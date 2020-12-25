@@ -25,7 +25,9 @@
 #include "dawn_native/ComputePassEncoder.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/QueryHelper.h"
 #include "dawn_native/QuerySet.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/ValidationUtils_autogen.h"
@@ -769,30 +771,67 @@ namespace dawn_native {
                                          uint32_t queryCount,
                                          BufferBase* destination,
                                          uint64_t destinationOffset) {
-        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (GetDevice()->IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(querySet));
-                DAWN_TRY(GetDevice()->ValidateObject(destination));
+        DeviceBase* device = GetDevice();
 
-                DAWN_TRY(ValidateQuerySetResolve(querySet, firstQuery, queryCount, destination,
-                                                 destinationOffset));
+        // Resolve queries to destination buffer
+        bool success =
+            mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+                if (device->IsValidationEnabled()) {
+                    DAWN_TRY(device->ValidateObject(querySet));
+                    DAWN_TRY(device->ValidateObject(destination));
 
-                DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::QueryResolve));
+                    DAWN_TRY(ValidateQuerySetResolve(querySet, firstQuery, queryCount, destination,
+                                                     destinationOffset));
 
-                TrackUsedQuerySet(querySet);
-                mTopLevelBuffers.insert(destination);
+                    DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::QueryResolve));
+
+                    TrackUsedQuerySet(querySet);
+                    mTopLevelBuffers.insert(destination);
+                }
+
+                ResolveQuerySetCmd* cmd =
+                    allocator->Allocate<ResolveQuerySetCmd>(Command::ResolveQuerySet);
+                cmd->querySet = querySet;
+                cmd->firstQuery = firstQuery;
+                cmd->queryCount = queryCount;
+                cmd->destination = destination;
+                cmd->destinationOffset = destinationOffset;
+
+                return {};
+            });
+
+        // Call internal compute pipeline if this type of query needs
+        if (success && querySet->IsInternalPipelineNeeded()) {
+            std::vector<uint32_t> availability(querySet->GetQueryCount());
+            auto it = mQueryAvailabilityMap.find(querySet);
+            if (it != mQueryAvailabilityMap.end()) {
+                availability = {it->second.begin(), it->second.end()};
             }
 
-            ResolveQuerySetCmd* cmd =
-                allocator->Allocate<ResolveQuerySetCmd>(Command::ResolveQuerySet);
-            cmd->querySet = querySet;
-            cmd->firstQuery = firstQuery;
-            cmd->queryCount = queryCount;
-            cmd->destination = destination;
-            cmd->destinationOffset = destinationOffset;
+            // Timestamp availability storage buffer
+            BufferDescriptor availabilityDesc = {};
+            availabilityDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst;
+            availabilityDesc.size = querySet->GetQueryCount() * sizeof(uint32_t);
+            Ref<BufferBase> availabilityBuffer =
+                AcquireRef(GetDevice()->CreateBuffer(&availabilityDesc));
+            device->GetDefaultQueue()->WriteBuffer(availabilityBuffer.Get(), 0, availability.data(),
+                                                   querySet->GetQueryCount() * sizeof(uint32_t));
 
-            return {};
-        });
+            if (querySet->GetQueryType() == wgpu::QueryType::Timestamp) {
+                // Timestamp params uniform buffer
+                TimestampParams params = {queryCount, static_cast<uint32_t>(destinationOffset),
+                                          device->GetTimestampPeriodInNS()};
+                BufferDescriptor parmsDesc = {};
+                parmsDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
+                parmsDesc.size = sizeof(params);
+                Ref<BufferBase> paramsBuffer = AcquireRef(GetDevice()->CreateBuffer(&parmsDesc));
+                device->GetDefaultQueue()->WriteBuffer(paramsBuffer.Get(), 0, &params,
+                                                       sizeof(params));
+
+                EncodeConvertTimestampsToNanoseconds(this, destination, availabilityBuffer.Get(),
+                                                     paramsBuffer.Get());
+            }
+        }
     }
 
     void CommandEncoder::WriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
