@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "925a51f2_981d1ba3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-25T05:42:19Z",
+      "side": 1,
+      "message": "Move the comment to https://dawn-review.googlesource.com/c/dawn/+/36221, let\u0027s discuss this there.",
+      "parentUuid": "4d95d821_4e74ebcf",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb0161b7_146340a8",
@@ -168,6 +186,24 @@
       "side": 1,
       "message": "Yea, I mean store it on device creation - when we have multiple queues, we\u0027ll store it on queue creation. We can do the error handling in the creation methods. On device/queue creation, we know what type of queue we\u0027re making (D3D12_COMMAND_LIST_TYPE_DIRECT) so we can perform the call there, and if it fails, assume there\u0027s been some fatal error.",
       "parentUuid": "04c3e7e8_d8fa2e9a",
+      "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a376b56_1ab3f993",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-25T05:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11b3d8a0_ad116a8e",
       "revId": "1ef42a93efd702687331867616f64795ce4cbbe4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
