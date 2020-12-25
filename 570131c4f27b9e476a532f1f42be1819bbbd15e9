@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "986c6061_e3c52379",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-25T14:55:14Z",
+      "side": 1,
+      "message": "Forgot to update this, the array was used here before :(",
+      "parentUuid": "6594b833_23c0250e",
+      "range": {
+        "startLine": 812,
+        "startChar": 16,
+        "endLine": 815,
+        "endChar": 74
+      },
+      "revId": "570131c4f27b9e476a532f1f42be1819bbbd15e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a568523_e1af659e",
@@ -37,6 +61,30 @@
       "writtenOn": "2020-12-22T18:11:22Z",
       "side": 1,
       "message": "Why are these in separate if-blocks? Shouldn\u0027t we only create the availability buffer if the query type is timestamp?\n\nis it possible for |querySet| to not be found in |mQueryAvailabilityMap|? If so, right now we\u0027re passing nullptr for the availability buffer when we should pass a buffer of zeros.\nAlthough, if no queries are available, should we just fill the destination buffer with 0?",
+      "range": {
+        "startLine": 816,
+        "startChar": 7,
+        "endLine": 818,
+        "endChar": 73
+      },
+      "revId": "570131c4f27b9e476a532f1f42be1819bbbd15e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "888563b8_cb99c4d8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 818,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-25T14:55:14Z",
+      "side": 1,
+      "message": "The availability buffers track the written queries for all query set used in a command buffer, not only timestamp query, but also other types of queries. Tts creation should be out of the if-block.\n\nThe |querySet| may not exist in |mQueryAvailabilityMap|, for example resolve a query set without writing any timestamp to it, we should do nothing in the resolve function of backends and just pass an availability buffer of zeros, the destination buffer will be filled with 0.\nSo yes, we should create an availability buffer of zeros if the |querySet| is not found in |mQueryAvailabilityMap|.",
+      "parentUuid": "3a568523_e1af659e",
       "range": {
         "startLine": 816,
         "startChar": 7,
