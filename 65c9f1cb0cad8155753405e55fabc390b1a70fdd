@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c00bcd_1f9399c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:10:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "65c9f1cb0cad8155753405e55fabc390b1a70fdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df3150d_0ce0c2eb",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:10:50Z",
+      "side": 1,
+      "message": "nit: comment this should never fail for D3D12_COMMAND_LIST_TYPE_DIRECT",
+      "revId": "65c9f1cb0cad8155753405e55fabc390b1a70fdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2945dd92_6a713d46",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:10:50Z",
+      "side": 1,
+      "message": "nit: compute the period on creation and store that instead of doing the division here?",
+      "range": {
+        "startLine": 662,
+        "startChar": 49,
+        "endLine": 662,
+        "endChar": 94
+      },
+      "revId": "65c9f1cb0cad8155753405e55fabc390b1a70fdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
