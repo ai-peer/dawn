@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin, I\u0027ve tried that all CompressedTextureFormatTests can pass without flaky issues on newer Intel Windows drivers used by trybots now.\n\nPTAL, thanks!",
       "revId": "24ade3aaff4e788db7e9806589c6cb586a7060e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adfd8815_29446b18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T17:51:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "24ade3aaff4e788db7e9806589c6cb586a7060e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
