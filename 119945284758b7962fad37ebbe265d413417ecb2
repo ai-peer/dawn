@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c802806c_72316405",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:04:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "119945284758b7962fad37ebbe265d413417ecb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b4f698c_66ff7ead",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:04:34Z",
+      "side": 1,
+      "message": "|ceil| isn\u0027t doing anything here since we\u0027re working with integers.",
+      "range": {
+        "startLine": 178,
+        "startChar": 34,
+        "endLine": 178,
+        "endChar": 38
+      },
+      "revId": "119945284758b7962fad37ebbe265d413417ecb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d051a9_68e1e5a3",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:04:34Z",
+      "side": 1,
+      "message": "nit: \"created manually\"",
+      "range": {
+        "startLine": 79,
+        "startChar": 86,
+        "endLine": 80,
+        "endChar": 11
+      },
+      "revId": "119945284758b7962fad37ebbe265d413417ecb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90596c47_1fb9fa23",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T18:04:34Z",
+      "side": 1,
+      "message": "typo: timestamps",
+      "revId": "119945284758b7962fad37ebbe265d413417ecb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
