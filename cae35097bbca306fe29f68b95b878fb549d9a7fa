@@ -16,6 +16,24 @@
       "message": "Copy Austin\u0027s comment from https://dawn-review.googlesource.com/c/dawn/+/36220/1#message-e1865406b1ff3b803b4dcbdf0974cfba62fc143b:\n\u003e Mmm.. okay. So we have timestamp -\u003e ns conversion for timestamps; non-zero -\u003e binary conversion for occlusion; Are there multiple pipelines for each backend for pipeline statistics? If so, it would be better to have this virtual function return an enum which describes what type of conversion we need to do.\n\nThanks for reminding. Yes, for pipeline statistics, we may need different pipelines for each backend. On Vulkan, we can individually enable pipeline statistics counters when creating query pool (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VkQueryPipelineStatisticFlagBits), we just need to change its order to match with user-provided order. But on D3D12 and Metal, they don\u0027t have such bits, and always resolve all pipeline statistics to the buffer, we also need to pick up the values we need, here we still cannot avoid using an internal resolve buffer like what I did in timestamp query.",
       "revId": "cae35097bbca306fe29f68b95b878fb549d9a7fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b14015_f1eeba52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-28T19:19:51Z",
+      "side": 1,
+      "message": "Ok, let\u0027s return an enum instead of just a boolean then. Sounds like we\u0027ll need two paths for pipeline statistics - one that only does reordering and one that resolves into an intermediate and reorders and writes results into the destination buffer.\n\nOtherwise, LGTM",
+      "parentUuid": "ec22b7bb_40428597",
+      "revId": "cae35097bbca306fe29f68b95b878fb549d9a7fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
