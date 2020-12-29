@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "01db3292251dc2cd5cff91cba78f6b7ce002cc20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b63be46e_82deff30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-29T19:35:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "01db3292251dc2cd5cff91cba78f6b7ce002cc20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5b96fb8_58905d9b",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-29T19:35:45Z",
+      "side": 1,
+      "message": "this should handle 3D textures as well, or leave a comment about it. Right now it assumes 2D array.",
+      "revId": "01db3292251dc2cd5cff91cba78f6b7ce002cc20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf33422c_621862fc",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2020-12-29T19:35:45Z",
+      "side": 1,
+      "message": "this is not really verifying it can be used as \"sampled textures correctly\"\n\nI\u0027d say that we\u0027re testing with a render pipeline if each layer can be sampled with the expected data.",
+      "range": {
+        "startLine": 868,
+        "startChar": 9,
+        "endLine": 868,
+        "endChar": 72
+      },
+      "revId": "01db3292251dc2cd5cff91cba78f6b7ce002cc20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
