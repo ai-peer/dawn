@@ -14,6 +14,7 @@
 
 #include "dawn_native/Buffer.h"
 
+#include "common/Alloc.h"
 #include "common/Assert.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
@@ -56,8 +57,8 @@ namespace dawn_native {
                         descriptor->size < uint64_t(std::numeric_limits<size_t>::max());
 
                     if (isValidSize) {
-                        mFakeMappedData = std::unique_ptr<uint8_t[]>(new (std::nothrow)
-                                                                         uint8_t[descriptor->size]);
+                        mFakeMappedData =
+                            std::unique_ptr<uint8_t[]>(AllocNoThrow<uint8_t>(descriptor->size));
                     }
                 }
             }
