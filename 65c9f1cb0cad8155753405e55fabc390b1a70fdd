@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b100c32a_21db8a04",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-30T11:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0df3150d_0ce0c2eb",
+      "revId": "65c9f1cb0cad8155753405e55fabc390b1a70fdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2945dd92_6a713d46",
@@ -48,6 +66,30 @@
       "writtenOn": "2020-12-28T18:10:50Z",
       "side": 1,
       "message": "nit: compute the period on creation and store that instead of doing the division here?",
+      "range": {
+        "startLine": 662,
+        "startChar": 49,
+        "endLine": 662,
+        "endChar": 94
+      },
+      "revId": "65c9f1cb0cad8155753405e55fabc390b1a70fdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "def25b00_d8cc0665",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2020-12-30T11:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2945dd92_6a713d46",
       "range": {
         "startLine": 662,
         "startChar": 49,
