@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "97fc3cfa_1d578d8e",
+        "filename": ".gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T10:20:17Z",
+      "side": 1,
+      "message": "Is this because ANGLE is in the middle of a transition from build_overrides to .gn variables?",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "534327c8_23ac89cf",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T10:20:17Z",
+      "side": 1,
+      "message": "nit: Bug: dawn:\u003cGLES tracking bug?\u003e",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "aba613cb_b4e0bc68",
@@ -104,6 +138,69 @@
       "side": 1,
       "message": "Totally agree about using Jamie\u0027s 6-layer burrito. I\u0027ll look at that in the new year.\n\nThere\u0027s no need to modify build_with_chromium in Dawn. That\u0027s why I added angle_standalone to ANGLE first.\n\nAnd yeah, we should totally do that for the DEPS, too (Jamie and I discussed it). Dawn is not recursing into ANGLE\u0027s DEPS, so it\u0027s not a problem, but it would be clearer in ANGLE.",
       "parentUuid": "5f684147_c0dcdaa6",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad181b40_dfbe5ab1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T10:20:17Z",
+      "side": 1,
+      "message": "Looks good after we start recurse_depsing into vulkan-deps.",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16dd2494_77a5b9fc",
+        "filename": "DEPS",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T10:20:17Z",
+      "side": 1,
+      "message": "nit: {chromium_git}/angle/angle and we can remove the angle_git variable.",
+      "range": {
+        "startLine": 127,
+        "startChar": 12,
+        "endLine": 127,
+        "endChar": 23
+      },
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcee13a6_b4817b10",
+        "filename": "build_overrides/angle.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T10:20:17Z",
+      "side": 1,
+      "message": "nit: angle_googletest_dir",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 18
+      },
       "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
