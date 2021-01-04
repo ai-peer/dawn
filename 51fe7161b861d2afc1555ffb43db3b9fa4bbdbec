@@ -16,6 +16,23 @@
       "message": "Building on Windows with MSVC (and not Clang) seems to have been failing for some time. This is one of a few minor tweaks (as individual commits to keep them to the minimum).",
       "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25259007_36349e2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T09:24:24Z",
+      "side": 1,
+      "message": "Thanks for the fix! Would you be able to sign the Google CLA here https://cla.developers.google.com/clas so we can accept the CL? Once that\u0027s done I\u0027ll also add you to the ACL to dry run the CQ.",
+      "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
