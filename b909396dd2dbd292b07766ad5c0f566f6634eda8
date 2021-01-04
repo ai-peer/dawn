@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66a491d3_28db5933",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T09:26:30Z",
+      "side": 1,
+      "message": "LGTM thanks for the fix! One comment and as commented in the other CL can you sign the CLA?",
+      "revId": "b909396dd2dbd292b07766ad5c0f566f6634eda8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5f75915_b3a98819",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T09:26:30Z",
+      "side": 1,
+      "message": "This should return a nullptr instead.",
+      "revId": "b909396dd2dbd292b07766ad5c0f566f6634eda8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
