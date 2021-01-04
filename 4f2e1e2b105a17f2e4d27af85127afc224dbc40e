@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee1dc53_da965312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T11:38:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4f2e1e2b105a17f2e4d27af85127afc224dbc40e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eae2034_3c83c4b0",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T11:38:51Z",
+      "side": 1,
+      "message": "nit: \"timestamps\" since they are modified inplace?",
+      "range": {
+        "startLine": 56,
+        "startChar": 36,
+        "endLine": 56,
+        "endChar": 47
+      },
+      "revId": "4f2e1e2b105a17f2e4d27af85127afc224dbc40e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
