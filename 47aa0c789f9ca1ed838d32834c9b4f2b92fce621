@@ -33,6 +33,24 @@
       "message": "Maybe return {Aspect{format.aspects}} would work?",
       "revId": "47aa0c789f9ca1ed838d32834c9b4f2b92fce621",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8350ba98_bf8a174c",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-04T10:50:30Z",
+      "side": 1,
+      "message": "This gives the same error.",
+      "parentUuid": "af81fc66_a5555498",
+      "revId": "47aa0c789f9ca1ed838d32834c9b4f2b92fce621",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
