@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69fc6ac1_072508c1",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T14:23:52Z",
+      "side": 1,
+      "message": "Can we add a DISABLED end2end test that checks that a validation error is produced if a query resolve buffer is used as a storage buffer in bindgroup creation? It will need to pass once we properly do StorageInternal.",
+      "revId": "a5efd180bc94fb70fd8108680506027afd147b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e09efec_2442f38c",
         "filename": "src/dawn_native/CommandEncoder.cpp",
         "patchSetId": 4
