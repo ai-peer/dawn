@@ -106,7 +106,7 @@ namespace dawn_native { namespace vulkan {
                 return nullptr;
         }
 #else
-        return false;
+        return nullptr;
 #endif  // DAWN_PLATFORM_LINUX
     }
 
