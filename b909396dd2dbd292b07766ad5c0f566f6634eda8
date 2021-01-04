@@ -33,6 +33,24 @@
       "message": "This should return a nullptr instead.",
       "revId": "b909396dd2dbd292b07766ad5c0f566f6634eda8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee26ab0b_fc74d653",
+        "filename": "src/dawn_native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-04T13:07:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5f75915_b3a98819",
+      "revId": "b909396dd2dbd292b07766ad5c0f566f6634eda8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
