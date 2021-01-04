@@ -195,7 +195,7 @@ test("dawn_unittests") {
     "unittests/validation/GetBindGroupLayoutValidationTests.cpp",
     "unittests/validation/IndexBufferValidationTests.cpp",
     "unittests/validation/MinimumBufferSizeValidationTests.cpp",
-    "unittests/validation/QuerySetValidationTests.cpp",
+    "unittests/validation/QueryValidationTests.cpp",
     "unittests/validation/QueueSubmitValidationTests.cpp",
     "unittests/validation/QueueWriteTextureValidationTests.cpp",
     "unittests/validation/RenderBundleValidationTests.cpp",
@@ -310,6 +310,7 @@ source_set("dawn_end2end_tests_sources") {
     "end2end/RenderBundleTests.cpp",
     "end2end/RenderPassLoadOpTests.cpp",
     "end2end/RenderPassTests.cpp",
+    "end2end/SamplerFilterAnisotropicTests.cpp",
     "end2end/SamplerTests.cpp",
     "end2end/ScissorTests.cpp",
     "end2end/ShaderFloat16Tests.cpp",
@@ -401,7 +402,10 @@ source_set("dawn_white_box_tests_sources") {
     }
   }
 
-  sources += [ "white_box/InternalResourceUsageTests.cpp" ]
+  sources += [
+    "white_box/InternalResourceUsageTests.cpp",
+    "white_box/QueryInternalShaderTests.cpp",
+  ]
 
   if (dawn_enable_d3d12) {
     sources += [

@@ -243,49 +243,43 @@ namespace dawn_native { namespace opengl {
                     const BindingInfo& bindingInfo =
                         group->GetLayout()->GetBindingInfo(bindingIndex);
 
-                    switch (bindingInfo.type) {
-                        case wgpu::BindingType::UniformBuffer: {
+                    switch (bindingInfo.bindingType) {
+                        case BindingInfoType::Buffer: {
                             BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                             GLuint buffer = ToBackend(binding.buffer)->GetHandle();
-                            GLuint uboIndex = indices[bindingIndex];
+                            GLuint index = indices[bindingIndex];
                             GLuint offset = binding.offset;
 
-                            if (bindingInfo.hasDynamicOffset) {
+                            if (bindingInfo.buffer.hasDynamicOffset) {
                                 offset += dynamicOffsets[currentDynamicOffsetIndex];
                                 ++currentDynamicOffsetIndex;
                             }
 
-                            gl.BindBufferRange(GL_UNIFORM_BUFFER, uboIndex, buffer, offset,
-                                               binding.size);
-                            break;
-                        }
-
-                        case wgpu::BindingType::StorageBuffer:
-                        case wgpu::BindingType::ReadonlyStorageBuffer: {
-                            BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
-                            GLuint buffer = ToBackend(binding.buffer)->GetHandle();
-                            GLuint ssboIndex = indices[bindingIndex];
-                            GLuint offset = binding.offset;
-
-                            if (bindingInfo.hasDynamicOffset) {
-                                offset += dynamicOffsets[currentDynamicOffsetIndex];
-                                ++currentDynamicOffsetIndex;
+                            GLenum target;
+                            switch (bindingInfo.buffer.type) {
+                                case wgpu::BufferBindingType::Uniform:
+                                    target = GL_UNIFORM_BUFFER;
+                                    break;
+                                case wgpu::BufferBindingType::Storage:
+                                case wgpu::BufferBindingType::ReadOnlyStorage:
+                                    target = GL_SHADER_STORAGE_BUFFER;
+                                    break;
+                                case wgpu::BufferBindingType::Undefined:
+                                    UNREACHABLE();
                             }
 
-                            gl.BindBufferRange(GL_SHADER_STORAGE_BUFFER, ssboIndex, buffer, offset,
-                                               binding.size);
+                            gl.BindBufferRange(target, index, buffer, offset, binding.size);
                             break;
                         }
 
-                        case wgpu::BindingType::Sampler:
-                        case wgpu::BindingType::ComparisonSampler: {
+                        case BindingInfoType::Sampler: {
                             Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
                             GLuint samplerIndex = indices[bindingIndex];
 
                             for (PipelineGL::SamplerUnit unit :
                                  mPipeline->GetTextureUnitsForSampler(samplerIndex)) {
-                                // Only use filtering for certain texture units, because int and
-                                // uint texture are only complete without filtering
+                                // Only use filtering for certain texture units, because int
+                                // and uint texture are only complete without filtering
                                 if (unit.shouldUseFiltering) {
                                     gl.BindSampler(unit.unit, sampler->GetFilteringHandle());
                                 } else {
@@ -295,8 +289,7 @@ namespace dawn_native { namespace opengl {
                             break;
                         }
 
-                        case wgpu::BindingType::SampledTexture:
-                        case wgpu::BindingType::MultisampledTexture: {
+                        case BindingInfoType::Texture: {
                             TextureView* view =
                                 ToBackend(group->GetBindingAsTextureView(bindingIndex));
                             GLuint handle = view->GetHandle();
@@ -328,8 +321,7 @@ namespace dawn_native { namespace opengl {
                             break;
                         }
 
-                        case wgpu::BindingType::ReadonlyStorageTexture:
-                        case wgpu::BindingType::WriteonlyStorageTexture: {
+                        case BindingInfoType::StorageTexture: {
                             TextureView* view =
                                 ToBackend(group->GetBindingAsTextureView(bindingIndex));
                             Texture* texture = ToBackend(view->GetTexture());
@@ -337,20 +329,19 @@ namespace dawn_native { namespace opengl {
                             GLuint imageIndex = indices[bindingIndex];
 
                             GLenum access;
-                            switch (bindingInfo.type) {
-                                case wgpu::BindingType::ReadonlyStorageTexture:
+                            switch (bindingInfo.storageTexture.access) {
+                                case wgpu::StorageTextureAccess::ReadOnly:
                                     access = GL_READ_ONLY;
                                     break;
-                                case wgpu::BindingType::WriteonlyStorageTexture:
+                                case wgpu::StorageTextureAccess::WriteOnly:
                                     access = GL_WRITE_ONLY;
                                     break;
-
-                                default:
+                                case wgpu::StorageTextureAccess::Undefined:
                                     UNREACHABLE();
                             }
 
-                            // OpenGL ES only supports either binding a layer or the entire texture
-                            // in glBindImageTexture().
+                            // OpenGL ES only supports either binding a layer or the entire
+                            // texture in glBindImageTexture().
                             GLboolean isLayered;
                             if (view->GetLayerCount() == 1) {
                                 isLayered = GL_FALSE;
@@ -365,9 +356,6 @@ namespace dawn_native { namespace opengl {
                                                 texture->GetGLFormat().internalFormat);
                             break;
                         }
-
-                        case wgpu::BindingType::Undefined:
-                            UNREACHABLE();
                     }
                 }
             }
@@ -558,28 +546,84 @@ namespace dawn_native { namespace opengl {
                     gl.PixelStorei(GL_UNPACK_IMAGE_HEIGHT, src.rowsPerImage * blockInfo.height);
 
                     if (formatInfo.isCompressed) {
-                        gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_SIZE, blockInfo.byteSize);
-                        gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_WIDTH, blockInfo.width);
-                        gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_HEIGHT, blockInfo.height);
-                        gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_DEPTH, 1);
-
                         ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
-                        uint64_t copyDataSize = (copySize.width / blockInfo.width) *
-                                                (copySize.height / blockInfo.height) *
-                                                blockInfo.byteSize * copySize.depth;
+
                         Extent3D copyExtent = ComputeTextureCopyExtent(dst, copySize);
 
-                        if (texture->GetArrayLayers() > 1) {
-                            gl.CompressedTexSubImage3D(
-                                target, dst.mipLevel, dst.origin.x, dst.origin.y, dst.origin.z,
-                                copyExtent.width, copyExtent.height, copyExtent.depth,
-                                format.internalFormat, copyDataSize,
-                                reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
+                        // In GLES glPixelStorei() doesn't affect CompressedTexSubImage*D() and
+                        // GL_UNPACK_COMPRESSED_BLOCK_* isn't defined, so we have to workaround
+                        // this limitation by copying the compressed texture data once per row.
+                        // See OpenGL ES 3.2 SPEC Chapter 8.4.1, "Pixel Storage Modes and Pixel
+                        // Buffer Objects" for more details.
+                        if (gl.GetVersion().IsES()) {
+                            uint64_t copyDataSizePerBlockRow =
+                                (copySize.width / blockInfo.width) * blockInfo.byteSize;
+                            size_t copyBlockRowsPerImage = copySize.height / blockInfo.height;
+
+                            if (texture->GetArrayLayers() > 1) {
+                                // TODO(jiawei.shao@intel.com): do a single copy when the data is
+                                // correctly packed.
+                                for (size_t copyZ = 0; copyZ < copyExtent.depth; ++copyZ) {
+                                    uintptr_t offsetPerImage = static_cast<uintptr_t>(
+                                        src.offset + copyZ * src.bytesPerRow * src.rowsPerImage);
+                                    uint32_t dstOriginY = dst.origin.y;
+                                    uint32_t dstOriginZ = dst.origin.z + copyZ;
+
+                                    for (size_t copyBlockRow = 0;
+                                         copyBlockRow < copyBlockRowsPerImage; ++copyBlockRow) {
+                                        gl.CompressedTexSubImage3D(
+                                            target, dst.mipLevel, dst.origin.x, dstOriginY,
+                                            dstOriginZ, copyExtent.width, blockInfo.height, 1,
+                                            format.internalFormat, copyDataSizePerBlockRow,
+                                            reinterpret_cast<void*>(
+                                                static_cast<uintptr_t>(offsetPerImage)));
+
+                                        offsetPerImage += src.bytesPerRow;
+                                        dstOriginY += blockInfo.height;
+                                    }
+                                }
+                            } else {
+                                uintptr_t offset = static_cast<uintptr_t>(src.offset);
+                                uint32_t dstOriginY = dst.origin.y;
+
+                                // TODO(jiawei.shao@intel.com): do a single copy when the data is
+                                // correctly packed.
+                                for (size_t copyBlockRow = 0; copyBlockRow < copyBlockRowsPerImage;
+                                     ++copyBlockRow) {
+                                    gl.CompressedTexSubImage2D(
+                                        target, dst.mipLevel, dst.origin.x, dstOriginY,
+                                        copyExtent.width, blockInfo.height, format.internalFormat,
+                                        copyDataSizePerBlockRow,
+                                        reinterpret_cast<void*>(static_cast<uintptr_t>(offset)));
+
+                                    offset += src.bytesPerRow;
+                                    dstOriginY += blockInfo.height;
+                                }
+                            }
+
                         } else {
-                            gl.CompressedTexSubImage2D(
-                                target, dst.mipLevel, dst.origin.x, dst.origin.y, copyExtent.width,
-                                copyExtent.height, format.internalFormat, copyDataSize,
-                                reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
+                            gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_SIZE, blockInfo.byteSize);
+                            gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_WIDTH, blockInfo.width);
+                            gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_HEIGHT, blockInfo.height);
+                            gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_DEPTH, 1);
+
+                            uint64_t copyDataSize = (copySize.width / blockInfo.width) *
+                                                    (copySize.height / blockInfo.height) *
+                                                    blockInfo.byteSize * copySize.depth;
+
+                            if (texture->GetArrayLayers() > 1) {
+                                gl.CompressedTexSubImage3D(
+                                    target, dst.mipLevel, dst.origin.x, dst.origin.y, dst.origin.z,
+                                    copyExtent.width, copyExtent.height, copyExtent.depth,
+                                    format.internalFormat, copyDataSize,
+                                    reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
+                            } else {
+                                gl.CompressedTexSubImage2D(
+                                    target, dst.mipLevel, dst.origin.x, dst.origin.y,
+                                    copyExtent.width, copyExtent.height, format.internalFormat,
+                                    copyDataSize,
+                                    reinterpret_cast<void*>(static_cast<uintptr_t>(src.offset)));
+                            }
                         }
                     } else {
                         switch (texture->GetDimension()) {

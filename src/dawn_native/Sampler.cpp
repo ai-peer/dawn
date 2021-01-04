@@ -40,6 +40,18 @@ namespace dawn_native {
                 "Min lod clamp value cannot greater than max lod clamp value");
         }
 
+        if (descriptor->maxAnisotropy > 1) {
+            if (descriptor->minFilter != wgpu::FilterMode::Linear ||
+                descriptor->magFilter != wgpu::FilterMode::Linear ||
+                descriptor->mipmapFilter != wgpu::FilterMode::Linear) {
+                return DAWN_VALIDATION_ERROR(
+                    "min, mag, and mipmap filter should be linear when using anisotropic "
+                    "filtering");
+            }
+        } else if (descriptor->maxAnisotropy == 0u) {
+            return DAWN_VALIDATION_ERROR("max anisotropy cannot be set to 0");
+        }
+
         DAWN_TRY(ValidateFilterMode(descriptor->minFilter));
         DAWN_TRY(ValidateFilterMode(descriptor->magFilter));
         DAWN_TRY(ValidateFilterMode(descriptor->mipmapFilter));
@@ -62,7 +74,8 @@ namespace dawn_native {
           mMipmapFilter(descriptor->mipmapFilter),
           mLodMinClamp(descriptor->lodMinClamp),
           mLodMaxClamp(descriptor->lodMaxClamp),
-          mCompareFunction(descriptor->compare) {
+          mCompareFunction(descriptor->compare),
+          mMaxAnisotropy(descriptor->maxAnisotropy) {
     }
 
     SamplerBase::SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag)
@@ -87,7 +100,8 @@ namespace dawn_native {
     size_t SamplerBase::ComputeContentHash() {
         ObjectContentHasher recorder;
         recorder.Record(mAddressModeU, mAddressModeV, mAddressModeW, mMagFilter, mMinFilter,
-                        mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction);
+                        mMipmapFilter, mLodMinClamp, mLodMaxClamp, mCompareFunction,
+                        mMaxAnisotropy);
         return recorder.GetContentHash();
     }
 
@@ -105,7 +119,7 @@ namespace dawn_native {
                a->mAddressModeW == b->mAddressModeW && a->mMagFilter == b->mMagFilter &&
                a->mMinFilter == b->mMinFilter && a->mMipmapFilter == b->mMipmapFilter &&
                a->mLodMinClamp == b->mLodMinClamp && a->mLodMaxClamp == b->mLodMaxClamp &&
-               a->mCompareFunction == b->mCompareFunction;
+               a->mCompareFunction == b->mCompareFunction && a->mMaxAnisotropy == b->mMaxAnisotropy;
     }
 
 }  // namespace dawn_native
