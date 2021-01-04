@@ -33,6 +33,24 @@
       "message": "Thanks for the fix! Would you be able to sign the Google CLA here https://cla.developers.google.com/clas so we can accept the CL? Once that\u0027s done I\u0027ll also add you to the ACL to dry run the CQ.",
       "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d23b4b4_5b0a756b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-04T10:52:33Z",
+      "side": 1,
+      "message": "Hi! The Google CLA is already signed by my employer, Numfum GmbH.",
+      "parentUuid": "25259007_36349e2c",
+      "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
