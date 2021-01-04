@@ -51,6 +51,24 @@
       "parentUuid": "25259007_36349e2c",
       "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14be8afe_7ccbe3fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T11:32:58Z",
+      "side": 1,
+      "message": "Thanks, I added you to the ACL. You should be able to CQ+1 your CLs and CQ+2 them once they received CR+2!",
+      "parentUuid": "7d23b4b4_5b0a756b",
+      "revId": "51fe7161b861d2afc1555ffb43db3b9fa4bbdbec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
