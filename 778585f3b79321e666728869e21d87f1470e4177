@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef41117b_37206c7e",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T11:51:41Z",
+      "side": 1,
+      "message": "I\u0027m not sure that this is the best approach because the type of processing needed depends on the query type and maybe on the backend too. Instead we could check the query type in CommandEncoder::ResolveQuerySet and if device-\u003eGetTimestampNSFactor() !\u003d 1.0 then use the internal pipeline. Likewise for pipeline statistics queries we can check if the order is exactly what the backend gives us and otherwise use an internal pipeline.\n\nWDYT?",
+      "revId": "778585f3b79321e666728869e21d87f1470e4177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
