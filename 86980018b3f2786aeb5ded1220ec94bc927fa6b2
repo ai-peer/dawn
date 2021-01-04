@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d23b94c_7e50ac96",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T10:33:50Z",
+      "side": 1,
+      "message": "I\u0027m a bit worried that this will requires users of the C API to explicitly initialize maxAniso to 1. But that\u0027s probably ok for now and we can polish the C API later.",
+      "revId": "86980018b3f2786aeb5ded1220ec94bc927fa6b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
