@@ -33,6 +33,24 @@
       "message": "@Rafael, would you be responsible for this issue and fix it in https://dawn-review.googlesource.com/c/dawn/+/35480?\nIf yes, I may close this CL.",
       "revId": "9850719ec76130b17597683dc2532b7082ac8774",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96201d65_012d4674",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-04T23:38:24Z",
+      "side": 1,
+      "message": "@Xinghua, could you PTAL at my CL? I\u0027m happy to get it working for your change too, lmk.",
+      "parentUuid": "fbb0a171_31e4738b",
+      "revId": "9850719ec76130b17597683dc2532b7082ac8774",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
