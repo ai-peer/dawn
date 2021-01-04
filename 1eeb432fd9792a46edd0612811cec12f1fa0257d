@@ -155,6 +155,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90ee2dbb_a4417129",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-04T11:59:35Z",
+      "side": 1,
+      "message": "Gotcha. Even if it is a bit ugly I think we should do it because it makes the code more robust. We can add a TODO to make it nicer once we can require C++17.",
+      "parentUuid": "7123f138_8a654986",
+      "range": {
+        "startLine": 51,
+        "startChar": 20,
+        "endLine": 51,
+        "endChar": 99
+      },
+      "revId": "1eeb432fd9792a46edd0612811cec12f1fa0257d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec40b241_99a3603e",
         "filename": "src/dawn_wire/server/Server.h",
         "patchSetId": 2
