@@ -54,7 +54,7 @@ if (!defined(dawn_shaderc_dir)) {
 }
 
 if (!defined(dawn_spirv_cross_dir)) {
-  dawn_spirv_cross_dir = "//third_party/spirv-cross"
+  dawn_spirv_cross_dir = "//third_party/vulkan-deps/spirv-cross/src"
 }
 
 if (!defined(dawn_spirv_tools_dir)) {

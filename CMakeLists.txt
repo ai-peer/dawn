@@ -79,7 +79,7 @@ set(DAWN_THIRD_PARTY_DIR "${Dawn_SOURCE_DIR}/third_party" CACHE STRING "Director
 
 set(DAWN_GLFW_DIR "${DAWN_THIRD_PARTY_DIR}/glfw" CACHE STRING "Directory in which to find GLFW")
 set(DAWN_GLM_DIR "${DAWN_THIRD_PARTY_DIR}/glm" CACHE STRING "Directory in which to find GLM")
-set(DAWN_GLSLANG_DIR "${DAWN_THIRD_PARTY_DIR}/glslang" CACHE STRING "Directory in which to find GLSLang")
+set(DAWN_GLSLANG_DIR "${DAWN_THIRD_PARTY_DIR}/vulkan-deps/glslang" CACHE STRING "Directory in which to find GLSLang")
 set(DAWN_JINJA2_DIR "${DAWN_THIRD_PARTY_DIR}/jinja2" CACHE STRING "Directory in which to find Jinja2")
 set(DAWN_SHADERC_DIR "${DAWN_THIRD_PARTY_DIR}/shaderc" CACHE STRING "Directory in which to find shaderc")
 set(DAWN_SPIRV_CROSS_DIR "${DAWN_THIRD_PARTY_DIR}/spirv-cross" CACHE STRING "Directory in which to find SPIRV-Cross")

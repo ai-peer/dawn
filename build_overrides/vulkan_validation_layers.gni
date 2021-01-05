@@ -17,7 +17,7 @@
 # Dawn's repository.
 vulkan_headers_dir = "//third_party/vulkan-headers"
 vvl_spirv_tools_dir = "//third_party/SPIRV-Tools"
-vvl_glslang_dir = "//third_party/glslang"
+vvl_glslang_dir = "//third_party/vulkan-deps/glslang/src"
 
 # Subdirectories for generated files
 vulkan_data_subdir = "vulkandata"
