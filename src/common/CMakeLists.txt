@@ -52,6 +52,8 @@ target_sources(dawn_common PRIVATE
     "TypeTraits.h"
     "TypedInteger.h"
     "UnderlyingType.h"
+    "WorkerThread.cpp"
+    "WorkerThread.h"
     "ityp_array.h"
     "ityp_bitset.h"
     "ityp_span.h"
