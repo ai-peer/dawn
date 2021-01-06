@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f1d22e6_84c70ab8",
+        "filename": ".gitignore",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T15:45:15Z",
+      "side": 1,
+      "message": "See above, LMK.",
+      "parentUuid": "074287ac_6ac30974",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a48c5739_dacfd3e0",
         "filename": "/COMMIT_MSG",
         "patchSetId": 6
@@ -31,6 +49,24 @@
       "writtenOn": "2021-01-06T09:37:24Z",
       "side": 1,
       "message": "Can you also note that this implicitly rolls the dependencies (no need for a regression range though)",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e70e7de9_e7b9f5e4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T15:45:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a48c5739_dacfd3e0",
       "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -118,6 +154,42 @@
       "side": 1,
       "message": "I thought we might keep shaderc to allow ingesting SPVASM directly but maybe we can do that using SPIRV-Tools directly.",
       "parentUuid": "7fce0ab2_e8489479",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e1a354_1a123569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T15:45:15Z",
+      "side": 1,
+      "message": "Hmm. Not sure what to do here. Maybe I\u0027ll try a newer Tint locally and see if it\u0027s fixed? Or an older rev of some of the deps?",
+      "parentUuid": "1205f886_4e08dcb0",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41ae4546_9cef6513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T15:45:15Z",
+      "side": 1,
+      "message": "So what\u0027s the consensus here? Should I remove roll-shader-deps, update it, or leave it be?",
+      "parentUuid": "ad0760d9_90545a2c",
       "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
