@@ -80,6 +80,30 @@
       },
       "revId": "0831889f1db8cdb342d7606be3d5b9a9f1f7bde7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7012f9d6_3c3a3ff4",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T20:37:30Z",
+      "side": 1,
+      "message": "Yea I\u0027m not sure if it\u0027s supposed to work. The syntax in your test case though could also be interpreted as an array of storage buffer descriptors (webgpu doesn\u0027t have descriptor arrays though) instead of a single binding containing an array.\n\nI think it is indeed getting translated as an array of descriptors though. I was getting errors on Metal that the buffer slot must be between 0 and 30 - so it\u0027s likely producing shader code that has 1024 distinct bindings. We could verify by dumping the backend shader.",
+      "parentUuid": "d1556d8d_f5ad8bec",
+      "range": {
+        "startLine": 358,
+        "startChar": 8,
+        "endLine": 366,
+        "endChar": 9
+      },
+      "revId": "0831889f1db8cdb342d7606be3d5b9a9f1f7bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
