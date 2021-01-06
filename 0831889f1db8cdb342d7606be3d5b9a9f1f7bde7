@@ -56,6 +56,30 @@
       },
       "revId": "0831889f1db8cdb342d7606be3d5b9a9f1f7bde7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1556d8d_f5ad8bec",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-01-06T20:29:29Z",
+      "side": 1,
+      "message": "I knew that the version inside a [[block]] worked. I wasn\u0027t sure if the direct array was a use case that was supposed to work or not when I filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d617. (For the record it would be convenient for developers if it did.) And sorry for missing the access type! Definitely needs validation for that.",
+      "parentUuid": "2dee9a36_fdd8f28f",
+      "range": {
+        "startLine": 358,
+        "startChar": 8,
+        "endLine": 366,
+        "endChar": 9
+      },
+      "revId": "0831889f1db8cdb342d7606be3d5b9a9f1f7bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
