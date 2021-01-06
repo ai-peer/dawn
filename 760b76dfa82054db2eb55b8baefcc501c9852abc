@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b2c2474_8b9bc857",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-06T21:05:32Z",
+      "side": 1,
+      "message": "accidently closed",
+      "parentUuid": "25a226c5_88ea16e4",
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c88cc95_cd83dc71",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 2
