@@ -33,6 +33,70 @@
       "message": "the version from IDxcVersionInfo and D3D_COMPILER_VERSION - are they in the same namespace? i.e. can we get a concatenation of compilerMajor and compilerMinor that happens to match D3D_COMPILER_VERSION ? If we so we should make sure they\u0027re distinct in the HLSL key\n\npresumably https://dawn-review.googlesource.com/c/dawn/+/35260 will also need to know if the number came from IDxcVersionInfo or D3D_COMPILER_VERSION, so maybe we can just have two getters, one for D3D_COMPILER_VERSION and one for the Dxc version. The Dxc version could return 0 if we\u0027re not using Dxc.",
       "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e173a41a_9de7ca25",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2021-01-06T08:45:55Z",
+      "side": 1,
+      "message": "Agree",
+      "parentUuid": "adc4d40f_6bc25cc3",
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c88cc95_cd83dc71",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2021-01-06T08:45:55Z",
+      "side": 1,
+      "message": "Could we only query the dxc version one time, and cache it?",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 84
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e97f5e_316e99f4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2021-01-06T08:45:55Z",
+      "side": 1,
+      "message": "Is it convenient if I want to unpack the data to major version and minor version?",
+      "range": {
+        "startLine": 414,
+        "startChar": 12,
+        "endLine": 417,
+        "endChar": 45
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
