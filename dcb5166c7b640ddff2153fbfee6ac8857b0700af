@@ -20,6 +20,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "385435f4_a67db9f5",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "Can we have a TODO to have a FakeWorkerPool for UWP? You can\u0027t create threads in UWP apparently, and I\u0027m sure people will eventually start using Dawn there.",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "262f733d_24aa6878",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "nit: since we declare the class in this .cpp file we can declare all of the implementation inline.",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4b0d9dc_56143112",
         "filename": "src/common/WorkerThread.cpp",
         "patchSetId": 3
@@ -43,6 +77,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66709b66_a32f9d34",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "Do we ever expect to call IsReady? My understanding is that the CreateReadyPipeline task would \"push\" to the device it\u0027s result. If we don\u0027t expect to call it, then we could remove mMutex. Alternatively we could set an atomic\u003cbool\u003e from inside the lambda in the std::async.",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63829b85_7ed1e951",
         "filename": "src/common/WorkerThread.cpp",
         "patchSetId": 3
@@ -54,6 +105,30 @@
       "writtenOn": "2021-01-06T00:59:37Z",
       "side": 1,
       "message": "could we construct the event with the future instead of setting it later?",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29975a38_f1552d8b",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "This could be done by passing the Closure to the constructor of AsyncWaitableEvent.",
+      "parentUuid": "63829b85_7ed1e951",
       "range": {
         "startLine": 71,
         "startChar": 8,
@@ -160,6 +235,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d75015bb_b94173b4",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "The reason for the C API in ANGLE is because it is a shared library loaded at runtime so the only safe interface is through the C API. (We run into many many problems when sharing C++ objects, like having different std::string implementation, different instance of the same memory allocator, ...). +1 to Austin\u0027s suggestion of having a C++ API between Dawn and Chromium.",
+      "parentUuid": "3d2a0297_8f75b8d4",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78b60d40_42b7f50c",
         "filename": "src/common/WorkerThread.h",
         "patchSetId": 3
@@ -200,6 +299,46 @@
         "endLine": 46,
         "endChar": 0
       },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0729fd5_7b2c1190",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "nit: Wait",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 59
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b8ae4d_eb6da20b",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "nit: put implementations in the .cpp",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -252,6 +391,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fac5984_090f464e",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3140ba17_8c3cd40d",
         "filename": "src/common/WorkerThread.h",
         "patchSetId": 3
@@ -269,6 +425,23 @@
         "endLine": 80,
         "endChar": 39
       },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f9ef91_d6f95007",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "This is mRunningTasks.",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -298,6 +471,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8634cc4e_8fc339cf",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "We Tick only after waiting all tasks. Maybe instead of this logic we could just check that mTaskResultQueue has all the values we care about?",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1393c88a_2f1ce645",
         "filename": "src/tests/unittests/WorkerThreadTests.cpp",
         "patchSetId": 3
@@ -315,6 +505,23 @@
         "endLine": 127,
         "endChar": 28
       },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37a495c6_f47de1c4",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T13:59:25Z",
+      "side": 1,
+      "message": "It seems that we split Tracker in two to workaround definition order issues? Maybe we could declare SimpleTask first, then define Tracker then define SimpleTask?",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
