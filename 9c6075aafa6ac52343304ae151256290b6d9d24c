@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69213e89_67639d63",
+        "filename": ".gitignore",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T16:53:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9b9b792a_aa8002ca",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a48c5739_dacfd3e0",
@@ -226,6 +244,24 @@
       "side": 1,
       "message": "I think we should not do the EmitPointSize transform when producing SPIRV for GLSL most likely.",
       "parentUuid": "a8e1a354_1a123569",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc83041c_e44166db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T16:53:04Z",
+      "side": 1,
+      "message": "I re-ran the failing bot and it passed; am I missing some other failures?",
+      "parentUuid": "22ccb11e_669dab8b",
       "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
