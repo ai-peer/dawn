@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b178315_725c5f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T00:15:58Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nNote that the CMakeLists.txt changes were best-effort; not sure how to to test that build.\nAlso I didn\u0027t touch the roll-shader-deps.sh script; LMK if I should.",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
