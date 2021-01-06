@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "193f534c_48c6a4c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-06T17:40:10Z",
+      "side": 1,
+      "message": "I\u0027m going to go ahead and land, since everything looks green. Will be ready to revert if things go south.",
+      "revId": "530a3c3f53e43720f894276d5c281593778945ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
