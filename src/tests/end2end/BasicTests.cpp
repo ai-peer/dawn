@@ -49,6 +49,24 @@ TEST_P(BasicTests, QueueWriteBufferError) {
 
     uint8_t value = 187;
     ASSERT_DEVICE_ERROR(queue.WriteBuffer(buffer, 1000, &value, sizeof(value)));
+
+
+    wgpu::ShaderModule module =
+        utils::CreateShaderModuleFromWGSL(device, R"(
+            [[block]] struct Particle {
+                [[offset(0)]] pos : vec2<f32>;
+                [[offset(8)]] vel : vec2<f32>;
+            };
+            [[binding(0), set(0)]] var<storage_buffer> particles : [[stride(16)]] array<Particle, 1024>;
+            [[stage(compute)]] fn main() -> void {
+                particles[0].pos.x = 0.0;
+            }
+        )");
+
+    wgpu::ComputePipelineDescriptor desc;
+    desc.computeStage.module = module;
+    desc.computeStage.entryPoint = "main";
+    device.CreateComputePipeline(&desc);
 }
 
 DAWN_INSTANTIATE_TEST(BasicTests,
