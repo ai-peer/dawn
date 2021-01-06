@@ -112,6 +112,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "49f95af2_5a1c809d",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-06T02:05:05Z",
+      "side": 1,
+      "message": "Now I mainly use the implementation in ANGLE as my reference. In ANGLE the Chromium just provides an API called postWorkerTask(), and ANGLE does its wrapper on this external function by implementing a DelegateWorkerThread(). I once planned to add a similar wrapper in Dawn after the related code in Chromium for Dawn is ready, what do you think?\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:ui/gl/angle_platform_impl.cc;l\u003d132\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/angle/src/libANGLE/WorkerThread.cpp;l\u003d322",
+      "parentUuid": "5fbc4090_2c82ed0e",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78b60d40_42b7f50c",
         "filename": "src/common/WorkerThread.h",
         "patchSetId": 3
