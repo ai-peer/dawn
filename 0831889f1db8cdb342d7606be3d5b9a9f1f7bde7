@@ -33,6 +33,29 @@
       "message": "Huh! Based on the dry run, seems like this is a problem on Macs too! Wouldn\u0027t be surprised if it also fails on Linux.",
       "revId": "0831889f1db8cdb342d7606be3d5b9a9f1f7bde7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dee9a36_fdd8f28f",
+        "filename": "src/tests/end2end/ComputeStorageBufferBarrierTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T19:46:12Z",
+      "side": 1,
+      "message": "I\u0027m not sure if the syntax is valid or if it\u0027s a Tint translation bug. Either way it\u0027s a Tint bug - missing validation or incorrect translation.\n\nstorage_buffer requires an access(read) or access(read_write). I\u0027m not sure if that\u0027s valid on an array or if it must be on a [[block]]\n\nThe following works:\n\n        struct Particle {\n            [[offset(0)]] pos : vec2\u003cf32\u003e;\n            [[offset(8)]] vel : vec2\u003cf32\u003e;\n        };\n        [[block]] struct Buf {\n            [[offset(0)]] particles : [[stride(16)]] array\u003cParticle, 1024\u003e;\n        };\n        [[binding(0), set(0)]] var\u003cstorage_buffer\u003e buf : [[access(read_write)]] Buf;\n        [[builtin(global_invocation_id)]] var\u003cin\u003e globalId : vec3\u003cu32\u003e;\n        [[stage(compute)]] fn main() -\u003e void {\n            buf.particles[globalId.x].pos \u003d buf.particles[globalId.x].pos + buf.particles[globalId.x].vel;\n        }",
+      "range": {
+        "startLine": 358,
+        "startChar": 8,
+        "endLine": 366,
+        "endChar": 9
+      },
+      "revId": "0831889f1db8cdb342d7606be3d5b9a9f1f7bde7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
