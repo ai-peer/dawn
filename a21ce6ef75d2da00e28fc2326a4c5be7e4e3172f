@@ -16,6 +16,23 @@
       "message": "Corentin, bump",
       "revId": "a21ce6ef75d2da00e28fc2326a4c5be7e4e3172f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66c89b26_fea54f76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-06T09:45:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a21ce6ef75d2da00e28fc2326a4c5be7e4e3172f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
