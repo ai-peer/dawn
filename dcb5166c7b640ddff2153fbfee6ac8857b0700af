@@ -16,6 +16,259 @@
       "message": "PTAL, thanks!",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4b0d9dc_56143112",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: IsComplete may be a better name",
+      "range": {
+        "startLine": 54,
+        "startChar": 29,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63829b85_7ed1e951",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "could we construct the event with the future instead of setting it later?",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed341a1_012d9043",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "what is this lock for?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 71
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fbc4090_2c82ed0e",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "why not have:\n\nvirtual WorkerThreadPool* dawn_platform::Platform::CreateThreadPool() ?\n\nThen Chromium can override that to implement its own pool, and Dawn can provide a simple default implementation with async/futures.",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b60d40_42b7f50c",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: this is in common/ so there should be no namespace. One day we should move everything in common/ into a dawn:: namespace.",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6290d394_e005c0cb",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: probably give these their own headers as NonCopyable in particular could be useful for other classes.",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ca8766_4037dbbe",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "Can we use Ref\u003cT\u003e and Dawn\u0027s RefCounted class?",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 63,
+        "endChar": 23
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68167e93_5c990a04",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: Maybe \"WorkerTaskPool\" as it could be implemented with only a single thread",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3140ba17_8c3cd40d",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: This is the task count, not the thread count",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 39
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fc419aa_9c8a048d",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: why is this called \"waitableLock\" ?",
+      "range": {
+        "startLine": 40,
+        "startChar": 40,
+        "endLine": 40,
+        "endChar": 52
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1393c88a_2f1ce645",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T00:59:37Z",
+      "side": 1,
+      "message": "nit: std::atomic\u003cuint32_t\u003e\n\nwe had an issue where the atomic_uint32_t alias wasn\u0027t defined for MSVC",
+      "range": {
+        "startLine": 127,
+        "startChar": 13,
+        "endLine": 127,
+        "endChar": 28
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
