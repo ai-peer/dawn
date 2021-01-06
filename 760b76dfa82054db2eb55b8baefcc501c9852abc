@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a226c5_88ea16e4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-06T21:04:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31921d08_397b621f",
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c88cc95_cd83dc71",
@@ -107,6 +125,30 @@
       "side": 1,
       "message": "+1, and also ditto for handling the error.",
       "parentUuid": "7c88cc95_cd83dc71",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 84
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "754a288e_13046dd9",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-06T21:04:34Z",
+      "side": 1,
+      "message": "Does \"dxc version\" refer to IDxcVersionInfo or a returned single DXC version number (packed)?\n\nI can cache the IDxcVersionInfo so you don\u0027t need to unpack OR cache the returned \"packed\" value as @CW suggests.",
+      "parentUuid": "227e0f1a_1a0a7407",
       "range": {
         "startLine": 410,
         "startChar": 12,
