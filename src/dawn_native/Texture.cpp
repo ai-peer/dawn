@@ -155,8 +155,8 @@ namespace dawn_native {
 
         MaybeError ValidateTextureSize(const TextureDescriptor* descriptor, const Format* format) {
             ASSERT(descriptor->size.width != 0 && descriptor->size.height != 0);
-            if (descriptor->size.width > kMaxTextureSize ||
-                descriptor->size.height > kMaxTextureSize) {
+            if (descriptor->size.width > kMaxTextureDimension2D ||
+                descriptor->size.height > kMaxTextureDimension2D) {
                 return DAWN_VALIDATION_ERROR("Texture max size exceeded");
             }
 
