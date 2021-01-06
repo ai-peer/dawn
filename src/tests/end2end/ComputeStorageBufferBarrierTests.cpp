@@ -345,6 +345,50 @@ TEST_P(ComputeStorageBufferBarrierTests, UniformToStorageAddPingPongInOnePass) {
     EXPECT_BUFFER_U32_RANGE_EQ(expectedB.data(), bufferB, 0, kNumValues);
 }
 
+TEST_P(ComputeStorageBufferBarrierTests, ArrayAccessCrash) {
+    const uint32_t kParticleSizeInFloats = 4;
+
+    std::vector<float> data(kParticleSizeInFloats * 1024, 0);
+    uint64_t bufferSize = static_cast<uint64_t>(data.size() * sizeof(float));
+
+    wgpu::Buffer buffer = utils::CreateBufferFromData(
+        device, data.data(), bufferSize, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+
+    wgpu::ShaderModule module = utils::CreateShaderModuleFromWGSL(device, R"(
+        [[block]] struct Particle {
+            [[offset(0)]] pos : vec2<f32>;
+            [[offset(8)]] vel : vec2<f32>;
+        };
+        [[binding(0), set(0)]] var<storage_buffer> particles : [[stride(16)]] array<Particle, 1024>;
+        [[builtin(global_invocation_id)]] var<in> globalId : vec3<u32>;
+        [[stage(compute)]] fn main() -> void {
+            particles[globalId.x].pos = particles[globalId.x].pos + particles[globalId.x].vel;
+        }
+    )");
+
+    wgpu::ComputePipelineDescriptor pipelineDesc = {};
+    pipelineDesc.computeStage.module = module;
+    pipelineDesc.computeStage.entryPoint = "main";
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                     {
+                                                         {0, buffer, 0, bufferSize},
+                                                     });
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    for (uint32_t i = 0, b = 0; i < kIterations; ++i, b = 1 - b) {
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Dispatch(1024);
+    }
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+}
+
 DAWN_INSTANTIATE_TEST(ComputeStorageBufferBarrierTests,
                       D3D12Backend(),
                       MetalBackend(),
