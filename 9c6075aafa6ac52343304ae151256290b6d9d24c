@@ -16,6 +16,41 @@
       "message": "PTAL. Thanks!\n\nNote that the CMakeLists.txt changes were best-effort; not sure how to to test that build.\nAlso I didn\u0027t touch the roll-shader-deps.sh script; LMK if I should.",
       "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fce0ab2_e8489479",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T01:07:51Z",
+      "side": 1,
+      "message": "roll-shader-deps.sh also does tint and shaderc which aren\u0027t in vulkan-deps.\nTint is on an autoroller now, and shaderc is going away - so let\u0027s just remove it?",
+      "parentUuid": "3b178315_725c5f1f",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad0760d9_90545a2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-06T01:07:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9c6075aafa6ac52343304ae151256290b6d9d24c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
