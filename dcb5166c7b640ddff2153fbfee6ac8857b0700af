@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f628532_2e368840",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "385435f4_a67db9f5",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "262f733d_24aa6878",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-01-06T13:59:25Z",
       "side": 1,
       "message": "nit: since we declare the class in this .cpp file we can declare all of the implementation inline.",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf0e1126_329de2ed",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "262f733d_24aa6878",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e45cf57_db059b03",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4b0d9dc_56143112",
+      "range": {
+        "startLine": 54,
+        "startChar": 29,
+        "endLine": 54,
+        "endChar": 36
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66709b66_a32f9d34",
@@ -88,6 +148,24 @@
       "writtenOn": "2021-01-06T13:59:25Z",
       "side": 1,
       "message": "Do we ever expect to call IsReady? My understanding is that the CreateReadyPipeline task would \"push\" to the device it\u0027s result. If we don\u0027t expect to call it, then we could remove mMutex. Alternatively we could set an atomic\u003cbool\u003e from inside the lambda in the std::async.",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ae5f06_45e7c0d4",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "The problem is at the end of the execution of the Closure, we still cannot remove the std::future because the encapsulated thread is not finished before the return of the Closure, or there will be a use-after-free error.\n\nIn the WorkerThreadTests.Basic I will put all the WaitableEvent objects into a list in the tracker, and in each tracker.tick() I will do check on every WaitableEvent object in that list and remove the ones with IsReady() \u003d\u003d true.",
+      "parentUuid": "66709b66_a32f9d34",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bddc893_074a6300",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29975a38_f1552d8b",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ed341a1_012d9043",
@@ -152,6 +254,30 @@
       "writtenOn": "2021-01-06T00:59:37Z",
       "side": 1,
       "message": "what is this lock for?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 71
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b9bfa6_9205d294",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done\nWe don\u0027t need it anymore so I just removed it.",
+      "parentUuid": "4ed341a1_012d9043",
       "range": {
         "startLine": 82,
         "startChar": 0,
@@ -259,6 +385,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a938ce4_04ad7436",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Oh I am meeting another problem: to export class WorkerThreadPool I have to export Closure , NonCopyable and WaitableEvent, which is a bit too much.\n\nWhile if we follow ANGLE\u0027s style, we just need to implement postWorkerTask(PlatformMethods* platform, PostWorkerTaskCallback callback, void* user_data) in Chromium, where platform \u003d DawnPlatform(), and PostWorkerTaskCallback \u003d void (*)(void *userData)[1]. To be honest I prefer the way ANGLE does because it can hide far more implementation details of Dawn compared with the way that exporting a WorkerThreadPool class.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/master:ui/gl/angle_platform_impl.cc;l\u003d132",
+      "parentUuid": "d75015bb_b94173b4",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78b60d40_42b7f50c",
         "filename": "src/common/WorkerThread.h",
         "patchSetId": 3
@@ -270,6 +420,30 @@
       "writtenOn": "2021-01-06T00:59:37Z",
       "side": 1,
       "message": "nit: this is in common/ so there should be no namespace. One day we should move everything in common/ into a dawn:: namespace.",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 21
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa704362_60316ea7",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78b60d40_42b7f50c",
       "range": {
         "startLine": 26,
         "startChar": 10,
@@ -303,6 +477,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc0469e_7b235e60",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6290d394_e005c0cb",
+      "range": {
+        "startLine": 30,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0729fd5_7b2c1190",
@@ -316,6 +514,30 @@
       "writtenOn": "2021-01-06T13:59:25Z",
       "side": 1,
       "message": "nit: Wait",
+      "range": {
+        "startLine": 56,
+        "startChar": 55,
+        "endLine": 56,
+        "endChar": 59
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb525367_8d9e42bc",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0729fd5_7b2c1190",
       "range": {
         "startLine": 56,
         "startChar": 55,
@@ -343,6 +565,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a364151d_4e6f5363",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6b8ae4d_eb6da20b",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26ca8766_4037dbbe",
@@ -356,6 +596,30 @@
       "writtenOn": "2021-01-06T00:59:37Z",
       "side": 1,
       "message": "Can we use Ref\u003cT\u003e and Dawn\u0027s RefCounted class?",
+      "range": {
+        "startLine": 63,
+        "startChar": 8,
+        "endLine": 63,
+        "endChar": 23
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "650bdaf7_be72cc62",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done\nWe don\u0027t need it any more so I just removed it.",
+      "parentUuid": "26ca8766_4037dbbe",
       "range": {
         "startLine": 63,
         "startChar": 8,
@@ -389,6 +653,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24657aa_bf06cc25",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68167e93_5c990a04",
+      "range": {
+        "startLine": 68,
+        "startChar": 10,
+        "endLine": 68,
+        "endChar": 26
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fac5984_090f464e",
@@ -402,6 +690,24 @@
       "writtenOn": "2021-01-06T13:59:25Z",
       "side": 1,
       "message": "ditto",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c152b7e_33529537",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fac5984_090f464e",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -429,6 +735,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0fb580_12760cdc",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3140ba17_8c3cd40d",
+      "range": {
+        "startLine": 80,
+        "startChar": 17,
+        "endLine": 80,
+        "endChar": 39
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f9ef91_d6f95007",
@@ -446,6 +776,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19fa6d17_338c3d63",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4f9ef91_d6f95007",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9fc419aa_9c8a048d",
@@ -459,6 +807,30 @@
       "writtenOn": "2021-01-06T00:59:37Z",
       "side": 1,
       "message": "nit: why is this called \"waitableLock\" ?",
+      "range": {
+        "startLine": 40,
+        "startChar": 40,
+        "endLine": 40,
+        "endChar": 52
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb3a9095_338a98b3",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fc419aa_9c8a048d",
       "range": {
         "startLine": 40,
         "startChar": 40,
@@ -488,6 +860,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b1ea475_886cd742",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Oh actually we don\u0027t need to tick only after waiting all the tasks. The reason I call Wait() in the unittest here is that I need to ensure all the tasks are finished.\n\nWhen I use this infrastructure to implement CreateReady*Pipeline, this Tick() function will be called in Device.Tick(), where we can check if there is any finished task results in the concurrentQueue and call their callbacks. In the Tick() function we also need to clean up the Tasks that have already finished (whose IsComplete() \u003d\u003d true).",
+      "parentUuid": "8634cc4e_8fc339cf",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1393c88a_2f1ce645",
         "filename": "src/tests/unittests/WorkerThreadTests.cpp",
         "patchSetId": 3
@@ -499,6 +889,30 @@
       "writtenOn": "2021-01-06T00:59:37Z",
       "side": 1,
       "message": "nit: std::atomic\u003cuint32_t\u003e\n\nwe had an issue where the atomic_uint32_t alias wasn\u0027t defined for MSVC",
+      "range": {
+        "startLine": 127,
+        "startChar": 13,
+        "endLine": 127,
+        "endChar": 28
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7751df3_ed6bdfda",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1393c88a_2f1ce645",
       "range": {
         "startLine": 127,
         "startChar": 13,
@@ -522,6 +936,24 @@
       "writtenOn": "2021-01-06T13:59:25Z",
       "side": 1,
       "message": "It seems that we split Tracker in two to workaround definition order issues? Maybe we could declare SimpleTask first, then define Tracker then define SimpleTask?",
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "321fe9d9_c06afdc6",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "Oh sorry I failed to catch your point here. I found it enough just to pass a ConcurrentQueue into the SimpleTask instead of the whole Tracker, then we just need to take care of the mutex inside the ConcurrentQueue and we can call all the interfaces of Tracker only in the main thread.",
+      "parentUuid": "37a495c6_f47de1c4",
       "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

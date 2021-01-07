@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0826d3d9_7ee7284c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-07T08:40:15Z",
+      "side": 1,
+      "message": "The bot failures are mainly caused by the issues in Tint:\n\n0(6) : error C1503: undefined variable \"tint_pointsize\"\n0(7) : error C1503: undefined variable \"Position\"\n\nPTAL, thanks!",
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
