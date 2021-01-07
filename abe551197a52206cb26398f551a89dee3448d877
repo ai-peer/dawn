@@ -16,6 +16,23 @@
       "message": "Maybe not.\nThose only failed CQ because of webgpu_blink_web_tests_with_backend_validation.\nThat suite is flaky because of a WPT bug that hasn\u0027t been fixed yet.\n\nThe other suites fail because apparently they fail both with and without the patch.\nMaybe a bad change snuck in and is causing those end2end tests to fail consistently on OpenGL.",
       "revId": "abe551197a52206cb26398f551a89dee3448d877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2654e8a_c31fb810",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-07T12:58:25Z",
+      "side": 1,
+      "message": "No need to revert, it was a SPIRV-Cross bug that has now been fixed. See https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1163767",
+      "revId": "abe551197a52206cb26398f551a89dee3448d877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
