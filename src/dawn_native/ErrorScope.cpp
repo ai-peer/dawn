@@ -111,8 +111,10 @@ namespace dawn_native {
         }
 
         // The root error scope captures all uncaptured errors.
+        // Except, it should not capture device lost errors since those go to
+        // the device lost callback.
         ASSERT(currentScope->IsRoot());
-        if (currentScope->mCallback) {
+        if (currentScope->mCallback && type != wgpu::ErrorType::DeviceLost) {
             currentScope->mCallback(static_cast<WGPUErrorType>(type), message,
                                     currentScope->mUserdata);
         }
