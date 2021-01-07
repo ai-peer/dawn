@@ -203,6 +203,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e47108ed_8d633c06",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-07T17:48:27Z",
+      "side": 1,
+      "message": "@Xinghau, my question was which dxc \"version\" format do you want returned by Dawn\u0027s GetDXCVersion?\n\nFor my purposes, I only need a single version number that does not need to be broken into its constituent (major, minor) parts. In PS#2, I packed them as 1.5 \u003d\u003e 15 to match FXC\u0027s version format per @RC.\n\nHowever, I\u0027m confused which exact dxc version you want returned and cached by Dawn. I think we can use the bit (not digit) packed format as @CW suggested; however, you need to \"unpack\" them to get the parts. WDYT?",
+      "parentUuid": "6e293f30_7252e3c0",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 84
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2552cf5a_5de4f2ad",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 2
