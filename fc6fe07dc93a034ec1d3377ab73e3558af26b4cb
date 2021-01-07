@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402782cc_7a22b8fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-07T21:41:09Z",
+      "side": 1,
+      "message": "It looks like all our other device lost tests were checking for device lost via the uncaptured error callback, so that\u0027s why the other tests fail.",
+      "revId": "fc6fe07dc93a034ec1d3377ab73e3558af26b4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
