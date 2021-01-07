@@ -179,6 +179,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e293f30_7252e3c0",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000731
+      },
+      "writtenOn": "2021-01-07T08:21:58Z",
+      "side": 1,
+      "message": "I think it is not good to cache IDxcVersionInfo, if so, we still need to call its GetVersion member function to get major and minor values.\nI think dxc version is shown as https://github.com/microsoft/DirectXShaderCompiler/blob/d574d27c1fd49333cc7a1280dfccd840523d87aa/lib/HLSL/DxilValidation.cpp#L5617\n\nCurrent master dxc version is 1.6, mojar is 1, and minor is 6. It is very simple, Do we need to pack it to an uint64_t variable?",
+      "parentUuid": "754a288e_13046dd9",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 84
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2552cf5a_5de4f2ad",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 2
