@@ -322,7 +322,7 @@ namespace dawn_native {
         if (DAWN_LIKELY(mState == State::Alive)) {
             return {};
         }
-        return DAWN_DEVICE_LOST_ERROR("Device is lost");
+        return DAWN_VALIDATION_ERROR("Device is lost");
     }
 
     void DeviceBase::LoseForTesting() {
