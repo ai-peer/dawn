@@ -16,6 +16,121 @@
       "message": "The bot failures are mainly caused by the issues in Tint:\n\n0(6) : error C1503: undefined variable \"tint_pointsize\"\n0(7) : error C1503: undefined variable \"Position\"\n\nPTAL, thanks!",
       "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "008d7c0e_200d180d",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-07T11:03:53Z",
+      "side": 1,
+      "message": "We\u0027re aware this spawns a new short-lived thread for each AsyncWaitableEvent, right?",
+      "range": {
+        "startLine": 39,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19b0332a_ac0884bf",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-07T11:03:53Z",
+      "side": 1,
+      "message": "std::make_shared\u003cAsyncWorkerPool\u003e() is preferable as it allocates both the AsyncWorkerPool and shared_ptr control structure in a single allocation",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 38
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da458d38_fa933133",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-07T11:03:53Z",
+      "side": 1,
+      "message": "Why not:\n\n  using Closure \u003d std::function\u003cvoid()\u003e;\n\nYou\u0027ll then be able to use lambdas instead of requiring each task to implement a full class.\n\nAlso - why must the task be non-copyable?",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f70a011b_f3e80e36",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-07T11:03:53Z",
+      "side": 1,
+      "message": "What is the purpose of this method? It cannot be used for any critical logic as the count may change as soon as function returns.\nSuggest adding a comment stating that this must only be used for testing / non-critical statistics logging.",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 42
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "085a7064_7de69875",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-07T11:03:53Z",
+      "side": 1,
+      "message": "Unnecessary, and pointlessly slows down the test runs.",
+      "range": {
+        "startLine": 153,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 24
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
