@@ -409,6 +409,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "08986831_37508f82",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-07T18:13:36Z",
+      "side": 1,
+      "message": "We should still have the callback be a C function pointer, but the PostWorkerTask can be a virtual function:\n\nclass WorkerTaskPool {\n public:\n  virtual WaitableEvent* PostWorkerTask(void (*callback)(void* userdata), void* userdata) \u003d 0;\n};\n\nclass DawnPlatform {\n  virtual WorkerTaskPool* CreateWorkerTaskPool() \u003d 0;\n};",
+      "parentUuid": "2a938ce4_04ad7436",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78b60d40_42b7f50c",
         "filename": "src/common/WorkerThread.h",
         "patchSetId": 3
