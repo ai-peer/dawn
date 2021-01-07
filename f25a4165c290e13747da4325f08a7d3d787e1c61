@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a7ce15_8c3c86e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002046
+      },
+      "writtenOn": "2021-01-07T08:38:51Z",
+      "side": 1,
+      "message": "The CMake error was:\n```\nCMake Error at third_party/CMakeLists.txt:21 (add_subdirectory):\n  add_subdirectory given source\n  \"/home/jpnurmi/Projects/temp/dawn/third_party/vulkan_deps/spirv-cross/src\"\n  which is not an existing directory.\n```",
+      "revId": "f25a4165c290e13747da4325f08a7d3d787e1c61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
