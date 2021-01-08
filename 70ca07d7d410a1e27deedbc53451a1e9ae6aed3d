@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d46cb54_a3306242",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-08T08:31:22Z",
+      "side": 1,
+      "message": "linux-dawn-rel fails due to EntryPointTests.FragAndVertexSameModule failure.",
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
