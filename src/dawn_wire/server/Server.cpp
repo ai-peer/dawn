@@ -66,20 +66,46 @@ namespace dawn_wire { namespace server {
         DestroyAllObjects(mProcs);
     }
 
-    bool Server::InjectTexture(WGPUTexture texture, uint32_t id, uint32_t generation) {
+    bool Server::InjectTexture(WGPUTexture texture,
+                               uint32_t id,
+                               uint32_t generation,
+                               uint32_t deviceId,
+                               uint32_t deviceGeneration) {
+        ObjectData<WGPUDevice>* device = DeviceObjects().Get(deviceId);
+        if (device == nullptr || device->generation != deviceGeneration) {
+            return false;
+        }
+
         ObjectData<WGPUTexture>* data = TextureObjects().Allocate(id);
         if (data == nullptr) {
+            return false;
+        }
+
+        if (!TrackDeviceChild(device, ObjectType::Texture, id)) {
             return false;
         }
 
         data->handle = texture;
         data->generation = generation;
         data->allocated = true;
+        data->device = device;
 
         // The texture is externally owned so it shouldn't be destroyed when we receive a destroy
         // message from the client. Add a reference to counterbalance the eventual release.
         mProcs.textureReference(texture);
 
+        return true;
+    }
+
+    bool Server::TrackDeviceChild(ObjectDataBase<WGPUDevice>* device,
+                                  ObjectType type,
+                                  ObjectId id) {
+        auto it = static_cast<ObjectData<WGPUDevice>*>(device)->childObjectTypesAndIds.insert(
+            PackObjectTypeAndId(type, id));
+        if (!it.second) {
+            // An object of this type and id already exists.
+            return false;
+        }
         return true;
     }
 
