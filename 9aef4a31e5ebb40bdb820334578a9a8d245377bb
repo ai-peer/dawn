@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5502aa7d_ace0d5ff",
+        "filename": ".gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-08T22:19:54Z",
+      "side": 1,
+      "message": "Correct. They\u0027d like to move them all over eventually, but it\u0027s not done yet.",
+      "parentUuid": "97fc3cfa_1d578d8e",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "534327c8_23ac89cf",
         "filename": "/COMMIT_MSG",
         "patchSetId": 10
@@ -195,6 +213,30 @@
       "writtenOn": "2021-01-04T10:20:17Z",
       "side": 1,
       "message": "nit: angle_googletest_dir",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 18
+      },
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d69508_37640f86",
+        "filename": "build_overrides/angle.gni",
+        "patchSetId": 10
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-08T22:19:54Z",
+      "side": 1,
+      "message": "Funny. Given the typo, I don\u0027t think this was doing anything, especially since we skip all the ANGLE tests anyway. Removed.",
+      "parentUuid": "fcee13a6_b4817b10",
       "range": {
         "startLine": 23,
         "startChar": 0,
