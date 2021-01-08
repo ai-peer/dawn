@@ -55,6 +55,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aed7acb4_8e0aefa4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-08T23:06:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "534327c8_23ac89cf",
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "aba613cb_b4e0bc68",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 10
@@ -190,6 +208,30 @@
       "writtenOn": "2021-01-04T10:20:17Z",
       "side": 1,
       "message": "nit: {chromium_git}/angle/angle and we can remove the angle_git variable.",
+      "range": {
+        "startLine": 127,
+        "startChar": 12,
+        "endLine": 127,
+        "endChar": 23
+      },
+      "revId": "9aef4a31e5ebb40bdb820334578a9a8d245377bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7dbd3c6_bb326cfa",
+        "filename": "DEPS",
+        "patchSetId": 10
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-08T23:06:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16dd2494_77a5b9fc",
       "range": {
         "startLine": 127,
         "startChar": 12,
