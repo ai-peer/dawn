@@ -16,6 +16,171 @@
       "message": "PTAL this CL, if it makes sense I\u0027ll send the others for review",
       "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c861dea_b3933b95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "LGTM, can we have a second reviewer?",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f133ffd3_0eb8c315",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "Doesn\u0027t a range for-loop work here to iterate over all the packed type and id?",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6750f28b_307afe2c",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "in dawn_native",
+      "range": {
+        "startLine": 57,
+        "startChar": 59,
+        "endLine": 57,
+        "endChar": 65
+      },
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fab9d93_634847db",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "Can we static_assert that ObjectId and ObjectType are both at most 32bit? Also can you comment why these conversions are useful and why it is necessary?",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b53c893_b5751fb2",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "This is only 16bits and should be 0xFFFFFFFF instead.",
+      "range": {
+        "startLine": 60,
+        "startChar": 32,
+        "endLine": 60,
+        "endChar": 38
+      },
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3088ce8b_92a3efe5",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "This and UntrackDeviceChild could be freestanding functions.",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "701cb9ce_de754625",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "Why did this need to change from device to deviceId? The check done that the device !\u003d nullptr is already performed in the Server\u0027s implementation of ObjectIDProvider.",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363e897c_744d3fea",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "933a9116_8ce2d5ff",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:39:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
