@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84bc5a6d_bc8ce7d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T09:06:28Z",
+      "side": 1,
+      "message": "Actually can we have a small test that creates an instance then a device, and checks you can drop everything but the device and operations don\u0027t crash?",
+      "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
