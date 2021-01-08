@@ -33,6 +33,24 @@
       "message": "No need to revert, it was a SPIRV-Cross bug that has now been fixed. See https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1163767",
       "revId": "abe551197a52206cb26398f551a89dee3448d877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d620f967_0e209362",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-08T15:51:15Z",
+      "side": 1,
+      "message": "Yeah, I was worried that this change was blocking the Dawn roll into Chrome, but it looks like it was stuck before that (this change included only the Tint roll into Dawn):\n\nhttps://chromium-review.googlesource.com/c/chromium/src/+/2613228",
+      "parentUuid": "bced913d_995e3e62",
+      "revId": "abe551197a52206cb26398f551a89dee3448d877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
