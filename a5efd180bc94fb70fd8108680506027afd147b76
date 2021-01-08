@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df5c0ad_e81764c9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-08T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69fc6ac1_072508c1",
+      "revId": "a5efd180bc94fb70fd8108680506027afd147b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e09efec_2442f38c",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae66430c_354401d9",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-08T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87d43569_846a3865",
+      "range": {
+        "startLine": 805,
+        "startChar": 12,
+        "endLine": 805,
+        "endChar": 74
+      },
+      "revId": "a5efd180bc94fb70fd8108680506027afd147b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49131a82_72174fc9",
@@ -88,6 +130,30 @@
       "writtenOn": "2020-12-28T19:29:08Z",
       "side": 1,
       "message": "nit: let\u0027s put this code in a helper function. Also, we can put it inside the TryEncode right at [1].",
+      "range": {
+        "startLine": 805,
+        "startChar": 12,
+        "endLine": 833,
+        "endChar": 13
+      },
+      "revId": "a5efd180bc94fb70fd8108680506027afd147b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "328be312_f660feb8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 833,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-08T11:31:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49131a82_72174fc9",
       "range": {
         "startLine": 805,
         "startChar": 12,

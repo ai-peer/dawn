@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18fe43a5_4ceb54e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-08T11:31:58Z",
+      "side": 1,
+      "message": "We discussed about exposing timestamps in nanoseconds or origin timestamps with timestamp period in https://github.com/gpuweb/gpuweb/issues/1325. The latter has the upper hand, this and previous PR will be reverted.\nI still update it for comments, it can be reused in occlusion query and pipeline statistics query. ",
+      "revId": "b7ff42ccd4343cbc582b0707d5d9182fb3999046",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
