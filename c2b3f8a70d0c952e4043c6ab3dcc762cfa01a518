@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88a806cb_9ab2579a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-08T03:28:37Z",
+      "side": 1,
+      "message": "I think this is right..? using a lost device should be a validation error - it shouldn\u0027t itself be a device lost error.",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 36
+      },
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
