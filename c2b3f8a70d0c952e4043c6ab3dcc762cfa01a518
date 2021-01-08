@@ -63,6 +63,47 @@
       },
       "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cde5ae8a_5c2e1d8d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-08T22:33:36Z",
+      "side": 1,
+      "message": "Could this be the first time we notice the device is lost? If so, we still need to notify the client. Not sure if DAWN_DEVICE_LOST_ERROR was doing that but I thought it might be.",
+      "parentUuid": "66368f2f_70264089",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 36
+      },
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbd9f6d_29cc4cf6",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-08T22:33:36Z",
+      "side": 1,
+      "message": "Existing code, but doesn\u0027t this record Unknown and DeviceLost errors into every scope in the stack?",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
