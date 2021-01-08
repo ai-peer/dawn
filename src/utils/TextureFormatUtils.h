@@ -95,6 +95,7 @@ namespace utils {
     uint32_t GetTextureFormatBlockWidth(wgpu::TextureFormat textureFormat);
     uint32_t GetTextureFormatBlockHeight(wgpu::TextureFormat textureFormat);
     const char* GetGLSLImageFormatQualifier(wgpu::TextureFormat textureFormat);
+    const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat);
 }  // namespace utils
 
 #endif
