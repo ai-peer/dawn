@@ -163,6 +163,24 @@
       "parentUuid": "9bbd9f6d_29cc4cf6",
       "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "727d75b4_d2659cf2",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-08T23:16:26Z",
+      "side": 1,
+      "message": "Correction, DeviceLost should translate into a rejection, but Unknown actually means \"device was destroyed\" and translates into orphaning JS promises (because it only happens due to the JS device getting GC\u0027d I think?). We should pick a better name for Unknown (Orphaned?). Right now, I\u0027m pretty sure this is the only use of Unknown, except in ToWGPUErrorType, where we should remove the default case. The default case only occurs for InternalErrorType::Unimplemented which actually appears to be completely unused in the codebase (DAWN_UNIMPLEMENTED_ERROR is actually, correctly, InternalErrorType::Internal).",
+      "parentUuid": "2b640200_ec1c272d",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
