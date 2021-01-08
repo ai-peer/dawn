@@ -16,6 +16,189 @@
       "message": "linux-dawn-rel fails due to EntryPointTests.FragAndVertexSameModule failure.",
       "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f52e0e3_7b5cd4ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "183b71e9_ec2043e2",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "nit: \u003d {kRTSize, kRTSize, 1}",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 34
+      },
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bb13711_9dcddbe8",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "nit: default can be left out.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 35
+      },
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73a52cf3_7cf4a12b",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 37
+      },
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5630d1fa_a06358b3",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f520f048_c85b1d97",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t write the top bits, we could do ~uint64_t(1)",
+      "range": {
+        "startLine": 117,
+        "startChar": 26,
+        "endLine": 117,
+        "endChar": 36
+      },
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe33d95_eb4f10f1",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "nit: add a comment that we set all bits so we can check 0 is correctly written",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98fc4f12_de03ca24",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "nit: this is teh default.",
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f745b79d_c494c11c",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-08T14:57:50Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "70ca07d7d410a1e27deedbc53451a1e9ae6aed3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
