@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "418771bb_df11a26a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-08T22:50:52Z",
+      "side": 1,
+      "message": "Looks like all this shutdown and the mState setting doesn\u0027t occur if a DeviceLost comes in from a backend?",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88a806cb_9ab2579a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 5
@@ -91,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7fbd467d_34f747c9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-08T22:50:52Z",
+      "side": 1,
+      "message": "Chatted about this, mState is already set so we already noticed the device was lost. Returning validation error seems correct.\n\nI think DAWN_DEVICE_LOST_ERROR only makes sense to call inside the backends as it is the notification that the device has been lost. Same with DAWN_INTERNAL_ERROR I think. Can we put those in a header that\u0027s only included in backends, maybe?",
+      "parentUuid": "cde5ae8a_5c2e1d8d",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 36
+      },
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bbd9f6d_29cc4cf6",
         "filename": "src/dawn_native/ErrorScope.cpp",
         "patchSetId": 5
@@ -102,6 +143,24 @@
       "writtenOn": "2021-01-08T22:33:36Z",
       "side": 1,
       "message": "Existing code, but doesn\u0027t this record Unknown and DeviceLost errors into every scope in the stack?",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b640200_ec1c272d",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-08T22:50:52Z",
+      "side": 1,
+      "message": "Chatted about this, this is fine because all of the error scopes should reject if the device is lost (I missed the comment explaining this). However, this is kind of a confusing way to achieve that, and in fact might be wrong: I think because of this if(), if an error scope already had an error on it, that would take precedence over an Unknown/DeviceLost and the error scope would resolve instead of reject.\n\nCould we just never pass Unknown/DeviceLost into this function (and ASSERT that) and have a separate method to reject all the error scopes at once?",
+      "parentUuid": "9bbd9f6d_29cc4cf6",
       "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
