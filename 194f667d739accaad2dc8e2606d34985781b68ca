@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b11c47_2409b593",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-08T03:50:05Z",
+      "side": 1,
+      "message": "What do you think?\n\nMy thinking is that you can drop the instance and everything is ok. It stays alive until all devices are gone.\n\nBut if you drop the device, then we nullify all of the device children.",
+      "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
