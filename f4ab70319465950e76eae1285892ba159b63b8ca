@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!\nThis is a follow-up patch for the comment from Corentin at https://dawn-review.googlesource.com/c/dawn/+/34922/3/src/dawn_native/Texture.cpp#164. The corresponding pr for these max values in WebGPU spec is https://github.com/gpuweb/gpuweb/pull/1328. ",
       "revId": "f4ab70319465950e76eae1285892ba159b63b8ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49719448_b76aef09",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-09T06:32:38Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "f4ab70319465950e76eae1285892ba159b63b8ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
