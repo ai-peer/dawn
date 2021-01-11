@@ -35,7 +35,7 @@ namespace utils {
             case wgpu::TextureFormat::BGRA8Unorm:
             case wgpu::TextureFormat::BGRA8UnormSrgb:
             case wgpu::TextureFormat::RGBA8UnormSrgb:
-                return "";
+                return "f";
 
             case wgpu::TextureFormat::R8Uint:
             case wgpu::TextureFormat::R16Uint:
@@ -432,4 +432,44 @@ namespace utils {
                 UNREACHABLE();
         }
     }
+
+    const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat) {
+        switch (textureFormat) {
+            case wgpu::TextureFormat::RGBA8Unorm:
+                return "rgba8unorm";
+            case wgpu::TextureFormat::RGBA8Snorm:
+                return "rgba8snorm";
+            case wgpu::TextureFormat::RGBA8Uint:
+                return "rgba8uint";
+            case wgpu::TextureFormat::RGBA8Sint:
+                return "rgba8sint";
+            case wgpu::TextureFormat::RGBA16Uint:
+                return "rgba16uint";
+            case wgpu::TextureFormat::RGBA16Sint:
+                return "rgba16sint";
+            case wgpu::TextureFormat::RGBA16Float:
+                return "rgba16float";
+            case wgpu::TextureFormat::R32Uint:
+                return "r32uint";
+            case wgpu::TextureFormat::R32Sint:
+                return "r32sint";
+            case wgpu::TextureFormat::R32Float:
+                return "r32float";
+            case wgpu::TextureFormat::RG32Uint:
+                return "rg32uint";
+            case wgpu::TextureFormat::RG32Sint:
+                return "rg32sint";
+            case wgpu::TextureFormat::RG32Float:
+                return "rg32float";
+            case wgpu::TextureFormat::RGBA32Uint:
+                return "rgba32uint";
+            case wgpu::TextureFormat::RGBA32Sint:
+                return "rgba32sint";
+            case wgpu::TextureFormat::RGBA32Float:
+                return "rgba32float";
+            default:
+                UNREACHABLE();
+        }
+    }
+
 }  // namespace utils
