@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc5e25c_c4769198",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-11T08:43:19Z",
+      "side": 1,
+      "message": "LGTM, thanks for the contribution!\n\nStephen, PTAL too, I checked that Mark signed the CLA.",
+      "revId": "a75b4e27f2b708d9353ce316d72052bde9e044c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
