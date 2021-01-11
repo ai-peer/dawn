@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d87cac0_3638c68a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-11T22:55:18Z",
+      "side": 1,
+      "message": "Yea we probably don\u0027t want this in production; is it enough to have the formatter print the offending line and code snippets (what your previous CL does?). For the SPIR-V part - maybe we can keep that in though (for now as we transition). And in the message also ask people to file a bug since they should never see it.",
+      "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
