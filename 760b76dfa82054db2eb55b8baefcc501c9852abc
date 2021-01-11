@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca399f10_4f9532a4",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-11T22:37:12Z",
+      "side": 1,
+      "message": "I used the toggle to check if DXC or not, do we still need both?",
+      "parentUuid": "e173a41a_9de7ca25",
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31921d08_397b621f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 2
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "accidently closed",
       "parentUuid": "25a226c5_88ea16e4",
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "250c23f9_b6aa7116",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-11T22:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b2c2474_8b9bc857",
       "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -249,6 +285,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88f2ac53_36927040",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-11T22:37:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f187c2d_e1b2a784",
+      "range": {
+        "startLine": 410,
+        "startChar": 12,
+        "endLine": 411,
+        "endChar": 84
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2552cf5a_5de4f2ad",
@@ -279,6 +339,30 @@
       "writtenOn": "2021-01-06T08:45:55Z",
       "side": 1,
       "message": "Is it convenient if I want to unpack the data to major version and minor version?",
+      "range": {
+        "startLine": 414,
+        "startChar": 12,
+        "endLine": 417,
+        "endChar": 45
+      },
+      "revId": "760b76dfa82054db2eb55b8baefcc501c9852abc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fc2b52d_f61d0452",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-11T22:37:12Z",
+      "side": 1,
+      "message": "Yup, unpack by masking out the top/bottom picks for major/minor.",
+      "parentUuid": "c3e97f5e_316e99f4",
       "range": {
         "startLine": 414,
         "startChar": 12,
