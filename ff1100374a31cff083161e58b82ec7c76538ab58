@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e4e749_98c079fe",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-11T18:02:13Z",
+      "side": 1,
+      "message": "I don\u0027t know, we should check on a Linux box.",
+      "parentUuid": "bfe36505_29e29617",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "05a77cf2_fcf94624",
