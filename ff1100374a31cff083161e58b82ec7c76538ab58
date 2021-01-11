@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe36505_29e29617",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-11T18:01:22Z",
+      "side": 1,
+      "message": "does your other CL remove this one?",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "05a77cf2_fcf94624",
@@ -14,6 +37,23 @@
       "writtenOn": "2021-01-11T17:49:47Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b233ea5d_58d5f7e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-11T18:01:22Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
