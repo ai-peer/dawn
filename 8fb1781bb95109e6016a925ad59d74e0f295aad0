@@ -16,6 +16,24 @@
       "message": "Note, if you want you can land the CLs in parallel by rebasing them on top of the \"main\" branch using the \"Rebase\" button on the top right of the Gerrit UI.",
       "revId": "8fb1781bb95109e6016a925ad59d74e0f295aad0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06095a83_0982fd53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-11T21:42:13Z",
+      "side": 1,
+      "message": "I didn\u0027t manage to merge the two. This is the last of the three, after which the Dawn libs and demos build again with MSVC (with is_clang\u003dfalse).",
+      "parentUuid": "83e4f10e_3a89eb1b",
+      "revId": "8fb1781bb95109e6016a925ad59d74e0f295aad0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
