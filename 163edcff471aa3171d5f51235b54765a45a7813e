@@ -16,6 +16,23 @@
       "message": "Still LGTM, Austin PTAL?",
       "revId": "163edcff471aa3171d5f51235b54765a45a7813e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8abc25_2acbb264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-11T17:40:58Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "163edcff471aa3171d5f51235b54765a45a7813e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
