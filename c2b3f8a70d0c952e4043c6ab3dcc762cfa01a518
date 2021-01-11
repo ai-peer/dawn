@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "183be321_6346e3cb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-11T08:37:56Z",
+      "side": 1,
+      "message": "We might be using DAWN_INTERNAL_ERROR for some WIP code paths in the frontend though. I\u0027m not sure it is practical to split headers because the InternalErrorType enum needs to be defined entierly at once. Could be worth adding a comment though.",
+      "parentUuid": "7fbd467d_34f747c9",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 36
+      },
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9bbd9f6d_29cc4cf6",
         "filename": "src/dawn_native/ErrorScope.cpp",
         "patchSetId": 5
@@ -179,6 +203,24 @@
       "side": 1,
       "message": "Correction, DeviceLost should translate into a rejection, but Unknown actually means \"device was destroyed\" and translates into orphaning JS promises (because it only happens due to the JS device getting GC\u0027d I think?). We should pick a better name for Unknown (Orphaned?). Right now, I\u0027m pretty sure this is the only use of Unknown, except in ToWGPUErrorType, where we should remove the default case. The default case only occurs for InternalErrorType::Unimplemented which actually appears to be completely unused in the codebase (DAWN_UNIMPLEMENTED_ERROR is actually, correctly, InternalErrorType::Internal).",
       "parentUuid": "2b640200_ec1c272d",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882ed8bd_2e344735",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-11T08:37:56Z",
+      "side": 1,
+      "message": "Orphaned + different function sounds good.",
+      "parentUuid": "727d75b4_d2659cf2",
       "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
