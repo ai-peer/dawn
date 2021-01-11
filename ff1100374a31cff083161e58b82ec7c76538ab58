@@ -80,6 +80,23 @@
       "message": "LGTM",
       "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34d568f0_60d6302c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-11T18:46:29Z",
+      "side": 1,
+      "message": "LGTM2. Sorry for the mess.",
+      "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
