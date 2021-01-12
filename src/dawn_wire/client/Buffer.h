@@ -18,7 +18,7 @@
 #include <dawn/webgpu.h>
 
 #include "dawn_wire/WireClient.h"
-#include "dawn_wire/client/ObjectBase.h"
+#include "dawn_wire/client/ApiObjects.h"
 
 #include <map>
 
@@ -57,7 +57,7 @@ namespace dawn_wire { namespace client {
         bool IsMappedForWriting() const;
         bool CheckGetMappedRangeOffsetSize(size_t offset, size_t size) const;
 
-        Device* mDevice;
+        Ref<Device> mDevice;
 
         // We want to defer all the validation to the server, which means we could have multiple
         // map request in flight at a single time and need to track them separately.

@@ -23,6 +23,7 @@
 #include "dawn_wire/WireClient.h"
 #include "dawn_wire/WireCmd_autogen.h"
 #include "dawn_wire/WireDeserializeAllocator.h"
+#include "dawn_wire/client/ApiObjects.h"
 #include "dawn_wire/client/ClientBase_autogen.h"
 
 namespace dawn_wire { namespace client {

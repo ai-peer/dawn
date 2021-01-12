@@ -17,11 +17,14 @@
 
 #include "dawn_wire/client/ObjectBase.h"
 
+// Included before the manual classes since this header
+// also defines Reference/Release for the manual classes.
+#include "dawn_wire/client/ApiObjects_autogen.h"
+
 #include "dawn_wire/client/Buffer.h"
 #include "dawn_wire/client/Device.h"
 #include "dawn_wire/client/Fence.h"
 #include "dawn_wire/client/Queue.h"
 
-#include "dawn_wire/client/ApiObjects_autogen.h"
 
 #endif  // DAWNWIRE_CLIENT_APIOBJECTS_H_

@@ -15,6 +15,7 @@
 #ifndef DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
 #define DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_
 
+#include "common/RefCounted.h"
 #include "dawn_wire/ObjectType_autogen.h"
 #include "dawn_wire/client/ObjectBase.h"
 
@@ -27,10 +28,10 @@ namespace dawn_wire { namespace client {
 
     {% for type in by_category["object"] %}
         {% set Type = type.name.CamelCase() %}
-        {% if type.name.CamelCase() in client_special_objects %}
+        {% if Type in client_special_objects %}
             class {{Type}};
         {% else %}
-            struct {{type.name.CamelCase()}} final : ObjectBase {
+            struct {{Type}} final : ObjectBase {
                 using ObjectBase::ObjectBase;
             };
         {% endif %}
@@ -47,7 +48,27 @@ namespace dawn_wire { namespace client {
             static constexpr ObjectType value = ObjectType::{{Type}};
         };
 
+        void Client{{as_MethodSuffix(type.name, Name("reference"))}}({{as_cType(type.name)}} cObj);
+        void Client{{as_MethodSuffix(type.name, Name("release"))}}({{as_cType(type.name)}} cObj);
+
     {% endfor %}
+
 }}  // namespace dawn_wire::client
+
+//* Define Reference/Release for internal usages of Ref<T>
+{% for type in by_category["object"] %}
+    {% set Type = type.name.CamelCase() %}
+
+    template <>
+    struct RefCountedTraits<dawn_wire::client::{{Type}}> {
+        static constexpr dawn_wire::client::{{Type}}* kNullValue = nullptr;
+        static void Reference(dawn_wire::client::{{Type}}* value) {
+            dawn_wire::client::Client{{as_MethodSuffix(type.name, Name("reference"))}}(ToAPI(value));
+        }
+        static void Release(dawn_wire::client::{{Type}}* value) {
+            dawn_wire::client::Client{{as_MethodSuffix(type.name, Name("release"))}}(ToAPI(value));
+        }
+    };
+{% endfor %}
 
 #endif  // DAWNWIRE_CLIENT_APIOBJECTS_AUTOGEN_H_

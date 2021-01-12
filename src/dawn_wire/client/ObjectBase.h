@@ -18,7 +18,6 @@
 #include <dawn/webgpu.h>
 
 #include "common/LinkedList.h"
-#include "dawn_wire/ObjectType_autogen.h"
 
 namespace dawn_wire { namespace client {
 
