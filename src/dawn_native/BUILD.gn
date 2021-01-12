@@ -280,6 +280,8 @@ source_set("dawn_native_sources") {
     "ToBackend.h",
     "Toggles.cpp",
     "Toggles.h",
+    "WorkerThread.cpp",
+    "WorkerThread.h",
     "dawn_platform.h",
   ]
 
