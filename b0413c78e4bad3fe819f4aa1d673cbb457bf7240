@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1ef6f42f_bffe92d3",
+        "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T19:02:38Z",
+      "side": 1,
+      "message": "The test is doing a buffer copy, and the null backend no-ops the queue submit.",
+      "parentUuid": "4bc79976_0f4feceb",
+      "revId": "b0413c78e4bad3fe819f4aa1d673cbb457bf7240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2a1e876c_ff527ef1",
         "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
         "patchSetId": 2
