@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b953187f_a17726dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "PTAL again, I finally took (free :S ) time to update this.",
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fb2a490_613fa84f",
@@ -31,6 +48,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Please add a comment that explains why you chose the numbers you did for BufferCountForPresentMode.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d35db1_cfe39ced",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "I used whatever works really. The semantic are in this order:\n - VSync off\n - VSync on, double buffering\n - VSync on, triple buffering\n\nDoes the values chosen correspond to this semantic? Of note this CL will be useful for Babylon native to have good swapchains.",
+      "parentUuid": "8fb2a490_613fa84f",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -66,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "30ee4c5c_73c8f7f5",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "263ed618_b63e9019",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 13
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ed862a13_6ad7e797",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
@@ -89,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "711606af_12ec4bb4",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Yes, that swapchain class is only used in native. For example Babylon native using Dawn in native to reuse their WebGPU engine.",
+      "parentUuid": "ed862a13_6ad7e797",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63f0931a_d713cde4",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
@@ -100,6 +189,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Nit: For empty destructors, prefer to use \"\u003d default.\"",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 5
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59652e72_d9f5dbdc",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63f0931a_d713cde4",
       "range": {
         "startLine": 87,
         "startChar": 0,
@@ -135,6 +248,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "977c6d1a_ae23980a",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "That\u0027s what\u0027s intended in that old code path but we\u0027re going to delete it soon anyway.",
+      "parentUuid": "21b47953_8816cdde",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 93
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495ec564_e045e139",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8dc2d2c2_5b2a30e8",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
@@ -146,6 +300,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "For my understanding, when will a non-null previous swapchain be passed here? Why can\u0027t the caller reuse the previous swap chain instead of complicating this code with having to transfer internal objects?",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 72
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c7a490c_844d1dde",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "The swapchain passed here may or may not be null. The idea is that native code using Dawn does the following:\n\n - Create a wgpu::Surface from an HWIN\n - Create a first swapchain on that surface with previousSwapChain \u003d nullptr.\n - When the window is resized or the application wants to change one of the other parameters of the swapchain\n   - Create a swapchain on the surface with previousSwapChain \u003d non-nullptr.",
+      "parentUuid": "8dc2d2c2_5b2a30e8",
       "range": {
         "startLine": 136,
         "startChar": 37,
@@ -179,6 +357,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8719d621_6048556b",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "156e50fd_25153e96",
+      "range": {
+        "startLine": 182,
+        "startChar": 0,
+        "endLine": 196,
+        "endChar": 0
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ccc5f2d_47f59248",
@@ -192,6 +394,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Nit: We -\u003e we",
+      "range": {
+        "startLine": 197,
+        "startChar": 41,
+        "endLine": 197,
+        "endChar": 43
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e035dad9_0994b51b",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ccc5f2d_47f59248",
       "range": {
         "startLine": 197,
         "startChar": 41,
@@ -225,6 +451,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa98758d_6c7e22bf",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "The block of code that grabs the buffers from the previous swapchain has an early return, so we get here only if we need to create new buffers (and the previous swapchain still has its buffers.)",
+      "parentUuid": "12b21ca3_d0218bda",
+      "range": {
+        "startLine": 202,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 70
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "141b13b3_b8fc5a4f",
@@ -238,6 +488,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "QueryInterface increments the reference count of objects. You need to use ComPtr\u003cIDXGIFactory2\u003e here to avoid a memory leak.",
+      "range": {
+        "startLine": 229,
+        "startChar": 8,
+        "endLine": 229,
+        "endChar": 42
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48912993_3e59e16d",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "141b13b3_b8fc5a4f",
       "range": {
         "startLine": 229,
         "startChar": 8,
@@ -271,6 +545,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0b7dac9_19cee225",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8644c0d_33226ad3",
+      "range": {
+        "startLine": 234,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 72
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61bd4694_38ff3b2e",
@@ -284,6 +582,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Present can return DXGI_STATUS_OCCLUDED, which is an error code, if the window is not visible. We probably don\u0027t want to make this a Dawn error.",
+      "range": {
+        "startLine": 271,
+        "startChar": 1,
+        "endLine": 272,
+        "endChar": 53
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47570ea1_b179549c",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done, although I wasn\u0027t able to trigger that HRESULT.",
+      "parentUuid": "61bd4694_38ff3b2e",
       "range": {
         "startLine": 271,
         "startChar": 1,
@@ -317,6 +639,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee534f5_823f249d",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d921fe_12224000",
+      "range": {
+        "startLine": 287,
+        "startChar": 11,
+        "endLine": 287,
+        "endChar": 25
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd4ab573_8b6c4b9d",
@@ -330,6 +676,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Unless I am missing something, waiting for GPU work to finish on the CPU is only necessary for readback or when we\u0027re resizing buffers. \n\nWhat is \"frame pacing\"?",
+      "range": {
+        "startLine": 292,
+        "startChar": 1,
+        "endLine": 292,
+        "endChar": 80
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52ed7a67_8f3e48b5",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Frame pacing is the concept of making sure that the CPU doesn\u0027t run too far in advance of the GPU. Here the synchronous wait makes sure that the CPU is only one or two frame behind the GPU.",
+      "parentUuid": "bd4ab573_8b6c4b9d",
       "range": {
         "startLine": 292,
         "startChar": 1,
@@ -363,6 +733,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db38f970_91954613",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Fixed with another CL that does the change to use the Texture::Create pattern for swapchain textures.",
+      "parentUuid": "047c68d5_88dc0d84",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 97
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1939556d_a8c519e0",
@@ -376,6 +770,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Why do we wait for GetLastSubmittedCommandSerial instead of the serials in mBufferLastUsedSerials?",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 307,
+        "endChar": 5
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f785fd3f_8a5c032f",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Added a comment that explains more what\u0027s happening there.",
+      "parentUuid": "1939556d_a8c519e0",
       "range": {
         "startLine": 300,
         "startChar": 0,
@@ -409,6 +827,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74871366_9ec5c523",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "When texture-\u003eDestroy is called, the texture is put in a queue so that we lose the reference only when all previous operations are completed. That\u0027s actually why we need to wait in DetachAndWaitDeallocation.",
+      "parentUuid": "ce504697_b58c52d8",
+      "range": {
+        "startLine": 315,
+        "startChar": 1,
+        "endLine": 316,
+        "endChar": 25
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59d706d7_3ae3a9cf",
@@ -422,6 +864,30 @@
       "writtenOn": "2020-11-24T21:37:31Z",
       "side": 1,
       "message": "Please make RefCounted derived class destructors be private.",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da60b44d_4d7e8d4e",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T13:44:02Z",
+      "side": 1,
+      "message": "Made the class final, however making the constructor private causes a compilation error at [1] because the unique_ptr template isn\u0027t allowed access to the destructor.",
+      "parentUuid": "59d706d7_3ae3a9cf",
       "range": {
         "startLine": 46,
         "startChar": 1,
