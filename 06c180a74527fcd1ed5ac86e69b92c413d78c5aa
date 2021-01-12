@@ -103,6 +103,24 @@
       "parentUuid": "f14076ce_6d448ef8",
       "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fdf7989_1ea21250",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-12T17:42:45Z",
+      "side": 1,
+      "message": "Making it protected alone gives the same errors. Making it public (and losing the friend) means the other edits below are no longer needed.",
+      "parentUuid": "e78863a7_61258f37",
+      "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
