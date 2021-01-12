@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ccf5ea5_6cd95c77",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T17:54:06Z",
+      "side": 1,
+      "message": "I think a range for-loop wouldn\u0027t be good because DoDestroyObject inside the loop is what does the removal. So the iterators would get invalidated.",
+      "parentUuid": "95acf59d_df88dbd1",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6750f28b_307afe2c",
         "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
         "patchSetId": 1
