@@ -120,6 +120,10 @@ namespace dawn_wire { namespace server {
         // TODO(enga): Use a tagged pointer to save space.
         std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
         std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
+
+    private:
+        friend class Server;
+        MapUserdata() = delete;
     };
 
     struct ErrorScopeUserdata : CallbackUserdata {
@@ -128,6 +132,10 @@ namespace dawn_wire { namespace server {
         // TODO(enga): ObjectHandle device;
         // when the wire supports multiple devices.
         uint64_t requestSerial;
+
+    private:
+        friend class Server;
+        ErrorScopeUserdata() = delete;
     };
 
     struct FenceCompletionUserdata : CallbackUserdata {
@@ -135,6 +143,10 @@ namespace dawn_wire { namespace server {
 
         ObjectHandle fence;
         uint64_t value;
+
+    private:
+        friend class Server;
+        FenceCompletionUserdata() = delete;
     };
 
     struct FenceOnCompletionUserdata : CallbackUserdata {
@@ -142,6 +154,10 @@ namespace dawn_wire { namespace server {
 
         ObjectHandle fence;
         uint64_t requestSerial;
+
+    private:
+        friend class Server;
+        FenceOnCompletionUserdata() = delete;
     };
 
     struct CreateReadyPipelineUserData : CallbackUserdata {
@@ -149,6 +165,10 @@ namespace dawn_wire { namespace server {
 
         uint64_t requestSerial;
         ObjectId pipelineObjectID;
+
+    private:
+        friend class Server;
+        CreateReadyPipelineUserData() = delete;
     };
 
     class Server : public ServerBase {
