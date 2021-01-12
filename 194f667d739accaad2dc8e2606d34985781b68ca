@@ -50,6 +50,24 @@
       "message": "Actually can we have a small test that creates an instance then a device, and checks you can drop everything but the device and operations don\u0027t crash?",
       "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe6fa93_7e3625d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T02:41:11Z",
+      "side": 1,
+      "message": "Now that I\u0027ve written the test, I\u0027m not sure this is the right semantic.\n\nASSUMING deviceTick becomes wgpuInstanceProcessEvents, you can never get the callback results once you drop the instance. So either we disallow enqueuing callbacks after you drop the instance, or we keep deviceTick, or we disallow dropping the instance before the device.",
+      "parentUuid": "84bc5a6d_bc8ce7d1",
+      "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
