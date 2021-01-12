@@ -34,6 +34,41 @@
       "parentUuid": "3d87cac0_3638c68a",
       "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a826cda_44007960",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T11:46:40Z",
+      "side": 1,
+      "message": "LGTM overall, we can fine tune messages that get produced over time.",
+      "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c28a9db_24f7ac0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T11:46:40Z",
+      "side": 1,
+      "message": "We don\u0027t know when we\u0027re running in tests, but maybe we could add a Toggle that causes more information to be printed? It seems a bit much for developers targeting WebGPU to get all of this.",
+      "parentUuid": "8d7a707d_e9061429",
+      "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
