@@ -69,6 +69,41 @@
       "parentUuid": "8d7a707d_e9061429",
       "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f869e5_480551c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T17:45:45Z",
+      "side": 1,
+      "message": "ok yea; maybe not a toggle, maybe even a \"log level\" extension or something. Then we can configure it when you have dev tools open on device creation.\nI guess we\u0027ll still want a toggle for the default log level so it\u0027s easy to set from the command line for tests.\n\nOk with this for now; I\u0027ll file a bug about logging verbosity and we should make sure we turn off the extra verbose logs before OT.",
+      "parentUuid": "9c28a9db_24f7ac0c",
+      "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e013a211_5a8ad757",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T17:45:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2031a0fb25926abc489976551ab8ae96578ef0dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
