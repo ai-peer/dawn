@@ -45,6 +45,9 @@
 #include "dawn_native/d3d12/TextureD3D12.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
 
+#include <stdio.h>
+#include <tchar.h>
+#include <windows.h>
 #include <sstream>
 
 namespace dawn_native { namespace d3d12 {
@@ -64,7 +67,20 @@ namespace dawn_native { namespace d3d12 {
 
     MaybeError Device::Initialize() {
         InitTogglesFromDriver();
+        MEMORYSTATUSEX statex;
+        statex.dwLength = sizeof(statex);
+        GlobalMemoryStatusEx(&statex);
+        _tprintf(TEXT("There is  %*ld percent of memory in use.\n"), 7, statex.dwMemoryLoad);
+        _tprintf(TEXT("There are %*I64d total Mbytes of physical memory.\n"), 7,
+                 statex.ullTotalPhys / 1048576);
+        _tprintf(TEXT("There are %*I64d free Mbytes of physical memory.\n"), 7,
+                 statex.ullAvailPhys / 1048576);
 
+        mFunctions = std::make_unique<PlatformFunctions>();
+        DAWN_TRY(mFunctions->LoadFunctions());
+        ComPtr<IDXGIDebug> debug;
+        mFunctions->dxgiGetDebugInterface1(0, IID_PPV_ARGS(&debug));
+        // debug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_SUMMARY);
         mD3d12Device = ToBackend(GetAdapter())->GetDevice();
 
         ASSERT(mD3d12Device != nullptr);
@@ -256,7 +272,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(NextSerial());
         }
 
-        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
+        // DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
         return {};
     }
