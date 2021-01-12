@@ -157,6 +157,24 @@
       "parentUuid": "2fdf7989_1ea21250",
       "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f72ba6ce_b80c0d3c",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-12T18:08:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e73588ef_a7c74ab8",
+      "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
