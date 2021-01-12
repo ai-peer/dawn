@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4ff878_3c70a64c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T17:38:55Z",
+      "side": 1,
+      "message": "Please also put \"Bug: dawn:602\" here",
+      "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f989ed6d_3b9ea572",
