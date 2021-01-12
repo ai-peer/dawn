@@ -164,6 +164,8 @@ target_sources(dawn_native PRIVATE
     "ToBackend.h"
     "Toggles.cpp"
     "Toggles.h"
+    "WorkerThread.cpp"
+    "WorkerThread.h"
     "dawn_platform.h"
 )
 target_link_libraries(dawn_native
