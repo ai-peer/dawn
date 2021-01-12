@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9fde24ce_9d3dba04",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-01-12T23:44:43Z",
+      "side": 1,
+      "message": "My bad. (Thanks for the review)",
+      "parentUuid": "6577016e_24b87834",
+      "range": {
+        "startLine": 9,
+        "startChar": 6,
+        "endLine": 9,
+        "endChar": 17
+      },
+      "revId": "935e24758af1820a1f689b75fe65b87b54aaa122",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "39ce4b62_38086a58",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
