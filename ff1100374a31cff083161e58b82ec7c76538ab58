@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e35f42f0_3f9f6a44",
+        "filename": ".gitignore",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T09:07:01Z",
+      "side": 1,
+      "message": "Checked, it can be removed.",
+      "parentUuid": "03e4e749_98c079fe",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 21
+      },
+      "revId": "ff1100374a31cff083161e58b82ec7c76538ab58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "05a77cf2_fcf94624",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
