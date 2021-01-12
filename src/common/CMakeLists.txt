@@ -32,6 +32,7 @@ target_sources(dawn_common PRIVATE
     "Log.h"
     "Math.cpp"
     "Math.h"
+    "NonCopyable.h"
     "NSRef.h"
     "PlacementAllocated.h"
     "Platform.h"
