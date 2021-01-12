@@ -44,6 +44,7 @@ namespace dawn_native {
         bool SupportsAllRequestedExtensions(
             const std::vector<const char*>& requestedExtensions) const;
         WGPUDeviceProperties GetAdapterProperties() const;
+        void ResetDevice();
 
       protected:
         PCIInfo mPCIInfo = {};
@@ -53,6 +54,7 @@ namespace dawn_native {
 
       private:
         virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) = 0;
+        virtual MaybeError ResetDeviceImpl() = 0;
 
         MaybeError CreateDeviceInternal(DeviceBase** result, const DeviceDescriptor* descriptor);
 

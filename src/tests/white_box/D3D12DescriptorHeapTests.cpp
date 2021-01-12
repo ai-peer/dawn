@@ -434,7 +434,7 @@ TEST_P(D3D12DescriptorHeapTests, EncodeManyUBO) {
     // accumulation. By checking for this sum, we ensure each bindgroup was encoded correctly.
     DAWN_SKIP_TEST_IF(!mD3DDevice->IsToggleEnabled(
         dawn_native::Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
-
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled());
     utils::BasicRenderPass renderPass =
         MakeRenderPass(kRTSize, kRTSize, wgpu::TextureFormat::R32Float);
 
@@ -447,8 +447,7 @@ TEST_P(D3D12DescriptorHeapTests, EncodeManyUBO) {
         layout (location = 0) out float fragColor;
         layout (set = 0, binding = 0) uniform buffer0 {
             float heapSize;
-        };
-        void main() {
+        };        void main() {
             fragColor = heapSize;
         })");
 
