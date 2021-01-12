@@ -1006,11 +1006,26 @@ namespace dawn_native { namespace d3d12 {
         if (!ToBackend(GetDevice())->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
             return;
         }
-        if (!IsSubresourceContentInitialized(range)) {
-            // If subresource has not been initialized, clear it to black as it could contain
-            // dirty bits from recycled memory
-            GetDevice()->ConsumedError(
-                ClearTexture(commandContext, range, TextureBase::ClearValue::Zero));
+        /*       if (!IsSubresourceContentInitialized(range)) {
+                   // If subresource has not been initialized, clear it to black as it could contain
+                   // dirty bits from recycled memory
+                   GetDevice()->ConsumedError(
+                       ClearTexture(commandContext, range, TextureBase::ClearValue::Zero));
+               }*/
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            for (uint32_t arrayLayer = range.baseArrayLayer;
+                 arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    if (!IsSubresourceContentInitialized(
+                            SubresourceRange::SingleMipAndLayer(mipLevel, arrayLayer, aspect))) {
+                        GetDevice()->ConsumedError(ClearTexture(
+                            commandContext,
+                            SubresourceRange::SingleMipAndLayer(mipLevel, arrayLayer, aspect),
+                            TextureBase::ClearValue::Zero));
+                    }
+                }
+            }
         }
     }
 
