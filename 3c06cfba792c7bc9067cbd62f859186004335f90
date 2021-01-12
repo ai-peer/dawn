@@ -16,6 +16,114 @@
       "message": "PTAL!",
       "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f409d947_fd8ba5e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:27:13Z",
+      "side": 1,
+      "message": "LGTM too, but is my understanding correct that it will cause a regression until we have https://dawn-review.googlesource.com/c/dawn/+/37002 ? Should we land that other CL first?",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d93f1e71_8319db17",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:27:13Z",
+      "side": 1,
+      "message": "IMHO we don\u0027t need to check this in dawn_wire::client, and can expect all the objects to be coming from the same client.",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dc61308_9086b9f5",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:27:13Z",
+      "side": 1,
+      "message": "The message should probably be improved (my bad)",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f3f7b6_0471adae",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:27:13Z",
+      "side": 1,
+      "message": "The buffer should keep a reference to the device since it is calling it here.",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5ecf8e_a75b39f3",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:27:13Z",
+      "side": 1,
+      "message": "nit: .data, using .begin causes an issue on MSVC",
+      "range": {
+        "startLine": 61,
+        "startChar": 83,
+        "endLine": 61,
+        "endChar": 88
+      },
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca23a4e_435c7301",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:27:13Z",
+      "side": 1,
+      "message": "That\u0027s going to change right?",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
