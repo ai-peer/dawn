@@ -91,4 +91,8 @@ namespace dawn_native {
         return {};
     }
 
+    void AdapterBase::ResetDevice() {
+        mInstance->ConsumedError(ResetDeviceImpl());
+    }
+
 }  // namespace dawn_native

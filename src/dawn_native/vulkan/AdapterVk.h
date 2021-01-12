@@ -37,6 +37,7 @@ namespace dawn_native { namespace vulkan {
 
       private:
         ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
+        MaybeError ResetDeviceImpl() override;
         void InitializeSupportedExtensions();
 
         VkPhysicalDevice mPhysicalDevice;
