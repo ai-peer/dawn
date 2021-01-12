@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca4cd406_b7da82a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:39:30Z",
+      "side": 1,
+      "message": "I don\u0027t think so. The tracking work was previously done for a few reasons.\n 1. to reject callbacks on destruction - we preserve this functionality\n 2. to fix leaks. if you destroy the client and not the server we need to ask the server to delete stuff - we preserve this functionality\n 3. Because I thought we needed to know the child objects client-side to support multiple devices - but we don\u0027t need that here, and it should be server-side",
+      "parentUuid": "f409d947_fd8ba5e1",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d93f1e71_8319db17",
         "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2021-01-12T10:27:13Z",
       "side": 1,
       "message": "IMHO we don\u0027t need to check this in dawn_wire::client, and can expect all the objects to be coming from the same client.",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "397fee6c_ed37f0be",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:39:30Z",
+      "side": 1,
+      "message": "This is a stopgap solution until we actually have multiple devices on the wire and can do the same device validation in Dawn native. Right now it\u0027s still 1-1 client device relationship which we\u0027re still relying on for correct validation.\n\nWe\u0027ll remove this once we have multiple devices.",
+      "parentUuid": "d93f1e71_8319db17",
       "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a364c94f_cffbfa68",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dc61308_9086b9f5",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10f3f7b6_0471adae",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-01-12T10:27:13Z",
       "side": 1,
       "message": "The buffer should keep a reference to the device since it is calling it here.",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffeed92f_dfc21961",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:39:30Z",
+      "side": 1,
+      "message": "It\u0027s not possible to release the device (yet). I\u0027ll fix this in one of the following changes. This one is just reorganizing where stuff gets stored.",
+      "parentUuid": "10f3f7b6_0471adae",
       "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f48f990_204d65e4",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:39:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f5ecf8e_a75b39f3",
+      "range": {
+        "startLine": 61,
+        "startChar": 83,
+        "endLine": 61,
+        "endChar": 88
+      },
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ca23a4e_435c7301",
@@ -122,6 +218,24 @@
       "writtenOn": "2021-01-12T10:27:13Z",
       "side": 1,
       "message": "That\u0027s going to change right?",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e35b1d4b_951ac463",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:39:30Z",
+      "side": 1,
+      "message": "Yes, it will.",
+      "parentUuid": "6ca23a4e_435c7301",
       "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
