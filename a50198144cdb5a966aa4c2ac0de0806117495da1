@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa73889e_3d1d8507",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T23:06:48Z",
+      "side": 1,
+      "message": "The pool probably needs a virtual function to create a WaitableEvent.\n\nThe reason is that the pool implementation may implement the event differently. In our default implementation, it\u0027s currently a std::future. In Chromium, it will use the TaskRunner primitives.\n\nI don\u0027t think we should copy ANGLE too much here since the way their platform interface works is a little bit different. Because we\u0027re using virtual methods, Dawn\u0027s default Platform::CreateWorkerTaskPool() would return ANGLE\u0027s equivalent of AsyncWorkerPool. And Chromium would override this to return ANGLE\u0027s equivalent of DelegateWorkerPool. Dawn wouldn\u0027t have a concept of DelegateWorkerPool.",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 45
+      },
+      "revId": "a50198144cdb5a966aa4c2ac0de0806117495da1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d032cb98_95d02dc6",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T23:06:48Z",
+      "side": 1,
+      "message": "This can take a raw function pointer instead of std::function since there\u0027s a userdata arg.\n\nThe implementation of it can wrap that into an std::function if it likes.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 89
+      },
+      "revId": "a50198144cdb5a966aa4c2ac0de0806117495da1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4cc5a97_9888109b",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T23:06:48Z",
+      "side": 1,
+      "message": "What is this meant to do? If it signals that a task has finished, I don\u0027t think we should assume that they will finish in the order the tasks were posted?\n\nIf it\u0027s associated with a particular task, shouldn\u0027t it be on WaitableEvent?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 36
+      },
+      "revId": "a50198144cdb5a966aa4c2ac0de0806117495da1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
