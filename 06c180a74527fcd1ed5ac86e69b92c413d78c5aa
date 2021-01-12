@@ -139,6 +139,24 @@
       "parentUuid": "e78863a7_61258f37",
       "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e73588ef_a7c74ab8",
+        "filename": "src/dawn_wire/server/Server.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T17:51:01Z",
+      "side": 1,
+      "message": "Ok let\u0027s make it public then.",
+      "parentUuid": "2fdf7989_1ea21250",
+      "revId": "06c180a74527fcd1ed5ac86e69b92c413d78c5aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
