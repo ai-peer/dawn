@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95acf59d_df88dbd1",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "This hasn\u0027t been addressed.",
+      "parentUuid": "f133ffd3_0eb8c315",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6750f28b_307afe2c",
         "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
         "patchSetId": 1
@@ -130,6 +148,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "5fab9d93_634847db",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9873a632_cba30111",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "The part about the comment hasn\u0027t been addressed.",
+      "parentUuid": "c59a1449_7495f29e",
       "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -251,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e74a1ea8_ad42de10",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "23bcb9c0_311e8d90",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "363e897c_744d3fea",
@@ -268,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69434fe7_24248c44",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "363e897c_744d3fea",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "933a9116_8ce2d5ff",
@@ -281,6 +353,24 @@
       "writtenOn": "2021-01-08T09:39:00Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fc8f482_3369ce49",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "933a9116_8ce2d5ff",
       "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

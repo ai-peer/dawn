@@ -39,6 +39,57 @@
       "message": "PTAL!",
       "revId": "df0715832d7b036cba1ee69104db26d78b3e11ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697ef277_5baefe9a",
+        "filename": "generator/templates/dawn_wire/server/ServerBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "nit: explain that we do it as a second step because of dawn_native\u0027s limitations.",
+      "revId": "df0715832d7b036cba1ee69104db26d78b3e11ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b68df25_3a04146d",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "This could be an UntrackChildObject that lives next to TrackChildObject",
+      "revId": "df0715832d7b036cba1ee69104db26d78b3e11ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39bd30e1_8dc7dc03",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:41:15Z",
+      "side": 1,
+      "message": "nit: sizeof(ObjectType) * 8, otherwise we are comparing bits to bytes.",
+      "revId": "df0715832d7b036cba1ee69104db26d78b3e11ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
