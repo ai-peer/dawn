@@ -237,14 +237,25 @@ namespace dawn_native {
             return {};
         }
 
-        ResultOrError<std::vector<uint32_t>> ModuleToSPIRV(tint::ast::Module module) {
+        ResultOrError<std::vector<uint32_t>> ModuleToSPIRV(tint::ast::Module module,
+                                                           bool using_tint_inspector) {
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V writer failure:" << std::endl;
 
             tint::writer::spirv::Generator generator(std::move(module));
-            if (!generator.Generate()) {
-                errorStream << "Generator: " << generator.error() << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            if (using_tint_inspector) {
+                if (!generator.Generate()) {
+                    errorStream << "Generator: " << generator.error() << std::endl;
+                    return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+                }
+            } else {
+                // When not using the inspector, generate with unsafe names
+                // otherwise, SPIRV-Cross will not get the correct names back
+                // when trying to lookup entry points.
+                if (!generator.GenerateUnsafe()) {
+                    errorStream << "Generator: " << generator.error() << std::endl;
+                    return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+                }
             }
 
             std::vector<uint32_t> spirv = generator.result();
@@ -853,9 +864,10 @@ namespace dawn_native {
                     // pulling since we can't go WGSL->point size transform->spirv->Tint.
                     // Tint's spirv reader doesn't understand point size. crbug.com/tint/412.
                     auto tintModule = std::make_unique<tint::ast::Module>(module.Clone());
-
                     std::vector<uint32_t> spirv;
-                    DAWN_TRY_ASSIGN(spirv, ModuleToSPIRV(std::move(module)));
+                    DAWN_TRY_ASSIGN(
+                        spirv, ModuleToSPIRV(std::move(module),
+                                             device->IsToggleEnabled(Toggle::UseTintInspector)));
                     DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
 
                     parseResult.tintModule = std::move(tintModule);
@@ -1053,9 +1065,19 @@ namespace dawn_native {
         DAWN_TRY_ASSIGN(module, RunTransforms(&transformManager, moduleIn));
 
         tint::writer::spirv::Generator generator(std::move(module));
-        if (!generator.Generate()) {
-            errorStream << "Generator: " << generator.error() << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        if (GetDevice()->IsToggleEnabled(Toggle::UseTintInspector)) {
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+        } else {
+            // When not using the inspector, generate with unsafe names
+            // otherwise, SPIRV-Cross will not get the correct names back
+            // when trying to lookup entry points.
+            if (!generator.GenerateUnsafe()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
         }
 
         std::vector<uint32_t> spirv = generator.result();
@@ -1093,7 +1115,9 @@ namespace dawn_native {
             if (!typeDeterminer.Determine()) {
                 return DAWN_VALIDATION_ERROR(typeDeterminer.error().c_str());
             }
-            DAWN_TRY_ASSIGN(localSpirv, ModuleToSPIRV(std::move(clonedModule)));
+            DAWN_TRY_ASSIGN(localSpirv,
+                            ModuleToSPIRV(std::move(clonedModule),
+                                          GetDevice()->IsToggleEnabled(Toggle::UseTintInspector)));
             DAWN_TRY(ValidateSpirv(localSpirv.data(), localSpirv.size()));
             spirvPtr = &localSpirv;
 #else
