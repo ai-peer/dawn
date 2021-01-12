@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "31e3d448583e9efd80748a73ac68074636cf85df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d78c81b_296d1996",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T09:07:44Z",
+      "side": 1,
+      "message": "Looks good but I already did the same change in https://dawn-review.googlesource.com/c/dawn/+/37200 :)",
+      "revId": "31e3d448583e9efd80748a73ac68074636cf85df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
