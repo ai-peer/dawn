@@ -50,6 +50,24 @@
       "message": "We\u0027ll need to also call client::Buffer\u0027s destroy method or something like that when the refcount reaches zero so it can remove its own reference to the client::Device.",
       "revId": "4ed76ab60179efc6ee0c7127ad4c989e2d53d301",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385dd841_daebbeb1",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T22:40:45Z",
+      "side": 1,
+      "message": "The buffer shouldn\u0027t take a reference since that would keep the device alive. And we intend to make everything an error if you drop the device. \n\nThe buffer only stores a pointer to the device to do injectError. So in a future change I\u0027m no-oping those calls if you delete the device.",
+      "parentUuid": "51c7ee81_38f8f3cc",
+      "revId": "4ed76ab60179efc6ee0c7127ad4c989e2d53d301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
