@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b6ef14_b66d360c",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-12T14:13:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "008d7c0e_200d180d",
+      "range": {
+        "startLine": 39,
+        "startChar": 12,
+        "endLine": 43,
+        "endChar": 15
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19b0332a_ac0884bf",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-07T11:03:53Z",
       "side": 1,
       "message": "std::make_shared\u003cAsyncWorkerPool\u003e() is preferable as it allocates both the AsyncWorkerPool and shared_ptr control structure in a single allocation",
+      "range": {
+        "startLine": 82,
+        "startChar": 4,
+        "endLine": 82,
+        "endChar": 38
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63e1f1a9_60933c1e",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-12T14:13:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19b0332a_ac0884bf",
       "range": {
         "startLine": 82,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fde730b_e5301ffc",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-12T14:13:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da458d38_fa933133",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 2
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f70a011b_f3e80e36",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca3c697_c1c3d75b",
+        "filename": "src/common/WorkerThread.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-12T14:13:55Z",
+      "side": 1,
+      "message": "Done\n\nI just removed it as it is not very important.",
+      "parentUuid": "f70a011b_f3e80e36",
+      "range": {
+        "startLine": 63,
+        "startChar": 4,
+        "endLine": 63,
+        "endChar": 42
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "085a7064_7de69875",
@@ -123,6 +219,30 @@
       "writtenOn": "2021-01-07T11:03:53Z",
       "side": 1,
       "message": "Unnecessary, and pointlessly slows down the test runs.",
+      "range": {
+        "startLine": 153,
+        "startChar": 3,
+        "endLine": 154,
+        "endChar": 24
+      },
+      "revId": "90d15ae552a4857d76b0757810e5654dde5ce473",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0311d5bc_78fba5cf",
+        "filename": "src/tests/unittests/WorkerThreadTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-12T14:13:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "085a7064_7de69875",
       "range": {
         "startLine": 153,
         "startChar": 3,

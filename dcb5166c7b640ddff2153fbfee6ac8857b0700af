@@ -457,6 +457,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42080d0f_1c4a1526",
+        "filename": "src/common/WorkerThread.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-12T14:13:55Z",
+      "side": 1,
+      "message": "I\u0027ve just updated the CL as you suggested. PTAL, thanks!",
+      "parentUuid": "b23ef581_e95d4422",
+      "range": {
+        "startLine": 90,
+        "startChar": 4,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "dcb5166c7b640ddff2153fbfee6ac8857b0700af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78b60d40_42b7f50c",
         "filename": "src/common/WorkerThread.h",
         "patchSetId": 3
