@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5985fa4_e0f9d5fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-12T14:41:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28b778b7_731f4eaf",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-12T14:41:36Z",
+      "side": 1,
+      "message": "Naming nit: Perhaps these could be FooToBar instead of BarForFoo? That\u0027d more closely mirror ToDXGIUsage() below. E.g., This one could be PresentModeToBufferCount().",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b64a0f62_cce6b50c",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-12T14:41:36Z",
+      "side": 1,
+      "message": "Is there a test to exercise this code path?",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc72dcaa_4824ec4a",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-12T14:41:36Z",
+      "side": 1,
+      "message": "Is there a test to exercise this code path?",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e19ce2aa_3559330b",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-12T14:41:36Z",
+      "side": 1,
+      "message": "Naming nit: Wait -\u003e Await? or WaitFor?",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c2201fb_6295f1df",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-12T14:41:36Z",
+      "side": 1,
+      "message": "Naming nit: prefer \"DeprecatedSwapChain\" a la Blink practice.",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
