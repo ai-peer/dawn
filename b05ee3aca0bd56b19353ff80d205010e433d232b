@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e51ad95_934bd25a",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T06:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6750f28b_307afe2c",
+      "range": {
+        "startLine": 57,
+        "startChar": 59,
+        "endLine": 57,
+        "endChar": 65
+      },
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fab9d93_634847db",
@@ -88,6 +112,24 @@
       "writtenOn": "2021-01-08T09:39:00Z",
       "side": 1,
       "message": "Can we static_assert that ObjectId and ObjectType are both at most 32bit? Also can you comment why these conversions are useful and why it is necessary?",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c59a1449_7495f29e",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T06:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fab9d93_634847db",
       "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +157,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc3e415f_a56294b8",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T06:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b53c893_b5751fb2",
+      "range": {
+        "startLine": 60,
+        "startChar": 32,
+        "endLine": 60,
+        "endChar": 38
+      },
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3088ce8b_92a3efe5",
@@ -132,6 +198,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7dc6c59_cccd85a3",
+        "filename": "src/dawn_wire/server/Server.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T06:41:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3088ce8b_92a3efe5",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "701cb9ce_de754625",
@@ -145,6 +229,24 @@
       "writtenOn": "2021-01-08T09:39:00Z",
       "side": 1,
       "message": "Why did this need to change from device to deviceId? The check done that the device !\u003d nullptr is already performed in the Server\u0027s implementation of ObjectIDProvider.",
+      "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23bcb9c0_311e8d90",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T06:41:55Z",
+      "side": 1,
+      "message": "if it\u0027s just WGPUDevice we don\u0027t have the pointer to the wrapper struct which holds the list of owned children. We need the whole thing to do the tracking in |TrackDeviceChild|",
+      "parentUuid": "701cb9ce_de754625",
       "revId": "b05ee3aca0bd56b19353ff80d205010e433d232b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
