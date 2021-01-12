@@ -15,12 +15,23 @@
 #include "dawn_platform/DawnPlatform.h"
 
 #include "common/Assert.h"
+#include "common/WorkerThread.h"
 
 namespace dawn_platform {
 
     CachingInterface::CachingInterface() = default;
 
     CachingInterface::~CachingInterface() = default;
+
+    WorkerTaskPool::~WorkerTaskPool() {
+    }
+
+    void WorkerTaskPool::PostWorkerTask(std::function<void(void*)> callback, void* userdata) {
+        callback(userdata);
+    }
+
+    void WorkerTaskPool::TaskFinished() {
+    }
 
     Platform::Platform() = default;
 
@@ -52,6 +63,10 @@ namespace dawn_platform {
 
     dawn_platform::CachingInterface* Platform::GetCachingInterface(const void* fingerprint,
                                                                    size_t fingerprintSize) {
+        return nullptr;
+    }
+
+    dawn_platform::WorkerTaskPool* Platform::CreateWorkerTaskPool() {
         return nullptr;
     }
 
