@@ -86,6 +86,24 @@
       "parentUuid": "fbe6fa93_7e3625d2",
       "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e8e03b_1659ce1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-12T23:13:56Z",
+      "side": 1,
+      "message": "I suppose it\u0027s fine for now then. Now that we have device.destroy() we can try to clarify all the lifetime stuff with DM.",
+      "parentUuid": "c534861f_f80d5bdc",
+      "revId": "194f667d739accaad2dc8e2606d34985781b68ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
