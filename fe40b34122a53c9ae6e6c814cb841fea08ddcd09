@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f1e9004_3f903a00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T15:24:33Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll land this so I can test and revert if needed before the US comes online.",
+      "revId": "fe40b34122a53c9ae6e6c814cb841fea08ddcd09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
