@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e9305b3_3aecf4a8",
+        "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:46:47Z",
+      "side": 1,
+      "message": "nit: comment before the test.",
+      "revId": "b0413c78e4bad3fe819f4aa1d673cbb457bf7240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa31daab_a1e2868c",
+        "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:46:47Z",
+      "side": 1,
+      "message": "Why do we skip the null backend?",
+      "revId": "b0413c78e4bad3fe819f4aa1d673cbb457bf7240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bc79976_0f4feceb",
+        "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:46:47Z",
+      "side": 1,
+      "message": "nit: stay debug? Also you can use DAWN_DEBUG() in common/Log.h",
+      "revId": "b0413c78e4bad3fe819f4aa1d673cbb457bf7240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a1e876c_ff527ef1",
+        "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-12T10:46:47Z",
+      "side": 1,
+      "message": "In the future with processEvents we could check that 1) it doesn\u0027t crash when we do things in this order and 2) we can still create objects. It\u0027s true we won\u0027t be able to test callbacks,",
+      "revId": "b0413c78e4bad3fe819f4aa1d673cbb457bf7240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
