@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f999c7_a3a43e48",
+        "filename": "generator/templates/dawn_wire/client/ApiProcs.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T08:59:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "397fee6c_ed37f0be",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dc61308_9086b9f5",
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "It\u0027s not possible to release the device (yet). I\u0027ll fix this in one of the following changes. This one is just reorganizing where stuff gets stored.",
       "parentUuid": "10f3f7b6_0471adae",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de99478_f0e1d3cd",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T08:59:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ffeed92f_dfc21961",
       "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +272,24 @@
       "side": 1,
       "message": "Yes, it will.",
       "parentUuid": "6ca23a4e_435c7301",
+      "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c18671_f766a58a",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T08:59:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e35b1d4b_951ac463",
       "revId": "3c06cfba792c7bc9067cbd62f859186004335f90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
