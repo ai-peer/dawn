@@ -16,6 +16,24 @@
       "message": "LGTM, thanks!\n\nOut of curiosity, what\u0027s the larger context of these fixes? If you have a project using Dawn, if you have a project using Dawn / Tint / ANGLE as a dependency, it shouldn\u0027t need to build tests.",
       "revId": "2453f83503872445c6b708b41d8c166a03a8bddf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df56fbf_890d87dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-13T12:49:40Z",
+      "side": 1,
+      "message": "The short answer is: we use Dawn to develop the WebGPU backend for our in-house 3D engine (since the tooling with Emscripten isn\u0027t at the same level as with native desktop); same with ANGLE, to get a better insight into WebGL.\n\nLong answer: it\u0027s not possible to use the Dawn libs built with Clang with VS due to the C++ API exposing things like std::vector, e.g.:\n\nstd::vector\u003cdawn_native::Adapter\u003e adapters \u003d instance.GetAdapters();\n\n(From memory, down to std::vector mapping to a different internal namespace, not just the different memory layout between Clang and VS\u0027s STL.)\n\nTo work around this we\u0027d need to either build everything with Clang, which for Windows feels a bit second class, add a layer to expose a C API (just for the parts that need/expose STL), or build Dawn with VS. When we first started experimenting (2019) Dawn would build with VS with no problems, but at some point the win-msvc-rel-x64 builder seems to have stopped running and more bits started breaking.\n\nThe fixes for the tests was out of completion, all the other fixes were just to get the dawn_samples and the libs building. Getting the optimised build working (at all) is the only step remaining (then the MSVC builders should run again).",
+      "parentUuid": "0711f21b_6eaaf796",
+      "revId": "2453f83503872445c6b708b41d8c166a03a8bddf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
