@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3073f3ef_bd771a2b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-13T04:48:33Z",
+      "side": 1,
+      "message": "Right. So DeviceLost is supposed to mean the device is actually completely lost. InternalError means that we try to wait for everything to finish to gracefully shut down.",
+      "parentUuid": "418771bb_df11a26a",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88a806cb_9ab2579a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 5
@@ -154,6 +172,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "345ef18a_78d50a71",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-13T04:48:33Z",
+      "side": 1,
+      "message": "I added comments about the macros.",
+      "parentUuid": "183be321_6346e3cb",
+      "range": {
+        "startLine": 325,
+        "startChar": 15,
+        "endLine": 325,
+        "endChar": 36
+      },
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bbd9f6d_29cc4cf6",
@@ -221,6 +263,24 @@
       "side": 1,
       "message": "Orphaned + different function sounds good.",
       "parentUuid": "727d75b4_d2659cf2",
+      "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25953f7_e777e551",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-13T04:48:33Z",
+      "side": 1,
+      "message": "I\u0027ll open a webgpu-headers PR about renaming Unknown. \n\nI tried moving the device lost handling to a different function, but the bulk of the code was the same as the code here, so I kept it where it is. I think it\u0027s more readable now though.",
+      "parentUuid": "882ed8bd_2e344735",
       "revId": "c2b3f8a70d0c952e4043c6ab3dcc762cfa01a518",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
