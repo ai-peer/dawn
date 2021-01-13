@@ -16,6 +16,24 @@
       "message": "It suspect this CL caused failure of this bot https://ci.chromium.org/p/chromium/builders/ci/Windows%20deterministic?limit\u003d200 starting https://ci.chromium.org/ui/p/chromium/builders/ci/Windows%20deterministic/17747/blamelist\n\nIs it plausible?\nChecking mini_installer.exe difference: (43949 deps)\n  obj/third_party/swiftshader/src/Main/swiftshader_main/FrameBuffer.obj    ",
       "revId": "4110684aa07a1443dcd6b40e219baf4314210dd5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b50a78e3_6890f664",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T10:08:27Z",
+      "side": 1,
+      "message": "It is most likely unrelated given the difference is in Swiftshader. There\u0027s been an LLVM roll in the regression range so that seems more related (since there are no Swiftshader changes in the regression range).",
+      "parentUuid": "d4ab94b2_2fa4d562",
+      "revId": "4110684aa07a1443dcd6b40e219baf4314210dd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
