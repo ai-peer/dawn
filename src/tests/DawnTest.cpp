@@ -784,6 +784,8 @@ bool DawnTestBase::SupportsExtensions(const std::vector<const char*>& extensions
 }
 
 void DawnTestBase::SetUp() {
+    gTestEnv->TearDown();
+    gTestEnv->SetUp();
     {
         // Find the adapter that exactly matches our adapter properties.
         const auto& adapters = gTestEnv->GetInstance()->GetAdapters();
@@ -833,6 +835,7 @@ void DawnTestBase::SetUp() {
         deviceDescriptor.forceDisabledToggles.push_back(info->name);
     }
 
+    // mBackendAdapter.ResetDevice();
     backendDevice = mBackendAdapter.CreateDevice(&deviceDescriptor);
     ASSERT_NE(nullptr, backendDevice);
 
@@ -900,7 +903,7 @@ void DawnTestBase::SetUp() {
     // A very large number of tests hang on Intel D3D12 with the debug adapter after a driver
     // upgrade. Violently suppress this whole configuration until we figure out what to do.
     // See https://crbug.com/dawn/598
-    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
+    // DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
 }
 
 void DawnTestBase::TearDown() {

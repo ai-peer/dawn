@@ -45,6 +45,10 @@ namespace dawn_native { namespace null {
         return Device::Create(this, descriptor);
     }
 
+    MaybeError Adapter::ResetDeviceImpl() {
+        return {};
+    }
+
     class Backend : public BackendConnection {
       public:
         Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::BackendType::Null) {
