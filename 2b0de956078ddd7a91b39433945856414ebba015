@@ -39,6 +39,30 @@
       },
       "revId": "2b0de956078ddd7a91b39433945856414ebba015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5fa1ee6_107b9d11",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T14:06:51Z",
+      "side": 1,
+      "message": "We do now, but it used to not be the case so some files (especially tests) have some chunks that were never formatted.",
+      "parentUuid": "76ad1b81_8c3a9734",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 11
+      },
+      "revId": "2b0de956078ddd7a91b39433945856414ebba015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
