@@ -101,7 +101,7 @@ namespace dawn_native { namespace vulkan {
 
       private:
         ~Texture() override;
-        using TextureBase::TextureBase;
+        Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
 
         MaybeError InitializeAsInternalTexture(VkImageUsageFlags extraUsages);
         MaybeError InitializeFromExternal(const ExternalImageDescriptorVk* descriptor,
@@ -113,10 +113,18 @@ namespace dawn_native { namespace vulkan {
                                 const SubresourceRange& range,
                                 TextureBase::ClearValue);
 
+        void TransitionUsageForPassImpl(CommandRecordingContext* recordingContext,
+                                        const PassTextureUsage& textureUsages,
+                                        std::vector<VkImageMemoryBarrier>* imageBarriers,
+                                        VkPipelineStageFlags* srcStages,
+                                        VkPipelineStageFlags* dstStages);
         void TweakTransitionForExternalUsage(CommandRecordingContext* recordingContext,
                                              std::vector<VkImageMemoryBarrier>* barriers,
                                              size_t transitionBarrierStart);
         bool CanReuseWithoutBarrier(wgpu::TextureUsage lastUsage, wgpu::TextureUsage usage);
+
+        bool ShouldCombineDepthStencilBarriers() const;
+        Aspect ComputeAspectsForSubresourceStorage() const;
 
         VkImage mHandle = VK_NULL_HANDLE;
         ResourceMemoryAllocation mMemoryAllocation;
@@ -137,12 +145,10 @@ namespace dawn_native { namespace vulkan {
         VkSemaphore mSignalSemaphore = VK_NULL_HANDLE;
         std::vector<VkSemaphore> mWaitRequirements;
 
-        bool mSameLastUsagesAcrossSubresources = true;
-
-        // A usage of none will make sure the texture is transitioned before its first use as
-        // required by the Vulkan spec.
-        std::vector<wgpu::TextureUsage> mSubresourceLastUsages =
-            std::vector<wgpu::TextureUsage>(GetSubresourceCount(), wgpu::TextureUsage::None);
+        // Note that in early Vulkan versions it is not possible to transition depth and stencil
+        // separately so textures with Depth|Stencil aspects will have a single Depth aspect in the
+        // storage.
+        SubresourceStorage<wgpu::TextureUsage> mSubresourceLastUsages;
     };
 
     class TextureView final : public TextureViewBase {
