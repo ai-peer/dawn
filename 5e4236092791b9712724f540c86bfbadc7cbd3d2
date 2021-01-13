@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "201ce581_0908bbd0",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-13T19:18:09Z",
+      "side": 1,
+      "message": "Since there is only one D3D12 device per-adapter, you\u0027ll need a machine with two adapters to test this codepath.",
+      "parentUuid": "dc72dcaa_4824ec4a",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e19ce2aa_3559330b",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 3

@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb78b7e1_453a3408",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-13T19:18:09Z",
+      "side": 1,
+      "message": "Applications will generally want to be triple buffered to avoid stalls if they get MPOed. Strange that people will need to specify \"Mailbox\" to get this behavior. Can we just expose the buffer count as a parameter directly?",
+      "parentUuid": "c3d35db1_cfe39ced",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "263ed618_b63e9019",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
@@ -166,6 +190,30 @@
       "side": 1,
       "message": "Yes, that swapchain class is only used in native. For example Babylon native using Dawn in native to reuse their WebGPU engine.",
       "parentUuid": "ed862a13_6ad7e797",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 53,
+        "endChar": 13
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3e6ff02_7a117aca",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-13T19:18:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "711606af_12ec4bb4",
       "range": {
         "startLine": 51,
         "startChar": 0,
@@ -272,6 +320,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a0aec4ef_fbeb2144",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-13T19:18:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "977c6d1a_ae23980a",
+      "range": {
+        "startLine": 99,
+        "startChar": 8,
+        "endLine": 99,
+        "endChar": 93
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "495ec564_e045e139",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
@@ -324,6 +396,30 @@
       "side": 1,
       "message": "The swapchain passed here may or may not be null. The idea is that native code using Dawn does the following:\n\n - Create a wgpu::Surface from an HWIN\n - Create a first swapchain on that surface with previousSwapChain \u003d nullptr.\n - When the window is resized or the application wants to change one of the other parameters of the swapchain\n   - Create a swapchain on the surface with previousSwapChain \u003d non-nullptr.",
       "parentUuid": "8dc2d2c2_5b2a30e8",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 72
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1d18e4_51435233",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-13T19:18:09Z",
+      "side": 1,
+      "message": "Makes sense. Might be a good idea to add this as a comment.",
+      "parentUuid": "6c7a490c_844d1dde",
       "range": {
         "startLine": 136,
         "startChar": 37,
@@ -888,6 +984,30 @@
       "side": 1,
       "message": "Made the class final, however making the constructor private causes a compilation error at [1] because the unique_ptr template isn\u0027t allowed access to the destructor.",
       "parentUuid": "59d706d7_3ae3a9cf",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f31a3be_e33078b4",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-13T19:18:09Z",
+      "side": 1,
+      "message": "You shouldn\u0027t be using unique_ptr with reference counted classes because the unique_ptr may delete the object out from under code which still has a reference to it. The only code which should delete a reference counted class is the Release method of RefCounted.\n\nConsider instead using operator new with AcquireRef to keep things safe. This is done in the create methods of TextureD3D12.cpp. If you need to pass the object to code that is not ref count aware, you can use the Detach method of Ref.",
+      "parentUuid": "da60b44d_4d7e8d4e",
       "range": {
         "startLine": 46,
         "startChar": 1,
