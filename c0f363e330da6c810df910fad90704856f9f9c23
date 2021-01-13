@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "492815e2_c592abb3",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Since the fragment shader doesn\u0027t have first offset information, I kept the call outside of the loop.",
+      "parentUuid": "337d0e14_fe5ae1bb",
+      "range": {
+        "startLine": 333,
+        "startChar": 76,
+        "endLine": 333,
+        "endChar": 77
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0889d89c_ca485461",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-13T04:47:44Z",
       "side": 1,
       "message": "nit: mutable output argument should be passed by pointer, not reference",
+      "range": {
+        "startLine": 205,
+        "startChar": 8,
+        "endLine": 205,
+        "endChar": 25
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ece9de21_48838c14",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0889d89c_ca485461",
       "range": {
         "startLine": 205,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4189f69c_9eedb828",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done. You are correct, the transforms need to run before the values are available. I believe that in the future, these values would be returned as part of the Transform::Output.",
+      "parentUuid": "8a9b78ce_9f3bc4a2",
+      "range": {
+        "startLine": 228,
+        "startChar": 46,
+        "endLine": 228,
+        "endChar": 85
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da784c9d_a0fdd510",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-01-13T04:47:44Z",
       "side": 1,
       "message": "Maybe this should be returned as part of the CompiledShader struct? otherwise it makes ShaderModule stateful. GetFirstOffsetInfo() changes depending on what you last compiled.\n\nWe could put it on CompiledShader and get/set it at [1].",
+      "range": {
+        "startLine": 335,
+        "startChar": 73,
+        "endLine": 335,
+        "endChar": 89
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a40e8a_6ba7ada5",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da784c9d_a0fdd510",
       "range": {
         "startLine": 335,
         "startChar": 73,
@@ -127,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b59526_99869ae2",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "226e00c1_b307d1c3",
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2337b16_37cf19bb",
@@ -140,6 +254,30 @@
       "writtenOn": "2021-01-13T04:47:44Z",
       "side": 1,
       "message": "unit: whitespace",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 105,
+        "endChar": 8
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf97411_2124b734",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2337b16_37cf19bb",
       "range": {
         "startLine": 105,
         "startChar": 0,
@@ -173,6 +311,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aacdf8cf_4eaa8099",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d80704c_34328ab5",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 117,
+        "endChar": 56
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ef28bef_4d05a586",
@@ -186,6 +348,30 @@
       "writtenOn": "2021-01-13T04:47:44Z",
       "side": 1,
       "message": "why does this matter? If we only want the shader to run once, we could draw a single point instead.",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 0
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b4fc02_a8ebe153",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ef28bef_4d05a586",
       "range": {
         "startLine": 120,
         "startChar": 0,
@@ -213,6 +399,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683a6b2b_4df204c7",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5ef7332_884f9987",
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b2ebab6_d2969e08",
@@ -226,6 +430,24 @@
       "writtenOn": "2021-01-13T04:47:44Z",
       "side": 1,
       "message": "nit: newline after this to separate the creation and the descriptor",
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a15fb887_6b9d8c16",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b2ebab6_d2969e08",
       "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -253,6 +475,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "120b0eb1_078428f4",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42d8c21a_ac929806",
+      "range": {
+        "startLine": 200,
+        "startChar": 0,
+        "endLine": 202,
+        "endChar": 45
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7faacd1a_e2d0ea7d",
@@ -266,6 +512,30 @@
       "writtenOn": "2021-01-13T04:47:44Z",
       "side": 1,
       "message": "nit: add a comment above each TEST_P",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 55
+      },
+      "revId": "c0f363e330da6c810df910fad90704856f9f9c23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f2ca0a_11c9f9d6",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-13T23:53:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7faacd1a_e2d0ea7d",
       "range": {
         "startLine": 204,
         "startChar": 0,
