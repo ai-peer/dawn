@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0711f21b_6eaaf796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T11:34:58Z",
+      "side": 1,
+      "message": "LGTM, thanks!\n\nOut of curiosity, what\u0027s the larger context of these fixes? If you have a project using Dawn, if you have a project using Dawn / Tint / ANGLE as a dependency, it shouldn\u0027t need to build tests.",
+      "revId": "2453f83503872445c6b708b41d8c166a03a8bddf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
