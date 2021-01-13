@@ -67,7 +67,7 @@ namespace dawn_native {
         return adapterProperties;
     }
 
-    DeviceBase* AdapterBase::CreateDevice(const DeviceDescriptor* descriptor) {
+    DeviceBase* AdapterBase::CreateDevice(const DeprecatedDeviceDescriptor* descriptor) {
         DeviceBase* result = nullptr;
 
         if (mInstance->ConsumedError(CreateDeviceInternal(&result, descriptor))) {
@@ -78,7 +78,7 @@ namespace dawn_native {
     }
 
     MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result,
-                                                 const DeviceDescriptor* descriptor) {
+                                                 const DeprecatedDeviceDescriptor* descriptor) {
         if (descriptor != nullptr) {
             if (!SupportsAllRequestedExtensions(descriptor->requiredExtensions)) {
                 return DAWN_VALIDATION_ERROR("One or more requested extensions are not supported");

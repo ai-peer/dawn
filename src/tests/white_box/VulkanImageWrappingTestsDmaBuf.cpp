@@ -295,11 +295,19 @@ namespace dawn_native { namespace vulkan {
                 return;
             }
 
+            deviceDescriptor.nextInChain = &deviceDescriptorDawnNative;
+
             // Create another device based on the original
             backendAdapter =
                 reinterpret_cast<dawn_native::vulkan::Adapter*>(deviceVk->GetAdapter());
-            deviceDescriptor.forceEnabledToggles = GetParam().forceEnabledWorkarounds;
-            deviceDescriptor.forceDisabledToggles = GetParam().forceDisabledWorkarounds;
+            deviceDescriptorDawnNative.forceEnabledToggles =
+                GetParam().forceEnabledWorkarounds.data();
+            deviceDescriptorDawnNative.forceEnabledTogglesCount =
+                GetParam().forceEnabledWorkarounds.size();
+            deviceDescriptorDawnNative.forceDisabledToggles =
+                GetParam().forceDisabledWorkarounds.data();
+            deviceDescriptorDawnNative.forceDisabledTogglesCount =
+                GetParam().forceDisabledWorkarounds.size();
 
             secondDeviceVk = reinterpret_cast<dawn_native::vulkan::Device*>(
                 backendAdapter->CreateDevice(&deviceDescriptor));
@@ -308,7 +316,8 @@ namespace dawn_native { namespace vulkan {
 
       protected:
         dawn_native::vulkan::Adapter* backendAdapter;
-        dawn_native::DeviceDescriptor deviceDescriptor;
+        wgpu::DeviceDescriptorDawnNative deviceDescriptorDawnNative;
+        wgpu::DeviceDescriptor deviceDescriptor;
 
         wgpu::Device secondDevice;
         dawn_native::vulkan::Device* secondDeviceVk;

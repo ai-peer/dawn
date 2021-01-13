@@ -37,7 +37,8 @@ namespace dawn_native { namespace d3d12 {
         MaybeError Initialize();
 
       private:
-        ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
+        ResultOrError<DeviceBase*> CreateDeviceImpl(
+            const DeprecatedDeviceDescriptor* descriptor) override;
         void InitializeSupportedExtensions();
         MaybeError InitializeDebugLayerFilters();
         void CleanUpDebugLayerFilters();

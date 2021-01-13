@@ -45,7 +45,7 @@ namespace dawn_native { namespace metal {
     // static
     ResultOrError<Device*> Device::Create(AdapterBase* adapter,
                                           NSPRef<id<MTLDevice>> mtlDevice,
-                                          const DeviceDescriptor* descriptor) {
+                                          const DeprecatedDeviceDescriptor* descriptor) {
         Ref<Device> device = AcquireRef(new Device(adapter, std::move(mtlDevice), descriptor));
         DAWN_TRY(device->Initialize());
         return device.Detach();
@@ -53,7 +53,7 @@ namespace dawn_native { namespace metal {
 
     Device::Device(AdapterBase* adapter,
                    NSPRef<id<MTLDevice>> mtlDevice,
-                   const DeviceDescriptor* descriptor)
+                   const DeprecatedDeviceDescriptor* descriptor)
         : DeviceBase(adapter, descriptor), mMtlDevice(std::move(mtlDevice)), mCompletedSerial(0) {
     }
 

@@ -69,7 +69,7 @@ namespace dawn_native {
         std::vector<const char*> forceDisabledToggles;
     };
 
-    using DeviceDescriptor = DeprecatedDeviceDescriptor;
+    struct DeviceDescriptor;
 
     // A struct to record the information of a toggle. A toggle is a code path in Dawn device that
     // can be manually configured to run or not outside Dawn, including workarounds, special
@@ -117,6 +117,8 @@ namespace dawn_native {
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
         // On an error, nullptr is returned.
+        WGPUDevice CreateDevice(const DeprecatedDeviceDescriptor* deviceDescriptor);
+        WGPUDevice CreateDevice(const wgpu::DeviceDescriptor* deviceDescriptor);
         WGPUDevice CreateDevice(const DeviceDescriptor* deviceDescriptor = nullptr);
 
       private:

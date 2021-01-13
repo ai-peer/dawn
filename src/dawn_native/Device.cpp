@@ -83,7 +83,7 @@ namespace dawn_native {
 
     // DeviceBase
 
-    DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
+    DeviceBase::DeviceBase(AdapterBase* adapter, const DeprecatedDeviceDescriptor* descriptor)
         : mAdapter(adapter) {
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
@@ -889,12 +889,13 @@ namespace dawn_native {
         return mDefaultQueue.Get();
     }
 
-    void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {
-        ASSERT(deviceDescriptor);
-        ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->requiredExtensions));
+    void DeviceBase::ApplyExtensions(const DeprecatedDeviceDescriptor* DeprecatedDeviceDescriptor) {
+        ASSERT(DeprecatedDeviceDescriptor);
+        ASSERT(GetAdapter()->SupportsAllRequestedExtensions(
+            DeprecatedDeviceDescriptor->requiredExtensions));
 
         mEnabledExtensions = GetAdapter()->GetInstance()->ExtensionNamesToExtensionsSet(
-            deviceDescriptor->requiredExtensions);
+            DeprecatedDeviceDescriptor->requiredExtensions);
     }
 
     std::vector<const char*> DeviceBase::GetEnabledExtensions() const {
@@ -1174,7 +1175,7 @@ namespace dawn_native {
         SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
     }
 
-    void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
+    void DeviceBase::ApplyToggleOverrides(const DeprecatedDeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
 
         for (const char* toggleName : deviceDescriptor->forceEnabledToggles) {
