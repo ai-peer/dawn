@@ -25,6 +25,7 @@
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
+#include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
 #include <memory>
@@ -49,6 +50,7 @@ namespace dawn_native { namespace d3d12 {
     // Definition of backend types
     class Device : public DeviceBase {
       public:
+        std::unique_ptr<PlatformFunctions> mFunctions;
         static ResultOrError<Device*> Create(Adapter* adapter, const DeviceDescriptor* descriptor);
         ~Device() override;
 
