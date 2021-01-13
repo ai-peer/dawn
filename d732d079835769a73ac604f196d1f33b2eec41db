@@ -16,6 +16,23 @@
       "message": "PTAL! Should be the last Dawn-side change prior to removing the deprecated path.",
       "revId": "d732d079835769a73ac604f196d1f33b2eec41db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa13c2e_2bef1131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T08:40:51Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "d732d079835769a73ac604f196d1f33b2eec41db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
