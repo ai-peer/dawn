@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe1d7a8_ea7d4baa",
+        "filename": "src/tests/end2end/DeviceInitializationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T09:19:02Z",
+      "side": 1,
+      "message": "Whoops I forgot to delete this comment, sorry.",
+      "parentUuid": "cda6f6d1_e69ecd01",
+      "revId": "b0413c78e4bad3fe819f4aa1d673cbb457bf7240",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bc79976_0f4feceb",
