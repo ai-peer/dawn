@@ -96,26 +96,26 @@ namespace dawn_native { namespace d3d12 {
                                 const SubresourceRange& range,
                                 TextureBase::ClearValue clearValue);
 
+        struct StateAndDecay {
+            D3D12_RESOURCE_STATES lastState;
+            ExecutionSerial lastDecaySerial;
+            bool isValidToDecay;
+
+            bool operator==(const StateAndDecay& other) const;
+        };
         void TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                                   std::vector<D3D12_RESOURCE_BARRIER>* barrier,
                                                   D3D12_RESOURCE_STATES newState,
                                                   const SubresourceRange& range);
 
         void TransitionSingleOrAllSubresources(std::vector<D3D12_RESOURCE_BARRIER>* barriers,
-                                               uint32_t index,
+                                               const SubresourceRange& range,
+                                               StateAndDecay* state,
                                                D3D12_RESOURCE_STATES subresourceNewState,
-                                               ExecutionSerial pendingCommandSerial,
-                                               bool allSubresources);
+                                               ExecutionSerial pendingCommandSerial);
         void HandleTransitionSpecialCases(CommandRecordingContext* commandContext);
 
-        bool mSameLastUsagesAcrossSubresources = true;
-
-        struct StateAndDecay {
-            D3D12_RESOURCE_STATES lastState;
-            ExecutionSerial lastDecaySerial;
-            bool isValidToDecay;
-        };
-        std::vector<StateAndDecay> mSubresourceStateAndDecay;
+        SubresourceStorage<StateAndDecay> mSubresourceStateAndDecay;
 
         ResourceHeapAllocation mResourceAllocation;
         bool mSwapChainTexture = false;
