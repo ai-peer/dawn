@@ -52,6 +52,24 @@
       "parentUuid": "7df56fbf_890d87dc",
       "revId": "2453f83503872445c6b708b41d8c166a03a8bddf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a1cb836_44d1106d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002006
+      },
+      "writtenOn": "2021-01-13T13:56:49Z",
+      "side": 1,
+      "message": "It\u0027d be great having it running again, thanks! I\u0027m going to look at the linker flags next (probably tomorrow) otherwise only the debug builds will work.\n\nAs for clang-cl, we had issues switching (quite a few years ago) plus some tool integrations tie us to certain VS/lib versions.",
+      "parentUuid": "ccdb4d05_8218d7c9",
+      "revId": "2453f83503872445c6b708b41d8c166a03a8bddf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
