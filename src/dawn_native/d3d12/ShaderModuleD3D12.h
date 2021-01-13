@@ -33,6 +33,13 @@ namespace dawn_native { namespace d3d12 {
         D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
     };
 
+    struct FirstOffsetInfo {
+        bool usesVertexIndex;
+        uint32_t vertexIndexOffset;
+        bool usesInstanceIndex;
+        uint32_t instanceIndexOffset;
+    };
+
     class ShaderModule final : public ShaderModuleBase {
       public:
         static ResultOrError<ShaderModule*> Create(Device* device,
@@ -44,16 +51,18 @@ namespace dawn_native { namespace d3d12 {
                                               PipelineLayout* layout,
                                               uint32_t compileFlags);
 
+        const FirstOffsetInfo& GetFirstOffsetInfo();
+
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
         MaybeError Initialize(ShaderModuleParseResult* parseResult);
 
-        ResultOrError<std::string> TranslateToHLSLWithTint(
-            const char* entryPointName,
-            SingleShaderStage stage,
-            PipelineLayout* layout,
-            std::string* remappedEntryPointName) const;
+        ResultOrError<std::string> TranslateToHLSLWithTint(const char* entryPointName,
+                                                           SingleShaderStage stage,
+                                                           PipelineLayout* layout,
+                                                           std::string* remappedEntryPointName,
+                                                           FirstOffsetInfo& firstOffsetInfo) const;
 
         ResultOrError<std::string> TranslateToHLSLWithSPIRVCross(const char* entryPointName,
                                                                  SingleShaderStage stage,
@@ -70,6 +79,7 @@ namespace dawn_native { namespace d3d12 {
 #ifdef DAWN_ENABLE_WGSL
         std::unique_ptr<tint::ast::Module> mTintModule;
 #endif
+        FirstOffsetInfo mFirstOffsetInfo;
     };
 
 }}  // namespace dawn_native::d3d12

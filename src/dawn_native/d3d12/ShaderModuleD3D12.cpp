@@ -181,8 +181,12 @@ namespace dawn_native { namespace d3d12 {
         return module.Detach();
     }
 
+    const FirstOffsetInfo& ShaderModule::GetFirstOffsetInfo() {
+        return mFirstOffsetInfo;
+    }
+
     ShaderModule::ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor)
-        : ShaderModuleBase(device, descriptor) {
+        : ShaderModuleBase(device, descriptor), mFirstOffsetInfo{} {
     }
 
     MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult) {
@@ -197,7 +201,8 @@ namespace dawn_native { namespace d3d12 {
         const char* entryPointName,
         SingleShaderStage stage,
         PipelineLayout* layout,
-        std::string* remappedEntryPointName) const {
+        std::string* remappedEntryPointName,
+        FirstOffsetInfo& firstOffsetInfo) const {
         ASSERT(!IsError());
 
 #ifdef DAWN_ENABLE_WGSL
@@ -207,8 +212,30 @@ namespace dawn_native { namespace d3d12 {
         tint::transform::Manager transformManager;
         transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
 
+        tint::transform::FirstIndexOffset* firstOffsetTransform = nullptr;
+        if (stage == SingleShaderStage::Vertex) {
+            auto transformer = std::make_unique<tint::transform::FirstIndexOffset>(
+                layout->GetFirstIndexOffsetShaderRegister(),
+                layout->GetFirstIndexOffsetRegisterSpace());
+            firstOffsetTransform = transformer.get();
+            transformManager.append(std::move(transformer));
+        }
+
         tint::ast::Module module;
         DAWN_TRY_ASSIGN(module, RunTransforms(&transformManager, mTintModule.get()));
+
+        if (firstOffsetTransform != nullptr) {
+            firstOffsetInfo.usesVertexIndex = firstOffsetTransform->HasVertexIndex();
+            if (firstOffsetInfo.usesVertexIndex) {
+                firstOffsetInfo.vertexIndexOffset = firstOffsetTransform->GetFirstVertexOffset();
+            }
+
+            firstOffsetInfo.usesInstanceIndex = firstOffsetTransform->HasInstanceIndex();
+            if (firstOffsetInfo.usesInstanceIndex) {
+                firstOffsetInfo.instanceIndexOffset =
+                    firstOffsetTransform->GetFirstInstanceOffset();
+            }
+        }
 
         ASSERT(remappedEntryPointName != nullptr);
         tint::inspector::Inspector inspector(module);
@@ -303,8 +330,9 @@ namespace dawn_native { namespace d3d12 {
         std::string hlslSource;
         std::string remappedEntryPoint;
         if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
-            DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSLWithTint(entryPointName, stage, layout,
-                                                                &remappedEntryPoint));
+            DAWN_TRY_ASSIGN(hlslSource,
+                            TranslateToHLSLWithTint(entryPointName, stage, layout,
+                                                    &remappedEntryPoint, mFirstOffsetInfo));
             entryPointName = remappedEntryPoint.c_str();
         } else {
             DAWN_TRY_ASSIGN(hlslSource,
