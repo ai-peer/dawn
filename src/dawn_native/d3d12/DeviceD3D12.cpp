@@ -65,6 +65,11 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Device::Initialize() {
         InitTogglesFromDriver();
 
+        mFunctions = std::make_unique<PlatformFunctions>();
+        DAWN_TRY(mFunctions->LoadFunctions());
+        ComPtr<IDXGIDebug> debug;
+        mFunctions->dxgiGetDebugInterface1(0, IID_PPV_ARGS(&debug));
+        // debug->ReportLiveObjects(DXGI_DEBUG_ALL, DXGI_DEBUG_RLO_SUMMARY);
         mD3d12Device = ToBackend(GetAdapter())->GetDevice();
 
         ASSERT(mD3d12Device != nullptr);
@@ -260,7 +265,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(NextSerial());
         }
 
-        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
+        // DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
         return {};
     }

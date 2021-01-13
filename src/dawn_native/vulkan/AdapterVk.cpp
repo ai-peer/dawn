@@ -104,4 +104,8 @@ namespace dawn_native { namespace vulkan {
         return Device::Create(this, descriptor);
     }
 
+    MaybeError Adapter::ResetDeviceImpl() {
+        return {};
+    }
+
 }}  // namespace dawn_native::vulkan
