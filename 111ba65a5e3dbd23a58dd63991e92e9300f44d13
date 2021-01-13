@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b16ac977_a16133c2",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-13T14:04:23Z",
+      "side": 0,
+      "message": "This seemed to have confused the hell out of clang-format. Can you remove the outer-most braces in all of these blocks (so instead of \u003ccomment\u003e {{}{}} it is \u003ccomment\u003e{}{})?",
+      "revId": "111ba65a5e3dbd23a58dd63991e92e9300f44d13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
