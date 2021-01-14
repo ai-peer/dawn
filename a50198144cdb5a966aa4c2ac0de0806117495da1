@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5dae246_3ef51f7a",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-14T04:02:10Z",
+      "side": 1,
+      "message": "In the latest patch set I make PostWorkerTask() return a WaitableEvent so that we don\u0027t need Platform::CreateWorkerTaskPool(). PTAL, thanks!",
+      "parentUuid": "aa73889e_3d1d8507",
+      "range": {
+        "startLine": 72,
+        "startChar": 31,
+        "endLine": 72,
+        "endChar": 45
+      },
+      "revId": "a50198144cdb5a966aa4c2ac0de0806117495da1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d032cb98_95d02dc6",
         "filename": "src/include/dawn_platform/DawnPlatform.h",
         "patchSetId": 12
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-12T23:06:48Z",
       "side": 1,
       "message": "This can take a raw function pointer instead of std::function since there\u0027s a userdata arg.\n\nThe implementation of it can wrap that into an std::function if it likes.",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 89
+      },
+      "revId": "a50198144cdb5a966aa4c2ac0de0806117495da1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbc16f19_aba89ea7",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-14T04:02:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d032cb98_95d02dc6",
       "range": {
         "startLine": 76,
         "startChar": 0,
@@ -60,6 +108,30 @@
       "writtenOn": "2021-01-12T23:06:48Z",
       "side": 1,
       "message": "What is this meant to do? If it signals that a task has finished, I don\u0027t think we should assume that they will finish in the order the tasks were posted?\n\nIf it\u0027s associated with a particular task, shouldn\u0027t it be on WaitableEvent?",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 36
+      },
+      "revId": "a50198144cdb5a966aa4c2ac0de0806117495da1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca82b824_bd0f2a23",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-14T04:02:10Z",
+      "side": 1,
+      "message": "Done\n\nIt\u0027s not very useful now so I removed it. Note that in ANGLE it is useful because the pool in ANGLE needs to track the total number of running threads as there is a restriction on it.",
+      "parentUuid": "e4cc5a97_9888109b",
       "range": {
         "startLine": 77,
         "startChar": 0,
