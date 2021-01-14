@@ -45,15 +45,6 @@ namespace dawn_wire { namespace client {
             }
         };
 #endif  // DAWN_ENABLE_ASSERTS
-        // Get the default queue for this device.
-        auto* allocation = client->QueueAllocator().New(client);
-        mDefaultQueue = allocation->object.get();
-
-        DeviceGetDefaultQueueCmd cmd;
-        cmd.self = ToAPI(this);
-        cmd.result = ObjectHandle{allocation->object->id, allocation->generation};
-
-        client->SerializeCommand(cmd);
     }
 
     Device::~Device() {
@@ -206,6 +197,18 @@ namespace dawn_wire { namespace client {
     }
 
     WGPUQueue Device::GetDefaultQueue() {
+        if (mDefaultQueue == nullptr) {
+            // Get the default queue for this device.
+            auto* allocation = client->QueueAllocator().New(client);
+            mDefaultQueue = allocation->object.get();
+
+            DeviceGetDefaultQueueCmd cmd;
+            cmd.self = ToAPI(this);
+            cmd.result = ObjectHandle{allocation->object->id, allocation->generation};
+
+            client->SerializeCommand(cmd);
+        }
+
         mDefaultQueue->refcount++;
         return ToAPI(mDefaultQueue);
     }
