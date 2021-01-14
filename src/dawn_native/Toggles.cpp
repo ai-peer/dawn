@@ -152,6 +152,10 @@ namespace dawn_native {
             {Toggle::UseTintInspector,
              {"use_tint_inspector", "Use Tint instead of SPRIV-cross for shader reflection.",
               "https://crbug.com/dawn/578"}},
+            {Toggle::ANGLEUseFlushWorkaround,
+             {"angle_use_flush_workaround",
+              "Work around a bug in ANGLE which causes a hang in Dawn",
+              "https://crbug.com/dawn/633"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 
