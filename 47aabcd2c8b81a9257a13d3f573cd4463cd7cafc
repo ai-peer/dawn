@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfbc046a_03aec1de",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T18:12:50Z",
+      "side": 1,
+      "message": "Uh? Why can\u0027t we DrawIndexed with pointlist?",
+      "parentUuid": "cd706be9_82ec08cc",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd55d9b9_dadead90",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
