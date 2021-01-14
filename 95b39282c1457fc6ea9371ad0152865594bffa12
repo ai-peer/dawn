@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5fb8bd8_76637f46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T18:11:08Z",
+      "side": 1,
+      "message": "The actual implementation of textureNumLayers() is bubbling through the pipeline, and so CQ will not (yet) pass. Still good for review.",
+      "revId": "95b39282c1457fc6ea9371ad0152865594bffa12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
