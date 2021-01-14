@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2bb50c2_d0eeaa2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-14T18:16:31Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nNote that this workaround is currently enabled for all OpenGL ES implementations. It\nshould probably be ANGLE-only, probably by checking the renderer string.",
+      "revId": "4edcd5967dbb2f37f6bef3aa8d4e35d003365e6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
