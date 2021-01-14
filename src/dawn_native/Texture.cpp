@@ -27,7 +27,7 @@
 namespace dawn_native {
     namespace {
         // TODO(jiawei.shao@intel.com): implement texture view format compatibility rule
-        MaybeError ValidateTextureViewFormatCompatibility(const TextureBase* texture,
+        /*MaybeError ValidateTextureViewFormatCompatibility(const TextureBase* texture,
                                                           const TextureViewDescriptor* descriptor) {
             if (texture->GetFormat().format != descriptor->format) {
                 return DAWN_VALIDATION_ERROR(
@@ -35,7 +35,7 @@ namespace dawn_native {
             }
 
             return {};
-        }
+        }*/
 
         // TODO(jiawei.shao@intel.com): support validation on all texture view dimensions
         bool IsTextureViewDimensionCompatibleWithTextureDimension(
@@ -285,7 +285,7 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Texture view mip-level out of range");
         }
 
-        DAWN_TRY(ValidateTextureViewFormatCompatibility(texture, descriptor));
+        //DAWN_TRY(ValidateTextureViewFormatCompatibility(texture, descriptor));
         DAWN_TRY(ValidateTextureViewDimensionCompatibility(texture, descriptor));
 
         return {};
@@ -345,7 +345,6 @@ namespace dawn_native {
                 return false;
         }
     }
-
     // TextureBase
 
     TextureBase::TextureBase(DeviceBase* device,

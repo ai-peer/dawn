@@ -668,6 +668,9 @@ namespace dawn_native {
             case wgpu::TextureAspect::StencilOnly:
                 ASSERT(format.aspects & Aspect::Stencil);
                 return Aspect::Stencil;
+            case wgpu::TextureAspect::Plane0:
+            case wgpu::TextureAspect::Plane1:
+                return DAWN_VALIDATION_ERROR("Multi-planar textures do not support copying.");
         }
     }
 

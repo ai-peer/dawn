@@ -80,6 +80,55 @@ namespace dawn_native {
             DAWN_TRY_ASSIGN(aspectUsed, SingleAspectUsedByTextureCopyView(src));
             if (aspectUsed == Aspect::Depth) {
                 switch (src.texture->GetFormat().format) {
+                                        case wgpu::TextureFormat::Depth24Plus:
+                    case wgpu::TextureFormat::Depth24PlusStencil8:
+                        return DAWN_VALIDATION_ERROR(
+                            "The depth aspect of depth24plus texture cannot be selected in a "
+                            "texture to buffer copy");
+                        break;
+                    case wgpu::TextureFormat::Depth32Float:
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+            }
+
+            return {};
+        }
+
+        /*MaybeError ValidateTextureToBufferCopyRestrictions(const TextureCopyView& src) {
+            const Format& format = src.texture->GetFormat();
+
+            bool depthSelected = false;
+            switch (src.aspect) {
+                case wgpu::TextureAspect::All:
+                    switch (format.aspects) {
+                        case Aspect::Color:
+                        case Aspect::Stencil:
+                            break;
+                        case Aspect::Depth:
+                            depthSelected = true;
+                            break;
+                        default:
+                            return DAWN_VALIDATION_ERROR(
+                                "A single aspect must be selected for multi planar formats in "
+                                "texture to buffer copies");
+                    }
+                    break;
+                case wgpu::TextureAspect::DepthOnly:
+                    ASSERT(format.aspects & Aspect::Depth);
+                    depthSelected = true;
+                    break;
+                case wgpu::TextureAspect::StencilOnly:
+                    ASSERT(format.aspects & Aspect::Stencil);
+                    break;
+                case wgpu::TextureAspect::Plane0:
+                case wgpu::TextureAspect::Plane1:
+                    return DAWN_VALIDATION_ERROR("Multi-planar textures do not support copying.");
+            }
+
+            if (depthSelected) {
+                switch (format.format) {
                     case wgpu::TextureFormat::Depth24Plus:
                     case wgpu::TextureFormat::Depth24PlusStencil8:
                         return DAWN_VALIDATION_ERROR(
@@ -88,14 +137,13 @@ namespace dawn_native {
                         break;
                     case wgpu::TextureFormat::Depth32Float:
                         break;
-
                     default:
                         UNREACHABLE();
                 }
             }
 
             return {};
-        }
+        }*/
 
         MaybeError ValidateAttachmentArrayLayersAndLevelCount(const TextureViewBase* attachment) {
             // Currently we do not support layered rendering.

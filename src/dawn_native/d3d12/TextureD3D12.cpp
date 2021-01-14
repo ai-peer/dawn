@@ -201,8 +201,34 @@ namespace dawn_native { namespace d3d12 {
                 case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                     return DXGI_FORMAT_BC7_TYPELESS;
 
+                case wgpu::TextureFormat::NV12:
+                    return DXGI_FORMAT_NV12;
+
                 case wgpu::TextureFormat::Undefined:
                     UNREACHABLE();
+            }
+        }
+
+        uint32_t D3D12TexturePlaneSlice(wgpu::TextureFormat viewFormat,
+                                        wgpu::TextureFormat textureFormat,
+                                        wgpu::TextureAspect aspect) {
+            switch (textureFormat) {
+                case wgpu::TextureFormat::NV12:
+                    switch (aspect) {
+                        case wgpu::TextureAspect::Plane0:
+                            ASSERT(viewFormat == wgpu::TextureFormat::R8Unorm);  // Y
+                            return 0;
+                        case wgpu::TextureAspect::Plane1:
+                            ASSERT(viewFormat == wgpu::TextureFormat::RG8Unorm);  // UV
+                            return 1;
+                        default:
+                            UNREACHABLE();
+                    }
+                    break;
+                case wgpu::TextureFormat::Undefined:
+                    UNREACHABLE();
+                default:
+                    return 0;
             }
         }
 
@@ -322,7 +348,8 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_BC7_UNORM;
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                 return DXGI_FORMAT_BC7_UNORM_SRGB;
-
+            case wgpu::TextureFormat::NV12:
+                return DXGI_FORMAT_NV12;
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }
@@ -378,6 +405,21 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_shared_resource_compatibility_tier
+    MaybeError ValidateD3D12SharedVideoTexture(bool supportsSharedResourceCapabilityTier2,
+                                               const TextureDescriptor* dawnDescriptor) {
+        switch (D3D12TextureFormat(dawnDescriptor->format)) {
+            case DXGI_FORMAT_NV12:
+                if (!supportsSharedResourceCapabilityTier2) {
+                    return DAWN_VALIDATION_ERROR(
+                        "D3D12 NV texture does not support cross-API sharing.");
+                }
+                return {};
+            default:
+                return {};
+        }
+    }
+
     ResultOrError<Ref<TextureBase>> Texture::Create(Device* device,
                                                     const TextureDescriptor* descriptor) {
         Ref<Texture> dawnTexture =
@@ -415,8 +457,13 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(CheckHRESULT(dawnDevice->GetD3D12Device()->OpenSharedHandle(
                                   sharedHandle, IID_PPV_ARGS(&d3d12Resource)),
                               "D3D12 opening shared handle"));
-
         DAWN_TRY(ValidateD3D12TextureCanBeWrapped(d3d12Resource.Get(), descriptor));
+
+        // TODO: Check all tiers?
+        const bool supportsSharedResourceCapabilityTier2 =
+            ToBackend(GetDevice())->GetDeviceInfo().supportsSharedResourceCapabilityTier2;
+        DAWN_TRY(
+            ValidateD3D12SharedVideoTexture(supportsSharedResourceCapabilityTier2, descriptor));
 
         ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
         DAWN_TRY_ASSIGN(dxgiKeyedMutex,
@@ -1049,6 +1096,8 @@ namespace dawn_native { namespace d3d12 {
                                     D3D12_SHADER_COMPONENT_MAPPING_FORCE_VALUE_1);
                             break;
                         case wgpu::TextureAspect::All:
+                        case wgpu::TextureAspect::Plane0:
+                        case wgpu::TextureAspect::Plane1:
                             // A single aspect is not selected. The texture view must not be
                             // sampled.
                             mSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
@@ -1092,7 +1141,8 @@ namespace dawn_native { namespace d3d12 {
                     mSrvDesc.Texture2DArray.FirstArraySlice = descriptor->baseArrayLayer;
                     mSrvDesc.Texture2DArray.MipLevels = descriptor->mipLevelCount;
                     mSrvDesc.Texture2DArray.MostDetailedMip = descriptor->baseMipLevel;
-                    mSrvDesc.Texture2DArray.PlaneSlice = planeSlice;
+                    mSrvDesc.Texture2DArray.PlaneSlice = D3D12TexturePlaneSlice(
+                        descriptor->format, GetTexture()->GetFormat().format, descriptor->aspect);
                     mSrvDesc.Texture2DArray.ResourceMinLODClamp = 0;
                     break;
                 case wgpu::TextureViewDimension::Cube:

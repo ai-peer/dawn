@@ -39,6 +39,10 @@ namespace dawn_native {
                 return format.aspects & Aspect::Depth;
             case wgpu::TextureAspect::StencilOnly:
                 return format.aspects & Aspect::Stencil;
+            case wgpu::TextureAspect::Plane0:
+                return Aspect::Plane0;
+            case wgpu::TextureAspect::Plane1:
+                return Aspect::Plane1;
         }
     }
 

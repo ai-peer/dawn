@@ -28,6 +28,8 @@ namespace dawn_native {
         Color = 0x1,
         Depth = 0x2,
         Stencil = 0x4,
+        Plane0 = 0x5,
+        Plane1 = 0x6,
     };
 
     template <>

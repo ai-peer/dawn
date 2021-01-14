@@ -105,9 +105,9 @@ namespace dawn_native {
             TextureViewBase* view = entry.textureView;
 
             Aspect aspect = view->GetAspects();
-            if (!HasOneBit(aspect)) {
+            /*if (!HasOneBit(aspect)) {
                 return DAWN_VALIDATION_ERROR("Texture view must select a single aspect");
-            }
+            }*/
 
             TextureBase* texture = view->GetTexture();
             if (!(texture->GetUsage() & requiredUsage)) {

@@ -144,6 +144,7 @@ namespace utils {
             case wgpu::TextureFormat::R8Snorm:
             case wgpu::TextureFormat::R8Uint:
             case wgpu::TextureFormat::R8Sint:
+            case wgpu::TextureFormat::NV12:
                 return 1u;
 
             case wgpu::TextureFormat::R16Uint:
@@ -253,6 +254,7 @@ namespace utils {
             case wgpu::TextureFormat::Depth32Float:
             case wgpu::TextureFormat::Depth24Plus:
             case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::NV12:
                 return 1u;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -317,6 +319,7 @@ namespace utils {
             case wgpu::TextureFormat::Depth32Float:
             case wgpu::TextureFormat::Depth24Plus:
             case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::NV12:
                 return 1u;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -428,6 +431,7 @@ namespace utils {
             case wgpu::TextureFormat::Depth32Float:
             case wgpu::TextureFormat::Depth24Plus:
             case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::NV12:
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }

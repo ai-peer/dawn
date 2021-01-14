@@ -372,7 +372,7 @@ namespace dawn_native { namespace vulkan {
                 return VK_FORMAT_BC7_UNORM_BLOCK;
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                 return VK_FORMAT_BC7_SRGB_BLOCK;
-
+            case wgpu::TextureFormat::NV12:  // TODO: VK multi-planar format support
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }
@@ -719,6 +719,9 @@ namespace dawn_native { namespace vulkan {
             case wgpu::TextureAspect::StencilOnly:
                 ASSERT(GetFormat().aspects & Aspect::Stencil);
                 return VulkanAspectMask(Aspect::Stencil);
+            case wgpu::TextureAspect::Plane0:
+            case wgpu::TextureAspect::Plane1:
+                UNREACHABLE();  // TODO: VK multi-planar format support
         }
     }
 
