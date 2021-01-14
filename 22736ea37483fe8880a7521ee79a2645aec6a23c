@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10e9e01d_f4a541b8",
+        "filename": "src/tests/unittests/wire/WireDestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T18:10:05Z",
+      "side": 1,
+      "message": "nevermind it wasn\u0027t worth the effort I just enforced the order.",
+      "parentUuid": "6dd3f4ba_f829848d",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "587adae2_c8e096c8",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-01-14T13:20:34Z",
       "side": 1,
       "message": "ditto",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78306cf7_3e03d123",
+        "filename": "src/tests/unittests/wire/WireDestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T18:10:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "587adae2_c8e096c8",
       "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c92bf56a_2f0929df",
+        "filename": "src/tests/unittests/wire/WireDisconnectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T18:10:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d980333_fbc41fde",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6c264a4_e11b29d0",
@@ -117,6 +171,30 @@
       "writtenOn": "2021-01-14T13:20:34Z",
       "side": 1,
       "message": "nit: were cleared no? Maybe this comment shouldn\u0027t mention the callbacks, it\u0027s a bit confusing given they aren\u0027t reference in the function.",
+      "range": {
+        "startLine": 103,
+        "startChar": 48,
+        "endLine": 103,
+        "endChar": 51
+      },
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88b0657f_3006e10a",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T18:10:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6c264a4_e11b29d0",
       "range": {
         "startLine": 103,
         "startChar": 48,
