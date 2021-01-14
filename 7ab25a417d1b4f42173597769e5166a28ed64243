@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503d429d_748c8bee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T20:39:55Z",
+      "side": 1,
+      "message": "Interesting - the CQ bots are clearly not happy with this. Investigating.",
+      "revId": "7ab25a417d1b4f42173597769e5166a28ed64243",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
