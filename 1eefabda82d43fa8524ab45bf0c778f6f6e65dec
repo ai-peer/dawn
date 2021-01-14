@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf80fef_3e6909c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T00:35:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1eefabda82d43fa8524ab45bf0c778f6f6e65dec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b10b864d_c7ca7fdc",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T00:35:35Z",
+      "side": 1,
+      "message": "nit: we shouldn\u0027t need the return statement anymore",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 12
+      },
+      "revId": "1eefabda82d43fa8524ab45bf0c778f6f6e65dec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d3e4f4_57ccb12e",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T00:35:35Z",
+      "side": 1,
+      "message": "sorry, should have mentioned this in the first review.\n\nyou can DAWN_SKIP_TEST inside your test\u0027s SetUp() like so:\n\nclass FirstIndexOffsetTests : public DawnTest {\n\nvoid SetUp() override {\n  DAWN_SKIP_TEST_IF(...);\n  DawnTest::SetUp();\n};\n\n}",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 64
+      },
+      "revId": "1eefabda82d43fa8524ab45bf0c778f6f6e65dec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
