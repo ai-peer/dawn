@@ -16,6 +16,97 @@
       "message": "PTAL! I\u0027ve decided to go this route because it\u0027s a simpler way to get the validation we need (see linked bug for context)",
       "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ec51bf_6162d98b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T13:20:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322e11a0_7747584f",
+        "filename": "src/tests/unittests/wire/WireDestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T13:20:34Z",
+      "side": 1,
+      "message": "nit: this should be in sequence S1 and S2, same for the device lost callback.",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "587adae2_c8e096c8",
+        "filename": "src/tests/unittests/wire/WireDestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T13:20:34Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d980333_fbc41fde",
+        "filename": "src/tests/unittests/wire/WireDisconnectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T13:20:34Z",
+      "side": 1,
+      "message": "ditto (and S3)",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c264a4_e11b29d0",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T13:20:34Z",
+      "side": 1,
+      "message": "nit: were cleared no? Maybe this comment shouldn\u0027t mention the callbacks, it\u0027s a bit confusing given they aren\u0027t reference in the function.",
+      "range": {
+        "startLine": 103,
+        "startChar": 48,
+        "endLine": 103,
+        "endChar": 51
+      },
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
