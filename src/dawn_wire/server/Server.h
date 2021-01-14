@@ -167,6 +167,8 @@ namespace dawn_wire { namespace server {
                            uint32_t deviceId,
                            uint32_t deviceGeneration);
 
+        bool InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation);
+
         template <typename T,
                   typename Enable = std::enable_if<std::is_base_of<CallbackUserdata, T>::value>>
         std::unique_ptr<T> MakeUserdata() {

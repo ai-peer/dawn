@@ -91,8 +91,10 @@ void WireTest::TearDown() {
     if (mWireServer) {
         // These are called on server destruction to clear the callbacks. They must not be
         // called after the server is destroyed.
-        EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(_, nullptr, nullptr)).Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(_, nullptr, nullptr)).Times(Exactly(1));
+        EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
+            .Times(Exactly(1));
+        EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
+            .Times(Exactly(1));
     }
     mWireServer = nullptr;
 }

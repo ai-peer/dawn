@@ -50,6 +50,8 @@ namespace dawn_wire {
                            uint32_t deviceId = 1,
                            uint32_t deviceGeneration = 0);
 
+        bool InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation);
+
       private:
         std::unique_ptr<server::Server> mImpl;
     };

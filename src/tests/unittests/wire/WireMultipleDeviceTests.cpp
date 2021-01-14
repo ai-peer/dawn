@@ -47,8 +47,9 @@ class WireMultipleDeviceTests : public testing::Test {
 
             // This SetCallback call cannot be ignored because it is done as soon as we start the
             // server
-            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallback(_, _, _)).Times(Exactly(1));
-            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallback(_, _, _)).Times(Exactly(1));
+            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallback(mServerDevice, _, _))
+                .Times(Exactly(1));
+            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallback(mServerDevice, _, _)).Times(Exactly(1));
 
             mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
             mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
@@ -83,9 +84,10 @@ class WireMultipleDeviceTests : public testing::Test {
 
             // These are called on server destruction to clear the callbacks. They must not be
             // called after the server is destroyed.
-            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallback(_, nullptr, nullptr))
+            EXPECT_CALL(mApi, OnDeviceSetUncapturedErrorCallback(mServerDevice, nullptr, nullptr))
                 .Times(Exactly(1));
-            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallback(_, nullptr, nullptr)).Times(Exactly(1));
+            EXPECT_CALL(mApi, OnDeviceSetDeviceLostCallback(mServerDevice, nullptr, nullptr))
+                .Times(Exactly(1));
             mWireServer = nullptr;
         }
 
@@ -95,6 +97,14 @@ class WireMultipleDeviceTests : public testing::Test {
 
         void FlushServer(bool success = true) {
             ASSERT_EQ(mS2cBuf->Flush(), success);
+        }
+
+        WireClient* GetClient() {
+            return mWireClient.get();
+        }
+
+        WireServer* GetServer() {
+            return mWireServer.get();
         }
 
         testing::StrictMock<MockProcTable>* Api() {
