@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b9f71a9_2be34675",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:36:41Z",
+      "side": 1,
+      "message": "I read the bug, but I\u0027m not quite sure - what isn\u0027t supported?",
+      "range": {
+        "startLine": 156,
+        "startChar": 24,
+        "endLine": 156,
+        "endChar": 50
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b107ef3c_cfc4fb0a",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:36:41Z",
+      "side": 1,
+      "message": "write?",
+      "range": {
+        "startLine": 159,
+        "startChar": 75,
+        "endLine": 159,
+        "endChar": 79
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21b99dca_d5d3c378",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:36:41Z",
+      "side": 1,
+      "message": "write ?",
+      "range": {
+        "startLine": 175,
+        "startChar": 75,
+        "endLine": 175,
+        "endChar": 79
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc9b93cc_7281eef4",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:36:41Z",
+      "side": 1,
+      "message": "write",
+      "range": {
+        "startLine": 217,
+        "startChar": 75,
+        "endLine": 217,
+        "endChar": 79
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c49ef3_0b6adaf5",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:36:41Z",
+      "side": 1,
+      "message": "nit: not SPIRV anymore",
+      "range": {
+        "startLine": 331,
+        "startChar": 38,
+        "endLine": 331,
+        "endChar": 74
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8737a65_3d720d35",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:36:41Z",
+      "side": 1,
+      "message": "nit: typename is short enough to say wgpu::TextureFormat\n\nhowever, what do you think about just having the list of strings here and calling the version that takes \"const char*\" ?\n\nThen we don\u0027t need to add the unsupported formats to the helper function.",
+      "range": {
+        "startLine": 344,
+        "startChar": 13,
+        "endLine": 344,
+        "endChar": 17
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
