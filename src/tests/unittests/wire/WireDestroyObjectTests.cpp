@@ -36,8 +36,13 @@ TEST_F(WireDestroyObjectTests, DestroyDeviceDestroysChildren) {
     EXPECT_CALL(api, CommandEncoderRelease(apiEncoder)).InSequence(s1);
     EXPECT_CALL(api, QueueRelease(apiQueue)).InSequence(s2);
     EXPECT_CALL(api, DeviceRelease(apiDevice)).InSequence(s1, s2);
+    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr)).Times(1);
+    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr)).Times(1);
 
     FlushClient();
+
+    // Signal that we already released and cleared callbacks for |apiDevice|
+    DefaultApiDeviceWasReleased();
 
     // Using the command encoder should be an error.
     wgpuCommandEncoderFinish(encoder, nullptr);
