@@ -405,6 +405,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90ba54f9_e4740325",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2021-01-14T14:30:19Z",
+      "side": 1,
+      "message": "You can\u0027t and this would be post-MVP even if requested. You can do it this way with very little extra work.",
+      "parentUuid": "197eb86f_2fc95b30",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38b50eb5_3e11c5ca",
