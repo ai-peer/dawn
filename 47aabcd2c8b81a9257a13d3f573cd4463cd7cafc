@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "501fb2c8_c27112a6",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T18:57:06Z",
+      "side": 1,
+      "message": "Got unexpected device error: indexFormat must be undefined when using non-strip primitive topologies",
+      "parentUuid": "cfbc046a_03aec1de",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd55d9b9_dadead90",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
