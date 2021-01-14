@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46d6015a_d943931e",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T22:13:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "546c8b05_5a12e568",
+      "range": {
+        "startLine": 156,
+        "startChar": 24,
+        "endLine": 156,
+        "endChar": 50
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b107ef3c_cfc4fb0a",
