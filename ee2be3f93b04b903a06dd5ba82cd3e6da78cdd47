@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7899bb0_2261c063",
+        "filename": "src/dawn_platform/DawnPlatform.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T20:02:52Z",
+      "side": 1,
+      "message": "Do we want to be returning new\u0027d raw pointers? Would std::unique_ptr\u003cdawn_platform::WorkerTaskPool\u003e work here?",
+      "range": {
+        "startLine": 60,
+        "startChar": 15,
+        "endLine": 60,
+        "endChar": 18
+      },
+      "revId": "ee2be3f93b04b903a06dd5ba82cd3e6da78cdd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fb6e8f_bcd093fe",
+        "filename": "src/dawn_platform/WorkerThread.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T20:02:52Z",
+      "side": 1,
+      "message": "Doesn\u0027t appear to be used",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 17
+      },
+      "revId": "ee2be3f93b04b903a06dd5ba82cd3e6da78cdd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
