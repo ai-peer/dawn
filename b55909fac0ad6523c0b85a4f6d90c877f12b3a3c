@@ -229,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b83b2877_7e84b56d",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T14:27:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d94bad4f_58bdbb93",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ddf278d_45609e8c",
@@ -365,6 +383,24 @@
       "side": 1,
       "message": "I don\u0027t believe you can inline the struct definition. Maybe raise a request with the WGSL github tracker?",
       "parentUuid": "90457044_fa6095da",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197eb86f_2fc95b30",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T14:27:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5c3f9a70_e981f576",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -616,6 +652,30 @@
       "side": 1,
       "message": "So I\u0027ve intentionally opted for 2-space in this file as the shaders have deep indentation and very long lines. These either force you to have ugly multi-line statements due to clang-format, or start littering the code with R() filth.\nI hope you agree that the code around https://dawn-review.googlesource.com/c/dawn/+/37080/10/src/tests/end2end/StorageTextureTests.cpp#364 is far more readable now. I consider readability more important than tab-width especially when this is all in string literals.",
       "parentUuid": "e84d6043_625a0422",
+      "range": {
+        "startLine": 1153,
+        "startChar": 0,
+        "endLine": 1155,
+        "endChar": 1
+      },
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d950b13e_11a7060d",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T14:27:04Z",
+      "side": 1,
+      "message": "Ok sounds good",
+      "parentUuid": "342feac0_a4008521",
       "range": {
         "startLine": 1153,
         "startChar": 0,
