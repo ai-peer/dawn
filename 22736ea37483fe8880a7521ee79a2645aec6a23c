@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "793f1c22_8a571d86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T01:51:18Z",
+      "side": 1,
+      "message": "PTAL! I\u0027ve decided to go this route because it\u0027s a simpler way to get the validation we need (see linked bug for context)",
+      "revId": "22736ea37483fe8880a7521ee79a2645aec6a23c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
