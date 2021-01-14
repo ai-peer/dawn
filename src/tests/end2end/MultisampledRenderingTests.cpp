@@ -570,6 +570,8 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DArrayTexture) {
 // Test using one multisampled color attachment with resolve target can render correctly
 // with a non-default sample mask.
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMask) {
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     constexpr bool kTestDepth = false;
     // The second and third samples are included,
     // only the second one is covered by the triangle.
@@ -599,6 +601,8 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMask) {
 // Test using one multisampled color attachment with resolve target can render correctly
 // with the final sample mask empty.
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) {
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     constexpr bool kTestDepth = false;
     // The third and fourth samples are included,
     // none of which is covered by the triangle.
@@ -628,6 +632,8 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithEmptyFinalSampleMask) 
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default sample
 // mask.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMask) {
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     wgpu::TextureView multisampledColorView2 =
         CreateTextureForRenderAttachment(kColorFormat, kSampleCount).CreateView();
     wgpu::Texture resolveTexture2 = CreateTextureForRenderAttachment(kColorFormat, 1);
@@ -667,6 +673,8 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithSampleMas
 
 // Test multisampled rendering with depth test works correctly with a non-default sample mask.
 TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMask) {
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     constexpr bool kTestDepth = true;
     // The second sample is included in the first render pass and it's covered by the triangle.
     constexpr uint32_t kSampleMaskGreen = kSecondSampleMaskBit;
@@ -727,6 +735,8 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMas
 // Test using one multisampled color attachment with resolve target can render correctly
 // with non-default sample mask and shader-output mask.
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOutputMask) {
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     // TODO(crbug.com/tint/372): Support sample mask builtin.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
 
@@ -773,6 +783,8 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default
 // shader-output mask.
 TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOutputMask) {
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     // TODO(crbug.com/tint/372): Support sample mask builtin.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
 
@@ -927,7 +939,7 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithAlphaToCo
 TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCoverage) {
     // This test fails because Swiftshader is off-by-one with its ((a+b)/2 + (c+d)/2)/2 fast resolve
     // algorithm.
-    DAWN_SKIP_TEST_IF(IsSwiftshader());
+    DAWN_SKIP_TEST_IF(IsSwiftshader() || IsANGLE());
 
     constexpr bool kTestDepth = true;
     constexpr uint32_t kSampleMask = 0xFFFFFFFF;
@@ -986,6 +998,9 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCo
 // Test using one multisampled color attachment with resolve target can render correctly
 // with alphaToCoverageEnabled and a sample mask.
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndSampleMask) {
+    // ANGLE does not support SampleMask.
+    DAWN_SKIP_TEST_IF(IsANGLE());
+
     // This test fails because Swiftshader is off-by-one with its ((a+b)/2 + (c+d)/2)/2 fast resolve
     // algorithm.
     DAWN_SKIP_TEST_IF(IsSwiftshader());
@@ -1033,7 +1048,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndSamp
 TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndRasterizationMask) {
     // This test fails because Swiftshader is off-by-one with its ((a+b)/2 + (c+d)/2)/2 fast resolve
     // algorithm.
-    DAWN_SKIP_TEST_IF(IsSwiftshader());
+    DAWN_SKIP_TEST_IF(IsSwiftshader() || IsANGLE());
 
     constexpr bool kTestDepth = false;
     constexpr float kMSAACoverage = 0.50f;
