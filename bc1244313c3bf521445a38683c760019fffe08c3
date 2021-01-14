@@ -132,6 +132,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da1f3e36_0052b589",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-01-14T20:43:18Z",
+      "side": 1,
+      "message": "MPO \u003d\u003e Multi-plane overlay. It\u0027s when the compositor in the driver composes your swap chain to the output instead of the desktop window manager. Having the driver constantly locking your textures can cause stutters, hence the need for triple buffering.\n\nI think it makes sense to expose the number of buffers directly instead of having an enum called \"Mailbox\". Is \"Mailbox\" a concept in Firefox?",
+      "parentUuid": "e78375c3_50a77477",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "263ed618_b63e9019",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
