@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bb642b4_9054657b",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T19:21:11Z",
+      "side": 1,
+      "message": "and... that\u0027s why we need better error messages. Sorry the optional one is on the pipeline descriptor. We can omit:\npipelineDesc.cVertexState.indexFormat \u003d wgpu::IndexFormat::Uint32;",
+      "parentUuid": "279c1fb4_4ec9bbc3",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd55d9b9_dadead90",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
