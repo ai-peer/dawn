@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e88635b3_0676fe60",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28b778b7_731f4eaf",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b64a0f62_cce6b50c",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-01-12T14:41:36Z",
       "side": 1,
       "message": "Is there a test to exercise this code path?",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a48270e_6c914839",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "Not at the moment, but in the future I plan for ManualSwapChainTest to be able to test this.",
+      "parentUuid": "b64a0f62_cce6b50c",
       "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c7e3b2e_a7f3809d",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "201ce581_0908bbd0",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e19ce2aa_3559330b",
@@ -121,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "997fc9d3_4c291674",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e19ce2aa_3559330b",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c2201fb_6295f1df",
@@ -134,6 +206,24 @@
       "writtenOn": "2021-01-12T14:41:36Z",
       "side": 1,
       "message": "Naming nit: prefer \"DeprecatedSwapChain\" a la Blink practice.",
+      "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c44b0ca3_64833cf7",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "As discussed offline this is something I should have done when I started the stack but now there\u0027s a bunch of OldSwapChain\u0027s in the backend so I\u0027d rather keep the naming consistent.",
+      "parentUuid": "4c2201fb_6295f1df",
       "revId": "5e4236092791b9712724f540c86bfbadc7cbd3d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

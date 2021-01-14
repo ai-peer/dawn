@@ -108,6 +108,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e78375c3_50a77477",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "The interface is what we tentatively agreed to with Dzmitry in https://github.com/webgpu-native/webgpu-headers but I\u0027m sure it will change in the future.\n\nWhat does MPOed mean?",
+      "parentUuid": "fb78b7e1_453a3408",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "263ed618_b63e9019",
         "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
         "patchSetId": 2
@@ -420,6 +444,30 @@
       "side": 1,
       "message": "Makes sense. Might be a good idea to add this as a comment.",
       "parentUuid": "6c7a490c_844d1dde",
+      "range": {
+        "startLine": 136,
+        "startChar": 37,
+        "endLine": 136,
+        "endChar": 72
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9387a8_f5c68d38",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c1d18e4_51435233",
       "range": {
         "startLine": 136,
         "startChar": 37,
@@ -1008,6 +1056,30 @@
       "side": 1,
       "message": "You shouldn\u0027t be using unique_ptr with reference counted classes because the unique_ptr may delete the object out from under code which still has a reference to it. The only code which should delete a reference counted class is the Release method of RefCounted.\n\nConsider instead using operator new with AcquireRef to keep things safe. This is done in the create methods of TextureD3D12.cpp. If you need to pass the object to code that is not ref count aware, you can use the Detach method of Ref.",
       "parentUuid": "da60b44d_4d7e8d4e",
+      "range": {
+        "startLine": 46,
+        "startChar": 1,
+        "endLine": 46,
+        "endChar": 30
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dfe2c09_ad6d93e2",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T12:59:36Z",
+      "side": 1,
+      "message": "Ah yeah, that was a simple mistake. Put up https://dawn-review.googlesource.com/c/dawn/+/37843 to fix the other backends.",
+      "parentUuid": "7f31a3be_e33078b4",
       "range": {
         "startLine": 46,
         "startChar": 1,
