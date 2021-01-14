@@ -16,6 +16,46 @@
       "message": "PTAL. Thanks!\n\nNote that this workaround is currently enabled for all OpenGL ES implementations. It\nshould probably be ANGLE-only, probably by checking the renderer string.",
       "revId": "4edcd5967dbb2f37f6bef3aa8d4e35d003365e6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1e17cd_a3182c80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T18:20:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4edcd5967dbb2f37f6bef3aa8d4e35d003365e6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ff90de_f1d01a64",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T18:20:22Z",
+      "side": 1,
+      "message": "nit: flush_before_glclientwaitsync ? This would be more descriptive of what the toggle does.",
+      "range": {
+        "startLine": 155,
+        "startChar": 21,
+        "endLine": 155,
+        "endChar": 44
+      },
+      "revId": "4edcd5967dbb2f37f6bef3aa8d4e35d003365e6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
