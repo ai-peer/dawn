@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "256ca034_d799baf3",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "This is how it was in GLSL. Agree it looks weird, so fixed.",
+      "parentUuid": "93cdd118_735f881f",
+      "range": {
+        "startLine": 211,
+        "startChar": 52,
+        "endLine": 211,
+        "endChar": 71
+      },
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "32157b80_67650083",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 218,
+        "startChar": 52,
+        "endLine": 218,
+        "endChar": 72
+      },
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a72ddf1_203353c9",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32157b80_67650083",
       "range": {
         "startLine": 218,
         "startChar": 52,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78ea729d_073e7136",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb95d629_fed62412",
+      "range": {
+        "startLine": 219,
+        "startChar": 42,
+        "endLine": 219,
+        "endChar": 61
+      },
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "837a8a7e_a27619ec",
@@ -100,6 +172,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "nit: ident it one more level than the return? Ditto below",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e690c2_701a1082",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "than the return?\nDo you mean indent with 4? See my reply about indenting below.",
+      "parentUuid": "837a8a7e_a27619ec",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d94bad4f_58bdbb93",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Yes debug code, but is useful for when things go wrong. There\u0027s so much template generated shader code, it\u0027s rather handy to be able to see the shader that caused the failure.",
+      "parentUuid": "8f79354b_a4706b2b",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ddf278d_45609e8c",
@@ -134,6 +242,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto indentation.",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcf3c96c_af4b51b1",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9ddf278d_45609e8c",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35eef22e_9c5939ee",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f8dfd94_83352d10",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be64e0e8_9f85a3d8",
@@ -168,6 +312,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto indentation.",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce4f266e_604aee04",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "be64e0e8_9f85a3d8",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +351,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c3f9a70_e981f576",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "I don\u0027t believe you can inline the struct definition. Maybe raise a request with the WGSL github tracker?",
+      "parentUuid": "90457044_fa6095da",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38b50eb5_3e11c5ca",
@@ -202,6 +382,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto indentation",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3ee732_e22a1986",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "38b50eb5_3e11c5ca",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -223,6 +421,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b00081d_83b391e6",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8e535a32_c11d91a2",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d9b2c67_22fb8c1e",
@@ -236,6 +452,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23cbd2c0_aaba2be6",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d9b2c67_22fb8c1e",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -257,6 +491,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf64901_f3a41230",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1058,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Good spot. Removed.",
+      "parentUuid": "960a7342_4a948b2d",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55b95904_0e980be6",
@@ -274,6 +526,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d32b8f_9b5e8660",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1062,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "55b95904_0e980be6",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b62ff7c3_bb579531",
@@ -287,6 +557,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64a85ff9_5060c434",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1152,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b62ff7c3_bb579531",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -316,6 +604,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "342feac0_a4008521",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "So I\u0027ve intentionally opted for 2-space in this file as the shaders have deep indentation and very long lines. These either force you to have ugly multi-line statements due to clang-format, or start littering the code with R() filth.\nI hope you agree that the code around https://dawn-review.googlesource.com/c/dawn/+/37080/10/src/tests/end2end/StorageTextureTests.cpp#364 is far more readable now. I consider readability more important than tab-width especially when this is all in string literals.",
+      "parentUuid": "e84d6043_625a0422",
+      "range": {
+        "startLine": 1153,
+        "startChar": 0,
+        "endLine": 1155,
+        "endChar": 1
+      },
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "847f0616_c288ca2d",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 10
@@ -327,6 +639,24 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e44971a7_b425ad6f",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "847f0616_c288ca2d",
       "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -348,6 +678,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e56e1cd8_7c952d5c",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1214,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d33d9072_aaa61d19",
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02a89e06_3757e64d",
@@ -361,6 +709,30 @@
       "writtenOn": "2021-01-14T13:58:46Z",
       "side": 1,
       "message": "nit: maybe it can jsut be : u32.",
+      "range": {
+        "startLine": 1220,
+        "startChar": 55,
+        "endLine": 1220,
+        "endChar": 64
+      },
+      "revId": "b55909fac0ad6523c0b85a4f6d90c877f12b3a3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "075fafdf_aba5c22f",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1220,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T14:24:24Z",
+      "side": 1,
+      "message": "I believe this has to be a [[block]] struct.",
+      "parentUuid": "02a89e06_3757e64d",
       "range": {
         "startLine": 1220,
         "startChar": 55,
