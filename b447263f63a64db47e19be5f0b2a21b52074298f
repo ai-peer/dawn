@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "546c8b05_5a12e568",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T19:47:29Z",
+      "side": 1,
+      "message": "In this case, validation that \"Write-only storage textures cannot be declared in a vertex shader\". Tint will happily pass this on through to the backend, which might support it.",
+      "parentUuid": "0b9f71a9_2be34675",
+      "range": {
+        "startLine": 156,
+        "startChar": 24,
+        "endLine": 156,
+        "endChar": 50
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b107ef3c_cfc4fb0a",
         "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
         "patchSetId": 1
@@ -37,6 +61,30 @@
       "writtenOn": "2021-01-14T19:36:41Z",
       "side": 1,
       "message": "write?",
+      "range": {
+        "startLine": 159,
+        "startChar": 75,
+        "endLine": 159,
+        "endChar": 79
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "296f73b6_49fd98fd",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T19:47:29Z",
+      "side": 1,
+      "message": "Thanks, done.",
+      "parentUuid": "b107ef3c_cfc4fb0a",
       "range": {
         "startLine": 159,
         "startChar": 75,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a528abe5_8197ca42",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T19:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21b99dca_d5d3c378",
+      "range": {
+        "startLine": 175,
+        "startChar": 75,
+        "endLine": 175,
+        "endChar": 79
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc9b93cc_7281eef4",
@@ -83,6 +155,30 @@
       "writtenOn": "2021-01-14T19:36:41Z",
       "side": 1,
       "message": "write",
+      "range": {
+        "startLine": 217,
+        "startChar": 75,
+        "endLine": 217,
+        "endChar": 79
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "269e4f41_5a03f7b6",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T19:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc9b93cc_7281eef4",
       "range": {
         "startLine": 217,
         "startChar": 75,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ffc783a_2c1cac60",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T19:47:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0c49ef3_0b6adaf5",
+      "range": {
+        "startLine": 331,
+        "startChar": 38,
+        "endLine": 331,
+        "endChar": 74
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8737a65_3d720d35",
@@ -129,6 +249,30 @@
       "writtenOn": "2021-01-14T19:36:41Z",
       "side": 1,
       "message": "nit: typename is short enough to say wgpu::TextureFormat\n\nhowever, what do you think about just having the list of strings here and calling the version that takes \"const char*\" ?\n\nThen we don\u0027t need to add the unsupported formats to the helper function.",
+      "range": {
+        "startLine": 344,
+        "startChar": 13,
+        "endLine": 344,
+        "endChar": 17
+      },
+      "revId": "b447263f63a64db47e19be5f0b2a21b52074298f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75960dad_59cd406c",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-14T19:47:29Z",
+      "side": 1,
+      "message": "Replaced auto with the full typename.\n\n\u003e however, what do you think about just having the list of strings here and calling the version that takes \"const char*\" ?\n\nGiven the rate that WGSL is being changed, using another set of string literals is likely to go out of sync with any format patterns we currently have.\n\n\u003e Then we don\u0027t need to add the unsupported formats to the helper function\n\nThey were actually required for another test. Can\u0027t remember which one(s) though.",
+      "parentUuid": "c8737a65_3d720d35",
       "range": {
         "startLine": 344,
         "startChar": 13,
