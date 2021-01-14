@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e3957a4_adbc16f4",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T01:26:27Z",
+      "side": 1,
+      "message": "There was a bug on implicit return that was just patched today.\nhttps://bugs.chromium.org/p/tint/issues/detail?id\u003d446",
+      "parentUuid": "b10b864d_c7ca7fdc",
+      "range": {
+        "startLine": 153,
+        "startChar": 0,
+        "endLine": 158,
+        "endChar": 12
+      },
+      "revId": "1eefabda82d43fa8524ab45bf0c778f6f6e65dec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0d3e4f4_57ccb12e",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-14T00:35:35Z",
       "side": 1,
       "message": "sorry, should have mentioned this in the first review.\n\nyou can DAWN_SKIP_TEST inside your test\u0027s SetUp() like so:\n\nclass FirstIndexOffsetTests : public DawnTest {\n\nvoid SetUp() override {\n  DAWN_SKIP_TEST_IF(...);\n  DawnTest::SetUp();\n};\n\n}",
+      "range": {
+        "startLine": 213,
+        "startChar": 4,
+        "endLine": 215,
+        "endChar": 64
+      },
+      "revId": "1eefabda82d43fa8524ab45bf0c778f6f6e65dec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0598cdd4_094e9fa2",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T01:26:27Z",
+      "side": 1,
+      "message": "Done. Needs to be\n  DawnTest::SetUp();\n  DAWN_SKIP_TEST_IF(...);\notherwise TearDown() crashes.",
+      "parentUuid": "c0d3e4f4_57ccb12e",
       "range": {
         "startLine": 213,
         "startChar": 4,
