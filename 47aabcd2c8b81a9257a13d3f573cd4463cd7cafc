@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "279c1fb4_4ec9bbc3",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T19:16:13Z",
+      "side": 1,
+      "message": "Not sure what you mean, RenderEncoderBase::SetIndexBuffer has the following check.\n\n            if (format \u003d\u003d wgpu::IndexFormat::Undefined) {\n                return DAWN_VALIDATION_ERROR(\"Index format must be specified\");\n            }",
+      "parentUuid": "b39faa7f_3db0fdbf",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd55d9b9_dadead90",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
