@@ -17,6 +17,7 @@
 #include "dawn_native/opengl/BufferGL.h"
 #include "dawn_native/opengl/CommandBufferGL.h"
 #include "dawn_native/opengl/DeviceGL.h"
+#include "dawn_native/opengl/TextureGL.h"
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
 
@@ -55,7 +56,23 @@ namespace dawn_native { namespace opengl {
                                        const void* data,
                                        const TextureDataLayout& dataLayout,
                                        const Extent3D& writeSizePixel) {
-        return DAWN_UNIMPLEMENTED_ERROR("Unable to write to texture\n");
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
+
+        const Texture* texture = ToBackend(destination.texture);
+        const GLFormat& format = texture->GetGLFormat();
+        GLenum target = texture->GetGLTarget();
+        gl.BindTexture(target, texture->GetHandle());
+        if (texture->GetArrayLayers() > 1) {
+            gl.TexSubImage3D(target, destination.mipLevel, destination.origin.x,
+                             destination.origin.y, destination.origin.z, writeSizePixel.width,
+                             writeSizePixel.height, writeSizePixel.depth, format.format,
+                             format.type, data);
+        } else {
+            gl.TexSubImage2D(target, destination.mipLevel, destination.origin.x,
+                             destination.origin.y, writeSizePixel.width, writeSizePixel.height,
+                             format.format, format.type, data);
+        }
+        return {};
     }
 
 }}  // namespace dawn_native::opengl
