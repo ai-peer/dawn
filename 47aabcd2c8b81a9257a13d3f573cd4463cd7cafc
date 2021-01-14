@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cd706be9_82ec08cc",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "No, OpenGL throws a GLSL error about uint requiring flat. Under Vulkan (at least on Intel iGPUs) the attribute will be 0 (which couldn\u0027t possible have been interpolated from the given values) if the SPIR-V doesn\u0027t have OpDecorate \u003cattrib\u003e \"Flat\".\n\nAlso, we can\u0027t test DrawIndexed() with PointList.",
+      "parentUuid": "ceb044ab_59bfba1e",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd55d9b9_dadead90",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
@@ -65,6 +83,30 @@
       "writtenOn": "2021-01-14T13:40:23Z",
       "side": 1,
       "message": "nit: let\u0027s use vertex_index instead of idx because it was fixed in the upstream WGSL spec. (ditto for out_ and in_ versions of the variable)",
+      "range": {
+        "startLine": 104,
+        "startChar": 40,
+        "endLine": 104,
+        "endChar": 50
+      },
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84e2fec2_e92e3e9c",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd55d9b9_dadead90",
       "range": {
         "startLine": 104,
         "startChar": 40,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f809702f_c189fd35",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "Done. Using 1 and 2 since 0 is used by position.",
+      "parentUuid": "7abf8e26_c44cd277",
+      "range": {
+        "startLine": 105,
+        "startChar": 25,
+        "endLine": 105,
+        "endChar": 33
+      },
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56231b64_88d235c2",
@@ -111,6 +177,30 @@
       "writtenOn": "2021-01-14T13:40:23Z",
       "side": 1,
       "message": "ditto instance_index.",
+      "range": {
+        "startLine": 116,
+        "startChar": 46,
+        "endLine": 116,
+        "endChar": 58
+      },
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d40ba40_b34e3e96",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56231b64_88d235c2",
       "range": {
         "startLine": 116,
         "startChar": 46,
@@ -144,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeaeaf97_8b598f22",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "763b0a25_e1681e35",
+      "range": {
+        "startLine": 204,
+        "startChar": 57,
+        "endLine": 204,
+        "endChar": 82
+      },
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5875f06_6c649ab5",
@@ -167,6 +281,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2aa98891_9deb9455",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5875f06_6c649ab5",
+      "range": {
+        "startLine": 207,
+        "startChar": 34,
+        "endLine": 207,
+        "endChar": 45
+      },
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f249ec55_73c8eda2",
@@ -180,6 +318,30 @@
       "writtenOn": "2021-01-14T13:40:23Z",
       "side": 1,
       "message": "nit: the constants don\u0027t exist, did you mean to set them to 7 and 11 respectively?",
+      "range": {
+        "startLine": 230,
+        "startChar": 54,
+        "endLine": 230,
+        "endChar": 72
+      },
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48fd62a_d2785f7b",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T17:47:59Z",
+      "side": 1,
+      "message": "Done. Forgot to convert these to 7 and 11 respectively after Austin asked me to remove the constants and inline the numbers.",
+      "parentUuid": "f249ec55_73c8eda2",
       "range": {
         "startLine": 230,
         "startChar": 54,
