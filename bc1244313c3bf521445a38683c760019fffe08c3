@@ -177,6 +177,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "815adc23_46d4c95a",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-14T13:00:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30ee4c5c_73c8f7f5",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 13
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed862a13_6ad7e797",
