@@ -43,9 +43,10 @@ namespace dawn_native { namespace metal {
                                                 Surface* surface,
                                                 NewSwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor);
-        ~SwapChain() override;
 
       private:
+        ~SwapChain() override;
+
         using NewSwapChainBase::NewSwapChainBase;
         MaybeError Initialize(NewSwapChainBase* previousSwapChain);
 

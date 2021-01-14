@@ -42,15 +42,16 @@ namespace dawn_native { namespace vulkan {
         wgpu::TextureUsage mTextureUsage;
     };
 
-    class SwapChain : public NewSwapChainBase {
+    class SwapChain final : public NewSwapChainBase {
       public:
         static ResultOrError<SwapChain*> Create(Device* device,
                                                 Surface* surface,
                                                 NewSwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor);
-        ~SwapChain() override;
 
       private:
+        ~SwapChain() override;
+
         using NewSwapChainBase::NewSwapChainBase;
         MaybeError Initialize(NewSwapChainBase* previousSwapChain);
 

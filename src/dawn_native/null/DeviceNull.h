@@ -258,9 +258,9 @@ namespace dawn_native { namespace null {
                                                 Surface* surface,
                                                 NewSwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor);
+      private:
         ~SwapChain() override;
 
-      private:
         using NewSwapChainBase::NewSwapChainBase;
         MaybeError Initialize(NewSwapChainBase* previousSwapChain);
 

@@ -353,10 +353,9 @@ namespace dawn_native { namespace null {
                                                 Surface* surface,
                                                 NewSwapChainBase* previousSwapChain,
                                                 const SwapChainDescriptor* descriptor) {
-        std::unique_ptr<SwapChain> swapchain =
-            std::make_unique<SwapChain>(device, surface, descriptor);
+        Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, descriptor));
         DAWN_TRY(swapchain->Initialize(previousSwapChain));
-        return swapchain.release();
+        return swapchain.Detach();
     }
 
     MaybeError SwapChain::Initialize(NewSwapChainBase* previousSwapChain) {
