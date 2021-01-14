@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "1dcebd5d9f5cbc9bf8ac97db7e419004f248f084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbd0fb59_36f9b764",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T17:14:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1dcebd5d9f5cbc9bf8ac97db7e419004f248f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c47fd27_624eabd7",
+        "filename": "src/tests/perf_tests/SubresourceTrackingPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T17:14:34Z",
+      "side": 1,
+      "message": "nit: (params.mipLevelCount - 1) ?",
+      "range": {
+        "startLine": 58,
+        "startChar": 35,
+        "endLine": 58,
+        "endChar": 55
+      },
+      "revId": "1dcebd5d9f5cbc9bf8ac97db7e419004f248f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
