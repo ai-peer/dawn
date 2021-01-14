@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1615072d_0b8b8fb6",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-14T23:06:46Z",
+      "side": 1,
+      "message": "Oops, I just noticed that I was passing pipelineDesc.cVertexState.indexFormat to SetIndexBuffer (which would have been undefined). Switching to PointList to simplify shaders and buffers.\n\nThat said, Vulkan and OpenGL are still broken due to missing OpDecorate. Confirmed that SwiftShader also breaks without OpDecorate. Also, forcing Tint to add OpDecorate \"Flat\" to all (u)int attributes fixes the issue.",
+      "parentUuid": "5bb642b4_9054657b",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd55d9b9_dadead90",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
