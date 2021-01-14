@@ -22,6 +22,30 @@
       },
       "revId": "e89a1f2b0bddd96098c014319035ba0888d152d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7454fb52_9fc92489",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-14T18:24:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c17b5d25_e74006e5",
+      "range": {
+        "startLine": 103,
+        "startChar": 38,
+        "endLine": 103,
+        "endChar": 46
+      },
+      "revId": "e89a1f2b0bddd96098c014319035ba0888d152d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
