@@ -16,6 +16,69 @@
       "message": "PTAL!",
       "revId": "83bb4092aaf3b34f470dcba2c9306410db373d61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "412e2941_5c4c27a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:50:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "83bb4092aaf3b34f470dcba2c9306410db373d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf43082_6419f270",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:50:22Z",
+      "side": 1,
+      "message": "It\u0027s... ok. but I still don\u0027t love it. Can\u0027t we add a separate aspect DepthStencil? we would return DepthStencil here if ShouldCombineDepthStencilBarrier()\n\nwe could even name it DepthStencilForMergedBarriers so it\u0027s clear it\u0027s not to be used elsewhere\n\nGetAspectCount would return 1 and GetAspectIndex would return 0",
+      "range": {
+        "startLine": 822,
+        "startChar": 4,
+        "endLine": 831,
+        "endChar": 5
+      },
+      "revId": "83bb4092aaf3b34f470dcba2c9306410db373d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eec94f6_a621866a",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:50:22Z",
+      "side": 1,
+      "message": "nit: Subresource",
+      "range": {
+        "startLine": 840,
+        "startChar": 33,
+        "endLine": 840,
+        "endChar": 49
+      },
+      "revId": "83bb4092aaf3b34f470dcba2c9306410db373d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
