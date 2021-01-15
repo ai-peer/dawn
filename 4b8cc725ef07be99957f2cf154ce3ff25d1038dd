@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b65e2fa7_fe53215e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T16:09:40Z",
+      "side": 1,
+      "message": "He did review it :)\n\nI think I needed to add one more function though.",
+      "parentUuid": "806944f4_ad672d23",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3d07c65_431f8332",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3952c693_bb073a76",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T16:09:40Z",
+      "side": 1,
+      "message": "Right I\u0027ll comment. This is to support the now-deprecated path in Chrome where the wire server gets initialized with a pre-existing device, and the client is hardcoded the ID to 1.\n\nGoing forward Chrome will Reserve on the client side and Inject on the service side.",
+      "parentUuid": "e644d4ee_be012022",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6fc96f37_8341b545",
         "filename": "src/dawn_wire/client/Device.cpp",
         "patchSetId": 6
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c05c50a_32b1a1fc",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T16:09:40Z",
+      "side": 1,
+      "message": "I\u0027ll comment. GetQueue won\u0027t be a valid call until the device it refers to is Injected. Thus we shouldn\u0027t call it immediately in the Device constructor because that leaves us no opportunity to do the injection.",
+      "parentUuid": "6fc96f37_8341b545",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1256fdb8_e67da4f3",
         "filename": "src/tests/unittests/wire/WireInjectDeviceTests.cpp",
         "patchSetId": 6
@@ -82,6 +136,24 @@
       "writtenOn": "2021-01-15T15:07:38Z",
       "side": 1,
       "message": "Is this an error? If you can\u0027t get the default queue before injection, or after injection (see below), when can you get it? :)",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7aba525_3edfb585",
+        "filename": "src/tests/unittests/wire/WireInjectDeviceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T16:09:40Z",
+      "side": 1,
+      "message": "heh. whoops the comment below is wrong.",
+      "parentUuid": "1256fdb8_e67da4f3",
       "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
