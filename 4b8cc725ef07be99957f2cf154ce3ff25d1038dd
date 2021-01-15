@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "806944f4_ad672d23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T15:07:38Z",
+      "side": 1,
+      "message": "LGTM, but this should defo have a thorough review by Corentin. My knowledge of the wire is thin.",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3d07c65_431f8332",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T15:07:38Z",
+      "side": 1,
+      "message": "Nit: forwared -\u003e forwarded.",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e644d4ee_be012022",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T15:07:38Z",
+      "side": 1,
+      "message": "Why is the ID always 1? Is this function only ever called once, or does it have something to do with the injected device? (Maybe add a comment?)",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc96f37_8341b545",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T15:07:38Z",
+      "side": 1,
+      "message": "Out of curiosity, why make this lazy-allocated? Memory saving or something else?",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1256fdb8_e67da4f3",
+        "filename": "src/tests/unittests/wire/WireInjectDeviceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T15:07:38Z",
+      "side": 1,
+      "message": "Is this an error? If you can\u0027t get the default queue before injection, or after injection (see below), when can you get it? :)",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
