@@ -48,6 +48,7 @@ namespace dawn_native { namespace vulkan {
         {InstanceExt::XlibSurface, "VK_KHR_xlib_surface", NeverPromoted},
 
         {InstanceExt::DebugUtils, "VK_EXT_debug_utils", NeverPromoted},
+        {InstanceExt::ValidationFeatures, "VK_EXT_validation_features", NeverPromoted},
         //
     }};
 
@@ -88,6 +89,7 @@ namespace dawn_native { namespace vulkan {
                 case InstanceExt::GetPhysicalDeviceProperties2:
                 case InstanceExt::Surface:
                 case InstanceExt::DebugUtils:
+                case InstanceExt::ValidationFeatures:
                     hasDependencies = true;
                     break;
 
@@ -299,6 +301,7 @@ namespace dawn_native { namespace vulkan {
     static constexpr size_t kInstanceLayerCount = static_cast<size_t>(InstanceLayer::EnumCount);
     static constexpr std::array<InstanceLayerInfo, kInstanceLayerCount> sInstanceLayerInfos{{
         //
+        {InstanceLayer::Validation, "VK_LAYER_KHRONOS_validation"},
         {InstanceLayer::LunargVkTrace, "VK_LAYER_LUNARG_vktrace"},
         {InstanceLayer::RenderDocCapture, "VK_LAYER_RENDERDOC_Capture"},
         {InstanceLayer::FuchsiaImagePipeSwapchain, "VK_LAYER_FUCHSIA_imagepipe_swapchain"},

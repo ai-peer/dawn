@@ -40,6 +40,7 @@ namespace dawn_native { namespace vulkan {
 
         // Others
         DebugUtils,
+        ValidationFeatures,
 
         EnumCount,
     };
@@ -132,6 +133,7 @@ namespace dawn_native { namespace vulkan {
     // The list of all known instance layers (not that there are device layers, but just "Layer"
     // would be too common a name).
     enum class InstanceLayer {
+        Validation,
         LunargVkTrace,
         RenderDocCapture,
 
