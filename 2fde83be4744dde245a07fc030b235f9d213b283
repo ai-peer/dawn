@@ -16,6 +16,57 @@
       "message": "Also FYI (not ready for review despite what Gerrit says.)",
       "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b04ddd_95308631",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-15T12:52:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43400cd7_23f9457d",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-15T12:52:17Z",
+      "side": 1,
+      "message": "Can we we tag with the correct https://crbug/dawn/XXX ditto everywhere in this CL.",
+      "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc86362e_d9503ece",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-15T12:52:17Z",
+      "side": 1,
+      "message": "Do you mean that it doesn\u0027t support the indexed sampled mask?",
+      "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
