@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bc5c8fb_542358cd",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-15T23:35:43Z",
+      "side": 1,
+      "message": "IHMO, I\u0027m not sure that it is worth the added code complexity. Our own driver team has mentioned that there is more than enough room in the HW. That said, I\u0027m happy to be proven wrong 😊.",
+      "parentUuid": "1355d964_8c4a448c",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ceb044ab_59bfba1e",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
@@ -210,6 +228,24 @@
       "side": 1,
       "message": "Ok thanks! Please file a Tint bug for this so it gets fixed.",
       "parentUuid": "1615072d_0b8b8fb6",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7029f05f_1d4e9eba",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-15T23:35:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c03d9fe1_45662e90",
       "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
