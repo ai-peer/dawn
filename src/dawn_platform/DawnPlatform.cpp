@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/WorkerThread.h"
 
 #include "common/Assert.h"
 
@@ -53,6 +54,10 @@ namespace dawn_platform {
     dawn_platform::CachingInterface* Platform::GetCachingInterface(const void* fingerprint,
                                                                    size_t fingerprintSize) {
         return nullptr;
+    }
+
+    std::shared_ptr<dawn_platform::WorkerTaskPool> Platform::CreateWorkerTaskPool() {
+        return std::make_shared<AsyncWorkerThreadPool>();
     }
 
 }  // namespace dawn_platform
