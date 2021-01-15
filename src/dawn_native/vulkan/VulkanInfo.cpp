@@ -146,6 +146,22 @@ namespace dawn_native { namespace vulkan {
                 }
             }
 
+            // Specific handling for the Fuchsia swapchain surface creation extension
+            // which is normally part of the Fuchsia-specific swapchain layer.
+            if (info.validation && !info.HasExt(InstanceExt::ValidationFeatures)) {
+                if (!EnumerateInstanceExtensions(kLayerNameKhronosValidation, vkFunctions,
+                                                 &extensionsProperties)) {
+                    return DAWN_INTERNAL_ERROR("vkEnumerateInstanceExtensionProperties");
+                }
+
+                for (const VkExtensionProperties& extension : extensionsProperties) {
+                    auto it = knownExts.find(extension.extensionName);
+                    if (it != knownExts.end() && it->second == InstanceExt::ValidationFeatures) {
+                        info.extensions.Set(InstanceExt::ValidationFeatures, true);
+                    }
+                }
+            }
+
             MarkPromotedExtensions(&info.extensions, info.apiVersion);
             info.extensions = EnsureDependencies(info.extensions);
         }
