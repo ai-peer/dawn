@@ -16,6 +16,46 @@
       "message": "PTAL. Thanks!",
       "revId": "64787230272894f496b7f4785e9ce7891c75ae42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6df56d_be62d3f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:29:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "64787230272894f496b7f4785e9ce7891c75ae42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23c2435_30086d59",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:29:49Z",
+      "side": 1,
+      "message": "Does ANGLE use a known device/vendor id? If it does, I think it would be slightly better",
+      "range": {
+        "startLine": 688,
+        "startChar": 5,
+        "endLine": 688,
+        "endChar": 63
+      },
+      "revId": "64787230272894f496b7f4785e9ce7891c75ae42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
