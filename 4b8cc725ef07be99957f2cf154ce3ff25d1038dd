@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "398a9810_0551b833",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:47:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3d07c65_431f8332",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e644d4ee_be012022",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Right I\u0027ll comment. This is to support the now-deprecated path in Chrome where the wire server gets initialized with a pre-existing device, and the client is hardcoded the ID to 1.\n\nGoing forward Chrome will Reserve on the client side and Inject on the service side.",
       "parentUuid": "e644d4ee_be012022",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fbe1880_e349b7c1",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:47:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3952c693_bb073a76",
       "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc9dbd6d_486b3293",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:47:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c05c50a_32b1a1fc",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1256fdb8_e67da4f3",
@@ -154,6 +208,24 @@
       "side": 1,
       "message": "heh. whoops the comment below is wrong.",
       "parentUuid": "1256fdb8_e67da4f3",
+      "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7eb03a_bebc0720",
+        "filename": "src/tests/unittests/wire/WireInjectDeviceTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T17:47:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7aba525_3edfb585",
       "revId": "4b8cc725ef07be99957f2cf154ce3ff25d1038dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
