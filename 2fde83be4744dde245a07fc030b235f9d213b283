@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c13c08_7e2296cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T12:44:13Z",
+      "side": 1,
+      "message": "Also FYI (not ready for review despite what Gerrit says.)",
+      "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
