@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1355d964_8c4a448c",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T00:22:00Z",
+      "side": 1,
+      "message": "Enrico, let\u0027s file a bug for this and put it in a comment here.",
+      "parentUuid": "f736c9f2_8dca2336",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ceb044ab_59bfba1e",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
@@ -174,6 +192,24 @@
       "side": 1,
       "message": "Oops, I just noticed that I was passing pipelineDesc.cVertexState.indexFormat to SetIndexBuffer (which would have been undefined). Switching to PointList to simplify shaders and buffers.\n\nThat said, Vulkan and OpenGL are still broken due to missing OpDecorate. Confirmed that SwiftShader also breaks without OpDecorate. Also, forcing Tint to add OpDecorate \"Flat\" to all (u)int attributes fixes the issue.",
       "parentUuid": "5bb642b4_9054657b",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c03d9fe1_45662e90",
+        "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-15T00:22:00Z",
+      "side": 1,
+      "message": "Ok thanks! Please file a Tint bug for this so it gets fixed.",
+      "parentUuid": "1615072d_0b8b8fb6",
       "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
