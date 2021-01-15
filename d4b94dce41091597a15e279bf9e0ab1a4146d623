@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a54d2b_7cdac57e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T14:03:08Z",
+      "side": 1,
+      "message": "LGTM, but also curious about Rafael\u0027s question.",
+      "revId": "d4b94dce41091597a15e279bf9e0ab1a4146d623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b06e0baf_cf24bd61",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-01-14T20:45:56Z",
       "side": 1,
       "message": "Is there a reason this can\u0027t be ResultOrError\u003cRef\u003cSwapChain\u003e\u003e?  Would avoid bugs in the caller from accidentally assigning the pointer to a Ref (which would be a memory leak), vs calling AcquireRef (which would not leak).",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 29
+      },
+      "revId": "d4b94dce41091597a15e279bf9e0ab1a4146d623",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fcf63ea_76b18ac8",
+        "filename": "src/dawn_native/metal/SwapChainMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-15T14:03:08Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "b06e0baf_cf24bd61",
       "range": {
         "startLine": 61,
         "startChar": 4,
