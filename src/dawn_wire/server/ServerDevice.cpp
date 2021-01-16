@@ -16,28 +16,36 @@
 
 namespace dawn_wire { namespace server {
 
-    void Server::OnUncapturedError(WGPUErrorType type, const char* message) {
+    void Server::OnUncapturedError(ObjectHandle device, WGPUErrorType type, const char* message) {
         ReturnDeviceUncapturedErrorCallbackCmd cmd;
+        cmd.device = device;
         cmd.type = type;
         cmd.message = message;
 
         SerializeCommand(cmd);
     }
 
-    void Server::OnDeviceLost(const char* message) {
+    void Server::OnDeviceLost(ObjectHandle device, const char* message) {
         ReturnDeviceLostCallbackCmd cmd;
+        cmd.device = device;
         cmd.message = message;
 
         SerializeCommand(cmd);
     }
 
-    bool Server::DoDevicePopErrorScope(WGPUDevice cDevice, uint64_t requestSerial) {
+    bool Server::DoDevicePopErrorScope(ObjectId deviceId, uint64_t requestSerial) {
+        auto* device = DeviceObjects().Get(deviceId);
+        if (device == nullptr) {
+            return false;
+        }
+
         auto userdata = MakeUserdata<ErrorScopeUserdata>();
         userdata->requestSerial = requestSerial;
+        userdata->device = ObjectHandle{deviceId, device->generation};
 
         ErrorScopeUserdata* unownedUserdata = userdata.release();
         bool success = mProcs.devicePopErrorScope(
-            cDevice,
+            device->handle,
             ForwardToServer<decltype(
                 &Server::OnDevicePopErrorScope)>::Func<&Server::OnDevicePopErrorScope>(),
             unownedUserdata);
@@ -51,6 +59,7 @@ namespace dawn_wire { namespace server {
                                        const char* message,
                                        ErrorScopeUserdata* userdata) {
         ReturnDevicePopErrorScopeCallbackCmd cmd;
+        cmd.device = userdata->device;
         cmd.requestSerial = userdata->requestSerial;
         cmd.type = type;
         cmd.message = message;
