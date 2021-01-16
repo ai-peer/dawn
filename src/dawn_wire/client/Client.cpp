@@ -129,8 +129,14 @@ namespace dawn_wire { namespace client {
     void Client::Disconnect() {
         mDisconnected = true;
         mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());
-        if (mDevice != nullptr) {
-            mDevice->HandleDeviceLost("GPU connection lost");
+
+        auto& deviceList = mObjects[ObjectType::Device];
+        {
+            auto* device = deviceList.head();
+            while (device != deviceList.end()) {
+                static_cast<Device*>(device->value())->HandleDeviceLost("GPU connection lost");
+                device = device->next();
+            }
         }
         for (auto& objectList : mObjects) {
             LinkNode<ObjectBase>* object = objectList.head();
