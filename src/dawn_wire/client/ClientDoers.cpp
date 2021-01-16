@@ -20,7 +20,9 @@
 
 namespace dawn_wire { namespace client {
 
-    bool Client::DoDeviceUncapturedErrorCallback(WGPUErrorType errorType, const char* message) {
+    bool Client::DoDeviceUncapturedErrorCallback(Device* device,
+                                                 WGPUErrorType errorType,
+                                                 const char* message) {
         switch (errorType) {
             case WGPUErrorType_NoError:
             case WGPUErrorType_Validation:
@@ -31,19 +33,20 @@ namespace dawn_wire { namespace client {
             default:
                 return false;
         }
-        mDevice->HandleError(errorType, message);
+        device->HandleError(errorType, message);
         return true;
     }
 
-    bool Client::DoDeviceLostCallback(char const* message) {
-        mDevice->HandleDeviceLost(message);
+    bool Client::DoDeviceLostCallback(Device* device, char const* message) {
+        device->HandleDeviceLost(message);
         return true;
     }
 
-    bool Client::DoDevicePopErrorScopeCallback(uint64_t requestSerial,
+    bool Client::DoDevicePopErrorScopeCallback(Device* device,
+                                               uint64_t requestSerial,
                                                WGPUErrorType errorType,
                                                const char* message) {
-        return mDevice->OnPopErrorScopeCallback(requestSerial, errorType, message);
+        return device->OnPopErrorScopeCallback(requestSerial, errorType, message);
     }
 
     bool Client::DoBufferMapAsyncCallback(Buffer* buffer,

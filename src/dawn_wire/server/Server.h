@@ -123,8 +123,7 @@ namespace dawn_wire { namespace server {
     struct ErrorScopeUserdata : CallbackUserdata {
         using CallbackUserdata::CallbackUserdata;
 
-        // TODO(enga): ObjectHandle device;
-        // when the wire supports multiple devices.
+        ObjectHandle device;
         uint64_t requestSerial;
     };
 
@@ -193,8 +192,8 @@ namespace dawn_wire { namespace server {
         void ClearDeviceCallbacks(WGPUDevice device);
 
         // Error callbacks
-        void OnUncapturedError(WGPUErrorType type, const char* message);
-        void OnDeviceLost(const char* message);
+        void OnUncapturedError(ObjectHandle device, WGPUErrorType type, const char* message);
+        void OnDeviceLost(ObjectHandle device, const char* message);
         void OnDevicePopErrorScope(WGPUErrorType type,
                                    const char* message,
                                    ErrorScopeUserdata* userdata);
