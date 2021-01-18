@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddec8988_bd6a010d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T16:27:38Z",
+      "side": 1,
+      "message": "BTW, I\u0027ve started peeling off subsets of this change to land separately.",
+      "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43400cd7_23f9457d",
@@ -65,6 +82,24 @@
       "writtenOn": "2021-01-15T12:52:17Z",
       "side": 1,
       "message": "Do you mean that it doesn\u0027t support the indexed sampled mask?",
+      "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7319ae2_ad85e02d",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1002,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T16:27:38Z",
+      "side": 1,
+      "message": "This comment may be stale (at one point, I was testing with ES 3.0 and SampleMask is a 3.1 feature). I think it\u0027s more likely to be failing for the same reason that SwiftShader/GL is failing (below); fast resolve issue. Will fix the comment.",
+      "parentUuid": "cc86362e_d9503ece",
       "revId": "2fde83be4744dde245a07fc030b235f9d213b283",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
