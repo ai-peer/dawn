@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8656d819_894ade4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T23:59:53Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nNote: I also did a glBlitFramebuffer implementation here: https://dawn-review.googlesource.com/c/dawn/+/38145/ but it doesn\u0027t work. Not sure why.",
+      "revId": "697397ab9fb6fe21b5b062cc80d9710077d069bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
