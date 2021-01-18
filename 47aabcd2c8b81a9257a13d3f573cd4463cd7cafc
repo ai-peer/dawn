@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70367357_b771799c",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-18T09:21:33Z",
+      "side": 1,
+      "message": "There\u0027s a lot of room in Intel HW but I know AMD HW has very little room instead (and would prefer high-frequency root table change to be at the start, not at the end like is done here). Not that we need to change anything in this CL, but in the future when people start looking at WebGPU performance in detils, it\u0027s probably going to come up.\n\nHappy to downgrade from a TODO() to a Note: \u003cwe could do this and that to be more optimal\u003e",
+      "parentUuid": "2bc5c8fb_542358cd",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ceb044ab_59bfba1e",
         "filename": "src/tests/end2end/FirstIndexOffsetTests.cpp",
         "patchSetId": 3
