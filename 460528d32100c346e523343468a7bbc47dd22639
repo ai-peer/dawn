@@ -16,6 +16,40 @@
       "message": "PTAL. Thanks!",
       "revId": "460528d32100c346e523343468a7bbc47dd22639",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de12c865_d55d82c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-18T18:25:03Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "460528d32100c346e523343468a7bbc47dd22639",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7726b67_6afef2eb",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-18T18:25:03Z",
+      "side": 1,
+      "message": "Could we use a temporary FBO here to avoid FRAMEBUFFER_INCOMPLETE too?",
+      "revId": "460528d32100c346e523343468a7bbc47dd22639",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
