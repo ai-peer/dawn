@@ -129,6 +129,34 @@ namespace dawn_native { namespace vulkan {
                                     const InstanceExtSet& instanceExts,
                                     uint32_t icdVersion);
 
+    // The list of all known instance layers (not that there are device layers, but just "Layer"
+    // would be too common a name).
+    enum class InstanceLayer {
+        LunargVkTrace,
+        RenderDocCapture,
+
+        // Fuchsia implements the swapchain through a layer (VK_LAYER_FUCHSIA_image_pipe_swapchain),
+        // which adds an instance extensions (VK_FUCHSIA_image_surface) to all ICDs.
+        FuchsiaImagePipeSwapchain,
+
+        EnumCount,
+    };
+
+    // A bitset that is indexed with InstanceLayer.
+    using InstanceLayerSet =
+        ityp::bitset<InstanceLayer, static_cast<uint32_t>(InstanceLayer::EnumCount)>;
+
+    // Information about a known layer
+    struct InstanceLayerInfo {
+        InstanceLayer index;
+        const char* name;
+    };
+
+    // Returns the information about a known InstanceLayer
+    const InstanceLayerInfo& GetInstanceLayerInfo(InstanceLayer layer);
+    // Returns a map that maps a Vulkan layer name to its InstanceLayer.
+    std::unordered_map<std::string, InstanceLayer> CreateInstanceLayerNameMap();
+
 }}  // namespace dawn_native::vulkan
 
 #endif  // DAWNNATIVE_VULKAN_VULKANEXTENSIONS_H_

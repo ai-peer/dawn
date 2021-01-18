@@ -293,4 +293,31 @@ namespace dawn_native { namespace vulkan {
         }
     }
 
+    // A static array for InstanceLayerInfo that can be indexed with InstanceLayers.
+    // GetInstanceLayerInfo checks that "index" matches the index used to access this array so an
+    // assert will fire if it isn't in the correct order.
+    static constexpr size_t kInstanceLayerCount = static_cast<size_t>(InstanceLayer::EnumCount);
+    static constexpr std::array<InstanceLayerInfo, kInstanceLayerCount> sInstanceLayerInfos{{
+        //
+        {InstanceLayer::LunargVkTrace, "VK_LAYER_LUNARG_vktrace"},
+        {InstanceLayer::RenderDocCapture, "VK_LAYER_RENDERDOC_Capture"},
+        {InstanceLayer::FuchsiaImagePipeSwapchain, "VK_LAYER_FUCHSIA_imagepipe_swapchain"},
+        //
+    }};
+
+    const InstanceLayerInfo& GetInstanceLayerInfo(InstanceLayer layer) {
+        uint32_t index = static_cast<uint32_t>(layer);
+        ASSERT(index < sInstanceLayerInfos.size());
+        ASSERT(sInstanceLayerInfos[index].index == layer);
+        return sInstanceLayerInfos[index];
+    }
+
+    std::unordered_map<std::string, InstanceLayer> CreateInstanceLayerNameMap() {
+        std::unordered_map<std::string, InstanceLayer> result;
+        for (const InstanceLayerInfo& info : sInstanceLayerInfos) {
+            result[info.name] = info.index;
+        }
+        return result;
+    }
+
 }}  // namespace dawn_native::vulkan
