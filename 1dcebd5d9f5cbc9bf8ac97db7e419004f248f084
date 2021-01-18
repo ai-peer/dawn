@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5fa8ebc_42303c5b",
+        "filename": "src/tests/perf_tests/SubresourceTrackingPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-18T08:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccaa650b_58a4b2cb",
+      "revId": "1dcebd5d9f5cbc9bf8ac97db7e419004f248f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c47fd27_624eabd7",
@@ -82,6 +100,30 @@
       "writtenOn": "2021-01-14T17:14:34Z",
       "side": 1,
       "message": "nit: (params.mipLevelCount - 1) ?",
+      "range": {
+        "startLine": 58,
+        "startChar": 35,
+        "endLine": 58,
+        "endChar": 55
+      },
+      "revId": "1dcebd5d9f5cbc9bf8ac97db7e419004f248f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fc57704_f0d56557",
+        "filename": "src/tests/perf_tests/SubresourceTrackingPerf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-18T08:43:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c47fd27_624eabd7",
       "range": {
         "startLine": 58,
         "startChar": 35,
