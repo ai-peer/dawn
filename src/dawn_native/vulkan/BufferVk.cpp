@@ -45,7 +45,7 @@ namespace dawn_native { namespace vulkan {
             if (usage & wgpu::BufferUsage::Uniform) {
                 flags |= VK_BUFFER_USAGE_UNIFORM_BUFFER_BIT;
             }
-            if (usage & wgpu::BufferUsage::Storage) {
+            if (usage & (wgpu::BufferUsage::Storage | kReadOnlyStorageBuffer)) {
                 flags |= VK_BUFFER_USAGE_STORAGE_BUFFER_BIT;
             }
             if (usage & wgpu::BufferUsage::Indirect) {
@@ -114,6 +114,9 @@ namespace dawn_native { namespace vulkan {
                 flags |= VK_ACCESS_UNIFORM_READ_BIT;
             }
             if (usage & wgpu::BufferUsage::Storage) {
+                flags |= VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT;
+            }
+            if (usage & kReadOnlyStorageBuffer) {
                 flags |= VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT;
             }
             if (usage & wgpu::BufferUsage::Indirect) {
