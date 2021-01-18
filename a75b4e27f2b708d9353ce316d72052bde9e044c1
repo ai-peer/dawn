@@ -50,6 +50,24 @@
       "message": "Mark, now that this CL has CR+2 (and all comments are addressed since there are no comments), you can CQ+2 it or press the \"Submit To CQ\" button to merge it.",
       "revId": "a75b4e27f2b708d9353ce316d72052bde9e044c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b60862c0_ac2d19d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002061
+      },
+      "writtenOn": "2021-01-18T08:16:22Z",
+      "side": 1,
+      "message": "Hi Corentin, thanks for the help, I think I\u0027m getting the idea. Is it OK to ask you questions about the whole process here or is there somewhere else I\u0027m supposed to do that.\n\nFor instance, I though I\u0027d look at another issue, but how do I know if someone else is working on it? Who assigns issues I guess? It\u0027s marked \u0027approved\u0027 so I\u0027m guessing someone wants it done, but by who?",
+      "parentUuid": "1de201ef_56281f96",
+      "revId": "a75b4e27f2b708d9353ce316d72052bde9e044c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
