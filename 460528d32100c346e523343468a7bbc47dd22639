@@ -50,6 +50,24 @@
       "message": "Could we use a temporary FBO here to avoid FRAMEBUFFER_INCOMPLETE too?",
       "revId": "460528d32100c346e523343468a7bbc47dd22639",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2539d6b2_5aa3205c",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T19:31:16Z",
+      "side": 1,
+      "message": "Done in the latest patch.",
+      "parentUuid": "c7726b67_6afef2eb",
+      "revId": "460528d32100c346e523343468a7bbc47dd22639",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
