@@ -88,12 +88,19 @@ namespace dawn_native { namespace vulkan {
                 return DAWN_INTERNAL_ERROR("vkEnumerateInstanceLayerProperties");
             }
 
-            info.layers.resize(count);
+            info.layersProperties.resize(count);
             DAWN_TRY(CheckVkSuccess(
-                vkFunctions.EnumerateInstanceLayerProperties(&count, info.layers.data()),
+                vkFunctions.EnumerateInstanceLayerProperties(&count, info.layersProperties.data()),
                 "vkEnumerateInstanceLayerProperties"));
 
-            for (const auto& layer : info.layers) {
+            std::unordered_map<std::string, InstanceLayer> knownLayers = CreateInstanceLayerNameMap();
+            for (const auto& layer : info.layersProperties) {
+                auto it = knownLayers.find(layer.layerName);
+                if (it != knownLayers.end()) {
+                    info.layers.set(it->second, true);
+                }
+
+                // XXX remove
                 if (IsLayerName(layer, kLayerNameKhronosValidation)) {
                     info.validation = true;
                 }
@@ -103,9 +110,6 @@ namespace dawn_native { namespace vulkan {
                 if (IsLayerName(layer, kLayerNameRenderDocCapture)) {
                     info.renderDocCapture = true;
                 }
-                // Technical note: Fuchsia implements the swapchain through
-                // a layer (VK_LAYER_FUCHSIA_image_pipe_swapchain), which adds
-                // an instance extensions (VK_FUCHSIA_image_surface) to all ICDs.
                 if (IsLayerName(layer, kLayerNameFuchsiaImagePipeSwapchain)) {
                     info.fuchsiaImagePipeSwapchain = true;
                 }

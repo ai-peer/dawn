@@ -33,18 +33,15 @@ namespace dawn_native { namespace vulkan {
 
     // Global information - gathered before the instance is created
     struct VulkanGlobalKnobs {
-        // Layers
-        bool validation = false;
-        bool vktrace = false;
-        bool renderDocCapture = false;
-        bool fuchsiaImagePipeSwapchain = false;
+        bool HasLayer(InstanceLayer layer) const;
+        InstanceLayerSet layers;
 
         bool HasExt(InstanceExt ext) const;
         InstanceExtSet extensions;
     };
 
     struct VulkanGlobalInfo : VulkanGlobalKnobs {
-        std::vector<VkLayerProperties> layers;
+        std::vector<VkLayerProperties> layersProperties;
         uint32_t apiVersion;
         // TODO(cwallez@chromium.org): layer instance extensions
     };
