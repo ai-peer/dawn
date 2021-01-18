@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f11592d_ccc158e8",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-18T08:46:06Z",
+      "side": 1,
+      "message": "That would work, although I have slight concerns that it will be Vulkan-specific logic in the frontend\u0027s Subresource.h common header.\n\nAlternatively, what do you think of adding a static constexpr Aspect kDepthStencilForMergedBarriers \u003d Aspect::Depth; with a reasonably fat comment in TextureVk?",
+      "parentUuid": "dbf43082_6419f270",
+      "range": {
+        "startLine": 822,
+        "startChar": 4,
+        "endLine": 831,
+        "endChar": 5
+      },
+      "revId": "83bb4092aaf3b34f470dcba2c9306410db373d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3eec94f6_a621866a",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 5
