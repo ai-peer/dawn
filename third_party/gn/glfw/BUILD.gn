@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import("//build/config/chromeos/ui_mode.gni")
 import("../../../scripts/dawn_overrides_with_defaults.gni")
 
 import("${dawn_root}/scripts/dawn_features.gni")
@@ -34,7 +35,7 @@ config("glfw_public") {
     defines = [ "_GLFW_COCOA" ]
   }
 
-  if (is_linux) {
+  if (is_linux || is_chromeos_lacros) {
     defines = [ "_GLFW_X11" ]
   }
 }
@@ -89,14 +90,14 @@ static_library("glfw") {
     ]
   }
 
-  if (is_linux || is_mac) {
+  if (is_linux || is_chromeos_lacros || is_mac) {
     sources += [
       "${glfw_dir}/src/posix_thread.c",
       "${glfw_dir}/src/posix_thread.h",
     ]
   }
 
-  if (is_linux) {
+  if (is_linux || is_chromeos_lacros) {
     sources += [
       "${glfw_dir}/src/glx_context.c",
       "${glfw_dir}/src/glx_context.h",

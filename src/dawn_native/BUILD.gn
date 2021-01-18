@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import("//build/config/chromeos/ui_mode.gni")
 import("../../scripts/dawn_overrides_with_defaults.gni")
 
 import("//build_overrides/build.gni")
@@ -564,12 +565,12 @@ source_set("dawn_native_sources") {
       "vulkan/external_semaphore/SemaphoreService.h",
     ]
 
-    if (is_chromeos) {
+    if (is_chromeos_ash) {
       sources += [
         "vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
       ]
-    } else if (is_linux) {
+    } else if (is_linux || is_chromeos_lacros) {
       sources += [
         "vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
         "vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
