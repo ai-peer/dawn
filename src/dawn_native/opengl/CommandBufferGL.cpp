@@ -780,11 +780,41 @@ namespace dawn_native { namespace opengl {
                     } else {
                         dstTexture->EnsureSubresourceContentInitialized(dstRange);
                     }
-                    gl.CopyImageSubData(srcTexture->GetHandle(), srcTexture->GetGLTarget(),
-                                        src.mipLevel, src.origin.x, src.origin.y, src.origin.z,
-                                        dstTexture->GetHandle(), dstTexture->GetGLTarget(),
-                                        dst.mipLevel, dst.origin.x, dst.origin.y, dst.origin.z,
-                                        copySize.width, copySize.height, copy->copySize.depth);
+                    if (gl.IsAtLeastGL(4, 3) || gl.IsAtLeastGLES(3, 2)) {
+                        gl.CopyImageSubData(srcTexture->GetHandle(), srcTexture->GetGLTarget(),
+                                            src.mipLevel, src.origin.x, src.origin.y, src.origin.z,
+                                            dstTexture->GetHandle(), dstTexture->GetGLTarget(),
+                                            dst.mipLevel, dst.origin.x, dst.origin.y, dst.origin.z,
+                                            copySize.width, copySize.height, copy->copySize.depth);
+                    } else {
+                        GLuint framebuffer = 0;
+                        gl.GenFramebuffers(1, &framebuffer);
+                        gl.BindFramebuffer(GL_READ_FRAMEBUFFER, framebuffer);
+                        for (uint32_t layer = 0; layer < copy->copySize.depth; ++layer) {
+                            if (srcTexture->GetArrayLayers() == 1) {
+                                gl.FramebufferTexture2D(GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                                        srcTexture->GetGLTarget(),
+                                                        srcTexture->GetHandle(), src.mipLevel);
+                            } else {
+                                gl.FramebufferTextureLayer(
+                                    GL_READ_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                    srcTexture->GetHandle(), static_cast<GLint>(src.mipLevel),
+                                    static_cast<GLint>(src.origin.z + layer));
+                            }
+                            gl.BindTexture(dstTexture->GetGLTarget(), dstTexture->GetHandle());
+                            if (dstTexture->GetArrayLayers() == 1) {
+                                gl.CopyTexSubImage2D(srcTexture->GetGLTarget(), dst.mipLevel,
+                                                     dst.origin.x, dst.origin.y, src.origin.x,
+                                                     src.origin.y, copySize.width, copySize.height);
+                            } else {
+                                gl.CopyTexSubImage3D(
+                                    srcTexture->GetGLTarget(), dst.mipLevel, dst.origin.x,
+                                    dst.origin.y, static_cast<GLint>(dst.origin.z + layer),
+                                    src.origin.x, src.origin.y, copySize.width, copySize.height);
+                            }
+                        }
+                        gl.DeleteFramebuffers(1, &framebuffer);
+                    }
                     break;
                 }
 
