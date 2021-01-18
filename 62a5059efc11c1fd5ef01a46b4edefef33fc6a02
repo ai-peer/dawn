@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "80796a58_358964c3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T17:33:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8911398_15ee307b",
+      "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "46faa267_2a444958",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5019cd4_39ff341a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T17:33:50Z",
+      "side": 1,
+      "message": "The tests are blocked on some other things (copy texture functionality). Will land that stuff first.",
+      "parentUuid": "b6433315_539d0bb1",
+      "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0e63963_6e7ad0bd",
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af7c7279_8aebce7f",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T17:33:50Z",
+      "side": 1,
+      "message": "Yes. Sorry, didn\u0027t mean to mark this as ready for review. Just more like a \"does this seem like a good direction to pursue or am I hopelessly naive\" kind of upload.",
+      "parentUuid": "f0e63963_6e7ad0bd",
+      "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "746ff427_c551d765",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 1
@@ -82,6 +136,24 @@
       "writtenOn": "2021-01-15T12:54:57Z",
       "side": 1,
       "message": "We should use a temporary FBO, right now it could be anything and end up framebuffer incomplete.",
+      "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38df3cd9_c415842c",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-18T17:33:50Z",
+      "side": 1,
+      "message": "Good point; will do that in my other patch.",
+      "parentUuid": "746ff427_c551d765",
       "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
