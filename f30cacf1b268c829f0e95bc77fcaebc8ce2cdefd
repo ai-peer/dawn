@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6196e577_3896a967",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T15:56:48Z",
+      "side": 1,
+      "message": "Nit: \"and requires\"?",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1d3b7c3_2b905bb6",
@@ -14,6 +31,40 @@
       "writtenOn": "2021-01-19T14:07:59Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46c344df_b1d3809a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T15:56:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c9b0733_a7e418da",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T15:56:48Z",
+      "side": 1,
+      "message": "A Venn diagram might be useful. (Only half kidding.)",
       "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
