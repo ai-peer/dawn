@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5ccd55c_0eebaccf",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T22:46:23Z",
+      "side": 1,
+      "message": "OK, it\u0027s in a better state now (enabled and passing all QueueWriteTextureTests).\n\nHowever, it\u0027s super-non-optimized. It should really be using PBOs. Which begs the question, why isn\u0027t StagingBuffer implemented for GL? Is it not implementable using PBOs? That would obviate the need for GL to have a bespoke WriteTexture implementation, and the need for this CL.",
+      "parentUuid": "af7c7279_8aebce7f",
+      "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "746ff427_c551d765",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 1
