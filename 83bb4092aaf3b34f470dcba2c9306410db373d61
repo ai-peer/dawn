@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5003d3b6_f916c376",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 831,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-19T18:12:44Z",
+      "side": 1,
+      "message": "The concern though is that some non-barrier-transitioning code in the Vulkan backend might be written that looks at |mSubresourceLastUsages|. And it gets back an Aspect, iterates on it, and assumes that it\u0027s iterated all the aspects of the subresource. It would look right, but actually be wrong since it only iterated Depth of a combined D/S texture. Having an enum value that\u0027s distinct from Aspect::Depth would make it clear that this is a bug since it would likely be UNREACHABLE() inside a switch statement.",
+      "parentUuid": "8f11592d_ccc158e8",
+      "range": {
+        "startLine": 822,
+        "startChar": 4,
+        "endLine": 831,
+        "endChar": 5
+      },
+      "revId": "83bb4092aaf3b34f470dcba2c9306410db373d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3eec94f6_a621866a",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 5
