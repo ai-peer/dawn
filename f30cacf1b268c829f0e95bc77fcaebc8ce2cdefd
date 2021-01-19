@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66484e23_111a1d39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-19T18:47:08Z",
+      "side": 1,
+      "message": "LGMT too",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c9b0733_a7e418da",
@@ -65,6 +82,29 @@
       "writtenOn": "2021-01-19T15:56:48Z",
       "side": 1,
       "message": "A Venn diagram might be useful. (Only half kidding.)",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfeb0ca_75300d24",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-19T18:47:08Z",
+      "side": 1,
+      "message": "could we pass in an optional SubresourceRange? BuildMemoryBarrier knows the range it\u0027s operating on, so we may be able to choose more optimal layouts. This code was already like this, so doesn\u0027t have to happen now.",
+      "range": {
+        "startLine": 403,
+        "startChar": 55,
+        "endLine": 405,
+        "endChar": 27
+      },
       "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
