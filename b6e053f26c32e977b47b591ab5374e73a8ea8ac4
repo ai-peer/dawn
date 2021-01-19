@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61003187_974783e8",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-19T17:57:51Z",
+      "side": 1,
+      "message": "will this work for depth/stencil textures?\n\nwebgpu\u0027s copyTextureToTexture is allowed for depth/stencil textures, though it must copy all of the aspects for a combined depth/stencil texture.",
+      "range": {
+        "startLine": 795,
+        "startChar": 77,
+        "endLine": 795,
+        "endChar": 97
+      },
+      "revId": "b6e053f26c32e977b47b591ab5374e73a8ea8ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
