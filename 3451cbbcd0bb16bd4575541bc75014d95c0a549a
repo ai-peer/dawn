@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f72980_e76dfc74",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T19:15:06Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ad35bf9d_0ca0d2e4",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "626b70a5_482eb26d",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-01-19T09:42:38Z",
       "side": 1,
       "message": "Is it invalid to call glFramebufferTextureLayer for a 2D texture? It would simplify code if that was legal.",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba920199_52800cb3",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T19:15:06Z",
+      "side": 1,
+      "message": "Not sure. Will try in the other patch. This ones doesn\u0027t work, and I\u0027m not sure why.",
+      "parentUuid": "626b70a5_482eb26d",
       "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
