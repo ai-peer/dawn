@@ -16,6 +16,24 @@
       "message": "Is glClearBufferiv affect by Scissor state? I believe we might need to disable scissor before this (and reenable it afterwards)",
       "revId": "ce9b6fbbc3ac7d1e3e2d73a490da0c387dc05395",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "803d2b2d_4695b99e",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T16:43:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f3cdfa_9ede1544",
+      "revId": "ce9b6fbbc3ac7d1e3e2d73a490da0c387dc05395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
