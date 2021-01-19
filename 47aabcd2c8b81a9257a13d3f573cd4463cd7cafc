@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bef5c9f3_12c4f58f",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000861
+      },
+      "writtenOn": "2021-01-19T19:56:24Z",
+      "side": 1,
+      "message": "Done, added 2 notes, one for delaying creating the root signature until we know how many constants we need and another one for moving the entry to the beginning of the signature.",
+      "parentUuid": "70367357_b771799c",
+      "revId": "47aabcd2c8b81a9257a13d3f573cd4463cd7cafc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceb044ab_59bfba1e",
