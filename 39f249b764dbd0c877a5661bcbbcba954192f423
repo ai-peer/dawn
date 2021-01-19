@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "39f249b764dbd0c877a5661bcbbcba954192f423",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc24a6c8_b9d2b217",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-19T18:20:28Z",
+      "side": 1,
+      "message": "LGTM too (not triggering submit b.c. it needs a rebase)",
+      "revId": "39f249b764dbd0c877a5661bcbbcba954192f423",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
