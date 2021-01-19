@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc317b59_f0ce3832",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T14:53:57Z",
+      "side": 1,
+      "message": "I seem to remember advice from Scott Myers (I think?) that if you overload \u003d\u003d, you should also overload !\u003d to avoid surprising behaviour. But I can\u0027t find it ATM.",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f206bc_cd62c07a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T14:53:57Z",
+      "side": 1,
+      "message": "Drive-by comments (should still be looked at by Yunchao and Austin).",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8296c42_c1522496",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T14:53:57Z",
+      "side": 1,
+      "message": "\u003cunpopular_opinion_puffin\u003eI actually found the code more readable without the lambda.\u003c/unpopular_opinion_puffin\u003e",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1420bc3a_95d41514",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T14:53:57Z",
+      "side": 1,
+      "message": "This is still a PassTextureUsage, not a PassResourceUsage, no? I see no change to this declaration in this CL:\n\nstd::map\u003cTextureBase*, PassTextureUsage\u003e mTextureUsages;",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90762a4a_38960ce0",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T14:53:57Z",
+      "side": 1,
+      "message": "Ibid",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeba8648_f1d24746",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T14:53:57Z",
+      "side": 1,
+      "message": "Grammar nit: This sentence is a bit awkward; I\u0027d reverse the order:\n\n\"In base Vulkan, Depth and stencil can only be transitioned together. This function indicates whether we should combine depth and stencil barriers to accommodate this limitation.\"",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
