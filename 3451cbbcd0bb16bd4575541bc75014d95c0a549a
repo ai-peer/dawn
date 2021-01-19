@@ -86,6 +86,24 @@
       "parentUuid": "626b70a5_482eb26d",
       "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03e2f2ba_71da811b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-19T19:42:54Z",
+      "side": 1,
+      "message": "Nope, tried in the other patch. Didn\u0027t work. From the docs:\n\n\"texture must either be zero or the name of an existing three-dimensional texture, or a two-dimensional array texture.\"",
+      "parentUuid": "ba920199_52800cb3",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
