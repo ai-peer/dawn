@@ -13,61 +13,8 @@
 # limitations under the License.
 
 import("//build_overrides/build.gni")
+import("//testing/libfuzzer/fuzzer_test.gni")
 import("../../scripts/dawn_overrides_with_defaults.gni")
-
-# We only have libfuzzer in Chromium builds but if we build fuzzer targets only
-# there, we would risk breaking fuzzer targets all the time when making changes
-# to Dawn. To avoid that, we make fuzzer targets compile in standalone builds
-# as well with a dawn_fuzzer_test target that acts like Chromium's fuzzer_test.
-#
-# The standalone fuzzer targets are able to run a single fuzzer input which
-# could help reproduce fuzzer crashes more easily because you don't need a
-# whole Chromium checkout.
-
-if (build_with_chromium) {
-  import("//testing/libfuzzer/fuzzer_test.gni")
-
-  # In Chromium build we just proxy everything to the real fuzzer_test
-  template("dawn_fuzzer_test") {
-    fuzzer_test(target_name) {
-      forward_variables_from(invoker, "*")
-    }
-  }
-} else {
-  import("//testing/test.gni")
-
-  # In standalone build we do something similar to fuzzer_test.
-  template("dawn_fuzzer_test") {
-    test(target_name) {
-      forward_variables_from(invoker,
-                             [
-                               "asan_options",
-                               "cflags",
-                               "cflags_cc",
-                               "check_includes",
-                               "defines",
-                               "deps",
-                               "include_dirs",
-                               "sources",
-                             ])
-
-      if (defined(asan_options)) {
-        not_needed([ "asan_options" ])
-      }
-
-      if (!defined(configs)) {
-        configs = []
-      }
-
-      # Weirdly fuzzer_test uses a special variable for additional configs.
-      if (defined(invoker.additional_configs)) {
-        configs += invoker.additional_configs
-      }
-
-      sources += [ "StandaloneFuzzerMain.cpp" ]
-    }
-  }
-}
 
 static_library("dawn_spirv_cross_fuzzer_common") {
   sources = [
@@ -98,13 +45,13 @@ static_library("dawn_wire_server_fuzzer_common") {
 # TODO(rharrison): Remove asan_options once signal trap is no longer
 #                  needed.
 # Uses Dawn specific options and varies input data
-dawn_fuzzer_test("dawn_spirv_cross_glsl_fast_fuzzer") {
+fuzzer_test("dawn_spirv_cross_glsl_fast_fuzzer") {
   sources = [ "DawnSPIRVCrossGLSLFastFuzzer.cpp" ]
   deps = [ ":dawn_spirv_cross_fuzzer_common" ]
   asan_options = [ "allow_user_segv_handler=1" ]
 }
 
-dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
+fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
   sources = [ "DawnWireServerAndFrontendFuzzer.cpp" ]
 
   deps = [ ":dawn_wire_server_fuzzer_common" ]
@@ -113,7 +60,7 @@ dawn_fuzzer_test("dawn_wire_server_and_frontend_fuzzer") {
 }
 
 if (is_win) {
-  dawn_fuzzer_test("dawn_wire_server_and_d3d12_backend_fuzzer") {
+  fuzzer_test("dawn_wire_server_and_d3d12_backend_fuzzer") {
     sources = [ "DawnWireServerAndD3D12BackendFuzzer.cpp" ]
 
     deps = [ ":dawn_wire_server_fuzzer_common" ]
@@ -122,7 +69,7 @@ if (is_win) {
   }
 }
 
-dawn_fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
+fuzzer_test("dawn_wire_server_and_vulkan_backend_fuzzer") {
   sources = [ "DawnWireServerAndVulkanBackendFuzzer.cpp" ]
 
   deps = [ ":dawn_wire_server_fuzzer_common" ]

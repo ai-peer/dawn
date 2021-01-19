@@ -45,6 +45,10 @@ deps = {
     'url': '{chromium_git}/external/github.com/google/googletest@2828773179fa425ee406df61890a150577178ea2',
     'condition': 'dawn_standalone',
   },
+  'third_party/libFuzzer/src': {
+    'url': '{chromium_git}/chromium/llvm-project/compiler-rt/lib/fuzzer@debe7d2d1982e540fbd6bd78604bf001753f9e74',
+    'condition': 'dawn_standalone',
+  },
 
   # Jinja2 and MarkupSafe for the code generator
   'third_party/jinja2': {
