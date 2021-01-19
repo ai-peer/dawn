@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8a51eee_823b28c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-19T09:42:38Z",
+      "side": 1,
+      "message": "LGTM but does this allow enabling some tests?",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad35bf9d_0ca0d2e4",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-19T09:42:38Z",
+      "side": 1,
+      "message": "ditto, we might need to disable the scissor test for the blit",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626b70a5_482eb26d",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 801,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-19T09:42:38Z",
+      "side": 1,
+      "message": "Is it invalid to call glFramebufferTextureLayer for a 2D texture? It would simplify code if that was legal.",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
