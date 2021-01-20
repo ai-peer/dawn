@@ -598,6 +598,7 @@ class WireServerTraceLayer : public dawn_wire::CommandHandler {
   public:
     WireServerTraceLayer(const char* file, dawn_wire::CommandHandler* handler)
         : dawn_wire::CommandHandler(), mHandler(handler) {
+        dawn::InfoLog() << "Writing wire trace to " << file;
         mFile.open(file, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
     }
 
