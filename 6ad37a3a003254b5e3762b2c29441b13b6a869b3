@@ -33,6 +33,24 @@
       "message": "LGTM too, I somehow thought this was superseeded by the Blit approach.",
       "revId": "6ad37a3a003254b5e3762b2c29441b13b6a869b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34cca74f_f8a45c76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T14:55:48Z",
+      "side": 1,
+      "message": "Yesterday this CL was the only version that was working. Now that the blit version is working, I\u0027ll probably go with that. Sorry for the noise.",
+      "parentUuid": "88692a66_24a0327b",
+      "revId": "6ad37a3a003254b5e3762b2c29441b13b6a869b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
