@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d00449c8_eaaa70d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T14:16:18Z",
+      "side": 1,
+      "message": "The tests are already enabled and are passing on ES 3.2 without this patch. Now passing on ES 3.1 with this patch.",
+      "parentUuid": "c8a51eee_823b28c0",
+      "revId": "3451cbbcd0bb16bd4575541bc75014d95c0a549a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad35bf9d_0ca0d2e4",
