@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d434ce86_7a7e0d7f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-20T16:47:48Z",
+      "side": 1,
+      "message": "nit: Bug id",
+      "revId": "be33956c61efe96580cbd47ad62044cdb5bc2d31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0120a4f3_3fd26884",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-20T16:47:48Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "be33956c61efe96580cbd47ad62044cdb5bc2d31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
