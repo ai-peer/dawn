@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32852c71_cff0e766",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T17:42:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "af349550127db24eb24ab8f14b90deb9231f3117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
