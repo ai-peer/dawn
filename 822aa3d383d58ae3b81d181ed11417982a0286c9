@@ -50,6 +50,24 @@
       "message": "Naming nit: I\u0027m not fond of \"Info\" as a suffix, since it carries no, er, information.  Maybe ChildList? Or ChildObjects or DeviceChildObjectList or.. ?",
       "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c01cd6c0_2b977664",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-20T23:40:27Z",
+      "side": 1,
+      "message": "Hm.. https://dawn-review.googlesource.com/c/dawn/+/38282 adds some more stuff into this struct though, so it sort of has to be general. Maybe DeviceDataAllocation? but that\u0027s not so much better.",
+      "parentUuid": "33121339_e1058b90",
+      "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
