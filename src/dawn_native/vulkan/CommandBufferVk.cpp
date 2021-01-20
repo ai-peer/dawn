@@ -1183,11 +1183,19 @@ namespace dawn_native { namespace vulkan {
                 }
 
                 case Command::BeginOcclusionQuery: {
-                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                    BeginOcclusionQueryCmd* cmd = mCommands.NextCommand<BeginOcclusionQueryCmd>();
+                    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+
+                    device->fn.CmdBeginQuery(commands, querySet->GetHandle(), cmd->queryIndex, 0);
+                    break;
                 }
 
                 case Command::EndOcclusionQuery: {
-                    return DAWN_UNIMPLEMENTED_ERROR("Waiting for implementation.");
+                    EndOcclusionQueryCmd* cmd = mCommands.NextCommand<EndOcclusionQueryCmd>();
+                    QuerySet* querySet = ToBackend(cmd->querySet.Get());
+
+                    device->fn.CmdEndQuery(commands, querySet->GetHandle(), cmd->queryIndex);
+                    break;
                 }
 
                 case Command::WriteTimestamp: {

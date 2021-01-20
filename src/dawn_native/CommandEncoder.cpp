@@ -16,6 +16,7 @@
 
 #include "common/BitSetIterator.h"
 #include "common/Math.h"
+#include "dawn_native/Adapter.h"
 #include "dawn_native/BindGroup.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
@@ -392,11 +393,11 @@ namespace dawn_native {
             return {};
         }
 
-        void EncodeTimestampsToNanosecondsConversion(CommandEncoder* encoder,
-                                                     QuerySetBase* querySet,
-                                                     uint32_t queryCount,
-                                                     BufferBase* destination,
-                                                     uint64_t destinationOffset) {
+        void EncodeQueryResultConversionHelper(CommandEncoder* encoder,
+                                               QuerySetBase* querySet,
+                                               uint32_t queryCount,
+                                               BufferBase* destination,
+                                               uint64_t destinationOffset) {
             DeviceBase* device = encoder->GetDevice();
 
             std::vector<uint32_t> availability;
@@ -407,7 +408,7 @@ namespace dawn_native {
                 availability.resize(querySet->GetQueryCount());
             }
 
-            // Timestamp availability storage buffer
+            // Queries availability storage buffer
             BufferDescriptor availabilityDesc = {};
             availabilityDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst;
             availabilityDesc.size = querySet->GetQueryCount() * sizeof(uint32_t);
@@ -416,7 +417,7 @@ namespace dawn_native {
             device->GetDefaultQueue()->WriteBuffer(availabilityBuffer.Get(), 0, availability.data(),
                                                    querySet->GetQueryCount() * sizeof(uint32_t));
 
-            // Timestamp params uniform buffer
+            // Queries params uniform buffer
             TimestampParams params = {queryCount, static_cast<uint32_t>(destinationOffset),
                                       device->GetTimestampPeriodInNS()};
             BufferDescriptor parmsDesc = {};
@@ -425,8 +426,8 @@ namespace dawn_native {
             Ref<BufferBase> paramsBuffer = AcquireRef(device->CreateBuffer(&parmsDesc));
             device->GetDefaultQueue()->WriteBuffer(paramsBuffer.Get(), 0, &params, sizeof(params));
 
-            EncodeConvertTimestampsToNanoseconds(encoder, destination, availabilityBuffer.Get(),
-                                                 paramsBuffer.Get());
+            EncodeQueryResultConversion(encoder, querySet->GetQueryType(), destination,
+                                        availabilityBuffer.Get(), paramsBuffer.Get());
         }
 
     }  // namespace
@@ -830,10 +831,14 @@ namespace dawn_native {
             cmd->destination = destination;
             cmd->destinationOffset = destinationOffset;
 
-            // Encode internal compute pipeline for timestamp query
-            if (querySet->GetQueryType() == wgpu::QueryType::Timestamp) {
-                EncodeTimestampsToNanosecondsConversion(this, querySet, queryCount, destination,
-                                                        destinationOffset);
+            // Encode internal compute pipeline
+            wgpu::QueryType queryType = querySet->GetQueryType();
+            wgpu::BackendType backupType = GetDevice()->GetAdapter()->GetBackendType();
+            if (queryType == wgpu::QueryType::Timestamp ||
+                (queryType == wgpu::QueryType::Occlusion &&
+                 backupType == wgpu::BackendType::Vulkan)) {
+                EncodeQueryResultConversionHelper(this, querySet, queryCount, destination,
+                                                  destinationOffset);
             }
 
             return {};

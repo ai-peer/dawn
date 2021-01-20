@@ -17,6 +17,8 @@
 
 #include "dawn_native/ObjectBase.h"
 
+#include "dawn_native/dawn_platform.h"
+
 namespace dawn_native {
 
     class BufferBase;
@@ -29,10 +31,16 @@ namespace dawn_native {
         float period;
     };
 
-    void EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,
-                                              BufferBase* timestamps,
-                                              BufferBase* availability,
-                                              BufferBase* params);
+    struct OcclusionParams {
+        uint32_t count;
+        uint32_t offset;
+    };
+
+    void EncodeQueryResultConversion(CommandEncoder* encoder,
+                                     wgpu::QueryType type,
+                                     BufferBase* queries,
+                                     BufferBase* availability,
+                                     BufferBase* params);
 
 }  // namespace dawn_native
 

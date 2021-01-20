@@ -105,6 +105,62 @@ namespace dawn_native {
             }
         )";
 
+        // Assert the offsets in dawn_native::OcclusionParams are same with the ones in the shader
+        static_assert(offsetof(dawn_native::OcclusionParams, count) == 0, "");
+        static_assert(offsetof(dawn_native::OcclusionParams, offset) == 4, "");
+
+        static const char sConvertOcclusionToBinary[] = R"(
+            struct Occlusion {
+                [[offset(0)]] low  : u32;
+                [[offset(4)]] high : u32;
+            };
+
+            [[block]] struct OcclusionArr {
+                [[offset(0)]] t : [[stride(8)]] array<Occlusion>;
+            };
+
+            [[block]] struct AvailabilityArr {
+                [[offset(0)]] v : [[stride(4)]] array<u32>;
+            };
+
+            [[block]] struct OcclusionParams {
+                [[offset(0)]]  count  : u32;
+                [[offset(4)]]  offset : u32;
+            };
+
+            [[set(0), binding(0)]]
+                var<storage_buffer> occlusions : [[access(read_write)]] OcclusionArr;
+            [[set(0), binding(1)]]
+                var<storage_buffer> availability : [[access(read)]] AvailabilityArr;
+            [[set(0), binding(2)]] var<uniform> params : OcclusionParams;
+
+            [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
+
+            const sizeofOcclusion : u32 = 8u;
+
+            [[stage(compute), workgroup_size(8, 1, 1)]]
+            fn main() -> void {
+                if (GlobalInvocationID.x >= params.count) { return; }
+
+                var index : u32 = GlobalInvocationID.x + params.offset / sizeofOcclusion;
+
+                # Return 0 for the unavailable value.
+                if (availability.v[index] == 0u) {
+                    occlusions.t[index].low = 0u;
+                    occlusions.t[index].high = 0u;
+                    return;
+                }
+
+                var occlusion : Occlusion = occlusions.t[index];
+
+                # Normalize the occlusion value greater than 1 to 1 as binary result
+                if (occlusion.low > 0 || occlusion.high > 0) {
+                    occlusions.t[index].low = 1u;
+                    occlusions.t[index].high = 0u;
+                }
+            }
+        )";
+
         ComputePipelineBase* GetOrCreateTimestampComputePipeline(DeviceBase* device) {
             InternalPipelineStore* store = device->GetInternalPipelineStore();
 
@@ -133,47 +189,90 @@ namespace dawn_native {
             return store->timestampComputePipeline.Get();
         }
 
+        ComputePipelineBase* GetOrCreateOcclusionComputePipeline(DeviceBase* device) {
+            InternalPipelineStore* store = device->GetInternalPipelineStore();
+
+            if (store->occlusionComputePipeline == nullptr) {
+                // Create compute shader module if not cached before.
+                if (store->occlusionCS == nullptr) {
+                    ShaderModuleDescriptor descriptor;
+                    ShaderModuleWGSLDescriptor wgslDesc;
+                    wgslDesc.source = sConvertOcclusionToBinary;
+                    descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
+
+                    store->occlusionCS = AcquireRef(device->CreateShaderModule(&descriptor));
+                }
+
+                // Create ComputePipeline.
+                ComputePipelineDescriptor computePipelineDesc = {};
+                // Generate the layout based on shader module.
+                computePipelineDesc.layout = nullptr;
+                computePipelineDesc.computeStage.module = store->occlusionCS.Get();
+                computePipelineDesc.computeStage.entryPoint = "main";
+
+                store->occlusionComputePipeline =
+                    AcquireRef(device->CreateComputePipeline(&computePipelineDesc));
+            }
+
+            return store->occlusionComputePipeline.Get();
+        }
+
+        ComputePipelineBase* GetOrCreateQueryComputePipeline(DeviceBase* device,
+                                                             wgpu::QueryType type) {
+            switch (type) {
+                case wgpu::QueryType::Timestamp:
+                    return GetOrCreateTimestampComputePipeline(device);
+                case wgpu::QueryType::Occlusion:
+                    return GetOrCreateOcclusionComputePipeline(device);
+                default:
+                    return nullptr;
+            }
+        }
+
     }  // anonymous namespace
 
-    void EncodeConvertTimestampsToNanoseconds(CommandEncoder* encoder,
-                                              BufferBase* timestamps,
-                                              BufferBase* availability,
-                                              BufferBase* params) {
+    void EncodeQueryResultConversion(CommandEncoder* encoder,
+                                     wgpu::QueryType type,
+                                     BufferBase* queries,
+                                     BufferBase* availability,
+                                     BufferBase* params) {
         DeviceBase* device = encoder->GetDevice();
 
-        ComputePipelineBase* pipeline = GetOrCreateTimestampComputePipeline(device);
+        ComputePipelineBase* pipeline = GetOrCreateQueryComputePipeline(device, type);
 
-        // Prepare bind group layout.
-        Ref<BindGroupLayoutBase> layout = AcquireRef(pipeline->GetBindGroupLayout(0));
+        if (pipeline != nullptr) {
+            // Prepare bind group layout.
+            Ref<BindGroupLayoutBase> layout = AcquireRef(pipeline->GetBindGroupLayout(0));
 
-        // Prepare bind group descriptor
-        std::array<BindGroupEntry, 3> bindGroupEntries = {};
-        BindGroupDescriptor bgDesc = {};
-        bgDesc.layout = layout.Get();
-        bgDesc.entryCount = 3;
-        bgDesc.entries = bindGroupEntries.data();
+            // Prepare bind group descriptor
+            std::array<BindGroupEntry, 3> bindGroupEntries = {};
+            BindGroupDescriptor bgDesc = {};
+            bgDesc.layout = layout.Get();
+            bgDesc.entryCount = 3;
+            bgDesc.entries = bindGroupEntries.data();
 
-        // Set bind group entries.
-        bindGroupEntries[0].binding = 0;
-        bindGroupEntries[0].buffer = timestamps;
-        bindGroupEntries[0].size = timestamps->GetSize();
-        bindGroupEntries[1].binding = 1;
-        bindGroupEntries[1].buffer = availability;
-        bindGroupEntries[1].size = availability->GetSize();
-        bindGroupEntries[2].binding = 2;
-        bindGroupEntries[2].buffer = params;
-        bindGroupEntries[2].size = params->GetSize();
+            // Set bind group entries.
+            bindGroupEntries[0].binding = 0;
+            bindGroupEntries[0].buffer = queries;
+            bindGroupEntries[0].size = queries->GetSize();
+            bindGroupEntries[1].binding = 1;
+            bindGroupEntries[1].buffer = availability;
+            bindGroupEntries[1].size = availability->GetSize();
+            bindGroupEntries[2].binding = 2;
+            bindGroupEntries[2].buffer = params;
+            bindGroupEntries[2].size = params->GetSize();
 
-        // Create bind group after all binding entries are set.
-        Ref<BindGroupBase> bindGroup = AcquireRef(device->CreateBindGroup(&bgDesc));
+            // Create bind group after all binding entries are set.
+            Ref<BindGroupBase> bindGroup = AcquireRef(device->CreateBindGroup(&bgDesc));
 
-        // Create compute encoder and issue dispatch.
-        ComputePassDescriptor passDesc = {};
-        Ref<ComputePassEncoder> pass = AcquireRef(encoder->BeginComputePass(&passDesc));
-        pass->SetPipeline(pipeline);
-        pass->SetBindGroup(0, bindGroup.Get());
-        pass->Dispatch(static_cast<uint32_t>((timestamps->GetSize() / sizeof(uint64_t) + 7) / 8));
-        pass->EndPass();
+            // Create compute encoder and issue dispatch.
+            ComputePassDescriptor passDesc = {};
+            Ref<ComputePassEncoder> pass = AcquireRef(encoder->BeginComputePass(&passDesc));
+            pass->SetPipeline(pipeline);
+            pass->SetBindGroup(0, bindGroup.Get());
+            pass->Dispatch(static_cast<uint32_t>((queries->GetSize() / sizeof(uint64_t) + 7) / 8));
+            pass->EndPass();
+        }
     }
 
 }  // namespace dawn_native

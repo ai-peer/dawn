@@ -188,8 +188,8 @@ TEST_P(OcclusionQueryTests, QuerySetDestroy) {
 // 0 indicates that no sample passed depth/stencil testing,
 // 1 indicates that at least one sample passed depth/stencil testing.
 TEST_P(OcclusionQueryTests, QueryWithDepthStencilTest) {
-    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal and Vulkan
-    DAWN_SKIP_TEST_IF(IsMetal() || IsVulkan());
+    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     // Disable depth/stencil testing, the samples always pass the testing, the expected occlusion
     // result is 1.
@@ -209,8 +209,8 @@ TEST_P(OcclusionQueryTests, QueryWithDepthStencilTest) {
 // 0 indicates that no sample passed scissor testing,
 // 1 indicates that at least one sample passed scissor testing.
 TEST_P(OcclusionQueryTests, QueryWithScissorTest) {
-    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal and Vulkan
-    DAWN_SKIP_TEST_IF(IsMetal() || IsVulkan());
+    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     // Test there are samples passed scissor testing, the expected occlusion result is 1.
     TestOcclusionQueryWithScissorTest({2, 1, 2, 1}, 1);

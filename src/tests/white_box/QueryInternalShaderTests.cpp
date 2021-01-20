@@ -25,8 +25,9 @@ namespace {
                                               wgpu::Buffer timestamps,
                                               wgpu::Buffer availability,
                                               wgpu::Buffer params) {
-        dawn_native::EncodeConvertTimestampsToNanoseconds(
+        dawn_native::EncodeQueryResultConversion(
             reinterpret_cast<dawn_native::CommandEncoder*>(encoder.Get()),
+            wgpu::QueryType::Timestamp,
             reinterpret_cast<dawn_native::BufferBase*>(timestamps.Get()),
             reinterpret_cast<dawn_native::BufferBase*>(availability.Get()),
             reinterpret_cast<dawn_native::BufferBase*>(params.Get()));
