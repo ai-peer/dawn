@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da82a689_ca17cbbd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T17:13:44Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "b8ec0e15a8850d6c75346c4b0f5fa3a988ffef7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c20deae_4817c797",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T17:13:44Z",
+      "side": 1,
+      "message": "Is this still comment (\"only on Depth\") still true? I see the updated range has CombinedDepthStencil aspects. Is there another parameter that\u0027s still only Depth?",
+      "revId": "b8ec0e15a8850d6c75346c4b0f5fa3a988ffef7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
