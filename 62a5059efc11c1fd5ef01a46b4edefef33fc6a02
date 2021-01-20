@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc5bfff2_1c9042cf",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-20T02:35:42Z",
+      "side": 1,
+      "message": "I\u0027m not completely sure, but I don\u0027t think there\u0027s a particular reason  - we just didn\u0027t implement the StagingBuffer at the time. I could see Dawn wanting to use the StagingBuffer for other things as well to make internal uploads, so implementing it could become useful.",
+      "parentUuid": "d5ccd55c_0eebaccf",
+      "revId": "62a5059efc11c1fd5ef01a46b4edefef33fc6a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "746ff427_c551d765",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 1
