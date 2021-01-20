@@ -33,6 +33,24 @@
       "message": "Is this still comment (\"only on Depth\") still true? I see the updated range has CombinedDepthStencil aspects. Is there another parameter that\u0027s still only Depth?",
       "revId": "b8ec0e15a8850d6c75346c4b0f5fa3a988ffef7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaa577b9_2950865d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T17:37:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c20deae_4817c797",
+      "revId": "b8ec0e15a8850d6c75346c4b0f5fa3a988ffef7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
