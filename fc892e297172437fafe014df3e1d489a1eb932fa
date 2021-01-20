@@ -73,6 +73,30 @@
       },
       "revId": "fc892e297172437fafe014df3e1d489a1eb932fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd583a8b_6cbafeae",
+        "filename": "src/include/dawn_platform/DawnPlatform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-20T03:05:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a5eaaa3_9aefa585",
+      "range": {
+        "startLine": 105,
+        "startChar": 21,
+        "endLine": 105,
+        "endChar": 31
+      },
+      "revId": "fc892e297172437fafe014df3e1d489a1eb932fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
