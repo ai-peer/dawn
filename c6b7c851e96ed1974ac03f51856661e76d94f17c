@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84ed5500_5256e620",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 814,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T08:23:22Z",
+      "side": 1,
+      "message": "nit: scissor is still not handled.",
+      "revId": "c6b7c851e96ed1974ac03f51856661e76d94f17c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
