@@ -22,6 +22,30 @@
       },
       "revId": "b6e053f26c32e977b47b591ab5374e73a8ea8ac4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e95835e8_41342aad",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T13:58:37Z",
+      "side": 1,
+      "message": "Doubtful. This passes all the CopyTests, but I don\u0027t think those cover depth/stencil.\n\nI\u0027ll take a look at that in a followup patch.",
+      "parentUuid": "61003187_974783e8",
+      "range": {
+        "startLine": 795,
+        "startChar": 77,
+        "endLine": 795,
+        "endChar": 97
+      },
+      "revId": "b6e053f26c32e977b47b591ab5374e73a8ea8ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
