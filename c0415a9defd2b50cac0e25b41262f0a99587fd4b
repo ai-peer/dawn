@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b5d23bfc_7d6e223a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:47:46Z",
+      "side": 1,
+      "message": "I think it\u0027s to avoid the problem I found and also to avoid implicit fallback to an incompatible !\u003d operator. I\u0027ll keep things as is but I\u0027m happy to change it in a follow up if you think it\u0027s better to have operator !\u003d.",
+      "parentUuid": "bc317b59_f0ce3832",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "87f206bc_cd62c07a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 9
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea0d53f8_c7b93523",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:47:46Z",
+      "side": 1,
+      "message": "Agreed, but the current code also does more stuff and is less error prone. (just more verbose because of the error handling).",
+      "parentUuid": "c8296c42_c1522496",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1420bc3a_95d41514",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-01-19T14:53:57Z",
       "side": 1,
       "message": "This is still a PassTextureUsage, not a PassResourceUsage, no? I see no change to this declaration in this CL:\n\nstd::map\u003cTextureBase*, PassTextureUsage\u003e mTextureUsages;",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5592a393_ec546667",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:47:46Z",
+      "side": 1,
+      "message": "Done, I meant PassTextureUsage.",
+      "parentUuid": "1420bc3a_95d41514",
       "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef2d283_0e207211",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90762a4a_38960ce0",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aeba8648_f1d24746",
@@ -99,6 +171,24 @@
       "writtenOn": "2021-01-19T14:53:57Z",
       "side": 1,
       "message": "Grammar nit: This sentence is a bit awkward; I\u0027d reverse the order:\n\n\"In base Vulkan, Depth and stencil can only be transitioned together. This function indicates whether we should combine depth and stencil barriers to accommodate this limitation.\"",
+      "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2adb47f3_fb23fae3",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:47:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeba8648_f1d24746",
       "revId": "c0415a9defd2b50cac0e25b41262f0a99587fd4b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
