@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "808705fd_4eef47cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T18:23:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6196e577_3896a967",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c1d3b7c3_2b905bb6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67c15e95_358f553f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T18:23:09Z",
+      "side": 1,
+      "message": "Ahhh I think this can now be simplified with subresource tracking. I\u0027ll add a TODO.",
+      "parentUuid": "0c9b0733_a7e418da",
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dfeb0ca_75300d24",
@@ -99,6 +135,30 @@
       "writtenOn": "2021-01-19T18:47:08Z",
       "side": 1,
       "message": "could we pass in an optional SubresourceRange? BuildMemoryBarrier knows the range it\u0027s operating on, so we may be able to choose more optimal layouts. This code was already like this, so doesn\u0027t have to happen now.",
+      "range": {
+        "startLine": 403,
+        "startChar": 55,
+        "endLine": 405,
+        "endChar": 27
+      },
+      "revId": "f30cacf1b268c829f0e95bc77fcaebc8ce2cdefd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba7bfe6_bfc4d1e7",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T18:23:09Z",
+      "side": 1,
+      "message": "We already get a range. I\u0027ll add a TODO to fix this.",
+      "parentUuid": "9dfeb0ca_75300d24",
       "range": {
         "startLine": 403,
         "startChar": 55,
