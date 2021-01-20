@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e9892ba_36575e11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T23:33:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33121339_e1058b90",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-20T23:33:29Z",
+      "side": 1,
+      "message": "Naming nit: I\u0027m not fond of \"Info\" as a suffix, since it carries no, er, information.  Maybe ChildList? Or ChildObjects or DeviceChildObjectList or.. ?",
+      "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
