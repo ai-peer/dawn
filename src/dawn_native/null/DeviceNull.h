@@ -172,6 +172,7 @@ namespace dawn_native { namespace null {
 
       private:
         ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) override;
+        MaybeError ResetDeviceImpl() override;
     };
 
     // Helper class so |BindGroup| can allocate memory for its binding data,
