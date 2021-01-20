@@ -33,6 +33,57 @@
       "message": "Hmm, weird. These all pass on ES (native NV 3.2, or ANGLE 3.1). But all fail on Deskop GL. Can repro locally; will investigate.",
       "revId": "8ddbe032d50f82cb854c72b808c360c4f7e59d5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2aaf3d_f7531e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T09:32:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8ddbe032d50f82cb854c72b808c360c4f7e59d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd481e64_6e556766",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T09:32:47Z",
+      "side": 1,
+      "message": "nit; maybe use whitespace to make the code breath a bit? Right now it\u0027s a giant blob of control flow.",
+      "revId": "8ddbe032d50f82cb854c72b808c360c4f7e59d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6dc6d7f8_ca371fca",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T09:32:47Z",
+      "side": 1,
+      "message": "We might not need to reset these parameters since we always set them when they are going to be used.  Same thing for UNPACK_ROW_LENGTH",
+      "revId": "8ddbe032d50f82cb854c72b808c360c4f7e59d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
