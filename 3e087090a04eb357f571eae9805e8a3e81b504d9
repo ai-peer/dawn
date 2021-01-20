@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5203aed8_3f218da7",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:55:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36b5bb42_c4dcd137",
+      "revId": "3e087090a04eb357f571eae9805e8a3e81b504d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c75bdd01_9e0311ed",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-01-19T16:26:06Z",
       "side": 1,
       "message": "Nit: maybe VulkanLayer?",
+      "revId": "3e087090a04eb357f571eae9805e8a3e81b504d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48c375d0_7477e94e",
+        "filename": "src/dawn_native/vulkan/VulkanExtensions.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T16:55:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c75bdd01_9e0311ed",
       "revId": "3e087090a04eb357f571eae9805e8a3e81b504d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
