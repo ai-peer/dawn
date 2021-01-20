@@ -120,6 +120,24 @@
       "parentUuid": "6dc6d7f8_ca371fca",
       "revId": "8ddbe032d50f82cb854c72b808c360c4f7e59d5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "367036e5_877536d0",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-20T17:35:43Z",
+      "side": 1,
+      "message": "Ah got it, and I now realize this is an incorrect comment because we don\u0027t want to leak the GL_UNPACK_IMAGE_HEIGHT",
+      "parentUuid": "1379465c_32a5edba",
+      "revId": "8ddbe032d50f82cb854c72b808c360c4f7e59d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
