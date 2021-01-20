@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c30774ce_e86f220f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-01-20T21:06:25Z",
+      "side": 1,
+      "message": "It needs Dawn to roll into Chromium, so that Chromium\u0027s Tint gets updated.\n\nI believe that is unblocked now, so should roll soon.",
+      "parentUuid": "205887a9_5c47cc9e",
+      "revId": "ee0feebb3e10a39cabe2ace29170546e6a97a8dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68ec3e7b_4838a80b",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-01-20T20:43:08Z",
       "side": 1,
       "message": "nit: we\u0027re not trying to have amazing error messages right now, but overall let\u0027s try to make them a little more consistent.\n\nshould it be \"location\" or \"Location\" ? is it a \"decoration\" or a qualifier\" ? are we \"Unable to find\" it or is it \"Missing\" ?",
+      "range": {
+        "startLine": 720,
+        "startChar": 31,
+        "endLine": 732,
+        "endChar": 76
+      },
+      "revId": "ee0feebb3e10a39cabe2ace29170546e6a97a8dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffe85708_931bef37",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 732,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-01-20T21:06:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68ec3e7b_4838a80b",
       "range": {
         "startLine": 720,
         "startChar": 31,
