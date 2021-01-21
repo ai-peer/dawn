@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "ebcb7b0b000748a043f7b628fe0fa4f69bd957e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e00e6c6_f12a7db8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T18:43:01Z",
+      "side": 1,
+      "message": "It\u0027s not going to work now, there\u0027s the ComboVertexStateDescriptor fix that needs to be in first.",
+      "revId": "ebcb7b0b000748a043f7b628fe0fa4f69bd957e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
