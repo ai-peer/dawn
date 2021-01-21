@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26c92ae0_0e7423bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-21T07:06:39Z",
+      "side": 1,
+      "message": "Looks good, with one nit and one question below.",
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2203d4bf_6e9d2909",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-21T07:06:39Z",
+      "side": 1,
+      "message": "of",
+      "range": {
+        "startLine": 351,
+        "startChar": 27,
+        "endLine": 351,
+        "endChar": 29
+      },
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01c52d6d_44b7fda0",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-21T07:06:39Z",
+      "side": 1,
+      "message": "I didn\u0027t closely track your patches about SubresourceStorage, but I am curious that how you can ensure the State(s)Before are the same across all subresource (for both fullRange and partial rangle) when you removed mSameLastUsagesAcrossSubresources?",
+      "range": {
+        "startLine": 684,
+        "startChar": 8,
+        "endLine": 684,
+        "endChar": 51
+      },
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
