@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "536caf03_092fb125",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T18:13:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "566cc8164a5f1bf664ab1079ebebcd31cff95893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36686f57_3de8aa6d",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-01-21T17:32:03Z",
       "side": 1,
       "message": "this is just copy-pasted out of Chromium, so we\u0027ll have to manually update it if we want to roll. I don\u0027t forsee needing to do this very often though, and it would be used strictly for standalone bots (and only on CI, not CQ) so there wouldn\u0027t be version conflicts.",
+      "revId": "566cc8164a5f1bf664ab1079ebebcd31cff95893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "819c86fd_1076cab5",
+        "filename": "third_party/libFuzzer/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T18:13:02Z",
+      "side": 1,
+      "message": "Ack, can you add a comment at the top of the file explaining that this needs to be manually updated (and how to do any changes that you had to do)?",
+      "parentUuid": "36686f57_3de8aa6d",
       "revId": "566cc8164a5f1bf664ab1079ebebcd31cff95893",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
