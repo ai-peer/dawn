@@ -33,6 +33,40 @@
       "message": "Hi Kai,\n\nHere is my patch to change the validation on \u0027aspect\u0027 in Dawn. I found this issue when testing https://github.com/gpuweb/cts/pull/442 on the latest Chromium.\n\nPTAL, thanks!",
       "revId": "964e5c92e738868bad70362003b936f295c09558",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd951475_f24d91af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T08:35:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "964e5c92e738868bad70362003b936f295c09558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8a206a7_d51783ec",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T08:35:11Z",
+      "side": 1,
+      "message": "I think this could be\n srcTexAspects \u003d src.texture.GetFormat().aspects;\n if (SelectFormatAspects(src.aspects, srcTexAspects) !\u003d srcTexAspects) {\n }\n\nand same thing for the dst.",
+      "revId": "964e5c92e738868bad70362003b936f295c09558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
