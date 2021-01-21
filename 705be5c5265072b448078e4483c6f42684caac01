@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28cfa86e_5fac8170",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T19:16:43Z",
+      "side": 1,
+      "message": "well, within a command buffer you can have multiple passes. And if walking the command buffer for validation of early passes happens in parallel with encoding of later passes, then we could end up with lower total latency. But yea, I do see that\u0027s it\u0027s questionable if it would be even worth it to parallelize like this. The inline validation is fairly fast.",
+      "parentUuid": "35d8edea_bab75650",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b02943_b9e27252",

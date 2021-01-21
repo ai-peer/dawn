@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ab4dab_ae54dd90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T19:16:43Z",
+      "side": 1,
+      "message": "LGTM too, one more nit",
+      "revId": "efa69ca556b9eaeb917415236ee2c7b8f75e009c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d22cf716_993e3a3e",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T19:16:43Z",
+      "side": 1,
+      "message": "nit: all of the validation here is missing the check against the skip_validation toggle.\n\nAlso, we should probably cache that boolean on the encoder so we\u0027re not fetching it from the device every time.",
+      "revId": "efa69ca556b9eaeb917415236ee2c7b8f75e009c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
