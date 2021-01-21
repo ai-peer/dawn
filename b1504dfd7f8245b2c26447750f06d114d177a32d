@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "679f1d7a_3c9e67e0",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T10:06:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2203d4bf_6e9d2909",
+      "range": {
+        "startLine": 351,
+        "startChar": 27,
+        "endLine": 351,
+        "endChar": 29
+      },
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01c52d6d_44b7fda0",
@@ -60,6 +84,64 @@
         "endLine": 684,
         "endChar": 51
       },
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cf670cd_a1900b2a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T10:06:47Z",
+      "side": 1,
+      "message": "SubresourceStorage has the equivalent of mSameLastUsagesAcrossSubresources (and more fine grained compression) and call the functions at [1] and [2] only on subranges that have the same stored value.",
+      "parentUuid": "01c52d6d_44b7fda0",
+      "range": {
+        "startLine": 684,
+        "startChar": 8,
+        "endLine": 684,
+        "endChar": 51
+      },
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca577519_7b584744",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 743,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T10:06:47Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d3f81df_0a4372a8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T10:06:47Z",
+      "side": 1,
+      "message": "[2]",
       "revId": "b1504dfd7f8245b2c26447750f06d114d177a32d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
