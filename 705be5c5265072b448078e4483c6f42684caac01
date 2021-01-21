@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "47f15d55_841a2f45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T18:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1eff4a1_468b6d8d",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e5647704_f5e3aa76",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35d8edea_bab75650",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T18:40:34Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure that we want to move most of the validation at encoding time. It\u0027s more efficient because we walk the encoder less times and we shouldn\u0027t forget that eventually applications will be encoding multiple command buffers in parallel so they get explicit parallelization there.",
+      "parentUuid": "eba35a2a_394f0eba",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b02943_b9e27252",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-01-21T17:50:30Z",
       "side": 1,
       "message": "Nit: I don\u0027t understand that grammar here. Maybe just \"check validation\" or \"check that validation \u003cverb phrase\u003e\".",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feaa840c_e3fe0d71",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-21T18:40:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b02943_b9e27252",
       "revId": "705be5c5265072b448078e4483c6f42684caac01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
