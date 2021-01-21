@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1eff4a1_468b6d8d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-21T17:50:30Z",
+      "side": 1,
+      "message": "Nit: in -\u003e into",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e5647704_f5e3aa76",
@@ -14,6 +31,40 @@
       "writtenOn": "2021-01-21T15:19:01Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4e845f7_9dd8ead8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-21T17:50:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b02943_b9e27252",
+        "filename": "src/tests/unittests/validation/VertexBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-21T17:50:30Z",
+      "side": 1,
+      "message": "Nit: I don\u0027t understand that grammar here. Maybe just \"check validation\" or \"check that validation \u003cverb phrase\u003e\".",
       "revId": "705be5c5265072b448078e4483c6f42684caac01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
