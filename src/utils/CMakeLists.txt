@@ -22,6 +22,8 @@ target_sources(dawn_utils PRIVATE
     "ComboRenderPipelineDescriptor.h"
     "GLFWUtils.cpp"
     "GLFWUtils.h"
+    "InstanceHolder.cpp"
+    "InstanceHolder.h"
     "PlatformDebugLogger.h"
     "SystemUtils.cpp"
     "SystemUtils.h"
