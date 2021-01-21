@@ -1217,6 +1217,7 @@ class StorageTextureZeroInitTests : public StorageTextureTests {
 TEST_P(StorageTextureZeroInitTests, ReadonlyStorageTextureClearsToZeroInRenderPass) {
     // TODO(crbug.com/tint/398): GLSL builtins don't work with SPIR-V reader.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("use_tint_generator"));
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
 
     wgpu::Texture readonlyStorageTexture =
         CreateTexture(wgpu::TextureFormat::R32Uint, wgpu::TextureUsage::Storage);
