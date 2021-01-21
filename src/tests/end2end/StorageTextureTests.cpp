@@ -1160,8 +1160,8 @@ fn doTest() -> bool {
 // Verify that the texture is correctly cleared to 0 before its first usage as a read-only storage
 // texture in a render pass.
 TEST_P(StorageTextureZeroInitTests, ReadonlyStorageTextureClearsToZeroInRenderPass) {
-    wgpu::Texture readonlyStorageTexture =
-        CreateTexture(wgpu::TextureFormat::R32Uint, wgpu::TextureUsage::Storage);
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
+    CreateTexture(wgpu::TextureFormat::R32Uint, wgpu::TextureUsage::Storage);
 
     // Create a rendering pipeline that reads the pixels from the read-only storage texture and uses
     // green as the output color, otherwise uses red instead.
