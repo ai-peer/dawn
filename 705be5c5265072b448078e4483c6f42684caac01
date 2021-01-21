@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba35a2a_394f0eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T18:27:13Z",
+      "side": 1,
+      "message": "So.. I just had a thought.. are we sure we want to move all of the validation to encoding time?\n\nKeeping it deferred, while perhaps more latency now, would let us validate pass usages and command buffer state for each pass in parallel (when we have threads). We would also be able to begin validating a pass before commandEncoder.finish() has been called. So for a command buffer with many or very large render passes, parallel validation might give us better perf.",
+      "revId": "705be5c5265072b448078e4483c6f42684caac01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81b02943_b9e27252",
