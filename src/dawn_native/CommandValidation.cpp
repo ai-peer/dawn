@@ -120,6 +120,31 @@ namespace dawn_native {
             return {};
         }
 
+        MaybeError ValidateTextureFormatAndAspectInT2TCopies(const Format& format,
+                                                             wgpu::TextureAspect aspect) {
+            switch (aspect) {
+                case wgpu::TextureAspect::All:
+                    break;
+                // Metal cannot select a single aspect for texture-to-texture copies.
+                case wgpu::TextureAspect::DepthOnly:
+                    if (format.aspects != Aspect::Depth) {
+                        return DAWN_VALIDATION_ERROR(
+                            "TextureAspect::DepthOnly can only be used with depth-only texture "
+                            "formats in CopyTextureToTexture().");
+                    }
+                    break;
+                // TODO(jiawei.shao@intel.com): support stencil-only texture formats.
+                case wgpu::TextureAspect::StencilOnly:
+                    return DAWN_VALIDATION_ERROR(
+                        "TextureAspect::StencilOnly is not supported in CopyTextureToTexture() "
+                        "now.");
+                default:
+                    UNREACHABLE();
+            }
+
+            return {};
+        }
+
     }  // namespace
 
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize) {
@@ -698,11 +723,8 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Source and destination texture formats must match.");
         }
 
-        if (src.aspect != wgpu::TextureAspect::All || dst.aspect != wgpu::TextureAspect::All) {
-            // Metal cannot select a single aspect for texture-to-texture copies
-            return DAWN_VALIDATION_ERROR(
-                "Texture aspect must be \"all\" for texture to texture copies");
-        }
+        DAWN_TRY(ValidateTextureFormatAndAspectInT2TCopies(src.texture->GetFormat(), src.aspect));
+        DAWN_TRY(ValidateTextureFormatAndAspectInT2TCopies(dst.texture->GetFormat(), dst.aspect));
 
         if (src.texture == dst.texture && src.mipLevel == dst.mipLevel) {
             ASSERT(src.texture->GetDimension() == wgpu::TextureDimension::e2D &&
