@@ -68,6 +68,24 @@
       "parentUuid": "36686f57_3de8aa6d",
       "revId": "566cc8164a5f1bf664ab1079ebebcd31cff95893",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afb0546a_8a1c72ed",
+        "filename": "third_party/libFuzzer/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T18:16:02Z",
+      "side": 1,
+      "message": "absolutely zero changes 😊\nadded a comment",
+      "parentUuid": "819c86fd_1076cab5",
+      "revId": "566cc8164a5f1bf664ab1079ebebcd31cff95893",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
