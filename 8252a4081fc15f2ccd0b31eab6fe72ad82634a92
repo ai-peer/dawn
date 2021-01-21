@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ee14f3c_2cf49963",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T19:20:24Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "8252a4081fc15f2ccd0b31eab6fe72ad82634a92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6635651_51560ec5",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T19:20:24Z",
+      "side": 1,
+      "message": "nit: OutputAttachment - and I don\u0027t think your later CL fixes this one\nditto below",
+      "range": {
+        "startLine": 160,
+        "startChar": 58,
+        "endLine": 160,
+        "endChar": 74
+      },
+      "revId": "8252a4081fc15f2ccd0b31eab6fe72ad82634a92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
