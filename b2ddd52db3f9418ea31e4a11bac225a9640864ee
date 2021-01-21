@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b38de44e_5e903218",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-21T11:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ebcfb28_2ef6a81d",
+      "range": {
+        "startLine": 90,
+        "startChar": 21,
+        "endLine": 90,
+        "endChar": 23
+      },
+      "revId": "b2ddd52db3f9418ea31e4a11bac225a9640864ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83bcd089_d535513f",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a0cf4a_a474ce8a",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-21T11:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83bcd089_d535513f",
+      "range": {
+        "startLine": 158,
+        "startChar": 22,
+        "endLine": 158,
+        "endChar": 32
+      },
+      "revId": "b2ddd52db3f9418ea31e4a11bac225a9640864ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2452f84_e08f3d31",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-01-19T14:46:38Z",
       "side": 1,
       "message": "nit: group, ditto everywhere else.",
+      "range": {
+        "startLine": 159,
+        "startChar": 14,
+        "endLine": 159,
+        "endChar": 17
+      },
+      "revId": "b2ddd52db3f9418ea31e4a11bac225a9640864ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953ee1af_0c466116",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-21T11:07:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2452f84_e08f3d31",
       "range": {
         "startLine": 159,
         "startChar": 14,
