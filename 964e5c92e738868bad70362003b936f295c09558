@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "964e5c92e738868bad70362003b936f295c09558",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cf6871e_6fa81ce4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-21T05:45:57Z",
+      "side": 1,
+      "message": "Hi Kai,\n\nHere is my patch to change the validation on \u0027aspect\u0027 in Dawn. I found this issue when testing https://github.com/gpuweb/cts/pull/442 on the latest Chromium.\n\nPTAL, thanks!",
+      "revId": "964e5c92e738868bad70362003b936f295c09558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
