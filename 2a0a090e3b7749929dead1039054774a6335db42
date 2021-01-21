@@ -33,6 +33,40 @@
       "message": "Logic LGTM",
       "revId": "2a0a090e3b7749929dead1039054774a6335db42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a14148b_cd1cb9b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-21T14:44:57Z",
+      "side": 1,
+      "message": "Looks fine so far.",
+      "revId": "2a0a090e3b7749929dead1039054774a6335db42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89ff779_2d2da35b",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-21T14:44:57Z",
+      "side": 1,
+      "message": "Could be a for-loop. Also fine as-written if you prefer.",
+      "revId": "2a0a090e3b7749929dead1039054774a6335db42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
