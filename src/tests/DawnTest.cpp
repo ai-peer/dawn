@@ -837,6 +837,7 @@ void DawnTestBase::SetUp() {
         deviceDescriptor.forceDisabledToggles.push_back(info->name);
     }
 
+    mBackendAdapter.ResetDevice();
     backendDevice = mBackendAdapter.CreateDevice(&deviceDescriptor);
     ASSERT_NE(nullptr, backendDevice);
 
@@ -904,7 +905,7 @@ void DawnTestBase::SetUp() {
     // A very large number of tests hang on Intel D3D12 with the debug adapter after a driver
     // upgrade. Violently suppress this whole configuration until we figure out what to do.
     // See https://crbug.com/dawn/598
-    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsVulkan());
 }
 
 void DawnTestBase::TearDown() {
