@@ -18,11 +18,11 @@ if (build_with_chromium) {
   import("//build/config/sanitizers/sanitizers.gni")
   import("//build/config/ui.gni")
 
-  dawn_use_x11 = use_x11
+  dawn_use_x11 = use_x11 && !is_chromeos_lacros
 } else {
   declare_args() {
     # Whether Dawn should enable X11 support.
-    dawn_use_x11 = is_linux && !is_chromeos
+    dawn_use_x11 = is_linux && !is_chromeos && !is_chromeos_lacros
   }
 }
 
