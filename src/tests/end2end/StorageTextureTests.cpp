@@ -1160,6 +1160,7 @@ fn doTest() -> bool {
 // Verify that the texture is correctly cleared to 0 before its first usage as a read-only storage
 // texture in a render pass.
 TEST_P(StorageTextureZeroInitTests, ReadonlyStorageTextureClearsToZeroInRenderPass) {
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
     wgpu::Texture readonlyStorageTexture =
         CreateTexture(wgpu::TextureFormat::R32Uint, wgpu::TextureUsage::Storage);
 
@@ -1211,6 +1212,7 @@ TEST_P(StorageTextureZeroInitTests, ReadonlyStorageTextureClearsToZeroInComputeP
 // Verify that the texture is correctly cleared to 0 before its first usage as a write-only storage
 // storage texture in a render pass.
 TEST_P(StorageTextureZeroInitTests, WriteonlyStorageTextureClearsToZeroInRenderPass) {
+    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
     // Prepare the write-only storage texture.
     constexpr uint32_t kTexelSizeR32Uint = 4u;
     wgpu::Texture writeonlyStorageTexture = CreateTexture(
