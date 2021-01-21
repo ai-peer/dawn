@@ -39,6 +39,30 @@
       },
       "revId": "8252a4081fc15f2ccd0b31eab6fe72ad82634a92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "220d20d3_0baf4f55",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T19:51:41Z",
+      "side": 1,
+      "message": "nvm. I had it backward.",
+      "parentUuid": "d6635651_51560ec5",
+      "range": {
+        "startLine": 160,
+        "startChar": 58,
+        "endLine": 160,
+        "endChar": 74
+      },
+      "revId": "8252a4081fc15f2ccd0b31eab6fe72ad82634a92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
