@@ -110,6 +110,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c28d772_f98d526a",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T22:31:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c01cd6c0_2b977664",
+      "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b8e753e_06c355d9",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T22:31:05Z",
+      "side": 1,
+      "message": "I\u0027m just going to keep it as is for now. It\u0027s sort of temporary since we won\u0027t need the child object list once Dawn native implements that. Then we could just call it DeviceCallbackUserdata or something.",
+      "parentUuid": "dd82cd93_a7d03ef1",
+      "range": {
+        "startLine": 27,
+        "startChar": 11,
+        "endLine": 27,
+        "endChar": 21
+      },
+      "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d3b7810_a14236d9",
@@ -123,6 +165,24 @@
       "writtenOn": "2021-01-21T08:45:41Z",
       "side": 1,
       "message": "Maybe comment that this isn\u0027t an owning pointer and instead the lifetime is owned by the device.",
+      "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a6d5a3_5b17db15",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-21T22:31:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d3b7810_a14236d9",
       "revId": "822aa3d383d58ae3b81d181ed11417982a0286c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
