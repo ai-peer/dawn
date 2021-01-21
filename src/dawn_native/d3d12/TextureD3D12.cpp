@@ -839,9 +839,14 @@ namespace dawn_native { namespace d3d12 {
         uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
         float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
 
+        bool everySubresourceUninitialized = IsEverySubresourceUninitialized(range);
+
         if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0) {
             if (GetFormat().HasDepthOrStencil()) {
-                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
+                if (everySubresourceUninitialized) {
+                    TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE,
+                                               range);
+                }
 
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
@@ -851,6 +856,7 @@ namespace dawn_native { namespace d3d12 {
                         D3D12_CLEAR_FLAGS clearFlags = {};
                         for (Aspect aspect : IterateEnumMask(range.aspects)) {
                             if (clearValue == TextureBase::ClearValue::Zero &&
+                                !everySubresourceUninitialized &&
                                 IsSubresourceContentInitialized(
                                     SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
                                 // Skip lazy clears if already initialized.
@@ -866,6 +872,11 @@ namespace dawn_native { namespace d3d12 {
                                     break;
                                 default:
                                     UNREACHABLE();
+                            }
+                            if (clearFlags && !everySubresourceUninitialized) {
+                                TrackUsageAndTransitionNow(
+                                    commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE,
+                                    SubresourceRange::SingleMipAndLayer(level, layer, aspect));
                             }
                         }
 
@@ -887,8 +898,10 @@ namespace dawn_native { namespace d3d12 {
                     }
                 }
             } else {
-                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET,
-                                           range);
+                if (everySubresourceUninitialized) {
+                    TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET,
+                                               range);
+                }
 
                 const float clearColorRGBA[4] = {fClearColor, fClearColor, fClearColor,
                                                  fClearColor};
@@ -899,12 +912,18 @@ namespace dawn_native { namespace d3d12 {
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
+                            !everySubresourceUninitialized &&
                             IsSubresourceContentInitialized(
                                 SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
 
+                        if (!everySubresourceUninitialized) {
+                            TrackUsageAndTransitionNow(
+                                commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET,
+                                SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color));
+                        }
                         CPUDescriptorHeapAllocation rtvHeap;
                         DAWN_TRY_ASSIGN(rtvHeap, device->GetRenderTargetViewAllocator()
                                                      ->AllocateTransientCPUDescriptors());
@@ -919,7 +938,9 @@ namespace dawn_native { namespace d3d12 {
             }
         } else {
             // create temp buffer with clear color to copy to the texture image
-            TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
+            if (everySubresourceUninitialized) {
+                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
+            }
 
             for (Aspect aspect : IterateEnumMask(range.aspects)) {
                 const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
@@ -947,12 +968,18 @@ namespace dawn_native { namespace d3d12 {
                     for (uint32_t layer = range.baseArrayLayer;
                          layer < range.baseArrayLayer + range.layerCount; ++layer) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
+                            !everySubresourceUninitialized &&
                             IsSubresourceContentInitialized(
                                 SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
                             // Skip lazy clears if already initialized.
                             continue;
                         }
 
+                        if (!everySubresourceUninitialized) {
+                            TrackUsageAndTransitionNow(
+                                commandContext, D3D12_RESOURCE_STATE_COPY_DEST,
+                                SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color));
+                        }
                         D3D12_TEXTURE_COPY_LOCATION textureLocation =
                             ComputeTextureCopyLocationForTexture(this, level, layer, aspect);
                         for (uint32_t i = 0; i < copySplit.count; ++i) {

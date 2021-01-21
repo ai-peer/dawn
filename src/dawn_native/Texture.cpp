@@ -472,6 +472,24 @@ namespace dawn_native {
         return true;
     }
 
+    bool TextureBase::IsEverySubresourceUninitialized(const SubresourceRange& range) const {
+        ASSERT(!IsError());
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            for (uint32_t arrayLayer = range.baseArrayLayer;
+                 arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                for (uint32_t mipLevel = range.baseMipLevel;
+                     mipLevel < range.baseMipLevel + range.levelCount; ++mipLevel) {
+                    uint32_t subresourceIndex = GetSubresourceIndex(mipLevel, arrayLayer, aspect);
+                    ASSERT(subresourceIndex < mIsSubresourceContentInitializedAtIndex.size());
+                    if (mIsSubresourceContentInitializedAtIndex[subresourceIndex]) {
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
     void TextureBase::SetIsSubresourceContentInitialized(bool isInitialized,
                                                          const SubresourceRange& range) {
         ASSERT(!IsError());

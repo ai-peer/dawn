@@ -68,6 +68,7 @@ namespace dawn_native {
         TextureState GetTextureState() const;
         uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice, Aspect aspect) const;
         bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
+        bool IsEverySubresourceUninitialized(const SubresourceRange& range) const;
         void SetIsSubresourceContentInitialized(bool isInitialized, const SubresourceRange& range);
 
         MaybeError ValidateCanUseInSubmitNow() const;
