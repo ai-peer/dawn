@@ -70,6 +70,8 @@ static_library("dawn_utils") {
     "ComboRenderBundleEncoderDescriptor.h",
     "ComboRenderPipelineDescriptor.cpp",
     "ComboRenderPipelineDescriptor.h",
+    "InstanceHolder.cpp",
+    "InstanceHolder.h",
     "PlatformDebugLogger.h",
     "SystemUtils.cpp",
     "SystemUtils.h",

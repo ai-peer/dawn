@@ -29,6 +29,7 @@
 namespace utils {
 
     void SetupGLFWWindowHintsForBackend(wgpu::BackendType type) {
+        glfwDefaultWindowHints();
         if (type == wgpu::BackendType::OpenGL) {
             // Ask for OpenGL 4.4 which is what the GL backend requires for compute shaders and
             // texture views.

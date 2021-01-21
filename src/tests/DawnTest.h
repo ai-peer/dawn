@@ -19,6 +19,7 @@
 #include "dawn/dawn_proc_table.h"
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
+#include "utils/InstanceHolder.h"
 
 #include <dawn_platform/DawnPlatform.h>
 #include <gtest/gtest.h>
@@ -127,21 +128,11 @@ struct BackendTestConfig {
     std::vector<const char*> forceDisabledWorkarounds;
 };
 
-struct TestAdapterProperties : wgpu::AdapterProperties {
-    TestAdapterProperties(const wgpu::AdapterProperties& properties, bool selected);
-    std::string adapterName;
-    bool selected;
-
-  private:
-    // This may be temporary, so it is copied into |adapterName| and made private.
-    using wgpu::AdapterProperties::name;
-};
-
 struct AdapterTestParam {
     AdapterTestParam(const BackendTestConfig& config,
-                     const TestAdapterProperties& adapterProperties);
+                     const utils::InstanceHolder::AdapterProperties& adapterProperties);
 
-    TestAdapterProperties adapterProperties;
+    utils::InstanceHolder::AdapterProperties adapterProperties;
     std::vector<const char*> forceEnabledWorkarounds;
     std::vector<const char*> forceDisabledWorkarounds;
 };
@@ -204,42 +195,16 @@ class DawnTestEnvironment : public testing::Environment {
     void SetUp() override;
     void TearDown() override;
 
-    bool UsesWire() const;
-    bool IsBackendValidationEnabled() const;
-    dawn_native::Instance* GetInstance() const;
-    bool HasVendorIdFilter() const;
-    uint32_t GetVendorIdFilter() const;
-    const char* GetWireTraceDir() const;
-    GLFWwindow* GetOpenGLWindow() const;
-    GLFWwindow* GetOpenGLESWindow() const;
-
-    const std::vector<std::string>& GetEnabledToggles() const;
-    const std::vector<std::string>& GetDisabledToggles() const;
-
-  protected:
-    std::unique_ptr<dawn_native::Instance> mInstance;
+    utils::InstanceHolder* GetInstanceHolder() {
+        return mInstanceHolder.get();
+    }
 
   private:
-    void ParseArgs(int argc, char** argv);
-    std::unique_ptr<dawn_native::Instance> CreateInstanceAndDiscoverAdapters();
-    void SelectPreferredAdapterProperties(const dawn_native::Instance* instance);
-    void PrintTestConfigurationAndAdapterInfo(dawn_native::Instance* instance) const;
-
-    bool mUseWire = false;
-    bool mEnableBackendValidation = false;
-    bool mBeginCaptureOnStartup = false;
-    bool mHasVendorIdFilter = false;
-    uint32_t mVendorIdFilter = 0;
-    std::string mWireTraceDir;
-
-    std::vector<std::string> mEnabledToggles;
-    std::vector<std::string> mDisabledToggles;
-    std::vector<dawn_native::DeviceType> mDevicePreferences;
-    std::vector<TestAdapterProperties> mAdapterProperties;
+    utils::InstanceHolder::Options mOptions;
+    std::unique_ptr<utils::InstanceHolder> mInstanceHolder;
+    std::vector<utils::InstanceHolder::AdapterProperties> mAdapterProperties;
 
     std::unique_ptr<utils::PlatformDebugLogger> mPlatformDebugLogger;
-    GLFWwindow* mOpenGLWindow;
-    GLFWwindow* mOpenGLESWindow;
 };
 
 class DawnTestBase {
@@ -293,11 +258,9 @@ class DawnTestBase {
     virtual std::unique_ptr<dawn_platform::Platform> CreateTestPlatform();
 
   protected:
+    WGPUDevice backendDevice = nullptr;
     wgpu::Device device;
     wgpu::Queue queue;
-
-    DawnProcTable backendProcs = {};
-    WGPUDevice backendDevice = nullptr;
 
     size_t mLastWarningCount = 0;
 
@@ -377,14 +340,6 @@ class DawnTestBase {
   private:
     AdapterTestParam mParam;
 
-    // Things used to set up testing through the Wire.
-    std::unique_ptr<dawn_wire::WireServer> mWireServer;
-    std::unique_ptr<dawn_wire::WireClient> mWireClient;
-    std::unique_ptr<utils::TerribleCommandBuffer> mC2sBuf;
-    std::unique_ptr<utils::TerribleCommandBuffer> mS2cBuf;
-
-    std::unique_ptr<dawn_wire::CommandHandler> mWireServerTraceLayer;
-
     // Tracking for validation errors
     static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
     static void OnDeviceLost(const char* message, void* userdata);
@@ -445,6 +400,7 @@ class DawnTestBase {
     void ResolveExpectations();
 
     dawn_native::Adapter mBackendAdapter;
+    std::unique_ptr<utils::InstanceHolder::ScopedWireTrace> mScopedWireTrace;
 
     std::unique_ptr<dawn_platform::Platform> mTestPlatform;
 };
