@@ -15,6 +15,7 @@
 #include "tests/DawnTest.h"
 
 #include "common/Assert.h"
+#include "common/DynamicLib.h"
 #include "common/GPUInfo.h"
 #include "common/Log.h"
 #include "common/Math.h"
@@ -29,6 +30,9 @@
 #include "utils/TerribleCommandBuffer.h"
 #include "utils/TestUtils.h"
 #include "utils/WGPUHelpers.h"
+#ifdef DAWN_ENABLE_RENDERDOC
+#    include "renderdoc.h"
+#endif
 
 #include <algorithm>
 #include <fstream>
@@ -354,9 +358,33 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     instance->DiscoverDefaultAdapters();
 
 #ifdef DAWN_ENABLE_BACKEND_OPENGL
+#    ifdef DAWN_ENABLE_RENDERDOC
+    pRENDERDOC_GetAPI getAPI = nullptr;
+    std::string error;
+    DynamicLib renderDocLib;
+    if (renderDocLib.Open("librenderdoc.so", &error)) {
+        printf("opened renderdoc lib\n");
+        getAPI = (pRENDERDOC_GetAPI)renderDocLib.GetProc("RENDERDOC_GetApi");
+        if (getAPI) {
+            printf("got getapi call");
+            RENDERDOC_API_1_4_1* api;
+            if (getAPI(eRENDERDOC_API_Version_1_4_1, (void**)&api)) {
+                printf("got api");
+                api->TriggerCapture();
+            } else {
+                printf("couldn't get api\n");
+            }
+        } else {
+            printf("couldn't get getapi call\n");
+        }
+    } else {
+        printf("couldn't open renderdoc lib\n");
+    }
+#    endif
     if (!glfwInit()) {
         return instance;
     }
+
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
@@ -370,6 +398,7 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptions);
 
+#    if 0
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -382,6 +411,7 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     dawn_native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
     adapterOptionsES.getProc = adapterOptions.getProc;
     instance->DiscoverAdapters(&adapterOptionsES);
+#    endif
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
 
     return instance;

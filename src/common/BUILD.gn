@@ -54,6 +54,10 @@ config("dawn_internal") {
     defines += [ "DAWN_ENABLE_ASSERTS" ]
   }
 
+  if (dawn_enable_renderdoc) {
+    defines += [ "DAWN_ENABLE_RENDERDOC" ]
+  }
+
   if (use_fuzzing_engine) {
     # Does a hard abort when an assertion fails so that fuzzers catch and parse the failure.
     defines += [ "DAWN_ABORT_ON_ASSERT" ]
