@@ -67,6 +67,24 @@
       "message": "I think this could be\n srcTexAspects \u003d src.texture.GetFormat().aspects;\n if (SelectFormatAspects(src.aspects, srcTexAspects) !\u003d srcTexAspects) {\n }\n\nand same thing for the dst.",
       "revId": "964e5c92e738868bad70362003b936f295c09558",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fa0786b_6e6652e8",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-01-21T08:56:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8a206a7_d51783ec",
+      "revId": "964e5c92e738868bad70362003b936f295c09558",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
