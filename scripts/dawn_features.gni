@@ -22,7 +22,7 @@ if (build_with_chromium) {
 } else {
   declare_args() {
     # Whether Dawn should enable X11 support.
-    dawn_use_x11 = is_linux && !is_chromeos
+    dawn_use_x11 = is_linux && !is_chromeos && !is_chromeos_lacros
   }
 }
 
