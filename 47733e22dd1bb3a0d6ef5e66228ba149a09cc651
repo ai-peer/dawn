@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df59b3e5_b96b6fb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-22T17:23:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "47733e22dd1bb3a0d6ef5e66228ba149a09cc651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c23a7297_ffad32ca",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-01-22T15:22:19Z",
       "side": 1,
       "message": "Seems a little silly to duplicate the logic here. Another option: create a local VALIDATE_IF_ENABLED macro and leave the logic interspersed, just conditionally validating if it\u0027s enabled. Could even be a common macro for all (with the contract that there\u0027s an IsValidationEnabled() func available).\n\nVALIDATE_IF_ENABLED(size \u003e remainingSize, \"Size + offset larger than the buffer size\");\n\nWDYT?",
+      "revId": "47733e22dd1bb3a0d6ef5e66228ba149a09cc651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d3473d_6c203f2a",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-22T17:23:40Z",
+      "side": 1,
+      "message": "I think this depends on if the generated code would actually check the boolean multiple times, or if it would factor that out. I would be concerned about performance if we end up with more checks than necessary.",
+      "parentUuid": "c23a7297_ffad32ca",
       "revId": "47733e22dd1bb3a0d6ef5e66228ba149a09cc651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
