@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f69a37cc_c2cf7df7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T14:59:14Z",
+      "side": 1,
+      "message": "I considered it but the move logic was non-trivial so I preferred doing.a bunch of mechanical changes. We can always add move constructors later if needed.",
+      "parentUuid": "6ced2675_94b5e3b2",
+      "revId": "f2adae6c812aedcbb078e228699fe4fa3da97211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2ab765f7_2bfab877",
@@ -65,6 +83,23 @@
       "writtenOn": "2021-01-22T14:55:22Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "f2adae6c812aedcbb078e228699fe4fa3da97211",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "498c9ef8_612fa348",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T14:59:14Z",
+      "side": 1,
+      "message": "Thanks!",
       "revId": "f2adae6c812aedcbb078e228699fe4fa3da97211",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
