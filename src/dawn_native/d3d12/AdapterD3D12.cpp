@@ -214,4 +214,10 @@ namespace dawn_native { namespace d3d12 {
         return Device::Create(this, descriptor);
     }
 
+    MaybeError Adapter::ResetDeviceImpl() {
+        mD3d12Device.Reset();
+        DAWN_TRY(Initialize());
+        return {};
+    }
+
 }}  // namespace dawn_native::d3d12
