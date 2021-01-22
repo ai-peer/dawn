@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c01e6467_9775030b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-22T14:41:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "644fbdc00867776b1ae27d552ab211969187961e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5318a845_622f3a1a",
+        "filename": "third_party/libFuzzer/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-22T14:41:42Z",
+      "side": 1,
+      "message": "Should this be 2021? Even though it\u0027s a copy? (I\u0027m actually not sure.)",
+      "revId": "644fbdc00867776b1ae27d552ab211969187961e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
