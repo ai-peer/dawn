@@ -71,7 +71,7 @@ namespace dawn_native { namespace d3d12 {
 
         // Create device-global objects
         D3D12_COMMAND_QUEUE_DESC queueDesc = {};
-        queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
+        queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_DISABLE_GPU_TIMEOUT;
         queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
         DAWN_TRY(
             CheckHRESULT(mD3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
@@ -260,7 +260,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(NextSerial());
         }
 
-        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
+        // DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
         return {};
     }
