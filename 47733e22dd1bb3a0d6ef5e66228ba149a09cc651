@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8ae102_22b86b08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T14:27:16Z",
+      "side": 1,
+      "message": "PTAL this was a follow up asked in the CL moving validation to SetVertexBuffer / SetIndexBuffer etc.",
+      "revId": "47733e22dd1bb3a0d6ef5e66228ba149a09cc651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
