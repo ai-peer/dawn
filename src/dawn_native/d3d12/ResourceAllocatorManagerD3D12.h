@@ -90,7 +90,7 @@ namespace dawn_native { namespace d3d12 {
         uint32_t mResourceHeapTier;
 
         static constexpr uint64_t kMaxHeapSize = 32ll * 1024ll * 1024ll * 1024ll;  // 32GB
-        static constexpr uint64_t kMinHeapSize = 4ll * 1024ll * 1024ll;            // 4MB
+        static constexpr uint64_t kMinHeapSize = 32ll * 1024ll * 1024ll * 1024ll;  // 32GB
 
         std::array<std::unique_ptr<BuddyMemoryAllocator>, ResourceHeapKind::EnumCount>
             mSubAllocatedResourceAllocators;

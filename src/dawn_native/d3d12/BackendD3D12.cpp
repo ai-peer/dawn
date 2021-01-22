@@ -35,13 +35,15 @@ namespace dawn_native { namespace d3d12 {
             // Enable the debug layer (requires the Graphics Tools "optional feature").
             {
                 if (enableBackendValidation) {
-                    ComPtr<ID3D12Debug1> debugController;
+                    ComPtr<ID3D12Debug3> debugController;
                     if (SUCCEEDED(
                             functions->d3d12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
                         ASSERT(debugController != nullptr);
                         debugController->EnableDebugLayer();
                         debugController->SetEnableGPUBasedValidation(
                             enableGPUBasedBackendValidation);
+                        // debugController->SetGPUBasedValidationFlags(
+                        //  D3D12_GPU_BASED_VALIDATION_FLAGS_DISABLE_STATE_TRACKING);
 
                         // Enable additional debug layers.
                         dxgiFactoryFlags |= DXGI_CREATE_FACTORY_DEBUG;
