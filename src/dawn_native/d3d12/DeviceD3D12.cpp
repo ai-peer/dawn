@@ -260,7 +260,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(NextSerial());
         }
 
-        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
+        // DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
         return {};
     }
