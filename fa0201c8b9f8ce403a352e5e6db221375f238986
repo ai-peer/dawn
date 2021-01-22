@@ -39,6 +39,40 @@
       "message": "PTAL!",
       "revId": "fa0201c8b9f8ce403a352e5e6db221375f238986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b98ebb5_d6a8d795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T07:59:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fa0201c8b9f8ce403a352e5e6db221375f238986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "942d3b87_c4c759e2",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T07:59:39Z",
+      "side": 1,
+      "message": "Don\u0027t we need to do the same for textures?",
+      "revId": "fa0201c8b9f8ce403a352e5e6db221375f238986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
