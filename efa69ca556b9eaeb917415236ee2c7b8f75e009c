@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a72050_6b339781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T08:13:47Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "efa69ca556b9eaeb917415236ee2c7b8f75e009c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d22cf716_993e3a3e",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-01-21T19:16:43Z",
       "side": 1,
       "message": "nit: all of the validation here is missing the check against the skip_validation toggle.\n\nAlso, we should probably cache that boolean on the encoder so we\u0027re not fetching it from the device every time.",
+      "revId": "efa69ca556b9eaeb917415236ee2c7b8f75e009c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b82f762b_075e4f6b",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T08:13:47Z",
+      "side": 1,
+      "message": "This is a more general problem with the encoders right now. I\u0027ll take care of it with a follow-up CL. Ditto for the boolean.",
+      "parentUuid": "d22cf716_993e3a3e",
       "revId": "efa69ca556b9eaeb917415236ee2c7b8f75e009c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
