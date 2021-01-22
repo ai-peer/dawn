@@ -16,6 +16,24 @@
       "message": "So it turns out the tests were failing due to lazy clears. The upload was correct, but then\nthe readback was clearing it to zero.\n\nFixed by calling SetIsSubresourceContentInitialized, although this did require a const_cast.\n\nLMK if there\u0027s a better way.\n\n(Also curious why it didn\u0027t fail on ES.)",
       "revId": "e5a709403cd79df1edcec5bab565c2046af623f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fa5fc34_04f1efd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-22T20:30:20Z",
+      "side": 1,
+      "message": "Updated to remove the const_cast: just don\u0027t make the thing const to begin with (duh).\n\nHowever, about half the tests are still failing. Reason TBD.",
+      "parentUuid": "a484dce8_199f9548",
+      "revId": "e5a709403cd79df1edcec5bab565c2046af623f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
