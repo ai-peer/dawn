@@ -88,7 +88,7 @@ namespace dawn_native { namespace metal {
         }
         transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
 
-        tint::ast::Module module;
+        tint::Program module;
         DAWN_TRY_ASSIGN(module, RunTransforms(&transformManager, mTintModule.get()));
 
         ASSERT(remappedEntryPointName != nullptr);

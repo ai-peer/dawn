@@ -217,7 +217,7 @@ namespace dawn_native { namespace d3d12 {
             transformManager.append(std::move(transformer));
         }
 
-        tint::ast::Module module;
+        tint::Program module;
         DAWN_TRY_ASSIGN(module, RunTransforms(&transformManager, mTintModule.get()));
 
         if (firstOffsetTransform != nullptr) {
