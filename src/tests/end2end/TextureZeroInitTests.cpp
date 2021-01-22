@@ -1392,9 +1392,6 @@ TEST_P(TextureZeroInitTest, CopyTextureToBufferNonRenderableUnaligned) {
 
 // In this test WriteTexture fully overwrites a texture
 TEST_P(TextureZeroInitTest, WriteWholeTexture) {
-    // TODO(dawn:483): Remove this condition after implementing WriteTexture in those backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
         1, 1, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc, kColorFormat);
     wgpu::Texture texture = device.CreateTexture(&descriptor);
@@ -1427,9 +1424,6 @@ TEST_P(TextureZeroInitTest, WriteWholeTexture) {
 // Test WriteTexture to a subset of the texture, lazy init is necessary to clear the other
 // half.
 TEST_P(TextureZeroInitTest, WriteTextureHalf) {
-    // TODO(dawn:483): Remove this condition after implementing WriteTexture in those backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
         4, 1,
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
@@ -1467,9 +1461,6 @@ TEST_P(TextureZeroInitTest, WriteTextureHalf) {
 // In this test WriteTexture fully overwrites a range of subresources, so lazy initialization
 // is needed for neither the subresources involved in the write nor the other subresources.
 TEST_P(TextureZeroInitTest, WriteWholeTextureArray) {
-    // TODO(dawn:483): Remove this condition after implementing WriteTexture in those backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
         1, 6, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc, kColorFormat);
     wgpu::Texture texture = device.CreateTexture(&descriptor);
@@ -1510,9 +1501,6 @@ TEST_P(TextureZeroInitTest, WriteWholeTextureArray) {
 // Test WriteTexture to a subset of the subresource, lazy init is necessary to clear the other
 // half.
 TEST_P(TextureZeroInitTest, WriteTextureArrayHalf) {
-    // TODO(dawn:483): Remove this condition after implementing WriteTexture in those backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
         4, 6,
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
@@ -1557,9 +1545,6 @@ TEST_P(TextureZeroInitTest, WriteTextureArrayHalf) {
 
 // In this test WriteTexture fully overwrites a texture at mip level.
 TEST_P(TextureZeroInitTest, WriteWholeTextureAtMipLevel) {
-    // TODO(dawn:483): Remove this condition after implementing WriteTexture in those backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
         4, 1, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::CopySrc, kColorFormat);
     wgpu::Texture texture = device.CreateTexture(&descriptor);
@@ -1596,9 +1581,6 @@ TEST_P(TextureZeroInitTest, WriteWholeTextureAtMipLevel) {
 // Test WriteTexture to a subset of the texture at mip level, lazy init is necessary to clear the
 // other half.
 TEST_P(TextureZeroInitTest, WriteTextureHalfAtMipLevel) {
-    // TODO(dawn:483): Remove this condition after implementing WriteTexture in those backends.
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
     wgpu::TextureDescriptor descriptor = CreateTextureDescriptor(
         4, 1,
         wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::CopySrc,
@@ -1983,4 +1965,5 @@ TEST_P(CompressedTextureZeroInitTest, HalfCopyTextureToTextureMipLevel) {
 DAWN_INSTANTIATE_TEST(CompressedTextureZeroInitTest,
                       D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
                       MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
                       VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
