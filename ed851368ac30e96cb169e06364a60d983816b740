@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "707349ac_9b21aa65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-22T14:30:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ed851368ac30e96cb169e06364a60d983816b740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e154eec5_02f1332f",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-22T14:30:14Z",
+      "side": 1,
+      "message": "Nit: per-subresources -\u003e per-subresource\n\nActually maybe this sentence could be:\n\n\"The texture usage inside passes must be tracked per-subresource.\" (If that\u0027s correct.)",
+      "revId": "ed851368ac30e96cb169e06364a60d983816b740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "880cd2e7_4e7ff0a1",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-22T14:30:14Z",
+      "side": 1,
+      "message": "Hmm, this code looks pretty similar on some backends. I wonder if it could be refactored or templated.",
+      "revId": "ed851368ac30e96cb169e06364a60d983816b740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
