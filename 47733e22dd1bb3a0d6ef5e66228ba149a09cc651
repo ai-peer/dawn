@@ -85,6 +85,24 @@
       "parentUuid": "c23a7297_ffad32ca",
       "revId": "47733e22dd1bb3a0d6ef5e66228ba149a09cc651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10e3e50_887fe83f",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-22T17:31:52Z",
+      "side": 1,
+      "message": "We had such a macro before but found it made code a bit harder to reason about because there\u0027s more nested macros and more logic.\n\nAlso I have the same convern about the perf of the generate code. The compiler doesn\u0027t know that mIsValidationEnabled doesn\u0027t get changed and will have to emit the load and branch every time.",
+      "parentUuid": "72d3473d_6c203f2a",
+      "revId": "47733e22dd1bb3a0d6ef5e66228ba149a09cc651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
