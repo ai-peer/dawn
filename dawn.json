@@ -1488,6 +1488,114 @@
             }
         ]
     },
+
+
+    "vertex state": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "module", "type": "shader module"},
+            {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "input buffer count", "type": "uint32_t"},
+            {"name": "input buffers", "type": "vertex buffer layout descriptor", "annotation": "const*", "length": "input buffer count"}
+        ]
+    },
+    "vertex buffer layout": {
+        "category": "structure",
+        "extensible": false,
+        "members": [
+            {"name": "array stride", "type": "uint64_t"},
+            {"name": "step mode", "type": "input step mode", "default": "vertex"},
+            {"name": "attribute count", "type": "uint32_t"},
+            {"name": "attributes", "type": "vertex attribute descriptor", "annotation": "const*", "length": "attribute count"}
+        ]
+    },
+    "vertex attribute": {
+        "category": "structure",
+        "extensible": false,
+        "members": [
+            {"name": "format", "type": "vertex format"},
+            {"name": "offset", "type": "uint64_t"},
+            {"name": "shader location", "type": "uint32_t"}
+        ]
+    },
+
+    "primitive state": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "topology", "type": "primitive topology"},
+            {"name": "strip index format", "type": "index format", "default": "undefined"},
+            {"name": "front face", "type": "front face", "default": "CCW"},
+            {"name": "cull mode", "type": "cull mode", "default": "none"}
+        ]
+    },
+
+    "depth stencil state": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "format", "type": "texture format"},
+            {"name": "depth write enabled", "type": "bool", "default": "false"},
+            {"name": "depth compare", "type": "compare function", "default": "always"},
+            {"name": "stencil front", "type": "stencil state face descriptor"},
+            {"name": "stencil back", "type": "stencil state face descriptor"},
+            {"name": "stencil read mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
+            {"name": "stencil write mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
+            {"name": "depth bias", "type": "int32_t", "default": "0"},
+            {"name": "depth bias slope scale", "type": "float", "default": "0.0f"},
+            {"name": "depth bias clamp", "type": "float", "default": "0.0f"}
+        ]
+    },
+
+    "multisample state": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "count", "type": "uint32_t", "default": "1"},
+            {"name": "mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
+            {"name": "alpha to coverage enabled", "type": "bool", "default": "false"}
+        ]
+    },
+
+    "fragment state": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "module", "type": "shader module"},
+            {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "output target count", "type": "uint32_t"},
+            {"name": "output targets", "type": "color target state", "annotation": "const*", "length": "output target count"}
+        ]
+    },
+    "color target state": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+            {"name": "format", "type": "texture format"},
+            {"name": "blend", "type": "blend state"},
+            {"name": "write mask", "type": "color write mask", "default": "all"}
+        ]
+    },
+    "blend state": {
+        "category": "structure",
+        "extensible": false,
+        "members": [
+            {"name": "color", "type": "blend component"},
+            {"name": "alpha", "type": "blend component"}
+        ]
+    },
+    "blend component": {
+        "category": "structure",
+        "extensible": false,
+        "members": [
+            {"name": "src factor", "type": "blend factor", "default": "one"},
+            {"name": "dst factor", "type": "blend factor", "default": "zero"},
+            {"name": "operation", "type": "blend operation", "default": "add"}
+        ]
+    },
+
+
     "render pipeline descriptor": {
         "category": "structure",
         "extensible": true,
@@ -1504,7 +1612,13 @@
             {"name": "color state count", "type": "uint32_t"},
             {"name": "color states", "type": "color state descriptor", "annotation": "const*", "length": "color state count"},
             {"name": "sample mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
-            {"name": "alpha to coverage enabled", "type": "bool", "default": "false"}
+            {"name": "alpha to coverage enabled", "type": "bool", "default": "false"},
+
+            {"name": "vertex", "type": "vertex state"},
+            {"name": "primitive", "type": "primitive state", "annotation": "const*", "optional": true},
+            {"name": "depth stencil", "type": "depth stencil state", "annotation": "const*", "optional": true},
+            {"name": "multisample", "type": "multisample state", "annotation": "const*", "optional": true},
+            {"name": "fragment", "type": "fragment state", "annotation": "const*", "optional": true}
         ]
     },
     "render pipeline descriptor dummy extension": {

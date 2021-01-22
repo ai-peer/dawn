@@ -33,6 +33,8 @@ namespace dawn_native {
     struct EntryPointMetadata;
     class RenderBundleEncoder;
 
+    RenderPipelineDescriptor* NormalizeRenderPipelineDescriptor(
+        const RenderPipelineDescriptor* descriptor);
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor);
     size_t IndexFormatSize(wgpu::IndexFormat format);
