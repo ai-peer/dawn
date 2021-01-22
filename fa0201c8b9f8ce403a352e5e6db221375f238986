@@ -126,6 +126,24 @@
       "parentUuid": "e74a2364_812dcb40",
       "revId": "fa0201c8b9f8ce403a352e5e6db221375f238986",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17231c3f_43e16cb0",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-22T17:06:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "275e0a1f_d66bcf9b",
+      "revId": "fa0201c8b9f8ce403a352e5e6db221375f238986",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
