@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04f777ff_bec12b7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-01-22T23:19:50Z",
+      "side": 1,
+      "message": "This needs tests, but I wanted to float the code past you really quick to see if there\u0027s any concerns about going this direction.\n\ncwallez@, I know you had said previously that we could split this into a \"createRenderPipeline2\" for simplicity, but honestly this seems to be a far easier change than the BindGroupLayoutEntry update simply because this particular structure can\u0027t reasonably be constructed with an initializer list. As such it seems like having the two layouts live side-by-side in the same structure for a while won\u0027t be very disruptive.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
