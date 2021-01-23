@@ -19,6 +19,11 @@
 
 class GetBindGroupLayoutTests : public ValidationTest {
   protected:
+    void SetUp() override {
+        ValidationTest::SetUp();
+        DAWN_SKIP_TEST_IF(UsesWire());
+    }
+
     wgpu::RenderPipeline RenderPipelineFromFragmentShader(const char* shader) {
         wgpu::ShaderModule vsModule = utils::CreateShaderModuleFromWGSL(device, R"(
                 [[stage(vertex)]] fn main() -> void {
