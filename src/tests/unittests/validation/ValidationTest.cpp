@@ -21,11 +21,37 @@
 
 #include <algorithm>
 
-void ValidationTest::SetUp() {
-    instance = std::make_unique<dawn_native::Instance>();
-    instance->DiscoverDefaultAdapters();
+namespace {
 
-    std::vector<dawn_native::Adapter> adapters = instance->GetAdapters();
+    DawnValidationTestEnvironment* gTestEnv = nullptr;
+
+}  // namespace
+
+void InitDawnValidationTestEnvironment(int argc, char** argv) {
+    gTestEnv = new DawnValidationTestEnvironment(argc, argv);
+    testing::AddGlobalTestEnvironment(gTestEnv);
+}
+
+DawnValidationTestEnvironment::DawnValidationTestEnvironment(int argc, char** argv)
+    : mOptions(utils::InstanceHolder::Options::FromCommandLine(argc, argv)),
+      mInstanceHolder(new utils::InstanceHolder(mOptions)) {
+    mInstanceHolder->DiscoverDefaultAdapters();
+}
+
+DawnValidationTestEnvironment::~DawnValidationTestEnvironment() = default;
+
+void ValidationTest::SetUp() {
+    if (gTestEnv == nullptr) {
+        // TODO(enga): Remove when Chromium is updated to initialize the
+        // test environment.
+        gTestEnv = new DawnValidationTestEnvironment(0, nullptr);
+    }
+
+    // Ensure the procs have been set to the default in case a previous test set them.
+    gTestEnv->GetInstanceHolder()->EnsureProcs();
+
+    std::vector<dawn_native::Adapter> adapters =
+        gTestEnv->GetInstanceHolder()->GetInstance()->GetAdapters();
 
     // Validation tests run against the null backend, find the corresponding adapter
     bool foundNullAdapter = false;
@@ -42,9 +68,8 @@ void ValidationTest::SetUp() {
 
     ASSERT(foundNullAdapter);
 
-    dawnProcSetProcs(&dawn_native::GetProcs());
-
-    device = CreateTestDevice();
+    std::tie(device, backendDevice) =
+        gTestEnv->GetInstanceHolder()->RegisterDevice(CreateTestDevice());
     device.SetUncapturedErrorCallback(ValidationTest::OnDeviceError, this);
 }
 
@@ -62,6 +87,10 @@ void ValidationTest::TearDown() {
         EXPECT_EQ(mLastWarningCount,
                   dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
     }
+}
+
+dawn_native::Instance* ValidationTest::GetInstance() {
+    return gTestEnv->GetInstanceHolder()->GetInstance();
 }
 
 void ValidationTest::StartExpectDeviceError() {
@@ -100,14 +129,14 @@ bool ValidationTest::HasWGSL() const {
 }
 
 bool ValidationTest::HasToggleEnabled(const char* toggle) const {
-    auto toggles = dawn_native::GetTogglesUsed(device.Get());
+    auto toggles = dawn_native::GetTogglesUsed(backendDevice);
     return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {
                return strcmp(toggle, name) == 0;
            }) != toggles.end();
 }
 
-wgpu::Device ValidationTest::CreateTestDevice() {
-    return wgpu::Device::Acquire(adapter.CreateDevice());
+WGPUDevice ValidationTest::CreateTestDevice() {
+    return adapter.CreateDevice();
 }
 
 // static

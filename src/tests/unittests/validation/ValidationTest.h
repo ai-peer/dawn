@@ -19,6 +19,7 @@
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
 #include "gtest/gtest.h"
+#include "utils/InstanceHolder.h"
 
 #define ASSERT_DEVICE_ERROR(statement)                          \
     StartExpectDeviceError();                                   \
@@ -48,12 +49,30 @@
         mLastWarningCount = warningsAfter;                                                       \
     } while (0)
 
+void InitDawnValidationTestEnvironment(int argc, char** argv);
+
+class DawnValidationTestEnvironment : public testing::Environment {
+  public:
+    DawnValidationTestEnvironment(int argc, char** argv);
+    ~DawnValidationTestEnvironment() override;
+
+    utils::InstanceHolder* GetInstanceHolder() {
+        return mInstanceHolder.get();
+    }
+
+  private:
+    utils::InstanceHolder::Options mOptions;
+    std::unique_ptr<utils::InstanceHolder> mInstanceHolder;
+};
+
 class ValidationTest : public testing::Test {
   public:
     ~ValidationTest() override;
 
     void SetUp() override;
     void TearDown() override;
+
+    dawn_native::Instance* GetInstance();
 
     void StartExpectDeviceError();
     bool EndExpectDeviceError();
@@ -79,15 +98,17 @@ class ValidationTest : public testing::Test {
     bool HasToggleEnabled(const char* toggle) const;
 
   protected:
-    virtual wgpu::Device CreateTestDevice();
+    virtual WGPUDevice CreateTestDevice();
 
-    wgpu::Device device;
     dawn_native::Adapter adapter;
-    std::unique_ptr<dawn_native::Instance> instance;
+    wgpu::Device device;
+    WGPUDevice backendDevice;
 
     size_t mLastWarningCount = 0;
 
   private:
+    std::unique_ptr<utils::InstanceHolder> mInstanceHolder;
+
     static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
     std::string mDeviceErrorMessage;
     bool mExpectError = false;

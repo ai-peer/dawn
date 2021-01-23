@@ -23,7 +23,8 @@ namespace {
         // Query with a valid toggle name
         {
             const char* kValidToggleName = "emulate_store_and_msaa_resolve";
-            const dawn_native::ToggleInfo* toggleInfo = instance->GetToggleInfo(kValidToggleName);
+            const dawn_native::ToggleInfo* toggleInfo =
+                GetInstance()->GetToggleInfo(kValidToggleName);
             ASSERT_NE(nullptr, toggleInfo);
             ASSERT_NE(nullptr, toggleInfo->name);
             ASSERT_NE(nullptr, toggleInfo->description);
@@ -33,7 +34,8 @@ namespace {
         // Query with an invalid toggle name
         {
             const char* kInvalidToggleName = "!@#$%^&*";
-            const dawn_native::ToggleInfo* toggleInfo = instance->GetToggleInfo(kInvalidToggleName);
+            const dawn_native::ToggleInfo* toggleInfo =
+                GetInstance()->GetToggleInfo(kInvalidToggleName);
             ASSERT_EQ(nullptr, toggleInfo);
         }
     }
