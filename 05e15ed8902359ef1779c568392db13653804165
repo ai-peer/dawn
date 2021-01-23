@@ -16,6 +16,257 @@
       "message": "This needs tests, but I wanted to float the code past you really quick to see if there\u0027s any concerns about going this direction.\n\ncwallez@, I know you had said previously that we could split this into a \"createRenderPipeline2\" for simplicity, but honestly this seems to be a far easier change than the BindGroupLayoutEntry update simply because this particular structure can\u0027t reasonably be constructed with an initializer list. As such it seems like having the two layouts live side-by-side in the same structure for a while won\u0027t be very disruptive.",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c96f05_cab729c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "Reviewed only dawn.json so far",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5982cc87_b9d5cade",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "Should be \"buffer count\"/\"buffers\" according to the latest spec (but we should confirm everyone likes that naming before we settle on it here)",
+      "range": {
+        "startLine": 1499,
+        "startChar": 22,
+        "endLine": 1499,
+        "endChar": 34
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593d801b_fba82be0",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "The JS spec allows this array to have holes, but I don\u0027t think it\u0027s possible in the (old or new) C API. Now seems like the time to do something about this. Some options:\n\n- Array of pointers (gross)\n- Don\u0027t make it sparse, instead add a \"slot\" field to VertexBufferLayout (like BindGroupLayoutDescriptor.entries)\n- Use the default-initialized VertexBufferLayout value to indicate an unused vertex buffer (by checking attributeCount\u003d\u003d0 and/or stepMode\u003d\u003dUndefined)",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11a59b6b_40d543ca",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "Is this meant to be just \"vertex buffer layout\"?",
+      "range": {
+        "startLine": 1500,
+        "startChar": 47,
+        "endLine": 1500,
+        "endChar": 78
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b430c0cf_a388f748",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "just \"vertex attribute\"?",
+      "range": {
+        "startLine": 1510,
+        "startChar": 44,
+        "endLine": 1510,
+        "endChar": 71
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24630c29_61638fe1",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "should default to triangle list",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e570397_45b8b283",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "Upstream this is GPUStencilFaceState, we should probably have the updated name now (can probably just rename it and typedef WGPUStencilStateFaceDescriptor to it)",
+      "range": {
+        "startLine": 1542,
+        "startChar": 46,
+        "endLine": 1542,
+        "endChar": 75
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d6a4e59_04fc9776",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "also renamed upstream",
+      "range": {
+        "startLine": 1568,
+        "startChar": 22,
+        "endLine": 1568,
+        "endChar": 36
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a6dba5c_952ab19d",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "This member needs to be nullable (and default to null)",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c8fb10_7b0f525f",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "I don\u0027t think this needs to be pointerized - it\u0027s not optional, it defaults to the default value {} in JS.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c068d0_807a8a5c",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "Probably makes sense to represent \"unspecified\" here with the default value (.format\u003d\u003dUndefined etc) instead of having a pointer indirection.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7a64670_42b25a16",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "same, not optional, defaults to {}",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a5d54d_51b2e339",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-23T01:57:35Z",
+      "side": 1,
+      "message": "same, probably makes sense to represent \"unspecified\" here with the default value (.module\u003d\u003dnullptr etc) instead of having a pointer indirection.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
