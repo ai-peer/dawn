@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d798bbf2_278d3028",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-23T07:26:03Z",
+      "side": 1,
+      "message": "I think there are some other places we can fix too\n\nhttps://source.chromium.org/search?q\u003dwgpu::SamplerDescriptor%5Cs%5CS%2B%5Cs%3D%5Cs%7B%7D\n(not everything in that search, but some of them)",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f00f26d4_659e5a66",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-23T07:26:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f274624d_cf45cdc5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-23T07:26:03Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think it\u0027s worth making this a static variable. We can just stack-allocate it in the function.",
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd58623_94d8cc67",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-23T07:26:03Z",
+      "side": 1,
+      "message": "nit: in Dawn, we prefer explicit boolean conversions: \"descriptor !\u003d nullptr ?\"",
+      "range": {
+        "startLine": 1068,
+        "startChar": 21,
+        "endLine": 1068,
+        "endChar": 31
+      },
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
