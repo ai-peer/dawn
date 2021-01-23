@@ -1063,7 +1063,9 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateSamplerInternal(SamplerBase** result,
                                                  const SamplerDescriptor* descriptor) {
+        static const SamplerDescriptor defaultDescriptor = {};
         DAWN_TRY(ValidateIsAlive());
+        descriptor = descriptor ? descriptor : &defaultDescriptor;
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateSamplerDescriptor(this, descriptor));
         }
