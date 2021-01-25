@@ -32,6 +32,10 @@ namespace dawn_native { namespace d3d12 {
         // indicates that current driver supports the maximum shader model is shader model 6.2.
         uint32_t shaderModel;
         PerStage<std::wstring> shaderProfiles;
+
+        // sharedResourceCapability indicates which data formats can be imported as a DX11 texture
+        // into Dawn. The only tier2 supported format or NV12 format is needed.
+        bool supportsSharedResourceCapabilityTier2;
     };
 
     ResultOrError<D3D12DeviceInfo> GatherDeviceInfo(const Adapter& adapter);

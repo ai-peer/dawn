@@ -23,6 +23,24 @@
 
 #include <array>
 
+// About multi-plane texture formats.
+//
+// Dawn supports additional "multi-plane" formats when Toggle::UseMultiPlaneTextures is enabled.
+// When enabled, Dawn treats planar data as sub-resources (ie. 1 sub-resource == 1 view == 1 plane).
+// A multi-plane format name encodes the channel mapping and order of planes. For example,
+// R8BG82plane420Unorm is YUV 4:2:0 where Plane 0 = R8, and Plane 1 = RG16.
+//
+// Requirements:
+// * Plane aspects cannot be combined with color, depth, or stencil aspects.
+// * Only compatible multi-plane texture formats of planes can be used with multi-plane texture
+// formats.
+// * Multi-plane texture formats must set ALL plane aspects (ex. 2plane == Aspect::Plane0 |
+// Aspect::Plane1).
+// * Can't access multiple planes without creating per plane views (ie. no color-conversion).
+// * Multi-plane texture cannot be written or read without a per plane view.
+//
+// TODO(dawn:551): Consider moving this comment.
+
 namespace dawn_native {
 
     enum class Aspect : uint8_t;
@@ -56,7 +74,7 @@ namespace dawn_native {
 
     // The number of formats Dawn knows about. Asserts in BuildFormatTable ensure that this is the
     // exact number of known format.
-    static constexpr size_t kKnownFormatCount = 53;
+    static constexpr size_t kKnownFormatCount = 54;
 
     struct Format;
     using FormatTable = std::array<Format, kKnownFormatCount>;
@@ -75,6 +93,7 @@ namespace dawn_native {
         bool HasDepth() const;
         bool HasStencil() const;
         bool HasDepthOrStencil() const;
+        bool IsMultiPlane() const;
 
         const AspectInfo& GetAspectInfo(wgpu::TextureAspect aspect) const;
         const AspectInfo& GetAspectInfo(Aspect aspect) const;
@@ -82,6 +101,12 @@ namespace dawn_native {
         // The index of the format in the list of all known formats: a unique number for each format
         // in [0, kKnownFormatCount)
         size_t GetIndex() const;
+
+        // Multi-plane texture formats can't access multiple planes using a single view. Since
+        // a multi-plane format cannot have multiple formats per plane, GetPlaneFormat()
+        // is used to lookup the compatible view format at the plane index.
+        // TODO(dawn:551): Consider moving this into a separate table.
+        wgpu::TextureFormat GetPlaneFormat(wgpu::TextureAspect planeAspect) const;
 
       private:
         // The most common aspect: the color aspect for color texture, the depth aspect for

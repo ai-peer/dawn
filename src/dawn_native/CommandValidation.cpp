@@ -633,7 +633,8 @@ namespace dawn_native {
         return {};
     }
 
-    // Always returns a single aspect (color, stencil, or depth).
+    // Always returns a single aspect (color, stencil, depth, or ith plane for multi-plane
+    // textures).
     ResultOrError<Aspect> SingleAspectUsedByTextureCopyView(const TextureCopyView& view) {
         const Format& format = view.texture->GetFormat();
         switch (view.aspect) {
@@ -653,6 +654,9 @@ namespace dawn_native {
             case wgpu::TextureAspect::StencilOnly:
                 ASSERT(format.aspects & Aspect::Stencil);
                 return Aspect::Stencil;
+            case wgpu::TextureAspect::Plane0:
+            case wgpu::TextureAspect::Plane1:
+                return DAWN_VALIDATION_ERROR("Multi-plane textures do not support copies.");
         }
     }
 
@@ -710,6 +714,11 @@ namespace dawn_native {
         ASSERT(wgpu::HasZeroOrOneBits(usage));
         if (!(texture->GetUsage() & usage)) {
             return DAWN_VALIDATION_ERROR("texture doesn't have the required usage.");
+        }
+
+        // TODO(dawn:551): Consider supporting more usages.
+        if (texture->GetFormat().IsMultiPlane() && usage != wgpu::TextureUsage::Sampled) {
+            return DAWN_VALIDATION_ERROR("Multi-plane textures doesn't have the required usage.");
         }
 
         return {};
