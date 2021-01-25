@@ -65,6 +65,7 @@ class DeviceLostTest : public DawnTest {
 
     void TearDown() override {
         mockDeviceLostCallback = nullptr;
+        mockFenceOnCompletionCallback = nullptr;
         DawnTest::TearDown();
     }
 
@@ -451,7 +452,7 @@ TEST_P(DeviceLostTest, FenceOnCompletionFails) {
     ASSERT_DEVICE_ERROR(device.Tick());
 
     // completed value should not have changed from initial value
-    EXPECT_EQ(fence.GetCompletedValue(), 0u);
+    EXPECT_EQ(fence.GetCompletedValue(), 2u);
 }
 
 // Test that Fence::OnCompletion callbacks with device lost status when device is lost after calling
@@ -470,7 +471,7 @@ TEST_P(DeviceLostTest, FenceOnCompletionBeforeLossFails) {
     SetCallbackAndLoseForTesting();
     ASSERT_DEVICE_ERROR(device.Tick());
 
-    EXPECT_EQ(fence.GetCompletedValue(), 0u);
+    EXPECT_EQ(fence.GetCompletedValue(), 2u);
 }
 
 // Regression test for the Null backend not properly setting the completedSerial when
