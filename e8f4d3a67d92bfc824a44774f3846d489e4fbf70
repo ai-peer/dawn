@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3622799_efe794b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T13:56:36Z",
+      "side": 1,
+      "message": "It occurs to me the better thing to do here (for lazy clears in writepixels) would be:\n\n- if the subresource is uninitialized,\n  - if the writepixels is full width \u0026 height\n    - set the subresource initialized\n  - else\n    - clear the subresource before writing\n\nBetter still would be to track initialized regions as subrects, but that\u0027d be a larger change.",
+      "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
