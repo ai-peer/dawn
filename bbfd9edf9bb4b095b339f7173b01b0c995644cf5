@@ -16,6 +16,23 @@
       "message": "Yay! LGTM",
       "revId": "bbfd9edf9bb4b095b339f7173b01b0c995644cf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c2b39e1_91f825f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T17:26:47Z",
+      "side": 1,
+      "message": "PT(another)L\n\nThanks!",
+      "revId": "bbfd9edf9bb4b095b339f7173b01b0c995644cf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
