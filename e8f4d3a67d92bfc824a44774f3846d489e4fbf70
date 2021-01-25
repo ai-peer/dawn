@@ -105,6 +105,24 @@
       "parentUuid": "e4fcf6f5_dcd7976f",
       "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23087a82_6630d846",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T17:03:34Z",
+      "side": 1,
+      "message": "Thanks! That\u0027s cleaner than what I had started to write.",
+      "parentUuid": "2aa0de1c_e2a0769f",
+      "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
