@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0e7b86_5d9e7cd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "Looks good overall. You might want to run this through webgpu-native to gets Dzmitry\u0027s opinion on the new structures etc. You can make your own copy of https://dawn-review.googlesource.com/c/dawn/+/31572 with these changes (and removals of deprecated things), then ninja -C out/Debug dawn_headers and copy out/Debug/gen/src/incude/dawn/webgpu.h to webgpu-native/webgpu.h (not this in-flight PR I just made https://github.com/webgpu-native/webgpu-headers/pull/76 )",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5982cc87_b9d5cade",
@@ -100,6 +117,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98b28dfe_fb432ce2",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "The latter seems the most practical one.",
+      "parentUuid": "593d801b_fba82be0",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3354c9_adb8f53a",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "nit: we could just rename \"vertex buffer layout descriptor\" and add typedefs in the headers.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b430c0cf_a388f748",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -117,6 +169,23 @@
         "endLine": 1510,
         "endChar": 71
       },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "270f3135_6d21fd8e",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "ditto for rename + typedefs.",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -203,6 +272,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "192ad73d_1fb22ba1",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "Is there no better idiomatic way to do it? I\u0027m a bit worried that this very common thing will require even more pointer indirection. But maybe there\u0027s no othe way.",
+      "parentUuid": "3a6dba5c_952ab19d",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53c8fb10_7b0f525f",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -265,6 +352,41 @@
       "writtenOn": "2021-01-23T01:57:35Z",
       "side": 1,
       "message": "same, probably makes sense to represent \"unspecified\" here with the default value (.module\u003d\u003dnullptr etc) instead of having a pointer indirection.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04451820_f74b0272",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "Yes, that\u0027s actually something we wanted to fix for a while (removing the pointer indirection for fragment) so we might as well do it now.",
+      "parentUuid": "71a5d54d_51b2e339",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7a2902e_be9ba0b3",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T09:31:57Z",
+      "side": 1,
+      "message": "nit: stray definition",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
