@@ -87,6 +87,24 @@
       "parentUuid": "4df65908_f2f1ad6d",
       "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aa0de1c_e2a0769f",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T16:35:26Z",
+      "side": 1,
+      "message": "Yep that works, and is what is done in other backends https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/DeviceD3D12.cpp;l\u003d406;drc\u003dce8d17ff494cf684f35c8ff64cb6bd0947adcf46;bpv\u003d1;bpt\u003d1\n\n(the common code for WriteTexture calls CopyFromStagingToTexture)",
+      "parentUuid": "e4fcf6f5_dcd7976f",
+      "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
