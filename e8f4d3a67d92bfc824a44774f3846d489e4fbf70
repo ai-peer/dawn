@@ -69,6 +69,24 @@
       "parentUuid": "7f638057_dd9ee900",
       "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4fcf6f5_dcd7976f",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T16:32:09Z",
+      "side": 1,
+      "message": "Yeah, as I said above, I think the safer solution is:\n\nif the subresource is uninitialized,\n  - if the writepixels is full width \u0026 height\n    - set the subresource initialized\n  - else\n    - clear the subresource before writing\n\nDoes that make sense?\n\n(I mean the safest thing would be to always clear if uninit, but the above seems a safe enough optimization.)",
+      "parentUuid": "4df65908_f2f1ad6d",
+      "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
