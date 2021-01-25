@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a74798c5_900bac40",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-01-25T23:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d798bbf2_278d3028",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 63
+      },
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f00f26d4_659e5a66",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9841b96_df1fafcd",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-01-25T23:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f274624d_cf45cdc5",
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cd58623_94d8cc67",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-01-23T07:26:03Z",
       "side": 1,
       "message": "nit: in Dawn, we prefer explicit boolean conversions: \"descriptor !\u003d nullptr ?\"",
+      "range": {
+        "startLine": 1068,
+        "startChar": 21,
+        "endLine": 1068,
+        "endChar": 31
+      },
+      "revId": "40ac074e058a6ba228e4d17dc51276d61afda5c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "187201dc_eb465ed0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-01-25T23:36:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cd58623_94d8cc67",
       "range": {
         "startLine": 1068,
         "startChar": 21,
