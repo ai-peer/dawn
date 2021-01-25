@@ -644,6 +644,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
 // buffer is composed of vertices, indices, uniforms and readonly storage. Data to be read in the
 // buffer in render pass depend on the write operation in compute pass.
 TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
+    DAWN_SKIP_TEST_IF(IsOpenGLES());
     // Create pipeline, bind group, and a complex buffer for compute pass.
     wgpu::ShaderModule csModule = utils::CreateShaderModuleFromWGSL(device, R"(
         [[block]] struct Contents {
