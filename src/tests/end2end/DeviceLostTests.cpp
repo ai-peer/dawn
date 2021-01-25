@@ -65,6 +65,7 @@ class DeviceLostTest : public DawnTest {
 
     void TearDown() override {
         mockDeviceLostCallback = nullptr;
+        mockFenceOnCompletionCallback = nullptr;
         DawnTest::TearDown();
     }
 
