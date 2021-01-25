@@ -67,6 +67,24 @@
       "message": "Could be a for-loop. Also fine as-written if you prefer.",
       "revId": "2a0a090e3b7749929dead1039054774a6335db42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5fad9a0_5715e6e7",
+        "filename": "src/dawn_wire/client/Client.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T17:01:12Z",
+      "side": 1,
+      "message": "(was done)",
+      "parentUuid": "e89ff779_2d2da35b",
+      "revId": "2a0a090e3b7749929dead1039054774a6335db42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
