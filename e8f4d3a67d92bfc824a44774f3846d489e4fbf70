@@ -34,6 +34,23 @@
       "parentUuid": "f3622799_efe794b8",
       "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f638057_dd9ee900",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-25T16:10:25Z",
+      "side": 1,
+      "message": "What happens if the texture isn\u0027t initialized and we WriteTexture to only part of the subresource? Aren\u0027t we going to have uninitialized data in the part we didn\u0027t write to?",
+      "revId": "e8f4d3a67d92bfc824a44774f3846d489e4fbf70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
