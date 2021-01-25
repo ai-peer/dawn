@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d201c8cc_32859313",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T21:12:22Z",
+      "side": 1,
+      "message": "PTAL. I\u0027m not sure this is the right thing to do, but if we do need these calls it\u0027ll need WebGPU-compat validation or a workaround on ES.",
+      "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
