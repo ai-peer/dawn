@@ -86,6 +86,24 @@
       "parentUuid": "880cd2e7_4e7ff0a1",
       "revId": "ed851368ac30e96cb169e06364a60d983816b740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6568c61_e4bbcce5",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T16:55:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b1a20d9_0cf69482",
+      "revId": "ed851368ac30e96cb169e06364a60d983816b740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
