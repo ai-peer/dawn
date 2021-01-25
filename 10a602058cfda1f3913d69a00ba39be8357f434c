@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdd70adc_69daad34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-25T18:53:30Z",
+      "side": 1,
+      "message": "Hey Corentin, any idea why hiding the GLFW windows for OpenGL and OpenGL ES would cause errors in the swapchain tests on *other* backends (Vulkan and Null)? Seems weird that this would interfere.\n\n(This is not a high priority, just find them a bit annoying.)",
+      "revId": "10a602058cfda1f3913d69a00ba39be8357f434c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
