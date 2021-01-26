@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!",
       "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f3ab6ff_6dcd5fb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T01:23:07Z",
+      "side": 1,
+      "message": "LGTM; can we comment about why in the code?",
+      "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
