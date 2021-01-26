@@ -50,6 +50,41 @@
       "message": "LGTM",
       "revId": "d479e7c07af2310f670eab1b5a49df025aff2d3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7863ed13_1d452af6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T13:03:25Z",
+      "side": 1,
+      "message": "Thanks for your reviews!",
+      "revId": "d479e7c07af2310f670eab1b5a49df025aff2d3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8148dcfe_cff5b4bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T13:03:25Z",
+      "side": 1,
+      "message": "You haven\u0027t, but it does. It\u0027s a good point; I\u0027d like to change these IsANGLE() calls to IsSwANGLE() in a future patch, since ANGLE isn\u0027t to blame (and the failures shouldn\u0027t happen with ANGLE on native drivers).",
+      "parentUuid": "b2c986ad_16e8f92f",
+      "revId": "d479e7c07af2310f670eab1b5a49df025aff2d3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
