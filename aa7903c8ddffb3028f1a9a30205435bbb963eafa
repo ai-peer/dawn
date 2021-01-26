@@ -16,6 +16,40 @@
       "message": "PTAL. Thanks!",
       "revId": "aa7903c8ddffb3028f1a9a30205435bbb963eafa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f9eac80_68046b9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T14:16:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "aa7903c8ddffb3028f1a9a30205435bbb963eafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "450f4ec8_eb4e3885",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T14:16:28Z",
+      "side": 1,
+      "message": "Uh wow, SPIRV-Cross seems to really trip on this one.",
+      "revId": "aa7903c8ddffb3028f1a9a30205435bbb963eafa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
