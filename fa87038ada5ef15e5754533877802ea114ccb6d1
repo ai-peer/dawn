@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a1db4899_6e34fcff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T12:55:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "414bb9b3_69353648",
+      "revId": "fa87038ada5ef15e5754533877802ea114ccb6d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "1d132442_9528256b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -82,6 +100,24 @@
       "writtenOn": "2021-01-26T08:37:05Z",
       "side": 1,
       "message": "How was this caught? Any tests it can enable?",
+      "revId": "fa87038ada5ef15e5754533877802ea114ccb6d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a55458_60216e19",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T12:55:31Z",
+      "side": 1,
+      "message": "Caught by running tests with ANGLE in Debug. No tests were failing, oddly. It seems ANGLE (and GLES drivers) are forgiving and treat this as a warning. Once we\u0027re running ANGLE on the bots, we should see those warnings (or maybe we can trigger them to cause errors?)",
+      "parentUuid": "09bb4be2_d2dce16f",
       "revId": "fa87038ada5ef15e5754533877802ea114ccb6d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
