@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d855c668_77a5cf8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T18:39:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a040ca3_f546c357",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T18:39:14Z",
+      "side": 1,
+      "message": "nit: perhaps we can have an enum OcclusionExpectation::Result::{Zero, One}\n\nThis would be more explicit and easier to understand than true/false.",
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d022cf6_e439478d",
