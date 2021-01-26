@@ -561,6 +561,8 @@ namespace dawn_native {
                 cmd->width = width;
                 cmd->height = height;
 
+                cmd->occlusionQuerySet = descriptor->occlusionQuerySet;
+
                 return {};
             });
 
