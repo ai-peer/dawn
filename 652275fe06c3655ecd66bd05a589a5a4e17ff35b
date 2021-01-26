@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "652275fe06c3655ecd66bd05a589a5a4e17ff35b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c1b242_c054a9aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T14:17:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "652275fe06c3655ecd66bd05a589a5a4e17ff35b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c204192b_0fcc61fa",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T14:17:55Z",
+      "side": 1,
+      "message": "Nit: this comment now seems incorrect.",
+      "revId": "652275fe06c3655ecd66bd05a589a5a4e17ff35b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
