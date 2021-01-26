@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!\n\n(Last one. ANGLE run should be green after this.)",
       "revId": "dd6f60c9fff409702eb820449eb5f266f7398536",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b2bf90_20388f7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T14:54:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dd6f60c9fff409702eb820449eb5f266f7398536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
