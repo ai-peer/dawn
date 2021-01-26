@@ -87,6 +87,41 @@
       "parentUuid": "d17760ea_88538072",
       "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749e862d_107e4a93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T21:51:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b07540b1_f3df8349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T21:51:12Z",
+      "side": 1,
+      "message": "Sounds fine. We can always add it back when we figure out the specific rules for Dawn\u0027s SPIR-V ingestion.",
+      "parentUuid": "35bebec7_4d2b9349",
+      "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
