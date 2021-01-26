@@ -16,6 +16,69 @@
       "message": "PTAL!",
       "revId": "315809b300397d98df80b9586047cd541d0c9877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f8f9ae5_84826d4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T19:23:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "315809b300397d98df80b9586047cd541d0c9877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a28ddcd4_04d322ea",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T19:23:37Z",
+      "side": 1,
+      "message": "nit: + \"with render encoder attachment state\"",
+      "range": {
+        "startLine": 175,
+        "startChar": 83,
+        "endLine": 175,
+        "endChar": 93
+      },
+      "revId": "315809b300397d98df80b9586047cd541d0c9877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a361f3_066f7172",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T19:23:37Z",
+      "side": 1,
+      "message": "nit: + \"attachment state\"",
+      "range": {
+        "startLine": 205,
+        "startChar": 73,
+        "endLine": 205,
+        "endChar": 77
+      },
+      "revId": "315809b300397d98df80b9586047cd541d0c9877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
