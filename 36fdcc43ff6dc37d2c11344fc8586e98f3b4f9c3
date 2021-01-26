@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe68d33_4d30f6c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T21:08:39Z",
+      "side": 1,
+      "message": "LGTM - do we have a process for deciding when it\u0027s worth adding a native regression test?\nOverall I think it would be worth it for something like this.",
+      "revId": "36fdcc43ff6dc37d2c11344fc8586e98f3b4f9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
