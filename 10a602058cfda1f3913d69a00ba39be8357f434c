@@ -33,6 +33,24 @@
       "message": "I don\u0027t know why this would be happening. Could does the failure happen without this CL maybe? (so it\u0027s a preexisting issue?)",
       "revId": "10a602058cfda1f3913d69a00ba39be8357f434c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb919e70_91231b1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T15:33:15Z",
+      "side": 1,
+      "message": "Nope, it\u0027s definitely this CL. I have an idea, though. Perhaps the \"hidden\" state is persisting to the next call to glfwCreateWindow() on the Vulkan or Null backend. Will try just resetting it before function exit.",
+      "parentUuid": "d9232dc1_9a02b8fe",
+      "revId": "10a602058cfda1f3913d69a00ba39be8357f434c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
