@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "377e9824_ac2d3b5d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T20:01:49Z",
+      "side": 1,
+      "message": "Nit: s/Move/Do/ or s/at/to/",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dc7b6c34_478ce7c8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -20,6 +37,23 @@
         "endLine": 11,
         "endChar": 35
       },
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfc7a7c_2db50e22",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T20:01:49Z",
+      "side": 1,
+      "message": "Nit: s/move/do/ or s/at/to/",
       "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +88,40 @@
       "writtenOn": "2021-01-26T19:02:43Z",
       "side": 1,
       "message": "LGTM overall",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34194c83_9b67079c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T20:01:49Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2828b002_0b9b6725",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T20:01:49Z",
+      "side": 1,
+      "message": "Nit: could just be one if and \u0026\u0026",
       "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
