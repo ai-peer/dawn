@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0f20aed_1a62176f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T13:04:36Z",
+      "side": 1,
+      "message": "Sure but we should still test that SRGB blending happens even if we don\u0027t glEnable GL_FRAMEBUFFER_SRGB",
+      "parentUuid": "297fc596_12462e47",
+      "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2166fcb0_8f8a124b",
