@@ -69,6 +69,24 @@
       "parentUuid": "497b6099_7a6f55d1",
       "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35bebec7_4d2b9349",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-01-26T21:39:03Z",
+      "side": 1,
+      "message": "Eventually we will be using Tint to SPIRV-\u003eSPIRV to validate/regularlize inputs, which will remove OpUndefs.\n\nI think it is resonable to remove this specific test. For other cases where we want to check that unsupported op codes are being rejected, I think keeping such tests would make sense.",
+      "parentUuid": "d17760ea_88538072",
+      "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
