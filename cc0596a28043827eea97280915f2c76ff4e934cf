@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de83ebbf_dcb46ad1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T21:18:32Z",
+      "side": 1,
+      "message": "What happens if this SPIR-V were to be passed into Tint? \n\nDawn and webgpu.h users will be able to use SPIR-V in native in both our implementation and Mozilla\u0027s.\n\nWe\u0027re still going to need some sort of validation for OpCodes that aren\u0027t supported.\n\nWe could remove this if you\u0027d like for now, but maybe it\u0027s worth keeping anyway for the future. What do you think?",
+      "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
