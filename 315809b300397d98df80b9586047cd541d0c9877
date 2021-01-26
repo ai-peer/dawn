@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b03166_e6ca1e63",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T19:42:32Z",
+      "side": 1,
+      "message": "Nit: s/Move/Do/ or s/at/to/",
+      "revId": "315809b300397d98df80b9586047cd541d0c9877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8845839f_1359ec3d",
@@ -31,6 +48,23 @@
       "writtenOn": "2021-01-26T19:23:37Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "315809b300397d98df80b9586047cd541d0c9877",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1493b3e_0fe64e87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T19:42:32Z",
+      "side": 1,
+      "message": "LGTM2",
       "revId": "315809b300397d98df80b9586047cd541d0c9877",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
