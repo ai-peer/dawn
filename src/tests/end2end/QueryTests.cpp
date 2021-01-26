@@ -33,6 +33,24 @@ class QueryTests : public DawnTest {
     }
 };
 
+class OcclusionExpectation : public detail::Expectation {
+  public:
+    ~OcclusionExpectation() override = default;
+
+    testing::AssertionResult Check(const void* data, size_t size) override {
+        ASSERT(size % sizeof(uint64_t) == 0);
+        const uint64_t* actual = static_cast<const uint64_t*>(data);
+        for (size_t i = 0; i < size / sizeof(uint64_t); i++) {
+            if (actual[i] == 0) {
+                return testing::AssertionFailure()
+                       << "Expected data[" << i << "] is a non-zero value." << std::endl;
+            }
+        }
+
+        return testing::AssertionSuccess();
+    }
+};
+
 class OcclusionQueryTests : public QueryTests {
   protected:
     void SetUp() override {
@@ -80,7 +98,7 @@ class OcclusionQueryTests : public QueryTests {
 
     void TestOcclusionQueryWithDepthStencilTest(bool depthTestEnabled,
                                                 bool stencilTestEnabled,
-                                                uint64_t expected) {
+                                                bool zeroExpected) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.vertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
@@ -129,10 +147,14 @@ class OcclusionQueryTests : public QueryTests {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_BUFFER_U64_EQ(expected, destination, 0);
+        if (zeroExpected) {
+            EXPECT_BUFFER_U64_EQ(0, destination, 0);
+        } else {
+            EXPECT_BUFFER(destination, 0, sizeof(uint64_t), new OcclusionExpectation);
+        }
     }
 
-    void TestOcclusionQueryWithScissorTest(ScissorRect rect, uint64_t expected) {
+    void TestOcclusionQueryWithScissorTest(ScissorRect rect, bool zeroExpected) {
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.vertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
@@ -162,7 +184,11 @@ class OcclusionQueryTests : public QueryTests {
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_BUFFER_U64_EQ(expected, destination, 0);
+        if (zeroExpected) {
+            EXPECT_BUFFER_U64_EQ(0, destination, 0);
+        } else {
+            EXPECT_BUFFER(destination, 0, sizeof(uint64_t), new OcclusionExpectation);
+        }
     }
 
     wgpu::ShaderModule vsModule;
@@ -184,39 +210,39 @@ TEST_P(OcclusionQueryTests, QuerySetDestroy) {
 }
 
 // Draw a bottom right triangle with depth/stencil testing enabled and check whether there is
-// sample passed the testing by non-precise occlusion query with the binary results:
-// 0 indicates that no sample passed depth/stencil testing,
-// 1 indicates that at least one sample passed depth/stencil testing.
+// sample passed the testing by non-precise occlusion query with the results:
+// zero indicates that no sample passed depth/stencil testing,
+// non-zero indicates that at least one sample passed depth/stencil testing.
 TEST_P(OcclusionQueryTests, QueryWithDepthStencilTest) {
-    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal and Vulkan
-    DAWN_SKIP_TEST_IF(IsMetal() || IsVulkan());
+    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal
+    DAWN_SKIP_TEST_IF(IsMetal());
 
     // Disable depth/stencil testing, the samples always pass the testing, the expected occlusion
-    // result is 1.
-    TestOcclusionQueryWithDepthStencilTest(false, false, 1);
+    // result is non-zero.
+    TestOcclusionQueryWithDepthStencilTest(false, false, false);
 
     // Only enable depth testing and set the samples never pass the testing, the expected occlusion
-    // result is 0.
-    TestOcclusionQueryWithDepthStencilTest(true, false, 0);
+    // result is zero.
+    TestOcclusionQueryWithDepthStencilTest(true, false, true);
 
     // Only enable stencil testing and set the samples never pass the testing, the expected
-    // occlusion result is 0.
-    TestOcclusionQueryWithDepthStencilTest(false, true, 0);
+    // occlusion result is zero.
+    TestOcclusionQueryWithDepthStencilTest(false, true, true);
 }
 
 // Draw a bottom right triangle with scissor testing enabled and check whether there is
-// sample passed the testing by non-precise occlusion query with the binary results:
-// 0 indicates that no sample passed scissor testing,
-// 1 indicates that at least one sample passed scissor testing.
+// sample passed the testing by non-precise occlusion query with the results:
+// zero indicates that no sample passed scissor testing,
+// non-zero indicates that at least one sample passed scissor testing.
 TEST_P(OcclusionQueryTests, QueryWithScissorTest) {
-    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal and Vulkan
-    DAWN_SKIP_TEST_IF(IsMetal() || IsVulkan());
+    // TODO(hao.x.li@intel.com): Implement non-precise occlusion on Metal
+    DAWN_SKIP_TEST_IF(IsMetal());
 
-    // Test there are samples passed scissor testing, the expected occlusion result is 1.
-    TestOcclusionQueryWithScissorTest({2, 1, 2, 1}, 1);
+    // Test there are samples passed scissor testing, the expected occlusion result is non-zero.
+    TestOcclusionQueryWithScissorTest({2, 1, 2, 1}, false);
 
-    // Test there is no sample passed scissor testing, the expected occlusion result is 0.
-    TestOcclusionQueryWithScissorTest({0, 0, 2, 1}, 0);
+    // Test there is no sample passed scissor testing, the expected occlusion result is zero.
+    TestOcclusionQueryWithScissorTest({0, 0, 2, 1}, true);
 }
 
 DAWN_INSTANTIATE_TEST(OcclusionQueryTests, D3D12Backend(), MetalBackend(), VulkanBackend());
