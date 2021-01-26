@@ -69,6 +69,24 @@
       "parentUuid": "07364c5b_b2964008",
       "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9f0cfe5_c03bbc98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T13:00:46Z",
+      "side": 1,
+      "message": "Dawn only has 2D / 2D array texture for now, but we should still have tests that fail on this. Can you add a test that would require GL_PACK_IMAGE_HEIGHT in CopyTests_T2B and B2T?",
+      "parentUuid": "3e2033e1_3a067537",
+      "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
