@@ -32,8 +32,7 @@ namespace dawn_native {
     MaybeError ValidateCanPopDebugGroup(uint64_t debugGroupStackSize);
     MaybeError ValidateFinalDebugGroupStackSize(uint64_t debugGroupStackSize);
 
-    MaybeError ValidateRenderBundle(CommandIterator* commands,
-                                    const AttachmentState* attachmentState);
+    MaybeError ValidateRenderBundle(CommandIterator* commands);
     MaybeError ValidateRenderPass(CommandIterator* commands, const BeginRenderPassCmd* renderPass);
     MaybeError ValidateComputePass(CommandIterator* commands);
 
