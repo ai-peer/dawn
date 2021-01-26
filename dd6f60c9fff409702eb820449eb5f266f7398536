@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "880b48b8_0f6f18d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T14:48:41Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\n(Last one. ANGLE run should be green after this.)",
+      "revId": "dd6f60c9fff409702eb820449eb5f266f7398536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
