@@ -120,6 +120,24 @@
       "parentUuid": "09bb4be2_d2dce16f",
       "revId": "fa87038ada5ef15e5754533877802ea114ccb6d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41479be2_142c75af",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:57:24Z",
+      "side": 1,
+      "message": "With ARB-debug_report we should be able to see them and could assert if we can filter on correctness warnings.",
+      "parentUuid": "b2a55458_60216e19",
+      "revId": "fa87038ada5ef15e5754533877802ea114ccb6d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
