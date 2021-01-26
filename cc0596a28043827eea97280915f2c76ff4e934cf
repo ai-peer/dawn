@@ -51,6 +51,24 @@
       "parentUuid": "de83ebbf_dcb46ad1",
       "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d17760ea_88538072",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2021-01-26T21:36:22Z",
+      "side": 1,
+      "message": "Yes, Tint\u0027s SPIR-V writer should never generate an OpUndef.",
+      "parentUuid": "497b6099_7a6f55d1",
+      "revId": "cc0596a28043827eea97280915f2c76ff4e934cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
