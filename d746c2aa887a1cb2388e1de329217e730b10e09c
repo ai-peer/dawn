@@ -51,6 +51,24 @@
       "parentUuid": "71a3733f_ad6776d5",
       "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2033e1_3a067537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-26T12:50:55Z",
+      "side": 1,
+      "message": "According to https://www.khronos.org/registry/OpenGL-Refpages/es3.0/html/glPixelStorei.xhtml, it doesn\u0027t exist in any version of ES (although GL_UNPACK_IMAGE_HEIGHT does).\n\nMy understanding is that it\u0027s only required when reading back multiple images from a 3D texture where you want padding between the images, in the same way that GL_PACK_ROW_LENGTH allows you to specify padding between rows. If left unspecified, it defaults to the height of the readback (no padding). If it\u0027s possible to specify such padding in WebGPU, presumably we could do multiple readbacks of single images to apply the padding.\n\nEven if you can, however, the OpenGL backend right only seems to support 2D texture readback.",
+      "parentUuid": "07364c5b_b2964008",
+      "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
