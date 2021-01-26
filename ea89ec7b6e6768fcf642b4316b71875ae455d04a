@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a270c7_6bc6e682",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T09:18:05Z",
+      "side": 1,
+      "message": "Could we get a small test that the functionality works? We don\u0027t have any tests for SRGB blending.",
+      "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2166fcb0_8f8a124b",
@@ -31,6 +48,23 @@
       "writtenOn": "2021-01-26T01:23:07Z",
       "side": 1,
       "message": "LGTM; can we comment about why in the code?",
+      "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90503b5_ff4fcbd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T09:18:05Z",
+      "side": 1,
+      "message": "LGTM too but a test would be nice to know it works in GLES too",
       "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
