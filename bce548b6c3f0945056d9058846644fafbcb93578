@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68bbdf9b_a6f52235",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:38:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d022cf6_e439478d",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:38:05Z",
+      "side": 1,
+      "message": "nit data[i] was not written (it kept the sentinel value of \u003cvalue\u003e).",
+      "range": {
+        "startLine": 52,
+        "startChar": 27,
+        "endLine": 52,
+        "endChar": 79
+      },
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07bd914e_ace892ed",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:38:05Z",
+      "side": 1,
+      "message": "nit: Expected data[i] to be zero, actual: \u003cvalue\u003e",
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22b8f2b5_c0a6299e",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:38:05Z",
+      "side": 1,
+      "message": "nit: Expected data[i] to be zero.",
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48fc0c4d_f8e5d0fd",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:38:05Z",
+      "side": 1,
+      "message": "Setting all bits would be done with ~uint64_t(0). Can we have a constant for this that can be shared between the Test methods and the expectation?",
+      "range": {
+        "startLine": 146,
+        "startChar": 0,
+        "endLine": 148,
+        "endChar": 28
+      },
+      "revId": "bce548b6c3f0945056d9058846644fafbcb93578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
