@@ -33,6 +33,23 @@
       "message": "LGTM. I may have asked this before but - does the ANGLE adapter name have the string \"Swiftshader\" in it?",
       "revId": "d479e7c07af2310f670eab1b5a49df025aff2d3b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b928e635_1acd4205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T08:36:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d479e7c07af2310f670eab1b5a49df025aff2d3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
