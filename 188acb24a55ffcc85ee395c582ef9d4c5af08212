@@ -16,6 +16,23 @@
       "message": "I had to make a bunch of minor fixes. Please take another quick look!",
       "revId": "188acb24a55ffcc85ee395c582ef9d4c5af08212",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df155e2_ae6996d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-26T12:05:22Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "188acb24a55ffcc85ee395c582ef9d4c5af08212",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
