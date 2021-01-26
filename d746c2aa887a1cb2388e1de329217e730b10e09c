@@ -16,6 +16,23 @@
       "message": "PTAL. I\u0027m not sure this is the right thing to do, but if we do need these calls it\u0027ll need WebGPU-compat validation or a workaround on ES.",
       "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71a3733f_ad6776d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-26T01:32:14Z",
+      "side": 1,
+      "message": "I think it is available in ES 3.0 but not ES 2.0. So, I think we should be able to support this for what WebGPU compat is targeting. Same applies for GL_UNPACK_IMAGE_HEIGHT, I think.\n\nAs a workaround though, we could do multiple calls to glReadPixels for each layer if the stride is different from the image stride.",
+      "revId": "d746c2aa887a1cb2388e1de329217e730b10e09c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
