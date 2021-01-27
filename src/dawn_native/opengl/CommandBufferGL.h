@@ -24,6 +24,7 @@ namespace dawn_native {
 namespace dawn_native { namespace opengl {
 
     class Device;
+    struct OpenGLFunctions;
 
     class CommandBuffer final : public CommandBufferBase {
       public:
@@ -34,6 +35,10 @@ namespace dawn_native { namespace opengl {
       private:
         MaybeError ExecuteComputePass();
         MaybeError ExecuteRenderPass(BeginRenderPassCmd* renderPass);
+        static void CopyTextureToTextureWithBlit(const OpenGLFunctions& gl,
+                                                 const TextureCopy& src,
+                                                 const TextureCopy& dst,
+                                                 const Extent3D& copySize);
     };
 
 }}  // namespace dawn_native::opengl
