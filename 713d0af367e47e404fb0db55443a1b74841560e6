@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba5a6168_f2d7493f",
+        "filename": "src/utils/WireHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "423afc64_cc277abd",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a714892_e41d4c42",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcd4b4ea_0976646b",
+        "filename": "src/utils/WireHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a714892_e41d4c42",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92618104_3946637f",
@@ -99,6 +135,24 @@
       "writtenOn": "2021-01-27T17:48:34Z",
       "side": 1,
       "message": "µNit: Wire is capitalized here, uncapitalized in above comment.",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "659d6f68_d487c3b5",
+        "filename": "src/utils/WireHelper.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:22:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92618104_3946637f",
       "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
