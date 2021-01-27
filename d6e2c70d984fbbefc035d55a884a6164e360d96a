@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf5be54_b770ea74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T18:25:28Z",
+      "side": 1,
+      "message": "Ok I misunderstood. I thought this was referring to the push/pop debug group validation.",
+      "parentUuid": "0296e637_05439667",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 35
+      },
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cfc7a7c_2db50e22",
