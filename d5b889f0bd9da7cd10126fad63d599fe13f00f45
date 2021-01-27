@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5423b9c5_51d94433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2021-01-27T22:03:06Z",
+      "side": 1,
+      "message": "PTAL. Is this the right way to combine the flags? I didn\u0027t want to remove it as I wasn\u0027t sure what was depending on the flag.",
+      "revId": "d5b889f0bd9da7cd10126fad63d599fe13f00f45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
