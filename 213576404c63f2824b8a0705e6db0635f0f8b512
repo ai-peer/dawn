@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4adbbe81_89670bfd",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-27T15:14:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a07877d_da9d74f5",
+      "range": {
+        "startLine": 37,
+        "startChar": 26,
+        "endLine": 37,
+        "endChar": 39
+      },
+      "revId": "213576404c63f2824b8a0705e6db0635f0f8b512",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "406ad40b_729658b2",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-27T11:23:42Z",
       "side": 1,
       "message": "This should be vertex_index I believe.",
+      "range": {
+        "startLine": 82,
+        "startChar": 22,
+        "endLine": 82,
+        "endChar": 32
+      },
+      "revId": "213576404c63f2824b8a0705e6db0635f0f8b512",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd3837d8_88c7930c",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-01-27T15:14:22Z",
+      "side": 1,
+      "message": "Yes, rebase is needed.",
+      "parentUuid": "406ad40b_729658b2",
       "range": {
         "startLine": 82,
         "startChar": 22,
