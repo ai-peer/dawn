@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10fc5e38_5219cc3d",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T18:08:37Z",
+      "side": 1,
+      "message": "We usually put them in the unnamed namesapce.",
+      "parentUuid": "fa266587_6f06b0c6",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a73e12d_5cc18099",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 2
@@ -154,6 +172,24 @@
       "side": 1,
       "message": "I don\u0027t see much overlap with the clear load op code. What am I missing?",
       "parentUuid": "21ebba12_e494140f",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbaffe1_ee7de864",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T18:08:37Z",
+      "side": 1,
+      "message": "Probably nothing then :)",
+      "parentUuid": "07aca68e_f4ee9609",
       "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
