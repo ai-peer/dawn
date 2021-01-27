@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f463d44f_2541b387",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "All comments are addressed, Corentin. But there might be a question about usage constraint for 3d texture. ",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cc070e3_17e3469b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "I added texture size validation for 1d texture for completeness. But it looks like we don\u0027t want to support 1d-array texture (and 1d-array texture view)? But the code doesn\u0027t hurt anything, per my understanding.",
+      "range": {
+        "startLine": 165,
+        "startChar": 16,
+        "endLine": 169,
+        "endChar": 53
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

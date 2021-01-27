@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3cd7826_dc6e8392",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done. \nInvestigation has been submitted for discussion in community: https://github.com/gpuweb/gpuweb/issues/1372. Looks like we 2d-array texture view upon 3d texture will not be allowed (at least for WebGPU MVP).",
+      "parentUuid": "ec9068f6_dc353b9c",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "044bf933_6bf4242e",
@@ -48,6 +66,24 @@
       "writtenOn": "2020-12-04T13:41:43Z",
       "side": 1,
       "message": "We should have an investigation in the group because the maximum texture size depends on the dimension of the texture. For example in Vulkan there are all these different limits:\n\n    uint32_t              maxImageDimension1D;\n    uint32_t              maxImageDimension2D;\n    uint32_t              maxImageDimension3D;\n    uint32_t              maxImageDimensionCube;\n    uint32_t              maxImageArrayLayers;\n\nFor now can we in this CL or a preparatory CL: rename kMaxTextureSize to kMaxTexture2DSize, introduce a kMaxTexture3DSize with some value like 512?",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0609aac7_3f87c46c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done. Investigation in community and patch in Dawn has been landed.",
+      "parentUuid": "044bf933_6bf4242e",
       "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c871093_425d55d6",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "150db0e1_58407bbb",
+      "range": {
+        "startLine": 172,
+        "startChar": 21,
+        "endLine": 172,
+        "endChar": 33
+      },
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "174afa59_ff2b95cf",
@@ -88,6 +148,24 @@
       "writtenOn": "2020-12-04T13:41:43Z",
       "side": 1,
       "message": "[1]",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2765e72_7cbce953",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "174afa59_ff2b95cf",
       "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f9d4b1f_e10ca23d",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "I didn\u0027t see any usage constraint for 3d texture in Vulkan and Metal. In D3D12, depth-stencil-view doesn\u0027t have a 3d option, but RTV does. So the texture usage \u0027RENDER_ATTACHMENT\u0027 should be OK in theory at native graphics APIs. But I am not sure whether we want to support multiple layer/depth render target (MRT) in WebGPU MVP. So \u0027RENDER_ATTACHMENT\u0027 can be kicked out for 3d texture if we don\u0027t want to support MRT and 3d texture can\u0027t be re-interpret as 2d view in WebGPU MVP.",
+      "parentUuid": "04ec02d5_cf99e6ec",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "33bf6a9d_57fa6d95",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 3
@@ -122,6 +218,24 @@
       "writtenOn": "2020-12-04T13:41:43Z",
       "side": 1,
       "message": "I think this is completely convered by [1] and could be removed.",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efdc5816_c0cfd8a2",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done\n\nI added an ASSERT.",
+      "parentUuid": "33bf6a9d_57fa6d95",
       "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +253,24 @@
       "writtenOn": "2020-12-04T13:41:43Z",
       "side": 1,
       "message": "Can we mark the 3D textures as UnsafeAPI until they are fully implemented? See for example how this is done for dispatchIndirect: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/ComputePassEncoder.cpp;l\u003d75?q\u003dDisallowUnsafeAPIs\u0026sq\u003d . We\u0027d also need a simple test in UnsafeAPITests.\n\nThis will prevent the feature from being used from the Web until it is fully implemented because WIP implementation could have security bugs. On testing we will allow unsafe apis so they can still be tested obviously.\n\nThen as usages become correctly implemented for 3D textures we can change to make an \"unsafe API\" validation error only when some partially implemented usages are used.",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eefe12b_639ac1ec",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d6776bb_f16cc7f5",
       "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -166,6 +298,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "287439b7_8aede606",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e964595e_b2b78887",
+      "range": {
+        "startLine": 104,
+        "startChar": 36,
+        "endLine": 104,
+        "endChar": 37
+      },
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b772d9b5_b668486c",
@@ -179,6 +335,24 @@
       "writtenOn": "2020-12-04T13:41:43Z",
       "side": 1,
       "message": "I don\u0027t think this is needed and kMax3DTextureSize might be smaller than kMaxTexture2DArrayLayers. We could have a test somewhere in this file that created the biggest 3D texture is allowed. Actually you\u0027ve already done that in [2]",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "060bd02d_7e476d6f",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b772d9b5_b668486c",
       "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -200,6 +374,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3be75694_8f10b2ff",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done\n\nAnd I added tests for 1d texture for completeness.",
+      "parentUuid": "8662ace9_d3428c04",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "529e2118_099d202f",
@@ -217,6 +409,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a3a74e_c9f281cd",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "529e2118_099d202f",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18c0e55a_1dcb7db9",
@@ -230,6 +440,24 @@
       "writtenOn": "2020-12-04T13:41:43Z",
       "side": 1,
       "message": "We might need to revisit if it is possible for 3D-but-2D-compatible textures.",
+      "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb33669d_94293165",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-27T06:55:39Z",
+      "side": 1,
+      "message": "Hmm. I added a TODO.",
+      "parentUuid": "18c0e55a_1dcb7db9",
       "revId": "975fd005a5c350379453b5107ca7a0ed73be7d50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
