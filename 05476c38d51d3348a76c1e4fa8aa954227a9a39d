@@ -16,6 +16,23 @@
       "message": "PTAL, just adding to the blocking issues for enabling this test.",
       "revId": "05476c38d51d3348a76c1e4fa8aa954227a9a39d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f8d1b18_2f1ab8a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T18:22:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "05476c38d51d3348a76c1e4fa8aa954227a9a39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
