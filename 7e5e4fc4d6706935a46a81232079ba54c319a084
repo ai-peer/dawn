@@ -16,6 +16,131 @@
       "message": "PTAL!",
       "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "758cf298_d84599fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62d57e1d_7b989d57",
+        "filename": "src/tests/UnittestsMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "This change will be required in Chromium too.",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376ec2f0_84969a00",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "Maybe the wire could be flushed at the end of all tests?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cffefef3_f8a57cf8",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "Maybe the skips should be finer grained?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6edf5a9_ab9fde96",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "this is done by the wire helper already.",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cd73d73_4934a833",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "Need a FlushWire before StartExpectDeviceError too. (or a change to use error scope instead)",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f3bcf8_2a8b2c96",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:22:05Z",
+      "side": 1,
+      "message": "need a flushwire before the first warning count too.",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
