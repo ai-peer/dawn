@@ -16,6 +16,23 @@
       "message": "PTAL, another small test cleanup",
       "revId": "23b5051629b1396b1101ce60daf4a07a69951da2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09c92115_eb6a2452",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T20:40:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "23b5051629b1396b1101ce60daf4a07a69951da2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
