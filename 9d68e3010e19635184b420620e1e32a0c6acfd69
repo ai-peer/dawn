@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420e0315_7618b17a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T15:34:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ec99f62_1fcf7c0b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T15:34:05Z",
+      "side": 1,
+      "message": "nit: I believe this could be a freestanding function if OpenGLFunctions was passed as an argument.",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a73e12d_5cc18099",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T15:34:05Z",
+      "side": 1,
+      "message": "nit: // Generate temporary framebuffers for the blits.",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52998d57_dad37e2d",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T15:34:05Z",
+      "side": 1,
+      "message": "nit: // reset state that interacts with BlitFramebuffer",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ebba12_e494140f",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T15:34:05Z",
+      "side": 1,
+      "message": "nit: I think this might be possible to factor with handling of renderpass clear load op.",
+      "revId": "9d68e3010e19635184b420620e1e32a0c6acfd69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
