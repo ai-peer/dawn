@@ -67,6 +67,24 @@
       "message": "nit: in Dawn we usually iterate over aspect first and then layers. Can you detail what we\u0027re doing here (binding both depth and stencil at the same time so the blit does both, and that for each layer?)",
       "revId": "df0aac7087adc5a257a208b07f5a505b78720a1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7178d814_e903cd04",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T14:40:39Z",
+      "side": 1,
+      "message": "In this case, we have to do layers first then aspects, since we do a blit per layer but multiple binds per blit. Will comment.",
+      "parentUuid": "14d5fd64_d1c50d6b",
+      "revId": "df0aac7087adc5a257a208b07f5a505b78720a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
