@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a94f0cdc_79d2b57c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-01-27T18:21:51Z",
+      "side": 1,
+      "message": "PTAL, just adding to the blocking issues for enabling this test.",
+      "revId": "05476c38d51d3348a76c1e4fa8aa954227a9a39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
