@@ -16,6 +16,57 @@
       "message": "PTAL. Thanks!",
       "revId": "df0aac7087adc5a257a208b07f5a505b78720a1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed54eb9_47d814f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:37:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "df0aac7087adc5a257a208b07f5a505b78720a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3362bcdb_d9e210f1",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:37:20Z",
+      "side": 1,
+      "message": "This function is becoming massive. Could we split the else case into a CopyT2TWithBlitFramebuffer? In general the GL backend could benefit from being a bit more readable. Right now it feels a bit like a giant pile of control flow ^^ (I\u0027ll take some of the blame for that)",
+      "revId": "df0aac7087adc5a257a208b07f5a505b78720a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14d5fd64_d1c50d6b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 813,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:37:20Z",
+      "side": 1,
+      "message": "nit: in Dawn we usually iterate over aspect first and then layers. Can you detail what we\u0027re doing here (binding both depth and stencil at the same time so the blit does both, and that for each layer?)",
+      "revId": "df0aac7087adc5a257a208b07f5a505b78720a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
