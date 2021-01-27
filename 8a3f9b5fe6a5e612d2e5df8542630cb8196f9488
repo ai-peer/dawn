@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b18eecf2_c342f567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9865320a_59c53c55",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "nit: \"Multisampled texture must be 2D with depth\u003d1\"?",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae87baee_2d9af38d",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "Maybe we could switch on the dimensions and set a GPUExtent3D maxDimensions then do the check against maxDimensions instead of 3 different times. We might lose a bit of info in the error messages but that\u0027s ok.",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cc070e3_17e3469b",
@@ -37,6 +88,184 @@
         "endLine": 169,
         "endChar": 53
       },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37834ff0_dae6dd38",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "We should have an unconditional validation error that says \"1D textures aren\u0027t supported (yet).\" in ValidateTextureDescriptor",
+      "parentUuid": "0cc070e3_17e3469b",
+      "range": {
+        "startLine": 165,
+        "startChar": 16,
+        "endLine": 169,
+        "endChar": 53
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5350bfa_50c96147",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "We use \"not supported\" in various places but I think it gives the wrong impression that it will be supported for v1. Maybe \"compressed texture must be 2D\" or \"invalid dimension for compressed texture\"?",
+      "range": {
+        "startLine": 275,
+        "startChar": 42,
+        "endLine": 275,
+        "endChar": 88
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d117ad7_59ba69df",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "nit: split in two scopes? Also \"2D with depth\u003e1\"?",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395a4f00_8a1cb434",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "nit: that\u0027s a GLism no need for \"array\", since textures are always 1D, 2D and 3D. It is the views that are arrayed or not.",
+      "range": {
+        "startLine": 251,
+        "startChar": 90,
+        "endLine": 251,
+        "endChar": 95
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d76cc1_c5610c7d",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "We could probably separate the test for 2D and 3D. right now it\u0027s a bit hard to read the tests because of the state that\u0027s kept in descriptor.",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f33a8f7_9d5c5f82",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "note: it is possible to write descriptor.size \u003d {1, 1, kMaxTextureDimension3D + 1u}",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4220d04_8522707e",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "nit: texture size",
+      "range": {
+        "startLine": 354,
+        "startChar": 11,
+        "endLine": 354,
+        "endChar": 18
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7526cede_a80bb637",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "nit: no need for this TODO since the group determined the reinterpretation won\u0027t be for v1.",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89f5f6f7_eec624d4",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T12:32:32Z",
+      "side": 1,
+      "message": "nit: put the comment before the TEST_F",
       "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
