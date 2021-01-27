@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "148557a2_1ae61d82",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:02:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "377e9824_ac2d3b5d",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc7b6c34_478ce7c8",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0296e637_05439667",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:02:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, there isn\u0027t anything that validates that `this` is a valid object when we call Finish.",
+      "parentUuid": "dc7b6c34_478ce7c8",
+      "range": {
+        "startLine": 10,
+        "startChar": 8,
+        "endLine": 11,
+        "endChar": 35
+      },
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cfc7a7c_2db50e22",
@@ -54,6 +96,24 @@
       "writtenOn": "2021-01-26T20:01:49Z",
       "side": 1,
       "message": "Nit: s/move/do/ or s/at/to/",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76a13a85_6a290bfd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:02:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2cfc7a7c_2db50e22",
       "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +186,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "deae2aee_33c12e1d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:02:36Z",
+      "side": 1,
+      "message": "I thought about it but decided to keep the pattern of doing if (IsValidationEnabled) for regularity with other entrypoints. Let me know if that\u0027s no convincing enough and I\u0027ll change in a follow up.",
+      "parentUuid": "2828b002_0b9b6725",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0d65294_7862ea6b",
@@ -139,6 +217,30 @@
       "writtenOn": "2021-01-26T19:02:43Z",
       "side": 1,
       "message": "This is unclear to me. Is it an error that it\u0027s empty or an error that is has no attachments? I think the error is the lack of attachments and the fact that it\u0027s empty isn\u0027t relevant (though we should have a separate test that an empty bundle is indeed valid).",
+      "range": {
+        "startLine": 144,
+        "startChar": 0,
+        "endLine": 144,
+        "endChar": 68
+      },
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08912356_6b2ab50d",
+        "filename": "src/tests/unittests/validation/RenderBundleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T14:02:36Z",
+      "side": 1,
+      "message": "The error is that there are no attachment but the issue was that error encoders containing no commands would never ValidateObject themselves.",
+      "parentUuid": "d0d65294_7862ea6b",
       "range": {
         "startLine": 144,
         "startChar": 0,
