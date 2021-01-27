@@ -924,6 +924,12 @@ void DawnTestBase::TearDown() {
         EXPECT_EQ(mLastWarningCount,
                   dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
     }
+
+    // Reset the internal device on D3D12 when backend validation is enabled. This will ensure that
+    // GBV's resources are released after every test.
+    if (IsBackendValidationEnabled() && IsD3D12()) {
+        mBackendAdapter.ResetDevice();
+    }
 }
 
 void DawnTestBase::StartExpectDeviceError() {
