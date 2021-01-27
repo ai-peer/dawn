@@ -34,6 +34,9 @@ namespace dawn_native { namespace opengl {
       private:
         MaybeError ExecuteComputePass();
         MaybeError ExecuteRenderPass(BeginRenderPassCmd* renderPass);
+        void CopyTextureToTextureWithBlit(const TextureCopy& src,
+                                          const TextureCopy& dst,
+                                          const Extent3D& copySize);
     };
 
 }}  // namespace dawn_native::opengl
