@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab9283c0_c5fa2396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:16:44Z",
+      "side": 1,
+      "message": "LGTM overall, some structural suggestions maybe",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "423afc64_cc277abd",
+        "filename": "src/utils/WireHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:16:44Z",
+      "side": 1,
+      "message": "Why is this needed? Can\u0027t it be done in ~WireServerTraceLayer?",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a714892_e41d4c42",
+        "filename": "src/utils/WireHelper.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T11:16:44Z",
+      "side": 1,
+      "message": "nit: It\u0027s a bit easier to read if we don\u0027t use the short-circuiting. Also maybe we could have the wire helper be a virtual class with two implementations (a wire one and direct one) and a factory function that chooses which class to use.",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
