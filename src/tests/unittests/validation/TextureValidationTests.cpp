@@ -92,6 +92,19 @@ namespace {
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
 
+        // It is an error to create a multisampled 1D or 3D texture.
+        {
+            wgpu::TextureDescriptor descriptor = defaultDescriptor;
+            descriptor.sampleCount = 4;
+
+            descriptor.size.height = 1;
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+
+            descriptor.dimension = wgpu::TextureDimension::e3D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+        }
+
         // Currently we do not support multisampled 2D array textures.
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
@@ -199,6 +212,28 @@ namespace {
             device.CreateTexture(&descriptor);
         }
 
+        // Non square mip map for a 3D and 2D array textures.
+        {
+            wgpu::TextureDescriptor descriptor = defaultDescriptor;
+            descriptor.size.width = 32;
+            descriptor.size.height = 8;
+            descriptor.size.depth = 64;
+            descriptor.dimension = wgpu::TextureDimension::e3D;
+            // Non square mip map halves width, height and depth until a 1x1x1 dimension for a 3D
+            // texture. So there are 7 mipmaps at most: 32 * 8 * 64, 16 * 4 * 32, 8 * 2 * 16,
+            // 4 * 1 * 8, 2 * 1 * 4, 1 * 1 * 2, 1 * 1 * 1.
+            descriptor.mipLevelCount = 7;
+            device.CreateTexture(&descriptor);
+
+            // Non square mip map halves width and height until a 1x1 dimension for a 2D array
+            // texture. So there are 6 mipmaps at most: 32 * 8, 16 * 4, 8 * 2, 4 * 1, 2 * 1, 1 * 1.
+            descriptor.dimension = wgpu::TextureDimension::e2D;
+            descriptor.mipLevelCount = 7;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+            descriptor.mipLevelCount = 6;
+            device.CreateTexture(&descriptor);
+        }
+
         // Mip level exceeding kMaxTexture2DMipLevels not allowed
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
@@ -213,11 +248,16 @@ namespace {
     TEST_F(TextureValidationTest, ArrayLayerCount) {
         wgpu::TextureDescriptor defaultDescriptor = CreateDefaultTextureDescriptor();
 
-        // Array layer count exceeding kMaxTextureArrayLayers is not allowed
+        // Array layer count exceeding kMaxTextureArrayLayers is not allowed for 1D or 2D array
+        // texture
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
-            descriptor.size.depth = kMaxTextureArrayLayers + 1u;
 
+            descriptor.size.depth = kMaxTextureArrayLayers + 1u;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            descriptor.size.height = 1;
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
 
@@ -225,7 +265,10 @@ namespace {
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
             descriptor.size.depth = kMaxTextureArrayLayers >> 1;
+            device.CreateTexture(&descriptor);
 
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            descriptor.size.height = 1;
             device.CreateTexture(&descriptor);
         }
 
@@ -233,7 +276,10 @@ namespace {
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
             descriptor.size.depth = kMaxTextureArrayLayers;
+            device.CreateTexture(&descriptor);
 
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            descriptor.size.height = 1;
             device.CreateTexture(&descriptor);
         }
     }
@@ -242,30 +288,86 @@ namespace {
     TEST_F(TextureValidationTest, TextureSize) {
         wgpu::TextureDescriptor defaultDescriptor = CreateDefaultTextureDescriptor();
 
-        // Texture size exceeding kMaxTextureDimension2D is not allowed
+        // Out-of-bound texture dimension is not allowed
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
-            descriptor.size.width = kMaxTextureDimension2D + 1u;
-            descriptor.size.height = kMaxTextureDimension2D + 1u;
+            descriptor.size.width = kMaxTextureDimension1D + 1u;
+            descriptor.size.height = 1;
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
 
+            descriptor.size.width = kMaxTextureDimension2D + 1u;
+            descriptor.dimension = wgpu::TextureDimension::e2D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+
+            descriptor.size.width = 1;
+            descriptor.size.height = kMaxTextureDimension2D + 1u;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+
+            descriptor.size.width = 1;
+            descriptor.size.height = 1;
+            descriptor.size.depth = kMaxTextureDimension3D + 1u;
+            descriptor.dimension = wgpu::TextureDimension::e3D;
             ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
 
-        // Texture size less than kMaxTextureDimension2D is allowed
+        // Zero-sized texture is not allowed
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
+            descriptor.size.width = 0;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+
+            descriptor.size.width = 1;
+            descriptor.size.height = 0;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+
+            descriptor.size.width = 1;
+            descriptor.size.height = 1;
+            descriptor.size.depth = 0;
+            // Zero-sized array layer is not allowed
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+            // Zero-sized 3D texture is not allowed
+            descriptor.dimension = wgpu::TextureDimension::e3D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+        }
+
+        // Texture size less than max dimension is allowed
+        {
+            wgpu::TextureDescriptor descriptor = defaultDescriptor;
+            descriptor.size.width = kMaxTextureDimension1D >> 1;
+            descriptor.size.height = 1;
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            device.CreateTexture(&descriptor);
+
             descriptor.size.width = kMaxTextureDimension2D >> 1;
             descriptor.size.height = kMaxTextureDimension2D >> 1;
+            descriptor.dimension = wgpu::TextureDimension::e2D;
+            device.CreateTexture(&descriptor);
 
+            descriptor.size.width = kMaxTextureDimension3D >> 1;
+            descriptor.size.height = kMaxTextureDimension3D >> 1;
+            descriptor.size.depth = kMaxTextureDimension3D >> 1;
+            descriptor.dimension = wgpu::TextureDimension::e3D;
             device.CreateTexture(&descriptor);
         }
 
-        // Texture equal to kMaxTextureDimension2D is allowed
+        // Texture equal to max dimension is allowed
         {
             wgpu::TextureDescriptor descriptor = defaultDescriptor;
+            descriptor.size.width = kMaxTextureDimension1D;
+            descriptor.size.height = 1;
+            descriptor.dimension = wgpu::TextureDimension::e1D;
+            device.CreateTexture(&descriptor);
+
             descriptor.size.width = kMaxTextureDimension2D;
             descriptor.size.height = kMaxTextureDimension2D;
+            descriptor.dimension = wgpu::TextureDimension::e2D;
+            device.CreateTexture(&descriptor);
 
+            descriptor.size.width = kMaxTextureDimension3D;
+            descriptor.size.height = kMaxTextureDimension3D;
+            descriptor.size.depth = kMaxTextureDimension3D;
+            descriptor.dimension = wgpu::TextureDimension::e3D;
             device.CreateTexture(&descriptor);
         }
     }
@@ -483,6 +585,20 @@ namespace {
             descriptor.format = format;
             descriptor.size.depth = 6;
             device.CreateTexture(&descriptor);
+        }
+    }
+
+    // TODO(yunchao.he@intel.com): We might need to revisit this test if it is possible for
+    // 3d-but-2d-compatible textures. Test the validation of creating 3D textures in compressed
+    // texture formats.
+    TEST_F(CompressedTextureFormatsValidationTests, 3DTexture) {
+        // Test that it is not allowed to create a 3D texture in BC formats.
+        for (wgpu::TextureFormat format : utils::kBCFormats) {
+            wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+            descriptor.format = format;
+            descriptor.size.depth = 4;
+            descriptor.dimension = wgpu::TextureDimension::e3D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
         }
     }
 
