@@ -16,6 +16,23 @@
       "message": "LGTM - do we have a process for deciding when it\u0027s worth adding a native regression test?\nOverall I think it would be worth it for something like this.",
       "revId": "36fdcc43ff6dc37d2c11344fc8586e98f3b4f9c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd4e372_3eb0ed26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T08:31:18Z",
+      "side": 1,
+      "message": "LGTM too with the test. We don\u0027t really have a process to decide, but I agree that this fix would warrant a test. We should figure out when something should be added to Dawn and when CTS coverage is enough.",
+      "revId": "36fdcc43ff6dc37d2c11344fc8586e98f3b4f9c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
