@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c8e70df_fc236581",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T08:25:57Z",
+      "side": 1,
+      "message": "nit: explain why, is it just convenience?\n\nAlso Bug: N?",
+      "revId": "59ad2bf0229e976a51ac9027f2f0b4eb0cdab5c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "038c0034_ee5d1b25",
@@ -31,6 +48,23 @@
       "writtenOn": "2021-01-26T19:18:44Z",
       "side": 1,
       "message": "Whoops, thought I had a +1 from Corentin. Will wait. ;)",
+      "revId": "59ad2bf0229e976a51ac9027f2f0b4eb0cdab5c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4061545d_2af5b4e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-27T08:25:57Z",
+      "side": 1,
+      "message": "LGTM too",
       "revId": "59ad2bf0229e976a51ac9027f2f0b4eb0cdab5c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
