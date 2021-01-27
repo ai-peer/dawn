@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8cf075_1d6afe02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T17:53:20Z",
+      "side": 1,
+      "message": "This change looks like it does more than that. Maybe a bit longer description?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "388e5028_6a4305b1",
@@ -31,6 +48,23 @@
       "writtenOn": "2021-01-27T11:22:05Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baceb725_42c237eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T17:53:20Z",
+      "side": 1,
+      "message": "LGTM2",
       "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +116,40 @@
       "writtenOn": "2021-01-27T11:22:05Z",
       "side": 1,
       "message": "Maybe the skips should be finer grained?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c145ee2e_31865350",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T17:53:20Z",
+      "side": 1,
+      "message": "Bug ID and/or comment?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a7fe1cb_5ed0e4a4",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T17:53:20Z",
+      "side": 1,
+      "message": "Out of curiosity, why this change (here and elsewhere)?",
       "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
