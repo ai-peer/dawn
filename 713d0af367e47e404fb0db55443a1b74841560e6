@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7946436_d1e9238e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T17:48:34Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "423afc64_cc277abd",
@@ -65,6 +82,23 @@
       "writtenOn": "2021-01-27T11:16:44Z",
       "side": 1,
       "message": "nit: It\u0027s a bit easier to read if we don\u0027t use the short-circuiting. Also maybe we could have the wire helper be a virtual class with two implementations (a wire one and direct one) and a factory function that chooses which class to use.",
+      "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92618104_3946637f",
+        "filename": "src/utils/WireHelper.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-27T17:48:34Z",
+      "side": 1,
+      "message": "µNit: Wire is capitalized here, uncapitalized in above comment.",
       "revId": "713d0af367e47e404fb0db55443a1b74841560e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
