@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "309caaee_b80d6e41",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e8cf075_1d6afe02",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "388e5028_6a4305b1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a96dad8c_faa8b449",
+        "filename": "src/tests/UnittestsMain.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "62d57e1d_7b989d57",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "376ec2f0_84969a00",
@@ -99,6 +135,24 @@
       "writtenOn": "2021-01-27T11:22:05Z",
       "side": 1,
       "message": "Maybe the wire could be flushed at the end of all tests?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c72729b_085d13ab",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done, but we should still have these when we\u0027re expecting callbacks. It\u0027s more explicit since the Flush is what will trigger the callback.",
+      "parentUuid": "376ec2f0_84969a00",
       "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +191,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6560e806_2952e5cf",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cffefef3_f8a57cf8",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd8fd6c_ffd5c6ef",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c145ee2e_31865350",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a7fe1cb_5ed0e4a4",
@@ -150,6 +240,24 @@
       "writtenOn": "2021-01-27T17:53:20Z",
       "side": 1,
       "message": "Out of curiosity, why this change (here and elsewhere)?",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b3d6234_b89c0b26",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "This is because the device produced here is the backend device.\n\nReturning wgpu::Device is the refcounted version, but the procs for refcounting are different between Dawn native and Dawn wire.",
+      "parentUuid": "5a7fe1cb_5ed0e4a4",
       "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +285,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9acf743_85a97655",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a6edf5a9_ab9fde96",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 17
+      },
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cd73d73_4934a833",
@@ -194,6 +326,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49960fbe_ea1b034b",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done. Though indeed we should use error scopes in the future. Then we can resolve all of these validation expectations at the end of the test instead of flushing all the time.\n\nNot going to make that change though since it\u0027s not directly related to this CL.",
+      "parentUuid": "4cd73d73_4934a833",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73f3bcf8_2a8b2c96",
@@ -207,6 +357,24 @@
       "writtenOn": "2021-01-27T11:22:05Z",
       "side": 1,
       "message": "need a flushwire before the first warning count too.",
+      "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d30221b1_54cf0882",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-27T21:26:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73f3bcf8_2a8b2c96",
       "revId": "7e5e4fc4d6706935a46a81232079ba54c319a084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
