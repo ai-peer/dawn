@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "75deef81_06ae59ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-28T14:25:19Z",
+      "side": 1,
+      "message": "Existing test TextureFormatTest.BGRA8UnormSrgb/OpenGL_GeForce_GTX_650_PCIe_SSE2 fails on the OpenGL backend if GL_FRAMEBUFFER_SRGB is not enabled. It passes on OpenGLES either way.",
+      "parentUuid": "e0f20aed_1a62176f",
+      "revId": "ea89ec7b6e6768fcf642b4316b71875ae455d04a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2166fcb0_8f8a124b",
