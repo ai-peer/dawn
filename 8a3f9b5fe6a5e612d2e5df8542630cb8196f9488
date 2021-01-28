@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41dceeed_c576b0fa",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9865320a_59c53c55",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae87baee_2d9af38d",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-01-27T12:32:32Z",
       "side": 1,
       "message": "Maybe we could switch on the dimensions and set a GPUExtent3D maxDimensions then do the check against maxDimensions instead of 3 different times. We might lose a bit of info in the error messages but that\u0027s ok.",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb5b14e8_3ee8ea7a",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "How can we do that? add an operator loading (for operator \u003e) for Extent3D at somewhere? Looks like Extent3D related code is auto-generated. or add a helper function to compare these 3 values for two Extent3D?",
+      "parentUuid": "ae87baee_2d9af38d",
       "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -116,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "239d61eb_edb2228e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done\n\nAnd 1D texture related code is removed.",
+      "parentUuid": "37834ff0_dae6dd38",
+      "range": {
+        "startLine": 165,
+        "startChar": 16,
+        "endLine": 169,
+        "endChar": 53
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5350bfa_50c96147",
@@ -129,6 +189,30 @@
       "writtenOn": "2021-01-27T12:32:32Z",
       "side": 1,
       "message": "We use \"not supported\" in various places but I think it gives the wrong impression that it will be supported for v1. Maybe \"compressed texture must be 2D\" or \"invalid dimension for compressed texture\"?",
+      "range": {
+        "startLine": 275,
+        "startChar": 42,
+        "endLine": 275,
+        "endChar": 88
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fde6ce3_cd693063",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b5350bfa_50c96147",
       "range": {
         "startLine": 275,
         "startChar": 42,
@@ -156,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "248992db_85b2e501",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d117ad7_59ba69df",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "395a4f00_8a1cb434",
@@ -169,6 +271,30 @@
       "writtenOn": "2021-01-27T12:32:32Z",
       "side": 1,
       "message": "nit: that\u0027s a GLism no need for \"array\", since textures are always 1D, 2D and 3D. It is the views that are arrayed or not.",
+      "range": {
+        "startLine": 251,
+        "startChar": 90,
+        "endLine": 251,
+        "endChar": 95
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ef2a67_66ff6d95",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done. \nHmm, all underlying Graphics API have 2d-array related info for texture. For example, D3D12 call size.depth as size.depthOrArraySize in resource descriptor, Vulkan even has a standalone parameter named arrayLayers, and Metal goes even further, it has 2DArray texture type.\nIn addition, we have 2d-array view in WebGPU. You know, according to MVC design pattern, we can look at (view) something as 2d-array because the model itself has an array of items. View is just a projection of a model from a particular perspective. \nI personally think \"2d-array texture\" is simple and clear in order to indicate that the texture has multiple layers, \"2d texture with depth\u003e1\" sounds pedantic and verbose.",
+      "parentUuid": "395a4f00_8a1cb434",
       "range": {
         "startLine": 251,
         "startChar": 90,
@@ -196,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29730582_ec401547",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86d76cc1_c5610c7d",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f33a8f7_9d5c5f82",
@@ -209,6 +353,24 @@
       "writtenOn": "2021-01-27T12:32:32Z",
       "side": 1,
       "message": "note: it is possible to write descriptor.size \u003d {1, 1, kMaxTextureDimension3D + 1u}",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61666834_aca8c200",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done\n\nGood suggestion. It makes the code simpler.",
+      "parentUuid": "4f33a8f7_9d5c5f82",
       "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +398,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2ca11d4_9c24ccb3",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4220d04_8522707e",
+      "range": {
+        "startLine": 354,
+        "startChar": 11,
+        "endLine": 354,
+        "endChar": 18
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7526cede_a80bb637",
@@ -253,6 +439,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22172fb3_44eb8790",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7526cede_a80bb637",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89f5f6f7_eec624d4",
@@ -266,6 +470,24 @@
       "writtenOn": "2021-01-27T12:32:32Z",
       "side": 1,
       "message": "nit: put the comment before the TEST_F",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "742d3f4c_30c0330a",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T00:41:28Z",
+      "side": 1,
+      "message": "Done\n\nI moved a few other comments too.",
+      "parentUuid": "89f5f6f7_eec624d4",
       "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
