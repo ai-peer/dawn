@@ -423,6 +423,9 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn_native::In
             // It matches the vendor id, if present.
             selected = mVendorIdFilter == properties.vendorID;
 
+            if (mVendorIdFilter != properties.vendorID) {
+            }
+
             if (!mDevicePreferences.empty()) {
                 dawn::WarningLog() << "Vendor ID filter provided. Ignoring device type preference.";
             }
@@ -603,7 +606,7 @@ DawnTestBase::~DawnTestBase() {
     mReadbackSlots.clear();
     queue = wgpu::Queue();
     device = wgpu::Device();
-
+    mBackendAdapter.ResetDevice();
     mWireHelper.reset();
 }
 
@@ -837,7 +840,7 @@ void DawnTestBase::SetUp() {
     // A very large number of tests hang on Intel D3D12 with the debug adapter after a driver
     // upgrade. Violently suppress this whole configuration until we figure out what to do.
     // See https://crbug.com/dawn/598
-    DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
+    // DAWN_SKIP_TEST_IF(IsBackendValidationEnabled() && IsIntel() && IsD3D12());
 }
 
 void DawnTestBase::TearDown() {
@@ -854,6 +857,8 @@ void DawnTestBase::TearDown() {
         EXPECT_EQ(mLastWarningCount,
                   dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
     }
+
+    // mBackendAdapter.ResetDevice();
 }
 
 void DawnTestBase::StartExpectDeviceError() {
