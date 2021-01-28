@@ -197,6 +197,10 @@ namespace dawn_native { namespace opengl {
             return Device::Create(this, descriptor, mFunctions);
         }
 
+        MaybeError ResetDeviceImpl() override {
+            return {};
+        }
+
         void InitializeSupportedExtensions() {
             // TextureCompressionBC
             {
