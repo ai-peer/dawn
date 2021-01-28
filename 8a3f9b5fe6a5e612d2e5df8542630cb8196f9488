@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb84b42f_9c6bc808",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-28T12:09:38Z",
+      "side": 1,
+      "message": "Ah, what I meant is the following:\n\n wgpu::Extent3D maxExtent;\n switch (descriptor-\u003edimension) {\n    case wgpu::TextureDimension::e2D:\n      maxExtent \u003d {kMaxTextureDimension2D, kMaxTextureDimension2D, kMaxTextureArrayLayers};\n    case wgpu::TextureDimension::e3D:\n      maxExtent \u003d {kMaxTextureDimension3D, kMaxTextureDimension3D, kMaxTextureDimension3D};\n    default:\n      UNREACHABLE();\n }\n\n if (descriptor-\u003esize.width \u003e maxExtent.width || \u003cheight\u003e || \u003cdepth\u003e) {\n   return DAWN_VALIDATION_ERROR(...);\n }",
+      "parentUuid": "bb5b14e8_3ee8ea7a",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0cc070e3_17e3469b",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 4
@@ -295,6 +313,30 @@
       "side": 1,
       "message": "Done. \nHmm, all underlying Graphics API have 2d-array related info for texture. For example, D3D12 call size.depth as size.depthOrArraySize in resource descriptor, Vulkan even has a standalone parameter named arrayLayers, and Metal goes even further, it has 2DArray texture type.\nIn addition, we have 2d-array view in WebGPU. You know, according to MVC design pattern, we can look at (view) something as 2d-array because the model itself has an array of items. View is just a projection of a model from a particular perspective. \nI personally think \"2d-array texture\" is simple and clear in order to indicate that the texture has multiple layers, \"2d texture with depth\u003e1\" sounds pedantic and verbose.",
       "parentUuid": "395a4f00_8a1cb434",
+      "range": {
+        "startLine": 251,
+        "startChar": 90,
+        "endLine": 251,
+        "endChar": 95
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa8ce639_ae738439",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-28T12:09:38Z",
+      "side": 1,
+      "message": "Agreed that it\u0027s a bit pedantic, but the API and error messages have to be self consistent or people will get confused.",
+      "parentUuid": "c6ef2a67_66ff6d95",
       "range": {
         "startLine": 251,
         "startChar": 90,

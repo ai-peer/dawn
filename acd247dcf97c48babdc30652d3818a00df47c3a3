@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "131254ad_a79e6202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-28T12:09:38Z",
+      "side": 1,
+      "message": "LGTM, thanks for the iteration!",
+      "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2e7a0a_8e4937e8",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-28T12:09:38Z",
+      "side": 1,
+      "message": "As discussed in the Github issue there\u0027s only really \"2D\" (which does mean 2D array)",
+      "range": {
+        "startLine": 169,
+        "startChar": 65,
+        "endLine": 169,
+        "endChar": 73
+      },
+      "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97857bc6_f9346f3b",
