@@ -228,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea3f1b9_0cb40ded",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 794,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-28T00:29:23Z",
+      "side": 1,
+      "message": "No, that\u0027s fine. Also good if more validation gets added later.",
+      "parentUuid": "deae2aee_33c12e1d",
+      "revId": "d6e2c70d984fbbefc035d55a884a6164e360d96a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0d65294_7862ea6b",
