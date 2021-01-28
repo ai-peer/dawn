@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Corentin. ",
       "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97857bc6_f9346f3b",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-28T02:44:32Z",
+      "side": 1,
+      "message": "Are sizes like `kMaxTextureDimension3D - 1` valid?",
+      "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
