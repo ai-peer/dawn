@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "18f0fb33_5292638d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: it\u0027s in Format.h",
+      "range": {
+        "startLine": 11,
+        "startChar": 23,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a5e95433_89dd4c9a",
@@ -14,6 +37,418 @@
       "writtenOn": "2021-01-27T22:54:58Z",
       "side": 1,
       "message": "Here we go, PTAL.",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a822098c_7283ed50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "Overall looks good - bunch of various comments",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bebe7e54_1db4a121",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: This ought to be a Dawn toggle instead. That way we can set it from the command line only for bots that don\u0027t exhibit the expected behavior but the test still passes for.",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 64
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04fdfb69_e8ff22c5",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "this should probably check |format| instead",
+      "range": {
+        "startLine": 129,
+        "startChar": 19,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0026c31d_22745d1d",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "perhaps just call this \"GetAspectFormat\" ? We can make it return the correct per-aspect thing for DepthStencil formats too. So multiplanar and depthStencil formats would be special-cased in the  switch, then everything can just return |format| since they only have the color aspect.",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9891460_3a9a0102",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "mm.. maybe it\u0027s time we changed supportsStorageUsage, isRenderable, etc. into a capabilities bitmask. We shouldn\u0027t block this work on that though.\n\nHowever, it might be better for the comment to say \"are not copyable\"",
+      "range": {
+        "startLine": 188,
+        "startChar": 12,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "109dd5bd_929b530f",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "my preference would be to have this be an extension like the BC formats. Is there a particular reason it\u0027s a toggle?",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da425c01_fa0884e8",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: can passthrough. This function shouldn\u0027t be doing the validation.\n\nI think it should be okay already since ValidateBindGroupDescriptor calls ValidateTextureBinding which checks that the view has a single aspect.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa7915fb_f6e62316",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: format.aspects \u0026 Plane0",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fdb8afe_d53f7a6c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: we should also update the default for desc.format in GetTextureViewDescriptorWithDefaults",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a98a84_75957d3d",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: \"enables the\"",
+      "range": {
+        "startLine": 67,
+        "startChar": 42,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3893856_7c7bbd13",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: might be better to just pass |dawnDevice| into this function and extract the bool there. It would be a little harder to use wrong. Right now you can say Validate(true, ..) and it always works!",
+      "range": {
+        "startLine": 466,
+        "startChar": 49,
+        "endLine": 466,
+        "endChar": 86
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "716ef22f_b3c7f455",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "we ought to be able to just say planeSlice \u003d 0/1 based on the aspect. TextureView validation should check that you don\u0027t ask for Plane0/Plane1 on texture/textureFormat that doesn\u0027t have those planes.",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a6298a_48b11593",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "Ah, perhaps it\u0027s because we\u0027re using the same adapter so the only sharing going on is synchronization..?",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 70
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb2544ad_358cbc1c",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "these validation tests shouldn\u0027t need the set up in D3D12VideoViewsTestBase.\n\nIt can be a separate suite R8BG82plane420Unorm validation tests.",
+      "range": {
+        "startLine": 184,
+        "startChar": 6,
+        "endLine": 184,
+        "endChar": 32
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd18176d_eacb6d4b",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: we would make the format an extension and skip if it\u0027s not present.",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccf93f85_d8452b11",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "Also T2B copies and WriteTexture.\n\nWriteTexture isn\u0027t encoder-level so the validation you have in ValidateUsage probably isn\u0027t sufficient. It would be best I think to have the validation be in ValidateTextureDescriptor -\u003e ValidateTextureUsage",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd3f767e_c58d2e0e",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "Also test you can\u0027t use it as a render target",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe10539e_51097873",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "various places where there\u0027s whitespace in this file.",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 12
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2ce0097_44385d05",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "nit: Get this value from GetTestTextureData(..) ? Also perhaps make the data non-uniform and sample a couple points so we know it\u0027s not flipped",
+      "range": {
+        "startLine": 392,
+        "startChar": 3,
+        "endLine": 392,
+        "endChar": 45
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a8d7aea_7bc9cc33",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-28T00:54:15Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 465,
+        "endChar": 46
+      },
       "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
