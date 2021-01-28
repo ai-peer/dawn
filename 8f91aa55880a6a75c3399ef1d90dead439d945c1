@@ -16,6 +16,23 @@
       "message": "This change fixes dawn:573, which was hitting a situation where the depth offset was larger than 0 in the texture copy splitter. When examining these copies that had a depth offset in PIX, they did not copy the expected data. Dawn\u0027s offset calculations seemed correct when I did them by hand - but still they did not result in the correct operation and I am unsure why. Because of this, it seems simplest to workaround the issue by simply not using the depth offset and instead using a larger height offset.",
       "revId": "8f91aa55880a6a75c3399ef1d90dead439d945c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "430a613e_1ca66e76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-01-28T23:30:04Z",
+      "side": 1,
+      "message": "Returning to WIP. Feedback is welcome, but we\u0027re hoping to get clarification from someone from D3D on why the copies with depth offset are incorrect.",
+      "revId": "8f91aa55880a6a75c3399ef1d90dead439d945c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
