@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "c9698992e3f99682f5426fcb9d389fba1566ba91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2843f939_41d28c3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-28T08:19:38Z",
+      "side": 1,
+      "message": "LGTM but it seems to fail on OpenGL Intel with tint_generator.",
+      "revId": "c9698992e3f99682f5426fcb9d389fba1566ba91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
