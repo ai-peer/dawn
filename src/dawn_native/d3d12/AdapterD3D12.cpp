@@ -44,7 +44,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Adapter::~Adapter() {
-        CleanUpDebugLayerFilters();
+        // CleanUpDebugLayerFilters();
     }
 
     const D3D12DeviceInfo& Adapter::GetDeviceInfo() const {
@@ -68,6 +68,7 @@ namespace dawn_native { namespace d3d12 {
         // Create the device to populate the adapter properties then reuse it when needed for actual
         // rendering.
         const PlatformFunctions* functions = GetBackend()->GetFunctions();
+        // mFunctions = GetBackend()->GetFunctions();
         if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
                                                 _uuidof(ID3D12Device), &mD3d12Device))) {
             return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");
@@ -82,6 +83,10 @@ namespace dawn_native { namespace d3d12 {
         mPCIInfo.vendorId = adapterDesc.VendorId;
 
         DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
+
+        if (mPCIInfo.vendorId != 0x8086) {
+            mD3d12Device.Reset();
+        }
 
         if (adapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
             mAdapterType = wgpu::AdapterType::CPU;
@@ -212,6 +217,18 @@ namespace dawn_native { namespace d3d12 {
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
         return Device::Create(this, descriptor);
+    }
+
+    MaybeError Adapter::ResetDeviceImpl() {
+        mD3d12Device.Reset();
+        const PlatformFunctions* functions = GetBackend()->GetFunctions();
+        ComPtr<IDXGIDebug1> dxgiDebug;
+        if (SUCCEEDED(functions->dxgiGetDebugInterface1(0, IID_PPV_ARGS(&dxgiDebug)))) {
+            dxgiDebug->ReportLiveObjects(DXGI_DEBUG_ALL,
+                                         DXGI_DEBUG_RLO_FLAGS(DXGI_DEBUG_RLO_SUMMARY));
+        }
+        DAWN_TRY(Initialize());
+        return {};
     }
 
 }}  // namespace dawn_native::d3d12
