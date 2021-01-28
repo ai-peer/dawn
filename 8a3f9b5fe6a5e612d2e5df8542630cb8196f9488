@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5849031_702c92c6",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T18:42:20Z",
+      "side": 1,
+      "message": "Done. Thanks for the details!",
+      "parentUuid": "eb84b42f_9c6bc808",
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cc070e3_17e3469b",
@@ -337,6 +355,30 @@
       "side": 1,
       "message": "Agreed that it\u0027s a bit pedantic, but the API and error messages have to be self consistent or people will get confused.",
       "parentUuid": "c6ef2a67_66ff6d95",
+      "range": {
+        "startLine": 251,
+        "startChar": 90,
+        "endLine": 251,
+        "endChar": 95
+      },
+      "revId": "8a3f9b5fe6a5e612d2e5df8542630cb8196f9488",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96ac2923_d102eb1a",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T18:42:20Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "aa8ce639_ae738439",
       "range": {
         "startLine": 251,
         "startChar": 90,

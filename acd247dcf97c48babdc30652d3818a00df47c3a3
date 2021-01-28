@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33dc508d_9710ef54",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T18:42:20Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4e2e7a0a_8e4937e8",
+      "range": {
+        "startLine": 169,
+        "startChar": 65,
+        "endLine": 169,
+        "endChar": 73
+      },
+      "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97857bc6_f9346f3b",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-01-28T02:44:32Z",
       "side": 1,
       "message": "Are sizes like `kMaxTextureDimension3D - 1` valid?",
+      "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f87a9b_dad11dc2",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T18:42:20Z",
+      "side": 1,
+      "message": "There is a test for kMaxTextureDimension3D (see the code below). I assume that if the largest one is OK then we don\u0027t need to test the others. But we can definitely add more tests for full coverage in CTS when we revisit the counterpart in CTS.",
+      "parentUuid": "97857bc6_f9346f3b",
       "revId": "acd247dcf97c48babdc30652d3818a00df47c3a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

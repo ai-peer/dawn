@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6f40263_266ec8cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-28T18:42:20Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin and Kai. Landing it now... ",
+      "revId": "a0aa7430456c51aaa5cbf8c9f1105b87aa247819",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
