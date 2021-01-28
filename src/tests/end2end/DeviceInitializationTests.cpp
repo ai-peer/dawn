@@ -30,6 +30,7 @@ class DeviceInitializationTest : public testing::Test {
 // Test that device operations are still valid if the reference to the instance
 // is dropped.
 TEST_F(DeviceInitializationTest, DeviceOutlivesInstance) {
+    DAWN_SKIP_TEST_IF(IsIntel());
     // Get properties of all available adapters and then free the instance.
     // We want to create a device on a fresh instance and adapter each time.
     std::vector<wgpu::AdapterProperties> availableAdapterProperties;
