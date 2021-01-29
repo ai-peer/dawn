@@ -65,10 +65,14 @@ namespace dawn_native {
                 DAWN_TRY(mCommandBufferState.ValidateCanDispatch());
             }
 
-            DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
-            dispatch->x = x;
-            dispatch->y = y;
-            dispatch->z = z;
+            // Skip noop dispatch. This is a workaround since system crash for 0xNxMx, Nx0xMx,
+            // NxMx0x dispatches on Metal.
+            if (x != 0 && y != 0 && z != 0) {
+                DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
+                dispatch->x = x;
+                dispatch->y = y;
+                dispatch->z = z;
+            }
 
             return {};
         });
