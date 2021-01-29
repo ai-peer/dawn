@@ -16,6 +16,23 @@
       "message": "PTAL!\n\nAlso let me know if you\u0027d like the FindBestType logic separated so it can be tested in dawn_unittests.",
       "revId": "69e4d6125e37d59b58d85ca5307cf739f592dcf6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ec54065_0239b27c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T13:47:26Z",
+      "side": 1,
+      "message": "Soooooo I finally figure out what the failure is, and it is because we don\u0027t respect Vulkan\u0027s bufferImageGranularity. WTF Vulkan.\n\nThis commit will have to be paused until we fix Dawn to respect bufferImageGranularity.",
+      "revId": "69e4d6125e37d59b58d85ca5307cf739f592dcf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
