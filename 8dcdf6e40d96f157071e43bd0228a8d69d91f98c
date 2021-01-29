@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ad2c0436_f07944f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18f0fb33_5292638d",
+      "range": {
+        "startLine": 11,
+        "startChar": 23,
+        "endLine": 11,
+        "endChar": 34
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a5e95433_89dd4c9a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b914aa6e_51b3ec7c",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "No longer needed.",
+      "parentUuid": "bebe7e54_1db4a121",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 64
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04fdfb69_e8ff22c5",
@@ -94,6 +142,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "this should probably check |format| instead",
+      "range": {
+        "startLine": 129,
+        "startChar": 19,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3809fd2b_2b5c6013",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Hmm. Check format for what?",
+      "parentUuid": "04fdfb69_e8ff22c5",
       "range": {
         "startLine": 129,
         "startChar": 19,
@@ -121,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b6e5c96_d125e5e2",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done \u0026 left a TODO if we want to use for depth-stencil.",
+      "parentUuid": "0026c31d_22745d1d",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9891460_3a9a0102",
@@ -134,6 +224,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "mm.. maybe it\u0027s time we changed supportsStorageUsage, isRenderable, etc. into a capabilities bitmask. We shouldn\u0027t block this work on that though.\n\nHowever, it might be better for the comment to say \"are not copyable\"",
+      "range": {
+        "startLine": 188,
+        "startChar": 12,
+        "endLine": 191,
+        "endChar": 0
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762dcf9f_ac9cced2",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f9891460_3a9a0102",
       "range": {
         "startLine": 188,
         "startChar": 12,
@@ -163,6 +277,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b21752bc_73c5e5cb",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Due to [1] (see CW\u0027s comment). Still true?\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/30822",
+      "parentUuid": "109dd5bd_929b530f",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da425c01_fa0884e8",
         "filename": "src/dawn_native/Subresource.cpp",
         "patchSetId": 7
@@ -174,6 +306,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "nit: can passthrough. This function shouldn\u0027t be doing the validation.\n\nI think it should be okay already since ValidateBindGroupDescriptor calls ValidateTextureBinding which checks that the view has a single aspect.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 17
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eca7798_34169aab",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da425c01_fa0884e8",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -209,6 +365,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5d4fce9_077382a2",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Can\u0027t combine w/ others per rules. Maybe a TODO to relax (ex. color | plane)?",
+      "parentUuid": "fa7915fb_f6e62316",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fdb8afe_d53f7a6c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
@@ -226,6 +406,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b64a471_d77892bf",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Not sure I follow, can you clarify?",
+      "parentUuid": "0fdb8afe_d53f7a6c",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4a98a84_75957d3d",
         "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
         "patchSetId": 7
@@ -237,6 +435,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "nit: \"enables the\"",
+      "range": {
+        "startLine": 67,
+        "startChar": 42,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5253da70_99426a80",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a98a84_75957d3d",
       "range": {
         "startLine": 67,
         "startChar": 42,
@@ -270,6 +492,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2afe3a57_a036f653",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3893856_7c7bbd13",
+      "range": {
+        "startLine": 466,
+        "startChar": 49,
+        "endLine": 466,
+        "endChar": 86
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "716ef22f_b3c7f455",
@@ -283,6 +529,24 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "we ought to be able to just say planeSlice \u003d 0/1 based on the aspect. TextureView validation should check that you don\u0027t ask for Plane0/Plane1 on texture/textureFormat that doesn\u0027t have those planes.",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06fe324f_5eea70be",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1096,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "716ef22f_b3c7f455",
       "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -310,6 +574,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "403fb2f2_7b3ae327",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done. Fixed per MSFT.",
+      "parentUuid": "74a6298a_48b11593",
+      "range": {
+        "startLine": 60,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 70
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb2544ad_358cbc1c",
@@ -323,6 +611,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "these validation tests shouldn\u0027t need the set up in D3D12VideoViewsTestBase.\n\nIt can be a separate suite R8BG82plane420Unorm validation tests.",
+      "range": {
+        "startLine": 184,
+        "startChar": 6,
+        "endLine": 184,
+        "endChar": 32
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f9d07fa_054a08de",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "D3D12VideoViewsTestBase is needed because we can\u0027t CreateTexture. But I could add a toggle to bypass. Would you prefer that?",
+      "parentUuid": "cb2544ad_358cbc1c",
       "range": {
         "startLine": 184,
         "startChar": 6,
@@ -367,6 +679,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d52807b_b2d6ee9f",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Texture aspect validation forbids it. But I added tests for good measure.",
+      "parentUuid": "ccf93f85_d8452b11",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd3f767e_c58d2e0e",
@@ -384,6 +714,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d65c3995_7ba666c3",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd3f767e_c58d2e0e",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe10539e_51097873",
@@ -397,6 +745,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "various places where there\u0027s whitespace in this file.",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 12
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f82a472c_d191454c",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fe10539e_51097873",
       "range": {
         "startLine": 341,
         "startChar": 0,
@@ -430,6 +802,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1686c1eb_e5f862df",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "b2ce0097_44385d05",
+      "range": {
+        "startLine": 392,
+        "startChar": 3,
+        "endLine": 392,
+        "endChar": 45
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a8d7aea_7bc9cc33",
@@ -443,6 +839,30 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 465,
+        "startChar": 0,
+        "endLine": 465,
+        "endChar": 46
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b33f60c8_478e3209",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:57:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a8d7aea_7bc9cc33",
       "range": {
         "startLine": 465,
         "startChar": 0,
