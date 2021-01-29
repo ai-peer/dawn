@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37ef3e1_42990b04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T10:47:18Z",
+      "side": 1,
+      "message": "PTAL!\n\nAlso let me know if you\u0027d like the FindBestType logic separated so it can be tested in dawn_unittests.",
+      "revId": "69e4d6125e37d59b58d85ca5307cf739f592dcf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
