@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "7a93903d9b0387b7e1d7d58ed351ffd774d044eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d426ee51_e462e140",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-29T17:53:59Z",
+      "side": 1,
+      "message": "LGTM\n\n\"And ten of thousands of disk drives rejoiced in unison.\"",
+      "revId": "7a93903d9b0387b7e1d7d58ed351ffd774d044eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
