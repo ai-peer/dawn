@@ -781,6 +781,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eef278a9_3c9526dd",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-01-29T23:59:53Z",
+      "side": 1,
+      "message": "Leaving open to fixup",
+      "parentUuid": "f82a472c_d191454c",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 12
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b2ce0097_44385d05",
         "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
         "patchSetId": 7
