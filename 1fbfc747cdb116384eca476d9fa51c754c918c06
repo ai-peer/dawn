@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7183410_c212b9de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T12:53:03Z",
+      "side": 1,
+      "message": "Landing reland TBR to be able to revert it again if it goes wrong.",
+      "revId": "1fbfc747cdb116384eca476d9fa51c754c918c06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
