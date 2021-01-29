@@ -68,6 +68,24 @@
       "message": "LGTM2",
       "revId": "fc1266859aba8821f20e164cda71b0217dab3b9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d6b0a2c_43f5a1b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-29T20:28:11Z",
+      "side": 1,
+      "message": "Mostly so things work the same with/without the wire. A WebGPU implementation ought to either ignore or return a recoverable error if it sees an sType it doesn\u0027t support. Bailing out in the wire means the app simply breaks.\n\nWDYT?",
+      "parentUuid": "703e98d3_b6137322",
+      "revId": "fc1266859aba8821f20e164cda71b0217dab3b9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
