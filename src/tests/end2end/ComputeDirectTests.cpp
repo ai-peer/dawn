@@ -1,4 +1,4 @@
-// Copyright 2019 The Dawn Authors
+// Copyright 2021 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,16 +16,14 @@
 
 #include "utils/WGPUHelpers.h"
 
-#include <array>
 #include <initializer_list>
 
-class ComputeIndirectTests : public DawnTest {
+class ComputeDirectTests : public DawnTest {
   public:
-    void BasicTest(std::initializer_list<uint32_t> buffer, uint64_t indirectOffset);
+    void BasicTest(uint32_t x, uint32_t y, uint32_t z);
 };
 
-void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
-                                     uint64_t indirectOffset) {
+void ComputeDirectTests::BasicTest(uint32_t x, uint32_t y, uint32_t z) {
     // Set up shader and pipeline
 
     // Write into the output buffer if we saw the zero dispatch or biggest dispatch
@@ -47,10 +45,9 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
         fn main() -> void {
             const dispatch : vec3<u32> = input.expectedDispatch;
             if (dispatch.x * dispatch.y * dispatch.z == 0 ||
-                all(GlobalInvocationID == input.expectedDispatch - vec3<u32>(1u, 1u, 1u))) {
-                output.workGroups = input.expectedDispatch;
+                all(GlobalInvocationID == dispatch - vec3<u32>(1u, 1u, 1u))) {
+                output.workGroups = dispatch;
             }
-            return;
         })");
 
     wgpu::ComputePipelineDescriptor csDesc;
@@ -67,16 +64,9 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
         wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst,
         kSentinelData);
 
-    std::vector<uint32_t> indirectBufferData = bufferList;
-
-    wgpu::Buffer indirectBuffer =
-        utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, bufferList);
-
-    uint32_t indirectStart = indirectOffset / sizeof(uint32_t);
-
-    wgpu::Buffer expectedBuffer =
-        utils::CreateBufferFromData(device, &indirectBufferData[indirectStart],
-                                    3 * sizeof(uint32_t), wgpu::BufferUsage::Uniform);
+    std::initializer_list<uint32_t> expectedBufferData{x, y, z};
+    wgpu::Buffer expectedBuffer = utils::CreateBufferFromData<uint32_t>(
+        device, wgpu::BufferUsage::Uniform, expectedBufferData);
 
     // Set up bind group and issue dispatch
     wgpu::BindGroup bindGroup =
@@ -92,7 +82,7 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
         wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
         pass.SetPipeline(pipeline);
         pass.SetBindGroup(0, bindGroup);
-        pass.DispatchIndirect(indirectBuffer, indirectOffset);
+        pass.Dispatch(x, y, z);
         pass.EndPass();
 
         commands = encoder.Finish();
@@ -100,47 +90,33 @@ void ComputeIndirectTests::BasicTest(std::initializer_list<uint32_t> bufferList,
 
     queue.Submit(1, &commands);
 
-    std::vector<uint32_t> expected;
-    if (indirectBufferData[indirectStart] * indirectBufferData[indirectStart + 1] *
-            indirectBufferData[indirectStart + 2] ==
-        0) {
-        expected = kSentinelData;
-    } else {
-        expected.assign(indirectBufferData.begin() + indirectStart,
-                        indirectBufferData.begin() + indirectStart + 3);
-    }
+    std::vector<uint32_t> expected = x * y * z == 0 ? kSentinelData : expectedBufferData;
 
-    // Verify the dispatch got called with group counts in indirect buffer if all group counts are
-    // not zero
+    // Verify the dispatch got called if all group counts are not zero
     EXPECT_BUFFER_U32_RANGE_EQ(&expected[0], dst, 0, 3);
 }
 
-// Test basic indirect
-TEST_P(ComputeIndirectTests, Basic) {
-    BasicTest({2, 3, 4}, 0);
+// Test basic dispatch
+TEST_P(ComputeDirectTests, Basic) {
+    BasicTest(2, 3, 4);
 }
 
-// Test no-op indirect
-TEST_P(ComputeIndirectTests, Noop) {
+// Test noop dispatch
+TEST_P(ComputeDirectTests, Noop) {
     // All dimensions are 0s
-    BasicTest({0, 0, 0}, 0);
+    BasicTest(0, 0, 0);
 
     // Only x dimension is 0
-    BasicTest({0, 3, 4}, 0);
+    BasicTest(0, 3, 4);
 
     // Only y dimension is 0
-    BasicTest({2, 0, 4}, 0);
+    BasicTest(2, 0, 4);
 
     // Only z dimension is 0
-    BasicTest({2, 3, 0}, 0);
+    BasicTest(2, 3, 0);
 }
 
-// Test indirect with buffer offset
-TEST_P(ComputeIndirectTests, IndirectOffset) {
-    BasicTest({0, 0, 0, 2, 3, 4}, 3 * sizeof(uint32_t));
-}
-
-DAWN_INSTANTIATE_TEST(ComputeIndirectTests,
+DAWN_INSTANTIATE_TEST(ComputeDirectTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
