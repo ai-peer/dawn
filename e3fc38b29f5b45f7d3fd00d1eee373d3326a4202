@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5fcdd86_5e86fbb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-29T21:25:14Z",
+      "side": 1,
+      "message": "PTAL. Thank you!",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2f556af_c4e8d588",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-29T21:25:14Z",
+      "side": 1,
+      "message": "We have a lot of `ArrayLayer` related info here and there for texture descriptor. I suppose it is fine. If you think it\u0027s annoying, I can replace it with `depth` in a separate code refactoring patch.",
+      "range": {
+        "startLine": 28,
+        "startChar": 41,
+        "endLine": 28,
+        "endChar": 63
+      },
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
