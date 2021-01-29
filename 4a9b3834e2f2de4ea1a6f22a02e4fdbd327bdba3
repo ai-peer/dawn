@@ -50,6 +50,24 @@
       "message": "I think this one can be simplified too.",
       "revId": "4a9b3834e2f2de4ea1a6f22a02e4fdbd327bdba3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5932b470_16ef8f69",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-29T14:42:57Z",
+      "side": 1,
+      "message": "Right you are. Done.",
+      "parentUuid": "a3022bf0_f703178d",
+      "revId": "4a9b3834e2f2de4ea1a6f22a02e4fdbd327bdba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
