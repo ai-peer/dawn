@@ -50,6 +50,23 @@
       "message": "I\u0027ll hold on that a little bit, Nicolas says he\u0027ll have a better solution.",
       "revId": "7a93903d9b0387b7e1d7d58ed351ffd774d044eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab84548d_9fbe85f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-29T20:37:54Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7a93903d9b0387b7e1d7d58ed351ffd774d044eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
