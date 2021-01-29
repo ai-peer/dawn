@@ -39,6 +39,13 @@ namespace dawn_native {
                 return format.aspects & Aspect::Depth;
             case wgpu::TextureAspect::StencilOnly:
                 return format.aspects & Aspect::Stencil;
+            // A per plane view |format| using a color aspect must be selected as a plane
+            // aspect while a texture |format| aspect is always equal to all planes. Since |format|
+            // can be either a view or texture, return the same plane aspect.
+            case wgpu::TextureAspect::Plane0:
+                return Aspect::Plane0;
+            case wgpu::TextureAspect::Plane1:
+                return Aspect::Plane1;
         }
     }
 
@@ -50,6 +57,10 @@ namespace dawn_native {
             case Aspect::CombinedDepthStencil:
                 return 0;
             case Aspect::Stencil:
+                return 1;
+            case Aspect::Plane0:
+                return 0;
+            case Aspect::Plane1:
                 return 1;
             default:
                 UNREACHABLE();
@@ -63,6 +74,8 @@ namespace dawn_native {
         if (aspects == Aspect::Color || aspects == Aspect::Depth ||
             aspects == Aspect::CombinedDepthStencil) {
             return 1;
+        } else if (aspects == (Aspect::Plane0 | Aspect::Plane1)) {
+            return 2;
         } else {
             ASSERT(aspects == (Aspect::Depth | Aspect::Stencil));
             return 2;

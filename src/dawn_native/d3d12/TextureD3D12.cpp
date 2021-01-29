@@ -201,6 +201,7 @@ namespace dawn_native { namespace d3d12 {
                 case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                     return DXGI_FORMAT_BC7_TYPELESS;
 
+                case wgpu::TextureFormat::R8BG82plane420Unorm:
                 case wgpu::TextureFormat::Undefined:
                     UNREACHABLE();
             }
@@ -323,6 +324,9 @@ namespace dawn_native { namespace d3d12 {
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
                 return DXGI_FORMAT_BC7_UNORM_SRGB;
 
+            case wgpu::TextureFormat::R8BG82plane420Unorm:
+                return DXGI_FORMAT_NV12;
+
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }
@@ -378,11 +382,32 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
+    // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_shared_resource_compatibility_tier
+    MaybeError ValidateD3D12TextureCanBeShared(Device* device, DXGI_FORMAT textureFormat) {
+        const bool supportsSharedResourceCapabilityTier1 =
+            device->GetDeviceInfo().supportsSharedResourceCapabilityTier1;
+        switch (textureFormat) {
+            // MSDN docs are not correct, NV12 requires at-least tier 1.
+            case DXGI_FORMAT_NV12:
+                if (!supportsSharedResourceCapabilityTier1) {
+                    return DAWN_VALIDATION_ERROR("DXGI format does not support cross-API sharing.");
+                }
+                return {};
+            default:
+                return {};
+        }
+    }
+
     // static
     ResultOrError<Ref<Texture>> Texture::Create(Device* device,
                                                 const TextureDescriptor* descriptor) {
         Ref<Texture> dawnTexture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedInternal));
+
+        if (dawnTexture->GetFormat().IsMultiPlane()) {
+            return DAWN_VALIDATION_ERROR("Cannot create a multi-plane texture");
+        }
+
         DAWN_TRY(dawnTexture->InitializeAsInternalTexture());
         return std::move(dawnTexture);
     }
@@ -400,6 +425,14 @@ namespace dawn_native { namespace d3d12 {
             AcquireRef(new Texture(device, textureDescriptor, TextureState::OwnedExternal));
         DAWN_TRY(dawnTexture->InitializeAsExternalTexture(textureDescriptor, sharedHandle,
                                                           acquireMutexKey, isSwapChainTexture));
+
+        // Importing a multi-plane texture must be initialized. This is required because
+        // a shared multi-plane texture cannot be initialized by Dawn.
+        if (!descriptor->isInitialized && dawnTexture->GetFormat().IsMultiPlane()) {
+            return DAWN_VALIDATION_ERROR(
+                "Cannot create a multi-plane texture without being initialized");
+        }
+
         dawnTexture->SetIsSubresourceContentInitialized(descriptor->isInitialized,
                                                         dawnTexture->GetAllSubresources());
         return std::move(dawnTexture);
@@ -429,6 +462,11 @@ namespace dawn_native { namespace d3d12 {
                               "D3D12 opening shared handle"));
 
         DAWN_TRY(ValidateD3D12TextureCanBeWrapped(d3d12Resource.Get(), descriptor));
+
+        // Shared handle is assumed to support resource sharing capability. The resource
+        // shared capability tier must agree to share resources between D3D11 and D3D12 devices.
+        DAWN_TRY(ValidateD3D12TextureCanBeShared(ToBackend(GetDevice()),
+                                                 D3D12TextureFormat(descriptor->format)));
 
         ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
         DAWN_TRY_ASSIGN(dxgiKeyedMutex,
@@ -1038,12 +1076,24 @@ namespace dawn_native { namespace d3d12 {
                             // sampled.
                             mSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
                             break;
+
+                        // Depth formats cannot use plane aspects.
+                        case wgpu::TextureAspect::Plane0:
+                        case wgpu::TextureAspect::Plane1:
+                            UNREACHABLE();
+                            break;
                     }
                     break;
                 default:
                     UNREACHABLE();
                     break;
             }
+        }
+
+        // Per plane view formats must have the plane slice number be the index of the plane in the
+        // array of textures.
+        if (texture->GetFormat().IsMultiPlane()) {
+            planeSlice = GetAspectIndex(SelectFormatAspects(GetFormat(), descriptor->aspect));
         }
 
         // Currently we always use D3D12_TEX2D_ARRAY_SRV because we cannot specify base array layer
