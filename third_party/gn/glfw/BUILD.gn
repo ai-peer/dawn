@@ -35,7 +35,10 @@ config("glfw_public") {
   }
 
   if (is_linux) {
-    defines = [ "_GLFW_X11" ]
+    defines = [
+      "_GLFW_X11",
+      "_GLFW_EGL_LIBRARY=\"libEGL.so\"",
+    ]
   }
 }
 
