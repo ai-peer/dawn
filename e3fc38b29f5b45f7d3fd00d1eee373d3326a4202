@@ -39,6 +39,64 @@
       },
       "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f7a1274_497364c4",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-29T23:41:11Z",
+      "side": 1,
+      "message": "What about having two separate functions, one as this was, and one for 3D that takes a full (optional?) wgpu::Extent3D instead of depth,width,height?\n\nRequired depth but optional width/height for a helper function to create 3d textures is weird.",
+      "parentUuid": "b2f556af_c4e8d588",
+      "range": {
+        "startLine": 28,
+        "startChar": 41,
+        "endLine": 28,
+        "endChar": 63
+      },
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8ac3eb_59f7fbe5",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-29T23:41:11Z",
+      "side": 1,
+      "message": "nit: It isn\u0027t a problem in practice, but this permanently alters the descriptor. If the invalidDimensions array were re-ordered, it would change the test behavior.\n\nPerhaps simply move the definition of `descriptor` inside this loop.",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e82a6ee6_dcdd9faa",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-29T23:41:11Z",
+      "side": 1,
+      "message": "aside: Hm, this is a small mismatch between the C and JS APIs. Zero in JS actually means zero, not \"auto\". I don\u0027t know if we should change it (to WGPU_WHOLE_SIZE), but maybe.",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
