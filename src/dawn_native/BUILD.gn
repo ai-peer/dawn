@@ -77,6 +77,16 @@ config("dawn_native_weak_framework") {
   }
 }
 
+action("make_egl_symlink") {
+  outputs = [ "${root_build_dir}/libEGL.so.1" ]
+  script = "//build/symlink.py"
+  args = [
+    "-f",
+    "libEGL.so",
+    "libEGL.so.1",
+  ]
+}
+
 # Config that adds the @executable_path rpath if needed so that Swiftshader or the Vulkan loader are found.
 config("dawn_native_vulkan_rpath") {
   if (is_mac && dawn_enable_vulkan &&
@@ -622,6 +632,9 @@ source_set("dawn_native_sources") {
       "${dawn_angle_dir}:libEGL",
       "${dawn_angle_dir}:libGLESv2",
     ]
+    if (is_linux) {
+      deps += [ ":make_egl_symlink" ]
+    }
   }
 
   if (dawn_enable_wgsl) {
