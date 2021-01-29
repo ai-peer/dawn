@@ -16,6 +16,40 @@
       "message": "CQ is moaning as this is dependent on the dawn-chromium-autoroll. Still good for review.",
       "revId": "4a9b3834e2f2de4ea1a6f22a02e4fdbd327bdba3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6755c3af_bd26d6f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T14:14:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4a9b3834e2f2de4ea1a6f22a02e4fdbd327bdba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3022bf0_f703178d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T14:14:25Z",
+      "side": 1,
+      "message": "I think this one can be simplified too.",
+      "revId": "4a9b3834e2f2de4ea1a6f22a02e4fdbd327bdba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
