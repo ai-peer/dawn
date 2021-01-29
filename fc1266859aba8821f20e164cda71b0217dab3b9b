@@ -33,6 +33,24 @@
       "message": "LGTM but why do we need to support this case?",
       "revId": "fc1266859aba8821f20e164cda71b0217dab3b9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "703e98d3_b6137322",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T14:25:51Z",
+      "side": 1,
+      "message": "I\u0027m worried that we are adding more complexity to the wire when instead we could just bail out and return \"false\" from HandleCommands",
+      "parentUuid": "9eccdd87_6c8a5d99",
+      "revId": "fc1266859aba8821f20e164cda71b0217dab3b9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
