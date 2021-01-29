@@ -68,6 +68,24 @@
       "parentUuid": "90d902be_f8e04e6a",
       "revId": "c3450da02543ab8becf7312336bd5acf2c92ea83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b537834_ae9483dc",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-01-29T17:12:14Z",
+      "side": 1,
+      "message": "Will ask the ANGLE folks.\n\nBut why a copy when a symlink will do (and save disk space)?",
+      "parentUuid": "2aee3ee7_4e54d939",
+      "revId": "c3450da02543ab8becf7312336bd5acf2c92ea83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
