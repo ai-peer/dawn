@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c412f052_fb7315c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T17:00:46Z",
+      "side": 1,
+      "message": "LGTM since the next CL has the tests.",
+      "revId": "2dc8161483418aa1ce8a278f38e2f64b74dd3e2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c8ccb92_72114231",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T17:00:46Z",
+      "side": 1,
+      "message": "nit: 0xNxM the last x isn\u0027t needed in any of these.\n\nBut we could just say \"It is a workaround for system crashes on 0 dispatches on some platforms.\"",
+      "range": {
+        "startLine": 68,
+        "startChar": 79,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "2dc8161483418aa1ce8a278f38e2f64b74dd3e2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
