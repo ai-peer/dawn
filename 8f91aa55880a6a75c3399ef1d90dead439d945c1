@@ -33,6 +33,24 @@
       "message": "Returning to WIP. Feedback is welcome, but we\u0027re hoping to get clarification from someone from D3D on why the copies with depth offset are incorrect.",
       "revId": "8f91aa55880a6a75c3399ef1d90dead439d945c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e2198c6_2277118a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-01-29T11:02:14Z",
+      "side": 1,
+      "message": "If you don\u0027t mind I\u0027ll take a look once you have clarification, it\u0027s quite difficult to go back to understand the copy splitter :) But overall it would be nice to have regression tests both in WriteTextureTests and in the CopySplitterTests.",
+      "parentUuid": "430a613e_1ca66e76",
+      "revId": "8f91aa55880a6a75c3399ef1d90dead439d945c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
