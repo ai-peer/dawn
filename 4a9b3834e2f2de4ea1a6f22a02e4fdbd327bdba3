@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dcaa83c_15c052b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-01-29T10:26:38Z",
+      "side": 1,
+      "message": "CQ is moaning as this is dependent on the dawn-chromium-autoroll. Still good for review.",
+      "revId": "4a9b3834e2f2de4ea1a6f22a02e4fdbd327bdba3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
