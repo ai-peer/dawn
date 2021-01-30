@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3725883_9d38e185",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-30T00:12:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "46524dcd88514277f3798b209008797fdaafd474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83a4876c_bc629e3e",
+        "filename": "src/tests/end2end/ComputeDirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-30T00:12:45Z",
+      "side": 1,
+      "message": "this test is not so different from ComputeIndirectTests. Maybe we can factor the code a bit.",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "46524dcd88514277f3798b209008797fdaafd474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73152960_73be1cd7",
+        "filename": "src/tests/end2end/ComputeDirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-01-30T00:12:45Z",
+      "side": 1,
+      "message": "and we also write 0xFFFFFFFF if any dimension is 0. Would be good to expand the comment to describe overall how the whole test works.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 66
+      },
+      "revId": "46524dcd88514277f3798b209008797fdaafd474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
