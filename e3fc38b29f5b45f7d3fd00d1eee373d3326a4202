@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f13ecf26_cc00afac",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-30T00:57:48Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "1f7a1274_497364c4",
+      "range": {
+        "startLine": 28,
+        "startChar": 41,
+        "endLine": 28,
+        "endChar": 63
+      },
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f8ac3eb_59f7fbe5",
@@ -82,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b580bb15_b95ce01c",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-30T00:57:48Z",
+      "side": 1,
+      "message": "My mistake. Done.",
+      "parentUuid": "0f8ac3eb_59f7fbe5",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e82a6ee6_dcdd9faa",
@@ -95,6 +137,24 @@
       "writtenOn": "2021-01-29T23:41:11Z",
       "side": 1,
       "message": "aside: Hm, this is a small mismatch between the C and JS APIs. Zero in JS actually means zero, not \"auto\". I don\u0027t know if we should change it (to WGPU_WHOLE_SIZE), but maybe.",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24201d9a_17e7b13a",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-01-30T00:57:48Z",
+      "side": 1,
+      "message": "Maybe not? I visited CTS, and found that tests in CTS (creating_texture_view_on_a_2D_non_array_texture and creating_texture_view_on_a_2D_array_texture in createView.spec.ts) also followed this rule. I also read the WebGPU spec, it says \"if undefined, defaults to ...\" for mipLevelCount and arrayLayerCount, it doesn\u0027t mention \"0\", though. So, it seems that CTS treated \"0\" as \"undefined\" for this special case.",
+      "parentUuid": "e82a6ee6_dcdd9faa",
       "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
