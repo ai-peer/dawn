@@ -157,6 +157,24 @@
       "parentUuid": "e82a6ee6_dcdd9faa",
       "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85dfe651_7bb57c37",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-01-30T05:03:40Z",
+      "side": 1,
+      "message": "The spec is correct, CTS needs to be fixed (test is probably from before we got clarity on that)",
+      "parentUuid": "24201d9a_17e7b13a",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
