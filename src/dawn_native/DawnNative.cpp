@@ -150,20 +150,16 @@ namespace dawn_native {
         return mImpl->GetToggleInfo(toggleName);
     }
 
-    void Instance::EnableBackendValidation(bool enableBackendValidation) {
-        mImpl->EnableBackendValidation(enableBackendValidation);
-    }
-
-    void Instance::EnableGPUBasedBackendValidation(bool enableGPUBasedBackendValidation) {
-        mImpl->EnableGPUBasedBackendValidation(enableGPUBasedBackendValidation);
-    }
-
     void Instance::EnableBeginCaptureOnStartup(bool beginCaptureOnStartup) {
         mImpl->EnableBeginCaptureOnStartup(beginCaptureOnStartup);
     }
 
     void Instance::SetPlatform(dawn_platform::Platform* platform) {
         mImpl->SetPlatform(platform);
+    }
+
+    void Instance::SetBackendValidationLevel(BackendValidationLevel level) {
+        mImpl->SetBackendValidationLevel(level);
     }
 
     WGPUInstance Instance::Get() const {
