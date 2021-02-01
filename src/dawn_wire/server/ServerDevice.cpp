@@ -19,24 +19,35 @@ namespace dawn_wire { namespace server {
     namespace {
 
         template <ObjectType objectType, typename Pipeline>
-        void HandleCreateReadyRenderPipelineCallbackResult(KnownObjects<Pipeline>* knownObjects,
-                                                           WGPUCreateReadyPipelineStatus status,
+        void HandleCreateReadyRenderPipelineCallbackResult(void (*releaseFn)(Pipeline handle),
+                                                           KnownObjects<Pipeline>* knownObjects,
+                                                           WGPUCreateReadyPipelineStatus* status,
                                                            Pipeline pipeline,
-                                                           const char* message,
                                                            CreateReadyPipelineUserData* data) {
-            auto* pipelineObject = knownObjects->Get(data->pipelineObjectID);
+            // May be null if the device was destroyed. Device destruction destroys child
+            // objects on the wire.
+            auto* pipelineObject =
+                knownObjects->Get(data->pipelineObjectID, AllocationState::Reserved);
 
-            if (status == WGPUCreateReadyPipelineStatus_Success) {
-                ASSERT(pipelineObject != nullptr);
+            if (pipelineObject != nullptr && *status == WGPUCreateReadyPipelineStatus_Success &&
+                TrackDeviceChild(pipelineObject->deviceInfo, objectType, data->pipelineObjectID)) {
+                // Only assign the handle and allocated status if the object exists, is created
+                // successfully, and is successfully tracked by its parent device.
+                pipelineObject->state = AllocationState::Allocated;
                 pipelineObject->handle = pipeline;
-            } else if (pipelineObject != nullptr) {
-                // May be null if the device was destroyed. Device destruction destroys child
-                // objects on the wire.
-                if (!UntrackDeviceChild(pipelineObject->deviceInfo, objectType,
-                                        data->pipelineObjectID)) {
-                    UNREACHABLE();
-                }
+            } else {
+                // Otherwise, free the ObjectId which will make it unusable.
                 knownObjects->Free(data->pipelineObjectID);
+
+                // Release the pipeline, if it exists, so it doesn't leak.
+                if (pipeline != nullptr) {
+                    releaseFn(pipeline);
+                }
+
+                // Update the status to be an error.
+                if (*status == WGPUCreateReadyPipelineStatus_Success) {
+                    *status = WGPUCreateReadyPipelineStatus_Error;
+                }
             }
         }
 
@@ -103,17 +114,14 @@ namespace dawn_wire { namespace server {
             return false;
         }
 
-        auto* resultData = ComputePipelineObjects().Allocate(pipelineObjectHandle.id);
+        auto* resultData =
+            ComputePipelineObjects().Allocate(pipelineObjectHandle.id, AllocationState::Reserved);
         if (resultData == nullptr) {
             return false;
         }
 
         resultData->generation = pipelineObjectHandle.generation;
         resultData->deviceInfo = device->info.get();
-        if (!TrackDeviceChild(resultData->deviceInfo, ObjectType::ComputePipeline,
-                              pipelineObjectHandle.id)) {
-            return false;
-        }
 
         auto userdata = MakeUserdata<CreateReadyPipelineUserData>();
         userdata->device = ObjectHandle{deviceId, device->generation};
@@ -133,7 +141,7 @@ namespace dawn_wire { namespace server {
                                                       const char* message,
                                                       CreateReadyPipelineUserData* data) {
         HandleCreateReadyRenderPipelineCallbackResult<ObjectType::ComputePipeline>(
-            &ComputePipelineObjects(), status, pipeline, message, data);
+            mProcs.computePipelineRelease, &ComputePipelineObjects(), &status, pipeline, data);
 
         ReturnDeviceCreateReadyComputePipelineCallbackCmd cmd;
         cmd.device = data->device;
@@ -153,17 +161,14 @@ namespace dawn_wire { namespace server {
             return false;
         }
 
-        auto* resultData = RenderPipelineObjects().Allocate(pipelineObjectHandle.id);
+        auto* resultData =
+            RenderPipelineObjects().Allocate(pipelineObjectHandle.id, AllocationState::Reserved);
         if (resultData == nullptr) {
             return false;
         }
 
         resultData->generation = pipelineObjectHandle.generation;
         resultData->deviceInfo = device->info.get();
-        if (!TrackDeviceChild(resultData->deviceInfo, ObjectType::RenderPipeline,
-                              pipelineObjectHandle.id)) {
-            return false;
-        }
 
         auto userdata = MakeUserdata<CreateReadyPipelineUserData>();
         userdata->device = ObjectHandle{deviceId, device->generation};
@@ -183,7 +188,7 @@ namespace dawn_wire { namespace server {
                                                      const char* message,
                                                      CreateReadyPipelineUserData* data) {
         HandleCreateReadyRenderPipelineCallbackResult<ObjectType::RenderPipeline>(
-            &RenderPipelineObjects(), status, pipeline, message, data);
+            mProcs.renderPipelineRelease, &RenderPipelineObjects(), &status, pipeline, data);
 
         ReturnDeviceCreateReadyRenderPipelineCallbackCmd cmd;
         cmd.device = data->device;
