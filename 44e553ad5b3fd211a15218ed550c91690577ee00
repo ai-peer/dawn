@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa167f15_4c6e5e4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-01T19:15:23Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\n(This is a reland with tweaks of https://dawn-review.googlesource.com/c/dawn/+/39320)",
+      "revId": "44e553ad5b3fd211a15218ed550c91690577ee00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
