@@ -281,6 +281,8 @@ namespace dawn_native {
                 }
             }
 
+            mOcclusionQuerySet->SetQueryAvailability(mCurrentOcclusionQueryIndex, 1);
+
             TrackQueryAvailability(mOcclusionQuerySet.Get(), mCurrentOcclusionQueryIndex);
             mOcclusionQueryActive = false;
 
@@ -302,6 +304,7 @@ namespace dawn_native {
                     ValidateQueryIndexOverwrite(querySet, queryIndex, GetQueryAvailabilityMap()));
             }
 
+            querySet->SetQueryAvailability(queryIndex, 1);
             TrackQueryAvailability(querySet, queryIndex);
 
             WriteTimestampCmd* cmd =

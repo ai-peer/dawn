@@ -371,6 +371,47 @@ TEST_P(TimestampQueryTests, TimestampOnComputePass) {
     EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
 }
 
+// Test resolving timestamp query from another different encoder
+TEST_P(TimestampQueryTests, ResolveFromAnotherEncoder) {
+    constexpr uint32_t kQueryCount = 2;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder timestampEncoder = device.CreateCommandEncoder();
+    timestampEncoder.WriteTimestamp(querySet, 0);
+    timestampEncoder.WriteTimestamp(querySet, 1);
+    wgpu::CommandBuffer timestampCommands = timestampEncoder.Finish();
+    queue.Submit(1, &timestampCommands);
+
+    wgpu::CommandEncoder resolveEncoder = device.CreateCommandEncoder();
+    resolveEncoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer resolveCommands = resolveEncoder.Finish();
+    queue.Submit(1, &resolveCommands);
+
+    EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+}
+
+// Test resolving timestamp query to 0 if all queries are not written
+TEST_P(TimestampQueryTests, ResolveWithoutWritten) {
+    constexpr uint32_t kQueryCount = 2;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+    // Set all bits in buffer to check 0 is correctly written if resolving query set with no query
+    // is written
+    constexpr static uint64_t kSentinelValue = ~uint64_t(0);
+    queue.WriteBuffer(destination, 0, &kSentinelValue, sizeof(kSentinelValue));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    std::vector<uint64_t> expectedZeros(kQueryCount);
+    EXPECT_BUFFER_U64_RANGE_EQ(expectedZeros.data(), destination, 0, 2);
+}
+
 // Test resolving timestamp query to one slot in the buffer
 TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
     // TODO(hao.x.li@intel.com): Fail to resolve query to buffer with offset on Windows Vulkan and

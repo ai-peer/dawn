@@ -135,6 +135,7 @@ namespace dawn_native {
                 DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
             }
 
+            querySet->SetQueryAvailability(queryIndex, 1);
             mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
 
             WriteTimestampCmd* cmd =
