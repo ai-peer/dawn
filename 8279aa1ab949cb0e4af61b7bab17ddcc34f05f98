@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fd4eba6e_a5b98766",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c790af42_b58961e3",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c7d07d73_cf13153f",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "439a0852_1f286fb2",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8d08a45_06da8a30",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6153db97_c612db27",
@@ -99,6 +135,30 @@
       "writtenOn": "2021-02-01T20:54:20Z",
       "side": 1,
       "message": "nit: unsigned or uint32_t",
+      "range": {
+        "startLine": 23,
+        "startChar": 21,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa4cccf8_7498fc52",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6153db97_c612db27",
       "range": {
         "startLine": 23,
         "startChar": 21,
@@ -132,6 +192,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b9b8b0_961a0873",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edc27607_e5a93a08",
+      "range": {
+        "startLine": 27,
+        "startChar": 25,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54efb6c7_1cc2caa9",
@@ -149,6 +233,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1969685_9e310700",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54efb6c7_1cc2caa9",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93565a53_ecd56000",
@@ -162,6 +264,24 @@
       "writtenOn": "2021-02-01T21:02:11Z",
       "side": 1,
       "message": "I\u0027m not sure what the bug is, but do we want to test values like 2^n-1 too?",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6562e6bc_0835ff3c",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "The original bug report just has 2^n, since it was catching a specific glslang bug, but I think testing 2^n-1 could be useful to.",
+      "parentUuid": "93565a53_ecd56000",
       "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +309,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5b6870e_c64ddd7e",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71fb659e_e690088a",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edc202b8_288099e6",
@@ -202,6 +346,30 @@
       "writtenOn": "2021-02-01T21:02:11Z",
       "side": 1,
       "message": "nit: this is optional.",
+      "range": {
+        "startLine": 63,
+        "startChar": 80,
+        "endLine": 63,
+        "endChar": 95
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c5f306_3f83f5a5",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-01T21:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edc202b8_288099e6",
       "range": {
         "startLine": 63,
         "startChar": 80,
