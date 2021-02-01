@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a117f74_93e42e86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T12:35:25Z",
+      "side": 1,
+      "message": "TIL, this is a good fix, thank you!\n\nAustin PTAL too.",
+      "revId": "10ae14f362c1c60013a7804a92fec0da2ce6566d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
