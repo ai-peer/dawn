@@ -16,6 +16,23 @@
       "message": "Landing suppression TBR",
       "revId": "9befef5a581a93c1df1263444abc3e5f27e29410",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc2c7304_c99920f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-01T15:39:05Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "9befef5a581a93c1df1263444abc3e5f27e29410",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
