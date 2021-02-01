@@ -16,6 +16,672 @@
       "message": "Thanks, @AE. Left some questions w.r.t. moving validation tests + toggle vs ext.",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdbf5bd7_ccceebe5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Lots of small comments but it looks great overall!",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94fa39d_f7c7cbfb",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: plane 0 only, plane 1 only, ...",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5db9581_0715dd17",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure how best to fix this but the resulting enum is R8BG82plane420Unorm which has the 8 an the 2 concatenated so it read 82. Maybe \"2plane 420 R8 RG8 unorm\"? Which would give e2Plane420R8RG8Unorm, but that\u0027s not great either.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f574ae69_1519e6d5",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: isn\u0027t the name multi-planar for this concept?",
+      "range": {
+        "startLine": 647,
+        "startChar": 62,
+        "endLine": 647,
+        "endChar": 73
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df6b088_48fce93a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "[1] nit: Maybe \"multi-planar textures don\u0027t support copies (yet)\"",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1944be7_6ece30c5",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Maybe this validation could be done at texture creation? This way we wouldn\u0027t need this check and could use UNREACHABLE at [1]",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfcfd333_22764eb2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed because all toggles start at false.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c16a3df_c9654006",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: RG8",
+      "range": {
+        "startLine": 31,
+        "startChar": 70,
+        "endLine": 31,
+        "endChar": 74
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2cbd92a_a93218af",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "I think we could add a wgpu::TextureFormat format that represents the \"default format\" for this aspect. For all single-planar formats it would be the format itself. For depth-stencil or NV12 it would be different from the main format. I think this could simplify a bunch of the logic and require less special casing.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d499f7_caa46deb",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: depth-stencil is also technically multiplanar. Can we at least have a comment that says it is NV12 and friends and not depth-stencil?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9f8c39b_891820fa",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: merge with the other aspects that return 0, ditto for 1",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb925cae_c885bcd4",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "u-nit: these are real planes so maybe they could come before CombinedDepthStencil (and be renumbered) so that CombinedDepthStencil stays at the end given it is special.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "035ebaf6_cf1608e0",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "GetFormat() was added just for this and adds significant complexity for formats. Maybe we could change things to look like the following:\n\n wgpu::TextureFormat defaultFormat;\n if (selectedaspects \u003d\u003d all aspects) {\n   defaultFormat \u003d texture-\u003eformat;\n } else {\n   defaultFormat \u003d texture-\u003eformat-\u003egetaspectInfo(aspect).format;\n }\n\n if (descriptor-\u003eformat !\u003d defaultFormat) {validation error}\n\n\nThis would require adding a wgpu::TextureFormat to each aspectInfo, and change the logic for depth-stencil aspect selection in a couple places, so it could be split off to its own CL that\u0027s before this one.\n\nWe\u0027d use similar logic at [2].",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b8929f_9d8ade85",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59439e03_d3a3fd2a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Where there no changes needed for barriers?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a1de290_b431f0d6",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Maybe return a validation error here for when we add more multiplanar formats?\n\nMaybe we could do \n\n if (single planar) {return {};} // are dpeth-stencil shareable?\n\n switch (textureFormat) {\n   case DXGI_FORMAT_NV12:\n     if (supports) { return {}; }\n   default:\n     break;\n }\n return DAWN_VALIDATION_ERROR",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "655267d7_5a1fde3f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: directly",
+      "range": {
+        "startLine": 408,
+        "startChar": 77,
+        "endLine": 408,
+        "endChar": 78
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83199e7f_2705b8e4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "We never validate the descriptor between the WrapSharedHandle call and here. We should do it so that it\u0027s invalid to create multiplanar textures with COPY_SRC or COPY_DST",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd320c5b_1594ec3f",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: that won\u0027t test that luma is supersampled compared to Chrome (because it is constant in 2x2 chunks) but that\u0027s probably fine?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58d9c16_c4a1e7ca",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: could be a return value.",
+      "range": {
+        "startLine": 130,
+        "startChar": 39,
+        "endLine": 130,
+        "endChar": 69
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "afb26145_48c19d5f",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: maybe add block comments\n\n // Create the shareable D3D11 texture.\n\n // Open it with Dawn.\n\n // ...",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "760db585_a349deeb",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Maybe explain that normally this would be done by the thing that writes to the texture, but in the test we write to it on creation so we can\u0027t do that. Instead we do the acquire release with nothing.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d821eb8_57dbec60",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: vertex_index",
+      "range": {
+        "startLine": 205,
+        "startChar": 26,
+        "endLine": 205,
+        "endChar": 36
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84e2b858_7d5be1de",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: whitespace.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4a7782a_973e8693",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: return is no longer necessary.",
+      "range": {
+        "startLine": 218,
+        "startChar": 20,
+        "endLine": 218,
+        "endChar": 26
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0874b392_540db70d",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Maybe these could be in the general texture validation tests.",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 55
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c813f2bd_262155e2",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Maybe add cases for specifying the formats but using the correct formats?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d789a8cf_7981e7dd",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "nit: comment doesn\u0027t match the test.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3feea530_fb50e1b8",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e93c361_5566b3d4",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 573,
+        "startChar": 15,
+        "endLine": 573,
+        "endChar": 21
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7649bf33_87feb1bd",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "I think triangleList might be the default.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96d462bd_a8a5e1f5",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Can just be device.CreateSampler() now.",
+      "range": {
+        "startLine": 583,
+        "startChar": 2,
+        "endLine": 585,
+        "endChar": 0
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3516d729_95e49e8d",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "Same comment as for the LUMA test.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d9d822b_8a55867e",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "That\u0027s a bit misleading, it\u0027s more that the block size depends on the aspect.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1526fb2_5d5b14fa",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c62bb3d_bea6a039",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

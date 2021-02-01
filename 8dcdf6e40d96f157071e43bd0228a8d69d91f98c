@@ -295,6 +295,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8b65fc5_393f027c",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure what comment that links to. Unless I\u0027m forgetting something, I don\u0027t have a strong preference. Having it as a toggle makes it more \"unstable / private API\" but also doesn\u0027t require adding the extension to the device descriptor when creating it.",
+      "parentUuid": "b21752bc_73c5e5cb",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "da425c01_fa0884e8",
         "filename": "src/dawn_native/Subresource.cpp",
         "patchSetId": 7
@@ -377,6 +395,30 @@
       "side": 1,
       "message": "Can\u0027t combine w/ others per rules. Maybe a TODO to relax (ex. color | plane)?",
       "parentUuid": "fa7915fb_f6e62316",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b8d82e_5737b591",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T17:20:14Z",
+      "side": 1,
+      "message": "IIRC we also use this function to know if a format has an aspect or not (by checking the result isn\u0027t 0) so the \u0026 is important.",
+      "parentUuid": "f5d4fce9_077382a2",
       "range": {
         "startLine": 49,
         "startChar": 0,
