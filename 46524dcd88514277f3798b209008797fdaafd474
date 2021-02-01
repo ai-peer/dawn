@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7c4f24_8368bf4b",
+        "filename": "src/tests/end2end/ComputeDirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-01T02:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83a4876c_bc629e3e",
+      "range": {
+        "startLine": 21,
+        "startChar": 6,
+        "endLine": 21,
+        "endChar": 24
+      },
+      "revId": "46524dcd88514277f3798b209008797fdaafd474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73152960_73be1cd7",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-01-30T00:12:45Z",
       "side": 1,
       "message": "and we also write 0xFFFFFFFF if any dimension is 0. Would be good to expand the comment to describe overall how the whole test works.",
+      "range": {
+        "startLine": 29,
+        "startChar": 4,
+        "endLine": 29,
+        "endChar": 66
+      },
+      "revId": "46524dcd88514277f3798b209008797fdaafd474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e30f4b_8dd0a207",
+        "filename": "src/tests/end2end/ComputeDirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-01T02:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73152960_73be1cd7",
       "range": {
         "startLine": 29,
         "startChar": 4,
