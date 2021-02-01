@@ -129,6 +129,8 @@ namespace dawn_native {
         AdapterDiscoveryOptionsBase(WGPUBackendType type);
     };
 
+    enum BackendValidationLevel : uint32_t { Full, Performance, Disabled };
+
     // Represents a connection to dawn_native and is used for dependency injection, discovering
     // system adapters and injecting custom adapters (like a Swiftshader Vulkan adapter).
     //
@@ -155,14 +157,11 @@ namespace dawn_native {
 
         const ToggleInfo* GetToggleInfo(const char* toggleName);
 
-        // Enable backend's validation layers if it has.
-        void EnableBackendValidation(bool enableBackendValidation);
+        // Enables backend validation layers
+        void SetBackendValidationLevel(BackendValidationLevel validationLevel);
 
         // Enable debug capture on Dawn startup
         void EnableBeginCaptureOnStartup(bool beginCaptureOnStartup);
-
-        // Enable GPU based backend validation if it has.
-        void EnableGPUBasedBackendValidation(bool enableGPUBasedBackendValidation);
 
         void SetPlatform(dawn_platform::Platform* platform);
 
