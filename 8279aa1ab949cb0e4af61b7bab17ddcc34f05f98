@@ -16,6 +16,92 @@
       "message": "PTAL",
       "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e487efae_a3db771f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-01T20:54:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6153db97_c612db27",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-01T20:54:20Z",
+      "side": 1,
+      "message": "nit: unsigned or uint32_t",
+      "range": {
+        "startLine": 23,
+        "startChar": 21,
+        "endLine": 23,
+        "endChar": 25
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc27607_e5a93a08",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-01T20:54:20Z",
+      "side": 1,
+      "message": "I think we can just give this a name",
+      "range": {
+        "startLine": 27,
+        "startChar": 25,
+        "endLine": 27,
+        "endChar": 39
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71fb659e_e690088a",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-01T20:54:20Z",
+      "side": 1,
+      "message": "nit: wgpu::ShaderModule, or just put it on the rhs of the assignment into the descriptor just below.",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 9
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
