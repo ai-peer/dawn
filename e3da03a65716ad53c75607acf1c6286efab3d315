@@ -16,6 +16,40 @@
       "message": "Thanks for your review, Kai! ",
       "revId": "e3da03a65716ad53c75607acf1c6286efab3d315",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34c9fda4_569afbc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T15:38:16Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "e3da03a65716ad53c75607acf1c6286efab3d315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a6e9fd4_13f8726c",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T15:38:16Z",
+      "side": 1,
+      "message": "We should write down all these validation rules in the spec and decide if it is ok to have 0 miplevels or 0 array layers. Opened https://github.com/gpuweb/gpuweb/issues/1397 for this.",
+      "revId": "e3da03a65716ad53c75607acf1c6286efab3d315",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
