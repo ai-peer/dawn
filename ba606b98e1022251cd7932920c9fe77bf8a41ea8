@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "ba606b98e1022251cd7932920c9fe77bf8a41ea8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89063d8_b58a4d36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T16:59:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ba606b98e1022251cd7932920c9fe77bf8a41ea8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1858ccab_bfee43e7",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 668,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T16:59:36Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ba606b98e1022251cd7932920c9fe77bf8a41ea8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a396cb4_e4757442",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T16:59:36Z",
+      "side": 1,
+      "message": "nit: add a TODO to remove the defaulting once it is used in Chromium.",
+      "revId": "ba606b98e1022251cd7932920c9fe77bf8a41ea8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
