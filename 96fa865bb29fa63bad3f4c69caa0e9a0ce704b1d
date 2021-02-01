@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72b2f020_347bcfaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-01T02:24:14Z",
+      "side": 1,
+      "message": "All comments are addressed, but it still shows in my turn list. I\u0027m not sure if you can see it in your review list.\n\nPTAL again, thanks!",
+      "revId": "96fa865bb29fa63bad3f4c69caa0e9a0ce704b1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
