@@ -663,16 +663,19 @@ namespace dawn_wire {
         }
 
         bool DeserializeWGPUDeviceProperties(WGPUDeviceProperties* deviceProperties,
-                                             const volatile char* deserializeBuffer) {
-            size_t devicePropertiesSize = SerializedWGPUDevicePropertiesSize(deviceProperties);
+                                             const volatile char* deserializeBuffer,
+                                             size_t deserializeBufferSize) {
+            if (deserializeBufferSize == 0) {
+                deserializeBufferSize = SerializedWGPUDevicePropertiesSize(deviceProperties);
+            }
             const volatile WGPUDevicePropertiesTransfer* transfer = nullptr;
-            if (GetPtrFromBuffer(&deserializeBuffer, &devicePropertiesSize, 1, &transfer) !=
+            if (GetPtrFromBuffer(&deserializeBuffer, &deserializeBufferSize, 1, &transfer) !=
                 DeserializeResult::Success) {
                 return false;
             }
 
             return WGPUDevicePropertiesDeserialize(deviceProperties, transfer, &deserializeBuffer,
-                                                   &devicePropertiesSize,
+                                                   &deserializeBufferSize,
                                                    nullptr) == DeserializeResult::Success;
         }
 

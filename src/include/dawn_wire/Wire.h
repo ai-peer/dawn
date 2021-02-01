@@ -50,7 +50,8 @@ namespace dawn_wire {
         char* serializeBuffer);
 
     DAWN_WIRE_EXPORT bool DeserializeWGPUDeviceProperties(WGPUDeviceProperties* deviceProperties,
-                                                          const volatile char* deserializeBuffer);
+                                                          const volatile char* deserializeBuffer,
+                                                          size_t deserializeBufferSize = 0);
 
 }  // namespace dawn_wire
 
