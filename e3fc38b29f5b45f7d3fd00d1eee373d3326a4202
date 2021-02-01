@@ -211,6 +211,24 @@
       "parentUuid": "0b36174a_cbd5203c",
       "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fd88b5c_81f1583e",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-01T17:58:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fbd2df6e_e0aad66e",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
