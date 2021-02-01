@@ -24,10 +24,11 @@ namespace dawn_wire { namespace server {
                                                            Pipeline pipeline,
                                                            const char* message,
                                                            CreateReadyPipelineUserData* data) {
-            auto* pipelineObject = knownObjects->Get(data->pipelineObjectID);
+            auto* pipelineObject = knownObjects->GetAllowReserved(data->pipelineObjectID);
 
             if (status == WGPUCreateReadyPipelineStatus_Success) {
                 ASSERT(pipelineObject != nullptr);
+                pipelineObject->allocated = AllocationState::Allocated;
                 pipelineObject->handle = pipeline;
             } else if (pipelineObject != nullptr) {
                 // May be null if the device was destroyed. Device destruction destroys child
@@ -103,7 +104,8 @@ namespace dawn_wire { namespace server {
             return false;
         }
 
-        auto* resultData = ComputePipelineObjects().Allocate(pipelineObjectHandle.id);
+        auto* resultData =
+            ComputePipelineObjects().Allocate(pipelineObjectHandle.id, AllocationState::Reserved);
         if (resultData == nullptr) {
             return false;
         }
@@ -153,7 +155,8 @@ namespace dawn_wire { namespace server {
             return false;
         }
 
-        auto* resultData = RenderPipelineObjects().Allocate(pipelineObjectHandle.id);
+        auto* resultData =
+            RenderPipelineObjects().Allocate(pipelineObjectHandle.id, AllocationState::Reserved);
         if (resultData == nullptr) {
             return false;
         }
