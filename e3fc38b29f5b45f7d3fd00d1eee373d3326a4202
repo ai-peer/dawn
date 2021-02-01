@@ -193,6 +193,24 @@
       "parentUuid": "85dfe651_7bb57c37",
       "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbd2df6e_e0aad66e",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T15:33:00Z",
+      "side": 1,
+      "message": "As usual this is a change we should discuss in webgpu-native. Like always I\u0027m mildly concerned that 0 initialization won\u0027t mean the default values for C.",
+      "parentUuid": "0b36174a_cbd5203c",
+      "revId": "e3fc38b29f5b45f7d3fd00d1eee373d3326a4202",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
