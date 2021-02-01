@@ -30,6 +30,12 @@ namespace dawn_wire { namespace server {
         ObjectHandle self;
     };
 
+    enum class AllocationState : uint32_t {
+        Free,
+        Reserved,
+        Allocated,
+    };
+
     template <typename T>
     struct ObjectDataBase {
         // The backend-provided handle and generation to this object.
@@ -37,8 +43,7 @@ namespace dawn_wire { namespace server {
         uint32_t generation = 0;
 
         // Whether this object has been allocated, used by the KnownObjects queries
-        // TODO(cwallez@chromium.org): make this an internal bit vector in KnownObjects.
-        bool allocated;
+        AllocationState allocated;
 
         // This points to an allocation that is owned by the device.
         DeviceInfo* deviceInfo = nullptr;
@@ -92,33 +97,46 @@ namespace dawn_wire { namespace server {
             // KnownObjects for ID 0.
             Data reservation;
             reservation.handle = nullptr;
-            reservation.allocated = false;
+            reservation.allocated = AllocationState::Free;
             mKnown.push_back(std::move(reservation));
         }
 
         // Get a backend objects for a given client ID.
         // Returns nullptr if the ID hasn't previously been allocated.
-        const Data* Get(uint32_t id) const {
+        const Data* Get(uint32_t id, AllocationState expected = AllocationState::Allocated) const {
             if (id >= mKnown.size()) {
                 return nullptr;
             }
 
             const Data* data = &mKnown[id];
 
-            if (!data->allocated) {
+            if (data->allocated != expected) {
                 return nullptr;
             }
 
             return data;
         }
-        Data* Get(uint32_t id) {
+        Data* Get(uint32_t id, AllocationState expected = AllocationState::Allocated) {
             if (id >= mKnown.size()) {
                 return nullptr;
             }
 
             Data* data = &mKnown[id];
 
-            if (!data->allocated) {
+            if (data->allocated != expected) {
+                return nullptr;
+            }
+
+            return data;
+        }
+        Data* GetAllowReserved(uint32_t id) {
+            if (id >= mKnown.size()) {
+                return nullptr;
+            }
+
+            Data* data = &mKnown[id];
+
+            if (data->allocated == AllocationState::Free) {
                 return nullptr;
             }
 
@@ -128,13 +146,13 @@ namespace dawn_wire { namespace server {
         // Allocates the data for a given ID and returns it.
         // Returns nullptr if the ID is already allocated, or too far ahead, or if ID is 0 (ID 0 is
         // reserved for nullptr). Invalidates all the Data*
-        Data* Allocate(uint32_t id) {
+        Data* Allocate(uint32_t id, AllocationState allocated = AllocationState::Allocated) {
             if (id == 0 || id > mKnown.size()) {
                 return nullptr;
             }
 
             Data data;
-            data.allocated = true;
+            data.allocated = allocated;
             data.handle = nullptr;
 
             if (id >= mKnown.size()) {
@@ -142,7 +160,7 @@ namespace dawn_wire { namespace server {
                 return &mKnown.back();
             }
 
-            if (mKnown[id].allocated) {
+            if (mKnown[id].allocated != AllocationState::Free) {
                 return nullptr;
             }
 
@@ -153,15 +171,15 @@ namespace dawn_wire { namespace server {
         // Marks an ID as deallocated
         void Free(uint32_t id) {
             ASSERT(id < mKnown.size());
-            mKnown[id].allocated = false;
+            mKnown[id].allocated = AllocationState::Free;
         }
 
         std::vector<T> AcquireAllHandles() {
             std::vector<T> objects;
             for (Data& data : mKnown) {
-                if (data.allocated && data.handle != nullptr) {
+                if (data.allocated == AllocationState::Allocated && data.handle != nullptr) {
                     objects.push_back(data.handle);
-                    data.allocated = false;
+                    data.allocated = AllocationState::Free;
                     data.handle = nullptr;
                 }
             }
@@ -172,7 +190,7 @@ namespace dawn_wire { namespace server {
         std::vector<T> GetAllHandles() {
             std::vector<T> objects;
             for (Data& data : mKnown) {
-                if (data.allocated && data.handle != nullptr) {
+                if (data.allocated == AllocationState::Allocated && data.handle != nullptr) {
                     objects.push_back(data.handle);
                 }
             }
