@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c790af42_b58961e3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:02:11Z",
+      "side": 1,
+      "message": "This bug is missing digits.",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c7d07d73_cf13153f",
@@ -31,6 +48,40 @@
       "writtenOn": "2021-02-01T20:54:20Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ab6c17_b4280c60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:02:11Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d08a45_06da8a30",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:02:11Z",
+      "side": 1,
+      "message": "I wonder if maybe we should have a file that\u0027s like \"ShaderTests\" which will receive all such things, instead of doing a file per test. WDYT?",
       "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -83,6 +134,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54efb6c7_1cc2caa9",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:02:11Z",
+      "side": 1,
+      "message": "u-nit: 4 space indent.",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93565a53_ecd56000",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:02:11Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the bug is, but do we want to test values like 2^n-1 too?",
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71fb659e_e690088a",
         "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
         "patchSetId": 2
@@ -99,6 +184,29 @@
         "startChar": 4,
         "endLine": 55,
         "endChar": 9
+      },
+      "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edc202b8_288099e6",
+        "filename": "src/tests/end2end/ComputeLog2Tests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:02:11Z",
+      "side": 1,
+      "message": "nit: this is optional.",
+      "range": {
+        "startLine": 63,
+        "startChar": 80,
+        "endLine": 63,
+        "endChar": 95
       },
       "revId": "8279aa1ab949cb0e4af61b7bab17ddcc34f05f98",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
