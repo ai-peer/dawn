@@ -195,20 +195,20 @@ namespace dawn_native {
         return false;
     }
 
-    void InstanceBase::EnableBackendValidation(bool enableBackendValidation) {
-        mEnableBackendValidation = enableBackendValidation;
+    void InstanceBase::EnableBackendValidation() {
+        SetBackendValidationLevel(BackendValidationLevel::Full);
     }
 
     bool InstanceBase::IsBackendValidationEnabled() const {
-        return mEnableBackendValidation;
+        return mBackendValidationLevel != BackendValidationLevel::Disabled;
     }
 
-    void InstanceBase::EnableGPUBasedBackendValidation(bool enableGPUBasedBackendValidation) {
-        mEnableGPUValidation = enableGPUBasedBackendValidation;
+    void InstanceBase::SetBackendValidationLevel(BackendValidationLevel level) {
+        mBackendValidationLevel = level;
     }
 
-    bool InstanceBase::IsGPUBasedBackendValidationEnabled() const {
-        return mEnableGPUValidation;
+    BackendValidationLevel InstanceBase::GetBackendValidationLevel() const {
+        return mBackendValidationLevel;
     }
 
     void InstanceBase::EnableBeginCaptureOnStartup(bool beginCaptureOnStartup) {
