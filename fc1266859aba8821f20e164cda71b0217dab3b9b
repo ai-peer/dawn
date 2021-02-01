@@ -104,6 +104,24 @@
       "parentUuid": "3d6b0a2c_43f5a1b6",
       "revId": "fc1266859aba8821f20e164cda71b0217dab3b9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9a2ce98_f0eb3b28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-01T15:58:41Z",
+      "side": 1,
+      "message": "Ok, I\u0027m going to land this. I think it\u0027s better to have the behavior consistent and less fragile.\nIt\u0027s true we don\u0027t need it for the JS api, but we should avoid cases where usage of the c++ with the wire would abruptly stop working.",
+      "parentUuid": "1aef481b_4c2765e3",
+      "revId": "fc1266859aba8821f20e164cda71b0217dab3b9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
