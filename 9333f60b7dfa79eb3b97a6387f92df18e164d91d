@@ -16,6 +16,80 @@
       "message": "PTAL",
       "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea549288_f525a62a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:18:15Z",
+      "side": 1,
+      "message": "Will take another look tomorrow, here are some comments before then.",
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "742c493f_36ec4929",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:18:15Z",
+      "side": 1,
+      "message": "Why is this allow reserved?",
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a8c7b2b_bdd476df",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:18:15Z",
+      "side": 1,
+      "message": "The TODO can probably be removed. Also the comment could be moved to the enum definition.",
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7fc8e3_28a3cdda",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-01T21:18:15Z",
+      "side": 1,
+      "message": "We should probably make this GetReservedHandle() and have it return null if the object was destroyed. Then we\u0027d check the pointer. Right now I think we\u0027d dereference nullptr.\n\nOr not given the logic in destroy, but something to be careful of if we change the code.",
+      "range": {
+        "startLine": 27,
+        "startChar": 49,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
