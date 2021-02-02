@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f3e33fb_531482d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T01:16:26Z",
+      "side": 1,
+      "message": "PTAL. Thank you!",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c430e7f5_e99cc7c4",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 696,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T01:16:26Z",
+      "side": 1,
+      "message": "Looks like the testing infra can\u0027t support naming started with a number (say 3DTextureViewTest). But it\u0027s not important.",
+      "range": {
+        "startLine": 696,
+        "startChar": 6,
+        "endLine": 696,
+        "endChar": 23
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950adf10_0e54fac6",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T01:16:26Z",
+      "side": 1,
+      "message": "In the dawn issue 547: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d547, Corentin listed the task after 3d textures and views validation: \"- (3D textures and views) Creation in the backends (but can\u0027t do anything with them)\". Here we are...",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 1
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
