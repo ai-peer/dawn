@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a60c2e8_44db9f2b",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T20:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e709b2f5_8a79aa95",
+      "range": {
+        "startLine": 47,
+        "startChar": 24,
+        "endLine": 47,
+        "endChar": 33
+      },
+      "revId": "706b01f53b6ab6634d418fd931b87b610ab7e40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa714dd9_c80ae65f",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "759e4490_68e70e91",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T20:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa714dd9_c80ae65f",
+      "revId": "706b01f53b6ab6634d418fd931b87b610ab7e40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fac8327f_527e9204",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-02-02T12:55:58Z",
       "side": 1,
       "message": "nit: state",
+      "range": {
+        "startLine": 150,
+        "startChar": 52,
+        "endLine": 150,
+        "endChar": 61
+      },
+      "revId": "706b01f53b6ab6634d418fd931b87b610ab7e40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3f4e86f_4e6d87e6",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T20:53:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fac8327f_527e9204",
       "range": {
         "startLine": 150,
         "startChar": 52,

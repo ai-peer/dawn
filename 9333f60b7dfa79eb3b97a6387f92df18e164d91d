@@ -192,6 +192,30 @@
       },
       "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ec93e7_c07dbc7e",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T20:53:03Z",
+      "side": 1,
+      "message": "I tried doing this, but even this doesn\u0027t work. DoDestroyObject requires that objects be in the AllocatedState. So currently there\u0027s no command that can free the ObjectId until we get into this callback. I likewise don\u0027t know if the TrackDeviceChild here could ever fail since it would require you to make a command that creates a duplicate Id. Anything that creates an object checks against this. So we can probably ASSERT this conditions?",
+      "parentUuid": "444d0226_628b7d92",
+      "range": {
+        "startLine": 27,
+        "startChar": 49,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
