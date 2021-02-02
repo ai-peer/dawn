@@ -16,6 +16,63 @@
       "message": "Idea behind this is that I can use the less intense command line option for the Intel bots. This would be followed by a chromium patch that changes the command line for only the Intel bots. Would have preferred not making the test parameters more complicated, but the only alternative I can think of is identifying when running on Intel inside Dawn and disabling state tracking - which would be undesirable for local runs.",
       "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53870cd9_9e9b639c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:44:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07c3d32_3f02dd35",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:44:13Z",
+      "side": 1,
+      "message": "LowOverhead? idk?\n\nI feel like \"Performance\" isn\u0027t quite right because we still want to convey that it\u0027s slower than \"Disabled\"",
+      "range": {
+        "startLine": 132,
+        "startChar": 51,
+        "endLine": 132,
+        "endChar": 62
+      },
+      "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea4d924f_2e6374e7",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:44:13Z",
+      "side": 1,
+      "message": "nit: maybe add \"\u003c\u003c level\" so you get an even nicer message",
+      "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
