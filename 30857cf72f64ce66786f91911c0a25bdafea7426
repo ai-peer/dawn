@@ -374,6 +374,30 @@
       },
       "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7c8d5e0_7acb08aa",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T17:34:54Z",
+      "side": 1,
+      "message": "Got it. Thanks for the suggestion!",
+      "parentUuid": "f1af59c6_93e6ec62",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 1
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
