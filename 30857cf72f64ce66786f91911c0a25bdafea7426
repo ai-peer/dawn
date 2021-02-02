@@ -55,6 +55,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c80e1384_1e8d3c8c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T06:39:18Z",
+      "side": 1,
+      "message": "nit: let\u0027s put these enums in order - either 1, 2, 3 or 3, 2, 1",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f02a816f_9256bfad",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T06:39:18Z",
+      "side": 1,
+      "message": "why not D3D12_SRV_DIMENSION_TEXTURE3D ?",
+      "range": {
+        "startLine": 1097,
+        "startChar": 45,
+        "endLine": 1097,
+        "endChar": 79
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c430e7f5_e99cc7c4",
         "filename": "src/tests/end2end/TextureViewTests.cpp",
         "patchSetId": 2
