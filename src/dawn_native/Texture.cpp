@@ -29,7 +29,7 @@ namespace dawn_native {
         // TODO(jiawei.shao@intel.com): implement texture view format compatibility rule
         MaybeError ValidateTextureViewFormatCompatibility(const TextureBase* texture,
                                                           const TextureViewDescriptor* descriptor) {
-            if (texture->GetFormat().format != descriptor->format) {
+            if (texture->GetFormat().GetAspectFormat(descriptor->aspect) != descriptor->format) {
                 return DAWN_VALIDATION_ERROR(
                     "The format of texture view is not compatible to the original texture");
             }
@@ -227,6 +227,12 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Format cannot be used in storage textures");
             }
 
+            constexpr wgpu::TextureUsage kValidMultiPlaneUsages = wgpu::TextureUsage::Sampled;
+            if (format->IsMultiPlane() && !IsSubset(descriptor->usage, kValidMultiPlaneUsages)) {
+                return DAWN_VALIDATION_ERROR(
+                    "Multi-plane texture doesn't have the required usage.");
+            }
+
             return {};
         }
 
@@ -352,7 +358,7 @@ namespace dawn_native {
         }
 
         if (desc.format == wgpu::TextureFormat::Undefined) {
-            desc.format = texture->GetFormat().format;
+            desc.format = texture->GetFormat().GetAspectFormat(desc.aspect);
         }
         if (desc.arrayLayerCount == 0) {
             desc.arrayLayerCount = texture->GetArrayLayers() - desc.baseArrayLayer;

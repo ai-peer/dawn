@@ -47,7 +47,11 @@ namespace dawn_native {
              {Extension::TimestampQuery,
               {"timestamp_query", "Support Timestamp Query",
                "https://bugs.chromium.org/p/dawn/issues/detail?id=434"},
-              &WGPUDeviceProperties::timestampQuery}}};
+              &WGPUDeviceProperties::timestampQuery},
+             {Extension::MultiPlaneTextures,
+              {"multiplane_textures", "Import and use multi-plane textures with per plane views",
+               "https://bugs.chromium.org/p/dawn/issues/detail?id=551"},
+              &WGPUDeviceProperties::multiplaneTextures}}};
 
     }  // anonymous namespace
 
