@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05274420_bf5e3071",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-02T17:19:00Z",
+      "side": 1,
+      "message": "... apparently log2 is hard to implement correctly. I will disable this test for the failing combo after lunch.",
+      "revId": "15f2cf9e3439a04fc96769f21a92839c75201049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
