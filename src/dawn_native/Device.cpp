@@ -97,7 +97,7 @@ namespace dawn_native {
     DeviceBase::~DeviceBase() = default;
 
     MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
-        mDefaultQueue = AcquireRef(defaultQueue);
+        mQueue = AcquireRef(defaultQueue);
         mRootErrorScope = AcquireRef(new ErrorScope());
         mCurrentErrorScope = mRootErrorScope.Get();
 
@@ -240,7 +240,7 @@ namespace dawn_native {
 
         // The device was lost, call the application callback.
         if (type == InternalErrorType::DeviceLost && mDeviceLostCallback != nullptr) {
-            mDefaultQueue->HandleDeviceLoss();
+            mQueue->HandleDeviceLoss();
 
             mDeviceLostCallback(message, mDeviceLostUserdata);
             mDeviceLostCallback = nullptr;
@@ -886,13 +886,19 @@ namespace dawn_native {
         }
     }
 
-    QueueBase* DeviceBase::GetDefaultQueue() {
+    QueueBase* DeviceBase::GetQueue() {
         // Backends gave the default queue during initialization.
-        ASSERT(mDefaultQueue != nullptr);
+        ASSERT(mQueue != nullptr);
 
         // Returns a new reference to the queue.
-        mDefaultQueue->Reference();
-        return mDefaultQueue.Get();
+        mQueue->Reference();
+        return mQueue.Get();
+    }
+
+    QueueBase* DeviceBase::GetDefaultQueue() {
+        EmitDeprecationWarning(
+            "Device::GetDefaultQueue is deprecated, use Device::GetQueue() instead");
+        return GetQueue();
     }
 
     void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {

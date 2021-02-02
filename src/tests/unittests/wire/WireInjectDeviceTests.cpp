@@ -112,7 +112,7 @@ TEST_F(WireInjectDeviceTests, InjectedDeviceLifetime) {
 TEST_F(WireInjectDeviceTests, GetQueueBeforeInject) {
     ReservedDevice reservation = GetWireClient()->ReserveDevice();
 
-    wgpuDeviceGetDefaultQueue(reservation.device);
+    wgpuDeviceGetQueue(reservation.device);
     FlushClient(false);
 }
 
@@ -128,10 +128,10 @@ TEST_F(WireInjectDeviceTests, GetQueueAfterInject) {
     ASSERT_TRUE(
         GetWireServer()->InjectDevice(serverDevice, reservation.id, reservation.generation));
 
-    wgpuDeviceGetDefaultQueue(reservation.device);
+    wgpuDeviceGetQueue(reservation.device);
 
     WGPUQueue apiQueue = api.GetNewQueue();
-    EXPECT_CALL(api, DeviceGetDefaultQueue(serverDevice)).WillOnce(Return(apiQueue));
+    EXPECT_CALL(api, DeviceGetQueue(serverDevice)).WillOnce(Return(apiQueue));
     FlushClient();
 
     // Called on shutdown.
