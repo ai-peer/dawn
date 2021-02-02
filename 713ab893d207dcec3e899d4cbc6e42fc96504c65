@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca608d9_af78032a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Thanks, @CW and @RC for the pass.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e94fa39d_f7c7cbfb",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "nit: plane 0 only, plane 1 only, ...",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10a91a67_3c7996b7",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 1709,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e94fa39d_f7c7cbfb",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +127,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d72f086_df343b42",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f574ae69_1519e6d5",
+      "range": {
+        "startLine": 647,
+        "startChar": 62,
+        "endLine": 647,
+        "endChar": 73
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2df6b088_48fce93a",
@@ -105,6 +164,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "[1] nit: Maybe \"multi-planar textures don\u0027t support copies (yet)\"",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc24d359_a09de23a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 660,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df6b088_48fce93a",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +203,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "135d960c_18a5bdf5",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Moved to ValidateTextureUsage.",
+      "parentUuid": "a1944be7_6ece30c5",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfcfd333_22764eb2",
@@ -143,6 +238,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "161a5a5f_f850d9d8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1179,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Oh, confusing name, maybe \"EnableDefaultToggles\"",
+      "parentUuid": "cfcfd333_22764eb2",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c16a3df_c9654006",
@@ -156,6 +269,30 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "nit: RG8",
+      "range": {
+        "startLine": 31,
+        "startChar": 70,
+        "endLine": 31,
+        "endChar": 74
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99900301_1548f2d5",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c16a3df_c9654006",
       "range": {
         "startLine": 31,
         "startChar": 70,
@@ -185,6 +322,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f87416b_c74b9060",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "a multi-plane format can have multiple formats per aspect, there isn\u0027t a \"default format\" per say. I think GetAspectInfo would need to be special cased or require a lookup to get per plane info back.\n\nI simplified GetAspectFormat, PTAL.",
+      "parentUuid": "d2cbd92a_a93218af",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2d499f7_caa46deb",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 9
@@ -196,6 +351,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "nit: depth-stencil is also technically multiplanar. Can we at least have a comment that says it is NV12 and friends and not depth-stencil?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1d8aa57_4f44cd40",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2d499f7_caa46deb",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +390,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f68d97_2227b0de",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9f8c39b_891820fa",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb925cae_c885bcd4",
@@ -234,6 +425,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d380b484_8e5ac321",
+        "filename": "src/dawn_native/Subresource.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb925cae_c885bcd4",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "035ebaf6_cf1608e0",
@@ -247,6 +456,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "GetFormat() was added just for this and adds significant complexity for formats. Maybe we could change things to look like the following:\n\n wgpu::TextureFormat defaultFormat;\n if (selectedaspects \u003d\u003d all aspects) {\n   defaultFormat \u003d texture-\u003eformat;\n } else {\n   defaultFormat \u003d texture-\u003eformat-\u003egetaspectInfo(aspect).format;\n }\n\n if (descriptor-\u003eformat !\u003d defaultFormat) {validation error}\n\n\nThis would require adding a wgpu::TextureFormat to each aspectInfo, and change the logic for depth-stencil aspect selection in a couple places, so it could be split off to its own CL that\u0027s before this one.\n\nWe\u0027d use similar logic at [2].",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa43da8d_514c0748",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "I don\u0027t think we want to set an illegal format by default (All + NV12 is not allowed). Moved this logic to GetAspectFormat (returns a legit format or undefined, if not allowed).",
+      "parentUuid": "035ebaf6_cf1608e0",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -291,6 +518,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2954fb32_d5afbff3",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42868382_4d016d14",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 66
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59439e03_d3a3fd2a",
@@ -310,6 +561,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f8dab9d_a22b5d05",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Only changes to Subresource.cpp",
+      "parentUuid": "59439e03_d3a3fd2a",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a1de290_b431f0d6",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 9
@@ -321,6 +590,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "Maybe return a validation error here for when we add more multiplanar formats?\n\nMaybe we could do \n\n if (single planar) {return {};} // are dpeth-stencil shareable?\n\n switch (textureFormat) {\n   case DXGI_FORMAT_NV12:\n     if (supports) { return {}; }\n   default:\n     break;\n }\n return DAWN_VALIDATION_ERROR",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91094677_bc1a01df",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Both single and multi-plane formats are sharable so this check would probably stay \"per tier\". Since support is very narrow, I renamed it.",
+      "parentUuid": "6a1de290_b431f0d6",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -348,6 +635,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33f9c470_fd0b08d7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "655267d7_5a1fde3f",
+      "range": {
+        "startLine": 408,
+        "startChar": 77,
+        "endLine": 408,
+        "endChar": 78
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83199e7f_2705b8e4",
@@ -365,6 +676,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62e3f18_998ac6a2",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83199e7f_2705b8e4",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd320c5b_1594ec3f",
@@ -378,6 +707,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "nit: that won\u0027t test that luma is supersampled compared to Chrome (because it is constant in 2x2 chunks) but that\u0027s probably fine?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2147a2b_675b2cc7",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow. There is no supersampling. Chroma is subsampled by a factor of two. My test needs to check if the chroma and luma channel in each 2x2 region is of an expected color.",
+      "parentUuid": "bd320c5b_1594ec3f",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -405,6 +752,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ac8fecb_5958a86d",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Can\u0027t ASSERT in non-void return IIRC",
+      "parentUuid": "f58d9c16_c4a1e7ca",
+      "range": {
+        "startLine": 130,
+        "startChar": 39,
+        "endLine": 130,
+        "endChar": 69
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "afb26145_48c19d5f",
@@ -422,6 +793,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "839cefb0_9e858120",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "afb26145_48c19d5f",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "760db585_a349deeb",
@@ -435,6 +824,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "Maybe explain that normally this would be done by the thing that writes to the texture, but in the test we write to it on creation so we can\u0027t do that. Instead we do the acquire release with nothing.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bccbb9a9_3f5f760c",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "D3D11 always requires acquire + release to access the texture. It doesn\u0027t matter if it was initialized by being written to or from creation AFAIK.",
+      "parentUuid": "760db585_a349deeb",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -462,6 +869,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff29cd0b_56726292",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d821eb8_57dbec60",
+      "range": {
+        "startLine": 205,
+        "startChar": 26,
+        "endLine": 205,
+        "endChar": 36
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84e2b858_7d5be1de",
@@ -479,6 +910,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f6117ff_d0e0b6b5",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84e2b858_7d5be1de",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4a7782a_973e8693",
@@ -492,6 +941,30 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "nit: return is no longer necessary.",
+      "range": {
+        "startLine": 218,
+        "startChar": 20,
+        "endLine": 218,
+        "endChar": 26
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53f5b7af_21c952fc",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4a7782a_973e8693",
       "range": {
         "startLine": 218,
         "startChar": 20,
@@ -525,6 +998,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66960913_3d947871",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0874b392_540db70d",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 55
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c813f2bd_262155e2",
@@ -538,6 +1035,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "Maybe add cases for specifying the formats but using the correct formats?",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f0c553_0e739dae",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c813f2bd_262155e2",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -559,6 +1074,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "228c4393_b0cbd857",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d789a8cf_7981e7dd",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3feea530_fb50e1b8",
@@ -572,6 +1105,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "ditto",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9010a139_27297060",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3feea530_fb50e1b8",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -599,6 +1150,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c184b92_5c79434a",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e93c361_5566b3d4",
+      "range": {
+        "startLine": 573,
+        "startChar": 15,
+        "endLine": 573,
+        "endChar": 21
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7649bf33_87feb1bd",
@@ -612,6 +1187,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "I think triangleList might be the default.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c89371c_8e61dd11",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7649bf33_87feb1bd",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -639,6 +1232,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9629f139_8620a6ea",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96d462bd_a8a5e1f5",
+      "range": {
+        "startLine": 583,
+        "startChar": 2,
+        "endLine": 585,
+        "endChar": 0
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3516d729_95e49e8d",
@@ -652,6 +1269,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "Same comment as for the LUMA test.",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22136931_41b4d147",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "See reply.",
+      "parentUuid": "3516d729_95e49e8d",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -673,6 +1308,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65be592b_f0a44c09",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d9d822b_8a55867e",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1526fb2_5d5b14fa",
@@ -690,6 +1343,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "efb88f72_136e13e4",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1526fb2_5d5b14fa",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c62bb3d_bea6a039",
@@ -703,6 +1374,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "ditto",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6d5603b_7deb3bab",
+        "filename": "src/utils/TextureFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c62bb3d_bea6a039",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

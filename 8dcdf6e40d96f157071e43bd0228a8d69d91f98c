@@ -329,6 +329,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a3213a2_b0ccac02",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Moved to extension which is only enabled for D3D12 and import only (validation tests use NULL backend, which doesn\u0027t use zero init to CreateTexture).\n\nNote: both copy + zero init require GetAspectInfo to select a planar AspectInfo, which isn\u0027t trivial to add atm.",
+      "parentUuid": "c9f5d898_7d6584e7",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da425c01_fa0884e8",
@@ -437,6 +455,30 @@
       "side": 1,
       "message": "IIRC we also use this function to know if a format has an aspect or not (by checking the result isn\u0027t 0) so the \u0026 is important.",
       "parentUuid": "f5d4fce9_077382a2",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af8c7d2d_b62a9209",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Sorry for the confusion but we can\u0027t select a per plane aspect from an internal (view) format which has only a color specified specified.\n\nEither the plane aspects need to be added to the internal format OR the color aspect can be safely ignored/dropped after validation. If we \"\u0026\", nothing will get selected. \u003d(",
+      "parentUuid": "62b8d82e_5737b591",
       "range": {
         "startLine": 49,
         "startChar": 0,
@@ -705,6 +747,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2380396b_118b28f4",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Moved to extension.",
+      "parentUuid": "0f9d07fa_054a08de",
+      "range": {
+        "startLine": 184,
+        "startChar": 6,
+        "endLine": 184,
+        "endChar": 32
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd18176d_eacb6d4b",
@@ -718,6 +784,24 @@
       "writtenOn": "2021-01-28T00:54:15Z",
       "side": 1,
       "message": "nit: we would make the format an extension and skip if it\u0027s not present.",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "befdb2da_549fd264",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd18176d_eacb6d4b",
       "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -853,6 +937,30 @@
       "side": 1,
       "message": "Leaving open to fixup",
       "parentUuid": "f82a472c_d191454c",
+      "range": {
+        "startLine": 341,
+        "startChar": 0,
+        "endLine": 341,
+        "endChar": 12
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1079439_d3119eba",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-02T20:03:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eef278a9_3c9526dd",
       "range": {
         "startLine": 341,
         "startChar": 0,
