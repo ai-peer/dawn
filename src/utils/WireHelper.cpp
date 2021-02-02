@@ -35,27 +35,81 @@ namespace utils {
 
         class WireServerTraceLayer : public dawn_wire::CommandHandler {
           public:
-            WireServerTraceLayer(const char* dir, dawn_wire::CommandHandler* handler)
-                : dawn_wire::CommandHandler(), mDir(dir), mHandler(handler) {
+            WireServerTraceLayer(dawn_wire::CommandHandler* handler,
+                                 const char* dir,
+                                 const char* injectedDir)
+                : dawn_wire::CommandHandler(),
+                  mHandler(handler),
+                  mDir(dir),
+                  mInjectedDir(injectedDir) {
                 const char* sep = GetPathSeparator();
-                if (mDir.back() != *sep) {
+                if (mDir.size() > 0 && mDir.back() != *sep) {
                     mDir += sep;
+                }
+
+                if (mInjectedDir.size() > 0 && mInjectedDir.back() != *sep) {
+                    mInjectedDir += sep;
+                }
+            }
+
+            ~WireServerTraceLayer() override {
+                if (mFile.is_open()) {
+                    mFile.close();
+                    if (mInjectedDir.size() == 0) {
+                        return;
+                    }
+
+                    // Acquire the number of injected errors.
+                    const uint64_t injectedCallCount = dawn_native::AcquireErrorInjectorCallCount();
+
+                    // For each injected error, create a file and write out the error index.
+                    std::vector<std::ofstream> outputFiles(injectedCallCount);
+                    for (uint64_t i = 0; i < injectedCallCount; ++i) {
+                        outputFiles[i].open(
+                            mInjectedDir + mFilename + "_injected_" + std::to_string(i),
+                            std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+                        outputFiles[i].write(reinterpret_cast<const char*>(&i), sizeof(i));
+                    }
+
+                    // Read the original trace file and append the contents to all of the output
+                    // files.
+                    char buf[4096];
+                    std::ifstream original(mDir + mFilename, std::ios_base::in | std::ios_base::binary);
+                    do {
+                        original.read(&buf[0], sizeof(buf));
+
+                        for (uint64_t i = 0; i < injectedCallCount; ++i) {
+                            outputFiles[i].write(&buf[0], original.gcount());
+                        }
+
+                    } while (original.gcount() > 0);
                 }
             }
 
             void BeginWireTrace(const char* name) {
-                std::string filename = name;
+                mFilename = name;
                 // Replace slashes in gtest names with underscores so everything is in one
                 // directory.
-                std::replace(filename.begin(), filename.end(), '/', '_');
-                std::replace(filename.begin(), filename.end(), '\\', '_');
+                std::replace(mFilename.begin(), mFilename.end(), '/', '_');
+                std::replace(mFilename.begin(), mFilename.end(), '\\', '_');
 
                 // Prepend the filename with the directory.
-                filename = mDir + filename;
+                std::string path = mDir + mFilename;
 
                 ASSERT(!mFile.is_open());
-                mFile.open(filename,
-                           std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+                mFile.open(path, std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+
+                if (mInjectedDir.size() == 0) {
+                    return;
+                }
+
+                // To write injected error traces to the output directory, first enable the error
+                // injector. The error injector will increment a counter for all callsites where
+                // error injection is possible.
+                dawn_native::EnableErrorInjector();
+
+                // Clear the error injector since it may have a previous run's call counts.
+                dawn_native::ClearErrorInjector();
             }
 
             const volatile char* HandleCommands(const volatile char* commands,
@@ -67,8 +121,10 @@ namespace utils {
             }
 
           private:
-            std::string mDir;
             dawn_wire::CommandHandler* mHandler;
+            std::string mDir;
+            std::string mInjectedDir;
+            std::string mFilename;
             std::ofstream mFile;
         };
 
@@ -97,7 +153,7 @@ namespace utils {
 
         class WireHelperProxy : public WireHelper {
           public:
-            explicit WireHelperProxy(const char* wireTraceDir) {
+            WireHelperProxy(const char* wireTraceDir, const char* wireInjectedTraceDir) {
                 mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
                 mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
@@ -109,8 +165,8 @@ namespace utils {
                 mC2sBuf->SetHandler(mWireServer.get());
 
                 if (wireTraceDir != nullptr && strlen(wireTraceDir) > 0) {
-                    mWireServerTraceLayer.reset(
-                        new WireServerTraceLayer(wireTraceDir, mWireServer.get()));
+                    mWireServerTraceLayer.reset(new WireServerTraceLayer(
+                        mWireServer.get(), wireTraceDir, wireInjectedTraceDir));
                     mC2sBuf->SetHandler(mWireServerTraceLayer.get());
                 }
 
@@ -156,9 +212,12 @@ namespace utils {
 
     }  // anonymous namespace
 
-    std::unique_ptr<WireHelper> CreateWireHelper(bool useWire, const char* wireTraceDir) {
+    std::unique_ptr<WireHelper> CreateWireHelper(bool useWire,
+                                                 const char* wireTraceDir,
+                                                 const char* wireInjectedTraceDir) {
         if (useWire) {
-            return std::unique_ptr<WireHelper>(new WireHelperProxy(wireTraceDir));
+            return std::unique_ptr<WireHelper>(
+                new WireHelperProxy(wireTraceDir, wireInjectedTraceDir));
         } else {
             return std::unique_ptr<WireHelper>(new WireHelperDirect());
         }

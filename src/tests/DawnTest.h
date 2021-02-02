@@ -211,6 +211,7 @@ class DawnTestEnvironment : public testing::Environment {
     bool HasVendorIdFilter() const;
     uint32_t GetVendorIdFilter() const;
     const char* GetWireTraceDir() const;
+    const char* GetWireInjectedTraceDir() const;
     GLFWwindow* GetOpenGLWindow() const;
     GLFWwindow* GetOpenGLESWindow() const;
 
@@ -232,6 +233,7 @@ class DawnTestEnvironment : public testing::Environment {
     bool mHasVendorIdFilter = false;
     uint32_t mVendorIdFilter = 0;
     std::string mWireTraceDir;
+    std::string mWireInjectedTraceDir;
 
     std::vector<std::string> mEnabledToggles;
     std::vector<std::string> mDisabledToggles;
