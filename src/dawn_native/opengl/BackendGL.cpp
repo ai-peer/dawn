@@ -109,7 +109,7 @@ namespace dawn_native { namespace opengl {
                                    << "\n    Message: " << message;
 
                 // Abort on an error when in Debug mode.
-                UNREACHABLE();
+                //                UNREACHABLE();
             }
         }
 
@@ -182,6 +182,10 @@ namespace dawn_native { namespace opengl {
 
             mDriverDescription = std::string("OpenGL version ") +
                                  reinterpret_cast<const char*>(mFunctions.GetString(GL_VERSION));
+
+            if (mPCIInfo.name.find("SwiftShader") != std::string::npos) {
+                mAdapterType = wgpu::AdapterType::CPU;
+            }
 
             InitializeSupportedExtensions();
 
