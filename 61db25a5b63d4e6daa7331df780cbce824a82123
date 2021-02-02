@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "840b1490_46e5e328",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-02T19:46:05Z",
+      "side": 1,
+      "message": "Idea behind this is that I can use the less intense command line option for the Intel bots. This would be followed by a chromium patch that changes the command line for only the Intel bots. Would have preferred not making the test parameters more complicated, but the only alternative I can think of is identifying when running on Intel inside Dawn and disabling state tracking - which would be undesirable for local runs.",
+      "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
