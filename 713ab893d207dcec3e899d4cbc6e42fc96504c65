@@ -270,6 +270,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42868382_4d016d14",
+        "filename": "src/dawn_native/d3d12/D3D12Info.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-02T02:47:42Z",
+      "side": 1,
+      "message": "Be sure and initialize supportsSharedResourceCapabilityTier1 to false.",
+      "range": {
+        "startLine": 71,
+        "startChar": 16,
+        "endLine": 71,
+        "endChar": 66
+      },
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59439e03_d3a3fd2a",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 9
