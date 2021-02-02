@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd21c357_e106789c",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T12:55:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3de438f3_c6f83582",
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a8c7b2b_bdd476df",
@@ -142,6 +160,30 @@
       "side": 1,
       "message": "I changed this up. It\u0027s rather difficult to test though since I can\u0027t synthesize a command to DestroyObject on the server but not affect the client.",
       "parentUuid": "2a7fc8e3_28a3cdda",
+      "range": {
+        "startLine": 27,
+        "startChar": 49,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "444d0226_628b7d92",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T12:55:58Z",
+      "side": 1,
+      "message": "The new logic looks better but I agree that it would be better if we could somehow test sending the destroy object command before the callback is called. Maybe a \"ForTesting\" command in the client that calls destroy on all pending async pipeline creations?",
+      "parentUuid": "f12c0ab9_ddf42258",
       "range": {
         "startLine": 27,
         "startChar": 49,
