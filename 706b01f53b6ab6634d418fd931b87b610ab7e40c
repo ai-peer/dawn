@@ -96,6 +96,24 @@
       "message": "These two methods are used during device destruction. Do we have dawn_end2end_tests that cover these cases for when the device is destroyed before the pipeline creation callback are fired?",
       "revId": "706b01f53b6ab6634d418fd931b87b610ab7e40c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8acdac85_5358f2bc",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T19:09:39Z",
+      "side": 1,
+      "message": "Indeed https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/end2end/CreateReadyPipelineTests.cpp;l\u003d273?q\u003df:tests%20CreateReady%20Device",
+      "parentUuid": "d7dd26ca_c1c828ac",
+      "revId": "706b01f53b6ab6634d418fd931b87b610ab7e40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
