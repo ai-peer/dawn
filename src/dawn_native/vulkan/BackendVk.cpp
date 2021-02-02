@@ -37,11 +37,7 @@ constexpr char kSwiftshaderLibName[] = "libvk_swiftshader.dylib";
 #endif
 
 #if defined(DAWN_PLATFORM_LINUX)
-#    if defined(DAWN_PLATFORM_ANDROID)
 constexpr char kVulkanLibName[] = "libvulkan.so";
-#    else
-constexpr char kVulkanLibName[] = "libvulkan.so.1";
-#    endif
 #elif defined(DAWN_PLATFORM_WINDOWS)
 constexpr char kVulkanLibName[] = "vulkan-1.dll";
 #elif defined(DAWN_PLATFORM_MACOS)
