@@ -16,6 +16,23 @@
       "message": "Can I merge this simple change? ",
       "revId": "2dbc7bd86fde7f757756f98640e41875c0fe3667",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57d7e0a1_59def83b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T18:08:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2dbc7bd86fde7f757756f98640e41875c0fe3667",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
