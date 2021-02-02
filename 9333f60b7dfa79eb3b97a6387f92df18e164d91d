@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3de438f3_c6f83582",
+        "filename": "generator/templates/dawn_wire/server/ServerDoers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T00:42:01Z",
+      "side": 1,
+      "message": "device destruction was destroying reserved yet-to-be-created pipelines. I changed things around to avoid doing this. We shouldn\u0027t have been tracking device children until after async creation finished.",
+      "parentUuid": "742c493f_36ec4929",
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a8c7b2b_bdd476df",
         "filename": "src/dawn_wire/server/ObjectStorage.h",
         "patchSetId": 3
@@ -65,6 +83,24 @@
       "writtenOn": "2021-02-01T21:18:15Z",
       "side": 1,
       "message": "The TODO can probably be removed. Also the comment could be moved to the enum definition.",
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb41710c_482d67cd",
+        "filename": "src/dawn_wire/server/ObjectStorage.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T00:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a8c7b2b_bdd476df",
       "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +118,30 @@
       "writtenOn": "2021-02-01T21:18:15Z",
       "side": 1,
       "message": "We should probably make this GetReservedHandle() and have it return null if the object was destroyed. Then we\u0027d check the pointer. Right now I think we\u0027d dereference nullptr.\n\nOr not given the logic in destroy, but something to be careful of if we change the code.",
+      "range": {
+        "startLine": 27,
+        "startChar": 49,
+        "endLine": 27,
+        "endChar": 65
+      },
+      "revId": "9333f60b7dfa79eb3b97a6387f92df18e164d91d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f12c0ab9_ddf42258",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T00:42:01Z",
+      "side": 1,
+      "message": "I changed this up. It\u0027s rather difficult to test though since I can\u0027t synthesize a command to DestroyObject on the server but not affect the client.",
+      "parentUuid": "2a7fc8e3_28a3cdda",
       "range": {
         "startLine": 27,
         "startChar": 49,
