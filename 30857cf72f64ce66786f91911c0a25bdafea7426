@@ -70,6 +70,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "700d452d_94e64b8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T17:05:23Z",
+      "side": 1,
+      "message": "Thanks for your review, Austin and Corentin. ",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c80e1384_1e8d3c8c",
@@ -83,6 +100,24 @@
       "writtenOn": "2021-02-02T06:39:18Z",
       "side": 1,
       "message": "nit: let\u0027s put these enums in order - either 1, 2, 3 or 3, 2, 1",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5274507f_e5954460",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T17:05:23Z",
+      "side": 1,
+      "message": "I think it will be in order: 1D, 2D, 3D. But 1D has not been implemented. So it looks a little upside down temporarily. BTW, all TextureDimension/TextureViewDimension related switches at frontend or backend have the same \"not in order\" problem at the moment. So just let it be?",
+      "parentUuid": "c80e1384_1e8d3c8c",
       "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -106,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6297b57b_5cb33edc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T17:05:23Z",
+      "side": 1,
+      "message": "We have already set 3D texture as unsafe API at frontend. Maybe we don\u0027t need to do this again at every backend? See the frontend code: https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/Texture.cpp#260",
+      "parentUuid": "5ee92ae6_5b5d3a02",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f02a816f_9256bfad",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 2
@@ -117,6 +170,30 @@
       "writtenOn": "2021-02-02T06:39:18Z",
       "side": 1,
       "message": "why not D3D12_SRV_DIMENSION_TEXTURE3D ?",
+      "range": {
+        "startLine": 1097,
+        "startChar": 45,
+        "endLine": 1097,
+        "endChar": 79
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b656c5b_044ce4c6",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T17:05:23Z",
+      "side": 1,
+      "message": "Done. My bad.",
+      "parentUuid": "f02a816f_9256bfad",
       "range": {
         "startLine": 1097,
         "startChar": 45,
@@ -187,6 +264,30 @@
       "side": 1,
       "message": "Progress was stalled for so long I didn\u0027t want to add too much for this sprint. Feel free to grab more tasks related to them. (like all the copies)",
       "parentUuid": "950adf10_0e54fac6",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 1
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c0fa78_9b2f2cd7",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T17:05:23Z",
+      "side": 1,
+      "message": "Sorry for the slow progress. Yeah. I am looking into copies. It seems to be a little complicated.",
+      "parentUuid": "362341c7_eacd5f82",
       "range": {
         "startLine": 699,
         "startChar": 0,
