@@ -150,7 +150,8 @@
             "BufferDestroy",
             "BufferUnmap",
             "DeviceCreateErrorBuffer",
-            "DeviceGetDefaultQueue",
+            "DeviceGetQueue",
+            "DeviceGetQueue",
             "DeviceInjectError",
             "DevicePushErrorScope",
             "QueueCreateFence"
