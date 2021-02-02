@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "ad65452b194c4101e8cac2502ea8a670d1a3305d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b8ca992_fad87c97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:07:43Z",
+      "side": 1,
+      "message": "LGTM - maybe also test the max uint32 value?",
+      "revId": "ad65452b194c4101e8cac2502ea8a670d1a3305d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
