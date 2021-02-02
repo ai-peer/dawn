@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37f3465e_327b33ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-02T03:38:30Z",
+      "side": 1,
+      "message": "No problem, Kai. In upcoming patches, I will add you into reviewer list only if the patch impacts validation rules and/or WebGPU spec.",
+      "parentUuid": "b4ccfcdf_2b43d299",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c430e7f5_e99cc7c4",
