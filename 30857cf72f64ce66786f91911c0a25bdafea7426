@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "796c4f2e_57e1fa47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T08:42:22Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c80e1384_1e8d3c8c",
@@ -66,6 +83,23 @@
       "writtenOn": "2021-02-02T06:39:18Z",
       "side": 1,
       "message": "nit: let\u0027s put these enums in order - either 1, 2, 3 or 3, 2, 1",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ee92ae6_5b5d3a02",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T08:42:22Z",
+      "side": 1,
+      "message": "If we partially implement textures like that, we should tag 3D texture creation as an unsafe API until they are fully implemented (uncluding zero init). git grep for DisallowUnsafeAPIs for examples.",
       "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -129,6 +163,30 @@
       "writtenOn": "2021-02-02T01:16:26Z",
       "side": 1,
       "message": "In the dawn issue 547: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d547, Corentin listed the task after 3d textures and views validation: \"- (3D textures and views) Creation in the backends (but can\u0027t do anything with them)\". Here we are...",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 1
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "362341c7_eacd5f82",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T08:42:22Z",
+      "side": 1,
+      "message": "Progress was stalled for so long I didn\u0027t want to add too much for this sprint. Feel free to grab more tasks related to them. (like all the copies)",
+      "parentUuid": "950adf10_0e54fac6",
       "range": {
         "startLine": 699,
         "startChar": 0,
