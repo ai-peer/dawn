@@ -27,6 +27,7 @@ namespace {
 
     bool gUseWire = false;
     std::string gWireTraceDir = "";
+    std::string gWireInjectedTraceDir = "";
 
 }  // namespace
 
@@ -43,11 +44,19 @@ void InitDawnValidationTestEnvironment(int argc, char** argv) {
             gWireTraceDir = argv[i] + argLen;
             continue;
         }
+
+        constexpr const char kWireInjectedTraceDirArg[] = "--wire-injected-trace-dir=";
+        argLen = sizeof(kWireInjectedTraceDirArg) - 1;
+        if (strncmp(argv[i], kWireInjectedTraceDirArg, argLen) == 0) {
+            gWireInjectedTraceDir = argv[i] + argLen;
+            continue;
+        }
     }
 }
 
 ValidationTest::ValidationTest()
-    : mWireHelper(utils::CreateWireHelper(gUseWire, gWireTraceDir.c_str())) {
+    : mWireHelper(
+          utils::CreateWireHelper(gUseWire, gWireTraceDir.c_str(), gWireInjectedTraceDir.c_str())) {
 }
 
 void ValidationTest::SetUp() {

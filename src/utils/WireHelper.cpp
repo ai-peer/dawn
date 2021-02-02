@@ -35,11 +35,20 @@ namespace utils {
 
         class WireServerTraceLayer : public dawn_wire::CommandHandler {
           public:
-            WireServerTraceLayer(const char* dir, dawn_wire::CommandHandler* handler)
-                : dawn_wire::CommandHandler(), mDir(dir), mHandler(handler) {
+            WireServerTraceLayer(dawn_wire::CommandHandler* handler,
+                                 const char* dir,
+                                 const char* injectedDir)
+                : dawn_wire::CommandHandler(),
+                  mHandler(handler),
+                  mDir(dir),
+                  mInjectedDir(injectedDir) {
                 const char* sep = GetPathSeparator();
-                if (mDir.back() != *sep) {
+                if (mDir.size() > 0 && mDir.back() != *sep) {
                     mDir += sep;
+                }
+
+                if (mInjectedDir.size() > 0 && mInjectedDir.back() != *sep) {
+                    mInjectedDir += sep;
                 }
             }
 
@@ -50,26 +59,43 @@ namespace utils {
                 std::replace(filename.begin(), filename.end(), '/', '_');
                 std::replace(filename.begin(), filename.end(), '\\', '_');
 
-                // Prepend the filename with the directory.
-                filename = mDir + filename;
+                if (mDir.size() > 0) {
+                    ASSERT(!mTraceFile.is_open());
+                    mTraceFile.open(mDir + filename, std::ios_base::out | std::ios_base::binary |
+                                                         std::ios_base::trunc);
+                }
 
-                ASSERT(!mFile.is_open());
-                mFile.open(filename,
-                           std::ios_base::out | std::ios_base::binary | std::ios_base::trunc);
+                if (mInjectedDir.size() > 0) {
+                    ASSERT(!mInjectionTraceFile.is_open());
+                    mInjectionTraceFile.open(mInjectedDir + filename, std::ios_base::out |
+                                                                          std::ios_base::binary |
+                                                                          std::ios_base::trunc);
+
+                    // Write the initial 8 bytes. This means the fuzzer should never inject an
+                    // error.
+                    const uint64_t injectedErrorIndex = 0xFFFF'FFFF'FFFF'FFFF;
+                    mInjectionTraceFile.write(reinterpret_cast<const char*>(&injectedErrorIndex),
+                                              sizeof(injectedErrorIndex));
+                }
             }
 
             const volatile char* HandleCommands(const volatile char* commands,
                                                 size_t size) override {
-                if (mFile.is_open()) {
-                    mFile.write(const_cast<const char*>(commands), size);
+                if (mTraceFile.is_open()) {
+                    mTraceFile.write(const_cast<const char*>(commands), size);
+                }
+                if (mInjectionTraceFile.is_open()) {
+                    mInjectionTraceFile.write(const_cast<const char*>(commands), size);
                 }
                 return mHandler->HandleCommands(commands, size);
             }
 
           private:
-            std::string mDir;
             dawn_wire::CommandHandler* mHandler;
-            std::ofstream mFile;
+            std::string mDir;
+            std::string mInjectedDir;
+            std::ofstream mTraceFile;
+            std::ofstream mInjectionTraceFile;
         };
 
         class WireHelperDirect : public WireHelper {
@@ -97,7 +123,7 @@ namespace utils {
 
         class WireHelperProxy : public WireHelper {
           public:
-            explicit WireHelperProxy(const char* wireTraceDir) {
+            WireHelperProxy(const char* wireTraceDir, const char* wireInjectedTraceDir) {
                 mC2sBuf = std::make_unique<utils::TerribleCommandBuffer>();
                 mS2cBuf = std::make_unique<utils::TerribleCommandBuffer>();
 
@@ -108,9 +134,10 @@ namespace utils {
                 mWireServer.reset(new dawn_wire::WireServer(serverDesc));
                 mC2sBuf->SetHandler(mWireServer.get());
 
-                if (wireTraceDir != nullptr && strlen(wireTraceDir) > 0) {
-                    mWireServerTraceLayer.reset(
-                        new WireServerTraceLayer(wireTraceDir, mWireServer.get()));
+                if ((wireTraceDir != nullptr && strlen(wireTraceDir) > 0) ||
+                    (wireInjectedTraceDir != nullptr && strlen(wireInjectedTraceDir) > 0)) {
+                    mWireServerTraceLayer.reset(new WireServerTraceLayer(
+                        mWireServer.get(), wireTraceDir, wireInjectedTraceDir));
                     mC2sBuf->SetHandler(mWireServerTraceLayer.get());
                 }
 
@@ -156,9 +183,12 @@ namespace utils {
 
     }  // anonymous namespace
 
-    std::unique_ptr<WireHelper> CreateWireHelper(bool useWire, const char* wireTraceDir) {
+    std::unique_ptr<WireHelper> CreateWireHelper(bool useWire,
+                                                 const char* wireTraceDir,
+                                                 const char* wireInjectedTraceDir) {
         if (useWire) {
-            return std::unique_ptr<WireHelper>(new WireHelperProxy(wireTraceDir));
+            return std::unique_ptr<WireHelper>(
+                new WireHelperProxy(wireTraceDir, wireInjectedTraceDir));
         } else {
             return std::unique_ptr<WireHelper>(new WireHelperDirect());
         }

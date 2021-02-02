@@ -37,7 +37,9 @@ namespace utils {
         virtual bool FlushServer() = 0;
     };
 
-    std::unique_ptr<WireHelper> CreateWireHelper(bool useWire, const char* wireTraceDir = nullptr);
+    std::unique_ptr<WireHelper> CreateWireHelper(bool useWire,
+                                                 const char* wireTraceDir = nullptr,
+                                                 const char* wireInjectedTraceDir = nullptr);
 
 }  // namespace utils
 

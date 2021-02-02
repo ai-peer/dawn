@@ -314,6 +314,13 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             continue;
         }
 
+        constexpr const char kWireInjectedTraceDirArg[] = "--wire-injected-trace-dir=";
+        argLen = sizeof(kWireInjectedTraceDirArg) - 1;
+        if (strncmp(argv[i], kWireInjectedTraceDirArg, argLen) == 0) {
+            mWireInjectedTraceDir = argv[i] + argLen;
+            continue;
+        }
+
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
             dawn::InfoLog()
                 << "\n\nUsage: " << argv[0]
@@ -579,10 +586,11 @@ uint32_t DawnTestEnvironment::GetVendorIdFilter() const {
 }
 
 const char* DawnTestEnvironment::GetWireTraceDir() const {
-    if (mWireTraceDir.length() == 0) {
-        return nullptr;
-    }
     return mWireTraceDir.c_str();
+}
+
+const char* DawnTestEnvironment::GetWireInjectedTraceDir() const {
+    return mWireInjectedTraceDir.c_str();
 }
 
 const std::vector<std::string>& DawnTestEnvironment::GetEnabledToggles() const {
@@ -597,7 +605,9 @@ const std::vector<std::string>& DawnTestEnvironment::GetDisabledToggles() const 
 
 DawnTestBase::DawnTestBase(const AdapterTestParam& param)
     : mParam(param),
-      mWireHelper(utils::CreateWireHelper(gTestEnv->UsesWire(), gTestEnv->GetWireTraceDir())) {
+      mWireHelper(utils::CreateWireHelper(gTestEnv->UsesWire(),
+                                          gTestEnv->GetWireTraceDir(),
+                                          gTestEnv->GetWireInjectedTraceDir())) {
 }
 
 DawnTestBase::~DawnTestBase() {
