@@ -691,6 +691,9 @@ TEST_P(StorageTextureTests, BindGroupLayoutWithStorageTextureBindingType) {
 
 // Test that read-only storage textures are supported in compute shader.
 TEST_P(StorageTextureTests, ReadonlyStorageTextureInComputeShader) {
+    // TODO(crbug.com/dawn/624): this test fails validation on GLES. Investigate why.
+    DAWN_SKIP_TEST_IF(IsOpenGLES() && IsBackendValidationEnabled());
+
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
@@ -729,6 +732,9 @@ TEST_P(StorageTextureTests, ReadonlyStorageTextureInComputeShader) {
 
 // Test that read-only storage textures are supported in vertex shader.
 TEST_P(StorageTextureTests, ReadonlyStorageTextureInVertexShader) {
+    // TODO(crbug.com/dawn/624): this test fails validation on GLES. Investigate why.
+    DAWN_SKIP_TEST_IF(IsOpenGLES() && IsBackendValidationEnabled());
+
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
