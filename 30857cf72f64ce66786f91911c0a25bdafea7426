@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea95d5af_7a6b3100",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T17:23:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5274507f_e5954460",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ee92ae6_5b5d3a02",
@@ -153,6 +171,24 @@
       "side": 1,
       "message": "We have already set 3D texture as unsafe API at frontend. Maybe we don\u0027t need to do this again at every backend? See the frontend code: https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/Texture.cpp#260",
       "parentUuid": "5ee92ae6_5b5d3a02",
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf184f7a_9d815de9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1095,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T17:23:47Z",
+      "side": 1,
+      "message": "Ack, I thought you had done it but didn\u0027t find it in my copy of Dawn. I must have had an old version of the code :)",
+      "parentUuid": "6297b57b_5cb33edc",
       "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -288,6 +324,30 @@
       "side": 1,
       "message": "Sorry for the slow progress. Yeah. I am looking into copies. It seems to be a little complicated.",
       "parentUuid": "362341c7_eacd5f82",
+      "range": {
+        "startLine": 699,
+        "startChar": 0,
+        "endLine": 702,
+        "endChar": 1
+      },
+      "revId": "30857cf72f64ce66786f91911c0a25bdafea7426",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1af59c6_93e6ec62",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 702,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-02T17:23:47Z",
+      "side": 1,
+      "message": "Yeah, maybe buffer to texture copies (and vice versa) could be the first one since then it will allow putting data in texture for sampling them.",
+      "parentUuid": "33c0fa78_9b2f2cd7",
       "range": {
         "startLine": 699,
         "startChar": 0,
