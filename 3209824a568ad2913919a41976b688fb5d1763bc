@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2b3a1196_dca90c5f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-02T16:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26922a94_5d9851e0",
+      "range": {
+        "startLine": 9,
+        "startChar": 13,
+        "endLine": 9,
+        "endChar": 19
+      },
+      "revId": "3209824a568ad2913919a41976b688fb5d1763bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "84ca5013_cfb26f87",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -54,6 +78,30 @@
       "writtenOn": "2021-02-02T08:37:13Z",
       "side": 1,
       "message": "This is missing digits too.",
+      "range": {
+        "startLine": 23,
+        "startChar": 66,
+        "endLine": 23,
+        "endChar": 72
+      },
+      "revId": "3209824a568ad2913919a41976b688fb5d1763bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e859e38_58ec6b6d",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-02-02T16:51:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37e89f10_ce753034",
       "range": {
         "startLine": 23,
         "startChar": 66,
