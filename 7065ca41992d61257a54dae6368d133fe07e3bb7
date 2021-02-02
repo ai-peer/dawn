@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02968358_c4da0940",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:39:57Z",
+      "side": 1,
+      "message": "nit: it might be more accurate to say \"valid\" usage",
+      "range": {
+        "startLine": 233,
+        "startChar": 58,
+        "endLine": 233,
+        "endChar": 67
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "224969d0_9fa51de7",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:39:57Z",
+      "side": 1,
+      "message": "Are there other multi planar formats you forsee us adding where a platform doesn\u0027t support all the formats? If so it may be better to give this a more specific (but backend-agnostic) name.",
+      "range": {
+        "startLine": 125,
+        "startChar": 56,
+        "endLine": 125,
+        "endChar": 74
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ef2de1b_b08f3714",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:39:57Z",
+      "side": 1,
+      "message": "why not return this?",
+      "range": {
+        "startLine": 143,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 69
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

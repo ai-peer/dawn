@@ -178,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8b02fa7_51c370c7",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:39:57Z",
+      "side": 1,
+      "message": "If we have other multi plane formats, we should check the format member and see if it\u0027s r8bg82plane420 instead of IsMultiPlane(). We\u0027re returning a very format-specific value here.",
+      "parentUuid": "3809fd2b_2b5c6013",
+      "range": {
+        "startLine": 129,
+        "startChar": 19,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0026c31d_22745d1d",
         "filename": "src/dawn_native/Format.cpp",
         "patchSetId": 7
@@ -491,6 +515,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3bcea3f0_63e2ca9d",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:39:57Z",
+      "side": 1,
+      "message": "Sorry I don\u0027t understand. This function *is* supposed to return None if you select an aspect the format doesn\u0027t have. What code path are you talking about?",
+      "parentUuid": "af8c7d2d_b62a9209",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fdb8afe_d53f7a6c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
@@ -520,6 +568,24 @@
       "side": 1,
       "message": "Not sure I follow, can you clarify?",
       "parentUuid": "0fdb8afe_d53f7a6c",
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20022b71_ba376f57",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-02T22:39:57Z",
+      "side": 1,
+      "message": "Sorry I\u0027m not sure either. I think I thought this code was not in GetTextureViewDescriptorWithDefaults and we also needed to update elsewhere. But this is indeed GetTextureViewDescriptorWithDefaults after all.",
+      "parentUuid": "2b64a471_d77892bf",
       "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
