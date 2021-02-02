@@ -39,9 +39,10 @@ namespace dawn_native { namespace opengl {
                             return GL_TEXTURE_2D;
                         }
                     }
+                case wgpu::TextureDimension::e3D:
+                    return GL_TEXTURE_3D;
 
                 case wgpu::TextureDimension::e1D:
-                case wgpu::TextureDimension::e3D:
                     UNREACHABLE();
             }
         }
@@ -62,9 +63,10 @@ namespace dawn_native { namespace opengl {
                     return GL_TEXTURE_CUBE_MAP;
                 case wgpu::TextureViewDimension::CubeArray:
                     return GL_TEXTURE_CUBE_MAP_ARRAY;
+                case wgpu::TextureViewDimension::e3D:
+                    return GL_TEXTURE_3D;
 
                 case wgpu::TextureViewDimension::e1D:
-                case wgpu::TextureViewDimension::e3D:
                 case wgpu::TextureViewDimension::Undefined:
                     UNREACHABLE();
             }
@@ -127,6 +129,7 @@ namespace dawn_native { namespace opengl {
 
         uint32_t width = GetWidth();
         uint32_t height = GetHeight();
+        uint32_t depth = GetDepth();
         uint32_t levels = GetNumMipLevels();
         uint32_t arrayLayers = GetArrayLayers();
         uint32_t sampleCount = GetSampleCount();
@@ -153,9 +156,12 @@ namespace dawn_native { namespace opengl {
                     }
                 }
                 break;
+            case wgpu::TextureDimension::e3D:
+                ASSERT(!IsMultisampledTexture());
+                ASSERT(arrayLayers == 1);
+                gl.TexStorage3D(mTarget, levels, glFormat.internalFormat, width, height, depth);
 
             case wgpu::TextureDimension::e1D:
-            case wgpu::TextureDimension::e3D:
                 UNREACHABLE();
         }
 
