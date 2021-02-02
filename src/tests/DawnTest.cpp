@@ -827,7 +827,7 @@ void DawnTestBase::SetUp() {
         "_" + ::testing::UnitTest::GetInstance()->current_test_info()->name();
     mWireHelper->BeginWireTrace(traceName.c_str());
 
-    queue = device.GetDefaultQueue();
+    queue = device.GetQueue();
 
     device.SetUncapturedErrorCallback(OnDeviceError, this);
     device.SetDeviceLostCallback(OnDeviceLost, this);
@@ -993,7 +993,7 @@ void DawnTestBase::FlushWire() {
 }
 
 void DawnTestBase::WaitForAllOperations() {
-    wgpu::Queue queue = device.GetDefaultQueue();
+    wgpu::Queue queue = device.GetQueue();
     wgpu::Fence fence = queue.CreateFence();
 
     // Force the currently submitted operations to completed.
