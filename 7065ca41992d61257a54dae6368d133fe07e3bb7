@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89e7e6a9_73ca15e3",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T00:27:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "02968358_c4da0940",
+      "range": {
+        "startLine": 233,
+        "startChar": 58,
+        "endLine": 233,
+        "endChar": 67
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "224969d0_9fa51de7",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96377322_39598bf7",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T00:27:26Z",
+      "side": 1,
+      "message": "Viz may need 10-bit and 16-bit YUV formats (NV12 \u003d 12 bit) but all are 2plane. Maybe \"MultiTexture2plane\"?",
+      "parentUuid": "224969d0_9fa51de7",
+      "range": {
+        "startLine": 125,
+        "startChar": 56,
+        "endLine": 125,
+        "endChar": 74
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7ef2de1b_b08f3714",
         "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
         "patchSetId": 10
@@ -60,6 +108,30 @@
       "writtenOn": "2021-02-02T22:39:57Z",
       "side": 1,
       "message": "why not return this?",
+      "range": {
+        "startLine": 143,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 69
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f98620f_efb52bc3",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T00:27:26Z",
+      "side": 1,
+      "message": "Compiler complains that ASSERT cannot be converted to non-void. \u003d(",
+      "parentUuid": "7ef2de1b_b08f3714",
       "range": {
         "startLine": 143,
         "startChar": 39,

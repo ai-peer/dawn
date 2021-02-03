@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17aa9746_9686dfa4",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T00:27:26Z",
+      "side": 1,
+      "message": "+1 underscores",
+      "parentUuid": "cf82c479_c72648dd",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f574ae69_1519e6d5",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 9
@@ -609,6 +627,24 @@
       "side": 1,
       "message": "Well the question is: do we need to issue barriers which transition the planes together?\n\nIf so it\u0027s okay - I think we can handle this separately as it might be more complex than the basic support added here.",
       "parentUuid": "9f8dab9d_a22b5d05",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51bee488_4dfce125",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T00:27:26Z",
+      "side": 1,
+      "message": "I meant the per plane transitions seem to be correctly created for D3D (the same subresource calculation is used for depth-stencil).",
+      "parentUuid": "5b5de97f_31572489",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
