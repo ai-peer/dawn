@@ -195,6 +195,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae16fe6b_e7b63c78",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T19:51:09Z",
+      "side": 1,
+      "message": "It depends on more than setting a \"no tracking\" flag whether or not there is any \"overhead\" to be removed. Otherwise, it would be named as you wish. \"partial\" and \"reduced\" seem fine. My point is we might need to modify this further (ex. add unguarded) to avoid TDRs. FYI, this is also happening on my non-Intel dGPU card.",
+      "parentUuid": "828a1878_a1a298d9",
+      "range": {
+        "startLine": 132,
+        "startChar": 51,
+        "endLine": 132,
+        "endChar": 62
+      },
+      "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea4d924f_2e6374e7",
