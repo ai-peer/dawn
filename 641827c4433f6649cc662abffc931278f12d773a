@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!\n\n(This is to pick up Corentin\u0027s Mac fix 91eebe922de06a3ed4ba6622686c436c7941aa63.)",
       "revId": "641827c4433f6649cc662abffc931278f12d773a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebcb5386_2654c63f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-03T18:31:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "641827c4433f6649cc662abffc931278f12d773a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
