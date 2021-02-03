@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "193e0788_6e567b3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:07:57Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "6a1c1e790fdb24c5a64db292f53f680e6d67e3aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428d706b_5a6cb8de",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:07:57Z",
+      "side": 1,
+      "message": "this comment needs updating",
+      "revId": "6a1c1e790fdb24c5a64db292f53f680e6d67e3aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86393141_acf17c35",
+        "filename": "src/dawn_wire/server/ServerDevice.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:07:57Z",
+      "side": 1,
+      "message": "nit: ... which would fail validation.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 48
+      },
+      "revId": "6a1c1e790fdb24c5a64db292f53f680e6d67e3aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
