@@ -200,6 +200,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57109ff8_af89cb99",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T21:11:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8b02fa7_51c370c7",
+      "range": {
+        "startLine": 129,
+        "startChar": 19,
+        "endLine": 129,
+        "endChar": 31
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0026c31d_22745d1d",
@@ -575,6 +599,30 @@
       "side": 1,
       "message": "Uh? GetValidInternalFormat doesn\u0027t call ConvertAspect.\n\nDo you mean that TextureViewBase decides that Plane0 means an R8Unorm format then tries to select something with Aspect::Color on the multi-planar format?\n\nLike I\u0027m not sure what I understand what the problem is, but SelectFormatAspects is meant to return None if the format doesn\u0027t have the aspect.",
       "parentUuid": "7f52a9f2_bb0375c0",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214e11c6_a8363095",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T21:11:03Z",
+      "side": 1,
+      "message": "\u003e Do you mean that TextureViewBase decides that Plane0\n\nYes. R8Unorm is _always_ specified as Color but the view decides it is Plane0.\n\nGetValidInternalFormat() passes the internal \"color\" format of R8Unorm to ConvertAspect(). SelectFormatAspects(colorAspectOnly, Plane[0|1]) should select and return only the plane aspect, Plane0 (NOT return None which is the result of `color \u0026 plane0`).",
+      "parentUuid": "d16de0a5_bf61c13b",
       "range": {
         "startLine": 49,
         "startChar": 0,
