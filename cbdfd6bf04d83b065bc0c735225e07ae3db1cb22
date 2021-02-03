@@ -16,6 +16,46 @@
       "message": "PTAL. I\u0027m sure this is not the long-term fix (should probably be rejiggering layout ids or something) but it does unblock a number of tests which were giving warnings in ANGLE and errors in backend validation. Thanks!",
       "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fdbc629_86055430",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-03T23:32:55Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 149,
+        "startChar": 32,
+        "endLine": 153,
+        "endChar": 77
+      },
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b74c466f_f87b2ded",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-03T23:32:55Z",
+      "side": 1,
+      "message": "Is this the same reason for the comment at [1]?",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
