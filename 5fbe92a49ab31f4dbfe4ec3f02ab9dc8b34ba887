@@ -85,6 +85,23 @@
       "message": "Thanks for the review!\n\nFYI, the EntryPointTests were just enabled yesterday, which is probably why this didn\u0027t cause a problem before. Basically a race condition between me and Ryan.",
       "revId": "5fbe92a49ab31f4dbfe4ec3f02ab9dc8b34ba887",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0260a3b_ecf0762b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-03T16:57:31Z",
+      "side": 1,
+      "message": "lgtm too",
+      "revId": "5fbe92a49ab31f4dbfe4ec3f02ab9dc8b34ba887",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
