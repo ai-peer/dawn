@@ -147,6 +147,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbdac2de_05e6d6ba",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-03T18:13:07Z",
+      "side": 1,
+      "message": "Tracking isn\u0027t guaranteed to be \"low-overhead\", I wouldn\u0027t suggest mapping these as such since they will likely change in the future. Like -o3 means \"aggressive\", it may or may not be as fast.",
+      "parentUuid": "732b9230_e372a601",
+      "range": {
+        "startLine": 132,
+        "startChar": 51,
+        "endLine": 132,
+        "endChar": 62
+      },
+      "revId": "61db25a5b63d4e6daa7331df780cbce824a82123",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea4d924f_2e6374e7",
