@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6283984_7a3703a1",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 1825,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:50:23Z",
+      "side": 1,
+      "message": "R8BG8Biplanar420Unorm is nice, otherwise I think it\u0027s ok to have underscores. This is a \"private\" extension anyway so we can change the name easily in the future if we want to.",
+      "parentUuid": "17aa9746_9686dfa4",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f574ae69_1519e6d5",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 9
@@ -370,6 +388,24 @@
       "side": 1,
       "message": "a multi-plane format can have multiple formats per aspect, there isn\u0027t a \"default format\" per say. I think GetAspectInfo would need to be special cased or require a lookup to get per plane info back.\n\nI simplified GetAspectFormat, PTAL.",
       "parentUuid": "d2cbd92a_a93218af",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "054622f7_7629e4a7",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:50:23Z",
+      "side": 1,
+      "message": "The D3D11 functional spec has a description of the formats the planes can be viewed as which are R8Unorm/Uint and RG8Unorm/Uint. It would simplify things to have nv12 follow the same AspectInfo structure by choosing one of these format to represent each of the planes. For example the Unorm one. (this paves the way for copies and removes the need for special casing that\u0027s done in this CL).\n\nGetAspectFormat() just becomes GetAspectInfo(aspect).format\nGetAspectInfo() does if aspect \u003d\u003d plane1: ASSERT(nv12); return aspect for nv12 plane0.\n\nThis paves the way for having creation and copies of these formats and having a unified way to add more multi-planar formats instead of special casing more.",
+      "parentUuid": "8f87416b_c74b9060",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -651,6 +687,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2160b20_f8a77fa7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:50:23Z",
+      "side": 1,
+      "message": "I couldn\u0027t find the investigation for this, but I remember that we mentioned in the past that multi-planar formats in D3D12 had some complexity because you couldn\u0027t do barriers on each plane individually and instead had to do both planes at the same time. Is that no longer a constraint?",
+      "parentUuid": "51bee488_4dfce125",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a1de290_b431f0d6",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 9
@@ -680,6 +734,24 @@
       "side": 1,
       "message": "Both single and multi-plane formats are sharable so this check would probably stay \"per tier\". Since support is very narrow, I renamed it.",
       "parentUuid": "6a1de290_b431f0d6",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb7da2d_1d347a12",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:50:23Z",
+      "side": 1,
+      "message": "Sorry, what I meant was that the current code make it easy to forget to add the condition for new multi-planar formats when we add them. It would help avoid mistakes to have the logic default to disallowing.",
+      "parentUuid": "91094677_bc1a01df",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -801,6 +873,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8235a3da_93b3e397",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:50:23Z",
+      "side": 1,
+      "message": "Yeah what I meant is that this test doesn\u0027t check that you can vary the luma in the 2x2 region, but I think that ok. Please ignore this comment.",
+      "parentUuid": "c2147a2b_675b2cc7",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f58d9c16_c4a1e7ca",
@@ -914,6 +1004,24 @@
       "side": 1,
       "message": "D3D11 always requires acquire + release to access the texture. It doesn\u0027t matter if it was initialized by being written to or from creation AFAIK.",
       "parentUuid": "760db585_a349deeb",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643b4c3a_66f1179c",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T10:50:23Z",
+      "side": 1,
+      "message": "Isn\u0027t it the interop between D3D11 and D3D12 that requires the acquire/release on the D3D11 side? Can we have a comment explaining that?",
+      "parentUuid": "bccbb9a9_3f5f760c",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
