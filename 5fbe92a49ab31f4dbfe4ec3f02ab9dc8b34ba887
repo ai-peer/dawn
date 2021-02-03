@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19263c78_9cb9ea48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-03T16:46:34Z",
+      "side": 1,
+      "message": "PTAL. Difference from previous landing:\n\nSkip EntryPointTests.FragAndVertexSameModule on OpenGL ES (already skipped on Desktop GL).\n\nNot sure why this didn\u0027t fail on Dawn CQ, but it\u0027s failing on Chrome CQ, blocking the Dawn roll.\n\nThanks!",
+      "revId": "5fbe92a49ab31f4dbfe4ec3f02ab9dc8b34ba887",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
