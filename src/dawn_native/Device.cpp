@@ -144,6 +144,22 @@ namespace dawn_native {
     }
 
     void DeviceBase::ShutDownBase() {
+        // Skip handling device facilities if they haven't even been created (or failed doing so)
+        if (mState != State::BeingCreated) {
+            // Cancel all device-level in-flight callbacks.
+
+            // Unlink the current scope. This will clear all scopes that have been pushed but not
+            // popped.
+            mCurrentErrorScope->UnlinkForShutdown();
+
+            // Then unlink all the scopes which have already been popped. All callbacks will be
+            // rejected.
+            mErrorScopeTracker->ClearForShutDown();
+
+            // Reject all async pipeline creations.
+            mCreateReadyPipelineTracker->ClearForShutDown();
+        }
+
         // Disconnect the device, depending on which state we are currently in.
         switch (mState) {
             case State::BeingCreated:
@@ -171,18 +187,11 @@ namespace dawn_native {
         ASSERT(mCompletedSerial == mLastSubmittedSerial);
         ASSERT(mFutureSerial <= mCompletedSerial);
 
-        // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
-            // The GPU timeline is finished so all services can be freed immediately. They need to
-            // be freed before ShutDownImpl() because they might relinquish resources that will be
-            // freed by backends in the ShutDownImpl() call. Still tick the ones that might have
-            // pending callbacks.
-            mErrorScopeTracker->Tick(GetCompletedCommandSerial());
+            // The GPU timeline is finished.
+            // Tick the queue-related tasks since they should be complete.
             GetDefaultQueue()->Tick(GetCompletedCommandSerial());
-
-            mCreateReadyPipelineTracker->ClearForShutDown();
-
-            // call TickImpl once last time to clean up resources
+            // Call TickImpl once last time to clean up resources
             // Ignore errors so that we can continue with destruction
             IgnoreErrors(TickImpl());
         }
@@ -190,10 +199,6 @@ namespace dawn_native {
         // At this point GPU operations are always finished, so we are in the disconnected state.
         mState = State::Disconnected;
 
-        // mCurrentErrorScope can be null if we failed device initialization.
-        if (mCurrentErrorScope != nullptr) {
-            mCurrentErrorScope->UnlinkForShutdown();
-        }
         mErrorScopeTracker = nullptr;
         mDynamicUploader = nullptr;
         mCreateReadyPipelineTracker = nullptr;
