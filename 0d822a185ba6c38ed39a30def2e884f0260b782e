@@ -34,6 +34,24 @@
       "parentUuid": "9905f427_48dfd13c",
       "revId": "0d822a185ba6c38ed39a30def2e884f0260b782e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e13502fe_bc4fec4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T09:48:25Z",
+      "side": 1,
+      "message": "The problem is that you cannot land this one because it fails CQ due to the Metal bug. Can you add a suppression for the Metal issue, land this CL then land the noop CL (that would also remove the suppression)?\n\nOr just invert the order of CLs.",
+      "parentUuid": "e60e84c8_7210fe9d",
+      "revId": "0d822a185ba6c38ed39a30def2e884f0260b782e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
