@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "86685ac30e82155b93a98c47813da848eba9fd1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f42bb259_0139eb1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-03T19:25:29Z",
+      "side": 1,
+      "message": "LGTM though I like round() slightly more. It\u0027s unclear what 4294967295.0 * 1.0001 is.\n\nThere\u0027s not so much we can do here, but I hope the builtins don\u0027t become a fingerprinting issue.. :-/ ",
+      "revId": "86685ac30e82155b93a98c47813da848eba9fd1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
