@@ -33,6 +33,23 @@
       "message": "very exciting!! LGTM",
       "revId": "7f433792e510c249dfa70dd3ef71f110f67833db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df1be48d_f0aef677",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-03T09:55:18Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "7f433792e510c249dfa70dd3ef71f110f67833db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
