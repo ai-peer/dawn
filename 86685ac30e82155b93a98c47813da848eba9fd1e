@@ -33,6 +33,40 @@
       "message": "LGTM though I like round() slightly more. It\u0027s unclear what 4294967295.0 * 1.0001 is.\n\nThere\u0027s not so much we can do here, but I hope the builtins don\u0027t become a fingerprinting issue.. :-/ ",
       "revId": "86685ac30e82155b93a98c47813da848eba9fd1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "131ca4d4_8f829bf4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2021-02-03T19:35:40Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "86685ac30e82155b93a98c47813da848eba9fd1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f8ec0a6_924a50f4",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2021-02-03T19:35:40Z",
+      "side": 1,
+      "message": "LGTM.\nExplanation.\n\nu32(f32) is semantically the same as SPIR-V OpConvertFToU which \"\n\nConvert value numerically from floating point to unsigned integer, with round toward 0.0.\"\n\nSo it truncates, basically.  We can\u0027t rely on log2 to be accurate enough to always be at or above the exact answer.\n\nThis is a good compromise.",
+      "revId": "86685ac30e82155b93a98c47813da848eba9fd1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
