@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3fa1b05b_2c1b4362",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-03T16:52:57Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6862c39f_4a88927c",
+      "revId": "5fbe92a49ab31f4dbfe4ec3f02ab9dc8b34ba887",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "19263c78_9cb9ea48",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -48,6 +66,23 @@
       "writtenOn": "2021-02-03T16:48:12Z",
       "side": 1,
       "message": "LGTM!",
+      "revId": "5fbe92a49ab31f4dbfe4ec3f02ab9dc8b34ba887",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d4481fc_9b640fa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-03T16:52:57Z",
+      "side": 1,
+      "message": "Thanks for the review!\n\nFYI, the EntryPointTests were just enabled yesterday, which is probably why this didn\u0027t cause a problem before. Basically a race condition between me and Ryan.",
       "revId": "5fbe92a49ab31f4dbfe4ec3f02ab9dc8b34ba887",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
