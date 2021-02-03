@@ -16,6 +16,24 @@
       "message": "LGTM, but don\u0027t we need to land this after the next patch, or simultaneously?",
       "revId": "0d822a185ba6c38ed39a30def2e884f0260b782e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e60e84c8_7210fe9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-03T09:14:20Z",
+      "side": 1,
+      "message": "This is the parent of next patch (not depend on code, but on commits, just for testing), we cannot landed the next patch if this patch does not get +2.",
+      "parentUuid": "9905f427_48dfd13c",
+      "revId": "0d822a185ba6c38ed39a30def2e884f0260b782e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
