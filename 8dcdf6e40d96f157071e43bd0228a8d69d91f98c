@@ -635,6 +635,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ca01cdb_1cb489d2",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-03T23:18:41Z",
+      "side": 1,
+      "message": "I see. We should keep SelectFormatAspects the same instead of making handling of the Plane0 Plane1 aspects break the semantic.\n\nInstead, let\u0027s change TextureViewBase to call some other helper instead of ConvertAspect.\nAlso, maybe it should also be calling GetFormatAspect to assign mFormat. Then, mRange.aspects would be All of the aspects of the plane format.",
+      "parentUuid": "214e11c6_a8363095",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fdb8afe_d53f7a6c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7
