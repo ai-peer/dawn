@@ -302,6 +302,7 @@ namespace dawn_native {
                     ValidateQueryIndexOverwrite(querySet, queryIndex, GetQueryAvailabilityMap()));
             }
 
+            querySet->SetQueryAvailability(queryIndex, 1);
             TrackQueryAvailability(querySet, queryIndex);
 
             WriteTimestampCmd* cmd =
