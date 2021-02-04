@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a351243b_98a2dfc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-04T08:52:42Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2fdbc629_86055430",
@@ -108,6 +125,24 @@
       "side": 1,
       "message": "For SSBOs we modified the binding decorations. Is the same workaround needed here?",
       "parentUuid": "58248fc6_705157f8",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24fc7bf9_d37078e1",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-04T08:52:42Z",
+      "side": 1,
+      "message": "Yeah we most likely need the same workaround (and a test to check it was needed and fixes things.)",
+      "parentUuid": "14207f42_7de63db2",
       "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
