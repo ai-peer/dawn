@@ -681,6 +681,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf79901b_ee051c16",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-04T17:41:13Z",
+      "side": 1,
+      "message": "Done.\n\nGetFormatAspect returns the same color format so I left it as-is.\nmRange.aspects should probably stay per plane (vs All) since 1 view \u003d\u003d 1 plane \u003d\u003d 1 sub-resource.",
+      "parentUuid": "db270382_e5f870ee",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fdb8afe_d53f7a6c",

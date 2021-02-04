@@ -518,6 +518,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c7be7c5_83446b01",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-04T17:41:13Z",
+      "side": 1,
+      "message": "Ack.\n\nWas worth a shot. \u003d)",
+      "parentUuid": "eb8fe6ea_c6f78439",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2d499f7_caa46deb",
@@ -671,6 +689,24 @@
       "writtenOn": "2021-02-01T17:20:14Z",
       "side": 1,
       "message": "[2]",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afa0251c_5721be74",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-04T17:41:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59b8929f_9d8ade85",
       "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
