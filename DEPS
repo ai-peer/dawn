@@ -38,11 +38,11 @@ deps = {
 
   # Testing, GTest and GMock
   'testing': {
-    'url': '{chromium_git}/chromium/src/testing@3e2640a325dc34ec3d9cb2802b8da874aecaf52d',
+    'url': '{chromium_git}/chromium/src/testing@967a8819da4f9f7169a735cb597e8432cfc090d0',
     'condition': 'dawn_standalone',
   },
   'third_party/googletest': {
-    'url': '{chromium_git}/external/github.com/google/googletest@2828773179fa425ee406df61890a150577178ea2',
+    'url': '{chromium_git}/external/github.com/google/googletest@273f8cb059a4e7b089731036392422b5ef489791',
     'condition': 'dawn_standalone',
   },
 
