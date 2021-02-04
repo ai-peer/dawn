@@ -56,6 +56,24 @@
       "message": "Is this the same reason for the comment at [1]?",
       "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00920257_46363dd1",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-04T00:05:24Z",
+      "side": 1,
+      "message": "Similar. This refers to image load/store, while the comment at [1] refers to SSBOs.\n\nI\u0027m trying to find where in the spec it explicitly says that ES does not allow glUniform on storage image bindings. The wiki says:\n\n\"Just as with samplers, image variables reference image unit indices in the context. These are usually set with a binding layout qualifier, but they can also be set with glUniform1i or glProgramUniform1i.\"\n\nIt seems empirically that only the former is allowed in ES (similar to SSBOs), but I can\u0027t find spec language to back it up. There\u0027s no mention of glUniform at all in the desktop GL spec on image load/store.",
+      "parentUuid": "b74c466f_f87b2ded",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
