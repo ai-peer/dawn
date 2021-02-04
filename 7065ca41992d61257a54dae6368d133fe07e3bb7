@@ -261,6 +261,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d48af6_7c2d13ce",
+        "filename": "src/tests/end2end/D3D12VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-04T12:15:51Z",
+      "side": 1,
+      "message": "Yeah that\u0027s the problem with EXPECT that when the test fails it can continue and crash the whole test run. But it should fail! Thanks for making the change.",
+      "parentUuid": "234da1b1_cb395e11",
+      "range": {
+        "startLine": 143,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 69
+      },
+      "revId": "7065ca41992d61257a54dae6368d133fe07e3bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "587f736f_c14a7bea",

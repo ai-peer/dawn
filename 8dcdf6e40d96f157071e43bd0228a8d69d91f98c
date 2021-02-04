@@ -659,6 +659,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db270382_e5f870ee",
+        "filename": "src/dawn_native/Subresource.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-04T12:15:51Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "7ca01cdb_1cb489d2",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 52,
+        "endChar": 38
+      },
+      "revId": "8dcdf6e40d96f157071e43bd0228a8d69d91f98c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fdb8afe_d53f7a6c",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 7

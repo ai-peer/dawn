@@ -484,6 +484,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "721320b1_261dcae1",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-04T12:15:51Z",
+      "side": 1,
+      "message": "Since this CL is kinda blocking other things I think it is ok to move forward with the suboptimal Format changes and iterate in a follow-up. I\u0027d be happy to give it a try if needed.",
+      "parentUuid": "95b262aa_f531f942",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2d499f7_caa46deb",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 9
