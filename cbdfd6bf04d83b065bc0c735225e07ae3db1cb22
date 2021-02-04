@@ -163,6 +163,24 @@
       "parentUuid": "24fc7bf9_d37078e1",
       "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07527487_c8672ff8",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-04T14:37:19Z",
+      "side": 1,
+      "message": "Found it, in the ES 3.1 spec, under 7.6 Uniforms, Errors:\n\n\"• an image uniform is loaded with any of the Uniform* commands.\"\n\nThat line is not present in the desktop GL spec.\n\n(There\u0027s also a line above that allows glUniform1i for \"sampler or image uniforms\", same as desktop, but the \"or image\" is in strikethrough in ES. :) Spec editor fail...)",
+      "parentUuid": "582c41a7_8d49b5c6",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
