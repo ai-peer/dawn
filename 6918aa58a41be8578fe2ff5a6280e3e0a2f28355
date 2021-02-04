@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dbd971e_0548a880",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-04T17:29:30Z",
+      "side": 1,
+      "message": "Is it really necessary that the enum be a uint32_t? If the compiler thinks it can do it in fewer bits, why not?",
+      "range": {
+        "startLine": 132,
+        "startChar": 34,
+        "endLine": 132,
+        "endChar": 42
+      },
+      "revId": "6918aa58a41be8578fe2ff5a6280e3e0a2f28355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "297525df_5010735b",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-04T17:29:30Z",
+      "side": 1,
+      "message": "Please list all of the available options in the help text: full, partial, disabled.",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 345,
+        "endChar": 96
+      },
+      "revId": "6918aa58a41be8578fe2ff5a6280e3e0a2f28355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d75cab3_0f8f59c6",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-04T17:29:30Z",
+      "side": 1,
+      "message": "Would be good to add a specific case for \u0027disabled\u0027 and have the default case be \"unreachable code\". Makes it easier to update code when we need to add new enums in the future.",
+      "range": {
+        "startLine": 524,
+        "startChar": 0,
+        "endLine": 525,
+        "endChar": 30
+      },
+      "revId": "6918aa58a41be8578fe2ff5a6280e3e0a2f28355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
