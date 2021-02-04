@@ -502,6 +502,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb8fe6ea_c6f78439",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-04T16:28:20Z",
+      "side": 1,
+      "message": "Yea, I agree now - sorry for the back and forth. We\u0027re going to add a Stencil8 format so later, we should be able to handle this nicely without special-casing.",
+      "parentUuid": "721320b1_261dcae1",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2d499f7_caa46deb",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 9
