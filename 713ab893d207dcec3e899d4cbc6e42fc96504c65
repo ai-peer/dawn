@@ -466,6 +466,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95b262aa_f531f942",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-04T03:00:00Z",
+      "side": 1,
+      "message": "\u003e Can\u0027t we do this the same way GetAspectInfo works for now\n\nI don\u0027t think we can unless we specify the formats of StencilOnly. Stencil8 does not seem to be allowed format, right? Alternatively, we special case the validation to avoid using GetAspectInfo(aspect).format.",
+      "parentUuid": "1262a986_3adeb7e7",
+      "revId": "713ab893d207dcec3e899d4cbc6e42fc96504c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2d499f7_caa46deb",
         "filename": "src/dawn_native/Format.h",
         "patchSetId": 9
