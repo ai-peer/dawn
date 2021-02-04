@@ -145,6 +145,24 @@
       "parentUuid": "14207f42_7de63db2",
       "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582c41a7_8d49b5c6",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-04T14:31:35Z",
+      "side": 1,
+      "message": "Yes, I strongly suspect that\u0027s what we need. There are a number of other StorageTexture tests still failing on GLES; it could be that this is the cause.",
+      "parentUuid": "24fc7bf9_d37078e1",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
