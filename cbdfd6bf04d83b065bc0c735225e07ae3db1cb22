@@ -92,6 +92,24 @@
       "parentUuid": "00920257_46363dd1",
       "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14207f42_7de63db2",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-04T00:41:05Z",
+      "side": 1,
+      "message": "For SSBOs we modified the binding decorations. Is the same workaround needed here?",
+      "parentUuid": "58248fc6_705157f8",
+      "revId": "cbdfd6bf04d83b065bc0c735225e07ae3db1cb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
