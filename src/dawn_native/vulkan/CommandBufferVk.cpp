@@ -34,6 +34,8 @@
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
+#include <algorithm>
+
 namespace dawn_native { namespace vulkan {
 
     namespace {
@@ -386,6 +388,61 @@ namespace dawn_native { namespace vulkan {
             device->fn.CmdWriteTimestamp(commands, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
                                          querySet->GetHandle(), cmd->queryIndex);
         }
+
+        auto FindUnavailableQuery(const std::vector<bool>& availability,
+                                  uint32_t start,
+                                  uint32_t end) {
+            return std::find(availability.begin() + start, availability.begin() + end, 0);
+        }
+
+        void RecordResolveQuerySet(VkCommandBuffer commands,
+                                   Device* device,
+                                   QuerySet* querySet,
+                                   uint32_t firstQuery,
+                                   uint32_t queryCount,
+                                   Buffer* destination,
+                                   uint64_t destinationOffset) {
+            const std::vector<bool>& availability = querySet->GetQueryAvailability();
+
+            // Search unavailable queries
+            auto it = FindUnavailableQuery(availability, firstQuery, firstQuery + queryCount);
+
+            if (it == availability.begin() + firstQuery + queryCount) {
+                // All queries are available, resolve them at once.
+                device->fn.CmdCopyQueryPoolResults(
+                    commands, querySet->GetHandle(), firstQuery, queryCount,
+                    destination->GetHandle(), destinationOffset, sizeof(uint64_t),
+                    VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT);
+            } else {
+                uint32_t distance = std::distance(availability.begin() + firstQuery, it);
+                // The distance must be not greater than the remainning query count
+                ASSERT(distance <= queryCount);
+                // The first query is unavailable, move to next
+                if (distance == 0) {
+                    firstQuery++;
+                    queryCount--;
+                    destinationOffset += sizeof(uint64_t);
+                } else {
+                    // Resolve sparse queries. The value of distance is the number of consecutive
+                    // available queries.
+                    device->fn.CmdCopyQueryPoolResults(
+                        commands, querySet->GetHandle(), firstQuery, distance,
+                        destination->GetHandle(), destinationOffset, sizeof(uint64_t),
+                        VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT);
+
+                    firstQuery += distance;
+                    queryCount -= distance;
+                    destinationOffset += distance * sizeof(uint64_t);
+                }
+
+                // There're remainning queries need to be resolved
+                if (queryCount != 0) {
+                    RecordResolveQuerySet(commands, device, querySet, firstQuery, queryCount,
+                                          destination, destinationOffset);
+                }
+            }
+        }
+
     }  // anonymous namespace
 
     // static
@@ -731,10 +788,21 @@ namespace dawn_native { namespace vulkan {
                         cmd->queryCount * sizeof(uint64_t));
                     destination->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
-                    device->fn.CmdCopyQueryPoolResults(
-                        commands, querySet->GetHandle(), cmd->firstQuery, cmd->queryCount,
-                        destination->GetHandle(), cmd->destinationOffset, sizeof(uint64_t),
-                        VK_QUERY_RESULT_64_BIT | VK_QUERY_RESULT_WAIT_BIT);
+                    // If there are unavailable queries in the range of [firstQuery, firstQuery +
+                    // queryCount], we can clear the destination buffer to 0, then resolve the
+                    // sparse queries in segments
+                    const std::vector<bool>& availability = querySet->GetQueryAvailability();
+                    if (FindUnavailableQuery(availability, cmd->firstQuery,
+                                             cmd->firstQuery + cmd->queryCount) !=
+                        availability.begin() + cmd->firstQuery + cmd->queryCount) {
+                        device->fn.CmdFillBuffer(commands, destination->GetHandle(),
+                                                 cmd->destinationOffset,
+                                                 cmd->queryCount * sizeof(uint64_t), 0u);
+                    }
+
+                    RecordResolveQuerySet(commands, device, querySet, cmd->firstQuery,
+                                          cmd->queryCount, destination, cmd->destinationOffset);
+
                     break;
                 }
 
