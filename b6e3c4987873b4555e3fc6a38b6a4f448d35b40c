@@ -16,6 +16,23 @@
       "message": "Waiting on https://chromium-review.googlesource.com/c/chromium/src/+/2676367, but PTAL",
       "revId": "b6e3c4987873b4555e3fc6a38b6a4f448d35b40c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe296f3_a232b18b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-05T08:52:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b6e3c4987873b4555e3fc6a38b6a4f448d35b40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
