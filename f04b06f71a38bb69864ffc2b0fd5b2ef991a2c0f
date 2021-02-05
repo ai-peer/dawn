@@ -33,6 +33,23 @@
       "message": "LGTM. The defaults are different, but the test changes do look fine.",
       "revId": "f04b06f71a38bb69864ffc2b0fd5b2ef991a2c0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a889f76_0e9f76d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-05T20:25:22Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "f04b06f71a38bb69864ffc2b0fd5b2ef991a2c0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
