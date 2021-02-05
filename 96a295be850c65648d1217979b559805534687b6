@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "96a295be850c65648d1217979b559805534687b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82fd6445_b7703107",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-05T08:54:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "96a295be850c65648d1217979b559805534687b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cce1de8_ced264ea",
+        "filename": "src/tests/unittests/validation/MultipleDeviceTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-05T08:54:56Z",
+      "side": 1,
+      "message": "nit: indentation of the WGSL looks off",
+      "revId": "96a295be850c65648d1217979b559805534687b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
