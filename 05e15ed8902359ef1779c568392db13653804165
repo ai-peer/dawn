@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a9674d_ca0b249d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Updated but still a WIP. Had a question about the BlendState",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5982cc87_b9d5cade",
@@ -65,6 +82,30 @@
       "writtenOn": "2021-01-23T01:57:35Z",
       "side": 1,
       "message": "Should be \"buffer count\"/\"buffers\" according to the latest spec (but we should confirm everyone likes that naming before we settle on it here)",
+      "range": {
+        "startLine": 1499,
+        "startChar": 22,
+        "endLine": 1499,
+        "endChar": 34
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66bf6048_d2120667",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1499,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5982cc87_b9d5cade",
       "range": {
         "startLine": 1499,
         "startChar": 22,
@@ -133,6 +174,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32c943dd_72cabb71",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1500,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11a59b6b_40d543ca",
+      "range": {
+        "startLine": 1500,
+        "startChar": 47,
+        "endLine": 1500,
+        "endChar": 78
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f3354c9_adb8f53a",
@@ -146,6 +211,24 @@
       "writtenOn": "2021-01-25T09:31:57Z",
       "side": 1,
       "message": "nit: we could just rename \"vertex buffer layout descriptor\" and add typedefs in the headers.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af1c7bbc_1376d036",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done in https://dawn-review.googlesource.com/c/dawn/+/40581",
+      "parentUuid": "4f3354c9_adb8f53a",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -173,6 +256,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d98f89d_1d593712",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1510,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b430c0cf_a388f748",
+      "range": {
+        "startLine": 1510,
+        "startChar": 44,
+        "endLine": 1510,
+        "endChar": 71
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "270f3135_6d21fd8e",
@@ -190,6 +297,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "453702ed_98a6e162",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1513,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done in https://dawn-review.googlesource.com/c/dawn/+/40581",
+      "parentUuid": "270f3135_6d21fd8e",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24630c29_61638fe1",
@@ -203,6 +328,24 @@
       "writtenOn": "2021-01-23T01:57:35Z",
       "side": 1,
       "message": "should default to triangle list",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49508c0f_b824857a",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1527,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24630c29_61638fe1",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -230,6 +373,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1d0bb5b_79be4702",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1542,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e570397_45b8b283",
+      "range": {
+        "startLine": 1542,
+        "startChar": 46,
+        "endLine": 1542,
+        "endChar": 75
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d6a4e59_04fc9776",
@@ -243,6 +410,30 @@
       "writtenOn": "2021-01-23T01:57:35Z",
       "side": 1,
       "message": "also renamed upstream",
+      "range": {
+        "startLine": 1568,
+        "startChar": 22,
+        "endLine": 1568,
+        "endChar": 36
+      },
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b6d5223_520ca979",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1568,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d6a4e59_04fc9776",
       "range": {
         "startLine": 1568,
         "startChar": 22,
@@ -290,6 +481,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63245dc0_8cdf47d2",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Changed, but doesn\u0027t this fall into the same category as the other non-optional items below? Since every member of the structure has defaults?",
+      "parentUuid": "192ad73d_1fb22ba1",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53c8fb10_7b0f525f",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -301,6 +510,24 @@
       "writtenOn": "2021-01-23T01:57:35Z",
       "side": 1,
       "message": "I don\u0027t think this needs to be pointerized - it\u0027s not optional, it defaults to the default value {} in JS.",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bccf460_a06ff731",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1618,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53c8fb10_7b0f525f",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -322,6 +549,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4bf45f1_f2dd7aa5",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1619,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8c068d0_807a8a5c",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7a64670_42b25a16",
@@ -335,6 +580,24 @@
       "writtenOn": "2021-01-23T01:57:35Z",
       "side": 1,
       "message": "same, not optional, defaults to {}",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88145739_8d128f59",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7a64670_42b25a16",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -370,6 +633,24 @@
       "side": 1,
       "message": "Yes, that\u0027s actually something we wanted to fix for a while (removing the pointer indirection for fragment) so we might as well do it now.",
       "parentUuid": "71a5d54d_51b2e339",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a28f6ed_753e75a9",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1621,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T23:36:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04451820_f74b0272",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
