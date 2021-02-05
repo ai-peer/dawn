@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b47b0a_e7ecd368",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-05T08:47:34Z",
+      "side": 1,
+      "message": "Can you look at whether a change is needed for the bindings assignment in ShaderModuleGL and make a test if a change is needed?",
+      "revId": "4846281d3680e1e34ffeebe556ca25c285bc1151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
