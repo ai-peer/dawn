@@ -405,13 +405,8 @@ namespace dawn_native {
                                                      uint64_t destinationOffset) {
             DeviceBase* device = encoder->GetDevice();
 
-            std::vector<uint32_t> availability;
-            auto it = encoder->GetQueryAvailabilityMap().find(querySet);
-            if (it != encoder->GetQueryAvailabilityMap().end()) {
-                availability = {it->second.begin(), it->second.end()};
-            } else {
-                availability.resize(querySet->GetQueryCount());
-            }
+            std::vector<uint32_t> availability{querySet->GetQueryAvailability().begin(),
+                                               querySet->GetQueryAvailability().end()};
 
             // Timestamp availability storage buffer
             BufferDescriptor availabilityDesc = {};
@@ -461,6 +456,9 @@ namespace dawn_native {
         if (GetDevice()->IsValidationEnabled()) {
             TrackUsedQuerySet(querySet);
         }
+
+        // Set the query at queryIndex to available for resolving in query set.
+        querySet->SetQueryAvailability(queryIndex, 1);
 
         // Gets the iterator for that querySet or create a new vector of bool set to false
         // if the querySet wasn't registered.
