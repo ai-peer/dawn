@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2697f3d_7ca2a184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-05T22:04:08Z",
+      "side": 1,
+      "message": "PTAL! First time I\u0027ve touched the generator, so I wouldn\u0027t be surprised if I\u0027m missed touching some file.\n\nThis is essentially part of https://dawn-review.googlesource.com/c/dawn/+/38600 but given that it was mucking with the generator code I felt it was safer and easier to review if I broke this bit out.",
+      "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
