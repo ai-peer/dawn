@@ -117,6 +117,10 @@ typedef struct WGPUChainedStruct {
 
 {% endfor %}
 
+{% for typeDef in by_category["typedef"] %}
+    typedef struct {{as_cType(typeDef.type.name)}} {{as_cType(typeDef.name)}};
+{% endfor %}
+
 #ifdef __cplusplus
 extern "C" {
 #endif

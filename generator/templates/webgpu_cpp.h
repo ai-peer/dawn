@@ -63,6 +63,10 @@ namespace wgpu {
         struct {{as_cppType(type.name)}};
     {% endfor %}
 
+    {% for typeDef in by_category["typedef"] %}
+        typedef struct {{as_cppType(typeDef.type.name)}} {{as_cppType(typeDef.name)}};
+    {% endfor %}
+
     template<typename Derived, typename CType>
     class ObjectBase {
       public:
