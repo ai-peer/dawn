@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee695278_43d7e467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-05T00:20:54Z",
+      "side": 1,
+      "message": "Waiting on https://chromium-review.googlesource.com/c/chromium/src/+/2676367, but PTAL",
+      "revId": "b6e3c4987873b4555e3fc6a38b6a4f448d35b40c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
