@@ -748,9 +748,9 @@ namespace dawn_native { namespace opengl {
                     const GLFormat& format = texture->GetGLFormat();
                     GLenum target = texture->GetGLTarget();
 
-                    // TODO(jiawei.shao@intel.com): support texture-to-buffer copy with compressed
-                    // texture formats.
-                    if (formatInfo.isCompressed) {
+                    // TODO(jiawei.shao@intel.com): support texture-to-buffer copy with
+                    // non-renderable texture formats.
+                    if (!formatInfo.isRenderable) {
                         UNREACHABLE();
                     }
 
