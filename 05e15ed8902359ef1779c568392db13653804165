@@ -499,6 +499,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60383532_867a3f8b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-06T01:46:15Z",
+      "side": 1,
+      "message": "no, in IDL this is\n\n GPUBlendState blend;\n\nas opposed to\n\n GPUBlendState blend \u003d {};\n\n. And note that GPUBlendComponent has default values but GPUBlendState does not.\n\nThis member is \"nullable\" because we use .blend\u003d\u003dundefined to mean \"blending is disabled\". Once upon a time, we represented this with the default values (\u0027one\u0027, \u0027zero\u0027, \u0027add\u0027), but there was some reason that we had to add explicit blend enable/disable.\n\nIn C we could remove the indirection by adding a member \"bool enabled\" to WGPUBlendState. If we do that we should probably validate that \"if not .enabled, .color and .alpha must be set to defaults\" to avoid confusion.",
+      "parentUuid": "63245dc0_8cdf47d2",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53c8fb10_7b0f525f",
         "filename": "dawn.json",
         "patchSetId": 1
