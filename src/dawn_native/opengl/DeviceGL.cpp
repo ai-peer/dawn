@@ -68,6 +68,12 @@ namespace dawn_native { namespace opengl {
         // TODO(crbug.com/dawn/582): Use OES_draw_buffers_indexed where available.
         bool supportsIndexedDrawBuffers = gl.IsAtLeastGLES(3, 2) || gl.IsAtLeastGL(3, 0);
 
+        bool supportsStencilCopy =
+            gl.IsGLExtensionSupported("NV_stencil_read") || gl.IsAtLeastGL(3, 0);
+
+        bool supportsSnormCopy =
+            gl.IsGLExtensionSupported("EXT_render_snorm") || gl.IsAtLeastGL(4, 4);
+
         // TODO(crbug.com/dawn/343): We can support the extension variants, but need to load the EXT
         // procs without the extension suffix.
         // We'll also need emulation of shader builtins gl_BaseVertex and gl_BaseInstance.
@@ -86,6 +92,8 @@ namespace dawn_native { namespace opengl {
         SetToggle(Toggle::DisableBaseVertex, !supportsBaseVertex);
         SetToggle(Toggle::DisableBaseInstance, !supportsBaseInstance);
         SetToggle(Toggle::DisableIndexedDrawBuffers, !supportsIndexedDrawBuffers);
+        SetToggle(Toggle::DisableStencilCopy, !supportsStencilCopy);
+        SetToggle(Toggle::DisableSnormCopy, !supportsSnormCopy);
         SetToggle(Toggle::FlushBeforeClientWaitSync, gl.GetVersion().IsES());
     }
 
