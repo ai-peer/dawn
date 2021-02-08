@@ -519,6 +519,11 @@ namespace dawn_native { namespace opengl {
             gl.DeleteFramebuffers(1, &readFBO);
             gl.DeleteFramebuffers(1, &drawFBO);
         }
+        bool TextureFormatIsSnorm(wgpu::TextureFormat format) {
+            return format == wgpu::TextureFormat::RGBA8Snorm ||
+                   format == wgpu::TextureFormat::RG8Snorm ||
+                   format == wgpu::TextureFormat::R8Snorm;
+        }
     }  // namespace
 
     CommandBuffer::CommandBuffer(CommandEncoder* encoder, const CommandBufferDescriptor* descriptor)
@@ -752,9 +757,11 @@ namespace dawn_native { namespace opengl {
                     const GLFormat& format = texture->GetGLFormat();
                     GLenum target = texture->GetGLTarget();
 
-                    // TODO(jiawei.shao@intel.com): support texture-to-buffer copy with compressed
-                    // texture formats.
-                    if (formatInfo.isCompressed) {
+                    // TODO(jiawei.shao@intel.com): support texture-to-buffer copy with
+                    // non-renderable texture formats.
+                    if (formatInfo.isCompressed ||
+                        (TextureFormatIsSnorm(formatInfo.format) &&
+                         GetDevice()->IsToggleEnabled(Toggle::DisableSnormCopy))) {
                         UNREACHABLE();
                     }
 

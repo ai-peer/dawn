@@ -1427,6 +1427,10 @@ TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
 // This is a regression test for crbug.com/dawn/451 where the lazy texture
 // init path on D3D12 had a divide-by-zero exception in the copy split logic.
 TEST_P(TextureZeroInitTest, CopyTextureToBufferNonRenderableUnaligned) {
+    // TODO(crbug.com/dawn/667): GL and GLES do not support texture-to-buffer copies of
+    // non-renderable formats, and Snorm is non-renderable on some platforms.
+    DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_snorm_copy"));
+
     wgpu::TextureDescriptor descriptor;
     descriptor.size.width = kUnalignedSize;
     descriptor.size.height = kUnalignedSize;
