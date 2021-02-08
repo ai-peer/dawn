@@ -517,6 +517,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e8ecdd2a_03f845c6",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T13:24:03Z",
+      "side": 1,
+      "message": "I have a slight preference for the `bool enabled` because it reduces the number of indirections in the C/C++ API but both options are fine (the const* or additional bool). We should check with Dzmitry in webgpu-native.",
+      "parentUuid": "60383532_867a3f8b",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53c8fb10_7b0f525f",
         "filename": "dawn.json",
         "patchSetId": 1
