@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5d84f09_68394688",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-08T18:38:41Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 9
+      },
+      "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "10b11747_064116e2",
@@ -14,6 +37,23 @@
       "writtenOn": "2021-02-08T15:39:59Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323a42af_556c896e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-08T18:38:41Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
