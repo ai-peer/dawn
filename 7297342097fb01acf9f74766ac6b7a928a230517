@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bca86bcc_fe19191c",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T18:17:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "974f7d41_e2b40c5c",
+      "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a4e9ee1_b22d92a2",
