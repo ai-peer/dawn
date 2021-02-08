@@ -64,6 +64,10 @@ namespace dawn_native {
 
     {% endfor %}
 
+    {% for typeDef in by_category["typedef"] %}
+        typedef {{as_cppType(typeDef.type.name)}} {{as_cppType(typeDef.name)}};
+    {% endfor %}
+
 } // namespace dawn_native
 
 #endif  // DAWNNATIVE_WGPU_STRUCTS_H_
