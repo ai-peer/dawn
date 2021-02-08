@@ -16,6 +16,80 @@
       "message": "PTAL! First time I\u0027ve touched the generator, so I wouldn\u0027t be surprised if I\u0027m missed touching some file.\n\nThis is essentially part of https://dawn-review.googlesource.com/c/dawn/+/38600 but given that it was mucking with the generator code I felt it was safer and easier to review if I broke this bit out.",
       "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9cf67f6_e5367184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T13:19:44Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c89fba07_9f2a3247",
+        "filename": "generator/templates/dawn_native/wgpu_structs.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T13:19:44Z",
+      "side": 1,
+      "message": "nit: using Foo \u003d FormerFoo;",
+      "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f15dadca_5b403b9f",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T13:19:44Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these be marked as deprecated? Do we see other uses of typedef for non-deprecated constructs?",
+      "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a4e9ee1_b22d92a2",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T13:19:44Z",
+      "side": 1,
+      "message": "nit: using Foo \u003d FormerFoo;",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 23
+      },
+      "revId": "7297342097fb01acf9f74766ac6b7a928a230517",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
