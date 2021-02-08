@@ -25,6 +25,7 @@
 // identifiers in internal code. It should never be included in something that is part of the public
 // interface.
 #include <X11/Xlib.h>
+#include <X11/Xlib-xcb.h>
 
 #undef Success
 #undef None
