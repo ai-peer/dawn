@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69ba4c1d_8bf6956f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T14:52:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a81dd0b_f592133b",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T14:52:37Z",
+      "side": 1,
+      "message": "Can we remove this TODO and say that these copies are not supported by GLES3.1 so not implemented? (which should raise a validation error). We could add that info to the GL-specific format table.",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0649826c_26c90a71",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-08T14:52:37Z",
+      "side": 1,
+      "message": "Can we move this logic in a helper shared between tests and update the comment now that we know why it fails? ditto in the rest of the file.",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
