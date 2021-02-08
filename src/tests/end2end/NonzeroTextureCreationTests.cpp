@@ -117,6 +117,8 @@ TEST_P(NonzeroTextureCreationTests, ArrayLayerClears) {
 
 // Test that nonrenderable texture formats clear 0x01 because toggle is enabled
 TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
+    DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_snorm_read"));
+
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
     descriptor.size.width = kSize;
@@ -151,6 +153,8 @@ TEST_P(NonzeroTextureCreationTests, NonrenderableTextureFormat) {
 // Test that textures with more than 1 array layers and nonrenderable texture formats clear to 0x01
 // because toggle is enabled
 TEST_P(NonzeroTextureCreationTests, NonRenderableTextureClearWithMultiArrayLayers) {
+    DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_snorm_read"));
+
     wgpu::TextureDescriptor descriptor;
     descriptor.dimension = wgpu::TextureDimension::e2D;
     descriptor.size.width = kSize;
