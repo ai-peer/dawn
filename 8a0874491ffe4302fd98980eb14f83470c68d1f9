@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9e061ac_a181fb0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-08T18:33:30Z",
+      "side": 1,
+      "message": "PTAnotherL. Thanks!\n\nIn trying to satisfy all the configs, this CL has changed a bit.\n",
+      "revId": "8a0874491ffe4302fd98980eb14f83470c68d1f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
