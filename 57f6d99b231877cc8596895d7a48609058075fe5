@@ -107,6 +107,23 @@
       "message": "LGTM!",
       "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1a7b46_aaff5f3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T11:07:10Z",
+      "side": 1,
+      "message": "Thanks, I\u0027ll assume that last one was +2 :)",
+      "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
