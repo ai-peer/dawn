@@ -33,6 +33,46 @@
       "message": "Tested dawn:662 cannot be reproduced with this CL.\n\nOS: Ubunut 20.04.1 LTS\nGPU: Intel HD Graphics 630\nVulkan Driver: Mesa 20.2.6",
       "revId": "112192673f0f4f13f21222b94c0223463b703805",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d9ca336_f3909d68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-09T06:12:18Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "112192673f0f4f13f21222b94c0223463b703805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dd0ec19_39a94eb7",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-09T06:12:18Z",
+      "side": 1,
+      "message": "in CMakeLists.txt we likely need to find_package(X11_XCB)",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 16
+      },
+      "revId": "112192673f0f4f13f21222b94c0223463b703805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
