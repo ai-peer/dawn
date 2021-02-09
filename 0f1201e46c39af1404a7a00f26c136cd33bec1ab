@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67436ba1_5e4a0b7a",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T18:18:45Z",
+      "side": 1,
+      "message": "Ack, we can do the GLFormat change when this bug is addressed.",
+      "parentUuid": "d66f9b2c_8e15f312",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0649826c_26c90a71",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "I\u0027m happy to refactor, but I was actually wrong about this. It\u0027s really a bug in the Intel drivers, since SNORM is supposed to be readable in OpenGL 4.5 (which Intel\u0027s driver supports), and their GLES driver claims to support EXT_render_snorm. I\u0027ve separated out the Intel workaround from the renderability issue.",
       "parentUuid": "6ca51258_b1ff1ebd",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99443038_72cd86d2",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T18:18:45Z",
+      "side": 1,
+      "message": "Gotcha, maybe it is the same bug and should be linked in all these skips? Otherwise LGTM",
+      "parentUuid": "3fe3be50_4edc9af3",
       "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
