@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bab8961c_474bbfe5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002296
+      },
+      "writtenOn": "2021-02-09T15:06:11Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 6
+      },
+      "revId": "5de2318403d06ecee91afbfdc36610828eb93b55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d65f91d_9a62c182",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002296
+      },
+      "writtenOn": "2021-02-09T15:06:11Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 188,
+        "startChar": 107,
+        "endLine": 188,
+        "endChar": 110
+      },
+      "revId": "5de2318403d06ecee91afbfdc36610828eb93b55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8280a1a5_e76bfc18",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1002296
+      },
+      "writtenOn": "2021-02-09T15:06:11Z",
+      "side": 1,
+      "message": "typo",
+      "range": {
+        "startLine": 188,
+        "startChar": 136,
+        "endLine": 188,
+        "endChar": 140
+      },
+      "revId": "5de2318403d06ecee91afbfdc36610828eb93b55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
