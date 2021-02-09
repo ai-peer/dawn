@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "61a580a15920819ef921b7443934dca185c6a801",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66797c44_d185591e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-09T18:30:21Z",
+      "side": 1,
+      "message": "I also think it would be a good idea to run fuzzer \"smoke\" tests that build and run the fuzzers for like idk 1 or 2 or 10 iterations just to check nothing is terribly wrong.",
+      "revId": "61a580a15920819ef921b7443934dca185c6a801",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
