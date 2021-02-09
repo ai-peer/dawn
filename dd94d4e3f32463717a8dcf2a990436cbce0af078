@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab8432f_4a6ec82d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-09T17:36:56Z",
+      "side": 1,
+      "message": "LGTM; I guess the CTS needs updating.",
+      "revId": "dd94d4e3f32463717a8dcf2a990436cbce0af078",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
