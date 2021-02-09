@@ -16,6 +16,23 @@
       "message": "LGTM; I guess the CTS needs updating.",
       "revId": "dd94d4e3f32463717a8dcf2a990436cbce0af078",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da2e452c_4b712c83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T18:07:12Z",
+      "side": 1,
+      "message": "Yeah I have a CL in progress, I\u0027ll suppress the tests that fail in the meantime.",
+      "revId": "dd94d4e3f32463717a8dcf2a990436cbce0af078",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
