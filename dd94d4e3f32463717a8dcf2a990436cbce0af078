@@ -33,6 +33,23 @@
       "message": "Yeah I have a CL in progress, I\u0027ll suppress the tests that fail in the meantime.",
       "revId": "dd94d4e3f32463717a8dcf2a990436cbce0af078",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16eae72e_2b7d9289",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-09T20:43:25Z",
+      "side": 1,
+      "message": "LGTM2 up to my understanding",
+      "revId": "dd94d4e3f32463717a8dcf2a990436cbce0af078",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
