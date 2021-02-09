@@ -90,6 +90,23 @@
       "message": "Great! Jiawei PTAL with Hao\u0027s confirmation this fixes the issue!",
       "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58281254_c1bc4740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-09T11:06:35Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
