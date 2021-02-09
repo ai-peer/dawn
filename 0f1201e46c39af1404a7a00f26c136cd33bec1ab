@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48c5d8a8_721c12c2",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T10:40:01Z",
+      "side": 1,
+      "message": "This hasn\u0027t really been addressed.",
+      "parentUuid": "5a81dd0b_f592133b",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0649826c_26c90a71",
         "filename": "src/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 12
@@ -48,6 +66,24 @@
       "writtenOn": "2021-02-08T14:52:37Z",
       "side": 1,
       "message": "Can we move this logic in a helper shared between tests and update the comment now that we know why it fails? ditto in the rest of the file.",
+      "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca51258_b1ff1ebd",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T10:40:01Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "0649826c_26c90a71",
       "revId": "0f1201e46c39af1404a7a00f26c136cd33bec1ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
