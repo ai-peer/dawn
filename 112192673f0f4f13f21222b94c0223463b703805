@@ -73,6 +73,30 @@
       },
       "revId": "112192673f0f4f13f21222b94c0223463b703805",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c09fa4c_13dcfe6c",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T10:35:33Z",
+      "side": 1,
+      "message": "Done, PTAL again at the CMake part.",
+      "parentUuid": "3dd0ec19_39a94eb7",
+      "range": {
+        "startLine": 300,
+        "startChar": 0,
+        "endLine": 300,
+        "endChar": 16
+      },
+      "revId": "112192673f0f4f13f21222b94c0223463b703805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
