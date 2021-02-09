@@ -770,8 +770,9 @@ TEST_P(StorageTextureTests, ReadonlyStorageTextureInVertexShader) {
 
 // Test that read-only storage textures are supported in fragment shader.
 TEST_P(StorageTextureTests, ReadonlyStorageTextureInFragmentShader) {
-    // TODO(crbug.com/dawn/624): this test fails on GLES. Investigate why.
-    DAWN_SKIP_TEST_IF(IsOpenGLES());
+    // TODO(crbug.com/dawn/672): Investigate why this test fails on Linux
+    // NVidia OpenGLES drivers.
+    DAWN_SKIP_TEST_IF(IsNvidia() && IsLinux() && IsOpenGLES());
 
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
@@ -807,14 +808,15 @@ TEST_P(StorageTextureTests, ReadonlyStorageTextureInFragmentShader) {
 
 // Test that write-only storage textures are supported in compute shader.
 TEST_P(StorageTextureTests, WriteonlyStorageTextureInComputeShader) {
-    // TODO(crbug.com/dawn/647): diagnose and fix this OpenGL ES failure.
-    DAWN_SKIP_TEST_IF(IsOpenGLES());
-
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
         }
-        if (!OpenGLESSupportsStorageTexture(format)) {
+        if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
+            continue;
+        }
+
+        if (format == wgpu::TextureFormat::RGBA8Snorm && HasToggleEnabled("disable_snorm_read")) {
             continue;
         }
 
@@ -878,14 +880,19 @@ TEST_P(StorageTextureTests, ReadWriteDifferentStorageTextureInOneDispatchInCompu
 
 // Test that write-only storage textures are supported in fragment shader.
 TEST_P(StorageTextureTests, WriteonlyStorageTextureInFragmentShader) {
-    // TODO(crbug.com/dawn/647): diagnose and fix this OpenGL ES failure.
-    DAWN_SKIP_TEST_IF(IsOpenGLES());
+    // TODO(crbug.com/dawn/672): Investigate why this test fails on Linux
+    // NVidia OpenGLES drivers.
+    DAWN_SKIP_TEST_IF(IsNvidia() && IsLinux() && IsOpenGLES());
 
     for (wgpu::TextureFormat format : utils::kAllTextureFormats) {
         if (!utils::TextureFormatSupportsStorageTexture(format)) {
             continue;
         }
         if (IsOpenGLES() && !OpenGLESSupportsStorageTexture(format)) {
+            continue;
+        }
+
+        if (format == wgpu::TextureFormat::RGBA8Snorm && HasToggleEnabled("disable_snorm_read")) {
             continue;
         }
 
@@ -1040,9 +1047,6 @@ TEST_P(StorageTextureTests, ReadonlyAndWriteonlyStorageTexturePingPong) {
 // Test that multiple dispatches to increment values by ping-ponging between a sampled texture and
 // a write-only storage texture are synchronized in one pass.
 TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
-    // TODO(crbug.com/dawn/636): diagnose and fix this failure on OpenGL ES
-    DAWN_SKIP_TEST_IF(IsOpenGLES());
-
     constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::R32Uint;
     wgpu::Texture storageTexture1 = CreateTexture(
         kTextureFormat,
