@@ -91,4 +91,12 @@ namespace dawn_native {
         return {};
     }
 
+    void AdapterBase::ResetDeviceInternal() {
+        mInstance->ConsumedError(ResetDeviceInternalImpl());
+    }
+
+    MaybeError AdapterBase::ResetDeviceInternalImpl() {
+        return {};
+    }
+
 }  // namespace dawn_native

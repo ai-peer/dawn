@@ -216,4 +216,14 @@ namespace dawn_native { namespace d3d12 {
         return Device::Create(this, descriptor);
     }
 
+    // Resets the backend device and creates a new one. If any D3D12 objects belonging to the
+    // current ID3D12Device have not been destroyed, a new device will not be created and instead a
+    // handle to the previous device will be returned upon D3D12CreateDevice().
+    MaybeError Adapter::ResetDeviceInternalImpl() {
+        mD3d12Device.Reset();
+        DAWN_TRY(Initialize());
+
+        return {};
+    }
+
 }}  // namespace dawn_native::d3d12
