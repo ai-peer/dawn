@@ -73,6 +73,23 @@
       "message": "Tested dawn:671 cannot be reproduced with this CL.\n\nOS: Ubunut 20.04.1 LTS\nGPU: Intel HD Graphics 630\nVulkan Driver: Mesa 20.2.6",
       "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00c4b116_b61ba865",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-09T10:06:02Z",
+      "side": 1,
+      "message": "Great! Jiawei PTAL with Hao\u0027s confirmation this fixes the issue!",
+      "revId": "57f6d99b231877cc8596895d7a48609058075fe5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
