@@ -29,7 +29,9 @@ namespace dawn_native {
         // TODO(jiawei.shao@intel.com): implement texture view format compatibility rule
         MaybeError ValidateTextureViewFormatCompatibility(const TextureBase* texture,
                                                           const TextureViewDescriptor* descriptor) {
-            if (texture->GetFormat().GetAspectFormat(descriptor->aspect) != descriptor->format) {
+            if (texture->GetFormat().format != descriptor->format &&
+                texture->GetFormat().GetAspectInfo(descriptor->aspect).format !=
+                    descriptor->format) {
                 return DAWN_VALIDATION_ERROR(
                     "The format of texture view is not compatible to the original texture");
             }
@@ -357,7 +359,7 @@ namespace dawn_native {
         }
 
         if (desc.format == wgpu::TextureFormat::Undefined) {
-            desc.format = texture->GetFormat().GetAspectFormat(desc.aspect);
+            desc.format = texture->GetFormat().format;
         }
         if (desc.arrayLayerCount == 0) {
             desc.arrayLayerCount = texture->GetArrayLayers() - desc.baseArrayLayer;
