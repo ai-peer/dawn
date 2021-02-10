@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8aac1351_2240c9e5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-10T07:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a741cf7b_19e7b4dc",
+      "revId": "043b9399a03e75ad8b91dad03b7d2519515ca36c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "341eff2f_85d1b2ed",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 7
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b12682b_4b07ba6b",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-10T07:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad66d47a_a0b9d13d",
+      "revId": "043b9399a03e75ad8b91dad03b7d2519515ca36c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "449fe3b3_89f8f9fe",
@@ -82,6 +118,30 @@
       "writtenOn": "2021-02-08T13:43:40Z",
       "side": 1,
       "message": "nit: availability.size() just to be safe (it should the same value but it makes it more clear we\u0027re not reading out of bounds when reading the code of this function)",
+      "range": {
+        "startLine": 418,
+        "startChar": 51,
+        "endLine": 418,
+        "endChar": 76
+      },
+      "revId": "043b9399a03e75ad8b91dad03b7d2519515ca36c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a337c30_2051628d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 418,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-10T07:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "449fe3b3_89f8f9fe",
       "range": {
         "startLine": 418,
         "startChar": 51,
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46cab926_10623a17",
+        "filename": "src/dawn_native/QuerySet.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-10T07:14:00Z",
+      "side": 1,
+      "message": "Prepare for quert reset, we can set them in a range.\n\nRemove it here, and will add it back when we need it.",
+      "parentUuid": "bbe3a17a_678c9bb5",
+      "range": {
+        "startLine": 39,
+        "startChar": 64,
+        "endLine": 39,
+        "endChar": 84
+      },
+      "revId": "043b9399a03e75ad8b91dad03b7d2519515ca36c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50325234_32f15c34",
@@ -128,6 +212,24 @@
       "writtenOn": "2021-02-08T13:43:40Z",
       "side": 1,
       "message": "In general we try to avoid unbounded recursion like this because it can cause crashes by stackoverflow for example with a large querySet where only odd queries are available. Can you turn this algorithm into a while loop?\n\n auto currentIt \u003d availability.begin() + firstQuery;\n auto lastIt \u003d availability.begin() + firstQuery + queryCount;\n\n while (currentIt !\u003d lastIt) {\n     auto firstTrueIt \u003d std::find(currentIt, lastIt, true);\n     auto nextFalseIt \u003d std::find(firstTrueIt, lastIt, false);\n\n     // resolve between firstTrueIt and nextFalseIt (which is at most lastIt)\n\n     currentIt \u003d nextFalseIt;\n }\n\nThis would also remove the need to special case the case when all queries are avilable.",
+      "revId": "043b9399a03e75ad8b91dad03b7d2519515ca36c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de13f511_b5b05aea",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-10T07:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50325234_32f15c34",
       "revId": "043b9399a03e75ad8b91dad03b7d2519515ca36c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
