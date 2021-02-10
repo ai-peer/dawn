@@ -203,6 +203,7 @@ namespace dawn_native { namespace d3d12 {
                     return DXGI_FORMAT_BC7_TYPELESS;
 
                 case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                case wgpu::TextureFormat::Stencil8:
                 case wgpu::TextureFormat::Undefined:
                     UNREACHABLE();
             }
@@ -328,6 +329,7 @@ namespace dawn_native { namespace d3d12 {
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
                 return DXGI_FORMAT_NV12;
 
+            case wgpu::TextureFormat::Stencil8:
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }
@@ -1098,7 +1100,27 @@ namespace dawn_native { namespace d3d12 {
         // Per plane view formats must have the plane slice number be the index of the plane in the
         // array of textures.
         if (texture->GetFormat().IsMultiPlanar()) {
-            planeSlice = GetAspectIndex(ConvertViewAspect(GetFormat(), descriptor->aspect));
+            switch (descriptor->format) {
+                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                    switch (descriptor->aspect) {
+                        case wgpu::TextureAspect::Plane0Only:
+                            planeSlice = 0;
+                            mSrvDesc.Format = DXGI_FORMAT_R8_UNORM;
+                            break;
+                        case wgpu::TextureAspect::Plane1Only:
+                            planeSlice = 1;
+                            mSrvDesc.Format = DXGI_FORMAT_R8G8_UNORM;
+                            break;
+                        default:
+                            // Non plane view into a multi-planar texture cannot be sampled.
+                            mSrvDesc.Format = DXGI_FORMAT_UNKNOWN;
+                            break;
+                    }
+                    break;
+                default:
+                    UNREACHABLE();
+                    break;
+            }
         }
 
         // Currently we always use D3D12_TEX2D_ARRAY_SRV because we cannot specify base array layer
