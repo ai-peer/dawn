@@ -93,19 +93,39 @@ namespace dawn_native { namespace opengl {
             if (texture->GetArrayLayers() == 1) {
                 const uint8_t* d = static_cast<const uint8_t*>(data);
                 for (uint32_t y = 0; y < writeSizePixel.height; ++y) {
-                    gl.TexSubImage2D(target, destination.mipLevel, destination.origin.x,
-                                     destination.origin.y + y, writeSizePixel.width, 1,
-                                     format.format, format.type, d);
+                    if (texture->GetFormat().isCompressed) {
+                        size_t copyDataSizePerBlockRow =
+                            (writeSizePixel.width / blockInfo.width) * blockInfo.byteSize;
+                        gl.CompressedTexSubImage2D(
+                            target, destination.mipLevel, destination.origin.x,
+                            destination.origin.y + y * blockInfo.height, writeSizePixel.width,
+                            blockInfo.height, format.internalFormat, copyDataSizePerBlockRow, d);
+                    } else {
+                        gl.TexSubImage2D(target, destination.mipLevel, destination.origin.x,
+                                         destination.origin.y + y, writeSizePixel.width, 1,
+                                         format.format, format.type, d);
+                    }
                     d += dataLayout.bytesPerRow;
                 }
             } else {
                 const uint8_t* slice = static_cast<const uint8_t*>(data);
+                size_t copyDataSizePerBlockRow =
+                    (writeSizePixel.width / blockInfo.width) * blockInfo.byteSize;
                 for (uint32_t z = 0; z < writeSizePixel.depth; ++z) {
                     const uint8_t* d = slice;
-                    for (uint32_t y = 0; y < writeSizePixel.height; ++y) {
-                        gl.TexSubImage3D(target, destination.mipLevel, destination.origin.x,
-                                         destination.origin.y + y, destination.origin.z + z,
-                                         writeSizePixel.width, 1, 1, format.format, format.type, d);
+                    for (uint32_t y = 0; y < writeSizePixel.height / blockInfo.height; ++y) {
+                        if (texture->GetFormat().isCompressed) {
+                            gl.CompressedTexSubImage3D(
+                                target, destination.mipLevel, destination.origin.x,
+                                destination.origin.y + y * blockInfo.height,
+                                destination.origin.z + z, writeSizePixel.width, blockInfo.height, 1,
+                                format.internalFormat, copyDataSizePerBlockRow, d);
+                        } else {
+                            gl.TexSubImage3D(target, destination.mipLevel, destination.origin.x,
+                                             destination.origin.y + y, destination.origin.z + z,
+                                             writeSizePixel.width, 1, 1, format.format, format.type,
+                                             d);
+                        }
                         d += dataLayout.bytesPerRow;
                     }
                     slice += dataLayout.rowsPerImage * dataLayout.bytesPerRow;
