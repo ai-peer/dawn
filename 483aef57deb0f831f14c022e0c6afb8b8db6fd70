@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e80515e4_54fe969b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T08:23:33Z",
+      "side": 1,
+      "message": "Is that true? I thought there was a standard C layout.",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f295dc81_a5afbec0",
@@ -14,6 +31,23 @@
       "writtenOn": "2021-02-11T07:25:27Z",
       "side": 1,
       "message": "PTAL. I don\u0027t think we can remove it entirely though. Some of the webgpu.h APIs take size_t.\nMaybe we can do it for GetCmdSpace, GetRequiredSize, etc. but that\u0027s a separate more involved patch to do overflow checks.",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26e0b9a_9c9bda77",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T08:23:33Z",
+      "side": 1,
+      "message": "I\u0027m not sure this is the correct approach: there are only a couple places where size_t is used in the wire commands: QueueWriteBuffer/Texture (which could become u32 and fail in the client if that\u0027s not the case) and BufferMapAsync that could be using u64 with the narrowing check done in the handler/doer. It would make size a bunch simpler and would allow blamket disallowing size_t in WireCmd.cpp by #define size_t dontUseSizeTInThisFile.",
       "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
