@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73abc08a_a2aa61d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T21:29:04Z",
+      "side": 1,
+      "message": "LGTM. We could also destroy the instance and recreate it. This would have a bigger startup cost for each test though, so if it\u0027s too significant, please disregard this suggestion. If it\u0027s not so bad though, this would be a clean way to do the reset without adding additional public APIs.",
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89333ca7_cb5d1696",
@@ -19,6 +36,29 @@
         "startChar": 8,
         "endLine": 223,
         "endChar": 29
+      },
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17037b8c_99c1a973",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T21:29:04Z",
+      "side": 1,
+      "message": "let\u0027s suffix the name with \"ForTesting\"",
+      "range": {
+        "startLine": 641,
+        "startChar": 24,
+        "endLine": 641,
+        "endChar": 43
       },
       "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
