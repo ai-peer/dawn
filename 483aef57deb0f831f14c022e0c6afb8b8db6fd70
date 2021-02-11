@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f295dc81_a5afbec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T07:25:27Z",
+      "side": 1,
+      "message": "PTAL. I don\u0027t think we can remove it entirely though. Some of the webgpu.h APIs take size_t.\nMaybe we can do it for GetCmdSpace, GetRequiredSize, etc. but that\u0027s a separate more involved patch to do overflow checks.",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
