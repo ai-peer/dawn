@@ -219,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "980cc0db_529ee09c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T21:47:41Z",
+      "side": 1,
+      "message": "You mean the check at [1] ?\n\nMaybe we should can it as:\n\n // Aspects are all present in the base format\n SelectFormatAspects(texture-\u003eGetFormat(), viewDesc-\u003easpect) is a subset of texture-\u003eGetFormat().aspects\n\n and\n \n // And the selected planar format is the same as the view format.\n // One day this will be \"compatible with\".\n texture-\u003eGetFormat().GetAspectInfo(viewDesc-\u003easpect).format \u003d\u003d\n                        viewDesc-\u003eformat",
+      "parentUuid": "4925d17b_609ec246",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb4fb8d2_3ad6c171",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 6

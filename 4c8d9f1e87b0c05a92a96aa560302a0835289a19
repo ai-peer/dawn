@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4064c81d_38078f17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T21:47:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e233d332_39bdede0",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T21:47:41Z",
+      "side": 1,
+      "message": "nit: prefer * instead of \u0026",
+      "range": {
+        "startLine": 183,
+        "startChar": 22,
+        "endLine": 183,
+        "endChar": 23
+      },
+      "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf2d381f_8cfa60d7",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T21:47:41Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 32,
+        "startChar": 12,
+        "endLine": 41,
+        "endChar": 13
+      },
+      "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
