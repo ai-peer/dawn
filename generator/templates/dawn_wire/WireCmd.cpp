@@ -80,6 +80,7 @@
             {%- endif -%}
         ));
     {%- else -%}
+        static_assert(sizeof({{out}}) >= sizeof({{in}}), "Deserialize assignment may not narrow");
         {{out}} = {{in}};
     {%- endif -%}
 {% endmacro %}
@@ -124,7 +125,7 @@ namespace {
 
         //* const char* have their length embedded directly in the command.
         {% for member in members if member.length == "strlen" %}
-            size_t {{as_varName(member.name)}}Strlen;
+            uint64_t {{as_varName(member.name)}}Strlen;
         {% endfor %}
 
         {% for member in members if member.optional and member.annotation != "value" and member.type.category != "object" %}
@@ -326,7 +327,9 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-                size_t stringLength = transfer->{{memberName}}Strlen;
+                size_t stringLength;
+                DESERIALIZE_TRY(TryAssign(&stringLength, transfer->{{memberName}}Strlen));
+
                 const volatile char* stringInBuffer = nullptr;
                 DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, stringLength, &stringInBuffer));
 
@@ -455,6 +458,37 @@ namespace dawn_wire {
     }
 
     namespace {
+
+        template <typename Out, typename In, bool MayNarrow = sizeof(Out) < sizeof(In)>
+        struct TryAssignImpl {
+            static DeserializeResult Call(Out* out, const In& in);
+        };
+
+        // TryAssignImpl where there is no narrowing. We can assign without checking.
+        template <typename Out, typename In>
+        struct TryAssignImpl<Out, In, /* MayNarrow */ false> {
+            static DeserializeResult Call(Out* out, const In& in)  {
+                *out = in;
+                return DeserializeResult::Success;
+            }
+        };
+
+        // TryAssignImpl where In may be larger than Out.
+        template <typename Out, typename In>
+        struct TryAssignImpl<Out, In, /* MayNarrow */ true> {
+            static DeserializeResult Call(Out* out, const In& in) {
+                if (in > std::numeric_limits<Out>::max()) {
+                    return DeserializeResult::FatalError;
+                }
+                *out = in;
+                return DeserializeResult::Success;
+            }
+        };
+
+        template <typename Out, typename In>
+        DeserializeResult TryAssign(Out* out, const In& in) {
+            return TryAssignImpl<Out, In>::Call(out, in);
+        }
 
         // Consumes from (buffer, size) enough memory to contain T[count] and return it in data.
         // Returns FatalError if not enough memory was available
