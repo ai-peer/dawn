@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cf6ddcc_5e9baba5",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T21:08:43Z",
+      "side": 1,
+      "message": "Moved to ValidateTextureViewFormatCompatibility for \"all\" views check.",
+      "parentUuid": "5ccde565_26ebc001",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec27acc9_5a668380",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d9e5202_88bcc099",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T21:08:43Z",
+      "side": 1,
+      "message": "Unsupported SGTM.",
+      "parentUuid": "951fba7e_f9c39c37",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 46
+      },
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbaca261_6512e2c7",
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12fba41_e4369263",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T21:08:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbaca261_6512e2c7",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66b9d4b1_a0fcb558",
@@ -88,6 +148,30 @@
       "writtenOn": "2021-02-11T12:50:57Z",
       "side": 1,
       "message": "nit: comment needs to be changed for kMaxPlanesPerFormat",
+      "range": {
+        "startLine": 78,
+        "startChar": 64,
+        "endLine": 79,
+        "endChar": 44
+      },
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e0dc5e_d1cc00b3",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T21:08:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66b9d4b1_a0fcb558",
       "range": {
         "startLine": 78,
         "startChar": 64,
@@ -117,6 +201,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4925d17b_609ec246",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T21:08:43Z",
+      "side": 1,
+      "message": "I discovered TextureView relies on a behavior of expecting the multi planar format for the view format then re-mapping the per plane format by aspect upon creation. \n\nIf I reverse this, I would also need to modify all the backends; in particular, for depth-stencil.",
+      "parentUuid": "e5c541a2_c3c0155b",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb4fb8d2_3ad6c171",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 6
@@ -128,6 +230,24 @@
       "writtenOn": "2021-02-11T12:50:57Z",
       "side": 1,
       "message": "Can\u0027t this stay the following: ?\n\n  aspect \u003d ConvertViewAspect()\n  planeSlice \u003d GetAspectIndex(aspect);\n  format \u003d ToDXGIFormat(GetFormat().GetAspectInfo(aspect).format);",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3823132_d9f88cdc",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T21:08:43Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "fb4fb8d2_3ad6c171",
       "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
