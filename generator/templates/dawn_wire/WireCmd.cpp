@@ -42,7 +42,7 @@
     {%- elif member.type.category == "bitmask" -%}
         {{as_cType(member.type.name)}}Flags
     {%- else -%}
-        {{as_cType(member.type.name)}}
+        {{as_archIndependentCType(member.type.name)}}
     {%- endif -%}
 {%- endmacro %}
 
@@ -80,7 +80,7 @@
             {%- endif -%}
         ));
     {%- else -%}
-        {{out}} = {{in}};
+        DESERIALIZE_TRY(Assign(&{{out}}, {{in}}));
     {%- endif -%}
 {% endmacro %}
 
@@ -124,7 +124,7 @@ namespace {
 
         //* const char* have their length embedded directly in the command.
         {% for member in members if member.length == "strlen" %}
-            size_t {{as_varName(member.name)}}Strlen;
+            uint64_t {{as_varName(member.name)}}Strlen;
         {% endfor %}
 
         {% for member in members if member.optional and member.annotation != "value" and member.type.category != "object" %}
@@ -326,7 +326,9 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-                size_t stringLength = transfer->{{memberName}}Strlen;
+                size_t stringLength;
+                DESERIALIZE_TRY(Assign(&stringLength, transfer->{{memberName}}Strlen));
+
                 const volatile char* stringInBuffer = nullptr;
                 DESERIALIZE_TRY(GetPtrFromBuffer(buffer, size, stringLength, &stringInBuffer));
 
@@ -455,6 +457,42 @@ namespace dawn_wire {
     }
 
     namespace {
+
+        template <typename Out, typename In, typename Enable = void>
+        struct AssignImpl {
+            static DeserializeResult Call(Out* out, const In& in);
+        };
+
+        // AssignImpl where the unqualified types are the same. We can just assign without checking.
+        template <typename Out, typename In>
+        struct AssignImpl<Out, In,
+            typename std::enable_if<std::is_same<
+                typename std::remove_cv<Out>::type,
+                typename std::remove_cv<In>::type
+            >::value>::type> {
+            static DeserializeResult Call(Out* out, const In& in)  {
+                *out = in;
+                return DeserializeResult::Success;
+            }
+        };
+
+        // AssignImpl where In may be larger than Out.
+        // This may happen because size_t members are always transfered as uint64_t.
+        template <typename Out, typename In>
+        struct AssignImpl<Out, In, typename std::enable_if<sizeof(Out) < sizeof(In)>::type> {
+            static DeserializeResult Call(Out* out, const In& in) {
+                if (in > std::numeric_limits<Out>::max()) {
+                    return DeserializeResult::FatalError;
+                }
+                *out = in;
+                return DeserializeResult::Success;
+            }
+        };
+
+        template <typename Out, typename In>
+        DeserializeResult Assign(Out* out, const In& in) {
+            return AssignImpl<Out, In>::Call(out, in);
+        }
 
         // Consumes from (buffer, size) enough memory to contain T[count] and return it in data.
         // Returns FatalError if not enough memory was available
