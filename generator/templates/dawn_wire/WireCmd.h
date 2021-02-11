@@ -55,6 +55,35 @@ namespace dawn_wire {
             virtual void* GetSpace(size_t size) = 0;
     };
 
+    class DeserializeBuffer {
+      public:
+        DeserializeBuffer(const volatile char* buffer, size_t size) : mBuffer(buffer), mSize(size) {}
+
+        // Consume enough memory to contain T[count] and return it in data.
+        // Return FatalError if there was insufficient space.
+        // Always writes to |data| on success.
+        template <typename T, typename N>
+        DeserializeResult ReadN(N count, const volatile T** data);
+
+        // Special-case the count==1 case of ReadN. The overflow checks are simpler.
+        // Always writes to |data| on success.
+        template <typename T>
+        DeserializeResult Read(const volatile T** data);
+
+        // Check (without consuming) that there is enough memory to contain T and return it in data.
+        // Return FatalError if there was insufficient space.
+        // Always writes to |data| on success.
+        template <typename T>
+        DeserializeResult Peek(const volatile T** data);
+
+        const volatile char* Buffer() const { return mBuffer; }
+        size_t Size() const { return mSize; }
+
+      private:
+        const volatile char* mBuffer;
+        size_t mSize;
+    };
+
     // Interface to convert an ID to a server object, if possible.
     // Methods return FatalError if the ID is for a non-existent object and Success otherwise.
     class ObjectIdResolver {
@@ -114,7 +143,7 @@ namespace dawn_wire {
         //* Deserialize returns:
         //*  - Success if everything went well (yay!)
         //*  - FatalError is something bad happened (buffer too small for example)
-        DeserializeResult Deserialize(const volatile char** buffer, size_t* size, DeserializeAllocator* allocator
+        DeserializeResult Deserialize(DeserializeBuffer* deserializeBuffer, DeserializeAllocator* allocator
             {%- if command.may_have_dawn_object -%}
                 , const ObjectIdResolver& resolver
             {%- endif -%}
