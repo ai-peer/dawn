@@ -468,6 +468,13 @@ def as_cType(name):
         return 'WGPU' + name.CamelCase()
 
 
+def as_archIndependentCType(name):
+    if name.concatcase() == 'size_t':
+        return 'uint64_t'
+    else:
+        return as_cType(name)
+
+
 def as_cTypeDawn(name):
     if name.native:
         return name.concatcase()
@@ -670,6 +677,7 @@ class MultiGeneratorFromDawnJSON(Generator):
             'as_cProc': as_cProc,
             'as_cProcDawn': as_cProcDawn,
             'as_cType': as_cType,
+            'as_archIndependentCType': as_archIndependentCType,
             'as_cTypeDawn': as_cTypeDawn,
             'as_cppType': as_cppType,
             'as_jsEnumValue': as_jsEnumValue,
