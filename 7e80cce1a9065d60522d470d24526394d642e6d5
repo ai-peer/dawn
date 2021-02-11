@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "651eb4d8_2ae3adc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T08:25:51Z",
+      "side": 1,
+      "message": "That\u0027s an awesome QoL improvement, thanks!",
+      "revId": "7e80cce1a9065d60522d470d24526394d642e6d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
