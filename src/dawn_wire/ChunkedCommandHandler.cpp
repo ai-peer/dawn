@@ -24,13 +24,13 @@ namespace dawn_wire {
     ChunkedCommandHandler::~ChunkedCommandHandler() = default;
 
     const volatile char* ChunkedCommandHandler::HandleCommands(const volatile char* commands,
-                                                               size_t size) {
+                                                               uint32_t size) {
         if (mChunkedCommandRemainingSize > 0) {
             // If there is a chunked command in flight, append the command data.
             // We append at most |mChunkedCommandRemainingSize| which is enough to finish the
             // in-flight chunked command, and then pass the rest along to a second call to
             // |HandleCommandsImpl|.
-            size_t chunkSize = std::min(size, mChunkedCommandRemainingSize);
+            uint32_t chunkSize = std::min(size, mChunkedCommandRemainingSize);
 
             memcpy(mChunkedCommandData.get() + mChunkedCommandPutOffset,
                    const_cast<const char*>(commands), chunkSize);
@@ -58,8 +58,8 @@ namespace dawn_wire {
 
     ChunkedCommandHandler::ChunkedCommandsResult ChunkedCommandHandler::BeginChunkedCommandData(
         const volatile char* commands,
-        size_t commandSize,
-        size_t initialSize) {
+        uint32_t commandSize,
+        uint32_t initialSize) {
         ASSERT(!mChunkedCommandData);
 
         // Reserve space for all the command data we're expecting, and copy the initial data

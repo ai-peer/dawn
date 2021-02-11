@@ -14,7 +14,7 @@
 
 //* Return command handlers
 {% for command in cmd_records["return command"] %}
-    bool Handle{{command.name.CamelCase()}}(const volatile char** commands, size_t* size);
+    bool Handle{{command.name.CamelCase()}}(const volatile char** commands, uint32_t* size);
 {% endfor %}
 
 //* Return command doers

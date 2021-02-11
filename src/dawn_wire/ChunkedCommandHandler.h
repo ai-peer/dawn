@@ -26,7 +26,7 @@ namespace dawn_wire {
 
     class ChunkedCommandHandler : public CommandHandler {
       public:
-        const volatile char* HandleCommands(const volatile char* commands, size_t size) override;
+        const volatile char* HandleCommands(const volatile char* commands, uint32_t size) override;
         ~ChunkedCommandHandler() override;
 
       protected:
@@ -39,14 +39,9 @@ namespace dawn_wire {
         // Returns |true| if the commands were entirely consumed into the chunked command vector
         // and should be handled later once we receive all the command data.
         // Returns |false| if commands should be handled now immediately.
-        ChunkedCommandsResult HandleChunkedCommands(const volatile char* commands, size_t size) {
-            uint64_t commandSize64 =
+        ChunkedCommandsResult HandleChunkedCommands(const volatile char* commands, uint32_t size) {
+            uint32_t commandSize =
                 reinterpret_cast<const volatile CmdHeader*>(commands)->commandSize;
-
-            if (commandSize64 > std::numeric_limits<size_t>::max()) {
-                return ChunkedCommandsResult::Error;
-            }
-            size_t commandSize = static_cast<size_t>(commandSize64);
             if (size < commandSize) {
                 return BeginChunkedCommandData(commands, commandSize, size);
             }
@@ -55,14 +50,14 @@ namespace dawn_wire {
 
       private:
         virtual const volatile char* HandleCommandsImpl(const volatile char* commands,
-                                                        size_t size) = 0;
+                                                        uint32_t size) = 0;
 
         ChunkedCommandsResult BeginChunkedCommandData(const volatile char* commands,
-                                                      size_t commandSize,
-                                                      size_t initialSize);
+                                                      uint32_t commandSize,
+                                                      uint32_t initialSize);
 
-        size_t mChunkedCommandRemainingSize = 0;
-        size_t mChunkedCommandPutOffset = 0;
+        uint32_t mChunkedCommandRemainingSize = 0;
+        uint32_t mChunkedCommandPutOffset = 0;
         std::unique_ptr<char[]> mChunkedCommandData;
     };
 

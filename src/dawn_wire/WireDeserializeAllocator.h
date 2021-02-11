@@ -28,12 +28,12 @@ namespace dawn_wire {
         WireDeserializeAllocator();
         virtual ~WireDeserializeAllocator();
 
-        void* GetSpace(size_t size) override;
+        void* GetSpace(uint32_t size) override;
 
         void Reset();
 
       private:
-        size_t mRemainingSize = 0;
+        uint32_t mRemainingSize = 0;
         char* mCurrentBuffer = nullptr;
         char mStaticBuffer[2048];
         std::vector<char*> mAllocations;

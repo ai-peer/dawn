@@ -205,6 +205,7 @@ namespace dawn_wire { namespace client {
             // Get the primary queue for this device.
             auto* allocation = client->QueueAllocator().New(client);
             mQueue = allocation->object.get();
+            mQueue->mDevice = this;
 
             DeviceGetQueueCmd cmd;
             cmd.self = ToAPI(this);

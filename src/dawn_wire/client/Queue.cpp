@@ -37,6 +37,10 @@ namespace dawn_wire { namespace client {
                             uint64_t bufferOffset,
                             const void* data,
                             size_t size) {
+        if (size > std::numeric_limits<uint32_t>::max()) {
+            mDevice->InjectError(WGPUErrorType_OutOfMemory, "Insufficient space.");
+            return;
+        }
         Buffer* buffer = FromAPI(cBuffer);
 
         QueueWriteBufferInternalCmd cmd;
@@ -44,7 +48,7 @@ namespace dawn_wire { namespace client {
         cmd.bufferId = buffer->id;
         cmd.bufferOffset = bufferOffset;
         cmd.data = static_cast<const uint8_t*>(data);
-        cmd.size = size;
+        cmd.size = static_cast<uint32_t>(size);
 
         client->SerializeCommand(cmd);
     }
@@ -54,11 +58,15 @@ namespace dawn_wire { namespace client {
                              size_t dataSize,
                              const WGPUTextureDataLayout* dataLayout,
                              const WGPUExtent3D* writeSize) {
+        if (dataSize > std::numeric_limits<uint32_t>::max()) {
+            mDevice->InjectError(WGPUErrorType_OutOfMemory, "Insufficient space.");
+            return;
+        }
         QueueWriteTextureInternalCmd cmd;
         cmd.queueId = id;
         cmd.destination = destination;
         cmd.data = static_cast<const uint8_t*>(data);
-        cmd.dataSize = dataSize;
+        cmd.dataSize = static_cast<uint32_t>(dataSize);
         cmd.dataLayout = dataLayout;
         cmd.writeSize = writeSize;
 

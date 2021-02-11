@@ -163,9 +163,22 @@ namespace dawn_wire { namespace client {
         request.size = size;
         request.offset = offset;
 
+        size_t readHandleSize = 0;
+        size_t writeHandleSize = 0;
+
         // Step 2a: Create the read / write handles for this request.
         if (isReadMode) {
             request.readHandle.reset(client->GetMemoryTransferService()->CreateReadHandle(size));
+            readHandleSize = request.readHandle->SerializeCreateSize();
+            if (readHandleSize > std::numeric_limits<uint32_t>::max()) {
+                if (!mDeviceIsAlive.expired()) {
+                    mDevice->InjectError(WGPUErrorType_OutOfMemory,
+                                         "Insufficient space for buffer mapping.");
+                }
+                callback(WGPUBufferMapAsyncStatus_Error, userdata);
+                return;
+            }
+
             if (request.readHandle == nullptr) {
                 if (!mDeviceIsAlive.expired()) {
                     mDevice->InjectError(WGPUErrorType_OutOfMemory,
@@ -177,6 +190,16 @@ namespace dawn_wire { namespace client {
         } else {
             ASSERT(isWriteMode);
             request.writeHandle.reset(client->GetMemoryTransferService()->CreateWriteHandle(size));
+            writeHandleSize = request.writeHandle->SerializeCreateSize();
+            if (writeHandleSize > std::numeric_limits<uint32_t>::max()) {
+                if (!mDeviceIsAlive.expired()) {
+                    mDevice->InjectError(WGPUErrorType_OutOfMemory,
+                                         "Insufficient space for buffer mapping.");
+                }
+                callback(WGPUBufferMapAsyncStatus_Error, userdata);
+                return;
+            }
+
             if (request.writeHandle == nullptr) {
                 if (!mDeviceIsAlive.expired()) {
                     mDevice->InjectError(WGPUErrorType_OutOfMemory,
@@ -198,13 +221,13 @@ namespace dawn_wire { namespace client {
 
         // Step 3a. Fill the handle create info in the command.
         if (isReadMode) {
-            cmd.handleCreateInfoLength = request.readHandle->SerializeCreateSize();
+            cmd.handleCreateInfoLength = static_cast<uint32_t>(readHandleSize);
             client->SerializeCommand(cmd, cmd.handleCreateInfoLength, [&](char* cmdSpace) {
                 request.readHandle->SerializeCreate(cmdSpace);
             });
         } else {
             ASSERT(isWriteMode);
-            cmd.handleCreateInfoLength = request.writeHandle->SerializeCreateSize();
+            cmd.handleCreateInfoLength = static_cast<uint32_t>(writeHandleSize);
             client->SerializeCommand(cmd, cmd.handleCreateInfoLength, [&](char* cmdSpace) {
                 request.writeHandle->SerializeCreate(cmdSpace);
             });

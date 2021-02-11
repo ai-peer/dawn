@@ -158,7 +158,7 @@ namespace dawn_wire { namespace server {
 
         // ChunkedCommandHandler implementation
         const volatile char* HandleCommandsImpl(const volatile char* commands,
-                                                size_t size) override;
+                                                uint32_t size) override;
 
         bool InjectTexture(WGPUTexture texture,
                            uint32_t id,

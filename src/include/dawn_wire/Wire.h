@@ -39,10 +39,11 @@ namespace dawn_wire {
     class DAWN_WIRE_EXPORT CommandHandler {
       public:
         virtual ~CommandHandler() = default;
-        virtual const volatile char* HandleCommands(const volatile char* commands, size_t size) = 0;
+        virtual const volatile char* HandleCommands(const volatile char* commands,
+                                                    uint32_t size) = 0;
     };
 
-    DAWN_WIRE_EXPORT size_t
+    DAWN_WIRE_EXPORT uint32_t
     SerializedWGPUDevicePropertiesSize(const WGPUDeviceProperties* deviceProperties);
 
     DAWN_WIRE_EXPORT void SerializeWGPUDeviceProperties(
@@ -51,7 +52,18 @@ namespace dawn_wire {
 
     DAWN_WIRE_EXPORT bool DeserializeWGPUDeviceProperties(WGPUDeviceProperties* deviceProperties,
                                                           const volatile char* deserializeBuffer,
-                                                          size_t deserializeBufferSize);
+                                                          uint32_t deserializeBufferSize);
+
+    // TODO(crbug.com/dawn/680): Remove after updating Chromium.
+    inline bool DeserializeWGPUDeviceProperties(WGPUDeviceProperties* deviceProperties,
+                                                const volatile char* deserializeBuffer,
+                                                size_t deserializeBufferSize) {
+        if (deserializeBufferSize > std::numeric_limits<uint32_t>::max()) {
+            return false;
+        }
+        return DeserializeWGPUDeviceProperties(deviceProperties, deserializeBuffer,
+                                               static_cast<uint32_t>(deserializeBufferSize));
+    }
 
 }  // namespace dawn_wire
 

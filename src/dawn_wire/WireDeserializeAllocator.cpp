@@ -25,7 +25,7 @@ namespace dawn_wire {
         Reset();
     }
 
-    void* WireDeserializeAllocator::GetSpace(size_t size) {
+    void* WireDeserializeAllocator::GetSpace(uint32_t size) {
         // Return space in the current buffer if possible first.
         if (mRemainingSize >= size) {
             char* buffer = mCurrentBuffer;
@@ -35,7 +35,7 @@ namespace dawn_wire {
         }
 
         // Otherwise allocate a new buffer and try again.
-        size_t allocationSize = std::max(size, size_t(2048));
+        uint32_t allocationSize = std::max(size, 2048u);
         char* allocation = static_cast<char*>(malloc(allocationSize));
         if (allocation == nullptr) {
             return nullptr;

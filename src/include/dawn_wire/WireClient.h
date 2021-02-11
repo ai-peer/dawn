@@ -18,6 +18,7 @@
 #include "dawn/dawn_proc_table.h"
 #include "dawn_wire/Wire.h"
 
+#include <limits>
 #include <memory>
 #include <vector>
 
@@ -54,8 +55,15 @@ namespace dawn_wire {
         WireClient(const WireClientDescriptor& descriptor);
         ~WireClient() override;
 
+        const volatile char* HandleCommands(const volatile char* commands, uint64_t size) {
+            if (size > std::numeric_limits<uint32_t>::max()) {
+                return nullptr;
+            }
+            return HandleCommands(commands, static_cast<uint32_t>(size));
+        }
+
         const volatile char* HandleCommands(const volatile char* commands,
-                                            size_t size) override final;
+                                            uint32_t size) override final;
 
         ReservedTexture ReserveTexture(WGPUDevice device);
         ReservedDevice ReserveDevice();

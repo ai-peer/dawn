@@ -15,6 +15,7 @@
 #ifndef DAWNWIRE_WIRESERVER_H_
 #define DAWNWIRE_WIRESERVER_H_
 
+#include <limits>
 #include <memory>
 
 #include "dawn_wire/Wire.h"
@@ -39,8 +40,15 @@ namespace dawn_wire {
         WireServer(const WireServerDescriptor& descriptor);
         ~WireServer() override;
 
+        const volatile char* HandleCommands(const volatile char* commands, uint64_t size) {
+            if (size > std::numeric_limits<uint32_t>::max()) {
+                return nullptr;
+            }
+            return HandleCommands(commands, static_cast<uint32_t>(size));
+        }
+
         const volatile char* HandleCommands(const volatile char* commands,
-                                            size_t size) override final;
+                                            uint32_t size) override final;
 
         // TODO(enga): Remove defaults after updating Chrome.
         bool InjectTexture(WGPUTexture texture,

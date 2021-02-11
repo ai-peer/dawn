@@ -47,9 +47,9 @@ namespace dawn_wire { namespace server {
     bool Server::DoBufferMapAsync(ObjectId bufferId,
                                   uint32_t requestSerial,
                                   WGPUMapModeFlags mode,
-                                  size_t offset,
-                                  size_t size,
-                                  uint64_t handleCreateInfoLength,
+                                  uint64_t offset64,
+                                  uint64_t size64,
+                                  uint32_t handleCreateInfoLength,
                                   const uint8_t* handleCreateInfo) {
         // These requests are just forwarded to the buffer, with userdata containing what the
         // client will require in the return command.
@@ -71,11 +71,13 @@ namespace dawn_wire { namespace server {
             return false;
         }
 
-        if (handleCreateInfoLength > std::numeric_limits<size_t>::max()) {
-            // This is the size of data deserialized from the command stream, which must be
-            // CPU-addressable.
+        if (offset64 > std::numeric_limits<size_t>::max() ||
+            size64 > std::numeric_limits<size_t>::max()) {
             return false;
         }
+
+        size_t offset = static_cast<size_t>(offset64);
+        size_t size = static_cast<size_t>(size64);
 
         std::unique_ptr<MapUserdata> userdata = MakeUserdata<MapUserdata>();
         userdata->buffer = ObjectHandle{bufferId, buffer->generation};
@@ -123,7 +125,7 @@ namespace dawn_wire { namespace server {
     bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
                                       const WGPUBufferDescriptor* descriptor,
                                       ObjectHandle bufferResult,
-                                      uint64_t handleCreateInfoLength,
+                                      uint32_t handleCreateInfoLength,
                                       const uint8_t* handleCreateInfo) {
         auto* device = DeviceObjects().Get(deviceId);
         if (device == nullptr) {
@@ -145,12 +147,6 @@ namespace dawn_wire { namespace server {
         // If the buffer isn't mapped at creation, we are done.
         if (!descriptor->mappedAtCreation) {
             return handleCreateInfoLength == 0;
-        }
-
-        // This is the size of data deserialized from the command stream to create the write handle,
-        // which must be CPU-addressable.
-        if (handleCreateInfoLength > std::numeric_limits<size_t>::max()) {
-            return false;
         }
 
         void* mapping = mProcs.bufferGetMappedRange(resultData->handle, 0, descriptor->size);
@@ -180,14 +176,10 @@ namespace dawn_wire { namespace server {
     }
 
     bool Server::DoBufferUpdateMappedData(ObjectId bufferId,
-                                          uint64_t writeFlushInfoLength,
+                                          uint32_t writeFlushInfoLength,
                                           const uint8_t* writeFlushInfo) {
         // The null object isn't valid as `self`
         if (bufferId == 0) {
-            return false;
-        }
-
-        if (writeFlushInfoLength > std::numeric_limits<size_t>::max()) {
             return false;
         }
 

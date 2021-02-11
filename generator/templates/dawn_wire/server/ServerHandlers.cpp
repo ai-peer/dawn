@@ -23,7 +23,7 @@ namespace dawn_wire { namespace server {
 
         {% set Suffix = command.name.CamelCase() %}
         //* The generic command handlers
-        bool Server::Handle{{Suffix}}(const volatile char** commands, size_t* size) {
+        bool Server::Handle{{Suffix}}(const volatile char** commands, uint32_t* size) {
             {{Suffix}}Cmd cmd;
             DeserializeResult deserializeResult = cmd.Deserialize(commands, size, &mAllocator
                 {%- if command.may_have_dawn_object -%}
@@ -106,7 +106,7 @@ namespace dawn_wire { namespace server {
         }
     {% endfor %}
 
-    const volatile char* Server::HandleCommandsImpl(const volatile char* commands, size_t size) {
+    const volatile char* Server::HandleCommandsImpl(const volatile char* commands, uint32_t size) {
         while (size >= sizeof(CmdHeader) + sizeof(WireCmd)) {
             // Start by chunked command handling, if it is done, then it means the whole buffer
             // was consumed by it, so we return a pointer to the end of the commands.

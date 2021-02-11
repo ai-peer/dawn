@@ -37,7 +37,7 @@ namespace dawn_wire { namespace client {
 
         // ChunkedCommandHandler implementation
         const volatile char* HandleCommandsImpl(const volatile char* commands,
-                                                size_t size) override;
+                                                uint32_t size) override;
 
         MemoryTransferService* GetMemoryTransferService() const {
             return mMemoryTransferService;

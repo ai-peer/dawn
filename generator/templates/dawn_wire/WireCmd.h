@@ -52,7 +52,7 @@ namespace dawn_wire {
     // nullptr is treated as an error.
     class DeserializeAllocator {
         public:
-            virtual void* GetSpace(size_t size) = 0;
+            virtual void* GetSpace(uint32_t size) = 0;
     };
 
     // Interface to convert an ID to a server object, if possible.
@@ -89,7 +89,7 @@ namespace dawn_wire {
     };
 
     struct CmdHeader {
-        uint64_t commandSize;
+        uint32_t commandSize;
     };
 
 {% macro write_command_struct(command, is_return_command) %}
@@ -97,11 +97,11 @@ namespace dawn_wire {
     {% set Cmd = command.name.CamelCase() + "Cmd" %}
     struct {{Return}}{{Cmd}} {
         //* From a filled structure, compute how much size will be used in the serialization buffer.
-        size_t GetRequiredSize() const;
+        uint32_t GetRequiredSize() const;
 
         //* Serialize the structure and everything it points to into serializeBuffer which must be
         //* big enough to contain all the data (as queried from GetRequiredSize).
-        void Serialize(size_t commandSize, char* serializeBuffer
+        void Serialize(uint32_t commandSize, char* serializeBuffer
             {%- if not is_return_command -%}
                 , const ObjectIdProvider& objectIdProvider
             {%- endif -%}
@@ -114,7 +114,7 @@ namespace dawn_wire {
         //* Deserialize returns:
         //*  - Success if everything went well (yay!)
         //*  - FatalError is something bad happened (buffer too small for example)
-        DeserializeResult Deserialize(const volatile char** buffer, size_t* size, DeserializeAllocator* allocator
+        DeserializeResult Deserialize(const volatile char** buffer, uint32_t* size, DeserializeAllocator* allocator
             {%- if command.may_have_dawn_object -%}
                 , const ObjectIdResolver& resolver
             {%- endif -%}

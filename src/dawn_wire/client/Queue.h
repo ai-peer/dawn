@@ -24,6 +24,8 @@
 
 namespace dawn_wire { namespace client {
 
+    class Device;
+
     class Queue final : public ObjectBase {
       public:
         using ObjectBase::ObjectBase;
@@ -35,6 +37,8 @@ namespace dawn_wire { namespace client {
                           size_t dataSize,
                           const WGPUTextureDataLayout* dataLayout,
                           const WGPUExtent3D* writeSize);
+
+        Device* mDevice;
     };
 
 }}  // namespace dawn_wire::client
