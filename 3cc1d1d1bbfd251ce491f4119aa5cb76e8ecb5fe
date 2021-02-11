@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ccde565_26ebc001",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "nit: Why is this needed?",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec27acc9_5a668380",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "This is a bit too much magic. Maybe we could have a second helper function that\u0027s \n\n AspectInfo GetSinglePlaneAspectInfo(format) {\n     ASSERT(formatsSet[format]);\n     return table[index].aspectInfo[0];\n }",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951fba7e_f9c39c37",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "This should be false for stencil8 because it\u0027s not implemented yet. Otherwise it\u0027s possible to ask the creation of a stencil8 texture which will fail in the backends. If we need we can special case stencil8 for now in createTextureView.\n\nAlternatively we can add special checks in createTexture, createREnderPipeline, createRenderBundleEncoder and beginRenderPass but that\u0027s more work.",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 223,
+        "endChar": 46
+      },
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbaca261_6512e2c7",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "nit: extra whiespace.",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b9d4b1_a0fcb558",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "nit: comment needs to be changed for kMaxPlanesPerFormat",
+      "range": {
+        "startLine": 78,
+        "startChar": 64,
+        "endLine": 79,
+        "endChar": 44
+      },
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5c541a2_c3c0155b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "Shouldn\u0027t that default to the plane\u0027s format if a single plane is selected?",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb4fb8d2_3ad6c171",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-11T12:50:57Z",
+      "side": 1,
+      "message": "Can\u0027t this stay the following: ?\n\n  aspect \u003d ConvertViewAspect()\n  planeSlice \u003d GetAspectIndex(aspect);\n  format \u003d ToDXGIFormat(GetFormat().GetAspectInfo(aspect).format);",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
