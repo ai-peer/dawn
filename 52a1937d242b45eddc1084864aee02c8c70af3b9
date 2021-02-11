@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89333ca7_cb5d1696",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-11T19:42:42Z",
+      "side": 1,
+      "message": "Consider checking the return value of Reset and asserting that it returns 0. \n\nIf it returns \u003e 0, then any \"resetting\" here will not solve the problem. Any subsequent call to D3D12CreateDevice will just give you a reference to the existing one.",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 29
+      },
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
