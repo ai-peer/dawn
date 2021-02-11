@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e97e4825_58497d9c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T17:25:15Z",
+      "side": 1,
+      "message": "I found:\n\"\"\"\nObject types have alignment requirements (3.9.1, 3.9.2). The alignment of a complete object type is an implementation-defined integer value representing a number of bytes; an object is allocated at an address that meets the alignment requirements of its object type.\n\"\"\"",
+      "parentUuid": "e80515e4_54fe969b",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "f295dc81_a5afbec0",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-02-11T08:23:33Z",
       "side": 1,
       "message": "I\u0027m not sure this is the correct approach: there are only a couple places where size_t is used in the wire commands: QueueWriteBuffer/Texture (which could become u32 and fail in the client if that\u0027s not the case) and BufferMapAsync that could be using u64 with the narrowing check done in the handler/doer. It would make size a bunch simpler and would allow blamket disallowing size_t in WireCmd.cpp by #define size_t dontUseSizeTInThisFile.",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4e2463_956557af",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-11T17:25:15Z",
+      "side": 1,
+      "message": "We could do this too, but aside from having a #define to disallow usage in WireCmd completely, I\u0027d question whether this is that much simpler. Instead of supporting the size_t by always expanding to uint64_t to be network transparent, we\u0027re instead forcing any function using size_t to have a manually written handler.\n\nFor QueueWriteBuffer, if we make it u32, then the client needs to do more custom error handling :-/\n\nI guess it\u0027s fine though - we already have custom code for these.",
+      "parentUuid": "a26e0b9a_9c9bda77",
       "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
