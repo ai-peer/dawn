@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cfbb8e0_b6a5163c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-11T00:22:33Z",
+      "side": 1,
+      "message": "For fun, I tried the \"if all view.format \u003d tex.format else view.format \u003d GetAspectInfo(aspect).format\" idea but soon discovered all backends do not expect a \"default\" single aspect format from a combined parent format (depth-stencil).\n\nBut if I move the per plane format logic into the backend, GetAspectFormat is eliminated w/o changing the behavior of default formats.\n\nPTAL.",
+      "revId": "3e7e578a8331c486d7c3b70b9943a3d355384b28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
