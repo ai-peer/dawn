@@ -73,7 +73,45 @@ namespace dawn_native { namespace opengl {
         gl.BindTexture(target, texture->GetHandle());
         const TexelBlockInfo& blockInfo =
             texture->GetFormat().GetAspectInfo(destination.aspect).block;
-        if (dataLayout.bytesPerRow % blockInfo.byteSize == 0) {
+
+        if (texture->GetFormat().isCompressed) {
+            Extent3D virtSize = texture->GetMipLevelVirtualSize(destination.mipLevel);
+            uint32_t width = writeSizePixel.width;
+            if (destination.origin.x + width > virtSize.width) {
+                width = virtSize.width - destination.origin.x;
+            }
+            if (texture->GetArrayLayers() == 1) {
+                const uint8_t* d = static_cast<const uint8_t*>(data);
+                size_t imageSize = writeSizePixel.width / blockInfo.width * blockInfo.byteSize;
+                uint32_t x = destination.origin.x;
+                for (uint32_t y = destination.origin.y;
+                     y < destination.origin.y + writeSizePixel.height; y += blockInfo.height) {
+                    uint32_t height = blockInfo.height;
+                    if (y + height > virtSize.height) {
+                        height = virtSize.height - y;
+                    }
+                    gl.CompressedTexSubImage2D(target, destination.mipLevel, x, y, width, height,
+                                               format.internalFormat, imageSize, d);
+                }
+                d += dataLayout.bytesPerRow;
+            } else {
+                const uint8_t* slice = static_cast<const uint8_t*>(data);
+                size_t imageSize = (writeSizePixel.width / blockInfo.width) * blockInfo.byteSize;
+                uint32_t x = destination.origin.x;
+                for (uint32_t z = destination.origin.z;
+                     z < destination.origin.z + writeSizePixel.depth; ++z) {
+                    const uint8_t* d = slice;
+                    for (uint32_t y = destination.origin.y;
+                         y < destination.origin.y + writeSizePixel.height; y += blockInfo.height) {
+                        gl.CompressedTexSubImage3D(target, destination.mipLevel, x, y, z,
+                                                   writeSizePixel.width, blockInfo.height, 1,
+                                                   format.internalFormat, imageSize, d);
+                        d += dataLayout.bytesPerRow;
+                    }
+                    slice += dataLayout.rowsPerImage * dataLayout.bytesPerRow;
+                }
+            }
+        } else if (dataLayout.bytesPerRow % blockInfo.byteSize == 0) {
             gl.PixelStorei(GL_UNPACK_ROW_LENGTH,
                            dataLayout.bytesPerRow / blockInfo.byteSize * blockInfo.width);
             if (texture->GetArrayLayers() == 1) {
