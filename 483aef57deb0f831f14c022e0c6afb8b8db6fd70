@@ -86,6 +86,24 @@
       "parentUuid": "a26e0b9a_9c9bda77",
       "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f26680c_160e6b5f",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-12T00:33:21Z",
+      "side": 1,
+      "message": "Here\u0027s the other version of it:\nhttps://dawn-review.googlesource.com/c/dawn/+/41581\n\nI\u0027m not convinced it\u0027s better though because it requires more custom handling on *both* the client and server. I\u0027d rather have the client \"just work\" and have custom handling only on the server side to handle insufficient space.\n\nSo instead I might prefer something like this:\nhttps://dawn-review.googlesource.com/c/dawn/+/41582",
+      "parentUuid": "6b4e2463_956557af",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
