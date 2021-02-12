@@ -18,6 +18,64 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d75484_005077b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:35:51Z",
+      "side": 1,
+      "message": "+1 that the instance thing could be a better solution.",
+      "parentUuid": "73abc08a_a2aa61d1",
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047072fa_e205709d",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:35:51Z",
+      "side": 1,
+      "message": "Maybe produce an error instead so we check this is only used in D3D12.",
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8590871_8110285b",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:35:51Z",
+      "side": 1,
+      "message": "u-nit: the order of words in the methods changes. I think it should stay mImpl-\u003eResetInternalDevice.",
+      "range": {
+        "startLine": 114,
+        "startChar": 3,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89333ca7_cb5d1696",
