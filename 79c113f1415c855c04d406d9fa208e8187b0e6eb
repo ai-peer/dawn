@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b78dfcac_e472c191",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-12T20:01:29Z",
+      "side": 1,
+      "message": "Moving back to WIP. After adding the assert to ensure the device is being released as expected, the bots fail. I see locally that all objects are being released as intended and the assert isn\u0027t hit. I will need to do some debugging on the bots with ReportLiveObjects().",
+      "revId": "79c113f1415c855c04d406d9fa208e8187b0e6eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a29363_e1093841",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-12T20:01:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "047072fa_e205709d",
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8590871_8110285b",
@@ -84,6 +102,30 @@
       "writtenOn": "2021-02-12T11:35:51Z",
       "side": 1,
       "message": "u-nit: the order of words in the methods changes. I think it should stay mImpl-\u003eResetInternalDevice.",
+      "range": {
+        "startLine": 114,
+        "startChar": 3,
+        "endLine": 116,
+        "endChar": 5
+      },
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5108f211_10fe1bec",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-12T20:01:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8590871_8110285b",
       "range": {
         "startLine": 114,
         "startChar": 3,
@@ -117,6 +159,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22c40344_271b876c",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-12T20:01:29Z",
+      "side": 1,
+      "message": "Good call. We hit the assert on the bots - but not locally for some reason.",
+      "parentUuid": "89333ca7_cb5d1696",
+      "range": {
+        "startLine": 223,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 29
+      },
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17037b8c_99c1a973",
@@ -130,6 +196,30 @@
       "writtenOn": "2021-02-11T21:29:04Z",
       "side": 1,
       "message": "let\u0027s suffix the name with \"ForTesting\"",
+      "range": {
+        "startLine": 641,
+        "startChar": 24,
+        "endLine": 641,
+        "endChar": 43
+      },
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddddb49a_f3481817",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-12T20:01:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17037b8c_99c1a973",
       "range": {
         "startLine": 641,
         "startChar": 24,
