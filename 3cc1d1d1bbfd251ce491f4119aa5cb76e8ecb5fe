@@ -237,6 +237,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eedfdc06_607b4c84",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-12T02:11:57Z",
+      "side": 1,
+      "message": "Not the validation check at [1] but the default format being equal to the texture format at Ln#362 for CreateView(). The backends expect the view format to be a \"planar format\" (ex. depth-stencil) and not the per plane \"view format\" (ex. depth24 or stencil8). The \"use texture format\" also makes sense to me because only D3D12 could re-map views.",
+      "parentUuid": "980cc0db_529ee09c",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fb4fb8d2_3ad6c171",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 6
