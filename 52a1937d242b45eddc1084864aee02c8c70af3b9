@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6ebee98c_3f6c6437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-12T17:27:19Z",
+      "side": 1,
+      "message": "To destroy and recreate the Instance, I put this in ~DawnTestBase:\n    if (IsD3D12() \u0026\u0026 IsBackendValidationEnabled()) {\n        gTestEnv-\u003eTearDown();\n        gTestEnv-\u003eSetUp();\n    }\n\nWith this, I see a 2x increase in e2e runtime compared to the internal reset method. This seems like enough of a performance hit to continue forward with the method in this CL.",
+      "parentUuid": "06d75484_005077b2",
+      "revId": "52a1937d242b45eddc1084864aee02c8c70af3b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "047072fa_e205709d",
         "filename": "src/dawn_native/Adapter.cpp",
         "patchSetId": 1
