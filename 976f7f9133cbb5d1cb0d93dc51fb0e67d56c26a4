@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d56549_a9d01126",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-12T19:25:38Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nNote 1: the compressed textures tests run and pass on GL, but not GLES, since ES does not\nyet enable the texture_compression_bc Dawn extension. (I need to understand which GLES\nextensions are required.)\n\nNote 2: I think the WriteTexture path is under-tested for compressed 3D textures. I\u0027ll add some more tests in a followup.",
+      "revId": "976f7f9133cbb5d1cb0d93dc51fb0e67d56c26a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
