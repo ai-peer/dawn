@@ -16,6 +16,24 @@
       "message": "Moving back to WIP. After adding the assert to ensure the device is being released as expected, the bots fail. I see locally that all objects are being released as intended and the assert isn\u0027t hit. I will need to do some debugging on the bots with ReportLiveObjects().",
       "revId": "79c113f1415c855c04d406d9fa208e8187b0e6eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3006f205_7898cfa2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-12T20:31:12Z",
+      "side": 1,
+      "message": "You might also try building dawn_end2end_tests inside the Chromium source tree. The gtest harness there is a bit different.\n\nFrom what I understand, InitDawnEnd2EndTestEnvironment is called, but then the harness forks the process before launching tests. This forking might be affecting things.",
+      "parentUuid": "b78dfcac_e472c191",
+      "revId": "79c113f1415c855c04d406d9fa208e8187b0e6eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
