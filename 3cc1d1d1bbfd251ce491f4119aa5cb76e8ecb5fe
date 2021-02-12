@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc490e0_b71af634",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-12T19:28:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcdc3bf7_67d3c72b",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "951fba7e_f9c39c37",
@@ -285,6 +303,24 @@
       "side": 1,
       "message": "The other backends also work the same way. In Vulkan depth-stencil is special but multi-planar formats ask for the plane\u0027s format:\n\n\u003e If image was created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, if the format of the image is a multi-planar format, and if subresourceRange.aspectMask is one of VK_IMAGE_ASPECT_PLANE_0_BIT, VK_IMAGE_ASPECT_PLANE_1_BIT, or VK_IMAGE_ASPECT_PLANE_2_BIT, then format must be compatible with the VkFormat for the plane of the image format indicated by subresourceRange.aspectMask, as defined in Compatible formats of planes of multi-planar formats\n\n(note that multi-planar formats for imported video will always be mutable format in Vulkan).\n\nMetal has a similar thing where it uses texture view for the stencil view on depth stencil textures.\n\nThis isn\u0027t necessary to do now, so we can instead add a TODO and file a bug about this. Someone will take the task eventually.",
       "parentUuid": "eedfdc06_607b4c84",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a571f26_47386e26",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-12T19:28:03Z",
+      "side": 1,
+      "message": "Thanks! But note: even D3D12 TextureView expects selecting the view format from the texture format for depth-stencil - not Vulkan specific. Left a TODO.",
+      "parentUuid": "75c72394_765c9a09",
       "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
