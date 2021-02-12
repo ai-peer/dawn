@@ -216,4 +216,22 @@ namespace dawn_native { namespace d3d12 {
         return Device::Create(this, descriptor);
     }
 
+    // Resets the backend device and creates a new one. If any D3D12 objects belonging to the
+    // current ID3D12Device have not been destroyed, a non-zero value will be returned upon Reset()
+    // and the subequent call to CreateDevice will return a handle the existing device instead of
+    // creating a new one.
+    MaybeError Adapter::ResetInternalDeviceForTestingImpl() {
+        // ASSERT(mD3d12Device.Reset() != 0);
+        mD3d12Device.Reset();
+        const PlatformFunctions* functions = GetBackend()->GetFunctions();
+        ComPtr<IDXGIDebug1> dxgiDebug;
+        if (SUCCEEDED(functions->dxgiGetDebugInterface1(0, IID_PPV_ARGS(&dxgiDebug)))) {
+            dxgiDebug->ReportLiveObjects(DXGI_DEBUG_ALL,
+                                         DXGI_DEBUG_RLO_FLAGS(DXGI_DEBUG_RLO_SUMMARY));
+        }
+        DAWN_TRY(Initialize());
+
+        return {};
+    }
+
 }}  // namespace dawn_native::d3d12
