@@ -122,6 +122,24 @@
       "parentUuid": "5f26680c_160e6b5f",
       "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b370624_63c63cc7",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-12T14:41:35Z",
+      "side": 1,
+      "message": "I prefer v2 as well. If the wire types are fixed size, let\u0027s be explicit about that at every level.",
+      "parentUuid": "622d63e0_0aade0ff",
+      "revId": "483aef57deb0f831f14c022e0c6afb8b8db6fd70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
