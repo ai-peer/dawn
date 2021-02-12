@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12165a9f_1a089d43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:26:47Z",
+      "side": 1,
+      "message": "LGTM too with one non-trivial comment.",
+      "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e233d332_39bdede0",
@@ -78,6 +95,40 @@
         "endLine": 183,
         "endChar": 23
       },
+      "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60f89132_5e7c8115",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:26:47Z",
+      "side": 1,
+      "message": "nit: extra whitespace. Can you remove it?",
+      "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21974867_8f03bc41",
+        "filename": "src/dawn_native/Format.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:26:47Z",
+      "side": 1,
+      "message": "Since this is only used inside BuildFormatTable I think the other comment (about copying whole AspectInfos instead of the magic loop) while remove the need for both this function and the friend declaration.",
       "revId": "4c8d9f1e87b0c05a92a96aa560302a0835289a19",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

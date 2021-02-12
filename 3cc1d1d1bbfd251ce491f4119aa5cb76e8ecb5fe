@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcdc3bf7_67d3c72b",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:26:47Z",
+      "side": 1,
+      "message": "And to be more precise this helper function would be use in AddMultiAspectFormat",
+      "parentUuid": "ec27acc9_5a668380",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "951fba7e_f9c39c37",
         "filename": "src/dawn_native/Format.cpp",
         "patchSetId": 6
@@ -249,6 +267,24 @@
       "side": 1,
       "message": "Not the validation check at [1] but the default format being equal to the texture format at Ln#362 for CreateView(). The backends expect the view format to be a \"planar format\" (ex. depth-stencil) and not the per plane \"view format\" (ex. depth24 or stencil8). The \"use texture format\" also makes sense to me because only D3D12 could re-map views.",
       "parentUuid": "980cc0db_529ee09c",
+      "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75c72394_765c9a09",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-12T11:26:47Z",
+      "side": 1,
+      "message": "The other backends also work the same way. In Vulkan depth-stencil is special but multi-planar formats ask for the plane\u0027s format:\n\n\u003e If image was created with the VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT flag, if the format of the image is a multi-planar format, and if subresourceRange.aspectMask is one of VK_IMAGE_ASPECT_PLANE_0_BIT, VK_IMAGE_ASPECT_PLANE_1_BIT, or VK_IMAGE_ASPECT_PLANE_2_BIT, then format must be compatible with the VkFormat for the plane of the image format indicated by subresourceRange.aspectMask, as defined in Compatible formats of planes of multi-planar formats\n\n(note that multi-planar formats for imported video will always be mutable format in Vulkan).\n\nMetal has a similar thing where it uses texture view for the stencil view on depth stencil textures.\n\nThis isn\u0027t necessary to do now, so we can instead add a TODO and file a bug about this. Someone will take the task eventually.",
+      "parentUuid": "eedfdc06_607b4c84",
       "revId": "3cc1d1d1bbfd251ce491f4119aa5cb76e8ecb5fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
