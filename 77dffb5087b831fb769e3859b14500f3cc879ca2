@@ -16,6 +16,74 @@
       "message": "LGTM",
       "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ad300c_a5075369",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-15T09:07:56Z",
+      "side": 1,
+      "message": "nit: empty line to separate the reset.",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa8d32d_0d39f696",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-15T09:07:56Z",
+      "side": 1,
+      "message": "This code in the GL backend is pretty horrible and could use a lot of cleanup between writeTexture, copyBufferToTexture, copyTextureToBuffer and the zero initialization. Can we have a helper method that assumes that the correct PBO (or absence of) is bound and does the copy logic? It could be templated on the direction of the copy (from or to the texture). It could detect several cases like compressed textures, fast paths, etc and call to more helper functions. And most importantly it could be shared between all things that copy from-to texture because right now we are reinventing code every time in less and less readable ways.",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2493ee9_8738e6b1",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-15T09:07:56Z",
+      "side": 1,
+      "message": "u-nit: As usual, can we add some empty lines to let the code breath a bit?",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15df7571_7b01dbf6",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-15T09:07:56Z",
+      "side": 1,
+      "message": "This doesn\u0027t need to be computed from the real size and can instead be computed from width, for example widthInBytes \u003d width / xx * xx.\n\nI stopped reviewing this at this point because we should really share the implementation instead of adding more cruft.",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
