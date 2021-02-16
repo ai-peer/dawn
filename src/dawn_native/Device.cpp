@@ -23,7 +23,7 @@
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/ComputePipeline.h"
-#include "dawn_native/CreateReadyPipelineTracker.h"
+#include "dawn_native/CreatePipelineAsyncTracker.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/ErrorScope.h"
@@ -129,7 +129,7 @@ namespace dawn_native {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mErrorScopeTracker = std::make_unique<ErrorScopeTracker>(this);
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
-        mCreateReadyPipelineTracker = std::make_unique<CreateReadyPipelineTracker>(this);
+        mCreatePipelineAsyncTracker = std::make_unique<CreatePipelineAsyncTracker>(this);
         mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
         mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
         mPersistentCache = std::make_unique<PersistentCache>(this);
@@ -150,7 +150,7 @@ namespace dawn_native {
             mErrorScopeTracker->ClearForShutDown();
 
             // Reject all async pipeline creations.
-            mCreateReadyPipelineTracker->ClearForShutDown();
+            mCreatePipelineAsyncTracker->ClearForShutDown();
         }
 
         // Disconnect the device, depending on which state we are currently in.
@@ -200,7 +200,7 @@ namespace dawn_native {
         }
         mErrorScopeTracker = nullptr;
         mDynamicUploader = nullptr;
-        mCreateReadyPipelineTracker = nullptr;
+        mCreatePipelineAsyncTracker = nullptr;
         mPersistentCache = nullptr;
 
         mEmptyBindGroupLayout = nullptr;
@@ -713,21 +713,21 @@ namespace dawn_native {
 
         return result;
     }
-    void DeviceBase::CreateReadyComputePipeline(const ComputePipelineDescriptor* descriptor,
-                                                WGPUCreateReadyComputePipelineCallback callback,
+    void DeviceBase::CreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
+                                                WGPUCreateComputePipelineAsyncCallback callback,
                                                 void* userdata) {
         ComputePipelineBase* result = nullptr;
         MaybeError maybeError = CreateComputePipelineInternal(&result, descriptor);
         if (maybeError.IsError()) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
-            callback(WGPUCreateReadyPipelineStatus_Error, nullptr, error->GetMessage().c_str(),
+            callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
                      userdata);
             return;
         }
 
-        std::unique_ptr<CreateReadyComputePipelineTask> request =
-            std::make_unique<CreateReadyComputePipelineTask>(result, callback, userdata);
-        mCreateReadyPipelineTracker->TrackTask(std::move(request), GetPendingCommandSerial());
+        std::unique_ptr<CreateComputePipelineAsyncTask> request =
+            std::make_unique<CreateComputePipelineAsyncTask>(result, callback, userdata);
+        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     PipelineLayoutBase* DeviceBase::CreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
@@ -757,21 +757,21 @@ namespace dawn_native {
 
         return result;
     }
-    void DeviceBase::CreateReadyRenderPipeline(const RenderPipelineDescriptor* descriptor,
-                                               WGPUCreateReadyRenderPipelineCallback callback,
+    void DeviceBase::CreateRenderPipelineAsync(const RenderPipelineDescriptor* descriptor,
+                                               WGPUCreateRenderPipelineAsyncCallback callback,
                                                void* userdata) {
         RenderPipelineBase* result = nullptr;
         MaybeError maybeError = CreateRenderPipelineInternal(&result, descriptor);
         if (maybeError.IsError()) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
-            callback(WGPUCreateReadyPipelineStatus_Error, nullptr, error->GetMessage().c_str(),
+            callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
                      userdata);
             return;
         }
 
-        std::unique_ptr<CreateReadyRenderPipelineTask> request =
-            std::make_unique<CreateReadyRenderPipelineTask>(result, callback, userdata);
-        mCreateReadyPipelineTracker->TrackTask(std::move(request), GetPendingCommandSerial());
+        std::unique_ptr<CreateRenderPipelineAsyncTask> request =
+            std::make_unique<CreateRenderPipelineAsyncTask>(result, callback, userdata);
+        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     RenderBundleEncoder* DeviceBase::CreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
@@ -871,7 +871,7 @@ namespace dawn_native {
             mErrorScopeTracker->Tick(mCompletedSerial);
             GetQueue()->Tick(mCompletedSerial);
 
-            mCreateReadyPipelineTracker->Tick(mCompletedSerial);
+            mCreatePipelineAsyncTracker->Tick(mCompletedSerial);
         }
 
         return !IsDeviceIdle();
