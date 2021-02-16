@@ -28,6 +28,12 @@ namespace dawn_wire { namespace client {
       public:
         using ObjectBase::ObjectBase;
 
+        bool OnWorkDoneCallback(uint64_t requestSerial, WGPUQueueWorkDoneStatus status);
+
+        // Dawn API
+        void OnSubmittedWorkDone(uint64_t signalValue,
+                                 WGPUQueueWorkDoneCallback callback,
+                                 void* userdata);
         WGPUFence CreateFence(const WGPUFenceDescriptor* descriptor);
         void WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size);
         void WriteTexture(const WGPUTextureCopyView* destination,
@@ -35,6 +41,16 @@ namespace dawn_wire { namespace client {
                           size_t dataSize,
                           const WGPUTextureDataLayout* dataLayout,
                           const WGPUExtent3D* writeSize);
+
+      private:
+        void CancelCallbacksForDisconnect() override;
+
+        struct OnWorkDoneData {
+            WGPUQueueWorkDoneCallback callback = nullptr;
+            void* userdata = nullptr;
+        };
+        uint64_t mOnWorkDoneSerial = 0;
+        std::map<uint64_t, OnWorkDoneData> mOnWorkDoneRequests;
     };
 
 }}  // namespace dawn_wire::client
