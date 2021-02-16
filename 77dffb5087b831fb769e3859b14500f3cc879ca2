@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a867e976_a5ddda9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-16T18:04:53Z",
+      "side": 1,
+      "message": "LGTM, as discussed offline I think we should land this before doing the refactor since the logic\u0027s good and it allows enabling more tests.\n\nApologies for the very dry comment previously.",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5ad300c_a5075369",
@@ -72,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f946f984_418b07dd",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-16T18:04:53Z",
+      "side": 1,
+      "message": "As discussed offline I think this PBO path would work well but that requires implementing the StagingBuffer in the OpenGL backend. Even if we do this, the refactor of the copy logic would be useful to simplify code.",
+      "parentUuid": "81351a73_1bdee0ac",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2493ee9_8738e6b1",
         "filename": "src/dawn_native/opengl/QueueGL.cpp",
         "patchSetId": 5
@@ -100,6 +135,40 @@
       "writtenOn": "2021-02-15T09:07:56Z",
       "side": 1,
       "message": "This doesn\u0027t need to be computed from the real size and can instead be computed from width, for example widthInBytes \u003d width / xx * xx.\n\nI stopped reviewing this at this point because we should really share the implementation instead of adding more cruft.",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33d269d0_a4e454ae",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-16T18:04:53Z",
+      "side": 1,
+      "message": "nit: a comment explaining why we do the copy line-by-line will help future readers understand what\u0027s happening.",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb4ce7c_5e8e732b",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-16T18:04:53Z",
+      "side": 1,
+      "message": "I think this line should be inside the for-loop for Y",
       "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
