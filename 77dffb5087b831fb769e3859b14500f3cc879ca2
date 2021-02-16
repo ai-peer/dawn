@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "865e1838_8111e2da",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-16T21:21:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5ad300c_a5075369",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aa8d32d_0d39f696",
