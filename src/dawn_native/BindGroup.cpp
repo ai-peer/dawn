@@ -214,6 +214,11 @@ namespace dawn_native {
         DAWN_TRY(device->ValidateObject(descriptor->layout));
 
         if (BindingIndex(descriptor->entryCount) != descriptor->layout->GetBindingCount()) {
+            fprintf(stderr,
+                    "RHARRISON: BindingIndex = %u, descriptor->layout->GetBindingCount() = %u\n",
+                    BindingIndex(descriptor->entryCount).operator unsigned int(),
+                    descriptor->layout->GetBindingCount().operator unsigned int());
+            fflush(stderr);
             return DAWN_VALIDATION_ERROR("numBindings mismatch");
         }
 
