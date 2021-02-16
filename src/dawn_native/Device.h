@@ -33,7 +33,7 @@ namespace dawn_native {
     class AttachmentState;
     class AttachmentStateBlueprint;
     class BindGroupLayoutBase;
-    class CreateReadyPipelineTracker;
+    class CreatePipelineAsyncTracker;
     class DynamicUploader;
     class ErrorScope;
     class ErrorScopeTracker;
@@ -149,11 +149,11 @@ namespace dawn_native {
         ComputePipelineBase* CreateComputePipeline(const ComputePipelineDescriptor* descriptor);
         PipelineLayoutBase* CreatePipelineLayout(const PipelineLayoutDescriptor* descriptor);
         QuerySetBase* CreateQuerySet(const QuerySetDescriptor* descriptor);
-        void CreateReadyComputePipeline(const ComputePipelineDescriptor* descriptor,
-                                        WGPUCreateReadyComputePipelineCallback callback,
+        void CreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
+                                        WGPUCreateComputePipelineAsyncCallback callback,
                                         void* userdata);
-        void CreateReadyRenderPipeline(const RenderPipelineDescriptor* descriptor,
-                                       WGPUCreateReadyRenderPipelineCallback callback,
+        void CreateRenderPipelineAsync(const RenderPipelineDescriptor* descriptor,
+                                       WGPUCreateRenderPipelineAsyncCallback callback,
                                        void* userdata);
         RenderBundleEncoder* CreateRenderBundleEncoder(
             const RenderBundleEncoderDescriptor* descriptor);
@@ -385,7 +385,7 @@ namespace dawn_native {
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
         std::unique_ptr<ErrorScopeTracker> mErrorScopeTracker;
-        std::unique_ptr<CreateReadyPipelineTracker> mCreateReadyPipelineTracker;
+        std::unique_ptr<CreatePipelineAsyncTracker> mCreatePipelineAsyncTracker;
         Ref<QueueBase> mQueue;
 
         struct DeprecationWarnings;
