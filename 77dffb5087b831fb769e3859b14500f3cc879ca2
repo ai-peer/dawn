@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "81351a73_1bdee0ac",
+        "filename": "src/dawn_native/opengl/QueueGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-16T16:28:34Z",
+      "side": 1,
+      "message": "Or, should we just use the CopyBufferToTexture path in all cases (as the other backends do) and throw away this WriteTexture implementation entirely. With the use of PBOs in the we could also avoid the line-by-line uploads, without having to reinvent that in this implementation. WDYT?",
+      "parentUuid": "6aa8d32d_0d39f696",
+      "revId": "77dffb5087b831fb769e3859b14500f3cc879ca2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2493ee9_8738e6b1",
         "filename": "src/dawn_native/opengl/QueueGL.cpp",
         "patchSetId": 5
