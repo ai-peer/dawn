@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f1af8bf_7ad65c8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T01:43:51Z",
+      "side": 1,
+      "message": "PTAL!\nlinux-clang-dbg-x86 failures were all from one bot. After killing the bot things seem okay. Not sure what was going wrong there, but it was reporting an invalid texture format in the unittests. Maybe an outdated build cache..?",
+      "revId": "cff2a785d25ab03e04c67758a2600e6937d18df1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
