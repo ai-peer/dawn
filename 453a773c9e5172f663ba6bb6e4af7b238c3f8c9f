@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd5f7ebf_37b2849e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T01:32:22Z",
+      "side": 1,
+      "message": "Alex from the security team said they\u0027re mainly concerned about size_t in the serialized protocol.\nThis here is my preferred approach then.",
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
