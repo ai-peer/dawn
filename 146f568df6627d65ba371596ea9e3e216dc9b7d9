@@ -16,6 +16,182 @@
       "message": "PTAL!",
       "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d2585b_502fbbf3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286fdcd6_7fd205a8",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "u-nit: that block should probably be indented.",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7d67ae2_429832c3",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "(with the other followup) We could have WireResult and WIRE_TRY defined outside of this file so it can be used everywhere. Likewise BufferConsumer could have its own file so it could be unit tested.",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bb5bcd5_7a46cb3a",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "Maybe we could put DAWN_NO_DISCARD on DeserializeResult (or rename it to WireResult?) and use that type instead. This way the DAWN_NO_DISCARD doesn\u0027t need to be added to every function and we won\u0027t forget to add it in the future.\n\nNote if we choose to do this it can be in a follow-up. It would also remove the need for the ternaries in DeserializeBuffer.",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 28
+      },
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6132bc49_225973fb",
+        "filename": "src/dawn_wire/ChunkedCommandSerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "What\u0027s the plan with OnSerializeError?",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45ceab3d_4c792abd",
+        "filename": "src/dawn_wire/ChunkedCommandSerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "I\u0027m a bit worried about the extra overhead for every single command here. But I\u0027m not sure how we can reduce it if SerializeCmd and SerializeExtraSize can return errors.",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9813f06e_3863b7c1",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we skip the serialization if the available size isn\u0027t the createInfoLength?",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2df59ba9_d0611412",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5a2b158_718e7389",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac3342b_4f8b69b8",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:23:21Z",
+      "side": 1,
+      "message": "nit: the empty implementation can be in the .cpp (same for the destructor actually). Unless it is meant to be \u003d 0 in the future?",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
