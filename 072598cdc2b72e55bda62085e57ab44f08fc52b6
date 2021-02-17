@@ -16,6 +16,57 @@
       "message": "PTAL (alternate)\n\nThis version renames mHasBackendType to mHasBackendTypeFilter in order to match\nmHasVendorIdFilter, and add accessors so that it can be tested similarly.\n",
       "revId": "072598cdc2b72e55bda62085e57ab44f08fc52b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c950379c_4da9fec5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T15:35:13Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "072598cdc2b72e55bda62085e57ab44f08fc52b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73c8e873_41dbb85c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T15:35:13Z",
+      "side": 1,
+      "message": "We should keep the usage string in sync too. (even if it\u0027s growing quite large now)",
+      "revId": "072598cdc2b72e55bda62085e57ab44f08fc52b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d56d21c_3a84f779",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T15:35:13Z",
+      "side": 1,
+      "message": "This makes the backend filter and the vendor ID filter mutually exclusive. Maybe we could \u0026\u003d selected so that we can combine flags? (same for hasDevicePreference)",
+      "revId": "072598cdc2b72e55bda62085e57ab44f08fc52b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
