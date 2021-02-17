@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa2b6bcc_e4c05ba9",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "286fdcd6_7fd205a8",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea41e72_344dce56",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-02-17T19:18:15Z",
       "side": 1,
       "message": "Any chance of overflow here?",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0224e18_ecaa29fe",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Nope, it\u0027s checked above. Added a comment about it.",
+      "parentUuid": "cea41e72_344dce56",
       "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9edc22_4fbaa086",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e7d67ae2_429832c3",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bb5bcd5_7a46cb3a",
@@ -116,6 +170,30 @@
       "writtenOn": "2021-02-17T13:23:21Z",
       "side": 1,
       "message": "Maybe we could put DAWN_NO_DISCARD on DeserializeResult (or rename it to WireResult?) and use that type instead. This way the DAWN_NO_DISCARD doesn\u0027t need to be added to every function and we won\u0027t forget to add it in the future.\n\nNote if we choose to do this it can be in a follow-up. It would also remove the need for the ternaries in DeserializeBuffer.",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 28
+      },
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69df3bb0_c7fceafa",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Mm yea, I\u0027ll change this to be WireResult everywhere after the deserialize changes.",
+      "parentUuid": "6bb5bcd5_7a46cb3a",
       "range": {
         "startLine": 61,
         "startChar": 8,
@@ -145,6 +223,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccf239d1_a4a9cc4d",
+        "filename": "src/dawn_wire/ChunkedCommandSerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "I don\u0027t think it would be good for this to silently fail, so the plan is to have it log something in Chrome, or perhaps a CHECK? it should really never happen at all.",
+      "parentUuid": "6132bc49_225973fb",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45ceab3d_4c792abd",
         "filename": "src/dawn_wire/ChunkedCommandSerializer.h",
         "patchSetId": 2
@@ -156,6 +252,24 @@
       "writtenOn": "2021-02-17T13:23:21Z",
       "side": 1,
       "message": "I\u0027m a bit worried about the extra overhead for every single command here. But I\u0027m not sure how we can reduce it if SerializeCmd and SerializeExtraSize can return errors.",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "347ec9c0_91961750",
+        "filename": "src/dawn_wire/ChunkedCommandSerializer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "yea, unfortunately I think the best we can do is to store |success| somewhere else and defer checking it until some later point in time. It would be a little bit less branching, but I\u0027m not convinced it would help very much.",
+      "parentUuid": "45ceab3d_4c792abd",
       "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +291,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4636346b_681979f7",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9813f06e_3863b7c1",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2df59ba9_d0611412",
@@ -190,6 +322,24 @@
       "writtenOn": "2021-02-17T13:23:21Z",
       "side": 1,
       "message": "ditto",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2093e3d8_a76659e9",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2df59ba9_d0611412",
       "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -211,6 +361,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "befd55b2_09a92d77",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5a2b158_718e7389",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ac3342b_4f8b69b8",
@@ -224,6 +392,24 @@
       "writtenOn": "2021-02-17T13:23:21Z",
       "side": 1,
       "message": "nit: the empty implementation can be in the .cpp (same for the destructor actually). Unless it is meant to be \u003d 0 in the future?",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6fd0ed1_1a051f23",
+        "filename": "src/include/dawn_wire/Wire.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ac3342b_4f8b69b8",
       "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5cbb506_591e5cbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T20:38:50Z",
+      "side": 1,
+      "message": "Thanks! Landing this and can follow up to address any other concerns about the specifics of OnSerializeError or optimizing the error reporting.",
+      "revId": "ad68685259d45911db9f291af83dfe9f2946b11e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
