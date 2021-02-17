@@ -16,6 +16,29 @@
       "message": "Alex from the security team said they\u0027re mainly concerned about size_t in the serialized protocol.\nThis here is my preferred approach then.",
       "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3620110b_8ae3f1f9",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-17T01:42:04Z",
+      "side": 1,
+      "message": "note: I think I\u0027m going to land the null-terminator patch first and then get rid of this TryAssign thing. This will become:\n\nuint64_t stringLength64 \u003d transfer-\u003e{{memberName}}StrLen;\nif (stringLength64 \u003e\u003d std::numeric_limits\u003csize_t\u003e::max()) {\n  return FatalError;\n}\n\nsize_t stringLength \u003d static_cast\u003csize_t\u003e(stringLength64);",
+      "range": {
+        "startLine": 331,
+        "startChar": 16,
+        "endLine": 332,
+        "endChar": 90
+      },
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
