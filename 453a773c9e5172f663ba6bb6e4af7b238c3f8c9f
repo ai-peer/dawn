@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fcc4541_38e5ae4e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:41:04Z",
+      "side": 1,
+      "message": "LGTM thanks for making all the options!",
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a866067b_482f5caa",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:41:04Z",
+      "side": 1,
+      "message": "That\u0027s a nice way to do the assert!",
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3620110b_8ae3f1f9",
@@ -37,6 +71,47 @@
         "endLine": 332,
         "endChar": 90
       },
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53fa5fa5_50ab023e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:41:04Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3620110b_8ae3f1f9",
+      "range": {
+        "startLine": 331,
+        "startChar": 16,
+        "endLine": 332,
+        "endChar": 90
+      },
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a3c5e72_18c6c543",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-17T13:41:04Z",
+      "side": 1,
+      "message": "This will be removed after the BufferConsumer patches are landed right?",
       "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
