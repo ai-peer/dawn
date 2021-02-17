@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "01bed15f_74bc5b85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-17T15:47:32Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "453a773c9e5172f663ba6bb6e4af7b238c3f8c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a866067b_482f5caa",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 2
