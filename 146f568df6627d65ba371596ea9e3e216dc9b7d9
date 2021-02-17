@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5d9851_bfcb3366",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-17T19:18:15Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "286fdcd6_7fd205a8",
@@ -48,6 +65,23 @@
       "writtenOn": "2021-02-17T13:23:21Z",
       "side": 1,
       "message": "u-nit: that block should probably be indented.",
+      "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea41e72_344dce56",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-17T19:18:15Z",
+      "side": 1,
+      "message": "Any chance of overflow here?",
       "revId": "146f568df6627d65ba371596ea9e3e216dc9b7d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
