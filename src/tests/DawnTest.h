@@ -232,6 +232,8 @@ class DawnTestEnvironment : public testing::Environment {
     bool mBeginCaptureOnStartup = false;
     bool mHasVendorIdFilter = false;
     uint32_t mVendorIdFilter = 0;
+    bool mHasBackendType = false;
+    wgpu::BackendType mBackendType;
     std::string mWireTraceDir;
 
     std::vector<std::string> mEnabledToggles;

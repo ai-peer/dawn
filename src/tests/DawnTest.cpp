@@ -329,6 +329,31 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             continue;
         }
 
+        constexpr const char kBackendArg[] = "--backend=";
+        argLen = sizeof(kBackendArg) - 1;
+        if (strncmp(argv[i], kBackendArg, argLen) == 0) {
+            const char* param = argv[i] + argLen;
+            if (strcmp("d3d12", param) == 0) {
+                mBackendType = wgpu::BackendType::D3D12;
+            } else if (strcmp("metal", param) == 0) {
+                mBackendType = wgpu::BackendType::Metal;
+            } else if (strcmp("null", param) == 0) {
+                mBackendType = wgpu::BackendType::Null;
+            } else if (strcmp("opengl", param) == 0) {
+                mBackendType = wgpu::BackendType::OpenGL;
+            } else if (strcmp("opengles", param) == 0) {
+                mBackendType = wgpu::BackendType::OpenGLES;
+            } else if (strcmp("vulkan", param) == 0) {
+                mBackendType = wgpu::BackendType::Vulkan;
+            } else {
+                dawn::ErrorLog()
+                    << "Invalid backend \"" << param
+                    << "\". Valid backends are: d3d12, metal, null, opengl, opengles, vulkan.";
+                UNREACHABLE();
+            }
+            mHasBackendType = true;
+            continue;
+        }
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
             dawn::InfoLog()
                 << "\n\nUsage: " << argv[0]
@@ -439,7 +464,10 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn_native::In
 
         // The adapter is selected if:
         bool selected = false;
-        if (mHasVendorIdFilter) {
+        if (mHasBackendType) {
+            // It matches the backend type, if present.
+            selected = properties.backendType == mBackendType;
+        } else if (mHasVendorIdFilter) {
             // It matches the vendor id, if present.
             selected = mVendorIdFilter == properties.vendorID;
 
