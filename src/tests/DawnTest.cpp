@@ -329,6 +329,31 @@ void DawnTestEnvironment::ParseArgs(int argc, char** argv) {
             continue;
         }
 
+        constexpr const char kBackendArg[] = "--backend=";
+        argLen = sizeof(kBackendArg) - 1;
+        if (strncmp(argv[i], kBackendArg, argLen) == 0) {
+            const char* param = argv[i] + argLen;
+            if (strcmp("d3d12", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::D3D12;
+            } else if (strcmp("metal", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::Metal;
+            } else if (strcmp("null", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::Null;
+            } else if (strcmp("opengl", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::OpenGL;
+            } else if (strcmp("opengles", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::OpenGLES;
+            } else if (strcmp("vulkan", param) == 0) {
+                mBackendTypeFilter = wgpu::BackendType::Vulkan;
+            } else {
+                dawn::ErrorLog()
+                    << "Invalid backend \"" << param
+                    << "\". Valid backends are: d3d12, metal, null, opengl, opengles, vulkan.";
+                UNREACHABLE();
+            }
+            mHasBackendTypeFilter = true;
+            continue;
+        }
         if (strcmp("-h", argv[i]) == 0 || strcmp("--help", argv[i]) == 0) {
             dawn::InfoLog()
                 << "\n\nUsage: " << argv[0]
@@ -439,7 +464,10 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const dawn_native::In
 
         // The adapter is selected if:
         bool selected = false;
-        if (mHasVendorIdFilter) {
+        if (mHasBackendTypeFilter) {
+            // It matches the backend type, if present.
+            selected = properties.backendType == mBackendTypeFilter;
+        } else if (mHasVendorIdFilter) {
             // It matches the vendor id, if present.
             selected = mVendorIdFilter == properties.vendorID;
 
@@ -610,6 +638,14 @@ uint32_t DawnTestEnvironment::GetVendorIdFilter() const {
     return mVendorIdFilter;
 }
 
+bool DawnTestEnvironment::HasBackendTypeFilter() const {
+    return mHasBackendTypeFilter;
+}
+
+wgpu::BackendType DawnTestEnvironment::GetBackendTypeFilter() const {
+    return mBackendTypeFilter;
+}
+
 const char* DawnTestEnvironment::GetWireTraceDir() const {
     if (mWireTraceDir.length() == 0) {
         return nullptr;
@@ -763,6 +799,14 @@ bool DawnTestBase::HasVendorIdFilter() const {
 
 uint32_t DawnTestBase::GetVendorIdFilter() const {
     return gTestEnv->GetVendorIdFilter();
+}
+
+bool DawnTestBase::HasBackendTypeFilter() const {
+    return gTestEnv->HasBackendTypeFilter();
+}
+
+wgpu::BackendType DawnTestBase::GetBackendTypeFilter() const {
+    return gTestEnv->GetBackendTypeFilter();
 }
 
 wgpu::Instance DawnTestBase::GetInstance() const {
