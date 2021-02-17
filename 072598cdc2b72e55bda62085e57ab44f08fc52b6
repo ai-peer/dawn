@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb079ed_47053df2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-17T15:18:18Z",
+      "side": 1,
+      "message": "PTAL (alternate)\n\nThis version renames mHasBackendType to mHasBackendTypeFilter in order to match\nmHasVendorIdFilter, and add accessors so that it can be tested similarly.\n",
+      "revId": "072598cdc2b72e55bda62085e57ab44f08fc52b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
