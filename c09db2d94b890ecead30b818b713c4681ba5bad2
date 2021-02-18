@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79360c4d_c9b0fec7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002336
+      },
+      "writtenOn": "2021-02-18T18:33:09Z",
+      "side": 1,
+      "message": "The next version of clang has retired a warning option used by the Dawn build.",
+      "revId": "c09db2d94b890ecead30b818b713c4681ba5bad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
