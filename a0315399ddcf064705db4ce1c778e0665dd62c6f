@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fcddf6f_2534b806",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T19:45:02Z",
+      "side": 1,
+      "message": "Thoughts?\n\nIt\u0027s a little more magic, but it would let us abolish this pattern here, which I find quite ugly.\nhttps://source.chromium.org/search?q\u003df:dawn%20%22DAWN_TRY(std::move(%22\nThe other pattern gives poorer error messages and stack traces. It tells you that std::move(err) failed, instead of the original source of the error.",
+      "revId": "a0315399ddcf064705db4ce1c778e0665dd62c6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
