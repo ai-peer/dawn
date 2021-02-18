@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39c1ca60_0a71c72b",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T16:35:56Z",
+      "side": 1,
+      "message": "Indeed it can; it depends on what the type is in dawn.json",
+      "parentUuid": "5d24b10d_6782d7da",
+      "revId": "5cb60c1798ccd0a359d1194f346292a8e72f90cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e7194034_2c7f2548",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2021-02-18T14:58:37Z",
       "side": 1,
       "message": "Nit: Can the type of memberLength vary? If not, could we be explicit about the type here? I prefer auto only when the type is obvious from the surrounding code.",
+      "revId": "5cb60c1798ccd0a359d1194f346292a8e72f90cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f66577a6_54cbce3c",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T16:35:56Z",
+      "side": 1,
+      "message": "Same here",
+      "parentUuid": "e7194034_2c7f2548",
       "revId": "5cb60c1798ccd0a359d1194f346292a8e72f90cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
