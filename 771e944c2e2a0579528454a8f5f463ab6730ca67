@@ -51,6 +51,24 @@
       "parentUuid": "7c9fa4ac_cba56c00",
       "revId": "771e944c2e2a0579528454a8f5f463ab6730ca67",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40d7e03_2ebec423",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-18T18:08:17Z",
+      "side": 1,
+      "message": "You know more than I about the wire, so I\u0027m afraid I\u0027m not too helpful here. Fine to land without a test.",
+      "parentUuid": "051fb4be_5c7f8f29",
+      "revId": "771e944c2e2a0579528454a8f5f463ab6730ca67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
