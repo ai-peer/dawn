@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95aba8fe_6161cccd",
+        "filename": "generator/templates/dawn_wire/client/ClientHandlers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T18:49:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4748499_dd98ec95",
+      "revId": "5cb60c1798ccd0a359d1194f346292a8e72f90cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d56ea68a_69d79a48",
@@ -154,6 +172,24 @@
       "writtenOn": "2021-02-18T14:58:37Z",
       "side": 1,
       "message": "Same here.",
+      "revId": "5cb60c1798ccd0a359d1194f346292a8e72f90cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc6df139_5bc96da7",
+        "filename": "generator/templates/dawn_wire/server/ServerHandlers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T18:49:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d56ea68a_69d79a48",
       "revId": "5cb60c1798ccd0a359d1194f346292a8e72f90cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
