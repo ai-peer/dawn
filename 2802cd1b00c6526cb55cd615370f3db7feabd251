@@ -112,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b3c1c46a_a76dd851",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-18T18:16:02Z",
+      "side": 1,
+      "message": "double check: there would be possible overflow if we are doing uint32_t + uint32_t? (e.g. What I\u0027m doing is correct here to prevent overflow)",
+      "parentUuid": "676efb47_d72bae6c",
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6262413b_0020622b",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 2
