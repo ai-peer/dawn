@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7b8c4c_d57194a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-18T15:27:50Z",
+      "side": 1,
+      "message": "LGTM too, but can we have at least a couple tests in Dawn too? (for example for success, error, and a try at making an overflow?)",
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "213b0b73_7d835569",
@@ -72,6 +89,23 @@
         "endLine": 53,
         "endChar": 0
       },
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "676efb47_d72bae6c",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-18T15:27:50Z",
+      "side": 1,
+      "message": "Can we also comment that there\u0027s no overflow because we\u0027re doing uint32_t + uint32_t? It would help future readers of the code.",
       "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
