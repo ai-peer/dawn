@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7495715_cfd9a673",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-02-18T22:43:09Z",
+      "side": 1,
+      "message": "A simple patch. We have test for compressed texture for sampleCount, but no test for compressed texture for mipLevelCount. \n\nPTAL. ",
+      "revId": "2b1434ace60beb2840ad914e1448350aa1b14bb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
