@@ -140,23 +140,19 @@ TEST_F(ErrorScopeValidationTest, PushPopBalanced) {
     }
 }
 
-// Test that error scopes do not call their callbacks until after an enclosed Queue::Submit
+// Test that error scopes call their callbacks before an enclosed Queue::Submit
 // completes
 TEST_F(ErrorScopeValidationTest, CallbackAfterQueueSubmit) {
     wgpu::Queue queue = device.GetQueue();
 
     device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
     queue.Submit(0, nullptr);
-    device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
 
     EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_NoError, _, this)).Times(1);
-
-    // Side effects of Queue::Submit only are seen after Tick()
-    device.Tick();
-    FlushWire();
+    device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
 }
 
-// Test that parent error scopes do not call their callbacks until after an enclosed Queue::Submit
+// Test that parent error scopes also call their callbacks before an enclosed Queue::Submit
 // completes
 TEST_F(ErrorScopeValidationTest, CallbackAfterQueueSubmitNested) {
     wgpu::Queue queue = device.GetQueue();
@@ -164,40 +160,17 @@ TEST_F(ErrorScopeValidationTest, CallbackAfterQueueSubmitNested) {
     device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
     device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
     queue.Submit(0, nullptr);
-    device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
-    device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this + 1);
 
     EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_NoError, _, this)).Times(1);
     EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_NoError, _, this + 1))
         .Times(1);
-
-    // Side effects of Queue::Submit only are seen after Tick()
-    device.Tick();
-    FlushWire();
-}
-
-// Test a callback that returns asynchronously followed by a synchronous one
-TEST_F(ErrorScopeValidationTest, AsynchronousThenSynchronous) {
-    wgpu::Queue queue = device.GetQueue();
-
-    device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
-    queue.Submit(0, nullptr);
     device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
-
-    EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_NoError, _, this + 1))
-        .Times(1);
-    device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
     device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this + 1);
-
-    EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_NoError, _, this)).Times(1);
-
-    // Side effects of Queue::Submit only are seen after Tick()
-    device.Tick();
-    FlushWire();
 }
 
 // Test that if the device is destroyed before the callback occurs, it is called with NoError
-// because all previous operations are waited upon before the destruction returns.
+// in dawn_native, but Unknown in dawn_wire because the device is destroyed before the callback
+// message happens.
 TEST_F(ErrorScopeValidationTest, DeviceDestroyedBeforeCallback) {
     device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
     {
@@ -205,10 +178,20 @@ TEST_F(ErrorScopeValidationTest, DeviceDestroyedBeforeCallback) {
         wgpu::Queue queue = device.GetQueue();
         queue.Submit(0, nullptr);
     }
-    device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
 
-    EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_Unknown, _, this)).Times(1);
-    device = nullptr;
+    if (UsesWire()) {
+        device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
+
+        EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_Unknown, _, this))
+            .Times(1);
+        device = nullptr;
+    } else {
+        EXPECT_CALL(*mockDevicePopErrorScopeCallback, Call(WGPUErrorType_NoError, _, this))
+            .Times(1);
+        device.PopErrorScope(ToMockDevicePopErrorScopeCallback, this);
+
+        device = nullptr;
+    }
 }
 
 // Regression test that on device shutdown, we don't get a recursion in O(pushed error scope) that
