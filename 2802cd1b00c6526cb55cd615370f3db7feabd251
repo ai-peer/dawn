@@ -130,6 +130,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f44487e2_3203c827",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T18:20:15Z",
+      "side": 1,
+      "message": "I think: we should comment that there is no overflow since we cast to uint64_t. MAX_UINT32 + MAX_UINT32 should fit inside a uint64_t.",
+      "parentUuid": "b3c1c46a_a76dd851",
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6262413b_0020622b",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 2
