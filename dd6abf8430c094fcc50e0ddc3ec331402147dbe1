@@ -16,6 +16,23 @@
       "message": "I\u0027m not sure how this wasn\u0027t caught on CQ, but I broke the build yesterday and the roll was stopped.\nI\u0027m looking to see if there\u0027s a new version of clang..",
       "revId": "dd6abf8430c094fcc50e0ddc3ec331402147dbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9f521e_b1b43921",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-18T16:27:09Z",
+      "side": 1,
+      "message": "LGTM Is there a warning we can enable to prevent future breakage like this?",
+      "revId": "dd6abf8430c094fcc50e0ddc3ec331402147dbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
