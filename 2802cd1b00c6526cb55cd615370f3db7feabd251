@@ -16,6 +16,87 @@
       "message": "Related cts change is at https://github.com/gpuweb/cts/pull/466\nWondering why it\u0027s not failing the CQ dry run here. (How is webgpu cts getting rolled now?)",
       "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ec7c14_4b952330",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T07:33:13Z",
+      "side": 1,
+      "message": "LGTM. I think validation error is one of the allowed WebGPU OOB-access behaviors.",
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3938d9_9a6a4295",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T07:33:13Z",
+      "side": 1,
+      "message": "It\u0027s skipped on all backends https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/web_tests/WebGPUExpectations;l\u003d180;drc\u003d55d9f12ec0601d0b62a187af18b945515f2f3328;bpv\u003d1;bpt\u003d0",
+      "parentUuid": "d46cf6a8_fa90c283",
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "213b0b73_7d835569",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T07:33:13Z",
+      "side": 1,
+      "message": "we wouldn\u0027t need these getters with the comment at [1]",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6262413b_0020622b",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T07:33:13Z",
+      "side": 1,
+      "message": "[1]\nnit: maybe pass in (firstIndex + indexCount) and do the check inside ValidateCanDrawIndexed",
+      "range": {
+        "startLine": 88,
+        "startChar": 45,
+        "endLine": 95,
+        "endChar": 17
+      },
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
