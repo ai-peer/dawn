@@ -87,6 +87,12 @@ namespace dawn_native {
             if (IsValidationEnabled()) {
                 DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
 
+                // A valid index buffer is bound when it reaches here
+                if (static_cast<uint64_t>(firstIndex) + indexCount >
+                    mCommandBufferState.GetIndexBufferSize() /
+                        IndexFormatSize(mCommandBufferState.GetIndexFormat())) {
+                    return DAWN_VALIDATION_ERROR("Index count is out of bounds");
+                }
                 if (mDisableBaseInstance && firstInstance != 0) {
                     return DAWN_VALIDATION_ERROR("Non-zero first instance not supported");
                 }
@@ -235,7 +241,7 @@ namespace dawn_native {
                 }
             }
 
-            mCommandBufferState.SetIndexBuffer(format);
+            mCommandBufferState.SetIndexBuffer(format, size);
 
             SetIndexBufferCmd* cmd =
                 allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
