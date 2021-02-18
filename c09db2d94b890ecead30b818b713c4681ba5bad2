@@ -33,6 +33,23 @@
       "message": "Should we use -Wno-redundant-move instead?",
       "revId": "c09db2d94b890ecead30b818b713c4681ba5bad2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "054095cc_aa91aa7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000116
+      },
+      "writtenOn": "2021-02-18T19:54:36Z",
+      "side": 1,
+      "message": "Wredundant-move (like Wpessimizing-move) is part of -Wall, which you likely already enable.",
+      "revId": "c09db2d94b890ecead30b818b713c4681ba5bad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
