@@ -16,6 +16,92 @@
       "message": "Thanks for the review",
       "revId": "c0f2a03a8b3b975340f8cc8af686949f86af15e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fddf88cb_5fe1c3a5",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T21:40:39Z",
+      "side": 1,
+      "message": "nit: I might say \"range\". because the error could also be because firstIndex is too large.",
+      "range": {
+        "startLine": 84,
+        "startChar": 48,
+        "endLine": 84,
+        "endChar": 54
+      },
+      "revId": "c0f2a03a8b3b975340f8cc8af686949f86af15e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8e71d5c_b3511290",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T21:40:39Z",
+      "side": 1,
+      "message": "2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 18
+      },
+      "revId": "c0f2a03a8b3b975340f8cc8af686949f86af15e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ef7858_4a4d9bbe",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T21:40:39Z",
+      "side": 1,
+      "message": "CreateBufferFromData has a form where you can pass the data in directly\n\nindexBuffer \u003d\n            utils::CreateBufferFromData\u003cuint32_t\u003e(device, wgpu::BufferUsage::Index, {0, 1, 2, 3, 1, 2});",
+      "range": {
+        "startLine": 50,
+        "startChar": 19,
+        "endLine": 50,
+        "endChar": 39
+      },
+      "revId": "c0f2a03a8b3b975340f8cc8af686949f86af15e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cabdeb5a_0b087007",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T21:40:39Z",
+      "side": 1,
+      "message": "hm.. I\u0027m curious. Do the backend API validation layers allow indexCount to be 0, but firstIndex to be out of bounds? I think this *probably* shouldn\u0027t cause a validation error, and instead be a no-op.\n\nIf the backend validation layers don\u0027t allow it, we can still do most of the draw validation, but skip outputting the command here:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/RenderEncoderBase.cpp;l\u003d98?q\u003dRenderEncoderBase",
+      "revId": "c0f2a03a8b3b975340f8cc8af686949f86af15e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
