@@ -97,10 +97,14 @@ namespace dawn_native {
     // When Errors aren't handled explicitly, calls to functions returning errors should be
     // wrapped in an DAWN_TRY. It will return the error if any, otherwise keep executing
     // the current function.
-#define DAWN_TRY(EXPR)                                                                       \
+#define DAWN_TRY(EXPR) DAWN_TRY_WITH_CLEANUP(EXPR, {})
+
+#define DAWN_TRY_WITH_CLEANUP(EXPR, BODY)                                                    \
     {                                                                                        \
         auto DAWN_LOCAL_VAR = EXPR;                                                          \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                                       \
+            do                                                                               \
+                BODY while (0);                                                              \
             std::unique_ptr<::dawn_native::ErrorData> error = DAWN_LOCAL_VAR.AcquireError(); \
             error->AppendBacktrace(__FILE__, __func__, __LINE__);                            \
             return {std::move(error)};                                                       \
