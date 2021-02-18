@@ -16,6 +16,161 @@
       "message": "PTAL!",
       "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba872a84_94afd386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8efcd84_6ee68866",
+        "filename": "src/dawn_native/Queue.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "nit: typo",
+      "range": {
+        "startLine": 93,
+        "startChar": 56,
+        "endLine": 93,
+        "endChar": 68
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a91b96_1ed4b22a",
+        "filename": "src/dawn_wire/client/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "nit: don\u0027t reference \"fence\"",
+      "range": {
+        "startLine": 29,
+        "startChar": 44,
+        "endLine": 29,
+        "endChar": 50
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906582b4_d2f68b3d",
+        "filename": "src/dawn_wire/client/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "this should happen with status Unknown in Queue::~Queue, should have a test for it too",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 110,
+        "endChar": 36
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13e1d228_ada00519",
+        "filename": "src/dawn_wire/server/ServerQueue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "we have this check a lot, but as you pointed out once, QueueObjects().Get(0) will return nullptr, so we don\u0027t need it.",
+      "range": {
+        "startLine": 55,
+        "startChar": 8,
+        "endLine": 59,
+        "endChar": 0
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00506378_9fb300e4",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "OnSubmittedWorkDone",
+      "range": {
+        "startLine": 98,
+        "startChar": 14,
+        "endLine": 98,
+        "endChar": 21
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7101b1b4_d3e88f9c",
+        "filename": "src/tests/end2end/QueueTimelineTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T17:17:18Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 133,
+        "startChar": 9,
+        "endLine": 133,
+        "endChar": 16
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
