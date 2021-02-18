@@ -93,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be231efe_75a14e36",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-18T21:20:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "213b0b73_7d835569",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 53,
+        "endChar": 0
+      },
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "676efb47_d72bae6c",
@@ -146,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "567e2db2_7ffc2ce5",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-18T21:20:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f44487e2_3203c827",
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6262413b_0020622b",
@@ -159,6 +201,30 @@
       "writtenOn": "2021-02-18T07:33:13Z",
       "side": 1,
       "message": "[1]\nnit: maybe pass in (firstIndex + indexCount) and do the check inside ValidateCanDrawIndexed",
+      "range": {
+        "startLine": 88,
+        "startChar": 45,
+        "endLine": 95,
+        "endChar": 17
+      },
+      "revId": "2802cd1b00c6526cb55cd615370f3db7feabd251",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa34bf1b_ea77c67f",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-18T21:20:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6262413b_0020622b",
       "range": {
         "startLine": 88,
         "startChar": 45,
