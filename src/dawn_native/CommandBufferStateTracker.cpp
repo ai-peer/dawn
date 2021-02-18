@@ -72,7 +72,22 @@ namespace dawn_native {
         return ValidateOperation(kDrawAspects);
     }
 
-    MaybeError CommandBufferStateTracker::ValidateCanDrawIndexed() {
+    MaybeError CommandBufferStateTracker::ValidateCanDrawIndexed(uint32_t firstIndex,
+                                                                 uint32_t indexCount) {
+        DAWN_TRY(ValidateOperation(kDrawIndexedAspects));
+
+        // A valid index buffer is bound when it reaches here
+        // There is no overflow since we cast to uint64_t. MAX_UINT32 + MAX_UINT32 should fit inside
+        // a uint64_t
+        if (static_cast<uint64_t>(firstIndex) + indexCount >
+            mIndexBufferSize / IndexFormatSize(mIndexFormat)) {
+            return DAWN_VALIDATION_ERROR("Index range is out of bounds");
+        }
+
+        return {};
+    }
+
+    MaybeError CommandBufferStateTracker::ValidateCanDrawIndexedIndirect() {
         return ValidateOperation(kDrawIndexedAspects);
     }
 
@@ -210,9 +225,10 @@ namespace dawn_native {
         mAspects.reset(VALIDATION_ASPECT_BIND_GROUPS);
     }
 
-    void CommandBufferStateTracker::SetIndexBuffer(wgpu::IndexFormat format) {
+    void CommandBufferStateTracker::SetIndexBuffer(wgpu::IndexFormat format, uint64_t size) {
         mIndexBufferSet = true;
         mIndexFormat = format;
+        mIndexBufferSize = size;
     }
 
     void CommandBufferStateTracker::SetVertexBuffer(VertexBufferSlot slot) {
