@@ -33,6 +33,24 @@
       "message": "LGTM Is there a warning we can enable to prevent future breakage like this?",
       "revId": "dd6abf8430c094fcc50e0ddc3ec331402147dbe1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee23ebc6_8d2ab778",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-18T16:29:16Z",
+      "side": 1,
+      "message": "It\u0027s -Wdeprecated-copy-dtor but we have it, so I\u0027m very confused.",
+      "parentUuid": "3f9f521e_b1b43921",
+      "revId": "dd6abf8430c094fcc50e0ddc3ec331402147dbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
