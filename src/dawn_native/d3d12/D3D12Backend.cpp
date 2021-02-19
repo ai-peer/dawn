@@ -51,6 +51,20 @@ namespace dawn_native { namespace d3d12 {
         : ExternalImageDescriptor(ExternalImageType::DXGISharedHandle) {
     }
 
+    ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource)
+        : mD3D12Resource(std::move(d3d12Resource)) {
+    }
+
+    WGPUTexture ExternalImageDXGI::ProduceTexture(
+        WGPUDevice device,
+        const ExternalImageDescriptorDXGISharedHandle* descriptor) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
+            descriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
+            descriptor->isSwapChainTexture);
+        return reinterpret_cast<WGPUTexture>(texture.Detach());
+    }
+
     uint64_t SetExternalMemoryReservation(WGPUDevice device,
                                           uint64_t requestedReservationSize,
                                           MemorySegment memorySegment) {
@@ -60,13 +74,16 @@ namespace dawn_native { namespace d3d12 {
             memorySegment, requestedReservationSize);
     }
 
-    WGPUTexture WrapSharedHandle(WGPUDevice device,
-                                 const ExternalImageDescriptorDXGISharedHandle* descriptor) {
+    std::unique_ptr<ExternalImageDXGI> WrapSharedHandle(WGPUDevice device, HANDLE sharedHandle) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
-        Ref<TextureBase> texture = backendDevice->WrapSharedHandle(
-            descriptor, descriptor->sharedHandle, ExternalMutexSerial(descriptor->acquireMutexKey),
-            descriptor->isSwapChainTexture);
-        return reinterpret_cast<WGPUTexture>(texture.Detach());
+
+        Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
+        if (FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(
+                sharedHandle, IID_PPV_ARGS(&d3d12Resource)))) {
+            return nullptr;
+        }
+
+        return std::make_unique<ExternalImageDXGI>(std::move(d3d12Resource));
     }
 
     AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
