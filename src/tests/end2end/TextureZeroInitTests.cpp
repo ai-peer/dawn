@@ -1865,6 +1865,9 @@ TEST_P(CompressedTextureZeroInitTest, HalfCopyBufferToTexture) {
 // Test that 0 lazy clear count happens when we copy buffer to texture to a nonzero mip level
 // (with physical size different from the virtual mip size)
 TEST_P(CompressedTextureZeroInitTest, FullCopyToNonZeroMipLevel) {
+    // TODO(crbug.com/dawn/593): This test uses glTextureView() which is not supported on OpenGL ES.
+    DAWN_SKIP_TEST_IF(IsOpenGLES());
+
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.usage =
         wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled;
