@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb79d336_811bc1f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-19T17:44:39Z",
+      "side": 1,
+      "message": "Changes since last review:\n\n- fixed desktop GL glPixelStorei() calls\n- added support for GL_NV_sRGB_formats\n- added some comments",
+      "revId": "2b93228afdfba80e70b006e8268c23482d43850f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
