@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16a3b406_86dda773",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T11:07:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a0315399ddcf064705db4ce1c778e0665dd62c6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0104f211_cca051e9",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-02-18T19:48:37Z",
       "side": 1,
       "message": "ew, I wanted a newline after this, but git cl format removed it :(\n\nI can make it:\n\ndo\n  BODY while(0);",
+      "range": {
+        "startLine": 106,
+        "startChar": 12,
+        "endLine": 106,
+        "endChar": 17
+      },
+      "revId": "a0315399ddcf064705db4ce1c778e0665dd62c6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e756d2_0e630b4e",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T11:07:03Z",
+      "side": 1,
+      "message": "That would work, or just {BODY} maybe?",
+      "parentUuid": "0104f211_cca051e9",
       "range": {
         "startLine": 106,
         "startChar": 12,
