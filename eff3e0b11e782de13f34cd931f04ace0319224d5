@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f33e21f8_d29d027c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:14:07Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c4d0060_a7fee56b",
@@ -48,6 +65,81 @@
       "writtenOn": "2021-02-19T14:41:44Z",
       "side": 1,
       "message": "Out of curiosity, since this seems to be unconditionally allocated, why not aggregate instead of unique_ptr?",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb995ce1_b4640c1f",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:14:07Z",
+      "side": 1,
+      "message": "I think it\u0027s because it avoids having to include \"ErrorScope.h\" in this file.",
+      "parentUuid": "7c4d0060_a7fee56b",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79fb6f98_f437f38c",
+        "filename": "src/dawn_native/ErrorScope.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:14:07Z",
+      "side": 1,
+      "message": "nit: Maybe this conversion could be done on error scope creation so that it happens only once.",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 56
+      },
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63dcc04b_788b4d9f",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:14:07Z",
+      "side": 1,
+      "message": "Maybe we could use testing::InSequence and also register an onWorkSubmittedDone on the queue to check the error scope callback is called before the work done callback.",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54fe6d58_f38d26ce",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:14:07Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
