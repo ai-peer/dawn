@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54784923_f739ab84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:06:59Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f003959e_908b4e57",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:06:59Z",
+      "side": 1,
+      "message": "nit: no need for a layout, you can use the pipeline\u0027s defaulted layout.",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38bf317f_db4149cb",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-19T15:06:59Z",
+      "side": 1,
+      "message": "I think this should be invalid, WebGPU tends to avoid special cases like this (contrary to GL). Also how comes this is not failing at the moment? The validation check doesn\u0027t special case indexCount \u003d 0.",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
