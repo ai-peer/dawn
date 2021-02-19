@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55e1fc26_1251d69f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-19T14:41:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c4d0060_a7fee56b",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-19T14:41:44Z",
+      "side": 1,
+      "message": "Out of curiosity, since this seems to be unconditionally allocated, why not aggregate instead of unique_ptr?",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
