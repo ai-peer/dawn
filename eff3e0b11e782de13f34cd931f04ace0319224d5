@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d4a4438_56892e16",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-19T16:27:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eb995ce1_b4640c1f",
+      "revId": "eff3e0b11e782de13f34cd931f04ace0319224d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79fb6f98_f437f38c",
