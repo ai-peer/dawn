@@ -85,7 +85,7 @@ namespace dawn_native {
                                         uint32_t firstInstance) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
-                DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
+                DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed(indexCount, firstIndex));
 
                 if (mDisableBaseInstance && firstInstance != 0) {
                     return DAWN_VALIDATION_ERROR("Non-zero first instance not supported");
@@ -139,7 +139,7 @@ namespace dawn_native {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
                 DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
-                DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
+                DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexedIndirect());
 
                 // Indexed indirect draws need a compute-shader based validation check that the
                 // range of indices is contained inside the index buffer on Metal. Disallow them as
@@ -235,7 +235,7 @@ namespace dawn_native {
                 }
             }
 
-            mCommandBufferState.SetIndexBuffer(format);
+            mCommandBufferState.SetIndexBuffer(format, size);
 
             SetIndexBufferCmd* cmd =
                 allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);

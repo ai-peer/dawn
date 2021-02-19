@@ -32,13 +32,14 @@ namespace dawn_native {
         // Non-state-modifying validation functions
         MaybeError ValidateCanDispatch();
         MaybeError ValidateCanDraw();
-        MaybeError ValidateCanDrawIndexed();
+        MaybeError ValidateCanDrawIndexed(uint32_t firstIndex, uint32_t indexCount);
+        MaybeError ValidateCanDrawIndexedIndirect();
 
         // State-modifying methods
         void SetComputePipeline(ComputePipelineBase* pipeline);
         void SetRenderPipeline(RenderPipelineBase* pipeline);
         void SetBindGroup(BindGroupIndex index, BindGroupBase* bindgroup);
-        void SetIndexBuffer(wgpu::IndexFormat format);
+        void SetIndexBuffer(wgpu::IndexFormat format, uint64_t size);
         void SetVertexBuffer(VertexBufferSlot slot);
 
         static constexpr size_t kNumAspects = 4;
@@ -57,6 +58,7 @@ namespace dawn_native {
         ityp::bitset<VertexBufferSlot, kMaxVertexBuffers> mVertexBufferSlotsUsed;
         bool mIndexBufferSet = false;
         wgpu::IndexFormat mIndexFormat;
+        uint64_t mIndexBufferSize = 0;
 
         PipelineLayoutBase* mLastPipelineLayout = nullptr;
         RenderPipelineBase* mLastRenderPipeline = nullptr;
