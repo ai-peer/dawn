@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "db9cb919e07b2223f047f3e59a3ef2ffedfa7c42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37a61a22_b682226a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-19T16:02:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "db9cb919e07b2223f047f3e59a3ef2ffedfa7c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b24b9457_7582663d",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-19T16:02:54Z",
+      "side": 1,
+      "message": "nit: render",
+      "range": {
+        "startLine": 252,
+        "startChar": 21,
+        "endLine": 252,
+        "endChar": 42
+      },
+      "revId": "db9cb919e07b2223f047f3e59a3ef2ffedfa7c42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
