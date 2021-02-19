@@ -16,6 +16,24 @@
       "message": "So the case when indexCount is 0 is not gonna fail validation.\n\nRead through comments on cts and webgpu spec, we should also not generate invalid error for other out-of-bounds cases (e.g. indexCount \u003e index buffer size), but implement it as no-ops, console log warning or clamping for best cross-platform behavior. Am I correct on this understanding?",
       "revId": "ef6bb30ac7e65a9182f28f933b549ff7821436f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749a4d74_4f13fb90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-19T23:49:50Z",
+      "side": 1,
+      "message": "All sounds correct according to my understanding.",
+      "parentUuid": "8d0449d7_05f060bc",
+      "revId": "ef6bb30ac7e65a9182f28f933b549ff7821436f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
