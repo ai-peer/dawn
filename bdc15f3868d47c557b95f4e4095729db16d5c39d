@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "712c257d_87624f3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-19T16:01:12Z",
+      "side": 1,
+      "message": "fyi Corentin, Kai pointed out on https://github.com/gpuweb/cts/pull/466 that this should probably no-op and not be a validation error. I\u0027m not exactly clear on if the group decided spec for OOB rules.",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f003959e_908b4e57",
