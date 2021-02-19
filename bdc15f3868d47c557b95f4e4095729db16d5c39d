@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5de6b10d_c6963924",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-19T23:08:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f003959e_908b4e57",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38bf317f_db4149cb",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-02-19T15:06:59Z",
       "side": 1,
       "message": "I think this should be invalid, WebGPU tends to avoid special cases like this (contrary to GL). Also how comes this is not failing at the moment? The validation check doesn\u0027t special case indexCount \u003d 0.",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "495f3f99_7cc81f2d",
+        "filename": "src/tests/unittests/validation/DrawIndexedValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-19T23:08:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38bf317f_db4149cb",
       "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
