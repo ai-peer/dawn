@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffde2256_54ef55a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-19T22:18:29Z",
+      "side": 1,
+      "message": "I think this was decided, see https://github.com/gpuweb/gpuweb/issues/955",
+      "parentUuid": "712c257d_87624f3c",
+      "revId": "bdc15f3868d47c557b95f4e4095729db16d5c39d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f003959e_908b4e57",
