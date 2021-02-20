@@ -34,6 +34,24 @@
       "parentUuid": "8d0449d7_05f060bc",
       "revId": "ef6bb30ac7e65a9182f28f933b549ff7821436f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78989bc4_db7e6c48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-20T00:56:40Z",
+      "side": 1,
+      "message": "Note: for the warning log, feel free to use `dawn::WarningLog() \u003c\u003c \"message\"` for now. It won\u0027t go to the JS console though. One day we\u0027ll wire it up to do so.\n\nI think no-op here is best. We could potentially decrease indexCount until all the indices are in bounds, so you get a partial draw, but I don\u0027t want developers to that behavior.",
+      "parentUuid": "749a4d74_4f13fb90",
+      "revId": "ef6bb30ac7e65a9182f28f933b549ff7821436f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
