@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aadf8bd_6e1d7567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-22T09:48:32Z",
+      "side": 1,
+      "message": "Aren\u0027t we missing one thing in the Vulkan backend for query reset / query availability?",
+      "revId": "d7e7a105b98b723c77c2567943238eee5865c13e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
