@@ -171,22 +171,21 @@ namespace {
 
             ComPtr<ID3D11Texture2D> d3d11Texture;
             HRESULT hr = mD3d11Device->CreateTexture2D(&d3dDescriptor, &subres, &d3d11Texture);
-            EXPECT_EQ(hr, S_OK);
+            ASSERT(hr == S_OK);
 
             ComPtr<IDXGIResource1> dxgiResource;
             hr = d3d11Texture.As(&dxgiResource);
-            EXPECT_EQ(hr, S_OK);
+            ASSERT(hr == S_OK);
 
             HANDLE sharedHandle;
             hr = dxgiResource->CreateSharedHandle(
                 nullptr, DXGI_SHARED_RESOURCE_READ | DXGI_SHARED_RESOURCE_WRITE, nullptr,
                 &sharedHandle);
-            EXPECT_EQ(hr, S_OK);
+            ASSERT(hr == S_OK);
 
             dawn_native::d3d12::ExternalImageDescriptorDXGISharedHandle externDesc;
             externDesc.cTextureDescriptor =
                 reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
-            externDesc.sharedHandle = sharedHandle;
             externDesc.acquireMutexKey = 1;
             externDesc.isInitialized = true;
 
@@ -195,23 +194,23 @@ namespace {
             // texture is left uninitialized. This is required for D3D11 and D3D12 interop.
             ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
             hr = d3d11Texture.As(&dxgiKeyedMutex);
-            EXPECT_EQ(hr, S_OK);
+            ASSERT(hr == S_OK);
 
             hr = dxgiKeyedMutex->AcquireSync(0, INFINITE);
-            EXPECT_EQ(hr, S_OK);
+            ASSERT(hr == S_OK);
 
             hr = dxgiKeyedMutex->ReleaseSync(1);
-            EXPECT_EQ(hr, S_OK);
+            ASSERT(hr == S_OK);
 
             // Open the DX11 texture in Dawn from the shared handle and return it as a WebGPU
             // texture.
-            wgpu::Texture wgpuTexture = wgpu::Texture::Acquire(
-                dawn_native::d3d12::WrapSharedHandle(device.Get(), &externDesc));
+            std::unique_ptr<dawn_native::d3d12::ExternalImageDXGI> externalImage =
+                dawn_native::d3d12::CreateExternalImage(device.Get(), sharedHandle);
 
             // Handle is no longer needed once resources are created.
             ::CloseHandle(sharedHandle);
 
-            return wgpuTexture;
+            return wgpu::Texture::Acquire(externalImage->ProduceTexture(device.Get(), &externDesc));
         }
 
         // Vertex shader used to render a sampled texture into a quad.
