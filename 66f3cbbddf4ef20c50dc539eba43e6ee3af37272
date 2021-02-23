@@ -46,6 +46,30 @@
       },
       "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e1ad66_aa3ad42e",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-23T03:19:08Z",
+      "side": 1,
+      "message": "You should be able to solve this by making the return value be an out parameter.\n\nEither way, since ASSERT_X just early returns, you need to do something in the caller so that it also does an early out. ASSERTing in the caller is one option but you can also follow the suggestions in the below article.\n\nhttps://github.com/google/googletest/blob/master/docs/advanced.md#using-assertions-in-sub-routines",
+      "parentUuid": "929d3260_823ce5fb",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 28
+      },
+      "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
