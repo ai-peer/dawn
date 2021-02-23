@@ -50,6 +50,24 @@
       "message": "LGTM too",
       "revId": "4239c1534f8a5cd03c26043eca60197226c4ef72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "064f6076_bb78f72e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-23T00:29:41Z",
+      "side": 1,
+      "message": "I found these when I was adding a workaround on the D3D12 backend. It is annoying for me to see so many useless forward declarations there so I decided to remove them~",
+      "parentUuid": "b2d147e8_e804c7ad",
+      "revId": "4239c1534f8a5cd03c26043eca60197226c4ef72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
