@@ -91,6 +91,12 @@ namespace dawn_native { namespace metal {
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, mTintProgram.get()));
 
+        if (!program.IsValid()) {
+            auto err = tint::diag::Formatter{}.format(program.Diagnostics());
+            errorStream << "Tint program transform error: " << err << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
         ASSERT(remappedEntryPointName != nullptr);
         tint::inspector::Inspector inspector(&program);
         *remappedEntryPointName = inspector.GetRemappedNameForEntryPoint(entryPointName);
