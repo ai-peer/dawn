@@ -93,6 +93,12 @@ namespace dawn_native { namespace opengl {
             DAWN_TRY_ASSIGN(program,
                             RunTransforms(&transformManager, parseResult->tintProgram.get()));
 
+            if (!program.IsValid()) {
+                auto err = tint::diag::Formatter{}.format(program.Diagnostics());
+                errorStream << "Tint program transform error: " << err << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
             tint::writer::spirv::Generator generator(&program);
             if (!generator.Generate()) {
                 errorStream << "Generator: " << generator.error() << std::endl;

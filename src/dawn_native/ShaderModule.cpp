@@ -867,12 +867,17 @@ namespace dawn_native {
                         DAWN_TRY(ValidateModule(&program));
                     }
                 } else {
-                    {
-                        tint::transform::Manager transformManager;
-                        transformManager.append(
-                            std::make_unique<tint::transform::EmitVertexPointSize>());
-                        transformManager.append(std::make_unique<tint::transform::Spirv>());
-                        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
+                    tint::transform::Manager transformManager;
+                    transformManager.append(
+                        std::make_unique<tint::transform::EmitVertexPointSize>());
+                    transformManager.append(std::make_unique<tint::transform::Spirv>());
+                    DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
+
+                    if (!program.IsValid()) {
+                        auto err = tint::diag::Formatter{}.format(program.Diagnostics());
+                        std::ostringstream errorStream;
+                        errorStream << "Tint program transform error: " << err << std::endl;
+                        return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
                     }
 
                     if (device->IsValidationEnabled()) {
@@ -1082,6 +1087,12 @@ namespace dawn_native {
 
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, programIn));
+
+        if (!program.IsValid()) {
+            auto err = tint::diag::Formatter{}.format(program.Diagnostics());
+            errorStream << "Tint program transform error: " << err << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
 
         tint::writer::spirv::Generator generator(&program);
         if (!generator.Generate()) {

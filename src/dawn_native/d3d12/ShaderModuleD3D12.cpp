@@ -220,6 +220,12 @@ namespace dawn_native { namespace d3d12 {
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, mTintProgram.get()));
 
+        if (!program.IsValid()) {
+            auto err = tint::diag::Formatter{}.format(program.Diagnostics());
+            errorStream << "Tint program transform error: " << err << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+
         if (firstOffsetTransform != nullptr) {
             // Functions are only available after transform has been performed
             firstOffsetInfo->usesVertexIndex = firstOffsetTransform->HasVertexIndex();
