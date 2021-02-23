@@ -912,14 +912,6 @@ namespace dawn_native {
     ResultOrError<tint::Program> RunTransforms(tint::transform::Transform* transform,
                                                tint::Program* program) {
         tint::transform::Transform::Output output = transform->Run(program);
-        if (output.diagnostics.contains_errors()) {
-            // TODO(bclayton): Remove Transform::Output::diagnostics - just put diagnostics into
-            // output.program.
-            std::string err =
-                "Tint transform failure: " + tint::diag::Formatter{}.format(output.diagnostics);
-            return DAWN_VALIDATION_ERROR(err.c_str());
-        }
-
         if (!output.program.IsValid()) {
             std::string err = "Tint program failure: " +
                               tint::diag::Formatter{}.format(output.program.Diagnostics());
@@ -932,8 +924,9 @@ namespace dawn_native {
         const VertexStateDescriptor& vertexState,
         const std::string& entryPoint,
         BindGroupIndex pullingBufferBindingSet) {
-        auto transform = std::make_unique<tint::transform::VertexPulling>();
-        tint::transform::VertexStateDescriptor state;
+        tint::transform::VertexPulling::Config cfg;
+        cfg.entry_point_name = entryPoint;
+        cfg.pulling_group = static_cast<uint32_t>(pullingBufferBindingSet);
         for (uint32_t i = 0; i < vertexState.vertexBufferCount; ++i) {
             const auto& vertexBuffer = vertexState.vertexBuffers[i];
             tint::transform::VertexBufferLayoutDescriptor layout;
@@ -950,12 +943,9 @@ namespace dawn_native {
                 layout.attributes.push_back(std::move(attr));
             }
 
-            state.push_back(std::move(layout));
+            cfg.vertex_state.push_back(std::move(layout));
         }
-        transform->SetVertexState(std::move(state));
-        transform->SetEntryPoint(entryPoint);
-        transform->SetPullingBufferBindingSet(static_cast<uint32_t>(pullingBufferBindingSet));
-        return transform;
+        return std::make_unique<tint::transform::VertexPulling>(cfg);
     }
 #endif
 
