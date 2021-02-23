@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b10a30a9_fe811f45",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-02-23T21:20:30Z",
+      "side": 1,
+      "message": "Thank you for the graph. I\u0027m saving that!\n\nBased on the graph, it looks like we should be moving all these transforms up to at least as high as \u0027frontend transforms\u0027.\n\n\u003e I think techncially, what I\u0027ve sketched here breaks (b) in that reflection is done on a different program, BUT they originated from the same program (post frontend transforms), and we performed the same spirv transforms on them for reflection afterword.\n\nRight - transforms should be deterministic, so as long as the same transforms are applied in the same order we should be okay, but this should be cleaned up so there\u0027s a single source of truth. I guess while we\u0027re sorting out the tint issue, this might be okay.",
+      "parentUuid": "3091dc92_774e7dd4",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 271
+      },
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d60a192_fa78d16b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
