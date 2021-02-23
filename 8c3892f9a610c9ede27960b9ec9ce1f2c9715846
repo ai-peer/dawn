@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9581dc96_4c6c2898",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-23T20:37:47Z",
+      "side": 1,
+      "message": "to clarify: which validation? Is it the ValidateSpirv that happens after ModuleToSpirv ? IIRC, this check was mostly a temporary sanity check since sometimes Tint lets through bad SPIR-V.\n\nDo we still need to reorder this if we update ModuleToSpirv to use tint::transform::Spirv instaed ?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 271
+      },
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d60a192_fa78d16b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-23T20:37:47Z",
+      "side": 1,
+      "message": "though that\u0027s just because Tint doesn\u0027t support all the reflection information yet. I would think we would still be able to correctly convert to Spirv inside InitializeBase in order to do the (temporary) reflection.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 143
+      },
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52ad84c3_1d31230e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-23T20:37:47Z",
+      "side": 1,
+      "message": "Overall, looks good with some questions",
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
