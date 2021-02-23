@@ -60,9 +60,13 @@ namespace dawn_native { namespace vulkan {
             transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
             transformManager.append(std::make_unique<tint::transform::Spirv>());
 
+            printf("*** PRE TRANSFORM ***\n%s\n", parseResult->tintProgram->to_str(true).c_str());
+
             tint::Program program;
             DAWN_TRY_ASSIGN(program,
                             RunTransforms(&transformManager, parseResult->tintProgram.get()));
+
+            printf("*** POST TRANSFORM ***\n%s\n", program.to_str(true).c_str());
 
             tint::writer::spirv::Generator generator(&program);
             if (!generator.Generate()) {
