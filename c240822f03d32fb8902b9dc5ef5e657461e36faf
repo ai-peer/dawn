@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4891b040_33285dc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-02-23T02:16:53Z",
+      "side": 1,
+      "message": "Make out-of-bounds call no-ops instead of generate invalid error. Remove DrawIndexedValidationTest and add a section to DrawIndexedTests to make sure nothing is drawn for oob calls",
+      "revId": "c240822f03d32fb8902b9dc5ef5e657461e36faf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
