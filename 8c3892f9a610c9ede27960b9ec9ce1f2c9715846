@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27d0c3bb_42ce1249",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-02-23T20:56:10Z",
+      "side": 1,
+      "message": "\u003e  Is it the ValidateSpirv that happens after ModuleToSpirv ? IIRC, this check was mostly a temporary sanity check since sometimes Tint lets through bad SPIR-V.\n\nYes, that\u0027s the one.\n\n\u003e Do we still need to reorder this if we update ModuleToSpirv to use tint::transform::Spirv instaed ?\n\nI think I have to draw out a graph to answer this. I really struggle to keep a mental map of where all the tint logic goes.\n\nThe rules are:\n(a) Each backend (generator) will need to have a tint::transform::[Spirv,Hlsl,Msl] sanitizer applied to the program.\n(b) Reflection needs to be done on the same program that the generator consumes. Reflecting a program before it is transformed is likely to provide information that is not in sync with the shader program used by the graphics API.\n(c) Any number of common transforms can be applied between parsing and the sanitizer transforms. These don\u0027t need to be part of the same transform::Manager run.",
+      "parentUuid": "9581dc96_4c6c2898",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 271
+      },
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d60a192_fa78d16b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2021-02-23T20:37:47Z",
       "side": 1,
       "message": "though that\u0027s just because Tint doesn\u0027t support all the reflection information yet. I would think we would still be able to correctly convert to Spirv inside InitializeBase in order to do the (temporary) reflection.",
+      "range": {
+        "startLine": 14,
+        "startChar": 0,
+        "endLine": 14,
+        "endChar": 143
+      },
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99bb9d1b_a887725b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-02-23T20:56:10Z",
+      "side": 1,
+      "message": "Yup, understood.",
+      "parentUuid": "4d60a192_fa78d16b",
       "range": {
         "startLine": 14,
         "startChar": 0,
