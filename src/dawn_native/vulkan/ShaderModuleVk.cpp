@@ -55,14 +55,36 @@ namespace dawn_native { namespace vulkan {
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V writer failure:" << std::endl;
 
-            tint::transform::Manager transformManager;
-            transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
-            transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
-            transformManager.append(std::make_unique<tint::transform::Spirv>());
+            tint::Program program;
+            {
+                tint::transform::BoundArrayAccessors transform;
+                DAWN_TRY_ASSIGN(program, RunTransforms(&transform, parseResult->tintProgram.get()));
+                printf("*** POST BoundArrayAccessors ***\n%s\n", program.to_str(true).c_str());
+            }
+            {
+                tint::transform::EmitVertexPointSize transform;
+                DAWN_TRY_ASSIGN(program, RunTransforms(&transform, &program));
+                printf("*** POST EmitVertexPointSize ***\n%s\n", program.to_str(true).c_str());
+            }
+            {
+                tint::transform::Spirv transform;
+                DAWN_TRY_ASSIGN(program, RunTransforms(&transform, &program));
+                printf("*** POST Spirv ***\n%s\n", program.to_str(true).c_str());
+            }
+
+            /*
+             tint::transform::Manager transformManager;
+             transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
+             transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
+             transformManager.append(std::make_unique<tint::transform::Spirv>());
+            printf("*** PRE TRANSFORM ***\n%s\n", parseResult->tintProgram->to_str(true).c_str());
 
             tint::Program program;
             DAWN_TRY_ASSIGN(program,
                             RunTransforms(&transformManager, parseResult->tintProgram.get()));
+
+            printf("*** POST TRANSFORM ***\n%s\n", program.to_str(true).c_str());
+            */
 
             tint::writer::spirv::Generator generator(&program);
             if (!generator.Generate()) {
