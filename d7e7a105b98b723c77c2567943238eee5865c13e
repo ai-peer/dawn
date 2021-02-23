@@ -16,6 +16,24 @@
       "message": "Aren\u0027t we missing one thing in the Vulkan backend for query reset / query availability?",
       "revId": "d7e7a105b98b723c77c2567943238eee5865c13e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c6577e_7e512093",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-02-23T16:13:10Z",
+      "side": 1,
+      "message": "Currently we can use occlusion query, but it fails to start a query twice at same index, which is a bug we need to fix.",
+      "parentUuid": "8aadf8bd_6e1d7567",
+      "revId": "d7e7a105b98b723c77c2567943238eee5865c13e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
