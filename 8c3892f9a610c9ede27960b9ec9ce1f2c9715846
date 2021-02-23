@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3091dc92_774e7dd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-23T21:10:08Z",
+      "side": 1,
+      "message": "Yes there are very many paths and it\u0027s hard to understand. Just to be clear, the way I *think* this works is:\n\n\nWGSL / SPIR-V \n     |\n tint::Program\n     |\n backend-specific transforms (ex. EmitVertexPointSize)\n     |\n frontend transforms (ex. bound array accessors)\n     |                            \\\n backend code generation           reflection\n    /   \\                          /          \\\ntint   tint-\u003espirv-\u003ecross    tint-\u003espirv      tint reflection\n                             |\n                         spirv cross reflection\n\n\nIn this picture, you\u0027ve changed tint-\u003espirv on the backend code generation side, to use tint::transform::Spirv before tint::writer::spirv::Generator, but the reflection side is still only has tint::writer::spirv::Generator without the transform.\n\nI think tecncially, what I\u0027ve sketched here breaks (b) in that reflection is done on a different program, BUT they originated from the same program (post frontend transforms), and we performed the same spirv transforms on them for reflection afterword.",
+      "parentUuid": "27d0c3bb_42ce1249",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 271
+      },
+      "revId": "8c3892f9a610c9ede27960b9ec9ce1f2c9715846",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4d60a192_fa78d16b",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
