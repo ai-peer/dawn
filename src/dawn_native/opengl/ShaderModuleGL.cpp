@@ -79,21 +79,26 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult) {
-        DAWN_TRY(InitializeBase(parseResult));
         if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
 #ifdef DAWN_ENABLE_WGSL
-            tint::Program program = std::move(*parseResult->tintProgram.release());
-
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V (for GLSL) writer failure:" << std::endl;
 
             tint::transform::Manager transformManager;
             transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
             transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
+            transformManager.append(std::make_unique<tint::transform::Spirv>());
 
-            DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
+            ShaderModuleParseResult transformedParseResult;
+            transformedParseResult.tintProgram = std::make_unique<tint::Program>();
+            transformedParseResult.spirv = parseResult->spirv;
 
-            tint::writer::spirv::Generator generator(&program);
+            DAWN_TRY_ASSIGN(*transformedParseResult.tintProgram,
+                            RunTransforms(&transformManager, parseResult->tintProgram.get()));
+
+            DAWN_TRY(InitializeBase(&transformedParseResult));
+
+            tint::writer::spirv::Generator generator(transformedParseResult.tintProgram.get());
             if (!generator.Generate()) {
                 errorStream << "Generator: " << generator.error() << std::endl;
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
@@ -103,6 +108,8 @@ namespace dawn_native { namespace opengl {
 #else
             UNREACHABLE();
 #endif
+        } else {
+            DAWN_TRY(InitializeBase(parseResult));
         }
         return {};
     }
