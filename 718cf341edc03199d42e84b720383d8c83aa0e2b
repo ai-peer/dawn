@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "718cf341edc03199d42e84b720383d8c83aa0e2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5877d141_fe53fd4d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-23T03:23:03Z",
+      "side": 1,
+      "message": "Please use std::move(d3d12Texture) to avoid needless AddRef/Release.\n\n(Same goes for the other instances)",
+      "range": {
+        "startLine": 450,
+        "startChar": 60,
+        "endLine": 450,
+        "endChar": 72
+      },
+      "revId": "718cf341edc03199d42e84b720383d8c83aa0e2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
