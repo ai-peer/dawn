@@ -16,6 +16,23 @@
       "message": "Make out-of-bounds call no-ops instead of generate invalid error. Remove DrawIndexedValidationTest and add a section to DrawIndexedTests to make sure nothing is drawn for oob calls",
       "revId": "c240822f03d32fb8902b9dc5ef5e657461e36faf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b6a030_f22147de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-23T13:35:52Z",
+      "side": 1,
+      "message": "Still LGTM. When we wire the warnings to Chromium we should have an EXPECT_WARNING macro similar to the deprecation one.",
+      "revId": "c240822f03d32fb8902b9dc5ef5e657461e36faf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
