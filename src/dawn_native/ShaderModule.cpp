@@ -867,13 +867,11 @@ namespace dawn_native {
                         DAWN_TRY(ValidateModule(&program));
                     }
                 } else {
-                    {
-                        tint::transform::Manager transformManager;
-                        transformManager.append(
-                            std::make_unique<tint::transform::EmitVertexPointSize>());
-                        transformManager.append(std::make_unique<tint::transform::Spirv>());
-                        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
-                    }
+                    tint::transform::Manager transformManager;
+                    transformManager.append(
+                        std::make_unique<tint::transform::EmitVertexPointSize>());
+                    transformManager.append(std::make_unique<tint::transform::Spirv>());
+                    DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
 
                     if (device->IsValidationEnabled()) {
                         DAWN_TRY(ValidateModule(&program));
@@ -911,9 +909,15 @@ namespace dawn_native {
     }
 
 #ifdef DAWN_ENABLE_WGSL
-    ResultOrError<tint::Program> RunTransforms(tint::transform::Manager* manager,
+    ResultOrError<tint::Program> RunTransforms(tint::transform::Transform* transform,
                                                tint::Program* program) {
-        tint::transform::Transform::Output output = manager->Run(program);
+        if (!program->IsValid()) {
+            std::string err =
+                "Tint program failure: " + tint::diag::Formatter{}.format(program->Diagnostics());
+            return DAWN_VALIDATION_ERROR(err.c_str());
+        }
+
+        tint::transform::Transform::Output output = transform->Run(program);
         if (output.diagnostics.contains_errors()) {
             // TODO(bclayton): Remove Transform::Output::diagnostics - just put diagnostics into
             // output.program.
