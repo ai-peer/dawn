@@ -1,0 +1,181 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a09f138_335e5853",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "LGTM overall.",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5261457_a2958ea6",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "nit: Maybe we could keep this as kDefaultFormat and use the same constant in the defaults for functions.",
+      "range": {
+        "startLine": 30,
+        "startChar": 37,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eaf33ddf_9ce8b1e5",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "Maybe we could just change uses of GetExpectedTextureDataRGBA8 to GetExpectedTextureData to avoid the duplicate helper functions? It doesn\u0027t really matter what\u0027s in the various RGBA components.",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 57
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0a655b1_c66fb343",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "nit: widthInBlock and heightInBlock so widthInBlocks * bytesPerTexelBlock looks more correct?",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf8676b_3dcd1b00",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "Why is this ASSERT needed? The function seems to have been updated to allow for non RGBA8Unorm formats.",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03143946_3453fd37",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "nit: including that the data outside of the copy has been untouched.",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f391ce9_8b5ad919",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "This only needs to be a tight bound because GetTextureDataCopyLayoutForTexture2DAtLevel above gives a tight bound. Maybe we could over-allocate here but in the call to EXPECT_BUFFER_U32_RANGE_EQ have something that keeps the data in bounds (with a comment that explains we\u0027re doing that?)\n\nThis would just be Align(dstDataCopyLayout.bytesPerRow * width * height, 4) and then below the EXPECT_BUFFER_U32_EQ would have:\n\n expectationOffset \u003d dstDataCopyLayout.bytesPerImage * slice\n expectationSize \u003d min(alidDataSizePerImage / sizeof(uint32_t), bufferSize - expectationOffset);",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2be79b1_c1e2a890",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "Uh, I\u0027m not sure I understand what this does, is it just selecting the first texel that\u0027s copied so that PackTextureData doesn\u0027t have to care about it?",
+      "range": {
+        "startLine": 384,
+        "startChar": 37,
+        "endLine": 385,
+        "endChar": 92
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a4d1895_a75a1dc6",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T17:01:06Z",
+      "side": 1,
+      "message": "The comment says this pass on the Vulkan driver but this is suppressed, is it that it doesn\u0027t pass on older drivers?",
+      "range": {
+        "startLine": 1550,
+        "startChar": 35,
+        "endLine": 1550,
+        "endChar": 63
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
