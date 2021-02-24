@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fe12c075_6d0bd729",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-24T18:51:22Z",
+      "side": 1,
+      "message": "Babylon.js testPerfWebGPU.html - VSYNC limited which turns this code hot.",
+      "parentUuid": "6695ba0d_e2d6e67b",
+      "revId": "718cf341edc03199d42e84b720383d8c83aa0e2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6702aef1_1eb6344a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -92,6 +110,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f2e518e_2922dd02",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-24T18:51:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "596f9062_319de470",
+      "range": {
+        "startLine": 60,
+        "startChar": 14,
+        "endLine": 60,
+        "endChar": 53
+      },
+      "revId": "718cf341edc03199d42e84b720383d8c83aa0e2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c18758d_87926d1e",
@@ -139,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f656016f_92de7517",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-24T18:51:22Z",
+      "side": 1,
+      "message": "SGTM.\n\nNote: I plan to make ExternalImageDescriptorDXGISharedHandle wrap only a HANDLE once WrapSharedHandle can be safely removed.",
+      "parentUuid": "ba63ef99_d8a9e8e0",
+      "range": {
+        "startLine": 77,
+        "startChar": 78,
+        "endLine": 77,
+        "endChar": 97
+      },
+      "revId": "718cf341edc03199d42e84b720383d8c83aa0e2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5877d141_fe53fd4d",
@@ -152,6 +218,30 @@
       "writtenOn": "2021-02-23T03:23:03Z",
       "side": 1,
       "message": "Please use std::move(d3d12Texture) to avoid needless AddRef/Release.\n\n(Same goes for the other instances)",
+      "range": {
+        "startLine": 450,
+        "startChar": 60,
+        "endLine": 450,
+        "endChar": 72
+      },
+      "revId": "718cf341edc03199d42e84b720383d8c83aa0e2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6135ae7b_0324a81e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-24T18:51:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5877d141_fe53fd4d",
       "range": {
         "startLine": 450,
         "startChar": 60,
