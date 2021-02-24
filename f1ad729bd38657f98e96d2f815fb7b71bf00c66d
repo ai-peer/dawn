@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49114897_527e7bdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-24T23:51:20Z",
+      "side": 1,
+      "message": "PTAL! My biggest open question on this is I\u0027m not sure what the expected casing should be for the Dawn enums?\n\nunorm8x2?\nUnorm8x2? \u003c-- This is what this CL does now\nUNorm8x2?\n",
+      "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
