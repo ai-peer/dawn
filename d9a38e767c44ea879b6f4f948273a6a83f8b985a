@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "846ed322_5f6f98ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T10:17:38Z",
+      "side": 1,
+      "message": "Ok, we can always restore this CL once the reset is implemented.",
+      "revId": "d9a38e767c44ea879b6f4f948273a6a83f8b985a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
