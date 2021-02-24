@@ -25,66 +25,68 @@ namespace dawn_native { namespace metal {
     namespace {
         MTLVertexFormat VertexFormatType(wgpu::VertexFormat format) {
             switch (format) {
-                case wgpu::VertexFormat::UChar2:
+                case wgpu::VertexFormat::Uint8x2:  // UChar2:
                     return MTLVertexFormatUChar2;
-                case wgpu::VertexFormat::UChar4:
+                case wgpu::VertexFormat::Uint8x4:  // UChar4:
                     return MTLVertexFormatUChar4;
-                case wgpu::VertexFormat::Char2:
+                case wgpu::VertexFormat::Sint8x2:  // Char2:
                     return MTLVertexFormatChar2;
-                case wgpu::VertexFormat::Char4:
+                case wgpu::VertexFormat::Sint8x4:  // Char4:
                     return MTLVertexFormatChar4;
-                case wgpu::VertexFormat::UChar2Norm:
+                case wgpu::VertexFormat::Unorm8x2:  // UChar2Norm:
                     return MTLVertexFormatUChar2Normalized;
-                case wgpu::VertexFormat::UChar4Norm:
+                case wgpu::VertexFormat::Unorm8x4:  // UChar4Norm:
                     return MTLVertexFormatUChar4Normalized;
-                case wgpu::VertexFormat::Char2Norm:
+                case wgpu::VertexFormat::Snorm8x2:  // Char2Norm:
                     return MTLVertexFormatChar2Normalized;
-                case wgpu::VertexFormat::Char4Norm:
+                case wgpu::VertexFormat::Snorm8x4:  // Char4Norm:
                     return MTLVertexFormatChar4Normalized;
-                case wgpu::VertexFormat::UShort2:
+                case wgpu::VertexFormat::Uint16x2:  // UShort2:
                     return MTLVertexFormatUShort2;
-                case wgpu::VertexFormat::UShort4:
+                case wgpu::VertexFormat::Uint16x4:  // UShort4:
                     return MTLVertexFormatUShort4;
-                case wgpu::VertexFormat::Short2:
+                case wgpu::VertexFormat::Sint16x2:  // Short2:
                     return MTLVertexFormatShort2;
-                case wgpu::VertexFormat::Short4:
+                case wgpu::VertexFormat::Sint16x4:  // Short4:
                     return MTLVertexFormatShort4;
-                case wgpu::VertexFormat::UShort2Norm:
+                case wgpu::VertexFormat::Unorm16x2:  // UShort2Norm:
                     return MTLVertexFormatUShort2Normalized;
-                case wgpu::VertexFormat::UShort4Norm:
+                case wgpu::VertexFormat::Unorm16x4:  // UShort4Norm:
                     return MTLVertexFormatUShort4Normalized;
-                case wgpu::VertexFormat::Short2Norm:
+                case wgpu::VertexFormat::Snorm16x2:  // Short2Norm:
                     return MTLVertexFormatShort2Normalized;
-                case wgpu::VertexFormat::Short4Norm:
+                case wgpu::VertexFormat::Snorm16x4:  // Short4Norm:
                     return MTLVertexFormatShort4Normalized;
-                case wgpu::VertexFormat::Half2:
+                case wgpu::VertexFormat::Float16x2:  // Half2:
                     return MTLVertexFormatHalf2;
-                case wgpu::VertexFormat::Half4:
+                case wgpu::VertexFormat::Float16x4:  // Half4:
                     return MTLVertexFormatHalf4;
-                case wgpu::VertexFormat::Float:
+                case wgpu::VertexFormat::Float32:  // Float:
                     return MTLVertexFormatFloat;
-                case wgpu::VertexFormat::Float2:
+                case wgpu::VertexFormat::Float32x2:  // Float2:
                     return MTLVertexFormatFloat2;
-                case wgpu::VertexFormat::Float3:
+                case wgpu::VertexFormat::Float32x3:  // Float3:
                     return MTLVertexFormatFloat3;
-                case wgpu::VertexFormat::Float4:
+                case wgpu::VertexFormat::Float32x4:  // Float4:
                     return MTLVertexFormatFloat4;
-                case wgpu::VertexFormat::UInt:
+                case wgpu::VertexFormat::Uint32:  // UInt:
                     return MTLVertexFormatUInt;
-                case wgpu::VertexFormat::UInt2:
+                case wgpu::VertexFormat::Uint32x2:  // UInt2:
                     return MTLVertexFormatUInt2;
-                case wgpu::VertexFormat::UInt3:
+                case wgpu::VertexFormat::Uint32x3:  // UInt3:
                     return MTLVertexFormatUInt3;
-                case wgpu::VertexFormat::UInt4:
+                case wgpu::VertexFormat::Uint32x4:  // UInt4:
                     return MTLVertexFormatUInt4;
-                case wgpu::VertexFormat::Int:
+                case wgpu::VertexFormat::Sint32:  // Int:
                     return MTLVertexFormatInt;
-                case wgpu::VertexFormat::Int2:
+                case wgpu::VertexFormat::Sint32x2:  // Int2:
                     return MTLVertexFormatInt2;
-                case wgpu::VertexFormat::Int3:
+                case wgpu::VertexFormat::Sint32x3:  // Int3:
                     return MTLVertexFormatInt3;
-                case wgpu::VertexFormat::Int4:
+                case wgpu::VertexFormat::Sint32x4:  // Int4:
                     return MTLVertexFormatInt4;
+                default:
+                    UNREACHABLE();
             }
         }
 
