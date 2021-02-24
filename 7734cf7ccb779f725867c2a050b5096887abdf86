@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e503a14_0fd3858b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-24T23:59:39Z",
+      "side": 1,
+      "message": "No additional comments, but overall perhaps we can have more documentation inside the code to explain all the offsets. It\u0027s tricky to follow all of the math.",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5261457_a2958ea6",
@@ -145,6 +162,30 @@
       "writtenOn": "2021-02-24T17:01:06Z",
       "side": 1,
       "message": "Uh, I\u0027m not sure I understand what this does, is it just selecting the first texel that\u0027s copied so that PackTextureData doesn\u0027t have to care about it?",
+      "range": {
+        "startLine": 384,
+        "startChar": 37,
+        "endLine": 385,
+        "endChar": 92
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "146d0bd7_ccd0f74c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-24T23:59:39Z",
+      "side": 1,
+      "message": "I think this is getting the offset into the src CPU data so we can copy it into the expected CPU data for the destination",
+      "parentUuid": "a2be79b1_c1e2a890",
       "range": {
         "startLine": 384,
         "startChar": 37,
