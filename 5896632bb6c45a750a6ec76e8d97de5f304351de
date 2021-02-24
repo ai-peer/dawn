@@ -16,6 +16,23 @@
       "message": "Ready for review again. This now also includes a fix for the DeviceInitializationTests leak.",
       "revId": "5896632bb6c45a750a6ec76e8d97de5f304351de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c06a5e7_a5a544fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-24T20:53:29Z",
+      "side": 1,
+      "message": "LGTM; changes from last review shouldn\u0027t be contentious",
+      "revId": "5896632bb6c45a750a6ec76e8d97de5f304351de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
