@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f41717f3_b3274503",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-24T16:59:07Z",
+      "side": 1,
+      "message": "Adding a comment here since this is the only arithmetic that\u0027s in the direct serialize/deserialize path that doesn\u0027t use BufferConsumer.\n\nGetRequiredSize uses arithmetic, but not directly part of the serialization/deserialization.",
+      "revId": "9392586684bf8d6e93aeda56ef3aa1616265323a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
