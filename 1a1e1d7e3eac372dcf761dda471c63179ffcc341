@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82d0358_5869a6b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-24T06:56:07Z",
+      "side": 1,
+      "message": "Seems bots happy 😊\nPTAL!",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
