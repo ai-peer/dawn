@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50acae79_4ea3dddc",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-24T21:50:03Z",
+      "side": 1,
+      "message": "Nit: You should be able to use std::move here to make this easier to read.",
+      "range": {
+        "startLine": 126,
+        "startChar": 16,
+        "endLine": 126,
+        "endChar": 65
+      },
+      "revId": "077ecbbcef405f1c48df2758bbe8301fd3eda0c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
