@@ -139,6 +139,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3063a060_cc00e043",
+        "filename": "src/dawn_wire/client/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T18:11:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9a91b96_1ed4b22a",
+      "range": {
+        "startLine": 29,
+        "startChar": 44,
+        "endLine": 29,
+        "endChar": 50
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "906582b4_d2f68b3d",
@@ -152,6 +176,30 @@
       "writtenOn": "2021-02-18T17:17:18Z",
       "side": 1,
       "message": "this should happen with status Unknown in Queue::~Queue, should have a test for it too",
+      "range": {
+        "startLine": 105,
+        "startChar": 6,
+        "endLine": 110,
+        "endChar": 36
+      },
+      "revId": "8ed204a9bee0f25870e8c70b4e6a37b3f734908a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceb7620f_263e439a",
+        "filename": "src/dawn_wire/client/Queue.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-24T18:11:18Z",
+      "side": 1,
+      "message": "Done. As discussed offline it is not possible to test this yet because there\u0027s a single queue per device.",
+      "parentUuid": "906582b4_d2f68b3d",
       "range": {
         "startLine": 105,
         "startChar": 6,
