@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "7489612d17d8f6118e76793f97ebddfebfe0dbbf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df0c76b_0884a092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-24T17:43:30Z",
+      "side": 1,
+      "message": "LGTM. I don\u0027t think anything has landed in Chromium that\u0027s dependent on this yet. But we should watch the Dawn -\u003e Chromium roll in case.",
+      "revId": "7489612d17d8f6118e76793f97ebddfebfe0dbbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
