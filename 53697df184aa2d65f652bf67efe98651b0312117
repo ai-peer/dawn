@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f97202_7194d160",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-24T04:26:42Z",
+      "side": 1,
+      "message": "I\u0027ve changed the test method to cover color conversion logic(Compare pixel value in shader), it is weired that D3D12_Microsoft_Basic_Render_Driver_CPU for flipY related cases cannot get the correct result. Do you have any ideas?",
+      "revId": "53697df184aa2d65f652bf67efe98651b0312117",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
