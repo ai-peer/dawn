@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e1e9991_0d87b7c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-02-25T20:24:56Z",
+      "side": 1,
+      "message": "Sigh. I really thought this was all sorted.\nThanks for landing this, and sorry for the trouble.",
+      "revId": "12827fb805e4dc5cccdf01286cffa353e278af8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
