@@ -16,6 +16,23 @@
       "message": "Please take a look, thank you.",
       "revId": "2bb9fa7052b1b8e7da9d556829f323dcf5c4eba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4976994f_b670b8b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T09:54:14Z",
+      "side": 1,
+      "message": "LGTM! Jiawei feel free to +2 if it looks good to you.",
+      "revId": "2bb9fa7052b1b8e7da9d556829f323dcf5c4eba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
