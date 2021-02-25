@@ -16,6 +16,74 @@
       "message": "PTAL! My biggest open question on this is I\u0027m not sure what the expected casing should be for the Dawn enums?\n\nunorm8x2?\nUnorm8x2? \u003c-- This is what this CL does now\nUNorm8x2?\n",
       "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c9a19b8_e4d2b776",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T02:16:48Z",
+      "side": 1,
+      "message": "lgtm but tests are failing because they generate unexpected deprecation warnings",
+      "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "168dec20_bb8934cb",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1893,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T02:16:48Z",
+      "side": 1,
+      "message": "If it\u0027s not too hard now would be a good time to make 0 be \"undefined\"",
+      "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "772d5306_dbc28807",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1924,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T02:16:48Z",
+      "side": 1,
+      "message": "nit: Would it work to make these start at, like, 100? That would leave room to add formats before removing the deprecated ones JUST in case.",
+      "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cb65fa0_f07b2f6c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T02:16:48Z",
+      "side": 1,
+      "message": "uNit: \u003e\u003d first deprecated format, like above, makes more sense to me",
+      "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
