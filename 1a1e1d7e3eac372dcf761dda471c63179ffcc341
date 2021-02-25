@@ -94,6 +94,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1bea9ec_f03bc78c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T00:13:41Z",
+      "side": 1,
+      "message": "Why can\u0027t this be in the same buffer and binding as the |uniformBuffer| above?",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 62
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd23154c_50caff4a",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
@@ -174,6 +197,23 @@
       "writtenOn": "2021-02-24T16:03:37Z",
       "side": 1,
       "message": "Can you explain at a high level what happens here and why we needed the change to use shaders instead of computing on the CPU? (also we seem to be checking a single pixel??)",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e87a6b_447cc943",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T00:13:41Z",
+      "side": 1,
+      "message": "Maybe it\u0027s simpler to do a (width x height) compute shader dispatch and have each thread load one texel from each of the src/dst textures.",
       "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
