@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9de74ac4_1c8e67b1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T18:24:36Z",
+      "side": 1,
+      "message": "sorry for being lazy - I\u0027ll do this in future",
+      "parentUuid": "5e134cb3_0a6119e2",
+      "revId": "6ca640206e1cbd4b94474a4e0b15575d374f8cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "4a23b138_c6d71401",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
