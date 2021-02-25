@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7bd214_c9e96eaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T23:59:01Z",
+      "side": 1,
+      "message": "I think the casing in this CL is good.",
+      "parentUuid": "49114897_527e7bdc",
+      "revId": "f1ad729bd38657f98e96d2f815fb7b71bf00c66d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "168dec20_bb8934cb",

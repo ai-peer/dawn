@@ -16,6 +16,74 @@
       "message": "Alright, looks like I\u0027ve finally appeased the build bots. Not entirely happy with where I ended up as a result, though, with VertexFormatUtils in common/. May be better to move the functions back to their original location in RenderPipeline.cpp and duplicate the required functions in tests/, but I\u0027ll wait to hear the reviewers opinions on that.",
       "revId": "91cd4d9fc92f024bf2e471d8a00fd2b71304a875",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e68bfe_19d9a349",
+        "filename": "src/common/VertexFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T23:59:01Z",
+      "side": 1,
+      "message": "optional:\nIf you exclude default:, I believe there should be a compile error if the switch is incomplete. Unfortunately this would mean including all of the deprecated formats in this switch (as UNREACHABLE), but it would be safer.\n\nThis UNREACHABLE would move just after the switch.",
+      "revId": "91cd4d9fc92f024bf2e471d8a00fd2b71304a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b889f0_c994cc38",
+        "filename": "src/common/VertexFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T23:59:01Z",
+      "side": 1,
+      "message": "same",
+      "revId": "91cd4d9fc92f024bf2e471d8a00fd2b71304a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d41d985_49800fb9",
+        "filename": "src/common/VertexFormatUtils.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T23:59:01Z",
+      "side": 1,
+      "message": "same",
+      "revId": "91cd4d9fc92f024bf2e471d8a00fd2b71304a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ccfd7e6_9ce3b17d",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-02-25T23:59:01Z",
+      "side": 1,
+      "message": "it would probably be a pain but MAYBE we should update these test names?",
+      "revId": "91cd4d9fc92f024bf2e471d8a00fd2b71304a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
