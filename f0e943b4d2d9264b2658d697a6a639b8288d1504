@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4e8a205_bd362e8f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "I find the test fails on blitting RGBA8Unorm to RGB10A2(Even don\u0027t compare the alpha channel) and to all Float16 component types.\nI did a quick investigation but have no idea. Since this CL contains a refactory for the test case methods, I\u0027d like to resolve this issue in another CL by dig into it(to unblock the reviewing). WDYT?",
+      "revId": "f0e943b4d2d9264b2658d697a6a639b8288d1504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d412c4e3_acabbe14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec71ec88_c1c58681",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 21
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c82d0358_5869a6b8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 6
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "61d050d4_10a52c1b",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fdc802f_0465564a",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b83cb61_85943a57",
@@ -71,6 +113,24 @@
       "writtenOn": "2021-02-24T16:03:37Z",
       "side": 1,
       "message": "Does setting tempColor \u003d tempColor.bgra work?",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f35f592_6b391c9c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Works fine! Done.",
+      "parentUuid": "1b83cb61_85943a57",
       "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -110,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f88e80c_a7a5ed45",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ababb513_41f740d9",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1bea9ec_f03bc78c",
@@ -133,6 +211,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8a7ebf7_4fcb613a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1bea9ec_f03bc78c",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 62
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd23154c_50caff4a",
@@ -146,6 +248,30 @@
       "writtenOn": "2021-02-24T16:03:37Z",
       "side": 1,
       "message": "Maybe we could have structs for these and use sizeof instead of hardcoded sizes (and check that sizeof is what we expect for the packing?)",
+      "range": {
+        "startLine": 27,
+        "startChar": 3,
+        "endLine": 28,
+        "endChar": 56
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86459564_3abb9629",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd23154c_50caff4a",
       "range": {
         "startLine": 27,
         "startChar": 3,
@@ -202,6 +328,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a30ddb6_e3a4fb03",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "No helper functions in utils/texture_utils. And change the names.",
+      "parentUuid": "15bc0f5a_a6500543",
+      "range": {
+        "startLine": 57,
+        "startChar": 20,
+        "endLine": 57,
+        "endChar": 48
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "43d2dc88_b814554c",
@@ -239,6 +389,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1fc108df_cdce87d3",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "\u003e also we seem to be checking a single pixel??)\nThat\u0027s my fault to use the wrong expect macro. Change the whole logic by using compute shader now.",
+      "parentUuid": "da0ac14b_18e5c67e",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5e87a6b_447cc943",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
@@ -268,6 +436,24 @@
       "side": 1,
       "message": "That would be a good idea.",
       "parentUuid": "a5e87a6b_447cc943",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe5ed23_526eaf9f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T10:24:22Z",
+      "side": 1,
+      "message": "Switch to compute shader now!",
+      "parentUuid": "8ea7fae1_92ec0e72",
       "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
