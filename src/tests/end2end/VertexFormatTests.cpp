@@ -56,14 +56,14 @@ class VertexFormatTest : public DawnTest {
 
     bool IsNormalizedFormat(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::UChar2Norm:
-            case wgpu::VertexFormat::UChar4Norm:
-            case wgpu::VertexFormat::Char2Norm:
-            case wgpu::VertexFormat::Char4Norm:
-            case wgpu::VertexFormat::UShort2Norm:
-            case wgpu::VertexFormat::UShort4Norm:
-            case wgpu::VertexFormat::Short2Norm:
-            case wgpu::VertexFormat::Short4Norm:
+            case wgpu::VertexFormat::Unorm8x2:
+            case wgpu::VertexFormat::Unorm8x4:
+            case wgpu::VertexFormat::Snorm8x2:
+            case wgpu::VertexFormat::Snorm8x4:
+            case wgpu::VertexFormat::Unorm16x2:
+            case wgpu::VertexFormat::Unorm16x4:
+            case wgpu::VertexFormat::Snorm16x2:
+            case wgpu::VertexFormat::Snorm16x4:
                 return true;
             default:
                 return false;
@@ -72,18 +72,18 @@ class VertexFormatTest : public DawnTest {
 
     bool IsUnsignedFormat(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::UInt:
-            case wgpu::VertexFormat::UChar2:
-            case wgpu::VertexFormat::UChar4:
-            case wgpu::VertexFormat::UShort2:
-            case wgpu::VertexFormat::UShort4:
-            case wgpu::VertexFormat::UInt2:
-            case wgpu::VertexFormat::UInt3:
-            case wgpu::VertexFormat::UInt4:
-            case wgpu::VertexFormat::UChar2Norm:
-            case wgpu::VertexFormat::UChar4Norm:
-            case wgpu::VertexFormat::UShort2Norm:
-            case wgpu::VertexFormat::UShort4Norm:
+            case wgpu::VertexFormat::Uint32:
+            case wgpu::VertexFormat::Uint8x2:
+            case wgpu::VertexFormat::Uint8x4:
+            case wgpu::VertexFormat::Uint16x2:
+            case wgpu::VertexFormat::Uint16x4:
+            case wgpu::VertexFormat::Uint32x2:
+            case wgpu::VertexFormat::Uint32x3:
+            case wgpu::VertexFormat::Uint32x4:
+            case wgpu::VertexFormat::Unorm8x2:
+            case wgpu::VertexFormat::Unorm8x4:
+            case wgpu::VertexFormat::Unorm16x2:
+            case wgpu::VertexFormat::Unorm16x4:
                 return true;
             default:
                 return false;
@@ -92,12 +92,12 @@ class VertexFormatTest : public DawnTest {
 
     bool IsFloatFormat(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::Half2:
-            case wgpu::VertexFormat::Half4:
-            case wgpu::VertexFormat::Float:
-            case wgpu::VertexFormat::Float2:
-            case wgpu::VertexFormat::Float3:
-            case wgpu::VertexFormat::Float4:
+            case wgpu::VertexFormat::Float16x2:
+            case wgpu::VertexFormat::Float16x4:
+            case wgpu::VertexFormat::Float32:
+            case wgpu::VertexFormat::Float32x2:
+            case wgpu::VertexFormat::Float32x3:
+            case wgpu::VertexFormat::Float32x4:
                 return true;
             default:
                 return false;
@@ -106,8 +106,8 @@ class VertexFormatTest : public DawnTest {
 
     bool IsHalfFormat(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::Half2:
-            case wgpu::VertexFormat::Half4:
+            case wgpu::VertexFormat::Float16x2:
+            case wgpu::VertexFormat::Float16x4:
                 return true;
             default:
                 return false;
@@ -116,38 +116,38 @@ class VertexFormatTest : public DawnTest {
 
     uint32_t BytesPerComponents(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::Char2:
-            case wgpu::VertexFormat::Char4:
-            case wgpu::VertexFormat::UChar2:
-            case wgpu::VertexFormat::UChar4:
-            case wgpu::VertexFormat::UChar2Norm:
-            case wgpu::VertexFormat::UChar4Norm:
-            case wgpu::VertexFormat::Char2Norm:
-            case wgpu::VertexFormat::Char4Norm:
+            case wgpu::VertexFormat::Uint8x2:
+            case wgpu::VertexFormat::Uint8x4:
+            case wgpu::VertexFormat::Sint8x2:
+            case wgpu::VertexFormat::Sint8x4:
+            case wgpu::VertexFormat::Unorm8x2:
+            case wgpu::VertexFormat::Unorm8x4:
+            case wgpu::VertexFormat::Snorm8x2:
+            case wgpu::VertexFormat::Snorm8x4:
                 return 1;
-            case wgpu::VertexFormat::UShort2:
-            case wgpu::VertexFormat::UShort4:
-            case wgpu::VertexFormat::Short2:
-            case wgpu::VertexFormat::Short4:
-            case wgpu::VertexFormat::UShort2Norm:
-            case wgpu::VertexFormat::UShort4Norm:
-            case wgpu::VertexFormat::Short2Norm:
-            case wgpu::VertexFormat::Short4Norm:
-            case wgpu::VertexFormat::Half2:
-            case wgpu::VertexFormat::Half4:
+            case wgpu::VertexFormat::Uint16x2:
+            case wgpu::VertexFormat::Uint16x4:
+            case wgpu::VertexFormat::Unorm16x2:
+            case wgpu::VertexFormat::Unorm16x4:
+            case wgpu::VertexFormat::Sint16x2:
+            case wgpu::VertexFormat::Sint16x4:
+            case wgpu::VertexFormat::Snorm16x2:
+            case wgpu::VertexFormat::Snorm16x4:
+            case wgpu::VertexFormat::Float16x2:
+            case wgpu::VertexFormat::Float16x4:
                 return 2;
-            case wgpu::VertexFormat::UInt:
-            case wgpu::VertexFormat::Int:
-            case wgpu::VertexFormat::Float:
-            case wgpu::VertexFormat::UInt2:
-            case wgpu::VertexFormat::UInt3:
-            case wgpu::VertexFormat::UInt4:
-            case wgpu::VertexFormat::Int2:
-            case wgpu::VertexFormat::Int3:
-            case wgpu::VertexFormat::Int4:
-            case wgpu::VertexFormat::Float2:
-            case wgpu::VertexFormat::Float3:
-            case wgpu::VertexFormat::Float4:
+            case wgpu::VertexFormat::Float32:
+            case wgpu::VertexFormat::Float32x2:
+            case wgpu::VertexFormat::Float32x3:
+            case wgpu::VertexFormat::Float32x4:
+            case wgpu::VertexFormat::Uint32:
+            case wgpu::VertexFormat::Uint32x2:
+            case wgpu::VertexFormat::Uint32x3:
+            case wgpu::VertexFormat::Uint32x4:
+            case wgpu::VertexFormat::Sint32:
+            case wgpu::VertexFormat::Sint32x2:
+            case wgpu::VertexFormat::Sint32x3:
+            case wgpu::VertexFormat::Sint32x4:
                 return 4;
             default:
                 DAWN_UNREACHABLE();
@@ -156,39 +156,39 @@ class VertexFormatTest : public DawnTest {
 
     uint32_t ComponentCount(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::UInt:
-            case wgpu::VertexFormat::Int:
-            case wgpu::VertexFormat::Float:
+            case wgpu::VertexFormat::Float32:
+            case wgpu::VertexFormat::Uint32:
+            case wgpu::VertexFormat::Sint32:
                 return 1;
-            case wgpu::VertexFormat::UChar2:
-            case wgpu::VertexFormat::UShort2:
-            case wgpu::VertexFormat::UInt2:
-            case wgpu::VertexFormat::Char2:
-            case wgpu::VertexFormat::Short2:
-            case wgpu::VertexFormat::Int2:
-            case wgpu::VertexFormat::UChar2Norm:
-            case wgpu::VertexFormat::Char2Norm:
-            case wgpu::VertexFormat::UShort2Norm:
-            case wgpu::VertexFormat::Short2Norm:
-            case wgpu::VertexFormat::Half2:
-            case wgpu::VertexFormat::Float2:
+            case wgpu::VertexFormat::Uint8x2:
+            case wgpu::VertexFormat::Sint8x2:
+            case wgpu::VertexFormat::Unorm8x2:
+            case wgpu::VertexFormat::Snorm8x2:
+            case wgpu::VertexFormat::Uint16x2:
+            case wgpu::VertexFormat::Sint16x2:
+            case wgpu::VertexFormat::Unorm16x2:
+            case wgpu::VertexFormat::Snorm16x2:
+            case wgpu::VertexFormat::Float16x2:
+            case wgpu::VertexFormat::Float32x2:
+            case wgpu::VertexFormat::Uint32x2:
+            case wgpu::VertexFormat::Sint32x2:
                 return 2;
-            case wgpu::VertexFormat::Int3:
-            case wgpu::VertexFormat::UInt3:
-            case wgpu::VertexFormat::Float3:
+            case wgpu::VertexFormat::Float32x3:
+            case wgpu::VertexFormat::Uint32x3:
+            case wgpu::VertexFormat::Sint32x3:
                 return 3;
-            case wgpu::VertexFormat::UChar4:
-            case wgpu::VertexFormat::UShort4:
-            case wgpu::VertexFormat::UInt4:
-            case wgpu::VertexFormat::Char4:
-            case wgpu::VertexFormat::Short4:
-            case wgpu::VertexFormat::Int4:
-            case wgpu::VertexFormat::UChar4Norm:
-            case wgpu::VertexFormat::Char4Norm:
-            case wgpu::VertexFormat::UShort4Norm:
-            case wgpu::VertexFormat::Short4Norm:
-            case wgpu::VertexFormat::Half4:
-            case wgpu::VertexFormat::Float4:
+            case wgpu::VertexFormat::Uint8x4:
+            case wgpu::VertexFormat::Sint8x4:
+            case wgpu::VertexFormat::Unorm8x4:
+            case wgpu::VertexFormat::Snorm8x4:
+            case wgpu::VertexFormat::Uint16x4:
+            case wgpu::VertexFormat::Sint16x4:
+            case wgpu::VertexFormat::Unorm16x4:
+            case wgpu::VertexFormat::Snorm16x4:
+            case wgpu::VertexFormat::Float16x4:
+            case wgpu::VertexFormat::Float32x4:
+            case wgpu::VertexFormat::Uint32x4:
+            case wgpu::VertexFormat::Sint32x4:
                 return 4;
             default:
                 DAWN_UNREACHABLE();
@@ -423,7 +423,7 @@ TEST_P(VertexFormatTest, UChar2) {
         std::numeric_limits<uint8_t>::max(), 0, std::numeric_limits<uint8_t>::min(), 2, 200, 201,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::UChar2, vertexData, expectedData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint8x2, vertexData, expectedData);
 }
 
 TEST_P(VertexFormatTest, UChar4) {
@@ -446,7 +446,7 @@ TEST_P(VertexFormatTest, UChar4) {
         203,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::UChar4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint8x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Char2) {
@@ -473,7 +473,7 @@ TEST_P(VertexFormatTest, Char2) {
         std::numeric_limits<int8_t>::max(), 0, std::numeric_limits<int8_t>::min(), -2, 120, -121,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::Char2, vertexData, expectedData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint8x2, vertexData, expectedData);
 }
 
 TEST_P(VertexFormatTest, Char4) {
@@ -496,7 +496,7 @@ TEST_P(VertexFormatTest, Char4) {
         -123,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::Char4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint8x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UChar2Norm) {
@@ -526,7 +526,7 @@ TEST_P(VertexFormatTest, UChar2Norm) {
                                          200,
                                          201};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UChar2Norm, vertexData, expectedData);
+    DoVertexFormatTest(wgpu::VertexFormat::Unorm8x2, vertexData, expectedData);
 }
 
 TEST_P(VertexFormatTest, UChar4Norm) {
@@ -547,7 +547,7 @@ TEST_P(VertexFormatTest, UChar4Norm) {
                                        202,
                                        203};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UChar4Norm, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Unorm8x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Char2Norm) {
@@ -579,7 +579,7 @@ TEST_P(VertexFormatTest, Char2Norm) {
         -121,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::Char2Norm, vertexData, expectedData);
+    DoVertexFormatTest(wgpu::VertexFormat::Snorm8x2, vertexData, expectedData);
 }
 
 TEST_P(VertexFormatTest, Char4Norm) {
@@ -600,7 +600,7 @@ TEST_P(VertexFormatTest, Char4Norm) {
                                       102,
                                       -123};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Char4Norm, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Snorm8x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UShort2) {
@@ -615,7 +615,7 @@ TEST_P(VertexFormatTest, UShort2) {
                                         65432,
                                         4890};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UShort2, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint16x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UShort4) {
@@ -638,7 +638,7 @@ TEST_P(VertexFormatTest, UShort4) {
         3467,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::UShort4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint16x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Short2) {
@@ -653,7 +653,7 @@ TEST_P(VertexFormatTest, Short2) {
                                        3876,
                                        -3948};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Short2, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint16x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Short4) {
@@ -676,7 +676,7 @@ TEST_P(VertexFormatTest, Short4) {
         -2987,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::Short4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint16x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UShort2Norm) {
@@ -691,7 +691,7 @@ TEST_P(VertexFormatTest, UShort2Norm) {
                                         3456,
                                         6543};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UShort2Norm, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Unorm16x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UShort4Norm) {
@@ -712,7 +712,7 @@ TEST_P(VertexFormatTest, UShort4Norm) {
                                         2987,
                                         2987};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UShort4Norm, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Unorm16x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Short2Norm) {
@@ -727,7 +727,7 @@ TEST_P(VertexFormatTest, Short2Norm) {
                                        4987,
                                        -6789};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Short2Norm, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Snorm16x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Short4Norm) {
@@ -748,7 +748,7 @@ TEST_P(VertexFormatTest, Short4Norm) {
                                        20432,
                                        -2083};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Short4Norm, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Snorm16x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Half2) {
@@ -759,7 +759,7 @@ TEST_P(VertexFormatTest, Half2) {
     std::vector<uint16_t> vertexData =
         Float32ToFloat16(std::vector<float>({14.8f, -0.0f, 22.5f, 1.3f, +0.0f, -24.8f}));
 
-    DoVertexFormatTest(wgpu::VertexFormat::Half2, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float16x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Half4) {
@@ -770,7 +770,7 @@ TEST_P(VertexFormatTest, Half4) {
     std::vector<uint16_t> vertexData = Float32ToFloat16(std::vector<float>(
         {+0.0f, -16.8f, 18.2f, -0.0f, 12.5f, 1.3f, 14.8f, -12.4f, 22.5f, -48.8f, 47.4f, -24.8f}));
 
-    DoVertexFormatTest(wgpu::VertexFormat::Half4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float16x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Float) {
@@ -780,11 +780,11 @@ TEST_P(VertexFormatTest, Float) {
 
     std::vector<float> vertexData = {1.3f, +0.0f, -0.0f};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Float, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float32, vertexData, vertexData);
 
     vertexData = std::vector<float>{+1.0f, -1.0f, 18.23f};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Float, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float32, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Float2) {
@@ -794,7 +794,7 @@ TEST_P(VertexFormatTest, Float2) {
 
     std::vector<float> vertexData = {18.23f, -0.0f, +0.0f, +1.0f, 1.3f, -1.0f};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Float2, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float32x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Float3) {
@@ -806,7 +806,7 @@ TEST_P(VertexFormatTest, Float3) {
         +0.0f, -1.0f, -0.0f, 1.0f, 1.3f, 99.45f, 23.6f, -81.2f, 55.0f,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::Float3, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float32x3, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Float4) {
@@ -818,7 +818,7 @@ TEST_P(VertexFormatTest, Float4) {
         19.2f, -19.3f, +0.0f, 1.0f, -0.0f, 1.0f, 1.3f, -1.0f, 13.078f, 21.1965f, -1.1f, -1.2f,
     };
 
-    DoVertexFormatTest(wgpu::VertexFormat::Float4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Float32x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UInt) {
@@ -830,7 +830,7 @@ TEST_P(VertexFormatTest, UInt) {
                                         std::numeric_limits<uint16_t>::max(),
                                         std::numeric_limits<uint8_t>::max()};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UInt, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint32, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UInt2) {
@@ -842,7 +842,7 @@ TEST_P(VertexFormatTest, UInt2) {
                                         std::numeric_limits<uint16_t>::max(), 64,
                                         std::numeric_limits<uint8_t>::max(),  128};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UInt2, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint32x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UInt3) {
@@ -854,7 +854,7 @@ TEST_P(VertexFormatTest, UInt3) {
                                         std::numeric_limits<uint16_t>::max(), 164,  128,
                                         std::numeric_limits<uint8_t>::max(),  1283, 256};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UInt3, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint32x3, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, UInt4) {
@@ -866,7 +866,7 @@ TEST_P(VertexFormatTest, UInt4) {
                                         std::numeric_limits<uint16_t>::max(), 164,  128, 0,
                                         std::numeric_limits<uint8_t>::max(),  1283, 256, 4567};
 
-    DoVertexFormatTest(wgpu::VertexFormat::UInt4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Uint32x4, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Int) {
@@ -878,7 +878,7 @@ TEST_P(VertexFormatTest, Int) {
                                        std::numeric_limits<int32_t>::min(),
                                        std::numeric_limits<int8_t>::max()};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Int, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint32, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Int2) {
@@ -891,7 +891,7 @@ TEST_P(VertexFormatTest, Int2) {
         std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::min(),
         std::numeric_limits<int8_t>::max(),  std::numeric_limits<int8_t>::min()};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Int2, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint32x2, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Int3) {
@@ -904,7 +904,7 @@ TEST_P(VertexFormatTest, Int3) {
         std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::min(), 128,
         std::numeric_limits<int8_t>::max(),  std::numeric_limits<int8_t>::min(),  256};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Int3, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint32x3, vertexData, vertexData);
 }
 
 TEST_P(VertexFormatTest, Int4) {
@@ -917,7 +917,7 @@ TEST_P(VertexFormatTest, Int4) {
         std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::min(), -128, 0,
         std::numeric_limits<int8_t>::max(),  std::numeric_limits<int8_t>::min(),  256,  -4567};
 
-    DoVertexFormatTest(wgpu::VertexFormat::Int4, vertexData, vertexData);
+    DoVertexFormatTest(wgpu::VertexFormat::Sint32x4, vertexData, vertexData);
 }
 
 DAWN_INSTANTIATE_TEST(VertexFormatTest,
