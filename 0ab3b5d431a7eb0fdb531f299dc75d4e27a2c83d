@@ -50,6 +50,24 @@
       "message": "Snap! https://dawn-review.googlesource.com/c/dawn/+/42260\n\nI spent the entirety of yesterday figuring out why QueryInternalShaderTests.TimestampComputeShader was failing on windows when enabled. Turned out to be a DLL symbol linker issue. Looks like my fix landed just in time for this!",
       "revId": "0ab3b5d431a7eb0fdb531f299dc75d4e27a2c83d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c273dd26_9976d8f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T18:56:21Z",
+      "side": 1,
+      "message": "except now the test is failing on the bots again...? CI is red and CQ is broken. Not sure what\u0027s wrong here or how it passed the tryjob in the first place. I\u0027m doing a partial revert in https://dawn-review.googlesource.com/c/dawn/+/42740",
+      "parentUuid": "4723b1d1_ee9fcf3d",
+      "revId": "0ab3b5d431a7eb0fdb531f299dc75d4e27a2c83d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
