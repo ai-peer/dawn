@@ -3,6 +3,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48d06404_42da3541",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T16:11:18Z",
+      "side": 1,
+      "message": "nit: no longer passthrough",
+      "range": {
+        "startLine": 59,
+        "startChar": 27,
+        "endLine": 59,
+        "endChar": 40
+      },
+      "revId": "f0e943b4d2d9264b2658d697a6a639b8288d1504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e3d5ce_7bd288ea",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T16:11:18Z",
+      "side": 1,
+      "message": "what? This shouldn\u0027t matter. Can\u0027t we just have a single uniform buffer (that\u0027s this strcuture) that\u0027s passed to both fragment and vertex? We can have a \"CopyTextureCommonShaderHeader\" for that.",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 51
+      },
+      "revId": "f0e943b4d2d9264b2658d697a6a639b8288d1504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa5dcdac_80467f6f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T16:11:18Z",
+      "side": 1,
+      "message": "nit: just params?",
+      "range": {
+        "startLine": 71,
+        "startChar": 50,
+        "endLine": 71,
+        "endChar": 67
+      },
+      "revId": "f0e943b4d2d9264b2658d697a6a639b8288d1504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b4e8a205_bd362e8f",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 8
@@ -14,6 +83,24 @@
       "writtenOn": "2021-02-25T10:24:22Z",
       "side": 1,
       "message": "I find the test fails on blitting RGBA8Unorm to RGB10A2(Even don\u0027t compare the alpha channel) and to all Float16 component types.\nI did a quick investigation but have no idea. Since this CL contains a refactory for the test case methods, I\u0027d like to resolve this issue in another CL by dig into it(to unblock the reviewing). WDYT?",
+      "revId": "f0e943b4d2d9264b2658d697a6a639b8288d1504",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed79d3e2_cad7abb6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T16:11:18Z",
+      "side": 1,
+      "message": "This is a bit unfortunate. Can\u0027t we refactor the tests as a first CL and then land the additional conversion?",
+      "parentUuid": "b4e8a205_bd362e8f",
       "revId": "f0e943b4d2d9264b2658d697a6a639b8288d1504",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

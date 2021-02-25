@@ -237,6 +237,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82c371d2_3462d16d",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T16:11:18Z",
+      "side": 1,
+      "message": "That\u0027s not what Austin meant I think. He meant that we should use binding(0) in both the vertex and fragment shaders.",
+      "parentUuid": "b8a7ebf7_4fcb613a",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 62
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd23154c_50caff4a",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
