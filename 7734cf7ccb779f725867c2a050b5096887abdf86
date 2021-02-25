@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be6449e7_a910bfad",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5261457_a2958ea6",
+      "range": {
+        "startLine": 30,
+        "startChar": 37,
+        "endLine": 30,
+        "endChar": 68
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eaf33ddf_9ce8b1e5",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-02-24T17:01:06Z",
       "side": 1,
       "message": "Maybe we could just change uses of GetExpectedTextureDataRGBA8 to GetExpectedTextureData to avoid the duplicate helper functions? It doesn\u0027t really matter what\u0027s in the various RGBA components.",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 57
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a42807_6b215edd",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "Oh in this CL I just want to test arbitrary formats in CopyTests_T2T so that it is enough for me to write the regression tests about T2T copy, and I don\u0027t intend to change CopyTests_B2T or CopyTests_T2B so they still only support testing RGBA8 now. You can see CopyTests_B2T still checks the pixel values with EXPECT_TEXTURE_RGBA8_EQ().\n\nDo you want me to do the change in CopyTests_B2T and CopyTest_T2B in this CL?",
+      "parentUuid": "eaf33ddf_9ce8b1e5",
       "range": {
         "startLine": 60,
         "startChar": 30,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "753bd9fe_d6569a16",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0a655b1_c66fb343",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebf8676b_3dcd1b00",
@@ -111,6 +177,24 @@
       "writtenOn": "2021-02-24T17:01:06Z",
       "side": 1,
       "message": "Why is this ASSERT needed? The function seems to have been updated to allow for non RGBA8Unorm formats.",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b13f0041_f8b76f4c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "I left this ASSERT because CopyTests_B2T and CopyTests_T2B still only supports testing RGBA8.",
+      "parentUuid": "ebf8676b_3dcd1b00",
       "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -132,6 +216,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7382aec4_50edbdd5",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03143946_3453fd37",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f391ce9_8b5ad919",
@@ -145,6 +247,24 @@
       "writtenOn": "2021-02-24T17:01:06Z",
       "side": 1,
       "message": "This only needs to be a tight bound because GetTextureDataCopyLayoutForTexture2DAtLevel above gives a tight bound. Maybe we could over-allocate here but in the call to EXPECT_BUFFER_U32_RANGE_EQ have something that keeps the data in bounds (with a comment that explains we\u0027re doing that?)\n\nThis would just be Align(dstDataCopyLayout.bytesPerRow * width * height, 4) and then below the EXPECT_BUFFER_U32_EQ would have:\n\n expectationOffset \u003d dstDataCopyLayout.bytesPerImage * slice\n expectationSize \u003d min(alidDataSizePerImage / sizeof(uint32_t), bufferSize - expectationOffset);",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e547f8e_0c70784b",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f391ce9_8b5ad919",
       "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -209,6 +329,30 @@
       "writtenOn": "2021-02-24T17:01:06Z",
       "side": 1,
       "message": "The comment says this pass on the Vulkan driver but this is suppressed, is it that it doesn\u0027t pass on older drivers?",
+      "range": {
+        "startLine": 1550,
+        "startChar": 35,
+        "endLine": 1550,
+        "endChar": 63
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91d8930d_17aeaaac",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1550,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-25T08:37:29Z",
+      "side": 1,
+      "message": "Yes. This test fails on the bots with an older driver (26.20.100.8141).",
+      "parentUuid": "5a4d1895_a75a1dc6",
       "range": {
         "startLine": 1550,
         "startChar": 35,
