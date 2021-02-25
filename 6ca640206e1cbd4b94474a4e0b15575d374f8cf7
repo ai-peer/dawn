@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e134cb3_0a6119e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-25T16:58:21Z",
+      "side": 1,
+      "message": "Nit: these seem like two unrelated changes; it would be easier on the reviewers to have them in separate CLs.",
+      "revId": "6ca640206e1cbd4b94474a4e0b15575d374f8cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4a23b138_c6d71401",
@@ -14,6 +31,23 @@
       "writtenOn": "2021-02-24T16:42:59Z",
       "side": 1,
       "message": "fyi: will add unittests after this",
+      "revId": "6ca640206e1cbd4b94474a4e0b15575d374f8cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44bbfb8_8e094aaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-25T16:58:21Z",
+      "side": 1,
+      "message": "LGTM up to my understanding",
       "revId": "6ca640206e1cbd4b94474a4e0b15575d374f8cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
