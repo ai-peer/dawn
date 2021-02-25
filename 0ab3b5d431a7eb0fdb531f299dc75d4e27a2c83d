@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "0ab3b5d431a7eb0fdb531f299dc75d4e27a2c83d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4723b1d1_ee9fcf3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-02-25T11:02:27Z",
+      "side": 1,
+      "message": "Snap! https://dawn-review.googlesource.com/c/dawn/+/42260\n\nI spent the entirety of yesterday figuring out why QueryInternalShaderTests.TimestampComputeShader was failing on windows when enabled. Turned out to be a DLL symbol linker issue. Looks like my fix landed just in time for this!",
+      "revId": "0ab3b5d431a7eb0fdb531f299dc75d4e27a2c83d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
