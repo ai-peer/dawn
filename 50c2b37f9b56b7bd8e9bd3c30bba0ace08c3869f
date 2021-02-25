@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e77d91d5_3cd3a53f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-25T18:33:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b1bbfe8_d6014c7b",
+      "revId": "50c2b37f9b56b7bd8e9bd3c30bba0ace08c3869f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f73bafae_f1434a81",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ede45e60_a1868d5a",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-25T18:33:24Z",
+      "side": 1,
+      "message": "It\u0027s used in ShaderModule.cpp, which is why it was exposed. I\u0027ve moved that function into the new VertexFormatUtils files.",
+      "parentUuid": "f73bafae_f1434a81",
+      "revId": "50c2b37f9b56b7bd8e9bd3c30bba0ace08c3869f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9009a678_c643b95c",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-02-25T13:08:27Z",
       "side": 1,
       "message": "nit: no need to keep the comments ditto in other backends.",
+      "revId": "50c2b37f9b56b7bd8e9bd3c30bba0ace08c3869f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36b6b0e_027300f7",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-25T18:33:24Z",
+      "side": 1,
+      "message": "The comments were primarily a way of sanity checking when I looked at the diffs. 😊 Happy to remove them now.",
+      "parentUuid": "9009a678_c643b95c",
       "revId": "50c2b37f9b56b7bd8e9bd3c30bba0ace08c3869f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b18f6b_3b984970",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-25T18:33:24Z",
+      "side": 1,
+      "message": "Thanks for the feedback! In implementing the deprecation test I decided that it was beneficial to move the VertexFormat utils into their own file, like the TextureFormat utils. It feels a little silly to do that for a usage that will largely disappear when the deprecated formats are removed, but it still feels like a cleaner way to do it. Please take another look at that and the deprecation tests specifically!\n\nAlso, for some reason the deprecation warning was firing twice where I had it previously, so I\u0027ve moved it into the validation code.",
+      "revId": "51a8d48df0170d6fc8ace624032df76b086a5533",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
