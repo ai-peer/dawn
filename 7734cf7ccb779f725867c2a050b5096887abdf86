@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f34bbcfa_6ebf3cb2",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T15:01:44Z",
+      "side": 1,
+      "message": "Maybe as a followup if it\u0027s not too much work to just change T2B and B2T tests to use GetExpectedTextureData instead of GetExpectedTextureDataRGBA8",
+      "parentUuid": "01a42807_6b215edd",
+      "range": {
+        "startLine": 60,
+        "startChar": 30,
+        "endLine": 60,
+        "endChar": 57
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b0a655b1_c66fb343",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 5
@@ -195,6 +219,24 @@
       "side": 1,
       "message": "I left this ASSERT because CopyTests_B2T and CopyTests_T2B still only supports testing RGBA8.",
       "parentUuid": "ebf8676b_3dcd1b00",
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7df02542_b72fc2e0",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T15:01:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b13f0041_f8b76f4c",
       "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -306,6 +348,30 @@
       "side": 1,
       "message": "I think this is getting the offset into the src CPU data so we can copy it into the expected CPU data for the destination",
       "parentUuid": "a2be79b1_c1e2a890",
+      "range": {
+        "startLine": 384,
+        "startChar": 37,
+        "endLine": 385,
+        "endChar": 92
+      },
+      "revId": "7734cf7ccb779f725867c2a050b5096887abdf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a23aa849_dcc5c224",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-02-25T15:01:44Z",
+      "side": 1,
+      "message": "Yeah that\u0027s my understanding but it could use comments to explain this better. Right now it\u0027s a lot of math that\u0027s difficult to extract meaning from.",
+      "parentUuid": "146d0bd7_ccd0f74c",
       "range": {
         "startLine": 384,
         "startChar": 37,
