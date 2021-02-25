@@ -68,6 +68,23 @@
       "parentUuid": "507dcebe_435e0394",
       "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e75e4e0e_c54efa82",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-25T22:12:30Z",
+      "side": 1,
+      "message": "I was referring to the clean-up below (ln:585 and ln:594) which only runs when this is an external texture. Once texture is Destroyed, it\u0027s still Invalid. No strong preference.",
+      "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
