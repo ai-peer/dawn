@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93ec6675_1988e338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-25T22:26:16Z",
+      "side": 1,
+      "message": "Alright, looks like I\u0027ve finally appeased the build bots. Not entirely happy with where I ended up as a result, though, with VertexFormatUtils in common/. May be better to move the functions back to their original location in RenderPipeline.cpp and duplicate the required functions in tests/, but I\u0027ll wait to hear the reviewers opinions on that.",
+      "revId": "91cd4d9fc92f024bf2e471d8a00fd2b71304a875",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
