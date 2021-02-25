@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41db6cca_4f482d78",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T22:18:41Z",
+      "side": 1,
+      "message": "[1]\n\nWe can do everything above this point can happen on ExternalImage creation.\nEverything below this point happens on ProduceTexture()\n\n\nThe reason I think TextureDescriptor should be passed on ExternalImage creation is because the I3D12Resource doesn\u0027t change once we import it. GetDesc() should always return the same thing. We can validate it a single time against the TextureDescriptor. We always need to pass TextureDescriptor as some point for validation.\n\nProduceTexture is really just handing out access to the texture. It doesn\u0027t make sense to pass in the format or dimensions there. It *might* make sense to pass in a usage which is a subset of the usages in the texture descriptor - but I don\u0027t think it\u0027s needed just now.",
+      "revId": "05e071ed0eca51ddd28bfd34d9b4a48d86c60699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "103e8e67_666cad50",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 7
@@ -120,6 +137,30 @@
       "side": 1,
       "message": "ExternalImage only needs the handle, which is wrapped by ExternalImageDescriptorDXGISharedHandle - it does not require WGPUTextureDescriptor hence why its base class (and common properties) can be removed later.\n\nI think you\u0027re suggesting to cache the WGPUTextureDescriptor on ExternalImage, is that right?",
       "parentUuid": "ee3a486b_5a002100",
+      "range": {
+        "startLine": 58,
+        "startChar": 62,
+        "endLine": 58,
+        "endChar": 86
+      },
+      "revId": "05e071ed0eca51ddd28bfd34d9b4a48d86c60699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4147cf8_f766aa1d",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T22:18:41Z",
+      "side": 1,
+      "message": "Please see my comment at [1]",
+      "parentUuid": "e19b12c4_12bafbe8",
       "range": {
         "startLine": 58,
         "startChar": 62,
