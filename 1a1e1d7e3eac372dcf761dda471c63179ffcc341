@@ -94,6 +94,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ababb513_41f740d9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T02:04:20Z",
+      "side": 1,
+      "message": "Oh my. It is a critical problem which means copy to BGRA should be false but the case pass the bots. I\u0027ll take a look at this and the case today.",
+      "parentUuid": "b143c02e_aa2da74e",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1bea9ec_f03bc78c",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 6
@@ -203,6 +221,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da0ac14b_18e5c67e",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T02:04:20Z",
+      "side": 1,
+      "message": "(I\u0027ll add comments in code too).\nThe reason is that:\n1. The dst texture format will have RGBAFloatX, with my experience in VertexFormatTest experience. Calculate the unorm in CPU and in GPU will have errors. \n2. Use shader can save works like transfer FP16 to FP32 things.",
+      "parentUuid": "43d2dc88_b814554c",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a5e87a6b_447cc943",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
@@ -214,6 +250,24 @@
       "writtenOn": "2021-02-25T00:13:41Z",
       "side": 1,
       "message": "Maybe it\u0027s simpler to do a (width x height) compute shader dispatch and have each thread load one texel from each of the src/dst textures.",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea7fae1_92ec0e72",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-25T02:04:20Z",
+      "side": 1,
+      "message": "That would be a good idea.",
+      "parentUuid": "a5e87a6b_447cc943",
       "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
