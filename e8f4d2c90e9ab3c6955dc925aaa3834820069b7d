@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e0e9c3_b82c64af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-25T17:59:40Z",
+      "side": 1,
+      "message": "LGTM\n\n@Rafael - this is another symptom of using depth offset instead of height offset in the copyTextureSplitter and is fixed by my patch: https://dawn-review.googlesource.com/c/dawn/+/39200",
+      "revId": "e8f4d2c90e9ab3c6955dc925aaa3834820069b7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9d1a5f6_2618c7ca",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-02-25T08:47:06Z",
       "side": 1,
       "message": "I don\u0027t fix the bug in the CL because I find this test will pass after https://dawn-review.googlesource.com/c/dawn/+/39200 is landed.",
+      "range": {
+        "startLine": 1587,
+        "startChar": 0,
+        "endLine": 1587,
+        "endChar": 51
+      },
+      "revId": "e8f4d2c90e9ab3c6955dc925aaa3834820069b7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66b5e621_89996388",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1587,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-02-25T17:59:40Z",
+      "side": 1,
+      "message": "Yes, I agree that with #39200 the texture copy splitter will no longer create texture footprints such that depth copies \u003e1 need to be done on non-3D textures.",
+      "parentUuid": "d9d1a5f6_2618c7ca",
       "range": {
         "startLine": 1587,
         "startChar": 0,
