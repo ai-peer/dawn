@@ -50,6 +50,24 @@
       "message": "nit: this doesn\u0027t matter for internal textures, correct? If so, could also consider checking \"if external { /*clean-up external only stuff*/ }\" to make this more obvious.",
       "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6f888c_d2d17f90",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-25T21:55:12Z",
+      "side": 1,
+      "message": "For the D3D12 backend, external textures do not need special treatment with regard to cleanup. You simply release your references if you no longer need them. \n\nGiven this, I\u0027d rather keep the current code I have.",
+      "parentUuid": "507dcebe_435e0394",
+      "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
