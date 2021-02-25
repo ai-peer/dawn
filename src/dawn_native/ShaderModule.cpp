@@ -19,6 +19,7 @@
 #include "dawn_native/ObjectContentHasher.h"
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
+#include "dawn_native/RenderPipeline.h"
 #include "dawn_native/SpirvUtils.h"
 
 #include <spirv-tools/libspirv.hpp>
@@ -48,67 +49,70 @@ namespace dawn_native {
 
 #ifdef DAWN_ENABLE_WGSL
         tint::transform::VertexFormat ToTintVertexFormat(wgpu::VertexFormat format) {
+            format = NormalizeVertexFormat(format);
             switch (format) {
-                case wgpu::VertexFormat::UChar2:
+                case wgpu::VertexFormat::Uint8x2:  // UChar2:
                     return tint::transform::VertexFormat::kVec2U8;
-                case wgpu::VertexFormat::UChar4:
+                case wgpu::VertexFormat::Uint8x4:  // UChar4:
                     return tint::transform::VertexFormat::kVec4U8;
-                case wgpu::VertexFormat::Char2:
+                case wgpu::VertexFormat::Sint8x2:  // Char2:
                     return tint::transform::VertexFormat::kVec2I8;
-                case wgpu::VertexFormat::Char4:
+                case wgpu::VertexFormat::Sint8x4:  // Char4:
                     return tint::transform::VertexFormat::kVec4I8;
-                case wgpu::VertexFormat::UChar2Norm:
+                case wgpu::VertexFormat::Unorm8x2:  // UChar2Norm:
                     return tint::transform::VertexFormat::kVec2U8Norm;
-                case wgpu::VertexFormat::UChar4Norm:
+                case wgpu::VertexFormat::Unorm8x4:  // UChar4Norm:
                     return tint::transform::VertexFormat::kVec4U8Norm;
-                case wgpu::VertexFormat::Char2Norm:
+                case wgpu::VertexFormat::Snorm8x2:  // Char2Norm:
                     return tint::transform::VertexFormat::kVec2I8Norm;
-                case wgpu::VertexFormat::Char4Norm:
+                case wgpu::VertexFormat::Snorm8x4:  // Char4Norm:
                     return tint::transform::VertexFormat::kVec4I8Norm;
-                case wgpu::VertexFormat::UShort2:
+                case wgpu::VertexFormat::Uint16x2:  // UShort2:
                     return tint::transform::VertexFormat::kVec2U16;
-                case wgpu::VertexFormat::UShort4:
+                case wgpu::VertexFormat::Uint16x4:  // UShort4:
                     return tint::transform::VertexFormat::kVec4U16;
-                case wgpu::VertexFormat::Short2:
+                case wgpu::VertexFormat::Sint16x2:  // Short2:
                     return tint::transform::VertexFormat::kVec2I16;
-                case wgpu::VertexFormat::Short4:
+                case wgpu::VertexFormat::Sint16x4:  // Short4:
                     return tint::transform::VertexFormat::kVec4I16;
-                case wgpu::VertexFormat::UShort2Norm:
+                case wgpu::VertexFormat::Unorm16x2:  // UShort2Norm:
                     return tint::transform::VertexFormat::kVec2U16Norm;
-                case wgpu::VertexFormat::UShort4Norm:
+                case wgpu::VertexFormat::Unorm16x4:  // UShort4Norm:
                     return tint::transform::VertexFormat::kVec4U16Norm;
-                case wgpu::VertexFormat::Short2Norm:
+                case wgpu::VertexFormat::Snorm16x2:  // Short2Norm:
                     return tint::transform::VertexFormat::kVec2I16Norm;
-                case wgpu::VertexFormat::Short4Norm:
+                case wgpu::VertexFormat::Snorm16x4:  // Short4Norm:
                     return tint::transform::VertexFormat::kVec4I16Norm;
-                case wgpu::VertexFormat::Half2:
+                case wgpu::VertexFormat::Float16x2:  // Half2:
                     return tint::transform::VertexFormat::kVec2F16;
-                case wgpu::VertexFormat::Half4:
+                case wgpu::VertexFormat::Float16x4:  // Half4:
                     return tint::transform::VertexFormat::kVec4F16;
-                case wgpu::VertexFormat::Float:
+                case wgpu::VertexFormat::Float32:  // Float:
                     return tint::transform::VertexFormat::kF32;
-                case wgpu::VertexFormat::Float2:
+                case wgpu::VertexFormat::Float32x2:  // Float2:
                     return tint::transform::VertexFormat::kVec2F32;
-                case wgpu::VertexFormat::Float3:
+                case wgpu::VertexFormat::Float32x3:  // Float3:
                     return tint::transform::VertexFormat::kVec3F32;
-                case wgpu::VertexFormat::Float4:
+                case wgpu::VertexFormat::Float32x4:  // Float4:
                     return tint::transform::VertexFormat::kVec4F32;
-                case wgpu::VertexFormat::UInt:
+                case wgpu::VertexFormat::Uint32:  // UInt:
                     return tint::transform::VertexFormat::kU32;
-                case wgpu::VertexFormat::UInt2:
+                case wgpu::VertexFormat::Uint32x2:  // UInt2:
                     return tint::transform::VertexFormat::kVec2U32;
-                case wgpu::VertexFormat::UInt3:
+                case wgpu::VertexFormat::Uint32x3:  // UInt3:
                     return tint::transform::VertexFormat::kVec3U32;
-                case wgpu::VertexFormat::UInt4:
+                case wgpu::VertexFormat::Uint32x4:  // UInt4:
                     return tint::transform::VertexFormat::kVec4U32;
-                case wgpu::VertexFormat::Int:
+                case wgpu::VertexFormat::Sint32:  // Int:
                     return tint::transform::VertexFormat::kI32;
-                case wgpu::VertexFormat::Int2:
+                case wgpu::VertexFormat::Sint32x2:  // Int2:
                     return tint::transform::VertexFormat::kVec2I32;
-                case wgpu::VertexFormat::Int3:
+                case wgpu::VertexFormat::Sint32x3:  // Int3:
                     return tint::transform::VertexFormat::kVec3I32;
-                case wgpu::VertexFormat::Int4:
+                case wgpu::VertexFormat::Sint32x4:  // Int4:
                     return tint::transform::VertexFormat::kVec4I32;
+                default:
+                    UNREACHABLE();
             }
         }
 
