@@ -80,6 +80,30 @@
       },
       "revId": "05e071ed0eca51ddd28bfd34d9b4a48d86c60699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee3a486b_5a002100",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-25T21:05:06Z",
+      "side": 1,
+      "message": "not exactly sure what you mean. My point is:\n\n- creating the ExternalImage should take a descriptor, and it needs:\n  - shareHandle\n  - WGPUTextureDescriptor (from the base class)\n\n- accessing the ExternalImage should take a descriptor, and it needs:\n - acquireMutexKey\n - isSwapChainTexture\n - isInitialized (from the base class)",
+      "parentUuid": "df0b4dec_e339243c",
+      "range": {
+        "startLine": 58,
+        "startChar": 62,
+        "endLine": 58,
+        "endChar": 86
+      },
+      "revId": "05e071ed0eca51ddd28bfd34d9b4a48d86c60699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
