@@ -85,6 +85,24 @@
       "message": "I was referring to the clean-up below (ln:585 and ln:594) which only runs when this is an external texture. Once texture is Destroyed, it\u0027s still Invalid. No strong preference.",
       "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b1a320_61e92a73",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-25T22:32:48Z",
+      "side": 1,
+      "message": "Swapchain textures, today, are always external. But they may not be in the future. \n\nThe DXGI keyed mutex will be present when we have an external texture.  \n\nI think the important thing is to clean up things if they\u0027re present. If you prefer, I can move the \u0027if GetInfo\u0027 if statement to encompass both the \u0027if swapchain\u0027 and \u0027Deallocate\u0027 statements.",
+      "parentUuid": "e75e4e0e_c54efa82",
+      "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
