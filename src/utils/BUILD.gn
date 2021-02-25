@@ -80,6 +80,8 @@ static_library("dawn_utils") {
     "TextureFormatUtils.cpp",
     "TextureFormatUtils.h",
     "Timer.h",
+    "VertexFormatUtils.cpp",
+    "VertexFormatUtils.h",
     "WGPUHelpers.cpp",
     "WGPUHelpers.h",
     "WireHelper.cpp",
