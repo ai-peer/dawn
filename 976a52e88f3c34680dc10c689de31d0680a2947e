@@ -68,6 +68,23 @@
       "message": "LGTM! THanks for fixing this.",
       "revId": "976a52e88f3c34680dc10c689de31d0680a2947e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af29cc49_6c08ff23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-02-25T21:22:49Z",
+      "side": 1,
+      "message": "By the power vested in me as the \"right\" Brandon Jones, I deem this change LGTM! ;)",
+      "revId": "976a52e88f3c34680dc10c689de31d0680a2947e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
