@@ -50,6 +50,23 @@
       "message": "LGTM up to my understanding",
       "revId": "6ca640206e1cbd4b94474a4e0b15575d374f8cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "372a2bae_5984dbb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-02-25T16:58:47Z",
+      "side": 1,
+      "message": "LGTM2 that is",
+      "revId": "6ca640206e1cbd4b94474a4e0b15575d374f8cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
