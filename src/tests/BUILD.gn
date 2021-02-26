@@ -477,7 +477,6 @@ test("dawn_end2end_tests") {
   deps = [
     ":dawn_end2end_tests_common",
     ":dawn_end2end_tests_sources",
-    ":dawn_white_box_tests_sources",
   ]
 }
 
