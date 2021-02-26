@@ -94,6 +94,30 @@
       },
       "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1695355_b5910760",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-26T23:06:41Z",
+      "side": 1,
+      "message": "Where you ended up is not quite right. The ASSERT_EQ will take care of marking the test as failed and returning early from this method. So far, so good.\n\nHowever, the caller will continue to execute. You need to also ASSERT that the out parameter is valid in the caller. Otherwise, it will run with garbage data.",
+      "parentUuid": "3eeabef2_71c839ab",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 28
+      },
+      "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
