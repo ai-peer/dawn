@@ -16,6 +16,115 @@
       "message": "refactored, @enga PTAL",
       "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b76c9b57_e5b52c94",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:50:50Z",
+      "side": 1,
+      "message": "We should make a copy of the contents. The ExternalImage may outlive this descriptor.\n\nwe should also assert that descriptor-\u003enextInChain is null. If it\u0027s non-null then we would need to copy the chained structs too. Right now, there are no chained structs that would be here though.",
+      "range": {
+        "startLine": 56,
+        "startChar": 52,
+        "endLine": 56,
+        "endChar": 77
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e9d6a2b_86eefa1f",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:50:50Z",
+      "side": 1,
+      "message": "nit: what do you think about passing in ExternalImageDXGI* in directly here - (Or renaming the function). We have Texture::Create which takes in a resource for the swapchain below, but one is for sharing and one is just for presenting. I don\u0027t want them to get confused.",
+      "range": {
+        "startLine": 422,
+        "startChar": 48,
+        "endLine": 423,
+        "endChar": 84
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d469eab8_db18059f",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:50:50Z",
+      "side": 1,
+      "message": "instead of CreateExternalImage below, we should have ExternalImageDXGI::Create which takes the share handle.\n\nAnd this constructor should be private. IT shouldn\u0027t be possible for anyone to make an ExternalImageDXGI with any ID3D12Resource. It must be from a share handle.",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ee8f750_fd108e1a",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:50:50Z",
+      "side": 1,
+      "message": "this should be a class, and these should be private. We don\u0027t want anyone to change mD3D12Resource after afterward.",
+      "range": {
+        "startLine": 72,
+        "startChar": 7,
+        "endLine": 73,
+        "endChar": 59
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12d218db_7db2b411",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:50:50Z",
+      "side": 1,
+      "message": "should we check the contents are still solidRed ?",
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
