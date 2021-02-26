@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "1c93fbae5121cf36b4299ecee3a5fd70b63d0018",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f863aaa0_c67e9c5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T17:06:33Z",
+      "side": 1,
+      "message": "LGTM. Bryan, please review since Corentin is out.",
+      "revId": "1c93fbae5121cf36b4299ecee3a5fd70b63d0018",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
