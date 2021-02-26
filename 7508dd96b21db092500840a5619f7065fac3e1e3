@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6762b31b_d6f867c7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "While it is OK for |unorm| formats to compare their pixel values on the CPU side, we cannot do such comparisons for the |float| formats  because we may meet the precision issues when comparing a value generated at the CPU side to the one from the GPU side.",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 12,
+        "endChar": 47
+      },
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "4f0ae68a_5f72b77c",
@@ -14,6 +37,144 @@
       "writtenOn": "2021-02-26T01:48:16Z",
       "side": 1,
       "message": "Hi, Austin and Jiawei,\nUpdate this CL. Now this CL focuses on using compute shader in CopyTextureForBrowserTests.\nPlease take another look.",
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce0f9db7_bfe86e30",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "Do the bit-by-bit comparison between the source and destination texture with GPU (compute shader) instead of CPU after executing CopyTextureForBrowser() to avoid the errors caused by comparing a value generated on CPU to the one generated on GPU.",
+      "range": {
+        "startLine": 69,
+        "startChar": 0,
+        "endLine": 72,
+        "endChar": 82
+      },
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1c506d_ea3fbe96",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "This is useless?",
+      "range": {
+        "startLine": 128,
+        "startChar": 12,
+        "endLine": 128,
+        "endChar": 42
+      },
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f7f265a_cea90f7d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "This is useless?",
+      "range": {
+        "startLine": 136,
+        "startChar": 30,
+        "endLine": 136,
+        "endChar": 60
+      },
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9431bff_d66c3e3d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "This can be omitted as \u00271\u0027 is the default value.",
+      "range": {
+        "startLine": 191,
+        "startChar": 8,
+        "endLine": 191,
+        "endChar": 45
+      },
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6ed00b_2c025c89",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 196,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "This can be omitted as \u00271\u0027 is the default value.",
+      "range": {
+        "startLine": 196,
+        "startChar": 7,
+        "endLine": 196,
+        "endChar": 45
+      },
+      "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e1be42c_3f160d5f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-02-26T05:50:00Z",
+      "side": 1,
+      "message": "const std::vector\u003cuint32_t\u003e expectResult(copySize.width * copySize.height, 1);",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 226,
+        "endChar": 73
+      },
       "revId": "7508dd96b21db092500840a5619f7065fac3e1e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
