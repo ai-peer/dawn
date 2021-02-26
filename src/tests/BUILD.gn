@@ -265,6 +265,7 @@ source_set("dawn_end2end_tests_sources") {
     "${dawn_root}/src/dawn:dawn_proc",
     "${dawn_root}/src/dawn:dawncpp",
     "${dawn_root}/src/dawn_native",
+    "${dawn_root}/src/dawn_native:dawn_native_sources",
     "${dawn_root}/src/dawn_wire",
     "${dawn_root}/src/utils:dawn_utils",
   ]
@@ -390,15 +391,16 @@ source_set("dawn_white_box_tests_sources") {
     "${dawn_root}/src/dawn:dawn_proc",
     "${dawn_root}/src/dawn:dawncpp",
     "${dawn_root}/src/dawn_native:dawn_native_sources",
+    "${dawn_root}/src/dawn_native:dawn_native_static",
     "${dawn_root}/src/dawn_wire",
     "${dawn_root}/src/utils:dawn_utils",
-
-    # Static because the tests both link against and have dawn_native
-    # sources. MSVC errors when both importing and exporting symbols.
-    "${dawn_root}/src/dawn_native:dawn_native_static",
   ]
 
-  sources = [ "DawnTest.h" ]
+  sources = [
+    "DawnTest.h",
+    "white_box/InternalResourceUsageTests.cpp",
+    "white_box/QueryInternalShaderTests.cpp",
+  ]
 
   if (dawn_enable_vulkan) {
     deps += [ "${dawn_root}/third_party/khronos:vulkan_headers" ]
@@ -413,11 +415,6 @@ source_set("dawn_white_box_tests_sources") {
       sources += [ "white_box/VulkanErrorInjectorTests.cpp" ]
     }
   }
-
-  sources += [
-    "white_box/InternalResourceUsageTests.cpp",
-    "white_box/QueryInternalShaderTests.cpp",
-  ]
 
   if (dawn_enable_d3d12) {
     sources += [
@@ -438,20 +435,9 @@ source_set("dawn_white_box_tests_sources") {
   libs = []
 }
 
-test("dawn_end2end_tests") {
+source_set("dawn_end2end_tests_common") {
+  testonly = true
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
-
-  deps = [
-    ":dawn_end2end_tests_sources",
-    ":dawn_white_box_tests_sources",
-    ":gmock_and_gtest",
-    "${dawn_root}/src/common",
-    "${dawn_root}/src/dawn:dawn_proc",
-    "${dawn_root}/src/dawn:dawncpp",
-    "${dawn_root}/src/dawn_native",
-    "${dawn_root}/src/dawn_wire",
-    "${dawn_root}/src/utils:dawn_utils",
-  ]
 
   sources = [
     "DawnTest.cpp",
@@ -459,6 +445,16 @@ test("dawn_end2end_tests") {
   ]
 
   libs = []
+  deps = [
+    ":gmock_and_gtest",
+    "${dawn_root}/src/common",
+    "${dawn_root}/src/dawn:dawn_proc",
+    "${dawn_root}/src/dawn:dawncpp",
+    "${dawn_root}/src/dawn_native:dawn_native_headers",
+    "${dawn_root}/src/dawn_platform",
+    "${dawn_root}/src/dawn_wire",
+    "${dawn_root}/src/utils:dawn_utils",
+  ]
 
   # When building inside Chromium, use their gtest main function because it is
   # needed to run in swarming correctly.
@@ -475,6 +471,21 @@ test("dawn_end2end_tests") {
   if (is_chromeos) {
     libs += [ "gbm" ]
   }
+}
+
+test("dawn_end2end_tests") {
+  deps = [
+    ":dawn_end2end_tests_common",
+    ":dawn_end2end_tests_sources",
+    ":dawn_white_box_tests_sources",
+  ]
+}
+
+test("dawn_end2end_white_box_tests") {
+  deps = [
+    ":dawn_end2end_tests_common",
+    ":dawn_white_box_tests_sources",
+  ]
 }
 
 ###############################################################################
