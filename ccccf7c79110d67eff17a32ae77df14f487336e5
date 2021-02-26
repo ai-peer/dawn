@@ -121,6 +121,24 @@
       "parentUuid": "27b1a320_61e92a73",
       "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c4db59_4cb60491",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:27:22Z",
+      "side": 1,
+      "message": "Would it also work to unset |mSwapChainTexture| and |mDxgiKeyedMutex| after they are Presented / Released below? It may be a more direct way to solve the issue as the current CL sort of relies on some implementation details of the allocator.",
+      "parentUuid": "20e5d142_827b66e5",
+      "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
