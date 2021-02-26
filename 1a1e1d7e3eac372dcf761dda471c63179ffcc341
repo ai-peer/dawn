@@ -259,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "176344fe_e4baf469",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-26T00:54:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "82c371d2_3462d16d",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 62
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd23154c_50caff4a",
