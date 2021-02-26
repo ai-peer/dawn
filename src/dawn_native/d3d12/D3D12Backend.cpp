@@ -51,6 +51,25 @@ namespace dawn_native { namespace d3d12 {
         : ExternalImageDescriptor(ExternalImageType::DXGISharedHandle) {
     }
 
+    ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
+                                         const WGPUTextureDescriptor* descriptor)
+        : mD3D12Resource(std::move(d3d12Resource)), mDescriptor(descriptor) {
+    }
+
+    WGPUTexture ExternalImageDXGI::ProduceTexture(
+        WGPUDevice device,
+        const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+
+        const TextureDescriptor* textureDescriptor =
+            reinterpret_cast<const TextureDescriptor*>(mDescriptor);
+
+        Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
+            textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
+            descriptor->isSwapChainTexture, descriptor->isInitialized);
+        return reinterpret_cast<WGPUTexture>(texture.Detach());
+    }
+
     uint64_t SetExternalMemoryReservation(WGPUDevice device,
                                           uint64_t requestedReservationSize,
                                           MemorySegment memorySegment) {
@@ -60,13 +79,60 @@ namespace dawn_native { namespace d3d12 {
             memorySegment, requestedReservationSize);
     }
 
+    std::unique_ptr<ExternalImageDXGI> CreateExternalImage(
+        WGPUDevice device,
+        const ExternalImageDescriptorDXGISharedHandle* descriptor) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+
+        Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource;
+        if (FAILED(backendDevice->GetD3D12Device()->OpenSharedHandle(
+                descriptor->sharedHandle, IID_PPV_ARGS(&d3d12Resource)))) {
+            return nullptr;
+        }
+
+        const TextureDescriptor* textureDescriptor =
+            reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
+
+        if (backendDevice->ConsumedError(
+                ValidateTextureDescriptor(backendDevice, textureDescriptor))) {
+            return nullptr;
+        }
+
+        if (backendDevice->ConsumedError(
+                ValidateTextureDescriptorCanBeWrapped(textureDescriptor))) {
+            return nullptr;
+        }
+
+        if (backendDevice->ConsumedError(
+                ValidateD3D12TextureCanBeWrapped(d3d12Resource.Get(), textureDescriptor))) {
+            return nullptr;
+        }
+
+        // Shared handle is assumed to support resource sharing capability. The resource
+        // shared capability tier must agree to share resources between D3D devices.
+        const Format* format =
+            backendDevice->GetInternalFormat(textureDescriptor->format).AcquireSuccess();
+        if (format->IsMultiPlanar()) {
+            if (backendDevice->ConsumedError(ValidateD3D12VideoTextureCanBeShared(
+                    backendDevice, D3D12TextureFormat(textureDescriptor->format)))) {
+                return nullptr;
+            }
+        }
+
+        return std::make_unique<ExternalImageDXGI>(std::move(d3d12Resource),
+                                                   descriptor->cTextureDescriptor);
+    }
+
     WGPUTexture WrapSharedHandle(WGPUDevice device,
                                  const ExternalImageDescriptorDXGISharedHandle* descriptor) {
-        Device* backendDevice = reinterpret_cast<Device*>(device);
-        Ref<TextureBase> texture = backendDevice->WrapSharedHandle(
-            descriptor, descriptor->sharedHandle, ExternalMutexSerial(descriptor->acquireMutexKey),
-            descriptor->isSwapChainTexture);
-        return reinterpret_cast<WGPUTexture>(texture.Detach());
+        std::unique_ptr<ExternalImageDXGI> externalImage = CreateExternalImage(device, descriptor);
+
+        ExternalImageAccessDescriptorDXGIKeyedMutex externalAccessDesc = {};
+        externalAccessDesc.isInitialized = descriptor->isInitialized;
+        externalAccessDesc.isSwapChainTexture = descriptor->isSwapChainTexture;
+        externalAccessDesc.acquireMutexKey = descriptor->acquireMutexKey;
+
+        return externalImage->ProduceTexture(device, &externalAccessDesc);
     }
 
     AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
