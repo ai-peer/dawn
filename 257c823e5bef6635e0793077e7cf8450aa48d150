@@ -33,6 +33,24 @@
       "message": "nit: return nullptr if |externalImage| is null",
       "revId": "257c823e5bef6635e0793077e7cf8450aa48d150",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62254789_e5271885",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T21:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23dbf8bc_41840c75",
+      "revId": "257c823e5bef6635e0793077e7cf8450aa48d150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
