@@ -103,6 +103,24 @@
       "parentUuid": "e75e4e0e_c54efa82",
       "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20e5d142_827b66e5",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T01:25:43Z",
+      "side": 1,
+      "message": "The \"if GetInfo\" also SGTM, your call.",
+      "parentUuid": "27b1a320_61e92a73",
+      "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
