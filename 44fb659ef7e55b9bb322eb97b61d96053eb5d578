@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20f53c4_f682a685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:21:18Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "44fb659ef7e55b9bb322eb97b61d96053eb5d578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1339adea_638fccec",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-02-26T08:21:18Z",
+      "side": 1,
+      "message": "nit: widthInBlocks - with an \"s\" at the end probably is most clear.\n\n\"width in block\" could mean the width inside of a block, but\n\"width in blocks\" sounds like the width in block-sized units",
+      "range": {
+        "startLine": 111,
+        "startChar": 41,
+        "endLine": 111,
+        "endChar": 53
+      },
+      "revId": "44fb659ef7e55b9bb322eb97b61d96053eb5d578",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
