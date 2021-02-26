@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ce3e8d5_7cfc4a15",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T18:24:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b76c9b57_e5b52c94",
+      "range": {
+        "startLine": 56,
+        "startChar": 52,
+        "endLine": 56,
+        "endChar": 77
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e9d6a2b_86eefa1f",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-02-26T08:50:50Z",
       "side": 1,
       "message": "nit: what do you think about passing in ExternalImageDXGI* in directly here - (Or renaming the function). We have Texture::Create which takes in a resource for the swapchain below, but one is for sharing and one is just for presenting. I don\u0027t want them to get confused.",
+      "range": {
+        "startLine": 422,
+        "startChar": 48,
+        "endLine": 423,
+        "endChar": 84
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cd5325c_49e6c42e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T18:24:12Z",
+      "side": 1,
+      "message": "Renamed.",
+      "parentUuid": "2e9d6a2b_86eefa1f",
       "range": {
         "startLine": 422,
         "startChar": 48,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ade4e788_742d9f6c",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T18:24:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d469eab8_db18059f",
+      "range": {
+        "startLine": 66,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 67
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ee8f750_fd108e1a",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "661a1f73_fb78dac5",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T18:24:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ee8f750_fd108e1a",
+      "range": {
+        "startLine": 72,
+        "startChar": 7,
+        "endLine": 73,
+        "endChar": 59
+      },
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12d218db_7db2b411",
@@ -123,6 +219,24 @@
       "writtenOn": "2021-02-26T08:50:50Z",
       "side": 1,
       "message": "should we check the contents are still solidRed ?",
+      "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d74f95_9c3f1424",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 572,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T18:24:12Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "12d218db_7db2b411",
       "revId": "29e27e52d7deae0ea070104bab785c97ac64fa05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
