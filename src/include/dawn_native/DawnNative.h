@@ -62,7 +62,7 @@ namespace dawn_native {
 
     // An optional parameter of Adapter::CreateDevice() to send additional information when creating
     // a Device. For example, we can use it to enable a workaround, optimization or feature.
-    struct DAWN_NATIVE_EXPORT DeviceDescriptor {
+    struct DeviceDescriptor {
         std::vector<const char*> requiredExtensions;
         std::vector<const char*> forceEnabledToggles;
         std::vector<const char*> forceDisabledToggles;
