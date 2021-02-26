@@ -1073,9 +1073,7 @@ namespace dawn_native {
         transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
         transformManager.append(std::make_unique<tint::transform::Spirv>());
         if (GetDevice()->IsRobustnessEnabled()) {
-            // TODO(enga): Run the Tint BoundArrayAccessors transform instead of the SPIRV Tools
-            // one, but it appears to crash after running VertexPulling.
-            // transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
+            transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
         }
 
         tint::Program program;
