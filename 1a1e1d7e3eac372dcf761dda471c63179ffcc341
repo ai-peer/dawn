@@ -283,6 +283,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec73b183_a685d3d7",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-26T01:48:16Z",
+      "side": 1,
+      "message": "Finally figure out how to make it work in local. Thanks for this suggestion(Austin) and explain(Corentin). Will adopt this in future CL which support the color format conversion.",
+      "parentUuid": "176344fe_e4baf469",
+      "range": {
+        "startLine": 314,
+        "startChar": 8,
+        "endLine": 316,
+        "endChar": 62
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd23154c_50caff4a",
@@ -343,6 +367,30 @@
       "writtenOn": "2021-02-24T16:03:37Z",
       "side": 1,
       "message": "nit: Maybe we could have smaller defaults for tests, no need to do 1080p :)",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab95b80f_54d08376",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-26T01:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7145af64_ef617855",
       "range": {
         "startLine": 29,
         "startChar": 0,
@@ -502,6 +550,24 @@
       "side": 1,
       "message": "Switch to compute shader now!",
       "parentUuid": "8ea7fae1_92ec0e72",
+      "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87744869_4988959f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-02-26T01:48:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbe5ed23_526eaf9f",
       "revId": "1a1e1d7e3eac372dcf761dda471c63179ffcc341",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
