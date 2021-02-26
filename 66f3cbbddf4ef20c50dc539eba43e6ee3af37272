@@ -118,6 +118,30 @@
       },
       "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acf1d621_feb69787",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-02-26T23:23:21Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s correct. On my machine ASSERT_EQ also returns the caller early, it does not continue to run.",
+      "parentUuid": "f1695355_b5910760",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 28
+      },
+      "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
