@@ -46,7 +46,7 @@ namespace dawn_native { namespace d3d12 {
 
     void RecordCopyBufferToTextureFromTextureCopySplit(ID3D12GraphicsCommandList* commandList,
                                                        const Texture2DCopySplit& baseCopySplit,
-                                                       Buffer* buffer,
+                                                       ID3D12Resource* bufferResource,
                                                        uint64_t baseOffset,
                                                        uint64_t bufferBytesPerRow,
                                                        Texture* texture,
