@@ -310,9 +310,29 @@ namespace dawn_native {
 
         ResultOrError<std::vector<uint32_t>> RunRobustBufferAccessPass(
             const std::vector<uint32_t>& spirv) {
+            std::ostringstream errorStream;
+#ifdef DAWN_ENABLE_WGSL
+            tint::Program program;
+            DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv));
+
+            tint::transform::Manager transformManager;
+            transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
+            transformManager.append(std::make_unique<tint::transform::Spirv>());
+
+            DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
+
+            tint::writer::spirv::Generator generator(&program);
+            if (!generator.Generate()) {
+                errorStream << "Generator: " << generator.error() << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            std::vector<uint32_t> spirvOut = generator.result();
+            DAWN_TRY(ValidateSpirv(spirvOut.data(), spirvOut.size()));
+            return std::move(spirvOut);
+#else
             spvtools::Optimizer opt(SPV_ENV_VULKAN_1_1);
 
-            std::ostringstream errorStream;
             errorStream << "SPIRV Optimizer failure:" << std::endl;
             opt.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
                                                   const spv_position_t& position,
@@ -344,6 +364,7 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
             return std::move(result);
+#endif
         }
 
         MaybeError ValidateCompatibilityWithBindGroupLayout(DeviceBase*,
@@ -1111,12 +1132,8 @@ namespace dawn_native {
         transformManager.append(
             MakeVertexPullingTransform(vertexState, entryPoint, pullingBufferBindingSet));
         transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
+        transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
         transformManager.append(std::make_unique<tint::transform::Spirv>());
-        if (GetDevice()->IsRobustnessEnabled()) {
-            // TODO(enga): Run the Tint BoundArrayAccessors transform instead of the SPIRV Tools
-            // one, but it appears to crash after running VertexPulling.
-            // transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
-        }
 
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, programIn));
@@ -1128,9 +1145,6 @@ namespace dawn_native {
         }
 
         std::vector<uint32_t> spirv = generator.result();
-        if (GetDevice()->IsRobustnessEnabled()) {
-            DAWN_TRY_ASSIGN(spirv, RunRobustBufferAccessPass(spirv));
-        }
         DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
         return std::move(spirv);
     }
