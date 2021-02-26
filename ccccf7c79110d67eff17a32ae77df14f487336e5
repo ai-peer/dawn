@@ -139,6 +139,24 @@
       "parentUuid": "20e5d142_827b66e5",
       "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "677739c1_9fc8cac3",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-26T20:35:09Z",
+      "side": 1,
+      "message": "@Austin, we std::move mDxgiKeyedMutex to ReleaseMutexForTexture so it does get unset at the end of the call.\n\nThe call to Present calls mResourceAllocation.GetD3D12Resource(), so it needs to rely on the validity of mResourceAllocation to do its job.\n\nI\u0027ll put up a new patch which removes the GetInfo call and, instead, sets mSwapChainTexture to false after the DeallocateMemory call. That should avoid the crash and keeps the member variables internally consistent.",
+      "parentUuid": "c6c4db59_4cb60491",
+      "revId": "ccccf7c79110d67eff17a32ae77df14f487336e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
