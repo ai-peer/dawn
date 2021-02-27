@@ -142,6 +142,30 @@
       },
       "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d876fa_747e51a7",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-02-27T01:53:36Z",
+      "side": 1,
+      "message": "Yes, the implementation of the ASSERT_EQ macro has an early return. However, the caller of WrapSharedHandle also needs to assert that the out parameter is valid. \n\nJust now, I tried an experiment where I force an assert in WrapShaderHandle by changing the hr in the debugger to be a failure code. WrapSharedHandle exited right away but control still transferred to the caller where execution resumed. This is in line with the behavior described in the \"Propagating Failures\" section of https://github.com/google/googletest/blob/master/docs/advanced.md#using-assertions-in-sub-routines.",
+      "parentUuid": "acf1d621_feb69787",
+      "range": {
+        "startLine": 93,
+        "startChar": 12,
+        "endLine": 93,
+        "endChar": 28
+      },
+      "revId": "66f3cbbddf4ef20c50dc539eba43e6ee3af37272",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
