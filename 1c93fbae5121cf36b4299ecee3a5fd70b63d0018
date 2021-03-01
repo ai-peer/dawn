@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d59268_3ccc589d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-01T02:03:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aabf6bd3_ebdeebf5",
+      "revId": "1c93fbae5121cf36b4299ecee3a5fd70b63d0018",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfd89be5_1572f35d",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-02-26T18:53:54Z",
       "side": 1,
       "message": "unit: parameter does not match cpp",
+      "revId": "1c93fbae5121cf36b4299ecee3a5fd70b63d0018",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0cdc4e3_bf5e0cd4",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-01T02:03:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bfd89be5_1572f35d",
       "revId": "1c93fbae5121cf36b4299ecee3a5fd70b63d0018",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
