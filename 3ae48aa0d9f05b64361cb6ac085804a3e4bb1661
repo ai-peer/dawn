@@ -16,6 +16,23 @@
       "message": "PTAL, this was the only case that was breaking on Linux \u0026 Mac for me when using my patch in Tint",
       "revId": "3ae48aa0d9f05b64361cb6ac085804a3e4bb1661",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7d1d9e_b80b6d74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-01T20:27:44Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "3ae48aa0d9f05b64361cb6ac085804a3e4bb1661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
