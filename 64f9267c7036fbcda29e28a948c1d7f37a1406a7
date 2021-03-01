@@ -132,6 +132,24 @@
       "parentUuid": "13621707_9ff1c14d",
       "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dcc4b14_85df5e9f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-01T20:30:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand - why can\u0027t we just compare the floats? Does the graphics driver treat this differently than an integer comparison?",
+      "parentUuid": "a964e349_c505cbcc",
+      "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
