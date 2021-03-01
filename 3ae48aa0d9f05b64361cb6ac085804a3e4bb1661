@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78bedeca_a413f0bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-01T18:31:57Z",
+      "side": 1,
+      "message": "PTAL, this was the only case that was breaking on Linux \u0026 Mac for me when using my patch in Tint",
+      "revId": "3ae48aa0d9f05b64361cb6ac085804a3e4bb1661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
