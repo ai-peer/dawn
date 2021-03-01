@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5b8ed92_9e5eb9a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-01T17:10:21Z",
+      "side": 1,
+      "message": "Austin: PTAL. Thanks!\n\n(Looks like this will have to land simultaneously with the VMA roll.)",
+      "revId": "e3af16c3ff67cb77133b2deaec8d534bbc4a1144",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
