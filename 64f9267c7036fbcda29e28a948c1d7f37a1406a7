@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "fb91d2ea_bf497b52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-01T01:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "897db454_c57bcf75",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 12
+      },
+      "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c9cad8f2_f072eacf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 13
@@ -88,6 +112,24 @@
       "writtenOn": "2021-02-26T09:00:39Z",
       "side": 1,
       "message": "is the bitcast necessary? Is it because the colors may be NaN and would fail the comparison? If so, we should comment about it.",
+      "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a964e349_c505cbcc",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-01T01:51:10Z",
+      "side": 1,
+      "message": "Actually, I did this bitcast not for NaN, but for float compare. In my experience of vertexFormat test cases, Dawn choose to compare the float value bit by bit.\nAnd if NaN only occurs on OOB access, I don\u0027t think this end2end test will have this input. WDYT?",
+      "parentUuid": "13621707_9ff1c14d",
       "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
