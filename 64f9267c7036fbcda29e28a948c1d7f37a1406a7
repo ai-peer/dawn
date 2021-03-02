@@ -150,6 +150,24 @@
       "parentUuid": "a964e349_c505cbcc",
       "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ce001c_b8d330e4",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-02T00:24:05Z",
+      "side": 1,
+      "message": "Hi, Austin,\nThanks for the comments.\n(Pls correct me if I\u0027m wrong).\nWhen compare float, usually what we did is doing a - b \u003c threshold(Am I right). And in vertexFormatTest (https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/end2end/VertexFormatTests.cpp;l\u003d330) we choose to compare the floats bit-by-bit. So I think maybe in this test we should do the same.\nAnd the dst format has something like RGBA32Float in future, which CPU will calculate the expected value different in GPU (https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/end2end/VertexFormatTests.cpp;l\u003d242), so I think we should compare the value in shader.\n\nBut if my concern is not correct, I\u0027m happy to compare the float value (in a - b \u003c threshold way). WDYT?",
+      "parentUuid": "5dcc4b14_85df5e9f",
+      "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
