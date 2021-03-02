@@ -16,6 +16,23 @@
       "message": "@Austin and @Bryan, please take another look.  ",
       "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f731ad2a_a237f38b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-02T17:49:26Z",
+      "side": 1,
+      "message": "LGTM, thanks for the updatE!",
+      "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
