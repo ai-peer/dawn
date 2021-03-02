@@ -16,6 +16,23 @@
       "message": "PTAL, this was the only test that the bots were failing on.\n\nTook another pass through the calls to textureLoad in the tests to confirm that level param was added everwhere elst that it is needed, since I missed this case the first time.",
       "revId": "e7527a4464fa887d08b2d690e187997872c773ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02993a32_b1f4140f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-02T17:09:07Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "e7527a4464fa887d08b2d690e187997872c773ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
