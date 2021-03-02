@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae19bc2c_5348cb1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-02T00:22:44Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "a6f5345b07652a172bf52f25e8843ac60b597a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a62e36a_39e172db",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-03-01T22:30:31Z",
       "side": 1,
       "message": "What about this callsite? Are ClearImage and others protected from crashes?",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 559,
+        "endChar": 37
+      },
+      "revId": "a6f5345b07652a172bf52f25e8843ac60b597a1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "277b3f49_b06beb00",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-02T00:22:44Z",
+      "side": 1,
+      "message": "Yes, they should be.",
+      "parentUuid": "9a62e36a_39e172db",
       "range": {
         "startLine": 558,
         "startChar": 0,
