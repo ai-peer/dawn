@@ -186,6 +186,24 @@
       "parentUuid": "94ce001c_b8d330e4",
       "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f134dcb_a7ec579f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-02T02:20:08Z",
+      "side": 1,
+      "message": "Sry for misunderstanding. all(srcColor \u003d\u003d dstColor) works fine. Done.",
+      "parentUuid": "0421a2e0_9a72e156",
+      "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
