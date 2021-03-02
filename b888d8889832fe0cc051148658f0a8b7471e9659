@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c367191_a4a094f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-02T01:45:33Z",
+      "side": 1,
+      "message": "LGTM, thanks Jiawei.",
+      "revId": "b888d8889832fe0cc051148658f0a8b7471e9659",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
