@@ -168,6 +168,24 @@
       "parentUuid": "5dcc4b14_85df5e9f",
       "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0421a2e0_9a72e156",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-02T01:12:54Z",
+      "side": 1,
+      "message": "well I\u0027m asking if it\u0027s possible to just do `all(srcColor \u003d\u003d dstColor)` without the explicit bitcast",
+      "parentUuid": "94ce001c_b8d330e4",
+      "revId": "64f9267c7036fbcda29e28a948c1d7f37a1406a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
