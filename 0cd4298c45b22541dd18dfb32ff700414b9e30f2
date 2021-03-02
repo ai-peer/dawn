@@ -16,6 +16,29 @@
       "message": "Ben, this patch, plus the following one in the chain fixed the problem for me. I was able to reproduce on Windows. We\u0027ll have to land this one, then have a Chromium CL to put the new binary on the bots, and then land the following one which removes the problematic white_box test sources from the end2end_tests.\n\nI think I\u0027ll wait till Corentin is back from vacation for this. He may have opinions about splitting the tests into two binaries.",
       "revId": "0cd4298c45b22541dd18dfb32ff700414b9e30f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea77d5d_fbe59038",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-02T20:30:48Z",
+      "side": 1,
+      "message": "I\u0027m no-idea-dog about your build rules, but I assume this is defined here:\n\nhttps://dawn.googlesource.com/dawn/+/refs/changes/20/42820/5/src/dawn_native/BUILD.gn#637\n\nIf so, aren\u0027t we still pulling in \u0027dawn_native:dawn_native_sources\u0027 twice?",
+      "range": {
+        "startLine": 394,
+        "startChar": 22,
+        "endLine": 394,
+        "endChar": 52
+      },
+      "revId": "0cd4298c45b22541dd18dfb32ff700414b9e30f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
