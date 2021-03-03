@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d3198f5_a090c1a0",
+        "filename": "src/common/VertexFormatUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-03T09:06:54Z",
+      "side": 1,
+      "message": "Will we be able to remove these files (or put them in dawn_native) after the deprecation period?",
+      "revId": "e3f10e3d8ef431981cdeee8a47791bcf4f347bb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
