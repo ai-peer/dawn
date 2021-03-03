@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c963dfae_c84b4763",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-03T08:45:51Z",
+      "side": 1,
+      "message": "LGTM too, thank you for the fix!",
+      "revId": "6e5edc9a69ee1c16d6cae9c22704945b1ff8bf45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
