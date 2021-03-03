@@ -33,6 +33,40 @@
       "message": "LGTM, thanks for the updatE!",
       "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9da0c81_9c9b4ec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-03T09:56:53Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c48cb53_1da507ce",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-03T09:56:53Z",
+      "side": 1,
+      "message": "u-nit: maybe put this inside the if at [1] or does DeallocateMemory look at mSwapChainTexture? (it seems it wouldn\u0027t)",
+      "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
