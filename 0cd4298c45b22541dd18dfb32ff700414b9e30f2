@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "238d9eb7_2f79d80a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-03T13:25:31Z",
+      "side": 1,
+      "message": "Based on what I understand, LGTM.\nThank you for looking into this!",
+      "revId": "0cd4298c45b22541dd18dfb32ff700414b9e30f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bea77d5d_fbe59038",
@@ -96,6 +113,30 @@
       "side": 1,
       "message": "Also it\u0027s not a problem because GN will dedup dependencies (so the files don\u0027t get added twice).",
       "parentUuid": "2fe587a0_fa6a74ef",
+      "range": {
+        "startLine": 394,
+        "startChar": 22,
+        "endLine": 394,
+        "endChar": 52
+      },
+      "revId": "0cd4298c45b22541dd18dfb32ff700414b9e30f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e04f431b_e10a308f",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-03T13:25:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "beb03737_9e705c94",
       "range": {
         "startLine": 394,
         "startChar": 22,
