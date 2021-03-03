@@ -39,6 +39,30 @@
       },
       "revId": "0cd4298c45b22541dd18dfb32ff700414b9e30f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fe587a0_fa6a74ef",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-03T04:27:35Z",
+      "side": 1,
+      "message": "Yes, but Chromium doesn\u0027t like the transitive dependency. It\u0027ll tell you this:\n\nERROR at //third_party/dawn/src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp:21:11: Can\u0027t include this header from here.\n#include \"dawn_native/vulkan/DeviceVk.h\"\n          ^----------------------------\nThe target:\n  //third_party/dawn/src/tests:dawn_white_box_tests_sources\nis including a file from the target:\n  //third_party/dawn/src/dawn_native:dawn_native_sources\n\nIt\u0027s usually best to depend directly on the destination target.\nIn some cases, the destination target is considered a subcomponent\nof an intermediate target. In this case, the intermediate target\nshould depend publicly on the destination to forward the ability\nto include headers.\n\nDependency chain (there may also be others):\n  //third_party/dawn/src/tests:dawn_white_box_tests_sources --\u003e\n  //third_party/dawn/src/dawn_native:dawn_native_static --[private]--\u003e\n  //third_party/dawn/src/dawn_native:dawn_native_sources",
+      "parentUuid": "bea77d5d_fbe59038",
+      "range": {
+        "startLine": 394,
+        "startChar": 22,
+        "endLine": 394,
+        "endChar": 52
+      },
+      "revId": "0cd4298c45b22541dd18dfb32ff700414b9e30f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
