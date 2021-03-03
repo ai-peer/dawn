@@ -85,6 +85,24 @@
       "parentUuid": "7c48cb53_1da507ce",
       "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9f50692_f58fd752",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-03T17:49:18Z",
+      "side": 1,
+      "message": "No problem, I think it\u0027s marginally better but it\u0027s very subjective (hence the tag as an ultra-nitpicky comment)",
+      "parentUuid": "1992e0c1_5e6eeed5",
+      "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
