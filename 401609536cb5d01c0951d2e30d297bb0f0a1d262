@@ -103,6 +103,24 @@
       "parentUuid": "1992e0c1_5e6eeed5",
       "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86615537_55ace8e9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-03-04T17:21:16Z",
+      "side": 1,
+      "message": "OK. Let me know if you\u0027d like me to change it. Up to you.",
+      "parentUuid": "f9f50692_f58fd752",
+      "revId": "401609536cb5d01c0951d2e30d297bb0f0a1d262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
