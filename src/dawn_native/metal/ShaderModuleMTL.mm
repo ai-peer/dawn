@@ -87,13 +87,25 @@ namespace dawn_native { namespace metal {
             }
         }
         transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
+        transformManager.append(std::make_unique<tint::transform::Renamer>());
+        transformManager.append(std::make_unique<tint::transform::Msl>());
 
-        tint::Program program;
-        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, mTintProgram.get()));
+        tint::Program& program = output.program;
+        if (!program.IsValid()) {
+            errorStream << "Tint program transform error: " << program.Diagnostics().str()
+                        << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
 
-        ASSERT(remappedEntryPointName != nullptr);
-        tint::inspector::Inspector inspector(&program);
-        *remappedEntryPointName = inspector.GetRemappedNameForEntryPoint(entryPointName);
+        if (auto* data = output.data.Get<tint::transform::Renamer::Data>()) {
+            auto it = data->remappings.find(entryPointName);
+            if (it == data->remappings.end()) {
+                return DAWN_VALIDATION_ERROR("Could not find remapped name for entry point.");
+            }
+            *remappedEntryPointName = it->second;
+        } else {
+            return DAWN_VALIDATION_ERROR("Transform output missing renamer data.");
+        }
 
         tint::writer::msl::Generator generator(&program);
         if (!generator.Generate()) {
