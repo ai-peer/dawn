@@ -79,6 +79,7 @@ namespace dawn_native { namespace d3d12 {
 
 #ifdef DAWN_ENABLE_WGSL
         std::unique_ptr<tint::Program> mTintProgram;
+        std::unordered_map<std::string, std::string> mSymbolToName;
 #endif
     };
 

@@ -189,6 +189,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(InitializeBase(parseResult));
 #ifdef DAWN_ENABLE_WGSL
         mTintProgram = std::move(parseResult->tintProgram);
+        mSymbolToName = std::move(parseResult->symbolToName);
 #endif
         return {};
     }
@@ -218,7 +219,7 @@ namespace dawn_native { namespace d3d12 {
 
         tint::Program& program = output.program;
         if (!program.IsValid()) {
-            auto err = tint::diag::Formatter{}.format(program.Diagnostics());
+            auto err = program.Diagnostics().str();
             errorStream << "Tint program transform error: " << err << std::endl;
             return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
         }
@@ -234,9 +235,13 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        ASSERT(remappedEntryPointName != nullptr);
-        tint::inspector::Inspector inspector(&program);
-        *remappedEntryPointName = inspector.GetRemappedNameForEntryPoint(entryPointName);
+        auto symbolToNameIt = mSymbolToName.find(entryPointName);
+        if (symbolToNameIt == mSymbolToName.end()) {
+            errorStream << "Could not find entrypoint symbol '" << entryPointName << "'"
+                        << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+        *remappedEntryPointName = symbolToNameIt.second;
 
         tint::writer::hlsl::Generator generator(&program);
         // TODO: Switch to GenerateEntryPoint once HLSL writer supports it.

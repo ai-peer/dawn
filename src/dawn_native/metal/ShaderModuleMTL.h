@@ -72,6 +72,7 @@ namespace dawn_native { namespace metal {
 
 #ifdef DAWN_ENABLE_WGSL
         std::unique_ptr<tint::Program> mTintProgram;
+        std::unordered_map<std::string, std::string> mSymbolToName;
 #endif
     };
 

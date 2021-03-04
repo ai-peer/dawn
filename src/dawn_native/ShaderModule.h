@@ -62,6 +62,9 @@ namespace dawn_native {
 
 #ifdef DAWN_ENABLE_WGSL
         std::unique_ptr<tint::Program> tintProgram;
+
+        // Map of symbol to the original authored identifier name.
+        std::unordered_map<std::string, std::string> symbolToName;
 #endif
         std::vector<uint32_t> spirv;
     };

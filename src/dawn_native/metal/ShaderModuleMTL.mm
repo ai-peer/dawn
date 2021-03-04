@@ -51,6 +51,7 @@ namespace dawn_native { namespace metal {
         DAWN_TRY(InitializeBase(parseResult));
 #ifdef DAWN_ENABLE_WGSL
         mTintProgram = std::move(parseResult->tintProgram);
+        mSymbolToName = std::move(parseResult->symbolToName);
 #endif
         return {};
     }
@@ -91,9 +92,13 @@ namespace dawn_native { namespace metal {
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, mTintProgram.get()));
 
-        ASSERT(remappedEntryPointName != nullptr);
-        tint::inspector::Inspector inspector(&program);
-        *remappedEntryPointName = inspector.GetRemappedNameForEntryPoint(entryPointName);
+        auto symbolToNameIt = mSymbolToName.find(entryPointName);
+        if (symbolToNameIt == mSymbolToName.end()) {
+            errorStream << "Could not find entrypoint symbol '"
+                        << entryPointName << "'" << std::endl;
+            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        }
+        *remappedEntryPointName = symbolToNameIt.second;
 
         tint::writer::msl::Generator generator(&program);
         if (!generator.Generate()) {

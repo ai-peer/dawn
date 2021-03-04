@@ -902,6 +902,27 @@ namespace dawn_native {
                 tint::Program program;
                 DAWN_TRY_ASSIGN(program, ParseWGSL(&file));
 
+                // Remap the unsafe authored identifiers into sanitized symbols.
+                // Construct a symbolToName map that can look up the original
+                // authored name for each sanitized symbol.
+                std::unordered_map<std::string, std::string> symbolToName;
+                tint::transform::Transform::Output renamerOutput =
+                    tint::transform::Renamer().Run(&program);
+                if (!renamerOutput.program.IsValid()) {
+                    std::string err =
+                        "Tint program failure: " + renamerOutput.program.Diagnostics().str();
+                    return DAWN_VALIDATION_ERROR(err.c_str());
+                }
+                program = std::move(renamerOutput.program);
+                if (auto* data = renamerOutput.data.Get<tint::transform::Renamer::Data>()) {
+                    symbolToName.reserve(data->remappings.size());
+                    for (auto& it : data->remappings) {
+                        symbolToName[it.second] = it.first;
+                    }
+                } else {
+                    return DAWN_VALIDATION_ERROR("Tint renamer transform did not produce data");
+                }
+
                 if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
                     if (device->IsValidationEnabled()) {
                         DAWN_TRY(ValidateModule(&program));
@@ -925,6 +946,7 @@ namespace dawn_native {
                 }
 
                 parseResult.tintProgram = std::make_unique<tint::Program>(std::move(program));
+                parseResult.symbolToName = std::move(symbolToName);
                 break;
 #else
                 return DAWN_VALIDATION_ERROR("Using Tint is not enabled in this build.");
