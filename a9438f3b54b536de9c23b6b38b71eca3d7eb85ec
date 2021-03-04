@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "328d06bd_2a477772",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-04T20:59:07Z",
+      "side": 1,
+      "message": "LGTM too, but I have a general concern about detecting specifically when the workaround is needed.",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f1943d1_885c28ad",
@@ -94,6 +111,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a7b34a7_f779967f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-04T20:59:07Z",
+      "side": 1,
+      "message": "I just want to be sure.. have we confirmed the driver team that these specific mipLevel values are what\u0027s causing the bug? And it\u0027s not something else related to the size or alignment of the mip levels copied?\n\nI ask this because it looks like the issue happens on all formats where texels are less than 4 bytes in size. Perhaps that, combined with particular mipLevels, the internal alignment for the copy becomes wrong.",
+      "range": {
+        "startLine": 193,
+        "startChar": 13,
+        "endLine": 193,
+        "endChar": 43
+      },
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8317570e_fd28cb3d",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -105,6 +145,29 @@
       "writtenOn": "2021-03-04T16:10:55Z",
       "side": 1,
       "message": "Can we have a bit more explanation of why this produces an issue or there\u0027s no explanation and it just fails? The conditions seem somewhat random.",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b018d2_ff7829a3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-04T20:59:07Z",
+      "side": 1,
+      "message": "nit: std::move(tempBuffer)",
+      "range": {
+        "startLine": 270,
+        "startChar": 47,
+        "endLine": 270,
+        "endChar": 57
+      },
       "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
