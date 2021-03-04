@@ -207,12 +207,13 @@ namespace dawn_native { namespace d3d12 {
 
         tint::transform::Manager transformManager;
         transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
-
         if (stage == SingleShaderStage::Vertex) {
             transformManager.append(std::make_unique<tint::transform::FirstIndexOffset>(
                 layout->GetFirstIndexOffsetShaderRegister(),
                 layout->GetFirstIndexOffsetRegisterSpace()));
         }
+        transformManager.append(std::make_unique<tint::transform::Renamer>());
+        transformManager.append(std::make_unique<tint::transform::Hlsl>());
 
         tint::transform::Transform::Output output = transformManager.Run(mTintProgram.get());
 
@@ -234,9 +235,15 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        ASSERT(remappedEntryPointName != nullptr);
-        tint::inspector::Inspector inspector(&program);
-        *remappedEntryPointName = inspector.GetRemappedNameForEntryPoint(entryPointName);
+        if (auto* data = output.data.Get<tint::transform::Renamer::Data>()) {
+            auto it = data->remappings.find(entryPointName);
+            if (it == data->remappings.end()) {
+                return DAWN_VALIDATION_ERROR("Could not find remapped name for entry point.");
+            }
+            *remappedEntryPointName = it->second;
+        } else {
+            return DAWN_VALIDATION_ERROR("Transform output missing renamer data.");
+        }
 
         tint::writer::hlsl::Generator generator(&program);
         // TODO: Switch to GenerateEntryPoint once HLSL writer supports it.
