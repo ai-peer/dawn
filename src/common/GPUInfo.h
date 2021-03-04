@@ -43,5 +43,9 @@ namespace gpu_info {
     bool IsSwiftshader(PCIVendorID vendorId, PCIDeviceID deviceId);
     bool IsWARP(PCIVendorID vendorId, PCIDeviceID deviceId);
 
+    bool IsSkylake(PCIDeviceID deviceId);
+    bool IsKabylake(PCIDeviceID deviceId);
+    bool IsCoffeelake(PCIDeviceID deviceId);
+
 }  // namespace gpu_info
 #endif  // COMMON_GPUINFO_H
