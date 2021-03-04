@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9c389819_3f77e3e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-04T17:24:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f1bcf546_fdf6e2a6",
         "filename": "dawn.json",
         "patchSetId": 2
@@ -31,6 +48,29 @@
       "writtenOn": "2021-03-04T14:36:24Z",
       "side": 1,
       "message": "This file had manual changes.",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1c71595_4d9d8ff9",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-04T17:24:07Z",
+      "side": 1,
+      "message": "nice - I hadn\u0027t realized Brandon added this.",
+      "range": {
+        "startLine": 296,
+        "startChar": 8,
+        "endLine": 296,
+        "endChar": 30
+      },
       "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
