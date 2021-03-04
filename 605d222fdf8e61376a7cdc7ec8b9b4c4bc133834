@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "718f5238_0d1184fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T14:36:24Z",
+      "side": 1,
+      "message": "PTAL! This was mostly done with git grep | sed but I commented on the files with manual changes.",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1bcf546_fdf6e2a6",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T14:36:24Z",
+      "side": 1,
+      "message": "This file had manual changes.",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e725388_a4762286",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T14:36:24Z",
+      "side": 1,
+      "message": "This file had manual changes.",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3791178b_1c5c5960",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T14:36:24Z",
+      "side": 1,
+      "message": "This file had manual changes.",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf3ab190_4eef1004",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T14:36:24Z",
+      "side": 1,
+      "message": "This file had manual changes",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c57a000d_5bf52883",
+        "filename": "src/tests/unittests/validation/VideoViewsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T14:36:24Z",
+      "side": 1,
+      "message": "This file had manual changes.",
+      "revId": "605d222fdf8e61376a7cdc7ec8b9b4c4bc133834",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
