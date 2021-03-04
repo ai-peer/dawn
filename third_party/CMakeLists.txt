@@ -81,6 +81,14 @@ endif()
 if (DAWN_ENABLE_WGSL)
     if (NOT TARGET libtint)
         set(TINT_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+        set(TINT_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+
+        # Change the default value of TINT_ENABLE_SHARED_CRT to ON as that's what matches the
+        # CMake defaults better.
+        if(MSVC)
+            set(TINT_ENABLE_SHARED_CRT ON CACHE BOOL "Use the shared CRT instead of the static CRT")
+        endif()
+
         message(STATUS "Dawn: using Tint at ${DAWN_TINT_DIR}")
         add_subdirectory(${DAWN_TINT_DIR})
     endif()
