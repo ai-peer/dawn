@@ -16,6 +16,148 @@
       "message": "PTAL, thanks!",
       "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "090eb538_e7bc6895",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f1943d1_885c28ad",
+        "filename": "src/common/GPUInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "nit: add a comment that these are Intel architectures, or put it in the name.",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "968eac85_44147b5d",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "I\u0027m not super happy about this name and UseTemporaryBufferInCompressedTextureToTextureCopy since they don\u0027t describe the issue enough (and other workaround might require a temporary buffer, but under different conditions), but I\u0027m not sure how to improve it. Do you have ideas?",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6329d5d7_b24dc1d3",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "nit: have",
+      "range": {
+        "startLine": 181,
+        "startChar": 26,
+        "endLine": 181,
+        "endChar": 29
+      },
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8317570e_fd28cb3d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "Can we have a bit more explanation of why this produces an issue or there\u0027s no explanation and it just fails? The conditions seem somewhat random.",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c29d745_34ea4291",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 898,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cdb879d_c8c36477",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "nit: if (....) { SetToggle(foo, true) }?",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66fb577d_344b8dba",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T16:10:55Z",
+      "side": 1,
+      "message": "Maybe the workaround would be easy to add on Vulkan since we already have a mechanism to fake the T2T copy with T2B2T.",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
