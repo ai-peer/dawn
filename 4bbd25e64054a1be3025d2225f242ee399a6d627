@@ -16,6 +16,41 @@
       "message": "LGTM, but why is this part of making tint a transitive dep? Is it so we can recurse_deps and not check out stuff from Chromium again?",
       "revId": "4bbd25e64054a1be3025d2225f242ee399a6d627",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85144666_48f7d761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T17:36:23Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "4bbd25e64054a1be3025d2225f242ee399a6d627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58cfd2b6_6a65ae74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T17:36:23Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "4720f08a_cc9a83aa",
+      "revId": "4bbd25e64054a1be3025d2225f242ee399a6d627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
