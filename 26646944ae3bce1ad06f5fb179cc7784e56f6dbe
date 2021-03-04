@@ -16,6 +16,23 @@
       "message": "Taking the suggestion to just link statically then. It\u0027s simpler this way.",
       "revId": "26646944ae3bce1ad06f5fb179cc7784e56f6dbe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47739e0d_b99a259a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-04T08:30:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "26646944ae3bce1ad06f5fb179cc7784e56f6dbe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
