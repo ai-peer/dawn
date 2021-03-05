@@ -1059,7 +1059,102 @@ namespace dawn_native {
     MaybeError DeviceBase::CreateRenderPipelineInternal(
         RenderPipelineBase** result,
         const RenderPipelineDescriptor* descriptor) {
+        // If the descriptor is using the newer syntax, convert it before proceeding.
+        if (descriptor->vertex.module) {
+            RenderPipelineDescriptor normalizedDescriptor;
+
+            VertexStateDescriptor vertexState;
+            normalizedDescriptor.vertexState = &vertexState;
+
+            RasterizationStateDescriptor rasterizationState;
+            normalizedDescriptor.rasterizationState = &rasterizationState;
+
+            DepthStencilStateDescriptor depthStencilState;
+            normalizedDescriptor.depthStencilState = &depthStencilState;
+
+            ProgrammableStageDescriptor fragmentStage;
+            normalizedDescriptor.fragmentStage = &fragmentStage;
+
+            normalizedDescriptor.label = descriptor->label;
+            normalizedDescriptor.layout = descriptor->layout;
+            normalizedDescriptor.vertexStage.module = descriptor->vertex.module;
+            normalizedDescriptor.vertexStage.entryPoint = descriptor->vertex.entryPoint;
+            normalizedDescriptor.primitiveTopology = descriptor->primitive.topology;
+            normalizedDescriptor.sampleCount = descriptor->multisample.count;
+            normalizedDescriptor.sampleMask = descriptor->multisample.mask;
+            normalizedDescriptor.alphaToCoverageEnabled =
+                descriptor->multisample.alphaToCoverageEnabled;
+
+            vertexState.vertexBufferCount = descriptor->vertex.bufferCount;
+            vertexState.vertexBuffers = descriptor->vertex.buffers;
+            vertexState.indexFormat = descriptor->primitive.stripIndexFormat;
+
+            rasterizationState.frontFace = descriptor->primitive.frontFace;
+            rasterizationState.cullMode = descriptor->primitive.cullMode;
+
+            if (descriptor->depthStencil.format != wgpu::TextureFormat::Undefined) {
+                depthStencilState.format = descriptor->depthStencil.format;
+                depthStencilState.depthWriteEnabled = descriptor->depthStencil.depthWriteEnabled;
+                depthStencilState.depthCompare = descriptor->depthStencil.depthCompare;
+                depthStencilState.stencilFront = descriptor->depthStencil.stencilFront;
+                depthStencilState.stencilBack = descriptor->depthStencil.stencilBack;
+                depthStencilState.stencilReadMask = descriptor->depthStencil.stencilReadMask;
+                depthStencilState.stencilWriteMask = descriptor->depthStencil.stencilWriteMask;
+                rasterizationState.depthBias = descriptor->depthStencil.depthBias;
+                rasterizationState.depthBiasSlopeScale =
+                    descriptor->depthStencil.depthBiasSlopeScale;
+                rasterizationState.depthBiasClamp = descriptor->depthStencil.depthBiasClamp;
+            }
+
+            std::array<ColorStateDescriptor, kMaxColorAttachments> colorStates;
+            if (descriptor->fragment.module) {
+                // Have to do this one bit of validation early since we're manually copying the
+                // list of color attachements.
+                if (descriptor->fragment.targetCount > kMaxColorAttachments) {
+                    return DAWN_VALIDATION_ERROR("Fragment target count exceeds maximum");
+                }
+
+                fragmentStage.module = descriptor->fragment.module;
+                fragmentStage.entryPoint = descriptor->fragment.entryPoint;
+                normalizedDescriptor.colorStateCount = descriptor->fragment.targetCount;
+                normalizedDescriptor.colorStates = &colorStates[0];
+
+                for (uint32_t i = 0; i < descriptor->fragment.targetCount; ++i) {
+                    const ColorTargetState& target = descriptor->fragment.targets[i];
+                    colorStates[i].format = target.format;
+                    colorStates[i].writeMask = target.writeMask;
+
+                    if (target.blend.enabled) {
+                        colorStates[i].colorBlend.srcFactor = target.blend.color.srcFactor;
+                        colorStates[i].colorBlend.dstFactor = target.blend.color.dstFactor;
+                        colorStates[i].colorBlend.operation = target.blend.color.operation;
+
+                        colorStates[i].alphaBlend.srcFactor = target.blend.alpha.srcFactor;
+                        colorStates[i].alphaBlend.dstFactor = target.blend.alpha.dstFactor;
+                        colorStates[i].alphaBlend.operation = target.blend.alpha.operation;
+                    }
+                }
+            }
+
+            return CreateRenderPipelineInternalNormalized(result, &normalizedDescriptor);
+        }
+
+        /*EmitDeprecationWarning(
+            "The format of RenderPipelineDescriptor has changed, and will soon require the "
+            "new structure. Please begin using the vertex, primitive, depthStencil, multisample, "
+            "and fragment members instead.");*/
+
+        return CreateRenderPipelineInternalNormalized(result, descriptor);
+    }
+
+    MaybeError DeviceBase::CreateRenderPipelineInternalNormalized(
+        RenderPipelineBase** result,
+        const RenderPipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
+
+        // Ensure that the descriptor has been normalized to the older, deprecated form.
+        ASSERT(descriptor->vertex.module == nullptr);
+
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
         }
