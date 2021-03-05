@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "557bd1ac_3c59401e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-05T07:21:39Z",
+      "side": 1,
+      "message": "Drive by review since this was linked from an issue. Looks good!",
+      "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "788be088_13af431d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-05T07:21:39Z",
+      "side": 1,
+      "message": "nit: Here and everywhere UNREACHABLE + return DAWN_VALIDATION_ERROR should just be return DAWN_VALIDATION_ERROR: we actually emit a __builtin_unreachable() which could cause clang to produce code that skips over the return DAWN_VALIDATION_ERROR in release.",
+      "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb2446ad_bf14269d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-05T07:21:39Z",
+      "side": 1,
+      "message": "FYI you can #include \"common/Log.h\" and DAWN_DEBUG() \u003c\u003c stuff \u003c\u003c foo \u003c\u003c croissant;\n\nIt also gives you the file, line number and function so just spreading DAWN_LOG(); around is often enough.",
+      "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3778d1f_aa6a6945",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-05T07:21:39Z",
+      "side": 1,
+      "message": "TIL",
+      "range": {
+        "startLine": 1112,
+        "startChar": 51,
+        "endLine": 1112,
+        "endChar": 74
+      },
+      "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
