@@ -203,7 +203,9 @@ namespace {
     // Define base texture sizes and offsets to test with: some aligned, some unaligned
     constexpr TextureSpec kBaseTextureSpecs[] = {
         {0, 0, 0, 1, 1, 1, 4},
+        {0, 0, 0, 64, 1, 1, 4},
         {31, 16, 0, 1, 1, 1, 4},
+        {64, 1, 0, 1, 1, 1, 4},
         {64, 16, 0, 1, 1, 1, 4},
         {64, 16, 8, 1, 1, 1, 4},
 
@@ -471,4 +473,11 @@ TEST_F(CopySplitTest, ImageHeight) {
             }
         }
     }
+}
+
+// When copy height is 1, rowPitch and slicePitch are equal. This means calculating the subresource
+// footprint in the source buffer could be done with either a y-offset of 1, or a z-offset of 1. It
+// has been found that there are rendering issues when the z-offset is used, so we should ensure the
+// y-offset is being used in this scenario.
+TEST_F(CopySplitTest, CopyWith256RowPitchAndSinglePixelHeight) {
 }
