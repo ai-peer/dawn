@@ -46,6 +46,15 @@ class RenderPipelineValidationTest : public ValidationTest {
 // Test cases where creation should succeed
 TEST_F(RenderPipelineValidationTest, CreationSuccess) {
     {
+        // New format
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+
+        device.CreateRenderPipeline(&descriptor);
+    }
+    {
+        // Deprecated format
         utils::ComboRenderPipelineDescriptor descriptor(device);
         descriptor.vertexStage.module = vsModule;
         descriptor.cFragmentStage.module = fsModule;
@@ -75,64 +84,69 @@ TEST_F(RenderPipelineValidationTest, CreationSuccess) {
 TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
     // Control case, depth bias parameters in ComboRenderPipeline default to 0 which is finite
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.depthStencil.format = wgpu::TextureFormat::Depth24PlusStencil8;
         device.CreateRenderPipeline(&descriptor);
     }
 
     // Infinite depth bias clamp is valid
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.cRasterizationState.depthBiasClamp = INFINITY;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.depthStencil.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.depthStencil.depthBiasClamp = INFINITY;
         device.CreateRenderPipeline(&descriptor);
     }
     // NAN depth bias clamp is invalid
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.cRasterizationState.depthBiasClamp = NAN;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.depthStencil.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.depthStencil.depthBiasClamp = NAN;
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
     // Infinite depth bias slope is valid
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.cRasterizationState.depthBiasSlopeScale = INFINITY;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.depthStencil.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.depthStencil.depthBiasSlopeScale = INFINITY;
         device.CreateRenderPipeline(&descriptor);
     }
     // NAN depth bias slope is invalid
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.cRasterizationState.depthBiasSlopeScale = NAN;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.depthStencil.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.depthStencil.depthBiasSlopeScale = NAN;
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 }
 
-// Tests that at least one color state is required.
-TEST_F(RenderPipelineValidationTest, ColorStateRequired) {
+// Tests that at least one color target state is required.
+TEST_F(RenderPipelineValidationTest, ColorTargetStateRequired) {
     {
         // This one succeeds because attachment 0 is the color attachment
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.colorStateCount = 1;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.fragment.targetCount = 1;
 
         device.CreateRenderPipeline(&descriptor);
     }
 
-    {  // Fail because lack of color states (and depth/stencil state)
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.colorStateCount = 0;
+    {  // Fail because lack of color target states (and depth/stencil state)
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.fragment.targetCount = 0;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
@@ -142,20 +156,20 @@ TEST_F(RenderPipelineValidationTest, ColorStateRequired) {
 TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
     {
         // Succeeds because RGBA8Unorm is renderable
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.cColorStates[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
 
         device.CreateRenderPipeline(&descriptor);
     }
 
     {
         // Fails because RG11B10Ufloat is non-renderable
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.cColorStates[0].format = wgpu::TextureFormat::RG11B10Ufloat;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RG11B10Ufloat;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
@@ -196,19 +210,19 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
 /// Tests that the sample count of the render pipeline must be valid.
 TEST_F(RenderPipelineValidationTest, SampleCount) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.sampleCount = 4;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.multisample.count = 4;
 
         device.CreateRenderPipeline(&descriptor);
     }
 
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.sampleCount = 3;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.multisample.count = 3;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
@@ -360,21 +374,21 @@ TEST_F(RenderPipelineValidationTest, SampleCountCompatibilityWithRenderPass) {
 // when the alphaToCoverage mode is enabled.
 TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.sampleCount = 4;
-        descriptor.alphaToCoverageEnabled = true;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.multisample.count = 4;
+        descriptor.multisample.alphaToCoverageEnabled = true;
 
         device.CreateRenderPipeline(&descriptor);
     }
 
     {
-        utils::ComboRenderPipelineDescriptor descriptor(device);
-        descriptor.vertexStage.module = vsModule;
-        descriptor.cFragmentStage.module = fsModule;
-        descriptor.sampleCount = 1;
-        descriptor.alphaToCoverageEnabled = true;
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.fragment.module = fsModule;
+        descriptor.multisample.count = 1;
+        descriptor.multisample.alphaToCoverageEnabled = true;
 
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
@@ -586,11 +600,11 @@ TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor descriptor(device);
-    descriptor.vertexStage.module = module;
-    descriptor.vertexStage.entryPoint = "vertex_main";
-    descriptor.cFragmentStage.module = module;
-    descriptor.cFragmentStage.entryPoint = "fragment_main";
+    utils::ComboRenderPipelineDescriptor2 descriptor;
+    descriptor.vertex.module = module;
+    descriptor.vertex.entryPoint = "vertex_main";
+    descriptor.fragment.module = module;
+    descriptor.fragment.entryPoint = "fragment_main";
 
     // Success case.
     device.CreateRenderPipeline(&descriptor);
@@ -598,24 +612,24 @@ TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
     // Test for the vertex stage entryPoint name.
     {
         // The entryPoint name doesn't exist in the module.
-        descriptor.vertexStage.entryPoint = "main";
+        descriptor.vertex.entryPoint = "main";
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 
         // The entryPoint name exists, but not for the correct stage.
-        descriptor.vertexStage.entryPoint = "fragment_main";
+        descriptor.vertex.entryPoint = "fragment_main";
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 
-    descriptor.vertexStage.entryPoint = "vertex_main";
+    descriptor.vertex.entryPoint = "vertex_main";
 
     // Test for the fragment stage entryPoint name.
     {
         // The entryPoint name doesn't exist in the module.
-        descriptor.cFragmentStage.entryPoint = "main";
+        descriptor.fragment.entryPoint = "main";
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 
         // The entryPoint name exists, but not for the correct stage.
-        descriptor.cFragmentStage.entryPoint = "vertex_main";
+        descriptor.fragment.entryPoint = "vertex_main";
         ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
     }
 }
@@ -639,32 +653,32 @@ TEST_F(RenderPipelineValidationTest, VertexAttribCorrectEntryPoint) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor descriptor(device);
-    descriptor.vertexStage.module = module;
-    descriptor.cFragmentStage.module = fsModule;
+    utils::ComboRenderPipelineDescriptor2 descriptor;
+    descriptor.vertex.module = module;
+    descriptor.fragment.module = fsModule;
 
-    descriptor.cVertexState.vertexBufferCount = 1;
-    descriptor.cVertexState.cVertexBuffers[0].attributeCount = 1;
-    descriptor.cVertexState.cVertexBuffers[0].arrayStride = 16;
-    descriptor.cVertexState.cAttributes[0].format = wgpu::VertexFormat::Float32x4;
-    descriptor.cVertexState.cAttributes[0].offset = 0;
+    descriptor.vertex.bufferCount = 1;
+    descriptor.cBuffers[0].attributeCount = 1;
+    descriptor.cBuffers[0].arrayStride = 16;
+    descriptor.cAttributes[0].format = wgpu::VertexFormat::Float32x4;
+    descriptor.cAttributes[0].offset = 0;
 
     // Success cases, the attribute used by the entryPoint is declared in the pipeline.
-    descriptor.vertexStage.entryPoint = "vertex0";
-    descriptor.cVertexState.cAttributes[0].shaderLocation = 0;
+    descriptor.vertex.entryPoint = "vertex0";
+    descriptor.cAttributes[0].shaderLocation = 0;
     device.CreateRenderPipeline(&descriptor);
 
-    descriptor.vertexStage.entryPoint = "vertex1";
-    descriptor.cVertexState.cAttributes[0].shaderLocation = 1;
+    descriptor.vertex.entryPoint = "vertex1";
+    descriptor.cAttributes[0].shaderLocation = 1;
     device.CreateRenderPipeline(&descriptor);
 
     // Error cases, the attribute used by the entryPoint isn't declared in the pipeline.
-    descriptor.vertexStage.entryPoint = "vertex1";
-    descriptor.cVertexState.cAttributes[0].shaderLocation = 0;
+    descriptor.vertex.entryPoint = "vertex1";
+    descriptor.cAttributes[0].shaderLocation = 0;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 
-    descriptor.vertexStage.entryPoint = "vertex0";
-    descriptor.cVertexState.cAttributes[0].shaderLocation = 1;
+    descriptor.vertex.entryPoint = "vertex0";
+    descriptor.cAttributes[0].shaderLocation = 1;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
 
@@ -686,26 +700,26 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputCorrectEntryPoint) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor descriptor(device);
-    descriptor.vertexStage.module = vsModule;
-    descriptor.cFragmentStage.module = module;
+    utils::ComboRenderPipelineDescriptor2 descriptor;
+    descriptor.vertex.module = vsModule;
+    descriptor.fragment.module = module;
 
     // Success case, the component type matches between the pipeline and the entryPoint
-    descriptor.cFragmentStage.entryPoint = "fragmentFloat";
-    descriptor.cColorStates[0].format = wgpu::TextureFormat::RGBA32Float;
+    descriptor.fragment.entryPoint = "fragmentFloat";
+    descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA32Float;
     device.CreateRenderPipeline(&descriptor);
 
-    descriptor.cFragmentStage.entryPoint = "fragmentUint";
-    descriptor.cColorStates[0].format = wgpu::TextureFormat::RGBA32Uint;
+    descriptor.fragment.entryPoint = "fragmentUint";
+    descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA32Uint;
     device.CreateRenderPipeline(&descriptor);
 
     // Error case, the component type doesn't match between the pipeline and the entryPoint
-    descriptor.cFragmentStage.entryPoint = "fragmentUint";
-    descriptor.cColorStates[0].format = wgpu::TextureFormat::RGBA32Float;
+    descriptor.fragment.entryPoint = "fragmentUint";
+    descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA32Float;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 
-    descriptor.cFragmentStage.entryPoint = "fragmentFloat";
-    descriptor.cColorStates[0].format = wgpu::TextureFormat::RGBA32Uint;
+    descriptor.fragment.entryPoint = "fragmentFloat";
+    descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA32Uint;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
 
@@ -743,25 +757,25 @@ TEST_F(RenderPipelineValidationTest, DISABLED_BindingsFromCorrectEntryPoint) {
         device, {{1, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform}});
     wgpu::PipelineLayout layout1 = utils::MakeBasicPipelineLayout(device, &bgl1);
 
-    utils::ComboRenderPipelineDescriptor descriptor(device);
-    descriptor.vertexStage.module = module;
-    descriptor.cFragmentStage.module = fsModule;
+    utils::ComboRenderPipelineDescriptor2 descriptor;
+    descriptor.vertex.module = module;
+    descriptor.fragment.module = fsModule;
 
     // Success case, the BGL matches the bindings used by the entryPoint
-    descriptor.vertexStage.entryPoint = "vertex0";
+    descriptor.vertex.entryPoint = "vertex0";
     descriptor.layout = layout0;
     device.CreateRenderPipeline(&descriptor);
 
-    descriptor.vertexStage.entryPoint = "vertex1";
+    descriptor.vertex.entryPoint = "vertex1";
     descriptor.layout = layout1;
     device.CreateRenderPipeline(&descriptor);
 
     // Error case, the BGL doesn't match the bindings used by the entryPoint
-    descriptor.vertexStage.entryPoint = "vertex1";
+    descriptor.vertex.entryPoint = "vertex1";
     descriptor.layout = layout0;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 
-    descriptor.vertexStage.entryPoint = "vertex0";
+    descriptor.vertex.entryPoint = "vertex0";
     descriptor.layout = layout1;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
 }
