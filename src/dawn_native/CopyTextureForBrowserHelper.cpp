@@ -56,34 +56,49 @@ namespace dawn_native {
             }
         )";
 
-        static const char sPassthrough2D4ChannelFrag[] = R"(
+        static const char sCopyTextureForBrowserFragment[] = R"(
             [[binding(1), group(0)]] var mySampler: sampler;
             [[binding(2), group(0)]] var myTexture: texture_2d<f32>;
             [[location(0)]] var<in> v_texcoord : vec2<f32>;
-            [[location(0)]] var<out> rgbaColor : vec4<f32>;
-            [[stage(fragment)]] fn main() -> void {
+            [[location(0)]] var<out> outputColor : vec4<f32>;
+            [[stage(fragment)]] 
+            fn main() -> void {
                 // Clamp the texcoord and discard the out-of-bound pixels.
                 var clampedTexcoord : vec2<f32> =
                     clamp(v_texcoord, vec2<f32>(0.0, 0.0), vec2<f32>(1.0, 1.0));
                 if (all(clampedTexcoord == v_texcoord)) {
-                    rgbaColor = textureSample(myTexture, mySampler, v_texcoord);
+                    var srcColor : vec4<f32> = textureSample(myTexture, mySampler, v_texcoord);
+                    // Swizzled texture format conversion e.g. RGBA8Unorm -> BGRA8Unorm doesn't
+                    // need to do swizzle explicitly. Use a test case to guard this conclusion.
+                    outputColor = srcColor;
                 }
             }
         )";
 
-        // TODO(shaobo.yan@intel.com): Expand supported texture formats
+        // TODO(shaobo.yan@intel.com): Expand copyTextureForBrowser to support any
+        // non-depth, non-stencil, non-compressed texture format pair copy. Now this API
+        // supports CopyImageBitmapToTexture normal format pairs.
         MaybeError ValidateCopyTextureFormatConversion(const wgpu::TextureFormat srcFormat,
                                                        const wgpu::TextureFormat dstFormat) {
             switch (srcFormat) {
                 case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::BGRA8Unorm:
                     break;
                 default:
                     return DAWN_VALIDATION_ERROR(
                         "Unsupported src texture format for CopyTextureForBrowser.");
             }
 
+            // TODO(dawn:465): Copy from 8bit channel format to 16/10 bit channel format
+            // cannot get correct result. Need to fix it.
             switch (dstFormat) {
                 case wgpu::TextureFormat::RGBA8Unorm:
+                case wgpu::TextureFormat::BGRA8Unorm:
+                case wgpu::TextureFormat::RGBA32Float:
+                case wgpu::TextureFormat::RG8Unorm:
+                case wgpu::TextureFormat::RGBA16Float:
+                case wgpu::TextureFormat::RG16Float:
+                case wgpu::TextureFormat::RGB10A2Unorm:
                     break;
                 default:
                     return DAWN_VALIDATION_ERROR(
@@ -103,10 +118,20 @@ namespace dawn_native {
             return {};
         }
 
-        RenderPipelineBase* GetOrCreateCopyTextureForBrowserPipeline(DeviceBase* device) {
+        RenderPipelineBase* GetCachedPipeline(InternalPipelineStore* store,
+                                              wgpu::TextureFormat format) {
+            auto pipeline = store->copyTextureForBrowserPipelines.find(format);
+            if (pipeline != store->copyTextureForBrowserPipelines.end()) {
+                return pipeline->second.Get();
+            }
+            return nullptr;
+        }
+
+        RenderPipelineBase* GetOrCreateCopyTextureForBrowserPipeline(DeviceBase* device,
+                                                                     wgpu::TextureFormat format) {
             InternalPipelineStore* store = device->GetInternalPipelineStore();
 
-            if (store->copyTextureForBrowserPipeline == nullptr) {
+            if (GetCachedPipeline(store, format) == nullptr) {
                 // Create vertex shader module if not cached before.
                 if (store->copyTextureForBrowserVS == nullptr) {
                     ShaderModuleDescriptor descriptor;
@@ -124,7 +149,7 @@ namespace dawn_native {
                 if (store->copyTextureForBrowserFS == nullptr) {
                     ShaderModuleDescriptor descriptor;
                     ShaderModuleWGSLDescriptor wgslDesc;
-                    wgslDesc.source = sPassthrough2D4ChannelFrag;
+                    wgslDesc.source = sCopyTextureForBrowserFragment;
                     descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
                     store->copyTextureForBrowserFS =
                         AcquireRef(device->CreateShaderModule(&descriptor));
@@ -143,8 +168,8 @@ namespace dawn_native {
                 fragmentStage.entryPoint = "main";
 
                 // Prepare color state.
-                ColorStateDescriptor colorState = {};
-                colorState.format = wgpu::TextureFormat::RGBA8Unorm;
+                ColorStateDescriptor colorState;
+                colorState.format = format;
 
                 // Create RenderPipeline.
                 RenderPipelineDescriptor renderPipelineDesc = {};
@@ -160,11 +185,11 @@ namespace dawn_native {
                 renderPipelineDesc.colorStateCount = 1;
                 renderPipelineDesc.colorStates = &colorState;
 
-                store->copyTextureForBrowserPipeline =
-                    AcquireRef(device->CreateRenderPipeline(&renderPipelineDesc));
+                store->copyTextureForBrowserPipelines.insert(
+                    {format, AcquireRef(device->CreateRenderPipeline(&renderPipelineDesc))});
             }
 
-            return store->copyTextureForBrowserPipeline.Get();
+            return GetCachedPipeline(store, format);
         }
 
     }  // anonymous namespace
@@ -180,7 +205,7 @@ namespace dawn_native {
         DAWN_TRY(ValidateTextureCopyView(device, *source, *copySize));
         DAWN_TRY(ValidateTextureCopyView(device, *destination, *copySize));
 
-        DAWN_TRY(ValidateTextureToTextureCopyRestrictions(*source, *destination, *copySize));
+        DAWN_TRY(ValidateCopyTextureForBrowserRestrictions(*source, *destination, *copySize));
 
         DAWN_TRY(ValidateTextureCopyRange(*source, *copySize));
         DAWN_TRY(ValidateTextureCopyRange(*destination, *copySize));
@@ -214,7 +239,9 @@ namespace dawn_native {
                                        const CopyTextureForBrowserOptions* options) {
         // TODO(shaobo.yan@intel.com): In D3D12 and Vulkan, compatible texture format can directly
         // copy to each other. This can be a potential fast path.
-        RenderPipelineBase* pipeline = GetOrCreateCopyTextureForBrowserPipeline(device);
+
+        RenderPipelineBase* pipeline = GetOrCreateCopyTextureForBrowserPipeline(
+            device, destination->texture->GetFormat().format);
 
         // Prepare bind group layout.
         Ref<BindGroupLayoutBase> layout = AcquireRef(pipeline->GetBindGroupLayout(0));
@@ -229,7 +256,7 @@ namespace dawn_native {
         // Prepare binding 0 resource: uniform buffer.
         float uniformData[] = {
             1.0, 1.0,  // scale
-            0.0, 0.0   // offset
+            0.0, 0.0,  // offset
         };
 
         // Handle flipY.
@@ -282,6 +309,7 @@ namespace dawn_native {
 
         // Prepare render pass color attachment descriptor.
         RenderPassColorAttachmentDescriptor colorAttachmentDesc;
+
         colorAttachmentDesc.attachment = dstView.Get();
         colorAttachmentDesc.loadOp = wgpu::LoadOp::Load;
         colorAttachmentDesc.storeOp = wgpu::StoreOp::Store;
