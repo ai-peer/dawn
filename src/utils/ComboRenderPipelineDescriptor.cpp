@@ -18,6 +18,8 @@
 
 namespace utils {
 
+    // For creating deprecated render pipeline descriptors
+
     ComboVertexStateDescriptor::ComboVertexStateDescriptor() {
         wgpu::VertexStateDescriptor* descriptor = this;
 
@@ -111,6 +113,107 @@ namespace utils {
             cDepthStencilState.stencilReadMask = 0xff;
             cDepthStencilState.stencilWriteMask = 0xff;
             descriptor->depthStencilState = nullptr;
+        }
+    }
+
+    ComboRenderPipelineDescriptor2::ComboRenderPipelineDescriptor2() {
+        wgpu::RenderPipelineDescriptor* descriptor = this;
+
+        // Set defaults for the vertex state.
+        {
+            wgpu::VertexState& vertex = descriptor->vertex;
+            vertex.module = nullptr;
+            vertex.entryPoint = "main";
+            vertex.bufferCount = 0;
+
+            // Fill the default values for vertexBuffers and vertexAttributes in buffers.
+            wgpu::VertexAttribute vertexAttribute;
+            vertexAttribute.shaderLocation = 0;
+            vertexAttribute.offset = 0;
+            vertexAttribute.format = wgpu::VertexFormat::Float32;
+            for (uint32_t i = 0; i < kMaxVertexAttributes; ++i) {
+                cAttributes[i] = vertexAttribute;
+            }
+            for (uint32_t i = 0; i < kMaxVertexBuffers; ++i) {
+                cBuffers[i].arrayStride = 0;
+                cBuffers[i].stepMode = wgpu::InputStepMode::Vertex;
+                cBuffers[i].attributeCount = 0;
+                cBuffers[i].attributes = nullptr;
+            }
+            // cBuffers[i].attributes points to somewhere in cAttributes.
+            // cBuffers[0].attributes points to &cAttributes[0] by default. Assuming
+            // cBuffers[0] has two attributes, then cBuffers[1].attributes should point to
+            // &cAttributes[2]. Likewise, if cBuffers[1] has 3 attributes, then
+            // cBuffers[2].attributes should point to &cAttributes[5].
+            cBuffers[0].attributes = &cAttributes[0];
+            vertex.buffers = &cBuffers[0];
+        }
+
+        // Set the defaults for the primitive state
+        {
+            wgpu::PrimitiveState& primitive = descriptor->primitive;
+            primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+            primitive.stripIndexFormat = wgpu::IndexFormat::Undefined;
+            primitive.frontFace = wgpu::FrontFace::CCW;
+            primitive.cullMode = wgpu::CullMode::None;
+        }
+
+        // Set the defaults for the depth-stencil state
+        {
+            wgpu::StencilFaceState stencilFace;
+            stencilFace.compare = wgpu::CompareFunction::Always;
+            stencilFace.failOp = wgpu::StencilOperation::Keep;
+            stencilFace.depthFailOp = wgpu::StencilOperation::Keep;
+            stencilFace.passOp = wgpu::StencilOperation::Keep;
+
+            wgpu::DepthStencilState& depthStencil = descriptor->depthStencil;
+            depthStencil.format = wgpu::TextureFormat::Undefined;
+            depthStencil.depthWriteEnabled = false;
+            depthStencil.depthCompare = wgpu::CompareFunction::Always;
+            depthStencil.stencilBack = stencilFace;
+            depthStencil.stencilFront = stencilFace;
+            depthStencil.stencilReadMask = 0xff;
+            depthStencil.stencilWriteMask = 0xff;
+            depthStencil.depthBias = 0;
+            depthStencil.depthBiasSlopeScale = 0.0;
+            depthStencil.depthBiasClamp = 0.0;
+        }
+
+        // Set the defaults for the multisample state
+        {
+            wgpu::MultisampleState& multisample = descriptor->multisample;
+            multisample.count = 1;
+            multisample.mask = 0xFFFFFFFF;
+            multisample.alphaToCoverageEnabled = false;
+        }
+
+        // Set the defaults for the fragment state
+        {
+            wgpu::FragmentState& fragment = descriptor->fragment;
+            fragment.module = nullptr;
+            fragment.entryPoint = "main";
+            fragment.targetCount = 1;
+            fragment.targets = &cTargets[0];
+
+            wgpu::BlendComponent blendComponent;
+            blendComponent.srcFactor = wgpu::BlendFactor::One;
+            blendComponent.dstFactor = wgpu::BlendFactor::Zero;
+            blendComponent.operation = wgpu::BlendOperation::Add;
+
+            wgpu::BlendState blend;
+            blend.enabled = false;
+            blend.color = blendComponent;
+            blend.alpha = blendComponent;
+
+            wgpu::ColorTargetState colorTargetState;
+            colorTargetState.format = wgpu::TextureFormat::RGBA8Unorm;
+            colorTargetState.blend.enabled = false;
+            colorTargetState.blend.color = blendComponent;
+            colorTargetState.blend.alpha = blendComponent;
+            colorTargetState.writeMask = wgpu::ColorWriteMask::All;
+            for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
+                cTargets[i] = colorTargetState;
+            }
         }
     }
 
