@@ -16,6 +16,24 @@
       "message": "Will we be able to remove these files (or put them in dawn_native) after the deprecation period?",
       "revId": "e3f10e3d8ef431981cdeee8a47791bcf4f347bb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ff0073_ee91654e",
+        "filename": "src/common/VertexFormatUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-06T00:07:18Z",
+      "side": 1,
+      "message": "Yeah, we can. It\u0027s mostly needed in the shared location for the deprecation tests.",
+      "parentUuid": "2d3198f5_a090c1a0",
+      "revId": "e3f10e3d8ef431981cdeee8a47791bcf4f347bb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
