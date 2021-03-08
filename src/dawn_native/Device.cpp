@@ -771,6 +771,12 @@ namespace dawn_native {
             return;
         }
 
+        // TODO: Enable this warning once the tests have been converted to either use the new
+        // format or expect the deprecation warning.
+        /*EmitDeprecationWarning(
+            "The format of RenderPipelineDescriptor has changed, and will soon require the "
+            "new structure. Please begin using CreateRenderPipeline2Async() instead.");*/
+
         MaybeError maybeError = CreateRenderPipelineInternal(&result, descriptor);
         if (maybeError.IsError()) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
@@ -795,6 +801,22 @@ namespace dawn_native {
     }
     RenderPipelineBase* DeviceBase::CreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
+        RenderPipelineBase* result = nullptr;
+
+        // TODO: Enable this warning once the tests have been converted to either use the new
+        // format or expect the deprecation warning.
+        /*EmitDeprecationWarning(
+            "The format of RenderPipelineDescriptor has changed, and will soon require the "
+            "new structure. Please begin using CreateRenderPipeline2() instead.");*/
+
+        if (ConsumedError(CreateRenderPipelineInternal(&result, descriptor))) {
+            return RenderPipelineBase::MakeError(this);
+        }
+
+        return result;
+    }
+    RenderPipelineBase* DeviceBase::CreateRenderPipeline2(
+        const RenderPipelineDescriptor2* descriptor) {
         RenderPipelineBase* result = nullptr;
 
         if (ConsumedError(CreateRenderPipelineInternal(&result, descriptor))) {
@@ -1058,8 +1080,88 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateRenderPipelineInternal(
         RenderPipelineBase** result,
+        const RenderPipelineDescriptor2* descriptor) {
+        // Convert descriptor to the older format it before proceeding.
+        // TODO: Convert the rest of the code to operate on the newer format.
+        RenderPipelineDescriptor normalizedDescriptor;
+
+        VertexStateDescriptor vertexState;
+        normalizedDescriptor.vertexState = &vertexState;
+
+        RasterizationStateDescriptor rasterizationState;
+        normalizedDescriptor.rasterizationState = &rasterizationState;
+
+        normalizedDescriptor.label = descriptor->label;
+        normalizedDescriptor.layout = descriptor->layout;
+        normalizedDescriptor.vertexStage.module = descriptor->vertex.module;
+        normalizedDescriptor.vertexStage.entryPoint = descriptor->vertex.entryPoint;
+        normalizedDescriptor.primitiveTopology = descriptor->primitive.topology;
+        normalizedDescriptor.sampleCount = descriptor->multisample.count;
+        normalizedDescriptor.sampleMask = descriptor->multisample.mask;
+        normalizedDescriptor.alphaToCoverageEnabled =
+            descriptor->multisample.alphaToCoverageEnabled;
+
+        vertexState.vertexBufferCount = descriptor->vertex.bufferCount;
+        vertexState.vertexBuffers = descriptor->vertex.buffers;
+        vertexState.indexFormat = descriptor->primitive.stripIndexFormat;
+
+        rasterizationState.frontFace = descriptor->primitive.frontFace;
+        rasterizationState.cullMode = descriptor->primitive.cullMode;
+
+        DepthStencilStateDescriptor depthStencilState;
+        if (descriptor->depthStencil.format != wgpu::TextureFormat::Undefined) {
+            normalizedDescriptor.depthStencilState = &depthStencilState;
+
+            depthStencilState.format = descriptor->depthStencil.format;
+            depthStencilState.depthWriteEnabled = descriptor->depthStencil.depthWriteEnabled;
+            depthStencilState.depthCompare = descriptor->depthStencil.depthCompare;
+            depthStencilState.stencilFront = descriptor->depthStencil.stencilFront;
+            depthStencilState.stencilBack = descriptor->depthStencil.stencilBack;
+            depthStencilState.stencilReadMask = descriptor->depthStencil.stencilReadMask;
+            depthStencilState.stencilWriteMask = descriptor->depthStencil.stencilWriteMask;
+            rasterizationState.depthBias = descriptor->depthStencil.depthBias;
+            rasterizationState.depthBiasSlopeScale = descriptor->depthStencil.depthBiasSlopeScale;
+            rasterizationState.depthBiasClamp = descriptor->depthStencil.depthBiasClamp;
+        }
+
+        ProgrammableStageDescriptor fragmentStage;
+        std::vector<ColorStateDescriptor> colorStates;
+        if (descriptor->fragment.module) {
+            normalizedDescriptor.fragmentStage = &fragmentStage;
+
+            fragmentStage.module = descriptor->fragment.module;
+            fragmentStage.entryPoint = descriptor->fragment.entryPoint;
+
+            for (uint32_t i = 0; i < descriptor->fragment.targetCount; ++i) {
+                const ColorTargetState& target = descriptor->fragment.targets[i];
+                ColorStateDescriptor colorState;
+                colorState.format = target.format;
+                colorState.writeMask = target.writeMask;
+
+                if (target.blend.enabled) {
+                    colorState.colorBlend.srcFactor = target.blend.color.srcFactor;
+                    colorState.colorBlend.dstFactor = target.blend.color.dstFactor;
+                    colorState.colorBlend.operation = target.blend.color.operation;
+
+                    colorState.alphaBlend.srcFactor = target.blend.alpha.srcFactor;
+                    colorState.alphaBlend.dstFactor = target.blend.alpha.dstFactor;
+                    colorState.alphaBlend.operation = target.blend.alpha.operation;
+                }
+                colorStates.push_back(colorState);
+            }
+
+            normalizedDescriptor.colorStateCount = descriptor->fragment.targetCount;
+            normalizedDescriptor.colorStates = colorStates.data();
+        }
+
+        return CreateRenderPipelineInternal(result, &normalizedDescriptor);
+    }
+
+    MaybeError DeviceBase::CreateRenderPipelineInternal(
+        RenderPipelineBase** result,
         const RenderPipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
+
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
         }
