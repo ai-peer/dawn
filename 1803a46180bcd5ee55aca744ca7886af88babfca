@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f67b718_01a5334f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-08T22:12:40Z",
+      "side": 1,
+      "message": "Detailed explanation of the bug is available here: https://bugs.chromium.org/p/dawn/issues/attachmentText?aid\u003d492836",
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
