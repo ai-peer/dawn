@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1391038a_732df736",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-08T21:32:56Z",
+      "side": 1,
+      "message": "And we just talked with Dzmitry to resolve the issue he had with our pointers not matching the spec. I\u0027ll comment there.",
+      "parentUuid": "f950766d_76c4873d",
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e357a05f_9b4f1970",
