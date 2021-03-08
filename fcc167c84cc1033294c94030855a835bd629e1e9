@@ -16,6 +16,29 @@
       "message": "LGTM, thanks for the fix! Ben can you also check if the use of TINT_ENABLE_SHARED_CRT is correct?",
       "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2248cb7a_ba325f3a",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-08T11:49:41Z",
+      "side": 1,
+      "message": "This is un-defaulting logic in Tint\u0027s CMakeLists.txt that explicitly defaults to using static CRT.\n\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/tint/src/CMakeLists.txt;l\u003d47-53\n\nThe reason given is:\n\n  # We don\u0027t want to have to copy the C Runtime DLL everywhere the executable\n  # goes.  So by default compile code to assume the CRT is statically linked,\n  # i.e. use /MT* options.  For debug builds use /MTd, and for release builds\n  # use /MT.  If TINT_ENABLE_SHARED_CRT is ON, then use the shared C runtime.\n  # Modify the project-wide options variables. This is ugly, but seems to be\n  # the state of the art.\n\nThis landed in https://dawn-review.googlesource.com/c/tint/+/20940, which has the rather nondescript CL description:\n\n  Windows fixes.\n\n  This CL fixes up some issues which give compile errors when building\n  with Visual Studio.\n\nMaybe the TINT_ENABLE_SHARED_CRT was just a preference. Maybe there was some build issue.\n\nI don\u0027t really mind what the defaults here are, but it is a bit odd that we\u0027re attempting to disable by-default logic in tint in its outer project. Perhaps we should just be removing this logic from our Tint CMake rules.\n\nApproving as I don\u0027t really mind either way, and Corentin can make the final call.",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
