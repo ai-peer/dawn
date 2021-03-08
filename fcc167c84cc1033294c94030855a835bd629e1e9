@@ -87,6 +87,30 @@
       },
       "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35c74289_a5272b07",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-03-08T15:04:49Z",
+      "side": 1,
+      "message": "I was able to build the dawn main branch with your changes to tint (and my fix to the other cmake file) without a problem.\n\nI should\u0027ve explained more the problem I encountered. Since dawn is statically linked by default, all the libraries must use the same type of CRT, otherwise a linking error occurs. By default CMake uses the shared CRT, so tint couldn\u0027t link when trying to build with default options, because it was built with a static CRT.\n\n\"dawn\\out\\build\\x64-Debug\\SPIRV-Tools.lib(libspirv.cpp.obj) : error LNK2038: mismatch detected for \u0027RuntimeLibrary\u0027: value \u0027MDd_DynamicDebug\u0027 doesn\u0027t match value \u0027MTd_StaticDebug\u0027 in main.cc.obj\" \u003c- main.cc is a tint file.\n\nI initially encountered this error in my project that depends on dawn, but worked around it by adding \"set(CMAKE_MSVC_RUNTIME_LIBRARY \"MultiThreaded$\u003c$\u003cCONFIG:Debug\u003e:Debug\u003e\")\" to my cmake files, so all libraries used the static CRT, and didn\u0027t investigate further. Only when I tried to build dawn standalone to fix the missing source files in cmake did I decide I should try to fix the problem at the source. Since shaderc also defaulted to the static CRT link tint, I just applied the same fix.\n\nThere was also a separate issue with tint trying to generate docs in \"third_party/tint/out/docs\". Since \"out\" doesn\u0027t exist, Doxygen will give an error, because it will only create the last directory of the path if it doesn\u0027t exist (here that would be \"docs\"), but not parents. Simplest solution is just to disable the docs in dawn.",
+      "parentUuid": "c39c8930_15636f44",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
