@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27af05e2_f72f4fde",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-08T22:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e357a05f_9b4f1970",
+      "range": {
+        "startLine": 1130,
+        "startChar": 12,
+        "endLine": 1134,
+        "endChar": 13
+      },
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae01ef3c_edc30dd4",
@@ -89,6 +113,24 @@
       "writtenOn": "2021-03-08T21:18:34Z",
       "side": 1,
       "message": "nit: here and in other places in this function, we usually like to always have mutable things be pointers, not references. So would prefer \u0026descriptor-\u003edepthStencil.",
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48dd56c_0749a41c",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-08T22:33:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ae01ef3c_edc30dd4",
       "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
