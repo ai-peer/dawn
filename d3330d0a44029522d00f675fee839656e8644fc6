@@ -16,6 +16,63 @@
       "message": "So I\u0027ve actually decided that it may be best to change direction here and go with the route that @cwallez originally suggested: Adding a new entry point and declaring the new format as a separate structure. \"RenderPipelineDescriptor2\", in this case. Please take a look and let me know what you think.\n\nThis will be more of a pain to fully deprecate as it requires a couple more steps to get us back to the signatures we actually want. But in trying to do a unified structure I\u0027ve been struggling with various issues related to how the wire formats are created that required LOTS of existing fields to be marked as optional, which in turn would require more manual validation to ensure that the pipeline descriptors were valid, which increases the chances that this addition breaks backwards compat. The scope of that change got to a point where I wasn\u0027t comfortable with it any longer.\n\nIf any of you feel strongly that this is the wrong direction I\u0027m happy to go back and try to make the other approach work, but for now this strikes me as the most incremental, atomic, and isolated approach.",
       "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f950766d_76c4873d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-08T21:18:34Z",
+      "side": 1,
+      "message": "LGTM overall, though I guess we should resolve https://github.com/webgpu-native/webgpu-headers/pull/81 first. Maybe for structural changes like this we should always start with the webgpu-native PR first to avoid too much churn.",
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e357a05f_9b4f1970",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-08T21:18:34Z",
+      "side": 1,
+      "message": "you could make |colorStates| an std::vector instead, then you don\u0027t need this check.",
+      "range": {
+        "startLine": 1130,
+        "startChar": 12,
+        "endLine": 1134,
+        "endChar": 13
+      },
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae01ef3c_edc30dd4",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-08T21:18:34Z",
+      "side": 1,
+      "message": "nit: here and in other places in this function, we usually like to always have mutable things be pointers, not references. So would prefer \u0026descriptor-\u003edepthStencil.",
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
