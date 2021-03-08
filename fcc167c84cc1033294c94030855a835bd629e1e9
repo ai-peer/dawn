@@ -63,6 +63,30 @@
       },
       "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c39c8930_15636f44",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-08T12:34:10Z",
+      "side": 1,
+      "message": "Sure. Based on my understanding of why this was originally done, I don\u0027t have any issues removing it. My only concern is that I don\u0027t primarily develop on Windows, and I might inadvertently break some usage I\u0027m unaware of. \n\nAleksi - given that you wanted to change this default, would you be willing to give https://dawn-review.googlesource.com/c/tint/+/44045 a quick try? With this change, you should be able to revert your changes to this file, along with:\n\n        set(TINT_BUILD_TESTS OFF CACHE BOOL \"\" FORCE)\n        set(TINT_BUILD_DOCS OFF CACHE BOOL \"\" FORCE)\n\n\nThanks!",
+      "parentUuid": "32f613a5_b95dcc07",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
