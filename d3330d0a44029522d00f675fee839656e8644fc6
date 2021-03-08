@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b28cb1b_4fe02ea2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-08T18:16:41Z",
+      "side": 1,
+      "message": "So I\u0027ve actually decided that it may be best to change direction here and go with the route that @cwallez originally suggested: Adding a new entry point and declaring the new format as a separate structure. \"RenderPipelineDescriptor2\", in this case. Please take a look and let me know what you think.\n\nThis will be more of a pain to fully deprecate as it requires a couple more steps to get us back to the signatures we actually want. But in trying to do a unified structure I\u0027ve been struggling with various issues related to how the wire formats are created that required LOTS of existing fields to be marked as optional, which in turn would require more manual validation to ensure that the pipeline descriptors were valid, which increases the chances that this addition breaks backwards compat. The scope of that change got to a point where I wasn\u0027t comfortable with it any longer.\n\nIf any of you feel strongly that this is the wrong direction I\u0027m happy to go back and try to make the other approach work, but for now this strikes me as the most incremental, atomic, and isolated approach.",
+      "revId": "d3330d0a44029522d00f675fee839656e8644fc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
