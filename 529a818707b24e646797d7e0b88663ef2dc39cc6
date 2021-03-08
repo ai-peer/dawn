@@ -16,6 +16,23 @@
       "message": "Double check the failure, it is a mesa driver bug in 19.0.2 but has been fixed in latest mesa(ubuntu 20.04 default driver)\nThe case fails when running without suffix ",
       "revId": "529a818707b24e646797d7e0b88663ef2dc39cc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b12ab82a_f37d8059",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-08T08:42:06Z",
+      "side": 1,
+      "message": "Double check the failure, it is a mesa driver bug in 19.0.2 but has been fixed in latest mesa(ubuntu 20.04 default driver, verified on local)\nThe case hangs on when running without suffix _e_use_tint_generator(I\u0027m not quite sure the difference). I\u0027m not quite sure whether we should workaround it(since it has been fixed by new mesa). What\u0027s your suggestions?\nAnd PTAL for the CL, thanks!",
+      "revId": "529a818707b24e646797d7e0b88663ef2dc39cc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
