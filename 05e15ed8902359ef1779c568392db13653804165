@@ -535,6 +535,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cab950dc_0feb5e9a",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-08T13:20:18Z",
+      "side": 1,
+      "message": "Opened https://github.com/webgpu-native/webgpu-headers/pull/81 for this.",
+      "parentUuid": "e8ecdd2a_03f845c6",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53c8fb10_7b0f525f",
         "filename": "dawn.json",
         "patchSetId": 1
