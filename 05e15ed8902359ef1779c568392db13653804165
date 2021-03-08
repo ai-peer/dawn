@@ -724,6 +724,24 @@
       "message": "nit: stray definition",
       "revId": "05e15ed8902359ef1779c568392db13653804165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc753c52_d4a9e6e6",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-08T13:25:46Z",
+      "side": 1,
+      "message": "declaration*",
+      "parentUuid": "c7a2902e_be9ba0b3",
+      "revId": "05e15ed8902359ef1779c568392db13653804165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
