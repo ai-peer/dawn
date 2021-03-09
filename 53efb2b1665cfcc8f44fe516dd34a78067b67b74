@@ -16,6 +16,92 @@
       "message": "PTAL",
       "revId": "53efb2b1665cfcc8f44fe516dd34a78067b67b74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a295b05a_bf46ed74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-09T20:07:36Z",
+      "side": 1,
+      "message": "LGTM, some comments",
+      "revId": "53efb2b1665cfcc8f44fe516dd34a78067b67b74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f74e474_29adc36c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-09T20:07:36Z",
+      "side": 1,
+      "message": "nit: Don\u0027t think we need to mention SPIRV",
+      "range": {
+        "startLine": 768,
+        "startChar": 64,
+        "endLine": 768,
+        "endChar": 76
+      },
+      "revId": "53efb2b1665cfcc8f44fe516dd34a78067b67b74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c15651c_8457ac1f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-09T20:07:36Z",
+      "side": 1,
+      "message": "nit: preference to say \"Missing location decoration\".\n\nAlso, it looks like it would be easy to include output_var.name and output_var.location_decoration in the message.\n\nWe\u0027re not trying hard right now to have good error messages, but if it\u0027s not so much work to add it, I think we may as well.\n\nThat said, is it possible to hit this error using Tint? Or will the missing decoration be caught earlier in validation?",
+      "range": {
+        "startLine": 776,
+        "startChar": 33,
+        "endLine": 776,
+        "endChar": 37
+      },
+      "revId": "53efb2b1665cfcc8f44fe516dd34a78067b67b74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "859af5eb_c333e8d6",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-09T20:07:36Z",
+      "side": 1,
+      "message": "typo: \"vertex\"",
+      "range": {
+        "startLine": 861,
+        "startChar": 85,
+        "endLine": 861,
+        "endChar": 90
+      },
+      "revId": "53efb2b1665cfcc8f44fe516dd34a78067b67b74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
