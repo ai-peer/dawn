@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "708d61df_e44fabbf",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 1667,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-09T00:05:04Z",
+      "side": 1,
+      "message": "IIUC, the discussion on https://github.com/webgpu-native/webgpu-headers/pull/81 means that we should indeed have these as const* and make desc.fragment.module non-optional? (but desc.fragment can be nullptr)\n\nand then .depthStencil and .blend are passed as const* too.",
+      "range": {
+        "startLine": 1667,
+        "startChar": 0,
+        "endLine": 1667,
+        "endChar": 58
+      },
+      "revId": "53236f32abf56b4ff44d0ba896eb34e52e765e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
