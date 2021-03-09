@@ -134,6 +134,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49484bc_b894bb7b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-09T22:06:22Z",
+      "side": 1,
+      "message": "Sure, sounds fine.",
+      "parentUuid": "dbcea5af_708a1a08",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9acde47_c117e3c7",
