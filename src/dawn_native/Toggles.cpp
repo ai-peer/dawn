@@ -172,7 +172,15 @@ namespace dawn_native {
               "If needed, use a compute shader to transform timestamp queries from ticks to "
               "nanoseconds. This is temporarily needed to avoid requiring Tint to use timestamp "
               "queries",
-              "https://crbug.com/dawn/686"}}
+              "https://crbug.com/dawn/686"}},
+            {Toggle::UseTemporaryBufferInTextureToTextureCopy,
+             {"use_temporary_buffer_in_texture_to_texture_copy",
+              "Split texture-to-texture copy into two copies: copy from source texture into a "
+              "temporary buffer, and copy from the temporary buffer into the destination texture "
+              "under specific situations. This workaround is by default enabled on some Intel "
+              "GPUs which have a driver bug in the execution of CopyTextureRegion() when we copy "
+              "with specific formats from lower mip levels on D3D12 backends.",
+              "https://crbug.com/1161355"}}
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 
