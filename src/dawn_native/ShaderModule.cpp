@@ -756,6 +756,28 @@ namespace dawn_native {
                     metadata->localWorkgroupSize.z = entryPoint.workgroup_size_z;
                 }
 
+                if (metadata->stage == SingleShaderStage::Vertex) {
+                    for (const auto& input_var : entryPoint.input_variables) {
+                        uint32_t location = 0;
+                        if (input_var.has_location_decoration) {
+                            location = input_var.location_decoration;
+                        }
+
+                        if (location >= kMaxVertexAttributes) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Attribute location over limits in the SPIRV");
+                        }
+                        metadata->usedVertexAttributes.set(location);
+                    }
+
+                    for (const auto& output_var : entryPoint.output_variables) {
+                        if (!output_var.has_location_decoration) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Need location qualifier on vertex output");
+                        }
+                    }
+                }
+
                 result[entryPoint.name] = std::move(metadata);
             }
             return std::move(result);
@@ -830,6 +852,14 @@ namespace dawn_native {
                         return DAWN_VALIDATION_ERROR(
                             "Tint and SPIRV-Cross returned different values for local workgroup "
                             "size");
+                    }
+                }
+
+                if (tintEntry->stage == SingleShaderStage::Vertex) {
+                    if (tintEntry->usedVertexAttributes != crossEntry->usedVertexAttributes) {
+                        return DAWN_VALIDATION_ERROR(
+                            "Tint and SPIRV-Cross returned different values for used vertx "
+                            "attributes");
                     }
                 }
 
