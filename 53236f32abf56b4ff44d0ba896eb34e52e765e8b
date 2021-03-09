@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8c05365_108f1c5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-09T08:44:19Z",
+      "side": 1,
+      "message": "Likewise, I was a bit surprised but I\u0027m glad it we were able to catch it early-ish.",
+      "parentUuid": "b62e5300_915298a2",
+      "revId": "53236f32abf56b4ff44d0ba896eb34e52e765e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "708d61df_e44fabbf",
