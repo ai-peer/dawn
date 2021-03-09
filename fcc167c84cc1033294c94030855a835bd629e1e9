@@ -111,6 +111,30 @@
       },
       "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "930a1f5f_5bd61edb",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-09T13:58:44Z",
+      "side": 1,
+      "message": "Thank you for the additional context.\nhttps://dawn-review.googlesource.com/c/tint/+/44045 has landed. This should be rolled into Dawn shortly.",
+      "parentUuid": "35c74289_a5272b07",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 32
+      },
+      "revId": "fcc167c84cc1033294c94030855a835bd629e1e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
