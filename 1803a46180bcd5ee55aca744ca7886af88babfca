@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51f3e1bb_c24d75e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-09T02:29:34Z",
+      "side": 1,
+      "message": "Hi Brandon, can you also enable CopyTests_T2B/CopyOneRowWithDepth32Float in this CL? I expect this CL will also fix https://bugs.chromium.org/p/dawn/issues/detail?id\u003d693.",
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3249bf3f_17b1fd4b",
