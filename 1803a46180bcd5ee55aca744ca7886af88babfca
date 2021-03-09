@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d3da140_65701314",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-09T08:43:05Z",
+      "side": 1,
+      "message": "LGTM too, this is a pretty mind-bending investigation and fix. The logic looks good and I\u0027m not sure why the first version of this code used the slicePitch.\n\nCan we also have a test in CopySplitTests.cpp?",
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3249bf3f_17b1fd4b",
@@ -94,6 +111,46 @@
         "endLine": 73,
         "endChar": 41
       },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f1e2076_0fc4a342",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-09T08:43:05Z",
+      "side": 1,
+      "message": "u-nit: I think these + should be ~. Ditto below.",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 21
+      },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68191fdb_316f25d7",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-09T08:43:05Z",
+      "side": 1,
+      "message": "u-nit: we could have a newline after the texture creation to visually separate the code.",
       "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
