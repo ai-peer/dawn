@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "373ccb08_cda102ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-09T22:01:32Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "51f3e1bb_c24d75e9",
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3249bf3f_17b1fd4b",
@@ -82,6 +100,30 @@
       "writtenOn": "2021-03-09T00:10:07Z",
       "side": 1,
       "message": "seems like we could just return our own struct with only .x and .y here. That way it would be impossible to even use |texelOffset.z|",
+      "range": {
+        "startLine": 24,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 17
+      },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcea5af_708a1a08",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-09T22:01:32Z",
+      "side": 1,
+      "message": "I\u0027d prefer to do this in a brief follow up patch if you don\u0027t mind.",
+      "parentUuid": "3249bf3f_17b1fd4b",
       "range": {
         "startLine": 24,
         "startChar": 8,
@@ -115,6 +157,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4db11a6c_377a5f09",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-09T22:01:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9acde47_c117e3c7",
+      "range": {
+        "startLine": 73,
+        "startChar": 35,
+        "endLine": 73,
+        "endChar": 41
+      },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f1e2076_0fc4a342",
@@ -138,6 +204,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44d4022_13b81ba0",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-09T22:01:32Z",
+      "side": 1,
+      "message": "When I counted I was only off by one - I think it\u0027s good now.",
+      "parentUuid": "9f1e2076_0fc4a342",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 21
+      },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68191fdb_316f25d7",
@@ -151,6 +241,24 @@
       "writtenOn": "2021-03-09T08:43:05Z",
       "side": 1,
       "message": "u-nit: we could have a newline after the texture creation to visually separate the code.",
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9dd5cec_99319f15",
+        "filename": "src/tests/end2end/QueueTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-09T22:01:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68191fdb_316f25d7",
       "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
