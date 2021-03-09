@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc923b2b_567f670f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-09T18:07:04Z",
+      "side": 1,
+      "message": "Refactored the optional members to use pointers instead of checking for various types of flags. I think if we\u0027re going this route we should put more effort into making classes like ComboRenderPipelineDescriptor more ergonomic, like was pointed out on the related GitHub issue, but that feels like it\u0027s better left to a follow up.",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69c5069d_63cef151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-09T18:07:04Z",
+      "side": 1,
+      "message": "Not a big deal. I\u0027m personally of the opinion that this feels less ergonomic for developers, but it does make the intent more explicit. Besides, I\u0027ll personally be using WebGPU via JavaScript most of the time, so I won\u0027t have to trip over tracking my pointers. ;)",
+      "parentUuid": "f8c05365_108f1c5d",
+      "revId": "53236f32abf56b4ff44d0ba896eb34e52e765e8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "708d61df_e44fabbf",
