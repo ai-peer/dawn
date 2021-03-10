@@ -252,6 +252,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b175b4c_21ce3653",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T07:20:45Z",
+      "side": 1,
+      "message": "Uh? I thought we could only do \"rectangular\" copies so that the last + has to be aligned with the first one. (in column (column of the first one - 1))",
+      "parentUuid": "d44d4022_13b81ba0",
+      "range": {
+        "startLine": 84,
+        "startChar": 17,
+        "endLine": 84,
+        "endChar": 21
+      },
+      "revId": "1803a46180bcd5ee55aca744ca7886af88babfca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "68191fdb_316f25d7",
