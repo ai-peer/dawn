@@ -33,6 +33,24 @@
       "message": "I\u0027m still processing the test. It extremely complicated and I\u0027m trying to find if we can do simpler (even if the tolerances would be a bit larger)",
       "revId": "175ec5416619decdd62a8f08e1ed998fc48bd7b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "878a5f77_05ae7720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-10T01:19:23Z",
+      "side": 1,
+      "message": "The basic idea for this test case is that I need this tests to make sure I could rely on the samplers(not sure I call it correctly, which I mean is the directly assign from source to dst) to handle value transformation magically. So I need to emulate what\u0027s the transform looks like based on specs and compared it with the result.\n\nI think the complicated part is due to the FP16 part and src-\u003edst transformation in cases like 8-channel format -\u003e 10+2 channel format. And if we accept uint, sint or srgb format as inputs and output, it will have more helper functions and conditions in this test.\n\nBut I\u0027m happy to do some simplification based on your further comments.",
+      "parentUuid": "f31c670f_b843e538",
+      "revId": "175ec5416619decdd62a8f08e1ed998fc48bd7b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

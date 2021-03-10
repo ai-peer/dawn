@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bc9860_34ed551f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-10T01:19:23Z",
+      "side": 1,
+      "message": "(Oops, I think I should reply to the failure reason here too).\nI\u0027ve dumped the spirv-asm and do some experiment on different mesa version. I added the analysis result as comments in CL(Could do a bisect for mesa to find the exactly CL fix this issue if you think necessary). The result is:\nNOTE: There is a bug in Mesa before version 19.1.0 which cannot\nhandle variables as index to access vector values correctly. It hangs\nthe execution of shader. Tint generator uses \u0027clamp\u0027 to prevent OOB\naccess for index access and it could workaround this bug too. But\nfor the test cases which doesn\u0027t use tint generator, it won\u0027t\ngenerate OOB guard ops and will hit this bug on bots(which running\nwith Mesa 19.0.2) and causes bots crash. To workaround this crash,\nwe use {vector}.r/g/b/a instead of \u0027loop\u0027 + {vector}[i] to access\nchannels in the test shader.\n\nSo I think tint generator has no need to workaround it. WDYT?",
+      "parentUuid": "dd2b7281_15a301a7",
+      "revId": "529a818707b24e646797d7e0b88663ef2dc39cc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "288851ed_e8429b85",
