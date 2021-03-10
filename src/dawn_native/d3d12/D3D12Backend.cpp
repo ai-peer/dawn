@@ -17,6 +17,7 @@
 
 #include "dawn_native/D3D12Backend.h"
 
+#include "common/Log.h"
 #include "common/SwapChainUtils.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
@@ -68,8 +69,14 @@ namespace dawn_native { namespace d3d12 {
         const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
 
+        // Ensure the texture usage is allowed
+        if (descriptor->usage & ~mUsage) {
+            dawn::ErrorLog() << "Texture usage is not valid for external image\n";
+            return nullptr;
+        }
+
         TextureDescriptor textureDescriptor = {};
-        textureDescriptor.usage = static_cast<wgpu::TextureUsage>(mUsage);
+        textureDescriptor.usage = static_cast<wgpu::TextureUsage>(descriptor->usage);
         textureDescriptor.dimension = static_cast<wgpu::TextureDimension>(mDimension);
         textureDescriptor.size = {mSize.width, mSize.height, mSize.depth};
         textureDescriptor.format = static_cast<wgpu::TextureFormat>(mFormat);
@@ -149,6 +156,7 @@ namespace dawn_native { namespace d3d12 {
         externalAccessDesc.isInitialized = descriptor->isInitialized;
         externalAccessDesc.isSwapChainTexture = descriptor->isSwapChainTexture;
         externalAccessDesc.acquireMutexKey = descriptor->acquireMutexKey;
+        externalAccessDesc.usage = descriptor->cTextureDescriptor->usage;
 
         return externalImage->ProduceTexture(device, &externalAccessDesc);
     }
