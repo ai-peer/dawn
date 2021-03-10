@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf27b4a_848a3d2a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-10T16:56:32Z",
+      "side": 1,
+      "message": "Ha, good catch - this was me trying to diagnose an unrelated issue.\nRemoved",
+      "parentUuid": "7f7111d3_855006c5",
+      "range": {
+        "startLine": 342,
+        "startChar": 11,
+        "endLine": 344,
+        "endChar": 22
+      },
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87a64df2_08a3637b",
@@ -88,6 +112,30 @@
       "writtenOn": "2021-03-10T16:37:52Z",
       "side": 1,
       "message": "nit: the original offsets are there because of alignment requirements. So maybe it would make most sense to have these be [[align(256)]] instead?",
+      "range": {
+        "startLine": 645,
+        "startChar": 12,
+        "endLine": 648,
+        "endChar": 39
+      },
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "032417b2_8c46ba3d",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-10T16:56:32Z",
+      "side": 1,
+      "message": "That works. Changed.",
+      "parentUuid": "87a64df2_08a3637b",
       "range": {
         "startLine": 645,
         "startChar": 12,
