@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "732398bf_e9ec008d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T16:56:29Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d59dd9a1_9aa0625d",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T16:56:29Z",
+      "side": 1,
+      "message": "nit: I think this stride can go too. ditto in many other filed (git grep \"[[stride(\")\n\nIt could be a follow-up.",
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f7111d3_855006c5",
@@ -60,6 +94,23 @@
         "endLine": 648,
         "endChar": 39
       },
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1ec715_5fd5efdf",
+        "filename": "src/tests/end2end/OpArrayLengthTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T16:56:29Z",
+      "side": 1,
+      "message": "This file could keep the strides though.",
       "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
