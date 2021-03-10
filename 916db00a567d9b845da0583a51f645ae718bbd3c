@@ -33,6 +33,23 @@
       "message": "Thanks for the test! I remembered that in BufferMTL.mm we pad the buffer size to be at least 4 bytes. This is probably why it\u0027s OK with the vertex pulling.",
       "revId": "916db00a567d9b845da0583a51f645ae718bbd3c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8819a101_052fdfe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T07:44:52Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "916db00a567d9b845da0583a51f645ae718bbd3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
