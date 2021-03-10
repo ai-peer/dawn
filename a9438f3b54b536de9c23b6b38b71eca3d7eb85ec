@@ -295,6 +295,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd68eb28_9939ee20",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T11:20:42Z",
+      "side": 1,
+      "message": "Looks great!",
+      "parentUuid": "e50f75ba_76869b69",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3b018d2_ff7829a3",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 1
@@ -447,6 +465,24 @@
       "side": 1,
       "message": "Yes but sorry that it is a low-priority task for us to add workaround for the driver bugs on Windows Intel Vulkan drivers right now.",
       "parentUuid": "66fb577d_344b8dba",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e24c4f0_5457af00",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T11:20:42Z",
+      "side": 1,
+      "message": "Ah it\u0027s only the Windows Vulkan driver? Yeah seems fine.",
+      "parentUuid": "17748a6d_d7573470",
       "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

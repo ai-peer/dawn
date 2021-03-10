@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96604b73_0c1aa5a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T11:20:42Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the iteration.",
+      "revId": "e5e38b1fca4cdbaf073b9439b6571891bdd888a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306ef6b6_4c76770d",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T11:20:42Z",
+      "side": 1,
+      "message": "nit: now we know that\u0027s formats less than 4 bytes",
+      "range": {
+        "startLine": 183,
+        "startChar": 19,
+        "endLine": 183,
+        "endChar": 36
+      },
+      "revId": "e5e38b1fca4cdbaf073b9439b6571891bdd888a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d715342f_39e15748",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-10T11:20:42Z",
+      "side": 1,
+      "message": "u-nit: Maybe this could be:\n\n if (device-\u003eToggleEnabled()) {\n   bool copyToLesserLevel \u003d ...;\n   bool formatIsSmall \u003d ...;\n   if (copyToLesserLevel \u0026\u0026 formatIsSmall) {\n     return true;\n   }\n }\n\n return false;\n\nThis way in the future when we have more such cases we can extend the function easily (and it will go through all the toggles before returning false).",
+      "revId": "e5e38b1fca4cdbaf073b9439b6571891bdd888a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
