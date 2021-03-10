@@ -68,6 +68,11 @@ namespace dawn_native { namespace d3d12 {
         const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
 
+        // Ensure the texture usage is allowed
+        if (descriptor->usage & ~mUsage) {
+            return nullptr;
+        }
+
         TextureDescriptor textureDescriptor = {};
         textureDescriptor.usage = static_cast<wgpu::TextureUsage>(mUsage);
         textureDescriptor.dimension = static_cast<wgpu::TextureDimension>(mDimension);
@@ -149,6 +154,7 @@ namespace dawn_native { namespace d3d12 {
         externalAccessDesc.isInitialized = descriptor->isInitialized;
         externalAccessDesc.isSwapChainTexture = descriptor->isSwapChainTexture;
         externalAccessDesc.acquireMutexKey = descriptor->acquireMutexKey;
+        externalAccessDesc.usage = descriptor->cTextureDescriptor->usage;
 
         return externalImage->ProduceTexture(device, &externalAccessDesc);
     }
