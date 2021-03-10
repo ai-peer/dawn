@@ -60,6 +60,7 @@ namespace dawn_native { namespace d3d12 {
       public:
         uint64_t acquireMutexKey;
         bool isSwapChainTexture = false;
+        WGPUTextureUsageFlags usage;
     };
 
     class DAWN_NATIVE_EXPORT ExternalImageDXGI {
