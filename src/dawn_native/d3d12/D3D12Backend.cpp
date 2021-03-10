@@ -65,8 +65,14 @@ namespace dawn_native { namespace d3d12 {
 
     WGPUTexture ExternalImageDXGI::ProduceTexture(
         WGPUDevice device,
+        WGPUTextureUsageFlags usage,
         const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
         Device* backendDevice = reinterpret_cast<Device*>(device);
+
+        // Validate the WGPUTexture usage is allowed
+        if (usage & ~mUsage) {
+            return nullptr;
+        }
 
         TextureDescriptor textureDescriptor = {};
         textureDescriptor.usage = static_cast<wgpu::TextureUsage>(mUsage);
@@ -150,7 +156,8 @@ namespace dawn_native { namespace d3d12 {
         externalAccessDesc.isSwapChainTexture = descriptor->isSwapChainTexture;
         externalAccessDesc.acquireMutexKey = descriptor->acquireMutexKey;
 
-        return externalImage->ProduceTexture(device, &externalAccessDesc);
+        return externalImage->ProduceTexture(device, descriptor->cTextureDescriptor->usage,
+                                             &externalAccessDesc);
     }
 
     AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
