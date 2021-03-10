@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa1ced9b_6455d277",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-10T00:36:45Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "033e240d915ab3767243e29f7a3cb23264c378b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45805e83_893b6af6",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-10T00:36:45Z",
+      "side": 1,
+      "message": "block size \u003c 4?",
+      "range": {
+        "startLine": 182,
+        "startChar": 20,
+        "endLine": 182,
+        "endChar": 37
+      },
+      "revId": "033e240d915ab3767243e29f7a3cb23264c378b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f196eb5_cd9552b3",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-10T00:36:45Z",
+      "side": 1,
+      "message": "\"lower\" might be confusing.\nWe mean when the value of the mip level is greater, correct? So it\u0027s deeper in the mip chain.",
+      "range": {
+        "startLine": 182,
+        "startChar": 42,
+        "endLine": 182,
+        "endChar": 48
+      },
+      "revId": "033e240d915ab3767243e29f7a3cb23264c378b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce54eb1_d6fa662e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-10T00:36:45Z",
+      "side": 1,
+      "message": "can we check texel block size \u003c 4 instead?",
+      "revId": "033e240d915ab3767243e29f7a3cb23264c378b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

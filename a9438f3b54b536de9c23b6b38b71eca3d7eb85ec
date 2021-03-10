@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a49725cb_9a93b0b8",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-10T00:36:45Z",
+      "side": 1,
+      "message": "Really long name, but \"UseTemporaryBufferInSmallFormatTextureToTextureCopyFromGreaterToLesserMipLevel\" ?",
+      "parentUuid": "968eac85_44147b5d",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6329d5d7_b24dc1d3",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 1
@@ -188,6 +206,30 @@
       "side": 1,
       "message": "Sorry it\u0027s my fault not to dig more into this issue.\n\nI just tried to read the CL to fix this issue in the driver and according to the commit message it fixes the T2T copies from lower mip levels.",
       "parentUuid": "7a7b34a7_f779967f",
+      "range": {
+        "startLine": 193,
+        "startChar": 13,
+        "endLine": 193,
+        "endChar": 43
+      },
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "089db424_aea2467e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-10T00:36:45Z",
+      "side": 1,
+      "message": "Thank you for checking!",
+      "parentUuid": "4da16fef_6c7213c3",
       "range": {
         "startLine": 193,
         "startChar": 13,
