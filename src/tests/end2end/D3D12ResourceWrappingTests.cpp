@@ -122,6 +122,7 @@ namespace {
 
             dawn_native::d3d12::ExternalImageAccessDescriptorDXGIKeyedMutex externalAccessDesc;
             externalAccessDesc.acquireMutexKey = 0;
+            externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(dawnDesc->usage);
 
             *dawnTexture = wgpu::Texture::Acquire(
                 externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
@@ -361,6 +362,7 @@ class D3D12SharedHandleUsageTests : public D3D12ResourceTestBase {
         dawn_native::d3d12::ExternalImageAccessDescriptorDXGIKeyedMutex externalAccessDesc;
         externalAccessDesc.acquireMutexKey = 1;
         externalAccessDesc.isInitialized = isInitialized;
+        externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(dawnDescriptor->usage);
 
         *dawnTextureOut = wgpu::Texture::Acquire(
             externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
@@ -573,6 +575,7 @@ TEST_P(D3D12SharedHandleUsageTests, ReuseExternalImage) {
     dawn_native::d3d12::ExternalImageAccessDescriptorDXGIKeyedMutex externalAccessDesc;
     externalAccessDesc.acquireMutexKey = 1;
     externalAccessDesc.isInitialized = true;
+    externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage);
 
     texture =
         wgpu::Texture::Acquire(externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
