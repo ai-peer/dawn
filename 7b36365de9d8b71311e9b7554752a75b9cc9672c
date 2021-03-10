@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ec8731e_4d78588b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-10T16:27:19Z",
+      "side": 1,
+      "message": "Requires https://dawn-review.googlesource.com/c/tint/+/43640 to land first, but still good for review.",
+      "revId": "7b36365de9d8b71311e9b7554752a75b9cc9672c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
