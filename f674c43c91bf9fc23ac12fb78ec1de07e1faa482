@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ef73f6_72521a48",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-10T16:58:09Z",
+      "side": 1,
+      "message": "Good spot. I haven\u0027t really tackled default array strides yet, and I think need to tackle this as a follow-up.",
+      "parentUuid": "d59dd9a1_9aa0625d",
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f7111d3_855006c5",
@@ -159,6 +177,24 @@
       "writtenOn": "2021-03-10T16:56:29Z",
       "side": 1,
       "message": "This file could keep the strides though.",
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50071f8f_0455e76d",
+        "filename": "src/tests/end2end/OpArrayLengthTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-10T16:58:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9d1ec715_5fd5efdf",
       "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
