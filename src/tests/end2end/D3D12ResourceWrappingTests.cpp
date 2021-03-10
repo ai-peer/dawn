@@ -123,8 +123,9 @@ namespace {
             dawn_native::d3d12::ExternalImageAccessDescriptorDXGIKeyedMutex externalAccessDesc;
             externalAccessDesc.acquireMutexKey = 0;
 
-            *dawnTexture = wgpu::Texture::Acquire(
-                externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
+            *dawnTexture = wgpu::Texture::Acquire(externalImage->ProduceTexture(
+                device.Get(), static_cast<WGPUTextureUsageFlags>(dawnDesc->usage),
+                &externalAccessDesc));
             *d3d11TextureOut = d3d11Texture.Detach();
 
             if (externalImageOut != nullptr) {
@@ -362,8 +363,9 @@ class D3D12SharedHandleUsageTests : public D3D12ResourceTestBase {
         externalAccessDesc.acquireMutexKey = 1;
         externalAccessDesc.isInitialized = isInitialized;
 
-        *dawnTextureOut = wgpu::Texture::Acquire(
-            externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
+        *dawnTextureOut = wgpu::Texture::Acquire(externalImage->ProduceTexture(
+            device.Get(), static_cast<WGPUTextureUsageFlags>(dawnDescriptor->usage),
+            &externalAccessDesc));
         *d3d11TextureOut = d3d11Texture.Detach();
         *dxgiKeyedMutexOut = dxgiKeyedMutex.Detach();
     }
@@ -574,8 +576,9 @@ TEST_P(D3D12SharedHandleUsageTests, ReuseExternalImage) {
     externalAccessDesc.acquireMutexKey = 1;
     externalAccessDesc.isInitialized = true;
 
-    texture =
-        wgpu::Texture::Acquire(externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
+    texture = wgpu::Texture::Acquire(externalImage->ProduceTexture(
+        device.Get(), static_cast<WGPUTextureUsageFlags>(baseDawnDescriptor.usage),
+        &externalAccessDesc));
 
     // Check again that the new texture is still red
     EXPECT_PIXEL_RGBA8_EQ(RGBA8(0xFF, 0, 0, 0xFF), texture.Get(), 0, 0);

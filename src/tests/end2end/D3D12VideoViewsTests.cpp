@@ -214,8 +214,9 @@ namespace {
             externalAccessDesc.acquireMutexKey = 1;
             externalAccessDesc.isInitialized = true;
 
-            *dawnTextureOut = wgpu::Texture::Acquire(
-                externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
+            *dawnTextureOut = wgpu::Texture::Acquire(externalImage->ProduceTexture(
+                device.Get(), static_cast<WGPUTextureUsageFlags>(textureDesc.usage),
+                &externalAccessDesc));
         }
 
         // Vertex shader used to render a sampled texture into a quad.

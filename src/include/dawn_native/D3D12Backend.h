@@ -70,6 +70,7 @@ namespace dawn_native { namespace d3d12 {
             const ExternalImageDescriptorDXGISharedHandle* descriptor);
 
         WGPUTexture ProduceTexture(WGPUDevice device,
+                                   WGPUTextureUsageFlags usage,
                                    const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor);
 
       private:
