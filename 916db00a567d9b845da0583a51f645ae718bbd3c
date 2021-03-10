@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b5d3b30_4be98a37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-10T00:04:59Z",
+      "side": 1,
+      "message": "With the added tests passed and the similiar cts passed with backend validation enabled on metal and d3d12. It seems it\u0027s handled correctly when size of index buffer is 0? (I didn\u0027t verify by reading through vertex pulling code though)",
+      "revId": "916db00a567d9b845da0583a51f645ae718bbd3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
