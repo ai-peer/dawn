@@ -339,6 +339,9 @@ namespace dawn_native {
             opt.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
 
             std::vector<uint32_t> result;
+            FILE* f = fopen("/home/ben/src/dawn/opt-fail.spv", "wb");
+            fwrite(spirv.data(), spirv.size() * 4, 1, f);
+            fclose(f);
             if (!opt.Run(spirv.data(), spirv.size(), &result, spvtools::ValidatorOptions(),
                          false)) {
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
