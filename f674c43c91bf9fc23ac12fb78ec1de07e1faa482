@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d5e847d_1ff1cf72",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-03-10T20:14:56Z",
+      "side": 1,
+      "message": "Just pushed another patchset that removes most of the [[stride(n)]] decorations (with exception of OpArrayLengthTests).\nhttps://dawn-review.googlesource.com/c/tint/+/43640 has been updated to handle strides correctly.",
+      "parentUuid": "8f12d57e_6c976b2e",
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f7111d3_855006c5",
