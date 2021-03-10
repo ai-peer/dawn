@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f12d57e_6c976b2e",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-10T17:00:32Z",
+      "side": 1,
+      "message": "Filed: crbug.com/tint/629",
+      "parentUuid": "35ef73f6_72521a48",
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f7111d3_855006c5",
