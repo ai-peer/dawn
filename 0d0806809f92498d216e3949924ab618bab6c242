@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d33c47fd_b2bb2577",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-10T19:53:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d579a72b_93f52857",
+      "range": {
+        "startLine": 72,
+        "startChar": 7,
+        "endLine": 75,
+        "endChar": 0
+      },
+      "revId": "0d0806809f92498d216e3949924ab618bab6c242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9c014dd_2b7d36fe",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-03-10T19:18:56Z",
       "side": 1,
       "message": "descriptor-\u003eusage ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 66,
+        "endLine": 77,
+        "endChar": 72
+      },
+      "revId": "0d0806809f92498d216e3949924ab618bab6c242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "899df0a5_0c41be25",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-10T19:53:15Z",
+      "side": 1,
+      "message": "Good catch, typo.",
+      "parentUuid": "d9c014dd_2b7d36fe",
       "range": {
         "startLine": 77,
         "startChar": 66,
