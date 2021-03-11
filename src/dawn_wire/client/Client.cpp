@@ -28,7 +28,7 @@ namespace dawn_wire { namespace client {
                 return &gNoopCommandSerializer;
             }
 
-            ~NoopCommandSerializer() = default;
+            ~NoopCommandSerializer() override = default;
 
             size_t GetMaximumAllocationSize() const final {
                 return 0;

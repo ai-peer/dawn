@@ -111,6 +111,7 @@ config("dawn_internal") {
       "-Wpessimizing-move",
       "-Wrange-loop-analysis",
       "-Wshadow-field",
+      "-Wsuggest-destructor-override",
       "-Wstrict-prototypes",
       "-Wtautological-unsigned-zero-compare",
     ]

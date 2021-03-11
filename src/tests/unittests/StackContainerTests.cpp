@@ -21,7 +21,7 @@ namespace {
         }
 
       private:
-        ~Dummy() {
+        ~Dummy() override {
             --*mAlive;
         }
 

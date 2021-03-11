@@ -42,7 +42,7 @@ namespace dawn_native {
         const CommandBufferResourceUsage& GetResourceUsages() const;
 
       protected:
-        ~CommandBufferBase();
+        ~CommandBufferBase() override;
 
         CommandIterator mCommands;
 
