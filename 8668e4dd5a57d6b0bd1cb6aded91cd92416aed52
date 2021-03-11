@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "8668e4dd5a57d6b0bd1cb6aded91cd92416aed52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecaff4aa_41a8e450",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-11T16:31:37Z",
+      "side": 1,
+      "message": "LGTM. Is this related to our CQ breaking, or is it for -Wsuggest-destructor-override ?",
+      "revId": "8668e4dd5a57d6b0bd1cb6aded91cd92416aed52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
