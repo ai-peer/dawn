@@ -33,6 +33,91 @@
       "message": "still LGTM",
       "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c195318_6fbbd645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-11T18:51:42Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "903c93ea_5bf49744",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-11T18:51:42Z",
+      "side": 1,
+      "message": "Will CreateRenderPipelineAsync isn\u0027t used by anyone (except Chromium). We could make it a shim in Chromium, update Dawn\u0027s to take a Descriptor2 and re-enable in Chromium. This way we don\u0027t have a deprecation period there.",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3df6ee4b_e617c3dd",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-11T18:51:42Z",
+      "side": 1,
+      "message": "Did we check that all the defaults set here are the same as the ones in dawn.json (when there are present?)",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdeb6ffa_7cc07ab8",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-11T18:51:42Z",
+      "side": 1,
+      "message": "nit: It\u0027s kinda weird that for attributes we build outside the loop and set while for buffers we set inside the loop.",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f20c87f4_0c9018e1",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-11T18:51:42Z",
+      "side": 1,
+      "message": "There is up to one blend state per cTargets so it should be an std::array too.\n\nWe can figure out how to make this class nice to use in a follow-up.",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
