@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7d3f042_f53cbc77",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-11T19:28:46Z",
+      "side": 1,
+      "message": "That\u0027s definitely follow-up patch material, but I\u0027ve removed the TODO and commented warning for now.",
+      "parentUuid": "903c93ea_5bf49744",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3df6ee4b_e617c3dd",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-03-11T18:51:42Z",
       "side": 1,
       "message": "Did we check that all the defaults set here are the same as the ones in dawn.json (when there are present?)",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3278c655_f2f3fcd1",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-11T19:28:46Z",
+      "side": 1,
+      "message": "Yes, with one notable exception: the cDepthStencil.format defaults to undefined, but here we set it to Depth24PlusStencil8 as a convenience for the tests that use it. (This is identical to how the original ComboRenderPipelineDescriptor handled it.)",
+      "parentUuid": "3df6ee4b_e617c3dd",
       "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a00487_9ac5b10d",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-11T19:28:46Z",
+      "side": 1,
+      "message": "This was identical to how the existing ComboRenderPipelineDescriptor handled it, but I don\u0027t mind normalizing it, here and below.",
+      "parentUuid": "fdeb6ffa_7cc07ab8",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f20c87f4_0c9018e1",
@@ -116,6 +170,24 @@
       "writtenOn": "2021-03-11T18:51:42Z",
       "side": 1,
       "message": "There is up to one blend state per cTargets so it should be an std::array too.\n\nWe can figure out how to make this class nice to use in a follow-up.",
+      "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64fc5b85_c7047ab2",
+        "filename": "src/utils/ComboRenderPipelineDescriptor.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-11T19:28:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f20c87f4_0c9018e1",
       "revId": "381f1f7831de1f4177a4aba718ee545ec30719ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
