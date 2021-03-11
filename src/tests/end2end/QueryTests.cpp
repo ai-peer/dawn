@@ -347,65 +347,124 @@ TEST_P(TimestampQueryTests, TimestampOnCommandEncoder) {
 
     constexpr uint32_t kQueryCount = 2;
 
-    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
-    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+    // Write timestamp on different query index
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
 
-    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    encoder.WriteTimestamp(querySet, 0);
-    encoder.WriteTimestamp(querySet, 1);
-    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
-    wgpu::CommandBuffer commands = encoder.Finish();
-    queue.Submit(1, &commands);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(querySet, 0);
+        encoder.WriteTimestamp(querySet, 1);
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
 
-    EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+        EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
+
+    // Write timestamp on same query index
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(querySet, 0);
+        encoder.WriteTimestamp(querySet, 0);
+        encoder.WriteTimestamp(querySet, 1);
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
 }
 
 // Test calling timestamp query from render pass encoder
 TEST_P(TimestampQueryTests, TimestampOnRenderPass) {
     constexpr uint32_t kQueryCount = 2;
 
-    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
-    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+    // Write timestamp on different query index
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
 
-    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
-    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-    pass.WriteTimestamp(querySet, 0);
-    pass.WriteTimestamp(querySet, 1);
-    pass.EndPass();
-    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
-    wgpu::CommandBuffer commands = encoder.Finish();
-    queue.Submit(1, &commands);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
 
-    EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+        EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
+
+    // Write timestamp on same query index
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(querySet, 0);
+
+        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
 }
 
 // Test calling timestamp query from compute pass encoder
 TEST_P(TimestampQueryTests, TimestampOnComputePass) {
     constexpr uint32_t kQueryCount = 2;
 
-    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
-    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+    // Write timestamp on different query index
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
 
-    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
-    pass.WriteTimestamp(querySet, 0);
-    pass.WriteTimestamp(querySet, 1);
-    pass.EndPass();
-    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
-    wgpu::CommandBuffer commands = encoder.Finish();
-    queue.Submit(1, &commands);
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
 
-    EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+        EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
+
+    // Write timestamp on same query index
+    {
+        wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.WriteTimestamp(querySet, 0);
+
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.WriteTimestamp(querySet, 0);
+        pass.WriteTimestamp(querySet, 1);
+        pass.EndPass();
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
+    }
 }
 
 // Test resolving timestamp query from another different encoder
 TEST_P(TimestampQueryTests, ResolveFromAnotherEncoder) {
-    // TODO(hao.x.li@intel.com): Fix queries reset on Vulkan backend, it does not allow to resolve
-    // unissued queries. Currently we reset the whole query set at the beginning of command buffer
-    // creation.
-    DAWN_SKIP_TEST_IF(IsVulkan());
-
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
@@ -427,10 +486,6 @@ TEST_P(TimestampQueryTests, ResolveFromAnotherEncoder) {
 
 // Test resolving timestamp query correctly if the queries are written sparsely
 TEST_P(TimestampQueryTests, ResolveSparseQueries) {
-    // TODO(hao.x.li@intel.com): Fix queries reset and sparsely resolving on Vulkan backend,
-    // otherwise its validation layer reports unissued queries resolving error
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsBackendValidationEnabled());
-
     constexpr uint32_t kQueryCount = 4;
     constexpr uint64_t kZero = 0;
 
@@ -458,26 +513,22 @@ TEST_P(TimestampQueryTests, ResolveSparseQueries) {
 
 // Test resolving timestamp query to 0 if all queries are not written
 TEST_P(TimestampQueryTests, ResolveWithoutWritten) {
-    // TODO(hao.x.li@intel.com): Fix queries reset and sparsely resolving on Vulkan backend,
-    // otherwise its validation layer reports unissued queries resolving error
-    DAWN_SKIP_TEST_IF(IsVulkan() && IsBackendValidationEnabled());
-
-    constexpr uint32_t kQueryCount = 2;
+    constexpr uint32_t kQueryCount = 4;
 
     wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
-    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+    wgpu::Buffer destination = CreateResolveBuffer(3 * sizeof(uint64_t));
     // Set sentinel values to check 0 is correctly written if resolving query set with no
     // query is written
-    std::vector<uint64_t> sentinelValues(kQueryCount, kSentinelValue);
-    queue.WriteBuffer(destination, 0, sentinelValues.data(), kQueryCount * sizeof(uint64_t));
+    std::vector<uint64_t> sentinelValues(3, kSentinelValue);
+    queue.WriteBuffer(destination, 0, sentinelValues.data(), 3 * sizeof(uint64_t));
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+    encoder.ResolveQuerySet(querySet, 0, 3, destination, 0);
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint64_t> expectedZeros(kQueryCount);
-    EXPECT_BUFFER_U64_RANGE_EQ(expectedZeros.data(), destination, 0, kQueryCount);
+    std::vector<uint64_t> expectedZeros(3);
+    EXPECT_BUFFER_U64_RANGE_EQ(expectedZeros.data(), destination, 0, 3);
 }
 
 // Test resolving timestamp query to one slot in the buffer

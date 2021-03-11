@@ -27,8 +27,6 @@
 
 namespace dawn_native {
 
-    using QueryAvailabilityMap = std::map<QuerySetBase*, std::vector<bool>>;
-
     class CommandEncoder final : public ObjectBase {
       public:
         CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);

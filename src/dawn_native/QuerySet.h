@@ -36,7 +36,7 @@ namespace dawn_native {
         const std::vector<wgpu::PipelineStatisticName>& GetPipelineStatistics() const;
 
         const std::vector<bool>& GetQueryAvailability() const;
-        void SetQueryAvailability(uint32_t index, bool available);
+        void SetQueryAvailability(uint32_t index, bool available, uint32_t count = 1);
 
         MaybeError ValidateCanUseInSubmitNow() const;
 
