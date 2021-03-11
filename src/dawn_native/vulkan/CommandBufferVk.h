@@ -16,6 +16,7 @@
 #define DAWNNATIVE_VULKAN_COMMANDBUFFERVK_H_
 
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Error.h"
 
 #include "common/vulkan_platform.h"
@@ -47,6 +48,9 @@ namespace dawn_native { namespace vulkan {
                                                 const TextureCopy& srcCopy,
                                                 const TextureCopy& dstCopy,
                                                 const Extent3D& copySize);
+
+        // For query reset on whole command buffer
+        QueryAvailabilityMap mQueryAvailabilityMap;
     };
 
 }}  // namespace dawn_native::vulkan

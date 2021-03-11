@@ -141,8 +141,12 @@ namespace dawn_native {
         return mQueryAvailability;
     }
 
-    void QuerySetBase::SetQueryAvailability(uint32_t index, bool available) {
-        mQueryAvailability[index] = available;
+    void QuerySetBase::SetQueryAvailability(uint32_t index, bool available, uint32_t count) {
+        if (count == 1) {
+            mQueryAvailability[index] = available;
+        } else {
+            std::fill_n(mQueryAvailability.begin() + index, count, available);
+        }
     }
 
     MaybeError QuerySetBase::ValidateCanUseInSubmitNow() const {
