@@ -16,6 +16,23 @@
       "message": "It seems both Windows and Linux try bots are broken.\n\nPTAL, thanks!",
       "revId": "63a517814da423e2fa51c683d669adfffd96d811",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c196844c_af6daf95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-11T19:32:18Z",
+      "side": 1,
+      "message": "Bots should be fixed now.",
+      "revId": "63a517814da423e2fa51c683d669adfffd96d811",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
