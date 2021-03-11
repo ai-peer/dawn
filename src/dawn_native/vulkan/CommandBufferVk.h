@@ -16,6 +16,7 @@
 #define DAWNNATIVE_VULKAN_COMMANDBUFFERVK_H_
 
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Error.h"
 
 #include "common/vulkan_platform.h"
