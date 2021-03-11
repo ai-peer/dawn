@@ -42,7 +42,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
   'third_party/googletest': {
-    'url': '{chromium_git}/external/github.com/google/googletest@2828773179fa425ee406df61890a150577178ea2',
+    'url': '{chromium_git}/external/github.com/google/googletest@e8512bc38c4c0060858c3306b0660a3f126aee30',
     'condition': 'dawn_standalone',
   },
 
