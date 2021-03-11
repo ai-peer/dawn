@@ -202,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "95f4becb_ad987b44",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-11T07:09:01Z",
+      "side": 1,
+      "message": "I think the fix for this comment got overwritten later.",
+      "parentUuid": "032417b2_8c46ba3d",
+      "range": {
+        "startLine": 645,
+        "startChar": 12,
+        "endLine": 648,
+        "endChar": 39
+      },
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d1ec715_5fd5efdf",
         "filename": "src/tests/end2end/OpArrayLengthTests.cpp",
         "patchSetId": 2
