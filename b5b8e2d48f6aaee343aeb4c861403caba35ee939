@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d056691f_38fbfe0d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 805,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-11T20:31:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55374d20_670b472d",
+      "range": {
+        "startLine": 805,
+        "startChar": 47,
+        "endLine": 805,
+        "endChar": 56
+      },
+      "revId": "b5b8e2d48f6aaee343aeb4c861403caba35ee939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21097ff3_1e671912",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-03-11T19:36:02Z",
       "side": 1,
       "message": "nit: can we just do a bitwise operation between the two bitsets instead of a loop? I think ityp::bitset supports it.",
+      "revId": "b5b8e2d48f6aaee343aeb4c861403caba35ee939",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "884f5321_e122f26b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-11T20:31:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21097ff3_1e671912",
       "revId": "b5b8e2d48f6aaee343aeb4c861403caba35ee939",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
