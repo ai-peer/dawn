@@ -311,6 +311,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42e3412_776188cc",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-11T02:35:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "fd68eb28_9939ee20",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3b018d2_ff7829a3",
@@ -483,6 +501,24 @@
       "side": 1,
       "message": "Ah it\u0027s only the Windows Vulkan driver? Yeah seems fine.",
       "parentUuid": "17748a6d_d7573470",
+      "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e886f0f_62fd7534",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1620,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-11T02:35:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5e24c4f0_5457af00",
       "revId": "a9438f3b54b536de9c23b6b38b71eca3d7eb85ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

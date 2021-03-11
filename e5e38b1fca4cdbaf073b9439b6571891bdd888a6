@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1905294_3fc1e101",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-11T02:35:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "306ef6b6_4c76770d",
+      "range": {
+        "startLine": 183,
+        "startChar": 19,
+        "endLine": 183,
+        "endChar": 36
+      },
+      "revId": "e5e38b1fca4cdbaf073b9439b6571891bdd888a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d715342f_39e15748",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-03-10T11:20:42Z",
       "side": 1,
       "message": "u-nit: Maybe this could be:\n\n if (device-\u003eToggleEnabled()) {\n   bool copyToLesserLevel \u003d ...;\n   bool formatIsSmall \u003d ...;\n   if (copyToLesserLevel \u0026\u0026 formatIsSmall) {\n     return true;\n   }\n }\n\n return false;\n\nThis way in the future when we have more such cases we can extend the function easily (and it will go through all the toggles before returning false).",
+      "revId": "e5e38b1fca4cdbaf073b9439b6571891bdd888a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b4c0aa_bc38b0f2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-11T02:35:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d715342f_39e15748",
       "revId": "e5e38b1fca4cdbaf073b9439b6571891bdd888a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
