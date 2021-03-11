@@ -77,22 +77,6 @@ namespace dawn_native {
         return new RenderPassEncoder(device, commandEncoder, encodingContext, ObjectBase::kError);
     }
 
-    void RenderPassEncoder::TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex) {
-        DAWN_ASSERT(querySet != nullptr);
-
-        // Gets the iterator for that querySet or create a new vector of bool set to false
-        // if the querySet wasn't registered.
-        auto it = mQueryAvailabilityMap.emplace(querySet, querySet->GetQueryCount()).first;
-        it->second[queryIndex] = 1;
-
-        // Track it again on command encoder for zero-initializing when resolving unused queries.
-        mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
-    }
-
-    const QueryAvailabilityMap& RenderPassEncoder::GetQueryAvailabilityMap() const {
-        return mQueryAvailabilityMap;
-    }
-
     void RenderPassEncoder::EndPass() {
         if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 if (IsValidationEnabled()) {
@@ -253,7 +237,7 @@ namespace dawn_native {
                 }
 
                 DAWN_TRY(ValidateQueryIndexOverwrite(mOcclusionQuerySet.Get(), queryIndex,
-                                                     GetQueryAvailabilityMap()));
+                                                     mUsageTracker.GetQueryAvailabilityMap()));
 
                 mCommandEncoder->TrackUsedQuerySet(mOcclusionQuerySet.Get());
             }
@@ -281,7 +265,13 @@ namespace dawn_native {
                 }
             }
 
-            TrackQueryAvailability(mOcclusionQuerySet.Get(), mCurrentOcclusionQueryIndex);
+            mUsageTracker.TrackQueryAvailability(mOcclusionQuerySet.Get(),
+                                                 mCurrentOcclusionQueryIndex);
+            // Track it again on command encoder for zero-initializing and query resetting on
+            // Vulkan backend.
+            mCommandEncoder->TrackQueryAvailability(mOcclusionQuerySet.Get(),
+                                                    mCurrentOcclusionQueryIndex);
+
             mOcclusionQueryActive = false;
 
             EndOcclusionQueryCmd* cmd =
@@ -298,11 +288,14 @@ namespace dawn_native {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
                 DAWN_TRY(ValidateTimestampQuery(querySet, queryIndex));
-                DAWN_TRY(
-                    ValidateQueryIndexOverwrite(querySet, queryIndex, GetQueryAvailabilityMap()));
+                DAWN_TRY(ValidateQueryIndexOverwrite(querySet, queryIndex,
+                                                     mUsageTracker.GetQueryAvailabilityMap()));
             }
 
-            TrackQueryAvailability(querySet, queryIndex);
+            mUsageTracker.TrackQueryAvailability(querySet, queryIndex);
+            // Track it again on command encoder for zero-initializing and query resetting on
+            // Vulkan backend.
+            mCommandEncoder->TrackQueryAvailability(querySet, queryIndex);
 
             WriteTimestampCmd* cmd =
                 allocator->Allocate<WriteTimestampCmd>(Command::WriteTimestamp);

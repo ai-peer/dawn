@@ -369,13 +369,64 @@ namespace dawn_native { namespace vulkan {
             return {};
         }
 
+        // Reset the query sets used in command buffer or both inside and outside render pass with
+        // same query index.
         void ResetUsedQuerySets(Device* device,
                                 VkCommandBuffer commands,
-                                const std::set<QuerySetBase*>& usedQuerySets) {
-            // TODO(hao.x.li@intel.com): Reset the queries based on the used indexes.
-            for (QuerySetBase* querySet : usedQuerySets) {
-                device->fn.CmdResetQueryPool(commands, ToBackend(querySet)->GetHandle(), 0,
-                                             querySet->GetQueryCount());
+                                QuerySetBase* querySet,
+                                const std::vector<bool>& availability,
+                                bool isRenderPass = false) {
+            ASSERT(availability.size() == querySet->GetQueryAvailability().size());
+
+            auto currentIt = availability.begin();
+            auto lastIt = availability.end();
+            // Traverse the used queries which availability are true.
+            while (currentIt != lastIt) {
+                auto firstTrueIt = std::find(currentIt, lastIt, true);
+                // No used queries need to be reset
+                if (firstTrueIt == lastIt) {
+                    break;
+                }
+
+                auto nextFalseIt = std::find(firstTrueIt, lastIt, false);
+
+                uint32_t queryIndex = std::distance(availability.begin(), firstTrueIt);
+                uint32_t queryCount = std::distance(firstTrueIt, nextFalseIt);
+
+                // If the queries is used on render pass, we also need the availability on query set
+                // to check whether they need to be reset.
+                if (isRenderPass) {
+                    // Find the query sets used both inside and outside render pass with same
+                    // queryIndex between [queryIndex, queryIndex + queryCount].
+                    const std::vector<bool>& querySetAvailability =
+                        querySet->GetQueryAvailability();
+                    auto passCurrentIt = querySetAvailability.begin() + queryIndex;
+                    auto passLastIt = querySetAvailability.begin() + queryIndex + queryCount;
+
+                    auto passFirstTrueIt = std::find(passCurrentIt, passLastIt, true);
+
+                    if (passFirstTrueIt == passLastIt) {
+                        break;
+                    }
+
+                    auto passNextFalseIt = std::find(passFirstTrueIt, passLastIt, false);
+
+                    // Update the reset queryIndex and queryCount based on the availability on
+                    // render pass.
+                    queryIndex = std::distance(querySetAvailability.begin(), passFirstTrueIt);
+                    queryCount = std::distance(passFirstTrueIt, passNextFalseIt);
+                }
+
+                // Reset the queries between firstTrueIt and nextFalseIt (which is at most
+                // lastIt)
+                device->fn.CmdResetQueryPool(commands, ToBackend(querySet)->GetHandle(), queryIndex,
+                                             queryCount);
+
+                // Clear the query availability after resetting
+                querySet->SetQueryAvailability(queryIndex, false, queryCount);
+
+                // Set current interator to next starting point
+                currentIt = availability.begin() + queryIndex + queryCount;
             }
         }
 
@@ -385,8 +436,15 @@ namespace dawn_native { namespace vulkan {
             VkCommandBuffer commands = recordingContext->commandBuffer;
             QuerySet* querySet = ToBackend(cmd->querySet.Get());
 
+            // The query must be reset between uses.
+            if (querySet->GetQueryAvailability()[cmd->queryIndex] == true) {
+                device->fn.CmdResetQueryPool(commands, querySet->GetHandle(), cmd->queryIndex, 1);
+            }
+
             device->fn.CmdWriteTimestamp(commands, VK_PIPELINE_STAGE_ALL_COMMANDS_BIT,
                                          querySet->GetHandle(), cmd->queryIndex);
+
+            querySet->SetQueryAvailability(cmd->queryIndex, true);
         }
 
         void RecordResolveQuerySetCmd(VkCommandBuffer commands,
@@ -439,7 +497,8 @@ namespace dawn_native { namespace vulkan {
     }
 
     CommandBuffer::CommandBuffer(CommandEncoder* encoder, const CommandBufferDescriptor* descriptor)
-        : CommandBufferBase(encoder, descriptor) {
+        : CommandBufferBase(encoder, descriptor),
+          mQueryAvailabilityMap(encoder->GetQueryAvailabilityMap()) {
     }
 
     void CommandBuffer::RecordCopyImageWithTemporaryBuffer(
@@ -502,7 +561,8 @@ namespace dawn_native { namespace vulkan {
         Device* device = ToBackend(GetDevice());
         VkCommandBuffer commands = recordingContext->commandBuffer;
 
-        // Records the necessary barriers for the resource usage pre-computed by the frontend
+        // Records the necessary barriers for the resource usage pre-computed by the frontend.
+        // And resets the used query sets which are overwritten on render pass.
         auto PrepareResourcesForRenderPass = [](Device* device,
                                                 CommandRecordingContext* recordingContext,
                                                 const PassResourceUsage& usages) {
@@ -544,6 +604,11 @@ namespace dawn_native { namespace vulkan {
                                               bufferBarriers.data(), imageBarriers.size(),
                                               imageBarriers.data());
             }
+
+            for (size_t i = 0; i < usages.querySets.size(); ++i) {
+                ResetUsedQuerySets(device, recordingContext->commandBuffer, usages.querySets[i],
+                                   usages.queryAvailabilities[i], true);
+            }
         };
 
         // TODO(jiawei.shao@intel.com): move the resource lazy clearing inside the barrier tracking
@@ -566,8 +631,10 @@ namespace dawn_native { namespace vulkan {
         const std::vector<PassResourceUsage>& passResourceUsages = GetResourceUsages().perPass;
         size_t nextPassNumber = 0;
 
-        // QuerySet must be reset between uses.
-        ResetUsedQuerySets(device, commands, GetResourceUsages().usedQuerySets);
+        // Reset the used query sets in whole command buffer.
+        for (const auto& p : mQueryAvailabilityMap) {
+            ResetUsedQuerySets(device, commands, p.first, p.second, false);
+        }
 
         Command type;
         while (mCommands.NextCommandId(&type)) {
@@ -773,7 +840,8 @@ namespace dawn_native { namespace vulkan {
                     destination->EnsureDataInitializedAsDestination(
                         recordingContext, cmd->destinationOffset,
                         cmd->queryCount * sizeof(uint64_t));
-                    destination->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
+                    destination->TransitionUsageNow(recordingContext,
+                                                    wgpu::BufferUsage::QueryResolve);
 
                     RecordResolveQuerySetCmd(commands, device, querySet, cmd->firstQuery,
                                              cmd->queryCount, destination, cmd->destinationOffset);
@@ -1243,6 +1311,7 @@ namespace dawn_native { namespace vulkan {
 
                     device->fn.CmdEndQuery(commands, ToBackend(cmd->querySet.Get())->GetHandle(),
                                            cmd->queryIndex);
+                    cmd->querySet.Get()->SetQueryAvailability(cmd->queryIndex, true);
                     break;
                 }
 

@@ -22,12 +22,9 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/PassResourceUsage.h"
 
-#include <map>
 #include <string>
 
 namespace dawn_native {
-
-    using QueryAvailabilityMap = std::map<QuerySetBase*, std::vector<bool>>;
 
     class CommandEncoder final : public ObjectBase {
       public:
