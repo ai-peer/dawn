@@ -16,6 +16,23 @@
       "message": "Needed patch has rolled, so dry run should work.",
       "revId": "514326c42ebc718de909db383bfe0a7f86364e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "371ea840_5048ac18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-11T20:43:44Z",
+      "side": 1,
+      "message": "*-dawn-rel failures are due to new symbols being missing, so likely due to tint has rolled into dawn, but the dawn change with the updated DEP for tint has not yet rolled into Chrome :-(",
+      "revId": "514326c42ebc718de909db383bfe0a7f86364e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
