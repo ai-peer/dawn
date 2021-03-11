@@ -76,7 +76,7 @@ namespace dawn_native {
 
       private:
         InstanceBase() = default;
-        ~InstanceBase() = default;
+        ~InstanceBase() override = default;
 
         InstanceBase(const InstanceBase& other) = delete;
         InstanceBase& operator=(const InstanceBase& other) = delete;

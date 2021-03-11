@@ -33,7 +33,7 @@ namespace dawn_native { namespace d3d12 {
         DeletableFacet(Args&&... args) : Facet(std::forward<Args>(args)...) {
         }
 
-        ~DeletableFacet() {
+        ~DeletableFacet() override {
         }
     };
 
