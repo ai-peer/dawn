@@ -33,6 +33,23 @@
       "message": "*-dawn-rel failures are due to new symbols being missing, so likely due to tint has rolled into dawn, but the dawn change with the updated DEP for tint has not yet rolled into Chrome :-(",
       "revId": "514326c42ebc718de909db383bfe0a7f86364e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbe94091_49f74608",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-12T08:39:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "514326c42ebc718de909db383bfe0a7f86364e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
