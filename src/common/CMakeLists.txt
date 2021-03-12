@@ -55,6 +55,8 @@ target_sources(dawn_common PRIVATE
     "UnderlyingType.h"
     "VertexFormatUtils.cpp"
     "VertexFormatUtils.h"
+    "WindowsUtils.cpp"
+    "WindowsUtils.h"
     "ityp_array.h"
     "ityp_bitset.h"
     "ityp_span.h"
