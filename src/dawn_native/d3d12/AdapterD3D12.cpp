@@ -21,21 +21,22 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 
-#include <locale>
 #include <sstream>
 
 namespace dawn_native { namespace d3d12 {
 
-    // utility wrapper to adapt locale-bound facets for wstring/wbuffer convert
-    template <class Facet>
-    struct DeletableFacet : Facet {
-        template <class... Args>
-        DeletableFacet(Args&&... args) : Facet(std::forward<Args>(args)...) {
-        }
+    std::string WCharToUTF8(const wchar_t* input) {
+        // The -1 argument asks WideCharToMultiByte to use the null terminator to know the size of
+        // input. It will return a size that includes the null terminator.
+        int requiredSize = WideCharToMultiByte(CP_UTF8, 0, input, -1, nullptr, 0, nullptr, nullptr);
 
-        ~DeletableFacet() {
-        }
-    };
+        // When we can use C++17 this can be changed to use string.data() instead.
+        std::unique_ptr<char[]> result = std::make_unique<char[]>(requiredSize);
+        WideCharToMultiByte(CP_UTF8, 0, input, -1, result.get(), requiredSize, nullptr, nullptr);
+
+        // This will allocate the returned std::string and then destroy result.
+        return result.get();
+    }
 
     Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter)
         : AdapterBase(backend->GetInstance(), wgpu::BackendType::D3D12),
@@ -80,6 +81,7 @@ namespace dawn_native { namespace d3d12 {
 
         mPCIInfo.deviceId = adapterDesc.DeviceId;
         mPCIInfo.vendorId = adapterDesc.VendorId;
+        mPCIInfo.name = WCharToUTF8(adapterDesc.Description);
 
         DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
@@ -89,11 +91,6 @@ namespace dawn_native { namespace d3d12 {
             mAdapterType = (mDeviceInfo.isUMA) ? wgpu::AdapterType::IntegratedGPU
                                                : wgpu::AdapterType::DiscreteGPU;
         }
-
-        // Get the adapter's name as a UTF8 string.
-        std::wstring_convert<DeletableFacet<std::codecvt<wchar_t, char, std::mbstate_t>>> converter(
-            "Error converting");
-        mPCIInfo.name = converter.to_bytes(adapterDesc.Description);
 
         // Convert the adapter's D3D12 driver version to a readable string like "24.21.13.9793".
         LARGE_INTEGER umdVersion;
