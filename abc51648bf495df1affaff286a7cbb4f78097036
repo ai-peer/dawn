@@ -39,6 +39,30 @@
       },
       "revId": "abc51648bf495df1affaff286a7cbb4f78097036",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e161861_5c8992ff",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-12T17:19:46Z",
+      "side": 1,
+      "message": "Done, plus the tests.",
+      "parentUuid": "893ec687_6d624e87",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "abc51648bf495df1affaff286a7cbb4f78097036",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
