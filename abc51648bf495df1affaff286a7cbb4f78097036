@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "abc51648bf495df1affaff286a7cbb4f78097036",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893ec687_6d624e87",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-12T16:28:51Z",
+      "side": 1,
+      "message": "nit: I think you can save a strlen with:\n\n  std::string(result.get(), result.get()+requiredSize-1)\n\nBut as with anything around this, I\u0027d be _very_ careful as these sorts of functions are security nightmares.\n\nAre there tests for this function?",
+      "range": {
+        "startLine": 38,
+        "startChar": 15,
+        "endLine": 38,
+        "endChar": 27
+      },
+      "revId": "abc51648bf495df1affaff286a7cbb4f78097036",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
