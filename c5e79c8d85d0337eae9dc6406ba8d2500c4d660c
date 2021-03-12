@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58766c29_cf7bb1e9",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-12T02:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b53cd32_d06b82b7",
+      "range": {
+        "startLine": 73,
+        "startChar": 12,
+        "endLine": 73,
+        "endChar": 39
+      },
+      "revId": "c5e79c8d85d0337eae9dc6406ba8d2500c4d660c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d008e8bd_c1311076",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-03-11T07:33:51Z",
       "side": 1,
       "message": "nit: I think the \\n is added automatically by logs. I\u0027m not a huge fan of using logs for error reporting here but I don\u0027t really see a better way. Maybe we\u0027ll find a better mechanism in the future and revisit this one.",
+      "range": {
+        "startLine": 74,
+        "startChar": 78,
+        "endLine": 74,
+        "endChar": 80
+      },
+      "revId": "c5e79c8d85d0337eae9dc6406ba8d2500c4d660c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d73a1d26_5940ec52",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-03-12T02:25:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d008e8bd_c1311076",
       "range": {
         "startLine": 74,
         "startChar": 78,
