@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd30e7c8_f45145b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-03-12T04:24:41Z",
+      "side": 1,
+      "message": "This is causing a build failure in the Dawn-\u003eSkia roll:\n\nhttps://skia-review.googlesource.com/c/skia/+/383979\nhttps://logs.chromium.org/logs/skia/523d77d5a81fc511/+/steps/ninja/0/stdout\n\nI\u0027m not exactly sure why. Could be a C++ version issue or something..?\n\n../../../../../../skia/third_party/externals/dawn/src/common/GPUInfo.cpp:69:26: error: no matching function for call to \u0027begin\u0027\n        return std::find(std::begin(Skylake), std::end(Skylake), deviceId) !\u003d std::end(Skylake);\n\nPerhaps it\u0027s possible to find a fix quickly so we won\u0027t have to revert.",
+      "revId": "f905e57be2d9fb5df144c72bbe01386fb65c1d98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
