@@ -657,7 +657,8 @@ namespace dawn_native {
             ApplyDefaultTextureDataLayoutOptions(&srcLayout, blockInfo, *copySize);
 
             // Skip noop copies.
-            if (copySize->width != 0 && copySize->height != 0 && copySize->depth != 0) {
+            if (copySize->width != 0 && copySize->height != 0 &&
+                copySize->depthOrArrayLayers != 0) {
                 // Record the copy command.
                 CopyBufferToTextureCmd* copy =
                     allocator->Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
@@ -712,7 +713,8 @@ namespace dawn_native {
             ApplyDefaultTextureDataLayoutOptions(&dstLayout, blockInfo, *copySize);
 
             // Skip noop copies.
-            if (copySize->width != 0 && copySize->height != 0 && copySize->depth != 0) {
+            if (copySize->width != 0 && copySize->height != 0 &&
+                copySize->depthOrArrayLayers != 0) {
                 // Record the copy command.
                 CopyTextureToBufferCmd* copy =
                     allocator->Allocate<CopyTextureToBufferCmd>(Command::CopyTextureToBuffer);
@@ -756,7 +758,8 @@ namespace dawn_native {
             }
 
             // Skip noop copies.
-            if (copySize->width != 0 && copySize->height != 0 && copySize->depth != 0) {
+            if (copySize->width != 0 && copySize->height != 0 &&
+                copySize->depthOrArrayLayers != 0) {
                 CopyTextureToTextureCmd* copy =
                     allocator->Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
                 copy->source.texture = source->texture;
