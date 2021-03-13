@@ -235,7 +235,7 @@ TEST_P(DeviceLostTest, CreateTextureFails) {
     wgpu::TextureDescriptor descriptor;
     descriptor.size.width = 4;
     descriptor.size.height = 4;
-    descriptor.size.depth = 1;
+    descriptor.size.depthOrArrayLayers = 1;
     descriptor.mipLevelCount = 1;
     descriptor.dimension = wgpu::TextureDimension::e2D;
     descriptor.usage = wgpu::TextureUsage::RenderAttachment;
