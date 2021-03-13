@@ -29,7 +29,7 @@ class DepthStencilStateTest : public DawnTest {
         renderTargetDescriptor.dimension = wgpu::TextureDimension::e2D;
         renderTargetDescriptor.size.width = kRTSize;
         renderTargetDescriptor.size.height = kRTSize;
-        renderTargetDescriptor.size.depth = 1;
+        renderTargetDescriptor.size.depthOrArrayLayers = 1;
         renderTargetDescriptor.sampleCount = 1;
         renderTargetDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
         renderTargetDescriptor.mipLevelCount = 1;
@@ -43,7 +43,7 @@ class DepthStencilStateTest : public DawnTest {
         depthDescriptor.dimension = wgpu::TextureDimension::e2D;
         depthDescriptor.size.width = kRTSize;
         depthDescriptor.size.height = kRTSize;
-        depthDescriptor.size.depth = 1;
+        depthDescriptor.size.depthOrArrayLayers = 1;
         depthDescriptor.sampleCount = 1;
         depthDescriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
         depthDescriptor.mipLevelCount = 1;
@@ -69,7 +69,7 @@ class DepthStencilStateTest : public DawnTest {
                         vec2<f32>(-1.0,  1.0),
                         vec2<f32>( 1.0,  1.0),
                         vec2<f32>( 1.0, -1.0)); // back-facing
-                Position = vec4<f32>(pos[VertexIndex], ubo.depth, 1.0);
+                Position = vec4<f32>(pos[VertexIndex], ubo.depthOrArrayLayers, 1.0);
             })");
 
         fsModule = utils::CreateShaderModuleFromWGSL(device, R"(
@@ -282,7 +282,7 @@ class DepthStencilStateTest : public DawnTest {
             TriangleData data = {
                 {static_cast<float>(test.color.r) / 255.f, static_cast<float>(test.color.g) / 255.f,
                  static_cast<float>(test.color.b) / 255.f},
-                test.depth,
+                test.depthOrArrayLayers,
             };
             // Upload a buffer for each triangle's depth and color data
             wgpu::Buffer buffer = utils::CreateBufferFromData(device, &data, sizeof(TriangleData),
