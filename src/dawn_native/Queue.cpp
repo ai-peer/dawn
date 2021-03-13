@@ -115,9 +115,9 @@ namespace dawn_native {
             uint64_t imageAdditionalStride =
                 dataLayout.bytesPerRow * (dataRowsPerImage - alignedRowsPerImage);
 
-            CopyTextureData(dstPointer, srcPointer, writeSizePixel.depth, alignedRowsPerImage,
-                            imageAdditionalStride, alignedBytesPerRow, optimallyAlignedBytesPerRow,
-                            dataLayout.bytesPerRow);
+            CopyTextureData(dstPointer, srcPointer, writeSizePixel.depthOrArrayLayers,
+                            alignedRowsPerImage, imageAdditionalStride, alignedBytesPerRow,
+                            optimallyAlignedBytesPerRow, dataLayout.bytesPerRow);
 
             return uploadHandle;
         }
@@ -307,7 +307,7 @@ namespace dawn_native {
                                                const Extent3D* writeSize) {
         DAWN_TRY(ValidateWriteTexture(destination, dataSize, dataLayout, writeSize));
 
-        if (writeSize->width == 0 || writeSize->height == 0 || writeSize->depth == 0) {
+        if (writeSize->width == 0 || writeSize->height == 0 || writeSize->depthOrArrayLayers == 0) {
             return {};
         }
 
