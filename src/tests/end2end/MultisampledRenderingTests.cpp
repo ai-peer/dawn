@@ -41,26 +41,29 @@ class MultisampledRenderingTest : public DawnTest {
         uint32_t sampleMask = 0xFFFFFFFF,
         bool alphaToCoverageEnabled = false,
         bool flipTriangle = false) {
-        const char* kFsOneOutputWithDepth =
-            R"(#version 450
-            layout(location = 0) out vec4 fragColor;
-            layout (std140, set = 0, binding = 0) uniform uBuffer {
-                vec4 color;
-                float depth;
+        const char* kFsOneOutputWithDepth = R"(
+            [[block]] struct U {
+                color : vec4<f32>;
+                depth : f32;
             };
-            void main() {
-                fragColor = color;
-                gl_FragDepth = depth;
+            [[group(0), binding(0)]] var<uniform> uBuffer : U;
+            [[location(0)]] var<out> FragColor : vec4<f32>;
+            [[builtin(frag_depth)]] var<out> FragDepth : f32;
+
+            [[stage(fragment)]] fn main() -> void {
+                FragColor = uBuffer.color;
+                FragDepth = uBuffer.depth;
             })";
 
-        const char* kFsOneOutputWithoutDepth =
-            R"(#version 450
-            layout(location = 0) out vec4 fragColor;
-            layout (std140, set = 0, binding = 0) uniform uBuffer {
-                vec4 color;
+        const char* kFsOneOutputWithoutDepth = R"(
+            [[block]] struct U {
+                color : vec4<f32>;
             };
-            void main() {
-                fragColor = color;
+            [[group(0), binding(0)]] var<uniform> uBuffer : U;
+            [[location(0)]] var<out> FragColor : vec4<f32>;
+
+            [[stage(fragment)]] fn main() -> void {
+                FragColor = uBuffer.color;
             })";
 
         const char* fs = testDepth ? kFsOneOutputWithDepth : kFsOneOutputWithoutDepth;
@@ -72,17 +75,18 @@ class MultisampledRenderingTest : public DawnTest {
     wgpu::RenderPipeline CreateRenderPipelineWithTwoOutputsForTest(
         uint32_t sampleMask = 0xFFFFFFFF,
         bool alphaToCoverageEnabled = false) {
-        const char* kFsTwoOutputs =
-            R"(#version 450
-            layout(location = 0) out vec4 fragColor1;
-            layout(location = 1) out vec4 fragColor2;
-            layout (std140, set = 0, binding = 0) uniform uBuffer {
-                vec4 color1;
-                vec4 color2;
+        const char* kFsTwoOutputs = R"(
+            [[block]] struct U {
+                color0 : vec4<f32>;
+                color1 : vec4<f32>;
             };
-            void main() {
-                fragColor1 = color1;
-                fragColor2 = color2;
+            [[group(0), binding(0)]] var<uniform> uBuffer : U;
+            [[location(0)]] var<out> FragColor0 : vec4<f32>;
+            [[location(1)]] var<out> FragColor1 : vec4<f32>;
+
+            [[stage(fragment)]] fn main() -> void {
+                FragColor0 = uBuffer.color0;
+                FragColor1 = uBuffer.color1;
             })";
 
         return CreateRenderPipelineForTest(kFsTwoOutputs, 2, false, sampleMask,
@@ -206,31 +210,41 @@ class MultisampledRenderingTest : public DawnTest {
 
         // Draw a bottom-right triangle. In standard 4xMSAA pattern, for the pixels on diagonal,
         // only two of the samples will be touched.
-        const char* vs =
-            R"(#version 450
-            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(1.f, -1.f));
-            void main() {
-                gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);
+        const char* vs = R"(
+            [[builtin(position)]] var<out> Position : vec4<f32>;
+            [[builtin(vertex_index)]] var<in> VertexIndex : u32;
+
+            [[stage(vertex)]] fn main() -> void {
+                const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+                    vec2<f32>(-1.0,  1.0),
+                    vec2<f32>( 1.0,  1.0),
+                    vec2<f32>( 1.0, -1.0)
+                );
+                Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
             })";
 
         // Draw a bottom-left triangle.
-        const char* vsFlipped =
-            R"(#version 450
-            const vec2 pos[3] = vec2[3](vec2(-1.f, 1.f), vec2(1.f, 1.f), vec2(-1.f, -1.f));
-            void main() {
-                gl_Position = vec4(pos[gl_VertexIndex], 0.0, 1.0);
+        const char* vsFlipped = R"(
+            [[builtin(position)]] var<out> Position : vec4<f32>;
+            [[builtin(vertex_index)]] var<in> VertexIndex : u32;
+
+            [[stage(vertex)]] fn main() -> void {
+                const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+                    vec2<f32>(-1.0,  1.0),
+                    vec2<f32>( 1.0,  1.0),
+                    vec2<f32>(-1.0, -1.0)
+                );
+                Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
             })";
 
         if (flipTriangle) {
             pipelineDescriptor.vertexStage.module =
-                utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, vsFlipped);
+                utils::CreateShaderModuleFromWGSL(device, vsFlipped);
         } else {
-            pipelineDescriptor.vertexStage.module =
-                utils::CreateShaderModule(device, utils::SingleShaderStage::Vertex, vs);
+            pipelineDescriptor.vertexStage.module = utils::CreateShaderModuleFromWGSL(device, vs);
         }
 
-        pipelineDescriptor.cFragmentStage.module =
-            utils::CreateShaderModule(device, utils::SingleShaderStage::Fragment, fs);
+        pipelineDescriptor.cFragmentStage.module = utils::CreateShaderModuleFromWGSL(device, fs);
 
         if (hasDepthStencilAttachment) {
             pipelineDescriptor.cDepthStencilState.format = kDepthStencilFormat;
@@ -751,15 +765,17 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
     // Thus the final mask includes only the third sample.
     constexpr float kMSAACoverage = 0.25f;
     constexpr uint32_t kSampleMask = kFirstSampleMaskBit | kThirdSampleMaskBit;
-    const char* fs =
-        R"(#version 450
-        layout(location = 0) out vec4 fragColor;
-        layout (std140, set = 0, binding = 0) uniform uBuffer {
-            vec4 color;
+    const char* fs = R"(
+        [[block]] struct U {
+            color : vec4<f32>;
         };
-        void main() {
-            fragColor = color;
-            gl_SampleMask[0] = 6;
+        [[group(0), binding(0)]] var<uniform> uBuffer : U;
+        [[location(0)]] var<out> FragColor : vec4<f32>;
+        [[builtin(sample_mask_out)]] var<out> SampleMask : u32;
+
+        [[stage(fragment)]] fn main() -> void {
+            FragColor = uBuffer.color;
+            SampleMask = 6u;
         })";
 
     wgpu::RenderPipeline pipeline = CreateRenderPipelineForTest(fs, 1, false, kSampleMask);
@@ -801,18 +817,20 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithShaderOut
     // The second and third samples are included in the shader-output mask,
     // only the first one is covered by the triangle.
     constexpr float kMSAACoverage = 0.25f;
-    const char* fs =
-        R"(#version 450
-        layout(location = 0) out vec4 fragColor1;
-        layout(location = 1) out vec4 fragColor2;
-        layout (std140, set = 0, binding = 0) uniform uBuffer {
-            vec4 color1;
-            vec4 color2;
+    const char* fs = R"(
+        [[block]] struct U {
+            color0 : vec4<f32>;
+            color1 : vec4<f32>;
         };
-        void main() {
-            fragColor1 = color1;
-            fragColor2 = color2;
-            gl_SampleMask[0] = 6;
+        [[group(0), binding(0)]] var<uniform> uBuffer : U;
+        [[location(0)]] var<out> FragColor0 : vec4<f32>;
+        [[location(1)]] var<out> FragColor1 : vec4<f32>;
+        [[builtin(sample_mask_out)]] var<out> SampleMask : u32;
+
+        [[stage(fragment)]] fn main() -> void {
+            FragColor0 = uBuffer.color0;
+            FragColor1 = uBuffer.color1;
+            SampleMask = 6u;
         })";
 
     wgpu::RenderPipeline pipeline = CreateRenderPipelineForTest(fs, 2, false);
