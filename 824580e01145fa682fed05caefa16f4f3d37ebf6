@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9599530_445f9b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-15T23:53:18Z",
+      "side": 1,
+      "message": "Low priority patch review\nI think the failures are now for cts.\nThe API updated there is landed but not rolled (https://github.com/gpuweb/cts/commit/2072a5ae959f109a82960076b0c2965a2abbb16e). Compared to adding a bunch of temporary suppressions, I think we just need to wait for a roll",
+      "revId": "824580e01145fa682fed05caefa16f4f3d37ebf6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
