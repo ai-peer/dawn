@@ -184,9 +184,9 @@ class MinBufferSizeTestsBase : public ValidationTest {
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(
             device, utils::SingleShaderStage::Fragment, fragShader.c_str());
 
-        utils::ComboRenderPipelineDescriptor pipelineDescriptor(device);
-        pipelineDescriptor.vertexStage.module = vsModule;
-        pipelineDescriptor.cFragmentStage.module = fsModule;
+        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        pipelineDescriptor.vertex.module = vsModule;
+        pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.layout = nullptr;
         if (!layouts.empty()) {
             wgpu::PipelineLayoutDescriptor descriptor;
@@ -195,7 +195,7 @@ class MinBufferSizeTestsBase : public ValidationTest {
             pipelineDescriptor.layout = device.CreatePipelineLayout(&descriptor);
         }
 
-        return device.CreateRenderPipeline(&pipelineDescriptor);
+        return device.CreateRenderPipeline2(&pipelineDescriptor);
     }
 
     // Creates render pipeline with default layout
