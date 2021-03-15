@@ -109,6 +109,24 @@
       "message": "nit: Maybe // Swizzling of texture formats when sampling / rendering is handled by the hardware so we don\u0027t need special logic in this shader. This is covered by a test.",
       "revId": "529a818707b24e646797d7e0b88663ef2dc39cc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deb6ef1d_83883ab4",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-15T05:39:15Z",
+      "side": 1,
+      "message": "Actually, the refactor test cases with fixed value help me catch this dangerous issue. It turns out that it is not true that we don\u0027t need the swizzle. The previous cases constructor happens construct r channel has the same value as b, so the test case doesn\u0027t catch this.",
+      "parentUuid": "bf845265_fe170192",
+      "revId": "529a818707b24e646797d7e0b88663ef2dc39cc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
