@@ -16,6 +16,23 @@
       "message": "CL has been updated, PTAL!",
       "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d86f07ce_876f0e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-15T09:06:36Z",
+      "side": 1,
+      "message": "FYI: Also file an issue about using variable as index to access vector with Spirv-cross will hang on linux with mesa driver \u003c 19.1.0 here https://bugs.chromium.org/p/tint/issues/detail?id\u003d638\n",
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
