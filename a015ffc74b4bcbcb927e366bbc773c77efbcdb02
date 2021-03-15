@@ -33,6 +33,230 @@
       "message": "FYI: Also file an issue about using variable as index to access vector with Spirv-cross will hang on linux with mesa driver \u003c 19.1.0 here https://bugs.chromium.org/p/tint/issues/detail?id\u003d638\n",
       "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32875234_af53f997",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdc68c9c_66903127",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "why is this a float?",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a1aa1f_efde54fb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "I believe using std::string will result in a static initializer, which should be avoided and is disallowed in Chromium.\n\nIf you want to include this code snippet statically, I\u0027m not sure if I know of another way aside from using a #define for it. like:\n\n#define HEADER R\"(\n    hello\n)\"\n\nstatic constexpr char kFoo[] \u003d HEADER R\"(\n    world\n)\";",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cc36f1e_5d5858bb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "is it just a precision difference?",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 57
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f4d967f_04d00c0e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "here, and in related places, we may want to call this \"dstFormat\" to be clear.",
+      "range": {
+        "startLine": 142,
+        "startChar": 41,
+        "endLine": 142,
+        "endChar": 47
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cdfd2b8_4cf891f6",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "typo: width",
+      "range": {
+        "startLine": 40,
+        "startChar": 53,
+        "endLine": 40,
+        "endChar": 58
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a30afdd9_8147c16c",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "maybe name this isApproximatelyEqual or aboutEqual.",
+      "range": {
+        "startLine": 118,
+        "startChar": 15,
+        "endLine": 118,
+        "endChar": 22
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc0d7f0b_5add09e4",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "it may be more clear to say abs(max(value - expect)) \u003c 0.001 ?",
+      "range": {
+        "startLine": 120,
+        "startChar": 22,
+        "endLine": 120,
+        "endChar": 71
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf44d1ab_ae023012",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "this comment seems to imply that some checks are strict equality, but all of them are using the isEqual helper",
+      "range": {
+        "startLine": 144,
+        "startChar": 25,
+        "endLine": 144,
+        "endChar": 85
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b662ed41_7ba92f62",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-15T21:39:35Z",
+      "side": 1,
+      "message": "stray comment?",
+      "range": {
+        "startLine": 162,
+        "startChar": 20,
+        "endLine": 162,
+        "endChar": 22
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
