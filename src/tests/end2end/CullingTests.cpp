@@ -39,7 +39,6 @@ class CullingTest : public DawnTest {
 
             [[stage(vertex)]] fn main() -> void {
                 Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
-                return;
             })");
 
         // FragCoord of pixel(x, y) in framebuffer coordinate is (x + 0.5, y + 0.5). And we use
@@ -53,7 +52,6 @@ class CullingTest : public DawnTest {
                 fragColor = vec4<f32>(
                     (FragCoord.xy - vec2<f32>(0.5, 0.5)) / vec2<f32>(255.0, 255.0),
                     0.0, 1.0);
-                return;
             })");
 
         // Set culling mode and front face according to the parameters
