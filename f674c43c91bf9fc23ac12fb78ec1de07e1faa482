@@ -224,6 +224,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3729ffb0_e38ac6a5",
+        "filename": "src/tests/end2end/GpuMemorySynchronizationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-15T12:43:25Z",
+      "side": 1,
+      "message": "Good catch. The dangers of editing CLs in gerrit, then pushing again. Gets me every time, and I really need to stop trying to use it.\n\nFixed.",
+      "parentUuid": "95f4becb_ad987b44",
+      "range": {
+        "startLine": 645,
+        "startChar": 12,
+        "endLine": 648,
+        "endChar": 39
+      },
+      "revId": "f674c43c91bf9fc23ac12fb78ec1de07e1faa482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d1ec715_5fd5efdf",
