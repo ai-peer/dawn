@@ -33,6 +33,29 @@
       "message": "LGTM",
       "revId": "77c351a9ef2718363c160033fff8b0ab1e899690",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24014fb_6673cd1b",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-16T09:13:57Z",
+      "side": 1,
+      "message": "This was 0.0. Is this intended? Does it matter?",
+      "range": {
+        "startLine": 182,
+        "startChar": 42,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "77c351a9ef2718363c160033fff8b0ab1e899690",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
