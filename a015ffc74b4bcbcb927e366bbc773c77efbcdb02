@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25d7ff3d_49ec32ff",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "(Yes, it is a bit weired)\nBecause in the uploading part, I want to upload all of the uniform data in one |writeBuffer| call and the uniformData is float array. Is there any better way to handle this?",
+      "parentUuid": "bdc68c9c_66903127",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70a1aa1f_efde54fb",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 14
@@ -88,6 +112,30 @@
       "writtenOn": "2021-03-15T21:39:35Z",
       "side": 1,
       "message": "I believe using std::string will result in a static initializer, which should be avoided and is disallowed in Chromium.\n\nIf you want to include this code snippet statically, I\u0027m not sure if I know of another way aside from using a #define for it. like:\n\n#define HEADER R\"(\n    hello\n)\"\n\nstatic constexpr char kFoo[] \u003d HEADER R\"(\n    world\n)\";",
+      "range": {
+        "startLine": 44,
+        "startChar": 21,
+        "endLine": 44,
+        "endChar": 32
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c984231d_6bd9c69e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Thanks and address the comment by using macro.Done.",
+      "parentUuid": "70a1aa1f_efde54fb",
       "range": {
         "startLine": 44,
         "startChar": 21,
@@ -121,6 +169,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57782d4e_3339e8fa",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Yes, the difference is due to the precision. And the comments is out-dated, remove it.\nDone.",
+      "parentUuid": "8cc36f1e_5d5858bb",
+      "range": {
+        "startLine": 100,
+        "startChar": 11,
+        "endLine": 101,
+        "endChar": 57
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f4d967f_04d00c0e",
@@ -134,6 +206,30 @@
       "writtenOn": "2021-03-15T21:39:35Z",
       "side": 1,
       "message": "here, and in related places, we may want to call this \"dstFormat\" to be clear.",
+      "range": {
+        "startLine": 142,
+        "startChar": 41,
+        "endLine": 142,
+        "endChar": 47
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "114a0bbc_14ffdb27",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f4d967f_04d00c0e",
       "range": {
         "startLine": 142,
         "startChar": 41,
@@ -167,6 +263,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bec0161_52f3683e",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cdfd2b8_4cf891f6",
+      "range": {
+        "startLine": 40,
+        "startChar": 53,
+        "endLine": 40,
+        "endChar": 58
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a30afdd9_8147c16c",
@@ -180,6 +300,30 @@
       "writtenOn": "2021-03-15T21:39:35Z",
       "side": 1,
       "message": "maybe name this isApproximatelyEqual or aboutEqual.",
+      "range": {
+        "startLine": 118,
+        "startChar": 15,
+        "endLine": 118,
+        "endChar": 22
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cdd9c72_097eb642",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "choose aboutEqual, Done.",
+      "parentUuid": "a30afdd9_8147c16c",
       "range": {
         "startLine": 118,
         "startChar": 15,
@@ -213,6 +357,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdb1b42c_7cddc9ed",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc0d7f0b_5add09e4",
+      "range": {
+        "startLine": 120,
+        "startChar": 22,
+        "endLine": 120,
+        "endChar": 71
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf44d1ab_ae023012",
@@ -236,6 +404,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffdef33d_1e8ff77f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Sry, you\u0027re right. In previous, this else will conver RGBA8Unorm to RGBA8Unorm. But now, it covers converts like RGBA8Unorm to RGBA16Float, so the comment is outdated, remove it.",
+      "parentUuid": "cf44d1ab_ae023012",
+      "range": {
+        "startLine": 144,
+        "startChar": 25,
+        "endLine": 144,
+        "endChar": 85
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b662ed41_7ba92f62",
@@ -249,6 +441,30 @@
       "writtenOn": "2021-03-15T21:39:35Z",
       "side": 1,
       "message": "stray comment?",
+      "range": {
+        "startLine": 162,
+        "startChar": 20,
+        "endLine": 162,
+        "endChar": 22
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02bc884b_e5a9f00a",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-16T06:00:48Z",
+      "side": 1,
+      "message": "Oops.Done.",
+      "parentUuid": "b662ed41_7ba92f62",
       "range": {
         "startLine": 162,
         "startChar": 20,
