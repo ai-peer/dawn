@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94c905c0_6a95b80c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T07:30:16Z",
+      "side": 1,
+      "message": "The update looks good overall. Because there are several clients of Dawn (see spreadsheet I linked last week) we can\u0027t just make .depth a noop as it will break them. Instead what we\u0027ve been doing is every time a deprecated thing is used we emit a deprecation warning, and if both deprecated and new are used emit a validation error. Then in DeprecatedAPITests we add tests covering 1) the deprecation warning 2) the validation error 3) check that the deprecated member is still used (for example by using it to cause a validation error).\n\nSee for example https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/BindGroupLayout.cpp;l\u003d150 and https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/end2end/DeprecatedAPITests.cpp;l\u003d56?q\u003dDeprecatedAPITest\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "revId": "d7a0e966778db04b042748a06a3a36e74bee7664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a726e4b9_b1072897",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T07:30:16Z",
+      "side": 1,
+      "message": "nit: the deprecated attribute doesn\u0027t do anything.",
+      "revId": "d7a0e966778db04b042748a06a3a36e74bee7664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
