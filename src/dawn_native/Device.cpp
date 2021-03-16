@@ -799,9 +799,9 @@ namespace dawn_native {
 
         // TODO: Enable this warning once the tests have been converted to either use the new
         // format or expect the deprecation warning.
-        /*EmitDeprecationWarning(
+        EmitDeprecationWarning(
             "The format of RenderPipelineDescriptor has changed, and will soon require the "
-            "new structure. Please begin using CreateRenderPipeline2() instead.");*/
+            "new structure. Please begin using CreateRenderPipeline2() instead.");
 
         if (ConsumedError(CreateRenderPipelineInternal(&result, descriptor))) {
             return RenderPipelineBase::MakeError(this);
