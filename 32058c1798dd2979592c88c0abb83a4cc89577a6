@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "017901a6_90e1adfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "832870f3_ce9e3016",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "I still don\u0027t understand why this is needed. Isn\u0027t the sampling and rendering handle this automatically?",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8cca6b_41a455eb",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "Likewise I think this is incorrect: the sampler does it for us.",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "872373d8_09ca37e1",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "This could be a for-loop using the vector indexing operator. Or does it trigger a miscompilation?",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a8c36e3_cf24a89e",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "Why does this need to be * 2?",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c61469e_2bf1095e",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "Maybe we could test other combinations than RGBA8 -\u003e XFormat.",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

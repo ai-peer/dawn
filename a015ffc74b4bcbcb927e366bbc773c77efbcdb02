@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df3232c6_a8db654b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "nit: I think we don\u0027t need the offset anymore: https://dawn-review.googlesource.com/c/dawn/+/44280",
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bdc68c9c_66903127",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 14
@@ -89,6 +106,30 @@
       "side": 1,
       "message": "(Yes, it is a bit weired)\nBecause in the uploading part, I want to upload all of the uniform data in one |writeBuffer| call and the uniformData is float array. Is there any better way to handle this?",
       "parentUuid": "bdc68c9c_66903127",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "921c822a_1a0f8e7f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:36:00Z",
+      "side": 1,
+      "message": "Declare a structure and static_assert sizeof(struct) \u003d\u003d 20.\n\nstruct {\n   float scaleX;\n   float scaleY;\n   float offsetX;\n   float offsetY;\n   uint32_t isSwizzle;\n}",
+      "parentUuid": "25d7ff3d_49ec32ff",
       "range": {
         "startLine": 39,
         "startChar": 44,
