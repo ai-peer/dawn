@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "7bd1b9f7449f031ad290e3bc70e81465536ee5a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39fdda18_6c9acfcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-16T16:11:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7bd1b9f7449f031ad290e3bc70e81465536ee5a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c40c6c2_ad65005b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-16T16:11:49Z",
+      "side": 1,
+      "message": "we can just say ComputeRequiredBytesInCopy(..).AcquireSuccess();\n\nAcquireSuccess has the ASSERT inside.",
+      "revId": "7bd1b9f7449f031ad290e3bc70e81465536ee5a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
