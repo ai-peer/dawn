@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4234726_6fadd60f",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-16T08:07:13Z",
+      "side": 0,
+      "message": "This should be copySize.depth instead.",
+      "range": {
+        "startLine": 233,
+        "startChar": 53,
+        "endLine": 233,
+        "endChar": 66
+      },
+      "revId": "8c40cad1c92d7e85154bbae4cb92539e2200d139",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
