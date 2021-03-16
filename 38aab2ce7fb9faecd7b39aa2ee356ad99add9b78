@@ -16,6 +16,57 @@
       "message": "Part 1 of N converting tests to the new RenderPipelineDescriptor format so that we can turn on the deprecation warnings.",
       "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48349e46_e43c6066",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:46:44Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b405e5_218afa0e",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:46:44Z",
+      "side": 1,
+      "message": "We didn\u0027t add the deprecation warning in this CL. How come the EXPECT_DEPRECATION_WARNING doesn\u0027t cause an error because no warning was raised?",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ac151a_11899bec",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T14:46:44Z",
+      "side": 1,
+      "message": "I\u0027m surprised that this doesn\u0027t require the depth stencil format. Could we add a \"UseDepthStencil(wgpu::TextureFormat)\" as a helper on ComboRenderPipeline2?",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
