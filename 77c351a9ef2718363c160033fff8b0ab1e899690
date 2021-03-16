@@ -56,6 +56,30 @@
       },
       "revId": "77c351a9ef2718363c160033fff8b0ab1e899690",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e0d8b1_72f19e93",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T09:22:16Z",
+      "side": 1,
+      "message": "It wasn\u0027t intended but doesn\u0027t matter. Done",
+      "parentUuid": "d24014fb_6673cd1b",
+      "range": {
+        "startLine": 182,
+        "startChar": 42,
+        "endLine": 182,
+        "endChar": 45
+      },
+      "revId": "77c351a9ef2718363c160033fff8b0ab1e899690",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
