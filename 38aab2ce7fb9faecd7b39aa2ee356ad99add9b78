@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e791cd0_43ed7600",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-16T15:29:06Z",
+      "side": 1,
+      "message": "Huh... that\u0027s weird. I did have the warning added for a bit to root out failures but commented it back out again before uploading. I would have expected these to failm on me at that point too. I\u0027ll take them out, but we probably want to look into why that happened.",
+      "parentUuid": "40b405e5_218afa0e",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01ac151a_11899bec",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-03-16T14:46:44Z",
       "side": 1,
       "message": "I\u0027m surprised that this doesn\u0027t require the depth stencil format. Could we add a \"UseDepthStencil(wgpu::TextureFormat)\" as a helper on ComboRenderPipeline2?",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcf92af4_dccd3f8d",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-16T15:29:06Z",
+      "side": 1,
+      "message": "So in this case I copied the behavior of ComboRenderPipeline, which was that the cDpethStencil(State) was initialized with a depth format, but not set as the pipeline\u0027s depthStencil(State). This meant that tests could simple set the depthStencil to cDepthStencil and it would already be valid. This DOES feel a little too \"magic\" to me, but then again so does some of the other ComboRenderPipeline behavior.\n\nI\u0027m happy to update the helper class to do things differently, I had just been assuming that it would be best to do so in a different CL so that the changes wouldn\u0027t get lost amid all the test updates.",
+      "parentUuid": "01ac151a_11899bec",
       "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
