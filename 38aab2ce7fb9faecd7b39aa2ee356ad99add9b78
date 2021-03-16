@@ -103,6 +103,24 @@
       "parentUuid": "01ac151a_11899bec",
       "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa342de5_0c853ac0",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-16T16:47:55Z",
+      "side": 1,
+      "message": "Since we are going to go through all the tests it\u0027s an opportunity to see if small improvements like this can be done. It\u0027s a bit too magic indeed that the format is already set so that would be one such improvement.",
+      "parentUuid": "fcf92af4_dccd3f8d",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
