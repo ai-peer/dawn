@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "940bc94e29b85f5fbe9c016b525abd26f2cbbb78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7afd5e5_35776360",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-16T09:17:20Z",
+      "side": 1,
+      "message": "d",
+      "range": {
+        "startLine": 77,
+        "startChar": 25,
+        "endLine": 77,
+        "endChar": 26
+      },
+      "revId": "940bc94e29b85f5fbe9c016b525abd26f2cbbb78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
