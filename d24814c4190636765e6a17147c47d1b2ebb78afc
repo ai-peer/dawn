@@ -51,6 +51,23 @@
       "message": "LGTM",
       "revId": "d24814c4190636765e6a17147c47d1b2ebb78afc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4f10c11_b02aedf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-17T16:26:07Z",
+      "side": 1,
+      "message": "LGTM too; sorry for being slow to review your previous patch",
+      "revId": "d24814c4190636765e6a17147c47d1b2ebb78afc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
