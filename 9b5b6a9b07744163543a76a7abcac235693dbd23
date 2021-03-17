@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "789fc76e_6de3f31d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T12:38:04Z",
+      "side": 1,
+      "message": "nit: Bug:",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9e3249c_cf8b0187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T12:38:04Z",
+      "side": 1,
+      "message": "Nice, thanks for all the updates! Let us know if there are parts that you\u0027d like to shard to other people. For example I can look at the samples or CreatePipelineAsync.",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65679490_ad8b4d04",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T12:38:04Z",
+      "side": 1,
+      "message": "Could we do this in a follow-up and add a Deprecation test there?",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de35a3b_21f7d322",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T12:38:04Z",
+      "side": 1,
+      "message": "nit: blendComponent0 / blend0",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8438bcc_313d020e",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T12:38:04Z",
+      "side": 1,
+      "message": "This is where keeping cDepthStencil public could have helped.",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
