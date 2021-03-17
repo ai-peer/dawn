@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56c3090a_1f4c41cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8788c859_559866fa",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a70c6485_04f4d09e",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b6e9e2_2ebda1a2",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "Wut? Reading in the shader should be enough because the TextureFormat tests check that the correspondence between Buffer and Texture is correct for BGRA8Unorm.",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4153afd_fc8b7963",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "nit: unneeded * 2",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59593f7b_3081d084",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "nit: comments before the test.",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2222eb04_d684d087",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T10:44:45Z",
+      "side": 1,
+      "message": "nit: this could be a statically defined array, then the VerifyColorConversion test could be split into FromRGBA8 and FromBGRA8 so only the second one is suppressed on GLES.",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
