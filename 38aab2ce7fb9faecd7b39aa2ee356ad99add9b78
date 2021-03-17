@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1081c6b_fbd345bd",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-17T07:45:31Z",
+      "side": 1,
+      "message": "When I looked yesterday.I checked DawnTest and not ValidationTest. It seems the logic in ValidationTest is incorrect so I\u0027ll fix it.",
+      "parentUuid": "0e791cd0_43ed7600",
+      "revId": "38aab2ce7fb9faecd7b39aa2ee356ad99add9b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01ac151a_11899bec",
