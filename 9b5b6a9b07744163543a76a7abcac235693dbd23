@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1b3c15e6_137b5f49",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-17T18:52:36Z",
+      "side": 1,
+      "message": "Yeah, actually I was wondering about that. Did we update how Dawn works with git cl? It doesn\u0027t prompt me for commit messages/updates any more, which is where I typically added the bug.",
+      "parentUuid": "789fc76e_6de3f31d",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c9e3249c_cf8b0187",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-17T12:38:04Z",
       "side": 1,
       "message": "Nice, thanks for all the updates! Let us know if there are parts that you\u0027d like to shard to other people. For example I can look at the samples or CreatePipelineAsync.",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916621b1_d57a08e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-17T18:52:36Z",
+      "side": 1,
+      "message": "If you want to take a look at CreatePipelineAsync that would be helpful. I hit some snags on that one that I think are just a result of me still not fully understanding the generators.",
+      "parentUuid": "c9e3249c_cf8b0187",
       "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc051947_378ffc29",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-17T18:52:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65679490_ad8b4d04",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4de35a3b_21f7d322",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09be6b11_2b90ab22",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-17T18:52:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4de35a3b_21f7d322",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8438bcc_313d020e",
@@ -82,6 +154,24 @@
       "writtenOn": "2021-03-17T12:38:04Z",
       "side": 1,
       "message": "This is where keeping cDepthStencil public could have helped.",
+      "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce5a31b8_d7fe0af2",
+        "filename": "src/tests/end2end/DepthStencilCopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-17T18:52:36Z",
+      "side": 1,
+      "message": "I\u0027m fine making it public again.",
+      "parentUuid": "a8438bcc_313d020e",
       "revId": "9b5b6a9b07744163543a76a7abcac235693dbd23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
