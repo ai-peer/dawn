@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6330fe13_e2acf72f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-17T02:51:35Z",
+      "side": 1,
+      "message": "Turns out the aggregate initializer at https://source.chromium.org/chromium/chromium/src/+/master:third_party/blink/renderer/modules/webgpu/dawn_conversions.cc;l\u003d932;bpv\u003d1;bpt\u003d1?q\u003ddawn_conversion\u0026ss\u003dchromium\nwould initialize the newly added field as 0 (default is 1) so that makes it hard to tell which of depth or depthOrArrayLengths is assigned by user.\nI think I have to add a new field in dawn first, then extend the initializer on chrome side to size of 4 https://chromium-review.googlesource.com/c/chromium/src/+/2766283\nAnd then come back to land https://dawn-review.googlesource.com/c/dawn/+/44640",
+      "revId": "d24814c4190636765e6a17147c47d1b2ebb78afc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
