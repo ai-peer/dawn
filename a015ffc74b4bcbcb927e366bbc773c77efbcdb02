@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e54ad2a_fa11ecd9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df3232c6_a8db654b",
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bdc68c9c_66903127",
@@ -130,6 +148,30 @@
       "side": 1,
       "message": "Declare a structure and static_assert sizeof(struct) \u003d\u003d 20.\n\nstruct {\n   float scaleX;\n   float scaleY;\n   float offsetX;\n   float offsetY;\n   uint32_t isSwizzle;\n}",
       "parentUuid": "25d7ff3d_49ec32ff",
+      "range": {
+        "startLine": 39,
+        "startChar": 44,
+        "endLine": 39,
+        "endChar": 47
+      },
+      "revId": "a015ffc74b4bcbcb927e366bbc773c77efbcdb02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0168c2ae_a4d6d922",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "Done. No need to set isSwizzle, so use float array to update uniform.",
+      "parentUuid": "921c822a_1a0f8e7f",
       "range": {
         "startLine": 39,
         "startChar": 44,

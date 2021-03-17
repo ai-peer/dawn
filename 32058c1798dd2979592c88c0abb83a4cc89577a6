@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba28a7f0_71e6f42e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "You\u0027re right, after further investigation, we don\u0027t need this. So the test case which compare pixels in shader cannot cover swizzle cases. I modify the test cases to compare the pixel content.",
+      "parentUuid": "832870f3_ce9e3016",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac8cca6b_41a455eb",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 16
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-16T14:36:00Z",
       "side": 1,
       "message": "Likewise I think this is incorrect: the sampler does it for us.",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eae2232e_5433a5cd",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac8cca6b_41a455eb",
       "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ec1f5a5_e2bc736c",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "Yes, and add comment to point out that we don\u0027t use loop and indexing to workaround tint:638",
+      "parentUuid": "872373d8_09ca37e1",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a8c36e3_cf24a89e",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f5e3320_67626a71",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "No need... Done",
+      "parentUuid": "3a8c36e3_cf24a89e",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c61469e_2bf1095e",
@@ -99,6 +171,24 @@
       "writtenOn": "2021-03-16T14:36:00Z",
       "side": 1,
       "message": "Maybe we could test other combinations than RGBA8 -\u003e XFormat.",
+      "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dbed360_4a60b763",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-17T09:03:27Z",
+      "side": 1,
+      "message": "Add BGRA8Unorm as source input too. But for others, I\u0027d like to double check and add source texture data generation logic in future. And after adding BGRA8Unorm as source texture format, I had to skip OpenGLES backend to pass linux bots. Through the swiftshader opengles error message, it yield INFO: GL error: HIGH: Invalid combination of format, type and internalFormat.\n(Still trying to run this on linux machine, but it seems the self-build mesa 19.0.2 doesn\u0027t have opengles support. I\u0027ll investigate more to find the root cause).",
+      "parentUuid": "7c61469e_2bf1095e",
       "revId": "32058c1798dd2979592c88c0abb83a4cc89577a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
