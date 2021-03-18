@@ -33,6 +33,63 @@
       "message": "Failing *-rel builds are because there is an already landed API patch in Tint that hasn\u0027t rolled through that this patch depends on.",
       "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b942f92b_493a0843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T18:49:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f07ff929_d8fb77c9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T18:49:48Z",
+      "side": 1,
+      "message": "nit: here and in the others, I would have expected this to be inside the \"default\" case.\n\nbut also - does tint ever return an invalid enum? This could be an UNREACHABLE()",
+      "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11c6c07b_87c4b69a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T18:49:48Z",
+      "side": 1,
+      "message": "how does this happen? We assign to info-\u003ebindingType, and then we switch on it. I don\u0027t think we can hit this case unless TintResourceTypeToBindingInfoType is wrong, so it should be an ASSERT.\n\nBut also, it\u0027s kind of odd we\u0027re going from switch(resource_type) -\u003e bindingType -\u003e and then switching on resource_type.\n\nCouldn\u0027t we do the switch directly on resource_type first instead of the extra indirection?",
+      "range": {
+        "startLine": 1019,
+        "startChar": 30,
+        "endLine": 1022,
+        "endChar": 62
+      },
+      "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
