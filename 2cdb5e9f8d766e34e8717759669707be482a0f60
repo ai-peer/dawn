@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d67c0f_050745f9",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T08:45:53Z",
+      "side": 1,
+      "message": "Ah, I got your point. Thanks for more explain and agree it is redundant to TextureFormat and remove the extra swizzle test. Done.",
+      "parentUuid": "d3dcae84_61d341f3",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4153afd_fc8b7963",
