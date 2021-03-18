@@ -16,6 +16,166 @@
       "message": "PTAL! This is the first part of the internal conversion away from the deprecated structs, next is likely to be converting the validation to happen on the new RenderPipelineDescriptor and pass that down to the RenderPipelineBase.",
       "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad8d01d2_a5d67505",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a72bd581_43374ab8",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "nit: stray comment",
+      "range": {
+        "startLine": 632,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 78
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6324d6e9_ed5e99d2",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "nit: minor preference to keep this next to the other attachment-state related checks - right after checking ColorTargetState",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a4e2d1_7f7d9689",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "nit: mVertexBufferCount",
+      "range": {
+        "startLine": 98,
+        "startChar": 17,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c3b680a_73f42b73",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "consider instead:\n\nVertexStateDescriptor* vertexStatePtr \u003d descriptor-\u003evertexState;\nVertexStateDescriptor vertexState;\nif (vertexStatePtr \u003d\u003d nullptr) {\n  vertexState \u003d {};\n  vertexStatePtr \u003d \u0026vertexState;\n};\n\nAnd then using vertexStatePtr below.\n\nThat way we can avoid a copy.",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42987a8_5fef655f",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "usually we prefer explicit conversion to boolean: \"foo !\u003d nullptr\"",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 32
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae35cef1_351b9bd1",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "this is now slightly different than the original code because we now enable blending even if it would be functionally the same as no blending. Same for the other backends. I don\u0027t know if the driver will effectively do the same check we were doing here.",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c817b790_788aae77",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:08:02Z",
+      "side": 1,
+      "message": "do we need this if blending is disabled?",
+      "range": {
+        "startLine": 237,
+        "startChar": 16,
+        "endLine": 242,
+        "endChar": 58
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
