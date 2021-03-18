@@ -47,7 +47,8 @@ namespace dawn_native { namespace metal {
                                   const PipelineLayout* layout,
                                   MetalFunctionData* out,
                                   uint32_t sampleMask = 0xFFFFFFFF,
-                                  const RenderPipeline* renderPipeline = nullptr);
+                                  const RenderPipeline* renderPipeline = nullptr,
+                                  const VertexStateDescriptor* vertexState = nullptr);
 
       private:
         ResultOrError<std::string> TranslateToMSLWithTint(const char* entryPointName,
