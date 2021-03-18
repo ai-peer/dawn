@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08ef67e1_d506721f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T16:09:47Z",
+      "side": 1,
+      "message": "LGTM! And thanks for cleaning up the vertex formats and BindGroupLayouts while you were at it!",
+      "revId": "664665a7320128965a41ee395708971b88cdc610",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
