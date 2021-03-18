@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9639bc59_2d75a390",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T16:36:44Z",
+      "side": 1,
+      "message": "LGTM too after the compilation fix",
+      "revId": "3db26b07c85a9fa1922fd7d0268eb22474363494",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d35bc734_a6df7c1b",
