@@ -16,6 +16,23 @@
       "message": "LGTM! And thanks for cleaning up the vertex formats and BindGroupLayouts while you were at it!",
       "revId": "664665a7320128965a41ee395708971b88cdc610",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4227f00_3a32734b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T16:30:56Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "664665a7320128965a41ee395708971b88cdc610",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
