@@ -67,8 +67,12 @@
 #define EXPECT_PIXEL_RGBA8_EQ(expected, texture, x, y) \
     AddTextureExpectation(__FILE__, __LINE__, expected, texture, x, y)
 
-#define EXPECT_TEXTURE_RGBA8_EQ(expected, texture, x, y, width, height, level, slice) \
+#define EXPECT_2D_TEXTURE_RGBA8_EQ(expected, texture, x, y, width, height, level, slice) \
     AddTextureExpectation(__FILE__, __LINE__, expected, texture, x, y, width, height, level, slice)
+
+#define EXPECT_TEXTURE_RGBA8_EQ(expected, texture, x, y, z, width, height, depth, level, slice) \
+    AddTextureExpectation(__FILE__, __LINE__, expected, texture, x, y, z, width, height, depth, \
+                          level, slice)
 
 #define EXPECT_PIXEL_FLOAT_EQ(expected, texture, x, y) \
     AddTextureExpectation(__FILE__, __LINE__, expected, texture, x, y)
@@ -331,8 +335,28 @@ class DawnTestBase {
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
                                               uint32_t bytesPerRow = 0) {
         return AddTextureExpectationImpl(
-            file, line, new detail::ExpectEq<T>(expectedData, width * height), texture, x, y, width,
-            height, level, slice, aspect, sizeof(T), bytesPerRow);
+            file, line, new detail::ExpectEq<T>(expectedData, width * height), texture, x, y, 0,
+            width, height, 1, level, slice, aspect, sizeof(T), bytesPerRow);
+    }
+
+    template <typename T>
+    std::ostringstream& AddTextureExpectation(const char* file,
+                                              int line,
+                                              const T* expectedData,
+                                              const wgpu::Texture& texture,
+                                              uint32_t x,
+                                              uint32_t y,
+                                              uint32_t z,
+                                              uint32_t width,
+                                              uint32_t height,
+                                              uint32_t depth,
+                                              uint32_t level,
+                                              uint32_t slice,
+                                              wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
+                                              uint32_t bytesPerRow = 0) {
+        return AddTextureExpectationImpl(
+            file, line, new detail::ExpectEq<T>(expectedData, width * height * depth), texture, x,
+            y, z, width, height, depth, level, slice, aspect, sizeof(T), bytesPerRow);
     }
 
     template <typename T>
@@ -347,7 +371,8 @@ class DawnTestBase {
                                               wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
                                               uint32_t bytesPerRow = 0) {
         return AddTextureExpectationImpl(file, line, new detail::ExpectEq<T>(expectedData), texture,
-                                         x, y, 1, 1, level, slice, aspect, sizeof(T), bytesPerRow);
+                                         x, y, 0, 1, 1, 1, level, slice, aspect, sizeof(T),
+                                         bytesPerRow);
     }
 
     template <typename T>
@@ -364,8 +389,8 @@ class DawnTestBase {
         wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
         uint32_t bytesPerRow = 0) {
         return AddTextureExpectationImpl(
-            file, line, new detail::ExpectBetweenColors<T>(color0, color1), texture, x, y, 1, 1,
-            level, slice, aspect, sizeof(T), bytesPerRow);
+            file, line, new detail::ExpectBetweenColors<T>(color0, color1), texture, x, y, 0, 1, 1,
+            1, level, slice, aspect, sizeof(T), bytesPerRow);
     }
 
     void WaitABit();
@@ -398,10 +423,12 @@ class DawnTestBase {
                                                   const wgpu::Texture& texture,
                                                   uint32_t x,
                                                   uint32_t y,
+                                                  uint32_t z,
                                                   uint32_t width,
                                                   uint32_t height,
+                                                  uint32_t depth,
                                                   uint32_t level,
-                                                  uint32_t slice,
+                                                  uint32_t layer,
                                                   wgpu::TextureAspect aspect,
                                                   uint32_t dataSize,
                                                   uint32_t bytesPerRow);

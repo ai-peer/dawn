@@ -421,7 +421,9 @@ namespace dawn_native {
           mUsage(descriptor->usage),
           mState(state) {
         uint32_t subresourceCount =
-            mMipLevelCount * mSize.depthOrArrayLayers * GetAspectCount(mFormat.aspects);
+            descriptor->dimension == wgpu::TextureDimension::e2D
+                ? mMipLevelCount * mSize.depthOrArrayLayers * GetAspectCount(mFormat.aspects)
+                : mMipLevelCount * GetAspectCount(mFormat.aspects);
         mIsSubresourceContentInitializedAtIndex = std::vector<bool>(subresourceCount, false);
 
         // Add readonly storage usage if the texture has a storage usage. The validation rules in
