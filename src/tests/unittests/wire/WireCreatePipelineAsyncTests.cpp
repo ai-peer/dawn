@@ -161,10 +161,10 @@ TEST_F(WireCreatePipelineAsyncTest, CreateRenderPipelineAsyncSuccess) {
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.vertex.entryPoint = "main";
 
-    WGPUFragmentState fragment= {};
+    WGPUFragmentState fragment = {};
     fragment.module = vsModule;
     fragment.entryPoint = "main";
-    pipelineDescriptor.fragment= &fragment;
+    pipelineDescriptor.fragment = &fragment;
 
     wgpuDeviceCreateRenderPipelineAsync(device, &pipelineDescriptor,
                                         ToMockCreateRenderPipelineAsyncCallback, this);
@@ -194,10 +194,10 @@ TEST_F(WireCreatePipelineAsyncTest, CreateRenderPipelineAsyncError) {
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.vertex.entryPoint = "main";
 
-    WGPUFragmentState fragment= {};
+    WGPUFragmentState fragment = {};
     fragment.module = vsModule;
     fragment.entryPoint = "main";
-    pipelineDescriptor.fragment= &fragment;
+    pipelineDescriptor.fragment = &fragment;
 
     wgpuDeviceCreateRenderPipelineAsync(device, &pipelineDescriptor,
                                         ToMockCreateRenderPipelineAsyncCallback, this);
@@ -224,14 +224,14 @@ TEST_F(WireCreatePipelineAsyncTest, CreateRenderPipelineAsyncThenDisconnect) {
     WGPUShaderModule apiVsModule = api.GetNewShaderModule();
     EXPECT_CALL(api, DeviceCreateShaderModule(apiDevice, _)).WillOnce(Return(apiVsModule));
 
-    WGPUFragmentState fragment= {};
+    WGPUFragmentState fragment = {};
     fragment.module = vsModule;
     fragment.entryPoint = "main";
 
     WGPURenderPipelineDescriptor2 pipelineDescriptor{};
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.vertex.entryPoint = "main";
-    pipelineDescriptor.fragment= &fragment;
+    pipelineDescriptor.fragment = &fragment;
 
     wgpuDeviceCreateRenderPipelineAsync(device, &pipelineDescriptor,
                                         ToMockCreateRenderPipelineAsyncCallback, this);
@@ -285,14 +285,14 @@ TEST_F(WireCreatePipelineAsyncTest, CreateRenderPipelineAsyncAfterDisconnect) {
     WGPUShaderModule apiVsModule = api.GetNewShaderModule();
     EXPECT_CALL(api, DeviceCreateShaderModule(apiDevice, _)).WillOnce(Return(apiVsModule));
 
-    WGPUFragmentState fragment= {};
+    WGPUFragmentState fragment = {};
     fragment.module = vsModule;
     fragment.entryPoint = "main";
 
     WGPURenderPipelineDescriptor2 pipelineDescriptor{};
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.vertex.entryPoint = "main";
-    pipelineDescriptor.fragment= &fragment;
+    pipelineDescriptor.fragment = &fragment;
 
     FlushClient();
 
@@ -339,10 +339,10 @@ TEST_F(WireCreatePipelineAsyncTest, DeviceDeletedBeforeCallback) {
     pipelineDescriptor.vertex.module = module;
     pipelineDescriptor.vertex.entryPoint = "main";
 
-    WGPUFragmentState fragment= {};
+    WGPUFragmentState fragment = {};
     fragment.module = module;
     fragment.entryPoint = "main";
-    pipelineDescriptor.fragment= &fragment;
+    pipelineDescriptor.fragment = &fragment;
 
     wgpuDeviceCreateRenderPipelineAsync(device, &pipelineDescriptor,
                                         ToMockCreateRenderPipelineAsyncCallback, this);
