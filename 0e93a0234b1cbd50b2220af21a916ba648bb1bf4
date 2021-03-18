@@ -50,6 +50,24 @@
       "message": "while we have it failing, it may be worth looking at the diff in the generated SPIRV",
       "revId": "0e93a0234b1cbd50b2220af21a916ba648bb1bf4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d14ad2_798fd168",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-18T18:02:15Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "fe03cc3e_ee13088f",
+      "revId": "0e93a0234b1cbd50b2220af21a916ba648bb1bf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
