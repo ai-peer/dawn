@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd117139_00197003",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:15:13Z",
+      "side": 1,
+      "message": "Just want to be sure the code we have is necessary:\n\nfor the pipeline stage kNone, Tint has\nbool IsEntryPoint() const { return pipeline_stage() !\u003d PipelineStage::kNone; }\n\nso when iterating entrypoints, I\u0027m not sure this one can happen.\n\nusage of ComponentType::kUnknown looks ok though.",
+      "parentUuid": "c479918f_46685ccc",
+      "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "11c6c07b_87c4b69a",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 3
@@ -124,6 +142,30 @@
       "side": 1,
       "message": "Changed it to UNREACHABLE in the default.\n\nIn this CL, I am attempting to mirror the logic of the SPIRV-Cross code path as closely as possible, so that it can be easily verified that all of the information that is needed included. In future CLs, after the Cross path is deprecated we can refactor this.\n\nOne advantage of the current code is that for bindings of different types but at similar, like 3 types of buffer, common actions like extracting the min binding size don\u0027t have to be duplicated, though at the cost of nested switches as you mentioned..",
       "parentUuid": "11c6c07b_87c4b69a",
+      "range": {
+        "startLine": 1019,
+        "startChar": 30,
+        "endLine": 1022,
+        "endChar": 62
+      },
+      "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4967aaef_2a34fce9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T23:15:13Z",
+      "side": 1,
+      "message": "Ok, sounds fine.",
+      "parentUuid": "4d8f1a16_3c4fd7d0",
       "range": {
         "startLine": 1019,
         "startChar": 30,
