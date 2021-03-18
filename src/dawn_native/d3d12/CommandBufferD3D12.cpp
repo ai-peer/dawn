@@ -128,9 +128,10 @@ namespace dawn_native { namespace d3d12 {
                 texture->GetFormat().GetAspectInfo(textureCopy.aspect).block;
 
             // See comments around ComputeTextureCopySplits() for more details.
-            const TextureCopySplits copySplits =
-                ComputeTextureCopySplits(textureCopy.origin, copySize, blockInfo, bufferCopy.offset,
-                                         bufferCopy.bytesPerRow, bufferCopy.rowsPerImage);
+            bool is3DTexture = texture->GetDimension() == wgpu::TextureDimension::e3D;
+            const TextureCopySplits copySplits = ComputeTextureCopySplits(
+                textureCopy.origin, copySize, blockInfo, bufferCopy.offset, bufferCopy.bytesPerRow,
+                bufferCopy.rowsPerImage, is3DTexture);
 
             const uint64_t bytesPerSlice = bufferCopy.bytesPerRow * bufferCopy.rowsPerImage;
 
@@ -143,12 +144,13 @@ namespace dawn_native { namespace d3d12 {
             // that uses copySplits.copies2D[1].
             std::array<uint64_t, TextureCopySplits::kMaxTextureCopySplits>
                 bufferOffsetsForNextSlice = {{0u, 0u}};
-            for (uint32_t copySlice = 0; copySlice < copySize.depthOrArrayLayers; ++copySlice) {
-                const uint32_t splitIndex = copySlice % copySplits.copies2D.size();
+            uint32_t totalLayers = is3DTexture ? 1 : copySize.depth;
+            for (uint32_t layer = 0; layer < totalLayers; ++layer) {
+                const uint32_t splitIndex = layer % copySplits.copies2D.size();
 
                 const Texture2DCopySplit& copySplitPerLayerBase = copySplits.copies2D[splitIndex];
                 const uint64_t bufferOffsetForNextSlice = bufferOffsetsForNextSlice[splitIndex];
-                const uint32_t copyTextureLayer = copySlice + textureCopy.origin.z;
+                const uint32_t copyTextureLayer = layer + textureCopy.origin.z;
 
                 RecordCopyTextureToBufferFromTextureCopySplit(
                     commandList, copySplitPerLayerBase, buffer, bufferOffsetForNextSlice,
@@ -808,7 +810,7 @@ namespace dawn_native { namespace d3d12 {
 
                     DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
 
@@ -839,7 +841,7 @@ namespace dawn_native { namespace d3d12 {
 
                     DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(copy->source, copy->copySize);
 
