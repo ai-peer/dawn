@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef3dbd5_0221cf16",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T22:10:03Z",
+      "side": 1,
+      "message": "PTAL! This is the first part of the internal conversion away from the deprecated structs, next is likely to be converting the validation to happen on the new RenderPipelineDescriptor and pass that down to the RenderPipelineBase.",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
