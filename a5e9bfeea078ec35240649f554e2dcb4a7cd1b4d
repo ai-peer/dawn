@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87418f9a_7901f52c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-18T17:50:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "788be088_13af431d",
+      "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb2446ad_bf14269d",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-05T07:21:39Z",
       "side": 1,
       "message": "FYI you can #include \"common/Log.h\" and DAWN_DEBUG() \u003c\u003c stuff \u003c\u003c foo \u003c\u003c croissant;\n\nIt also gives you the file, line number and function so just spreading DAWN_LOG(); around is often enough.",
+      "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb8c0bd_206fa173",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1111,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-18T17:50:12Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bb2446ad_bf14269d",
       "revId": "a5e9bfeea078ec35240649f554e2dcb4a7cd1b4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
