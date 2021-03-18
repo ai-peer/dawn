@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "0e93a0234b1cbd50b2220af21a916ba648bb1bf4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "288cb258_cb82ca59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T17:34:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0e93a0234b1cbd50b2220af21a916ba648bb1bf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe03cc3e_ee13088f",
+        "filename": "src/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 749,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-18T17:34:23Z",
+      "side": 1,
+      "message": "while we have it failing, it may be worth looking at the diff in the generated SPIRV",
+      "revId": "0e93a0234b1cbd50b2220af21a916ba648bb1bf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
