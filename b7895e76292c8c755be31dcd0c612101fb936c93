@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cfb0ca8_a21ef825",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a72bd581_43374ab8",
+      "range": {
+        "startLine": 632,
+        "startChar": 0,
+        "endLine": 632,
+        "endChar": 78
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6324d6e9_ed5e99d2",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-03-18T23:08:02Z",
       "side": 1,
       "message": "nit: minor preference to keep this next to the other attachment-state related checks - right after checking ColorTargetState",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7204cc24_5e45f6ba",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 720,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6324d6e9_ed5e99d2",
       "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "856ff8db_c5dcaee2",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a4e2d1_7f7d9689",
+      "range": {
+        "startLine": 98,
+        "startChar": 17,
+        "endLine": 98,
+        "endChar": 29
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c3b680a_73f42b73",
@@ -115,6 +181,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "147f06b8_56e4ee69",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 350,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c3b680a_73f42b73",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f42987a8_5fef655f",
@@ -128,6 +212,30 @@
       "writtenOn": "2021-03-18T23:08:02Z",
       "side": 1,
       "message": "usually we prefer explicit conversion to boolean: \"foo !\u003d nullptr\"",
+      "range": {
+        "startLine": 247,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 32
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c161b9d_2b22814f",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f42987a8_5fef655f",
       "range": {
         "startLine": 247,
         "startChar": 8,
@@ -157,6 +265,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b268d32_5e60fd8b",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "The BlendEnabled() check has been moved back to the RenderPipelineBase constructor and will only set `state-\u003eblend` if it returns true. Should be equivalent behavior. (This has the opportunity to change with RenderPipelineDescriptor2, but we haven\u0027t gotten there yet.)",
+      "parentUuid": "ae35cef1_351b9bd1",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c817b790_788aae77",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 3
@@ -168,6 +294,30 @@
       "writtenOn": "2021-03-18T23:08:02Z",
       "side": 1,
       "message": "do we need this if blending is disabled?",
+      "range": {
+        "startLine": 237,
+        "startChar": 16,
+        "endLine": 242,
+        "endChar": 58
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "516e9976_48001de5",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-18T23:47:27Z",
+      "side": 1,
+      "message": "Strangely, yes? I didn\u0027t have this previously and it was causing failures for bots running Vulkan on Swiftshader.",
+      "parentUuid": "c817b790_788aae77",
       "range": {
         "startLine": 237,
         "startChar": 16,
