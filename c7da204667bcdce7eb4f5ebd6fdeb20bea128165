@@ -33,6 +33,24 @@
       "message": "LGTM but this means we lose sample_mask coverage entirely on Metal/D3D12 :-/",
       "revId": "c7da204667bcdce7eb4f5ebd6fdeb20bea128165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb9d087_be7184cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-18T17:34:45Z",
+      "side": 1,
+      "message": "Yeah for now, hopefully just for a couple months at most.",
+      "parentUuid": "86ac0ad7_1787411a",
+      "revId": "c7da204667bcdce7eb4f5ebd6fdeb20bea128165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
