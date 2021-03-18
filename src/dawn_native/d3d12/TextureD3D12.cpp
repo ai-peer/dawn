@@ -768,7 +768,7 @@ namespace dawn_native { namespace d3d12 {
             ToBackend(GetDevice())->GetPendingCommandSerial();
 
         // This transitions assume it is a 2D texture
-        ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
+        ASSERT(GetDimension() != wgpu::TextureDimension::e1D);
 
         mSubresourceStateAndDecay.Update(
             range, [&](const SubresourceRange& updateRange, StateAndDecay* state) {

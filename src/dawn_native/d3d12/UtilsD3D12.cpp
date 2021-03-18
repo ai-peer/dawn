@@ -186,8 +186,10 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(HasOneBit(aspect));
         // See comments in ComputeTextureCopySplits() for more details.
         const TexelBlockInfo& blockInfo = texture->GetFormat().GetAspectInfo(aspect).block;
-        const TextureCopySplits copySplits = ComputeTextureCopySplits(
-            textureCopy.origin, copySize, blockInfo, offset, bytesPerRow, rowsPerImage);
+        bool is3DTexture = texture->GetDimension() == wgpu::TextureDimension::e3D;
+        const TextureCopySplits copySplits =
+            ComputeTextureCopySplits(textureCopy.origin, copySize, blockInfo, offset, bytesPerRow,
+                                     rowsPerImage, is3DTexture);
 
         const uint64_t bytesPerSlice = bytesPerRow * rowsPerImage;
 
@@ -201,12 +203,13 @@ namespace dawn_native { namespace d3d12 {
         std::array<uint64_t, TextureCopySplits::kMaxTextureCopySplits> bufferOffsetsForNextSlice = {
             {0u, 0u}};
 
-        for (uint32_t copySlice = 0; copySlice < copySize.depthOrArrayLayers; ++copySlice) {
-            const uint32_t splitIndex = copySlice % copySplits.copies2D.size();
+        uint32_t totalLayers = is3DTexture ? 1 : copySize.depthOrArrayLayers;
+        for (uint32_t layer = 0; layer < totalLayers; ++layer) {
+            const uint32_t splitIndex = layer % copySplits.copies2D.size();
 
             const Texture2DCopySplit& copySplitPerLayerBase = copySplits.copies2D[splitIndex];
             const uint64_t bufferOffsetForNextSlice = bufferOffsetsForNextSlice[splitIndex];
-            const uint32_t copyTextureLayer = copySlice + textureCopy.origin.z;
+            const uint32_t copyTextureLayer = layer + textureCopy.origin.z;
 
             RecordCopyBufferToTextureFromTextureCopySplit(
                 commandContext->GetCommandList(), copySplitPerLayerBase, bufferResource,
