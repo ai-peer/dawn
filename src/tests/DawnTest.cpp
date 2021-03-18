@@ -1005,10 +1005,12 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
                                                             const wgpu::Texture& texture,
                                                             uint32_t x,
                                                             uint32_t y,
+                                                            uint32_t z,
                                                             uint32_t width,
                                                             uint32_t height,
+                                                            uint32_t depth,
                                                             uint32_t level,
-                                                            uint32_t slice,
+                                                            uint32_t layer,
                                                             wgpu::TextureAspect aspect,
                                                             uint32_t dataSize,
                                                             uint32_t bytesPerRow) {
@@ -1020,7 +1022,6 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
     }
 
     uint32_t rowsPerImage = height;
-    uint32_t depth = 1;
     uint32_t size =
         utils::RequiredBytesInCopy(bytesPerRow, rowsPerImage, width, height, depth, dataSize);
 
@@ -1031,10 +1032,10 @@ std::ostringstream& DawnTestBase::AddTextureExpectationImpl(const char* file,
     // We need to enqueue the copy immediately because by the time we resolve the expectation,
     // the texture might have been modified.
     wgpu::ImageCopyTexture imageCopyTexture =
-        utils::CreateImageCopyTexture(texture, level, {x, y, slice}, aspect);
+        utils::CreateImageCopyTexture(texture, level, {x, y, z + layer}, aspect);
     wgpu::ImageCopyBuffer imageCopyBuffer =
         utils::CreateImageCopyBuffer(readback.buffer, readback.offset, bytesPerRow, rowsPerImage);
-    wgpu::Extent3D copySize = {width, height, 1};
+    wgpu::Extent3D copySize = {width, height, depth};
 
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);

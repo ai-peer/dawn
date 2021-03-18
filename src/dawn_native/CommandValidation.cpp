@@ -318,8 +318,10 @@ namespace dawn_native {
         Extent3D mipSize = texture->GetMipLevelPhysicalSize(textureCopy.mipLevel);
         // For 2D textures, include the array layer as depth so it can be checked with other
         // dimensions.
-        ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
-        mipSize.depthOrArrayLayers = texture->GetArrayLayers();
+        ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
+        mipSize.depthOrArrayLayers = texture->GetDimension() == wgpu::TextureDimension::e2D
+                                         ? texture->GetArrayLayers()
+                                         : texture->GetDepth();
 
         // All texture dimensions are in uint32_t so by doing checks in uint64_t we avoid
         // overflows.
