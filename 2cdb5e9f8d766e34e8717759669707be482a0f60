@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ecb516_b58726eb",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T01:36:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8788c859_559866fa",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a70c6485_04f4d09e",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-17T10:44:45Z",
       "side": 1,
       "message": "ditto",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "521d0978_c54e684f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T01:36:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a70c6485_04f4d09e",
       "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9515bdcd_9c167dd2",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T01:36:02Z",
+      "side": 1,
+      "message": "(Maybe I\u0027m too careful on checking this case. ( Because I\u0027ve done the wrong+wrong \u003d the test case passed before)).\nTake copy from RGBA8Unorm to BGRA8Unorm case as example, in shader we check them like:\nsuccess \u003d success \u0026\u0026 aboutEqual(srcColor.r, dstColor.r) \u0026\u0026 aboutEqual(srcColor.g, dstColor.g) \u0026\u0026 aboutEqual(srcColor.b, dstColor.b) \u0026\u0026 aboutEqual(srcColor.a, dstColor.a). This cannot catch one case: the driver do both wrong(and the case can pass). Like, when calling |CopyTextureForBrowser|, the driver write value (0.0, 1.0, 1.0, 1.0)// rgba from RGBA8Unorm to BGRA8Unorm texture but not doing swizzle. So the dst texture is (0.0, 1.0, 1.0, 1.0) // bgra. And when sampling from BGRA8unrom texture, the driver made mistake again by not swizzling the order at all. In shader, we could still got (0.0, 1.0, 1.0, 1.0), and the test pass.\nSo adding a read-back to CPU buffer and check the value is the guard for this(to make me feel confidence when the case tell me it is \"PASS\").",
+      "parentUuid": "54b6e9e2_2ebda1a2",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4153afd_fc8b7963",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 19
@@ -82,6 +136,24 @@
       "writtenOn": "2021-03-17T10:44:45Z",
       "side": 1,
       "message": "nit: unneeded * 2",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c1ee55d_deecb935",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T01:36:02Z",
+      "side": 1,
+      "message": "Sry, miss this comment in last update. Done.",
+      "parentUuid": "f4153afd_fc8b7963",
       "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c507cee9_487507fd",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T01:36:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59593f7b_3081d084",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2222eb04_d684d087",
@@ -116,6 +206,24 @@
       "writtenOn": "2021-03-17T10:44:45Z",
       "side": 1,
       "message": "nit: this could be a statically defined array, then the VerifyColorConversion test could be split into FromRGBA8 and FromBGRA8 so only the second one is suppressed on GLES.",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b693e64e_6faaf9bd",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-18T01:36:02Z",
+      "side": 1,
+      "message": "Since the source texture format are only two elements and the RGBA8Unorm is the default format. So just seperate them in two tests. Will add the statically array when we support more texture formats.",
+      "parentUuid": "2222eb04_d684d087",
       "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
