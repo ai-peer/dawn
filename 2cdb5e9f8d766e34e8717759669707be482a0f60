@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3dcae84_61d341f3",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-18T07:17:59Z",
+      "side": 1,
+      "message": "I understand that the driver can get it wrong, it\u0027s a good test to do locally but it is redundant with this TextureFormatTest: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/end2end/TextureFormatTests.cpp;l\u003d461?q\u003dTextureFormatTest that\u0027s why I don\u0027t think it\u0027s needed in this file.",
+      "parentUuid": "9515bdcd_9c167dd2",
+      "revId": "2cdb5e9f8d766e34e8717759669707be482a0f60",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4153afd_fc8b7963",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 19
