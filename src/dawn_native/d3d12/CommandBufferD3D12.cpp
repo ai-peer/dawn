@@ -741,7 +741,7 @@ namespace dawn_native { namespace d3d12 {
 
                     DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
 
@@ -772,7 +772,7 @@ namespace dawn_native { namespace d3d12 {
 
                     DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(copy->source, copy->copySize);
 
