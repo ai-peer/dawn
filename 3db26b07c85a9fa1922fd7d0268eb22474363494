@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d35bc734_a6df7c1b",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-18T09:34:27Z",
+      "side": 1,
+      "message": "I think the compilation error might be because this is constexpr instead of const. Not 100% sure why though.",
+      "revId": "3db26b07c85a9fa1922fd7d0268eb22474363494",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
