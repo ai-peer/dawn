@@ -741,7 +741,7 @@ namespace dawn_native { namespace d3d12 {
 
                     DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
 
@@ -756,11 +756,22 @@ namespace dawn_native { namespace d3d12 {
                     texture->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopyDst,
                                                         subresources);
 
-                    // compute the copySplits and record the CopyTextureRegion commands
-                    CopyBufferToTextureWithCopySplit(
-                        commandContext, copy->destination, buffer->GetD3D12Resource(),
-                        copy->source.offset, copy->source.bytesPerRow, copy->source.rowsPerImage,
-                        copy->copySize, texture, subresources.aspects);
+                    // Record the CopyTextureRegion commands for 3D textures. Multiple depths of 3D
+                    // textures can be copied in one shot and copySplits are not needed.
+                    if (texture->GetDimension() == wgpu::TextureDimension::e3D) {
+                        CopyBufferTo3DTexture(commandContext, copy->destination,
+                                              buffer->GetD3D12Resource(), copy->source.offset,
+                                              copy->source.bytesPerRow, copy->source.rowsPerImage,
+                                              copy->copySize, texture, subresources.aspects);
+                    } else {
+                        // Compute the copySplits and record the CopyTextureRegion commands for 2D
+                        // textures.
+                        CopyBufferToTextureWithCopySplit(
+                            commandContext, copy->destination, buffer->GetD3D12Resource(),
+                            copy->source.offset, copy->source.bytesPerRow,
+                            copy->source.rowsPerImage, copy->copySize, texture,
+                            subresources.aspects);
+                    }
 
                     break;
                 }
@@ -772,7 +783,7 @@ namespace dawn_native { namespace d3d12 {
 
                     DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(copy->source, copy->copySize);
 
@@ -782,8 +793,14 @@ namespace dawn_native { namespace d3d12 {
                                                         subresources);
                     buffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
 
-                    CopyTextureToBufferWithCopySplit(commandList, copy->source, copy->destination,
-                                                     texture, buffer, copy->copySize);
+                    if (texture->GetDimension() == wgpu::TextureDimension::e3D) {
+                        Copy3DTextureToBuffer(commandList, copy->source, copy->destination, texture,
+                                              buffer, copy->copySize);
+                    } else {
+                        CopyTextureToBufferWithCopySplit(commandList, copy->source,
+                                                         copy->destination, texture, buffer,
+                                                         copy->copySize);
+                    }
 
                     break;
                 }
