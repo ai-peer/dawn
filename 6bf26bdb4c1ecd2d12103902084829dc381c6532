@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76ab2524_c049a362",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "That\u0027s definitely the next step. The conversion is a large enough task that it\u0027s been a challenge to figure out natural incremental CLs, so apologies if it\u0027s a little awkward at this stage.",
+      "parentUuid": "90dbda71_680edb04",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e01700d4_49ae2a74",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 7
@@ -65,6 +83,24 @@
       "writtenOn": "2021-03-19T09:32:42Z",
       "side": 1,
       "message": "nit: we can skip hashing these when the blend is not set. It will produce a different hash but that\u0027s ok.",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be86f2c6_a04c432f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e01700d4_49ae2a74",
       "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db42abe4_c738b7a6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "Sure! I wasn\u0027t 100% sure what these hashes were used for and had opted to keep the ordering the same just in case they were being used for cross-session caching. Happy to reorder it more logically given that we\u0027re not worried about that level of consistency!",
+      "parentUuid": "d7f68865_2a4d6703",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34500f60_0521fad3",
@@ -103,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c680537_ca50f506",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "Thanks! That\u0027s definitely nicer to read.",
+      "parentUuid": "34500f60_0521fad3",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b3bd16c_a42b6e92",
@@ -116,6 +188,24 @@
       "writtenOn": "2021-03-19T09:32:42Z",
       "side": 1,
       "message": "nit: comment that the sample count is already checked as part of the check on the attachment state?",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "214988b8_ab8f05b9",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b3bd16c_a42b6e92",
       "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5fde5be5_cd61c5a8",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "Yup, getting rid of essentially all VertexStateDescriptor usage is coming up soon.",
+      "parentUuid": "27a4fcd2_785ad69d",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00ccad1f_58533490",
         "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
         "patchSetId": 7
@@ -150,6 +258,24 @@
       "writtenOn": "2021-03-19T09:32:42Z",
       "side": 1,
       "message": "Shouldn\u0027t this check for blend!\u003dnullptr otherwise we risk dereferencing nullptr?",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b518b72_0727d9b8",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T17:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00ccad1f_58533490",
       "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
