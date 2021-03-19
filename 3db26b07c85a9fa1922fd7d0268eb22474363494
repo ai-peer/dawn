@@ -33,6 +33,24 @@
       "message": "I think the compilation error might be because this is constexpr instead of const. Not 100% sure why though.",
       "revId": "3db26b07c85a9fa1922fd7d0268eb22474363494",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "731ea089_f058be5d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-19T05:00:52Z",
+      "side": 1,
+      "message": "Bots passed!",
+      "parentUuid": "d35bc734_a6df7c1b",
+      "revId": "3db26b07c85a9fa1922fd7d0268eb22474363494",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
