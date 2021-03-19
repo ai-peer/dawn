@@ -51,6 +51,23 @@
       "parentUuid": "86ac0ad7_1787411a",
       "revId": "c7da204667bcdce7eb4f5ebd6fdeb20bea128165",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bfb9c3d_4746536b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:45:39Z",
+      "side": 1,
+      "message": "Ben PTAL when you got time!",
+      "revId": "c7da204667bcdce7eb4f5ebd6fdeb20bea128165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
