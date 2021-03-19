@@ -16,6 +16,142 @@
       "message": "Okay, I swear I got it this time! 😅",
       "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85553650_1153679a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90dbda71_680edb04",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "Could be a follow-up but I think we could switch around the frontend code to converte Descriptor to Descriptor2, which would make the code in this contructor easier (instead of doing Descriptor2 -\u003e Descriptor -\u003e Descriptor2-like).",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e01700d4_49ae2a74",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "nit: we can skip hashing these when the blend is not set. It will produce a different hash but that\u0027s ok.",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f68865_2a4d6703",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "nit: can we reorganize between primitive, depthStencil and multisample. depthstencil could be moved in [1] (and skipped)",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34500f60_0521fad3",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "nit: I think this could be rephrased as\n\n if ((descA.blend \u003d\u003d nullptr) !\u003d (descB.blend \u003d\u003d nullptr)) {return false};\n \n if (descA.blend !\u003d nullptr) {\n                if (descA.blend-\u003ecolor.operation !\u003d descB.blend-\u003ecolor.operation ||\n                    descA.blend-\u003ecolor.srcFactor !\u003d descB.blend-\u003ecolor.srcFactor ||\n                    descA.blend-\u003ecolor.dstFactor !\u003d descB.blend-\u003ecolor.dstFactor) {\n                    return false;\n                }\n                if (descA.blend-\u003ealpha.operation !\u003d descB.blend-\u003ealpha.operation ||\n                    descA.blend-\u003ealpha.srcFactor !\u003d descB.blend-\u003ealpha.srcFactor ||\n                    descA.blend-\u003ealpha.dstFactor !\u003d descB.blend-\u003ealpha.dstFactor) {\n                    return false;\n                }\n }",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b3bd16c_a42b6e92",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "nit: comment that the sample count is already checked as part of the check on the attachment state?",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27a4fcd2_785ad69d",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "As a follow-up maybe we can change this call to use the pipeline instead of the VertexStateDescriptor?",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ccad1f_58533490",
+        "filename": "src/dawn_native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:32:42Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this check for blend!\u003dnullptr otherwise we risk dereferencing nullptr?",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
