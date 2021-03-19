@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bac485_74c72982",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-19T01:58:36Z",
+      "side": 1,
+      "message": "Okay, I swear I got it this time! 😅",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
