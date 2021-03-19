@@ -1,0 +1,152 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00415980_bed7fc4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "LGTM too with small comments.",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c7aedd8_fdefa428",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "Maybe the lack of \"default: UNREACHABLE()\" here will mean we\u0027ll have compilation errors that have to be fixed on roll when Tint adds additional enums. We can probably figure out what to do when that happens though.",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecb356c6_f530e2eb",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "nit: Maybe this should be TextureFormat given that the WebGPU spec uses the \"texture\" terminology.",
+      "range": {
+        "startLine": 202,
+        "startChar": 55,
+        "endLine": 202,
+        "endChar": 66
+      },
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60728c92_a2a9d558",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "nit: This could be a helper function as well.",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3eb23fe_e522cf0b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "nit: Multisampled (and not Mulit)",
+      "range": {
+        "startLine": 1017,
+        "startChar": 75,
+        "endLine": 1017,
+        "endChar": 95
+      },
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ec0937_ec21323e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "u-nit: Maybe could be a helper function too.",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2edd078_291a4625",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "Can we check all the other properties too or is that too much code?",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76d48c28_45136516",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T09:12:45Z",
+      "side": 1,
+      "message": "nit: is this change needed in this CL?",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
