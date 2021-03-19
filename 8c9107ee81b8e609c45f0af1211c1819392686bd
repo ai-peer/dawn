@@ -39,6 +39,30 @@
       },
       "revId": "8c9107ee81b8e609c45f0af1211c1819392686bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a96eaae_20c0ed4d",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-19T07:10:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04711725_400eda8f",
+      "range": {
+        "startLine": 27,
+        "startChar": 35,
+        "endLine": 27,
+        "endChar": 37
+      },
+      "revId": "8c9107ee81b8e609c45f0af1211c1819392686bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
