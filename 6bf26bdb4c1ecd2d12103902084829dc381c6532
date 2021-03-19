@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "229a1bf1_14ea4b54",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T17:08:12Z",
+      "side": 1,
+      "message": "No worries, a messy intermediate step is definitely ok! I should have known you had this in mind already :)",
+      "parentUuid": "76ab2524_c049a362",
+      "revId": "6bf26bdb4c1ecd2d12103902084829dc381c6532",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e01700d4_49ae2a74",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 7
