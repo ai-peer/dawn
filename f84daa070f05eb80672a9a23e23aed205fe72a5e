@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c642e753_aa678af4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 32
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-19T12:48:08Z",
+      "side": 1,
+      "message": "Shaobo, can you reland this CL with the static initializers fixed (with const char[] foo \u003d ... ?)\n\nAlso use the \"reland\" button on this page then modify the new CL so that we can see the fix in the diff between patchset 1 and N\n\nSee this log:\n\nError: file \"CopyTextureForBrowserHelper.cpp\" is not expected to have static initializers in binary \"chrome\"\n\n# Static initializers in chrome:\n# 000101 _Unwind_Resume@plt\n# 000101 guard variable for std::__1::ios_base::Init::Init()::init_the_streams\n# 000101 std::__1::DoIOSInit::DoIOSInit()\n# 000101 std::__1::DoIOSInit::~DoIOSInit()\n# 000101 std::__1::ios_base::Init::Init()::init_the_streams\n# 000101 __cxa_atexit@plt [registers a dtor to run at exit]\n# 000101 __cxa_guard_abort\n# 000101 __cxa_guard_acquire\n# 000101 __cxa_guard_release\n# 000101 __dso_handle\n# CopyTextureForBrowserHelper.cpp dawn_native::(anonymous namespace)::sCopyTextureForBrowserVertex\n# CopyTextureForBrowserHelper.cpp dawn_native::(anonymous namespace)::sCopyTextureForBrowserFragment\n# CopyTextureForBrowserHelper.cpp std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e \u003e::basic_string\u003cdecltype(nullptr)\u003e(char const*)\n# CopyTextureForBrowserHelper.cpp __dtor__ZN11dawn_native12_GLOBAL__N_128sCopyTextureForBrowserVertexE\n# CopyTextureForBrowserHelper.cpp __dtor__ZN11dawn_native12_GLOBAL__N_130sCopyTextureForBrowserFragmentE\n# CopyTextureForBrowserHelper.cpp atexit\n# CopyTextureForBrowserHelper.cpp cr_png_formatted_warning.valid_parameters+0x2c6be1\n# CopyTextureForBrowserHelper.cpp cr_png_formatted_warning.valid_parameters+0x2c6f98\n# InstrProfilingRuntime.cpp __llvm_profile_initialize\n# iostream.cpp: (empty initializer list)\n# Found 19 static initializers in 4 files.\n\nError: file \"CopyTextureForBrowserHelper.cpp\" is not expected to have static initializers in binary \"nacl_helper\"\n\n# Static initializers in nacl_helper:\n# 000101 _Unwind_Resume@plt\n# 000101 guard variable for std::__1::ios_base::Init::Init()::init_the_streams\n# 000101 std::__1::DoIOSInit::DoIOSInit()\n# 000101 std::__1::DoIOSInit::~DoIOSInit()\n# 000101 std::__1::ios_base::Init::Init()::init_the_streams\n# 000101 __cxa_atexit@plt [registers a dtor to run at exit]\n# 000101 __cxa_guard_abort\n# 000101 __cxa_guard_acquire\n# 000101 __cxa_guard_release\n# 000101 __dso_handle\n# CopyTextureForBrowserHelper.cpp dawn_native::(anonymous namespace)::sCopyTextureForBrowserVertex\n# CopyTextureForBrowserHelper.cpp dawn_native::(anonymous namespace)::sCopyTextureForBrowserFragment\n# CopyTextureForBrowserHelper.cpp std::__1::basic_string\u003cchar, std::__1::char_traits\u003cchar\u003e, std::__1::allocator\u003cchar\u003e \u003e::basic_string\u003cdecltype(nullptr)\u003e(char const*)\n# CopyTextureForBrowserHelper.cpp google::IdentifierIsAnonymousNamespace(google::State*, int)::anon_prefix+0x1065c\n# CopyTextureForBrowserHelper.cpp google::IdentifierIsAnonymousNamespace(google::State*, int)::anon_prefix+0x10a13\n# CopyTextureForBrowserHelper.cpp __dtor__ZN11dawn_native12_GLOBAL__N_128sCopyTextureForBrowserVertexE\n# CopyTextureForBrowserHelper.cpp __dtor__ZN11dawn_native12_GLOBAL__N_130sCopyTextureForBrowserFragmentE\n# CopyTextureForBrowserHelper.cpp atexit\n# InstrProfilingRuntime.cpp __llvm_profile_initialize\n# iostream.cpp: (empty initializer list)\n# Found 19 static initializers in 4 files.\n\n\n# Static initializers in nacl_helper_bootstrap:\n# Found 0 static initializers in 0 files.",
+      "revId": "f84daa070f05eb80672a9a23e23aed205fe72a5e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
