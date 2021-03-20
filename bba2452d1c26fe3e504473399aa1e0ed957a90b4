@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd179eba_8a3e51d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-20T01:23:51Z",
+      "side": 1,
+      "message": "Keep deprecated depth functional and add DeprecatedAPITests\n\nSearching the webgpu spec for GPUExtent3D gives the following functions that could passed in depth from outside\n\nCreateTexture\nCopyBufferToTexture\nCopyTextureToBuffer\nCopyTextureToTexture\nWriteTexture\nCopyImageBitmapToTexture\n\nThe last seems unimplemented so added logic to generate warning/errors and adjust GPUExtent3D input for the first 4 functions. I think that would be enough? Let me know if I miss something.\n\nOr change the struct to use getter/setter for the field? (don\u0027t think it\u0027s the right way to go for deprecated api)",
+      "revId": "bba2452d1c26fe3e504473399aa1e0ed957a90b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

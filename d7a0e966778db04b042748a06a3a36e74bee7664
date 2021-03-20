@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd0e7eb7_ccd896f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-20T01:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94c905c0_6a95b80c",
+      "revId": "d7a0e966778db04b042748a06a3a36e74bee7664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a726e4b9_b1072897",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-03-16T07:30:16Z",
       "side": 1,
       "message": "nit: the deprecated attribute doesn\u0027t do anything.",
+      "revId": "d7a0e966778db04b042748a06a3a36e74bee7664",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9f97dd1_288236d6",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-20T01:23:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a726e4b9_b1072897",
       "revId": "d7a0e966778db04b042748a06a3a36e74bee7664",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
