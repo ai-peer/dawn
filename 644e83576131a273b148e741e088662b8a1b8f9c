@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6d6131_6861fc5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-03-20T02:22:42Z",
+      "side": 1,
+      "message": "Before any patch set, I apologize first, especially to Ausin@.\nThe revert reason is pointed by Austin@ before in the reviewing rounds. But I\u0027m not pay enough attention and just relies on \"compile and tests\" and click \u0027Resolved\u0027. My feeling is not good to add your burderns due to such reason.And it is not a good experience to make the mistake which reviewer has already pointed out. If you feel uncomfortable, that\u0027s my fault. \nI\u0027ll be more seriously on the patch set uploading and land comments in future. But for this, I\u0027m really sorry.",
+      "revId": "644e83576131a273b148e741e088662b8a1b8f9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
