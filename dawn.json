@@ -825,7 +825,8 @@
             {"name": "shader float16", "type": "bool", "default": "false"},
             {"name": "pipeline statistics query", "type": "bool", "default": "false"},
             {"name": "timestamp query", "type": "bool", "default": "false"},
-            {"name": "multi planar formats", "type": "bool", "default": "false"}
+            {"name": "multi planar formats", "type": "bool", "default": "false"},
+            {"name": "depth clamping", "type": "bool", "default": "false"}
         ]
     },
     "depth stencil state descriptor": {
@@ -835,6 +836,7 @@
             {"name": "format", "type": "texture format"},
             {"name": "depth write enabled", "type": "bool", "default": "false"},
             {"name": "depth compare", "type": "compare function", "default": "always"},
+            {"name": "clamp depth", "type": "bool", "default": "false"},
             {"name": "stencil front", "type": "stencil face state"},
             {"name": "stencil back", "type": "stencil face state"},
             {"name": "stencil read mask", "type": "uint32_t", "default": "0xFFFFFFFF"},
@@ -1581,6 +1583,7 @@
             {"name": "format", "type": "texture format"},
             {"name": "depth write enabled", "type": "bool", "default": "false"},
             {"name": "depth compare", "type": "compare function", "default": "always"},
+            {"name": "clamp depth", "type": "bool", "default": "false"},
             {"name": "stencil front", "type": "stencil face state"},
             {"name": "stencil back", "type": "stencil face state"},
             {"name": "stencil read mask", "type": "uint32_t", "default": "0xFFFFFFFF"},

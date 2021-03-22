@@ -229,6 +229,7 @@ namespace dawn_native { namespace metal {
             }
 
             mSupportedExtensions.EnableExtension(Extension::ShaderFloat16);
+            mSupportedExtensions.EnableExtension(Extension::DepthClamping);
         }
 
         NSPRef<id<MTLDevice>> mDevice;

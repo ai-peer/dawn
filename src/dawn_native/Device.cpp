@@ -1110,6 +1110,10 @@ namespace dawn_native {
             depthStencilState.format = depthStencil->format;
             depthStencilState.depthWriteEnabled = depthStencil->depthWriteEnabled;
             depthStencilState.depthCompare = depthStencil->depthCompare;
+            if (depthStencil->clampDepth && !IsExtensionEnabled(Extension::DepthClamping)) {
+                return DAWN_VALIDATION_ERROR("The depth clamping feature is not supported");
+            }
+            depthStencilState.clampDepth = depthStencil->clampDepth;
             depthStencilState.stencilFront = depthStencil->stencilFront;
             depthStencilState.stencilBack = depthStencil->stencilBack;
             depthStencilState.stencilReadMask = depthStencil->stencilReadMask;
