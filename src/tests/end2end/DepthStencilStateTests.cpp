@@ -333,6 +333,17 @@ class DepthStencilStateTest : public DawnTest {
     wgpu::ShaderModule fsModule;
 };
 
+class DepthClampingTest : public DepthStencilStateTest {
+    void SetUp() override {
+        DepthStencilStateTest::SetUp();
+        DAWN_SKIP_TEST_IF(!SupportsExtensions({"depth_clamping"}));
+    }
+
+    std::vector<const char*> GetRequiredExtensions() override {
+        return { "depth_clamping" };
+    }
+};
+
 // Test compilation and usage of the fixture
 TEST_P(DepthStencilStateTest, Basic) {
     wgpu::StencilFaceState stencilFace;
@@ -752,6 +763,115 @@ TEST_P(DepthStencilStateTest, StencilFrontAndBackFace) {
     DoTest({{state, RGBA8::kRed, 0.f, 0u, wgpu::FrontFace::CW}}, RGBA8::kZero, RGBA8::kRed);
 }
 
+// Test that fragments beyond the far plane are clamped if depth clamping is enabled.
+TEST_P(DepthClampingTest, ClampOnOutsideViewFrustum) {
+    wgpu::DepthStencilDepthClampingState clampingState;
+    clampingState.sType = wgpu::SType::DepthStencilDepthClampingState;
+    clampingState.clampDepth = true;
+
+    wgpu::DepthStencilState state;
+    state.nextInChain = &clampingState;
+    state.depthWriteEnabled = false;
+    state.depthCompare = wgpu::CompareFunction::Always;
+    state.format = wgpu::TextureFormat::Depth24PlusStencil8;
+
+    DoTest(
+        {
+            {state, RGBA8(0, 255, 0, 255), 2.f, 0u},
+        },
+        RGBA8(0, 255, 0, 255));
+}
+
+// Test that fragments inside the view frustum are unaffected by depth clamping.
+TEST_P(DepthClampingTest, ClampOnInsideViewFrustum) {
+    wgpu::DepthStencilDepthClampingState clampingState;
+    clampingState.sType = wgpu::SType::DepthStencilDepthClampingState;
+    clampingState.clampDepth = true;
+
+    wgpu::DepthStencilState state;
+    state.nextInChain = &clampingState;
+    state.depthWriteEnabled = false;
+    state.depthCompare = wgpu::CompareFunction::Always;
+    state.format = wgpu::TextureFormat::Depth24PlusStencil8;
+
+    DoTest(
+        {
+            {state, RGBA8(0, 255, 0, 255), 0.5f, 0u},
+        },
+        RGBA8(0, 255, 0, 255));
+}
+
+
+// Test that fragments beyond the far plane are clipped if depth clamping is disabled.
+TEST_P(DepthClampingTest, ClampOffOutsideViewFrustum) {
+    wgpu::DepthStencilDepthClampingState clampingState;
+    clampingState.sType = wgpu::SType::DepthStencilDepthClampingState;
+    clampingState.clampDepth = false;
+
+    wgpu::DepthStencilState state;
+    state.nextInChain = &clampingState;
+    state.depthWriteEnabled = false;
+    state.depthCompare = wgpu::CompareFunction::Always;
+    state.format = wgpu::TextureFormat::Depth24PlusStencil8;
+
+    DoTest(
+        {
+            {state, RGBA8(0, 255, 0, 255), 2.f, 0u},
+        },
+        RGBA8(0, 0, 0, 0));
+}
+
+// Test that fragments beyond the far plane are clipped if clampDepth is left unspecified.
+TEST_P(DepthClampingTest, ClampUnspecifiedOutsideViewFrustum) {
+    wgpu::DepthStencilDepthClampingState clampingState;
+    clampingState.sType = wgpu::SType::DepthStencilDepthClampingState;
+    clampingState.clampDepth = false;
+
+    wgpu::DepthStencilState state;
+    state.nextInChain = &clampingState;
+    state.depthWriteEnabled = false;
+    state.depthCompare = wgpu::CompareFunction::Always;
+    state.format = wgpu::TextureFormat::Depth24PlusStencil8;
+
+    DoTest(
+        {
+            {state, RGBA8(0, 255, 0, 255), 2.f, 0u},
+        },
+        RGBA8(0, 0, 0, 0));
+}
+
+// Test that fragments are properly clipped or clamped if multiple render pipelines are used
+// within the same render pass with differing clampDepth values.
+TEST_P(DepthClampingTest, MultipleRenderPipelines) {
+    wgpu::DepthStencilDepthClampingState clampingState;
+    clampingState.sType = wgpu::SType::DepthStencilDepthClampingState;
+    clampingState.clampDepth = true;
+
+    wgpu::DepthStencilState firstState;
+    firstState.nextInChain = &clampingState;
+    firstState.depthWriteEnabled = false;
+    firstState.depthCompare = wgpu::CompareFunction::Always;
+    firstState.format = wgpu::TextureFormat::Depth24PlusStencil8;
+
+    wgpu::DepthStencilDepthClampingState clippingState;
+    clippingState.sType = wgpu::SType::DepthStencilDepthClampingState;
+    clippingState.clampDepth = false;
+
+    wgpu::DepthStencilState secondState;
+    secondState.nextInChain = &clippingState;
+    secondState.depthWriteEnabled = false;
+    secondState.depthCompare = wgpu::CompareFunction::Always;
+    secondState.format = wgpu::TextureFormat::Depth24PlusStencil8;
+
+    DoTest(
+        {
+            {firstState, RGBA8(0, 255, 0, 255), 3.f, 0u}, // Draw blue with clamping
+            {secondState, RGBA8(255, 0, 0, 255), 2.f, 0u}, // Draw red with clipping
+        },
+        RGBA8(0, 255, 0, 255)); // Result should be blue
+}
+
+
 DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                       D3D12Backend(),
                       MetalBackend(),
@@ -759,3 +879,10 @@ DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                       OpenGLESBackend(),
                       VulkanBackend({"vulkan_use_d32s8"}, {}),
                       VulkanBackend({}, {"vulkan_use_d32s8"}));
+
+DAWN_INSTANTIATE_TEST(DepthClampingTest,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());

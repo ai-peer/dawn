@@ -186,8 +186,14 @@ namespace dawn_native {
         MaybeError ValidateDepthStencilStateDescriptor(
             const DeviceBase* device,
             const DepthStencilStateDescriptor* descriptor) {
-            if (descriptor->nextInChain != nullptr) {
-                return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
+            const ChainedStruct* chained = descriptor->nextInChain;
+            if (chained != nullptr) {
+                if (chained->sType != wgpu::SType::DepthStencilDepthClampingState) {
+                    return DAWN_VALIDATION_ERROR("Unsupported sType");
+                }
+                if (!device->IsExtensionEnabled(Extension::DepthClamping)) {
+                    return DAWN_VALIDATION_ERROR("The depth clamping feature is not supported");
+                }
             }
             DAWN_TRY(ValidateCompareFunction(descriptor->depthCompare));
             DAWN_TRY(ValidateCompareFunction(descriptor->stencilFront.compare));
@@ -374,6 +380,7 @@ namespace dawn_native {
 
         if (mAttachmentState->HasDepthStencilAttachment()) {
             const DepthStencilStateDescriptor& depthStencil = *descriptor->depthStencilState;
+            mDepthStencil.nextInChain = depthStencil.nextInChain;
             mDepthStencil.format = depthStencil.format;
             mDepthStencil.depthWriteEnabled = depthStencil.depthWriteEnabled;
             mDepthStencil.depthCompare = depthStencil.depthCompare;
@@ -531,6 +538,18 @@ namespace dawn_native {
         return mDepthStencil.depthBiasClamp;
     }
 
+    bool RenderPipelineBase::ShouldClampDepth() const {
+        ASSERT(!IsError());
+        const ChainedStruct* chained = mDepthStencil.nextInChain;
+        if (chained == nullptr) {
+            return false;
+        }
+        ASSERT(chained->sType == wgpu::SType::DepthStencilDepthClampingState);
+        const auto* depthClampingState =
+            static_cast<const DepthStencilDepthClampingState*>(chained);
+        return depthClampingState->clampDepth;
+    }
+
     ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments>
     RenderPipelineBase::GetColorAttachmentsMask() const {
         ASSERT(!IsError());
@@ -599,6 +618,14 @@ namespace dawn_native {
 
         if (mAttachmentState->HasDepthStencilAttachment()) {
             const DepthStencilState& desc = mDepthStencil;
+            if (desc.nextInChain == nullptr ||
+                desc.nextInChain->sType != wgpu::SType::DepthStencilDepthClampingState) {
+                recorder.Record(false);
+            } else {
+                const auto* chained =
+                    static_cast<const DepthStencilDepthClampingState*>(desc.nextInChain);
+                recorder.Record(chained->clampDepth);
+            }
             recorder.Record(desc.depthWriteEnabled, desc.depthCompare);
             recorder.Record(desc.stencilReadMask, desc.stencilWriteMask);
             recorder.Record(desc.stencilFront.compare, desc.stencilFront.failOp,

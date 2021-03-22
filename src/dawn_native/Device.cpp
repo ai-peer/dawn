@@ -1110,6 +1110,7 @@ namespace dawn_native {
             depthStencilState.format = depthStencil->format;
             depthStencilState.depthWriteEnabled = depthStencil->depthWriteEnabled;
             depthStencilState.depthCompare = depthStencil->depthCompare;
+            depthStencilState.nextInChain = depthStencil->nextInChain;
             depthStencilState.stencilFront = depthStencil->stencilFront;
             depthStencilState.stencilBack = depthStencil->stencilBack;
             depthStencilState.stencilReadMask = depthStencil->stencilReadMask;
