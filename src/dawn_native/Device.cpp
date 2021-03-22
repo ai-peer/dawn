@@ -1103,6 +1103,7 @@ namespace dawn_native {
         vertexState.vertexBuffers = descriptor->vertex.buffers;
         vertexState.indexFormat = descriptor->primitive.stripIndexFormat;
 
+        rasterizationState.nextInChain = descriptor->primitive.nextInChain;
         rasterizationState.frontFace = descriptor->primitive.frontFace;
         rasterizationState.cullMode = descriptor->primitive.cullMode;
 

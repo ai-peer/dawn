@@ -131,9 +131,16 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ValidatePrimitiveState(const PrimitiveState* descriptor) {
-            if (descriptor->nextInChain != nullptr) {
-                return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
+        MaybeError ValidatePrimitiveState(const DeviceBase* device,
+                                          const PrimitiveState* descriptor) {
+            const ChainedStruct* chained = descriptor->nextInChain;
+            if (chained != nullptr) {
+                if (chained->sType != wgpu::SType::PrimitiveDepthClampingState) {
+                    return DAWN_VALIDATION_ERROR("Unsupported sType");
+                }
+                if (!device->IsExtensionEnabled(Extension::DepthClamping)) {
+                    return DAWN_VALIDATION_ERROR("The depth clamping feature is not supported");
+                }
             }
 
             DAWN_TRY(ValidatePrimitiveTopology(descriptor->topology));
@@ -318,10 +325,6 @@ namespace dawn_native {
 
         MaybeError ValidateRasterizationStateDescriptor(
             const RasterizationStateDescriptor* descriptor) {
-            if (descriptor->nextInChain != nullptr) {
-                return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
-            }
-
             DAWN_TRY(ValidateFrontFace(descriptor->frontFace));
             DAWN_TRY(ValidateCullMode(descriptor->cullMode));
 
@@ -500,7 +503,7 @@ namespace dawn_native {
 
         DAWN_TRY(ValidateVertexState(device, &descriptor->vertex, descriptor->layout));
 
-        DAWN_TRY(ValidatePrimitiveState(&descriptor->primitive));
+        DAWN_TRY(ValidatePrimitiveState(device, &descriptor->primitive));
 
         if (descriptor->depthStencil) {
             DAWN_TRY(ValidateDepthStencilState(device, descriptor->depthStencil));
@@ -642,6 +645,14 @@ namespace dawn_native {
         }
 
         if (descriptor->rasterizationState != nullptr) {
+            // TODO(dawn:642): Move this chained struct check to PrimitiveState when we start
+            // using RenderPipelineDescriptor2.
+            const ChainedStruct* chained = descriptor->rasterizationState->nextInChain;
+            if (chained != nullptr) {
+                ASSERT(chained->sType == wgpu::SType::PrimitiveDepthClampingState);
+                const auto* clampState = static_cast<const PrimitiveDepthClampingState*>(chained);
+                mClampDepth = clampState->clampDepth;
+            }
             mPrimitive.frontFace = descriptor->rasterizationState->frontFace;
             mPrimitive.cullMode = descriptor->rasterizationState->cullMode;
             mDepthStencil.depthBias = descriptor->rasterizationState->depthBias;
@@ -771,6 +782,11 @@ namespace dawn_native {
         return mDepthStencil.depthBiasClamp;
     }
 
+    bool RenderPipelineBase::ShouldClampDepth() const {
+        ASSERT(!IsError());
+        return mClampDepth;
+    }
+
     ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments>
     RenderPipelineBase::GetColorAttachmentsMask() const {
         ASSERT(!IsError());
@@ -863,7 +879,7 @@ namespace dawn_native {
 
         // Record primitive state
         recorder.Record(mPrimitive.topology, mPrimitive.stripIndexFormat, mPrimitive.frontFace,
-                        mPrimitive.cullMode);
+                        mPrimitive.cullMode, mClampDepth);
 
         // Record multisample state
         // Sample count hashed as part of the attachment state
