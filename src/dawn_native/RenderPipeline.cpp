@@ -531,6 +531,11 @@ namespace dawn_native {
         return mDepthStencil.depthBiasClamp;
     }
 
+    bool RenderPipelineBase::ShouldClampDepth() const {
+        ASSERT(!IsError());
+        return mDepthStencilState.clampDepth;
+    }
+
     ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments>
     RenderPipelineBase::GetColorAttachmentsMask() const {
         ASSERT(!IsError());
