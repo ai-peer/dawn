@@ -80,6 +80,7 @@ namespace dawn_native {
         int32_t GetDepthBias() const;
         float GetDepthBiasSlopeScale() const;
         float GetDepthBiasClamp() const;
+        bool ShouldClampDepth() const;
 
         ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> GetColorAttachmentsMask() const;
         bool HasDepthStencilAttachment() const;
@@ -118,6 +119,7 @@ namespace dawn_native {
         PrimitiveState mPrimitive;
         DepthStencilState mDepthStencil;
         MultisampleState mMultisample;
+        bool mClampDepth = false;
     };
 
 }  // namespace dawn_native
