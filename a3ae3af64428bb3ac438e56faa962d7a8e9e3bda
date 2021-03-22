@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "354a37d1_04388709",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T16:34:19Z",
+      "side": 1,
+      "message": "Is there a bug associated with this?",
+      "revId": "a3ae3af64428bb3ac438e56faa962d7a8e9e3bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "494ec677_82b4b804",
@@ -14,6 +31,23 @@
       "writtenOn": "2021-03-22T16:33:04Z",
       "side": 1,
       "message": "Another small bug",
+      "revId": "a3ae3af64428bb3ac438e56faa962d7a8e9e3bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d1cfd0_851caeec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T16:34:19Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "a3ae3af64428bb3ac438e56faa962d7a8e9e3bda",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
