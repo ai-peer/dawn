@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9fa5ac6_3100b441",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T22:02:51Z",
+      "side": 1,
+      "message": "nit: this pointer can be const",
+      "range": {
+        "startLine": 69,
+        "startChar": 58,
+        "endLine": 69,
+        "endChar": 70
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3006c89e_ce34b1de",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 4
@@ -19,6 +42,46 @@
         "startChar": 33,
         "endLine": 79,
         "endChar": 34
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a50980_3dd4c715",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T22:02:51Z",
+      "side": 1,
+      "message": "nit: is there a reason to not always use fill_n ?",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "628cf0c3_0a269ace",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T22:02:51Z",
+      "side": 1,
+      "message": "typo: iterator",
+      "range": {
+        "startLine": 428,
+        "startChar": 31,
+        "endLine": 428,
+        "endChar": 40
       },
       "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
