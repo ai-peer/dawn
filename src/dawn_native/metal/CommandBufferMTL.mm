@@ -1191,6 +1191,9 @@ namespace dawn_native { namespace metal {
                     [encoder setDepthBias:newPipeline->GetDepthBias()
                                slopeScale:newPipeline->GetDepthBiasSlopeScale()
                                     clamp:newPipeline->GetDepthBiasClamp()];
+                    if (newPipeline->ShouldClampDepth()) {
+                        [encoder setDepthClipMode:MTLDepthClipModeClamp];
+                    }
                     newPipeline->Encode(encoder);
 
                     lastPipeline = newPipeline;
