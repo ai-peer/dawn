@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3006c89e_ce34b1de",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 1,
+      "message": "nit: \u003d true or .set(qureyIndex)",
+      "range": {
+        "startLine": 79,
+        "startChar": 33,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cffaed0_2ed76144",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 1,
+      "message": "We could do on-demand query resetting until we find that it is a performance problem. Once that happens we could optimize it with a mechanism similar to whatever we do for optimizing barriers. This comment is general for this file.",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c99d58f_aefea4a6",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 1,
+      "message": "This wouldn\u0027t work if we write the same query multiple times in the same command buffer. We should have on-demand resetting (except for render pass that can be done at the start of the render pass like is done in this patchset).",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4c05ba_993ef847",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 1,
+      "message": "This CL makes the Vulkan backend modify data in the frontend, which is breaking the layering of dawn_native between frontend and backend. While technically correct it will make stuff harder to maintain in the long term. Can we have a QueryAvailabilityMap in vulkan::Query to track the Vulkan-specific state? It\u0027s less optimal but better layered.",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "104ed40a_904e7f58",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 1,
+      "message": "ditto, same comment as for the compute pass.",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "234778c7_b4176409",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 1,
+      "message": "Did you mean to start a render pass that writes to 0 and 0?\n\nThis case were both the outside and the inside of the compute pass write conflicting slots is also interesting.",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

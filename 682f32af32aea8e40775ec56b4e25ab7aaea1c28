@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b068489_e1a51eba",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T15:28:36Z",
+      "side": 0,
+      "message": "nit: this helper function could have stayed to be used in EndOcclusionQuery and WriteTimestamp, even if part of the logic is now in PassResourceUsageTracker. It keeps the comment about needing to set the availability twice in the same place and will make it easier to add more query types.",
+      "revId": "682f32af32aea8e40775ec56b4e25ab7aaea1c28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
