@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f234ef75_871b084d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T10:46:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c0e67b53fb4d07c5feb4be2bebc433a5b29cff1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46b2bc25_603f951f",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T10:46:35Z",
+      "side": 1,
+      "message": "Can we also handle the deprecation for CopyTextureForBrowser? (no need for deprecation tests for that one since it isn\u0027t used yet.)",
+      "revId": "c0e67b53fb4d07c5feb4be2bebc433a5b29cff1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83d18557_69207bb2",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-22T10:46:35Z",
+      "side": 1,
+      "message": "note: this ASSERT_DEVICE_ERROR will trigger if at least one of the command errors. The way to fix this is to split into two command encoders, but it\u0027s probably not worth the hassle for these tests.",
+      "revId": "c0e67b53fb4d07c5feb4be2bebc433a5b29cff1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
