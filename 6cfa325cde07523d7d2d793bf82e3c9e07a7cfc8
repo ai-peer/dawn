@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2144e0d8_8aa6ae72",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "Marking it as UNREACHABLE instead.",
+      "parentUuid": "fd117139_00197003",
+      "revId": "6cfa325cde07523d7d2d793bf82e3c9e07a7cfc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11c6c07b_87c4b69a",

@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27b0e6e_ae407be7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "The compile failing when a new enum is added, in these cases I personally view as a positive, since it avoids the situation where a new enum is rolled and silently works, so handling it correctly is missed.\n\nFor most of these enums changing means them means a non-trivial change in how WGSL/WebGPU interact, so I would rather have them be intentionaly dealt with then they occur.\n\nAlso for things like ResourceTypes and ShaderStages, I don\u0027t expect them to change that much.",
+      "parentUuid": "6c7aedd8_fdefa428",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb356c6_f530e2eb",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-03-19T09:12:45Z",
       "side": 1,
       "message": "nit: Maybe this should be TextureFormat given that the WebGPU spec uses the \"texture\" terminology.",
+      "range": {
+        "startLine": 202,
+        "startChar": 55,
+        "endLine": 202,
+        "endChar": 66
+      },
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "200a4936_8ebc6acd",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "WGSL uses the \u0027image\u0027 terminology from what I can tell.",
+      "parentUuid": "ecb356c6_f530e2eb",
       "range": {
         "startLine": 202,
         "startChar": 55,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e752a59_6376746b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60728c92_a2a9d558",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3eb23fe_e522cf0b",
@@ -98,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4aeb6087_d833fe24",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1017,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "Fixed in https://dawn-review.googlesource.com/c/tint/+/45620, will need to wait on that landing and rolling.",
+      "parentUuid": "e3eb23fe_e522cf0b",
+      "range": {
+        "startLine": 1017,
+        "startChar": 75,
+        "endLine": 1017,
+        "endChar": 95
+      },
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06ec0937_ec21323e",
@@ -111,6 +195,24 @@
       "writtenOn": "2021-03-19T09:12:45Z",
       "side": 1,
       "message": "u-nit: Maybe could be a helper function too.",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e71a50_0184a548",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1021,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ec0937_ec21323e",
       "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +247,24 @@
       "writtenOn": "2021-03-19T09:12:45Z",
       "side": 1,
       "message": "nit: is this change needed in this CL?",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e01b4c_4d456d5c",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-22T20:51:08Z",
+      "side": 1,
+      "message": "Yes, because otherwise the binding isn\u0027t used, so Tint doesn\u0027t report it as being associated with the entry point, which lead to a number of bindings mismatch error.",
+      "parentUuid": "76d48c28_45136516",
       "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
