@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6981f9_818ca1f3",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-22T19:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "46b2bc25_603f951f",
+      "revId": "c0e67b53fb4d07c5feb4be2bebc433a5b29cff1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83d18557_69207bb2",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-03-22T10:46:35Z",
       "side": 1,
       "message": "note: this ASSERT_DEVICE_ERROR will trigger if at least one of the command errors. The way to fix this is to split into two command encoders, but it\u0027s probably not worth the hassle for these tests.",
+      "revId": "c0e67b53fb4d07c5feb4be2bebc433a5b29cff1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7192a5e1_9a81dc52",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-22T19:19:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83d18557_69207bb2",
       "revId": "c0e67b53fb4d07c5feb4be2bebc433a5b29cff1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
