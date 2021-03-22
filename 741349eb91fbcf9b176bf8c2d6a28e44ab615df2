@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00931ffd_e7271107",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T22:58:36Z",
+      "side": 1,
+      "message": "nit: capitalization typo",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f3dc6f6_1123742d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T22:58:36Z",
+      "side": 1,
+      "message": "nit: this was just renamed to mDepthStencil",
+      "range": {
+        "startLine": 536,
+        "startChar": 15,
+        "endLine": 536,
+        "endChar": 33
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a56f5302_809e4288",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T22:58:36Z",
+      "side": 1,
+      "message": "seems like we will only ever set state to clamp, but never back to clip. Instead we should probably always call setDepthClipMode and pick between MTLDepthClipModeClamp and MTLDepthClipModeClip.\n\nWe should also have a test that uses two pipelines in the same render pass with different clip modes.",
+      "range": {
+        "startLine": 1194,
+        "startChar": 20,
+        "endLine": 1196,
+        "endChar": 21
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
