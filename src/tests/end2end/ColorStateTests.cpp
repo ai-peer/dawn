@@ -79,6 +79,7 @@ class ColorStateTest : public DawnTest {
         baseDescriptor.cFragment.module = fsModule;
         baseDescriptor.cTargets[0].format = renderPass.colorFormat;
 
+        fprintf(stderr, "SetupSingleSourcePipelines 1\n");
         basePipeline = device.CreateRenderPipeline2(&baseDescriptor);
 
         utils::ComboRenderPipelineDescriptor2 testDescriptor;
@@ -86,6 +87,7 @@ class ColorStateTest : public DawnTest {
         testDescriptor.cFragment.module = fsModule;
         testDescriptor.cTargets[0] = colorTargetState;
         testDescriptor.cTargets[0].format = renderPass.colorFormat;
+        fprintf(stderr, "SetupSingleSourcePipelines 2\n");
 
         testPipeline = device.CreateRenderPipeline2(&testDescriptor);
     }
@@ -311,10 +313,12 @@ TEST_P(ColorStateTest, Basic) {
     wgpu::ColorTargetState descriptor;
     descriptor.blend = &blend;
     descriptor.writeMask = wgpu::ColorWriteMask::All;
-
+    fprintf(stderr, "Basic 1\n");
     SetupSingleSourcePipelines(descriptor);
 
+    fprintf(stderr, "Basic 2\n");
     DoSingleSourceTest(RGBA8(0, 0, 0, 0), {RGBA8(255, 0, 0, 0)}, RGBA8(255, 0, 0, 0));
+    fprintf(stderr, "Basic 3\n");
 }
 
 // The following tests check test that the blend operation works
