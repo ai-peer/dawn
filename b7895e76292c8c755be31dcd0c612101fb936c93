@@ -281,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06adf18_896f6989",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T16:57:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0b268d32_5e60fd8b",
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c817b790_788aae77",
@@ -318,6 +336,30 @@
       "side": 1,
       "message": "Strangely, yes? I didn\u0027t have this previously and it was causing failures for bots running Vulkan on Swiftshader.",
       "parentUuid": "c817b790_788aae77",
+      "range": {
+        "startLine": 237,
+        "startChar": 16,
+        "endLine": 242,
+        "endChar": 58
+      },
+      "revId": "b7895e76292c8c755be31dcd0c612101fb936c93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7c156f_8bafd4ca",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T16:57:18Z",
+      "side": 1,
+      "message": "Maybe add a comment then since one would expect we could skip it like the other backends.",
+      "parentUuid": "516e9976_48001de5",
       "range": {
         "startLine": 237,
         "startChar": 16,
