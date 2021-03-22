@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bec802e_ca374e14",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T15:42:51Z",
+      "side": 1,
+      "message": "nit: usually good to say what changed in the reland",
+      "revId": "8a740bddfd76719ed19fe2ee51c5f6eb6e695e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "78f3567d_1ffd08a1",
@@ -31,6 +48,23 @@
       "writtenOn": "2021-03-22T08:53:32Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "8a740bddfd76719ed19fe2ee51c5f6eb6e695e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5ca5f7_2336130f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-22T15:42:51Z",
+      "side": 1,
+      "message": "LGTM too",
       "revId": "8a740bddfd76719ed19fe2ee51c5f6eb6e695e61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
