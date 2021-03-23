@@ -105,6 +105,14 @@
         ]
     },
 
+    "external texture binding layout": {
+        "category": "structure",
+        "extensible": true,
+        "members": [
+
+        ]
+    },
+
     "sampler binding type": {
         "category": "enum",
         "values": [
@@ -176,6 +184,7 @@
             {"name": "storage texture format", "type": "texture format", "default": "undefined"},
 
             {"name": "buffer", "type": "buffer binding layout"},
+            {"name": "external texture", "type": "external texture binding layout"},
             {"name": "sampler", "type": "sampler binding layout"},
             {"name": "texture", "type": "texture binding layout"},
             {"name": "storage texture", "type": "storage texture binding layout"}
@@ -767,6 +776,13 @@
                 "returns": "queue"
             },
             {
+                "name": "import external texture",
+                "returns": "external texture",
+                "args": [
+                    {"name": "descriptor", "type": "external texture descriptor", "annotation": "const*"}
+                ]
+            },
+            {
                 "name": "inject error",
                 "args": [
                     {"name": "type", "type": "error type"},
@@ -876,6 +892,21 @@
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t", "default": 1},
             {"name": "depth", "type": "uint32_t", "default": 1}
+        ]
+    },
+    "external texture": {
+        "category": "object",
+        "methods": [
+            {
+                "name": "destroy",
+                "returns": "void"
+            }
+        ]
+    },
+    "external texture descriptor": {
+        "category": "structure",
+        "members": [
+            {"name": "external texture view", "type": "texture view"}
         ]
     },
     "fence": {
