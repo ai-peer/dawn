@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d954def9_92f021e5",
+        "filename": ".vscode/tasks.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-23T16:49:59Z",
+      "side": 1,
+      "message": "out/active is a symlink to the currently selected build flavor - see gn gen below.\n\n\u003e could we make it out/${input:buildType} \n\nNot without it asking you what flavour you want to build, each and every build.\n\nNote: \u0027\"label\": \"build\"\u0027 is special - it triggers with the standard build keyboard shortcut (ctrl+shift+b for me)",
+      "parentUuid": "77b0504a_7d559748",
+      "range": {
+        "startLine": 51,
+        "startChar": 46,
+        "endLine": 51,
+        "endChar": 62
+      },
+      "revId": "ba9f4329270a7f8c5a11ad1f3143052ea266e8ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "31c287fe_0e380411",
