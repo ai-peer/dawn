@@ -924,6 +924,32 @@ namespace dawn_native {
             return {};
         }
 
+        DeviceBase* gICEHandlerDevice = nullptr;
+
+        void TintInternalCompilerErrorReporter(const tint::diag::List& diagnostics) {
+            if (gICEHandlerDevice) {
+                gICEHandlerDevice->HandleError(InternalErrorType::Validation,
+                                               diagnostics.str().c_str());
+            }
+        }
+
+        // Indicates that for the lifetime of this object tint internal compiler errors should be
+        // reported to the given device.
+        class ScopedTintICEHandler {
+          public:
+            ScopedTintICEHandler(DeviceBase* device) {
+                // Cannot have overlapping scoped handlers
+                ASSERT(gICEHandlerDevice == nullptr);
+                gICEHandlerDevice = device;
+                tint::SetInternalCompilerErrorReporter(&TintInternalCompilerErrorReporter);
+            }
+
+            ~ScopedTintICEHandler() {
+                tint::SetInternalCompilerErrorReporter(nullptr);
+                gICEHandlerDevice = nullptr;
+            }
+        };
+
     }  // anonymous namespace
 
     ShaderModuleParseResult::ShaderModuleParseResult() = default;
@@ -946,6 +972,8 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR(
                 "Shader module descriptor chained nextInChain must be nullptr");
         }
+
+        ScopedTintICEHandler scopedICEHandler(device);
 
         ShaderModuleParseResult parseResult = {};
         switch (chainedDescriptor->sType) {
