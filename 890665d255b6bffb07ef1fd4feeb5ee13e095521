@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "890665d255b6bffb07ef1fd4feeb5ee13e095521",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f4e6330_11283ed5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-23T16:49:44Z",
+      "side": 1,
+      "message": "LGTM - yay we have barriers now!",
+      "revId": "890665d255b6bffb07ef1fd4feeb5ee13e095521",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
