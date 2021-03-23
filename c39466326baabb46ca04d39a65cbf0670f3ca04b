@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "723c6fff_3a96c574",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T17:31:56Z",
+      "side": 1,
+      "message": "PTAL, this has been bothering me for a while.",
+      "revId": "c39466326baabb46ca04d39a65cbf0670f3ca04b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
