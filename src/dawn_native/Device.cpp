@@ -27,6 +27,7 @@
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/ErrorScope.h"
+#include "dawn_native/ExternalTexture.h"
 #include "dawn_native/Fence.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/InternalPipelineStore.h"
@@ -918,6 +919,16 @@ namespace dawn_native {
         return APIGetQueue();
     }
 
+    ExternalTextureBase* DeviceBase::APIImportExternalTexture(
+        const ExternalTextureDescriptor* descriptor) {
+        ExternalTextureBase* result;
+        if (ConsumedError(CreateExternalTextureInternal(&result, descriptor))) {
+            return ExternalTextureBase::MakeError(this);
+        }
+
+        return result;
+    }
+
     void DeviceBase::ApplyExtensions(const DeviceDescriptor* deviceDescriptor) {
         ASSERT(deviceDescriptor);
         ASSERT(GetAdapter()->SupportsAllRequestedExtensions(deviceDescriptor->requiredExtensions));
@@ -1029,6 +1040,18 @@ namespace dawn_native {
         } else {
             DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(descriptor));
         }
+        return {};
+    }
+
+    MaybeError DeviceBase::CreateExternalTextureInternal(
+        ExternalTextureBase** result,
+        const ExternalTextureDescriptor* descriptor) {
+        if (IsValidationEnabled()) {
+            DAWN_TRY(ValidateExternalTextureDescriptor(this, descriptor));
+        }
+
+        *result = new ExternalTextureBase(this, descriptor);
+
         return {};
     }
 
