@@ -50,6 +50,24 @@
       "message": "nit: Unless I\u0027m missing something we can use the ASSERT_DEVICE_ERROR macro: ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromWGSL(device, \"...\"));",
       "revId": "a0311bda234a5a20f53d6b0dae649d97b9f7f817",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06fe26f_2752d75a",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-23T15:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d46a111b_2eb9d55f",
+      "revId": "a0311bda234a5a20f53d6b0dae649d97b9f7f817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
