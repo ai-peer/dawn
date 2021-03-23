@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "a0311bda234a5a20f53d6b0dae649d97b9f7f817",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77d88f80_5afc04ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T15:03:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a0311bda234a5a20f53d6b0dae649d97b9f7f817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d46a111b_2eb9d55f",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T15:03:28Z",
+      "side": 1,
+      "message": "nit: Unless I\u0027m missing something we can use the ASSERT_DEVICE_ERROR macro: ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromWGSL(device, \"...\"));",
+      "revId": "a0311bda234a5a20f53d6b0dae649d97b9f7f817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
