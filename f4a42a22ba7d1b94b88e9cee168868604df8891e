@@ -159,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0b7d8fc9_5e84bb49",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T14:54:46Z",
+      "side": 1,
+      "message": "Somethin like that. Right now if we do:\n\n  encoder \u003d createCommandEncoder()\n  encoder.WriteTimestamp(set, 0);\n  encoder.WriteTimestamp(set, 0);\n\nI think it doesn\u0027t reset the query set between the two writes, which is invalid in Vulkan.",
+      "parentUuid": "61671f8d_4ab16d4f",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd4c05ba_993ef847",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
         "patchSetId": 4
