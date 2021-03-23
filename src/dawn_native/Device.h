@@ -169,6 +169,7 @@ namespace dawn_native {
 
         // TODO(dawn:22): Remove once the deprecation period is finished.
         QueueBase* GetDefaultQueue();
+        QueueBase* API_GetQueue();
         QueueBase* GetQueue();
 
         void InjectError(wgpu::ErrorType type, const char* message);

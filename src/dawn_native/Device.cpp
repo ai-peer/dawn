@@ -916,10 +916,14 @@ namespace dawn_native {
     }
 
     QueueBase* DeviceBase::GetQueue() {
+        return mQueue.Get();
+    }
+
+    QueueBase* DeviceBase::API_GetQueue() {
         // Backends gave the primary queue during initialization.
         ASSERT(mQueue != nullptr);
 
-        // Returns a new reference to the queue.
+        // This returns a new reference to the queue that will be owned by the application.
         mQueue->Reference();
         return mQueue.Get();
     }
