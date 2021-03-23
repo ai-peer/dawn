@@ -20,6 +20,7 @@
 #include "dawn_native/IntegerTypes.h"
 
 #include <memory>
+#include <string>
 
 namespace dawn_native {
 
@@ -28,21 +29,25 @@ namespace dawn_native {
     class RenderPipelineBase;
 
     struct CreatePipelineAsyncTaskBase {
-        CreatePipelineAsyncTaskBase(void* userData);
+        CreatePipelineAsyncTaskBase(std::string errorMessage, void* userData);
         virtual ~CreatePipelineAsyncTaskBase();
 
-        virtual void Finish(WGPUCreatePipelineAsyncStatus status) = 0;
+        virtual void FinishInTick() = 0;
+        virtual void FinishForShutDown() = 0;
 
       protected:
+        std::string mErrorMessage;
         void* mUserData;
     };
 
     struct CreateComputePipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
         CreateComputePipelineAsyncTask(ComputePipelineBase* pipeline,
+                                       std::string errorMessage,
                                        WGPUCreateComputePipelineAsyncCallback callback,
                                        void* userdata);
 
-        void Finish(WGPUCreatePipelineAsyncStatus status) final;
+        void FinishInTick() final;
+        void FinishForShutDown() final;
 
       private:
         ComputePipelineBase* mPipeline;
@@ -51,10 +56,12 @@ namespace dawn_native {
 
     struct CreateRenderPipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
         CreateRenderPipelineAsyncTask(RenderPipelineBase* pipeline,
+                                      std::string errorMessage,
                                       WGPUCreateRenderPipelineAsyncCallback callback,
                                       void* userdata);
 
-        void Finish(WGPUCreatePipelineAsyncStatus status) final;
+        void FinishInTick() final;
+        void FinishForShutDown() final;
 
       private:
         RenderPipelineBase* mPipeline;
@@ -63,7 +70,7 @@ namespace dawn_native {
 
     class CreatePipelineAsyncTracker {
       public:
-        CreatePipelineAsyncTracker(DeviceBase* device);
+        explicit CreatePipelineAsyncTracker(DeviceBase* device);
         ~CreatePipelineAsyncTracker();
 
         void TrackTask(std::unique_ptr<CreatePipelineAsyncTaskBase> task, ExecutionSerial serial);
