@@ -14,6 +14,7 @@
 
 #include "dawn_native/vulkan/ShaderModuleVk.h"
 
+#include "dawn_native/TintUtils.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/VulkanError.h"
@@ -49,6 +50,8 @@ namespace dawn_native { namespace vulkan {
         const std::vector<uint32_t>* spirvPtr;
 
         if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            ScopedTintICEHandler scopedICEHandler(GetDevice());
+
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V writer failure:" << std::endl;
 
