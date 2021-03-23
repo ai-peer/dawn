@@ -66,6 +66,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37d1bbd7_0bb6352c",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-03-23T08:59:16Z",
+      "side": 1,
+      "message": "Just thought it\u0027s more efficient by subscripting than the iterator if there is only one index need to be updated.",
+      "parentUuid": "50a50980_3dd4c715",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "628cf0c3_0a269ace",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
@@ -117,6 +135,24 @@
       "writtenOn": "2021-03-22T15:28:36Z",
       "side": 1,
       "message": "This wouldn\u0027t work if we write the same query multiple times in the same command buffer. We should have on-demand resetting (except for render pass that can be done at the start of the render pass like is done in this patchset).",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61671f8d_4ab16d4f",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-03-23T08:59:16Z",
+      "side": 1,
+      "message": "Do you mean we just need to reset each query at where it\u0027s used outside the render pass?",
+      "parentUuid": "4c99d58f_aefea4a6",
       "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
