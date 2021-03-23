@@ -68,4 +68,7 @@ static constexpr uint64_t kCopyBufferToBufferOffsetAlignment = 4u;
 // * 1024 / 8.
 static constexpr uint32_t kMaxQueryCount = 8192u;
 
+// Max number of planes in an external texture.
+static constexpr uint8_t kMaxExternalTexturePlanes = 3u;
+
 #endif  // COMMON_CONSTANTS_H_

@@ -36,6 +36,7 @@ namespace dawn_native {
     class CreatePipelineAsyncTracker;
     class DynamicUploader;
     class ErrorScopeStack;
+    class ExternalTextureBase;
     class PersistentCache;
     class StagingBufferBase;
     struct InternalPipelineStore;
@@ -156,6 +157,7 @@ namespace dawn_native {
             const RenderBundleEncoderDescriptor* descriptor);
         RenderPipelineBase* APICreateRenderPipeline(const RenderPipelineDescriptor* descriptor);
         RenderPipelineBase* APICreateRenderPipeline2(const RenderPipelineDescriptor2* descriptor);
+        ExternalTextureBase* APICreateExternalTexture(const ExternalTextureDescriptor* descriptor);
         SamplerBase* APICreateSampler(const SamplerDescriptor* descriptor);
         ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
         SwapChainBase* APICreateSwapChain(Surface* surface, const SwapChainDescriptor* descriptor);
@@ -299,6 +301,8 @@ namespace dawn_native {
         ResultOrError<Ref<BufferBase>> CreateBufferInternal(const BufferDescriptor* descriptor);
         MaybeError CreateComputePipelineInternal(ComputePipelineBase** result,
                                                  const ComputePipelineDescriptor* descriptor);
+        ResultOrError<Ref<ExternalTextureBase>> CreateExternalTextureInternal(
+            const ExternalTextureDescriptor* descriptor);
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
         MaybeError CreateQuerySetInternal(QuerySetBase** result,
