@@ -299,6 +299,9 @@ namespace dawn_native {
         MaybeError CreateBindGroupLayoutInternal(BindGroupLayoutBase** result,
                                                  const BindGroupLayoutDescriptor* descriptor);
         ResultOrError<Ref<BufferBase>> CreateBufferInternal(const BufferDescriptor* descriptor);
+        void CreateComputePipelineAsyncInternal(const ComputePipelineDescriptor* descriptor,
+                                                WGPUCreateComputePipelineAsyncCallback callback,
+                                                void* userdata);
         MaybeError CreateComputePipelineInternal(ComputePipelineBase** result,
                                                  const ComputePipelineDescriptor* descriptor);
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
@@ -308,6 +311,9 @@ namespace dawn_native {
         MaybeError CreateRenderBundleEncoderInternal(
             RenderBundleEncoder** result,
             const RenderBundleEncoderDescriptor* descriptor);
+        void CreateRenderPipelineAsyncInternal(const RenderPipelineDescriptor2* descriptor,
+                                               WGPUCreateRenderPipelineAsyncCallback callback,
+                                               void* userdata);
         MaybeError CreateRenderPipelineInternal(RenderPipelineBase** result,
                                                 const RenderPipelineDescriptor2* descriptor);
         MaybeError CreateRenderPipelineInternal(RenderPipelineBase** result,
