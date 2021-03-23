@@ -20,7 +20,9 @@
 
 namespace dawn_native {
 
-    CreatePipelineAsyncTaskBase::CreatePipelineAsyncTaskBase(void* userdata) : mUserData(userdata) {
+    CreatePipelineAsyncTaskBase::CreatePipelineAsyncTaskBase(std::string errorMessage,
+                                                             void* userdata)
+        : mErrorMessage(errorMessage), mUserData(userdata) {
     }
 
     CreatePipelineAsyncTaskBase::~CreatePipelineAsyncTaskBase() {
@@ -28,28 +30,37 @@ namespace dawn_native {
 
     CreateComputePipelineAsyncTask::CreateComputePipelineAsyncTask(
         ComputePipelineBase* pipeline,
+        std::string errorMessage,
         WGPUCreateComputePipelineAsyncCallback callback,
         void* userdata)
-        : CreatePipelineAsyncTaskBase(userdata),
+        : CreatePipelineAsyncTaskBase(errorMessage, userdata),
           mPipeline(pipeline),
           mCreateComputePipelineAsyncCallback(callback) {
     }
 
-    void CreateComputePipelineAsyncTask::Finish(WGPUCreatePipelineAsyncStatus status) {
-        ASSERT(mPipeline != nullptr);
+    void CreateComputePipelineAsyncTask::FinishInTick() {
         ASSERT(mCreateComputePipelineAsyncCallback != nullptr);
 
-        if (status != WGPUCreatePipelineAsyncStatus_Success) {
-            // TODO(jiawei.shao@intel.com): support handling device lost
-            ASSERT(status == WGPUCreatePipelineAsyncStatus_DeviceDestroyed);
-            mCreateComputePipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceDestroyed,
-                                                nullptr, "Device destroyed before callback",
-                                                mUserData);
-            mPipeline->Release();
+        // TODO(jiawei.shao@intel.com): support handling device lost
+        if (mPipeline) {
+            mCreateComputePipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_Success,
+                                                reinterpret_cast<WGPUComputePipeline>(mPipeline),
+                                                "", mUserData);
         } else {
-            mCreateComputePipelineAsyncCallback(
-                status, reinterpret_cast<WGPUComputePipeline>(mPipeline), "", mUserData);
+            mCreateComputePipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_Error, nullptr,
+                                                mErrorMessage.c_str(), mUserData);
         }
+
+        // Set mCreateComputePipelineAsyncCallback to nullptr in case it is called more than once.
+        mCreateComputePipelineAsyncCallback = nullptr;
+    }
+
+    void CreateComputePipelineAsyncTask::FinishForShutDown() {
+        ASSERT(mCreateComputePipelineAsyncCallback != nullptr);
+
+        mCreateComputePipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceDestroyed, nullptr,
+                                            "Device destroyed before callback", mUserData);
+        mPipeline->Release();
 
         // Set mCreateComputePipelineAsyncCallback to nullptr in case it is called more than once.
         mCreateComputePipelineAsyncCallback = nullptr;
@@ -57,28 +68,38 @@ namespace dawn_native {
 
     CreateRenderPipelineAsyncTask::CreateRenderPipelineAsyncTask(
         RenderPipelineBase* pipeline,
+        std::string errorMessage,
         WGPUCreateRenderPipelineAsyncCallback callback,
         void* userdata)
-        : CreatePipelineAsyncTaskBase(userdata),
+        : CreatePipelineAsyncTaskBase(errorMessage, userdata),
           mPipeline(pipeline),
           mCreateRenderPipelineAsyncCallback(callback) {
     }
 
-    void CreateRenderPipelineAsyncTask::Finish(WGPUCreatePipelineAsyncStatus status) {
-        ASSERT(mPipeline != nullptr);
+    void CreateRenderPipelineAsyncTask::FinishInTick() {
         ASSERT(mCreateRenderPipelineAsyncCallback != nullptr);
 
-        if (status != WGPUCreatePipelineAsyncStatus_Success) {
-            // TODO(jiawei.shao@intel.com): support handling device lost
-            ASSERT(status == WGPUCreatePipelineAsyncStatus_DeviceDestroyed);
-            mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceDestroyed,
-                                               nullptr, "Device destroyed before callback",
+        // TODO(jiawei.shao@intel.com): support handling device lost
+        if (mPipeline != nullptr) {
+            mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_Success,
+                                               reinterpret_cast<WGPURenderPipeline>(mPipeline), "",
                                                mUserData);
-            mPipeline->Release();
         } else {
-            mCreateRenderPipelineAsyncCallback(
-                status, reinterpret_cast<WGPURenderPipeline>(mPipeline), "", mUserData);
+            mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_Error,
+                                               reinterpret_cast<WGPURenderPipeline>(mPipeline),
+                                               mErrorMessage.c_str(), mUserData);
         }
+
+        // Set mCreatePipelineAsyncCallback to nullptr in case it is called more than once.
+        mCreateRenderPipelineAsyncCallback = nullptr;
+    }
+
+    void CreateRenderPipelineAsyncTask::FinishForShutDown() {
+        ASSERT(mCreateRenderPipelineAsyncCallback != nullptr);
+
+        mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceDestroyed, nullptr,
+                                           "Device destroyed before callback", mUserData);
+        mPipeline->Release();
 
         // Set mCreatePipelineAsyncCallback to nullptr in case it is called more than once.
         mCreateRenderPipelineAsyncCallback = nullptr;
@@ -99,14 +120,14 @@ namespace dawn_native {
 
     void CreatePipelineAsyncTracker::Tick(ExecutionSerial finishedSerial) {
         for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateUpTo(finishedSerial)) {
-            task->Finish(WGPUCreatePipelineAsyncStatus_Success);
+            task->FinishInTick();
         }
         mCreatePipelineAsyncTasksInFlight.ClearUpTo(finishedSerial);
     }
 
     void CreatePipelineAsyncTracker::ClearForShutDown() {
         for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateAll()) {
-            task->Finish(WGPUCreatePipelineAsyncStatus_DeviceDestroyed);
+            task->FinishForShutDown();
         }
         mCreatePipelineAsyncTasksInFlight.Clear();
     }
