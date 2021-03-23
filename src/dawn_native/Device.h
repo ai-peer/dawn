@@ -36,6 +36,7 @@ namespace dawn_native {
     class CreatePipelineAsyncTracker;
     class DynamicUploader;
     class ErrorScopeStack;
+    class ExternalTextureBase;
     class PersistentCache;
     class StagingBufferBase;
     struct InternalPipelineStore;
@@ -174,6 +175,8 @@ namespace dawn_native {
         void APIInjectError(wgpu::ErrorType type, const char* message);
         bool APITick();
 
+        ExternalTextureBase* APIImportExternalTexture(const ExternalTextureDescriptor* descriptor);
+
         void APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
         void APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
         void APIPushErrorScope(wgpu::ErrorFilter filter);
@@ -299,6 +302,8 @@ namespace dawn_native {
         ResultOrError<Ref<BufferBase>> CreateBufferInternal(const BufferDescriptor* descriptor);
         MaybeError CreateComputePipelineInternal(ComputePipelineBase** result,
                                                  const ComputePipelineDescriptor* descriptor);
+        MaybeError CreateExternalTextureInternal(ExternalTextureBase** result,
+                                                 const ExternalTextureDescriptor* descriptor);
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
         MaybeError CreateQuerySetInternal(QuerySetBase** result,
