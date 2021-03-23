@@ -86,6 +86,13 @@ TEST_P(ShaderTests, ComputeLog2) {
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, kSteps);
 }
 
+TEST_P(ShaderTests, BadWGSL) {
+    std::string shader = R"(
+I am an invalid shader and should never pass validation!
+})";
+    ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromWGSL(device, shader.c_str()));
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
