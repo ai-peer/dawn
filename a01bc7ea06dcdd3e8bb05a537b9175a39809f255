@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bdd8f68_193dd127",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T12:16:03Z",
+      "side": 1,
+      "message": "Sound good.",
+      "parentUuid": "c27b0e6e_ae407be7",
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecb356c6_f530e2eb",
@@ -90,6 +108,30 @@
       "side": 1,
       "message": "WGSL uses the \u0027image\u0027 terminology from what I can tell.",
       "parentUuid": "ecb356c6_f530e2eb",
+      "range": {
+        "startLine": 202,
+        "startChar": 55,
+        "endLine": 202,
+        "endChar": 66
+      },
+      "revId": "a01bc7ea06dcdd3e8bb05a537b9175a39809f255",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef91067_528cf21e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T12:16:03Z",
+      "side": 1,
+      "message": "The types are `texture_2d\u003cf32\u003e` and friends in WGSL. But this is a nitpick, either way is fine. (and easy to change later with a type alias)",
+      "parentUuid": "200a4936_8ebc6acd",
       "range": {
         "startLine": 202,
         "startChar": 55,
