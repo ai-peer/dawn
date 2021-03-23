@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b0504a_7d559748",
+        "filename": ".vscode/tasks.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-23T16:45:36Z",
+      "side": 1,
+      "message": "looks like it\u0027s always \"out/active\" - could we make it out/${input:buildType} here and in the build task above? Would be nice to allow multiple build directories at once.",
+      "range": {
+        "startLine": 51,
+        "startChar": 46,
+        "endLine": 51,
+        "endChar": 62
+      },
+      "revId": "ba9f4329270a7f8c5a11ad1f3143052ea266e8ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "31c287fe_0e380411",
@@ -14,6 +37,23 @@
       "writtenOn": "2021-03-23T12:08:30Z",
       "side": 1,
       "message": "LGTM but I think Jiawei and Austin are also using VSCode so I\u0027d like them to review as well (I have 0 knowledge of vscode)",
+      "revId": "ba9f4329270a7f8c5a11ad1f3143052ea266e8ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c4db09_a2a88912",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-23T16:45:36Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "ba9f4329270a7f8c5a11ad1f3143052ea266e8ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
