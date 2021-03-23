@@ -26,6 +26,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c319be8_64b8e864",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T14:34:57Z",
+      "side": 1,
+      "message": "Can you add a // TODO(dawn:642): Move this check to ValidateRenderPipelineDescriptor when inverting the direction of the conversion.\n\n+CC Brandon as FYI",
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5188e6a_6bc4699c",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T14:34:57Z",
+      "side": 1,
+      "message": "nit: in WebGPU it would be [0, 1]",
+      "range": {
+        "startLine": 57,
+        "startChar": 49,
+        "endLine": 57,
+        "endChar": 56
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6f3dc6f6_1123742d",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 2
@@ -49,6 +89,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e66a51b_ad7817da",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T14:34:57Z",
+      "side": 1,
+      "message": "nit: setDepthClipMode in Metal is only available on ios 11.0 (and macOS 11.0). Can we have it in an @available block to avoid breaking the compilation on iOS?",
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbb9c6b_3cd0ae28",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T14:34:57Z",
+      "side": 1,
+      "message": "ditto @available",
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a56f5302_809e4288",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 2
@@ -60,6 +134,30 @@
       "writtenOn": "2021-03-22T22:58:36Z",
       "side": 1,
       "message": "seems like we will only ever set state to clamp, but never back to clip. Instead we should probably always call setDepthClipMode and pick between MTLDepthClipModeClamp and MTLDepthClipModeClip.\n\nWe should also have a test that uses two pipelines in the same render pass with different clip modes.",
+      "range": {
+        "startLine": 1194,
+        "startChar": 20,
+        "endLine": 1196,
+        "endChar": 21
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd47cff_e65c1677",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T14:34:57Z",
+      "side": 1,
+      "message": "(in addition to a couple test exercising the basic functionality)",
+      "parentUuid": "a56f5302_809e4288",
       "range": {
         "startLine": 1194,
         "startChar": 20,
