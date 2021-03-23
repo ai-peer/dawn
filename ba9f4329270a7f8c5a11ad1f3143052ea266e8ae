@@ -50,6 +50,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "28eefe8c_49e52b6a",
+        "filename": ".vscode/tasks.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-23T16:52:53Z",
+      "side": 1,
+      "message": "ok I see - that makes sense now. So after running gn gen, it\u0027s easier to launch a build without specifying every time.",
+      "parentUuid": "d954def9_92f021e5",
+      "range": {
+        "startLine": 51,
+        "startChar": 46,
+        "endLine": 51,
+        "endChar": 62
+      },
+      "revId": "ba9f4329270a7f8c5a11ad1f3143052ea266e8ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "31c287fe_0e380411",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
