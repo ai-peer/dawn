@@ -16,6 +16,23 @@
       "message": "PTAL! Follow up from the conversation this morning and email. It would be nice to have a more generic was to communicate messages that aren\u0027t explicitly errors (such as deprecation warnings) but in the meantime this allows us to show more useful error messages about shader validation failures in some situations.",
       "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a2e58f_fee2e880",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-23T22:38:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
