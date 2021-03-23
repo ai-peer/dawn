@@ -16,6 +16,24 @@
       "message": "Seems ok. Maybe to simplify where stuff is specified though, this could be an \"implemented as\": \"API_GetQueue\" inside dawn.json ? Let\u0027s also start a docs/generator/blah.md that details where the various bits of customization are. Some stuff is in dawn.json, dawn_wire.json, or some list in a jinja2 template like this.\n\n\nShrek mentioned that knowing what stuff is generated and how is one of the pain points of ramping up.",
       "revId": "570527275e36b7377c76c03353f7da85ab29b4ec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07da90be_34b620db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-23T17:39:44Z",
+      "side": 1,
+      "message": "Gotcha, I\u0027ll make it better and start a doc.",
+      "parentUuid": "0cbfee6c_8e6b7c47",
+      "revId": "570527275e36b7377c76c03353f7da85ab29b4ec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
