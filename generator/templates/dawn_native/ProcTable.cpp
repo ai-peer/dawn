@@ -24,6 +24,8 @@
     {% endif %}
 {% endfor %}
 
+{% set MethodWithAPIPrefix = ["DeviceGetQueue"] %}
+
 namespace dawn_native {
 
     // Type aliases to make all frontend types appear as if they have "Base" at the end when some
@@ -40,6 +42,7 @@ namespace dawn_native {
         {% for type in by_category["object"] %}
             {% for method in c_methods(type) %}
                 {% set suffix = as_MethodSuffix(type.name, method.name) %}
+                {% set API = "API_" if suffix in MethodWithAPIPrefix else "" %}
 
                 {{as_cType(method.return_type.name)}} Native{{suffix}}(
                     {{-as_cType(type.name)}} cSelf
@@ -64,7 +67,7 @@ namespace dawn_native {
                     {% if method.return_type.name.canonical_case() != "void" %}
                         auto result =
                     {%- endif %}
-                    self->{{method.name.CamelCase()}}(
+                    self->{{API}}{{method.name.CamelCase()}}(
                         {%- for arg in method.arguments -%}
                             {%- if not loop.first %}, {% endif -%}
                             {{as_varName(arg.name)}}_
