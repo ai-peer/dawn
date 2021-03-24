@@ -51,6 +51,24 @@
       "parentUuid": "6cb471a4_579be6e9",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe71100_0d5a5009",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T18:02:18Z",
+      "side": 1,
+      "message": "PTAL is Please Take A Look (that was addressed at the people I added as reviewers).\n\nLGTM \u003d Looks Good To Me, we use that a lot too.\n\nI think the tests would be unittests. We have similar tests here: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/validation/BufferValidationTests.cpp;l\u003d404\n\nBut these would live in this file https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/validation/QueueOnSubmittedWorkDoneValidationTests.cpp\n\nand this file https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/unittests/validation/RenderPipelineValidationTests.cpp (somehow we don\u0027t have PipelineAsync tests there, but it\u0027s where it should live.)",
+      "parentUuid": "34e32932_d6b7a71d",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
