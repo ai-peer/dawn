@@ -141,6 +141,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b183d8f9_5d8d2534",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-03-24T07:43:10Z",
+      "side": 1,
+      "message": "Roughly tested the time for 1000 queries on Intel UHD 630.\nReset 100 queries in one time: ~0.01 ms\nReset 100 queries in 100 times: ~0.016 ms\nReset 1000 queries in one time: ~0.013 ms\nReset 1000 queries in 1000 times: ~0.167 ms\n\nWhen resetting a small number of queries, their time difference is not big, but when the number increases, there is almost a 10 times difference.",
+      "parentUuid": "0cffaed0_2ed76144",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c99d58f_aefea4a6",
         "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 4
