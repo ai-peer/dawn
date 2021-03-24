@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4e8659f_df5429ca",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T19:01:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "332b9bad_4cc5c98b",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5ebb8cf7_74f25978",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-24T17:32:10Z",
       "side": 1,
       "message": "There is still technically a race that can happen here if two threads get in the condition at the same time. That\u0027s why Ben\u0027s suggestion uses the lambda trick.",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a51dd54f_130b8cd9",
+        "filename": "src/dawn_native/TintUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T19:01:07Z",
+      "side": 1,
+      "message": "Ah, I see. I tried another variant that assigns the static variable from a local, non-lambda function and that seems to have worked as well. Not sure if the use of a lambda here was necessary to grant magical cross-thread synchronization powers 😁, since my understanding is that it\u0027s the assignment of the static that does the trick.",
+      "parentUuid": "5ebb8cf7_74f25978",
       "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7e0b76_243926e2",
+        "filename": "src/dawn_native/TintUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T19:01:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b57a522_bb3791fa",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ceda4480_364a9ac6",
@@ -109,6 +169,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d0859f_407b6676",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T19:01:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ceda4480_364a9ac6",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26c4ce09_19c01760",
@@ -122,6 +200,24 @@
       "writtenOn": "2021-03-24T17:32:10Z",
       "side": 1,
       "message": "ditto",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "656761ab_3e4ef6d8",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T19:01:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26c4ce09_19c01760",
       "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
