@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f749530f_62010aa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "332b9bad_4cc5c98b",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "nit: also edit src/dawn_native/CMakeLists.txt (without the commas)",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ebb8cf7_74f25978",
+        "filename": "src/dawn_native/TintUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "There is still technically a race that can happen here if two threads get in the condition at the same time. That\u0027s why Ben\u0027s suggestion uses the lambda trick.",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "767d8cf8_cf695b77",
+        "filename": "src/dawn_native/TintUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "Oh, I completely forget we had that. Does it have NonMovable as well?",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b57a522_bb3791fa",
+        "filename": "src/dawn_native/TintUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "nit: I think these can be local to TintUtils.cpp (in an anonymous namespace for example)",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ceda4480_364a9ac6",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "nit: We can use Tint outside of the code path when consuming WGSL I think. It might be worth putting it outside of this if ()",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26c4ce09_19c01760",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:32:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
