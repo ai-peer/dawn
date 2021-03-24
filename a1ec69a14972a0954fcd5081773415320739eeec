@@ -16,6 +16,23 @@
       "message": "That\u0027s probably enough reviews, we can land this and iterate in follow up CLs if needed.",
       "revId": "a1ec69a14972a0954fcd5081773415320739eeec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e5de2c9_6d15f29e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-24T09:40:28Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "a1ec69a14972a0954fcd5081773415320739eeec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
