@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b1701e6_c00472a1",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T17:26:57Z",
+      "side": 1,
+      "message": "Updated to more closely align with these suggestions, thank you!\n\nOne thing I had to change was that I found if I tried the static lambda approach as shown in Ben\u0027s comment tint::SetInternalCompilerErrorReporter was just... never called? And honestly I don\u0027t have enough experience with C++ lambdas to know why. I understand what it SHOULD be doing, looks correct as far as I can tell, and it compiles fine. Just never calls the function. Maybe an overactive compiler accidentally optimizing away a value that it sees is never used without realizing the call has side effects? I don\u0027t know.\n\nIn any case, I went with a more old-school approach that I don\u0027t think affects the thread safety of the tint call. PTAL and let me know what you think.",
+      "parentUuid": "bcce8a79_1ba257be",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b566e7d_b870640b",
@@ -172,6 +190,24 @@
       "writtenOn": "2021-03-24T09:22:07Z",
       "side": 1,
       "message": "nit: this class should be non-copyable non-movable.",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e0a4ecc_07efc284",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T17:26:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b566e7d_b870640b",
       "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -207,6 +243,24 @@
       "side": 1,
       "message": "I should have archived this in the review - but I talked to Brandon yesterday and he said he would add it in more places as well. But yes, we could make a common TintUtils.",
       "parentUuid": "bfeb9786_2f5eea5c",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df749de_1ad52212",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-24T17:26:57Z",
+      "side": 1,
+      "message": "Moved the class out to a new util file as suggested, and applied it everywhere I could find that Tint is used. It\u0027s slightly tricky because it seems reasonable to put a scoped handler in InitializeBase, but the way it\u0027s called by each of the backends is slightly different and means that you actually have to apply it one level up to consistently cover all of the tint calls.",
+      "parentUuid": "34439160_92a93b4e",
       "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
