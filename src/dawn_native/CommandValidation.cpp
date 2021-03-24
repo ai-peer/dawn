@@ -24,6 +24,7 @@
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPipeline.h"
+#include "dawn_native/ValidationUtils_autogen.h"
 
 namespace dawn_native {
 
@@ -286,6 +287,7 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("mipLevel out of range");
         }
 
+        DAWN_TRY(ValidateTextureAspect(textureCopy.aspect));
         if (SelectFormatAspects(texture->GetFormat(), textureCopy.aspect) == Aspect::None) {
             return DAWN_VALIDATION_ERROR("Texture does not have selected aspect for texture copy.");
         }
