@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66ea9f40_0621b001",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-03-24T10:02:58Z",
+      "side": 1,
+      "message": "Requires a bit more work than that to make this thread safe. I think this does the trick:\n\n  \n // Indicates that for the lifetime of this object tint internal compiler errors should be\n // reported to the given device.\n class ScopedTintICEHandler : public NonCopyable {\n     public:\n     ScopedTintICEHandler(DeviceBase* device) {\n         // Call tint::SetInternalCompilerErrorReporter() the first time\n         // this constructor is called. Static initialization is\n         // guaranteed to be thread-safe, and only occur once.\n         static bool init_once_tint_error_reporter \u003d [] {\n             tint::SetInternalCompilerErrorReporter(\u0026TintICEReporter);\n             return true;\n         };\n         (void)init_once_tint_error_reporter;  // Value isn\u0027t actually used.\n         tlDevice \u003d device;\n     }\n \n     ~ScopedTintICEHandler() {\n         tint::SetInternalCompilerErrorReporter(nullptr);\n         tlDevice \u003d nullptr;\n     }\n \n     private:\n     static thread_local DeviceBase* tlDevice;\n \n     static void TintICEReporter(const tint::diag::List\u0026 diagnostics) {\n         if (tlDevice) {\n             tlDevice-\u003eHandleError(InternalErrorType::Internal, diagnostics.str().c_str());\n         }\n     }\n     ScopedTintICEHandler(ScopedTintICEHandler\u0026\u0026) \u003d delete;\n };\n \n thread_local DeviceBase* ScopedTintICEHandler::tlDevice \u003d nullptr;\n\n\n\nNote I also changed the InternalErrorType to Internal, as these are not Validation issues.",
+      "parentUuid": "0de711ce_cf7c530f",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b566e7d_b870640b",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
