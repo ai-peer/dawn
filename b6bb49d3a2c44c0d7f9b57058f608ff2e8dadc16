@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39e9c1f1_eebf8d50",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T12:24:01Z",
+      "side": 1,
+      "message": "Heh, C++ is annoying with void* writes not being speced to be atomic.",
+      "parentUuid": "0497443c_104d7700",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b566e7d_b870640b",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
