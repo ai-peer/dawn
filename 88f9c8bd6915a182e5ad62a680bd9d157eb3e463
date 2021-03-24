@@ -33,6 +33,23 @@
       "message": "Feel free to edit the .md directly using Gerrit\u0027s Edit feature.",
       "revId": "88f9c8bd6915a182e5ad62a680bd9d157eb3e463",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44cc619b_e38a8c34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-03-24T17:46:51Z",
+      "side": 1,
+      "message": "LGTM(Simply read through the md). I think this could be useful as I found it necessary to look into generated code and their generator for some issues instead of just waiting for black box magic.",
+      "revId": "88f9c8bd6915a182e5ad62a680bd9d157eb3e463",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
