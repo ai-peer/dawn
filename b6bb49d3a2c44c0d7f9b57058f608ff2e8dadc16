@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcce8a79_1ba257be",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-24T16:03:16Z",
+      "side": 1,
+      "message": "tbh, I didn\u0027t think making this thread_local was worth it right now. Little else in Dawn actually supports multithreaded usage. And then in Chrome, usage of multiple devices is still fine because execution happens on a single thread.",
+      "parentUuid": "2b2420fd_9c8fdb8f",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b566e7d_b870640b",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
@@ -171,6 +189,24 @@
       "writtenOn": "2021-03-24T09:22:07Z",
       "side": 1,
       "message": "There are other places where we use Tint, maybe we should add the ScopeTintICEHandler there too? Places include ShaderModuleBase::InitializeBase, and variaous backend ShaderModules translating to SPIRV/MSL/HLSL.\n\nThis means that the ScopeTintICEHandler would be used in multiple files so it should be moved to a shared src/dawn_native/TintUtils.h/.cpp header.",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34439160_92a93b4e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-24T16:03:16Z",
+      "side": 1,
+      "message": "I should have archived this in the review - but I talked to Brandon yesterday and he said he would add it in more places as well. But yes, we could make a common TintUtils.",
+      "parentUuid": "bfeb9786_2f5eea5c",
       "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
