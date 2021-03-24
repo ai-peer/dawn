@@ -33,6 +33,74 @@
       "message": "LGTM",
       "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15dd357_857f8bcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:22:07Z",
+      "side": 1,
+      "message": "+CC Ben",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0de711ce_cf7c530f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:22:07Z",
+      "side": 1,
+      "message": "Maybe this should be a thread_local variable so that multiple devices can be used at the same time.",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b566e7d_b870640b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 938,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:22:07Z",
+      "side": 1,
+      "message": "nit: this class should be non-copyable non-movable.",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfeb9786_2f5eea5c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 976,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:22:07Z",
+      "side": 1,
+      "message": "There are other places where we use Tint, maybe we should add the ScopeTintICEHandler there too? Places include ShaderModuleBase::InitializeBase, and variaous backend ShaderModules translating to SPIRV/MSL/HLSL.\n\nThis means that the ScopeTintICEHandler would be used in multiple files so it should be moved to a shared src/dawn_native/TintUtils.h/.cpp header.",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
