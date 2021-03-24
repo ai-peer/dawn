@@ -16,6 +16,24 @@
       "message": "At least for the failing perf tests I think the issue is because \"GetBindGroupLayout\" returns an empty bind group layout in SubresourceTrackingPerf because this shader entrypoint doesn\u0027t reference \"materials\". There\u0027s likely similar small fixes to do in other tests to make this CL pass CQ.",
       "revId": "e4fc51fd4737f50e8b822126da816231ac9a2597",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa6032ce_0f63e115",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:09:35Z",
+      "side": 1,
+      "message": "I forgot to link to it: https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/tests/perf_tests/SubresourceTrackingPerf.cpp;l\u003d83?q\u003dSubresourceTrack",
+      "parentUuid": "686ce894_91a9ddb0",
+      "revId": "e4fc51fd4737f50e8b822126da816231ac9a2597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
