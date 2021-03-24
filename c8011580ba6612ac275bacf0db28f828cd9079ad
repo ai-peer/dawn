@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7adc4eca_43e83f64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:11:57Z",
+      "side": 1,
+      "message": "nit: Bug: dawn:572",
+      "revId": "c8011580ba6612ac275bacf0db28f828cd9079ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4fe159_d0e6d04f",
+        "filename": "src/tests/end2end/ComputeSharedMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T09:11:57Z",
+      "side": 1,
+      "message": "u-nit: we usually put the [[block]] on the same line as the struct keyword",
+      "revId": "c8011580ba6612ac275bacf0db28f828cd9079ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
