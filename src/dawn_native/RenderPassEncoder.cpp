@@ -93,7 +93,7 @@ namespace dawn_native {
         return mQueryAvailabilityMap;
     }
 
-    void RenderPassEncoder::EndPass() {
+    void RenderPassEncoder::APIEndPass() {
         if (mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 if (IsValidationEnabled()) {
                     DAWN_TRY(ValidateProgrammableEncoderEnd());
@@ -110,7 +110,7 @@ namespace dawn_native {
         }
     }
 
-    void RenderPassEncoder::SetStencilReference(uint32_t reference) {
+    void RenderPassEncoder::APISetStencilReference(uint32_t reference) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             SetStencilReferenceCmd* cmd =
                 allocator->Allocate<SetStencilReferenceCmd>(Command::SetStencilReference);
@@ -120,7 +120,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::SetBlendColor(const Color* color) {
+    void RenderPassEncoder::APISetBlendColor(const Color* color) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             SetBlendColorCmd* cmd = allocator->Allocate<SetBlendColorCmd>(Command::SetBlendColor);
             cmd->color = *color;
@@ -129,7 +129,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::SetViewport(float x,
+    void RenderPassEncoder::APISetViewport(float x,
                                         float y,
                                         float width,
                                         float height,
@@ -170,7 +170,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::SetScissorRect(uint32_t x,
+    void RenderPassEncoder::APISetScissorRect(uint32_t x,
                                            uint32_t y,
                                            uint32_t width,
                                            uint32_t height) {
@@ -194,7 +194,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::ExecuteBundles(uint32_t count, RenderBundleBase* const* renderBundles) {
+    void RenderPassEncoder::APIExecuteBundles(uint32_t count, RenderBundleBase* const* renderBundles) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 for (uint32_t i = 0; i < count; ++i) {
@@ -232,7 +232,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::BeginOcclusionQuery(uint32_t queryIndex) {
+    void RenderPassEncoder::APIBeginOcclusionQuery(uint32_t queryIndex) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 if (mOcclusionQuerySet.Get() == nullptr) {
@@ -271,7 +271,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::EndOcclusionQuery() {
+    void RenderPassEncoder::APIEndOcclusionQuery() {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 if (!mOcclusionQueryActive) {
@@ -293,7 +293,7 @@ namespace dawn_native {
         });
     }
 
-    void RenderPassEncoder::WriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
+    void RenderPassEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
         mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(querySet));
