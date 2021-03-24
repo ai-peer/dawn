@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a2243710_3e210eb3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001736
+      },
+      "writtenOn": "2021-03-24T12:46:33Z",
+      "side": 1,
+      "message": "No. I\u0027m simply trying to assess the current state of the tint HLSL backend. I hit this crash immediately...",
+      "parentUuid": "ad24d039_53481b9b",
+      "revId": "97c0a1bf4faa75d59da13f8e2541bae3772112b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9ac4f19e_c55643ad",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
