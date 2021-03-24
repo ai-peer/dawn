@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "88f9c8bd6915a182e5ad62a680bd9d157eb3e463",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef7ae6d4_2823fbcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:33:59Z",
+      "side": 1,
+      "message": "Feel free to edit the .md directly using Gerrit\u0027s Edit feature.",
+      "revId": "88f9c8bd6915a182e5ad62a680bd9d157eb3e463",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
