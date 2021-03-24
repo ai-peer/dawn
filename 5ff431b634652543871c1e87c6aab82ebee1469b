@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a07edc5_38c8f429",
+        "filename": ".vscode/tasks.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-03-24T05:57:50Z",
+      "side": 1,
+      "message": "It does not work on Windows, we\u0027d better put the command and args in the \"linux\" property for linux specific command configration.\n \"linux\": {\n   \"command\": \"...\",\n   \"args\": [...]\n }",
+      "revId": "5ff431b634652543871c1e87c6aab82ebee1469b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
