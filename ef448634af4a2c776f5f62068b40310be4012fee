@@ -16,6 +16,23 @@
       "message": "I found this crash when running natively, using Dawn as the WebGPU implementation. When running using WASM in Chrome this crash doesn\u0027t occur. I assume callbacks are handled differently?\n\nThere could be more cases of callbacks causing re-entrance issues, but this is what I\u0027ve found for now.\n\nI can add a test for this if the fix is good.",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cb471a4_579be6e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T17:12:15Z",
+      "side": 1,
+      "message": "PTAL!\n\nThanks for the contribution! The fix looks good, but like you said, can we have tests for it?",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
