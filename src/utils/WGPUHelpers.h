@@ -30,7 +30,7 @@ namespace utils {
 
     enum class SingleShaderStage { Vertex, Fragment, Compute };
 
-    wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source);
+    wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, std::string source);
     wgpu::ShaderModule CreateShaderModule(const wgpu::Device& device, const char* source);
 
     wgpu::Buffer CreateBufferFromData(const wgpu::Device& device,
