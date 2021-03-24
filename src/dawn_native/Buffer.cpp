@@ -186,11 +186,11 @@ namespace dawn_native {
 
         DeviceBase* device = GetDevice();
         if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            memset(GetMappedRange(0, mSize), uint8_t(0u), mSize);
+            memset(GetMappedRangeInternal(true, 0, mSize), uint8_t(0u), mSize);
             SetIsDataInitialized();
             device->IncrementLazyClearCountForTesting();
         } else if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            memset(GetMappedRange(0, mSize), uint8_t(1u), mSize);
+            memset(GetMappedRangeInternal(true, 0, mSize), uint8_t(1u), mSize);
         }
 
         return {};
@@ -252,11 +252,11 @@ namespace dawn_native {
         }
     }
 
-    void BufferBase::MapAsync(wgpu::MapMode mode,
-                              size_t offset,
-                              size_t size,
-                              WGPUBufferMapCallback callback,
-                              void* userdata) {
+    void BufferBase::APIMapAsync(wgpu::MapMode mode,
+                                 size_t offset,
+                                 size_t size,
+                                 WGPUBufferMapCallback callback,
+                                 void* userdata) {
         // Handle the defaulting of size required by WebGPU, even if in webgpu_cpp.h it is not
         // possible to default the function argument (because there is the callback later in the
         // argument list)
@@ -287,15 +287,16 @@ namespace dawn_native {
         }
         std::unique_ptr<MapRequestTask> request =
             std::make_unique<MapRequestTask>(this, mLastMapID);
-        GetDevice()->GetQueue()->TrackTask(std::move(request),
-                                           GetDevice()->GetPendingCommandSerial());
+        // XXX
+        GetDevice()->APIGetQueue()->TrackTask(std::move(request),
+                                              GetDevice()->GetPendingCommandSerial());
     }
 
-    void* BufferBase::GetMappedRange(size_t offset, size_t size) {
+    void* BufferBase::APIGetMappedRange(size_t offset, size_t size) {
         return GetMappedRangeInternal(true, offset, size);
     }
 
-    const void* BufferBase::GetConstMappedRange(size_t offset, size_t size) {
+    const void* BufferBase::APIGetConstMappedRange(size_t offset, size_t size) {
         return GetMappedRangeInternal(false, offset, size);
     }
 
@@ -314,7 +315,7 @@ namespace dawn_native {
         return start == nullptr ? nullptr : start + offset;
     }
 
-    void BufferBase::Destroy() {
+    void BufferBase::APIDestroy() {
         if (IsError()) {
             // It is an error to call Destroy() on an ErrorBuffer, but we still need to reclaim the
             // fake mapped staging data.
@@ -354,7 +355,7 @@ namespace dawn_native {
         return {};
     }
 
-    void BufferBase::Unmap() {
+    void BufferBase::APIUnmap() {
         UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback);
     }
 

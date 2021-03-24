@@ -32,7 +32,8 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
         Device* device = ToBackend(GetDevice());
 
-        device->Tick();
+        // XXX
+        device->APITick();
 
         CommandRecordingContext* commandContext;
         DAWN_TRY_ASSIGN(commandContext, device->GetPendingCommandContext());

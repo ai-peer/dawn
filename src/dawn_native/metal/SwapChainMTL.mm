@@ -113,7 +113,7 @@ namespace dawn_native { namespace metal {
         ASSERT(mCurrentDrawable != nullptr);
         [*mCurrentDrawable present];
 
-        mTexture->Destroy();
+        mTexture->APIDestroy();
         mTexture = nullptr;
 
         mCurrentDrawable = nullptr;
@@ -129,14 +129,15 @@ namespace dawn_native { namespace metal {
 
         mTexture = AcquireRef(
             new Texture(ToBackend(GetDevice()), &textureDesc, [*mCurrentDrawable texture]));
-        return mTexture->CreateView();
+        // XXX
+        return mTexture->APICreateView();
     }
 
     void SwapChain::DetachFromSurfaceImpl() {
         ASSERT((mTexture == nullptr) == (mCurrentDrawable == nullptr));
 
         if (mTexture != nullptr) {
-            mTexture->Destroy();
+            mTexture->APIDestroy();
             mTexture = nullptr;
 
             mCurrentDrawable = nullptr;
