@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0497443c_104d7700",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-03-24T10:03:53Z",
+      "side": 1,
+      "message": "argh. remove the \n\n tint::SetInternalCompilerErrorReporter(nullptr);\n\nline in ~ScopedTintICEHandler().",
+      "parentUuid": "66ea9f40_0621b001",
+      "revId": "b6bb49d3a2c44c0d7f9b57058f608ff2e8dadc16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1b566e7d_b870640b",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 1
