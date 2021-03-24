@@ -14,6 +14,7 @@
 
 #include "tests/unittests/validation/ValidationTest.h"
 
+#include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
 namespace {
@@ -127,6 +128,129 @@ namespace {
 
         // Resubmitting any command buffer, even if the problem was fixed, should fail
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
+
+    // Test that submitting in a buffer mapping callback doesn't cause re-entrance problems.
+    TEST_F(QueueSubmitValidationTest, SubmitInBufferMapCallback) {
+        // Create a buffer for mapping, to run our callback.
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+        descriptor.usage = wgpu::BufferUsage::MapWrite;
+        wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+        struct CallbackData {
+            wgpu::Device device;
+            wgpu::Buffer buffer;
+        } callbackData = { device, buffer };
+
+        const auto callback = [](WGPUBufferMapAsyncStatus status, void* userdata) {
+            CallbackData* data = reinterpret_cast<CallbackData*>(userdata);
+
+            // Create buffers to use in a dummy b2b copy command.
+            wgpu::BufferDescriptor descriptor;
+            descriptor.size = 4;
+            descriptor.usage = wgpu::BufferUsage::CopySrc;
+            wgpu::Buffer bufferSrc = data->device.CreateBuffer(&descriptor);
+            descriptor.usage = wgpu::BufferUsage::CopyDst;
+            wgpu::Buffer bufferDst = data->device.CreateBuffer(&descriptor);
+
+            // Encode and submit our command.
+            wgpu::CommandEncoder encoder = data->device.CreateCommandEncoder();
+            encoder.CopyBufferToBuffer(bufferSrc, 0, bufferDst, 0, descriptor.size);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            wgpu::Queue queue = data->device.GetQueue();
+            queue.Submit(1, &commands);
+
+            data->buffer.Unmap();
+        };
+
+        buffer.MapAsync(wgpu::MapMode::Write, 0, descriptor.size, callback, &callbackData);
+
+        WaitForAllOperations(device);
+    }
+
+    // Test that submitting in a render pipeline creation callback doesn't cause re-entrance problems.
+    TEST_F(QueueSubmitValidationTest, SubmitInCreateRenderPipelineAsyncCallback) {
+        struct CallbackData {
+            wgpu::Device device;
+        } callbackData = { device };
+
+        const auto callback = [](WGPUCreatePipelineAsyncStatus status, WGPURenderPipeline pipeline, char const* message, void* userdata) {
+            CallbackData* data = reinterpret_cast<CallbackData*>(userdata);
+
+            wgpuRenderPipelineRelease(pipeline);
+
+            // Create buffers to use in a dummy b2b copy command.
+            wgpu::BufferDescriptor descriptor;
+            descriptor.size = 4;
+            descriptor.usage = wgpu::BufferUsage::CopySrc;
+            wgpu::Buffer bufferSrc = data->device.CreateBuffer(&descriptor);
+            descriptor.usage = wgpu::BufferUsage::CopyDst;
+            wgpu::Buffer bufferDst = data->device.CreateBuffer(&descriptor);
+
+            // Encode and submit our command.
+            wgpu::CommandEncoder encoder = data->device.CreateCommandEncoder();
+            encoder.CopyBufferToBuffer(bufferSrc, 0, bufferDst, 0, descriptor.size);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            wgpu::Queue queue = data->device.GetQueue();
+            queue.Submit(1, &commands);
+        };
+
+        wgpu::ShaderModule vsModule = utils::CreateShaderModuleFromWGSL(device, R"(
+            [[builtin(position)]] var<out> Position : vec4<f32>;
+            [[stage(vertex)]] fn main() -> void {
+                Position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+            })");
+
+        wgpu::ShaderModule fsModule = utils::CreateShaderModuleFromWGSL(device, R"(
+            [[location(0)]] var<out> fragColor : vec4<f32>;
+            [[stage(fragment)]] fn main() -> void {
+                fragColor = vec4<f32>(0.0, 1.0, 0.0, 1.0);
+            })");
+
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        device.CreateRenderPipelineAsync(&descriptor, callback, &callbackData);
+
+        WaitForAllOperations(device);
+    }
+
+    // Test that submitting in a compute pipeline creation callback doesn't cause re-entrance problems.
+    TEST_F(QueueSubmitValidationTest, SubmitInCreateComputePipelineAsyncCallback) {
+        struct CallbackData {
+            wgpu::Device device;
+        } callbackData = { device };
+
+        const auto callback = [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline pipeline, char const* message, void* userdata) {
+            CallbackData* data = reinterpret_cast<CallbackData*>(userdata);
+
+            wgpuComputePipelineRelease(pipeline);
+
+            // Create buffers to use in a dummy b2b copy command.
+            wgpu::BufferDescriptor descriptor;
+            descriptor.size = 4;
+            descriptor.usage = wgpu::BufferUsage::CopySrc;
+            wgpu::Buffer bufferSrc = data->device.CreateBuffer(&descriptor);
+            descriptor.usage = wgpu::BufferUsage::CopyDst;
+            wgpu::Buffer bufferDst = data->device.CreateBuffer(&descriptor);
+
+            // Encode and submit our command.
+            wgpu::CommandEncoder encoder = data->device.CreateCommandEncoder();
+            encoder.CopyBufferToBuffer(bufferSrc, 0, bufferDst, 0, descriptor.size);
+            wgpu::CommandBuffer commands = encoder.Finish();
+            wgpu::Queue queue = data->device.GetQueue();
+            queue.Submit(1, &commands);
+        };
+
+        wgpu::ComputePipelineDescriptor descriptor;
+        descriptor.computeStage.module = utils::CreateShaderModuleFromWGSL(device, R"(
+            [[stage(compute)]] fn main() -> void {
+            })");
+        descriptor.computeStage.entryPoint = "main";
+        device.CreateComputePipelineAsync(&descriptor, callback, &callbackData);
+
+        WaitForAllOperations(device);
     }
 
 }  // anonymous namespace
