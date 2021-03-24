@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad24d039_53481b9b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T12:25:50Z",
+      "side": 1,
+      "message": "nit: do you have a Bug ID for what you were investigating?",
+      "revId": "97c0a1bf4faa75d59da13f8e2541bae3772112b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac4f19e_c55643ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-24T12:25:50Z",
+      "side": 1,
+      "message": "LGTM! I checked we correctly check the result of CreateGraphicsPipeline.",
+      "revId": "97c0a1bf4faa75d59da13f8e2541bae3772112b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
