@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb028064_2c45bdc0",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-25T05:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7656ce55_38a7ad0a",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fe3c099_a32f5743",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-24T17:21:48Z",
       "side": 1,
       "message": "Instead of manual Ref/Release, WDYT of making these object contain a Ref\u003cRenderPipeline\u003e and call ref.Release() before passing it to the callback?",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7692cf97_b7df9d4b",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-25T05:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fe3c099_a32f5743",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c65a40_fdee4ebe",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-25T05:52:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2839a189_341a371d",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "383bf4ce_54b49142",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8574dfa9_b4025050",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-25T05:52:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "383bf4ce_54b49142",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c565fd0d_fa2fe751",
@@ -99,6 +171,24 @@
       "writtenOn": "2021-03-24T17:21:48Z",
       "side": 1,
       "message": "The usual pattern is that Foo wraps ConsumedError(FooInternal) and FooInternal does DAWN_TRY(ValidateFoo); DAWN_TRY(FooImpl); Can we have the same split here? (it would require adding MaybeError to CreateInternal, make it call ValidatePipelineDescriptor and only then call CreateImpl that has a default implementation on DeviceBase).",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26300e3a_c451f63f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-25T05:52:15Z",
+      "side": 1,
+      "message": "I think Create*PipelineAsync is a bit different from other APIs as it shouldn\u0027t report any validation errors according to the SPEC. When there is a validation error on the descriptor, the error message should be returned to the caller through callback instead of being captured by ErrorScopeStack.",
+      "parentUuid": "c565fd0d_fa2fe751",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
