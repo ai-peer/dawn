@@ -80,6 +80,30 @@
       },
       "revId": "711ce3472058a9fd566e03d27767aefc1a62f704",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25feca3_138e263b",
+        "filename": "src/dawn_native/TintUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-25T11:41:19Z",
+      "side": 1,
+      "message": "Cool, thanks for confirming.",
+      "parentUuid": "f37ba60d_992eadee",
+      "range": {
+        "startLine": 28,
+        "startChar": 57,
+        "endLine": 28,
+        "endChar": 67
+      },
+      "revId": "711ce3472058a9fd566e03d27767aefc1a62f704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

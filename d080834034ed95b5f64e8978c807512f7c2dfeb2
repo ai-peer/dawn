@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaacb76f_855b7fc2",
+        "filename": "src/dawn_native/TintUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-25T11:41:19Z",
+      "side": 1,
+      "message": "The lambda not working is concerning! They should behave exactly the same as a regular function call.\n\nThanks for trying though!",
+      "parentUuid": "a51dd54f_130b8cd9",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "767d8cf8_cf695b77",
@@ -101,6 +119,24 @@
       "writtenOn": "2021-03-24T17:32:10Z",
       "side": 1,
       "message": "Oh, I completely forget we had that. Does it have NonMovable as well?",
+      "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb774d4_2b897bc3",
+        "filename": "src/dawn_native/TintUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-25T11:41:19Z",
+      "side": 1,
+      "message": "No, I looked. NonMovable doesn\u0027t exist.",
+      "parentUuid": "767d8cf8_cf695b77",
       "revId": "d080834034ed95b5f64e8978c807512f7c2dfeb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
