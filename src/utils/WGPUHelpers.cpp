@@ -146,6 +146,7 @@ namespace utils {
         wgslDesc.source = source;
         wgpu::ShaderModuleDescriptor descriptor;
         descriptor.nextInChain = &wgslDesc;
+        printf("WGSL:\n%s\n", source);
         return device.CreateShaderModule(&descriptor);
     }
 

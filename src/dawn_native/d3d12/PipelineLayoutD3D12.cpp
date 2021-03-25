@@ -151,9 +151,8 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        // Since Tint's HLSL writer doesn't currently map sets to spaces, we use the default space
-        // (0).
-        mFirstIndexOffsetRegisterSpace = 0;
+        // We currently use register space for first index offsets.
+        mFirstIndexOffsetRegisterSpace = 3;
         BindGroupIndex firstOffsetGroup{mFirstIndexOffsetRegisterSpace};
         if (GetBindGroupLayoutsMask()[firstOffsetGroup]) {
             // Find the last register used on firstOffsetGroup.
