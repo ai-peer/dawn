@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15f240b6_fcf342c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-25T20:44:12Z",
+      "side": 1,
+      "message": "PTAL. Thanks. \n\nThere are some issues related to texture copy: \n- Remove Extent3D.depth, use Extent3D.depthOrArrayLayers only (it is defined in dawn.json)? For example, copySize is an instance of Extent3D, so copySize has these two parameters (both depth and depthOrArrayLayers), it is annoying. \n    - Shrek is working on this? \n- Move CopyTextureToBufferCopySplit from CommandBufferD3D12.cpp to UtilsD3D12.cpp? And combine it with CopyBufferToTextureCopySplit into one function in UtilsD3D12.cpp? They are quite similar. \n- Rename TextureCopySplits.copies2D to TextureCopySplits.copyRegions? It can support 3D/1D actually.\n- If we have multiple layers for 2D texture to copy, can we merge these copies into one copy (or two copies if the last copy can’t be merged because of alignment) without ping pong? Currently we have 2 elements in TextureCopySplits.copies2D for ping pong? Copy multiple layers in one shot should be much faster than copy layers one by one. \n\nThe current change is not small. I don\u0027t want to make it larger. I will submit separate patches for these issues above if needed. \n",
+      "revId": "7c7b1bd55b4f95785bdce32aa9cb0c59ab122e5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
