@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8721266c_2429cd44",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-25T17:56:31Z",
+      "side": 1,
+      "message": "nit: Remove (we use deprecate for the gradual deprecation we\u0027re doing in Dawn)",
+      "revId": "282e1df0f0bd0b2b8ff1818818e61bd76cfb2037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8a77d249_0db84b9d",
@@ -14,6 +31,23 @@
       "writtenOn": "2021-03-25T17:52:51Z",
       "side": 1,
       "message": "PTAL",
+      "revId": "282e1df0f0bd0b2b8ff1818818e61bd76cfb2037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bab37953_b4a01e27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-25T17:56:31Z",
+      "side": 1,
+      "message": "LGTM!",
       "revId": "282e1df0f0bd0b2b8ff1818818e61bd76cfb2037",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
