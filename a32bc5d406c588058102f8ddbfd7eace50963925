@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47a3efd3_541e62fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-25T22:38:48Z",
+      "side": 1,
+      "message": "PTAL! This CL is in a bit of an odd place, as I don\u0027t really like leaving two distinct validation paths in the code, but any of the next incremental changes that we could make are comparatively huge and likely involve touching every single backend. As a result I felt a lot more comfortable with having the updated validation code reviewed independently.",
+      "revId": "a32bc5d406c588058102f8ddbfd7eace50963925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
