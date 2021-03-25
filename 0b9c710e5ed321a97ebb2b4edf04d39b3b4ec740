@@ -209,6 +209,24 @@
       "parentUuid": "26300e3a_c451f63f",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b8d185_ec652eff",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-25T16:16:10Z",
+      "side": 1,
+      "message": "Maybe we could just store ResultOrError\u003cRef\u003cRenderPipelineBase\u003e\u003e inside the task?\nThis way we would store a validation error from ValidateIsAlive() and ValidateRenderPipelineDescriptor() in the task. If there\u0027s an error we can call TrackTask and return early.\n\nIf there\u0027s no error, then we call CreateRenderPipelineAsyncImpl.\n\nIf we store ResultOrError, then we don\u0027t need two types of tasks. Also, since CreateRenderPipelineAsyncImpl is async, it could see a device lost error later on, so the error stored there is useful.",
+      "parentUuid": "2c7acaa7_26d704f4",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
