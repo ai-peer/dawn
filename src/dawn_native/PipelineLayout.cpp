@@ -177,7 +177,7 @@ namespace dawn_native {
         // Loops over all the reflected BindGroupLayoutEntries from shaders.
         for (const StageAndDescriptor& stage : stages) {
             const EntryPointMetadata::BindingInfoArray& info =
-                stage.second->module->GetEntryPoint(stage.second->entryPoint).bindings;
+                stage.module->GetEntryPoint(stage.entryPoint).bindings;
 
             for (BindGroupIndex group(0); group < info.size(); ++group) {
                 for (const auto& bindingIt : info[group]) {
@@ -187,7 +187,7 @@ namespace dawn_native {
                     // Create the BindGroupLayoutEntry
                     BindGroupLayoutEntry entry = ConvertMetadataToEntry(shaderBinding);
                     entry.binding = static_cast<uint32_t>(bindingNumber);
-                    entry.visibility = StageBit(stage.first);
+                    entry.visibility = StageBit(stage.shaderStage);
 
                     // Add it to our map of all entries, if there is an existing entry, then we
                     // need to merge, if we can.
@@ -232,8 +232,7 @@ namespace dawn_native {
 
         // Sanity check in debug that the pipeline layout is compatible with the current pipeline.
         for (const StageAndDescriptor& stage : stages) {
-            const EntryPointMetadata& metadata =
-                stage.second->module->GetEntryPoint(stage.second->entryPoint);
+            const EntryPointMetadata& metadata = stage.module->GetEntryPoint(stage.entryPoint);
             ASSERT(ValidateCompatibilityWithPipelineLayout(device, metadata, pipelineLayout)
                        .IsSuccess());
         }
