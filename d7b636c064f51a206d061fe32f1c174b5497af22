@@ -16,6 +16,69 @@
       "message": "PTAL!",
       "revId": "d7b636c064f51a206d061fe32f1c174b5497af22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c22c781_28e1bf6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-25T15:50:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d7b636c064f51a206d061fe32f1c174b5497af22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0821492f_2af34869",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-25T15:50:43Z",
+      "side": 1,
+      "message": "I think we should stick with the pattern where APIGetMappedRange is implemented on top of GetMappedRange - just as APITick is implemented on top of Tick and APIWriteBuffer on top of WriteBuffer.",
+      "range": {
+        "startLine": 294,
+        "startChar": 4,
+        "endLine": 297,
+        "endChar": 0
+      },
+      "revId": "d7b636c064f51a206d061fe32f1c174b5497af22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f206376_1e8a3bb1",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-25T15:50:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 361,
+        "startChar": 1,
+        "endLine": 364,
+        "endChar": 0
+      },
+      "revId": "d7b636c064f51a206d061fe32f1c174b5497af22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
