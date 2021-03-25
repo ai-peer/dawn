@@ -41,7 +41,7 @@ namespace dawn_native {
     struct InternalPipelineStore;
     struct ShaderModuleParseResult;
 
-    class DeviceBase {
+    class DeviceBase : public RefCounted {
       public:
         DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
         virtual ~DeviceBase();
@@ -182,9 +182,6 @@ namespace dawn_native {
         MaybeError ValidateIsAlive() const;
 
         PersistentCache* GetPersistentCache();
-
-        void Reference();
-        void Release();
 
         virtual ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
             size_t size) = 0;
