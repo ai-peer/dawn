@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "197bfab8_43e49deb",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00931ffd_e7271107",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 23
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2c319be8_64b8e864",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "564c59fe_339d7438",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "I ended up moving this to ValidateRenderPipelineDescriptor anyways since as per Austin\u0027s comment on the Chromium CL, I\u0027m now just passing around a pNext.",
+      "parentUuid": "2c319be8_64b8e864",
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5188e6a_6bc4699c",
@@ -54,6 +96,30 @@
       "writtenOn": "2021-03-23T14:34:57Z",
       "side": 1,
       "message": "nit: in WebGPU it would be [0, 1]",
+      "range": {
+        "startLine": 57,
+        "startChar": 49,
+        "endLine": 57,
+        "endChar": 56
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fcc7537_632ad76f",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5188e6a_6bc4699c",
       "range": {
         "startLine": 57,
         "startChar": 49,
@@ -87,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6a11a78_c1a36a67",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f3dc6f6_1123742d",
+      "range": {
+        "startLine": 536,
+        "startChar": 15,
+        "endLine": 536,
+        "endChar": 33
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e66a51b_ad7817da",
@@ -104,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d2b23b_01bb8888",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e66a51b_ad7817da",
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbbb9c6b_3cd0ae28",
@@ -117,6 +225,24 @@
       "writtenOn": "2021-03-23T14:34:57Z",
       "side": 1,
       "message": "ditto @available",
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c08c7a2_b51d0226",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbbb9c6b_3cd0ae28",
       "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -158,6 +284,30 @@
       "side": 1,
       "message": "(in addition to a couple test exercising the basic functionality)",
       "parentUuid": "a56f5302_809e4288",
+      "range": {
+        "startLine": 1194,
+        "startChar": 20,
+        "endLine": 1196,
+        "endChar": 21
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2532dfca_d7d13207",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000613
+      },
+      "writtenOn": "2021-03-25T22:09:17Z",
+      "side": 1,
+      "message": "Ah oops, done. I can also add some validation unit tests if you prefer, but it\u0027s a little more complex since ValidationTest doesn\u0027t support extensions yet.",
+      "parentUuid": "8cd47cff_e65c1677",
       "range": {
         "startLine": 1194,
         "startChar": 20,
