@@ -105,6 +105,24 @@
       "parentUuid": "170fbf4d_b263fbf4",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cda8217_52412f93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-25T00:42:58Z",
+      "side": 1,
+      "message": "Also could you file an issue to https://bugs.chromium.org/p/dawn/issues/list and mention it in this CL?",
+      "parentUuid": "ded25c23_f895dc82",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
