@@ -256,10 +256,10 @@ namespace dawn_native {
                                    uint64_t bufferOffset,
                                    const void* data,
                                    size_t size) {
-        GetDevice()->ConsumedError(WriteBufferInternal(buffer, bufferOffset, data, size));
+        GetDevice()->ConsumedError(WriteBuffer(buffer, bufferOffset, data, size));
     }
 
-    MaybeError QueueBase::WriteBufferInternal(BufferBase* buffer,
+    MaybeError QueueBase::WriteBuffer(BufferBase* buffer,
                                               uint64_t bufferOffset,
                                               const void* data,
                                               size_t size) {

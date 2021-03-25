@@ -186,13 +186,11 @@ namespace dawn_native {
 
         DeviceBase* device = GetDevice();
         if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            // TODO(dawn:723): propagate any errors from GetMappedRange.
-            memset(APIGetMappedRange(0, mSize), uint8_t(0u), mSize);
+            memset(GetMappedRange(0, mSize), uint8_t(0u), mSize);
             SetIsDataInitialized();
             device->IncrementLazyClearCountForTesting();
         } else if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
-            // TODO(dawn:723): propagate any errors from GetMappedRange.
-            memset(APIGetMappedRange(0, mSize), uint8_t(1u), mSize);
+            memset(GetMappedRange(0, mSize), uint8_t(1u), mSize);
         }
 
         return {};
@@ -293,6 +291,10 @@ namespace dawn_native {
                                               GetDevice()->GetPendingCommandSerial());
     }
 
+    void* BufferBase::GetMappedRange(size_t offset, size_t size) {
+        return APIGetMappedRange(offset, size);
+    }
+
     void* BufferBase::APIGetMappedRange(size_t offset, size_t size) {
         return GetMappedRangeInternal(true, offset, size);
     }
@@ -354,6 +356,10 @@ namespace dawn_native {
         uploader->ReleaseStagingBuffer(std::move(mStagingBuffer));
 
         return {};
+    }
+
+    void BufferBase::Unmap() {
+        APIUnmap();
     }
 
     void BufferBase::APIUnmap() {

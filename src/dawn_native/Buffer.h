@@ -61,6 +61,9 @@ namespace dawn_native {
         bool IsDataInitialized() const;
         void SetIsDataInitialized();
 
+        void* GetMappedRange(size_t offset, size_t size);
+        void Unmap();
+
         // Dawn API
         void APIMapAsync(wgpu::MapMode mode,
                          size_t offset,
