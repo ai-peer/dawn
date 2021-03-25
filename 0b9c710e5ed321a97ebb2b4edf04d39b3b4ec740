@@ -191,6 +191,24 @@
       "parentUuid": "c565fd0d_fa2fe751",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c7acaa7_26d704f4",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-25T09:34:33Z",
+      "side": 1,
+      "message": "Thanks for the explanation, it makes sense that this is different. We should still use the \"Impl\" terminology to make it clear it can be overriden by backends.\n\nAlso I don\u0027t think the backends will do deferred validation. Maybe CreateRenderPipelineAsync could do the validation, if it fails enqueue a small task that says validation failed, and only otherwise call into the backend.",
+      "parentUuid": "26300e3a_c451f63f",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
