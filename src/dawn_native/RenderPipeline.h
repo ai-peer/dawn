@@ -31,11 +31,16 @@ namespace dawn_native {
 
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor);
+    MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
+                                                const RenderPipelineDescriptor2* descriptor);
     size_t IndexFormatSize(wgpu::IndexFormat format);
 
     bool IsStripPrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology);
 
     bool StencilTestEnabled(const DepthStencilState* mDepthStencil);
+
+    const ProgrammableStageDescriptor* AsProgrammableStage(const VertexState* descriptor);
+    const ProgrammableStageDescriptor* AsProgrammableStage(const FragmentState* descriptor);
 
     struct VertexAttributeInfo {
         wgpu::VertexFormat format;
