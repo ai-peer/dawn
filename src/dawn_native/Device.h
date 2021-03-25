@@ -89,7 +89,6 @@ namespace dawn_native {
         ExecutionSerial GetLastSubmittedCommandSerial() const;
         ExecutionSerial GetFutureSerial() const;
         ExecutionSerial GetPendingCommandSerial() const;
-        virtual MaybeError TickImpl() = 0;
 
         // Many Dawn objects are completely immutable once created which means that if two
         // creations are given the same arguments, they can return the same object. Reusing
@@ -229,6 +228,7 @@ namespace dawn_native {
         size_t GetDeprecationWarningCountForTesting();
         void EmitDeprecationWarning(const char* warning);
         void APILoseForTesting();
+        QueueBase* GetQueue() const;
 
         // AddFutureSerial is used to update the mFutureSerial with the max serial needed to be
         // ticked in order to clean up all pending callback work or to execute asynchronous resource
@@ -319,6 +319,8 @@ namespace dawn_native {
         MaybeError CreateTextureViewInternal(TextureViewBase** result,
                                              TextureBase* texture,
                                              const TextureViewDescriptor* descriptor);
+
+        virtual MaybeError TickImpl() = 0;
 
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
         void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);

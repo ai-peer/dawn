@@ -136,8 +136,7 @@ namespace dawn_native {
             std::make_unique<FenceInFlight>(fence, value);
 
         // TODO: use GetLastSubmittedCommandSerial in the future for perforamnce
-        // TODO(dawn:723): do not get a new reference to the Queue.
-        GetDevice()->APIGetQueue()->TrackTask(std::move(fenceInFlight),
+        GetDevice()->GetQueue()->TrackTask(std::move(fenceInFlight),
                                               GetDevice()->GetPendingCommandSerial());
     }
 
