@@ -144,7 +144,7 @@ namespace dawn_native { namespace d3d12 {
             // that uses copySplits.copies2D[1].
             std::array<uint64_t, TextureCopySplits::kMaxTextureCopySplits>
                 bufferOffsetsForNextSlice = {{0u, 0u}};
-            uint32_t totalLayers = is3DTexture ? 1 : copySize.depth;
+            uint32_t totalLayers = is3DTexture ? 1 : copySize.depthOrArrayLayers;
             for (uint32_t layer = 0; layer < totalLayers; ++layer) {
                 const uint32_t splitIndex = layer % copySplits.copies2D.size();
 
