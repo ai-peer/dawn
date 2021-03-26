@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "81736968_ad730953",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-26T00:08:07Z",
+      "side": 1,
+      "message": "uNit: \"better make the difference\" is awkward. \"clarify the difference\", or \"make the distinction clear\", or ...",
+      "revId": "0e905b840593122c4b825026824f0d1bfc5758bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e48cdbc5_ca31e8cc",
@@ -48,6 +65,40 @@
       "writtenOn": "2021-03-25T15:35:20Z",
       "side": 1,
       "message": "maybe also update the codegen.md doc to say that the native proctable calls these API-prefixed methods",
+      "revId": "0e905b840593122c4b825026824f0d1bfc5758bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e5b8ae4_c033b797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-26T00:08:07Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "0e905b840593122c4b825026824f0d1bfc5758bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa3b967e_4ee6d144",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-26T00:08:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be a new bug? It\u0027s unrelated to the rename, no?",
       "revId": "0e905b840593122c4b825026824f0d1bfc5758bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
