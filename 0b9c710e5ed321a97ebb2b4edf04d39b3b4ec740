@@ -245,6 +245,24 @@
       "parentUuid": "e1b8d185_ec652eff",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1cf7386_54640b96",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-26T08:31:13Z",
+      "side": 1,
+      "message": "Both the sync and the async version of CreateComputePipeline should share most of the code (validation, object caching, shader compilation (HLSL), pipeline creation), and we need to properly treat them in two ways:\n1. always called in the main thread\n2. the code is shared but called in different threads (in main thread for sync version, and in the sub-thread for async version)\n\nAnd there is the code that is totally different in the sync and async version:\n- In sync code: return errors\n- In async code:\n  - Encapsulate a task and run it with PostWorkerTask()\n  - Put the result into a queue\n  - Call callback in device.Tick()",
+      "parentUuid": "00a8d808_a825b6d3",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
