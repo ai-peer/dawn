@@ -47,6 +47,8 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(mDevice->GetResidencyManager()->LockAllocation(
             ToBackend(mUploadHeap.GetResourceHeap())));
 
+        GetResource()->SetName(L"Staging buffer");
+
         return CheckHRESULT(GetResource()->Map(0, nullptr, &mMappedPointer), "ID3D12Resource::Map");
     }
 
