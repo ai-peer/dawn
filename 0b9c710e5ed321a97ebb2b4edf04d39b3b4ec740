@@ -227,6 +227,24 @@
       "parentUuid": "2c7acaa7_26d704f4",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00a8d808_a825b6d3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-26T02:17:26Z",
+      "side": 1,
+      "message": "OK so both of you prefer not putting the validations into sub-threads? It may affect a lot to my implementation here.",
+      "parentUuid": "e1b8d185_ec652eff",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

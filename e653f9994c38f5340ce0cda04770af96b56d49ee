@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f21c3458_60ba330a",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-26T02:17:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "86839b03_3f8975c5",
+      "revId": "e653f9994c38f5340ce0cda04770af96b56d49ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b394eea_b063fdd7",
@@ -88,6 +106,30 @@
       "writtenOn": "2021-03-25T16:16:10Z",
       "side": 1,
       "message": "the error from CreateComputePipelineInternal could be a device lost error - and it looks like we\u0027re dropping it here.",
+      "range": {
+        "startLine": 1006,
+        "startChar": 12,
+        "endLine": 1007,
+        "endChar": 47
+      },
+      "revId": "e653f9994c38f5340ce0cda04770af96b56d49ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36dfe9c_6b02ec78",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-26T02:17:26Z",
+      "side": 1,
+      "message": "My thought is that we can just check if the device is lost in one place (CreatePipelineAsyncTracker::Tick()). What do you think?",
+      "parentUuid": "ca9312e6_21731f83",
       "range": {
         "startLine": 1006,
         "startChar": 12,
