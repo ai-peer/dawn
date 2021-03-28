@@ -123,6 +123,24 @@
       "parentUuid": "ded25c23_f895dc82",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc09ba6a_89aa12a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-03-28T19:01:39Z",
+      "side": 1,
+      "message": "Would it make sense to put the tests in QueueSubmitValidationTest? Since this is about a crash occurring in Queue::Submit.",
+      "parentUuid": "1cda8217_52412f93",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
