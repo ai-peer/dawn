@@ -141,6 +141,24 @@
       "parentUuid": "1cda8217_52412f93",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e63f851_697425df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-03-28T19:04:32Z",
+      "side": 1,
+      "message": "I opened an issue for this crash: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d729",
+      "parentUuid": "fc09ba6a_89aa12a9",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
