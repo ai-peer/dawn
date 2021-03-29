@@ -67,6 +67,24 @@
       "message": "Nit: indentation",
       "revId": "17f44afa11ee632d3333e751899ca688a1f55e17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d4a7963_d2ef386e",
+        "filename": "src/dawn_native/Fence.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:19:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5362b3cb_03426e45",
+      "revId": "17f44afa11ee632d3333e751899ca688a1f55e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
