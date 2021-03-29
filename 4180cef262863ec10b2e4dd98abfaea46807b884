@@ -50,6 +50,24 @@
       "message": "Nit: test?\n\nLGTM2",
       "revId": "4180cef262863ec10b2e4dd98abfaea46807b884",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9963a4_f3fdd8f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T15:43:55Z",
+      "side": 1,
+      "message": "Testing this would require injecting errors in the backends, which we can\u0027t do. It is covered by the fuzzer, see the linked Chromium bug.",
+      "parentUuid": "92645efe_1dbf2ca8",
+      "revId": "4180cef262863ec10b2e4dd98abfaea46807b884",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
