@@ -263,6 +263,24 @@
       "parentUuid": "00a8d808_a825b6d3",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ecc54fa_35b36c26",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:25:24Z",
+      "side": 1,
+      "message": "\u003e OK so both of you prefer not putting the validations into sub-threads? It may affect a lot to my implementation here.\n\nYeah, the alternative is to completely copy the RenderPipelineDescriptor in the task (and including pointers to sub-structures, etc) so that we can call ValidateRenderPipelineDescriptor() inside the task. That\u0027s a lot of code and complexity for not much gain because the validation should be a very very small fraction of the total creation cost of a pipeline.\n\nYour last comment sound 100% correct. How does that influence the architecture you had in mind?",
+      "parentUuid": "f1cf7386_54640b96",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
