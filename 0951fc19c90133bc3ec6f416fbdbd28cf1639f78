@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c49e9d_55caa50e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:53:02Z",
+      "side": 1,
+      "message": "Ugh, sorry for the churn, but it seems clampDepth might move to GPUPrimitiveState because it is valid to use without a depth stencil attachment. I just mentioned this extension to Dzmitry and he wants to move the member in the WebGPU spec.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a686fc4_aa6e0fda",
