@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "004f0734_a997ae4e",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "Also can we make 3D texture copies and WriteTexture an UnsafeAPI so it isn\u0027t usable on the Web until we believe that it is secure?",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65f2744_6f9519d4",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "Maybe this could be done by GetMipLevelPhysicalSize instead? The physical size of an 2D array texture includes the array size. (it\u0027s not just w, h, 1)",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7b7065_4e0ad96f",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "nit: We can avoid the ternary by using GetArrayLayers().",
+      "range": {
+        "startLine": 425,
+        "startChar": 35,
+        "endLine": 425,
+        "endChar": 59
+      },
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7099096_666b0159",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "It seems that the 1/2D code path will become quite different from the 3D code path. What do you see the end state of the code will be like? Is there a way to have the 1/2/3D paths all look similar enough that we have a single function for all, or is it different enough that it makes sense to split the helper functions between 1/2D and 3D?\n\nI\u0027m asking because for example here we don\u0027t need to handle layers for 3D textures, and we don\u0027t need to handle the multiple copySplits for 3D textures in TextureCopySplitter.cpp",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86a90da3_985edd41",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "nit: I think this transition doesn\u0027t assume anything anymore, as long as the subresource range is correct. We could remove this comment/ASSERT entirely.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a63ac46f_0bb82c7a",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "nit: EXPECT_TEXTURE_2D_RGBA8_EQ. Also could this be done in a preparation CL so as to de-risk this one?\n\nActually I think that by using wgpu::Extent3D and wgpu::Origin3D in the arguments to AddTextureExpectation we can have both of the following work:\n\n EXPECT_TEXTURE_RGBA8_EQ(expect, texture, {x, y, slice}, {w, h}, level)\n EXPECT_TEXTURE_RGBA8_EQ(expect, texture, {x, y, z}, {w, h, d}, level)\n\nThat\u0027s because Extent3D defaults members to 1 while Origin3D defaults them to 0.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3afebe05_03361d8d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "nit: EXPECT_TEXTURE_3D_RGBA8_EQ maybe?",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef05bf33_983b1b81",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "Maybe this can be a wgpu::TextureDimension to prep for 1D textures too?\n\nAlso nit: maybe rename DoTest to Do2DTest and then have Do3DTest where they both use the DoTest helper. The DoTest helper could have argument for depth / arrayLayers so we don\u0027t need the ternaries.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38efd620_bf330a45",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "Instead of using ternaries everywhere, can we compute the effective depth and arrayLayers once?",
+      "range": {
+        "startLine": 296,
+        "startChar": 36,
+        "endLine": 296,
+        "endChar": 65
+      },
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3092aaae_7fb84307",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T16:10:55Z",
+      "side": 1,
+      "message": "We\u0027re going to need to test some more than that. Maybe we can have a TODO with a list of additional aspects that will need to be tested (RowPitch, RowsPerImage, buffer offset, etc)\n\nAlso T2B, WriteTexture and CopySplitterTests eventually.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
