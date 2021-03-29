@@ -316,6 +316,30 @@
       },
       "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d348b02_6834669e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "ValidationTest should support extensions, look for \"timestamp_query\" in QueryValidationTests.cpp. It could be a follow-up if you want to unblock the Chromium-side.",
+      "parentUuid": "2532dfca_d7d13207",
+      "range": {
+        "startLine": 1194,
+        "startChar": 20,
+        "endLine": 1196,
+        "endChar": 21
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

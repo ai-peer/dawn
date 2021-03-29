@@ -16,6 +16,159 @@
       "message": "Also oops, I didn\u0027t realize I was posting on my @google.com account instead of my @chromium.org one. That explains why I couldn\u0027t figure out how to change the status from WIP or submit to the CQ...",
       "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "420692aa_46e4ef95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "LGTM with a couple comments and follow-ups:\n\n - Blink side: raise an exception as per-spec when clampDepth is specified without the extension being enabled.\n - Validation tests\n - Removing the dummy sTypes.\n - Helpers to validate / work with chained descriptors.\n - Adding SetClampDepth() to ComboRenderPipelineDescriptor (not mentioned in any comments)",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a686fc4_aa6e0fda",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1855,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "\"render pipeline descriptor dummy extension\" was used to test structure extensions, but now we\u0027re able to do it with \"depth clamping state\". In a follow-up can you remove \"render pipeline descriptor dummy extension\" and fixup the wire test to use \"depth clamping state\"? Same thing for anisotropic filtering actually.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b569f9f6_c6b5a338",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "Not necessarily in this CL, but you mentioned that Mesa has nice helpers with working with chained structure, could we have helpers in Dawn too to help with extracting data and validating chained structs? Could be a follow-up.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17c8f786_826ff78b",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "This could be extracted at render pipeline initialization instead and stored in a member of RenderPipelineDescriptor. The reason is because the chained structure is only valid during the duration of the call to CreateRenderPipeline but that this method can be called at any time.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815de56c_dd4fd930",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "With mClampDepth a member, we could record it unconditionally.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26aa43a6_82105ec9",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "u-nit: We usually declare the fixture just before the tests and put the instantiation right after the tests. So everything would be added at [1]",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b08345a_febed2f7",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "Is there a way to test that it gets clamped to 1.0? For example by drawing something that output 1.0 then using CompareFunction::Equal.\n\nLikewise for -1.0 getting clamped to 0.0.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c670b8b6_2a699c83",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "nit: this test talks about unspecified but still specifies the clampDepth.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f06eee_462d3ff4",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:48:30Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
