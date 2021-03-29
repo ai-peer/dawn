@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b2a0b5_0ccdccad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T15:13:16Z",
+      "side": 1,
+      "message": "Still LGTM, thanks for the iterations Aleksi! All comments have been addressed as far as I can see but we\u0027re missing CR+2 from another committer.",
+      "revId": "c314a331ee307c5ef7901d4d39a911a732d5fd30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
