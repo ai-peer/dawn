@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facc4694_358ca925",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-29T02:04:36Z",
+      "side": 1,
+      "message": "Add the following Dawn issue number to the commit message like what has been done in other Dawn patches:\n\nBug: dawn:729",
+      "revId": "f43284b66da3a10978f12e2e9727d0c16a86497b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "588855a3_bc72c680",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-29T02:04:36Z",
+      "side": 1,
+      "message": "This patch needs to be rebased and this function should be renamed to \"CreateShaderModule\" after rebase.",
+      "range": {
+        "startLine": 199,
+        "startChar": 45,
+        "endLine": 199,
+        "endChar": 71
+      },
+      "revId": "f43284b66da3a10978f12e2e9727d0c16a86497b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5a1d425_2ce2afd4",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-29T02:04:36Z",
+      "side": 1,
+      "message": "You can use \"git cl format\" to better format your patch (or you cannot pass the checks when you try to merge it into the main branch).",
+      "range": {
+        "startLine": 219,
+        "startChar": 4,
+        "endLine": 219,
+        "endChar": 103
+      },
+      "revId": "f43284b66da3a10978f12e2e9727d0c16a86497b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

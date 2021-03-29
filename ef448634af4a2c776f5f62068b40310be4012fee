@@ -159,6 +159,24 @@
       "parentUuid": "fc09ba6a_89aa12a9",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d05ff72_308e90b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-29T02:04:36Z",
+      "side": 1,
+      "message": "I just tried to run your newly-added tests in dawn_unittests on latest Dawn without your fix but I cannot reproduce the crash you claimed in the commit message. Could you take a look? Thanks!",
+      "parentUuid": "3e63f851_697425df",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
