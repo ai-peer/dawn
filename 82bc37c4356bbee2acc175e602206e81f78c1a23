@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2f85ecc_4e555bb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b95442_592e93c8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "nit: the helper functions could take a whole RenderPipelineDescriptor and return the vector\u003cStageAndDescriptor\u003e so that the logic about the descriptor eventually only lives in RenderPipeline.cpp.",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7596ff83_34a7e160",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "nit: Can we change CreateDefault to return the Ref so we don\u0027t forget to AcquireRef?",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36043f67_950e4e92",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "Maybe this notion of programmable stage descriptor inside Dawn doesn\u0027t make sense anymore. I\u0027m not sure what to replace it with though.\n\nAlso u-nit: maybe group this with just before [1] so all non-module checks are grouped and all module checks are grouped.",
+      "range": {
+        "startLine": 104,
+        "startChar": 21,
+        "endLine": 104,
+        "endChar": 56
+      },
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ee52e3_eab22b7a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ac8e1ce_2e9f4ac6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "nit: TODO(dawn:XXX) so we can git grep it afterwards",
+      "range": {
+        "startLine": 274,
+        "startChar": 16,
+        "endLine": 274,
+        "endChar": 17
+      },
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0015853e_def9c866",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T14:37:27Z",
+      "side": 1,
+      "message": "Wow this is quite unsafe. Can we at least have static_asserts that the offset of members of ProgrammableStageDescriptor match the offsets in VertexState/FragmentState?",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
