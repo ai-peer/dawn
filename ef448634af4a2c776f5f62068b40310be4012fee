@@ -195,6 +195,24 @@
       "parentUuid": "8d05ff72_308e90b5",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a910ec0_c837d42d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-03-29T15:00:59Z",
+      "side": 1,
+      "message": "Yes the Tick call in Device::SubmitImpl is necessary to reproduce the bug, that\u0027s why I added it to null::Device, so it better mimics the other implementations.\n\nAfter rebasing I can\u0027t reproduce the crash in QueueBase::Tick, despite the re-entrance and invalidation of the task queue still being there... But the crash still occurs in CreatePipelineAsyncTracker::Tick.\n\nConsidering that it is the result of undefined behaviour, I\u0027m not surprised it can be hard to reproduce. I was having it consistently in my project, because when building in debug with CMake and MSVC I have _ITERATOR_DEBUG_LEVEL \u003e 0, which enables a check that catches this problem. But with depot_tools (with is_debug\u003dtrue) the debug level is 0 so there\u0027s no check.",
+      "parentUuid": "1f0f7b9a_f5755f9e",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
