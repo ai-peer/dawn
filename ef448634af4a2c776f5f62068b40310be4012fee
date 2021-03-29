@@ -177,6 +177,24 @@
       "parentUuid": "3e63f851_697425df",
       "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0f7b9a_f5755f9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:06:01Z",
+      "side": 1,
+      "message": "I think it might be because the Tick() call in null::Device::SubmitImpl is what causes the crash.",
+      "parentUuid": "8d05ff72_308e90b5",
+      "revId": "ef448634af4a2c776f5f62068b40310be4012fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

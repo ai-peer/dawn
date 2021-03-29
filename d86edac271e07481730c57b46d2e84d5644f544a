@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62c59a3b_33d81c0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:06:01Z",
+      "side": 1,
+      "message": "LGTM with all the nits, thanks for the tests!",
+      "revId": "d86edac271e07481730c57b46d2e84d5644f544a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aed83ecb_7bf6c80c",
+        "filename": "src/tests/unittests/validation/QueueSubmitValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-29T13:06:01Z",
+      "side": 1,
+      "message": "u-nit: think a call to an empty Submit might be enough.",
+      "revId": "d86edac271e07481730c57b46d2e84d5644f544a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
