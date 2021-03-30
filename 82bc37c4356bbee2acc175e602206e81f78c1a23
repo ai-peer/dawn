@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "be9397ba_365f2ce6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-30T18:39:34Z",
+      "side": 1,
+      "message": "ResultOrError\u003cRef\u003cT\u003e\u003e should work. We have it in several other places https://source.chromium.org/search?q\u003d%22ResultOrError%3CRef%3C%22\u0026sq\u003d",
+      "parentUuid": "91e73b5d_dc228053",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36043f67_950e4e92",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 2
