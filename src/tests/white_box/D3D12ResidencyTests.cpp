@@ -332,6 +332,10 @@ TEST_P(D3D12ResourceResidencyTests, SetExternalReservation) {
 TEST_P(D3D12DescriptorResidencyTests, SwitchedViewHeapResidency) {
     utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
 
+    // TODO(crbug.com/dawn/739):
+    // unknown file: error: SEH exception with code 0x87d thrown in the test body.
+    DAWN_SKIP_TEST_IF(IsD3D12() && IsWARP() && IsBackendValidationEnabled());
+
     // Fill in a view heap with "view only" bindgroups (1x view per group) by creating a
     // view bindgroup each draw. After HEAP_SIZE + 1 draws, the heaps must switch over.
     renderPipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
