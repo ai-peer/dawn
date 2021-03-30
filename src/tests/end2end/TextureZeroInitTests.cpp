@@ -662,8 +662,8 @@ TEST_P(TextureZeroInitTest, IndependentDepthStencilLoadAfterDiscard) {
             // Check by copy that the stencil data is 2.
             std::vector<uint8_t> expected(kSize * kSize, 2);
             EXPECT_LAZY_CLEAR(
-                0u, EXPECT_TEXTURE_EQ(expected.data(), depthStencilTexture, 0, 0, kSize, kSize, 0,
-                                      0, wgpu::TextureAspect::StencilOnly));
+                0u, EXPECT_TEXTURE_EQ(expected.data(), depthStencilTexture, {0, 0}, {kSize, kSize},
+                                      0, 0, wgpu::TextureAspect::StencilOnly));
         }
     }
 
@@ -735,8 +735,8 @@ TEST_P(TextureZeroInitTest, IndependentDepthStencilLoadAfterDiscard) {
             // Check by copy that the stencil data is 0.
             std::vector<uint8_t> expected(kSize * kSize, 0);
             EXPECT_LAZY_CLEAR(
-                0u, EXPECT_TEXTURE_EQ(expected.data(), depthStencilTexture, 0, 0, kSize, kSize, 0,
-                                      0, wgpu::TextureAspect::StencilOnly));
+                0u, EXPECT_TEXTURE_EQ(expected.data(), depthStencilTexture, {0, 0}, {kSize, kSize},
+                                      0, 0, wgpu::TextureAspect::StencilOnly));
         }
     }
 }
@@ -779,8 +779,9 @@ TEST_P(TextureZeroInitTest, IndependentDepthStencilCopyAfterDiscard) {
 
     // Check by copy that the stencil data is lazily cleared to 0.
     std::vector<uint8_t> expected(kSize * kSize, 0);
-    EXPECT_LAZY_CLEAR(1u, EXPECT_TEXTURE_EQ(expected.data(), depthStencilTexture, 0, 0, kSize,
-                                            kSize, 0, 0, wgpu::TextureAspect::StencilOnly));
+    EXPECT_LAZY_CLEAR(
+        1u, EXPECT_TEXTURE_EQ(expected.data(), depthStencilTexture, {0, 0}, {kSize, kSize}, 0, 0,
+                              wgpu::TextureAspect::StencilOnly));
 
     // Everything is initialized now
     EXPECT_EQ(true, dawn_native::IsTextureSubresourceInitialized(depthStencilTexture.Get(), 0, 1, 0,

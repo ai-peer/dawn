@@ -336,7 +336,7 @@ class DepthStencilSamplingTest : public DawnTest {
             wgpu::CommandBuffer commands = commandEncoder.Finish();
             queue.Submit(1, &commands);
 
-            EXPECT_TEXTURE_EQ(expectedValues[i], outputTexture, 0, 0);
+            EXPECT_TEXTURE_EQ(expectedValues[i], outputTexture, {0, 0});
         }
     }
 
@@ -479,7 +479,7 @@ class DepthStencilSamplingTest : public DawnTest {
             queue.Submit(1, &commands);
 
             EXPECT_TEXTURE_EQ(CompareFunctionPasses(compareRef, compare, textureValue) ? 1.f : 0.f,
-                              outputTexture, 0, 0);
+                              outputTexture, {0, 0});
         }
     }
 
@@ -649,9 +649,10 @@ TEST_P(DepthStencilSamplingTest, SampleDepthAndStencilRender) {
         wgpu::CommandBuffer commands = commandEncoder.Finish();
         queue.Submit(1, &commands);
 
-        EXPECT_TEXTURE_EQ(passDescriptor.cDepthStencilAttachmentInfo.clearDepth, depthOutput, 0, 0);
+        EXPECT_TEXTURE_EQ(passDescriptor.cDepthStencilAttachmentInfo.clearDepth, depthOutput,
+                          {0, 0});
         EXPECT_TEXTURE_EQ(uint8_t(passDescriptor.cDepthStencilAttachmentInfo.clearStencil),
-                          stencilOutput, 0, 0);
+                          stencilOutput, {0, 0});
     }
 
     // With compute pipeline
