@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3598c6e6_550d7b77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-30T15:57:40Z",
+      "side": 1,
+      "message": "A question for Corentin. ",
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db629fa3_a66247ae",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-03-30T13:11:34Z",
       "side": 1,
       "message": "I was trying to find a way to have the same macro for 2D and 3D. The {w, h} trick doesn\u0027t work but the following seems to work:\n\n  https://godbolt.org/z/sbGqzh4a9\n\nThe nested parenthesis are a bit worse than it would have been with nested curly brackets though :/",
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e736009_5709676a",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-30T15:57:40Z",
+      "side": 1,
+      "message": "A quick clarification: do you mean that we need to change all callers in this code refactoring CL in order to reduce one single MACRO? I mean, change all EXPECT_TEXTURE_xxx (..., x, y, width, height, ...) to EXPECT_TEXTURE_xxx (..., {x, y}, {width, height}, ...) in order to fit \"origin\" and \"extent\". \n\nI will do it if you think it is worth, although it might take some effort (need to replace manually one by one, no easy way for string replace).",
+      "parentUuid": "db629fa3_a66247ae",
       "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
