@@ -33,6 +33,23 @@
       "message": "LGTM too",
       "revId": "c314a331ee307c5ef7901d4d39a911a732d5fd30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "565dce0b_1b6aa5d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-30T02:05:17Z",
+      "side": 1,
+      "message": "Hi developer, could you fix the compilation error with your patch? Thanks!",
+      "revId": "c314a331ee307c5ef7901d4d39a911a732d5fd30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
