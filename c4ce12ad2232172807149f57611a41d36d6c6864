@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b072fc2c_4e1162a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:36:57Z",
+      "side": 1,
+      "message": "I took the liberty to update your CL to fix the conflict with the Tick change. CQing now to unblock Jiawei\u0027s conflicting CL 😊",
+      "revId": "c4ce12ad2232172807149f57611a41d36d6c6864",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
