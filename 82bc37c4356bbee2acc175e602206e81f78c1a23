@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0eab637_b70f92f9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1161,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-30T18:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67b95442_592e93c8",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7596ff83_34a7e160",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-03-29T14:37:27Z",
       "side": 1,
       "message": "nit: Can we change CreateDefault to return the Ref so we don\u0027t forget to AcquireRef?",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e73b5d_dc228053",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1170,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-30T18:13:21Z",
+      "side": 1,
+      "message": "I\u0027m not sure what the right way to handle that is with a method that may return a Dawn error?",
+      "parentUuid": "7596ff83_34a7e160",
       "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40112098_7cc039fc",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-30T18:13:21Z",
+      "side": 1,
+      "message": "Regrouped the code, and also did some refactoring so that ProgrammableStageDescriptors are no longer used for this type of validation or logic. Instead we pass the module/entry point individually wherever needed, which did not prove to be a large burden.",
+      "parentUuid": "36043f67_950e4e92",
+      "range": {
+        "startLine": 104,
+        "startChar": 21,
+        "endLine": 104,
+        "endChar": 56
+      },
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7ee52e3_eab22b7a",
@@ -88,6 +148,24 @@
       "writtenOn": "2021-03-29T14:37:27Z",
       "side": 1,
       "message": "[1]",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0363711b_1dc5712d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-30T18:13:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7ee52e3_eab22b7a",
       "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e67f04_3b37f621",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-30T18:13:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5ac8e1ce_2e9f4ac6",
+      "range": {
+        "startLine": 274,
+        "startChar": 16,
+        "endLine": 274,
+        "endChar": 17
+      },
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0015853e_def9c866",
@@ -128,6 +230,24 @@
       "writtenOn": "2021-03-29T14:37:27Z",
       "side": 1,
       "message": "Wow this is quite unsafe. Can we at least have static_asserts that the offset of members of ProgrammableStageDescriptor match the offsets in VertexState/FragmentState?",
+      "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35986b77_7753b25c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-03-30T18:13:21Z",
+      "side": 1,
+      "message": "Refactored the code to no longer rely on this.",
+      "parentUuid": "0015853e_def9c866",
       "revId": "82bc37c4356bbee2acc175e602206e81f78c1a23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
