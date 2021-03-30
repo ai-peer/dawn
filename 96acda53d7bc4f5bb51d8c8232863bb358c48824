@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "196a2a4b_3e40b451",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-30T17:10:22Z",
+      "side": 1,
+      "message": "It is not 20 occurences. It about 60 for EXPECT_TEXTURE_RGBA8_EQ only. if we change parameters for all these 4 EXPECT_TEXTURE/EXPECT_PIXEL MACROs from (..., x, y, w, h, ...) to (..., (x, y), (w, h), ...), it would be around 500 occurences. \n\nSo I wonder whether it is worth to do so for reducing a single MACRO. I know you set a high standard for code quality though.",
+      "parentUuid": "c9a81537_9f09ea62",
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95607386_edf21102",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 2
