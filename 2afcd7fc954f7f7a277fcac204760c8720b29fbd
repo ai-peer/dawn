@@ -33,6 +33,24 @@
       "message": "nit: the can be put before the ComboRenderPipelineDescriptor2",
       "revId": "2afcd7fc954f7f7a277fcac204760c8720b29fbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40a23c49_2c251a61",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-03-30T14:42:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "687d1976_a0d316ab",
+      "revId": "2afcd7fc954f7f7a277fcac204760c8720b29fbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
