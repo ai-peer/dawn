@@ -1,0 +1,254 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d52957_cbdfe22d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "Direction looks good.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c57badcf_e3a4f109",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: In Dawn\u0027s side we aren\u0027t really importing anything, but more creating a wrapper object around some existing textures. So I think this should be create external texture.",
+      "range": {
+        "startLine": 770,
+        "startChar": 25,
+        "endLine": 770,
+        "endChar": 31
+      },
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7e7ac4b_30f2c676",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: extensible: true",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3b11a4_aed8a053",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "Looking at this, it seems you\u0027re going for a descriptor which will have plane 0-2 and other metadata. What do you think of including the format here as well so we can 1) validate it is a format we know how to handle with the external texture 2) differentiate between different multiplanar formats. I know that technically we could infer it, but it makes the API much more implicit in its behavior.\n\nAlso maybe we can just call this \"plane 0\"?",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f075a5_43d00742",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: Also modify the CMakeLists.txt (without commas)",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e09ffc6_6dd95c2a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "Interesting, it\u0027s true that this could likely stay a purely frontend object.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4baeca7_6ce6bdd3",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: this could go with the other creation methods.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b90d3489_b3bd31da",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "We should use the same pattern as for CreateBufferInternal. The other methods should be changed in the future (see crbug.com/dawn/723)",
+      "range": {
+        "startLine": 305,
+        "startChar": 8,
+        "endLine": 305,
+        "endChar": 18
+      },
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3814ae_08fc0884",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "Maybe we could have a switch over descriptor-\u003eformat that checks for each format that the constraints are satisfied (which planes are null, what their format is, that they have the SAMPLED usage, that they represent a single subresource and that their sizes are correct).",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50a0083_c1672c1f",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "Why is that an error? There could be a future where for example \u003ccanvas\u003e uses a Dawn texture so that the texture is internal.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd820611_82871ffb",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: Can we have a Ref\u003c...\u003e Create and make the constructor private?",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23887528_3fe5fb0b",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: std::vector is a bit overkill, maybe std::array\u003c..., 3\u003e if that\u0027s the max we think we\u0027ll have?",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5fce294_0ac853f2",
+        "filename": "src/tests/end2end/D3D12ExternalTextureTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "If we remove the requirement that ExternalTexture must be composed of external textures, then we can write the test in a backend-agnostic file.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac2d7c6c_6dde15bb",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:39:02Z",
+      "side": 1,
+      "message": "nit: based on the comment in ValidateExternalTextureDescriptor we\u0027ll need to expand the validation tests a bit.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
