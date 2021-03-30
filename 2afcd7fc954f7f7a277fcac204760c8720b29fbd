@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6e05e7a_9e10c958",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T12:11:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2afcd7fc954f7f7a277fcac204760c8720b29fbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687d1976_a0d316ab",
+        "filename": "src/tests/white_box/D3D12ResidencyTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T12:11:52Z",
+      "side": 1,
+      "message": "nit: the can be put before the ComboRenderPipelineDescriptor2",
+      "revId": "2afcd7fc954f7f7a277fcac204760c8720b29fbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
