@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02ca1891_c10608a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-30T04:52:19Z",
+      "side": 1,
+      "message": "PTAL. This CL attempts to address Corentin\u0027s comment at https://dawn-review.googlesource.com/c/dawn/+/45980/4/src/tests/DawnTest.h#b70. ",
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95607386_edf21102",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-30T04:52:19Z",
+      "side": 1,
+      "message": "We can almost remove this AddTextureExpectation. But there is one difference: we use a vector above, but we use a raw data here. I tend to keep this one, because there are a lot of callers where we use a single raw data for comparison.",
+      "range": {
+        "startLine": 347,
+        "startChar": 46,
+        "endLine": 347,
+        "endChar": 67
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffbe4e22_8dd8ecc2",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-30T04:52:19Z",
+      "side": 1,
+      "message": "I\u0027d rather to say \"layer\", because all of these three can be seen as slice: different mip levels, layers and aspects can be seen as mip slices, layer slices, and plane slices. So it makes more sense to specify \"layer\" here.",
+      "range": {
+        "startLine": 408,
+        "startChar": 59,
+        "endLine": 408,
+        "endChar": 64
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
