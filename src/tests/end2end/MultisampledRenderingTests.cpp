@@ -177,7 +177,7 @@ class MultisampledRenderingTest : public DawnTest {
         constexpr uint32_t kMiddleY = (kHeight - 1) / 2;
 
         RGBA8 expectedColor = ExpectedMSAAColor(inputColor, msaaCoverage);
-        EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, resolveTexture, kMiddleX, kMiddleY, 1, 1,
+        EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, resolveTexture, (kMiddleX, kMiddleY), (1, 1),
                                 mipmapLevel, arrayLayer);
     }
 
@@ -797,7 +797,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithSampleMaskAndShaderOut
     queue.Submit(1, &commandBuffer);
 
     RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage);
-    EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, 1, 0, 1, 1, 0, 0);
+    EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, (1, 0), (1, 1), 0, 0);
 }
 
 // Test doing MSAA resolve into multiple resolve targets works correctly with a non-default
@@ -906,7 +906,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverage) {
         }
 
         RGBA8 expectedColor = ExpectedMSAAColor(kGreen, msaaCoverage);
-        EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, 1, 0, 1, 1, 0, 0);
+        EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, (1, 0), (1, 1), 0, 0);
     }
 }
 
@@ -959,8 +959,8 @@ TEST_P(MultisampledRenderingTest, ResolveIntoMultipleResolveTargetsWithAlphaToCo
         // using only the first one.
         RGBA8 expectedRed = ExpectedMSAAColor(kRed, kMSAACoverage);
         RGBA8 expectedGreen = ExpectedMSAAColor(kGreen, kMSAACoverage);
-        EXPECT_TEXTURE_RGBA8_EQ(&expectedRed, mResolveTexture, 1, 0, 1, 1, 0, 0);
-        EXPECT_TEXTURE_RGBA8_EQ(&expectedGreen, resolveTexture2, 1, 0, 1, 1, 0, 0);
+        EXPECT_TEXTURE_RGBA8_EQ(&expectedRed, mResolveTexture, (1, 0), (1, 1), 0, 0);
+        EXPECT_TEXTURE_RGBA8_EQ(&expectedGreen, resolveTexture2, (1, 0), (1, 1), 0, 0);
     }
 }
 
@@ -1021,7 +1021,7 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndAlphaToCo
                                                (kGreen.a + kRed.a) / 2.0};
     RGBA8 expectedColor = ExpectedMSAAColor(kHalfGreenHalfRed, 1.0f);
 
-    EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, 1, 0, 1, 1, 0, 0);
+    EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, (1, 0), (1, 1), 0, 0);
 }
 
 // Test using one multisampled color attachment with resolve target can render correctly
@@ -1065,7 +1065,7 @@ TEST_P(MultisampledRenderingTest, ResolveInto2DTextureWithAlphaToCoverageAndSamp
         queue.Submit(1, &commandBuffer);
 
         RGBA8 expectedColor = ExpectedMSAAColor(kGreen, kMSAACoverage * alpha);
-        EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, 1, 0, 1, 1, 0, 0);
+        EXPECT_TEXTURE_RGBA8_EQ(&expectedColor, mResolveTexture, (1, 0), (1, 1), 0, 0);
     }
 }
 
