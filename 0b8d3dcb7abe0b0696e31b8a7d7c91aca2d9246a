@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8141d4dc_2498aa1a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:33:02Z",
+      "side": 1,
+      "message": "nit: Bug: dawn:548",
+      "revId": "0b8d3dcb7abe0b0696e31b8a7d7c91aca2d9246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf82c0b9_bd3558c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:33:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0b8d3dcb7abe0b0696e31b8a7d7c91aca2d9246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe6c6c56_21daae44",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:33:02Z",
+      "side": 1,
+      "message": "Why is the last register space 3? It should be 4 because kMaxBindgroups is 4 (so 0, 1, 2, 3 are for bindgroups and 4 for FIO). This would guarantee that FIO gets its own space (so the comment should be updated)",
+      "revId": "0b8d3dcb7abe0b0696e31b8a7d7c91aca2d9246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
