@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05a2d765_d006a819",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:29:49Z",
+      "side": 1,
+      "message": "LGTM, thanks for doing the change to use the transform in Dawn!",
+      "revId": "9a2daa91a855c7f3a746d1ae752227c0984c2ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d3c97a8_1f23f748",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:29:49Z",
+      "side": 1,
+      "message": "Could we have a comment along the lines of:\n\n d3d12::BindGroupLayout packs the bindings per HLSL register-space. We modify the Tint AST to make the \"bindings\" decoration match the offset chosen by d3d12::BindGroupLayout so that Tint produces HLSL with the correct registers assigned to each interface variable.",
+      "revId": "9a2daa91a855c7f3a746d1ae752227c0984c2ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3848caa4_a8eb0328",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:29:49Z",
+      "side": 1,
+      "message": "Could we have a comment explaining why we do this (similarly to the SPIRV-Cross path?)",
+      "revId": "9a2daa91a855c7f3a746d1ae752227c0984c2ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "828bc7ce_58111835",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T11:29:49Z",
+      "side": 1,
+      "message": "How does Tint know that this Data is for the BindingRemapper? Does the runtime reflection walk all the inputs when a transform request its input?",
+      "revId": "9a2daa91a855c7f3a746d1ae752227c0984c2ad2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
