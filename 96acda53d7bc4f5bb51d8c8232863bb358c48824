@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "db629fa3_a66247ae",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:11:34Z",
+      "side": 1,
+      "message": "I was trying to find a way to have the same macro for 2D and 3D. The {w, h} trick doesn\u0027t work but the following seems to work:\n\n  https://godbolt.org/z/sbGqzh4a9\n\nThe nested parenthesis are a bit worse than it would have been with nested curly brackets though :/",
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "95607386_edf21102",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 2
@@ -54,6 +71,30 @@
       "writtenOn": "2021-03-30T04:52:19Z",
       "side": 1,
       "message": "I\u0027d rather to say \"layer\", because all of these three can be seen as slice: different mip levels, layers and aspects can be seen as mip slices, layer slices, and plane slices. So it makes more sense to specify \"layer\" here.",
+      "range": {
+        "startLine": 408,
+        "startChar": 59,
+        "endLine": 408,
+        "endChar": 64
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a74f98cd_9cad3550",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-30T13:11:34Z",
+      "side": 1,
+      "message": "+1, but that should be part of the origin since 2D array layers are specified with origin.z in copies.",
+      "parentUuid": "ffbe4e22_8dd8ecc2",
       "range": {
         "startLine": 408,
         "startChar": 59,
