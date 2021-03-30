@@ -623,7 +623,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
     queue.Submit(1, &commandBuffer);
 
     // Verify the rendering result.
-    int min = 1, max = kRTSize - 3;
+    uint32_t min = 1, max = kRTSize - 3;
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kYellow, renderPass.color, min, min);
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kYellow, renderPass.color, max, min);
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kYellow, renderPass.color, min, max);
@@ -742,7 +742,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
     queue.Submit(1, &commandBuffer);
 
     // Verify the rendering result.
-    int min = 1, max = kRTSize - 3;
+    uint32_t min = 1, max = kRTSize - 3;
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kYellow, renderPass.color, min, min);
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kYellow, renderPass.color, max, min);
     EXPECT_PIXEL_RGBA8_EQ(RGBA8::kYellow, renderPass.color, min, max);
