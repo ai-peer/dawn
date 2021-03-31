@@ -711,14 +711,6 @@ namespace dawn_native {
                                                    void* userdata) {
         ComputePipelineBase* result = nullptr;
 
-        if (IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
-            callback(WGPUCreatePipelineAsyncStatus_Error, nullptr,
-                     "CreateComputePipelineAsync is disallowed because it isn't completely "
-                     "implemented yet.",
-                     userdata);
-            return;
-        }
-
         MaybeError maybeError = CreateComputePipelineInternal(&result, descriptor);
         if (maybeError.IsError()) {
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
@@ -763,14 +755,6 @@ namespace dawn_native {
                                                   WGPUCreateRenderPipelineAsyncCallback callback,
                                                   void* userdata) {
         RenderPipelineBase* result = nullptr;
-
-        if (IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
-            callback(WGPUCreatePipelineAsyncStatus_Error, nullptr,
-                     "CreateRenderPipelineAsync is disallowed because it isn't completely "
-                     "implemented yet.",
-                     userdata);
-            return;
-        }
 
         MaybeError maybeError = CreateRenderPipelineInternal(&result, descriptor);
         if (maybeError.IsError()) {
