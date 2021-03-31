@@ -281,6 +281,24 @@
       "parentUuid": "f1cf7386_54640b96",
       "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e8b05b1_c81d8e36",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-03-31T07:55:44Z",
+      "side": 1,
+      "message": "I\u0027ve updated this CL to provide a framework to only treat the creation of the pipeline on the backend as an async task.\n\nNow in CreateComputePipelineAsync(), the callback will be called at once in the main thread when:\n- an error is caught by the front-end validations, or\n- we can find a proper pipeline object in the front-end cache\n\nOtherwise, the remaining work will all be put into CreateComputePipelineAsyncImpl(), where the newly-created pipeline object, the callback and userdata will be saved into CreatePipelineAsyncTracker.\n\nPTAL, thanks!",
+      "parentUuid": "6ecc54fa_35b36c26",
+      "revId": "0b9c710e5ed321a97ebb2b4edf04d39b3b4ec740",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
