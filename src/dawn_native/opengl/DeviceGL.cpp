@@ -54,6 +54,9 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError Device::Initialize() {
+        if (IsToggleEnabled(Toggle::UseTintGenerator)) {
+            return DAWN_UNIMPLEMENTED_ERROR("GL backend not supported by Tint generator");
+        }
         InitTogglesFromDriver();
         mFormatTable = BuildGLFormatTable();
 
