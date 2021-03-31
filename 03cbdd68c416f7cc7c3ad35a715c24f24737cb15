@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a04b385_227a0666",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-31T15:09:43Z",
+      "side": 1,
+      "message": "Not sure whether you discussed before. But it looks like that moving T2B copy helpers into UtilsD3D12 make more sense (B2T copy helpers are there). In addition, do you think that we need to do code refactoring between T2B helpers and B2T helpers and merge them into one? They are quite similar. But maybe you discussed that before. ",
+      "revId": "03cbdd68c416f7cc7c3ad35a715c24f24737cb15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
