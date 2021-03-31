@@ -142,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ead2ea_4dc1253d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-31T05:35:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c01f71c_20547b53",
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95607386_edf21102",
@@ -202,6 +220,30 @@
       "side": 1,
       "message": "+1, but that should be part of the origin since 2D array layers are specified with origin.z in copies.",
       "parentUuid": "ffbe4e22_8dd8ecc2",
+      "range": {
+        "startLine": 408,
+        "startChar": 59,
+        "endLine": 408,
+        "endChar": 64
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2329766_cee7536a",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-31T05:35:08Z",
+      "side": 1,
+      "message": "Ack. It should. But the current tests don\u0027t use origin.z at all. Most callers name it \"layer\" too in order to specify the particular layer index if it is a variable (some callers just use a constant value).",
+      "parentUuid": "a74f98cd_9cad3550",
       "range": {
         "startLine": 408,
         "startChar": 59,
