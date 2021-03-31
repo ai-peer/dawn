@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39745dfc_46c264e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:07:16Z",
+      "side": 1,
+      "message": "LGTM overall; haven\u0027t looked at why the bots are red",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959e9dff_02134842",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:07:16Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d02e11e_dcc25b7a",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:07:16Z",
+      "side": 1,
+      "message": "maybe we should draw the triangle at an angle with different depth per vertex - so we can check  that some pixels are clipped/clamped and some are not. For example, we don\u0027t want the whole triangle to be clipped if just one point is outside the depth range",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

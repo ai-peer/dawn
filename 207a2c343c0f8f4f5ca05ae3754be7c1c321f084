@@ -16,6 +16,46 @@
       "message": "PTAL again since a fair amount changed after moving clampDepth to primitive state.",
       "revId": "207a2c343c0f8f4f5ca05ae3754be7c1c321f084",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aea250cd_279cac1e",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:07:16Z",
+      "side": 1,
+      "message": "let\u0027s also make a PR on https://github.com/webgpu-native/webgpu-headers to add this (and the sType) - just so we don\u0027t churn the name. I don\u0027t expect it to be contentious though - but one could imagine calling it \"primitive state depth clamping\" instead..",
+      "range": {
+        "startLine": 1578,
+        "startChar": 5,
+        "endLine": 1578,
+        "endChar": 35
+      },
+      "revId": "207a2c343c0f8f4f5ca05ae3754be7c1c321f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ba95ab9_06443476",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:07:16Z",
+      "side": 1,
+      "message": "this seems ok for now - but can we have a follow-up cl that adds a helper to iterate the chain?",
+      "revId": "207a2c343c0f8f4f5ca05ae3754be7c1c321f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
