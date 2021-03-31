@@ -33,6 +33,23 @@
       "message": "LGTM! I think the reason B2T was already in UtilsD3D12 is because it\u0027s used in Queue::WriteBuffer.",
       "revId": "03cbdd68c416f7cc7c3ad35a715c24f24737cb15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f187cddb_6373fed3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T16:40:58Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "03cbdd68c416f7cc7c3ad35a715c24f24737cb15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
