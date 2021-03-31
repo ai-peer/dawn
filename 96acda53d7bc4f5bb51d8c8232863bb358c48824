@@ -300,6 +300,30 @@
       },
       "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fef0242_96e8c822",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-03-31T15:06:16Z",
+      "side": 1,
+      "message": "Can we leave the first part as a separate issue too? This CL is used to add a potential texture result comparison MACRO but don\u0027t need to add a new one (I confirmed). The next one will remove layer / slice into origin.z, which will change the logic of some functions, I think. Actually, we separate depth and layer in a lot of functions for copy, even though we have one parameter \"depthOrArrayLayers\", and/or depth/layer index is duplicated with parameters like origin.z. I think I can have a more through thinking about code refactoring for this kind of thing.",
+      "parentUuid": "49511b9a_da5b63b3",
+      "range": {
+        "startLine": 408,
+        "startChar": 59,
+        "endLine": 408,
+        "endChar": 64
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
