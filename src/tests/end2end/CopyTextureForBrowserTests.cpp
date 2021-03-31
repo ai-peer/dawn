@@ -34,6 +34,10 @@ namespace {
         wgpu::TextureFormat::RGBA32Float, wgpu::TextureFormat::RG8Unorm,
         wgpu::TextureFormat::RGBA16Float, wgpu::TextureFormat::RG16Float,
         wgpu::TextureFormat::RGB10A2Unorm};
+
+    static const wgpu::Origin3D kOrigins[] = {{1, 1}, {1, 2}, {2, 1}};
+
+    static const wgpu::Extent3D kCopySize[] = {{1, 1}, {2, 1}, {1, 2}, {2, 2}};
 }  // anonymous namespace
 
 class CopyTextureForBrowserTests : public DawnTest {
@@ -72,17 +76,27 @@ class CopyTextureForBrowserTests : public DawnTest {
         return sourceTextureData;
     }
 
-    static std::vector<RGBA8> GetSourceTextureData(const utils::TextureDataCopyLayout& layout) {
+    enum class TextureCopyRole {
+        SOURCE,
+        DEST,
+    };
+
+    // Source texture contains red pixels and dst texture contains green pixels at start.
+    static std::vector<RGBA8> GetTextureData(const utils::TextureDataCopyLayout& layout,
+                                             TextureCopyRole textureRole) {
+        RGBA8 texel = (textureRole == TextureCopyRole::SOURCE)
+                          ? RGBA8(static_cast<uint8_t>(255), static_cast<uint8_t>(0),
+                                  static_cast<uint8_t>(0), static_cast<uint8_t>(255))
+                          : RGBA8(static_cast<uint8_t>(0), static_cast<uint8_t>(255),
+                                  static_cast<uint8_t>(0), static_cast<uint8_t>(255));
+
         std::vector<RGBA8> textureData(layout.texelBlockCount);
         for (uint32_t layer = 0; layer < layout.mipSize.depthOrArrayLayers; ++layer) {
             const uint32_t sliceOffset = layout.texelBlocksPerImage * layer;
             for (uint32_t y = 0; y < layout.mipSize.height; ++y) {
                 const uint32_t rowOffset = layout.texelBlocksPerRow * y;
                 for (uint32_t x = 0; x < layout.mipSize.width; ++x) {
-                    textureData[sliceOffset + rowOffset + x] =
-                        RGBA8(static_cast<uint8_t>((x + layer * x) % 256),
-                              static_cast<uint8_t>((y + layer * y) % 256),
-                              static_cast<uint8_t>(x % 256), static_cast<uint8_t>(x % 256));
+                    textureData[sliceOffset + rowOffset + x] = texel;
                 }
             }
         }
@@ -99,8 +113,11 @@ class CopyTextureForBrowserTests : public DawnTest {
         testPipeline = MakeTestPipeline();
 
         uint32_t uniformBufferData[] = {
-            0,  // copy have flipY option
-            4,  // channelCount
+            0,     // copy have flipY option
+            4,     // channelCount
+            0, 0,  // uvec2, subrect copy src origin
+            0, 0,  // uvec2, subrect copy dst origin
+            0, 0,  // uvec2, subrect copy size
         };
 
         wgpu::BufferDescriptor uniformBufferDesc = {};
@@ -116,7 +133,10 @@ class CopyTextureForBrowserTests : public DawnTest {
         wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
             [[block]] struct Uniforms {
                 dstTextureFlipY : u32;
-                channelCount : u32;
+                channelCount    : u32;
+                srcCopyOrigin   : vec2<u32>;
+                dstCopyOrigin   : vec2<u32>;
+                copySize        : vec2<u32>;
             };
             [[block]] struct OutputBuf {
                 result : array<u32>;
@@ -134,32 +154,46 @@ class CopyTextureForBrowserTests : public DawnTest {
                 // Current CopyTextureForBrowser only support full copy now.
                 // TODO(crbug.com/dawn/465): Refactor this after CopyTextureForBrowser
                 // support sub-rect copy.
-                var size : vec2<i32> = textureDimensions(src);
-                var dstTexCoord : vec2<i32> = vec2<i32>(GlobalInvocationID.xy);
-                var srcTexCoord : vec2<i32> = dstTexCoord;
-                if (uniforms.dstTextureFlipY == 1u) {
-                    srcTexCoord.y = size.y - dstTexCoord.y - 1;
-                }
+                var srcSize : vec2<i32> = textureDimensions(src);
+                var dstSize : vec2<i32> = textureDimensions(dst);
+                var dstTexCoord : vec2<u32> = vec2<u32>(GlobalInvocationID.xy);
+                var nonCoveredColor : vec4<f32> =
+                    vec4<f32>(0.0, 1.0, 0.0, 1.0); // should be green
 
-                var srcColor : vec4<f32> = textureLoad(src, srcTexCoord, 0);
-                var dstColor : vec4<f32> = textureLoad(dst, dstTexCoord, 0);
                 var success : bool = true;
-
-                // Not use loop and variable index format to workaround
-                // crbug.com/tint/638.
-                if (uniforms.channelCount == 2u) { // All have rg components.
+                if (dstTexCoord.x < uniforms.dstCopyOrigin.x ||
+                    dstTexCoord.y < uniforms.dstCopyOrigin.y ||
+                    dstTexCoord.x >= uniforms.dstCopyOrigin.x + uniforms.copySize.x ||
+                    dstTexCoord.y >= uniforms.dstCopyOrigin.y + uniforms.copySize.y) {
                     success = success &&
-                              aboutEqual(dstColor.r, srcColor.r) &&
-                              aboutEqual(dstColor.g, srcColor.g);
+                              all(textureLoad(dst, vec2<i32>(dstTexCoord), 0) == nonCoveredColor);
                 } else {
-                    success = success &&
-                              aboutEqual(dstColor.r, srcColor.r) &&
-                              aboutEqual(dstColor.g, srcColor.g) &&
-                              aboutEqual(dstColor.b, srcColor.b) &&
-                              aboutEqual(dstColor.a, srcColor.a);
-                }
+                    // Calculate source texture coord.
+                    var srcTexCoord : vec2<u32> = dstTexCoord - uniforms.dstCopyOrigin +
+                                                  uniforms.srcCopyOrigin;
+                    if (uniforms.dstTextureFlipY == 1u) {
+                        srcTexCoord.y = u32(srcSize.y) - srcTexCoord.y - 1u;
+                    }
 
-                var outputIndex : u32 = GlobalInvocationID.y * u32(size.x) + GlobalInvocationID.x;
+                    var srcColor : vec4<f32> = textureLoad(src, vec2<i32>(srcTexCoord), 0);
+                    var dstColor : vec4<f32> = textureLoad(dst, vec2<i32>(dstTexCoord), 0);
+
+                    // Not use loop and variable index format to workaround
+                    // crbug.com/tint/638.
+                    if (uniforms.channelCount == 2u) { // All have rg components.
+                        success = success &&
+                                  aboutEqual(dstColor.r, srcColor.r) &&
+                                  aboutEqual(dstColor.g, srcColor.g);
+                    } else {
+                        success = success &&
+                                  aboutEqual(dstColor.r, srcColor.r) &&
+                                  aboutEqual(dstColor.g, srcColor.g) &&
+                                  aboutEqual(dstColor.b, srcColor.b) &&
+                                  aboutEqual(dstColor.a, srcColor.a);
+                    }
+                }
+                var outputIndex : u32 = GlobalInvocationID.y * u32(dstSize.x) +
+                                        GlobalInvocationID.x;
                 if (success) {
                     output.result[outputIndex] = 1u;
                 } else {
@@ -218,33 +252,70 @@ class CopyTextureForBrowserTests : public DawnTest {
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
-        const utils::TextureDataCopyLayout copyLayout =
+        const utils::TextureDataCopyLayout srcCopyLayout =
             utils::GetTextureDataCopyLayoutForTexture2DAtLevel(
                 kTextureFormat,
                 {srcSpec.textureSize.width, srcSpec.textureSize.height,
                  copySize.depthOrArrayLayers},
                 srcSpec.level);
 
-        const std::vector<RGBA8> textureArrayCopyData =
-            useFixedTestValue ? GetFixedSourceTextureData() : GetSourceTextureData(copyLayout);
-        wgpu::ImageCopyTexture imageCopyTexture =
-            utils::CreateImageCopyTexture(srcTexture, srcSpec.level, {0, 0, srcSpec.copyOrigin.z});
+        std::vector<RGBA8> srcTextureArrayCopyData;
+        if (useFixedTestValue) {  // Use fixed value for color conversion tests.
+            srcTextureArrayCopyData = GetFixedSourceTextureData();
+        } else {  // For other tests, the input format is always kTextureFormat.
 
-        wgpu::TextureDataLayout textureDataLayout;
-        textureDataLayout.offset = 0;
-        textureDataLayout.bytesPerRow = copyLayout.bytesPerRow;
-        textureDataLayout.rowsPerImage = copyLayout.rowsPerImage;
+            srcTextureArrayCopyData = GetTextureData(srcCopyLayout, TextureCopyRole::SOURCE);
+        }
 
-        device.GetQueue().WriteTexture(&imageCopyTexture, textureArrayCopyData.data(),
-                                       textureArrayCopyData.size() * sizeof(RGBA8),
-                                       &textureDataLayout, &copyLayout.mipSize);
-
-        // Perform the texture to texture copy
         wgpu::ImageCopyTexture srcImageCopyTexture =
             utils::CreateImageCopyTexture(srcTexture, srcSpec.level, srcSpec.copyOrigin);
+        wgpu::ImageCopyTexture srcImageTextureInit =
+            utils::CreateImageCopyTexture(srcTexture, srcSpec.level, {0, 0});
+
+        wgpu::TextureDataLayout srcTextureDataLayout;
+        srcTextureDataLayout.offset = 0;
+        srcTextureDataLayout.bytesPerRow = srcCopyLayout.bytesPerRow;
+        srcTextureDataLayout.rowsPerImage = srcCopyLayout.rowsPerImage;
+
+        device.GetQueue().WriteTexture(&srcImageTextureInit, srcTextureArrayCopyData.data(),
+                                       srcTextureArrayCopyData.size() * sizeof(RGBA8),
+                                       &srcTextureDataLayout, &srcCopyLayout.mipSize);
+
+        bool testSubRectCopy = srcSpec.copyOrigin.x > 0 || srcSpec.copyOrigin.y > 0 ||
+                               dstSpec.copyOrigin.x > 0 || dstSpec.copyOrigin.y > 0 ||
+                               srcSpec.textureSize.width > copySize.width ||
+                               srcSpec.textureSize.height > copySize.height ||
+                               dstSpec.textureSize.width > copySize.width ||
+                               dstSpec.textureSize.height > copySize.height;
+
         wgpu::ImageCopyTexture dstImageCopyTexture =
             utils::CreateImageCopyTexture(dstTexture, dstSpec.level, dstSpec.copyOrigin);
+        if (testSubRectCopy) {
+            // For subrect copy tests, dst texture use kTextureFormat always.
+            const utils::TextureDataCopyLayout dstCopyLayout =
+                utils::GetTextureDataCopyLayoutForTexture2DAtLevel(
+                    kTextureFormat,
+                    {dstSpec.textureSize.width, dstSpec.textureSize.height,
+                     copySize.depthOrArrayLayers},
+                    dstSpec.level);
 
+            const std::vector<RGBA8> dstTextureArrayCopyData =
+                GetTextureData(dstCopyLayout, TextureCopyRole::DEST);
+
+            wgpu::TextureDataLayout dstTextureDataLayout;
+            dstTextureDataLayout.offset = 0;
+            dstTextureDataLayout.bytesPerRow = dstCopyLayout.bytesPerRow;
+            dstTextureDataLayout.rowsPerImage = dstCopyLayout.rowsPerImage;
+
+            wgpu::ImageCopyTexture dstImageTextureInit =
+                utils::CreateImageCopyTexture(dstTexture, dstSpec.level, {0, 0});
+
+            device.GetQueue().WriteTexture(&dstImageTextureInit, dstTextureArrayCopyData.data(),
+                                           dstTextureArrayCopyData.size() * sizeof(RGBA8),
+                                           &dstTextureDataLayout, &dstCopyLayout.mipSize);
+        }
+
+        // Perform the texture to texture copy
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
 
@@ -253,15 +324,22 @@ class CopyTextureForBrowserTests : public DawnTest {
 
         // Update uniform buffer based on test config
         uint32_t uniformBufferData[] = {
-            options.flipY,                                    // copy have flipY option
-            GetTextureFormatComponentCount(dstSpec.format)};  // channelCount
+            options.flipY,                                   // copy have flipY option
+            GetTextureFormatComponentCount(dstSpec.format),  // channelCount
+            srcSpec.copyOrigin.x,
+            srcSpec.copyOrigin.y,  // src texture copy origin
+            dstSpec.copyOrigin.x,
+            dstSpec.copyOrigin.y,  // dst texture copy origin
+            copySize.width,
+            copySize.height  // copy size
+        };
 
         device.GetQueue().WriteBuffer(uniformBuffer, 0, uniformBufferData,
                                       sizeof(uniformBufferData));
 
         // Create output buffer to store result
         wgpu::BufferDescriptor outputDesc;
-        outputDesc.size = copySize.width * copySize.height * sizeof(uint32_t);
+        outputDesc.size = dstSpec.textureSize.width * dstSpec.textureSize.height * sizeof(uint32_t);
         outputDesc.usage =
             wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
         wgpu::Buffer outputBuffer = device.CreateBuffer(&outputDesc);
@@ -280,7 +358,8 @@ class CopyTextureForBrowserTests : public DawnTest {
             device, testPipeline.GetBindGroupLayout(0),
             {{0, srcTextureView},
              {1, dstTextureView},
-             {2, outputBuffer, 0, copySize.width * copySize.height * sizeof(uint32_t)},
+             {2, outputBuffer, 0,
+              dstSpec.textureSize.width * dstSpec.textureSize.height * sizeof(uint32_t)},
              {3, uniformBuffer, 0, sizeof(uniformBufferData)}});
 
         // Start a pipeline to check pixel value in bit form.
@@ -292,16 +371,18 @@ class CopyTextureForBrowserTests : public DawnTest {
             wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
             pass.SetPipeline(testPipeline);
             pass.SetBindGroup(0, bindGroup);
-            pass.Dispatch(copySize.width, copySize.height);
+            pass.Dispatch(dstSpec.textureSize.width,
+                          dstSpec.textureSize.height);  // Verify dst texture content
             pass.EndPass();
 
             testCommands = encoder.Finish();
         }
         queue.Submit(1, &testCommands);
 
-        std::vector<uint32_t> expectResult(copySize.width * copySize.height, 1);
+        std::vector<uint32_t> expectResult(dstSpec.textureSize.width * dstSpec.textureSize.height,
+                                           1);
         EXPECT_BUFFER_U32_RANGE_EQ(expectResult.data(), outputBuffer, 0,
-                                   copySize.width * copySize.height);
+                                   dstSpec.textureSize.width * dstSpec.textureSize.height);
     }
 
     wgpu::Buffer uniformBuffer;  // Uniform buffer to store dst texture meta info.
@@ -428,6 +509,35 @@ TEST_P(CopyTextureForBrowserTests, FromBGRA8UnormCopy) {
         dstTextureSpec.format = dstFormat;
 
         DoColorConversionTest(srcTextureSpec, dstTextureSpec);
+    }
+}
+
+// Verify |CopyTextureForBrowser| doing subrect copy.
+// Source texture is a full red texture and dst texture is a full
+// green texture originally. After the subrect copy, affected part
+// in dst texture should be red and other part should remain green.
+TEST_P(CopyTextureForBrowserTests, CopySubRect) {
+    // Tests skip due to crbug.com/dawn/592.
+    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
+
+    for (wgpu::Origin3D srcOrigin : kOrigins) {
+        for (wgpu::Origin3D dstOrigin : kOrigins) {
+            for (wgpu::Extent3D copySize : kCopySize) {
+                for (bool flipY : {true, false}) {
+                    TextureSpec srcTextureSpec;
+                    srcTextureSpec.copyOrigin = srcOrigin;
+                    srcTextureSpec.textureSize = {6, 7};
+
+                    TextureSpec dstTextureSpec;
+                    dstTextureSpec.copyOrigin = dstOrigin;
+                    dstTextureSpec.textureSize = {8, 5};
+                    wgpu::CopyTextureForBrowserOptions options = {};
+                    options.flipY = flipY;
+
+                    DoTest(srcTextureSpec, dstTextureSpec, copySize, options);
+                }
+            }
+        }
     }
 }
 
