@@ -340,6 +340,30 @@
       },
       "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd97d820_ee98b684",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 1196,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Ah, I guess I didn\u0027t look hard enough. Done.",
+      "parentUuid": "1d348b02_6834669e",
+      "range": {
+        "startLine": 1194,
+        "startChar": 20,
+        "endLine": 1196,
+        "endChar": 21
+      },
+      "revId": "741349eb91fbcf9b176bf8c2d6a28e44ab615df2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

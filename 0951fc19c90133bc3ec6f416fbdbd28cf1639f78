@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee58df1_7b5e679c",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1855,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9a686fc4_aa6e0fda",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b569f9f6_c6b5a338",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-03-29T13:48:30Z",
       "side": 1,
       "message": "Not necessarily in this CL, but you mentioned that Mesa has nice helpers with working with chained structure, could we have helpers in Dawn too to help with extracting data and validating chained structs? Could be a follow-up.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "053a12bc_0516d0e8",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b569f9f6_c6b5a338",
       "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1feb815e_0ef143b6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c8f786_826ff78b",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f7178d_c2cbbe94",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17c8f786_826ff78b",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "815de56c_dd4fd930",
@@ -116,6 +188,42 @@
       "writtenOn": "2021-03-29T13:48:30Z",
       "side": 1,
       "message": "With mClampDepth a member, we could record it unconditionally.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1339bf8b_5938395b",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815de56c_dd4fd930",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb807a1_27f00b97",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815de56c_dd4fd930",
       "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4f397de_17fe5a0b",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Ended up moving this all to a new PrimitiveStateTests.cpp.",
+      "parentUuid": "26aa43a6_82105ec9",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b08345a_febed2f7",
@@ -150,6 +276,24 @@
       "writtenOn": "2021-03-29T13:48:30Z",
       "side": 1,
       "message": "Is there a way to test that it gets clamped to 1.0? For example by drawing something that output 1.0 then using CompareFunction::Equal.\n\nLikewise for -1.0 getting clamped to 0.0.",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e8de4de_b7f1a94c",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Done. Thanks for the suggestion!",
+      "parentUuid": "3b08345a_febed2f7",
       "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +315,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4845cf48_541e7a4e",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 824,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Ah, oops. That was a bad copy-paste...",
+      "parentUuid": "c670b8b6_2a699c83",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6f06eee_462d3ff4",
@@ -184,6 +346,24 @@
       "writtenOn": "2021-03-29T13:48:30Z",
       "side": 1,
       "message": "[1]",
+      "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f24566cb_6c040141",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6f06eee_462d3ff4",
       "revId": "0951fc19c90133bc3ec6f416fbdbd28cf1639f78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

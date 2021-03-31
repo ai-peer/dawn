@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01289d58_bcb2d595",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-03-31T19:59:21Z",
+      "side": 1,
+      "message": "PTAL again since a fair amount changed after moving clampDepth to primitive state.",
+      "revId": "207a2c343c0f8f4f5ca05ae3754be7c1c321f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
