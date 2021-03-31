@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c7df12a_7403c168",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c57badcf_e3a4f109",
+      "range": {
+        "startLine": 770,
+        "startChar": 25,
+        "endLine": 770,
+        "endChar": 31
+      },
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7e7ac4b_30f2c676",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-03-30T13:39:02Z",
       "side": 1,
       "message": "nit: extensible: true",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d2173fa_de1a53a7",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 899,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7e7ac4b_30f2c676",
       "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06701777_74879cda",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 901,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a3b11a4_aed8a053",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97f075a5_43d00742",
@@ -88,6 +148,24 @@
       "writtenOn": "2021-03-30T13:39:02Z",
       "side": 1,
       "message": "nit: Also modify the CMakeLists.txt (without commas)",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d88b71_b6a9fc29",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97f075a5_43d00742",
       "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c698928_986f7867",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4baeca7_6ce6bdd3",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b90d3489_b3bd31da",
@@ -139,6 +235,30 @@
       "writtenOn": "2021-03-30T13:39:02Z",
       "side": 1,
       "message": "We should use the same pattern as for CreateBufferInternal. The other methods should be changed in the future (see crbug.com/dawn/723)",
+      "range": {
+        "startLine": 305,
+        "startChar": 8,
+        "endLine": 305,
+        "endChar": 18
+      },
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb1f6b2_60a6e350",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b90d3489_b3bd31da",
       "range": {
         "startLine": 305,
         "startChar": 8,
@@ -168,6 +288,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4777e0e_246538d1",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "I don\u0027t currently know all the formats that will be supported (I just haven\u0027t researched it yet). Since we\u0027re only wanting to get it working for a single plane at the moment, I\u0027d rather defer the validation until multiplanar support is implemented.",
+      "parentUuid": "5d3814ae_08fc0884",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a50a0083_c1672c1f",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 6
@@ -179,6 +317,24 @@
       "writtenOn": "2021-03-30T13:39:02Z",
       "side": 1,
       "message": "Why is that an error? There could be a future where for example \u003ccanvas\u003e uses a Dawn texture so that the texture is internal.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e025d791_8f30707c",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Didn\u0027t realize that. Done.",
+      "parentUuid": "a50a0083_c1672c1f",
       "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -200,6 +356,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "019d8f9c_a1b2347e",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd820611_82871ffb",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23887528_3fe5fb0b",
@@ -213,6 +387,24 @@
       "writtenOn": "2021-03-30T13:39:02Z",
       "side": 1,
       "message": "nit: std::vector is a bit overkill, maybe std::array\u003c..., 3\u003e if that\u0027s the max we think we\u0027ll have?",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed4a23c8_3921f49d",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23887528_3fe5fb0b",
       "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -247,6 +439,24 @@
       "writtenOn": "2021-03-30T13:39:02Z",
       "side": 1,
       "message": "nit: based on the comment in ValidateExternalTextureDescriptor we\u0027ll need to expand the validation tests a bit.",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b55e46a_458618b3",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-03-31T21:03:45Z",
+      "side": 1,
+      "message": "Done. (I think)",
+      "parentUuid": "ac2d7c6c_6dde15bb",
       "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
