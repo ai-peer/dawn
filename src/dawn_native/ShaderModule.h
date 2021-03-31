@@ -143,6 +143,8 @@ namespace dawn_native {
         const std::vector<uint32_t>& GetSpirv() const;
         const tint::Program* GetTintProgram() const;
 
+        void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
+
         ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
             const std::vector<uint32_t>& spirv,
             const VertexStateDescriptor& vertexState,
@@ -155,11 +157,20 @@ namespace dawn_native {
             const std::string& entryPoint,
             BindGroupIndex pullingBufferBindingSet) const;
 
+        void ClearCompilationMessagesForTesting();
+        void AddCompilationMessageForTesting(
+            const char* message,
+            wgpu::CompilationMessageType type = wgpu::CompilationMessageType::Info,
+            uint64_t lineNum = 0,
+            uint64_t linePos = 0);
+
       protected:
         MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        void GetProgramDiagnosticMessages();
 
         // The original data in the descriptor for caching.
         enum class Type { Undefined, Spirv, Wgsl };
@@ -172,6 +183,9 @@ namespace dawn_native {
         EntryPointMetadataTable mEntryPoints;
         std::vector<uint32_t> mSpirv;
         std::unique_ptr<tint::Program> mTintProgram;
+
+        bool mProgramDiagnosticsQueried = false;
+        std::vector<WGPUCompilationMessage> mCompilationMessages;
     };
 
 }  // namespace dawn_native

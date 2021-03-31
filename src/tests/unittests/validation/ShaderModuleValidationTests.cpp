@@ -14,6 +14,8 @@
 
 #include "common/Constants.h"
 
+#include "dawn_native/ShaderModule.h"
+
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "utils/WGPUHelpers.h"

@@ -122,4 +122,14 @@ namespace dawn_wire { namespace client {
         return device->OnCreateRenderPipelineAsyncCallback(requestSerial, status, message);
     }
 
+    bool Client::DoShaderModuleGetCompilationInfoCallback(ShaderModule* shaderModule,
+                                                          uint64_t requestSerial,
+                                                          const WGPUCompilationInfo* info) {
+        // The fence might have been deleted or recreated so this isn't an error.
+        if (shaderModule == nullptr) {
+            return true;
+        }
+        return shaderModule->GetCompilationInfoCallback(requestSerial, info);
+    }
+
 }}  // namespace dawn_wire::client
