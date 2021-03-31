@@ -176,7 +176,7 @@ namespace dawn_native { namespace d3d12 {
                                                       const ShaderModuleDescriptor* descriptor,
                                                       ShaderModuleParseResult* parseResult) {
         Ref<ShaderModule> module = AcquireRef(new ShaderModule(device, descriptor));
-        DAWN_TRY(module->Initialize(parseResult));
+        DAWN_TRY(module->Initialize(parseResult, ReflectionTool::Tint));
         return module.Detach();
     }
 

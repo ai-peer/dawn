@@ -405,7 +405,7 @@ namespace dawn_native { namespace null {
     // ShaderModule
 
     MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult) {
-        return InitializeBase(parseResult);
+        return InitializeBase(parseResult, ReflectionTool::Tint);
     }
 
     // OldSwapChain
