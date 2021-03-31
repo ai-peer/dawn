@@ -183,6 +183,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18485401_7f3c1432",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T12:43:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "95607386_edf21102",
+      "range": {
+        "startLine": 347,
+        "startChar": 46,
+        "endLine": 347,
+        "endChar": 67
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffbe4e22_8dd8ecc2",
@@ -244,6 +268,30 @@
       "side": 1,
       "message": "Ack. It should. But the current tests don\u0027t use origin.z at all. Most callers name it \"layer\" too in order to specify the particular layer index if it is a variable (some callers just use a constant value).",
       "parentUuid": "a74f98cd_9cad3550",
+      "range": {
+        "startLine": 408,
+        "startChar": 59,
+        "endLine": 408,
+        "endChar": 64
+      },
+      "revId": "96acda53d7bc4f5bb51d8c8232863bb358c48824",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49511b9a_da5b63b3",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T12:43:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this is left unaddressed. It makes things easier to understand when putting the layer in the origin because there\u0027s a single number left alone that\u0027s the mip level. This way there is no confusion as to which is the mip level and which is the layer.\n\nAlso I found a better idea for this yesterday evening but didn\u0027t have connection to share it:\n\n https://godbolt.org/z/xsx3MaT4h\n\nIt allows 1) using {} and 2) removing the level argument when it is the default value of 0.\n\nThe second part of the comment can be left unadressed, but we should at least open a bug to track that item.",
+      "parentUuid": "e2329766_cee7536a",
       "range": {
         "startLine": 408,
         "startChar": 59,
