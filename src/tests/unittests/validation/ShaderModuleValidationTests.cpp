@@ -14,6 +14,8 @@
 
 #include "common/Constants.h"
 
+#include "dawn_native/ShaderModule.h"
+
 #include "tests/unittests/validation/ValidationTest.h"
 
 #include "utils/WGPUHelpers.h"
@@ -152,4 +154,47 @@ TEST_F(ShaderModuleValidationTest, MultisampledArrayTexture) {
         )";
 
     ASSERT_DEVICE_ERROR(utils::CreateShaderModuleFromASM(device, shader));
+}
+
+// Tests that shader module compilation messages can be queried.
+TEST_F(ShaderModuleValidationTest, CompilationMessages) {
+    std::ostringstream stream;
+    stream << R"([[location(0)]] var<out> fragColor : vec4<f32>;
+        [[stage(fragment)]] fn main() -> void {
+            fragColor = vec4<f32>(0.0, 1.0, 0.0, 1.0);
+        })";
+    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, stream.str().c_str());
+
+    dawn_native::ShaderModuleBase* shaderModuleBase =
+        reinterpret_cast<dawn_native::ShaderModuleBase*>(shaderModule.Get());
+    shaderModuleBase->ClearCompilationMessagesForTesting();
+    shaderModuleBase->AddCompilationMessageForTesting("Info Message");
+    shaderModuleBase->AddCompilationMessageForTesting("Warning Message",
+                                                      wgpu::CompilationMessageType::Warning);
+    shaderModuleBase->AddCompilationMessageForTesting("Error Message",
+                                                      wgpu::CompilationMessageType::Error, 3, 4);
+
+    auto callback = [](const WGPUCompilationInfo* info, void* userdata) {
+        ASSERT_EQ(3u, info->messageCount);
+
+        const WGPUCompilationMessage* message = &info->messages[0];
+        ASSERT_STREQ("Info Message", message->message);
+        ASSERT_EQ(WGPUCompilationMessageType_Info, message->type);
+        ASSERT_EQ(0u, message->lineNum);
+        ASSERT_EQ(0u, message->linePos);
+
+        message = &info->messages[1];
+        ASSERT_STREQ("Warning Message", message->message);
+        ASSERT_EQ(WGPUCompilationMessageType_Warning, message->type);
+        ASSERT_EQ(0u, message->lineNum);
+        ASSERT_EQ(0u, message->linePos);
+
+        message = &info->messages[2];
+        ASSERT_STREQ("Error Message", message->message);
+        ASSERT_EQ(WGPUCompilationMessageType_Error, message->type);
+        ASSERT_EQ(3u, message->lineNum);
+        ASSERT_EQ(4u, message->linePos);
+    };
+
+    shaderModule.GetCompilationInfo(callback, nullptr);
 }
