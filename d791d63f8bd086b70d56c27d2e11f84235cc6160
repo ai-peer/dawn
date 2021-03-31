@@ -33,6 +33,57 @@
       "message": "LGTM!\n\nI feel like we talked about this in the past, but maybe one day we can also have MakeRef\u003cT\u003e which does AcquireRef(new T(...))",
       "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9baba36_85d2ca42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-31T18:30:20Z",
+      "side": 1,
+      "message": "LGTM2! See bare pointers go away makes me happy.",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aabf395e_b6e1ba98",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-31T18:30:20Z",
+      "side": 1,
+      "message": "Out of curiosity, why no ResultOrError here? Because it doesn\u0027t call DAWN_TRY (\"can\u0027t fail\")?",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62c183c5_4be1a6a0",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-03-31T18:30:20Z",
+      "side": 1,
+      "message": "Hmm, this one is ResultOrError but doesn\u0027t call DAWN_TRY. Should we be consistent?",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
