@@ -3,6 +3,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c4fdb27_af26eeeb",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:56:53Z",
+      "side": 1,
+      "message": "Changes to this file seem good and not risky, maybe we can land them first quickly and iterate on the DeviceBase part that seems to be more difficult?",
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18b7af4_df75612a",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:56:53Z",
+      "side": 1,
+      "message": "nit: this should probably be a Ref\u003c\u003e that\u0027s std::moved in mPipeline.",
+      "range": {
+        "startLine": 46,
+        "startChar": 39,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b57c361f_9aa1628f",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 8
@@ -14,6 +54,24 @@
       "writtenOn": "2021-03-31T16:39:20Z",
       "side": 1,
       "message": "I don\u0027t love how CreateComputePipelineInternal is now supporting both the async and the sync paths. It makes the code harder to follow.\n\nWhat about changing GetOrCreateComputePipeline to just be GetCachedPipeline, and have it return a pair of (Ref\u003cComputePipeline\u003e, blueprintHash).\n\nThen, CreateComputePipelineInternal would call CreateComputePipelineImpl if the pipeline is null (lookup failed).\n\nAnd CreateComputePipelineAsyncInternal would call CreateComputePipelineAsyncImpl if the pipeline is null, otherwise call the callback immediately.",
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac25115_f77359e6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:56:53Z",
+      "side": 1,
+      "message": "And there would be a helper function\n\nRef\u003cpipeline\u003e AddOrGetCachedPipeline(Ref\u003cpipeline\u003e, hash) {\n    pipeline.SetHash()\n    auto insertion \u003d cache.pipelines.insert(pipeline).second)\n    if (insertion) {\n        // it was inserted\n        pipeline-\u003eSetIsCachedReference();\n        return pipeline\n    } else {\n        return {insertion.first};\n    }\n}\n\nThat both GetCachedPipeline (in the new creation path) and the Async task (on success) would call. WDYT?",
+      "parentUuid": "b57c361f_9aa1628f",
       "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
