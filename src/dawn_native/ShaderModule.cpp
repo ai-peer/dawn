@@ -1479,6 +1479,48 @@ namespace dawn_native {
         return mTintProgram.get();
     }
 
+    void ShaderModuleBase::APIGetCompilationInfo(WGPUCompilationInfoCallback callback,
+                                                 void* userdata) {
+        std::vector<WGPUCompilationMessage> messages = GetCompilationMessages();
+
+        WGPUCompilationInfo result;
+        result.messageCount = messages.size();
+        result.messages = messages.data();
+
+        if (callback) {
+            callback(&result, userdata);
+        }
+    }
+
+    std::vector<WGPUCompilationMessage> ShaderModuleBase::GetCompilationMessages() const {
+        std::vector<WGPUCompilationMessage> messages;
+        if (!GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            // Messages are only available when using Tint
+            return messages;
+        }
+
+        const tint::diag::List& diagnostics = mTintProgram->Diagnostics();
+        for (const auto& diag : diagnostics) {
+            WGPUCompilationMessage message;
+            switch (diag.severity) {
+                case tint::diag::Severity::Note:
+                    message.type = WGPUCompilationMessageType_Info;
+                    break;
+                case tint::diag::Severity::Warning:
+                    message.type = WGPUCompilationMessageType_Warning;
+                    break;
+                default:
+                    message.type = WGPUCompilationMessageType_Error;
+                    break;
+            }
+            message.lineNum = diag.source.range.begin.line;
+            message.linePos = diag.source.range.begin.column;
+            message.message = diag.message.c_str();
+            messages.push_back(message);
+        }
+        return messages;
+    }
+
     ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
         const std::vector<uint32_t>& spirv,
         const VertexStateDescriptor& vertexState,

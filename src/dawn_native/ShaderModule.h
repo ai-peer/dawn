@@ -143,6 +143,9 @@ namespace dawn_native {
         const std::vector<uint32_t>& GetSpirv() const;
         const tint::Program* GetTintProgram() const;
 
+        void APIGetCompilationInfo(WGPUCompilationInfoCallback callback, void* userdata);
+        std::vector<WGPUCompilationMessage> GetCompilationMessages() const;
+
         ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
             const std::vector<uint32_t>& spirv,
             const VertexStateDescriptor& vertexState,
