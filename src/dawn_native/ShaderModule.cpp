@@ -1265,6 +1265,35 @@ namespace dawn_native {
         return mTintProgram.get();
     }
 
+    void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callback,
+                                                 void* userdata) {
+        if (callback == nullptr) {
+            return;
+        }
+
+        GetProgramDiagnosticMessages();
+
+        callback(WGPUCompilationInfoRequestStatus_Success,
+                 mCompilationMessages.GetCompilationInfo(), userdata);
+    }
+
+    void ShaderModuleBase::GetProgramDiagnosticMessages() {
+        if (mProgramDiagnosticsQueried) {
+            return;
+        }
+        mProgramDiagnosticsQueried = true;
+
+        if (!GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            // Messages are only available when using Tint
+            return;
+        }
+
+        const tint::diag::List& diagnostics = mTintProgram->Diagnostics();
+        for (const auto& diag : diagnostics) {
+            mCompilationMessages.AddMessage(diag);
+        }
+    }
+
     ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
         const std::vector<uint32_t>& spirv,
         const VertexState& vertexState,
