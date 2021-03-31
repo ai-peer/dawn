@@ -804,14 +804,6 @@ namespace dawn_native {
     void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
                                                    WGPUCreateComputePipelineAsyncCallback callback,
                                                    void* userdata) {
-        if (IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
-            callback(WGPUCreatePipelineAsyncStatus_Error, nullptr,
-                     "CreateComputePipelineAsync is disallowed because it isn't completely "
-                     "implemented yet.",
-                     userdata);
-            return;
-        }
-
         ResultOrError<Ref<ComputePipelineBase>> maybeResult =
             CreateComputePipelineInternal(descriptor);
         if (maybeResult.IsError()) {
@@ -851,6 +843,7 @@ namespace dawn_native {
     void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor2* descriptor,
                                                   WGPUCreateRenderPipelineAsyncCallback callback,
                                                   void* userdata) {
+<<<<<<< HEAD
         if (IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
             callback(WGPUCreatePipelineAsyncStatus_Error, nullptr,
                      "CreateRenderPipelineAsync is disallowed because it isn't completely "
@@ -863,6 +856,13 @@ namespace dawn_native {
             CreateRenderPipelineInternal(descriptor);
         if (maybeResult.IsError()) {
             std::unique_ptr<ErrorData> error = maybeResult.AcquireError();
+=======
+        RenderPipelineBase* result = nullptr;
+
+        MaybeError maybeError = CreateRenderPipelineInternal(&result, descriptor);
+        if (maybeError.IsError()) {
+            std::unique_ptr<ErrorData> error = maybeError.AcquireError();
+>>>>>>> debc0355 (Remove marking of CreatePipelineAsync as unsafe.)
             callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
                      userdata);
             return;
