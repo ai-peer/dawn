@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956ab317_5e30fd3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:31:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f629a12_b566d281",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:31:00Z",
+      "side": 1,
+      "message": "I\u0027m thinking about how this will be used elsewhere now. What we have now is pretty specific to how we\u0027ll implement this in Blink. However, for native emscripten users, it won\u0027t be so useful if they want video/canvas imports.\n\nPerhaps, to have good extensibility we should have an extension struct \"external texture webgpu views descriptor\" that contains the current \"plane0\" member.\n\nLater, for Emscripten, we\u0027ll want to add a chained \"external texture html selector descriptor\" which gets translated in Emscripten into a query of that selector, followed by device.importExternalTexture(). (see \"surface descriptor\" and \"surface descriptor from canvas HTML selector\")\n\nAnd then further on, we may have an extension struct that lets you directly import something like a DXGI handle..?",
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49b68dbc_9e02d6bb",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:31:00Z",
+      "side": 1,
+      "message": "I think this check doesn\u0027t happen on creation. Similar to how you can create a bind group from destroyed resources, but only get an error when you use the bind group in a queue.submit.\n\nInstead, we would have something like TextureBase\u0027s ValidateCanUseInSubmitNow - which we\u0027ll check when the external texture is used.",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 30,
+        "endChar": 9
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "532dcc43_dc09509f",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:31:00Z",
+      "side": 1,
+      "message": "I know we do this elsewhere, but that might just be outdated code. I think the native API can assume inputs are well-formed and this could be an ASSERT if it\u0027s not optional in dawn.json",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 63,
+        "endChar": 9
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f1ef07_e1631b70",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T21:31:00Z",
+      "side": 1,
+      "message": "unit: extra indentation?\n\nalso, would be nice to have a newline after this",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
