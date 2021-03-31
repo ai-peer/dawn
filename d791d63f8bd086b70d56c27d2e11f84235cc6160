@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2442897_6ce6ec75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:36:23Z",
+      "side": 1,
+      "message": "PTAL! Most of the changes are extremely mechanical except changes in the frontend (so CommandEncoder and DeviceBase).",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
