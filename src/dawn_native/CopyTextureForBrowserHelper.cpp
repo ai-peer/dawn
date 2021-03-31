@@ -222,13 +222,13 @@ namespace dawn_native {
         // TODO(shaobo.yan@intel.com): Support the simplest case for now that source and destination
         // texture has the same size and do full texture blit. Will address sub texture blit in
         // future and remove these validations.
-        if (source->origin.x != 0 || source->origin.y != 0 || source->origin.z != 0 ||
+        /*if (source->origin.x != 0 || source->origin.y != 0 || source->origin.z != 0 ||
             destination->origin.x != 0 || destination->origin.y != 0 ||
             destination->origin.z != 0 || source->mipLevel != 0 || destination->mipLevel != 0 ||
             source->texture->GetWidth() != destination->texture->GetWidth() ||
             source->texture->GetHeight() != destination->texture->GetHeight()) {
             return DAWN_VALIDATION_ERROR("Cannot support sub blit now.");
-        }
+        }*/
 
         return {};
     }
@@ -255,16 +255,20 @@ namespace dawn_native {
         bgDesc.entryCount = 3;
         bgDesc.entries = bindGroupEntries;
 
+        Extent3D srcTextureSize = source->texture->GetSize();
+
         // Prepare binding 0 resource: uniform buffer.
         float uniformData[] = {
-            1.0, 1.0,  // scale
-            0.0, 0.0   // offset
+            copySize->width / static_cast<float>(srcTextureSize.width),
+            copySize->height / static_cast<float>(srcTextureSize.height),  // scale
+            source->origin.x / static_cast<float>(srcTextureSize.width),
+            source->origin.y / static_cast<float>(srcTextureSize.height)  // offset
         };
 
         // Handle flipY
         if (options && options->flipY) {
             uniformData[1] *= -1.0;
-            uniformData[3] += 1.0;
+            uniformData[3] += copySize->height / static_cast<float>(srcTextureSize.height);
         }
 
         BufferDescriptor uniformDesc = {};
@@ -337,6 +341,8 @@ namespace dawn_native {
         // the copy from src texture to dst texture with transformation.
         passEncoder->APISetPipeline(pipeline);
         passEncoder->APISetBindGroup(0, bindGroup.Get());
+        passEncoder->APISetViewport(destination->origin.x, destination->origin.y, copySize->width,
+                                    copySize->height, 0.0, 1.0);
         passEncoder->APIDraw(3);
         passEncoder->APIEndPass();
 
