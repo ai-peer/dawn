@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4636c32_27fe2896",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-31T19:08:56Z",
+      "side": 1,
+      "message": "Ack, rewrote this patch fix this.",
+      "parentUuid": "60665c16_2e024412",
+      "revId": "8bd394e1fda2eef62518639968358796882e1ac3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edd5c165_6d2173d6",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-03-31T15:46:04Z",
       "side": 1,
       "message": "unit: this is in the else branch of UseTintGenerator - so maaaybe it makes sense to just say SPIRV_Cross?",
+      "range": {
+        "startLine": 83,
+        "startChar": 49,
+        "endLine": 83,
+        "endChar": 70
+      },
+      "revId": "8bd394e1fda2eef62518639968358796882e1ac3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9765d2fa_579c8dad",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-03-31T19:08:56Z",
+      "side": 1,
+      "message": "Ack, rewrote this patch.",
+      "parentUuid": "edd5c165_6d2173d6",
       "range": {
         "startLine": 83,
         "startChar": 49,
