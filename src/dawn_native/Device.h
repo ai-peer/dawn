@@ -110,8 +110,6 @@ namespace dawn_native {
 
         BindGroupLayoutBase* GetEmptyBindGroupLayout();
 
-        ResultOrError<ComputePipelineBase*> GetOrCreateComputePipeline(
-            const ComputePipelineDescriptor* descriptor);
         void UncacheComputePipeline(ComputePipelineBase* obj);
 
         ResultOrError<PipelineLayoutBase*> GetOrCreatePipelineLayout(
@@ -301,7 +299,9 @@ namespace dawn_native {
                                                  const BindGroupLayoutDescriptor* descriptor);
         ResultOrError<Ref<BufferBase>> CreateBufferInternal(const BufferDescriptor* descriptor);
         MaybeError CreateComputePipelineInternal(ComputePipelineBase** result,
-                                                 const ComputePipelineDescriptor* descriptor);
+                                                 const ComputePipelineDescriptor* descriptor,
+                                                 WGPUCreateComputePipelineAsyncCallback callback,
+                                                 void* userdata);
         MaybeError CreatePipelineLayoutInternal(PipelineLayoutBase** result,
                                                 const PipelineLayoutDescriptor* descriptor);
         MaybeError CreateQuerySetInternal(QuerySetBase** result,
@@ -323,6 +323,15 @@ namespace dawn_native {
         MaybeError CreateTextureViewInternal(TextureViewBase** result,
                                              TextureBase* texture,
                                              const TextureViewDescriptor* descriptor);
+
+        MaybeError GetOrCreateComputePipeline(ComputePipelineBase** result,
+                                              const ComputePipelineDescriptor* descriptor,
+                                              WGPUCreateComputePipelineAsyncCallback callback,
+                                              void* userdata);
+        virtual void CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                                    size_t blueprintHash,
+                                                    WGPUCreateComputePipelineAsyncCallback callback,
+                                                    void* userdata);
 
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
         void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);
