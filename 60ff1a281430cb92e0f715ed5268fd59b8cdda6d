@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57c361f_9aa1628f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T16:39:20Z",
+      "side": 1,
+      "message": "I don\u0027t love how CreateComputePipelineInternal is now supporting both the async and the sync paths. It makes the code harder to follow.\n\nWhat about changing GetOrCreateComputePipeline to just be GetCachedPipeline, and have it return a pair of (Ref\u003cComputePipeline\u003e, blueprintHash).\n\nThen, CreateComputePipelineInternal would call CreateComputePipelineImpl if the pipeline is null (lookup failed).\n\nAnd CreateComputePipelineAsyncInternal would call CreateComputePipelineAsyncImpl if the pipeline is null, otherwise call the callback immediately.",
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
