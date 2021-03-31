@@ -156,7 +156,11 @@ namespace dawn_native {
             BindGroupIndex pullingBufferBindingSet) const;
 
       protected:
-        MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
+        // Which tool should be used for performing reflection.
+        // NOTE: Tint only has an effect if use_tint_generator is enabled.
+        enum class ReflectionTool { SPIRV_Cross, Tint };
+
+        MaybeError InitializeBase(ShaderModuleParseResult* parseResult, ReflectionTool tool);
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);

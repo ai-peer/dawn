@@ -78,9 +78,9 @@ namespace dawn_native { namespace vulkan {
                 std::make_unique<tint::Program>(std::move(program));
             transformedParseResult.spirv = spirv;
 
-            DAWN_TRY(InitializeBase(&transformedParseResult));
+            DAWN_TRY(InitializeBase(&transformedParseResult, ReflectionTool::Tint));
         } else {
-            DAWN_TRY(InitializeBase(parseResult));
+            DAWN_TRY(InitializeBase(parseResult, ReflectionTool::Tint));
             spirvPtr = &GetSpirv();
         }
 

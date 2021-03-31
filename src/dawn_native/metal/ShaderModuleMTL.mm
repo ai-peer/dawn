@@ -48,7 +48,7 @@ namespace dawn_native { namespace metal {
 
     MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult) {
         ScopedTintICEHandler scopedICEHandler(GetDevice());
-        return InitializeBase(parseResult);
+        return InitializeBase(parseResult, ReflectionTool::Tint);
     }
 
     ResultOrError<std::string> ShaderModule::TranslateToMSLWithTint(

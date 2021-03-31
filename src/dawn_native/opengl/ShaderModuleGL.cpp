@@ -106,9 +106,9 @@ namespace dawn_native { namespace opengl {
                 std::make_unique<tint::Program>(std::move(program));
             transformedParseResult.spirv = mSpirv;
 
-            DAWN_TRY(InitializeBase(&transformedParseResult));
+            DAWN_TRY(InitializeBase(&transformedParseResult, ReflectionTool::SPIRV_Cross));
         } else {
-            DAWN_TRY(InitializeBase(parseResult));
+            DAWN_TRY(InitializeBase(parseResult, ReflectionTool::SPIRV_Cross));
         }
         return {};
     }
