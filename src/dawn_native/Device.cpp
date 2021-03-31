@@ -477,25 +477,65 @@ namespace dawn_native {
         return mEmptyBindGroupLayout.Get();
     }
 
-    ResultOrError<ComputePipelineBase*> DeviceBase::GetOrCreateComputePipeline(
-        const ComputePipelineDescriptor* descriptor) {
+    MaybeError DeviceBase::GetOrCreateComputePipeline(
+        ComputePipelineBase** result,
+        const ComputePipelineDescriptor* descriptor,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata) {
         ComputePipelineBase blueprint(this, descriptor);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
         blueprint.SetContentHash(blueprintHash);
 
+        // Directly return the pipeline object in the cache when possible
         auto iter = mCaches->computePipelines.find(&blueprint);
         if (iter != mCaches->computePipelines.end()) {
             (*iter)->Reference();
-            return *iter;
+            *result = *iter;
+            return {};
         }
 
-        ComputePipelineBase* backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreateComputePipelineImpl(descriptor));
-        backendObj->SetIsCachedReference();
-        backendObj->SetContentHash(blueprintHash);
-        mCaches->computePipelines.insert(backendObj);
-        return backendObj;
+        if (callback != nullptr) {
+            // Create pipeline object asynchrnously
+            ASSERT(userdata != nullptr);
+            CreateComputePipelineAsyncImpl(descriptor, blueprintHash, callback, userdata);
+        } else {
+            // Create pipeline object in the main thread
+            ComputePipelineBase* backendObj;
+            DAWN_TRY_ASSIGN(backendObj, CreateComputePipelineImpl(descriptor));
+            backendObj->SetIsCachedReference();
+            backendObj->SetContentHash(blueprintHash);
+            mCaches->computePipelines.insert(backendObj);
+            *result = backendObj;
+        }
+
+        return {};
+    }
+
+    // TODO(jiawei.shao@intel.com): override this function with the async version on the backends
+    // that supports creating compute pipeline asynchronously
+    void DeviceBase::CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                                    size_t blueprintHash,
+                                                    WGPUCreateComputePipelineAsyncCallback callback,
+                                                    void* userdata) {
+        ComputePipelineBase* result = nullptr;
+        std::string errorMessage;
+
+        auto resultOrError = CreateComputePipelineImpl(descriptor);
+        if (resultOrError.IsError()) {
+            std::unique_ptr<ErrorData> error = resultOrError.AcquireError();
+            errorMessage = error->GetMessage();
+        } else {
+            result = resultOrError.AcquireSuccess();
+            result->SetIsCachedReference();
+            result->SetContentHash(blueprintHash);
+            mCaches->computePipelines.insert(result);
+        }
+
+        std::unique_ptr<CreateComputePipelineAsyncTask> request =
+            std::make_unique<CreateComputePipelineAsyncTask>(result, errorMessage, callback,
+                                                             userdata);
+        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
 
     void DeviceBase::UncacheComputePipeline(ComputePipelineBase* obj) {
@@ -700,10 +740,11 @@ namespace dawn_native {
         const ComputePipelineDescriptor* descriptor) {
         ComputePipelineBase* result = nullptr;
 
-        if (ConsumedError(CreateComputePipelineInternal(&result, descriptor))) {
+        if (ConsumedError(CreateComputePipelineInternal(&result, descriptor, nullptr, nullptr))) {
             return ComputePipelineBase::MakeError(this);
         }
 
+        ASSERT(result != nullptr);
         return result;
     }
     void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
@@ -719,17 +760,19 @@ namespace dawn_native {
             return;
         }
 
-        MaybeError maybeError = CreateComputePipelineInternal(&result, descriptor);
+        MaybeError maybeError =
+            CreateComputePipelineInternal(&result, descriptor, callback, userdata);
+
         if (maybeError.IsError()) {
+            // A validation error has been found in the front-end validations.
             std::unique_ptr<ErrorData> error = maybeError.AcquireError();
             callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
                      userdata);
-            return;
+        } else if (result != nullptr) {
+            // Return the pipeline object directly from the pipeline cache.
+            callback(WGPUCreatePipelineAsyncStatus_Success,
+                     reinterpret_cast<WGPUComputePipeline>(result), "", userdata);
         }
-
-        std::unique_ptr<CreateComputePipelineAsyncTask> request =
-            std::make_unique<CreateComputePipelineAsyncTask>(result, callback, userdata);
-        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
@@ -781,7 +824,7 @@ namespace dawn_native {
         }
 
         std::unique_ptr<CreateRenderPipelineAsyncTask> request =
-            std::make_unique<CreateRenderPipelineAsyncTask>(result, callback, userdata);
+            std::make_unique<CreateRenderPipelineAsyncTask>(result, "", callback, userdata);
         mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
@@ -1013,7 +1056,9 @@ namespace dawn_native {
 
     MaybeError DeviceBase::CreateComputePipelineInternal(
         ComputePipelineBase** result,
-        const ComputePipelineDescriptor* descriptor) {
+        const ComputePipelineDescriptor* descriptor,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateComputePipelineDescriptor(this, descriptor));
@@ -1029,9 +1074,10 @@ namespace dawn_native {
             // the pipeline will take another reference.
             Ref<PipelineLayoutBase> layoutRef = AcquireRef(descriptorWithDefaultLayout.layout);
 
-            DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(&descriptorWithDefaultLayout));
+            DAWN_TRY(GetOrCreateComputePipeline(result, &descriptorWithDefaultLayout, callback,
+                                                userdata));
         } else {
-            DAWN_TRY_ASSIGN(*result, GetOrCreateComputePipeline(descriptor));
+            DAWN_TRY(GetOrCreateComputePipeline(result, descriptor, callback, userdata));
         }
         return {};
     }

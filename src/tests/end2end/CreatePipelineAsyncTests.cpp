@@ -28,7 +28,43 @@ namespace {
 
 class CreatePipelineAsyncTest : public DawnTest {
   protected:
-    CreatePipelineAsyncTask task;
+    void ValidateCreateComputePipelineAsync() {
+        wgpu::BufferDescriptor bufferDesc;
+        bufferDesc.size = sizeof(uint32_t);
+        bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
+        wgpu::Buffer ssbo = device.CreateBuffer(&bufferDesc);
+
+        wgpu::CommandBuffer commands;
+        {
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+            wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+
+            while (!mTask.isCompleted) {
+                WaitABit();
+            }
+            ASSERT_TRUE(mTask.message.empty());
+            ASSERT_NE(nullptr, mTask.computePipeline.Get());
+            wgpu::BindGroup bindGroup =
+                utils::MakeBindGroup(device, mTask.computePipeline.GetBindGroupLayout(0),
+                                     {
+                                         {0, ssbo, 0, sizeof(uint32_t)},
+                                     });
+            pass.SetBindGroup(0, bindGroup);
+            pass.SetPipeline(mTask.computePipeline);
+
+            pass.Dispatch(1);
+            pass.EndPass();
+
+            commands = encoder.Finish();
+        }
+
+        queue.Submit(1, &commands);
+
+        constexpr uint32_t kExpected = 1u;
+        EXPECT_BUFFER_U32_EQ(kExpected, ssbo, 0);
+    }
+
+    CreatePipelineAsyncTask mTask;
 };
 
 // Verify the basic use of CreateComputePipelineAsync works on all backends.
@@ -56,41 +92,9 @@ TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateComputePipelineAsync) {
             task->isCompleted = true;
             task->message = message;
         },
-        &task);
+        &mTask);
 
-    wgpu::BufferDescriptor bufferDesc;
-    bufferDesc.size = sizeof(uint32_t);
-    bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
-    wgpu::Buffer ssbo = device.CreateBuffer(&bufferDesc);
-
-    wgpu::CommandBuffer commands;
-    {
-        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
-
-        while (!task.isCompleted) {
-            WaitABit();
-        }
-        ASSERT_TRUE(task.message.empty());
-        ASSERT_NE(nullptr, task.computePipeline.Get());
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, task.computePipeline.GetBindGroupLayout(0),
-                                 {
-                                     {0, ssbo, 0, sizeof(uint32_t)},
-                                 });
-        pass.SetBindGroup(0, bindGroup);
-        pass.SetPipeline(task.computePipeline);
-
-        pass.Dispatch(1);
-        pass.EndPass();
-
-        commands = encoder.Finish();
-    }
-
-    queue.Submit(1, &commands);
-
-    constexpr uint32_t kExpected = 1u;
-    EXPECT_BUFFER_U32_EQ(kExpected, ssbo, 0);
+    ValidateCreateComputePipelineAsync();
 }
 
 // Verify CreateComputePipelineAsync() works as expected when there is any error that happens during
@@ -123,14 +127,14 @@ TEST_P(CreatePipelineAsyncTest, CreateComputePipelineFailed) {
             task->isCompleted = true;
             task->message = message;
         },
-        &task);
+        &mTask);
 
-    while (!task.isCompleted) {
+    while (!mTask.isCompleted) {
         WaitABit();
     }
 
-    ASSERT_FALSE(task.message.empty());
-    ASSERT_EQ(nullptr, task.computePipeline.Get());
+    ASSERT_FALSE(mTask.message.empty());
+    ASSERT_EQ(nullptr, mTask.computePipeline.Get());
 }
 
 // Verify the basic use of CreateRenderPipelineAsync() works on all backends.
@@ -164,7 +168,7 @@ TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateRenderPipelineAsync) {
             task->isCompleted = true;
             task->message = message;
         },
-        &task);
+        &mTask);
 
     wgpu::TextureDescriptor textureDescriptor;
     textureDescriptor.size = {1, 1, 1};
@@ -181,13 +185,13 @@ TEST_P(CreatePipelineAsyncTest, BasicUseOfCreateRenderPipelineAsync) {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPassEncoder = encoder.BeginRenderPass(&renderPassDescriptor);
 
-        while (!task.isCompleted) {
+        while (!mTask.isCompleted) {
             WaitABit();
         }
-        ASSERT_TRUE(task.message.empty());
-        ASSERT_NE(nullptr, task.renderPipeline.Get());
+        ASSERT_TRUE(mTask.message.empty());
+        ASSERT_NE(nullptr, mTask.renderPipeline.Get());
 
-        renderPassEncoder.SetPipeline(task.renderPipeline);
+        renderPassEncoder.SetPipeline(mTask.renderPipeline);
         renderPassEncoder.Draw(1);
         renderPassEncoder.EndPass();
         commands = encoder.Finish();
@@ -234,14 +238,14 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineFailed) {
             task->isCompleted = true;
             task->message = message;
         },
-        &task);
+        &mTask);
 
-    while (!task.isCompleted) {
+    while (!mTask.isCompleted) {
         WaitABit();
     }
 
-    ASSERT_FALSE(task.message.empty());
-    ASSERT_EQ(nullptr, task.computePipeline.Get());
+    ASSERT_FALSE(mTask.message.empty());
+    ASSERT_EQ(nullptr, mTask.computePipeline.Get());
 }
 
 // Verify there is no error when the device is released before the callback of
@@ -265,7 +269,7 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipeli
             task->isCompleted = true;
             task->message = message;
         },
-        &task);
+        &mTask);
 }
 
 // Verify there is no error when the device is released before the callback of
@@ -299,7 +303,57 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateRenderPipelin
             task->isCompleted = true;
             task->message = message;
         },
-        &task);
+        &mTask);
+}
+
+// Verify the code path of CreateComputePipelineAsync() to directly return the compute pipeline
+// object from cache works correctly.
+TEST_P(CreatePipelineAsyncTest, CreateSameComputePipelineTwice) {
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.computeStage.module = utils::CreateShaderModule(device, R"(
+        [[block]] struct SSBO {
+            value : u32;
+        };
+        [[group(0), binding(0)]] var<storage> ssbo : [[access(read_write)]] SSBO;
+
+        [[stage(compute)]] fn main() -> void {
+            ssbo.value = 1u;
+        })");
+    csDesc.computeStage.entryPoint = "main";
+
+    CreatePipelineAsyncTask anotherTask;
+    device.CreateComputePipelineAsync(
+        &csDesc,
+        [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
+           const char* message, void* userdata) {
+            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_Success, status);
+
+            CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
+            task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
+            task->isCompleted = true;
+            task->message = message;
+        },
+        &anotherTask);
+    while (!anotherTask.isCompleted) {
+        WaitABit();
+    }
+    ASSERT_TRUE(anotherTask.message.empty());
+    ASSERT_NE(nullptr, anotherTask.computePipeline.Get());
+
+    device.CreateComputePipelineAsync(
+        &csDesc,
+        [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
+           const char* message, void* userdata) {
+            EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_Success, status);
+
+            CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
+            task->computePipeline = wgpu::ComputePipeline::Acquire(returnPipeline);
+            task->isCompleted = true;
+            task->message = message;
+        },
+        &mTask);
+
+    ValidateCreateComputePipelineAsync();
 }
 
 DAWN_INSTANTIATE_TEST(CreatePipelineAsyncTest,
