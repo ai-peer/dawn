@@ -86,6 +86,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaef6716_c8e25a10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T18:34:30Z",
+      "side": 1,
+      "message": "Thanks for the review! I\u0027ll CQ now to avoid merge conflicts. Jiawei, I understand this conflicts with your CL, so let me know if you\u0027d like me to update it.",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aabf395e_b6e1ba98",
@@ -103,6 +120,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "702b2199_bb0008f8",
+        "filename": "src/dawn_native/d3d12/SamplerD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T18:34:30Z",
+      "side": 1,
+      "message": "Yeah, and because the move constructor from Ref\u003c\u003e to ResultOrError\u003cRef\u003e works (and is implicitly used in DeviceD3D12::CreateSamplerImpl).",
+      "parentUuid": "aabf395e_b6e1ba98",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62c183c5_4be1a6a0",
@@ -116,6 +151,41 @@
       "writtenOn": "2021-03-31T18:30:20Z",
       "side": 1,
       "message": "Hmm, this one is ResultOrError but doesn\u0027t call DAWN_TRY. Should we be consistent?",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a6bd2a_383078f3",
+        "filename": "src/dawn_native/null/DeviceNull.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T18:34:30Z",
+      "side": 1,
+      "message": "This is an implementation of a virtual method, see [1].",
+      "parentUuid": "62c183c5_4be1a6a0",
+      "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7492a01_c26feae5",
+        "filename": "src/dawn_native/null/DeviceNull.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T18:34:30Z",
+      "side": 1,
+      "message": "[1], notice the override qualifier.",
       "revId": "d791d63f8bd086b70d56c27d2e11f84235cc6160",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
