@@ -16,6 +16,57 @@
       "message": "Should be OK now. PTAL. ",
       "revId": "148fb7b0aef4d3eea247955617423bd903861c68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f481bf9a_230bb0c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:44:05Z",
+      "side": 1,
+      "message": "Ok let\u0027s land this because it\u0027s a step in the right direction and unblocks the 3D texture work.",
+      "revId": "148fb7b0aef4d3eea247955617423bd903861c68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fa2a80c_a861b4d2",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1022,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:44:05Z",
+      "side": 1,
+      "message": "nit: I think we can use extend.depth to be future proof.",
+      "revId": "148fb7b0aef4d3eea247955617423bd903861c68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5455068_71e4afb0",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-03-31T16:44:05Z",
+      "side": 1,
+      "message": "nit: I think copySize can just be extent. (we could rename the parameter even).",
+      "revId": "148fb7b0aef4d3eea247955617423bd903861c68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
