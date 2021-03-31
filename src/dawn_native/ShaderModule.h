@@ -19,6 +19,7 @@
 #include "common/ityp_array.h"
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/CachedObject.h"
+#include "dawn_native/CompilationMessages.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
@@ -143,6 +144,8 @@ namespace dawn_native {
         const std::vector<uint32_t>& GetSpirv() const;
         const tint::Program* GetTintProgram() const;
 
+        void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
+
         ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
             const std::vector<uint32_t>& spirv,
             const VertexState& vertexState,
@@ -155,6 +158,10 @@ namespace dawn_native {
             const std::string& entryPoint,
             BindGroupIndex pullingBufferBindingSet) const;
 
+        OwnedCompilationMessages& CompilationMessages() {
+            return mCompilationMessages;
+        }
+
       protected:
         MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
         static ResultOrError<EntryPointMetadataTable> ReflectShaderUsingSPIRVCross(
@@ -163,6 +170,8 @@ namespace dawn_native {
 
       private:
         ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        void GetProgramDiagnosticMessages();
 
         // The original data in the descriptor for caching.
         enum class Type { Undefined, Spirv, Wgsl };
@@ -175,6 +184,9 @@ namespace dawn_native {
         EntryPointMetadataTable mEntryPoints;
         std::vector<uint32_t> mSpirv;
         std::unique_ptr<tint::Program> mTintProgram;
+
+        bool mProgramDiagnosticsQueried = false;
+        OwnedCompilationMessages mCompilationMessages;
     };
 
 }  // namespace dawn_native
