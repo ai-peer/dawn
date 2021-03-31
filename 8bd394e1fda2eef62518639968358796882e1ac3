@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba07b5bb_c693eaf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T15:46:04Z",
+      "side": 1,
+      "message": "didn\u0027t look into the compile error but LGTM! Exciting Tint matches all the reflection now.",
+      "revId": "8bd394e1fda2eef62518639968358796882e1ac3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd5c165_6d2173d6",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-03-31T15:46:04Z",
+      "side": 1,
+      "message": "unit: this is in the else branch of UseTintGenerator - so maaaybe it makes sense to just say SPIRV_Cross?",
+      "range": {
+        "startLine": 83,
+        "startChar": 49,
+        "endLine": 83,
+        "endChar": 70
+      },
+      "revId": "8bd394e1fda2eef62518639968358796882e1ac3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
