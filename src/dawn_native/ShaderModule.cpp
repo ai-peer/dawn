@@ -1479,6 +1479,67 @@ namespace dawn_native {
         return mTintProgram.get();
     }
 
+    void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callback,
+                                                 void* userdata) {
+        if (callback == nullptr) {
+            return;
+        }
+
+        GetProgramDiagnosticMessages();
+
+        WGPUCompilationInfo result;
+        result.messageCount = mCompilationMessages.size();
+        result.messages = mCompilationMessages.data();
+
+        callback(WGPUCompilationInfoStatus_Success, &result, userdata);
+    }
+
+    std::vector<WGPUCompilationMessage>& ShaderModuleBase::GetProgramDiagnosticMessages() {
+        if (mProgramDiagnosticsQueried) {
+            return mCompilationMessages;
+        }
+        mProgramDiagnosticsQueried = true;
+
+        if (!GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            // Messages are only available when using Tint
+            return mCompilationMessages;
+        }
+
+        const tint::diag::List& diagnostics = mTintProgram->Diagnostics();
+        for (const auto& diag : diagnostics) {
+            WGPUCompilationMessage message;
+            switch (diag.severity) {
+                case tint::diag::Severity::Note:
+                    message.type = WGPUCompilationMessageType_Info;
+                    break;
+                case tint::diag::Severity::Warning:
+                    message.type = WGPUCompilationMessageType_Warning;
+                    break;
+                default:
+                    message.type = WGPUCompilationMessageType_Error;
+                    break;
+            }
+            message.lineNum = diag.source.range.begin.line;
+            message.linePos = diag.source.range.begin.column;
+            message.message = diag.message.c_str();
+            mCompilationMessages.push_back(message);
+        }
+
+        return mCompilationMessages;
+    }
+
+    void ShaderModuleBase::ClearCompilationMessagesForTesting() {
+        mCompilationMessages.clear();
+    }
+
+    void ShaderModuleBase::AddCompilationMessageForTesting(const char* message,
+                                                           wgpu::CompilationMessageType type,
+                                                           uint64_t lineNum,
+                                                           uint64_t linePos) {
+        mCompilationMessages.push_back(
+            {message, static_cast<WGPUCompilationMessageType>(type), lineNum, linePos});
+    }
+
     ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
         const std::vector<uint32_t>& spirv,
         const VertexStateDescriptor& vertexState,
