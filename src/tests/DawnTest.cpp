@@ -536,9 +536,7 @@ std::vector<AdapterTestParam> DawnTestEnvironment::GetAvailableAdapterTestParams
                 // that suite on all unsupported platforms. Once we have basic functionality and
                 // test skips on all backends, we can remove this and use a test suite with
                 // use_tint_generator in the command line args instead.
-                if (params[i].backendType == wgpu::BackendType::Vulkan ||
-                    params[i].backendType == wgpu::BackendType::OpenGL ||
-                    params[i].backendType == wgpu::BackendType::OpenGLES) {
+                if (params[i].backendType == wgpu::BackendType::Vulkan) {
                     BackendTestConfig configWithTint = params[i];
                     configWithTint.forceEnabledWorkarounds.push_back("use_tint_generator");
                     testParams.push_back(AdapterTestParam(configWithTint, adapterProperties));

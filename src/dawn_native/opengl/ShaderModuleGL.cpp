@@ -81,35 +81,11 @@ namespace dawn_native { namespace opengl {
         ScopedTintICEHandler scopedICEHandler(GetDevice());
 
         if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
-            std::ostringstream errorStream;
-            errorStream << "Tint SPIR-V (for GLSL) writer failure:" << std::endl;
-
-            tint::transform::Manager transformManager;
-            transformManager.append(std::make_unique<tint::transform::BoundArrayAccessors>());
-            transformManager.append(std::make_unique<tint::transform::EmitVertexPointSize>());
-            transformManager.append(std::make_unique<tint::transform::Spirv>());
-
-            tint::Program program;
-            DAWN_TRY_ASSIGN(program,
-                            RunTransforms(&transformManager, parseResult->tintProgram.get()));
-
-            tint::writer::spirv::Generator generator(&program);
-            if (!generator.Generate()) {
-                errorStream << "Generator: " << generator.error() << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-
-            mSpirv = generator.result();
-
-            ShaderModuleParseResult transformedParseResult;
-            transformedParseResult.tintProgram =
-                std::make_unique<tint::Program>(std::move(program));
-            transformedParseResult.spirv = mSpirv;
-
-            DAWN_TRY(InitializeBase(&transformedParseResult));
-        } else {
-            DAWN_TRY(InitializeBase(parseResult));
+            return DAWN_UNIMPLEMENTED_ERROR("Tint generation of GLSL");
         }
+
+        DAWN_TRY(InitializeBase(parseResult));
+
         return {};
     }
 
