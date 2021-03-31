@@ -111,8 +111,6 @@ namespace dawn_native {
 
         BindGroupLayoutBase* GetEmptyBindGroupLayout();
 
-        ResultOrError<Ref<ComputePipelineBase>> GetOrCreateComputePipeline(
-            const ComputePipelineDescriptor* descriptor);
         void UncacheComputePipeline(ComputePipelineBase* obj);
 
         ResultOrError<Ref<PipelineLayoutBase>> GetOrCreatePipelineLayout(
@@ -306,6 +304,10 @@ namespace dawn_native {
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutInternal(
             const BindGroupLayoutDescriptor* descriptor);
         ResultOrError<Ref<BufferBase>> CreateBufferInternal(const BufferDescriptor* descriptor);
+        MaybeError CreateComputePipelineAsyncInternal(
+            const ComputePipelineDescriptor* descriptor,
+            WGPUCreateComputePipelineAsyncCallback callback,
+            void* userdata);
         ResultOrError<Ref<ComputePipelineBase>> CreateComputePipelineInternal(
             const ComputePipelineDescriptor* descriptor);
         ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayoutInternal(
@@ -330,6 +332,15 @@ namespace dawn_native {
         ResultOrError<Ref<TextureViewBase>> CreateTextureViewInternal(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor);
+
+        std::pair<Ref<ComputePipelineBase>, size_t> GetCachedComputePipeline(
+            const ComputePipelineDescriptor* descriptor);
+        Ref<ComputePipelineBase> AddOrGetCachedPipeline(Ref<ComputePipelineBase> computePipeline,
+                                                        size_t blueprintHash);
+        void CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                            size_t blueprintHash,
+                                            WGPUCreateComputePipelineAsyncCallback callback,
+                                            void* userdata);
 
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
         void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);
