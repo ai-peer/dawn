@@ -129,6 +129,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "213b69cf_7bd5afd6",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T18:05:18Z",
+      "side": 1,
+      "message": "overall though I think the status enum is the way to go - so we can differentiate between Unknown and DeviceLost like the other callbacks",
+      "parentUuid": "e40ec3f9_db0ba0f6",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 64
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "00887589_0cfe8295",
         "filename": "src/dawn_wire/client/ShaderModule.cpp",
         "patchSetId": 2
