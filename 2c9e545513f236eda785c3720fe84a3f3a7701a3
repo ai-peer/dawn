@@ -16,6 +16,74 @@
       "message": "Some bots have not finished yet. Hope that they will not complain... ",
       "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5b53c61_b70446f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:33:14Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c63fc67d_e9d316b7",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:33:14Z",
+      "side": 1,
+      "message": "Can we have some simple tests in UnsafeAPITests? This + tests could be a separate CL if we want. Also we need to mark creating texture views on 3D textures as unsafe.",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b27c754_3f80e57f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:33:14Z",
+      "side": 1,
+      "message": "nit: the dawn_native:: is unecessary, I\u0027m not sure why we left it there.\n\nTernaries are hard to see, maybe we could surface the difference with a condition, for example:\n\n  Extent3D copyOneLayer \u003d copySize;\n  Extent3D copyFirstLayerOrigin \u003d origin;\n\n  if (!is3D) {\n    copyOneLayer.depthOrArrayLayers \u003d 1;\n    copyFirstLayerOrigin.z \u003d 0;\n  }",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc501ec_957f5a16",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:33:14Z",
+      "side": 1,
+      "message": "nit: For these functions the 3D variant seems like it can just be the following, which is really small so IMHO it is worth having a separate function:\n\n        const TextureCopySplits copySplits \u003d\n            ComputeTextureCopySplits(textureCopy.origin, copySize, texture-\u003eGetFormat().GetAspectInfo(textureCopy.aspect).block, bufferCopy.offset,\n                                     bufferCopy.bytesPerRow, bufferCopy.rowsPerImage, true);\n\n            RecordCopyTextureToBufferFromTextureCopySplit(\n                commandList, copySplits.copies2D[0], buffer, 0,\n                bufferCopy.bytesPerRow, texture, textureCopy.mipLevel, textureCopy.origin.z,\n                textureCopy.aspect);\n\nAlso it looks weird to use copySplits.copies2D for a 3D texture, that\u0027s a good thing to look at cleaning up later as well.",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

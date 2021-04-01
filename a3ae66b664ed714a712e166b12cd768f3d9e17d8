@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1857a8bb_655dff6e",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:33:14Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Seems ok as is then!",
+      "parentUuid": "c627b21a_daa0ab8c",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af7b7065_4e0ad96f",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 4
@@ -149,6 +167,24 @@
       "side": 1,
       "message": "Yeah. TextureCopySplits related stuff is not very useful for 3D texture copy. Except that, the other parts like validation, alignment, offset, rowpitch, etc., are quite similar. I tend to reuse the current code if I can, but do code refactoring as I proceed. Is that OK?",
       "parentUuid": "b7099096_666b0159",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efb595fa_865f451c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:33:14Z",
+      "side": 1,
+      "message": "It sounds good to proceed this way. Then when we think we are finished, we should take another look at the stack to see if there are simplification we could have done.",
+      "parentUuid": "a85e6f2c_f465caa8",
       "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
