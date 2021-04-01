@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64023a37_b74cf553",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1578,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:17:31Z",
+      "side": 1,
+      "message": "Filed https://github.com/webgpu-native/webgpu-headers/pull/85 (becaues it\u0027s a bit of a manual process to use Dawn\u0027s generated webgpu.h for that repo) and took the liberty to change the sType to 7 because that header doesn\u0027t have the dummy extensions.",
+      "parentUuid": "aea250cd_279cac1e",
+      "range": {
+        "startLine": 1578,
+        "startChar": 5,
+        "endLine": 1578,
+        "endChar": 35
+      },
+      "revId": "207a2c343c0f8f4f5ca05ae3754be7c1c321f084",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ba95ab9_06443476",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 5

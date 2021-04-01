@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34ccd274_f747f0a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:17:31Z",
+      "side": 1,
+      "message": "LGTM, I\u0027m not sure why it crashes on the bots though. You should be able to repro using Swiftshader.",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "959e9dff_02134842",
@@ -43,6 +60,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c0bbe0f_598979ba",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:17:31Z",
+      "side": 1,
+      "message": "FYI there\u0027s a lot of default values in wgpu::TextureDescriptor that you can take advantage of. There\u0027s also the idiom to do .size \u003d {w, h}; letting the 1 be filled by the default value of GPUExtent3D.",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d02e11e_dcc25b7a",
         "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
         "patchSetId": 6
@@ -54,6 +88,64 @@
       "writtenOn": "2021-03-31T21:07:16Z",
       "side": 1,
       "message": "maybe we should draw the triangle at an angle with different depth per vertex - so we can check  that some pixels are clipped/clamped and some are not. For example, we don\u0027t want the whole triangle to be clipped if just one point is outside the depth range",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "795b64f2_3f28d086",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:17:31Z",
+      "side": 1,
+      "message": "This seems to be more of a hardware property thing, I was going to suggest that we can use point rendering to avoid drawing a triangle (and making the RTSize 1x1)",
+      "parentUuid": "0d02e11e_dcc25b7a",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18bbcda_a39accd4",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:17:31Z",
+      "side": 1,
+      "message": "FYI the defaults here make the binding use the whole buffer.",
+      "range": {
+        "startLine": 138,
+        "startChar": 67,
+        "endLine": 138,
+        "endChar": 93
+      },
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f9dbd39_6838811e",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:17:31Z",
+      "side": 1,
+      "message": "nit: this is the default value too!",
       "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
