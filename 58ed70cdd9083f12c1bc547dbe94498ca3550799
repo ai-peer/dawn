@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c2d460_9e487526",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Thanks for the iteration, it looks great!",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "484d347d_f97ba519",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "u-nit: I think this include can be replaced by a forward declaration.",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee804e6_84250509",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Tests are great! I think the only additional thing would be if we could test the iteration logic a bit more for the resetting at the start of render passes. Maybe something like (for a query set of size 7)\n\n 0 - not written (tests starting with not written)\n 1 - written (tests combing multiple written, although other tests already do it.)\n 2 - written\n 3 - not written (tests skipping over not written in the middle)\n 4 - not written\n 5 - written (tests another written query in the middle)\n 6 - not written (tests the last query not being written)",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

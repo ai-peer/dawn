@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ebee909_4949e8bc",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8f872816_7e8925a0",
+      "range": {
+        "startLine": 69,
+        "startChar": 58,
+        "endLine": 69,
+        "endChar": 70
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3006c89e_ce34b1de",
@@ -212,6 +236,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93af0b62_d157567e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b295eed_92a78555",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0cffaed0_2ed76144",
@@ -243,6 +285,24 @@
       "side": 1,
       "message": "Roughly tested the time for 1000 queries on Intel UHD 630.\nReset 100 queries in one time: ~0.01 ms\nReset 100 queries in 100 times: ~0.016 ms\nReset 1000 queries in one time: ~0.013 ms\nReset 1000 queries in 1000 times: ~0.167 ms\n\nWhen resetting a small number of queries, their time difference is not big, but when the number increases, there is almost a 10 times difference.",
       "parentUuid": "0cffaed0_2ed76144",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60ca7d4e_89662ad8",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b183d8f9_5d8d2534",
       "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -318,6 +378,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b3014b7_765ef6df",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Thanks for the link, and for the iteration.",
+      "parentUuid": "4aa6e339_778db6aa",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd4c05ba_993ef847",
@@ -349,6 +427,24 @@
       "side": 1,
       "message": "I think we don\u0027t track an additional availability on Vulkan::QuerySet if we do on-demand query resetting. For every beginOcclusionQuery/beginPipelineStatisticsQuery/writeTimestamp, we must need to insert a reset command before it, no matter if he has been used or not, because each query must be reset before it\u0027s used or re-used.\nThe availability tracking on passes is needed by reseting all used queries on each pass together, so the tracking on render pass is enough, we can remove others including command encoder now.",
       "parentUuid": "dd4c05ba_993ef847",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "547cf152_e8ca88da",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:15Z",
+      "side": 1,
+      "message": "Thanks for the explanation! I thought that vkCmdResetQueryPool was disallowed if the query had not previously being started but checking the Vulkan spec, that\u0027s not the case.",
+      "parentUuid": "b945cdf3_3e582f4a",
       "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
