@@ -51,6 +51,24 @@
       "message": "Looks good overall",
       "revId": "5d06d5990c998cf6df01cf91ee7ebfee566a35c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "999eb141_e0bb4457",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Because I was reinterpret casting the ShaderModule to ShaderModuleBase in order to get to the testing-only methods. It\u0027s my assumption that on the client side of the wire ShaderModule is not actually backed by ShaderModuleBase.\n\nHonestly I\u0027m not entirely sure what the right way to test this feature is. Even injecting testing messages feels like it\u0027s missing a crucial step, but I\u0027m not sure we want to rely on Tint\u0027s message output to never change.",
+      "parentUuid": "16342cc4_d98f77da",
+      "revId": "5d06d5990c998cf6df01cf91ee7ebfee566a35c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

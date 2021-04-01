@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80feded0_51fd0146",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1490,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b58a4867_7cfa4a03",
+      "range": {
+        "startLine": 1484,
+        "startChar": 8,
+        "endLine": 1490,
+        "endChar": 23
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8b18acd_69c686ca",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-04-01T18:00:48Z",
       "side": 1,
       "message": "nit: this function can still cache the result if it has already been queried, but I think we should be returning a reference to mCompilationMessages here",
+      "range": {
+        "startLine": 1496,
+        "startChar": 8,
+        "endLine": 1498,
+        "endChar": 9
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7458855_c4524e91",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1498,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8b18acd_69c686ca",
       "range": {
         "startLine": 1496,
         "startChar": 8,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c151f67_3f1a87ea",
+        "filename": "src/dawn_wire/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f43c230_3a42b74f",
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ab83c63_0c3f0828",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-04-01T18:00:48Z",
       "side": 1,
       "message": "nit: shader module",
+      "range": {
+        "startLine": 128,
+        "startChar": 15,
+        "endLine": 128,
+        "endChar": 21
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "664c79a9_aa3873e2",
+        "filename": "src/dawn_wire/client/ClientDoers.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ab83c63_0c3f0828",
       "range": {
         "startLine": 128,
         "startChar": 15,
@@ -151,6 +241,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9deeb1f_19cc9474",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "213b69cf_7bd5afd6",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 64
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00887589_0cfe8295",
@@ -168,6 +282,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb073be_fc9d5541",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00887589_0cfe8295",
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "25215436_20f4d792",
@@ -181,6 +313,30 @@
       "writtenOn": "2021-04-01T18:00:48Z",
       "side": 1,
       "message": "shader module",
+      "range": {
+        "startLine": 59,
+        "startChar": 44,
+        "endLine": 59,
+        "endChar": 50
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7777b9c9_a25d9f6b",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25215436_20f4d792",
       "range": {
         "startLine": 59,
         "startChar": 44,
@@ -214,6 +370,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f1ca4c1_5d74ac74",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d49024d_81169bb0",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 55
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6bd881f9_6918785a",
@@ -227,6 +407,30 @@
       "writtenOn": "2021-04-01T18:00:48Z",
       "side": 1,
       "message": "we have this common pattern but it\u0027s outdated now. Get(0) should return nullptr now",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 27,
+        "endChar": 71
+      },
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a115656_a79604ca",
+        "filename": "src/dawn_wire/server/ServerShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T19:11:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd881f9_6918785a",
       "range": {
         "startLine": 22,
         "startChar": 8,
