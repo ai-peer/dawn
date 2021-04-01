@@ -141,7 +141,33 @@ namespace dawn_native {
         Ref<AttachmentState> GetOrCreateAttachmentState(const RenderPassDescriptor* descriptor);
         void UncacheAttachmentState(AttachmentState* obj);
 
-        // Dawn API
+        // Object creation methods that be used in a reentrant manner.
+        ResultOrError<Ref<BindGroupBase>> CreateBindGroup(const BindGroupDescriptor* descriptor);
+        ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayout(
+            const BindGroupLayoutDescriptor* descriptor);
+        ResultOrError<Ref<BufferBase>> CreateBuffer(const BufferDescriptor* descriptor);
+        ResultOrError<Ref<ComputePipelineBase>> CreateComputePipeline(
+            const ComputePipelineDescriptor* descriptor);
+        ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayout(
+            const PipelineLayoutDescriptor* descriptor);
+        ResultOrError<Ref<QuerySetBase>> CreateQuerySet(const QuerySetDescriptor* descriptor);
+        ResultOrError<Ref<RenderBundleEncoder>> CreateRenderBundleEncoder(
+            const RenderBundleEncoderDescriptor* descriptor);
+        ResultOrError<Ref<RenderPipelineBase>> CreateRenderPipeline(
+            const RenderPipelineDescriptor2* descriptor);
+        ResultOrError<Ref<RenderPipelineBase>> CreateRenderPipeline(
+            const RenderPipelineDescriptor* descriptor);
+        ResultOrError<Ref<SamplerBase>> CreateSampler(const SamplerDescriptor* descriptor);
+        ResultOrError<Ref<ShaderModuleBase>> CreateShaderModule(
+            const ShaderModuleDescriptor* descriptor);
+        ResultOrError<Ref<SwapChainBase>> CreateSwapChain(Surface* surface,
+                                                          const SwapChainDescriptor* descriptor);
+        ResultOrError<Ref<TextureBase>> CreateTexture(const TextureDescriptor* descriptor);
+        ResultOrError<Ref<TextureViewBase>> CreateTextureView(
+            TextureBase* texture,
+            const TextureViewDescriptor* descriptor);
+
+        // Implementation of API object creation methods. DO NOT use them in a reentrant manner.
         BindGroupBase* APICreateBindGroup(const BindGroupDescriptor* descriptor);
         BindGroupLayoutBase* APICreateBindGroupLayout(const BindGroupLayoutDescriptor* descriptor);
         BufferBase* APICreateBuffer(const BufferDescriptor* descriptor);
@@ -163,8 +189,7 @@ namespace dawn_native {
         ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
         SwapChainBase* APICreateSwapChain(Surface* surface, const SwapChainDescriptor* descriptor);
         TextureBase* APICreateTexture(const TextureDescriptor* descriptor);
-        TextureViewBase* CreateTextureView(TextureBase* texture,
-                                           const TextureViewDescriptor* descriptor);
+
         InternalPipelineStore* GetInternalPipelineStore();
 
         // For Dawn Wire
@@ -298,34 +323,6 @@ namespace dawn_native {
         virtual MaybeError TickImpl() = 0;
 
         ResultOrError<Ref<BindGroupLayoutBase>> CreateEmptyBindGroupLayout();
-
-        ResultOrError<Ref<BindGroupBase>> CreateBindGroupInternal(
-            const BindGroupDescriptor* descriptor);
-        ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutInternal(
-            const BindGroupLayoutDescriptor* descriptor);
-        ResultOrError<Ref<BufferBase>> CreateBufferInternal(const BufferDescriptor* descriptor);
-        ResultOrError<Ref<ComputePipelineBase>> CreateComputePipelineInternal(
-            const ComputePipelineDescriptor* descriptor);
-        ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayoutInternal(
-            const PipelineLayoutDescriptor* descriptor);
-        ResultOrError<Ref<QuerySetBase>> CreateQuerySetInternal(
-            const QuerySetDescriptor* descriptor);
-        ResultOrError<Ref<RenderBundleEncoder>> CreateRenderBundleEncoderInternal(
-            const RenderBundleEncoderDescriptor* descriptor);
-        ResultOrError<Ref<RenderPipelineBase>> CreateRenderPipelineInternal(
-            const RenderPipelineDescriptor2* descriptor);
-        ResultOrError<Ref<RenderPipelineBase>> CreateRenderPipelineInternal(
-            const RenderPipelineDescriptor* descriptor);
-        ResultOrError<Ref<SamplerBase>> CreateSamplerInternal(const SamplerDescriptor* descriptor);
-        ResultOrError<Ref<ShaderModuleBase>> CreateShaderModuleInternal(
-            const ShaderModuleDescriptor* descriptor);
-        ResultOrError<Ref<SwapChainBase>> CreateSwapChainInternal(
-            Surface* surface,
-            const SwapChainDescriptor* descriptor);
-        ResultOrError<Ref<TextureBase>> CreateTextureInternal(const TextureDescriptor* descriptor);
-        ResultOrError<Ref<TextureViewBase>> CreateTextureViewInternal(
-            TextureBase* texture,
-            const TextureViewDescriptor* descriptor);
 
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
         void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);

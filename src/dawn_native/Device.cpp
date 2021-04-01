@@ -768,7 +768,7 @@ namespace dawn_native {
 
     BindGroupBase* DeviceBase::APICreateBindGroup(const BindGroupDescriptor* descriptor) {
         Ref<BindGroupBase> result;
-        if (ConsumedError(CreateBindGroupInternal(descriptor), &result)) {
+        if (ConsumedError(CreateBindGroup(descriptor), &result)) {
             return BindGroupBase::MakeError(this);
         }
         return result.Detach();
@@ -776,14 +776,14 @@ namespace dawn_native {
     BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor) {
         Ref<BindGroupLayoutBase> result;
-        if (ConsumedError(CreateBindGroupLayoutInternal(descriptor), &result)) {
+        if (ConsumedError(CreateBindGroupLayout(descriptor), &result)) {
             return BindGroupLayoutBase::MakeError(this);
         }
         return result.Detach();
     }
     BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
         Ref<BufferBase> result = nullptr;
-        if (ConsumedError(CreateBufferInternal(descriptor), &result)) {
+        if (ConsumedError(CreateBuffer(descriptor), &result)) {
             ASSERT(result == nullptr);
             return BufferBase::MakeError(this, descriptor);
         }
@@ -796,7 +796,7 @@ namespace dawn_native {
     ComputePipelineBase* DeviceBase::APICreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
         Ref<ComputePipelineBase> result;
-        if (ConsumedError(CreateComputePipelineInternal(descriptor), &result)) {
+        if (ConsumedError(CreateComputePipeline(descriptor), &result)) {
             return ComputePipelineBase::MakeError(this);
         }
         return result.Detach();
@@ -812,8 +812,7 @@ namespace dawn_native {
             return;
         }
 
-        ResultOrError<Ref<ComputePipelineBase>> maybeResult =
-            CreateComputePipelineInternal(descriptor);
+        ResultOrError<Ref<ComputePipelineBase>> maybeResult = CreateComputePipeline(descriptor);
         if (maybeResult.IsError()) {
             std::unique_ptr<ErrorData> error = maybeResult.AcquireError();
             callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
@@ -829,21 +828,21 @@ namespace dawn_native {
     PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
         Ref<PipelineLayoutBase> result;
-        if (ConsumedError(CreatePipelineLayoutInternal(descriptor), &result)) {
+        if (ConsumedError(CreatePipelineLayout(descriptor), &result)) {
             return PipelineLayoutBase::MakeError(this);
         }
         return result.Detach();
     }
     QuerySetBase* DeviceBase::APICreateQuerySet(const QuerySetDescriptor* descriptor) {
         Ref<QuerySetBase> result;
-        if (ConsumedError(CreateQuerySetInternal(descriptor), &result)) {
+        if (ConsumedError(CreateQuerySet(descriptor), &result)) {
             return QuerySetBase::MakeError(this);
         }
         return result.Detach();
     }
     SamplerBase* DeviceBase::APICreateSampler(const SamplerDescriptor* descriptor) {
         Ref<SamplerBase> result;
-        if (ConsumedError(CreateSamplerInternal(descriptor), &result)) {
+        if (ConsumedError(CreateSampler(descriptor), &result)) {
             return SamplerBase::MakeError(this);
         }
         return result.Detach();
@@ -859,8 +858,7 @@ namespace dawn_native {
             return;
         }
 
-        ResultOrError<Ref<RenderPipelineBase>> maybeResult =
-            CreateRenderPipelineInternal(descriptor);
+        ResultOrError<Ref<RenderPipelineBase>> maybeResult = CreateRenderPipeline(descriptor);
         if (maybeResult.IsError()) {
             std::unique_ptr<ErrorData> error = maybeResult.AcquireError();
             callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
@@ -876,7 +874,7 @@ namespace dawn_native {
     RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
         Ref<RenderBundleEncoder> result;
-        if (ConsumedError(CreateRenderBundleEncoderInternal(descriptor), &result)) {
+        if (ConsumedError(CreateRenderBundleEncoder(descriptor), &result)) {
             return RenderBundleEncoder::MakeError(this);
         }
         return result.Detach();
@@ -890,7 +888,7 @@ namespace dawn_native {
             "new structure. Please begin using CreateRenderPipeline2() instead.");*/
 
         Ref<RenderPipelineBase> result;
-        if (ConsumedError(CreateRenderPipelineInternal(descriptor), &result)) {
+        if (ConsumedError(CreateRenderPipeline(descriptor), &result)) {
             return RenderPipelineBase::MakeError(this);
         }
         return result.Detach();
@@ -898,14 +896,14 @@ namespace dawn_native {
     RenderPipelineBase* DeviceBase::APICreateRenderPipeline2(
         const RenderPipelineDescriptor2* descriptor) {
         Ref<RenderPipelineBase> result;
-        if (ConsumedError(CreateRenderPipelineInternal(descriptor), &result)) {
+        if (ConsumedError(CreateRenderPipeline(descriptor), &result)) {
             return RenderPipelineBase::MakeError(this);
         }
         return result.Detach();
     }
     ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor* descriptor) {
         Ref<ShaderModuleBase> result;
-        if (ConsumedError(CreateShaderModuleInternal(descriptor), &result)) {
+        if (ConsumedError(CreateShaderModule(descriptor), &result)) {
             return ShaderModuleBase::MakeError(this);
         }
         return result.Detach();
@@ -913,23 +911,15 @@ namespace dawn_native {
     SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
                                                   const SwapChainDescriptor* descriptor) {
         Ref<SwapChainBase> result;
-        if (ConsumedError(CreateSwapChainInternal(surface, descriptor), &result)) {
+        if (ConsumedError(CreateSwapChain(surface, descriptor), &result)) {
             return SwapChainBase::MakeError(this);
         }
         return result.Detach();
     }
     TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
         Ref<TextureBase> result;
-        if (ConsumedError(CreateTextureInternal(descriptor), &result)) {
+        if (ConsumedError(CreateTexture(descriptor), &result)) {
             return TextureBase::MakeError(this);
-        }
-        return result.Detach();
-    }
-    TextureViewBase* DeviceBase::CreateTextureView(TextureBase* texture,
-                                                   const TextureViewDescriptor* descriptor) {
-        Ref<TextureViewBase> result;
-        if (ConsumedError(CreateTextureViewInternal(texture, descriptor), &result)) {
-            return TextureViewBase::MakeError(this);
         }
         return result.Detach();
     }
@@ -1046,7 +1036,7 @@ namespace dawn_native {
 
     // Implementation details of object creation
 
-    ResultOrError<Ref<BindGroupBase>> DeviceBase::CreateBindGroupInternal(
+    ResultOrError<Ref<BindGroupBase>> DeviceBase::CreateBindGroup(
         const BindGroupDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1055,7 +1045,7 @@ namespace dawn_native {
         return CreateBindGroupImpl(descriptor);
     }
 
-    ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayoutInternal(
+    ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1064,8 +1054,7 @@ namespace dawn_native {
         return GetOrCreateBindGroupLayout(descriptor);
     }
 
-    ResultOrError<Ref<BufferBase>> DeviceBase::CreateBufferInternal(
-        const BufferDescriptor* descriptor) {
+    ResultOrError<Ref<BufferBase>> DeviceBase::CreateBuffer(const BufferDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateBufferDescriptor(this, descriptor));
@@ -1081,7 +1070,7 @@ namespace dawn_native {
         return std::move(buffer);
     }
 
-    ResultOrError<Ref<ComputePipelineBase>> DeviceBase::CreateComputePipelineInternal(
+    ResultOrError<Ref<ComputePipelineBase>> DeviceBase::CreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1107,7 +1096,7 @@ namespace dawn_native {
         }
     }
 
-    ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::CreatePipelineLayoutInternal(
+    ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::CreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1116,7 +1105,7 @@ namespace dawn_native {
         return GetOrCreatePipelineLayout(descriptor);
     }
 
-    ResultOrError<Ref<QuerySetBase>> DeviceBase::CreateQuerySetInternal(
+    ResultOrError<Ref<QuerySetBase>> DeviceBase::CreateQuerySet(
         const QuerySetDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1125,7 +1114,7 @@ namespace dawn_native {
         return CreateQuerySetImpl(descriptor);
     }
 
-    ResultOrError<Ref<RenderBundleEncoder>> DeviceBase::CreateRenderBundleEncoderInternal(
+    ResultOrError<Ref<RenderBundleEncoder>> DeviceBase::CreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1134,7 +1123,7 @@ namespace dawn_native {
         return RenderBundleEncoder::Create(this, descriptor);
     }
 
-    ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipelineInternal(
+    ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
         const RenderPipelineDescriptor2* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
@@ -1157,7 +1146,7 @@ namespace dawn_native {
         }
     }
 
-    ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipelineInternal(
+    ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
 
@@ -1181,8 +1170,7 @@ namespace dawn_native {
         }
     }
 
-    ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSamplerInternal(
-        const SamplerDescriptor* descriptor) {
+    ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSampler(const SamplerDescriptor* descriptor) {
         const SamplerDescriptor defaultDescriptor = {};
         DAWN_TRY(ValidateIsAlive());
         descriptor = descriptor != nullptr ? descriptor : &defaultDescriptor;
@@ -1192,7 +1180,7 @@ namespace dawn_native {
         return GetOrCreateSampler(descriptor);
     }
 
-    ResultOrError<Ref<ShaderModuleBase>> DeviceBase::CreateShaderModuleInternal(
+    ResultOrError<Ref<ShaderModuleBase>> DeviceBase::CreateShaderModule(
         const ShaderModuleDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
 
@@ -1206,7 +1194,7 @@ namespace dawn_native {
         return GetOrCreateShaderModule(descriptor, parseResultPtr);
     }
 
-    ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChainInternal(
+    ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
         Surface* surface,
         const SwapChainDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
@@ -1237,8 +1225,7 @@ namespace dawn_native {
         }
     }
 
-    ResultOrError<Ref<TextureBase>> DeviceBase::CreateTextureInternal(
-        const TextureDescriptor* descriptor) {
+    ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         TextureDescriptor fixedDescriptor = *descriptor;
         DAWN_TRY(FixUpDeprecatedGPUExtent3DDepth(this, &(fixedDescriptor.size)));
@@ -1248,7 +1235,7 @@ namespace dawn_native {
         return CreateTextureImpl(&fixedDescriptor);
     }
 
-    ResultOrError<Ref<TextureViewBase>> DeviceBase::CreateTextureViewInternal(
+    ResultOrError<Ref<TextureViewBase>> DeviceBase::CreateTextureView(
         TextureBase* texture,
         const TextureViewDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
