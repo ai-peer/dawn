@@ -304,6 +304,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae4e4c1f_a3b2cecc",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4777e0e_246538d1",
+      "revId": "ddc16e07506ccfb61cc70cfcd6c2e0df9f7e5ea0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a50a0083_c1672c1f",

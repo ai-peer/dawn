@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c514df0a_08188d06",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "I don\u0027t want to this in this CL. I\u0027ll mention this needs to be done in the bug.",
+      "parentUuid": "60548a36_606187d1",
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f9dc21_467217dd",
@@ -87,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "336101f4_57fb71eb",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4f9dc21_467217dd",
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c87f7832_655aa4ab",
@@ -100,6 +136,30 @@
       "writtenOn": "2021-04-01T15:06:19Z",
       "side": 1,
       "message": "nit: just return ExternalTexture::Create(this, descriptor);",
+      "range": {
+        "startLine": 1032,
+        "startChar": 0,
+        "endLine": 1036,
+        "endChar": 42
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "503360ef_73ee0403",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c87f7832_655aa4ab",
       "range": {
         "startLine": 1032,
         "startChar": 0,
@@ -157,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e97e92ae_27461fe6",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "Removed the check.",
+      "parentUuid": "acda65a4_dbd5f9c7",
+      "range": {
+        "startLine": 26,
+        "startChar": 7,
+        "endLine": 30,
+        "endChar": 9
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "532dcc43_dc09509f",
@@ -204,6 +288,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "257a9b24_9b2541c2",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32944aec_670869f8",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 63,
+        "endChar": 9
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "067f6a2b_53f2d593",
@@ -217,6 +325,24 @@
       "writtenOn": "2021-04-01T15:06:19Z",
       "side": 1,
       "message": "Could we have an allow-list of formats for external textures too? In the future I think only select multi-planar formats should be supported as well as \"filterable float formats\". We can start with RGBA8Unorm BGRA8Unorm and RGBA16Float, WDYT?",
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fe45dec_03a2235d",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "SGTM. Added a switch for the listed formats + a unit test.",
+      "parentUuid": "067f6a2b_53f2d593",
       "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -258,6 +384,30 @@
       "side": 1,
       "message": "Uh, and it should be before the includes, that\u0027s what we do in all other files.",
       "parentUuid": "30f1ef07_e1631b70",
+      "range": {
+        "startLine": 22,
+        "startChar": 1,
+        "endLine": 22,
+        "endChar": 4
+      },
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "829bea1f_0217831c",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-04-01T17:59:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38161c1c_56cecef3",
       "range": {
         "startLine": 22,
         "startChar": 1,
