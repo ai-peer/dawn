@@ -51,6 +51,24 @@
       "parentUuid": "ec788683_714366ae",
       "revId": "c2ff649b01948ee242928ce1ce880941c27dd66c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88298ed5_e1bd4fc0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-01T18:19:19Z",
+      "side": 1,
+      "message": "I have a taken another pass at thei CL after sleeping on it, and I have ended up implementing what Austin was suggesting.\n\nThe goal I think it to eventually remove ReflectShaderUsingSPIRVCross from the frontend and just have it live in the GL backend, so I have left the checks as UseTintGenerator for now.\n\nI also removed the checks that turned off GL support when USETineGenerator was enabled.",
+      "parentUuid": "ff0aa6f2_141e4d62",
+      "revId": "c2ff649b01948ee242928ce1ce880941c27dd66c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

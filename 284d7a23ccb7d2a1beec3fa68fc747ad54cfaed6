@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43666780_8f693309",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-01T18:19:19Z",
+      "side": 1,
+      "message": "PTAL, another non-trivial rewrite",
+      "revId": "284d7a23ccb7d2a1beec3fa68fc747ad54cfaed6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
