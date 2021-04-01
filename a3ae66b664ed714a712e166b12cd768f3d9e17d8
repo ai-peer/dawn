@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9588e0a5_8cdba6e7",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done. \nIt will also make CopyTextureForBrowser an UnsafeAPI if it is 3D texture (although I suppose that API may not copy between 3D textures) because all these APIs call into the validation function.",
+      "parentUuid": "004f0734_a997ae4e",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b65f2744_6f9519d4",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c627b21a_daa0ab8c",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "GetMipLevelPhysicalSize and GetMipLevelVirtualSize will return {w, h, 1} for 2D array textures, which is not correct here. But for 3D textures, it is correct (mipSize is {w, h, d}) and I don\u0027t need to make any change here. \n\nIf we change GetMipLevelVirtualSize/GetMipLevelPhysicalSize, then it will definitely impact other callers. If we do need to make that change, it can be a separate issue?",
+      "parentUuid": "b65f2744_6f9519d4",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af7b7065_4e0ad96f",
         "filename": "src/dawn_native/Texture.cpp",
         "patchSetId": 4
@@ -48,6 +84,30 @@
       "writtenOn": "2021-03-29T16:10:55Z",
       "side": 1,
       "message": "nit: We can avoid the ternary by using GetArrayLayers().",
+      "range": {
+        "startLine": 425,
+        "startChar": 35,
+        "endLine": 425,
+        "endChar": 59
+      },
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e85907b5_1c69d008",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af7b7065_4e0ad96f",
       "range": {
         "startLine": 425,
         "startChar": 35,
@@ -77,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a85e6f2c_f465caa8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Yeah. TextureCopySplits related stuff is not very useful for 3D texture copy. Except that, the other parts like validation, alignment, offset, rowpitch, etc., are quite similar. I tend to reuse the current code if I can, but do code refactoring as I proceed. Is that OK?",
+      "parentUuid": "b7099096_666b0159",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86a90da3_985edd41",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 4
@@ -88,6 +166,24 @@
       "writtenOn": "2021-03-29T16:10:55Z",
       "side": 1,
       "message": "nit: I think this transition doesn\u0027t assume anything anymore, as long as the subresource range is correct. We could remove this comment/ASSERT entirely.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "064b9924_9bded1e8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 770,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86a90da3_985edd41",
       "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fad57e7b_0b05b01d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done by a separate change.",
+      "parentUuid": "a63ac46f_0bb82c7a",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3afebe05_03361d8d",
@@ -126,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "099414d1_7c78cac4",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "No need now.",
+      "parentUuid": "3afebe05_03361d8d",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef05bf33_983b1b81",
@@ -139,6 +271,24 @@
       "writtenOn": "2021-03-29T16:10:55Z",
       "side": 1,
       "message": "Maybe this can be a wgpu::TextureDimension to prep for 1D textures too?\n\nAlso nit: maybe rename DoTest to Do2DTest and then have Do3DTest where they both use the DoTest helper. The DoTest helper could have argument for depth / arrayLayers so we don\u0027t need the ternaries.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20e73aa7_de626f8b",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done.\n\nI used a couple of variables to avoid ternaries. For Do2DTest/Do3DTest/DoTest helpers, I tend to refactor the code as I proceed and add more tests. Is that OK?",
+      "parentUuid": "ef05bf33_983b1b81",
       "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -166,6 +316,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8fc632d_8dcc55c6",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38efd620_bf330a45",
+      "range": {
+        "startLine": 296,
+        "startChar": 36,
+        "endLine": 296,
+        "endChar": 65
+      },
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3092aaae_7fb84307",
@@ -179,6 +353,24 @@
       "writtenOn": "2021-03-29T16:10:55Z",
       "side": 1,
       "message": "We\u0027re going to need to test some more than that. Maybe we can have a TODO with a list of additional aspects that will need to be tested (RowPitch, RowsPerImage, buffer offset, etc)\n\nAlso T2B, WriteTexture and CopySplitterTests eventually.",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b73cf3_c5b9a0ab",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1369,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T07:03:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3092aaae_7fb84307",
       "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
