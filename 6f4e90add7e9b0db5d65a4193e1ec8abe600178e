@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bc1f879_31f1bc53",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 769,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T20:15:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92ad95a7_1eefc57a",
+      "range": {
+        "startLine": 769,
+        "startChar": 24,
+        "endLine": 769,
+        "endChar": 56
+      },
+      "revId": "6f4e90add7e9b0db5d65a4193e1ec8abe600178e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aed25edf_cb2ad706",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-04-01T18:54:03Z",
       "side": 1,
       "message": "I might be missing something, but the 3D texture copy doesn\u0027t need to call into this function. Can\u0027t it simply call ComputeTextureCopySplit (singular)?\n\nPerhaps we could rename this one to Compute2DTextureCopySplits ? and perhaps rename Texture2DCopySplit  -\u003e TextureCopySplit",
+      "revId": "6f4e90add7e9b0db5d65a4193e1ec8abe600178e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28e756dc_88577a80",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T20:15:56Z",
+      "side": 1,
+      "message": "Yeah. It is very likely that we can call into ComputeTextureCopySplit (singular, the naming is not very good), but I am not 100% sure. Currently it returns early for 3D texture and one layer 2D texture. But for multiple depth 3D texture, if \"bytesPerSlice  % D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT \u003d\u003d 0\" is not true (see the code below), we may need this function? You know, one layer 2D texture definitely doesn\u0027t have this problem, but I am not 100% sure for one layer (but multiple depth) 3D texture. Can we defer this to later tests and implementation? \n\nFor the renaming stuff for Texture2DCopySplit (-\u003e TextureCopySplit) and its variables, I have a separate patch and I will submit it soon.",
+      "parentUuid": "aed25edf_cb2ad706",
       "revId": "6f4e90add7e9b0db5d65a4193e1ec8abe600178e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
