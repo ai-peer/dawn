@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7749186a_e538e03a",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-01T21:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "959e9dff_02134842",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c0bbe0f_598979ba",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-04-01T15:17:31Z",
       "side": 1,
       "message": "FYI there\u0027s a lot of default values in wgpu::TextureDescriptor that you can take advantage of. There\u0027s also the idiom to do .size \u003d {w, h}; letting the 1 be filled by the default value of GPUExtent3D.",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c1570b_c0e647e8",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-01T21:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c0bbe0f_598979ba",
       "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -110,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43b4e6f4_2df3b816",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-01T21:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "795b64f2_3f28d086",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18bbcda_a39accd4",
@@ -133,6 +193,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e520ce3_8bc878a0",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-01T21:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f18bbcda_a39accd4",
+      "range": {
+        "startLine": 138,
+        "startChar": 67,
+        "endLine": 138,
+        "endChar": 93
+      },
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ffccec3_c28c42b5",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-01T21:10:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f18bbcda_a39accd4",
+      "range": {
+        "startLine": 138,
+        "startChar": 67,
+        "endLine": 138,
+        "endChar": 93
+      },
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f9dbd39_6838811e",
@@ -146,6 +254,24 @@
       "writtenOn": "2021-04-01T15:17:31Z",
       "side": 1,
       "message": "nit: this is the default value too!",
+      "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56a39458_2c92ab98",
+        "filename": "src/tests/end2end/PrimitiveStateTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-01T21:10:27Z",
+      "side": 1,
+      "message": "Ah, neat. Done.",
+      "parentUuid": "1f9dbd39_6838811e",
       "revId": "f14b07b2e0c1f7b65202ec3366d5f9966daa3ccc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
