@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a9a8c50_1062dbbf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:48:16Z",
+      "side": 1,
+      "message": "Looks like we\u0027re getting to a working solution!",
+      "revId": "76b9e940bbd9ba345e62c40cc7b7a9a6055aac52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f594af_16b5b3b9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:48:16Z",
+      "side": 1,
+      "message": "What happens if we do the following?\n\n - CreatePipelineAsync(myDescriptor)\n - CreatePipeline(myDescriptor)\n\nIt seems that we\u0027d have two pipelines that believe they are the cached reference. We need to handle race conditions with async logic, even if Dawn isn\u0027t multithreaded yet ^^.",
+      "revId": "76b9e940bbd9ba345e62c40cc7b7a9a6055aac52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd148994_06f82a3a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:48:16Z",
+      "side": 1,
+      "message": "This is return type is a bit complicated, it\u0027s Error | Pipeline | Nothing (because we spawned a task). In general the APIFoo only handle the error cases but don\u0027t have more logic, so what do you think of chaging CreateAsyncInternal to return MaybeError and handle the case where the pipeline was already created by directly calling the callback inside CreateAsyncIntenral?",
+      "revId": "76b9e940bbd9ba345e62c40cc7b7a9a6055aac52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
