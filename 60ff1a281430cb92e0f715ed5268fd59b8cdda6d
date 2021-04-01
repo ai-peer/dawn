@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a877641_0ecfecb4",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-01T09:51:10Z",
+      "side": 1,
+      "message": "I\u0027ve updated this CL to address your concerns. PTAL, thanks!",
+      "parentUuid": "5c4fdb27_af26eeeb",
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18b7af4_df75612a",
         "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
         "patchSetId": 8
@@ -31,6 +49,30 @@
       "writtenOn": "2021-03-31T16:56:53Z",
       "side": 1,
       "message": "nit: this should probably be a Ref\u003c\u003e that\u0027s std::moved in mPipeline.",
+      "range": {
+        "startLine": 46,
+        "startChar": 39,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9aa4b5a_8554c273",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-01T09:51:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f18b7af4_df75612a",
       "range": {
         "startLine": 46,
         "startChar": 39,
@@ -90,6 +132,24 @@
       "side": 1,
       "message": "+1 and this would be needed in addition to GetCachedPipeline because two threads could eventually race on adding to the cache we only want to set the one that was actually inserted as the cached reference.",
       "parentUuid": "7ac25115_f77359e6",
+      "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "515b622f_34ca738e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1078,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-01T09:51:10Z",
+      "side": 1,
+      "message": "Sorry that I am not sure I have fully understood your thoughts. Could you take a look at the latest changes?",
+      "parentUuid": "d31c8508_53510844",
       "revId": "60ff1a281430cb92e0f715ed5268fd59b8cdda6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
