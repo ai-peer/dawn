@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b191de53_d09f99e8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-01T01:21:07Z",
+      "side": 1,
+      "message": "Hi, Jiawei,\nPls take a look at this CL firstly!",
+      "revId": "2765cf3a1c3940835e477fd2523b96639702214c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
