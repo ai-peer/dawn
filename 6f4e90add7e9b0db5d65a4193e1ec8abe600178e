@@ -98,6 +98,24 @@
       "parentUuid": "aed25edf_cb2ad706",
       "revId": "6f4e90add7e9b0db5d65a4193e1ec8abe600178e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f74bd51d_241eb4a1",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T21:52:21Z",
+      "side": 1,
+      "message": "Please see [1]",
+      "parentUuid": "28e756dc_88577a80",
+      "revId": "6f4e90add7e9b0db5d65a4193e1ec8abe600178e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
