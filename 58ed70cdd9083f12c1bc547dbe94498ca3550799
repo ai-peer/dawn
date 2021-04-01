@@ -35,6 +35,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e9b07c_eee45ec2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T17:04:14Z",
+      "side": 1,
+      "message": "no additional comments",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac6bb139_0dd70250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T17:04:14Z",
+      "side": 1,
+      "message": "I think there\u0027s still a TODO about setting unused queries to 0 in the resolve buffer",
+      "parentUuid": "9d7af83c_f7bb46ac",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "484d347d_f97ba519",
