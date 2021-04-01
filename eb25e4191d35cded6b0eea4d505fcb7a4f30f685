@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afbc2806_d46bcc66",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T18:18:20Z",
+      "side": 1,
+      "message": "No problem; I\u0027ll look at this in parallel. I realized just today that this is a pretty significant blocker for our friends using WebGPU in native + Emscripten in order to get data from a canvas into WebGPU.",
+      "parentUuid": "c514df0a_08188d06",
+      "revId": "eb25e4191d35cded6b0eea4d505fcb7a4f30f685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f9dc21_467217dd",
