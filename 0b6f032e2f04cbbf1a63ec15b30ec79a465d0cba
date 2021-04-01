@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208b7549_fb1dce1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T17:27:38Z",
+      "side": 1,
+      "message": "This is my first attempt at adding anything significant to dawn_wire, so please help make sure I\u0027m not doing anything dumb. 😊\n\nAlso, while I\u0027ve confirmed that this is indeed surfacing messages correctly (Blink-side patch is almost ready) it\u0027s not catching validation messages currently produced by Tint and I\u0027m not sure about the timing of the call. This is a callback specifically so that it can wait for the shader to finish compiling before returning, but I don\u0027t see anything offhand that it looks like we\u0027re doing asynchronously? In any case, I\u0027d definitely like to discuss which messages we capture and when before landing.",
+      "revId": "0b6f032e2f04cbbf1a63ec15b30ec79a465d0cba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
