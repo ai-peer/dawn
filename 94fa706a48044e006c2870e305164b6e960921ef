@@ -16,6 +16,23 @@
       "message": "Ben PTAL!\n\nAustin I\u0027ll add you to TBR since this change is blocking even locally testing the change in Chromium",
       "revId": "94fa706a48044e006c2870e305164b6e960921ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c758a70d_69c64af3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T15:34:00Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "94fa706a48044e006c2870e305164b6e960921ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
