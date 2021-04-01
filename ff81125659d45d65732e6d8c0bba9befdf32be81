@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52c3c9f_fd6ad761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T14:12:26Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "407ca07d_8871ec47",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T14:12:26Z",
+      "side": 1,
+      "message": "u-nit: I think we could put this right before the copy from SRC to DST. Ditto for dstImageCopyTexture",
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8717e5d_0a5d2fbb",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T14:12:26Z",
+      "side": 1,
+      "message": "nit: you can just use the default values here and for binding 3: it will use the whole buffer.",
+      "range": {
+        "startLine": 361,
+        "startChar": 31,
+        "endLine": 362,
+        "endChar": 87
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
