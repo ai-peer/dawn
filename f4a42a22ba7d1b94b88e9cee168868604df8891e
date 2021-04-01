@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f872816_7e8925a0",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "The QuerySetBase pointer in mQueryAvailabilities is not const, and we need update availability in QuerySetBase",
+      "parentUuid": "e9fa5ac6_3100b441",
+      "range": {
+        "startLine": 69,
+        "startChar": 58,
+        "endLine": 69,
+        "endChar": 70
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3006c89e_ce34b1de",
         "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2021-03-22T15:28:36Z",
       "side": 1,
       "message": "nit: \u003d true or .set(qureyIndex)",
+      "range": {
+        "startLine": 79,
+        "startChar": 33,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612713bc_8a93762d",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3006c89e_ce34b1de",
       "range": {
         "startLine": 79,
         "startChar": 33,
@@ -82,6 +130,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3792fe32_5fd10591",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "Discussed with corentin, we could do on-demand query resetting in the feature implementation stage, making it correct is more import, so this change is not needed.",
+      "parentUuid": "37d1bbd7_0bb6352c",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "628cf0c3_0a269ace",
@@ -95,6 +161,30 @@
       "writtenOn": "2021-03-22T22:02:51Z",
       "side": 1,
       "message": "typo: iterator",
+      "range": {
+        "startLine": 428,
+        "startChar": 31,
+        "endLine": 428,
+        "endChar": 40
+      },
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd3fc6e_61da359e",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "628cf0c3_0a269ace",
       "range": {
         "startLine": 428,
         "startChar": 31,
@@ -247,6 +337,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b945cdf3_3e582f4a",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "I think we don\u0027t track an additional availability on Vulkan::QuerySet if we do on-demand query resetting. For every beginOcclusionQuery/beginPipelineStatisticsQuery/writeTimestamp, we must need to insert a reset command before it, no matter if he has been used or not, because each query must be reset before it\u0027s used or re-used.\nThe availability tracking on passes is needed by reseting all used queries on each pass together, so the tracking on render pass is enough, we can remove others including command encoder now.",
+      "parentUuid": "dd4c05ba_993ef847",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "104ed40a_904e7f58",
         "filename": "src/tests/end2end/QueryTests.cpp",
         "patchSetId": 4
@@ -258,6 +366,24 @@
       "writtenOn": "2021-03-22T15:28:36Z",
       "side": 1,
       "message": "ditto, same comment as for the compute pass.",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53912c3_81f0d2b6",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "104ed40a_904e7f58",
       "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -275,6 +401,24 @@
       "writtenOn": "2021-03-22T15:28:36Z",
       "side": 1,
       "message": "Did you mean to start a render pass that writes to 0 and 0?\n\nThis case were both the outside and the inside of the compute pass write conflicting slots is also interesting.",
+      "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887a7cc2_aabe4cfc",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-01T11:55:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "234778c7_b4176409",
       "revId": "f4a42a22ba7d1b94b88e9cee168868604df8891e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
