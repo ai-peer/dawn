@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab31e52d_65c06202",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T18:27:31Z",
+      "side": 1,
+      "message": "Ack.\n\nI will submit a separate CL for tests UnsafeAPI, and mark 3D view creation as unsafe as well. \n\nBTW, 3D texture creation has already been marked as unsafe. So it is relative safe to say that Chromium tests like CTS will not run into 3D texture related wip features.",
+      "parentUuid": "c63fc67d_e9d316b7",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b27c754_3f80e57f",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21ce7c88_6c1f6f49",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T18:27:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b27c754_3f80e57f",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bc501ec_957f5a16",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-04-01T15:33:14Z",
       "side": 1,
       "message": "nit: For these functions the 3D variant seems like it can just be the following, which is really small so IMHO it is worth having a separate function:\n\n        const TextureCopySplits copySplits \u003d\n            ComputeTextureCopySplits(textureCopy.origin, copySize, texture-\u003eGetFormat().GetAspectInfo(textureCopy.aspect).block, bufferCopy.offset,\n                                     bufferCopy.bytesPerRow, bufferCopy.rowsPerImage, true);\n\n            RecordCopyTextureToBufferFromTextureCopySplit(\n                commandList, copySplits.copies2D[0], buffer, 0,\n                bufferCopy.bytesPerRow, texture, textureCopy.mipLevel, textureCopy.origin.z,\n                textureCopy.aspect);\n\nAlso it looks weird to use copySplits.copies2D for a 3D texture, that\u0027s a good thing to look at cleaning up later as well.",
+      "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3868f08_b9854523",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T18:27:31Z",
+      "side": 1,
+      "message": "Done\n\nGood suggestion. Although I feel like that we may still need to use some functions and data structures like ComputeTextureCopySplits (for stuff like 256B-alignment, rowPitch, etc.?), but the for loop and offsets among layers in this function are not necessary at all for 3D texture copy. So it is better to have a separate counterpart for 3D texture copy as you suggested.",
+      "parentUuid": "0bc501ec_957f5a16",
       "revId": "2c9e545513f236eda785c3720fe84a3f3a7701a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

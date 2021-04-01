@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc614e3_d7a9134a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T18:27:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "1857a8bb_655dff6e",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af7b7065_4e0ad96f",
@@ -185,6 +203,24 @@
       "side": 1,
       "message": "It sounds good to proceed this way. Then when we think we are finished, we should take another look at the stack to see if there are simplification we could have done.",
       "parentUuid": "a85e6f2c_f465caa8",
+      "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "055d5bb9_80106504",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-01T18:27:31Z",
+      "side": 1,
+      "message": "Ack. I will definitely keep an eye on the stack and see whether we can refactor the code during the implementation and/or after the main parts are finished.",
+      "parentUuid": "efb595fa_865f451c",
       "revId": "a3ae66b664ed714a712e166b12cd768f3d9e17d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
