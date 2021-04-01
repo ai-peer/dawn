@@ -74,7 +74,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(*this));
 
         if (adapterDesc.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
-            mAdapterType = wgpu::AdapterType::CPU;
+            mAdapterType = wgpu::AdapterType::IntegratedGPU;
         } else {
             mAdapterType = (mDeviceInfo.isUMA) ? wgpu::AdapterType::IntegratedGPU
                                                : wgpu::AdapterType::DiscreteGPU;
