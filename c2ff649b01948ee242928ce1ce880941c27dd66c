@@ -33,6 +33,24 @@
       "message": "as I understand Corentin\u0027s suggestion, we don\u0027t need to error in the OpenGL backend if UseTintGenerator. We can\n 1. keep the code change you have here as-is\n 2. remove checks that OpenGL can\u0027t use UseTintGenerator\n 3. in opengl::ShaderModule::Initialize always call InitializeBase with the not-transformed parseResult, but *in addition* do the conversion to SPIRV, and do another reflection pass just to get the correct base_type_id and type_id for the conversion to GLSL.\n\nThis lets us eventually completely remove ReflectShaderUsingSPIRVCross from the frontend, and replace it with a small second reflection just in the OpenGL backend. It should be less maintenance this way because we don\u0027t need to maintain the rest of the SPIRVCross-based reflection.\n\nIF we do keep ReflectShaderUsingSPIRVCross, another idea: instead of checking UseTintGenerator here, we check mTintProgram?\n\nThis would let the OpenGL backend perform a tint::Program-\u003eSPIRV transform before calling InitializeBase with the parseResult. The OpenGL backend would clear out parseResult-\u003etintProgram and instead populate parseResult-\u003espirv.\n\nThat way, things don\u0027t have to break if you use OpenGL and pass --use-tint-generator. It\u0027ll simply do the initial parse using Tint, and then convert back to SPIRV for the rest of reflection and translation.",
       "revId": "c2ff649b01948ee242928ce1ce880941c27dd66c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff0aa6f2_141e4d62",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1337,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T08:38:04Z",
+      "side": 1,
+      "message": "+1, and there was a good point made on Chat that since we eventually want to generate GLSL with Tint for WebGPU compat, it would be nice to not completely lose the coverage.\n\nAs such, to make forward progress, how about landing CL except with changes to ShaderModuleGL reverted (so that we don\u0027t reintroduce the same code we removed later)? It would still prevent using GL with use_tint_generator for now. Then as a follow-up we can move the reflection of base_type_id and type_id into the GL backend and reenable the Tint generator for GL.",
+      "parentUuid": "ec788683_714366ae",
+      "revId": "c2ff649b01948ee242928ce1ce880941c27dd66c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
