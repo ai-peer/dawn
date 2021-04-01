@@ -16,6 +16,41 @@
       "message": "Temporarily stripped out the unit test that was causing the failure after realizing why it couldn\u0027t work with --use-wire. Want to make sure it builds everywhere first.",
       "revId": "5d06d5990c998cf6df01cf91ee7ebfee566a35c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16342cc4_d98f77da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T18:00:48Z",
+      "side": 1,
+      "message": "Why was it? At a brief look, it looks like you may have been missing a WaitForAllOperations(device)",
+      "parentUuid": "b8ea983b_79e280a3",
+      "revId": "5d06d5990c998cf6df01cf91ee7ebfee566a35c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2154658_0170fb24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T18:00:48Z",
+      "side": 1,
+      "message": "Looks good overall",
+      "revId": "5d06d5990c998cf6df01cf91ee7ebfee566a35c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
