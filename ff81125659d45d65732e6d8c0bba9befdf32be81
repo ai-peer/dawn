@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7881eff8_00447389",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T16:52:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd16cb31_32a12ced",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T16:52:09Z",
+      "side": 1,
+      "message": "stale comment now?",
+      "range": {
+        "startLine": 154,
+        "startChar": 16,
+        "endLine": 156,
+        "endChar": 41
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "407ca07d_8871ec47",
@@ -53,6 +93,29 @@
         "startChar": 31,
         "endLine": 362,
         "endChar": 87
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88f51e22_563b2707",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-01T16:52:09Z",
+      "side": 1,
+      "message": "crbug.com/dawn/592 says that it is fixed. What problem are you observing here?",
+      "range": {
+        "startLine": 520,
+        "startChar": 25,
+        "endLine": 520,
+        "endChar": 43
       },
       "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
