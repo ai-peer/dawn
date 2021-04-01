@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ea983b_79e280a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-01T17:47:10Z",
+      "side": 1,
+      "message": "Temporarily stripped out the unit test that was causing the failure after realizing why it couldn\u0027t work with --use-wire. Want to make sure it builds everywhere first.",
+      "revId": "5d06d5990c998cf6df01cf91ee7ebfee566a35c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
