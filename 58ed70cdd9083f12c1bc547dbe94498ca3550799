@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d7af83c_f7bb46ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-01T12:09:36Z",
+      "side": 1,
+      "message": "I think with this we\u0027ll be able to remove occlusion queries from the \"unsafe\" APIs, can you do it?",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "484d347d_f97ba519",
