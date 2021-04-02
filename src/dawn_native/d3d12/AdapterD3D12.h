@@ -43,6 +43,7 @@ namespace dawn_native { namespace d3d12 {
         void InitializeSupportedExtensions();
         MaybeError InitializeDebugLayerFilters();
         void CleanUpDebugLayerFilters();
+        void ConfigureDebugLayerAfterDeviceCreation();
 
         ComPtr<IDXGIAdapter3> mHardwareAdapter;
         ComPtr<ID3D12Device> mD3d12Device;
