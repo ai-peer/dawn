@@ -28,6 +28,47 @@ class UnsafeAPIValidationTest : public ValidationTest {
     }
 };
 
+constexpr uint32_t kWidth = 32u;
+constexpr uint32_t kHeight = 32u;
+constexpr uint32_t kDepthOrArrayLayers = 6u;
+
+wgpu::TextureDescriptor CreateTextureDescriptor() {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.size = {kWidth, kHeight, kDepthOrArrayLayers};
+    descriptor.sampleCount = 1;
+    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    descriptor.mipLevelCount = 1;
+    descriptor.usage = wgpu::TextureUsage::Sampled;
+    return descriptor;
+}
+
+// Check that 3D Texture creation is disallowed as part of unsafe APIs.
+TEST_F(UnsafeAPIValidationTest, 3DTextureCreationDisallowed) {
+    wgpu::TextureDescriptor baseDesc = CreateTextureDescriptor();
+
+    // Control case: 2D (array) texture creation is allowed.
+    device.CreateTexture(&baseDesc);
+
+    // 3D texture creation is disallowed.
+    wgpu::TextureDescriptor texture3DDesc = baseDesc;
+    texture3DDesc.dimension = wgpu::TextureDimension::e3D;
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&texture3DDesc));
+}
+
+// Check that 3D view creation is disallowed as part of unsafe APIs.
+TEST_F(UnsafeAPIValidationTest, 3DViewCreationDisallowed) {
+    wgpu::TextureDescriptor baseDesc = CreateTextureDescriptor();
+
+    // Control case: 2D (array) texture view creation is allowed.
+    device.CreateTexture(&baseDesc).CreateView();
+
+    // 3D view creation is disallowed.
+    wgpu::TextureDescriptor texture3DDesc = baseDesc;
+    texture3DDesc.dimension = wgpu::TextureDimension::e3D;
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&texture3DDesc).CreateView());
+}
+
 // Check that DrawIndexedIndirect is disallowed as part of unsafe APIs.
 TEST_F(UnsafeAPIValidationTest, DrawIndexedIndirectDisallowed) {
     // Create the index and indirect buffers.
