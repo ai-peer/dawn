@@ -312,13 +312,13 @@ namespace dawn_native { namespace metal {
     // static
     ResultOrError<Ref<RenderPipeline>> RenderPipeline::Create(
         Device* device,
-        const RenderPipelineDescriptor* descriptor) {
+        const RenderPipelineDescriptor2* descriptor) {
         Ref<RenderPipeline> pipeline = AcquireRef(new RenderPipeline(device, descriptor));
         DAWN_TRY(pipeline->Initialize(descriptor));
         return pipeline;
     }
 
-    MaybeError RenderPipeline::Initialize(const RenderPipelineDescriptor* descriptor) {
+    MaybeError RenderPipeline::Initialize(const RenderPipelineDescriptor2* descriptor) {
         mMtlPrimitiveTopology = MTLPrimitiveTopology(GetPrimitiveTopology());
         mMtlFrontFace = MTLFrontFace(GetFrontFace());
         mMtlCullMode = ToMTLCullMode(GetCullMode());
@@ -338,12 +338,12 @@ namespace dawn_native { namespace metal {
         }
         descriptorMTL.vertexDescriptor = vertexDesc.Get();
 
-        ShaderModule* vertexModule = ToBackend(descriptor->vertexStage.module);
-        const char* vertexEntryPoint = descriptor->vertexStage.entryPoint;
+        ShaderModule* vertexModule = ToBackend(descriptor->vertex.module);
+        const char* vertexEntryPoint = descriptor->vertex.entryPoint;
         ShaderModule::MetalFunctionData vertexData;
 
-        const VertexStateDescriptor* vertexStatePtr = descriptor->vertexState;
-        VertexStateDescriptor vertexState;
+        const VertexState* vertexStatePtr = descriptor->vertex;
+        VertexState vertexState;
         if (vertexStatePtr == nullptr) {
             vertexState = {};
             vertexStatePtr = &vertexState;
