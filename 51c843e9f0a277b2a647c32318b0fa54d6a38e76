@@ -39,6 +39,30 @@
       },
       "revId": "51c843e9f0a277b2a647c32318b0fa54d6a38e76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70facde4_9ccac8d9",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T07:00:26Z",
+      "side": 1,
+      "message": "Oh, I\u0027m so sorry, I thought we didn\u0027t disallow 3D texture creation because I didn\u0027t see a test for it. Yeah adding a test just for 3D texture creation sounds good!",
+      "parentUuid": "c1136296_539c01b4",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 75
+      },
+      "revId": "51c843e9f0a277b2a647c32318b0fa54d6a38e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
