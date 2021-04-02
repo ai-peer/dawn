@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ba918de_b00afa19",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T10:30:33Z",
+      "side": 1,
+      "message": "This is a bit complicated when a Y-flip is just v_texcoord.y \u003d 1.0 - v_texcoord.y. It would be simpler with a separate argument in the uniform buffer. Ok to simplify as a follow-up though.",
+      "revId": "fe7776d29a0919a0790d5ec67ceee17d6170888f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
