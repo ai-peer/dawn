@@ -311,9 +311,6 @@ class CopyTextureForBrowserTests : public DawnTest {
 // Verify CopyTextureForBrowserTests works with internal pipeline.
 // The case do copy without any transform.
 TEST_P(CopyTextureForBrowserTests, PassthroughCopy) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
-
     constexpr uint32_t kWidth = 10;
     constexpr uint32_t kHeight = 1;
 
@@ -324,9 +321,6 @@ TEST_P(CopyTextureForBrowserTests, PassthroughCopy) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyCopyOnXDirection) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
-
     constexpr uint32_t kWidth = 1000;
     constexpr uint32_t kHeight = 1;
 
@@ -337,9 +331,6 @@ TEST_P(CopyTextureForBrowserTests, VerifyCopyOnXDirection) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyCopyOnYDirection) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
-
     constexpr uint32_t kWidth = 1;
     constexpr uint32_t kHeight = 1000;
 
@@ -363,9 +354,6 @@ TEST_P(CopyTextureForBrowserTests, VerifyCopyFromLargeTexture) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyFlipY) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
-
     constexpr uint32_t kWidth = 901;
     constexpr uint32_t kHeight = 1001;
 
@@ -378,9 +366,6 @@ TEST_P(CopyTextureForBrowserTests, VerifyFlipY) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyFlipYInSlimTexture) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
-
     constexpr uint32_t kWidth = 1;
     constexpr uint32_t kHeight = 1001;
 
@@ -395,8 +380,6 @@ TEST_P(CopyTextureForBrowserTests, VerifyFlipYInSlimTexture) {
 // Verify |CopyTextureForBrowser| doing color conversion correctly when
 // the source texture is RGBA8Unorm format.
 TEST_P(CopyTextureForBrowserTests, FromRGBA8UnormCopy) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
     // Skip OpenGLES backend because it fails on using RGBA8Unorm as
     // source texture format.
     DAWN_SKIP_TEST_IF(IsOpenGLES());
@@ -414,8 +397,6 @@ TEST_P(CopyTextureForBrowserTests, FromRGBA8UnormCopy) {
 // Verify |CopyTextureForBrowser| doing color conversion correctly when
 // the source texture is BGRAUnorm format.
 TEST_P(CopyTextureForBrowserTests, FromBGRA8UnormCopy) {
-    // Tests skip due to crbug.com/dawn/592.
-    DAWN_SKIP_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
     // Skip OpenGLES backend because it fails on using BGRA8Unorm as
     // source texture format.
     DAWN_SKIP_TEST_IF(IsOpenGLES());
