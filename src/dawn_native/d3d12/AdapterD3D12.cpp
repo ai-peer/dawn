@@ -64,6 +64,8 @@ namespace dawn_native { namespace d3d12 {
 
         DAWN_TRY(InitializeDebugLayerFilters());
 
+        ConfigureDebugLayerAfterDeviceCreation();
+
         DXGI_ADAPTER_DESC1 adapterDesc;
         mHardwareAdapter->GetDesc1(&adapterDesc);
 
@@ -108,6 +110,32 @@ namespace dawn_native { namespace d3d12 {
             mSupportedExtensions.EnableExtension(Extension::ShaderFloat16);
         }
         mSupportedExtensions.EnableExtension(Extension::MultiPlanarFormats);
+    }
+
+    void Adapter::ConfigureDebugLayerAfterDeviceCreation() {
+        if (!GetInstance()->IsBackendValidationEnabled()) {
+            return;
+        }
+
+        ComPtr<ID3D12DebugDevice1> debugDevice1;
+        mD3d12Device.As(&debugDevice1);
+
+        // TODO(http://crbug.com/dawn/592): Disable patching shaders with validation code as it will
+        // unexpectedly hang end2end tests.
+        D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE maxShaderPatchMode =
+            D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE_STATE_TRACKING_ONLY;
+
+        // Partial validation disables resource state tracking and since there is no mode below
+        // |maxShaderPatchMode|, disable shader patching entirely.
+        if (GetInstance()->GetBackendValidationLevel() == BackendValidationLevel::Partial) {
+            maxShaderPatchMode = D3D12_GPU_BASED_VALIDATION_SHADER_PATCH_MODE_NONE;
+        }
+
+        const D3D12_DEBUG_DEVICE_GPU_BASED_VALIDATION_SETTINGS gpuValidationSettings{
+            256, maxShaderPatchMode, D3D12_GPU_BASED_VALIDATION_PIPELINE_STATE_CREATE_FLAG_NONE};
+
+        debugDevice1->SetDebugParameter(D3D12_DEBUG_DEVICE_PARAMETER_GPU_BASED_VALIDATION_SETTINGS,
+                                        &gpuValidationSettings, sizeof(gpuValidationSettings));
     }
 
     MaybeError Adapter::InitializeDebugLayerFilters() {
