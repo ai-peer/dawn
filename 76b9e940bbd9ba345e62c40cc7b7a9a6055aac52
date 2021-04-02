@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3df4d648_df752330",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-02T03:57:56Z",
+      "side": 1,
+      "message": "Done\n\nSorry that I failed to think about this point. Thanks for your explanation!",
+      "parentUuid": "73f594af_16b5b3b9",
+      "revId": "76b9e940bbd9ba345e62c40cc7b7a9a6055aac52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd148994_06f82a3a",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-01T15:48:16Z",
       "side": 1,
       "message": "This is return type is a bit complicated, it\u0027s Error | Pipeline | Nothing (because we spawned a task). In general the APIFoo only handle the error cases but don\u0027t have more logic, so what do you think of chaging CreateAsyncInternal to return MaybeError and handle the case where the pipeline was already created by directly calling the callback inside CreateAsyncIntenral?",
+      "revId": "76b9e940bbd9ba345e62c40cc7b7a9a6055aac52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44267e60_5c63eaaf",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 817,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-02T03:57:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd148994_06f82a3a",
       "revId": "76b9e940bbd9ba345e62c40cc7b7a9a6055aac52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
