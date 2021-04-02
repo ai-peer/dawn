@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7d6c994_c19c8b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-02T06:25:02Z",
+      "side": 1,
+      "message": "A follow-up CL for https://dawn-review.googlesource.com/c/dawn/+/45980/5/src/dawn_native/CommandValidation.cpp#321, with one question inline. ",
+      "revId": "51c843e9f0a277b2a647c32318b0fa54d6a38e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1136296_539c01b4",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-02T06:25:02Z",
+      "side": 1,
+      "message": "3D texture creation has already marked as unsafe API. So any other tests like 3D view, 3D texture copy, WriteTexture to 3D texture, etc., will fail. Because we need to create a 3D texture first for those test, but 3D texture creation has already failed, and texture object is not valid at all.\n\nSo, I guess adding 3D texture creation test is enough for UnsafeAPIValidationTest. WDYT?",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 69,
+        "endChar": 75
+      },
+      "revId": "51c843e9f0a277b2a647c32318b0fa54d6a38e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
