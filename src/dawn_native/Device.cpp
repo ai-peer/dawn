@@ -532,6 +532,7 @@ namespace dawn_native {
 
     ResultOrError<Ref<RenderPipelineBase>> DeviceBase::GetOrCreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
+        fprintf(stderr, "GetOrCreateRenderPipeline 1\n");
         RenderPipelineBase blueprint(this, descriptor);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
@@ -553,6 +554,7 @@ namespace dawn_native {
 
     ResultOrError<Ref<RenderPipelineBase>> DeviceBase::GetOrCreateRenderPipeline(
         const RenderPipelineDescriptor2* descriptor) {
+        fprintf(stderr, "GetOrCreateRenderPipeline 2\n");
         RenderPipelineBase blueprint(this, descriptor);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
