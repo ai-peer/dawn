@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc4600c1_813c5033",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T17:39:22Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t have a change to look at this CL in details yet. Feel free to iterate without my review.\n\nThe only thing maybe, could we have some WireTests for things like losing the device, destruction, etc. (ditto DeviceLostTests?)",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f720104b_39804242",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T17:39:22Z",
+      "side": 1,
+      "message": "Should be change this, and the spec to has a span?",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13103357_b86fae70",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T17:39:22Z",
+      "side": 1,
+      "message": "nit: Maybe this should be marked as optional?",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36bf2eba_070946c7",
+        "filename": "src/dawn_wire/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T17:39:22Z",
+      "side": 1,
+      "message": "nit: CMakeLists too.",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
