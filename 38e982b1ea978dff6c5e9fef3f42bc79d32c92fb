@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2383bc5b_7a28c1c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T06:50:02Z",
+      "side": 1,
+      "message": "LGTM with the fix of semantics, thanks Austin for catching this!",
+      "revId": "38e982b1ea978dff6c5e9fef3f42bc79d32c92fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed4cdad2_e7237216",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T06:50:02Z",
+      "side": 1,
+      "message": "Does this match what we want to do to implement things in the Blink side? My understanding is that in Blink some source textures will be Y flipped and some not, so Y-flip should control the flipping of the source, not of the destination rect.\n\nFor example if I do a copy of pixel (0, 0) of a 2x2 Y-flipped texture, I want it to copy pixel (0, 1) and not (0, 0) (then flip it on itself, so still 0, 0).\n\nOf course both approaches are just as powerful but what\u0027s currently done necessitates more work on the Blink side to adjust the source rect instead of just passing arguments to Dawn.\n\nTests caught the issue, that\u0027s good!",
+      "revId": "38e982b1ea978dff6c5e9fef3f42bc79d32c92fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
