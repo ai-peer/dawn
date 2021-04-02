@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19b0bd1d_55fefa6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-02T18:07:31Z",
+      "side": 1,
+      "message": "This CL looks large but it\u0027s actually smaller than I anticipated. The part that needs the most attention is the new conversion from RDP-\u003eRDP2, but most everything else turned out be changing function signatures and a whole bunch of dead code removal! 🎉",
+      "revId": "fde88297b81b2b9dd99368c13ec19ac59c944f20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
