@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7f5d464_a79df6e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-02T22:22:34Z",
+      "side": 1,
+      "message": "Not super familiar with wire stuff at this point, but LGTM",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927d2c15_41c36648",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-02T22:22:34Z",
+      "side": 1,
+      "message": "nit: \"success\" and \"error\" sound like they could describe whether the compilation succeeded or not, but I think they are meant to describe whether the GetCompilationInfo operation succeeded. Maybe rename the enum to \"compilation info request status\" or something?",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f720104b_39804242",
@@ -31,6 +65,24 @@
       "writtenOn": "2021-04-02T17:39:22Z",
       "side": 1,
       "message": "Should be change this, and the spec to has a span?",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcc3bc89_96fde3a9",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-02T22:22:34Z",
+      "side": 1,
+      "message": "filed https://github.com/gpuweb/gpuweb/issues/1597",
+      "parentUuid": "f720104b_39804242",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +106,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad58eb2d_55d9a52a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-02T22:22:34Z",
+      "side": 1,
+      "message": "Is the return value actually used? Returning a reference is a little scary. It could at least be a const reference, but perhaps a const pointer.",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36bf2eba_070946c7",
         "filename": "src/dawn_wire/BUILD.gn",
         "patchSetId": 5
@@ -65,6 +134,23 @@
       "writtenOn": "2021-04-02T17:39:22Z",
       "side": 1,
       "message": "nit: CMakeLists too.",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94e06d32_5a07106a",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-02T22:22:34Z",
+      "side": 1,
+      "message": "Do we want to make any guarantee that callbacks won\u0027t be called inside GetCompilationInfo (to avoid reentrancy)? Probably not really a concern.",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
