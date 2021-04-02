@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f49623c0_4b1881c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T06:41:32Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "4fdaa17b11eedb81e079bc3b43b018a8dcc8b7d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "609fe78a_45c52ac5",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T06:41:32Z",
+      "side": 1,
+      "message": "EqualityFunc should be updated too, I think that\u0027s what caused the failure.",
+      "revId": "4fdaa17b11eedb81e079bc3b43b018a8dcc8b7d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
