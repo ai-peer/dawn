@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84f1faa_030f2f63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T07:08:16Z",
+      "side": 1,
+      "message": "LGTM too!\n\nI have some concerns that Device.cpp/.h are getting huge and difficult to reason about but it\u0027s definitely not something to address in this CL.\n\nI\u0027m thinking that we could maybe improve things by moving code around in Device.cpp to be per aspect: all sampler creation related code one next to the other, or pipeline creation code :) Maybe making the Caches object a separate class in its own file, especially if it gains more logic. Maybe banner comments would help give more structure to the files too.",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db363c0e_c60b8f16",
@@ -54,6 +71,40 @@
         "endLine": 1136,
         "endChar": 9
       },
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89c8df78_1aaabfb9",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T07:08:16Z",
+      "side": 1,
+      "message": "nit: I think we\u0027ll need to #include \u003cutility\u003e for std::pair on some stdlibc++s",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10e88fa7_5c6815ac",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-02T07:08:16Z",
+      "side": 1,
+      "message": "Can we have a small test for the race condition mentioned in the previous patchset?",
       "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
