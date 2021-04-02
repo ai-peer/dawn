@@ -22,6 +22,30 @@
       },
       "revId": "864a3647420511313a4f3f91d6591ed56706ee5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3576707_2a5cb2cb",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-02T05:56:17Z",
+      "side": 0,
+      "message": "Good catch! Keep the source texture init value to cover flipY and future premulAlpha ops. And it helps catch an error in current test case. \nOne thing I\u0027d like to mentsion about flipY is that:\nI thought the flipY means copy from src rect to dst rect firstly and then apply flipy.\n(The other option is that apply flipY on src texture firstly, and then copy the rect to the dst rect. This will have a totally different result.)\nAdded a comments in test case to emphasize this.",
+      "parentUuid": "143860dc_ac2fd68a",
+      "range": {
+        "startLine": 83,
+        "startChar": 24,
+        "endLine": 85,
+        "endChar": 92
+      },
+      "revId": "864a3647420511313a4f3f91d6591ed56706ee5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

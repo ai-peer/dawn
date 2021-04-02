@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45970d66_507f58ed",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-02T05:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd16cb31_32a12ced",
+      "range": {
+        "startLine": 154,
+        "startChar": 16,
+        "endLine": 156,
+        "endChar": 41
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "407ca07d_8871ec47",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-04-01T14:12:26Z",
       "side": 1,
       "message": "u-nit: I think we could put this right before the copy from SRC to DST. Ditto for dstImageCopyTexture",
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d02d6d8_03bf09d4",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-02T05:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "407ca07d_8871ec47",
       "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5057cc21_56ed110f",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-02T05:56:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8717e5d_0a5d2fbb",
+      "range": {
+        "startLine": 361,
+        "startChar": 31,
+        "endLine": 362,
+        "endChar": 87
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88f51e22_563b2707",
@@ -111,6 +177,30 @@
       "writtenOn": "2021-04-01T16:52:09Z",
       "side": 1,
       "message": "crbug.com/dawn/592 says that it is fixed. What problem are you observing here?",
+      "range": {
+        "startLine": 520,
+        "startChar": 25,
+        "endLine": 520,
+        "endChar": 43
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e42edd3c_befb90ce",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-02T05:56:17Z",
+      "side": 1,
+      "message": "Thanks for the comment and sry for missing the updat of crbug.com/dawn/592. \nActually I still hit the hang issue in my local machine. Upload a CL(https://dawn-review.googlesource.com/c/dawn/+/46722) and the bots still fail.\nI\u0027ll comment under crbug.com/dawn/592",
+      "parentUuid": "88f51e22_563b2707",
       "range": {
         "startLine": 520,
         "startChar": 25,
