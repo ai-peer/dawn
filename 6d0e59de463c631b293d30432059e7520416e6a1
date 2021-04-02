@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d36ef4da_476712dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-02T05:56:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db363c0e_c60b8f16",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-02T05:56:08Z",
+      "side": 1,
+      "message": "also say: if there is no error, then CreateComputePipelineAsyncInternal will call the callback.",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc5d756c_67f4f780",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-02T05:56:08Z",
+      "side": 1,
+      "message": "I wish we could factor this code into a \"ValidateAndGetDescriptorWithDefaults\" helper that CreateComputePipelineInternal also calls.\n\nBut then we would need an out pointer for the layoutRef. Maybe that\u0027s not so bad?",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1136,
+        "endChar": 9
+      },
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
