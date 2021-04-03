@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c389f10_01c03a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-03T02:59:35Z",
+      "side": 1,
+      "message": "Yes, let‘s keep it as unsafe for a while. There is still a TODO at [2] need to be addressed, it requests to clear the buffer to 0 for the resolve region, especially when the buffer has been initialized or full used which we won\u0027t do lazy initialize again. But a barrier issue is found when I call vkCmdFillBuffer to clear the buffer before vkCmdCopyQueryPoolResults, they are not executed in order with memory barrier. I\u0027m looking at whether it\u0027s a driver bug or implementation issue.",
+      "parentUuid": "ac6bb139_0dd70250",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "484d347d_f97ba519",
@@ -87,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaf0da65_f0500c75",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-03T02:59:35Z",
+      "side": 1,
+      "message": "It should be removed which added for using QueryAvailabilityMap, and it\u0027s no needed on command encoder now.",
+      "parentUuid": "484d347d_f97ba519",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7ee804e6_84250509",
@@ -100,6 +136,24 @@
       "writtenOn": "2021-04-01T12:09:15Z",
       "side": 1,
       "message": "Tests are great! I think the only additional thing would be if we could test the iteration logic a bit more for the resetting at the start of render passes. Maybe something like (for a query set of size 7)\n\n 0 - not written (tests starting with not written)\n 1 - written (tests combing multiple written, although other tests already do it.)\n 2 - written\n 3 - not written (tests skipping over not written in the middle)\n 4 - not written\n 5 - written (tests another written query in the middle)\n 6 - not written (tests the last query not being written)",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cc5a678_fbca21b5",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-03T02:59:35Z",
+      "side": 1,
+      "message": "I add a TODO for resolving unused queries to 0 at [2] because a barrier issue is found for transfer operations (between vkCmdFillBuffer and vkCmdCopyQueryPoolResults), this case and other resolving cases will be added after that TODO is resolved.\nIt\u0027s also fine to add them in this PR, but I will skip some of them related to the TODO.",
+      "parentUuid": "7ee804e6_84250509",
       "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
