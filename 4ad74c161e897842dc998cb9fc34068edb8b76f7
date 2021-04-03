@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cdae6aa_9d45ea33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-03T03:18:59Z",
+      "side": 1,
+      "message": "A follow-up change for https://dawn-review.googlesource.com/c/dawn/+/46320. PTAL. ",
+      "revId": "4ad74c161e897842dc998cb9fc34068edb8b76f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
