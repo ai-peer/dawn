@@ -33,6 +33,24 @@
       "message": "EqualityFunc should be updated too, I think that\u0027s what caused the failure.",
       "revId": "4fdaa17b11eedb81e079bc3b43b018a8dcc8b7d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef7bc86_07771453",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 974,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-05T15:08:33Z",
+      "side": 1,
+      "message": "Thanks for the catch!",
+      "parentUuid": "609fe78a_45c52ac5",
+      "revId": "4fdaa17b11eedb81e079bc3b43b018a8dcc8b7d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
