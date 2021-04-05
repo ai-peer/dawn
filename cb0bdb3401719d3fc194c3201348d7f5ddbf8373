@@ -33,6 +33,23 @@
       "message": "Thanks for merging!\n\nSorry, I completely misunderstood what you wanted here somehow.\n\nThe code should say \"enum class DAWN_NODISCARD WireResult\" instead of  \"enum DAWN_NODISCARD class WireResult\". Then it\u0027ll work with both __attribute__((warn_unused_result)) and [[nodiscard]] expansions.\n\nWith old clang, the code as it was worked with __attribute__((warn_unused_result)) due to a clang quirk but errored out on [[nodiscard]]. Clang now consistently errors out on this placement. I\u0027ll send another Cl with the Right Fix.",
       "revId": "cb0bdb3401719d3fc194c3201348d7f5ddbf8373",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7d7209f_6a1423fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2021-04-05T14:52:47Z",
+      "side": 1,
+      "message": "(https://dawn-review.googlesource.com/c/dawn/+/46800)",
+      "revId": "cb0bdb3401719d3fc194c3201348d7f5ddbf8373",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
