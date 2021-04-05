@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb0dc6d6_378b8841",
+        "filename": "dawn_wire.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T19:37:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13103357_b86fae70",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2324b78e_9784992a",
@@ -135,6 +153,24 @@
       "writtenOn": "2021-04-05T17:46:21Z",
       "side": 1,
       "message": "[1]",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df91bd8f_868a82c7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T19:37:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2324b78e_9784992a",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -210,6 +246,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f227ca9d_a3eb954d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T19:37:48Z",
+      "side": 1,
+      "message": "Oh, sorry Austin! Missed your comment before responding. Like I said, though, I think this needs to be refactored in a followup.",
+      "parentUuid": "2bcde6df_e9ac17de",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36bf2eba_070946c7",
@@ -223,6 +277,24 @@
       "writtenOn": "2021-04-02T17:39:22Z",
       "side": 1,
       "message": "nit: CMakeLists too.",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8ff7e32_724aa720",
+        "filename": "src/dawn_wire/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T19:37:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36bf2eba_070946c7",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
