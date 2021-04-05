@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c1a4ad_5e50e635",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 524,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T18:22:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "927d2c15_41c36648",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f720104b_39804242",
@@ -174,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bcde6df_e9ac17de",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T18:22:42Z",
+      "side": 1,
+      "message": "Austin asked me to add this. :D Honestly, though, I\u0027m beginning to see that it\u0027s not going to be the main way that messages get added (which I\u0027m going to have to address in a followup CL.) I think this may get removed in the future, but in the meantime I\u0027ve set it to have a void return type again.\n\nAlso, to get a better handle on the lifetime of the messages/strings I\u0027ve refactored them into an \"OwnedCompilationMessages\" class, which should make ownership and lifetimes of the messages much clearer.",
+      "parentUuid": "ad58eb2d_55d9a52a",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36bf2eba_070946c7",
@@ -204,6 +240,24 @@
       "writtenOn": "2021-04-02T22:22:34Z",
       "side": 1,
       "message": "Do we want to make any guarantee that callbacks won\u0027t be called inside GetCompilationInfo (to avoid reentrancy)? Probably not really a concern.",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8020fa19_99a0d3b1",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T18:22:42Z",
+      "side": 1,
+      "message": "If it\u0027s important for us to avoid reentrancy here we need to revisit the other callback sites to, because most of them have this pattern of calling the callback immediately on a disconnected client. (See Queue::OnSubmittedWorkDone, Buffer::MapAsync, etc.)",
+      "parentUuid": "94e06d32_5a07106a",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
