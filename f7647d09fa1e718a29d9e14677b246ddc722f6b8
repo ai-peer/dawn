@@ -158,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7cab11fe_d6b07602",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-05T18:21:28Z",
+      "side": 1,
+      "message": "OK, seems fine, const ref would be ideal though if possible.",
+      "parentUuid": "a6603dcf_4e635097",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "36bf2eba_070946c7",
         "filename": "src/dawn_wire/BUILD.gn",
         "patchSetId": 5
