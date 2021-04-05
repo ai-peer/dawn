@@ -97,6 +97,30 @@
       },
       "revId": "4ad74c161e897842dc998cb9fc34068edb8b76f7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59855abc_684b188f",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-05T18:09:23Z",
+      "side": 1,
+      "message": "Done. \nI am a little bit hesitant to remove it because 1) it is more straightforward for a refactoring patch to move it from somewhere to another place, 2) origin.x and origin.y in many tests are 0 too, we can remove them in theory if we remove a default 0 for origin.z. \n\nBut maybe it is better to remove it. Because 1) if we ignore this refactoring and look at it aftermath, it is more natural to remove unnecessary default values, and Corentin also mentioned that we can remove mipLevel if it is 0. 2) The vast majority of the tests are for 2D, so (origin.x, origin.y) is symmetric with (width, height) and looks better than adding a unneeded default 0 as origin.z. \n\nAnyway, this should be trivial, either way should be OK. I removed most default 0s as you suggested, except where we are testing parameter layer/origin.z in which we are testing origin \u003d (0, 0, 0) and then testing origin \u003d (0, 0, 1) immediately - I leave the default 0 for more clear comparison between consecutive tests.",
+      "parentUuid": "01a90d72_c2bc048f",
+      "range": {
+        "startLine": 201,
+        "startChar": 69,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "4ad74c161e897842dc998cb9fc34068edb8b76f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
