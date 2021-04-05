@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4001b649_f9700df6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-05T14:39:42Z",
+      "side": 1,
+      "message": "Submitted to expedite things, but do you know of a way to achieve the same effect on enum classes ?",
+      "revId": "cb0bdb3401719d3fc194c3201348d7f5ddbf8373",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
