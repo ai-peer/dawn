@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1faf47c5_32dcdc02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T17:14:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4ad74c161e897842dc998cb9fc34068edb8b76f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3476bad1_d8138fad",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-04-03T03:48:04Z",
       "side": 1,
       "message": "I still moves layer to origin.z even if layer is 0. But origin.z\u0027s default value is 0. So it is not needed to move. We can just remove 0 if layer is 0. Which one do you prefer?",
+      "range": {
+        "startLine": 201,
+        "startChar": 69,
+        "endLine": 201,
+        "endChar": 70
+      },
+      "revId": "4ad74c161e897842dc998cb9fc34068edb8b76f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a90d72_c2bc048f",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T17:14:53Z",
+      "side": 1,
+      "message": "since this is the default, sounds good to remove it. You\u0027ve kept it as (0, 0, 0) in other parts of the code though - either is fine with me",
+      "parentUuid": "3476bad1_d8138fad",
       "range": {
         "startLine": 201,
         "startChar": 69,
