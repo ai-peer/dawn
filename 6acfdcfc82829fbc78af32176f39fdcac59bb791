@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca181d37_36510ca5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T21:25:08Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "6acfdcfc82829fbc78af32176f39fdcac59bb791",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b27849_334888e3",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T21:25:08Z",
+      "side": 1,
+      "message": "let\u0027s name this \"Ensure\" then. \"Get\" is weird if nothing is returned.",
+      "range": {
+        "startLine": 1274,
+        "startChar": 8,
+        "endLine": 1274,
+        "endChar": 36
+      },
+      "revId": "6acfdcfc82829fbc78af32176f39fdcac59bb791",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e86108_1ca10ff5",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T21:25:08Z",
+      "side": 1,
+      "message": "nit: since this is mutable, prefer returning a pointer",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 34
+      },
+      "revId": "6acfdcfc82829fbc78af32176f39fdcac59bb791",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
