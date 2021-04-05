@@ -390,12 +390,14 @@ namespace dawn_native {
             return {};
         }
 
-        ResultOrError<tint::Program> ParseWGSL(const tint::Source::File* file) {
+        ResultOrError<tint::Program> ParseWGSL(const tint::Source::File* file,
+                                               OwnedCompilationMessages* outMessages) {
             std::ostringstream errorStream;
             errorStream << "Tint WGSL reader failure:" << std::endl;
 
             tint::Program program = tint::reader::wgsl::Parse(file);
             if (!program.IsValid()) {
+                outMessages->AddMessages(program.Diagnostics());
                 auto err = program.Diagnostics().str();
                 errorStream << "Parser: " << err << std::endl
                             << "Shader: " << std::endl
@@ -406,12 +408,16 @@ namespace dawn_native {
             return std::move(program);
         }
 
-        ResultOrError<tint::Program> ParseSPIRV(const std::vector<uint32_t>& spirv) {
+        ResultOrError<tint::Program> ParseSPIRV(const std::vector<uint32_t>& spirv,
+                                                OwnedCompilationMessages* outMessages) {
             std::ostringstream errorStream;
             errorStream << "Tint SPIRV reader failure:" << std::endl;
 
             tint::Program program = tint::reader::spirv::Parse(spirv);
             if (!program.IsValid()) {
+                if (outMessages) {
+                    outMessages->AddMessages(program.Diagnostics());
+                }
                 auto err = program.Diagnostics().str();
                 errorStream << "Parser: " << err << std::endl;
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
@@ -420,12 +426,14 @@ namespace dawn_native {
             return std::move(program);
         }
 
-        MaybeError ValidateModule(const tint::Program* program) {
+        MaybeError ValidateModule(const tint::Program* program,
+                                  OwnedCompilationMessages* outMessages) {
             std::ostringstream errorStream;
             errorStream << "Tint program validation" << std::endl;
 
             tint::Validator validator;
             if (!validator.Validate(program)) {
+                outMessages->AddMessages(validator.diagnostics());
                 auto err = validator.diagnostics().str();
                 errorStream << "Validation: " << err << std::endl;
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
@@ -1049,7 +1057,8 @@ namespace dawn_native {
 
     ResultOrError<ShaderModuleParseResult> ValidateShaderModuleDescriptor(
         DeviceBase* device,
-        const ShaderModuleDescriptor* descriptor) {
+        const ShaderModuleDescriptor* descriptor,
+        OwnedCompilationMessages* outMessages) {
         const ChainedStruct* chainedDescriptor = descriptor->nextInChain;
         if (chainedDescriptor == nullptr) {
             return DAWN_VALIDATION_ERROR("Shader module descriptor missing chained descriptor");
@@ -1070,9 +1079,9 @@ namespace dawn_native {
                 std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
                 if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
                     tint::Program program;
-                    DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv));
+                    DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
                     if (device->IsValidationEnabled()) {
-                        DAWN_TRY(ValidateModule(&program));
+                        DAWN_TRY(ValidateModule(&program, outMessages));
                     }
                     parseResult.tintProgram = std::make_unique<tint::Program>(std::move(program));
                 } else {
@@ -1091,11 +1100,11 @@ namespace dawn_native {
                 tint::Source::File file("", wgslDesc->source);
 
                 tint::Program program;
-                DAWN_TRY_ASSIGN(program, ParseWGSL(&file));
+                DAWN_TRY_ASSIGN(program, ParseWGSL(&file, outMessages));
 
                 if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
                     if (device->IsValidationEnabled()) {
-                        DAWN_TRY(ValidateModule(&program));
+                        DAWN_TRY(ValidateModule(&program, outMessages));
                     }
                     parseResult.tintProgram = std::make_unique<tint::Program>(std::move(program));
                 } else {
@@ -1103,10 +1112,11 @@ namespace dawn_native {
                     transformManager.append(
                         std::make_unique<tint::transform::EmitVertexPointSize>());
                     transformManager.append(std::make_unique<tint::transform::Spirv>());
-                    DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
+                    DAWN_TRY_ASSIGN(program,
+                                    RunTransforms(&transformManager, &program, outMessages));
 
                     if (device->IsValidationEnabled()) {
-                        DAWN_TRY(ValidateModule(&program));
+                        DAWN_TRY(ValidateModule(&program, outMessages));
                     }
 
                     std::vector<uint32_t> spirv;
@@ -1136,9 +1146,13 @@ namespace dawn_native {
     }
 
     ResultOrError<tint::Program> RunTransforms(tint::transform::Transform* transform,
-                                               const tint::Program* program) {
+                                               const tint::Program* program,
+                                               OwnedCompilationMessages* outMessages) {
         tint::transform::Transform::Output output = transform->Run(program);
         if (!output.program.IsValid()) {
+            if (outMessages) {
+                outMessages->AddMessages(output.program.Diagnostics());
+            }
             std::string err = "Tint program failure: " + output.program.Diagnostics().str();
             return DAWN_VALIDATION_ERROR(err.c_str());
         }
@@ -1195,10 +1209,13 @@ namespace dawn_native {
 
     // ShaderModuleBase
 
-    ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
+    ShaderModuleBase::ShaderModuleBase(
+        DeviceBase* device,
+        const ShaderModuleDescriptor* descriptor,
+        std::unique_ptr<OwnedCompilationMessages> compilationMessages)
         : CachedObject(device),
           mType(Type::Undefined),
-          mCompilationMessages(std::make_unique<OwnedCompilationMessages>()) {
+          mCompilationMessages(std::move(compilationMessages)) {
         ASSERT(descriptor->nextInChain != nullptr);
         switch (descriptor->nextInChain->sType) {
             case wgpu::SType::ShaderModuleSPIRVDescriptor: {
@@ -1218,12 +1235,19 @@ namespace dawn_native {
             default:
                 UNREACHABLE();
         }
+
+        if (!mCompilationMessages) {
+            mCompilationMessages = std::make_unique<OwnedCompilationMessages>();
+        }
     }
 
-    ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
+    ShaderModuleBase::ShaderModuleBase(
+        DeviceBase* device,
+        ObjectBase::ErrorTag tag,
+        std::unique_ptr<OwnedCompilationMessages> compilationMessages)
         : CachedObject(device, tag),
           mType(Type::Undefined),
-          mCompilationMessages(std::make_unique<OwnedCompilationMessages>()) {
+          mCompilationMessages(std::move(compilationMessages)) {
     }
 
     ShaderModuleBase::~ShaderModuleBase() {
@@ -1233,8 +1257,10 @@ namespace dawn_native {
     }
 
     // static
-    ShaderModuleBase* ShaderModuleBase::MakeError(DeviceBase* device) {
-        return new ShaderModuleBase(device, ObjectBase::kError);
+    ShaderModuleBase* ShaderModuleBase::MakeError(
+        DeviceBase* device,
+        std::unique_ptr<OwnedCompilationMessages> compilationMessages) {
+        return new ShaderModuleBase(device, ObjectBase::kError, std::move(compilationMessages));
     }
 
     bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint) const {
@@ -1286,7 +1312,7 @@ namespace dawn_native {
         const std::string& entryPoint,
         BindGroupIndex pullingBufferBindingSet) const {
         tint::Program program;
-        DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv));
+        DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, nullptr));
 
         return GeneratePullingSpirv(&program, vertexState, entryPoint, pullingBufferBindingSet);
     }
@@ -1309,7 +1335,7 @@ namespace dawn_native {
         }
 
         tint::Program program;
-        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, programIn));
+        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, programIn, nullptr));
 
         tint::writer::spirv::Generator generator(&program);
         if (!generator.Generate()) {

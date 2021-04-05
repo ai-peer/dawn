@@ -22,6 +22,7 @@
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandBuffer.h"
 #include "dawn_native/CommandEncoder.h"
+#include "dawn_native/CompilationMessages.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/CreatePipelineAsyncTracker.h"
 #include "dawn_native/DynamicUploader.h"
@@ -604,8 +605,12 @@ namespace dawn_native {
                 // now, so call validate. Most of |ValidateShaderModuleDescriptor| is parsing, but
                 // we can consider splitting it if additional validation is added.
                 ASSERT(!IsValidationEnabled());
+                std::unique_ptr<OwnedCompilationMessages> messages =
+                    std::make_unique<OwnedCompilationMessages>();
                 ShaderModuleParseResult localParseResult =
-                    ValidateShaderModuleDescriptor(this, descriptor).AcquireSuccess();
+                    ValidateShaderModuleDescriptor(this, descriptor, messages.get())
+                        .AcquireSuccess();
+                // TODO: Pass messages
                 DAWN_TRY_ASSIGN(result, CreateShaderModuleImpl(descriptor, &localParseResult));
             } else {
                 DAWN_TRY_ASSIGN(result, CreateShaderModuleImpl(descriptor, parseResult));
@@ -878,9 +883,11 @@ namespace dawn_native {
         return result.Detach();
     }
     ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor* descriptor) {
+        std::unique_ptr<OwnedCompilationMessages> messages =
+            std::make_unique<OwnedCompilationMessages>();
         Ref<ShaderModuleBase> result;
-        if (ConsumedError(CreateShaderModuleInternal(descriptor), &result)) {
-            return ShaderModuleBase::MakeError(this);
+        if (ConsumedError(CreateShaderModuleInternal(descriptor, messages.get()), &result)) {
+            return ShaderModuleBase::MakeError(this, std::move(messages));
         }
         return result.Detach();
     }
@@ -1162,13 +1169,15 @@ namespace dawn_native {
     }
 
     ResultOrError<Ref<ShaderModuleBase>> DeviceBase::CreateShaderModuleInternal(
-        const ShaderModuleDescriptor* descriptor) {
+        const ShaderModuleDescriptor* descriptor,
+        OwnedCompilationMessages* messages) {
         DAWN_TRY(ValidateIsAlive());
 
         ShaderModuleParseResult parseResult = {};
         ShaderModuleParseResult* parseResultPtr = nullptr;
         if (IsValidationEnabled()) {
-            DAWN_TRY_ASSIGN(parseResult, ValidateShaderModuleDescriptor(this, descriptor));
+            DAWN_TRY_ASSIGN(parseResult,
+                            ValidateShaderModuleDescriptor(this, descriptor, messages));
             parseResultPtr = &parseResult;
         }
 
