@@ -16,6 +16,23 @@
       "message": "Apologies again.",
       "revId": "0bd22881c024ada054fa6e2dfa9347ba0f8f9a5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a387d0d1_f751ca39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T16:58:12Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "0bd22881c024ada054fa6e2dfa9347ba0f8f9a5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
