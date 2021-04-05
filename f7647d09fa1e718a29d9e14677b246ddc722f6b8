@@ -260,6 +260,24 @@
       "parentUuid": "94e06d32_5a07106a",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "175fa94b_eb4af9ec",
+        "filename": "src/dawn_wire/client/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-05T18:29:42Z",
+      "side": 1,
+      "message": "It\u0027s probably not important, it was just a thought. (Maybe we do generally want to do it, though, for predictability. Filed crbug.com/dawn/752 .)",
+      "parentUuid": "8020fa19_99a0d3b1",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
