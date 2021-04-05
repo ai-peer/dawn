@@ -16,6 +16,23 @@
       "message": "PTAL. \n\nThe previous patch of B2T copy for an entire texture has already done most of the work for T2B copy and T2T copy. Because we need to read data back from texture for B2T copy and compare the result. And the readback itself is a T2B copy actually. So this patch is simple. ",
       "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e04dfc1_c3aa53b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T23:23:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
