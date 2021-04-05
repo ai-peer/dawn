@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "415bcfcb_bba3569e",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-05T18:19:30Z",
+      "side": 0,
+      "message": "We need to repeat this code snippet again and again, So I used a wrapper function named CopyBufferToTexture. Likewise, I used CopyTextureToBuffer for T2B copy.",
+      "range": {
+        "startLine": 759,
+        "startChar": 1,
+        "endLine": 774,
+        "endChar": 21
+      },
+      "revId": "f759264387ae312456c7930ae72b0c0e13a8aab2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
