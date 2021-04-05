@@ -209,6 +209,30 @@
       },
       "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e9e254_710f959b",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-05T11:26:27Z",
+      "side": 1,
+      "message": "FYI. crbug.com/dawn/592 has been reopened. I think Bryan will report the bug to MS.",
+      "parentUuid": "e42edd3c_befb90ce",
+      "range": {
+        "startLine": 520,
+        "startChar": 25,
+        "endLine": 520,
+        "endChar": 43
+      },
+      "revId": "ff81125659d45d65732e6d8c0bba9befdf32be81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
