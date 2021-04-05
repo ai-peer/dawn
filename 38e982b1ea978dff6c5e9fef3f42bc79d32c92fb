@@ -51,6 +51,24 @@
       "parentUuid": "ed4cdad2_e7237216",
       "revId": "38e982b1ea978dff6c5e9fef3f42bc79d32c92fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b4f4b93_ec2d4be0",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-04-05T11:27:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9dcb804_4c729f43",
+      "revId": "38e982b1ea978dff6c5e9fef3f42bc79d32c92fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
