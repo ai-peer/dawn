@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb52faee_4ee8b05e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T21:46:37Z",
+      "side": 1,
+      "message": "Thanks for the review, Austin! If you don\u0027t mind, I made one significant late change that only got posted after your review was done: I changed the OwnedCompilationMessages on the ShaderModule to be a unique_ptr. That doesn\u0027t really benefit (or hurt) this CL, but looking ahead to the next CL I post it\u0027ll be important for ShaderModules to be able to consume a list of messages produced from validation, so this pattern makes more sense. If you don\u0027t mind taking one last look to sanity check that I\u0027d appreciate it!",
+      "revId": "1f216d8d2ceeaae4939f478ba1ca9511326348bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

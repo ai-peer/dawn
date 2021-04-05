@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c744fb4e_5312eed1",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T21:46:37Z",
+      "side": 1,
+      "message": "I\u0027ve removed this method entirely after working out the majority of the followup CL and realizing this will actually never be useful. That leaves this CL with no apparent way to produce messages outside of tests, but I think that it\u0027s OK to have this one just focus on the communication mechanisms.",
+      "parentUuid": "03b27849_334888e3",
+      "range": {
+        "startLine": 1274,
+        "startChar": 8,
+        "endLine": 1274,
+        "endChar": 36
+      },
+      "revId": "6acfdcfc82829fbc78af32176f39fdcac59bb791",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5e86108_1ca10ff5",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-04-05T21:25:08Z",
       "side": 1,
       "message": "nit: since this is mutable, prefer returning a pointer",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 34
+      },
+      "revId": "6acfdcfc82829fbc78af32176f39fdcac59bb791",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99701171_e4385082",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-05T21:46:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5e86108_1ca10ff5",
       "range": {
         "startLine": 161,
         "startChar": 8,
