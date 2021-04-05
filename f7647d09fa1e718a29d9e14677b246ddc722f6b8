@@ -106,6 +106,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2324b78e_9784992a",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T17:46:21Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ad58eb2d_55d9a52a",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 5
@@ -117,6 +134,24 @@
       "writtenOn": "2021-04-02T22:22:34Z",
       "side": 1,
       "message": "Is the return value actually used? Returning a reference is a little scary. It could at least be a const reference, but perhaps a const pointer.",
+      "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6603dcf_4e635097",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-05T17:46:21Z",
+      "side": 1,
+      "message": "I was thinking about doing `const auto\u0026 messages \u003d GetProgramDiagnosticMessages()` at [1], and then using `messages` in that function instead of `mCompilationMessages`.",
+      "parentUuid": "ad58eb2d_55d9a52a",
       "revId": "f7647d09fa1e718a29d9e14677b246ddc722f6b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
