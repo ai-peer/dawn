@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d174f5d0_61b1402e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-04-06T14:59:44Z",
+      "side": 1,
+      "message": "Thanks for fixing that! It\u0027s unfortunate that the bots don\u0027t have a way to catch this.",
+      "revId": "0515e90cadb6ba600e0e25c8b953b0c918eea4f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
