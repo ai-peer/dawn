@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3d3e81_5b81e195",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "nit: Maybe mention that at the moment it only works for full copies.",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "2cf691ba_1816c77d",
@@ -31,6 +48,126 @@
       "writtenOn": "2021-04-05T23:23:36Z",
       "side": 1,
       "message": "LGTM",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc83883_e4f87bd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d9108c9_cef6fee1",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "Do some of these become implementation details of UtilsD3D12.h that we could remove from the header?",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 46
+      },
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51e23c0a_33c92109",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "nit: Maybe RecordXXXX since we record the command in the commandContext",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 28
+      },
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0403f7a7_17008289",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "ditto (RecordXXX and the implementation details to remove from this header)",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3460df4_2f8c277a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "nit: the Region naming (here and for T2B) is misleading since we are only testing full copies. Maybe use Texture3DFull?",
+      "range": {
+        "startLine": 1406,
+        "startChar": 31,
+        "endLine": 1406,
+        "endChar": 37
+      },
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9652a6a5_3217c8b9",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T15:20:54Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
