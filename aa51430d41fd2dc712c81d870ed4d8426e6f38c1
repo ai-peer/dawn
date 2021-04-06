@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4693675b_c772937a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-06T22:47:34Z",
+      "side": 1,
+      "message": "This is my first stab at filling out the CompilationInfo with something useful. It\u0027s slightly awkward, and I\u0027m open to suggestions on improving it. A few things that may or may not be a concern off the top of my head:\n\n - If messages are generated during validation but the validation succeeds they\u0027re currently being discarded. (Only error ShaderModules get the validation messages.) I can fix this, but it also looks like some of the validation is being re-run when a valid ShaderModule is created, so it\u0027s possible we\u0027re getting them anyway?\n - ShaderModuleMTL may miss out on some messages because part of the shader is generated at RenderPipeline creation time, and I currently have a restriction that messages can\u0027t be added after the CompilationMessages are able to be queried.\n - There\u0027s a whole pile of Validation errors that aren\u0027t directly from Tint that this system ignores currently. And maybe that\u0027s working as intended? I\u0027m not sure.\n\nAnyway, I\u0027d love some feedback!",
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
