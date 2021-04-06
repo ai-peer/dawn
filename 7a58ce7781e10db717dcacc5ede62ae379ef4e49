@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca85e893_a47830eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T12:03:02Z",
+      "side": 1,
+      "message": "LGTM still!",
+      "revId": "7a58ce7781e10db717dcacc5ede62ae379ef4e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65afbe8_595afad8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T12:03:02Z",
+      "side": 1,
+      "message": "nit: ResultOrError\u003cRef\u003cLayout\u003e\u003e ?",
+      "revId": "7a58ce7781e10db717dcacc5ede62ae379ef4e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c39da0_31ac1842",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T12:03:02Z",
+      "side": 1,
+      "message": "nit: And maybe check that is !UseWire the two pipelines returned the same object?",
+      "revId": "7a58ce7781e10db717dcacc5ede62ae379ef4e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
