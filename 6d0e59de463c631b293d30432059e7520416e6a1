@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "564c0956_a1a13c93",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-06T08:42:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db363c0e_c60b8f16",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc5d756c_67f4f780",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-04-02T05:56:08Z",
       "side": 1,
       "message": "I wish we could factor this code into a \"ValidateAndGetDescriptorWithDefaults\" helper that CreateComputePipelineInternal also calls.\n\nBut then we would need an out pointer for the layoutRef. Maybe that\u0027s not so bad?",
+      "range": {
+        "startLine": 1121,
+        "startChar": 8,
+        "endLine": 1136,
+        "endChar": 9
+      },
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2d7262f_b6bc2826",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-06T08:42:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc5d756c_67f4f780",
       "range": {
         "startLine": 1121,
         "startChar": 8,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0ee4971_4e9c53d5",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-06T08:42:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89c8df78_1aaabfb9",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10e88fa7_5c6815ac",
@@ -105,6 +165,24 @@
       "writtenOn": "2021-04-02T07:08:16Z",
       "side": 1,
       "message": "Can we have a small test for the race condition mentioned in the previous patchset?",
+      "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05b9a8c_de58590b",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-06T08:42:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "10e88fa7_5c6815ac",
       "revId": "6d0e59de463c631b293d30432059e7520416e6a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
