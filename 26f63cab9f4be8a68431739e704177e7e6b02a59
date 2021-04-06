@@ -16,6 +16,23 @@
       "message": "Thanks for your review, Austin. \n\nBrandon, I will add you into CC list for all copy related changes and remove Bryan out of the list. Feel free to review the code. ",
       "revId": "26f63cab9f4be8a68431739e704177e7e6b02a59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feca1647_d3ed68a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T09:19:28Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "26f63cab9f4be8a68431739e704177e7e6b02a59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
