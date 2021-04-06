@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a8134b_6f17b426",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T09:37:36Z",
+      "side": 1,
+      "message": "Any chance to have wire tests for device lost, reentrant call, etc?",
+      "revId": "6f2bbe9896aa345fa50b8d5fb0c4d355322c1719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7115c684_c4fdcdcc",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T09:37:36Z",
+      "side": 1,
+      "message": "nit: GetCompilationMessagesForTesting?",
+      "revId": "6f2bbe9896aa345fa50b8d5fb0c4d355322c1719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
