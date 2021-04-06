@@ -58,7 +58,9 @@ namespace dawn_native {
         DAWN_TRY(ValidateAddressMode(descriptor->addressModeU));
         DAWN_TRY(ValidateAddressMode(descriptor->addressModeV));
         DAWN_TRY(ValidateAddressMode(descriptor->addressModeW));
-        DAWN_TRY(ValidateCompareFunction(descriptor->compare));
+        if (descriptor->compare != wgpu::CompareFunction::Undefined) {
+            DAWN_TRY(ValidateCompareFunction(descriptor->compare));
+        }
         return {};
     }
 
