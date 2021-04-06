@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1e719c3_0a52e4a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-06T15:24:46Z",
+      "side": 1,
+      "message": "Ah whoops - I had mentioned doing this as well but forgot about it.",
+      "parentUuid": "49a8134b_6f17b426",
+      "revId": "6f2bbe9896aa345fa50b8d5fb0c4d355322c1719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7115c684_c4fdcdcc",
