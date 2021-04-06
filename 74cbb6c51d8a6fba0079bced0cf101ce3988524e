@@ -16,6 +16,40 @@
       "message": "Looks like you missed this simple change... It should be OK to land. ",
       "revId": "74cbb6c51d8a6fba0079bced0cf101ce3988524e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "036b55a1_f574a85b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-06T17:28:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "74cbb6c51d8a6fba0079bced0cf101ce3988524e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b9ce131_19ad7f9c",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-06T17:28:04Z",
+      "side": 1,
+      "message": "nit: many of these values are the default - do we really need the helper function to produce a descriptor?",
+      "revId": "74cbb6c51d8a6fba0079bced0cf101ce3988524e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
