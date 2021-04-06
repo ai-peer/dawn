@@ -50,6 +50,24 @@
       "message": "nit: many of these values are the default - do we really need the helper function to produce a descriptor?",
       "revId": "74cbb6c51d8a6fba0079bced0cf101ce3988524e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "042b05bc_ce4ef5b7",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-06T17:49:38Z",
+      "side": 1,
+      "message": "Done. \nHmm, I remember that we are using similar helper functions in tests so I put one here. But UnsafeAPIValidationTests actually are some temporary tests, so a helper function may not help anything at all (it will be removed soon if we progress fast). And it is repeating default values, so it makes sense to remove it.",
+      "parentUuid": "4b9ce131_19ad7f9c",
+      "revId": "74cbb6c51d8a6fba0079bced0cf101ce3988524e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
