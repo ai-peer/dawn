@@ -50,11 +50,11 @@ if (!defined(dawn_googletest_dir)) {
 }
 
 if (!defined(dawn_spirv_cross_dir)) {
-  dawn_spirv_cross_dir = "//third_party/vulkan-deps/spirv-cross/src"
+  dawn_spirv_cross_dir = "//third_party/dawn-vulkan-deps/spirv-cross/src"
 }
 
 if (!defined(dawn_spirv_tools_dir)) {
-  dawn_spirv_tools_dir = "//third_party/vulkan-deps/spirv-tools/src"
+  dawn_spirv_tools_dir = "//third_party/dawn-vulkan-deps/spirv-tools/src"
 }
 
 if (!defined(dawn_swiftshader_dir)) {

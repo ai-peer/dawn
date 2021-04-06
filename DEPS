@@ -126,7 +126,7 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
-  'third_party/vulkan-deps': {
+  'third_party/dawn-vulkan-deps': {
     'url': '{chromium_git}/vulkan-deps@105af117f0532953577198cc9bd8ee6f76c29009',
     'condition': 'dawn_standalone',
   },
@@ -232,5 +232,5 @@ hooks = [
 ]
 
 recursedeps = [
-  'third_party/vulkan-deps',
+  'third_party/dawn-vulkan-deps',
 ]

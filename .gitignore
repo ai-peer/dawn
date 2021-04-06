@@ -18,7 +18,7 @@ third_party/llvm-build
 third_party/markupsafe/
 third_party/swiftshader/
 third_party/tint/
-third_party/vulkan-deps/
+third_party/dawn-vulkan-deps/
 third_party/vulkan_memory_allocator/
 third_party/zlib/
 tools
