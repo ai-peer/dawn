@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4d77671_2d9e792b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T13:53:36Z",
+      "side": 1,
+      "message": "PTAL, sorry for the churn, jmadill@ commented on the similar Chromium change that we should use .gn instead of build_overrides now, which makes more sense. So I\u0027m changing all the VMA-related CLs to use .gn instead.",
+      "revId": "d222508794e4f9eafb40a02b32f4cfeb1c974110",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
