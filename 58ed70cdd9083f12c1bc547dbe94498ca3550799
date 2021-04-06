@@ -156,6 +156,24 @@
       "parentUuid": "7ee804e6_84250509",
       "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d8011e_cb19698f",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-06T09:25:34Z",
+      "side": 1,
+      "message": "Either way sounds good",
+      "parentUuid": "6cc5a678_fbca21b5",
+      "revId": "58ed70cdd9083f12c1bc547dbe94498ca3550799",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
