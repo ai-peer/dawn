@@ -122,10 +122,10 @@ namespace dawn_native {
                     return DAWN_VALIDATION_ERROR("Multisampled texture must be 2D with depth=1");
                 }
 
-                if (format->isCompressed) {
-                    return DAWN_VALIDATION_ERROR(
-                        "The sample counts of the textures in BC formats must be 1.");
+                if (!format->isRenderable) {
+                    return DAWN_VALIDATION_ERROR("This format cannot support multisample.");
                 }
+                ASSERT(!format->isCompressed);
 
                 if (descriptor->usage & wgpu::TextureUsage::Storage) {
                     return DAWN_VALIDATION_ERROR(
