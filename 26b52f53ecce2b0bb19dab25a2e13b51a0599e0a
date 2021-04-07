@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "179e016c_f9fb1c3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T21:46:18Z",
+      "side": 1,
+      "message": "LGTM! I\u0027ll look into removing this hack..",
+      "revId": "26b52f53ecce2b0bb19dab25a2e13b51a0599e0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
