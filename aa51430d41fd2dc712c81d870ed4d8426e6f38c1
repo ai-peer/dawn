@@ -37,6 +37,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90fa83dc_96479b42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-07T02:25:18Z",
+      "side": 1,
+      "message": "If createShaderModule fails any kind of validation, there should be an error scope error, which doesn\u0027t need to (and probably shouldn\u0027t) contain any specific shader source error _messages_.\n\nIf there were any errors in the shader source, they should _also_ be surfaced in the compilation info.",
+      "parentUuid": "1615f9a6_ee5eb941",
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31eccd5b_ad3f6f20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-07T02:25:18Z",
+      "side": 1,
+      "message": "Partially reviewed but Austin\u0027s suggestions seem pretty structural so holding off before actually trying to totally understand the data flow here.",
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0573b699_6c01e132",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 2
@@ -71,6 +106,30 @@
       "writtenOn": "2021-04-07T00:33:38Z",
       "side": 1,
       "message": "interesting.. so this would be the one error object you can actually do something with (call getCompilationInfo). Correct me if I\u0027m wrong, but this would have to be an exception** to the rest of the internal nullability stuff in the spec - which I don\u0027t think has been written yet.\n\nIt probably does make sense for it to be an exception because failed creation is probably one of the most important times to get structured information about why it failed.\n\nNow we already have ShaderModuleParseResult that gets passed in down the call tree, but it\u0027s created slightly later in CreateShaderModuleInternal. What do you think about moving it up to here, and putting |messages| as a member of it? That might simplify the handling of your TODO around [1].\n\nWe wouldn\u0027t need the localParseResult thing and instead have ValidateShaderModuleDescriptor accept the parseResult by pointer, instead of returning it.\n\nAlso think it might fix the potential problem at [2].\n\n**I guess a potential way to spec this without making an exception for internal nullability is to say \"shader module creation never produces an error\" but sometimes produces an \"invalid\" shader module.",
+      "range": {
+        "startLine": 886,
+        "startChar": 8,
+        "endLine": 891,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b73d47db_21f148e5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-07T02:25:18Z",
+      "side": 1,
+      "message": "I don\u0027t think there will be any problem at the spec level; invalid shader module objects are still objects and we can still hang error information off of them. The difference is only that when you call getCompilationInfo, it won\u0027t result in a check for object validity. This makes sense because getCompilationInfo is not a GPU command of any kind, it\u0027s a reflection API.\n\nWe also are unlikely to spec this area very strictly since the error messages themselves will be implementation dependent.",
+      "parentUuid": "09145e12_05aa876a",
       "range": {
         "startLine": 886,
         "startChar": 8,
