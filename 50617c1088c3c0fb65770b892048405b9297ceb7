@@ -50,6 +50,23 @@
       "message": "LGTM too",
       "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04514886_95d3f41b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T16:59:04Z",
+      "side": 1,
+      "message": "Thanks, merging now. The last step is to remove the skipped tests.",
+      "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
