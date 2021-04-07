@@ -16,6 +16,23 @@
       "message": "Bots can pass after CTS roll-in and WebGPUExpectation updates from https://chromium-review.googlesource.com/c/chromium/src/+/2806671. \n\nPTAL. Thanks! ",
       "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be39e9e_f6c72257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-07T07:57:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
