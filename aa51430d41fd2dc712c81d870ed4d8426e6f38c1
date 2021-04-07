@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "305f24ae_f1bfc5f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "I\u0027m semi of the opinion that we shouldn\u0027t be putting messages about the shader source in error scope errors, but I\u0027d like to have a larger conversation about it. Especially around how much we should lean into having descriptive errors output to the console by default.\n\nIn the meantime I\u0027m favoring leaving it be because as Kai said it is failing validation and so SOME error should be produced, and duplicating message text isn\u0027t the worst thing in the world.\n\nI definitely want to follow up on this though!",
+      "parentUuid": "90fa83dc_96479b42",
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0573b699_6c01e132",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 2
@@ -83,6 +101,30 @@
       "writtenOn": "2021-04-07T00:33:38Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 613,
+        "endChar": 38
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7ab41a_4a8311cf",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0573b699_6c01e132",
       "range": {
         "startLine": 613,
         "startChar": 0,
@@ -140,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8647a380_ffde4355",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "\u003e Now we already have ShaderModuleParseResult that gets passed in down the call tree, but it\u0027s created slightly later in CreateShaderModuleInternal. What do you think about moving it up to here, and putting |messages| as a member of it?\n\nAh, I had to read through the code a few times to figure out how this all ties together but I see what you mean now. Gave it a try, let me know what you think.\n\nOn a related note: It\u0027s very confusing that we have validation that can be skipped, but if we skip it then we run the exact same validation code again just one level down the call stack because we need the side effects that the validation generates anyway. It would be much clearer in my opinion if we simply called the validation function in CreateShaderModuleInternal all the time with a comment to explain that even when skipping validation we need the ParseResults.",
+      "parentUuid": "b73d47db_21f148e5",
+      "range": {
+        "startLine": 886,
+        "startChar": 8,
+        "endLine": 891,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f54e314d_3a49d3c3",
@@ -163,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0390833_8d17e9c5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f54e314d_3a49d3c3",
+      "range": {
+        "startLine": 1184,
+        "startChar": 39,
+        "endLine": 1184,
+        "endChar": 65
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd8be05c_ed548e30",
@@ -176,6 +266,30 @@
       "writtenOn": "2021-04-07T00:33:38Z",
       "side": 1,
       "message": "nit: overall, Dawn prefers the explicit comparison \"!\u003d nullptr\"",
+      "range": {
+        "startLine": 399,
+        "startChar": 16,
+        "endLine": 399,
+        "endChar": 27
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acf86e19_f8d0041d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd8be05c_ed548e30",
       "range": {
         "startLine": 399,
         "startChar": 16,
@@ -211,6 +325,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf2a0d27_8977bc8f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "I don\u0027t know at the moment but I\u0027m going to look into it.",
+      "parentUuid": "e5388d73_74e23b06",
+      "range": {
+        "startLine": 1156,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cedb5d9b_571d1445",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 2
@@ -222,6 +360,30 @@
       "writtenOn": "2021-04-07T00:33:38Z",
       "side": 1,
       "message": "[3]",
+      "range": {
+        "startLine": 1244,
+        "startChar": 7,
+        "endLine": 1246,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7761f9c1_c96554c4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T21:55:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cedb5d9b_571d1445",
       "range": {
         "startLine": 1244,
         "startChar": 7,
