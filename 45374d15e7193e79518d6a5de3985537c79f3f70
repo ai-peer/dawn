@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1e565637_086ba1c4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T03:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c3d3e81_5b81e195",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2cf691ba_1816c77d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -92,6 +110,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3ada31b_96f7e12e",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T03:01:50Z",
+      "side": 1,
+      "message": "Done. \nI didn\u0027t do that because I feel like that we can move these helper functions to TextureCopySplitter. So I wanted to defer this code refactoring. \nLet\u0027s do that later if it is needed.\nNote that we can\u0027t move these implementation functions into anonymous namespace in .cpp file because they call into RecordXXXWithCopySplits, but RecordXXXXWithCopySplits is called by other functions outside of this file.",
+      "parentUuid": "3d9108c9_cef6fee1",
+      "range": {
+        "startLine": 47,
+        "startChar": 1,
+        "endLine": 75,
+        "endChar": 46
+      },
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51e23c0a_33c92109",
@@ -105,6 +147,30 @@
       "writtenOn": "2021-04-06T15:20:54Z",
       "side": 1,
       "message": "nit: Maybe RecordXXXX since we record the command in the commandContext",
+      "range": {
+        "startLine": 77,
+        "startChar": 9,
+        "endLine": 77,
+        "endChar": 28
+      },
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6456c188_5bf809f7",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T03:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51e23c0a_33c92109",
       "range": {
         "startLine": 77,
         "startChar": 9,
@@ -132,6 +198,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44fe2ad7_2ca0f939",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T03:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0403f7a7_17008289",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3460df4_2f8c277a",
@@ -155,6 +239,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c36bba3_395762be",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T03:01:50Z",
+      "side": 1,
+      "message": "Done.\nAlso renamed similar cases (like full copy for 2DArray textures) in this file.",
+      "parentUuid": "c3460df4_2f8c277a",
+      "range": {
+        "startLine": 1406,
+        "startChar": 31,
+        "endLine": 1406,
+        "endChar": 37
+      },
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9652a6a5_3217c8b9",
@@ -168,6 +276,24 @@
       "writtenOn": "2021-04-06T15:20:54Z",
       "side": 1,
       "message": "ditto",
+      "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5945f7d1_6bf2b9f1",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1736,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T03:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9652a6a5_3217c8b9",
       "revId": "45374d15e7193e79518d6a5de3985537c79f3f70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
