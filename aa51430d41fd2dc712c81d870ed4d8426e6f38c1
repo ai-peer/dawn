@@ -16,6 +16,161 @@
       "message": "This is my first stab at filling out the CompilationInfo with something useful. It\u0027s slightly awkward, and I\u0027m open to suggestions on improving it. A few things that may or may not be a concern off the top of my head:\n\n - If messages are generated during validation but the validation succeeds they\u0027re currently being discarded. (Only error ShaderModules get the validation messages.) I can fix this, but it also looks like some of the validation is being re-run when a valid ShaderModule is created, so it\u0027s possible we\u0027re getting them anyway?\n - ShaderModuleMTL may miss out on some messages because part of the shader is generated at RenderPipeline creation time, and I currently have a restriction that messages can\u0027t be added after the CompilationMessages are able to be queried.\n - There\u0027s a whole pile of Validation errors that aren\u0027t directly from Tint that this system ignores currently. And maybe that\u0027s working as intended? I\u0027m not sure.\n\nAnyway, I\u0027d love some feedback!",
       "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1615f9a6_ee5eb941",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "Overall, looks good!\n\nI\u0027m not sure if validation errors are supposed to go into the compilation info, or the device error scopes, or both. Right now it seems like both. I\u0027ll let Kai chime in on that.",
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0573b699_6c01e132",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 613,
+        "endChar": 38
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09145e12_05aa876a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "interesting.. so this would be the one error object you can actually do something with (call getCompilationInfo). Correct me if I\u0027m wrong, but this would have to be an exception** to the rest of the internal nullability stuff in the spec - which I don\u0027t think has been written yet.\n\nIt probably does make sense for it to be an exception because failed creation is probably one of the most important times to get structured information about why it failed.\n\nNow we already have ShaderModuleParseResult that gets passed in down the call tree, but it\u0027s created slightly later in CreateShaderModuleInternal. What do you think about moving it up to here, and putting |messages| as a member of it? That might simplify the handling of your TODO around [1].\n\nWe wouldn\u0027t need the localParseResult thing and instead have ValidateShaderModuleDescriptor accept the parseResult by pointer, instead of returning it.\n\nAlso think it might fix the potential problem at [2].\n\n**I guess a potential way to spec this without making an exception for internal nullability is to say \"shader module creation never produces an error\" but sometimes produces an \"invalid\" shader module.",
+      "range": {
+        "startLine": 886,
+        "startChar": 8,
+        "endLine": 891,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f54e314d_3a49d3c3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1184,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "[2] we don\u0027t pass messages in here - but instead recreate OwnedCompilationMessages at [3]. I think that means if anything produces a message that is not a validation error before this point (warnings? maybe? not sure if Tint does that), then we\u0027ll silently drop them.",
+      "range": {
+        "startLine": 1184,
+        "startChar": 39,
+        "endLine": 1184,
+        "endChar": 65
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd8be05c_ed548e30",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "nit: overall, Dawn prefers the explicit comparison \"!\u003d nullptr\"",
+      "range": {
+        "startLine": 399,
+        "startChar": 16,
+        "endLine": 399,
+        "endChar": 27
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5388d73_74e23b06",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "Could we clarify that output.program does NOT inherit diagnostics from the input program? If it did, then we would be duplicating messages. I think the same question applies for tint::Validator::Validate as well.",
+      "range": {
+        "startLine": 1156,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cedb5d9b_571d1445",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1246,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T00:33:38Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 1244,
+        "startChar": 7,
+        "endLine": 1246,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
