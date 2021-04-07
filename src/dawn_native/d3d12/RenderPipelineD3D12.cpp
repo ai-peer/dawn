@@ -145,24 +145,24 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        D3D12_BLEND D3D12Blend(wgpu::BlendFactor factor) {
+        D3D12_BLEND D3D12Blend(wgpu::BlendFactor factor, bool alpha) {
             switch (factor) {
                 case wgpu::BlendFactor::Zero:
                     return D3D12_BLEND_ZERO;
                 case wgpu::BlendFactor::One:
                     return D3D12_BLEND_ONE;
                 case wgpu::BlendFactor::SrcColor:
-                    return D3D12_BLEND_SRC_COLOR;
+                    return alpha ? D3D12_BLEND_SRC_ALPHA : D3D12_BLEND_SRC_COLOR;
                 case wgpu::BlendFactor::OneMinusSrcColor:
-                    return D3D12_BLEND_INV_SRC_COLOR;
+                    return alpha ? D3D12_BLEND_INV_SRC_ALPHA : D3D12_BLEND_INV_SRC_COLOR;
                 case wgpu::BlendFactor::SrcAlpha:
                     return D3D12_BLEND_SRC_ALPHA;
                 case wgpu::BlendFactor::OneMinusSrcAlpha:
                     return D3D12_BLEND_INV_SRC_ALPHA;
                 case wgpu::BlendFactor::DstColor:
-                    return D3D12_BLEND_DEST_COLOR;
+                    return alpha ? D3D12_BLEND_DEST_ALPHA : D3D12_BLEND_DEST_COLOR;
                 case wgpu::BlendFactor::OneMinusDstColor:
-                    return D3D12_BLEND_INV_DEST_COLOR;
+                    return alpha ? D3D12_BLEND_INV_DEST_ALPHA : D3D12_BLEND_INV_DEST_COLOR;
                 case wgpu::BlendFactor::DstAlpha:
                     return D3D12_BLEND_DEST_ALPHA;
                 case wgpu::BlendFactor::OneMinusDstAlpha:
@@ -207,15 +207,15 @@ namespace dawn_native { namespace d3d12 {
             return static_cast<uint8_t>(writeMask);
         }
 
-        D3D12_RENDER_TARGET_BLEND_DESC ComputeColorDesc(const ColorTargetState* state) {
+        D3D12_RENDER_TARGET_BLEND_DESC D3D12BlendDesc(const ColorTargetState* state) {
             D3D12_RENDER_TARGET_BLEND_DESC blendDesc;
             blendDesc.BlendEnable = state->blend != nullptr;
             if (blendDesc.BlendEnable) {
-                blendDesc.SrcBlend = D3D12Blend(state->blend->color.srcFactor);
-                blendDesc.DestBlend = D3D12Blend(state->blend->color.dstFactor);
+                blendDesc.SrcBlend = D3D12Blend(state->blend->color.srcFactor, false);
+                blendDesc.DestBlend = D3D12Blend(state->blend->color.dstFactor, false);
                 blendDesc.BlendOp = D3D12BlendOperation(state->blend->color.operation);
-                blendDesc.SrcBlendAlpha = D3D12Blend(state->blend->alpha.srcFactor);
-                blendDesc.DestBlendAlpha = D3D12Blend(state->blend->alpha.dstFactor);
+                blendDesc.SrcBlendAlpha = D3D12Blend(state->blend->alpha.srcFactor, true);
+                blendDesc.DestBlendAlpha = D3D12Blend(state->blend->alpha.dstFactor, true);
                 blendDesc.BlendOpAlpha = D3D12BlendOperation(state->blend->alpha.operation);
             }
             blendDesc.RenderTargetWriteMask = D3D12RenderTargetWriteMask(state->writeMask);
@@ -373,7 +373,7 @@ namespace dawn_native { namespace d3d12 {
             descriptorD3D12.RTVFormats[static_cast<uint8_t>(i)] =
                 D3D12TextureFormat(GetColorAttachmentFormat(i));
             descriptorD3D12.BlendState.RenderTarget[static_cast<uint8_t>(i)] =
-                ComputeColorDesc(GetColorTargetState(i));
+                D3D12BlendDesc(GetColorTargetState(i));
         }
         descriptorD3D12.NumRenderTargets = static_cast<uint32_t>(GetColorAttachmentsMask().count());
 
