@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2b2b6c9_2b929b2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-04-07T20:10:32Z",
+      "side": 1,
+      "message": "I\u0027d change this to say \"Validation is now automatically performed, and the Validator class is now redundant...\"",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 30
+      },
+      "revId": "2f2237c5629f4a6bc8f426287b1a28a61e031b49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
