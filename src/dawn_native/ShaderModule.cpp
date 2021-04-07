@@ -420,20 +420,6 @@ namespace dawn_native {
             return std::move(program);
         }
 
-        MaybeError ValidateModule(const tint::Program* program) {
-            std::ostringstream errorStream;
-            errorStream << "Tint program validation" << std::endl;
-
-            tint::Validator validator;
-            if (!validator.Validate(program)) {
-                auto err = validator.diagnostics().str();
-                errorStream << "Validation: " << err << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-
-            return {};
-        }
-
         ResultOrError<std::vector<uint32_t>> ModuleToSPIRV(const tint::Program* program) {
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V writer failure:" << std::endl;
@@ -1071,9 +1057,6 @@ namespace dawn_native {
                 if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
                     tint::Program program;
                     DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv));
-                    if (device->IsValidationEnabled()) {
-                        DAWN_TRY(ValidateModule(&program));
-                    }
                     parseResult.tintProgram = std::make_unique<tint::Program>(std::move(program));
                 } else {
                     if (device->IsValidationEnabled()) {
@@ -1094,9 +1077,6 @@ namespace dawn_native {
                 DAWN_TRY_ASSIGN(program, ParseWGSL(&file));
 
                 if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
-                    if (device->IsValidationEnabled()) {
-                        DAWN_TRY(ValidateModule(&program));
-                    }
                     parseResult.tintProgram = std::make_unique<tint::Program>(std::move(program));
                 } else {
                     tint::transform::Manager transformManager;
@@ -1104,10 +1084,6 @@ namespace dawn_native {
                         std::make_unique<tint::transform::EmitVertexPointSize>());
                     transformManager.append(std::make_unique<tint::transform::Spirv>());
                     DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program));
-
-                    if (device->IsValidationEnabled()) {
-                        DAWN_TRY(ValidateModule(&program));
-                    }
 
                     std::vector<uint32_t> spirv;
                     DAWN_TRY_ASSIGN(spirv, ModuleToSPIRV(&program));
