@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/CachedBlob.h"
 #include "dawn_platform/WorkerThread.h"
 
 #include "common/Assert.h"
@@ -58,6 +59,60 @@ namespace dawn_platform {
 
     std::unique_ptr<dawn_platform::WorkerTaskPool> Platform::CreateWorkerTaskPool() {
         return std::make_unique<AsyncWorkerThreadPool>();
+    }
+
+    ScopedCachedData Platform::CreateCachedData(const uint8_t* data, size_t size) const {
+        return ScopedCachedData(new CachedBlob(data, size));
+    }
+
+    ScopedCachedData::ScopedCachedData(CachedData* blob) : mBlob(blob) {
+    }
+
+    ScopedCachedData::ScopedCachedData(const ScopedCachedData& other) {
+        ReferenceCachedData(other.mBlob);
+        ReleaseCachedData(mBlob);
+        mBlob = other.mBlob;
+    }
+
+    ScopedCachedData::~ScopedCachedData() {
+        ReleaseCachedData(mBlob);
+    }
+
+    bool ScopedCachedData::operator!=(const ScopedCachedData& other) const {
+        return mBlob != other.mBlob;
+    }
+
+    bool ScopedCachedData::operator==(const ScopedCachedData& other) const {
+        return mBlob == other.mBlob;
+    }
+
+    ScopedCachedData& ScopedCachedData::operator=(const ScopedCachedData& other) {
+        if (&other != this) {
+            ReferenceCachedData(other.mBlob);
+            ReleaseCachedData(mBlob);
+            mBlob = other.mBlob;
+        }
+        return *this;
+    }
+
+    CachedData* ScopedCachedData::operator->() const {
+        return mBlob;
+    }
+
+    CachedData* ScopedCachedData::Get() const {
+        return mBlob;
+    }
+
+    void ScopedCachedData::ReferenceCachedData(CachedData* blob) const {
+        if (blob != nullptr) {
+            blob->Reference();
+        }
+    }
+
+    void ScopedCachedData::ReleaseCachedData(CachedData* blob) const {
+        if (blob != nullptr) {
+            blob->Release();
+        }
     }
 
 }  // namespace dawn_platform

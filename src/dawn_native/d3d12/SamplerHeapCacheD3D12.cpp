@@ -50,7 +50,7 @@ namespace dawn_native { namespace d3d12 {
     SamplerHeapCacheEntry::~SamplerHeapCacheEntry() {
         // If this is a blueprint then the CPU allocation cannot exist and has no entry to remove.
         if (mCPUAllocation.IsValid()) {
-            mCache->RemoveCacheEntry(this);
+            mCache->RemovePipelineCache(this);
             mAllocator->Deallocate(&mCPUAllocation);
         }
 
@@ -145,7 +145,7 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(mCache.empty());
     }
 
-    void SamplerHeapCache::RemoveCacheEntry(SamplerHeapCacheEntry* entry) {
+    void SamplerHeapCache::RemovePipelineCache(SamplerHeapCacheEntry* entry) {
         ASSERT(entry->GetRefCountForTesting() == 0);
         size_t removedCount = mCache.erase(entry);
         ASSERT(removedCount == 1);

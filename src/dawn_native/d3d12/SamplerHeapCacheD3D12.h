@@ -90,7 +90,7 @@ namespace dawn_native { namespace d3d12 {
             const BindGroup* group,
             StagingDescriptorAllocator* samplerAllocator);
 
-        void RemoveCacheEntry(SamplerHeapCacheEntry* entry);
+        void RemovePipelineCache(SamplerHeapCacheEntry* entry);
 
       private:
         Device* mDevice;
