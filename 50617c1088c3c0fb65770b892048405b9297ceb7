@@ -67,6 +67,24 @@
       "message": "Thanks, merging now. The last step is to remove the skipped tests.",
       "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "183d5f60_5e7a54a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T17:06:44Z",
+      "side": 1,
+      "message": "Before I remove the skipped tests in WebGPUExpectation in Chromium, I need to roll latest Dawn (including this change) into Chromium. How can I do that?",
+      "parentUuid": "04514886_95d3f41b",
+      "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
