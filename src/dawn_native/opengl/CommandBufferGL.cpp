@@ -630,10 +630,9 @@ namespace dawn_native { namespace opengl {
                     gl.BindBuffer(GL_PIXEL_UNPACK_BUFFER, buffer->GetHandle());
 
                     TextureDataLayout dataLayout;
-                    dataLayout.offset = src.offset;
+                    dataLayout.offset = 0;
                     dataLayout.bytesPerRow = src.bytesPerRow;
                     dataLayout.rowsPerImage = src.rowsPerImage;
-                    UploadTexture(gl, dst, reinterpret_cast<void*>(src.offset), dataLayout, copySize);
                     gl.ActiveTexture(GL_TEXTURE0);
                     gl.BindTexture(target, texture->GetHandle());
 
@@ -651,52 +650,7 @@ namespace dawn_native { namespace opengl {
                         // See OpenGL ES 3.2 SPEC Chapter 8.4.1, "Pixel Storage Modes and Pixel
                         // Buffer Objects" for more details.
                         if (gl.GetVersion().IsES()) {
-                            uint64_t copyDataSizePerBlockRow =
-                                (copySize.width / blockInfo.width) * blockInfo.byteSize;
-                            size_t copyBlockRowsPerImage = copySize.height / blockInfo.height;
-
-                            if (texture->GetArrayLayers() > 1) {
-                                // TODO(jiawei.shao@intel.com): do a single copy when the data is
-                                // correctly packed.
-                                for (size_t copyZ = 0; copyZ < copyExtent.depthOrArrayLayers;
-                                     ++copyZ) {
-                                    uintptr_t offsetPerImage = static_cast<uintptr_t>(
-                                        src.offset + copyZ * src.bytesPerRow * src.rowsPerImage);
-                                    uint32_t dstOriginY = dst.origin.y;
-                                    uint32_t dstOriginZ = dst.origin.z + copyZ;
-
-                                    for (size_t copyBlockRow = 0;
-                                         copyBlockRow < copyBlockRowsPerImage; ++copyBlockRow) {
-                                        gl.CompressedTexSubImage3D(
-                                            target, dst.mipLevel, dst.origin.x, dstOriginY,
-                                            dstOriginZ, copyExtent.width, blockInfo.height, 1,
-                                            format.internalFormat, copyDataSizePerBlockRow,
-                                            reinterpret_cast<void*>(
-                                                static_cast<uintptr_t>(offsetPerImage)));
-
-                                        offsetPerImage += src.bytesPerRow;
-                                        dstOriginY += blockInfo.height;
-                                    }
-                                }
-                            } else {
-                                uintptr_t offset = static_cast<uintptr_t>(src.offset);
-                                uint32_t dstOriginY = dst.origin.y;
-
-                                // TODO(jiawei.shao@intel.com): do a single copy when the data is
-                                // correctly packed.
-                                for (size_t copyBlockRow = 0; copyBlockRow < copyBlockRowsPerImage;
-                                     ++copyBlockRow) {
-                                    gl.CompressedTexSubImage2D(
-                                        target, dst.mipLevel, dst.origin.x, dstOriginY,
-                                        copyExtent.width, blockInfo.height, format.internalFormat,
-                                        copyDataSizePerBlockRow,
-                                        reinterpret_cast<void*>(static_cast<uintptr_t>(offset)));
-
-                                    offset += src.bytesPerRow;
-                                    dstOriginY += blockInfo.height;
-                                }
-                            }
-
+                            UploadTexture(gl, dst, reinterpret_cast<void*>(src.offset), dataLayout, copySize);
                         } else {
                             gl.PixelStorei(GL_UNPACK_ROW_LENGTH,
                                            src.bytesPerRow / blockInfo.byteSize * blockInfo.width);
