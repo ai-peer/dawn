@@ -14,6 +14,7 @@
 
 #include "tests/DawnTest.h"
 
+#include "dawn_native/D3D12Backend.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
@@ -25,6 +26,21 @@
         size_t after = mPersistentCache.mHitCount;  \
         EXPECT_EQ(N, after - before);               \
     } while (0)
+
+#define EXPECT_PSO_CACHE_HIT_DEVICE(N, statement, wgpuDevice)                               \
+    do {                                                                                    \
+        if (UsesWire()) {                                                                   \
+            statement;                                                                      \
+            FlushWire();                                                                    \
+        } else {                                                                            \
+            size_t before = dawn_native::d3d12::GetPipelineCacheHitCount(wgpuDevice.Get()); \
+            statement;                                                                      \
+            size_t after = dawn_native::d3d12::GetPipelineCacheHitCount(wgpuDevice.Get());  \
+            EXPECT_EQ(N, after - before);                                                   \
+        }                                                                                   \
+    } while (0)
+
+#define EXPECT_PSO_CACHE_HIT(N, statement) EXPECT_PSO_CACHE_HIT_DEVICE(N, statement, device)
 
 // FakePersistentCache implements a in-memory persistent cache.
 class FakePersistentCache : public dawn_platform::CachingInterface {
@@ -40,30 +56,28 @@ class FakePersistentCache : public dawn_platform::CachingInterface {
         const std::string keyStr(reinterpret_cast<const char*>(key), keySize);
 
         const uint8_t* value_start = reinterpret_cast<const uint8_t*>(value);
-        std::vector<uint8_t> entry_value(value_start, value_start + valueSize);
+
+        dawn_platform::Platform platform;
+        dawn_platform::ScopedCachedBlob entry_value =
+            platform.CreateCachedBlob(value_start, valueSize);
 
         EXPECT_TRUE(mCache.insert({keyStr, std::move(entry_value)}).second);
     }
 
-    size_t LoadData(const WGPUDevice device,
-                    const void* key,
-                    size_t keySize,
-                    void* value,
-                    size_t valueSize) override {
+    dawn_platform::ScopedCachedBlob LoadData(const WGPUDevice device,
+                                             const void* key,
+                                             size_t keySize) override {
         const std::string keyStr(reinterpret_cast<const char*>(key), keySize);
         auto entry = mCache.find(keyStr);
         if (entry == mCache.end()) {
-            return 0;
-        }
-        if (valueSize >= entry->second.size()) {
-            memcpy(value, entry->second.data(), entry->second.size());
+            return {};
         }
         mHitCount++;
-        return entry->second.size();
+        return entry->second;
     }
 
     using Blob = std::vector<uint8_t>;
-    using FakeCache = std::unordered_map<std::string, Blob>;
+    using FakeCache = std::unordered_map<std::string, dawn_platform::ScopedCachedBlob>;
 
     FakeCache mCache;
 
@@ -94,6 +108,76 @@ class D3D12CachingTests : public DawnTest {
     }
 
     FakePersistentCache mPersistentCache;
+
+    void SetUp() override {
+        DawnTest::SetUp();
+
+        // Clear the persistent cache after SetUp to ensure the cache is always empty before running
+        // the test. This is to ensure the tests continue running independently from each other.
+        mPersistentCache.mCache.clear();
+    }
+
+    void TearDown() override {
+        DawnTest::TearDown();
+
+        // Disable the persistent cache after TearDown to prevent the default device shutdown from
+        // overwriting the pipeline cache data stored upon SetUp(). This is to ensure each test can
+        // verify data being persistently stored is always unique.
+        mPersistentCache.mIsDisabled = true;
+    }
+
+    wgpu::ComputePipeline CreateTestComputePipeline(wgpu::Device otherDevice) const {
+        wgpu::ShaderModule module = utils::CreateShaderModule(otherDevice, R"(
+            [[block]] struct Data {
+                [[offset(0)]] data : u32;
+            };
+            [[binding(0), group(0)]] var<storage_buffer> data : Data;
+
+            [[stage(compute)]] fn main() -> void {
+                data.data = 1u;
+                return;
+            }
+        )");
+
+        wgpu::ComputePipelineDescriptor desc;
+        desc.computeStage.module = module;
+        desc.computeStage.entryPoint = "main";
+        return otherDevice.CreateComputePipeline(&desc);
+    }
+
+    wgpu::RenderPipeline CreateTestRenderPipeline(
+        wgpu::Device otherDevice,
+        wgpu::PrimitiveTopology primitiveTopology = wgpu::PrimitiveTopology::TriangleList) const {
+        wgpu::ShaderModule module = utils::CreateShaderModule(otherDevice, R"(
+            [[builtin(position)]] var<out> Position : vec4<f32>;
+
+            [[stage(vertex)]] fn vertex_main() -> void {
+                Position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+                return;
+            }
+
+            [[stage(vertex)]] fn vertex_main2() -> void {
+                Position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
+                return;
+            }
+
+            [[location(0)]] var<out> outColor : vec4<f32>;
+
+            [[stage(fragment)]] fn fragment_main() -> void {
+            outColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
+            return;
+            }
+        )");
+
+        utils::ComboRenderPipelineDescriptor2 desc;
+        desc.primitive.topology = primitiveTopology;
+        desc.vertex.module = module;
+        desc.vertex.entryPoint = "vertex_main";
+        desc.cFragment.module = module;
+        desc.cFragment.entryPoint = "fragment_main";
+
+        return otherDevice.CreateRenderPipeline2(&desc);
+    }
 };
 
 // Test that duplicate WGSL still re-compiles HLSL even when the cache is not enabled.
@@ -184,9 +268,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
         desc.cFragment.module = module;
         desc.cFragment.entryPoint = "fragment_main";
 
-        // Cached HLSL shader calls LoadData twice (once to peek, again to get), so check 2 x
-        // kNumOfShaders hits.
-        EXPECT_CACHE_HIT(4u, device.CreateRenderPipeline2(&desc));
+        EXPECT_CACHE_HIT(2u, device.CreateRenderPipeline2(&desc));
     }
 
     EXPECT_EQ(mPersistentCache.mCache.size(), 2u);
@@ -262,18 +344,156 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPoints) {
         desc.computeStage.module = module;
         desc.computeStage.entryPoint = "write1";
 
-        // Cached HLSL shader calls LoadData twice (once to peek, again to get), so check 2 x
-        // kNumOfShaders hits.
-        EXPECT_CACHE_HIT(2u, device.CreateComputePipeline(&desc));
+        EXPECT_CACHE_HIT(1u, device.CreateComputePipeline(&desc));
 
         desc.computeStage.module = module;
         desc.computeStage.entryPoint = "write42";
 
-        // Cached HLSL shader calls LoadData twice, so check 2 x kNumOfShaders hits.
-        EXPECT_CACHE_HIT(2u, device.CreateComputePipeline(&desc));
+        EXPECT_CACHE_HIT(1u, device.CreateComputePipeline(&desc));
     }
 
     EXPECT_EQ(mPersistentCache.mCache.size(), 2u);
+}
+
+// Verify pipelines can be reused with the same device.
+// The test creates render and compute pipelines from the same device while ensuring dependant
+// shaders are persistently stored and pipelines are cached.
+TEST_P(D3D12CachingTests, ReusePipelinesSameDevice) {
+    EXPECT_EQ(mPersistentCache.mCache.size(), 0u);
+
+    // Create a render pipeline
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestRenderPipeline(device));
+
+    // Adds two entries: 1 pipeline cache blob plus 1 compute shader source.
+    EXPECT_EQ(mPersistentCache.mCache.size(), 2u);
+
+    // Create the same pipeline again.
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device));
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 2u);
+
+    // Create a sightly different render pipeline
+    wgpu::PrimitiveTopology newPrimitiveTopology = wgpu::PrimitiveTopology::PointList;
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestRenderPipeline(device, newPrimitiveTopology));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device, newPrimitiveTopology));
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 2u);
+
+    // Create a new compute pipeline
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestComputePipeline(device));
+
+    // Adds one entries: 1 compute shader source.
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+
+    // Create the first compute pipeline again.
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestComputePipeline(device));
+
+    // Create the first render pipeline again.
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device));
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+}
+
+// Verify pipelines can be reused with the same device.
+// The test creates render and compute pipelines from the same device while ensuring dependant
+// debug shaders are NOT persistently stored and pipelines are cached.
+TEST_P(D3D12CachingTests, ReusePipelinesSameDeviceDebug) {
+    DAWN_SKIP_TEST_IF(!IsDebug());
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 0u);
+
+    // Create new pipelines
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestComputePipeline(device));
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestRenderPipeline(device));
+
+    // Adds three entries: 1 compute shader source + 1 pixel shader + 1 vertex shader.
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+
+    // Create the same pipelines again
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestComputePipeline(device));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device));
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+}
+
+// Verify a pipeline cache with pipelines can be reused between devices using the persistent cache.
+// The test creates render and compute pipelines between two devices while ensuring dependant
+// shaders are persistently stored and pipelines are cached.
+TEST_P(D3D12CachingTests, ReusePipelinesMultipleDevices) {
+    DAWN_SKIP_TEST_IF(IsDebug());
+
+    wgpu::Device firstDevice = wgpu::Device::Acquire(GetAdapter().CreateDevice());
+    wgpu::Device secondDevice = wgpu::Device::Acquire(GetAdapter().CreateDevice());
+
+    // Create two new pipelines on the first device.
+    EXPECT_PSO_CACHE_HIT_DEVICE(0u, CreateTestComputePipeline(firstDevice), firstDevice);
+    EXPECT_PSO_CACHE_HIT_DEVICE(0u, CreateTestRenderPipeline(firstDevice), firstDevice);
+
+    // Reuse the same two pipelines on the second device.
+    EXPECT_PSO_CACHE_HIT_DEVICE(1u, CreateTestComputePipeline(secondDevice), secondDevice);
+    EXPECT_PSO_CACHE_HIT_DEVICE(1u, CreateTestRenderPipeline(secondDevice), secondDevice);
+
+    // Reuse the same two pipelines on the first device again.
+    EXPECT_PSO_CACHE_HIT_DEVICE(1u, CreateTestComputePipeline(firstDevice), firstDevice);
+    EXPECT_PSO_CACHE_HIT_DEVICE(1u, CreateTestRenderPipeline(firstDevice), firstDevice);
+
+    // Persistent cache must be cleared before TearDown to prevent the pipeline cache data from
+    // being updated in the persistent cache.
+    mPersistentCache.mCache.clear();
+}
+
+// Verify pipelines can be reused when the persistent cache is nuked.
+TEST_P(D3D12CachingTests, ReusePipelinesNukeShader) {
+    DAWN_SKIP_TEST_IF(IsDebug());
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 0u);
+
+    // Create new pipelines
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestComputePipeline(device));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestComputePipeline(device));
+
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestRenderPipeline(device));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device));
+
+    // Adds three entries: 1 compute shader source + 1 pixel shader + 1 vertex shader.
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+
+    // Nuke the cache
+    mPersistentCache.mCache.clear();
+
+    // Create the same pipelines again
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestComputePipeline(device));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device));
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+}
+
+// Verify pipelines using debug shaders cannot be reused when the persistent cache is nuked.
+// The test creates render and compute pipelines from the same device then clears the persistent
+// cache storing the dependant shaders.
+TEST_P(D3D12CachingTests, ReusePipelinesNukeDebugShader) {
+    DAWN_SKIP_TEST_IF(!IsDebug());
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 0u);
+
+    // Create new pipelines
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestComputePipeline(device));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestComputePipeline(device));
+
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestRenderPipeline(device));
+    EXPECT_PSO_CACHE_HIT(1u, CreateTestRenderPipeline(device));
+
+    // Adds three entries: 1 compute shader source + 1 pixel shader + 1 vertex shader.
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
+
+    // Nuke the cache
+    mPersistentCache.mCache.clear();
+
+    // Re-create the same pipelines again
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestComputePipeline(device));
+    EXPECT_PSO_CACHE_HIT(0u, CreateTestRenderPipeline(device));
+
+    EXPECT_EQ(mPersistentCache.mCache.size(), 3u);
 }
 
 DAWN_INSTANTIATE_TEST(D3D12CachingTests, D3D12Backend());

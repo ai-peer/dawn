@@ -32,22 +32,54 @@ namespace dawn_platform {
         GPUWork,     // Actual GPU work
     };
 
+    class ScopedCachedBlob;
+
+    class DAWN_PLATFORM_EXPORT CachedBlob {
+      public:
+        CachedBlob() = default;
+        virtual ~CachedBlob() = default;
+
+        virtual const uint8_t* data() = 0;
+        virtual size_t size() const = 0;
+
+      private:
+        friend ScopedCachedBlob;
+
+        virtual void Reference() = 0;
+        virtual void Release() = 0;
+    };
+
+    class DAWN_PLATFORM_EXPORT ScopedCachedBlob {
+      public:
+        ScopedCachedBlob(CachedBlob* blob = nullptr);
+        ScopedCachedBlob(const ScopedCachedBlob& other);
+        ~ScopedCachedBlob();
+
+        ScopedCachedBlob& operator=(const ScopedCachedBlob& other);
+
+        bool operator!=(const ScopedCachedBlob& other) const;
+        bool operator==(const ScopedCachedBlob& other) const;
+
+        CachedBlob* operator->() const;
+        CachedBlob* Get() const;
+
+      private:
+        void ReferenceCachedBlob(CachedBlob* blob) const;
+        void ReleaseCachedBlob(CachedBlob* blob) const;
+
+        CachedBlob* mBlob = nullptr;
+    };
+
     class DAWN_PLATFORM_EXPORT CachingInterface {
       public:
         CachingInterface();
         virtual ~CachingInterface();
 
-        // LoadData has two modes. The first mode is used to get a value which
-        // corresponds to the |key|. The |valueOut| is a caller provided buffer
-        // allocated to the size |valueSize| which is loaded with data of the
-        // size returned. The second mode is used to query for the existence of
-        // the |key| where |valueOut| is nullptr and |valueSize| must be 0.
-        // The return size is non-zero if the |key| exists.
-        virtual size_t LoadData(const WGPUDevice device,
-                                const void* key,
-                                size_t keySize,
-                                void* valueOut,
-                                size_t valueSize) = 0;
+        // LoadData returns a cached blob which corresponds to the |key|. If no |key| exists,
+        // the returned cached blob data is nullptr with a zero size.
+        virtual ScopedCachedBlob LoadData(const WGPUDevice device,
+                                          const void* key,
+                                          size_t keySize) = 0;
 
         // StoreData puts a |value| in the cache which corresponds to the |key|.
         virtual void StoreData(const WGPUDevice device,
@@ -105,6 +137,8 @@ namespace dawn_platform {
         virtual CachingInterface* GetCachingInterface(const void* fingerprint,
                                                       size_t fingerprintSize);
         virtual std::unique_ptr<WorkerTaskPool> CreateWorkerTaskPool();
+
+        virtual ScopedCachedBlob CreateCachedBlob(const uint8_t* data, size_t size) const;
 
       private:
         Platform(const Platform&) = delete;
