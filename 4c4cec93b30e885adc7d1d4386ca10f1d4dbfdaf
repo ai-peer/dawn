@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01925d5c_54314032",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-04-07T16:42:36Z",
+      "side": 1,
+      "message": "This should have pointed at https://crbug.com/tint/704",
+      "revId": "4c4cec93b30e885adc7d1d4386ca10f1d4dbfdaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
