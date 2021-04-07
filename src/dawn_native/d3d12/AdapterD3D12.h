@@ -23,6 +23,7 @@
 namespace dawn_native { namespace d3d12 {
 
     class Backend;
+    class SharedPipelineCaches;
 
     class Adapter : public AdapterBase {
       public:
@@ -49,6 +50,8 @@ namespace dawn_native { namespace d3d12 {
 
         Backend* mBackend;
         D3D12DeviceInfo mDeviceInfo = {};
+
+        std::unique_ptr<SharedPipelineCaches> mSharedPipelineCaches;
     };
 
 }}  // namespace dawn_native::d3d12
