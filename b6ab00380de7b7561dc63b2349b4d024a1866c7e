@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb71e6e1_0fa582f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T22:14:40Z",
+      "side": 1,
+      "message": "A follow-up CL for Corentin\u0027s suggestion (https://godbolt.org/z/xsx3MaT4h) for https://dawn-review.googlesource.com/c/dawn/+/45980. PTAL. ",
+      "revId": "b6ab00380de7b7561dc63b2349b4d024a1866c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e341099_e5ed9c37",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-07T22:14:40Z",
+      "side": 1,
+      "message": "After we use {x, y} and {w, h} to replace (x, y) and (w, h) in EXPECT_TEXTURE_{RGBA8|FLOAT}_EQ, it looks like we can use EXPECT_TEXTURE_EQ to replace EXPECT_TEXURE_{RGBA8|FLOAT}_EQ and remove these two MACROs. and Austin has already put a TODO here. WDYT?",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 25
+      },
+      "revId": "b6ab00380de7b7561dc63b2349b4d024a1866c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
