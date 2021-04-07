@@ -134,7 +134,8 @@ namespace dawn_native { namespace metal {
         return CommandBuffer::Create(encoder, descriptor);
     }
     ResultOrError<Ref<ComputePipelineBase>> Device::CreateComputePipelineImpl(
-        const ComputePipelineDescriptor* descriptor) {
+        const ComputePipelineDescriptor* descriptor,
+        size_t descriptorHash) {
         return ComputePipeline::Create(this, descriptor);
     }
     ResultOrError<Ref<PipelineLayoutBase>> Device::CreatePipelineLayoutImpl(
@@ -146,7 +147,8 @@ namespace dawn_native { namespace metal {
         return QuerySet::Create(this, descriptor);
     }
     ResultOrError<Ref<RenderPipelineBase>> Device::CreateRenderPipelineImpl(
-        const RenderPipelineDescriptor2* descriptor) {
+        const RenderPipelineDescriptor2* descriptor,
+        size_t descriptorHash) {
         return RenderPipeline::Create(this, descriptor);
     }
     ResultOrError<Ref<SamplerBase>> Device::CreateSamplerImpl(const SamplerDescriptor* descriptor) {
