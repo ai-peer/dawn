@@ -23,7 +23,32 @@
 
 #include <dawn/webgpu.h>
 
+#include "common/RefCounted.h"
+
 namespace dawn_platform {
+
+    // TODO(bryan.bernhart@intel.com): Move this into cpp
+    class DAWN_PLATFORM_EXPORT CachedBlob final : public RefCounted {
+      public:
+        CachedBlob() = default;
+        CachedBlob(const uint8_t* data, size_t size) {
+            if (data) {
+                buffer.reset(new uint8_t[size]);
+                memcpy(buffer.get(), data, size);
+            }
+            bufferSize = size;
+        }
+        const uint8_t* data() const {
+            return buffer.get();
+        }
+        size_t size() const {
+            return bufferSize;
+        }
+
+      private:
+        std::unique_ptr<uint8_t[]> buffer;
+        size_t bufferSize = 0;
+    };
 
     enum class TraceCategory {
         General,     // General trace events
@@ -37,17 +62,11 @@ namespace dawn_platform {
         CachingInterface();
         virtual ~CachingInterface();
 
-        // LoadData has two modes. The first mode is used to get a value which
-        // corresponds to the |key|. The |valueOut| is a caller provided buffer
-        // allocated to the size |valueSize| which is loaded with data of the
-        // size returned. The second mode is used to query for the existence of
-        // the |key| where |valueOut| is nullptr and |valueSize| must be 0.
-        // The return size is non-zero if the |key| exists.
-        virtual size_t LoadData(const WGPUDevice device,
-                                const void* key,
-                                size_t keySize,
-                                void* valueOut,
-                                size_t valueSize) = 0;
+        // LoadData returns a cached blob which corresponds to the |key|. If no |key| exists,
+        // the returned cached blob data is nullptr with a zero size.
+        virtual Ref<dawn_platform::CachedBlob> LoadData(const WGPUDevice device,
+                                                        const void* key,
+                                                        size_t keySize) = 0;
 
         // StoreData puts a |value| in the cache which corresponds to the |key|.
         virtual void StoreData(const WGPUDevice device,

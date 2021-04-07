@@ -686,12 +686,17 @@ DawnTestBase::~DawnTestBase() {
     queue = wgpu::Queue();
     device = wgpu::Device();
 
+    // ResetInternalDeviceForTesting expects no outstanding backend objects to exist before reseting
+    // the device. However, the backend device should not release all objects needed to persist a
+    // pipeline cache until after it is shutdown. Reseting the wire will also shutdown the device so
+    // do so before calling ResetInternalDeviceForTesting to free remaining backend objects.
+    mWireHelper.reset();
+
     // D3D12's GPU-based validation will accumulate objects over time if the backend device is not
     // destroyed and recreated, so we reset it here.
     if (IsD3D12() && IsBackendValidationEnabled()) {
         mBackendAdapter.ResetInternalDeviceForTesting();
     }
-    mWireHelper.reset();
 }
 
 bool DawnTestBase::IsD3D12() const {
@@ -789,6 +794,14 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
 
 bool DawnTestBase::IsAsan() const {
 #if defined(ADDRESS_SANITIZER)
+    return true;
+#else
+    return false;
+#endif
+}
+
+bool DawnTestBase::IsDebug() const {
+#if defined(_DEBUG)
     return true;
 #else
     return false;
