@@ -650,7 +650,8 @@ namespace dawn_native { namespace opengl {
                         // See OpenGL ES 3.2 SPEC Chapter 8.4.1, "Pixel Storage Modes and Pixel
                         // Buffer Objects" for more details.
                         if (gl.GetVersion().IsES()) {
-                            UploadTexture(gl, dst, reinterpret_cast<void*>(src.offset), dataLayout, copySize);
+                            UploadTexture(gl, dst, reinterpret_cast<void*>(src.offset), dataLayout,
+                                          copySize);
                         } else {
                             gl.PixelStorei(GL_UNPACK_ROW_LENGTH,
                                            src.bytesPerRow / blockInfo.byteSize * blockInfo.width);

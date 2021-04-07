@@ -60,7 +60,8 @@ namespace dawn_native { namespace opengl {
         textureCopy.texture = destination.texture;
         textureCopy.mipLevel = destination.mipLevel;
         textureCopy.origin = destination.origin;
-        textureCopy.aspect = SelectFormatAspects(destination.texture->GetFormat(), destination.aspect);
+        textureCopy.aspect =
+            SelectFormatAspects(destination.texture->GetFormat(), destination.aspect);
         UploadTexture(ToBackend(GetDevice())->gl, textureCopy, data, dataLayout, writeSizePixel);
         return {};
     }
