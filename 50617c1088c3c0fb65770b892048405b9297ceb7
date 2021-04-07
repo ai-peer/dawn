@@ -85,6 +85,24 @@
       "parentUuid": "04514886_95d3f41b",
       "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3af0d9af_7b89fda2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-07T17:10:24Z",
+      "side": 1,
+      "message": "Dawn is automatically rolled into Chromium roughly every 4 hours. See https://autoroll.skia.org/r/dawn-chromium-autoroll\n\nSo you don\u0027t need to do anything!",
+      "parentUuid": "183d5f60_5e7a54a3",
+      "revId": "50617c1088c3c0fb65770b892048405b9297ceb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
