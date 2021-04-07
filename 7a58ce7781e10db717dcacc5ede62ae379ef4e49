@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "795d1e79_491afe18",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-07T01:58:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b65afbe8_595afad8",
+      "revId": "7a58ce7781e10db717dcacc5ede62ae379ef4e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4c39da0_31ac1842",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-06T12:03:02Z",
       "side": 1,
       "message": "nit: And maybe check that is !UseWire the two pipelines returned the same object?",
+      "revId": "7a58ce7781e10db717dcacc5ede62ae379ef4e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2801ff4e_31422b47",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-07T01:58:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4c39da0_31ac1842",
       "revId": "7a58ce7781e10db717dcacc5ede62ae379ef4e49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
