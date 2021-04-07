@@ -347,6 +347,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90797966_6d7d2435",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-07T22:20:56Z",
+      "side": 1,
+      "message": "According to Ben Clayton: \"For now, no, diagnostics are completely rebuilt with each transform pass\"",
+      "parentUuid": "bf2a0d27_8977bc8f",
+      "range": {
+        "startLine": 1156,
+        "startChar": 8,
+        "endLine": 1159,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cedb5d9b_571d1445",
