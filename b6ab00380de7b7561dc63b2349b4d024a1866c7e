@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7acbba96_f5b6771f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T23:23:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b6ab00380de7b7561dc63b2349b4d024a1866c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e341099_e5ed9c37",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-04-07T22:14:40Z",
       "side": 1,
       "message": "After we use {x, y} and {w, h} to replace (x, y) and (w, h) in EXPECT_TEXTURE_{RGBA8|FLOAT}_EQ, it looks like we can use EXPECT_TEXTURE_EQ to replace EXPECT_TEXURE_{RGBA8|FLOAT}_EQ and remove these two MACROs. and Austin has already put a TODO here. WDYT?",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 83,
+        "endChar": 25
+      },
+      "revId": "b6ab00380de7b7561dc63b2349b4d024a1866c7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fc03df_6f20201c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-07T23:23:16Z",
+      "side": 1,
+      "message": "That would be awesome!",
+      "parentUuid": "3e341099_e5ed9c37",
       "range": {
         "startLine": 83,
         "startChar": 8,
