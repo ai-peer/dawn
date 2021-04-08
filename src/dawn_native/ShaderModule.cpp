@@ -159,6 +159,8 @@ namespace dawn_native {
                 case tint::inspector::ResourceBinding::ResourceType::kReadOnlyStorageTexture:
                 case tint::inspector::ResourceBinding::ResourceType::kWriteOnlyStorageTexture:
                     return BindingInfoType::StorageTexture;
+                case tint::inspector::ResourceBinding::ResourceType::kExternalTexture:
+                    return BindingInfoType::ExternalTexture;
 
                 default:
                     UNREACHABLE();
@@ -503,9 +505,15 @@ namespace dawn_native {
                 const BindingInfo& layoutInfo = layout->GetBindingInfo(bindingIndex);
 
                 if (layoutInfo.bindingType != shaderInfo.bindingType) {
-                    return DAWN_VALIDATION_ERROR(
-                        "The binding type of the bind group layout entry conflicts " +
-                        GetShaderDeclarationString(group, bindingNumber));
+                    // At the moment, external textures are effectively just wrappers for sampled
+                    // textures. Tint transforms instances of texture_external to texture_2d<f32>.
+                    // This type mismatch is allowed.
+                    if (layoutInfo.bindingType != BindingInfoType::ExternalTexture ||
+                        shaderInfo.bindingType != BindingInfoType::Texture) {
+                        return DAWN_VALIDATION_ERROR(
+                            "The binding type of the bind group layout entry conflicts " +
+                            GetShaderDeclarationString(group, bindingNumber));
+                    }
                 }
 
                 if ((layoutInfo.visibility & StageBit(entryPoint.stage)) == 0) {
@@ -564,6 +572,10 @@ namespace dawn_native {
                                 "is different from " +
                                 GetShaderDeclarationString(group, bindingNumber));
                         }
+                        break;
+                    }
+
+                    case BindingInfoType::ExternalTexture: {
                         break;
                     }
 
@@ -755,6 +767,11 @@ namespace dawn_native {
                         }
                         case BindingInfoType::Sampler: {
                             info->sampler.type = wgpu::SamplerBindingType::Filtering;
+                            break;
+                        }
+                        case BindingInfoType::ExternalTexture: {
+                            return DAWN_VALIDATION_ERROR("External textures are not supported.");
+                            break;
                         }
                     }
                 }
@@ -993,6 +1010,8 @@ namespace dawn_native {
                             info->storageTexture.viewDimension =
                                 TintTextureDimensionToTextureViewDimension(resource.dim);
 
+                            break;
+                        case BindingInfoType::ExternalTexture:
                             break;
                         default:
                             return DAWN_VALIDATION_ERROR("Unknown binding type in Shader");

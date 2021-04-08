@@ -146,10 +146,15 @@ namespace dawn_native {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
                 }
             }
+            if (entry.nextInChain != nullptr &&
+                entry.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
+                bindingMemberCount++;
+            }
 
             if (bindingMemberCount != 1) {
                 return DAWN_VALIDATION_ERROR(
-                    "Exactly one of buffer, sampler, texture, or storageTexture must be set for "
+                    "Exactly one of buffer, sampler, texture, storageTexture, or externalTexture "
+                    "must be set for "
                     "each BindGroupLayoutEntry");
             }
 
@@ -190,6 +195,8 @@ namespace dawn_native {
                     return a.storageTexture.access != b.storageTexture.access ||
                            a.storageTexture.viewDimension != b.storageTexture.viewDimension ||
                            a.storageTexture.format != b.storageTexture.format;
+                case BindingInfoType::ExternalTexture:
+                    return false;
             }
         }
 
@@ -229,6 +236,9 @@ namespace dawn_native {
                 if (binding.storageTexture.viewDimension == wgpu::TextureViewDimension::Undefined) {
                     bindingInfo.storageTexture.viewDimension = wgpu::TextureViewDimension::e2D;
                 }
+            } else if (binding.nextInChain != nullptr &&
+                       binding.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
+                bindingInfo.bindingType = BindingInfoType::ExternalTexture;
             }
 
             return bindingInfo;
@@ -308,6 +318,8 @@ namespace dawn_native {
                     if (aInfo.storageTexture.format != bInfo.storageTexture.format) {
                         return aInfo.storageTexture.format < bInfo.storageTexture.format;
                     }
+                    break;
+                case BindingInfoType::ExternalTexture:
                     break;
             }
             return false;
