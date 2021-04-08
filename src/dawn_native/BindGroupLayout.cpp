@@ -146,23 +146,27 @@ namespace dawn_native {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
                 }
             }
+            if (entry.nextInChain != nullptr &&
+                entry.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
+                bindingMemberCount++;
+            }
 
             if (bindingMemberCount > 1) {
                 return DAWN_VALIDATION_ERROR(
-                    "Only one of buffer, sampler, texture, or storageTexture may be set for each "
-                    "BindGroupLayoutEntry");
+                    "Only one of buffer, sampler, texture, storageTexture, or externalTexture may "
+                    "be set for each BindGroupLayoutEntry");
             } else if (bindingMemberCount == 1) {
                 if (entry.type != wgpu::BindingType::Undefined) {
                     return DAWN_VALIDATION_ERROR(
                         "BindGroupLayoutEntry type must be undefined if any of buffer, sampler, "
-                        "texture, or storageTexture are set");
+                        "texture, storageTexture, or externalTexture are set");
                 }
             } else if (bindingMemberCount == 0) {
                 // Deprecated validation path
                 device->EmitDeprecationWarning(
                     "The format of BindGroupLayoutEntry has changed, and will soon require the "
-                    "buffer, sampler, texture, or storageTexture members be set rather than "
-                    "setting type, etc. on the entry directly.");
+                    "buffer, sampler, texture, storageTexture, or externalTexture members be set "
+                    "rather than setting type, etc. on the entry directly.");
 
                 DAWN_TRY(ValidateBindingType(entry.type));
                 DAWN_TRY(ValidateTextureComponentType(entry.textureComponentType));
@@ -185,6 +189,7 @@ namespace dawn_native {
                         break;
 
                     case wgpu::BindingType::SampledTexture:
+                    case wgpu::BindingType::ExternalTexture:
                         break;
 
                     case wgpu::BindingType::MultisampledTexture:
@@ -266,6 +271,8 @@ namespace dawn_native {
                     return a.storageTexture.access != b.storageTexture.access ||
                            a.storageTexture.viewDimension != b.storageTexture.viewDimension ||
                            a.storageTexture.format != b.storageTexture.format;
+                case BindingInfoType::ExternalTexture:
+                    return false;
             }
         }
 
@@ -279,6 +286,9 @@ namespace dawn_native {
             } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
                 return false;
             } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                return false;
+            } else if (binding.nextInChain != nullptr &&
+                       binding.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
                 return false;
             }
 
@@ -294,6 +304,7 @@ namespace dawn_native {
                 case wgpu::BindingType::ComparisonSampler:
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture:
+                case wgpu::BindingType::ExternalTexture:
                 case wgpu::BindingType::Undefined:
                     return false;
             }
@@ -307,6 +318,9 @@ namespace dawn_native {
             } else if (binding.texture.sampleType != wgpu::TextureSampleType::Undefined) {
                 return false;
             } else if (binding.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
+                return false;
+            } else if (binding.nextInChain != nullptr &&
+                       binding.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
                 return false;
             }
 
@@ -405,6 +419,9 @@ namespace dawn_native {
                 if (binding.storageTexture.viewDimension == wgpu::TextureViewDimension::Undefined) {
                     bindingInfo.storageTexture.viewDimension = wgpu::TextureViewDimension::e2D;
                 }
+            } else if (binding.nextInChain != nullptr &&
+                       binding.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
+                bindingInfo.bindingType = BindingInfoType::ExternalTexture;
             } else {
                 // Deprecated entry layout.
                 switch (binding.type) {
@@ -482,7 +499,9 @@ namespace dawn_native {
                                 wgpu::TextureViewDimension::e2D;
                         }
                         break;
-
+                    case wgpu::BindingType::ExternalTexture:
+                        bindingInfo.bindingType = BindingInfoType::ExternalTexture;
+                        break;
                     case wgpu::BindingType::Undefined:
                         UNREACHABLE();
                 }
