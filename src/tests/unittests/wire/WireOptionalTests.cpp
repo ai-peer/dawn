@@ -40,6 +40,7 @@ TEST_F(WireOptionalTests, OptionalObjectValue) {
     entry.sampler = nullptr;
     entry.textureView = nullptr;
     entry.buffer = nullptr;
+    entry.externalTexture = nullptr;
 
     WGPUBindGroupDescriptor bgDesc = {};
     bgDesc.layout = bgl;
@@ -55,7 +56,8 @@ TEST_F(WireOptionalTests, OptionalObjectValue) {
                                     desc->entries[0].binding == 0 &&
                                     desc->entries[0].sampler == nullptr &&
                                     desc->entries[0].buffer == nullptr &&
-                                    desc->entries[0].textureView == nullptr;
+                                    desc->entries[0].textureView == nullptr &&
+                                    desc->entries[0].externalTexture == nullptr;
                          })))
         .WillOnce(Return(apiDummyBindGroup));
 

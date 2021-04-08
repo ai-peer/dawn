@@ -56,8 +56,10 @@ namespace dawn_native {
             perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
         } else if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
             perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
+        } else if (entry.nextInChain != nullptr &&
+                   entry.nextInChain->sType == wgpu::SType::ExternalTextureBindingLayout) {
+            perStageBindingCountMember = &PerStageBindingCounts::externalTextureCount;
         }
-
         ASSERT(perStageBindingCountMember != nullptr);
         for (SingleShaderStage stage : IterateStages(entry.visibility)) {
             ++(bindingCounts->perStage[stage].*perStageBindingCountMember);
@@ -73,14 +75,18 @@ namespace dawn_native {
 
         for (SingleShaderStage stage : IterateStages(kAllStages)) {
             bindingCounts->perStage[stage].sampledTextureCount +=
-                rhs.perStage[stage].sampledTextureCount;
-            bindingCounts->perStage[stage].samplerCount += rhs.perStage[stage].samplerCount;
+                rhs.perStage[stage].sampledTextureCount +
+                (rhs.perStage[stage].externalTextureCount * kSampledTexturesPerExternalTexture);
+            bindingCounts->perStage[stage].samplerCount +=
+                rhs.perStage[stage].samplerCount +
+                (rhs.perStage[stage].externalTextureCount * kSamplersPerExternalTexture);
             bindingCounts->perStage[stage].storageBufferCount +=
                 rhs.perStage[stage].storageBufferCount;
             bindingCounts->perStage[stage].storageTextureCount +=
                 rhs.perStage[stage].storageTextureCount;
             bindingCounts->perStage[stage].uniformBufferCount +=
-                rhs.perStage[stage].uniformBufferCount;
+                rhs.perStage[stage].uniformBufferCount +
+                (rhs.perStage[stage].externalTextureCount * kUniformsPerExternalTexture);
         }
     }
 
