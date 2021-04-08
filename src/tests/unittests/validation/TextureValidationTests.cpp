@@ -401,6 +401,27 @@ namespace {
         }
     }
 
+    // Test that depth/stencil formats are invalid for 3D texture
+    TEST_F(TextureValidationTest, DepthStencilFormatsFor3D) {
+        wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();
+
+        // TODO(yunchao.he@intel.com): Uncomment these depth/stencil formats after we implement them
+        // in Dawn
+        wgpu::TextureFormat depthStencilFormats[] = {
+            wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Depth24Plus,
+            wgpu::TextureFormat::Stencil8, wgpu::TextureFormat::Depth24PlusStencil8,
+            // wgpu::TextureFormat::Depth16Unorm,
+            // wgpu::TextureFormat::Depth24UnormStencil8,
+            // wgpu::TextureFormat::Depth32FloatStencil8,
+        };
+
+        for (wgpu::TextureFormat format : depthStencilFormats) {
+            descriptor.format = format;
+            descriptor.dimension = wgpu::TextureDimension::e3D;
+            ASSERT_DEVICE_ERROR(device.CreateTexture(&descriptor));
+        }
+    }
+
     // Test that it is valid to destroy a texture
     TEST_F(TextureValidationTest, DestroyTexture) {
         wgpu::TextureDescriptor descriptor = CreateDefaultTextureDescriptor();

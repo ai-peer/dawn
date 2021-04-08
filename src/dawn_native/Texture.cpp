@@ -301,6 +301,12 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Compressed texture must be 2D");
         }
 
+        // At least D3D12 requires that Depth/stencil formats are invalid for 3D texture.
+        if (descriptor->dimension == wgpu::TextureDimension::e3D &&
+            (format->aspects & (Aspect::Depth | Aspect::Stencil)) != 0) {
+            return DAWN_VALIDATION_ERROR("Depth/stencil formats are invalid for 3D texture");
+        }
+
         DAWN_TRY(ValidateTextureSize(descriptor, format));
 
         return {};
