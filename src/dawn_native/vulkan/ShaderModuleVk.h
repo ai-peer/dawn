@@ -23,6 +23,7 @@
 namespace dawn_native { namespace vulkan {
 
     class Device;
+    class PipelineLayout;
 
     class ShaderModule final : public ShaderModuleBase {
       public:
@@ -31,6 +32,10 @@ namespace dawn_native { namespace vulkan {
                                                        ShaderModuleParseResult* parseResult);
 
         VkShaderModule GetHandle() const;
+
+        // This is only called when UseTintGenerator is on
+        ResultOrError<VkShaderModule> GenerateTransformedModuleHandle(const char* entryPointName,
+                                                                      PipelineLayout* layout) const;
 
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
