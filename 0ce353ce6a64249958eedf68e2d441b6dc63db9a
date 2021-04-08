@@ -60,6 +60,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2e87dcd_2337156d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-08T00:35:30Z",
+      "side": 1,
+      "message": "This is not a question for this CL, but:\nCould we skip validation (in the IsValidationEnabled()\u003d\u003dtrue case) on cache hits, if we checked the cache before validation?",
+      "revId": "0ce353ce6a64249958eedf68e2d441b6dc63db9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6776ad57_17ce6cb1",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 3
