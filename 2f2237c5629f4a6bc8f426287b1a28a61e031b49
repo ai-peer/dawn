@@ -22,6 +22,23 @@
       },
       "revId": "2f2237c5629f4a6bc8f426287b1a28a61e031b49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e9db7c0_5badcb7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-08T08:16:03Z",
+      "side": 1,
+      "message": "Nice, LGTM too!",
+      "revId": "2f2237c5629f4a6bc8f426287b1a28a61e031b49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
