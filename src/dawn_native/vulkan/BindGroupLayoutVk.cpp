@@ -67,6 +67,7 @@ namespace dawn_native { namespace vulkan {
             case BindingInfoType::Sampler:
                 return VK_DESCRIPTOR_TYPE_SAMPLER;
             case BindingInfoType::Texture:
+            case BindingInfoType::ExternalTexture:
                 return VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE;
             case BindingInfoType::StorageTexture:
                 return VK_DESCRIPTOR_TYPE_STORAGE_IMAGE;
