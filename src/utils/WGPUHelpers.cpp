@@ -27,6 +27,10 @@
 
 namespace utils {
 
+    // ExternalTextureBindingLayout never contains data, so just make one that can be reused instead
+    // of declaring a new one every time it's needed.
+    wgpu::ExternalTextureBindingLayout kExternalTextureBindingLayout = {};
+
     wgpu::ShaderModule CreateShaderModuleFromASM(const wgpu::Device& device, const char* source) {
         // Use SPIRV-Tools's C API to assemble the SPIR-V assembly text to binary. Because the types
         // aren't RAII, we don't return directly on success and instead always go through the code
@@ -297,6 +301,15 @@ namespace utils {
     }
 
     BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
+        uint32_t entryBinding,
+        wgpu::ShaderStage entryVisibility,
+        wgpu::ExternalTextureBindingLayout* bindingLayout) {
+        binding = entryBinding;
+        visibility = entryVisibility;
+        nextInChain = bindingLayout;
+    }
+
+    BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         const wgpu::BindGroupLayoutEntry& entry)
         : wgpu::BindGroupLayoutEntry(entry) {
     }
@@ -309,6 +322,13 @@ namespace utils {
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
                                                              const wgpu::TextureView& textureView)
         : binding(binding), textureView(textureView) {
+    }
+
+    BindingInitializationHelper::BindingInitializationHelper(
+        uint32_t binding,
+        const wgpu::ExternalTexture& externalTexture)
+        : binding(binding) {
+        externalTextureBindingEntry.externalTexture = externalTexture;
     }
 
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
@@ -327,6 +347,9 @@ namespace utils {
         result.buffer = buffer;
         result.offset = offset;
         result.size = size;
+        if (externalTextureBindingEntry.externalTexture != nullptr) {
+            result.nextInChain = &externalTextureBindingEntry;
+        }
 
         return result;
     }

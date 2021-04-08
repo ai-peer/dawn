@@ -185,6 +185,26 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
+                case BindingInfoType::ExternalTexture: {
+                    const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& views =
+                        GetBindingAsExternalTextureViews(bindingIndex);
+
+                    // Only single-plane formats are supported right now, so assert only one view
+                    // exists.
+                    ASSERT(views[1].Get() == nullptr);
+                    ASSERT(views[2].Get() == nullptr);
+
+                    auto& srv = ToBackend(views[0])->GetSRVDescriptor();
+
+                    ID3D12Resource* resource =
+                        ToBackend(views[0]->GetTexture())->GetD3D12Resource();
+
+                    d3d12Device->CreateShaderResourceView(
+                        resource, &srv,
+                        viewAllocation.OffsetFrom(viewSizeIncrement, bindingOffsets[bindingIndex]));
+                    break;
+                }
+
                 case BindingInfoType::Sampler: {
                     // No-op as samplers will be later initialized by CreateSamplers().
                     break;

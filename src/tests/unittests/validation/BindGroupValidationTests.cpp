@@ -746,7 +746,7 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
         wgpu::BindGroupLayoutEntry otherEntry;
     };
 
-    std::array<TestInfo, 7> kTestInfos = {
+    std::array<TestInfo, 8> kTestInfos = {
         TestInfo{kMaxSampledTexturesPerShaderStage, BGLEntryType(wgpu::TextureSampleType::Float),
                  BGLEntryType(wgpu::BufferBindingType::Uniform)},
         TestInfo{kMaxSamplersPerShaderStage, BGLEntryType(wgpu::SamplerBindingType::Filtering),
@@ -765,7 +765,12 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
             BGLEntryType(wgpu::BufferBindingType::Uniform)},
         TestInfo{kMaxUniformBuffersPerShaderStage, BGLEntryType(wgpu::BufferBindingType::Uniform),
                  BGLEntryType(wgpu::TextureSampleType::Float)},
-    };
+        // External textures use multiple bindings (3 sampled textures, 1 sampler, 1 uniform buffer)
+        // that count towards the per stage binding limits. The number of external textures are
+        // currently restricted by the maximum number of sampled textures.
+        TestInfo{kMaxSampledTexturesPerShaderStage / kSampledTexturesPerExternalTexture,
+                 BGLEntryType(&utils::kExternalTextureBindingLayout),
+                 BGLEntryType(wgpu::BufferBindingType::Uniform)}};
 
     for (TestInfo info : kTestInfos) {
         wgpu::BindGroupLayout bgl[2];
@@ -778,6 +783,98 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
         }
 
         // Creating with the maxes works.
+        bgl[0] = MakeBindGroupLayout(maxBindings.data(), maxBindings.size());
+
+        // Adding an extra binding of a different type works.
+        {
+            std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
+            wgpu::BindGroupLayoutEntry entry = info.otherEntry;
+            entry.binding = info.maxCount;
+            bindings.push_back(entry);
+            MakeBindGroupLayout(bindings.data(), bindings.size());
+        }
+
+        // Adding an extra binding of the maxed type in a different stage works
+        {
+            std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
+            wgpu::BindGroupLayoutEntry entry = info.entry;
+            entry.binding = info.maxCount;
+            entry.visibility = wgpu::ShaderStage::Fragment;
+            bindings.push_back(entry);
+            MakeBindGroupLayout(bindings.data(), bindings.size());
+        }
+
+        // Adding an extra binding of the maxed type and stage exceeds the per stage limit.
+        {
+            std::vector<utils::BindingLayoutEntryInitializationHelper> bindings = maxBindings;
+            wgpu::BindGroupLayoutEntry entry = info.entry;
+            entry.binding = info.maxCount;
+            bindings.push_back(entry);
+            ASSERT_DEVICE_ERROR(MakeBindGroupLayout(bindings.data(), bindings.size()));
+        }
+
+        // Creating a pipeline layout from the valid BGL works.
+        TestCreatePipelineLayout(bgl, 1, true);
+
+        // Adding an extra binding of a different type in a different BGL works
+        bgl[1] = utils::MakeBindGroupLayout(device, {info.otherEntry});
+        TestCreatePipelineLayout(bgl, 2, true);
+
+        {
+            // Adding an extra binding of the maxed type in a different stage works
+            wgpu::BindGroupLayoutEntry entry = info.entry;
+            entry.visibility = wgpu::ShaderStage::Fragment;
+            bgl[1] = utils::MakeBindGroupLayout(device, {entry});
+            TestCreatePipelineLayout(bgl, 2, true);
+        }
+
+        // Adding an extra binding of the maxed type in a different BGL exceeds the per stage limit.
+        bgl[1] = utils::MakeBindGroupLayout(device, {info.entry});
+        TestCreatePipelineLayout(bgl, 2, false);
+    }
+}
+
+// External textures require multiple binding slots (3 sampled texture, 1 uniform buffer, 1
+// sampler), so ensure that these count towards the limit when combined non-external texture
+// bindings.
+TEST_F(BindGroupLayoutValidationTest, PerStageLimitsWithExternalTexture) {
+    struct TestInfo {
+        uint32_t maxCount;
+        uint32_t bindingsPerExternalTexture;
+        wgpu::BindGroupLayoutEntry entry;
+        wgpu::BindGroupLayoutEntry otherEntry;
+    };
+
+    std::array<TestInfo, 3> kTestInfos = {
+        TestInfo{kMaxSampledTexturesPerShaderStage, kSampledTexturesPerExternalTexture,
+                 BGLEntryType(wgpu::TextureSampleType::Float),
+                 BGLEntryType(wgpu::BufferBindingType::Uniform)},
+        TestInfo{kMaxSamplersPerShaderStage, kSamplersPerExternalTexture,
+                 BGLEntryType(wgpu::SamplerBindingType::Filtering),
+                 BGLEntryType(wgpu::BufferBindingType::Uniform)},
+        TestInfo{kMaxUniformBuffersPerShaderStage, kUniformsPerExternalTexture,
+                 BGLEntryType(wgpu::BufferBindingType::Uniform),
+                 BGLEntryType(wgpu::TextureSampleType::Float)},
+    };
+
+    for (TestInfo info : kTestInfos) {
+        wgpu::BindGroupLayout bgl[2];
+        std::vector<utils::BindingLayoutEntryInitializationHelper> maxBindings;
+
+        // Create an external texture binding layout entry
+        wgpu::BindGroupLayoutEntry entry = BGLEntryType(&utils::kExternalTextureBindingLayout);
+        entry.binding = 0;
+        maxBindings.push_back(entry);
+
+        // Create the other bindings such that we reach the max bindings per stage when including
+        // the external texture.
+        for (uint32_t i = 1; i <= info.maxCount - info.bindingsPerExternalTexture; ++i) {
+            wgpu::BindGroupLayoutEntry entry = info.entry;
+            entry.binding = i;
+            maxBindings.push_back(entry);
+        }
+
+        // Ensure that creation without the external texture works.
         bgl[0] = MakeBindGroupLayout(maxBindings.data(), maxBindings.size());
 
         // Adding an extra binding of a different type works.
