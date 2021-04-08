@@ -297,6 +297,15 @@ namespace utils {
     }
 
     BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
+        uint32_t entryBinding,
+        wgpu::ShaderStage entryVisibility,
+        wgpu::ExternalTextureBindingLayout* bindingLayout) {
+        binding = entryBinding;
+        visibility = entryVisibility;
+        nextInChain = bindingLayout;
+    }
+
+    BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         const wgpu::BindGroupLayoutEntry& entry)
         : wgpu::BindGroupLayoutEntry(entry) {
     }
@@ -309,6 +318,12 @@ namespace utils {
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
                                                              const wgpu::TextureView& textureView)
         : binding(binding), textureView(textureView) {
+    }
+
+    BindingInitializationHelper::BindingInitializationHelper(
+        uint32_t binding,
+        const wgpu::ExternalTexture& externalTexture)
+        : binding(binding), externalTexture(externalTexture) {
     }
 
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
@@ -324,6 +339,7 @@ namespace utils {
         result.binding = binding;
         result.sampler = sampler;
         result.textureView = textureView;
+        result.externalTexture = externalTexture;
         result.buffer = buffer;
         result.offset = offset;
         result.size = size;

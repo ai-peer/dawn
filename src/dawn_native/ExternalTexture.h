@@ -35,7 +35,7 @@ namespace dawn_native {
             DeviceBase* device,
             const ExternalTextureDescriptor* descriptor);
 
-        std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> GetTextureViews() const;
+        const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& GetTextureViews() const;
 
         static ExternalTextureBase* MakeError(DeviceBase* device);
 
