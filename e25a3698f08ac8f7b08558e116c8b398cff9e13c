@@ -50,6 +50,24 @@
       "message": "nit: can we have a comment about why?",
       "revId": "e25a3698f08ac8f7b08558e116c8b398cff9e13c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14554ff3_ab6d2e9f",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-08T10:35:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31b2c4c6_3f485112",
+      "revId": "e25a3698f08ac8f7b08558e116c8b398cff9e13c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
