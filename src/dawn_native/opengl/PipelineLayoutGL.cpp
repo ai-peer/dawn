@@ -66,6 +66,10 @@ namespace dawn_native { namespace opengl {
                         mIndexInfo[group][bindingIndex] = storageTextureIndex;
                         storageTextureIndex++;
                         break;
+
+                    case BindingInfoType::ExternalTexture:
+                        // TODO (dawn:728)
+                        break;
                 }
             }
         }

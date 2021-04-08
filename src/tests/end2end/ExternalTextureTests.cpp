@@ -13,6 +13,8 @@
 // limitations under the License.
 
 #include "tests/DawnTest.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
 
@@ -43,8 +45,6 @@ namespace {
 }  // anonymous namespace
 
 TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-
     wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
 
     // Create a texture view for the external texture
