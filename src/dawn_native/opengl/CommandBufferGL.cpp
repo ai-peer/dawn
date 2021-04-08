@@ -362,6 +362,21 @@ namespace dawn_native { namespace opengl {
                                                 texture->GetGLFormat().internalFormat);
                             break;
                         }
+
+                        case BindingInfoType::ExternalTexture: {
+                            std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> textureViews =
+                                mBindGroups[index]->GetBindingAsExternalTextureViews(binding);
+                            TextureView* view = ToBackend(textureViews[0]);
+                            GLuint handle = view->GetHandle();
+                            GLenum target = view->GetGLTarget();
+                            GLuint viewIndex = indices[bindingIndex];
+
+                            for (auto unit : mPipeline->GetTextureUnitsForTextureView(viewIndex)) {
+                                gl.ActiveTexture(GL_TEXTURE0 + unit);
+                                gl.BindTexture(target, handle);
+                            }
+                            break;
+                        }
                     }
                 }
             }
