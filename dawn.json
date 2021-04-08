@@ -72,7 +72,8 @@
             {"name": "offset", "type": "uint64_t", "default": "0"},
             {"name": "size", "type": "uint64_t"},
             {"name": "sampler", "type": "sampler", "optional": true},
-            {"name": "texture view", "type": "texture view", "optional": true}
+            {"name": "texture view", "type": "texture view", "optional": true},
+            {"name": "external texture", "type": "external texture", "optional":true}
         ]
     },
     "bind group descriptor": {
@@ -144,6 +145,12 @@
             {"name": "view dimension", "type": "texture view dimension", "default": "undefined"},
             {"name": "multisampled", "type": "bool", "default": "false"}
         ]
+    },
+
+    "external texture binding layout": {
+        "category": "structure",
+        "chained": true,
+        "members": []
     },
 
     "storage texture access": {
@@ -1787,7 +1794,8 @@
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
             {"value": 7, "name": "primitive depth clamping state"},
-            {"value": 8, "name": "surface descriptor from windows core window"}
+            {"value": 8, "name": "surface descriptor from windows core window"},
+            {"value": 9, "name": "external texture binding layout"}
         ]
     },
     "texture": {

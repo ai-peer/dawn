@@ -93,8 +93,8 @@ namespace dawn_native {
         : ObjectBase(device, tag) {
     }
 
-    std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> ExternalTextureBase::GetTextureViews()
-        const {
+    const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>&
+    ExternalTextureBase::GetTextureViews() const {
         return textureViews;
     }
 
