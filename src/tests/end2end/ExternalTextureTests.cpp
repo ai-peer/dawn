@@ -13,6 +13,8 @@
 // limitations under the License.
 
 #include "tests/DawnTest.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
 
@@ -34,17 +36,35 @@ namespace {
     }
 
     class ExternalTextureTests : public DawnTest {
+      public:
+        void initBuffers() {
+            static const uint32_t indexData[3] = {
+                0,
+                1,
+                2,
+            };
+            indexBuffer = utils::CreateBufferFromData(device, indexData, sizeof(indexData),
+                                                      wgpu::BufferUsage::Index);
+
+            static const float vertexData[12] = {
+                -1.0f, 1.0f, 0.0f, 1.0f, -1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f,
+            };
+            vertexBuffer = utils::CreateBufferFromData(device, vertexData, sizeof(vertexData),
+                                                       wgpu::BufferUsage::Vertex);
+        }
+
       protected:
         static constexpr uint32_t kWidth = 4;
         static constexpr uint32_t kHeight = 4;
         static constexpr wgpu::TextureFormat kFormat = wgpu::TextureFormat::RGBA8Unorm;
         static constexpr wgpu::TextureUsage kSampledUsage = wgpu::TextureUsage::Sampled;
+
+        wgpu::Buffer indexBuffer;
+        wgpu::Buffer vertexBuffer;
     };
 }  // anonymous namespace
 
 TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-
     wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
 
     // Create a texture view for the external texture
@@ -59,6 +79,25 @@ TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
 
     ASSERT_NE(externalTexture.Get(), nullptr);
+}
+
+// Ensure that we can create a bind group layout and bind group with an external texture.
+TEST_P(ExternalTextureTests, BindExternalTexture) {
+    wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
+    wgpu::TextureView view = texture.CreateView();
+
+    wgpu::ExternalTextureDescriptor externalDesc;
+    externalDesc.plane0 = view;
+    externalDesc.format = kFormat;
+
+    wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+    wgpu::BindGroup bindGroup;
+    wgpu::BindGroupLayout bgl;
+
+    bgl = utils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment, kFormat}});
+
+    bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
 }
 
 DAWN_INSTANTIATE_TEST(ExternalTextureTests,
