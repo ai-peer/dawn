@@ -710,6 +710,16 @@ bool DawnTestBase::IsVulkan() const {
     return mParam.adapterProperties.backendType == wgpu::BackendType::Vulkan;
 }
 
+bool DawnTestBase::IsUsingTintGenerator() const {
+    std::vector<const char*> workarounds = mParam.forceEnabledWorkarounds;
+    for (const char* workaround : workarounds) {
+        if (!strcmp(workaround, "use_tint_generator")) {
+            return true;
+        }
+    }
+    return false;
+}
+
 bool DawnTestBase::IsAMD() const {
     return gpu_info::IsAMD(mParam.adapterProperties.vendorID);
 }
