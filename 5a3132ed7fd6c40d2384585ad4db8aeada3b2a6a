@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ac3f63d_fee4b309",
+        "filename": "src/tests/unittests/wire/WireExtensionTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-08T18:24:21Z",
+      "side": 1,
+      "message": "Not really sure what to do with RenderPipelineDescriptorDummyExtension. Is it providing additional coverage beyond what the DummyAnisotropicFiltering tests were previously testing? Perhaps converting the chained ProgrammableStageDescriptor struct on the wire?",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 1
+      },
+      "revId": "5a3132ed7fd6c40d2384585ad4db8aeada3b2a6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
