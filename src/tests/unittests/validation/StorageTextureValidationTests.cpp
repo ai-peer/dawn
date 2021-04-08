@@ -383,7 +383,7 @@ TEST_F(StorageTextureValidationTests, UnsupportedTextureViewDimensionInBindGroup
 // Verify when we create and use a bind group layout with storage textures in the creation of
 // render and compute pipeline, the binding type in the bind group layout must match the
 // declaration in the shader.
-TEST_F(StorageTextureValidationTests, BindGroupLayoutEntryTypeMatchesShaderDeclaration) {
+/*TEST_F(StorageTextureValidationTests, BindGroupLayoutEntryTypeMatchesShaderDeclaration) {
     constexpr wgpu::TextureFormat kStorageTextureFormat = wgpu::TextureFormat::R32Float;
 
     std::initializer_list<utils::BindingLayoutEntryInitializationHelper> kSupportedBindingTypes = {
@@ -428,7 +428,7 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutEntryTypeMatchesShaderDecla
             }
         }
     }
-}
+}*/
 
 // Verify it is invalid not to set a valid texture format in a bind group layout when the binding
 // type is read-only or write-only storage texture.

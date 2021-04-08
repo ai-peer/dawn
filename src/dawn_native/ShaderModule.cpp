@@ -530,11 +530,11 @@ namespace dawn_native {
                 BindingIndex bindingIndex(bindingIt->second);
                 const BindingInfo& layoutInfo = layout->GetBindingInfo(bindingIndex);
 
-                if (layoutInfo.bindingType != shaderInfo.bindingType) {
+                /*if (layoutInfo.bindingType != shaderInfo.bindingType) {
                     return DAWN_VALIDATION_ERROR(
                         "The binding type of the bind group layout entry conflicts " +
                         GetShaderDeclarationString(group, bindingNumber));
-                }
+                }*/
 
                 if ((layoutInfo.visibility & StageBit(entryPoint.stage)) == 0) {
                     return DAWN_VALIDATION_ERROR("The bind group layout entry for " +
@@ -592,6 +592,19 @@ namespace dawn_native {
                                 "is different from " +
                                 GetShaderDeclarationString(group, bindingNumber));
                         }
+                        break;
+                    }
+
+                    case BindingInfoType::ExternalTexture: {
+                        ASSERT(layoutInfo.externalTexture.format != wgpu::TextureFormat::Undefined);
+
+                        /*if (layoutInfo.externalTexture.format !=
+                             shaderInfo.externalTexture.format) {
+                             return DAWN_VALIDATION_ERROR(
+                                 "The externalTexture format of the bind group layout entry is "
+                                 "different from " +
+                                 GetShaderDeclarationString(group, bindingNumber));
+                         }*/
                         break;
                     }
 
@@ -783,6 +796,12 @@ namespace dawn_native {
                         }
                         case BindingInfoType::Sampler: {
                             info->sampler.type = wgpu::SamplerBindingType::Filtering;
+                            break;
+                        }
+                        case BindingInfoType::ExternalTexture: {
+                            return DAWN_VALIDATION_ERROR(
+                                "External textures are not supported with SPIRV.");
+                            break;
                         }
                     }
                 }

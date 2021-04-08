@@ -168,6 +168,7 @@ namespace dawn_native { namespace opengl {
 
                     case BindingInfoType::Sampler:
                     case BindingInfoType::Texture:
+                    case BindingInfoType::ExternalTexture:
                         // These binding types are handled in the separate sampler and texture
                         // emulation
                         break;
