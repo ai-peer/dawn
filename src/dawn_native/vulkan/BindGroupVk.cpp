@@ -110,6 +110,18 @@ namespace dawn_native { namespace vulkan {
                     write.pImageInfo = &writeImageInfo[numWrites];
                     break;
                 }
+
+                case BindingInfoType::ExternalTexture: {
+                    std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> textureViews =
+                        GetBindingAsExternalTextureViews(bindingIndex);
+
+                    writeImageInfo[numWrites].imageView = ToBackend(textureViews[0])->GetHandle();
+                    writeImageInfo[numWrites].imageLayout = VK_IMAGE_LAYOUT_GENERAL;
+
+                    write.pImageInfo = &writeImageInfo[numWrites];
+
+                    break;
+                }
             }
 
             numWrites++;

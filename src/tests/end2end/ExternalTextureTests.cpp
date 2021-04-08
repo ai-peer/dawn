@@ -13,6 +13,8 @@
 // limitations under the License.
 
 #include "tests/DawnTest.h"
+#include "utils/ComboRenderPipelineDescriptor.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
 
@@ -43,7 +45,40 @@ namespace {
 }  // anonymous namespace
 
 TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
-    DAWN_SKIP_TEST_IF(UsesWire());
+    wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
+
+    // Create a texture view for the external texture
+    wgpu::TextureView view = texture.CreateView();
+
+    // Create an ExternalTextureDescriptor from the texture view
+    wgpu::ExternalTextureDescriptor externalDesc;
+    externalDesc.plane0 = view;
+    externalDesc.format = kFormat;
+
+    // Import the external texture
+    wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+    ASSERT_NE(externalTexture.Get(), nullptr);
+}
+
+TEST_P(ExternalTextureTests, BindExternalTexture) {
+    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        [[builtin(position)]] var<out> Position : vec4<f32>;
+        [[stage(vertex)]] fn main() -> void {
+            Position = vec4<f32>(1.0, 0.0, 0.0, 1.0);
+            return;
+        })");
+
+    const wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        [[builtin(frag_coord)]] var<in> FragCoord : vec4<f32>;        
+        [[group(0), binding(0)]] var externalTexture: texture_external;
+
+
+        [[location(0)]] var<out> FragColor : vec4<f32>;
+        [[stage(fragment)]] fn main() -> void {
+            FragColor = vec4<f32>(1.0, 0.0, 0.0, 1.0);
+            return;
+        })");
 
     wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
 
@@ -59,6 +94,36 @@ TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
 
     ASSERT_NE(externalTexture.Get(), nullptr);
+
+    wgpu::BindGroup bindGroup;
+    wgpu::BindGroupLayout bgl;
+
+    bgl = utils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment, kFormat}});
+    bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+
+    wgpu::PipelineLayout pipelineLayout;
+    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, &bgl);
+
+    utils::ComboRenderPipelineDescriptor2 descriptor;
+    descriptor.layout = pipelineLayout;
+    descriptor.vertex.module = vsModule;
+    descriptor.cFragment.module = fsModule;
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kWidth, kHeight);
+    descriptor.cTargets[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline2(&descriptor);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+    {
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
 }
 
 DAWN_INSTANTIATE_TEST(ExternalTextureTests,

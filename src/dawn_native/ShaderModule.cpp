@@ -600,6 +600,20 @@ namespace dawn_native {
                         break;
                     }
 
+                    case BindingInfoType::ExternalTexture: {
+                        ASSERT(layoutInfo.externalTexture.format != wgpu::TextureFormat::Undefined);
+                        ASSERT(shaderInfo.externalTexture.format != wgpu::TextureFormat::Undefined);
+
+                        if (layoutInfo.externalTexture.format !=
+                            shaderInfo.externalTexture.format) {
+                            return DAWN_VALIDATION_ERROR(
+                                "The externalTexture format of the bind group layout entry is "
+                                "different from " +
+                                GetShaderDeclarationString(group, bindingNumber));
+                        }
+                        break;
+                    }
+
                     case BindingInfoType::Buffer: {
                         // Binding mismatch between shader and bind group is invalid. For example, a
                         // writable binding in the shader with a readonly storage buffer in the bind
@@ -788,6 +802,12 @@ namespace dawn_native {
                         }
                         case BindingInfoType::Sampler: {
                             info->sampler.type = wgpu::SamplerBindingType::Filtering;
+                            break;
+                        }
+                        case BindingInfoType::ExternalTexture: {
+                            return DAWN_VALIDATION_ERROR(
+                                "External textures are not supported with SPIRV.");
+                            break;
                         }
                     }
                 }

@@ -336,6 +336,16 @@ namespace dawn_native { namespace d3d12 {
                                 break;
                             }
 
+                            case BindingInfoType::ExternalTexture: {
+                                std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> textureViews =
+                                    mBindGroups[index]->GetBindingAsExternalTextureViews(binding);
+                                ToBackend(textureViews[0]->GetTexture())
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        commandContext, &barriers, wgpu::TextureUsage::Sampled,
+                                        textureViews[0]->GetSubresourceRange());
+                                break;
+                            }
+
                             case BindingInfoType::Sampler:
                                 // Don't require barriers.
                                 break;

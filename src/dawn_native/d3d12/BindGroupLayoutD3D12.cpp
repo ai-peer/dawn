@@ -41,6 +41,7 @@ namespace dawn_native { namespace d3d12 {
                     return BindGroupLayout::DescriptorType::Sampler;
 
                 case BindingInfoType::Texture:
+                case BindingInfoType::ExternalTexture:
                     return BindGroupLayout::DescriptorType::SRV;
 
                 case BindingInfoType::StorageTexture:
