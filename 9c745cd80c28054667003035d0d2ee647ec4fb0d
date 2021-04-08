@@ -16,6 +16,23 @@
       "message": "LGTM! Thanks a lot for the cleanup, that\u0027s the ideal end state!",
       "revId": "9c745cd80c28054667003035d0d2ee647ec4fb0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eea18990_deb95ca3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-08T14:56:45Z",
+      "side": 1,
+      "message": "Thanks for review!",
+      "revId": "9c745cd80c28054667003035d0d2ee647ec4fb0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
