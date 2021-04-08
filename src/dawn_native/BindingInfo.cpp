@@ -14,6 +14,8 @@
 
 #include "dawn_native/BindingInfo.h"
 
+#include "dawn_native/ChainUtils_autogen.h"
+
 namespace dawn_native {
 
     void IncrementBindingCounts(BindingCounts* bindingCounts, const BindGroupLayoutEntry& entry) {
@@ -56,6 +58,12 @@ namespace dawn_native {
             perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
         } else if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
             perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
+        } else {
+            const ExternalTextureBindingLayout* externalTextureBindingLayout;
+            FindInChain(entry.nextInChain, &externalTextureBindingLayout);
+            if (externalTextureBindingLayout != nullptr) {
+                perStageBindingCountMember = &PerStageBindingCounts::externalTextureCount;
+            }
         }
 
         ASSERT(perStageBindingCountMember != nullptr);
@@ -73,14 +81,18 @@ namespace dawn_native {
 
         for (SingleShaderStage stage : IterateStages(kAllStages)) {
             bindingCounts->perStage[stage].sampledTextureCount +=
-                rhs.perStage[stage].sampledTextureCount;
-            bindingCounts->perStage[stage].samplerCount += rhs.perStage[stage].samplerCount;
+                rhs.perStage[stage].sampledTextureCount +
+                (rhs.perStage[stage].externalTextureCount * kSampledTexturesPerExternalTexture);
+            bindingCounts->perStage[stage].samplerCount +=
+                rhs.perStage[stage].samplerCount +
+                (rhs.perStage[stage].externalTextureCount * kSamplersPerExternalTexture);
             bindingCounts->perStage[stage].storageBufferCount +=
                 rhs.perStage[stage].storageBufferCount;
             bindingCounts->perStage[stage].storageTextureCount +=
                 rhs.perStage[stage].storageTextureCount;
             bindingCounts->perStage[stage].uniformBufferCount +=
-                rhs.perStage[stage].uniformBufferCount;
+                rhs.perStage[stage].uniformBufferCount +
+                (rhs.perStage[stage].externalTextureCount * kUniformsPerExternalTexture);
         }
     }
 
@@ -98,13 +110,18 @@ namespace dawn_native {
         }
 
         for (SingleShaderStage stage : IterateStages(kAllStages)) {
-            if (bindingCounts.perStage[stage].sampledTextureCount >
+            if (bindingCounts.perStage[stage].sampledTextureCount +
+                    (bindingCounts.perStage[stage].externalTextureCount *
+                     kSampledTexturesPerExternalTexture) >
                 kMaxSampledTexturesPerShaderStage) {
                 return DAWN_VALIDATION_ERROR(
                     "The number of sampled textures exceeds the maximum "
                     "per-stage limit.");
             }
-            if (bindingCounts.perStage[stage].samplerCount > kMaxSamplersPerShaderStage) {
+            if (bindingCounts.perStage[stage].samplerCount +
+                    (bindingCounts.perStage[stage].externalTextureCount *
+                     kSamplersPerExternalTexture) >
+                kMaxSamplersPerShaderStage) {
                 return DAWN_VALIDATION_ERROR(
                     "The number of samplers exceeds the maximum per-stage limit.");
             }
@@ -118,7 +135,9 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR(
                     "The number of storage textures exceeds the maximum per-stage limit.");
             }
-            if (bindingCounts.perStage[stage].uniformBufferCount >
+            if (bindingCounts.perStage[stage].uniformBufferCount +
+                    (bindingCounts.perStage[stage].externalTextureCount *
+                     kUniformsPerExternalTexture) >
                 kMaxUniformBuffersPerShaderStage) {
                 return DAWN_VALIDATION_ERROR(
                     "The number of uniform buffers exceeds the maximum per-stage limit.");
