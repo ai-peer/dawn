@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
     class ExternalTextureTest : public ValidationTest {

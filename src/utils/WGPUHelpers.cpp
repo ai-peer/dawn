@@ -299,6 +299,15 @@ namespace utils {
     BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         uint32_t entryBinding,
         wgpu::ShaderStage entryVisibility,
+        wgpu::ExternalTextureAllowedType allowedType) {
+        binding = entryBinding;
+        visibility = entryVisibility;
+        externalTexture.allowedType = allowedType;
+    }
+
+    BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
+        uint32_t entryBinding,
+        wgpu::ShaderStage entryVisibility,
         wgpu::BindingType entryType,
         bool bufferHasDynamicOffset,
         uint64_t bufferMinBindingSize,
@@ -330,6 +339,12 @@ namespace utils {
         : binding(binding), textureView(textureView) {
     }
 
+    BindingInitializationHelper::BindingInitializationHelper(
+        uint32_t binding,
+        const wgpu::ExternalTexture& externalTexture)
+        : binding(binding), externalTexture(externalTexture) {
+    }
+
     BindingInitializationHelper::BindingInitializationHelper(uint32_t binding,
                                                              const wgpu::Buffer& buffer,
                                                              uint64_t offset,
@@ -343,6 +358,7 @@ namespace utils {
         result.binding = binding;
         result.sampler = sampler;
         result.textureView = textureView;
+        result.externalTexture = externalTexture;
         result.buffer = buffer;
         result.offset = offset;
         result.size = size;

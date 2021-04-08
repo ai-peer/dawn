@@ -109,6 +109,13 @@ namespace dawn_native {
                     break;
                 }
 
+                case BindingInfoType::ExternalTexture: {
+                    std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> textureViews =
+                        group->GetBindingAsExternalTextureViews(bindingIndex);
+                    TextureViewUsedAs(textureViews[0].Get(), wgpu::TextureUsage::Sampled);
+                    break;
+                }
+
                 case BindingInfoType::Sampler:
                     break;
             }
@@ -159,6 +166,12 @@ namespace dawn_native {
                 case BindingInfoType::Texture: {
                     mUsage.referencedTextures.insert(
                         group->GetBindingAsTextureView(index)->GetTexture());
+                    break;
+                }
+
+                case BindingInfoType::ExternalTexture: {
+                    mUsage.referencedTextures.insert(
+                        group->GetBindingAsExternalTextureViews(index)[0].Get()->GetTexture());
                     break;
                 }
 
