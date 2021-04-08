@@ -1003,6 +1003,27 @@ TEST_P(CopyTests_T2B, Texture3DSubRegion) {
            {kWidth, kHeight, kCopyDepth}, wgpu::TextureDimension::e3D);
 }
 
+// Test that copying an entire texture works when texture's dimensions are less than 256-byte
+TEST_P(CopyTests_T2B, Texture3DFullUnalignedTinyCopies) {
+    DAWN_SKIP_TEST_IF(IsVulkan() || IsMetal() || IsOpenGL() || IsOpenGLES());
+
+    constexpr uint32_t kWidth = 4;
+    constexpr uint32_t kHeight = 2;
+    constexpr uint32_t kDepth = 3;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, kDepth};
+
+    // The for loop is designed to test TextureCopySplitter in D3D. Data offset in staging buffer
+    // for first DoTest() is 0. It is 256-bytes aligned. The Offset of the second DoTest() run is
+    // very likely at somewhere that are not 256-byte aligned because the last row of the first
+    // DoTest() doesn't fill data till the end. So the copied data may need to be split.
+    for (uint32_t i = 0; i < 2; ++i) {
+        DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight, kDepth), {kWidth, kHeight, kDepth},
+               wgpu::TextureDimension::e3D);
+    }
+}
+
 // TODO(yunchao.he@intel.com): add T2B tests for 3D textures, like RowPitch,
 // RowsPerImage, buffer offset, partial depth range, non-zero level, etc.
 

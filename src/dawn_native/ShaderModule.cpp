@@ -597,6 +597,12 @@ namespace dawn_native {
                         break;
                     }
 
+                    case BindingInfoType::ExternalTexture: {
+                        ASSERT(layoutInfo.externalTexture.allowedType !=
+                               wgpu::ExternalTextureAllowedType::Undefined);
+                        break;
+                    }
+
                     case BindingInfoType::Buffer: {
                         // Binding mismatch between shader and bind group is invalid. For example, a
                         // writable binding in the shader with a readonly storage buffer in the bind
@@ -785,6 +791,12 @@ namespace dawn_native {
                         }
                         case BindingInfoType::Sampler: {
                             info->sampler.type = wgpu::SamplerBindingType::Filtering;
+                            break;
+                        }
+                        case BindingInfoType::ExternalTexture: {
+                            return DAWN_VALIDATION_ERROR(
+                                "External textures are not supported with SPIRV.");
+                            break;
                         }
                     }
                 }

@@ -467,6 +467,24 @@ namespace dawn_native { namespace metal {
                             }
                             break;
                         }
+
+                        case BindingInfoType::ExternalTexture: {
+                            auto textureView = ToBackend(
+                                group->GetBindingAsExternalTextureViews(bindingIndex)[0].Get());
+                            if (hasVertStage) {
+                                [render setVertexTexture:textureView->GetMTLTexture()
+                                                 atIndex:vertIndex];
+                            }
+                            if (hasFragStage) {
+                                [render setFragmentTexture:textureView->GetMTLTexture()
+                                                   atIndex:fragIndex];
+                            }
+                            if (hasComputeStage) {
+                                [compute setTexture:textureView->GetMTLTexture()
+                                            atIndex:computeIndex];
+                            }
+                            break;
+                        }
                     }
                 }
             }
