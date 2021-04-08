@@ -467,6 +467,32 @@ namespace dawn_native { namespace metal {
                             }
                             break;
                         }
+
+                        case BindingInfoType::ExternalTexture: {
+                            const std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat>& views =
+                                GetBindingAsExternalTextureViews(bindingIndex);
+
+                            // Only single-plane formats are supported right now, so assert only one
+                            // view exists.
+                            ASSERT(views[1].Get() == nullptr);
+                            ASSERT(views[2].Get() == nullptr);
+
+                            auto textureView = ToBackend(views[0].Get());
+
+                            if (hasVertStage) {
+                                [render setVertexTexture:textureView->GetMTLTexture()
+                                                 atIndex:vertIndex];
+                            }
+                            if (hasFragStage) {
+                                [render setFragmentTexture:textureView->GetMTLTexture()
+                                                   atIndex:fragIndex];
+                            }
+                            if (hasComputeStage) {
+                                [compute setTexture:textureView->GetMTLTexture()
+                                            atIndex:computeIndex];
+                            }
+                            break;
+                        }
                     }
                 }
             }
