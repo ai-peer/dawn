@@ -56,6 +56,9 @@ namespace dawn_native {
             perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
         } else if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
             perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
+        } else if (entry.externalTexture.allowedType !=
+                   wgpu::ExternalTextureAllowedType::Undefined) {
+            perStageBindingCountMember = &PerStageBindingCounts::externalTextureCount;
         } else {
             // Deprecated path.
             switch (entry.type) {
@@ -97,6 +100,10 @@ namespace dawn_native {
                     perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
                     break;
 
+                case wgpu::BindingType::ExternalTexture:
+                    perStageBindingCountMember = &PerStageBindingCounts::externalTextureCount;
+                    break;
+
                 case wgpu::BindingType::Undefined:
                     UNREACHABLE();
             }
@@ -117,14 +124,16 @@ namespace dawn_native {
 
         for (SingleShaderStage stage : IterateStages(kAllStages)) {
             bindingCounts->perStage[stage].sampledTextureCount +=
-                rhs.perStage[stage].sampledTextureCount;
-            bindingCounts->perStage[stage].samplerCount += rhs.perStage[stage].samplerCount;
+                rhs.perStage[stage].sampledTextureCount +
+                (rhs.perStage[stage].externalTextureCount * 3);
+            bindingCounts->perStage[stage].samplerCount +=
+                rhs.perStage[stage].samplerCount + rhs.perStage[stage].externalTextureCount;
             bindingCounts->perStage[stage].storageBufferCount +=
                 rhs.perStage[stage].storageBufferCount;
             bindingCounts->perStage[stage].storageTextureCount +=
                 rhs.perStage[stage].storageTextureCount;
             bindingCounts->perStage[stage].uniformBufferCount +=
-                rhs.perStage[stage].uniformBufferCount;
+                rhs.perStage[stage].uniformBufferCount + rhs.perStage[stage].externalTextureCount;
         }
     }
 

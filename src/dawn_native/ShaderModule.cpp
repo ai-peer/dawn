@@ -533,9 +533,15 @@ namespace dawn_native {
                 const BindingInfo& layoutInfo = layout->GetBindingInfo(bindingIndex);
 
                 if (layoutInfo.bindingType != shaderInfo.bindingType) {
-                    return DAWN_VALIDATION_ERROR(
-                        "The binding type of the bind group layout entry conflicts " +
-                        GetShaderDeclarationString(group, bindingNumber));
+                    // Because the underlying texture views of an ExternalTexture work the same as a
+                    // normal texture, Tint transforms instances of texture_external into
+                    // texture_2d<f32>. Because these types are the same, allow the type mismatch.
+                    if (layoutInfo.bindingType != BindingInfoType::ExternalTexture ||
+                        shaderInfo.bindingType != BindingInfoType::Texture) {
+                        return DAWN_VALIDATION_ERROR(
+                            "The binding type of the bind group layout entry conflicts " +
+                            GetShaderDeclarationString(group, bindingNumber));
+                    }
                 }
 
                 if ((layoutInfo.visibility & StageBit(entryPoint.stage)) == 0) {
@@ -594,6 +600,12 @@ namespace dawn_native {
                                 "is different from " +
                                 GetShaderDeclarationString(group, bindingNumber));
                         }
+                        break;
+                    }
+
+                    case BindingInfoType::ExternalTexture: {
+                        ASSERT(layoutInfo.externalTexture.allowedType !=
+                               wgpu::ExternalTextureAllowedType::Undefined);
                         break;
                     }
 
@@ -785,6 +797,11 @@ namespace dawn_native {
                         }
                         case BindingInfoType::Sampler: {
                             info->sampler.type = wgpu::SamplerBindingType::Filtering;
+                            break;
+                        }
+                        case BindingInfoType::ExternalTexture: {
+                            return DAWN_VALIDATION_ERROR("External textures are not supported.");
+                            break;
                         }
                     }
                 }
