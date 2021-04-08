@@ -57,9 +57,6 @@ class DepthStencilSamplingTest : public DawnTest {
     void SetUp() override {
         DawnTest::SetUp();
 
-        // TODO(crbug.com/tint/684): Shaders compile, tests fail.
-        DAWN_SKIP_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
-
         wgpu::BufferDescriptor uniformBufferDesc;
         uniformBufferDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
         uniformBufferDesc.size = sizeof(float);
@@ -728,6 +725,9 @@ TEST_P(DepthStencilSamplingTest, CompareFunctionsRender) {
 TEST_P(DepthStencilSamplingTest, CompareFunctionsCompute) {
     // Initialization via renderPass loadOp doesn't work on Mac Intel.
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
+
+    // TODO(crbug.com/tint/684): cannot map expression to cs_5_1 instruction set.
+    DAWN_SKIP_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
 
     wgpu::ComputePipeline pipeline = CreateComparisonComputePipeline();
 
