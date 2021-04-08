@@ -23,6 +23,7 @@
 namespace dawn_native { namespace vulkan {
 
     class Device;
+    class PipelineLayout;
 
     class ShaderModule final : public ShaderModuleBase {
       public:
@@ -32,12 +33,17 @@ namespace dawn_native { namespace vulkan {
 
         VkShaderModule GetHandle() const;
 
+        MaybeError InitializeTransformedModule(const char* entryPointName, PipelineLayout* layout);
+
       private:
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override;
         MaybeError Initialize(ShaderModuleParseResult* parseResult);
 
         VkShaderModule mHandle = VK_NULL_HANDLE;
+
+        // make sure creation of VkShaderModule only happens once
+        bool mInitialized = false;
     };
 
 }}  // namespace dawn_native::vulkan
