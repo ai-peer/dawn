@@ -14,6 +14,7 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include "common/HashUtils.h"
 #include "common/VertexFormatUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/CompilationMessages.h"
@@ -1362,6 +1363,13 @@ namespace dawn_native {
             result[entryPoint.name] = std::move(metadata);
         }
         return std::move(result);
+    }
+
+    size_t PipelineLayoutEntryPointPairHashFunc::operator()(
+        const PipelineLayoutEntryPointPair& pair) const {
+        size_t hash = Hash(pair.first);
+        HashCombine(&hash, Hash(pair.second));
+        return hash;
     }
 
 }  // namespace dawn_native
