@@ -206,6 +206,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f156c074_5fd5e813",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-08T00:02:51Z",
+      "side": 1,
+      "message": "well, skipping the validation in the beginning lets us do the cache lookup without parsing. This would be much faster than always parsing. Perhaps instead, we could have ValidateShaderModuleDescriptor happen ONLY inside GetOrCreateShaderModule - but to do that we would need to have a mini-validation just before blueprint creation that checks that we won\u0027t hit an ASSERT when creating the blueprint.",
+      "parentUuid": "8647a380_ffde4355",
+      "range": {
+        "startLine": 886,
+        "startChar": 8,
+        "endLine": 891,
+        "endChar": 9
+      },
+      "revId": "aa51430d41fd2dc712c81d870ed4d8426e6f38c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f54e314d_3a49d3c3",
