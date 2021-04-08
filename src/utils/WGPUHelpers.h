@@ -126,6 +126,9 @@ namespace utils {
             wgpu::StorageTextureAccess storageTextureAccess,
             wgpu::TextureFormat format,
             wgpu::TextureViewDimension viewDimension = wgpu::TextureViewDimension::e2D);
+        BindingLayoutEntryInitializationHelper(uint32_t entryBinding,
+                                               wgpu::ShaderStage entryVisibility,
+                                               wgpu::ExternalTextureAllowedType allowedType);
 
         // Backwards compat support for the deprecated path
         BindingLayoutEntryInitializationHelper(
@@ -157,6 +160,7 @@ namespace utils {
     struct BindingInitializationHelper {
         BindingInitializationHelper(uint32_t binding, const wgpu::Sampler& sampler);
         BindingInitializationHelper(uint32_t binding, const wgpu::TextureView& textureView);
+        BindingInitializationHelper(uint32_t binding, const wgpu::ExternalTexture& externalTexture);
         BindingInitializationHelper(uint32_t binding,
                                     const wgpu::Buffer& buffer,
                                     uint64_t offset = 0,
@@ -167,6 +171,7 @@ namespace utils {
         uint32_t binding;
         wgpu::Sampler sampler;
         wgpu::TextureView textureView;
+        wgpu::ExternalTexture externalTexture;
         wgpu::Buffer buffer;
         uint64_t offset = 0;
         uint64_t size = 0;

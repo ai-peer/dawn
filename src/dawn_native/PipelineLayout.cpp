@@ -147,6 +147,9 @@ namespace dawn_native {
                 case BindingInfoType::StorageTexture:
                     entry.storageTexture = shaderBinding.storageTexture;
                     break;
+                case BindingInfoType::ExternalTexture:
+                    entry.externalTexture = shaderBinding.externalTexture;
+                    break;
             }
             return entry;
         };

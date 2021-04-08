@@ -113,6 +113,18 @@ namespace dawn_native { namespace vulkan {
                     write.pImageInfo = &writeImageInfo[numWrites];
                     break;
                 }
+
+                case BindingInfoType::ExternalTexture: {
+                    TextureView* view =
+                        ToBackend(GetBindingAsExternalTextureViews(bindingIndex)[0].Get());
+
+                    writeImageInfo[numWrites].imageView = view->GetHandle();
+                    writeImageInfo[numWrites].imageLayout = VulkanImageLayout(
+                        ToBackend(view->GetTexture()), wgpu::TextureUsage::Sampled);
+
+                    write.pImageInfo = &writeImageInfo[numWrites];
+                    break;
+                }
             }
 
             numWrites++;

@@ -260,6 +260,8 @@ class DawnTestBase {
     bool IsOpenGLES() const;
     bool IsVulkan() const;
 
+    bool IsUsingTintGenerator() const;
+
     bool IsAMD() const;
     bool IsARM() const;
     bool IsImgTec() const;
