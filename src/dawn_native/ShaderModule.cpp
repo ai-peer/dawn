@@ -415,6 +415,7 @@ namespace dawn_native {
             std::ostringstream errorStream;
             errorStream << "Tint SPIRV reader failure:" << std::endl;
 
+            // TOUCH
             tint::Program program = tint::reader::spirv::Parse(spirv);
             if (outMessages != nullptr) {
                 outMessages->AddMessages(program.Diagnostics());
