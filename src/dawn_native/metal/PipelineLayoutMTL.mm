@@ -61,6 +61,9 @@ namespace dawn_native { namespace metal {
                             mIndexInfo[stage][group][bindingIndex] = textureIndex;
                             textureIndex++;
                             break;
+                        case BindingInfoType::ExternalTexture:
+                            // TODO (dawn:728)
+                            break;
                     }
                 }
             }
