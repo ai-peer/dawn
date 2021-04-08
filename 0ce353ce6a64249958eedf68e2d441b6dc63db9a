@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0e67d07_52a83e92",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-08T02:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4416e3d0_5d4ec7cd",
+      "range": {
+        "startLine": 592,
+        "startChar": 15,
+        "endLine": 592,
+        "endChar": 26
+      },
+      "revId": "0ce353ce6a64249958eedf68e2d441b6dc63db9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2e87dcd_2337156d",
@@ -88,6 +112,30 @@
       "writtenOn": "2021-04-08T00:02:51Z",
       "side": 1,
       "message": "nit: could be const, CamelCase, define it in the .cpp file instead, and perhaps name it HasParsedShader to be more explicit",
+      "range": {
+        "startLine": 64,
+        "startChar": 13,
+        "endLine": 64,
+        "endChar": 22
+      },
+      "revId": "0ce353ce6a64249958eedf68e2d441b6dc63db9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58b72df6_212ef006",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-08T02:12:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6776ad57_17ce6cb1",
       "range": {
         "startLine": 64,
         "startChar": 13,
