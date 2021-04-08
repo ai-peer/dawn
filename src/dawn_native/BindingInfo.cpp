@@ -56,6 +56,8 @@ namespace dawn_native {
             perStageBindingCountMember = &PerStageBindingCounts::sampledTextureCount;
         } else if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
             perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
+        } else if (entry.externalTexture.format != wgpu::TextureFormat::Undefined) {
+            perStageBindingCountMember = &PerStageBindingCounts::externalTextureCount;
         } else {
             // Deprecated path.
             switch (entry.type) {
@@ -95,6 +97,10 @@ namespace dawn_native {
                 case wgpu::BindingType::ReadonlyStorageTexture:
                 case wgpu::BindingType::WriteonlyStorageTexture:
                     perStageBindingCountMember = &PerStageBindingCounts::storageTextureCount;
+                    break;
+
+                case wgpu::BindingType::ExternalTexture:
+                    perStageBindingCountMember = &PerStageBindingCounts::externalTextureCount;
                     break;
 
                 case wgpu::BindingType::Undefined:

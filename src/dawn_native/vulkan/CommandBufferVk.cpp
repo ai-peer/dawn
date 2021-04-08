@@ -205,6 +205,17 @@ namespace dawn_native { namespace vulkan {
                                 break;
                             }
 
+                            case BindingInfoType::ExternalTexture: {
+                                std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> views =
+                                    mBindGroups[index]->GetBindingAsExternalTextureViews(binding);
+                                ToBackend(views[0]->GetTexture())
+                                    ->TransitionUsageAndGetResourceBarrier(
+                                        wgpu::TextureUsage::Sampled,
+                                        views[0]->GetSubresourceRange(), &imageBarriers, &srcStages,
+                                        &dstStages);
+                                break;
+                            }
+
                             case BindingInfoType::Sampler:
                                 // Don't require barriers.
                                 break;

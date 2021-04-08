@@ -362,6 +362,11 @@ namespace dawn_native { namespace opengl {
                                                 texture->GetGLFormat().internalFormat);
                             break;
                         }
+
+                        case BindingInfoType::ExternalTexture: {
+                            // TODO (dawn:728)
+                            break;
+                        }
                     }
                 }
             }

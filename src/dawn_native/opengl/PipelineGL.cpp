@@ -181,6 +181,11 @@ namespace dawn_native { namespace opengl {
                         }
                         break;
                     }
+
+                    case BindingInfoType::ExternalTexture: {
+                        // TODO (dawn:728)
+                        break;
+                    }
                 }
             }
         }

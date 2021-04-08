@@ -467,6 +467,11 @@ namespace dawn_native { namespace metal {
                             }
                             break;
                         }
+
+                        case BindingInfoType::ExternalTexture: {
+                            // TODO (dawn:728)
+                            break;
+                        }
                     }
                 }
             }
