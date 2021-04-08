@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "tests/DawnTest.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
 
@@ -43,8 +44,6 @@ namespace {
 }  // anonymous namespace
 
 TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-
     wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
 
     // Create a texture view for the external texture
@@ -59,6 +58,25 @@ TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
     wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
 
     ASSERT_NE(externalTexture.Get(), nullptr);
+}
+
+// Ensure that we can create a bind group layout and bind group with an external texture.
+TEST_P(ExternalTextureTests, BindExternalTexture) {
+    wgpu::Texture texture = Create2DTexture(device, kWidth, kHeight, kFormat, kSampledUsage);
+    wgpu::TextureView view = texture.CreateView();
+
+    wgpu::ExternalTextureDescriptor externalDesc;
+    externalDesc.plane0 = view;
+    externalDesc.format = kFormat;
+
+    wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+    wgpu::BindGroup bindGroup;
+    wgpu::BindGroupLayout bgl;
+
+    bgl = utils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment, kFormat}});
+
+    bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
 }
 
 DAWN_INSTANTIATE_TEST(ExternalTextureTests,

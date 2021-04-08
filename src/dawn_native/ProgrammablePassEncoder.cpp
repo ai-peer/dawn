@@ -73,7 +73,12 @@ namespace dawn_native {
                         }
                         break;
                     }
-
+                    case BindingInfoType::ExternalTexture: {
+                        std::array<Ref<TextureViewBase>, kMaxPlanesPerFormat> textureViews =
+                            group->GetBindingAsExternalTextureViews(bindingIndex);
+                        usageTracker->TextureViewUsedAs(textureViews[0].Get(),
+                                                        wgpu::TextureUsage::Sampled);
+                    } break;
                     case BindingInfoType::Sampler:
                         break;
                 }

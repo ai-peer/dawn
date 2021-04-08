@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "tests/unittests/validation/ValidationTest.h"
+#include "utils/WGPUHelpers.h"
 
 namespace {
     class ExternalTextureTest : public ValidationTest {
@@ -109,6 +110,33 @@ namespace {
             externalDesc.plane0 = errorTextureView;
             externalDesc.format = kDefaultTextureFormat;
             ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+        }
+    }
+
+    TEST_F(ExternalTextureTest, BindExternalTextureValidation) {
+        wgpu::TextureDescriptor textureDescriptor = CreateDefaultTextureDescriptor();
+        wgpu::Texture texture = device.CreateTexture(&textureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc;
+        externalDesc.plane0 = texture.CreateView();
+        externalDesc.format = kDefaultTextureFormat;
+
+        wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+        wgpu::BindGroupLayout bgl;
+
+        // Creating a bind group with an external texture that has a matching format should succeed.
+        {
+            bgl = utils::MakeBindGroupLayout(
+                device, {{0, wgpu::ShaderStage::Fragment, kDefaultTextureFormat}});
+            utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+        }
+
+        // Creating a bind group with an external texture that has a mismatched format should fail.
+        {
+            bgl = utils::MakeBindGroupLayout(
+                device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureFormat::BGRA8Unorm}});
+            ASSERT_DEVICE_ERROR(utils::MakeBindGroup(device, bgl, {{0, externalTexture}}));
         }
     }
 
