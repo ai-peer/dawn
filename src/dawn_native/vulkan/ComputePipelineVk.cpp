@@ -45,7 +45,11 @@ namespace dawn_native { namespace vulkan {
         createInfo.stage.pNext = nullptr;
         createInfo.stage.flags = 0;
         createInfo.stage.stage = VK_SHADER_STAGE_COMPUTE_BIT;
-        createInfo.stage.module = ToBackend(descriptor->computeStage.module)->GetHandle();
+        ShaderModule* module = ToBackend(descriptor->computeStage.module);
+        DAWN_TRY(module->InitializeTransformedModule(descriptor->computeStage.entryPoint,
+                                                     ToBackend(GetLayout())));
+        createInfo.stage.module = module->GetHandle();
+
         createInfo.stage.pName = descriptor->computeStage.entryPoint;
         createInfo.stage.pSpecializationInfo = nullptr;
 

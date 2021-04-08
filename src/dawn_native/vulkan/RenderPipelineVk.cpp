@@ -332,12 +332,21 @@ namespace dawn_native { namespace vulkan {
 
         VkPipelineShaderStageCreateInfo shaderStages[2];
         {
+            PerStage<ShaderModule*> modules;
+            modules[SingleShaderStage::Vertex] = ToBackend(descriptor->vertexStage.module);
+            modules[SingleShaderStage::Fragment] = ToBackend(descriptor->fragmentStage->module);
+
+            DAWN_TRY(modules[SingleShaderStage::Vertex]->InitializeTransformedModule(
+                descriptor->vertexStage.entryPoint, ToBackend(GetLayout())));
+            DAWN_TRY(modules[SingleShaderStage::Fragment]->InitializeTransformedModule(
+                descriptor->fragmentStage->entryPoint, ToBackend(GetLayout())));
+
             shaderStages[0].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
             shaderStages[0].pNext = nullptr;
             shaderStages[0].flags = 0;
             shaderStages[0].stage = VK_SHADER_STAGE_VERTEX_BIT;
             shaderStages[0].pSpecializationInfo = nullptr;
-            shaderStages[0].module = ToBackend(descriptor->vertexStage.module)->GetHandle();
+            shaderStages[0].module = modules[SingleShaderStage::Vertex]->GetHandle();
             shaderStages[0].pName = descriptor->vertexStage.entryPoint;
 
             shaderStages[1].sType = VK_STRUCTURE_TYPE_PIPELINE_SHADER_STAGE_CREATE_INFO;
@@ -345,7 +354,7 @@ namespace dawn_native { namespace vulkan {
             shaderStages[1].flags = 0;
             shaderStages[1].stage = VK_SHADER_STAGE_FRAGMENT_BIT;
             shaderStages[1].pSpecializationInfo = nullptr;
-            shaderStages[1].module = ToBackend(descriptor->fragmentStage->module)->GetHandle();
+            shaderStages[1].module = modules[SingleShaderStage::Fragment]->GetHandle();
             shaderStages[1].pName = descriptor->fragmentStage->entryPoint;
         }
 
