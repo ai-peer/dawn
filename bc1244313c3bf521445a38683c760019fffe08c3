@@ -154,6 +154,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc2cc068_cf63733e",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-08T10:52:13Z",
+      "side": 1,
+      "message": "Mailbox is a concept in Vulkan and wgpu-rs uses the same name for triple-buffering.\n\nOverall the swapchain creation descriptor will have to be revisited once we start paying more attention to native. I\u0027ll ping you (and Jesse probably) when we try to finalize the webgpu.h swapchains. Not for a while though.",
+      "parentUuid": "da1f3e36_0052b589",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 9
+      },
+      "revId": "bc1244313c3bf521445a38683c760019fffe08c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "263ed618_b63e9019",
