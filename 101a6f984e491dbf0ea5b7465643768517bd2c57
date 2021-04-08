@@ -33,6 +33,24 @@
       "message": "Whoops, I forgot to re-review. LGTM",
       "revId": "101a6f984e491dbf0ea5b7465643768517bd2c57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dbfa58f_12f73501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-08T15:31:59Z",
+      "side": 1,
+      "message": "No problem. Thanks!",
+      "parentUuid": "bf8e6a04_9969f72e",
+      "revId": "101a6f984e491dbf0ea5b7465643768517bd2c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
