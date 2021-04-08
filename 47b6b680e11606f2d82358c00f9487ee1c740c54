@@ -16,6 +16,24 @@
       "message": "A Question: \nHow do we pass the CompilationMessages() into tint::transform::Manager::Run instead of RunTransforms\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/ShaderModuleD3D12.cpp;l\u003d262;drc\u003d3f2cdf1a151e731746aad1bc4187d67efdd7ea8c;bpv\u003d1;bpt\u003d1?q\u003dtransformmanager%20f:dawn\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nDo you plan to add an overload there as well?",
       "revId": "47b6b680e11606f2d82358c00f9487ee1c740c54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54b300d7_32247c5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-08T22:18:57Z",
+      "side": 1,
+      "message": "Wouldn\u0027t we grab the diagnostics from the tranform\u0027s program output? https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/d3d12/ShaderModuleD3D12.cpp;l\u003d266;drc\u003d3f2cdf1a151e731746aad1bc4187d67efdd7ea8c?q\u003dtransformmanager%20f:dawn\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nThis one however looks like it\u0027s a pipeline-level message not a shader-module-level error.",
+      "parentUuid": "b6fb80f0_99900d34",
+      "revId": "47b6b680e11606f2d82358c00f9487ee1c740c54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
