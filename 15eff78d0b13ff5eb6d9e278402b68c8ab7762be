@@ -33,6 +33,24 @@
       "message": "Why do we need a PIMPL? Can\u0027t we store a unique_ptr\u003ctint::Source::File\u003e instead and add the proper forward declaration?",
       "revId": "15eff78d0b13ff5eb6d9e278402b68c8ab7762be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0ab37c_3e041225",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-04-09T12:29:47Z",
+      "side": 1,
+      "message": "No, Source is a class, File is a nested class of Source. You cannot forward declare these.",
+      "parentUuid": "c98c34e7_684c6557",
+      "revId": "15eff78d0b13ff5eb6d9e278402b68c8ab7762be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
