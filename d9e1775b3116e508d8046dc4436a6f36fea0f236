@@ -210,6 +210,24 @@
       "parentUuid": "fa990c7c_4e7a7413",
       "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b3c62d2_479c6a37",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T15:30:29Z",
+      "side": 1,
+      "message": "DoTexSubImage seems good.",
+      "parentUuid": "46a2a2f9_fc58559c",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
