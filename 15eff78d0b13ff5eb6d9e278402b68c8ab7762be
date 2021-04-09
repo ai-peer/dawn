@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "765cd35d_80eaf11b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:08:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "15eff78d0b13ff5eb6d9e278402b68c8ab7762be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c98c34e7_684c6557",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1052,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:08:07Z",
+      "side": 1,
+      "message": "Why do we need a PIMPL? Can\u0027t we store a unique_ptr\u003ctint::Source::File\u003e instead and add the proper forward declaration?",
+      "revId": "15eff78d0b13ff5eb6d9e278402b68c8ab7762be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
