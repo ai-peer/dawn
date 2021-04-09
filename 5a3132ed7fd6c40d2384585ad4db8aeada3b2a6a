@@ -46,6 +46,30 @@
       },
       "revId": "5a3132ed7fd6c40d2384585ad4db8aeada3b2a6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "696af4a4_f7a4bf29",
+        "filename": "src/tests/unittests/wire/WireExtensionTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-09T17:22:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9d759dd_d1c99ab9",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 1
+      },
+      "revId": "5a3132ed7fd6c40d2384585ad4db8aeada3b2a6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
