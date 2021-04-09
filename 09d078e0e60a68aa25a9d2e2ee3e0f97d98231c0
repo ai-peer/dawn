@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "959e2f01_720aae47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-04-09T01:27:40Z",
+      "side": 1,
+      "message": "Open for review for any inputs (it\u0027s still failing vulkan intel/swiftshader path with use_tint_generator...)\n\nBasically I defer the creation of actual vulkan shader module from Initialize to pipeline creation time (compute/render) for UseTintGenerator path (like the time when MSL and HLSL shaders getting translated) To avoid duplicate initialization of the vulkan shader module object I added flag to make sure the InitializeTransformedModule would only be executed once. The tintProgram after transformed seems to have the remapped binding Index (mWgsl of the shaderModule is not changed but that doesn\u0027t seem to matter)\n\nLike to hear anything else needs to be considered during this process...\nThanks!",
+      "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
