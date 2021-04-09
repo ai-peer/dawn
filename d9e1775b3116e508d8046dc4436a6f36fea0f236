@@ -102,6 +102,24 @@
       "parentUuid": "c83037e7_9ed7f5cd",
       "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa990c7c_4e7a7413",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T13:49:42Z",
+      "side": 1,
+      "message": "glCopyTexture is a GL function. CallCopyToTexture maybe? Also maybe we could have a comment calling out that data is the same as the glTexImage\u0027s argument as in it can be an offset in a PBO? Otherwise it wouldn\u0027t be clear that you can use it with a buffer.",
+      "parentUuid": "57c04afe_42079e54",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
