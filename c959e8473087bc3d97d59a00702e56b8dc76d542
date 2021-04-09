@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7fd4cb8_731b35e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T16:47:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c959e8473087bc3d97d59a00702e56b8dc76d542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1651ec1_88c24bd9",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T16:47:25Z",
+      "side": 1,
+      "message": "nit: IsDesktop()",
+      "range": {
+        "startLine": 1300,
+        "startChar": 68,
+        "endLine": 1300,
+        "endChar": 91
+      },
+      "revId": "c959e8473087bc3d97d59a00702e56b8dc76d542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
