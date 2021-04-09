@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8629cf8f_19e8ab34",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T14:55:12Z",
+      "side": 1,
+      "message": "BTW, wrapping to 80 chars makes the formatting really ugly. Looks like gerrit is wrapping again to a different width. Will try shorter.",
+      "parentUuid": "c279e2c8_bf104fb7",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69f5a13b_d361c1f7",
