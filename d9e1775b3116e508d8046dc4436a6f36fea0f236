@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c279e2c8_bf104fb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T14:49:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec77f23e_a047b9ae",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69f5a13b_d361c1f7",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-04-09T12:29:51Z",
       "side": 1,
       "message": "nit: do we have a bug number?",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d7e8b49_868ca18e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T14:49:55Z",
+      "side": 1,
+      "message": "Done\n\nNote that it isn\u0027t actually fixed here (see further down the CL stack), but this refactor makes it possible.",
+      "parentUuid": "69f5a13b_d361c1f7",
       "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2021-04-09T12:29:51Z",
       "side": 1,
       "message": "note: I wonder if we could somehow abstract over compressed vs. not compressed, 2D vs. 3D and have templated \"PerformCopyRowByRow\" \"PerformCopyImagePerImage\" etc.\n\nMaybe it would work if we had the function take a lambda that call the correct gl.TexImage, but it could also be over-complicated, I\u0027m not sure.",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1413a8cd_691a0798",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T14:49:55Z",
+      "side": 1,
+      "message": "I thought about it, but I think it would be harder to read. Compressed textures\nhave specific needs that change the loop bounds, and 2D vs 3D need different \nPixelStore bindings. I might give it a try, though.\n\nAnother idea was just to factor out compressed and uncompressed uploads into\ntheir own functions.",
+      "parentUuid": "020dee73_f436da77",
       "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -118,6 +172,24 @@
       "side": 1,
       "message": "glCopyTexture is a GL function. CallCopyToTexture maybe? Also maybe we could have a comment calling out that data is the same as the glTexImage\u0027s argument as in it can be an offset in a PBO? Otherwise it wouldn\u0027t be clear that you can use it with a buffer.",
       "parentUuid": "57c04afe_42079e54",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46a2a2f9_fc58559c",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T14:49:55Z",
+      "side": 1,
+      "message": "OK, if we\u0027re going to be GL-like, DoTexSubImage() (preferred) or PerformTexSubImage()?\n\n\"data\" comment added.",
+      "parentUuid": "fa990c7c_4e7a7413",
       "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
