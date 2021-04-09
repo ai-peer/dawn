@@ -16,6 +16,40 @@
       "message": "Open for review for any inputs (it\u0027s still failing vulkan intel/swiftshader path with use_tint_generator...)\n\nBasically I defer the creation of actual vulkan shader module from Initialize to pipeline creation time (compute/render) for UseTintGenerator path (like the time when MSL and HLSL shaders getting translated) To avoid duplicate initialization of the vulkan shader module object I added flag to make sure the InitializeTransformedModule would only be executed once. The tintProgram after transformed seems to have the remapped binding Index (mWgsl of the shaderModule is not changed but that doesn\u0027t seem to matter)\n\nLike to hear anything else needs to be considered during this process...\nThanks!",
       "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a0a0ea_0c650574",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:19:47Z",
+      "side": 1,
+      "message": "Can we have a comment in BindGroupLayoutVk.h that explains the layout that we use depending on TintGenerator vs. not? This is to serve as reference in the future when folks look at the backend.",
+      "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5374829_128e6459",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:19:47Z",
+      "side": 1,
+      "message": "What would happen when pipelines with different layouts use the same shader module? We might need to do the same thing as other backends where we don\u0027t cache the produced shader at all for now, and instead return a new blob each time.",
+      "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
