@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!",
       "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf943f29_db668886",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-09T20:22:43Z",
+      "side": 1,
+      "message": "Add Kai because this is a validation change which is related to spec discussions. The PR in CTS was just merged (Thanks Kai).  ",
+      "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
