@@ -84,6 +84,24 @@
       "message": "nit: It\u0027s not necessarily an upload but can also be a GPU buffer-\u003etexture copy. Maybe we could call this PerformTexImage?",
       "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c04afe_42079e54",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T13:46:54Z",
+      "side": 1,
+      "message": "I don\u0027t like yours or mine, TBH. :) TexSubImage would be more accurate, but I\u0027ve never liked the naming of that GL function either. CopyToTexture()?",
+      "parentUuid": "c83037e7_9ed7f5cd",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
