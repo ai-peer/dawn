@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7c19be0_f7136728",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T19:55:52Z",
+      "side": 1,
+      "message": "!IsES() -\u003e IsDesktop(). Also refactored width \u0026 height.",
+      "revId": "fe54f0ab52d8add7ee99265ebc432878f2bd0c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
