@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec77f23e_a047b9ae",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:29:51Z",
+      "side": 1,
+      "message": "nit: try to wrap commit messages to 80 characters",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f5a13b_d361c1f7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:29:51Z",
+      "side": 1,
+      "message": "nit: do we have a bug number?",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11aad0c3_87cf1187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:29:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020dee73_f436da77",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1398,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:29:51Z",
+      "side": 1,
+      "message": "note: I wonder if we could somehow abstract over compressed vs. not compressed, 2D vs. 3D and have templated \"PerformCopyRowByRow\" \"PerformCopyImagePerImage\" etc.\n\nMaybe it would work if we had the function take a lambda that call the correct gl.TexImage, but it could also be over-complicated, I\u0027m not sure.",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c83037e7_9ed7f5cd",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:29:51Z",
+      "side": 1,
+      "message": "nit: It\u0027s not necessarily an upload but can also be a GPU buffer-\u003etexture copy. Maybe we could call this PerformTexImage?",
+      "revId": "d9e1775b3116e508d8046dc4436a6f36fea0f236",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
