@@ -50,6 +50,24 @@
       "message": "What would happen when pipelines with different layouts use the same shader module? We might need to do the same thing as other backends where we don\u0027t cache the produced shader at all for now, and instead return a new blob each time.",
       "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b10081e_151858c9",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-04-09T23:19:05Z",
+      "side": 1,
+      "message": "I\u0027m now create a new VkShaderModule and call device-\u003efn.CreateShaderModule at pipeline creation time and pass this new VkShaderModule object (instead of ShaderModuleVk::mHandle) to e.g. shaderStages[0].module. I think this could solve the issue where a shader module is used by multiple pipelines? (But I\u0027m not sure how to destroy them properly like that in ~ShaderModuleVk)\n\nStill looking at other failures",
+      "parentUuid": "b5374829_128e6459",
+      "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
