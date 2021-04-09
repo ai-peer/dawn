@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "968751dc_1f6e4a91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T12:09:40Z",
+      "side": 1,
+      "message": "LGTM, can we make sure we file an FXC bug and/or track the work needed in Tint to fix this? This CL fixes the test, but WebGPU users could do similar shaders and hit the issue too.",
+      "revId": "0c0c425e82b31e42676153861382b0809f3d46e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
