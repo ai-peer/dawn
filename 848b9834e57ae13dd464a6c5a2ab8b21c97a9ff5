@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ceab73a_d4db84b3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-09T15:35:25Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\n(Note: I split this into a refactor and a cleanup patch that makes it slightly easier to review, but\nthe diffs are still unpleasant. Happy to squash if you\u0027d prefer.)",
+      "revId": "848b9834e57ae13dd464a6c5a2ab8b21c97a9ff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
