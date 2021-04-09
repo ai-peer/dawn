@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e76d648_8a2762d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-09T16:34:38Z",
+      "side": 1,
+      "message": "LGTM too - sorry did not realize this is how the diagnostics needed the Source::File. Brandon FYI",
+      "revId": "15eff78d0b13ff5eb6d9e278402b68c8ab7762be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c98c34e7_684c6557",
