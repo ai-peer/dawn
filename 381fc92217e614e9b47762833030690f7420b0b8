@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79715759_65eadf71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T07:45:00Z",
+      "side": 1,
+      "message": "LGTM, thanks for handling this follow-up!\n\nAnd I just realized I was in CC not a reviewer, hope you don\u0027t mind the drive-by review.",
+      "revId": "381fc92217e614e9b47762833030690f7420b0b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e1b97e7_9681f985",
+        "filename": "src/tests/unittests/wire/WireExtensionTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T07:45:00Z",
+      "side": 1,
+      "message": "I think the comment got outdated, it seems like passing both valid and invalid works now.",
+      "range": {
+        "startLine": 183,
+        "startChar": 71,
+        "endLine": 183,
+        "endChar": 87
+      },
+      "revId": "381fc92217e614e9b47762833030690f7420b0b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

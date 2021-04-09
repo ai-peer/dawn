@@ -22,6 +22,30 @@
       },
       "revId": "5a3132ed7fd6c40d2384585ad4db8aeada3b2a6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d759dd_d1c99ab9",
+        "filename": "src/tests/unittests/wire/WireExtensionTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-09T07:45:00Z",
+      "side": 1,
+      "message": "Yeah it is not providing any additional coverage. We did it originally to test that chained structs didn\u0027t just work on the root descriptor. Now that we test with a chained descriptor in the primitive sub-descriptor, that\u0027s covered. (we lost coverage of adding chained struct in the root descriptor, but that\u0027s fine because \"who can do more, can do less\").\n\nWe can just remove it, nice!",
+      "parentUuid": "9ac3f63d_fee4b309",
+      "range": {
+        "startLine": 245,
+        "startChar": 0,
+        "endLine": 291,
+        "endChar": 1
+      },
+      "revId": "5a3132ed7fd6c40d2384585ad4db8aeada3b2a6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
