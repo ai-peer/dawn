@@ -16,6 +16,24 @@
       "message": "I\u0027m now create a new VkShaderModule at pipeline creation time and pass this new VkShaderModule object (instead of ShaderModuleVk::mHandle) to VkPipelineShaderStageCreateInfo::module. But I\u0027m not sure how to destroy them properly like that in ~ShaderModuleVk(). Is it okay for vulkan to not destroy this resource?",
       "revId": "8a2dbcf1ef7ea5a9d2f3ba4403441c5cd3611128",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "047b6b6c_335995cb",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-04-10T04:20:11Z",
+      "side": 1,
+      "message": "Turns out it\u0027s not okay. It\u0027s failing on some hardware\nThe Vulkan spec states: All child objects created on device must have been destroyed prior to destroying device (https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VUID-vkDestroyDevice-device-00378)\nError: Assertion failure at ../../third_party/dawn/src/dawn_native/vulkan/BackendVk.cpp:65 (OnDebugUtilsCallback): (messageSeverity \u0026 VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) \u003d\u003d 0\n\nOne way might be to store all VkShaderModules created and destroyed in ~ShaderModuleVk()",
+      "parentUuid": "0d025378_2c27a19e",
+      "revId": "8a2dbcf1ef7ea5a9d2f3ba4403441c5cd3611128",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
