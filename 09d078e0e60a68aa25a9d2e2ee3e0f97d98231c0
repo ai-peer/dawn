@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1b4626b_188c6be0",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-04-10T03:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35a0a0ea_0c650574",
+      "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5374829_128e6459",
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "I\u0027m now create a new VkShaderModule and call device-\u003efn.CreateShaderModule at pipeline creation time and pass this new VkShaderModule object (instead of ShaderModuleVk::mHandle) to e.g. shaderStages[0].module. I think this could solve the issue where a shader module is used by multiple pipelines? (But I\u0027m not sure how to destroy them properly like that in ~ShaderModuleVk)\n\nStill looking at other failures",
       "parentUuid": "b5374829_128e6459",
+      "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb0ed4d7_24034adc",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-04-10T03:40:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b10081e_151858c9",
       "revId": "09d078e0e60a68aa25a9d2e2ee3e0f97d98231c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

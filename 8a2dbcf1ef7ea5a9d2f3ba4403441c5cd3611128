@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d025378_2c27a19e",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-04-10T03:40:04Z",
+      "side": 1,
+      "message": "I\u0027m now create a new VkShaderModule at pipeline creation time and pass this new VkShaderModule object (instead of ShaderModuleVk::mHandle) to VkPipelineShaderStageCreateInfo::module. But I\u0027m not sure how to destroy them properly like that in ~ShaderModuleVk(). Is it okay for vulkan to not destroy this resource?",
+      "revId": "8a2dbcf1ef7ea5a9d2f3ba4403441c5cd3611128",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
