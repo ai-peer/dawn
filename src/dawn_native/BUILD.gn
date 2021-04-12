@@ -182,6 +182,7 @@ source_set("dawn_native_sources") {
     "Buffer.h",
     "CachedObject.cpp",
     "CachedObject.h",
+    "ChainUtils.h",
     "CommandAllocator.cpp",
     "CommandAllocator.h",
     "CommandBuffer.cpp",
