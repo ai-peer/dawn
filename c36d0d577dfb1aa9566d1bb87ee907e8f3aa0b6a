@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c9b6bc6_ddaec5fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T15:59:08Z",
+      "side": 1,
+      "message": "PTAL! I have a suggestion for the formatting of entrypoints with arguments and return values:\n\n [[stage(fragment)]] fn main(\n      [[builtin(frag_coord)]] FragCoord : vec4\u003cf32\u003e\n ) -\u003e [[location(0)]] vec4\u003cf32\u003e {\n      // foo\n }",
+      "revId": "c36d0d577dfb1aa9566d1bb87ee907e8f3aa0b6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
