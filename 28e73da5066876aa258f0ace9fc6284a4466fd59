@@ -16,6 +16,92 @@
       "message": "Passing bots now",
       "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6ee7065_6a35bc88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-12T18:07:34Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a65376cf_cb3ebf3f",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-12T18:07:34Z",
+      "side": 1,
+      "message": "nit: if this needs to be mutable, use tint::Program* instead. Otherwise, const tint::Program\u0026",
+      "range": {
+        "startLine": 164,
+        "startChar": 8,
+        "endLine": 164,
+        "endChar": 22
+      },
+      "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aece055_a24ea667",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-12T18:07:34Z",
+      "side": 1,
+      "message": "nit: shouldn\u0027t be necessary. We can just use |spirv| below",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 55
+      },
+      "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8455d69d_9ea65b78",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-12T18:07:34Z",
+      "side": 1,
+      "message": "nit: maybe we don\u0027t need to keep this list - we can probably delete the VkShaderModules right after creating the pipelines.\n\nAlternatively, we could turn the list into a Map\u003c(PipelineLayout*, entryPoint), VkShaderModule\u003e and avoid doing the transform if we have one in the cache. We should probably have a similar cache on all the backends - so we don\u0027t need to do it right now yet.",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 53
+      },
+      "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
