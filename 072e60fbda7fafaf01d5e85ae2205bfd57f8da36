@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87fda23a_ad3e20f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T08:23:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "072e60fbda7fafaf01d5e85ae2205bfd57f8da36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fdb113_ec474e79",
+        "filename": "examples/ComputeBoids.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T08:23:15Z",
+      "side": 1,
+      "message": "u-nit: maybe these vertex inputs could use a structure type since there are many of them.",
+      "revId": "072e60fbda7fafaf01d5e85ae2205bfd57f8da36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
