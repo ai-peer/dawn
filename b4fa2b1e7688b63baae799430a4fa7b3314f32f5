@@ -16,6 +16,23 @@
       "message": "Austin: friendly ping. :)",
       "revId": "b4fa2b1e7688b63baae799430a4fa7b3314f32f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96a4e17_089c7d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-12T18:12:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b4fa2b1e7688b63baae799430a4fa7b3314f32f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
