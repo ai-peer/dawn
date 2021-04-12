@@ -65,6 +65,13 @@ namespace {
 
             ASSERT_GE(featureOptions5.SharedResourceTier, D3D11_SHARED_RESOURCE_TIER_2);
 
+            // Not all D3D11 devices support NV12 textures.
+            UINT formatSupport;
+            hr = d3d11Device->CheckFormatSupport(DXGI_FORMAT_NV12, &formatSupport);
+            ASSERT_EQ(hr, S_OK);
+
+            ASSERT_TRUE(formatSupport & D3D11_FORMAT_SUPPORT_TEXTURE2D);
+
             mD3d11Device = std::move(d3d11Device);
         }
 
@@ -102,24 +109,24 @@ namespace {
             constexpr uint8_t Yu = kYellowYUVColor[kYUVChromaPlaneIndex].r;
             constexpr uint8_t Yv = kYellowYUVColor[kYUVChromaPlaneIndex].g;
 
+            constexpr uint8_t Wy = kWhiteYUVColor[kYUVLumaPlaneIndex].r;
+            constexpr uint8_t Wu = kWhiteYUVColor[kYUVChromaPlaneIndex].r;
+            constexpr uint8_t Wv = kWhiteYUVColor[kYUVChromaPlaneIndex].g;
+
+            constexpr uint8_t Ry = kRedYUVColor[kYUVLumaPlaneIndex].r;
+            constexpr uint8_t Ru = kRedYUVColor[kYUVChromaPlaneIndex].r;
+            constexpr uint8_t Rv = kRedYUVColor[kYUVChromaPlaneIndex].g;
+
+            constexpr uint8_t By = kBlueYUVColor[kYUVLumaPlaneIndex].r;
+            constexpr uint8_t Bu = kBlueYUVColor[kYUVChromaPlaneIndex].r;
+            constexpr uint8_t Bv = kBlueYUVColor[kYUVChromaPlaneIndex].g;
+
             switch (format) {
                 // The first 16 bytes is the luma plane (Y), followed by the chroma plane (UV) which
                 // is half the number of bytes (subsampled by 2) but same bytes per line as luma
                 // plane.
                 case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
                     if (isCheckerboard) {
-                        constexpr uint8_t Wy = kWhiteYUVColor[kYUVLumaPlaneIndex].r;
-                        constexpr uint8_t Wu = kWhiteYUVColor[kYUVChromaPlaneIndex].r;
-                        constexpr uint8_t Wv = kWhiteYUVColor[kYUVChromaPlaneIndex].g;
-
-                        constexpr uint8_t Ry = kRedYUVColor[kYUVLumaPlaneIndex].r;
-                        constexpr uint8_t Ru = kRedYUVColor[kYUVChromaPlaneIndex].r;
-                        constexpr uint8_t Rv = kRedYUVColor[kYUVChromaPlaneIndex].g;
-
-                        constexpr uint8_t By = kBlueYUVColor[kYUVLumaPlaneIndex].r;
-                        constexpr uint8_t Bu = kBlueYUVColor[kYUVChromaPlaneIndex].r;
-                        constexpr uint8_t Bv = kBlueYUVColor[kYUVChromaPlaneIndex].g;
-
                         // clang-format off
                         return {
                             Wy, Wy, Ry, Ry, // plane 0, start + 0
@@ -139,6 +146,27 @@ namespace {
                             Yy, Yy, Yy, Yy,
                             Yu, Yv, Yu, Yv,  // plane 1, start + 16
                             Yu, Yv, Yu, Yv,
+                        };
+                        // clang-format on
+                    }
+                case wgpu::TextureFormat::RGBA8Unorm:
+                    // Combines both NV12 planes by directly mapping back to RGB: R=Y, G=U, B=V.
+                    if (isCheckerboard) {
+                        // clang-format off
+                        return {
+                            Yy,Yu,Yv, Yy,Yu,Yv, By,Bu,Bv, By,Bu,Bv,
+                            Yy,Yu,Yv, Yy,Yu,Yv, By,Bu,Bv, By,Bu,Bv,
+                            Wy,Wu,Wv, Wy,Wu,Wv, Ry,Ru,Rv, Ry,Ru,Rv,
+                            Wy,Wu,Wv, Wy,Wu,Wv, Ry,Ru,Rv, Ry,Ru,Rv,
+                        };
+                        // clang-format on
+                    } else {
+                        // clang-format off
+                        return {
+                            Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv,
+                            Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv,
+                            Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv,
+                            Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv, Yy,Yu,Yv,
                         };
                         // clang-format on
                     }
@@ -464,6 +492,76 @@ TEST_P(D3D12VideoViewsTests, NV12SampleYUVtoRGB) {
                    kWhiteYUVColor[kYUVChromaPlaneIndex].g, 0xFF);
     EXPECT_PIXEL_RGBA8_EQ(whiteYUV, renderPass.color, 0,
                           kYUVImageDataHeightInTexels - 1);  // bottom left
+}
+
+// Renders a NV12 "checkerboard" texture into a RGB quad then checks all 2x2 quardrant colors.
+// This test uses two seperate samplers (per plane) to read the YUV formatted texture.
+TEST_P(D3D12VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
+    wgpu::Texture wgpuTexture;
+    CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+                              wgpu::TextureUsage::Sampled, /*isCheckerboard*/ true, &wgpuTexture);
+    ASSERT_NE(wgpuTexture.Get(), nullptr);
+
+    wgpu::TextureViewDescriptor lumaViewDesc;
+    lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    wgpu::TextureView lumaTextureView = wgpuTexture.CreateView(&lumaViewDesc);
+
+    wgpu::TextureViewDescriptor chromaViewDesc;
+    chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    wgpu::TextureView chromaTextureView = wgpuTexture.CreateView(&chromaViewDesc);
+
+    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+
+    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            [[set(0), binding(0)]] var sampler0 : sampler;
+            [[set(0), binding(1)]] var sampler1 : sampler;
+            [[set(0), binding(2)]] var lumaTexture : texture_2d<f32>;
+            [[set(0), binding(3)]] var chromaTexture : texture_2d<f32>;
+
+            [[location(0)]] var<in> texCoord : vec2<f32>;
+            [[location(0)]] var<out> fragColor : vec4<f32>;
+
+            [[stage(fragment)]] fn main() -> void {
+               var y : f32 = textureSample(lumaTexture, sampler0, texCoord).r;
+               var u : f32 = textureSample(chromaTexture, sampler1, texCoord).r;
+               var v : f32 = textureSample(chromaTexture, sampler1, texCoord).g;
+               fragColor = vec4<f32>(y, u, v, 1.0);
+            })");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+        device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
+    renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline2(&renderPipelineDescriptor);
+
+    wgpu::Sampler sampler0 = device.CreateSampler();
+    wgpu::Sampler sampler1 = device.CreateSampler();
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(renderPipeline);
+        pass.SetBindGroup(
+            0, utils::MakeBindGroup(
+                   device, renderPipeline.GetBindGroupLayout(0),
+                   {{0, sampler0}, {1, sampler1}, {2, lumaTextureView}, {3, chromaTextureView}}));
+        pass.Draw(6);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    std::vector<uint8_t> rgba = GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, true);
+
+    std::vector<RGBA8> expected;
+    for (uint8_t i = 0; i < rgba.size(); i += 3) {
+        expected.push_back({rgba[i], rgba[i + 1], rgba[i + 2], 0xFF});
+    }
+
+    EXPECT_TEXTURE_EQ(expected.data(), renderPass.color, {0, 0},
+                      {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels});
 }
 
 DAWN_INSTANTIATE_TEST(D3D12VideoViewsTests, D3D12Backend());
