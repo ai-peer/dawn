@@ -16,6 +16,23 @@
       "message": "!IsES() -\u003e IsDesktop(). Also refactored width \u0026 height.",
       "revId": "fe54f0ab52d8add7ee99265ebc432878f2bd0c82",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10db2511_7292653f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-12T18:15:41Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "fe54f0ab52d8add7ee99265ebc432878f2bd0c82",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
