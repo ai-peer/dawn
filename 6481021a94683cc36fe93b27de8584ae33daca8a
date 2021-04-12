@@ -33,6 +33,74 @@
       "message": "Add Kai because this is a validation change which is related to spec discussions. The PR in CTS was just merged (Thanks Kai).  ",
       "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d64c54_9cc1732e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T08:19:28Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35955fcb_d1fdbbca",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T08:19:28Z",
+      "side": 1,
+      "message": "Maybe we don\u0027t need to tag that bug on you and can use TODO(dawn:690)",
+      "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42d954b7_20a6ca58",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T08:19:28Z",
+      "side": 1,
+      "message": "u-nit we don\u0027t really need to tag a dawn bug if the validation is required by the WebGPU spec",
+      "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0822cd4_268fae27",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-12T08:19:28Z",
+      "side": 1,
+      "message": "nit: ditto dawn:690",
+      "revId": "6481021a94683cc36fe93b27de8584ae33daca8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
