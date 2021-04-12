@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1315c571_9dede1a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-12T20:10:35Z",
+      "side": 1,
+      "message": "Hm, so I have mixed feelings about these helpers. We don\u0027t really have much use for them right now in Dawn since we don\u0027t have real \"chains\" yet (there can only be a single surface descriptor, a single shader module descriptor, etc). I\u0027m happy to polish up this CL and write some tests, but I wonder if we should just hold off until there\u0027s actually a use case for chains of length \u003e 1. The helpers don\u0027t really make any of the existing sType code blocks more readable.",
+      "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
