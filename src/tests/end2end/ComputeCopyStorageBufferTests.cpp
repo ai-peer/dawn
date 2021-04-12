@@ -101,7 +101,7 @@ TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfBasic) {
 
         [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
 
-        [[stage(compute)]] fn main() -> void {
+        [[stage(compute)]] fn main() {
             var index : u32 = GlobalInvocationID.x;
             if (index >= 4u) { return; }
             dst.s[index] = src.s[index];
@@ -132,7 +132,7 @@ TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfStruct) {
 
         [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
 
-        [[stage(compute)]] fn main() -> void {
+        [[stage(compute)]] fn main() {
             var index : u32 = GlobalInvocationID.x;
             if (index >= 4u) { return; }
             dst.s[index] = src.s[index];
@@ -158,7 +158,7 @@ TEST_P(ComputeCopyStorageBufferTests, UnsizedArrayOfBasic) {
 
         [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
 
-        [[stage(compute)]] fn main() -> void {
+        [[stage(compute)]] fn main() {
             var index : u32 = GlobalInvocationID.x;
             if (index >= 4u) { return; }
             dst.s[index] = src.s[index];
