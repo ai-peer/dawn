@@ -99,10 +99,9 @@ TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfBasic) {
         [[set(0), binding(0)]] var<storage> src : [[access(read_write)]] Buf1;
         [[set(0), binding(1)]] var<storage> dst : [[access(read_write)]] Buf2;
 
-        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
-
-        [[stage(compute)]] fn main() -> void {
-            var index : u32 = GlobalInvocationID.x;
+        [[stage(compute)]]
+        fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>) {
+            let index : u32 = GlobalInvocationID.x;
             if (index >= 4u) { return; }
             dst.s[index] = src.s[index];
         })");
@@ -130,10 +129,9 @@ TEST_P(ComputeCopyStorageBufferTests, SizedArrayOfStruct) {
         [[set(0), binding(0)]] var<storage> src : [[access(read_write)]] Buf1;
         [[set(0), binding(1)]] var<storage> dst : [[access(read_write)]] Buf2;
 
-        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
-
-        [[stage(compute)]] fn main() -> void {
-            var index : u32 = GlobalInvocationID.x;
+        [[stage(compute)]]
+        fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>) {
+            let index : u32 = GlobalInvocationID.x;
             if (index >= 4u) { return; }
             dst.s[index] = src.s[index];
         })");
@@ -156,10 +154,9 @@ TEST_P(ComputeCopyStorageBufferTests, UnsizedArrayOfBasic) {
         [[set(0), binding(0)]] var<storage> src : [[access(read_write)]] Buf1;
         [[set(0), binding(1)]] var<storage> dst : [[access(read_write)]] Buf2;
 
-        [[builtin(global_invocation_id)]] var<in> GlobalInvocationID : vec3<u32>;
-
-        [[stage(compute)]] fn main() -> void {
-            var index : u32 = GlobalInvocationID.x;
+        [[stage(compute)]]
+        fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>) {
+            let index : u32 = GlobalInvocationID.x;
             if (index >= 4u) { return; }
             dst.s[index] = src.s[index];
         })");

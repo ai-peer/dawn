@@ -78,10 +78,8 @@ void ComputeSharedMemoryTests::BasicTest(const char* shader) {
 // Basic shared memory test
 TEST_P(ComputeSharedMemoryTests, Basic) {
     BasicTest(R"(
-        const kTileSize : u32 = 4;
-        const kInstances : u32 = 11;
-
-        [[builtin(local_invocation_id)]] var<in> LocalInvocationID : vec3<u32>;
+        let kTileSize : u32 = 4;
+        let kInstances : u32 = 11;
 
         [[block]] struct Dst {
             x : u32;
@@ -91,8 +89,8 @@ TEST_P(ComputeSharedMemoryTests, Basic) {
         var<workgroup> tmp : u32;
 
         [[stage(compute), workgroup_size(4,4,1)]]
-        fn main() -> void {
-            var index : u32 = LocalInvocationID.y * kTileSize + LocalInvocationID.x;
+        fn main([[builtin(local_invocation_id)]] LocalInvocationID : vec3<u32>) {
+            let index : u32 = LocalInvocationID.y * kTileSize + LocalInvocationID.x;
             if (index == 0u) {
                 tmp = 0u;
             }

@@ -46,16 +46,14 @@ class BindGroupTests : public DawnTest {
 
     wgpu::ShaderModule MakeSimpleVSModule() const {
         return utils::CreateShaderModule(device, R"(
-        [[builtin(vertex_index)]] var<in> VertexIndex : u32;
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]] fn main() -> void {
-             const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+        [[stage(vertex)]]
+        fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+             let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
                 vec2<f32>(-1.0, 1.0),
                 vec2<f32>( 1.0, 1.0),
                 vec2<f32>(-1.0, -1.0));
 
-            Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
         })");
     }
 
@@ -63,8 +61,6 @@ class BindGroupTests : public DawnTest {
         ASSERT(bindingTypes.size() <= kMaxBindGroups);
 
         std::ostringstream fs;
-        fs << "[[location(0)]] var<out> fragColor : vec4<f32>;\n";
-
         for (size_t i = 0; i < bindingTypes.size(); ++i) {
             fs << "[[block]] struct Buffer" << i << R"( {
                 color : vec4<f32>;
@@ -84,10 +80,12 @@ class BindGroupTests : public DawnTest {
             }
         }
 
-        fs << "\n[[stage(fragment)]] fn main() -> void {\n";
+        fs << "\n[[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32>{\n";
+        fs << "var fragColor : vec4<f32> = vec4<f32>();\n";
         for (size_t i = 0; i < bindingTypes.size(); ++i) {
             fs << "fragColor = fragColor + buffer" << i << ".color;\n";
         }
+        fs << "return fragColor;\n";
         fs << "}\n";
         return utils::CreateShaderModule(device, fs.str().c_str());
     }
@@ -129,7 +127,7 @@ TEST_P(BindGroupTests, ReusedBindGroupSingleSubmit) {
         };
         [[group(0), binding(0)]] var <uniform> contents: Contents;
 
-        [[stage(compute)]] fn main() -> void {
+        [[stage(compute)]] fn main() {
           var f : f32 = contents.f;
         })");
 
@@ -165,17 +163,15 @@ TEST_P(BindGroupTests, ReusedUBO) {
 
         [[group(0), binding(0)]] var <uniform> vertexUbo : VertexUniformBuffer;
 
-        [[builtin(vertex_index)]] var<in> VertexIndex : u32;
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]] fn main() -> void {
-            const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+        [[stage(vertex)]]
+        fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+            let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
                 vec2<f32>(-1.0, 1.0),
                 vec2<f32>( 1.0, 1.0),
                 vec2<f32>(-1.0, -1.0));
 
             var transform : mat2x2<f32> = mat2x2<f32>(vertexUbo.transform.xy, vertexUbo.transform.zw);
-            Position = vec4<f32>(transform * pos[VertexIndex], 0.0, 1.0);
+            return vec4<f32>(transform * pos[VertexIndex], 0.0, 1.0);
         })");
 
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
@@ -184,10 +180,8 @@ TEST_P(BindGroupTests, ReusedUBO) {
         };
         [[group(0), binding(1)]] var <uniform> fragmentUbo : FragmentUniformBuffer;
 
-        [[location(0)]] var<out> fragColor : vec4<f32>;
-
-        [[stage(fragment)]] fn main() -> void {
-            fragColor = fragmentUbo.color;
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return fragmentUbo.color;
         })");
 
     utils::ComboRenderPipelineDescriptor2 textureDescriptor;
@@ -246,28 +240,24 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
         };
         [[group(0), binding(0)]] var <uniform> vertexUbo : VertexUniformBuffer;
 
-        [[builtin(vertex_index)]] var<in> VertexIndex : u32;
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]] fn main() -> void {
-            const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+        [[stage(vertex)]]
+        fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+            let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
                 vec2<f32>(-1.0, 1.0),
                 vec2<f32>( 1.0, 1.0),
                 vec2<f32>(-1.0, -1.0));
 
             var transform : mat2x2<f32> = mat2x2<f32>(vertexUbo.transform.xy, vertexUbo.transform.zw);
-            Position = vec4<f32>(transform * pos[VertexIndex], 0.0, 1.0);
+            return vec4<f32>(transform * pos[VertexIndex], 0.0, 1.0);
         })");
 
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
         [[group(0), binding(1)]] var samp : sampler;
         [[group(0), binding(2)]] var tex : texture_2d<f32>;
-        [[builtin(frag_coord)]] var<in> FragCoord : vec4<f32>;
 
-        [[location(0)]] var<out> fragColor : vec4<f32>;
-
-        [[stage(fragment)]] fn main() -> void {
-            fragColor = textureSample(tex, samp, FragCoord.xy);
+        [[stage(fragment)]]
+        fn main([[builtin(frag_coord)]] FragCoord : vec4<f32>) -> [[location(0)]] vec4<f32> {
+            return textureSample(tex, samp, FragCoord.xy);
         })");
 
     utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
@@ -361,16 +351,14 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
         [[group(0), binding(0)]] var <uniform> vertexUbo1 : VertexUniformBuffer1;
         [[group(1), binding(0)]] var <uniform> vertexUbo2 : VertexUniformBuffer2;
 
-        [[builtin(vertex_index)]] var<in> VertexIndex : u32;
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]] fn main() -> void {
-            const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+        [[stage(vertex)]]
+        fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+            let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
                 vec2<f32>(-1.0, 1.0),
                 vec2<f32>( 1.0, 1.0),
                 vec2<f32>(-1.0, -1.0));
 
-            Position = vec4<f32>(mat2x2<f32>(
+            return vec4<f32>(mat2x2<f32>(
                 vertexUbo1.transform.xy + vertexUbo2.transform.xy,
                 vertexUbo1.transform.zw + vertexUbo2.transform.zw
             ) * pos[VertexIndex], 0.0, 1.0);
@@ -390,10 +378,8 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
         [[group(0), binding(1)]] var <uniform> fragmentUbo1 : FragmentUniformBuffer1;
         [[group(1), binding(1)]] var <uniform> fragmentUbo2 : FragmentUniformBuffer2;
 
-        [[location(0)]] var<out> fragColor : vec4<f32>;
-
-        [[stage(fragment)]] fn main() -> void {
-            fragColor = fragmentUbo1.color + fragmentUbo2.color;
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return fragmentUbo1.color + fragmentUbo2.color;
         })");
 
     utils::ComboRenderPipelineDescriptor2 textureDescriptor;
@@ -855,7 +841,7 @@ TEST_P(BindGroupTests, DynamicOffsetOrder) {
         [[group(0), binding(0)]] var<storage> buffer0 : [[access(read)]] Buffer0;
         [[group(0), binding(4)]] var<storage> outputBuffer : [[access(read_write)]] OutputBuffer;
 
-        [[stage(compute)]] fn main() -> void {
+        [[stage(compute)]] fn main() {
             outputBuffer.value = vec3<u32>(buffer0.value, buffer2.value, buffer3.value);
         })");
     pipelineDescriptor.computeStage.entryPoint = "main";
@@ -951,16 +937,14 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
-        [[builtin(vertex_index)]] var<in> VertexIndex : u32;
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]] fn main() -> void {
-            const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+        [[stage(vertex)]]
+        fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+            let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
                 vec2<f32>(-1.0, 1.0),
                 vec2<f32>( 1.0, 1.0),
                 vec2<f32>(-1.0, -1.0));
 
-            Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
         })");
 
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
@@ -982,10 +966,8 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
         [[group(0), binding(47)]] var <uniform> ubo2 : Ubo2;
         [[group(0), binding(111)]] var <uniform> ubo3 : Ubo3;
 
-        [[location(0)]] var<out> fragColor : vec4<f32>;
-
-        [[stage(fragment)]] fn main() -> void {
-            fragColor = ubo1.color + 2.0 * ubo2.color + 4.0 * ubo3.color;
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return ubo1.color + 2.0 * ubo2.color + 4.0 * ubo3.color;
         })");
 
     utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
@@ -1084,7 +1066,7 @@ TEST_P(BindGroupTests, EmptyLayout) {
     pipelineDesc.layout = utils::MakeBasicPipelineLayout(device, &bgl);
     pipelineDesc.computeStage.entryPoint = "main";
     pipelineDesc.computeStage.module = utils::CreateShaderModule(device, R"(
-        [[stage(compute)]] fn main() -> void {
+        [[stage(compute)]] fn main() {
         })");
 
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
@@ -1107,16 +1089,14 @@ TEST_P(BindGroupTests, ReadonlyStorage) {
     utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
 
     pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
-        [[builtin(vertex_index)]] var<in> VertexIndex : u32;
-        [[builtin(position)]] var<out> Position : vec4<f32>;
-
-        [[stage(vertex)]] fn main() -> void {
-            const pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+        [[stage(vertex)]]
+        fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+            let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
                 vec2<f32>(-1.0, 1.0),
                 vec2<f32>( 1.0, 1.0),
                 vec2<f32>(-1.0, -1.0));
 
-            Position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
         })");
 
     pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
@@ -1125,9 +1105,8 @@ TEST_P(BindGroupTests, ReadonlyStorage) {
         };
         [[group(0), binding(0)]] var<storage> buffer0 : [[access(read)]] Buffer0;
 
-        [[location(0)]] var<out> fragColor : vec4<f32>;
-        [[stage(fragment)]] fn main() -> void {
-            fragColor = buffer0.color;
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return buffer0.color;
         })");
 
     constexpr uint32_t kRTSize = 4;
@@ -1282,8 +1261,7 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
 
     body << "result.value = 1u;\n";
 
-    std::string shader =
-        interface.str() + "[[stage(compute)]] fn main() -> void {\n" + body.str() + "}\n";
+    std::string shader = interface.str() + "[[stage(compute)]] fn main() {\n" + body.str() + "}\n";
     wgpu::ComputePipelineDescriptor cpDesc;
     cpDesc.computeStage.module = utils::CreateShaderModule(device, shader.c_str());
     cpDesc.computeStage.entryPoint = "main";
