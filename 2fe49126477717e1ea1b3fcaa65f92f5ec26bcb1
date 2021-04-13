@@ -34,6 +34,24 @@
       "parentUuid": "1315c571_9dede1a5",
       "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce4973e1_630bf1a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-13T10:15:41Z",
+      "side": 1,
+      "message": "In webgpu_cpp.h we could add a static consexpr member to chained structures that gives the sType, so you can do T::SType when working with templates over chained structs.\n\n+1 on trying to do the correct chain handling now even if it seems overkill. In the future we\u0027re very likely going to have a lot of extensions. However contrary to Mesa we should have a way to validate that all the things in the chain are known things. (Vulkan puts the onus on the application for that)\n\nMaybe what Austin suggested with a variadic macro, but that also returns a boolean saying if it saw something extra, or a MaybeError",
+      "parentUuid": "625b850c_2e281d49",
+      "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
