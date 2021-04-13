@@ -16,6 +16,23 @@
       "message": "TIL that we already have a build recipe that run with \u0027use_tint_generator\u0027... ",
       "revId": "17dcb51a05596c349aa416f37b753c71fe78f6d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0580f7ef_cecd12cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-13T20:09:51Z",
+      "side": 1,
+      "message": "I am going to supresse the failing tests in this CL to make it happy, and then in follow on CLs fix/re-enable them. Instead of making changes to the bot configs.",
+      "revId": "17dcb51a05596c349aa416f37b753c71fe78f6d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
