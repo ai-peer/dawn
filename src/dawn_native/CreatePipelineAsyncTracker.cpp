@@ -20,25 +20,25 @@
 
 namespace dawn_native {
 
-    CreatePipelineAsyncTaskBase::CreatePipelineAsyncTaskBase(std::string errorMessage,
-                                                             void* userdata)
+    CreatePipelineAsyncTaskResultBase::CreatePipelineAsyncTaskResultBase(std::string errorMessage,
+                                                                         void* userdata)
         : mErrorMessage(errorMessage), mUserData(userdata) {
     }
 
-    CreatePipelineAsyncTaskBase::~CreatePipelineAsyncTaskBase() {
+    CreatePipelineAsyncTaskResultBase::~CreatePipelineAsyncTaskResultBase() {
     }
 
-    CreateComputePipelineAsyncTask::CreateComputePipelineAsyncTask(
+    CreateComputePipelineAsyncTaskResult::CreateComputePipelineAsyncTaskResult(
         Ref<ComputePipelineBase> pipeline,
         std::string errorMessage,
         WGPUCreateComputePipelineAsyncCallback callback,
         void* userdata)
-        : CreatePipelineAsyncTaskBase(errorMessage, userdata),
+        : CreatePipelineAsyncTaskResultBase(errorMessage, userdata),
           mPipeline(std::move(pipeline)),
           mCreateComputePipelineAsyncCallback(callback) {
     }
 
-    void CreateComputePipelineAsyncTask::Finish() {
+    void CreateComputePipelineAsyncTaskResult::Finish() {
         ASSERT(mCreateComputePipelineAsyncCallback != nullptr);
 
         if (mPipeline.Get() != nullptr) {
@@ -51,31 +51,31 @@ namespace dawn_native {
         }
     }
 
-    void CreateComputePipelineAsyncTask::HandleShutDown() {
+    void CreateComputePipelineAsyncTaskResult::HandleShutDown() {
         ASSERT(mCreateComputePipelineAsyncCallback != nullptr);
 
         mCreateComputePipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceDestroyed, nullptr,
                                             "Device destroyed before callback", mUserData);
     }
 
-    void CreateComputePipelineAsyncTask::HandleDeviceLoss() {
+    void CreateComputePipelineAsyncTaskResult::HandleDeviceLoss() {
         ASSERT(mCreateComputePipelineAsyncCallback != nullptr);
 
         mCreateComputePipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceLost, nullptr,
                                             "Device lost before callback", mUserData);
     }
 
-    CreateRenderPipelineAsyncTask::CreateRenderPipelineAsyncTask(
+    CreateRenderPipelineAsyncTaskResult::CreateRenderPipelineAsyncTaskResult(
         Ref<RenderPipelineBase> pipeline,
         std::string errorMessage,
         WGPUCreateRenderPipelineAsyncCallback callback,
         void* userdata)
-        : CreatePipelineAsyncTaskBase(errorMessage, userdata),
+        : CreatePipelineAsyncTaskResultBase(errorMessage, userdata),
           mPipeline(std::move(pipeline)),
           mCreateRenderPipelineAsyncCallback(callback) {
     }
 
-    void CreateRenderPipelineAsyncTask::Finish() {
+    void CreateRenderPipelineAsyncTaskResult::Finish() {
         ASSERT(mCreateRenderPipelineAsyncCallback != nullptr);
 
         if (mPipeline.Get() != nullptr) {
@@ -88,46 +88,60 @@ namespace dawn_native {
         }
     }
 
-    void CreateRenderPipelineAsyncTask::HandleShutDown() {
+    void CreateRenderPipelineAsyncTaskResult::HandleShutDown() {
         ASSERT(mCreateRenderPipelineAsyncCallback != nullptr);
 
         mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceDestroyed, nullptr,
                                            "Device destroyed before callback", mUserData);
     }
 
-    void CreateRenderPipelineAsyncTask::HandleDeviceLoss() {
+    void CreateRenderPipelineAsyncTaskResult::HandleDeviceLoss() {
         ASSERT(mCreateRenderPipelineAsyncCallback != nullptr);
 
         mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceLost, nullptr,
                                            "Device lost before callback", mUserData);
     }
 
-    CreatePipelineAsyncTracker::CreatePipelineAsyncTracker(DeviceBase* device) : mDevice(device) {
+    CreatePipelineAsyncResultTracker::CreatePipelineAsyncResultTracker(DeviceBase* device)
+        : mDevice(device) {
     }
 
-    CreatePipelineAsyncTracker::~CreatePipelineAsyncTracker() {
-        ASSERT(mCreatePipelineAsyncTasksInFlight.Empty());
+    CreatePipelineAsyncResultTracker::~CreatePipelineAsyncResultTracker() {
+        ASSERT(mCreatePipelineAsyncTaskResultsInFlight.Empty());
     }
 
-    void CreatePipelineAsyncTracker::TrackTask(std::unique_ptr<CreatePipelineAsyncTaskBase> task,
-                                               ExecutionSerial serial) {
-        mCreatePipelineAsyncTasksInFlight.Enqueue(std::move(task), serial);
+    void CreatePipelineAsyncResultTracker::TrackTask(
+        std::unique_ptr<CreatePipelineAsyncTaskResultBase> task,
+        ExecutionSerial serial) {
+        {
+            std::lock_guard<std::mutex> lock(mMutex);
+            mCreatePipelineAsyncTaskResultsInFlight.Enqueue(std::move(task), serial);
+        }
+
         mDevice->AddFutureSerial(serial);
     }
 
-    void CreatePipelineAsyncTracker::Tick(ExecutionSerial finishedSerial) {
+    std::vector<std::unique_ptr<CreatePipelineAsyncTaskResultBase>>
+    CreatePipelineAsyncResultTracker::GetTaskResultsBeforeFinishedSerial(
+        ExecutionSerial finishedSerial) {
         // If a user calls Queue::Submit inside Create*PipelineAsync, then the device will be
         // ticked, which in turns ticks the tracker, causing reentrance here. To prevent the
         // reentrant call from invalidating mCreatePipelineAsyncTasksInFlight while in use by the
         // first call, we remove the tasks to finish from the queue, update
         // mCreatePipelineAsyncTasksInFlight, then run the callbacks.
-        std::vector<std::unique_ptr<CreatePipelineAsyncTaskBase>> tasks;
-        for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateUpTo(finishedSerial)) {
+        std::vector<std::unique_ptr<CreatePipelineAsyncTaskResultBase>> tasks;
+
+        std::lock_guard<std::mutex> lock(mMutex);
+        for (auto& task : mCreatePipelineAsyncTaskResultsInFlight.IterateUpTo(finishedSerial)) {
             tasks.push_back(std::move(task));
         }
-        mCreatePipelineAsyncTasksInFlight.ClearUpTo(finishedSerial);
+        mCreatePipelineAsyncTaskResultsInFlight.ClearUpTo(finishedSerial);
+        return tasks;
+    }
 
-        for (auto& task : tasks) {
+    void CreatePipelineAsyncResultTracker::Tick(ExecutionSerial finishedSerial) {
+        auto finishedTasks = GetTaskResultsBeforeFinishedSerial(finishedSerial);
+        for (auto& task : finishedTasks) {
             if (mDevice->IsLost()) {
                 task->HandleDeviceLoss();
             } else {
@@ -136,11 +150,103 @@ namespace dawn_native {
         }
     }
 
-    void CreatePipelineAsyncTracker::ClearForShutDown() {
-        for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateAll()) {
+    void CreatePipelineAsyncResultTracker::ClearForShutDown() {
+        std::lock_guard<std::mutex> lock(mMutex);
+        for (auto& task : mCreatePipelineAsyncTaskResultsInFlight.IterateAll()) {
             task->HandleShutDown();
         }
-        mCreatePipelineAsyncTasksInFlight.Clear();
+
+        mCreatePipelineAsyncTaskResultsInFlight.Clear();
+    }
+
+    void WorkerTask::DoTask(void* userdata) {
+        std::unique_ptr<WorkerTask> workerTaskPtr(static_cast<WorkerTask*>(userdata));
+        workerTaskPtr->Run();
+    }
+
+    ComputePipelineAsyncTask::ComboComputePipelineDescriptor::ComboComputePipelineDescriptor(
+        const ComputePipelineDescriptor* descriptor)
+        : mPipelineLayout(descriptor->layout),
+          mComputeShaderModule(descriptor->computeStage.module),
+          mEntryPoint(descriptor->computeStage.entryPoint) {
+        if (descriptor->label != nullptr) {
+            mLabel = descriptor->label;
+            label = mLabel.c_str();
+        }
+
+        layout = mPipelineLayout.Get();
+        computeStage.module = mComputeShaderModule.Get();
+        computeStage.entryPoint = mEntryPoint.c_str();
+    }
+
+    ComputePipelineAsyncTask::ComputePipelineAsyncTask(
+        DeviceBase* device,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : mDevice(device),
+          mBlueprintHash(blueprintHash),
+          mCallback(callback),
+          mUserData(userdata),
+          mDescriptor(descriptor) {
+    }
+
+    void ComputePipelineAsyncTask::Run() {
+        ASSERT(mDevice != nullptr);
+
+        // This class is declared as a friend of class DeviceBase so we can use its private member
+        // functions.
+        mDevice->CreateComputePipelineAsyncImplBase(&mDescriptor, mBlueprintHash, mCallback,
+                                                    mUserData);
+    }
+
+    CreatePipelineAsyncTaskManager::CreatePipelineAsyncTaskManager(DeviceBase* device)
+        : mDevice(device), mWorkerTaskPool(device->GetWorkerTaskPool()) {
+    }
+
+    void CreatePipelineAsyncTaskManager::StartComputePipelineAsyncWaitableTask(
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata) {
+        // The pointer task will be protected by a unique_ptr in WorkerTask::DoTask().
+        ComputePipelineAsyncTask* task =
+            new ComputePipelineAsyncTask(mDevice, descriptor, blueprintHash, callback, userdata);
+        std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent =
+            mWorkerTaskPool->PostWorkerTask(ComputePipelineAsyncTask::DoTask, task);
+
+        {
+            std::lock_guard<std::mutex> lock(mWaitableTasksMutex);
+            mWaitableEventsInFlight.push_back(std::move(waitableEvent));
+        }
+    }
+
+    void CreatePipelineAsyncTaskManager::Tick() {
+        std::lock_guard<std::mutex> lock(mWaitableTasksMutex);
+        auto iter = mWaitableEventsInFlight.begin();
+        while (iter != mWaitableEventsInFlight.end()) {
+            if ((*iter)->IsComplete()) {
+                iter = mWaitableEventsInFlight.erase(iter);
+            } else {
+                ++iter;
+            }
+        }
+    }
+
+    void CreatePipelineAsyncTaskManager::WaitAndRemoveAll() {
+        std::lock_guard<std::mutex> lock(mWaitableTasksMutex);
+        for (auto iter = mWaitableEventsInFlight.begin(); iter != mWaitableEventsInFlight.end();
+             ++iter) {
+            (*iter)->Wait();
+        }
+
+        mWaitableEventsInFlight.clear();
+    }
+
+    bool CreatePipelineAsyncTaskManager::HasWaitableTasksInFlight() {
+        std::lock_guard<std::mutex> lock(mWaitableTasksMutex);
+        return !mWaitableEventsInFlight.empty();
     }
 
 }  // namespace dawn_native

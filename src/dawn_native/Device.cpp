@@ -24,7 +24,6 @@
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/CompilationMessages.h"
 #include "dawn_native/ComputePipeline.h"
-#include "dawn_native/CreatePipelineAsyncTracker.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/ErrorScope.h"
@@ -57,6 +56,40 @@ namespace dawn_native {
     using ContentLessObjectCache =
         std::unordered_set<Object*, typename Object::HashFunc, typename Object::EqualityFunc>;
 
+    template <typename Object>
+    class ConcurrentContentLessObjectCache {
+      public:
+        bool empty() {
+            std::lock_guard<std::mutex> lock(mMutex);
+            return mCache.empty();
+        }
+
+        using iterator = typename ContentLessObjectCache<Object>::iterator;
+        iterator find(Object* blueprint) {
+            std::lock_guard<std::mutex> lock(mMutex);
+            return mCache.find(blueprint);
+        }
+
+        iterator end() {
+            std::lock_guard<std::mutex> lock(mMutex);
+            return mCache.end();
+        }
+
+        std::pair<iterator, bool> insert(Object* blueprint) {
+            std::lock_guard<std::mutex> lock(mMutex);
+            return mCache.insert(blueprint);
+        }
+
+        size_t erase(Object* blueprint) {
+            std::lock_guard<std::mutex> lock(mMutex);
+            return mCache.erase(blueprint);
+        }
+
+      private:
+        std::mutex mMutex;
+        ContentLessObjectCache<Object> mCache;
+    };
+
     struct DeviceBase::Caches {
         ~Caches() {
             ASSERT(attachmentStates.empty());
@@ -70,7 +103,7 @@ namespace dawn_native {
 
         ContentLessObjectCache<AttachmentStateBlueprint> attachmentStates;
         ContentLessObjectCache<BindGroupLayoutBase> bindGroupLayouts;
-        ContentLessObjectCache<ComputePipelineBase> computePipelines;
+        ConcurrentContentLessObjectCache<ComputePipelineBase> computePipelines;
         ContentLessObjectCache<PipelineLayoutBase> pipelineLayouts;
         ContentLessObjectCache<RenderPipelineBase> renderPipelines;
         ContentLessObjectCache<SamplerBase> samplers;
@@ -125,10 +158,17 @@ namespace dawn_native {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mErrorScopeStack = std::make_unique<ErrorScopeStack>();
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
-        mCreatePipelineAsyncTracker = std::make_unique<CreatePipelineAsyncTracker>(this);
+        mCreatePipelineAsynResultTracker = std::make_unique<CreatePipelineAsyncResultTracker>(this);
         mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
         mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
         mPersistentCache = std::make_unique<PersistentCache>(this);
+
+        if (GetPlatform() != nullptr) {
+            mWorkerTaskPool = GetPlatform()->CreateWorkerTaskPool();
+        } else {
+            mDefaultPlatform = std::make_unique<dawn_platform::Platform>();
+            mWorkerTaskPool = mDefaultPlatform->CreateWorkerTaskPool();
+        }
 
         // Starting from now the backend can start doing reentrant calls so the device is marked as
         // alive.
@@ -142,8 +182,14 @@ namespace dawn_native {
     void DeviceBase::ShutDownBase() {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
+            // Wait for the completion of all the in-flight async CreatePipelineAsync tasks and
+            // clear all of them.
+            if (mCreatePipelineAsyncTaskManager) {
+                mCreatePipelineAsyncTaskManager->WaitAndRemoveAll();
+            }
+
             // Reject all async pipeline creations.
-            mCreatePipelineAsyncTracker->ClearForShutDown();
+            mCreatePipelineAsynResultTracker->ClearForShutDown();
         }
 
         // Disconnect the device, depending on which state we are currently in.
@@ -171,7 +217,7 @@ namespace dawn_native {
                 break;
         }
         ASSERT(mCompletedSerial == mLastSubmittedSerial);
-        ASSERT(mFutureSerial <= mCompletedSerial);
+        ASSERT(mFutureSerial.GetSerial() <= mCompletedSerial);
 
         if (mState != State::BeingCreated) {
             // The GPU timeline is finished.
@@ -188,7 +234,8 @@ namespace dawn_native {
         mState = State::Disconnected;
 
         mDynamicUploader = nullptr;
-        mCreatePipelineAsyncTracker = nullptr;
+        mCreatePipelineAsyncTaskManager = nullptr;
+        mCreatePipelineAsynResultTracker = nullptr;
         mPersistentCache = nullptr;
 
         mEmptyBindGroupLayout = nullptr;
@@ -223,7 +270,7 @@ namespace dawn_native {
             IgnoreErrors(WaitForIdleForDestruction());
             IgnoreErrors(TickImpl());
             AssumeCommandsComplete();
-            ASSERT(mFutureSerial <= mCompletedSerial);
+            ASSERT(mFutureSerial.GetSerial() <= mCompletedSerial);
             mState = State::Disconnected;
 
             // Now everything is as if the device was lost.
@@ -366,8 +413,8 @@ namespace dawn_native {
         return mLastSubmittedSerial;
     }
 
-    ExecutionSerial DeviceBase::GetFutureSerial() const {
-        return mFutureSerial;
+    ExecutionSerial DeviceBase::GetFutureSerial() {
+        return mFutureSerial.GetSerial();
     }
 
     InternalPipelineStore* DeviceBase::GetInternalPipelineStore() {
@@ -379,18 +426,20 @@ namespace dawn_native {
     }
 
     void DeviceBase::AssumeCommandsComplete() {
-        ExecutionSerial maxSerial =
-            ExecutionSerial(std::max(mLastSubmittedSerial + ExecutionSerial(1), mFutureSerial));
+        ExecutionSerial maxSerial = ExecutionSerial(
+            std::max(mLastSubmittedSerial + ExecutionSerial(1), mFutureSerial.GetSerial()));
         mLastSubmittedSerial = maxSerial;
         mCompletedSerial = maxSerial;
     }
 
     bool DeviceBase::IsDeviceIdle() {
-        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
-        if (mCompletedSerial == maxSerial) {
-            return true;
+        if (mCreatePipelineAsyncTaskManager &&
+            mCreatePipelineAsyncTaskManager->HasWaitableTasksInFlight()) {
+            return false;
         }
-        return false;
+
+        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial.GetSerial());
+        return mCompletedSerial == maxSerial;
     }
 
     ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
@@ -398,9 +447,7 @@ namespace dawn_native {
     }
 
     void DeviceBase::AddFutureSerial(ExecutionSerial serial) {
-        if (serial > mFutureSerial) {
-            mFutureSerial = serial;
-        }
+        mFutureSerial.TestAndSetGreaterSerial(serial);
     }
 
     MaybeError DeviceBase::CheckPassedSerials() {
@@ -765,10 +812,10 @@ namespace dawn_native {
         }
 
         Ref<RenderPipelineBase> result = maybeResult.AcquireSuccess();
-        std::unique_ptr<CreateRenderPipelineAsyncTask> request =
-            std::make_unique<CreateRenderPipelineAsyncTask>(std::move(result), "", callback,
-                                                            userdata);
-        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
+        std::unique_ptr<CreateRenderPipelineAsyncTaskResult> request =
+            std::make_unique<CreateRenderPipelineAsyncTaskResult>(std::move(result), "", callback,
+                                                                  userdata);
+        mCreatePipelineAsynResultTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
@@ -941,7 +988,8 @@ namespace dawn_native {
         // to avoid overly ticking, we only want to tick when:
         // 1. the last submitted serial has moved beyond the completed serial
         // 2. or the completed serial has not reached the future serial set by the trackers
-        if (mLastSubmittedSerial > mCompletedSerial || mCompletedSerial < mFutureSerial) {
+        if (mLastSubmittedSerial > mCompletedSerial ||
+            mCompletedSerial < mFutureSerial.GetSerial()) {
             DAWN_TRY(CheckPassedSerials());
             DAWN_TRY(TickImpl());
 
@@ -959,7 +1007,7 @@ namespace dawn_native {
             mDynamicUploader->Deallocate(mCompletedSerial);
             mQueue->Tick(mCompletedSerial);
 
-            mCreatePipelineAsyncTracker->Tick(mCompletedSerial);
+            mCreatePipelineAsynResultTracker->Tick(mCompletedSerial);
         }
 
         return {};
@@ -1149,12 +1197,18 @@ namespace dawn_native {
         return layoutRef;
     }
 
-    // TODO(jiawei.shao@intel.com): override this function with the async version on the backends
-    // that supports creating compute pipeline asynchronously
     void DeviceBase::CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
                                                     size_t blueprintHash,
                                                     WGPUCreateComputePipelineAsyncCallback callback,
                                                     void* userdata) {
+        CreateComputePipelineAsyncImplBase(descriptor, blueprintHash, callback, userdata);
+    }
+
+    void DeviceBase::CreateComputePipelineAsyncImplBase(
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata) {
         Ref<ComputePipelineBase> result;
         std::string errorMessage;
 
@@ -1166,10 +1220,10 @@ namespace dawn_native {
             result = AddOrGetCachedPipeline(resultOrError.AcquireSuccess(), blueprintHash);
         }
 
-        std::unique_ptr<CreateComputePipelineAsyncTask> request =
-            std::make_unique<CreateComputePipelineAsyncTask>(result, errorMessage, callback,
-                                                             userdata);
-        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
+        std::unique_ptr<CreateComputePipelineAsyncTaskResult> request =
+            std::make_unique<CreateComputePipelineAsyncTaskResult>(result, errorMessage, callback,
+                                                                   userdata);
+        mCreatePipelineAsynResultTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
 
     ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::CreatePipelineLayoutInternal(
@@ -1360,6 +1414,10 @@ namespace dawn_native {
                 mOverridenToggles.Set(toggle, true);
             }
         }
+    }
+
+    dawn_platform::WorkerTaskPool* DeviceBase::GetWorkerTaskPool() {
+        return mWorkerTaskPool.get();
     }
 
 }  // namespace dawn_native

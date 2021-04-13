@@ -19,8 +19,12 @@
 #include "common/SerialQueue.h"
 #include "dawn/webgpu.h"
 #include "dawn_native/IntegerTypes.h"
+#include "dawn_native/wgpu_structs_autogen.h"
+#include "dawn_platform/DawnPlatform.h"
 
+#include <list>
 #include <memory>
+#include <mutex>
 #include <string>
 
 namespace dawn_native {
@@ -29,9 +33,9 @@ namespace dawn_native {
     class DeviceBase;
     class RenderPipelineBase;
 
-    struct CreatePipelineAsyncTaskBase {
-        CreatePipelineAsyncTaskBase(std::string errorMessage, void* userData);
-        virtual ~CreatePipelineAsyncTaskBase();
+    struct CreatePipelineAsyncTaskResultBase {
+        CreatePipelineAsyncTaskResultBase(std::string errorMessage, void* userData);
+        virtual ~CreatePipelineAsyncTaskResultBase();
 
         virtual void Finish() = 0;
         virtual void HandleShutDown() = 0;
@@ -42,11 +46,11 @@ namespace dawn_native {
         void* mUserData;
     };
 
-    struct CreateComputePipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
-        CreateComputePipelineAsyncTask(Ref<ComputePipelineBase> pipeline,
-                                       std::string errorMessage,
-                                       WGPUCreateComputePipelineAsyncCallback callback,
-                                       void* userdata);
+    struct CreateComputePipelineAsyncTaskResult final : public CreatePipelineAsyncTaskResultBase {
+        CreateComputePipelineAsyncTaskResult(Ref<ComputePipelineBase> pipeline,
+                                             std::string errorMessage,
+                                             WGPUCreateComputePipelineAsyncCallback callback,
+                                             void* userdata);
 
         void Finish() final;
         void HandleShutDown() final;
@@ -57,11 +61,11 @@ namespace dawn_native {
         WGPUCreateComputePipelineAsyncCallback mCreateComputePipelineAsyncCallback;
     };
 
-    struct CreateRenderPipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
-        CreateRenderPipelineAsyncTask(Ref<RenderPipelineBase> pipeline,
-                                      std::string errorMessage,
-                                      WGPUCreateRenderPipelineAsyncCallback callback,
-                                      void* userdata);
+    struct CreateRenderPipelineAsyncTaskResult final : public CreatePipelineAsyncTaskResultBase {
+        CreateRenderPipelineAsyncTaskResult(Ref<RenderPipelineBase> pipeline,
+                                            std::string errorMessage,
+                                            WGPUCreateRenderPipelineAsyncCallback callback,
+                                            void* userdata);
 
         void Finish() final;
         void HandleShutDown() final;
@@ -72,19 +76,82 @@ namespace dawn_native {
         WGPUCreateRenderPipelineAsyncCallback mCreateRenderPipelineAsyncCallback;
     };
 
-    class CreatePipelineAsyncTracker {
+    class CreatePipelineAsyncResultTracker {
       public:
-        explicit CreatePipelineAsyncTracker(DeviceBase* device);
-        ~CreatePipelineAsyncTracker();
+        explicit CreatePipelineAsyncResultTracker(DeviceBase* device);
+        ~CreatePipelineAsyncResultTracker();
 
-        void TrackTask(std::unique_ptr<CreatePipelineAsyncTaskBase> task, ExecutionSerial serial);
+        void TrackTask(std::unique_ptr<CreatePipelineAsyncTaskResultBase> task,
+                       ExecutionSerial serial);
         void Tick(ExecutionSerial finishedSerial);
         void ClearForShutDown();
 
       private:
+        std::vector<std::unique_ptr<CreatePipelineAsyncTaskResultBase>>
+        GetTaskResultsBeforeFinishedSerial(ExecutionSerial finishedSerial);
+
         DeviceBase* mDevice;
-        SerialQueue<ExecutionSerial, std::unique_ptr<CreatePipelineAsyncTaskBase>>
-            mCreatePipelineAsyncTasksInFlight;
+
+        // All the operations on mCreatePipelineAsyncTaskResultsInFlight should be thread-safe.
+        std::mutex mMutex;
+        SerialQueue<ExecutionSerial, std::unique_ptr<CreatePipelineAsyncTaskResultBase>>
+            mCreatePipelineAsyncTaskResultsInFlight;
+    };
+
+    class WorkerTask {
+      public:
+        virtual ~WorkerTask() = default;
+        static void DoTask(void* userdata);
+
+      private:
+        virtual void Run() = 0;
+    };
+
+    class ComputePipelineAsyncTask : public WorkerTask {
+      public:
+        ComputePipelineAsyncTask(DeviceBase* device,
+                                 const ComputePipelineDescriptor* descriptor,
+                                 size_t blueprintHash,
+                                 WGPUCreateComputePipelineAsyncCallback callback,
+                                 void* userdata);
+
+      private:
+        void Run() override;
+
+        DeviceBase* mDevice;
+        size_t mBlueprintHash;
+        WGPUCreateComputePipelineAsyncCallback mCallback;
+        void* mUserData;
+
+        struct ComboComputePipelineDescriptor : public ComputePipelineDescriptor {
+            explicit ComboComputePipelineDescriptor(const ComputePipelineDescriptor* descriptor);
+
+            std::string mLabel;
+            Ref<PipelineLayoutBase> mPipelineLayout;
+            Ref<ShaderModuleBase> mComputeShaderModule;
+            std::string mEntryPoint;
+        } mDescriptor;
+    };
+
+    class CreatePipelineAsyncTaskManager {
+      public:
+        explicit CreatePipelineAsyncTaskManager(DeviceBase* device);
+
+        void StartComputePipelineAsyncWaitableTask(const ComputePipelineDescriptor* descriptor,
+                                                   size_t blueprintHash,
+                                                   WGPUCreateComputePipelineAsyncCallback callback,
+                                                   void* userdata);
+        void Tick();
+
+        void WaitAndRemoveAll();
+
+        bool HasWaitableTasksInFlight();
+
+      private:
+        DeviceBase* mDevice;
+        dawn_platform::WorkerTaskPool* mWorkerTaskPool;
+        std::mutex mWaitableTasksMutex;
+        std::list<std::unique_ptr<dawn_platform::WaitableEvent>> mWaitableEventsInFlight;
     };
 
 }  // namespace dawn_native

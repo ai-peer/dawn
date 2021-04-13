@@ -158,6 +158,8 @@ namespace dawn_native { namespace d3d12 {
         // device initialization to call NextSerial
         DAWN_TRY(NextSerial());
 
+        mCreatePipelineAsyncTaskManager = std::make_unique<CreatePipelineAsyncTaskManager>(this);
+
         // The environment can only use DXC when it's available. Override the decision if it is not
         // applicable.
         ApplyUseDxcToggle();
@@ -249,6 +251,7 @@ namespace dawn_native { namespace d3d12 {
         mRenderTargetViewAllocator->Tick(completedSerial);
         mDepthStencilViewAllocator->Tick(completedSerial);
         mUsedComObjectRefs.ClearUpTo(completedSerial);
+        mCreatePipelineAsyncTaskManager->Tick();
 
         if (mPendingCommands.IsOpen()) {
             DAWN_TRY(ExecutePendingCommandContext());
@@ -354,6 +357,14 @@ namespace dawn_native { namespace d3d12 {
         TextureBase* texture,
         const TextureViewDescriptor* descriptor) {
         return TextureView::Create(texture, descriptor);
+    }
+
+    void Device::CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                                size_t blueprintHash,
+                                                WGPUCreateComputePipelineAsyncCallback callback,
+                                                void* userdata) {
+        mCreatePipelineAsyncTaskManager->StartComputePipelineAsyncWaitableTask(
+            descriptor, blueprintHash, callback, userdata);
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
