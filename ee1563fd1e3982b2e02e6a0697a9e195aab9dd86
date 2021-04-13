@@ -86,6 +86,24 @@
       "parentUuid": "8e380b46_1b9122ef",
       "revId": "ee1563fd1e3982b2e02e6a0697a9e195aab9dd86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52bc56e7_8aa6f84b",
+        "filename": "src/tests/end2end/ComputeSharedMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T04:00:34Z",
+      "side": 1,
+      "message": "pretty sure this is because they haven\u0027t updated it to be invalid yet to avoid breaking code - fine to fix it now",
+      "parentUuid": "f7b4ab90_91e80f80",
+      "revId": "ee1563fd1e3982b2e02e6a0697a9e195aab9dd86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
