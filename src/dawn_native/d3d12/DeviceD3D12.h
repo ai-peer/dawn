@@ -17,6 +17,7 @@
 
 #include "common/SerialQueue.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/PipelineLayout.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Info.h"
 #include "dawn_native/d3d12/Forward.h"
@@ -137,6 +138,12 @@ namespace dawn_native { namespace d3d12 {
         uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
 
         float GetTimestampPeriodInNS() const override;
+
+      protected:
+        void CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                            size_t blueprintHash,
+                                            WGPUCreateComputePipelineAsyncCallback callback,
+                                            void* userdata) override;
 
       private:
         using DeviceBase::DeviceBase;
