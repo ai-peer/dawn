@@ -138,6 +138,12 @@ namespace dawn_native { namespace d3d12 {
 
         float GetTimestampPeriodInNS() const override;
 
+      protected:
+        void CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                            size_t blueprintHash,
+                                            WGPUCreateComputePipelineAsyncCallback callback,
+                                            void* userdata) override;
+
       private:
         using DeviceBase::DeviceBase;
 
