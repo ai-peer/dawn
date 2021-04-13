@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1304d34_1ceda1e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-13T20:11:53Z",
+      "side": 1,
+      "message": "Rebased over the recent removal of \"-\u003e void\" everywhere, so this should be land-able as soon as https://dawn-review.googlesource.com/c/dawn/+/47701 is in to prevent OpenGL backend errors.",
+      "revId": "4cd462017cb9c4a477771c17104ae6cc3842a3d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
