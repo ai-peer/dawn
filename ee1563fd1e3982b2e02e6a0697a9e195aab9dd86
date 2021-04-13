@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8233387_4ee734c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-13T03:54:37Z",
+      "side": 1,
+      "message": "I needed to do a rebase. Some tests were skipped locally that were failing on the bots. That bit should be resolved now, at least.",
+      "parentUuid": "2b9695a3_401deef5",
+      "revId": "ee1563fd1e3982b2e02e6a0697a9e195aab9dd86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e380b46_1b9122ef",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-13T02:19:31Z",
       "side": 1,
       "message": "Aside: Why are these valid? I thought 4 and 11 were i32.",
+      "revId": "ee1563fd1e3982b2e02e6a0697a9e195aab9dd86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b4ab90_91e80f80",
+        "filename": "src/tests/end2end/ComputeSharedMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-13T03:54:37Z",
+      "side": 1,
+      "message": "That\u0027s a good question! Worth bringing up with the Tint team",
+      "parentUuid": "8e380b46_1b9122ef",
       "revId": "ee1563fd1e3982b2e02e6a0697a9e195aab9dd86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
