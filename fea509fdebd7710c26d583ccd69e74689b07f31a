@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8a06259_8fdfcd1b",
+        "filename": "src/tests/ToggleParser.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T21:17:44Z",
+      "side": 1,
+      "message": "this should be \"disable\" and the rest of the variables in this function should be set accordingly.",
+      "range": {
+        "startLine": 38,
+        "startChar": 53,
+        "endLine": 38,
+        "endChar": 59
+      },
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
