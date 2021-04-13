@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bacb26e_91d5d87c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-13T20:00:38Z",
+      "side": 1,
+      "message": "TIL that we already have a build recipe that run with \u0027use_tint_generator\u0027... ",
+      "revId": "17dcb51a05596c349aa416f37b753c71fe78f6d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
