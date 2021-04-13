@@ -17,6 +17,7 @@
 
 #include "dawn_native/Error.h"
 
+#include <mutex>
 #include <vector>
 
 namespace dawn_platform {
@@ -56,6 +57,8 @@ namespace dawn_native {
         template <typename CreateFn>
         ResultOrError<ScopedCachedBlob> GetOrCreate(const PersistentCacheKey& key,
                                                     CreateFn&& createFn) {
+            std::lock_guard<std::mutex> lock(mMutex);
+
             // Attempt to load an existing blob from the cache.
             ScopedCachedBlob blob = LoadData(key);
             if (blob.bufferSize > 0) {
@@ -79,6 +82,7 @@ namespace dawn_native {
 
         DeviceBase* mDevice = nullptr;
 
+        std::mutex mMutex;
         dawn_platform::CachingInterface* mCache = nullptr;
     };
 }  // namespace dawn_native
