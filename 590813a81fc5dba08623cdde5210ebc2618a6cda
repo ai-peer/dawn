@@ -16,6 +16,46 @@
       "message": "This should work now",
       "revId": "590813a81fc5dba08623cdde5210ebc2618a6cda",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa474614_93b60b33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T20:46:32Z",
+      "side": 1,
+      "message": "Wait - so does this mean that previously we were running with --enable-toggles\u003duse_tint_generator but it didn\u0027t do anything?",
+      "revId": "590813a81fc5dba08623cdde5210ebc2618a6cda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09dbf03c_dc76541e",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T20:46:32Z",
+      "side": 1,
+      "message": "nit: small preference to just put HasToggleEnabled(\"use_tint_generator\") everywhere instead of adding an additional getter.",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 1
+      },
+      "revId": "590813a81fc5dba08623cdde5210ebc2618a6cda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
