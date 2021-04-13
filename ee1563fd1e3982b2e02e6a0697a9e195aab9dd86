@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21f03481_4d71a1b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-13T00:14:30Z",
+      "side": 1,
+      "message": "Sorry for such a large CL! It\u0027s just the same change over and over again, though, so it didn\u0027t feel like there was much to be gained by breaking it up.",
+      "revId": "ee1563fd1e3982b2e02e6a0697a9e195aab9dd86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
