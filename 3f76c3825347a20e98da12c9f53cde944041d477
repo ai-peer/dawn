@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9894efdc_82b44de5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T01:12:23Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "3f76c3825347a20e98da12c9f53cde944041d477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfd3dae5_ff98b2dc",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T01:12:23Z",
+      "side": 1,
+      "message": "unit: this could be\n\nsize_t hash \u003d 0;\nHashCombine(\u0026hash, pair.first, pair.second);\nreturn hash;\n\nI guess it\u0027s the same number of lines in this case, but I think it\u0027s a little more readable when we have more than two things to hash.",
+      "range": {
+        "startLine": 1369,
+        "startChar": 8,
+        "endLine": 1372,
+        "endChar": 20
+      },
+      "revId": "3f76c3825347a20e98da12c9f53cde944041d477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -226,6 +226,30 @@
       },
       "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9c492d_011d5be7",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-13T01:12:23Z",
+      "side": 1,
+      "message": "Looks okay - though I think we might end up either changing it from std::pair to a struct, or just have a separate cache type per-backend.\n\nMetal, for example requires a bunch more things like the shader stage and vertex state.",
+      "parentUuid": "36f4e0dc_1e50c85e",
+      "range": {
+        "startLine": 197,
+        "startChar": 0,
+        "endLine": 197,
+        "endChar": 53
+      },
+      "revId": "28e73da5066876aa258f0ace9fc6284a4466fd59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
