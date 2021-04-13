@@ -18,7 +18,9 @@
 #include "common/Log.h"
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
-#include "gtest/gtest.h"
+#include "tests/ToggleParser.h"
+
+#include <gtest/gtest.h>
 
 #define ASSERT_DEVICE_ERROR(statement)                          \
     FlushWire();                                                \
@@ -93,6 +95,8 @@ class ValidationTest : public testing::Test {
     };
 
     bool HasToggleEnabled(const char* toggle) const;
+
+    bool IsUseTintGeneratorEnabled() const;
 
   protected:
     virtual WGPUDevice CreateTestDevice();
