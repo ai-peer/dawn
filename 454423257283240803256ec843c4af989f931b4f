@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "378564a3_4cb9d693",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-13T18:18:46Z",
+      "side": 1,
+      "message": "ShaderModuleGL change is based on Corentin\u0027s proof-of-concept patch, my primary addition in the shader tests.",
+      "revId": "454423257283240803256ec843c4af989f931b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
