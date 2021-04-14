@@ -16,6 +16,23 @@
       "message": "Sadly there seems to be a tint issue right now that\u0027s causing a huge swath of the e2e tests to fail, but if I roll tit back about a day on my local machine I can verify that this works, so I\u0027ll put it up for review now. PTAL!",
       "revId": "8b08764b200a0ca464def634069886c728e6252a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "715d7c67_2feb6678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-14T22:46:58Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "8b08764b200a0ca464def634069886c728e6252a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
