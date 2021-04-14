@@ -52,6 +52,24 @@
       "parentUuid": "625b850c_2e281d49",
       "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "642b80aa_eba4bdca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-14T21:56:40Z",
+      "side": 1,
+      "message": "The singular FindInChain seems useful, but I\u0027m not convinced that the variadic version is more concise or ergonomic than a switch statement like the one used for processing surface descriptors. If we\u0027re likely to have a lot of extensions, I don\u0027t think it\u0027s particularly pleasant to write:\n\n```\nDescA a \u003d nullptr;\nDescB b \u003d nullptr;\n...\nDescZ z \u003d nullptr;\nFindInChain(chain, a, b..., z);\nif (a) {\n}\nif (b) {\n}\n...\nif (z) {\n}\n```\n\nwhen a simple switch statement gets us most of the way there without any template magic behind the scenes. Also, this won\u0027t work if we decide it\u0027s valid to have two structs in a chain with the same sType.\n\nAs for validation, I think it\u0027d be useful to have a function that looks like:\n\n```\nbool ValidateChainSTypes(std::vector\u003cstd::vector\u003cSType\u003e\u003e validSTypes);\n```\n\nwhere validStypes contains all of the possible sTypes for the chain and each vector inside validSTypes is a oneof constraint. To illustrate:\n\n```\nValidateChainSTypes(chain, {{ShaderModuleSPIRV, ShaderModuleWGSL}});\nValidateChainSTypes(chain, {{DepthClampingState}, {SomeOtherPrimitiveStruct}});\n```",
+      "parentUuid": "ce4973e1_630bf1a5",
+      "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
