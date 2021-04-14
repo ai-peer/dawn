@@ -50,6 +50,24 @@
       "message": "All of the blend factors are valid for alpha as well, that was part of the decision along with these renames. So should test them (and old enum names should produce warnings all the same).",
       "revId": "8b08764b200a0ca464def634069886c728e6252a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbdf2afa_149ecb13",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-14T23:33:47Z",
+      "side": 1,
+      "message": "Oh, thanks for pointing that out! I\u0027ll update this to account for it tomorrow.",
+      "parentUuid": "dc29efaa_12f4671f",
+      "revId": "8b08764b200a0ca464def634069886c728e6252a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
