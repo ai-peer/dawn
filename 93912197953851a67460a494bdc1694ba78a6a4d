@@ -33,6 +33,24 @@
       "message": "Are any of the other transforms needed? e.g. BoundArrayAccessors:\nhttps://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/vulkan/ShaderModuleVk.cpp;l\u003d55;drc\u003d47b6b680e11606f2d82358c00f9487ee1c740c54",
       "revId": "93912197953851a67460a494bdc1694ba78a6a4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643109c2_e1f282bb",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-14T15:23:59Z",
+      "side": 1,
+      "message": "I think this might have larger implications. We could leave it for when we need the transforms.",
+      "parentUuid": "0359e3e9_b348305e",
+      "revId": "93912197953851a67460a494bdc1694ba78a6a4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
