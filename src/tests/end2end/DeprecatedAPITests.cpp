@@ -549,3 +549,136 @@ DAWN_INSTANTIATE_TEST(VertexFormatDeprecationTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+// Tests that deprecated blend factors properly raise a deprecation warning when used
+class BlendFactorDeprecationTests : public DeprecationTests {
+  protected:
+    // Runs the test
+    void DoColorTest(const wgpu::BlendFactor blendFactor, bool deprecated) {
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+                [[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {
+                    return vec4<f32>(0.0, 0.0, 0.0, 1.0);
+                }
+            )");
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+                [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+                    return vec4<f32>(1.0, 1.0, 1.0, 1.0);
+                }
+            )");
+
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].blend = &descriptor.cBlends[0];
+
+        descriptor.cBlends[0].color.srcFactor = blendFactor;
+        if (deprecated) {
+            EXPECT_DEPRECATION_WARNING(device.CreateRenderPipeline2(&descriptor));
+        } else {
+            device.CreateRenderPipeline2(&descriptor);
+        }
+        descriptor.cBlends[0].color.srcFactor = wgpu::BlendFactor::One;
+
+        descriptor.cBlends[0].color.dstFactor = blendFactor;
+        if (deprecated) {
+            EXPECT_DEPRECATION_WARNING(device.CreateRenderPipeline2(&descriptor));
+        } else {
+            device.CreateRenderPipeline2(&descriptor);
+        }
+        descriptor.cBlends[0].color.dstFactor = wgpu::BlendFactor::Zero;
+    }
+
+    void DoAlphaTest(const wgpu::BlendFactor blendFactor, bool deprecated) {
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+                [[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {
+                    return vec4<f32>(0.0, 0.0, 0.0, 1.0);
+                }
+            )");
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+                [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+                    return vec4<f32>(1.0, 1.0, 1.0, 1.0);
+                }
+            )");
+
+        utils::ComboRenderPipelineDescriptor2 descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].blend = &descriptor.cBlends[0];
+
+        descriptor.cBlends[0].alpha.srcFactor = blendFactor;
+        if (deprecated) {
+            EXPECT_DEPRECATION_WARNING(device.CreateRenderPipeline2(&descriptor));
+        } else {
+            device.CreateRenderPipeline2(&descriptor);
+        }
+        descriptor.cBlends[0].alpha.srcFactor = wgpu::BlendFactor::One;
+
+        descriptor.cBlends[0].alpha.dstFactor = blendFactor;
+        if (deprecated) {
+            EXPECT_DEPRECATION_WARNING(device.CreateRenderPipeline2(&descriptor));
+        } else {
+            device.CreateRenderPipeline2(&descriptor);
+        }
+        descriptor.cBlends[0].alpha.dstFactor = wgpu::BlendFactor::Zero;
+    }
+};
+
+static constexpr std::array<wgpu::BlendFactor, 13> kColorBlendFactors = {
+    wgpu::BlendFactor::Zero,
+    wgpu::BlendFactor::One,
+    wgpu::BlendFactor::Src,
+    wgpu::BlendFactor::OneMinusSrc,
+    wgpu::BlendFactor::SrcAlpha,
+    wgpu::BlendFactor::OneMinusSrcAlpha,
+    wgpu::BlendFactor::Dst,
+    wgpu::BlendFactor::OneMinusDst,
+    wgpu::BlendFactor::DstAlpha,
+    wgpu::BlendFactor::OneMinusDstAlpha,
+    wgpu::BlendFactor::SrcAlphaSaturated,
+    wgpu::BlendFactor::Constant,
+    wgpu::BlendFactor::OneMinusConstant,
+};
+
+static constexpr std::array<wgpu::BlendFactor, 9> kAlphaBlendFactors = {
+    wgpu::BlendFactor::Zero,
+    wgpu::BlendFactor::One,
+    wgpu::BlendFactor::SrcAlpha,
+    wgpu::BlendFactor::OneMinusSrcAlpha,
+    wgpu::BlendFactor::DstAlpha,
+    wgpu::BlendFactor::OneMinusDstAlpha,
+    wgpu::BlendFactor::SrcAlphaSaturated,
+    wgpu::BlendFactor::Constant,
+    wgpu::BlendFactor::OneMinusConstant,
+};
+
+TEST_P(BlendFactorDeprecationTests, CurrentBlendFactors) {
+    // Using the new vertex formats does not emit a warning.
+    for (auto& format : kColorBlendFactors) {
+        DoColorTest(format, false);
+    }
+
+    for (auto& format : kAlphaBlendFactors) {
+        DoAlphaTest(format, false);
+    }
+}
+
+static constexpr std::array<wgpu::BlendFactor, 6> kDeprecatedBlendFactors = {
+    wgpu::BlendFactor::SrcColor,   wgpu::BlendFactor::OneMinusSrcColor,
+    wgpu::BlendFactor::DstColor,   wgpu::BlendFactor::OneMinusDstColor,
+    wgpu::BlendFactor::BlendColor, wgpu::BlendFactor::OneMinusBlendColor,
+};
+
+TEST_P(BlendFactorDeprecationTests, DeprecatedBlendFactors) {
+    // Using deprecated vertex formats does emit a warning.
+    for (auto& format : kDeprecatedBlendFactors) {
+        DoColorTest(format, true);
+    }
+}
+
+DAWN_INSTANTIATE_TEST(BlendFactorDeprecationTests,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      NullBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
