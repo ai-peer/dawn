@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6db62cd_4e420520",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-14T14:15:00Z",
+      "side": 1,
+      "message": "I agree that for long term code health that a general solution should be implemented, I have filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d757 to track.\n\nI decided to focus on just the elements that are needed to get better testing of Tint for OT for short term.",
+      "parentUuid": "73a1bbdb_bac2eb58",
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a06259_8fdfcd1b",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "025121e7_fd33ac68",
+        "filename": "src/tests/ToggleParser.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-14T14:15:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8a06259_8fdfcd1b",
+      "range": {
+        "startLine": 38,
+        "startChar": 53,
+        "endLine": 38,
+        "endChar": 59
+      },
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab3718eb_bbe40ec9",
@@ -54,6 +96,24 @@
       "writtenOn": "2021-04-14T08:05:49Z",
       "side": 1,
       "message": "nit: include is not necessary?",
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "852e1164_5f7fecc9",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-04-14T14:15:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab3718eb_bbe40ec9",
       "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
