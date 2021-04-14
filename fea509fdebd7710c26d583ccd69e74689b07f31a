@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a1bbdb_bac2eb58",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-14T08:05:49Z",
+      "side": 1,
+      "message": "LGTM\n\nI was thinking we could have a more generic utils::CommandLineParser that also handles --use-wire, debug validation, etc. But we can always do that later (is in not anytime soon)",
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a06259_8fdfcd1b",
@@ -20,6 +37,23 @@
         "endLine": 38,
         "endChar": 59
       },
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab3718eb_bbe40ec9",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-14T08:05:49Z",
+      "side": 1,
+      "message": "nit: include is not necessary?",
       "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
