@@ -70,6 +70,24 @@
       "parentUuid": "ce4973e1_630bf1a5",
       "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "087e8246_976a6c40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-14T22:01:44Z",
+      "side": 1,
+      "message": "+1 to Validate. Agree that singular FindInChain is sufficient for now. We can see if a varadic one is useful in the future when there are more extensions.",
+      "parentUuid": "642b80aa_eba4bdca",
+      "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
