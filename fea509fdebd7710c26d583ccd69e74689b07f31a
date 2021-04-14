@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "575747cf_2a57c2c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-14T14:17:54Z",
+      "side": 1,
+      "message": "Thanks for filing the issue. Makes sense and I was definitely not suggesting we do it now :)",
+      "parentUuid": "a6db62cd_4e420520",
+      "revId": "fea509fdebd7710c26d583ccd69e74689b07f31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8a06259_8fdfcd1b",
