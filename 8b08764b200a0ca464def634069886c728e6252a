@@ -33,6 +33,23 @@
       "message": "LGTM!",
       "revId": "8b08764b200a0ca464def634069886c728e6252a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc29efaa_12f4671f",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-04-14T22:58:41Z",
+      "side": 1,
+      "message": "All of the blend factors are valid for alpha as well, that was part of the decision along with these renames. So should test them (and old enum names should produce warnings all the same).",
+      "revId": "8b08764b200a0ca464def634069886c728e6252a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
