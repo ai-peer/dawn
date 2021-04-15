@@ -1337,7 +1337,7 @@ namespace dawn_native {
         std::vector<uint32_t> spirv = generator.result();
         DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
         return std::move(spirv);
-    }
+    }  //
 
     MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult) {
         mTintProgram = std::move(parseResult->tintProgram);
