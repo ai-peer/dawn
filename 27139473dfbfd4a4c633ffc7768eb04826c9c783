@@ -33,6 +33,40 @@
       "message": "LGTM!",
       "revId": "27139473dfbfd4a4c633ffc7768eb04826c9c783",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab34c15c_0c92ab1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-15T07:16:32Z",
+      "side": 1,
+      "message": "LGTM too! Thanks for fixing all these tests. I think in the future type omission will help with such things since we\u0027ll be able to just do let a \u003d myBufferBinding; I think.",
+      "revId": "27139473dfbfd4a4c633ffc7768eb04826c9c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de09d88_50104a1d",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-15T07:16:32Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "27139473dfbfd4a4c633ffc7768eb04826c9c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
