@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34d0ce01_ae52f6f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-15T17:17:35Z",
+      "side": 1,
+      "message": "PTAL! Follow up to https://dawn-review.googlesource.com/c/dawn/+/47860\n\nAnd just as a sanity check, the internal command buffer isn\u0027t exposed outside of Dawn, right? I presume those renames won\u0027t break anyone.",
+      "revId": "b07c25a6bf8ecf072ba824a26997a901ca3fdcd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
