@@ -88,6 +88,24 @@
       "parentUuid": "642b80aa_eba4bdca",
       "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "495f2b6b_4990663c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-15T18:07:58Z",
+      "side": 1,
+      "message": "Yep that sounds good. The goal is to have helpers we can start using now, and when we find that they don\u0027t scale it\u0027s easy to find and replace their usage and add additional helpers.",
+      "parentUuid": "087e8246_976a6c40",
+      "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
