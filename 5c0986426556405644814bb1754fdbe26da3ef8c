@@ -33,6 +33,24 @@
       "message": "nit: I think this comment should be // Other blend factors translate to the same D3D12 enum as the color blend factors.",
       "revId": "5c0986426556405644814bb1754fdbe26da3ef8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25166b11_785cb52a",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-15T16:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c750d94e_b1c57f30",
+      "revId": "5c0986426556405644814bb1754fdbe26da3ef8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
