@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8a5f14a_7bb5f25e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-15T15:52:38Z",
+      "side": 1,
+      "message": "LGTM. It\u0027ll be good to get the CQ unblocked.",
+      "revId": "4aeb36b3d23e29dc946e41e742459f7bf2028fdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
