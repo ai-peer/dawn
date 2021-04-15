@@ -37,6 +37,7 @@ namespace tint {
     class Program;
 
     namespace transform {
+        class DataMap;
         class Transform;
         class VertexPulling;
     }  // namespace transform
@@ -88,6 +89,8 @@ namespace dawn_native {
                                                             const PipelineLayoutBase* layout);
     ResultOrError<tint::Program> RunTransforms(tint::transform::Transform* transform,
                                                const tint::Program* program,
+                                               const tint::transform::DataMap& inputs,
+                                               tint::transform::DataMap* outputs,
                                                OwnedCompilationMessages* messages);
 
     std::unique_ptr<tint::transform::VertexPulling> MakeVertexPullingTransform(
