@@ -270,6 +270,9 @@ class DrawCallPerf : public DawnPerfTestWithParams<DrawCallParamForTest> {
 void DrawCallPerf::SetUp() {
     DawnPerfTestWithParams::SetUp();
 
+    // TODO(dawn:758): Causes an FXC compile error: X3501: 'tint_symbol_6': entrypoint not found
+    DAWN_SKIP_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
+
     // Compute aligned uniform / vertex data sizes.
     mAlignedUniformSize = Align(kUniformSize, kMinDynamicBufferOffsetAlignment);
     mAlignedVertexDataSize = Align(sizeof(kVertexData), 4);
