@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1966771c_0f783e61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-04-15T19:36:40Z",
+      "side": 1,
+      "message": "Hey, I just stopped the roller as it seems there was an issue with tint and this CL https://dawn-review.googlesource.com/c/tint/+/45720 that it\u0027s causing issues with Chromium.\n\nThe roll to dawn of that change has been reverted here https://chromium-review.googlesource.com/c/chromium/src/+/2828672",
+      "revId": "5d73b31175079cb1ee37cbb88e41c015db4b8fb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
