@@ -68,6 +68,24 @@
       "parentUuid": "dc29efaa_12f4671f",
       "revId": "8b08764b200a0ca464def634069886c728e6252a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d24b2f_7646f8dd",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-15T03:49:38Z",
+      "side": 1,
+      "message": "Done. Now I just need to wait for the tint errors to be fixed.",
+      "parentUuid": "cbdf2afa_149ecb13",
+      "revId": "8b08764b200a0ca464def634069886c728e6252a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
