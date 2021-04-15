@@ -16,6 +16,23 @@
       "message": "PTAL! Follow up to https://dawn-review.googlesource.com/c/dawn/+/47860\n\nAnd just as a sanity check, the internal command buffer isn\u0027t exposed outside of Dawn, right? I presume those renames won\u0027t break anyone.",
       "revId": "b07c25a6bf8ecf072ba824a26997a901ca3fdcd4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e2d6f6a_de936d35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-15T17:22:47Z",
+      "side": 1,
+      "message": "LGTM! Yeah Commands.h is an implementation detail of dawn_native.",
+      "revId": "b07c25a6bf8ecf072ba824a26997a901ca3fdcd4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
