@@ -106,6 +106,24 @@
       "parentUuid": "087e8246_976a6c40",
       "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0af474c7_b1fcdd02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-04-15T21:33:45Z",
+      "side": 1,
+      "message": "Cool, done. If it\u0027s reasonable, I can also update the ShaderModule validation as well.",
+      "parentUuid": "495f2b6b_4990663c",
+      "revId": "2fe49126477717e1ea1b3fcaa65f92f5ec26bcb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
