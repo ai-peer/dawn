@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb2f1355_17d3fd94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-15T21:24:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c8919ee73b97c50d5a548164910ff2a9197275b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebe86a5d_df1e1454",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1426,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-15T21:24:17Z",
+      "side": 1,
+      "message": "remove + deprecate the \"descriptor\" suffix?",
+      "range": {
+        "startLine": 1426,
+        "startChar": 34,
+        "endLine": 1426,
+        "endChar": 44
+      },
+      "revId": "c8919ee73b97c50d5a548164910ff2a9197275b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de20496_8f9e9059",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-15T21:24:17Z",
+      "side": 1,
+      "message": "nit: should this be optional during the deprecation period?",
+      "range": {
+        "startLine": 1429,
+        "startChar": 37,
+        "endLine": 1429,
+        "endChar": 51
+      },
+      "revId": "c8919ee73b97c50d5a548164910ff2a9197275b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b67a3fbb_c548d1d6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-15T21:24:17Z",
+      "side": 1,
+      "message": "nit: can factor these DAWN_TRYs till after setting |attachment|",
+      "range": {
+        "startLine": 214,
+        "startChar": 16,
+        "endLine": 221,
+        "endChar": 81
+      },
+      "revId": "c8919ee73b97c50d5a548164910ff2a9197275b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e7deac3_c1c8e980",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-15T21:24:17Z",
+      "side": 1,
+      "message": "nit: ditto factor DAWN_TRYs",
+      "range": {
+        "startLine": 270,
+        "startChar": 17,
+        "endLine": 277,
+        "endChar": 81
+      },
+      "revId": "c8919ee73b97c50d5a548164910ff2a9197275b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1d8f893_c24ebbc8",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-15T21:24:17Z",
+      "side": 1,
+      "message": "nit: unused",
+      "range": {
+        "startLine": 69,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 64
+      },
+      "revId": "c8919ee73b97c50d5a548164910ff2a9197275b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
