@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c851b9cc_43288a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T02:46:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "797ac38e_4404fe79",
+        "filename": "generator/templates/dawn_native/ChainUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T02:46:44Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4919d033_cb565b1f",
+        "filename": "generator/templates/dawn_native/ChainUtils.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T02:46:44Z",
+      "side": 1,
+      "message": "hmm.. can you think of a way we can avoid the std::vector heap allocations though? maybe with some std::array\u003cwgpu::SType, N\u003e that\u0027ll compile into compile-time constants?\n\nMight be complex. Perhaps we keep this code, but just have a second version that only validates one constraint instead of a list of them. I didn\u0027t see any usages in this CL that actually need the vector\u003cvector\u003c\u003e\u003e",
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08cbada_ff04619a",
+        "filename": "generator/templates/dawn_native/ChainUtils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T02:46:44Z",
+      "side": 1,
+      "message": "nit: tabs to spaces",
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04d1003f_1cf02b8c",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T02:46:44Z",
+      "side": 1,
+      "message": "is this still needed?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 19
+      },
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
