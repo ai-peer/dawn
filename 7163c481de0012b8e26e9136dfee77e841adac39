@@ -276,6 +276,24 @@
       "message": "[1]",
       "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8ffc044_9ac11ed5",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:14:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a08d5e11_68f1fd49",
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
