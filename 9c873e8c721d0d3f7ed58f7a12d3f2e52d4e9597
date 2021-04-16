@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef0eef3_0094599e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T08:42:56Z",
+      "side": 1,
+      "message": "LGTM too. Let\u0027s start with these helpers and see how they work out.",
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e43dd83_9f05d8df",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 768,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T08:42:56Z",
+      "side": 1,
+      "message": "Can we add a couple words about this in docs/codegen.md",
+      "revId": "9c873e8c721d0d3f7ed58f7a12d3f2e52d4e9597",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "797ac38e_4404fe79",
