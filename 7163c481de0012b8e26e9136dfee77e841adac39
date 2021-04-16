@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "612244c4_0f9c5b9c",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T04:05:43Z",
+      "side": 1,
+      "message": "I feel like this would be better structured if we had a base WorkerTask class.\n\nIt would have a static function DoTask() which calls virtual method Run(). After Run() executes, the WorkerTask deletes itself.\n\nThe task would not automatically start itself on creation. You post it separately.\n\nusage would look like:\n\nauto* t \u003d new ComputePipelineAsyncTask(...);\nev \u003d workerTaskPool-\u003ePostWorkerTask(ComputePipelineAsyncTask::DoTask, t);\n// enqueue |ev| to the list of waitable events. see [2]\n\nclass WorkerTask {\n  virtual void Run() \u003d 0;\n public:\n  static void DoTask(void* userdata) {\n    static_cast\u003cWorkerTask*\u003e(userdata)-\u003eRun();\n  }\n};\n\nclass ComputePipelineAsyncTask : WorkerTask {\n void Run() override {\n    mDevice-\u003eCreateComputePipelineAsyncImplBase(...);\n }\n\n // ...\n};",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2087faab_7be2f88a",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T04:05:43Z",
+      "side": 1,
+      "message": "[2] This lets us prune completed tasks and wait for tasks in flight. I don\u0027t think we need to wrap WaitableEvent with CreateComputePipelineAsyncWaitableTask to accomplish that. We can just need the WaitableEvent, not the CreateComputePipelineAsyncWaitableTask.\n\nCreatePipelineAsyncTaskManager can simply be a device-level of not-pipeline-specific WaitableEvents that are in flight.\n\nThen at [1], we would create the Task, post it, and enqueue the waitable event to the device-level list.",
+      "range": {
+        "startLine": 217,
+        "startChar": 5,
+        "endLine": 237,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edd2cea1_cb66f04e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T04:05:43Z",
+      "side": 1,
+      "message": "I think we can just always make this on Device creation. Or is making the task pool very slow?",
+      "range": {
+        "startLine": 1411,
+        "startChar": 4,
+        "endLine": 1424,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08d5e11_68f1fd49",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T04:05:43Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
