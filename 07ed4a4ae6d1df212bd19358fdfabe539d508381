@@ -43,6 +43,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c769c6c_fde1b278",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T05:34:52Z",
+      "side": 1,
+      "message": "\u003e That said.. I\u0027m not sure these callbacks are getting called at the right time. It looks like we create and track CreatePipelineAsyncTaskResultBase when the async task is started - shouldn\u0027t it happen instead when the async task finishes?\n\nI just intend to use CreatePipelineAsyncResultTracker to track the results and all the on-flight tasks are tracked at CreatePipelineAsyncTaskManager.\n\nThe basic work flow of the asynchronously creating compute pipeline is:\n1. CreatePipelineAsyncTaskManager creates a CreateComputePipelineAsyncWaitableTask, where the whole execution environment is stored and device-\u003eCreateComputePipelineAsyncImplBase() is called asyncrhonously.\n2. At the end of every call of device-\u003eCreateComputePipelineAsyncImplBase(), an CreatePipelineAsyncTaskResultBase is created and passed to CreatePipelineAsyncResultTracker\n3. At every Device-\u003eTick():\n  - Call the callback of all the CreatePipelineAsyncTaskResultBase objects in CreatePipelineAsyncResultTracker as the related CreatePipelienAsync tasks have already been completed and its the right time to call them.\n  - Clean up all the completed CreateComputePipelineAsyncWaitableTask in CreatePipelineAsyncTaskManager as the related CreatePipelienAsync tasks have already been completed and should no longer be alive.",
+      "parentUuid": "f4b67c0f_cd59faf6",
+      "revId": "07ed4a4ae6d1df212bd19358fdfabe539d508381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c64d5314_b7df83ca",
         "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
         "patchSetId": 5
@@ -77,6 +95,30 @@
       "writtenOn": "2021-04-16T04:05:43Z",
       "side": 1,
       "message": "I don\u0027t think this is safe. The descriptor contains pointers to other objects which may not live long enough. It might be necessary for us to make some descriptor-cloning utilities.",
+      "range": {
+        "startLine": 167,
+        "startChar": 10,
+        "endLine": 167,
+        "endChar": 35
+      },
+      "revId": "07ed4a4ae6d1df212bd19358fdfabe539d508381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fa0a0fd_627cc464",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T05:34:52Z",
+      "side": 1,
+      "message": "Yes that\u0027s true. So I find I have to keep a Ref\u003c\u003e at [3] to ensure all these pointers are always valid during the lifecycle of this Task.",
+      "parentUuid": "0e69e6a0_e8282310",
       "range": {
         "startLine": 167,
         "startChar": 10,

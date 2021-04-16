@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "561524c5_74351498",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T05:34:52Z",
+      "side": 1,
+      "message": "Like [4], I find we must keep all the parameters used in mDevice-\u003eCreateComputePipelineAsyncImplBase() alive during the async execution of Run(), so I have to save all of these parameters together with WaitableEvent (here they should be stored inside ComputePipelineAsyncTask).",
+      "parentUuid": "612244c4_0f9c5b9c",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2087faab_7be2f88a",
         "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
         "patchSetId": 6
@@ -49,6 +73,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0ae93f5e_e346e731",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T05:34:52Z",
+      "side": 1,
+      "message": "[4]\nI warp WaitableEvent and all of its parameters together to ensure all of these parameters be alive during the execution of the async task, or I found we will meet some errors (as you said, some pointers may no longer be valid when the async task is executed if we only save WaitableTask without saving its parameters).\n\nI use CreatePipelineAsyncTaskManager::Tick() to clean up all of such \"completed execution environments\" as their WaitableEvent have already been completed.",
+      "parentUuid": "2087faab_7be2f88a",
+      "range": {
+        "startLine": 217,
+        "startChar": 5,
+        "endLine": 237,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcbfc5a4_adc8f94c",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T05:34:52Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 51
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "edd2cea1_cb66f04e",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 6
@@ -60,6 +131,30 @@
       "writtenOn": "2021-04-16T04:05:43Z",
       "side": 1,
       "message": "I think we can just always make this on Device creation. Or is making the task pool very slow?",
+      "range": {
+        "startLine": 1411,
+        "startChar": 4,
+        "endLine": 1424,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44e41cb4_f8296921",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T05:34:52Z",
+      "side": 1,
+      "message": "Here I just consider if we should still create mWorkerTaskPool on the platforms that don\u0027t support async creation of compute pipelines (like OpenGL).",
+      "parentUuid": "edd2cea1_cb66f04e",
       "range": {
         "startLine": 1411,
         "startChar": 4,
