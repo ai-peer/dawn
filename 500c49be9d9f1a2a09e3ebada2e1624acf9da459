@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "954725dd_52c0a76a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T15:46:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "500c49be9d9f1a2a09e3ebada2e1624acf9da459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bb43f0ac_fba43e27",
         "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
         "patchSetId": 6
