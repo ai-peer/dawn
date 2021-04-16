@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "911e8731_4b4db6bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T11:26:05Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "500c49be9d9f1a2a09e3ebada2e1624acf9da459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb43f0ac_fba43e27",
+        "filename": "src/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T11:26:05Z",
+      "side": 1,
+      "message": "It took me forever (30m on 8 different days at least) to figure out the failures I was seeing were because I used ASSERT instead of ASSERT_TRUE here. \u003e_\u003c",
+      "revId": "500c49be9d9f1a2a09e3ebada2e1624acf9da459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
