@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "c2efe505ebd1e18341e2e061f99eb1baf4811ada",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8af858e3_1c72fc06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:39:05Z",
+      "side": 1,
+      "message": "LGTM, is there a way to test this?",
+      "revId": "c2efe505ebd1e18341e2e061f99eb1baf4811ada",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a793594_7ffafe26",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:39:05Z",
+      "side": 1,
+      "message": "(nit: maybe explicitly call out that the slab is inside slab-\u003eallocation).",
+      "revId": "c2efe505ebd1e18341e2e061f99eb1baf4811ada",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
