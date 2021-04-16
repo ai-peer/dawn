@@ -16,6 +16,74 @@
       "message": "still LGTM",
       "revId": "264069c5b23116c2454eac32fc2b62405bd3d627",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d9c328_c60cf663",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T06:42:47Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "264069c5b23116c2454eac32fc2b62405bd3d627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b0510fa_bb5f78e7",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1429,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T06:42:47Z",
+      "side": 1,
+      "message": "u-nit: we can do TODO: \"remove optional once XXX\"",
+      "revId": "264069c5b23116c2454eac32fc2b62405bd3d627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a6a256_8fd75ceb",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T06:42:47Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "264069c5b23116c2454eac32fc2b62405bd3d627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d11855be_de1c1e20",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T06:42:47Z",
+      "side": 1,
+      "message": "What if both are set? Previously we\u0027ve made that produce errors so that developers don\u0027t forget to also unset the deprecated member. (ditto for color).",
+      "revId": "264069c5b23116c2454eac32fc2b62405bd3d627",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
