@@ -50,7 +50,11 @@ SlabAllocatorImpl::SentinelSlab::~SentinelSlab() {
     while (slab != nullptr) {
         Slab* next = slab->next;
         ASSERT(slab->blocksInUse == 0);
-        slab->~Slab();
+        // Clear the allocation instead of calling the Slab destructor.
+        // The Slab destructor will free the memory backing the slab, but
+        // will also try to set itself to nullptr after deallocating. It
+        // would be a memory error to write nullptr to freed memory.
+        slab->allocation.reset();
         slab = next;
     }
 }
