@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50fb3291_e393e9f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T17:08:16Z",
+      "side": 1,
+      "message": "For some reason our tests running with either ASAN or Valgrind don\u0027t pick up this problem. It should happen on device destruction as long as you\u0027ve allocated at least one bind group. I\u0027m not sure if perhaps a difference in Skia\u0027s build flags makes it surface. I tried is_debug\u003dtrue in Dawn\u0027s build thinking that compiler optimizations where optimizing away the invalid write, but that didn\u0027t make it repro for dawn_end2end_tests.\n\nI\u0027m not sure about more specific testing - any ideas?",
+      "parentUuid": "8af858e3_1c72fc06",
+      "revId": "c2efe505ebd1e18341e2e061f99eb1baf4811ada",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6a793594_7ffafe26",
         "filename": "src/common/SlabAllocator.cpp",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-16T15:39:05Z",
       "side": 1,
       "message": "(nit: maybe explicitly call out that the slab is inside slab-\u003eallocation).",
+      "revId": "c2efe505ebd1e18341e2e061f99eb1baf4811ada",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8210d880_453e71e2",
+        "filename": "src/common/SlabAllocator.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-16T17:08:16Z",
+      "side": 1,
+      "message": "And now, I\u0027ve just changed this to be a manual delete[] instead of using unique_ptr. If we have to manually free the contents of the unique_ptr, then there\u0027s little point in using it.",
+      "parentUuid": "6a793594_7ffafe26",
       "revId": "c2efe505ebd1e18341e2e061f99eb1baf4811ada",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
