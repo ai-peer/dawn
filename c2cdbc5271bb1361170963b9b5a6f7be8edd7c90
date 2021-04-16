@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c42034_05bd8f0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "I\u0027m sorry but the more I read this CL and surrounding code, the more concerns I have with the current approach that we are using to handle these classes of problems (async pipeline creation, but also its interactions with pipeline deduplication, pipeline caching, etc).\n\nThe basic issue is that concurrency is amazingly hard to get right and any issues in concurrent code will lead to bugs that are extremely difficult to reproduce. Right now in Dawn, and even more with this CL, there is a lot of code in a bunch of places that deals with parts of pipeline creation and interact in subtle ways.\n\nInstead we should have objects and concept with clear interfaces and spelt-out guarantees in terms of concurrency that hide the synchronization of caches, task queues, etc behind a safe interface. Then device.createComputePipeline[Async] would just call this \"ComputePipelineFactory\" (yes I know that starts to look like enterprise code) that deals with all the difficult details in one place. Then the backends either implement an interface or a subclass of that factory for just the parts needed. Both the backend\u0027s interface and the factory can then be tested independently with stress tests for concurrency cases under TSAN.\n\nThe thing is, doing concurrency with the amount of respect needed for the problem will be a lot of work. It will mean doing large refactors in Dawn, like introducing the \"CallbackQueue\" on the device, probably some concept of ConstRef\u003cT\u003e, deciding on conventions for what is threadsafe and what isn\u0027t, etc. I don\u0027t think any of us will have time to spend on that before the Origin Trial.\n\nHowever I understand that TF.js is very interested in actual async pipeline compilation too. So in the meantime, I think we can have a toggle off by default like concurrent_create_pipeline_async that controls if we actually use WorkerTasks or not. Then we can probably end with landing an iteration of this CL.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4f8c17a_492fbbab",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "This may happen to work with std::unordered_map (because it does extra allocations), but I have strong concerns that the iterators might become invalidated when other threads are doing operations on the cache at the same time.\n\nWhen doing concurrent primitives like this cache, we should prefer to define safe interfaces that completely prevents any data race possible. Here we could do something like:\n\n  Ref\u003cComputePipeline\u003e Find(const ComputePipeline* blueprint);\n  Ref\u003cComputePipeline\u003e AddOrGet(Ref\u003cComputePipeline\u003e\u0026\u0026 obj);\n  void Remove(const ComputePipeline* obj);",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d30af7c_af036be1",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "nit: mCreatePipelineAsyncResultTracker instead of mCreatePipelineAsynResultTracker",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 40
+      },
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7130a490_d4405428",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8988f6a1_1095da4d",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "nit: Could forward declarations work instead of including the file? This would help avoid including DawnPlatform.h almost everywhere.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e47db70b_73a1a272",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "With the atomic, this could stay const.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b2885c_24d129a1",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "This should be possible to do by wrapping std::atomic\u003cuint64_t\u003e and a compare_exchange_weak in a loop (that will be executed once). Also it\u0027s a bit weird to declare a class inline like this.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6292eebb_aebbd95c",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-16T15:48:32Z",
+      "side": 1,
+      "message": "This locks the cache for the duration of createFn too. We could instead lock just while we call LoadData and StoreData. This could lead to some redundant computations but is better than serializing all shader compilations.\n\nPlease also add a class level comment about concurrency otherwise we\u0027ll quickly forget what has been made concurrent and what hasn\u0027t.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
