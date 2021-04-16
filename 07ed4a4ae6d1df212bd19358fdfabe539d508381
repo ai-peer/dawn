@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8a29fc_b4b93c46",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b246378a_33a7633d",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 41
+      },
+      "revId": "07ed4a4ae6d1df212bd19358fdfabe539d508381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4b67c0f_cd59faf6",
@@ -61,6 +85,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26497bb7_ab004891",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "I just move the code to iterate mCreatePipelineAsyncTaskResultsInFlight and the related lock to a single function.\n\nPTAL, thanks!",
+      "parentUuid": "8c769c6c_fde1b278",
+      "revId": "07ed4a4ae6d1df212bd19358fdfabe539d508381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c64d5314_b7df83ca",
         "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
         "patchSetId": 5
@@ -72,6 +114,30 @@
       "writtenOn": "2021-04-16T04:05:43Z",
       "side": 1,
       "message": "nit: this class should probably be named \"ComputePipelineAsyncWaitableTask\"",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 159,
+        "endChar": 42
+      },
+      "revId": "07ed4a4ae6d1df212bd19358fdfabe539d508381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed0ff0a_aeb0e7cb",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c64d5314_b7df83ca",
       "range": {
         "startLine": 159,
         "startChar": 4,
@@ -119,6 +185,30 @@
       "side": 1,
       "message": "Yes that\u0027s true. So I find I have to keep a Ref\u003c\u003e at [3] to ensure all these pointers are always valid during the lifecycle of this Task.",
       "parentUuid": "0e69e6a0_e8282310",
+      "range": {
+        "startLine": 167,
+        "startChar": 10,
+        "endLine": 167,
+        "endChar": 35
+      },
+      "revId": "07ed4a4ae6d1df212bd19358fdfabe539d508381",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36215b7e_26fc0e06",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Now I\u0027ve tried to clone the input descriptor into a ComboComputePipelineDescriptor. PTAL, thanks!",
+      "parentUuid": "9fa0a0fd_627cc464",
       "range": {
         "startLine": 167,
         "startChar": 10,

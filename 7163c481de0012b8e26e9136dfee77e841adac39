@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f978ed3e_83982e0b",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "561524c5_74351498",
+      "range": {
+        "startLine": 176,
+        "startChar": 8,
+        "endLine": 178,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2087faab_7be2f88a",
@@ -95,6 +119,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15aa1c0c_c1a8dc83",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0ae93f5e_e346e731",
+      "range": {
+        "startLine": 217,
+        "startChar": 5,
+        "endLine": 237,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bcbfc5a4_adc8f94c",
@@ -108,6 +156,30 @@
       "writtenOn": "2021-04-16T05:34:52Z",
       "side": 1,
       "message": "[3]",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 51
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37730cae_6b644882",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bcbfc5a4_adc8f94c",
       "range": {
         "startLine": 119,
         "startChar": 0,
@@ -155,6 +227,30 @@
       "side": 1,
       "message": "Here I just consider if we should still create mWorkerTaskPool on the platforms that don\u0027t support async creation of compute pipelines (like OpenGL).",
       "parentUuid": "edd2cea1_cb66f04e",
+      "range": {
+        "startLine": 1411,
+        "startChar": 4,
+        "endLine": 1424,
+        "endChar": 5
+      },
+      "revId": "7163c481de0012b8e26e9136dfee77e841adac39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6209563_7c364d59",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-16T08:13:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44e41cb4_f8296921",
       "range": {
         "startLine": 1411,
         "startChar": 4,
