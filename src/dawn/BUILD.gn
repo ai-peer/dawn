@@ -79,6 +79,12 @@ source_set("dawncpp") {
     ":dawncpp_headers",
   ]
   sources = get_target_outputs(":dawncpp_gen")
+  if (dawn_is_winuwp) {
+    cflags_cc = [
+      "/ZW:nostdlib",
+      "/EHsc",
+    ]
+  }
 }
 
 ###############################################################################
@@ -103,4 +109,10 @@ dawn_component("dawn_proc") {
     "${dawn_root}/src/include/dawn/dawn_proc.h",
     "${dawn_root}/src/include/dawn/dawn_thread_dispatch_proc.h",
   ]
+  if (dawn_is_winuwp) {
+    cflags_cc = [
+      "/ZW:nostdlib",
+      "/EHsc",
+    ]
+  }
 }
