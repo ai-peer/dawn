@@ -309,6 +309,16 @@ source_set("dawn_native_sources") {
 
   if (is_win) {
     libs += [ "user32.lib" ]
+    if(target_os == "winuwp") {
+      libs += [ 
+        "dxgi.lib",
+        "d3d12.lib",
+        "d3d11.lib",
+        # somehow use dxcompiler.lib makes CoreApp unable to activate
+        #"dxcompiler.lib"
+        # should add PIX in the future
+       ]
+    }
   }
 
   if (dawn_enable_d3d12) {
@@ -653,6 +663,7 @@ dawn_component("dawn_native") {
     ":dawn_native_weak_framework",
     ":dawn_native_vulkan_rpath",
   ]
+  
 
   if (dawn_enable_d3d12) {
     sources += [ "d3d12/D3D12Backend.cpp" ]

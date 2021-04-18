@@ -94,8 +94,10 @@ static_library("dawn_utils") {
   ]
   libs = []
   frameworks = []
-
-  if (is_win) {
+  if( target_os == "winuwp" ) {
+      cflags_cc = ["/ZW", "/EHsc"]
+  }
+  if (is_win && target_os != "winuwp") {
     sources += [ "WindowsDebugLogger.cpp" ]
   } else {
     sources += [ "EmptyDebugLogger.cpp" ]

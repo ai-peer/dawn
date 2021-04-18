@@ -39,7 +39,18 @@ namespace dawn_native { namespace d3d12 {
     }  // anonymous namespace
 
     NativeSwapChainImpl::NativeSwapChainImpl(Device* device, HWND window)
-        : mWindow(window), mDevice(device), mInterval(1) {
+        : mSwapChainType(SwapChainType::Hwnd), mWindow(window), mDevice(device), mInterval(1) {
+    }
+
+    NativeSwapChainImpl::NativeSwapChainImpl(Device* device, IUnknown* coreWindow)
+        : mSwapChainType(SwapChainType::CoreWindow),
+          mCoreWindow(coreWindow),
+          mDevice(device),
+          mInterval(1) {
+    }
+
+    NativeSwapChainImpl::NativeSwapChainImpl(Device* device)
+        : mSwapChainType(SwapChainType::Composition), mDevice(device), mInterval(1){
     }
 
     NativeSwapChainImpl::~NativeSwapChainImpl() {
@@ -73,8 +84,22 @@ namespace dawn_native { namespace d3d12 {
         swapChainDesc.SampleDesc.Quality = 0;
 
         ComPtr<IDXGISwapChain1> swapChain1;
-        ASSERT_SUCCESS(factory->CreateSwapChainForHwnd(queue.Get(), mWindow, &swapChainDesc,
-                                                       nullptr, nullptr, &swapChain1));
+        switch (mSwapChainType) {
+            case SwapChainType::Hwnd:
+                ASSERT_SUCCESS(factory->CreateSwapChainForHwnd(queue.Get(), mWindow, &swapChainDesc,
+                                                               nullptr, nullptr, &swapChain1));
+                break;
+            case SwapChainType::CoreWindow:
+                ASSERT_SUCCESS(factory->CreateSwapChainForCoreWindow(
+                    queue.Get(), mCoreWindow, &swapChainDesc, nullptr, &swapChain1));
+                break;
+            case SwapChainType::Composition:
+                ASSERT_SUCCESS(factory->CreateSwapChainForComposition(queue.Get(), &swapChainDesc,
+                                                                      nullptr, &swapChain1));
+                break;
+            default:
+                UNREACHABLE();
+        }
 
         ASSERT_SUCCESS(swapChain1.As(&mSwapChain));
 

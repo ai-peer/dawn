@@ -60,6 +60,11 @@ namespace dawn_native {
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
 #if defined(DAWN_PLATFORM_WINDOWS)
+#if __cplusplus_winrt == 201009
+// TODO(cjj19970505@live.cn):
+// both Surface from SwapChainPanel and CoreWindow need validation
+#endif
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
             case wgpu::SType::SurfaceDescriptorFromWindowsHWND: {
                 const SurfaceDescriptorFromWindowsHWND* hwndDesc =
                     static_cast<const SurfaceDescriptorFromWindowsHWND*>(chainedDescriptor);
@@ -72,6 +77,7 @@ namespace dawn_native {
                 }
                 break;
             }
+#endif
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_USE_X11)

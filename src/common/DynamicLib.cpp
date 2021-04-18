@@ -18,6 +18,10 @@
 
 #if DAWN_PLATFORM_WINDOWS
 #    include "common/windows_with_undefs.h"
+#if __cplusplus_winrt == 201009
+#    include <locale>
+#    include <codecvt>
+#endif
 #elif DAWN_PLATFORM_POSIX
 #    include <dlfcn.h>
 #else
@@ -43,8 +47,15 @@ bool DynamicLib::Valid() const {
 
 bool DynamicLib::Open(const std::string& filename, std::string* error) {
 #if DAWN_PLATFORM_WINDOWS
+#if __cplusplus_winrt == 201009
+    { 
+        std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
+        std::wstring wFilename = converter.from_bytes(filename);
+        mHandle = LoadPackagedLibrary(wFilename.c_str(), 0);
+    }
+#else
     mHandle = LoadLibraryA(filename.c_str());
-
+#endif
     if (mHandle == nullptr && error != nullptr) {
         *error = "Windows Error: " + std::to_string(GetLastError());
     }

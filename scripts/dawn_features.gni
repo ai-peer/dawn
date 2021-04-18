@@ -62,7 +62,7 @@ declare_args() {
   dawn_enable_opengl = is_linux && !is_chromeos
 
   # Enables the compilation of Dawn's Vulkan backend
-  dawn_enable_vulkan = is_linux || is_chromeos || is_win || is_fuchsia ||
+  dawn_enable_vulkan = is_linux || is_chromeos || (is_win && target_os != "winuwp") || is_fuchsia ||
                        is_android || dawn_use_swiftshader
 
   # Enable use of reflection compiler in spirv-cross. This is needed
@@ -91,4 +91,4 @@ declare_args() {
 }
 
 dawn_supports_glfw_for_windowing =
-    is_win || (is_linux && !is_chromeos) || is_mac
+    (is_win && target_os != "winuwp") || (is_linux && !is_chromeos) || is_mac
