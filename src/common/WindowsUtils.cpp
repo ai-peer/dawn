@@ -30,3 +30,10 @@ std::string WCharToUTF8(const wchar_t* input) {
     // This will allocate the returned std::string and then destroy result.
     return std::string(result.get(), result.get() + (requiredSize - 1));
 }
+
+std::wstring CharToWStr(const char* input) {
+    int requiredSize = MultiByteToWideChar(CP_UTF8, 0, input, -1, nullptr, 0);
+    std::unique_ptr<WCHAR[]> result = std::make_unique<WCHAR[]>(requiredSize);
+    MultiByteToWideChar(CP_UTF8, 0, input, -1, result.get(), requiredSize);
+    return std::wstring(result.get(), result.get() + (requiredSize - 1));
+}
