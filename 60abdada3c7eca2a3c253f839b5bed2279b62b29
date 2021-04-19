@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "a18a1b74_8c258b10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T09:02:23Z",
+      "side": 1,
+      "message": "I also granted you rights to trigger the \"CQ (Commit Queue) dry-run\" to run Dawn\u0027s tests on your CL, and the ability to \"Submit to CQ\" once your CLs have been approved.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
         "filename": "scripts/dawn_features.gni",
         "patchSetId": 1
