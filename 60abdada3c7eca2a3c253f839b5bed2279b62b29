@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9310b2f_9a5e6ccb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Thanks for such detailed review. Such an honor to be able to participating this project. \nFirst time using Gerrit, still unclear about some rules here. Should I simply abandon this change and create other three commits for review after I fix the problem you mentioned ?",
+      "parentUuid": "bc7ccb13_e4199b34",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64822a70_65a9ea0e",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "I can set a dawn_is_winuwp just like what angle does.",
+      "parentUuid": "194c6bb0_5e24d736",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bccaae4_8e555e62",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "Can we have a comment explaining what this does and why it is required?\n\nThe warning we should fix if possible and normally Dawn doesn\u0027t use exception, so why is it required here?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97c64ef5_06bb3d8c",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "You are right. \nI suppress this warning because PlacementAllocated.h has a operator new(size_t size, void* ptr) operator, but not having a matching delete operator. This triggered C4291 warning(Level 1) and stop the compiling. \n\nI\u0027ll add a matching delete operator in my next commit and remove this /wd4291 flag.",
+      "parentUuid": "9bccaae4_8e555e62",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d43ab872_28faab87",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "33b82c77_8cf787da",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87383248_24d9ead3",
@@ -116,6 +188,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "nit: I think std::codecvt is deprecated. Instead we should add a UTF8ToWChar with tests similarly to this CL https://dawn-review.googlesource.com/c/dawn/+/44560\n\nThis can be a prep CL before the CL that adds UWP support.\n\nAlso I see trailing whitespaces in some files. You can run \"git cl format\" to format the code according to Dawn\u0027s convention.\n\nFinally is this needed given we link everything statically?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b77f1a3a_73b75bfe",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "I\u0027ll make use of UTF8ToWChar and fix the format issue.\n\nReason of statically linking is explained in the reply of #312",
+      "parentUuid": "87383248_24d9ead3",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +229,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9af3caa_9cf642f2",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Just getting started with GN, so maybe there are something I missed.\ndawncpp is just a source_set target and don\u0027t forward any configs from it\u0027s dependencies. So I have to add these flags for them again. I check the generated ninja file and there is only one \"/ZW /EHsc\" flags.\nBut dawn_proc is a dawn_component which will forward configs from it\u0027s dependencies, so it do have repeat \"/ZW /EHsc\" flags. I\u0027ll remove them in next commit.",
+      "parentUuid": "967f323f_ba57adb1",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddaf6c70_c6956896",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 1
@@ -150,6 +258,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "nit: Maybe explain why we need to link statically on UWP because I don\u0027t think other Dawn dev knows how UWP works.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e612eae0_8d87e189",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Linking statically is necessary because DLL search space is highly limited in UWP and d3d related DLLs can\u0027t be found in those locations. \nhttps://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order\nInstead linking with stub libs make sure current d3d DLLs can be loaded correctly in different versions of windows 10 and Xbox.\n\nI\u0027ll add the explanations in the message of next commit.",
+      "parentUuid": "ddaf6c70_c6956896",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -171,6 +297,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "353e72ba_209d40a8",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bb41322c_7fecf057",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0dd5bed_97d78827",
@@ -184,6 +328,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "nit: extra newline?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff62675d_d0c4493f",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll delete it",
+      "parentUuid": "a0dd5bed_97d78827",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -207,6 +369,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2512d125_9f28549d",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "What do you think of declaring a DAWN_PLATFORM_WINUWP in Platform.h ?\nDAWN_PLATFORM_WINDOWS and DAWN_PLATFORM_WINUWP both are set when targeting UWP.\nDAWN_PLATFORM_WINDOWS is defined and DAWN_PLATFORM_WINUWP is not, we enables HWND, CoreWindow and SwapChainPanel.\nif DAWN_PLATFORM_WINUWP is defined, only CoreWindow and SwapChainPanel are enabled.",
+      "parentUuid": "83731665_081d6857",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec762746_0a85844f",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1
@@ -218,6 +398,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "Note: the duplication is a bit unfortunate, do you see a way to just change how we open mD3D12Lib so that the GetProc still work? This way when adding new functions to load we don\u0027t risk breaking the UWP path.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "499fb405_aa7e3074",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "I don\u0027t think there is a way to do this. UWP has such limited DLL search space. DLLs required by d3d are not in that search space. Statically linking makes sense since UWP can also run on Xbox, only those stub libs know how to load DLLs correctly.\nhttps://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order",
+      "parentUuid": "ec762746_0a85844f",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -235,6 +433,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "nit: TODO(dawn:XXX): ...",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "865d39d9_789b69a0",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4899cc14_d517e780",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -262,6 +478,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "822d30ce_d3c01c8a",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dac9dfeb_4f5f5955",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 19
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b19fef6_4e09fdd5",
@@ -275,6 +515,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "nit: TODO(dawn:XXX):",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5dc930e_bc29d536",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5b19fef6_4e09fdd5",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -296,6 +554,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5769d451_a10f215b",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "906ca687_b00804b2",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "185b54ab_ecc68e3b",
@@ -309,6 +585,24 @@
       "writtenOn": "2021-04-19T08:58:08Z",
       "side": 1,
       "message": "I think this shouldn\u0027t be needed because dawn_utils depends on src/common that has a public_config for dawn_internal which adds these flags.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a9f88c_9ada9ebc",
+        "filename": "src/utils/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-19T14:59:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "185b54ab_ecc68e3b",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
