@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a76b6c2d_091bd22c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-19T02:59:11Z",
+      "side": 1,
+      "message": "Sorry to hear about that. :-(\n\nFor myself, I really don\u0027t want to put any questionable code into Dawn, even if I am agreed to first have it behind a flag.\n\n\nHere I just want to have another try to save this CL:\n\nShall we just make the parts asynchronously that we have full confidence in their thread-safety? I think the most time-consuming parts should be (use D3D12 backend as an example) as below, which I think are undoubtedly thread-safe:\n1. translate from WGSL to HLSL with Tint (I think it should be thread-safe?)\n2. compile HLSL with dxcompiler-\u003eD3DCompile()\n3. create D3D12 render pipeline\n\nThe steps above are all in ComputePipeline::Create(), so it seems we can just make this function called asynchronously. Something like below:\n1. Call ComputePipeline::Create() to create a compute pipeline object on PostWorkerTask()\n2. In the sub-thread, the result of ComputePipeline::Create() will be put into a concurrent queue that contains all the compute pipeline objects created asynchronously and the related callbacks or error messages\n3. In DeviceD3D12.tick() called in main thread:\n(1) check the concurrent queue that contains the compute pipelines created in step 2 if their creations are completed or not.\n(2) put the newly-created compute pipelines into DeviceBase::Cache and call the callbacks\n\nFollowing the steps above, I think\n1. We don\u0027t need to care about the thread-safety of DeviceBase::Cache, ExecutionSerial, and CreatePipelineResultTracker as they are always called in the main thread.\n\n2. We just need to implement the concurrent queue (to store the compute pipelines in creation) and ensure the PersistentCache (to be used as the HLSL shader cache) be thread-safe as they are the only two global resources that are touched in this process.\n\nI will try to write a draft CL and a design doc to show more details with you before our next meeting.",
+      "parentUuid": "d5c42034_05bd8f0b",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f8c17a_492fbbab",
