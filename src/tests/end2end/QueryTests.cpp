@@ -247,14 +247,6 @@ TEST_P(OcclusionQueryTests, QueryWithDepthStencilTest) {
 // zero indicates that no sample passed scissor testing,
 // non-zero indicates that at least one sample passed scissor testing.
 TEST_P(OcclusionQueryTests, QueryWithScissorTest) {
-    // TODO(hao.x.li@intel.com): It's failed weirdly on Intel TGL（Window Vulkan) which says
-    // the destination buffer keep sentinel value in the second case, it cannot be reproduced with
-    // any debug actions including Vulkan validation layers enabled, and takes time to find out if
-    // the WriteBuffer and ResolveQuerySet are not executed in order or the ResolveQuerySet does not
-    // copy the result to the buffer. In order to integrate end2end tests to Intel driver CL without
-    // unknown issues, skip it until we find the root cause.
-    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
-
     // Test there are samples passed scissor testing, the expected occlusion result is non-zero.
     TestOcclusionQueryWithScissorTest({2, 1, 2, 1}, OcclusionExpectation::Result::NonZero);
 
@@ -302,9 +294,8 @@ TEST_P(OcclusionQueryTests, Rewrite) {
 // Test resolving occlusion query correctly if the queries are written sparsely, which also tests
 // the query resetting at the start of render passes on Vulkan backend.
 TEST_P(OcclusionQueryTests, ResolveSparseQueries) {
-    // TODO(hao.x.li@intel.com): Clear the resolve region of the buffer to 0 if there is at least
-    // one query not written and the resolve buffer has been initialized or fully used.
-    DAWN_SKIP_TEST_IF(IsVulkan());
+    // TODO(hao.x.li@intel.com): Remove once the vkCmdFillBuffer issue is fixed in Intel driver.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
 
     // TODO(hao.x.li@intel.com): Investigate why it's failed on D3D12 on Nvidia when running with
     // the previous occlusion tests. Expect resolve to 0 for these unwritten queries but the
@@ -366,10 +357,6 @@ TEST_P(OcclusionQueryTests, ResolveSparseQueries) {
 
 // Test resolving occlusion query to 0 if all queries are not written
 TEST_P(OcclusionQueryTests, ResolveWithoutWritten) {
-    // TODO(hao.x.li@intel.com): Clear the resolve region of the buffer to 0 if there is at least
-    // one query not written and the resolve buffer has been initialized or fully used.
-    DAWN_SKIP_TEST_IF(IsVulkan());
-
     // TODO(hao.x.li@intel.com): Investigate why it's failed on D3D12 on Nvidia when running with
     // the previous occlusion tests. Expect resolve to 0 but the occlusion result of the previous
     // tests is got.
