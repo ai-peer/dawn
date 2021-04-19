@@ -32,22 +32,57 @@ namespace dawn_platform {
         GPUWork,     // Actual GPU work
     };
 
+    class ScopedCachedData;
+
+    class DAWN_PLATFORM_EXPORT CachedData {
+      public:
+        static ScopedCachedData CreateCachedData(const uint8_t* data, size_t size);
+
+        virtual const uint8_t* data() = 0;
+        virtual size_t size() const = 0;
+
+      protected:
+        CachedData() = default;
+        virtual ~CachedData() = default;
+
+      private:
+        friend ScopedCachedData;
+
+        virtual void Reference() = 0;
+        virtual void Release() = 0;
+    };
+
+    class DAWN_PLATFORM_EXPORT ScopedCachedData {
+      public:
+        ScopedCachedData(CachedData* blob = nullptr);
+        ScopedCachedData(const ScopedCachedData& other);
+        ~ScopedCachedData();
+
+        ScopedCachedData& operator=(const ScopedCachedData& other);
+
+        bool operator!=(const ScopedCachedData& other) const;
+        bool operator==(const ScopedCachedData& other) const;
+
+        CachedData* operator->() const;
+        CachedData* Get() const;
+
+      private:
+        void ReferenceCachedData(CachedData* blob) const;
+        void ReleaseCachedData(CachedData* blob) const;
+
+        CachedData* mBlob = nullptr;
+    };
+
     class DAWN_PLATFORM_EXPORT CachingInterface {
       public:
         CachingInterface();
         virtual ~CachingInterface();
 
-        // LoadData has two modes. The first mode is used to get a value which
-        // corresponds to the |key|. The |valueOut| is a caller provided buffer
-        // allocated to the size |valueSize| which is loaded with data of the
-        // size returned. The second mode is used to query for the existence of
-        // the |key| where |valueOut| is nullptr and |valueSize| must be 0.
-        // The return size is non-zero if the |key| exists.
-        virtual size_t LoadData(const WGPUDevice device,
-                                const void* key,
-                                size_t keySize,
-                                void* valueOut,
-                                size_t valueSize) = 0;
+        // LoadData returns a cached blob which corresponds to the |key|. If no |key| exists,
+        // the returned cached blob data is nullptr with a zero size.
+        virtual ScopedCachedData LoadData(const WGPUDevice device,
+                                          const void* key,
+                                          size_t keySize) = 0;
 
         // StoreData puts a |value| in the cache which corresponds to the |key|.
         virtual void StoreData(const WGPUDevice device,
