@@ -193,7 +193,6 @@ namespace dawn_native {
 
         mDynamicUploader = nullptr;
         mCallbackTaskManager = nullptr;
-        mPersistentCache = nullptr;
 
         mEmptyBindGroupLayout = nullptr;
 
@@ -202,6 +201,9 @@ namespace dawn_native {
         AssumeCommandsComplete();
         // Tell the backend that it can free all the objects now that the GPU timeline is empty.
         ShutDownImpl();
+
+        // Release after ShutDownImpl so any added pipelines may be persistently cached.
+        mPersistentCache = nullptr;
 
         mCaches = nullptr;
     }
@@ -563,7 +565,7 @@ namespace dawn_native {
         if (iter != mCaches->renderPipelines.end()) {
             result = *iter;
         } else {
-            DAWN_TRY_ASSIGN(result, CreateRenderPipelineImpl(descriptor));
+            DAWN_TRY_ASSIGN(result, CreateRenderPipelineImpl(descriptor, blueprintHash));
             result->SetIsCachedReference();
             result->SetContentHash(blueprintHash);
             mCaches->renderPipelines.insert(result.Get());
@@ -1104,8 +1106,8 @@ namespace dawn_native {
         }
 
         Ref<ComputePipelineBase> backendObj;
-        DAWN_TRY_ASSIGN(backendObj, CreateComputePipelineImpl(&appliedDescriptor));
         size_t blueprintHash = pipelineAndBlueprintFromCache.second;
+        DAWN_TRY_ASSIGN(backendObj, CreateComputePipelineImpl(&appliedDescriptor, blueprintHash));
         return AddOrGetCachedPipeline(backendObj, blueprintHash);
     }
 
@@ -1168,7 +1170,7 @@ namespace dawn_native {
         Ref<ComputePipelineBase> result;
         std::string errorMessage;
 
-        auto resultOrError = CreateComputePipelineImpl(descriptor);
+        auto resultOrError = CreateComputePipelineImpl(descriptor, blueprintHash);
         if (resultOrError.IsError()) {
             std::unique_ptr<ErrorData> error = resultOrError.AcquireError();
             errorMessage = error->GetMessage();
