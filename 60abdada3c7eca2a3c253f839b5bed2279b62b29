@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "123fdd61_6405484c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T16:12:30Z",
+      "side": 1,
+      "message": "Heh no worries, Windows UWP support will help many people in the future!\n\nThe way reviews work in Gerrit is that you upload new version of a commit using the same `git push` command. Gerrit will recognize that a git commit is for a CL through the Change-Id: tag in the commit message. If you push a commit with the same Change-Id: as here (for example if you amend or git rebase -i) then it will recognize it and publish a new version.\n\nWhat you can do is have the following in your branch:\n\n - A commit for the conversion helper (new commit)\n - A reworked version of this commit (keep the Change-Id)\n - A commit for the swapchain stuff (new commit)\n\nIn general what we do is that we fix reviewer commits, and answer the thread with \"Done\". This way you can keep track of what\u0027s addressed and what still needs discussion.",
+      "parentUuid": "d9310b2f_9a5e6ccb",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
@@ -105,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be6f29fd_b4d583aa",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T16:12:30Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "64822a70_65a9ea0e",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bccaae4_8e555e62",
@@ -136,6 +172,24 @@
       "side": 1,
       "message": "You are right. \nI suppress this warning because PlacementAllocated.h has a operator new(size_t size, void* ptr) operator, but not having a matching delete operator. This triggered C4291 warning(Level 1) and stop the compiling. \n\nI\u0027ll add a matching delete operator in my next commit and remove this /wd4291 flag.",
       "parentUuid": "9bccaae4_8e555e62",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e08ca686_119c5275",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T16:12:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "97c64ef5_06bb3d8c",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -241,6 +295,24 @@
       "side": 1,
       "message": "Just getting started with GN, so maybe there are something I missed.\ndawncpp is just a source_set target and don\u0027t forward any configs from it\u0027s dependencies. So I have to add these flags for them again. I check the generated ninja file and there is only one \"/ZW /EHsc\" flags.\nBut dawn_proc is a dawn_component which will forward configs from it\u0027s dependencies, so it do have repeat \"/ZW /EHsc\" flags. I\u0027ll remove them in next commit.",
       "parentUuid": "967f323f_ba57adb1",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd3ed840_1490a494",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T16:12:30Z",
+      "side": 1,
+      "message": "The ideal solution would be to not need /ZW /EHsc (I don\u0027t understand what it changes for Dawn since it is exception-free). Otherwise yeah dawn_proc and dawncpp don\u0027t depend on a shared header. Maybe we could have a dawn_basic_private_config in common/BUILD.gn? This isn\u0027t ideal but I don\u0027t see another solution.",
+      "parentUuid": "e9af3caa_9cf642f2",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -387,6 +459,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7e79be18_23738688",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T16:12:30Z",
+      "side": 1,
+      "message": "That would work too. I have a marginal preference for also having DAWN_PLATFORM_WIN32 as well so that the intent is a bit clearer and you don\u0027t have to think about what it means to be !UWP.",
+      "parentUuid": "2512d125_9f28549d",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec762746_0a85844f",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1
@@ -416,6 +506,24 @@
       "side": 1,
       "message": "I don\u0027t think there is a way to do this. UWP has such limited DLL search space. DLLs required by d3d are not in that search space. Statically linking makes sense since UWP can also run on Xbox, only those stub libs know how to load DLLs correctly.\nhttps://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order",
       "parentUuid": "ec762746_0a85844f",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a8ebcd_d07905f3",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T16:12:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "499fb405_aa7e3074",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
