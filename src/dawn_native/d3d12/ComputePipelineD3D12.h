@@ -25,9 +25,8 @@ namespace dawn_native { namespace d3d12 {
 
     class ComputePipeline final : public ComputePipelineBase {
       public:
-        static ResultOrError<Ref<ComputePipeline>> Create(
-            Device* device,
-            const ComputePipelineDescriptor* descriptor);
+        static ResultOrError<Ref<ComputePipeline>>
+        Create(Device* device, const ComputePipelineDescriptor* descriptor, size_t descriptorHash);
         ComputePipeline() = delete;
 
         ID3D12PipelineState* GetPipelineState() const;
@@ -35,7 +34,7 @@ namespace dawn_native { namespace d3d12 {
       private:
         ~ComputePipeline() override;
         using ComputePipelineBase::ComputePipelineBase;
-        MaybeError Initialize(const ComputePipelineDescriptor* descriptor);
+        MaybeError Initialize(const ComputePipelineDescriptor* descriptor, size_t descriptorHash);
         ComPtr<ID3D12PipelineState> mPipelineState;
     };
 
