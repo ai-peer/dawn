@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2940dce6_10af3ca9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T17:05:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0915a9_4107554e",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T17:05:54Z",
+      "side": 1,
+      "message": "These transforms are done when creating the pipeline. Any compilation message shouldn\u0027t be forward to the shader module, but in the RenderPipeline creation error. We can just pass nullptr for now.",
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf983e98_1404fd39",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T17:05:54Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe3485ce_a4879ff2",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T17:05:54Z",
+      "side": 1,
+      "message": "ditto, but also nit: I think this method should be named GetCompilationMessages().",
+      "range": {
+        "startLine": 174,
+        "startChar": 56,
+        "endLine": 174,
+        "endChar": 75
+      },
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
