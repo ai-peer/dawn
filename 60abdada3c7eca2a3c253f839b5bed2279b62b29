@@ -1,0 +1,299 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7ccb13_e4199b34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "Adding Rafael as a reviewer for usage of Windows APIs.\n\nThanks for the contribution! I added a lot of small comments, but nothing too major. Nice work! To help make progress faster, can we split this into three CLs?\n\n - Addition of UTF8ToWChar with tests (nothing for UWP)\n - Making Dawn build with UWP (but no swapchain)\n - Addition of swapchain code for UWP\u0027s CoreWindow / SwapChainPanel (via surface-based swapchains only).\n\nYou can do this by having three commits in your branch and `git push origin HEAD:refs/for/main` which Gerrit will create three code reviews for. Then when you need to make changes you can amend the commits, for example with `git rebase -i` and push again.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e68a2fd_3bbe0fbc",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194c6bb0_5e24d736",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "What do you think of declaring variables at the top of this file (at [1]?): is_win32 and is_winuwp so that we can avoid having the same `is_win \u0026\u0026 target_os !\u003d \"winduwp\"` repeatedly?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bccaae4_8e555e62",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "Can we have a comment explaining what this does and why it is required?\n\nThe warning we should fix if possible and normally Dawn doesn\u0027t use exception, so why is it required here?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b82c77_8cf787da",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: Maybe we could have this added as a DAWN_PLATFORM_WIN32 / DAWN_PLATFORM_WINUWP to Platform.h since it is Platform detection.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87383248_24d9ead3",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: I think std::codecvt is deprecated. Instead we should add a UTF8ToWChar with tests similarly to this CL https://dawn-review.googlesource.com/c/dawn/+/44560\n\nThis can be a prep CL before the CL that adds UWP support.\n\nAlso I see trailing whitespaces in some files. You can run \"git cl format\" to format the code according to Dawn\u0027s convention.\n\nFinally is this needed given we link everything statically?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "967f323f_ba57adb1",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "ditto here and for dawn_proc, why are these required? If they turn out to be required, we should figure out how we can add them to a GN config so they aren\u0027t repeated in many places.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddaf6c70_c6956896",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: Maybe explain why we need to link statically on UWP because I don\u0027t think other Dawn dev knows how UWP works.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb41322c_7fecf057",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: Maybe // TODO(dawn:766): \u003cProblem\u003e. \u003cAction to take (could just be ifgure out how to XXX)\u003e\n\nDitto for the PIX comment.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0dd5bed_97d78827",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 666,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: extra newline?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83731665_081d6857",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "Is the compile guard here because some UWP compilation environments don\u0027t have IsWindow? If that\u0027s the case, what do you think of gating this code path on DAWN_PLATFORM_WIN32 and force UWP to go through CoreWindow of SwapChainPanel?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec762746_0a85844f",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "Note: the duplication is a bit unfortunate, do you see a way to just change how we open mD3D12Lib so that the GetProc still work? This way when adding new functions to load we don\u0027t risk breaking the UWP path.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4899cc14_d517e780",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: TODO(dawn:XXX): ...",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac9dfeb_4f5f5955",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: Statically",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 19
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b19fef6_4e09fdd5",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "nit: TODO(dawn:XXX):",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906ca687_b00804b2",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "We are deprecating \"implementation based swapchains\" soon. Can we instead implement them through surface-based swapchains, and in a different CL after the CL that makes Dawn build on UWP?",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "185b54ab_ecc68e3b",
+        "filename": "src/utils/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T08:58:08Z",
+      "side": 1,
+      "message": "I think this shouldn\u0027t be needed because dawn_utils depends on src/common that has a public_config for dawn_internal which adds these flags.",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
