@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2dbc6bc_be04eb61",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-04-19T17:58:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e0915a9_4107554e",
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf983e98_1404fd39",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a54575_f25b72eb",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-04-19T17:58:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf983e98_1404fd39",
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe3485ce_a4879ff2",
@@ -65,6 +101,30 @@
       "writtenOn": "2021-04-19T17:05:54Z",
       "side": 1,
       "message": "ditto, but also nit: I think this method should be named GetCompilationMessages().",
+      "range": {
+        "startLine": 174,
+        "startChar": 56,
+        "endLine": 174,
+        "endChar": 75
+      },
+      "revId": "3781f4944a37988253c2ddc8269f9c26720a6af5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d42c715_91599afb",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-04-19T17:58:06Z",
+      "side": 1,
+      "message": "Done and done",
+      "parentUuid": "fe3485ce_a4879ff2",
       "range": {
         "startLine": 174,
         "startChar": 56,
