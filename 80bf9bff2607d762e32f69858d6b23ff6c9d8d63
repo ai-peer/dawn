@@ -16,6 +16,23 @@
       "message": "LGTM too",
       "revId": "80bf9bff2607d762e32f69858d6b23ff6c9d8d63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cbceea9_50036fce",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-19T18:06:09Z",
+      "side": 1,
+      "message": "nit: I think this can be const again now.",
+      "revId": "80bf9bff2607d762e32f69858d6b23ff6c9d8d63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
