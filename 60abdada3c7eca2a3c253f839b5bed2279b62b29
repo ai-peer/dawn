@@ -90,6 +90,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc2880e0_41cb1207",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-19T21:57:36Z",
+      "side": 1,
+      "message": "Please add a comment describing why this is needed.",
+      "range": {
+        "startLine": 65,
+        "startChar": 61,
+        "endLine": 65,
+        "endChar": 82
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "194c6bb0_5e24d736",
         "filename": "scripts/dawn_features.gni",
         "patchSetId": 1
@@ -137,6 +160,29 @@
       "side": 1,
       "message": "Sounds good.",
       "parentUuid": "64822a70_65a9ea0e",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9baf9819_00d88d06",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-19T21:57:36Z",
+      "side": 1,
+      "message": "Similarly here, please add a comment describing why this additional condition is necessary.",
+      "range": {
+        "startLine": 94,
+        "startChar": 15,
+        "endLine": 94,
+        "endChar": 36
+      },
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4600fd6_9dbccbd2",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-19T21:57:36Z",
+      "side": 1,
+      "message": "+1 to adding a comment",
+      "parentUuid": "e08ca686_119c5275",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33b82c77_8cf787da",
@@ -225,6 +289,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "33b82c77_8cf787da",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abe2f69_78860273",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-19T21:57:36Z",
+      "side": 1,
+      "message": "Better yet, add this as a define in the .gn file based on the target_os.",
+      "parentUuid": "d43ab872_28faab87",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -477,6 +559,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "481490fb_fadfbb9c",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-19T21:57:36Z",
+      "side": 1,
+      "message": "Please use ComPtr for all IUnknown based pointers to avoid memory leaks.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 40
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec762746_0a85844f",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1
@@ -524,6 +629,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "499fb405_aa7e3074",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5bb3024_80ba4d20",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-19T21:57:36Z",
+      "side": 1,
+      "message": "Can we use delay loading for both Win32 and UWP codepaths?",
+      "parentUuid": "d9a8ebcd_d07905f3",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
