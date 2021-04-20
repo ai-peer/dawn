@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2485926_6db8a76f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "nit: Sentences usually start with caps.",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bbf89f2_c06f1a43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "nit: We don\u0027t usually use \"I\" since this is a group effort. \"We\" is good for stuff we should do, or that the code does. Here is could be: \"Swapchain related changes will be in another commit.\"",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9305d7a0_58160506",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "Looks good. Rafael PTAL again! Due to some git-foo this ended up being a new CL.\n\nI only have nitpicks so this looks almost ready, except for the /ZW /EHsc flags that would be nice to skip. Why are they needed?",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29a2f524_79ea000f",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "declare_args is for overridable variables with `gn args` but this one doesn\u0027t seem to make sense to override.. I think this can just be a variable defined above this block.",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbd5785c_583d4a9d",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "I don\u0027t remember if we answered this in the previous CL: why do we need these flags?",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b565b25c_55aa6605",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "nit: Can we describe that on UWP the search paths don\u0027t contain the D3D12 DLLs so we have to statically link them?",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe87eb1_8a49ec3a",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "Why do we need D3D11?\n\nAh it\u0027s for 11On12.",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e3dda90_5c9816b2",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "nit: the rest of the TODO can be on the same line too.",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a61c3bd_fe1bcc23",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:21:32Z",
+      "side": 1,
+      "message": "nit: We can remove this TODO since the surfaces from SwapChainPanel and CoreWindow don\u0027t exist yet.\n\nThis means we just need the #if defined(DAWN_PLATFORM_WIN32) since that implies WINDOWS.",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
