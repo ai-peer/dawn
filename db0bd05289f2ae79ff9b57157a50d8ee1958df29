@@ -160,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fec986fa_5bed9d05",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:22:19Z",
+      "side": 1,
+      "message": "Thanks for the explanation! Since /ZW is only to produce errors on invalid Windows API calls, I think we don\u0027t need it for dawn_proc and dawncpp that are just C++ code without even usage of C++ the standard library.\n\nThe only occurence left would be here and we should have a comment that explains both things you explained (/ZW makes sure we don\u0027t add calls that are forbidden in UWP, and /EHsc is required to be used in combination with it, even if it is already added by the windows GN defaults)",
+      "parentUuid": "6c31f02b_3dbe1311",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b565b25c_55aa6605",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 1
