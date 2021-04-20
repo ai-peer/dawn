@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6116a5a2_1ef0ecbc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a2485926_6db8a76f",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bbf89f2_c06f1a43",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-04-20T17:21:32Z",
       "side": 1,
       "message": "nit: We don\u0027t usually use \"I\" since this is a group effort. \"We\" is good for stuff we should do, or that the code does. Here is could be: \"Swapchain related changes will be in another commit.\"",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fbd1fbe_51081283",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3bbf89f2_c06f1a43",
       "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a65280_7a94712f",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "29a2f524_79ea000f",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbd5785c_583d4a9d",
@@ -88,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c31f02b_3dbe1311",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Document here explains\nhttps://docs.microsoft.com/en-us/cpp/porting/how-to-use-existing-cpp-code-in-a-universal-windows-platform-app?view\u003dmsvc-160\n\"UWP Apps run in a protected environment. As a result, many Win32, COM, and CRT API calls that might compromise platform security aren\u0027t allowed. The /ZW compiler option can detect such calls and generate an error.\"\n\nAnd /ZW document says \n\"When you use /ZW to compile, always specify /EHsc as well.\"\nhttps://docs.microsoft.com/en-us/cpp/build/reference/zw-windows-runtime-compilation?view\u003dmsvc-160\n\nSo I add 2 flags as document suggest.\n\n/EHsc flags will be added from toolchain when target_os\u003d\"winuwp\" (build\\config\\win\\BUILD.gn) but I still add it, making every \"/ZW\" is paired with a \"/EHsc\" as document suggest.",
+      "parentUuid": "cbd5785c_583d4a9d",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b565b25c_55aa6605",
         "filename": "src/dawn_native/BUILD.gn",
         "patchSetId": 1
@@ -99,6 +171,24 @@
       "writtenOn": "2021-04-20T17:21:32Z",
       "side": 1,
       "message": "nit: Can we describe that on UWP the search paths don\u0027t contain the D3D12 DLLs so we have to statically link them?",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f5f2f74_dcbd84fd",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Sure. I\u0027ll have a comment about that.",
+      "parentUuid": "b565b25c_55aa6605",
       "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +227,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "966af712_b7c445c4",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 318,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0e3dda90_5c9816b2",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a61c3bd_fe1bcc23",
@@ -150,6 +258,24 @@
       "writtenOn": "2021-04-20T17:21:32Z",
       "side": 1,
       "message": "nit: We can remove this TODO since the surfaces from SwapChainPanel and CoreWindow don\u0027t exist yet.\n\nThis means we just need the #if defined(DAWN_PLATFORM_WIN32) since that implies WINDOWS.",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd22467d_a9f3ab24",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T18:10:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5a61c3bd_fe1bcc23",
       "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
