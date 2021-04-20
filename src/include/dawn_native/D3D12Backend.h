@@ -32,6 +32,10 @@ namespace dawn_native { namespace d3d12 {
     DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device);
     DAWN_NATIVE_EXPORT DawnSwapChainImplementation CreateNativeSwapChainImpl(WGPUDevice device,
                                                                              HWND window);
+
+    DAWN_NATIVE_EXPORT DawnSwapChainImplementation
+    CreateNativeSwapChainForCoreWindowImpl(WGPUDevice device, IUnknown* pCoreWindow);
+
     DAWN_NATIVE_EXPORT WGPUTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
 

@@ -43,6 +43,15 @@ namespace dawn_native { namespace d3d12 {
         return impl;
     }
 
+    DawnSwapChainImplementation CreateNativeSwapChainForCoreWindowImpl(WGPUDevice device,
+                                                                       IUnknown* pCoreWindow) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        DawnSwapChainImplementation impl;
+        impl = CreateSwapChainImplementation(new NativeSwapChainImpl(backendDevice, pCoreWindow));
+        impl.textureUsage = WGPUTextureUsage_Present;
+        return impl;
+    }
+
     WGPUTextureFormat GetNativeSwapChainPreferredFormat(
         const DawnSwapChainImplementation* swapChain) {
         NativeSwapChainImpl* impl = reinterpret_cast<NativeSwapChainImpl*>(swapChain->userData);
