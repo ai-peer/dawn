@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb269e1_99a9f28e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-20T12:34:25Z",
+      "side": 1,
+      "message": "Hi Corentin, in the latest patch set I just put ComputePipelineD3D12::Initialize() into PostWorkerTask, so now we don\u0027t need to handle the thread-safety of the front-end pipeline object cache, CreatePipelineAsyncResultTracker (the \"callback queue\") and serials. Now there are only two places that need to be changed to be thread-safe:\n- GetOrCreate[Dxc|Fxc]Compilers\n- Persistent Cache\n\nPTAL, thanks!",
+      "parentUuid": "a76b6c2d_091bd22c",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4f8c17a_492fbbab",
