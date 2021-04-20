@@ -815,6 +815,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cbcfd112_f421baaa",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T08:57:56Z",
+      "side": 1,
+      "message": "Delay loading wont resolve the problem. it won\u0027t expand DLL search spaces so it still can\u0027t find those DLLs. \nIt makes sense using static link If we considering Xbox, HoloLens and different versions of Win10, since we might not load those DLLs currently (Xbox might have them in different locations than Win10, and of course different implementations)  but those stub libs knows.",
+      "parentUuid": "dadc991d_e17e0322",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4899cc14_d517e780",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1
