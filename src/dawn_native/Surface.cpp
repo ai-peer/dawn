@@ -59,7 +59,7 @@ namespace dawn_native {
             }
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
-#if defined(DAWN_PLATFORM_WINDOWS)
+#if defined(DAWN_PLATFORM_WIN32)
             case wgpu::SType::SurfaceDescriptorFromWindowsHWND: {
                 const SurfaceDescriptorFromWindowsHWND* hwndDesc =
                     static_cast<const SurfaceDescriptorFromWindowsHWND*>(chainedDescriptor);
@@ -72,7 +72,7 @@ namespace dawn_native {
                 }
                 break;
             }
-#endif  // defined(DAWN_PLATFORM_WINDOWS)
+#endif  // defined(DAWN_PLATFORM_WIN32)
 
 #if defined(DAWN_USE_X11)
             case wgpu::SType::SurfaceDescriptorFromXlib: {
