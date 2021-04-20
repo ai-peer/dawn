@@ -145,6 +145,30 @@
       },
       "revId": "f55f8458adf2605f2b64239ca368f4c90240b75a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ece6b3_03d15b13",
+        "filename": "src/common/WindowsUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T13:55:23Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "b1b98cfe_815faf83",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "f55f8458adf2605f2b64239ca368f4c90240b75a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
