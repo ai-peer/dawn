@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 
 #include "common/GPUInfo.h"
+#include "dawn_native/CreatePipelineAsyncTracker.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
@@ -119,6 +120,9 @@ namespace dawn_native { namespace d3d12 {
 
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
+
+        mCreateComputePipelineAsyncTaskManager =
+            std::make_unique<CreateComputePipelineAsyncTaskManager>(this);
 
         // ShaderVisibleDescriptorAllocators use the ResidencyManager and must be initialized after.
         DAWN_TRY_ASSIGN(
@@ -249,6 +253,11 @@ namespace dawn_native { namespace d3d12 {
         mRenderTargetViewAllocator->Tick(completedSerial);
         mDepthStencilViewAllocator->Tick(completedSerial);
         mUsedComObjectRefs.ClearUpTo(completedSerial);
+
+        if (HasCreatePipelineAsyncTasksInFlight()) {
+            DAWN_TRY(NextSerial());
+        }
+        HandleCreateComputePipelineAsyncTasks();
 
         if (mPendingCommands.IsOpen()) {
             DAWN_TRY(ExecutePendingCommandContext());
@@ -608,6 +617,23 @@ namespace dawn_native { namespace d3d12 {
         return DAWN_INTERNAL_ERROR(messages.str());
     }
 
+    void Device::FinishCreatePipelineAsyncTasks() {
+        std::list<CreateComputePipelineAsyncResult> completedTaskResults =
+            mCreateComputePipelineAsyncTaskManager->WaitAndGetAllCreateComputePipelineAsyncTasks();
+
+        ExecutionSerial completedSerial = GetCompletedCommandSerial();
+        for (auto& task : completedTaskResults) {
+            Ref<ComputePipelineBase> result;
+            if (task.computePipeline.Get()) {
+                result = AddOrGetCachedPipeline(task.computePipeline, task.blueprintHash);
+            }
+            std::unique_ptr<CreateComputePipelineAsyncTaskResult> taskResult =
+                std::make_unique<CreateComputePipelineAsyncTaskResult>(
+                    result, task.errorMessage, task.callback, task.userData);
+            mCreatePipelineAsyncTracker->TrackTask(std::move(taskResult), completedSerial);
+        }
+    }
+
     void Device::ShutDownImpl() {
         ASSERT(GetState() == State::Disconnected);
 
@@ -681,6 +707,39 @@ namespace dawn_native { namespace d3d12 {
 
     float Device::GetTimestampPeriodInNS() const {
         return mTimestampPeriod;
+    }
+
+    CreateComputePipelineAsyncTaskManager* Device::GetCreateComputePipelineAsyncTaskManager()
+        const {
+        return mCreateComputePipelineAsyncTaskManager.get();
+    }
+
+    void Device::CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                                size_t blueprintHash,
+                                                WGPUCreateComputePipelineAsyncCallback callback,
+                                                void* userdata) {
+        ComputePipeline::CreateAsync(this, descriptor, blueprintHash, callback, userdata);
+    }
+
+    void Device::HandleCreateComputePipelineAsyncTasks() {
+        std::list<CreateComputePipelineAsyncResult> completedTaskResults =
+            mCreateComputePipelineAsyncTaskManager->GetCompletedCreateComputePipelineAsyncTasks();
+
+        for (const auto& task : completedTaskResults) {
+            Ref<ComputePipelineBase> result;
+            if (task.computePipeline.Get()) {
+                result = AddOrGetCachedPipeline(task.computePipeline, task.blueprintHash);
+            }
+            std::unique_ptr<CreateComputePipelineAsyncTaskResult> taskResult =
+                std::make_unique<CreateComputePipelineAsyncTaskResult>(
+                    result, task.errorMessage, task.callback, task.userData);
+            mCreatePipelineAsyncTracker->TrackTask(std::move(taskResult),
+                                                   GetPendingCommandSerial());
+        }
+    }
+
+    bool Device::HasCreatePipelineAsyncTasksInFlight() {
+        return mCreateComputePipelineAsyncTaskManager->HasTasksInFlight();
     }
 
 }}  // namespace dawn_native::d3d12

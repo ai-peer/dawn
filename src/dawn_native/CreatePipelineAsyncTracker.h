@@ -21,6 +21,7 @@
 #include "dawn_native/IntegerTypes.h"
 
 #include <memory>
+#include <mutex>
 #include <string>
 
 namespace dawn_native {
@@ -29,9 +30,9 @@ namespace dawn_native {
     class DeviceBase;
     class RenderPipelineBase;
 
-    struct CreatePipelineAsyncTaskBase {
-        CreatePipelineAsyncTaskBase(std::string errorMessage, void* userData);
-        virtual ~CreatePipelineAsyncTaskBase();
+    struct CreatePipelineAsyncTaskResultBase {
+        CreatePipelineAsyncTaskResultBase(std::string errorMessage, void* userData);
+        virtual ~CreatePipelineAsyncTaskResultBase();
 
         virtual void Finish() = 0;
         virtual void HandleShutDown() = 0;
@@ -42,11 +43,11 @@ namespace dawn_native {
         void* mUserData;
     };
 
-    struct CreateComputePipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
-        CreateComputePipelineAsyncTask(Ref<ComputePipelineBase> pipeline,
-                                       std::string errorMessage,
-                                       WGPUCreateComputePipelineAsyncCallback callback,
-                                       void* userdata);
+    struct CreateComputePipelineAsyncTaskResult final : public CreatePipelineAsyncTaskResultBase {
+        CreateComputePipelineAsyncTaskResult(Ref<ComputePipelineBase> pipeline,
+                                             std::string errorMessage,
+                                             WGPUCreateComputePipelineAsyncCallback callback,
+                                             void* userdata);
 
         void Finish() final;
         void HandleShutDown() final;
@@ -57,11 +58,11 @@ namespace dawn_native {
         WGPUCreateComputePipelineAsyncCallback mCreateComputePipelineAsyncCallback;
     };
 
-    struct CreateRenderPipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
-        CreateRenderPipelineAsyncTask(Ref<RenderPipelineBase> pipeline,
-                                      std::string errorMessage,
-                                      WGPUCreateRenderPipelineAsyncCallback callback,
-                                      void* userdata);
+    struct CreateRenderPipelineAsyncTaskResult final : public CreatePipelineAsyncTaskResultBase {
+        CreateRenderPipelineAsyncTaskResult(Ref<RenderPipelineBase> pipeline,
+                                            std::string errorMessage,
+                                            WGPUCreateRenderPipelineAsyncCallback callback,
+                                            void* userdata);
 
         void Finish() final;
         void HandleShutDown() final;
@@ -77,13 +78,14 @@ namespace dawn_native {
         explicit CreatePipelineAsyncTracker(DeviceBase* device);
         ~CreatePipelineAsyncTracker();
 
-        void TrackTask(std::unique_ptr<CreatePipelineAsyncTaskBase> task, ExecutionSerial serial);
+        void TrackTask(std::unique_ptr<CreatePipelineAsyncTaskResultBase> task,
+                       ExecutionSerial serial);
         void Tick(ExecutionSerial finishedSerial);
         void ClearForShutDown();
 
       private:
         DeviceBase* mDevice;
-        SerialQueue<ExecutionSerial, std::unique_ptr<CreatePipelineAsyncTaskBase>>
+        SerialQueue<ExecutionSerial, std::unique_ptr<CreatePipelineAsyncTaskResultBase>>
             mCreatePipelineAsyncTasksInFlight;
     };
 
