@@ -179,6 +179,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "06691468_16c4527b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T15:41:44Z",
+      "side": 1,
+      "message": "Ok no worries. but can we have the helper function separate like before? You can do this multiple ways, ping me on matrix if you\u0027d like some help.",
+      "parentUuid": "6130788f_45403d07",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
