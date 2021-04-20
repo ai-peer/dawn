@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c74f6343_b51836b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T21:42:02Z",
+      "side": 1,
+      "message": "LoadPackagedLibrary is used inside this method:\n\n   bool DynamicLib::Open(const std::string\u0026 filename, std::string* error)\n\nBecause this is cross-platform code that works on Linux flavors and macOS too, I don\u0027t think we can change the Open method to take an std::wstring, so we need to conversion step. Unless I\u0027m missing something?",
+      "parentUuid": "d5c4ef63_a23f41ed",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9675925e_e6429ed1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
