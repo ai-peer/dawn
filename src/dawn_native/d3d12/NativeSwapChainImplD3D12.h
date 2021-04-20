@@ -29,9 +29,15 @@ namespace dawn_native { namespace d3d12 {
 
     class NativeSwapChainImpl {
       public:
+        enum class SwapChainType { Hwnd, CoreWindow };
+
         using WSIContext = DawnWSIContextD3D12;
 
+        // For HWND
         NativeSwapChainImpl(Device* device, HWND window);
+        // For CoreWindow
+        NativeSwapChainImpl(Device* device, IUnknown* coreWindow);
+
         ~NativeSwapChainImpl();
 
         void Init(DawnWSIContextD3D12* context);
@@ -45,7 +51,9 @@ namespace dawn_native { namespace d3d12 {
         wgpu::TextureFormat GetPreferredFormat() const;
 
       private:
+        SwapChainType mSwapChainType;
         HWND mWindow = nullptr;
+        ComPtr<IUnknown> mCoreWindow = nullptr;
         Device* mDevice = nullptr;
         UINT mInterval;
 
