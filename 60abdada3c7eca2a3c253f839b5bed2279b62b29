@@ -143,6 +143,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d012a62_cb6d160f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T15:32:19Z",
+      "side": 1,
+      "message": "Uh, you seemed to have squashed multiple commits in a single commit with the same Change-Id:\n\nThe goal is to have multiple commits each with their own Change-Id:",
+      "parentUuid": "b9ce2c25_c4d9962b",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
