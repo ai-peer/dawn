@@ -60,6 +60,9 @@ namespace dawn_native {
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
 #if defined(DAWN_PLATFORM_WINDOWS)
+// TODO(dawn:766):
+// both Surface from SwapChainPanel and CoreWindow need validation
+#    if defined(DAWN_PLATFORM_WIN32)
             case wgpu::SType::SurfaceDescriptorFromWindowsHWND: {
                 const SurfaceDescriptorFromWindowsHWND* hwndDesc =
                     static_cast<const SurfaceDescriptorFromWindowsHWND*>(chainedDescriptor);
@@ -72,6 +75,7 @@ namespace dawn_native {
                 }
                 break;
             }
+#    endif
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_USE_X11)

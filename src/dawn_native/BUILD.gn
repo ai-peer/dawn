@@ -309,6 +309,19 @@ source_set("dawn_native_sources") {
 
   if (is_win) {
     libs += [ "user32.lib" ]
+    if (dawn_is_winuwp) {
+      libs += [
+        "dxgi.lib",
+        "d3d12.lib",
+        "d3d11.lib",
+
+        # TODO(dawn:766):
+        # somehow use dxcompiler.lib makes CoreApp unable to activate
+
+        # TODO(dawn:766):
+        # WinPIX should be added as third party tools and linked statically
+      ]
+    }
   }
 
   if (dawn_enable_d3d12) {
