@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f543b3f3_aa23aecd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T14:26:08Z",
+      "side": 1,
+      "message": "Some more questions here.\nShould I still push my rework using the same Change-ID ? Since my patch 2 and patch 3 only contain a UTF8ToWStr and a test, I don\u0027t know if they seem to be a bit messy to you.\nIf so, can I push my rework before you finishing review patch 3 ? Since my rework will contain UTF8ToWChar so you have to review them again which might cause you some trouble.",
+      "parentUuid": "f61330ea_5ef3b007",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
