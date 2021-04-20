@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e096430c_88fee30f",
+        "filename": "src/common/WindowsUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T13:47:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "96db8a41_8132aad1",
+      "revId": "f55f8458adf2605f2b64239ca368f4c90240b75a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54a0bb3a_353033b5",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9854fe04_74d85ee5",
+        "filename": "src/common/WindowsUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T13:47:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "54a0bb3a_353033b5",
+      "range": {
+        "startLine": 36,
+        "startChar": 20,
+        "endLine": 36,
+        "endChar": 25
+      },
+      "revId": "f55f8458adf2605f2b64239ca368f4c90240b75a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c740e5b_a2a9d977",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-04-20T12:19:43Z",
       "side": 1,
       "message": "nit: UTF8ToWChar so it is clear the encoding of input is UTF-8.",
+      "range": {
+        "startLine": 22,
+        "startChar": 13,
+        "endLine": 22,
+        "endChar": 17
+      },
+      "revId": "f55f8458adf2605f2b64239ca368f4c90240b75a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b98cfe_815faf83",
+        "filename": "src/common/WindowsUtils.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T13:47:42Z",
+      "side": 1,
+      "message": "Maybe UTF8ToWStr? ToWChar feels like return type is wchar_t*",
+      "parentUuid": "9c740e5b_a2a9d977",
       "range": {
         "startLine": 22,
         "startChar": 13,
