@@ -942,6 +942,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc826455_27e27216",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T17:37:44Z",
+      "side": 1,
+      "message": "I strongly prefer that we use ComPtrs here.  \n\nIf the user of Dawn releases their window between the time they make the Dawn swap chain and the time they call `Configure`, we now have a use-after-free bug on our hands that is difficult to debug. Keeping a reference (via ComPtr) prevents that from happening. \n\nI don\u0027t know what you mean by \"different ComPtr\" still have their own reference counter\". ComPtr does not (and never has) a reference counter of its own. It uses the reference counter that is already part of the object and increments/decrements it by calling AddRef and Release on the IUnknown interface.",
+      "parentUuid": "4c662f99_63d27a24",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 40
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec762746_0a85844f",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1

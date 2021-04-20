@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0311e3b1_140ba131",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T17:37:44Z",
+      "side": 1,
+      "message": "Unless I am missing something, this CL is unnecessary. If we need to call Windows APIs with hardcoded wide character strings, We should use put the letter L in front of them and use LoadLibraryW in the Win32 side of the #if.\n\nWindows is a unicode OS so internally, LoadLibraryA is already converting our ANSI string to a unicode string and calling LoadLibraryW. Using LoadLibraryW directly skips this conversion.",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6db94f04_77584151",
