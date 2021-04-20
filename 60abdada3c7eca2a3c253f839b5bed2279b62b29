@@ -797,6 +797,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dadc991d_e17e0322",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T03:28:44Z",
+      "side": 1,
+      "message": "I don\u0027t know about delay loading before. I\u0027ll give a try and answer this later",
+      "parentUuid": "a5bb3024_80ba4d20",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4899cc14_d517e780",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1
