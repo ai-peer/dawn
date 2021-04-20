@@ -395,6 +395,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93fa3fc6_0dd1df3c",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T09:06:57Z",
+      "side": 1,
+      "message": "Rafael, all of Dawn relies on defines defined in Platform.h at the moment, so I\u0027d like to keep the logic centralized there.",
+      "parentUuid": "c9d65195_15d6566f",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87383248_24d9ead3",
@@ -714,6 +732,30 @@
       "side": 1,
       "message": "I use raw pointer for mCoreWindow here since it\u0027s provided by user. If we use ComPtr to wrap user\u0027s pointer we\u0027ll take control of the lifetime of user\u0027s object and may causing problem when user release it before calling Configure()\n(just like the mDevice and mWindow here).",
       "parentUuid": "481490fb_fadfbb9c",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 40
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c1b413_9cb0b05e",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T09:06:57Z",
+      "side": 1,
+      "message": "Would it work to have a ComPtr that takes a new reference of the object?",
+      "parentUuid": "170b1fda_29fa6f6a",
       "range": {
         "startLine": 57,
         "startChar": 8,
