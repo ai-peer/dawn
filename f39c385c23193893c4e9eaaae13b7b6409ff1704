@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc415133_3e4346ea",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T17:51:50Z",
+      "side": 1,
+      "message": "LoadPackageLibrary takes a wide character string as its first parameter. Hence, you can use the same L\"\" strings to avoid converting between ANSI and Unicode strings.\n\nWhich follow up CL are you referring to?  Is it this one: https://dawn-review.googlesource.com/c/dawn/+/48480?",
+      "parentUuid": "c36b8773_cfd7e66b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9675925e_e6429ed1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
