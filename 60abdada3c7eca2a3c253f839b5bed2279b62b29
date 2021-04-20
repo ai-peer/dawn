@@ -73,6 +73,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f61330ea_5ef3b007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "123fdd61_6405484c",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6e68a2fd_3bbe0fbc",
         "filename": "scripts/dawn_features.gni",
         "patchSetId": 1
@@ -101,6 +119,30 @@
       "writtenOn": "2021-04-19T21:57:36Z",
       "side": 1,
       "message": "Please add a comment describing why this is needed.",
+      "range": {
+        "startLine": 65,
+        "startChar": 61,
+        "endLine": 65,
+        "endChar": 82
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b05931f2_b3a4566a",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "UWP can only use d3d APIs. Other graphic APIs are not allowed.\nI\u0027ll add a comment here.",
+      "parentUuid": "fc2880e0_41cb1207",
       "range": {
         "startLine": 65,
         "startChar": 61,
@@ -177,6 +219,30 @@
       "writtenOn": "2021-04-19T21:57:36Z",
       "side": 1,
       "message": "Similarly here, please add a comment describing why this additional condition is necessary.",
+      "range": {
+        "startLine": 94,
+        "startChar": 15,
+        "endLine": 94,
+        "endChar": 36
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6959ddda_d28eca85",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "glfw doesn\u0027t support UWP.\nI\u0027ll add a comment here.",
+      "parentUuid": "9baf9819_00d88d06",
       "range": {
         "startLine": 94,
         "startChar": 15,
@@ -311,6 +377,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d65195_15d6566f",
+        "filename": "src/common/DynamicLib.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3abe2f69_78860273",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87383248_24d9ead3",
@@ -395,6 +479,24 @@
       "side": 1,
       "message": "The ideal solution would be to not need /ZW /EHsc (I don\u0027t understand what it changes for Dawn since it is exception-free). Otherwise yeah dawn_proc and dawncpp don\u0027t depend on a shared header. Maybe we could have a dawn_basic_private_config in common/BUILD.gn? This isn\u0027t ideal but I don\u0027t see another solution.",
       "parentUuid": "e9af3caa_9cf642f2",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d5ebdd0_f3e7c96b",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "Document here explains\nhttps://docs.microsoft.com/en-us/cpp/porting/how-to-use-existing-cpp-code-in-a-universal-windows-platform-app?view\u003dmsvc-160\n\"UWP Apps run in a protected environment. As a result, many Win32, COM, and CRT API calls that might compromise platform security aren\u0027t allowed. The /ZW compiler option can detect such calls and generate an error.\"\n\nAnd /ZW document says \n\"When you use /ZW to compile, always specify /EHsc as well.\"\nhttps://docs.microsoft.com/en-us/cpp/build/reference/zw-windows-runtime-compilation?view\u003dmsvc-160\n\nSo I add 2 flags as document suggest.\n\n/EHsc flags will be added from toolchain when target_os\u003d\"winuwp\" (build\\config\\win\\BUILD.gn) but I still add it, making every \"/ZW\" is paired with a \"/EHsc\" as document suggest.\n\nAdding a dawn_basic_private_config seems to be an viable options, but we should do more discussion about what exactly \"dawn_basic\" contains(all dawn_components + dawn_cpp + dawn_utils + dawn_proc ?). Maybe I should file a issue and do this in another CL ?\n\nFor now \"/ZW\" is just acting as a safeguard to make sure the components I want to use runs in a protected environment. So I think I still use /ZW in dawn_internal, dawn_proc, dawn_utils and dawn_cpp, until we clearly define what dawn_basic means and decide to use dawn_basic_private_config or figure out other solutions.",
+      "parentUuid": "dd3ed840_1490a494",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -559,6 +661,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aed3e717_b6da490d",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "Sure. We may keep 3 macro here and define them like this.\n\n#if defined(_WIN32) || defined(_WIN64)\n#    define DAWN_PLATFORM_WINDOWS 1\n#    if WINAPI_FAMILY \u003d\u003d WINAPI_FAMILY_DESKTOP_APP\n#        define DAWN_PLATFORM_WIN32 1\n#    elif WINAPI_FAMILY \u003d\u003d WINAPI_FAMILY_PC_APP\n#        define DAWN_PLATFORM_WINUWP 1\n#    else\n#        error \"Unsupported Windows platform\"\n#    endif",
+      "parentUuid": "7e79be18_23738688",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "481490fb_fadfbb9c",
         "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
         "patchSetId": 1
@@ -570,6 +690,30 @@
       "writtenOn": "2021-04-19T21:57:36Z",
       "side": 1,
       "message": "Please use ComPtr for all IUnknown based pointers to avoid memory leaks.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 40
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "170b1fda_29fa6f6a",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T02:38:37Z",
+      "side": 1,
+      "message": "I use raw pointer for mCoreWindow here since it\u0027s provided by user. If we use ComPtr to wrap user\u0027s pointer we\u0027ll take control of the lifetime of user\u0027s object and may causing problem when user release it before calling Configure()\n(just like the mDevice and mWindow here).",
+      "parentUuid": "481490fb_fadfbb9c",
       "range": {
         "startLine": 57,
         "startChar": 8,
