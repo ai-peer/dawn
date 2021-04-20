@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5c4ef63_a23f41ed",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T20:59:49Z",
+      "side": 1,
+      "message": "Corentin, my point was that we can have this function take a wstring directly for Windows and avoid the need for conversion at the last minute. \n\nLoadLibrary is a macro that resolves to either LoadLibraryW or LoadLibraryA depending on whether you build for Unicode. Both should be callable for UWPs.",
+      "parentUuid": "582226ea_98167f30",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9675925e_e6429ed1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
