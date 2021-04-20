@@ -768,6 +768,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "905140ce_bcfa3037",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T10:41:57Z",
+      "side": 1,
+      "message": "We can do this by attach it to a ComPtr and detach it in the SwapChain\u0027s destructors. But I don\u0027t see point in doing this.\n1. We won\u0027t pass the mCoreWindow around, we just use it in Configure().\n2. even if we attach to a ComPtr, It\u0027s hard to say what users will do to the objects. User may use a different kind of smart pointer(such as winrt::com_ptr in C++/WinRT) which have their own reference counter. They still destroy the object when their counter reaching 0.\n3. Different ComPtr still have their own reference counter if we don\u0027t use ComPtr\u0027s operators. Image doing things like this:\nshared_ptr\u003cFoo\u003e a{nullptr};\n{\n    shared_ptr\u003cFoo\u003e b \u003d make_shared\u003cFoo\u003e();\n    a.reset(b.get())\n}",
+      "parentUuid": "90c1b413_9cb0b05e",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 40
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec762746_0a85844f",
         "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
         "patchSetId": 1
