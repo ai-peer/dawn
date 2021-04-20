@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b604ca_836ce25c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T14:21:41Z",
+      "side": 1,
+      "message": "Still LGTM, let\u0027s wait for Rafael\u0027s review.",
+      "revId": "8164aacb49ee4a60176b6b9a4bc5971224cdb005",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
