@@ -16,6 +16,201 @@
       "message": "PTAL!",
       "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "942ed7c0_b6d0c68a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "LGTM; nits are at your discretion",
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "933b6003_abca56d6",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Nit: comma splice",
+      "range": {
+        "startLine": 14,
+        "startChar": 75,
+        "endLine": 14,
+        "endChar": 76
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be072510_2fa1a93d",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Should indicate that this is a \"Google CLA\"? Or (below) \"a different Google project\"?",
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a88d9d26_26da42fb",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Nit: comma splice",
+      "range": {
+        "startLine": 28,
+        "startChar": 18,
+        "endLine": 28,
+        "endChar": 19
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a4e1a94_e283eb15",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Nit: in English, \"authenticated\" is more commonly used",
+      "range": {
+        "startLine": 40,
+        "startChar": 57,
+        "endLine": 40,
+        "endChar": 69
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e75390_52210bde",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Nit: authentication",
+      "range": {
+        "startLine": 41,
+        "startChar": 50,
+        "endLine": 41,
+        "endChar": 66
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6934bc9_9655094e",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Nit: commit -\u003e commits?",
+      "range": {
+        "startLine": 88,
+        "startChar": 24,
+        "endLine": 88,
+        "endChar": 30
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c1a555f_7ecf09ad",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "That\u0027s really cool! I didn\u0027t know that.",
+      "range": {
+        "startLine": 99,
+        "startChar": 10,
+        "endLine": 99,
+        "endChar": 41
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5607c2c6_2bc1775a",
+        "filename": "docs/contributing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-20T19:40:08Z",
+      "side": 1,
+      "message": "Nit: \"but could\" -\u003e \"although it could\" since it\u0027s slightly ambiguous if this refers to the CL or the reviewers",
+      "range": {
+        "startLine": 105,
+        "startChar": 69,
+        "endLine": 105,
+        "endChar": 78
+      },
+      "revId": "fd34ffd58a0d73609a46e83368643dcce1a05f4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
