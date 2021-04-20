@@ -964,6 +964,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a455ae9_e9a03dbf",
+        "filename": "src/dawn_native/d3d12/NativeSwapChainImplD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T17:59:30Z",
+      "side": 1,
+      "message": "My understanding about ComPtr\u0027s reference counter is a mistake. I\u0027ll use ComPtr instead. Thanks.",
+      "parentUuid": "fc826455_27e27216",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 40
+      },
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec762746_0a85844f",

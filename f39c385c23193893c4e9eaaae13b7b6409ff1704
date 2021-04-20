@@ -98,6 +98,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "582226ea_98167f30",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T17:59:30Z",
+      "side": 1,
+      "message": "I don\u0027t use LoadPackagedLibrary for now. But LoadLibraryW is not defined in UWP, \nhttps://docs.microsoft.com/en-us/cpp/porting/how-to-use-existing-cpp-code-in-a-universal-windows-platform-app?view\u003dmsvc-160",
+      "parentUuid": "c36b8773_cfd7e66b",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9675925e_e6429ed1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -109,6 +133,24 @@
       "writtenOn": "2021-04-20T17:41:23Z",
       "side": 1,
       "message": "nit: Bug: dawn:766, I\u0027m not sure if Feature: works.",
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95eec651_cdae8255",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-20T17:59:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9675925e_e6429ed1",
       "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
