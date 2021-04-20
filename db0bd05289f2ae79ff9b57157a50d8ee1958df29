@@ -125,6 +125,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0639b039_e0ac358d",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T23:02:00Z",
+      "side": 1,
+      "message": "Please add a comment which describes which this is needed for dawn_enable_vulkan.",
+      "range": {
+        "startLine": 68,
+        "startChar": 61,
+        "endLine": 68,
+        "endChar": 76
+      },
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e53728e_c0145164",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T23:02:00Z",
+      "side": 1,
+      "message": "Similarly, please add a comment which describes why this is needed for dawn_supports_glfw_for_windowing.",
+      "range": {
+        "startLine": 97,
+        "startChar": 15,
+        "endLine": 97,
+        "endChar": 30
+      },
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbd5785c_583d4a9d",
         "filename": "src/common/BUILD.gn",
         "patchSetId": 1
@@ -172,6 +218,29 @@
       "side": 1,
       "message": "Thanks for the explanation! Since /ZW is only to produce errors on invalid Windows API calls, I think we don\u0027t need it for dawn_proc and dawncpp that are just C++ code without even usage of C++ the standard library.\n\nThe only occurence left would be here and we should have a comment that explains both things you explained (/ZW makes sure we don\u0027t add calls that are forbidden in UWP, and /EHsc is required to be used in combination with it, even if it is already added by the windows GN defaults)",
       "parentUuid": "6c31f02b_3dbe1311",
+      "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bff03831_85a826b0",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-20T23:02:00Z",
+      "side": 1,
+      "message": "I see these flags copied in several locations. BUILD.gn has a concept of \u0027configs\u0027 you can add which let you group these together in one place for better maintainability. Then, here, you can simply include the config.",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 14
+      },
       "revId": "db0bd05289f2ae79ff9b57157a50d8ee1958df29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
