@@ -33,6 +33,24 @@
       "message": "nit: I think this can be const again now.",
       "revId": "80bf9bff2607d762e32f69858d6b23ff6c9d8d63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ccf2159_5a448af0",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-04-20T12:24:44Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/48385",
+      "parentUuid": "9cbceea9_50036fce",
+      "revId": "80bf9bff2607d762e32f69858d6b23ff6c9d8d63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
