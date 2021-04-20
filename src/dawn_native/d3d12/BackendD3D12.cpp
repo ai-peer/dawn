@@ -103,6 +103,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ResultOrError<IDxcLibrary*> Backend::GetOrCreateDxcLibrary() {
+        std::lock_guard<std::mutex> lock(mDxcLibraryMutex);
         if (mDxcLibrary == nullptr) {
             DAWN_TRY(CheckHRESULT(
                 mFunctions->dxcCreateInstance(CLSID_DxcLibrary, IID_PPV_ARGS(&mDxcLibrary)),
@@ -113,6 +114,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ResultOrError<IDxcCompiler*> Backend::GetOrCreateDxcCompiler() {
+        std::lock_guard<std::mutex> lock(mDxcCompilerMutex);
         if (mDxcCompiler == nullptr) {
             DAWN_TRY(CheckHRESULT(
                 mFunctions->dxcCreateInstance(CLSID_DxcCompiler, IID_PPV_ARGS(&mDxcCompiler)),
@@ -123,6 +125,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ResultOrError<IDxcValidator*> Backend::GetOrCreateDxcValidator() {
+        std::lock_guard<std::mutex> lock(mDxcValidatorMutex);
         if (mDxcValidator == nullptr) {
             DAWN_TRY(CheckHRESULT(
                 mFunctions->dxcCreateInstance(CLSID_DxcValidator, IID_PPV_ARGS(&mDxcValidator)),

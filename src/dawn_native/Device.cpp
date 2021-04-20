@@ -130,6 +130,13 @@ namespace dawn_native {
         mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
         mPersistentCache = std::make_unique<PersistentCache>(this);
 
+        if (GetPlatform() != nullptr) {
+            mWorkerTaskPool = GetPlatform()->CreateWorkerTaskPool();
+        } else {
+            mDefaultPlatform = std::make_unique<dawn_platform::Platform>();
+            mWorkerTaskPool = mDefaultPlatform->CreateWorkerTaskPool();
+        }
+
         // Starting from now the backend can start doing reentrant calls so the device is marked as
         // alive.
         mState = State::Alive;
@@ -139,10 +146,14 @@ namespace dawn_native {
         return {};
     }
 
+    void DeviceBase::FinishCreatePipelineAsyncTasks() {
+    }
+
     void DeviceBase::ShutDownBase() {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
             // Reject all async pipeline creations.
+            FinishCreatePipelineAsyncTasks();
             mCreatePipelineAsyncTracker->ClearForShutDown();
         }
 
@@ -386,11 +397,12 @@ namespace dawn_native {
     }
 
     bool DeviceBase::IsDeviceIdle() {
-        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
-        if (mCompletedSerial == maxSerial) {
-            return true;
+        if (HasCreatePipelineAsyncTasksInFlight()) {
+            return false;
         }
-        return false;
+
+        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
+        return mCompletedSerial == maxSerial;
     }
 
     ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
@@ -765,9 +777,9 @@ namespace dawn_native {
         }
 
         Ref<RenderPipelineBase> result = maybeResult.AcquireSuccess();
-        std::unique_ptr<CreateRenderPipelineAsyncTask> request =
-            std::make_unique<CreateRenderPipelineAsyncTask>(std::move(result), "", callback,
-                                                            userdata);
+        std::unique_ptr<CreateRenderPipelineAsyncTaskResult> request =
+            std::make_unique<CreateRenderPipelineAsyncTaskResult>(std::move(result), "", callback,
+                                                                  userdata);
         mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
     RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
@@ -1157,9 +1169,9 @@ namespace dawn_native {
             result = AddOrGetCachedPipeline(resultOrError.AcquireSuccess(), blueprintHash);
         }
 
-        std::unique_ptr<CreateComputePipelineAsyncTask> request =
-            std::make_unique<CreateComputePipelineAsyncTask>(result, errorMessage, callback,
-                                                             userdata);
+        std::unique_ptr<CreateComputePipelineAsyncTaskResult> request =
+            std::make_unique<CreateComputePipelineAsyncTaskResult>(result, errorMessage, callback,
+                                                                   userdata);
         mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
     }
 
@@ -1358,6 +1370,14 @@ namespace dawn_native {
                 mOverridenToggles.Set(toggle, true);
             }
         }
+    }
+
+    dawn_platform::WorkerTaskPool* DeviceBase::GetWorkerTaskPool() const {
+        return mWorkerTaskPool.get();
+    }
+
+    bool DeviceBase::HasCreatePipelineAsyncTasksInFlight() {
+        return false;
     }
 
 }  // namespace dawn_native

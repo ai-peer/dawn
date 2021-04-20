@@ -17,6 +17,7 @@
 
 #include "dawn_native/Error.h"
 
+#include <mutex>
 #include <vector>
 
 namespace dawn_platform {
@@ -79,6 +80,7 @@ namespace dawn_native {
 
         DeviceBase* mDevice = nullptr;
 
+        std::mutex mMutex;
         dawn_platform::CachingInterface* mCache = nullptr;
     };
 }  // namespace dawn_native

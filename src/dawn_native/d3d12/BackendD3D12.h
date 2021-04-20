@@ -19,6 +19,8 @@
 
 #include "dawn_native/d3d12/d3d12_platform.h"
 
+#include <mutex>
+
 namespace dawn_native { namespace d3d12 {
 
     class PlatformFunctions;
@@ -44,8 +46,12 @@ namespace dawn_native { namespace d3d12 {
         // the D3D12 DLLs are unloaded before we are done using them.
         std::unique_ptr<PlatformFunctions> mFunctions;
         ComPtr<IDXGIFactory4> mFactory;
+
+        std::mutex mDxcLibraryMutex;
         ComPtr<IDxcLibrary> mDxcLibrary;
+        std::mutex mDxcCompilerMutex;
         ComPtr<IDxcCompiler> mDxcCompiler;
+        std::mutex mDxcValidatorMutex;
         ComPtr<IDxcValidator> mDxcValidator;
     };
 
