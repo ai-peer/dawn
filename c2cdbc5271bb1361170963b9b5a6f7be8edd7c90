@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f8a16091_0f6e805a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "I think this is much better but still a bit scary. Austin WDYT? Overall I think we could land this as-is (with some stress test maybe?) and iterate on it to find the correct abstraction for the medium-term (until v1 is out).",
+      "parentUuid": "edb269e1_99a9f28e",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4f8c17a_492fbbab",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 7
@@ -175,6 +193,24 @@
       "writtenOn": "2021-04-16T15:48:32Z",
       "side": 1,
       "message": "This locks the cache for the duration of createFn too. We could instead lock just while we call LoadData and StoreData. This could lead to some redundant computations but is better than serializing all shader compilations.\n\nPlease also add a class level comment about concurrency otherwise we\u0027ll quickly forget what has been made concurrent and what hasn\u0027t.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7ddb668_cfeaf672",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "Changes in mutexing looks good. I think it would still be nice to have a comment about concurrency at the top of the class.",
+      "parentUuid": "6292eebb_aebbd95c",
       "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

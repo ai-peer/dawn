@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67617279_c3e8cb02",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "Overall this is much better",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce194c9d_2d8cf580",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "nit: this include doesn\u0027t seem used.",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2c85ff_3b1b96e1",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "I think this isn\u0027t needed if we call LoadDxcLibrary, LoadDxcCompiler and gather the DXC info on device creation (when the toggle is enabled).\n\nThis can be a prep CL.",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b2802a_a581083a",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "nit: this can be return Initialize ...",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "010279ce_649b8fe0",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "It\u0027s unfortunate that we iterate over all the pending tasks on each Tick().\n\nWhat do you think of having a model where tasks do the thing they need to do when they are finished (add themselves to a list of things to process or something?)\n\nHere they would just do device-\u003eGetCallbackQueue()-\u003eAddCallback(...);\n\nThe CallbackQueue would just be a simple std::vector of unique_ptr to Callback objects with a Call() method. With two operations AddCallback() and AcquireAllCallbacks() that would be with a mutex.\n\nAh but then we don\u0027t know if there are tasks in flight. :/ CallbackQueue simplifies the CreatePipelineAsyncTrackers and related logic, but doesn\u0027t help this CL as much.\n\nThis would work if we had an unordered_map\u003c\u003e of pending tasks that they would remove themselves from on completion though.\n\nI\u0027ll sleep on this.",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf05590_b36dd76a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "Why do we need to increment the serial?",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d79f681_a99d3a8f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "This is extremely similar to FinishCreatePipelineAsyncTasks, is there a way to merge them? Also it\u0027s a bit weird that we are associating a serial with something that\u0027s pure CPU. Maybe we can keep this with a TODO to use a CallbackQueue instead. The CallbackQueue would help in many other places too. (I can create an issue for the CallbackQueue stuff if you want).",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab21444b_06b2bb7f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T18:18:30Z",
+      "side": 1,
+      "message": "It\u0027s breaking layering a bit that we are modifying the cache like that, but we can fix it once we have a ComputePipelineFactory concept. Maybe add a TODO?",
+      "range": {
+        "startLine": 731,
+        "startChar": 25,
+        "endLine": 731,
+        "endChar": 47
+      },
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
