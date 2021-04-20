@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99e8382d_e2dbf6dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-20T17:56:08Z",
+      "side": 1,
+      "message": "Yes, this is inside a call that takes an std::string so we need the conversion function.",
+      "parentUuid": "dc415133_3e4346ea",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 60
+      },
+      "revId": "f39c385c23193893c4e9eaaae13b7b6409ff1704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9675925e_e6429ed1",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
