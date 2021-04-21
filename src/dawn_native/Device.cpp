@@ -134,6 +134,13 @@ namespace dawn_native {
         // alive.
         mState = State::Alive;
 
+        if (GetPlatform() != nullptr) {
+            mWorkerTaskPool = GetPlatform()->CreateWorkerTaskPool();
+        } else {
+            mDefaultPlatform = std::make_unique<dawn_platform::Platform>();
+            mWorkerTaskPool = mDefaultPlatform->CreateWorkerTaskPool();
+        }
+
         DAWN_TRY_ASSIGN(mEmptyBindGroupLayout, CreateEmptyBindGroupLayout());
 
         return {};
@@ -143,6 +150,7 @@ namespace dawn_native {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
             // Reject all async pipeline creations.
+            FinishCreatePipelineAsyncTasks();
             mCreatePipelineAsyncTracker->ClearForShutDown();
         }
 
@@ -188,6 +196,7 @@ namespace dawn_native {
         mState = State::Disconnected;
 
         mDynamicUploader = nullptr;
+        mCreatePipelineAsyncTaskManager = nullptr;
         mCreatePipelineAsyncTracker = nullptr;
         mPersistentCache = nullptr;
 
@@ -386,11 +395,19 @@ namespace dawn_native {
     }
 
     bool DeviceBase::IsDeviceIdle() {
-        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
-        if (mCompletedSerial == maxSerial) {
-            return true;
+        if (HasCreatePipelineAsyncTasksInFlight()) {
+            return false;
         }
-        return false;
+
+        ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
+        return mCompletedSerial == maxSerial;
+    }
+
+    void DeviceBase::FinishCreatePipelineAsyncTasks() {
+        if (mCreatePipelineAsyncTaskManager) {
+            mCreatePipelineAsyncTaskManager->WaitAndRemoveAll(
+                WGPUCreatePipelineAsyncStatus_DeviceDestroyed);
+        }
     }
 
     ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
@@ -1140,6 +1157,11 @@ namespace dawn_native {
         return layoutRef;
     }
 
+    bool DeviceBase::HasCreatePipelineAsyncTasksInFlight() {
+        return mCreatePipelineAsyncTaskManager &&
+               mCreatePipelineAsyncTaskManager->HasWaitableTasksInFlight();
+    }
+
     // TODO(jiawei.shao@intel.com): override this function with the async version on the backends
     // that supports creating compute pipeline asynchronously
     void DeviceBase::CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
@@ -1358,6 +1380,14 @@ namespace dawn_native {
                 mOverridenToggles.Set(toggle, true);
             }
         }
+    }
+
+    dawn_platform::WorkerTaskPool* DeviceBase::GetWorkerTaskPool() const {
+        return mWorkerTaskPool.get();
+    }
+
+    CreatePipelineAsyncTaskManagerBase* DeviceBase::GetCreatePipelineAsyncTaskManager() const {
+        return mCreatePipelineAsyncTaskManager.get();
     }
 
 }  // namespace dawn_native

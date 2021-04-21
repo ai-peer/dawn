@@ -18,6 +18,10 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/RenderPipeline.h"
 
+#include <list>
+#include <map>
+#include <mutex>
+
 namespace dawn_native {
 
     CreatePipelineAsyncTaskBase::CreatePipelineAsyncTaskBase(std::string errorMessage,
@@ -141,6 +145,105 @@ namespace dawn_native {
             task->HandleShutDown();
         }
         mCreatePipelineAsyncTasksInFlight.Clear();
+    }
+
+    void WorkerTask::DoTask(void* userdata) {
+        std::unique_ptr<WorkerTask> workerTaskPtr(static_cast<WorkerTask*>(userdata));
+        workerTaskPtr->Run();
+    }
+
+    CreatePipelineAsyncTaskManagerBase::CreatePipelineAsyncTaskManagerBase(DeviceBase* device)
+        : mDevice(device), mTaskSerial(0) {
+    }
+
+    CreatePipelineAsyncTaskManagerBase::~CreatePipelineAsyncTaskManagerBase() {
+        ASSERT(mCreateComputePipelineAsyncTaskResults.IsEmpty());
+        ASSERT(mWaitableEventsInFlight.empty());
+    }
+
+    void CreatePipelineAsyncTaskManagerBase::Tick() {
+        if (mCreateComputePipelineAsyncTaskResults.IsEmpty()) {
+            return;
+        }
+
+        std::vector<CreateComputePipelineAsyncResult> completedComputePipelineAsyncTasks =
+            mCreateComputePipelineAsyncTaskResults.FetchAllResultsAndClear();
+
+        for (const CreateComputePipelineAsyncResult& taskResult :
+             completedComputePipelineAsyncTasks) {
+            Ref<ComputePipelineBase> computePipeline = taskResult.computePipeline;
+            if (computePipeline.Get() != nullptr) {
+                computePipeline =
+                    mDevice->AddOrGetCachedPipeline(computePipeline, taskResult.blueprintHash);
+
+                taskResult.callback(WGPUCreatePipelineAsyncStatus_Success,
+                                    reinterpret_cast<WGPUComputePipeline>(computePipeline.Detach()),
+                                    "", taskResult.userData);
+            } else {
+                taskResult.callback(WGPUCreatePipelineAsyncStatus_Error, nullptr,
+                                    taskResult.errorMessage.c_str(), taskResult.userData);
+            }
+
+            const auto& waitableEvent = mWaitableEventsInFlight.find(taskResult.taskSerial);
+            ASSERT(waitableEvent != mWaitableEventsInFlight.cend());
+            // Wait for the finish of everything about waitableEvent as some clean-ups (e.g. the
+            // destructor of workerTaskPtr) may still be ongoing after taskResult being inserted
+            // into mCreateComputePipelineAsyncTaskResults.
+            waitableEvent->second->Wait();
+            mWaitableEventsInFlight.erase(waitableEvent);
+        }
+    }
+
+    void CreatePipelineAsyncTaskManagerBase::WaitAndRemoveAll(
+        WGPUCreatePipelineAsyncStatus status) {
+        for (auto& iter : mWaitableEventsInFlight) {
+            iter.second->Wait();
+        }
+
+        std::vector<CreateComputePipelineAsyncResult> completedComputePipelineAsyncTasks =
+            mCreateComputePipelineAsyncTaskResults.FetchAllResultsAndClear();
+        for (const CreateComputePipelineAsyncResult& taskResult :
+             completedComputePipelineAsyncTasks) {
+            switch (status) {
+                case WGPUCreatePipelineAsyncStatus_DeviceLost:
+                    taskResult.callback(status, nullptr, "Device lost before callback",
+                                        taskResult.userData);
+                    break;
+                case WGPUCreatePipelineAsyncStatus_DeviceDestroyed:
+                    taskResult.callback(status, nullptr, "Device destroyed before callback",
+                                        taskResult.userData);
+                    break;
+                default:
+                    UNREACHABLE();
+                    taskResult.callback(WGPUCreatePipelineAsyncStatus_Unknown, nullptr,
+                                        "Unknown error before callback", taskResult.userData);
+                    break;
+            }
+        }
+
+        mWaitableEventsInFlight.clear();
+    }
+
+    bool CreatePipelineAsyncTaskManagerBase::HasWaitableTasksInFlight() const {
+        return !mWaitableEventsInFlight.empty();
+    }
+
+    void CreatePipelineAsyncTaskManagerBase::StartComputePipelineAsyncWaitableTask(
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata) {
+        ++mTaskSerial;
+        std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent =
+            StartComputePipelineAsyncWaitableTaskImpl(descriptor, blueprintHash, callback, userdata,
+                                                      mTaskSerial);
+        mWaitableEventsInFlight.insert(std::make_pair(mTaskSerial, std::move(waitableEvent)));
+    }
+
+    void CreatePipelineAsyncTaskManagerBase::AddCreateComputePipelineAsyncResult(
+        const CreateComputePipelineAsyncResult& result) {
+        ASSERT(mWaitableEventsInFlight.find(result.taskSerial) != mWaitableEventsInFlight.end());
+        mCreateComputePipelineAsyncTaskResults.AddTaskResult(result);
     }
 
 }  // namespace dawn_native
