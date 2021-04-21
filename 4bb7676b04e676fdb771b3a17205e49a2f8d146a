@@ -39,6 +39,30 @@
       },
       "revId": "4bb7676b04e676fdb771b3a17205e49a2f8d146a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc5e78e_6f23b62a",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 709,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-04-21T07:48:08Z",
+      "side": 1,
+      "message": "We have added the buffer memory barrier for vkCmdFillBuffer and vkCmdCopyQueryPoolResults in Dawn. It can be reproduced in a pure Vulkan application and we also tried different kinds of barriers such as transfer barrier and memory barrier.",
+      "parentUuid": "25ac7530_81f97116",
+      "range": {
+        "startLine": 707,
+        "startChar": 4,
+        "endLine": 709,
+        "endChar": 26
+      },
+      "revId": "4bb7676b04e676fdb771b3a17205e49a2f8d146a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
