@@ -19,8 +19,11 @@
 #include "common/SerialQueue.h"
 #include "dawn/webgpu.h"
 #include "dawn_native/IntegerTypes.h"
+#include "dawn_platform/DawnPlatform.h"
 
+#include <map>
 #include <memory>
+#include <mutex>
 #include <string>
 
 namespace dawn_native {
@@ -28,6 +31,7 @@ namespace dawn_native {
     class ComputePipelineBase;
     class DeviceBase;
     class RenderPipelineBase;
+    struct ComputePipelineDescriptor;
 
     struct CreatePipelineAsyncTaskBase {
         CreatePipelineAsyncTaskBase(std::string errorMessage, void* userData);
@@ -85,6 +89,81 @@ namespace dawn_native {
         DeviceBase* mDevice;
         SerialQueue<ExecutionSerial, std::unique_ptr<CreatePipelineAsyncTaskBase>>
             mCreatePipelineAsyncTasksInFlight;
+    };
+
+    class WorkerTask {
+      public:
+        virtual ~WorkerTask() = default;
+        static void DoTask(void* userdata);
+
+      private:
+        virtual void Run() = 0;
+    };
+
+    // A thread-safe queue to save all the results from WorkerTask
+    template <class ResultType>
+    class ConcurrentTaskResultQueue {
+      public:
+        void AddTaskResult(const ResultType& result) {
+            std::lock_guard<std::mutex> lock(mMutex);
+            mResults.push_back(std::move(result));
+        }
+
+        std::vector<ResultType> FetchAllResultsAndClear() {
+            std::lock_guard<std::mutex> lock(mMutex);
+            std::vector<ResultType> output = mResults;
+            mResults.clear();
+            return output;
+        }
+
+        bool IsEmpty() {
+            std::lock_guard<std::mutex> lock(mMutex);
+            return mResults.empty();
+        }
+
+      private:
+        std::mutex mMutex;
+        std::vector<ResultType> mResults;
+    };
+
+    struct CreateComputePipelineAsyncResult {
+        Ref<ComputePipelineBase> computePipeline;
+        std::string errorMessage;
+        void* userData;
+        WGPUCreateComputePipelineAsyncCallback callback;
+        size_t blueprintHash;
+        size_t taskSerial;
+    };
+
+    class CreatePipelineAsyncTaskManagerBase {
+      public:
+        explicit CreatePipelineAsyncTaskManagerBase(DeviceBase* device);
+        virtual ~CreatePipelineAsyncTaskManagerBase();
+
+        void StartComputePipelineAsyncWaitableTask(const ComputePipelineDescriptor* descriptor,
+                                                   size_t blueprintHash,
+                                                   WGPUCreateComputePipelineAsyncCallback callback,
+                                                   void* userdata);
+        void AddCreateComputePipelineAsyncResult(const CreateComputePipelineAsyncResult& result);
+
+        void Tick();
+        void WaitAndRemoveAll(WGPUCreatePipelineAsyncStatus status);
+        bool HasWaitableTasksInFlight() const;
+
+      protected:
+        virtual std::unique_ptr<dawn_platform::WaitableEvent>
+        StartComputePipelineAsyncWaitableTaskImpl(const ComputePipelineDescriptor* descriptor,
+                                                  size_t blueprintHash,
+                                                  WGPUCreateComputePipelineAsyncCallback callback,
+                                                  void* userdata,
+                                                  size_t taskSerial) = 0;
+
+        DeviceBase* mDevice;
+
+        size_t mTaskSerial;
+        std::map<size_t, std::unique_ptr<dawn_platform::WaitableEvent>> mWaitableEventsInFlight;
+        ConcurrentTaskResultQueue<CreateComputePipelineAsyncResult>
+            mCreateComputePipelineAsyncTaskResults;
     };
 
 }  // namespace dawn_native
