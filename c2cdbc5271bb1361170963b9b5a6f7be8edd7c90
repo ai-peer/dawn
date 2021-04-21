@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcb5dddc_8223294f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-21T06:43:26Z",
+      "side": 1,
+      "message": "It looks ok, and we can make progress on async pipeline creation before other improvements to the abstraction in Dawn. I do think it\u0027d be good to see the callback queue and perhaps a more general way to handle tasks sooner than later. The number of things that happen inside Tick() keeps growing, and for every type of callback we have a new Tracker class to manage it.\n\nI think we should clearly comment on the various functions in this CL about what thread (worker / non-worker) we expect them to be called on. Right now I think it\u0027s prone to people adding / changing functionality that accidentally breaks thread-safety.",
+      "parentUuid": "f8a16091_0f6e805a",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4f8c17a_492fbbab",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 7
