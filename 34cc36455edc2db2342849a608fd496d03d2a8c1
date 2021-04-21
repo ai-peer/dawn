@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3eaf7e_88e82111",
+        "filename": "src/dawn_native/CreatePipelineAsyncTracker.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-21T12:23:38Z",
+      "side": 1,
+      "message": "Now I need it in the latest patch. :-)",
+      "parentUuid": "ce194c9d_2d8cf580",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e2c85ff_3b1b96e1",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-20T18:18:30Z",
       "side": 1,
       "message": "I think this isn\u0027t needed if we call LoadDxcLibrary, LoadDxcCompiler and gather the DXC info on device creation (when the toggle is enabled).\n\nThis can be a prep CL.",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e6979f_0a799cef",
+        "filename": "src/dawn_native/d3d12/BackendD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-21T12:23:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e2c85ff_3b1b96e1",
       "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "875a3f2d_c9e1b216",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-21T12:23:38Z",
+      "side": 1,
+      "message": "Hi Corentin, in the latest CL I just put the completed results into a concurrent queue, and in each tick() we just need to check if that concurrent queue is empty or not.\n\nPTAL, thanks!",
+      "parentUuid": "010279ce_649b8fe0",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbf05590_b36dd76a",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 9
@@ -99,6 +153,24 @@
       "writtenOn": "2021-04-20T18:18:30Z",
       "side": 1,
       "message": "Why do we need to increment the serial?",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9213550_22d1090a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-21T12:23:38Z",
+      "side": 1,
+      "message": "It is because in this patch we need to check if there is any completed CreateComputePipelineAsync tasks in DeviceBase::Tick(), while DeviceBase::Tick() will early return if we don\u0027t increase the serial.",
+      "parentUuid": "fbf05590_b36dd76a",
       "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

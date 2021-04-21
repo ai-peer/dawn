@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eab7c262_c00b7945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-21T12:23:38Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin,\n\nThanks for your comments! In this CL I\u0027d like to discuss with you about the overall design, so I may not be so careful about many details (sorry about that!). I am expecting that when we can meet the agreement on the basic infrastructure, I can split this CL into smaller ones to address all of your comments and implement this feature completely step by step.\n\nPTAL, thanks!",
+      "revId": "7a554d54bf87ae6650e47faba08b2418fb39e01e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
