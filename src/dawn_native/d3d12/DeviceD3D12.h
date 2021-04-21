@@ -183,6 +183,11 @@ namespace dawn_native { namespace d3d12 {
         HANDLE mFenceEvent = nullptr;
         ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
 
+        void CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                            size_t blueprintHash,
+                                            WGPUCreateComputePipelineAsyncCallback callback,
+                                            void* userdata) override;
+
         ComPtr<ID3D12Device> mD3d12Device;  // Device is owned by adapter and will not be outlived.
         ComPtr<ID3D12CommandQueue> mCommandQueue;
         ComPtr<ID3D12SharingContract> mD3d12SharingContract;

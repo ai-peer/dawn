@@ -120,6 +120,9 @@ namespace dawn_native { namespace d3d12 {
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
 
+        mCreatePipelineAsyncTaskManager =
+            std::make_unique<CreateComputePipelineAsyncTaskManager>(this);
+
         // ShaderVisibleDescriptorAllocators use the ResidencyManager and must be initialized after.
         DAWN_TRY_ASSIGN(
             mSamplerShaderVisibleDescriptorAllocator,
@@ -258,6 +261,12 @@ namespace dawn_native { namespace d3d12 {
         mDepthStencilViewAllocator->Tick(completedSerial);
         mUsedComObjectRefs.ClearUpTo(completedSerial);
 
+        mCreatePipelineAsyncTaskManager->Tick();
+        // Increase serial to force Device call TickImpl() in the next DeviceBase::Tick().
+        if (mCreatePipelineAsyncTaskManager->HasWaitableTasksInFlight()) {
+            DAWN_TRY(NextSerial());
+        }
+
         if (mPendingCommands.IsOpen()) {
             DAWN_TRY(ExecutePendingCommandContext());
             DAWN_TRY(NextSerial());
@@ -362,6 +371,13 @@ namespace dawn_native { namespace d3d12 {
         TextureBase* texture,
         const TextureViewDescriptor* descriptor) {
         return TextureView::Create(texture, descriptor);
+    }
+
+    void Device::CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
+                                                size_t blueprintHash,
+                                                WGPUCreateComputePipelineAsyncCallback callback,
+                                                void* userdata) {
+        ComputePipeline::CreateAsync(this, descriptor, blueprintHash, callback, userdata);
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {

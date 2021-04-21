@@ -67,4 +67,61 @@ namespace dawn_native { namespace d3d12 {
         return mPipelineState.Get();
     }
 
+    void ComputePipeline::CreateAsync(Device* device,
+                                      const ComputePipelineDescriptor* descriptor,
+                                      size_t blueprintHash,
+                                      WGPUCreateComputePipelineAsyncCallback callback,
+                                      void* userdata) {
+        device->GetCreatePipelineAsyncTaskManager()->StartComputePipelineAsyncWaitableTask(
+            descriptor, blueprintHash, callback, userdata);
+    }
+
+    CreateComputePipelineAsyncTask::CreateComputePipelineAsyncTask(
+        Device* device,
+        size_t taskSerial,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : mDevice(device),
+          mEntryPoint(descriptor->computeStage.entryPoint),
+          mComputeShaderModule(descriptor->computeStage.module) {
+        mResult.computePipeline = AcquireRef(new ComputePipeline(device, descriptor));
+        mResult.userData = userdata;
+        mResult.callback = callback;
+        mResult.blueprintHash = blueprintHash;
+        mResult.taskSerial = taskSerial;
+    }
+
+    void CreateComputePipelineAsyncTask::Run() {
+        ComputePipelineDescriptor descriptor;
+
+        // Only set useful members of descriptor
+        descriptor.computeStage.entryPoint = mEntryPoint.c_str();
+        descriptor.computeStage.module = mComputeShaderModule.Get();
+        MaybeError maybeError = ToBackend(mResult.computePipeline)->Initialize(&descriptor);
+
+        if (maybeError.IsError()) {
+            mResult.computePipeline = nullptr;
+            mResult.errorMessage = maybeError.AcquireError()->GetMessage();
+        }
+
+        mComputeShaderModule = nullptr;
+        mDevice->GetCreatePipelineAsyncTaskManager()->AddCreateComputePipelineAsyncResult(mResult);
+    }
+
+    std::unique_ptr<dawn_platform::WaitableEvent>
+    CreateComputePipelineAsyncTaskManager::StartComputePipelineAsyncWaitableTaskImpl(
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata,
+        size_t taskSerial) {
+        // task will be protected by a std::unique_ptr in CreateComputePipelineAsyncTask::DoTask()
+        CreateComputePipelineAsyncTask* task = new CreateComputePipelineAsyncTask(
+            ToBackend(mDevice), taskSerial, descriptor, blueprintHash, callback, userdata);
+        return mDevice->GetWorkerTaskPool()->PostWorkerTask(CreateComputePipelineAsyncTask::DoTask,
+                                                            task);
+    }
+
 }}  // namespace dawn_native::d3d12
