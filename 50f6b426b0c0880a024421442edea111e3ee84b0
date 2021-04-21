@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6127d051_4e2c5df2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-21T21:51:28Z",
+      "side": 1,
+      "message": "nit: typo\n\nmaybe \"ValidateSingleSType\" ? I feel like \"singleton\" might be confusing with the singletone design pattern",
+      "range": {
+        "startLine": 18,
+        "startChar": 3,
+        "endLine": 18,
+        "endChar": 25
+      },
+      "revId": "50f6b426b0c0880a024421442edea111e3ee84b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d52f99_09749ccb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-21T21:51:28Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "50f6b426b0c0880a024421442edea111e3ee84b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
