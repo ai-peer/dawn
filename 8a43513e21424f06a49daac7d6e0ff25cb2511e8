@@ -34,6 +34,24 @@
       "parentUuid": "451939f3_66e2bdf4",
       "revId": "8a43513e21424f06a49daac7d6e0ff25cb2511e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7531a99_324d468a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-21T11:11:40Z",
+      "side": 1,
+      "message": "Thank you. You can eitehr abandon or repurpose this CL.",
+      "parentUuid": "4d517356_042a448b",
+      "revId": "8a43513e21424f06a49daac7d6e0ff25cb2511e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
