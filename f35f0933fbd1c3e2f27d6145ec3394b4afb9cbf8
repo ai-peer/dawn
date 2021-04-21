@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2bea803_79a28ea8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-21T08:52:56Z",
+      "side": 1,
+      "message": "Xeon, this CL now has CR+2 so you can press the \"Submit to CQ\" button. Note that at the moment something is broken in the CQ so it will fail. We\u0027re looking at fixing that now.",
+      "revId": "f35f0933fbd1c3e2f27d6145ec3394b4afb9cbf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
