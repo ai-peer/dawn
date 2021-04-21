@@ -645,6 +645,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d131273_876204af",
+        "filename": "src/dawn/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-21T05:59:37Z",
+      "side": 1,
+      "message": "Resolved in another CL",
+      "parentUuid": "5d5ebdd0_f3e7c96b",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddaf6c70_c6956896",
@@ -817,6 +835,24 @@
       "side": 1,
       "message": "Sure. We may keep 3 macro here and define them like this.\n\n#if defined(_WIN32) || defined(_WIN64)\n#    define DAWN_PLATFORM_WINDOWS 1\n#    if WINAPI_FAMILY \u003d\u003d WINAPI_FAMILY_DESKTOP_APP\n#        define DAWN_PLATFORM_WIN32 1\n#    elif WINAPI_FAMILY \u003d\u003d WINAPI_FAMILY_PC_APP\n#        define DAWN_PLATFORM_WINUWP 1\n#    else\n#        error \"Unsupported Windows platform\"\n#    endif",
       "parentUuid": "7e79be18_23738688",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9055b4a2_efd173bd",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-21T05:59:37Z",
+      "side": 1,
+      "message": "I think it\u0027s better to have this resolved and move the discussion to the CL focusing on compilation for UWP",
+      "parentUuid": "aed3e717_b6da490d",
       "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
