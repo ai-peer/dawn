@@ -1131,6 +1131,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e16b17e9_5156364c",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-21T06:01:06Z",
+      "side": 1,
+      "message": "I think it\u0027s better to have this resolved and move the discussion to the CL focusing on compilation for UWP",
+      "parentUuid": "cbcfd112_f421baaa",
+      "revId": "60abdada3c7eca2a3c253f839b5bed2279b62b29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4899cc14_d517e780",
