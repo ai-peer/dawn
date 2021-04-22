@@ -19,9 +19,9 @@
 #include "dawn_native/Instance.h"
 #include "dawn_native/SwapChain.h"
 
-#if defined(DAWN_PLATFORM_WINDOWS)
-#    include "common/windows_with_undefs.h"
-#endif  // DAWN_PLATFORM_WINDOWS
+#if defined(DAWN_PLATFORM_WINUWP)
+#    include <windows.ui.core.h>
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
 #if defined(DAWN_USE_X11)
 #    include "common/xlib_with_undefs.h"
@@ -40,9 +40,10 @@ namespace dawn_native {
         }
 
         DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-            wgpu::SType::SurfaceDescriptorFromMetalLayer,
-            wgpu::SType::SurfaceDescriptorFromWindowsHWND,
-            wgpu::SType::SurfaceDescriptorFromXlib));
+                                     wgpu::SType::SurfaceDescriptorFromMetalLayer,
+                                     wgpu::SType::SurfaceDescriptorFromWindowsHWND,
+                                     wgpu::SType::SurfaceDescriptorFromWindowsCoreWindow,
+                                     wgpu::SType::SurfaceDescriptorFromXlib));
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)
         const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
@@ -67,6 +68,20 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Invalid HWND");
         }
 #endif  // defined(DAWN_PLATFORM_WIN32)
+
+#if defined(DAWN_PLATFORM_WINUWP)
+        const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
+        FindInChain(descriptor->nextInChain, &coreWindowDesc);
+        if (!coreWindowDesc) {
+            return DAWN_VALIDATION_ERROR("Unsupported sType");
+        }
+        // Validate the coreWindow by query for ICoreWindow interface
+        ComPtr<ABI::Windows::UI::Core::ICoreWindow> coreWindow;
+        if (FAILED(reinterpret_cast<IUnknown*>(coreWindowDesc->coreWindow)
+                       ->QueryInterface(IID_PPV_ARGS(&coreWindow)))) {
+            return DAWN_VALIDATION_ERROR("Invalid CoreWindow");
+        }
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
 #if defined(DAWN_USE_X11)
         const SurfaceDescriptorFromXlib* xDesc = nullptr;
@@ -98,22 +113,33 @@ namespace dawn_native {
         ASSERT(descriptor->nextInChain != nullptr);
         const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
         const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
+        const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
         const SurfaceDescriptorFromXlib* xDesc = nullptr;
         FindInChain(descriptor->nextInChain, &metalDesc);
         FindInChain(descriptor->nextInChain, &hwndDesc);
+        FindInChain(descriptor->nextInChain, &coreWindowDesc);
         FindInChain(descriptor->nextInChain, &xDesc);
         ASSERT(metalDesc || hwndDesc || xDesc);
         if (metalDesc) {
             mType = Type::MetalLayer;
             mMetalLayer = metalDesc->layer;
         } else if (hwndDesc) {
+#if defined(DAWN_PLATFORM_WIN32)
             mType = Type::WindowsHWND;
             mHInstance = hwndDesc->hinstance;
             mHWND = hwndDesc->hwnd;
+#endif
+        } else if (coreWindowDesc) {
+#if defined(DAWN_PLATFORM_WINUWP)
+            mType = Type::WindowsCoreWindow;
+            mCoreWindow = static_cast<IUnknown*>(coreWindowDesc->coreWindow);
+#endif
         } else if (xDesc) {
             mType = Type::Xlib;
             mXDisplay = xDesc->display;
             mXWindow = xDesc->window;
+        } else {
+            UNREACHABLE();
         }
     }
 
@@ -145,14 +171,24 @@ namespace dawn_native {
         return mMetalLayer;
     }
 
+#if defined(DAWN_PLATFORM_WIN32)
     void* Surface::GetHInstance() const {
         ASSERT(mType == Type::WindowsHWND);
         return mHInstance;
     }
+
     void* Surface::GetHWND() const {
         ASSERT(mType == Type::WindowsHWND);
         return mHWND;
     }
+#endif  // defined(DAWN_PLATFORM_WIN32)
+
+#if defined(DAWN_PLATFORM_WINUWP)
+    IUnknown* Surface::GetCoreWindow() const {
+        ASSERT(mType == Type::WindowsCoreWindow);
+        return mCoreWindow.Get();
+    }
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
     void* Surface::GetXDisplay() const {
         ASSERT(mType == Type::Xlib);
