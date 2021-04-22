@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "285e0412_3edd80b0",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T16:00:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "95dfdcf0_d1bd3f9f",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 19
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8707e11_71cd20ea",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab58a019_50b46bbb",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T16:00:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a8707e11_71cd20ea",
+      "range": {
+        "startLine": 179,
+        "startChar": 39,
+        "endLine": 179,
+        "endChar": 57
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffaa32de_c03b6b0c",
@@ -94,6 +142,30 @@
       "writtenOn": "2021-04-22T15:33:28Z",
       "side": 1,
       "message": "I don\u0027t understand what you mean by \"but LoadFunctions can still be successfully executed\". There is no code here that skips calling LoadDXIL and LoadDXCompiler for UWP. Is that expected to come in a separate change? If so please put a bug number here that\u0027s assigned to you. If not, please explain in a comment.",
+      "range": {
+        "startLine": 179,
+        "startChar": 59,
+        "endLine": 180,
+        "endChar": 33
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b922549_609c8b9d",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T16:00:11Z",
+      "side": 1,
+      "message": "I mean d3dcompiler.dll won\u0027t be loaded. but since they are optional, LoadFunction can still be executed successfully because we don\u0027t have DAWN_TRY around LoadDXCLibraries()",
+      "parentUuid": "ffaa32de_c03b6b0c",
       "range": {
         "startLine": 179,
         "startChar": 59,
