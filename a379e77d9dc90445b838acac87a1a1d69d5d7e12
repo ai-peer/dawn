@@ -16,6 +16,23 @@
       "message": "LGTM with no additional comments! The CQ tests are failing for an unrelated reason.",
       "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbef683b_9fbe8469",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-22T10:10:32Z",
+      "side": 1,
+      "message": "Rafael, do you have any other comments? If not, can you CR+2?",
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
