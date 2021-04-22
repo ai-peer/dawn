@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b3b82da_d9c39ef5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T12:09:55Z",
+      "side": 1,
+      "message": "Currently I can only provide a Visual Studio project for examples. Need some time to figure it out how to integrate it with GN.\nAngle seems to mock a CoreWindow for testing. I\u0027ll take a look.",
+      "parentUuid": "05377c18_780f1464",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14c70e18_7f4ff017",
