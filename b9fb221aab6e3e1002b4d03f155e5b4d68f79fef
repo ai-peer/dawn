@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88a0a5f5_ce43b704",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-22T13:10:25Z",
+      "side": 1,
+      "message": "I\u0027m not too familiar with the Windows SDK compatibility: aren\u0027t applications using newer version of the SDK able to contain calls to new APIs without breaking compatibility with older Windows? Rafael, do you know?",
+      "parentUuid": "cde87b8d_a52cd62c",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "664cfeb6_96a824a2",
         "filename": "src/dawn_native/Surface.h",
         "patchSetId": 1
