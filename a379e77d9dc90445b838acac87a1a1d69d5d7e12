@@ -33,6 +33,75 @@
       "message": "Rafael, do you have any other comments? If not, can you CR+2?",
       "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95dfdcf0_d1bd3f9f",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-22T15:33:28Z",
+      "side": 1,
+      "message": "Nit: Staticly -\u003e Statically",
+      "range": {
+        "startLine": 177,
+        "startChar": 11,
+        "endLine": 177,
+        "endChar": 19
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8707e11_71cd20ea",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-22T15:33:28Z",
+      "side": 1,
+      "message": "Nit: \"will failed in UWP\" -\u003e \"will fail in UWP\"",
+      "range": {
+        "startLine": 179,
+        "startChar": 39,
+        "endLine": 179,
+        "endChar": 57
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffaa32de_c03b6b0c",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-22T15:33:28Z",
+      "side": 1,
+      "message": "I don\u0027t understand what you mean by \"but LoadFunctions can still be successfully executed\". There is no code here that skips calling LoadDXIL and LoadDXCompiler for UWP. Is that expected to come in a separate change? If so please put a bug number here that\u0027s assigned to you. If not, please explain in a comment.",
+      "range": {
+        "startLine": 179,
+        "startChar": 59,
+        "endLine": 180,
+        "endChar": 33
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
