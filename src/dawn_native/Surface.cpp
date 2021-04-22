@@ -18,9 +18,9 @@
 #include "dawn_native/Instance.h"
 #include "dawn_native/SwapChain.h"
 
-#if defined(DAWN_PLATFORM_WINDOWS)
-#    include "common/windows_with_undefs.h"
-#endif  // DAWN_PLATFORM_WINDOWS
+#if defined(DAWN_PLATFORM_WINUWP)
+#    include <windows.ui.core.h>
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
 #if defined(DAWN_USE_X11)
 #    include "common/xlib_with_undefs.h"
@@ -73,6 +73,20 @@ namespace dawn_native {
                 break;
             }
 #endif  // defined(DAWN_PLATFORM_WIN32)
+#if defined(DAWN_PLATFORM_WINUWP)
+            case wgpu::SType::SurfaceDescriptorFromWindowsCoreWindow: {
+                const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc =
+                    static_cast<const SurfaceDescriptorFromWindowsCoreWindow*>(chainedDescriptor);
+
+                // Validate the coreWindow by query for ICoreWindow interface
+                ComPtr<ABI::Windows::UI::Core::ICoreWindow> coreWindow;
+                if (FAILED(reinterpret_cast<IUnknown*>(coreWindowDesc->coreWindow)
+                               ->QueryInterface(IID_PPV_ARGS(&coreWindow)))) {
+                    return DAWN_VALIDATION_ERROR("Invalid CoreWindow");
+                }
+                break;
+            }
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
 #if defined(DAWN_USE_X11)
             case wgpu::SType::SurfaceDescriptorFromXlib: {
@@ -121,6 +135,8 @@ namespace dawn_native {
                 break;
             }
 
+#if defined(DAWN_PLATFORM_WIN32)
+            // todo only win32 can pass this case
             case wgpu::SType::SurfaceDescriptorFromWindowsHWND: {
                 const SurfaceDescriptorFromWindowsHWND* hwndDesc =
                     static_cast<const SurfaceDescriptorFromWindowsHWND*>(chainedDescriptor);
@@ -129,6 +145,17 @@ namespace dawn_native {
                 mHWND = hwndDesc->hwnd;
                 break;
             }
+#endif  // defined(DAWN_PLATFORM_WIN32)
+
+#if defined(DAWN_PLATFORM_WINUWP)
+            case wgpu::SType::SurfaceDescriptorFromWindowsCoreWindow: {
+                const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc =
+                    static_cast<const SurfaceDescriptorFromWindowsCoreWindow*>(chainedDescriptor);
+                mType = Type::WindowsCoreWindow;
+                mCoreWindow = reinterpret_cast<IUnknown*>(coreWindowDesc->coreWindow);
+                break;
+            }
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
             case wgpu::SType::SurfaceDescriptorFromXlib: {
                 const SurfaceDescriptorFromXlib* xDesc =
@@ -172,14 +199,24 @@ namespace dawn_native {
         return mMetalLayer;
     }
 
+#if defined(DAWN_PLATFORM_WIN32)
     void* Surface::GetHInstance() const {
         ASSERT(mType == Type::WindowsHWND);
         return mHInstance;
     }
+
     void* Surface::GetHWND() const {
         ASSERT(mType == Type::WindowsHWND);
         return mHWND;
     }
+#endif  // defined(DAWN_PLATFORM_WIN32)
+
+#if defined(DAWN_PLATFORM_WINUWP)
+    IUnknown* Surface::GetCoreWindow() const {
+        ASSERT(mType == Type::WindowsCoreWindow);
+        return mCoreWindow.Get();
+    }
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
     void* Surface::GetXDisplay() const {
         ASSERT(mType == Type::Xlib);

@@ -149,6 +149,7 @@
         "client_side_structures": [
             "SurfaceDescriptorFromMetalLayer",
             "SurfaceDescriptorFromWindowsHWND",
+            "SurfaceDescriptorFromWindowsCoreWindow",
             "SurfaceDescriptorFromXlib"
         ],
         "client_side_commands": [

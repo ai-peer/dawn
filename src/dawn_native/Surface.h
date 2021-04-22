@@ -21,6 +21,13 @@
 
 #include "dawn_native/dawn_platform.h"
 
+#include "common/Platform.h"
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    include "common/windows_with_undefs.h"
+#    include "dawn_native/d3d12/d3d12_platform.h"
+#endif  // defined(DAWN_PLATFORM_WINDOWS)
+
 namespace dawn_native {
 
     MaybeError ValidateSurfaceDescriptor(const InstanceBase* instance,
@@ -39,16 +46,22 @@ namespace dawn_native {
         NewSwapChainBase* GetAttachedSwapChain();
 
         // These are valid to call on all Surfaces.
-        enum class Type { MetalLayer, WindowsHWND, Xlib };
+        enum class Type { MetalLayer, WindowsHWND, WindowsCoreWindow, Xlib };
         Type GetType() const;
         InstanceBase* GetInstance();
 
         // Valid to call if the type is MetalLayer
         void* GetMetalLayer() const;
 
+#if defined(DAWN_PLATFORM_WIN32)
         // Valid to call if the type is WindowsHWND
         void* GetHInstance() const;
         void* GetHWND() const;
+#endif  // defined(DAWN_PLATFORM_WIN32)
+#if defined(DAWN_PLATFORM_WINUWP)
+        // Valid to call if the type is WindowsCoreWindow
+        IUnknown* GetCoreWindow() const;
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
         // Valid to call if the type is WindowsXlib
         void* GetXDisplay() const;
@@ -65,10 +78,15 @@ namespace dawn_native {
 
         // MetalLayer
         void* mMetalLayer = nullptr;
-
+#if defined(DAWN_PLATFORM_WIN32)
         // WindowsHwnd
         void* mHInstance = nullptr;
         void* mHWND = nullptr;
+#endif  // defined(DAWN_PLATFORM_WIN32)
+#if defined(DAWN_PLATFORM_WINUWP)
+        // WindowsCoreWindow
+        ComPtr<IUnknown> mCoreWindow = nullptr;
+#endif  // defined(DAWN_PLATFORM_WINUWP)
 
         // Xlib
         void* mXDisplay = nullptr;
