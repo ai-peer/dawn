@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05377c18_780f1464",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-22T10:09:33Z",
+      "side": 1,
+      "message": "LGTM!\n\nIf CoreWindow is available outside of UWP, it would be nice to have a sample in a followup CL that we can use to test that the CoreWindow swapchain works.\n\nManualSwapChainTests could work, but could also be difficult to change for CoreWindow because it heavily relies on GLFW and GLFW doesn\u0027t support CoreWindow.",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14c70e18_7f4ff017",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-22T10:09:33Z",
+      "side": 1,
+      "message": "Is CoreWindow only available on UWP? I looked at https://docs.microsoft.com/en-us/uwp/api/Windows.UI.Core.CoreWindow?view\u003dwinrt-19041 but can\u0027t tell where we know it is only available for UWP.",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "664cfeb6_96a824a2",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-22T10:09:33Z",
+      "side": 1,
+      "message": "I have some concerns about making each part of Surface compiled only when supported because it will make the file messy for not much gain. By keeping things untyped (void* here), the only #ifs needed are for ValidateSurfaceDescriptor.\n\nI understand this is to add ComPtr\u003c\u003e, but webgpu.h will ask that the Window is kept alive for the lifetime of the wgpu::Surface, so we don\u0027t need to take a reference.\n\nAustin: I\u0027d like a second opinion on this. Do you think the untyped version is best, or should we add #ifs for X11 and Metal too?",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
