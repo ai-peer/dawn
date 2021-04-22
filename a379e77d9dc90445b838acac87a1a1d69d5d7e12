@@ -174,6 +174,30 @@
       },
       "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec5fbd7_a4d529d4",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T17:02:37Z",
+      "side": 1,
+      "message": "And need more time to investigate whether D3dCompiler supports UWP. If it\u0027s not supported, I will add code to skip these call in another CL.",
+      "parentUuid": "8b922549_609c8b9d",
+      "range": {
+        "startLine": 179,
+        "startChar": 59,
+        "endLine": 180,
+        "endChar": 33
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
