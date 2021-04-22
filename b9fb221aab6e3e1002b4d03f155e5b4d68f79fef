@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cde87b8d_a52cd62c",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T12:01:56Z",
+      "side": 1,
+      "message": "CoreWindow is exposed as a WinRT classes so all win32 app can access it. But we can\u0027t create CoreWindow in win32 app.\nBut the main reason I make it available only in UWP is that I thought Dawn might be targeting older windows version(Win7/8/8.1), So I thought I\u0027d better not add WinRT related code path in Win32 compilation.",
+      "parentUuid": "14c70e18_7f4ff017",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "664cfeb6_96a824a2",
         "filename": "src/dawn_native/Surface.h",
         "patchSetId": 1
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-22T10:09:33Z",
       "side": 1,
       "message": "I have some concerns about making each part of Surface compiled only when supported because it will make the file messy for not much gain. By keeping things untyped (void* here), the only #ifs needed are for ValidateSurfaceDescriptor.\n\nI understand this is to add ComPtr\u003c\u003e, but webgpu.h will ask that the Window is kept alive for the lifetime of the wgpu::Surface, so we don\u0027t need to take a reference.\n\nAustin: I\u0027d like a second opinion on this. Do you think the untyped version is best, or should we add #ifs for X11 and Metal too?",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f58248e7_1a6ff035",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-22T12:01:56Z",
+      "side": 1,
+      "message": "I introduced this windows compilation path because I would like to store user\u0027s CoreWindow in ComPtr (Windows only type) as Rafael suggested in another CL.",
+      "parentUuid": "664cfeb6_96a824a2",
       "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
