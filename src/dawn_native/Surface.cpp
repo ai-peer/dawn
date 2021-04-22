@@ -20,8 +20,8 @@
 #include "dawn_native/SwapChain.h"
 
 #if defined(DAWN_PLATFORM_WINDOWS)
-#    include "common/windows_with_undefs.h"
-#endif  // DAWN_PLATFORM_WINDOWS
+#    include <windows.ui.core.h>
+#endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_USE_X11)
 #    include "common/xlib_with_undefs.h"
@@ -40,9 +40,10 @@ namespace dawn_native {
         }
 
         DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-            wgpu::SType::SurfaceDescriptorFromMetalLayer,
-            wgpu::SType::SurfaceDescriptorFromWindowsHWND,
-            wgpu::SType::SurfaceDescriptorFromXlib));
+                                     wgpu::SType::SurfaceDescriptorFromMetalLayer,
+                                     wgpu::SType::SurfaceDescriptorFromWindowsHWND,
+                                     wgpu::SType::SurfaceDescriptorFromWindowsCoreWindow,
+                                     wgpu::SType::SurfaceDescriptorFromXlib));
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)
         const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
@@ -56,7 +57,8 @@ namespace dawn_native {
         }
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
-#if defined(DAWN_PLATFORM_WIN32)
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    if defined(DAWN_PLATFORM_WIN32)
         const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
         FindInChain(descriptor->nextInChain, &hwndDesc);
         if (!hwndDesc) {
@@ -66,7 +68,27 @@ namespace dawn_native {
         if (IsWindow(static_cast<HWND>(hwndDesc->hwnd)) == 0) {
             return DAWN_VALIDATION_ERROR("Invalid HWND");
         }
-#endif  // defined(DAWN_PLATFORM_WIN32)
+#    endif  // defined(DAWN_PLATFORM_WIN32)
+
+        const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
+        FindInChain(descriptor->nextInChain, &coreWindowDesc);
+        if (!coreWindowDesc) {
+            return DAWN_VALIDATION_ERROR("Unsupported sType");
+        }
+
+        // Validate the coreWindow by query for ICoreWindow interface
+        ComPtr<ABI::Windows::UI::Core::ICoreWindow> coreWindow;
+        // TODO(dawn:766)
+        // Using QueryInterface to validate CoreWindow can only work
+        // when coreWindowDesc->coreWindow is a pointer to COM objects.
+        // Should add other validations here to make sure
+        // coreWindowDesc->coreWindow is a valid COM pointer.
+        if (coreWindowDesc->coreWindow != nullptr &&
+            FAILED(reinterpret_cast<IUnknown*>(coreWindowDesc->coreWindow)
+                       ->QueryInterface(IID_PPV_ARGS(&coreWindow)))) {
+            return DAWN_VALIDATION_ERROR("Invalid CoreWindow");
+        }
+#endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_USE_X11)
         const SurfaceDescriptorFromXlib* xDesc = nullptr;
@@ -98,22 +120,33 @@ namespace dawn_native {
         ASSERT(descriptor->nextInChain != nullptr);
         const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
         const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
+        const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
         const SurfaceDescriptorFromXlib* xDesc = nullptr;
         FindInChain(descriptor->nextInChain, &metalDesc);
         FindInChain(descriptor->nextInChain, &hwndDesc);
+        FindInChain(descriptor->nextInChain, &coreWindowDesc);
         FindInChain(descriptor->nextInChain, &xDesc);
         ASSERT(metalDesc || hwndDesc || xDesc);
         if (metalDesc) {
             mType = Type::MetalLayer;
             mMetalLayer = metalDesc->layer;
         } else if (hwndDesc) {
+#if defined(DAWN_PLATFORM_WIN32)
             mType = Type::WindowsHWND;
             mHInstance = hwndDesc->hinstance;
             mHWND = hwndDesc->hwnd;
+#endif  // defined(DAWN_PLATFORM_WIN32)
+        } else if (coreWindowDesc) {
+#if defined(DAWN_PLATFORM_WINDOWS)
+            mType = Type::WindowsCoreWindow;
+            mCoreWindow = static_cast<IUnknown*>(coreWindowDesc->coreWindow);
+#endif  // defined(DAWN_PLATFORM_WINDOWS)
         } else if (xDesc) {
             mType = Type::Xlib;
             mXDisplay = xDesc->display;
             mXWindow = xDesc->window;
+        } else {
+            UNREACHABLE();
         }
     }
 
@@ -145,14 +178,24 @@ namespace dawn_native {
         return mMetalLayer;
     }
 
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    if defined(DAWN_PLATFORM_WIN32)
     void* Surface::GetHInstance() const {
         ASSERT(mType == Type::WindowsHWND);
         return mHInstance;
     }
+
     void* Surface::GetHWND() const {
         ASSERT(mType == Type::WindowsHWND);
         return mHWND;
     }
+#    endif  // defined(DAWN_PLATFORM_WIN32)
+
+    IUnknown* Surface::GetCoreWindow() const {
+        ASSERT(mType == Type::WindowsCoreWindow);
+        return mCoreWindow.Get();
+    }
+#endif  // defined(DAWN_PLATFORM_WINDOWS)
 
     void* Surface::GetXDisplay() const {
         ASSERT(mType == Type::Xlib);
