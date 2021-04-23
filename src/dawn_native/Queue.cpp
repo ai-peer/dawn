@@ -122,7 +122,7 @@ namespace dawn_native {
             return uploadHandle;
         }
 
-        struct SubmittedWorkDone : QueueBase::TaskInFlight {
+        struct SubmittedWorkDone : CallbackTaskInFlight {
             SubmittedWorkDone(WGPUQueueWorkDoneCallback callback, void* userdata)
                 : mCallback(callback), mUserdata(userdata) {
             }
@@ -158,13 +158,11 @@ namespace dawn_native {
 
     // QueueBase
 
-    QueueBase::TaskInFlight::~TaskInFlight() {
+    QueueBase::QueueBase(DeviceBase* device) : ObjectBase(device), mTasksInFlight(device) {
     }
 
-    QueueBase::QueueBase(DeviceBase* device) : ObjectBase(device) {
-    }
-
-    QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag) : ObjectBase(device, tag) {
+    QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag)
+        : ObjectBase(device, tag), mTasksInFlight(device) {
     }
 
     QueueBase::~QueueBase() {
@@ -217,8 +215,8 @@ namespace dawn_native {
         TrackTask(std::move(task), GetDevice()->GetPendingCommandSerial());
     }
 
-    void QueueBase::TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial) {
-        mTasksInFlight.Enqueue(std::move(task), serial);
+    void QueueBase::TrackTask(std::unique_ptr<CallbackTaskInFlight> task, ExecutionSerial serial) {
+        mTasksInFlight.AddCallback(std::move(task), serial);
         GetDevice()->AddFutureSerial(serial);
     }
 
@@ -228,11 +226,8 @@ namespace dawn_native {
         // To prevent the reentrant call from invalidating mTasksInFlight while in use by the first
         // call, we remove the tasks to finish from the queue, update mTasksInFlight, then run the
         // callbacks.
-        std::vector<std::unique_ptr<TaskInFlight>> tasks;
-        for (auto& task : mTasksInFlight.IterateUpTo(finishedSerial)) {
-            tasks.push_back(std::move(task));
-        }
-        mTasksInFlight.ClearUpTo(finishedSerial);
+        std::vector<std::unique_ptr<CallbackTaskInFlight>> tasks =
+            mTasksInFlight.AcquireCallbacksWithFinishedSerial(finishedSerial);
 
         for (auto& task : tasks) {
             task->Finish();
@@ -240,10 +235,11 @@ namespace dawn_native {
     }
 
     void QueueBase::HandleDeviceLoss() {
-        for (auto& task : mTasksInFlight.IterateAll()) {
+        std::vector<std::unique_ptr<CallbackTaskInFlight>> tasks =
+            mTasksInFlight.AcquireAllCallbacks();
+        for (auto& task : tasks) {
             task->HandleDeviceLoss();
         }
-        mTasksInFlight.Clear();
     }
 
     Fence* QueueBase::APICreateFence(const FenceDescriptor* descriptor) {

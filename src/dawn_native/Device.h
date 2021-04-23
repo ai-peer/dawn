@@ -34,13 +34,14 @@ namespace dawn_native {
     class AttachmentState;
     class AttachmentStateBlueprint;
     class BindGroupLayoutBase;
-    class CreatePipelineAsyncTracker;
+    class CallbackQueue;
     class DynamicUploader;
     class ErrorScopeStack;
     class ExternalTextureBase;
     class OwnedCompilationMessages;
     class PersistentCache;
     class StagingBufferBase;
+    struct CallbackTaskInFlight;
     struct InternalPipelineStore;
     struct ShaderModuleParseResult;
 
@@ -359,6 +360,8 @@ namespace dawn_native {
         void AssumeCommandsComplete();
         bool IsDeviceIdle();
 
+        void AddCallback(std::unique_ptr<CallbackTaskInFlight> task, ExecutionSerial serial);
+
         // mCompletedSerial tracks the last completed command serial that the fence has returned.
         // mLastSubmittedSerial tracks the last submitted command serial.
         // During device removal, the serials could be artificially incremented
@@ -404,7 +407,6 @@ namespace dawn_native {
         Ref<BindGroupLayoutBase> mEmptyBindGroupLayout;
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
-        std::unique_ptr<CreatePipelineAsyncTracker> mCreatePipelineAsyncTracker;
         Ref<QueueBase> mQueue;
 
         struct DeprecationWarnings;
@@ -423,6 +425,8 @@ namespace dawn_native {
         std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
 
         std::unique_ptr<PersistentCache> mPersistentCache;
+
+        std::unique_ptr<CallbackQueue> mCallbackQueue;
     };
 
 }  // namespace dawn_native

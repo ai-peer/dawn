@@ -15,10 +15,9 @@
 #ifndef DAWNNATIVE_QUEUE_H_
 #define DAWNNATIVE_QUEUE_H_
 
-#include "common/SerialQueue.h"
+#include "dawn_native/CallbackQueue.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
-#include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -27,11 +26,6 @@ namespace dawn_native {
 
     class QueueBase : public ObjectBase {
       public:
-        struct TaskInFlight {
-            virtual ~TaskInFlight();
-            virtual void Finish() = 0;
-            virtual void HandleDeviceLoss() = 0;
-        };
 
         static QueueBase* MakeError(DeviceBase* device);
         ~QueueBase() override;
@@ -61,7 +55,7 @@ namespace dawn_native {
                                uint64_t bufferOffset,
                                const void* data,
                                size_t size);
-        void TrackTask(std::unique_ptr<TaskInFlight> task, ExecutionSerial serial);
+        void TrackTask(std::unique_ptr<CallbackTaskInFlight> task, ExecutionSerial serial);
         void Tick(ExecutionSerial finishedSerial);
         void HandleDeviceLoss();
 
@@ -106,7 +100,7 @@ namespace dawn_native {
 
         void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
-        SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
+        CallbackQueue mTasksInFlight;
     };
 
 }  // namespace dawn_native
