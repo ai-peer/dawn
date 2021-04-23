@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "48c0c7df_4218169d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-23T12:39:48Z",
+      "side": 1,
+      "message": "\"There is no need for DAWN_PLATFORM_WINUWP define at all\".\nBut we still need to separate code path like Dynamic libs loading and HWND related APIs are not going to compile in UWP. \nfor example: \nLoadLibraryA used in DynamicLib.cpp gets compiled only if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)\nIsWindow() used for surface validation gets compiled only if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)\n\n\"The same exact binary of Dawn\"\nIs this binary are built without setting target_os\u003d\"winuwp\" ? If you are using a DLL compiling for win32 in a UWP app, I think LoadFunction() in PlatformFunction.cpp will failed because UWPs have a limited DLL search space. Have you done other things to make it work ?\n\n\"And I need SwapChainForComposition in Desktop build as well\"\nI will add SwapChainForComposition in another CL. This API supports creating swapchain for SwapChainPanel and IDCompositionVisual, but we currently decided to support only one of them.\nWhat do you think of using SwapChainPanel instead of IDCompositionVisual, since MS recommend using Windows.UI.Composition APIs instead of DirectComposition now.",
+      "parentUuid": "b9fea9cd_496a8ba4",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14c70e18_7f4ff017",
         "filename": "src/dawn_native/Surface.cpp",
         "patchSetId": 1
