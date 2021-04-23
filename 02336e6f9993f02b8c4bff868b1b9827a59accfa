@@ -34,6 +34,24 @@
       "parentUuid": "24ac6ec2_39ae3022",
       "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b083874c_45e9ce3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000801
+      },
+      "writtenOn": "2021-04-23T12:09:42Z",
+      "side": 1,
+      "message": "I\u0027ve meant \"allowed since some time ago\".\nAPI restrictions for UWP were relaxed greatly since original inception.\nAnd with each new Windows SDK release, MS allows more and more classic Win32 APIs. They are basically merging both worlds.\n\nDocumentation is lagging behind though, so the best way is to use WACK, and consult with %ProgramFiles(x86)%\\Windows Kits\\10\\App Certification Kit\\SupportedAPIs-x86.xml\n\nI do not see any use for LoadPackagedLibrary in Dawn. It won\u0027t load d3d11.dll or d3d12.dll anyway.",
+      "parentUuid": "aa301b05_580cef6b",
+      "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
