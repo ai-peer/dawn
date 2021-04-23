@@ -92,11 +92,10 @@ config("dawn_internal") {
   # Enable more warnings that were found when using Dawn in other projects
   if (is_clang) {
     cflags += [
+      # TODO(https://crbug.com/1201858): Enable -Wdeprecated-copy and -Wdeprecated-copy-dtor?
       "-Wconditional-uninitialized",
       "-Wcstring-format-directive",
       "-Wc++11-narrowing",
-      "-Wdeprecated-copy",
-      "-Wdeprecated-copy-dtor",
       "-Wduplicate-enum",
       "-Wextra-semi-stmt",
       "-Wimplicit-fallthrough",
