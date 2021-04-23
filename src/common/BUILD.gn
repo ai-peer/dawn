@@ -95,8 +95,6 @@ config("dawn_internal") {
       "-Wconditional-uninitialized",
       "-Wcstring-format-directive",
       "-Wc++11-narrowing",
-      "-Wdeprecated-copy",
-      "-Wdeprecated-copy-dtor",
       "-Wduplicate-enum",
       "-Wextra-semi-stmt",
       "-Wimplicit-fallthrough",
@@ -111,6 +109,13 @@ config("dawn_internal") {
       "-Wstrict-prototypes",
       "-Wtautological-unsigned-zero-compare",
     ]
+    if (!build_with_chromium) {
+      cflags += [
+        # These fire with Chromium's Clang (https://crbug.com/1201858)
+        "-Wdeprecated-copy",
+        "-Wdeprecated-copy-dtor",
+      ]
+    }
 
     if (is_win) {
       cflags += [
