@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f8a54f9_4d08d914",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-23T03:06:01Z",
+      "side": 1,
+      "message": "Is there a compatibility requirement for Win7/8.1 and older versions of Win10 ?\nI see a a comment in PlatformFunction.h saying \"Loads the functions required from the platform dynamically so that we don\u0027t need to rely on them being present in the system. For example linking against d3d12.lib would prevent dawn_native from loading on Windows 7 system where d3d12.dll doesn\u0027t exist.\" so I think we might be targeting Win7 as well.",
+      "parentUuid": "88a0a5f5_ce43b704",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "664cfeb6_96a824a2",
         "filename": "src/dawn_native/Surface.h",
         "patchSetId": 1
