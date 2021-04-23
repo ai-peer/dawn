@@ -38,6 +38,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9fea9cd_496a8ba4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000801
+      },
+      "writtenOn": "2021-04-23T10:23:45Z",
+      "side": 1,
+      "message": "There is no need for DAWN_PLATFORM_WINUWP define at all.\nThese COM API\u0027s are safe to use on older versions of Windows.\nThey are just addresses in interface vtbl after all.\n\nMy app uses customized Dawn in both UWP and Desktop builds.\nThe same exact binary of Dawn. The only change I\u0027ve made is CreateSwapChainForComposition support. And I need SwapChainForComposition in Desktop build as well, because it runs on XAML Islands.\n\nSwapChainForComposition is also very useful for classic HWND apps which prefer DirectComposition presentation without redirection bitmap.",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14c70e18_7f4ff017",
         "filename": "src/dawn_native/Surface.cpp",
         "patchSetId": 1
