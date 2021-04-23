@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40bfc422_cabd02c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-23T08:44:17Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, I\u0027ve just filed the issue (dawn:769) to implement CallbackQueue and assigned myself as the owner.\n\nPTAL, thanks!",
+      "parentUuid": "bcb5dddc_8223294f",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4f8c17a_492fbbab",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 7
