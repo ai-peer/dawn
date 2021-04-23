@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc36ed5d_ae33b089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000082
+      },
+      "writtenOn": "2021-04-23T14:10:38Z",
+      "side": 1,
+      "message": "The warning is firing with newer versions of Clang (see bug). This blocks updating Clang in Chromium.\n\nSince it\u0027s not a particularly useful warning, let\u0027s turn it off.\n\n\nFAILED: obj/third_party/dawn/src/dawn_platform/dawn_platform_shared/WorkerThread.obj \n[..]\nIn file included from ../../third_party/dawn/src/dawn_platform/WorkerThread.cpp:15:\nIn file included from ../../third_party/dawn/src\\dawn_platform/WorkerThread.h:19:\n../../third_party/dawn/src/include\\dawn_platform/DawnPlatform.h(67,17): error: definition of implicit copy assignment operator for \u0027WaitableEvent\u0027 is deprecated because it has a user-declared destructor [-Werror,-Wdeprecated-copy-with-dtor]\n        virtual ~WaitableEvent() \u003d default;\n                ^\n../../third_party/dawn/src/include\\dawn_platform/DawnPlatform.h(64,32): note: in implicit copy assignment operator for \u0027dawn_platform::WaitableEvent\u0027 first required here\n    class DAWN_PLATFORM_EXPORT WaitableEvent {\n                               ^\n../../third_party/dawn/src/include\\dawn_platform/DawnPlatform.h(64,11): note: due to \u0027WaitableEvent\u0027 being dllexported\n    class DAWN_PLATFORM_EXPORT WaitableEvent {\n          ^",
+      "revId": "a1d986f63fb92975435ba01b6b764bdbb5872d80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
