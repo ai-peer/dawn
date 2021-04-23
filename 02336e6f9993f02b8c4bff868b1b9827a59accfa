@@ -52,6 +52,24 @@
       "parentUuid": "aa301b05_580cef6b",
       "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26401df9_b92b6c39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-23T13:20:19Z",
+      "side": 1,
+      "message": "Hey Vladimir:\n\"I\u0027d prefer Dawn to link D3D at build-time though.\":\nLoadPackagedLibrary APIs can\u0027t find those DLLs because they are not in UWP\u0027s DLL search space. And LoadLibrary is not defined if WINAPI_FAMILY\u003d\u003dWINAPI_FAMILY_PC_APP.\n\n\"I do not see any use for LoadPackagedLibrary in Dawn\":\nTrue. LoadPackagedLibrary is not used. It\u0027s just a replacement of original LoadLibraryA for UWP since LoadLibraryA is not defined in WINAPI_FAMILY_PC_APP, otherwise it will stop the compilation.\n\nHey Corentin:\n\"then it makes sense to prepare and just use LoadPackagedLibrary\":\nWin32 version should keep using LoadLibrary. It\u0027s addressed here: \"Desktop applications cannot use LoadPackagedLibrary; if a desktop application calls this function it fails with APPMODEL_ERROR_NO_PACKAGE.\"\nhttps://docs.microsoft.com/en-us/windows/win32/api/winbase/nf-winbase-loadpackagedlibrary",
+      "parentUuid": "b083874c_45e9ce3a",
+      "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
