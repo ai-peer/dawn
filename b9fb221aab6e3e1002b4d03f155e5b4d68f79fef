@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33a148d4_87378664",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000801
+      },
+      "writtenOn": "2021-04-23T13:06:28Z",
+      "side": 1,
+      "message": "I am using cmake, and building for UWP with -DCMAKE_SYSTEM_NAME:STRING\u003dWindowsStore, have zero issues with LoadLibraryA and WACK. \n\nYep, SwapChainPanel is used in both my Desktop and UWP builds. \nOriginally DirectComposition was used to support Windows 7, but I\u0027ve dropped it and gone forward with XAML Islands for Desktop.\n\nIsWindow() call is totally removed in my case. I understand it may cause problems, so why not use WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) directly instead of DAWN_PLATFORM_WINUWP?",
+      "parentUuid": "48c0c7df_4218169d",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14c70e18_7f4ff017",
         "filename": "src/dawn_native/Surface.cpp",
         "patchSetId": 1
