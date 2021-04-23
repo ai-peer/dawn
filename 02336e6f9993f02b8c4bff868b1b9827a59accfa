@@ -16,6 +16,24 @@
       "message": "By the way, my UWP app passes all WACK tests perfectly fine with old LoadLibraryA code (because it is actually allowed by Microsoft for some time now).\nSo this LoadPackagedLibrary additions make little to no sense for UWP support.\n\nI\u0027d prefer Dawn to link D3D at build-time though.\nWhat\u0027s the reason it loads D3D12 \u0026 D3D11 at runtime?\nTo support Windows 7 \u0026 Windows 8.x?\n",
       "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa301b05_580cef6b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-23T11:42:04Z",
+      "side": 1,
+      "message": "You said \"allowed for now\", so is the plan that it won\u0027t be supported in the future? If yes, then it makes sense to prepare and just use LoadPackagedLibrary.\n\nYes, Dawn loads D3D11/12 at runtime to support other versions of Windows.",
+      "parentUuid": "24ac6ec2_39ae3022",
+      "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
