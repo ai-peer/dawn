@@ -125,10 +125,10 @@ namespace dawn_native {
         mCaches = std::make_unique<DeviceBase::Caches>();
         mErrorScopeStack = std::make_unique<ErrorScopeStack>();
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
-        mCreatePipelineAsyncTracker = std::make_unique<CreatePipelineAsyncTracker>(this);
         mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
         mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
         mPersistentCache = std::make_unique<PersistentCache>(this);
+        mCallbackQueue = std::make_unique<CallbackQueue>(this);
 
         // Starting from now the backend can start doing reentrant calls so the device is marked as
         // alive.
@@ -140,12 +140,6 @@ namespace dawn_native {
     }
 
     void DeviceBase::ShutDownBase() {
-        // Skip handling device facilities if they haven't even been created (or failed doing so)
-        if (mState != State::BeingCreated) {
-            // Reject all async pipeline creations.
-            mCreatePipelineAsyncTracker->ClearForShutDown();
-        }
-
         // Disconnect the device, depending on which state we are currently in.
         switch (mState) {
             case State::BeingCreated:
@@ -179,6 +173,8 @@ namespace dawn_native {
             // ShutDownImpl() it may relinquish resources that will be freed by backends in the
             // ShutDownImpl() call.
             mQueue->Tick(GetCompletedCommandSerial());
+            ClearCallbackQueueForShutDown();
+
             // Call TickImpl once last time to clean up resources
             // Ignore errors so that we can continue with destruction
             IgnoreErrors(TickImpl());
@@ -188,7 +184,7 @@ namespace dawn_native {
         mState = State::Disconnected;
 
         mDynamicUploader = nullptr;
-        mCreatePipelineAsyncTracker = nullptr;
+        mCallbackQueue = nullptr;
         mPersistentCache = nullptr;
 
         mEmptyBindGroupLayout = nullptr;
@@ -768,7 +764,7 @@ namespace dawn_native {
         std::unique_ptr<CreateRenderPipelineAsyncTask> request =
             std::make_unique<CreateRenderPipelineAsyncTask>(std::move(result), "", callback,
                                                             userdata);
-        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
+        AddCallback(std::move(request), GetPendingCommandSerial());
     }
     RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
@@ -950,8 +946,7 @@ namespace dawn_native {
             // reclaiming resources one tick earlier.
             mDynamicUploader->Deallocate(mCompletedSerial);
             mQueue->Tick(mCompletedSerial);
-
-            mCreatePipelineAsyncTracker->Tick(mCompletedSerial);
+            ExecuteCompletedCallbacks(mCompletedSerial);
         }
 
         return {};
@@ -1160,7 +1155,7 @@ namespace dawn_native {
         std::unique_ptr<CreateComputePipelineAsyncTask> request =
             std::make_unique<CreateComputePipelineAsyncTask>(result, errorMessage, callback,
                                                              userdata);
-        mCreatePipelineAsyncTracker->TrackTask(std::move(request), GetPendingCommandSerial());
+        AddCallback(std::move(request), GetPendingCommandSerial());
     }
 
     ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::CreatePipelineLayout(
@@ -1357,6 +1352,37 @@ namespace dawn_native {
                 mEnabledToggles.Set(toggle, false);
                 mOverridenToggles.Set(toggle, true);
             }
+        }
+    }
+
+    void DeviceBase::AddCallback(std::unique_ptr<CallbackTaskInFlight> task,
+                                 ExecutionSerial serial) {
+        mCallbackQueue->AddCallback(std::move(task), serial);
+        AddFutureSerial(serial);
+    }
+
+    void DeviceBase::ClearCallbackQueueForShutDown() {
+        std::vector<std::unique_ptr<CallbackTaskInFlight>> callbacksInFlight =
+            mCallbackQueue->AcquireAllCallbacks();
+        for (auto& callback : callbacksInFlight) {
+            callback->HandleShutDown();
+        }
+    }
+
+    void DeviceBase::ExecuteCompletedCallbacks(ExecutionSerial serial) {
+        std::vector<std::unique_ptr<CallbackTaskInFlight>> callbacksInFlight;
+
+        if (IsLost()) {
+            callbacksInFlight = mCallbackQueue->AcquireAllCallbacks();
+            for (auto& callback : callbacksInFlight) {
+                callback->HandleDeviceLoss();
+            }
+            return;
+        }
+
+        callbacksInFlight = mCallbackQueue->AcquireCallbacksWithFinishedSerial(serial);
+        for (auto& callback : callbacksInFlight) {
+            callback->Finish();
         }
     }
 

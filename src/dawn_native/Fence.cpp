@@ -23,7 +23,7 @@
 
 namespace dawn_native {
 
-    struct FenceInFlight : QueueBase::TaskInFlight {
+    struct FenceInFlight : CallbackTaskInFlight {
         FenceInFlight(Ref<Fence> fence, FenceAPISerial value)
             : fence(std::move(fence)), value(value) {
         }

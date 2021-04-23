@@ -102,45 +102,4 @@ namespace dawn_native {
                                            "Device lost before callback", mUserData);
     }
 
-    CreatePipelineAsyncTracker::CreatePipelineAsyncTracker(DeviceBase* device) : mDevice(device) {
-    }
-
-    CreatePipelineAsyncTracker::~CreatePipelineAsyncTracker() {
-        ASSERT(mCreatePipelineAsyncTasksInFlight.Empty());
-    }
-
-    void CreatePipelineAsyncTracker::TrackTask(std::unique_ptr<CreatePipelineAsyncTaskBase> task,
-                                               ExecutionSerial serial) {
-        mCreatePipelineAsyncTasksInFlight.Enqueue(std::move(task), serial);
-        mDevice->AddFutureSerial(serial);
-    }
-
-    void CreatePipelineAsyncTracker::Tick(ExecutionSerial finishedSerial) {
-        // If a user calls Queue::Submit inside Create*PipelineAsync, then the device will be
-        // ticked, which in turns ticks the tracker, causing reentrance here. To prevent the
-        // reentrant call from invalidating mCreatePipelineAsyncTasksInFlight while in use by the
-        // first call, we remove the tasks to finish from the queue, update
-        // mCreatePipelineAsyncTasksInFlight, then run the callbacks.
-        std::vector<std::unique_ptr<CreatePipelineAsyncTaskBase>> tasks;
-        for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateUpTo(finishedSerial)) {
-            tasks.push_back(std::move(task));
-        }
-        mCreatePipelineAsyncTasksInFlight.ClearUpTo(finishedSerial);
-
-        for (auto& task : tasks) {
-            if (mDevice->IsLost()) {
-                task->HandleDeviceLoss();
-            } else {
-                task->Finish();
-            }
-        }
-    }
-
-    void CreatePipelineAsyncTracker::ClearForShutDown() {
-        for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateAll()) {
-            task->HandleShutDown();
-        }
-        mCreatePipelineAsyncTasksInFlight.Clear();
-    }
-
 }  // namespace dawn_native

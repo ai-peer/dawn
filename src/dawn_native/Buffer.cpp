@@ -30,7 +30,7 @@
 namespace dawn_native {
 
     namespace {
-        struct MapRequestTask : QueueBase::TaskInFlight {
+        struct MapRequestTask : CallbackTaskInFlight {
             MapRequestTask(Ref<BufferBase> buffer, MapRequestID id)
                 : buffer(std::move(buffer)), id(id) {
             }

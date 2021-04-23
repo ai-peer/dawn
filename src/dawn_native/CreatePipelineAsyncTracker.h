@@ -16,11 +16,9 @@
 #define DAWNNATIVE_CREATEPIPELINEASYNCTRACKER_H_
 
 #include "common/RefCounted.h"
-#include "common/SerialQueue.h"
 #include "dawn/webgpu.h"
-#include "dawn_native/IntegerTypes.h"
+#include "dawn_native/CallbackQueue.h"
 
-#include <memory>
 #include <string>
 
 namespace dawn_native {
@@ -29,20 +27,16 @@ namespace dawn_native {
     class DeviceBase;
     class RenderPipelineBase;
 
-    struct CreatePipelineAsyncTaskBase {
+    struct CreatePipelineAsyncTaskBase : CallbackTaskInFlight {
         CreatePipelineAsyncTaskBase(std::string errorMessage, void* userData);
-        virtual ~CreatePipelineAsyncTaskBase();
-
-        virtual void Finish() = 0;
-        virtual void HandleShutDown() = 0;
-        virtual void HandleDeviceLoss() = 0;
+        ~CreatePipelineAsyncTaskBase() override;
 
       protected:
         std::string mErrorMessage;
         void* mUserData;
     };
 
-    struct CreateComputePipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
+    struct CreateComputePipelineAsyncTask final : CreatePipelineAsyncTaskBase {
         CreateComputePipelineAsyncTask(Ref<ComputePipelineBase> pipeline,
                                        std::string errorMessage,
                                        WGPUCreateComputePipelineAsyncCallback callback,
@@ -57,7 +51,7 @@ namespace dawn_native {
         WGPUCreateComputePipelineAsyncCallback mCreateComputePipelineAsyncCallback;
     };
 
-    struct CreateRenderPipelineAsyncTask final : public CreatePipelineAsyncTaskBase {
+    struct CreateRenderPipelineAsyncTask final : CreatePipelineAsyncTaskBase {
         CreateRenderPipelineAsyncTask(Ref<RenderPipelineBase> pipeline,
                                       std::string errorMessage,
                                       WGPUCreateRenderPipelineAsyncCallback callback,
@@ -70,21 +64,6 @@ namespace dawn_native {
       private:
         Ref<RenderPipelineBase> mPipeline;
         WGPUCreateRenderPipelineAsyncCallback mCreateRenderPipelineAsyncCallback;
-    };
-
-    class CreatePipelineAsyncTracker {
-      public:
-        explicit CreatePipelineAsyncTracker(DeviceBase* device);
-        ~CreatePipelineAsyncTracker();
-
-        void TrackTask(std::unique_ptr<CreatePipelineAsyncTaskBase> task, ExecutionSerial serial);
-        void Tick(ExecutionSerial finishedSerial);
-        void ClearForShutDown();
-
-      private:
-        DeviceBase* mDevice;
-        SerialQueue<ExecutionSerial, std::unique_ptr<CreatePipelineAsyncTaskBase>>
-            mCreatePipelineAsyncTasksInFlight;
     };
 
 }  // namespace dawn_native
