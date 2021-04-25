@@ -158,7 +158,9 @@ namespace dawn_native { namespace d3d12 {
 
     MaybeError PlatformFunctions::LoadDXGI() {
 #if DAWN_PLATFORM_WINUWP
+#    if defined(_DEBUG)
         dxgiGetDebugInterface1 = &DXGIGetDebugInterface1;
+#    endif
         createDxgiFactory2 = &CreateDXGIFactory2;
 #else
         std::string error;
