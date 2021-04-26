@@ -70,6 +70,41 @@
       "parentUuid": "b083874c_45e9ce3a",
       "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bae855d3_65d7a146",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:07:57Z",
+      "side": 1,
+      "message": "Yeah sorry, I meant it makes sense to keep the logic in this CL as is.\n\nSince WINAPI_FAMILY\u003d\u003dWINAPI_FAMILY_PC_APP makes using LoadLibraryA a compilation error, let\u0027s go forward with the current approach and we can iterate in follow-up CLs if need be.",
+      "parentUuid": "26401df9_b92b6c39",
+      "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a211d38_64c6b913",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:07:57Z",
+      "side": 1,
+      "message": "Still LGTM, but I think we should squash https://dawn-review.googlesource.com/c/dawn/+/49040 in this CL and update the commit message.",
+      "revId": "02336e6f9993f02b8c4bff868b1b9827a59accfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -198,6 +198,30 @@
       },
       "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf59b147_4412b6f4",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:07:57Z",
+      "side": 1,
+      "message": "I think we can see in a follow-up after this CL.",
+      "parentUuid": "3ec5fbd7_a4d529d4",
+      "range": {
+        "startLine": 179,
+        "startChar": 59,
+        "endLine": 180,
+        "endChar": 33
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
