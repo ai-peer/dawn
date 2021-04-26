@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3343d6ba_625a33a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:05:46Z",
+      "side": 1,
+      "message": "LGTM, but it seems we should just squash inside https://dawn-review.googlesource.com/c/dawn/+/48480",
+      "revId": "2ba8882c528082ec6c21b5b945bf5f645ce9be76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff2388d_4581f8b5",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:05:46Z",
+      "side": 1,
+      "message": "Can we also have a short explanation of why we do this here are well?",
+      "revId": "2ba8882c528082ec6c21b5b945bf5f645ce9be76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
