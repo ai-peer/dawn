@@ -16,6 +16,91 @@
       "message": "PTAL, thanks!",
       "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab0e9a5f_33ede53f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:56:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3dfef11_4bb3147d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:56:14Z",
+      "side": 1,
+      "message": "Won\u0027t HandleError be called first and all in flight pipelines be cleared? Or can additional pipelines be added to the tracker after the device is lost?",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "268e4fe3_a66be966",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:56:14Z",
+      "side": 1,
+      "message": "nit: struct Foo {} mMember; is a bit too smart and extremely unusual in C++ code. IMHO it\u0027s better to be a bit more verbose to be have code that\u0027s more traditional.",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5379652_3e0fa9c9",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:56:14Z",
+      "side": 1,
+      "message": "nit: no need for a uniform buffer.",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "531ad62c_912e72d4",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:56:14Z",
+      "side": 1,
+      "message": "We don\u0027t use mTask except to assign it stuff so we could remove it.",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
