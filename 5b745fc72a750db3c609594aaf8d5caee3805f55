@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "385c598b_05dffa5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-04-26T07:13:51Z",
+      "side": 1,
+      "message": "Hi Corentin, \n\nI found that I can not run the try bot. The message shows:\n\n\u003e Dry run: Only full committers OR the CL owner if they have tryjob access are allowed to trigger CQ dry runs.\n\u003e Committers in this project are members of:\n\u003e \n\u003e  * https://chrome-infra-auth.appspot.com/auth/groups/project-dawn-committers\n\u003e Tryjob access is additionally granted to members of:\n\u003e  * https://chrome-infra-auth.appspot.com/auth/groups/project-dawn-tryjob-access\n\nCould you help me? Thanks!\n",
+      "revId": "5b745fc72a750db3c609594aaf8d5caee3805f55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
