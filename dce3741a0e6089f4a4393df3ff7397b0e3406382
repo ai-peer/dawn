@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fefa8fb_15bc5331",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T09:11:48Z",
+      "side": 1,
+      "message": "Just realized this now. Best practice when using git is to wrap commit messages to 80 characters. Many tools expect commit messages to have short lines. Can we wrap the lines in this commit message?",
+      "revId": "dce3741a0e6089f4a4393df3ff7397b0e3406382",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
