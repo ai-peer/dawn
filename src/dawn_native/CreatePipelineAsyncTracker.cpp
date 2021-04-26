@@ -116,6 +116,8 @@ namespace dawn_native {
     }
 
     void CreatePipelineAsyncTracker::Tick(ExecutionSerial finishedSerial) {
+        ASSERT(!mDevice->IsLost());
+
         // If a user calls Queue::Submit inside Create*PipelineAsync, then the device will be
         // ticked, which in turns ticks the tracker, causing reentrance here. To prevent the
         // reentrant call from invalidating mCreatePipelineAsyncTasksInFlight while in use by the
@@ -128,17 +130,20 @@ namespace dawn_native {
         mCreatePipelineAsyncTasksInFlight.ClearUpTo(finishedSerial);
 
         for (auto& task : tasks) {
-            if (mDevice->IsLost()) {
-                task->HandleDeviceLoss();
-            } else {
-                task->Finish();
-            }
+            task->Finish();
         }
     }
 
     void CreatePipelineAsyncTracker::ClearForShutDown() {
         for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateAll()) {
             task->HandleShutDown();
+        }
+        mCreatePipelineAsyncTasksInFlight.Clear();
+    }
+
+    void CreatePipelineAsyncTracker::ClearForDeviceLoss() {
+        for (auto& task : mCreatePipelineAsyncTasksInFlight.IterateAll()) {
+            task->HandleDeviceLoss();
         }
         mCreatePipelineAsyncTasksInFlight.Clear();
     }

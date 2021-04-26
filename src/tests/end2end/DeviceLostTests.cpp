@@ -91,6 +91,12 @@ class DeviceLostTest : public DawnTest {
         EXPECT_EQ(WGPUBufferMapAsyncStatus_DeviceLost, status);
         EXPECT_EQ(&fakeUserData, userdata);
     }
+
+    struct CreatePipelineAsyncTask {
+        wgpu::ComputePipeline computePipeline = nullptr;
+        bool isCompleted = false;
+        std::string message;
+    } mTask;
 };
 
 // Test that DeviceLostCallback is invoked when LostForTestimg is called
@@ -552,6 +558,35 @@ TEST_P(DeviceLostTest, DeviceLostDoesntCallUncapturedError) {
                                       mockErrorCallback.MakeUserdata(nullptr));
     EXPECT_CALL(mockErrorCallback, Call(_, _, _)).Times(Exactly(0));
     device.LoseForTesting();
+}
+
+// Test that WGPUCreatePipelineAsyncStatus_DeviceLost can be correctly returned when device is lost
+// before the callback of Create*PipelineAsync() is called.
+TEST_P(DeviceLostTest, DeviceLostBeforeCreatePipelineAsyncCallback) {
+    wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
+        [[block]] struct UniformBuffer {
+            pos : vec4<f32>;
+        };
+        [[group(0), binding(0)]] var<uniform> ubo : UniformBuffer;
+        [[stage(compute)]] fn main() {
+        })");
+
+    wgpu::ComputePipelineDescriptor descriptor;
+    descriptor.computeStage.module = csModule;
+    descriptor.computeStage.entryPoint = "main";
+
+    auto callback = [](WGPUCreatePipelineAsyncStatus status, WGPUComputePipeline returnPipeline,
+                       const char* message, void* userdata) {
+        EXPECT_EQ(WGPUCreatePipelineAsyncStatus::WGPUCreatePipelineAsyncStatus_DeviceLost, status);
+
+        CreatePipelineAsyncTask* task = static_cast<CreatePipelineAsyncTask*>(userdata);
+        task->computePipeline = nullptr;
+        task->isCompleted = true;
+        task->message = message;
+    };
+
+    device.CreateComputePipelineAsync(&descriptor, callback, &mTask);
+    SetCallbackAndLoseForTesting();
 }
 
 DAWN_INSTANTIATE_TEST(DeviceLostTest,
