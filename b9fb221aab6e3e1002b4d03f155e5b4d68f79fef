@@ -216,6 +216,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a77bb23_94851b23",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-26T14:59:43Z",
+      "side": 1,
+      "message": "After some investigations and experiments, CoreWindow related code should be working fine in Windows 7 since we only use the ICoreWindow interface definitions here, no external functions are introduced from my code. So I relax the restrictions and have CoreWindow related codes compiled in both win32 and UWP in latest patch.",
+      "parentUuid": "75e4dce8_8a0a2f8f",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "664cfeb6_96a824a2",
         "filename": "src/dawn_native/Surface.h",
         "patchSetId": 1
