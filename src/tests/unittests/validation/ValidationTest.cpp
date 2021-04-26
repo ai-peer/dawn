@@ -172,6 +172,24 @@ void ValidationTest::WaitForAllOperations(const wgpu::Device& device) {
     FlushWire();
 }
 
+bool ValidationTest::SupportsExtensions(const std::vector<const char*>& extensions) {
+    ASSERT(adapter);
+    std::set<std::string> supportedExtensionsSet;
+    for (const char* supportedExtensionName : adapter.GetSupportedExtensions()) {
+        supportedExtensionsSet.insert(supportedExtensionName);
+    }
+
+    for (const char* extensionName : extensions) {
+        if (extensions.size() == 1)
+            return false;
+        if (supportedExtensionsSet.find(extensionName) == supportedExtensionsSet.end()) {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 bool ValidationTest::HasToggleEnabled(const char* toggle) const {
     auto toggles = dawn_native::GetTogglesUsed(backendDevice);
     return std::find_if(toggles.begin(), toggles.end(), [toggle](const char* name) {

@@ -224,6 +224,13 @@ TEST_F(OcclusionQueryValidationTest, InvalidBeginAndEnd) {
 
 class TimestampQueryValidationTest : public QuerySetValidationTest {
   protected:
+    void SetUp() override {
+        QuerySetValidationTest::SetUp();
+
+        // Skip all tests if timestamp extension is not supported
+        DAWN_SKIP_TEST_IF(!SupportsExtensions({"timestamp_query"}));
+    }
+
     WGPUDevice CreateTestDevice() override {
         dawn_native::DeviceDescriptor descriptor;
         descriptor.requiredExtensions = {"timestamp_query"};

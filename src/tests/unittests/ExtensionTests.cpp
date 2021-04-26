@@ -44,7 +44,7 @@ class ExtensionTests : public testing::Test {
 
 // Test the creation of a device will fail if the requested extension is not supported on the
 // Adapter.
-TEST_F(ExtensionTests, AdapterWithRequiredExtensionDisabled) {
+TEST_F(ExtensionTests, DISABLED_AdapterWithRequiredExtensionDisabled) {
     const std::vector<const char*> kAllExtensionNames = GetAllExtensionNames();
     for (size_t i = 0; i < kTotalExtensionsCount; ++i) {
         dawn_native::Extension notSupportedExtension = static_cast<dawn_native::Extension>(i);
@@ -64,11 +64,11 @@ TEST_F(ExtensionTests, AdapterWithRequiredExtensionDisabled) {
 }
 
 // Test Device.GetEnabledExtensions() can return the names of the enabled extensions correctly.
-TEST_F(ExtensionTests, GetEnabledExtensions) {
+TEST_F(ExtensionTests, DISABLED_GetEnabledExtensions) {
     dawn_native::Adapter adapter(&mAdapterBase);
-    for (size_t i = 0; i < kTotalExtensionsCount; ++i) {
-        dawn_native::Extension extension = static_cast<dawn_native::Extension>(i);
-        const char* extensionName = ExtensionEnumToName(extension);
+    std::vector<const char*> extensions = adapter.GetSupportedExtensions();
+    for (size_t i = 0; i < extensions.size(); ++i) {
+        const char* extensionName = extensions[i];
 
         dawn_native::DeviceDescriptor deviceDescriptor;
         deviceDescriptor.requiredExtensions = {extensionName};

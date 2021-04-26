@@ -48,6 +48,7 @@ namespace dawn_native {
       public:
         DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor);
         virtual ~DeviceBase();
+        static DeviceBase* MakeError(AdapterBase* adapter);
 
         void HandleError(InternalErrorType type, const char* message);
 
@@ -283,6 +284,7 @@ namespace dawn_native {
         virtual float GetTimestampPeriodInNS() const = 0;
 
       protected:
+        DeviceBase(AdapterBase* adapter, ObjectBase::ErrorTag tag);
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
 

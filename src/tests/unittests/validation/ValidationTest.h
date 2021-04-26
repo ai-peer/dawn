@@ -97,6 +97,7 @@ class ValidationTest : public testing::Test {
 
   protected:
     virtual WGPUDevice CreateTestDevice();
+    bool SupportsExtensions(const std::vector<const char*>& extensions);
 
     std::unique_ptr<dawn_native::Instance> instance;
     dawn_native::Adapter adapter;

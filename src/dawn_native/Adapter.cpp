@@ -14,6 +14,8 @@
 
 #include "dawn_native/Adapter.h"
 
+#include "dawn_native/Device.h"
+
 #include "dawn_native/Instance.h"
 
 namespace dawn_native {
@@ -50,7 +52,8 @@ namespace dawn_native {
         const std::vector<const char*>& requestedExtensions) const {
         for (const char* extensionStr : requestedExtensions) {
             Extension extensionEnum = mInstance->ExtensionNameToEnum(extensionStr);
-            if (extensionEnum == Extension::InvalidEnum) {
+            if (extensionEnum == Extension::InvalidEnum ||
+                extensionEnum == Extension::TimestampQuery) {
                 return false;
             }
             if (!mSupportedExtensions.IsEnabled(extensionEnum)) {
@@ -71,7 +74,7 @@ namespace dawn_native {
         DeviceBase* result = nullptr;
 
         if (mInstance->ConsumedError(CreateDeviceInternal(&result, descriptor))) {
-            return nullptr;
+            return DeviceBase::MakeError(this);
         }
 
         return result;

@@ -48,6 +48,118 @@
 #include <unordered_set>
 
 namespace dawn_native {
+    namespace {
+
+        class ErrorDevice final : public DeviceBase {
+          public:
+            ErrorDevice(AdapterBase* adapter) : DeviceBase(adapter, ObjectBase::kError) {
+            }
+
+            ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
+                CommandEncoder* encoder,
+                const CommandBufferDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<std::unique_ptr<StagingBufferBase>> CreateStagingBuffer(
+                size_t size) override {
+                UNREACHABLE();
+            }
+            MaybeError CopyFromStagingToBuffer(StagingBufferBase* source,
+                                               uint64_t sourceOffset,
+                                               BufferBase* destination,
+                                               uint64_t destinationOffset,
+                                               uint64_t size) override {
+                UNREACHABLE();
+            }
+            MaybeError CopyFromStagingToTexture(const StagingBufferBase* source,
+                                                const TextureDataLayout& src,
+                                                TextureCopy* dst,
+                                                const Extent3D& copySizePixels) override {
+                UNREACHABLE();
+            }
+            uint32_t GetOptimalBytesPerRowAlignment() const override {
+                UNREACHABLE();
+            }
+            uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override {
+                UNREACHABLE();
+            }
+
+            float GetTimestampPeriodInNS() const override {
+                UNREACHABLE();
+            }
+
+          private:
+            ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
+                const BindGroupDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
+                const BindGroupLayoutDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<BufferBase>> CreateBufferImpl(
+                const BufferDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<ComputePipelineBase>> CreateComputePipelineImpl(
+                const ComputePipelineDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayoutImpl(
+                const PipelineLayoutDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<QuerySetBase>> CreateQuerySetImpl(
+                const QuerySetDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<RenderPipelineBase>> CreateRenderPipelineImpl(
+                const RenderPipelineDescriptor2* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<SamplerBase>> CreateSamplerImpl(
+                const SamplerDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<ShaderModuleBase>> CreateShaderModuleImpl(
+                const ShaderModuleDescriptor* descriptor,
+                ShaderModuleParseResult* parseResult) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<SwapChainBase>> CreateSwapChainImpl(
+                const SwapChainDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<NewSwapChainBase>> CreateSwapChainImpl(
+                Surface* surface,
+                NewSwapChainBase* previousSwapChain,
+                const SwapChainDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<TextureBase>> CreateTextureImpl(
+                const TextureDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(
+                TextureBase* texture,
+                const TextureViewDescriptor* descriptor) override {
+                UNREACHABLE();
+            }
+            ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override {
+                UNREACHABLE();
+            }
+            MaybeError TickImpl() override {
+                UNREACHABLE();
+            }
+            void ShutDownImpl() override {
+                UNREACHABLE();
+            }
+            MaybeError WaitForIdleForDestruction() override {
+                UNREACHABLE();
+            }
+        };
+
+    }  // anonymous namespace
 
     // DeviceBase sub-structures
 
@@ -93,6 +205,23 @@ namespace dawn_native {
 
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
+    }
+
+    DeviceBase::DeviceBase(AdapterBase* adapter, ObjectBase::ErrorTag tag)
+        : RefCounted(0), mInstance(adapter->GetInstance()), mAdapter(adapter) {
+        mState = State::Disconnected;
+        mQueue = AcquireRef(QueueBase::MakeError(this));
+        mCaches = std::make_unique<DeviceBase::Caches>();
+        mErrorScopeStack = std::make_unique<ErrorScopeStack>();
+        mDynamicUploader = std::make_unique<DynamicUploader>(this);
+        mCreatePipelineAsyncTracker = std::make_unique<CreatePipelineAsyncTracker>(this);
+        mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
+        mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
+        mPersistentCache = std::make_unique<PersistentCache>(this);
+    }
+
+    DeviceBase* DeviceBase::MakeError(AdapterBase* adapter) {
+        return new ErrorDevice(adapter);
     }
 
     DeviceBase::~DeviceBase() = default;

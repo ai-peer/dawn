@@ -14,6 +14,7 @@
 
 #include "tests/DawnTest.h"
 
+#include <iostream>
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/TestUtils.h"
 #include "utils/WGPUHelpers.h"
@@ -44,15 +45,6 @@ namespace {
 }  // anonymous namespace
 
 class BufferZeroInitTest : public DawnTest {
-  protected:
-    std::vector<const char*> GetRequiredExtensions() override {
-        std::vector<const char*> requiredExtensions = {};
-        if (SupportsExtensions({"timestamp_query"})) {
-            requiredExtensions.push_back("timestamp_query");
-        }
-        return requiredExtensions;
-    }
-
   public:
     wgpu::Buffer CreateBuffer(uint64_t size,
                               wgpu::BufferUsage usage,
@@ -1193,18 +1185,42 @@ TEST_P(BufferZeroInitTest, IndirectBufferForDispatchIndirect) {
     }
 }
 
+DAWN_INSTANTIATE_TEST(BufferZeroInitTest,
+                      D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      OpenGLESBackend({"nonzero_clear_resources_on_creation_for_testing"}),
+                      VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"}));
+
+class BufferZeroInitForQueriesTest : public DawnTest {
+  protected:
+    void SetUp() override {
+        DawnTest::SetUp();
+
+        // Skip all tests if timestamp extension is not supported
+        DAWN_SKIP_TEST_IF(!SupportsExtensions({"timestamp_query"}));
+    }
+
+    std::vector<const char*> GetRequiredExtensions() override {
+        std::vector<const char*> requiredExtensions = {};
+        if (SupportsExtensions({"timestamp_query"})) {
+            requiredExtensions.push_back("timestamp_query");
+        }
+
+        return requiredExtensions;
+    }
+
+  public:
+    wgpu::Buffer CreateBuffer(uint64_t size, wgpu::BufferUsage usage) {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = size;
+        descriptor.usage = usage;
+        return device.CreateBuffer(&descriptor);
+    }
+};
+
 // Test the buffer will be lazily initialized correctly when its first use is in resolveQuerySet
-TEST_P(BufferZeroInitTest, ResolveQuerySet) {
-    // Timestamp query is not supported on OpenGL
-    DAWN_SKIP_TEST_IF(IsOpenGL());
-
-    // TODO(hao.x.li@intel.com): Crash occurs if we only call WriteTimestamp in a command encoder
-    // without any copy commands on Metal on AMD GPU. See https://crbug.com/dawn/545.
-    DAWN_SKIP_TEST_IF(IsMetal() && IsAMD());
-
-    // Skip if timestamp extension is not supported on device
-    DAWN_SKIP_TEST_IF(!SupportsExtensions({"timestamp_query"}));
-
+TEST_P(BufferZeroInitForQueriesTest, ResolveQuerySet) {
     constexpr uint64_t kBufferSize = 16u;
     constexpr wgpu::BufferUsage kBufferUsage =
         wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::CopyDst;
@@ -1259,7 +1275,7 @@ TEST_P(BufferZeroInitTest, ResolveQuerySet) {
     }
 }
 
-DAWN_INSTANTIATE_TEST(BufferZeroInitTest,
+DAWN_INSTANTIATE_TEST(BufferZeroInitForQueriesTest,
                       D3D12Backend({"nonzero_clear_resources_on_creation_for_testing"}),
                       MetalBackend({"nonzero_clear_resources_on_creation_for_testing"}),
                       OpenGLBackend({"nonzero_clear_resources_on_creation_for_testing"}),
