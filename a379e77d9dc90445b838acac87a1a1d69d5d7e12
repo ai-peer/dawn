@@ -222,6 +222,30 @@
       },
       "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80634b0f_fcd7acbe",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-26T15:25:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cf59b147_4412b6f4",
+      "range": {
+        "startLine": 179,
+        "startChar": 59,
+        "endLine": 180,
+        "endChar": 33
+      },
+      "revId": "a379e77d9dc90445b838acac87a1a1d69d5d7e12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
