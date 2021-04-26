@@ -113,7 +113,7 @@ namespace dawn_native {
 
         // Create a device on this adapter, note that the interface will change to include at least
         // a device descriptor and a pointer to backend specific options.
-        // On an error, nullptr is returned.
+        // On an error, error device is returned.
         WGPUDevice CreateDevice(const DeviceDescriptor* deviceDescriptor = nullptr);
 
         // Reset the backend device object for testing purposes.

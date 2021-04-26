@@ -14,6 +14,8 @@
 
 #include "dawn_native/Adapter.h"
 
+#include "dawn_native/Device.h"
+
 #include "dawn_native/Instance.h"
 
 namespace dawn_native {
@@ -71,7 +73,7 @@ namespace dawn_native {
         DeviceBase* result = nullptr;
 
         if (mInstance->ConsumedError(CreateDeviceInternal(&result, descriptor))) {
-            return nullptr;
+            return DeviceBase::MakeError(this);
         }
 
         return result;

@@ -59,16 +59,16 @@ TEST_F(ExtensionTests, AdapterWithRequiredExtensionDisabled) {
         const char* extensionName = ExtensionEnumToName(notSupportedExtension);
         deviceDescriptor.requiredExtensions = std::vector<const char*>(1, extensionName);
         WGPUDevice deviceWithExtension = adapterWithoutExtension.CreateDevice(&deviceDescriptor);
-        ASSERT_EQ(nullptr, deviceWithExtension);
+        ASSERT(reinterpret_cast<dawn_native::DeviceBase*>(deviceWithExtension)->IsError());
     }
 }
 
 // Test Device.GetEnabledExtensions() can return the names of the enabled extensions correctly.
 TEST_F(ExtensionTests, GetEnabledExtensions) {
     dawn_native::Adapter adapter(&mAdapterBase);
-    for (size_t i = 0; i < kTotalExtensionsCount; ++i) {
-        dawn_native::Extension extension = static_cast<dawn_native::Extension>(i);
-        const char* extensionName = ExtensionEnumToName(extension);
+    std::vector<const char*> extensions = adapter.GetSupportedExtensions();
+    for (size_t i = 0; i < extensions.size(); ++i) {
+        const char* extensionName = extensions[i];
 
         dawn_native::DeviceDescriptor deviceDescriptor;
         deviceDescriptor.requiredExtensions = {extensionName};
