@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cb76e57_7fbedbd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T13:18:23Z",
+      "side": 1,
+      "message": "Sorry, I feel that communication lines have kind of broken down on the pipeline async stuff. I sent a meeting invite so we can discuss more tomorrow morning.\n\nThe gist of it, is that we need a mechanism to handle pure-CPU callbacks, which are going to be increasing in numbers. For GPU-related callbacks the current mechanism on the Queue makes sense and we needn\u0027t touch it. There are a number of problems that we are trying to solve though that can have a shared solution with a CallbackQueue that\u0027s just vector\u003cunique_ptr\u003ccallback\u003e\u003e+mutex (no SerialQueue).\n\n - Many places where we call callbacks we need to do special things to avoid iterator invalidation when the application calls Dawn inside a callback. (we would need that logic only in the CallbackQueue)\n - Other Dawn threads (like CreatePipelineAsync) want to call callbacks but the application needs to be in control of which threads callbacks are fired one.\n - Eventually wgpu::Device::Tick should be replaced (at least in the interface) with wgpu::Instance::ProcessEvents which is the only call during which callbacks can be called.\n\nFor createPipelineAsync, we could abuse this mechanism to enqueue a task that won\u0027t actually call a user callback but instead inject the pipeline in the Device\u0027s cache etc. It is a bit of a hack in the short term, but makes the code for createPipelineAsync much easier to be confident about.",
+      "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3996d1d_f013bed2",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T13:18:23Z",
+      "side": 1,
+      "message": "nit: also update CMakeLists.txt without the commas",
+      "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
