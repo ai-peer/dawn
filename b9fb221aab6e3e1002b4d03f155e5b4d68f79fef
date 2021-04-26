@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75e4dce8_8a0a2f8f",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:11:21Z",
+      "side": 1,
+      "message": "Yes Dawn needs to work on Win7+",
+      "parentUuid": "9f8a54f9_4d08d914",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "664cfeb6_96a824a2",
         "filename": "src/dawn_native/Surface.h",
         "patchSetId": 1
@@ -227,6 +245,24 @@
       "side": 1,
       "message": "I introduced this windows compilation path because I would like to store user\u0027s CoreWindow in ComPtr (Windows only type) as Rafael suggested in another CL.",
       "parentUuid": "664cfeb6_96a824a2",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372a2fb5_01b2bd24",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:11:21Z",
+      "side": 1,
+      "message": "I have a slight preference for keeping Surface as dumb as possible to avoid #if spaghetti here, but don\u0027t mind if we go the other way. Austin WDYT?",
+      "parentUuid": "f58248e7_1a6ff035",
       "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

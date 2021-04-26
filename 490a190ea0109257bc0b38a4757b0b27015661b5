@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8b3268c_496c3d42",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1944,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-26T08:11:21Z",
+      "side": 1,
+      "message": "The list doesn\u0027t need to be ordered and as to be kept in sync with https://github.com/webgpu-native/webgpu-headers as much as possible. That\u0027s why new entries should got to the bottom of the list (in this case 8)",
+      "revId": "490a190ea0109257bc0b38a4757b0b27015661b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
