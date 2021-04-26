@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "eea140068a503cf215230bd87a008f4aee90f6f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "032e795f_b5556a5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2021-04-26T11:22:24Z",
+      "side": 1,
+      "message": "Thanks! Don\u0027t have +2 perms though.",
+      "revId": "eea140068a503cf215230bd87a008f4aee90f6f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
