@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce19f54_393367bb",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-27T03:19:14Z",
+      "side": 1,
+      "message": "SurfaceDescriptorFromWindowsCoreWindow struct (coreWindowDesc\u0027s type) is from codegen so void* is the only option. I\u0027ll use static_cast in next patch.",
+      "parentUuid": "20dbcb32_afb623e3",
+      "range": {
+        "startLine": 88,
+        "startChar": 16,
+        "endLine": 89,
+        "endChar": 69
+      },
+      "revId": "ee8d772872faea525efa65f086b0f4916c7b06e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e9eca08b_ed4be1e3",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "335e658c_4e80d630",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-27T03:19:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e9eca08b_ed4be1e3",
+      "range": {
+        "startLine": 90,
+        "startChar": 36,
+        "endLine": 90,
+        "endChar": 46
+      },
+      "revId": "ee8d772872faea525efa65f086b0f4916c7b06e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "624625e6_6b9853e5",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-04-27T02:16:18Z",
       "side": 1,
       "message": "There should be no need for any of these ifdefs, particularly the DAWN_PLATFORM_WINDOWS one since SwapChainD3D12.cpp is a Windows-only file.",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 249,
+        "endChar": 36
+      },
+      "revId": "ee8d772872faea525efa65f086b0f4916c7b06e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d418045e_f61db48c",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-27T03:19:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "624625e6_6b9853e5",
       "range": {
         "startLine": 248,
         "startChar": 0,
