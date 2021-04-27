@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8cab07b_96aa3a62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-27T09:38:28Z",
+      "side": 1,
+      "message": "LGTM still with one comment for the validation. Feel free to CQ+2 after you\u0027ve addressed comments!",
+      "revId": "d6efe2bb3fa08c8088daff27d38fbaab2dccbbe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "681279b7_d3d485eb",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-27T09:38:28Z",
+      "side": 1,
+      "message": "nit: We don\u0027t need an else if here since we already validate there a single SType SurfaceDescriptor. So this could be like below.\n\nNote that the logic changed recently and it seems to have introduced a bug where we don\u0027t complain if the sType isn\u0027t supported at all. I\u0027ll make a fix after this CL lands.\n\n#if defined(DAWN_PLATFORM_WINDOWS)\n\n#    if defined(DAWN_PLATFORM_WIN32)\n        const SurfaceDescriptorFromWindowsHWND* hwndDesc \u003d nullptr;\n        FindInChain(descriptor-\u003enextInChain, \u0026hwndDesc);\n        if (hwndDesc) {\n            if (IsWindow(static_cast\u003cHWND\u003e(hwndDesc-\u003ehwnd)) \u003d\u003d 0) {\n                return DAWN_VALIDATION_ERROR(\"Invalid HWND\");\n            }\n            return {};\n        }\n#    endif  // defined(DAWN_PLATFORM_WIN32)\n\n        const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc \u003d nullptr;\n        FindInChain(descriptor-\u003enextInChain, \u0026coreWindowDesc);\n        if (coreWindowDesc) {\n            // Validate the coreWindow by querying for ICoreWindow interface\n            ComPtr\u003cABI::Windows::UI::Core::ICoreWindow\u003e coreWindow;\n            if (coreWindowDesc-\u003ecoreWindow !\u003d nullptr \u0026\u0026\n                FAILED(static_cast\u003cIUnknown*\u003e(coreWindowDesc-\u003ecoreWindow)\n                           -\u003eQueryInterface(IID_PPV_ARGS(\u0026coreWindow)))) {\n                return DAWN_VALIDATION_ERROR(\"Invalid CoreWindow\");\n            }\n            return {};\n        }\n#endif  // defined(DAWN_PLATFORM_WINDOWS)",
+      "revId": "d6efe2bb3fa08c8088daff27d38fbaab2dccbbe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f5ad874_72b3fd6f",
