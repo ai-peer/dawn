@@ -283,6 +283,24 @@
       "parentUuid": "f58248e7_1a6ff035",
       "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1f3bd1_91a1dd1c",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-04-27T02:16:18Z",
+      "side": 1,
+      "message": "My preference would be have the only #ifdef in this file be for the ComPtr line for ICoreWindow. \n\nAs a followon change, we should either have platform specific subclasses for each group of variables or add strong typing here for #ifdefs. The former seems preferable as it would remove the \"kitchen sink\" feeling this file currently has.",
+      "parentUuid": "372a2fb5_01b2bd24",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
