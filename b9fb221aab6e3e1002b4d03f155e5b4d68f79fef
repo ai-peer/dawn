@@ -301,6 +301,24 @@
       "parentUuid": "372a2fb5_01b2bd24",
       "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd57e44_6ed58452",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-27T04:03:04Z",
+      "side": 1,
+      "message": "I think Rafael\u0027s suggestion to only #ifdef the member ComPtr would be ok with me to keep the style of this file with minimal #ifdefs. So we could still remove the #ifdefs at [1] and just return nullptr from GetCoreWindow() if we\u0027re not compiling on Windows",
+      "parentUuid": "8b1f3bd1_91a1dd1c",
+      "revId": "b9fb221aab6e3e1002b4d03f155e5b4d68f79fef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

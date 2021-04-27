@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f5ad874_72b3fd6f",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-27T04:03:04Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d6efe2bb3fa08c8088daff27d38fbaab2dccbbe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
