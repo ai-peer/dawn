@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55c31562_2e72216d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-27T05:15:59Z",
+      "side": 1,
+      "message": "Oh after revisiting the original discussions[1] I found here maybe here we can just treat all of the callbacks being executed without device lost. If device is lost now, actually the newly created pipelines cannot be used anywhere else, and other on-flight create*PipelineAsync calls added after device lost will be cleared in any HandleError(). What do you think?\n\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/45842/3..4/src/dawn_native/CreatePipelineAsyncTracker.cpp",
+      "parentUuid": "f3dfef11_4bb3147d",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "268e4fe3_a66be966",
         "filename": "src/tests/end2end/DeviceLostTests.cpp",
         "patchSetId": 1
@@ -82,6 +100,24 @@
       "writtenOn": "2021-04-26T08:56:14Z",
       "side": 1,
       "message": "nit: struct Foo {} mMember; is a bit too smart and extremely unusual in C++ code. IMHO it\u0027s better to be a bit more verbose to be have code that\u0027s more traditional.",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5fb6cfa_54bf9873",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-27T05:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "268e4fe3_a66be966",
       "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f3984d2_311bc634",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-27T05:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5379652_3e0fa9c9",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "531ad62c_912e72d4",
@@ -116,6 +170,24 @@
       "writtenOn": "2021-04-26T08:56:14Z",
       "side": 1,
       "message": "We don\u0027t use mTask except to assign it stuff so we could remove it.",
+      "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5506ff9_300e1832",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-27T05:15:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "531ad62c_912e72d4",
       "revId": "f2727a8fb74916055945092aee1569c4b15a1cc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
