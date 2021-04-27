@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26349a42_c00f252e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-27T05:13:30Z",
+      "side": 1,
+      "message": "Thanks - I do think we can probably land the async pipeline work first and implement the CallbackQueue after. Either way is ok with me.",
+      "parentUuid": "40bfc422_cabd02c1",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4f8c17a_492fbbab",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 7
