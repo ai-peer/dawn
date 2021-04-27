@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a40703d1_9a6968b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-27T05:12:08Z",
+      "side": 1,
+      "message": "Sounds like you\u0027re going to have a meeting to discuss more about this - but my two cents:\n\nI think I might have Corentin\u0027s \"callback\" in \"vector\u003cunique_ptr\u003ccallback\u003e\u003e+mutex\" be a basic \"Task\" class with just a virtual void Run() method, perhaps constructible from std::function.\n\nWhenever something finishes, like popErrorScope, mapAsync, or createRenderPipelineAsync, etc. it would push a \"CallCallbackTask\" which is a std::function with bound arguments onto the callback queue. So, whenever tasks finish, whether asynchronously or synchronously, their results get stored in bound callbacks. Calling device.Tick() simply calls all of these std::functions.\n\nAfter having this basic Task mechanism, I think we could have createRenderPipelineAsync generate a WorkerTask that gets run on a some other thread. Completion of that WorkerTask would enqueue a CallCallbackTask on the CallbackQueue.\n\nI think having these two distinct CallbackQueue and WorkerTaskQueue makes a clear separation that tasks in WorkerTaskQueue are on a different thread and CallbackQueue is storage for results that we will give to the developer when they call device.Tick(). I also think it simplifies device destruction. Instead of having multiple types of trackers for everything, we have just a couple things to do:\n - Cancel all worker tasks - this will not call callbacks, but store Unknown/DeviceLost results into the CallbackQueue\n - Cancel all tasks on the GPU timeline - iterate all QueueBase tasks and put Unknown/DeviceLost results into the CallbackQueue \n - Flush the CallbackQueue",
+      "parentUuid": "1cb76e57_7fbedbd8",
+      "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3996d1d_f013bed2",
