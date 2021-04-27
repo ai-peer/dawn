@@ -50,6 +50,24 @@
       "message": "Just be sure the only functional change is this and the same one in Copy3DTextureToBuffer?",
       "revId": "cc228cd1b41ae7fe82262073f1ed58c500cfd706",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cee369be_d26c3224",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-27T14:09:46Z",
+      "side": 1,
+      "message": "Yeah. Parameter layer (and aspect, etc) is used to calculate subresource id for D3D12\u0027s CopyTextureRegion(). It always is 0 for 3D texture because there are no 3D array textures. This is also the reason I change the name from \"slice\" to \"layer\" to make it clearer.",
+      "parentUuid": "d000c64f_b843f9f7",
+      "revId": "cc228cd1b41ae7fe82262073f1ed58c500cfd706",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
