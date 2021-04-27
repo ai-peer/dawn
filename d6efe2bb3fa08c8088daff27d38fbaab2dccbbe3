@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66709818_9e04efc9",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-27T14:53:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "681279b7_d3d485eb",
+      "revId": "d6efe2bb3fa08c8088daff27d38fbaab2dccbbe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f5ad874_72b3fd6f",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-04-27T04:03:04Z",
       "side": 1,
       "message": "[1]",
+      "revId": "d6efe2bb3fa08c8088daff27d38fbaab2dccbbe3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf0b2350_e75b4bcf",
+        "filename": "src/dawn_native/Surface.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-27T14:53:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9f5ad874_72b3fd6f",
       "revId": "d6efe2bb3fa08c8088daff27d38fbaab2dccbbe3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
