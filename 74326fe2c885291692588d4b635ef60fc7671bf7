@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53703fb0_99caabcc",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-28T07:32:26Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "74326fe2c885291692588d4b635ef60fc7671bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15af5939_d2cfa82d",
         "filename": "src/dawn_native/Surface.cpp",
         "patchSetId": 9
@@ -14,6 +31,30 @@
       "writtenOn": "2021-04-27T21:12:45Z",
       "side": 1,
       "message": "Nit: We should add additional validation that fails things if you have both a coreWindowDesc and a hwndDesc at the same time.",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 73
+      },
+      "revId": "74326fe2c885291692588d4b635ef60fc7671bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ef17756_6c9a6d0a",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-28T07:32:26Z",
+      "side": 1,
+      "message": "Note: that\u0027s already present at [1].",
+      "parentUuid": "15af5939_d2cfa82d",
       "range": {
         "startLine": 74,
         "startChar": 12,
