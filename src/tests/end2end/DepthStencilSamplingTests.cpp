@@ -567,6 +567,10 @@ TEST_P(DepthStencilSamplingTest, SampleStencil) {
 TEST_P(DepthStencilSamplingTest, SampleExtraComponents) {
     // TODO(crbug.com/dawn/593): This test requires glTextureView, which is unsupported on GLES.
     DAWN_SKIP_TEST_IF(IsOpenGLES());
+
+    // TODO(crbug.com/dawn/770): Determine why this is failing on Windows Intel 630 OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
+
     // TODO(enga): In Metal, color textures' unspecified default components values
     // are (0, 0, 0, 1). Depth/stencil textures are undefined! Figure out what
     // to do here.

@@ -402,6 +402,9 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyStencil) {
     // T2TBothAspectsThenCopyNonRenderableStencil does not use RenderAttachment and works correctly.
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
 
+    // TODO(crbug.com/dawn/770): Determine why this is failing on Windows Intel 630 OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
+
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_depth_stencil_read"));
 
@@ -426,6 +429,9 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyStencil) {
 // Test that part of a non-renderable stencil aspect can be copied. Notably,
 // this test has different behavior on some platforms than T2TBothAspectsThenCopyStencil.
 TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyNonRenderableStencil) {
+    // TODO(crbug.com/dawn/770): Determine why this is failing on Windows Intel 630 OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
+
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_depth_stencil_read"));
 
@@ -454,6 +460,9 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyNonRenderableNonZeroMipStenc
     // Maybe has to do with the non-zero mip. Notably, a previous test
     // T2TBothAspectsThenCopyNonRenderableStencil works correctly.
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
+
+    // TODO(crbug.com/dawn/770): Determine why this is failing on Windows Intel 630 OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
 
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_depth_stencil_read"));
@@ -510,6 +519,9 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyStencilThenDepth) {
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_SKIP_TEST_IF(HasToggleEnabled("disable_depth_stencil_read"));
 
+    // TODO(crbug.com/dawn/770): Determine why this is failing on Windows Intel 630 OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
+
     constexpr uint32_t kWidth = 4;
     constexpr uint32_t kHeight = 4;
 
@@ -545,6 +557,9 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyDepthThenStencil) {
     // test T2TBothAspectsThenCopyStencil passes.
     // T2TBothAspectsThenCopyStencilThenDepth which checks stencil first also passes.
     DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
+
+    // TODO(crbug.com/dawn/770): Determine why this is failing on Windows Intel 630 OpenGL drivers.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
 
     // TODO(crbug.com/dawn/667): Work around the fact that some platforms are unable to read
     // stencil.
