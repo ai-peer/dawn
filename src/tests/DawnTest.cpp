@@ -37,10 +37,10 @@
 #include <sstream>
 #include <unordered_map>
 
-#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
 #    include "GLFW/glfw3.h"
 #    include "dawn_native/OpenGLBackend.h"
-#endif  // DAWN_ENABLE_BACKEND_OPENGL
+#endif  // DAWN_ENABLE_BACKEND_OPENGL || DAWN_ENABLE_BACKEND_OPENGLES
 
 namespace {
 
@@ -403,11 +403,16 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
     adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptions);
+#endif  // DAWN_ENABLE_BACKEND_OPENGL
+
+#ifdef DAWN_ENABLE_BACKEND_OPENGLES
 
     if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").empty()) {
         SetEnvironmentVar("ANGLE_DEFAULT_PLATFORM", "swiftshader");
     }
-
+    if (!glfwInit()) {
+        return instance;
+    }
     glfwDefaultWindowHints();
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
@@ -419,10 +424,10 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
 
     glfwMakeContextCurrent(mOpenGLESWindow);
     dawn_native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
-    adapterOptionsES.getProc = adapterOptions.getProc;
+    adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptionsES);
     glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-#endif  // DAWN_ENABLE_BACKEND_OPENGL
+#endif  // DAWN_ENABLE_BACKEND_OPENGLES
 
     return instance;
 }
@@ -906,10 +911,13 @@ void DawnTestBase::SetUp() {
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
     if (IsOpenGL()) {
         glfwMakeContextCurrent(gTestEnv->GetOpenGLWindow());
-    } else if (IsOpenGLES()) {
+    }
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+    if (IsOpenGLES()) {
         glfwMakeContextCurrent(gTestEnv->GetOpenGLESWindow());
     }
-#endif
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
 }
 
 void DawnTestBase::TearDown() {

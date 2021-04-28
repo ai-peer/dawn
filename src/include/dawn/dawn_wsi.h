@@ -73,7 +73,7 @@ struct DawnWSIContextMetal {
 };
 #endif
 
-#ifdef DAWN_ENABLE_BACKEND_OPENGL
+#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
 typedef struct {
 } DawnWSIContextGL;
 #endif

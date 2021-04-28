@@ -18,9 +18,9 @@
 
 #include "GLFW/glfw3.h"
 
-#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
 #    include "dawn_native/OpenGLBackend.h"
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
 
 namespace utils {
 
@@ -33,7 +33,7 @@ namespace utils {
 #if defined(DAWN_ENABLE_BACKEND_NULL)
     BackendBinding* CreateNullBinding(GLFWwindow* window, WGPUDevice device);
 #endif
-#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
     BackendBinding* CreateOpenGLBinding(GLFWwindow* window, WGPUDevice device);
 #endif
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
@@ -51,7 +51,7 @@ namespace utils {
         DAWN_UNUSED(window);
 
         if (type == wgpu::BackendType::OpenGL || type == wgpu::BackendType::OpenGLES) {
-#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
             glfwMakeContextCurrent(window);
             auto getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
             if (type == wgpu::BackendType::OpenGL) {
@@ -63,7 +63,7 @@ namespace utils {
                 adapterOptions.getProc = getProc;
                 instance->DiscoverAdapters(&adapterOptions);
             }
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
         } else {
             instance->DiscoverDefaultAdapters();
         }
@@ -88,6 +88,10 @@ namespace utils {
 
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
             case wgpu::BackendType::OpenGL:
+                return CreateOpenGLBinding(window, device);
+#endif
+
+#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
             case wgpu::BackendType::OpenGLES:
                 return CreateOpenGLBinding(window, device);
 #endif

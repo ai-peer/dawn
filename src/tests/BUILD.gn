@@ -379,7 +379,7 @@ source_set("dawn_end2end_tests_sources") {
     frameworks = [ "IOSurface.framework" ]
   }
 
-  if (dawn_enable_opengl) {
+  if (dawn_enable_opengl || dawn_enable_opengles) {
     assert(dawn_supports_glfw_for_windowing)
   }
 
@@ -446,7 +446,7 @@ source_set("dawn_white_box_tests_sources") {
     sources += [ "white_box/MetalAutoreleasePoolTests.mm" ]
   }
 
-  if (dawn_enable_opengl) {
+  if (dawn_enable_opengl || dawn_enable_opengles) {
     deps += [ "${dawn_root}/src/utils:dawn_glfw" ]
   }
 
@@ -483,7 +483,7 @@ test("dawn_end2end_tests") {
     sources += [ "End2EndTestsMain.cpp" ]
   }
 
-  if (dawn_enable_opengl) {
+  if (dawn_enable_opengl || dawn_enable_opengles) {
     deps += [ "${dawn_root}/src/utils:dawn_glfw" ]
   }
 
@@ -541,7 +541,7 @@ test("dawn_perf_tests") {
     frameworks = [ "IOSurface.framework" ]
   }
 
-  if (dawn_enable_opengl) {
+  if (dawn_enable_opengl || dawn_enable_opengles) {
     deps += [ "${dawn_root}/src/utils:dawn_glfw" ]
   }
 }

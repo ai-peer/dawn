@@ -42,11 +42,11 @@ namespace dawn_native {
         BackendConnection* Connect(InstanceBase* instance);
     }
 #endif  // defined(DAWN_ENABLE_BACKEND_NULL)
-#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
     namespace opengl {
         BackendConnection* Connect(InstanceBase* instance, wgpu::BackendType backendType);
     }
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL || defined(DAWN_ENABLE_BACKEND_OPENGLES)
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
     namespace vulkan {
         BackendConnection* Connect(InstanceBase* instance, bool useSwiftshader);
@@ -152,8 +152,10 @@ namespace dawn_native {
 #endif      // defined(DAWN_ENABLE_BACKEND_VULKAN)
 #if defined(DAWN_ENABLE_BACKEND_OPENGL)
         Register(opengl::Connect(this, wgpu::BackendType::OpenGL), wgpu::BackendType::OpenGL);
-        Register(opengl::Connect(this, wgpu::BackendType::OpenGLES), wgpu::BackendType::OpenGLES);
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+        Register(opengl::Connect(this, wgpu::BackendType::OpenGLES), wgpu::BackendType::OpenGLES);
+#endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
 #if defined(DAWN_ENABLE_BACKEND_NULL)
         Register(null::Connect(this), wgpu::BackendType::Null);
 #endif  // defined(DAWN_ENABLE_BACKEND_NULL)
