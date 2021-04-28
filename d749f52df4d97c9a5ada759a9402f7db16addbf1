@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b5d08e_ac80398b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-28T23:55:32Z",
+      "side": 1,
+      "message": "Does it give us more coverage? I thought we run end2end tests via SwANGLE on the Linux GPU-less bots.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "d749f52df4d97c9a5ada759a9402f7db16addbf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1b1d22_1a5a77f8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-28T23:55:32Z",
+      "side": 1,
+      "message": "The failures on Windows OpenGL are surprisingly few given we haven\u0027t maintained it. Do we intend to support this in the long term though?\n\nIf we only care about ANGLE/D3D11, then it seems like we can enable only OpenGLES on Windows when the time comes.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "d749f52df4d97c9a5ada759a9402f7db16addbf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515ab845_06f5b2f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-28T23:55:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d749f52df4d97c9a5ada759a9402f7db16addbf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
