@@ -62,7 +62,7 @@ declare_args() {
 
   # Enables the compilation of Dawn's OpenGL backend
   # (best effort, non-conformant)
-  dawn_enable_opengl = is_linux && !is_chromeos
+  dawn_enable_opengl = (is_linux && !is_chromeos) || is_win
 
   # Enables the compilation of Dawn's Vulkan backend
   # Disables vulkan when compiling for UWP, since UWP only supports d3d
