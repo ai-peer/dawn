@@ -108,12 +108,24 @@ namespace dawn_native { namespace metal {
         // TODO(jiawei.shao@intel.com): tighten this workaround when the driver bug is fixed.
         SetToggle(Toggle::AlwaysResolveIntoZeroLevelAndLayer, true);
 
+        PCIInfo pciInfo = GetAdapter()->GetPCIInfo();
+
         // TODO(hao.x.li@intel.com): Use MTLStorageModeShared instead of MTLStorageModePrivate when
         // creating MTLCounterSampleBuffer in QuerySet on Intel platforms, otherwise it fails to
         // create the buffer. Change to use MTLStorageModePrivate when the bug is fixed.
         if (@available(macOS 10.15, iOS 14.0, *)) {
-            bool useSharedMode = gpu_info::IsIntel(this->GetAdapter()->GetPCIInfo().vendorId);
+            bool useSharedMode = gpu_info::IsIntel(pciInfo.vendorId);
             SetToggle(Toggle::MetalUseSharedModeForCounterSampleBuffer, useSharedMode);
+        }
+
+        // Currently this workaround is only needed on Intel Gen9 and Gen9.5 GPUs.
+        // See http://crbug.com/1161355 for more information.
+        if (gpu_info::IsIntel(pciInfo.vendorId) &&
+            (gpu_info::IsSkylake(pciInfo.deviceId) || gpu_info::IsKabylake(pciInfo.deviceId) ||
+             gpu_info::IsCoffeelake(pciInfo.deviceId))) {
+            SetToggle(
+                Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
+                true);
         }
     }
 

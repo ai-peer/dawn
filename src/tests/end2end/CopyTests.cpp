@@ -1797,6 +1797,8 @@ DAWN_INSTANTIATE_TEST(
     D3D12Backend(
         {"use_temp_buffer_in_small_format_texture_to_texture_copy_from_greater_to_less_mip_level"}),
     MetalBackend(),
+    MetalBackend(
+        {"use_temp_buffer_in_small_format_texture_to_texture_copy_from_greater_to_less_mip_level"}),
     OpenGLBackend(),
     OpenGLESBackend(),
     VulkanBackend());

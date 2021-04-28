@@ -467,6 +467,83 @@ namespace dawn_native {
                 encoder, destination, availabilityBuffer.Get(), paramsBuffer.Get());
         }
 
+        bool ShouldCopyT2TUsingTemporaryBuffer(DeviceBase* device,
+                                               const ImageCopyTexture& srcCopy,
+                                               const ImageCopyTexture& dstCopy) {
+            // Currently we only need the workaround for an Intel D3D12 driver issue.
+            if (device->IsToggleEnabled(
+                    Toggle::
+                        UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel)) {
+                bool copyToLesserLevel = srcCopy.mipLevel > dstCopy.mipLevel;
+                ASSERT(srcCopy.texture->GetFormat().format == dstCopy.texture->GetFormat().format);
+
+                // GetAspectInfo(aspect) requires HasOneBit(aspect) == true, plus the texel block
+                // sizes of depth stencil formats are always no less than 4 bytes.
+                bool isSmallColorFormat =
+                    HasOneBit(srcCopy.aspect) &&
+                    srcCopy.texture->GetFormat().GetAspectInfo(srcCopy.aspect).block.byteSize < 4u;
+                if (copyToLesserLevel && isSmallColorFormat) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        MaybeError RecordCopyT2TUsingTemporaryBuffer(CommandAllocator* allocator,
+                                                     DeviceBase* device,
+                                                     const ImageCopyTexture& srcCopy,
+                                                     const ImageCopyTexture& dstCopy,
+                                                     const Extent3D& copySize) {
+            ASSERT(srcCopy.texture->GetFormat().format == dstCopy.texture->GetFormat().format);
+            ASSERT(srcCopy.aspect == dstCopy.aspect);
+            dawn_native::Format format = srcCopy.texture->GetFormat();
+            const TexelBlockInfo& blockInfo = format.GetAspectInfo(srcCopy.aspect).block;
+            ASSERT(copySize.width % blockInfo.width == 0);
+            uint32_t widthInBlocks = copySize.width / blockInfo.width;
+            ASSERT(copySize.height % blockInfo.height == 0);
+            uint32_t heightInBlocks = copySize.height / blockInfo.height;
+
+            uint32_t bytesPerRow =
+                Align(blockInfo.byteSize * widthInBlocks, device->GetOptimalBytesPerRowAlignment());
+            uint32_t rowsPerImage = heightInBlocks;
+
+            // The size of temporary buffer isn't needed to be a multiple of 4 because we don't
+            // need to set mappedAtCreation to be true.
+            auto tempBufferSize =
+                ComputeRequiredBytesInCopy(blockInfo, copySize, bytesPerRow, rowsPerImage);
+
+            BufferDescriptor tempBufferDescriptor;
+            tempBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+            tempBufferDescriptor.size = tempBufferSize.AcquireSuccess();
+
+            Ref<BufferBase> tempBuffer;
+            DAWN_TRY_ASSIGN(tempBuffer, device->CreateBuffer(&tempBufferDescriptor));
+
+            CopyTextureToBufferCmd* t2b =
+                allocator->Allocate<CopyTextureToBufferCmd>(Command::CopyTextureToBuffer);
+            t2b->source.texture = srcCopy.texture;
+            t2b->source.origin = srcCopy.origin;
+            t2b->source.mipLevel = srcCopy.mipLevel;
+            t2b->source.aspect = ConvertAspect(srcCopy.texture->GetFormat(), srcCopy.aspect);
+            t2b->destination.buffer = tempBuffer;
+            t2b->destination.offset = 0;
+            t2b->destination.bytesPerRow = bytesPerRow;
+            t2b->destination.rowsPerImage = rowsPerImage;
+            t2b->copySize = copySize;
+
+            CopyBufferToTextureCmd* b2t =
+                allocator->Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
+            b2t->source = t2b->destination;
+            b2t->destination.texture = dstCopy.texture;
+            b2t->destination.origin = dstCopy.origin;
+            b2t->destination.mipLevel = dstCopy.mipLevel;
+            b2t->destination.aspect = ConvertAspect(dstCopy.texture->GetFormat(), dstCopy.aspect);
+            b2t->copySize = copySize;
+
+            return {};
+        }
+
     }  // namespace
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
@@ -799,6 +876,12 @@ namespace dawn_native {
             // Skip noop copies.
             if (fixedCopySize.width != 0 && fixedCopySize.height != 0 &&
                 fixedCopySize.depthOrArrayLayers != 0) {
+                if (ShouldCopyT2TUsingTemporaryBuffer(GetDevice(), *source, *destination)) {
+                    DAWN_TRY(RecordCopyT2TUsingTemporaryBuffer(allocator, GetDevice(), *source,
+                                                               *destination, fixedCopySize));
+                    return {};
+                }
+
                 CopyTextureToTextureCmd* copy =
                     allocator->Allocate<CopyTextureToTextureCmd>(Command::CopyTextureToTexture);
                 copy->source.texture = source->texture;

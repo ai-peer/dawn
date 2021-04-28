@@ -116,83 +116,6 @@ namespace dawn_native { namespace d3d12 {
                                                        count, offsets.data(), 0);
         }
 
-        bool ShouldCopyUsingTemporaryBuffer(DeviceBase* device,
-                                            const TextureCopy& srcCopy,
-                                            const TextureCopy& dstCopy) {
-            // Currently we only need the workaround for an Intel D3D12 driver issue.
-            if (device->IsToggleEnabled(
-                    Toggle::
-                        UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel)) {
-                bool copyToLesserLevel = srcCopy.mipLevel > dstCopy.mipLevel;
-                ASSERT(srcCopy.texture->GetFormat().format == dstCopy.texture->GetFormat().format);
-
-                // GetAspectInfo(aspect) requires HasOneBit(aspect) == true, plus the texel block
-                // sizes of depth stencil formats are always no less than 4 bytes.
-                bool isSmallColorFormat =
-                    HasOneBit(srcCopy.aspect) &&
-                    srcCopy.texture->GetFormat().GetAspectInfo(srcCopy.aspect).block.byteSize < 4u;
-                if (copyToLesserLevel && isSmallColorFormat) {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        MaybeError RecordCopyTextureWithTemporaryBuffer(CommandRecordingContext* recordingContext,
-                                                        const TextureCopy& srcCopy,
-                                                        const TextureCopy& dstCopy,
-                                                        const Extent3D& copySize) {
-            ASSERT(srcCopy.texture->GetFormat().format == dstCopy.texture->GetFormat().format);
-            ASSERT(srcCopy.aspect == dstCopy.aspect);
-            dawn_native::Format format = srcCopy.texture->GetFormat();
-            const TexelBlockInfo& blockInfo = format.GetAspectInfo(srcCopy.aspect).block;
-            ASSERT(copySize.width % blockInfo.width == 0);
-            uint32_t widthInBlocks = copySize.width / blockInfo.width;
-            ASSERT(copySize.height % blockInfo.height == 0);
-            uint32_t heightInBlocks = copySize.height / blockInfo.height;
-
-            // Create tempBuffer
-            uint32_t bytesPerRow =
-                Align(blockInfo.byteSize * widthInBlocks, kTextureBytesPerRowAlignment);
-            uint32_t rowsPerImage = heightInBlocks;
-
-            // The size of temporary buffer isn't needed to be a multiple of 4 because we don't
-            // need to set mappedAtCreation to be true.
-            auto tempBufferSize =
-                ComputeRequiredBytesInCopy(blockInfo, copySize, bytesPerRow, rowsPerImage);
-
-            BufferDescriptor tempBufferDescriptor;
-            tempBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
-            tempBufferDescriptor.size = tempBufferSize.AcquireSuccess();
-            Device* device = ToBackend(srcCopy.texture->GetDevice());
-            Ref<BufferBase> tempBufferBase;
-            DAWN_TRY_ASSIGN(tempBufferBase, device->CreateBuffer(&tempBufferDescriptor));
-            Ref<Buffer> tempBuffer = ToBackend(std::move(tempBufferBase));
-
-            // Copy from source texture into tempBuffer
-            Texture* srcTexture = ToBackend(srcCopy.texture).Get();
-            tempBuffer->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopyDst);
-            BufferCopy bufferCopy;
-            bufferCopy.buffer = tempBuffer;
-            bufferCopy.offset = 0;
-            bufferCopy.bytesPerRow = bytesPerRow;
-            bufferCopy.rowsPerImage = rowsPerImage;
-            RecordCopyTextureToBuffer(recordingContext->GetCommandList(), srcCopy, bufferCopy,
-                                      srcTexture, tempBuffer.Get(), copySize);
-
-            // Copy from tempBuffer into destination texture
-            tempBuffer->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopySrc);
-            Texture* dstTexture = ToBackend(dstCopy.texture).Get();
-            RecordCopyBufferToTexture(recordingContext, dstCopy, tempBuffer->GetD3D12Resource(), 0,
-                                      bytesPerRow, rowsPerImage, copySize, dstTexture,
-                                      dstCopy.aspect);
-
-            // Save tempBuffer into recordingContext
-            recordingContext->AddToTempBuffers(std::move(tempBuffer));
-
-            return {};
-        }
     }  // anonymous namespace
 
     class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
@@ -824,13 +747,6 @@ namespace dawn_native { namespace d3d12 {
                                                             wgpu::TextureUsage::CopyDst, dstRange);
 
                     ASSERT(srcRange.aspects == dstRange.aspects);
-                    if (ShouldCopyUsingTemporaryBuffer(GetDevice(), copy->source,
-                                                       copy->destination)) {
-                        DAWN_TRY(RecordCopyTextureWithTemporaryBuffer(
-                            commandContext, copy->source, copy->destination, copy->copySize));
-                        break;
-                    }
-
                     if (CanUseCopyResource(copy->source, copy->destination, copy->copySize)) {
                         commandList->CopyResource(destination->GetD3D12Resource(),
                                                   source->GetD3D12Resource());
