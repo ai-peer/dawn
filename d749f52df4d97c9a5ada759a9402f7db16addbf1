@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38343444_3f4e1f10",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-29T00:12:25Z",
+      "side": 1,
+      "message": "The GPU-less Linux bot has an issue right now: it fails to find an X display and no tests are run. It might require some xvfb magic (which I think Chrome uses), or maybe something in ANGLE to avoid the use of X11. SwiftShader/GL works there, so it\u0027s not SwiftShader per se, but something in the SwANGLE combo isn\u0027t happy.\n\nAnyway I\u0027d like to fix it, but it seems harmless to run them on the Windows bot in the interim.",
+      "parentUuid": "20b5d08e_ac80398b",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 27
+      },
+      "revId": "d749f52df4d97c9a5ada759a9402f7db16addbf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5f1b1d22_1a5a77f8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2021-04-28T23:55:32Z",
       "side": 1,
       "message": "The failures on Windows OpenGL are surprisingly few given we haven\u0027t maintained it. Do we intend to support this in the long term though?\n\nIf we only care about ANGLE/D3D11, then it seems like we can enable only OpenGLES on Windows when the time comes.",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 0
+      },
+      "revId": "d749f52df4d97c9a5ada759a9402f7db16addbf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25e048d5_f476e100",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-04-29T00:12:25Z",
+      "side": 1,
+      "message": "No, I don\u0027t think we should support it long-term. I\u0027m unsure how to enable only OpenGLES, though, since both are currently enabled by dawn_enable_opengl. Perhaps something in the recipe or other config file determines which backends are used. I\u0027ll dig in a bit more before landing this.",
+      "parentUuid": "5f1b1d22_1a5a77f8",
       "range": {
         "startLine": 12,
         "startChar": 0,
