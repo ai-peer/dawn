@@ -34,7 +34,7 @@ namespace dawn_native {
     class AttachmentState;
     class AttachmentStateBlueprint;
     class BindGroupLayoutBase;
-    class CreatePipelineAsyncTracker;
+    class CallbackTaskManager;
     class DynamicUploader;
     class ErrorScopeStack;
     class ExternalTextureBase;
@@ -336,6 +336,7 @@ namespace dawn_native {
             const ComputePipelineDescriptor* descriptor);
         Ref<ComputePipelineBase> AddOrGetCachedPipeline(Ref<ComputePipelineBase> computePipeline,
                                                         size_t blueprintHash);
+
         void CreateComputePipelineAsyncImpl(const ComputePipelineDescriptor* descriptor,
                                             size_t blueprintHash,
                                             WGPUCreateComputePipelineAsyncCallback callback,
@@ -402,7 +403,7 @@ namespace dawn_native {
         Ref<BindGroupLayoutBase> mEmptyBindGroupLayout;
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
-        std::unique_ptr<CreatePipelineAsyncTracker> mCreatePipelineAsyncTracker;
+        std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
         Ref<QueueBase> mQueue;
 
         struct DeprecationWarnings;
