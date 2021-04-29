@@ -16,6 +16,114 @@
       "message": "PTAL!",
       "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "605170e6_2e1417bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:30:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ddb65a1_138602a3",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:30:32Z",
+      "side": 1,
+      "message": "typo: Source",
+      "range": {
+        "startLine": 158,
+        "startChar": 19,
+        "endLine": 158,
+        "endChar": 65
+      },
+      "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97a2e173_04175370",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:30:32Z",
+      "side": 1,
+      "message": "I think the spec requires both CopyDst and RenderAttachment so we don\u0027t need this TODO",
+      "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "459daf58_f84cbe25",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:30:32Z",
+      "side": 1,
+      "message": "This method is unused.",
+      "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fee79f7_a39e9352",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:30:32Z",
+      "side": 1,
+      "message": "u-nit: comment before tests so people can skim the file more easily.",
+      "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "310da94f_4a43e13d",
+        "filename": "src/tests/unittests/validation/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:30:32Z",
+      "side": 1,
+      "message": "Can we also test the lack of CopyDst usage and CopySrc usage?",
+      "revId": "0ac7f93c23be4e78825af1e0c042e840f0a016f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
