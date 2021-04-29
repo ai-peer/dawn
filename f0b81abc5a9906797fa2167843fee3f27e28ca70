@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f4817e7_5df00dae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T10:27:55Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, I\u0027ve updated this CL as a follow-up of this discussion. PTAL, thanks!",
+      "parentUuid": "a40703d1_9a6968b8",
+      "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3996d1d_f013bed2",
@@ -66,6 +84,24 @@
       "writtenOn": "2021-04-26T13:18:23Z",
       "side": 1,
       "message": "nit: also update CMakeLists.txt without the commas",
+      "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4b02333_efa83462",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T10:27:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3996d1d_f013bed2",
       "revId": "f0b81abc5a9906797fa2167843fee3f27e28ca70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
