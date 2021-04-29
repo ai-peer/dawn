@@ -41,6 +41,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aafff02c_065bb401",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "LGTM, aaaaand I just realized I wasn\u0027t supposed to review yet. Sorry about that 😊",
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c2b5a3_d1084e80",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "Seems like Tint might not be correctly zero-initializing?",
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ef8a4d8_6973f43d",
@@ -54,6 +88,30 @@
       "writtenOn": "2021-04-29T08:11:43Z",
       "side": 1,
       "message": "should be",
+      "range": {
+        "startLine": 151,
+        "startChar": 60,
+        "endLine": 151,
+        "endChar": 63
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff7e61ea_5e8a4054",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "I think it is correct actually. Though I\u0027m not a native speaker either ^^",
+      "parentUuid": "9ef8a4d8_6973f43d",
       "range": {
         "startLine": 151,
         "startChar": 60,
@@ -89,6 +147,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3928c9fa_a751b022",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "Is there any risk that the randomness here would cause noise in the execution time? I don\u0027t think so but just checking.",
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a353d5e0_b2eafc7a",
         "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
         "patchSetId": 2
@@ -100,6 +175,30 @@
       "writtenOn": "2021-04-29T08:11:43Z",
       "side": 1,
       "message": "You can simplify this with:\n\nwgpu::Buffer bufA \u003d utils::CreateBufferFromData(device, dataA.data(), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst, byteASize);",
+      "range": {
+        "startLine": 349,
+        "startChar": 4,
+        "endLine": 353,
+        "endChar": 56
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72404da1_9158c2e0",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "+1 and CreateBufferFromData adds CopyDst for you as well.",
+      "parentUuid": "a353d5e0_b2eafc7a",
       "range": {
         "startLine": 349,
         "startChar": 4,
@@ -158,6 +257,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79a78aea_512b14df",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "Just checking, the goal is to look at the graph for the execution time on the GPU and see the difference between robustness on and off?",
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "08e0acb2_57293bb2",
         "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
         "patchSetId": 2
@@ -169,6 +285,30 @@
       "writtenOn": "2021-04-29T08:11:43Z",
       "side": 1,
       "message": "Currently we have to disable the Toggle \"use_tint_generator\" for this test because of the issue tint:744",
+      "range": {
+        "startLine": 424,
+        "startChar": 90,
+        "endLine": 424,
+        "endChar": 91
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b73280_0305d3cb",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-29T11:52:05Z",
+      "side": 1,
+      "message": "Should be have variants of the test with robustness as well so we can compare?",
+      "parentUuid": "08e0acb2_57293bb2",
       "range": {
         "startLine": 424,
         "startChar": 90,
