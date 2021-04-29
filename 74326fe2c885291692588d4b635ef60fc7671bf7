@@ -88,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "086dad21_065eca18",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-29T13:39:44Z",
+      "side": 1,
+      "message": "I\u0027ll fix it in another CL since this CL has been merged.",
+      "parentUuid": "fa5220f1_9ae3ed6f",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 41
+      },
+      "revId": "74326fe2c885291692588d4b635ef60fc7671bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb3f7ce2_6ba54037",
@@ -111,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0ba9b03_e748b3a7",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-29T13:39:44Z",
+      "side": 1,
+      "message": "I\u0027ll fix it in another CL since this CL has been merged",
+      "parentUuid": "eb3f7ce2_6ba54037",
+      "range": {
+        "startLine": 248,
+        "startChar": 0,
+        "endLine": 257,
+        "endChar": 39
+      },
+      "revId": "74326fe2c885291692588d4b635ef60fc7671bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a093cd3_b9d095b2",
@@ -124,6 +172,30 @@
       "writtenOn": "2021-04-27T21:12:45Z",
       "side": 1,
       "message": "You should be able to strongly type the return value of GetCoreWindow to be IUnknown in the header file for all platforms by forward declaring IUnknown as a struct.  \n\nYou\u0027ll still need the #ifdef in the GetCoreWindow implementation to return nullptr on non-Windows platforms.\n\nWith this approach, you can avoid the static_cast to IUnknown here. The less casting we do, the better.",
+      "range": {
+        "startLine": 261,
+        "startChar": 42,
+        "endLine": 261,
+        "endChar": 94
+      },
+      "revId": "74326fe2c885291692588d4b635ef60fc7671bf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc39c197_02ecab08",
+        "filename": "src/dawn_native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-04-29T13:39:44Z",
+      "side": 1,
+      "message": "I\u0027ll fix it in another CL since this CL has been merged.",
+      "parentUuid": "3a093cd3_b9d095b2",
       "range": {
         "startLine": 261,
         "startChar": 42,
