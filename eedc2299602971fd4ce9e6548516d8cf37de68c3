@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "2604f33a_0e4f175a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "Add perf test on shader robustness",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 24
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "aa2a6f8b_93c54dd7",
@@ -14,6 +37,144 @@
       "writtenOn": "2021-04-29T07:49:05Z",
       "side": 1,
       "message": "Please take a look, thanks.\nCurrently, the use_tint_generator cases are failed due to tine bug. See https://bugs.chromium.org/p/tint/issues/detail?id\u003d744.",
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef8a4d8_6973f43d",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "should be",
+      "range": {
+        "startLine": 151,
+        "startChar": 60,
+        "endLine": 151,
+        "endChar": 63
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a613aa8_d71461b7",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "Test doing matrix multiplication ... ?",
+      "range": {
+        "startLine": 316,
+        "startChar": 3,
+        "endLine": 316,
+        "endChar": 29
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a353d5e0_b2eafc7a",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "You can simplify this with:\n\nwgpu::Buffer bufA \u003d utils::CreateBufferFromData(device, dataA.data(), wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopyDst, byteASize);",
+      "range": {
+        "startLine": 349,
+        "startChar": 4,
+        "endLine": 353,
+        "endChar": 56
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62f57469_828d5f75",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "You can simplify this with utils::CreateBufferFromData().",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 363,
+        "endChar": 56
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b799d7f7_1d64adea",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "I think here we only want to test the overhead brought by the extra checks inside shader to ensure shader access robustness. There are also other kinds of \"robustness\", for example vertex buffer and indirect buffer robustness.\n\nSo maybe it\u0027s better to call this test \"ShaderRobustnessPerf\"?",
+      "range": {
+        "startLine": 419,
+        "startChar": 7,
+        "endLine": 419,
+        "endChar": 21
+      },
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08e0acb2_57293bb2",
+        "filename": "src/tests/perf_tests/RobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-04-29T08:11:43Z",
+      "side": 1,
+      "message": "Currently we have to disable the Toggle \"use_tint_generator\" for this test because of the issue tint:744",
+      "range": {
+        "startLine": 424,
+        "startChar": 90,
+        "endLine": 424,
+        "endChar": 91
+      },
       "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
