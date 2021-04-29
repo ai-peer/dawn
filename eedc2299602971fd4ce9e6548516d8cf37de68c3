@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa2a6f8b_93c54dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000241
+      },
+      "writtenOn": "2021-04-29T07:49:05Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\nCurrently, the use_tint_generator cases are failed due to tine bug. See https://bugs.chromium.org/p/tint/issues/detail?id\u003d744.",
+      "revId": "eedc2299602971fd4ce9e6548516d8cf37de68c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
