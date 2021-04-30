@@ -67,6 +67,24 @@
       "message": "What about \\r\\n? Maybe it would be easier if Tint kept the offset for the start of each line and we queried it here. No need for a loop too.",
       "revId": "74b277cb6d3bee49d45da68047f385487e793b78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18dfd661_97489dd5",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-04-30T18:09:00Z",
+      "side": 1,
+      "message": "Tint breaks on \u0027\\n\u0027. (See: https://dawn.googlesource.com/tint/+/refs/heads/main/src/source.cc#27) We need this to be written into the WGSL standard in order to really enforce it here, but in the meantime I think it\u0027s fine to match their logic. (Line breaks on \u0027\\n\u0027 seem like the only sensible option anyway.)\n\nIf Tint adds more more data to their diagnostic ranges regarding offset/length then that\u0027s great and it\u0027ll save us some trouble, but until that point I\u0027d prefer that we have a way to do it ourselves.",
+      "parentUuid": "b98c862a_32c1caa7",
+      "revId": "74b277cb6d3bee49d45da68047f385487e793b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
