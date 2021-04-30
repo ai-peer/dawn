@@ -181,13 +181,17 @@ namespace dawn_native {
 
             uint32_t colorAttachmentBaseMipLevel = attachment->GetBaseMipLevel();
             const Extent3D& colorTextureSize = attachment->GetTexture()->GetSize();
-            uint32_t colorAttachmentWidth = colorTextureSize.width >> colorAttachmentBaseMipLevel;
-            uint32_t colorAttachmentHeight = colorTextureSize.height >> colorAttachmentBaseMipLevel;
+            uint32_t colorAttachmentWidth =
+                std::max(colorTextureSize.width >> colorAttachmentBaseMipLevel, 1u);
+            uint32_t colorAttachmentHeight =
+                std::max(colorTextureSize.height >> colorAttachmentBaseMipLevel, 1u);
 
             uint32_t resolveTargetBaseMipLevel = resolveTarget->GetBaseMipLevel();
             const Extent3D& resolveTextureSize = resolveTarget->GetTexture()->GetSize();
-            uint32_t resolveTargetWidth = resolveTextureSize.width >> resolveTargetBaseMipLevel;
-            uint32_t resolveTargetHeight = resolveTextureSize.height >> resolveTargetBaseMipLevel;
+            uint32_t resolveTargetWidth =
+                std::max(resolveTextureSize.width >> resolveTargetBaseMipLevel, 1u);
+            uint32_t resolveTargetHeight =
+                std::max(resolveTextureSize.height >> resolveTargetBaseMipLevel, 1u);
             if (colorAttachmentWidth != resolveTargetWidth ||
                 colorAttachmentHeight != resolveTargetHeight) {
                 return DAWN_VALIDATION_ERROR(
