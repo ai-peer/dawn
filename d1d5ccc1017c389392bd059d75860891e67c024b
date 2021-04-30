@@ -50,6 +50,24 @@
       "message": "We could use attachment-\u003eGetVirtualSizeAtLevel() and the same for resolveTarget. This code must have been written before we had these helpers.",
       "revId": "d1d5ccc1017c389392bd059d75860891e67c024b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6726e8e_6ae8e253",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-04-30T16:26:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d98e6724_c6c2878c",
+      "revId": "d1d5ccc1017c389392bd059d75860891e67c024b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
