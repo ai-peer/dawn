@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f140394_98807321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-04-30T19:23:13Z",
+      "side": 1,
+      "message": "LGTM too - I think this is fine to land and we can fix it up if necessary as the spec is updated",
+      "revId": "74b277cb6d3bee49d45da68047f385487e793b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a394b61_3ed7dcd3",
