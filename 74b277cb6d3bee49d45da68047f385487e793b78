@@ -50,6 +50,23 @@
       "message": "Dawn\u0027s interface probably does everything in utf-8, which means results should probably be in utf-8 code units (i.e. bytes). In chromium however we need utf-16 code units. In order to remap this you basically need to go from utf-8 code units -\u003e unicode code points -\u003e utf-16 code units. This isn\u0027t hard, just take the utf-8 string, iterate over code points adding 1 each time, adding 2 instead if the code point takes 2 utf-16 code units. But it does require having the string, so if done in chromium would require holding onto the string there.\n\nanyway, probably no change here, just something to think about.",
       "revId": "74b277cb6d3bee49d45da68047f385487e793b78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b98c862a_32c1caa7",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-30T08:13:25Z",
+      "side": 1,
+      "message": "What about \\r\\n? Maybe it would be easier if Tint kept the offset for the start of each line and we queried it here. No need for a loop too.",
+      "revId": "74b277cb6d3bee49d45da68047f385487e793b78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
