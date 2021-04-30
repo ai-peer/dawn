@@ -16,6 +16,40 @@
       "message": "I noted this issue about mip dimension calculation when I was debugging 3D texture copies and I wrote a test in CopyTests.cpp, it failed on Windows, and it got a segfault on Linux. \n\nPer my understanding, helper functions for tests (like the function in src/utils/TestUtils.cpp) should use std::max(width \u003e\u003e mipLevel, 1u) to accurately calculate mip dimension because helper functions are shared among different tests. It should be absolutely accurate and correct. However, test cases themselves may use width \u003e\u003e mipLevel because they don\u0027t impact other functions.\n\nSo I changed uses in TestUtils.cpp and CommandEncoder.cpp (it is very unlikely that the mip dimension will shrink to 1 in CommandEncoder, though), but I didn\u0027t replace the uses (width \u003e\u003e mipLevel) in end2end and unittest test cases by std::max(width \u003e\u003e mipLevel, 1u).\n\nPTAL.",
       "revId": "d1d5ccc1017c389392bd059d75860891e67c024b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f6e2cd3_09420cb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-30T08:16:21Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d1d5ccc1017c389392bd059d75860891e67c024b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d98e6724_c6c2878c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-04-30T08:16:21Z",
+      "side": 1,
+      "message": "We could use attachment-\u003eGetVirtualSizeAtLevel() and the same for resolveTarget. This code must have been written before we had these helpers.",
+      "revId": "d1d5ccc1017c389392bd059d75860891e67c024b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
