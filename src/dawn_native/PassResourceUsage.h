@@ -43,14 +43,16 @@ namespace dawn_native {
         std::vector<TextureSubresourceUsage> textureUsages;
     };
 
-    // Additional data tracked per-pass.
-    struct PassResourceUsage : public SyncScopeResourceUsage {
+    struct ComputePassResourceUsage : public SyncScopeResourceUsage {};
+
+    struct RenderPassResourceUsage : public SyncScopeResourceUsage {
+        // Storage to track the occlusion queries used during the pass.
         std::vector<QuerySetBase*> querySets;
         std::vector<std::vector<bool>> queryAvailabilities;
     };
 
-    using RenderPassUsages = std::vector<PassResourceUsage>;
-    using ComputePassUsages = std::vector<PassResourceUsage>;
+    using RenderPassUsages = std::vector<RenderPassResourceUsage>;
+    using ComputePassUsages = std::vector<ComputePassResourceUsage>;
 
     struct CommandBufferResourceUsage {
         RenderPassUsages renderPasses;
