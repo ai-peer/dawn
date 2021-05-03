@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b65fae6_38df7e48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-03T16:04:53Z",
+      "side": 1,
+      "message": "PTAL! There\u0027s going to be several small CLs to make things easier to review.",
+      "revId": "e6cd9d2ea22ab3a6215f9dfffdb730f5e0d256d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
