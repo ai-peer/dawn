@@ -22,6 +22,8 @@
 
 namespace dawn_native {
 
+    class SyncScopeUsageTracker;
+
     class ComputePassEncoder final : public ProgrammablePassEncoder {
       public:
         ComputePassEncoder(DeviceBase* device,
@@ -58,6 +60,9 @@ namespace dawn_native {
         // For render and compute passes, the encoding context is borrowed from the command encoder.
         // Keep a reference to the encoder to make sure the context isn't freed.
         Ref<CommandEncoder> mCommandEncoder;
+
+        void UseBindGroupsInDispatch(SyncScopeUsageTracker* scope);
+        ityp::bitset<BindGroupIndex, kMaxBindGroups> mBindGroupsUsed;
     };
 
 }  // namespace dawn_native
