@@ -20,6 +20,7 @@
 #include "dawn_native/Commands.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/PassResourceUsageTracker.h"
 #include "dawn_native/QuerySet.h"
 
 namespace dawn_native {
@@ -50,6 +51,13 @@ namespace dawn_native {
                     DAWN_TRY(ValidateProgrammableEncoderEnd());
                 }
 
+                for (BindGroupIndex index : IterateBitSet(~mBindGroupsUsed)) {
+                    BindGroupBase* group = mCommandBufferState.GetBindGroup(index);
+                    if (group != nullptr) {
+                        mUsageTracker.AddUnusedBindGroup(group);
+                    }
+                }
+
                 allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
 
                 return {};
@@ -63,6 +71,10 @@ namespace dawn_native {
             if (IsValidationEnabled()) {
                 DAWN_TRY(mCommandBufferState.ValidateCanDispatch());
             }
+
+            SyncScopeUsageTracker scope;
+            UseBindGroupsInDispatch(&scope);
+            mUsageTracker.AddDispatch(scope.AcquireSyncScopeUsage());
 
             DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
             dispatch->x = x;
@@ -101,12 +113,15 @@ namespace dawn_native {
                 }
             }
 
+            SyncScopeUsageTracker scope;
+            UseBindGroupsInDispatch(&scope);
+            scope.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
+            mUsageTracker.AddDispatch(scope.AcquireSyncScopeUsage());
+
             DispatchIndirectCmd* dispatch =
                 allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
             dispatch->indirectBuffer = indirectBuffer;
             dispatch->indirectOffset = indirectOffset;
-
-            mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
             return {};
         });
@@ -140,12 +155,17 @@ namespace dawn_native {
                     ValidateSetBindGroup(groupIndex, group, dynamicOffsetCount, dynamicOffsets));
             }
 
+            if (!mBindGroupsUsed[groupIndex]) {
+                BindGroupBase* group = mCommandBufferState.GetBindGroup(groupIndex);
+                if (group != nullptr) {
+                    mUsageTracker.AddUnusedBindGroup(group);
+                }
+            } else {
+                mBindGroupsUsed.reset(groupIndex);
+            }
+
             RecordSetBindGroup(allocator, groupIndex, group, dynamicOffsetCount, dynamicOffsets);
             mCommandBufferState.SetBindGroup(groupIndex, group);
-
-            // TODO(dawn:632): This doesn't match the WebGPU specification. Instead the
-            // synchronization scopes should be created on Dispatch().
-            mUsageTracker.AddBindGroup(group);
 
             return {};
         });
@@ -167,6 +187,14 @@ namespace dawn_native {
 
             return {};
         });
+    }
+
+    void ComputePassEncoder::UseBindGroupsInDispatch(SyncScopeUsageTracker* scope) {
+        PipelineLayoutBase* layout = mCommandBufferState.GetPipelineLayout();
+        for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            scope->AddBindGroup(mCommandBufferState.GetBindGroup(i));
+            mBindGroupsUsed.set(i);
+        }
     }
 
 }  // namespace dawn_native

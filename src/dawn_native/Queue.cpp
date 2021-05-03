@@ -425,8 +425,17 @@ namespace dawn_native {
             for (const SyncScopeResourceUsage& scope : usages.renderPasses) {
                 DAWN_TRY(ValidateSyncScopeUsedInSubmit(scope));
             }
-            for (const SyncScopeResourceUsage& scope : usages.computePasses) {
-                DAWN_TRY(ValidateSyncScopeUsedInSubmit(scope));
+
+            for (const ComputePassResourceUsage& pass : usages.computePasses) {
+                for (const SyncScopeResourceUsage& scope : pass.dispatchUsages) {
+                    DAWN_TRY(ValidateSyncScopeUsedInSubmit(scope));
+                }
+                for (const BufferBase* buffer : pass.unusedBuffers) {
+                    DAWN_TRY(buffer->ValidateCanUseOnQueueNow());
+                }
+                for (const TextureBase* texture : pass.unusedTextures) {
+                    DAWN_TRY(texture->ValidateCanUseInSubmitNow());
+                }
             }
 
             for (const BufferBase* buffer : usages.topLevelBuffers) {
