@@ -67,6 +67,8 @@ namespace dawn_native {
             // Skip noop dispatch. It is a workaround for system crashes on 0 dispatches on some
             // platforms.
             if (x != 0 && y != 0 && z != 0) {
+                mUsageTracker.AddDispatch(UseBindGroupsInDispatch());
+
                 DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
                 dispatch->x = x;
                 dispatch->y = y;
@@ -105,11 +107,16 @@ namespace dawn_native {
                 }
             }
 
+            SyncScopeUsageTracker scope = UseBindGroupsInDispatch();
+            scope.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
+            mUsageTracker.AddDispatch(UseBindGroupsInDispatch());
+
             DispatchIndirectCmd* dispatch =
                 allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
             dispatch->indirectBuffer = indirectBuffer;
             dispatch->indirectOffset = indirectOffset;
 
+            // TODO(dawn:632): Local sync scope, mark bindgroups as used, include indirect buffer.
             mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
             return {};
@@ -147,9 +154,10 @@ namespace dawn_native {
             RecordSetBindGroup(allocator, groupIndex, group, dynamicOffsetCount, dynamicOffsets);
             mCommandBufferState.SetBindGroup(groupIndex, group);
 
-            // TODO(dawn:632): This doesn't match the WebGPU specification. Instead the
-            // synchronization scopes should be created on Dispatch().
-            mUsageTracker.AddBindGroup(group);
+            if (!mBindGroupsUsed[groupIndex]) {
+                mUsageTracker->AddUnusedBindGroup(group);
+            }
+            mBindGroupsUsed.set(groupIndex);
 
             return {};
         });
@@ -171,6 +179,18 @@ namespace dawn_native {
 
             return {};
         });
+    }
+
+    SyncScopeResourceUsageTracker ComputePassEncoder::UseBindGroupsInDispatch() {
+        SyncScopeResourceUsageTracker scope;
+
+        PipelineLayoutBase* layout = mCommandBufferState->GetPipelineLayout();
+        for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            scope.AddBindGroup(mCommandBufferState->GetBindGroup(i));
+            mBindGroupsUsed.set(i);
+        }
+
+        return scope;
     }
 
 }  // namespace dawn_native

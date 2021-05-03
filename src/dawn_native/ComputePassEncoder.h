@@ -58,6 +58,9 @@ namespace dawn_native {
         // For render and compute passes, the encoding context is borrowed from the command encoder.
         // Keep a reference to the encoder to make sure the context isn't freed.
         Ref<CommandEncoder> mCommandEncoder;
+
+        SyncScopeResourceUsageTracker UseBindGroupsInDispatch();
+        ityp::bitset<BindGroupIndex, kMaxBindGroups> mBindGroupsUsed;
     };
 
 }  // namespace dawn_native
