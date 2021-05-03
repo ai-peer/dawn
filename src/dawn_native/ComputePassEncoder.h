@@ -22,6 +22,8 @@
 
 namespace dawn_native {
 
+    class SyncScopeUsageTracker;
+
     class ComputePassEncoder final : public ProgrammablePassEncoder {
       public:
         ComputePassEncoder(DeviceBase* device,
@@ -58,6 +60,13 @@ namespace dawn_native {
         // For render and compute passes, the encoding context is borrowed from the command encoder.
         // Keep a reference to the encoder to make sure the context isn't freed.
         Ref<CommandEncoder> mCommandEncoder;
+
+        // Keep track of which SetBindGroup calls weren't used in a SyncScope so we can add their
+        // resources to the list of "potentially unused resources" that still need to be checked in
+        // Queue::Submit validation.
+        ityp::bitset<BindGroupIndex, kMaxBindGroups> mBindGroupsUsed;
+        // Add the bindgroups for the currect Dispatch state to the scope, and marks them as used.
+        void UseBindGroupsInDispatch(SyncScopeUsageTracker* scope);
     };
 
 }  // namespace dawn_native
