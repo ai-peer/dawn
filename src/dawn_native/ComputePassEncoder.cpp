@@ -72,6 +72,7 @@ namespace dawn_native {
                 dispatch->y = y;
                 dispatch->z = z;
             }
+            // TODO(dawn:632): Local sync scope, mark bindgroups as used.
 
             return {};
         });
@@ -110,6 +111,7 @@ namespace dawn_native {
             dispatch->indirectBuffer = indirectBuffer;
             dispatch->indirectOffset = indirectOffset;
 
+            // TODO(dawn:632): Local sync scope, mark bindgroups as used, include indirect buffer.
             mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
             return {};
@@ -146,10 +148,7 @@ namespace dawn_native {
 
             RecordSetBindGroup(allocator, groupIndex, group, dynamicOffsetCount, dynamicOffsets);
             mCommandBufferState.SetBindGroup(groupIndex, group);
-
-            // TODO(dawn:632): This doesn't match the WebGPU specification. Instead the
-            // synchronization scopes should be created on Dispatch().
-            mUsageTracker.AddBindGroup(group);
+            // TODO(dawn:632): Mark unused bindgroups as unused.
 
             return {};
         });

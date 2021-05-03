@@ -48,12 +48,17 @@ namespace dawn_native {
 
     // Contains all the resource usage data for a compute pass.
     //
-    // TODO(dawn:632) Not now, but in the future, compute passes will contain a list of
-    // SyncScopeResourceUsage, one per Dispatch as required by the WebGPU specification. It will
-    // also store inline the set of all buffers and textures used, because some unused BindGroups
-    // may not be used at all in synchronization scope but their resources still need to be
-    // validated on Queue::Submit.
-    struct ComputePassResourceUsage : public SyncScopeResourceUsage {};
+    // Essentially a list of SyncScopeResourceUsage, one per Dispatch as required by the WebGPU
+    // specification. It will also store inline the set of all buffers and textures used, because
+    // some unused BindGroups may not be used at all in synchronization scope but their resources
+    // still need to be validated on Queue::Submit.
+    struct ComputePassResourceUsage {
+        std::vector<SyncScopeResourceUsage> dispatchUsages;
+
+        // Resources from bindgroups that aren't used at all, for Queue::Submit validation.
+        std::set<BufferBase*> unusedBuffers;
+        std::set<TextureBase*> unusedTextures;
+    };
 
     // Contains all the resource usage data for a render pass.
     //
