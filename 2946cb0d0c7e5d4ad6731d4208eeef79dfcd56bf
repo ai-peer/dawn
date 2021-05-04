@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "672d436b_03326efe",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T22:08:57Z",
+      "side": 1,
+      "message": "nit: chances are, we\u0027re going to want to inline these simple getters",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 5
+      },
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e52427_c2e41455",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T22:08:57Z",
+      "side": 1,
+      "message": "It\u0027s kind of weird how we\u0027re modifying mBindGroups used inside UseBindGroupsInDispatch, but writing out to the |scope| variable, but then passing the |scope| results back to update mUsageTracker.\n\n- bitset manipulations in UseBindGroupsInDispatch look inefficient. We can simply directly OR in layout-\u003eGetBindGroupLayoutsMask().\n- perhaps the bitset can be an output variable as well. This way mutations happen in the same way, instead of one mutation happening to this-\u003emUsedBindGroups inside the member function, and one in the \u0026scope output var.\n- alternatively, just pull out updating mUsedBindGroups to here, so the mUsageTracker and mUsedBindGroups mutations happen next to each other:\n  mUsedBindGroups |\u003d\n    mCommandBufferState.GetPipelineLayout()-\u003eGetBindGroupLayoutsMask();\n- or maybe just return a SyncScopeUsageTracker from UseBindGroupsInDispatch",
+      "range": {
+        "startLine": 120,
+        "startChar": 12,
+        "endLine": 123,
+        "endChar": 69
+      },
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3d9919_0d05ee60",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T22:08:57Z",
+      "side": 1,
+      "message": "okay so, IIUC, if you call SetBindGroup with the same index multiple times, without calling Dispatch, then because you might be replacing the set bind group, we take the previous one and move it to the unused set.\n\nthen if you do call Dispatch, mBindGroupsUsed gets populated, so if you call SetBindGroup after that, we reset the index in mBindGroupsUsed.. is this because its the first replacement, so it\u0027s not \"kicking out\" the previous bind group into the unused set?\n\nFollowing this logic, if I got it right, was a bit confusing. Would it be simpler if instead of having an unused set, we simply had a single set of bind groups to check IsValidForSubmit? Right now we have that check split between ValidateSyncScopeUsedInSubmit and the loop over unusedTextures/unusedBuffers. This single set of resources would contain both used/unused resources and we wouldn\u0027t need ValidateSyncScopeUsedInSubmit***.\n\nAlso, I don\u0027t think the current unused list strictly means these resources are unused - which can be a bit confusing.\nsetBindGroup(0, bg1);\nsetBindGroup(0, bg2);\nsetBindGroup(0, bg1);\nwill get resources from both bg1 and bg2 into the \"unused\" list, but then following that I could do:\nsetBindGroup(1, bg1);\nsetBindGroup(2, bg2);\ndispatch(1);\nand all of those resources would actually be used.",
+      "range": {
+        "startLine": 162,
+        "startChar": 12,
+        "endLine": 170,
+        "endChar": 13
+      },
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5766f883_eadf939a",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T22:08:57Z",
+      "side": 1,
+      "message": "nit: maybe add a note that the usages won\u0027t ever contain RenderAttachment usage inside a Dispatch call - otherwise it kind of looks like we could accidentally skip the subresource initialization for a texture with RenderAttachment usage.",
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c650bb_be2b5162",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T22:08:57Z",
+      "side": 1,
+      "message": "ditto: comment about RenderAttachment in Dispatch",
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
