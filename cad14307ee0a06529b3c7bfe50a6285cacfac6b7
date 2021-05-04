@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "cad14307ee0a06529b3c7bfe50a6285cacfac6b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "357d27ef_1213410f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T03:59:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cad14307ee0a06529b3c7bfe50a6285cacfac6b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8526e784_bb0c1be0",
+        "filename": "src/dawn_native/PassResourceUsageTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T03:59:37Z",
+      "side": 1,
+      "message": "nit: probably \"bind groups\" with a space, for consistency",
+      "range": {
+        "startLine": 40,
+        "startChar": 21,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "cad14307ee0a06529b3c7bfe50a6285cacfac6b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
