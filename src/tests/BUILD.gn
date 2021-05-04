@@ -379,8 +379,10 @@ source_set("dawn_end2end_tests_sources") {
     frameworks = [ "IOSurface.framework" ]
   }
 
-  if (dawn_enable_opengl) {
+  if (dawn_enable_opengles) {
     assert(dawn_supports_glfw_for_windowing)
+    sources += [ "end2end/EGLImageWrappingTests.cpp" ]
+    include_dirs = [ "${dawn_root}/third_party/angle/include" ]
   }
 
   if (dawn_supports_glfw_for_windowing) {
