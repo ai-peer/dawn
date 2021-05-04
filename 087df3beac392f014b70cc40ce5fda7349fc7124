@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "087df3beac392f014b70cc40ce5fda7349fc7124",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c06ec53_03011bc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-04T20:30:22Z",
+      "side": 1,
+      "message": "I don\u0027t think this actually gets in the way of the following change - we can still add stuff into the sync scope, but not allocate a DispatchCmd. I don\u0027t feel strongly, but maybe we can keep this in the frontend as it\u0027s an easy workaround that might avoid issues that we don\u0027t know about yet on other platforms.",
+      "revId": "087df3beac392f014b70cc40ce5fda7349fc7124",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
