@@ -176,6 +176,22 @@ namespace dawn_native { namespace opengl {
         mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
     }
 
+    TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
+                                                       void* image) {
+        const TextureDescriptor* textureDescriptor =
+            reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
+
+        if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
+            return nullptr;
+        }
+        GLuint tex;
+        gl.GenTextures(1, &tex);
+        gl.BindTexture(GL_TEXTURE_2D, tex);
+        gl.EGLImageTargetTexture2DOES(GL_TEXTURE_2D, image);
+        gl.BindTexture(GL_TEXTURE_2D, GL_NONE);
+        return new Texture(this, textureDescriptor, tex, TextureBase::TextureState::OwnedInternal);
+    }
+
     MaybeError Device::TickImpl() {
         return {};
     }

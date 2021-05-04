@@ -49,6 +49,9 @@ namespace dawn_native { namespace opengl {
 
         void SubmitFenceSync();
 
+        TextureBase* CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
+                                                   void* image);
+
         ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
             CommandEncoder* encoder,
             const CommandBufferDescriptor* descriptor) override;
