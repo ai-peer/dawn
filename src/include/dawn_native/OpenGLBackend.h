@@ -38,6 +38,18 @@ namespace dawn_native { namespace opengl {
     DAWN_NATIVE_EXPORT WGPUTextureFormat
     GetNativeSwapChainPreferredFormat(const DawnSwapChainImplementation* swapChain);
 
+    struct DAWN_NATIVE_EXPORT ExternalImageDescriptorEGLImage : ExternalImageDescriptor {
+      public:
+        ExternalImageDescriptorEGLImage();
+
+        // TODO(senorblanco): this should be EGLImage*, but we don't have common egl.h headers for
+        // Dawn and clients
+        void* image;
+    };
+
+    DAWN_NATIVE_EXPORT WGPUTexture
+    WrapExternalEGLImage(WGPUDevice device, const ExternalImageDescriptorEGLImage* descriptor);
+
 }}  // namespace dawn_native::opengl
 
 #endif  // DAWNNATIVE_OPENGLBACKEND_H_
