@@ -56,6 +56,30 @@
       },
       "revId": "cad14307ee0a06529b3c7bfe50a6285cacfac6b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8f10d8_4f718b5c",
+        "filename": "src/dawn_native/PassResourceUsageTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T13:48:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8526e784_bb0c1be0",
+      "range": {
+        "startLine": 40,
+        "startChar": 21,
+        "endLine": 40,
+        "endChar": 31
+      },
+      "revId": "cad14307ee0a06529b3c7bfe50a6285cacfac6b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
