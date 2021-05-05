@@ -966,10 +966,11 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, kCopyLayers});
 }
 
+// TODO(yunchao.he@intel.com): implement 3D texture copy on Vulkan, Metal, OpenGL and OpenGLES
+// backend.
+
 // Test that copying whole 3D texture in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture3DFull) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on Vulkan, Metal, OpenGL and OpenGLES
-    // backend.
     DAWN_SKIP_TEST_IF(IsVulkan() || IsMetal() || IsOpenGL() || IsOpenGLES());
 
     constexpr uint32_t kWidth = 256;
@@ -985,8 +986,6 @@ TEST_P(CopyTests_T2B, Texture3DFull) {
 
 // Test that copying a range of texture 3D depths in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture3DSubRegion) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on Vulkan, Metal, OpenGL and OpenGLES
-    // backend.
     DAWN_SKIP_TEST_IF(IsVulkan() || IsMetal() || IsOpenGL() || IsOpenGLES());
 
     constexpr uint32_t kWidth = 256;
@@ -1001,6 +1000,20 @@ TEST_P(CopyTests_T2B, Texture3DSubRegion) {
 
     DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight, kCopyDepth),
            {kWidth, kHeight, kCopyDepth}, wgpu::TextureDimension::e3D);
+}
+
+// Test that copying an entire texture without 256-byte aligned dimensions works
+TEST_P(CopyTests_T2B, Texture3DFullUnaligned) {
+    DAWN_SKIP_TEST_IF(IsVulkan() || IsMetal() || IsOpenGL() || IsOpenGLES());
+    constexpr uint32_t kWidth = 259;
+    constexpr uint32_t kHeight = 127;
+    constexpr uint32_t kDepth = 2;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, kDepth};
+
+    DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight, kDepth), {kWidth, kHeight, kDepth},
+           wgpu::TextureDimension::e3D);
 }
 
 // TODO(yunchao.he@intel.com): add T2B tests for 3D textures, like RowPitch,
