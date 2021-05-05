@@ -565,7 +565,7 @@ namespace dawn_native { namespace metal {
                 scope.textureUsages[i].Iterate(
                     [&](const SubresourceRange& range, wgpu::TextureUsage usage) {
                         if (usage & ~wgpu::TextureUsage::RenderAttachment) {
-                            texture->EnsureSubresourceContentInitialized(range);
+                            texture->EnsureSubresourceContentInitialized(commandContext, range);
                         }
                     });
             }
@@ -632,7 +632,8 @@ namespace dawn_native { namespace metal {
                     Texture* texture = ToBackend(dst.texture.Get());
 
                     buffer->EnsureDataInitialized(commandContext);
-                    EnsureDestinationTextureInitialized(texture, copy->destination, copy->copySize);
+                    EnsureDestinationTextureInitialized(commandContext, texture, copy->destination,
+                                                        copy->copySize);
 
                     TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
                         texture, dst.mipLevel, dst.origin, copySize, buffer->GetSize(), src.offset,
@@ -682,7 +683,7 @@ namespace dawn_native { namespace metal {
                     buffer->EnsureDataInitializedAsDestination(commandContext, copy);
 
                     texture->EnsureSubresourceContentInitialized(
-                        GetSubresourcesAffectedByCopy(src, copySize));
+                        commandContext, GetSubresourcesAffectedByCopy(src, copySize));
 
                     TextureBufferCopySplit splitCopies = ComputeTextureBufferCopySplit(
                         texture, src.mipLevel, src.origin, copySize, buffer->GetSize(), dst.offset,
@@ -728,9 +729,10 @@ namespace dawn_native { namespace metal {
                     Texture* dstTexture = ToBackend(copy->destination.texture.Get());
 
                     srcTexture->EnsureSubresourceContentInitialized(
+                        commandContext,
                         GetSubresourcesAffectedByCopy(copy->source, copy->copySize));
-                    EnsureDestinationTextureInitialized(dstTexture, copy->destination,
-                                                        copy->copySize);
+                    EnsureDestinationTextureInitialized(commandContext, dstTexture,
+                                                        copy->destination, copy->copySize);
 
                     // TODO(jiawei.shao@intel.com): support copies with 1D and 3D textures.
                     ASSERT(srcTexture->GetDimension() == wgpu::TextureDimension::e2D &&
