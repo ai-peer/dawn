@@ -331,25 +331,53 @@ namespace dawn_native { namespace opengl {
                             continue;
                         }
                         if (gl.IsAtLeastGL(4, 4)) {
-                            gl.ClearTexSubImage(mHandle, static_cast<GLint>(level), 0, 0,
-                                                static_cast<GLint>(layer), mipSize.width,
-                                                mipSize.height, 1, glFormat.format, glFormat.type,
-                                                clearColorData.data());
+                            gl.ClearTexSubImage(
+                                mHandle, static_cast<GLint>(level), 0, 0, static_cast<GLint>(layer),
+                                mipSize.width, mipSize.height, mipSize.depthOrArrayLayers,
+                                glFormat.format, glFormat.type, clearColorData.data());
                         } else {
                             GLuint framebuffer = 0;
                             gl.GenFramebuffers(1, &framebuffer);
                             gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
+                            gl.Disable(GL_SCISSOR_TEST);
+
+                            auto DoClear = [&]() {
+                                gl.ClearBufferiv(
+                                    GL_COLOR, 0,
+                                    reinterpret_cast<const GLint*>(clearColorData.data()));
+                            };
+
                             if (GetArrayLayers() == 1) {
-                                gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                                                        GetGLTarget(), GetHandle(), level);
+                                switch (GetDimension()) {
+                                    case wgpu::TextureDimension::e1D:
+                                        UNREACHABLE();
+                                    case wgpu::TextureDimension::e2D:
+                                        gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
+                                                                GL_COLOR_ATTACHMENT0, GetGLTarget(),
+                                                                GetHandle(), level);
+                                        DoClear();
+                                        break;
+                                    case wgpu::TextureDimension::e3D:
+                                        uint32_t depth =
+                                            GetMipLevelVirtualSize(level).depthOrArrayLayers;
+                                        for (GLint layer = 0; layer < static_cast<GLint>(depth);
+                                             ++layer) {
+                                            gl.FramebufferTextureLayer(
+                                                GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
+                                                GetHandle(), static_cast<GLint>(level), layer);
+                                            DoClear();
+                                        }
+                                        break;
+                                }
+
                             } else {
+                                ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
                                 gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER,
                                                            GL_COLOR_ATTACHMENT0, GetHandle(), level,
                                                            layer);
+                                DoClear();
                             }
-                            gl.Disable(GL_SCISSOR_TEST);
-                            gl.ClearBufferiv(GL_COLOR, 0,
-                                             reinterpret_cast<const GLint*>(clearColorData.data()));
+
                             gl.Enable(GL_SCISSOR_TEST);
                             gl.DeleteFramebuffers(1, &framebuffer);
                         }

@@ -951,9 +951,13 @@ namespace dawn_native { namespace d3d12 {
             for (Aspect aspect : IterateEnumMask(range.aspects)) {
                 const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
 
-                uint32_t bytesPerRow = Align((GetWidth() / blockInfo.width) * blockInfo.byteSize,
-                                             kTextureBytesPerRowAlignment);
-                uint64_t bufferSize = bytesPerRow * (GetHeight() / blockInfo.height);
+                Extent3D largestMipSize = GetMipLevelPhysicalSize(range.baseMipLevel);
+
+                uint32_t bytesPerRow =
+                    Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
+                          kTextureBytesPerRowAlignment);
+                uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
+                                      largestMipSize.depthOrArrayLayers;
                 DynamicUploader* uploader = device->GetDynamicUploader();
                 UploadHandle uploadHandle;
                 DAWN_TRY_ASSIGN(uploadHandle,
@@ -966,7 +970,7 @@ namespace dawn_native { namespace d3d12 {
                     // compute d3d12 texture copy locations for texture and buffer
                     Extent3D copySize = GetMipLevelPhysicalSize(level);
 
-                    uint32_t rowsPerImage = GetHeight() / blockInfo.height;
+                    uint32_t rowsPerImage = copySize.height / blockInfo.height;
                     Texture2DCopySplit copySplit = ComputeTextureCopySplit(
                         {0, 0, 0}, copySize, blockInfo, uploadHandle.startOffset, bytesPerRow,
                         rowsPerImage);

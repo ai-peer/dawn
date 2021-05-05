@@ -1030,9 +1030,13 @@ namespace dawn_native { namespace vulkan {
             ASSERT(range.aspects == Aspect::Color);
             const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
 
-            uint32_t bytesPerRow = Align((GetWidth() / blockInfo.width) * blockInfo.byteSize,
-                                         device->GetOptimalBytesPerRowAlignment());
-            uint64_t bufferSize = bytesPerRow * (GetHeight() / blockInfo.height);
+            Extent3D largestMipSize = GetMipLevelPhysicalSize(range.baseMipLevel);
+
+            uint32_t bytesPerRow =
+                Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
+                      device->GetOptimalBytesPerRowAlignment());
+            uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
+                                  largestMipSize.depthOrArrayLayers;
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
@@ -1053,9 +1057,11 @@ namespace dawn_native { namespace vulkan {
                         continue;
                     }
 
+                    Extent3D copySize = GetMipLevelPhysicalSize(level);
+
                     TextureDataLayout dataLayout;
                     dataLayout.offset = uploadHandle.startOffset;
-                    dataLayout.rowsPerImage = GetHeight() / blockInfo.height;
+                    dataLayout.rowsPerImage = copySize.height / blockInfo.height;
                     dataLayout.bytesPerRow = bytesPerRow;
                     TextureCopy textureCopy;
                     textureCopy.aspect = range.aspects;
@@ -1063,8 +1069,8 @@ namespace dawn_native { namespace vulkan {
                     textureCopy.origin = {0, 0, layer};
                     textureCopy.texture = this;
 
-                    regions.push_back(ComputeBufferImageCopyRegion(dataLayout, textureCopy,
-                                                                   GetMipLevelPhysicalSize(level)));
+                    regions.push_back(
+                        ComputeBufferImageCopyRegion(dataLayout, textureCopy, copySize));
                 }
             }
             device->fn.CmdCopyBufferToImage(
