@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ed2cf5_43853d83",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T13:52:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f649939d_4362eee6",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f05ebeb_62673787",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dd569b0_e03c3148",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T13:52:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f05ebeb_62673787",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2868f0_5cf6da1d",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-05-05T13:44:17Z",
       "side": 1,
       "message": "Ignore my last comment on your previous CL. It makes sense now.",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cffd7bf_52b349be",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T13:52:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7a2868f0_5cf6da1d",
       "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
