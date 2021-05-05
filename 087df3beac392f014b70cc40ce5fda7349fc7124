@@ -51,6 +51,24 @@
       "parentUuid": "8c06ec53_03011bc2",
       "revId": "087df3beac392f014b70cc40ce5fda7349fc7124",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3c6379_9d478bff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T11:50:10Z",
+      "side": 1,
+      "message": "The problem in the following change is that if we don\u0027t allocate a DispatchCmd then it will make the dispatchUsages indices not line up with the computations of currentDispatch in the backends. So we either need a second list of unused SyncScopes or a flag for each dispatchUsage on whether it is nooped and should be skipped (or something else?)",
+      "parentUuid": "74ca6fc9_4768a5ed",
+      "revId": "087df3beac392f014b70cc40ce5fda7349fc7124",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
