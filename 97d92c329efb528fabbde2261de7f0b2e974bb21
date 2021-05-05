@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47eb2730_5d464064",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T13:52:59Z",
+      "side": 1,
+      "message": "Had CR+2 from Austin and Stephen on https://dawn-review.googlesource.com/c/dawn/+/49681",
+      "revId": "97d92c329efb528fabbde2261de7f0b2e974bb21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
