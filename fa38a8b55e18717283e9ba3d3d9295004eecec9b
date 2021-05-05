@@ -71,6 +71,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ee72b4_29f76240",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:58:11Z",
+      "side": 1,
+      "message": "LGTM2 modulo comment about testing coverage.",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ace25383_14f58da0",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:58:11Z",
+      "side": 1,
+      "message": "Nit: Does the \"it\" here refer to \"compute passes\" in the first sentence? If so, it should be \"they\" (or the first sentence should use the singular). If it refers to the SyncScopeResourceUsage list, maybe it should specify \"The list will also..\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 89,
+        "endLine": 52,
+        "endChar": 91
+      },
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2868f0_5cf6da1d",
@@ -102,6 +142,86 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "7a2868f0_5cf6da1d",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f7fcd0_e909aeac",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:58:11Z",
+      "side": 1,
+      "message": "Nit: need -\u003e needs? render pass -\u003e render passes?",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71200780_6413843f",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:58:11Z",
+      "side": 1,
+      "message": "Nit: query sets? the query set?",
+      "range": {
+        "startLine": 167,
+        "startChar": 50,
+        "endLine": 167,
+        "endChar": 59
+      },
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "666795c7_27399ab8",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:58:11Z",
+      "side": 1,
+      "message": "Nit: Vulkan backend -\u003e the Vulkan backend?",
+      "range": {
+        "startLine": 167,
+        "startChar": 63,
+        "endLine": 167,
+        "endChar": 77
+      },
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3611abc_ccdb541e",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:58:11Z",
+      "side": 1,
+      "message": "Looks like there\u0027s some new logic here. Is this covered by tests?",
       "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
