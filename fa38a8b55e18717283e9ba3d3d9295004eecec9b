@@ -111,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12b3048a_3c624f1b",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T18:21:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ace25383_14f58da0",
+      "range": {
+        "startLine": 52,
+        "startChar": 89,
+        "endLine": 52,
+        "endChar": 91
+      },
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a2868f0_5cf6da1d",
@@ -163,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb6cf18_d2f06037",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T18:21:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f7fcd0_e909aeac",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71200780_6413843f",
@@ -209,6 +251,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84b5bcb_d30b12fc",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T18:21:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71200780_6413843f",
+      "range": {
+        "startLine": 167,
+        "startChar": 50,
+        "endLine": 167,
+        "endChar": 59
+      },
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34073832_27a9fd04",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T18:21:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "666795c7_27399ab8",
+      "range": {
+        "startLine": 167,
+        "startChar": 63,
+        "endLine": 167,
+        "endChar": 77
+      },
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3611abc_ccdb541e",
@@ -222,6 +312,24 @@
       "writtenOn": "2021-05-05T13:58:11Z",
       "side": 1,
       "message": "Looks like there\u0027s some new logic here. Is this covered by tests?",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb06a76c_ff80bc28",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T18:21:59Z",
+      "side": 1,
+      "message": "It is not new, but code from [1] that was moved. Hence all the typos :)",
+      "parentUuid": "c3611abc_ccdb541e",
       "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

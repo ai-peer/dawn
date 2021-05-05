@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6ac16e5_043433b1",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-05T18:21:59Z",
+      "side": 0,
+      "message": "[1]",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
