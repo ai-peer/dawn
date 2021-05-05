@@ -247,6 +247,17 @@ namespace dawn_native { namespace opengl {
                 gl.GenFramebuffers(1, &framebuffer);
                 gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
 
+                GLenum attachment;
+                if (range.aspects == (Aspect::Depth | Aspect::Stencil)) {
+                    attachment = GL_DEPTH_STENCIL_ATTACHMENT;
+                } else if (range.aspects == Aspect::Depth) {
+                    attachment = GL_DEPTH_ATTACHMENT;
+                } else if (range.aspects == Aspect::Stencil) {
+                    attachment = GL_STENCIL_ATTACHMENT;
+                } else {
+                    UNREACHABLE();
+                }
+
                 for (uint32_t level = range.baseMipLevel;
                      level < range.baseMipLevel + range.levelCount; ++level) {
                     switch (GetDimension()) {
@@ -268,9 +279,9 @@ namespace dawn_native { namespace opengl {
                                     continue;
                                 }
 
-                                gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER,
-                                                        GL_DEPTH_STENCIL_ATTACHMENT, GetGLTarget(),
-                                                        GetHandle(), static_cast<GLint>(level));
+                                gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment,
+                                                        GetGLTarget(), GetHandle(),
+                                                        static_cast<GLint>(level));
                                 DoClear(aspectsToClear);
                             } else {
                                 for (uint32_t layer = range.baseArrayLayer;
@@ -292,9 +303,8 @@ namespace dawn_native { namespace opengl {
                                     }
 
                                     gl.FramebufferTextureLayer(
-                                        GL_DRAW_FRAMEBUFFER, GL_DEPTH_STENCIL_ATTACHMENT,
-                                        GetHandle(), static_cast<GLint>(level),
-                                        static_cast<GLint>(layer));
+                                        GL_DRAW_FRAMEBUFFER, attachment, GetHandle(),
+                                        static_cast<GLint>(level), static_cast<GLint>(layer));
                                     DoClear(aspectsToClear);
                                 }
                             }
@@ -314,9 +324,20 @@ namespace dawn_native { namespace opengl {
                 const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(Aspect::Color).block;
                 ASSERT(blockInfo.byteSize <= MAX_TEXEL_SIZE);
 
-                std::array<GLbyte, MAX_TEXEL_SIZE> clearColorData;
-                clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 255;
-                clearColorData.fill(clearColor);
+                // For gl.ClearBufferiv/uiv calls
+                std::array<GLuint, 4> clearColorData;
+                clearColorData.fill((clearValue == TextureBase::ClearValue::Zero) ? 0u : 1u);
+
+                // For gl.ClearBufferfv calls
+                std::array<GLfloat, 4> fClearColorData;
+                fClearColorData.fill((clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f);
+
+                // For gl.ClearTexSubImage calls
+                std::array<GLbyte, MAX_TEXEL_SIZE> clearColorValue;
+                clearColorValue.fill((clearValue == TextureBase::ClearValue::Zero) ? 0 : char(255));
+
+                wgpu::TextureComponentType baseType =
+                    GetFormat().GetAspectInfo(Aspect::Color).baseType;
 
                 const GLFormat& glFormat = GetGLFormat();
                 for (uint32_t level = range.baseMipLevel;
@@ -331,28 +352,74 @@ namespace dawn_native { namespace opengl {
                             continue;
                         }
                         if (gl.IsAtLeastGL(4, 4)) {
-                            gl.ClearTexSubImage(mHandle, static_cast<GLint>(level), 0, 0,
-                                                static_cast<GLint>(layer), mipSize.width,
-                                                mipSize.height, 1, glFormat.format, glFormat.type,
-                                                clearColorData.data());
+                            gl.ClearTexSubImage(
+                                mHandle, static_cast<GLint>(level), 0, 0, static_cast<GLint>(layer),
+                                mipSize.width, mipSize.height, mipSize.depthOrArrayLayers,
+                                glFormat.format, glFormat.type, clearColorValue.data());
                         } else {
                             GLuint framebuffer = 0;
                             gl.GenFramebuffers(1, &framebuffer);
                             gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, framebuffer);
-                            if (GetArrayLayers() == 1 &&
-                                GetDimension() == wgpu::TextureDimension::e2D) {
-                                gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, GL_COLOR_ATTACHMENT0,
-                                                        GetGLTarget(), GetHandle(), level);
-                            } else {
-                                gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER,
-                                                           GL_COLOR_ATTACHMENT0, GetHandle(), level,
-                                                           layer);
-                            }
+
+                            GLenum attachment = GL_COLOR_ATTACHMENT0;
+                            gl.DrawBuffers(1, &attachment);
+
                             gl.Disable(GL_SCISSOR_TEST);
-                            gl.ClearBufferiv(GL_COLOR, 0,
-                                             reinterpret_cast<const GLint*>(clearColorData.data()));
+                            gl.ColorMask(true, true, true, true);
+
+                            auto DoClear = [&]() {
+                                switch (baseType) {
+                                    case wgpu::TextureComponentType::Float: {
+                                        gl.ClearBufferfv(GL_COLOR, 0, fClearColorData.data());
+                                        break;
+                                    }
+                                    case wgpu::TextureComponentType::Uint: {
+                                        gl.ClearBufferuiv(GL_COLOR, 0, clearColorData.data());
+                                        break;
+                                    }
+                                    case wgpu::TextureComponentType::Sint: {
+                                        gl.ClearBufferiv(
+                                            GL_COLOR, 0,
+                                            reinterpret_cast<GLint*>(clearColorData.data()));
+                                        break;
+                                    }
+
+                                    case wgpu::TextureComponentType::DepthComparison:
+                                        UNREACHABLE();
+                                }
+                            };
+
+                            if (GetArrayLayers() == 1) {
+                                switch (GetDimension()) {
+                                    case wgpu::TextureDimension::e1D:
+                                        UNREACHABLE();
+                                    case wgpu::TextureDimension::e2D:
+                                        gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment,
+                                                                GetGLTarget(), GetHandle(), level);
+                                        DoClear();
+                                        break;
+                                    case wgpu::TextureDimension::e3D:
+                                        uint32_t depth =
+                                            GetMipLevelVirtualSize(level).depthOrArrayLayers;
+                                        for (GLint z = 0; z < static_cast<GLint>(depth); ++z) {
+                                            gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER,
+                                                                       attachment, GetHandle(),
+                                                                       level, z);
+                                            DoClear();
+                                        }
+                                        break;
+                                }
+
+                            } else {
+                                ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
+                                gl.FramebufferTextureLayer(GL_DRAW_FRAMEBUFFER, attachment,
+                                                           GetHandle(), level, layer);
+                                DoClear();
+                            }
+
                             gl.Enable(GL_SCISSOR_TEST);
                             gl.DeleteFramebuffers(1, &framebuffer);
+                            gl.BindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
                         }
                     }
                 }
@@ -363,20 +430,27 @@ namespace dawn_native { namespace opengl {
             // create temp buffer with clear color to copy to the texture image
             const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(Aspect::Color).block;
             ASSERT(kTextureBytesPerRowAlignment % blockInfo.byteSize == 0);
-            uint32_t bytesPerRow = Align((GetWidth() / blockInfo.width) * blockInfo.byteSize,
-                                         kTextureBytesPerRowAlignment);
+
+            Extent3D largestMipSize = GetMipLevelPhysicalSize(range.baseMipLevel);
+            uint32_t bytesPerRow = (largestMipSize.width / blockInfo.width) * blockInfo.byteSize;
 
             // Make sure that we are not rounding
             ASSERT(bytesPerRow % blockInfo.byteSize == 0);
-            ASSERT(GetHeight() % blockInfo.height == 0);
+            ASSERT(largestMipSize.height % blockInfo.height == 0);
+
+            uint64_t bufferSize64 = Align(static_cast<uint64_t>(bytesPerRow) *
+                                              (largestMipSize.height / blockInfo.height) *
+                                              largestMipSize.depthOrArrayLayers,
+                                          4);
+            if (bufferSize64 > std::numeric_limits<size_t>::max()) {
+                return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
+            }
+            size_t bufferSize = static_cast<size_t>(bufferSize64);
 
             dawn_native::BufferDescriptor descriptor = {};
             descriptor.mappedAtCreation = true;
             descriptor.usage = wgpu::BufferUsage::CopySrc;
-            descriptor.size = bytesPerRow * (GetHeight() / blockInfo.height);
-            if (descriptor.size > std::numeric_limits<uint32_t>::max()) {
-                return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
-            }
+            descriptor.size = bufferSize;
 
             // We don't count the lazy clear of srcBuffer because it is an internal buffer.
             // TODO(natlee@microsoft.com): use Dynamic Uploader here for temp buffer
@@ -384,7 +458,7 @@ namespace dawn_native { namespace opengl {
             DAWN_TRY_ASSIGN(srcBuffer, Buffer::CreateInternalBuffer(device, &descriptor, false));
 
             // Fill the buffer with clear color
-            memset(srcBuffer->GetMappedRange(0, descriptor.size), clearColor, descriptor.size);
+            memset(srcBuffer->GetMappedRange(0, bufferSize), clearColor, bufferSize);
             srcBuffer->Unmap();
 
             // Bind buffer and texture, and make the buffer to texture copy
@@ -427,8 +501,13 @@ namespace dawn_native { namespace opengl {
                         }
                         break;
 
-                    case wgpu::TextureDimension::e1D:
                     case wgpu::TextureDimension::e3D:
+                        gl.TexSubImage3D(GetGLTarget(), static_cast<GLint>(level), 0, 0, 0,
+                                         size.width, size.height, size.depthOrArrayLayers,
+                                         GetGLFormat().format, GetGLFormat().type, 0);
+                        break;
+
+                    case wgpu::TextureDimension::e1D:
                         UNREACHABLE();
                 }
             }
