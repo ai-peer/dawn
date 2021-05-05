@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f649939d_4362eee6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:44:17Z",
+      "side": 1,
+      "message": "uNit: .. -\u003e .",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f05ebeb_62673787",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:44:17Z",
+      "side": 1,
+      "message": "Nit: duplicate -\u003e duplicates",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a2868f0_5cf6da1d",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:44:17Z",
+      "side": 1,
+      "message": "Ignore my last comment on your previous CL. It makes sense now.",
+      "revId": "fa38a8b55e18717283e9ba3d3d9295004eecec9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
