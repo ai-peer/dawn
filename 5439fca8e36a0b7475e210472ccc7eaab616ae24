@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67acdac9_4ab6cc20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e613c96_9e60bf0e",
+        "filename": "src/dawn_native/PassResourceUsage.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "If RenderPassUsage and ComputePassUsage are identical, why not just have a single PassUsages or PassResourceUsages type?",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68fe687f_905a4ca0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "Not new to this patch, but could a malformed command stream cause access outside the computePasses vector? e.g., Too many BeginComputePass cmds? Or is that something validation would catch?",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb558953_7eda38f0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 708,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2c8ad0_35f858df",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ff4d390_e50d9ca3",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d22c8cc_910266c8",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 567,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a555cc8_afe95e62",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 576,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-05T13:40:10Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "5439fca8e36a0b7475e210472ccc7eaab616ae24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
