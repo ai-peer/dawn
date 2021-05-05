@@ -682,7 +682,8 @@ namespace dawn_native { namespace d3d12 {
     // TODO(dawn:512): Once we optimize DynamicUploader allocation with offsets we
     // should make this return D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT = 512.
     // Current implementations would try to allocate additional 511 bytes,
-    // so we return 1 and let ComputeTextureCopySplits take care of the alignment.
+    // so we return 1 and let Compute2DTextureCopySplits and Compute3DTextureCopySplits
+    // take care of the alignment.
     uint64_t Device::GetOptimalBufferToTextureCopyOffsetAlignment() const {
         return 1;
     }
