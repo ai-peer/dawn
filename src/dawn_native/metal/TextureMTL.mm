@@ -538,9 +538,7 @@ namespace dawn_native { namespace metal {
                              (largestMipSize.height / blockInfo.height),
                          512llu);
 
-            // TODO(enga): Multiply by largestMipSize.depthOrArrayLayers and do a larger 3D copy to
-            // clear a whole range of subresources when tracking that is improved.
-            uint64_t bufferSize = largestMipBytesPerImage * 1;
+            uint64_t bufferSize = largestMipBytesPerImage * largestMipSize.depthOrArrayLayers;
 
             if (bufferSize > std::numeric_limits<NSUInteger>::max()) {
                 return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
@@ -577,7 +575,7 @@ namespace dawn_native { namespace metal {
                               sourceBytesPerRow:largestMipBytesPerRow
                             sourceBytesPerImage:largestMipBytesPerImage
                                      sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height,
-                                                            1)
+                                                            virtualSize.depthOrArrayLayers)
                                       toTexture:GetMTLTexture()
                                destinationSlice:arrayLayer
                                destinationLevel:level
