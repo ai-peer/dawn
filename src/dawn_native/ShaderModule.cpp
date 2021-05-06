@@ -1106,10 +1106,11 @@ namespace dawn_native {
                 parseResult->tintSource = std::move(tintSource);
             } else {
                 tint::transform::Manager transformManager;
-                transformManager.Add<tint::transform::EmitVertexPointSize>();
+                // transformManager.Add<tint::transform::EmitVertexPointSize>();
                 transformManager.Add<tint::transform::Spirv>();
 
                 tint::transform::DataMap transformInputs;
+                transformInputs.Add<tint::transform::Spirv::Config>(true);
 
                 DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program,
                                                        transformInputs, nullptr, outMessages));
@@ -1309,13 +1310,15 @@ namespace dawn_native {
 
         tint::transform::Manager transformManager;
         transformManager.Add<tint::transform::VertexPulling>();
-        transformManager.Add<tint::transform::EmitVertexPointSize>();
+        // transformManager.Add<tint::transform::EmitVertexPointSize>();
         transformManager.Add<tint::transform::Spirv>();
         if (GetDevice()->IsRobustnessEnabled()) {
             transformManager.Add<tint::transform::BoundArrayAccessors>();
         }
 
         tint::transform::DataMap transformInputs;
+        transformInputs.Add<tint::transform::Spirv::Config>(true);
+
         AddVertexPullingTransformConfig(vertexState, entryPoint, pullingBufferBindingSet,
                                         &transformInputs);
 

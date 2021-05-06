@@ -56,10 +56,11 @@ namespace dawn_native { namespace vulkan {
 
             tint::transform::Manager transformManager;
             transformManager.Add<tint::transform::BoundArrayAccessors>();
-            transformManager.Add<tint::transform::EmitVertexPointSize>();
+            // transformManager.Add<tint::transform::EmitVertexPointSize>();
             transformManager.Add<tint::transform::Spirv>();
 
             tint::transform::DataMap transformInputs;
+            transformInputs.Add<tint::transform::Spirv::Config>(true);
 
             tint::Program program;
             DAWN_TRY_ASSIGN(program,
