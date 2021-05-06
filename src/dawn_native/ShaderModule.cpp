@@ -1106,7 +1106,7 @@ namespace dawn_native {
                 parseResult->tintSource = std::move(tintSource);
             } else {
                 tint::transform::Manager transformManager;
-                transformManager.Add<tint::transform::EmitVertexPointSize>();
+                // transformManager.Add<tint::transform::EmitVertexPointSize>();
                 transformManager.Add<tint::transform::Spirv>();
 
                 tint::transform::DataMap transformInputs;
@@ -1309,7 +1309,7 @@ namespace dawn_native {
 
         tint::transform::Manager transformManager;
         transformManager.Add<tint::transform::VertexPulling>();
-        transformManager.Add<tint::transform::EmitVertexPointSize>();
+        // transformManager.Add<tint::transform::EmitVertexPointSize>();
         transformManager.Add<tint::transform::Spirv>();
         if (GetDevice()->IsRobustnessEnabled()) {
             transformManager.Add<tint::transform::BoundArrayAccessors>();
