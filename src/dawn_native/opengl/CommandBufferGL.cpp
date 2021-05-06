@@ -492,7 +492,8 @@ namespace dawn_native { namespace opengl {
                         case Aspect::Plane1:
                             UNREACHABLE();
                     }
-                    if (srcTexture->GetArrayLayers() == 1) {
+                    if (srcTexture->GetArrayLayers() == 1 &&
+                        srcTexture->GetDimension() == wgpu::TextureDimension::e2D) {
                         gl.FramebufferTexture2D(GL_READ_FRAMEBUFFER, glAttachment,
                                                 srcTexture->GetGLTarget(), srcTexture->GetHandle(),
                                                 src.mipLevel);
@@ -502,7 +503,8 @@ namespace dawn_native { namespace opengl {
                                                    static_cast<GLint>(src.mipLevel),
                                                    static_cast<GLint>(src.origin.z + layer));
                     }
-                    if (dstTexture->GetArrayLayers() == 1) {
+                    if (dstTexture->GetArrayLayers() == 1 &&
+                        dstTexture->GetDimension() == wgpu::TextureDimension::e2D) {
                         gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, glAttachment,
                                                 dstTexture->GetGLTarget(), dstTexture->GetHandle(),
                                                 dst.mipLevel);
@@ -648,7 +650,7 @@ namespace dawn_native { namespace opengl {
 
                     buffer->EnsureDataInitializedAsDestination(copy);
 
-                    ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
                     SubresourceRange subresources =
                         GetSubresourcesAffectedByCopy(src, copy->copySize);
                     texture->EnsureSubresourceContentInitialized(subresources);
@@ -718,8 +720,21 @@ namespace dawn_native { namespace opengl {
                             break;
                         }
 
+                        case wgpu::TextureDimension::e3D: {
+                            const uint64_t bytesPerImage = dst.bytesPerRow * dst.rowsPerImage;
+                            for (uint32_t layer = 0; layer < copySize.depthOrArrayLayers; ++layer) {
+                                gl.FramebufferTextureLayer(GL_READ_FRAMEBUFFER, glAttachment,
+                                                           texture->GetHandle(), src.mipLevel,
+                                                           src.origin.z + layer);
+                                gl.ReadPixels(src.origin.x, src.origin.y, copySize.width,
+                                              copySize.height, glFormat, glType, offset);
+
+                                offset += bytesPerImage;
+                            }
+                            break;
+                        }
+
                         case wgpu::TextureDimension::e1D:
-                        case wgpu::TextureDimension::e3D:
                             UNREACHABLE();
                     }
 
@@ -1266,7 +1281,7 @@ namespace dawn_native { namespace opengl {
                        const TextureDataLayout& dataLayout,
                        const Extent3D& copySize) {
         Texture* texture = ToBackend(destination.texture.Get());
-        ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
+        ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
         SubresourceRange range = GetSubresourcesAffectedByCopy(destination, copySize);
         if (IsCompleteSubresourceCopiedTo(texture, copySize, destination.mipLevel)) {
             texture->SetIsSubresourceContentInitialized(true, range);
@@ -1309,7 +1324,8 @@ namespace dawn_native { namespace opengl {
                 gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_HEIGHT, blockInfo.height);
                 gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_DEPTH, 1);
 
-                if (texture->GetArrayLayers() == 1) {
+                if (texture->GetArrayLayers() == 1 &&
+                    texture->GetDimension() == wgpu::TextureDimension::e2D) {
                     gl.CompressedTexSubImage2D(target, destination.mipLevel, x, y, width, height,
                                                format.internalFormat, imageSize, data);
                 } else {
@@ -1327,7 +1343,8 @@ namespace dawn_native { namespace opengl {
                 gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_HEIGHT, 0);
                 gl.PixelStorei(GL_UNPACK_COMPRESSED_BLOCK_DEPTH, 0);
             } else {
-                if (texture->GetArrayLayers() == 1) {
+                if (texture->GetArrayLayers() == 1 &&
+                    texture->GetDimension() == wgpu::TextureDimension::e2D) {
                     const uint8_t* d = static_cast<const uint8_t*>(data);
 
                     for (; y < destination.origin.y + copySize.height; y += blockInfo.height) {
@@ -1361,7 +1378,8 @@ namespace dawn_native { namespace opengl {
             if (dataLayout.bytesPerRow % blockInfo.byteSize == 0) {
                 gl.PixelStorei(GL_UNPACK_ROW_LENGTH,
                                dataLayout.bytesPerRow / blockInfo.byteSize * blockInfo.width);
-                if (texture->GetArrayLayers() == 1) {
+                if (texture->GetArrayLayers() == 1 &&
+                    texture->GetDimension() == wgpu::TextureDimension::e2D) {
                     gl.TexSubImage2D(target, destination.mipLevel, x, y, width, height,
                                      format.format, format.type, data);
                 } else {
@@ -1373,7 +1391,8 @@ namespace dawn_native { namespace opengl {
                 }
                 gl.PixelStorei(GL_UNPACK_ROW_LENGTH, 0);
             } else {
-                if (texture->GetArrayLayers() == 1) {
+                if (texture->GetArrayLayers() == 1 &&
+                    texture->GetDimension() == wgpu::TextureDimension::e2D) {
                     const uint8_t* d = static_cast<const uint8_t*>(data);
                     for (; y < destination.origin.y + height; ++y) {
                         gl.TexSubImage2D(target, destination.mipLevel, x, y, width, 1,
