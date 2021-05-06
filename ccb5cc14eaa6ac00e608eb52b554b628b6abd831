@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd6e54be_5200edec",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T07:37:57Z",
+      "side": 1,
+      "message": "nit: Do you have a Bug: to tag this with?",
+      "revId": "ccb5cc14eaa6ac00e608eb52b554b628b6abd831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0ea456f_c5fa3907",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T07:37:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ccb5cc14eaa6ac00e608eb52b554b628b6abd831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
