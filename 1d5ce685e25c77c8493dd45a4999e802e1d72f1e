@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b6c12d2_e55c1d8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T11:27:05Z",
+      "side": 1,
+      "message": "Carrying Austin\u0027s +2 from https://dawn-review.googlesource.com/c/dawn/+/49740",
+      "revId": "1d5ce685e25c77c8493dd45a4999e802e1d72f1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
