@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8662602_59dcdc9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-06T15:20:44Z",
+      "side": 1,
+      "message": "In addition to the new functionality, nice cleanup in the D3D12 and Vulkan backends.\n\nThis sync scope functionality seems subtle and complex worthy of a (non-spec) document describing it, if one doesn\u0027t already exist. It feels like some example diagrams with brackets on the side showing the scopes for different calls (copy, render pass, compute pass) could be really helpful.",
+      "revId": "c5af453e9f805454d0e11130466312b26d5b4891",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
