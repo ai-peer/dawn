@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "033d8a23_bc9874ba",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T11:50:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "337b3613_56ba49e6",
+      "range": {
+        "startLine": 230,
+        "startChar": 4,
+        "endLine": 236,
+        "endChar": 5
+      },
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7e52427_c2e41455",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "Yea.. idk - iteration of the std::vector will be much faster for sure. But at the same time we have std::vector\u003cSyncScopeResourceUsage\u003e and each sync scope has std::vector\u003cBuffer*\u003e. There\u0027s no deduplication so we\u0027ll check some resources more times than necessary.\n\nI do think that having a set would be more clear to understand than the way the CL currently attempts to maintain a definitelyUsed list and maybeUnused set.\nFor now though, I\u0027d be okay as long as the name/comment clarifies that the resources are maybeUnused and may be checked in duplicate.\n\nWe can do some better testing of perf whenever we start using absl::flat_hash_set",
       "parentUuid": "6c9797e5_0524b7ec",
+      "range": {
+        "startLine": 162,
+        "startChar": 12,
+        "endLine": 170,
+        "endChar": 13
+      },
+      "revId": "2946cb0d0c7e5d4ad6731d4208eeef79dfcd56bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0097aec5_a2c7b06c",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T11:50:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f23b649_c9e53e12",
       "range": {
         "startLine": 162,
         "startChar": 12,
