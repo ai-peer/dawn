@@ -59,6 +59,17 @@ namespace utils {
     // in it will contain 1 byte of data.
     void UnalignDynamicUploader(wgpu::Device device);
 
+    // Samples an input texture and writes out the texture data into an output buffer.
+    // Data will be written as the texture's component type.
+    std::pair<wgpu::Buffer, uint64_t> ReadbackTextureBySampling(
+        wgpu::Device device,
+        wgpu::ImageCopyTexture source,
+        wgpu::TextureFormat format,
+        wgpu::TextureDimension dimension,
+        wgpu::Extent3D extent3D,
+        wgpu::BufferUsage bufferUsage,
+        wgpu::CommandEncoder encoder = nullptr);
+
 }  // namespace utils
 
 #endif  // UTILS_TESTHELPERS_H_

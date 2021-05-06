@@ -20,6 +20,7 @@
 #include "utils/TextureFormatUtils.h"
 #include "utils/WGPUHelpers.h"
 
+#include <sstream>
 #include <vector>
 
 namespace utils {
@@ -134,4 +135,248 @@ namespace utils {
         device.GetQueue().WriteTexture(&imageCopyTexture, data.data(), 1, &textureDataLayout,
                                        &copyExtent);
     }
+
+    std::pair<wgpu::Buffer, uint64_t> ReadbackTextureBySampling(wgpu::Device device,
+                                                                wgpu::ImageCopyTexture source,
+                                                                wgpu::TextureFormat format,
+                                                                wgpu::TextureDimension dimension,
+                                                                wgpu::Extent3D extent3D,
+                                                                wgpu::BufferUsage bufferUsage,
+                                                                wgpu::CommandEncoder encoder) {
+        std::ostringstream shader;
+
+        const char* textureComponentType = utils::GetWGSLColorTextureComponentType(format);
+        uint32_t componentCount = utils::GetTextureFormatComponentCount(format);
+
+        wgpu::BufferDescriptor bufferDesc;
+        bufferDesc.size =
+            4u * componentCount * extent3D.width * extent3D.height * extent3D.depthOrArrayLayers;
+        bufferDesc.usage = wgpu::BufferUsage::Storage | bufferUsage;
+        wgpu::Buffer buffer = device.CreateBuffer(&bufferDesc);
+
+        const char* indexExpression = nullptr;
+        switch (format) {
+            case wgpu::TextureFormat::R8Unorm:
+            case wgpu::TextureFormat::R8Snorm:
+            case wgpu::TextureFormat::R8Uint:
+            case wgpu::TextureFormat::R8Sint:
+            case wgpu::TextureFormat::R16Uint:
+            case wgpu::TextureFormat::R16Sint:
+            case wgpu::TextureFormat::R16Float:
+            case wgpu::TextureFormat::R32Float:
+            case wgpu::TextureFormat::R32Uint:
+            case wgpu::TextureFormat::R32Sint:
+            case wgpu::TextureFormat::BC4RUnorm:
+            case wgpu::TextureFormat::BC4RSnorm:
+                indexExpression = ".r";
+                break;
+
+            case wgpu::TextureFormat::RG8Unorm:
+            case wgpu::TextureFormat::RG8Snorm:
+            case wgpu::TextureFormat::RG8Uint:
+            case wgpu::TextureFormat::RG8Sint:
+            case wgpu::TextureFormat::RG16Uint:
+            case wgpu::TextureFormat::RG16Sint:
+            case wgpu::TextureFormat::RG16Float:
+            case wgpu::TextureFormat::RG32Float:
+            case wgpu::TextureFormat::RG32Uint:
+            case wgpu::TextureFormat::RG32Sint:
+            case wgpu::TextureFormat::BC5RGUnorm:
+            case wgpu::TextureFormat::BC5RGSnorm:
+                indexExpression = ".rg";
+                break;
+
+            case wgpu::TextureFormat::RGB10A2Unorm:
+            case wgpu::TextureFormat::RGB9E5Ufloat:
+            case wgpu::TextureFormat::RG11B10Ufloat:
+            case wgpu::TextureFormat::BC6HRGBUfloat:
+            case wgpu::TextureFormat::BC6HRGBFloat:
+                indexExpression = ".rgb";
+                break;
+
+            case wgpu::TextureFormat::RGBA8Unorm:
+            case wgpu::TextureFormat::RGBA8UnormSrgb:
+            case wgpu::TextureFormat::RGBA8Snorm:
+            case wgpu::TextureFormat::RGBA8Uint:
+            case wgpu::TextureFormat::RGBA8Sint:
+            case wgpu::TextureFormat::RGBA16Uint:
+            case wgpu::TextureFormat::RGBA16Sint:
+            case wgpu::TextureFormat::RGBA16Float:
+            case wgpu::TextureFormat::RGBA32Float:
+            case wgpu::TextureFormat::RGBA32Uint:
+            case wgpu::TextureFormat::RGBA32Sint:
+            case wgpu::TextureFormat::BC1RGBAUnorm:
+            case wgpu::TextureFormat::BC1RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC2RGBAUnorm:
+            case wgpu::TextureFormat::BC2RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC3RGBAUnorm:
+            case wgpu::TextureFormat::BC3RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC7RGBAUnorm:
+            case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+                indexExpression = ".rgba";
+                break;
+
+            case wgpu::TextureFormat::BGRA8Unorm:
+            case wgpu::TextureFormat::BGRA8UnormSrgb:
+                indexExpression = ".bgra";
+                break;
+
+            case wgpu::TextureFormat::Stencil8:
+            case wgpu::TextureFormat::Depth32Float:
+            case wgpu::TextureFormat::Depth24Plus:
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+            case wgpu::TextureFormat::Undefined:
+                UNREACHABLE();
+        }
+
+        shader << "type TextureComponentT = " << textureComponentType << ";\n";
+        if (componentCount == 1) {
+            shader << "type TexelResultT = TextureComponentT;\n";
+        } else {
+            shader << "type TexelResultT = vec" << std::to_string(componentCount)
+                   << "<TextureComponentT>;\n";
+        }
+        switch (dimension) {
+            case wgpu::TextureDimension::e1D:
+                shader << "type TextureT = texture_1d<TextureComponentT>;\n";
+                break;
+            case wgpu::TextureDimension::e2D:
+                if (extent3D.depthOrArrayLayers > 1) {
+                    shader << "type TextureT = texture_2d_array<TextureComponentT>;\n";
+                } else {
+                    shader << "type TextureT = texture_2d<TextureComponentT>;\n";
+                }
+                break;
+            case wgpu::TextureDimension::e3D:
+                shader << "type TextureT = texture_3d<TextureComponentT>;\n";
+                break;
+        }
+        shader << R"(
+[[block]] struct Constants {
+    [[size(16)]] origin : vec3<u32>;
+    [[size(4)]] mipLevel : u32;
+    [[size(4)]] width : u32;
+    [[size(4)]] height : u32;
+};
+
+[[group(0), binding(0)]] var<uniform> constants : Constants;
+
+[[group(0), binding(1)]] var source : TextureT;
+
+[[block]] struct Result {
+    values : array<TexelResultT>;
+};
+[[group(0), binding(2)]] var<storage> result : [[access(read_write)]] Result;
+
+)";
+
+        switch (dimension) {
+            case wgpu::TextureDimension::e1D:
+                shader << R"(
+fn loadTexel(t : texture_1d<TextureComponentT>, texelCoords : vec3<i32>) -> vec4<TextureComponentT> {
+    return textureLoad(t, texelCoords.x, i32(constants.mipLevel));
+}
+                )";
+                break;
+            case wgpu::TextureDimension::e2D:
+                if (extent3D.depthOrArrayLayers > 1) {
+                    shader << R"(
+fn loadTexel(t : texture_2d_array<TextureComponentT>, texelCoords : vec3<i32>) -> vec4<TextureComponentT> {
+    return textureLoad(t, texelCoords.xy, texelCoords.z, i32(constants.mipLevel));
+}
+                    )";
+                } else {
+                    shader << R"(
+fn loadTexel(t : texture_2d<TextureComponentT>, texelCoords : vec3<i32>) -> vec4<TextureComponentT> {
+    return textureLoad(t, texelCoords.xy, i32(constants.mipLevel));
+}
+                    )";
+                }
+                break;
+            case wgpu::TextureDimension::e3D:
+                shader << R"(
+fn loadTexel(t : texture_3d<TextureComponentT>, texelCoords : vec3<i32>) -> vec4<TextureComponentT> {
+    return textureLoad(t, texelCoords, i32(constants.mipLevel));
+}
+                )";
+                break;
+        }
+
+        shader << R"(
+[[stage(compute)]]
+fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>) {
+    var flatIndex : u32 =
+        constants.width * constants.height * GlobalInvocationID.z +
+        constants.width * GlobalInvocationID.y +
+        GlobalInvocationID.x;
+
+    var texel : vec4<TextureComponentT> = loadTexel(source, vec3<i32>(GlobalInvocationID.xyz + constants.origin));
+
+    result.values[flatIndex] = texel)"
+               << indexExpression << ";\n}";
+
+        wgpu::ComputePipelineDescriptor pipelineDesc;
+        pipelineDesc.computeStage.entryPoint = "main";
+        pipelineDesc.computeStage.module = utils::CreateShaderModule(device, shader.str().c_str());
+
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
+
+        struct Constants {
+            std::array<uint32_t, 4> origin;  // one extra for padding
+            uint32_t mipLevel;
+            uint32_t width;
+            uint32_t height;
+        };
+        static_assert(offsetof(Constants, origin) == 0, "");
+        static_assert(offsetof(Constants, mipLevel) == 16, "");
+        static_assert(offsetof(Constants, width) == 20, "");
+        static_assert(offsetof(Constants, height) == 24, "");
+
+        Constants constants = {
+            {source.origin.x, source.origin.y, source.origin.z, 0},
+            source.mipLevel,
+            extent3D.width,
+            extent3D.height,
+        };
+
+        wgpu::Buffer constantsBuffer = utils::CreateBufferFromData(
+            device, &constants, sizeof(constants), wgpu::BufferUsage::Uniform);
+
+        wgpu::TextureViewDescriptor viewDesc = {};
+        if (dimension == wgpu::TextureDimension::e2D) {
+            if (extent3D.depthOrArrayLayers > 1) {
+                viewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+            } else {
+                viewDesc.dimension = wgpu::TextureViewDimension::e2D;
+                viewDesc.baseArrayLayer = source.origin.z;
+                viewDesc.arrayLayerCount = 1u;
+            }
+        }
+
+        bool madeEncoder = false;
+        if (!encoder) {
+            madeEncoder = true;
+            encoder = device.CreateCommandEncoder();
+        }
+
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                  {
+                                                      {0, constantsBuffer},
+                                                      {1, source.texture.CreateView(&viewDesc)},
+                                                      {2, buffer},
+                                                  }));
+        pass.Dispatch(extent3D.width, extent3D.height, extent3D.depthOrArrayLayers);
+        pass.EndPass();
+
+        if (madeEncoder) {
+            wgpu::CommandBuffer commandBuffer = encoder.Finish();
+            device.GetQueue().Submit(1, &commandBuffer);
+        }
+
+        return std::make_pair(buffer, bufferDesc.size);
+    }
+
 }  // namespace utils

@@ -379,4 +379,75 @@ namespace utils {
         }
     }
 
+    uint32_t GetTextureFormatComponentCount(wgpu::TextureFormat textureFormat) {
+        switch (textureFormat) {
+            case wgpu::TextureFormat::R8Unorm:
+            case wgpu::TextureFormat::R8Snorm:
+            case wgpu::TextureFormat::R8Uint:
+            case wgpu::TextureFormat::R8Sint:
+            case wgpu::TextureFormat::R16Uint:
+            case wgpu::TextureFormat::R16Sint:
+            case wgpu::TextureFormat::R16Float:
+            case wgpu::TextureFormat::R32Float:
+            case wgpu::TextureFormat::R32Uint:
+            case wgpu::TextureFormat::R32Sint:
+            case wgpu::TextureFormat::Stencil8:
+            case wgpu::TextureFormat::Depth32Float:
+            case wgpu::TextureFormat::Depth24Plus:
+            case wgpu::TextureFormat::BC4RUnorm:
+            case wgpu::TextureFormat::BC4RSnorm:
+                return 1;
+
+            case wgpu::TextureFormat::RG8Unorm:
+            case wgpu::TextureFormat::RG8Snorm:
+            case wgpu::TextureFormat::RG8Uint:
+            case wgpu::TextureFormat::RG8Sint:
+            case wgpu::TextureFormat::RG16Uint:
+            case wgpu::TextureFormat::RG16Sint:
+            case wgpu::TextureFormat::RG16Float:
+            case wgpu::TextureFormat::RG32Float:
+            case wgpu::TextureFormat::RG32Uint:
+            case wgpu::TextureFormat::RG32Sint:
+            case wgpu::TextureFormat::BC5RGUnorm:
+            case wgpu::TextureFormat::BC5RGSnorm:
+                return 2;
+
+            case wgpu::TextureFormat::RGB10A2Unorm:
+            case wgpu::TextureFormat::RGB9E5Ufloat:
+            case wgpu::TextureFormat::RG11B10Ufloat:
+            case wgpu::TextureFormat::BC6HRGBUfloat:
+            case wgpu::TextureFormat::BC6HRGBFloat:
+                return 3;
+
+            case wgpu::TextureFormat::RGBA8Unorm:
+            case wgpu::TextureFormat::RGBA8UnormSrgb:
+            case wgpu::TextureFormat::RGBA8Snorm:
+            case wgpu::TextureFormat::RGBA8Uint:
+            case wgpu::TextureFormat::RGBA8Sint:
+            case wgpu::TextureFormat::BGRA8Unorm:
+            case wgpu::TextureFormat::BGRA8UnormSrgb:
+            case wgpu::TextureFormat::RGBA16Uint:
+            case wgpu::TextureFormat::RGBA16Sint:
+            case wgpu::TextureFormat::RGBA16Float:
+            case wgpu::TextureFormat::RGBA32Float:
+            case wgpu::TextureFormat::RGBA32Uint:
+            case wgpu::TextureFormat::RGBA32Sint:
+            case wgpu::TextureFormat::BC1RGBAUnorm:
+            case wgpu::TextureFormat::BC1RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC2RGBAUnorm:
+            case wgpu::TextureFormat::BC2RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC3RGBAUnorm:
+            case wgpu::TextureFormat::BC3RGBAUnormSrgb:
+            case wgpu::TextureFormat::BC7RGBAUnorm:
+            case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+                return 4u;
+
+            // Component count of a multi-planar format depends on aspect.
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+            case wgpu::TextureFormat::Undefined:
+                UNREACHABLE();
+        }
+    }
+
 }  // namespace utils
