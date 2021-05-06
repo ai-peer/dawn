@@ -16,6 +16,7 @@
 
 #include "common/Constants.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
+#include "utils/TestUtils.h"
 #include "utils/WGPUHelpers.h"
 
 class NonzeroTextureCreationTests : public DawnTest {
@@ -291,6 +292,75 @@ TEST_P(NonzeroTextureCreationTests, NonRenderableAllSubresourcesFilled) {
                 EXPECT_TEXTURE_EQ(&filled, texture, {0, 0, i}, {1, 1}, j);
             }
         }
+    }
+}
+
+// Test that all a 3D texture is filled because the toggle is enabled.
+// This test samples the texture mostly because it's easier to get 3D texture sampling working
+// than it is to support full 3D copies.
+TEST_P(NonzeroTextureCreationTests, AllSubresourcesFilled3DSample) {
+    wgpu::TextureFormat format = wgpu::TextureFormat::RGBA8Unorm;
+
+    wgpu::TextureDescriptor textureDesc;
+    textureDesc.dimension = wgpu::TextureDimension::e3D;
+    textureDesc.size.width = kSize;
+    textureDesc.size.height = kSize;
+    textureDesc.size.depthOrArrayLayers = 5;
+    textureDesc.sampleCount = 1;
+    textureDesc.format = format;
+    textureDesc.mipLevelCount = 4;
+    textureDesc.usage = wgpu::TextureUsage::Sampled;
+
+    wgpu::Texture texture = device.CreateTexture(&textureDesc);
+
+    wgpu::ImageCopyTexture copyTexture;
+    copyTexture.texture = texture;
+    copyTexture.mipLevel = 0;
+    copyTexture.origin = {0, 0, 0};
+
+    wgpu::Buffer buffer;
+    uint64_t bufferSize;
+    {
+        std::tie(buffer, bufferSize) = utils::ReadbackTextureBySampling(
+            device, copyTexture, textureDesc.format, textureDesc.dimension, textureDesc.size,
+            wgpu::BufferUsage::CopySrc);
+
+        std::vector<float> expectedData(bufferSize / sizeof(float));
+        std::fill(expectedData.begin(), expectedData.end(), 1.0f);
+        EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedData.data(), buffer, 0, expectedData.size());
+    }
+
+    copyTexture.mipLevel = 1;
+    {
+        std::tie(buffer, bufferSize) = utils::ReadbackTextureBySampling(
+            device, copyTexture, textureDesc.format, textureDesc.dimension,
+            {kSize >> 1, kSize >> 1, 2}, wgpu::BufferUsage::CopySrc);
+
+        std::vector<float> expectedData(bufferSize / sizeof(float));
+        std::fill(expectedData.begin(), expectedData.end(), 1.0f);
+        EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedData.data(), buffer, 0, expectedData.size());
+    }
+
+    copyTexture.mipLevel = 2;
+    {
+        std::tie(buffer, bufferSize) = utils::ReadbackTextureBySampling(
+            device, copyTexture, textureDesc.format, textureDesc.dimension,
+            {kSize >> 2, kSize >> 2, 1}, wgpu::BufferUsage::CopySrc);
+
+        std::vector<float> expectedData(bufferSize / sizeof(float));
+        std::fill(expectedData.begin(), expectedData.end(), 1.0f);
+        EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedData.data(), buffer, 0, expectedData.size());
+    }
+
+    copyTexture.mipLevel = 3;
+    {
+        std::tie(buffer, bufferSize) = utils::ReadbackTextureBySampling(
+            device, copyTexture, textureDesc.format, textureDesc.dimension,
+            {kSize >> 3, kSize >> 3, 1}, wgpu::BufferUsage::CopySrc);
+
+        std::vector<float> expectedData(bufferSize / sizeof(float));
+        std::fill(expectedData.begin(), expectedData.end(), 1.0f);
+        EXPECT_BUFFER_FLOAT_RANGE_EQ(expectedData.data(), buffer, 0, expectedData.size());
     }
 }
 

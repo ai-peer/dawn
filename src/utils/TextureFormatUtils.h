@@ -95,6 +95,8 @@ namespace utils {
 
     const char* GetWGSLColorTextureComponentType(wgpu::TextureFormat textureFormat);
     const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat);
+    uint32_t GetTextureFormatComponentCount(wgpu::TextureFormat textureFormat);
+
 }  // namespace utils
 
 #endif

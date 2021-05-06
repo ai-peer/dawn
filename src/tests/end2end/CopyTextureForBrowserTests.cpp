@@ -212,21 +212,6 @@ class CopyTextureForBrowserTests : public DawnTest {
 
         return device.CreateComputePipeline(&csDesc);
     }
-    static uint32_t GetTextureFormatComponentCount(wgpu::TextureFormat format) {
-        switch (format) {
-            case wgpu::TextureFormat::RGBA8Unorm:
-            case wgpu::TextureFormat::BGRA8Unorm:
-            case wgpu::TextureFormat::RGB10A2Unorm:
-            case wgpu::TextureFormat::RGBA16Float:
-            case wgpu::TextureFormat::RGBA32Float:
-                return 4;
-            case wgpu::TextureFormat::RG8Unorm:
-            case wgpu::TextureFormat::RG16Float:
-                return 2;
-            default:
-                UNREACHABLE();
-        }
-    }
 
     void DoColorConversionTest(const TextureSpec& srcSpec, const TextureSpec& dstSpec) {
         DoTest(srcSpec, dstSpec, {kDefaultTextureWidth, kDefaultTextureHeight}, {}, true);
@@ -326,7 +311,7 @@ class CopyTextureForBrowserTests : public DawnTest {
         // Update uniform buffer based on test config
         uint32_t uniformBufferData[] = {
             options.flipY,                                   // copy have flipY option
-            GetTextureFormatComponentCount(dstSpec.format),  // channelCount
+            utils::GetTextureFormatComponentCount(dstSpec.format),  // channelCount
             srcSpec.copyOrigin.x,
             srcSpec.copyOrigin.y,  // src texture copy origin
             dstSpec.copyOrigin.x,
