@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "d10d1a0de16230cd5138adbdb40ab373245a5118",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025cc54b_05449f2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000241
+      },
+      "writtenOn": "2021-05-06T10:07:33Z",
+      "side": 1,
+      "message": "Thanks for the quick fixing. It works for the tests. LGTM.",
+      "revId": "d10d1a0de16230cd5138adbdb40ab373245a5118",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
