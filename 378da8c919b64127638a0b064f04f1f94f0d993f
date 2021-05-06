@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c500625c_51c6cb87",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T18:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3def5160_d4a3e73c",
+      "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80d9f050_54c0fd75",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-05-06T15:20:44Z",
       "side": 1,
       "message": "Nit: \"merging\" -\u003e \"the merging of\" .. \"in\" -\u003e \"into\"",
+      "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e69a57a_185d66e1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T18:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80d9f050_54c0fd75",
       "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +118,30 @@
       "writtenOn": "2021-05-06T14:52:17Z",
       "side": 1,
       "message": "nit: I think this comment is stale",
+      "range": {
+        "startLine": 151,
+        "startChar": 11,
+        "endLine": 151,
+        "endChar": 99
+      },
+      "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ef32faf_9eb1fb28",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T18:04:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f04de323_b07108f1",
       "range": {
         "startLine": 151,
         "startChar": 11,
