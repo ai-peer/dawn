@@ -977,10 +977,6 @@ TEST_P(CopyTests_T2B, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
 
 // Test that copying whole 3D texture in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture3DFull) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -994,10 +990,6 @@ TEST_P(CopyTests_T2B, Texture3DFull) {
 
 // Test that copying a range of texture 3D depths in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture3DSubRegion) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -1454,10 +1446,6 @@ TEST_P(CopyTests_B2T, Texture2DArrayRegionWithOffsetEvenRowsPerImage) {
 
 // Test that copying whole texture 3D in one buffer-to-texture-copy works.
 TEST_P(CopyTests_B2T, Texture3DFull) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -1471,10 +1459,6 @@ TEST_P(CopyTests_B2T, Texture3DFull) {
 
 // Test that copying a range of texture 3D Depths in one texture-to-buffer-copy works.
 TEST_P(CopyTests_B2T, Texture3DSubRegion) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -1804,10 +1788,6 @@ TEST_P(CopyTests_T2T, CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4Bytes) {
 
 // Test that copying whole 3D texture in one texture-to-texture-copy works.
 TEST_P(CopyTests_T2T, Texture3DFull) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -1819,10 +1799,6 @@ TEST_P(CopyTests_T2T, Texture3DFull) {
 }
 
 TEST_P(CopyTests_T2T, Texture3DTo2DArrayFull) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
@@ -1835,10 +1811,6 @@ TEST_P(CopyTests_T2T, Texture3DTo2DArrayFull) {
 }
 
 TEST_P(CopyTests_T2T, Texture2DArrayTo3DFull) {
-    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
-    // backend.
-    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6u;
