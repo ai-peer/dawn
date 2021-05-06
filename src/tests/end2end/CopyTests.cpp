@@ -323,11 +323,20 @@ class CopyTests_T2T : public CopyTests {
                 const wgpu::Extent3D& copySize,
                 bool copyWithinSameTexture = false,
                 wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D) {
+        DoTest(srcSpec, dstSpec, copySize, dimension, dimension, copyWithinSameTexture);
+    }
+
+    void DoTest(const TextureSpec& srcSpec,
+                const TextureSpec& dstSpec,
+                const wgpu::Extent3D& copySize,
+                wgpu::TextureDimension srcDimension,
+                wgpu::TextureDimension dstDimension,
+                bool copyWithinSameTexture = false) {
         ASSERT_EQ(srcSpec.format, dstSpec.format);
         const wgpu::TextureFormat format = srcSpec.format;
 
         wgpu::TextureDescriptor srcDescriptor;
-        srcDescriptor.dimension = dimension;
+        srcDescriptor.dimension = srcDimension;
         srcDescriptor.size = srcSpec.textureSize;
         srcDescriptor.sampleCount = 1;
         srcDescriptor.format = format;
@@ -340,7 +349,7 @@ class CopyTests_T2T : public CopyTests {
             dstTexture = srcTexture;
         } else {
             wgpu::TextureDescriptor dstDescriptor;
-            dstDescriptor.dimension = dimension;
+            dstDescriptor.dimension = dstDimension;
             dstDescriptor.size = dstSpec.textureSize;
             dstDescriptor.sampleCount = 1;
             dstDescriptor.format = format;
@@ -403,7 +412,7 @@ class CopyTests_T2T : public CopyTests {
         {
             uint32_t copyLayer = copySize.depthOrArrayLayers;
             uint32_t copyDepth = 1;
-            if (dimension == wgpu::TextureDimension::e3D) {
+            if (dstDimension == wgpu::TextureDimension::e3D) {
                 copyLayer = 1;
                 copyDepth = copySize.depthOrArrayLayers;
             }
@@ -1807,6 +1816,38 @@ TEST_P(CopyTests_T2T, Texture3DFull) {
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
 
     DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, false, wgpu::TextureDimension::e3D);
+}
+
+TEST_P(CopyTests_T2T, Texture3DTo2DArrayFull) {
+    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
+    // backend.
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+    constexpr uint32_t kDepth = 6u;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, kDepth};
+
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
+           wgpu::TextureDimension::e2D);
+}
+
+TEST_P(CopyTests_T2T, Texture2DArrayTo3DFull) {
+    // TODO(yunchao.he@intel.com): implement 3D texture copy on OpenGL and OpenGLES
+    // backend.
+    DAWN_SKIP_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+    constexpr uint32_t kWidth = 256;
+    constexpr uint32_t kHeight = 128;
+    constexpr uint32_t kDepth = 6u;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, kDepth};
+
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
+           wgpu::TextureDimension::e2D);
 }
 
 // TODO(yunchao.he@intel.com): add T2T tests for 3D textures, like RowPitch,
