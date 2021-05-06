@@ -314,30 +314,59 @@ namespace dawn_native { namespace metal {
         // texture.
         const Extent3D clampedSize =
             texture->ClampToMipLevelVirtualSize(dst->mipLevel, dst->origin, copySizePixels);
-        const uint32_t copyBaseLayer = dst->origin.z;
-        const uint32_t copyLayerCount = copySizePixels.depthOrArrayLayers;
+        const uint32_t copyBaseSlice = dst->origin.z;
         const uint64_t bytesPerImage = dataLayout.rowsPerImage * dataLayout.bytesPerRow;
 
         MTLBlitOption blitOption = ComputeMTLBlitOption(texture->GetFormat(), dst->aspect);
+        MTLSize copyExtent = MTLSizeMake(clampedSize.width, clampedSize.height, 1);
+
+        id<MTLBlitCommandEncoder> blitEncoder = GetPendingCommandContext()->EnsureBlit();
 
         uint64_t bufferOffset = dataLayout.offset;
-        for (uint32_t copyLayer = copyBaseLayer; copyLayer < copyBaseLayer + copyLayerCount;
-             ++copyLayer) {
-            [GetPendingCommandContext()->EnsureBlit()
-                     copyFromBuffer:ToBackend(source)->GetBufferHandle()
-                       sourceOffset:bufferOffset
-                  sourceBytesPerRow:dataLayout.bytesPerRow
-                sourceBytesPerImage:bytesPerImage
-                         sourceSize:MTLSizeMake(clampedSize.width, clampedSize.height, 1)
-                          toTexture:texture->GetMTLTexture()
-                   destinationSlice:copyLayer
-                   destinationLevel:dst->mipLevel
-                  destinationOrigin:MTLOriginMake(dst->origin.x, dst->origin.y, 0)
-                            options:blitOption];
+        switch (texture->GetDimension()) {
+            case wgpu::TextureDimension::e2D: {
+                const MTLOrigin textureOrigin = MTLOriginMake(dst->origin.x, dst->origin.y, 0);
 
-            bufferOffset += bytesPerImage;
+                for (uint32_t copyLayer = copyBaseSlice;
+                     copyLayer < copyBaseSlice + copySizePixels.depthOrArrayLayers; ++copyLayer) {
+                    [blitEncoder copyFromBuffer:ToBackend(source)->GetBufferHandle()
+                                   sourceOffset:bufferOffset
+                              sourceBytesPerRow:dataLayout.bytesPerRow
+                            sourceBytesPerImage:bytesPerImage
+                                     sourceSize:copyExtent
+                                      toTexture:texture->GetMTLTexture()
+                               destinationSlice:copyLayer
+                               destinationLevel:dst->mipLevel
+                              destinationOrigin:textureOrigin
+                                        options:blitOption];
+
+                    bufferOffset += bytesPerImage;
+                }
+                break;
+            }
+
+            case wgpu::TextureDimension::e3D: {
+                for (uint32_t copySlice = copyBaseSlice;
+                     copySlice < copyBaseSlice + copySizePixels.depthOrArrayLayers; ++copySlice) {
+                    [blitEncoder
+                             copyFromBuffer:ToBackend(source)->GetBufferHandle()
+                               sourceOffset:bufferOffset
+                          sourceBytesPerRow:dataLayout.bytesPerRow
+                        sourceBytesPerImage:bytesPerImage
+                                 sourceSize:copyExtent
+                                  toTexture:texture->GetMTLTexture()
+                           destinationSlice:0
+                           destinationLevel:dst->mipLevel
+                          destinationOrigin:MTLOriginMake(dst->origin.x, dst->origin.y, copySlice)
+                                    options:blitOption];
+
+                    bufferOffset += bytesPerImage;
+                }
+                break;
+            }
+            case wgpu::TextureDimension::e1D:
+                UNREACHABLE();
         }
-
         return {};
     }
 
