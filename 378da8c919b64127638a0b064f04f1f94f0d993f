@@ -16,6 +16,46 @@
       "message": "Stephen PTAL the whole CL. Austin PTAL the diff between patchset 1 and 3.\n\nYunchao FYI.",
       "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9643779f_a57e3adc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-06T14:52:17Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f04de323_b07108f1",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-06T14:52:17Z",
+      "side": 1,
+      "message": "nit: I think this comment is stale",
+      "range": {
+        "startLine": 151,
+        "startChar": 11,
+        "endLine": 151,
+        "endChar": 99
+      },
+      "revId": "378da8c919b64127638a0b064f04f1f94f0d993f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
