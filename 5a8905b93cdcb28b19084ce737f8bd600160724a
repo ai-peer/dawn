@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0df5032c_1d9afa47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T11:27:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "12eec5de_fc294a0e",
+      "revId": "5a8905b93cdcb28b19084ce737f8bd600160724a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "665a6f01_586ffc6b",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-05-05T14:03:37Z",
       "side": 1,
       "message": "uNit: when starting a sentence with \"However\", a comma is required. https://www.grammar-monster.com/lessons/starting_a_sentence_with_however.htm",
+      "revId": "5a8905b93cdcb28b19084ce737f8bd600160724a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca858afe_e260ea74",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-06T11:27:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "665a6f01_586ffc6b",
       "revId": "5a8905b93cdcb28b19084ce737f8bd600160724a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
