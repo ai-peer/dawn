@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "ba32ea5b510b940348029e212b4b595900e14cfb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "630155d1_e413a6ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T08:05:15Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027d also like Stephen to review.",
+      "revId": "ba32ea5b510b940348029e212b4b595900e14cfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f058931_e6e0e442",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T08:05:15Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ba32ea5b510b940348029e212b4b595900e14cfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3439e2fb_2166a7d2",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 726,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T08:05:15Z",
+      "side": 1,
+      "message": "I think this is exactly the same logic as [1]. Maybe we could have a fallthrough from 2D to 3D when GetArrayLayers is not 1?",
+      "revId": "ba32ea5b510b940348029e212b4b595900e14cfb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
