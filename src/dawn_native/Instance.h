@@ -21,6 +21,7 @@
 #include "dawn_native/Extensions.h"
 #include "dawn_native/Toggles.h"
 #include "dawn_native/dawn_platform.h"
+#include "dawn_platform/DawnPlatform.h"
 
 #include <array>
 #include <memory>
@@ -95,6 +96,7 @@ namespace dawn_native {
         BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
 
         dawn_platform::Platform* mPlatform = nullptr;
+        std::unique_ptr<dawn_platform::Platform> mDefaultPlatform;
 
         std::vector<std::unique_ptr<BackendConnection>> mBackends;
         std::vector<std::unique_ptr<AdapterBase>> mAdapters;

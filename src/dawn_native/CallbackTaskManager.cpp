@@ -14,6 +14,10 @@
 
 #include "dawn_native/CallbackTaskManager.h"
 
+#include "common/Assert.h"
+#include "dawn_native/Device.h"
+#include "dawn_platform/DawnPlatform.h"
+
 namespace dawn_native {
 
     bool CallbackTaskManager::IsEmpty() {
@@ -32,6 +36,79 @@ namespace dawn_native {
     void CallbackTaskManager::AddCallbackTask(std::unique_ptr<CallbackTask> callbackTask) {
         std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
         mCallbackTaskQueue.push_back(std::move(callbackTask));
+    }
+
+    WorkerThreadTask::WorkerThreadTask(DeviceBase* device)
+        : mDevice(device), mWaitableEvent(nullptr) {
+    }
+
+    WorkerThreadTask::~WorkerThreadTask() {
+        ASSERT(mWaitableEvent != nullptr);
+        mDevice->GetWaitableEventManager()->AddCompletedWaitableEvent(mWaitableEvent);
+    }
+
+    void WorkerThreadTask::DoTask(void* userdata) {
+        std::unique_ptr<WorkerThreadTask> workerTaskPtr(static_cast<WorkerThreadTask*>(userdata));
+        workerTaskPtr->Run();
+    }
+
+    void WorkerThreadTask::Start() {
+        std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent =
+            mDevice->GetWorkerTaskPool()->PostWorkerTask(DoTask, this);
+        mWaitableEvent = waitableEvent.get();
+        mDevice->GetWaitableEventManager()->TrackWaitableEvent(std::move(waitableEvent));
+    }
+
+    WaitableEventManager::~WaitableEventManager() {
+        {
+            std::lock_guard<std::mutex> lock(mCompletedWaitableEventQueueMutex);
+            ASSERT(mCompletedWaitableEventQueue.empty());
+        }
+
+        ASSERT(mWaitableEventsInFlight.empty());
+    }
+
+    void WaitableEventManager::TrackWaitableEvent(
+        std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent) {
+        ASSERT(mWaitableEventsInFlight.find(waitableEvent.get()) == mWaitableEventsInFlight.end());
+        mWaitableEventsInFlight.insert(
+            std::make_pair(waitableEvent.get(), std::move(waitableEvent)));
+    }
+
+    bool WaitableEventManager::HasCompletedWaitableEvent() {
+        std::lock_guard<std::mutex> lock(mCompletedWaitableEventQueueMutex);
+        return !mCompletedWaitableEventQueue.empty();
+    }
+
+    void WaitableEventManager::AddCompletedWaitableEvent(
+        dawn_platform::WaitableEvent* waitableEvent) {
+        std::lock_guard<std::mutex> lock(mCompletedWaitableEventQueueMutex);
+        mCompletedWaitableEventQueue.push_back(waitableEvent);
+    }
+
+    void WaitableEventManager::ClearAllCompletedWaitableEvents() {
+        std::lock_guard<std::mutex> lock(mCompletedWaitableEventQueueMutex);
+        for (dawn_platform::WaitableEvent* waitableEvent : mCompletedWaitableEventQueue) {
+            ASSERT(mWaitableEventsInFlight.find(waitableEvent) != mWaitableEventsInFlight.end());
+            mWaitableEventsInFlight.erase(waitableEvent);
+        }
+        mCompletedWaitableEventQueue.clear();
+    }
+
+    void WaitableEventManager::WaitAndClearAllWaitableEvent() {
+        for (auto& iter : mWaitableEventsInFlight) {
+            iter.second->Wait();
+        }
+
+        {
+            std::lock_guard<std::mutex> lock(mCompletedWaitableEventQueueMutex);
+            mCompletedWaitableEventQueue.clear();
+        }
+        mWaitableEventsInFlight.clear();
+    }
+
+    bool WaitableEventManager::HasWaitableEventsInFlight() const {
+        return !mWaitableEventsInFlight.empty();
     }
 
 }  // namespace dawn_native
