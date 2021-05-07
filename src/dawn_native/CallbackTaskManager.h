@@ -15,13 +15,16 @@
 #ifndef DAWNNATIVE_CALLBACK_TASK_MANAGER_H_
 #define DAWNNATIVE_CALLBACK_TASK_MANAGER_H_
 
+#include <map>
 #include <memory>
 #include <mutex>
 #include <vector>
 
-namespace dawn_native {
+namespace dawn_platform {
+    class WaitableEvent;
+}  // namespace dawn_platform
 
-    class CallbackTaskManager;
+namespace dawn_native {
 
     struct CallbackTask {
       public:
@@ -40,6 +43,31 @@ namespace dawn_native {
       private:
         std::mutex mCallbackTaskQueueMutex;
         std::vector<std::unique_ptr<CallbackTask>> mCallbackTaskQueue;
+    };
+
+    class WorkerThreadTask {
+      public:
+        virtual ~WorkerThreadTask() = default;
+        static void DoTask(void* userdata);
+
+      private:
+        virtual void Run() = 0;
+    };
+
+    class WaitableEventManager {
+      public:
+        WaitableEventManager();
+        ~WaitableEventManager();
+
+        size_t NextTaskserial();
+        void TrackNewWaitableEvent(size_t taskSerial,
+                                   std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent);
+        void ClearCompletedWaitableEvent(size_t taskSerial);
+        void WaitAndClearAllWaitableEvent();
+
+      private:
+        size_t mTaskSerial;
+        std::map<size_t, std::unique_ptr<dawn_platform::WaitableEvent>> mWaitableEventsInFlight;
     };
 
 }  // namespace dawn_native

@@ -17,28 +17,65 @@
 
 #include "dawn_native/ComputePipeline.h"
 
+#include "dawn_native/CallbackTaskManager.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
-namespace dawn_native { namespace d3d12 {
+namespace dawn_native {
+    struct CreateComputePipelineAsyncWaitableCallbackTask;
 
-    class Device;
+    namespace d3d12 {
 
-    class ComputePipeline final : public ComputePipelineBase {
-      public:
-        static ResultOrError<Ref<ComputePipeline>> Create(
-            Device* device,
-            const ComputePipelineDescriptor* descriptor);
-        ComputePipeline() = delete;
+        class CreateComputePipelineAsyncTask;
+        class Device;
 
-        ID3D12PipelineState* GetPipelineState() const;
+        class ComputePipeline final : public ComputePipelineBase {
+          public:
+            static ResultOrError<Ref<ComputePipeline>> Create(
+                Device* device,
+                const ComputePipelineDescriptor* descriptor);
+            static void CreateAsync(Device* device,
+                                    const ComputePipelineDescriptor* descriptor,
+                                    size_t blueprintHash,
+                                    WGPUCreateComputePipelineAsyncCallback callback,
+                                    void* userdata);
+            ComputePipeline() = delete;
 
-      private:
-        ~ComputePipeline() override;
-        using ComputePipelineBase::ComputePipelineBase;
-        MaybeError Initialize(const ComputePipelineDescriptor* descriptor);
-        ComPtr<ID3D12PipelineState> mPipelineState;
-    };
+            ID3D12PipelineState* GetPipelineState() const;
 
-}}  // namespace dawn_native::d3d12
+          private:
+            ~ComputePipeline() override;
+            using ComputePipelineBase::ComputePipelineBase;
+
+            friend class CreateComputePipelineAsyncTask;
+            MaybeError Initialize(const ComputePipelineDescriptor* descriptor);
+            ComPtr<ID3D12PipelineState> mPipelineState;
+        };
+
+        class CreateComputePipelineAsyncTask : public WorkerThreadTask {
+          public:
+            CreateComputePipelineAsyncTask(Device* device,
+                                           size_t taskSerial,
+                                           const ComputePipelineDescriptor* descriptor,
+                                           size_t blueprintHash,
+                                           WGPUCreateComputePipelineAsyncCallback callback,
+                                           void* userdata);
+
+          private:
+            void Run() override;
+
+            Device* mDevice;
+
+            Ref<ComputePipelineBase> mComputePipeline;
+            size_t mTaskSerial;
+            size_t mBlueprintHash;
+            WGPUCreateComputePipelineAsyncCallback mCallback;
+            void* mUserdata;
+
+            std::string mEntryPoint;
+            Ref<ShaderModuleBase> mComputeShaderModule;
+        };
+
+    }  // namespace d3d12
+}  // namespace dawn_native
 
 #endif  // DAWNNATIVE_D3D12_COMPUTEPIPELINED3D12_H_
