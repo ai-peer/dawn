@@ -16,6 +16,23 @@
       "message": "PTAL!\n\nnote - will need to swap this CL with the one that implements it on GL",
       "revId": "b93a21667b6deb669fe9a74f527f17a22c100e9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b846d3b_d3ee087e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T08:01:27Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b93a21667b6deb669fe9a74f527f17a22c100e9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
