@@ -17,6 +17,7 @@
 
 #include "dawn_native/ComputePipeline.h"
 
+#include "dawn_native/CallbackTaskManager.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
 
 namespace dawn_native { namespace d3d12 {
@@ -28,6 +29,11 @@ namespace dawn_native { namespace d3d12 {
         static ResultOrError<Ref<ComputePipeline>> Create(
             Device* device,
             const ComputePipelineDescriptor* descriptor);
+        static void CreateAsync(Device* device,
+                                const ComputePipelineDescriptor* descriptor,
+                                size_t blueprintHash,
+                                WGPUCreateComputePipelineAsyncCallback callback,
+                                void* userdata);
         ComputePipeline() = delete;
 
         ID3D12PipelineState* GetPipelineState() const;
@@ -37,6 +43,30 @@ namespace dawn_native { namespace d3d12 {
         using ComputePipelineBase::ComputePipelineBase;
         MaybeError Initialize(const ComputePipelineDescriptor* descriptor);
         ComPtr<ID3D12PipelineState> mPipelineState;
+
+        class CreateComputePipelineAsyncTask : public WorkerThreadTask {
+          public:
+            CreateComputePipelineAsyncTask(Device* device,
+                                           ExecutionSerial taskSerial,
+                                           const ComputePipelineDescriptor* descriptor,
+                                           size_t blueprintHash,
+                                           WGPUCreateComputePipelineAsyncCallback callback,
+                                           void* userdata);
+
+          private:
+            void Run() override;
+
+            Device* mDevice;
+
+            Ref<ComputePipelineBase> mComputePipeline;
+            ExecutionSerial mTaskSerial;
+            size_t mBlueprintHash;
+            WGPUCreateComputePipelineAsyncCallback mCallback;
+            void* mUserdata;
+
+            std::string mEntryPoint;
+            Ref<ShaderModuleBase> mComputeShaderModule;
+        };
     };
 
 }}  // namespace dawn_native::d3d12
