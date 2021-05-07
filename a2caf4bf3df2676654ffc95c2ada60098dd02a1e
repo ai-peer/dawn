@@ -16,6 +16,40 @@
       "message": "Looks like Linux bots are unstable. Anyway, PTAL in case I go too far on the road to implement separate copy splitter functions for 3D textures on D3D backend. ",
       "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b8b590_93813310",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T13:31:44Z",
+      "side": 1,
+      "message": "Depending on the order in which things land, this change might not be necessary!",
+      "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3723c39_ecd1d565",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T13:31:44Z",
+      "side": 1,
+      "message": "If we have 3D-specific logic we should make sure they are covered by extensive tests here (but it seems maybe we can just augment the 2D logic slightly?)",
+      "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

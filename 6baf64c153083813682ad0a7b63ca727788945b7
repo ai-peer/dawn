@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8784d5f7_e60695db",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T13:31:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this part. Working through some examples on paper I\u0027m not able to find a case where we would need to copy the last row separately. Do you have a concrete case where this would need to happen?\n\nIf we don\u0027t need to copy the last row separately, it seems a 3D split is just a 2D split of the first image, extended for the depth of the copy.",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 0
+      },
+      "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf96783_e3ee3050",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T13:31:44Z",
+      "side": 1,
+      "message": "I tried putting this test without the rest of the CL and it passes.",
+      "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
