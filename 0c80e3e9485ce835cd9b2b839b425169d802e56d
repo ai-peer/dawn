@@ -198,6 +198,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "463d82ba_fd3e9dc0",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T17:19:49Z",
+      "side": 1,
+      "message": "Hm, the comment in this function says it shouldn\u0027t need any splits. Regardless though, I think it\u0027s worth factoring it out. I can just do this now.",
+      "parentUuid": "662c3233_c35af1a6",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7edbb917_548ed1f2",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 2
