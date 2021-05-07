@@ -14,6 +14,9 @@
 
 #include "dawn_native/CallbackTaskManager.h"
 
+#include "common/Assert.h"
+#include "dawn_platform/DawnPlatform.h"
+
 namespace dawn_native {
 
     bool CallbackTaskManager::IsEmpty() {
@@ -32,6 +35,43 @@ namespace dawn_native {
     void CallbackTaskManager::AddCallbackTask(std::unique_ptr<CallbackTask> callbackTask) {
         std::lock_guard<std::mutex> lock(mCallbackTaskQueueMutex);
         mCallbackTaskQueue.push_back(std::move(callbackTask));
+    }
+
+    void WorkerThreadTask::DoTask(void* userdata) {
+        std::unique_ptr<WorkerThreadTask> workerTaskPtr(static_cast<WorkerThreadTask*>(userdata));
+        workerTaskPtr->Run();
+    }
+
+    WaitableEventManager::WaitableEventManager() : mTaskSerial(0) {
+    }
+
+    WaitableEventManager::~WaitableEventManager() {
+        ASSERT(mWaitableEventsInFlight.empty());
+    }
+
+    size_t WaitableEventManager::NextTaskSerial() {
+        ++mTaskSerial;
+        return mTaskSerial;
+    }
+
+    void WaitableEventManager::TrackNewWaitableEvent(
+        size_t taskSerial,
+        std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent) {
+        ASSERT(mWaitableEventsInFlight.find(taskSerial) == mWaitableEventsInFlight.end());
+        mWaitableEventsInFlight.insert(std::make_pair(taskSerial, std::move(waitableEvent)));
+    }
+
+    void WaitableEventManager::ClearCompletedWaitableEvent(size_t taskSerial) {
+        auto iter = mWaitableEventsInFlight.find(taskSerial);
+        ASSERT(iter != mWaitableEventsInFlight.end());
+        mWaitableEventsInFlight.erase(iter);
+    }
+
+    void WaitableEventManager::WaitAndClearAllWaitableEvent() {
+        for (auto& iter : mWaitableEventsInFlight) {
+            iter.second->Wait();
+        }
+        mWaitableEventsInFlight.clear();
     }
 
 }  // namespace dawn_native
