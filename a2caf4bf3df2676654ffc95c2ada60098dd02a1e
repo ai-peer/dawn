@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2423271_e1e101b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-07T06:34:11Z",
+      "side": 1,
+      "message": "Looks like Linux bots are unstable. Anyway, PTAL in case I go too far on the road to implement separate copy splitter functions for 3D textures on D3D backend. ",
+      "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
