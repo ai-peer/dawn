@@ -27,7 +27,7 @@ namespace dawn_native {
 
 namespace dawn_native { namespace d3d12 {
 
-    struct Texture2DCopySplit {
+    struct TextureCopySplit {
         static constexpr unsigned int kMaxTextureCopyRegions = 3;
 
         struct CopyInfo {
@@ -46,15 +46,15 @@ namespace dawn_native { namespace d3d12 {
     struct TextureCopySplits {
         static constexpr uint32_t kMaxTextureCopySplits = 2;
 
-        std::array<Texture2DCopySplit, kMaxTextureCopySplits> copies2D;
+        std::array<TextureCopySplit, kMaxTextureCopySplits> copySubresources;
     };
 
-    Texture2DCopySplit Compute2DTextureCopySplit(Origin3D origin,
-                                                 Extent3D copySize,
-                                                 const TexelBlockInfo& blockInfo,
-                                                 uint64_t offset,
-                                                 uint32_t bytesPerRow,
-                                                 uint32_t rowsPerImage);
+    TextureCopySplit Compute2DTextureCopySplit(Origin3D origin,
+                                               Extent3D copySize,
+                                               const TexelBlockInfo& blockInfo,
+                                               uint64_t offset,
+                                               uint32_t bytesPerRow,
+                                               uint32_t rowsPerImage);
 
     TextureCopySplits Compute2DTextureCopySplits(Origin3D origin,
                                                  Extent3D copySize,
@@ -63,12 +63,12 @@ namespace dawn_native { namespace d3d12 {
                                                  uint32_t bytesPerRow,
                                                  uint32_t rowsPerImage);
 
-    Texture2DCopySplit Compute3DTextureCopySplit(Origin3D origin,
-                                                 Extent3D copySize,
-                                                 const TexelBlockInfo& blockInfo,
-                                                 uint64_t offset,
-                                                 uint32_t bytesPerRow,
-                                                 uint32_t rowsPerImage);
+    TextureCopySplit Compute3DTextureCopySplit(Origin3D origin,
+                                               Extent3D copySize,
+                                               const TexelBlockInfo& blockInfo,
+                                               uint64_t offset,
+                                               uint32_t bytesPerRow,
+                                               uint32_t rowsPerImage);
 
     TextureCopySplits Compute3DTextureCopySplits(Origin3D origin,
                                                  Extent3D copySize,

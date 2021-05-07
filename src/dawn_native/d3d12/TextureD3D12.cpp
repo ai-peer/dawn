@@ -967,7 +967,7 @@ namespace dawn_native { namespace d3d12 {
                     Extent3D copySize = GetMipLevelPhysicalSize(level);
 
                     uint32_t rowsPerImage = GetHeight() / blockInfo.height;
-                    Texture2DCopySplit copySplit = Compute2DTextureCopySplit(
+                    TextureCopySplit copySplit = Compute2DTextureCopySplit(
                         {0, 0, 0}, copySize, blockInfo, uploadHandle.startOffset, bytesPerRow,
                         rowsPerImage);
 
