@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c73e56_4fa61729",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "98b2802a_a581083a",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "010279ce_649b8fe0",
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Hi Corentin, in the latest CL I just put the completed results into a concurrent queue, and in each tick() we just need to check if that concurrent queue is empty or not.\n\nPTAL, thanks!",
       "parentUuid": "010279ce_649b8fe0",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa6348f_ece9bccf",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "875a3f2d_c9e1b216",
       "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -143,6 +143,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e53c058_f12fa541",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Ack\n\nIn the latest CL we don\u0027t need this change.",
+      "parentUuid": "c4f8c17a_492fbbab",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d30af7c_af036be1",
@@ -156,6 +174,30 @@
       "writtenOn": "2021-04-16T15:48:32Z",
       "side": 1,
       "message": "nit: mCreatePipelineAsyncResultTracker instead of mCreatePipelineAsynResultTracker",
+      "range": {
+        "startLine": 161,
+        "startChar": 8,
+        "endLine": 161,
+        "endChar": 40
+      },
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c2f8b8_091deaa8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6d30af7c_af036be1",
       "range": {
         "startLine": 161,
         "startChar": 8,
@@ -183,6 +225,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d56a7094_ad535310",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7130a490_d4405428",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8988f6a1_1095da4d",
@@ -196,6 +256,24 @@
       "writtenOn": "2021-04-16T15:48:32Z",
       "side": 1,
       "message": "nit: Could forward declarations work instead of including the file? This would help avoid including DawnPlatform.h almost everywhere.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f042084_d79f4a1a",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8988f6a1_1095da4d",
       "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +295,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6e8e2c1_35a72ae7",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Ack\n\nIn the latest CL we don\u0027t need this change.",
+      "parentUuid": "e47db70b_73a1a272",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73b2885c_24d129a1",
@@ -230,6 +326,24 @@
       "writtenOn": "2021-04-16T15:48:32Z",
       "side": 1,
       "message": "This should be possible to do by wrapping std::atomic\u003cuint64_t\u003e and a compare_exchange_weak in a loop (that will be executed once). Also it\u0027s a bit weird to declare a class inline like this.",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "365e995d_74fdb180",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Ack\n\nIn the latest CL we don\u0027t need this change.",
+      "parentUuid": "73b2885c_24d129a1",
       "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -265,6 +379,24 @@
       "side": 1,
       "message": "Changes in mutexing looks good. I think it would still be nice to have a comment about concurrency at the top of the class.",
       "parentUuid": "6292eebb_aebbd95c",
+      "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc23f1d3_cc708337",
+        "filename": "src/dawn_native/PersistentCache.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-07T08:57:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7ddb668_cfeaf672",
       "revId": "c2cdbc5271bb1361170963b9b5a6f7be8edd7c90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
