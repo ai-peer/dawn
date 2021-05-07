@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin,\n\nNow this test fails and makes Dawn crash on HD530 with latest Intel D3D driver, which is quite annoying to me when I am working on such dev machine, so I\u0027d like to skip it right now.\n\nPTAL, thanks!",
       "revId": "9f0126f1ce4688beac7daf3baa8457df5235706c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfaa2e2_9429160f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T10:34:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9f0126f1ce4688beac7daf3baa8457df5235706c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
