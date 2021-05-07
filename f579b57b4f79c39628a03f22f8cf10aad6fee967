@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ced8df_d4a6a5d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-07T19:31:36Z",
+      "side": 1,
+      "message": "PTAL and let me know if you have a better way of approaching this.",
+      "revId": "f579b57b4f79c39628a03f22f8cf10aad6fee967",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
