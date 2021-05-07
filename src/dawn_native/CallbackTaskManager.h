@@ -17,11 +17,16 @@
 
 #include <memory>
 #include <mutex>
+#include <unordered_map>
 #include <vector>
 
-namespace dawn_native {
+namespace dawn_platform {
+    class WaitableEvent;
+    class WorkerTaskPool;
+}  // namespace dawn_platform
 
-    class CallbackTaskManager;
+namespace dawn_native {
+    class DeviceBase;
 
     struct CallbackTask {
       public:
@@ -40,6 +45,46 @@ namespace dawn_native {
       private:
         std::mutex mCallbackTaskQueueMutex;
         std::vector<std::unique_ptr<CallbackTask>> mCallbackTaskQueue;
+    };
+
+    class WaitableEventManager;
+
+    class WorkerThreadTask {
+      public:
+        explicit WorkerThreadTask(DeviceBase* device);
+        virtual ~WorkerThreadTask();
+        static void DoTask(void* userdata);
+
+        void Start();
+
+      protected:
+        DeviceBase* mDevice;
+
+      private:
+        virtual void Run() = 0;
+
+        dawn_platform::WaitableEvent* mWaitableEvent;
+    };
+
+    class WaitableEventManager {
+      public:
+        ~WaitableEventManager();
+
+        void TrackWaitableEvent(std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent);
+        bool HasWaitableEventsInFlight() const;
+
+        bool HasCompletedWaitableEvent();
+        void AddCompletedWaitableEvent(dawn_platform::WaitableEvent* waitableEvent);
+        void ClearAllCompletedWaitableEvents();
+        void WaitAndClearAllWaitableEvent();
+
+      private:
+        std::unordered_map<dawn_platform::WaitableEvent*,
+                           std::unique_ptr<dawn_platform::WaitableEvent>>
+            mWaitableEventsInFlight;
+
+        std::mutex mCompletedWaitableEventQueueMutex;
+        std::vector<dawn_platform::WaitableEvent*> mCompletedWaitableEventQueue;
     };
 
 }  // namespace dawn_native
