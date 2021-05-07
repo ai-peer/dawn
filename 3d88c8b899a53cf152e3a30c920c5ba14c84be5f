@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d02d0f13_fc7207bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-07T17:45:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3d88c8b899a53cf152e3a30c920c5ba14c84be5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "307916b6_798540d9",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-05-07T07:22:33Z",
       "side": 1,
       "message": "nit: the \"slice\" terminology is a bit confusing because 3D textures are non-array. Maybe \"depth range\"?",
+      "revId": "3d88c8b899a53cf152e3a30c920c5ba14c84be5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d38b33bb_0e100cc7",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1922,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-07T17:45:53Z",
+      "side": 1,
+      "message": "Ack. See my similar comment at https://github.com/gpuweb/cts/pull/557#issuecomment-833678222 and https://github.com/gpuweb/cts/pull/557#issuecomment-834647974",
+      "parentUuid": "307916b6_798540d9",
       "revId": "3d88c8b899a53cf152e3a30c920c5ba14c84be5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
