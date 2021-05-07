@@ -14,6 +14,7 @@
 
 #include "dawn_native/CreatePipelineAsyncTask.h"
 
+#include "dawn_native/AsyncTask.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/RenderPipeline.h"
@@ -98,6 +99,60 @@ namespace dawn_native {
 
         mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceLost, nullptr,
                                            "Device lost before callback", mUserData);
+    }
+
+    CreateComputePipelineAsyncTaskBase::CreateComputePipelineAsyncTaskBase(
+        DeviceBase* device,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : mDevice(device),
+          mBlueprintHash(blueprintHash),
+          mCallback(callback),
+          mUserdata(userdata),
+          mLabel(descriptor->label != nullptr ? descriptor->label : ""),
+          mLayout(descriptor->layout),
+          mEntryPoint(descriptor->computeStage.entryPoint),
+          mComputeShaderModule(descriptor->computeStage.module) {
+        // TODO(jiawei.shao@intel.com): save nextInChain when it is supported in Dawn.
+        ASSERT(descriptor->nextInChain == nullptr);
+    }
+
+    void CreateComputePipelineAsyncTaskBase::Run() {
+        ComputePipelineDescriptor descriptor;
+        if (!mLabel.empty()) {
+            descriptor.label = mLabel.c_str();
+        }
+        descriptor.computeStage.entryPoint = mEntryPoint.c_str();
+        descriptor.layout = mLayout.Get();
+        descriptor.computeStage.module = mComputeShaderModule.Get();
+        mComputePipeline = CreateComputePipelineObject(mDevice, descriptor);
+
+        MaybeError maybeError = InitializeComputePipeline(descriptor);
+        std::string errorMessage;
+        if (maybeError.IsError()) {
+            mComputePipeline = nullptr;
+            errorMessage = maybeError.AcquireError()->GetMessage();
+        }
+
+        mComputeShaderModule = nullptr;
+        mDevice->AddComputePipelineAsyncCallbackTask(mComputePipeline, errorMessage, mCallback,
+                                                     mUserdata, mBlueprintHash);
+    }
+
+    void CreateComputePipelineAsyncTaskBase::RunAsync(
+        std::unique_ptr<CreateComputePipelineAsyncTaskBase> task) {
+        DeviceBase* device = task->mDevice;
+
+        // Using "taskPtr = std::move(task)" causes compilation error while it should be supported
+        // since C++14:
+        // https://docs.microsoft.com/en-us/cpp/cpp/lambda-expressions-in-cpp?view=msvc-160
+        auto asyncTask = [taskPtr = task.release()] {
+            std::unique_ptr<CreateComputePipelineAsyncTaskBase> innnerTaskPtr(taskPtr);
+            innnerTaskPtr->Run();
+        };
+        device->GetAsyncTaskManager()->PostTask(std::move(asyncTask));
     }
 
 }  // namespace dawn_native

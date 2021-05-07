@@ -28,6 +28,11 @@ namespace dawn_native { namespace d3d12 {
         static ResultOrError<Ref<ComputePipeline>> Create(
             Device* device,
             const ComputePipelineDescriptor* descriptor);
+        static void CreateAsync(Device* device,
+                                const ComputePipelineDescriptor* descriptor,
+                                size_t blueprintHash,
+                                WGPUCreateComputePipelineAsyncCallback callback,
+                                void* userdata);
         ComputePipeline() = delete;
 
         ID3D12PipelineState* GetPipelineState() const;
