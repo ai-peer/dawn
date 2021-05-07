@@ -14,6 +14,7 @@
 
 #include "dawn_native/CreatePipelineAsyncTask.h"
 
+#include "dawn_native/AsyncTask.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/RenderPipeline.h"
@@ -98,6 +99,32 @@ namespace dawn_native {
 
         mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceLost, nullptr,
                                            "Device lost before callback", mUserData);
+    }
+
+    CreateComputePipelineAsyncTaskBase::CreateComputePipelineAsyncTaskBase(
+        DeviceBase* device,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : mDevice(device),
+          mBlueprintHash(blueprintHash),
+          mCallback(callback),
+          mUserdata(userdata),
+          mEntryPoint(descriptor->computeStage.entryPoint),
+          mComputeShaderModule(descriptor->computeStage.module) {
+    }
+
+    void CreateComputePipelineAsyncTaskBase::RunAsync(
+        std::unique_ptr<CreateComputePipelineAsyncTaskBase> task) {
+        DeviceBase* device = task->mDevice;
+        // TODO(jiawei.shao@intel.com): use taskPtr = std::move(task) when it is supported on
+        // Windows.
+        AsyncTask asyncTask = [taskPtr = task.release()] {
+            std::unique_ptr<CreateComputePipelineAsyncTaskBase> innnerTaskPtr(taskPtr);
+            innnerTaskPtr->Run();
+        };
+        device->GetAsyncTaskManager()->PostTask(std::move(asyncTask));
     }
 
 }  // namespace dawn_native

@@ -19,6 +19,11 @@
 #include <mutex>
 #include <vector>
 
+namespace dawn_platform {
+    class WaitableEvent;
+    class WorkerTaskPool;
+}  // namespace dawn_platform
+
 namespace dawn_native {
 
     struct CallbackTask {

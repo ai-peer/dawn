@@ -24,6 +24,8 @@ namespace dawn_native {
     class ComputePipelineBase;
     class DeviceBase;
     class RenderPipelineBase;
+    class ShaderModuleBase;
+    struct ComputePipelineDescriptor;
 
     struct CreatePipelineAsyncCallbackTaskBase : CallbackTask {
         CreatePipelineAsyncCallbackTaskBase(std::string errorMessage, void* userData);
@@ -33,17 +35,17 @@ namespace dawn_native {
         void* mUserData;
     };
 
-    struct CreateComputePipelineAsyncCallbackTask final : CreatePipelineAsyncCallbackTaskBase {
+    struct CreateComputePipelineAsyncCallbackTask : CreatePipelineAsyncCallbackTaskBase {
         CreateComputePipelineAsyncCallbackTask(Ref<ComputePipelineBase> pipeline,
                                                std::string errorMessage,
                                                WGPUCreateComputePipelineAsyncCallback callback,
                                                void* userdata);
 
-        void Finish() final;
+        void Finish() override;
         void HandleShutDown() final;
         void HandleDeviceLoss() final;
 
-      private:
+      protected:
         Ref<ComputePipelineBase> mPipeline;
         WGPUCreateComputePipelineAsyncCallback mCreateComputePipelineAsyncCallback;
     };
@@ -58,9 +60,35 @@ namespace dawn_native {
         void HandleShutDown() final;
         void HandleDeviceLoss() final;
 
-      private:
+      protected:
         Ref<RenderPipelineBase> mPipeline;
         WGPUCreateRenderPipelineAsyncCallback mCreateRenderPipelineAsyncCallback;
+    };
+
+    // CreateComputePipelineAsyncTaskBase defines all the inputs and outputs of
+    // CreateComputePipelineAsync() tasks, which are the same among all the backends.
+    class CreateComputePipelineAsyncTaskBase {
+      public:
+        CreateComputePipelineAsyncTaskBase(DeviceBase* device,
+                                           const ComputePipelineDescriptor* descriptor,
+                                           size_t blueprintHash,
+                                           WGPUCreateComputePipelineAsyncCallback callback,
+                                           void* userdata);
+
+        virtual ~CreateComputePipelineAsyncTaskBase() = default;
+        virtual void Run() = 0;
+
+        static void RunAsync(std::unique_ptr<CreateComputePipelineAsyncTaskBase> task);
+
+      protected:
+        DeviceBase* mDevice;
+        Ref<ComputePipelineBase> mComputePipeline;
+        size_t mBlueprintHash;
+        WGPUCreateComputePipelineAsyncCallback mCallback;
+        void* mUserdata;
+
+        std::string mEntryPoint;
+        Ref<ShaderModuleBase> mComputeShaderModule;
     };
 
 }  // namespace dawn_native
