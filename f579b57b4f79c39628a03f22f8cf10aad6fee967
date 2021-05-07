@@ -16,6 +16,23 @@
       "message": "PTAL and let me know if you have a better way of approaching this.",
       "revId": "f579b57b4f79c39628a03f22f8cf10aad6fee967",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96049f7f_e6c91548",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T19:38:25Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "f579b57b4f79c39628a03f22f8cf10aad6fee967",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
