@@ -100,4 +100,18 @@ namespace dawn_native {
                                            "Device lost before callback", mUserData);
     }
 
+    CreateComputePipelineAsyncTaskBase::CreateComputePipelineAsyncTaskBase(
+        DeviceBase* device,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : WorkerThreadTask(device),
+          mBlueprintHash(blueprintHash),
+          mCallback(callback),
+          mUserdata(userdata),
+          mEntryPoint(descriptor->computeStage.entryPoint),
+          mComputeShaderModule(descriptor->computeStage.module) {
+    }
+
 }  // namespace dawn_native

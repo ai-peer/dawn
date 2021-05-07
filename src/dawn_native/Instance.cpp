@@ -65,6 +65,7 @@ namespace dawn_native {
     }
 
     bool InstanceBase::Initialize(const InstanceDescriptor*) {
+        mDefaultPlatform = std::make_unique<dawn_platform::Platform>();
         return true;
     }
 
@@ -224,7 +225,7 @@ namespace dawn_native {
     }
 
     dawn_platform::Platform* InstanceBase::GetPlatform() const {
-        return mPlatform;
+        return (mPlatform != nullptr) ? mPlatform : mDefaultPlatform.get();
     }
 
     const XlibXcbFunctions* InstanceBase::GetOrCreateXlibXcbFunctions() {
