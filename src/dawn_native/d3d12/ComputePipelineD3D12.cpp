@@ -14,7 +14,8 @@
 
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 
-#include "common/Assert.h"
+#include "dawn_native/AsyncTask.h"
+#include "dawn_native/CreatePipelineAsyncTask.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
@@ -65,6 +66,53 @@ namespace dawn_native { namespace d3d12 {
 
     ID3D12PipelineState* ComputePipeline::GetPipelineState() const {
         return mPipelineState.Get();
+    }
+
+    void ComputePipeline::CreateAsync(Device* device,
+                                      const ComputePipelineDescriptor* descriptor,
+                                      size_t blueprintHash,
+                                      WGPUCreateComputePipelineAsyncCallback callback,
+                                      void* userdata) {
+        // CreateComputePipelineAsyncTaskImpl is declared as an internal class as it needs to call
+        // the private member function ComputePipeline::Initialize().
+        class CreateComputePipelineAsyncTaskImpl : public CreateComputePipelineAsyncTaskBase {
+          public:
+            CreateComputePipelineAsyncTaskImpl(DeviceBase* device,
+                                               const ComputePipelineDescriptor* descriptor,
+                                               size_t blueprintHash,
+                                               WGPUCreateComputePipelineAsyncCallback callback,
+                                               void* userdata)
+                : CreateComputePipelineAsyncTaskBase(device,
+                                                     descriptor,
+                                                     blueprintHash,
+                                                     callback,
+                                                     userdata) {
+                mComputePipeline = AcquireRef(new ComputePipeline(device, descriptor));
+            }
+
+            void Run() override {
+                // Only set useful members of descriptor
+                ComputePipelineDescriptor descriptor;
+                descriptor.computeStage.entryPoint = mEntryPoint.c_str();
+                descriptor.computeStage.module = mComputeShaderModule.Get();
+
+                MaybeError maybeError = ToBackend(mComputePipeline)->Initialize(&descriptor);
+                std::string errorMessage;
+                if (maybeError.IsError()) {
+                    mComputePipeline = nullptr;
+                    errorMessage = maybeError.AcquireError()->GetMessage();
+                }
+
+                mComputeShaderModule = nullptr;
+                mDevice->AddComputePipelineAsyncCallbackTask(mComputePipeline, errorMessage,
+                                                             mCallback, mUserdata, mBlueprintHash);
+            }
+        };
+
+        std::unique_ptr<CreateComputePipelineAsyncTaskBase> asyncTask =
+            std::make_unique<CreateComputePipelineAsyncTaskImpl>(device, descriptor, blueprintHash,
+                                                                 callback, userdata);
+        CreateComputePipelineAsyncTaskBase::RunAsync(std::move(asyncTask));
     }
 
 }}  // namespace dawn_native::d3d12
