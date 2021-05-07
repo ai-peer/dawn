@@ -45,6 +45,7 @@
 #include "dawn_native/SwapChain.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ValidationUtils_autogen.h"
+#include "dawn_platform/DawnPlatform.h"
 
 #include <unordered_set>
 
@@ -127,9 +128,17 @@ namespace dawn_native {
         mErrorScopeStack = std::make_unique<ErrorScopeStack>();
         mDynamicUploader = std::make_unique<DynamicUploader>(this);
         mCallbackTaskManager = std::make_unique<CallbackTaskManager>();
+        mWaitableEventManager = std::make_unique<WaitableEventManager>();
         mDeprecationWarnings = std::make_unique<DeprecationWarnings>();
         mInternalPipelineStore = std::make_unique<InternalPipelineStore>();
         mPersistentCache = std::make_unique<PersistentCache>(this);
+
+        if (GetPlatform() != nullptr) {
+            mWorkerTaskPool = GetPlatform()->CreateWorkerTaskPool();
+        } else {
+            mDefaultPlatform = std::make_unique<dawn_platform::Platform>();
+            mWorkerTaskPool = mDefaultPlatform->CreateWorkerTaskPool();
+        }
 
         // Starting from now the backend can start doing reentrant calls so the device is marked as
         // alive.
@@ -144,6 +153,7 @@ namespace dawn_native {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
             // Call all the callbacks immediately as the device is about to shut down.
+            mWaitableEventManager->WaitAndClearAllWaitableEvent();
             auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
             for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
                 callbackTask->HandleShutDown();
@@ -193,6 +203,7 @@ namespace dawn_native {
 
         mDynamicUploader = nullptr;
         mCallbackTaskManager = nullptr;
+        mWaitableEventManager = nullptr;
         mPersistentCache = nullptr;
 
         mEmptyBindGroupLayout = nullptr;
@@ -242,6 +253,7 @@ namespace dawn_native {
             }
 
             mQueue->HandleDeviceLoss();
+            mWaitableEventManager->WaitAndClearAllWaitableEvent();
             auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
             for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
                 callbackTask->HandleDeviceLoss();
@@ -1379,4 +1391,15 @@ namespace dawn_native {
         }
     }
 
+    WaitableEventManager* DeviceBase::GetWaitableEventManager() const {
+        return mWaitableEventManager.get();
+    }
+
+    dawn_platform::WorkerTaskPool* DeviceBase::GetWorkerTaskPool() const {
+        return mWorkerTaskPool.get();
+    }
+
+    CallbackTaskManager* DeviceBase::GetCallbackTaskManager() const {
+        return mCallbackTaskManager.get();
+    }
 }  // namespace dawn_native
