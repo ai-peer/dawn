@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d216ec51_c2e04ba0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "LGTM overall, but the code is getting fairly complicated already without 1D textures :/",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8e61f2_94b8a556",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "nit: I think we can use range-for loops here.\n\nSame below",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "993915ee_d6639fe1",
@@ -37,6 +71,47 @@
         "endLine": 646,
         "endChar": 52
       },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6b7d597_3bb9c2e1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "The naming in the specific code work, but why not keep Z in non-specific code since it match the WebGPU API?",
+      "parentUuid": "993915ee_d6639fe1",
+      "range": {
+        "startLine": 646,
+        "startChar": 39,
+        "endLine": 646,
+        "endChar": 52
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41164f73_384a96b0",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "nit: I think that this can be moved out of the splitCopies loop.\n\nSame below.",
       "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -89,6 +164,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e7ed869_0eb21904",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "This is a bit complicated and doesn\u0027t support direct 3D -\u003e 3D copies but that\u0027s probably ok (with a TODO). I\u0027m not sure how to reduce the complexity, especially when we\u0027ll also have 1D \u003c-\u003e 2D/3D textures.",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "662c3233_c35af1a6",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "In a follow-up could we somehow factor the code with the handling of CopyBufferToTexture? For example here we don\u0027t handle the potential copy splits that are necessary.",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7edbb917_548ed1f2",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 2
@@ -100,6 +209,30 @@
       "writtenOn": "2021-05-07T01:42:40Z",
       "side": 1,
       "message": "originZ",
+      "range": {
+        "startLine": 349,
+        "startChar": 30,
+        "endLine": 349,
+        "endChar": 39
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a11db83_0b8c458b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-07T07:58:44Z",
+      "side": 1,
+      "message": "Can\u0027t we make a single copy for 3D textures? That Metal call seems like it could support buffer-\u003e3D texture copies. Ditto in the other file.",
+      "parentUuid": "7edbb917_548ed1f2",
       "range": {
         "startLine": 349,
         "startChar": 30,
