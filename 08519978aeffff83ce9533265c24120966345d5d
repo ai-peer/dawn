@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d64401_0c95cbb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:40:04Z",
+      "side": 1,
+      "message": "PTAL! (tests ran and passed in a later CL in this stack)",
+      "revId": "08519978aeffff83ce9533265c24120966345d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a54e782_fed843e3",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:40:04Z",
+      "side": 1,
+      "message": "note: I have the test for 2darray-\u003e3d vice versa, and 3d-\u003e3d in a later patch",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 87
+      },
+      "revId": "08519978aeffff83ce9533265c24120966345d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
