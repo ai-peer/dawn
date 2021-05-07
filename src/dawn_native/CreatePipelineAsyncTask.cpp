@@ -100,4 +100,29 @@ namespace dawn_native {
                                            "Device lost before callback", mUserData);
     }
 
+    CreateComputePipelineAsyncWaitableCallbackTask::CreateComputePipelineAsyncWaitableCallbackTask(
+        Ref<ComputePipelineBase> pipeline,
+        std::string errorMessage,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata,
+        size_t blueprintHash,
+        WaitableEventManager* waitableEventManager,
+        size_t waitableEventSerial)
+        : CreateComputePipelineAsyncCallbackTask(std::move(pipeline),
+                                                 errorMessage,
+                                                 callback,
+                                                 userdata),
+          mBlueprintHash(blueprintHash),
+          mWaitableEventManager(waitableEventManager),
+          mWaitableEventSerial(waitableEventSerial) {
+    }
+
+    void CreateComputePipelineAsyncWaitableCallbackTask::Finish() {
+        if (mPipeline.Get() != nullptr) {
+            mPipeline = mPipeline->GetDevice()->AddOrGetCachedPipeline(mPipeline, mBlueprintHash);
+        }
+
+        mWaitableEventManager->ClearCompletedWaitableEvent(mWaitableEventSerial);
+        CreateComputePipelineAsyncCallbackTask::Finish();
+    }
 }  // namespace dawn_native

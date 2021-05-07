@@ -24,6 +24,7 @@ namespace dawn_native {
     class ComputePipelineBase;
     class DeviceBase;
     class RenderPipelineBase;
+    class WaitableEventManager;
 
     struct CreatePipelineAsyncCallbackTaskBase : CallbackTask {
         CreatePipelineAsyncCallbackTaskBase(std::string errorMessage, void* userData);
@@ -33,17 +34,17 @@ namespace dawn_native {
         void* mUserData;
     };
 
-    struct CreateComputePipelineAsyncCallbackTask final : CreatePipelineAsyncCallbackTaskBase {
+    struct CreateComputePipelineAsyncCallbackTask : CreatePipelineAsyncCallbackTaskBase {
         CreateComputePipelineAsyncCallbackTask(Ref<ComputePipelineBase> pipeline,
                                                std::string errorMessage,
                                                WGPUCreateComputePipelineAsyncCallback callback,
                                                void* userdata);
 
-        void Finish() final;
+        void Finish() override;
         void HandleShutDown() final;
         void HandleDeviceLoss() final;
 
-      private:
+      protected:
         Ref<ComputePipelineBase> mPipeline;
         WGPUCreateComputePipelineAsyncCallback mCreateComputePipelineAsyncCallback;
     };
@@ -61,6 +62,25 @@ namespace dawn_native {
       private:
         Ref<RenderPipelineBase> mPipeline;
         WGPUCreateRenderPipelineAsyncCallback mCreateRenderPipelineAsyncCallback;
+    };
+
+    struct CreateComputePipelineAsyncWaitableCallbackTask final
+        : CreateComputePipelineAsyncCallbackTask {
+        CreateComputePipelineAsyncWaitableCallbackTask(
+            Ref<ComputePipelineBase> pipeline,
+            std::string errorMessage,
+            WGPUCreateComputePipelineAsyncCallback callback,
+            void* userdata,
+            size_t blueprintHash,
+            WaitableEventManager* waitableEventManager,
+            size_t waitableEventSerial);
+
+        void Finish() final;
+
+      private:
+        size_t mBlueprintHash;
+        WaitableEventManager* mWaitableEventManager;
+        size_t mWaitableEventSerial;
     };
 
 }  // namespace dawn_native
