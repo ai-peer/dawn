@@ -33,13 +33,13 @@ namespace dawn_native { namespace d3d12 {
         }
     }  // namespace
 
-    Texture2DCopySplit Compute2DTextureCopySplit(Origin3D origin,
-                                                 Extent3D copySize,
-                                                 const TexelBlockInfo& blockInfo,
-                                                 uint64_t offset,
-                                                 uint32_t bytesPerRow,
-                                                 uint32_t rowsPerImage) {
-        Texture2DCopySplit copy;
+    TextureCopySubresource Compute2DTextureCopySplit(Origin3D origin,
+                                                     Extent3D copySize,
+                                                     const TexelBlockInfo& blockInfo,
+                                                     uint64_t offset,
+                                                     uint32_t bytesPerRow,
+                                                     uint32_t rowsPerImage) {
+        TextureCopySubresource copy;
 
         ASSERT(bytesPerRow % blockInfo.byteSize == 0);
 
@@ -221,7 +221,7 @@ namespace dawn_native { namespace d3d12 {
 
         const uint64_t bytesPerSlice = bytesPerRow * rowsPerImage;
 
-        // The function ComputeTextureCopySplit() decides how to split the copy based on:
+        // The function Compute2DTextureCopySplit() decides how to split the copy based on:
         // - the alignment of the buffer offset with D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT (512)
         // - the alignment of the buffer offset with D3D12_TEXTURE_DATA_PITCH_ALIGNMENT (256)
         // Each slice of a 2D array might need to be split, but because of the WebGPU
@@ -237,22 +237,22 @@ namespace dawn_native { namespace d3d12 {
         copyOneLayerSize.depthOrArrayLayers = 1;
         copyFirstLayerOrigin.z = 0;
 
-        copies.copies2D[0] = Compute2DTextureCopySplit(
+        copies.copySubresources[0] = Compute2DTextureCopySplit(
             copyFirstLayerOrigin, copyOneLayerSize, blockInfo, offset, bytesPerRow, rowsPerImage);
 
-        // When the copy only refers one texture 2D array layer, copies.copies2D[1]
+        // When the copy only refers one texture 2D array layer, copies.copySubresources[1]
         // will never be used so we can safely early return here.
         if (copySize.depthOrArrayLayers == 1) {
             return copies;
         }
 
         if (bytesPerSlice % D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT == 0) {
-            copies.copies2D[1] = copies.copies2D[0];
-            copies.copies2D[1].copies[0].offset += bytesPerSlice;
-            copies.copies2D[1].copies[1].offset += bytesPerSlice;
+            copies.copySubresources[1] = copies.copySubresources[0];
+            copies.copySubresources[1].copies[0].offset += bytesPerSlice;
+            copies.copySubresources[1].copies[1].offset += bytesPerSlice;
         } else {
             const uint64_t bufferOffsetNextLayer = offset + bytesPerSlice;
-            copies.copies2D[1] =
+            copies.copySubresources[1] =
                 Compute2DTextureCopySplit(copyFirstLayerOrigin, copyOneLayerSize, blockInfo,
                                           bufferOffsetNextLayer, bytesPerRow, rowsPerImage);
         }
@@ -260,13 +260,13 @@ namespace dawn_native { namespace d3d12 {
         return copies;
     }
 
-    Texture2DCopySplit Compute3DTextureCopySplit(Origin3D origin,
-                                                 Extent3D copySize,
-                                                 const TexelBlockInfo& blockInfo,
-                                                 uint64_t offset,
-                                                 uint32_t bytesPerRow,
-                                                 uint32_t rowsPerImage) {
-        Texture2DCopySplit copy;
+    TextureCopySubresource Compute3DTextureCopySplit(Origin3D origin,
+                                                     Extent3D copySize,
+                                                     const TexelBlockInfo& blockInfo,
+                                                     uint64_t offset,
+                                                     uint32_t bytesPerRow,
+                                                     uint32_t rowsPerImage) {
+        TextureCopySubresource copy;
 
         ASSERT(bytesPerRow % blockInfo.byteSize == 0);
 
@@ -504,7 +504,7 @@ namespace dawn_native { namespace d3d12 {
         Extent3D copyOneLayerSize = copySize;
         Origin3D copyFirstLayerOrigin = origin;
 
-        copies.copies2D[0] = Compute3DTextureCopySplit(
+        copies.copySubresources[0] = Compute3DTextureCopySplit(
             copyFirstLayerOrigin, copyOneLayerSize, blockInfo, offset, bytesPerRow, rowsPerImage);
 
         return copies;
