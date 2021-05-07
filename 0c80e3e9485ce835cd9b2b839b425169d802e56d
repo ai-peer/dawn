@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edb40396_62187a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:42:40Z",
+      "side": 1,
+      "message": "PTAL! (tests ran and passed in a later CL in this stack)",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993915ee_d6639fe1",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:42:40Z",
+      "side": 1,
+      "message": "I\u0027ve been using \"slice\" to mean it might be the z index or the layer index, and then naming it \"layer\" or \"z\" in 2d/3d-specific code",
+      "range": {
+        "startLine": 646,
+        "startChar": 39,
+        "endLine": 646,
+        "endChar": 52
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "814fb0c0_434c861a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:42:40Z",
+      "side": 1,
+      "message": "nit: should rename to \"originZ\"",
+      "range": {
+        "startLine": 679,
+        "startChar": 46,
+        "endLine": 679,
+        "endChar": 55
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97446c99_bbff7171",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:42:40Z",
+      "side": 1,
+      "message": "originZ",
+      "range": {
+        "startLine": 761,
+        "startChar": 46,
+        "endLine": 761,
+        "endChar": 55
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7edbb917_548ed1f2",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-07T01:42:40Z",
+      "side": 1,
+      "message": "originZ",
+      "range": {
+        "startLine": 349,
+        "startChar": 30,
+        "endLine": 349,
+        "endChar": 39
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
