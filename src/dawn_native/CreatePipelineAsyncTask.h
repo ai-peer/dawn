@@ -24,6 +24,8 @@ namespace dawn_native {
     class ComputePipelineBase;
     class DeviceBase;
     class RenderPipelineBase;
+    class ShaderModuleBase;
+    struct ComputePipelineDescriptor;
 
     struct CreatePipelineAsyncCallbackTaskBase : CallbackTask {
         CreatePipelineAsyncCallbackTaskBase(std::string errorMessage, void* userData);
@@ -33,17 +35,18 @@ namespace dawn_native {
         void* mUserData;
     };
 
-    struct CreateComputePipelineAsyncCallbackTask final : CreatePipelineAsyncCallbackTaskBase {
+    struct CreateComputePipelineAsyncCallbackTask : CreatePipelineAsyncCallbackTaskBase {
         CreateComputePipelineAsyncCallbackTask(Ref<ComputePipelineBase> pipeline,
                                                std::string errorMessage,
                                                WGPUCreateComputePipelineAsyncCallback callback,
                                                void* userdata);
 
-        void Finish() final;
         void HandleShutDown() final;
         void HandleDeviceLoss() final;
 
-      private:
+      protected:
+        void FinishImpl() override;
+
         Ref<ComputePipelineBase> mPipeline;
         WGPUCreateComputePipelineAsyncCallback mCreateComputePipelineAsyncCallback;
     };
@@ -54,13 +57,33 @@ namespace dawn_native {
                                               WGPUCreateRenderPipelineAsyncCallback callback,
                                               void* userdata);
 
-        void Finish() final;
         void HandleShutDown() final;
         void HandleDeviceLoss() final;
 
-      private:
+      protected:
+        void FinishImpl() override;
+
         Ref<RenderPipelineBase> mPipeline;
         WGPUCreateRenderPipelineAsyncCallback mCreateRenderPipelineAsyncCallback;
+    };
+
+    class CreateComputePipelineAsyncTaskBase : public WorkerThreadTask {
+      public:
+        CreateComputePipelineAsyncTaskBase(DeviceBase* device,
+                                           const ComputePipelineDescriptor* descriptor,
+                                           size_t blueprintHash,
+                                           WGPUCreateComputePipelineAsyncCallback callback,
+                                           void* userdata);
+
+      protected:
+        DeviceBase* mDevice;
+        Ref<ComputePipelineBase> mComputePipeline;
+        size_t mBlueprintHash;
+        WGPUCreateComputePipelineAsyncCallback mCallback;
+        void* mUserdata;
+
+        std::string mEntryPoint;
+        Ref<ShaderModuleBase> mComputeShaderModule;
     };
 
 }  // namespace dawn_native

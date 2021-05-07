@@ -223,8 +223,15 @@ namespace dawn_native {
         mPlatform = platform;
     }
 
-    dawn_platform::Platform* InstanceBase::GetPlatform() const {
-        return mPlatform;
+    dawn_platform::Platform* InstanceBase::GetPlatform() {
+        if (mPlatform != nullptr) {
+            return mPlatform;
+        }
+
+        if (mDefaultPlatform == nullptr) {
+            mDefaultPlatform = std::make_unique<dawn_platform::Platform>();
+        }
+        return mDefaultPlatform.get();
     }
 
     const XlibXcbFunctions* InstanceBase::GetOrCreateXlibXcbFunctions() {

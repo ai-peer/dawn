@@ -36,7 +36,7 @@ namespace dawn_native {
           mCreateComputePipelineAsyncCallback(callback) {
     }
 
-    void CreateComputePipelineAsyncCallbackTask::Finish() {
+    void CreateComputePipelineAsyncCallbackTask::FinishImpl() {
         ASSERT(mCreateComputePipelineAsyncCallback != nullptr);
 
         if (mPipeline.Get() != nullptr) {
@@ -73,7 +73,7 @@ namespace dawn_native {
           mCreateRenderPipelineAsyncCallback(callback) {
     }
 
-    void CreateRenderPipelineAsyncCallbackTask::Finish() {
+    void CreateRenderPipelineAsyncCallbackTask::FinishImpl() {
         ASSERT(mCreateRenderPipelineAsyncCallback != nullptr);
 
         if (mPipeline.Get() != nullptr) {
@@ -98,6 +98,21 @@ namespace dawn_native {
 
         mCreateRenderPipelineAsyncCallback(WGPUCreatePipelineAsyncStatus_DeviceLost, nullptr,
                                            "Device lost before callback", mUserData);
+    }
+
+    CreateComputePipelineAsyncTaskBase::CreateComputePipelineAsyncTaskBase(
+        DeviceBase* device,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : WorkerThreadTask(device->GetWaitableEventManager(), device->GetCallbackTaskManager()),
+          mDevice(device),
+          mBlueprintHash(blueprintHash),
+          mCallback(callback),
+          mUserdata(userdata),
+          mEntryPoint(descriptor->computeStage.entryPoint),
+          mComputeShaderModule(descriptor->computeStage.module) {
     }
 
 }  // namespace dawn_native
