@@ -21,6 +21,7 @@
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ShaderModuleD3D12.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
+#include "dawn_platform/DawnPlatform.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -65,6 +66,60 @@ namespace dawn_native { namespace d3d12 {
 
     ID3D12PipelineState* ComputePipeline::GetPipelineState() const {
         return mPipelineState.Get();
+    }
+
+    void ComputePipeline::CreateAsync(Device* device,
+                                      const ComputePipelineDescriptor* descriptor,
+                                      size_t blueprintHash,
+                                      WGPUCreateComputePipelineAsyncCallback callback,
+                                      void* userdata) {
+        // The pointer task will be protected by a std::unique_ptr in
+        // CreateComputePipelineAsyncTask::DoTask().
+        ExecutionSerial serial = device->GetWaitableEventManager()->NextTaskSerial();
+        CreateComputePipelineAsyncTask* task = new CreateComputePipelineAsyncTask(
+            device, serial, descriptor, blueprintHash, callback, userdata);
+        std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent =
+            device->GetWorkerTaskPool()->PostWorkerTask(CreateComputePipelineAsyncTask::DoTask,
+                                                        task);
+        device->GetWaitableEventManager()->TrackNewWaitableEvent(serial, std::move(waitableEvent));
+    }
+
+    ComputePipeline::CreateComputePipelineAsyncTask::CreateComputePipelineAsyncTask(
+        Device* device,
+        ExecutionSerial taskSerial,
+        const ComputePipelineDescriptor* descriptor,
+        size_t blueprintHash,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata)
+        : mDevice(device),
+          mComputePipeline(AcquireRef(new ComputePipeline(device, descriptor))),
+          mTaskSerial(taskSerial),
+          mBlueprintHash(blueprintHash),
+          mCallback(callback),
+          mUserdata(userdata),
+          mEntryPoint(descriptor->computeStage.entryPoint),
+          mComputeShaderModule(descriptor->computeStage.module) {
+    }
+
+    void ComputePipeline::CreateComputePipelineAsyncTask::Run() {
+        ComputePipelineDescriptor descriptor;
+
+        // Only set useful members of descriptor
+        descriptor.computeStage.entryPoint = mEntryPoint.c_str();
+        descriptor.computeStage.module = mComputeShaderModule.Get();
+        MaybeError maybeError = ToBackend(mComputePipeline)->Initialize(&descriptor);
+
+        std::string errorMessage;
+        if (maybeError.IsError()) {
+            mComputePipeline = nullptr;
+            errorMessage = maybeError.AcquireError()->GetMessage();
+        }
+
+        mComputeShaderModule = nullptr;
+
+        mDevice->CreateComputePipelineAsyncTaskFinished(std::move(mComputePipeline), errorMessage,
+                                                        mCallback, mUserdata, mBlueprintHash,
+                                                        mTaskSerial);
     }
 
 }}  // namespace dawn_native::d3d12
