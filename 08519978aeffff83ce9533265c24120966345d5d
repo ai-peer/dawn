@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73395b68_663ecece",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-08T02:38:28Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "08519978aeffff83ce9533265c24120966345d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a54e782_fed843e3",
@@ -72,6 +89,30 @@
       "side": 1,
       "message": "Ack. This is clearly the intent of the Vulkan spec, but I think it has a bug:\n\n\u003e For each element of pRegions, srcOffset.z and (extent.depth + srcOffset.z) must both be greater than or equal to 0 and less than or equal to the depth of the specified srcSubresource of srcImage\n\n\u003e If srcImage is of type VK_IMAGE_TYPE_2D, and dstImage is of type VK_IMAGE_TYPE_3D, then for each element of pRegions, extent.depth must equal srcSubresource.layerCount\n\nIt will be something to watch careful as drivers risk having bugs here. WebGPU\u0027s unified depthOrArrayLayers makes things much more clear I think.",
       "parentUuid": "9a54e782_fed843e3",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 87
+      },
+      "revId": "08519978aeffff83ce9533265c24120966345d5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a1eb6e5_c66963b9",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-08T02:38:28Z",
+      "side": 1,
+      "message": "Vulkan has a validation rule to say that extent.depth must match {src|dst}Subresource.layerCount. If driver implementation conforms to the Vulkan spec, it should be fine. \n\nGood point. This is a strong reason that it\u0027s better to combine depth and arrayLayers into one variable (we had separated variables in WebGPU spec before), and name it as the current one depthOrArrayLayers(we called it depth before).",
+      "parentUuid": "78c279e4_cda2f308",
       "range": {
         "startLine": 121,
         "startChar": 0,
