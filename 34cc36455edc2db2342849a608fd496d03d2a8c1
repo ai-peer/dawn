@@ -211,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "627af952_6834183d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-08T01:49:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b9213550_22d1090a",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "814b4c56_12d4fd0a",
@@ -224,6 +242,24 @@
       "writtenOn": "2021-04-21T06:43:26Z",
       "side": 1,
       "message": "This is called on device shut down. So while I guess we need to wait for all the results to come back so we clean up resources, shouldn\u0027t we be passing the DeviceDestroyed status as the callback result?\n\nEven we that though, Dawn would be waiting for compilation to finish before calling the callback with the DeviceDestroyed status. Perhaps we should call the callbacks first before performing the wait?\n\nAlso, probably not necessary to add to the cache on shutdown.",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c6d96ab_a51cf57b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-08T01:49:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "814b4c56_12d4fd0a",
       "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -245,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e7488cc_f27e3703",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 724,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-08T01:49:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8d79f681_a99d3a8f",
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab21444b_06b2bb7f",
@@ -258,6 +312,30 @@
       "writtenOn": "2021-04-20T18:18:30Z",
       "side": 1,
       "message": "It\u0027s breaking layering a bit that we are modifying the cache like that, but we can fix it once we have a ComputePipelineFactory concept. Maybe add a TODO?",
+      "range": {
+        "startLine": 731,
+        "startChar": 25,
+        "endLine": 731,
+        "endChar": 47
+      },
+      "revId": "34cc36455edc2db2342849a608fd496d03d2a8c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ecb2aa3_97283d6d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 731,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-08T01:49:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ab21444b_06b2bb7f",
       "range": {
         "startLine": 731,
         "startChar": 25,
