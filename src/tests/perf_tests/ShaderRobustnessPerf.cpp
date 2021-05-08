@@ -150,7 +150,7 @@ namespace {
         })";
 
     // The vec4 version requires that dimInner and dimBOuter are divisible by 4.
-    constexpr char kMatMulVec4[] = R"(
+    constexpr char kMatMulVec4OneDimensionalSharedArray[] = R"(
         [[block]] struct Uniforms {
             dimAOuter : u32;
             dimInner : u32;
@@ -272,11 +272,134 @@ namespace {
                          acc[innerRow]);
             }
         })";
+
+    // The vec4 version requires that dimInner and dimBOuter are divisible by 4.
+    constexpr char kMatMulVec4TwoDimensionalSharedArray[] = R"(
+        [[block]] struct Uniforms {
+            dimAOuter : u32;
+            dimInner : u32;
+            dimBOuter : u32;
+        };
+        [[block]] struct Matrix {
+            numbers: array<vec4<f32>>;
+        };
+
+        [[group(0), binding(0)]] var<storage> firstMatrix : [[access(read)]] Matrix;
+        [[group(0), binding(1)]] var<storage> secondMatrix : [[access(read)]] Matrix;
+        [[group(0), binding(2)]] var<storage> resultMatrix : [[access(write)]] Matrix;
+        [[group(0), binding(3)]] var<uniform> uniforms : Uniforms;
+
+        fn mm_readA(row : u32, col : u32) -> vec4<f32>  {
+            if (row < uniforms.dimAOuter && col < uniforms.dimInner)
+            {
+                let result : vec4<f32> = firstMatrix.numbers[row * uniforms.dimInner / 4u + col];
+                return result;
+            }
+            return vec4<f32>(0.0, 0.0, 0.0, 0.0);
+        }
+
+        fn mm_readB(row : u32, col : u32) -> vec4<f32> {
+            if (row < uniforms.dimInner && col < uniforms.dimBOuter)
+            {
+                let result : vec4<f32> = secondMatrix.numbers[row * uniforms.dimBOuter / 4u + col];
+                return result;
+            }
+            return vec4<f32>(0.0, 0.0, 0.0, 0.0);
+        }
+
+        fn mm_write(row : u32, col : u32, value : vec4<f32>) {
+            if (row < uniforms.dimAOuter && col < uniforms.dimBOuter)
+            {
+                let index : u32 = col + row * uniforms.dimBOuter / 4u;
+                resultMatrix.numbers[index] = value;
+            }
+        }
+
+        let RowPerThread : u32 = 4u;
+        let ColPerThread : u32 = 4u;
+        let TileAOuter : u32 = 64u;
+        let TileBOuter : u32 = 64u;
+        let TileInner : u32 = 64u;
+
+        var<workgroup> mm_Asub : array<array<vec4<f32>, 16>, 64>;
+        var<workgroup> mm_Bsub : array<array<vec4<f32>, 16>, 64>;
+
+        [[stage(compute), workgroup_size(16, 16, 1)]]
+        fn main([[builtin(local_invocation_id)]] local_id : vec3<u32>,
+                [[builtin(global_invocation_id)]] global_id  : vec3<u32>) {
+            let tileRow : u32 = local_id.y * RowPerThread;
+            let tileCol : u32 = local_id.x;
+
+            let globalRow : u32 = global_id.y * RowPerThread;
+            let globalCol : u32 = global_id.x;
+
+            let numTiles : u32 = (uniforms.dimInner - 1u) / TileInner + 1u;
+
+            var acc: array<vec4<f32>, 4>;
+            var ACached : vec4<f32>;
+            var BCached : array<vec4<f32>, 4>;
+
+            // Without this initialization strange values show up in acc.
+            // TODO: Remove it once the following bug is fixed.
+            // https://bugs.chromium.org/p/tint/issues/detail?id=759
+            for (var index : u32 = 0u; index < RowPerThread; index = index + 1u) {
+                acc[index] = vec4<f32>(0.0, 0.0, 0.0, 0.0);
+            }
+
+            var globalColA : u32 = tileCol;
+            let RowPerThreadB : u32 = TileInner / 16u;
+            let tileRowB : u32 = local_id.y * RowPerThreadB;
+
+            // Loop over shared dimension.
+            for (var t : u32 = 0u; t < numTiles; t = t + 1u) {
+                // Load one tile of A into local memory.
+                for (var innerRow : u32 = 0u; innerRow < RowPerThread; innerRow = innerRow + 1u) {
+                    let inputRow : u32 = tileRow + innerRow;
+                    let inputCol : u32 = tileCol;
+                    mm_Asub[inputRow][inputCol] = mm_readA(globalRow + innerRow, globalColA);
+                }
+                globalColA = globalColA + TileInner / ColPerThread;
+
+                // Load one tile of B into local memory.
+                for (var innerRow : u32 = 0u; innerRow < RowPerThreadB; innerRow = innerRow + 1u) {
+                    let inputRow : u32 = tileRowB + innerRow;
+                    let inputCol : u32 = tileCol;
+                    mm_Bsub[inputRow][inputCol] = mm_readB(t * TileInner + inputRow, globalCol);;
+                }
+
+                workgroupBarrier();
+
+                // Compute acc values for a single thread.
+                for (var k : u32 = 0u; k < TileInner / ColPerThread; k = k + 1u) {
+                    BCached[0] = mm_Bsub[k * ColPerThread][tileCol];
+                    BCached[1] = mm_Bsub[k * ColPerThread + 1u][tileCol];
+                    BCached[2] = mm_Bsub[k * ColPerThread + 2u][tileCol];
+                    BCached[3] = mm_Bsub[k * ColPerThread + 3u][tileCol];
+
+                    for (var i : u32 = 0u; i < RowPerThread; i = i + 1u) {
+                        ACached = mm_Asub[tileRow + i][k];
+                        acc[i] = BCached[0] * ACached.x + acc[i];
+                        acc[i] = BCached[1] * ACached.y + acc[i];
+                        acc[i] = BCached[2] * ACached.z + acc[i];
+                        acc[i] = BCached[3] * ACached.w + acc[i];
+                    }
+                }
+
+                workgroupBarrier();
+            }
+
+            for (var innerRow : u32 = 0u; innerRow < RowPerThread; innerRow = innerRow + 1u) {
+                mm_write(globalRow + innerRow,
+                         globalCol,
+                         acc[innerRow]);
+            }
+        })";
     constexpr unsigned int kNumIterations = 50;
 
     enum class MatMulMethod {
         MatMulFloat,
-        MatMulVec4,
+        MatMulVec4OneDimSharedArray,
+        MatMulVec4TwoDimSharedArray
     };
 
     struct ShaderRobustnessParams : AdapterTestParam {
@@ -304,8 +427,11 @@ namespace {
             case MatMulMethod::MatMulFloat:
                 ostream << "_MatMulFloat";
                 break;
-            case MatMulMethod::MatMulVec4:
-                ostream << "_MatMulVec4";
+            case MatMulMethod::MatMulVec4OneDimSharedArray:
+                ostream << "_MatMulVec4OneDimSharedArray";
+                break;
+            case MatMulMethod::MatMulVec4TwoDimSharedArray:
+                ostream << "_MatMulVec4TwoDimSharedArray";
                 break;
         }
 
@@ -372,8 +498,13 @@ void ShaderRobustnessPerf::SetUp() {
             break;
         }
 
-        case MatMulMethod::MatMulVec4: {
-            module = utils::CreateShaderModule(device, kMatMulVec4);
+        case MatMulMethod::MatMulVec4OneDimSharedArray: {
+            module = utils::CreateShaderModule(device, kMatMulVec4OneDimensionalSharedArray);
+            break;
+        }
+
+        case MatMulMethod::MatMulVec4TwoDimSharedArray: {
+            module = utils::CreateShaderModule(device, kMatMulVec4TwoDimensionalSharedArray);
             break;
         }
     }
@@ -423,7 +554,9 @@ DAWN_INSTANTIATE_PERF_TEST_SUITE_P(ShaderRobustnessPerf,
                                     MetalBackend(), MetalBackend({"disable_robustness"}, {}),
                                     OpenGLBackend(), OpenGLBackend({"disable_robustness"}, {}),
                                     VulkanBackend(), VulkanBackend({"disable_robustness"}, {})},
-                                   {MatMulMethod::MatMulFloat, MatMulMethod::MatMulVec4},
+                                   {MatMulMethod::MatMulFloat,
+                                    MatMulMethod::MatMulVec4OneDimSharedArray,
+                                    MatMulMethod::MatMulVec4TwoDimSharedArray},
                                    {512},
                                    {512},
                                    {512});
