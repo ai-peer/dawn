@@ -16,6 +16,46 @@
       "message": "Please take a look, thanks.",
       "revId": "475c6058c2da5ea7df51647f0467fd2fab1d1a7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2efd8023_fc554775",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-08T07:40:04Z",
+      "side": 1,
+      "message": "On bots the following test failure:\nShaderRobustnessPerf.Run/D3D12_Microsoft_Basic_Render_Driver_CPU__e_disable_robustness__d_use_tint_generator_MatMulVec4TwoDimSharedArray_512_512_512\nError: Assertion failure at ../../third_party/dawn/src/dawn_native/Device.cpp:418 (CheckPassedSerials): completedSerial \u003c\u003d mLastSubmittedSerial\n\nAnd locally I met the following test failure:\nShaderRobustnessPerf.Run/D3D12_Microsoft_Basic_Render_Driver_CPU__d_use_tint_generator_MatMulVec4OneDimSharedArray_512_512_512\nError: Assertion failure at ../../src/dawn_native/Device.cpp:418 (CheckPassedSerials): completedSerial \u003c\u003d mLastSubmittedSerial\n\nI suspect it a bug in Dawn D3D12 backends. Can we skip these tests on \"Microsoft Basic Render Driver\" right now?",
+      "revId": "475c6058c2da5ea7df51647f0467fd2fab1d1a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d952875e_7a5778a4",
+        "filename": "src/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-08T07:40:04Z",
+      "side": 1,
+      "message": "Do you think it better to share some code among these 3 shaders?",
+      "range": {
+        "startLine": 278,
+        "startChar": 4,
+        "endLine": 290,
+        "endChar": 66
+      },
+      "revId": "475c6058c2da5ea7df51647f0467fd2fab1d1a7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
