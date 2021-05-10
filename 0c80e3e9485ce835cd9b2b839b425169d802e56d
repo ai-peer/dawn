@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfdb91f1_ec5b55ba",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b8e61f2_94b8a556",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "993915ee_d6639fe1",
@@ -99,6 +117,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "392c2692_a90d83e3",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6b7d597_3bb9c2e1",
+      "range": {
+        "startLine": 646,
+        "startChar": 39,
+        "endLine": 646,
+        "endChar": 52
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41164f73_384a96b0",
@@ -116,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3681bb2_2b8bc7bf",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41164f73_384a96b0",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "814fb0c0_434c861a",
@@ -129,6 +189,30 @@
       "writtenOn": "2021-05-07T01:42:40Z",
       "side": 1,
       "message": "nit: should rename to \"originZ\"",
+      "range": {
+        "startLine": 679,
+        "startChar": 46,
+        "endLine": 679,
+        "endChar": 55
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfaa4adb_26339c61",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "814fb0c0_434c861a",
       "range": {
         "startLine": 679,
         "startChar": 46,
@@ -162,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91933bc_3048997c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97446c99_bbff7171",
+      "range": {
+        "startLine": 761,
+        "startChar": 46,
+        "endLine": 761,
+        "endChar": 55
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e7ed869_0eb21904",
@@ -175,6 +283,24 @@
       "writtenOn": "2021-05-07T07:58:44Z",
       "side": 1,
       "message": "This is a bit complicated and doesn\u0027t support direct 3D -\u003e 3D copies but that\u0027s probably ok (with a TODO). I\u0027m not sure how to reduce the complexity, especially when we\u0027ll also have 1D \u003c-\u003e 2D/3D textures.",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c33c76e3_2494e80a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Yea, unfortunately the Metal API is not super composable here. Added a comment",
+      "parentUuid": "8e7ed869_0eb21904",
       "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -210,6 +336,24 @@
       "side": 1,
       "message": "Hm, the comment in this function says it shouldn\u0027t need any splits. Regardless though, I think it\u0027s worth factoring it out. I can just do this now.",
       "parentUuid": "662c3233_c35af1a6",
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb0d74a_9735bca7",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "463d82ba_fd3e9dc0",
       "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -251,6 +395,30 @@
       "side": 1,
       "message": "Can\u0027t we make a single copy for 3D textures? That Metal call seems like it could support buffer-\u003e3D texture copies. Ditto in the other file.",
       "parentUuid": "7edbb917_548ed1f2",
+      "range": {
+        "startLine": 349,
+        "startChar": 30,
+        "endLine": 349,
+        "endChar": 39
+      },
+      "revId": "0c80e3e9485ce835cd9b2b839b425169d802e56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a92fc68d_3952839d",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T18:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a11db83_0b8c458b",
       "range": {
         "startLine": 349,
         "startChar": 30,
