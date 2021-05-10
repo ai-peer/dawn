@@ -16,6 +16,23 @@
       "message": "rebased this, Yunchao PTAL",
       "revId": "ab4b8b6230e061c09f8b99a797abdf02dc5cb967",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43852c3e_64890c1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T23:37:10Z",
+      "side": 1,
+      "message": "LGTM. No additional comments for this change. But it seems that my change to ComputeTextureCopySplit(s) will impact Metal backend. ",
+      "revId": "ab4b8b6230e061c09f8b99a797abdf02dc5cb967",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
