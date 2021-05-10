@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f7d64f_cb46a8e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T15:11:41Z",
+      "side": 1,
+      "message": "Looks like the bots is failing due to the new code. ",
+      "revId": "2faa5584c7decb89eaca9af755c981b80ae11c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f73a8a_e8167d9c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 746,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T15:11:41Z",
+      "side": 1,
+      "message": "If both src and dst are 3D textures, we can copy all depth ranges in one shot via one single CopyTextureRegion call.",
+      "range": {
+        "startLine": 746,
+        "startChar": 0,
+        "endLine": 746,
+        "endChar": 28
+      },
+      "revId": "2faa5584c7decb89eaca9af755c981b80ae11c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "150e3cbe_8dbebcbb",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T15:11:41Z",
+      "side": 1,
+      "message": "There are a couple more possible tests:\n - One is full but the other is not. I mean 3D texture and 2D array texture are not the same size. For example, one is [256, 128, 6], the other is [256, 128, 10] (I assume that is valid). \n - The srcStartOffset and dstStartOffset can be different when it is not a full copy.\n\nI am not sure whether we need to add these tests in end2end tests, though. Maybe adding them into CTS is enough.",
+      "range": {
+        "startLine": 1801,
+        "startChar": 0,
+        "endLine": 1801,
+        "endChar": 47
+      },
+      "revId": "2faa5584c7decb89eaca9af755c981b80ae11c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
