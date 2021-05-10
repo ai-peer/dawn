@@ -33,6 +33,24 @@
       "message": "LGTM. No additional comments for this change. But it seems that my change to ComputeTextureCopySplit(s) will impact Metal backend. ",
       "revId": "ab4b8b6230e061c09f8b99a797abdf02dc5cb967",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92dcad6_f1b2a23e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-10T23:40:35Z",
+      "side": 1,
+      "message": "Did you upload that change yet? If you did, I must have missed it. I don\u0027t want to conflict with your work.",
+      "parentUuid": "43852c3e_64890c1a",
+      "revId": "ab4b8b6230e061c09f8b99a797abdf02dc5cb967",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
