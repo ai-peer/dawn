@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "454ff819_c736f0c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T23:41:07Z",
+      "side": 1,
+      "message": "LGTM. Please go ahead. The bots should be happy if we only add tests. ",
+      "revId": "7405d4a53a8b2b15fb8f8239650f69f5ba2f552f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

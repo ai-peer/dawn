@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b6876f2_eab2e596",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T23:41:07Z",
+      "side": 1,
+      "message": "No problem. I can take the D3D implementation.",
+      "parentUuid": "6f69d007_ef151d5d",
+      "revId": "2faa5584c7decb89eaca9af755c981b80ae11c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73f73a8a_e8167d9c",
@@ -96,6 +114,30 @@
       "side": 1,
       "message": "I think we should add more tests here, these are just some simple ones for now. Can expand in another CL though?",
       "parentUuid": "150e3cbe_8dbebcbb",
+      "range": {
+        "startLine": 1801,
+        "startChar": 0,
+        "endLine": 1801,
+        "endChar": 47
+      },
+      "revId": "2faa5584c7decb89eaca9af755c981b80ae11c5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b73a69a_dac8c7e7",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1801,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-10T23:41:07Z",
+      "side": 1,
+      "message": "Sound good.",
+      "parentUuid": "18582a5a_8aeadbc0",
       "range": {
         "startLine": 1801,
         "startChar": 0,
