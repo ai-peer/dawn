@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c267cb8_1139beb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-11T20:43:54Z",
+      "side": 1,
+      "message": "PTAL! Roughly corresponds with the Blink changes in https://chromium-review.googlesource.com/c/chromium/src/+/2879900 but excludes fences since that requires a significant amount more code removal in Dawn (due to the wire API) and thus is probably deserving of it\u0027s own CL.",
+      "revId": "76a5e1e91b178cfc2dbc0ffea87d77ed0675e6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
