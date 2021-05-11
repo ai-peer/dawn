@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6979a2_ee91f8a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-11T22:13:09Z",
+      "side": 1,
+      "message": "As promised, here\u0027s the separate CL for just fence removal. It\u0027s, uh... large.",
+      "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
