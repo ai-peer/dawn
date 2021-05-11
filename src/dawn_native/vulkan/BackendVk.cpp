@@ -55,7 +55,7 @@ constexpr char kVulkanLibName[] = "libvulkan.so";
 // List of Vulkan MessageIdNames to suppress validation messages for. These should be used sparingly
 // but may be useful to temporarily quiet issues while a fix is in the works.
 constexpr const char* kSuppressedValidationMessageNames[] = {
-    "UNASSIGNED-CoreValidation-DrawState-InvalidImageLayout",  // (ISSUE: dawn:785)
+    "",  // Sentinel so this array is never empty.
 };
 
 namespace dawn_native { namespace vulkan {
@@ -68,8 +68,9 @@ namespace dawn_native { namespace vulkan {
                              const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
                              void* /* pUserData */) {
             // If the message is of a suppressed type, ignore it.
-            for (const char* msgName : kSuppressedValidationMessageNames) {
-                if (strstr(pCallbackData->pMessageIdName, msgName) != nullptr) {
+            for (const char* const* msgName = std::begin(kSuppressedValidationMessageNames) + 1;
+                 msgName != std::end(kSuppressedValidationMessageNames); ++msgName) {
+                if (strstr(pCallbackData->pMessageIdName, *msgName) != nullptr) {
                     return VK_FALSE;
                 }
             }

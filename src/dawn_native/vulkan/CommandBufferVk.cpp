@@ -472,8 +472,8 @@ namespace dawn_native { namespace vulkan {
         VkBufferImageCopy srcToTempBufferRegion =
             ComputeBufferImageCopyRegion(tempBufferCopy, srcCopy, copySize);
 
-        // The Dawn CopySrc usage is always mapped to GENERAL
-        device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
+        // The Dawn CopySrc usage is always mapped to TRANSER_SRC_OPTIMAL
+        device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL,
                                         tempBuffer->GetHandle(), 1, &srcToTempBufferRegion);
 
         tempBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopySrc);
@@ -601,9 +601,10 @@ namespace dawn_native { namespace vulkan {
 
                     VkImage srcImage = ToBackend(src.texture)->GetHandle();
                     VkBuffer dstBuffer = ToBackend(dst.buffer)->GetHandle();
-                    // The Dawn CopySrc usage is always mapped to GENERAL
-                    device->fn.CmdCopyImageToBuffer(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
-                                                    dstBuffer, 1, &region);
+                    // The Dawn CopySrc usage is always mapped to TRANSER_SRC_OPTIMAL
+                    device->fn.CmdCopyImageToBuffer(commands, srcImage,
+                                                    VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, dstBuffer,
+                                                    1, &region);
                     break;
                 }
 
@@ -671,9 +672,9 @@ namespace dawn_native { namespace vulkan {
 
                             // Dawn guarantees dstImage be in the TRANSFER_DST_OPTIMAL layout after
                             // the copy command.
-                            device->fn.CmdCopyImage(commands, srcImage, VK_IMAGE_LAYOUT_GENERAL,
-                                                    dstImage, VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                                    1, &region);
+                            device->fn.CmdCopyImage(
+                                commands, srcImage, VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL, dstImage,
+                                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1, &region);
                         }
                     } else {
                         RecordCopyImageWithTemporaryBuffer(recordingContext, src, dst,
