@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a47b9c1b_8e6c1fc6",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-11T08:54:28Z",
+      "side": 1,
+      "message": "In my latest CL WorkerThreadTask* is released after WorkerThreadTask::Run() returns, so it is not suitable to use it as the key of the map.\n\nNow I am using dawn_platform::WaitableEvent* as the key.",
+      "parentUuid": "4b655d3f_fe6a2b8a",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "feb6b250_a507cb24",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 20
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-11T04:29:40Z",
       "side": 1,
       "message": "Creating the default platform should probably happen in Instance.cpp",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 75
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36dbd67d_0625d7e2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-11T08:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "feb6b250_a507cb24",
       "range": {
         "startLine": 137,
         "startChar": 0,
@@ -64,6 +112,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eca582a_fb80ce1b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-11T08:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74f82b0c_b105b3ad",
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8d983ff_71111fc2",
@@ -77,6 +143,30 @@
       "writtenOn": "2021-05-11T04:29:40Z",
       "side": 1,
       "message": "Let\u0027s add a TODO about moving this part into the implementation of CreateComputePipelineAsyncTask::Run if/when the object cache and WaitableEventManager become thread-safe.",
+      "range": {
+        "startLine": 1419,
+        "startChar": 8,
+        "endLine": 1423,
+        "endChar": 81
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a48a5bb2_29e1b935",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-11T08:54:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8d983ff_71111fc2",
       "range": {
         "startLine": 1419,
         "startChar": 8,
@@ -112,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a12a94e8_66c6feee",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-11T08:54:28Z",
+      "side": 1,
+      "message": "\u003e We could pass it into the WorkerThreadTask constructor. WorkerThreadTask::DoTask would run the task, and then remove itself from the WaitableEventManager after completion. \n\nThe main problem is that we cannot delete the WaitableEvent object in the function body of DoTask():\n\nAccording to [1], \n\"In any case, the call to std::async synchronizes-with (as defined in std::memory_order) the call to f, and the completion of f is sequenced-before making the shared state ready\", inside the function body of DoTask() the state of the std::future object won\u0027t be \"ready\"; and \n\naccording to [2], when \"the shared state was created by a call to std::async, the shared state is not yet ready, and this was the last reference to the shared state\", the destructor of future will be blocked until its state becomes \"ready\".\n\nSo if we try to delete the WaitableEvent object inside DoTask(), we will \nmeet a dead lock and the function DoTask() will never return.\n\nIn fact the std::future object stores all the data structures to support multi-threading. Before the return of DoTask() these data structures should always be alive, so we cannot destroy the WaitableEvent object before the return of DoTask(). \n\n[1] https://en.cppreference.com/w/cpp/thread/async\n[2] https://en.cppreference.com/w/cpp/thread/future/~future",
+      "parentUuid": "aa513974_da6c7e3e",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 99
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "799830a9_2b6996d3",
         "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
         "patchSetId": 20
@@ -123,6 +237,30 @@
       "writtenOn": "2021-05-11T04:29:40Z",
       "side": 1,
       "message": "The code that implements finishing the task is far from the code that starts it. Can we create this callback task here instead, and just do mDevice-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask(..); ?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f177bb_190800be",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-11T08:54:28Z",
+      "side": 1,
+      "message": "The logic in device-\u003eCreateComputePipelineAsyncTaskFinished() (create a callback and save it into the callback manager) can be shared among other backends so I put it in a standalone function in the front end of Device. What do you think?",
+      "parentUuid": "799830a9_2b6996d3",
       "range": {
         "startLine": 120,
         "startChar": 0,
