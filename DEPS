@@ -96,7 +96,7 @@ deps = {
 
   # WGSL support
   'third_party/tint': {
-    'url': '{dawn_git}/tint@9fdfa1e32374f8d862c98ad241757853386f66e6',
+    'url': '{dawn_git}/tint@cc1e9e04fd1b5a65fe3d152897db691be95c09ba',
   },
 
   # GLFW for tests and samples
