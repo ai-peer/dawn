@@ -393,29 +393,15 @@ namespace dawn_native { namespace vulkan {
             case wgpu::TextureUsage::CopyDst:
                 return VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL;
 
-                // A texture that's sampled and storage may be used as both usages in the same pass.
-                // When that happens, the layout must be GENERAL because that's a requirement for
-                // the storage usage. We can't know at bindgroup creation time if that case will
-                // happen so we must prepare for the pessimistic case and always use the GENERAL
-                // layout.
             case wgpu::TextureUsage::Sampled:
-                if (texture->GetUsage() & wgpu::TextureUsage::Storage) {
-                    return VK_IMAGE_LAYOUT_GENERAL;
-                } else {
-                    return VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
-                }
+                return VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
 
-                // Vulkan texture copy functions require the image to be in _one_  known layout.
-                // Depending on whether parts of the texture have been transitioned to only CopySrc
-                // or a combination with something else, the texture could be in a combination of
-                // GENERAL and TRANSFER_SRC_OPTIMAL. This would be a problem, so we make CopySrc use
-                // GENERAL.
-                // TODO(cwallez@chromium.org): We no longer need to transition resources all at
-                // once and can instead track subresources so we should lift this limitation.
             case wgpu::TextureUsage::CopySrc:
-                // Read-only and write-only storage textures must use general layout because load
-                // and store operations on storage images can only be done on the images in
-                // VK_IMAGE_LAYOUT_GENERAL layout.
+                return VK_IMAGE_LAYOUT_TRANSFER_SRC_OPTIMAL;
+
+            // Read-only and write-only storage textures must use general layout because load
+            // and store operations on storage images can only be done on the images in
+            // VK_IMAGE_LAYOUT_GENERAL layout.
             case wgpu::TextureUsage::Storage:
             case kReadOnlyStorageTexture:
                 return VK_IMAGE_LAYOUT_GENERAL;

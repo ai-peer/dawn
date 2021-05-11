@@ -95,8 +95,6 @@ namespace dawn_native { namespace vulkan {
                     TextureView* view = ToBackend(GetBindingAsTextureView(bindingIndex));
 
                     writeImageInfo[numWrites].imageView = view->GetHandle();
-                    // The layout may be GENERAL here because of interactions between the Sampled
-                    // and ReadOnlyStorage usages. See the logic in VulkanImageLayout.
                     writeImageInfo[numWrites].imageLayout = VulkanImageLayout(
                         ToBackend(view->GetTexture()), wgpu::TextureUsage::Sampled);
 
