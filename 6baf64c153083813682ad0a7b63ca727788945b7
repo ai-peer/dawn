@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "574101c5_528ae4e1",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T07:12:20Z",
+      "side": 1,
+      "message": "I also attached a couple pictures with explanations at a Google doc: https://docs.google.com/document/d/1gDryVdKxUHb4i5UJB2vOXwfwk6u_mF-gzy8q6ul0JUc/edit. But I think you don\u0027t need to read that. 😊",
+      "parentUuid": "282cb91b_7085c551",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 0
+      },
+      "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbf96783_e3ee3050",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
