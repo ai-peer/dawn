@@ -16,6 +16,46 @@
       "message": "Please take another look, thanks.",
       "revId": "27cc3370017686876ce00e7f78883facaddedd49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1434c936_868777f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T23:04:39Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "27cc3370017686876ce00e7f78883facaddedd49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb45ffb_d00d27d4",
+        "filename": "src/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T23:04:39Z",
+      "side": 1,
+      "message": "do you think we could change this to a helper function like:\n\nwriteSharedArray(\n   mm_Bsub, inputRow, inputCol,\n   mm_readB(t * TileInner + inputRow, globalCol))\n\nWe could define writeSharedArray for both array\u003cvec4\u003cf32\u003e, 1024\u003e and array\u003carray\u003cvec4\u003cf32\u003e, 16\u003e, 64\u003e\n\nI think WGSL should be able to resolve the overload ? This way we don\u0027t need to duplicate so much between kMatMulVec4BodyPart2Array1D and kMatMulVec4BodyPart2Array2D",
+      "range": {
+        "startLine": 309,
+        "startChar": 20,
+        "endLine": 309,
+        "endChar": 48
+      },
+      "revId": "27cc3370017686876ce00e7f78883facaddedd49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
