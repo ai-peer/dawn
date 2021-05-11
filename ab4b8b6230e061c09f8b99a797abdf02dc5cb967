@@ -51,6 +51,24 @@
       "parentUuid": "43852c3e_64890c1a",
       "revId": "ab4b8b6230e061c09f8b99a797abdf02dc5cb967",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c834fa_76fa4a11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T00:00:14Z",
+      "side": 1,
+      "message": "It doesn\u0027t conflict with my change. The functions names are similar, but Metal and D3D have their own functions to compute copy splits. They are totally isolated to each other. Sorry to make you confused. Just ignore that comment above.",
+      "parentUuid": "b92dcad6_f1b2a23e",
+      "revId": "ab4b8b6230e061c09f8b99a797abdf02dc5cb967",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
