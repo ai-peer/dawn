@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a491c2_6a85c856",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a47b9c1b_8e6c1fc6",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "feb6b250_a507cb24",
@@ -224,6 +248,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b058b751_229f0bb9",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "That makes sense - thanks for the explanation.",
+      "parentUuid": "a12a94e8_66c6feee",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 99
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "799830a9_2b6996d3",
@@ -261,6 +309,30 @@
       "side": 1,
       "message": "The logic in device-\u003eCreateComputePipelineAsyncTaskFinished() (create a callback and save it into the callback manager) can be shared among other backends so I put it in a standalone function in the front end of Device. What do you think?",
       "parentUuid": "799830a9_2b6996d3",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0401116c_448993c0",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "Right, thanks for the explanation.\n\nPerhaps we can put it in CreateComputePipelineAsyncTaskBase ?\n\n\nResultOrError\u003cRef\u003cComputePipeline\u003e\u003e CreateComputePipelineAsyncTaskImpl::CreateImpl() {\n  // Current contents of CreateComputePipelineAsyncTaskImpl::Run;\n  // but also return the pipeline, or an error.\n}\n\nvoid CreateComputePipelineAsyncTaskBase::Run() {\n   ResultOrError\u003cRef\u003cComputePipeline\u003e\u003e result \u003d CreateImpl();\n\n   // Current contents of CreateComputePipelineAsyncTaskFinished\n}",
+      "parentUuid": "a9f177bb_190800be",
       "range": {
         "startLine": 120,
         "startChar": 0,

@@ -1,0 +1,119 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb361b33_93038ac8",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "nit: would prefer to pass the WaitableEventManager into the constructor because that is precisely what we need. The WorkerThreadTask shouldn\u0027t be using any other Device-facilities (many of which are not thread-safe)",
+      "range": {
+        "startLine": 41,
+        "startChar": 39,
+        "endLine": 41,
+        "endChar": 57
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40872b98_90203b19",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "and, would prefer to pass the WorkerTaskPool into this function as it is the only time when we actually need it\n\nWe should also have an ASSERT to check that you don\u0027t call Start(..) more than once. Perhaps by checking that mWaitableEvent \u003d\u003d nullptr",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "877f0973_ef70d0c0",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "Maybe this function should be called \"MarkWaitableEventCompleted\"\n\nI think mCompletedWaitableEventQueue should become a vector\u003cunique_ptr\u003cWaitableEvent\u003e\u003e and this function should move the event from mWaitableEventsInFlight into mCompletedWaitableEventQueue.\n\nThen, ClearAllCompletedWaitableEvents would simply do mCompletedWaitableEventQueue.clear();\n\nThe reason is because once the events are complete, we need to move them out of mWaitableEventsInFlight immediately, otherwise HasWaitableEventsInFlight will return true even though events are done.",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 62
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e02b9f_60f547c7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "true?",
+      "range": {
+        "startLine": 404,
+        "startChar": 19,
+        "endLine": 404,
+        "endChar": 24
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8de0ae02_ab17913c",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T16:01:53Z",
+      "side": 1,
+      "message": "Can we lazily create mDefaultPlatform here instead? That way if someone manually sets it with SetPlatform, it is never instantiated",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 75
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
