@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "282cb91b_7085c551",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "I replaced the test and redrew the figure and explained why we need a separate CopyTextureRegion call for the last row of each depth slice in some situations.\n\nPlease also see comments marked as [1].",
+      "parentUuid": "8784d5f7_e60695db",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 0
+      },
+      "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbf96783_e3ee3050",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
@@ -37,6 +61,24 @@
       "writtenOn": "2021-05-07T13:31:44Z",
       "side": 1,
       "message": "I tried putting this test without the rest of the CL and it passes.",
+      "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40bd9d4c_86969ab1",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "Oops. You can reproduce it by running two DoTest(), just like DoTest() in Texture3DFullUnalignedTinyCopies. But I will submit that part in the next change, in order to make this change easier to review. This change is used to explain why we need separate functions for 3D texture copy.",
+      "parentUuid": "fbf96783_e3ee3050",
       "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

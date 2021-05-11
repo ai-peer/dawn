@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6adbfe34_1dab8858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin. Please see the explanation that why we need separate copy splitter functions for 3D textures. ",
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf104ea8_31b35c22",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "[1] Note that bufferSize.height can be greater than buffer\u0027s real height of each layer. Because we repositioned the alignedOffset (512B aligned) for each layer). However, we have only one single alignedOffset if we want to copy data across all depth ranges for a 3D texture. There is no chance to reposition alignedOffset. So bufferSize.height \u003e buffer\u0027s real height will make copied data in a mess.",
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9de28072_d9c6a833",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "[1] same here.",
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8e64729_64e2679f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "[1] same here.",
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

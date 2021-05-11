@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc55adbf_424821cf",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 969,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "Ack. It was removed now.",
+      "parentUuid": "44b8b590_93813310",
+      "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3723c39_ecd1d565",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-05-07T13:31:44Z",
       "side": 1,
       "message": "If we have 3D-specific logic we should make sure they are covered by extensive tests here (but it seems maybe we can just augment the 2D logic slightly?)",
+      "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0f998b1_82b7e117",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-11T06:52:44Z",
+      "side": 1,
+      "message": "Agreed. Added a TODO here. I will add unittests in a separate change.",
+      "parentUuid": "e3723c39_ecd1d565",
       "revId": "a2caf4bf3df2676654ffc95c2ada60098dd02a1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
