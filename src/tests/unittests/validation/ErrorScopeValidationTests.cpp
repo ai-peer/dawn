@@ -141,63 +141,6 @@ TEST_F(ErrorScopeValidationTest, PushPopBalanced) {
     }
 }
 
-// Test that error scopes call their callbacks before an enclosed Queue::Submit
-// completes
-TEST_F(ErrorScopeValidationTest, EnclosedQueueSubmit) {
-    wgpu::Queue queue = device.GetQueue();
-
-    device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
-
-    queue.Submit(0, nullptr);
-    wgpu::Fence fence;
-    EXPECT_DEPRECATION_WARNING(fence = queue.CreateFence());
-    queue.Signal(fence, 1);
-
-    testing::Sequence seq;
-
-    MockCallback<WGPUFenceOnCompletionCallback> fenceCallback;
-    fence.OnCompletion(1, fenceCallback.Callback(), fenceCallback.MakeUserdata(this));
-
-    MockCallback<WGPUErrorCallback> errorScopeCallback;
-    EXPECT_CALL(errorScopeCallback, Call(WGPUErrorType_NoError, _, this + 1)).InSequence(seq);
-    device.PopErrorScope(errorScopeCallback.Callback(), errorScopeCallback.MakeUserdata(this + 1));
-
-    EXPECT_CALL(fenceCallback, Call(WGPUFenceCompletionStatus_Success, this)).InSequence(seq);
-    WaitForAllOperations(device);
-}
-
-// Test that parent error scopes also call their callbacks before an enclosed Queue::Submit
-// completes
-TEST_F(ErrorScopeValidationTest, EnclosedQueueSubmitNested) {
-    wgpu::Queue queue = device.GetQueue();
-
-    device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
-    device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
-
-    queue.Submit(0, nullptr);
-    wgpu::Fence fence;
-    EXPECT_DEPRECATION_WARNING(fence = queue.CreateFence());
-    queue.Signal(fence, 1);
-
-    testing::Sequence seq;
-
-    MockCallback<WGPUFenceOnCompletionCallback> fenceCallback;
-    fence.OnCompletion(1, fenceCallback.Callback(), fenceCallback.MakeUserdata(this));
-
-    MockCallback<WGPUErrorCallback> errorScopeCallback2;
-    EXPECT_CALL(errorScopeCallback2, Call(WGPUErrorType_NoError, _, this + 1)).InSequence(seq);
-    device.PopErrorScope(errorScopeCallback2.Callback(),
-                         errorScopeCallback2.MakeUserdata(this + 1));
-
-    MockCallback<WGPUErrorCallback> errorScopeCallback1;
-    EXPECT_CALL(errorScopeCallback1, Call(WGPUErrorType_NoError, _, this + 2)).InSequence(seq);
-    device.PopErrorScope(errorScopeCallback1.Callback(),
-                         errorScopeCallback1.MakeUserdata(this + 2));
-
-    EXPECT_CALL(fenceCallback, Call(WGPUFenceCompletionStatus_Success, this)).InSequence(seq);
-    WaitForAllOperations(device);
-}
-
 // Test that if the device is destroyed before the callback occurs, it is called with NoError
 // in dawn_native, but Unknown in dawn_wire because the device is destroyed before the callback
 // message happens.
