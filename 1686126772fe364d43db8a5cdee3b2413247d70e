@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b655d3f_fe6a2b8a",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T04:29:40Z",
+      "side": 1,
+      "message": "It\u0027s odd that we\u0027re using \"Serial\" here when there\u0027s nothing ordered about the events in this map. Perhaps this could simply be a std::set\u003cstd::unique_ptr\u003cdawn_platform::WaitableEvent\u003e\u003e ?\n\nor perhaps\nstd::map\u003cWorkerThreadTask*, std::unique_ptr\u003cdawn_platform::WaitableEvent\u003e\u003e ?",
+      "range": {
+        "startLine": 71,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 36
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb6b250_a507cb24",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T04:29:40Z",
+      "side": 1,
+      "message": "Creating the default platform should probably happen in Instance.cpp",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 75
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f82b0c_b105b3ad",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T04:29:40Z",
+      "side": 1,
+      "message": "this probably needs a check to see if there are any waitable events in progress",
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8d983ff_71111fc2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T04:29:40Z",
+      "side": 1,
+      "message": "Let\u0027s add a TODO about moving this part into the implementation of CreateComputePipelineAsyncTask::Run if/when the object cache and WaitableEventManager become thread-safe.",
+      "range": {
+        "startLine": 1419,
+        "startChar": 8,
+        "endLine": 1423,
+        "endChar": 81
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa513974_da6c7e3e",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T04:29:40Z",
+      "side": 1,
+      "message": "If we make the WaitableEventManager thread-safe, we could pass it into the WorkerThreadTask constructor. WorkerThreadTask::DoTask would run the task, and then remove itself from the WaitableEventManager after completion. This is common functionality that we don\u0027t want to re-implement in a callback task for every type of task.\n\nIt might also then make sense to have this look like:\n\ntask-\u003eStart(device-\u003eGetWorkerTaskPool());\n\nwhere:\n\nvoid WorkerThreadTask::Start(WorkerTaskPool* pool) {\n  mWaitableEventManager-\u003eTrack(pool-\u003ePostWorkerTask(WorkerThreadTask::DoTask, this));\n}",
+      "range": {
+        "startLine": 84,
+        "startChar": 0,
+        "endLine": 84,
+        "endChar": 99
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "799830a9_2b6996d3",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-11T04:29:40Z",
+      "side": 1,
+      "message": "The code that implements finishing the task is far from the code that starts it. Can we create this callback task here instead, and just do mDevice-\u003eGetCallbackTaskManager()-\u003eAddCallbackTask(..); ?",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
