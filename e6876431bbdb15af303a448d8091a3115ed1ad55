@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1559f9b_f6563042",
+        "filename": "src/dawn_native/TaskManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-12T23:34:56Z",
+      "side": 1,
+      "message": "note: we could probably actually completely remove this by using a condition variable.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 59
+      },
+      "revId": "e6876431bbdb15af303a448d8091a3115ed1ad55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
