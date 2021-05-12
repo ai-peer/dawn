@@ -90,6 +90,30 @@
       },
       "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f36439_dc1c4341",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-12T01:09:46Z",
+      "side": 1,
+      "message": "For 3D texture copies, we have only one single alignedOffset (512-byte aligned) and one internal offset within the copy for all depth slices. So if copy\u0027s bufferSize.height is bigger than the real bufferSize.height, the copied data will be in a mess. An example of B2T copy: assuming the original data is 128 * 3 * 5, and the first row should be skipped because of alignment, so it is 3 * 5 + 1 \u003d 16 rows in buffer. If the bufferSize.height is 4 (real bufferSize.height + 1 \u003d 3 + 1 \u003d 4, in order to cover all rows for the first depth slice. Note that the first row of the first depth slice should be skipped because of alignment), then the next copy is also 4 rows, so are the following copies. The copied data will be 4 depth slices only (16 rows in total in buffer / 4 rows for each copy \u003d 4 copies \u003d 4 depth slices). But it is actually 5 depth slices. In addition, every first row of each depth slice is missing now (but only the first row of the first depth slice should be skipped, the first rows of the following depth slices should not be skipped). And the copies data itself is in a mess, actually. Its layout is not what we want.\n\nFor 2D array texture copies, we have separate alignedOffset for each layer. So copy\u0027s bufferSize.height \u003e real bufferSize.height is doable. The first copy is row N to row N + 3 (4 rows), but actually copied data is row N + 1 to N + 3 (3 rows, the first row is skipped). Note that the second copy will start from N + 3 (not N + 4 like 3D texture copy). it will copy N + 3 to N + 6 (4 rows), and the real copied data is N + 4 to N + 6 (3 rows). Because we can reposition the alignedOffset and internal offset for each copy of each layer for 2D array textures. See the code at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/d3d12/TextureCopySplitter.h#49, you have two copy.copies: copy.copies[0] and copy.copies[1] in order to reposition aligned offset. You can see the code snippet of this if-else at https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/d3d12/TextureCopySplitter.cpp#245. It is used to re-calculate the alignedOffset for each layer. But there is no chance to re-calculate alignedOffset for each depth slice of a 3D texture when we copy all depth ranges in one single call. \n\nAlso see the figure above via text and the comment at https://dawn-review.googlesource.com/c/dawn/+/50248/4/src/dawn_native/d3d12/TextureCopySplitter.cpp#453, and this document https://docs.google.com/document/d/1gDryVdKxUHb4i5UJB2vOXwfwk6u_mF-gzy8q6ul0JUc/edit.",
+      "parentUuid": "16a64df5_57b60e8c",
+      "range": {
+        "startLine": 389,
+        "startChar": 74,
+        "endLine": 393,
+        "endChar": 94
+      },
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
