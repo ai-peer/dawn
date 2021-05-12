@@ -67,6 +67,29 @@
       "message": "[1] same here.",
       "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16a64df5_57b60e8c",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-12T00:30:24Z",
+      "side": 1,
+      "message": "Why can\u0027t we make bufferSize larger than the real buffer size of each depth slice? We should be able to do that because that just indicates how to interpret the data, but the D3D12_BOX specifies the region of the buffer to copy.",
+      "range": {
+        "startLine": 389,
+        "startChar": 74,
+        "endLine": 393,
+        "endChar": 94
+      },
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
