@@ -56,6 +56,30 @@
       },
       "revId": "27cc3370017686876ce00e7f78883facaddedd49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38239f7c_eddf917e",
+        "filename": "src/tests/perf_tests/ShaderRobustnessPerf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000241
+      },
+      "writtenOn": "2021-05-12T06:14:58Z",
+      "side": 1,
+      "message": "It seems that WGSL doesn\u0027t support function overload. If we have below overload functions:\n        fn readSharedArray(arr : array\u003cvec4\u003cf32\u003e, 1024\u003e, inputRow : u32, inputCol : u32, rowStride : u32) -\u003e vec4\u003cf32\u003e  {\n            let index : u32 \u003d inputRow * rowStride + inputCol;\n            return arr[index];\n        }\n\n        fn readSharedArray(arr : array\u003carray\u003cvec4\u003cf32\u003e, 16\u003e, 64\u003e, inputRow : u32, inputCol : u32, rowStride : u32) -\u003e vec4\u003cf32\u003e  {\n            return arr[inputRow][inputCol];\n        }\n\n        fn writeSharedArray(arr : array\u003cvec4\u003cf32\u003e, 1024\u003e, inputRow : u32, inputCol : u32, rowStride : u32, value : vec4\u003cf32\u003e) {\n            let index : u32 \u003d inputRow * rowStride + inputCol;\n            arr[index] \u003d value;\n        }\n\n        fn writeSharedArray(arr : array\u003carray\u003cvec4\u003cf32\u003e, 16\u003e, 64\u003e, inputRow : u32, inputCol : u32, rowStride : u32, value : vec4\u003cf32\u003e) {\n            arr[inputRow][inputCol] \u003d value;\n        }\n\nIt will report below errors:\nGot unexpected device error: Tint WGSL reader failure:\nParser: 54:9 error v-0016: function names must be unique \u0027readSharedArray\u0027\n        fn readSharedArray(arr : array\u003carray\u003cvec4\u003cf32\u003e, 16\u003e, 64\u003e, inputRow : u32, inputCol : u32, rowStride : u32) -\u003e vec4\u003cf32\u003e  {\n        ^^",
+      "parentUuid": "adb45ffb_d00d27d4",
+      "range": {
+        "startLine": 309,
+        "startChar": 20,
+        "endLine": 309,
+        "endChar": 48
+      },
+      "revId": "27cc3370017686876ce00e7f78883facaddedd49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
