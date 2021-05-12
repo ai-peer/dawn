@@ -66,7 +66,7 @@ namespace dawn_native {
         bool IsBeginCaptureOnStartupEnabled() const;
 
         void SetPlatform(dawn_platform::Platform* platform);
-        dawn_platform::Platform* GetPlatform() const;
+        dawn_platform::Platform* GetPlatform();
 
         // Get backend-independent libraries that need to be loaded dynamically.
         const XlibXcbFunctions* GetOrCreateXlibXcbFunctions();
@@ -76,7 +76,7 @@ namespace dawn_native {
 
       private:
         InstanceBase() = default;
-        ~InstanceBase() = default;
+        ~InstanceBase();
 
         InstanceBase(const InstanceBase& other) = delete;
         InstanceBase& operator=(const InstanceBase& other) = delete;
@@ -95,6 +95,7 @@ namespace dawn_native {
         BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
 
         dawn_platform::Platform* mPlatform = nullptr;
+        std::unique_ptr<dawn_platform::Platform> mDefaultPlatform;
 
         std::vector<std::unique_ptr<BackendConnection>> mBackends;
         std::vector<std::unique_ptr<AdapterBase>> mAdapters;

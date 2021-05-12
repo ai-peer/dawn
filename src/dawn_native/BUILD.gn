@@ -293,6 +293,8 @@ source_set("dawn_native_sources") {
     "Surface.h",
     "SwapChain.cpp",
     "SwapChain.h",
+    "TaskManager.cpp",
+    "TaskManager.h",
     "Texture.cpp",
     "Texture.h",
     "TintUtils.cpp",

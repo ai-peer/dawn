@@ -43,8 +43,10 @@
 #include "dawn_native/ShaderModule.h"
 #include "dawn_native/Surface.h"
 #include "dawn_native/SwapChain.h"
+#include "dawn_native/TaskManager.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ValidationUtils_autogen.h"
+#include "dawn_platform/DawnPlatform.h"
 
 #include <unordered_set>
 
@@ -86,7 +88,10 @@ namespace dawn_native {
     // DeviceBase
 
     DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
-        : mInstance(adapter->GetInstance()), mAdapter(adapter) {
+        : mInstance(adapter->GetInstance()),
+          mAdapter(adapter),
+          mWorkerTaskPool(GetPlatform()->CreateWorkerTaskPool()),
+          mTaskManager(new TaskManager(mWorkerTaskPool.get())) {
         if (descriptor != nullptr) {
             ApplyToggleOverrides(descriptor);
             ApplyExtensions(descriptor);
@@ -143,6 +148,8 @@ namespace dawn_native {
     void DeviceBase::ShutDownBase() {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
+            mTaskManager->WaitForTasks();
+
             // Call all the callbacks immediately as the device is about to shut down.
             auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
             for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
@@ -242,6 +249,7 @@ namespace dawn_native {
             }
 
             mQueue->HandleDeviceLoss();
+            mTaskManager->WaitForTasks();
             auto callbackTasks = mCallbackTaskManager->AcquireCallbackTasks();
             for (std::unique_ptr<CallbackTask>& callbackTask : callbackTasks) {
                 callbackTask->HandleDeviceLoss();
@@ -366,6 +374,10 @@ namespace dawn_native {
         return GetAdapter()->GetInstance()->GetPlatform();
     }
 
+    TaskManager* DeviceBase::GetTaskManager() const {
+        return mTaskManager.get();
+    }
+
     ExecutionSerial DeviceBase::GetCompletedCommandSerial() const {
         return mCompletedSerial;
     }
@@ -394,6 +406,9 @@ namespace dawn_native {
     }
 
     bool DeviceBase::IsDeviceIdle() {
+        if (mTaskManager->HasPendingTasks()) {
+            return false;
+        }
         ExecutionSerial maxSerial = std::max(mLastSubmittedSerial, mFutureSerial);
         if (mCompletedSerial == maxSerial) {
             return true;
@@ -1180,6 +1195,55 @@ namespace dawn_native {
             std::make_unique<CreateComputePipelineAsyncCallbackTask>(
                 std::move(result), errorMessage, callback, userdata);
         mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+    }
+
+    void DeviceBase::CreateComputePipelineAsyncTaskFinished(
+        Ref<ComputePipelineBase> pipeline,
+        MaybeError err,
+        WGPUCreateComputePipelineAsyncCallback callback,
+        void* userdata,
+        size_t blueprintHash) {
+        std::string errorMessage;
+        if (err.IsError()) {
+            std::unique_ptr<ErrorData> error = err.AcquireError();
+            errorMessage = error->GetMessage();
+            pipeline = nullptr;
+        }
+
+        struct CreateComputePipelineAsyncWaitableCallbackTask final
+            : CreateComputePipelineAsyncCallbackTask {
+            CreateComputePipelineAsyncWaitableCallbackTask(
+                Ref<ComputePipelineBase> pipeline,
+                std::string errorMessage,
+                WGPUCreateComputePipelineAsyncCallback callback,
+                void* userdata,
+                size_t blueprintHash)
+                : CreateComputePipelineAsyncCallbackTask(std::move(pipeline),
+                                                         errorMessage,
+                                                         callback,
+                                                         userdata),
+                  mBlueprintHash(blueprintHash) {
+            }
+
+            void Finish() final {
+                // TODO(jiawei.shao@intel.com): call AddOrGetCachedPipeline() asynchronously in
+                // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
+                // thread-safe.
+                if (mPipeline.Get() != nullptr) {
+                    mPipeline =
+                        mPipeline->GetDevice()->AddOrGetCachedPipeline(mPipeline, mBlueprintHash);
+                }
+
+                CreateComputePipelineAsyncCallbackTask::Finish();
+            }
+
+          private:
+            size_t mBlueprintHash;
+        };
+
+        mCallbackTaskManager->AddCallbackTask(
+            std::make_unique<CreateComputePipelineAsyncWaitableCallbackTask>(
+                std::move(pipeline), std::move(errorMessage), callback, userdata, blueprintHash));
     }
 
     ResultOrError<Ref<PipelineLayoutBase>> DeviceBase::CreatePipelineLayout(

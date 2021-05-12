@@ -13,18 +13,20 @@
 // limitations under the License.
 
 #include "dawn_platform/DawnPlatform.h"
-#include "dawn_platform/WorkerThread.h"
 
 #include "common/Assert.h"
+#include "dawn_platform/WorkerThread.h"
 
 namespace dawn_platform {
 
-    CachingInterface::CachingInterface() = default;
+    // CachingInterface
 
+    CachingInterface::CachingInterface() = default;
     CachingInterface::~CachingInterface() = default;
 
-    Platform::Platform() = default;
+    // Platform
 
+    Platform::Platform() = default;
     Platform::~Platform() = default;
 
     const unsigned char* Platform::GetTraceCategoryEnabledFlag(TraceCategory category) {

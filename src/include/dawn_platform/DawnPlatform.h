@@ -17,8 +17,11 @@
 
 #include "dawn_platform/dawn_platform_export.h"
 
+#include "common/RefCounted.h"
+
 #include <cstddef>
 #include <cstdint>
+#include <functional>
 #include <memory>
 
 #include <dawn/webgpu.h>

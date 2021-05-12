@@ -159,6 +159,8 @@ target_sources(dawn_native PRIVATE
     "Surface.h"
     "SwapChain.cpp"
     "SwapChain.h"
+    "TaskManager.cpp"
+    "TaskManager.h"
     "Texture.cpp"
     "Texture.h"
     "TintUtils.cpp"

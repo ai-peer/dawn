@@ -15,6 +15,7 @@
 #include "dawn_native/d3d12/ComputePipelineD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/TaskManager.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
@@ -57,6 +58,27 @@ namespace dawn_native { namespace d3d12 {
             d3d12Device->CreateComputePipelineState(&d3dDesc, IID_PPV_ARGS(&mPipelineState)),
             "D3D12 creating pipeline state"));
         return {};
+    }
+
+    void ComputePipeline::CreateAsync(Device* device,
+                                      const ComputePipelineDescriptor* descriptor,
+                                      size_t blueprintHash,
+                                      WGPUCreateComputePipelineAsyncCallback callback,
+                                      void* userdata) {
+        device->GetTaskManager()->PostTask(
+            [device = Ref<Device>(device),
+             pipeline = AcquireRef(new ComputePipeline(device, descriptor)),
+             moduleBase = Ref<ShaderModuleBase>(descriptor->computeStage.module),
+             entryPoint = std::string(descriptor->computeStage.entryPoint), blueprintHash, callback,
+             userdata]() {
+                ComputePipelineDescriptor descriptor;
+                descriptor.computeStage.entryPoint = entryPoint.c_str();
+                descriptor.computeStage.module = moduleBase.Get();
+
+                MaybeError err = pipeline->Initialize(&descriptor);
+                device->CreateComputePipelineAsyncTaskFinished(std::move(pipeline), std::move(err),
+                                                               callback, userdata, blueprintHash);
+            });
     }
 
     ComputePipeline::~ComputePipeline() {
