@@ -97,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8c2ee321_892b2523",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-12T23:35:10Z",
+      "side": 1,
+      "message": "I think that what you have works, but I don\u0027t think it\u0027s a good abstraction. Now the callbacks are intermixed with the worker tasks, and there\u0027s an optional waitable event manager to handle removing tasks from list of tasks.\n\nThe system that creates the tasks should be able to keep track of whether or not those tasks are complete in a self-contained way without too much complexity.\n\nIt seems like part of the problem here is that we\u0027re running into issues with std::future, potential deadlocks with when the std::future is destroyed, and problems where we need the waitable event or some key which references the task to outlive the worker function itself. I\u0027d suggest not using std::launch::async given the problems we\u0027re finding. And I\u0027d suggest making a separate ref-counted allocation to hold onto the task \"handle\". This way, the handle can outlive the task, but we can also access the handle inside the task so the task can remove itself from the list of in-flight tasks.\n\nI cloned your Patchset 24 and applied some of these suggestions in https://dawn-review.googlesource.com/c/dawn/+/50805",
+      "parentUuid": "b81998bf_6861f079",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "877f0973_ef70d0c0",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 24
@@ -179,6 +203,30 @@
       "side": 1,
       "message": "I think \"has waitableEvents in flight\" means \"device is doing something async and not idle\", so here we should return false. What do you think?",
       "parentUuid": "c0e02b9f_60f547c7",
+      "range": {
+        "startLine": 404,
+        "startChar": 19,
+        "endLine": 404,
+        "endChar": 24
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fb9494a_93331cc7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-12T23:35:10Z",
+      "side": 1,
+      "message": "Right, sorry I read this in the opposite direction.",
+      "parentUuid": "bc6bfc80_619d4c11",
       "range": {
         "startLine": 404,
         "startChar": 19,
