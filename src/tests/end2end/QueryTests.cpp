@@ -774,7 +774,6 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
         encoder.ResolveQuerySet(querySet, 0, 1, destination, 0);
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
@@ -789,7 +788,6 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
         wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         encoder.WriteTimestamp(querySet, 0);
-        encoder.WriteTimestamp(querySet, 1);
         encoder.ResolveQuerySet(querySet, 0, 1, destination, sizeof(uint64_t));
         wgpu::CommandBuffer commands = encoder.Finish();
         queue.Submit(1, &commands);
@@ -797,6 +795,31 @@ TEST_P(TimestampQueryTests, ResolveToBufferWithOffset) {
         EXPECT_BUFFER_U64_RANGE_EQ(&kZero, destination, 0, 1);
         EXPECT_BUFFER(destination, sizeof(uint64_t), sizeof(uint64_t), new TimestampExpectation);
     }
+}
+
+// Test resolving a query set twice into the same destination buffer with potentially overlapping
+// ranges
+TEST_P(TimestampQueryTests, ResolveTwiceToSameBuffer) {
+    // TODO(hao.x.li@intel.com): Fails on Intel Windows Vulkan due to a driver issue that
+    // vkCmdFillBuffer and vkCmdCopyQueryPoolResults are not executed in order, skip it util
+    // the issue is fixed.
+    DAWN_SKIP_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
+
+    constexpr uint32_t kQueryCount = 3;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.WriteTimestamp(querySet, 0);
+    encoder.WriteTimestamp(querySet, 1);
+    encoder.WriteTimestamp(querySet, 2);
+    encoder.ResolveQuerySet(querySet, 0, 2, destination, 0);
+    encoder.ResolveQuerySet(querySet, 1, 2, destination, sizeof(uint64_t));
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation);
 }
 
 DAWN_INSTANTIATE_TEST(TimestampQueryTests,
