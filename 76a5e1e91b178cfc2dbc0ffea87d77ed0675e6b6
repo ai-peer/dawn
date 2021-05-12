@@ -16,6 +16,23 @@
       "message": "PTAL! Roughly corresponds with the Blink changes in https://chromium-review.googlesource.com/c/chromium/src/+/2879900 but excludes fences since that requires a significant amount more code removal in Dawn (due to the wire API) and thus is probably deserving of it\u0027s own CL.",
       "revId": "76a5e1e91b178cfc2dbc0ffea87d77ed0675e6b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29f7eb72_28bd0aba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-12T16:50:47Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "76a5e1e91b178cfc2dbc0ffea87d77ed0675e6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
