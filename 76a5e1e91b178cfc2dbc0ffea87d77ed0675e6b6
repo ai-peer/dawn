@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "384fffd6_9d5f30ad",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-12T16:57:08Z",
+      "side": 0,
+      "message": "do we have a version of this test that does queue.OnSubmittedWorkDone instead?",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 86
+      },
+      "revId": "76a5e1e91b178cfc2dbc0ffea87d77ed0675e6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
