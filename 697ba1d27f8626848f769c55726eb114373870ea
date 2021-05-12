@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead85e24_9336b327",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-12T08:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb361b33_93038ac8",
+      "range": {
+        "startLine": 41,
+        "startChar": 39,
+        "endLine": 41,
+        "endChar": 57
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40872b98_90203b19",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-05-11T16:01:53Z",
       "side": 1,
       "message": "and, would prefer to pass the WorkerTaskPool into this function as it is the only time when we actually need it\n\nWe should also have an ASSERT to check that you don\u0027t call Start(..) more than once. Perhaps by checking that mWaitableEvent \u003d\u003d nullptr",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b81998bf_6861f079",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-12T08:59:20Z",
+      "side": 1,
+      "message": "Done\n\nToday I find another issue here:\nIn DoTask() the WorkerThreadTask object will be released at the end of DoTask(), so after calling PostWorkerTask() here all the members of WorkerThreadTask may be invalid as it is possible that DoTask() is completed before \"mWaitableEvent \u003d waitableEvent.get()\". In fact we cannot use any members in WorkerThreadTask() after PostWorkerTask() is called.\n\nTherefore, I just move all the configurations of WorkerThreadTask into WaitableEventManager,and I decide not to use WaitableEvent* as key because we can only get waitableEvent after PostWorkerTask, when the WorkerThreadTask object may have already been invalid.\n\nPTAL, thanks!",
+      "parentUuid": "40872b98_90203b19",
       "range": {
         "startLine": 55,
         "startChar": 32,
@@ -72,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9436ff5_a67c3d8c",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-12T08:59:20Z",
+      "side": 1,
+      "message": "In fact I don\u0027t want to use too many locks in this CL as it may introduce more potential bugs. Handling mWaitableEventsInFlight here means we should also make it thread-safe, thus adding the complexity of the whole CL.\n\nIn my latest CL I put the removal of waitableEvent in the Callback again, when we are always in the main thread and we don\u0027t need to care about the thread safety of mWaitableEventsInFlight.\n\nWhat do you think?",
+      "parentUuid": "877f0973_ef70d0c0",
+      "range": {
+        "startLine": 85,
+        "startChar": 8,
+        "endLine": 86,
+        "endChar": 62
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0e02b9f_60f547c7",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 24
@@ -95,6 +167,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bc6bfc80_619d4c11",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-12T08:59:20Z",
+      "side": 1,
+      "message": "I think \"has waitableEvents in flight\" means \"device is doing something async and not idle\", so here we should return false. What do you think?",
+      "parentUuid": "c0e02b9f_60f547c7",
+      "range": {
+        "startLine": 404,
+        "startChar": 19,
+        "endLine": 404,
+        "endChar": 24
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8de0ae02_ab17913c",
         "filename": "src/dawn_native/Instance.cpp",
         "patchSetId": 24
@@ -106,6 +202,30 @@
       "writtenOn": "2021-05-11T16:01:53Z",
       "side": 1,
       "message": "Can we lazily create mDefaultPlatform here instead? That way if someone manually sets it with SetPlatform, it is never instantiated",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 228,
+        "endChar": 75
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdaf06c9_9e59e507",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-12T08:59:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8de0ae02_ab17913c",
       "range": {
         "startLine": 228,
         "startChar": 0,
