@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dea5737_b232d88e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-13T16:44:47Z",
+      "side": 1,
+      "message": "PTAL.\n\nThis is an alternative to https://dawn-review.googlesource.com/c/dawn/+/49400.\n\nInstead of enabling both ES and desktop in Windows, we split the #defines and enable only\nES on Windows.",
+      "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
