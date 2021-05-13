@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8aff91_a6cbd575",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-13T17:49:40Z",
+      "side": 0,
+      "message": "Why are these removed?",
+      "range": {
+        "startLine": 792,
+        "startChar": 0,
+        "endLine": 792,
+        "endChar": 44
+      },
+      "revId": "f0fdfa0d61dfa9486914fd278985d2de880be51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04457808_2d9c3656",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-13T17:49:40Z",
+      "side": 0,
+      "message": "Do we have tests for / is it valid to resolve a query set twice into the same destination buffer (with potentially overlapping ranges)?",
+      "revId": "f0fdfa0d61dfa9486914fd278985d2de880be51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
