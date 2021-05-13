@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a45cb6f2_86eef4de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-13T23:10:27Z",
+      "side": 1,
+      "message": "Thank you, Austin! I updated the comments in the latest patch set. And decoupled the renaming patch and submitted another one at https://dawn-review.googlesource.com/c/dawn/+/50920. PTAL.",
+      "parentUuid": "c66c6f68_1ae1a587",
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf104ea8_31b35c22",
@@ -147,6 +165,30 @@
       "side": 1,
       "message": "Thanks for the explanation Yunchao - I believe I understand this now.",
       "parentUuid": "c0f36439_dc1c4341",
+      "range": {
+        "startLine": 389,
+        "startChar": 74,
+        "endLine": 393,
+        "endChar": 94
+      },
+      "revId": "5b27e2a5e24eb95bd2ba220c7dc432de075969a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8dd240a_3daae2b9",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-13T23:10:27Z",
+      "side": 1,
+      "message": "Great!",
+      "parentUuid": "6a465e72_57393ef4",
       "range": {
         "startLine": 389,
         "startChar": 74,
