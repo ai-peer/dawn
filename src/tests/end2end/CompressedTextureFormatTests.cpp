@@ -451,9 +451,6 @@ TEST_P(CompressedTextureBCFormatTest, Basic) {
 TEST_P(CompressedTextureBCFormatTest, CopyIntoSubRegion) {
     DAWN_SKIP_TEST_IF(!IsBCFormatSupported());
 
-    // TODO(crbug.com/dawn/771): Determine why this is failing on Windows Intel 630 OpenGL drivers.
-    DAWN_SKIP_TEST_IF(IsWindows() && IsOpenGL() && IsIntel());
-
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {8, 8, 1};
