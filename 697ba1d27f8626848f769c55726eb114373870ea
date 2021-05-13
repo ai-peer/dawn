@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ab8ec91_ecb1051f",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-13T01:25:41Z",
+      "side": 1,
+      "message": "Thanks for your advice. Yes I am also annoyed by std::future which doesn\u0027t allow me deleting itself in the callback function. The only concern to use std::thread instead of std::async is to use std::thread we need to carefully ensure that all the resources are cleared before we delete std::thread object inside the function executed on that thread, but I am still OK if you don\u0027t mind it when using std::thread in Dawn.\n\nI really don\u0027t want to give up this CL and I\u0027d like to use https://dawn-review.googlesource.com/c/dawn/+/50805 as a reference to improve this CL. What do you think?",
+      "parentUuid": "8c2ee321_892b2523",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "877f0973_ef70d0c0",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 24
