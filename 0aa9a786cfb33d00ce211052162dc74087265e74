@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2cb6cb_bfe47ee9",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-13T01:09:26Z",
+      "side": 1,
+      "message": "If we bind the buffer at an offset, then this index could also be GlobalInvocationID.x + params.first. Then, indexing into availability.v would match timestamps.t",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 89
+      },
+      "revId": "0aa9a786cfb33d00ce211052162dc74087265e74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65b492f3_f63a6b10",
+        "filename": "src/dawn_native/QueryHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-13T01:09:26Z",
+      "side": 1,
+      "message": "Maybe we should put the destinationOffset here, and then in the shader, index starting from firstQuery.",
+      "range": {
+        "startLine": 162,
+        "startChar": 7,
+        "endLine": 163,
+        "endChar": 57
+      },
+      "revId": "0aa9a786cfb33d00ce211052162dc74087265e74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
