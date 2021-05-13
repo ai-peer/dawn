@@ -193,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58f616d7_b984b74d",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-13T02:07:35Z",
+      "side": 1,
+      "message": "Oh according to [1], std::async() will always return a std::future, and \"If the std::future obtained from std::async is not moved from or bound to a reference, the destructor of the std::future will block at the end of the full expression until the asynchronous operation completes\", so we will always meet the std::future issue as long as we are using std::async().\n\n[1] https://en.cppreference.com/w/cpp/thread/async",
+      "parentUuid": "6a5702cd_185c00a4",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "877f0973_ef70d0c0",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 24
