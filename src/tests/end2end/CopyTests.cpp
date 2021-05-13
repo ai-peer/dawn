@@ -1024,6 +1024,25 @@ TEST_P(CopyTests_T2B, Texture3DFullUnalignedTinyCopies) {
     }
 }
 
+// Test that copying an entire texture without 256-byte aligned dimensions works
+TEST_P(CopyTests_T2B, Texture3DFullUnaligned) {
+    constexpr uint32_t kWidth = 259;
+    constexpr uint32_t kHeight = 127;
+    constexpr uint32_t kDepth = 2;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, kDepth};
+
+    // The for loop is designed to test TextureCopySplitter on D3D12. All iterations use the same
+    // staging buffer to transfer initial data from buffer to texture. So the buffer offset for
+    // each iteration will change from iteration to iteration, which will impact how to split
+    // textures during copy on D3D12.
+    for (uint32_t i = 0; i < 2; ++i) {
+        DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight, kDepth), {kWidth, kHeight, kDepth},
+               wgpu::TextureDimension::e3D);
+    }
+}
+
 // TODO(yunchao.he@intel.com): add T2B tests for 3D textures, like RowPitch,
 // RowsPerImage, buffer offset, partial depth range, non-zero level, etc.
 

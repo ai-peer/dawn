@@ -424,10 +424,96 @@ namespace dawn_native { namespace d3d12 {
             return copy;
         }
 
-        // TODO (yunchao.he@intel.com): add code to handle the situation when copyBytesPerRowPitch +
-        // byteOffsetInRowPitch > bytesPerRow
+        // copyBytesPerRowPitch + byteOffsetInRowPitch > bytesPerRow
+        uint32_t rowsPerImageInTexels = rowsPerImage * blockInfo.height;
+        // The region's rows straddle the bytes per row. Split the copy into two copies:
+        // copy the head block (h), and copy the tail block (t).
+        //  |<------------- bytes per row ------------->|
+        //
+        //    _____________________________________________
+        //   /                                           /|
+        //  /                                           / |
+        //  |-------------------------------------------| |
+        //  |                                   hhhhhhhh| |
+        //  |ttttttttt~~~~~~~~~~~~~~~~~~~~~~~~~~hhhhhhhh| |
+        //  |ttttttttt~~~~~~~~~~~~~~~~~~~~~~~~~~hhhhhhhh| |
+        //  |ttttttttt~~~~~~~~~~~~~~~~~~~~~~~~~~hhhhhhhh| |
+        //  |ttttttttt                                  | /
+        //  |-------------------------------------------|/
+
+        //  Copy the head block:
+        //    _____________________________________________
+        //   /                                           /|
+        //  /                                           / |
+        //  |-------------------------------------------| |
+        //  |                                   hhhhhhhh| |
+        //  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhhhhhh| |
+        //  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhhhhhh| |
+        //  |~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~hhhhhhhh| |
+        //  |-------------------------------------------|/
+
+        //  Copy the tail block (Note that the alignedOffset will be repositioned for tail block.
+        //  After recalculation, the tail may not start from the very beginning of each row):
+        //    _______________________
+        //   /                     /|
+        //  /                     / |
+        //  |---------------------| |
+        //  |            ttttttttt| |
+        //  |~~~~~~~~~~~~ttttttttt| |
+        //  |~~~~~~~~~~~~ttttttttt| /
+        //  |~~~~~~~~~~~~ttttttttt|/
+        //  |---------------------|
+
+        copy.count = 2;
+
+        // copy 0 is used to copy the head block
+        copy.copies[0].offset = alignedOffset;
+
+        copy.copies[0].textureOffset = origin;
+
+        ASSERT(bytesPerRow > byteOffsetInRowPitch);
+        uint32_t texelsPerRow = bytesPerRow / blockInfo.byteSize * blockInfo.width;
+        copy.copies[0].copySize.width = texelsPerRow - texelOffset.x;
+        copy.copies[0].copySize.height = copySize.height - texelOffset.y;
+        copy.copies[0].copySize.depthOrArrayLayers = copySize.depthOrArrayLayers - texelOffset.z;
+
+        copy.copies[0].bufferOffset = texelOffset;
+
+        copy.copies[0].bufferSize.width = texelsPerRow;
+        copy.copies[0].bufferSize.height = rowsPerImageInTexels;
+        copy.copies[0].bufferSize.depthOrArrayLayers = copySize.depthOrArrayLayers;
+
+        // copy 1 is used to copy the tail block
+        // texelOffset.y is either 0 or 1. buffer offset for the tail block could be 1 row
+        // (texelOffset.y is 0) or 2 rows (texelOffset.y is 1) away from alignedOffset of copy 0.
+        uint64_t offsetForTail = alignedOffset + bytesPerRow * (texelOffset.y + 1);
+        uint64_t alignedOffsetForTail =
+            offsetForTail & ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
+
+        Origin3D texelOffsetForTail = ComputeTexelOffsets(
+            blockInfo, static_cast<uint32_t>(offsetForTail - alignedOffsetForTail), bytesPerRow);
+
+        copy.copies[1].offset = alignedOffsetForTail;
+        copy.copies[1].textureOffset.x = origin.x + copy.copies[0].copySize.width;
+        copy.copies[1].textureOffset.y = origin.y;
+        copy.copies[1].textureOffset.z = origin.z;
+
+        copy.copies[1].bufferOffset = texelOffsetForTail;
+
+        copy.copies[1].copySize.width = copySize.width - copy.copies[0].copySize.width;
+        copy.copies[1].copySize.height = copySize.height - texelOffsetForTail.y;
+        copy.copies[1].copySize.depthOrArrayLayers = copySize.depthOrArrayLayers;
+
+        copy.copies[1].bufferSize = copySize;
+        copy.copies[1].bufferSize.width =
+            copy.copies[1].copySize.width + copy.copies[1].bufferOffset.x;
+
+        // TODO(yunchao.he@intel.com): implement more copy scenarios. When bytesPerRow is 256, we
+        // may need an extra copy for either the last row of the head block (if texelOffset.y > 0)
+        // or the last row of the tail block (if texelOffsetForTail.y > 0).
+
         return copy;
-    }
+    }  // namespace d3d12
 
     TextureCopySplits Compute3DTextureCopySplits(Origin3D origin,
                                                  Extent3D copySize,
@@ -462,5 +548,4 @@ namespace dawn_native { namespace d3d12 {
 
         return copies;
     }
-
 }}  // namespace dawn_native::d3d12
