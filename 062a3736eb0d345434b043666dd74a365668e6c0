@@ -68,6 +68,24 @@
       "message": "LGTM",
       "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd7cb7c6_c53c744b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-13T19:21:22Z",
+      "side": 1,
+      "message": "It\u0027s working on Windows as of this change. If you look at the win-clang-* bots, you\u0027ll see that SwANGLE running. E.g. win-clang-rel-x64:\n\nhttps://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket.appspot.com/8847331439646247696/+/steps/Run_the_Dawn_end2end_tests_with_ANGLE_SwiftShader/0/stdout\n\nIt wasn\u0027t being run before this change because the OpenGLES backend was only being built on Linux, where some X11 issue is preventing SwANGLE from starting. (That\u0027s still the case, but at least Windows GLES gives us some coverage until it\u0027s fixed.)",
+      "parentUuid": "4e575153_e1e7bf94",
+      "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
