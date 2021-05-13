@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7dcb127_9a2aa327",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-13T01:45:42Z",
+      "side": 1,
+      "message": "Sounds good to improve this CL.\n\nre std::thread - maybe we can still use std::launch::async.\n\nThe problem is that we\u0027re using the std::future from the launch as the WaitableEvent. It doesn\u0027t have to be this way. We could instead launch an event loop and then use a separate primitive to indicate a task is done.\n\nOverly simplified, but something like:\n\nstd::async(std::launch::async, []() {\n  while(!mTaskQueue.empty()) {\n    // process tasks, wait on a condition variable if there are none.\n  }\n});\n\nclass AsyncWaitableEvent {\n  void Wait() {\n    cv.wait(mutex, [this]() {\n       return !isDone;\n    });\n  }\n \n  std::condition_variable cv;\n  std::mutex mutex;\n  std::atomic\u003cbool\u003e isDone \u003d false;\n};\n\nAsyncWaitableEvent PostWorkerTask(closure) {\n\n  unique_ptr\u003cAsyncWaitableEvent\u003e ev \u003d ...;\n\n  mTaskQueue.push([fn \u003d std::move(closure), ev \u003d ev.get()]() {\n    fn();\n    {\n       lock_guard lock(ev-\u003emutex);\n       ev-\u003eisDone \u003d true;\n    }\n    ev-\u003econditionVariable.notify_one();\n  });\n\n  return ev;\n}",
+      "parentUuid": "2ab8ec91_ecb1051f",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "877f0973_ef70d0c0",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 24
