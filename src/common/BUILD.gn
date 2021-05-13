@@ -71,6 +71,9 @@ config("dawn_internal") {
   if (dawn_enable_opengl) {
     defines += [ "DAWN_ENABLE_BACKEND_OPENGL" ]
   }
+  if (dawn_enable_opengles) {
+    defines += [ "DAWN_ENABLE_BACKEND_OPENGLES" ]
+  }
   if (dawn_enable_vulkan) {
     defines += [ "DAWN_ENABLE_BACKEND_VULKAN" ]
   }

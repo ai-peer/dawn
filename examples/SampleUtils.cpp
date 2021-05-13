@@ -72,6 +72,8 @@ static wgpu::BackendType backendType = wgpu::BackendType::D3D12;
 static wgpu::BackendType backendType = wgpu::BackendType::Metal;
 #elif defined(DAWN_ENABLE_BACKEND_VULKAN)
 static wgpu::BackendType backendType = wgpu::BackendType::Vulkan;
+#elif defined(DAWN_ENABLE_BACKEND_OPENGLES)
+static wgpu::BackendType backendType = wgpu::BackendType::OpenGLES;
 #elif defined(DAWN_ENABLE_BACKEND_OPENGL)
 static wgpu::BackendType backendType = wgpu::BackendType::OpenGL;
 #else
