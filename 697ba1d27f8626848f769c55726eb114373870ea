@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a5702cd_185c00a4",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-13T01:47:53Z",
+      "side": 1,
+      "message": "This way completion of the task is just a closure that sets a condition variable when it\u0027s done, and there\u0027s no use of std::future for that part.",
+      "parentUuid": "e7dcb127_9a2aa327",
+      "range": {
+        "startLine": 55,
+        "startChar": 32,
+        "endLine": 55,
+        "endChar": 34
+      },
+      "revId": "697ba1d27f8626848f769c55726eb114373870ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "877f0973_ef70d0c0",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 24
