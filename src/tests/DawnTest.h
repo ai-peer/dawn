@@ -19,6 +19,7 @@
 #include "dawn/dawn_proc_table.h"
 #include "dawn/webgpu_cpp.h"
 #include "dawn_native/DawnNative.h"
+#include "tests/ParamGenerator.h"
 #include "tests/ToggleParser.h"
 
 #include <dawn_platform/DawnPlatform.h>
@@ -491,6 +492,29 @@ using DawnTest = DawnTestWithParams<>;
 #define DAWN_INTERNAL_PP_GET_HEAD(firstParam, ...) firstParam
 #define DAWN_PP_GET_HEAD(...) DAWN_INTERNAL_PP_GET_HEAD(__VA_ARGS__, dummyArg)
 
+#define DAWN_PP_CONCATENATE(arg1, arg2) DAWN_PP_CONCATENATE1(arg1, arg2)
+#define DAWN_PP_CONCATENATE1(arg1, arg2) DAWN_PP_CONCATENATE2(arg1, arg2)
+#define DAWN_PP_CONCATENATE2(arg1, arg2) arg1##arg2
+
+#define DAWN_PP_FOR_EACH_1(func, x) func(x)
+#define DAWN_PP_FOR_EACH_2(func, x, ...) func(x) DAWN_PP_FOR_EACH_1(func, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH_3(func, x, ...) func(x) DAWN_PP_FOR_EACH_2(func, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH_4(func, x, ...) func(x) DAWN_PP_FOR_EACH_3(func, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH_5(func, x, ...) func(x) DAWN_PP_FOR_EACH_4(func, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH_6(func, x, ...) func(x) DAWN_PP_FOR_EACH_5(func, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH_7(func, x, ...) func(x) DAWN_PP_FOR_EACH_6(func, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH_8(func, x, ...) func(x) DAWN_PP_FOR_EACH_7(func, __VA_ARGS__)
+
+#define DAWN_PP_FOR_EACH_NARG(...) DAWN_PP_FOR_EACH_NARG_(__VA_ARGS__, DAWN_PP_FOR_EACH_RSEQ_N())
+#define DAWN_PP_FOR_EACH_NARG_(...) DAWN_PP_FOR_EACH_ARG_N(__VA_ARGS__)
+#define DAWN_PP_FOR_EACH_ARG_N(_1, _2, _3, _4, _5, _6, _7, _8, N, ...) N
+#define DAWN_PP_FOR_EACH_RSEQ_N() 8, 7, 6, 5, 4, 3, 2, 1, 0
+
+#define DAWN_PP_FOR_EACH_(N, func, x, ...) \
+    DAWN_PP_CONCATENATE(DAWN_PP_FOR_EACH_, N)(func, x, __VA_ARGS__)
+#define DAWN_PP_FOR_EACH(func, x, ...) \
+    DAWN_PP_FOR_EACH_(DAWN_PP_FOR_EACH_NARG(x, __VA_ARGS__), func, x, __VA_ARGS__)
+
 // Instantiate the test once for each backend provided after the first argument. Use it like this:
 //     DAWN_INSTANTIATE_TEST(MyTestFixture, MetalBackend, OpenGLBackend)
 #define DAWN_INSTANTIATE_TEST(testName, ...)                                            \
@@ -501,6 +525,46 @@ using DawnTest = DawnTestWithParams<>;
             testName##params, sizeof(testName##params) / sizeof(testName##params[0]))), \
         testing::PrintToStringParamName());                                             \
     GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
+
+// Instantiate the test once for each backend provided in the first param list.
+// The test will be parameterized over the following param lists.
+// Use it like this:
+//     DAWN_INSTANTIATE_TEST_P(MyTestFixture, {MetalBackend, OpenGLBackend}, {A, B, C}, {1, 2, 3})
+// MyTestFixture must extend DawnTestWithParam<Param> where Param is a struct extends
+// AdapterTestParam, and whose constructor looks like:
+//     Param(AdapterTestParam, ABorC, 12or3, ..., otherParams... )
+//     You must also teach GTest how to print this struct.
+//     https://github.com/google/googletest/blob/master/docs/advanced.md#teaching-googletest-how-to-print-your-values
+// Macro DAWN_TEST_PARAM_STRUCT can help generate this struct.
+#define DAWN_INSTANTIATE_TEST_P(testName, ...)                                                 \
+    INSTANTIATE_TEST_SUITE_P(                                                                  \
+        , testName, ::testing::ValuesIn(MakeParamGenerator<testName::ParamType>(__VA_ARGS__)), \
+        testing::PrintToStringParamName());                                                    \
+    GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
+
+#define DAWN_TEST_PARAM_STRUCT_DECL_STRUCT_FIELD(Type) Type m_##Type;
+#define DAWN_TEST_PARAM_STRUCT_PRINT_STRUCT_FIELD(Type) \
+    ostream << "__" << #Type << "_" << param.m_##Type;
+
+#define DAWN_TEST_PARAM_STRUCT(StructName, ...)                                            \
+    struct __Base##StructName {                                                            \
+        DAWN_PP_FOR_EACH(DAWN_TEST_PARAM_STRUCT_PRINT_STRUCT_FIELD, __VA_ARGS__)           \
+    };                                                                                     \
+    std::ostream& operator<<(std::ostream& ostream, const __Base##StructName& param) {     \
+        DAWN_PP_FOR_EACH(DAWN_TEST_PARAM_STRUCT_DECL_STRUCT_FIELD, __VA_ARGS__)            \
+        return ostream;                                                                    \
+    }                                                                                      \
+    struct StructName : AdapterTestParam, __Base##StructName {                             \
+        template <typename... Args>                                                        \
+        StructName(const AdapterTestParam& __param, Args&&... args)                        \
+            : AdapterTestParam(__param), __Base##StructName{std::forward<Args>(args)...} { \
+        }                                                                                  \
+    };                                                                                     \
+    std::ostream& operator<<(std::ostream& ostream, const StructName& param) {             \
+        ostream << static_cast<const AdapterTestParam&>(param);                            \
+        ostream << "_" << static_cast<const __Base##StructName&>(param);                   \
+        return ostream;                                                                    \
+    }
 
 namespace detail {
     // Helper functions used for DAWN_INSTANTIATE_TEST
