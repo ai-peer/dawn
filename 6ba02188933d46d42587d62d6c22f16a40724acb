@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5392fcd_6b17e377",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000241
+      },
+      "writtenOn": "2021-05-14T10:35:31Z",
+      "side": 1,
+      "message": "Please take a look, thanks.\n\nWith this change, it\u0027s convenient for us to try some features in shader model 60+ with use_dxc toggle enabled.\n\nAnd a question here which is not related with this PR: Can you help to roll spirv-cross to latest or some commit which includes the change https://github.com/KhronosGroup/SPIRV-Cross/pull/1661? Or guild me how to auto roll spirv-cross? Thanks.",
+      "revId": "6ba02188933d46d42587d62d6c22f16a40724acb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
