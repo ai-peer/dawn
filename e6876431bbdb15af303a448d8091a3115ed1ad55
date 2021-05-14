@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff1675ec_f1d37526",
+        "filename": "src/dawn_native/TaskManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-14T06:36:08Z",
+      "side": 1,
+      "message": "Hi Austin,\n\nWhen I was working on this proposal, I found the following two issues, which should both be handled carefully in the multi-threading environment:\n\nmPendingTasks.find() may return mPendingTasks.end() as\n1. It may be executed before mPendingTasks.emplace() (always called in main thread).\n- It is easy to be handled as we can just move [1] before PostWorkerTask().\n2. It may be executed after the call of WaitForTasks() (always called in main thread), where all the items in mPendingTasks are moved out.\n- Maybe we can make WaitForTasks() to be simply { while(HasPendingTasks());}?\n- This may introduce another lock to protect mPendingTasks, which may add more complexity and performance loss. Note that in my previous method (only delete waitableEvent in Device.tick()) we can avoid using this lock.\n\nWhat do you think?",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 69
+      },
+      "revId": "e6876431bbdb15af303a448d8091a3115ed1ad55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3823cbab_b5b8030b",
+        "filename": "src/dawn_native/TaskManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-14T06:36:08Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 9
+      },
+      "revId": "e6876431bbdb15af303a448d8091a3115ed1ad55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1559f9b_f6563042",
         "filename": "src/dawn_native/TaskManager.h",
         "patchSetId": 1
