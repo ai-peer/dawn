@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d38359e_7a337092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-14T00:47:14Z",
+      "side": 1,
+      "message": "WDYT? I found myself doing a lot of either:\n- Factoring stuff into \"silly\" helpers like CreateTexture that does various test-specific defaults.\n  This is not nice for test readability because you can\u0027t see the whole texture descriptor in the test\n- Copy-pasting lots of tests with slight modifications - not good for maintenance.\n- Moving multiple tests into a single test function so I can share code better without lots of helpers.\n  But then we lose the ability to do DAWN_SKIP_TEST_IF for a specific part of the test.\n\nFor texture initialization tests, for example, I want to be able to do something like:\n\nTEST_P(Cls, Name) {\n  wgpu::TextureDescriptor desc;\n  desc.dimension \u003d GetParam().dimension;\n  desc.size \u003d { kWidth, kHeight, GetParam().depthOrArrayLayers };\n\n  // etc.\n}\n\nOverall, this is just resurfacing parameterization that gtest\u0027s INSTANTIATE_TEST_SUITE_P is supposed to help with. We just didn\u0027t have it at first because of the complexity of filtering based on available backends.",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
