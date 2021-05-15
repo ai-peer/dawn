@@ -106,6 +106,7 @@ class WireMemoryTransferServiceTests : public WireTest {
     std::pair<WGPUBuffer, WGPUBuffer> CreateBuffer() {
         WGPUBufferDescriptor descriptor = {};
         descriptor.size = kBufferSize;
+        descriptor.usage = WGPUBufferUsage_MapRead;  // temp test
 
         WGPUBuffer apiBuffer = api.GetNewBuffer();
         WGPUBuffer buffer = wgpuDeviceCreateBuffer(device, &descriptor);
@@ -331,44 +332,63 @@ uint32_t WireMemoryTransferServiceTests::mSerializeFlushInfo = 1235;
 TEST_F(WireMemoryTransferServiceTests, BufferMapReadSuccess) {
     WGPUBuffer buffer;
     WGPUBuffer apiBuffer;
-    std::tie(apiBuffer, buffer) = CreateBuffer();
-    FlushClient();
 
     // The client should create and serialize a ReadHandle on mapAsync for reading.
     ClientReadHandle* clientHandle = ExpectReadHandleCreation();
     ExpectReadHandleSerialization(clientHandle);
 
-    wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize, ToMockBufferMapCallback, nullptr);
-
     // The server should deserialize the read handle from the client and then serialize
     // an initialization message.
+    // ExpectServerReadHandleDeserialize();
     ServerReadHandle* serverHandle = ExpectServerReadHandleDeserialize();
-    ExpectServerReadHandleInitialize(serverHandle);
+    // ExpectServerReadHandleInitialize(serverHandle);  // data size on map
 
-    // Mock a successful callback
-    EXPECT_CALL(api, OnBufferMapAsync(apiBuffer, WGPUMapMode_Read, 0, kBufferSize, _, _))
-        .WillOnce(InvokeWithoutArgs([&]() {
-            api.CallBufferMapAsyncCallback(apiBuffer, WGPUBufferMapAsyncStatus_Success);
-        }));
-    EXPECT_CALL(api, BufferGetConstMappedRange(apiBuffer, 0, kBufferSize))
-        .WillOnce(Return(&mBufferContent));
-
+    std::tie(apiBuffer, buffer) = CreateBuffer();
     FlushClient();
 
-    // The client receives a successful callback.
-    EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_Success, _)).Times(1);
+    // // The client should create and serialize a ReadHandle on mapAsync for reading.
+    // ClientReadHandle* clientHandle = ExpectReadHandleCreation();
+    // ExpectReadHandleSerialization(clientHandle);
 
-    // The client should receive the handle initialization message from the server.
-    ExpectClientReadHandleDeserializeInitialize(clientHandle, &mBufferContent);
+    // // The server should deserialize the read handle from the client and then serialize
+    // // an initialization message.
+    // ServerReadHandle* serverHandle = ExpectServerReadHandleDeserialize();
+    // ExpectServerReadHandleInitialize(serverHandle);
 
-    FlushServer();
+    // wgpuBufferMapAsync(buffer, WGPUMapMode_Read, 0, kBufferSize, ToMockBufferMapCallback,
+    // nullptr);
 
-    // The handle is destroyed once the buffer is unmapped.
+    // // Mock a successful callback
+    // EXPECT_CALL(api, OnBufferMapAsync(apiBuffer, WGPUMapMode_Read, 0, kBufferSize, _, _))
+    //     .WillOnce(InvokeWithoutArgs([&]() {
+    //         api.CallBufferMapAsyncCallback(apiBuffer, WGPUBufferMapAsyncStatus_Success);
+    //     }));
+    // EXPECT_CALL(api, BufferGetConstMappedRange(apiBuffer, 0, kBufferSize))
+    //     .WillOnce(Return(&mBufferContent));
+
+    // FlushClient();
+
+    // // The client receives a successful callback.
+    // EXPECT_CALL(*mockBufferMapCallback, Call(WGPUBufferMapAsyncStatus_Success, _)).Times(1);
+
+    // // The client should receive the handle initialization message from the server.
+    // ExpectClientReadHandleDeserializeInitialize(clientHandle, &mBufferContent);
+
+    // FlushServer();
+
+    // wgpuBufferUnmap(buffer);
+
+    // // The handle is destroyed once the buffer is unmapped.
     EXPECT_CALL(clientMemoryTransferService, OnReadHandleDestroy(clientHandle)).Times(1);
-    wgpuBufferUnmap(buffer);
+    // wgpuBufferUnmap(buffer);
+
+    wgpuBufferDestroy(buffer);
 
     EXPECT_CALL(serverMemoryTransferService, OnReadHandleDestroy(serverHandle)).Times(1);
-    EXPECT_CALL(api, BufferUnmap(apiBuffer)).Times(1);
+    EXPECT_CALL(api, BufferDestroy(apiBuffer)).Times(1);
+
+    // EXPECT_CALL(serverMemoryTransferService, OnReadHandleDestroy(serverHandle)).Times(1);
+    // EXPECT_CALL(api, BufferUnmap(apiBuffer)).Times(1);
 
     FlushClient();
 }

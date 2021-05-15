@@ -35,6 +35,10 @@ namespace dawn_wire { namespace client {
         mService->OnReadHandleSerializeCreate(this, serializePointer);
     }
 
+    void MockMemoryTransferService::MockReadHandle::ResetSize(size_t size) {
+        mService->OnReadHandleResetSize(this, size);
+    }
+
     bool MockMemoryTransferService::MockReadHandle::DeserializeInitialData(
         const void* deserializePointer,
         size_t deserializeSize,
@@ -60,6 +64,10 @@ namespace dawn_wire { namespace client {
 
     void MockMemoryTransferService::MockWriteHandle::SerializeCreate(void* serializePointer) {
         mService->OnWriteHandleSerializeCreate(this, serializePointer);
+    }
+
+    void MockMemoryTransferService::MockWriteHandle::ResetSize(size_t size) {
+        mService->OnWriteHandleResetSize(this, size);
     }
 
     std::pair<void*, size_t> MockMemoryTransferService::MockWriteHandle::Open() {
