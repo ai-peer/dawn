@@ -31,6 +31,11 @@ namespace dawn_wire { namespace client {
 
             size_t SerializeCreateSize() override;
             void SerializeCreate(void* serializePointer) override;
+            std::pair<void*, size_t> GetDataSpan(const void* deserializePointer,
+                                                 size_t deserializeSize,
+                                                 size_t size,
+                                                 size_t offset) override;
+            // TODO(dawn:773): remove after update on chromium side.
             bool DeserializeInitialData(const void* deserializePointer,
                                         size_t deserializeSize,
                                         const void** data,
@@ -47,6 +52,7 @@ namespace dawn_wire { namespace client {
 
             size_t SerializeCreateSize() override;
             void SerializeCreate(void* serializePointer) override;
+            std::pair<void*, size_t> GetDataSpan(size_t size, size_t offset) override;
             std::pair<void*, size_t> Open() override;
             size_t SerializeFlushSize() override;
             void SerializeFlush(void* serializePointer) override;
@@ -69,6 +75,13 @@ namespace dawn_wire { namespace client {
 
         MOCK_METHOD(size_t, OnReadHandleSerializeCreateSize, (const ReadHandle*));
         MOCK_METHOD(void, OnReadHandleSerializeCreate, (const ReadHandle*, void* serializePointer));
+        MOCK_METHOD((std::pair<void*, size_t>),
+                    OnReadHandleGetDataSpan,
+                    (const ReadHandle*,
+                     const uint32_t* deserializePointer,
+                     size_t deserializeSize,
+                     size_t size,
+                     size_t offset));
         MOCK_METHOD(bool,
                     OnReadHandleDeserializeInitialData,
                     (const ReadHandle*,
@@ -82,6 +95,9 @@ namespace dawn_wire { namespace client {
         MOCK_METHOD(void,
                     OnWriteHandleSerializeCreate,
                     (const void* WriteHandle, void* serializePointer));
+        MOCK_METHOD((std::pair<void*, size_t>),
+                    OnWriteHandleGetDataSpan,
+                    (const void* WriteHandle, size_t size, size_t offset));
         MOCK_METHOD((std::pair<void*, size_t>), OnWriteHandleOpen, (const void* WriteHandle));
         MOCK_METHOD(size_t, OnWriteHandleSerializeFlushSize, (const void* WriteHandle));
         MOCK_METHOD(void,
