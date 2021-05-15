@@ -508,9 +508,79 @@ namespace dawn_native { namespace d3d12 {
         copy.copies[1].bufferSize.width =
             copy.copies[1].copySize.width + copy.copies[1].bufferOffset.x;
 
-        // TODO(yunchao.he@intel.com): implement more copy scenarios. When bytesPerRow is 256, we
-        // may need an extra copy for either the last row of the head block (if texelOffset.y > 0)
-        // or the last row of the tail block (if texelOffsetForTail.y > 0).
+        if (texelOffset.y || texelOffsetForTail.y) {
+            // If texelOffset.y > 0, there will be one more useless row at the top in copy 0. Then
+            // we can't copy all rows for each depth slice. Otherwise, the data will be in a mess:
+            // each depth slice should have 4 rows only, but we will copy 5 rows. And the first row
+            // of each depth slice will be skipped. However, the data is compacted in buffer, which
+            // means the first row for the 2nd, 3rd, etc., slice should not be skipped. Take the
+            // figure below as an example (copySize.height is 4), copied rows on depth 0 will be row
+            // 0 - 3, copied rows on depth 1 will be row 5 - 8 because row 4 is skipped (it should
+            // be row 4
+            // - 7), copied rows on depth 2 will be row 10 - 13 because row 9 is skipped (is should
+            // be row 8 - 11), etc. You see, copied data on depth 1 and afterwards is totally wrong.
+            // So we can copy (copySize.height - texelOffset.y) rows for the head block. Then copied
+            // rows on depth 0 is row 0 - 2, copied rows on depth 1 is row 4 - 6, etc. And call
+            // another CopyTextureRegion to copy the last row of the head block for each depth slice
+            // (row 3, 7, 11, etc.). These two copies combined can get correct data.
+            //
+            //  Copy 0 (copy the head block) will be incorrect if we copy all rows for each slice
+            //  in one shot when texelOffset.y > 0:
+            //    ______________________
+            //   /                    /|
+            //  /                    / |
+            //  |--------------------| |
+            //  |                    | |
+            //  |         hhhhhhhhhhh| |
+            //  |~~~~~~~~~hhhhhhhhhhh| |
+            //  |~~~~~~~~~hhhhhhhhhhh| /
+            //  |~~~~~~~~~hhhhhhhhhhh|/
+            //  |--------------------|
+
+            // Likewise, texelOffsetForTail.y might be greater than 0. Then we need to call another
+            // CopyTextureRegion to copy the last row of the tail block.
+
+            //  Copy 1 (copy the tail block) will be incorrect if we copy all rows for each slice
+            //  in one shot when texelOffsetForTail.y > 0:
+            //    _______________________
+            //   /                     /|
+            //  /                     / |
+            //  |---------------------| |
+            //  |                     | |
+            //  |                ttttt| |
+            //  |~~~~~~~~~~~~~~~~ttttt| |
+            //  |~~~~~~~~~~~~~~~~ttttt| /
+            //  |~~~~~~~~~~~~~~~~ttttt|/
+            //  |---------------------|
+
+            // Note that if texelOffset.y or texelOffsetForTail.y is greater than 0, bytesPerRow is
+            // definitely 256 (D3D12_TEXTURE_DATA_PITCH_ALIGNMENT). And only one of them can be
+            // greater than 0: If either one is greater than 0 (it is definitely 1), the other is
+            // definitely none-zero. You can draw the figure and calculate it on paper (note that
+            // we repositioned alignedOffsetForTail and compute texelOffsetForTail based on the new
+            // values for the tail block).
+            copy.count = 3;
+            ASSERT(bytesPerRow == D3D12_TEXTURE_DATA_PITCH_ALIGNMENT);
+            copy.copies[2].offset = alignedOffset + D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT;
+            // If textureoffset.y is 1, then the last row of head has not copied yet. Otherwise, if
+            // texelOffsetForTail.y is 1, then the last row of tail has not copied yet.
+            copy.copies[2].textureOffset.x =
+                texelOffset.y ? copy.copies[0].textureOffset.x : copy.copies[1].textureOffset.x;
+            copy.copies[2].textureOffset.y = origin.y + copySize.height - blockInfo.height;
+            copy.copies[2].textureOffset.z = origin.z;
+            copy.copies[2].copySize.width =
+                texelOffset.y ? copy.copies[0].copySize.width : copy.copies[1].copySize.width;
+            copy.copies[2].copySize.height = 1;
+            copy.copies[2].copySize.depthOrArrayLayers = copySize.depthOrArrayLayers;
+
+            copy.copies[2].bufferOffset.x =
+                texelOffset.y ? copy.copies[0].bufferOffset.x : copy.copies[1].bufferOffset.x;
+            copy.copies[2].bufferOffset.y = copySize.height - 2;
+            copy.copies[2].bufferOffset.z = 0;
+            copy.copies[2].bufferSize = copySize;
+            copy.copies[2].bufferSize.width =
+                texelOffset.y ? copy.copies[0].bufferSize.width : copy.copies[1].bufferSize.width;
+        }
 
         return copy;
     }  // namespace d3d12

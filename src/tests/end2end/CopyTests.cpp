@@ -1043,6 +1043,25 @@ TEST_P(CopyTests_T2B, Texture3DFullUnaligned) {
     }
 }
 
+// Test that copying whole 3D texture in one texture-to-buffer-copy works.
+TEST_P(CopyTests_T2B, Texture3DFullUnalignedSmallCopies) {
+    constexpr uint32_t kWidth = 39;
+    constexpr uint32_t kHeight = 4;
+    constexpr uint32_t kDepth = 2u;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, kDepth};
+
+    // The for loop is designed to test TextureCopySplitter on D3D12. All iterations use the same
+    // staging buffer to transfer initial data from buffer to texture. So the buffer offset for
+    // each iteration will change from iteration to iteration, which will impact how to split
+    // textures during copy on D3D12.
+    for (uint32_t i = 0; i < 4; ++i) {
+        DoTest(textureSpec, MinimumBufferSpec(kWidth, kHeight, kDepth), {kWidth, kHeight, kDepth},
+               wgpu::TextureDimension::e3D);
+    }
+}
+
 // TODO(yunchao.he@intel.com): add T2B tests for 3D textures, like RowPitch,
 // RowsPerImage, buffer offset, partial depth range, non-zero level, etc.
 
