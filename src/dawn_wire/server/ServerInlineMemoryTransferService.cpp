@@ -28,17 +28,18 @@ namespace dawn_wire { namespace server {
             }
             ~ReadHandleImpl() override = default;
 
-            size_t SerializeInitialDataSize(const void* data, size_t dataLength) override {
-                return dataLength;
+            size_t SizeOfSerializeDataUpdate(size_t offset, size_t size) override {
+                return size;
             }
 
-            void SerializeInitialData(const void* data,
-                                      size_t dataLength,
-                                      void* serializePointer) override {
-                if (dataLength > 0) {
+            void SerializeDataUpdate(const void* data,
+                                     size_t offset,
+                                     size_t size,
+                                     void* serializePointer) override {
+                if (size > 0) {
                     ASSERT(data != nullptr);
                     ASSERT(serializePointer != nullptr);
-                    memcpy(serializePointer, data, dataLength);
+                    memcpy(static_cast<uint8_t*>(serializePointer) + offset, data, size);
                 }
             }
         };
@@ -49,12 +50,16 @@ namespace dawn_wire { namespace server {
             }
             ~WriteHandleImpl() override = default;
 
-            bool DeserializeFlush(const void* deserializePointer, size_t deserializeSize) override {
-                if (deserializeSize != mDataLength || mTargetData == nullptr ||
+            bool DeserializeDataUpdate(const void* deserializePointer,
+                                       size_t deserializeSize,
+                                       size_t offset,
+                                       size_t size) override {
+                if (deserializeSize != size || mTargetData == nullptr ||
                     deserializePointer == nullptr) {
                     return false;
                 }
-                memcpy(mTargetData, deserializePointer, mDataLength);
+                memcpy(static_cast<uint8_t*>(mTargetData) + offset,
+                       static_cast<const uint8_t*>(deserializePointer) + offset, size);
                 return true;
             }
         };
