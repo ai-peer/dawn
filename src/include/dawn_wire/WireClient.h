@@ -115,6 +115,8 @@ namespace dawn_wire {
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
 
+                virtual void ResetSize(size_t size) = 0;
+
                 // Load initial data and open the handle for reading.
                 // This function takes in the serialized result of
                 // server::MemoryTransferService::ReadHandle::SerializeInitialData.
@@ -141,6 +143,8 @@ namespace dawn_wire {
 
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
+
+                virtual void ResetSize(size_t size) = 0;
 
                 // Open the handle for reading. The data returned should be zero-initialized.
                 // The data returned must live at least until the WriteHandle is destructed.
