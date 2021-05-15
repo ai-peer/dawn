@@ -62,6 +62,7 @@ TEST_F(WireDestroyObjectTests, DestroyDeviceDestroysChildren) {
 TEST_F(WireDestroyObjectTests, ImplicitInjectErrorAfterDestroyDevice) {
     WGPUBufferDescriptor bufferDesc = {};
     bufferDesc.size = 4;
+    bufferDesc.usage = WGPUBufferUsage_MapRead;
     WGPUBuffer buffer = wgpuDeviceCreateBuffer(device, &bufferDesc);
 
     WGPUBuffer apiBuffer = api.GetNewBuffer();
