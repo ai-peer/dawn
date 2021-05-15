@@ -159,14 +159,34 @@ TEST_F(BufferValidationTest, MapAsync_WriteSuccess) {
 
 // Test map async with a buffer that's an error
 TEST_F(BufferValidationTest, MapAsync_ErrorBuffer) {
-    wgpu::BufferDescriptor desc;
-    desc.size = 4;
-    desc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
-    wgpu::Buffer buffer;
-    ASSERT_DEVICE_ERROR(buffer = device.CreateBuffer(&desc));
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 4;
+        desc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
+        wgpu::Buffer buffer;
+        ASSERT_DEVICE_ERROR(buffer = device.CreateBuffer(&desc));
 
-    AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, 4);
-    AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
+        AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, 4);
+        AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
+    }
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 4;
+        desc.usage = wgpu::BufferUsage::MapRead;
+        wgpu::Buffer buffer;
+        buffer = device.CreateBuffer(&desc);
+
+        AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
+    }
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 4;
+        desc.usage = wgpu::BufferUsage::MapWrite;
+        wgpu::Buffer buffer;
+        buffer = device.CreateBuffer(&desc);
+
+        AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, 4);
+    }
 }
 
 // Test map async with an invalid offset and size alignment.
