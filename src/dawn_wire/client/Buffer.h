@@ -57,7 +57,7 @@ namespace dawn_wire { namespace client {
         bool IsMappedForWriting() const;
         bool CheckGetMappedRangeOffsetSize(size_t offset, size_t size) const;
 
-        void FreeMappedData(bool destruction);
+        void FreeMappedData(bool destructReadHandle, bool destructWriteHandle);
 
         Device* mDevice;
 
@@ -76,8 +76,9 @@ namespace dawn_wire { namespace client {
             WGPUBufferMapAsyncStatus clientStatus = WGPUBufferMapAsyncStatus_Success;
 
             // TODO(enga): Use a tagged pointer to save space.
-            std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
-            std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
+            // TODO: use weak_ptr?
+            std::shared_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
+            std::shared_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
         };
         std::map<uint32_t, MapRequestData> mRequests;
         uint32_t mRequestSerial = 0;
@@ -86,8 +87,12 @@ namespace dawn_wire { namespace client {
         // Only one mapped pointer can be active at a time because Unmap clears all the in-flight
         // requests.
         // TODO(enga): Use a tagged pointer to save space.
-        std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
-        std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
+        std::shared_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
+        std::shared_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
+        bool mIsMappingRead = false;
+        bool mIsMappingWrite = false;
+        bool mDestructWriteHandleOnUnmap = false;
+
         void* mMappedData = nullptr;
         size_t mMapOffset = 0;
         size_t mMapSize = 0;

@@ -115,16 +115,28 @@ namespace dawn_wire {
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
 
-                // Load initial data and open the handle for reading.
+                // Update map data and open the handle for reading.
                 // This function takes in the serialized result of
                 // server::MemoryTransferService::ReadHandle::SerializeInitialData.
                 // This function should write to |data| and |dataLength| the pointer and size of the
                 // mapped data for reading. It must live at least until the ReadHandle is
                 // destructed.
+                // TODO(shrekshao): change to pure virtual after update on chromium side.
+                virtual bool UpdateMapData(const void* deserializePointer,
+                                           size_t deserializeSize,
+                                           size_t size,
+                                           size_t offset,
+                                           const void** data) {
+                    return false;
+                }
+
+                // TODO(shrekshao): remove after update on chromium side.
                 virtual bool DeserializeInitialData(const void* deserializePointer,
                                                     size_t deserializeSize,
                                                     const void** data,
-                                                    size_t* dataLength) = 0;
+                                                    size_t* dataLength) {
+                    return false;
+                }
 
               private:
                 ReadHandle(const ReadHandle&) = delete;
@@ -145,7 +157,15 @@ namespace dawn_wire {
                 // Open the handle for reading. The data returned should be zero-initialized.
                 // The data returned must live at least until the WriteHandle is destructed.
                 // On failure, the pointer returned should be null.
-                virtual std::pair<void*, size_t> Open() = 0;
+                // TODO(shrekshao): change to pure virtual after update on chromium side.
+                virtual std::pair<void*, size_t> GetMapData(size_t size, size_t offset) {
+                    return std::make_pair(nullptr, 0);
+                }
+
+                // TODO(shrekshao): remove after update on chromium side.
+                virtual std::pair<void*, size_t> Open() {
+                    return std::make_pair(nullptr, 0);
+                }
 
                 // Get the required serialization size for SerializeFlush
                 virtual size_t SerializeFlushSize() = 0;
