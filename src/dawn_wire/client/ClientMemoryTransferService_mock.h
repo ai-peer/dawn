@@ -31,6 +31,7 @@ namespace dawn_wire { namespace client {
 
             size_t SerializeCreateSize() override;
             void SerializeCreate(void* serializePointer) override;
+            void ResetSize(size_t size) override;
             bool DeserializeInitialData(const void* deserializePointer,
                                         size_t deserializeSize,
                                         const void** data,
@@ -47,6 +48,7 @@ namespace dawn_wire { namespace client {
 
             size_t SerializeCreateSize() override;
             void SerializeCreate(void* serializePointer) override;
+            void ResetSize(size_t size) override;
             std::pair<void*, size_t> Open() override;
             size_t SerializeFlushSize() override;
             void SerializeFlush(void* serializePointer) override;
@@ -69,6 +71,7 @@ namespace dawn_wire { namespace client {
 
         MOCK_METHOD(size_t, OnReadHandleSerializeCreateSize, (const ReadHandle*));
         MOCK_METHOD(void, OnReadHandleSerializeCreate, (const ReadHandle*, void* serializePointer));
+        MOCK_METHOD(void, OnReadHandleResetSize, (const ReadHandle*, size_t size));
         MOCK_METHOD(bool,
                     OnReadHandleDeserializeInitialData,
                     (const ReadHandle*,
@@ -82,6 +85,7 @@ namespace dawn_wire { namespace client {
         MOCK_METHOD(void,
                     OnWriteHandleSerializeCreate,
                     (const void* WriteHandle, void* serializePointer));
+        MOCK_METHOD(void, OnWriteHandleResetSize, (const void* WriteHandle, size_t size));
         MOCK_METHOD((std::pair<void*, size_t>), OnWriteHandleOpen, (const void* WriteHandle));
         MOCK_METHOD(size_t, OnWriteHandleSerializeFlushSize, (const void* WriteHandle));
         MOCK_METHOD(void,
