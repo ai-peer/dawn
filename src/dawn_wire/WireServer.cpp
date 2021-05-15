@@ -68,9 +68,8 @@ namespace dawn_wire {
 
         MemoryTransferService::WriteHandle::~WriteHandle() = default;
 
-        void MemoryTransferService::WriteHandle::SetTarget(void* data, size_t dataLength) {
+        void MemoryTransferService::WriteHandle::SetTarget(void* data) {
             mTargetData = data;
-            mDataLength = dataLength;
         }
     }  // namespace server
 
