@@ -36,6 +36,10 @@ namespace dawn_wire { namespace client {
             void SerializeCreate(void*) override {
             }
 
+            void ResetSize(size_t size) override {
+                mSize = size;
+            }
+
             bool DeserializeInitialData(const void* deserializePointer,
                                         size_t deserializeSize,
                                         const void** data,
@@ -75,6 +79,10 @@ namespace dawn_wire { namespace client {
             }
 
             void SerializeCreate(void*) override {
+            }
+
+            void ResetSize(size_t size) override {
+                mSize = size;
             }
 
             std::pair<void*, size_t> Open() override {
