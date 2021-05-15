@@ -23,9 +23,7 @@
             { "name": "request serial", "type": "uint32_t" },
             { "name": "mode", "type": "map mode" },
             { "name": "offset", "type": "uint64_t"},
-            { "name": "size", "type": "uint64_t"},
-            { "name": "handle create info length", "type": "uint64_t" },
-            { "name": "handle create info", "type": "uint8_t", "annotation": "const*", "length": "handle create info length", "skip_serialize": true}
+            { "name": "size", "type": "uint64_t"}
         ],
         "buffer update mapped data": [
             { "name": "buffer id", "type": "ObjectId" },

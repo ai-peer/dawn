@@ -115,6 +115,15 @@ namespace dawn_wire {
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
 
+                virtual bool UpdateMapData(const void* deserializePointer,
+                                           size_t deserializeSize,
+                                           size_t size,
+                                           size_t offset,
+                                           const void** data,
+                                           size_t* dataLength) {
+                    return false;
+                }
+
                 // Load initial data and open the handle for reading.
                 // This function takes in the serialized result of
                 // server::MemoryTransferService::ReadHandle::SerializeInitialData.
@@ -124,7 +133,9 @@ namespace dawn_wire {
                 virtual bool DeserializeInitialData(const void* deserializePointer,
                                                     size_t deserializeSize,
                                                     const void** data,
-                                                    size_t* dataLength) = 0;
+                                                    size_t* dataLength) {
+                    return false;
+                }
 
               private:
                 ReadHandle(const ReadHandle&) = delete;
@@ -142,13 +153,21 @@ namespace dawn_wire {
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
 
+                virtual std::pair<void*, size_t> GetMapData(size_t size, size_t offset) {
+                    return std::make_pair(nullptr, 0);
+                }
+
                 // Open the handle for reading. The data returned should be zero-initialized.
                 // The data returned must live at least until the WriteHandle is destructed.
                 // On failure, the pointer returned should be null.
-                virtual std::pair<void*, size_t> Open() = 0;
+                // virtual std::pair<void*, size_t> Open() = 0;
+                virtual std::pair<void*, size_t> Open() {
+                    return std::make_pair(nullptr, 0);
+                }
 
                 // Get the required serialization size for SerializeFlush
                 virtual size_t SerializeFlushSize() = 0;
+                // virtual size_t SerializeFlushOffset() = 0;
 
                 // Flush writes to the handle. This should serialize info to send updates to the
                 // server.
