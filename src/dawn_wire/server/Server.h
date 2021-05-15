@@ -115,9 +115,6 @@ namespace dawn_wire { namespace server {
         uint64_t offset;
         uint64_t size;
         WGPUMapModeFlags mode;
-        // TODO(enga): Use a tagged pointer to save space.
-        std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
-        std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
     };
 
     struct ErrorScopeUserdata : CallbackUserdata {

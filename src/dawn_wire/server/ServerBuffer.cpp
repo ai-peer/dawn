@@ -25,9 +25,13 @@ namespace dawn_wire { namespace server {
         auto* buffer = BufferObjects().Get(cmd.selfId);
         DAWN_ASSERT(buffer != nullptr);
 
-        // The buffer was unmapped. Clear the Read/WriteHandle.
-        buffer->readHandle = nullptr;
-        buffer->writeHandle = nullptr;
+        if (buffer->mappedAtCreation && !(buffer->usage & WGPUMapMode_Write)) {
+            // This indicates the writeHandle is for mappedAtCreation only. Destory on unmap
+            // writeHandle could have possibly been deleted if buffer is already destroyed so we
+            // don't assert it's non-null
+            buffer->writeHandle = nullptr;
+        }
+
         buffer->mapWriteState = BufferMapWriteState::Unmapped;
 
         return true;
@@ -50,9 +54,7 @@ namespace dawn_wire { namespace server {
                                   uint32_t requestSerial,
                                   WGPUMapModeFlags mode,
                                   uint64_t offset64,
-                                  uint64_t size64,
-                                  uint64_t handleCreateInfoLength,
-                                  const uint8_t* handleCreateInfo) {
+                                  uint64_t size64) {
         // These requests are just forwarded to the buffer, with userdata containing what the
         // client will require in the return command.
 
@@ -80,8 +82,7 @@ namespace dawn_wire { namespace server {
         userdata->mode = mode;
 
         if (offset64 > std::numeric_limits<size_t>::max() ||
-            size64 > std::numeric_limits<size_t>::max() ||
-            handleCreateInfoLength > std::numeric_limits<size_t>::max()) {
+            size64 > std::numeric_limits<size_t>::max()) {
             OnBufferMapAsyncCallback(WGPUBufferMapAsyncStatus_Error, userdata.get());
             return true;
         }
@@ -92,31 +93,6 @@ namespace dawn_wire { namespace server {
         userdata->offset = offset;
         userdata->size = size;
 
-        // The handle will point to the mapped memory or staging memory for the mapping.
-        // Store it on the map request.
-        if (isWriteMode) {
-            // Deserialize metadata produced from the client to create a companion server handle.
-            MemoryTransferService::WriteHandle* writeHandle = nullptr;
-            if (!mMemoryTransferService->DeserializeWriteHandle(
-                    handleCreateInfo, static_cast<size_t>(handleCreateInfoLength), &writeHandle)) {
-                return false;
-            }
-            ASSERT(writeHandle != nullptr);
-
-            userdata->writeHandle =
-                std::unique_ptr<MemoryTransferService::WriteHandle>(writeHandle);
-        } else {
-            ASSERT(isReadMode);
-            // Deserialize metadata produced from the client to create a companion server handle.
-            MemoryTransferService::ReadHandle* readHandle = nullptr;
-            if (!mMemoryTransferService->DeserializeReadHandle(
-                    handleCreateInfo, static_cast<size_t>(handleCreateInfoLength), &readHandle)) {
-                return false;
-            }
-            ASSERT(readHandle != nullptr);
-
-            userdata->readHandle = std::unique_ptr<MemoryTransferService::ReadHandle>(readHandle);
-        }
 
         mProcs.bufferMapAsync(
             buffer->handle, mode, offset, size,
@@ -130,8 +106,10 @@ namespace dawn_wire { namespace server {
     bool Server::DoDeviceCreateBuffer(ObjectId deviceId,
                                       const WGPUBufferDescriptor* descriptor,
                                       ObjectHandle bufferResult,
-                                      uint64_t handleCreateInfoLength,
-                                      const uint8_t* handleCreateInfo) {
+                                      uint64_t readHandleCreateInfoLength,
+                                      const uint8_t* readHandleCreateInfo,
+                                      uint64_t writeHandleCreateInfoLength,
+                                      const uint8_t* writeHandleCreateInfo) {
         auto* device = DeviceObjects().Get(deviceId);
         if (device == nullptr) {
             return false;
@@ -145,43 +123,70 @@ namespace dawn_wire { namespace server {
         resultData->generation = bufferResult.generation;
         resultData->handle = mProcs.deviceCreateBuffer(device->handle, descriptor);
         resultData->deviceInfo = device->info.get();
+        resultData->usage = descriptor->usage;
+        resultData->mappedAtCreation = descriptor->mappedAtCreation;
         if (!TrackDeviceChild(resultData->deviceInfo, ObjectType::Buffer, bufferResult.id)) {
             return false;
         }
 
-        // If the buffer isn't mapped at creation, we are done.
-        if (!descriptor->mappedAtCreation) {
-            return handleCreateInfoLength == 0;
-        }
+        // isReadMode and isWriteMode could be true at the same time if usage contains
+        // WGPUMapMode_Read and buffer is mappedAtCreation
+        bool isReadMode = descriptor->usage & WGPUMapMode_Read;
+        bool isWriteMode = descriptor->usage & WGPUMapMode_Write || descriptor->mappedAtCreation;
 
         // This is the size of data deserialized from the command stream to create the write handle,
         // which must be CPU-addressable.
-        if (handleCreateInfoLength > std::numeric_limits<size_t>::max()) {
+        if (readHandleCreateInfoLength + writeHandleCreateInfoLength >
+            std::numeric_limits<size_t>::max()) {
             return false;
         }
 
-        void* mapping = mProcs.bufferGetMappedRange(resultData->handle, 0, descriptor->size);
-        if (mapping == nullptr) {
-            // A zero mapping is used to indicate an allocation error of an error buffer. This is a
-            // valid case and isn't fatal. Remember the buffer is an error so as to skip subsequent
-            // mapping operations.
-            resultData->mapWriteState = BufferMapWriteState::MapError;
-            return true;
-        }
-
-        // Deserialize metadata produced from the client to create a companion server handle.
+        // The handle will point to the mapped memory or staging memory for the mapping.
+        // Store it on the map request.
         MemoryTransferService::WriteHandle* writeHandle = nullptr;
-        if (!mMemoryTransferService->DeserializeWriteHandle(
-                handleCreateInfo, static_cast<size_t>(handleCreateInfoLength), &writeHandle)) {
-            return false;
+        MemoryTransferService::ReadHandle* readHandle = nullptr;
+        void* mapping = nullptr;
+        if (isWriteMode) {
+            if (descriptor->mappedAtCreation) {
+                mapping = mProcs.bufferGetMappedRange(resultData->handle, 0, descriptor->size);
+                if (mapping == nullptr) {
+                    // A zero mapping is used to indicate an allocation error of an error buffer.
+                    // This is a valid case and isn't fatal. Remember the buffer is an error so as
+                    // to skip subsequent mapping operations.
+                    resultData->mapWriteState = BufferMapWriteState::MapError;
+                    return true;
+                }
+            }
+
+            // Deserialize metadata produced from the client to create a companion server handle.
+            if (!mMemoryTransferService->DeserializeWriteHandle(
+                    writeHandleCreateInfo, static_cast<size_t>(writeHandleCreateInfoLength),
+                    &writeHandle)) {
+                return false;
+            }
+            ASSERT(writeHandle != nullptr);
+            resultData->writeHandle.reset(writeHandle);
+
+            if (descriptor->mappedAtCreation) {
+                ASSERT(writeHandle != nullptr);
+                ASSERT(mapping != nullptr);
+                writeHandle->SetTarget(mapping, descriptor->size, 0);
+
+                resultData->mapWriteState = BufferMapWriteState::Mapped;
+            }
         }
 
-        // Set the target of the WriteHandle to the mapped GPU memory.
-        ASSERT(writeHandle != nullptr);
-        writeHandle->SetTarget(mapping, descriptor->size);
+        if (isReadMode) {
+            // Deserialize metadata produced from the client to create a companion server handle.
+            if (!mMemoryTransferService->DeserializeReadHandle(
+                    readHandleCreateInfo, static_cast<size_t>(readHandleCreateInfoLength),
+                    &readHandle)) {
+                return false;
+            }
+            ASSERT(readHandle != nullptr);
 
-        resultData->mapWriteState = BufferMapWriteState::Mapped;
-        resultData->writeHandle.reset(writeHandle);
+            resultData->readHandle.reset(readHandle);
+        }
 
         return true;
     }
@@ -246,7 +251,7 @@ namespace dawn_wire { namespace server {
             // Get the serialization size of the message to initialize ReadHandle data.
             readData = mProcs.bufferGetConstMappedRange(data->bufferObj, data->offset, data->size);
             cmd.readInitialDataInfoLength =
-                data->readHandle->SerializeInitialDataSize(readData, data->size);
+                bufferData->readHandle->SerializeInitialDataSize(readData, data->size);
         }
 
         SerializeCommand(cmd, cmd.readInitialDataInfoLength, [&](SerializeBuffer* serializeBuffer) {
@@ -255,21 +260,16 @@ namespace dawn_wire { namespace server {
                     char* readHandleBuffer;
                     WIRE_TRY(
                         serializeBuffer->NextN(cmd.readInitialDataInfoLength, &readHandleBuffer));
-
-                    // Serialize the initialization message into the space after the command.
-                    data->readHandle->SerializeInitialData(readData, data->size, readHandleBuffer);
                     // The in-flight map request returned successfully.
-                    // Move the ReadHandle so it is owned by the buffer.
-                    bufferData->readHandle = std::move(data->readHandle);
+                    bufferData->readHandle->UpdateData(readData, data->size, data->offset,
+                                                       readHandleBuffer);
                 } else {
                     // The in-flight map request returned successfully.
-                    // Move the WriteHandle so it is owned by the buffer.
-                    bufferData->writeHandle = std::move(data->writeHandle);
                     bufferData->mapWriteState = BufferMapWriteState::Mapped;
                     // Set the target of the WriteHandle to the mapped buffer data.
                     bufferData->writeHandle->SetTarget(
                         mProcs.bufferGetMappedRange(data->bufferObj, data->offset, data->size),
-                        data->size);
+                        data->size, data->offset);
                 }
             }
             return WireResult::Success;
