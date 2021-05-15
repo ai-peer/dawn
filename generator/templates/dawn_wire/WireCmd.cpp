@@ -70,6 +70,20 @@
     {%- endif -%}
 {% endmacro %}
 
+//* Outputs the serialization code to put `length` elements from `inArr` into `outArr`
+{% macro serialize_members(member, inArr, outArr, length) %}
+    {% if member.type.category == "object" or member.type.category == "structure" %}
+        //* This loop cannot overflow because it iterates up to |length|. Even if
+        //* |length| were the maximum integer value, |i| would become equal to it just before
+        //* exiting the loop, but not increment past or wrap around.
+        for (decltype({{length}}) i = 0; i < {{length}}; ++i) {
+            {{serialize_member(member, inArr + "[i]", outArr + "[i]")}}
+        }
+    {% else %}
+        CopyMemberArray({{outArr}}, {{inArr}}, {{length}});
+    {% endif %}
+{% endmacro %}
+
 //* Outputs the deserialization code to put `in` in `out`
 {% macro deserialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
@@ -85,6 +99,20 @@
         static_assert(sizeof({{out}}) >= sizeof({{in}}), "Deserialize assignment may not narrow.");
         {{out}} = {{in}};
     {%- endif -%}
+{% endmacro %}
+
+//* Outputs the deserialization code to put `length` elements from `inArr` into `outArr`
+{% macro deserialize_members(member, inArr, outArr, length) %}
+    {% if member.type.category == "object" or member.type.category == "structure" %}
+        //* This loop cannot overflow because it iterates up to |length|. Even if
+        //* |length| were the maximum integer value, |i| would become equal to it just before
+        //* exiting the loop, but not increment past or wrap around.
+        for (decltype({{length}}) i = 0; i < {{length}}; ++i) {
+            {{deserialize_member(member, inArr + "[i]", outArr + "[i]")}}
+        }
+    {% else %}
+        CopyMemberArray({{outArr}}, {{inArr}}, {{length}});
+    {% endif %}
 {% endmacro %}
 
 namespace {
@@ -248,11 +276,12 @@ namespace {
                 if (has_{{memberName}})
             {% endif %}
             {
-                transfer->{{memberName}}Strlen = std::strlen(record.{{memberName}});
+                size_t {{memberName}}Strlen = std::strlen(record.{{memberName}});
+                transfer->{{memberName}}Strlen = {{memberName}}Strlen;
 
                 char* stringInBuffer;
-                WIRE_TRY(buffer->NextN(transfer->{{memberName}}Strlen, &stringInBuffer));
-                memcpy(stringInBuffer, record.{{memberName}}, transfer->{{memberName}}Strlen);
+                WIRE_TRY(buffer->NextN({{memberName}}Strlen, &stringInBuffer));
+                memcpy(stringInBuffer, record.{{memberName}}, {{memberName}}Strlen);
             }
         {% endfor %}
 
@@ -270,13 +299,7 @@ namespace {
 
                 {{member_transfer_type(member)}}* memberBuffer;
                 WIRE_TRY(buffer->NextN(memberLength, &memberBuffer));
-
-                //* This loop cannot overflow because it iterates up to |memberLength|. Even if
-                //* memberLength were the maximum integer value, |i| would become equal to it just before
-                //* exiting the loop, but not increment past or wrap around.
-                for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                    {{serialize_member(member, "record." + memberName + "[i]", "memberBuffer[i]" )}}
-                }
+                {{serialize_members(member, "record." + memberName, "memberBuffer", "memberLength")}}
             }
         {% endfor %}
         return WireResult::Success;
@@ -387,12 +410,7 @@ namespace {
                     record->{{memberName}} = copiedMembers;
                 {% endif %}
 
-                //* This loop cannot overflow because it iterates up to |memberLength|. Even if
-                //* memberLength were the maximum integer value, |i| would become equal to it just before
-                //* exiting the loop, but not increment past or wrap around.
-                for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                    {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
-                }
+                {{deserialize_members(member, "memberBuffer", "copiedMembers", "memberLength")}}
             }
         {% endfor %}
 
@@ -489,6 +507,15 @@ namespace dawn_wire {
             }
 
             return WireResult::Success;
+        }
+
+        template <typename OutArr, typename InArr, typename N>
+        void CopyMemberArray(OutArr outArr, InArr inArr, N length) {
+            using OutArrValue = typename std::remove_volatile<typename std::remove_pointer<OutArr>::type>::type;
+            using InArrValue = typename std::remove_volatile<typename std::remove_pointer<InArr>::type>::type;
+            static_assert(std::is_same<OutArrValue, typename std::remove_const<InArrValue>::type>::value,
+                          "Incompatible types for bulk list serialization.");
+            memcpy(const_cast<OutArrValue*>(outArr), const_cast<InArrValue*>(inArr), length * sizeof(InArrValue));
         }
 
         size_t GetChainedStructExtraRequiredSize(const WGPUChainedStruct* chainedStruct);
