@@ -54,6 +54,8 @@ namespace dawn_wire { namespace server {
                     deserializePointer == nullptr) {
                     return false;
                 }
+                // memcpy(static_cast<uint8_t*>(mTargetData) + deserializeOffset,
+                // deserializePointer, mDataLength);
                 memcpy(mTargetData, deserializePointer, mDataLength);
                 return true;
             }
