@@ -33,33 +33,77 @@ namespace dawn_wire { namespace client {
             return device->CreateErrorBuffer();
         }
 
+        std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
         std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
         void* writeData = nullptr;
         size_t writeHandleCreateInfoLength = 0;
 
         // If the buffer is mapped at creation, create a write handle that will represent the
         // mapping of the whole buffer.
-        if (descriptor->mappedAtCreation) {
-            // Create the handle.
-            writeHandle.reset(
-                wireClient->GetMemoryTransferService()->CreateWriteHandle(descriptor->size));
-            if (writeHandle == nullptr) {
-                device->InjectError(WGPUErrorType_OutOfMemory, "Buffer mapping allocation failed");
-                return device->CreateErrorBuffer();
+        // if (descriptor->mappedAtCreation) {
+        if (mappable) {
+            if ((descriptor->usage & WGPUBufferUsage_MapRead) != 0) {
+                // Create the read handle
+                readHandle.reset(
+                    wireClient->GetMemoryTransferService()->CreateReadHandle(descriptor->size));
+                if (readHandle == nullptr) {
+                    device->InjectError(WGPUErrorType_OutOfMemory,
+                                        "Failed to create buffer mapping");
+                    return device->CreateErrorBuffer();
+                }
             }
 
-            // Open the handle, it may fail by returning a nullptr in writeData.
-            size_t writeDataLength = 0;
-            std::tie(writeData, writeDataLength) = writeHandle->Open();
-            if (writeData == nullptr) {
-                device->InjectError(WGPUErrorType_OutOfMemory, "Buffer mapping allocation failed");
-                return device->CreateErrorBuffer();
-            }
-            ASSERT(writeDataLength == descriptor->size);
+            if ((descriptor->usage & WGPUBufferUsage_MapWrite) != 0 ||
+                descriptor->mappedAtCreation) {
+                // Create the write handle.
+                writeHandle.reset(
+                    wireClient->GetMemoryTransferService()->CreateWriteHandle(descriptor->size));
+                if (writeHandle == nullptr) {
+                    device->InjectError(WGPUErrorType_OutOfMemory,
+                                        "Failed to create buffer mapping");
+                    return device->CreateErrorBuffer();
+                }
 
-            // Get the serialization size of the write handle.
-            writeHandleCreateInfoLength = writeHandle->SerializeCreateSize();
+                if (descriptor->mappedAtCreation) {
+                    // Open the handle, it may fail by returning a nullptr in writeData.
+                    size_t writeDataLength = 0;
+                    std::tie(writeData, writeDataLength) = writeHandle->Open();
+                    if (writeData == nullptr) {
+                        device->InjectError(WGPUErrorType_OutOfMemory,
+                                            "Buffer mapping allocation failed");
+                        return device->CreateErrorBuffer();
+                    }
+                    ASSERT(writeDataLength == descriptor->size);
+
+                    // Get the serialization size of the write handle.
+                    writeHandleCreateInfoLength = writeHandle->SerializeCreateSize();
+                }
+            }
         }
+
+        // // If the buffer is mapped at creation, create a write handle that will represent the
+        // // mapping of the whole buffer.
+        // if (descriptor->mappedAtCreation) {
+        //     // Create the handle.
+        //     writeHandle.reset(
+        //         wireClient->GetMemoryTransferService()->CreateWriteHandle(descriptor->size));
+        //     if (writeHandle == nullptr) {
+        //         device->InjectError(WGPUErrorType_OutOfMemory, "Buffer mapping allocation
+        //         failed"); return device->CreateErrorBuffer();
+        //     }
+
+        //     // Open the handle, it may fail by returning a nullptr in writeData.
+        //     size_t writeDataLength = 0;
+        //     std::tie(writeData, writeDataLength) = writeHandle->Open();
+        //     if (writeData == nullptr) {
+        //         device->InjectError(WGPUErrorType_OutOfMemory, "Buffer mapping allocation
+        //         failed"); return device->CreateErrorBuffer();
+        //     }
+        //     ASSERT(writeDataLength == descriptor->size);
+
+        //     // Get the serialization size of the write handle.
+        //     writeHandleCreateInfoLength = writeHandle->SerializeCreateSize();
+        // }
 
         // Create the buffer and send the creation command.
         auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(wireClient);
@@ -77,16 +121,23 @@ namespace dawn_wire { namespace client {
 
         wireClient->SerializeCommand(
             cmd, writeHandleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
+                if (readHandle != nullptr) {
+                    buffer->mReadHandle = std::move(readHandle);
+                } else if (writeHandle != nullptr) {
+                    buffer->mWriteHandle = std::move(writeHandle);
+                }
+                // return WireResult::Success;
+
                 if (descriptor->mappedAtCreation) {
                     char* writeHandleBuffer;
                     WIRE_TRY(
                         serializeBuffer->NextN(writeHandleCreateInfoLength, &writeHandleBuffer));
                     // Serialize the WriteHandle into the space after the command.
-                    writeHandle->SerializeCreate(writeHandleBuffer);
+                    buffer->mWriteHandle->SerializeCreate(writeHandleBuffer);
 
                     // Set the buffer state for the mapping at creation. The buffer now owns the
                     // write handle..
-                    buffer->mWriteHandle = std::move(writeHandle);
+                    // buffer->mWriteHandle = std::move(writeHandle);
                     buffer->mMappedData = writeData;
                     buffer->mMapOffset = 0;
                     buffer->mMapSize = buffer->mSize;
@@ -149,11 +200,33 @@ namespace dawn_wire { namespace client {
         bool isReadMode = mode & WGPUMapMode_Read;
         bool isWriteMode = mode & WGPUMapMode_Write;
 
-        // Step 1. Do early validation of READ ^ WRITE because the server rejects mode = 0.
+        // Step 1a. Do early validation of READ ^ WRITE because the server rejects mode = 0.
         if (!(isReadMode ^ isWriteMode)) {
             if (!mDeviceIsAlive.expired()) {
                 mDevice->InjectError(WGPUErrorType_Validation,
                                      "MapAsync mode must be exactly one of Read or Write");
+            }
+            if (callback != nullptr) {
+                callback(WGPUBufferMapAsyncStatus_Error, userdata);
+            }
+            return;
+        }
+        // Step 1b. Do early validation of buffer usage contains Read/Write
+        // because we need mReadHandle/mWriteHandle != nullptr to send MapRequest
+        if (isReadMode && mReadHandle == nullptr) {
+            if (!mDeviceIsAlive.expired()) {
+                mDevice->InjectError(WGPUErrorType_Validation,
+                                     "The buffer must have the MapRead usage");
+            }
+            if (callback != nullptr) {
+                callback(WGPUBufferMapAsyncStatus_Error, userdata);
+            }
+            return;
+        }
+        if (isWriteMode && mWriteHandle == nullptr) {
+            if (!mDeviceIsAlive.expired()) {
+                mDevice->InjectError(WGPUErrorType_Validation,
+                                     "The buffer must have the MapWrite usage");
             }
             if (callback != nullptr) {
                 callback(WGPUBufferMapAsyncStatus_Error, userdata);
@@ -173,27 +246,45 @@ namespace dawn_wire { namespace client {
         request.offset = offset;
 
         // Step 2a: Create the read / write handles for this request.
-        if (isReadMode) {
-            request.readHandle.reset(client->GetMemoryTransferService()->CreateReadHandle(size));
-            if (request.readHandle == nullptr) {
-                if (!mDeviceIsAlive.expired()) {
-                    mDevice->InjectError(WGPUErrorType_OutOfMemory,
-                                         "Failed to create buffer mapping");
-                }
-                callback(WGPUBufferMapAsyncStatus_Error, userdata);
-                return;
-            }
-        } else {
+        // Existence of mReadHandle/mWriteHandle indicates if the buffer usage
+        // contains MapRead/MapWrite as the handles are created on buffer creation
+        if (isReadMode && mReadHandle != nullptr) {
+            // request.readHandle.reset(client->GetMemoryTransferService()->CreateReadHandle(size));
+            // if (request.readHandle == nullptr) {
+            //     if (!mDeviceIsAlive.expired()) {
+            //         mDevice->InjectError(WGPUErrorType_OutOfMemory,
+            //                              "Failed to create buffer mapping");
+            //     }
+            //     callback(WGPUBufferMapAsyncStatus_Error, userdata);
+            //     return;
+            // }
+
+            // TODO: buffeUsage must include
+            // request.readHandle.reset(mReadHandle.get());
+            request.readHandle = mReadHandle;
+
+            // if (request.readHandle == nullptr) {
+            //     if (!mDeviceIsAlive.expired()) {
+            //         mDevice->InjectError(WGPUErrorType_OutOfMemory,
+            //                              "Buffer mapping lost");
+            //     }
+            //     callback(WGPUBufferMapAsyncStatus_Error, userdata);
+            //     return;
+            // }
+            // } else {
+        } else if (isWriteMode && mWriteHandle != nullptr) {
             ASSERT(isWriteMode);
-            request.writeHandle.reset(client->GetMemoryTransferService()->CreateWriteHandle(size));
-            if (request.writeHandle == nullptr) {
-                if (!mDeviceIsAlive.expired()) {
-                    mDevice->InjectError(WGPUErrorType_OutOfMemory,
-                                         "Failed to create buffer mapping");
-                }
-                callback(WGPUBufferMapAsyncStatus_Error, userdata);
-                return;
-            }
+            // request.writeHandle.reset(client->GetMemoryTransferService()->CreateWriteHandle(size));
+            // if (request.writeHandle == nullptr) {
+            //     if (!mDeviceIsAlive.expired()) {
+            //         mDevice->InjectError(WGPUErrorType_OutOfMemory,
+            //                              "Failed to create buffer mapping");
+            //     }
+            //     callback(WGPUBufferMapAsyncStatus_Error, userdata);
+            //     return;
+            // }
+            // request.writeHandle.reset(mWriteHandle.get());
+            request.writeHandle = mWriteHandle;
         }
 
         // Step 3. Serialize the command to send to the server.
@@ -266,7 +357,8 @@ namespace dawn_wire { namespace client {
         size_t mappedDataLength = 0;
         const void* mappedData = nullptr;
         if (status == WGPUBufferMapAsyncStatus_Success) {
-            if (mReadHandle || mWriteHandle) {
+            // if (mReadHandle || mWriteHandle) {
+            if (mIsMappingRead || mIsMappingWrite) {
                 // Buffer is already mapped.
                 return FailRequest();
             }
@@ -299,10 +391,12 @@ namespace dawn_wire { namespace client {
                 }
             }
 
-            // The MapAsync request was successful. The buffer now owns the Read/Write handles
-            // until Unmap().
-            mReadHandle = std::move(request.readHandle);
-            mWriteHandle = std::move(request.writeHandle);
+            // // The MapAsync request was successful. The buffer now owns the Read/Write handles
+            // // until Unmap().
+            // mReadHandle = std::move(request.readHandle);
+            // mWriteHandle = std::move(request.writeHandle);
+            mIsMappingRead = isRead;
+            mIsMappingWrite = isWrite;
         }
 
         mMapOffset = request.offset;
@@ -339,9 +433,11 @@ namespace dawn_wire { namespace client {
         //   - Server -> Client: Result of MapRequest1
         //   - Unmap locally on the client
         //   - Server -> Client: Result of MapRequest2
-        if (mWriteHandle) {
+        // if (mWriteHandle && mIsMappingWrite) {
+        if (mIsMappingWrite) {
             // Writes need to be flushed before Unmap is sent. Unmap calls all associated
             // in-flight callbacks which may read the updated data.
+            ASSERT(mWriteHandle != nullptr);
             ASSERT(mReadHandle == nullptr);
 
             // Get the serialization size of metadata to flush writes.
@@ -365,6 +461,8 @@ namespace dawn_wire { namespace client {
         }
 
         FreeMappedData(false);
+        mIsMappingRead = false;
+        mIsMappingWrite = false;
 
         // Tag all mapping requests still in flight as unmapped before callback.
         for (auto& it : mRequests) {
@@ -395,11 +493,13 @@ namespace dawn_wire { namespace client {
     }
 
     bool Buffer::IsMappedForReading() const {
-        return mReadHandle != nullptr;
+        // return mReadHandle != nullptr;
+        return mIsMappingRead;
     }
 
     bool Buffer::IsMappedForWriting() const {
-        return mWriteHandle != nullptr;
+        // return mWriteHandle != nullptr;
+        return mIsMappingWrite;
     }
 
     bool Buffer::CheckGetMappedRangeOffsetSize(size_t offset, size_t size) const {
@@ -427,8 +527,10 @@ namespace dawn_wire { namespace client {
 
         mMapOffset = 0;
         mMapSize = 0;
-        mWriteHandle = nullptr;
-        mReadHandle = nullptr;
+        if (destruction) {
+            mWriteHandle = nullptr;
+            mReadHandle = nullptr;
+        }
         mMappedData = nullptr;
     }
 
