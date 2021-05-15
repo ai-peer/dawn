@@ -16,6 +16,7 @@
 #define DAWNWIRE_CLIENT_BUFFER_H_
 
 #include <dawn/webgpu.h>
+#include <dawn/webgpu_cpp.h>
 
 #include "dawn_wire/WireClient.h"
 #include "dawn_wire/client/ObjectBase.h"
@@ -37,8 +38,8 @@ namespace dawn_wire { namespace client {
 
         bool OnMapAsyncCallback(uint32_t requestSerial,
                                 uint32_t status,
-                                uint64_t readInitialDataInfoLength,
-                                const uint8_t* readInitialDataInfo);
+                                uint64_t readDataUpdateInfoLength,
+                                const uint8_t* readDataUpdateInfo);
         void MapAsync(WGPUMapModeFlags mode,
                       size_t offset,
                       size_t size,
@@ -75,9 +76,7 @@ namespace dawn_wire { namespace client {
             // from the server take precedence over the client-side status.
             WGPUBufferMapAsyncStatus clientStatus = WGPUBufferMapAsyncStatus_Success;
 
-            // TODO(enga): Use a tagged pointer to save space.
-            std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
-            std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
+            wgpu::MapMode type;
         };
         std::map<uint32_t, MapRequestData> mRequests;
         uint32_t mRequestSerial = 0;
@@ -88,6 +87,10 @@ namespace dawn_wire { namespace client {
         // TODO(enga): Use a tagged pointer to save space.
         std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
         std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
+        bool mIsMappingRead = false;
+        bool mIsMappingWrite = false;
+        bool mDestructWriteHandleOnUnmap = false;
+
         void* mMappedData = nullptr;
         size_t mMapOffset = 0;
         size_t mMapSize = 0;
