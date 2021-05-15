@@ -132,8 +132,7 @@ namespace dawn_wire {
 
                 // Set the target for writes from the client. DeserializeFlush should copy data
                 // into the target.
-                // TODO(dawn:773): only set backing buffer pointer data
-                void SetTarget(void* data, size_t dataLength);
+                void SetTarget(void* data);
 
                 // TODO(dawn:773): remove after update on chromium side.
                 virtual bool DeserializeFlush(const void* deserializePointer,
@@ -152,7 +151,7 @@ namespace dawn_wire {
 
               protected:
                 void* mTargetData = nullptr;
-                // TODO(dawn:773): only set backing buffer pointer data
+                // TODO(dawn:773): remove after update on chromium side
                 size_t mDataLength = 0;
 
               private:
