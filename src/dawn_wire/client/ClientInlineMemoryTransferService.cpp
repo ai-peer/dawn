@@ -24,7 +24,7 @@ namespace dawn_wire { namespace client {
     class InlineMemoryTransferService : public MemoryTransferService {
         class ReadHandleImpl : public ReadHandle {
           public:
-            explicit ReadHandleImpl(size_t size) : mSize(size) {
+            explicit ReadHandleImpl(size_t size) : mSize(size), mOffset(0) {
             }
 
             ~ReadHandleImpl() override = default;
@@ -34,6 +34,11 @@ namespace dawn_wire { namespace client {
             }
 
             void SerializeCreate(void*) override {
+            }
+
+            void ResetMapSizeAndOffset(size_t size, size_t offset) override {
+                mSize = size;
+                mOffset = offset;
             }
 
             bool DeserializeInitialData(const void* deserializePointer,
@@ -48,6 +53,8 @@ namespace dawn_wire { namespace client {
                 if (!mStagingData) {
                     return false;
                 }
+                // memcpy(mStagingData.get(), static_cast<const uint8_t*>(deserializePointer) +
+                // mOffset, mSize);
                 memcpy(mStagingData.get(), deserializePointer, mSize);
 
                 ASSERT(data != nullptr);
@@ -60,12 +67,13 @@ namespace dawn_wire { namespace client {
 
           private:
             size_t mSize;
+            size_t mOffset;
             std::unique_ptr<uint8_t[]> mStagingData;
         };
 
         class WriteHandleImpl : public WriteHandle {
           public:
-            explicit WriteHandleImpl(size_t size) : mSize(size) {
+            explicit WriteHandleImpl(size_t size) : mSize(size), mOffset(0) {
             }
 
             ~WriteHandleImpl() override = default;
@@ -75,6 +83,11 @@ namespace dawn_wire { namespace client {
             }
 
             void SerializeCreate(void*) override {
+            }
+
+            void ResetMapSizeAndOffset(size_t size, size_t offset) override {
+                mSize = size;
+                mOffset = offset;
             }
 
             std::pair<void*, size_t> Open() override {
@@ -90,14 +103,21 @@ namespace dawn_wire { namespace client {
                 return mSize;
             }
 
+            // size_t SerializeFlushOffset() override {
+            //     return mOffset;
+            // }
+
             void SerializeFlush(void* serializePointer) override {
                 ASSERT(mStagingData != nullptr);
                 ASSERT(serializePointer != nullptr);
+                // memcpy(static_cast<uint8_t*>(serializePointer) + mOffset, mStagingData.get(),
+                // mSize);
                 memcpy(serializePointer, mStagingData.get(), mSize);
             }
 
           private:
             size_t mSize;
+            size_t mOffset;
             std::unique_ptr<uint8_t[]> mStagingData;
         };
 
