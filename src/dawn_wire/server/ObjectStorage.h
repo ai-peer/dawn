@@ -59,8 +59,10 @@ namespace dawn_wire { namespace server {
     template <>
     struct ObjectData<WGPUBuffer> : public ObjectDataBase<WGPUBuffer> {
         // TODO(enga): Use a tagged pointer to save space.
-        std::unique_ptr<MemoryTransferService::ReadHandle> readHandle;
-        std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle;
+        // std::unique_ptr<MemoryTransferService::ReadHandle> readHandle;
+        // std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle;
+        std::shared_ptr<MemoryTransferService::ReadHandle> readHandle;
+        std::shared_ptr<MemoryTransferService::WriteHandle> writeHandle;
         BufferMapWriteState mapWriteState = BufferMapWriteState::Unmapped;
     };
 
