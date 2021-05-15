@@ -98,7 +98,14 @@ namespace dawn_wire {
                 // Serialize into |serializePointer| so the client can update handle data.
                 virtual void SerializeInitialData(const void* data,
                                                   size_t dataLength,
-                                                  void* serializePointer) = 0;
+                                                  void* serializePointer) {
+                }
+
+                virtual void UpdateData(const void* data,
+                                        size_t size,
+                                        size_t offset,
+                                        void* clientDataPointer) {
+                }
 
               private:
                 ReadHandle(const ReadHandle&) = delete;
@@ -112,7 +119,7 @@ namespace dawn_wire {
 
                 // Set the target for writes from the client. DeserializeFlush should copy data
                 // into the target.
-                void SetTarget(void* data, size_t dataLength);
+                void SetTarget(void* data, size_t dataLength, size_t offset);
 
                 // This function takes in the serialized result of
                 // client::MemoryTransferService::WriteHandle::SerializeFlush.
@@ -122,6 +129,7 @@ namespace dawn_wire {
               protected:
                 void* mTargetData = nullptr;
                 size_t mDataLength = 0;
+                size_t mOffset = 0;
 
               private:
                 WriteHandle(const WriteHandle&) = delete;

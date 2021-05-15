@@ -41,6 +41,17 @@ namespace dawn_wire { namespace server {
                     memcpy(serializePointer, data, dataLength);
                 }
             }
+
+            void UpdateData(const void* data,
+                            size_t size,
+                            size_t offset,
+                            void* clientDataPointer) override {
+                if (size > 0) {
+                    ASSERT(data != nullptr);
+                    ASSERT(clientDataPointer != nullptr);
+                    memcpy(clientDataPointer, data, size);
+                }
+            }
         };
 
         class WriteHandleImpl : public WriteHandle {
@@ -54,7 +65,8 @@ namespace dawn_wire { namespace server {
                     deserializePointer == nullptr) {
                     return false;
                 }
-                memcpy(mTargetData, deserializePointer, mDataLength);
+                memcpy(mTargetData, static_cast<const uint8_t*>(deserializePointer) + mOffset,
+                       mDataLength);
                 return true;
             }
         };
