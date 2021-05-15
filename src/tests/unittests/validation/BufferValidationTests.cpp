@@ -169,6 +169,27 @@ TEST_F(BufferValidationTest, MapAsync_ErrorBuffer) {
     AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
 }
 
+TEST_F(BufferValidationTest, MapAsync_ErrorMayAsyncUsage) {
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 4;
+        desc.usage = wgpu::BufferUsage::MapRead;
+        wgpu::Buffer buffer;
+        buffer = device.CreateBuffer(&desc);
+
+        AssertMapAsyncError(buffer, wgpu::MapMode::Write, 0, 4);
+    }
+    {
+        wgpu::BufferDescriptor desc;
+        desc.size = 4;
+        desc.usage = wgpu::BufferUsage::MapWrite;
+        wgpu::Buffer buffer;
+        buffer = device.CreateBuffer(&desc);
+
+        AssertMapAsyncError(buffer, wgpu::MapMode::Read, 0, 4);
+    }
+}
+
 // Test map async with an invalid offset and size alignment.
 TEST_F(BufferValidationTest, MapAsync_OffsetSizeAlignment) {
     // Control case, offset aligned to 8 and size to 4 is valid
