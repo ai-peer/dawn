@@ -975,6 +975,7 @@ std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,
     deferred.line = line;
     deferred.readbackSlot = readback.slot;
     deferred.readbackOffset = readback.offset;
+    // deferred.readbackOffset = offset;
     deferred.size = size;
     deferred.rowBytes = size;
     deferred.bytesPerRow = size;
@@ -1096,7 +1097,8 @@ void DawnTestBase::MapSlotsSynchronously() {
         MapReadUserdata* userdata = new MapReadUserdata{this, i};
 
         const ReadbackSlot& slot = mReadbackSlots[i];
-        slot.buffer.MapAsync(wgpu::MapMode::Read, 0, 0, SlotMapCallback, userdata);
+        // slot.buffer.MapAsync(wgpu::MapMode::Read, 0, 0, SlotMapCallback, userdata);
+        slot.buffer.MapAsync(wgpu::MapMode::Read, 0, slot.bufferSize, SlotMapCallback, userdata);
     }
 
     // Busy wait until all map operations are done.

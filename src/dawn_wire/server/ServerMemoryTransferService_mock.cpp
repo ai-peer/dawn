@@ -47,10 +47,13 @@ namespace dawn_wire { namespace server {
 
     bool MockMemoryTransferService::MockWriteHandle::DeserializeFlush(
         const void* deserializePointer,
-        size_t deserializeSize) {
+        size_t deserializeSize,
+        size_t deserializeOffset) {
         ASSERT(deserializeSize % sizeof(uint32_t) == 0);
+        ASSERT(deserializeOffset % sizeof(uint32_t) == 0);
         return mService->OnWriteHandleDeserializeFlush(
-            this, reinterpret_cast<const uint32_t*>(deserializePointer), deserializeSize);
+            this, reinterpret_cast<const uint32_t*>(deserializePointer), deserializeSize,
+            deserializeOffset);
     }
 
     const uint32_t* MockMemoryTransferService::MockWriteHandle::GetData() const {

@@ -43,7 +43,9 @@ namespace dawn_wire { namespace server {
             MockWriteHandle(MockMemoryTransferService* service);
             ~MockWriteHandle() override;
 
-            bool DeserializeFlush(const void* deserializePointer, size_t deserializeSize) override;
+            bool DeserializeFlush(const void* deserializePointer,
+                                  size_t deserializeSize,
+                                  size_t deserializeOffset) override;
 
             const uint32_t* GetData() const;
 
@@ -92,7 +94,8 @@ namespace dawn_wire { namespace server {
                     OnWriteHandleDeserializeFlush,
                     (const WriteHandle* writeHandle,
                      const uint32_t* deserializePointer,
-                     size_t deserializeSize));
+                     size_t deserializeSize,
+                     size_t deserializeOffset));
         MOCK_METHOD(void, OnWriteHandleDestroy, (const WriteHandle* writeHandle));
     };
 

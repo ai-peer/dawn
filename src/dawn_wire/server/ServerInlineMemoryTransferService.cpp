@@ -49,12 +49,17 @@ namespace dawn_wire { namespace server {
             }
             ~WriteHandleImpl() override = default;
 
-            bool DeserializeFlush(const void* deserializePointer, size_t deserializeSize) override {
+            bool DeserializeFlush(const void* deserializePointer,
+                                  size_t deserializeSize,
+                                  size_t deserializeOffset) override {
                 if (deserializeSize != mDataLength || mTargetData == nullptr ||
                     deserializePointer == nullptr) {
                     return false;
                 }
-                memcpy(mTargetData, deserializePointer, mDataLength);
+                // memcpy(mTargetData, deserializePointer, mDataLength);
+                // memcpy(static_cast<uint8_t*>(mTargetData) + deserializeOffset,
+                // deserializePointer, mDataLength);
+                memcpy(static_cast<uint8_t*>(mTargetData), deserializePointer, mDataLength);
                 return true;
             }
         };

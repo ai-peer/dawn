@@ -30,6 +30,7 @@
         "buffer update mapped data": [
             { "name": "buffer id", "type": "ObjectId" },
             { "name": "write flush info length", "type": "uint64_t" },
+            { "name": "write flush info offset", "type": "uint64_t" },
             { "name": "write flush info", "type": "uint8_t", "annotation": "const*", "length": "write flush info length", "skip_serialize": true}
         ],
         "device create buffer": [

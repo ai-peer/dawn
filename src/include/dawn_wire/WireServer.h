@@ -117,7 +117,8 @@ namespace dawn_wire {
                 // This function takes in the serialized result of
                 // client::MemoryTransferService::WriteHandle::SerializeFlush.
                 virtual bool DeserializeFlush(const void* deserializePointer,
-                                              size_t deserializeSize) = 0;
+                                              size_t deserializeSize,
+                                              size_t deserializeOffset) = 0;
 
               protected:
                 void* mTargetData = nullptr;
