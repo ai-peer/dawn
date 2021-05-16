@@ -33,6 +33,23 @@
       "message": "Looks reasonable, but I\u0027d like Rafael to review",
       "revId": "6ba02188933d46d42587d62d6c22f16a40724acb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd3b42a8_67866160",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-16T15:22:29Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "6ba02188933d46d42587d62d6c22f16a40724acb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
