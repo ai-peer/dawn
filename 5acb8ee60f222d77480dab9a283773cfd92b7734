@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ed95538_54f04b51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-16T15:15:36Z",
+      "side": 1,
+      "message": "Thanks for the fix!\n\nWe are in the process of removing the deprecated vertex formats at which point VertexFormatUtils will disappear. Can you add a comment like \"TODO(dawn:695): Remove the dawncpp_headers dependency when VerteFormatUtils is deleted.\" so we don\u0027t forget?\n\n+CC Brandon",
+      "revId": "5acb8ee60f222d77480dab9a283773cfd92b7734",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
