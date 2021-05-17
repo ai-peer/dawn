@@ -16,6 +16,24 @@
       "message": "Thanks for the fix!\n\nWe are in the process of removing the deprecated vertex formats at which point VertexFormatUtils will disappear. Can you add a comment like \"TODO(dawn:695): Remove the dawncpp_headers dependency when VerteFormatUtils is deleted.\" so we don\u0027t forget?\n\n+CC Brandon",
       "revId": "5acb8ee60f222d77480dab9a283773cfd92b7734",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41be3aca_1285839f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-05-17T13:07:00Z",
+      "side": 1,
+      "message": "The functions\n    uint32_t VertexFormatNumComponents(wgpu::VertexFormat format);\n    size_t VertexFormatComponentSize(wgpu::VertexFormat format);\n    size_t VertexFormatSize(wgpu::VertexFormat format);\n    const char* GetWGSLVertexFormatType(wgpu::VertexFormat textureFormat);\nstill depend on wgpu::VertexFormat and aren\u0027t related to the deprecation. There will still be a need for the dependency after the deprecation phase is over.",
+      "parentUuid": "8ed95538_54f04b51",
+      "revId": "5acb8ee60f222d77480dab9a283773cfd92b7734",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
