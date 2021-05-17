@@ -50,6 +50,23 @@
       "message": "Thanks for the reviews, all! I\u0027m holding off on rebasing and landing this because it appears that Skia is still making use of Fences and I\u0027m reluctant to break their ability to roll Dawn. I\u0027ll reach out to their team and try to make arrangements for transitioning off the deprecated mechanisms.",
       "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e4647e_a627fa1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T17:58:32Z",
+      "side": 1,
+      "message": "Stephen, can you take a look at Skia to remove the remaining usages of fences if any?",
+      "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
