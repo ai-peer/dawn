@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "df8b83aa_72646126",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "Did you mean to also add GLES to the lazy texture init tests?",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "dee85f63_8c3071c8",
@@ -14,6 +31,120 @@
       "writtenOn": "2021-05-15T02:32:55Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "379abb2d_fb9bbbee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "LGTN overall",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ce2d2f1_d1ecf3a8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "I think this should be 0 and 1, or at least ASSERTed that it is 0 and 1 because texture view creation of 3D textures shouldn\u0027t allow selecting WSlices.",
+      "range": {
+        "startLine": 838,
+        "startChar": 0,
+        "endLine": 839,
+        "endChar": 53
+      },
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25d3b31_1c333d64",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "Why do we need to separate the various types?",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b70a6a8_6f20fbe5",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "nit: Maybe we can continue; here to decrease indentation level in the rest?",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d862715_cfd92842",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "Do we need to do this check in other backends too?",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c866eafd_d13700ed",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:40:35Z",
+      "side": 1,
+      "message": "Why is metal different but only for 3D textures? Maybe we could have a custom expectation for NonZero that takes the wgpu::TextureFormat and checks that each texel is the same and non-zero.",
+      "range": {
+        "startLine": 158,
+        "startChar": 36,
+        "endLine": 158,
+        "endChar": 45
+      },
       "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
