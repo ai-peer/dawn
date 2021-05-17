@@ -34,6 +34,24 @@
       "parentUuid": "8ed95538_54f04b51",
       "revId": "5acb8ee60f222d77480dab9a283773cfd92b7734",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caf137f7_a458fd28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T13:11:40Z",
+      "side": 1,
+      "message": "IIRC functions in that file can either be moved inside dawn_native or in dawn_utils once the vertex format deprecation is over. Brandon do you remember?",
+      "parentUuid": "41be3aca_1285839f",
+      "revId": "5acb8ee60f222d77480dab9a283773cfd92b7734",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
