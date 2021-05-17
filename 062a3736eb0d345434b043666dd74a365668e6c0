@@ -176,6 +176,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa916ae0_f8dca706",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-17T15:03:30Z",
+      "side": 1,
+      "message": "Ack, done.\n\nI had to fight mild-OCD to put \"open\" in one backend (\"opengles\") but not in the other (\"desktop_gl\"). The other options I considered would be \"gles\" and \"desktop_gl\" or \"opengles\" and \"desktop_opengl\" but both seemed awkward.\n\nI also added a third #define to reflect the third feature var. \"DAWN_ENABLE_BACKEND_OPENGL\" is probably mis-named now, since it\u0027s not really a backend. Perhaps it should be \"DAWN_ENABLE_OPENGL\"; LMK what you prefer.",
+      "parentUuid": "f4c8e0cf_e4ca36db",
+      "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d9a07207_1184e159",
