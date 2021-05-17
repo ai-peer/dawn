@@ -255,4 +255,41 @@ namespace dawn_native { namespace d3d12 {
         return copies;
     }
 
+    TextureCopySubresource Compute3DTextureCopySplits(Origin3D origin,
+                                               Extent3D copySize,
+                                               const TexelBlockInfo& blockInfo,
+                                               uint64_t offset,
+                                               uint32_t bytesPerRow,
+                                               uint32_t rowsPerImage,
+                                               bool is3DTexture) {
+
+        wgpu::Extent3D copySize2D = copySize;
+        copySize2D.depthOrArrayLayers = 1;
+
+        auto copies = ComputeTextureCopySubresource(
+            origin, copySize2D, blockInfo, offset, bytesPerRow, rowsPerImage);
+
+        uint32_t originalCopyCount = copies.count;
+        for (uint32_t copyIndex = 0; copyIndex < originalCopyCount; copyIndex++) {
+            CopyInfo* copy = &copies.copies[copyIndex];
+            copy->copySize.depthOrArrayLayers = copySize.
+
+            if (/*last row would be problematic*/) {
+                CopyInfo* newCopy = &copies.copies[copies.count];
+                copies.count ++;
+
+                *newCopy = *copy;
+                copy->copySize.height = 1;
+                copy->textureOffset += copy->copySize.height
+
+                // Remove the last row.
+                copy->copySize.height--;
+                if (copy->copySize.height == 0) {
+                    // Remove the whole copy.
+                }
+            }
+        }
+
+        return copies;
+    }
 }}  // namespace dawn_native::d3d12
