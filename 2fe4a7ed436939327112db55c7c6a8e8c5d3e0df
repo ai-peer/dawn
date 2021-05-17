@@ -94,6 +94,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04ee944c_f28084bd",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-17T16:20:45Z",
+      "side": 1,
+      "message": "Looks like the NonZero clear values have irreconcileable differences.",
+      "parentUuid": "a25d3b31_1c333d64",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72f1df6_a5b174ea",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-17T16:20:45Z",
+      "side": 1,
+      "message": "Did you consider scoping these to just above the corresponding ClearBuffer* call? It might be slightly less efficient, but writing 16 bytes per mip level doesn\u0027t seem too onerous. (Or if we really care about that, perhaps the zero and non-zero values could be constexpr that we choose from at the call site.)",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b70a6a8_6f20fbe5",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 11
