@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e9d7952_cf2a6b81",
+        "filename": "src/dawn_native/TaskManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-17T02:09:33Z",
+      "side": 1,
+      "message": "Oh today I realized I can implement WaitForTasks() with std::condition_variable instead of  { while(HasPendingTasks());}, please ignore my previous comment.",
+      "parentUuid": "2f841e16_0ca2a076",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 69
+      },
+      "revId": "e6876431bbdb15af303a448d8091a3115ed1ad55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3823cbab_b5b8030b",
         "filename": "src/dawn_native/TaskManager.cpp",
         "patchSetId": 1
