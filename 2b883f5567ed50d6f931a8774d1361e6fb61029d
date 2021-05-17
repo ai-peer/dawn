@@ -33,6 +33,23 @@
       "message": "LGTM, Stephen can you review too?",
       "revId": "2b883f5567ed50d6f931a8774d1361e6fb61029d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1513a22_48068b45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:45:00Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "2b883f5567ed50d6f931a8774d1361e6fb61029d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
