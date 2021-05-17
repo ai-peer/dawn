@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5309cf09_c46c14a2",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T09:06:33Z",
+      "side": 1,
+      "message": "Thanks for the detailed drawing, CL comments and code comments. This is amazingly mind bending but I think I get it now.\n\nI think I have an idea on how to make it more comprehensible. We could do something similar to Compute2DTextureCopySplit / Compute2DTextureCopySplits. What we want is for the 3D texture splits to be an extrusion of the 2D split but then we need some fixup, like in Compute2DTextureCopySplits:\n\n - Get the Compute2DTextureCopySplit\n - For each copy:\n   - If it doesn\u0027t start with an empty row:\n    - Extend it to 3D.\n   - If it start with an empty row:\n    - Extent it to 3D - 1 row.\n    - Add a copy just for the last row.\n\nThis way we reuse the understanding of the split between Compute2DTextureCopySplit / Compute2DTextureCopySplits and make the splitting of each slice and the last row orthogonal. (the only non-orthogonality is that out of the max 2 splits for each slice, at most one of them will need a last-row split).\n\nLet\u0027s talk about it a bit more at today\u0027s meeting.",
+      "parentUuid": "574101c5_528ae4e1",
+      "range": {
+        "startLine": 501,
+        "startChar": 0,
+        "endLine": 504,
+        "endChar": 0
+      },
+      "revId": "6baf64c153083813682ad0a7b63ca727788945b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbf96783_e3ee3050",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 3
