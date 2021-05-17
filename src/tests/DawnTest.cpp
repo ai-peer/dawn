@@ -37,10 +37,10 @@
 #include <sstream>
 #include <unordered_map>
 
-#if defined(DAWN_ENABLE_BACKEND_OPENGL) || defined(DAWN_ENABLE_BACKEND_OPENGLES)
+#if defined(DAWN_ENABLE_BACKEND_OPENGL)
 #    include "GLFW/glfw3.h"
 #    include "dawn_native/OpenGLBackend.h"
-#endif  // DAWN_ENABLE_BACKEND_OPENGL || DAWN_ENABLE_BACKEND_OPENGLES
+#endif  // DAWN_ENABLE_BACKEND_OPENGL
 
 namespace {
 
@@ -386,7 +386,7 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     instance->SetBackendValidationLevel(mBackendValidationLevel);
     instance->DiscoverDefaultAdapters();
 
-#ifdef DAWN_ENABLE_BACKEND_OPENGL
+#ifdef DAWN_ENABLE_BACKEND_DESKTOP_GL
     if (!glfwInit()) {
         return instance;
     }
@@ -403,9 +403,9 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
     adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptions);
-#endif  // DAWN_ENABLE_BACKEND_OPENGL
+#endif  // DAWN_ENABLE_BACKEND_DESKTOP_GL
 
-#ifdef DAWN_ENABLE_BACKEND_OPENGLES
+#ifdef DAWN_ENABLE_BACKEND_GL_ES
 
     if (GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").empty()) {
         SetEnvironmentVar("ANGLE_DEFAULT_PLATFORM", "swiftshader");
@@ -427,7 +427,7 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptionsES);
     glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
-#endif  // DAWN_ENABLE_BACKEND_OPENGLES
+#endif  // DAWN_ENABLE_BACKEND_GL_ES
 
     return instance;
 }
@@ -908,16 +908,16 @@ void DawnTestBase::SetUp() {
 
     device.SetUncapturedErrorCallback(OnDeviceError, this);
     device.SetDeviceLostCallback(OnDeviceLost, this);
-#if defined(DAWN_ENABLE_BACKEND_OPENGL)
+#if defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
     if (IsOpenGL()) {
         glfwMakeContextCurrent(gTestEnv->GetOpenGLWindow());
     }
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGL)
-#if defined(DAWN_ENABLE_BACKEND_OPENGLES)
+#endif  // defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
+#if defined(DAWN_ENABLE_BACKEND_GL_ES)
     if (IsOpenGLES()) {
         glfwMakeContextCurrent(gTestEnv->GetOpenGLESWindow());
     }
-#endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
+#endif  // defined(DAWN_ENABLE_BACKEND_GL_ES)
 }
 
 void DawnTestBase::TearDown() {

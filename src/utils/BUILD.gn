@@ -175,7 +175,7 @@ if (dawn_standalone) {
       sources += [ "NullBinding.cpp" ]
     }
 
-    if (dawn_enable_opengl || dawn_enable_opengles) {
+    if (dawn_enable_opengl) {
       sources += [ "OpenGLBinding.cpp" ]
     }
 

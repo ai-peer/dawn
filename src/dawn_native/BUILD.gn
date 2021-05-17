@@ -101,7 +101,7 @@ dawn_json_generator("dawn_native_utils_gen") {
   ]
 }
 
-if (dawn_enable_opengl || dawn_enable_opengles) {
+if (dawn_enable_opengl) {
   dawn_generator("dawn_native_opengl_loader_gen") {
     script = "${dawn_root}/generator/opengl_loader_generator.py"
     args = [
@@ -472,7 +472,7 @@ source_set("dawn_native_sources") {
     ]
   }
 
-  if (dawn_enable_opengl || dawn_enable_opengles) {
+  if (dawn_enable_opengl) {
     public_deps += [
       ":dawn_native_opengl_loader_gen",
       "${dawn_root}/third_party/khronos:khronos_platform",
@@ -685,7 +685,7 @@ dawn_component("dawn_native") {
   if (dawn_enable_null) {
     sources += [ "null/NullBackend.cpp" ]
   }
-  if (dawn_enable_opengl || dawn_enable_opengles) {
+  if (dawn_enable_opengl) {
     sources += [ "opengl/OpenGLBackend.cpp" ]
   }
   if (dawn_enable_vulkan) {
