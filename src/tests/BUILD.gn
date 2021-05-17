@@ -381,6 +381,7 @@ source_set("dawn_end2end_tests_sources") {
 
   if (dawn_enable_opengl) {
     assert(dawn_supports_glfw_for_windowing)
+    sources += [ "end2end/EGLImageWrappingTests.cpp" ]
   }
 
   if (dawn_supports_glfw_for_windowing) {
