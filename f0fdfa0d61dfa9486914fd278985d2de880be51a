@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "279a6cfa_b9558381",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-05-17T03:28:15Z",
+      "side": 0,
+      "message": "In order to cover the check point of whether the query index of availability is calculated correctly.",
+      "parentUuid": "cc8aff91_a6cbd575",
+      "range": {
+        "startLine": 792,
+        "startChar": 0,
+        "endLine": 792,
+        "endChar": 44
+      },
+      "revId": "f0fdfa0d61dfa9486914fd278985d2de880be51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04457808_2d9c3656",
@@ -37,6 +61,41 @@
       "writtenOn": "2021-05-13T17:49:40Z",
       "side": 0,
       "message": "Do we have tests for / is it valid to resolve a query set twice into the same destination buffer (with potentially overlapping ranges)?",
+      "revId": "f0fdfa0d61dfa9486914fd278985d2de880be51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d676be_8208a552",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-05-17T03:28:15Z",
+      "side": 0,
+      "message": "We don\u0027t have such a test. And it\u0027s a valid case, add it to end2end tests.",
+      "parentUuid": "04457808_2d9c3656",
+      "revId": "f0fdfa0d61dfa9486914fd278985d2de880be51a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83bf8a93_1921c7b8",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-05-17T03:28:15Z",
+      "side": 0,
+      "message": "Even remove the skip on Metal, this case is not tested on trybots due to timestamp query is not supported on them. Test it pass on local (macOS 11.0.1, Intel and AMD GPUs).",
       "revId": "f0fdfa0d61dfa9486914fd278985d2de880be51a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
