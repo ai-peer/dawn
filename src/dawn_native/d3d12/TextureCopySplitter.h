@@ -43,26 +43,32 @@ namespace dawn_native { namespace d3d12 {
         std::array<CopyInfo, kMaxTextureCopyRegions> copies;
     };
 
-    struct TextureCopySplits {
+    struct Texture2DCopySplit {
         static constexpr uint32_t kMaxTextureCopySubresources = 2;
 
         std::array<TextureCopySubresource, kMaxTextureCopySubresources> copySubresources;
     };
 
-    TextureCopySubresource ComputeTextureCopySubresource(Origin3D origin,
-                                                         Extent3D copySize,
-                                                         const TexelBlockInfo& blockInfo,
-                                                         uint64_t offset,
-                                                         uint32_t bytesPerRow,
-                                                         uint32_t rowsPerImage);
+    TextureCopySubresource Compute2DTextureCopySplit(Origin3D origin,
+                                                 Extent3D copySize,
+                                                 const TexelBlockInfo& blockInfo,
+                                                 uint64_t offset,
+                                                 uint32_t bytesPerRow,
+                                                 uint32_t rowsPerImage);
 
-    TextureCopySplits ComputeTextureCopySplits(Origin3D origin,
-                                               Extent3D copySize,
-                                               const TexelBlockInfo& blockInfo,
-                                               uint64_t offset,
-                                               uint32_t bytesPerRow,
-                                               uint32_t rowsPerImage,
-                                               bool is3DTexture = false);
+    Texture2DCopySplits Compute2DTextureCopySplits(Origin3D origin,
+                                                 Extent3D copySize,
+                                                 const TexelBlockInfo& blockInfo,
+                                                 uint64_t offset,
+                                                 uint32_t bytesPerRow,
+                                                 uint32_t rowsPerImage);
+
+    TextureCopySubresource Compute3DTextureCopySplits(Origin3D origin,
+                                                 Extent3D copySize,
+                                                 const TexelBlockInfo& blockInfo,
+                                                 uint64_t offset,
+                                                 uint32_t bytesPerRow,
+                                                 uint32_t rowsPerImage);
 }}  // namespace dawn_native::d3d12
 
 #endif  // DAWNNATIVE_D3D12_TEXTURECOPYSPLITTER_H_
