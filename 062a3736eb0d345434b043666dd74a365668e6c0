@@ -104,6 +104,57 @@
       "parentUuid": "dd7cb7c6_c53c744b",
       "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46effa5b_2ff56e0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:24:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "245b70b2_f6a0019f",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:24:43Z",
+      "side": 1,
+      "message": "This idea looks good overall, but what do you think of having an extra variable and define for all opengl? They would become:\n\n - dawn_enable_opengles / DAWN_ENABLE_OPENGLES, in the declare_args() here\n - dawn_enable_dekstop_gl / DAWN_ENABLE_DESKTOP_GL in the declare_args() here\n - dawn_enable_opengl / DAWN_ENABLE_OPENGL that\u0027s set to dawn_enable_opengles | dawn_enable_desktop_gl.\n\nIn most cases we only care whether one of the GL backends is enabled, and only in a few cases (in InstanceBase and BackendBindings?) we care about the difference.",
+      "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a07207_1184e159",
+        "filename": "src/utils/BackendBinding.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:24:43Z",
+      "side": 1,
+      "message": "How hard would it be to implement the \"new\" swapchain for GL? It would allow removing this file completely as well as some other hacks.",
+      "revId": "062a3736eb0d345434b043666dd74a365668e6c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
