@@ -16,6 +16,131 @@
       "message": "WDYT? I found myself doing a lot of either:\n- Factoring stuff into \"silly\" helpers like CreateTexture that does various test-specific defaults.\n  This is not nice for test readability because you can\u0027t see the whole texture descriptor in the test\n- Copy-pasting lots of tests with slight modifications - not good for maintenance.\n- Moving multiple tests into a single test function so I can share code better without lots of helpers.\n  But then we lose the ability to do DAWN_SKIP_TEST_IF for a specific part of the test.\n\nFor texture initialization tests, for example, I want to be able to do something like:\n\nTEST_P(Cls, Name) {\n  wgpu::TextureDescriptor desc;\n  desc.dimension \u003d GetParam().dimension;\n  desc.size \u003d { kWidth, kHeight, GetParam().depthOrArrayLayers };\n\n  // etc.\n}\n\nOverall, this is just resurfacing parameterization that gtest\u0027s INSTANTIATE_TEST_SUITE_P is supposed to help with. We just didn\u0027t have it at first because of the complexity of filtering based on available backends.",
       "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07d38100_df0283c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa697c4_c6148bd7",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "Could we have this be in a file in common/ like \"PreprocessorMagic.h\"? ^^ Also it would be nice to have more comments to explain how the magic works. For example I\u0027m not sure I understand why DAWN_PP_CONCATENATE needs 3 levels.",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "999e38cc_1e1d02f2",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "Will this macro be removed in favor of DAWN_INSTANTIATE_TEST_P (or better DAWN_INSTANTIATE_TEST_P will be renamed to DAWN_INSTANTIATE_TEST)?",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1039d24e_ed607383",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "nit: that",
+      "range": {
+        "startLine": 533,
+        "startChar": 77,
+        "endLine": 533,
+        "endChar": 78
+      },
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05a366bc_571377b0",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "nit: the m_ prefix is a bit weird, but I don\u0027t know a better solution given the fields are given as CamelCase.",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b721378_a1dec22e",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "Can we have doc for this macro as well?",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7051c0eb_7cdb6c8b",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-17T08:19:40Z",
+      "side": 1,
+      "message": "nit: technically __ is reverved for the compiler. Maybe use _Dawn_Foo?",
+      "revId": "4db483f82b5d76f0a066c8508bfca2b85a287705",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
