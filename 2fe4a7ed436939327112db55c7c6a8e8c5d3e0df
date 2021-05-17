@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "b7f0fbaa_90c49337",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "Those tests are actually already enabled though on ES, though specific tests are disabled because glTextureView for snorm read.",
+      "parentUuid": "df8b83aa_72646126",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dee85f63_8c3071c8",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
@@ -77,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75fe9094_96a6f249",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 839,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "For .createTextureView() yes, but the 3D texture clearing code is also using this helper with (z, 1) in a loop over all slices in the 3D texture to do the clearing.\n\nFirstWSlice\u003d0, WSize\u003d1 isn\u0027t really a restriction of the D3D12 backend.",
+      "parentUuid": "2ce2d2f1_d1ecf3a8",
+      "range": {
+        "startLine": 838,
+        "startChar": 0,
+        "endLine": 839,
+        "endChar": 53
+      },
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a25d3b31_1c333d64",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 11
@@ -112,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9a708ce7_a07b09ab",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "Indeed, we\u0027re trying to clear to either 0xFFFFFFF...FF (all bytes set) or the texel\u0027s representation of \"1\", depending on the type of the texture and backend. As Corentin suggested, we could consider adding an expectation helper in the test which expects some constant non-zero value but doesn\u0027t care what the value is. And that would simplify some of this clearing code. But, then we lose the ability to test exactly that the initialization code works how we expect.",
+      "parentUuid": "04ee944c_f28084bd",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c72f1df6_a5b174ea",
         "filename": "src/dawn_native/opengl/TextureGL.cpp",
         "patchSetId": 11
@@ -123,6 +183,24 @@
       "writtenOn": "2021-05-17T16:20:45Z",
       "side": 1,
       "message": "Did you consider scoping these to just above the corresponding ClearBuffer* call? It might be slightly less efficient, but writing 16 bytes per mip level doesn\u0027t seem too onerous. (Or if we really care about that, perhaps the zero and non-zero values could be constexpr that we choose from at the call site.)",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ae169be_0d44a3b0",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "Used constexpr",
+      "parentUuid": "c72f1df6_a5b174ea",
       "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -140,6 +218,24 @@
       "writtenOn": "2021-05-17T08:40:35Z",
       "side": 1,
       "message": "nit: Maybe we can continue; here to decrease indentation level in the rest?",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "722c7764_82aa78a1",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b70a6a8_6f20fbe5",
       "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -163,6 +259,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c94d70a_4058e911",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "No, the other backends use DynamicUploader which checks for OOM itself.\n\nAlso though, eventually we\u0027re going to need to fix all the backends to issue multiple copies from a zero buffer if it isn\u0027t big enough. It should not be possible for zero init to fail.",
+      "parentUuid": "8d862715_cfd92842",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c866eafd_d13700ed",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 11
@@ -174,6 +288,30 @@
       "writtenOn": "2021-05-17T08:40:35Z",
       "side": 1,
       "message": "Why is metal different but only for 3D textures? Maybe we could have a custom expectation for NonZero that takes the wgpu::TextureFormat and checks that each texel is the same and non-zero.",
+      "range": {
+        "startLine": 158,
+        "startChar": 36,
+        "endLine": 158,
+        "endChar": 45
+      },
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac63383_957c9f6a",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-17T22:51:43Z",
+      "side": 1,
+      "message": "Because I thought render passes w/ 3d textures was unsupported until I realized there is a `.depthPlane` property. Now there is no difference.",
+      "parentUuid": "c866eafd_d13700ed",
       "range": {
         "startLine": 158,
         "startChar": 36,
