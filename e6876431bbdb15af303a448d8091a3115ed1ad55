@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f841e16_0ca2a076",
+        "filename": "src/dawn_native/TaskManager.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-17T01:01:24Z",
+      "side": 1,
+      "message": "I have another concern about allowing waitableEvent to be deleted inside the async function - we should be careful to call its member functions in the main thread because it may become invalid if we forget it may be deleted inside the async function.",
+      "parentUuid": "465167be_ffacc73a",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 69
+      },
+      "revId": "e6876431bbdb15af303a448d8091a3115ed1ad55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3823cbab_b5b8030b",
         "filename": "src/dawn_native/TaskManager.cpp",
         "patchSetId": 1
