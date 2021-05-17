@@ -33,6 +33,23 @@
       "message": "LGTM too, no additional comments.",
       "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29c77ec0_073654e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-17T17:53:53Z",
+      "side": 1,
+      "message": "Thanks for the reviews, all! I\u0027m holding off on rebasing and landing this because it appears that Skia is still making use of Fences and I\u0027m reluctant to break their ability to roll Dawn. I\u0027ll reach out to their team and try to make arrangements for transitioning off the deprecated mechanisms.",
+      "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
