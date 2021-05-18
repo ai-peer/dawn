@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1da1b8a_4bc9cf64",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T13:19:19Z",
+      "side": 1,
+      "message": "I realized this morning that if height !\u003d 0 then we need to copy the last row separately, but when \u003d\u003d 0 we need to copy the first \"slice\" separately and then all the others.",
+      "revId": "eb544d38ce1a730e1c29c86320fadb543d5ac125",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
