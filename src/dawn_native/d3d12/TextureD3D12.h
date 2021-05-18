@@ -42,7 +42,6 @@ namespace dawn_native { namespace d3d12 {
         static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
                                                                const TextureDescriptor* descriptor,
                                                                ComPtr<ID3D12Resource> d3d12Texture,
-                                                               ExternalMutexSerial acquireMutexKey,
                                                                bool isSwapChainTexture,
                                                                bool isInitialized);
         static ResultOrError<Ref<Texture>> Create(Device* device,
@@ -88,7 +87,6 @@ namespace dawn_native { namespace d3d12 {
         MaybeError InitializeAsInternalTexture();
         MaybeError InitializeAsExternalTexture(const TextureDescriptor* descriptor,
                                                ComPtr<ID3D12Resource> d3d12Texture,
-                                               ExternalMutexSerial acquireMutexKey,
                                                bool isSwapChainTexture);
         MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
 
@@ -121,6 +119,7 @@ namespace dawn_native { namespace d3d12 {
 
         ResourceHeapAllocation mResourceAllocation;
         bool mSwapChainTexture = false;
+        bool mIsSharedTexture = false;
 
         ExternalMutexSerial mAcquireMutexKey = ExternalMutexSerial(0);
         ComPtr<IDXGIKeyedMutex> mDxgiKeyedMutex;

@@ -220,12 +220,13 @@ namespace {
             ::CloseHandle(sharedHandle);
 
             dawn_native::d3d12::ExternalImageAccessDescriptorDXGIKeyedMutex externalAccessDesc;
-            externalAccessDesc.acquireMutexKey = 1;
             externalAccessDesc.isInitialized = true;
             externalAccessDesc.usage = static_cast<WGPUTextureUsageFlags>(textureDesc.usage);
 
             *dawnTextureOut = wgpu::Texture::Acquire(
                 externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
+
+            externalImage->BeginAccess(/*acquireMutexKey*/ 1);
         }
 
         // Vertex shader used to render a sampled texture into a quad.

@@ -65,6 +65,13 @@ namespace dawn_native { namespace d3d12 {
         ASSERT(descriptor->nextInChain == nullptr);
     }
 
+    ExternalImageDXGI::~ExternalImageDXGI() {
+        if (mDxgiKeyedMutex != nullptr) {
+            Device* backendDevice = reinterpret_cast<Device*>(mDevice);
+            backendDevice->ReleaseKeyedMutexForTexture(std::move(mDxgiKeyedMutex));
+        }
+    }
+
     WGPUTexture ExternalImageDXGI::ProduceTexture(
         WGPUDevice device,
         const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor) {
@@ -76,6 +83,17 @@ namespace dawn_native { namespace d3d12 {
             return nullptr;
         }
 
+        // TODO: Will ProduceTexture() ever be called with a d3d device from another
+        // adapter?
+        if (mDxgiKeyedMutex == nullptr) {
+            if (backendDevice->ConsumedError(
+                    backendDevice->CreateKeyedMutexForTexture(mD3D12Resource.Get()),
+                    (Microsoft::WRL::ComPtr<IDXGIKeyedMutex>*)&mDxgiKeyedMutex)) {
+                return nullptr;
+            }
+            mDevice = device;
+        }
+
         TextureDescriptor textureDescriptor = {};
         textureDescriptor.usage = static_cast<wgpu::TextureUsage>(descriptor->usage);
         textureDescriptor.dimension = static_cast<wgpu::TextureDimension>(mDimension);
@@ -85,9 +103,35 @@ namespace dawn_native { namespace d3d12 {
         textureDescriptor.sampleCount = mSampleCount;
 
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
-            &textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
-            descriptor->isSwapChainTexture, descriptor->isInitialized);
+            &textureDescriptor, mD3D12Resource, descriptor->isSwapChainTexture,
+            descriptor->isInitialized);
         return reinterpret_cast<WGPUTexture>(texture.Detach());
+    }
+
+    bool ExternalImageDXGI::BeginAccess(uint64_t acquireMutexKey) {
+        if (mDxgiKeyedMutex == nullptr) {
+            return false;
+        }
+
+        const HRESULT hr = mDxgiKeyedMutex->AcquireSync(acquireMutexKey, INFINITE);
+        if (FAILED(hr)) {
+            return false;
+        }
+
+        mAcquireMutexKey = acquireMutexKey;
+        return true;
+    }
+
+    void ExternalImageDXGI::EndAccess() {
+        if (mDxgiKeyedMutex == nullptr) {
+            return;
+        }
+
+        const HRESULT hr = mDxgiKeyedMutex->ReleaseSync(uint64_t(mAcquireMutexKey) + 1);
+        if (FAILED(hr)) {
+            dawn::ErrorLog() << "Texture unable to release mutex";
+            return;
+        }
     }
 
     // static

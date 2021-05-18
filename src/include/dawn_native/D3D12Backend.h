@@ -52,10 +52,11 @@ namespace dawn_native { namespace d3d12 {
         HANDLE sharedHandle;
     };
 
+    // TODO: Rename to ExternalImageAccessDescriptorDXGI
     struct DAWN_NATIVE_EXPORT ExternalImageAccessDescriptorDXGIKeyedMutex
         : ExternalImageAccessDescriptor {
       public:
-        uint64_t acquireMutexKey;
+        uint64_t acquireMutexKey;  // Warning: will be replaced by BeginAccess.
         bool isSwapChainTexture = false;
     };
 
@@ -65,15 +66,24 @@ namespace dawn_native { namespace d3d12 {
         static std::unique_ptr<ExternalImageDXGI> Create(
             WGPUDevice device,
             const ExternalImageDescriptorDXGISharedHandle* descriptor);
+        ~ExternalImageDXGI();
 
         WGPUTexture ProduceTexture(WGPUDevice device,
                                    const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor);
+
+        bool BeginAccess(uint64_t acquireMutexKey);
+        void EndAccess();
 
       private:
         ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                           const WGPUTextureDescriptor* descriptor);
 
+        WGPUDevice mDevice = nullptr;
+
         Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> mDxgiKeyedMutex;
+
+        uint64_t mAcquireMutexKey = 0;
 
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
         // could outlive this image.
