@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "157dde69_e150b898",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-18T16:37:31Z",
+      "side": 1,
+      "message": "PTAL. I also updated the explainer document at https://docs.google.com/document/d/1gDryVdKxUHb4i5UJB2vOXwfwk6u_mF-gzy8q6ul0JUc/edit#.",
+      "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
