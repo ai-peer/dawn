@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "32cdd074bd6f1ca3b55029bc7f821d5a0bc50af4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ef49bbe_b0c56403",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-18T08:35:28Z",
+      "side": 1,
+      "message": "Oh unfortunately there are some compilation errors...",
+      "revId": "32cdd074bd6f1ca3b55029bc7f821d5a0bc50af4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
