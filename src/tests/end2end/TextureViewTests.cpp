@@ -299,14 +299,14 @@ class TextureViewSamplingTest : public DawnTest {
             fn main([[location(0)]] texCoord : vec2<f32>) -> [[location(0)]] vec4<f32> {
                 var sc : f32 = 2.0 * texCoord.x - 1.0;
                 var tc : f32 = 2.0 * texCoord.y - 1.0;
-                return textureSample(texture0, sampler0, vec3<f32>()"
+                return textureSampleLevel(texture0, sampler0, vec3<f32>()"
                << coordToCubeMapFace << ")";
 
         if (isCubeMapArray) {
             stream << ", " << cubeMapArrayIndex;
         }
 
-        stream << R"();
+        stream << R"(, 0.0);
             })";
 
         return stream.str();
