@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "527eaa4a01f46c9c4889968c3e1bd13a3a44ebee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e2577a_da7272f2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T08:22:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "527eaa4a01f46c9c4889968c3e1bd13a3a44ebee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ce83761_a6317c5a",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T08:22:18Z",
+      "side": 1,
+      "message": "u-nit: here and below, extra space before the colon.",
+      "range": {
+        "startLine": 462,
+        "startChar": 49,
+        "endLine": 462,
+        "endChar": 50
+      },
+      "revId": "527eaa4a01f46c9c4889968c3e1bd13a3a44ebee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "231ffb2f_ac38c91c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T08:22:18Z",
+      "side": 1,
+      "message": "nit: I think the current code will output:\n\n Test suppressed : \"IsIntel() \u0026\u0026 more stuff\"\n\nWe could pass \"reason\" directly without # in DAWN_SKIP_TEST_IF_BASE and use C\u0027s compile time string concatenation with \"suppressed: \" #condition here.",
+      "revId": "527eaa4a01f46c9c4889968c3e1bd13a3a44ebee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
