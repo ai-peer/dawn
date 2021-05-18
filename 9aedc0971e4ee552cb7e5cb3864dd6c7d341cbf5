@@ -103,6 +103,24 @@
       "parentUuid": "538d654d_06263934",
       "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49b08087_093efb67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-18T15:06:19Z",
+      "side": 1,
+      "message": "Excellent! I\u0027ll rebase this and see if there\u0027s any other blockers.",
+      "parentUuid": "d9decabb_bb48b8ad",
+      "revId": "9aedc0971e4ee552cb7e5cb3864dd6c7d341cbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
