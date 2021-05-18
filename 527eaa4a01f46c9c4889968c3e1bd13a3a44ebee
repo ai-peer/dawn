@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76329a27_4592329a",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-18T21:02:40Z",
+      "side": 1,
+      "message": "I don\u0027t feel strongly about this, but if the colon is important, we can have a third argument in DAWN_SKIP_TEST_IF_BASE so we can do `DAWN_SKIP_TEST_IF_BASE(condition, \"unsupported:\", condition)`",
+      "parentUuid": "2afdc1b4_0a050330",
+      "range": {
+        "startLine": 462,
+        "startChar": 49,
+        "endLine": 462,
+        "endChar": 50
+      },
+      "revId": "527eaa4a01f46c9c4889968c3e1bd13a3a44ebee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "231ffb2f_ac38c91c",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 2
