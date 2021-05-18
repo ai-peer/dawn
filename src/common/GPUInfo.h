@@ -43,6 +43,15 @@ namespace gpu_info {
     bool IsSwiftshader(PCIVendorID vendorId, PCIDeviceID deviceId);
     bool IsWARP(PCIVendorID vendorId, PCIDeviceID deviceId);
 
+    // Do comparison between two driver versions. Currently we only support the comparison between
+    // Intel D3D driver versions.
+    // - Return -1 if version1 is older
+    // - Return 1 if version1 is newer
+    // - Return 0 if version1 and version2 represent same driver version
+    int CompareD3DDriverVersion(PCIVendorID vendorId,
+                                const uint32_t version1[4],
+                                const uint32_t version2[4]);
+
     // Intel architectures
     bool IsSkylake(PCIDeviceID deviceId);
     bool IsKabylake(PCIDeviceID deviceId);

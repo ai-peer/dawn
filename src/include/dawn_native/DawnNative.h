@@ -37,6 +37,7 @@ namespace dawn_native {
         uint32_t deviceId = 0;
         uint32_t vendorId = 0;
         std::string name;
+        uint32_t driverVersion[4];
     };
 
     // DEPRECATED: use WGPUBackendType instead.

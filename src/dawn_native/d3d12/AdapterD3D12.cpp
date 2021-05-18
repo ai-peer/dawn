@@ -88,10 +88,10 @@ namespace dawn_native { namespace d3d12 {
 
             std::ostringstream o;
             o << "D3D12 driver version ";
-            o << ((encodedVersion >> 48) & 0xFFFF) << ".";
-            o << ((encodedVersion >> 32) & 0xFFFF) << ".";
-            o << ((encodedVersion >> 16) & 0xFFFF) << ".";
-            o << (encodedVersion & 0xFFFF);
+            for (uint32_t i = 0; i < 4; ++i) {
+                mPCIInfo.driverVersion[i] = (encodedVersion >> (48 - 16 * i)) & 0xFFFF;
+                o << mPCIInfo.driverVersion[i] << ".";
+            }
             mDriverDescription = o.str();
         }
 

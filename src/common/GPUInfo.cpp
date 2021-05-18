@@ -14,6 +14,8 @@
 
 #include "common/GPUInfo.h"
 
+#include "common/Assert.h"
+
 #include <algorithm>
 #include <array>
 
@@ -38,6 +40,13 @@ namespace gpu_info {
         const std::array<uint32_t, 21> Cometlake = {
             {0x9B21, 0x9BA0, 0x9BA2, 0x9BA4, 0x9BA5, 0x9BA8, 0x9BAA, 0x9BAB, 0x9BAC, 0x9B41, 0x9BC0,
              0x9BC2, 0x9BC4, 0x9BC5, 0x9BC6, 0x9BC8, 0x9BCA, 0x9BCB, 0x9BCC, 0x9BE6, 0x9BF6}};
+
+        bool IsOldIntelDriver(const uint32_t driverVersion[4]) {
+            // See https://www.intel.com/content/www/us/en/support/articles/000005654/graphics.html
+            // for more details
+            return driverVersion[2] < 100;
+        }
+
     }  // anonymous namespace
 
     bool IsAMD(PCIVendorID vendorId) {
@@ -63,6 +72,28 @@ namespace gpu_info {
     }
     bool IsWARP(PCIVendorID vendorId, PCIDeviceID deviceId) {
         return vendorId == kVendorID_Microsoft && deviceId == kDeviceID_WARP;
+    }
+
+    int CompareD3DDriverVersion(PCIVendorID vendorId,
+                                const uint32_t version1[4],
+                                const uint32_t version2[4]) {
+        if (IsIntel(vendorId)) {
+            // See https://www.intel.com/content/www/us/en/support/articles/000005654/graphics.html
+            // for more details.
+            bool isOldIntelDriver1 = IsOldIntelDriver(version1);
+            bool isOldIntelDriver2 = IsOldIntelDriver(version2);
+            if (isOldIntelDriver1 && !isOldIntelDriver2) {
+                return -1;
+            } else if (!isOldIntelDriver1 && isOldIntelDriver2) {
+                return 1;
+            } else {
+                return static_cast<int64_t>(version1[3]) - static_cast<int64_t>(version2[3]);
+            }
+        }
+
+        // TODO(jiawei.shao@intel.com): support other GPU vendors
+        UNREACHABLE();
+        return 0;
     }
 
     // Intel GPUs
