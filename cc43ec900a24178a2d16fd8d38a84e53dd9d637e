@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b92c38_add2de54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T12:09:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cc43ec900a24178a2d16fd8d38a84e53dd9d637e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "caa48b40_e6950d23",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T12:09:42Z",
+      "side": 1,
+      "message": "nit: I think just \"UNREACHABLE()\" should work.",
+      "revId": "cc43ec900a24178a2d16fd8d38a84e53dd9d637e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
