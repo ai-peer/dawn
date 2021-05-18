@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2ef36bd_4eee054b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-18T19:15:41Z",
+      "side": 1,
+      "message": "some more skips for crbug.com/angleproject/5967",
+      "revId": "fe1f53a1d0f23fa5a5f69e44c3d6a98421415aa7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
