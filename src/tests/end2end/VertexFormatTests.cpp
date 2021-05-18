@@ -398,10 +398,6 @@ class VertexFormatTest : public DawnTest {
 };
 
 TEST_P(VertexFormatTest, Uint8x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint8_t> vertexData = {
         std::numeric_limits<uint8_t>::max(),
         0,
@@ -425,10 +421,6 @@ TEST_P(VertexFormatTest, Uint8x2) {
 }
 
 TEST_P(VertexFormatTest, Uint8x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint8_t> vertexData = {
         std::numeric_limits<uint8_t>::max(),
         0,
@@ -448,10 +440,6 @@ TEST_P(VertexFormatTest, Uint8x4) {
 }
 
 TEST_P(VertexFormatTest, Sint8x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int8_t> vertexData = {
         std::numeric_limits<int8_t>::max(),
         0,
@@ -475,10 +463,6 @@ TEST_P(VertexFormatTest, Sint8x2) {
 }
 
 TEST_P(VertexFormatTest, Sint8x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int8_t> vertexData = {
         std::numeric_limits<int8_t>::max(),
         0,
@@ -498,10 +482,6 @@ TEST_P(VertexFormatTest, Sint8x4) {
 }
 
 TEST_P(VertexFormatTest, Unorm8x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint8_t> vertexData = {
         std::numeric_limits<uint8_t>::max(),
         std::numeric_limits<uint8_t>::min(),
@@ -528,10 +508,6 @@ TEST_P(VertexFormatTest, Unorm8x2) {
 }
 
 TEST_P(VertexFormatTest, Unorm8x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint8_t> vertexData = {std::numeric_limits<uint8_t>::max(),
                                        std::numeric_limits<uint8_t>::min(),
                                        0,
@@ -549,10 +525,6 @@ TEST_P(VertexFormatTest, Unorm8x4) {
 }
 
 TEST_P(VertexFormatTest, Snorm8x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int8_t> vertexData = {
         std::numeric_limits<int8_t>::max(),
         std::numeric_limits<int8_t>::min(),
@@ -581,10 +553,6 @@ TEST_P(VertexFormatTest, Snorm8x2) {
 }
 
 TEST_P(VertexFormatTest, Snorm8x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int8_t> vertexData = {std::numeric_limits<int8_t>::max(),
                                       std::numeric_limits<int8_t>::min(),
                                       0,
@@ -602,10 +570,6 @@ TEST_P(VertexFormatTest, Snorm8x4) {
 }
 
 TEST_P(VertexFormatTest, Uint16x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint16_t> vertexData = {std::numeric_limits<uint16_t>::max(),
                                         0,
                                         std::numeric_limits<uint16_t>::min(),
@@ -617,10 +581,6 @@ TEST_P(VertexFormatTest, Uint16x2) {
 }
 
 TEST_P(VertexFormatTest, Uint16x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint16_t> vertexData = {
         std::numeric_limits<uint16_t>::max(),
         std::numeric_limits<uint8_t>::max(),
@@ -640,10 +600,6 @@ TEST_P(VertexFormatTest, Uint16x4) {
 }
 
 TEST_P(VertexFormatTest, Sint16x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int16_t> vertexData = {std::numeric_limits<int16_t>::max(),
                                        0,
                                        std::numeric_limits<int16_t>::min(),
@@ -655,10 +611,6 @@ TEST_P(VertexFormatTest, Sint16x2) {
 }
 
 TEST_P(VertexFormatTest, Sint16x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int16_t> vertexData = {
         std::numeric_limits<int16_t>::max(),
         0,
@@ -678,10 +630,6 @@ TEST_P(VertexFormatTest, Sint16x4) {
 }
 
 TEST_P(VertexFormatTest, Unorm16x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint16_t> vertexData = {std::numeric_limits<uint16_t>::max(),
                                         std::numeric_limits<uint16_t>::min(),
                                         std::numeric_limits<uint16_t>::max() / 2u,
@@ -693,10 +641,6 @@ TEST_P(VertexFormatTest, Unorm16x2) {
 }
 
 TEST_P(VertexFormatTest, Unorm16x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint16_t> vertexData = {std::numeric_limits<uint16_t>::max(),
                                         std::numeric_limits<uint16_t>::min(),
                                         0,
@@ -714,10 +658,6 @@ TEST_P(VertexFormatTest, Unorm16x4) {
 }
 
 TEST_P(VertexFormatTest, Snorm16x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int16_t> vertexData = {std::numeric_limits<int16_t>::max(),
                                        std::numeric_limits<int16_t>::min(),
                                        std::numeric_limits<int16_t>::max() / 2,
@@ -729,10 +669,6 @@ TEST_P(VertexFormatTest, Snorm16x2) {
 }
 
 TEST_P(VertexFormatTest, Snorm16x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int16_t> vertexData = {std::numeric_limits<int16_t>::max(),
                                        std::numeric_limits<int16_t>::min(),
                                        0,
@@ -750,10 +686,6 @@ TEST_P(VertexFormatTest, Snorm16x4) {
 }
 
 TEST_P(VertexFormatTest, Float16x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     // Fails on NVIDIA's Vulkan drivers on CQ but passes locally.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
 
@@ -764,10 +696,6 @@ TEST_P(VertexFormatTest, Float16x2) {
 }
 
 TEST_P(VertexFormatTest, Float16x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     // Fails on NVIDIA's Vulkan drivers on CQ but passes locally.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
 
@@ -778,10 +706,6 @@ TEST_P(VertexFormatTest, Float16x4) {
 }
 
 TEST_P(VertexFormatTest, Float32) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<float> vertexData = {1.3f, +0.0f, -0.0f};
 
     DoVertexFormatTest(wgpu::VertexFormat::Float32, vertexData, vertexData);
@@ -792,10 +716,6 @@ TEST_P(VertexFormatTest, Float32) {
 }
 
 TEST_P(VertexFormatTest, Float32x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     // Fails on NVIDIA's Vulkan drivers on CQ but passes locally.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
 
@@ -805,10 +725,6 @@ TEST_P(VertexFormatTest, Float32x2) {
 }
 
 TEST_P(VertexFormatTest, Float32x3) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     // Fails on NVIDIA's Vulkan drivers on CQ but passes locally.
     DAWN_SKIP_TEST_IF(IsVulkan() && IsNvidia());
 
@@ -820,10 +736,6 @@ TEST_P(VertexFormatTest, Float32x3) {
 }
 
 TEST_P(VertexFormatTest, Float32x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<float> vertexData = {
         19.2f, -19.3f, +0.0f, 1.0f, -0.0f, 1.0f, 1.3f, -1.0f, 13.078f, 21.1965f, -1.1f, -1.2f,
     };
@@ -832,10 +744,6 @@ TEST_P(VertexFormatTest, Float32x4) {
 }
 
 TEST_P(VertexFormatTest, Uint32) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint32_t> vertexData = {std::numeric_limits<uint32_t>::max(),
                                         std::numeric_limits<uint16_t>::max(),
                                         std::numeric_limits<uint8_t>::max()};
@@ -844,10 +752,6 @@ TEST_P(VertexFormatTest, Uint32) {
 }
 
 TEST_P(VertexFormatTest, Uint32x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint32_t> vertexData = {std::numeric_limits<uint32_t>::max(), 32,
                                         std::numeric_limits<uint16_t>::max(), 64,
                                         std::numeric_limits<uint8_t>::max(),  128};
@@ -856,10 +760,6 @@ TEST_P(VertexFormatTest, Uint32x2) {
 }
 
 TEST_P(VertexFormatTest, Uint32x3) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint32_t> vertexData = {std::numeric_limits<uint32_t>::max(), 32,   64,
                                         std::numeric_limits<uint16_t>::max(), 164,  128,
                                         std::numeric_limits<uint8_t>::max(),  1283, 256};
@@ -868,10 +768,6 @@ TEST_P(VertexFormatTest, Uint32x3) {
 }
 
 TEST_P(VertexFormatTest, Uint32x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<uint32_t> vertexData = {std::numeric_limits<uint32_t>::max(), 32,   64,  5460,
                                         std::numeric_limits<uint16_t>::max(), 164,  128, 0,
                                         std::numeric_limits<uint8_t>::max(),  1283, 256, 4567};
@@ -880,10 +776,6 @@ TEST_P(VertexFormatTest, Uint32x4) {
 }
 
 TEST_P(VertexFormatTest, Sint32) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int32_t> vertexData = {std::numeric_limits<int32_t>::max(),
                                        std::numeric_limits<int32_t>::min(),
                                        std::numeric_limits<int8_t>::max()};
@@ -892,10 +784,6 @@ TEST_P(VertexFormatTest, Sint32) {
 }
 
 TEST_P(VertexFormatTest, Sint32x2) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int32_t> vertexData = {
         std::numeric_limits<int32_t>::max(), std::numeric_limits<int32_t>::min(),
         std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::min(),
@@ -905,10 +793,6 @@ TEST_P(VertexFormatTest, Sint32x2) {
 }
 
 TEST_P(VertexFormatTest, Sint32x3) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int32_t> vertexData = {
         std::numeric_limits<int32_t>::max(), std::numeric_limits<int32_t>::min(), 64,
         std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::min(), 128,
@@ -918,10 +802,6 @@ TEST_P(VertexFormatTest, Sint32x3) {
 }
 
 TEST_P(VertexFormatTest, Sint32x4) {
-    // TODO(cwallez@chromium.org): Failing because of a SPIRV-Cross issue.
-    // See http://crbug.com/dawn/259
-    DAWN_SKIP_TEST_IF(IsMetal() && IsIntel());
-
     std::vector<int32_t> vertexData = {
         std::numeric_limits<int32_t>::max(), std::numeric_limits<int32_t>::min(), 64,   -5460,
         std::numeric_limits<int16_t>::max(), std::numeric_limits<int16_t>::min(), -128, 0,
