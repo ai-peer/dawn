@@ -16,6 +16,29 @@
       "message": "PTAL. I also updated the explainer document at https://docs.google.com/document/d/1gDryVdKxUHb4i5UJB2vOXwfwk6u_mF-gzy8q6ul0JUc/edit#.",
       "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34efeb65_6054b6b7",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-18T20:51:48Z",
+      "side": 1,
+      "message": "So that\u0027s the source buffer offset in the B2T copy. Can\u0027t that be tested explicitly by setting the offset in a test in CopyTests_B2T?\nAnd then the offset can be tested explicitly in CopyTests_T2B by setting the destination offset in a T2B copy.\n\nI worry about this loop because it assumes implementation details of WriteTexture.",
+      "range": {
+        "startLine": 1017,
+        "startChar": 3,
+        "endLine": 1020,
+        "endChar": 16
+      },
+      "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
