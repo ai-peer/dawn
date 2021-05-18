@@ -275,6 +275,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cd914ef_ace45082",
+        "filename": "src/dawn_native/opengl/TextureGL.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-18T08:11:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3c94d70a_4058e911",
+      "revId": "2fe4a7ed436939327112db55c7c6a8e8c5d3e0df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c866eafd_d13700ed",
