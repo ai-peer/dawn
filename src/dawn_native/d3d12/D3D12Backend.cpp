@@ -17,11 +17,13 @@
 
 #include "dawn_native/D3D12Backend.h"
 
+#include "common/HashUtils.h"
 #include "common/Log.h"
 #include "common/Math.h"
 #include "common/SwapChainUtils.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
+#include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
@@ -84,9 +86,19 @@ namespace dawn_native { namespace d3d12 {
         textureDescriptor.mipLevelCount = mMipLevelCount;
         textureDescriptor.sampleCount = mSampleCount;
 
+        // TODO(bryan.bernhart@intel.com): a resource can be shared between devices with the same
+        // context if it is read only. Consider reusing the context for multiple devices when the
+        // usage allows for it.
+        ExternalImageDXGI::ResourceDeviceContext* context = GetOrCreateResourceContext(device);
+        if (context == nullptr) {
+            dawn::ErrorLog() << "Texture cannot be used as a shared resource.";
+            return nullptr;
+        }
+
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
-            &textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
-            descriptor->isSwapChainTexture, descriptor->isInitialized);
+            &textureDescriptor, mD3D12Resource, context->GetKeyedSharedMutex(),
+            ExternalMutexSerial(descriptor->acquireMutexKey), descriptor->isSwapChainTexture,
+            descriptor->isInitialized);
         return reinterpret_cast<WGPUTexture>(texture.Detach());
     }
 
@@ -147,5 +159,136 @@ namespace dawn_native { namespace d3d12 {
 
     AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
         : AdapterDiscoveryOptionsBase(WGPUBackendType_D3D12), dxgiAdapter(std::move(adapter)) {
+    }
+
+    ExternalImageDXGI::ResourceDeviceContext* ExternalImageDXGI::GetOrCreateResourceContext(
+        WGPUDevice device) {
+        auto iter = mResourceContexts.find(std::make_unique<ResourceDeviceContext>(device));
+        if (iter != mResourceContexts.end()) {
+            return iter->get();
+        }
+
+        std::unique_ptr<ResourceDeviceContext> context =
+            ResourceDeviceContext::Create(device, mD3D12Resource.Get());
+
+        ResourceDeviceContext* contextPtr = context.get();
+        mResourceContexts.insert(std::move(context));
+        return contextPtr;
+    }
+
+    // static
+    std::unique_ptr<ExternalImageDXGI::ResourceDeviceContext>
+    ExternalImageDXGI::ResourceDeviceContext::Create(WGPUDevice device,
+                                                     ID3D12Resource* sharedResource) {
+        // We use IDXGIKeyedMutexes to synchronize access between D3D11 and D3D12. D3D11/12 fences
+        // are a viable alternative but are, unfortunately, not available on all versions of Windows
+        // 10. Since D3D12 does not directly support keyed mutexes, we need to wrap the D3D12
+        // resource using 11on12 and QueryInterface the D3D11 representation for the keyed mutex.
+        ComPtr<ID3D11Device> d3d11Device;
+        ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+
+        // D3D12 command queue is shared between the D3D12 and 11on12 device.
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        ComPtr<ID3D12CommandQueue> d3d12CommandQueue = backendDevice->GetCommandQueue();
+
+        ID3D12Device* d3d12Device = backendDevice->GetD3D12Device();
+        IUnknown* const iUnknownQueue = d3d12CommandQueue.Get();
+        if (FAILED(backendDevice->GetFunctions()->d3d11on12CreateDevice(
+                d3d12Device, 0, nullptr, 0, &iUnknownQueue, 1, 1, &d3d11Device, &d3d11DeviceContext,
+                nullptr))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11On12Device> d3d11on12Device;
+        if (FAILED(d3d11Device.As(&d3d11on12Device))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11DeviceContext2> d3d11DeviceContext2;
+        if (FAILED(d3d11DeviceContext.As(&d3d11DeviceContext2))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11Texture2D> d3d11Texture;
+        D3D11_RESOURCE_FLAGS resourceFlags;
+        resourceFlags.BindFlags = 0;
+        resourceFlags.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
+        resourceFlags.CPUAccessFlags = 0;
+        resourceFlags.StructureByteStride = 0;
+        if (FAILED(d3d11on12Device->CreateWrappedResource(
+                sharedResource, &resourceFlags, D3D12_RESOURCE_STATE_COMMON,
+                D3D12_RESOURCE_STATE_COMMON, IID_PPV_ARGS(&d3d11Texture)))) {
+            return nullptr;
+        }
+
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+        if (FAILED(d3d11Texture.As(&dxgiKeyedMutex))) {
+            return nullptr;
+        }
+
+        std::unique_ptr<ResourceDeviceContext> result(
+            new ResourceDeviceContext(std::move(dxgiKeyedMutex), std::move(d3d12CommandQueue),
+                                      std::move(d3d11on12Device), std::move(d3d11DeviceContext2)));
+        return result;
+    }
+
+    ExternalImageDXGI::ResourceDeviceContext::ResourceDeviceContext(
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+        ComPtr<ID3D12CommandQueue> d3d12CommandQueue,
+        ComPtr<ID3D11On12Device> d3d11On12Device,
+        ComPtr<ID3D11DeviceContext2> d3d11on12DeviceContext)
+        : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)),
+          mD3D12CommandQueue(std::move(d3d12CommandQueue)),
+          mD3D11on12Device(std::move(d3d11On12Device)),
+          mD3D11on12DeviceContext(std::move(d3d11on12DeviceContext)) {
+    }
+
+    ExternalImageDXGI::ResourceDeviceContext::ResourceDeviceContext(WGPUDevice device) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        mD3D12CommandQueue = backendDevice->GetCommandQueue();
+    }
+
+    ExternalImageDXGI::ResourceDeviceContext::~ResourceDeviceContext() {
+        if (mDXGIKeyedMutex == nullptr) {
+            return;
+        }
+
+        ComPtr<ID3D11Resource> d3d11Resource;
+        HRESULT hr = mDXGIKeyedMutex.As(&d3d11Resource);
+        if (FAILED(hr)) {
+            return;
+        }
+
+        ID3D11Resource* d3d11ResourceRaw = d3d11Resource.Get();
+        mD3D11on12Device->ReleaseWrappedResources(&d3d11ResourceRaw, 1);
+
+        d3d11Resource.Reset();
+        mDXGIKeyedMutex.Reset();
+
+        // 11on12 has a bug where D3D12 resources used only for keyed shared mutexes
+        // are not released until work is submitted to the device context and flushed.
+        // The most minimal work we can get away with is issuing a TiledResourceBarrier.
+
+        // ID3D11DeviceContext2 is available in Win8.1 and above. This suffices for a
+        // D3D12 backend since both D3D12 and 11on12 first appeared in Windows 10.
+        mD3D11on12DeviceContext->TiledResourceBarrier(nullptr, nullptr);
+        mD3D11on12DeviceContext->Flush();
+    }
+
+    IDXGIKeyedMutex* ExternalImageDXGI::ResourceDeviceContext::GetKeyedSharedMutex() {
+        return mDXGIKeyedMutex.Get();
+    }
+
+    size_t ExternalImageDXGI::ResourceDeviceContext::HashFunc::operator()(
+        const std::unique_ptr<ResourceDeviceContext>& a) const {
+        size_t hash = 0;
+        HashCombine(&hash, a->mD3D12CommandQueue.Get());
+        return hash;
+    }
+
+    bool ExternalImageDXGI::ResourceDeviceContext::EqualityFunc::operator()(
+        const std::unique_ptr<ResourceDeviceContext>& a,
+        const std::unique_ptr<ResourceDeviceContext>& b) const {
+        return a->mD3D12CommandQueue == b->mD3D12CommandQueue;
     }
 }}  // namespace dawn_native::d3d12

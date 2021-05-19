@@ -19,11 +19,14 @@
 #include <dawn_native/DawnNative.h>
 
 #include <DXGI1_4.h>
+#include <d3d11_2.h>
+#include <d3d11on12.h>
 #include <d3d12.h>
 #include <windows.h>
 #include <wrl/client.h>
 
 #include <memory>
+#include <unordered_set>
 
 struct ID3D12Device;
 struct ID3D12Resource;
@@ -73,6 +76,9 @@ namespace dawn_native { namespace d3d12 {
         ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                           const WGPUTextureDescriptor* descriptor);
 
+        class ResourceDeviceContext;
+        ResourceDeviceContext* GetOrCreateResourceContext(WGPUDevice device);
+
         Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
 
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
@@ -83,6 +89,50 @@ namespace dawn_native { namespace d3d12 {
         WGPUTextureFormat mFormat;
         uint32_t mMipLevelCount;
         uint32_t mSampleCount;
+
+        // Allows shared device access of 11 based resource with a 12 based Dawn device.
+        // This is seperated to allow ProduceTexture to create a context per device.
+        class ResourceDeviceContext {
+          public:
+            static std::unique_ptr<ResourceDeviceContext> Create(WGPUDevice device,
+                                                                 ID3D12Resource* sharedResource);
+            ResourceDeviceContext(WGPUDevice device);
+            ~ResourceDeviceContext();
+
+            IDXGIKeyedMutex* GetKeyedSharedMutex();
+
+            // Functors necessary for the
+            // unordered_set<std::unique_ptr<ResourceDeviceContext>>-based cache.
+            struct HashFunc {
+                size_t operator()(const std::unique_ptr<ResourceDeviceContext>& a) const;
+            };
+
+            struct EqualityFunc {
+                bool operator()(const std::unique_ptr<ResourceDeviceContext>& a,
+                                const std::unique_ptr<ResourceDeviceContext>& b) const;
+            };
+
+          private:
+            ResourceDeviceContext(
+                Microsoft::WRL::ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+                Microsoft::WRL::ComPtr<ID3D12CommandQueue> d3d12CommandQueue,
+                Microsoft::WRL::ComPtr<ID3D11On12Device> d3d11on12Device,
+                Microsoft::WRL::ComPtr<ID3D11DeviceContext2> d3d11on12DeviceContext);
+
+            Microsoft::WRL::ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+            Microsoft::WRL::ComPtr<ID3D12CommandQueue> mD3D12CommandQueue;
+
+            // 11on12 device and device context corresponding to a mD3D12CommandQueue
+            Microsoft::WRL::ComPtr<ID3D11On12Device> mD3D11on12Device;
+            Microsoft::WRL::ComPtr<ID3D11DeviceContext2> mD3D11on12DeviceContext;
+        };
+
+        using ResourceDeviceContextCache =
+            std::unordered_set<std::unique_ptr<ResourceDeviceContext>,
+                               ExternalImageDXGI::ResourceDeviceContext::HashFunc,
+                               ExternalImageDXGI::ResourceDeviceContext::EqualityFunc>;
+
+        ResourceDeviceContextCache mResourceContexts;
     };
 
     struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
