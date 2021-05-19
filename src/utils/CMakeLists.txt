@@ -12,6 +12,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+DawnJSONGenerator(
+    TARGET "dawn_utils"
+    PRINT_NAME "Dawn utils"
+    RESULT_VARIABLE "DAWN_UTILS_GEN_SOURCES"
+)
+
 add_library(dawn_utils STATIC ${DAWN_DUMMY_FILE})
 target_sources(dawn_utils PRIVATE
     "BackendBinding.cpp"
@@ -36,6 +42,7 @@ target_sources(dawn_utils PRIVATE
     "WGPUHelpers.h"
     "WireHelper.cpp"
     "WireHelper.h"
+    ${DAWN_UTILS_GEN_SOURCES}
 )
 target_link_libraries(dawn_utils
     PUBLIC dawncpp_headers
