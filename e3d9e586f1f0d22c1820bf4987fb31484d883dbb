@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0711f8d_4b85a321",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71f2e2e4_379cdcae",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5027f92c_7687294c",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "471465eb_140af321",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:41:42Z",
+      "side": 1,
+      "message": "It can happen when the GL driver optimizes out the variable.",
+      "parentUuid": "5027f92c_7687294c",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "382189d0_76bd6d6a",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-05-19T14:33:39Z",
       "side": 1,
       "message": "Nit: overall -\u003e over",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac8c5fa9_91b11554",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "382189d0_76bd6d6a",
       "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +163,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f6257c3_afe5bde1",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a54da628_67795d15",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00318c18_100c2e93",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:41:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01231b14_a9ec0a3c",
+      "range": {
+        "startLine": 188,
+        "startChar": 27,
+        "endLine": 188,
+        "endChar": 30
+      },
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f9d32bc_79cd6939",
@@ -122,6 +218,24 @@
       "writtenOn": "2021-05-19T14:33:39Z",
       "side": 1,
       "message": "Nit: assert? Or is this an expected case?",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ad9068_da900efc",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:41:42Z",
+      "side": 1,
+      "message": "This is an expected case, for example if you use_tint_generator and make a WGSL shader like so:\n\n [[group(0), binding(0)]] var tex0 : texture_2d\u003cf32\u003e;\n [[group(0), binding(1)]] var tex1 : texture_2d\u003cf32\u003e;\n\n [[stage(compute)]] fn main() {\n   // use tex0\n }\n\nThen we will iterate over all the bindings SPIRV-Cross reflected from the shader, so {tex0, tex1} but the BGL will contain Tint reflection so only {tex0} and the call to GetBindingIndex() below will ASSERT because the binding number is unknown.",
+      "parentUuid": "9f9d32bc_79cd6939",
       "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
