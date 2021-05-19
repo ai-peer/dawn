@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8828e417_8d5f85dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T10:22:17Z",
+      "side": 1,
+      "message": "There\u0027s still a lot of complexity in this CL but I\u0027d like us to make forward progress somehow here. WDYT of landing the CL with the current architecture after smaller comments are addressed and then work on a design doc with that lists all the requirements on an async task manager, iterate on that, and then change Dawn to match that design doc.",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "883db378_c89397fb",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T10:22:17Z",
+      "side": 1,
+      "message": "Serials should be uint64_t to ensure no wraparound and we can create a new type in TypeIntegers.h to avoid mixing it with other serials.",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9e654c2_80e752ce",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T10:22:17Z",
+      "side": 1,
+      "message": "nit: the default platform could be initialized on creation.",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
