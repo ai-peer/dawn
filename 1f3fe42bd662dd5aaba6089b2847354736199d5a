@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc3ec7c9_1d9fd469",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:36:48Z",
+      "side": 1,
+      "message": "+1, and Dzmitry agrees that we should do that for webgpu.h",
+      "parentUuid": "7a1e3133_3e0f27b2",
+      "range": {
+        "startLine": 200,
+        "startChar": 50,
+        "endLine": 200,
+        "endChar": 81
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b421268e_2bed49bf",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 16
