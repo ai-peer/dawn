@@ -63,6 +63,30 @@
       },
       "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6b5eee_15c3128d",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T09:56:24Z",
+      "side": 1,
+      "message": "I think the offset in the buffer means the same thing in B2T or T2B, just the direction of the copy changes. Yeah the new tests should cover the splitter in both cases so it\u0027s probably fine.",
+      "parentUuid": "08212b51_21c09a46",
+      "range": {
+        "startLine": 1017,
+        "startChar": 3,
+        "endLine": 1020,
+        "endChar": 16
+      },
+      "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
