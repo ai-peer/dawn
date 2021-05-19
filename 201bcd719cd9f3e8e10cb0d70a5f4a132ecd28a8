@@ -39,6 +39,30 @@
       },
       "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08212b51_21c09a46",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-19T06:29:32Z",
+      "side": 1,
+      "message": "Done.\n\nGood point. In addition, setting well-designed offset in buffer for B2T is more flexible than the implicit offset in WriteBuffer via a for loop. So it is easier to demonstrate the copy scenarios. \n\nI assume that setting offset in Buffer for T2B buffer is different, we may don\u0027t need to split buffer if it is copy destination. Anyway, we can revisit that later. The new-added B2T tests are enough to show how TextureCopySplitter should work for 3D texture copy.",
+      "parentUuid": "34efeb65_6054b6b7",
+      "range": {
+        "startLine": 1017,
+        "startChar": 3,
+        "endLine": 1020,
+        "endChar": 16
+      },
+      "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
