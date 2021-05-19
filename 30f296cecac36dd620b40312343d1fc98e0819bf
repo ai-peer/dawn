@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e06e15_0ac2193d",
+        "filename": "groups",
+        "patchSetId": 3
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2021-05-19T16:54:57Z",
+      "side": 1,
+      "message": "FYI: i\u0027ll clean this up after the switch.",
+      "revId": "30f296cecac36dd620b40312343d1fc98e0819bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
