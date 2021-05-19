@@ -213,7 +213,7 @@ class BufferZeroInitTest : public DawnTest {
             })");
 
         ASSERT(vertexBufferCount <= 1u);
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;

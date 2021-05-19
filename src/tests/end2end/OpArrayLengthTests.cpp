@@ -180,7 +180,7 @@ TEST_P(OpArrayLengthTest, Fragment) {
         })")
                                                                         .c_str());
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -241,7 +241,7 @@ TEST_P(OpArrayLengthTest, Vertex) {
             return color;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;

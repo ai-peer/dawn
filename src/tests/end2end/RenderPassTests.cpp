@@ -42,7 +42,7 @@ class RenderPassTest : public DawnTest {
                 return vec4<f32>(0.0, 0.0, 1.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = mVSModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -140,7 +140,7 @@ TEST_P(RenderPassTest, NoCorrespondingFragmentShaderOutputs) {
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
             [[stage(fragment)]] fn main() {
             })");
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = mVSModule;
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;

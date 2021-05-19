@@ -20,7 +20,7 @@
 class ClipSpaceTest : public DawnTest {
   protected:
     wgpu::RenderPipeline CreatePipelineForTest() {
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         // Draw two triangles:
         // 1. The depth value of the top-left one is >= 0.5

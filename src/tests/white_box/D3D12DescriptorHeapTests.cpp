@@ -126,7 +126,7 @@ TEST_P(D3D12DescriptorHeapTests, SwitchOverViewHeap) {
     DAWN_SKIP_TEST_IF(!mD3DDevice->IsToggleEnabled(
         dawn_native::Toggle::UseD3D12SmallShaderVisibleHeapForTesting));
 
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
 
     // Fill in a view heap with "view only" bindgroups (1x view per group) by creating a
     // view bindgroup each draw. After HEAP_SIZE + 1 draws, the heaps must switch over.
@@ -170,7 +170,7 @@ TEST_P(D3D12DescriptorHeapTests, SwitchOverViewHeap) {
 
 // Verify the shader visible sampler heaps does not switch over within a single submit.
 TEST_P(D3D12DescriptorHeapTests, NoSwitchOverSamplerHeap) {
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
 
     // Fill in a sampler heap with "sampler only" bindgroups (1x sampler per group) by creating a
     // sampler bindgroup each draw. After HEAP_SIZE + 1 draws, the heaps WILL NOT switch over
@@ -440,7 +440,7 @@ TEST_P(D3D12DescriptorHeapTests, EncodeManyUBO) {
     utils::BasicRenderPass renderPass =
         MakeRenderPass(kRTSize, kRTSize, wgpu::TextureFormat::R32Float);
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = mSimpleVSModule;
 
     pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
@@ -514,11 +514,9 @@ TEST_P(D3D12DescriptorHeapTests, EncodeUBOOverflowMultipleSubmit) {
     // TODO(crbug.com/dawn/742): Test output is wrong with D3D12 + WARP.
     DAWN_SKIP_TEST_IF(IsD3D12() && IsWARP());
 
-    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor(device);
-
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = mSimpleVSModule;
     pipelineDescriptor.cFragment.module = mSimpleFSModule;
     pipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -603,7 +601,7 @@ TEST_P(D3D12DescriptorHeapTests, EncodeReuseUBOOverflow) {
 
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = mSimpleVSModule;
     pipelineDescriptor.cFragment.module = mSimpleFSModule;
     pipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -664,7 +662,7 @@ TEST_P(D3D12DescriptorHeapTests, EncodeReuseUBOMultipleSubmits) {
 
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = mSimpleVSModule;
     pipelineDescriptor.cFragment.module = mSimpleFSModule;
     pipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -776,7 +774,7 @@ TEST_P(D3D12DescriptorHeapTests, EncodeManyUBOAndSamplers) {
     }
 
     {
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
             [[block]] struct U {

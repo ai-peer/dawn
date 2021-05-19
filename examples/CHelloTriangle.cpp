@@ -56,7 +56,7 @@ void init() {
     WGPUShaderModule fsModule = utils::CreateShaderModule(device, fs).Release();
 
     {
-        WGPURenderPipelineDescriptor2 descriptor = {};
+        WGPURenderPipelineDescriptor descriptor = {};
 
         // Fragment state
         WGPUBlendState blend = {};

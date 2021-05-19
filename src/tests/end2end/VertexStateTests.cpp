@@ -66,7 +66,7 @@ class VertexStateTest : public DawnTest {
         VertexFormat format;
         InputStepMode step;
     };
-    wgpu::RenderPipeline MakeTestPipeline(const wgpu::VertexStateDescriptor& vertexState,
+    wgpu::RenderPipeline MakeTestPipeline(const utils::ComboVertexStateDescriptor& vertexState,
                                           int multiplier,
                                           const std::vector<ShaderTestSpec>& testSpec) {
         std::ostringstream vs;
@@ -144,11 +144,11 @@ class VertexStateTest : public DawnTest {
             }
         )");
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.vertex.bufferCount = vertexState.vertexBufferCount;
-        descriptor.vertex.buffers = vertexState.vertexBuffers;
+        descriptor.vertex.buffers = &vertexState.cVertexBuffers[0];
         descriptor.cTargets[0].format = renderPass.colorFormat;
 
         return device.CreateRenderPipeline2(&descriptor);
@@ -580,7 +580,7 @@ TEST_P(VertexStateTest, OverlappingVertexAttributes) {
     wgpu::Buffer vertexBuffer =
         utils::CreateBufferFromData(device, &data, sizeof(data), wgpu::BufferUsage::Vertex);
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDesc;
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
         struct VertexIn {
             [[location(0)]] attr0 : vec4<f32>;
@@ -668,7 +668,7 @@ TEST_P(OptionalVertexStateTest, Basic) {
             return vec4<f32>(0.0, 1.0, 0.0, 1.0);
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
     descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;

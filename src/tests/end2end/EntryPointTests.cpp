@@ -34,7 +34,7 @@ TEST_P(EntryPointTests, FragAndVertexSameModule) {
     )");
 
     // Create a point pipeline from the module.
-    utils::ComboRenderPipelineDescriptor2 desc;
+    utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = module;
     desc.vertex.entryPoint = "vertex_main";
     desc.cFragment.module = module;

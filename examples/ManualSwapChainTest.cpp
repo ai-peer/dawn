@@ -311,7 +311,7 @@ int main(int argc, const char* argv[]) {
     queue = device.GetQueue();
 
     // The hacky pipeline to render a triangle.
-    utils::ComboRenderPipelineDescriptor2 pipelineDesc;
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
         let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
             vec2<f32>( 0.0,  0.5),

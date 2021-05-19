@@ -362,7 +362,7 @@ class VertexFormatTest : public DawnTest {
             strideBytes += (4 - strideBytes % 4);
         }
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.vertex.bufferCount = 1;

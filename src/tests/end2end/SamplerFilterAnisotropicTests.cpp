@@ -76,7 +76,7 @@ class SamplerFilterAnisotropicTest : public DawnTest {
                 return textureSample(texture0, sampler0, input.uv);
             })");
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.cBuffers[0].attributeCount = 2;

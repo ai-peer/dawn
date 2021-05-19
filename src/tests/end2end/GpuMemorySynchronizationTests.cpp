@@ -72,7 +72,7 @@ class GpuMemorySyncTests : public DawnTest {
                 return vec4<f32>(f32(data.i) / 255.0, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor2 rpDesc;
+        utils::ComboRenderPipelineDescriptor rpDesc;
         rpDesc.vertex.module = vsModule;
         rpDesc.cFragment.module = fsModule;
         rpDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -347,7 +347,7 @@ class StorageToUniformSyncTests : public DawnTest {
                 return vec4<f32>(contents.color, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor2 rpDesc;
+        utils::ComboRenderPipelineDescriptor rpDesc;
         rpDesc.vertex.module = vsModule;
         rpDesc.cFragment.module = fsModule;
         rpDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;
@@ -589,7 +589,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, SeparateBuffers) {
 
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
@@ -704,7 +704,7 @@ TEST_P(MultipleWriteThenMultipleReadTests, OneBuffer) {
 
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;

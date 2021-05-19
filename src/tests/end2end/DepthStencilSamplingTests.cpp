@@ -70,7 +70,7 @@ class DepthStencilSamplingTest : public DawnTest {
                 return vec4<f32>(0.0, 0.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         std::ostringstream shaderSource;
         std::ostringstream shaderOutputStruct;
@@ -199,7 +199,7 @@ class DepthStencilSamplingTest : public DawnTest {
                      {1, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Depth},
                      {2, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}});
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);

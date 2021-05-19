@@ -347,7 +347,7 @@ void DrawCallPerf::SetUp() {
     }
 
     // Setup the base render pipeline descriptor.
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDesc;
+    utils::ComboRenderPipelineDescriptor renderPipelineDesc;
     renderPipelineDesc.vertex.bufferCount = 1;
     renderPipelineDesc.cBuffers[0].arrayStride = 4 * sizeof(float);
     renderPipelineDesc.cBuffers[0].attributeCount = 1;

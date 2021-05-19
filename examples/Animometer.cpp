@@ -119,7 +119,7 @@ void init() {
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Vertex, wgpu::BufferBindingType::Uniform, true}});
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl);
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
