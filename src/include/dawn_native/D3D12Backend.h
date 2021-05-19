@@ -69,11 +69,15 @@ namespace dawn_native { namespace d3d12 {
         WGPUTexture ProduceTexture(WGPUDevice device,
                                    const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor);
 
+        void Destroy(WGPUDevice device);
+
       private:
         ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
+                          Microsoft::WRL::ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                           const WGPUTextureDescriptor* descriptor);
 
         Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> mDxgiKeyedMutex;
 
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
         // could outlive this image.

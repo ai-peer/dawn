@@ -124,6 +124,7 @@ namespace dawn_native { namespace d3d12 {
 
         Ref<TextureBase> CreateExternalTexture(const TextureDescriptor* descriptor,
                                                ComPtr<ID3D12Resource> d3d12Texture,
+                                               ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                ExternalMutexSerial acquireMutexKey,
                                                bool isSwapChainTexture,
                                                bool isInitialized);

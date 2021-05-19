@@ -54,8 +54,10 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ExternalImageDXGI::ExternalImageDXGI(ComPtr<ID3D12Resource> d3d12Resource,
+                                         ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                          const WGPUTextureDescriptor* descriptor)
         : mD3D12Resource(std::move(d3d12Resource)),
+          mDxgiKeyedMutex(std::move(dxgiKeyedMutex)),
           mUsage(descriptor->usage),
           mDimension(descriptor->dimension),
           mSize(descriptor->size),
@@ -63,6 +65,13 @@ namespace dawn_native { namespace d3d12 {
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount) {
         ASSERT(descriptor->nextInChain == nullptr);
+    }
+
+    void ExternalImageDXGI::Destroy(WGPUDevice device) {
+        if (mDxgiKeyedMutex != nullptr) {
+            Device* backendDevice = reinterpret_cast<Device*>(device);
+            backendDevice->ReleaseKeyedMutexForTexture(std::move(mDxgiKeyedMutex));
+        }
     }
 
     WGPUTexture ExternalImageDXGI::ProduceTexture(
@@ -85,8 +94,9 @@ namespace dawn_native { namespace d3d12 {
         textureDescriptor.sampleCount = mSampleCount;
 
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
-            &textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
-            descriptor->isSwapChainTexture, descriptor->isInitialized);
+            &textureDescriptor, mD3D12Resource, mDxgiKeyedMutex,
+            ExternalMutexSerial(descriptor->acquireMutexKey), descriptor->isSwapChainTexture,
+            descriptor->isInitialized);
         return reinterpret_cast<WGPUTexture>(texture.Detach());
     }
 
@@ -131,8 +141,15 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        std::unique_ptr<ExternalImageDXGI> result(
-            new ExternalImageDXGI(std::move(d3d12Resource), descriptor->cTextureDescriptor));
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+        if (backendDevice->ConsumedError(
+                backendDevice->CreateKeyedMutexForTexture(d3d12Resource.Get()),
+                (Microsoft::WRL::ComPtr<IDXGIKeyedMutex>*)&dxgiKeyedMutex)) {
+            return nullptr;
+        }
+
+        std::unique_ptr<ExternalImageDXGI> result(new ExternalImageDXGI(
+            std::move(d3d12Resource), std::move(dxgiKeyedMutex), descriptor->cTextureDescriptor));
         return result;
     }
 
