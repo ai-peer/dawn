@@ -256,6 +256,24 @@
       "parentUuid": "57ad9068_da900efc",
       "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "515e116f_e06f906e",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T17:08:16Z",
+      "side": 1,
+      "message": "I reworded the comment a bunch to be more explicit.",
+      "parentUuid": "e34d4c2d_39318e7b",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
