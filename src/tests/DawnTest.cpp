@@ -915,7 +915,7 @@ void DawnTestBase::SetUp() {
 
     std::tie(device, backendDevice) =
         mWireHelper->RegisterDevice(mBackendAdapter.CreateDevice(&deviceDescriptor));
-    ASSERT_NE(nullptr, backendDevice);
+    DAWN_SKIP_TEST_IF(backendDevice == nullptr);
 
     std::string traceName =
         std::string(::testing::UnitTest::GetInstance()->current_test_info()->test_suite_name()) +
