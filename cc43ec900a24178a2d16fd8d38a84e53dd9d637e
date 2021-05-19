@@ -86,6 +86,24 @@
       "parentUuid": "8eb9be04_a3ef6474",
       "revId": "cc43ec900a24178a2d16fd8d38a84e53dd9d637e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bd3bf8c_390905ef",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-05-19T17:33:30Z",
+      "side": 1,
+      "message": "\u003e Weird, we do this in other places and it the compiler didn\u0027t complain\n\na *potential* warning - sounds like it doesn\u0027t trigger with your particular build env.",
+      "parentUuid": "225eb572_4b8481a9",
+      "revId": "cc43ec900a24178a2d16fd8d38a84e53dd9d637e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
