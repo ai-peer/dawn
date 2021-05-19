@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "010df607_cf0a0b3a",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-19T06:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "205f7056_1d4acb33",
+      "revId": "52a8b943c56d76df2e46260b66744e1968cb04e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "381dd17c_3bed72eb",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-05-18T12:21:58Z",
       "side": 1,
       "message": "nit: we should say that CompareD3D version returns \u003d\u003d 0, \u003e 0 and \u003c 0 in the header.",
+      "revId": "52a8b943c56d76df2e46260b66744e1968cb04e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8906344_792b5934",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-19T06:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "381dd17c_3bed72eb",
       "revId": "52a8b943c56d76df2e46260b66744e1968cb04e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c59d29_6d62cc75",
+        "filename": "src/common/GPUInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-19T06:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe4ab804_a02f8885",
+      "revId": "52a8b943c56d76df2e46260b66744e1968cb04e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88758518_0b14e5b9",
@@ -116,6 +170,24 @@
       "writtenOn": "2021-05-18T12:21:58Z",
       "side": 1,
       "message": "This is a D3D-specific format for the driver version. Could we just keep it in AdapterD3D12.h and not expose it in the public dawn_native API?",
+      "revId": "52a8b943c56d76df2e46260b66744e1968cb04e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "353e38ce_8a6552d5",
+        "filename": "src/include/dawn_native/DawnNative.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-19T06:45:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88758518_0b14e5b9",
       "revId": "52a8b943c56d76df2e46260b66744e1968cb04e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
