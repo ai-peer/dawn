@@ -24,9 +24,11 @@
 #include <wrl/client.h>
 
 #include <memory>
+#include <unordered_set>
 
 struct ID3D12Device;
 struct ID3D12Resource;
+struct ID3D11On12Device;
 
 namespace dawn_native { namespace d3d12 {
     DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device);
@@ -61,6 +63,32 @@ namespace dawn_native { namespace d3d12 {
         bool isSwapChainTexture = false;
     };
 
+    // Wraps a 12 resource using a D3D11on12 device.
+    class DAWN_NATIVE_EXPORT D3D11on12Resource {
+      public:
+        D3D11on12Resource(Microsoft::WRL::ComPtr<ID3D11On12Device> d3d11on12Device);
+        D3D11on12Resource(Microsoft::WRL::ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+                          Microsoft::WRL::ComPtr<ID3D11On12Device> d3d11on12Device);
+        ~D3D11on12Resource();
+
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> GetDXGIKeyedMutex();
+
+        // Functors necessary for the
+        // unordered_set<std::unique_ptr<D3D11on12Resource>>-based cache.
+        struct HashFunc {
+            size_t operator()(const std::unique_ptr<D3D11on12Resource>& a) const;
+        };
+
+        struct EqualityFunc {
+            bool operator()(const std::unique_ptr<D3D11on12Resource>& a,
+                            const std::unique_ptr<D3D11on12Resource>& b) const;
+        };
+
+      private:
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+        Microsoft::WRL::ComPtr<ID3D11On12Device> mD3D11on12Device;
+    };
+
     class DAWN_NATIVE_EXPORT ExternalImageDXGI {
       public:
         // Note: SharedHandle must be a handle to a texture object.
@@ -75,6 +103,9 @@ namespace dawn_native { namespace d3d12 {
         ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
                           const WGPUTextureDescriptor* descriptor);
 
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> GetOrCreateDXGIKeyedMutex(
+            Microsoft::WRL::ComPtr<ID3D11On12Device> d3d11on12Device);
+
         Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
 
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
@@ -85,6 +116,13 @@ namespace dawn_native { namespace d3d12 {
         WGPUTextureFormat mFormat;
         uint32_t mMipLevelCount;
         uint32_t mSampleCount;
+
+        static constexpr uint64_t kMaxD3D11on12ResourceCacheSize = 5;
+        using D3D11on12ResourceCache = std::unordered_set<std::unique_ptr<D3D11on12Resource>,
+                                                          D3D11on12Resource::HashFunc,
+                                                          D3D11on12Resource::EqualityFunc>;
+
+        D3D11on12ResourceCache mD3D11on12Resources;
     };
 
     struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptions : public AdapterDiscoveryOptionsBase {
