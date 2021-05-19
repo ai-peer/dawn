@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "862fab3f_00d8eb5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T17:54:00Z",
+      "side": 1,
+      "message": "And I didn\u0027t see Austin\u0027s CL, which looks like a step in the right direction. Jiawei, when would the TF.js team need this? I\u0027m asking because we could take a suboptimal solution for now and revisit quickly but ideally we get something that\u0027s closer to the final solution.\n\nSo we need to make this design doc, the question is do we land this CL, Austin\u0027s CL or wait. I don\u0027t have strong feelings either way and I think it\u0027s mostly dependent on the timeline you\u0027re looking for.",
+      "parentUuid": "8828e417_8d5f85dc",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "883db378_c89397fb",
