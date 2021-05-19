@@ -56,6 +56,30 @@
       },
       "revId": "30f296cecac36dd620b40312343d1fc98e0819bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92afb792_84d8d8b2",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000005
+      },
+      "writtenOn": "2021-05-19T17:44:15Z",
+      "side": 1,
+      "message": "This is auto-generated CL, done with `git config ...`, which interprets all keys as lowercase -- but Gerrit doesn\u0027t care.",
+      "parentUuid": "6269d9b1_9a394f12",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 7
+      },
+      "revId": "30f296cecac36dd620b40312343d1fc98e0819bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
