@@ -19,6 +19,8 @@
 #include <dawn_native/DawnNative.h>
 
 #include <DXGI1_4.h>
+#include <d3d11_2.h>
+#include <d3d11on12.h>
 #include <d3d12.h>
 #include <windows.h>
 #include <wrl/client.h>
@@ -65,15 +67,25 @@ namespace dawn_native { namespace d3d12 {
         static std::unique_ptr<ExternalImageDXGI> Create(
             WGPUDevice device,
             const ExternalImageDescriptorDXGISharedHandle* descriptor);
+        ~ExternalImageDXGI();
 
         WGPUTexture ProduceTexture(WGPUDevice device,
                                    const ExternalImageAccessDescriptorDXGIKeyedMutex* descriptor);
 
       private:
         ExternalImageDXGI(Microsoft::WRL::ComPtr<ID3D12Resource> d3d12Resource,
+                          Microsoft::WRL::ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+                          Microsoft::WRL::ComPtr<ID3D11On12Device> d3d11on12Device,
+                          Microsoft::WRL::ComPtr<ID3D11DeviceContext2> d3d11On12DeviceContext,
                           const WGPUTextureDescriptor* descriptor);
 
         Microsoft::WRL::ComPtr<ID3D12Resource> mD3D12Resource;
+
+        Microsoft::WRL::ComPtr<IDXGIKeyedMutex> mDxgiKeyedMutex;
+
+        // 11on12 device and device context corresponding to mCommandQueue
+        Microsoft::WRL::ComPtr<ID3D11On12Device> mD3d11On12Device;
+        Microsoft::WRL::ComPtr<ID3D11DeviceContext2> mD3d11On12DeviceContext;
 
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
         // could outlive this image.
