@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eed6c05_0df61df8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T14:17:13Z",
+      "side": 1,
+      "message": "PTAL! This will unblock the roll of Tint in Dawn.",
+      "revId": "9becd6dc5f692dba0b7a197171fd79c465c21739",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
