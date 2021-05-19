@@ -16,6 +16,29 @@
       "message": "FYI: i\u0027ll clean this up after the switch.",
       "revId": "30f296cecac36dd620b40312343d1fc98e0819bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6269d9b1_9a394f12",
+        "filename": "project.config",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T17:03:50Z",
+      "side": 1,
+      "message": "nit: the casing of labelas is different from the lebalAs above. If Gerrit is happy with it, no need to change it.",
+      "range": {
+        "startLine": 35,
+        "startChar": 6,
+        "endLine": 35,
+        "endChar": 7
+      },
+      "revId": "30f296cecac36dd620b40312343d1fc98e0819bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
