@@ -16,6 +16,46 @@
       "message": "PTAL. Thanks!",
       "revId": "6afe68c25f5d7ac6cf0fc881a3aec4057b17972b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71536bf7_247f5567",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-19T06:37:49Z",
+      "side": 1,
+      "message": "Add Kai for a validation issue which may impact WebGPU spec and CTS. ",
+      "revId": "6afe68c25f5d7ac6cf0fc881a3aec4057b17972b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e4fdbea_792fbc11",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-19T06:37:49Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we say that buffer\u0027s offset for copy should be multiple of blockWidth in WebGPU spec? I didn\u0027t see any statement about this in spec: https://gpuweb.github.io/gpuweb/#dictdef-gpuimagedatalayout. @Kai. WDYT?",
+      "range": {
+        "startLine": 1488,
+        "startChar": 4,
+        "endLine": 1488,
+        "endChar": 26
+      },
+      "revId": "6afe68c25f5d7ac6cf0fc881a3aec4057b17972b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
