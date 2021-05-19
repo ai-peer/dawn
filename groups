@@ -6,3 +6,4 @@ cria:project-dawn-committers            	cria/project-dawn-committers
 cria:project-dawn-tryjob-access         	cria/project-dawn-tryjob-access
 cria:service-account-cq                 	cria/service-account-cq
 global:Change-Owner                     	Change Owner
+e8a7a6ec5578b7b3fb664b063b34b1278f7409e2	tint-scoped@luci-project-accounts.iam.gserviceaccount.com
