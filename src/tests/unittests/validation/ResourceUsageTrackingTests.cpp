@@ -54,7 +54,7 @@ namespace {
             wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
                 [[stage(fragment)]] fn main() {
                 })");
-            utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+            utils::ComboRenderPipelineDescriptor pipelineDescriptor;
             pipelineDescriptor.vertex.module = vsModule;
             pipelineDescriptor.cFragment.module = fsModule;
             pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, nullptr);
@@ -765,7 +765,7 @@ namespace {
                 [[group(0), binding(0)]] var<storage> rBuffer : [[access(read)]] RBuffer;
                 [[stage(fragment)]] fn main() {
                 })");
-            utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+            utils::ComboRenderPipelineDescriptor pipelineDescriptor;
             pipelineDescriptor.vertex.module = vsModule;
             pipelineDescriptor.cFragment.module = fsModule;
             pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &bgl0);
@@ -1511,7 +1511,7 @@ namespace {
                 [[group(0), binding(0)]] var tex : [[access(read)]] texture_storage_2d<rgba8unorm>;
                 [[stage(fragment)]] fn main() {
                 })");
-            utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+            utils::ComboRenderPipelineDescriptor pipelineDescriptor;
             pipelineDescriptor.vertex.module = vsModule;
             pipelineDescriptor.cFragment.module = fsModule;
             pipelineDescriptor.layout = utils::MakeBasicPipelineLayout(device, &readBGL);

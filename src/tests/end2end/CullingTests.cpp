@@ -20,7 +20,7 @@
 class CullingTest : public DawnTest {
   protected:
     wgpu::RenderPipeline CreatePipelineForTest(wgpu::FrontFace frontFace, wgpu::CullMode cullMode) {
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         // Draw two triangles with different winding orders:
         // 1. The top-left one is counterclockwise (CCW)

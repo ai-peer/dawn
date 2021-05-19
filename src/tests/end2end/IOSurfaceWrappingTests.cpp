@@ -287,7 +287,7 @@ class IOSurfaceUsageTests : public IOSurfaceTestBase {
                 }
             )");
 
-            utils::ComboRenderPipelineDescriptor2 descriptor;
+            utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vs;
             descriptor.cFragment.module = fs;
             descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;

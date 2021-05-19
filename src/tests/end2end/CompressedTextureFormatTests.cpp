@@ -138,7 +138,7 @@ class CompressedTextureBCFormatTest : public DawnTest {
     wgpu::RenderPipeline CreateRenderPipelineForTest() {
         ASSERT(IsBCFormatSupported());
 
-        utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
         wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
             struct VertexOut {
                 [[location(0)]] texCoord : vec2 <f32>;

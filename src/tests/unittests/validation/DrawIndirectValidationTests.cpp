@@ -36,7 +36,7 @@ class DrawIndirectValidationTest : public ValidationTest {
         // Set up render pipeline
         wgpu::PipelineLayout pipelineLayout = utils::MakeBasicPipelineLayout(device, nullptr);
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.layout = pipelineLayout;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;

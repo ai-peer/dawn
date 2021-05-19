@@ -112,7 +112,7 @@ TEST_P(D3D12CachingTests, SameShaderNoCache) {
 
     // Store the WGSL shader into the cache.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -125,7 +125,7 @@ TEST_P(D3D12CachingTests, SameShaderNoCache) {
 
     // Load the same WGSL shader from the cache.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -153,7 +153,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
 
     // Store the WGSL shader into the cache.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -166,7 +166,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
 
     // Load the same WGSL shader from the cache.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = module;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = module;
@@ -191,7 +191,7 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPointsPerStage) {
   )");
 
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         desc.vertex.module = newModule;
         desc.vertex.entryPoint = "vertex_main";
         desc.cFragment.module = newModule;

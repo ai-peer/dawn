@@ -29,7 +29,7 @@ class VertexStateTest : public ValidationTest {
             }
         )");
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.vertex.bufferCount = state.vertexBufferCount;
         descriptor.vertex.buffers = &state.cVertexBuffers[0];

@@ -51,7 +51,7 @@ class MultisampledSamplingTest : public DawnTest {
         DawnTest::SetUp();
 
         {
-            utils::ComboRenderPipelineDescriptor2 desc;
+            utils::ComboRenderPipelineDescriptor desc;
 
             desc.vertex.module = utils::CreateShaderModule(device, R"(
                 [[stage(vertex)]]

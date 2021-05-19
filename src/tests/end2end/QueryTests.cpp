@@ -95,7 +95,7 @@ class OcclusionQueryTests : public QueryTests {
                 return vec4<f32>(0.0, 1.0, 0.0, 1.0);
             })");
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
@@ -129,7 +129,7 @@ class OcclusionQueryTests : public QueryTests {
                                                 OcclusionExpectation::Result expected) {
         constexpr uint32_t kQueryCount = 1;
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 

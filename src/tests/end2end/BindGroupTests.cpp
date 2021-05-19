@@ -98,7 +98,7 @@ class BindGroupTests : public DawnTest {
 
         wgpu::PipelineLayout pipelineLayout = MakeBasicPipelineLayout(bindGroupLayouts);
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.layout = pipelineLayout;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
@@ -184,7 +184,7 @@ TEST_P(BindGroupTests, ReusedUBO) {
             return fragmentUbo.color;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 textureDescriptor;
+    utils::ComboRenderPipelineDescriptor textureDescriptor;
     textureDescriptor.vertex.module = vsModule;
     textureDescriptor.cFragment.module = fsModule;
     textureDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -260,7 +260,7 @@ TEST_P(BindGroupTests, UBOSamplerAndTexture) {
             return textureSample(tex, samp, FragCoord.xy);
         })");
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.cFragment.module = fsModule;
     pipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -382,7 +382,7 @@ TEST_P(BindGroupTests, MultipleBindLayouts) {
             return fragmentUbo1.color + fragmentUbo2.color;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 textureDescriptor;
+    utils::ComboRenderPipelineDescriptor textureDescriptor;
     textureDescriptor.vertex.module = vsModule;
     textureDescriptor.cFragment.module = fsModule;
     textureDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -970,7 +970,7 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
             return ubo1.color + 2.0 * ubo2.color + 4.0 * ubo3.color;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
     pipelineDescriptor.vertex.module = vsModule;
     pipelineDescriptor.cFragment.module = fsModule;
     pipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -1086,7 +1086,7 @@ TEST_P(BindGroupTests, EmptyLayout) {
 // This is a regression test for crbug.com/dawn/410 which tests that it can successfully compile and
 // execute the shader.
 TEST_P(BindGroupTests, ReadonlyStorage) {
-    utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
     pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
         [[stage(vertex)]]
