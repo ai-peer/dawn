@@ -296,7 +296,7 @@ namespace utils {
         storageTexture.viewDimension = textureViewDimension;
     }
 
-    BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
+    /*BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         uint32_t entryBinding,
         wgpu::ShaderStage entryVisibility,
         wgpu::BindingType entryType,
@@ -313,7 +313,7 @@ namespace utils {
         viewDimension = textureViewDimension;
         textureComponentType = textureComponent;
         storageTextureFormat = storageFormat;
-    }
+    }*/
 
     BindingLayoutEntryInitializationHelper::BindingLayoutEntryInitializationHelper(
         const wgpu::BindGroupLayoutEntry& entry)
