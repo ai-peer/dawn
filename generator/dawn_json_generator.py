@@ -832,6 +832,11 @@ class MultiGeneratorFromDawnJSON(Generator):
                     'src/dawn_wire/server/ServerPrototypes_autogen.inc',
                     wire_params))
 
+        if 'dawn_utils' in targets:
+            renders.append(
+                FileRender('utils/DebugPrint.h', 'src/utils/DebugPrint.h',
+                           [base_params, api_params]))
+
         return renders
 
     def get_dependencies(self, args):
