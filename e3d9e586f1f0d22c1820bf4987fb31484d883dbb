@@ -238,6 +238,24 @@
       "parentUuid": "9f9d32bc_79cd6939",
       "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e34d4c2d_39318e7b",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T15:56:31Z",
+      "side": 1,
+      "message": "This confused me too, so just to clarify:\n\n\u003e BGL will contain Tint reflection\n\nso a BGL for the default pipeline layout? That\u0027s when we would make it from reflection info\n\n~But if we have use_tint_generator then wouldn\u0027t the bindings we\u0027re iterating here also not contain tex1?~\n\nNvm: it is because we are looking at mGLEntryPoints which is always reflected with SPIRV-Cross. Worth a comment pointing this out.",
+      "parentUuid": "57ad9068_da900efc",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
