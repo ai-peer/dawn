@@ -16,6 +16,373 @@
       "message": "PTAL. Failure on win-rel seems unrelated. ",
       "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb4e18b_d8ba7396",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "LGTM overall with some comments",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a1e3133_3e0f27b2",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "as discussed over slack, maybe this would be better as an extension struct, similiar to \"shader module WGSL descriptor\". The C API would use it like:\n\nWGPUExternalTextureBindingLayout externalTexBinding \u003d {};\nWGPUBindGroupLayoutEntry entry \u003d {};\nentry.nextInChain \u003d \u0026externalTexBinding;\n\nThen, we also wouldn\u0027t need the .allowedType thing",
+      "range": {
+        "startLine": 200,
+        "startChar": 50,
+        "endLine": 200,
+        "endChar": 81
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b421268e_2bed49bf",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "can this be const\u0026 ?",
+      "range": {
+        "startLine": 400,
+        "startChar": 4,
+        "endLine": 400,
+        "endChar": 57
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bcae0fb_080753d2",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "Bindings get sorted based on type so that all the buffers are in the beginning, and we use that assumption in a couple places. Example [1]\n\nMutating this particular count the way you\u0027re doing doesn\u0027t matter because it\u0027s just for validation. But mutating |rhs.bufferCount| would be a problem. So, we should definitely include tests that use external texture alongside other buffer, sampler, and texture bindings - so we\u0027re sure we bind everything correctly.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/ShaderModule.cpp;l\u003d453;drc\u003dd8cdec7d0d3a396b3b7f269c4edce7b4cc3dd781;bpv\u003d1;bpt\u003d1",
+      "range": {
+        "startLine": 136,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 89
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c2f40d3_0a40bb61",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: ASSERT that there is a single view",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ee834b_4080139b",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "The caller of this code needs to have a comment that we need some custom handling to reserve additional descriptors when we support multi-planar external images.",
+      "range": {
+        "startLine": 44,
+        "startChar": 15,
+        "endLine": 45,
+        "endChar": 64
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a091150_c5719d35",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: ASSERT single view",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9c50fe2_b27eaea9",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "The caller of this code needs to have a comment that we need some custom handling to reserve additional descriptors when we support multi-planar external images.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 56
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da305efc_6b3f17d9",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: ASSERT there is only one view",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c6bbd07_d3f9a7aa",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "this only catches if it is force-enabled.\n\nWe don\u0027t need this helper and can instead use HasToggleEnabled(\"use_tint_generator\")",
+      "range": {
+        "startLine": 713,
+        "startChar": 0,
+        "endLine": 713,
+        "endChar": 49
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd33f04_1bcc1a46",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "var\u003cin\u003e is deprecated. Instead, make it an argument:\n\nfn main([[location(0)]] pos : vec4\u003cf32\u003e)",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b1f001a_d50e5378",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: -\u003e void not needed, though var\u003cout\u003e is also deprecated.\n\nThis should become \"-\u003e [[builtin(position)]] vec4\u003cf32\u003e;\n\nand we just \"return pos;\" instead.",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 43
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e046b5c_13465912",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: explicit return not needed",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abdf8009_1083b2d4",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "ditto, in/out deprecated",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 62
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a81d0f3a_6e999986",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "ditto, in/out deprecated",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 55
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc06c118_d79a1996",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: -\u003e void not needed",
+      "range": {
+        "startLine": 83,
+        "startChar": 38,
+        "endLine": 83,
+        "endChar": 45
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a2941c_b91d4754",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-19T00:53:26Z",
+      "side": 1,
+      "message": "nit: explicit return not needed",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 19
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
