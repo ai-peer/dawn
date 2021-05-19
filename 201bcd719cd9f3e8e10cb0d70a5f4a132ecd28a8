@@ -87,6 +87,30 @@
       },
       "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bee0ae8_669a9264",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-19T15:32:51Z",
+      "side": 1,
+      "message": "Done. Added T2B tests too.",
+      "parentUuid": "6f6b5eee_15c3128d",
+      "range": {
+        "startLine": 1017,
+        "startChar": 3,
+        "endLine": 1020,
+        "endChar": 16
+      },
+      "revId": "201bcd719cd9f3e8e10cb0d70a5f4a132ecd28a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
