@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "676695c5_ed4020d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-19T14:33:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71f2e2e4_379cdcae",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-19T14:33:39Z",
+      "side": 1,
+      "message": "Nit: could this be a const ref?",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5027f92c_7687294c",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-19T14:33:39Z",
+      "side": 1,
+      "message": "Nit: When does this happen? Shouldn\u0027t it assert if validation should catch it?",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "382189d0_76bd6d6a",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-19T14:33:39Z",
+      "side": 1,
+      "message": "Nit: overall -\u003e over",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a54da628_67795d15",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-19T14:33:39Z",
+      "side": 1,
+      "message": "Nit: less -\u003e fewer",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f9d32bc_79cd6939",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-05-19T14:33:39Z",
+      "side": 1,
+      "message": "Nit: assert? Or is this an expected case?",
+      "revId": "e3d9e586f1f0d22c1820bf4987fb31484d883dbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
