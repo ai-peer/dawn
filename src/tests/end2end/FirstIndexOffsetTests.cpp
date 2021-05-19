@@ -145,7 +145,7 @@ struct FragInputs {
 
     constexpr uint32_t kComponentsPerVertex = 4;
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDesc;
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.vertex.module = utils::CreateShaderModule(device, vertexShader.c_str());
     pipelineDesc.cFragment.module = utils::CreateShaderModule(device, fragmentShader.c_str());
     pipelineDesc.primitive.topology = wgpu::PrimitiveTopology::PointList;

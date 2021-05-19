@@ -66,7 +66,7 @@ namespace {
 
             pipelineLayout = device.CreatePipelineLayout(&pipelineLayoutDesc);
 
-            utils::ComboRenderPipelineDescriptor2 descriptor;
+            utils::ComboRenderPipelineDescriptor descriptor;
             InitializeRenderPipelineDescriptor(&descriptor);
             pipeline = device.CreateRenderPipeline2(&descriptor);
 
@@ -98,7 +98,7 @@ namespace {
                                               {1, vertexStorageBuffer, 0, sizeof(kVertices)}});
         }
 
-        void InitializeRenderPipelineDescriptor(utils::ComboRenderPipelineDescriptor2* descriptor) {
+        void InitializeRenderPipelineDescriptor(utils::ComboRenderPipelineDescriptor* descriptor) {
             descriptor->layout = pipelineLayout;
             descriptor->vertex.module = vsModule;
             descriptor->cFragment.module = fsModule;
@@ -729,7 +729,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
     renderBundleDesc.cColorFormats[1] = wgpu::TextureFormat::RG16Float;
     renderBundleDesc.cColorFormats[2] = wgpu::TextureFormat::R16Sint;
 
-    auto SetupRenderPipelineDescForTest = [this](utils::ComboRenderPipelineDescriptor2* desc) {
+    auto SetupRenderPipelineDescForTest = [this](utils::ComboRenderPipelineDescriptor* desc) {
         InitializeRenderPipelineDescriptor(desc);
         desc->cFragment.targetCount = 3;
         desc->cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -739,7 +739,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
     // Test the success case.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
 
         wgpu::RenderBundleEncoder renderBundleEncoder =
@@ -751,7 +751,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
     // Test the failure case for mismatched format types.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.cTargets[1].format = wgpu::TextureFormat::RGBA8Unorm;
 
@@ -764,7 +764,7 @@ TEST_F(RenderBundleValidationTest, PipelineColorFormatMismatch) {
 
     // Test the failure case for missing format
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.cFragment.targetCount = 2;
 
@@ -783,7 +783,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.depthStencilFormat = wgpu::TextureFormat::Depth24PlusStencil8;
 
-    auto SetupRenderPipelineDescForTest = [this](utils::ComboRenderPipelineDescriptor2* desc) {
+    auto SetupRenderPipelineDescForTest = [this](utils::ComboRenderPipelineDescriptor* desc) {
         InitializeRenderPipelineDescriptor(desc);
         desc->cFragment.targetCount = 1;
         desc->cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
@@ -791,7 +791,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
     // Test the success case.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.EnableDepthStencil(wgpu::TextureFormat::Depth24PlusStencil8);
 
@@ -804,7 +804,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
     // Test the failure case for mismatched format.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.EnableDepthStencil(wgpu::TextureFormat::Depth24Plus);
 
@@ -817,7 +817,7 @@ TEST_F(RenderBundleValidationTest, PipelineDepthStencilFormatMismatch) {
 
     // Test the failure case for missing format.
     {
-        utils::ComboRenderPipelineDescriptor2 desc;
+        utils::ComboRenderPipelineDescriptor desc;
         SetupRenderPipelineDescForTest(&desc);
         desc.depthStencil = nullptr;
 
@@ -836,7 +836,7 @@ TEST_F(RenderBundleValidationTest, PipelineSampleCountMismatch) {
     renderBundleDesc.cColorFormats[0] = wgpu::TextureFormat::RGBA8Unorm;
     renderBundleDesc.sampleCount = 4;
 
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDesc;
+    utils::ComboRenderPipelineDescriptor renderPipelineDesc;
     InitializeRenderPipelineDescriptor(&renderPipelineDesc);
     renderPipelineDesc.cFragment.targetCount = 1;
     renderPipelineDesc.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;

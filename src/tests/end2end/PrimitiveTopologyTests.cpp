@@ -183,7 +183,7 @@ class PrimitiveTopologyTest : public DawnTest {
     // locations
     void DoTest(wgpu::PrimitiveTopology primitiveTopology,
                 const std::vector<LocationSpec>& locationSpecs) {
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 

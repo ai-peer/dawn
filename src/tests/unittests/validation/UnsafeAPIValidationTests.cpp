@@ -64,7 +64,7 @@ TEST_F(UnsafeAPIValidationTest, DrawIndexedIndirectDisallowed) {
     bundleDesc.colorFormatsCount = 1;
     bundleDesc.cColorFormats[0] = renderPass.attachmentFormat;
 
-    utils::ComboRenderPipelineDescriptor2 desc;
+    utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = utils::CreateShaderModule(
         device,
         R"([[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {

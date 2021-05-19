@@ -1101,7 +1101,7 @@ class SetBindGroupValidationTest : public ValidationTest {
                 [[stage(fragment)]] fn main() {
                 })");
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         wgpu::PipelineLayout pipelineLayout =
@@ -1561,7 +1561,7 @@ class SetBindGroupPersistenceValidationTest : public ValidationTest {
 
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, ss.str().c_str());
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = mVsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         pipelineDescriptor.layout = pipelineLayout;
@@ -1700,7 +1700,7 @@ class BindGroupLayoutCompatibilityTest : public ValidationTest {
         wgpu::PipelineLayoutDescriptor descriptor;
         descriptor.bindGroupLayoutCount = bindGroupLayout.size();
         descriptor.bindGroupLayouts = bindGroupLayout.data();
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         wgpu::PipelineLayout pipelineLayout = device.CreatePipelineLayout(&descriptor);
@@ -2070,7 +2070,7 @@ class ComparisonSamplerBindingTest : public ValidationTest {
 
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentSource);
 
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = vsModule;
         pipelineDescriptor.cFragment.module = fsModule;
         wgpu::PipelineLayout pipelineLayout =

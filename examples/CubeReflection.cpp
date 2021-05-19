@@ -184,7 +184,7 @@ void init() {
     depthStencilView = CreateDefaultDepthStencilView(device);
 
     {
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.vertex.bufferCount = 1;
         descriptor.vertex.buffers = &vertexBufferLayout;
@@ -202,7 +202,7 @@ void init() {
     }
 
     {
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.vertex.bufferCount = 1;
         descriptor.vertex.buffers = &vertexBufferLayout;
@@ -221,7 +221,7 @@ void init() {
     }
 
     {
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.vertex.bufferCount = 1;
         descriptor.vertex.buffers = &vertexBufferLayout;

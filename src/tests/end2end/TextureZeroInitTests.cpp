@@ -66,7 +66,7 @@ class TextureZeroInitTest : public DawnTest {
         return descriptor;
     }
     wgpu::RenderPipeline CreatePipelineForTest(float depth = 0.f) {
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
         pipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest(depth);
         const char* fs = R"(
             ;
@@ -857,7 +857,7 @@ TEST_P(TextureZeroInitTest, RenderPassSampledTextureClear) {
     wgpu::Texture renderTexture = device.CreateTexture(&renderTextureDescriptor);
 
     // Create render pipeline
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.cTargets[0].format = kColorFormat;
     renderPipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest();
     renderPipelineDescriptor.cFragment.module = CreateSampledTextureFragmentShaderForTest();
@@ -916,7 +916,7 @@ TEST_P(TextureZeroInitTest, TextureBothSampledAndAttachmentClear) {
     wgpu::TextureView sampleView = texture.CreateView(&viewDesc);
 
     // Create render pipeline
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
     renderPipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest();
     renderPipelineDescriptor.cFragment.module = CreateSampledTextureFragmentShaderForTest();
@@ -1142,7 +1142,7 @@ TEST_P(TextureZeroInitTest, RenderPassStoreOpClear) {
     EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
 
     // Create render pipeline
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest();
     renderPipelineDescriptor.cFragment.module = CreateSampledTextureFragmentShaderForTest();
     renderPipelineDescriptor.cTargets[0].format = kColorFormat;
@@ -1288,7 +1288,7 @@ TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
     EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
 
     // Create render pipeline
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest();
     renderPipelineDescriptor.cFragment.module = CreateSampledTextureFragmentShaderForTest();
     renderPipelineDescriptor.cTargets[0].format = kColorFormat;
@@ -1365,7 +1365,7 @@ TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
     EXPECT_LAZY_CLEAR(0u, queue.Submit(1, &commands));
 
     // Create render pipeline
-    utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     renderPipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest();
     renderPipelineDescriptor.cFragment.module = CreateSampledTextureFragmentShaderForTest();
     renderPipelineDescriptor.cTargets[0].format = kColorFormat;
@@ -1789,7 +1789,7 @@ class CompressedTextureZeroInitTest : public TextureZeroInitTest {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
             wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-            utils::ComboRenderPipelineDescriptor2 renderPipelineDescriptor;
+            utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
             renderPipelineDescriptor.cTargets[0].format = kColorFormat;
             renderPipelineDescriptor.vertex.module = CreateBasicVertexShaderForTest();
             renderPipelineDescriptor.cFragment.module = CreateSampledTextureFragmentShaderForTest();

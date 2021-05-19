@@ -121,7 +121,7 @@ void initRender() {
 
     depthStencilView = CreateDefaultDepthStencilView(device);
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
 
     descriptor.vertex.module = vsModule;
     descriptor.vertex.bufferCount = 2;

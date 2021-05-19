@@ -68,7 +68,7 @@ class VertexBufferValidationTest : public ValidationTest {
 
     wgpu::RenderPipeline MakeRenderPipeline(const wgpu::ShaderModule& vsModule,
                                             unsigned int bufferCount) {
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 

@@ -27,7 +27,7 @@ class GetBindGroupLayoutTests : public ValidationTest {
 
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, shader);
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.layout = nullptr;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
@@ -73,7 +73,7 @@ TEST_F(GetBindGroupLayoutTests, SameObject) {
             var pos_s : mat4x4<f32> = storage3.pos;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -491,7 +491,7 @@ TEST_F(GetBindGroupLayoutTests, DuplicateBinding) {
             var pos : vec4<f32> = uniforms.pos;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -563,7 +563,7 @@ TEST_F(GetBindGroupLayoutTests, MinBufferSize) {
     binding.buffer.minBindingSize = 64;
     wgpu::BindGroupLayout bgl64 = device.CreateBindGroupLayout(&desc);
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
 
     // Check with both stages using 4 bytes.
@@ -629,7 +629,7 @@ TEST_F(GetBindGroupLayoutTests, StageAggregation) {
     desc.entryCount = 1;
     desc.entries = &binding;
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
 
     // Check with only the vertex shader using the sampler
@@ -686,7 +686,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingType) {
             var pos : vec4<f32> = ssbo.pos;
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -711,7 +711,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureMultisampling) {
             textureDimensions(myTexture);
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -736,7 +736,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingViewDimension) {
             textureDimensions(myTexture);
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -761,7 +761,7 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureComponentType) {
             textureDimensions(myTexture);
         })");
 
-    utils::ComboRenderPipelineDescriptor2 descriptor;
+    utils::ComboRenderPipelineDescriptor descriptor;
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModule;
     descriptor.cFragment.module = fsModule;
@@ -853,7 +853,7 @@ TEST_F(GetBindGroupLayoutTests, Reflection) {
         [[stage(fragment)]] fn main() {
         })");
 
-    utils::ComboRenderPipelineDescriptor2 pipelineDesc;
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.layout = pipelineLayout;
     pipelineDesc.vertex.module = vsModule;
     pipelineDesc.cFragment.module = fsModule;

@@ -290,7 +290,7 @@ class DepthStencilStateTest : public DawnTest {
 
             // Create a pipeline for the triangles with the test spec's depth stencil state
 
-            utils::ComboRenderPipelineDescriptor2 descriptor;
+            utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.vertex.module = vsModule;
             descriptor.cFragment.module = fsModule;
             wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
@@ -732,7 +732,7 @@ TEST_P(DepthStencilStateTest, CreatePipelineWithAllFormats) {
     };
 
     for (wgpu::TextureFormat depthStencilFormat : kDepthStencilFormats) {
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.EnableDepthStencil(depthStencilFormat);

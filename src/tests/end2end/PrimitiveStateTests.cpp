@@ -109,7 +109,7 @@ class DepthClampingTest : public DawnTest {
                                                               wgpu::BufferUsage::Uniform);
 
             // Create a pipeline for the triangles with the test spec's params.
-            utils::ComboRenderPipelineDescriptor2 descriptor;
+            utils::ComboRenderPipelineDescriptor descriptor;
             descriptor.primitive.nextInChain = test.depthClampingState;
             descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
             descriptor.vertex.module = vsModule;

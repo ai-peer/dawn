@@ -68,14 +68,14 @@ class ColorStateTest : public DawnTest {
                 }
             )");
 
-        utils::ComboRenderPipelineDescriptor2 baseDescriptor;
+        utils::ComboRenderPipelineDescriptor baseDescriptor;
         baseDescriptor.vertex.module = vsModule;
         baseDescriptor.cFragment.module = fsModule;
         baseDescriptor.cTargets[0].format = renderPass.colorFormat;
 
         basePipeline = device.CreateRenderPipeline2(&baseDescriptor);
 
-        utils::ComboRenderPipelineDescriptor2 testDescriptor;
+        utils::ComboRenderPipelineDescriptor testDescriptor;
         testDescriptor.vertex.module = vsModule;
         testDescriptor.cFragment.module = fsModule;
         testDescriptor.cTargets[0] = colorTargetState;
@@ -810,14 +810,14 @@ TEST_P(ColorStateTest, IndependentColorState) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor2 baseDescriptor;
+    utils::ComboRenderPipelineDescriptor baseDescriptor;
     baseDescriptor.vertex.module = vsModule;
     baseDescriptor.cFragment.module = fsModule;
     baseDescriptor.cFragment.targetCount = 4;
 
     basePipeline = device.CreateRenderPipeline2(&baseDescriptor);
 
-    utils::ComboRenderPipelineDescriptor2 testDescriptor;
+    utils::ComboRenderPipelineDescriptor testDescriptor;
     testDescriptor.vertex.module = vsModule;
     testDescriptor.cFragment.module = fsModule;
     testDescriptor.cFragment.targetCount = 4;
@@ -917,14 +917,14 @@ TEST_P(ColorStateTest, DefaultBlendColor) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor2 baseDescriptor;
+    utils::ComboRenderPipelineDescriptor baseDescriptor;
     baseDescriptor.vertex.module = vsModule;
     baseDescriptor.cFragment.module = fsModule;
     baseDescriptor.cTargets[0].format = renderPass.colorFormat;
 
     basePipeline = device.CreateRenderPipeline2(&baseDescriptor);
 
-    utils::ComboRenderPipelineDescriptor2 testDescriptor;
+    utils::ComboRenderPipelineDescriptor testDescriptor;
     testDescriptor.vertex.module = vsModule;
     testDescriptor.cFragment.module = fsModule;
     testDescriptor.cTargets[0].format = renderPass.colorFormat;
@@ -1041,14 +1041,14 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
         }
     )");
 
-    utils::ComboRenderPipelineDescriptor2 baseDescriptor;
+    utils::ComboRenderPipelineDescriptor baseDescriptor;
     baseDescriptor.vertex.module = vsModule;
     baseDescriptor.cFragment.module = fsModule;
     baseDescriptor.cTargets[0].format = renderPass.colorFormat;
 
     basePipeline = device.CreateRenderPipeline2(&baseDescriptor);
 
-    utils::ComboRenderPipelineDescriptor2 testDescriptor;
+    utils::ComboRenderPipelineDescriptor testDescriptor;
     testDescriptor.vertex.module = vsModule;
     testDescriptor.cFragment.module = fsModule;
     testDescriptor.cTargets[0].format = renderPass.colorFormat;

@@ -207,7 +207,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnLayout) {
     EXPECT_NE(pl.Get(), otherPl.Get());
     EXPECT_EQ(pl.Get() == samePl.Get(), !UsesWire());
 
-    utils::ComboRenderPipelineDescriptor2 desc;
+    utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = utils::CreateShaderModule(device, R"(
         [[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {
             return vec4<f32>(0.0, 0.0, 0.0, 0.0);
@@ -247,7 +247,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnVertexModule) {
     EXPECT_NE(module.Get(), otherModule.Get());
     EXPECT_EQ(module.Get() == sameModule.Get(), !UsesWire());
 
-    utils::ComboRenderPipelineDescriptor2 desc;
+    utils::ComboRenderPipelineDescriptor desc;
     desc.cFragment.module = utils::CreateShaderModule(device, R"(
             [[stage(fragment)]] fn main() {
             })");
@@ -281,7 +281,7 @@ TEST_P(ObjectCachingTest, RenderPipelineDeduplicationOnFragmentModule) {
     EXPECT_NE(module.Get(), otherModule.Get());
     EXPECT_EQ(module.Get() == sameModule.Get(), !UsesWire());
 
-    utils::ComboRenderPipelineDescriptor2 desc;
+    utils::ComboRenderPipelineDescriptor desc;
     desc.vertex.module = utils::CreateShaderModule(device, R"(
         [[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {
             return vec4<f32>(0.0, 0.0, 0.0, 0.0);

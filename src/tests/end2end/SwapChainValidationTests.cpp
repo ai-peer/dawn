@@ -220,7 +220,7 @@ TEST_P(SwapChainValidationTests, ViewDestroyedAfterPresent) {
 
 // Check that returned view is of the current format / usage / dimension / size / sample count
 TEST_P(SwapChainValidationTests, ReturnedViewCharacteristics) {
-    utils::ComboRenderPipelineDescriptor2 pipelineDesc;
+    utils::ComboRenderPipelineDescriptor pipelineDesc;
     pipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
         [[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {
             return vec4<f32>(0.0, 0.0, 0.0, 1.0);

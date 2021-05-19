@@ -230,7 +230,7 @@ class BlendFactorDeprecationTests : public DeprecationTests {
                 }
             )");
 
-        utils::ComboRenderPipelineDescriptor2 descriptor;
+        utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.cTargets[0].blend = &descriptor.cBlends[0];

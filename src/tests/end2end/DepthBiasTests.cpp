@@ -95,7 +95,7 @@ class DepthBiasTests : public DawnTest {
         renderPassDesc.cDepthStencilAttachmentInfo.clearDepth = depthClear;
 
         // Create a render pipeline to render the quad
-        utils::ComboRenderPipelineDescriptor2 renderPipelineDesc;
+        utils::ComboRenderPipelineDescriptor renderPipelineDesc;
 
         renderPipelineDesc.vertex.module = vertexModule;
         renderPipelineDesc.cFragment.module = fragmentModule;

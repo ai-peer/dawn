@@ -66,7 +66,7 @@ class DepthStencilCopyTests : public DawnTest {
         return device.CreateTexture(&texDescriptor);
     }
 
-    void PopulatePipelineDescriptorWriteDepth(utils::ComboRenderPipelineDescriptor2* desc,
+    void PopulatePipelineDescriptorWriteDepth(utils::ComboRenderPipelineDescriptor* desc,
                                               wgpu::TextureFormat format,
                                               float regionDepth) {
         desc->vertex.module = mVertexModule;
@@ -96,7 +96,7 @@ class DepthStencilCopyTests : public DawnTest {
         utils::ComboRenderPassDescriptor renderPassDesc({}, texture.CreateView(&viewDesc));
         renderPassDesc.cDepthStencilAttachmentInfo.clearDepth = clearDepth;
 
-        utils::ComboRenderPipelineDescriptor2 renderPipelineDesc;
+        utils::ComboRenderPipelineDescriptor renderPipelineDesc;
         PopulatePipelineDescriptorWriteDepth(&renderPipelineDesc, wgpu::TextureFormat::Depth32Float,
                                              regionDepth);
 
@@ -128,7 +128,7 @@ class DepthStencilCopyTests : public DawnTest {
         renderPassDesc.cDepthStencilAttachmentInfo.clearDepth = clearDepth;
         renderPassDesc.cDepthStencilAttachmentInfo.clearStencil = clearStencil;
 
-        utils::ComboRenderPipelineDescriptor2 renderPipelineDesc;
+        utils::ComboRenderPipelineDescriptor renderPipelineDesc;
         PopulatePipelineDescriptorWriteDepth(&renderPipelineDesc,
                                              wgpu::TextureFormat::Depth24PlusStencil8, regionDepth);
         renderPipelineDesc.cDepthStencil.stencilFront.passOp = wgpu::StencilOperation::Replace;
@@ -233,7 +233,7 @@ class DepthStencilCopyTests : public DawnTest {
         commandEncoder.CopyBufferToTexture(&bufferCopy, &textureCopy, &depthDataDesc.size);
 
         // Pipeline for a full screen quad.
-        utils::ComboRenderPipelineDescriptor2 pipelineDescriptor;
+        utils::ComboRenderPipelineDescriptor pipelineDescriptor;
 
         pipelineDescriptor.vertex.module = utils::CreateShaderModule(device, R"(
             [[stage(vertex)]]
@@ -642,7 +642,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
         wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
         // Create a render pipline which decrements the stencil value for passing fragments.
         // A quad is drawn in the bottom left.
-        utils::ComboRenderPipelineDescriptor2 renderPipelineDesc;
+        utils::ComboRenderPipelineDescriptor renderPipelineDesc;
         renderPipelineDesc.vertex.module = mVertexModule;
         renderPipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
             [[stage(fragment)]] fn main() {

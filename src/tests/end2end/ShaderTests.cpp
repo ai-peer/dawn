@@ -116,7 +116,7 @@ fn main([[builtin(position)]] fragCoord : vec4<f32>) -> [[location(0)]] vec4<f32
 })";
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     wgpu::RenderPipeline pipeline = device.CreateRenderPipeline2(&rpDesc);
@@ -152,7 +152,7 @@ fn main([[location(0)]] color : vec4<f32>) -> [[location(0)]] vec4<f32> {
 })";
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.vertex.bufferCount = 1;
@@ -200,7 +200,7 @@ fn main(input : FragmentIn) -> [[location(0)]] vec4<f32> {
 })";
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.vertex.bufferCount = 1;
@@ -247,7 +247,7 @@ fn main(input : FragmentIn) -> [[location(0)]] vec4<f32> {
 })";
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = vsModule;
     rpDesc.cFragment.module = fsModule;
     rpDesc.vertex.bufferCount = 1;
@@ -290,7 +290,7 @@ fn fragmentMain(input : VertexOut) -> [[location(0)]] vec4<f32> {
 })";
     wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
 
-    utils::ComboRenderPipelineDescriptor2 rpDesc;
+    utils::ComboRenderPipelineDescriptor rpDesc;
     rpDesc.vertex.module = shaderModule;
     rpDesc.vertex.entryPoint = "vertexMain";
     rpDesc.cFragment.module = shaderModule;
