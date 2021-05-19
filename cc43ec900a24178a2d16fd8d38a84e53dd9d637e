@@ -68,6 +68,24 @@
       "parentUuid": "caa48b40_e6950d23",
       "revId": "cc43ec900a24178a2d16fd8d38a84e53dd9d637e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "225eb572_4b8481a9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-19T17:30:45Z",
+      "side": 1,
+      "message": "Uh? Weird, we do this in other places and it the compiler didn\u0027t complain. Maybe the situations are slightly different. Sounds good to land as is.",
+      "parentUuid": "8eb9be04_a3ef6474",
+      "revId": "cc43ec900a24178a2d16fd8d38a84e53dd9d637e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
