@@ -17,11 +17,13 @@
 
 #include "dawn_native/D3D12Backend.h"
 
+#include "common/HashUtils.h"
 #include "common/Log.h"
 #include "common/Math.h"
 #include "common/SwapChainUtils.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
+#include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
 #include "dawn_native/d3d12/TextureD3D12.h"
 
@@ -84,9 +86,16 @@ namespace dawn_native { namespace d3d12 {
         textureDescriptor.mipLevelCount = mMipLevelCount;
         textureDescriptor.sampleCount = mSampleCount;
 
+        D3D11on12DeviceContext* context = GetOrCreateD3D11on12Context(device);
+        if (context == nullptr) {
+            dawn::ErrorLog() << "11on12 context cannot be created";
+            return nullptr;
+        }
+
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
-            &textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
-            descriptor->isSwapChainTexture, descriptor->isInitialized);
+            &textureDescriptor, mD3D12Resource, context->GetDevice(),
+            ExternalMutexSerial(descriptor->acquireMutexKey), descriptor->isSwapChainTexture,
+            descriptor->isInitialized);
         return reinterpret_cast<WGPUTexture>(texture.Detach());
     }
 
@@ -147,5 +156,98 @@ namespace dawn_native { namespace d3d12 {
 
     AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
         : AdapterDiscoveryOptionsBase(WGPUBackendType_D3D12), dxgiAdapter(std::move(adapter)) {
+    }
+
+    D3D11on12DeviceContext* ExternalImageDXGI::GetOrCreateD3D11on12Context(WGPUDevice device) {
+        auto iter = mD3d11on12Contexts.find(std::make_unique<D3D11on12DeviceContext>(device));
+        if (iter != mD3d11on12Contexts.end()) {
+            return iter->get();
+        }
+
+        std::unique_ptr<D3D11on12DeviceContext> context = D3D11on12DeviceContext::Create(device);
+
+        D3D11on12DeviceContext* contextPtr = context.get();
+        mD3d11on12Contexts.insert(std::move(context));
+        return contextPtr;
+    }
+
+    // static
+    std::unique_ptr<D3D11on12DeviceContext> D3D11on12DeviceContext::Create(WGPUDevice device) {
+        ComPtr<ID3D11Device> d3d11Device;
+        ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+
+        // D3D12 command queue is shared between the D3D12 and 11on12 device.
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        ComPtr<ID3D12CommandQueue> d3d12CommandQueue = backendDevice->GetCommandQueue();
+
+        ID3D12Device* d3d12Device = backendDevice->GetD3D12Device();
+        IUnknown* const iUnknownQueue = d3d12CommandQueue.Get();
+        if (FAILED(backendDevice->GetFunctions()->d3d11on12CreateDevice(
+                d3d12Device, 0, nullptr, 0, &iUnknownQueue, 1, 1, &d3d11Device, &d3d11DeviceContext,
+                nullptr))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11On12Device> d3d11on12Device;
+        if (FAILED(d3d11Device.As(&d3d11on12Device))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11DeviceContext2> d3d11DeviceContext2;
+        if (FAILED(d3d11DeviceContext.As(&d3d11DeviceContext2))) {
+            return nullptr;
+        }
+
+        std::unique_ptr<D3D11on12DeviceContext> result(
+            new D3D11on12DeviceContext(std::move(d3d12CommandQueue), std::move(d3d11on12Device),
+                                       std::move(d3d11DeviceContext2)));
+        return result;
+    }
+
+    D3D11on12DeviceContext::D3D11on12DeviceContext(
+        ComPtr<ID3D12CommandQueue> d3d12CommandQueue,
+        ComPtr<ID3D11On12Device> d3d11On12Device,
+        ComPtr<ID3D11DeviceContext2> d3d11on12DeviceContext)
+        : mD3D12CommandQueue(std::move(d3d12CommandQueue)),
+          mD3D11on12Device(std::move(d3d11On12Device)),
+          mD3D11on12DeviceContext(std::move(d3d11on12DeviceContext)) {
+    }
+
+    D3D11on12DeviceContext::D3D11on12DeviceContext(WGPUDevice device) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        mD3D12CommandQueue = backendDevice->GetCommandQueue();
+    }
+
+    ID3D11On12Device* D3D11on12DeviceContext::GetDevice() {
+        ASSERT(mD3D11on12Device != nullptr);
+        return mD3D11on12Device.Get();
+    }
+
+    D3D11on12DeviceContext::~D3D11on12DeviceContext() {
+        if (mD3D11on12DeviceContext == nullptr) {
+            return;
+        }
+
+        // 11on12 has a bug where D3D12 resources used only for keyed shared mutexes
+        // are not released until work is submitted to the device context and flushed.
+        // The most minimal work we can get away with is issuing a TiledResourceBarrier.
+
+        // ID3D11DeviceContext2 is available in Win8.1 and above. This suffices for a
+        // D3D12 backend since both D3D12 and 11on12 first appeared in Windows 10.
+        mD3D11on12DeviceContext->TiledResourceBarrier(nullptr, nullptr);
+        mD3D11on12DeviceContext->Flush();
+    }
+
+    size_t D3D11on12DeviceContext::HashFunc::operator()(
+        const std::unique_ptr<D3D11on12DeviceContext>& a) const {
+        size_t hash = 0;
+        HashCombine(&hash, a->mD3D12CommandQueue.Get());
+        return hash;
+    }
+
+    bool D3D11on12DeviceContext::EqualityFunc::operator()(
+        const std::unique_ptr<D3D11on12DeviceContext>& a,
+        const std::unique_ptr<D3D11on12DeviceContext>& b) const {
+        return a->mD3D12CommandQueue == b->mD3D12CommandQueue;
     }
 }}  // namespace dawn_native::d3d12

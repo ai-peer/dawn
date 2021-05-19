@@ -124,11 +124,13 @@ namespace dawn_native { namespace d3d12 {
 
         Ref<TextureBase> CreateExternalTexture(const TextureDescriptor* descriptor,
                                                ComPtr<ID3D12Resource> d3d12Texture,
+                                               ComPtr<ID3D11On12Device> d3d11On12Device,
                                                ExternalMutexSerial acquireMutexKey,
                                                bool isSwapChainTexture,
                                                bool isInitialized);
         ResultOrError<ComPtr<IDXGIKeyedMutex>> CreateKeyedMutexForTexture(
-            ID3D12Resource* d3d12Resource);
+            ID3D12Resource* d3d12Resource,
+            ComPtr<ID3D11On12Device> d3d11On12Device);
         void ReleaseKeyedMutexForTexture(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
 
         void InitTogglesFromDriver();
@@ -188,8 +190,8 @@ namespace dawn_native { namespace d3d12 {
         ComPtr<ID3D12SharingContract> mD3d12SharingContract;
 
         // 11on12 device and device context corresponding to mCommandQueue
-        ComPtr<ID3D11On12Device> mD3d11On12Device;
-        ComPtr<ID3D11DeviceContext2> mD3d11On12DeviceContext;
+        ComPtr<ID3D11On12Device>
+            mD3d11On12Device;  // Device is owned by external image and will not be outlived.
 
         ComPtr<ID3D12CommandSignature> mDispatchIndirectSignature;
         ComPtr<ID3D12CommandSignature> mDrawIndirectSignature;
