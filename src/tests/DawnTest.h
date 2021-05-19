@@ -22,6 +22,7 @@
 #include "dawn_native/DawnNative.h"
 #include "tests/ParamGenerator.h"
 #include "tests/ToggleParser.h"
+#include "utils/DebugPrint.h"
 
 #include <dawn_platform/DawnPlatform.h>
 #include <gtest/gtest.h>
@@ -301,6 +302,30 @@ class DawnTestBase {
 
     virtual std::unique_ptr<dawn_platform::Platform> CreateTestPlatform();
 
+    struct PrintToStringParamName {
+        std::string mName;
+
+        PrintToStringParamName(const char* name) : mName(name) {
+        }
+
+        template <class ParamType>
+        std::string operator()(const ::testing::TestParamInfo<ParamType>& info) const {
+            std::string paramName = ::testing::PrintToStringParamName()(info);
+
+            // We don't know the the test name at this point, but the format usually looks like
+            // this.
+            std::string testFormat = mName + ".TheTestNameUsuallyGoesHere/" + paramName;
+            if (testFormat.length() > 220) {
+                // The bots don't support test names longer than 256. Shorten the name to just an
+                // index if we're close. The failure log will still print the full param name.
+                std::ostringstream o;
+                o << static_cast<const AdapterTestParam&>(info.param) << "_" << info.index;
+                return o.str();
+            }
+            return paramName;
+        }
+    };
+
   protected:
     wgpu::Device device;
     wgpu::Queue queue;
@@ -531,7 +556,7 @@ using DawnTest = DawnTestWithParams<>;
 #define DAWN_INSTANTIATE_TEST_P(testName, ...)                                                 \
     INSTANTIATE_TEST_SUITE_P(                                                                  \
         , testName, ::testing::ValuesIn(MakeParamGenerator<testName::ParamType>(__VA_ARGS__)), \
-        testing::PrintToStringParamName());                                                    \
+        DawnTestBase::PrintToStringParamName(#testName));                                      \
     GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
 
 // Implementation for DAWN_TEST_PARAM_STRUCT to declare/print struct fields.
@@ -556,6 +581,7 @@ using DawnTest = DawnTestWithParams<>;
     };                                                                                             \
     std::ostream& operator<<(std::ostream& o,                                                      \
                              const DAWN_PP_CONCATENATE(_Dawn_, StructName) & param) {              \
+        using utils::debug_print::operator<<;                                                      \
         DAWN_PP_EXPAND(DAWN_PP_EXPAND(DAWN_PP_FOR_EACH)(DAWN_TEST_PARAM_STRUCT_PRINT_STRUCT_FIELD, \
                                                         __VA_ARGS__))                              \
         return o;                                                                                  \
