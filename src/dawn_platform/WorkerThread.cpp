@@ -14,40 +14,14 @@
 
 #include "dawn_platform/WorkerThread.h"
 
-#include <future>
+#include <functional>
+#include <thread>
 
 #include "common/Assert.h"
 
-namespace {
-
-    class AsyncWaitableEvent final : public dawn_platform::WaitableEvent {
-      public:
-        explicit AsyncWaitableEvent(std::function<void()> func) {
-            mFuture = std::async(std::launch::async, func);
-        }
-        void Wait() override {
-            ASSERT(mFuture.valid());
-            mFuture.wait();
-        }
-        bool IsComplete() override {
-            ASSERT(mFuture.valid());
-            return mFuture.wait_for(std::chrono::seconds(0)) == std::future_status::ready;
-        }
-
-      private:
-        // It is safe not to call Wait() in the destructor of AsyncWaitableEvent because since
-        // C++14 the destructor of std::future will always be blocked until its state becomes
-        // std::future_status::ready when it was created by a call of std::async and it is the
-        // last reference to the shared state.
-        // See https://en.cppreference.com/w/cpp/thread/future/~future for more details.
-        std::future<void> mFuture;
-    };
-
-}  // anonymous namespace
-
-std::unique_ptr<dawn_platform::WaitableEvent> AsyncWorkerThreadPool::PostWorkerTask(
-    dawn_platform::PostWorkerTaskCallback callback,
-    void* userdata) {
+void AsyncWorkerThreadPool::PostWorkerTask(dawn_platform::PostWorkerTaskCallback callback,
+                                           void* userdata) {
     std::function<void()> doTask = [callback, userdata]() { callback(userdata); };
-    return std::make_unique<AsyncWaitableEvent>(doTask);
+    std::thread subthread(doTask);
+    subthread.detach();
 }

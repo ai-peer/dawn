@@ -17,10 +17,8 @@
 
 #include <gtest/gtest.h>
 
-#include <list>
 #include <memory>
 #include <mutex>
-#include <queue>
 
 #include "common/NonCopyable.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -32,44 +30,49 @@ namespace {
         bool isDone = false;
     };
 
-    // A thread-safe queue that stores the task results.
-    class ConcurrentTaskResultQueue : public NonCopyable {
+    class SimpleTask;
+
+    class Tracker : public NonCopyable {
       public:
-        void TaskCompleted(const SimpleTaskResult& result) {
-            ASSERT_TRUE(result.isDone);
+        explicit Tracker(dawn_platform::WorkerTaskPool* pool);
 
-            std::lock_guard<std::mutex> lock(mMutex);
-            mTaskResultQueue.push(result);
-        }
+        void PostWorkerTask(SimpleTask* simpleTask);
+        void TaskCompleted(SimpleTaskResult taskResult);
+        size_t GetTasksOnFlightCount() const;
+        void WaitAll();
 
-        std::vector<SimpleTaskResult> GetAndPopCompletedTasks() {
-            std::lock_guard<std::mutex> lock(mMutex);
-
-            std::vector<SimpleTaskResult> results;
-            while (!mTaskResultQueue.empty()) {
-                results.push_back(mTaskResultQueue.front());
-                mTaskResultQueue.pop();
-            }
-            return results;
-        }
+        std::vector<SimpleTaskResult> GetCompletedTaskResults();
 
       private:
         std::mutex mMutex;
-        std::queue<SimpleTaskResult> mTaskResultQueue;
+        std::condition_variable mConditionVariable;
+
+        size_t mTotalTasksOnFlight;
+        std::vector<SimpleTaskResult> mTaskResults;
+
+        dawn_platform::WorkerTaskPool* mPool;
     };
 
     // A simple task that will be executed asynchronously with pool->PostWorkerTask().
     class SimpleTask : public NonCopyable {
       public:
-        SimpleTask(uint32_t id, ConcurrentTaskResultQueue* resultQueue)
-            : mId(id), mResultQueue(resultQueue) {
+        // SimpleTask is always created on heap and released in DoTaskOnWorkerTaskPool().
+        static SimpleTask* Create(uint32_t id, Tracker* tracker) {
+            return new SimpleTask(id, tracker);
+        }
+
+        void StartWorkerThreadTask(Tracker* tracker) {
+            tracker->PostWorkerTask(this);
         }
 
       private:
         friend class Tracker;
 
+        SimpleTask(uint32_t id, Tracker* tracker) : mId(id), mTracker(tracker) {
+        }
+
         static void DoTaskOnWorkerTaskPool(void* task) {
-            SimpleTask* simpleTaskPtr = static_cast<SimpleTask*>(task);
+            std::unique_ptr<SimpleTask> simpleTaskPtr(static_cast<SimpleTask*>(task));
             simpleTaskPtr->doTask();
         }
 
@@ -77,73 +80,49 @@ namespace {
             SimpleTaskResult result;
             result.id = mId;
             result.isDone = true;
-            mResultQueue->TaskCompleted(result);
+            mTracker->TaskCompleted(result);
         }
 
         uint32_t mId;
-        ConcurrentTaskResultQueue* mResultQueue;
+        Tracker* mTracker;
     };
 
-    // A simple implementation of task tracker which is only called in main thread and not
-    // thread-safe.
-    class Tracker : public NonCopyable {
-      public:
-        explicit Tracker(dawn_platform::WorkerTaskPool* pool) : mPool(pool) {
+    Tracker::Tracker(dawn_platform::WorkerTaskPool* pool) : mTotalTasksOnFlight(0), mPool(pool) {
+    }
+
+    void Tracker::PostWorkerTask(SimpleTask* simpleTask) {
+        {
+            std::lock_guard<std::mutex> lock(mMutex);
+            ++mTotalTasksOnFlight;
         }
 
-        void StartNewTask(uint32_t taskId) {
-            mTasksInFlight.emplace_back(this, mPool, taskId);
+        mPool->PostWorkerTask(SimpleTask::DoTaskOnWorkerTaskPool, simpleTask);
+    }
+
+    void Tracker::TaskCompleted(SimpleTaskResult result) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        mTaskResults.push_back(result);
+        --mTotalTasksOnFlight;
+        mConditionVariable.notify_all();
+    }
+
+    size_t Tracker::GetTasksOnFlightCount() const {
+        return mTotalTasksOnFlight;
+    }
+
+    void Tracker::WaitAll() {
+        std::unique_lock<std::mutex> lock(mMutex);
+        mConditionVariable.wait(lock, [this] { return mTotalTasksOnFlight == 0; });
+    }
+
+    std::vector<SimpleTaskResult> Tracker::GetCompletedTaskResults() {
+        std::vector<SimpleTaskResult> completedTaskResults;
+        {
+            std::unique_lock<std::mutex> lock(mMutex);
+            completedTaskResults.swap(mTaskResults);
         }
-
-        uint64_t GetTasksInFlightCount() {
-            return mTasksInFlight.size();
-        }
-
-        void WaitAll() {
-            for (auto iter = mTasksInFlight.begin(); iter != mTasksInFlight.end(); ++iter) {
-                iter->waitableEvent->Wait();
-            }
-        }
-
-        // In Tick() we clean up all the completed tasks and consume all the available results.
-        void Tick() {
-            auto iter = mTasksInFlight.begin();
-            while (iter != mTasksInFlight.end()) {
-                if (iter->waitableEvent->IsComplete()) {
-                    iter = mTasksInFlight.erase(iter);
-                } else {
-                    ++iter;
-                }
-            }
-
-            const std::vector<SimpleTaskResult>& results =
-                mCompletedTaskResultQueue.GetAndPopCompletedTasks();
-            for (const SimpleTaskResult& result : results) {
-                EXPECT_TRUE(result.isDone);
-            }
-        }
-
-      private:
-        SimpleTask* CreateSimpleTask(uint32_t taskId) {
-            return new SimpleTask(taskId, &mCompletedTaskResultQueue);
-        }
-
-        struct WaitableTask {
-            WaitableTask(Tracker* tracker, dawn_platform::WorkerTaskPool* pool, uint32_t taskId) {
-                task.reset(tracker->CreateSimpleTask(taskId));
-                waitableEvent =
-                    pool->PostWorkerTask(SimpleTask::DoTaskOnWorkerTaskPool, task.get());
-            }
-
-            std::unique_ptr<SimpleTask> task;
-            std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent;
-        };
-
-        dawn_platform::WorkerTaskPool* mPool;
-
-        std::list<WaitableTask> mTasksInFlight;
-        ConcurrentTaskResultQueue mCompletedTaskResultQueue;
-    };
+        return completedTaskResults;
+    }
 
 }  // anonymous namespace
 
@@ -155,15 +134,26 @@ TEST_F(WorkerThreadTest, Basic) {
     std::unique_ptr<dawn_platform::WorkerTaskPool> pool = platform.CreateWorkerTaskPool();
     Tracker tracker(pool.get());
 
-    constexpr uint32_t kTaskCount = 4;
+    constexpr size_t kTaskCount = 4;
+    std::set<size_t> allTaskIDs;
     for (uint32_t i = 0; i < kTaskCount; ++i) {
-        tracker.StartNewTask(i);
+        tracker.PostWorkerTask(SimpleTask::Create(i, &tracker));
+        allTaskIDs.insert(i);
     }
-    EXPECT_EQ(kTaskCount, tracker.GetTasksInFlightCount());
 
     // Wait for the completion of all the tasks.
     tracker.WaitAll();
 
-    tracker.Tick();
-    EXPECT_EQ(0u, tracker.GetTasksInFlightCount());
+    std::vector<SimpleTaskResult> completedTaskResults = tracker.GetCompletedTaskResults();
+    EXPECT_EQ(kTaskCount, completedTaskResults.size());
+    for (SimpleTaskResult result : completedTaskResults) {
+        ASSERT_TRUE(result.isDone);
+
+        const auto& iter = allTaskIDs.find(result.id);
+        ASSERT_NE(allTaskIDs.cend(), iter);
+        allTaskIDs.erase(iter);
+    }
+    EXPECT_TRUE(allTaskIDs.empty());
+
+    EXPECT_EQ(0u, tracker.GetTasksOnFlightCount());
 }

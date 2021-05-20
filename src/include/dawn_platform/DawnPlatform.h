@@ -61,22 +61,13 @@ namespace dawn_platform {
         CachingInterface& operator=(const CachingInterface&) = delete;
     };
 
-    class DAWN_PLATFORM_EXPORT WaitableEvent {
-      public:
-        WaitableEvent() = default;
-        virtual ~WaitableEvent() = default;
-        virtual void Wait() = 0;        // Wait for completion
-        virtual bool IsComplete() = 0;  // Non-blocking check if the event is complete
-    };
-
     using PostWorkerTaskCallback = void (*)(void* userdata);
 
     class DAWN_PLATFORM_EXPORT WorkerTaskPool {
       public:
         WorkerTaskPool() = default;
         virtual ~WorkerTaskPool() = default;
-        virtual std::unique_ptr<WaitableEvent> PostWorkerTask(PostWorkerTaskCallback,
-                                                              void* userdata) = 0;
+        virtual void PostWorkerTask(PostWorkerTaskCallback, void* userdata) = 0;
     };
 
     class DAWN_PLATFORM_EXPORT Platform {
