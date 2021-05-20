@@ -68,7 +68,7 @@ class DeviceLostTest : public DawnTest {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         mockDeviceLostCallback = std::make_unique<MockDeviceLostCallback>();
         mockFenceOnCompletionCallback = std::make_unique<MockFenceOnCompletionCallback>();
         mockQueueWorkDoneCallback = std::make_unique<MockQueueWorkDoneCallback>();
