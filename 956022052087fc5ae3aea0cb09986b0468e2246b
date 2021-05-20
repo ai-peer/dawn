@@ -1,0 +1,123 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ab189c0_0c244606",
+        "filename": "generator/templates/utils/DebugPrint.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "I\u0027ve wanted to do that many many times! But also wanted to use it in dawn_native, which I guess will happen to work here even if it won\u0027t pass \"gn check\"",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f5ce43c_40798fc9",
+        "filename": "generator/templates/utils/DebugPrint.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "nit: Maybe just namespace wgpu so that ADT finds it automatically?",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51f6a4fe_e3e377d7",
+        "filename": "generator/templates/utils/DebugPrint.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "Can we also have something for unknown enum values?",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fd766d5_1b82b0f6",
+        "filename": "generator/templates/utils/DebugPrint.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "nit: print TextureFormat::RGBA8Unorm instead of just RGBA8Unorm?",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ef09fe_fad256f7",
+        "filename": "generator/templates/utils/DebugPrint.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "Could we have something like that prints stuff like:\n\n TextureUsage::RenderAttachment\n TextureUsage::(Sampled|RenderAttachment)\n TextureUsage::(Sampled|RenderAttachment|0x8000000) fo unknown bits?",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15c13e79_b45ec0a2",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "Can the implementation be in the .cpp?",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a91b0b4d_f81b7a6f",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 591,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-20T19:39:35Z",
+      "side": 1,
+      "message": "Maybe this and the DebugPrint could be split to their own file?",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
