@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin,\n\nAfter reading  some more code I found we can use thread.detach() to do all the async tasks (like CreatePipelineAsync) without saving any extra objects in the main thread. It seems with thread.detach(), the sub-thread where the function is executed asynchronously will be detached from the original std::thread object, and the sub-thread will be recycled by OS after the async function is completed. In main thread we can just maintain a counter of the total thread count, and wait for the counter to be 0 before shutting down.\n\nPTAL, thanks!",
       "revId": "98b1e3f066b71f927a3cc76b83d4ce81e53e8c06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a5d6a9_b65e46fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-20T08:34:17Z",
+      "side": 1,
+      "message": "I also found according to [1], for the destructor of std::thread, \"if *this has an associated thread (joinable() \u003d\u003d true), std::terminate() is called.\", so before the async function returns, the std::thread object will still be joinable, so we cannot delete the std::thread object inside the async function.\n\nA thread object does not have an associated thread (and is safe to destroy) after\n- it was default-constructed\n- it was moved from\n- join() has been called\n- detach() has been called\n\n[1] https://en.cppreference.com/w/cpp/thread/thread/~thread",
+      "revId": "98b1e3f066b71f927a3cc76b83d4ce81e53e8c06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
