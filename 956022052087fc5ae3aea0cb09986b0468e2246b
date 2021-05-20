@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba321388_fce93005",
+        "filename": "generator/templates/utils/DebugPrint.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-20T19:43:37Z",
+      "side": 1,
+      "message": "sad thing here is that the printing for Gtest can only include alphanumeric characters and underscores - so maybe we should have two separate utilities. one of testing and one for general wgpu:: use.",
+      "parentUuid": "21ef09fe_fad256f7",
+      "revId": "956022052087fc5ae3aea0cb09986b0468e2246b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "15c13e79_b45ec0a2",
         "filename": "src/tests/DawnTest.h",
         "patchSetId": 9
