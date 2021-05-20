@@ -28,7 +28,7 @@ namespace dawn_native {
 namespace dawn_native { namespace d3d12 {
 
     struct TextureCopySubresource {
-        static constexpr unsigned int kMaxTextureCopyRegions = 2;
+        static constexpr unsigned int kMaxTextureCopyRegions = 4;
 
         struct CopyInfo {
             uint64_t alignedOffset = 0;
@@ -83,6 +83,14 @@ namespace dawn_native { namespace d3d12 {
                                                  uint64_t offset,
                                                  uint32_t bytesPerRow,
                                                  uint32_t rowsPerImage);
+
+    TextureCopySubresource Compute3DTextureCopySubresourceForSpecialCases(
+        Origin3D origin,
+        Extent3D copySize,
+        const TexelBlockInfo& blockInfo,
+        uint64_t offset,
+        uint32_t bytesPerRow,
+        uint32_t rowsPerImage);
 
     TextureCopySubresource Compute3DTextureCopySplits(Origin3D origin,
                                                       Extent3D copySize,
