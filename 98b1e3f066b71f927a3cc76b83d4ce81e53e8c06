@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d41808_d7188c23",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T14:51:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand why we need to do this: we\u0027ll need WaitableEvent at some point most likely.\n\nFor example we could internally defer all ShaderModule creation and store in the immutable cache a WaitableEvent or a concrete ShaderModule. Then when we need to immediately create a pipeline with the module, we can steal the task if it is not started or wait on it if it is started. Stuff like that.",
+      "revId": "98b1e3f066b71f927a3cc76b83d4ce81e53e8c06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9a121b70_ce45049c",
