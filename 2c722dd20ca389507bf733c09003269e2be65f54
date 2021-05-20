@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dd82f73_a2e49fe5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-20T23:32:22Z",
+      "side": 1,
+      "message": "Deprecation removal 3/3, which should get us up-to-date with all of the announced changes.",
+      "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
