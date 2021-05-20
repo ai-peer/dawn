@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545e6fdc_8de1b137",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-20T23:55:17Z",
+      "side": 1,
+      "message": "not doing so produces an infinite loop when iterating from begin to end",
+      "revId": "59eb0db84c5804b26d72bff691358bc9123f5ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5edf7bec_137e6d4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-20T23:55:17Z",
+      "side": 1,
+      "message": "Kai / Brandon PTAL! (cwallez is OOO)",
+      "revId": "59eb0db84c5804b26d72bff691358bc9123f5ae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
