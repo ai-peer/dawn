@@ -22,6 +22,30 @@
       },
       "revId": "76a5e1e91b178cfc2dbc0ffea87d77ed0675e6b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e44ce46_8d1f8269",
+        "filename": "src/tests/unittests/validation/ErrorScopeValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-20T23:10:48Z",
+      "side": 0,
+      "message": "I thought we had a different test that covered the same functionality for OnSubmittedWorkDone but upon searching again I can\u0027t find it. Replaced this test and updated it use OnSubmittedWorkDone rather than fences.",
+      "parentUuid": "384fffd6_9d5f30ad",
+      "range": {
+        "startLine": 183,
+        "startChar": 0,
+        "endLine": 185,
+        "endChar": 86
+      },
+      "revId": "76a5e1e91b178cfc2dbc0ffea87d77ed0675e6b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
