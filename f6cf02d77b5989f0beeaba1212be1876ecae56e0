@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21a05123_4cc83bd4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T11:38:30Z",
+      "side": 1,
+      "message": "nit: crash",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "301514b7_a8f2a995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T11:38:30Z",
+      "side": 1,
+      "message": "LGTM overall with some suggestions for the period computation.",
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4103182_dbd22a94",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T11:38:30Z",
+      "side": 1,
+      "message": "Maybe in DeviceMTL::Initialize we could make a \"best guess\" like if IsIntel 83.3 and otherwise 1.",
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9d52207_36d6f908",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T11:38:30Z",
+      "side": 1,
+      "message": "GetTimestampPeriodInNS gets called every ResolveQuery for timestamps which means that if one frame I do a lot of them, then mTimestampPeriod will be updated many times. But if it is called 0 times, then we don\u0027t update the timestamp at all.\n \nCould we instead do some computations on Tick and make the amount with which we update mTimestampPeriod depend on the time that has passed. We don\u0027t need to go full Kalman filter, but maybe something with exp(time_passed / half-life of 1sec?) for the mixing factor and updated the base time once in a while (otherwise we don\u0027t see small clock changes after the device has been created for a long time).",
+      "range": {
+        "startLine": 378,
+        "startChar": 18,
+        "endLine": 378,
+        "endChar": 40
+      },
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
