@@ -1141,6 +1141,23 @@ namespace dawn_native { namespace d3d12 {
 
         DAWN_TRY(SetupRenderPass(commandContext, renderPass, &renderPassBuilder));
 
+        if (device->IsToggleEnabled(Toggle::UseSetStencilRefToClearStencilAspect)) {
+            ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
+
+            // Remove stencil clear flag.
+            D3D12_RENDER_PASS_DEPTH_STENCIL_DESC* depthStencilDesc =
+                const_cast<D3D12_RENDER_PASS_DEPTH_STENCIL_DESC*>(
+                    renderPassBuilder.GetRenderPassDepthStencilDescriptor());
+            depthStencilDesc->StencilBeginningAccess.Type =
+                D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_PRESERVE;
+
+            uint8_t stencilClear =
+                renderPassBuilder.GetRenderPassDepthStencilDescriptor()
+                    ->StencilBeginningAccess.Clear.ClearValue.DepthStencil.Stencil;
+
+            commandList->OMSetStencilRef(stencilClear);
+        }
+
         // Use D3D12's native render pass API if it's available, otherwise emulate the
         // beginning and ending access operations.
         if (useRenderPass) {

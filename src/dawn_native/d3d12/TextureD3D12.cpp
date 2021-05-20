@@ -922,6 +922,18 @@ namespace dawn_native { namespace d3d12 {
                         device->GetD3D12Device()->CreateDepthStencilView(GetD3D12Resource(),
                                                                          &dsvDesc, baseDescriptor);
 
+                        if (device->IsToggleEnabled(Toggle::UseSetStencilRefToClearStencilAspect)) {
+                            if (clearFlags & D3D12_CLEAR_FLAG_STENCIL) {
+                                commandList->OMSetStencilRef(0);
+
+                                // Remove D3D12_CLEAR_FLAG_STENCIL
+                                if (clearFlags & D3D12_CLEAR_FLAG_DEPTH) {
+                                    clearFlags = {};
+                                    clearFlags = D3D12_CLEAR_FLAG_DEPTH;
+                                }
+                            }
+                        }
+
                         commandList->ClearDepthStencilView(baseDescriptor, clearFlags, fClearColor,
                                                            clearColor, 0, nullptr);
                     }

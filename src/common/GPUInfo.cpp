@@ -38,6 +38,15 @@ namespace gpu_info {
         const std::array<uint32_t, 21> Cometlake = {
             {0x9B21, 0x9BA0, 0x9BA2, 0x9BA4, 0x9BA5, 0x9BA8, 0x9BAA, 0x9BAB, 0x9BAC, 0x9B41, 0x9BC0,
              0x9BC2, 0x9BC4, 0x9BC5, 0x9BC6, 0x9BC8, 0x9BCA, 0x9BCB, 0x9BCC, 0x9BE6, 0x9BF6}};
+
+        // Intel
+        // Referenced from the following Mesa source code:
+        // https://github.com/mesa3d/mesa/blob/master/include/pci_ids/iris_pci_ids.h
+        // Xe
+        const std::array<uint32_t, 12> TigerLake = {{0x9A40, 0x9A49, 0x9A59, 0x9A60, 0x9A68, 0x9A70,
+                                                     0x9A78, 0x9AC0, 0x9AC9, 0x9AD9, 0x9AF8,
+                                                     // Xe Max
+                                                     0x4905}};
     }  // anonymous namespace
 
     bool IsAMD(PCIVendorID vendorId) {
@@ -76,5 +85,8 @@ namespace gpu_info {
         return (std::find(Coffeelake.cbegin(), Coffeelake.cend(), deviceId) != Coffeelake.cend()) ||
                (std::find(Whiskylake.cbegin(), Whiskylake.cend(), deviceId) != Whiskylake.cend()) ||
                (std::find(Cometlake.cbegin(), Cometlake.cend(), deviceId) != Cometlake.cend());
+    }
+    bool IsTigerlake(PCIDeviceID deviceId) {
+        return (std::find(TigerLake.cbegin(), TigerLake.cend(), deviceId) != TigerLake.cend());
     }
 }  // namespace gpu_info
