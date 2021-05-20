@@ -20,9 +20,7 @@
 
 class AsyncWorkerThreadPool : public dawn_platform::WorkerTaskPool, public NonCopyable {
   public:
-    std::unique_ptr<dawn_platform::WaitableEvent> PostWorkerTask(
-        dawn_platform::PostWorkerTaskCallback callback,
-        void* userdata) override;
+    void PostWorkerTask(dawn_platform::PostWorkerTaskCallback callback, void* userdata) override;
 };
 
 #endif
