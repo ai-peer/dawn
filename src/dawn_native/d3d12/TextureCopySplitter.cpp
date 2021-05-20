@@ -48,20 +48,15 @@ namespace dawn_native { namespace d3d12 {
         uint64_t alignedOffset =
             offset & ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
 
-        copy.offset = alignedOffset;
-
         // If the provided offset to the data was already 512-aligned, we can simply copy the data
         // without further translation.
         if (offset == alignedOffset) {
             copy.count = 1;
 
+            copy.copies[0].alignedOffset = alignedOffset;
             copy.copies[0].textureOffset = origin;
-
             copy.copies[0].copySize = copySize;
-
-            copy.copies[0].bufferOffset.x = 0;
-            copy.copies[0].bufferOffset.y = 0;
-            copy.copies[0].bufferOffset.z = 0;
+            copy.copies[0].bufferOffset = {0, 0, 0};
             copy.copies[0].bufferSize = copySize;
 
             return copy;
@@ -124,11 +119,11 @@ namespace dawn_native { namespace d3d12 {
 
             copy.count = 1;
 
+            copy.copies[0].alignedOffset = alignedOffset;
             copy.copies[0].textureOffset = origin;
-
             copy.copies[0].copySize = copySize;
-
             copy.copies[0].bufferOffset = texelOffset;
+
             copy.copies[0].bufferSize.width = copySize.width + texelOffset.x;
             copy.copies[0].bufferSize.height = rowsPerImageInTexels + texelOffset.y;
             copy.copies[0].bufferSize.depthOrArrayLayers = copySize.depthOrArrayLayers;
@@ -172,6 +167,7 @@ namespace dawn_native { namespace d3d12 {
 
         copy.count = 2;
 
+        copy.copies[0].alignedOffset = alignedOffset;
         copy.copies[0].textureOffset = origin;
 
         ASSERT(bytesPerRow > byteOffsetInRowPitch);
@@ -185,6 +181,7 @@ namespace dawn_native { namespace d3d12 {
         copy.copies[0].bufferSize.height = rowsPerImageInTexels + texelOffset.y;
         copy.copies[0].bufferSize.depthOrArrayLayers = copySize.depthOrArrayLayers;
 
+        copy.copies[1].alignedOffset = alignedOffset;
         copy.copies[1].textureOffset.x = origin.x + copy.copies[0].copySize.width;
         copy.copies[1].textureOffset.y = origin.y;
         copy.copies[1].textureOffset.z = origin.z;
@@ -204,55 +201,76 @@ namespace dawn_native { namespace d3d12 {
         return copy;
     }
 
-    TextureCopySplits ComputeTextureCopySplits(Origin3D origin,
-                                               Extent3D copySize,
-                                               const TexelBlockInfo& blockInfo,
-                                               uint64_t offset,
-                                               uint32_t bytesPerRow,
-                                               uint32_t rowsPerImage,
-                                               bool is3DTexture) {
+    TextureCopySplits Compute2DTextureCopySplits(Origin3D origin,
+                                                 Extent3D copySize,
+                                                 const TexelBlockInfo& blockInfo,
+                                                 uint64_t offset,
+                                                 uint32_t bytesPerRow,
+                                                 uint32_t rowsPerImage) {
         TextureCopySplits copies;
 
-        const uint64_t bytesPerSlice = bytesPerRow * rowsPerImage;
+        const uint64_t bytesPerLayer = bytesPerRow * rowsPerImage;
 
         // The function ComputeTextureCopySubresource() decides how to split the copy based on:
         // - the alignment of the buffer offset with D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT (512)
         // - the alignment of the buffer offset with D3D12_TEXTURE_DATA_PITCH_ALIGNMENT (256)
-        // Each slice of a 2D array or 3D copy might need to be split, but because of the WebGPU
-        // constraint that "bytesPerRow" must be a multiple of 256, all odd (resp. all even) slices
+        // Each layer of a 2D array might need to be split, but because of the WebGPU
+        // constraint that "bytesPerRow" must be a multiple of 256, all odd (resp. all even) layers
         // will be at an offset multiple of 512 of each other, which means they will all result in
         // the same 2D split. Thus we can just compute the copy splits for the first and second
-        // slices, and reuse them for the remaining slices by adding the related offset of each
-        // slice. Moreover, if "rowsPerImage" is even, both the first and second copy layers can
+        // layers, and reuse them for the remaining layers by adding the related offset of each
+        // layer. Moreover, if "rowsPerImage" is even, both the first and second copy layers can
         // share the same copy split, so in this situation we just need to compute copy split once
-        // and reuse it for all the slices.
+        // and reuse it for all the layers.
         Extent3D copyOneLayerSize = copySize;
         Origin3D copyFirstLayerOrigin = origin;
-        if (!is3DTexture) {
-            copyOneLayerSize.depthOrArrayLayers = 1;
-            copyFirstLayerOrigin.z = 0;
-        }
+        copyOneLayerSize.depthOrArrayLayers = 1;
+        copyFirstLayerOrigin.z = 0;
 
         copies.copySubresources[0] = ComputeTextureCopySubresource(
             copyFirstLayerOrigin, copyOneLayerSize, blockInfo, offset, bytesPerRow, rowsPerImage);
 
-        // When the copy only refers one texture 2D array layer or a 3D texture,
+        // When the copy only refers one texture 2D array layer,
         // copies.copySubresources[1] will never be used so we can safely early return here.
-        if (copySize.depthOrArrayLayers == 1 || is3DTexture) {
+        if (copySize.depthOrArrayLayers == 1) {
             return copies;
         }
 
-        if (bytesPerSlice % D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT == 0) {
+        if (bytesPerLayer % D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT == 0) {
             copies.copySubresources[1] = copies.copySubresources[0];
-            copies.copySubresources[1].offset += bytesPerSlice;
+            copies.copySubresources[1].copies[0].alignedOffset += bytesPerLayer;
+            copies.copySubresources[1].copies[1].alignedOffset += bytesPerLayer;
         } else {
-            const uint64_t bufferOffsetNextLayer = offset + bytesPerSlice;
+            const uint64_t bufferOffsetNextLayer = offset + bytesPerLayer;
             copies.copySubresources[1] =
                 ComputeTextureCopySubresource(copyFirstLayerOrigin, copyOneLayerSize, blockInfo,
                                               bufferOffsetNextLayer, bytesPerRow, rowsPerImage);
         }
 
         return copies;
+    }
+
+    TextureCopySubresource Compute3DTextureCopySplits(Origin3D origin,
+                                                      Extent3D copySize,
+                                                      const TexelBlockInfo& blockInfo,
+                                                      uint64_t offset,
+                                                      uint32_t bytesPerRow,
+                                                      uint32_t rowsPerImage) {
+        TextureCopySubresource copySubresource = ComputeTextureCopySubresource(
+            origin, copySize, blockInfo, offset, bytesPerRow, rowsPerImage);
+
+        // TODO(yunchao.he@intel.com): recompute/modify all copy regions if any copy region's
+        // bufferSize.height is bigger than copySize.height due to an empty row at the beginning
+        // of the copy region because of alignment adjustment. It can be divided into a few
+        // scenarios:
+        //     - copySize.height is 1. This is a very special case. We need to split copy regions
+        //       separately for this situation.
+        //     - copySize.height is greater than 1. And data in one row in original layout never
+        //       straddle two rows in new layout.
+        //     - copySize.height is greater than 1. And Data in one row in original layout
+        //       straddles two rows in new layout due to alignment adjustment.
+
+        return copySubresource;
     }
 
 }}  // namespace dawn_native::d3d12
