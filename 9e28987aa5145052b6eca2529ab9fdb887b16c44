@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7919bafc_81eecf9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-20T23:18:50Z",
+      "side": 1,
+      "message": "PTAL! 1st of three such patches that I\u0027ve got lined up.",
+      "revId": "9e28987aa5145052b6eca2529ab9fdb887b16c44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
