@@ -127,6 +127,15 @@ namespace dawn_native { namespace metal {
         // a different thread so we guard access to it with a mutex.
         std::mutex mLastSubmittedCommandsMutex;
         NSPRef<id<MTLCommandBuffer>> mLastSubmittedCommands;
+
+        // The current estimation of timestamp period
+        float mTimestampPeriod;
+        // The base of CPU timestamp and GPU timestamp to measure the linear regression between GPU
+        // and CPU timestamps.
+        MTLTimestamp mCpuTimestamp API_AVAILABLE(macos(10.15), ios(14.0)) = 0;
+        MTLTimestamp mGpuTimestamp API_AVAILABLE(macos(10.15), ios(14.0)) = 0;
+        // The timer to update timestamp period pre second
+        dispatch_source_t mTimestampPeriodTimer = nullptr;
     };
 
 }}  // namespace dawn_native::metal

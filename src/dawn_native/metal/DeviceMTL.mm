@@ -42,6 +42,29 @@
 
 namespace dawn_native { namespace metal {
 
+    namespace {
+
+        struct KalmanInfo {
+            float filterValue;  // The estimation value
+            float kalmanGain;   // The kalman gain
+            float R;            // The covariance of the observation noise
+            float P;            // The a posteriori estimate covariance
+        };
+
+        // A simplified kalman filter for estimating timestamp period based on measured values
+        float KalmanFilter(KalmanInfo* info, float measuredValue) {
+            // Optimize kalman gain
+            info->kalmanGain = info->P / (info->P + info->R);
+            // Correct filter value
+            info->filterValue =
+                info->kalmanGain * measuredValue + (1.0 - info->kalmanGain) * info->filterValue;
+            // Update estimate covariance
+            info->P = (1.0f - info->kalmanGain) * info->P;
+            return info->filterValue;
+        }
+
+    }  // namespace
+
     // static
     ResultOrError<Device*> Device::Create(AdapterBase* adapter,
                                           NSPRef<id<MTLDevice>> mtlDevice,
@@ -69,6 +92,58 @@ namespace dawn_native { namespace metal {
         }
 
         mCommandQueue.Acquire([*mMtlDevice newCommandQueue]);
+
+        // Make a best guess of timestamp period based on device vendor info, and converge it to an
+        // accurate value by the following calculations.
+        mTimestampPeriod = gpu_info::IsIntel(GetAdapter()->GetPCIInfo().vendorId) ? 83.333f : 1.0f;
+
+        if (@available(macos 10.15, iOS 14.0, *)) {
+            if (!mTimestampPeriodTimer) {
+                // Initialize kalman filter parameters
+                KalmanInfo* info;
+                info->filterValue = 0.0f;
+                info->kalmanGain = 0.0f;
+                info->R = 0.0001f;
+                info->P = 1.0f;
+
+                dispatch_queue_t queue = dispatch_get_global_queue(0, 0);
+                // Create timer
+                mTimestampPeriodTimer =
+                    dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue);
+                dispatch_time_t start = dispatch_time(DISPATCH_TIME_NOW, 0);
+                uint64_t interval = static_cast<uint64_t>(1 * NSEC_PER_SEC);
+                dispatch_source_set_timer(mTimestampPeriodTimer, start, interval, 0);
+                dispatch_source_set_event_handler(mTimestampPeriodTimer, ^{
+                    if (this->mCpuTimestamp == 0 && this->mGpuTimestamp == 0) {
+                        // Initialize the base of CPU and GPU timestamps on the first run
+                        [*mMtlDevice sampleTimestamps:&this->mCpuTimestamp
+                                         gpuTimestamp:&this->mGpuTimestamp];
+                    } else {
+                        MTLTimestamp cpuTimestamp, gpuTimestamp;
+                        [*mMtlDevice sampleTimestamps:&cpuTimestamp gpuTimestamp:&gpuTimestamp];
+                        if (cpuTimestamp > this->mCpuTimestamp &&
+                            gpuTimestamp > this->mGpuTimestamp) {
+                            // The measured timestamp period
+                            float timestampPeriod =
+                                (cpuTimestamp - this->mCpuTimestamp) /
+                                static_cast<float>(gpuTimestamp - this->mGpuTimestamp);
+                            this->mTimestampPeriod = KalmanFilter(info, timestampPeriod);
+
+                            // Cancel the timer if kalman gain is less than 1%, which means that the
+                            // estimated value almost can be trusted.
+                            if (info->kalmanGain < 0.01f) {
+                                dispatch_source_cancel(this->mTimestampPeriodTimer);
+                                this->mTimestampPeriodTimer = nullptr;
+                            }
+                        }
+                        this->mCpuTimestamp = cpuTimestamp;
+                        this->mGpuTimestamp = gpuTimestamp;
+                    }
+                });
+            }
+            // Start the timer
+            dispatch_resume(mTimestampPeriodTimer);
+        }
 
         return DeviceBase::Initialize(new Queue(this));
     }
@@ -361,6 +436,11 @@ namespace dawn_native { namespace metal {
 
         mCommandQueue = nullptr;
         mMtlDevice = nullptr;
+
+        if (mTimestampPeriodTimer) {
+            dispatch_source_cancel(mTimestampPeriodTimer);
+            mTimestampPeriodTimer = nullptr;
+        }
     }
 
     uint32_t Device::GetOptimalBytesPerRowAlignment() const {
@@ -372,7 +452,7 @@ namespace dawn_native { namespace metal {
     }
 
     float Device::GetTimestampPeriodInNS() const {
-        return 1.0f;
+        return mTimestampPeriod;
     }
 
 }}  // namespace dawn_native::metal
