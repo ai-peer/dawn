@@ -70,6 +70,10 @@ namespace dawn_native { namespace metal {
 
         mCommandQueue.Acquire([*mMtlDevice newCommandQueue]);
 
+        if (@available(macos 10.15, iOS 14.0, *)) {
+            [*mMtlDevice sampleTimestamps:&mCpuTimestamp gpuTimestamp:&mGpuTimestamp];
+        }
+
         return DeviceBase::Initialize(new Queue(this));
     }
 
@@ -372,7 +376,23 @@ namespace dawn_native { namespace metal {
     }
 
     float Device::GetTimestampPeriodInNS() const {
-        return 1.0f;
+        if (@available(macos 10.15, iOS 14.0, *)) {
+            // CPU timestamps are measured in nanoseconds, we can calculate a conversion factor
+            // between CPU timestamps and GPU timestamps by correlating the start and end times of
+            // the two time bases. The factor deviates from the accurate value (1.0 on AMD
+            // and 83.333 on Intel), but very close.
+            MTLTimestamp cpuTimestamp = 0, gpuTimestamp = 0;
+            [*mMtlDevice sampleTimestamps:&cpuTimestamp gpuTimestamp:&gpuTimestamp];
+            if (cpuTimestamp > mCpuTimestamp && gpuTimestamp > mGpuTimestamp) {
+                double timestampPeriod =
+                    (cpuTimestamp - mCpuTimestamp) / (double)(gpuTimestamp - mGpuTimestamp);
+
+                // Average with the previous result to converge to the accurate value.
+                return mTimestampPeriod == 1.0f ? timestampPeriod
+                                                : (mTimestampPeriod + timestampPeriod) / 2.0f;
+            }
+        }
+        return mTimestampPeriod;
     }
 
 }}  // namespace dawn_native::metal
