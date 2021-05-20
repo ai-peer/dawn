@@ -38,6 +38,7 @@
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
 
+#include <iostream>
 #include <type_traits>
 
 namespace dawn_native { namespace metal {
@@ -242,6 +243,12 @@ namespace dawn_native { namespace metal {
             if (this->mLastSubmittedCommands.Get() == pendingCommandsPointer) {
                 this->mLastSubmittedCommands = nullptr;
             }
+
+            if (@available(macos 10.15, iOS 14.0, *)) {
+                // Sample CPU timestamp and GPU timestamp at the beginning of command buffer
+                [GetMTLDevice() sampleTimestamps:&this->mCpuTimestamp
+                                    gpuTimestamp:&this->mGpuTimestamp];
+            }
         }];
 
         // Update the completed serial once the completed handler is fired. Make a local copy of
@@ -253,6 +260,23 @@ namespace dawn_native { namespace metal {
                                    uint64_t(pendingSerial));
             ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
             this->mCompletedSerial = uint64_t(pendingSerial);
+
+            if (@available(macos 10.15, iOS 14.0, *)) {
+                // Sample CPU timestamp and GPU timestamp at the end of command buffer
+                MTLTimestamp cpuTimestamp = 0, gpuTimestamp = 0;
+                [GetMTLDevice() sampleTimestamps:&cpuTimestamp gpuTimestamp:&gpuTimestamp];
+                if (cpuTimestamp > this->mCpuTimestamp && gpuTimestamp > this->mGpuTimestamp) {
+                    const double cpuDelta = cpuTimestamp - this->mCpuTimestamp;
+                    const double gpuDelta = gpuTimestamp - this->mGpuTimestamp;
+
+                    // Correlate CPU and GPU timestamps, the result should be near a fixed value
+                    // (such as 1.0 on AMD and 83.333 on Intel), and averaged with the previous
+                    // result to converge to the fixed value during the command buffer execution.
+                    mTimestampPeriod = mTimestampPeriod == 1.0f
+                                           ? cpuDelta / gpuDelta
+                                           : (mTimestampPeriod + cpuDelta / gpuDelta) / 2.0f;
+                }
+            }
         }];
 
         TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
@@ -372,7 +396,7 @@ namespace dawn_native { namespace metal {
     }
 
     float Device::GetTimestampPeriodInNS() const {
-        return 1.0f;
+        return mTimestampPeriod;
     }
 
 }}  // namespace dawn_native::metal
