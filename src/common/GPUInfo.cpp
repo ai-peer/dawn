@@ -47,6 +47,14 @@ namespace gpu_info {
             return driverVersion[2] < 100u;
         }
 
+        // Intel
+        // Referenced from the following Mesa source code:
+        // https://github.com/mesa3d/mesa/blob/master/include/pci_ids/iris_pci_ids.h
+        // Xe
+        const std::array<uint32_t, 12> TigerLake = {{0x9A40, 0x9A49, 0x9A59, 0x9A60, 0x9A68, 0x9A70,
+                                                     0x9A78, 0x9AC0, 0x9AC9, 0x9AD9, 0x9AF8,
+                                                     // Xe Max
+                                                     0x4905}};
     }  // anonymous namespace
 
     bool IsAMD(PCIVendorID vendorId) {
@@ -111,5 +119,8 @@ namespace gpu_info {
         return (std::find(Coffeelake.cbegin(), Coffeelake.cend(), deviceId) != Coffeelake.cend()) ||
                (std::find(Whiskylake.cbegin(), Whiskylake.cend(), deviceId) != Whiskylake.cend()) ||
                (std::find(Cometlake.cbegin(), Cometlake.cend(), deviceId) != Cometlake.cend());
+    }
+    bool IsTigerlake(PCIDeviceID deviceId) {
+        return (std::find(TigerLake.cbegin(), TigerLake.cend(), deviceId) != TigerLake.cend());
     }
 }  // namespace gpu_info

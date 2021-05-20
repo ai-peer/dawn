@@ -560,6 +560,14 @@ namespace dawn_native { namespace d3d12 {
                     true);
             }
         }
+
+        // Currently this workaround is only needed on Intel Gen11 GPUs.
+        // See https://crbug.com/dawn/704 for more informantion.
+        // TODO(shaobo.yan@intel.com): disable this workaround on the newer drivers when the driver
+        // bug is fixed.
+        if (gpu_info::IsIntel(pciInfo.vendorId) && (gpu_info::IsTigerlake(pciInfo.deviceId))) {
+            SetToggle(Toggle::UseSetStencilRefToClearStencilAspect, true);
+        }
     }
 
     MaybeError Device::WaitForIdleForDestruction() {

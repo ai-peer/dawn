@@ -176,7 +176,15 @@ namespace dawn_native {
               "GPUs which have a driver bug in the execution of CopyTextureRegion() when we copy "
               "with the formats whose texel block sizes are less than 4 bytes from a greater mip "
               "level to a smaller mip level on D3D12 backends.",
-              "https://crbug.com/1161355"}}
+              "https://crbug.com/1161355"}},
+            {Toggle::UseSetStencilRefToClearStencilAspect,
+             {"use_set_stencil_ref_to_clear_stencil_aspect,",
+              "Don't use renderpass or clearDepthStencilView() on d3d12 backend to clear stencil "
+              "aspect. Instead using OMSetStencilRef to set stencil aspect to the clear value."
+              "This workaround is by default enabled on some Intel GPUs which have a driver bug "
+              "to clear stencil aspect when we do clearTexture or BeginRenderPass with a stencil "
+              "clear flag.",
+              "https://crbug.com/dawn/704"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 
