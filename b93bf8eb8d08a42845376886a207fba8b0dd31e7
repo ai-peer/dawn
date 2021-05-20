@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "b93bf8eb8d08a42845376886a207fba8b0dd31e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe9eb6d_616caf79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T09:32:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b93bf8eb8d08a42845376886a207fba8b0dd31e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcc7b06_988db40d",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-20T09:32:24Z",
+      "side": 1,
+      "message": "nit: Maybe these should be suppressions.",
+      "revId": "b93bf8eb8d08a42845376886a207fba8b0dd31e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
