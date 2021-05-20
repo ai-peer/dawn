@@ -268,3 +268,19 @@ DAWN_INSTANTIATE_TEST(NonzeroTextureCreationTests,
                                       {"lazy_clear_resource_on_first_use"}),
                       VulkanBackend({"nonzero_clear_resources_on_creation_for_testing"},
                                     {"lazy_clear_resource_on_first_use"}));
+
+using Dim = wgpu::TextureDimension;
+using Usage = wgpu::TextureUsage;
+DAWN_TEST_PARAM_STRUCT(Param, Dim, Usage)
+
+class TestFoo : public DawnTestWithParams<Param> {};
+
+TEST_P(TestFoo, asdf) {
+}
+
+DAWN_INSTANTIATE_TEST_P(
+    TestFoo,
+    {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    {wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D},
+    {wgpu::TextureUsage::CopySrc,
+     wgpu::TextureUsage(wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment)});

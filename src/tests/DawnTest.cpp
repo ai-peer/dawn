@@ -243,6 +243,8 @@ DawnTestEnvironment::DawnTestEnvironment(int argc, char** argv) {
     std::unique_ptr<dawn_native::Instance> instance = CreateInstanceAndDiscoverAdapters();
     ASSERT(instance);
 
+    DAWN_DEBUG() << "Done discovering";
+
     SelectPreferredAdapterProperties(instance.get());
     PrintTestConfigurationAndAdapterInfo(instance.get());
 }
@@ -409,7 +411,10 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     auto instance = std::make_unique<dawn_native::Instance>();
     instance->EnableBeginCaptureOnStartup(mBeginCaptureOnStartup);
     instance->SetBackendValidationLevel(mBackendValidationLevel);
+    DAWN_DEBUG() << "Made instance";
+
     instance->DiscoverDefaultAdapters();
+    DAWN_DEBUG() << "Discovered adapters";
 
 #ifdef DAWN_ENABLE_BACKEND_DESKTOP_GL
     if (!glfwInit()) {
@@ -428,6 +433,7 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     dawn_native::opengl::AdapterDiscoveryOptions adapterOptions;
     adapterOptions.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptions);
+    DAWN_DEBUG() << "Discovered GL adapters";
 #endif  // DAWN_ENABLE_BACKEND_DESKTOP_GL
 
 #ifdef DAWN_ENABLE_BACKEND_OPENGLES
@@ -451,6 +457,7 @@ std::unique_ptr<dawn_native::Instance> DawnTestEnvironment::CreateInstanceAndDis
     dawn_native::opengl::AdapterDiscoveryOptionsES adapterOptionsES;
     adapterOptionsES.getProc = reinterpret_cast<void* (*)(const char*)>(glfwGetProcAddress);
     instance->DiscoverAdapters(&adapterOptionsES);
+    DAWN_DEBUG() << "Discovered GLES adapters";
     glfwWindowHint(GLFW_VISIBLE, GLFW_TRUE);
 #endif  // DAWN_ENABLE_BACKEND_OPENGLES
 
