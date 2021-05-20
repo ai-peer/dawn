@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31bfb5f4_a6fecce4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-20T23:25:06Z",
+      "side": 1,
+      "message": "Deprecation removal 2/3.\n\nThis is a large one, but it looks worse than it is because of the global rename of the *RenderPipeline2 stuff.",
+      "revId": "51b516df3770e298136ead59a05d8e8bb6ece725",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
