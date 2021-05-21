@@ -19,9 +19,13 @@
 #include "common/Assert.h"
 #include "common/Constants.h"
 #include "common/Math.h"
+#include "dawn_native/CommandBuffer.h"
+#include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/PassResourceUsage.h"
+#include "dawn_native/RenderPassEncoder.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 namespace dawn_native {
@@ -634,6 +638,236 @@ namespace dawn_native {
     MaybeError TextureBase::ValidateDestroy() const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
         return {};
+    }
+
+    ResultOrError<Ref<CommandBufferBase>> TextureBase::GenerateClearTextureCommands(
+        const SubresourceRange& range,
+        TextureBase::ClearValue clearValue) {
+        const uint32_t clearStencil = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
+        const float clearDepth = (clearValue == TextureBase::ClearValue::Zero) ? 0.0 : 1.0;
+        const double clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.0 : 1.0;
+
+        Ref<CommandEncoder> encoder = nullptr;
+        auto EnsureEncoder = [&]() {
+            if (encoder == nullptr) {
+                encoder = AcquireRef(
+                    new CommandEncoder(GetDevice(), nullptr, /* validationEnabled */ false));
+            }
+            return encoder.Get();
+        };
+
+        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0 &&
+            GetDimension() == wgpu::TextureDimension::e2D) {
+            ASSERT(GetFormat().isRenderable);
+            if (GetFormat().HasDepthOrStencil()) {
+                // Create a render pass to clear each subresource.
+                for (uint32_t level = range.baseMipLevel;
+                     level < range.baseMipLevel + range.levelCount; ++level) {
+                    for (uint32_t arrayLayer = range.baseArrayLayer;
+                         arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
+                                level, arrayLayer, range.aspects))) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
+
+                        // At least one aspect needs clearing. Iterate the aspects individually to
+                        // determine which to clear.
+                        Aspect aspectsToClear = Aspect::None;
+                        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+                            if (clearValue == TextureBase::ClearValue::Zero &&
+                                IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
+                                    level, arrayLayer, aspect))) {
+                                // Skip lazy clears if already initialized.
+                                continue;
+                            }
+                            aspectsToClear |= aspect;
+                        }
+
+                        TextureViewDescriptor viewDesc = {};
+                        viewDesc.baseMipLevel = level;
+                        viewDesc.mipLevelCount = 1;
+                        viewDesc.baseArrayLayer = arrayLayer;
+                        viewDesc.arrayLayerCount = 1;
+
+                        if (aspectsToClear == (Aspect::Depth | Aspect::Stencil)) {
+                            viewDesc.aspect = wgpu::TextureAspect::All;
+                        } else if (aspectsToClear == Aspect::Depth) {
+                            viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+                        } else if (aspectsToClear == Aspect::Stencil) {
+                            viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
+                        } else {
+                            UNREACHABLE();
+                        }
+
+                        Ref<TextureViewBase> view =
+                            GetDevice()->CreateTextureView(this, &viewDesc).AcquireSuccess();
+
+                        RenderPassDepthStencilAttachment attachment = {};
+                        attachment.view = view.Get();
+                        attachment.depthLoadOp = wgpu::LoadOp::Clear;
+                        attachment.depthStoreOp = wgpu::StoreOp::Store;
+                        attachment.clearDepth = clearDepth;
+                        attachment.stencilLoadOp = wgpu::LoadOp::Clear;
+                        attachment.stencilStoreOp = wgpu::StoreOp::Store;
+                        attachment.clearStencil = clearStencil;
+
+                        RenderPassDescriptor renderPassDesc = {};
+                        renderPassDesc.colorAttachmentCount = 0;
+                        renderPassDesc.colorAttachments = nullptr;
+                        renderPassDesc.depthStencilAttachment = &attachment;
+
+                        Ref<RenderPassEncoder> renderPass =
+                            AcquireRef(EnsureEncoder()->APIBeginRenderPass(&renderPassDesc));
+                        renderPass->APIEndPass();
+                    }
+                }
+            } else {
+                ASSERT(GetFormat().IsColor());
+                for (uint32_t level = range.baseMipLevel;
+                     level < range.baseMipLevel + range.levelCount; ++level) {
+                    // Create multiple render passes with each subresource as a color attachment to
+                    // clear them all. Only do this for array layers to ensure all attachments have
+                    // the same size.
+                    RenderPassDescriptor renderPassDesc = {};
+                    std::array<Ref<TextureViewBase>, kMaxColorAttachments> views;
+                    std::array<RenderPassColorAttachment, kMaxColorAttachments> attachments;
+                    renderPassDesc.colorAttachments = attachments.data();
+
+                    auto FlushAttachments = [&]() {
+                        Ref<RenderPassEncoder> renderPass =
+                            AcquireRef(EnsureEncoder()->APIBeginRenderPass(&renderPassDesc));
+                        renderPass->APIEndPass();
+                    };
+
+                    uint32_t attachment = 0;
+                    for (uint32_t arrayLayer = range.baseArrayLayer;
+                         arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
+                                level, arrayLayer, Aspect::Color))) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
+
+                        TextureViewDescriptor viewDesc = {};
+                        viewDesc.baseMipLevel = level;
+                        viewDesc.mipLevelCount = 1;
+                        viewDesc.baseArrayLayer = arrayLayer;
+                        viewDesc.arrayLayerCount = 1;
+
+                        views[attachment] =
+                            GetDevice()->CreateTextureView(this, &viewDesc).AcquireSuccess();
+                        attachments[attachment].view = views[attachment].Get();
+                        attachments[attachment].loadOp = wgpu::LoadOp::Clear;
+                        attachments[attachment].storeOp = wgpu::StoreOp::Store;
+                        attachments[attachment].clearColor = {clearColor, clearColor, clearColor,
+                                                              clearColor};
+
+                        attachment++;
+
+                        if (attachment == kMaxColorAttachments) {
+                            renderPassDesc.colorAttachmentCount = kMaxColorAttachments;
+                            attachment = 0;
+                            FlushAttachments();
+                        }
+                    }
+
+                    if (attachment != 0) {
+                        renderPassDesc.colorAttachmentCount = attachment;
+                        FlushAttachments();
+                    }
+                }
+            }
+        } else {
+            // Encode a buffer to texture copy to clear each subresource.
+            for (Aspect aspect : IterateEnumMask(range.aspects)) {
+                const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
+
+                // We will lazily allocate a staging buffer once for the largest mip in this aspect.
+                // We could share one buffer for all aspects, but then we need to sort them to
+                // determine the aspect with the largest block size.
+                UploadHandle uploadHandle = {};
+                uint32_t bytesPerRow;
+                uint32_t rowsPerImage;
+                auto AllocateStagingBuffer = [&](uint32_t level) -> MaybeError {
+                    Extent3D mipSize = GetMipLevelPhysicalSize(level);
+
+                    // Compute the buffer size big enough to fill the largest mip.
+                    bytesPerRow = Align(blockInfo.byteSize * mipSize.width / blockInfo.width,
+                                        GetDevice()->GetOptimalBytesPerRowAlignment());
+
+                    rowsPerImage = mipSize.height / blockInfo.height;
+
+                    uint64_t bufferSize = static_cast<uint64_t>(bytesPerRow) * rowsPerImage *
+                                          mipSize.depthOrArrayLayers;
+
+                    uint64_t alignment =
+                        std::max(uint64_t(blockInfo.byteSize),
+                                 GetDevice()->GetOptimalBufferToTextureCopyOffsetAlignment());
+                    DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
+                    DAWN_TRY_ASSIGN(
+                        uploadHandle,
+                        uploader->Allocate(bufferSize, GetDevice()->GetPendingCommandSerial(),
+                                           alignment));
+                    memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
+
+                    return {};
+                };
+
+                for (uint32_t level = range.baseMipLevel;
+                     level < range.baseMipLevel + range.levelCount; ++level) {
+                    Extent3D mipSize = GetMipLevelPhysicalSize(level);
+
+                    for (uint32_t arrayLayer = range.baseArrayLayer;
+                         arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
+                        if (clearValue == TextureBase::ClearValue::Zero &&
+                            IsSubresourceContentInitialized(
+                                SubresourceRange::SingleMipAndLayer(level, arrayLayer, aspect))) {
+                            // Skip lazy clears if already initialized.
+                            continue;
+                        }
+
+                        if (uploadHandle.stagingBuffer == nullptr) {
+                            DAWN_TRY(AllocateStagingBuffer(level));
+                            ASSERT(uploadHandle.stagingBuffer != nullptr);
+                        }
+
+                        TextureDataLayout layout;
+                        layout.offset = uploadHandle.startOffset;
+                        layout.bytesPerRow = bytesPerRow;
+                        layout.rowsPerImage = rowsPerImage;
+
+                        ImageCopyTexture copyTexture;
+                        copyTexture.texture = this;
+                        copyTexture.mipLevel = level;
+                        copyTexture.origin = {0, 0, arrayLayer};
+                        switch (aspect) {
+                            case Aspect::Color:
+                                copyTexture.aspect = wgpu::TextureAspect::All;
+                                break;
+                            case Aspect::Depth:
+                                copyTexture.aspect = wgpu::TextureAspect::DepthOnly;
+                                break;
+                            case Aspect::Stencil:
+                                copyTexture.aspect = wgpu::TextureAspect::StencilOnly;
+                                break;
+                            case Aspect::None:
+                            case Aspect::Plane0:
+                            case Aspect::Plane1:
+                            case Aspect::CombinedDepthStencil:
+                                UNREACHABLE();
+                        }
+
+                        EnsureEncoder()->CopyStagingBufferToTexture(
+                            uploadHandle.stagingBuffer, &layout, &copyTexture, &mipSize);
+                    }
+                }
+            }
+        }
+        ASSERT(encoder != nullptr);
+        return AcquireRef(encoder->APIFinish());
     }
 
     // TextureViewBase

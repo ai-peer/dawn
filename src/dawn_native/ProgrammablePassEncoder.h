@@ -59,9 +59,6 @@ namespace dawn_native {
         EncodingContext* mEncodingContext = nullptr;
 
         uint64_t mDebugGroupStackSize = 0;
-
-      private:
-        const bool mValidationEnabled;
     };
 
 }  // namespace dawn_native

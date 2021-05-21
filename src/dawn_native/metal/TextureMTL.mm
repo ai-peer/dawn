@@ -19,6 +19,7 @@
 #include "common/Platform.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/EnumMaskIterator.h"
+#include "dawn_native/metal/CommandBufferMTL.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/StagingBufferMTL.h"
 #include "dawn_native/metal/UtilsMetal.h"
@@ -405,199 +406,14 @@ namespace dawn_native { namespace metal {
     MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                      const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
-        Device* device = ToBackend(GetDevice());
+        Ref<CommandBufferBase> cmds;
+        DAWN_TRY_ASSIGN(cmds, GenerateClearTextureCommands(range, clearValue));
 
-        const uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
-        const double dClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.0 : 1.0;
-
-        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0) {
-            ASSERT(GetFormat().isRenderable);
-
-            // End the blit encoder if it is open.
-            commandContext->EndBlit();
-
-            if (GetFormat().HasDepthOrStencil()) {
-                // Create a render pass to clear each subresource.
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    for (uint32_t arrayLayer = range.baseArrayLayer;
-                         arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                level, arrayLayer, range.aspects))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-
-                        // Note that this creates a descriptor that's autoreleased so we don't use
-                        // AcquireNSRef
-                        NSRef<MTLRenderPassDescriptor> descriptorRef =
-                            [MTLRenderPassDescriptor renderPassDescriptor];
-                        MTLRenderPassDescriptor* descriptor = descriptorRef.Get();
-
-                        // At least one aspect needs clearing. Iterate the aspects individually to
-                        // determine which to clear.
-                        for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                            if (clearValue == TextureBase::ClearValue::Zero &&
-                                IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                    level, arrayLayer, aspect))) {
-                                // Skip lazy clears if already initialized.
-                                continue;
-                            }
-
-                            ASSERT(GetDimension() == wgpu::TextureDimension::e2D);
-                            switch (aspect) {
-                                case Aspect::Depth:
-                                    descriptor.depthAttachment.texture = GetMTLTexture();
-                                    descriptor.depthAttachment.level = level;
-                                    descriptor.depthAttachment.slice = arrayLayer;
-                                    descriptor.depthAttachment.loadAction = MTLLoadActionClear;
-                                    descriptor.depthAttachment.storeAction = MTLStoreActionStore;
-                                    descriptor.depthAttachment.clearDepth = dClearColor;
-                                    break;
-                                case Aspect::Stencil:
-                                    descriptor.stencilAttachment.texture = GetMTLTexture();
-                                    descriptor.stencilAttachment.level = level;
-                                    descriptor.stencilAttachment.slice = arrayLayer;
-                                    descriptor.stencilAttachment.loadAction = MTLLoadActionClear;
-                                    descriptor.stencilAttachment.storeAction = MTLStoreActionStore;
-                                    descriptor.stencilAttachment.clearStencil =
-                                        static_cast<uint32_t>(clearColor);
-                                    break;
-                                default:
-                                    UNREACHABLE();
-                            }
-                        }
-
-                        commandContext->BeginRender(descriptor);
-                        commandContext->EndRender();
-                    }
-                }
-            } else {
-                ASSERT(GetFormat().IsColor());
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    // Create multiple render passes with each subresource as a color attachment to
-                    // clear them all. Only do this for array layers to ensure all attachments have
-                    // the same size.
-                    NSRef<MTLRenderPassDescriptor> descriptor;
-                    uint32_t attachment = 0;
-
-                    uint32_t numZSlices = GetMipLevelVirtualSize(level).depthOrArrayLayers;
-
-                    for (uint32_t arrayLayer = range.baseArrayLayer;
-                         arrayLayer < range.baseArrayLayer + range.layerCount; arrayLayer++) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(SubresourceRange::SingleMipAndLayer(
-                                level, arrayLayer, Aspect::Color))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-
-                        for (uint32_t z = 0; z < numZSlices; ++z) {
-                            if (descriptor == nullptr) {
-                                // Note that this creates a descriptor that's autoreleased so we
-                                // don't use AcquireNSRef
-                                descriptor = [MTLRenderPassDescriptor renderPassDescriptor];
-                            }
-
-                            [*descriptor colorAttachments][attachment].texture = GetMTLTexture();
-                            [*descriptor colorAttachments][attachment].loadAction =
-                                MTLLoadActionClear;
-                            [*descriptor colorAttachments][attachment].storeAction =
-                                MTLStoreActionStore;
-                            [*descriptor colorAttachments][attachment].clearColor =
-                                MTLClearColorMake(dClearColor, dClearColor, dClearColor,
-                                                  dClearColor);
-                            [*descriptor colorAttachments][attachment].level = level;
-                            [*descriptor colorAttachments][attachment].slice = arrayLayer;
-                            [*descriptor colorAttachments][attachment].depthPlane = z;
-
-                            attachment++;
-
-                            if (attachment == kMaxColorAttachments) {
-                                attachment = 0;
-                                commandContext->BeginRender(descriptor.Get());
-                                commandContext->EndRender();
-                                descriptor = nullptr;
-                            }
-                        }
-                    }
-
-                    if (descriptor != nullptr) {
-                        commandContext->BeginRender(descriptor.Get());
-                        commandContext->EndRender();
-                    }
-                }
-            }
-        } else {
-            Extent3D largestMipSize = GetMipLevelVirtualSize(range.baseMipLevel);
-
-            // Encode a buffer to texture copy to clear each subresource.
-            for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                // Compute the buffer size big enough to fill the largest mip.
-                const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
-
-                // Metal validation layers: sourceBytesPerRow must be at least 64.
-                uint32_t largestMipBytesPerRow =
-                    std::max((largestMipSize.width / blockInfo.width) * blockInfo.byteSize, 64u);
-
-                // Metal validation layers: sourceBytesPerImage must be at least 512.
-                uint64_t largestMipBytesPerImage =
-                    std::max(static_cast<uint64_t>(largestMipBytesPerRow) *
-                                 (largestMipSize.height / blockInfo.height),
-                             512llu);
-
-                uint64_t bufferSize = largestMipBytesPerImage * largestMipSize.depthOrArrayLayers;
-
-                if (bufferSize > std::numeric_limits<NSUInteger>::max()) {
-                    return DAWN_OUT_OF_MEMORY_ERROR("Unable to allocate buffer.");
-                }
-
-                DynamicUploader* uploader = device->GetDynamicUploader();
-                UploadHandle uploadHandle;
-                DAWN_TRY_ASSIGN(uploadHandle,
-                                uploader->Allocate(bufferSize, device->GetPendingCommandSerial(),
-                                                   blockInfo.byteSize));
-                memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
-
-                id<MTLBuffer> uploadBuffer =
-                    ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle();
-
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    Extent3D virtualSize = GetMipLevelVirtualSize(level);
-
-                    for (uint32_t arrayLayer = range.baseArrayLayer;
-                         arrayLayer < range.baseArrayLayer + range.layerCount; ++arrayLayer) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, arrayLayer, aspect))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-
-                        MTLBlitOption blitOption = ComputeMTLBlitOption(GetFormat(), aspect);
-                        [commandContext->EnsureBlit()
-                                 copyFromBuffer:uploadBuffer
-                                   sourceOffset:uploadHandle.startOffset
-                              sourceBytesPerRow:largestMipBytesPerRow
-                            sourceBytesPerImage:largestMipBytesPerImage
-                                     sourceSize:MTLSizeMake(virtualSize.width, virtualSize.height,
-                                                            virtualSize.depthOrArrayLayers)
-                                      toTexture:GetMTLTexture()
-                               destinationSlice:arrayLayer
-                               destinationLevel:level
-                              destinationOrigin:MTLOriginMake(0, 0, 0)
-                                        options:blitOption];
-                    }
-                }
-            }
-        }
-
+        ASSERT(cmds != nullptr);
+        DAWN_TRY(ToBackend(cmds)->FillCommands(commandContext));
         if (clearValue == TextureBase::ClearValue::Zero) {
             SetIsSubresourceContentInitialized(true, range);
-            device->IncrementLazyClearCountForTesting();
+            GetDevice()->IncrementLazyClearCountForTesting();
         }
         return {};
     }

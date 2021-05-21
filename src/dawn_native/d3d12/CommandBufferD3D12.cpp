@@ -27,6 +27,7 @@
 #include "dawn_native/d3d12/RenderPassBuilderD3D12.h"
 #include "dawn_native/d3d12/RenderPipelineD3D12.h"
 #include "dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
+#include "dawn_native/d3d12/StagingBufferD3D12.h"
 #include "dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
 
@@ -669,6 +670,34 @@ namespace dawn_native { namespace d3d12 {
 
                     RecordCopyBufferToTexture(commandContext, copy->destination,
                                               buffer->GetD3D12Resource(), copy->source.offset,
+                                              copy->source.bytesPerRow, copy->source.rowsPerImage,
+                                              copy->copySize, texture, subresources.aspects);
+
+                    break;
+                }
+
+                case Command::CopyStagingBufferToTexture: {
+                    CopyStagingBufferToTextureCmd* copy =
+                        mCommands.NextCommand<CopyStagingBufferToTextureCmd>();
+                    StagingBuffer* buffer = ToBackend(copy->source.buffer);
+                    Texture* texture = ToBackend(copy->destination.texture.Get());
+
+                    ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
+                    SubresourceRange subresources =
+                        GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
+
+                    if (IsCompleteSubresourceCopiedTo(texture, copy->copySize,
+                                                      copy->destination.mipLevel)) {
+                        texture->SetIsSubresourceContentInitialized(true, subresources);
+                    } else {
+                        texture->EnsureSubresourceContentInitialized(commandContext, subresources);
+                    }
+
+                    texture->TrackUsageAndTransitionNow(commandContext, wgpu::TextureUsage::CopyDst,
+                                                        subresources);
+
+                    RecordCopyBufferToTexture(commandContext, copy->destination,
+                                              buffer->GetResource(), copy->source.offset,
                                               copy->source.bytesPerRow, copy->source.rowsPerImage,
                                               copy->copySize, texture, subresources.aspects);
 

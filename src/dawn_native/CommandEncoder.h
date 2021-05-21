@@ -26,9 +26,13 @@
 
 namespace dawn_native {
 
+    class StagingBufferBase;
+
     class CommandEncoder final : public ObjectBase {
       public:
-        CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);
+        CommandEncoder(DeviceBase* device,
+                       const CommandEncoderDescriptor* descriptor,
+                       bool validationEnabled = true);
 
         CommandIterator AcquireCommands();
         CommandBufferResourceUsage AcquireResourceUsages();
@@ -55,6 +59,11 @@ namespace dawn_native {
                                      const ImageCopyTexture* destination,
                                      const Extent3D* copySize);
 
+        void CopyStagingBufferToTexture(StagingBufferBase* stagingBuffer,
+                                        const TextureDataLayout* layout,
+                                        const ImageCopyTexture* destination,
+                                        const Extent3D* copySize);
+
         void APIInjectValidationError(const char* message);
         void APIInsertDebugMarker(const char* groupLabel);
         void APIPopDebugGroup();
@@ -70,6 +79,8 @@ namespace dawn_native {
         CommandBufferBase* APIFinish(const CommandBufferDescriptor* descriptor = nullptr);
 
       private:
+        bool IsValidationEnabled() const;
+
         ResultOrError<Ref<CommandBufferBase>> FinishInternal(
             const CommandBufferDescriptor* descriptor);
 

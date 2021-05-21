@@ -20,6 +20,7 @@
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/d3d12/BufferD3D12.h"
+#include "dawn_native/d3d12/CommandBufferD3D12.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
@@ -871,140 +872,11 @@ namespace dawn_native { namespace d3d12 {
     MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                      const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
+        Ref<CommandBufferBase> cmds;
+        DAWN_TRY_ASSIGN(cmds, GenerateClearTextureCommands(range, clearValue));
 
-        ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
-
-        Device* device = ToBackend(GetDevice());
-
-        uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
-        float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
-
-        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0) {
-            if (GetFormat().HasDepthOrStencil()) {
-                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
-
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    for (uint32_t layer = range.baseArrayLayer;
-                         layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                        // Iterate the aspects individually to determine which clear flags to use.
-                        D3D12_CLEAR_FLAGS clearFlags = {};
-                        for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                            if (clearValue == TextureBase::ClearValue::Zero &&
-                                IsSubresourceContentInitialized(
-                                    SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
-                                // Skip lazy clears if already initialized.
-                                continue;
-                            }
-
-                            switch (aspect) {
-                                case Aspect::Depth:
-                                    clearFlags |= D3D12_CLEAR_FLAG_DEPTH;
-                                    break;
-                                case Aspect::Stencil:
-                                    clearFlags |= D3D12_CLEAR_FLAG_STENCIL;
-                                    break;
-                                default:
-                                    UNREACHABLE();
-                            }
-                        }
-
-                        if (clearFlags == 0) {
-                            continue;
-                        }
-
-                        CPUDescriptorHeapAllocation dsvHandle;
-                        DAWN_TRY_ASSIGN(dsvHandle, device->GetDepthStencilViewAllocator()
-                                                       ->AllocateTransientCPUDescriptors());
-                        const D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor =
-                            dsvHandle.GetBaseDescriptor();
-                        D3D12_DEPTH_STENCIL_VIEW_DESC dsvDesc = GetDSVDescriptor(level, layer, 1);
-                        device->GetD3D12Device()->CreateDepthStencilView(GetD3D12Resource(),
-                                                                         &dsvDesc, baseDescriptor);
-
-                        commandList->ClearDepthStencilView(baseDescriptor, clearFlags, fClearColor,
-                                                           clearColor, 0, nullptr);
-                    }
-                }
-            } else {
-                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET,
-                                           range);
-
-                const float clearColorRGBA[4] = {fClearColor, fClearColor, fClearColor,
-                                                 fClearColor};
-
-                ASSERT(range.aspects == Aspect::Color);
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    for (uint32_t layer = range.baseArrayLayer;
-                         layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, Aspect::Color))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-
-                        CPUDescriptorHeapAllocation rtvHeap;
-                        DAWN_TRY_ASSIGN(rtvHeap, device->GetRenderTargetViewAllocator()
-                                                     ->AllocateTransientCPUDescriptors());
-                        const D3D12_CPU_DESCRIPTOR_HANDLE rtvHandle = rtvHeap.GetBaseDescriptor();
-
-                        D3D12_RENDER_TARGET_VIEW_DESC rtvDesc = GetRTVDescriptor(level, layer, 1);
-                        device->GetD3D12Device()->CreateRenderTargetView(GetD3D12Resource(),
-                                                                         &rtvDesc, rtvHandle);
-                        commandList->ClearRenderTargetView(rtvHandle, clearColorRGBA, 0, nullptr);
-                    }
-                }
-            }
-        } else {
-            // create temp buffer with clear color to copy to the texture image
-            TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
-
-            for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
-
-                Extent3D largestMipSize = GetMipLevelPhysicalSize(range.baseMipLevel);
-
-                uint32_t bytesPerRow =
-                    Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
-                          kTextureBytesPerRowAlignment);
-                uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
-                                      largestMipSize.depthOrArrayLayers;
-                DynamicUploader* uploader = device->GetDynamicUploader();
-                UploadHandle uploadHandle;
-                DAWN_TRY_ASSIGN(uploadHandle,
-                                uploader->Allocate(bufferSize, device->GetPendingCommandSerial(),
-                                                   blockInfo.byteSize));
-                memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
-
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    // compute d3d12 texture copy locations for texture and buffer
-                    Extent3D copySize = GetMipLevelPhysicalSize(level);
-
-                    uint32_t rowsPerImage = copySize.height / blockInfo.height;
-                    TextureCopySubresource copySplit = ComputeTextureCopySubresource(
-                        {0, 0, 0}, copySize, blockInfo, uploadHandle.startOffset, bytesPerRow,
-                        rowsPerImage);
-
-                    for (uint32_t layer = range.baseArrayLayer;
-                         layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-
-                        RecordCopyBufferToTextureFromTextureCopySplit(
-                            commandList, copySplit,
-                            ToBackend(uploadHandle.stagingBuffer)->GetResource(), 0, bytesPerRow,
-                            this, level, layer, aspect);
-                    }
-                }
-            }
-        }
+        ASSERT(cmds != nullptr);
+        DAWN_TRY(ToBackend(cmds)->RecordCommands(commandContext));
         if (clearValue == TextureBase::ClearValue::Zero) {
             SetIsSubresourceContentInitialized(true, range);
             GetDevice()->IncrementLazyClearCountForTesting();

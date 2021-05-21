@@ -114,10 +114,11 @@ namespace {
                                               : GetParam().mDepthOrArrayLayers;
 
             uint32_t texelCount = mipSize * mipSize * depthOrArrayLayers;
+            bool renderable = (GetParam().mUsage & wgpu::TextureUsage::RenderAttachment) != 0 &&
+                              GetParam().mDimension == wgpu::TextureDimension::e2D;
             switch (GetParam().mFormat) {
                 case wgpu::TextureFormat::R8Unorm: {
-                    if ((GetParam().mUsage & wgpu::TextureUsage::RenderAttachment) != 0 ||
-                        IsVulkan() || IsOpenGL() || IsOpenGLES()) {
+                    if (renderable || IsOpenGL() || IsOpenGLES()) {
                         std::vector<uint8_t> expected(texelCount, 0xFF);
                         EXPECT_TEXTURE_EQ(expected.data(), texture, {0, 0, 0},
                                           {mipSize, mipSize, depthOrArrayLayers}, mip);
@@ -129,8 +130,7 @@ namespace {
                     break;
                 }
                 case wgpu::TextureFormat::RG8Unorm: {
-                    if ((GetParam().mUsage & wgpu::TextureUsage::RenderAttachment) != 0 ||
-                        IsVulkan() || IsOpenGL() || IsOpenGLES()) {
+                    if (renderable || IsOpenGL() || IsOpenGLES()) {
                         std::vector<uint16_t> expected(texelCount, 0xFFFF);
                         EXPECT_TEXTURE_EQ(expected.data(), texture, {0, 0, 0},
                                           {mipSize, mipSize, depthOrArrayLayers}, mip);
@@ -142,8 +142,7 @@ namespace {
                     break;
                 }
                 case wgpu::TextureFormat::RGBA8Unorm: {
-                    if ((GetParam().mUsage & wgpu::TextureUsage::RenderAttachment) != 0 ||
-                        IsVulkan() || IsOpenGL() || IsOpenGLES()) {
+                    if (renderable || IsOpenGL() || IsOpenGLES()) {
                         std::vector<uint32_t> expected(texelCount, 0xFFFFFFFF);
                         EXPECT_TEXTURE_EQ(expected.data(), texture, {0, 0, 0},
                                           {mipSize, mipSize, depthOrArrayLayers}, mip);
@@ -155,15 +154,13 @@ namespace {
                     break;
                 }
                 case wgpu::TextureFormat::RGBA8Snorm: {
-                    std::vector<RGBA8> expected(
-                        texelCount, IsVulkan() ? RGBA8(127, 127, 127, 127) : RGBA8(1, 1, 1, 1));
+                    std::vector<RGBA8> expected(texelCount, RGBA8(1, 1, 1, 1));
                     EXPECT_TEXTURE_EQ(expected.data(), texture, {0, 0, 0},
                                       {mipSize, mipSize, depthOrArrayLayers}, mip);
                     break;
                 }
                 case wgpu::TextureFormat::Depth32Float: {
-                    if ((GetParam().mUsage & wgpu::TextureUsage::RenderAttachment) != 0 ||
-                        IsVulkan() || IsOpenGL() || IsOpenGLES()) {
+                    if (renderable || IsOpenGL() || IsOpenGLES()) {
                         std::vector<float> expected(texelCount, 1.f);
                         EXPECT_TEXTURE_EQ(expected.data(), texture, {0, 0, 0},
                                           {mipSize, mipSize, depthOrArrayLayers}, mip);
@@ -181,7 +178,7 @@ namespace {
                             float fValue = *reinterpret_cast<float*>(&value);
                             std::vector<float> expectedDepth(
                                 mipSize * mipSize,
-                                (IsVulkan() || IsOpenGL() ||
+                                (IsOpenGL() ||
                                  (GetParam().mUsage & wgpu::TextureUsage::RenderAttachment) != 0)
                                     ? 1.f
                                     : fValue);

@@ -26,6 +26,7 @@
 #include "dawn_native/metal/QuerySetMTL.h"
 #include "dawn_native/metal/RenderPipelineMTL.h"
 #include "dawn_native/metal/SamplerMTL.h"
+#include "dawn_native/metal/StagingBufferMTL.h"
 #include "dawn_native/metal/TextureMTL.h"
 #include "dawn_native/metal/UtilsMetal.h"
 
@@ -704,6 +705,24 @@ namespace dawn_native { namespace metal {
                     EnsureDestinationTextureInitialized(commandContext, texture, dst, copySize);
 
                     RecordCopyBufferToTexture(commandContext, buffer->GetMTLBuffer(),
+                                              buffer->GetSize(), src.offset, src.bytesPerRow,
+                                              src.rowsPerImage, texture, dst.mipLevel, dst.origin,
+                                              dst.aspect, copySize);
+                    break;
+                }
+
+                case Command::CopyStagingBufferToTexture: {
+                    CopyStagingBufferToTextureCmd* copy =
+                        mCommands.NextCommand<CopyStagingBufferToTextureCmd>();
+                    auto& src = copy->source;
+                    auto& dst = copy->destination;
+                    auto& copySize = copy->copySize;
+                    StagingBuffer* buffer = ToBackend(src.buffer);
+                    Texture* texture = ToBackend(dst.texture.Get());
+
+                    EnsureDestinationTextureInitialized(commandContext, texture, dst, copySize);
+
+                    RecordCopyBufferToTexture(commandContext, buffer->GetBufferHandle(),
                                               buffer->GetSize(), src.offset, src.bytesPerRow,
                                               src.rowsPerImage, texture, dst.mipLevel, dst.origin,
                                               dst.aspect, copySize);
