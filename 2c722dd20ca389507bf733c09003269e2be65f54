@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d84e4d8e_74ce8e29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-21T01:02:55Z",
+      "side": 1,
+      "message": "LGTM with commented out stuff removed",
+      "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3edb2831_595476c8",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 1
@@ -48,6 +65,24 @@
       "writtenOn": "2021-05-21T00:15:06Z",
       "side": 1,
       "message": "in case another reviewer is curious, we don\u0027t actually care about the rest of the bindings. We only care that buffers and dynamic buffers are first.\n\nNot sure why I sorted on these other members before.",
+      "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f6cf33e_9c51ade3",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-21T01:02:55Z",
+      "side": 1,
+      "message": "Did we want a stable order for deduplicating bind group layouts? I assume not, we have the hash and equality for that.",
+      "parentUuid": "3edb2831_595476c8",
       "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
