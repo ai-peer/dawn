@@ -17,132 +17,56 @@
 
 #include <gtest/gtest.h>
 
-#include <list>
 #include <memory>
 #include <mutex>
-#include <queue>
 
 #include "common/NonCopyable.h"
+#include "dawn_native/CallbackTaskManager.h"
 #include "dawn_platform/DawnPlatform.h"
 
 namespace {
 
     struct SimpleTaskResult {
         uint32_t id;
-        bool isDone = false;
     };
 
     // A thread-safe queue that stores the task results.
     class ConcurrentTaskResultQueue : public NonCopyable {
       public:
-        void TaskCompleted(const SimpleTaskResult& result) {
-            ASSERT_TRUE(result.isDone);
-
+        void TaskCompleted(std::unique_ptr<SimpleTaskResult> result) {
             std::lock_guard<std::mutex> lock(mMutex);
-            mTaskResultQueue.push(result);
+            mTaskResults.push_back(std::move(result));
         }
 
-        std::vector<SimpleTaskResult> GetAndPopCompletedTasks() {
-            std::lock_guard<std::mutex> lock(mMutex);
-
-            std::vector<SimpleTaskResult> results;
-            while (!mTaskResultQueue.empty()) {
-                results.push_back(mTaskResultQueue.front());
-                mTaskResultQueue.pop();
+        std::vector<std::unique_ptr<SimpleTaskResult>> GetAllResults() {
+            std::vector<std::unique_ptr<SimpleTaskResult>> outputResults;
+            {
+                std::lock_guard<std::mutex> lock(mMutex);
+                outputResults.swap(mTaskResults);
             }
-            return results;
+            return outputResults;
         }
 
       private:
         std::mutex mMutex;
-        std::queue<SimpleTaskResult> mTaskResultQueue;
+        std::vector<std::unique_ptr<SimpleTaskResult>> mTaskResults;
     };
 
-    // A simple task that will be executed asynchronously with pool->PostWorkerTask().
-    class SimpleTask : public NonCopyable {
+    class Task : public dawn_native::WorkerThreadTask {
       public:
-        SimpleTask(uint32_t id, ConcurrentTaskResultQueue* resultQueue)
-            : mId(id), mResultQueue(resultQueue) {
+        Task(ConcurrentTaskResultQueue* resultQueue, uint32_t id)
+            : mResultQueue(resultQueue), mId(id) {
+        }
+
+        void Run() override {
+            std::unique_ptr<SimpleTaskResult> result = std::make_unique<SimpleTaskResult>();
+            result->id = mId;
+            mResultQueue->TaskCompleted(std::move(result));
         }
 
       private:
-        friend class Tracker;
-
-        static void DoTaskOnWorkerTaskPool(void* task) {
-            SimpleTask* simpleTaskPtr = static_cast<SimpleTask*>(task);
-            simpleTaskPtr->doTask();
-        }
-
-        void doTask() {
-            SimpleTaskResult result;
-            result.id = mId;
-            result.isDone = true;
-            mResultQueue->TaskCompleted(result);
-        }
-
-        uint32_t mId;
         ConcurrentTaskResultQueue* mResultQueue;
-    };
-
-    // A simple implementation of task tracker which is only called in main thread and not
-    // thread-safe.
-    class Tracker : public NonCopyable {
-      public:
-        explicit Tracker(dawn_platform::WorkerTaskPool* pool) : mPool(pool) {
-        }
-
-        void StartNewTask(uint32_t taskId) {
-            mTasksInFlight.emplace_back(this, mPool, taskId);
-        }
-
-        uint64_t GetTasksInFlightCount() {
-            return mTasksInFlight.size();
-        }
-
-        void WaitAll() {
-            for (auto iter = mTasksInFlight.begin(); iter != mTasksInFlight.end(); ++iter) {
-                iter->waitableEvent->Wait();
-            }
-        }
-
-        // In Tick() we clean up all the completed tasks and consume all the available results.
-        void Tick() {
-            auto iter = mTasksInFlight.begin();
-            while (iter != mTasksInFlight.end()) {
-                if (iter->waitableEvent->IsComplete()) {
-                    iter = mTasksInFlight.erase(iter);
-                } else {
-                    ++iter;
-                }
-            }
-
-            const std::vector<SimpleTaskResult>& results =
-                mCompletedTaskResultQueue.GetAndPopCompletedTasks();
-            for (const SimpleTaskResult& result : results) {
-                EXPECT_TRUE(result.isDone);
-            }
-        }
-
-      private:
-        SimpleTask* CreateSimpleTask(uint32_t taskId) {
-            return new SimpleTask(taskId, &mCompletedTaskResultQueue);
-        }
-
-        struct WaitableTask {
-            WaitableTask(Tracker* tracker, dawn_platform::WorkerTaskPool* pool, uint32_t taskId) {
-                task.reset(tracker->CreateSimpleTask(taskId));
-                waitableEvent =
-                    pool->PostWorkerTask(SimpleTask::DoTaskOnWorkerTaskPool, task.get());
-            }
-
-            std::unique_ptr<SimpleTask> task;
-            std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent;
-        };
-
-        dawn_platform::WorkerTaskPool* mPool;
-
-        std::list<WaitableTask> mTasksInFlight;
-        ConcurrentTaskResultQueue mCompletedTaskResultQueue;
+        uint32_t mId;
     };
 
 }  // anonymous namespace
@@ -153,17 +77,24 @@ class WorkerThreadTest : public testing::Test {};
 TEST_F(WorkerThreadTest, Basic) {
     dawn_platform::Platform platform;
     std::unique_ptr<dawn_platform::WorkerTaskPool> pool = platform.CreateWorkerTaskPool();
-    Tracker tracker(pool.get());
 
-    constexpr uint32_t kTaskCount = 4;
+    dawn_native::WorkerThreadTaskManager taskManager(pool.get());
+    ConcurrentTaskResultQueue taskResultQueue;
+
+    constexpr size_t kTaskCount = 4u;
+    std::set<uint32_t> idset;
     for (uint32_t i = 0; i < kTaskCount; ++i) {
-        tracker.StartNewTask(i);
+        std::unique_ptr<Task> task = std::make_unique<Task>(&taskResultQueue, i);
+        taskManager.PostTask(std::move(task));
+        idset.insert(i);
     }
-    EXPECT_EQ(kTaskCount, tracker.GetTasksInFlightCount());
 
-    // Wait for the completion of all the tasks.
-    tracker.WaitAll();
+    taskManager.WaitAllPendingTasks();
 
-    tracker.Tick();
-    EXPECT_EQ(0u, tracker.GetTasksInFlightCount());
+    std::vector<std::unique_ptr<SimpleTaskResult>> results = taskResultQueue.GetAllResults();
+    ASSERT_EQ(kTaskCount, results.size());
+    for (std::unique_ptr<SimpleTaskResult>& result : results) {
+        idset.erase(result->id);
+    }
+    ASSERT_TRUE(idset.empty());
 }
