@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "228d3370_88c6484d",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-21T06:51:43Z",
+      "side": 1,
+      "message": "Corentin, you mentioned that after we recompute/modify the copy regions to handle empty row problem, we can re-iterate the new copy regions and see that if copySubresource.copies[i].copySize.height is 0 (it only happens when original copySize.height is 1) , we need to re-re-compute copy regions: https://dawn-review.googlesource.com/c/dawn/+/51282/2/src/dawn_native/d3d12/TextureCopySplitter.cpp#287. But I feel like we can\u0027t reuse the recomputed copy regions, so we can handle copySize.height \u003d 1 directly alongside other situations as a separate scenario. Please see the comment change between patchset 1 and patch set 2. \n\nBtw, Compute3DTextureCopySplits will be complicated, it will not be like its counterpart Compute2DTextureCopySplits. Instead, it will be very like ComputeTextureCopySubresource.",
+      "revId": "b882f7e367f18bdacf489c7101d10f08ffdd9c73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
