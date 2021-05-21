@@ -23,8 +23,13 @@
 
 namespace dawn_native {
 
-    EncodingContext::EncodingContext(DeviceBase* device, const ObjectBase* initialEncoder)
-        : mDevice(device), mTopLevelEncoder(initialEncoder), mCurrentEncoder(initialEncoder) {
+    EncodingContext::EncodingContext(DeviceBase* device,
+                                     const ObjectBase* initialEncoder,
+                                     bool validationEnabled)
+        : mDevice(device),
+          mTopLevelEncoder(initialEncoder),
+          mCurrentEncoder(initialEncoder),
+          mValidationEnabled(validationEnabled) {
     }
 
     EncodingContext::~EncodingContext() {
@@ -65,6 +70,10 @@ namespace dawn_native {
         } else {
             mDevice->HandleError(error->GetType(), error->GetMessage().c_str());
         }
+    }
+
+    bool EncodingContext::IsValidationEnabled() const {
+        return mValidationEnabled;
     }
 
     void EncodingContext::EnterPass(const ObjectBase* passEncoder) {

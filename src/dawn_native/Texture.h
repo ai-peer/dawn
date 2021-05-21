@@ -90,6 +90,10 @@ namespace dawn_native {
         TextureViewBase* APICreateView(const TextureViewDescriptor* descriptor = nullptr);
         void APIDestroy();
 
+        ResultOrError<Ref<CommandBufferBase>> GenerateClearTextureCommands(
+            const SubresourceRange& range,
+            ClearValue clearValue);
+
       protected:
         void DestroyInternal();
 
