@@ -36,7 +36,21 @@ namespace dawn_wire { namespace client {
         std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
         std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
         void* writeData = nullptr;
-        size_t writeHandleCreateInfoLength = 0;
+        // size_t writeHandleCreateInfoLength = 0;
+
+        // Create the buffer and send the creation command.
+        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(wireClient);
+        Buffer* buffer = bufferObjectAndSerial->object.get();
+        buffer->mDevice = device;
+        buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
+        buffer->mSize = descriptor->size;
+
+        DeviceCreateBufferCmd cmd;
+        cmd.deviceId = device->id;
+        cmd.descriptor = descriptor;
+        cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->generation};
+        // cmd.handleCreateInfoLength = writeHandleCreateInfoLength;
+        cmd.handleCreateInfo = nullptr;
 
         // If the buffer is mapped at creation, create a write handle that will represent the
         // mapping of the whole buffer.
@@ -47,10 +61,14 @@ namespace dawn_wire { namespace client {
                 readHandle.reset(
                     wireClient->GetMemoryTransferService()->CreateReadHandle(descriptor->size));
                 if (readHandle == nullptr) {
-                    device->InjectError(WGPUErrorType_OutOfMemory,
-                                        "Failed to create buffer mapping");
-                    return device->CreateErrorBuffer();
+                    if (!device->GetAliveWeakPtr().expired()) {
+                        device->InjectError(WGPUErrorType_OutOfMemory,
+                                            "Failed to create buffer mapping");
+                        return device->CreateErrorBuffer();
+                    }
                 }
+
+                cmd.handleCreateInfoLength = readHandle->SerializeCreateSize();
             }
 
             if ((descriptor->usage & WGPUBufferUsage_MapWrite) != 0 ||
@@ -76,68 +94,32 @@ namespace dawn_wire { namespace client {
                     ASSERT(writeDataLength == descriptor->size);
 
                     // Get the serialization size of the write handle.
-                    writeHandleCreateInfoLength = writeHandle->SerializeCreateSize();
+                    cmd.handleCreateInfoLength = writeHandle->SerializeCreateSize();
                 }
             }
         }
 
-        // // If the buffer is mapped at creation, create a write handle that will represent the
-        // // mapping of the whole buffer.
-        // if (descriptor->mappedAtCreation) {
-        //     // Create the handle.
-        //     writeHandle.reset(
-        //         wireClient->GetMemoryTransferService()->CreateWriteHandle(descriptor->size));
-        //     if (writeHandle == nullptr) {
-        //         device->InjectError(WGPUErrorType_OutOfMemory, "Buffer mapping allocation
-        //         failed"); return device->CreateErrorBuffer();
-        //     }
-
-        //     // Open the handle, it may fail by returning a nullptr in writeData.
-        //     size_t writeDataLength = 0;
-        //     std::tie(writeData, writeDataLength) = writeHandle->Open();
-        //     if (writeData == nullptr) {
-        //         device->InjectError(WGPUErrorType_OutOfMemory, "Buffer mapping allocation
-        //         failed"); return device->CreateErrorBuffer();
-        //     }
-        //     ASSERT(writeDataLength == descriptor->size);
-
-        //     // Get the serialization size of the write handle.
-        //     writeHandleCreateInfoLength = writeHandle->SerializeCreateSize();
-        // }
-
-        // Create the buffer and send the creation command.
-        auto* bufferObjectAndSerial = wireClient->BufferAllocator().New(wireClient);
-        Buffer* buffer = bufferObjectAndSerial->object.get();
-        buffer->mDevice = device;
-        buffer->mDeviceIsAlive = device->GetAliveWeakPtr();
-        buffer->mSize = descriptor->size;
-
-        DeviceCreateBufferCmd cmd;
-        cmd.deviceId = device->id;
-        cmd.descriptor = descriptor;
-        cmd.result = ObjectHandle{buffer->id, bufferObjectAndSerial->generation};
-        cmd.handleCreateInfoLength = writeHandleCreateInfoLength;
-        cmd.handleCreateInfo = nullptr;
-
         wireClient->SerializeCommand(
-            cmd, writeHandleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
+            cmd, cmd.handleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
                 if (readHandle != nullptr) {
-                    buffer->mReadHandle = std::move(readHandle);
-                } else if (writeHandle != nullptr) {
-                    buffer->mWriteHandle = std::move(writeHandle);
-                }
-                // return WireResult::Success;
+                    char* readHandleBuffer;
+                    WIRE_TRY(serializeBuffer->NextN(cmd.handleCreateInfoLength, &readHandleBuffer));
+                    readHandle->SerializeCreate(readHandleBuffer);
 
-                if (descriptor->mappedAtCreation) {
+                    buffer->mReadHandle = std::move(readHandle);
+                    buffer->mMappedData = writeData;
+                    buffer->mMapOffset = 0;
+                    buffer->mMapSize = buffer->mSize;
+                } else if (writeHandle != nullptr) {
                     char* writeHandleBuffer;
                     WIRE_TRY(
-                        serializeBuffer->NextN(writeHandleCreateInfoLength, &writeHandleBuffer));
+                        serializeBuffer->NextN(cmd.handleCreateInfoLength, &writeHandleBuffer));
                     // Serialize the WriteHandle into the space after the command.
-                    buffer->mWriteHandle->SerializeCreate(writeHandleBuffer);
+                    writeHandle->SerializeCreate(writeHandleBuffer);
 
                     // Set the buffer state for the mapping at creation. The buffer now owns the
                     // write handle..
-                    // buffer->mWriteHandle = std::move(writeHandle);
+                    buffer->mWriteHandle = std::move(writeHandle);
                     buffer->mMappedData = writeData;
                     buffer->mMapOffset = 0;
                     buffer->mMapSize = buffer->mSize;
@@ -248,7 +230,8 @@ namespace dawn_wire { namespace client {
         // Step 2a: Create the read / write handles for this request.
         // Existence of mReadHandle/mWriteHandle indicates if the buffer usage
         // contains MapRead/MapWrite as the handles are created on buffer creation
-        if (isReadMode && mReadHandle != nullptr) {
+        if (isReadMode) {
+            ASSERT(mReadHandle != nullptr);
             // request.readHandle.reset(client->GetMemoryTransferService()->CreateReadHandle(size));
             // if (request.readHandle == nullptr) {
             //     if (!mDeviceIsAlive.expired()) {
@@ -262,7 +245,7 @@ namespace dawn_wire { namespace client {
             // TODO: buffeUsage must include
             // request.readHandle.reset(mReadHandle.get());
 
-            mReadHandle->ResetSize(size);
+            // mReadHandle->ResetSize(size);
             request.readHandle = mReadHandle;
 
             // if (request.readHandle == nullptr) {
@@ -274,8 +257,8 @@ namespace dawn_wire { namespace client {
             //     return;
             // }
             // } else {
-        } else if (isWriteMode && mWriteHandle != nullptr) {
-            ASSERT(isWriteMode);
+        } else if (isWriteMode) {
+            ASSERT(mWriteHandle != nullptr);
             // request.writeHandle.reset(client->GetMemoryTransferService()->CreateWriteHandle(size));
             // if (request.writeHandle == nullptr) {
             //     if (!mDeviceIsAlive.expired()) {
@@ -286,7 +269,8 @@ namespace dawn_wire { namespace client {
             //     return;
             // }
             // request.writeHandle.reset(mWriteHandle.get());
-            mWriteHandle->ResetSize(size);
+
+            // mWriteHandle->ResetSize(size);
             request.writeHandle = mWriteHandle;
         }
 
@@ -299,28 +283,28 @@ namespace dawn_wire { namespace client {
         cmd.size = size;
         cmd.handleCreateInfo = nullptr;
 
-        // Step 3a. Fill the handle create info in the command.
-        if (isReadMode) {
-            cmd.handleCreateInfoLength = request.readHandle->SerializeCreateSize();
-            client->SerializeCommand(
-                cmd, cmd.handleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
-                    char* readHandleBuffer;
-                    WIRE_TRY(serializeBuffer->NextN(cmd.handleCreateInfoLength, &readHandleBuffer));
-                    request.readHandle->SerializeCreate(readHandleBuffer);
-                    return WireResult::Success;
-                });
-        } else {
-            ASSERT(isWriteMode);
-            cmd.handleCreateInfoLength = request.writeHandle->SerializeCreateSize();
-            client->SerializeCommand(
-                cmd, cmd.handleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
-                    char* writeHandleBuffer;
-                    WIRE_TRY(
-                        serializeBuffer->NextN(cmd.handleCreateInfoLength, &writeHandleBuffer));
-                    request.writeHandle->SerializeCreate(writeHandleBuffer);
-                    return WireResult::Success;
-                });
-        }
+        // // Step 3a. Fill the handle create info in the command.
+        // if (isReadMode) {
+        //     cmd.handleCreateInfoLength = request.readHandle->SerializeCreateSize();
+        //     client->SerializeCommand(
+        //         cmd, cmd.handleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
+        //             char* readHandleBuffer;
+        //             WIRE_TRY(serializeBuffer->NextN(cmd.handleCreateInfoLength,
+        //             &readHandleBuffer)); request.readHandle->SerializeCreate(readHandleBuffer);
+        //             return WireResult::Success;
+        //         });
+        // } else {
+        //     ASSERT(isWriteMode);
+        //     cmd.handleCreateInfoLength = request.writeHandle->SerializeCreateSize();
+        //     client->SerializeCommand(
+        //         cmd, cmd.handleCreateInfoLength, [&](SerializeBuffer* serializeBuffer) {
+        //             char* writeHandleBuffer;
+        //             WIRE_TRY(
+        //                 serializeBuffer->NextN(cmd.handleCreateInfoLength, &writeHandleBuffer));
+        //             request.writeHandle->SerializeCreate(writeHandleBuffer);
+        //             return WireResult::Success;
+        //         });
+        // }
 
         // Step 4. Register this request so that we can retrieve it from its serial when the server
         // sends the callback.
