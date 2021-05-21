@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/CallbackTaskManager.h"
+#include "dawn_platform/DawnPlatform.h"
 
 namespace dawn_native {
 
