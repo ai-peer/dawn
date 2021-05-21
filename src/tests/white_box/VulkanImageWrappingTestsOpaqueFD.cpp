@@ -33,7 +33,7 @@ namespace dawn_native { namespace vulkan {
           public:
             void SetUp() override {
                 DawnTest::SetUp();
-                DAWN_SKIP_TEST_IF(UsesWire());
+                DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
                 deviceVk = reinterpret_cast<dawn_native::vulkan::Device*>(device.Get());
             }
@@ -260,7 +260,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test no error occurs if the import is valid
     TEST_P(VulkanImageWrappingValidationTests, SuccessfulImport) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         wgpu::Texture texture =
             WrapVulkanImage(device, &defaultDescriptor, defaultFd, defaultAllocationSize,
                             defaultMemoryTypeIndex, {}, true, true);
@@ -270,7 +270,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if the texture descriptor is invalid
     TEST_P(VulkanImageWrappingValidationTests, InvalidTextureDescriptor) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         wgpu::ChainedStruct chainedDescriptor;
         defaultDescriptor.nextInChain = &chainedDescriptor;
 
@@ -282,7 +282,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if the descriptor dimension isn't 2D
     TEST_P(VulkanImageWrappingValidationTests, InvalidTextureDimension) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         defaultDescriptor.dimension = wgpu::TextureDimension::e1D;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapVulkanImage(
@@ -293,7 +293,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if the descriptor mip level count isn't 1
     TEST_P(VulkanImageWrappingValidationTests, InvalidMipLevelCount) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         defaultDescriptor.mipLevelCount = 2;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapVulkanImage(
@@ -304,7 +304,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if the descriptor depth isn't 1
     TEST_P(VulkanImageWrappingValidationTests, InvalidDepth) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         defaultDescriptor.size.depthOrArrayLayers = 2;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapVulkanImage(
@@ -315,7 +315,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if the descriptor sample count isn't 1
     TEST_P(VulkanImageWrappingValidationTests, InvalidSampleCount) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         defaultDescriptor.sampleCount = 4;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapVulkanImage(
@@ -326,7 +326,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if we try to export the signal semaphore twice
     TEST_P(VulkanImageWrappingValidationTests, DoubleSignalSemaphoreExport) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         wgpu::Texture texture =
             WrapVulkanImage(device, &defaultDescriptor, defaultFd, defaultAllocationSize,
                             defaultMemoryTypeIndex, {}, true, true);
@@ -341,7 +341,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if we try to export the signal semaphore from a normal texture
     TEST_P(VulkanImageWrappingValidationTests, NormalTextureSignalSemaphoreExport) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         wgpu::Texture texture = device.CreateTexture(&defaultDescriptor);
         ASSERT_NE(texture.Get(), nullptr);
 
@@ -353,7 +353,7 @@ namespace dawn_native { namespace vulkan {
 
     // Test an error occurs if we try to export the signal semaphore from a destroyed texture
     TEST_P(VulkanImageWrappingValidationTests, DestroyedTextureSignalSemaphoreExport) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
         wgpu::Texture texture = device.CreateTexture(&defaultDescriptor);
         ASSERT_NE(texture.Get(), nullptr);
         texture.Destroy();
@@ -469,7 +469,7 @@ namespace dawn_native { namespace vulkan {
     // Clear an image in |secondDevice|
     // Verify clear color is visible in |device|
     TEST_P(VulkanImageWrappingUsageTests, ClearImageAcrossDevices) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
@@ -500,7 +500,7 @@ namespace dawn_native { namespace vulkan {
     // Clear an image in |secondDevice|
     // Verify clear color is not visible in |device| if we import the texture as not cleared
     TEST_P(VulkanImageWrappingUsageTests, UninitializedTextureIsCleared) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
@@ -532,7 +532,7 @@ namespace dawn_native { namespace vulkan {
     // Issue a copy of the imported texture inside |device| to |copyDstTexture|
     // Verify the clear color from |secondDevice| is visible in |copyDstTexture|
     TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureSrcSync) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
@@ -575,7 +575,7 @@ namespace dawn_native { namespace vulkan {
     // If texture destination isn't synchronized, |secondDevice| could copy color B
     // into the texture first, then |device| writes color A
     TEST_P(VulkanImageWrappingUsageTests, CopyTextureToTextureDstSync) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |device|
         wgpu::Texture wrappedTexture = WrapVulkanImage(
@@ -627,7 +627,7 @@ namespace dawn_native { namespace vulkan {
     // Issue a copy of the imported texture inside |device| to |copyDstBuffer|
     // Verify the clear color from |secondDevice| is visible in |copyDstBuffer|
     TEST_P(VulkanImageWrappingUsageTests, CopyTextureToBufferSrcSync) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
@@ -683,7 +683,7 @@ namespace dawn_native { namespace vulkan {
     // If texture destination isn't synchronized, |secondDevice| could copy color B
     // into the texture first, then |device| writes color A
     TEST_P(VulkanImageWrappingUsageTests, CopyBufferToTextureDstSync) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |device|
         wgpu::Texture wrappedTexture = WrapVulkanImage(
@@ -746,7 +746,7 @@ namespace dawn_native { namespace vulkan {
     // Issue second copy to |secondCopyDstTexture|
     // Verify the clear color from |secondDevice| is visible in both copies
     TEST_P(VulkanImageWrappingUsageTests, DoubleTextureUsage) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Import the image on |secondDevice|
         wgpu::Texture wrappedTexture =
@@ -798,7 +798,7 @@ namespace dawn_native { namespace vulkan {
     // Copy C->D on device 1 (wait on C from previous op)
     // Verify D has same color as A
     TEST_P(VulkanImageWrappingUsageTests, ChainTextureCopy) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         // Close |defaultFd| since this test doesn't import it anywhere
         close(defaultFd);
@@ -912,7 +912,7 @@ namespace dawn_native { namespace vulkan {
 
     // Tests a larger image is preserved when importing
     TEST_P(VulkanImageWrappingUsageTests, LargerImage) {
-        DAWN_SKIP_TEST_IF(UsesWire());
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
         close(defaultFd);
 
