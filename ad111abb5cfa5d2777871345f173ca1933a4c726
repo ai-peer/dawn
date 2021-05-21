@@ -16,6 +16,149 @@
       "message": "PTAL, thanks!",
       "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9659bb05_d2ba7dc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd451fa5_c2a4ba29",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "nit: unsupported?",
+      "range": {
+        "startLine": 763,
+        "startChar": 4,
+        "endLine": 763,
+        "endChar": 25
+      },
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72341ad_dff3041c",
+        "filename": "src/tests/end2end/MultisampledRenderingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 825,
+        "startChar": 4,
+        "endLine": 825,
+        "endChar": 25
+      },
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e302fb4_c7245726",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "nit: unsupported",
+      "range": {
+        "startLine": 166,
+        "startChar": 4,
+        "endLine": 166,
+        "endChar": 25
+      },
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "876112b3_66d7025d",
+        "filename": "src/tests/end2end/TextureZeroInitTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1424,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "I think this should be unsupported. Ditto in other places in this file.",
+      "range": {
+        "startLine": 1424,
+        "startChar": 4,
+        "endLine": 1424,
+        "endChar": 25
+      },
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be51fc93_20cd9336",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c238ae15_92cd9dc4",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-05-21T08:36:37Z",
+      "side": 1,
+      "message": "I think all of these can be removed since we have [1]?",
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
