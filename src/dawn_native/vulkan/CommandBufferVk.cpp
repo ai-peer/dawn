@@ -30,6 +30,7 @@
 #include "dawn_native/vulkan/QuerySetVk.h"
 #include "dawn_native/vulkan/RenderPassCache.h"
 #include "dawn_native/vulkan/RenderPipelineVk.h"
+#include "dawn_native/vulkan/StagingBufferVk.h"
 #include "dawn_native/vulkan/TextureVk.h"
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
@@ -566,6 +567,47 @@ namespace dawn_native { namespace vulkan {
                     ToBackend(dst.texture)
                         ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst, range);
                     VkBuffer srcBuffer = ToBackend(src.buffer)->GetHandle();
+                    VkImage dstImage = ToBackend(dst.texture)->GetHandle();
+
+                    // Dawn guarantees dstImage be in the TRANSFER_DST_OPTIMAL layout after the
+                    // copy command.
+                    device->fn.CmdCopyBufferToImage(commands, srcBuffer, dstImage,
+                                                    VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, 1,
+                                                    &region);
+                    break;
+                }
+
+                case Command::CopyStagingBufferToTexture: {
+                    CopyStagingBufferToTextureCmd* copy =
+                        mCommands.NextCommand<CopyStagingBufferToTextureCmd>();
+                    auto& src = copy->source;
+                    auto& dst = copy->destination;
+
+                    TextureDataLayout dataLayout;
+                    dataLayout.offset = src.offset;
+                    dataLayout.rowsPerImage = src.rowsPerImage;
+                    dataLayout.bytesPerRow = src.bytesPerRow;
+
+                    VkBufferImageCopy region =
+                        ComputeBufferImageCopyRegion(dataLayout, dst, copy->copySize);
+                    VkImageSubresourceLayers subresource = region.imageSubresource;
+
+                    ASSERT(dst.texture->GetDimension() != wgpu::TextureDimension::e1D);
+                    SubresourceRange range =
+                        GetSubresourcesAffectedByCopy(copy->destination, copy->copySize);
+
+                    if (IsCompleteSubresourceCopiedTo(dst.texture.Get(), copy->copySize,
+                                                      subresource.mipLevel)) {
+                        // Since texture has been overwritten, it has been "initialized"
+                        dst.texture->SetIsSubresourceContentInitialized(true, range);
+                    } else {
+                        ToBackend(dst.texture)
+                            ->EnsureSubresourceContentInitialized(recordingContext, range);
+                    }
+
+                    ToBackend(dst.texture)
+                        ->TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst, range);
+                    VkBuffer srcBuffer = ToBackend(src.buffer)->GetBufferHandle();
                     VkImage dstImage = ToBackend(dst.texture)->GetHandle();
 
                     // Dawn guarantees dstImage be in the TRANSFER_DST_OPTIMAL layout after the

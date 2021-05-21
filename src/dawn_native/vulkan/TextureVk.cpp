@@ -22,6 +22,7 @@
 #include "dawn_native/VulkanBackend.h"
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BufferVk.h"
+#include "dawn_native/vulkan/CommandBufferVk.h"
 #include "dawn_native/vulkan/CommandRecordingContext.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/FencedDeleter.h"
@@ -575,6 +576,7 @@ namespace dawn_native { namespace vulkan {
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
             DAWN_TRY(ClearTexture(ToBackend(GetDevice())->GetPendingRecordingContext(),
                                   GetAllSubresources(), TextureBase::ClearValue::NonZero));
+            SetIsSubresourceContentInitialized(false, GetAllSubresources());
         }
 
         return {};
@@ -1006,143 +1008,12 @@ namespace dawn_native { namespace vulkan {
     MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
                                      const SubresourceRange& range,
                                      TextureBase::ClearValue clearValue) {
-        Device* device = ToBackend(GetDevice());
+        Ref<CommandBufferBase> cmds;
+        DAWN_TRY_ASSIGN(cmds, GenerateClearTextureCommands(range, clearValue));
 
-        const bool isZero = clearValue == TextureBase::ClearValue::Zero;
-        uint32_t uClearColor = isZero ? 0 : 1;
-        int32_t sClearColor = isZero ? 0 : 1;
-        float fClearColor = isZero ? 0.f : 1.f;
-
-        TransitionUsageNow(recordingContext, wgpu::TextureUsage::CopyDst, range);
-
-        VkImageSubresourceRange imageRange = {};
-        imageRange.levelCount = 1;
-        imageRange.layerCount = 1;
-
-        if (GetFormat().isCompressed) {
-            if (range.aspects == Aspect::None) {
-                return {};
-            }
-            // need to clear the texture with a copy from buffer
-            ASSERT(range.aspects == Aspect::Color);
-            const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
-
-            Extent3D largestMipSize = GetMipLevelPhysicalSize(range.baseMipLevel);
-
-            uint32_t bytesPerRow =
-                Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
-                      device->GetOptimalBytesPerRowAlignment());
-            uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
-                                  largestMipSize.depthOrArrayLayers;
-            DynamicUploader* uploader = device->GetDynamicUploader();
-            UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle,
-                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial(),
-                                               blockInfo.byteSize));
-            memset(uploadHandle.mappedBuffer, uClearColor, bufferSize);
-
-            std::vector<VkBufferImageCopy> regions;
-            for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
-                 ++level) {
-                Extent3D copySize = GetMipLevelPhysicalSize(level);
-                imageRange.baseMipLevel = level;
-                for (uint32_t layer = range.baseArrayLayer;
-                     layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                    if (clearValue == TextureBase::ClearValue::Zero &&
-                        IsSubresourceContentInitialized(
-                            SubresourceRange::SingleMipAndLayer(level, layer, range.aspects))) {
-                        // Skip lazy clears if already initialized.
-                        continue;
-                    }
-
-                    TextureDataLayout dataLayout;
-                    dataLayout.offset = uploadHandle.startOffset;
-                    dataLayout.rowsPerImage = copySize.height / blockInfo.height;
-                    dataLayout.bytesPerRow = bytesPerRow;
-                    TextureCopy textureCopy;
-                    textureCopy.aspect = range.aspects;
-                    textureCopy.mipLevel = level;
-                    textureCopy.origin = {0, 0, layer};
-                    textureCopy.texture = this;
-
-                    regions.push_back(
-                        ComputeBufferImageCopyRegion(dataLayout, textureCopy, copySize));
-                }
-            }
-            device->fn.CmdCopyBufferToImage(
-                recordingContext->commandBuffer,
-                ToBackend(uploadHandle.stagingBuffer)->GetBufferHandle(), GetHandle(),
-                VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, regions.size(), regions.data());
-        } else {
-            for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
-                 ++level) {
-                imageRange.baseMipLevel = level;
-                for (uint32_t layer = range.baseArrayLayer;
-                     layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                    Aspect aspects = Aspect::None;
-                    for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-                        aspects |= aspect;
-                    }
-
-                    if (aspects == Aspect::None) {
-                        continue;
-                    }
-
-                    imageRange.aspectMask = VulkanAspectMask(aspects);
-                    imageRange.baseArrayLayer = layer;
-
-                    if (aspects &
-                        (Aspect::Depth | Aspect::Stencil | Aspect::CombinedDepthStencil)) {
-                        VkClearDepthStencilValue clearDepthStencilValue[1];
-                        clearDepthStencilValue[0].depth = fClearColor;
-                        clearDepthStencilValue[0].stencil = uClearColor;
-                        device->fn.CmdClearDepthStencilImage(
-                            recordingContext->commandBuffer, GetHandle(),
-                            VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL, clearDepthStencilValue, 1,
-                            &imageRange);
-                    } else {
-                        ASSERT(aspects == Aspect::Color);
-                        VkClearColorValue clearColorValue;
-                        switch (GetFormat().GetAspectInfo(Aspect::Color).baseType) {
-                            case wgpu::TextureComponentType::Float:
-                                clearColorValue.float32[0] = fClearColor;
-                                clearColorValue.float32[1] = fClearColor;
-                                clearColorValue.float32[2] = fClearColor;
-                                clearColorValue.float32[3] = fClearColor;
-                                break;
-                            case wgpu::TextureComponentType::Sint:
-                                clearColorValue.int32[0] = sClearColor;
-                                clearColorValue.int32[1] = sClearColor;
-                                clearColorValue.int32[2] = sClearColor;
-                                clearColorValue.int32[3] = sClearColor;
-                                break;
-                            case wgpu::TextureComponentType::Uint:
-                                clearColorValue.uint32[0] = uClearColor;
-                                clearColorValue.uint32[1] = uClearColor;
-                                clearColorValue.uint32[2] = uClearColor;
-                                clearColorValue.uint32[3] = uClearColor;
-                                break;
-                            case wgpu::TextureComponentType::DepthComparison:
-                                UNREACHABLE();
-                        }
-                        device->fn.CmdClearColorImage(recordingContext->commandBuffer, GetHandle(),
-                                                      VK_IMAGE_LAYOUT_TRANSFER_DST_OPTIMAL,
-                                                      &clearColorValue, 1, &imageRange);
-                    }
-                }
-            }
-        }
-
-        if (clearValue == TextureBase::ClearValue::Zero) {
-            SetIsSubresourceContentInitialized(true, range);
-            device->IncrementLazyClearCountForTesting();
-        }
+        ASSERT(cmds != nullptr);
+        DAWN_TRY(ToBackend(cmds)->RecordCommands(recordingContext));
+        GetDevice()->IncrementLazyClearCountForTesting();
         return {};
     }
 

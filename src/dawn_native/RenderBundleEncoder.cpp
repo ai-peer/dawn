@@ -82,12 +82,12 @@ namespace dawn_native {
         : RenderEncoderBase(device,
                             &mBundleEncodingContext,
                             device->GetOrCreateAttachmentState(descriptor)),
-          mBundleEncodingContext(device, this) {
+          mBundleEncodingContext(device, this, device->IsValidationEnabled()) {
     }
 
     RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag)
         : RenderEncoderBase(device, &mBundleEncodingContext, errorTag),
-          mBundleEncodingContext(device, this) {
+          mBundleEncodingContext(device, this, device->IsValidationEnabled()) {
     }
 
     // static

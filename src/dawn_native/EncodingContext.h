@@ -32,7 +32,9 @@ namespace dawn_native {
     // It performs error tracking as well as encoding state for render/compute passes.
     class EncodingContext {
       public:
-        EncodingContext(DeviceBase* device, const ObjectBase* initialEncoder);
+        EncodingContext(DeviceBase* device,
+                        const ObjectBase* initialEncoder,
+                        bool validationEnabled);
         ~EncodingContext();
 
         CommandIterator AcquireCommands();
@@ -72,6 +74,8 @@ namespace dawn_native {
             return !ConsumedError(encodeFunction(&mAllocator));
         }
 
+        bool IsValidationEnabled() const;
+
         // Functions to set current encoder state
         void EnterPass(const ObjectBase* passEncoder);
         void ExitPass(const ObjectBase* passEncoder, RenderPassResourceUsage usages);
@@ -98,6 +102,8 @@ namespace dawn_native {
         // The current encoder changes with Enter/ExitPass which should be called by
         // CommandEncoder::Begin/EndPass.
         const ObjectBase* mCurrentEncoder;
+
+        bool mValidationEnabled;
 
         RenderPassUsages mRenderPassUsages;
         bool mWereRenderPassUsagesAcquired = false;

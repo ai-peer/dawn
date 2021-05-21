@@ -56,6 +56,12 @@ namespace dawn_native {
                     copy->~CopyBufferToTextureCmd();
                     break;
                 }
+                case Command::CopyStagingBufferToTexture: {
+                    CopyStagingBufferToTextureCmd* copy =
+                        commands->NextCommand<CopyStagingBufferToTextureCmd>();
+                    copy->~CopyStagingBufferToTextureCmd();
+                    break;
+                }
                 case Command::CopyTextureToBuffer: {
                     CopyTextureToBufferCmd* copy = commands->NextCommand<CopyTextureToBufferCmd>();
                     copy->~CopyTextureToBufferCmd();
@@ -222,6 +228,10 @@ namespace dawn_native {
 
             case Command::CopyBufferToTexture:
                 commands->NextCommand<CopyBufferToTextureCmd>();
+                break;
+
+            case Command::CopyStagingBufferToTexture:
+                commands->NextCommand<CopyStagingBufferToTextureCmd>();
                 break;
 
             case Command::CopyTextureToBuffer:

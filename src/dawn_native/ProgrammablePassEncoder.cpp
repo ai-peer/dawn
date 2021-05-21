@@ -29,21 +29,17 @@ namespace dawn_native {
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      EncodingContext* encodingContext)
-        : ObjectBase(device),
-          mEncodingContext(encodingContext),
-          mValidationEnabled(device->IsValidationEnabled()) {
+        : ObjectBase(device), mEncodingContext(encodingContext) {
     }
 
     ProgrammablePassEncoder::ProgrammablePassEncoder(DeviceBase* device,
                                                      EncodingContext* encodingContext,
                                                      ErrorTag errorTag)
-        : ObjectBase(device, errorTag),
-          mEncodingContext(encodingContext),
-          mValidationEnabled(device->IsValidationEnabled()) {
+        : ObjectBase(device, errorTag), mEncodingContext(encodingContext) {
     }
 
     bool ProgrammablePassEncoder::IsValidationEnabled() const {
-        return mValidationEnabled;
+        return mEncodingContext->IsValidationEnabled();
     }
 
     MaybeError ProgrammablePassEncoder::ValidateProgrammableEncoderEnd() const {

@@ -38,6 +38,7 @@ namespace dawn_native {
         BeginRenderPass,
         CopyBufferToBuffer,
         CopyBufferToTexture,
+        CopyStagingBufferToTexture,
         CopyTextureToBuffer,
         CopyTextureToTexture,
         Dispatch,
@@ -104,6 +105,13 @@ namespace dawn_native {
         Ref<QuerySetBase> occlusionQuerySet;
     };
 
+    struct StagingBufferCopy {
+        StagingBufferBase* buffer;
+        uint64_t offset;
+        uint32_t bytesPerRow;
+        uint32_t rowsPerImage;
+    };
+
     struct BufferCopy {
         Ref<BufferBase> buffer;
         uint64_t offset;
@@ -128,6 +136,12 @@ namespace dawn_native {
 
     struct CopyBufferToTextureCmd {
         BufferCopy source;
+        TextureCopy destination;
+        Extent3D copySize;  // Texels
+    };
+
+    struct CopyStagingBufferToTextureCmd {
+        StagingBufferCopy source;
         TextureCopy destination;
         Extent3D copySize;  // Texels
     };
