@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdbc4143_4f5153aa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-21T00:37:54Z",
+      "side": 1,
+      "message": "Oh maybe I am misunderstanding your proposal - don\u0027t you want to completely delete the Task object (and its WaitableEvent) at the end of the async function?\n\nIf so, then it cannot be done with std::thread;\nIf not, when do you clean up the Task object?",
+      "parentUuid": "64271c33_ef67f9c0",
+      "revId": "98b1e3f066b71f927a3cc76b83d4ce81e53e8c06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9a121b70_ce45049c",
