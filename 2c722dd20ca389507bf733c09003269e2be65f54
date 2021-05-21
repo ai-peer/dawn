@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbf89c48_dcfe2925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-21T17:23:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d84e4d8e_74ce8e29",
+      "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3edb2831_595476c8",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Ah, yes Kai, this is true! I\u0027m surprised the tests passed.. maybe we need more in src/tests/end2end/ObjectCachingTests.cpp ?",
       "parentUuid": "5f6cf33e_9c51ade3",
+      "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb367f71_a01cfeee",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-21T17:23:10Z",
+      "side": 1,
+      "message": "Thanks for catching that I missed this. I\u0027ve converted the sorting to rely in the new data structure now, and it\u0027s a bit more robust now.\n\nI actually suspect this was just straight up broken when using the new BGLE format prior to this CL, since we weren\u0027t populating these deprecated values from the new format. It would have just been sorting against the default values every time.",
+      "parentUuid": "215676a9_686f7aeb",
       "revId": "2c722dd20ca389507bf733c09003269e2be65f54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
