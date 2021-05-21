@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "64271c33_ef67f9c0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-21T00:31:03Z",
+      "side": 1,
+      "message": "In my proposal, WaitableEvent is stored inside a refcounted Task object. The task holds a reference to it, and so does the TaskManager. So even if the subthread finishes, it will not be deleted because the TaskManager holds a reference to it.",
+      "parentUuid": "c6fdd5ff_f2f12fb8",
+      "revId": "98b1e3f066b71f927a3cc76b83d4ce81e53e8c06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9a121b70_ce45049c",
