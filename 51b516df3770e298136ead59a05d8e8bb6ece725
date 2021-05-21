@@ -16,6 +16,40 @@
       "message": "Deprecation removal 2/3.\n\nThis is a large one, but it looks worse than it is because of the global rename of the *RenderPipeline2 stuff.",
       "revId": "51b516df3770e298136ead59a05d8e8bb6ece725",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e476a3d_64425f26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-21T00:01:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "51b516df3770e298136ead59a05d8e8bb6ece725",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9ef62a3_40e09b7a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 792,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-21T00:01:33Z",
+      "side": 1,
+      "message": "is there a reason this is commented? I think we should have the warning to push people back to the new old name",
+      "revId": "51b516df3770e298136ead59a05d8e8bb6ece725",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
