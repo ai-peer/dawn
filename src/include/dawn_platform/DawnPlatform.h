@@ -65,8 +65,9 @@ namespace dawn_platform {
       public:
         WaitableEvent() = default;
         virtual ~WaitableEvent() = default;
-        virtual void Wait() = 0;        // Wait for completion
-        virtual bool IsComplete() = 0;  // Non-blocking check if the event is complete
+        virtual void Wait() = 0;            // Wait for completion
+        virtual bool IsComplete() = 0;      // Non-blocking check if the event is complete
+        virtual void MarkAsComplete() = 0;  // Mark the event as it is complete
     };
 
     using PostWorkerTaskCallback = void (*)(void* userdata);
@@ -75,7 +76,7 @@ namespace dawn_platform {
       public:
         WorkerTaskPool() = default;
         virtual ~WorkerTaskPool() = default;
-        virtual std::unique_ptr<WaitableEvent> PostWorkerTask(PostWorkerTaskCallback,
+        virtual std::shared_ptr<WaitableEvent> PostWorkerTask(PostWorkerTaskCallback,
                                                               void* userdata) = 0;
     };
 
