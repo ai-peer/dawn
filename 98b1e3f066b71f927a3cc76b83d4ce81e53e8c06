@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6fdd5ff_f2f12fb8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-21T00:24:13Z",
+      "side": 1,
+      "message": "Here I just want to show you that using std::thread still cannot let us delete the std::thread object inside the async function, which is the core of Austin\u0027s proposal.\n\n\u003e  We\u0027ll need WaitableEvent at some point most likely\nIn Austin\u0027s proposal actually WaitableEvent is useless and it is wrong to call any member functions of WaitableEvent in the main thread because it can be deleted at any time in the sub-thread. However in my proposal WaitableEvent is always valid and we can use it to check the status of the sub-tasks, but it seems both of you don\u0027t like it.",
+      "parentUuid": "e4d41808_d7188c23",
+      "revId": "98b1e3f066b71f927a3cc76b83d4ce81e53e8c06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9a121b70_ce45049c",
