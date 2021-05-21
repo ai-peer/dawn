@@ -17,7 +17,15 @@
 
 #include <memory>
 #include <mutex>
+#include <unordered_map>
 #include <vector>
+
+#include "common/RefCounted.h"
+
+namespace dawn_platform {
+    class WaitableEvent;
+    class WorkerTaskPool;
+}  // namespace dawn_platform
 
 namespace dawn_native {
 
@@ -40,6 +48,35 @@ namespace dawn_native {
       private:
         std::mutex mCallbackTaskQueueMutex;
         std::vector<std::unique_ptr<CallbackTask>> mCallbackTaskQueue;
+    };
+
+    class WorkerThreadTask {
+      public:
+        virtual ~WorkerThreadTask();
+        virtual void Run() = 0;
+    };
+
+    class WorkerThreadTaskManager {
+      public:
+        explicit WorkerThreadTaskManager(dawn_platform::WorkerTaskPool* workerTaskPool);
+
+        void PostTask(std::unique_ptr<WorkerThreadTask> workerThreadTask);
+        void TaskCompleted(WorkerThreadTask* task);
+        void WaitAllPendingTasks();
+
+      private:
+        class WaitableTask : public RefCounted {
+          public:
+            std::unique_ptr<WorkerThreadTask> task;
+            WorkerThreadTaskManager* taskManager;
+            std::unique_ptr<dawn_platform::WaitableEvent> waitableEvent;
+        };
+
+        static void DoWaitableTask(void* task);
+
+        std::mutex mPendingTasksMutex;
+        std::unordered_map<WorkerThreadTask*, Ref<WaitableTask>> mPendingTasks;
+        dawn_platform::WorkerTaskPool* mWorkerTaskPool;
     };
 
 }  // namespace dawn_native

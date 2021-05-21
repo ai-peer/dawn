@@ -14,7 +14,9 @@
 
 #include "dawn_platform/WorkerThread.h"
 
-#include <future>
+#include <functional>
+#include <mutex>
+#include <thread>
 
 #include "common/Assert.h"
 
@@ -22,32 +24,63 @@ namespace {
 
     class AsyncWaitableEvent final : public dawn_platform::WaitableEvent {
       public:
-        explicit AsyncWaitableEvent(std::function<void()> func) {
-            mFuture = std::async(std::launch::async, func);
+        AsyncWaitableEvent() : waitableEventImpl(std::make_shared<WaitableEventImpl>()) {
         }
         void Wait() override {
-            ASSERT(mFuture.valid());
-            mFuture.wait();
+            std::unique_lock<std::mutex> lock(waitableEventImpl->mutex);
+            waitableEventImpl->condition.wait(lock,
+                                              [this] { return waitableEventImpl->isComplete; });
         }
         bool IsComplete() override {
-            ASSERT(mFuture.valid());
-            return mFuture.wait_for(std::chrono::seconds(0)) == std::future_status::ready;
+            std::lock_guard<std::mutex> lock(waitableEventImpl->mutex);
+            return waitableEventImpl->isComplete;
         }
 
-      private:
-        // It is safe not to call Wait() in the destructor of AsyncWaitableEvent because since
-        // C++14 the destructor of std::future will always be blocked until its state becomes
-        // std::future_status::ready when it was created by a call of std::async and it is the
-        // last reference to the shared state.
-        // See https://en.cppreference.com/w/cpp/thread/future/~future for more details.
-        std::future<void> mFuture;
+        struct WaitableEventImpl {
+            WaitableEventImpl() : isComplete(false) {
+            }
+            // To protect the concurrent accesses from both main thread and background
+            // threads to the member fields.
+
+            void MarkAsComplete() {
+                {
+                    std::lock_guard<std::mutex> lock(mutex);
+                    isComplete = true;
+                }
+                condition.notify_all();
+            }
+
+            std::mutex mutex;
+            std::condition_variable condition;
+            bool isComplete;
+        };
+
+        std::shared_ptr<WaitableEventImpl> waitableEventImpl;
     };
 
 }  // anonymous namespace
 
-std::unique_ptr<dawn_platform::WaitableEvent> AsyncWorkerThreadPool::PostWorkerTask(
-    dawn_platform::PostWorkerTaskCallback callback,
-    void* userdata) {
-    std::function<void()> doTask = [callback, userdata]() { callback(userdata); };
-    return std::make_unique<AsyncWaitableEvent>(doTask);
-}
+namespace dawn_platform {
+
+    std::unique_ptr<dawn_platform::WaitableEvent> AsyncWorkerThreadPool::PostWorkerTask(
+        dawn_platform::PostWorkerTaskCallback callback,
+        void* userdata) {
+        std::unique_ptr<AsyncWaitableEvent> waitableEvent = std::make_unique<AsyncWaitableEvent>();
+        std::function<void()> doTask = [callback, userdata,
+                                        waitableEventPtr = waitableEvent.get()]() {
+            // As WaitableEvent is stored in userdata and will always be released in callback(), we
+            // need to reference userdata here to ensure waitableEventImpl always points to a valid
+            // object.
+            std::shared_ptr<AsyncWaitableEvent::WaitableEventImpl> waitableEventImpl =
+                waitableEventPtr->waitableEventImpl;
+            callback(userdata);
+            waitableEventImpl->MarkAsComplete();
+        };
+
+        std::thread thread(doTask);
+        thread.detach();
+
+        return waitableEvent;
+    }
+
+}  // namespace dawn_platform
