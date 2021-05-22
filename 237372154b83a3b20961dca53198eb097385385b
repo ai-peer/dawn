@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d240af_eed73691",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-22T01:54:53Z",
+      "side": 1,
+      "message": "Controversial idea here. WDYT? I tried this initially because I was annoyed with having to deal with driver bugs and also the incredible repetitiveness of ClearTexture across the backends. So I thought that if we re-used more code then maybe things might be better. And it would be nice to not have workaround code in both ClearTexture and in CommandBufferXYZ.cpp. But guess what! We\u0027ve hit yet another driver bug by doing things this way. I think it is this one: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d791#c6 where clearing a mip level on some Intel drivers is \"contagious\" and just clears everything.\n\nAlso, regarding \"workaround code in both ClearTexture and in CommandBufferXYZ.cpp\". It would not be a lot of complexity to go down the copy path instead. I just thought that this might be a convenient opportunity to have less code as well. All in all, I think this idea is nice because it\u0027s more concise, but not so nice because it is probably less performant and a whole lot of re-entrancy (hello nested command buffers).",
+      "revId": "237372154b83a3b20961dca53198eb097385385b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
