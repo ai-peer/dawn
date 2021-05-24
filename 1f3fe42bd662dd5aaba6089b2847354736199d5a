@@ -226,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77850fb7_429f2176",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-24T21:38:57Z",
+      "side": 1,
+      "message": "Yes, we could. We also check it here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/BindGroupLayout.cpp;l\u003d360?q\u003dBindGroupLayout.cpp%20f:dawn\n\noverall though, how we map to bindings in the backend could change or be non-trivial so it would be nice to test situtations where collisions might be possible.",
+      "parentUuid": "3a9f3b15_ea0250ef",
+      "range": {
+        "startLine": 136,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 89
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c2f40d3_0a40bb61",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 16
