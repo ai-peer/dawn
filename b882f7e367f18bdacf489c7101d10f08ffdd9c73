@@ -16,6 +16,24 @@
       "message": "Corentin, you mentioned that after we recompute/modify the copy regions to handle empty row problem, we can re-iterate the new copy regions and see that if copySubresource.copies[i].copySize.height is 0 (it only happens when original copySize.height is 1) , we need to re-re-compute copy regions: https://dawn-review.googlesource.com/c/dawn/+/51282/2/src/dawn_native/d3d12/TextureCopySplitter.cpp#287. But I feel like we can\u0027t reuse the recomputed copy regions, so we can handle copySize.height \u003d 1 directly alongside other situations as a separate scenario. Please see the comment change between patchset 1 and patch set 2. \n\nBtw, Compute3DTextureCopySplits will be complicated, it will not be like its counterpart Compute2DTextureCopySplits. Instead, it will be very like ComputeTextureCopySubresource.",
       "revId": "b882f7e367f18bdacf489c7101d10f08ffdd9c73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b8ea09f_40c38cab",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-24T07:07:18Z",
+      "side": 1,
+      "message": "When the copy regions for 3D textures are incorrect for some cases, if we try to revise the copy regions\u0027 parameters in order to make them correct, we need to go to very details of each parameter for 2D vs 3D. It is really hard to understand. Instead, I think we should abandon the incorrect copy regions and re-compute them. So it is better to use a new function to re-compute copy regions for all special cases, making Compute3DTextureCopySplits like its counterpart (Compute2DTextureCopySplits): give you high level idea about how to generate copy regions, but call other split functions to do it.",
+      "parentUuid": "228d3370_88c6484d",
+      "revId": "b882f7e367f18bdacf489c7101d10f08ffdd9c73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
