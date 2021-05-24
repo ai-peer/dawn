@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c50e9cc5_ee8e408b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "All but 1 comment has been addressed. Still need a test for binding orders.",
+      "revId": "b59eb00d095cf6864ab4c2e90a497f4c546d20d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

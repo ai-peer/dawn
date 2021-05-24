@@ -106,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6df817_30ebb31e",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91260971_5fb6d633",
+      "range": {
+        "startLine": 200,
+        "startChar": 50,
+        "endLine": 200,
+        "endChar": 81
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b421268e_2bed49bf",
@@ -119,6 +143,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "can this be const\u0026 ?",
+      "range": {
+        "startLine": 400,
+        "startChar": 4,
+        "endLine": 400,
+        "endChar": 57
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90564a37_3499b8c7",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b421268e_2bed49bf",
       "range": {
         "startLine": 400,
         "startChar": 4,
@@ -169,6 +217,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ca4f8b_a4b3bd81",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c2f40d3_0a40bb61",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1ee834b_4080139b",
@@ -182,6 +248,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "The caller of this code needs to have a comment that we need some custom handling to reserve additional descriptors when we support multi-planar external images.",
+      "range": {
+        "startLine": 44,
+        "startChar": 15,
+        "endLine": 45,
+        "endChar": 64
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71484878_3cf6756d",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1ee834b_4080139b",
       "range": {
         "startLine": 44,
         "startChar": 15,
@@ -209,6 +299,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "422cb622_c8ee586c",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 16
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a091150_c5719d35",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9c50fe2_b27eaea9",
@@ -222,6 +330,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "The caller of this code needs to have a comment that we need some custom handling to reserve additional descriptors when we support multi-planar external images.",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 56
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85267d98_70e657cc",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9c50fe2_b27eaea9",
       "range": {
         "startLine": 70,
         "startChar": 0,
@@ -249,6 +381,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "110be925_dfb6c492",
+        "filename": "src/dawn_native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da305efc_6b3f17d9",
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c6bbd07_d3f9a7aa",
@@ -262,6 +412,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "this only catches if it is force-enabled.\n\nWe don\u0027t need this helper and can instead use HasToggleEnabled(\"use_tint_generator\")",
+      "range": {
+        "startLine": 713,
+        "startChar": 0,
+        "endLine": 713,
+        "endChar": 49
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c662b309_2a58a1f2",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 713,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c6bbd07_d3f9a7aa",
       "range": {
         "startLine": 713,
         "startChar": 0,
@@ -295,6 +469,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "164ec7ab_d3d0e02f",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecd33f04_1bcc1a46",
+      "range": {
+        "startLine": 71,
+        "startChar": 0,
+        "endLine": 71,
+        "endChar": 48
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b1f001a_d50e5378",
@@ -308,6 +506,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "nit: -\u003e void not needed, though var\u003cout\u003e is also deprecated.\n\nThis should become \"-\u003e [[builtin(position)]] vec4\u003cf32\u003e;\n\nand we just \"return pos;\" instead.",
+      "range": {
+        "startLine": 72,
+        "startChar": 36,
+        "endLine": 72,
+        "endChar": 43
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494e8603_636e304d",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b1f001a_d50e5378",
       "range": {
         "startLine": 72,
         "startChar": 36,
@@ -341,6 +563,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07ea2773_ccb74553",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e046b5c_13465912",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abdf8009_1083b2d4",
@@ -354,6 +600,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "ditto, in/out deprecated",
+      "range": {
+        "startLine": 78,
+        "startChar": 0,
+        "endLine": 78,
+        "endChar": 62
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "730a253d_14373877",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abdf8009_1083b2d4",
       "range": {
         "startLine": 78,
         "startChar": 0,
@@ -387,6 +657,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd69aa9_16da8c96",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a81d0f3a_6e999986",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 82,
+        "endChar": 55
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bc06c118_d79a1996",
@@ -410,6 +704,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4fdb7bd_1bdd9680",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc06c118_d79a1996",
+      "range": {
+        "startLine": 83,
+        "startChar": 38,
+        "endLine": 83,
+        "endChar": 45
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66a2941c_b91d4754",
@@ -423,6 +741,30 @@
       "writtenOn": "2021-05-19T00:53:26Z",
       "side": 1,
       "message": "nit: explicit return not needed",
+      "range": {
+        "startLine": 85,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 19
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e350f8_6e5cad6f",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T16:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66a2941c_b91d4754",
       "range": {
         "startLine": 85,
         "startChar": 0,
