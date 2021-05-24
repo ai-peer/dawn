@@ -250,6 +250,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "024d7d47_c2aed561",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-24T22:48:39Z",
+      "side": 1,
+      "message": "I don\u0027t understand what you\u0027re looking for in terms of a test. Writing another test with a different combination of bindings isn\u0027t testing anything that isn\u0027t already being tested. Binding a single external texture as I have does increment the buffer binding count for validation and would be caught by the suggested ASSERT if I had incorrectly incremented the rhs count.\n\nIn what situations would \"collisions\" be possible?",
+      "parentUuid": "77850fb7_429f2176",
+      "range": {
+        "startLine": 136,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 89
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c2f40d3_0a40bb61",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 16
