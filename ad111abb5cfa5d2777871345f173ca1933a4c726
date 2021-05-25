@@ -305,6 +305,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3f79db9_7b07c1f8",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T07:47:34Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d6c77f8b_8d4acc92",
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c238ae15_92cd9dc4",
@@ -354,6 +372,24 @@
       "side": 1,
       "message": "We need DAWN_TEST_UNSUPPORTED_IF(UsesWire()); at [2]",
       "parentUuid": "7ccd3192_f83b837a",
+      "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24928f0f_f12e420a",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsOpaqueFD.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T07:47:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7641d04b_37a29ae5",
       "revId": "ad111abb5cfa5d2777871345f173ca1933a4c726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
