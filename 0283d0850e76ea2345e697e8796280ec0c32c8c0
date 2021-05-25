@@ -16,6 +16,23 @@
       "message": "Austin, PTAL too",
       "revId": "0283d0850e76ea2345e697e8796280ec0c32c8c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c0d35e_527b4335",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:18:02Z",
+      "side": 1,
+      "message": "Is this still current?",
+      "revId": "0283d0850e76ea2345e697e8796280ec0c32c8c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
