@@ -76,6 +76,12 @@ namespace dawn_wire { namespace client {
         }
     }
 
+    void Device::HandleUserWarning(const char* message) {
+        if (mUserWarningCallback) {
+            mUserWarningCallback(message, mUserWarningUserdata);
+        }
+    }
+
     void Device::HandleDeviceLost(const char* message) {
         if (mDeviceLostCallback && !mDidRunLostCallback) {
             mDidRunLostCallback = true;
@@ -112,6 +118,11 @@ namespace dawn_wire { namespace client {
     void Device::SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* errorUserdata) {
         mErrorCallback = errorCallback;
         mErrorUserdata = errorUserdata;
+    }
+
+    void Device::SetUserWarningCallback(WGPUUserWarningCallback callback, void* userdata) {
+        mUserWarningCallback = callback;
+        mUserWarningUserdata = userdata;
     }
 
     void Device::SetDeviceLostCallback(WGPUDeviceLostCallback callback, void* userdata) {
