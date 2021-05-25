@@ -259,6 +259,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b96613b_b5bf119f",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T18:13:41Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation, yeah the SPIRV-Cross reflection path makes this difficult. Can we have clear TODOs for all of these as well as DISABLED_ tests that should pass if we started using Tint unconditionally?",
+      "parentUuid": "093969d7_2c2cd4cc",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0be38fa_b5a3bcc7",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 23
