@@ -16,6 +16,23 @@
       "message": "โดนแฮ๊ก",
       "revId": "e1598e4891ecc105c75fac5dc373e06881bad562",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfd9f1ee_77719f90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T06:28:55Z",
+      "side": 1,
+      "message": "LGTM too, thanks for handling this Ryan!",
+      "revId": "e1598e4891ecc105c75fac5dc373e06881bad562",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
