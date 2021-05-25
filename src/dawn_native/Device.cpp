@@ -260,6 +260,12 @@ namespace dawn_native {
         }
     }
 
+    void DeviceBase::UserWarning(const char* message) {
+        if (mUserWarningCallback != nullptr) {
+            mUserWarningCallback(message, mUserWarningUserdata);
+        }
+    }
+
     void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
         if (ConsumedError(ValidateErrorType(type))) {
             return;
@@ -290,6 +296,11 @@ namespace dawn_native {
     void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
         mUncapturedErrorCallback = callback;
         mUncapturedErrorUserdata = userdata;
+    }
+
+    void DeviceBase::APISetUserWarningCallback(wgpu::UserWarningCallback callback, void* userdata) {
+        mUserWarningCallback = callback;
+        mUserWarningUserdata = userdata;
     }
 
     void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {

@@ -44,6 +44,16 @@ namespace {
         mockDevicePopErrorScopeCallback->Call(type, message, userdata);
     }
 
+    class MockDeviceUserWarningCallback {
+      public:
+        MOCK_METHOD(void, Call, (const char* message, void* userdata));
+    };
+
+    std::unique_ptr<StrictMock<MockDeviceUserWarningCallback>> mockDeviceUserWarningCallback;
+    void ToMockDeviceUserWarningCallback(const char* message, void* userdata) {
+        mockDeviceUserWarningCallback->Call(message, userdata);
+    }
+
     class MockDeviceLostCallback {
       public:
         MOCK_METHOD(void, Call, (const char* message, void* userdata));
@@ -66,6 +76,8 @@ class WireErrorCallbackTests : public WireTest {
         WireTest::SetUp();
 
         mockDeviceErrorCallback = std::make_unique<StrictMock<MockDeviceErrorCallback>>();
+        mockDeviceUserWarningCallback =
+            std::make_unique<StrictMock<MockDeviceUserWarningCallback>>();
         mockDevicePopErrorScopeCallback =
             std::make_unique<StrictMock<MockDevicePopErrorScopeCallback>>();
         mockDeviceLostCallback = std::make_unique<StrictMock<MockDeviceLostCallback>>();
@@ -75,6 +87,7 @@ class WireErrorCallbackTests : public WireTest {
         WireTest::TearDown();
 
         mockDeviceErrorCallback = nullptr;
+        mockDeviceUserWarningCallback = nullptr;
         mockDevicePopErrorScopeCallback = nullptr;
         mockDeviceLostCallback = nullptr;
     }
@@ -102,6 +115,22 @@ TEST_F(WireErrorCallbackTests, DeviceErrorCallback) {
     EXPECT_CALL(*mockDeviceErrorCallback,
                 Call(WGPUErrorType_Validation, StrEq("Some error message"), this))
         .Times(1);
+
+    FlushServer();
+}
+
+// Test the return wire for device user warning callbacks
+TEST_F(WireErrorCallbackTests, DeviceUserWarningCallback) {
+    wgpuDeviceSetUserWarningCallback(device, ToMockDeviceUserWarningCallback, this);
+
+    // Setting the injected warning callback should stay on the client side and do nothing
+    FlushClient();
+
+    // Calling the callback on the server side will result in the callback being called on the
+    // client side
+    api.CallDeviceSetUserWarningCallbackCallback(apiDevice, "Some error message");
+
+    EXPECT_CALL(*mockDeviceUserWarningCallback, Call(StrEq("Some error message"), this)).Times(1);
 
     FlushServer();
 }

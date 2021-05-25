@@ -43,6 +43,8 @@ void WireTest::SetUp() {
 
     // This SetCallback call cannot be ignored because it is done as soon as we start the server
     EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(_, _, _)).Times(Exactly(1));
+    EXPECT_CALL(api, OnDeviceSetUserWarningCallback(_, _, _))
+        .Times(Exactly(1));  // Langmark AGT, called in InjectServer
     EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(_, _, _)).Times(Exactly(1));
     SetupIgnoredCallExpectations();
 
@@ -95,6 +97,8 @@ void WireTest::TearDown() {
         // called after the server is destroyed.
         EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
             .Times(Exactly(1));
+        EXPECT_CALL(api, OnDeviceSetUserWarningCallback(apiDevice, nullptr, nullptr))
+            .Times(Exactly(1));
         EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
             .Times(Exactly(1));
     }
@@ -134,6 +138,8 @@ void WireTest::DeleteServer() {
         // These are called on server destruction to clear the callbacks. They must not be
         // called after the server is destroyed.
         EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
+            .Times(Exactly(1));
+        EXPECT_CALL(api, OnDeviceSetUserWarningCallback(apiDevice, nullptr, nullptr))
             .Times(Exactly(1));
         EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
             .Times(Exactly(1));
