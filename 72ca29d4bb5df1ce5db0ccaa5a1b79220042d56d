@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42d92692_de34a76f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-25T21:55:21Z",
+      "side": 1,
+      "message": "Intermediate revision just to cut down some of the feedback.",
+      "revId": "72ca29d4bb5df1ce5db0ccaa5a1b79220042d56d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
