@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "720077fa_8210cd2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T07:00:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e69f8b5_ffb78d7d",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T07:00:36Z",
+      "side": 1,
+      "message": "nit: UNSUPPORTED for this one maybe?",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 33
+      },
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9700c53_9d9be6ae",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T07:00:36Z",
+      "side": 1,
+      "message": "WDYT of doing a custom expectation that checks that the first block is non-zero and that all following blocks are the same value? It would help make most of these cases be the same code.",
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cd2bb99_5184a998",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T07:00:36Z",
+      "side": 1,
+      "message": "Can we have a TODO for multisampled textures as well or are we going to have a different test for them? There\u0027s some complexity because it might require the backends to always add RenderAttachment to multisampled textures so they can use a clear (you can\u0027t copy into them)",
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
