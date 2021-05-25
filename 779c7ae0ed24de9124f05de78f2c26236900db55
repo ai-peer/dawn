@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68ffa94f_f5e928e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T18:08:23Z",
+      "side": 1,
+      "message": "After fighting a bunch with D3D12 validation layers and giving up for now, here\u0027s what I have.",
+      "revId": "779c7ae0ed24de9124f05de78f2c26236900db55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9afb2c_016976de",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1627,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T18:08:23Z",
+      "side": 1,
+      "message": "This test passes with this CL.",
+      "revId": "779c7ae0ed24de9124f05de78f2c26236900db55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
