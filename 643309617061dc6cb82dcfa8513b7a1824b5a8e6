@@ -1,0 +1,441 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e31357_5c160a9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "A bunch of small comments but the overall direction looks good. The three large comments are:\n\n - wgpu::BindGroupExternalTextureBinding should be an extension struct.\n - Could reflection correctly handle WGSL texture_external? (and we\u0027d do the transform to texture_2d\u003cf32\u003e in the backends)\n - Moar tests.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40b71325_e755098f",
+        "filename": "dawn.json",
+        "patchSetId": 23
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Since we\u0027re making external texture logic an extension, this should be an extension struct as well, as annoying as it is.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf7d4f19_ea671c8f",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "This could be nextInChain \u003d\u003d nullptr until we start having extensions for buffer bindings.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02e1851b_e52f56e5",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ccfb56a_53725b2c",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c131c7ef_50c7e7fa",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "We still need to ValidateObject(), and also that the extension struct is present in the descriptor.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4b2cdd_66015afd",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: This should handle extension structs.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0634b78_1e04df75",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Can we use a helper like https://source.chromium.org/chromium/chromium/src/+/main:out/win-Debug/gen/third_party/dawn/src/dawn_native/ChainUtils_autogen.h;l\u003d35?q\u003df:dawn%20FindIn so that we don\u0027t need the logic when additional extensions are added?",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc2c8b19_88181ed3",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 239,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d109688_3d1c0fb7",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "ditto FindInChain",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "920a525f_2948cd54",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Can we have a TODO to handle overflows in these computations or limit the maximum number of bindings so that overflows are impossible?",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1697cd0f_8ec5fc22",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "This works, but can we also add to the SyncScopeUsageTracker a set of ExternalTexture* so that calling ExternalTexture-\u003eDestroy() prevents using it in a submit (this needs additional validation in Queue.cpp)? We should also have a test for that in QueueSubmitValidationTests.cpp (both the external texture being destroyed or the view being destroyed).",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e069b2d8_82d1c503",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Ditto and also assert that the other views are nullptr for consistency with other code paths?",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "923f9993_67644aad",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "[1] When is the transform from external_texture to texture_2d\u003cf32\u003e done? I think it should be after we do the reflection in which case we need to do something here to make the BGL correct wrt the shaders. No need to address now be can we add a  TODO(dawn:728) and fix it before marking this task completed?",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0be38fa_b5a3bcc7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Related to [1], it seems that we do the transform before the reflection, could we do it afterwards instead?",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fdb422_7450ffa0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Same as [1] essentially.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c659109_a3594eb5",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: add a TODO(dawn:728)",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ad2f7cf_4cc464c5",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78993652_c7a9737f",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: TextureView*",
+      "range": {
+        "startLine": 480,
+        "startChar": 28,
+        "endLine": 480,
+        "endChar": 32
+      },
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55cd445c_d5737762",
+        "filename": "src/dawn_native/vulkan/BindGroupLayoutVk.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: Add TODO(dawn:728) for tracking.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e7baebb_88bfbf9b",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "u-nit: we usually hard-code an array of vertex coordinates in the vertex shader.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4df53935_a176a4e7",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: these can be declared where they are initialized.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b6dcb8_f004f4ae",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: Since this contains no data, WDYT of having a utils::kExternalTextureBinding constexpr struct that\u0027s just used as a tag for overload resolution?",
+      "range": {
+        "startLine": 134,
+        "startChar": 51,
+        "endLine": 134,
+        "endChar": 73
+      },
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbbce0e6_1347676d",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "Can we also test:\n\n - filling an external texture extension struct for non-external-texture bindings in the layout.\n - filling non-external-textures in external texture bindings in the layout?\n - validation of external texture bindings with what\u0027s in the shaders (otherwise add a TODO here)\n\nAlso can we also add tests in GetBindGroupLayoutValidationTests for reflection of external texture bindings? (otherwise add a TODO there).\n\nNot also the tests mentioned in another comment for QueueSubmitValidationTests.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd20e43c_43b04aad",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T13:14:39Z",
+      "side": 1,
+      "message": "nit: Fill in this test :)",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
