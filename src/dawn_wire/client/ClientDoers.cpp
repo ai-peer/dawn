@@ -37,6 +37,11 @@ namespace dawn_wire { namespace client {
         return true;
     }
 
+    bool Client::DoDeviceUserWarningCallback(Device* device, const char* message) {
+        device->HandleUserWarning(message);
+        return true;
+    }
+
     bool Client::DoDeviceLostCallback(Device* device, char const* message) {
         if (device == nullptr) {
             // The device might have been deleted or recreated so this isn't an error.

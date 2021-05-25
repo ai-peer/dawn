@@ -176,7 +176,12 @@ namespace dawn_native {
               "GPUs which have a driver bug in the execution of CopyTextureRegion() when we copy "
               "with the formats whose texel block sizes are less than 4 bytes from a greater mip "
               "level to a smaller mip level on D3D12 backends.",
-              "https://crbug.com/1161355"}}
+              "https://crbug.com/1161355"}},
+            {Toggle::DumpTranslatedHLSLShaders,
+             {"dump_translated_hlsl_shaders",
+              "Dump generated HLSL shaders for debug propose, dumped shaders will be print in "
+              "console.",
+              "https://crbug.com/dawn/792"}}
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 

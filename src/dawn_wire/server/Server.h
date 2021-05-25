@@ -214,6 +214,7 @@ namespace dawn_wire { namespace server {
         // Error callbacks
         void OnUncapturedError(ObjectHandle device, WGPUErrorType type, const char* message);
         void OnDeviceLost(ObjectHandle device, const char* message);
+        void OnUserWarning(ObjectHandle device, const char* message);
         void OnDevicePopErrorScope(WGPUErrorType type,
                                    const char* message,
                                    ErrorScopeUserdata* userdata);

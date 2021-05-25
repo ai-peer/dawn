@@ -50,6 +50,7 @@ namespace dawn_native {
         virtual ~DeviceBase();
 
         void HandleError(InternalErrorType type, const char* message);
+        void UserWarning(const char* message);
 
         bool ConsumedError(MaybeError maybeError) {
             if (DAWN_UNLIKELY(maybeError.IsError())) {
@@ -207,6 +208,7 @@ namespace dawn_native {
 
         void APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
         void APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
+        void APISetUserWarningCallback(wgpu::UserWarningCallback callback, void* userdata);
         void APIPushErrorScope(wgpu::ErrorFilter filter);
         bool APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata);
 
@@ -379,6 +381,9 @@ namespace dawn_native {
 
         wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
         void* mUncapturedErrorUserdata = nullptr;
+
+        wgpu::UserWarningCallback mUserWarningCallback = nullptr;
+        void* mUserWarningUserdata = nullptr;
 
         wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
         void* mDeviceLostUserdata = nullptr;
