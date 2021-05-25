@@ -1006,8 +1006,6 @@ TEST_P(CopyTests_T2B, Texture3DSubRegion) {
 }
 
 TEST_P(CopyTests_T2B, Texture3DNoSplitRowDataWithEmptyFirstRow) {
-    DAWN_TEST_UNSUPPORTED_IF(IsD3D12());  // TODO(crbug.com/dawn/547): Implement on D3D12.
-
     constexpr uint32_t kWidth = 2;
     constexpr uint32_t kHeight = 4;
     constexpr uint32_t kDepth = 3;
@@ -1589,8 +1587,6 @@ TEST_P(CopyTests_B2T, Texture3DSubRegion) {
 }
 
 TEST_P(CopyTests_B2T, Texture3DNoSplitRowDataWithEmptyFirstRow) {
-    DAWN_TEST_UNSUPPORTED_IF(IsD3D12());  // TODO(crbug.com/dawn/547): Implement on D3D12.
-
     constexpr uint32_t kWidth = 2;
     constexpr uint32_t kHeight = 4;
     constexpr uint32_t kDepth = 3;

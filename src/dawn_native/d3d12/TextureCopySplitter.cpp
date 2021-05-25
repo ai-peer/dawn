@@ -250,6 +250,160 @@ namespace dawn_native { namespace d3d12 {
         return copies;
     }
 
+    void Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(Origin3D origin,
+                                                              Extent3D copySize,
+                                                              const TexelBlockInfo& blockInfo,
+                                                              uint64_t offset,
+                                                              uint64_t alignedOffset,
+                                                              Origin3D texelOffset,
+                                                              uint32_t bytesPerRow,
+                                                              uint32_t rowsPerImage,
+                                                              TextureCopySubresource& copy) {
+        // There should be an empty row at the beginning of the copy region
+        ASSERT(texelOffset.y == 1);
+
+        // Specify data and show how we split copy regions. It is easier to understand it. Let's
+        // assume that bytesPerRow is 256 and we are dong a B2T copy. And copy size is {width: 2,
+        // depth: 4, depthOrArrayLayers: 3}. Then the data layout in buffer is demonstrated
+        // as below. Image 0 is from row N to row (N + 3). Image 1 is from row (N + 4) to
+        // row (N + 7), and image 3 is from row (N + 8) to row (N + 11). Note that
+        // alignedOffset is at the beginning of row (N - 1), while real data offset is at
+        // somewhere in row N. Row (N - 1) is the empty row between alignedOffset and offset.
+        //               |<----- bytes per row ------>|
+        //
+        //               |----------------------------|
+        //  row (N - 1)  |                            |
+        //  row N        |                 ++~~~~~~~~~|
+        //  row (N + 1)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 2)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 3)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 4)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 5)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 6)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 7)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 8)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 9)  |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 10) |~~~~~~~~~~~~~~~~~++~~~~~~~~~|
+        //  row (N + 11) |~~~~~~~~~~~~~~~~~++         |
+        //               |----------------------------|
+
+        // Copied data for the first slice (layer) is showed below if it is a 2D texture.
+        // Note that the copy block is 5 rows from row (N - 1) to row (N + 3), but row (N - 1)
+        // is skipped via parameter bufferOffset. Likewise, we will recalculate alignedOffset
+        // and real buffer offset for copy block of image 1. Copy block for image 1 will be
+        // from row (N + 3) to row (N + 7). Row (N + 3) in copy block of image 1 overlaps
+        // with copy block of image 0. But it won't be copied twice because it is skipped in
+        // copy block of image 1, just like row (N - 1) is skipped in copy block of image 0.
+        // So all data will be copied correctly for 2D texture copy. However, if we expand the
+        // computed copy block of image 0 to all depth ranges of a 3D texture, we have no chance
+        // to recompute alignedOffset and real buffer offset for each depth slice. So we will copy
+        // 5 rows every time, and every first row of each slice will be skipped. As a result, the
+        // copied data for image 0 will be from row N to row (N + 3), which is correct. But copied
+        // data for image 1 will be from row (N + 5) to row (N + 8) because row (N + 4) is skipped.
+        // It is incorrect. And all other image follow will be incorrect.
+        //              |-------------------|
+        //  row (N - 1) |                   |
+        //  row N       |                 ++|
+        //  row (N + 1) |~~~~~~~~~~~~~~~~~++|
+        //  row (N + 2) |~~~~~~~~~~~~~~~~~++|
+        //  row (N + 3) |~~~~~~~~~~~~~~~~~++|
+        //              |-------------------|
+        //
+        // Solutions: copy 3 rows in copy 0, and expand to all depth slices. 3 rows + one skipped
+        // rows = 4 rows, which is the height of buffer size. Then copy the last rows in copy 1,
+        // and expand to copySize.depthOrArrayLayers - 1 depth slices. And copy the last row of
+        // the last depth slice in copy 2.
+
+        // Copy 0: copy 3 rows, and expand to z-axis (all depth slices).
+        //                _____________________
+        //               /                    /|
+        //              /                    / |
+        //              |-------------------|  |
+        //  row (N - 1) |                   |  |
+        //  row N       |                 ++|  |
+        //  row (N + 1) |~~~~~~~~~~~~~~~~~++| /
+        //  row (N + 2) |~~~~~~~~~~~~~~~~~++|/
+        //              |-------------------|
+
+        // Copy 1: copy one single row (the last row on image 0), and expand to z-axis but only
+        // expand to (copySize.depthOrArrayLayers - 1) depth slices. Note that if we expand it
+        // to all depth slices, the last copy block will be row (N + 11) to row (N + 14).
+        // row (N + 11) might be the last row of the entire buffer, and the rest rows might
+        // be out-of-bound. Then we will get a validation error. So we need a final copy to copy
+        // the last row of the entire copy block.
+        //                _____________________
+        //               /                    /|
+        //              /                    / |
+        //              |-------------------|  |
+        //  row (N + 3) |                 ++|  |
+        //  row (N + 4) |~~~~~~~~~~~~~~~~~~~|  |
+        //  row (N + 5) |~~~~~~~~~~~~~~~~~~~| /
+        //  row (N + 6) |~~~~~~~~~~~~~~~~~~~|/
+        //              |-------------------|
+        //
+        //  copy 2: copy the last row of the last image.
+        //              |-------------------|
+        //  row (N + 11)|                 ++|
+        //              |-------------------|
+
+        uint32_t i = copy.count;
+        copy.count += 3;
+        copy.copies[i].alignedOffset = alignedOffset;
+        copy.copies[i].textureOffset = origin;
+
+        copy.copies[i].copySize = copySize;
+        copy.copies[i].copySize.height = copySize.height - texelOffset.y;
+
+        copy.copies[i].bufferOffset = texelOffset;
+        copy.copies[i].bufferSize = copySize;
+        copy.copies[i].bufferSize.width = copySize.width + texelOffset.x;
+
+        uint64_t offsetForLastRow = offset + bytesPerRow * copy.copies[i].copySize.height;
+        uint64_t alignedOffsetForLastRow =
+            offsetForLastRow & ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
+
+        Origin3D texelOffsetForLastRow = ComputeTexelOffsets(
+            blockInfo, static_cast<uint32_t>(offsetForLastRow - alignedOffsetForLastRow),
+            bytesPerRow);
+
+        copy.copies[i + 1].alignedOffset = alignedOffsetForLastRow;
+
+        copy.copies[i + 1].textureOffset = origin;
+        copy.copies[i + 1].textureOffset.y = origin.y + copy.copies[i].copySize.height;
+
+        copy.copies[i + 1].copySize = copySize;
+        copy.copies[i + 1].copySize.height = texelOffset.y;
+        copy.copies[i + 1].copySize.depthOrArrayLayers = copySize.depthOrArrayLayers - 1;
+
+        copy.copies[i + 1].bufferOffset = texelOffsetForLastRow;
+        copy.copies[i + 1].bufferSize = copy.copies[i].bufferSize;
+        copy.copies[i + 1].bufferSize.depthOrArrayLayers = copySize.depthOrArrayLayers - 1;
+
+        uint64_t bytesPerImage = bytesPerRow * rowsPerImage;
+        uint64_t offsetForLastRowOfLastImage =
+            offsetForLastRow + bytesPerImage * (copySize.depthOrArrayLayers - 1);
+        uint64_t alignedOffsetForLastRowOfLastImage =
+            offsetForLastRowOfLastImage &
+            ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
+
+        Origin3D texelOffsetForLastRowOfLastImage = ComputeTexelOffsets(
+            blockInfo,
+            static_cast<uint32_t>(offsetForLastRowOfLastImage - alignedOffsetForLastRowOfLastImage),
+            bytesPerRow);
+
+        copy.copies[i + 2].alignedOffset = alignedOffsetForLastRowOfLastImage;
+        copy.copies[i + 2].textureOffset = copy.copies[i + 1].textureOffset;
+        copy.copies[i + 2].textureOffset.z = origin.z + copySize.depthOrArrayLayers - 1;
+        copy.copies[i + 2].copySize = copy.copies[i + 1].copySize;
+        copy.copies[i + 2].copySize.depthOrArrayLayers = 1;
+        copy.copies[i + 2].bufferOffset = texelOffsetForLastRowOfLastImage;
+        copy.copies[i + 2].bufferSize.width = copy.copies[i + 1].bufferSize.width;
+        ASSERT(copy.copies[i + 2].copySize.height == 1);
+        copy.copies[i + 2].bufferSize.height =
+            copy.copies[i + 2].bufferOffset.y + copy.copies[i + 2].copySize.height;
+        copy.copies[i + 2].bufferSize.depthOrArrayLayers = 1;
+    }
+
     TextureCopySubresource Compute3DTextureCopySubresourceForSpecialCases(
         Origin3D origin,
         Extent3D copySize,
@@ -269,6 +423,30 @@ namespace dawn_native { namespace d3d12 {
         //       two rows or not due to alignment adjustment.
 
         TextureCopySubresource copy;
+
+        ASSERT(bytesPerRow % blockInfo.byteSize == 0);
+
+        // The copies must be 512-aligned. To do this, we calculate the first 512-aligned address
+        // preceding our data.
+        uint64_t alignedOffset =
+            offset & ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
+        ASSERT(alignedOffset < offset);
+        ASSERT(offset - alignedOffset < D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT);
+
+        Origin3D texelOffset = ComputeTexelOffsets(
+            blockInfo, static_cast<uint32_t>(offset - alignedOffset), bytesPerRow);
+
+        ASSERT(texelOffset.z == 0);
+
+        uint32_t copyBytesPerRowPitch = copySize.width / blockInfo.width * blockInfo.byteSize;
+        uint32_t byteOffsetInRowPitch = texelOffset.x / blockInfo.width * blockInfo.byteSize;
+        if (copyBytesPerRowPitch + byteOffsetInRowPitch <= bytesPerRow) {
+            // See comments in Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow() for details.
+            Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(origin, copySize, blockInfo,
+                                                                 offset, alignedOffset, texelOffset,
+                                                                 bytesPerRow, rowsPerImage, copy);
+        }
+
         return copy;
     }
 
