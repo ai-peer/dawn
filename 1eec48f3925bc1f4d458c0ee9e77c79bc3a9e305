@@ -144,6 +144,24 @@
       "parentUuid": "fbb97dde_c0d48006",
       "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5fc3343_ccc62dae",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T01:58:09Z",
+      "side": 1,
+      "message": "Oh I\u0027d like to say:\n\nbefore [2] we need to ensure there has already been a waitableEvent in WaitableTask.",
+      "parentUuid": "412a8f8c_68ff32f7",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
