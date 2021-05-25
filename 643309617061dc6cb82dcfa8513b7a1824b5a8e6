@@ -241,6 +241,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "093969d7_2c2cd4cc",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-25T17:37:29Z",
+      "side": 1,
+      "message": "In Tint, we transform external_texture to texture_2d\u003cf32\u003e at the beginning of each backend writer (libtint_hlsl_writer, libtint_spirv_writer, libtint_msl_writer). This is pretty much the end of the line unless I break compatibility with configurations that use SPIRV-Cross to reflect the shader. Obviously SPIRV-cross knows nothing about external textures, so the transforms must occur before reflection.\n\nOn D3D12/use_tint_generator we\u0027re already doing as you suggest - but it\u0027s because this configuration has no reason to be transformed before reflection.\n\nOn configurations that don\u0027t need to need SPIRV-Cross to reflect (i.e. Vk/use_tint_generator) we are still doing the transform before reflection - but I don\u0027t see any reason we couldn\u0027t defer WGSL-\u003eSPIRV transformation until pipeline creation (like on D3D) to then do reflection before transformation.",
+      "parentUuid": "923f9993_67644aad",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0be38fa_b5a3bcc7",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 23
