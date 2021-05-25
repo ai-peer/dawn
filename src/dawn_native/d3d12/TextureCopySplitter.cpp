@@ -445,6 +445,112 @@ namespace dawn_native { namespace d3d12 {
             Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(origin, copySize, blockInfo,
                                                                  offset, alignedOffset, texelOffset,
                                                                  bytesPerRow, rowsPerImage, copy);
+        } else {
+            // copyBytesPerRowPitch + byteOffsetInRowPitch > bytesPerRow
+            // The region's rows straddle the bytes per row. Split the copy into two copies:
+            // copy the head block (h), and copy the tail block (t). In addition, either the
+            // head block or the tail block has an empty first row.
+            //
+            // Case 0: the head block has an empty row.
+            // Note that alignedOffset is at the beginning of row (N - 1), but real buffer offset
+            // of head block start at somewhere in row N.
+            //              |<------- bytes per row ------>|
+            //
+            //              |------------------------------|
+            //  row (N - 1) |                              |  <--- an empty row for the head block
+            //  row N       |                      hhhhhhhh|
+            //  row (N + 1) |ttttttttt~~~~~~~~~~~~~hhhhhhhh|
+            //  row (N + 2) |ttttttttt~~~~~~~~~~~~~hhhhhhhh|
+            //  row (N + 3) |ttttttttt~~~~~~~~~~~~~hhhhhhhh|
+            //                            ......
+            //  row (N + x) |ttttttttt                     |
+            //              |------------------------------|
+            //
+            // Case 1: the tail block has an empty row
+            // Note that alignedOffset is at the beginning of row N, there is no empty row for the
+            // head block. However, buffer offset of the tail block is at the beginning of row (N +
+            // 1), So row N turnout to be an empty first row for the tail block.
+            //  |<------- bytes per row ------>|
+            //
+            //              |------------------------------|
+            //  row N       |                      hhhhhhhh|  <--- an empty row for the tail block
+            //  row (N + 1) |ttttttttt~~~~~~~~~~~~~hhhhhhhh|
+            //  row (N + 2) |ttttttttt~~~~~~~~~~~~~hhhhhhhh|
+            //  row (N + 3) |ttttttttt~~~~~~~~~~~~~hhhhhhhh|
+            //                            ......
+            //  row (N + x) |ttttttttt                     |
+            //              |------------------------------|
+            uint32_t texelsPerRow = bytesPerRow / blockInfo.byteSize * blockInfo.width;
+            if (texelOffset.y > 0) {
+                copy.count = 0;
+                // Case 0: the head block has an empty row. We can call function
+                // Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow to copy the head block.
+                // Note that the tail block will definitely has no empty first row after we
+                // repositioned the alignedOffset for the tail block. So we can copy the tail block
+                // in one shot.
+                Extent3D copySizeForHead = copySize;
+                copySizeForHead.width = texelsPerRow - texelOffset.x;
+                Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(
+                    origin, copySizeForHead, blockInfo, offset, alignedOffset, texelOffset,
+                    bytesPerRow, rowsPerImage, copy);
+
+                uint32_t i = copy.count++;
+                uint64_t offsetForTail = alignedOffset + bytesPerRow * (texelOffset.y + 1);
+                uint64_t alignedOffsetForTail =
+                    offsetForTail &
+                    ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
+
+                Origin3D texelOffsetForTail = ComputeTexelOffsets(
+                    blockInfo, static_cast<uint32_t>(offsetForTail - alignedOffsetForTail),
+                    bytesPerRow);
+
+                copy.copies[i].alignedOffset = alignedOffsetForTail;
+                copy.copies[i].textureOffset.x = origin.x + copySizeForHead.width;
+                copy.copies[i].textureOffset.y = origin.y;
+                copy.copies[i].textureOffset.z = origin.z;
+
+                copy.copies[i].bufferOffset = texelOffsetForTail;
+
+                copy.copies[i].copySize.width = copySize.width - copySizeForHead.width;
+                copy.copies[i].copySize.height = copySize.height - texelOffsetForTail.y;
+                copy.copies[i].copySize.depthOrArrayLayers = copySize.depthOrArrayLayers;
+
+                copy.copies[i].bufferSize = copySize;
+                copy.copies[i].bufferSize.width =
+                    copy.copies[i].copySize.width + copy.copies[i].bufferOffset.x;
+            } else {
+                // Case 1: the head block has no an empty first row. We can copy the head block
+                // in one shot. However, the tail block has an empty block, so we can call function
+                // Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow to copy the tail block.
+                copy.count = 1;
+                copy.copies[0].alignedOffset = alignedOffset;
+
+                copy.copies[0].textureOffset = origin;
+
+                copy.copies[0].copySize = copySize;
+                copy.copies[0].copySize.width = texelsPerRow - texelOffset.x;
+
+                copy.copies[0].bufferOffset = texelOffset;
+
+                copy.copies[0].bufferSize = copySize;
+                copy.copies[0].bufferSize.width = texelsPerRow;
+
+                Origin3D originForTail = origin;
+                originForTail.x = origin.x + copy.copies[0].copySize.width;
+                Extent3D copySizeForTail = copySize;
+                copySizeForTail.width = copySize.width - copy.copies[0].copySize.width;
+                uint64_t offsetForTail = alignedOffset + bytesPerRow * (texelOffset.y + 1);
+                uint64_t alignedOffsetForTail =
+                    offsetForTail &
+                    ~static_cast<uint64_t>(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1);
+
+                Origin3D texelOffsetForTail = ComputeTexelOffsets(
+                    blockInfo, static_cast<uint32_t>(offsetForTail - alignedOffsetForTail),
+                    bytesPerRow);
+                Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(
+                    originForTail, copySizeForTail, blockInfo, offsetForTail, alignedOffsetForTail,
+                    texelOffsetForTail, bytesPerRow, rowsPerImage, copy);
+            }
         }
 
         return copy;
