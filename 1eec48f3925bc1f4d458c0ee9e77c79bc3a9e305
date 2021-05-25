@@ -66,6 +66,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c5ec72dd_d6d59467",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T01:32:28Z",
+      "side": 1,
+      "message": "In fact there can be quite many variables that are involved in CreateRenderPipelineAsync(), personally I just don\u0027t want to pass so many arguments into a lambda function. What do you think?",
+      "parentUuid": "18d4f2fe_471671de",
+      "range": {
+        "startLine": 62,
+        "startChar": 43,
+        "endLine": 62,
+        "endChar": 93
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6189b3_bcbaa80f",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T01:32:28Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 110,
+        "startChar": 3,
+        "endLine": 110,
+        "endChar": 59
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbb97dde_c0d48006",
         "filename": "src/dawn_platform/WorkerThread.cpp",
         "patchSetId": 6
@@ -77,6 +124,24 @@
       "writtenOn": "2021-05-24T16:52:52Z",
       "side": 1,
       "message": "I think we should encapsulate how we mark the event complete here. I don\u0027t think we should add MarkAsComplete to dawn_platform::WaitableEvent. It feels like an implementation detail of AsyncWorkerThreadPool, and the Chromium implementation wouldn\u0027t use it.\n\nDo you think the following idea will work?\n\nstd::unique_ptr\u003cAsyncWaitableEvent\u003e event \u003d std::make_unique\u003cAsyncWaitableEvent\u003e();\nstd::thread thread([callback, userdata, eventPtr \u003d event.get()]() {\n    callback(userdata);\n    eventPtr-\u003emIsComplete \u003d true;\n    eventPtr-\u003emCondition.notify_all();\n});\nthread.detach();\n\nreturn event;\n\nAlso, because the condition variable is created and bound to the function strictly before the thread is launched, we don\u0027t need the additional condition variable around [1].",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "412a8f8c_68ff32f7",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T01:32:28Z",
+      "side": 1,
+      "message": "Oh the condition variable around [1] is protecting the access at [2]: before [2] we need to ensure there has already been a waitableEvent.\n\nInside the \"callback\" attached to std::thread the waitableEvent should be deleted and released, which I think is what actually you prefer, so we cannot call any functions on the waitableEvent.",
+      "parentUuid": "fbb97dde_c0d48006",
       "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
