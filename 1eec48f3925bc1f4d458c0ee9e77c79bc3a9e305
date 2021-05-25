@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2a3bd61_c63c0539",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T10:31:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a0285725_4e2c7de6",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 47,
+        "endChar": 53
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18d4f2fe_471671de",
@@ -101,6 +125,30 @@
       "writtenOn": "2021-05-25T01:32:28Z",
       "side": 1,
       "message": "[2]",
+      "range": {
+        "startLine": 110,
+        "startChar": 3,
+        "endLine": 110,
+        "endChar": 59
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c903100_10c3f678",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T10:31:24Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4e6189b3_bcbaa80f",
       "range": {
         "startLine": 110,
         "startChar": 3,
