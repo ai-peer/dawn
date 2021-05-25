@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c80369e_e335dd30",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:30:53Z",
+      "side": 1,
+      "message": "Oh and I think in general the lambda form can be useful. For CreateRenderPipelineAsync we have a lot of arguments, but I think eventually we should have a structure that contains all the arguments and that is used for both the caching logic and the async logic. So it won\u0027t be that bad in the end state. (in the meantime we can subclass AsyncTaskBase)",
+      "parentUuid": "3e966722_63c007de",
+      "range": {
+        "startLine": 62,
+        "startChar": 43,
+        "endLine": 62,
+        "endChar": 93
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e6189b3_bcbaa80f",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 6
