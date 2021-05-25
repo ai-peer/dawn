@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bdeddfb_c571f384",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "I\u0027m not sure we need to reference one more time here. We could pass waitableTask.Detach() to PostWorkerTask below.",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e3e2708_641e6ffd",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "MakeTaskCompleted? Or maybe just CancelTask?",
+      "range": {
+        "startLine": 66,
+        "startChar": 34,
+        "endLine": 66,
+        "endChar": 47
+      },
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4f364be_dbfa92b6",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "nit: This could be in a new set of files and maybe called AsyncTask and AsyncTaskManager (or Runner? not sure)",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c71923e4_1cce99ea",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "Is this going to be used outside of the implementation of WorkerThreadTaskManager?",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d6be3fb_a5ce73cb",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "This seems needed for all WorkerThreadTask, so maybe we could put them directly in that class and make the WorkerThreadTaskManager a friend?",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71af987_ab07e7da",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "nit: missing \u003ccondition_variable\u003e include.",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8299bc6_336c45b4",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "We had some discussion offline about using std::shared_ptr here but that doesn\u0027t work for Chromium because it is disallowed. We could add an exception to Chromium\u0027s PRESUBMIT.py but a nicer solution is to make AsyncWatiableEvent only contain an std::shared_ptr to the actual data (so an atomic\u003cbool\u003e and condition_variable).\n\nThen we don\u0027t need to cast to RefCounted in doTask.",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

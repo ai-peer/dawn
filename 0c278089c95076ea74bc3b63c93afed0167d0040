@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18794589_53f880d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "Thanks for the iteration, it looks like it is getting to the right place. I have a bunch of comments for simplifications or ergonomics but that\u0027s great progress!",
+      "revId": "0c278089c95076ea74bc3b63c93afed0167d0040",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

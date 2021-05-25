@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e966722_63c007de",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "In the future we are likely to add more things to the AsyncTask, like Cancel() or RunNow(). What do you think of having (includes other comments done on these files):\n\n class AsyncTaskBase: public RefCounted {\n   public:\n     virtual void DoTask() \u003d 0;\n   private:\n     friend AsyncTaskManager;\n\n     void DoTaskInternal(); // Does stuff and calls DoTask();\n     AsyncTaskManager* mManager \u003d nullptr;\n     std::unique_ptr\u003cWaitableEvent\u003e mWaitableEvent;\n };\n\n template\u003ctypename F\u003e\n Ref\u003cAsyncTaskBase\u003e MakeTask(F\u0026\u0026 f) {\n   class AsyncTaskInternal : public AsyncTask {\n     public:\n       AsyncTaskInternal(F\u0026\u0026 f) : mFunction(std::forward(f)) {}\n       void DoTask() override {\n         mFunction();\n       }\n       F mFunction;\n   };\n\n   return AcquireRef(new AsyncTaskInternal(std::forward(f)));\n }\n\n class AsyncTaskManager {\n   public:\n     PostTask(Ref\u003cAsyncTaskBase\u003e);\n };",
+      "parentUuid": "c5ec72dd_d6d59467",
+      "range": {
+        "startLine": 62,
+        "startChar": 43,
+        "endLine": 62,
+        "endChar": 93
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e6189b3_bcbaa80f",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 6
@@ -155,6 +179,40 @@
         "endLine": 110,
         "endChar": 59
       },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41aa160_2b0e68bf",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "nit: we wouldn\u0027t need this lock if mIsComplete were std::atomic\u003cbool\u003e",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31cf63b8_43c24602",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-25T12:29:30Z",
+      "side": 1,
+      "message": "ditto with .store() noting that the sequentially consistent default memory order guarantees that other threads see the new value of the boolean before their wait on mCondition is finished.\n\nI think this means that for now we can create a temporary mutex in Wait. I checked the source of libcxx and creating mutexes is super fast.",
       "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
