@@ -274,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4dd9c28e_d4fdbdbb",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-25T19:34:30Z",
+      "side": 1,
+      "message": "It\u0027s not a problem with the current code, but I\u0027m worried that in the future as we improve this with a non-trivial translation, there could be conflicts with what binding slots are used in the shader vs. bindings we map to when creating descriptors. For example, that ASSERT is only done in the frontend, and we kinda assume the backend bindings are in the same order/count as the frontend bindings (for descriptor allocation, etc). This assumption breaks down if we start mapping 1 frontend binding to 3 backend bindings in the future.",
+      "parentUuid": "024d7d47_c2aed561",
+      "range": {
+        "startLine": 136,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 89
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9c2f40d3_0a40bb61",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 16
