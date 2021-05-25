@@ -198,6 +198,24 @@
       "parentUuid": "01bad7b2_04c4af8b",
       "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4021f220_0b5abc39",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-25T09:01:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d459d056_99b7b693",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
