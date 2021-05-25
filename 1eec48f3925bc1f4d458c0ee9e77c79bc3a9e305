@@ -162,6 +162,24 @@
       "parentUuid": "412a8f8c_68ff32f7",
       "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01bad7b2_04c4af8b",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-25T05:10:22Z",
+      "side": 1,
+      "message": "Can we put the mIsComplete and mCondition inside a std::shared_ptr\u003cT\u003e ? Then the variables which indicate the event is done can outlive the event itself.",
+      "parentUuid": "c5fc3343_ccc62dae",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
