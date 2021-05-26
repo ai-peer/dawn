@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6995685_841cf395",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T23:22:29Z",
+      "side": 1,
+      "message": "SyncScopeUsageTracker-related comments are all that\u0027s left I think.",
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

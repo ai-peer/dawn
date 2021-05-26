@@ -296,6 +296,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "776574e2_3d28fae3",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T23:22:29Z",
+      "side": 1,
+      "message": "Noted. It\u0027s going to be difficult to keep things straight when we start including the external texture\u0027s buffer - but I\u0027m not sure what can be done about this at the moment.\n\nIt was actually a mistake for me to touch the code in the first place. I\u0027ve reverted it and external texture binding counts are in their own PerStage member, not combined with others which is a bit less implicit. \n\nFeel free to un-resolve if you were expecting some action in this CL to address this is issue.",
+      "parentUuid": "4dd9c28e_d4fdbdbb",
+      "range": {
+        "startLine": 136,
+        "startChar": 12,
+        "endLine": 138,
+        "endChar": 89
+      },
+      "revId": "1f3fe42bd662dd5aaba6089b2847354736199d5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c2f40d3_0a40bb61",

@@ -455,6 +455,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce229514_829bd60e",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T23:22:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b96613b_b5bf119f",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0be38fa_b5a3bcc7",
@@ -861,6 +879,24 @@
       "side": 1,
       "message": "Point #1 and #2 are addressed.",
       "parentUuid": "cbbce0e6_1347676d",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cecfed65_96719f59",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T23:22:29Z",
+      "side": 1,
+      "message": "Added DISABLED_ tests for points #3 \u0026 #4. I think all points are addressed, other than the QueueSubmit tests.",
+      "parentUuid": "d112837f_5090a2b6",
       "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
