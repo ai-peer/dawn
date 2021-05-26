@@ -82,6 +82,45 @@ namespace dawn_native {
         size_t count = 0;
     };
 
+    namespace {
+        struct LoggingCallbackTask : CallbackTask {
+          public:
+            LoggingCallbackTask(wgpu::LoggingCallback loggingCallback,
+                                WGPULoggingType loggingType,
+                                const char* message,
+                                void* userdata)
+                : mCallback(loggingCallback),
+                  mLoggingType(loggingType),
+                  mMessage(message),
+                  mUserdata(userdata) {
+                // The parameter of constructor is the same as those of callback.
+                // Since the Finish() will be called in uncertain future in which time the message
+                // may already disposed, we must keep a local copy in the CallbackTask.
+            }
+
+            void Finish() override {
+                // Original direct call: mLoggingCallback(message, mLoggingUserdata)
+                // Do the same here, but with everything bound locally.
+                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+            }
+
+            void HandleShutDown() override {
+                // Do the logging anyway
+                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+            }
+
+            void HandleDeviceLoss() override {
+                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+            }
+
+          private:
+            wgpu::LoggingCallback mCallback;
+            WGPULoggingType mLoggingType;
+            std::string mMessage;
+            void* mUserdata;
+        };
+    }  // anonymous namespace
+
     // DeviceBase
 
     DeviceBase::DeviceBase(AdapterBase* adapter, const DeviceDescriptor* descriptor)
@@ -260,6 +299,20 @@ namespace dawn_native {
         }
     }
 
+    void DeviceBase::EmitLog(const char* message) {
+        this->EmitLog(WGPULoggingType_Info, message);
+    }
+
+    void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
+        if (mLoggingCallback != nullptr) {
+            // Use the thread-safe CallbackTaskManager routine
+            std::unique_ptr<LoggingCallbackTask> callbackTask =
+                std::make_unique<LoggingCallbackTask>(mLoggingCallback, loggingType, message,
+                                                      mLoggingUserdata);
+            mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+        }
+    }
+
     void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
         if (ConsumedError(ValidateErrorType(type))) {
             return;
@@ -290,6 +343,11 @@ namespace dawn_native {
     void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
         mUncapturedErrorCallback = callback;
         mUncapturedErrorUserdata = userdata;
+    }
+
+    void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
+        mLoggingCallback = callback;
+        mLoggingUserdata = userdata;
     }
 
     void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
