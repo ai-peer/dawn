@@ -79,6 +79,30 @@
       },
       "revId": "af6e5e29df32d731a405f2338d356036f9288448",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f33b7bf_2a647523",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T10:53:02Z",
+      "side": 1,
+      "message": "Oh actually you don\u0027t need to worry about it because at this time we still hold a reference of waitableEvent in mPendingTasks, which won\u0027t be released before callback(userdata).",
+      "parentUuid": "6667101f_6ea991d8",
+      "range": {
+        "startLine": 86,
+        "startChar": 59,
+        "endLine": 86,
+        "endChar": 78
+      },
+      "revId": "af6e5e29df32d731a405f2338d356036f9288448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

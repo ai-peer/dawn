@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b771c679_25091c24",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T10:53:02Z",
+      "side": 1,
+      "message": "Oh after working on this task for quite a long time, now I am very sensitive when trying to use something that may be released in another thread :-).",
+      "parentUuid": "aea9f1dc_5fd208b3",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e3e2708_641e6ffd",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 7
