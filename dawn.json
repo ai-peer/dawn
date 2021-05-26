@@ -810,6 +810,13 @@
                 ]
             },
             {
+                "name": "set logging callback",
+                "args": [
+                    {"name": "callback", "type": "logging callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            },
+            {
                 "name": "set device lost callback",
                 "args": [
                     {"name": "callback", "type": "device lost callback"},
@@ -858,6 +865,13 @@
         "category": "callback",
         "args": [
             {"name": "type", "type": "error type"},
+            {"name": "message", "type": "char", "annotation": "const*"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "logging callback": {
+        "category": "callback",
+        "args": [
             {"name": "message", "type": "char", "annotation": "const*"},
             {"name": "userdata", "type": "void", "annotation": "*"}
         ]
