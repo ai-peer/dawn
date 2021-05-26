@@ -266,6 +266,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a803a1b4_a4aca0d6",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:10:49Z",
+      "side": 1,
+      "message": "Yeah I looked at the code for mutex creation and it is trivial (it just initializes \na structure with some compile time values) so we could always create one before cond.wait()\n\nBut the extra locking most likely doesn\u0027t matter so current code LGTM.",
+      "parentUuid": "8e535b8e_8b0e89ba",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31cf63b8_43c24602",

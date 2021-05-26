@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e027eb40_630de978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:10:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "af6e5e29df32d731a405f2338d356036f9288448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b4e7f35_21b2eb8f",
+        "filename": "src/dawn_native/AsyncTask.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:10:49Z",
+      "side": 1,
+      "message": "u-nit: HandleTaskCompletion? UntrackTask? It\u0027s a bit weird to call it making the task complete when what it does is the remove it from a list.",
+      "range": {
+        "startLine": 33,
+        "startChar": 27,
+        "endLine": 33,
+        "endChar": 44
+      },
+      "revId": "af6e5e29df32d731a405f2338d356036f9288448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2353d4fe_959949d8",
+        "filename": "src/dawn_native/AsyncTask.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:10:49Z",
+      "side": 1,
+      "message": "This works at the moment, but I think we\u0027ll add additional things to the task in the future, like Cancel() and RunNow(). Cancelling helps avoid running the task\u0027s body when we are just shutting down the device. RunNow() could be used for more advanced scenarios, for example always doing ShaderModule initial compilation asynchronously, but being able to steal the task if we need it for synchronous pipeline compilation.",
+      "revId": "af6e5e29df32d731a405f2338d356036f9288448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6667101f_6ea991d8",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:10:49Z",
+      "side": 1,
+      "message": "I think we should make the copy of the shared_ptr here, otherwise waitableEvent could have been already freed when we get to the first line of doTask.\n\nSomething like:\n\n        std::function\u003cvoid()\u003e doTask \u003d [callback, userdata,\n                                        waitableEventImpl \u003d waitableEvent-\u003eGetWaitableEventImpl()]() {",
+      "range": {
+        "startLine": 86,
+        "startChar": 59,
+        "endLine": 86,
+        "endChar": 78
+      },
+      "revId": "af6e5e29df32d731a405f2338d356036f9288448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
