@@ -467,14 +467,21 @@ namespace dawn_native {
 
     }  // namespace
 
-    CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
+    CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor)
         : ObjectBase(device), mEncodingContext(device, this) {
+        if (descriptor) {
+            mMeasureExecutionTime = descriptor->measureExecutionTime;
+        }
     }
 
     CommandBufferResourceUsage CommandEncoder::AcquireResourceUsages() {
         return CommandBufferResourceUsage{
             mEncodingContext.AcquireRenderPassUsages(), mEncodingContext.AcquireComputePassUsages(),
             std::move(mTopLevelBuffers), std::move(mTopLevelTextures), std::move(mUsedQuerySets)};
+    }
+
+    bool CommandEncoder::ShouldMeasureExecutionTime() const {
+        return mMeasureExecutionTime;
     }
 
     CommandIterator CommandEncoder::AcquireCommands() {

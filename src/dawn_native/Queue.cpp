@@ -143,6 +143,26 @@ namespace dawn_native {
             void* mUserdata;
         };
 
+        struct CommandBufferSubmitDone : QueueBase::TaskInFlight {
+            CommandBufferSubmitDone(Ref<CommandBufferBase> commandBuffer)
+                : mCommandBuffer(commandBuffer) {
+            }
+            void Finish() override {
+                ASSERT(mCommandBuffer != nullptr);
+                mCommandBuffer->ResolveExecutionTime();
+                mCommandBuffer = nullptr;
+            }
+            void HandleDeviceLoss() override {
+                ASSERT(mCommandBuffer != nullptr);
+                mCommandBuffer->OnExecutionTimeResolved(WGPUExecutionTimeRequestStatus_DeviceLost);
+                mCommandBuffer = nullptr;
+            }
+            ~CommandBufferSubmitDone() override = default;
+
+          private:
+            Ref<CommandBufferBase> mCommandBuffer = nullptr;
+        };
+
         class ErrorQueue : public QueueBase {
           public:
             ErrorQueue(DeviceBase* device) : QueueBase(device, ObjectBase::kError) {
@@ -499,6 +519,15 @@ namespace dawn_native {
         return {};
     }
 
+    void QueueBase::InvalidateExecutionTimes(uint32_t commandCount,
+                                             CommandBufferBase* const* commands) const {
+        for (uint32_t i = 0; i < commandCount; ++i) {
+            if (commands[i]->MeasureExecutionTime()) {
+                commands[i]->OnExecutionTimeResolved(WGPUExecutionTimeRequestStatus_Invalid);
+            }
+        }
+    }
+
     void QueueBase::SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands) {
         DeviceBase* device = GetDevice();
         if (device->ConsumedError(device->ValidateIsAlive())) {
@@ -509,12 +538,24 @@ namespace dawn_native {
         TRACE_EVENT0(device->GetPlatform(), General, "Queue::Submit");
         if (device->IsValidationEnabled() &&
             device->ConsumedError(ValidateSubmit(commandCount, commands))) {
+            InvalidateExecutionTimes(commandCount, commands);
             return;
         }
         ASSERT(!IsError());
 
         if (device->ConsumedError(SubmitImpl(commandCount, commands))) {
+            InvalidateExecutionTimes(commandCount, commands);
             return;
+        }
+
+        // If the submit was successful, add a task to to wait for the completion of any command
+        // buffers that indicate that they should have their execution time measured.
+        for (uint32_t i = 0; i < commandCount; ++i) {
+            if (commands[i]->MeasureExecutionTime()) {
+                std::unique_ptr<CommandBufferSubmitDone> task =
+                    std::make_unique<CommandBufferSubmitDone>(AcquireRef(commands[i]));
+                TrackTask(std::move(task), GetDevice()->GetPendingCommandSerial());
+            }
         }
     }
 

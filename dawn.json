@@ -358,8 +358,35 @@
             {"value": 15, "name": "all"}
         ]
     },
+    "execution time request status": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "success"},
+            {"value": 1, "name": "invalid"},
+            {"value": 2, "name": "not measured"},
+            {"value": 3, "name": "device lost"},
+            {"value": 4, "name": "unknown"}
+        ]
+    },
+    "execution time callback": {
+        "category": "callback",
+        "args": [
+            {"name": "status", "type": "execution time request status"},
+            {"name": "time", "type": "double"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
     "command buffer": {
-        "category": "object"
+        "category": "object",
+        "methods": [
+            {
+                "name": "get execution time",
+                "args": [
+                    {"name": "callback", "type": "execution time callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            }
+        ]
     },
     "command buffer descriptor": {
         "category": "structure",
@@ -472,7 +499,8 @@
         "category": "structure",
         "extensible": true,
         "members": [
-            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true}
+            {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
+            {"name": "measure execution time", "type": "bool", "default": "false"}
         ]
     },
     "compare function": {

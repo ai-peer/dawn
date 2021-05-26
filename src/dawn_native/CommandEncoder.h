@@ -32,6 +32,7 @@ namespace dawn_native {
 
         CommandIterator AcquireCommands();
         CommandBufferResourceUsage AcquireResourceUsages();
+        bool ShouldMeasureExecutionTime() const;
 
         void TrackUsedQuerySet(QuerySetBase* querySet);
         void TrackQueryAvailability(QuerySetBase* querySet, uint32_t queryIndex);
@@ -79,6 +80,8 @@ namespace dawn_native {
         std::set<BufferBase*> mTopLevelBuffers;
         std::set<TextureBase*> mTopLevelTextures;
         std::set<QuerySetBase*> mUsedQuerySets;
+
+        bool mMeasureExecutionTime = false;
 
         uint64_t mDebugGroupStackSize = 0;
     };
