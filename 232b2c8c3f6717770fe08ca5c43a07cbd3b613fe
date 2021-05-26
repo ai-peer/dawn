@@ -58,6 +58,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f7c6686_43efe202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-26T15:49:21Z",
+      "side": 1,
+      "message": "Overall, looks good. I\u0027ll look again after this is moved to the CallbackQueue.\n\nHigh-level question: Why is it called a \"user warning\" versus just a \"warning\" ? The \"uncaptured error callback\" is also triggered when someone uses the API incorrectly (for validation errors), but we don\u0027t have \"user\" in the name.\n",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "018ab56f_d840be2a",
