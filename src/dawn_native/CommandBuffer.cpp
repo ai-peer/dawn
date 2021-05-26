@@ -27,10 +27,14 @@ namespace dawn_native {
         : ObjectBase(encoder->GetDevice()),
           mCommands(encoder->AcquireCommands()),
           mResourceUsages(encoder->AcquireResourceUsages()) {
+        if (!encoder->MeasureExecutionTime()) {
+            OnExecutionTimeResolved(WGPUExecutionTimeRequestStatus_NotMeasured);
+        }
     }
 
     CommandBufferBase::CommandBufferBase(DeviceBase* device, ObjectBase::ErrorTag tag)
         : ObjectBase(device, tag) {
+        OnExecutionTimeResolved(WGPUExecutionTimeRequestStatus_Invalid);
     }
 
     CommandBufferBase::~CommandBufferBase() {
@@ -59,6 +63,45 @@ namespace dawn_native {
 
     const CommandBufferResourceUsage& CommandBufferBase::GetResourceUsages() const {
         return mResourceUsages;
+    }
+
+    // Only measure execution time if we don't have a status set. If measureExecutionTime was false
+    // in the command encoder descriptor the status will be set to "NotMeasured" in the constructor.
+    bool CommandBufferBase::MeasureExecutionTime() const {
+        return mExecutionTimeStatus == WGPUExecutionTimeRequestStatus_Unknown;
+    }
+
+    void CommandBufferBase::APIGetExecutionTime(wgpu::ExecutionTimeCallback callback,
+                                                void* userdata) {
+        if (callback == nullptr) {
+            return;
+        }
+
+        // If we have previously resolved the execution time return it immediately.
+        if (mExecutionTimeStatus != WGPUExecutionTimeRequestStatus_Unknown) {
+            callback(mExecutionTimeStatus, mExecutionTime, userdata);
+            return;
+        }
+
+        // If we don't already have a resolved time, queue this callback up for when we get one.
+        ExecutionTimeRequest request = {callback, userdata};
+        mExecutionTimeRequests.push_back(request);
+    }
+
+    void CommandBufferBase::OnExecutionTimeResolved(WGPUExecutionTimeRequestStatus status,
+                                                    double time) {
+        // Should only call this method once and with a status other than "unknown".
+        ASSERT(status != WGPUExecutionTimeRequestStatus_Unknown);
+        ASSERT(mExecutionTimeStatus == WGPUExecutionTimeRequestStatus_Unknown);
+        mExecutionTimeStatus = status;
+        mExecutionTime = time;
+
+        // Call all pending callbacks to notify them of the resolved time.
+        // TODO: Is there a race condition here with APIGetExecutionTime?
+        for (auto& request : mExecutionTimeRequests) {
+            request.callback(status, time, request.userdata);
+        }
+        mExecutionTimeRequests.clear();
     }
 
     bool IsCompleteSubresourceCopiedTo(const TextureBase* texture,

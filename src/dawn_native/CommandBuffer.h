@@ -41,6 +41,10 @@ namespace dawn_native {
 
         const CommandBufferResourceUsage& GetResourceUsages() const;
 
+        bool MeasureExecutionTime() const;
+        void APIGetExecutionTime(wgpu::ExecutionTimeCallback callback, void* userdata);
+        void OnExecutionTimeResolved(WGPUExecutionTimeRequestStatus status, double time = 0.0);
+
       protected:
         ~CommandBufferBase();
 
@@ -51,6 +55,15 @@ namespace dawn_native {
 
         CommandBufferResourceUsage mResourceUsages;
         bool mDestroyed = false;
+
+        struct ExecutionTimeRequest {
+            wgpu::ExecutionTimeCallback callback = nullptr;
+            void* userdata = nullptr;
+        };
+        std::vector<ExecutionTimeRequest> mExecutionTimeRequests;
+        WGPUExecutionTimeRequestStatus mExecutionTimeStatus =
+            WGPUExecutionTimeRequestStatus_Unknown;
+        double mExecutionTime = -1.0;
     };
 
     bool IsCompleteSubresourceCopiedTo(const TextureBase* texture,
