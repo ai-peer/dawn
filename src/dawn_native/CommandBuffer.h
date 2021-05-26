@@ -41,6 +41,11 @@ namespace dawn_native {
 
         const CommandBufferResourceUsage& GetResourceUsages() const;
 
+        bool MeasureExecutionTime() const {
+            return mMeasureExecutionTime;
+        }
+        void APIGetExecutionTime(wgpu::ExecutionTimeCallback callback, void* userdata);
+
       protected:
         ~CommandBufferBase();
 
@@ -50,6 +55,7 @@ namespace dawn_native {
         CommandBufferBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         CommandBufferResourceUsage mResourceUsages;
+        const bool mMeasureExecutionTime;
         bool mDestroyed = false;
     };
 

@@ -26,11 +26,12 @@ namespace dawn_native {
     CommandBufferBase::CommandBufferBase(CommandEncoder* encoder, const CommandBufferDescriptor*)
         : ObjectBase(encoder->GetDevice()),
           mCommands(encoder->AcquireCommands()),
-          mResourceUsages(encoder->AcquireResourceUsages()) {
+          mResourceUsages(encoder->AcquireResourceUsages()),
+          mMeasureExecutionTime(encoder->MeasureExecutionTime()) {
     }
 
     CommandBufferBase::CommandBufferBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag) {
+        : ObjectBase(device, tag), mMeasureExecutionTime(false) {
     }
 
     CommandBufferBase::~CommandBufferBase() {
@@ -59,6 +60,26 @@ namespace dawn_native {
 
     const CommandBufferResourceUsage& CommandBufferBase::GetResourceUsages() const {
         return mResourceUsages;
+    }
+
+    void CommandBufferBase::APIGetExecutionTime(wgpu::ExecutionTimeCallback callback,
+                                                void* userdata) {
+        if (callback == nullptr) {
+            return;
+        }
+
+        if (!mMeasureExecutionTime) {
+            callback(WGPUExecutionTimeRequestStatus_NotMeasured, 0.0, userdata);
+            return;
+        }
+
+        if (IsError()) {
+            callback(WGPUExecutionTimeRequestStatus_Invalid, 0.0, userdata);
+            return;
+        }
+
+        // TODO: Implement for each backend
+        callback(WGPUExecutionTimeRequestStatus_Unknown, 0.0, userdata);
     }
 
     bool IsCompleteSubresourceCopiedTo(const TextureBase* texture,
