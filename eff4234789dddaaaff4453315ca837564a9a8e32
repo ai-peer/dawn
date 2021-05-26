@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "612d09b0_eb67fa90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-26T01:11:43Z",
+      "side": 1,
+      "message": "PTAL, thanks",
+      "revId": "eff4234789dddaaaff4453315ca837564a9a8e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd808a3_9deb6666",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-26T01:11:43Z",
+      "side": 1,
+      "message": "Currently the callback only accept a string (message) and no type (logging level).",
+      "revId": "eff4234789dddaaaff4453315ca837564a9a8e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e42f75d_0506dd47",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-26T01:11:43Z",
+      "side": 1,
+      "message": "The toggle added for dumping translated HLSL shaders.",
+      "revId": "eff4234789dddaaaff4453315ca837564a9a8e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01bf64ef_372a813b",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-26T01:11:43Z",
+      "side": 1,
+      "message": "Call the DeviceBase::UserWarning to post a string. \nDeviceBase::UserWarning will call the bound callback, if any.",
+      "revId": "eff4234789dddaaaff4453315ca837564a9a8e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
