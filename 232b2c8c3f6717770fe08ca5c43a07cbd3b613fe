@@ -95,6 +95,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "368aca52_cb53016a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T12:03:41Z",
+      "side": 1,
+      "message": "We will soon face the multi-threading issue here as I believe we will support creating pipeline asynchronously very soon :-)",
+      "parentUuid": "4dd848fb_c7957f5c",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21d0cb35_9ce1bc3a",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 4
