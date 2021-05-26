@@ -67,6 +67,14 @@ namespace dawn_wire { namespace server {
         SerializeCommand(cmd);
     }
 
+    void Server::OnUserWarning(ObjectHandle device, const char* message) {
+        ReturnDeviceUserWarningCallbackCmd cmd;
+        cmd.device = device;
+        cmd.message = message;
+
+        SerializeCommand(cmd);
+    }
+
     bool Server::DoDevicePopErrorScope(ObjectId deviceId, uint64_t requestSerial) {
         auto* device = DeviceObjects().Get(deviceId);
         if (device == nullptr) {

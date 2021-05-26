@@ -23,6 +23,7 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/Toggles.h"
 
+#include "dawn_native/CallbackTaskManager.h"
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 
@@ -50,6 +51,7 @@ namespace dawn_native {
         virtual ~DeviceBase();
 
         void HandleError(InternalErrorType type, const char* message);
+        void UserWarning(const char* message);
 
         bool ConsumedError(MaybeError maybeError) {
             if (DAWN_UNLIKELY(maybeError.IsError())) {
@@ -205,6 +207,7 @@ namespace dawn_native {
 
         void APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata);
         void APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata);
+        void APISetUserWarningCallback(wgpu::UserWarningCallback callback, void* userdata);
         void APIPushErrorScope(wgpu::ErrorFilter filter);
         bool APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata);
 
@@ -377,6 +380,38 @@ namespace dawn_native {
 
         wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
         void* mUncapturedErrorUserdata = nullptr;
+
+        wgpu::UserWarningCallback mUserWarningCallback = nullptr;
+        void* mUserWarningUserdata = nullptr;
+
+        struct UserWarningCallbackTask : CallbackTask {
+          public:
+            UserWarningCallbackTask(wgpu::UserWarningCallback userWarningCallback,
+                                    const char* message,
+                                    void* userdata)
+                : mCallback(userWarningCallback), mMessage(message), mUserdata(userdata) {
+                // The parameter of constructor is the same as those of callback.
+                // Since the Finish() will be called in uncertain future in which time the message
+                // may already disposed, we must keep a local copy in the CallbackTask.
+            }
+
+            void Finish() override {
+                // Original direct call: mUserWarningCallback(message, mUserWarningUserdata)
+                // Do the same here, but with everything bound locally.
+                mCallback(mMessage.c_str(), mUserdata);
+            }
+
+            void HandleShutDown() override {
+            }
+
+            void HandleDeviceLoss() override {
+            }
+
+          private:
+            wgpu::UserWarningCallback mCallback;
+            std::string mMessage;
+            void* mUserdata;
+        };
 
         wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
         void* mDeviceLostUserdata = nullptr;
