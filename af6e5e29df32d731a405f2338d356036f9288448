@@ -103,6 +103,30 @@
       },
       "revId": "af6e5e29df32d731a405f2338d356036f9288448",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cebc090a_23260d5c",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T11:32:21Z",
+      "side": 1,
+      "message": "mPendingTasks is in a different, higher part of the stack so this PostWorkerTask should guarantee it can\u0027t crash without knowing the implementation details of the higher level of the stack. Unless I\u0027m missing something?",
+      "parentUuid": "9f33b7bf_2a647523",
+      "range": {
+        "startLine": 86,
+        "startChar": 59,
+        "endLine": 86,
+        "endChar": 78
+      },
+      "revId": "af6e5e29df32d731a405f2338d356036f9288448",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
