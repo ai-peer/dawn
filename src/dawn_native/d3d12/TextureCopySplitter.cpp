@@ -250,6 +250,98 @@ namespace dawn_native { namespace d3d12 {
         return copies;
     }
 
+    TextureCopySubresource Compute3DTextureCopyRegionsIfCopyHeightIsOne(
+        Origin3D origin,
+        Extent3D copySize,
+        const TexelBlockInfo& blockInfo,
+        uint64_t offset,
+        uint64_t alignedOffset,
+        Origin3D texelOffset,
+        uint32_t bytesPerRow,
+        uint32_t rowsPerImage,
+        bool straddleRows) {
+        ASSERT(texelOffset.y > 0 || straddleRows);
+        TextureCopySubresource copy;
+        if (texelOffset.y > 0) {
+            copy.count = 2;
+
+            // Copy 0: copy the head block or the entire row of first depth slice
+            copy.copies[0].alignedOffset = alignedOffset;
+            copy.copies[0].textureOffset = origin;
+            copy.copies[0].copySize = copySize;
+            copy.copies[0].copySize.depthOrArrayLayers = 1;
+            if (straddleRows) {
+                // blockInfo.width is 1 because 3D textures can't support compressed format;
+                copy.copies[0].copySize.width = bytesPerRow / blockInfo.byteSize - texelOffset.x;
+            }
+            copy.copies[0].bufferOffset = texelOffset;
+            copy.copies[0].bufferSize.width = copy.copies[0].copySize.width + texelOffset.x;
+            copy.copies[0].bufferSize.height = 2;
+            copy.copies[0].bufferSize.depthOrArrayLayers = 1;
+
+            // Copy 1: copy the head block or the entire row of the rest depth slices
+            copy.copies[1].alignedOffset = alignedOffset + D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT;
+            copy.copies[1].textureOffset = origin;
+            copy.copies[1].textureOffset.z += 1;
+            copy.copies[1].copySize = copySize;
+            copy.copies[1].copySize.width = copy.copies[0].copySize.width;
+            copy.copies[1].copySize.depthOrArrayLayers -= 1;
+            copy.copies[1].bufferOffset = texelOffset;
+            copy.copies[1].bufferOffset.y = 0;
+            copy.copies[1].bufferSize = {copy.copies[0].bufferSize.width, 1,
+                                         copySize.depthOrArrayLayers - 1};
+
+            // Copy 2 (optional): copy the tail block of all depth slices if it straddles rows.
+            // Note that it has an empty first row too.
+            if (straddleRows) {
+                copy.count = 3;
+                copy.copies[2].alignedOffset =
+                    alignedOffset + D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT;
+                copy.copies[2].textureOffset = origin;
+                copy.copies[2].textureOffset.x += copy.copies[0].copySize.width;
+                copy.copies[2].copySize = copySize;
+                copy.copies[2].copySize.width = copySize.width - copy.copies[0].copySize.width;
+                copy.copies[2].bufferOffset = {0, 0, 0};
+                copy.copies[2].bufferSize = copy.copies[2].copySize;
+            }
+        } else {
+            copy.count = 3;
+
+            // Copy 0: copy the head block of all depth slices
+            copy.copies[0].alignedOffset = alignedOffset;
+            copy.copies[0].textureOffset = origin;
+            copy.copies[0].copySize = copySize;
+            copy.copies[0].copySize.width = bytesPerRow / blockInfo.byteSize - texelOffset.x;
+            copy.copies[0].bufferOffset = texelOffset;
+            copy.copies[0].bufferSize = copySize;
+            copy.copies[0].bufferSize.width = copy.copies[0].copySize.width + texelOffset.x;
+
+            // Copy 1: copy the tail block of the first depth slice
+            copy.copies[1].alignedOffset = alignedOffset;
+            copy.copies[1].textureOffset = origin;
+            copy.copies[1].textureOffset.x += copy.copies[0].copySize.width;
+            copy.copies[1].copySize = copySize;
+            copy.copies[1].copySize.width = copySize.width - copy.copies[0].copySize.width;
+            copy.copies[1].copySize.depthOrArrayLayers = 1;
+            copy.copies[1].bufferOffset = {0, 1, 0};
+            copy.copies[1].bufferSize.width = copy.copies[1].copySize.width;
+            copy.copies[1].bufferSize.height = 2;
+            copy.copies[1].bufferSize.depthOrArrayLayers = 1;
+
+            // Copy 2: copy the tail block of the rest depth slices
+            copy.copies[2].alignedOffset = alignedOffset + D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT;
+            copy.copies[2].textureOffset = copy.copies[1].textureOffset;
+            copy.copies[2].textureOffset.z += 1;
+            copy.copies[2].copySize = copySize;
+            copy.copies[2].copySize.width = copy.copies[1].copySize.width;
+            copy.copies[2].copySize.depthOrArrayLayers -= 1;
+            copy.copies[2].bufferOffset = {0, 0, 0};
+            copy.copies[2].bufferSize = copy.copies[2].copySize;
+        }
+
+        return copy;
+    }
+
     void Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(Origin3D origin,
                                                               Extent3D copySize,
                                                               const TexelBlockInfo& blockInfo,
@@ -440,7 +532,18 @@ namespace dawn_native { namespace d3d12 {
 
         uint32_t copyBytesPerRowPitch = copySize.width / blockInfo.width * blockInfo.byteSize;
         uint32_t byteOffsetInRowPitch = texelOffset.x / blockInfo.width * blockInfo.byteSize;
-        if (copyBytesPerRowPitch + byteOffsetInRowPitch <= bytesPerRow) {
+        bool straddleRows = copyBytesPerRowPitch + byteOffsetInRowPitch > bytesPerRow;
+        // The core idea to resolve the first empty row issue is copy copySize.height - 1 rows in
+        // one copy, and then copy the last row in another copy. However, if copySize.height is 1,
+        // copySize.height - 1 will be 0. It is not working. So we need to handle that situation
+        // separately.
+        if (copySize.height == 1) {
+            return Compute3DTextureCopyRegionsIfCopyHeightIsOne(
+                origin, copySize, blockInfo, offset, alignedOffset, texelOffset, bytesPerRow,
+                rowsPerImage, straddleRows);
+        }
+
+        if (!straddleRows) {
             // See comments in Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow() for details.
             Compute3DTextureCopyRegionsForBlockWithEmptyFirstRow(origin, copySize, blockInfo,
                                                                  offset, alignedOffset, texelOffset,
