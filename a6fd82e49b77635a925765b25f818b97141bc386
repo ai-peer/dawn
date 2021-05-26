@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f6826608_9a7575ab",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Oh we need to have a reference of waitableTask here because we need to guarantee waitableTask is valid when we do the assignment of waitableTask-\u003ewaitableEvent.\n\nIf we don\u0027t have this reference, then waitableTask.Get() may have already been released in the sub-thread before the assignment of waitableTask-\u003ewaitableEvent in the main thread:\n- In DoWaitableTask the reference in mPendingTasks will be released\n- Before DoWaitableTask the reference got from *userdata will be released",
+      "parentUuid": "6bdeddfb_c571f384",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5e3e2708_641e6ffd",
         "filename": "src/dawn_native/CallbackTaskManager.cpp",
         "patchSetId": 7
@@ -31,6 +49,30 @@
       "writtenOn": "2021-05-25T12:29:30Z",
       "side": 1,
       "message": "MakeTaskCompleted? Or maybe just CancelTask?",
+      "range": {
+        "startLine": 66,
+        "startChar": 34,
+        "endLine": 66,
+        "endChar": 47
+      },
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ab9cff1_241bd0a6",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e3e2708_641e6ffd",
       "range": {
         "startLine": 66,
         "startChar": 34,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08d24d36_e7906d57",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4f364be_dbfa92b6",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c71923e4_1cce99ea",
@@ -71,6 +131,24 @@
       "writtenOn": "2021-05-25T12:29:30Z",
       "side": 1,
       "message": "Is this going to be used outside of the implementation of WorkerThreadTaskManager?",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "744b3b7b_31a66413",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Done\nSorry it should be private.",
+      "parentUuid": "c71923e4_1cce99ea",
       "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -94,6 +172,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53ba60c8_8d4dc7ce",
+        "filename": "src/dawn_native/CallbackTaskManager.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Now we don\u0027t need \"WorkerThreadTask\" as AsyncTask can just be a std::function\u003cvoid()\u003e.",
+      "parentUuid": "6d6be3fb_a5ce73cb",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e71af987_ab07e7da",
         "filename": "src/dawn_platform/WorkerThread.cpp",
         "patchSetId": 7
@@ -105,6 +201,24 @@
       "writtenOn": "2021-05-25T12:29:30Z",
       "side": 1,
       "message": "nit: missing \u003ccondition_variable\u003e include.",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba89fa7f_7a3567c4",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e71af987_ab07e7da",
       "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +236,24 @@
       "writtenOn": "2021-05-25T12:29:30Z",
       "side": 1,
       "message": "We had some discussion offline about using std::shared_ptr here but that doesn\u0027t work for Chromium because it is disallowed. We could add an exception to Chromium\u0027s PRESUBMIT.py but a nicer solution is to make AsyncWatiableEvent only contain an std::shared_ptr to the actual data (so an atomic\u003cbool\u003e and condition_variable).\n\nThen we don\u0027t need to cast to RefCounted in doTask.",
+      "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df824728_b320329f",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8299bc6_336c45b4",
       "revId": "a6fd82e49b77635a925765b25f818b97141bc386",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

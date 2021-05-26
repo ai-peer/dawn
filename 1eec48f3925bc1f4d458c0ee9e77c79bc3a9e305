@@ -160,6 +160,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c7d71d_a0f4597d",
+        "filename": "src/dawn_native/CallbackTaskManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c80369e_e335dd30",
+      "range": {
+        "startLine": 62,
+        "startChar": 43,
+        "endLine": 62,
+        "endChar": 93
+      },
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6189b3_bcbaa80f",
@@ -226,6 +250,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e535b8e_8b0e89ba",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Oh std::condition_variable.wait() needs a lock as its first parameter so we have to declare a mutex here.",
+      "parentUuid": "e41aa160_2b0e68bf",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31cf63b8_43c24602",
         "filename": "src/dawn_platform/WorkerThread.cpp",
         "patchSetId": 6
@@ -237,6 +279,24 @@
       "writtenOn": "2021-05-25T12:29:30Z",
       "side": 1,
       "message": "ditto with .store() noting that the sequentially consistent default memory order guarantees that other threads see the new value of the boolean before their wait on mCondition is finished.\n\nI think this means that for now we can create a temporary mutex in Wait. I checked the source of libcxx and creating mutexes is super fast.",
+      "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caad9c76_7516812e",
+        "filename": "src/dawn_platform/WorkerThread.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-26T06:38:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "31cf63b8_43c24602",
       "revId": "1eec48f3925bc1f4d458c0ee9e77c79bc3a9e305",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
