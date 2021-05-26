@@ -16,6 +16,23 @@
       "message": "Please let me know if you think I should add logging level type in this patch. Thanks!",
       "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "018ab56f_d840be2a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-26T06:37:10Z",
+      "side": 1,
+      "message": "The callback routine doesn\u0027t consider multithread yet.",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
