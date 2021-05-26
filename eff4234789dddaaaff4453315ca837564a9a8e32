@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a310ee7_e82c0201",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "I\u0027m not sure what\u0027s the ideal end state here. Either ways sounds good right now, and we can always change it later.",
+      "parentUuid": "0429a08c_9ca5ab28",
+      "revId": "eff4234789dddaaaff4453315ca837564a9a8e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e42f75d_0506dd47",
         "filename": "src/dawn_native/Toggles.h",
         "patchSetId": 2

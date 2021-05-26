@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2886832_5445d226",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "nit: bound",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 38
+      },
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "86742037_bf5347d3",
@@ -18,6 +41,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c897fb36_1adc784c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "018ab56f_d840be2a",
@@ -31,6 +71,81 @@
       "writtenOn": "2021-05-26T06:37:10Z",
       "side": 1,
       "message": "The callback routine doesn\u0027t consider multithread yet.",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dd848fb_c7957f5c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "Yeah we\u0027re not handling multithreading at all at the moment. In the future the application will be able to choose which thread to receive callbacks on based on the one it calls Tick (today) or Instance::ProcessEvents (future) on.",
+      "parentUuid": "018ab56f_d840be2a",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d0cb35_9ce1bc3a",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "nit: EmitUserWarning? It could be next to EmitDeprecationWarning.",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54f76c06_be5418f6",
+        "filename": "src/tests/unittests/wire/WireInjectDeviceTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "These additions we need to do are mildly annoying, we might want to have a helper function for them in the future. No need to address though.",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96eacef2_e14de270",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T09:19:14Z",
+      "side": 1,
+      "message": "wut?",
+      "range": {
+        "startLine": 47,
+        "startChar": 32,
+        "endLine": 47,
+        "endChar": 44
+      },
       "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
