@@ -350,6 +350,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4944fcae_d4a8a0a6",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T22:09:55Z",
+      "side": 1,
+      "message": "Limited.",
+      "parentUuid": "920a525f_2948cd54",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1697cd0f_8ec5fc22",
@@ -825,6 +843,24 @@
       "writtenOn": "2021-05-25T13:14:39Z",
       "side": 1,
       "message": "Can we also test:\n\n - filling an external texture extension struct for non-external-texture bindings in the layout.\n - filling non-external-textures in external texture bindings in the layout?\n - validation of external texture bindings with what\u0027s in the shaders (otherwise add a TODO here)\n\nAlso can we also add tests in GetBindGroupLayoutValidationTests for reflection of external texture bindings? (otherwise add a TODO there).\n\nNot also the tests mentioned in another comment for QueueSubmitValidationTests.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d112837f_5090a2b6",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T22:09:55Z",
+      "side": 1,
+      "message": "Point #1 and #2 are addressed.",
+      "parentUuid": "cbbce0e6_1347676d",
       "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
