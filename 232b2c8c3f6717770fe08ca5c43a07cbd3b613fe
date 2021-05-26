@@ -113,6 +113,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb8104e1_59575837",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-26T12:50:09Z",
+      "side": 1,
+      "message": "Got it :) Then I think this could add a callback to the CallbackQueue since that one is thread safe.",
+      "parentUuid": "368aca52_cb53016a",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21d0cb35_9ce1bc3a",
         "filename": "src/dawn_native/Device.h",
         "patchSetId": 4
