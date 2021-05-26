@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8819ade9_14c187ee",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-05-26T07:45:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21a05123_4cc83bd4",
+      "range": {
+        "startLine": 13,
+        "startChar": 4,
+        "endLine": 13,
+        "endChar": 8
+      },
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "301514b7_a8f2a995",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -88,6 +112,24 @@
       "writtenOn": "2021-05-20T11:38:30Z",
       "side": 1,
       "message": "Maybe in DeviceMTL::Initialize we could make a \"best guess\" like if IsIntel 83.3 and otherwise 1.",
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4403f4aa_d8d110e3",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-05-26T07:45:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4103182_dbd22a94",
       "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
