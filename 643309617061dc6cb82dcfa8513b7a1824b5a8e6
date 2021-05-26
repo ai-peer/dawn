@@ -454,6 +454,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f00ba27_2d1aab60",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 511,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T20:16:00Z",
+      "side": 1,
+      "message": "TODO added.",
+      "parentUuid": "e0be38fa_b5a3bcc7",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76fdb422_7450ffa0",
@@ -467,6 +485,24 @@
       "writtenOn": "2021-05-25T13:14:39Z",
       "side": 1,
       "message": "Same as [1] essentially.",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f52f675_19bdf789",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T20:16:00Z",
+      "side": 1,
+      "message": "TODO added.",
+      "parentUuid": "76fdb422_7450ffa0",
       "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -752,6 +788,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a3f2c56_5beb2c1a",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T20:16:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09b6dcb8_f004f4ae",
+      "range": {
+        "startLine": 134,
+        "startChar": 51,
+        "endLine": 134,
+        "endChar": 73
+      },
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbbce0e6_1347676d",
@@ -782,6 +842,24 @@
       "writtenOn": "2021-05-25T13:14:39Z",
       "side": 1,
       "message": "nit: Fill in this test :)",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b55f3ea_09cdef3e",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 2131,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-26T20:16:00Z",
+      "side": 1,
+      "message": "I tested this functionality by adding a case to BindGroupLayoutValidationTest.PerStageLimits.",
+      "parentUuid": "cd20e43c_43b04aad",
       "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
