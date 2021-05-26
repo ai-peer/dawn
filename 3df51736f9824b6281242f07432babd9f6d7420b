@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb8c5c9_de76fc29",
+        "filename": "generator/templates/webgpu_cpp_print.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-26T18:22:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2ad3ff5_e0e14c0c",
+      "range": {
+        "startLine": 75,
+        "startChar": 15,
+        "endLine": 75,
+        "endChar": 19
+      },
+      "revId": "3df51736f9824b6281242f07432babd9f6d7420b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5da53ae_e9a12d90",
@@ -88,6 +112,30 @@
       "writtenOn": "2021-05-25T06:40:18Z",
       "side": 1,
       "message": "u-u-nit: This function sanitizes a param name so maybe it should be SanitizeParamName (instead of SanitizeD)",
+      "range": {
+        "startLine": 307,
+        "startChar": 20,
+        "endLine": 307,
+        "endChar": 38
+      },
+      "revId": "3df51736f9824b6281242f07432babd9f6d7420b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84d547a2_4aaf9481",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-26T18:22:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5da53ae_e9a12d90",
       "range": {
         "startLine": 307,
         "startChar": 20,
