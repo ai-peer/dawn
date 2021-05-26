@@ -113,4 +113,15 @@ namespace dawn_wire { namespace client {
         return shaderModule->GetCompilationInfoCallback(requestSerial, status, info);
     }
 
+    bool Client::DoCommandBufferGetExecutionTimeCallback(CommandBuffer* commandBuffer,
+                                                         uint64_t requestSerial,
+                                                         WGPUExecutionTimeRequestStatus status,
+                                                         double time) {
+        // The command buffer might have been deleted or recreated so this isn't an error.
+        if (commandBuffer == nullptr) {
+            return true;
+        }
+        return commandBuffer->GetExecutionTimeCallback(requestSerial, status, time);
+    }
+
 }}  // namespace dawn_wire::client

@@ -100,6 +100,8 @@ namespace dawn_native {
                                         const TextureDataLayout* dataLayout,
                                         const Extent3D* writeSize) const;
 
+        void InvalidateExecutionTimes(uint32_t commandCount,
+                                      CommandBufferBase* const* commands) const;
         void SubmitInternal(uint32_t commandCount, CommandBufferBase* const* commands);
 
         SerialQueue<ExecutionSerial, std::unique_ptr<TaskInFlight>> mTasksInFlight;
