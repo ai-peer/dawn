@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0429a08c_9ca5ab28",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-26T02:20:01Z",
+      "side": 1,
+      "message": "If types are going to be added to fit the ConsoleMessageLevel in Chrome, I can add something like \"user logging type\", and change the name \"user warning\" into \"user logging\".",
+      "parentUuid": "ccd808a3_9deb6666",
+      "revId": "eff4234789dddaaaff4453315ca837564a9a8e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9e42f75d_0506dd47",
         "filename": "src/dawn_native/Toggles.h",
         "patchSetId": 2
