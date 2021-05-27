@@ -86,6 +86,24 @@
       "message": "nit: the default platform could be initialized on creation.",
       "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27240001_d527a62e",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-27T04:51:34Z",
+      "side": 1,
+      "message": "Oh Austin prefers lazily creating default platform (in patch set 24):\n\n\"Can we lazily create mDefaultPlatform here instead? That way if someone manually sets it with SetPlatform, it is never instantiated\"",
+      "parentUuid": "d9e654c2_80e752ce",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
