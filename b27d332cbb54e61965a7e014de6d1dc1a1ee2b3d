@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c2f1fa_50c0fcf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T23:15:21Z",
+      "side": 1,
+      "message": "PTAL! this bug was pretty tricky to track down",
+      "revId": "b27d332cbb54e61965a7e014de6d1dc1a1ee2b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
