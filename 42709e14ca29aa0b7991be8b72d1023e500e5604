@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09eb6257_baa9f217",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T16:58:43Z",
+      "side": 1,
+      "message": "I\u0027m a bit surprised that this is a different function given that we can reuse most of the computations done but the call to ComputeTextureCopySubresource. I guess we can see in the next CL.",
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bef7d81_965fb84f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T16:58:43Z",
+      "side": 1,
+      "message": "These two cases (and subcases) are already handled by ComputeTextureCopySubresource.",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 42
+      },
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a627325_d027d05c",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T16:58:43Z",
+      "side": 1,
+      "message": "This comment is a bit hard to read, consider splitting it in multiple paragraphs, and maybe an introductory paragraph that explains the overall idea. For example:\n\n // To compute the copy splits for 3D textures, what we\u0027d like to do is compute\n // the split for the first \"slice\" of the copy, then extend the copy\u0027s depth to\n // become a 3D copy. This doesn\u0027t work as easily as that due to some corner cases.\n //\n // Description of corner case.\n //\n // Description of fix.",
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a948d09_63c9666c",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T16:58:43Z",
+      "side": 1,
+      "message": "nit: the check for depthOrArrayLayers \u003d\u003d 1 could be just after the call to ComputeTextureCopySubresource",
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42368e9f_2b19f011",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T16:58:43Z",
+      "side": 1,
+      "message": "nit: Maybe we should mention \"2D\" in the name, to explain that it only knows how to handle 2D non-arrayed textures correctly, and just forwards \"copySize.depthOrArrayLayers\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 27,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
