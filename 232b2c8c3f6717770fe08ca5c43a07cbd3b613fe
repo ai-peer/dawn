@@ -155,6 +155,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb0e4b45_e86a2957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T16:01:11Z",
+      "side": 1,
+      "message": "\"set logging callback\" ? \n\nMaybe we could have dawn::WarningLog and dawn::DebugLog be optionally invoked like:\n\ndawn::WarningLog(device) where |device| must implement something interface \"LoggingHost\".\n\nThe device would implement it by sending logs to the callback, if it\u0027s set, instead of stdout and stderr.",
+      "parentUuid": "a7ec1b7f_7070bbd7",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "018ab56f_d840be2a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 4

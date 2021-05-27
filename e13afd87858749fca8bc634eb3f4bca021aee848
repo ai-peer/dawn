@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff62f33_e74876ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T16:01:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c17e084_041ac3aa",
@@ -48,6 +65,24 @@
       "writtenOn": "2021-05-27T08:51:15Z",
       "side": 1,
       "message": "The implemented CallbackTask class is defined within the DeviceBase now.\nIt will hold the callback pointer and all parameter it needed inside the class.",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aea4c60_366b4f6b",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T16:01:11Z",
+      "side": 1,
+      "message": "I think we might want the callback to still happen in HandleShutDown and HandleDeviceLoss.\n\nWhat do you think about having a more functional-style creation of this?  In the future, we could consider having \"policy\" enum which tells the task what to do on Finish/ShutDown/DeviceLoss. For example, it could either call the function anyway, or drop it without calling.\n\n// In CallbackTaskManager.cpp..\n\n// static\nstd::unique_ptr\u003cCallbackTask\u003e CallbackTask::From(std::function\u003cvoid()\u003e fn) {\n    struct FunctionalCallbackTask : public CallbackTask {\n        FunctionalCallbackTask(std::function\u003cvoid()\u003e fn) : mFn(std::move(fn)) {}\n        std::function\u003cvoid()\u003e mFn;\n\n        void Finish() override {\n            if (mFn) {\n                std::move(mFn)();\n            }\n        }\n\n        void HandleShutDown() override {\n            if (mFn) {\n                std::move(mFn)();\n            }\n        }\n\n        void HandleDeviceLoss() override {\n            if (mFn) {\n                std::move(mFn)();\n            }\n        }\n    };\n\n    return std::unique_ptr\u003cCallbackTask\u003e(\n        new FunctionalCallbackTask(std::move(fn)));\n}\n\n\n// Usage\n\nmCallbackTaskManager-\u003eAddCallbackTask([\n  callback,\n  userdata,\n  message \u003d std::string(message)] {\n  callback(message.c_str(), userdata);\n});",
+      "parentUuid": "f96070b2_ffa7a855",
       "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
