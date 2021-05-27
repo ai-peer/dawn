@@ -385,6 +385,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa4d6d7_e915b17f",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-27T22:39:00Z",
+      "side": 1,
+      "message": "Done. Tests were added in ExternalTextureTests.cpp, which is a bit more homogenous with the other types.",
+      "parentUuid": "1697cd0f_8ec5fc22",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e069b2d8_82d1c503",
@@ -398,6 +416,24 @@
       "writtenOn": "2021-05-25T13:14:39Z",
       "side": 1,
       "message": "Ditto and also assert that the other views are nullptr for consistency with other code paths?",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a186e264_3caf2496",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-27T22:39:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e069b2d8_82d1c503",
       "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
