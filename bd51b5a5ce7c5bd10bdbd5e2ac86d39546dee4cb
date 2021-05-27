@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ee051a_e928c722",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T04:10:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e69f8b5_ffb78d7d",
+      "range": {
+        "startLine": 71,
+        "startChar": 12,
+        "endLine": 71,
+        "endChar": 33
+      },
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9700c53_9d9be6ae",
@@ -60,6 +84,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27b6fc19_3944f37e",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T04:10:01Z",
+      "side": 1,
+      "message": "Ok, I did this and it helped nicely, but in the next CL, I still have one branch on the backend/usage because of ExpectSampledDepthData. I guess I could extend it to that expectation as well.",
+      "parentUuid": "b9700c53_9d9be6ae",
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cd2bb99_5184a998",
         "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
         "patchSetId": 15
@@ -71,6 +113,24 @@
       "writtenOn": "2021-05-25T07:00:36Z",
       "side": 1,
       "message": "Can we have a TODO for multisampled textures as well or are we going to have a different test for them? There\u0027s some complexity because it might require the backends to always add RenderAttachment to multisampled textures so they can use a clear (you can\u0027t copy into them)",
+      "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3661c98_664aaf78",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T04:10:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cd2bb99_5184a998",
       "revId": "bd51b5a5ce7c5bd10bdbd5e2ac86d39546dee4cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
