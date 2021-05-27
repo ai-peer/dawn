@@ -104,6 +104,24 @@
       "parentUuid": "d9e654c2_80e752ce",
       "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda0ce3a_9b1080c0",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T06:28:38Z",
+      "side": 1,
+      "message": "since we think differently on this, I\u0027ll explain my reasoning:\n\nI thought that we wouldn\u0027t want a thread pool to be created from the default platform when Dawn is used in Chromium. However, I now see the thread pool is not created on construction of the default platform, but only when you call \"CreateWorkerTaskPool\". so it is probably ok to allocate it on creation, as long as doing so doesn\u0027t launch any threads, etc.",
+      "parentUuid": "27240001_d527a62e",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
