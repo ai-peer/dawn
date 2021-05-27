@@ -119,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3ce95ca_9541613d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-05-27T03:54:42Z",
+      "side": 1,
+      "message": "Ok. I do think that we can probably just call it \"warning\". We intend for Dawn to be used for more than just Chrome anyway.",
+      "parentUuid": "ff881e57_1f26b311",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "018ab56f_d840be2a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 4
