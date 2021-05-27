@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b50e90c_50cbc3a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T08:51:15Z",
+      "side": 1,
+      "message": "PTAL.\nChange the callback routine to use the CallbackTaskManager, ensuring the thread safety.\nThe name \"UserWarning\" is unchanged for now, please give some advise.\nThanks!",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c17e084_041ac3aa",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T08:51:15Z",
+      "side": 1,
+      "message": "Rather than directly call the callback function right away, now the callback will be packed into a UserWarningCallbackTask and pushed into the callbackTaskManager, which ensures the thread safety.",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f96070b2_ffa7a855",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T08:51:15Z",
+      "side": 1,
+      "message": "The implemented CallbackTask class is defined within the DeviceBase now.\nIt will hold the callback pointer and all parameter it needed inside the class.",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

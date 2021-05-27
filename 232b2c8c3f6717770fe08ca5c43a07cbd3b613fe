@@ -137,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a7ec1b7f_7070bbd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T08:51:15Z",
+      "side": 1,
+      "message": "Thanks, I got it.\nBut what if we use more logging level (kInfo, kWarning, and kError for example) in the future? I am not sure. And we already have dawn::WarningLog() and DAWN_DEBUG macro for logging into stdout and stderr, will it be a little confused?",
+      "parentUuid": "d3ce95ca_9541613d",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "018ab56f_d840be2a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 4
