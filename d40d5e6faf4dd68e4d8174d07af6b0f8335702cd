@@ -16,6 +16,115 @@
       "message": "SyncScopeUsageTracker-related comments are all that\u0027s left I think.",
       "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0137dc5e_c8a450a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "I added small nits for the current iteration too but they are small.",
+      "parentUuid": "e6995685_841cf395",
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ddda66_b35f8af7",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "We should do this before the validation and check that externalTextureBindingEntry is not nullptr in the validation. Otherwise we can add an invalid  nextInChain and crash Dawn. There\u0027s the ValidateSingleSType helper as well we should use to make sure there are no other extension structs (like two external texture bindings, stuff like that)",
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "771e3e1f_30b65528",
+        "filename": "src/dawn_native/BindingInfo.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "Unless I\u0027m missing something, this is not validated prior to this check so \n\n  bindingCounts.perStage[stage].externalTextureCount * kSampledTexturesPerExternalTexture\n\ncan still overflow. We can fix this by dividing on the other side of the \u003e.",
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3bed8e1_851e0c30",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "Can we also test setting two extension structs here, and test setting a garbage (ie non external texture extension)?",
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b18951e_29bce1c7",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "these don\u0027t matter and could be removed?",
+      "range": {
+        "startLine": 288,
+        "startChar": 0,
+        "endLine": 289,
+        "endChar": 54
+      },
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8e87bb_bc2a658a",
+        "filename": "src/utils/WGPUHelpers.h",
+        "patchSetId": 28
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "nit: This seems like a premium spot to put such a niche helper. Maybe it can be next to the BindingLayoutEntryInitializationHelper to make it clear it\u0027s meant to be used with it?",
+      "revId": "d40d5e6faf4dd68e4d8174d07af6b0f8335702cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

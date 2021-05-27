@@ -901,6 +901,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b35efd6_892af3d7",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-27T08:00:56Z",
+      "side": 1,
+      "message": "Heh my english failed me again, I meant \"Note also the tests\"...",
+      "parentUuid": "cecfed65_96719f59",
+      "revId": "643309617061dc6cb82dcfa8513b7a1824b5a8e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd20e43c_43b04aad",
