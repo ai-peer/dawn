@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5f5028_965b0bd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-27T20:24:24Z",
+      "side": 1,
+      "message": "Even though this doesn\u0027t actually wire up to any of the backends yet, I\u0027d like to do a review to answer a few questions I have. Possibly land it as well? It would offer a good starting point for anyone who\u0027s in a better position to query these values from one of the backends than I am currently.",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daad9fcf_ad4c01ba",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-27T20:24:24Z",
+      "side": 1,
+      "message": "Looking at the Metal backend (which theoretically is the easiest one to get this working on) it appears that Dawn\u0027s metal/CommandBuffer never actually touches a MTLCommandBuffer. 😕 Is there a better place to direct these calls to when it\u0027s time to resolve the execution time?",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3e11c68_29025491",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-27T20:24:24Z",
+      "side": 1,
+      "message": "I\u0027m not clear on the threading situation involved here. This function will either be called directly in the case of an error or scheduled with Queue::TrackTask(). To the tasks Finish on a separate thread than the one that scheduled them?",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8f590d7_ca782176",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-05-27T20:24:24Z",
+      "side": 1,
+      "message": "If we assume that the CommandBuffer object is the thing that will hold the resources necessary to resolve the execution time (not a given, see previous comment) then it seems like we need to hold on to a reference to the CommandBuffer here till we observe that it\u0027s commands have been submitted. I\u0027m not clear on what the ownership model is for the commands that are passed here, though, and it feels like the calling app could delete it immediately after calling Submit(), is that right?",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
