@@ -289,96 +289,6 @@ TEST_P(EGLImageValidationTests, InvalidFormat) {
 // These tests are skipped if the harness is using the wire.
 class EGLImageUsageTests : public EGLImageTestBase {
   public:
-    // Test that sampling a 1x1 works.
-    void DoSampleTest(EGLImage eglImage, wgpu::TextureFormat format, RGBA8 expectedColor) {
-        // The simplest texture sampling pipeline.
-        wgpu::RenderPipeline pipeline;
-        {
-            wgpu::ShaderModule vs = utils::CreateShaderModule(device, R"(
-                struct VertexOut {
-                    [[location(0)]] texCoord : vec2<f32>;
-                    [[builtin(position)]] position : vec4<f32>;
-                };
-
-                [[stage(vertex)]]
-                fn main([[builtin(vertex_index)]] VertexIndex : u32) -> VertexOut {
-                    let pos : array<vec2<f32>, 6> = array<vec2<f32>, 6>(
-                        vec2<f32>(-2.0, -2.0),
-                        vec2<f32>(-2.0,  2.0),
-                        vec2<f32>( 2.0, -2.0),
-                        vec2<f32>(-2.0,  2.0),
-                        vec2<f32>( 2.0, -2.0),
-                        vec2<f32>( 2.0,  2.0));
-
-                    let texCoord : array<vec2<f32>, 6> = array<vec2<f32>, 6>(
-                        vec2<f32>(0.0, 0.0),
-                        vec2<f32>(0.0, 1.0),
-                        vec2<f32>(1.0, 0.0),
-                        vec2<f32>(0.0, 1.0),
-                        vec2<f32>(1.0, 0.0),
-                        vec2<f32>(1.0, 1.0));
-
-                    var output : VertexOut;
-                    output.position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
-                    output.texCoord = texCoord[VertexIndex];
-                    return output;
-                }
-            )");
-            wgpu::ShaderModule fs = utils::CreateShaderModule(device, R"(
-                [[group(0), binding(0)]] var sampler0 : sampler;
-                [[group(0), binding(1)]] var texture0 : texture_2d<f32>;
-
-                [[stage(fragment)]]
-                fn main([[location(0)]] texCoord : vec2<f32>) -> [[location(0)]] vec4<f32> {
-                    return textureSample(texture0, sampler0, texCoord);
-                }
-            )");
-
-            utils::ComboRenderPipelineDescriptor2 descriptor;
-            descriptor.vertex.module = vs;
-            descriptor.cFragment.module = fs;
-            descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
-
-            pipeline = device.CreateRenderPipeline2(&descriptor);
-        }
-
-        // The bindgroup containing the texture view for the eglImage as well as the sampler.
-        wgpu::BindGroup bindGroup;
-        {
-            wgpu::TextureDescriptor textureDescriptor;
-            textureDescriptor.dimension = wgpu::TextureDimension::e2D;
-            textureDescriptor.format = format;
-            textureDescriptor.size = {1, 1, 1};
-            textureDescriptor.sampleCount = 1;
-            textureDescriptor.mipLevelCount = 1;
-            textureDescriptor.usage = wgpu::TextureUsage::Sampled;
-            wgpu::Texture wrappingTexture = WrapEGLImage(&textureDescriptor, eglImage);
-
-            wgpu::TextureView textureView = wrappingTexture.CreateView();
-
-            wgpu::Sampler sampler = device.CreateSampler();
-
-            bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                             {{0, sampler}, {1, textureView}});
-        }
-
-        // Submit commands samping from the eglImage and writing the result to renderPass.color
-        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, 1, 1);
-        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
-        {
-            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
-            pass.SetPipeline(pipeline);
-            pass.SetBindGroup(0, bindGroup);
-            pass.Draw(6);
-            pass.EndPass();
-        }
-
-        wgpu::CommandBuffer commands = encoder.Finish();
-        queue.Submit(1, &commands);
-
-        EXPECT_PIXEL_RGBA8_EQ(expectedColor, renderPass.color, 0, 0);
-    }
-
     // Test that clearing using BeginRenderPass writes correct data in the eglImage.
     void DoClearTest(EGLImage eglImage,
                      GLuint texture,
@@ -430,17 +340,6 @@ class EGLImageUsageTests : public EGLImageTestBase {
 };
 
 #if 0
-// Test sampling from a R8 EGLImage
-TEST_P(EGLImageUsageTests, SampleFromR8EGLImage) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-    uint8_t data = 0x01;
-    ScopedEGLImage eglImage =
-        CreateEGLImage(device, 1, 1, GL_R8, GL_RED, GL_UNSIGNED_BYTE, &data, sizeof(data));
-
-    DoSampleTest(eglImage.getImage(), wgpu::TextureFormat::R8Unorm,
-                 RGBA8(1, 0, 0, 255));
-}
-
 // Test clearing a R8 EGLImage
 TEST_P(EGLImageUsageTests, ClearR8EGLImage) {
     DAWN_SKIP_TEST_IF(UsesWire());
@@ -449,17 +348,6 @@ TEST_P(EGLImageUsageTests, ClearR8EGLImage) {
 
     uint8_t data = 0x01;
     DoClearTest(eglImage.getImage(), eglImage.getTexture(), wgpu::TextureFormat::R8Unorm, GL_R8, GL_UNSIGNED_BYTE, &data, sizeof(data));
-}
-
-// Test sampling from a RG8 EGLImage
-TEST_P(EGLImageUsageTests, SampleFromRG8EGLImage) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-    uint16_t data = 0x0102;  // Stored as (G, R)
-    ScopedEGLImage eglImage =
-        CreateEGLImage(device, 1, 1, GL_RG8, GL_RG, GL_UNSIGNED_BYTE, &data, sizeof(data));
-
-    DoSampleTest(eglImage.getImage(), wgpu::TextureFormat::RG8Unorm,
-                 RGBA8(2, 1, 0, 255));
 }
 
 // Test clearing a RG8 EGLImage
@@ -473,17 +361,6 @@ TEST_P(EGLImageUsageTests, ClearRG8EGLImage) {
 }
 
 #    if 0
-// Test sampling from a BGRA8 EGLImage
-TEST_P(EGLImageUsageTests, SampleFromBGRA8EGLImage) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-    uint32_t data = 0x01020304;  // Stored as (A, R, G, B)
-    ScopedEGLImage eglImage =
-        CreateEGLImage(device, 1, 1, GL_BGRA8, GL_BGRA, GL_UNSIGNED_BYTE, &data, sizeof(data));
-
-    DoSampleTest(eglImage.getImage(), wgpu::TextureFormat::BGRA8Unorm, GL_BGRA, GL_UNSIGNED_BYTE,  &data, sizeof(data),
-                 RGBA8(2, 3, 4, 1));
-}
-
 // Test clearing a BGRA8 EGLImage
 TEST_P(EGLImageUsageTests, ClearBGRA8EGLImage) {
     DAWN_SKIP_TEST_IF(UsesWire());
@@ -495,16 +372,6 @@ TEST_P(EGLImageUsageTests, ClearBGRA8EGLImage) {
 }
 #    endif
 #endif
-
-// Test sampling from an RGBA8 EGLImage
-TEST_P(EGLImageUsageTests, SampleFromRGBA8EGLImage) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-    uint32_t data = 0x01020304;  // Stored as (A, B, G, R)
-    ScopedEGLImage eglImage =
-        CreateEGLImage(egl, device, 1, 1, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, &data, sizeof(data));
-
-    DoSampleTest(eglImage.getImage(), wgpu::TextureFormat::RGBA8Unorm, RGBA8(4, 3, 2, 1));
-}
 
 // Test clearing an RGBA8 EGLImage
 TEST_P(EGLImageUsageTests, ClearRGBA8EGLImage) {
