@@ -341,6 +341,30 @@
       },
       "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92e083b_82105f3c",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-05-27T08:14:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0401116c_448993c0",
+      "range": {
+        "startLine": 120,
+        "startChar": 0,
+        "endLine": 122,
+        "endChar": 69
+      },
+      "revId": "1686126772fe364d43db8a5cdee3b2413247d70e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
