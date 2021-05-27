@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0a22bbd7_3101d5e2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T01:02:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e2886832_5445d226",
+      "range": {
+        "startLine": 14,
+        "startChar": 32,
+        "endLine": 14,
+        "endChar": 38
+      },
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "86742037_bf5347d3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 4
@@ -71,6 +95,24 @@
       "writtenOn": "2021-05-26T15:49:21Z",
       "side": 1,
       "message": "Overall, looks good. I\u0027ll look again after this is moved to the CallbackQueue.\n\nHigh-level question: Why is it called a \"user warning\" versus just a \"warning\" ? The \"uncaptured error callback\" is also triggered when someone uses the API incorrectly (for validation errors), but we don\u0027t have \"user\" in the name.\n",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff881e57_1f26b311",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T01:02:16Z",
+      "side": 1,
+      "message": "I choose this name for \"(Chrome) user (visible) warning\". Actually I am not sure what name should this be.",
+      "parentUuid": "4f7c6686_43efe202",
       "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -146,6 +188,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20eba0bb_aaccf7f6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T01:02:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cb8104e1_59575837",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21d0cb35_9ce1bc3a",
@@ -159,6 +219,24 @@
       "writtenOn": "2021-05-26T09:19:14Z",
       "side": 1,
       "message": "nit: EmitUserWarning? It could be next to EmitDeprecationWarning.",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830d4645_00d2f971",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T01:02:16Z",
+      "side": 1,
+      "message": "Sound good, but I am not sure. I use the word \"user\" for \"Chrome/client user visible\", not \"user-defined warning\". Seems this usage is somehow misleading?",
+      "parentUuid": "21d0cb35_9ce1bc3a",
       "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -193,6 +271,30 @@
       "writtenOn": "2021-05-26T09:19:14Z",
       "side": 1,
       "message": "wut?",
+      "range": {
+        "startLine": 47,
+        "startChar": 32,
+        "endLine": 47,
+        "endChar": 44
+      },
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "341d7abe_d420ef1c",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-05-27T01:02:16Z",
+      "side": 1,
+      "message": "Just a scaffold forgot to clean up. Sorry.",
+      "parentUuid": "96eacef2_e14de270",
       "range": {
         "startLine": 47,
         "startChar": 32,
