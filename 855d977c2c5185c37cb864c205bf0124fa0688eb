@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b15dbbcc_a9770347",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-28T00:57:53Z",
+      "side": 1,
+      "message": "I\u0027m wondering if instead of wgpu::CommandBuffer::GetExecutionTime if we should take the callback directly in the CommandEncoderDescriptor (in place of measureExecutionTime). It would simplify things because there would always be exactly one callback, apps wouldn\u0027t be able to request the execution time multiple times.\n\nIn other words, we don\u0027t really need to wait for a GetExecutionTime call to bother asking the server to send the execution time result. If the server sees measureExecutionTime it already knows the client is going to want the result.\n\nThis could be less ergonomic though (as native apps would have to provide a callback very early, instead of being able to attach it later - not a problem for Chromium). IDK if it would be better to put it in CommandBufferDescriptor (in finish()) or keep it as is.",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daad9fcf_ad4c01ba",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 3
@@ -31,6 +48,24 @@
       "writtenOn": "2021-05-27T20:24:24Z",
       "side": 1,
       "message": "Looking at the Metal backend (which theoretically is the easiest one to get this working on) it appears that Dawn\u0027s metal/CommandBuffer never actually touches a MTLCommandBuffer. 😕 Is there a better place to direct these calls to when it\u0027s time to resolve the execution time?",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c2ea47_cbd55c51",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-28T00:57:53Z",
+      "side": 1,
+      "message": "The MTLCommandBuffer is owned by CommandRecordingContext which is owned by the device and accessed by queue::Submit. The place where the CommandBuffer and the CommandRecordingContext come together is in Submit:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/metal/QueueMTL.mm;l\u003d41;drc\u003d1bc1ed4bc9e0318813dfdedc999e443b909b8f8c\nwhich calls:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/metal/CommandBufferMTL.mm;l\u003d620;drc\u003d5230c6bd93cc09825d9f97232e8be427ddef85bd\n\nUnfortunately right now it looks like we actually record multiple dawn CommandBuffers into one MTLCommandBuffer, so we\u0027ll have to split them. It\u0027s not that trivial because currently Submit defers the finalization of that aggregated MTLCommandBuffer to device-\u003eSubmitPendingCommandBuffer(). We could possibly just do multiple SubmitPendingCommandBuffer calls in Submit. (AFAICT Metal command buffers are always submitted one-by-one using [MTLCommandBuffer commit], not batched.)",
+      "parentUuid": "daad9fcf_ad4c01ba",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "460c2838_ff9ce764",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-28T00:57:53Z",
+      "side": 1,
+      "message": "I don\u0027t remember the details but I think a scheduled callback is always guaranteed to be called inside Tick, so the client app has control over which thread that happens in.",
+      "parentUuid": "c3e11c68_29025491",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8f590d7_ca782176",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 3
@@ -65,6 +118,64 @@
       "writtenOn": "2021-05-27T20:24:24Z",
       "side": 1,
       "message": "If we assume that the CommandBuffer object is the thing that will hold the resources necessary to resolve the execution time (not a given, see previous comment) then it seems like we need to hold on to a reference to the CommandBuffer here till we observe that it\u0027s commands have been submitted. I\u0027m not clear on what the ownership model is for the commands that are passed here, though, and it feels like the calling app could delete it immediately after calling Submit(), is that right?",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10d2b45_208abb29",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-28T00:57:53Z",
+      "side": 1,
+      "message": "Dawn objects are ref-counted and I think we just need to make sure we hold a ref here. I\u0027m not that much of an expert on Dawn internals anymore though...",
+      "parentUuid": "d8f590d7_ca782176",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "975b9ab5_e819bc8a",
+        "filename": "src/dawn_wire/client/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-28T00:57:53Z",
+      "side": 1,
+      "message": "nit: command buffer",
+      "range": {
+        "startLine": 57,
+        "startChar": 44,
+        "endLine": 57,
+        "endChar": 57
+      },
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93ff18f2_149715ac",
+        "filename": "src/dawn_wire/client/CommandBuffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-05-28T00:57:53Z",
+      "side": 1,
+      "message": "I\u0027m not sure we really need to support making multiple requests for the execution time. The JS API would return the same promise object every time (like if it had [SameObject] but that\u0027s not allowed for Promise-typed attributes for some reason).",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
