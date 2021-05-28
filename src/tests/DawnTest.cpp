@@ -1146,7 +1146,8 @@ std::ostringstream& DawnTestBase::ExpectSampledDepthData(wgpu::Texture texture,
     wgpu::CommandBuffer commands = commandEncoder.Finish();
     queue.Submit(1, &commands);
 
-    return EXPECT_BUFFER_FLOAT_RANGE_EQ(expected.data(), readbackBuffer, 0, expected.size());
+    return EXPECT_BUFFER_FLOAT_RANGE_ABOUT_EQ(expected.data(), readbackBuffer, 0, expected.size(),
+                                              0.00001);
 }
 
 void DawnTestBase::WaitABit() {
@@ -1305,41 +1306,76 @@ namespace detail {
     // Helper classes to set expectations
 
     template <typename T>
-    ExpectEq<T>::ExpectEq(T singleValue) {
+    ExpectEq<T>::ExpectEq(T singleValue, T tolerance) : mTolerance(tolerance) {
         mExpected.push_back(singleValue);
     }
 
     template <typename T>
-    ExpectEq<T>::ExpectEq(const T* values, const unsigned int count) {
+    ExpectEq<T>::ExpectEq(const T* values, const unsigned int count, T tolerance)
+        : mTolerance(tolerance) {
         mExpected.assign(values, values + count);
     }
+
+    namespace {
+        template <typename T>
+        testing::AssertionResult CheckImpl(const std::vector<T>& expected,
+                                           const T* actual,
+                                           size_t size,
+                                           T tolerance) {
+            for (size_t i = 0; i < expected.size(); ++i) {
+                if (actual[i] != expected[i]) {
+                    testing::AssertionResult result = testing::AssertionFailure()
+                                                      << "Expected data[" << i << "] to be "
+                                                      << expected[i] << ", actual " << actual[i]
+                                                      << std::endl;
+
+                    if (expected.size() <= 1024) {
+                        result << "Expected:" << std::endl;
+                        printBuffer(result, expected.data(), expected.size());
+
+                        result << "Actual:" << std::endl;
+                        printBuffer(result, actual, expected.size());
+                    }
+
+                    return result;
+                }
+            }
+            return testing::AssertionSuccess();
+        }
+
+        template <>
+        testing::AssertionResult CheckImpl<float>(const std::vector<float>& expected,
+                                                  const float* actual,
+                                                  size_t size,
+                                                  float tolerance) {
+            for (size_t i = 0; i < expected.size(); ++i) {
+                if (abs(actual[i] - expected[i]) > tolerance) {
+                    testing::AssertionResult result =
+                        tolerance == 0.0 ? testing::AssertionFailure()
+                                               << "Expected data[" << i << "] to be " << expected[i]
+                                               << ", actual " << actual[i] << std::endl
+                                         : testing::AssertionFailure()
+                                               << "Expected data[" << i << "] to be within "
+                                               << tolerance << " of " << expected[i] << ", actual "
+                                               << actual[i] << std::endl;
+                    if (expected.size() <= 1024) {
+                        result << "Expected:" << std::endl;
+                        printBuffer(result, expected.data(), expected.size());
+                        result << "Actual:" << std::endl;
+                        printBuffer(result, actual, expected.size());
+                    }
+                    return result;
+                }
+            }
+            return testing::AssertionSuccess();
+        }
+    }  // namespace
 
     template <typename T>
     testing::AssertionResult ExpectEq<T>::Check(const void* data, size_t size) {
         DAWN_ASSERT(size == sizeof(T) * mExpected.size());
-
         const T* actual = static_cast<const T*>(data);
-
-        for (size_t i = 0; i < mExpected.size(); ++i) {
-            if (actual[i] != mExpected[i]) {
-                testing::AssertionResult result = testing::AssertionFailure()
-                                                  << "Expected data[" << i << "] to be "
-                                                  << mExpected[i] << ", actual " << actual[i]
-                                                  << std::endl;
-
-                if (mExpected.size() <= 1024) {
-                    result << "Expected:" << std::endl;
-                    printBuffer(result, mExpected.data(), mExpected.size());
-
-                    result << "Actual:" << std::endl;
-                    printBuffer(result, actual, mExpected.size());
-                }
-
-                return result;
-            }
-        }
-
-        return testing::AssertionSuccess();
+        return CheckImpl(mExpected, actual, size, mTolerance);
     }
 
     template class ExpectEq<uint8_t>;

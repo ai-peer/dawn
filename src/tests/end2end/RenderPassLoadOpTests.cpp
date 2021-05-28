@@ -289,3 +289,226 @@ DAWN_INSTANTIATE_TEST(RenderPassLoadOpTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+namespace {
+
+    using FirstMipToClear = uint32_t;
+    using Format = wgpu::TextureFormat;
+    enum class ReadStencil {
+        Copy,
+        StencilTest,
+    };
+
+    std::ostream& operator<<(std::ostream& o, ReadStencil readStencil) {
+        switch (readStencil) {
+            case ReadStencil::Copy:
+                o << "Copy";
+                break;
+            case ReadStencil::StencilTest:
+                o << "StencilTest";
+                break;
+        }
+        return o;
+    }
+
+    DAWN_TEST_PARAM_STRUCT(RenderPassDepthStencilLoadOpTestParams,
+                           Format,
+                           FirstMipToClear,
+                           ReadStencil)
+
+    constexpr uint32_t kMipLevelCount = 2u;
+    constexpr std::array<float, kMipLevelCount> kDepthValues = {0.2f, 0.8f};
+    constexpr std::array<uint8_t, kMipLevelCount> kStencilValues = {7u, 3u};
+
+    class RenderPassDepthStencilLoadOpTests
+        : public DawnTestWithParams<RenderPassDepthStencilLoadOpTestParams> {
+      protected:
+        void SetUp() override {
+            DawnTestWithParams<RenderPassDepthStencilLoadOpTestParams>::SetUp();
+
+            // TODO(crbug.com/tint/827): HLSL writer produces invalid code.
+            DAWN_SUPPRESS_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
+
+            // Readback of Depth/Stencil textures not fully supported on GL right now.
+            // Also depends on glTextureView which is not supported on ES.
+            DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+            wgpu::TextureDescriptor descriptor;
+            descriptor.dimension = wgpu::TextureDimension::e2D;
+            descriptor.size.width = kRTSize;
+            descriptor.size.height = kRTSize;
+            descriptor.size.depthOrArrayLayers = 1;
+            descriptor.sampleCount = 1;
+            descriptor.format = GetParam().mFormat;
+            descriptor.mipLevelCount = kMipLevelCount;
+            descriptor.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
+                               wgpu::TextureUsage::Sampled;
+
+            texture = device.CreateTexture(&descriptor);
+
+            wgpu::TextureViewDescriptor textureViewDesc = {};
+            textureViewDesc.mipLevelCount = 1;
+
+            for (uint32_t mipLevel = 0; mipLevel < kMipLevelCount; ++mipLevel) {
+                textureViewDesc.baseMipLevel = mipLevel;
+                textureViews[mipLevel] = texture.CreateView(&textureViewDesc);
+
+                utils::ComboRenderPassDescriptor renderPassDescriptor({}, textureViews[mipLevel]);
+                renderPassDescriptor.cDepthStencilAttachmentInfo.clearDepth =
+                    kDepthValues[mipLevel];
+                renderPassDescriptor.cDepthStencilAttachmentInfo.clearStencil =
+                    kStencilValues[mipLevel];
+                renderPassDescriptors.push_back(renderPassDescriptor);
+            }
+        }
+
+        void CheckMipLevel(uint32_t mipLevel) {
+            uint32_t mipSize = std::max(kRTSize >> mipLevel, 1u);
+            {
+                std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
+                ExpectSampledDepthData(texture, mipSize, mipSize, 0, mipLevel, expectedDepth)
+                    << "depth mip " << mipLevel;
+            }
+
+            if (GetParam().mFormat == wgpu::TextureFormat::Depth32Float) {
+                return;
+            }
+
+            switch (GetParam().mReadStencil) {
+                case ReadStencil::Copy: {
+                    std::vector<uint8_t> expectedStencil(mipSize * mipSize,
+                                                         kStencilValues[mipLevel]);
+                    EXPECT_TEXTURE_EQ(expectedStencil.data(), texture, {0, 0}, {mipSize, mipSize},
+                                      mipLevel, wgpu::TextureAspect::StencilOnly)
+                        << "stencil mip " << mipLevel;
+                    break;
+                }
+
+                case ReadStencil::StencilTest: {
+                    wgpu::TextureDescriptor readbackDesc;
+                    readbackDesc.dimension = wgpu::TextureDimension::e2D;
+                    readbackDesc.size.width = mipSize;
+                    readbackDesc.size.height = mipSize;
+                    readbackDesc.size.depthOrArrayLayers = 1;
+                    readbackDesc.sampleCount = 1;
+                    readbackDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+                    readbackDesc.mipLevelCount = 1;
+                    readbackDesc.usage =
+                        wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
+
+                    wgpu::Texture readbackTexture = device.CreateTexture(&readbackDesc);
+
+                    utils::ComboRenderPassDescriptor renderPassDescriptor(
+                        {readbackTexture.CreateView()}, textureViews[mipLevel]);
+                    renderPassDescriptor.cDepthStencilAttachmentInfo.depthLoadOp =
+                        wgpu::LoadOp::Load;
+                    renderPassDescriptor.cDepthStencilAttachmentInfo.stencilLoadOp =
+                        wgpu::LoadOp::Load;
+
+                    utils::ComboRenderPipelineDescriptor renderPipelineDesc;
+                    renderPipelineDesc.vertex.module = utils::CreateShaderModule(device, R"(
+                    [[stage(vertex)]]
+                    fn main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+                        let pos : array<vec2<f32>, 6> = array<vec2<f32>, 6>(
+                            vec2<f32>(-1.0, -1.0),
+                            vec2<f32>( 1.0, -1.0),
+                            vec2<f32>(-1.0,  1.0),
+                            vec2<f32>(-1.0,  1.0),
+                            vec2<f32>( 1.0, -1.0),
+                            vec2<f32>( 1.0,  1.0));
+                        return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+                    })");
+                    renderPipelineDesc.cFragment.module = utils::CreateShaderModule(device, R"(
+                        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+                            return vec4<f32>(0.0, 1.0, 0.0, 1.0);
+                        })");
+
+                    wgpu::DepthStencilState* depthStencil =
+                        renderPipelineDesc.EnableDepthStencil(GetParam().mFormat);
+                    depthStencil->stencilFront.compare = wgpu::CompareFunction::Equal;
+
+                    wgpu::RenderPipeline pipeline =
+                        device.CreateRenderPipeline(&renderPipelineDesc);
+
+                    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+                    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPassDescriptor);
+                    pass.SetStencilReference(kStencilValues[mipLevel]);
+                    pass.SetPipeline(pipeline);
+                    pass.Draw(6);
+                    pass.EndPass();
+                    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+                    queue.Submit(1, &commandBuffer);
+
+                    std::vector<RGBA8> expected(mipSize * mipSize, RGBA8(0, 255, 0, 255));
+                    EXPECT_TEXTURE_EQ(expected.data(), readbackTexture, {0, 0}, {mipSize, mipSize})
+                        << "stencil mip " << mipLevel;
+                    break;
+                }
+            }
+        }
+
+        wgpu::Texture texture;
+        std::array<wgpu::TextureView, kMipLevelCount> textureViews;
+        // Vector instead of array because there is no default constructor.
+        std::vector<utils::ComboRenderPassDescriptor> renderPassDescriptors;
+    };
+
+}  // anonymous namespace
+
+// Check that clearing a mip level works at all.
+TEST_P(RenderPassDepthStencilLoadOpTests, ClearSingleMip) {
+    // TODO(crbug.com/dawn/838):
+    // Unable to read back depth of a non-zero mip. Comes back as 0.
+    // Copying stencil does not work for the non-zero mip either, but reading it by
+    // stencil test works.
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && GetParam().mFirstMipToClear == 1u);
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        if (GetParam().mFirstMipToClear == 0u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[0]).EndPass();
+        } else if (GetParam().mFirstMipToClear == 1u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
+        } else {
+            UNREACHABLE();
+        }
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    CheckMipLevel(GetParam().mFirstMipToClear);
+}
+
+// Test clearing multiple mips of depth stencil textures. Some platforms have bugs where clearing
+// one mip also clears the other mips.
+TEST_P(RenderPassDepthStencilLoadOpTests, ClearMultipleMips) {
+    // TODO(crbug.com/dawn/838):
+    // Unable to read back depth of a non-zero mip. Comes back as 0.
+    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        if (GetParam().mFirstMipToClear == 0u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[0]).EndPass();
+            encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
+        } else if (GetParam().mFirstMipToClear == 1u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
+            encoder.BeginRenderPass(&renderPassDescriptors[0]).EndPass();
+        } else {
+            UNREACHABLE();
+        }
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    CheckMipLevel(0u);
+    CheckMipLevel(1u);
+}
+
+DAWN_INSTANTIATE_TEST_P(RenderPassDepthStencilLoadOpTests,
+                        {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}),
+                         MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+                        {wgpu::TextureFormat::Depth32Float,
+                         wgpu::TextureFormat::Depth24PlusStencil8},
+                        {0u, 1u},
+                        {ReadStencil::StencilTest, ReadStencil::Copy});
