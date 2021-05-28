@@ -16,6 +16,74 @@
       "message": "All feedback has been addressed. FYI this is my last day in the office until June 7.\n\n@Corentin - as we discussed in our last meeting, you can pass off the Chromium-side integration of external textures if you\u0027d like to keep progress going while I\u0027m out. Otherwise, I\u0027ll plan to start on it when I\u0027m back.",
       "revId": "35281a19a807b3aa19d77682adb833ba9ffc7e99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e5bc1d_4c09ba94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-28T09:44:11Z",
+      "side": 1,
+      "message": "Still LGTM! I think we need just one more iteration and we\u0027re good to go!",
+      "revId": "35281a19a807b3aa19d77682adb833ba9ffc7e99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21ce66f5_ebe73d7f",
+        "filename": "src/dawn_native/ExternalTexture.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-28T09:44:11Z",
+      "side": 1,
+      "message": "nit: this enum doesn\u0027t need to be public since it is only used for mState.",
+      "revId": "35281a19a807b3aa19d77682adb833ba9ffc7e99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "446cae2d_6b44815d",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-28T09:44:11Z",
+      "side": 1,
+      "message": "It isn\u0027t clear that this side effect happens when calling \"CreateBasicRenderPipeline\". Overall we shouldn\u0027t need a pipeline because the bindgroups only need to be referenced in the pass to be validated but don\u0027t need to actually be used. So we can do:\n\n BeginRenderPass\n SetBindGroup\n EndPass\n\nAnd that should be sufficient.",
+      "revId": "35281a19a807b3aa19d77682adb833ba9ffc7e99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05835e1_907464a2",
+        "filename": "src/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-28T09:44:11Z",
+      "side": 1,
+      "message": "Could we have similar tests but for a compute pass where the bindgroup is referenced? (no need for a Dispatch call)",
+      "revId": "35281a19a807b3aa19d77682adb833ba9ffc7e99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
