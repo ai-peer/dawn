@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a495c71_ec79971e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-28T00:17:26Z",
+      "side": 1,
+      "message": "All feedback has been addressed. FYI this is my last day in the office until June 7.\n\n@Corentin - as we discussed in our last meeting, you can pass off the Chromium-side integration of external textures if you\u0027d like to keep progress going while I\u0027m out. Otherwise, I\u0027ll plan to start on it when I\u0027m back.",
+      "revId": "35281a19a807b3aa19d77682adb833ba9ffc7e99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

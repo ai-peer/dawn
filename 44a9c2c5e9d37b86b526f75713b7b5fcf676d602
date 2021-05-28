@@ -39,6 +39,30 @@
       },
       "revId": "44a9c2c5e9d37b86b526f75713b7b5fcf676d602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd52e01f_2757b374",
+        "filename": "src/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-05-28T00:17:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3df88dec_2bead585",
+      "range": {
+        "startLine": 69,
+        "startChar": 47,
+        "endLine": 69,
+        "endChar": 48
+      },
+      "revId": "44a9c2c5e9d37b86b526f75713b7b5fcf676d602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
