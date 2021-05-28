@@ -74,6 +74,10 @@
     EXPECT_BUFFER(buffer, offset, sizeof(float) * (count),            \
                   new ::detail::ExpectEq<float>(expected, count))
 
+#define EXPECT_BUFFER_FLOAT_RANGE_ABOUT_EQ(expected, buffer, offset, count, tolerance) \
+    EXPECT_BUFFER(buffer, offset, sizeof(float) * (count),                             \
+                  new ::detail::ExpectEq<float>(expected, count, tolerance))
+
 // Test a pixel of the mip level 0 of a 2D texture.
 #define EXPECT_PIXEL_RGBA8_EQ(expected, texture, x, y) \
     AddTextureExpectation(__FILE__, __LINE__, expected, texture, {x, y})
@@ -631,13 +635,14 @@ namespace detail {
     template <typename T>
     class ExpectEq : public Expectation {
       public:
-        ExpectEq(T singleValue);
-        ExpectEq(const T* values, const unsigned int count);
+        ExpectEq(T singleValue, T tolerance = {});
+        ExpectEq(const T* values, const unsigned int count, T tolerance = {});
 
         testing::AssertionResult Check(const void* data, size_t size) override;
 
       private:
         std::vector<T> mExpected;
+        T mTolerance;
     };
     extern template class ExpectEq<uint8_t>;
     extern template class ExpectEq<int16_t>;
