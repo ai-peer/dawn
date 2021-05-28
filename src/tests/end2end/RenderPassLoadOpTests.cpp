@@ -289,3 +289,117 @@ DAWN_INSTANTIATE_TEST(RenderPassLoadOpTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+using FirstMipToClear = uint32_t;
+DAWN_TEST_PARAM_STRUCT(RenderPassDepthStencilLoadOpTestParams, FirstMipToClear)
+
+class RenderPassDepthStencilLoadOpTests
+    : public DawnTestWithParams<RenderPassDepthStencilLoadOpTestParams> {
+  protected:
+    static constexpr uint32_t kMipLevelCount = 2u;
+    static constexpr std::array<float, kMipLevelCount> kDepthValues = {0.2f, 0.8f};
+    static constexpr std::array<uint8_t, kMipLevelCount> kStencilValues = {7u, 3u};
+
+    void SetUp() override {
+        DawnTestWithParams<RenderPassDepthStencilLoadOpTestParams>::SetUp();
+
+        // TODO(crbug.com/tint/827): HLSL writer produces invalid code.
+        DAWN_SUPPRESS_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
+
+        // Readback of Depth/Stencil textures not fully supported on GL right now.
+        // Also depends on glTextureView which is not supported on ES.
+        DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+        wgpu::TextureDescriptor descriptor;
+        descriptor.dimension = wgpu::TextureDimension::e2D;
+        descriptor.size.width = kRTSize;
+        descriptor.size.height = kRTSize;
+        descriptor.size.depthOrArrayLayers = 1;
+        descriptor.sampleCount = 1;
+        descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.mipLevelCount = kMipLevelCount;
+        descriptor.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
+                           wgpu::TextureUsage::Sampled;
+
+        texture = device.CreateTexture(&descriptor);
+
+        wgpu::TextureViewDescriptor textureViewDesc = {};
+        textureViewDesc.mipLevelCount = 1;
+
+        for (uint32_t mipLevel = 0; mipLevel < kMipLevelCount; ++mipLevel) {
+            textureViewDesc.baseMipLevel = mipLevel;
+            textureViews[mipLevel] = texture.CreateView(&textureViewDesc);
+
+            utils::ComboRenderPassDescriptor renderPassDescriptor({}, textureViews[mipLevel]);
+            renderPassDescriptor.cDepthStencilAttachmentInfo.clearDepth = kDepthValues[mipLevel];
+            renderPassDescriptor.cDepthStencilAttachmentInfo.clearStencil =
+                kStencilValues[mipLevel];
+            renderPassDescriptors.push_back(renderPassDescriptor);
+        }
+    }
+
+    void CheckMipLevel(uint32_t mipLevel) {
+        uint32_t mipSize = std::max(kRTSize >> mipLevel, 1u);
+        {
+            std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
+            ExpectSampledDepthData(texture, mipSize, mipSize, 0, mipLevel, expectedDepth)
+                << "depth mip " << mipLevel;
+        }
+        {
+            std::vector<uint8_t> expectedStencil(mipSize * mipSize, kStencilValues[mipLevel]);
+            EXPECT_TEXTURE_EQ(expectedStencil.data(), texture, {0, 0}, {mipSize, mipSize}, mipLevel,
+                              wgpu::TextureAspect::StencilOnly)
+                << "stencil mip " << mipLevel;
+        }
+    }
+
+    wgpu::Texture texture;
+    std::array<wgpu::TextureView, kMipLevelCount> textureViews;
+    // Vector instead of array because there is no default constructor.
+    std::vector<utils::ComboRenderPassDescriptor> renderPassDescriptors;
+};
+
+// Check that clearing a mip level works at all.
+TEST_P(RenderPassDepthStencilLoadOpTests, ClearSingleMip) {
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        if (GetParam().mFirstMipToClear == 0u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[0]).EndPass();
+        } else if (GetParam().mFirstMipToClear == 1u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
+        } else {
+            UNREACHABLE();
+        }
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    CheckMipLevel(GetParam().mFirstMipToClear);
+}
+
+// Test clearing multiple mips of depth stencil textures. Some platforms have bugs where clearing
+// one mip also clears the other mips.
+TEST_P(RenderPassDepthStencilLoadOpTests, ClearMultipleMips) {
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        if (GetParam().mFirstMipToClear == 0u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[0]).EndPass();
+            encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
+        } else if (GetParam().mFirstMipToClear == 1u) {
+            encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
+            encoder.BeginRenderPass(&renderPassDescriptors[0]).EndPass();
+        } else {
+            UNREACHABLE();
+        }
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    CheckMipLevel(0u);
+    CheckMipLevel(1u);
+}
+
+DAWN_INSTANTIATE_TEST_P(RenderPassDepthStencilLoadOpTests,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {0u, 1u});
