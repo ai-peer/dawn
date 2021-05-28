@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce711981_485b4c18",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-28T06:21:41Z",
+      "side": 1,
+      "message": "I may still use a function to handle the special cases, write comments about details, etc., and let Compute3DTextureCopySplits like its counterpart Compute2DTextureCopySplits with some high level comments. Let\u0027s remove it in this CL and discuss that in the next CL as you suggested.",
+      "parentUuid": "09eb6257_baa9f217",
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bef7d81_965fb84f",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-05-27T16:58:43Z",
       "side": 1,
       "message": "These two cases (and subcases) are already handled by ComputeTextureCopySubresource.",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 42
+      },
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f75af627_cd98b22d",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-28T06:21:41Z",
+      "side": 1,
+      "message": "Let\u0027s discuss in the next CL.",
+      "parentUuid": "7bef7d81_965fb84f",
       "range": {
         "startLine": 264,
         "startChar": 0,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e23748c0_261b9f10",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-28T06:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a627325_d027d05c",
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a948d09_63c9666c",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bd1653c_d5b43d1d",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-28T06:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a948d09_63c9666c",
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "42368e9f_2b19f011",
@@ -88,6 +166,30 @@
       "writtenOn": "2021-05-27T16:58:43Z",
       "side": 1,
       "message": "nit: Maybe we should mention \"2D\" in the name, to explain that it only knows how to handle 2D non-arrayed textures correctly, and just forwards \"copySize.depthOrArrayLayers\"",
+      "range": {
+        "startLine": 52,
+        "startChar": 27,
+        "endLine": 52,
+        "endChar": 56
+      },
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "529b5033_cc3d1350",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-05-28T06:21:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "42368e9f_2b19f011",
       "range": {
         "startLine": 52,
         "startChar": 27,
