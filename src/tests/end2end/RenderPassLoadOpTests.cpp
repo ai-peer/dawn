@@ -289,3 +289,103 @@ DAWN_INSTANTIATE_TEST(RenderPassLoadOpTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+using FirstMipToClear = uint32_t;
+DAWN_TEST_PARAM_STRUCT(RenderPassDepthStencilLoadOpTestParams, FirstMipToClear)
+
+class RenderPassDepthStencilLoadOpTests
+    : public DawnTestWithParams<RenderPassDepthStencilLoadOpTestParams> {
+  protected:
+    void SetUp() override {
+        DawnTestWithParams<RenderPassDepthStencilLoadOpTestParams>::SetUp();
+
+        wgpu::TextureDescriptor descriptor;
+        descriptor.dimension = wgpu::TextureDimension::e2D;
+        descriptor.size.width = kRTSize;
+        descriptor.size.height = kRTSize;
+        descriptor.size.depthOrArrayLayers = 1;
+        descriptor.sampleCount = 1;
+        descriptor.format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.mipLevelCount = 2;
+        descriptor.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
+                           wgpu::TextureUsage::Sampled;
+
+        texture = device.CreateTexture(&descriptor);
+    }
+
+    wgpu::Texture texture;
+};
+
+// Test clearing multiple mips of depth stencil textures. Some platforms have bugs where clearing
+// one mip also clears the other mips.
+TEST_P(RenderPassDepthStencilLoadOpTests, ClearMultipleMips) {
+    // TODO(crbug.com/tint/827): HLSL writer produces invalid code.
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && HasToggleEnabled("use_tint_generator"));
+
+    // Readback of Depth/Stencil textures not fully supported on GL right now.
+    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+    wgpu::TextureViewDescriptor textureViewDesc = {};
+    textureViewDesc.mipLevelCount = 1;
+
+    textureViewDesc.baseMipLevel = 0;
+    wgpu::TextureView textureView0 = texture.CreateView(&textureViewDesc);
+
+    textureViewDesc.baseMipLevel = 1;
+    wgpu::TextureView textureView1 = texture.CreateView(&textureViewDesc);
+
+    constexpr uint8_t kMip0Stencil = 7u;
+    constexpr uint8_t kMip1Stencil = 3u;
+    constexpr float kMip0Depth = 0.2f;
+    constexpr float kMip1Depth = 0.8f;
+
+    utils::ComboRenderPassDescriptor renderPassDescriptor0({}, textureView0);
+    renderPassDescriptor0.cDepthStencilAttachmentInfo.clearDepth = kMip0Depth;
+    renderPassDescriptor0.cDepthStencilAttachmentInfo.clearStencil = kMip0Stencil;
+
+    utils::ComboRenderPassDescriptor renderPassDescriptor1({}, textureView1);
+    renderPassDescriptor1.cDepthStencilAttachmentInfo.clearDepth = kMip1Depth;
+    renderPassDescriptor1.cDepthStencilAttachmentInfo.clearStencil = kMip1Stencil;
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        if (GetParam().mFirstMipToClear == 0u) {
+            encoder.BeginRenderPass(&renderPassDescriptor0).EndPass();
+            encoder.BeginRenderPass(&renderPassDescriptor1).EndPass();
+        } else if (GetParam().mFirstMipToClear == 1u) {
+            encoder.BeginRenderPass(&renderPassDescriptor1).EndPass();
+            encoder.BeginRenderPass(&renderPassDescriptor0).EndPass();
+        } else {
+            UNREACHABLE();
+        }
+        wgpu::CommandBuffer commandBuffer = encoder.Finish();
+        queue.Submit(1, &commandBuffer);
+    }
+
+    {
+        std::vector<float> expectedDepth(kRTSize * kRTSize, kMip0Depth);
+        ExpectSampledDepthData(texture, kRTSize, kRTSize, 0, 0, expectedDepth) << "mip 0 depth";
+    }
+    {
+        std::vector<uint8_t> expectedStencil(kRTSize * kRTSize, kMip0Stencil);
+        EXPECT_TEXTURE_EQ(expectedStencil.data(), texture, {0, 0}, {kRTSize, kRTSize}, 0,
+                          wgpu::TextureAspect::StencilOnly)
+            << "mip 0 stencil";
+    }
+    {
+        std::vector<float> expectedDepth((kRTSize / 2) * (kRTSize / 2), kMip1Depth);
+        ExpectSampledDepthData(texture, kRTSize / 2, kRTSize / 2, 0, 1, expectedDepth)
+            << "mip 1 depth";
+    }
+    {
+        std::vector<uint8_t> expectedStencil((kRTSize / 2) * (kRTSize / 2), kMip1Stencil);
+        EXPECT_TEXTURE_EQ(expectedStencil.data(), texture, {0, 0}, {kRTSize / 2, kRTSize / 2}, 1,
+                          wgpu::TextureAspect::StencilOnly)
+            << "mip 1 stencil";
+    }
+}
+
+DAWN_INSTANTIATE_TEST_P(RenderPassDepthStencilLoadOpTests,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {0u, 1u});
