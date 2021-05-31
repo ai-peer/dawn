@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568d13e3_974ed521",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T21:03:04Z",
+      "side": 1,
+      "message": "PTAL! Chromium CL is https://chromium-review.googlesource.com/c/chromium/src/+/2928819",
+      "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
