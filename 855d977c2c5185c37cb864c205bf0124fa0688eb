@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf3e5b1b_522164f3",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "Probably worth bringing up to the group. Either seems fine.\n\nSpeaking of which we should make sure the Finish() calls have an empty descriptor for extensibility of webgpu.h",
+      "parentUuid": "b15dbbcc_a9770347",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daad9fcf_ad4c01ba",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 3
@@ -66,6 +84,24 @@
       "side": 1,
       "message": "The MTLCommandBuffer is owned by CommandRecordingContext which is owned by the device and accessed by queue::Submit. The place where the CommandBuffer and the CommandRecordingContext come together is in Submit:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/metal/QueueMTL.mm;l\u003d41;drc\u003d1bc1ed4bc9e0318813dfdedc999e443b909b8f8c\nwhich calls:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/metal/CommandBufferMTL.mm;l\u003d620;drc\u003d5230c6bd93cc09825d9f97232e8be427ddef85bd\n\nUnfortunately right now it looks like we actually record multiple dawn CommandBuffers into one MTLCommandBuffer, so we\u0027ll have to split them. It\u0027s not that trivial because currently Submit defers the finalization of that aggregated MTLCommandBuffer to device-\u003eSubmitPendingCommandBuffer(). We could possibly just do multiple SubmitPendingCommandBuffer calls in Submit. (AFAICT Metal command buffers are always submitted one-by-one using [MTLCommandBuffer commit], not batched.)",
       "parentUuid": "daad9fcf_ad4c01ba",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "954575b3_52d9b62a",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "Ah that\u0027s mildly annoying. We could have the recordingContext have a vector of command buffers and when we see a dawn_native::CommandBuffer that asks to be measured, then we\u0027d create a new Metal command buffer in the recording context.\n\nSomething similar would happen in the other backends to insert the timestamp queries.",
+      "parentUuid": "c1c2ea47_cbd55c51",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -107,6 +143,81 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e35a373_10a42f64",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "There might be a race, but everything in Dawn is racy at the moment so it\u0027s fine.",
+      "parentUuid": "460c2838_ff9ce764",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b6e0bc9_0f6dbc65",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "nit: implementation details should be in the .cpp and inlined with LLVM LTCG",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87fef1a1_e8c36d1b",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 533,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "Maybe this could be the initial value in command buffers so that if nothing happens, it is invalid to call getExecutionTimes.",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5231e8d3_0b71f2f0",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "nit: this accessor\u0027s name seems like it actually does something. Maybe it could be ShouldMeasureExecutionTime?",
+      "range": {
+        "startLine": 546,
+        "startChar": 29,
+        "endLine": 546,
+        "endChar": 49
+      },
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d8f590d7_ca782176",
         "filename": "src/dawn_native/Queue.cpp",
         "patchSetId": 3
@@ -136,6 +247,24 @@
       "side": 1,
       "message": "Dawn objects are ref-counted and I think we just need to make sure we hold a ref here. I\u0027m not that much of an expert on Dawn internals anymore though...",
       "parentUuid": "d8f590d7_ca782176",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea2b3bd7_ceb29bff",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "Correct, the app could Release the last reference to the CommandBuffer right after Submit. It should be sufficient for CommandBufferSubmitDone to hold a Ref\u003cCommandBuffer\u003e.",
+      "parentUuid": "e10d2b45_208abb29",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -176,6 +305,24 @@
       "writtenOn": "2021-05-28T00:57:53Z",
       "side": 1,
       "message": "I\u0027m not sure we really need to support making multiple requests for the execution time. The JS API would return the same promise object every time (like if it had [SameObject] but that\u0027s not allowed for Promise-typed attributes for some reason).",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9724f4d_00efa5c3",
+        "filename": "src/dawn_wire/client/CommandBuffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T16:23:00Z",
+      "side": 1,
+      "message": "I think webgpu.h might allow it?",
+      "parentUuid": "93ff18f2_149715ac",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
