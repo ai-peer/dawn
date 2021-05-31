@@ -16,6 +16,57 @@
       "message": "This change should be OK. Hope that the bots will not complain...",
       "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e8b0693_568a2eca",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:45:21Z",
+      "side": 1,
+      "message": "Why do we multiply by blockInfo.height? copySize.height should already be in texels, and * blockInfo.height does an unnecessary block -\u003e texel conversion.",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3564481c_f0eaa3e1",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:45:21Z",
+      "side": 1,
+      "message": "We should probably remove rowsPerImage from this function and always copySize.height (+ texelOffset.y). See https://dawn-review.googlesource.com/c/dawn/+/52720\n\nBasically depending on the type of copy (2D/2Darray or 3D) the handling of rowsPerImage is different so this function could just say that the copies regions say in bounds of the buffer, and the 3D split function will be responsible for adding back rowsPerImage.\n\nCan we edit TextureCopySplitterUnittests to cover this case as well?",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07b82e5b_0dc236ed",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:45:21Z",
+      "side": 1,
+      "message": "I think it might be simpler to ASSERT(texelOffset.y \u003c\u003d 1); and some special computations if texelOffset \u003d\u003d 1 (with a comment explaining which invariant we preserve when doing it):\n\n copy.copies[1].alignedOffset/.bufferSize.height/.bufferOffset.y \u003d ...;\n\n // stuff\n if (texelOffset \u003d\u003d 1) {\n   copy.copies[1].alignedOffset +\u003d bytesPerRow * 2;\n   copy.copies[1].bufferSize.height -\u003d 2;\n   copy.copies[1].bufferOffset.y -\u003d 2;\n }\n\nAlso can we add a check to TextureCopySplitter unittests for the bufferOffset invariants?",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
