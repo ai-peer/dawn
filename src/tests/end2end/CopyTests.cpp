@@ -833,6 +833,25 @@ TEST_P(CopyTests_T2B, BytesPerRowWithOneRowCopy) {
     }
 }
 
+// Test copying a single 2D image with rowsPerImage larger than the copy (in a way where all the
+// rows for the first image would go past the end of the buffer).
+TEST_P(CopyTests_T2B, RowsPerImageWouldCauseBufferOOB) {
+    // Check various offsets to cover each code path in the 2D split code in TextureCopySplitter.
+    for (uint32_t offset : {0, 4, 64}) {
+        constexpr uint32_t kWidth = 250;
+        constexpr uint32_t kHeight = 3;
+
+        TextureSpec textureSpec;
+        textureSpec.textureSize = {kWidth, kHeight, 1};
+
+        BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight);
+        bufferSpec.rowsPerImage = 2 * kHeight;
+        bufferSpec.offset = offset;
+        bufferSpec.size += offset;
+        DoTest(textureSpec, bufferSpec, {kWidth, kHeight, 1});
+    }
+}
+
 TEST_P(CopyTests_T2B, StrideSpecialCases) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {4, 4, 4};
