@@ -20,6 +20,7 @@
 #include "dawn_native/Format.h"
 #include "dawn_native/d3d12/TextureCopySplitter.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
+#include "utils/TestUtils.h"
 
 using namespace dawn_native::d3d12;
 
@@ -44,13 +45,33 @@ namespace {
     };
 
     // Check that each copy region fits inside the buffer footprint
-    void ValidateFootprints(const TextureCopySubresource& copySplit) {
+    void ValidateFootprints(const TextureSpec& textureSpec,
+                            const BufferSpec& bufferSpec,
+                            const TextureCopySubresource& copySplit) {
+        uint32_t widthInBlocks = textureSpec.width / textureSpec.blockWidth;
+        uint32_t heightInBlocks = textureSpec.height / textureSpec.blockHeight;
+        uint64_t minimumRequiredBufferSize =
+            bufferSpec.offset + utils::RequiredBytesInCopy(bufferSpec.bytesPerRow,
+                                                           bufferSpec.rowsPerImage, widthInBlocks,
+                                                           heightInBlocks, textureSpec.depth,
+                                                           textureSpec.texelBlockSizeInBytes);
+
         for (uint32_t i = 0; i < copySplit.count; ++i) {
             const auto& copy = copySplit.copies[i];
             ASSERT_LE(copy.bufferOffset.x + copy.copySize.width, copy.bufferSize.width);
             ASSERT_LE(copy.bufferOffset.y + copy.copySize.height, copy.bufferSize.height);
             ASSERT_LE(copy.bufferOffset.z + copy.copySize.depthOrArrayLayers,
                       copy.bufferSize.depthOrArrayLayers);
+
+            uint32_t widthInBlocksForFootprint = copy.bufferSize.width / textureSpec.blockWidth;
+            uint32_t heightInBlocksForFootprint = copy.bufferSize.height / textureSpec.blockHeight;
+            uint64_t bufferSizeForFootprint = utils::RequiredBytesInCopy(
+                bufferSpec.bytesPerRow, bufferSpec.rowsPerImage, widthInBlocksForFootprint,
+                heightInBlocksForFootprint, copy.bufferSize.depthOrArrayLayers,
+                textureSpec.texelBlockSizeInBytes);
+            // The buffer footprint for copy should not exceed the minimum required buffer size.
+            // Otherwise, pixels accessed by copy may be OOB.
+            ASSERT_LE(bufferSizeForFootprint, minimumRequiredBufferSize);
         }
     }
 
@@ -149,6 +170,7 @@ namespace {
                 copy.bufferOffset.x / textureSpec.blockWidth * texelsPerBlock +
                 copy.bufferOffset.y / textureSpec.blockHeight * bytesPerRowInTexels;
 
+            ASSERT_LE(copy.bufferOffset.y, textureSpec.blockHeight);
             ASSERT_EQ(copy.bufferOffset.z, 0u);
 
             ASSERT(absoluteTexelOffset >=
@@ -170,7 +192,7 @@ namespace {
     void ValidateCopySplit(const TextureSpec& textureSpec,
                            const BufferSpec& bufferSpec,
                            const TextureCopySubresource& copySplit) {
-        ValidateFootprints(copySplit);
+        ValidateFootprints(textureSpec, bufferSpec, copySplit);
         ValidateOffset(copySplit);
         ValidateDisjoint(copySplit);
         ValidateTextureBounds(textureSpec, copySplit);
@@ -212,9 +234,18 @@ namespace {
     constexpr TextureSpec kBaseTextureSpecs[] = {
         {0, 0, 0, 1, 1, 1, 4},
         {0, 0, 0, 64, 1, 1, 4},
+        {0, 0, 0, 128, 1, 1, 4},
+        {0, 0, 0, 192, 1, 1, 4},
         {31, 16, 0, 1, 1, 1, 4},
         {64, 16, 0, 1, 1, 1, 4},
         {64, 16, 8, 1, 1, 1, 4},
+
+        {0, 0, 0, 64, 2, 1, 4},
+        {0, 0, 0, 64, 2, 2, 4},
+        {0, 0, 0, 128, 2, 1, 4},
+        {0, 0, 0, 128, 2, 2, 4},
+        {0, 0, 0, 192, 2, 1, 4},
+        {0, 0, 0, 192, 2, 2, 4},
 
         {0, 0, 0, 1024, 1024, 1, 4},
         {256, 512, 0, 1024, 1024, 1, 4},
@@ -246,7 +277,7 @@ namespace {
 
     // Define base buffer sizes to work with: some offsets aligned, some unaligned. bytesPerRow is
     // the minimum required
-    std::array<BufferSpec, 14> BaseBufferSpecs(const TextureSpec& textureSpec) {
+    std::array<BufferSpec, 15> BaseBufferSpecs(const TextureSpec& textureSpec) {
         uint32_t bytesPerRow = Align(textureSpec.texelBlockSizeInBytes * textureSpec.width,
                                      kTextureBytesPerRowAlignment);
 
@@ -256,6 +287,8 @@ namespace {
 
         return {
             BufferSpec{alignNonPow2(0, textureSpec.texelBlockSizeInBytes), bytesPerRow,
+                       textureSpec.height},
+            BufferSpec{alignNonPow2(256, textureSpec.texelBlockSizeInBytes), bytesPerRow,
                        textureSpec.height},
             BufferSpec{alignNonPow2(512, textureSpec.texelBlockSizeInBytes), bytesPerRow,
                        textureSpec.height},
@@ -308,7 +341,7 @@ class CopySplitTest : public testing::Test {
         TextureCopySubresource copySplit = Compute2DTextureCopySubresource(
             {textureSpec.x, textureSpec.y, textureSpec.z},
             {textureSpec.width, textureSpec.height, textureSpec.depth}, blockInfo,
-            bufferSpec.offset, bufferSpec.bytesPerRow, bufferSpec.rowsPerImage);
+            bufferSpec.offset, bufferSpec.bytesPerRow);
         ValidateCopySplit(textureSpec, bufferSpec, copySplit);
         return copySplit;
     }
