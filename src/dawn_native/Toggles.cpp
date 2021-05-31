@@ -176,7 +176,13 @@ namespace dawn_native {
               "GPUs which have a driver bug in the execution of CopyTextureRegion() when we copy "
               "with the formats whose texel block sizes are less than 4 bytes from a greater mip "
               "level to a smaller mip level on D3D12 backends.",
-              "https://crbug.com/1161355"}}
+              "https://crbug.com/1161355"}},
+            {Toggle::DisallowSpirv,
+             {"disallow_spirv",
+              "Disallow usage of SPIR-V completely so that only WGSL is used for shader modules."
+              "This is useful to prevent a Chromium renderer process from successfully sending"
+              "SPIR-V code to be compiled in the GPU process.",
+              "https://crbug.com/1214923"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
 
