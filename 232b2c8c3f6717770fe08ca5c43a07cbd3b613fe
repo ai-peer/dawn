@@ -173,6 +173,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da66d0d9_f4c74d8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T12:22:34Z",
+      "side": 1,
+      "message": "Having it as a \"Logging\" with some levels make sense, this way it is useful outside of Chromium, and Dawn can also output stuff to about:gpu this way potentially.\n\nWe can see for the dawn::WarningLog change later but maybe we can add a TODO in Log.h to add that.",
+      "parentUuid": "bb0e4b45_e86a2957",
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "018ab56f_d840be2a",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 4
@@ -349,6 +367,30 @@
       "side": 1,
       "message": "Just a scaffold forgot to clean up. Sorry.",
       "parentUuid": "96eacef2_e14de270",
+      "range": {
+        "startLine": 47,
+        "startChar": 32,
+        "endLine": 47,
+        "endChar": 44
+      },
+      "revId": "232b2c8c3f6717770fe08ca5c43a07cbd3b613fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c088f86f_393debac",
+        "filename": "src/tests/unittests/wire/WireTest.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T12:22:34Z",
+      "side": 1,
+      "message": "np :)",
+      "parentUuid": "341d7abe_d420ef1c",
       "range": {
         "startLine": 47,
         "startChar": 32,
