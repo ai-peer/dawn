@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e514843_7c4091eb",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f75af627_cd98b22d",
+      "range": {
+        "startLine": 264,
+        "startChar": 0,
+        "endLine": 266,
+        "endChar": 42
+      },
+      "revId": "42709e14ca29aa0b7991be8b72d1023e500e5604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a627325_d027d05c",

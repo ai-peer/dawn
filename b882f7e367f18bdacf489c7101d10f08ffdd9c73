@@ -34,6 +34,24 @@
       "parentUuid": "228d3370_88c6484d",
       "revId": "b882f7e367f18bdacf489c7101d10f08ffdd9c73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c69410c_59924bb8",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "Ack, closing this thread since we discussed offline.",
+      "parentUuid": "0b8ea09f_40c38cab",
+      "revId": "b882f7e367f18bdacf489c7101d10f08ffdd9c73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -16,6 +16,97 @@
       "message": "Thanks for your review, Corentin. ",
       "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d98d51_2b2cdfd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a50fc493_818f3af6",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "This is much clearer thank you!",
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa4e5c7_67f14def",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "nit: we can be more descriptive and say \"will be offset for each slice except the first one.\"",
+      "range": {
+        "startLine": 265,
+        "startChar": 93,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdd3148c_c3a9aedd",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "nit: Maybe briefly describe what the fix is for this example.",
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3043036e_4e43aca0",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T13:36:11Z",
+      "side": 1,
+      "message": "Maybe we could have a list of invariants it provides here:\n\n 1- The resulting copies are equivalent to the copy defines by the arguments.\n 2- Each regions has an offset aligned to D3D12_....\n 3- The regions of the buffer defined in the copies don\u0027t go past the end of the copy. (which caused me to realize there is a bug, see the failures if you cherry-pick https://dawn-review.googlesource.com/c/dawn/+/52720 I think the rowsPerImage argument should be removed)\n 4- \u003cmore invariants?\u003e\n 5- bufferOffset.z \u003d 0\n 6- (later), bufferOffset.y \u003c\u003d 1\n\nSome of these invariants could be additionally tested in TextureCopySplitterUnittests (I\u0027m pretty sure 3, 5 and 6 aren\u0027t)",
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
