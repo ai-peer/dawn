@@ -149,6 +149,7 @@ namespace {
                 copy.bufferOffset.x / textureSpec.blockWidth * texelsPerBlock +
                 copy.bufferOffset.y / textureSpec.blockHeight * bytesPerRowInTexels;
 
+            ASSERT_LE(copy.bufferOffset.y, textureSpec.blockHeight);
             ASSERT_EQ(copy.bufferOffset.z, 0u);
 
             ASSERT(absoluteTexelOffset >=
@@ -246,7 +247,7 @@ namespace {
 
     // Define base buffer sizes to work with: some offsets aligned, some unaligned. bytesPerRow is
     // the minimum required
-    std::array<BufferSpec, 14> BaseBufferSpecs(const TextureSpec& textureSpec) {
+    std::array<BufferSpec, 15> BaseBufferSpecs(const TextureSpec& textureSpec) {
         uint32_t bytesPerRow = Align(textureSpec.texelBlockSizeInBytes * textureSpec.width,
                                      kTextureBytesPerRowAlignment);
 
@@ -256,6 +257,8 @@ namespace {
 
         return {
             BufferSpec{alignNonPow2(0, textureSpec.texelBlockSizeInBytes), bytesPerRow,
+                       textureSpec.height},
+            BufferSpec{alignNonPow2(256, textureSpec.texelBlockSizeInBytes), bytesPerRow,
                        textureSpec.height},
             BufferSpec{alignNonPow2(512, textureSpec.texelBlockSizeInBytes), bytesPerRow,
                        textureSpec.height},
