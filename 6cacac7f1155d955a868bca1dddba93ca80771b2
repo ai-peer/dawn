@@ -50,6 +50,24 @@
       "message": "Comment on the special case here?\n\nCould this result in cross-platform differences in WebGPU? Is that covered in the spec?",
       "revId": "6cacac7f1155d955a868bca1dddba93ca80771b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b00d388_16ac59dd",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-05-31T14:50:58Z",
+      "side": 1,
+      "message": "This tests the \"nonzero_clear_resources_on_creation_for_testing\" toggle of Dawn that\u0027s off by default. This toggle is used to force non-zero texture/buffer content so that the lazy-clearing tests don\u0027t happen to pass just because memory was already 0.",
+      "parentUuid": "c12a06ca_958a1d86",
+      "revId": "6cacac7f1155d955a868bca1dddba93ca80771b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
