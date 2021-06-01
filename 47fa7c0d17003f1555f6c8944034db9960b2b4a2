@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52cb3d37_d2b7aa8a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T16:04:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5e8b0693_568a2eca",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3564481c_f0eaa3e1",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "140a8a95_363f575d",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T16:04:19Z",
+      "side": 1,
+      "message": "See my reply at that CL. Let\u0027s discuss that issue at that CL if needed.",
+      "parentUuid": "3564481c_f0eaa3e1",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07b82e5b_0dc236ed",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-05-31T13:45:21Z",
       "side": 1,
       "message": "I think it might be simpler to ASSERT(texelOffset.y \u003c\u003d 1); and some special computations if texelOffset \u003d\u003d 1 (with a comment explaining which invariant we preserve when doing it):\n\n copy.copies[1].alignedOffset/.bufferSize.height/.bufferOffset.y \u003d ...;\n\n // stuff\n if (texelOffset \u003d\u003d 1) {\n   copy.copies[1].alignedOffset +\u003d bytesPerRow * 2;\n   copy.copies[1].bufferSize.height -\u003d 2;\n   copy.copies[1].bufferOffset.y -\u003d 2;\n }\n\nAlso can we add a check to TextureCopySplitter unittests for the bufferOffset invariants?",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "432fe2ac_81fdf89d",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T16:04:19Z",
+      "side": 1,
+      "message": "I tried, texelOffet.y should be less than blockInfo.height (not 1) in order to support compressed textures. \n\nThe computation of alignedOffset for copy1 can cover two situations for \"fake\" empty rows in copy regions: \n  - two empty row issue (like you pointed out), for example, if data in one row straddle two rows due to alignment adjustment, and there is an empty row at the first copy region for the first part of the row, the copy region for the second part will definitely has two empty rows if we don\u0027t recompute alignedOffset.\n  - one unwanted empty row issue. For example, if bytesPerRow \u003e\u003d 512 (let\u0027s say it is 512) and data in one row straddle two rows due to alignment adjustment, and there is NO EMPTY ROW in copy 0. The copy region for copy 1 will definitely has one empty row if we don\u0027t recompute alignedOffset for it (because data straddle rows). In this situation, the code above is incorrect.\n\nAnd recompute alignedOffset can handle both of these two situations.",
+      "parentUuid": "07b82e5b_0dc236ed",
       "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
