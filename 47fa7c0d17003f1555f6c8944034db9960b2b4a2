@@ -139,6 +139,24 @@
       "parentUuid": "432fe2ac_81fdf89d",
       "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eba8d809_807d38f8",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-01T18:58:26Z",
+      "side": 1,
+      "message": "Maybe this is similar to Corentin\u0027s question, but\n\nFor both of these cases, is it true that alignedOffsetForCopy1 is always one row past alignedOffsetForCopy0 ? That is, copy0 and copy1 are always one row offset from each other, so maybe we can simply compute \" alignedOffsetForCopy1 \u003d copy.copies[0].alignedOffset + bytesPerRow \"",
+      "parentUuid": "98e926f6_acebd0ff",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
