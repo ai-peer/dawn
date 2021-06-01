@@ -121,6 +121,24 @@
       "parentUuid": "07b82e5b_0dc236ed",
       "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98e926f6_acebd0ff",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-01T18:48:55Z",
+      "side": 1,
+      "message": "\u003e I tried, texelOffet.y should be less than blockInfo.height (not 1) in order to support compressed textures. \n\nI keep forgetting about blockInfo.height :)\n\nThanks for the explanation of why we need to use ComputeTexelOffsets again. Can we have a comment explaining the two cases it handles in the code and the invariant it preserves? (also we need to add the invariant to the list of invariants and CopySplit test coverage)",
+      "parentUuid": "432fe2ac_81fdf89d",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88b9e5c3_8c20e819",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-01T18:48:55Z",
+      "side": 1,
+      "message": "Instead of all these ternary expressions, what do you think of removing the rowsPerImage argument to Compute2DTextureCopySubresource and always set it to copySize.height? Then Compute2DTextureCopySplits and 3D can add it back if they need it.\n\nWe should also add the invariant to the list in the comment, and add CopySplit test coverage.",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 90
+      },
+      "revId": "5f4f44bc3c3f7d15a1d768a68bc195ee24890719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
