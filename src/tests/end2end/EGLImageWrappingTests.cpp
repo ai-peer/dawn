@@ -73,16 +73,26 @@ namespace {
 
     class ScopedEGLImage {
       public:
-        ScopedEGLImage(const EGLFunctions& eglFunctions,
+        ScopedEGLImage(PFNEGLDESTROYIMAGEPROC destroyImage,
                        EGLDisplay display,
                        EGLImage image,
                        GLuint texture)
-            : egl(eglFunctions), mDisplay(display), mImage(image), mTexture(texture) {
+            : mDestroyImage(destroyImage), mDisplay(display), mImage(image), mTexture(texture) {
+        }
+
+        ScopedEGLImage(ScopedEGLImage&& other) {
+            if (mImage != nullptr) {
+                mDestroyImage(mDisplay, mImage);
+            }
+            mDestroyImage = std::move(other.mDestroyImage);
+            mDisplay = std::move(other.mDisplay);
+            mImage = std::move(other.mImage);
+            mTexture = std::move(other.mTexture);
         }
 
         ~ScopedEGLImage() {
             if (mImage != nullptr) {
-                egl.DestroyImage(mDisplay, mImage);
+                mDestroyImage(mDisplay, mImage);
             }
         }
 
@@ -94,29 +104,8 @@ namespace {
             return mTexture;
         }
 
-        ScopedEGLImage(ScopedEGLImage&& other) : egl(other.egl) {
-            if (mImage != nullptr) {
-                egl.DestroyImage(mDisplay, mImage);
-            }
-            mImage = other.mImage;
-            other.mImage = nullptr;
-        }
-
-        ScopedEGLImage& operator=(ScopedEGLImage&& other) {
-            if (mImage != nullptr) {
-                egl.DestroyImage(mDisplay, mImage);
-            }
-            mImage = other.mImage;
-            other.mImage = nullptr;
-
-            return *this;
-        }
-
-        ScopedEGLImage(const ScopedEGLImage&) = delete;
-        ScopedEGLImage& operator=(const ScopedEGLImage&) = delete;
-
       private:
-        const EGLFunctions& egl;
+        PFNEGLDESTROYIMAGEPROC mDestroyImage = nullptr;
         EGLDisplay mDisplay = nullptr;
         EGLImage mImage = nullptr;
         GLuint mTexture = 0;
@@ -147,16 +136,13 @@ class EGLImageTestBase : public DawnTest {
         EGLImage eglImage = egl.CreateImage(dpy, ctx, EGL_GL_TEXTURE_2D, buffer, attribs);
         EXPECT_NE(nullptr, eglImage);
 
-        return ScopedEGLImage(egl, dpy, eglImage, tex);
+        return ScopedEGLImage(egl.DestroyImage, dpy, eglImage, tex);
     }
-    wgpu::Texture WrapEGLImage(const wgpu::TextureDescriptor* descriptor,
-                               EGLImage eglImage) {
+    wgpu::Texture WrapEGLImage(const wgpu::TextureDescriptor* descriptor, EGLImage eglImage) {
         dawn_native::opengl::ExternalImageDescriptorEGLImage externDesc;
-        externDesc.cTextureDescriptor =
-            reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
+        externDesc.cTextureDescriptor = reinterpret_cast<const WGPUTextureDescriptor*>(descriptor);
         externDesc.image = eglImage;
-        WGPUTexture texture =
-            dawn_native::opengl::WrapExternalEGLImage(device.Get(), &externDesc);
+        WGPUTexture texture = dawn_native::opengl::WrapExternalEGLImage(device.Get(), &externDesc);
         return wgpu::Texture::Acquire(texture);
     }
     EGLFunctions egl;
@@ -166,28 +152,31 @@ class EGLImageTestBase : public DawnTest {
 // These tests are skipped if the harness is using the wire.
 class EGLImageValidationTests : public EGLImageTestBase {
   public:
-    EGLImageValidationTests() : defaultEGLImage(CreateEGLImage(10, 10, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, nullptr, 0)) {
+    EGLImageValidationTests() {
         descriptor.dimension = wgpu::TextureDimension::e2D;
-        descriptor.format = wgpu::TextureFormat::BGRA8Unorm;
+        descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
         descriptor.size = {10, 10, 1};
         descriptor.sampleCount = 1;
         descriptor.mipLevelCount = 1;
         descriptor.usage = wgpu::TextureUsage::RenderAttachment;
     }
 
+    ScopedEGLImage CreateDefaultEGLImage() {
+        return CreateEGLImage(10, 10, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, nullptr, 0);
+    }
+
   protected:
     wgpu::TextureDescriptor descriptor;
-    ScopedEGLImage defaultEGLImage;
 };
 
 // Test a successful wrapping of an EGLImage in a texture
 TEST_P(EGLImageValidationTests, Success) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    wgpu::Texture texture = WrapEGLImage(&descriptor, defaultEGLImage.getImage());
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage());
     ASSERT_NE(texture.Get(), nullptr);
 }
 
-#if 0
 // Test an error occurs if the texture descriptor is invalid
 TEST_P(EGLImageValidationTests, InvalidTextureDescriptor) {
     DAWN_SKIP_TEST_IF(UsesWire());
@@ -195,27 +184,19 @@ TEST_P(EGLImageValidationTests, InvalidTextureDescriptor) {
     wgpu::ChainedStruct chainedDescriptor;
     descriptor.nextInChain = &chainedDescriptor;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
-    ASSERT_EQ(texture.Get(), nullptr);
-}
-
-// Test an error occurs if the plane is too large
-TEST_P(EGLImageValidationTests, PlaneTooLarge) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
 // Test an error occurs if the descriptor dimension isn't 2D
-// TODO(cwallez@chromium.org): Reenable when 1D or 3D textures are implemented
-TEST_P(EGLImageValidationTests, DISABLED_InvalidTextureDimension) {
+TEST_P(EGLImageValidationTests, InvalidTextureDimension) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.dimension = wgpu::TextureDimension::e3D;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
+
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -224,8 +205,8 @@ TEST_P(EGLImageValidationTests, InvalidMipLevelCount) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.mipLevelCount = 2;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -234,8 +215,8 @@ TEST_P(EGLImageValidationTests, InvalidDepth) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.size.depthOrArrayLayers = 2;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -244,8 +225,8 @@ TEST_P(EGLImageValidationTests, InvalidSampleCount) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.sampleCount = 4;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -254,8 +235,8 @@ TEST_P(EGLImageValidationTests, InvalidWidth) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.size.width = 11;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -264,8 +245,8 @@ TEST_P(EGLImageValidationTests, InvalidHeight) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.size.height = 11;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
 
@@ -274,11 +255,10 @@ TEST_P(EGLImageValidationTests, InvalidFormat) {
     DAWN_SKIP_TEST_IF(UsesWire());
     descriptor.format = wgpu::TextureFormat::R8Unorm;
 
-    ASSERT_DEVICE_ERROR(wgpu::Texture texture =
-                            WrapEGLImage(&descriptor, defaultEGLImage.getImage()));
+    ScopedEGLImage image = CreateDefaultEGLImage();
+    ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
     ASSERT_EQ(texture.Get(), nullptr);
 }
-#endif
 
 // Fixture to test using EGLImages through different usages.
 // These tests are skipped if the harness is using the wire.
@@ -334,45 +314,30 @@ class EGLImageUsageTests : public EGLImageTestBase {
     }
 };
 
-#if 0
 // Test clearing a R8 EGLImage
 TEST_P(EGLImageUsageTests, ClearR8EGLImage) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    ScopedEGLImage eglImage =
-        CreateEGLImage(1, 1, GL_R8, GL_RED, GL_UNSIGNED_BYTE, nullptr, 0);
+    ScopedEGLImage eglImage = CreateEGLImage(1, 1, GL_R8, GL_RED, GL_UNSIGNED_BYTE, nullptr, 0);
 
     uint8_t data = 0x01;
-    DoClearTest(eglImage.getImage(), eglImage.getTexture(), wgpu::TextureFormat::R8Unorm, GL_R8, GL_UNSIGNED_BYTE, &data, sizeof(data));
+    DoClearTest(eglImage.getImage(), eglImage.getTexture(), wgpu::TextureFormat::R8Unorm, GL_RED,
+                GL_UNSIGNED_BYTE, &data, sizeof(data));
 }
 
 // Test clearing a RG8 EGLImage
 TEST_P(EGLImageUsageTests, ClearRG8EGLImage) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    ScopedEGLImage eglImage =
-        CreateEGLImage(1, 1, GL_RG8, GL_RG, GL_UNSIGNED_BYTE, nullptr, 0);
+    ScopedEGLImage eglImage = CreateEGLImage(1, 1, GL_RG8, GL_RG, GL_UNSIGNED_BYTE, nullptr, 0);
 
     uint16_t data = 0x0201;
-    DoClearTest(eglImage.getImage(), eglImage.getTexture(), wgpu::TextureFormat::RG8Unorm, GL_RG8, GL_UNSIGNED_BYTE, &data, sizeof(data));
+    DoClearTest(eglImage.getImage(), eglImage.getTexture(), wgpu::TextureFormat::RG8Unorm, GL_RG,
+                GL_UNSIGNED_BYTE, &data, sizeof(data));
 }
-
-#    if 0
-// Test clearing a BGRA8 EGLImage
-TEST_P(EGLImageUsageTests, ClearBGRA8EGLImage) {
-    DAWN_SKIP_TEST_IF(UsesWire());
-    ScopedEGLImage eglImage =
-        CreateEGLImage(1, 1, GL_BGRA8, GL_BGRA, GL_UNSIGNED_BYTE, nullptr, 0);
-
-    uint32_t data = 0x04010203;
-    DoClearTest(eglImage.getImage(), wgpu::TextureFormat::BGRA8Unorm, &data, sizeof(data));
-}
-#    endif
-#endif
 
 // Test clearing an RGBA8 EGLImage
 TEST_P(EGLImageUsageTests, ClearRGBA8EGLImage) {
     DAWN_SKIP_TEST_IF(UsesWire());
-    ScopedEGLImage eglImage =
-        CreateEGLImage(1, 1, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, nullptr, 0);
+    ScopedEGLImage eglImage = CreateEGLImage(1, 1, GL_RGBA8, GL_RGBA, GL_UNSIGNED_BYTE, nullptr, 0);
 
     uint32_t data = 0x04030201;
     DoClearTest(eglImage.getImage(), eglImage.getTexture(), wgpu::TextureFormat::RGBA8Unorm,
