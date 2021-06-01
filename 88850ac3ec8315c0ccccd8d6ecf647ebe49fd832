@@ -16,6 +16,23 @@
       "message": "LGTM2.\n\nCool!",
       "revId": "88850ac3ec8315c0ccccd8d6ecf647ebe49fd832",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b024aa6f_f708d9a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-01T16:39:57Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "88850ac3ec8315c0ccccd8d6ecf647ebe49fd832",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
