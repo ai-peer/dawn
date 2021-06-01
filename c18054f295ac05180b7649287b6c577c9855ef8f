@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd592eca_6588335f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T06:04:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6aa4e5c7_67f14def",
+      "range": {
+        "startLine": 265,
+        "startChar": 93,
+        "endLine": 266,
+        "endChar": 28
+      },
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fdd3148c_c3a9aedd",
@@ -92,6 +116,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e6be51_f86d93ca",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T06:04:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fdd3148c_c3a9aedd",
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3043036e_4e43aca0",
@@ -105,6 +147,24 @@
       "writtenOn": "2021-05-31T13:36:11Z",
       "side": 1,
       "message": "Maybe we could have a list of invariants it provides here:\n\n 1- The resulting copies are equivalent to the copy defines by the arguments.\n 2- Each regions has an offset aligned to D3D12_....\n 3- The regions of the buffer defined in the copies don\u0027t go past the end of the copy. (which caused me to realize there is a bug, see the failures if you cherry-pick https://dawn-review.googlesource.com/c/dawn/+/52720 I think the rowsPerImage argument should be removed)\n 4- \u003cmore invariants?\u003e\n 5- bufferOffset.z \u003d 0\n 6- (later), bufferOffset.y \u003c\u003d 1\n\nSome of these invariants could be additionally tested in TextureCopySplitterUnittests (I\u0027m pretty sure 3, 5 and 6 aren\u0027t)",
+      "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "549bfb01_3b99d7a8",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T06:04:01Z",
+      "side": 1,
+      "message": "Good suggestion for the invariants and unittest. I added some comments about the invariants, but I feels like that there are a lot of invariants. So I didn\u0027t list the details but recommended to read the unittest. \n\nFor the unittest, I will reply on the CL for item 3. For item 5 and 6 (and maybe more items), I will add unittests later in following patch.",
+      "parentUuid": "3043036e_4e43aca0",
       "revId": "c18054f295ac05180b7649287b6c577c9855ef8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
