@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d26f84f_9ec445e8",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-06-01T18:04:01Z",
+      "side": 1,
+      "message": "I was thinking of just a C API change, not a JS API change. The JS API only needs the measureExecutionTime boolean (that it has now) to achieve this.\n\nFinish calls do already take descriptors in the C and JS APIs.",
+      "parentUuid": "cf3e5b1b_522164f3",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daad9fcf_ad4c01ba",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 3
@@ -323,6 +341,24 @@
       "side": 1,
       "message": "I think webgpu.h might allow it?",
       "parentUuid": "93ff18f2_149715ac",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9030f412_38c1a624",
+        "filename": "src/dawn_wire/client/CommandBuffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-06-01T18:04:01Z",
+      "side": 1,
+      "message": "Yeah, I\u0027m thinking of a C API change (at least a behavior change, if not the actual API surface change suggested above).",
+      "parentUuid": "c9724f4d_00efa5c3",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
