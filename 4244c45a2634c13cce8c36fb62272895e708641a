@@ -16,6 +16,24 @@
       "message": "Per my understanding, if we define rowsPerImage, we should have at least that many rows in buffer (include padding). It is similar to bytesPerRow: if we define bytesPerRow, the buffer\u0027s length should have that many bytes (including padding) if it has only one single row. Although bytesPerRow is more meaningful for a 2D texture whose height \u003e\u003d 2 and rowsPerImage is for a 2DArray or 3D texture whose depthOrArrayLayers \u003e\u003d2, but it still take effect when height is 1 and depthOrArrayLayers is 1 respectively. \n\nIf you set bytesPerRow to 256 with one single row like bufferSpec \u003d MinumumBufferSpec(2, 1), and don\u0027t increase the bufferSize to 256 bytes, I guess it will fail too. I mean, if we set bufferSpec.size \u003d bufferSpec.size * 2 + offset, it will be correct. So, this problem is caused by the test itself. \n\nWDYT?",
       "revId": "4244c45a2634c13cce8c36fb62272895e708641a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "293cdf10_f12d7711",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-01T06:47:12Z",
+      "side": 1,
+      "message": "I verified the test I just proposed, it would fail too if you set bytesPerRow (say 512) to a bigger one than the bytesPerRow indicated by copySize (say 256). \n\nThe problem is that when we allocate buffer size in CopyTests.cpp, we don\u0027t calculate buffer size according to copySize, we don\u0027t respect bufferSpec\u0027s bytesPerRow and rowsPerImage. I feel like this problem is caused by the test code itself. I will submit a CL to fix it.",
+      "parentUuid": "b7b0081d_46f29f07",
+      "revId": "4244c45a2634c13cce8c36fb62272895e708641a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
