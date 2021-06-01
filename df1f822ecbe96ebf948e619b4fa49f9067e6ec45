@@ -16,6 +16,23 @@
       "message": "PTAL! Chromium CL is https://chromium-review.googlesource.com/c/chromium/src/+/2928819",
       "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3d686b_ac7b2654",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-01T16:38:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
