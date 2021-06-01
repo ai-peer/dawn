@@ -33,6 +33,23 @@
       "message": "LGTM with one nit. Austin PTAL too.",
       "revId": "887185aaf5792cb6389e73d08b6e37ff6bbd6dd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f524650_ff4d77a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-01T16:06:19Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "887185aaf5792cb6389e73d08b6e37ff6bbd6dd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
