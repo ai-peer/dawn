@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38db3394_d56258f7",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-02T17:38:33Z",
+      "side": 1,
+      "message": "I feel like that bytesPerRow of 512 and 768 are not well tested. Both of them are greater than 256 (the minimum allowed bytesPerRow), and one is 512B-aligned, the other is not. \n\nIn addition, when bytesPerRow is 256/512/768, multiple rows and multiple depth or array slices are not well tested. \n\nSo I added a few more tests for these situations.",
+      "range": {
+        "startLine": 243,
+        "startChar": 1,
+        "endLine": 249,
+        "endChar": 0
+      },
+      "revId": "f00bc1cc243fba6cd2d69bf30900c51fc48df1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
