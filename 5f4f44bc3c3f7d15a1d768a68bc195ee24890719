@@ -22,6 +22,30 @@
       },
       "revId": "5f4f44bc3c3f7d15a1d768a68bc195ee24890719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "413eaa86_77245e72",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-02T06:59:26Z",
+      "side": 1,
+      "message": "Done\n\nThe current unittest has already covered these situations: partial copy on y-axis (height) when data in one row straddles two rows or not. For example, we have quite a few tests that rowsPerImage is set to copySize.height * 2. \n\nI didn\u0027t find any invariant for this, it seems that they are just some copy scenarios and didn\u0027t add invariants?",
+      "parentUuid": "88b9e5c3_8c20e819",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 90
+      },
+      "revId": "5f4f44bc3c3f7d15a1d768a68bc195ee24890719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

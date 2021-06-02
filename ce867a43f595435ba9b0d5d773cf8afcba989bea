@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e25366_948a627b",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-02T06:59:26Z",
+      "side": 1,
+      "message": "Added one more test for bytesPerRow, considering that we have a test for rowsPerImage.",
+      "revId": "ce867a43f595435ba9b0d5d773cf8afcba989bea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

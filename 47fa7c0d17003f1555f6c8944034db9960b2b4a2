@@ -157,6 +157,24 @@
       "parentUuid": "98e926f6_acebd0ff",
       "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ecaa0d1_22f59094",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-02T06:59:26Z",
+      "side": 1,
+      "message": "To Corentin: I feel like that recompute the texelOffset is more straightforward, it is definitely correct. We may need to explain otherwise. So I don\u0027t think we need to explain it in code. But I did explain the two situations that can be benefited due to this change in commit log. I also inserted some testing code to capture code execution stream during unittests, it turned out that these two situation has already been covered by a lot of tests. For example, two empty row situation is covered by copySize \u003d {64, 1, 1} and bufferSpec \u003d {offset: 260, bytesPerRow: 256, ...} or bufferSpec \u003d {384, 256, ...}. But I added one more test that offset is exactly 256 and bytesPerRow is 256 and there is exactly one empty row. And I also added a couple invariants in comments. \n\nTo Austin: For the first situation I mentioned, there are two rows offset from Copy 1 to copy 0, and for the second situation, there is one row offset. So we can\u0027t simply add one bytesPerRow. And adding ifs to distinguish one row offset or two row offset is more complicated than recompute alignedOffset for copy1. In addition, adding bytesPerRow might be incorrect if it is not 512B-aligned (bytesPerRow is 256B-aligned. That\u0027s not enough. Because alignedOffset should be 512B-aligned) and it is one row offset, while recompute is definitely correct (with texelOffset.x \u003e 0).",
+      "parentUuid": "eba8d809_807d38f8",
+      "revId": "47fa7c0d17003f1555f6c8944034db9960b2b4a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
