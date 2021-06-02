@@ -16,6 +16,75 @@
       "message": "PTAL. Thanks!\n\nLMK if TextureState::OwnedInternal makes sense for the texture created from\nglEGLImageTargetTexture2DOES(). I mean, the texture object is owned by the Dawn backend,\nbut the contents are not. Not sure of the semantics.\n\nNote that I tried validating that the EGLImage\u0027s format matched the WGPU texture format.\nHowever, after a GL texture has been \"laundered\" through an EGLImage and extracted on the other\nside, the glGetTexParameter call with GL_TEXTURE_INTERNAL_FORMAT returns different results \nbetween ANGLE and native GLES drivers. One returns GL_RGBA8, the other GL_RGBA.\n",
       "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9195724_e429288d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-02T23:56:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb58dae4_f091d060",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-02T23:56:37Z",
+      "side": 1,
+      "message": "I think that OwnedInternal makes sense since presumably we have to call glDeleteTextures on the handle\n\nMaybe we can have a TODO about checking the format? like perhaps reducing the sized internal format to the unsized one, and checking if those are the same",
+      "parentUuid": "32b8ff88_c9838c7a",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de7389c6_8e7ae4d7",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-02T23:56:37Z",
+      "side": 1,
+      "message": "should we also check that it can\u0027t have sampled usage?, and tests to check validation fails",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a891e1_8321779f",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-02T23:56:37Z",
+      "side": 1,
+      "message": "unit: minor prefernce for \"using EGLImage \u003d void*\"",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
