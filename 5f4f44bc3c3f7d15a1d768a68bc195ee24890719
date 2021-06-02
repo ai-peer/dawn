@@ -46,6 +46,30 @@
       },
       "revId": "5f4f44bc3c3f7d15a1d768a68bc195ee24890719",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e76859a_523b8970",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:18:51Z",
+      "side": 1,
+      "message": "The invariant is that the buffer footprint must be entirely within the buffer, see [1] for what I think is missing from the unittest.",
+      "parentUuid": "413eaa86_77245e72",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 90
+      },
+      "revId": "5f4f44bc3c3f7d15a1d768a68bc195ee24890719",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

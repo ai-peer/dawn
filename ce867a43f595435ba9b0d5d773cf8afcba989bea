@@ -1,6 +1,46 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51c1483_0e9ddb7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:18:51Z",
+      "side": 1,
+      "message": "LGTM with small comments, thanks for the iteration!",
+      "revId": "ce867a43f595435ba9b0d5d773cf8afcba989bea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5e7af36_ea90788f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:18:51Z",
+      "side": 1,
+      "message": "nit: This argument is now unused and could be removed.",
+      "range": {
+        "startLine": 40,
+        "startChar": 79,
+        "endLine": 41,
+        "endChar": 80
+      },
+      "revId": "ce867a43f595435ba9b0d5d773cf8afcba989bea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50e25366_948a627b",
@@ -14,6 +54,41 @@
       "writtenOn": "2021-06-02T06:59:26Z",
       "side": 1,
       "message": "Added one more test for bytesPerRow, considering that we have a test for rowsPerImage.",
+      "revId": "ce867a43f595435ba9b0d5d773cf8afcba989bea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44665eb_80b2ed83",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 890,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:18:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "50e25366_948a627b",
+      "revId": "ce867a43f595435ba9b0d5d773cf8afcba989bea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f80bb8c_7d7b7ad0",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:18:51Z",
+      "side": 1,
+      "message": "[1] we should also validate that the last \"texel\" of the buffer footprint doesn\u0027t go past the end of the buffer. Otherwise D3D12 produces an error on the command list (and with the debug device too).",
       "revId": "ce867a43f595435ba9b0d5d773cf8afcba989bea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
