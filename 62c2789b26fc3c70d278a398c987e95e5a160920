@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32b8ff88_c9838c7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-02T14:16:59Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nLMK if TextureState::OwnedInternal makes sense for the texture created from\nglEGLImageTargetTexture2DOES(). I mean, the texture object is owned by the Dawn backend,\nbut the contents are not. Not sure of the semantics.\n\nNote that I tried validating that the EGLImage\u0027s format matched the WGPU texture format.\nHowever, after a GL texture has been \"laundered\" through an EGLImage and extracted on the other\nside, the glGetTexParameter call with GL_TEXTURE_INTERNAL_FORMAT returns different results \nbetween ANGLE and native GLES drivers. One returns GL_RGBA8, the other GL_RGBA.\n",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
