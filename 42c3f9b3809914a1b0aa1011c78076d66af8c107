@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab519d34_f6aa6449",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:44:29Z",
+      "side": 1,
+      "message": "Kalman filter looks good, but we should probably simplify the use of the timer.",
+      "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a710afd1_5209a076",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:44:29Z",
+      "side": 1,
+      "message": "This should probably be a unique_ptr on the Device. You can forward declare the struct in the header if necessary for the unique_ptr.",
+      "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dff67707_ad64f7ab",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T08:44:29Z",
+      "side": 1,
+      "message": "The approach to use the Kalman filter seems good but I have some concerns with the use of the timer:\n\n  - The block passed to set_event_handle can be executed on a different thread, and dispatch_source_cancel doesn\u0027t wait for current dispatches to be finished. This means that we could be deallocate \"this\" while the block is running, causing a crash.\n  - Apple mentioned that the timestamp value could change over time due to clock changes or other things. Maybe we should keep the Kalman filter running indefinitely to handle these.\n\nMaybe instead we could make the Kalman filter run inside Tick, if enough time has passed on the CPU? Something like the following:\n\n Device::Initialize() {\n   init the filter and \"best guess\" values\n   if (available) {\n     sample timestamp for the first time\n   }\n }\n \n Device::TickImpl() {\n   if (@available) {\n     sample timestamp\n     if (cpu timestamp delta \u003e 100ms (or some other constant)) {\n       run the filter.\n     }\n   }\n }",
+      "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
