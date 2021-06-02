@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab107fc_a2d0ff14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-02T21:40:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6b72dd9f036cc54ddfa83c62022eb5044cc974a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27b4f35e_e427e908",
+        "filename": "infra/config/global/generated/luci-scheduler.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-02T21:40:08Z",
+      "side": 1,
+      "message": "is role: READER the default here?",
+      "revId": "6b72dd9f036cc54ddfa83c62022eb5044cc974a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
