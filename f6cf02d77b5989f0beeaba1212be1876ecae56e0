@@ -173,6 +173,30 @@
       },
       "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc48928_e4f67d24",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-02T05:28:03Z",
+      "side": 1,
+      "message": "I did not use the time_passed / half-life of 1sec for the mixing factor, but used the covariance of the measured values instead. I simpled cpu and gpu timestamps pre second by a timer, the error is stable at ~0.0001. After about one hundred rounds, we can converge the estimated values to a stable value (Intel: 83.3332, Nvidia: 0.9999).",
+      "parentUuid": "b9d52207_36d6f908",
+      "range": {
+        "startLine": 378,
+        "startChar": 18,
+        "endLine": 378,
+        "endChar": 40
+      },
+      "revId": "f6cf02d77b5989f0beeaba1212be1876ecae56e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
