@@ -16,6 +16,74 @@
       "message": "PTAL, thanks!",
       "revId": "f730f3fc05466ab09871761a8f9997d870cc385c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51428635_f3315f48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T11:57:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f730f3fc05466ab09871761a8f9997d870cc385c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2837e688_bd9597b7",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T11:57:25Z",
+      "side": 1,
+      "message": "note: Maybe in the future we can have a \"flat descriptor\" defined in ComputePipeline.h that\u0027s reused here and for caching, etc. ValidateComputePipelineDescriptor() could produce that flat descriptor so that it is reused in other places. Please do not address this, it\u0027s just a note.",
+      "revId": "f730f3fc05466ab09871761a8f9997d870cc385c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5036488_50b70982",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T11:57:25Z",
+      "side": 1,
+      "message": "nit: Can we have a TODO to cancel the tasks that are in flight if possible?",
+      "revId": "f730f3fc05466ab09871761a8f9997d870cc385c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "687ce1ac_79c9538c",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T11:57:25Z",
+      "side": 1,
+      "message": "The reason we have this class seems to be that 1) we want to create the correct backend object and 2) we want to call Initialize on it. What do you think of:\n\n - Adding a virtual MaybeError Initialize(const ComputePipelineDescriptor* descriptor) to ComputePipelineBase. It only needs a dummy implementation in the GL backend. CreateComputePipelineAsyncTaskBase could become a friend of ComputePipelineBase for that.\n - Assume that the creation of the ComputePipeline object is free (it is just copying some stuff) and do it immediately so we pass the object in the constructor of CreateComputePipelineAsyncTaskBase (renamed to not have -Base).\n\nThen code here would become:\n\n  Ref\u003cComputePipeline\u003e pipeline \u003d new ComputePipeline(device, \u0026descriptor);\n          std::unique_ptr\u003cCreateComputePipelineAsyncTaskBase\u003e asyncTask \u003d\n            std::make_unique\u003cCreateComputePipelineAsyncTaskImpl\u003e(device, pipeline descriptor, blueprintHash,\n                                                                 callback, userdata);\n        CreateComputePipelineAsyncTaskBase::RunAsync(std::move(asyncTask));",
+      "revId": "f730f3fc05466ab09871761a8f9997d870cc385c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

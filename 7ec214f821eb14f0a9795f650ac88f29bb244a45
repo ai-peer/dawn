@@ -122,6 +122,24 @@
       "parentUuid": "27240001_d527a62e",
       "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be87986b_545c2691",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-02T11:57:25Z",
+      "side": 1,
+      "message": "Ah sorry I got confused because I didn\u0027t realize the platform was set after creation with SetPlatform. I think the current code works. Can we have a TODO somewhere to make the platform an initialization parameter of the instance in the future?",
+      "parentUuid": "cda0ce3a_9b1080c0",
+      "revId": "7ec214f821eb14f0a9795f650ac88f29bb244a45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
