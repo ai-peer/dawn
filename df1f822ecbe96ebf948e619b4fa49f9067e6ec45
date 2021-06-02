@@ -67,6 +67,23 @@
       "message": "LGTM2",
       "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571d2881_8ba11e85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-02T17:12:01Z",
+      "side": 1,
+      "message": "LGTM. The conflict is due to new toggles added EmitHLSLDebugSymbols",
+      "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
