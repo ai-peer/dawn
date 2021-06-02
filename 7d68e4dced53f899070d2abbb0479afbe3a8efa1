@@ -50,6 +50,24 @@
       "message": "Although looking at the next CL it doesn\u0027t seem to 100% match the generated configs?",
       "revId": "7d68e4dced53f899070d2abbb0479afbe3a8efa1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2316c2ae_23012221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-02T17:07:06Z",
+      "side": 1,
+      "message": "They should be semantically equivalent, I ran them through \u0027lucicfg semantic-diff\u0027. Things like the usage of mixins from the original cfgs will not be the same.\n\nIf there is something that looks like it will have a functional difference let me know.",
+      "parentUuid": "7bf68dd8_d81d64d2",
+      "revId": "7d68e4dced53f899070d2abbb0479afbe3a8efa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
