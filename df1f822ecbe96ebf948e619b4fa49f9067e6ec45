@@ -50,6 +50,23 @@
       "message": "Adding Stephen as an alternative second reviewer. PTAL!",
       "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "156ba097_64ec5ba9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-02T12:49:32Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "df1f822ecbe96ebf948e619b4fa49f9067e6ec45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
