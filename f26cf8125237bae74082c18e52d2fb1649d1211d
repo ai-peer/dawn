@@ -33,6 +33,24 @@
       "message": "u-nit: Maybe put \u003d 0 and add an empty implementation in the GL backend? We should eventually use the same pattern there as well. It\u0027s ok to have an empty implementation in the Null backend too.",
       "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f2073c1_7717a4b6",
+        "filename": "src/dawn_native/ComputePipeline.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-03T07:50:36Z",
+      "side": 1,
+      "message": "Oh having \"\u003d0\" here may cause compilation error at MakeError() as that function should return an object of ComputePipelineBase.",
+      "parentUuid": "c954f17e_c980b082",
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
