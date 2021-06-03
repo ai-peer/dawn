@@ -69,6 +69,24 @@
       "parentUuid": "7f2073c1_7717a4b6",
       "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4faa0647_1d981267",
+        "filename": "src/dawn_native/ComputePipeline.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-03T10:37:57Z",
+      "side": 1,
+      "message": "OK. Now I found it hard to handle the \"blueprint\" in GetCachedComputePipeline() if we follow your idea here. What do you think?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/Device.cpp;l\u003d493",
+      "parentUuid": "41b88979_d42a82ca",
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
