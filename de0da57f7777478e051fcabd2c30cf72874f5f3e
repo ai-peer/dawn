@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94af9a7f_c1c285c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T00:59:54Z",
+      "side": 1,
+      "message": "PTAL.\nChange the name into \"Device.Logging\" and \"setLoggingCallback\", \nmove the callbackTask class into anonymous namespace.",
+      "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

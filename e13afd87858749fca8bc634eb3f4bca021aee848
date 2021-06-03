@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68d7d7ea_70c24918",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T00:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ac16498_57326a62",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c17e084_041ac3aa",
@@ -100,6 +118,24 @@
       "writtenOn": "2021-05-31T12:22:34Z",
       "side": 1,
       "message": "[1]",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc7cc790_b4140337",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T00:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4d2e01e_ce3b4965",
       "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -153,6 +189,24 @@
       "side": 1,
       "message": "+1 for a simple callback constructor for ones that don\u0027t know the difference between shutdown and finish and loss.\n\nAlso we try to avoid putting implementation details in headers. This whole class can be defined in Device.cpp (in the anonymous namespace for example). It would remove the need for the include at [1]",
       "parentUuid": "0aea4c60_366b4f6b",
+      "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f5055e1_eddfb7df",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T00:59:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f317220a_84ba2c8e",
       "revId": "e13afd87858749fca8bc634eb3f4bca021aee848",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
