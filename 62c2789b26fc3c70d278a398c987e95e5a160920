@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbfd403f_4322ce3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de7389c6_8e7ae4d7",
@@ -72,6 +89,41 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5343b4ff_3ee13bed",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "+1, but more like an allow-list of usages. (I don\u0027t think Storage would be allowed either).",
+      "parentUuid": "de7389c6_8e7ae4d7",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "202b9442_fca7fe68",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "nit: I think this isn\u0027t necessary because the GL backend should correctly handle binding things before it uses them. (maybe one day we\u0027ll have a StateGL like ANGLE to avoid redundant calls)",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "02a891e1_8321779f",
         "filename": "src/include/dawn_native/OpenGLBackend.h",
         "patchSetId": 16
@@ -83,6 +135,97 @@
       "writtenOn": "2021-06-02T23:56:37Z",
       "side": 1,
       "message": "unit: minor prefernce for \"using EGLImage \u003d void*\"",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22670882_868fd833",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "src/common is already added above, but also since we need dawn_native_sources, this should be move to the whitebox tests just below. (that\u0027s what the difference is: end2end is not allowed to look inside dawn_native while whitebox can)",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a3a9a5_217e0a01",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "Do we want to add a TODO to remind us to make our own EGL loading eventually?",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9073c25d_2abc7441",
+        "filename": "src/tests/end2end/EGLImageWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "This fprintf/exit error handling is a new precedent, and it will completely exit the harness on an error. Instead we could do something more gracefully using the EXPECT_EQ/EXPECT_NE GTest methods?",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 24
+      },
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a823ea_f8ecf2f9",
+        "filename": "src/tests/end2end/EGLImageWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "Don\u0027t we need to delete this texture name in the destructor too?",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dbbe66b_00a2fb6a",
+        "filename": "src/tests/end2end/EGLImageWrappingTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:33:00Z",
+      "side": 1,
+      "message": "DAWN_TEST_UNSUPPORTED_IF can be put in SetUp so that it affects all the tests automatically.",
       "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
