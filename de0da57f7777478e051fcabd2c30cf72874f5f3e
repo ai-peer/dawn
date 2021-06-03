@@ -16,6 +16,57 @@
       "message": "PTAL.\nChange the name into \"Device.Logging\" and \"setLoggingCallback\", \nmove the callbackTask class into anonymous namespace.",
       "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e4892ed_00e9342c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:37:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb4060c_94e366d8",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:37:51Z",
+      "side": 1,
+      "message": "Didn\u0027t you suggested adding some levels, which everyone agreed to? I\u0027m surprised to not see them.\n\nWithout log levels, it will be hard to know what\u0027s just some prints that go to stdout vs. what\u0027s a warning that should go in the developer console.",
+      "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "257eb73f_d0199425",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:37:51Z",
+      "side": 1,
+      "message": "nit: Maybe EmitLog next to EmitDeprecationWarning? \"Logging\" is a noun so it\u0027s weird to use it as a method name (they usually start with a verb).",
+      "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
