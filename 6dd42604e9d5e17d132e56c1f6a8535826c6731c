@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1654dfe7_3c7047d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-03T17:33:44Z",
+      "side": 1,
+      "message": "Cleaned up everything to avoid having a mix of utility functions and global vars/defines.",
+      "revId": "6dd42604e9d5e17d132e56c1f6a8535826c6731c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

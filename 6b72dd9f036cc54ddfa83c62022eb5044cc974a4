@@ -50,6 +50,24 @@
       "message": "is role: READER the default here?",
       "revId": "6b72dd9f036cc54ddfa83c62022eb5044cc974a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6d6b18d_bac47aaf",
+        "filename": "infra/config/global/generated/luci-scheduler.cfg",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-03T17:33:44Z",
+      "side": 1,
+      "message": "Hmm, I don\u0027t think things were getting propegated since it was changed from default to ci. I have added specifically acls for ci.",
+      "parentUuid": "27b4f35e_e427e908",
+      "revId": "6b72dd9f036cc54ddfa83c62022eb5044cc974a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
