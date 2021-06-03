@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0bb9746_e46c45ab",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-03T15:51:48Z",
+      "side": 1,
+      "message": "Some further discussion if you want to know: the copy region number for handling \"empty first row\" issue of 3D texture copy splitter can be 2 (not 3) for some cases: \n  when we are using the 2nd copy region to copy the last row of all depth slices, if the last row can sit on the last row of this copy region after 512B alignment adjustment (no extra row is added at the end of the copy region), it is done. We don\u0027t need one more copy for the last row of the last depth slice. The copy region number will be 2 (not 3) for this case. \n  \nThat is a minor optimization we can do, we can discuss it in the other patch.",
+      "parentUuid": "cfb8b2ca_c03ca841",
+      "revId": "f00bc1cc243fba6cd2d69bf30900c51fc48df1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38db3394_d56258f7",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 7
