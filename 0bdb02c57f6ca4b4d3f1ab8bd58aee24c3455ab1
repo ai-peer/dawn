@@ -16,6 +16,166 @@
       "message": "Sorry I haven\u0027t had time to review this today. I\u0027ll take a look tomorrow.",
       "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c354cd_9478cd77",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8775b30f_df3a4e88",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "This is exactly the same as the result of [1] above, maybe we could just give a name to that and reuse it?",
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb3b2b1_c1180757",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "nit: `cpu` is always either \"x64\" or \"x86\" so we could set it directly.",
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c70afa3_307f05b7",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "nit: Why don\u0027t we set properties[\"clang\"] \u003d clang directly? Then likely we can do mvsc \u003d os.category \u003d\u003d os_category.WINDOWS and not clang",
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ebafd6_02e54665",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "nit: not msvc",
+      "range": {
+        "startLine": 226,
+        "startChar": 7,
+        "endLine": 226,
+        "endChar": 19
+      },
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f8fa54_ae099853",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "nit: this argument is unused.",
+      "range": {
+        "startLine": 267,
+        "startChar": 49,
+        "endLine": 267,
+        "endChar": 55
+      },
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78b7bc37_bb664558",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "nit: could be a keyword argument defaulting to false to not have to respecify it all the time.",
+      "range": {
+        "startLine": 294,
+        "startChar": 48,
+        "endLine": 294,
+        "endChar": 54
+      },
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c760d4c_8012d231",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T07:54:06Z",
+      "side": 1,
+      "message": "ditto, this is the same that the build_recipe we do at [1]",
+      "range": {
+        "startLine": 379,
+        "startChar": 17,
+        "endLine": 383,
+        "endChar": 6
+      },
+      "revId": "0bdb02c57f6ca4b4d3f1ab8bd58aee24c3455ab1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
