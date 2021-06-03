@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57561655_ff00d620",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-06-03T14:57:27Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "674a7c8cdc3870963ff41b32780dd98cfafff6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c46161e0_29d5e5ca",
+        "filename": "src/tests/white_box/EGLImageWrappingTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-06-03T14:57:27Z",
+      "side": 1,
+      "message": "There\u0027s still some fprtinf/exit here :)",
+      "revId": "674a7c8cdc3870963ff41b32780dd98cfafff6ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

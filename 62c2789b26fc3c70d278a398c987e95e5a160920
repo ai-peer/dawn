@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e2937cb_01bdeccf",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-06-03T14:57:27Z",
+      "side": 1,
+      "message": "Present is not a real WebGPU usages and should disappear at the Dawn interface at some point. (I haven\u0027t had time to finish the swapchain reworks) Do imported EGLimages support copying from and to? I think probably so we could allow these too.\n\nAn allow-list would be more future proof for when we add new texture usages. Something like kAllowedUsages \u003d ... if (!IsSubset(usage, kAllowedUsages))",
+      "parentUuid": "fefe036f_dc1d8d41",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "202b9442_fca7fe68",
         "filename": "src/dawn_native/opengl/DeviceGL.cpp",
         "patchSetId": 16
@@ -207,6 +225,24 @@
       "side": 1,
       "message": "Unfortunately, that conflicts with the actual definition in egl.h. If a client includes both, it will error (I tried).",
       "parentUuid": "02a891e1_8321779f",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9ff648_7bb9bc01",
+        "filename": "src/include/dawn_native/OpenGLBackend.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-06-03T14:57:27Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0e1bbd2f_a2affca7",
       "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -277,6 +313,24 @@
       "side": 1,
       "message": "This is here just to compile the tests against ANGLE\u0027s egl.h.\n\nIf we did want a TODO, I don\u0027t think this would really be the correct place (although I could be wrong).",
       "parentUuid": "80a3a9a5_217e0a01",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306eebcd_19bfda0a",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000001
+      },
+      "writtenOn": "2021-06-03T14:57:27Z",
+      "side": 1,
+      "message": "Maybe we can have a Dawn issue about this with Milestone-WebGPU-Compat (I\u0027ll create it.)",
+      "parentUuid": "58264968_ea2b8407",
       "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
