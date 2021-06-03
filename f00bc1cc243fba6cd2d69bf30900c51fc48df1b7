@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb470f9b_a7af998b",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-03T05:39:44Z",
+      "side": 1,
+      "message": "Considering compressed formats, the computation you proposed should be:\n\nalignedOffset + widthInBlocksForFootprint * heightInBlocksForFootprint * copyBufferSize.depthOrArrayLayers * textureSpec.texelBlockSizeInBytes - Let\u0027s say it is [1]).\n\nOtherwise, some compressed unittest will fail. For example, textureSpec \u003d {0, 0, 0, 4, 4, 1, 8, 4, 4}, which means copyOrigin is {0, 0, 0}, and copySize is {4, 4, 1} and blockInfo is {8, 4, 4}. Note that copySize is just one pixel for this compressed format. So you previous computation will be: 0 + 4 * 4 * 1 * 8 \u003d 128. While the updated one I wrote above is 0 + 1 * 1 * 1 * 8 \u003d 8. And minimunBufferSize is 8. \n\nHowever, I think this computation is not the maximum pixel\u0027s ending location (or bufferSizeForFootprint). I feel like the correct one should be \n\ncopySize.alignedOffset + utils::RequiredBytesInCopy(....) - Let\u0027s say it is [2]. \n\nI did miss alignedOffset in my previous patchset (as you pointed out). \n\nExample: textureSpec \u003d {origin: {0, 0, 0}, copySize: {4, 5, 3}, blockInfo: {4, 1, 1}} and bufferSpec is {offset: 0, bytesPerRow: 256, rowsPerImage: 5}.\n\ncopy.bufferSize will be {4, 5, 3}, it is a pretty easy split. \n\nEquation [1] will be: 0 + 4 * 5 * 3 * 4 \u003d 240. \nEquation [2] will be: 0 + 256 * (5 * 3 - 1) + 4 * 4, it is much bigger than 240. \n\nFor equation [1], every row length is shorten to 4 (copySize.width) * 4 (textureSpec.texelBlockSizeInBytes) \u003d 16 bytes. \nFor equation [2], every row length but the last one is 256 (bytesPerRow) bytes, the last one is 4 * 4 \u003d 16 bytes, though. \nAnd the result of equation [2] equals to minimumBufferSize. So I chose equation [2] for comparison, WDYT?\n\nIn addition, the current unittest can only ensure its correctness for 2D non-array textures (at least for this new added test code snippet). See the comment I added.",
+      "parentUuid": "d4aa3426_c6bc29e5",
+      "revId": "f00bc1cc243fba6cd2d69bf30900c51fc48df1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38db3394_d56258f7",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 7
