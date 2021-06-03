@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2c5aed_a693e450",
+        "filename": "src/dawn_native/opengl/DeviceGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-03T15:56:03Z",
+      "side": 1,
+      "message": "OK, will investigate CopyFrom/To for a subsequent CL and to an allowlist at that time.",
+      "parentUuid": "3e2937cb_01bdeccf",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "202b9442_fca7fe68",
@@ -331,6 +349,24 @@
       "side": 1,
       "message": "Maybe we can have a Dawn issue about this with Milestone-WebGPU-Compat (I\u0027ll create it.)",
       "parentUuid": "58264968_ea2b8407",
+      "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "591c6871_771ba915",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 16
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-03T15:56:03Z",
+      "side": 1,
+      "message": "Done.\n\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d810",
+      "parentUuid": "306eebcd_19bfda0a",
       "revId": "62c2789b26fc3c70d278a398c987e95e5a160920",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
