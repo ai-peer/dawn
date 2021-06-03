@@ -105,6 +105,24 @@
       "parentUuid": "4faa0647_1d981267",
       "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d760f32_85129329",
+        "filename": "src/dawn_native/ComputePipeline.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-03T11:18:03Z",
+      "side": 1,
+      "message": "OK. We can revisit this idea after OT.",
+      "parentUuid": "ad0a59de_445ddc9e",
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
