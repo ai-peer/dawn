@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1539aa7a_807b0075",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-03T15:27:58Z",
+      "side": 1,
+      "message": "I should have talked about this and pointed out that this is incorrect because I actually have already tried that expression you said: \n  alignedOffset + rowPitch * heightInBlocksForFootprint * copyBufferSize.depthOrArrayLayers * textureSpec.texelBlockSizeInBytes\n\nIt should be (considering compressed formats): \n  alignedOffset + (rowPitch / textureSpec.blockWidth) * heightInBlocksForFootprint * copyBufferSize.depthOrArrayLayers * textureSpec.texelBlockSizeInBytes. \n  \nHowever, take copySize \u003d {4, 5, 3} as an example. The mininumBufferSize is \n  0 + 256 * (5 * 3 - 1) + 4 * 4. \n  \nThe updated expression [1] will be greater than minimunBufferSize. The test will fail. You can try to run unittest, there are lots of failures (no matter it is one single row copy, one single slice copy, or multiple slices copy) if you use expression [1] or my updated version for compressed formats. \n\nI think D3D12\u0027s validation code doesn\u0027t require the last row to be aligned with rowPitch. It can calculate the exact location for the last pixel: the last pixel will never exceed the 4th pixel of the last row in my example. it is not standing on the 64th pixel of the last row. The last pixel can be prior to the 4th pixel of the last row in copy (but it will never exceed that location)\n\nSo, I still think expression [2] is the correct one and the current comparison makes sense. \n\nNote that textureSpec.offset (can be at anywhere) and copy.alignedOffset (should be 512B aligned) are different in many cases, so are the other values for calculating minimumBufferSize and bufferSizeForFootprint. the example of copySize \u003d {4, 5, 3} and bufferSpec.offset \u003d 0 is one of the simplest case in order to discuss the calculated result for different expressions, and all parameters have the same values for calculating minimumBufferSize and bufferSizeForFootprint for this special example.",
+      "parentUuid": "20f9fa60_e3a49af0",
+      "revId": "f00bc1cc243fba6cd2d69bf30900c51fc48df1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38db3394_d56258f7",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 7
