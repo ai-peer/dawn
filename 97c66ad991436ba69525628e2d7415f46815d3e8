@@ -18,6 +18,149 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88c6aa2c_6a426a8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "096c54a9_b218c293",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "typo: doing",
+      "range": {
+        "startLine": 270,
+        "startChar": 55,
+        "endLine": 270,
+        "endChar": 59
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca159638_7d0817d8",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "As discussed in our call, we can add a simple helper to TextureCopySubresource like\n\nCopyInfo\u0026 TextureCopySubresource::AddCopy() {\n  ASSERT(this.count \u003c kMaxCopyCount);\n  return this.copies[this.count++];\n}\n\nThen, maybe we don\u0027t think we need to manually set the count or do \"copy.copies[3] \u003d copy.copies[1];\" at [1].\n\nAlso, I think if in this code we have something like:\n\nCopyInfo\u0026 copy0 \u003d copy.copies[0];\nCopyInfo\u0026 copy1 \u003d copy.AddCopy();\nCopyInfo\u0026 copy2 \u003d copy.AddCopy();\n\nthe code will be a little more readable without the additional indexing and \"[i + 1]\" or \"[i + 2]\"",
+      "range": {
+        "startLine": 364,
+        "startChar": 8,
+        "endLine": 364,
+        "endChar": 26
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "976afd95_5cd1b78b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "I can\u0027t decide if I like what you did in the above code for copy1 more, or if I prefer what you did for copy2. For copy2, instead of duplicating the entire copy (copy.copies[i + 1] \u003d copy.copies[i]), and then mutating the bits that are different, you only copied the parts that had any similarity. Doing this for copy1 could look like:\n\ncopy1.alignedOffset \u003d alignedOffsetForLastRow;\ncopy1.textureOffset \u003d copy0.textureOffset;\ncopy1.textureOffset.y \u003d origin.y + copy0.copySize.height;\ncopy1.copySize \u003d {\n  copy0.copySize.width,\n  blockInfo.height,\n  copySize.depthOrArrayLayers - 1,\n};\ncopy1.bufferOffset \u003d texelOffsetForLastRow;\ncopy1.bufferSize \u003d copy0.bufferSize;\ncopy1.bufferSize.depthOrArrayLayers \u003d copySize.depthOrArrayLayers - 1;\n\n\nWhatever we do, I think we should make it consistent.",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e846c55f_b739f82b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "nit: just for clarity, ASSERT that copy.count \u003d\u003d 2 here",
+      "range": {
+        "startLine": 422,
+        "startChar": 16,
+        "endLine": 423,
+        "endChar": 12
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07d1868a_a18685b3",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 432,
+        "startChar": 16,
+        "endLine": 432,
+        "endChar": 48
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b002c62e_e9917e07",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-03T18:13:03Z",
+      "side": 1,
+      "message": "nit: comment that this is set at most once because we assert copySubresource.count \u003c\u003d 2",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "88aaadd1_b01c5a16",
