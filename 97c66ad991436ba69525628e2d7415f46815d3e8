@@ -16,6 +16,29 @@
       "message": "PTAL. This change is similar to Corentin\u0027s proposal at https://dawn-review.googlesource.com/c/dawn/+/52281. This change wrapped some code into a function and added comments in order to understand the code, though.",
       "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88aaadd1_b01c5a16",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-03T06:07:53Z",
+      "side": 1,
+      "message": "As we discussed via video conference last week, I think that it is better to \n  - keep Compute3DTextureCopySplits() at some high-level idea/explanation, just like its counterpart Compute2DTextureCopySplits(). Readers can know the rough idea of 3D texture copy splitter and they may stop here if needed. \n  - and wrap details of some special and difficult edge cases into a callee, with detailed explanations in the callee if readers do want to go into those details.",
+      "range": {
+        "startLine": 502,
+        "startChar": 8,
+        "endLine": 504,
+        "endChar": 86
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
