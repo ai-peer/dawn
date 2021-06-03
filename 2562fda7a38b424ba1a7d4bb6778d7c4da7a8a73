@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e519764e_2f0e7136",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T12:08:08Z",
+      "side": 1,
+      "message": "PTAL. Change the API into Device.EmitLog(type, message), and provide a reload\nDevice.EmitLog(message) using WGPULoggingType_Info as default type.",
+      "revId": "2562fda7a38b424ba1a7d4bb6778d7c4da7a8a73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

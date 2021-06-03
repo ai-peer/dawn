@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3187275_6b5ed913",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T12:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcb4060c_94e366d8",
+      "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "257eb73f_d0199425",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-06-03T07:37:51Z",
       "side": 1,
       "message": "nit: Maybe EmitLog next to EmitDeprecationWarning? \"Logging\" is a noun so it\u0027s weird to use it as a method name (they usually start with a verb).",
+      "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6698beb_b5ed5234",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-03T12:08:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "257eb73f_d0199425",
       "revId": "de0da57f7777478e051fcabd2c30cf72874f5f3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
