@@ -701,3 +701,30 @@ dawn_component("dawn_native") {
     }
   }
 }
+
+dawn_json_generator("wgpu_dawn_proc_gen") {
+  target = "wgpu_dawn_proc"
+  outputs = [
+    "src/dawn/wgpu_dawn_proc.cpp",
+  ]
+}
+
+dawn_component("wgpu") {
+  # Recommended GN args:
+  # dawn_complete_static_libs = true - so we can package a single lib
+  # is_debug = false
+  #  - setting this to true makes the binary size HUGE - like over 50Mb
+  # is_component_build = false
+  #  - Must either link libc++ statically, or set use_custom_libcxx=false.
+  #    Otherwise, libc++ symbols will be exported and may conflict if the
+  #    library is used outside of Chromium.
+  #  - Also, is_component_build=true with is_debug=true crashes on loading
+  #    the shared library for some reason.
+  DEFINE_PREFIX = "WGPU_DAWN"
+
+  sources = get_target_outputs(":wgpu_dawn_proc_gen")
+  deps = [
+    ":wgpu_dawn_proc_gen",
+    ":dawn_native_static",
+  ]
+}

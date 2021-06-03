@@ -35,52 +35,51 @@ namespace dawn_native {
     using RenderBundleEncoderBase = RenderBundleEncoder;
     using SurfaceBase = Surface;
 
-    namespace {
+    {% for type in by_category["object"] %}
+        {% for method in c_methods(type) %}
+            {% set suffix = as_MethodSuffix(type.name, method.name) %}
 
-        {% for type in by_category["object"] %}
-            {% for method in c_methods(type) %}
-                {% set suffix = as_MethodSuffix(type.name, method.name) %}
+            {{as_cType(method.return_type.name)}} Native{{suffix}}(
+                {{-as_cType(type.name)}} cSelf
+                {%- for arg in method.arguments -%}
+                    , {{as_annotated_cType(arg)}}
+                {%- endfor -%}
+            ) {
+                //* Perform conversion between C types and frontend types
+                auto self = reinterpret_cast<{{as_frontendType(type)}}>(cSelf);
 
-                {{as_cType(method.return_type.name)}} Native{{suffix}}(
-                    {{-as_cType(type.name)}} cSelf
-                    {%- for arg in method.arguments -%}
-                        , {{as_annotated_cType(arg)}}
-                    {%- endfor -%}
-                ) {
-                    //* Perform conversion between C types and frontend types
-                    auto self = reinterpret_cast<{{as_frontendType(type)}}>(cSelf);
-
-                    {% for arg in method.arguments %}
-                        {% set varName = as_varName(arg.name) %}
-                        {% if arg.type.category in ["enum", "bitmask"] %}
-                            auto {{varName}}_ = static_cast<{{as_frontendType(arg.type)}}>({{varName}});
-                        {% elif arg.annotation != "value" or arg.type.category == "object" %}
-                            auto {{varName}}_ = reinterpret_cast<{{decorate("", as_frontendType(arg.type), arg)}}>({{varName}});
-                        {% else %}
-                            auto {{varName}}_ = {{as_varName(arg.name)}};
-                        {% endif %}
-                    {%- endfor-%}
-
-                    {% if method.return_type.name.canonical_case() != "void" %}
-                        auto result =
-                    {%- endif %}
-                    self->API{{method.name.CamelCase()}}(
-                        {%- for arg in method.arguments -%}
-                            {%- if not loop.first %}, {% endif -%}
-                            {{as_varName(arg.name)}}_
-                        {%- endfor -%}
-                    );
-                    {% if method.return_type.name.canonical_case() != "void" %}
-                        {% if method.return_type.category == "object" %}
-                            return reinterpret_cast<{{as_cType(method.return_type.name)}}>(result);
-                        {% else %}
-                            return result;
-                        {% endif %}
+                {% for arg in method.arguments %}
+                    {% set varName = as_varName(arg.name) %}
+                    {% if arg.type.category in ["enum", "bitmask"] %}
+                        auto {{varName}}_ = static_cast<{{as_frontendType(arg.type)}}>({{varName}});
+                    {% elif arg.annotation != "value" or arg.type.category == "object" %}
+                        auto {{varName}}_ = reinterpret_cast<{{decorate("", as_frontendType(arg.type), arg)}}>({{varName}});
+                    {% else %}
+                        auto {{varName}}_ = {{as_varName(arg.name)}};
                     {% endif %}
-                }
-            {% endfor %}
-        {% endfor %}
+                {%- endfor-%}
 
+                {% if method.return_type.name.canonical_case() != "void" %}
+                    auto result =
+                {%- endif %}
+                self->API{{method.name.CamelCase()}}(
+                    {%- for arg in method.arguments -%}
+                        {%- if not loop.first %}, {% endif -%}
+                        {{as_varName(arg.name)}}_
+                    {%- endfor -%}
+                );
+                {% if method.return_type.name.canonical_case() != "void" %}
+                    {% if method.return_type.category == "object" %}
+                        return reinterpret_cast<{{as_cType(method.return_type.name)}}>(result);
+                    {% else %}
+                        return result;
+                    {% endif %}
+                {% endif %}
+            }
+        {% endfor %}
+    {% endfor %}
+
+    namespace {
         struct ProcEntry {
             WGPUProc proc;
             const char* name;

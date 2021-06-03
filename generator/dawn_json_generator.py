@@ -711,6 +711,11 @@ class MultiGeneratorFromDawnJSON(Generator):
                            'src/dawn/dawn_thread_dispatch_proc.cpp',
                            [base_params, api_params]))
 
+        if 'wgpu_dawn_proc' in targets:
+            renders.append(
+                FileRender('wgpu_dawn_proc.cpp', 'src/dawn/wgpu_dawn_proc.cpp',
+                           [base_params, api_params]))
+
         if 'dawncpp' in targets:
             renders.append(
                 FileRender('webgpu_cpp.cpp', 'src/dawn/webgpu_cpp.cpp',
