@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "20f9fa60_e3a49af0",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-03T08:42:03Z",
+      "side": 1,
+      "message": "Ah yes I forgot to take rowPitch and compressed textures into account (again \u003e_\u003e) \n\nThe overall comment is not about a specific expression, but that we need to have an invariant that all of the buffer\u0027s footprint given to D3D must be in bounds of the buffer, not just the texels copied. This is something that D3D12 validates (with the debug device it produces a validation error, in release mode it produces an error on commandList.Close()). So we need to have it as an invariant. For example this is why we need to split the very last row in the 3D split.\n\nWith your comments the expression [1] should become:\n  alignedOffset + rowPitch * heightInBlocksForFootprint * copyBufferSize.depthOrArrayLayers * textureSpec.texelBlockSizeInBytes\n\nWhich gives:  \n 0 + 256 * 5 * 3 * 4\n \nThe difference is that [1] uses 256 - 4*4 more bytes than [2].",
+      "parentUuid": "eb470f9b_a7af998b",
+      "revId": "f00bc1cc243fba6cd2d69bf30900c51fc48df1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38db3394_d56258f7",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 7
