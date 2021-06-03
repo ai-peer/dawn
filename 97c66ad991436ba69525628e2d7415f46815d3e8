@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "68383774_355f23ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-03T05:56:41Z",
+      "side": 1,
+      "message": "PTAL. This change is similar to Corentin\u0027s proposal at https://dawn-review.googlesource.com/c/dawn/+/52281. This change wrapped some code into a function and added comments in order to understand the code, though.",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
