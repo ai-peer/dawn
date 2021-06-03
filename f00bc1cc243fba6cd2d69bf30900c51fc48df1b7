@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cfb8b2ca_c03ca841",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-03T15:41:14Z",
+      "side": 1,
+      "message": "by the way, when we are handling the \"first empty row\" issue for 3D texture copy split, we need 3 copy regions and we have a separate copy region for the last row of the last depth slice, the reason is that:\n  if we use a copy region for the last row of all depth slices, the \"last row\" of each depth slice is not at the last row of the copy region because of alignment adjustment. So there will be one more row at least added into the copy region (it means that the copied \"last row\" is at the location of the last but one row in the copy region due to alignment adjustment). The out-of-bound one more row is not a problem if it is in the middle of a depth slice. But if it is at the last depth slice, it will be OOB. \n\nI mean, the OOB issue is caused by one more row, it is not cause by \"the last row need to be aligned with rowPitch\". This is my understanding. WDYT?",
+      "parentUuid": "1539aa7a_807b0075",
+      "revId": "f00bc1cc243fba6cd2d69bf30900c51fc48df1b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "38db3394_d56258f7",
         "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
         "patchSetId": 7
