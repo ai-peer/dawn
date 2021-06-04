@@ -83,6 +83,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4656e6ad_de8d120a",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T07:36:14Z",
+      "side": 1,
+      "message": "I think the compiler will complain because we use an unguarded call to [*mMtlDevice sampleTimestamps:\n\nObjective C is annoying for this.",
+      "parentUuid": "f7ccf848_36eb773f",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 48
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58cdfab1_dd44a4a5",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 12
