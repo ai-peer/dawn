@@ -33,6 +33,24 @@
       "message": "Sorry I was triaging issues all day and didn\u0027t get to this yet. I\u0027ll look on Monday",
       "revId": "4189d8dd48616144259ff4041043191280e9be2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c27e27bb_40c9039e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T18:42:15Z",
+      "side": 1,
+      "message": "SGTM. No worries.",
+      "parentUuid": "a0bf1ade_5ceb584c",
+      "revId": "4189d8dd48616144259ff4041043191280e9be2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

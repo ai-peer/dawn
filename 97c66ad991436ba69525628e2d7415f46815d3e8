@@ -354,6 +354,24 @@
       "message": "nit: This is an implementation detail of TextureCopySplitter.cpp so unless we want to use it in unittests, it doesn\u0027t need to appear in the header.",
       "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6185af8c_bc167833",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T18:42:15Z",
+      "side": 1,
+      "message": "Done. I can add it back if we need it in unittest in later patches. Btw, I will run unittests for 3D texture copy splitter when the basic parts are landed. Right now 3D texture copy splitter are far from mature, we need to skip a lot of tests in order to make bots happy if we run unittest. It is annoying, with little benefit.",
+      "parentUuid": "014b6b7d_3b66f609",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
