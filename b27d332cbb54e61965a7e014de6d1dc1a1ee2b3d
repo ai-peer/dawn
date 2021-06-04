@@ -50,6 +50,23 @@
       "message": "Jiawei, PTAL!",
       "revId": "b27d332cbb54e61965a7e014de6d1dc1a1ee2b3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc584083_37cb57ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T04:53:06Z",
+      "side": 1,
+      "message": "lgtm!",
+      "revId": "b27d332cbb54e61965a7e014de6d1dc1a1ee2b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
