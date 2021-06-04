@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "b27d332cbb54e61965a7e014de6d1dc1a1ee2b3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c82bece_db470093",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T03:48:51Z",
+      "side": 1,
+      "message": "Jiawei, PTAL!",
+      "revId": "b27d332cbb54e61965a7e014de6d1dc1a1ee2b3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
