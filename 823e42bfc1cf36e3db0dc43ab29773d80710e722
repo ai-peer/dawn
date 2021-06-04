@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1576222_e48c37c4",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "this is done, and I don\u0027t think the comment is about clamping for robustness",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f9e3ffe_894a8d17",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "note: I\u0027m just removing TODOs that say to consider doing something without any clear reason why it needs to be better. We can file bugs when we have concrete perf issues.",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "201ff6e6_0d8ed9c6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "filed a bug about this. I don\u0027t think the spec says anything about what happens when the value is \u003e 255",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dba6728_b535463b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "Think this is done now?",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b883a2f_0a8bc9ea",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "not filing a bug because do we care about high versions of OpenGL or is this really just going to be mostly for ES?",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11186ea5_b2d7b905",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "that ship has sailed :P",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f92b530_ab7c01f6",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "I\u0027m pretty sure I tried this before and it matters on ANGLE",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3496942d_6e6ae010",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T21:05:58Z",
+      "side": 0,
+      "message": "I think we\u0027ve decided this is \"no\" but maybe post OT",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
