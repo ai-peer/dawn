@@ -165,6 +165,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbf3e774_5751fc74",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T01:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd9b953_a32c00fb",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 32
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2130e7de_f9b55e35",
@@ -178,6 +202,30 @@
       "writtenOn": "2021-06-04T01:27:05Z",
       "side": 1,
       "message": "We\u0027re trying to track work to be done in bugs instead of leaving references to ourseelves in the code. Can you make this crbug.com/dawn/826 ?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 92
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6aa857b0_5086c237",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T01:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2130e7de_f9b55e35",
       "range": {
         "startLine": 151,
         "startChar": 0,
@@ -211,6 +259,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5105da_80965526",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T01:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96cff945_6818aeee",
+      "range": {
+        "startLine": 253,
+        "startChar": 20,
+        "endLine": 253,
+        "endChar": 41
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe1f66c1_ffca1f80",
@@ -224,6 +296,30 @@
       "writtenOn": "2021-06-04T01:27:05Z",
       "side": 1,
       "message": "crbug.com/dawn/832",
+      "range": {
+        "startLine": 68,
+        "startChar": 12,
+        "endLine": 68,
+        "endChar": 33
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72708425_1ca5ea67",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T01:48:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe1f66c1_ffca1f80",
       "range": {
         "startLine": 68,
         "startChar": 12,
