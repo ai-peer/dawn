@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76bbaa8_46d52e87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T12:17:57Z",
+      "side": 1,
+      "message": "Still LGTM feel free to CQ after the last comment.",
+      "revId": "6310d0185ece334b4d6df71efed58d8be7d44d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34b7f416_19ae0a46",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T12:17:57Z",
+      "side": 1,
+      "message": "This statement does nothing?",
+      "revId": "6310d0185ece334b4d6df71efed58d8be7d44d0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
