@@ -143,6 +143,8 @@ namespace dawn_native {
             // ASSERT isn't true, then additional validation on bytesPerRow must be added.
             const bool hasMultipleAspects = !HasOneBit(format.aspects);
             ASSERT(hasMultipleAspects ||
+                   (format.format == wgpu::TextureFormat::Depth24Plus &&
+                    format.aspectInfo[0].block.byteSize == 0) ||
                    (kTextureBytesPerRowAlignment % format.aspectInfo[0].block.byteSize) == 0);
 
             table[index] = format;
@@ -297,14 +299,13 @@ namespace dawn_native {
 
         // Depth-stencil formats
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4);
-        AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 4);
+        // TODO(crbug.com/dawn/843): Unsized formats could probably be handled more robustly.
+        AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 0 /* unsized */);
         // TODO(dawn:666): Implement the stencil8 format
         AddStencilFormat(wgpu::TextureFormat::Stencil8);
-        // TODO(cwallez@chromium.org): It isn't clear if this format should be copyable
-        // because its size isn't well defined, is it 4, 5 or 8?
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
                               Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, true);
-	// TODO(dawn:690): Implement Depth16Unorm, Depth24UnormStencil8, Depth32FloatStencil8.
+        // TODO(dawn:690): Implement Depth16Unorm, Depth24UnormStencil8, Depth32FloatStencil8.
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsExtensionEnabled(Extension::TextureCompressionBC);
