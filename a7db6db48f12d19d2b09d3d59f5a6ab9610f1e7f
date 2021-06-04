@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8397456a_356dc136",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T18:04:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "697bfc4d_904e4804",
+      "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a0cb88f_e7ca90b5",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-06-04T08:33:31Z",
       "side": 1,
       "message": "ditto",
+      "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcf860f1_bb0b29fd",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T18:04:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a0cb88f_e7ca90b5",
       "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

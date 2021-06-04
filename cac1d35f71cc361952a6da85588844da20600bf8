@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "494d3423_5c731e9e",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T18:04:45Z",
+      "side": 0,
+      "message": "I made it 0, but it would probably be bad if we ended up reading this value somewhere for computations. I don\u0027t think we do but it would be nice to enforce it doesn\u0027t happen. Filed a bug for it.",
+      "parentUuid": "5a371b70_b6ec5921",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "502bf85b_7e15585b",
