@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb366395_955de569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T01:27:05Z",
+      "side": 1,
+      "message": "still LGTM too. Some comments about renaming the bug references.",
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c954f17e_c980b082",
@@ -121,6 +138,98 @@
       "side": 1,
       "message": "OK. We can revisit this idea after OT.",
       "parentUuid": "ad0a59de_445ddc9e",
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebd9b953_a32c00fb",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T01:27:05Z",
+      "side": 1,
+      "message": "can you make this crbug.com/dawn/529 ?",
+      "range": {
+        "startLine": 72,
+        "startChar": 12,
+        "endLine": 72,
+        "endChar": 32
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2130e7de_f9b55e35",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T01:27:05Z",
+      "side": 1,
+      "message": "We\u0027re trying to track work to be done in bugs instead of leaving references to ourseelves in the code. Can you make this crbug.com/dawn/826 ?",
+      "range": {
+        "startLine": 151,
+        "startChar": 0,
+        "endLine": 151,
+        "endChar": 92
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96cff945_6818aeee",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T01:27:05Z",
+      "side": 1,
+      "message": "crbug.com/dawn/826",
+      "range": {
+        "startLine": 253,
+        "startChar": 20,
+        "endLine": 253,
+        "endChar": 41
+      },
+      "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1f66c1_ffca1f80",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T01:27:05Z",
+      "side": 1,
+      "message": "crbug.com/dawn/832",
+      "range": {
+        "startLine": 68,
+        "startChar": 12,
+        "endLine": 68,
+        "endChar": 33
+      },
       "revId": "f26cf8125237bae74082c18e52d2fb1649d1211d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
