@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "86909a78_91f64098",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T08:33:31Z",
+      "side": 1,
+      "message": "nit: Bug: all the bugs referenced in the TODOs?\n\n\n\n\nJust joking let\u0027s not do that xD",
+      "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d62a92ea_09af5d65",
@@ -14,6 +31,57 @@
       "writtenOn": "2021-06-04T02:49:27Z",
       "side": 1,
       "message": "not done yet, but first pass through the TODOs",
+      "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86751fce_bd84a536",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T08:33:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697bfc4d_904e4804",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T08:33:31Z",
+      "side": 1,
+      "message": "nit: we could use dawn:NonCopyable",
+      "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a0cb88f_e7ca90b5",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T08:33:31Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "a7db6db48f12d19d2b09d3d59f5a6ab9610f1e7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
