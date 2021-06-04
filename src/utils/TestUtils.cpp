@@ -54,7 +54,7 @@ namespace utils {
 
         layout.bytesPerImage = layout.bytesPerRow * rowsPerImage;
 
-        // TODO(kainino@chromium.org): Remove this intermediate variable.
+        // TODO(crbug.com/dawn/547): Remove this intermediate variable.
         // It is currently needed because of an issue in the D3D12 copy splitter
         // (or maybe in D3D12 itself?) which requires there to be enough room in the
         // buffer for the last image to have a height of `rowsPerImage` instead of

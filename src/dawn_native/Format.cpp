@@ -300,11 +300,9 @@ namespace dawn_native {
         AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 4);
         // TODO(dawn:666): Implement the stencil8 format
         AddStencilFormat(wgpu::TextureFormat::Stencil8);
-        // TODO(cwallez@chromium.org): It isn't clear if this format should be copyable
-        // because its size isn't well defined, is it 4, 5 or 8?
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
                               Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, true);
-	// TODO(dawn:690): Implement Depth16Unorm, Depth24UnormStencil8, Depth32FloatStencil8.
+        // TODO(dawn:690): Implement Depth16Unorm, Depth24UnormStencil8, Depth32FloatStencil8.
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsExtensionEnabled(Extension::TextureCompressionBC);

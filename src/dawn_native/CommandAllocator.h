@@ -66,7 +66,6 @@ namespace dawn_native {
 
     class CommandAllocator;
 
-    // TODO(cwallez@chromium.org): prevent copy for both iterator and allocator
     class CommandIterator {
       public:
         CommandIterator();
@@ -74,6 +73,9 @@ namespace dawn_native {
 
         CommandIterator(CommandIterator&& other);
         CommandIterator& operator=(CommandIterator&& other);
+
+        CommandIterator(const CommandIterator& other) = delete;
+        CommandIterator& operator=(const CommandIterator& other) = delete;
 
         CommandIterator(CommandAllocator&& allocator);
         CommandIterator& operator=(CommandAllocator&& allocator);
@@ -148,6 +150,9 @@ namespace dawn_native {
       public:
         CommandAllocator();
         ~CommandAllocator();
+
+        CommandAllocator(const CommandAllocator& other) = delete;
+        CommandAllocator& operator=(const CommandAllocator& other) = delete;
 
         template <typename T, typename E>
         T* Allocate(E commandId) {
