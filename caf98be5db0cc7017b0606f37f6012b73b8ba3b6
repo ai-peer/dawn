@@ -33,6 +33,75 @@
       "message": "u-nit: You can just declare struct KalmanInfo; and put the details in the .cpp file.",
       "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f4849b_6b8c75a2",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T07:34:12Z",
+      "side": 1,
+      "message": "I think we only need to compute this when timestamp query is supported?",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 98
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7ccf848_36eb773f",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T07:34:12Z",
+      "side": 1,
+      "message": "Is it enough just to check if timestamp query is supported or not? I think without timestamp query the following operations are all meaningless and should not be executed.\n\nSame question at [1].",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 48
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58cdfab1_dd44a4a5",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-04T07:34:12Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 234,
+        "startChar": 12,
+        "endLine": 234,
+        "endChar": 48
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
