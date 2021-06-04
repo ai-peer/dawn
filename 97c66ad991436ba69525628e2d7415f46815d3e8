@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b79bf6_9c8ae649",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "096c54a9_b218c293",
+      "range": {
+        "startLine": 270,
+        "startChar": 55,
+        "endLine": 270,
+        "endChar": 59
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca159638_7d0817d8",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-06-03T18:13:03Z",
       "side": 1,
       "message": "As discussed in our call, we can add a simple helper to TextureCopySubresource like\n\nCopyInfo\u0026 TextureCopySubresource::AddCopy() {\n  ASSERT(this.count \u003c kMaxCopyCount);\n  return this.copies[this.count++];\n}\n\nThen, maybe we don\u0027t think we need to manually set the count or do \"copy.copies[3] \u003d copy.copies[1];\" at [1].\n\nAlso, I think if in this code we have something like:\n\nCopyInfo\u0026 copy0 \u003d copy.copies[0];\nCopyInfo\u0026 copy1 \u003d copy.AddCopy();\nCopyInfo\u0026 copy2 \u003d copy.AddCopy();\n\nthe code will be a little more readable without the additional indexing and \"[i + 1]\" or \"[i + 2]\"",
+      "range": {
+        "startLine": 364,
+        "startChar": 8,
+        "endLine": 364,
+        "endChar": 26
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49f597c8_723de870",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "Done. Good suggestion. I wanted to make all 3 copy regions adjacent to each other. But that is not needed.",
+      "parentUuid": "ca159638_7d0817d8",
       "range": {
         "startLine": 364,
         "startChar": 8,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aebe4636_b7576627",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "Done. I thought copy1 \u003d copy0 could save a couple lines of code. It is not a big deal.",
+      "parentUuid": "976afd95_5cd1b78b",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e846c55f_b739f82b",
@@ -111,6 +177,30 @@
       "writtenOn": "2021-06-03T18:13:03Z",
       "side": 1,
       "message": "nit: just for clarity, ASSERT that copy.count \u003d\u003d 2 here",
+      "range": {
+        "startLine": 422,
+        "startChar": 16,
+        "endLine": 423,
+        "endChar": 12
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c6a0191_4f09470a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "No need any more.",
+      "parentUuid": "e846c55f_b739f82b",
       "range": {
         "startLine": 422,
         "startChar": 16,
@@ -144,6 +234,53 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d8e7c6_67e989d5",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07d1868a_a18685b3",
+      "range": {
+        "startLine": 432,
+        "startChar": 16,
+        "endLine": 432,
+        "endChar": 48
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "950771a9_8642969a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "I distinguished different cases for \"empty first row\" issue for two reasons:\n  1) I want to make 3 copy regions to be adjacent for one data block. But  it looks like that it is not important. \n  2) I can transfer appropriate buffer offset (it is \"offset\" for the entire copy, or \"copy.copies[0].alignedOffset + bytesPerRow\") for the copy region with \"first empty row\" issue. Buffer offset is needed during re-computation. But we can retrieve the buffer offset from the copy region via a function ComputeBufferLinearOffset(), which is the reversal of ComputeTexelOffsets(). \n  \nSo we can totally remove the details and say: just give me the copy region with \"empty first row\", we can correct it for 3D textures. We don\u0027t care about other factors like whether a row of data straddle two rows, etc.",
+      "range": {
+        "startLine": 439,
+        "startChar": 49,
+        "endLine": 439,
+        "endChar": 91
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b002c62e_e9917e07",
@@ -157,6 +294,24 @@
       "writtenOn": "2021-06-03T18:13:03Z",
       "side": 1,
       "message": "nit: comment that this is set at most once because we assert copySubresource.count \u003c\u003d 2",
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63d7709f_2dae0445",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b002c62e_e9917e07",
       "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

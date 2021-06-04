@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "229db0ba_91aed054",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-04T04:30:42Z",
+      "side": 1,
+      "message": "Thanks for your review, Austin. Now it is simpler. I also revised the comments and use some lists in order to prevent readers lost in the comments when reading it.  ",
+      "revId": "4189d8dd48616144259ff4041043191280e9be2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
