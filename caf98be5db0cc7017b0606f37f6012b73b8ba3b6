@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef4a873b_2c42fff7",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T12:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da510933_3e306a44",
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48f4849b_6b8c75a2",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-06-04T07:34:12Z",
       "side": 1,
       "message": "I think we only need to compute this when timestamp query is supported?",
+      "range": {
+        "startLine": 93,
+        "startChar": 8,
+        "endLine": 95,
+        "endChar": 98
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9abd902_d2f65839",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T12:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48f4849b_6b8c75a2",
       "range": {
         "startLine": 93,
         "startChar": 8,
@@ -129,6 +171,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c118c1c4_4b86c8c1",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T12:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff87c3ac_61cf8911",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 97,
+        "endChar": 48
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58cdfab1_dd44a4a5",
@@ -152,6 +218,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "48968ab1_6fb14581",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T12:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58cdfab1_dd44a4a5",
+      "range": {
+        "startLine": 234,
+        "startChar": 12,
+        "endLine": 234,
+        "endChar": 48
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6dc72399_aa219ee3",
@@ -165,6 +255,30 @@
       "writtenOn": "2021-06-04T08:51:12Z",
       "side": 1,
       "message": "[2]",
+      "range": {
+        "startLine": 238,
+        "startChar": 16,
+        "endLine": 238,
+        "endChar": 54
+      },
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f93218e_ce218a80",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 12
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T12:15:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6dc72399_aa219ee3",
       "range": {
         "startLine": 238,
         "startChar": 16,
