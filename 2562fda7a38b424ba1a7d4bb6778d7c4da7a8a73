@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "2562fda7a38b424ba1a7d4bb6778d7c4da7a8a73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb409e65_8727ea77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-04T02:51:03Z",
+      "side": 1,
+      "message": "PTAL. Move the declaration and definition of Device::EmitLog after EmitDeprecationWarning.",
+      "revId": "2562fda7a38b424ba1a7d4bb6778d7c4da7a8a73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
