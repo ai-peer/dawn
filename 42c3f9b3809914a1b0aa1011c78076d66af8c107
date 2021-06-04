@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5146fb0_fab4cfe8",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T05:07:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a710afd1_5209a076",
+      "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dff67707_ad64f7ab",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-06-02T08:44:29Z",
       "side": 1,
       "message": "The approach to use the Kalman filter seems good but I have some concerns with the use of the timer:\n\n  - The block passed to set_event_handle can be executed on a different thread, and dispatch_source_cancel doesn\u0027t wait for current dispatches to be finished. This means that we could be deallocate \"this\" while the block is running, causing a crash.\n  - Apple mentioned that the timestamp value could change over time due to clock changes or other things. Maybe we should keep the Kalman filter running indefinitely to handle these.\n\nMaybe instead we could make the Kalman filter run inside Tick, if enough time has passed on the CPU? Something like the following:\n\n Device::Initialize() {\n   init the filter and \"best guess\" values\n   if (available) {\n     sample timestamp for the first time\n   }\n }\n \n Device::TickImpl() {\n   if (@available) {\n     sample timestamp\n     if (cpu timestamp delta \u003e 100ms (or some other constant)) {\n       run the filter.\n     }\n   }\n }",
+      "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13b1c7e6_e867f769",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-04T05:07:12Z",
+      "side": 1,
+      "message": "\u003e   - The block passed to set_event_handle can be executed on a different thread, and dispatch_source_cancel doesn\u0027t wait for current dispatches to be finished. This means that we could be deallocate \"this\" while the block is running, causing a crash.\n\nUse dispatch_source_set_timer could get more precise time interval, which can help calculate the timestamp period with small error. The error range of the period calculated in Tick is slightly higher, and we need to sample the timestamps for many times to get the passed time. Another reason to use time is to stop the calculation once the filter value is converaged to an optimal value. But starting a differen thread may not be a good idea.\n\n\u003e   - Apple mentioned that the timestamp value could change over time due to clock changes or other things. Maybe we should keep the Kalman filter running indefinitely to handle these.\n\nThe GPU timestamps are sampled from GPU counter, and the time interval (period) for each increase of 1 is fixed （verified on two Intel GPUs with different frequencies, their timestamp period are same).\nBecause Metal has no API to get the period directly, we need to calculate this value, the calculated period error is caused by sampling cpu/gpu timestamps, not caused by the changes of gpu counter or timestamp，so I think we can stop the calculation when we get the optimal value, not need to keep running the filter to get a same value again.",
+      "parentUuid": "dff67707_ad64f7ab",
       "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
