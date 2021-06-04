@@ -177,6 +177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b3cf44_dec015fd",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8e35a373_10a42f64",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b6e0bc9_0f6dbc65",
@@ -190,6 +208,24 @@
       "writtenOn": "2021-05-31T16:23:00Z",
       "side": 1,
       "message": "nit: implementation details should be in the .cpp and inlined with LLVM LTCG",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af0e02f_cb74d214",
+        "filename": "src/dawn_native/CommandEncoder.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b6e0bc9_0f6dbc65",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -224,6 +260,30 @@
       "writtenOn": "2021-05-31T16:23:00Z",
       "side": 1,
       "message": "nit: this accessor\u0027s name seems like it actually does something. Maybe it could be ShouldMeasureExecutionTime?",
+      "range": {
+        "startLine": 546,
+        "startChar": 29,
+        "endLine": 546,
+        "endChar": 49
+      },
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9064ae19_68885c8b",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5231e8d3_0b71f2f0",
       "range": {
         "startLine": 546,
         "startChar": 29,
@@ -287,6 +347,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4594e9cd_436c2cef",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea2b3bd7_ceb29bff",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "975b9ab5_e819bc8a",
@@ -300,6 +378,30 @@
       "writtenOn": "2021-05-28T00:57:53Z",
       "side": 1,
       "message": "nit: command buffer",
+      "range": {
+        "startLine": 57,
+        "startChar": 44,
+        "endLine": 57,
+        "endChar": 57
+      },
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d0df644_37ed7b94",
+        "filename": "src/dawn_wire/client/CommandBuffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "975b9ab5_e819bc8a",
       "range": {
         "startLine": 57,
         "startChar": 44,
@@ -359,6 +461,24 @@
       "side": 1,
       "message": "Yeah, I\u0027m thinking of a C API change (at least a behavior change, if not the actual API surface change suggested above).",
       "parentUuid": "c9724f4d_00efa5c3",
+      "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cc00853_d5421c5d",
+        "filename": "src/dawn_wire/client/CommandBuffer.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "This seems like a sensible idea, but I\u0027ve discovered that the generators don\u0027t expect callbacks in any dictionaries at this point (this would be our first use of them) so it\u0027s slightly more involved than expected.",
+      "parentUuid": "9030f412_38c1a624",
       "revId": "855d977c2c5185c37cb864c205bf0124fa0688eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

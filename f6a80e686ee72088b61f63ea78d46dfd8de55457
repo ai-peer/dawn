@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af7f8a9e_a8804266",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-04T20:27:07Z",
+      "side": 1,
+      "message": "Addressed some feedback, but not the suggestion to convert to a single-callback model. Given that we still have some open questions about how this should work and it appears we\u0027re de-prioritizing it for OT in favor of simply using timestamps, I\u0027m going to leave this alone for now but keep it open for me or someone else to use as a starting point if/when we want to prioritize it again in the future.",
+      "revId": "f6a80e686ee72088b61f63ea78d46dfd8de55457",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
