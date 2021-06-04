@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4613c922_cc4c8378",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "I feel like we don\u0027t need this TODO and this just is part of the task of implementing GPULimits",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45e98ad8_d6fb81bb",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "we have this already elsewhere where we check the ranges don\u0027t overlap",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1bf2492_f6e35d36",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "block size isn\u0027t defined here anymore. Maybe the comment applies to Depth24Plus though. idk set blockSize to 0 there?",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "502bf85b_7e15585b",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "I filed a bug about this",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "309c13b2_b2bf19ee",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "this is the case now. it bubbles up to ::Initialize()",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc1b3c3_78b1d53a",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "this is referring to making mFormat a reference instead of a value. THat\u0027s done now",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6b1dd7b_b9624607",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "Intern days heh. I don\u0027t think this to be a containts. We do need to be careful about zero-init stuff which I filed a bug for.",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22c1ba68_decadab6",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "I thought this was stale. I realized just now this TODO is talking about returning a ref to a buffer instead of making a new one. TBH it feels not worth it for this kind of edge case though.",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df3999c1_a3a55771",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-04T02:49:27Z",
+      "side": 0,
+      "message": "I don\u0027t think this comment applies. The offset should be 8-aligned but the size only needs to be 4-aligned. Reading back a size that is not a multiple of 8 is an application bug but valid usage of the API.",
+      "revId": "cac1d35f71cc361952a6da85588844da20600bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
