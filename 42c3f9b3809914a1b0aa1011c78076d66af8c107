@@ -86,6 +86,24 @@
       "parentUuid": "dff67707_ad64f7ab",
       "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a699f7c_623b1473",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T07:15:42Z",
+      "side": 1,
+      "message": "Thanks for the change to not use the dispatch, I agree that the results would make more sense, but the threading is non-trivial.\n\nOk thanks for the explanation for why we can stop the computation. It will be easy to change later if we find devices where the timestamp period varies over time.",
+      "parentUuid": "13b1c7e6_e867f769",
+      "revId": "42c3f9b3809914a1b0aa1011c78076d66af8c107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

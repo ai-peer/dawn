@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d0311f_3a7fe85d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T07:15:42Z",
+      "side": 1,
+      "message": "LGTM. Jiawei or Austin can you take another look?",
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da510933_3e306a44",
+        "filename": "src/dawn_native/metal/DeviceMTL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-04T07:15:42Z",
+      "side": 1,
+      "message": "u-nit: You can just declare struct KalmanInfo; and put the details in the .cpp file.",
+      "revId": "caf98be5db0cc7017b0606f37f6012b73b8ba3b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
