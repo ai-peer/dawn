@@ -128,6 +128,30 @@
       },
       "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a8ed74f_8d6851b9",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T11:53:50Z",
+      "side": 1,
+      "message": "Thank you LGTM!",
+      "parentUuid": "4b5bfb69_e0b1d5a5",
+      "range": {
+        "startLine": 399,
+        "startChar": 33,
+        "endLine": 399,
+        "endChar": 53
+      },
+      "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
