@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "f8d4927aceef55d544bb4852bb2621b68129a999",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "570da8d1_a8e3ddce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T16:38:51Z",
+      "side": 1,
+      "message": "LGTM; if you don\u0027t have time to fix/suppress the failing tests, when I look at updating these zero init tests for 3d texture, I can also update them to obey these rules",
+      "revId": "f8d4927aceef55d544bb4852bb2621b68129a999",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8af4e057_ccc461aa",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T16:38:51Z",
+      "side": 1,
+      "message": "nit: \"or\"",
+      "range": {
+        "startLine": 302,
+        "startChar": 38,
+        "endLine": 302,
+        "endChar": 41
+      },
+      "revId": "f8d4927aceef55d544bb4852bb2621b68129a999",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
