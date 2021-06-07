@@ -50,6 +50,24 @@
       "message": "nit: This is done, so we could make this private:",
       "revId": "d9cb96ecc74e5d21c9fc5aedde79f5b5c036e640",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6af25d3_2ba417a3",
+        "filename": "src/dawn_native/vulkan/TextureVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T17:28:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c66cabf_96b38213",
+      "revId": "d9cb96ecc74e5d21c9fc5aedde79f5b5c036e640",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
