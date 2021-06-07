@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73ac3d7e_6c677683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T16:44:25Z",
+      "side": 1,
+      "message": "I wonder if the failing tests are the ones hitting the D3D12 validation layers area with missing depth/stencil usage",
+      "parentUuid": "570da8d1_a8e3ddce",
+      "revId": "f8d4927aceef55d544bb4852bb2621b68129a999",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8af4e057_ccc461aa",
