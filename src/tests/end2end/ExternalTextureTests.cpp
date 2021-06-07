@@ -61,6 +61,76 @@ TEST_P(ExternalTextureTests, CreateExternalTextureSuccess) {
     ASSERT_NE(externalTexture.Get(), nullptr);
 }
 
+// Tests that setting a bind group with an external texture works in a render pass.
+TEST_P(ExternalTextureTests, BindRenderPass) {
+    wgpu::Texture texture =
+        Create2DTexture(device, kWidth, kHeight, kFormat, wgpu::TextureUsage::Sampled);
+
+    // Create a texture view for the external texture
+    wgpu::TextureView externalView = texture.CreateView();
+
+    // Create an ExternalTexture from the texture view
+    wgpu::ExternalTextureDescriptor externalDesc;
+    externalDesc.plane0 = externalView;
+    externalDesc.format = kFormat;
+    wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+    // Create a bind group for a single external texture
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+
+    // Setup a simple render pass
+    wgpu::Texture renderTexture =
+        Create2DTexture(device, kWidth, kHeight, kFormat, wgpu::TextureUsage::RenderAttachment);
+    utils::ComboRenderPassDescriptor renderPass({renderTexture.CreateView()}, nullptr);
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    // Set the bind group containing an external texture
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+    {
+        pass.SetBindGroup(0, bindGroup);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+}
+
+// Tests that setting a bind group with an external texture works in a compute pass.
+TEST_P(ExternalTextureTests, BindComputePass) {
+    wgpu::Texture texture =
+        Create2DTexture(device, kWidth, kHeight, kFormat, wgpu::TextureUsage::Sampled);
+
+    // Create a texture view for the external texture
+    wgpu::TextureView externalView = texture.CreateView();
+
+    // Create an ExternalTexture from the texture view
+    wgpu::ExternalTextureDescriptor externalDesc;
+    externalDesc.plane0 = externalView;
+    externalDesc.format = kFormat;
+    wgpu::ExternalTexture externalTexture = device.CreateExternalTexture(&externalDesc);
+
+    // Create a bind group for a single external texture
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl, {{0, externalTexture}});
+
+    // Setup a simple compute pass
+    wgpu::ComputePassDescriptor computePass;
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    // Set the bind group containing an external texture
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass(&computePass);
+    {
+        pass.SetBindGroup(0, bindGroup);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+}
+
 TEST_P(ExternalTextureTests, SampleExternalTexture) {
     wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
         [[stage(vertex)]] fn main([[builtin(vertex_idx)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
