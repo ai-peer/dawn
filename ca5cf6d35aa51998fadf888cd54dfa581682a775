@@ -16,6 +16,24 @@
       "message": "Addressing previous comments from https://dawn-review.googlesource.com/c/dawn/+/47381:\n\nsrc/dawn_native/ExternalTexture.h \nL34:\nnit: this enum doesn\u0027t need to be public since it is only used for mState.\n\nsrc/tests/unittests/validation/ExternalTextureTests.cpp\nL47: \nIt isn\u0027t clear that this side effect happens when calling \"CreateBasicRenderPipeline\". Overall we shouldn\u0027t need a pipeline because the bindgroups only need to be referenced in the pass to be validated but don\u0027t need to actually be used. So we can do:\n BeginRenderPass\n SetBindGroup\n EndPass\nAnd that should be sufficient.\n\nL202:\nCould we have similar tests but for a compute pass where the bindgroup is referenced? (no need for a Dispatch call)",
       "revId": "ca5cf6d35aa51998fadf888cd54dfa581682a775",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1165a6f3_93f6d412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T19:36:04Z",
+      "side": 1,
+      "message": "The comments on src/tests/unittests/validation/ExternalTextureTests.cpp don\u0027t seem addressed?",
+      "parentUuid": "e62829b6_b13fcc09",
+      "revId": "ca5cf6d35aa51998fadf888cd54dfa581682a775",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
