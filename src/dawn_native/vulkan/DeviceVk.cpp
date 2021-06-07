@@ -249,7 +249,13 @@ namespace dawn_native { namespace vulkan {
 
         VkFence fence = VK_NULL_HANDLE;
         DAWN_TRY_ASSIGN(fence, GetUnusedFence());
-        DAWN_TRY(CheckVkSuccess(fn.QueueSubmit(mQueue, 1, &submitInfo, fence), "vkQueueSubmit"));
+        DAWN_TRY_WITH_CLEANUP(
+            CheckVkSuccess(fn.QueueSubmit(mQueue, 1, &submitInfo, fence), "vkQueueSubmit"), {
+                // If submitting to the queue fails, immediately destroy the fence tracking
+                // the submission. Since it is not added to the list of in-flight fences,
+                // not destroying it would leak the fence.
+                fn.DestroyFence(mVkDevice, fence, nullptr);
+            });
 
         // Enqueue the semaphores before incrementing the serial, so that they can be deleted as
         // soon as the current submission is finished.
