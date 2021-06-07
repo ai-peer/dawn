@@ -1,0 +1,317 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31457de5_43a55004",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "Logic LGTM with a bunch of nits, I wish it was much easier to follow, but it\u0027s not clear if the other method (in my WIP CL) if easier to follow objectively, or only subjectively.",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca3e2c7b_fa2ae99d",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "nit: OffsetToFirstCopiedTexel?",
+      "range": {
+        "startLine": 35,
+        "startChar": 17,
+        "endLine": 35,
+        "endChar": 42
+      },
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1376cdd8_82b4b7f7",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "nit: kMaxTextureCopyRegions - 1 since we\u0027re adding one just below.",
+      "range": {
+        "startLine": 46,
+        "startChar": 29,
+        "endLine": 46,
+        "endChar": 51
+      },
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f54c70_65c25acc",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "This comment is very clear. Thank you.",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b944a73b_13f9387c",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "u-u-nit: you can use empty comment lines to separate paragraph and lists for better visual separation.",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d245235b_d3506cc6",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "nit: buffer offset makes the copy start at row N.",
+      "range": {
+        "startLine": 289,
+        "startChar": 91,
+        "endLine": 290,
+        "endChar": 30
+      },
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0254637_4ee2a3dc",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7998c1b2_a052db7f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "This lines seems to apply for the drawing at [2] so it\u0027s confusing while here.\n\nHow about doing the following:\n\n \u003cfirst paragraph of that top comment including \"Then the data layout in buffer is demonstrated as below:\"\u003e\n \n Drawing at [1]\n \n The copy we mean to do is the following:\n \n   - image 0:\n   - image 1:\n   ...\n   \n (potentially detail more to explain it the buffer size would be fine for a 2D texture but we need to extend for 3D) However the buffer size includes the empty first row so the actual copy performed if we didn\u0027t do any modifications would be: \n \n   - image 0: \u003cThis list is basically the same as the list in [3]\u003e\n   - image 1:\n   ..\n   \n This is incorrect for all images except the first one.\n \n (this is the equivalent of [4])\n The solution it to split into two copies. The first one... The second one copies the last rows ...\n \n  However \u003cstuff about the very last row\u003e so we make a third copy for the very last row.\n \n  \u003cdrawing for copy 1\u003e\n  \u003cdrawing for copy 2\u003e\n  \u003cdrawing for copy 3\u003e",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac6e2a87_60cffb37",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "I think this note is a bit confusing: it introduces more mental concepts than necessary since this code is handling a single copy and it is called \"EmptyFirstRow\" already.",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea48a6c_1806913f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "[3]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b23aceea_589236e9",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "373e66a2_0f9ede37",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 338,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "[4]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b973ad29_315f124c",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "Linearizing the offset + align + recompute alignedOffset and texel offset is big hammer.\n\nFor copy1 I think we can just move 2 rows down compared to copy 0 for simpler logic: copy 1 is like copy 0 but alignedOffset +\u003d 2* bytesPerRow and the copied region (copySize and bufferOffset) is adjusted.\n\nAm I missing something?",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12fb1b68_b6e54258",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "The big hammer might make sense here, since we don\u0027t know if the last row\u0027s start found by multiplying bytesPerRow a bunch of time will be aligned to 512.\n\nOverall I feel it easier to understand the same code in https://dawn-review.googlesource.com/c/dawn/+/52281 but I don\u0027t know if it is because I wrote it or because there\u0027s less of it / we reuse copies completely.",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce82b68_a86e15aa",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "We use that  \u0026~static_cast\u003cuint64_t\u003e(D3D12_TEXTURE_DATA_PLACEMENT_ALIGNMENT - 1); many times in this file, can we have a helper function for it, like AlignDownForDataPlacement?",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2264d8d2_62f77804",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "[6]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5b456e7_267a5679",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "nit: as a convention we use pointers for mutable data except in a very few exceptions. So this would return a CopyInfo*",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 17
+      },
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

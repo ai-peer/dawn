@@ -281,6 +281,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffc3d209_f46dbf50",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "950771a9_8642969a",
+      "range": {
+        "startLine": 439,
+        "startChar": 49,
+        "endLine": 439,
+        "endChar": 91
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b002c62e_e9917e07",
@@ -329,6 +353,30 @@
       "writtenOn": "2021-06-03T06:07:53Z",
       "side": 1,
       "message": "As we discussed via video conference last week, I think that it is better to \n  - keep Compute3DTextureCopySplits() at some high-level idea/explanation, just like its counterpart Compute2DTextureCopySplits(). Readers can know the rough idea of 3D texture copy splitter and they may stop here if needed. \n  - and wrap details of some special and difficult edge cases into a callee, with detailed explanations in the callee if readers do want to go into those details.",
+      "range": {
+        "startLine": 502,
+        "startChar": 8,
+        "endLine": 504,
+        "endChar": 86
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "659e83e4_33659ba5",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T14:00:58Z",
+      "side": 1,
+      "message": "I think the conclusion was a bit different: we can have AddCopyInfo and use it to split off special case handling in separate function, however do the handling of special cases directly in the loop at [6]:\n\n uint32_t copyCount \u003d ...;\n for (i \u003d 0 ... copyCount) {\n   ASSERT(...)\n   \n   // foo\n   copySubresource.copies[i].bufferSize.height \u003d rowsPerImageInTexels\n   \n   if (happy case) {\n     continue;\n   }\n   \n   if (single row) {\n     Recompute3DTextureCopyRegionsForBlockWithSingleRow(i);\n   } else {\n     Recompute3DTextureCopyRegionsForBlockWithEmptyFirstRow(i);\n   }\n }\n \n return copySubresources;",
+      "parentUuid": "88aaadd1_b01c5a16",
       "range": {
         "startLine": 502,
         "startChar": 8,
