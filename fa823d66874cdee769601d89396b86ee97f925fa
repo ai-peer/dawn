@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1213de09_fb3dda46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T16:11:46Z",
+      "side": 1,
+      "message": "LGTM too. Can we just call it DumpTranslatedShaders though (without \"HLSL\")? It would probably be useful to enable for other backends too. You don\u0027t need to do that work now though.",
+      "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76d9c95f_628c7acb",
