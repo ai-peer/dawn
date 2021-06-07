@@ -104,6 +104,30 @@
       },
       "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5bfb69_e0b1d5a5",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-07T11:52:46Z",
+      "side": 1,
+      "message": "https://developer-chrome-com.imgix.net/image/admin/mfrXFockwLgV5Bnm6xDM.png?w\u003d1252\n\nFrom top to bottom are info, warning and error.",
+      "parentUuid": "2bf6e7a7_63c95d40",
+      "range": {
+        "startLine": 399,
+        "startChar": 33,
+        "endLine": 399,
+        "endChar": 53
+      },
+      "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
