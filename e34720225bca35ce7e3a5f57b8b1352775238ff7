@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51dcb19_5bf2b678",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-07T22:20:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e34720225bca35ce7e3a5f57b8b1352775238ff7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ccda7ef_e55596f5",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-07T22:20:26Z",
+      "side": 1,
+      "message": "Is there anything we can point to in the various API specs that indicates that this is sufficient? Otherwise, I fear that we\u0027ll be tweaking this value to meet some empirical results in the future.",
+      "revId": "e34720225bca35ce7e3a5f57b8b1352775238ff7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e12ab788_44196161",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-07T22:20:26Z",
+      "side": 1,
+      "message": "Nit: lots of duplicated code here. I wonder if the comparison func above could be a template arg, for which float specialized to this code? Or a lambda or ...[handwavehandwave]?",
+      "revId": "e34720225bca35ce7e3a5f57b8b1352775238ff7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
