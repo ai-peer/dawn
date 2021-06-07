@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3047e6d3_49c3500d",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T23:55:46Z",
+      "side": 1,
+      "message": "I\u0027m not sure right now. I think precision is something we\u0027ll eventually have specific testing for in the CTS, so I\u0027m okay tweaking this if needed, for now.",
+      "parentUuid": "3ccda7ef_e55596f5",
+      "revId": "e34720225bca35ce7e3a5f57b8b1352775238ff7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e12ab788_44196161",
         "filename": "src/tests/DawnTest.cpp",
         "patchSetId": 11
@@ -65,6 +83,24 @@
       "writtenOn": "2021-06-07T22:20:26Z",
       "side": 1,
       "message": "Nit: lots of duplicated code here. I wonder if the comparison func above could be a template arg, for which float specialized to this code? Or a lambda or ...[handwavehandwave]?",
+      "revId": "e34720225bca35ce7e3a5f57b8b1352775238ff7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58476560_b70e42b5",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1477,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-07T23:55:46Z",
+      "side": 1,
+      "message": "Successfully did this in a way that\u0027s much less duplication.",
+      "parentUuid": "e12ab788_44196161",
       "revId": "e34720225bca35ce7e3a5f57b8b1352775238ff7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
