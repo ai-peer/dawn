@@ -56,6 +56,30 @@
       },
       "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a76e1280_4632fe66",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-07T11:46:12Z",
+      "side": 1,
+      "message": "I chose the \"info\" level as Chrome console will display info, warning, and error messages by default, while verbose level display need to switch on manually. On the other hand, I am not sure if a dumped shader is a \"warning\" (which will have a yellow warning sign)",
+      "parentUuid": "76d9c95f_628c7acb",
+      "range": {
+        "startLine": 399,
+        "startChar": 33,
+        "endLine": 399,
+        "endChar": 53
+      },
+      "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
