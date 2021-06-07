@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "315d990f_02f118a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-07T03:15:40Z",
+      "side": 1,
+      "message": "Will have another PR to disable timestamp query on AMD for dawn:545.",
+      "revId": "8b4fb528c5982eb66b311fddfa1a990e29e08d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
