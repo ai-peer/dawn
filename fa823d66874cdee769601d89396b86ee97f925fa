@@ -80,6 +80,30 @@
       },
       "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf6e7a7_63c95d40",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T11:47:38Z",
+      "side": 1,
+      "message": "Since it is a special toggle, I guess either is fine. Do you have a screenshot of what it would look like / the difference between info and warning?",
+      "parentUuid": "a76e1280_4632fe66",
+      "range": {
+        "startLine": 399,
+        "startChar": 33,
+        "endLine": 399,
+        "endChar": 53
+      },
+      "revId": "fa823d66874cdee769601d89396b86ee97f925fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
