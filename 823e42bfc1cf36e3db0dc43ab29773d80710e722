@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28147df6_013d056b",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "f1576222_e48c37c4",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f9e3ffe_894a8d17",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-06-04T21:05:58Z",
       "side": 0,
       "message": "note: I\u0027m just removing TODOs that say to consider doing something without any clear reason why it needs to be better. We can file bugs when we have concrete perf issues.",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd93dd2c_8fdbee5b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "2f9e3ffe_894a8d17",
       "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b80ab057_57398f7b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "201ff6e6_0d8ed9c6",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dba6728_b535463b",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-06-04T21:05:58Z",
       "side": 0,
       "message": "Think this is done now?",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b96a3674_b90a49e9",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Yes",
+      "parentUuid": "5dba6728_b535463b",
       "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0161eae_f2d803b3",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "I think it will be mostly ES. I don\u0027t remember exactly what would be necessary there. We can figure out when we do benchmarks of stuff like TF.js.",
+      "parentUuid": "2b883a2f_0a8bc9ea",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11186ea5_b2d7b905",
@@ -99,6 +189,24 @@
       "writtenOn": "2021-06-04T21:05:58Z",
       "side": 0,
       "message": "that ship has sailed :P",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51fba8d2_f71d1735",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 852,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "11186ea5_b2d7b905",
       "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d492fe0_15fbc01e",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 968,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "9f92b530_ab7c01f6",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3496942d_6e6ae010",
@@ -133,6 +259,24 @@
       "writtenOn": "2021-06-04T21:05:58Z",
       "side": 0,
       "message": "I think we\u0027ve decided this is \"no\" but maybe post OT",
+      "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96aed6fe_ca0f8d0b",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T08:54:08Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "3496942d_6e6ae010",
       "revId": "823e42bfc1cf36e3db0dc43ab29773d80710e722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
