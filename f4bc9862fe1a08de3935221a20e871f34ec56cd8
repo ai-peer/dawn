@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97a9095a_64b356ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T10:19:51Z",
+      "side": 1,
+      "message": "LGTM, one comment for another item we need to do for OT.",
+      "revId": "f4bc9862fe1a08de3935221a20e871f34ec56cd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "174b3a80_3ae9f2f8",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-07T10:19:51Z",
+      "side": 1,
+      "message": "I don\u0027t think we fully implement this (and we shouldn\u0027t for OT). Can we gate it here and in other backends behind if (!Toggle::DisallowUnsafeAPIs) and add a test in UnsafeAPIsTest that the devices never support pipeline statistics queries?",
+      "revId": "f4bc9862fe1a08de3935221a20e871f34ec56cd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
