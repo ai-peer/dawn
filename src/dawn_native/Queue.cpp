@@ -376,38 +376,38 @@ namespace dawn_native {
             const CommandBufferResourceUsage& usages = commands[i]->GetResourceUsages();
 
             for (const SyncScopeResourceUsage& scope : usages.renderPasses) {
-                for (const BufferBase* buffer : scope.buffers) {
+                for (const Ref<BufferBase>& buffer : scope.buffers) {
                     DAWN_TRY(buffer->ValidateCanUseOnQueueNow());
                 }
 
-                for (const TextureBase* texture : scope.textures) {
+                for (const Ref<TextureBase>& texture : scope.textures) {
                     DAWN_TRY(texture->ValidateCanUseInSubmitNow());
                 }
 
-                for (const ExternalTextureBase* externalTexture : scope.externalTextures) {
+                for (const Ref<ExternalTextureBase>& externalTexture : scope.externalTextures) {
                     DAWN_TRY(externalTexture->ValidateCanUseInSubmitNow());
                 }
             }
 
             for (const ComputePassResourceUsage& pass : usages.computePasses) {
-                for (const BufferBase* buffer : pass.referencedBuffers) {
+                for (const Ref<BufferBase>& buffer : pass.referencedBuffers) {
                     DAWN_TRY(buffer->ValidateCanUseOnQueueNow());
                 }
-                for (const TextureBase* texture : pass.referencedTextures) {
+                for (const Ref<TextureBase>& texture : pass.referencedTextures) {
                     DAWN_TRY(texture->ValidateCanUseInSubmitNow());
                 }
-                for (const ExternalTextureBase* externalTexture : pass.referencedExternalTextures) {
+                for (const Ref<ExternalTextureBase>& externalTexture : pass.referencedExternalTextures) {
                     DAWN_TRY(externalTexture->ValidateCanUseInSubmitNow());
                 }
             }
 
-            for (const BufferBase* buffer : usages.topLevelBuffers) {
+            for (const Ref<BufferBase>& buffer : usages.topLevelBuffers) {
                 DAWN_TRY(buffer->ValidateCanUseOnQueueNow());
             }
-            for (const TextureBase* texture : usages.topLevelTextures) {
+            for (const Ref<TextureBase>& texture : usages.topLevelTextures) {
                 DAWN_TRY(texture->ValidateCanUseInSubmitNow());
             }
-            for (const QuerySetBase* querySet : usages.usedQuerySets) {
+            for (const Ref<QuerySetBase>& querySet : usages.usedQuerySets) {
                 DAWN_TRY(querySet->ValidateCanUseInSubmitNow());
             }
         }

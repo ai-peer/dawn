@@ -56,6 +56,11 @@ struct RefCountedTraits {
 template <typename T>
 class Ref : public RefBase<T*, RefCountedTraits<T>> {
   public:
+    struct ComparePointers {
+      bool operator()(const Ref& a, const Ref& b) const {
+        return a.Get() < b.Get();
+      }
+    };
     using RefBase<T*, RefCountedTraits<T>>::RefBase;
 };
 

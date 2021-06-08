@@ -76,9 +76,9 @@ namespace dawn_native {
         MaybeError ValidateFinish() const;
 
         EncodingContext mEncodingContext;
-        std::set<BufferBase*> mTopLevelBuffers;
-        std::set<TextureBase*> mTopLevelTextures;
-        std::set<QuerySetBase*> mUsedQuerySets;
+        std::set<Ref<BufferBase>, Ref<BufferBase>::ComparePointers> mTopLevelBuffers;
+        std::set<Ref<TextureBase>, Ref<TextureBase>::ComparePointers> mTopLevelTextures;
+        std::set<Ref<QuerySetBase>, Ref<QuerySetBase>::ComparePointers> mUsedQuerySets;
 
         uint64_t mDebugGroupStackSize = 0;
     };

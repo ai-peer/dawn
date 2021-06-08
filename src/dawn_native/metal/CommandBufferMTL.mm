@@ -651,7 +651,7 @@ namespace dawn_native { namespace metal {
         auto LazyClearSyncScope = [](const SyncScopeResourceUsage& scope,
                                      CommandRecordingContext* commandContext) {
             for (size_t i = 0; i < scope.textures.size(); ++i) {
-                Texture* texture = ToBackend(scope.textures[i]);
+                const Ref<Texture>& texture = ToBackend(scope.textures[i]);
 
                 // Clear subresources that are not render attachments. Render attachments will be
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the texture
@@ -663,7 +663,7 @@ namespace dawn_native { namespace metal {
                         }
                     });
             }
-            for (BufferBase* bufferBase : scope.buffers) {
+            for (const Ref<BufferBase>& bufferBase : scope.buffers) {
                 ToBackend(bufferBase)->EnsureDataInitialized(commandContext);
             }
         };

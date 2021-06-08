@@ -156,7 +156,7 @@ namespace dawn_native { namespace vulkan {
             VkPipelineStageFlags dstStages = 0;
 
             for (size_t i = 0; i < scope.buffers.size(); ++i) {
-                Buffer* buffer = ToBackend(scope.buffers[i]);
+                Buffer* buffer = ToBackend(scope.buffers[i].Get());
                 buffer->EnsureDataInitialized(recordingContext);
 
                 VkBufferMemoryBarrier bufferBarrier;
@@ -167,7 +167,7 @@ namespace dawn_native { namespace vulkan {
             }
 
             for (size_t i = 0; i < scope.textures.size(); ++i) {
-                Texture* texture = ToBackend(scope.textures[i]);
+                Texture* texture = ToBackend(scope.textures[i].Get());
 
                 // Clear subresources that are not render attachments. Render attachments will be
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the texture
@@ -504,7 +504,7 @@ namespace dawn_native { namespace vulkan {
             // because the reset command must be called outside render pass
             for (size_t i = 0; i < usages.querySets.size(); ++i) {
                 ResetUsedQuerySetsOnRenderPass(device, recordingContext->commandBuffer,
-                                               usages.querySets[i], usages.queryAvailabilities[i]);
+                                               usages.querySets[i].Get(), usages.queryAvailabilities[i]);
             }
         };
 

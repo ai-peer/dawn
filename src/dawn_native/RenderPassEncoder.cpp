@@ -223,11 +223,11 @@ namespace dawn_native {
 
                 const RenderPassResourceUsage& usages = bundles[i]->GetResourceUsage();
                 for (uint32_t i = 0; i < usages.buffers.size(); ++i) {
-                    mUsageTracker.BufferUsedAs(usages.buffers[i], usages.bufferUsages[i]);
+                    mUsageTracker.BufferUsedAs(usages.buffers[i].Get(), usages.bufferUsages[i]);
                 }
 
                 for (uint32_t i = 0; i < usages.textures.size(); ++i) {
-                    mUsageTracker.AddTextureUsage(usages.textures[i], usages.textureUsages[i]);
+                    mUsageTracker.AddTextureUsage(usages.textures[i].Get(), usages.textureUsages[i]);
                 }
             }
 
