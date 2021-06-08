@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8355cd9_83ff81ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-08T05:20:31Z",
+      "side": 1,
+      "message": "PTAL. Change the toggle name into DumpTranslatedShaders. Thanks!",
+      "revId": "79da1353b2ed00c2643aee6620a6badd3b61a9db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
