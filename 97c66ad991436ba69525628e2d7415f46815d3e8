@@ -387,6 +387,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e24db55f_0293c72b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T07:06:16Z",
+      "side": 1,
+      "message": "Done.\nWith some changes:\n  - Don\u0027t assign rowsPerImageInTexels at the beginning, because we need original value in order to distinguish the \"happy case\" from other cases. In addition, it will at least temporarily make bufferSize.height \u003c bufferOffset.y + copySize.height for some cases, which is not good.\n  - Assign rowsPerImageInTexel in \"happy case\" only for the sake above.\n  \nI think the new one is basically comparable to my previous one because it also iterates all copy regions and we need to be aware that don\u0027t change the new added copy regions.",
+      "parentUuid": "659e83e4_33659ba5",
+      "range": {
+        "startLine": 502,
+        "startChar": 8,
+        "endLine": 504,
+        "endChar": 86
+      },
+      "revId": "97c66ad991436ba69525628e2d7415f46815d3e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "014b6b7d_3b66f609",
