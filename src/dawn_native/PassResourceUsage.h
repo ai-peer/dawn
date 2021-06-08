@@ -15,10 +15,6 @@
 #ifndef DAWNNATIVE_PASSRESOURCEUSAGE_H
 #define DAWNNATIVE_PASSRESOURCEUSAGE_H
 
-#include "dawn_native/Buffer.h"
-#include "dawn_native/ExternalTexture.h"
-#include "dawn_native/Texture.h"
-#include "dawn_native/QuerySet.h"
 #include "dawn_native/SubresourceStorage.h"
 #include "dawn_native/dawn_platform.h"
 
@@ -32,9 +28,6 @@ namespace dawn_native {
     // backends. The are produced by the "Encoder" objects that finalize them on "EndPass" or
     // "Finish". Internally the "Encoder" may use the "StateTracker" to create them.
 
-    template <typename T>
-    using RefSet = std::set<Ref<T>, typename Ref<T>::ComparePointers>;
-
     class BufferBase;
     class QuerySetBase;
     class TextureBase;
@@ -46,13 +39,13 @@ namespace dawn_native {
     // buffer validation pre-computes this information so that backends with explicit barriers
     // don't have to re-compute it.
     struct SyncScopeResourceUsage {
-        std::vector<Ref<BufferBase>> buffers;
+        std::vector<BufferBase*> buffers;
         std::vector<wgpu::BufferUsage> bufferUsages;
 
-        std::vector<Ref<TextureBase>> textures;
+        std::vector<TextureBase*> textures;
         std::vector<TextureSubresourceUsage> textureUsages;
 
-        std::vector<Ref<ExternalTextureBase>> externalTextures;
+        std::vector<ExternalTextureBase*> externalTextures;
     };
 
     // Contains all the resource usage data for a compute pass.
@@ -71,9 +64,9 @@ namespace dawn_native {
         std::vector<SyncScopeResourceUsage> dispatchUsages;
 
         // All the resources referenced by this compute pass for validation in Queue::Submit.
-        RefSet<BufferBase> referencedBuffers;
-        RefSet<TextureBase> referencedTextures;
-        RefSet<ExternalTextureBase> referencedExternalTextures;
+        std::set<BufferBase*> referencedBuffers;
+        std::set<TextureBase*> referencedTextures;
+        std::set<ExternalTextureBase*> referencedExternalTextures;
     };
 
     // Contains all the resource usage data for a render pass.
@@ -83,7 +76,7 @@ namespace dawn_native {
     // RenderBundle so they can be merged into the render passes' usage on ExecuteBundles().
     struct RenderPassResourceUsage : public SyncScopeResourceUsage {
         // Storage to track the occlusion queries used during the pass.
-        std::vector<Ref<QuerySetBase>> querySets;
+        std::vector<QuerySetBase*> querySets;
         std::vector<std::vector<bool>> queryAvailabilities;
     };
 
@@ -97,9 +90,9 @@ namespace dawn_native {
         ComputePassUsages computePasses;
 
         // Resources used in commands that aren't in a pass.
-        RefSet<BufferBase> topLevelBuffers;
-        RefSet<TextureBase> topLevelTextures;
-        RefSet<QuerySetBase> usedQuerySets;
+        std::set<BufferBase*> topLevelBuffers;
+        std::set<TextureBase*> topLevelTextures;
+        std::set<QuerySetBase*> usedQuerySets;
     };
 
 }  // namespace dawn_native
