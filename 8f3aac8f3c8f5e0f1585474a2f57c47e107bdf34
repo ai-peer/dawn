@@ -16,6 +16,103 @@
       "message": "PTAL, thanks!",
       "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f6f890e_f3373ca6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T10:27:43Z",
+      "side": 1,
+      "message": "LGTM, do we have a stress test that tries to create many different compute pipelines asynchronously to find locking errors?",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e12997f9_7399d1d6",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T10:27:43Z",
+      "side": 1,
+      "message": "nit: we use \"Acquire\" in other places (like CommandEncoder.cpp) to describe that ownership of something is moved.",
+      "range": {
+        "startLine": 65,
+        "startChar": 44,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a54134_f6893c7f",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T10:27:43Z",
+      "side": 1,
+      "message": "nit: I think return std::move(mTransformedShaderModuleCache) is sufficient.",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eec27b6_7fa76812",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T10:27:43Z",
+      "side": 1,
+      "message": "Since transformedShaderModuleCache has the device, this could be moved to transformedShaderModuleCache::~TransformedShaderModuleCache. Since it is the destructor, we could also just ASSERT that the mutex isn\u0027t held.",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "062628c2_b7ec0779",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T10:27:43Z",
+      "side": 1,
+      "message": "nit: Transformed",
+      "range": {
+        "startLine": 34,
+        "startChar": 20,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
