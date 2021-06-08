@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6bd316c_6ab3eb4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-08T12:52:55Z",
+      "side": 1,
+      "message": "The lock is only useful when we create multiple compute pipelines simultaneously with the same shader module.\n\nThe end2end test CreatePipelineAsyncTest.CreateSamePipelineTwiceAtSameTime can cover this usage and has helped me catch some issue about the mutex here.",
+      "parentUuid": "8f6f890e_f3373ca6",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e12997f9_7399d1d6",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-06-08T10:27:43Z",
       "side": 1,
       "message": "nit: we use \"Acquire\" in other places (like CommandEncoder.cpp) to describe that ownership of something is moved.",
+      "range": {
+        "startLine": 65,
+        "startChar": 44,
+        "endLine": 65,
+        "endChar": 55
+      },
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70354da0_8625f3e1",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-08T12:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e12997f9_7399d1d6",
       "range": {
         "startLine": 65,
         "startChar": 44,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d37a5b2_bc6212d1",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-08T12:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06a54134_f6893c7f",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eec27b6_7fa76812",
@@ -94,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "198a7190_8d526f85",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-08T12:52:55Z",
+      "side": 1,
+      "message": "Oh sorry I failed to find a way to know if a mutex is held or not...",
+      "parentUuid": "6eec27b6_7fa76812",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "062628c2_b7ec0779",
         "filename": "src/dawn_native/vulkan/ShaderModuleVk.h",
         "patchSetId": 2
@@ -105,6 +183,30 @@
       "writtenOn": "2021-06-08T10:27:43Z",
       "side": 1,
       "message": "nit: Transformed",
+      "range": {
+        "startLine": 34,
+        "startChar": 20,
+        "endLine": 34,
+        "endChar": 31
+      },
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca453801_2cc0ff22",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-08T12:52:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "062628c2_b7ec0779",
       "range": {
         "startLine": 34,
         "startChar": 20,
