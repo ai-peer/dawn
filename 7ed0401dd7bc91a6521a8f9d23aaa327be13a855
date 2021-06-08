@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccdde91c_c3cde756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T16:31:18Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "7ed0401dd7bc91a6521a8f9d23aaa327be13a855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72b83d17_ad27c776",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T16:31:18Z",
+      "side": 1,
+      "message": "nit: this is a cool trick but very uncommon. Maybe just add ConcurrentTransformedShaderModuleCache mTransformedShaderModuleCache;",
+      "revId": "7ed0401dd7bc91a6521a8f9d23aaa327be13a855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

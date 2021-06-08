@@ -170,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52e20f9f_2ee41bb6",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T16:31:18Z",
+      "side": 1,
+      "message": "Ah there isn\u0027t really one, except try_lock + unlock, but at that point we might as well just lock.",
+      "parentUuid": "198a7190_8d526f85",
+      "revId": "8f3aac8f3c8f5e0f1585474a2f57c47e107bdf34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "062628c2_b7ec0779",
