@@ -35,6 +35,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a04c6147_939cc83a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "LGTM. Feel free to CQ after handling the last nits.",
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8c98e71_841e6cd3",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "I think the section doesn\u0027t need to mention the 2D texture array part. Just say something like:\n\n   The 2D copy we received from Compute2DTextureCopySubresource is the following:\n   \n   \u003cimage\u003e\n   \n   However if we simply expand the copy region ...",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 0
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f4736b9_a978fbb6",
@@ -48,6 +88,30 @@
       "writtenOn": "2021-06-08T17:00:37Z",
       "side": 1,
       "message": "nit: please refrain from referencing yourself in the code, and instead reference a bug: crbug.com/dawn/547. This will help us track work better",
+      "range": {
+        "startLine": 472,
+        "startChar": 24,
+        "endLine": 472,
+        "endChar": 44
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5b0fda4_ba713d8a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "FYI this is a new convention we\u0027re using after Austin triaged all TODOs in Dawn.",
+      "parentUuid": "2f4736b9_a978fbb6",
       "range": {
         "startLine": 472,
         "startChar": 24,

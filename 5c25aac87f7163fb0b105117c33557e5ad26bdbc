@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ef4471_6ca8f949",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "Whoops ^^",
+      "parentUuid": "79ccf5b8_e659a28c",
+      "range": {
+        "startLine": 46,
+        "startChar": 29,
+        "endLine": 46,
+        "endChar": 51
+      },
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29f54c70_65c25acc",
@@ -125,6 +149,24 @@
       "writtenOn": "2021-06-07T14:00:58Z",
       "side": 1,
       "message": "This comment is very clear. Thank you.",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcd0d531_4452c1a9",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "29f54c70_65c25acc",
       "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +270,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a02bc61_e7e086aa",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e0254637_4ee2a3dc",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7998c1b2_a052db7f",
@@ -315,6 +375,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "20fd3690_1629cf88",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8ea48a6c_1806913f",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b23aceea_589236e9",
@@ -328,6 +406,24 @@
       "writtenOn": "2021-06-07T14:00:58Z",
       "side": 1,
       "message": "[2]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9c57b95_6a92527f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b23aceea_589236e9",
       "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -384,6 +480,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f90d09_938c8518",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "I\u0027m not super worried about the cost of the computations for linearizing the offset, but more about the understanding cost of seeing all this code. Thank you for making the change. Agreed even the current version is not trivial.",
+      "parentUuid": "a1b0fc02_a16a90f3",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12fb1b68_b6e54258",
@@ -415,6 +529,24 @@
       "side": 1,
       "message": "I can ask you the same question, considering that I have already written the code but need to refactor it again and again without significant advantages. I still think that using a separate 3D texture copy splitter is not bad and my code was already there. We don\u0027t need to dive into the very details and explain the differences of 2D copy splitter and 3D copy splitter if so.",
       "parentUuid": "12fb1b68_b6e54258",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "682d6bbb_86dc0b55",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "I think with the updated names of helper function it makes the code slightly easier to understand. LGTM",
+      "parentUuid": "8a9c3763_b26b016f",
       "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -467,6 +599,24 @@
       "writtenOn": "2021-06-07T14:00:58Z",
       "side": 1,
       "message": "[6]",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8068486f_09a61ee9",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T17:03:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2264d8d2_62f77804",
       "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
