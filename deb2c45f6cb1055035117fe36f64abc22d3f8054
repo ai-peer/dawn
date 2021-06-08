@@ -16,6 +16,69 @@
       "message": "It should be fine now. PATL.",
       "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "478b4b50_a1b839e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-08T17:00:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f4736b9_a978fbb6",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-08T17:00:37Z",
+      "side": 1,
+      "message": "nit: please refrain from referencing yourself in the code, and instead reference a bug: crbug.com/dawn/547. This will help us track work better",
+      "range": {
+        "startLine": 472,
+        "startChar": 24,
+        "endLine": 472,
+        "endChar": 44
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09be84ac_15704607",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-08T17:00:37Z",
+      "side": 1,
+      "message": "nit: usually we put methods before members",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
