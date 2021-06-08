@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c9d8712_c93668b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-08T22:18:39Z",
+      "side": 1,
+      "message": "PTAL! Relatively simple change overall that happens to change a lot of tests, making this CL look quite a bit noisier. Bits to pay the closest attention to are the validation/deprecation warning in dawn_native/ComputePipeline.cpp, the normalization in dawn_native/Device.cpp, and the copy in dawn_wire/client/Device.cpp",
+      "revId": "faa7d918808f14ef32a90d7a60370d1ee840b660",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
