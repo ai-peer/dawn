@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "917ca19a_fc40a9a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T17:30:05Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin and Austin, although we have different opinions on some details. Please take a final look if you want, otherwise I will land it if the bots don\u0027t complain. ",
+      "revId": "6b5a4398f3fd7dcf36387a0ea47b86d030ae14fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

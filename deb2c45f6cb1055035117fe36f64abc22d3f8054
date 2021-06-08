@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "784a2baf_0c43f11b",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T17:30:05Z",
+      "side": 1,
+      "message": "Done. Make sense.",
+      "parentUuid": "f8c98e71_841e6cd3",
+      "range": {
+        "startLine": 316,
+        "startChar": 0,
+        "endLine": 325,
+        "endChar": 0
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f4736b9_a978fbb6",
@@ -122,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d894157e_5d88b972",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T17:30:05Z",
+      "side": 1,
+      "message": "Done. Gotcha. Thanks for reminding me.",
+      "parentUuid": "b5b0fda4_ba713d8a",
+      "range": {
+        "startLine": 472,
+        "startChar": 24,
+        "endLine": 472,
+        "endChar": 44
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09be84ac_15704607",
@@ -135,6 +183,30 @@
       "writtenOn": "2021-06-08T17:00:37Z",
       "side": 1,
       "message": "nit: usually we put methods before members",
+      "range": {
+        "startLine": 44,
+        "startChar": 8,
+        "endLine": 44,
+        "endChar": 28
+      },
+      "revId": "deb2c45f6cb1055035117fe36f64abc22d3f8054",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae0a5296_435cfd37",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T17:30:05Z",
+      "side": 1,
+      "message": "Done. We can\u0027t move it to the top because it must after the embedded CopyInfo\u0027s definition.",
+      "parentUuid": "09be84ac_15704607",
       "range": {
         "startLine": 44,
         "startChar": 8,

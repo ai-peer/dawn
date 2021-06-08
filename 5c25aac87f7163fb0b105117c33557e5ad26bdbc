@@ -498,6 +498,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8432e12d_fc94ed23",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T17:30:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "23f90d09_938c8518",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12fb1b68_b6e54258",
@@ -547,6 +565,24 @@
       "side": 1,
       "message": "I think with the updated names of helper function it makes the code slightly easier to understand. LGTM",
       "parentUuid": "8a9c3763_b26b016f",
+      "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6dde0b8_07dd8f09",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-08T17:30:05Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "682d6bbb_86dc0b55",
       "revId": "5c25aac87f7163fb0b105117c33557e5ad26bdbc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
