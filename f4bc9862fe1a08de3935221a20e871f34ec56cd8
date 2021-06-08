@@ -33,6 +33,24 @@
       "message": "I don\u0027t think we fully implement this (and we shouldn\u0027t for OT). Can we gate it here and in other backends behind if (!Toggle::DisallowUnsafeAPIs) and add a test in UnsafeAPIsTest that the devices never support pipeline statistics queries?",
       "revId": "f4bc9862fe1a08de3935221a20e871f34ec56cd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3080bbc6_06d8c846",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-08T07:24:46Z",
+      "side": 1,
+      "message": "We cannot check the toggles from adapters, it\u0027s only available on the device and the toggles is enabled at device creation.\n\nHow about remove PipelineStatisticsQuery from mSupportedExtensions in all backends?",
+      "parentUuid": "174b3a80_3ae9f2f8",
+      "revId": "f4bc9862fe1a08de3935221a20e871f34ec56cd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
