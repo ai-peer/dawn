@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "069ee40d_e0e8b6bc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-08T16:48:03Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7ed0401dd7bc91a6521a8f9d23aaa327be13a855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7be32e3a_6e747c84",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-08T16:48:03Z",
+      "side": 1,
+      "message": "note: we might not need this lock because no other operations on the cache happen when this is destructed, in the destructor of ShaderModule. OK to have it though as it makes the code more obviously safe.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 49
+      },
+      "revId": "7ed0401dd7bc91a6521a8f9d23aaa327be13a855",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72b83d17_ad27c776",
