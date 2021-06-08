@@ -31,6 +31,32 @@
 
 namespace dawn_native { namespace vulkan {
 
+    VkShaderModule ConcurrentTrasnformedShaderModuleCache::FindShaderModule(
+        const PipelineLayoutEntryPointPair& key) {
+        std::lock_guard<std::mutex> lock(mMutex);
+        auto iter = mTransformedShaderModuleCache.find(key);
+        if (iter != mTransformedShaderModuleCache.end()) {
+            auto cached = iter->second;
+            return cached;
+        }
+        return VK_NULL_HANDLE;
+    }
+
+    void ConcurrentTrasnformedShaderModuleCache::Emplace(const PipelineLayoutEntryPointPair& key,
+                                                         VkShaderModule value) {
+        ASSERT(value != VK_NULL_HANDLE);
+        std::lock_guard<std::mutex> lock(mMutex);
+        mTransformedShaderModuleCache.emplace(key, value);
+    }
+
+    TransformedShaderModuleCache
+    ConcurrentTrasnformedShaderModuleCache::GetAndClearTransformedShaderModuleCache() {
+        std::lock_guard<std::mutex> lock(mMutex);
+        TransformedShaderModuleCache outputCache;
+        outputCache.swap(mTransformedShaderModuleCache);
+        return outputCache;
+    }
+
     // static
     ResultOrError<Ref<ShaderModule>> ShaderModule::Create(Device* device,
                                                           const ShaderModuleDescriptor* descriptor,
@@ -113,7 +139,9 @@ namespace dawn_native { namespace vulkan {
             mHandle = VK_NULL_HANDLE;
         }
 
-        for (const auto& iter : mTransformedShaderModuleCache) {
+        auto trasnformedShaderModuleCache =
+            mTransformedShaderModuleCache.GetAndClearTransformedShaderModuleCache();
+        for (const auto& iter : trasnformedShaderModuleCache) {
             device->GetFencedDeleter()->DeleteWhenUnused(iter.second);
         }
     }
@@ -131,10 +159,10 @@ namespace dawn_native { namespace vulkan {
         ASSERT(GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator));
 
         auto cacheKey = std::make_pair(layout, entryPointName);
-        auto iter = mTransformedShaderModuleCache.find(cacheKey);
-        if (iter != mTransformedShaderModuleCache.end()) {
-            auto cached = iter->second;
-            return cached;
+        VkShaderModule cachedShaderModule =
+            mTransformedShaderModuleCache.FindShaderModule(cacheKey);
+        if (cachedShaderModule != VK_NULL_HANDLE) {
+            return cachedShaderModule;
         }
 
         // Creation of VkShaderModule is deferred to this point when using tint generator
@@ -204,7 +232,7 @@ namespace dawn_native { namespace vulkan {
             device->fn.CreateShaderModule(device->GetVkDevice(), &createInfo, nullptr, &*newHandle),
             "CreateShaderModule"));
         if (newHandle != VK_NULL_HANDLE) {
-            mTransformedShaderModuleCache.emplace(cacheKey, newHandle);
+            mTransformedShaderModuleCache.Emplace(cacheKey, newHandle);
         }
 
         return newHandle;

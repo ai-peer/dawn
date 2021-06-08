@@ -20,6 +20,8 @@
 #include "common/vulkan_platform.h"
 #include "dawn_native/Error.h"
 
+#include <mutex>
+
 namespace dawn_native { namespace vulkan {
 
     class Device;
@@ -28,6 +30,17 @@ namespace dawn_native { namespace vulkan {
     using TransformedShaderModuleCache = std::unordered_map<PipelineLayoutEntryPointPair,
                                                             VkShaderModule,
                                                             PipelineLayoutEntryPointPairHashFunc>;
+
+    class ConcurrentTrasnformedShaderModuleCache {
+      public:
+        VkShaderModule FindShaderModule(const PipelineLayoutEntryPointPair& key);
+        void Emplace(const PipelineLayoutEntryPointPair& key, VkShaderModule value);
+        TransformedShaderModuleCache GetAndClearTransformedShaderModuleCache();
+
+      private:
+        std::mutex mMutex;
+        TransformedShaderModuleCache mTransformedShaderModuleCache;
+    };
 
     class ShaderModule final : public ShaderModuleBase {
       public:
@@ -49,7 +62,7 @@ namespace dawn_native { namespace vulkan {
         VkShaderModule mHandle = VK_NULL_HANDLE;
 
         // New handles created by GetTransformedModuleHandle at pipeline creation time
-        TransformedShaderModuleCache mTransformedShaderModuleCache;
+        ConcurrentTrasnformedShaderModuleCache mTransformedShaderModuleCache;
     };
 
 }}  // namespace dawn_native::vulkan
