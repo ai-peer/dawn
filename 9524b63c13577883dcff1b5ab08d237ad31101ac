@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "536f0ec0_130c8b12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T19:48:33Z",
+      "side": 1,
+      "message": "Austin PTAL too.\n\nLGTM",
+      "revId": "9524b63c13577883dcff1b5ab08d237ad31101ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93be5249_35a8e8d0",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T19:48:33Z",
+      "side": 1,
+      "message": "Can you add this to windows_with_undefs.h instead? https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/common/windows_with_undefs.h;l\u003d16?q\u003dwindows_with\u0026sq\u003d",
+      "revId": "9524b63c13577883dcff1b5ab08d237ad31101ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
