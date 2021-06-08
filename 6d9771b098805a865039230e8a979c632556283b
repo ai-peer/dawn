@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96578be5_6490c3ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-08T23:01:37Z",
+      "side": 1,
+      "message": "PTAL! The other option for doing this would be what I started in https://dawn-review.googlesource.com/c/dawn/+/53881/1. It felt more involved so I didn\u0027t go through with it.",
+      "revId": "6d9771b098805a865039230e8a979c632556283b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
