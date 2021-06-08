@@ -51,6 +51,24 @@
       "parentUuid": "174b3a80_3ae9f2f8",
       "revId": "f4bc9862fe1a08de3935221a20e871f34ec56cd8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c436627c_40a3dd19",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-08T10:04:03Z",
+      "side": 1,
+      "message": "We have some QueryTests that rely on it. Alternatively we could check for DisallowUnsafeAPIs in QuerySet creation if the type is pipelineStatistics.\n\nThis is the last bit to make query safe to use in OT but doesn\u0027t block this CL.",
+      "parentUuid": "3080bbc6_06d8c846",
+      "revId": "f4bc9862fe1a08de3935221a20e871f34ec56cd8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
