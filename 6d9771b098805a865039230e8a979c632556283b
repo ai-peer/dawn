@@ -104,6 +104,30 @@
       },
       "revId": "6d9771b098805a865039230e8a979c632556283b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5a5365f_cf7bed07",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-09T16:02:15Z",
+      "side": 1,
+      "message": "not just topLevelBuffers, but also everything in the pass usage trackers. Maybe this works too but probably not something we need to do now.",
+      "parentUuid": "b1646a1a_913f9afd",
+      "range": {
+        "startLine": 632,
+        "startChar": 0,
+        "endLine": 633,
+        "endChar": 53
+      },
+      "revId": "6d9771b098805a865039230e8a979c632556283b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
