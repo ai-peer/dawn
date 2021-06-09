@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe53651_2f513fef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T06:27:39Z",
+      "side": 1,
+      "message": "Now that the main part of 3D texture copy splitter is landed, this change can be revived.\n\nPTAL. Thanks!",
+      "revId": "0d1696ae5f1c2a409692e38015a2207183dce585",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
