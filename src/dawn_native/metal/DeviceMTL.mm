@@ -199,6 +199,10 @@ namespace dawn_native { namespace metal {
             bool useSharedMode = gpu_info::IsIntel(this->GetAdapter()->GetPCIInfo().vendorId);
             SetToggle(Toggle::MetalUseSharedModeForCounterSampleBuffer, useSharedMode);
         }
+
+        if (gpu_info::IsIntel(this->GetAdapter()->GetPCIInfo().vendorId)) {
+            SetToggle(Toggle::IDK, true);
+        }
     }
 
     ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(

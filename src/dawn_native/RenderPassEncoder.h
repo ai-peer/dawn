@@ -31,7 +31,8 @@ namespace dawn_native {
                           Ref<AttachmentState> attachmentState,
                           QuerySetBase* occlusionQuerySet,
                           uint32_t renderTargetWidth,
-                          uint32_t renderTargetHeight);
+                          uint32_t renderTargetHeight,
+                          Ref<TextureViewBase> dsViewForWorkaround);
 
         static RenderPassEncoder* MakeError(DeviceBase* device,
                                             CommandEncoder* commandEncoder,
@@ -76,6 +77,8 @@ namespace dawn_native {
         Ref<QuerySetBase> mOcclusionQuerySet;
         uint32_t mCurrentOcclusionQueryIndex = 0;
         bool mOcclusionQueryActive = false;
+
+        Ref<TextureViewBase> mDsViewForWorkaround;
     };
 
 }  // namespace dawn_native

@@ -55,12 +55,14 @@ namespace dawn_native {
                                          Ref<AttachmentState> attachmentState,
                                          QuerySetBase* occlusionQuerySet,
                                          uint32_t renderTargetWidth,
-                                         uint32_t renderTargetHeight)
+                                         uint32_t renderTargetHeight,
+                                         Ref<TextureViewBase> dsViewForWorkaround)
         : RenderEncoderBase(device, encodingContext, std::move(attachmentState)),
           mCommandEncoder(commandEncoder),
           mRenderTargetWidth(renderTargetWidth),
           mRenderTargetHeight(renderTargetHeight),
-          mOcclusionQuerySet(occlusionQuerySet) {
+          mOcclusionQuerySet(occlusionQuerySet),
+          mDsViewForWorkaround(std::move(dsViewForWorkaround)) {
         mUsageTracker = std::move(usageTracker);
     }
 
@@ -98,11 +100,151 @@ namespace dawn_native {
                     }
                 }
 
+                if (mDsViewForWorkaround != nullptr) {
+                    DeviceBase* device = GetDevice();
+                    const AttachmentState* attachmentState = GetAttachmentState();
+
+                    ShaderModuleWGSLDescriptor smWgslDesc = {};
+                    ShaderModuleDescriptor smDesc = {};
+                    smDesc.nextInChain = &smWgslDesc;
+                    smWgslDesc.source = R"(
+                        [[stage(vertex)]]
+                        fn vert_main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+                            let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+                                vec2<f32>(-1.0, -1.0),
+                                vec2<f32>( 3.0, -1.0),
+                                vec2<f32>(-1.0,  3.0));
+                            return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+                        }
+
+                        [[stage(fragment)]]
+                        fn frag_main() {
+                        }
+                    )";
+
+                    Ref<ShaderModuleBase> shaderModule =
+                        device->CreateShaderModule(&smDesc, nullptr).AcquireSuccess();
+
+                    FragmentState fragment = {};
+                    DepthStencilState depthStencil = {};
+                    RenderPipelineDescriptor rpDesc = {};
+                    rpDesc.depthStencil = &depthStencil;
+                    rpDesc.fragment = &fragment;
+
+                    rpDesc.vertex.module = shaderModule.Get();
+                    rpDesc.vertex.entryPoint = "vert_main";
+                    fragment.entryPoint = "frag_main";
+                    fragment.module = shaderModule.Get();
+                    depthStencil.format = attachmentState->GetDepthStencilFormat();
+                    depthStencil.depthWriteEnabled = false;
+
+                    Ref<RenderPipelineBase> renderPipeline =
+                        device->CreateRenderPipeline(&rpDesc).AcquireSuccess();
+
+                    auto* setRenderPipelineCmd = allocator->Allocate<SetRenderPipelineCmd>(Command::SetRenderPipeline);
+                    setRenderPipelineCmd->pipeline = std::move(renderPipeline);
+
+                    auto* drawCmd = allocator->Allocate<DrawCmd>(Command::Draw);
+                    drawCmd->vertexCount = 3;
+                    drawCmd->instanceCount = 1;
+                    drawCmd->firstVertex = 0;
+                    drawCmd->firstInstance = 0;
+                }
+
                 allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
                 return {};
             })) {
             mEncodingContext->ExitPass(this, mUsageTracker.AcquireResourceUsage());
         }
+        /*if (mDsViewForWorkaround != nullptr) {
+            DeviceBase* device = GetDevice();
+            const AttachmentState* attachmentState = GetAttachmentState();
+
+            RenderPassDepthStencilAttachment dsAttachment = {};
+            dsAttachment.depthLoadOp = wgpu::LoadOp::Load;
+            dsAttachment.depthStoreOp = wgpu::StoreOp::Store;
+            dsAttachment.stencilLoadOp = wgpu::LoadOp::Load;
+            dsAttachment.stencilStoreOp = wgpu::StoreOp::Store;
+            dsAttachment.view = mDsViewForWorkaround.Get();
+
+            RenderPassDescriptor renderPassDesc = {};
+            renderPassDesc.depthStencilAttachment = &dsAttachment;
+
+            ShaderModuleWGSLDescriptor smWgslDesc = {};
+            ShaderModuleDescriptor smDesc = {};
+            smDesc.nextInChain = &smWgslDesc;
+            smWgslDesc.source = R"(
+                [[stage(vertex)]]
+                fn vert_main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+                    let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+                        vec2<f32>(-1.0, -1.0),
+                        vec2<f32>( 3.0, -1.0),
+                        vec2<f32>(-1.0,  3.0));
+                    return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+                }
+
+                [[stage(fragment)]]
+                fn frag_main() {
+                }
+            )";
+
+            Ref<ShaderModuleBase> shaderModule =
+                device->CreateShaderModule(&smDesc, nullptr).AcquireSuccess();
+
+            FragmentState fragment = {};
+            DepthStencilState depthStencil = {};
+            RenderPipelineDescriptor rpDesc = {};
+            rpDesc.depthStencil = &depthStencil;
+            rpDesc.fragment = &fragment;
+
+            rpDesc.vertex.module = shaderModule.Get();
+            rpDesc.vertex.entryPoint = "vert_main";
+            fragment.entryPoint = "frag_main";
+            fragment.module = shaderModule.Get();
+            depthStencil.format = attachmentState->GetDepthStencilFormat();
+            depthStencil.depthWriteEnabled = false;
+
+            Ref<RenderPipelineBase> renderPipeline =
+                device->CreateRenderPipeline(&rpDesc).AcquireSuccess();
+
+            mEncodingContext->TryEncode(mCommandEncoder.Get(), [&](CommandAllocator* allocator) -> MaybeError {
+                auto* beginCmd = allocator->Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
+                beginCmd->attachmentState = device->GetOrCreateAttachmentState(&renderPassDesc);
+                beginCmd->depthStencilAttachment.view = mDsViewForWorkaround.Get();
+
+
+                return {};
+            });
+
+            RenderPassEncoder passEncoder(
+                GetDevice(),
+                mCommandEncoder.Get(),
+                mEncodingContext,
+                {},
+                GetDevice()->GetOrCreateAttachmentState(&renderPassDesc),
+                nullptr,
+                mRenderTargetWidth,
+                mRenderTargetHeight,
+                nullptr
+            );
+            mEncodingContext->EnterPass(&passEncoder);
+            mEncodingContext->TryEncode(&passEncoder, [&](CommandAllocator* allocator) -> MaybeError {
+
+                auto* setRenderPipelineCmd = allocator->Allocate<SetRenderPipelineCmd>(Command::SetRenderPipeline);
+                setRenderPipelineCmd->pipeline = std::move(renderPipeline);
+
+                auto* drawCmd = allocator->Allocate<DrawCmd>(Command::Draw);
+                drawCmd->vertexCount = 3;
+                drawCmd->instanceCount = 1;
+                drawCmd->firstVertex = 0;
+                drawCmd->firstInstance = 0;
+
+                allocator->Allocate<EndRenderPassCmd>(Command::EndRenderPass);
+
+                return {};
+            });
+            mEncodingContext->ExitPass(&passEncoder, RenderPassResourceUsage{});
+        }*/
     }
 
     void RenderPassEncoder::APISetStencilReference(uint32_t reference) {

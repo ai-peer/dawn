@@ -162,11 +162,6 @@ TEST_P(DepthStencilLoadOpTests, ClearMip1) {
     // TODO(crbug.com/dawn/838): Sampling from the non-zero mip does not work.
     DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && GetParam().mCheck == Check::SampleDepth);
 
-    // TODO(crbug.com/dawn/838): Copying from the non-zero mip here sometimes returns uninitialized
-    // data! (from mip 0 of a previous test run).
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && GetParam().mCheck == Check::CopyDepth);
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel() && GetParam().mCheck == Check::CopyStencil);
-
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     encoder.BeginRenderPass(&renderPassDescriptors[1]).EndPass();
     wgpu::CommandBuffer commandBuffer = encoder.Finish();
@@ -209,13 +204,13 @@ namespace {
 
     auto GenerateParams() {
         auto params1 = MakeParamGenerator<DepthStencilLoadOpTestParams>(
-            {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(),
+            {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(), MetalBackend({"idk"}),
              OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
             {wgpu::TextureFormat::Depth32Float},
             {Check::CopyDepth, Check::DepthTest, Check::SampleDepth});
 
         auto params2 = MakeParamGenerator<DepthStencilLoadOpTestParams>(
-            {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(),
+            {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(), MetalBackend({"idk"}),
              OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
             {wgpu::TextureFormat::Depth24PlusStencil8},
             {Check::CopyStencil, Check::StencilTest, Check::DepthTest, Check::SampleDepth});

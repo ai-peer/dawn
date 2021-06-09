@@ -526,6 +526,7 @@ namespace dawn_native {
         uint32_t width = 0;
         uint32_t height = 0;
         Ref<AttachmentState> attachmentState;
+        Ref<TextureViewBase> dsViewForWorkaround;
         bool success =
             mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 uint32_t sampleCount = 0;
@@ -586,6 +587,13 @@ namespace dawn_native {
                         descriptor->depthStencilAttachment->stencilStoreOp;
 
                     usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
+
+                    if (device->IsToggleEnabled(Toggle::IDK) && view->GetBaseMipLevel() > 0 && (
+                            descriptor->depthStencilAttachment->depthStoreOp == wgpu::StoreOp::Store ||
+                            descriptor->depthStencilAttachment->stencilStoreOp == wgpu::StoreOp::Store
+                        )) {
+                        dsViewForWorkaround = view;
+                    }
                 }
 
                 cmd->width = width;
@@ -599,7 +607,8 @@ namespace dawn_native {
         if (success) {
             RenderPassEncoder* passEncoder = new RenderPassEncoder(
                 device, this, &mEncodingContext, std::move(usageTracker),
-                std::move(attachmentState), descriptor->occlusionQuerySet, width, height);
+                std::move(attachmentState), descriptor->occlusionQuerySet, width, height,
+                std::move(dsViewForWorkaround));
             mEncodingContext.EnterPass(passEncoder);
             return passEncoder;
         }
