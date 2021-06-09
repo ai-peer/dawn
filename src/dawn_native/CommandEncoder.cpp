@@ -23,6 +23,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/ComputePassEncoder.h"
+#include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/QueryHelper.h"
@@ -598,9 +599,31 @@ namespace dawn_native {
 
         if (success) {
             RenderPassEncoder* passEncoder = new RenderPassEncoder(
-                device, this, &mEncodingContext, std::move(usageTracker),
-                std::move(attachmentState), descriptor->occlusionQuerySet, width, height);
+                device, this, &mEncodingContext, std::move(usageTracker), attachmentState,
+                descriptor->occlusionQuerySet, width, height);
             mEncodingContext.EnterPass(passEncoder);
+
+            /*if (attachmentState->HasDepthStencilAttachment() &&
+                device->IsToggleEnabled(Toggle::IDK)) {
+                TextureViewBase* view = descriptor->depthStencilAttachment->view;
+                if (view == nullptr) {
+                    view = descriptor->depthStencilAttachment->attachment;
+                }
+                Aspect aspectsToClear = Aspect::None;
+                if (descriptor->depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear) {
+                    aspectsToClear |= (view->GetAspects() & Aspect::Depth);
+                }
+                if (descriptor->depthStencilAttachment->stencilLoadOp == wgpu::LoadOp::Clear) {
+                    aspectsToClear |= (view->GetAspects() & Aspect::Stencil);
+                }
+                if (aspectsToClear != Aspect::None) {
+                    passEncoder->EncodeClearDSWithQuad(
+                        view, aspectsToClear, descriptor->depthStencilAttachment->clearDepth,
+                        descriptor->depthStencilAttachment->clearStencil,
+                        std::move(attachmentState));
+                }
+            }*/
+
             return passEncoder;
         }
 
@@ -730,6 +753,14 @@ namespace dawn_native {
 
             ApplyDefaultTextureDataLayoutOptions(&dstLayout, blockInfo, *copySize);
 
+            Aspect aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+            if ((aspect & (Aspect::Depth | Aspect::Stencil)) != Aspect::None &&
+                GetDevice()->IsToggleEnabled(Toggle::IDK)) {
+                GetDevice()->ConsumedError(EncodeBlitDSTextureToBuffer(
+                    allocator, source, aspect, destination->buffer, dstLayout, *copySize));
+                return {};
+            }
+
             CopyTextureToBufferCmd* copy =
                 allocator->Allocate<CopyTextureToBufferCmd>(Command::CopyTextureToBuffer);
             copy->source.texture = source->texture;
@@ -768,6 +799,14 @@ namespace dawn_native {
 
                 mTopLevelTextures.insert(source->texture);
                 mTopLevelTextures.insert(destination->texture);
+            }
+
+            Aspect aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+            if ((aspect & (Aspect::Depth | Aspect::Stencil)) != Aspect::None &&
+                GetDevice()->IsToggleEnabled(Toggle::IDK)) {
+                GetDevice()->ConsumedError(EncodeBlitDSTextureToTexture(
+                    allocator, source, aspect, destination, *copySize));
+                return {};
             }
 
             CopyTextureToTextureCmd* copy =
@@ -932,6 +971,547 @@ namespace dawn_native {
 
         if (mDebugGroupStackSize != 0) {
             return DAWN_VALIDATION_ERROR("Each Push must be balanced by a corresponding Pop.");
+        }
+
+        return {};
+    }
+
+    MaybeError CommandEncoder::EncodeBlitDSTextureToBuffer(CommandAllocator* allocator,
+                                                           const ImageCopyTexture* source,
+                                                           Aspect aspect,
+                                                           BufferBase* dstBuffer,
+                                                           const TextureDataLayout& dstLayout,
+                                                           const Extent3D& copySize) {
+        DeviceBase* device = GetDevice();
+        const TexelBlockInfo& blockInfo =
+            source->texture->GetFormat().GetAspectInfo(aspect).block;
+
+        Ref<ShaderModuleBase> shaderModule;
+
+        switch (aspect) {
+            case Aspect::Depth: {
+                ShaderModuleWGSLDescriptor smWgslDesc = {};
+                ShaderModuleDescriptor smDesc = {};
+                smDesc.nextInChain = &smWgslDesc;
+                smWgslDesc.source = R"(
+                    [[block]] struct Params {
+                        [[size(4)]] width : u32;
+                        [[size(4)]] bytesPerRow : u32;
+                        [[size(4)]] rowsPerImage : u32;
+                        [[size(4)]] offsetX: u32;
+                        [[size(4)]] offsetY: u32;
+                        [[size(4)]] level : u32;
+                    };
+
+                    [[block]] struct Result {
+                        values : array<f32>;
+                    };
+
+                    [[group(0), binding(0)]] var input : texture_depth_2d_array;
+                    [[group(0), binding(1)]] var<uniform> params : Params;
+                    [[group(0), binding(2)]] var<storage, read_write> result : Result;
+
+                    [[workgroup_size(1, 1, 1)]]
+                    [[stage(compute)]] fn main(
+                        [[builtin(global_invocation_id)]] global_id: vec3<u32>
+                    ) {
+                        let offset : vec3<u32> = global_id + vec3<u32>(params.offsetX, params.offsetY, 0u);
+                        let value : f32 = textureLoad(
+                            input,
+                            vec2<i32>(i32(offset.x), i32(offset.y)),
+                            i32(offset.z),
+                            i32(params.level)
+                        );
+
+                        let widthInTexels : u32 = params.bytesPerRow / 4u;
+                        result.values[
+                            global_id.x +
+                            global_id.y * widthInTexels +
+                            global_id.z * widthInTexels * params.rowsPerImage] = value;
+                    }
+                )";
+                DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&smDesc, nullptr));
+                break;
+            }
+            case Aspect::Stencil: {
+                ShaderModuleWGSLDescriptor smWgslDesc = {};
+                ShaderModuleDescriptor smDesc = {};
+                smDesc.nextInChain = &smWgslDesc;
+                smWgslDesc.source = R"(
+                    [[block]] struct Params {
+                        [[size(4)]] width : u32;
+                        [[size(4)]] bytesPerRow : u32;
+                        [[size(4)]] rowsPerImage : u32;
+                        [[size(4)]] offsetX: u32;
+                        [[size(4)]] offsetY: u32;
+                        [[size(4)]] level : u32;
+                    };
+
+                    [[block]] struct Result {
+                        values : array<u32>;
+                    };
+
+                    [[group(0), binding(0)]] var input : texture_2d_array<u32>;
+                    [[group(0), binding(1)]] var<uniform> params : Params;
+                    [[group(0), binding(2)]] var<storage, read_write> result : Result;
+
+                    [[workgroup_size(1, 1, 1)]]
+                    [[stage(compute)]] fn main(
+                        [[builtin(global_invocation_id)]] global_id: vec3<u32>
+                    ) {
+                        let offset : vec3<u32> = global_id + vec3<u32>(params.offsetX, params.offsetY, 0u);
+                        var value0 : u32;
+                        var value1 : u32;
+                        var value2 : u32;
+                        var value3 : u32;
+                        if (4u * offset.x + 0u < params.width) {
+                            value0 = textureLoad(
+                                input,
+                                vec2<i32>(i32(4u * offset.x + 0u), i32(offset.y)),
+                                i32(offset.z),
+                                i32(params.level)
+                            )[0];
+                        }
+                        if (4u * offset.x + 1u < params.width) {
+                            value1 = textureLoad(
+                                input,
+                                vec2<i32>(i32(4u * offset.x + 1u), i32(offset.y)),
+                                i32(offset.z),
+                                i32(params.level)
+                            )[0];
+                        }
+                        if (4u * offset.x + 2u < params.width) {
+                            value2 = textureLoad(
+                                input,
+                                vec2<i32>(i32(4u * offset.x + 2u), i32(offset.y)),
+                                i32(offset.z),
+                                i32(params.level)
+                            )[0];
+                        }
+                        if (4u * offset.x + 3u < params.width) {
+                            value3 = textureLoad(
+                                input,
+                                vec2<i32>(i32(4u * offset.x + 3u), i32(offset.y)),
+                                i32(offset.z),
+                                i32(params.level)
+                            )[0];
+                        }
+
+                        let widthIn4Texels : u32 = params.bytesPerRow / 4u;
+                        let index : u32 =
+                            global_id.x +
+                            global_id.y * widthIn4Texels +
+                            global_id.z * widthIn4Texels * params.rowsPerImage;
+
+                        result.values[index] = (
+                            ((value0 & 0x000000FFu) << 0u) +
+                            ((value1 & 0x000000FFu) << 8u) +
+                            ((value2 & 0x000000FFu) << 16u) +
+                            ((value3 & 0x000000FFu) << 24u)
+                        );
+                    }
+                )";
+                DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&smDesc, nullptr));
+                break;
+            }
+            default:
+                UNREACHABLE();
+        }
+
+        ComputePipelineDescriptor cpDesc = {};
+        cpDesc.compute.module = shaderModule.Get();
+        cpDesc.compute.entryPoint = "main";
+
+        Ref<ComputePipelineBase> pipeline;
+        DAWN_TRY_ASSIGN(pipeline, device->CreateComputePipeline(&cpDesc));
+
+        Ref<BindGroupLayoutBase> bgl;
+        DAWN_TRY_ASSIGN(bgl, pipeline->GetBindGroupLayout(0));
+
+        TextureViewDescriptor inputViewDesc = {};
+        inputViewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+        inputViewDesc.aspect = source->aspect;
+        inputViewDesc.baseArrayLayer = source->origin.z;
+        inputViewDesc.arrayLayerCount = copySize.depthOrArrayLayers;
+        // inputViewDesc.baseMipLevel = source->mipLevel;
+        // inputViewDesc.mipLevelCount = 1;
+
+        Ref<TextureViewBase> inputView;
+        DAWN_TRY_ASSIGN(inputView, device->CreateTextureView(source->texture, &inputViewDesc));
+
+        uint32_t bytesPerRow = std::max(Align(
+            blockInfo.byteSize * copySize.width,
+            device->GetOptimalBytesPerRowAlignment()), 16u);
+        uint32_t rowsPerImage = copySize.height;
+        // uint32_t bytesPerRow = dstLayout.bytesPerRow;
+        // uint32_t rowsPerImage = dstLayout.rowsPerImage;
+
+        struct Params {
+            uint32_t width;
+            uint32_t bytesPerRow;
+            uint32_t rowsPerImage;
+            uint32_t offsetX;
+            uint32_t offsetY;
+            uint32_t mipLevel;
+        };
+        static_assert(sizeof(Params) == 24, "");
+        Params params = {
+            copySize.width,
+            bytesPerRow,
+            rowsPerImage,
+            source->origin.x,
+            source->origin.y,
+            source->mipLevel,
+            // 0,
+        };
+        BufferDescriptor uniformBufferDesc = {};
+        uniformBufferDesc.size = sizeof(Params);
+        uniformBufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+
+        Ref<BufferBase> uniformBuffer;
+        DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&uniformBufferDesc));
+        DAWN_TRY(device->GetQueue()->WriteBuffer(uniformBuffer.Get(), 0, &params, sizeof(Params)));
+
+        BufferDescriptor resultBufferDesc = {};
+        resultBufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Storage;
+        resultBufferDesc.size =
+            bytesPerRow * rowsPerImage * copySize.depthOrArrayLayers;
+
+        Ref<BufferBase> resultBuffer;
+        DAWN_TRY_ASSIGN(resultBuffer, device->CreateBuffer(&resultBufferDesc));
+        std::vector<uint8_t> zeroBuffer(resultBufferDesc.size);
+        DAWN_TRY(device->GetQueue()->WriteBuffer(resultBuffer.Get(), 0, zeroBuffer.data(), zeroBuffer.size()));
+
+        std::array<BindGroupEntry, 3> entries = {};
+        entries[0].binding = 0;
+        entries[0].textureView = inputView.Get();
+        entries[1].binding = 1;
+        entries[1].buffer = uniformBuffer.Get();
+        entries[1].size = uniformBufferDesc.size;
+        entries[2].binding = 2;
+        entries[2].buffer = resultBuffer.Get();
+        entries[2].size = resultBufferDesc.size;
+
+        BindGroupDescriptor bgDesc = {};
+        bgDesc.layout = bgl.Get();
+        bgDesc.entryCount = entries.size();
+        bgDesc.entries = entries.data();
+
+        Ref<BindGroupBase> bg;
+        DAWN_TRY_ASSIGN(bg, device->UnsafeCreateBindGroup(&bgDesc));
+
+        ComputePassEncoder* passEncoder = APIBeginComputePass(nullptr);
+        passEncoder->APISetPipeline(pipeline.Get());
+        passEncoder->APISetBindGroup(0, bg.Get());
+
+        switch (aspect) {
+            case Aspect::Depth:
+                passEncoder->APIDispatch(copySize.width, copySize.height,
+                                         copySize.depthOrArrayLayers);
+                break;
+            case Aspect::Stencil:
+                passEncoder->APIDispatch((copySize.width + 3) / 4, copySize.height,
+                                         copySize.depthOrArrayLayers);
+                break;
+            default:
+                UNREACHABLE();
+        }
+
+        passEncoder->APIEndPass();
+
+        // Copy row-by-row.
+        for (uint32_t z = 0; z < copySize.depthOrArrayLayers; ++z) {
+            for (uint32_t y = 0; y < copySize.height; ++y) {
+                CopyBufferToBufferCmd* copy =
+                    allocator->Allocate<CopyBufferToBufferCmd>(Command::CopyBufferToBuffer);
+                copy->source = resultBuffer.Get();
+                copy->sourceOffset = bytesPerRow * rowsPerImage * z +
+                                     bytesPerRow * y;
+                copy->destination = dstBuffer;
+                copy->destinationOffset = dstLayout.offset +
+                                          dstLayout.bytesPerRow * dstLayout.rowsPerImage * z +
+                                          dstLayout.bytesPerRow * y;
+                copy->size = blockInfo.byteSize * copySize.width;
+            }
+        }
+
+        // CopyBufferToTextureCmd* copy =
+        //     allocator->Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
+        // copy->source.buffer = resultBuffer.Get();
+        // copy->source.offset = 0;
+        // copy->source.bytesPerRow = dstLayout.bytesPerRow;
+        // copy->source.rowsPerImage = dstLayout.rowsPerImage;
+        // copy->destination.texture = source->texture;
+        // copy->destination.origin = source->origin;
+        // copy->destination.mipLevel = source->mipLevel;
+        // copy->destination.aspect = aspect;
+        // copy->copySize = copySize;
+
+        return {};
+    }
+
+    MaybeError CommandEncoder::EncodeBlitDSTextureToTexture(CommandAllocator* allocator,
+                                                           const ImageCopyTexture* source,
+                                                           Aspect aspects,
+                                                           const ImageCopyTexture* destination,
+                                                           const Extent3D& copySize) {
+        DeviceBase* device = GetDevice();
+        for (Aspect aspect : IterateEnumMask(aspects)) {
+            const TexelBlockInfo& blockInfo =
+                source->texture->GetFormat().GetAspectInfo(aspect).block;
+
+            Ref<ShaderModuleBase> shaderModule;
+
+            switch (aspect) {
+                case Aspect::Depth: {
+                    ShaderModuleWGSLDescriptor smWgslDesc = {};
+                    ShaderModuleDescriptor smDesc = {};
+                    smDesc.nextInChain = &smWgslDesc;
+                    smWgslDesc.source = R"(
+                        [[block]] struct Params {
+                            [[size(4)]] width : u32;
+                            [[size(4)]] bytesPerRow : u32;
+                            [[size(4)]] rowsPerImage : u32;
+                            [[size(4)]] offsetX: u32;
+                            [[size(4)]] offsetY: u32;
+                            [[size(4)]] level : u32;
+                        };
+
+                        [[block]] struct Result {
+                            values : array<f32>;
+                        };
+
+                        [[group(0), binding(0)]] var input : texture_depth_2d_array;
+                        [[group(0), binding(1)]] var<uniform> params : Params;
+                        [[group(0), binding(2)]] var<storage, read_write> result : Result;
+
+                        [[workgroup_size(1, 1, 1)]]
+                        [[stage(compute)]] fn main(
+                            [[builtin(global_invocation_id)]] global_id: vec3<u32>
+                        ) {
+                            let offset : vec3<u32> = global_id + vec3<u32>(params.offsetX, params.offsetY, 0u);
+                            let value : f32 = textureLoad(
+                                input,
+                                vec2<i32>(i32(offset.x), i32(offset.y)),
+                                i32(offset.z),
+                                i32(params.level)
+                            );
+
+                            let widthInTexels : u32 = params.bytesPerRow / 4u;
+                            result.values[
+                                global_id.x +
+                                global_id.y * widthInTexels +
+                                global_id.z * widthInTexels * params.rowsPerImage] = value;
+                        }
+                    )";
+                    DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&smDesc, nullptr));
+                    break;
+                }
+                case Aspect::Stencil: {
+                    ShaderModuleWGSLDescriptor smWgslDesc = {};
+                    ShaderModuleDescriptor smDesc = {};
+                    smDesc.nextInChain = &smWgslDesc;
+                    smWgslDesc.source = R"(
+                        [[block]] struct Params {
+                            [[size(4)]] width : u32;
+                            [[size(4)]] bytesPerRow : u32;
+                            [[size(4)]] rowsPerImage : u32;
+                            [[size(4)]] offsetX: u32;
+                            [[size(4)]] offsetY: u32;
+                            [[size(4)]] level : u32;
+                        };
+
+                        [[block]] struct Result {
+                            values : array<u32>;
+                        };
+
+                        [[group(0), binding(0)]] var input : texture_2d_array<u32>;
+                        [[group(0), binding(1)]] var<uniform> params : Params;
+                        [[group(0), binding(2)]] var<storage, read_write> result : Result;
+
+                        [[workgroup_size(1, 1, 1)]]
+                        [[stage(compute)]] fn main(
+                            [[builtin(global_invocation_id)]] global_id: vec3<u32>
+                        ) {
+                            let offset : vec3<u32> = global_id + vec3<u32>(params.offsetX, params.offsetY, 0u);
+                            var value0 : u32;
+                            var value1 : u32;
+                            var value2 : u32;
+                            var value3 : u32;
+                            if (4u * offset.x + 0u < params.width) {
+                                value0 = textureLoad(
+                                    input,
+                                    vec2<i32>(i32(4u * offset.x + 0u), i32(offset.y)),
+                                    i32(offset.z),
+                                    i32(params.level)
+                                )[0];
+                            }
+                            if (4u * offset.x + 1u < params.width) {
+                                value1 = textureLoad(
+                                    input,
+                                    vec2<i32>(i32(4u * offset.x + 1u), i32(offset.y)),
+                                    i32(offset.z),
+                                    i32(params.level)
+                                )[0];
+                            }
+                            if (4u * offset.x + 2u < params.width) {
+                                value2 = textureLoad(
+                                    input,
+                                    vec2<i32>(i32(4u * offset.x + 2u), i32(offset.y)),
+                                    i32(offset.z),
+                                    i32(params.level)
+                                )[0];
+                            }
+                            if (4u * offset.x + 3u < params.width) {
+                                value3 = textureLoad(
+                                    input,
+                                    vec2<i32>(i32(4u * offset.x + 3u), i32(offset.y)),
+                                    i32(offset.z),
+                                    i32(params.level)
+                                )[0];
+                            }
+
+                            let widthIn4Texels : u32 = params.bytesPerRow / 4u;
+                            let index : u32 =
+                                global_id.x +
+                                global_id.y * widthIn4Texels +
+                                global_id.z * widthIn4Texels * params.rowsPerImage;
+
+                            result.values[index] = (
+                                ((value0 & 0x000000FFu) << 0u) +
+                                ((value1 & 0x000000FFu) << 8u) +
+                                ((value2 & 0x000000FFu) << 16u) +
+                                ((value3 & 0x000000FFu) << 24u)
+                            );
+                        }
+                    )";
+                    DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&smDesc, nullptr));
+                    break;
+                }
+                default:
+                    UNREACHABLE();
+            }
+
+            ComputePipelineDescriptor cpDesc = {};
+            cpDesc.compute.module = shaderModule.Get();
+            cpDesc.compute.entryPoint = "main";
+
+            Ref<ComputePipelineBase> pipeline;
+            DAWN_TRY_ASSIGN(pipeline, device->CreateComputePipeline(&cpDesc));
+
+            Ref<BindGroupLayoutBase> bgl;
+            DAWN_TRY_ASSIGN(bgl, pipeline->GetBindGroupLayout(0));
+
+            TextureViewDescriptor inputViewDesc = {};
+            inputViewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+            switch (aspect) {
+                case Aspect::Depth:
+                    inputViewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+                    break;
+                case Aspect::Stencil:
+                    inputViewDesc.aspect = wgpu::TextureAspect::StencilOnly;
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+            inputViewDesc.baseArrayLayer = source->origin.z;
+            inputViewDesc.arrayLayerCount = copySize.depthOrArrayLayers;
+            // inputViewDesc.baseMipLevel = source->mipLevel;
+            // inputViewDesc.mipLevelCount = 1;
+
+            Ref<TextureViewBase> inputView;
+            DAWN_TRY_ASSIGN(inputView, device->CreateTextureView(source->texture, &inputViewDesc));
+
+             uint32_t bytesPerRow = std::max(Align(
+                blockInfo.byteSize * copySize.width,
+                device->GetOptimalBytesPerRowAlignment()), 16u);
+            uint32_t rowsPerImage = copySize.height;
+            // uint32_t bytesPerRow = std::max(Align(copySize.width device->GetOptimalBytesPerRowAlignment(), 16u);
+            // uint32_t rowsPerImage = copySize.height;
+
+            struct Params {
+                uint32_t width;
+                uint32_t bytesPerRow;
+                uint32_t rowsPerImage;
+                uint32_t offsetX;
+                uint32_t offsetY;
+                uint32_t mipLevel;
+            };
+            static_assert(sizeof(Params) == 24, "");
+            Params params = {
+                copySize.width,
+                bytesPerRow,
+                rowsPerImage,
+                source->origin.x,
+                source->origin.y,
+                source->mipLevel,
+                // 0,
+            };
+            BufferDescriptor uniformBufferDesc = {};
+            uniformBufferDesc.size = sizeof(Params);
+            uniformBufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+
+            Ref<BufferBase> uniformBuffer;
+            DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&uniformBufferDesc));
+            DAWN_TRY(device->GetQueue()->WriteBuffer(uniformBuffer.Get(), 0, &params, sizeof(Params)));
+
+            BufferDescriptor resultBufferDesc = {};
+            resultBufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::Storage;
+            resultBufferDesc.size =
+                bytesPerRow * rowsPerImage * copySize.depthOrArrayLayers;
+
+            Ref<BufferBase> resultBuffer;
+            DAWN_TRY_ASSIGN(resultBuffer, device->CreateBuffer(&resultBufferDesc));
+
+            std::array<BindGroupEntry, 3> entries = {};
+            entries[0].binding = 0;
+            entries[0].textureView = inputView.Get();
+            entries[1].binding = 1;
+            entries[1].buffer = uniformBuffer.Get();
+            entries[1].size = uniformBufferDesc.size;
+            entries[2].binding = 2;
+            entries[2].buffer = resultBuffer.Get();
+            entries[2].size = resultBufferDesc.size;
+
+            BindGroupDescriptor bgDesc = {};
+            bgDesc.layout = bgl.Get();
+            bgDesc.entryCount = entries.size();
+            bgDesc.entries = entries.data();
+
+            Ref<BindGroupBase> bg;
+            DAWN_TRY_ASSIGN(bg, device->UnsafeCreateBindGroup(&bgDesc));
+
+            ComputePassEncoder* passEncoder = APIBeginComputePass(nullptr);
+            passEncoder->APISetPipeline(pipeline.Get());
+            passEncoder->APISetBindGroup(0, bg.Get());
+
+            switch (aspect) {
+                case Aspect::Depth:
+                    passEncoder->APIDispatch(copySize.width, copySize.height,
+                                            copySize.depthOrArrayLayers);
+                    break;
+                case Aspect::Stencil:
+                    passEncoder->APIDispatch((copySize.width + 3) / 4, copySize.height,
+                                            copySize.depthOrArrayLayers);
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+
+            passEncoder->APIEndPass();
+
+            CopyBufferToTextureCmd* copy =
+                allocator->Allocate<CopyBufferToTextureCmd>(Command::CopyBufferToTexture);
+            copy->source.buffer = resultBuffer.Get();
+            copy->source.offset = 0;
+            copy->source.bytesPerRow = bytesPerRow;
+            copy->source.rowsPerImage = rowsPerImage;
+            copy->destination.texture = destination->texture;
+            copy->destination.origin = destination->origin;
+            copy->destination.mipLevel = destination->mipLevel;
+            copy->destination.aspect = aspect;
+            copy->copySize = copySize;
+
         }
 
         return {};

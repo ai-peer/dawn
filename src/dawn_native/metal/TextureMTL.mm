@@ -28,13 +28,17 @@
 namespace dawn_native { namespace metal {
 
     namespace {
-        bool UsageNeedsTextureView(wgpu::TextureUsage usage) {
-            constexpr wgpu::TextureUsage kUsageNeedsTextureView =
-                wgpu::TextureUsage::Storage | wgpu::TextureUsage::Sampled;
-            return usage & kUsageNeedsTextureView;
+        bool UsageNeedsTextureView(MTLTextureUsage usage) {
+            // constexpr wgpu::TextureUsage kUsageNeedsTextureView =
+            //     wgpu::TextureUsage::Storage | wgpu::TextureUsage::Sampled;
+            // return usage & kUsageNeedsTextureView;
+            return (usage & (MTLTextureUsageShaderWrite | MTLTextureUsageShaderRead |
+                             MTLTextureUsageShaderRead)) != 0;
         }
 
-        MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
+        MTLTextureUsage MetalTextureUsage(const DeviceBase* device,
+                                          const Format& format,
+                                          wgpu::TextureUsage usage) {
             MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
 
             if (usage & (wgpu::TextureUsage::Storage)) {
@@ -55,6 +59,11 @@ namespace dawn_native { namespace metal {
 
             if (usage & (wgpu::TextureUsage::RenderAttachment)) {
                 result |= MTLTextureUsageRenderTarget;
+            }
+
+            if (device->IsToggleEnabled(Toggle::IDK) &&
+                IsSubset(format.aspects, Aspect::Depth | Aspect::Stencil)) {
+                result |= MTLTextureUsagePixelFormatView | MTLTextureUsageShaderRead;
             }
 
             return result;
@@ -100,6 +109,8 @@ namespace dawn_native { namespace metal {
             }
 
             switch (textureViewDescriptor->dimension) {
+                case wgpu::TextureViewDimension::e2DArray:
+                    return texture->GetArrayLayers() == 1;
                 case wgpu::TextureViewDimension::Cube:
                 case wgpu::TextureViewDimension::CubeArray:
                     return true;
@@ -309,8 +320,8 @@ namespace dawn_native { namespace metal {
         mtlDesc.sampleCount = descriptor->sampleCount;
         // TODO: add MTLTextureUsagePixelFormatView when needed when we support format
         // reinterpretation.
-        mtlDesc.usage = MetalTextureUsage(device->GetValidInternalFormat(descriptor->format),
-                                          descriptor->usage);
+        mtlDesc.usage = MetalTextureUsage(
+            device, device->GetValidInternalFormat(descriptor->format), descriptor->usage);
         mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
         mtlDesc.mipmapLevelCount = descriptor->mipLevelCount;
         mtlDesc.storageMode = MTLStorageModePrivate;
@@ -357,6 +368,7 @@ namespace dawn_native { namespace metal {
         NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor(device, descriptor);
         mMtlTexture =
             AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]);
+        mInternalUsage = [*mtlDesc usage];
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
             device->ConsumedError(ClearTexture(device->GetPendingCommandContext(),
@@ -369,7 +381,10 @@ namespace dawn_native { namespace metal {
                      const TextureDescriptor* descriptor,
                      NSPRef<id<MTLTexture>> mtlTexture)
         : TextureBase(device, descriptor, TextureState::OwnedInternal),
-          mMtlTexture(std::move(mtlTexture)) {
+          mMtlTexture(std::move(mtlTexture)),
+          mInternalUsage(MetalTextureUsage(device,
+                                           device->GetValidInternalFormat(descriptor->format),
+                                           descriptor->usage)) {
     }
 
     Texture::Texture(Device* device,
@@ -386,6 +401,7 @@ namespace dawn_native { namespace metal {
         mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
                                                                            iosurface:ioSurface
                                                                                plane:plane]);
+        mInternalUsage = [*mtlDesc usage];
 
         SetIsSubresourceContentInitialized(descriptor->isInitialized, GetAllSubresources());
     }
@@ -400,6 +416,10 @@ namespace dawn_native { namespace metal {
 
     id<MTLTexture> Texture::GetMTLTexture() {
         return mMtlTexture.Get();
+    }
+
+    MTLTextureUsage Texture::GetInternalUsage() const {
+        return mInternalUsage;
     }
 
     MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
@@ -625,9 +645,9 @@ namespace dawn_native { namespace metal {
         : TextureViewBase(texture, descriptor) {
         id<MTLTexture> mtlTexture = ToBackend(texture)->GetMTLTexture();
 
-        if (!UsageNeedsTextureView(texture->GetUsage())) {
+        if (texture == nullptr && !UsageNeedsTextureView(ToBackend(texture)->GetInternalUsage())) {
             mMtlTextureView = nullptr;
-        } else if (!RequiresCreatingNewTextureView(texture, descriptor)) {
+        } else if (texture == nullptr && !RequiresCreatingNewTextureView(texture, descriptor)) {
             mMtlTextureView = mtlTexture;
         } else {
             MTLPixelFormat format = MetalPixelFormat(descriptor->format);

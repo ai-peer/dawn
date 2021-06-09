@@ -145,6 +145,8 @@ namespace dawn_native {
 
         // Object creation methods that be used in a reentrant manner.
         ResultOrError<Ref<BindGroupBase>> CreateBindGroup(const BindGroupDescriptor* descriptor);
+        ResultOrError<Ref<BindGroupBase>> UnsafeCreateBindGroup(
+            const BindGroupDescriptor* descriptor);
         ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayout(
             const BindGroupLayoutDescriptor* descriptor);
         ResultOrError<Ref<BufferBase>> CreateBuffer(const BufferDescriptor* descriptor);
