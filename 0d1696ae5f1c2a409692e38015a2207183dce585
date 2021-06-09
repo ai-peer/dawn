@@ -16,6 +16,23 @@
       "message": "Now that the main part of 3D texture copy splitter is landed, this change can be revived.\n\nPTAL. Thanks!",
       "revId": "0d1696ae5f1c2a409692e38015a2207183dce585",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d734967_205bf9e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-09T08:51:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0d1696ae5f1c2a409692e38015a2207183dce585",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
