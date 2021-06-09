@@ -56,6 +56,12 @@ namespace dawn_native {
 
         void APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex);
 
+        void EncodeClearDSWithQuad(TextureViewBase* view,
+                                   Aspect aspects,
+                                   float clearDepth,
+                                   uint32_t clearStencil,
+                                   Ref<AttachmentState> attachmentState);
+
       protected:
         RenderPassEncoder(DeviceBase* device,
                           CommandEncoder* commandEncoder,
