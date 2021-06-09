@@ -48,6 +48,7 @@ namespace dawn_native { namespace metal {
                 uint32_t plane);
 
         id<MTLTexture> GetMTLTexture();
+        MTLTextureUsage GetInternalUsage() const;
 
         void EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                  const SubresourceRange& range);
@@ -63,6 +64,7 @@ namespace dawn_native { namespace metal {
                                 TextureBase::ClearValue clearValue);
 
         NSPRef<id<MTLTexture>> mMtlTexture;
+        MTLTextureUsage mInternalUsage;
     };
 
     class TextureView final : public TextureViewBase {

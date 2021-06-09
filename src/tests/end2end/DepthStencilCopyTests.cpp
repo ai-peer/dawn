@@ -235,7 +235,7 @@ TEST_P(DepthStencilCopyTests, FromStencilAspect) {
 TEST_P(DepthStencilCopyTests, FromNonZeroMipStencilAspect) {
     // TODO(crbug.com/dawn/704): Readback after clear via stencil copy does not work
     // on some Intel drivers.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
@@ -280,7 +280,7 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyStencil) {
     // on some Intel drivers.
     // Maybe has to do with the RenderAttachment usage. Notably, a later test
     // T2TBothAspectsThenCopyNonRenderableStencil does not use RenderAttachment and works correctly.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
@@ -333,7 +333,7 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyNonRenderableNonZeroMipStenc
     // on some Intel drivers.
     // Maybe has to do with the non-zero mip. Notably, a previous test
     // T2TBothAspectsThenCopyNonRenderableStencil works correctly.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     // TODO(crbug.com/dawn/667): Work around some platforms' inability to read back stencil.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
@@ -426,7 +426,7 @@ TEST_P(DepthStencilCopyTests, T2TBothAspectsThenCopyDepthThenStencil) {
     // It seems like the depth readback copy mutates the stencil because the previous
     // test T2TBothAspectsThenCopyStencil passes.
     // T2TBothAspectsThenCopyStencilThenDepth which checks stencil first also passes.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     // TODO(crbug.com/dawn/667): Work around the fact that some platforms are unable to read
     // stencil.
@@ -468,7 +468,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
 
     // TODO(crbug.com/dawn/704): Readback after clear via stencil copy does not work
     // on some Intel drivers.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     // Create a stencil texture
     constexpr uint32_t kWidth = 4;
@@ -570,6 +570,7 @@ TEST_P(DepthStencilCopyTests, ToStencilAspect) {
 DAWN_INSTANTIATE_TEST(DepthStencilCopyTests,
                       D3D12Backend(),
                       MetalBackend(),
+                      MetalBackend({"idk"}),
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());

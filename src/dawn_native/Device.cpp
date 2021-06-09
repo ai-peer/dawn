@@ -1026,6 +1026,12 @@ namespace dawn_native {
         return CreateBindGroupImpl(descriptor);
     }
 
+    ResultOrError<Ref<BindGroupBase>> DeviceBase::UnsafeCreateBindGroup(
+        const BindGroupDescriptor* descriptor) {
+        DAWN_TRY(ValidateIsAlive());
+        return CreateBindGroupImpl(descriptor);
+    }
+
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
