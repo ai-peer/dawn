@@ -84,6 +84,24 @@
       "message": "nit: TODO(dawn:800) this can be removed yadi yada",
       "revId": "faa7d918808f14ef32a90d7a60370d1ee840b660",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd381e17_921b8e4a",
+        "filename": "src/dawn_wire/client/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-06-09T17:02:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f1c9f8c_2958dbc8",
+      "revId": "faa7d918808f14ef32a90d7a60370d1ee840b660",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
