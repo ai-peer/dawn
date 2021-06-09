@@ -17,12 +17,12 @@
 #include "common/Assert.h"
 #include "common/Platform.h"
 #include "dawn_native/BindGroupLayout.h"
-#include "dawn_native/SpirvUtils.h"
+// #include "dawn_native/SpirvUtils.h"
 #include "dawn_native/TintUtils.h"
 #include "dawn_native/opengl/DeviceGL.h"
 #include "dawn_native/opengl/PipelineLayoutGL.h"
 
-#include <spirv_glsl.hpp>
+// #include <spirv_glsl.hpp>
 
 // Tint include must be after spirv_glsl.hpp, because spirv-cross has its own
 // version of spirv_headers. We also need to undef SPV_REVISION because SPIRV-Cross

@@ -24,12 +24,12 @@
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/RenderPipeline.h"
-#include "dawn_native/SpirvUtils.h"
+// #include "dawn_native/SpirvUtils.h"
 #include "dawn_native/TintUtils.h"
 
-#include <spirv-tools/libspirv.hpp>
-#include <spirv-tools/optimizer.hpp>
-#include <spirv_cross.hpp>
+// #include <spirv-tools/libspirv.hpp>
+// #include <spirv-tools/optimizer.hpp>
+// #include <spirv_cross.hpp>
 
 // Tint include must be after spirv_cross.hpp, because spirv-cross has its own
 // version of spirv_headers. We also need to undef SPV_REVISION because SPIRV-Cross
@@ -322,47 +322,47 @@ namespace dawn_native {
             }
         }
 
-        MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
-            spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
+        // MaybeError ValidateSpirv(const uint32_t* code, uint32_t codeSize) {
+        //     spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
 
-            std::ostringstream errorStream;
-            errorStream << "SPIRV Validation failure:" << std::endl;
+        //     std::ostringstream errorStream;
+        //     errorStream << "SPIRV Validation failure:" << std::endl;
 
-            spirvTools.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
-                                                         const spv_position_t& position,
-                                                         const char* message) {
-                switch (level) {
-                    case SPV_MSG_FATAL:
-                    case SPV_MSG_INTERNAL_ERROR:
-                    case SPV_MSG_ERROR:
-                        errorStream << "error: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_WARNING:
-                        errorStream << "warning: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_INFO:
-                        errorStream << "info: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    default:
-                        break;
-                }
-            });
+        //     spirvTools.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
+        //                                                  const spv_position_t& position,
+        //                                                  const char* message) {
+        //         switch (level) {
+        //             case SPV_MSG_FATAL:
+        //             case SPV_MSG_INTERNAL_ERROR:
+        //             case SPV_MSG_ERROR:
+        //                 errorStream << "error: line " << position.index << ": " << message
+        //                             << std::endl;
+        //                 break;
+        //             case SPV_MSG_WARNING:
+        //                 errorStream << "warning: line " << position.index << ": " << message
+        //                             << std::endl;
+        //                 break;
+        //             case SPV_MSG_INFO:
+        //                 errorStream << "info: line " << position.index << ": " << message
+        //                             << std::endl;
+        //                 break;
+        //             default:
+        //                 break;
+        //         }
+        //     });
 
-            if (!spirvTools.Validate(code, codeSize)) {
-                std::string disassembly;
-                if (spirvTools.Disassemble(std::vector<uint32_t>(code, code + codeSize),
-                                           &disassembly)) {
-                    errorStream << "disassembly:" << std::endl << disassembly;
-                }
+        //     if (!spirvTools.Validate(code, codeSize)) {
+        //         std::string disassembly;
+        //         if (spirvTools.Disassemble(std::vector<uint32_t>(code, code + codeSize),
+        //                                    &disassembly)) {
+        //             errorStream << "disassembly:" << std::endl << disassembly;
+        //         }
 
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
+        //         return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        //     }
 
-            return {};
-        }
+        //     return {};
+        // }
 
         ResultOrError<tint::Program> ParseWGSL(const tint::Source::File* file,
                                                OwnedCompilationMessages* outMessages) {
@@ -384,37 +384,37 @@ namespace dawn_native {
             return std::move(program);
         }
 
-        ResultOrError<tint::Program> ParseSPIRV(const std::vector<uint32_t>& spirv,
-                                                OwnedCompilationMessages* outMessages) {
-            std::ostringstream errorStream;
-            errorStream << "Tint SPIRV reader failure:" << std::endl;
+        // ResultOrError<tint::Program> ParseSPIRV(const std::vector<uint32_t>& spirv,
+        //                                         OwnedCompilationMessages* outMessages) {
+        //     std::ostringstream errorStream;
+        //     errorStream << "Tint SPIRV reader failure:" << std::endl;
 
-            tint::Program program = tint::reader::spirv::Parse(spirv);
-            if (outMessages != nullptr) {
-                outMessages->AddMessages(program.Diagnostics());
-            }
-            if (!program.IsValid()) {
-                auto err = program.Diagnostics().str();
-                errorStream << "Parser: " << err << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
+        //     tint::Program program = tint::reader::spirv::Parse(spirv);
+        //     if (outMessages != nullptr) {
+        //         outMessages->AddMessages(program.Diagnostics());
+        //     }
+        //     if (!program.IsValid()) {
+        //         auto err = program.Diagnostics().str();
+        //         errorStream << "Parser: " << err << std::endl;
+        //         return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        //     }
 
-            return std::move(program);
-        }
+        //     return std::move(program);
+        // }
 
-        ResultOrError<std::vector<uint32_t>> ModuleToSPIRV(const tint::Program* program) {
-            std::ostringstream errorStream;
-            errorStream << "Tint SPIR-V writer failure:" << std::endl;
+        // ResultOrError<std::vector<uint32_t>> ModuleToSPIRV(const tint::Program* program) {
+        //     std::ostringstream errorStream;
+        //     errorStream << "Tint SPIR-V writer failure:" << std::endl;
 
-            tint::writer::spirv::Generator generator(program);
-            if (!generator.Generate()) {
-                errorStream << "Generator: " << generator.error() << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
+        //     tint::writer::spirv::Generator generator(program);
+        //     if (!generator.Generate()) {
+        //         errorStream << "Generator: " << generator.error() << std::endl;
+        //         return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        //     }
 
-            std::vector<uint32_t> spirv = generator.result();
-            return std::move(spirv);
-        }
+        //     std::vector<uint32_t> spirv = generator.result();
+        //     return std::move(spirv);
+        // }
 
         std::vector<uint64_t> GetBindGroupMinBufferSizes(
             const EntryPointMetadata::BindingGroupInfoMap& shaderBindings,
@@ -446,43 +446,43 @@ namespace dawn_native {
             return requiredBufferSizes;
         }
 
-        ResultOrError<std::vector<uint32_t>> RunRobustBufferAccessPass(
-            const std::vector<uint32_t>& spirv) {
-            spvtools::Optimizer opt(SPV_ENV_VULKAN_1_1);
+        // ResultOrError<std::vector<uint32_t>> RunRobustBufferAccessPass(
+        //     const std::vector<uint32_t>& spirv) {
+        //     spvtools::Optimizer opt(SPV_ENV_VULKAN_1_1);
 
-            std::ostringstream errorStream;
-            errorStream << "SPIRV Optimizer failure:" << std::endl;
-            opt.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
-                                                  const spv_position_t& position,
-                                                  const char* message) {
-                switch (level) {
-                    case SPV_MSG_FATAL:
-                    case SPV_MSG_INTERNAL_ERROR:
-                    case SPV_MSG_ERROR:
-                        errorStream << "error: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_WARNING:
-                        errorStream << "warning: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_INFO:
-                        errorStream << "info: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    default:
-                        break;
-                }
-            });
-            opt.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
+        //     std::ostringstream errorStream;
+        //     errorStream << "SPIRV Optimizer failure:" << std::endl;
+        //     opt.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
+        //                                           const spv_position_t& position,
+        //                                           const char* message) {
+        //         switch (level) {
+        //             case SPV_MSG_FATAL:
+        //             case SPV_MSG_INTERNAL_ERROR:
+        //             case SPV_MSG_ERROR:
+        //                 errorStream << "error: line " << position.index << ": " << message
+        //                             << std::endl;
+        //                 break;
+        //             case SPV_MSG_WARNING:
+        //                 errorStream << "warning: line " << position.index << ": " << message
+        //                             << std::endl;
+        //                 break;
+        //             case SPV_MSG_INFO:
+        //                 errorStream << "info: line " << position.index << ": " << message
+        //                             << std::endl;
+        //                 break;
+        //             default:
+        //                 break;
+        //         }
+        //     });
+        //     opt.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
 
-            std::vector<uint32_t> result;
-            if (!opt.Run(spirv.data(), spirv.size(), &result, spvtools::ValidatorOptions(),
-                         false)) {
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-            return std::move(result);
-        }
+        //     std::vector<uint32_t> result;
+        //     if (!opt.Run(spirv.data(), spirv.size(), &result, spvtools::ValidatorOptions(),
+        //                  false)) {
+        //         return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+        //     }
+        //     return std::move(result);
+        // }
 
         MaybeError ValidateCompatibilityWithBindGroupLayout(DeviceBase*,
                                                             BindGroupIndex group,
@@ -627,245 +627,245 @@ namespace dawn_native {
             return {};
         }
 
-        ResultOrError<std::unique_ptr<EntryPointMetadata>> ExtractSpirvInfo(
-            const DeviceBase* device,
-            const spirv_cross::Compiler& compiler,
-            const std::string& entryPointName,
-            SingleShaderStage stage) {
-            std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
-            metadata->stage = stage;
+        // ResultOrError<std::unique_ptr<EntryPointMetadata>> ExtractSpirvInfo(
+        //     const DeviceBase* device,
+        //     const spirv_cross::Compiler& compiler,
+        //     const std::string& entryPointName,
+        //     SingleShaderStage stage) {
+        //     std::unique_ptr<EntryPointMetadata> metadata = std::make_unique<EntryPointMetadata>();
+        //     metadata->stage = stage;
 
-            const auto& resources = compiler.get_shader_resources();
+        //     const auto& resources = compiler.get_shader_resources();
 
-            if (resources.push_constant_buffers.size() > 0) {
-                return DAWN_VALIDATION_ERROR("Push constants aren't supported.");
-            }
+        //     if (resources.push_constant_buffers.size() > 0) {
+        //         return DAWN_VALIDATION_ERROR("Push constants aren't supported.");
+        //     }
 
-            if (resources.sampled_images.size() > 0) {
-                return DAWN_VALIDATION_ERROR("Combined images and samplers aren't supported.");
-            }
+        //     if (resources.sampled_images.size() > 0) {
+        //         return DAWN_VALIDATION_ERROR("Combined images and samplers aren't supported.");
+        //     }
 
-            // Fill in bindingInfo with the SPIRV bindings
-            auto ExtractResourcesBinding =
-                [](const DeviceBase* device,
-                   const spirv_cross::SmallVector<spirv_cross::Resource>& resources,
-                   const spirv_cross::Compiler& compiler, BindingInfoType bindingType,
-                   EntryPointMetadata::BindingInfoArray* metadataBindings,
-                   bool isStorageBuffer = false) -> MaybeError {
-                for (const auto& resource : resources) {
-                    if (!compiler.get_decoration_bitset(resource.id).get(spv::DecorationBinding)) {
-                        return DAWN_VALIDATION_ERROR("No Binding decoration set for resource");
-                    }
+        //     // Fill in bindingInfo with the SPIRV bindings
+        //     auto ExtractResourcesBinding =
+        //         [](const DeviceBase* device,
+        //            const spirv_cross::SmallVector<spirv_cross::Resource>& resources,
+        //            const spirv_cross::Compiler& compiler, BindingInfoType bindingType,
+        //            EntryPointMetadata::BindingInfoArray* metadataBindings,
+        //            bool isStorageBuffer = false) -> MaybeError {
+        //         for (const auto& resource : resources) {
+        //             if (!compiler.get_decoration_bitset(resource.id).get(spv::DecorationBinding)) {
+        //                 return DAWN_VALIDATION_ERROR("No Binding decoration set for resource");
+        //             }
 
-                    if (!compiler.get_decoration_bitset(resource.id)
-                             .get(spv::DecorationDescriptorSet)) {
-                        return DAWN_VALIDATION_ERROR("No Descriptor Decoration set for resource");
-                    }
+        //             if (!compiler.get_decoration_bitset(resource.id)
+        //                      .get(spv::DecorationDescriptorSet)) {
+        //                 return DAWN_VALIDATION_ERROR("No Descriptor Decoration set for resource");
+        //             }
 
-                    BindingNumber bindingNumber(
-                        compiler.get_decoration(resource.id, spv::DecorationBinding));
-                    BindGroupIndex bindGroupIndex(
-                        compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
+        //             BindingNumber bindingNumber(
+        //                 compiler.get_decoration(resource.id, spv::DecorationBinding));
+        //             BindGroupIndex bindGroupIndex(
+        //                 compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
 
-                    if (bindGroupIndex >= kMaxBindGroupsTyped) {
-                        return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
-                    }
+        //             if (bindGroupIndex >= kMaxBindGroupsTyped) {
+        //                 return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
+        //             }
 
-                    const auto& it = (*metadataBindings)[bindGroupIndex].emplace(
-                        bindingNumber, EntryPointMetadata::ShaderBindingInfo{});
-                    if (!it.second) {
-                        return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
-                    }
+        //             const auto& it = (*metadataBindings)[bindGroupIndex].emplace(
+        //                 bindingNumber, EntryPointMetadata::ShaderBindingInfo{});
+        //             if (!it.second) {
+        //                 return DAWN_VALIDATION_ERROR("Shader has duplicate bindings");
+        //             }
 
-                    EntryPointMetadata::ShaderBindingInfo* info = &it.first->second;
-                    info->id = resource.id;
-                    info->base_type_id = resource.base_type_id;
-                    info->bindingType = bindingType;
+        //             EntryPointMetadata::ShaderBindingInfo* info = &it.first->second;
+        //             info->id = resource.id;
+        //             info->base_type_id = resource.base_type_id;
+        //             info->bindingType = bindingType;
 
-                    switch (bindingType) {
-                        case BindingInfoType::Texture: {
-                            spirv_cross::SPIRType::ImageType imageType =
-                                compiler.get_type(info->base_type_id).image;
-                            spirv_cross::SPIRType::BaseType textureComponentType =
-                                compiler.get_type(imageType.type).basetype;
+        //             switch (bindingType) {
+        //                 case BindingInfoType::Texture: {
+        //                     spirv_cross::SPIRType::ImageType imageType =
+        //                         compiler.get_type(info->base_type_id).image;
+        //                     spirv_cross::SPIRType::BaseType textureComponentType =
+        //                         compiler.get_type(imageType.type).basetype;
 
-                            info->texture.viewDimension =
-                                SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
-                            info->texture.sampleType =
-                                SpirvBaseTypeToTextureSampleType(textureComponentType);
-                            info->texture.multisampled = imageType.ms;
+        //                     info->texture.viewDimension =
+        //                         SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
+        //                     info->texture.sampleType =
+        //                         SpirvBaseTypeToTextureSampleType(textureComponentType);
+        //                     info->texture.multisampled = imageType.ms;
 
-                            if (imageType.depth) {
-                                if (imageType.ms) {
-                                    return DAWN_VALIDATION_ERROR(
-                                        "Multisampled depth textures aren't supported");
-                                }
-                                if (info->texture.sampleType != wgpu::TextureSampleType::Float) {
-                                    return DAWN_VALIDATION_ERROR(
-                                        "Depth textures must have a float type");
-                                }
-                                info->texture.sampleType = wgpu::TextureSampleType::Depth;
-                            }
-                            if (imageType.ms && imageType.arrayed) {
-                                return DAWN_VALIDATION_ERROR(
-                                    "Multisampled array textures aren't supported");
-                            }
-                            break;
-                        }
-                        case BindingInfoType::Buffer: {
-                            // Determine buffer size, with a minimum of 1 element in the runtime
-                            // array
-                            spirv_cross::SPIRType type = compiler.get_type(info->base_type_id);
-                            info->buffer.minBindingSize =
-                                compiler.get_declared_struct_size_runtime_array(type, 1);
+        //                     if (imageType.depth) {
+        //                         if (imageType.ms) {
+        //                             return DAWN_VALIDATION_ERROR(
+        //                                 "Multisampled depth textures aren't supported");
+        //                         }
+        //                         if (info->texture.sampleType != wgpu::TextureSampleType::Float) {
+        //                             return DAWN_VALIDATION_ERROR(
+        //                                 "Depth textures must have a float type");
+        //                         }
+        //                         info->texture.sampleType = wgpu::TextureSampleType::Depth;
+        //                     }
+        //                     if (imageType.ms && imageType.arrayed) {
+        //                         return DAWN_VALIDATION_ERROR(
+        //                             "Multisampled array textures aren't supported");
+        //                     }
+        //                     break;
+        //                 }
+        //                 case BindingInfoType::Buffer: {
+        //                     // Determine buffer size, with a minimum of 1 element in the runtime
+        //                     // array
+        //                     spirv_cross::SPIRType type = compiler.get_type(info->base_type_id);
+        //                     info->buffer.minBindingSize =
+        //                         compiler.get_declared_struct_size_runtime_array(type, 1);
 
-                            // Differentiate between readonly storage bindings and writable ones
-                            // based on the NonWritable decoration.
-                            // TODO(dawn:527): Could isStorageBuffer be determined by calling
-                            // compiler.get_storage_class(resource.id)?
-                            if (isStorageBuffer) {
-                                spirv_cross::Bitset flags =
-                                    compiler.get_buffer_block_flags(resource.id);
-                                if (flags.get(spv::DecorationNonWritable)) {
-                                    info->buffer.type = wgpu::BufferBindingType::ReadOnlyStorage;
-                                } else {
-                                    info->buffer.type = wgpu::BufferBindingType::Storage;
-                                }
-                            } else {
-                                info->buffer.type = wgpu::BufferBindingType::Uniform;
-                            }
-                            break;
-                        }
-                        case BindingInfoType::StorageTexture: {
-                            spirv_cross::Bitset flags = compiler.get_decoration_bitset(resource.id);
-                            if (flags.get(spv::DecorationNonReadable)) {
-                                info->storageTexture.access = wgpu::StorageTextureAccess::WriteOnly;
-                            } else if (flags.get(spv::DecorationNonWritable)) {
-                                info->storageTexture.access = wgpu::StorageTextureAccess::ReadOnly;
-                            } else {
-                                return DAWN_VALIDATION_ERROR(
-                                    "Read-write storage textures are not supported");
-                            }
+        //                     // Differentiate between readonly storage bindings and writable ones
+        //                     // based on the NonWritable decoration.
+        //                     // TODO(dawn:527): Could isStorageBuffer be determined by calling
+        //                     // compiler.get_storage_class(resource.id)?
+        //                     if (isStorageBuffer) {
+        //                         spirv_cross::Bitset flags =
+        //                             compiler.get_buffer_block_flags(resource.id);
+        //                         if (flags.get(spv::DecorationNonWritable)) {
+        //                             info->buffer.type = wgpu::BufferBindingType::ReadOnlyStorage;
+        //                         } else {
+        //                             info->buffer.type = wgpu::BufferBindingType::Storage;
+        //                         }
+        //                     } else {
+        //                         info->buffer.type = wgpu::BufferBindingType::Uniform;
+        //                     }
+        //                     break;
+        //                 }
+        //                 case BindingInfoType::StorageTexture: {
+        //                     spirv_cross::Bitset flags = compiler.get_decoration_bitset(resource.id);
+        //                     if (flags.get(spv::DecorationNonReadable)) {
+        //                         info->storageTexture.access = wgpu::StorageTextureAccess::WriteOnly;
+        //                     } else if (flags.get(spv::DecorationNonWritable)) {
+        //                         info->storageTexture.access = wgpu::StorageTextureAccess::ReadOnly;
+        //                     } else {
+        //                         return DAWN_VALIDATION_ERROR(
+        //                             "Read-write storage textures are not supported");
+        //                     }
 
-                            spirv_cross::SPIRType::ImageType imageType =
-                                compiler.get_type(info->base_type_id).image;
-                            wgpu::TextureFormat storageTextureFormat =
-                                SpirvImageFormatToTextureFormat(imageType.format);
-                            if (storageTextureFormat == wgpu::TextureFormat::Undefined) {
-                                return DAWN_VALIDATION_ERROR(
-                                    "Invalid image format declaration on storage image");
-                            }
-                            const Format& format =
-                                device->GetValidInternalFormat(storageTextureFormat);
-                            if (!format.supportsStorageUsage) {
-                                return DAWN_VALIDATION_ERROR(
-                                    "The storage texture format is not supported");
-                            }
-                            if (imageType.ms) {
-                                return DAWN_VALIDATION_ERROR(
-                                    "Multisampled storage textures aren't supported");
-                            }
-                            if (imageType.depth) {
-                                return DAWN_VALIDATION_ERROR(
-                                    "Depth storage textures aren't supported");
-                            }
-                            info->storageTexture.format = storageTextureFormat;
-                            info->storageTexture.viewDimension =
-                                SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
-                            break;
-                        }
-                        case BindingInfoType::Sampler: {
-                            info->sampler.type = wgpu::SamplerBindingType::Filtering;
-                            break;
-                        }
-                        case BindingInfoType::ExternalTexture: {
-                            return DAWN_VALIDATION_ERROR("External textures are not supported.");
-                            break;
-                        }
-                    }
-                }
-                return {};
-            };
+        //                     spirv_cross::SPIRType::ImageType imageType =
+        //                         compiler.get_type(info->base_type_id).image;
+        //                     wgpu::TextureFormat storageTextureFormat =
+        //                         SpirvImageFormatToTextureFormat(imageType.format);
+        //                     if (storageTextureFormat == wgpu::TextureFormat::Undefined) {
+        //                         return DAWN_VALIDATION_ERROR(
+        //                             "Invalid image format declaration on storage image");
+        //                     }
+        //                     const Format& format =
+        //                         device->GetValidInternalFormat(storageTextureFormat);
+        //                     if (!format.supportsStorageUsage) {
+        //                         return DAWN_VALIDATION_ERROR(
+        //                             "The storage texture format is not supported");
+        //                     }
+        //                     if (imageType.ms) {
+        //                         return DAWN_VALIDATION_ERROR(
+        //                             "Multisampled storage textures aren't supported");
+        //                     }
+        //                     if (imageType.depth) {
+        //                         return DAWN_VALIDATION_ERROR(
+        //                             "Depth storage textures aren't supported");
+        //                     }
+        //                     info->storageTexture.format = storageTextureFormat;
+        //                     info->storageTexture.viewDimension =
+        //                         SpirvDimToTextureViewDimension(imageType.dim, imageType.arrayed);
+        //                     break;
+        //                 }
+        //                 case BindingInfoType::Sampler: {
+        //                     info->sampler.type = wgpu::SamplerBindingType::Filtering;
+        //                     break;
+        //                 }
+        //                 case BindingInfoType::ExternalTexture: {
+        //                     return DAWN_VALIDATION_ERROR("External textures are not supported.");
+        //                     break;
+        //                 }
+        //             }
+        //         }
+        //         return {};
+        //     };
 
-            DAWN_TRY(ExtractResourcesBinding(device, resources.uniform_buffers, compiler,
-                                             BindingInfoType::Buffer, &metadata->bindings));
-            DAWN_TRY(ExtractResourcesBinding(device, resources.separate_images, compiler,
-                                             BindingInfoType::Texture, &metadata->bindings));
-            DAWN_TRY(ExtractResourcesBinding(device, resources.separate_samplers, compiler,
-                                             BindingInfoType::Sampler, &metadata->bindings));
-            DAWN_TRY(ExtractResourcesBinding(device, resources.storage_buffers, compiler,
-                                             BindingInfoType::Buffer, &metadata->bindings, true));
-            // ReadonlyStorageTexture is used as a tag to do general storage texture handling.
-            DAWN_TRY(ExtractResourcesBinding(device, resources.storage_images, compiler,
-                                             BindingInfoType::StorageTexture, &metadata->bindings));
+        //     DAWN_TRY(ExtractResourcesBinding(device, resources.uniform_buffers, compiler,
+        //                                      BindingInfoType::Buffer, &metadata->bindings));
+        //     DAWN_TRY(ExtractResourcesBinding(device, resources.separate_images, compiler,
+        //                                      BindingInfoType::Texture, &metadata->bindings));
+        //     DAWN_TRY(ExtractResourcesBinding(device, resources.separate_samplers, compiler,
+        //                                      BindingInfoType::Sampler, &metadata->bindings));
+        //     DAWN_TRY(ExtractResourcesBinding(device, resources.storage_buffers, compiler,
+        //                                      BindingInfoType::Buffer, &metadata->bindings, true));
+        //     // ReadonlyStorageTexture is used as a tag to do general storage texture handling.
+        //     DAWN_TRY(ExtractResourcesBinding(device, resources.storage_images, compiler,
+        //                                      BindingInfoType::StorageTexture, &metadata->bindings));
 
-            // Extract the vertex attributes
-            if (stage == SingleShaderStage::Vertex) {
-                for (const auto& attrib : resources.stage_inputs) {
-                    if (!(compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation))) {
-                        return DAWN_VALIDATION_ERROR(
-                            "Unable to find Location decoration for Vertex input");
-                    }
-                    uint32_t location = compiler.get_decoration(attrib.id, spv::DecorationLocation);
+        //     // Extract the vertex attributes
+        //     if (stage == SingleShaderStage::Vertex) {
+        //         for (const auto& attrib : resources.stage_inputs) {
+        //             if (!(compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation))) {
+        //                 return DAWN_VALIDATION_ERROR(
+        //                     "Unable to find Location decoration for Vertex input");
+        //             }
+        //             uint32_t location = compiler.get_decoration(attrib.id, spv::DecorationLocation);
 
-                    if (location >= kMaxVertexAttributes) {
-                        return DAWN_VALIDATION_ERROR("Attribute location over limits in the SPIRV");
-                    }
+        //             if (location >= kMaxVertexAttributes) {
+        //                 return DAWN_VALIDATION_ERROR("Attribute location over limits in the SPIRV");
+        //             }
 
-                    metadata->usedVertexAttributes.set(location);
-                }
+        //             metadata->usedVertexAttributes.set(location);
+        //         }
 
-                // Without a location qualifier on vertex outputs, spirv_cross::CompilerMSL gives
-                // them all the location 0, causing a compile error.
-                for (const auto& attrib : resources.stage_outputs) {
-                    if (!compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation)) {
-                        return DAWN_VALIDATION_ERROR("Need location qualifier on vertex output");
-                    }
-                }
-            }
+        //         // Without a location qualifier on vertex outputs, spirv_cross::CompilerMSL gives
+        //         // them all the location 0, causing a compile error.
+        //         for (const auto& attrib : resources.stage_outputs) {
+        //             if (!compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation)) {
+        //                 return DAWN_VALIDATION_ERROR("Need location qualifier on vertex output");
+        //             }
+        //         }
+        //     }
 
-            if (stage == SingleShaderStage::Fragment) {
-                // Without a location qualifier on vertex inputs, spirv_cross::CompilerMSL gives
-                // them all the location 0, causing a compile error.
-                for (const auto& attrib : resources.stage_inputs) {
-                    if (!compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation)) {
-                        return DAWN_VALIDATION_ERROR("Need location qualifier on fragment input");
-                    }
-                }
+        //     if (stage == SingleShaderStage::Fragment) {
+        //         // Without a location qualifier on vertex inputs, spirv_cross::CompilerMSL gives
+        //         // them all the location 0, causing a compile error.
+        //         for (const auto& attrib : resources.stage_inputs) {
+        //             if (!compiler.get_decoration_bitset(attrib.id).get(spv::DecorationLocation)) {
+        //                 return DAWN_VALIDATION_ERROR("Need location qualifier on fragment input");
+        //             }
+        //         }
 
-                for (const auto& fragmentOutput : resources.stage_outputs) {
-                    if (!compiler.get_decoration_bitset(fragmentOutput.id)
-                             .get(spv::DecorationLocation)) {
-                        return DAWN_VALIDATION_ERROR(
-                            "Unable to find Location decoration for Fragment output");
-                    }
-                    uint32_t unsanitizedAttachment =
-                        compiler.get_decoration(fragmentOutput.id, spv::DecorationLocation);
-                    if (unsanitizedAttachment >= kMaxColorAttachments) {
-                        return DAWN_VALIDATION_ERROR(
-                            "Fragment output index must be less than max number of color "
-                            "attachments");
-                    }
-                    ColorAttachmentIndex attachment(static_cast<uint8_t>(unsanitizedAttachment));
+        //         for (const auto& fragmentOutput : resources.stage_outputs) {
+        //             if (!compiler.get_decoration_bitset(fragmentOutput.id)
+        //                      .get(spv::DecorationLocation)) {
+        //                 return DAWN_VALIDATION_ERROR(
+        //                     "Unable to find Location decoration for Fragment output");
+        //             }
+        //             uint32_t unsanitizedAttachment =
+        //                 compiler.get_decoration(fragmentOutput.id, spv::DecorationLocation);
+        //             if (unsanitizedAttachment >= kMaxColorAttachments) {
+        //                 return DAWN_VALIDATION_ERROR(
+        //                     "Fragment output index must be less than max number of color "
+        //                     "attachments");
+        //             }
+        //             ColorAttachmentIndex attachment(static_cast<uint8_t>(unsanitizedAttachment));
 
-                    spirv_cross::SPIRType::BaseType shaderFragmentOutputBaseType =
-                        compiler.get_type(fragmentOutput.base_type_id).basetype;
-                    metadata->fragmentOutputFormatBaseTypes[attachment] =
-                        SpirvBaseTypeToTextureComponentType(shaderFragmentOutputBaseType);
-                    metadata->fragmentOutputsWritten.set(attachment);
-                }
-            }
+        //             spirv_cross::SPIRType::BaseType shaderFragmentOutputBaseType =
+        //                 compiler.get_type(fragmentOutput.base_type_id).basetype;
+        //             metadata->fragmentOutputFormatBaseTypes[attachment] =
+        //                 SpirvBaseTypeToTextureComponentType(shaderFragmentOutputBaseType);
+        //             metadata->fragmentOutputsWritten.set(attachment);
+        //         }
+        //     }
 
-            if (stage == SingleShaderStage::Compute) {
-                const spirv_cross::SPIREntryPoint& spirEntryPoint =
-                    compiler.get_entry_point(entryPointName, spv::ExecutionModelGLCompute);
-                metadata->localWorkgroupSize.x = spirEntryPoint.workgroup_size.x;
-                metadata->localWorkgroupSize.y = spirEntryPoint.workgroup_size.y;
-                metadata->localWorkgroupSize.z = spirEntryPoint.workgroup_size.z;
-            }
+        //     if (stage == SingleShaderStage::Compute) {
+        //         const spirv_cross::SPIREntryPoint& spirEntryPoint =
+        //             compiler.get_entry_point(entryPointName, spv::ExecutionModelGLCompute);
+        //         metadata->localWorkgroupSize.x = spirEntryPoint.workgroup_size.x;
+        //         metadata->localWorkgroupSize.y = spirEntryPoint.workgroup_size.y;
+        //         metadata->localWorkgroupSize.z = spirEntryPoint.workgroup_size.z;
+        //     }
 
-            return {std::move(metadata)};
-        }
+        //     return {std::move(metadata)};
+        // }
 
         ResultOrError<EntryPointMetadataTable> ReflectShaderUsingTint(
             DeviceBase*,
@@ -1081,49 +1081,49 @@ namespace dawn_native {
         FindInChain(chainedDescriptor, &wgslDesc);
 
         if (spirvDesc) {
-            if (device->IsToggleEnabled(Toggle::DisallowSpirv)) {
+            // if (device->IsToggleEnabled(Toggle::DisallowSpirv)) {
                 return DAWN_VALIDATION_ERROR("SPIR-V is disallowed.");
-            }
+            // }
 
-            std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
-            if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
-                tint::Program program;
-                DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
-                parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
-            } else {
-                if (device->IsValidationEnabled()) {
-                    DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
-                }
-                parseResult->spirv = std::move(spirv);
-            }
+            // std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+            // if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            //     tint::Program program;
+            //     DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
+            //     parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
+            // } else {
+            //     if (device->IsValidationEnabled()) {
+            //         DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
+            //     }
+            //     parseResult->spirv = std::move(spirv);
+            // }
         } else if (wgslDesc) {
             auto tintSource = std::make_unique<TintSource>("", wgslDesc->source);
 
             tint::Program program;
             DAWN_TRY_ASSIGN(program, ParseWGSL(&tintSource->file, outMessages));
 
-            if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            // if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
                 parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
                 parseResult->tintSource = std::move(tintSource);
-            } else {
-                tint::transform::Manager transformManager;
-                transformManager.Add<tint::transform::Spirv>();
+            // } else {
+            //     tint::transform::Manager transformManager;
+            //     transformManager.Add<tint::transform::Spirv>();
 
-                tint::transform::DataMap transformInputs;
+            //     tint::transform::DataMap transformInputs;
 
-                tint::transform::Spirv::Config spirv_cfg;
-                spirv_cfg.emit_vertex_point_size = true;
-                transformInputs.Add<tint::transform::Spirv::Config>(spirv_cfg);
+            //     tint::transform::Spirv::Config spirv_cfg;
+            //     spirv_cfg.emit_vertex_point_size = true;
+            //     transformInputs.Add<tint::transform::Spirv::Config>(spirv_cfg);
 
-                DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program, transformInputs,
-                                                       nullptr, outMessages));
+            //     DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, &program, transformInputs,
+            //                                            nullptr, outMessages));
 
-                std::vector<uint32_t> spirv;
-                DAWN_TRY_ASSIGN(spirv, ModuleToSPIRV(&program));
-                DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
+            //     std::vector<uint32_t> spirv;
+            //     DAWN_TRY_ASSIGN(spirv, ModuleToSPIRV(&program));
+            //     DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
 
-                parseResult->spirv = std::move(spirv);
-            }
+            //     parseResult->spirv = std::move(spirv);
+            // }
         }
 
         return {};
@@ -1292,58 +1292,58 @@ namespace dawn_native {
                  mCompilationMessages->GetCompilationInfo(), userdata);
     }
 
-    ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
-        const std::vector<uint32_t>& spirv,
-        const VertexState& vertexState,
-        const std::string& entryPoint,
-        BindGroupIndex pullingBufferBindingSet) const {
-        tint::Program program;
-        DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, nullptr));
+    // ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
+    //     const std::vector<uint32_t>& spirv,
+    //     const VertexState& vertexState,
+    //     const std::string& entryPoint,
+    //     BindGroupIndex pullingBufferBindingSet) const {
+    //     tint::Program program;
+    //     DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, nullptr));
 
-        return GeneratePullingSpirv(&program, vertexState, entryPoint, pullingBufferBindingSet);
-    }
+    //     return GeneratePullingSpirv(&program, vertexState, entryPoint, pullingBufferBindingSet);
+    // }
 
-    ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
-        const tint::Program* programIn,
-        const VertexState& vertexState,
-        const std::string& entryPoint,
-        BindGroupIndex pullingBufferBindingSet) const {
-        std::ostringstream errorStream;
-        errorStream << "Tint vertex pulling failure:" << std::endl;
+    // ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
+    //     const tint::Program* programIn,
+    //     const VertexState& vertexState,
+    //     const std::string& entryPoint,
+    //     BindGroupIndex pullingBufferBindingSet) const {
+    //     std::ostringstream errorStream;
+    //     errorStream << "Tint vertex pulling failure:" << std::endl;
 
-        tint::transform::Manager transformManager;
-        transformManager.Add<tint::transform::VertexPulling>();
-        transformManager.Add<tint::transform::Spirv>();
-        if (GetDevice()->IsRobustnessEnabled()) {
-            transformManager.Add<tint::transform::BoundArrayAccessors>();
-        }
+    //     tint::transform::Manager transformManager;
+    //     transformManager.Add<tint::transform::VertexPulling>();
+    //     transformManager.Add<tint::transform::Spirv>();
+    //     if (GetDevice()->IsRobustnessEnabled()) {
+    //         transformManager.Add<tint::transform::BoundArrayAccessors>();
+    //     }
 
-        tint::transform::DataMap transformInputs;
+    //     tint::transform::DataMap transformInputs;
 
-        tint::transform::Spirv::Config spirv_cfg;
-        spirv_cfg.emit_vertex_point_size = true;
-        transformInputs.Add<tint::transform::Spirv::Config>(spirv_cfg);
+    //     tint::transform::Spirv::Config spirv_cfg;
+    //     spirv_cfg.emit_vertex_point_size = true;
+    //     transformInputs.Add<tint::transform::Spirv::Config>(spirv_cfg);
 
-        AddVertexPullingTransformConfig(vertexState, entryPoint, pullingBufferBindingSet,
-                                        &transformInputs);
+    //     AddVertexPullingTransformConfig(vertexState, entryPoint, pullingBufferBindingSet,
+    //                                     &transformInputs);
 
-        // A nullptr is passed in for the CompilationMessages here since this method is called
-        // during RenderPipeline creation, by which point the shader module's CompilationInfo
-        // may have already been queried.
-        tint::Program program;
-        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, programIn, transformInputs,
-                                               nullptr, nullptr));
+    //     // A nullptr is passed in for the CompilationMessages here since this method is called
+    //     // during RenderPipeline creation, by which point the shader module's CompilationInfo
+    //     // may have already been queried.
+    //     tint::Program program;
+    //     DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, programIn, transformInputs,
+    //                                            nullptr, nullptr));
 
-        tint::writer::spirv::Generator generator(&program);
-        if (!generator.Generate()) {
-            errorStream << "Generator: " << generator.error() << std::endl;
-            return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-        }
+    //     tint::writer::spirv::Generator generator(&program);
+    //     if (!generator.Generate()) {
+    //         errorStream << "Generator: " << generator.error() << std::endl;
+    //         return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+    //     }
 
-        std::vector<uint32_t> spirv = generator.result();
-        DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
-        return std::move(spirv);
-    }
+    //     std::vector<uint32_t> spirv = generator.result();
+    //     DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
+    //     return std::move(spirv);
+    // }
 
     MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult) {
         mTintProgram = std::move(parseResult->tintProgram);
@@ -1351,38 +1351,38 @@ namespace dawn_native {
         mSpirv = std::move(parseResult->spirv);
         mCompilationMessages = std::move(parseResult->compilationMessages);
 
-        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
+        // if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
             DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingTint(GetDevice(), mTintProgram.get()));
-        } else {
-            // If not using Tint to generate backend code, run the robust buffer access pass now
-            // since all backends will use this SPIR-V. If Tint is used, the robustness pass should
-            // be run per-backend.
-            if (GetDevice()->IsRobustnessEnabled()) {
-                DAWN_TRY_ASSIGN(mSpirv, RunRobustBufferAccessPass(mSpirv));
-            }
-            DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingSPIRVCross(GetDevice(), mSpirv));
-        }
+        // } else {
+        //     // If not using Tint to generate backend code, run the robust buffer access pass now
+        //     // since all backends will use this SPIR-V. If Tint is used, the robustness pass should
+        //     // be run per-backend.
+        //     if (GetDevice()->IsRobustnessEnabled()) {
+        //         DAWN_TRY_ASSIGN(mSpirv, RunRobustBufferAccessPass(mSpirv));
+        //     }
+        //     DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingSPIRVCross(GetDevice(), mSpirv));
+        // }
 
         return {};
     }
 
-    ResultOrError<EntryPointMetadataTable> ShaderModuleBase::ReflectShaderUsingSPIRVCross(
-        DeviceBase* device,
-        const std::vector<uint32_t>& spirv) {
-        EntryPointMetadataTable result;
-        spirv_cross::Compiler compiler(spirv);
-        for (const spirv_cross::EntryPoint& entryPoint : compiler.get_entry_points_and_stages()) {
-            ASSERT(result.count(entryPoint.name) == 0);
+    // ResultOrError<EntryPointMetadataTable> ShaderModuleBase::ReflectShaderUsingSPIRVCross(
+    //     DeviceBase* device,
+    //     const std::vector<uint32_t>& spirv) {
+    //     EntryPointMetadataTable result;
+    //     spirv_cross::Compiler compiler(spirv);
+    //     for (const spirv_cross::EntryPoint& entryPoint : compiler.get_entry_points_and_stages()) {
+    //         ASSERT(result.count(entryPoint.name) == 0);
 
-            SingleShaderStage stage = ExecutionModelToShaderStage(entryPoint.execution_model);
-            compiler.set_entry_point(entryPoint.name, entryPoint.execution_model);
+    //         SingleShaderStage stage = ExecutionModelToShaderStage(entryPoint.execution_model);
+    //         compiler.set_entry_point(entryPoint.name, entryPoint.execution_model);
 
-            std::unique_ptr<EntryPointMetadata> metadata;
-            DAWN_TRY_ASSIGN(metadata, ExtractSpirvInfo(device, compiler, entryPoint.name, stage));
-            result[entryPoint.name] = std::move(metadata);
-        }
-        return std::move(result);
-    }
+    //         std::unique_ptr<EntryPointMetadata> metadata;
+    //         DAWN_TRY_ASSIGN(metadata, ExtractSpirvInfo(device, compiler, entryPoint.name, stage));
+    //         result[entryPoint.name] = std::move(metadata);
+    //     }
+    //     return std::move(result);
+    // }
 
     size_t PipelineLayoutEntryPointPairHashFunc::operator()(
         const PipelineLayoutEntryPointPair& pair) const {

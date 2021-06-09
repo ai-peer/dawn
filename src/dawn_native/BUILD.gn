@@ -145,9 +145,9 @@ source_set("dawn_native_sources") {
     ":dawn_native_headers",
     ":dawn_native_utils_gen",
     "${dawn_root}/src/common",
-    "${dawn_root}/third_party/gn/spirv_cross:spirv_cross",
-    "${dawn_spirv_tools_dir}:spvtools_opt",
-    "${dawn_spirv_tools_dir}:spvtools_val",
+    # "${dawn_root}/third_party/gn/spirv_cross:spirv_cross",
+    # "${dawn_spirv_tools_dir}:spvtools_opt",
+    # "${dawn_spirv_tools_dir}:spvtools_val",
     "${dawn_tint_dir}/src:libtint",
   ]
   defines = []
@@ -282,8 +282,8 @@ source_set("dawn_native_sources") {
     "Sampler.h",
     "ShaderModule.cpp",
     "ShaderModule.h",
-    "SpirvUtils.cpp",
-    "SpirvUtils.h",
+    # "SpirvUtils.cpp",
+    # "SpirvUtils.h",
     "StagingBuffer.cpp",
     "StagingBuffer.h",
     "Subresource.cpp",
