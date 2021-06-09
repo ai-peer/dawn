@@ -39,6 +39,30 @@
       },
       "revId": "6d9771b098805a865039230e8a979c632556283b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bcc3306_0e7917eb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-09T03:44:34Z",
+      "side": 1,
+      "message": "We can\u0027t do that because we still look at mTopLevelBuffers for validation. Even if we no-op a copy, we need to validate that all resources referenced are not in the destroyed state.",
+      "parentUuid": "ea37ff8c_d38adfe8",
+      "range": {
+        "startLine": 632,
+        "startChar": 0,
+        "endLine": 633,
+        "endChar": 53
+      },
+      "revId": "6d9771b098805a865039230e8a979c632556283b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
