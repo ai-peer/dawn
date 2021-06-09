@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19a8c48_25861131",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T05:11:52Z",
+      "side": 0,
+      "message": "It turned out that we don\u0027t need to abandon the copy region(s) if copy height is 1. So I changed the comments here. And the implementation is quite easy, which can be seen as an optimization for cases whose copy height is odd. So I also changed the function name Recompute3DTextureCopyRegionXXXX a little bit.",
+      "range": {
+        "startLine": 431,
+        "startChar": 1,
+        "endLine": 439,
+        "endChar": 0
+      },
+      "revId": "cabd60d991487b64ddc99dc283b9fa2090d668e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
