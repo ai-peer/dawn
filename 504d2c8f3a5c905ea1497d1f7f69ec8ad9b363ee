@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67fc8006_536e10b3",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T20:18:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0124a720_3169f7a2",
+      "range": {
+        "startLine": 442,
+        "startChar": 8,
+        "endLine": 442,
+        "endChar": 28
+      },
+      "revId": "504d2c8f3a5c905ea1497d1f7f69ec8ad9b363ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9915889f_3ef19ee8",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-06-09T19:16:03Z",
       "side": 1,
       "message": "So .x is the same, and I think .z is already 0 from copy0 (or rather bufferOffset.z is always 0).\n\nWould it be more clear then to say copy1-\u003ebufferOffset.y \u003d 0, and explain why? IIUC it is because we skipped rows for the first slice, but now we don\u0027t need to skip anymore rows.",
+      "range": {
+        "startLine": 444,
+        "startChar": 31,
+        "endLine": 444,
+        "endChar": 58
+      },
+      "revId": "504d2c8f3a5c905ea1497d1f7f69ec8ad9b363ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "025bdc3e_a6929d8f",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T20:18:38Z",
+      "side": 1,
+      "message": "Done. \n\nThat\u0027s true. bufferOffset.z, which is frome texelOffset.z, is always 0.",
+      "parentUuid": "9915889f_3ef19ee8",
       "range": {
         "startLine": 444,
         "startChar": 31,
