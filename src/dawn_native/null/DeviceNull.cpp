@@ -20,7 +20,7 @@
 #include "dawn_native/Instance.h"
 #include "dawn_native/Surface.h"
 
-#include <spirv_cross.hpp>
+// #include <spirv_cross.hpp>
 
 namespace dawn_native { namespace null {
 
