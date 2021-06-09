@@ -54,6 +54,11 @@ namespace dawn_native { namespace vulkan {
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V writer failure:" << std::endl;
 
+            // The compilationMessages of parseResult should be reused, so that existing messages
+            // can be kept.
+            std::unique_ptr<OwnedCompilationMessages> messages =
+                std::move(parseResult->compilationMessages);
+
             tint::transform::Manager transformManager;
             if (GetDevice()->IsRobustnessEnabled()) {
                 transformManager.Add<tint::transform::BoundArrayAccessors>();
@@ -69,7 +74,7 @@ namespace dawn_native { namespace vulkan {
             tint::Program program;
             DAWN_TRY_ASSIGN(program,
                             RunTransforms(&transformManager, parseResult->tintProgram.get(),
-                                          transformInputs, nullptr, GetCompilationMessages()));
+                                          transformInputs, nullptr, messages.get()));
 
             tint::writer::spirv::Generator generator(&program);
             if (!generator.Generate()) {
@@ -84,6 +89,9 @@ namespace dawn_native { namespace vulkan {
             transformedParseResult.tintProgram =
                 std::make_unique<tint::Program>(std::move(program));
             transformedParseResult.spirv = spirv;
+            // Keep the origin compilationMessages
+            // The compilationMessages will be moved to ShaderModuleBase in InitializeBase
+            transformedParseResult.compilationMessages = std::move(messages);
 
             DAWN_TRY(InitializeBase(&transformedParseResult));
         } else {

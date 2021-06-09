@@ -842,6 +842,48 @@ namespace dawn_native {
         ShaderModuleParseResult parseResult = {};
         if (ConsumedError(CreateShaderModule(descriptor, &parseResult), &result)) {
             return ShaderModuleBase::MakeError(this, std::move(parseResult.compilationMessages));
+        } else {
+            // Successfully create the shader module with no error.
+            // Print deprecation and other warning message into log.
+            uint32_t countWarnings = 0;
+            std::stringstream s;
+            const WGPUCompilationInfo* CompilationInfo =
+                result->GetCompilationMessages()->GetCompilationInfo();
+
+            s << "Warning(s) in creating shader module:";
+            for (uint32_t i = 0; i < CompilationInfo->messageCount; i++) {
+                const WGPUCompilationMessage& message = CompilationInfo->messages[i];
+                ASSERT(message.type != WGPUCompilationMessageType_Error);
+                const char* typeName = "";
+                switch (message.type) {
+                    case WGPUCompilationMessageType_Error: {
+                        // This should never happen since CreateShaderModule return successfully.
+                        typeName = "Error";
+                        break;
+                    }
+                    case WGPUCompilationMessageType_Warning: {
+                        typeName = "Warning";
+                        countWarnings++;
+                        break;
+                    }
+                    case WGPUCompilationMessageType_Info: {
+                        typeName = "Info";
+                        break;
+                    }
+                    default: {
+                        typeName = "Unknown";
+                        break;
+                    }
+                }
+                s << std::endl
+                  << message.lineNum << ":" << message.linePos << " " << typeName << ": "
+                  << CompilationInfo->messages[i].message;
+            }
+
+            if (countWarnings) {
+                // Only print the compilation message if there is at least one warning.
+                this->EmitLog(WGPULoggingType_Warning, s.str().c_str());
+            }
         }
         return result.Detach();
     }
