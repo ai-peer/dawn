@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7041b1e0_180d17bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T18:03:33Z",
+      "side": 1,
+      "message": "Yeah. TextureCopySplitter unittest is the next one.\n\nAnother related stuff is T2T copy (I have already had a local patch, but need to do some minor refactoring), which is basically T2B + B2T, or has separate code but not complicated because it doesn\u0027t need to split copy region.\n\nIn addition, there are more e2e tests for 2D copies and less tests for 3D copies, not sure whether we need to add a few more. Will see.",
+      "parentUuid": "50929cd9_6c8da052",
+      "revId": "c99df01ddf0740c6867ac34fbca3a4722da427c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "52ff466d_f41d9bb5",
         "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
         "patchSetId": 3
@@ -92,6 +110,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd0181d3_eb953460",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T18:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0779263a_8087eb43",
+      "range": {
+        "startLine": 423,
+        "startChar": 32,
+        "endLine": 423,
+        "endChar": 86
+      },
+      "revId": "c99df01ddf0740c6867ac34fbca3a4722da427c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57eedeeb_58c525d6",
@@ -105,6 +147,30 @@
       "writtenOn": "2021-06-09T16:44:01Z",
       "side": 1,
       "message": "I think this needs to take into account the origin of the copy for y and z. It could be better to do textureOffset ++ instead.",
+      "range": {
+        "startLine": 443,
+        "startChar": 32,
+        "endLine": 443,
+        "endChar": 59
+      },
+      "revId": "c99df01ddf0740c6867ac34fbca3a4722da427c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b08962a0_8122039a",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 443,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T18:03:33Z",
+      "side": 1,
+      "message": "Done. I was lost in these magic numbers of textureOffset and bufferOffset and other arguments...",
+      "parentUuid": "57eedeeb_58c525d6",
       "range": {
         "startLine": 443,
         "startChar": 32,
@@ -138,6 +204,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62146032_b2dfb053",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T18:03:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "999e92c8_1bc460dd",
+      "range": {
+        "startLine": 488,
+        "startChar": 66,
+        "endLine": 488,
+        "endChar": 78
+      },
+      "revId": "c99df01ddf0740c6867ac34fbca3a4722da427c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adbf5f1_0c75cc0c",
@@ -151,6 +241,24 @@
       "writtenOn": "2021-06-09T16:44:01Z",
       "side": 1,
       "message": "u-nit: We can dedent control flow by having early outs. For example here it would be:\n\n if (bufferSize.height \u003d\u003d rowsPerImageInTexels) {\n   // Comment\n   bufferSize.height \u003d ...;\n   continue;\n }",
+      "revId": "c99df01ddf0740c6867ac34fbca3a4722da427c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "732a985d_a332b018",
+        "filename": "src/dawn_native/d3d12/TextureCopySplitter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 490,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-09T18:03:33Z",
+      "side": 1,
+      "message": "Good point. Done. And I rescheduled these if conditions, making them from the easiest one to more and more complicated ones.",
+      "parentUuid": "0adbf5f1_0c75cc0c",
       "revId": "c99df01ddf0740c6867ac34fbca3a4722da427c4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
