@@ -324,7 +324,7 @@ TEST_P(MultisampledRenderingTest, ResolveFromSingleLayerArrayInto2DTexture) {
     // Draw a green triangle.
     {
         wgpu::TextureViewDescriptor desc = {};
-        desc.dimension = wgpu::TextureViewDimension::e2DArray;
+        desc.dimension = wgpu::TextureViewDimension::e2D;
         desc.arrayLayerCount = 1;
 
         utils::ComboRenderPassDescriptor renderPass = CreateComboRenderPassDescriptorForTest(

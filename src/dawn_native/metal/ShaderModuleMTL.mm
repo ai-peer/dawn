@@ -255,6 +255,7 @@ namespace dawn_native { namespace metal {
                                                               vertexState, &remappedEntryPointName,
                                                               &out->needsStorageBufferLength));
         }
+        // printf("%s\n", msl.c_str());
 
         // Metal uses Clang to compile the shader as C++14. Disable everything in the -Wall
         // category. -Wunused-variable in particular comes up a lot in generated code, and some
