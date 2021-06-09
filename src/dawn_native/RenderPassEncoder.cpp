@@ -15,12 +15,15 @@
 #include "dawn_native/RenderPassEncoder.h"
 
 #include "common/Constants.h"
+#include "dawn_native/BindGroup.h"
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/QuerySet.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPipeline.h"
 
@@ -313,6 +316,106 @@ namespace dawn_native {
 
             return {};
         });
+    }
+
+    void RenderPassEncoder::EncodeClearDSWithQuad(TextureViewBase* view,
+                                                  Aspect aspects,
+                                                  float clearDepth,
+                                                  uint32_t clearStencil,
+                                                  Ref<AttachmentState> attachmentState) {
+        DeviceBase* device = GetDevice();
+
+        ShaderModuleWGSLDescriptor smWgslDesc = {};
+        ShaderModuleDescriptor smDesc = {};
+        smDesc.nextInChain = &smWgslDesc;
+        smWgslDesc.source = R"(
+            [[stage(vertex)]]
+            fn vert_main([[builtin(vertex_index)]] VertexIndex : u32) -> [[builtin(position)]] vec4<f32> {
+                let pos : array<vec2<f32>, 3> = array<vec2<f32>, 3>(
+                    vec2<f32>(-1.0, -1.0),
+                    vec2<f32>( 3.0, -1.0),
+                    vec2<f32>(-1.0,  3.0));
+                return vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+            }
+
+            [[block]] struct UniformDepth {
+                value: f32;
+            };
+
+            [[group(0), binding(0)]] var<uniform> depth : UniformDepth;
+
+            struct FragmentOut {
+                [[builtin(frag_depth)]] fragDepth : f32;
+            };
+
+            [[stage(fragment)]]
+            fn frag_main() -> FragmentOut {
+                var output : FragmentOut;
+                output.fragDepth = depth.value;
+                return output;
+            }
+        )";
+
+        Ref<ShaderModuleBase> shaderModule =
+            device->CreateShaderModule(&smDesc, nullptr).AcquireSuccess();
+
+        FragmentState fragment = {};
+        DepthStencilState depthStencil = {};
+        RenderPipelineDescriptor rpDesc = {};
+        ityp::array<ColorAttachmentIndex, ColorTargetState, kMaxColorAttachments> targets = {};
+        rpDesc.depthStencil = &depthStencil;
+        rpDesc.fragment = &fragment;
+        fragment.targets = targets.data();
+
+        if ((aspects & Aspect::Stencil) != Aspect::None) {
+            depthStencil.stencilFront.passOp = wgpu::StencilOperation::Replace;
+        }
+        rpDesc.multisample.count = attachmentState->GetSampleCount();
+        for (ColorAttachmentIndex i : IterateBitSet(attachmentState->GetColorAttachmentsMask())) {
+            targets[i].format = attachmentState->GetColorAttachmentFormat(i);
+            fragment.targetCount =
+                std::max(fragment.targetCount, static_cast<uint32_t>(static_cast<uint8_t>(i)) + 1);
+        }
+
+        rpDesc.vertex.module = shaderModule.Get();
+        rpDesc.vertex.entryPoint = "vert_main";
+        fragment.entryPoint = "frag_main";
+        fragment.module = shaderModule.Get();
+        depthStencil.format = view->GetFormat().format;
+        depthStencil.depthWriteEnabled = (aspects & Aspect::Depth) != Aspect::None;
+
+        Ref<RenderPipelineBase> renderPipeline =
+            device->CreateRenderPipeline(&rpDesc).AcquireSuccess();
+
+        Ref<BindGroupLayoutBase> bgl = renderPipeline->GetBindGroupLayout(0).AcquireSuccess();
+
+        BufferDescriptor bufferDesc = {};
+        bufferDesc.size = sizeof(clearDepth);
+        bufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+
+        Ref<BufferBase> buffer = device->CreateBuffer(&bufferDesc).AcquireSuccess();
+        device->GetQueue()
+            ->WriteBuffer(buffer.Get(), 0, &clearDepth, sizeof(clearDepth))
+            .AcquireSuccess();
+
+        BindGroupEntry bgEntry = {};
+        bgEntry.binding = 0;
+        bgEntry.buffer = buffer.Get();
+        bgEntry.size = sizeof(clearDepth);
+
+        BindGroupDescriptor bgDesc = {};
+        bgDesc.layout = bgl.Get();
+        bgDesc.entryCount = 1;
+        bgDesc.entries = &bgEntry;
+
+        Ref<BindGroupBase> bg = device->CreateBindGroup(&bgDesc).AcquireSuccess();
+
+        APISetPipeline(renderPipeline.Get());
+        APISetBindGroup(0, bg.Get());
+        if ((aspects & Aspect::Stencil) != Aspect::None) {
+            APISetStencilReference(clearStencil);
+        }
+        APIDraw(3, 1, 0, 0);
     }
 
 }  // namespace dawn_native

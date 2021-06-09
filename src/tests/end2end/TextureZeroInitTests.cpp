@@ -588,7 +588,7 @@ TEST_P(TextureZeroInitTest, RenderingLoadingDepthStencil) {
 TEST_P(TextureZeroInitTest, IndependentDepthStencilLoadAfterDiscard) {
     // TODO(crbug.com/dawn/704): Readback after clear via stencil copy does not work
     // on some Intel drivers.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     wgpu::TextureDescriptor depthStencilDescriptor = CreateTextureDescriptor(
         1, 1, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc,
@@ -750,7 +750,7 @@ TEST_P(TextureZeroInitTest, IndependentDepthStencilCopyAfterDiscard) {
     DAWN_SUPPRESS_TEST_IF(!(IsMetal() || IsVulkan() || IsD3D12()));
 
     // TODO(enga): Figure out why this fails on Metal Intel.
-    DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
+    // DAWN_SUPPRESS_TEST_IF(IsMetal() && IsIntel());
 
     wgpu::TextureDescriptor depthStencilDescriptor = CreateTextureDescriptor(
         1, 1, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc,

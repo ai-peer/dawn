@@ -75,6 +75,14 @@ namespace dawn_native {
 
         MaybeError ValidateFinish() const;
 
+        MaybeError EncodeBlitDSTextureToBuffer(
+          CommandAllocator* allocator,
+          const ImageCopyTexture* source,
+          Aspect aspect,
+          const BufferBase* dstBuffer,
+          const TextureDataLayout& dstLayout,
+          const Extent3D& copySize);
+
         EncodingContext mEncodingContext;
         std::set<BufferBase*> mTopLevelBuffers;
         std::set<TextureBase*> mTopLevelTextures;

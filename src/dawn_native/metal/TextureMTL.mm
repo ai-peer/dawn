@@ -34,7 +34,9 @@ namespace dawn_native { namespace metal {
             return usage & kUsageNeedsTextureView;
         }
 
-        MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
+        MTLTextureUsage MetalTextureUsage(const DeviceBase* device,
+                                          const Format& format,
+                                          wgpu::TextureUsage usage) {
             MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
 
             if (usage & (wgpu::TextureUsage::Storage)) {
@@ -55,6 +57,11 @@ namespace dawn_native { namespace metal {
 
             if (usage & (wgpu::TextureUsage::RenderAttachment)) {
                 result |= MTLTextureUsageRenderTarget;
+
+                if (device->IsToggleEnabled(Toggle::IDK) &&
+                    IsSubset(Aspect::Depth | Aspect::Stencil, format.aspects)) {
+                    result |= MTLTextureUsagePixelFormatView | MTLTextureUsageShaderRead;
+                }
             }
 
             return result;
@@ -309,8 +316,8 @@ namespace dawn_native { namespace metal {
         mtlDesc.sampleCount = descriptor->sampleCount;
         // TODO: add MTLTextureUsagePixelFormatView when needed when we support format
         // reinterpretation.
-        mtlDesc.usage = MetalTextureUsage(device->GetValidInternalFormat(descriptor->format),
-                                          descriptor->usage);
+        mtlDesc.usage = MetalTextureUsage(
+            device, device->GetValidInternalFormat(descriptor->format), descriptor->usage);
         mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
         mtlDesc.mipmapLevelCount = descriptor->mipLevelCount;
         mtlDesc.storageMode = MTLStorageModePrivate;

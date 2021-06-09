@@ -23,6 +23,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/ComputePassEncoder.h"
+#include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/QueryHelper.h"
@@ -598,9 +599,31 @@ namespace dawn_native {
 
         if (success) {
             RenderPassEncoder* passEncoder = new RenderPassEncoder(
-                device, this, &mEncodingContext, std::move(usageTracker),
-                std::move(attachmentState), descriptor->occlusionQuerySet, width, height);
+                device, this, &mEncodingContext, std::move(usageTracker), attachmentState,
+                descriptor->occlusionQuerySet, width, height);
             mEncodingContext.EnterPass(passEncoder);
+
+            if (attachmentState->HasDepthStencilAttachment() &&
+                device->IsToggleEnabled(Toggle::IDK)) {
+                TextureViewBase* view = descriptor->depthStencilAttachment->view;
+                if (view == nullptr) {
+                    view = descriptor->depthStencilAttachment->attachment;
+                }
+                Aspect aspectsToClear = Aspect::None;
+                if (descriptor->depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear) {
+                    aspectsToClear |= (view->GetAspects() & Aspect::Depth);
+                }
+                if (descriptor->depthStencilAttachment->stencilLoadOp == wgpu::LoadOp::Clear) {
+                    aspectsToClear |= (view->GetAspects() & Aspect::Stencil);
+                }
+                if (aspectsToClear != Aspect::None) {
+                    passEncoder->EncodeClearDSWithQuad(
+                        view, aspectsToClear, descriptor->depthStencilAttachment->clearDepth,
+                        descriptor->depthStencilAttachment->clearStencil,
+                        std::move(attachmentState));
+                }
+            }
+
             return passEncoder;
         }
 
@@ -738,6 +761,14 @@ namespace dawn_native {
 
             ApplyDefaultTextureDataLayoutOptions(&dstLayout, blockInfo, *copySize);
 
+            Aspect aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+            // if ((aspect & (Aspect::Depth | Aspect::Stencil)) != Aspect::None &&
+            //     GetDevice()->IsToggleEnabled(Toggle::IDK)) {
+            //     GetDevice()->ConsumedError(
+            //         EncodeBlitDSTextureToBuffer(allocator, source, aspect, destination->buffer, dstLayout, *copySize));
+            //     return {};
+            // }
+
             // Skip noop copies.
             if (copySize->width != 0 && copySize->height != 0 &&
                 copySize->depthOrArrayLayers != 0) {
@@ -747,7 +778,7 @@ namespace dawn_native {
                 copy->source.texture = source->texture;
                 copy->source.origin = source->origin;
                 copy->source.mipLevel = source->mipLevel;
-                copy->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+                copy->source.aspect = aspect;
                 copy->destination.buffer = destination->buffer;
                 copy->destination.offset = dstLayout.offset;
                 copy->destination.bytesPerRow = dstLayout.bytesPerRow;
@@ -950,6 +981,123 @@ namespace dawn_native {
         if (mDebugGroupStackSize != 0) {
             return DAWN_VALIDATION_ERROR("Each Push must be balanced by a corresponding Pop.");
         }
+
+        return {};
+    }
+
+    MaybeError CommandEncoder::EncodeBlitDSTextureToBuffer(
+        CommandAllocator* allocator,
+        const ImageCopyTexture* source,
+        Aspect aspect,
+        const BufferBase* dstBuffer,
+        const TextureDataLayout& dstLayout,
+        const Extent3D& copySize) {
+        DeviceBase* device = GetDevice();
+
+        // const TexelBlockInfo& blockInfo =
+        //     source->texture->GetFormat().GetAspectInfo(source->aspect).block;
+
+        // uint64_t requiredBytesInCopy = ComputeRequiredBytesInCopy(
+        //     blockInfo, copySize, dstLayout.bytesPerRow,
+        //     dstLayout.rowsPerImage).AcquireSuccess();
+
+        ShaderModuleWGSLDescriptor smWgslDesc = {};
+        ShaderModuleDescriptor smDesc = {};
+        smDesc.nextInChain = &smWgslDesc;
+        smWgslDesc.source = R"(
+            [[block]] struct Params {
+                level : u32;
+            };
+
+            [[block]] struct Result {
+                values : array<u32>;
+            };
+
+            [[group(0), binding(0)]] var input : texture_2d_array<u32>;
+            [[group(0), binding(1)]] var<uniform> params : Params;
+            [[group(0), binding(2)]] var<storage, read_write> result : Result;
+
+            [[workgroup_size(64, 64, 1)]]
+            [[stage(compute)]] fn main(
+                [[builtin(global_invocation_id)]] global_id: vec3<u32>
+            ) {
+                let value : u32 = textureLoad(
+                    input,
+                    vec2<i32>(i32(global_id.x), i32(global_id.y)),
+                    i32(global_id.z),
+                    i32(params.level)
+                )[0];
+            }
+        )";
+
+        Ref<ShaderModuleBase> shaderModule;
+        DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&smDesc, nullptr));
+
+        ComputePipelineDescriptor cpDesc = {};
+        cpDesc.computeStage.module = shaderModule.Get();
+        cpDesc.computeStage.entryPoint = "main";
+
+        Ref<ComputePipelineBase> pipeline;
+        DAWN_TRY_ASSIGN(pipeline, device->CreateComputePipeline(&cpDesc));
+
+        Ref<BindGroupLayoutBase> bgl;
+        DAWN_TRY_ASSIGN(bgl, pipeline->GetBindGroupLayout(0));
+
+        TextureViewDescriptor inputViewDesc = {};
+        inputViewDesc.dimension = wgpu::TextureViewDimension::e2DArray;
+        inputViewDesc.aspect = source->aspect;
+        inputViewDesc.baseArrayLayer = source->origin.z;
+        inputViewDesc.arrayLayerCount = copySize.depthOrArrayLayers;
+
+        Ref<TextureViewBase> inputView;
+        DAWN_TRY_ASSIGN(inputView, device->CreateTextureView(source->texture, &inputViewDesc));
+
+        BufferDescriptor uniformBufferDesc = {};
+        uniformBufferDesc.size = sizeof(uint32_t);
+        uniformBufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+
+        Ref<BufferBase> uniformBuffer;
+        DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&uniformBufferDesc));
+        DAWN_TRY(device->GetQueue()
+            ->WriteBuffer(uniformBuffer.Get(), 0, &source->mipLevel, sizeof(uint32_t)));
+
+        std::array<BindGroupEntry, 3> entries = {};
+        entries[0].binding = 0;
+        entries[0].textureView = inputView.Get();
+        entries[1].binding = 1;
+        entries[1].buffer = uniformBuffer.Get();
+        entries[1].size = sizeof(uint32_t);
+
+        BindGroupDescriptor bgDesc = {};
+        bgDesc.layout = bgl.Get();
+        bgDesc.entryCount = entries.size();
+        bgDesc.entries = entries.data();
+
+        Ref<BindGroupBase> bg;
+        DAWN_TRY_ASSIGN(bg, device->CreateBindGroup(&bgDesc));
+
+        ComputePassEncoder* passEncoder = APIBeginComputePass(nullptr);
+        // passEncoder->APISetPipeline(pipeline.Get());
+        // passEncoder->APISetBindGroup(0, bg.Get());
+        SetComputePipelineCmd* setPipeline = allocator->Allocate<SetComputePipelineCmd>(Command::SetComputePipeline);
+        setPipeline->pipeline = pipeline;
+
+        SetBindGroupCmd* setBindGroup = allocator->Allocate<SetBindGroupCmd>(Command::SetBindGroup);
+        setBindGroup->index = BindGroupIndex(0);
+        setBindGroup->group = bg.Get();
+        setBindGroup->dynamicOffsetCount = 0;
+
+        // passEncoder->APIDispatch(copySize.width, copySize.height, copySize.depthOrArrayLayers);
+        DispatchCmd* dispatch = allocator->Allocate<DispatchCmd>(Command::Dispatch);
+        dispatch->x = copySize.width;
+        dispatch->y = copySize.height;
+        dispatch->z = copySize.depthOrArrayLayers;
+
+        passEncoder->APIEndPass();
+
+        // allocator->Allocate<BeginComputePassCmd>(Command::BeginComputePass);
+
+        // allocator->Allocate<EndComputePassCmd>(Command::EndComputePass);
 
         return {};
     }
