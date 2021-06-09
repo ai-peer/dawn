@@ -194,7 +194,8 @@ namespace dawn_native {
               "Dump generated shaders for debug propose, dumped shaders will be log via "
               "EmitLog, thus printed in Chrome console or consumed by user-defined callback "
               "function.",
-              "https://crbug.com/dawn/792"}}
+              "https://crbug.com/dawn/792"}},
+            {Toggle::IDK, {"idk", "", "https://crbug.com/dawn/838"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
     }  // anonymous namespace

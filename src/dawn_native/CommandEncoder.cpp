@@ -598,9 +598,27 @@ namespace dawn_native {
 
         if (success) {
             RenderPassEncoder* passEncoder = new RenderPassEncoder(
-                device, this, &mEncodingContext, std::move(usageTracker),
-                std::move(attachmentState), descriptor->occlusionQuerySet, width, height);
+                device, this, &mEncodingContext, std::move(usageTracker), attachmentState,
+                descriptor->occlusionQuerySet, width, height);
             mEncodingContext.EnterPass(passEncoder);
+
+            if (attachmentState->HasDepthStencilAttachment() && device->IsToggleEnabled(Toggle::IDK)) {
+                TextureViewBase* view = descriptor->depthStencilAttachment->view;
+                Aspect aspectsToClear = Aspect::None;
+                if (descriptor->depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear) {
+                    aspectsToClear |= (view->GetAspects() & Aspect::Depth);
+                }
+                if (descriptor->depthStencilAttachment->stencilLoadOp == wgpu::LoadOp::Clear) {
+                    aspectsToClear |= (view->GetAspects() & Aspect::Stencil);
+                }
+                if (aspectsToClear != Aspect::None) {
+                    passEncoder->EncodeClearDSWithQuad(
+                        view, aspectsToClear, descriptor->depthStencilAttachment->clearDepth,
+                        descriptor->depthStencilAttachment->clearStencil,
+                        std::move(attachmentState));
+                }
+            }
+
             return passEncoder;
         }
 
