@@ -51,6 +51,24 @@
       "parentUuid": "ac8316f4_e1b12b4c",
       "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86da29ae_7aca8291",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-10T16:46:33Z",
+      "side": 1,
+      "message": "Ok I see. I was going to ask why we can\u0027t just reuse the existing bots here like \"linux-clang-rel-x64\". Is this the \"name collision\" you mention in the CL description? So these bots are effectively the same as the existing ones, but with a different name?",
+      "parentUuid": "98d06815_b93e85c8",
+      "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
