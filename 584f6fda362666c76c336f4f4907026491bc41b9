@@ -33,6 +33,24 @@
       "message": "Does ignore(myTexture) work here? That would make ignore() the magic static use builtin. Ditto for all the functions below.",
       "revId": "584f6fda362666c76c336f4f4907026491bc41b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a8c3587_88301da5",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1981,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-10T17:32:19Z",
+      "side": 1,
+      "message": "Afraid not. ignore() can only accept something that can be returned by a function, and a texture is not one of those things.\nWe\u0027re missing validation for this, but it will be enforced.",
+      "parentUuid": "705734ee_2a098cbb",
+      "revId": "584f6fda362666c76c336f4f4907026491bc41b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
