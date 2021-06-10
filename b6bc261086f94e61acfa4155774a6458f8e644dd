@@ -87,6 +87,41 @@
       "parentUuid": "86da29ae_7aca8291",
       "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0860f71_b9d036cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-10T18:25:09Z",
+      "side": 1,
+      "message": "Okay, thanks for explaining. Can we comment about this in the code?\nThis looks good for now though.\n\nI feel like in the future we will want to run on more than just Swiftshader so we can test the MSL / HLSL backends.",
+      "parentUuid": "54c7dd75_77ef64f3",
+      "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9959a73_4f5c6e36",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-10T18:25:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
