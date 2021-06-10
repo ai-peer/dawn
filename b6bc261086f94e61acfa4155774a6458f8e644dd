@@ -69,6 +69,24 @@
       "parentUuid": "98d06815_b93e85c8",
       "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54c7dd75_77ef64f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-10T17:00:17Z",
+      "side": 1,
+      "message": "Exactly, there was some Gerrit UI issues since it was treating the runs like they were for the same bot and I suspect may also cause issues with the CQ landing things later. They should be the exact same other then the naming.",
+      "parentUuid": "86da29ae_7aca8291",
+      "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
