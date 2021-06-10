@@ -33,6 +33,24 @@
       "message": "Which tests are we looking to run?",
       "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d06815_b93e85c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-10T14:34:48Z",
+      "side": 1,
+      "message": "Primarily the end2end tests, which I believe run under SwiftShader on the Tint bots.",
+      "parentUuid": "ac8316f4_e1b12b4c",
+      "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
