@@ -96,9 +96,22 @@ namespace dawn_wire {
 
                 // Initialize the handle data.
                 // Serialize into |serializePointer| so the client can update handle data.
+                // TODO(dawn:773): remove after update on chromium side.
                 virtual void SerializeInitialData(const void* data,
                                                   size_t dataLength,
-                                                  void* serializePointer) = 0;
+                                                  void* serializePointer) {
+                }
+
+                // Update handle data.
+                // Serialize into |clientDataPointer| so the client can read.
+                // When using shared memory for client/server handlers there is nothing to
+                // serialize.
+                // TODO(dawn:773): change to pure virtual after update on chromium side.
+                virtual void UpdateData(const void* data,
+                                        size_t size,
+                                        size_t offset,
+                                        void* clientDataPointer) {
+                }
 
               private:
                 ReadHandle(const ReadHandle&) = delete;

@@ -98,12 +98,6 @@ namespace dawn_wire {
             // This may fail and return nullptr.
             virtual WriteHandle* CreateWriteHandle(size_t) = 0;
 
-            // Imported memory implementation needs to override these to create Read/Write
-            // handles associated with a particular buffer. The client should receive a file
-            // descriptor for the buffer out-of-band.
-            virtual ReadHandle* CreateReadHandle(WGPUBuffer, uint64_t offset, size_t size);
-            virtual WriteHandle* CreateWriteHandle(WGPUBuffer, uint64_t offset, size_t size);
-
             class DAWN_WIRE_EXPORT ReadHandle {
               public:
                 ReadHandle();
@@ -115,16 +109,29 @@ namespace dawn_wire {
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
 
-                // Load initial data and open the handle for reading.
+                // Update map data and open the handle for reading.
                 // This function takes in the serialized result of
-                // server::MemoryTransferService::ReadHandle::SerializeInitialData.
-                // This function should write to |data| and |dataLength| the pointer and size of the
+                // server::MemoryTransferService::ReadHandle::UpdateData.
+                // This function should return a pair of data pointer and data length of the
                 // mapped data for reading. It must live at least until the ReadHandle is
-                // destructed.
+                // destructed. The deserializePointer and deserializeSize from server is passed in
+                // if any. There will be nothing to be deserialized if we are using shared memory
+                // for client and server handler
+                // TODO(dawn:773): change to pure virtual after update on chromium side.
+                virtual std::pair<void*, size_t> GetDataSpan(const void* deserializePointer,
+                                                             size_t deserializeSize,
+                                                             size_t size,
+                                                             size_t offset) {
+                    return std::make_pair(nullptr, 0);
+                }
+
+                // TODO(dawn:773): remove after update on chromium side.
                 virtual bool DeserializeInitialData(const void* deserializePointer,
                                                     size_t deserializeSize,
                                                     const void** data,
-                                                    size_t* dataLength) = 0;
+                                                    size_t* dataLength) {
+                    return false;
+                }
 
               private:
                 ReadHandle(const ReadHandle&) = delete;
@@ -142,10 +149,18 @@ namespace dawn_wire {
                 // Serialize the handle into |serializePointer| so it can be received by the server.
                 virtual void SerializeCreate(void* serializePointer) = 0;
 
-                // Open the handle for reading. The data returned should be zero-initialized.
+                // Get the handle data for writing. The data returned should be zero-initialized.
                 // The data returned must live at least until the WriteHandle is destructed.
                 // On failure, the pointer returned should be null.
-                virtual std::pair<void*, size_t> Open() = 0;
+                // TODO(dawn:773): change to pure virtual after update on chromium side.
+                virtual std::pair<void*, size_t> GetDataSpan(size_t size, size_t offset) {
+                    return std::make_pair(nullptr, 0);
+                }
+
+                // TODO(dawn:773): remove after update on chromium side.
+                virtual std::pair<void*, size_t> Open() {
+                    return std::make_pair(nullptr, 0);
+                }
 
                 // Get the required serialization size for SerializeFlush
                 virtual size_t SerializeFlushSize() = 0;
