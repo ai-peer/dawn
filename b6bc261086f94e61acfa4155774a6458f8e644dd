@@ -122,6 +122,24 @@
       "message": "LGTM",
       "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc423d84_340b5cba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-10T19:35:56Z",
+      "side": 1,
+      "message": "Expanded the comment on the generator function to make it clear why it is needed.\n\nI agree we will want to test the other backends, but I believe that involves using the Chromium bots and might require unwinding the subdependency work we did. This change is a minimally invasive change that should us help us avoid conflicts for now.",
+      "parentUuid": "f0860f71_b9d036cb",
+      "revId": "b6bc261086f94e61acfa4155774a6458f8e644dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
