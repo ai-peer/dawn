@@ -34,6 +34,24 @@
       "parentUuid": "c524d33a_b269b50d",
       "revId": "66af6b2703114f0bfd91bb93cb8a7a4da3f9e73e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "728e2307_5ae5497d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-10T19:46:42Z",
+      "side": 1,
+      "message": "Just talked to Austin. We might not need to add this ResetMapSizeAndOffset. But turning the DeserializeInitialData(for ReadHandle)/Open(for WriteHandle) to something like UpdateMapData and update the size and offset there. The mStagingData allocation happens in constructor of Read/WriteHandle. (We still need to add a new dummy function and keep the current DeserializeInitialData/Open to keep chromium happy)\n\nI will apply this update to main patch and followup with a new CL and abandon this one.",
+      "parentUuid": "7c8d39c8_9203a46b",
+      "revId": "66af6b2703114f0bfd91bb93cb8a7a4da3f9e73e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
