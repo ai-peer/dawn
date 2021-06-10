@@ -16,6 +16,46 @@
       "message": "PTAL, this needs a roll from Tint to land before it will complile correctly, which is why I haven\u0027t sent it for a dry run, but I wanted to get a start on the review while waiting for the roll.",
       "revId": "d296110ddef09a9ca0e8e01a827b6252cbf7b0e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cfa856d_286b380e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-10T19:50:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d296110ddef09a9ca0e8e01a827b6252cbf7b0e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92f563d5_b212ab98",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-10T19:50:40Z",
+      "side": 1,
+      "message": "uunit: casing seems confusing. I feel like it should either be:\n\n\"Pipeline overridable constants\"\nor\n\"Pipeline Overridable Constants\"",
+      "range": {
+        "startLine": 891,
+        "startChar": 25,
+        "endLine": 891,
+        "endChar": 55
+      },
+      "revId": "d296110ddef09a9ca0e8e01a827b6252cbf7b0e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
