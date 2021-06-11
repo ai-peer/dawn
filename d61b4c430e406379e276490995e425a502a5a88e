@@ -16,6 +16,40 @@
       "message": "PTAL. Thanks!",
       "revId": "d61b4c430e406379e276490995e425a502a5a88e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1ddbf0_7f00e092",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-11T11:48:45Z",
+      "side": 1,
+      "message": "This is an interesting issue: while the tintProgram/tintSource and spirv can be consumed by the ShaderModule (because they aren\u0027t visible when the shaderModule is an error), the compilation messages must stay, even if an error happens after WGSL validation, in the frontend or the backends.\n\nWhat do you think of changing of separating the parts that are acquired by ShaderModule creation (TintProgram/Source/Spirv) and the ones that are just modified (compilation messages) things like DeviceBase::CreateShaderModuleImpl backend::ShaderModule::Initialize, ShaderModuleBase::InitializeBase would then take a unique_ptr\u003cParseResult\u003e and a CompilationMessages*. The CompilationMessages wouldn\u0027t be consumed until we\u0027re back to APICreateShaderModule that would then SetCompilationMessages on either the error or successful shadermodule.\n\nAustin WDYT of this?",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d019c910_db052eaf",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-11T11:48:45Z",
+      "side": 1,
+      "message": "Why is the handling of warnings not in CompilationMessages directly?",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
