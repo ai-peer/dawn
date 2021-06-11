@@ -35,6 +35,13 @@ namespace dawn_native {
     // This currently aliases wgpu::TextureUsage::Present, we would assign it
     // some bit when wgpu::TextureUsage::Present is removed.
     static constexpr wgpu::TextureUsage kPresentTextureUsage = wgpu::TextureUsage::Present;
+
+    // Add an extra buffer usage and a extra binding type for binding the buffers with RESOLVE_QUERY
+    // usage as internal storage.
+    static constexpr wgpu::BufferUsage kInternalStorageBuffer =
+        static_cast<wgpu::BufferUsage>(0x08000000);
+    static constexpr wgpu::BufferBindingType kInternalStorageBufferBinding =
+        static_cast<wgpu::BufferBindingType>(0x80000000);
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_DAWNPLATFORM_H_

@@ -596,8 +596,10 @@ namespace dawn_native {
                         // group layout is invalid. However, a readonly binding in the shader with a
                         // writable storage buffer in the bind group layout is valid.
                         bool validBindingConversion =
-                            layoutInfo.buffer.type == wgpu::BufferBindingType::Storage &&
-                            shaderInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage;
+                            (layoutInfo.buffer.type == kInternalStorageBufferBinding &&
+                             shaderInfo.buffer.type == wgpu::BufferBindingType::Storage) ||
+                            (layoutInfo.buffer.type == wgpu::BufferBindingType::Storage &&
+                             shaderInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage);
 
                         if (layoutInfo.buffer.type != shaderInfo.buffer.type &&
                             !validBindingConversion) {
