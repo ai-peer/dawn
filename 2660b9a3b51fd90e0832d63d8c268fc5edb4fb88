@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a47bca_a9a84772",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-11T01:02:50Z",
+      "side": 1,
+      "message": "Changed the design a bit. Making the function virtual but not pure-virtual to avoid compilation breaking.\nThe usage could be seen at https://dawn-review.googlesource.com/c/dawn/+/51164 (cleaned)\nNow mStagingData is allocated at Read/WriteHandle construct time. The updated size/offset info is passed to UpdateMapData(ReadHandle, used to be DeserializeInitialData) and GetUpdateData(WriteHandle, used to be Open) directly. So an extra resetMapSizeAndOffset function is not needed.",
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
