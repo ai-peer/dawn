@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05fddc39_7e0f38b3",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-11T17:39:01Z",
+      "side": 1,
+      "message": "Oops. This is removed now.",
+      "parentUuid": "582e27ba_2b47b7c0",
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff5faa3e_45538ff4",
