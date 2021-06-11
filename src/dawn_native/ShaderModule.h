@@ -75,12 +75,13 @@ namespace dawn_native {
         std::unique_ptr<tint::Program> tintProgram;
         std::unique_ptr<TintSource> tintSource;
         std::vector<uint32_t> spirv;
-        std::unique_ptr<OwnedCompilationMessages> compilationMessages;
+        // std::unique_ptr<OwnedCompilationMessages> compilationMessages;
     };
 
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
                                               const ShaderModuleDescriptor* descriptor,
-                                              ShaderModuleParseResult* parseResult);
+                                              ShaderModuleParseResult* parseResult,
+                                              OwnedCompilationMessages* outMessages);
     MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
                                                        const EntryPointMetadata& entryPoint,
                                                        const PipelineLayoutBase* layout);
@@ -142,9 +143,7 @@ namespace dawn_native {
         ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModuleBase() override;
 
-        static ShaderModuleBase* MakeError(
-            DeviceBase* device,
-            std::unique_ptr<OwnedCompilationMessages> compilationMessages);
+        static ShaderModuleBase* MakeError(DeviceBase* device);
 
         // Return true iff the program has an entrypoint called `entryPoint`.
         bool HasEntryPoint(const std::string& entryPoint) const;
@@ -165,6 +164,13 @@ namespace dawn_native {
 
         void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 
+        void InjectCompilationMessages(
+            std::unique_ptr<OwnedCompilationMessages> compilationMessages);
+
+        OwnedCompilationMessages* GetCompilationMessages() {
+            return mCompilationMessages.get();
+        }
+
         ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
             const std::vector<uint32_t>& spirv,
             const VertexState& vertexState,
@@ -177,10 +183,6 @@ namespace dawn_native {
             const std::string& entryPoint,
             BindGroupIndex pullingBufferBindingSet) const;
 
-        OwnedCompilationMessages* GetCompilationMessages() {
-            return mCompilationMessages.get();
-        }
-
       protected:
         MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
         static ResultOrError<EntryPointMetadataTable> ReflectShaderUsingSPIRVCross(
@@ -188,9 +190,9 @@ namespace dawn_native {
             const std::vector<uint32_t>& spirv);
 
       private:
-        ShaderModuleBase(DeviceBase* device,
-                         ObjectBase::ErrorTag tag,
-                         std::unique_ptr<OwnedCompilationMessages> compilationMessages);
+        ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        void EmitTintWarning();
 
         // The original data in the descriptor for caching.
         enum class Type { Undefined, Spirv, Wgsl };
