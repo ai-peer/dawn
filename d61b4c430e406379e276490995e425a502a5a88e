@@ -50,6 +50,24 @@
       "message": "Why is the handling of warnings not in CompilationMessages directly?",
       "revId": "d61b4c430e406379e276490995e425a502a5a88e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4704b273_4fa263c3",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-11T15:12:28Z",
+      "side": 1,
+      "message": "\u003e Why is the handling of warnings not in CompilationMessages directly?\n\nBecause formatting the tint warnings require the tint::diag::list object (as the case of parseResult.tintProgram.Diagnostics()), which contains the source code information. When transfer the diagnostics list into OwnedCompilationMessages, only the type(error, warning or info), message (string), and position information (line number, position, and something similar) are kept, as same as what user can get by getCompilationInfo. With only these information and no source code, it would be hard to do the formatting (print the questionable part of source code).\nOn the other hand, the formatting method I know, tint::diag::Formatter.format, work in such way that take a tint::diag::list rather than CompilationMessages as input.\n\nIf there is a way to generate formatted warning just by using CompilationMessages, or we just skip the formatting (like the first patch), we can use CompilationMessages directly.",
+      "parentUuid": "d019c910_db052eaf",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
