@@ -231,8 +231,10 @@ namespace dawn_native { namespace d3d12 {
                 // instead of SRV.
                 const bool forceStorageBufferAsUAV =
                     (bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
-                     bgl->GetBindingInfo(bindingIndex).buffer.type ==
-                         wgpu::BufferBindingType::Storage);
+                     (bgl->GetBindingInfo(bindingIndex).buffer.type ==
+                          wgpu::BufferBindingType::Storage ||
+                      bgl->GetBindingInfo(bindingIndex).buffer.type ==
+                          kInternalStorageBufferBinding));
                 if (forceStorageBufferAsUAV) {
                     accessControls.emplace(srcBindingPoint, tint::ast::Access::kReadWrite);
                 }
