@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "582e27ba_2b47b7c0",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-11T17:32:15Z",
+      "side": 1,
+      "message": "Thanks for pointing this out. I will apply these change in the main CL with the real changes.",
+      "parentUuid": "aa0ebc38_a6f294a4",
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff5faa3e_45538ff4",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "061c6595_8e06547f",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-11T17:32:15Z",
+      "side": 1,
+      "message": "Will apply in the main CL",
+      "parentUuid": "ff5faa3e_45538ff4",
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9b1802f_0dd07e9f",
@@ -65,6 +101,30 @@
       "writtenOn": "2021-06-11T12:31:04Z",
       "side": 1,
       "message": "This should always be the same as the `size` passed in argument. Also since the read/write handles now always represent the entirety of the buffer, we could just have a GetData() or GetPointer() that gives us the start of the ReadHandle.",
+      "range": {
+        "startLine": 130,
+        "startChar": 43,
+        "endLine": 130,
+        "endChar": 61
+      },
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89078e7_5b0a00ec",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-11T17:32:15Z",
+      "side": 1,
+      "message": "Yep this seems unnecessary. Removed.",
+      "parentUuid": "f9b1802f_0dd07e9f",
       "range": {
         "startLine": 130,
         "startChar": 43,
