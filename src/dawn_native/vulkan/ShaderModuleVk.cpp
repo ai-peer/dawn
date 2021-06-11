@@ -67,9 +67,10 @@ namespace dawn_native { namespace vulkan {
             transformInputs.Add<tint::transform::Spirv::Config>(spirv_cfg);
 
             tint::Program program;
-            DAWN_TRY_ASSIGN(program,
-                            RunTransforms(&transformManager, parseResult->tintProgram.get(),
-                                          transformInputs, nullptr, GetCompilationMessages()));
+            DAWN_TRY_ASSIGN(
+                program,
+                RunTransforms(&transformManager, parseResult->tintProgram.get(), transformInputs,
+                              nullptr, parseResult->compilationMessages.get()));
 
             tint::writer::spirv::Generator generator(&program);
             if (!generator.Generate()) {
@@ -80,12 +81,14 @@ namespace dawn_native { namespace vulkan {
             spirv = generator.result();
             spirvPtr = &spirv;
 
-            ShaderModuleParseResult transformedParseResult;
-            transformedParseResult.tintProgram =
-                std::make_unique<tint::Program>(std::move(program));
-            transformedParseResult.spirv = spirv;
+            // Rather than use a new ParseResult object, we should just reuse the original
+            // parseResult, such that if any error occures compilationMessages and tintWarning can
+            // be pass back with parseResult, and can be used in ShaderModule::MakeError
+            parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
+            parseResult->spirv = spirv;
+            // The compilationMessages and tintWarning are kept.
 
-            DAWN_TRY(InitializeBase(&transformedParseResult));
+            DAWN_TRY(InitializeBase(parseResult));
         } else {
             DAWN_TRY(InitializeBase(parseResult));
             spirvPtr = &GetSpirv();

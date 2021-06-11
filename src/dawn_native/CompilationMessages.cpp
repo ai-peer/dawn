@@ -111,6 +111,8 @@ namespace dawn_native {
         for (const auto& diag : diagnostics) {
             AddMessage(diag);
         }
+
+        AddTintWarnings(diagnostics);
     }
 
     void OwnedCompilationMessages::ClearMessages() {
@@ -134,6 +136,42 @@ namespace dawn_native {
         }
 
         return &mCompilationInfo;
+    }
+
+    std::string OwnedCompilationMessages::getFormattedTintWarnings() {
+        if (mFormattedTintWarnings.empty()) {
+            return {};
+        }
+        std::ostringstream t;
+        for (auto pWarning = mFormattedTintWarnings.begin();
+             pWarning != mFormattedTintWarnings.end(); pWarning++) {
+            if (pWarning != mFormattedTintWarnings.begin()) {
+                t << std::endl;
+            }
+            t << *pWarning;
+        }
+        return t.str();
+    }
+
+    void OwnedCompilationMessages::AddTintWarnings(const tint::diag::List& diagnostics) {
+        tint::diag::List warningList;
+        size_t countWarning = 0;
+        for (auto& diag : diagnostics) {
+            if (diag.severity == tint::diag::Severity::Warning) {
+                countWarning++;
+                // list.add will move the Diagnostic, so we should create a new one
+                warningList.add(tint::diag::Diagnostic(diag));
+            }
+        }
+        if (countWarning == 0) {
+            return;
+        }
+        tint::diag::Formatter::Style style;
+        style.print_newline_at_end = false;
+        std::ostringstream t;
+        t << countWarning << " warning(s) generated in Tint:" << std::endl
+          << tint::diag::Formatter{style}.format(warningList);
+        mFormattedTintWarnings.push_back(t.str());
     }
 
 }  // namespace dawn_native

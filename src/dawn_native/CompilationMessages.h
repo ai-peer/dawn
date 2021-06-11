@@ -45,11 +45,15 @@ namespace dawn_native {
         void ClearMessages();
 
         const WGPUCompilationInfo* GetCompilationInfo();
+        std::string getFormattedTintWarnings();
 
       private:
+        void AddTintWarnings(const tint::diag::List& diagnostics);
+
         WGPUCompilationInfo mCompilationInfo;
         std::vector<std::string> mMessageStrings;
         std::vector<WGPUCompilationMessage> mMessages;
+        std::vector<std::string> mFormattedTintWarnings;
     };
 
 }  // namespace dawn_native

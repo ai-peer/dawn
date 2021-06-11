@@ -1227,13 +1227,12 @@ namespace dawn_native {
         }
     }
 
-    ShaderModuleBase::ShaderModuleBase(
-        DeviceBase* device,
-        ObjectBase::ErrorTag tag,
-        std::unique_ptr<OwnedCompilationMessages> compilationMessages)
+    ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
+                                       ObjectBase::ErrorTag tag,
+                                       ShaderModuleParseResult* parseResult)
         : CachedObject(device, tag),
           mType(Type::Undefined),
-          mCompilationMessages(std::move(compilationMessages)) {
+          mCompilationMessages(std::move(parseResult->compilationMessages)) {
     }
 
     ShaderModuleBase::~ShaderModuleBase() {
@@ -1243,10 +1242,9 @@ namespace dawn_native {
     }
 
     // static
-    ShaderModuleBase* ShaderModuleBase::MakeError(
-        DeviceBase* device,
-        std::unique_ptr<OwnedCompilationMessages> compilationMessages) {
-        return new ShaderModuleBase(device, ObjectBase::kError, std::move(compilationMessages));
+    ShaderModuleBase* ShaderModuleBase::MakeError(DeviceBase* device,
+                                                  ShaderModuleParseResult* parseResult) {
+        return new ShaderModuleBase(device, ObjectBase::kError, parseResult);
     }
 
     bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint) const {
@@ -1290,6 +1288,14 @@ namespace dawn_native {
 
         callback(WGPUCompilationInfoRequestStatus_Success,
                  mCompilationMessages->GetCompilationInfo(), userdata);
+    }
+
+    void ShaderModuleBase::EmitTintWarning() {
+        // To be called by InitializeBase and ErrorConstructor
+        std::string formattedWarning = mCompilationMessages->getFormattedTintWarnings();
+        if (!formattedWarning.empty()) {
+            this->GetDevice()->EmitLog(WGPULoggingType_Warning, formattedWarning.c_str());
+        }
     }
 
     ResultOrError<std::vector<uint32_t>> ShaderModuleBase::GeneratePullingSpirv(
@@ -1349,7 +1355,6 @@ namespace dawn_native {
         mTintProgram = std::move(parseResult->tintProgram);
         mTintSource = std::move(parseResult->tintSource);
         mSpirv = std::move(parseResult->spirv);
-        mCompilationMessages = std::move(parseResult->compilationMessages);
 
         if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
             DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingTint(GetDevice(), mTintProgram.get()));
@@ -1362,6 +1367,13 @@ namespace dawn_native {
             }
             DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingSPIRVCross(GetDevice(), mSpirv));
         }
+
+        // Move compilation messages from parseResult to ShaderModuleBase
+        // after all other operations are finished successfully. Otherwise, we must keep
+        // compilationMessages in parseResult valid, which will be used in
+        // ShaderModuleBase::MakeError.
+        mCompilationMessages = std::move(parseResult->compilationMessages);
+        this->EmitTintWarning();
 
         return {};
     }
