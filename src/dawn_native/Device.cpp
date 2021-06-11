@@ -841,7 +841,13 @@ namespace dawn_native {
         Ref<ShaderModuleBase> result;
         ShaderModuleParseResult parseResult = {};
         if (ConsumedError(CreateShaderModule(descriptor, &parseResult), &result)) {
-            return ShaderModuleBase::MakeError(this, std::move(parseResult.compilationMessages));
+            if (parseResult.compilationMessages == nullptr) {
+                // The compileMessage is already moved into ShaderModuleBase before error occures.
+                // Now the compilationMessages is lost. Make sure that compilationMessages hold a
+                // valid pointer.
+                parseResult.compilationMessages = std::make_unique<OwnedCompilationMessages>();
+            }
+            return ShaderModuleBase::MakeError(this, &parseResult);
         }
         return result.Detach();
     }
