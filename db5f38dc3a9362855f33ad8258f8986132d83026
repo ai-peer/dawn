@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5871201_74a17744",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-11T12:33:49Z",
+      "side": 1,
+      "message": "1+1\u003d2, CQing now that the suppressions are landed.",
+      "revId": "db5f38dc3a9362855f33ad8258f8986132d83026",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
