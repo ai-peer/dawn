@@ -76,6 +76,10 @@ namespace dawn_native {
         std::unique_ptr<TintSource> tintSource;
         std::vector<uint32_t> spirv;
         std::unique_ptr<OwnedCompilationMessages> compilationMessages;
+        std::string tintWarning;  // The formatted Tint warning messages, will not be keep in
+                                  // ShaderModule and should be emit before the object consumed
+
+        bool tintWarningEmitted = false;
     };
 
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
@@ -142,9 +146,8 @@ namespace dawn_native {
         ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModuleBase() override;
 
-        static ShaderModuleBase* MakeError(
-            DeviceBase* device,
-            std::unique_ptr<OwnedCompilationMessages> compilationMessages);
+        static ShaderModuleBase* MakeError(DeviceBase* device,
+                                           ShaderModuleParseResult* parseResult);
 
         // Return true iff the program has an entrypoint called `entryPoint`.
         bool HasEntryPoint(const std::string& entryPoint) const;
@@ -190,7 +193,9 @@ namespace dawn_native {
       private:
         ShaderModuleBase(DeviceBase* device,
                          ObjectBase::ErrorTag tag,
-                         std::unique_ptr<OwnedCompilationMessages> compilationMessages);
+                         ShaderModuleParseResult* parseResult);
+
+        void EmitTintWarning(ShaderModuleParseResult* parseResult);
 
         // The original data in the descriptor for caching.
         enum class Type { Undefined, Spirv, Wgsl };
