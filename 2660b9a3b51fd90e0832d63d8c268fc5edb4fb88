@@ -16,6 +16,63 @@
       "message": "Changed the design a bit. Making the function virtual but not pure-virtual to avoid compilation breaking.\nThe usage could be seen at https://dawn-review.googlesource.com/c/dawn/+/51164 (cleaned)\nNow mStagingData is allocated at Read/WriteHandle construct time. The updated size/offset info is passed to UpdateMapData(ReadHandle, used to be DeserializeInitialData) and GetUpdateData(WriteHandle, used to be Open) directly. So an extra resetMapSizeAndOffset function is not needed.",
       "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa0ebc38_a6f294a4",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-11T12:31:04Z",
+      "side": 1,
+      "message": "nit: I think these can be removed, they are no longer used.",
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff5faa3e_45538ff4",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-11T12:31:04Z",
+      "side": 1,
+      "message": "nit: the comment needs updating because it still talks about creation of the reead handle, SerializeInitialData, etc.",
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b1802f_0dd07e9f",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-11T12:31:04Z",
+      "side": 1,
+      "message": "This should always be the same as the `size` passed in argument. Also since the read/write handles now always represent the entirety of the buffer, we could just have a GetData() or GetPointer() that gives us the start of the ReadHandle.",
+      "range": {
+        "startLine": 130,
+        "startChar": 43,
+        "endLine": 130,
+        "endChar": 61
+      },
+      "revId": "2660b9a3b51fd90e0832d63d8c268fc5edb4fb88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
