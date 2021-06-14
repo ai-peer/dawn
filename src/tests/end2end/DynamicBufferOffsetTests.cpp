@@ -107,36 +107,19 @@ class DynamicBufferOffsetTests : public DawnTest {
         std::ostringstream fs;
         std::string multipleNumber = isInheritedPipeline ? "2" : "1";
         fs << R"(
-            // TODO(crbug.com/tint/386):  Use the same struct.
-            [[block]] struct Buffer1 {
+            [[block]] struct Buffer {
                 value : vec2<u32>;
             };
 
-            [[block]] struct Buffer2 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer3 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer4 {
-                value : vec2<u32>;
-            };
-
-            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer1;
-            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer2;
-            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer3;
-            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer4;
+            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer;
+            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer;
+            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer;
+            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer;
         )";
 
         if (isInheritedPipeline) {
             fs << R"(
-                [[block]] struct Buffer5 {
-                    value : vec2<u32>;
-                };
-
-                [[group(1), binding(0)]] var<uniform> paddingBlock : Buffer5;
+                [[group(1), binding(0)]] var<uniform> paddingBlock : Buffer;
             )";
         }
 
@@ -174,27 +157,14 @@ class DynamicBufferOffsetTests : public DawnTest {
         std::ostringstream cs;
         std::string multipleNumber = isInheritedPipeline ? "2" : "1";
         cs << R"(
-            // TODO(crbug.com/tint/386):  Use the same struct.
-            [[block]] struct Buffer1 {
+            [[block]] struct Buffer {
                 value : vec2<u32>;
             };
 
-            [[block]] struct Buffer2 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer3 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer4 {
-                value : vec2<u32>;
-            };
-
-            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer1;
-            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer2;
-            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer3;
-            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer4;
+            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer;
+            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer;
+            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer;
+            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer;
         )";
 
         if (isInheritedPipeline) {
