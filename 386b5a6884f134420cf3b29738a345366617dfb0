@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26b1caa5_68758db3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-14T17:54:21Z",
+      "side": 1,
+      "message": "PTAL, with one question below about log message output. ",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14a5de5_dbf260d9",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-14T17:54:21Z",
+      "side": 1,
+      "message": "The problem for this code snippet is that if there are some fatal failures, it will output both 2D splits and 3D splits. It tried to distinguish them but failed. It seems to me that function HasFatalFailure() is async. In addition, HasFatalFailure() and FAIL() didn\u0027t clear the information stored. I even looked into googletest but didn\u0027t find appropriate API to clear the errors after output msg. Any suggestion on this? Alternatively, we can let it be. The log will tell you there is an error. If we debug into the implementation code of 2D/3D texture copy splitter, it is very easy to find out what is wrong.",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 9
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
