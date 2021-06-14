@@ -16,6 +16,24 @@
       "message": "An example to show the error on x-axis (or any other axis) for the previous calculation (textureOffset.x, textureOffset.x + copySize.width).\ncopy0: textureOffset.x is 0, copySize.width is 2. The previous calculation is (0, 2)\ncopy1: textureOffset.x is 2, copySize.width is 2. The previous calculation is (2, 4). \nThere is no overlap on x-axis for copy0 and copy1. \nHowever, RangeOverlap will return true: minA(0) \u003c minB(2) \u0026\u0026 minB(2) \u003c\u003d maxA(2), which means they are overlapping on x axis. \n\nMy fix is a solution. copy0: [0, 1], copy1: [2, 3], both ends are included because they are integer. \n\nAnother solution is keep the calculation in ValidateDisjoint, but return\n  (minA \u003c\u003d minB \u0026\u0026 minB \u003c maxA) || (minB \u003c\u003d minA \u0026\u0026 minA \u003c maxB);\nin RangesOverlap. \n\nThe updated RangeOverlap() is saying that copy0 is [0, 2), and copy1 is [2, 4) on x-axis (note the braces I am using). And the updated RangesOverlap will not declare overlapping for copy0 and copy1 on x-axis. Note that the left value is included, while the right value is not included, so I use different braces. \n\nIf bufferOffset and copySize are float values, I will use this latter solution. Now that they are integers, I prefer the current fix.",
       "revId": "a70da66d64f9aee9795dfdaae38fb319b24010d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cfca931_a071b344",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 0,
+      "message": "LGTM, can we just rename to InclusiveRangesOverlap so that the semantic is more clear?",
+      "parentUuid": "c8aaeb60_8f971df7",
+      "revId": "a70da66d64f9aee9795dfdaae38fb319b24010d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

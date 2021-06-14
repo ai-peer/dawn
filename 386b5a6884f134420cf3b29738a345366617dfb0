@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cea8601_f86b0824",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 1,
+      "message": "nit: enables",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "26b1caa5_68758db3",
@@ -18,6 +41,80 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abfb8577_fa2978f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 1,
+      "message": "LGTM overall. Do you think the existing tests provide enough coverage for 3D or do we need to add more textureSpec / bufferSpecs?",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "770356d5_00a544a0",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 1,
+      "message": "Is there a place where we check that bufferOffset and copySize are multiple of the block size?",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f211695a_b7c5a569",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 1,
+      "message": "u-nit: ASSERT_EQ here and below since these are test assertions.",
+      "range": {
+        "startLine": 79,
+        "startChar": 16,
+        "endLine": 79,
+        "endChar": 22
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159a31a3_4b867945",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 1,
+      "message": "nit: Could we add a check there are not empty copies being generated?",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f14a5de5_dbf260d9",
@@ -31,6 +128,30 @@
       "writtenOn": "2021-06-14T17:54:21Z",
       "side": 1,
       "message": "The problem for this code snippet is that if there are some fatal failures, it will output both 2D splits and 3D splits. It tried to distinguish them but failed. It seems to me that function HasFatalFailure() is async. In addition, HasFatalFailure() and FAIL() didn\u0027t clear the information stored. I even looked into googletest but didn\u0027t find appropriate API to clear the errors after output msg. Any suggestion on this? Alternatively, we can let it be. The log will tell you there is an error. If we debug into the implementation code of 2D/3D texture copy splitter, it is very easy to find out what is wrong.",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 9
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1646469f_0a206904",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T18:10:37Z",
+      "side": 1,
+      "message": "Maybe we could parametrize the tests over 2D/3D. This fixture would be inheriting from TestWithParams\u003cFoo\u003e, TEST_F below would become TEST_P and we would need to call GTEST_INSTANTIATE... This is similar to what DawnTest does (although it adds a lot of complexity on top).",
+      "parentUuid": "f14a5de5_dbf260d9",
       "range": {
         "startLine": 368,
         "startChar": 0,
