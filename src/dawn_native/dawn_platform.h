@@ -35,6 +35,9 @@ namespace dawn_native {
     // This currently aliases wgpu::TextureUsage::Present, we would assign it
     // some bit when wgpu::TextureUsage::Present is removed.
     static constexpr wgpu::TextureUsage kPresentTextureUsage = wgpu::TextureUsage::Present;
+
+    static constexpr wgpu::BufferUsage kInternalStorageBuffer =
+        static_cast<wgpu::BufferUsage>(0x08000000);
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_DAWNPLATFORM_H_
