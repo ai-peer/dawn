@@ -16,6 +16,23 @@
       "message": "A bug found by unittest. Otherwise, 3D texture copy splitter should be fine. PTAL. Thanks.\n\nThe unittest itself need some significant changes in order to enable it for 3D texture copy splitter, I still need to take some time for that. ",
       "revId": "a70da66d64f9aee9795dfdaae38fb319b24010d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a48209_c3db6817",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T07:48:15Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "a70da66d64f9aee9795dfdaae38fb319b24010d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
