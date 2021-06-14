@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d90b5c6_db1c1023",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T07:56:08Z",
+      "side": 1,
+      "message": "LGTM with some nits. Austin can you TAL too?",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "846951a9_5de5ddf3",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T07:56:08Z",
+      "side": 1,
+      "message": "nit: can we assign TODOs to issues now that Austin triaged all TODOs? Ditto below.",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53e28eed_578d2ef8",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T07:56:08Z",
+      "side": 1,
+      "message": "nit: We can have GetData for this handle too, this would remove the need for \"const void** data\" here and make it symmetric with the WriteHandle.",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6805809_eb3231d8",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-14T07:56:08Z",
+      "side": 1,
+      "message": "u-nit: GetData? GetDataSpan? This is a \"memory transfer\" service that technically doesn\u0027t know about mapping specifically.",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
