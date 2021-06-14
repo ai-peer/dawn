@@ -73,6 +73,30 @@
       },
       "revId": "d296110ddef09a9ca0e8e01a827b6252cbf7b0e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19db5581_3a69e1f5",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-14T14:01:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92f563d5_b212ab98",
+      "range": {
+        "startLine": 891,
+        "startChar": 25,
+        "endLine": 891,
+        "endChar": 55
+      },
+      "revId": "d296110ddef09a9ca0e8e01a827b6252cbf7b0e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
