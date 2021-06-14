@@ -107,36 +107,19 @@ class DynamicBufferOffsetTests : public DawnTest {
         std::ostringstream fs;
         std::string multipleNumber = isInheritedPipeline ? "2" : "1";
         fs << R"(
-            // TODO(crbug.com/tint/386):  Use the same struct.
-            [[block]] struct Buffer1 {
+            [[block]] struct Buffer {
                 value : vec2<u32>;
             };
 
-            [[block]] struct Buffer2 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer3 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer4 {
-                value : vec2<u32>;
-            };
-
-            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer1;
-            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer2;
-            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer3;
-            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer4;
+            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer;
+            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer;
+            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer;
+            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer;
         )";
 
         if (isInheritedPipeline) {
             fs << R"(
-                [[block]] struct Buffer5 {
-                    value : vec2<u32>;
-                };
-
-                [[group(1), binding(0)]] var<uniform> paddingBlock : Buffer5;
+                [[group(1), binding(0)]] var<uniform> paddingBlock : Buffer;
             )";
         }
 
@@ -144,7 +127,7 @@ class DynamicBufferOffsetTests : public DawnTest {
         fs << R"(
             [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
                 sBufferNotDynamic.value = uBufferNotDynamic.value.xy;
-                sBuffer.value = vec2<u32>(multipleNumber, multipleNumber) * (uBuffer.value.xy + sBufferNotDynamic.value.xy);
+                sBuffer.value = vec2<u32>(multipleNumber, multipleNumber) * (uBuffer.value.xy + uBufferNotDynamic.value.xy);
                 return vec4<f32>(f32(uBuffer.value.x) / 255.0, f32(uBuffer.value.y) / 255.0,
                                       1.0, 1.0);
             }
@@ -174,27 +157,14 @@ class DynamicBufferOffsetTests : public DawnTest {
         std::ostringstream cs;
         std::string multipleNumber = isInheritedPipeline ? "2" : "1";
         cs << R"(
-            // TODO(crbug.com/tint/386):  Use the same struct.
-            [[block]] struct Buffer1 {
+            [[block]] struct Buffer {
                 value : vec2<u32>;
             };
 
-            [[block]] struct Buffer2 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer3 {
-                value : vec2<u32>;
-            };
-
-            [[block]] struct Buffer4 {
-                value : vec2<u32>;
-            };
-
-            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer1;
-            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer2;
-            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer3;
-            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer4;
+            [[group(0), binding(0)]] var<uniform> uBufferNotDynamic : Buffer;
+            [[group(0), binding(1)]] var<storage, read_write> sBufferNotDynamic : Buffer;
+            [[group(0), binding(3)]] var<uniform> uBuffer : Buffer;
+            [[group(0), binding(4)]] var<storage, read_write> sBuffer : Buffer;
         )";
 
         if (isInheritedPipeline) {
@@ -256,7 +226,7 @@ TEST_P(DynamicBufferOffsetTests, BasicRenderPipeline) {
 }
 
 // Have non-zero dynamic offsets.
-TEST_P(DynamicBufferOffsetTests, SetDynamicOffestsRenderPipeline) {
+TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsRenderPipeline) {
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
@@ -298,7 +268,10 @@ TEST_P(DynamicBufferOffsetTests, BasicComputePipeline) {
 }
 
 // Have non-zero dynamic offsets.
-TEST_P(DynamicBufferOffsetTests, SetDynamicOffestsComputePipeline) {
+TEST_P(DynamicBufferOffsetTests, SetDynamicOffsetsComputePipeline) {
+    // TODO(crbug.com/dawn/978): Failing on Windows Vulkan NVIDIA
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsNvidia());
+
     wgpu::ComputePipeline pipeline = CreateComputePipeline();
 
     std::array<uint32_t, 2> offsets = {kMinUniformBufferOffsetAlignment,
@@ -319,7 +292,7 @@ TEST_P(DynamicBufferOffsetTests, SetDynamicOffestsComputePipeline) {
 }
 
 // Test inherit dynamic offsets on render pipeline
-TEST_P(DynamicBufferOffsetTests, InheritDynamicOffestsRenderPipeline) {
+TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsRenderPipeline) {
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
     wgpu::RenderPipeline testPipeline = CreateRenderPipeline(true);
@@ -351,7 +324,7 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffestsRenderPipeline) {
 // TODO(shaobo.yan@intel.com) : Try this test on GTX1080 and cannot reproduce the failure.
 // Suspect it is due to dawn doesn't handle sync between two dispatch and disable this case.
 // Will double check root cause after got GTX1660.
-TEST_P(DynamicBufferOffsetTests, InheritDynamicOffestsComputePipeline) {
+TEST_P(DynamicBufferOffsetTests, InheritDynamicOffsetsComputePipeline) {
     DAWN_SUPPRESS_TEST_IF(IsWindows());
     wgpu::ComputePipeline pipeline = CreateComputePipeline();
     wgpu::ComputePipeline testPipeline = CreateComputePipeline(true);
@@ -377,7 +350,7 @@ TEST_P(DynamicBufferOffsetTests, InheritDynamicOffestsComputePipeline) {
 }
 
 // Setting multiple dynamic offsets for the same bindgroup in one render pass.
-TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffestsMultipleTimesRenderPipeline) {
+TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesRenderPipeline) {
     // Using default pipeline and setting dynamic offsets
     wgpu::RenderPipeline pipeline = CreateRenderPipeline();
 
