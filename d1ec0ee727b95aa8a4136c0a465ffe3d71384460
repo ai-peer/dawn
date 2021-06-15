@@ -1,0 +1,329 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "794fd126_10a33efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "Sorry again for the drive-by review. It\u0027s only when I finished it that I realized I got the email because I subscribe to all Dawn \"Ready for review\" CLs, so I thought I might as well send it.",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a39ebc7a_8c5c7ded",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f38d497_5d1750cf",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "What about testing fields without any or partial decorations?\n\nActually this function is not used to write the test WGSL, but same question for [1]",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf7b2b02_8c31a49a",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "Can we have a high-level explanation of what this test does so that it is easier to follow afterwards?",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "985246a1_e96edafc",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e98ee16_f8089003",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: extra whitespace (or not enough)",
+      "range": {
+        "startLine": 170,
+        "startChar": 20,
+        "endLine": 170,
+        "endChar": 23
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f8dc2d_8f4d3a48",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: // Build the input data.",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "106a0251_6c6b828a",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "u-nit: We usually use CamelCase so PushU32 here.",
+      "range": {
+        "startLine": 245,
+        "startChar": 13,
+        "endLine": 245,
+        "endChar": 21
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "074398a6_b255f747",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "Ditto",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f45889ed_025d920c",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: explain that the top bit is used to differentiate this from other codes (that all have the high bit set).",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73025868_108c433e",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: We can use utils::CreateBufferFromData (you can add an overload for vectors if needed.)",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a909781_c1527b1f",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "u-nit: we just wrote the data, so this seems unnecessary.",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77dd70e_1c01189a",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: This is not needed since Dawn (lazily) zero-initializes buffers. The CopyDst usage becomes unused.",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 5
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e32816da_37aa4ba3",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b57526d_83c50869",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: the offset and size are optional and will use the whole buffer by default.",
+      "range": {
+        "startLine": 315,
+        "startChar": 71,
+        "endLine": 315,
+        "endChar": 90
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "726265c5_f79664fa",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "Is there a way to have a suppression that\u0027s more precise that could be checked with DAWN_SUPPRESS_TEST_IF at the top of the test?",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61505895_d12a6af0",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T11:56:38Z",
+      "side": 1,
+      "message": "nit: This doesn\u0027t need to be StorageBufferOnly since the alignment is larger than 16.",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 90
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
