@@ -104,6 +104,24 @@
       "parentUuid": "12a5b07c_fecd7a0b",
       "revId": "d61b4c430e406379e276490995e425a502a5a88e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52dd32d6_b022302b",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T14:15:33Z",
+      "side": 1,
+      "message": "Yep that\u0027s the suggestion!",
+      "parentUuid": "22607bf9_4290b6ee",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
