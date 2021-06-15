@@ -68,6 +68,24 @@
       "parentUuid": "d019c910_db052eaf",
       "revId": "d61b4c430e406379e276490995e425a502a5a88e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12a5b07c_fecd7a0b",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T12:50:44Z",
+      "side": 1,
+      "message": "CompilationMessage has three AddMessage variants:\n\n - AddMessage with raw data, only used in tests so it should really be AddMessageForTesting.\n - AddMessage with a single Diagnostic, only used internally so it should really be a private function.\n - AddMessages with a DiagList that\u0027s what is used in ShaderModule, and we can use the DiagList to format the warning.\n \nWould this work?",
+      "parentUuid": "4704b273_4fa263c3",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
