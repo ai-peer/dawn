@@ -86,6 +86,24 @@
       "parentUuid": "4704b273_4fa263c3",
       "revId": "d61b4c430e406379e276490995e425a502a5a88e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22607bf9_4290b6ee",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-15T13:32:46Z",
+      "side": 1,
+      "message": "Currently what does AddMessages with a DiagList do is actually calling AddMessage with each single Diagnostic in the list, as in CompilationMessages.cpp#107(https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/CompilationMessages.cpp;drc\u003d83ae2cec69ec54b85670f61998f592b6801d3fda;l\u003d107). \nIn the AddMessage with each single Diagnostic (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/CompilationMessages.cpp;drc\u003d83ae2cec69ec54b85670f61998f592b6801d3fda;l\u003d58), only severity, lineNum, linePos, offset, and length will be pushed into mMessages, together with diagnostic message (e.g., \"xxx is deprecated\").\nMaybe we can add a private string member in CompilationMessage to keep the formatted warning, instead of keeping it in parseResult (like what I do in patch 3)?",
+      "parentUuid": "12a5b07c_fecd7a0b",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
