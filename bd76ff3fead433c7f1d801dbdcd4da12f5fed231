@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "582a0ece_fd14d724",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T15:27:22Z",
+      "side": 1,
+      "message": "Kai, Stephen PTAL\n\nAustin as FYI",
+      "revId": "bd76ff3fead433c7f1d801dbdcd4da12f5fed231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
