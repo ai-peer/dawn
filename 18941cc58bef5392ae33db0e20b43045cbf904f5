@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f82ab2f3_d1e3169b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T12:16:04Z",
+      "side": 1,
+      "message": "LGTM. Austin is OOO, Jiawei can you TAL?",
+      "revId": "18941cc58bef5392ae33db0e20b43045cbf904f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffca22cf_07947bdb",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-15T12:16:04Z",
+      "side": 1,
+      "message": "nit: You can use webgpu_cpp_print.h instead: https://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/src/include/dawn/webgpu_cpp_print.h;l\u003d3?q\u003dwebgpu_cpp_print\u0026sq\u003d",
+      "revId": "18941cc58bef5392ae33db0e20b43045cbf904f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
