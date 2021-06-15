@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "67e2a5dc_85a99ade",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-15T06:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cea8601_f86b0824",
+      "range": {
+        "startLine": 13,
+        "startChar": 12,
+        "endLine": 13,
+        "endChar": 19
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "26b1caa5_68758db3",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "602c54e5_f40c5418",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-15T06:55:43Z",
+      "side": 1,
+      "message": "bufferSpec should be enough. I added a few more tests in textureSpec for the particular 3D copy splitter cases when copySize.height is 1.",
+      "parentUuid": "abfb8577_fa2978f6",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "770356d5_00a544a0",
@@ -71,6 +113,24 @@
       "writtenOn": "2021-06-14T18:10:37Z",
       "side": 1,
       "message": "Is there a place where we check that bufferOffset and copySize are multiple of the block size?",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e69eab_a0ba6d3a",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-15T06:55:43Z",
+      "side": 1,
+      "message": "They might be validated in validation tests, but they are not checked in this unittests. I added a few ASSERT_EQs. They might be redundant. But it should be fine.",
+      "parentUuid": "770356d5_00a544a0",
       "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +158,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "482c506c_bc3ef31f",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-15T06:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f211695a_b7c5a569",
+      "range": {
+        "startLine": 79,
+        "startChar": 16,
+        "endLine": 79,
+        "endChar": 22
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "159a31a3_4b867945",
@@ -111,6 +195,24 @@
       "writtenOn": "2021-06-14T18:10:37Z",
       "side": 1,
       "message": "nit: Could we add a check there are not empty copies being generated?",
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74bd9687_644de78b",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-15T06:55:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "159a31a3_4b867945",
       "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -152,6 +254,30 @@
       "side": 1,
       "message": "Maybe we could parametrize the tests over 2D/3D. This fixture would be inheriting from TestWithParams\u003cFoo\u003e, TEST_F below would become TEST_P and we would need to call GTEST_INSTANTIATE... This is similar to what DawnTest does (although it adds a lot of complexity on top).",
       "parentUuid": "f14a5de5_dbf260d9",
+      "range": {
+        "startLine": 368,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 9
+      },
+      "revId": "386b5a6884f134420cf3b29738a345366617dfb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ffda565_4c248389",
+        "filename": "src/tests/unittests/d3d12/CopySplitTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-15T06:55:43Z",
+      "side": 1,
+      "message": "Thanks for the suggestion. There are quite a few similar tests where the tests parameterize some configs, especially in the perf_tests. And this one is very easy. I only need one parameter: dimension. It turned out DoTest2D and DoTest3D are at a weird place because the caller has \"dimension\" parameter, and we use the name DoTest{2D|3D} to distinguish them. So I removed these two functions from previous patch set. And the caller itself is not too complicated after adding the code. So I think it should be fine.",
+      "parentUuid": "1646469f_0a206904",
       "range": {
         "startLine": 368,
         "startChar": 0,
