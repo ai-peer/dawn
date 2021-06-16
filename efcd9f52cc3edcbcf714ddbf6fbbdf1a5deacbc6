@@ -16,6 +16,133 @@
       "message": "PTAL.\nI move the formatted Tint warning messages into the OwnedCompilationMessages as a private member. Now calling AddMessages with a DiagList will automatically updates the formatted warning.\nBut I am still not sure how to refactor the error consuming process. Maybe adding a ShaderModuleBase::transferCompilationMessages methods, whom will be called to move the OwnedCompilationMessages (and emit the warning) after we have a valid or error shader module?",
       "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "097225f4_036c3847",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-16T11:45:10Z",
+      "side": 1,
+      "message": "Yep that seems good. But we also need to split the parseResult and CompilationMessage arguments so that parseResult is a unique_ptr that\u0027s consumed, and CompilationMessage is a pointer which means ownership isn\u0027t transferred but it can be mutated.",
+      "parentUuid": "197001ac_ece65127",
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32c02884_779eea25",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-16T11:45:10Z",
+      "side": 1,
+      "message": "nit: we use CamelCase. But also Get method are supposed to be really dump. Maybe we can return a const\u0026 to the std::vector\u003cstring\u003e and just call EmitLog multiple times.",
+      "range": {
+        "startLine": 141,
+        "startChar": 42,
+        "endLine": 141,
+        "endChar": 66
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42f5141_6f59795d",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-16T11:45:10Z",
+      "side": 1,
+      "message": "u-u-nit: generally this would be called warningCount.",
+      "range": {
+        "startLine": 158,
+        "startChar": 15,
+        "endLine": 158,
+        "endChar": 27
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b8e673d_15230159",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-16T11:45:10Z",
+      "side": 1,
+      "message": "Actually, now that we have this, maybe it makes sense to also have errors, so we can send them to the console. So we\u0027d produce both warnings and errors. WDYT?",
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a5ea0be_92d8f481",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-16T11:45:10Z",
+      "side": 1,
+      "message": "nit: no need to say Tint, that\u0027s going to confuse Web developers that don\u0027t know what it is, maybe use \"when compiling the WGSL shader\"?",
+      "range": {
+        "startLine": 172,
+        "startChar": 52,
+        "endLine": 172,
+        "endChar": 60
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fd841f9_1b991f83",
+        "filename": "src/dawn_native/CompilationMessages.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-16T11:45:10Z",
+      "side": 1,
+      "message": "Can we do the changes to these methods suggested in the other comment? (the Diagnostic method would become private, the other would be renamed to include ForTesting so that it is clear it is not meant to be used outside of tests).",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 66
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
