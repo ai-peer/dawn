@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197001ac_ece65127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-16T06:55:12Z",
+      "side": 1,
+      "message": "PTAL.\nI move the formatted Tint warning messages into the OwnedCompilationMessages as a private member. Now calling AddMessages with a DiagList will automatically updates the formatted warning.\nBut I am still not sure how to refactor the error consuming process. Maybe adding a ShaderModuleBase::transferCompilationMessages methods, whom will be called to move the OwnedCompilationMessages (and emit the warning) after we have a valid or error shader module?",
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

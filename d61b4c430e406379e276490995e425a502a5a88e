@@ -122,6 +122,24 @@
       "parentUuid": "22607bf9_4290b6ee",
       "revId": "d61b4c430e406379e276490995e425a502a5a88e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73757de2_2e5ed6a7",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-16T06:55:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52dd32d6_b022302b",
+      "revId": "d61b4c430e406379e276490995e425a502a5a88e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
