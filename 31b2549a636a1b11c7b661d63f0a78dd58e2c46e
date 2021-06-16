@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e529c5a_a87d8048",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-16T09:21:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aeb712f2_f35e2ca1",
+      "range": {
+        "startLine": 42,
+        "startChar": 39,
+        "endLine": 42,
+        "endChar": 49
+      },
+      "revId": "31b2549a636a1b11c7b661d63f0a78dd58e2c46e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb0d9cf3_9b6d1207",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-06-14T20:04:58Z",
       "side": 1,
       "message": "This isn\u0027t a bitmask, so we could just use 0xFFFF\u0027FFFF.",
+      "range": {
+        "startLine": 44,
+        "startChar": 45,
+        "endLine": 44,
+        "endChar": 55
+      },
+      "revId": "31b2549a636a1b11c7b661d63f0a78dd58e2c46e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22595865_55ac01b2",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-16T09:21:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb0d9cf3_9b6d1207",
       "range": {
         "startLine": 44,
         "startChar": 45,
