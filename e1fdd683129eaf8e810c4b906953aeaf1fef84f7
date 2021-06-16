@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dad22726_e2fe2887",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-06-16T08:52:18Z",
+      "side": 1,
+      "message": "Hey, Jiawei,\nPls take a look at this CL first",
+      "revId": "e1fdd683129eaf8e810c4b906953aeaf1fef84f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
