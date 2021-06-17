@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2eaaeaa_ae1c148c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-17T16:51:47Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin and Jiawei!",
+      "revId": "5b6c1ebce7c6c15ceadbf0df145a866b7453c1c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
