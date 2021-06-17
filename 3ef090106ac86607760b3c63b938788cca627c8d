@@ -1,0 +1,165 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51747e0d_cf313634",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "This CL adds the support of wgpu::CopyTextureForBrowserOptions::alphaOps for CopyTextureForBrowser(), which allows the user to specify the alpha operations (DontChange, Premultiply, Unpremultiply) when calling CopyTextureForBrowser().",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 72
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34576e05_ab513a47",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "BUG\u003dchromium:1217153",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 11
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a20b293_841a9505",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "Can we use \u0027switch-case\u0027 here?\n\nAlso it would be better to define and use \u0027const ALPHA_MODE_DONT_CHANGE : u32 \u003d 0\u0027 for better readability.",
+      "range": {
+        "startLine": 106,
+        "startChar": 14,
+        "endLine": 106,
+        "endChar": 47
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "989ae473_f3518a26",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "Can we declare this as wgpu::AlphaOp?",
+      "range": {
+        "startLine": 125,
+        "startChar": 12,
+        "endLine": 125,
+        "endChar": 21
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2810a27_fa0703f2",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "Why there is a \u0027static_assert\u0027?",
+      "range": {
+        "startLine": 127,
+        "startChar": 7,
+        "endLine": 127,
+        "endChar": 49
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8938d96e_e5542c86",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "Maybe it is better to use \u0027switch-case\u0027 here?",
+      "range": {
+        "startLine": 167,
+        "startChar": 12,
+        "endLine": 167,
+        "endChar": 64
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c73903_7bce52da",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-17T13:00:22Z",
+      "side": 1,
+      "message": "I prefer using \u0027switch-case\u0027 in such multi-if-statements. WDYT?",
+      "range": {
+        "startLine": 101,
+        "startChar": 22,
+        "endLine": 101,
+        "endChar": 67
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
