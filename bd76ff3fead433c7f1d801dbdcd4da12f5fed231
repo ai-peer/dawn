@@ -16,6 +16,23 @@
       "message": "Kai, Stephen PTAL\n\nAustin as FYI",
       "revId": "bd76ff3fead433c7f1d801dbdcd4da12f5fed231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eb0822c_ec7d426f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-17T15:16:55Z",
+      "side": 1,
+      "message": "LGTM2 (sorry for the delay)",
+      "revId": "bd76ff3fead433c7f1d801dbdcd4da12f5fed231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
