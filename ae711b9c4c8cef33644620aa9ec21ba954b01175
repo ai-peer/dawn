@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ae074f6_5390ae10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-17T10:03:49Z",
+      "side": 1,
+      "message": "Thank you for the fix! We use that pattern so much ^^",
+      "revId": "ae711b9c4c8cef33644620aa9ec21ba954b01175",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
