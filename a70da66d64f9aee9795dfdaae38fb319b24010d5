@@ -84,6 +84,24 @@
       "message": "Oh I just saw the tests in the relation chain.",
       "revId": "a70da66d64f9aee9795dfdaae38fb319b24010d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a2a7aa_d237adcd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-17T17:00:58Z",
+      "side": 1,
+      "message": "Yeah. This bug was exposed by the unittests. This was the only bug in 3D copy splitter found by unittests. Others bugs were in unittests themselves, which were less important than this one. I thought this tiny fix could be merged much faster than the unittests enabling fixes, but it took the same time because Austin was OOO and the review was delayed (It didn\u0027t block my work at hand). \n\nAnyway, thanks for your review, Corentin and Jiawei.",
+      "parentUuid": "2c8d4247_e794fa35",
+      "revId": "a70da66d64f9aee9795dfdaae38fb319b24010d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
