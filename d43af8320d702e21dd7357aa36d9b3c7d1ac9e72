@@ -33,6 +33,24 @@
       "message": "LGTM",
       "revId": "d43af8320d702e21dd7357aa36d9b3c7d1ac9e72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17bb7e64_93b3e1e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-17T17:25:29Z",
+      "side": 1,
+      "message": "Yes I have a PR open for WebGPU too. It is a constraint on Metal (and 4 byte formats on Vulkan), the index buffer one is a constraint on at least Vulkan.",
+      "parentUuid": "b1efa502_62beb4c5",
+      "revId": "d43af8320d702e21dd7357aa36d9b3c7d1ac9e72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
