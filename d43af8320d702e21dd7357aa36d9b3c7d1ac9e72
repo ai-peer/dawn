@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1efa502_62beb4c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-17T17:18:16Z",
+      "side": 1,
+      "message": "Out of curiosity, is this constraint in the WebGPU spec? Does it need to be?",
+      "revId": "d43af8320d702e21dd7357aa36d9b3c7d1ac9e72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
