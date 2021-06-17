@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a99bc9_61b44935",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-17T22:03:39Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nCopies between 3D and 2DArray textures have already been supported on Vulkan, Metal and GL. This change adds the support on D3D12. ",
+      "revId": "c8c377e7a8a630cb7853708c948dc71074a4238a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
