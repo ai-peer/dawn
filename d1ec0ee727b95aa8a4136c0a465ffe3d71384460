@@ -325,6 +325,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "844228c8_448784a8",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-18T13:40:39Z",
+      "side": 1,
+      "message": "but it\u0027s a local scope function variable 😊",
+      "parentUuid": "ffc66cfc_9237aeca",
+      "range": {
+        "startLine": 245,
+        "startChar": 13,
+        "endLine": 245,
+        "endChar": 21
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "074398a6_b255f747",
         "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
         "patchSetId": 2
