@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f8730c_459f88b5",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-18T17:57:37Z",
+      "side": 1,
+      "message": "In theory it should work for GetTextureDataCopyLayoutForTextureAtLevel(). But it doesn\u0027t. T2T test itself doesn\u0027t want to tackle irrelevant layers/subresources of the texture, so it just pass copySize.depthOrArrayLayers for 2D, which is smaller than srcSpec.textureSize.depthOrArrayLayers if it is not a full copy. Unfortunately that is incorrect for 3D. These slices are depth slices in 3D. They are not layers. These depth slices are within the same subresource.",
+      "parentUuid": "64ecafc9_30580a6e",
+      "range": {
+        "startLine": 373,
+        "startChar": 17,
+        "endLine": 375,
+        "endChar": 52
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff634c67_43449397",
@@ -95,6 +119,24 @@
       "writtenOn": "2021-06-18T07:43:23Z",
       "side": 1,
       "message": "ditto",
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c06ffeb8_53577380",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-18T17:57:37Z",
+      "side": 1,
+      "message": "same here.",
+      "parentUuid": "ff634c67_43449397",
       "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
