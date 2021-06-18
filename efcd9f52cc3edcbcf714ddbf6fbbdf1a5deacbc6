@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e04de8d_17dece47",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T04:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32c02884_779eea25",
+      "range": {
+        "startLine": 141,
+        "startChar": 42,
+        "endLine": 141,
+        "endChar": 66
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a42f5141_6f59795d",
@@ -72,6 +96,30 @@
       "writtenOn": "2021-06-16T11:45:10Z",
       "side": 1,
       "message": "u-u-nit: generally this would be called warningCount.",
+      "range": {
+        "startLine": 158,
+        "startChar": 15,
+        "endLine": 158,
+        "endChar": 27
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "820b4d7a_cc16c7d0",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T04:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a42f5141_6f59795d",
       "range": {
         "startLine": 158,
         "startChar": 15,
@@ -99,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c25db4c_201dd303",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T04:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b8e673d_15230159",
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a5ea0be_92d8f481",
@@ -122,6 +188,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f8303f_89ad5864",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T04:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a5ea0be_92d8f481",
+      "range": {
+        "startLine": 172,
+        "startChar": 52,
+        "endLine": 172,
+        "endChar": 60
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fd841f9_1b991f83",
@@ -135,6 +225,30 @@
       "writtenOn": "2021-06-16T11:45:10Z",
       "side": 1,
       "message": "Can we do the changes to these methods suggested in the other comment? (the Diagnostic method would become private, the other would be renamed to include ForTesting so that it is clear it is not meant to be used outside of tests).",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 66
+      },
+      "revId": "efcd9f52cc3edcbcf714ddbf6fbbdf1a5deacbc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ba08629_38a28725",
+        "filename": "src/dawn_native/CompilationMessages.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T04:24:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fd841f9_1b991f83",
       "range": {
         "startLine": 37,
         "startChar": 0,

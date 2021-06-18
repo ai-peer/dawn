@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d0601af_76e89d4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T04:24:34Z",
+      "side": 1,
+      "message": "PTAL, thanks!\nIn this patch the behavior of creating shader module is changed, OwnedCompilationMessages are move separated from parseResult, and need to call ShaderModuleBase::InjectCompilationMessages manually to move it into the module, or otherwise the module will have a nullptr of compilationMessages.",
+      "revId": "d0b0ab8f35b12458c04d02d4942de9ca3e10cb05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
