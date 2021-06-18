@@ -16,6 +16,24 @@
       "message": "nit: in a follow-up can you make this reference a new issue so we can discuss more on it? Now that Austin triaged all TODOs we should always reference an issue in TODOs.",
       "revId": "fdc35e604e62b7ab152b6c97db3954ed286bb164",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "278cc6ed_bdbd371e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-18T13:59:17Z",
+      "side": 1,
+      "message": "I open the issue dawn:944. Thanks!",
+      "parentUuid": "dd80a1dc_6f97fdee",
+      "revId": "fdc35e604e62b7ab152b6c97db3954ed286bb164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
