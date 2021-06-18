@@ -144,6 +144,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e78b612_2980e908",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-18T07:30:43Z",
+      "side": 1,
+      "message": "Oh it\u0027s really unfortunate.",
+      "parentUuid": "3e2d9dda_76bc8a06",
+      "range": {
+        "startLine": 106,
+        "startChar": 14,
+        "endLine": 106,
+        "endChar": 47
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "989ae473_f3518a26",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 4
@@ -226,6 +250,30 @@
       "side": 1,
       "message": "To ensure the uniform padding is expected.",
       "parentUuid": "e2810a27_fa0703f2",
+      "range": {
+        "startLine": 127,
+        "startChar": 7,
+        "endLine": 127,
+        "endChar": 49
+      },
+      "revId": "3ef090106ac86607760b3c63b938788cca627c8d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5040556b_356731a7",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-18T07:30:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "468ef4e8_622ad7b5",
       "range": {
         "startLine": 127,
         "startChar": 7,
