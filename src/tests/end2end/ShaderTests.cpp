@@ -262,8 +262,9 @@ fn main(input : FragmentIn) -> [[location(0)]] vec4<f32> {
 
 // Tests that shaders I/O structs can be shared between vertex and fragment shaders.
 TEST_P(ShaderTests, WGSLSharedStructIO) {
-    // TODO(tint:714): Not yet implemeneted in tint yet, but intended to work.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() || IsVulkan() || IsMetal() || IsOpenGL() || IsOpenGLES());
+    // TODO(crbug.com/dawn/948): Test crashes on Linux Intel Vulkan when trying to create the render
+    // pipeline.
+    DAWN_SUPPRESS_TEST_IF(IsVulkan() && IsIntel() && IsLinux());
 
     std::string shader = R"(
 struct VertexIn {
