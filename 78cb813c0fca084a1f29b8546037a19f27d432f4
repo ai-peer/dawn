@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "131ab353_71de5d3c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T12:43:43Z",
+      "side": 1,
+      "message": "Seems like a Swiftshader issue. Can you add 1) make a follow-up CL that does the merge, 2) create a Swiftshader issue referencing it (reproducing locally, it seems to load a vertex input when we define 0 when creating the Vulkan pipeline) and 3) add a TODO referencing this issue in this CL and land it?\n\nAlso a SPIRV-Cross issue, although we don\u0027t care about that and can just suppress on OpenGL.",
+      "parentUuid": "9cbd552a_57d0c421",
+      "revId": "78cb813c0fca084a1f29b8546037a19f27d432f4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "28a12171_11a4a294",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 8
