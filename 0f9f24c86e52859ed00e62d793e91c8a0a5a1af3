@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0aa8171_ea1dd530",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T07:43:23Z",
+      "side": 1,
+      "message": "LGTM, Jiawei PTAL too.",
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe0a87e_cc441f2a",
@@ -37,6 +54,47 @@
         "endLine": 375,
         "endChar": 52
       },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64ecafc9_30580a6e",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T07:43:23Z",
+      "side": 1,
+      "message": "Would passing srcSpec.textureSize directly work? It would match what the function seems to expect since the argument is called textureSizeAtLevel0.",
+      "parentUuid": "cfe0a87e_cc441f2a",
+      "range": {
+        "startLine": 373,
+        "startChar": 17,
+        "endLine": 375,
+        "endChar": 52
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff634c67_43449397",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T07:43:23Z",
+      "side": 1,
+      "message": "ditto",
       "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
