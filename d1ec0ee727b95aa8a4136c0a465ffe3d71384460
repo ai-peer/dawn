@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e0fe24_2fc35261",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a39ebc7a_8c5c7ded",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f38d497_5d1750cf",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "What about testing fields without any or partial decorations?\n\nActually this function is not used to write the test WGSL, but same question for [1]",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb6c68b_d8770602",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "We have good test coverage in tint for implict alignment and size, but yes, we probably should test this too.\nFirst, I\u0027d like to get this lot passing.",
+      "parentUuid": "8f38d497_5d1750cf",
       "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb493ced_8516d1a5",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf7b2b02_8c31a49a",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "985246a1_e96edafc",
@@ -88,6 +148,24 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "[1]",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3bb7d8e_1bec5ae6",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "985246a1_e96edafc",
       "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1069e16c_71cd2624",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e98ee16_f8089003",
+      "range": {
+        "startLine": 170,
+        "startChar": 20,
+        "endLine": 170,
+        "endChar": 23
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57f8dc2d_8f4d3a48",
@@ -128,6 +230,24 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "nit: // Build the input data.",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b919ea4_605335aa",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57f8dc2d_8f4d3a48",
       "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +275,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "771051f8_8805fc05",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "106a0251_6c6b828a",
+      "range": {
+        "startLine": 245,
+        "startChar": 13,
+        "endLine": 245,
+        "endChar": 21
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "074398a6_b255f747",
@@ -168,6 +312,24 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "Ditto",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5569dca_16510649",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "074398a6_b255f747",
       "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +351,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f2edd7_e9ecb1d6",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f45889ed_025d920c",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73025868_108c433e",
@@ -206,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15bee53f_0f266eb8",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Nice, done.",
+      "parentUuid": "73025868_108c433e",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a909781_c1527b1f",
@@ -219,6 +417,24 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "u-nit: we just wrote the data, so this seems unnecessary.",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30c7172d_c675e8d1",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Copied from one of the other tests. Removed anyway.",
+      "parentUuid": "2a909781_c1527b1f",
       "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -246,6 +462,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18effa63_84664948",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b77dd70e_1c01189a",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 299,
+        "endChar": 5
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e32816da_37aa4ba3",
@@ -263,6 +503,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5165d64_9fa2d266",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e32816da_37aa4ba3",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b57526d_83c50869",
@@ -276,6 +534,30 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "nit: the offset and size are optional and will use the whole buffer by default.",
+      "range": {
+        "startLine": 315,
+        "startChar": 71,
+        "endLine": 315,
+        "endChar": 90
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "617ef244_30df6699",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "Nice, done.",
+      "parentUuid": "8b57526d_83c50869",
       "range": {
         "startLine": 315,
         "startChar": 71,
@@ -305,6 +587,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b7f2c42_86b480e8",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "I honestly don\u0027t know. I haven\u0027t investigated this yet.",
+      "parentUuid": "726265c5_f79664fa",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61505895_d12a6af0",
         "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
         "patchSetId": 2
@@ -316,6 +616,30 @@
       "writtenOn": "2021-06-15T11:56:38Z",
       "side": 1,
       "message": "nit: This doesn\u0027t need to be StorageBufferOnly since the alignment is larger than 16.",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 90
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a3d7772_710d7eb7",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T12:03:08Z",
+      "side": 1,
+      "message": "The base alignment is 16, but the stride is less than 16, so other elements are misaligned.",
+      "parentUuid": "61505895_d12a6af0",
       "range": {
         "startLine": 472,
         "startChar": 0,
