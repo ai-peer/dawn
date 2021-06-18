@@ -53,9 +53,18 @@ set(ENABLE_METAL OFF)
 set(ENABLE_OPENGL OFF)
 set(ENABLE_VULKAN OFF)
 set(USE_X11 OFF)
+set(BUILD_EXAMPLE ON)
 if (WIN32)
     set(ENABLE_D3D12 ON)
-    set(ENABLE_VULKAN ON)
+    if (WINDOWS_STORE)
+        # Current examples are depend on GLFW
+        # which is not supported in UWP
+        set(BUILD_EXAMPLE OFF)
+    else()
+        # Enable Vulkan in win32 compilation  only
+        # since UWP only supports d3d
+        set(ENABLE_VULKAN ON)
+    endif()
 elseif(APPLE)
     set(ENABLE_METAL ON)
 elseif(UNIX)
@@ -72,7 +81,7 @@ option(DAWN_ENABLE_VULKAN "Enable compilation of the Vulkan backend" ${ENABLE_VU
 option(DAWN_ALWAYS_ASSERT "Enable assertions on all build types" OFF)
 option(DAWN_USE_X11 "Enable support for X11 surface" ${USE_X11})
 
-option(DAWN_BUILD_EXAMPLES "Enables building Dawn's exmaples" ON)
+option(DAWN_BUILD_EXAMPLES "Enables building Dawn's exmaples" ${BUILD_EXAMPLE})
 
 set(DAWN_THIRD_PARTY_DIR "${Dawn_SOURCE_DIR}/third_party" CACHE STRING "Directory in which to find third-party dependencies.")
 
@@ -83,6 +92,11 @@ set(DAWN_SPIRV_CROSS_DIR "${DAWN_THIRD_PARTY_DIR}/vulkan-deps/spirv-cross/src" C
 set(DAWN_SPIRV_HEADERS_DIR "${DAWN_THIRD_PARTY_DIR}/vulkan-deps/spirv-headers/src" CACHE STRING "Directory in which to find SPIRV-Headers")
 set(DAWN_SPIRV_TOOLS_DIR "${DAWN_THIRD_PARTY_DIR}/vulkan-deps/spirv-tools/src" CACHE STRING "Directory in which to find SPIRV-Tools")
 set(DAWN_TINT_DIR "${DAWN_THIRD_PARTY_DIR}/tint" CACHE STRING "Directory in which to find Tint")
+
+
+if((WIN32 AND NOT WINDOWS_STORE) OR UNIX)
+    set(DAWN_SUPPORTS_GLFW_FOR_WINDOWING ON)
+endif()
 
 ################################################################################
 # Dawn's public and internal "configs"

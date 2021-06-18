@@ -14,14 +14,10 @@
 
 add_library(dawn_utils STATIC ${DAWN_DUMMY_FILE})
 target_sources(dawn_utils PRIVATE
-    "BackendBinding.cpp"
-    "BackendBinding.h"
     "ComboRenderBundleEncoderDescriptor.cpp"
     "ComboRenderBundleEncoderDescriptor.h"
     "ComboRenderPipelineDescriptor.cpp"
     "ComboRenderPipelineDescriptor.h"
-    "GLFWUtils.cpp"
-    "GLFWUtils.h"
     "PlatformDebugLogger.h"
     "SystemUtils.cpp"
     "SystemUtils.h"
@@ -48,7 +44,7 @@ target_link_libraries(dawn_utils
             glfw
 )
 
-if(WIN32)
+if(WIN32 AND NOT WINDOWS_STORE)
     target_sources(dawn_utils PRIVATE "WindowsDebugLogger.cpp")
 else()
     target_sources(dawn_utils PRIVATE "EmptyDebugLogger.cpp")
@@ -67,13 +63,12 @@ elseif(UNIX)
     target_sources(dawn_utils PRIVATE "PosixTimer.cpp")
 endif()
 
-if (DAWN_ENABLE_D3D12)
+if (DAWN_ENABLE_D3D12 AND DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
     target_sources(dawn_utils PRIVATE "D3D12Binding.cpp")
 endif()
 
 if (DAWN_ENABLE_METAL)
     target_sources(dawn_utils PRIVATE
-        "GLFWUtils_metal.mm"
         "MetalBinding.mm"
     )
     target_link_libraries(dawn_utils PRIVATE "-framework Metal")
@@ -89,4 +84,17 @@ endif()
 
 if (DAWN_ENABLE_VULKAN)
     target_sources(dawn_utils PRIVATE "VulkanBinding.cpp")
+endif()
+
+if(DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
+    message("XJ_DAWN_SUPPORTS_GLFW_FOR_WINDOWING")
+    target_sources(dawn_utils PRIVATE 
+    "BackendBinding.cpp"
+    "BackendBinding.h" 
+    "GLFWUtils.cpp" 
+    "GLFWUtils.h" )
+    target_link_libraries(dawn_utils PRIVATE glfw)
+    if (DAWN_ENABLE_METAL)
+        target_sources(dawn_utils PRIVATE "GLFWUtils_metal.mm")
+    endif()
 endif()
