@@ -16,6 +16,29 @@
       "message": "PTAL. Thanks!",
       "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfe0a87e_cc441f2a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-18T06:15:05Z",
+      "side": 1,
+      "message": "The function GetTextureDataCopyLayoutForTextureAtLevel() will shrink on depth dimension (via doing depthOrArrayLayers \u003e\u003e mipLevel) if it is a 3D texture, so if we pass copySize.depthOrArrayLayers, it will be shrink into a smaller value for 3D texture if the mip level is non-zero, which is incorrect. \n\nNow we pass srcSpec.textureSize.depthOrArrayLayers, the resized value (srcSpec.textureSize.depthOrArrayLayers \u003e\u003e mipLevel) will still be equal or greater than copySize.depthOrArrayLayers.",
+      "range": {
+        "startLine": 373,
+        "startChar": 17,
+        "endLine": 375,
+        "endChar": 52
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
