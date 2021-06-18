@@ -301,6 +301,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ffc66cfc_9237aeca",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T12:13:48Z",
+      "side": 1,
+      "message": "I meant CamelCase starting with uppercase for function ^^",
+      "parentUuid": "771051f8_8805fc05",
+      "range": {
+        "startLine": 245,
+        "startChar": 13,
+        "endLine": 245,
+        "endChar": 21
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "074398a6_b255f747",
         "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
         "patchSetId": 2
@@ -640,6 +664,30 @@
       "side": 1,
       "message": "The base alignment is 16, but the stride is less than 16, so other elements are misaligned.",
       "parentUuid": "61505895_d12a6af0",
+      "range": {
+        "startLine": 472,
+        "startChar": 0,
+        "endLine": 475,
+        "endChar": 90
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cb6aab8_5cb83428",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 475,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T12:13:48Z",
+      "side": 1,
+      "message": "Ah the alignment listed is for the whole array. Gotcha.",
+      "parentUuid": "9a3d7772_710d7eb7",
       "range": {
         "startLine": 472,
         "startChar": 0,
