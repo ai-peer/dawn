@@ -371,6 +371,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d808bbf_45a0c33a",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-18T14:14:06Z",
+      "side": 1,
+      "message": "Okay, done.",
+      "parentUuid": "f34e9302_ec0204c5",
+      "range": {
+        "startLine": 245,
+        "startChar": 13,
+        "endLine": 245,
+        "endChar": 21
+      },
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "074398a6_b255f747",
