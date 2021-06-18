@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd80a1dc_6f97fdee",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-18T13:34:26Z",
+      "side": 1,
+      "message": "nit: in a follow-up can you make this reference a new issue so we can discuss more on it? Now that Austin triaged all TODOs we should always reference an issue in TODOs.",
+      "revId": "fdc35e604e62b7ab152b6c97db3954ed286bb164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
