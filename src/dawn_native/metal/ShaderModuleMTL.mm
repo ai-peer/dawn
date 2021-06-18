@@ -61,9 +61,6 @@ namespace dawn_native { namespace metal {
         const VertexState* vertexState,
         std::string* remappedEntryPointName,
         bool* needsStorageBufferLength) {
-        // TODO(crbug.com/tint/256): Set this accordingly if arrayLength(..) is used.
-        *needsStorageBufferLength = false;
-
         ScopedTintICEHandler scopedICEHandler(GetDevice());
 
         std::ostringstream errorStream;
@@ -146,6 +143,12 @@ namespace dawn_native { namespace metal {
             *remappedEntryPointName = it->second;
         } else {
             return DAWN_VALIDATION_ERROR("Transform output missing renamer data.");
+        }
+
+        if (auto* data = transformOutputs.Get<tint::transform::Msl::Result>()) {
+            *needsStorageBufferLength = data->needs_storage_buffer_lengths;
+        } else {
+            return DAWN_VALIDATION_ERROR("Transform output missing MSL data.");
         }
 
         tint::writer::msl::Generator generator(&program);
