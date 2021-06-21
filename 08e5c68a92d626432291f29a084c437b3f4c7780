@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10dcc69b_5a20b9b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-21T07:24:25Z",
+      "side": 1,
+      "message": "Still LGTM. Sorry I forgot to +2 on Friday, I hadn\u0027t realized Jiawei had +1ed already.",
+      "revId": "08e5c68a92d626432291f29a084c437b3f4c7780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
