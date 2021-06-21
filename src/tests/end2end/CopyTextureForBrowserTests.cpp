@@ -389,6 +389,7 @@ class CopyTextureForBrowserTests : public DawnTest {
 // Verify CopyTextureForBrowserTests works with internal pipeline.
 // The case do copy without any transform.
 TEST_P(CopyTextureForBrowserTests, PassthroughCopy) {
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
     constexpr uint32_t kWidth = 10;
     constexpr uint32_t kHeight = 1;
 
@@ -399,6 +400,7 @@ TEST_P(CopyTextureForBrowserTests, PassthroughCopy) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyCopyOnXDirection) {
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
     constexpr uint32_t kWidth = 1000;
     constexpr uint32_t kHeight = 1;
 
@@ -409,6 +411,7 @@ TEST_P(CopyTextureForBrowserTests, VerifyCopyOnXDirection) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyCopyOnYDirection) {
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
     constexpr uint32_t kWidth = 1;
     constexpr uint32_t kHeight = 1000;
 
@@ -419,6 +422,7 @@ TEST_P(CopyTextureForBrowserTests, VerifyCopyOnYDirection) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyCopyFromLargeTexture) {
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
     constexpr uint32_t kWidth = 899;
     constexpr uint32_t kHeight = 999;
 
@@ -429,6 +433,7 @@ TEST_P(CopyTextureForBrowserTests, VerifyCopyFromLargeTexture) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyFlipY) {
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
     constexpr uint32_t kWidth = 901;
     constexpr uint32_t kHeight = 1001;
 
@@ -441,6 +446,7 @@ TEST_P(CopyTextureForBrowserTests, VerifyFlipY) {
 }
 
 TEST_P(CopyTextureForBrowserTests, VerifyFlipYInSlimTexture) {
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
     constexpr uint32_t kWidth = 1;
     constexpr uint32_t kHeight = 1001;
 
@@ -457,7 +463,7 @@ TEST_P(CopyTextureForBrowserTests, VerifyFlipYInSlimTexture) {
 TEST_P(CopyTextureForBrowserTests, FromRGBA8UnormCopy) {
     // Skip OpenGLES backend because it fails on using RGBA8Unorm as
     // source texture format.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
 
     for (wgpu::TextureFormat dstFormat : kDstTextureFormat) {
         TextureSpec srcTextureSpec = {};  // default format is RGBA8Unorm
@@ -474,7 +480,7 @@ TEST_P(CopyTextureForBrowserTests, FromRGBA8UnormCopy) {
 TEST_P(CopyTextureForBrowserTests, FromBGRA8UnormCopy) {
     // Skip OpenGLES backend because it fails on using BGRA8Unorm as
     // source texture format.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
 
     for (wgpu::TextureFormat dstFormat : kDstTextureFormat) {
         TextureSpec srcTextureSpec;
@@ -493,7 +499,7 @@ TEST_P(CopyTextureForBrowserTests, FromBGRA8UnormCopy) {
 // in dst texture should be red and other part should remain green.
 TEST_P(CopyTextureForBrowserTests, CopySubRect) {
     // Tests skip due to crbug.com/dawn/592.
-    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsBackendValidationEnabled());
+    DAWN_SUPPRESS_TEST_IF(IsSwiftshader() || IsANGLE() || IsOpenGLES());
 
     for (wgpu::Origin3D srcOrigin : kOrigins) {
         for (wgpu::Origin3D dstOrigin : kOrigins) {

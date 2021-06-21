@@ -33,7 +33,7 @@
 namespace dawn_native {
     namespace {
         // TODO(crbug.com/dawn/856) : Support premultiply-alpha
-        static const char sCopyTextureForBrowserVertex[] = R"(
+        static const char sCopyTextureForBrowserShader[] = R"(
             [[block]] struct Uniforms {
                 u_scale : vec2<f32>;
                 u_offset : vec2<f32>;
@@ -45,7 +45,7 @@ namespace dawn_native {
                 [[builtin(position)]] position : vec4<f32>;
             };
 
-            [[stage(vertex)]] fn main(
+            [[stage(vertex)]] fn vs_main(
                 [[builtin(vertex_index)]] VertexIndex : u32
             ) -> VertexOutputs {
                 var texcoord = array<vec2<f32>, 3>(
@@ -78,13 +78,11 @@ namespace dawn_native {
 
                 return output;
             }
-        )";
 
-        static const char sCopyTextureForBrowserFragment[] = R"(
             [[binding(1), group(0)]] var mySampler: sampler;
             [[binding(2), group(0)]] var myTexture: texture_2d<f32>;
 
-            [[stage(fragment)]] fn main(
+            [[stage(fragment)]] fn fs_main(
                 [[location(0)]] texcoord : vec2<f32>
             ) -> [[location(0)]] vec4<f32> {
                 // Clamp the texcoord and discard the out-of-bound pixels.
@@ -182,39 +180,27 @@ namespace dawn_native {
 
             if (GetCachedPipeline(store, dstFormat) == nullptr) {
                 // Create vertex shader module if not cached before.
-                if (store->copyTextureForBrowserVS == nullptr) {
+                if (store->copyTextureForBrowser == nullptr) {
                     ShaderModuleDescriptor descriptor;
                     ShaderModuleWGSLDescriptor wgslDesc;
-                    wgslDesc.source = sCopyTextureForBrowserVertex;
+                    wgslDesc.source = sCopyTextureForBrowserShader;
                     descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
 
-                    DAWN_TRY_ASSIGN(store->copyTextureForBrowserVS,
+                    DAWN_TRY_ASSIGN(store->copyTextureForBrowser,
                                     device->CreateShaderModule(&descriptor));
                 }
 
-                ShaderModuleBase* vertexModule = store->copyTextureForBrowserVS.Get();
-
-                // Create fragment shader module if not cached before.
-                if (store->copyTextureForBrowserFS == nullptr) {
-                    ShaderModuleDescriptor descriptor;
-                    ShaderModuleWGSLDescriptor wgslDesc;
-                    wgslDesc.source = sCopyTextureForBrowserFragment;
-                    descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
-                    DAWN_TRY_ASSIGN(store->copyTextureForBrowserFS,
-                                    device->CreateShaderModule(&descriptor));
-                }
-
-                ShaderModuleBase* fragmentModule = store->copyTextureForBrowserFS.Get();
+                ShaderModuleBase* shaderModule = store->copyTextureForBrowser.Get();
 
                 // Prepare vertex stage.
                 VertexState vertex = {};
-                vertex.module = vertexModule;
-                vertex.entryPoint = "main";
+                vertex.module = shaderModule;
+                vertex.entryPoint = "vs_main";
 
                 // Prepare frgament stage.
                 FragmentState fragment = {};
-                fragment.module = fragmentModule;
-                fragment.entryPoint = "main";
+                fragment.module = shaderModule;
+                fragment.entryPoint = "fs_main";
 
                 // Prepare color state.
                 ColorTargetState target = {};
