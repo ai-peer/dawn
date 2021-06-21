@@ -16,6 +16,23 @@
       "message": "LGTM! Austin can you TAL too?",
       "revId": "c6ba4ed85f229f56fd58b34fd035dc9f5e6b9f05",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c124a0_b8ced52c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-21T20:06:35Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c6ba4ed85f229f56fd58b34fd035dc9f5e6b9f05",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
