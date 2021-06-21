@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "551ed449_6b80d8a6",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-21T15:19:43Z",
+      "side": 1,
+      "message": "Pretty complicated logic depending on the allocation strategy the app chose. The one I looked at more tried to put the allocation in the buffer allocator and checks if there is conflicting allocations and does a fallback path in that case.",
+      "parentUuid": "5d7a6187_88401ecd",
+      "revId": "ff6ff8e6089b85ab90f90ef4bfcae8db93e0dbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "546d6cff_3b2fc8fd",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h",
         "patchSetId": 5
