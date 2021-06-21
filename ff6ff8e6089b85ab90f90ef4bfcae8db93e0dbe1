@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "82f50c08_eb372def",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-21T14:29:53Z",
+      "side": 1,
+      "message": "ANGLE uses the VMA directly and Skia uses it through an interface implemented in Chromium. https://chromium.googlesource.com/external/github.com/GPUOpen-LibrariesAndSDKs/VulkanMemoryAllocator/+/refs/heads/master\n\nGiven we need to implement our own logic for D3D12 it made sense to do our own memory allocator shared between D3D12 and Vulkan, but we\u0027ll have to see what we want to do in the future.",
+      "parentUuid": "2d4508f2_60550e5f",
+      "revId": "ff6ff8e6089b85ab90f90ef4bfcae8db93e0dbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "546d6cff_3b2fc8fd",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h",
         "patchSetId": 5
