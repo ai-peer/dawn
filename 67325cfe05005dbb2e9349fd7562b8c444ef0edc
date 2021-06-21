@@ -16,6 +16,69 @@
       "message": "LGTM, Austin can you TAL?",
       "revId": "67325cfe05005dbb2e9349fd7562b8c444ef0edc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eef49581_3a0e7cc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-21T15:43:27Z",
+      "side": 1,
+      "message": "LGTM too with one question",
+      "revId": "67325cfe05005dbb2e9349fd7562b8c444ef0edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa08a3e6_09d623e6",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-21T15:43:27Z",
+      "side": 1,
+      "message": "would it be more clear to have DAWN_SUPPORTS_GLFW_FOR_WINDOWING control the value of BUILD_EXAMPLE ?",
+      "range": {
+        "startLine": 60,
+        "startChar": 9,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "67325cfe05005dbb2e9349fd7562b8c444ef0edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64442732_c0404167",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-21T15:43:27Z",
+      "side": 1,
+      "message": "uunit: double space",
+      "range": {
+        "startLine": 64,
+        "startChar": 44,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "67325cfe05005dbb2e9349fd7562b8c444ef0edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
