@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d7a6187_88401ecd",
+        "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-06-21T14:55:21Z",
+      "side": 1,
+      "message": "Right, so how does the VMA handle this restriction?",
+      "parentUuid": "82f50c08_eb372def",
+      "revId": "ff6ff8e6089b85ab90f90ef4bfcae8db93e0dbe1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "546d6cff_3b2fc8fd",
         "filename": "src/dawn_native/vulkan/ResourceMemoryAllocatorVk.h",
         "patchSetId": 5
