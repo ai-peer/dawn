@@ -69,6 +69,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a5c0c18_dec97705",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-21T15:21:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "428e4161_2b1cb427",
@@ -177,6 +194,30 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "e1f8730c_459f88b5",
+      "range": {
+        "startLine": 373,
+        "startChar": 17,
+        "endLine": 375,
+        "endChar": 52
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bc9a344_c5f7b6ca",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-21T15:21:44Z",
+      "side": 1,
+      "message": "alternatively, we could also pass the |dimemsion| into GetTextureDataCopyLayoutForTextureAtLevel and compute it correctly inside there.",
+      "parentUuid": "8deb7e68_69e1be4c",
       "range": {
         "startLine": 373,
         "startChar": 17,
