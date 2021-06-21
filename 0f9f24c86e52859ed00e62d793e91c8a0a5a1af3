@@ -109,6 +109,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f04d2faf_eca8de9c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-21T17:53:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "428e4161_2b1cb427",
+      "range": {
+        "startLine": 367,
+        "startChar": 58,
+        "endLine": 367,
+        "endChar": 75
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe0a87e_cc441f2a",
@@ -218,6 +242,30 @@
       "side": 1,
       "message": "alternatively, we could also pass the |dimemsion| into GetTextureDataCopyLayoutForTextureAtLevel and compute it correctly inside there.",
       "parentUuid": "8deb7e68_69e1be4c",
+      "range": {
+        "startLine": 373,
+        "startChar": 17,
+        "endLine": 375,
+        "endChar": 52
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c3ad5b2_b583579d",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-21T17:53:16Z",
+      "side": 1,
+      "message": "Do you mean passing the dimension type like 1D, 2D, 3D? Yeah. We do have |dimension|. The problem is: the previous code was assuming that we were copying between 2D (array) textures, so it just past copySize.depthOrArrayLayers and thought only x and y axes would be resized but z-axis (depthOrArrayLayers) would never be resized in the callee.",
+      "parentUuid": "1bc9a344_c5f7b6ca",
       "range": {
         "startLine": 373,
         "startChar": 17,

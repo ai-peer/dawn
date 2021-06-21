@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f9ac8d_930d1736",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-21T17:53:16Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin, Jiawei and Austin.",
+      "revId": "7556eabd33882acb7f4b18eae62473f961a70bbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
