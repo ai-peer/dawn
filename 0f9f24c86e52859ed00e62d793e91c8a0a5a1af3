@@ -35,6 +35,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "738c2b71_d81cc7f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-21T07:27:41Z",
+      "side": 1,
+      "message": "Still LGTM.\n\nJiawei or Austin PTAL!",
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "428e4161_2b1cb427",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-21T07:27:41Z",
+      "side": 1,
+      "message": "nit: to completely populate the subresources that will be copied from.\n\nThis will make the comment match your explanation.\n\nDitto below",
+      "range": {
+        "startLine": 367,
+        "startChar": 58,
+        "endLine": 367,
+        "endChar": 75
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfe0a87e_cc441f2a",
@@ -96,6 +136,30 @@
       "side": 1,
       "message": "In theory it should work for GetTextureDataCopyLayoutForTextureAtLevel(). But it doesn\u0027t. T2T test itself doesn\u0027t want to tackle irrelevant layers/subresources of the texture, so it just pass copySize.depthOrArrayLayers for 2D, which is smaller than srcSpec.textureSize.depthOrArrayLayers if it is not a full copy. Unfortunately that is incorrect for 3D. These slices are depth slices in 3D. They are not layers. These depth slices are within the same subresource.",
       "parentUuid": "64ecafc9_30580a6e",
+      "range": {
+        "startLine": 373,
+        "startChar": 17,
+        "endLine": 375,
+        "endChar": 52
+      },
+      "revId": "0f9f24c86e52859ed00e62d793e91c8a0a5a1af3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8deb7e68_69e1be4c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-21T07:27:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e1f8730c_459f88b5",
       "range": {
         "startLine": 373,
         "startChar": 17,
