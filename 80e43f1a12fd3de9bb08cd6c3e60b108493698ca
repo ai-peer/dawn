@@ -16,6 +16,24 @@
       "message": "Still doesn\u0027t work 😞",
       "revId": "80e43f1a12fd3de9bb08cd6c3e60b108493698ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de454910_14acd339",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-21T17:28:12Z",
+      "side": 1,
+      "message": "I think this is the SPIRV-Cross path erroring again.",
+      "parentUuid": "77619b85_fbd981f6",
+      "revId": "80e43f1a12fd3de9bb08cd6c3e60b108493698ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
