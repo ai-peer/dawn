@@ -418,6 +418,8 @@ source_set("dawn_white_box_tests_sources") {
   if (dawn_enable_vulkan) {
     deps += [ "${dawn_root}/third_party/khronos:vulkan_headers" ]
 
+    sources += [ "white_box/VulkanMemoryAllocationTests.cpp" ]
+
     if (is_chromeos) {
       sources += [ "white_box/VulkanImageWrappingTestsDmaBuf.cpp" ]
     } else if (is_linux) {
