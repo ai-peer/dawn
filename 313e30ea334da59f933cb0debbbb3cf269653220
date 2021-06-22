@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4c57268_9d4ca4fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2021-06-22T17:25:25Z",
+      "side": 1,
+      "message": "PTAL - clean merge except for a minor merge conflict in unrelated code (whitespace changes)",
+      "revId": "313e30ea334da59f933cb0debbbb3cf269653220",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
