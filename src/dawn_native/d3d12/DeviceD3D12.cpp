@@ -447,13 +447,14 @@ namespace dawn_native { namespace d3d12 {
     Ref<TextureBase> Device::CreateExternalTexture(const TextureDescriptor* descriptor,
                                                    ComPtr<ID3D12Resource> d3d12Texture,
                                                    ExternalMutexSerial acquireMutexKey,
+                                                   ExternalMutexSerial releaseMutexKey,
                                                    bool isSwapChainTexture,
                                                    bool isInitialized) {
         Ref<Texture> dawnTexture;
-        if (ConsumedError(
-                Texture::CreateExternalImage(this, descriptor, std::move(d3d12Texture),
-                                             acquireMutexKey, isSwapChainTexture, isInitialized),
-                &dawnTexture)) {
+        if (ConsumedError(Texture::CreateExternalImage(this, descriptor, std::move(d3d12Texture),
+                                                       acquireMutexKey, releaseMutexKey,
+                                                       isSwapChainTexture, isInitialized),
+                          &dawnTexture)) {
             return nullptr;
         }
         return {dawnTexture};
@@ -551,6 +552,7 @@ namespace dawn_native { namespace d3d12 {
         if (gpu_info::IsIntel(pciInfo.vendorId) &&
             (gpu_info::IsSkylake(pciInfo.deviceId) || gpu_info::IsKabylake(pciInfo.deviceId) ||
              gpu_info::IsCoffeelake(pciInfo.deviceId))) {
+<<<<<<< HEAD   (7b58f0 Roll Tint from 9e32b2009686 to 6c582778cff9 (11 revisions))
             constexpr gpu_info::D3DDriverVersion kFirstDriverVersionWithFix = {27, 20, 100, 9466};
             if (gpu_info::CompareD3DDriverVersion(pciInfo.vendorId,
                                                   ToBackend(GetAdapter())->GetDriverVersion(),
@@ -559,6 +561,11 @@ namespace dawn_native { namespace d3d12 {
                     Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
                     true);
             }
+=======
+            SetToggle(
+                Toggle::UseTempBufferInSmallFormatTextureToTextureCopyFromGreaterToLessMipLevel,
+                true);
+>>>>>>> CHANGE (cabd60 Add releaseMutexKey to ExternalImageAccessDescriptorDXGIKeye)
         }
     }
 
