@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "574e71fc_2b59c5d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-22T20:26:31Z",
+      "side": 1,
+      "message": "PTAL, Patchset 1 is the original CL, Patchset 2 adds in my change to fix the build.",
+      "revId": "edcafb105788545b053644a0b2114c8719701c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
