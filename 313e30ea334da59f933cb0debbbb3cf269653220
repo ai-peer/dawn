@@ -16,6 +16,23 @@
       "message": "PTAL - clean merge except for a minor merge conflict in unrelated code (whitespace changes)",
       "revId": "313e30ea334da59f933cb0debbbb3cf269653220",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afb2d79d_4e232cce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-22T17:27:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "313e30ea334da59f933cb0debbbb3cf269653220",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
