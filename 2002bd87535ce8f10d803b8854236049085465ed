@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7616f4d_daf3edd4",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-22T15:10:00Z",
+      "side": 1,
+      "message": "Is the buffer big enough if we copy with this offset now? we the size of outputBuffer is |dstDataCopyLayout.byteLength|. Maybe we need to add |expectedDstDataOffset| bytes",
+      "parentUuid": "dafe30b5_78680c19",
+      "range": {
+        "startLine": 417,
+        "startChar": 26,
+        "endLine": 417,
+        "endChar": 47
+      },
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a023bf_12b5e057",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 1
