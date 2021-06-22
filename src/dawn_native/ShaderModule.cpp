@@ -1092,6 +1092,13 @@ namespace dawn_native {
             }
 
             std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+
+            std::string disassembly;
+            spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
+            if (spirvTools.Disassemble(spirv, &disassembly)) {
+                device->EmitLog(disassembly.c_str());
+            }
+
             if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
                 tint::Program program;
                 DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
