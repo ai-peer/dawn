@@ -39,6 +39,30 @@
       },
       "revId": "edcafb105788545b053644a0b2114c8719701c2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26b51d56_350ad4e4",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-22T20:52:03Z",
+      "side": 1,
+      "message": "... some local tests passed with ::Opaque",
+      "parentUuid": "6bac7226_e8f99a6a",
+      "range": {
+        "startLine": 176,
+        "startChar": 42,
+        "endLine": 176,
+        "endChar": 43
+      },
+      "revId": "edcafb105788545b053644a0b2114c8719701c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
