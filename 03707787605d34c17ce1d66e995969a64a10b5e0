@@ -33,6 +33,24 @@
       "message": "nit: !HasToggleEnabled(\"use_tint_generator\")",
       "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e469f7_fbaabe31",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-22T10:59:27Z",
+      "side": 1,
+      "message": "Please can you explain the preference for using a string literal over the enum?\nI was thinking of going through the project and switching everything over to the enum so it\u0027s easier to find all of these.",
+      "parentUuid": "48c4afc6_24b00d4f",
+      "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
