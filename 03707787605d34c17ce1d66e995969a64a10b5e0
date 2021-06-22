@@ -69,6 +69,24 @@
       "parentUuid": "39e469f7_fbaabe31",
       "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9778f6a5_ac6a72d5",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-22T11:02:10Z",
+      "side": 1,
+      "message": "Perfect, thank you. Will fix once I\u0027ve put out the autoroller fire...",
+      "parentUuid": "e96d0d5d_25aa06ab",
+      "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
