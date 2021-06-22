@@ -16,6 +16,23 @@
       "message": "LGTM, please add Austin as a second reviewer when you feel this CL is ready.",
       "revId": "c5bbe2762a5ce92c285a620418a5da135c9d4701",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7f9fdc_617ff6a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-22T17:02:16Z",
+      "side": 1,
+      "message": "https://chromium-swarm.appspot.com/task?id\u003d544ca490726e6211\n\nAny idea what this is Corentin? I\u0027m not entirely sure this is an issue with Tint.\n\n[ RUN      ] VertexFormatTest.Float16x4/Metal_AMD_Radeon_R9_M370X\nError: Assertion failure at ../../third_party/dawn/src/dawn_native/metal/CommandRecordingContext.mm:56 (EnsureBlit): mCommands !\u003d nullptr",
+      "revId": "c5bbe2762a5ce92c285a620418a5da135c9d4701",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
