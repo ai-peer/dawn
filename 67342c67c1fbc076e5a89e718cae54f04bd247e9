@@ -50,6 +50,23 @@
       "message": "Stephen, PTAL!",
       "revId": "67342c67c1fbc076e5a89e718cae54f04bd247e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51eaa95d_47828ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-22T12:13:53Z",
+      "side": 1,
+      "message": "Let\u0027s switch reviewers. Jiawei PTAL!",
+      "revId": "67342c67c1fbc076e5a89e718cae54f04bd247e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
