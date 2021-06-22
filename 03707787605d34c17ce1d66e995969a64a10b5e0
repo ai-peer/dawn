@@ -51,6 +51,24 @@
       "parentUuid": "48c4afc6_24b00d4f",
       "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e96d0d5d_25aa06ab",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-22T11:01:24Z",
+      "side": 1,
+      "message": "The enum is an implementation detail of dawn_native, and the end2end tests aren\u0027t allowed to use the dawn_native headers. Here we\u0027re in a white box test so it is technically allowed but I think it is better to be consistent with the rest of the tests.\n\nThis is used often enough that we could have a UsingTintGenerator() helper (or something like that) though.",
+      "parentUuid": "39e469f7_fbaabe31",
+      "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
