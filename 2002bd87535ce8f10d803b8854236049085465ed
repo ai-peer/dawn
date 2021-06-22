@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7784feb4_18b9e6d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-22T22:17:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7acc7864_ad10f365",
@@ -103,6 +120,30 @@
       "side": 1,
       "message": "The size of outputBuffer is big enough. The dstDataCopyLayout.byteLength is very close to (bytesPerImage * copyImages\u0027 number) except the last row of the last image is its real size (less than bytesPerRow). While the offset is smaller than bytesPerImage because it is just x and y offset within one the copied image. In addition, the offset has already been included in dstDataCopyLayout.byteLength when it is calculating its size: no matter it is a full copy or a partial copy, the size is always the entire copied images including offset/padding/irrelevant data(whatever you name it). If copy origin is not OOB for the texture (which will be captured by validation), it will never be OOB for the outputBuffer. \n\nNote that z offset is not calculated (dstSpec.copyorigin.z * bytesPerImage) for both outputBuffer (T2B copy) and expectedDstDataPerSlice (sw buffer to buffer copy for comparison). So it is fair and correct for both of them during pixel-by-pixel comparison.",
       "parentUuid": "b7616f4d_daf3edd4",
+      "range": {
+        "startLine": 417,
+        "startChar": 26,
+        "endLine": 417,
+        "endChar": 47
+      },
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1dce487_c9c5531e",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-22T22:17:30Z",
+      "side": 1,
+      "message": "Right, I see now that the buffer is sized for the entire texture, and not just the copied region. Thanks for the clarification.",
+      "parentUuid": "51bc0f2b_1a966795",
       "range": {
         "startLine": 417,
         "startChar": 26,
