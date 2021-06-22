@@ -16,6 +16,29 @@
       "message": "PTAL, Patchset 1 is the original CL, Patchset 2 adds in my change to fix the build.",
       "revId": "edcafb105788545b053644a0b2114c8719701c2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bac7226_e8f99a6a",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-06-22T20:28:09Z",
+      "side": 1,
+      "message": "I am not sure if ::Linear or ::Opaque is the correct value to use here. Tests pass with ::Opaque.",
+      "range": {
+        "startLine": 176,
+        "startChar": 42,
+        "endLine": 176,
+        "endChar": 43
+      },
+      "revId": "edcafb105788545b053644a0b2114c8719701c2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
