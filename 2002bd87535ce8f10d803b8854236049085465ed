@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51bc0f2b_1a966795",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-22T15:45:18Z",
+      "side": 1,
+      "message": "The size of outputBuffer is big enough. The dstDataCopyLayout.byteLength is very close to (bytesPerImage * copyImages\u0027 number) except the last row of the last image is its real size (less than bytesPerRow). While the offset is smaller than bytesPerImage because it is just x and y offset within one the copied image. In addition, the offset has already been included in dstDataCopyLayout.byteLength when it is calculating its size: no matter it is a full copy or a partial copy, the size is always the entire copied images including offset/padding/irrelevant data(whatever you name it). If copy origin is not OOB for the texture (which will be captured by validation), it will never be OOB for the outputBuffer. \n\nNote that z offset is not calculated (dstSpec.copyorigin.z * bytesPerImage) for both outputBuffer (T2B copy) and expectedDstDataPerSlice (sw buffer to buffer copy for comparison). So it is fair and correct for both of them during pixel-by-pixel comparison.",
+      "parentUuid": "b7616f4d_daf3edd4",
+      "range": {
+        "startLine": 417,
+        "startChar": 26,
+        "endLine": 417,
+        "endChar": 47
+      },
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "57a023bf_12b5e057",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 1
