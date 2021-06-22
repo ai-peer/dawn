@@ -87,6 +87,24 @@
       "parentUuid": "e96d0d5d_25aa06ab",
       "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6a9bb47_3a24e67a",
+        "filename": "src/tests/white_box/D3D12DescriptorHeapTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 741,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-22T11:26:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9778f6a5_ac6a72d5",
+      "revId": "03707787605d34c17ce1d66e995969a64a10b5e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
