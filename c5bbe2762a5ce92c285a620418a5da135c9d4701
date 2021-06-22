@@ -51,6 +51,24 @@
       "parentUuid": "3f7f9fdc_617ff6a8",
       "revId": "c5bbe2762a5ce92c285a620418a5da135c9d4701",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "442b94ef_2999346b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-22T19:56:50Z",
+      "side": 1,
+      "message": "Another:\n\n[ RUN      ] VertexFormatTest.Float32x2/Metal_AMD_Radeon_R9_M370X\nError: Assertion failure at ../../third_party/dawn/src/dawn_native/metal/CommandRecordingContext.mm:56 (EnsureBlit): mCommands !\u003d nullptr\n\nRunning again...",
+      "parentUuid": "4c76946c_2db0890e",
+      "revId": "c5bbe2762a5ce92c285a620418a5da135c9d4701",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
