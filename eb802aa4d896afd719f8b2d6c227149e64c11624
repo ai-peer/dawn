@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50289133_a622c7ab",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-22T20:49:32Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "eb802aa4d896afd719f8b2d6c227149e64c11624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
