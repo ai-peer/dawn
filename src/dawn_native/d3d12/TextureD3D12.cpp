@@ -879,7 +879,7 @@ namespace dawn_native { namespace d3d12 {
         uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
         float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
 
-        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0) {
+        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0 || IsMultisampledTexture()) {
             if (GetFormat().HasDepthOrStencil()) {
                 TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
 

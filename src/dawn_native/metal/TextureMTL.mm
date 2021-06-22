@@ -34,7 +34,9 @@ namespace dawn_native { namespace metal {
             return usage & kUsageNeedsTextureView;
         }
 
-        MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
+        MTLTextureUsage MetalTextureUsage(const Format& format,
+                                          wgpu::TextureUsage usage,
+                                          uint32_t sampleCount) {
             MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
 
             if (usage & (wgpu::TextureUsage::Storage)) {
@@ -53,7 +55,8 @@ namespace dawn_native { namespace metal {
                 }
             }
 
-            if (usage & (wgpu::TextureUsage::RenderAttachment)) {
+            // MTLTextureUsageRenderTarget is needed to clear multisample textures.
+            if (usage & (wgpu::TextureUsage::RenderAttachment) || sampleCount > 1) {
                 result |= MTLTextureUsageRenderTarget;
             }
 
@@ -310,7 +313,7 @@ namespace dawn_native { namespace metal {
         // TODO: add MTLTextureUsagePixelFormatView when needed when we support format
         // reinterpretation.
         mtlDesc.usage = MetalTextureUsage(device->GetValidInternalFormat(descriptor->format),
-                                          descriptor->usage);
+                                          descriptor->usage, descriptor->sampleCount);
         mtlDesc.pixelFormat = MetalPixelFormat(descriptor->format);
         mtlDesc.mipmapLevelCount = descriptor->mipLevelCount;
         mtlDesc.storageMode = MTLStorageModePrivate;
@@ -410,7 +413,7 @@ namespace dawn_native { namespace metal {
         const uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
         const double dClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.0 : 1.0;
 
-        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0) {
+        if ((GetUsage() & wgpu::TextureUsage::RenderAttachment) != 0 || IsMultisampledTexture()) {
             ASSERT(GetFormat().isRenderable);
 
             // End the blit encoder if it is open.
