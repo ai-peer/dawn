@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dfb99b5_c3df2356",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-22T05:32:17Z",
+      "side": 1,
+      "message": "PTAL. Thanks! This CL is the last one of 3D texture copy related change on my local machine. I will work on 3D texture sampling. ",
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7acc7864_ad10f365",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-22T05:32:17Z",
+      "side": 1,
+      "message": "The offset of output buffer should not be zero. It should be the same with the sw-copy buffer\u0027s offset below (expectedDstDataPerSlice). In addition, the calculation of the offset (which is expectedDstDataOffset) was incorrect before. \n\nThese two bugs were not covered because in previous tests either copy width is aligned with bytesPerRow (say width \u003d 256) or dst copy offset/origin is {0, 0, 0}, so it worked fine in those tests.",
+      "range": {
+        "startLine": 417,
+        "startChar": 26,
+        "endLine": 417,
+        "endChar": 47
+      },
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57a023bf_12b5e057",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-22T05:32:17Z",
+      "side": 1,
+      "message": "I mentioned a few more tests at https://dawn-review.googlesource.com/c/dawn/+/50243/7..11/src/tests/end2end/CopyTests.cpp#b1801. I added them via this test. This test exposed a bug in T2T test, which was fixed at [1].",
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
