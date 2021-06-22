@@ -33,6 +33,23 @@
       "message": "LGTM, I would have thought it could live in the Metal backend, but here seems fine too.",
       "revId": "f716b5f59f3d09595ee939e06ed328f4756e4bec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa5b89a8_ba2b1ca8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-22T21:47:58Z",
+      "side": 1,
+      "message": "Jiawei, PTAL!",
+      "revId": "f716b5f59f3d09595ee939e06ed328f4756e4bec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
