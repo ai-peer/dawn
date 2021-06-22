@@ -701,6 +701,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8192828_751a49f2",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-22T13:01:50Z",
+      "side": 1,
+      "message": "My understanding is that the OpenGL and OpenGLES backends both depend on SPIRV-Cross, and SPIRV-Cross just cannot deal with these layouts. So, I\u0027m not sure if the DAWN_SUPPRESS_TEST_IF() is any more precise.",
+      "parentUuid": "9b7f2c42_86b480e8",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61505895_d12a6af0",
         "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
         "patchSetId": 2
