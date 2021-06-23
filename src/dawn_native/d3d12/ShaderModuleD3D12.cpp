@@ -395,6 +395,130 @@ namespace dawn_native { namespace d3d12 {
                                                         uint32_t compileFlags) {
         Device* device = ToBackend(GetDevice());
 
+        const PlatformFunctions* functions = ToBackend(GetDevice())->GetFunctions();
+        if (device->IsToggleEnabled(Toggle::UseMesa)) {
+            ASSERT(functions->IsSPIRVToDXILAvailable());
+            ASSERT(device->IsToggleEnabled(Toggle::UseTintGenerator));
+
+            tint::transform::Manager transformManager;
+            if (GetDevice()->IsRobustnessEnabled()) {
+                transformManager.Add<tint::transform::BoundArrayAccessors>();
+            }
+
+            tint::transform::DataMap transformInputs;
+
+            {
+                // TODO(tangm): This code is copied from the Tint -> HLSL codepath. We want to
+                // eventually change the BindGroup, BindGroupLayout, PipelineLayout, etc to not
+                // compact the binding locations per resource type, since D3D12/DXIL does not have
+                // this limitation.
+                // TODO(tangm): This can now probably reuse most of the Tint -> HLSL codepath.
+
+                using BindingRemapper = tint::transform::BindingRemapper;
+                using BindingPoint = tint::transform::BindingPoint;
+                BindingRemapper::BindingPoints bindingPoints;
+                BindingRemapper::AccessControls accessControls;
+
+                const EntryPointMetadata::BindingInfoArray& moduleBindingInfo =
+                    GetEntryPoint(entryPointName).bindings;
+
+                // d3d12::BindGroupLayout packs the bindings per HLSL register-space.
+                // We modify the Tint AST to make the "bindings" decoration match the
+                // offset chosen by d3d12::BindGroupLayout so that Tint produces HLSL
+                // with the correct registers assigned to each interface variable.
+                for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+                    const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
+                    const auto& bindingOffsets = bgl->GetBindingOffsets();
+                    const auto& groupBindingInfo = moduleBindingInfo[group];
+                    for (const auto& it : groupBindingInfo) {
+                        BindingNumber binding = it.first;
+                        auto const& bindingInfo = it.second;
+                        BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
+                        uint32_t bindingOffset = bindingOffsets[bindingIndex];
+                        BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                                     static_cast<uint32_t>(binding)};
+                        BindingPoint dstBindingPoint{static_cast<uint32_t>(group), bindingOffset};
+                        if (srcBindingPoint != dstBindingPoint) {
+                            bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
+                        }
+
+                        // Declaring a read-only storage buffer in HLSL but specifying a
+                        // storage buffer in the BGL produces the wrong output.
+                        // Force read-only storage buffer bindings to be treated as UAV
+                        // instead of SRV.
+                        const bool forceStorageBufferAsUAV =
+                            (bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
+                             bgl->GetBindingInfo(bindingIndex).buffer.type ==
+                                 wgpu::BufferBindingType::Storage);
+                        if (forceStorageBufferAsUAV) {
+                            accessControls.emplace(srcBindingPoint, tint::ast::Access::kReadWrite);
+                        }
+                    }
+                }
+
+                if (stage == SingleShaderStage::Vertex) {
+                    transformManager.Add<tint::transform::FirstIndexOffset>();
+                    transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
+                        layout->GetFirstIndexOffsetShaderRegister(),
+                        layout->GetFirstIndexOffsetRegisterSpace());
+                }
+
+                transformManager.Add<tint::transform::BindingRemapper>();
+                // D3D12 registers like `t3` and `c3` have the same bindingOffset
+                // number in the remapping but should not be considered a collision
+                // because they have different types.
+                const bool mayCollide = true;
+                transformInputs.Add<BindingRemapper::Remappings>(
+                    std::move(bindingPoints), std::move(accessControls), mayCollide);
+            }
+
+            tint::Program program;
+            DAWN_TRY_ASSIGN(program,
+                            RunTransforms(&transformManager, GetTintProgram(), transformInputs,
+                                          nullptr, GetCompilationMessages()));
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V failure:" << std::endl;
+
+            tint::writer::spirv::Options options;
+            options.emit_vertex_point_size = false;
+            auto result = tint::writer::spirv::Generate(&program, options);
+            if (!result.success) {
+                errorStream << "Generator: " << result.error << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            dxil_spirv_shader_stage dxStage;
+            switch (stage) {
+                case SingleShaderStage::Vertex:
+                    dxStage = DXIL_SPIRV_SHADER_VERTEX;
+                    break;
+                case SingleShaderStage::Fragment:
+                    dxStage = DXIL_SPIRV_SHADER_FRAGMENT;
+                    break;
+                case SingleShaderStage::Compute:
+                    dxStage = DXIL_SPIRV_SHADER_COMPUTE;
+                    break;
+            }
+
+            uint8_t* dxil = nullptr;
+            size_t dxilCount = 0;
+            const PlatformFunctions* functions = device->GetFunctions();
+            if (!functions->spirvToDxil(result.spirv.data(), result.spirv.size(), NULL, 0, dxStage,
+                                        entryPointName, reinterpret_cast<void**>(&dxil),
+                                        &dxilCount)) {
+                return DAWN_VALIDATION_ERROR("spirv_to_dxil: Compilation failed");
+            }
+
+            std::unique_ptr<uint8_t[]> data(new uint8_t[dxilCount]);
+            std::copy(dxil, dxil + dxilCount, data.get());
+            functions->spirvToDxilFree(dxil);
+
+            CompiledShader compiledShader = {};
+            compiledShader.compiledMesaShader = {std::move(data), dxilCount};
+            return std::move(compiledShader);
+        }
+
         // Compile the source shader to HLSL.
         std::string hlslSource;
         std::string remappedEntryPoint;
@@ -454,6 +578,8 @@ namespace dawn_native { namespace d3d12 {
     D3D12_SHADER_BYTECODE CompiledShader::GetD3D12ShaderBytecode() const {
         if (cachedShader.buffer != nullptr) {
             return {cachedShader.buffer.get(), cachedShader.bufferSize};
+        } else if (compiledMesaShader.buffer != nullptr) {
+            return {compiledMesaShader.buffer.get(), compiledMesaShader.bufferSize};
         } else if (compiledFXCShader != nullptr) {
             return {compiledFXCShader->GetBufferPointer(), compiledFXCShader->GetBufferSize()};
         } else if (compiledDXCShader != nullptr) {
