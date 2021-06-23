@@ -63,6 +63,7 @@ class SwapChainTests : public DawnTest {
         surface = wgpu::Surface();
         if (window != nullptr) {
             glfwDestroyWindow(window);
+            glfwTerminate();
         }
         DawnTest::TearDown();
     }
