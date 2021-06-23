@@ -306,9 +306,14 @@ namespace dawn_native { namespace metal {
         if (mCommandContext.GetCommands() == nullptr) {
             TRACE_EVENT0(GetPlatform(), General, "[MTLCommandQueue commandBuffer]");
             // The MTLCommandBuffer will be autoreleased by default.
-            // The autorelease pool may drain before the command buffer is submitted. Retain so it
-            // stays alive.
-            mCommandContext = CommandRecordingContext([*mCommandQueue commandBuffer]);
+            // An autorelease pool in an outer scope may drain before the command buffer is submitted,
+            // so we need to keep the command buffer alive.
+            // Create it inside a local autoreleasepool with an additional retain.
+            // This effectively converts it to a manually-released object with one reference.
+            @autoreleasepool {
+                mCommandContext =
+                    CommandRecordingContext(AcquireNSPRef([[*mCommandQueue commandBuffer] retain]));
+            }
         }
         return &mCommandContext;
     }

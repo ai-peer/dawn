@@ -59,9 +59,14 @@ namespace dawn_native { namespace metal {
             ASSERT(!mInEncoder);
             mInEncoder = true;
 
-            // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
-            // draining from under us.
-            mBlit = [*mCommands blitCommandEncoder];
+            @autoreleasepool {
+                // The encoder will be autoreleased by default.
+                // An autorelease pool in an outer scope may drain before the encoder is submitted,
+                // so we need to keep the encoder alive.
+                // Create it inside a local autoreleasepool with an additional retain.
+                // This effectively converts it to a manually-released object with one reference.
+                mBlit.Acquire([[*mCommands blitCommandEncoder] retain]);
+            }
         }
         return mBlit.Get();
     }
@@ -82,9 +87,14 @@ namespace dawn_native { namespace metal {
         ASSERT(!mInEncoder);
 
         mInEncoder = true;
-        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from draining
-        // from under us.
-        mCompute = [*mCommands computeCommandEncoder];
+        @autoreleasepool {
+            // The encoder will be autoreleased by default.
+            // An autorelease pool in an outer scope may drain before the encoder is submitted,
+            // so we need to keep the encoder alive.
+            // Create it inside a local autoreleasepool with an additional retain.
+            // This effectively converts it to a manually-released object with one reference.
+            mCompute.Acquire([[*mCommands computeCommandEncoder] retain]);
+        }
         return mCompute.Get();
     }
 
@@ -104,9 +114,14 @@ namespace dawn_native { namespace metal {
         ASSERT(!mInEncoder);
 
         mInEncoder = true;
-        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from draining
-        // from under us.
-        mRender = [*mCommands renderCommandEncoderWithDescriptor:descriptor];
+        @autoreleasepool {
+            // The encoder will be autoreleased by default.
+            // An autorelease pool in an outer scope may drain before the encoder is submitted,
+            // so we need to keep the encoder alive.
+            // Create it inside a local autoreleasepool with an additional retain.
+            // This effectively converts it to a manually-released object with one reference.
+            mRender.Acquire([[*mCommands renderCommandEncoderWithDescriptor:descriptor] retain]);
+        }
         return mRender.Get();
     }
 
