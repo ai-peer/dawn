@@ -33,9 +33,7 @@ class SwapChainTests : public DawnTest {
 
         // GLFW can fail to start in headless environments, in which SwapChainTests are
         // inapplicable. Skip this cases without producing a test failure.
-        if (glfwInit() == GLFW_FALSE) {
-            GTEST_SKIP();
-        }
+        DAWN_TEST_UNSUPPORTED_IF(!glfwInit());
 
         // The SwapChainTests don't create OpenGL contexts so we don't need to call
         // SetupGLFWWindowHintsForBackend. Set GLFW_NO_API anyway to avoid GLFW bringing up a GL
@@ -63,6 +61,7 @@ class SwapChainTests : public DawnTest {
         surface = wgpu::Surface();
         if (window != nullptr) {
             glfwDestroyWindow(window);
+            glfwTerminate();
         }
         DawnTest::TearDown();
     }
