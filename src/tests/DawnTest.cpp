@@ -549,6 +549,19 @@ std::vector<AdapterTestParam> DawnTestEnvironment::GetAvailableAdapterTestParams
             if (params[i].backendType == adapterProperties.backendType &&
                 adapterProperties.selected) {
                 testParams.push_back(AdapterTestParam(params[i], adapterProperties));
+
+                // TODO remove: this is a hack to enable testing with and without mesa
+                if (params[i].backendType == wgpu::BackendType::D3D12) {
+                    BackendTestConfig configWithTint = params[i];
+                    configWithTint.forceEnabledWorkarounds.push_back("use_tint_generator");
+                    testParams.push_back(AdapterTestParam(configWithTint, adapterProperties));
+
+                    BackendTestConfig configWithTintAndMesa = params[i];
+                    configWithTintAndMesa.forceEnabledWorkarounds.push_back("use_tint_generator");
+                    configWithTintAndMesa.forceEnabledWorkarounds.push_back("use_mesa");
+                    testParams.push_back(
+                        AdapterTestParam(configWithTintAndMesa, adapterProperties));
+                }
             }
         }
     }
