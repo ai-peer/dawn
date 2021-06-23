@@ -49,6 +49,7 @@ namespace dawn_native { namespace metal {
         }
 
         ASSERT(!mInEncoder);
+
         return std::move(mCommands);
     }
 
@@ -61,7 +62,7 @@ namespace dawn_native { namespace metal {
 
             // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
             // draining from under us.
-            mBlit = [*mCommands blitCommandEncoder];
+            mBlit.Acquire([[*mCommands blitCommandEncoder] retain]);
         }
         return mBlit.Get();
     }
@@ -82,9 +83,9 @@ namespace dawn_native { namespace metal {
         ASSERT(!mInEncoder);
 
         mInEncoder = true;
-        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from draining
-        // from under us.
-        mCompute = [*mCommands computeCommandEncoder];
+        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+        // draining from under us.
+        mCompute.Acquire([[*mCommands computeCommandEncoder] retain]);
         return mCompute.Get();
     }
 
@@ -104,9 +105,9 @@ namespace dawn_native { namespace metal {
         ASSERT(!mInEncoder);
 
         mInEncoder = true;
-        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from draining
-        // from under us.
-        mRender = [*mCommands renderCommandEncoderWithDescriptor:descriptor];
+        // The encoder is created autoreleased. Retain it to avoid the autoreleasepool from
+        // draining from under us.
+        mRender.Acquire([[*mCommands renderCommandEncoderWithDescriptor:descriptor] retain]);
         return mRender.Get();
     }
 
