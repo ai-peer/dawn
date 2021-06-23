@@ -322,6 +322,67 @@ fn ep_func() {
     ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader.c_str()));
 }
 
+TEST_P(ShaderTests, A) {
+    wgpu::TextureDescriptor desc;
+    desc.format=wgpu::TextureFormat::RGBA8Unorm;
+    desc.size = {2, 2};
+    desc.mipLevelCount = 2;
+    desc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture texture = device.CreateTexture(&desc);
+
+    wgpu::TextureViewDescriptor viewDesc;
+    viewDesc.baseArrayLayer = 0;
+    viewDesc.arrayLayerCount = 1;
+    viewDesc.baseMipLevel = 0;
+    viewDesc.mipLevelCount = 1;
+
+    // Uninitialize the mip level 0
+    //  - Barrier: mip level 0 UNDEFINED -> OUTPUT_ATTACHMENT_OPTIMAL
+    {
+        utils::ComboRenderPassDescriptor rp({texture.CreateView(&viewDesc)});
+        rp.cColorAttachments[0].storeOp = wgpu::StoreOp::Clear;
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp);
+        pass.EndPass();
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    // Sample mip level 1
+    // Causes 0 initialization to happen using copies:
+    //  - Barrier: mip level 0 OUTPUT_ATTACHMENT_OPTIMAL -> TRANSFER_DST_OPTIMAL
+    //  - Barrier: mip level 1 UNDEFINED -> TRANSFER_DST_OPTIMAL
+    // Then the barriers for the dispatch:
+    //  - Barrier: mip level 0-1 TRANSFER_DST_OPTIMAL -> SHADER_READ_ONLY_OPTIMAL
+    {
+        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+[[group(0), binding(0)]] var tex : texture_2d<f32>;
+[[stage(compute), workgroup_size(1)]] fn main() {
+    ignore(textureDimensions(tex));
+}
+        )");
+
+        wgpu::ComputePipelineDescriptor pDesc;
+        pDesc.compute.module = module;
+        pDesc.compute.entryPoint = "main";
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pDesc);
+
+        wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, texture.CreateView()}});
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bg);
+        pass.Dispatch(1);
+        pass.EndPass();
+        wgpu::CommandBuffer commands = encoder.Finish();
+
+        queue.Submit(1, &commands);
+    }
+}
+
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
