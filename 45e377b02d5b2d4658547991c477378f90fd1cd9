@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "45e377b02d5b2d4658547991c477378f90fd1cd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5fb2728_52832e71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-23T02:13:11Z",
+      "side": 1,
+      "message": "Do you think eventually we should introduce base::CheckedNumeric into Dawn just like what ANGLE is doing[1]?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/common/third_party/base/anglebase/numerics/",
+      "revId": "45e377b02d5b2d4658547991c477378f90fd1cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
