@@ -110,6 +110,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(LoadFXCompiler());
         DAWN_TRY(LoadD3D11());
         LoadPIXRuntime();
+        LoadSPIRVToDXIL();
         return {};
     }
 
@@ -134,7 +135,9 @@ namespace dawn_native { namespace d3d12 {
             !mD3D12Lib.GetProc(&d3d12SerializeVersionedRootSignature,
                                "D3D12SerializeVersionedRootSignature", &error) ||
             !mD3D12Lib.GetProc(&d3d12CreateVersionedRootSignatureDeserializer,
-                               "D3D12CreateVersionedRootSignatureDeserializer", &error)) {
+                               "D3D12CreateVersionedRootSignatureDeserializer", &error) ||
+            !mD3D12Lib.GetProc(&d3d12EnableExperimentalFeatures, "D3D12EnableExperimentalFeatures",
+                               &error)) {
             return DAWN_INTERNAL_ERROR(error.c_str());
         }
 #endif
@@ -251,6 +254,10 @@ namespace dawn_native { namespace d3d12 {
         return mDXILLib.Valid() && mDXCompilerLib.Valid();
     }
 
+    bool PlatformFunctions::IsSPIRVToDXILAvailable() const {
+        return mSPIRVToDXILLib.Valid();
+    }
+
     void PlatformFunctions::LoadPIXRuntime() {
         // TODO(dawn:766):
         // In UWP PIX should be statically linked WinPixEventRuntime_UAP.lib
@@ -263,6 +270,14 @@ namespace dawn_native { namespace d3d12 {
             !mPIXEventRuntimeLib.GetProc(&pixEndEventOnCommandList, "PIXEndEventOnCommandList") ||
             !mPIXEventRuntimeLib.GetProc(&pixSetMarkerOnCommandList, "PIXSetMarkerOnCommandList")) {
             mPIXEventRuntimeLib.Close();
+        }
+    }
+
+    void PlatformFunctions::LoadSPIRVToDXIL() {
+        if (!mSPIRVToDXILLib.Open("spirv_to_dxil.dll") ||
+            !mSPIRVToDXILLib.GetProc(&spirvToDxil, "spirv_to_dxil") ||
+            !mSPIRVToDXILLib.GetProc(&spirvToDxilFree, "spirv_to_dxil_free")) {
+            mSPIRVToDXILLib.Close();
         }
     }
 
