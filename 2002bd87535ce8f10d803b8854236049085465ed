@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18b6e4d2_103c3a56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-23T13:41:05Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7acc7864_ad10f365",
@@ -150,6 +167,23 @@
         "endLine": 417,
         "endChar": 47
       },
+      "revId": "2002bd87535ce8f10d803b8854236049085465ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbfd42ec_6778acde",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-23T13:41:05Z",
+      "side": 1,
+      "message": "u-nit (since this was preexisting): we use TODO(crbug.com/dawn/....) for suppressions usually.",
       "revId": "2002bd87535ce8f10d803b8854236049085465ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
