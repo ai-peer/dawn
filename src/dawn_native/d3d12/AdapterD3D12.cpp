@@ -61,6 +61,10 @@ namespace dawn_native { namespace d3d12 {
         // Create the device to populate the adapter properties then reuse it when needed for actual
         // rendering.
         const PlatformFunctions* functions = GetBackend()->GetFunctions();
+        if (FAILED(functions->d3d12EnableExperimentalFeatures(1, &D3D12ExperimentalShaderModels,
+                                                              nullptr, nullptr))) {
+            return DAWN_INTERNAL_ERROR("D3D12EnableExperimentalFeatures failed");
+        }
         if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
                                                 _uuidof(ID3D12Device), &mD3d12Device))) {
             return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");
@@ -158,6 +162,8 @@ namespace dawn_native { namespace d3d12 {
             // get rejected and generate a debug error. Then, we request 0 to get the allowed
             // allowed alignment.
             D3D12_MESSAGE_ID_CREATERESOURCE_INVALIDALIGNMENT,
+
+            D3D12_MESSAGE_ID_NON_RETAIL_SHADER_MODEL_WONT_VALIDATE,
         };
 
         // Create a retrieval filter with a deny list to suppress messages.

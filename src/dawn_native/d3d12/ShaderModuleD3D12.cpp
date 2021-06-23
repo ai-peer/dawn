@@ -393,6 +393,124 @@ namespace dawn_native { namespace d3d12 {
                                                         uint32_t compileFlags) {
         Device* device = ToBackend(GetDevice());
 
+        const PlatformFunctions* functions = ToBackend(GetDevice())->GetFunctions();
+        if (device->IsToggleEnabled(Toggle::UseMesa)) {
+            ASSERT(functions->IsSPIRVToDXILAvailable());
+            ASSERT(device->IsToggleEnabled(Toggle::UseTintGenerator));
+
+            // TODO(tangm): this can probably be mostly de-duplicated with the
+            // `TranslateToHLSLWithTint` codepath, with the exception of `mayCollide = false` here.
+            using BindingRemapper = tint::transform::BindingRemapper;
+            using BindingPoint = tint::transform::BindingPoint;
+            BindingRemapper::AccessControls accessControls;
+            const EntryPointMetadata::BindingInfoArray& moduleBindingInfo =
+                GetEntryPoint(entryPointName).bindings;
+            for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+                const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
+                const auto& groupBindingInfo = moduleBindingInfo[group];
+                for (const auto& it : groupBindingInfo) {
+                    BindingNumber binding = it.first;
+                    auto const& bindingInfo = it.second;
+                    BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
+
+                    // Declaring a read-only storage buffer in HLSL but specifying a
+                    // storage buffer in the BGL produces the wrong output.
+                    // Force read-only storage buffer bindings to be treated as UAV
+                    // instead of SRV.
+                    // Internal storage buffer is a storage buffer used in the internal pipeline.
+                    const bool forceStorageBufferAsUAV =
+                        (bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
+                         (bgl->GetBindingInfo(bindingIndex).buffer.type ==
+                              wgpu::BufferBindingType::Storage ||
+                          bgl->GetBindingInfo(bindingIndex).buffer.type ==
+                              kInternalStorageBufferBinding));
+                    if (forceStorageBufferAsUAV) {
+                        BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                                     static_cast<uint32_t>(binding)};
+                        accessControls.emplace(srcBindingPoint, tint::ast::Access::kReadWrite);
+                    }
+                }
+            }
+
+            tint::transform::Manager transformManager;
+            if (GetDevice()->IsRobustnessEnabled()) {
+                transformManager.Add<tint::transform::BoundArrayAccessors>();
+            }
+
+            transformManager.Add<tint::transform::BindingRemapper>();
+
+            tint::transform::DataMap transformInputs;
+
+            if (stage == SingleShaderStage::Vertex) {
+                transformManager.Add<tint::transform::FirstIndexOffset>();
+                transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
+                    layout->GetFirstIndexOffsetShaderRegister(),
+                    layout->GetFirstIndexOffsetRegisterSpace());
+            }
+
+            const bool mayCollide = false;
+            transformInputs.Add<BindingRemapper::Remappings>(BindingRemapper::BindingPoints(),
+                                                             std::move(accessControls), mayCollide);
+
+            tint::Program program;
+            tint::transform::DataMap transformOutputs;
+            DAWN_TRY_ASSIGN(program,
+                            RunTransforms(&transformManager, GetTintProgram(), transformInputs,
+                                          &transformOutputs, GetCompilationMessages()));
+
+            std::ostringstream errorStream;
+            errorStream << "Tint SPIR-V failure:" << std::endl;
+
+            tint::writer::spirv::Options options;
+            options.emit_vertex_point_size = false;
+            auto result = tint::writer::spirv::Generate(&program, options);
+            if (!result.success) {
+                errorStream << "Generator: " << result.error << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            dxil_spirv_shader_stage dxStage;
+            switch (stage) {
+                case SingleShaderStage::Vertex:
+                    dxStage = DXIL_SPIRV_SHADER_VERTEX;
+                    break;
+                case SingleShaderStage::Fragment:
+                    dxStage = DXIL_SPIRV_SHADER_FRAGMENT;
+                    break;
+                case SingleShaderStage::Compute:
+                    dxStage = DXIL_SPIRV_SHADER_COMPUTE;
+                    break;
+            }
+
+            uint8_t* dxil = nullptr;
+            size_t dxilCount = 0;
+            const PlatformFunctions* functions = device->GetFunctions();
+            if (!functions->spirvToDxil(result.spirv.data(), result.spirv.size(), NULL, 0, dxStage,
+                                        entryPointName, reinterpret_cast<void**>(&dxil),
+                                        &dxilCount)) {
+                return DAWN_VALIDATION_ERROR("spirv_to_dxil: Compilation failed");
+            }
+
+            std::unique_ptr<uint8_t[]> data(new uint8_t[dxilCount]);
+            std::copy(dxil, dxil + dxilCount, data.get());
+            functions->spirvToDxilFree(dxil);
+
+            CompiledShader compiledShader = {};
+            if (auto* data = transformOutputs.Get<tint::transform::FirstIndexOffset::Data>()) {
+                compiledShader.firstOffsetInfo.usesVertexIndex = data->has_vertex_index;
+                if (compiledShader.firstOffsetInfo.usesVertexIndex) {
+                    compiledShader.firstOffsetInfo.vertexIndexOffset = data->first_vertex_offset;
+                }
+                compiledShader.firstOffsetInfo.usesInstanceIndex = data->has_instance_index;
+                if (compiledShader.firstOffsetInfo.usesInstanceIndex) {
+                    compiledShader.firstOffsetInfo.instanceIndexOffset =
+                        data->first_instance_offset;
+                }
+            }
+            compiledShader.compiledMesaShader = {std::move(data), dxilCount};
+            return std::move(compiledShader);
+        }
+
         // Compile the source shader to HLSL.
         std::string hlslSource;
         std::string remappedEntryPoint;
@@ -452,6 +570,8 @@ namespace dawn_native { namespace d3d12 {
     D3D12_SHADER_BYTECODE CompiledShader::GetD3D12ShaderBytecode() const {
         if (cachedShader.buffer != nullptr) {
             return {cachedShader.buffer.get(), cachedShader.bufferSize};
+        } else if (compiledMesaShader.buffer != nullptr) {
+            return {compiledMesaShader.buffer.get(), compiledMesaShader.bufferSize};
         } else if (compiledFXCShader != nullptr) {
             return {compiledFXCShader->GetBufferPointer(), compiledFXCShader->GetBufferSize()};
         } else if (compiledDXCShader != nullptr) {
