@@ -415,6 +415,7 @@ source_set("dawn_native_sources") {
       "d3d12/UtilsD3D12.cpp",
       "d3d12/UtilsD3D12.h",
       "d3d12/d3d12_platform.h",
+      "d3d12/spirv_to_dxil.h",
     ]
   }
 

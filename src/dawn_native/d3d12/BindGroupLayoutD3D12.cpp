@@ -115,7 +115,7 @@ namespace dawn_native { namespace d3d12 {
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
         : BindGroupLayoutBase(device, descriptor),
-          mUseBindingAsRegister(false),
+          mUseBindingAsRegister(device->IsToggleEnabled(Toggle::UseMesa)),
           mBindingOffsets(GetBindingCount()),
           mCbvUavSrvDescriptorCount(0),
           mSamplerDescriptorCount(0),
