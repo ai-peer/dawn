@@ -45,6 +45,7 @@ namespace dawn_native {
         DisableSampleVariables,
         UseD3D12SmallShaderVisibleHeapForTesting,
         UseDXC,
+        UseMesa,
         DisableRobustness,
         MetalEnableVertexPulling,
         DisallowUnsafeAPIs,

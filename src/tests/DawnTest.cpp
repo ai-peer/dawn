@@ -563,6 +563,14 @@ std::vector<AdapterTestParam> DawnTestEnvironment::GetAvailableAdapterTestParams
                     configWithTint.forceEnabledWorkarounds.push_back("use_tint_generator");
                     testParams.push_back(AdapterTestParam(configWithTint, adapterProperties));
                 }
+
+                if (params[i].backendType == wgpu::BackendType::D3D12) {
+                    BackendTestConfig configWithTintAndMesa = params[i];
+                    configWithTintAndMesa.forceEnabledWorkarounds.push_back("use_tint_generator");
+                    configWithTintAndMesa.forceEnabledWorkarounds.push_back("use_mesa");
+                    testParams.push_back(
+                        AdapterTestParam(configWithTintAndMesa, adapterProperties));
+                }
             }
         }
     }
