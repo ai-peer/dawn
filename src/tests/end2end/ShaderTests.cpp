@@ -322,6 +322,82 @@ fn ep_func() {
     ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader.c_str()));
 }
 
+TEST_P(ShaderTests, A) {
+    wgpu::TextureDescriptor desc;
+    desc.format=wgpu::TextureFormat::RGBA8Unorm;
+    desc.size = {2, 2};
+    desc.mipLevelCount = 2;
+    desc.usage = wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::Sampled | wgpu::TextureUsage::RenderAttachment;
+    wgpu::Texture texture = device.CreateTexture(&desc);
+
+    // Initialize miplevel1 with copy
+    //{
+    //    wgpu::Buffer buffer = utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::CopySrc, {1});
+    //    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    //    //{
+    //    //    wgpu::ImageCopyBuffer bufferCopy = utils::CreateImageCopyBuffer(buffer, 0, 256);
+    //    //    wgpu::ImageCopyTexture textureCopy = utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+    //    //    wgpu::Extent3D copySize = {1, 1, 1};
+    //    //    encoder.CopyBufferToTexture(&bufferCopy, &textureCopy, &copySize);
+    //    //}
+    //    {
+    //        wgpu::ImageCopyBuffer bufferCopy = utils::CreateImageCopyBuffer(buffer, 0, 256);
+    //        wgpu::ImageCopyTexture textureCopy = utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+    //        wgpu::Extent3D copySize = {1, 1, 1};
+    //        encoder.CopyBufferToTexture(&bufferCopy, &textureCopy, &copySize);
+    //    }
+    //    wgpu::CommandBuffer commands = encoder.Finish();
+    //    queue.Submit(1, &commands);
+    //}
+
+    wgpu::TextureViewDescriptor viewDesc;
+    viewDesc.baseArrayLayer = 0;
+    viewDesc.arrayLayerCount = 1;
+    viewDesc.baseMipLevel = 0;
+    viewDesc.mipLevelCount = 1;
+
+    // Uninitialize the mip level 1
+    {
+        utils::ComboRenderPassDescriptor rp({texture.CreateView(&viewDesc)});
+        rp.cColorAttachments[0].storeOp = wgpu::StoreOp::Clear;
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp);
+        pass.EndPass();
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    // Sample mip level 1
+    {
+        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+[[group(0), binding(0)]] var tex : texture_2d<f32>;
+[[stage(compute), workgroup_size(1)]] fn main() {
+    ignore(textureDimensions(tex));
+}
+        )");
+
+        wgpu::ComputePipelineDescriptor pDesc;
+        pDesc.compute.module = module;
+        pDesc.compute.entryPoint = "main";
+        wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pDesc);
+
+        wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, texture.CreateView()}});
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bg);
+        pass.Dispatch(1);
+        pass.EndPass();
+        wgpu::CommandBuffer commands = encoder.Finish();
+
+        queue.Submit(1, &commands);
+        
+    }
+}
+
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),

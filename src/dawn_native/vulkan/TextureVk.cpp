@@ -30,6 +30,9 @@
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
+#include "common/Log.h"
+#include "dawn/webgpu_cpp_print.h"
+
 namespace dawn_native { namespace vulkan {
 
     namespace {
@@ -168,6 +171,7 @@ namespace dawn_native { namespace vulkan {
                                                 wgpu::TextureUsage lastUsage,
                                                 wgpu::TextureUsage usage,
                                                 const SubresourceRange& range) {
+            DAWN_DEBUG() <<" [" << range.baseMipLevel << ", " << range.levelCount << "]x[" << range.baseArrayLayer << ", " << range.layerCount << "] " << lastUsage << " -> " << usage;
             VkImageMemoryBarrier barrier;
             barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
             barrier.pNext = nullptr;

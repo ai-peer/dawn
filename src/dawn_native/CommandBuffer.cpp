@@ -21,6 +21,8 @@
 #include "dawn_native/Format.h"
 #include "dawn_native/Texture.h"
 
+#include "common/Log.h"
+
 namespace dawn_native {
 
     CommandBufferBase::CommandBufferBase(CommandEncoder* encoder, const CommandBufferDescriptor*)
@@ -92,6 +94,7 @@ namespace dawn_native {
     }
 
     void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
+        DAWN_DEBUG();
         for (ColorAttachmentIndex i :
              IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
             auto& attachmentInfo = renderPass->colorAttachments[i];
@@ -102,9 +105,12 @@ namespace dawn_native {
             ASSERT(view->GetLevelCount() == 1);
             SubresourceRange range = view->GetSubresourceRange();
 
+            DAWN_DEBUG() << view->GetBaseMipLevel() << " " << view->GetBaseArrayLayer();
+
             // If the loadOp is Load, but the subresource is not initialized, use Clear instead.
             if (attachmentInfo.loadOp == wgpu::LoadOp::Load &&
                 !view->GetTexture()->IsSubresourceContentInitialized(range)) {
+                DAWN_DEBUG();
                 attachmentInfo.loadOp = wgpu::LoadOp::Clear;
                 attachmentInfo.clearColor = {0.f, 0.f, 0.f, 0.f};
             }

@@ -33,6 +33,7 @@
 #include "dawn_native/vulkan/TextureVk.h"
 #include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
+#include "common/Log.h"
 
 #include <algorithm>
 
@@ -168,6 +169,7 @@ namespace dawn_native { namespace vulkan {
 
             for (size_t i = 0; i < scope.textures.size(); ++i) {
                 Texture* texture = ToBackend(scope.textures[i]);
+                DAWN_DEBUG() << texture->GetArrayLayers() << " " << texture->GetNumMipLevels();
 
                 // Clear subresources that are not render attachments. Render attachments will be
                 // cleared in RecordBeginRenderPass by setting the loadop to clear when the texture
@@ -195,6 +197,7 @@ namespace dawn_native { namespace vulkan {
                                          BeginRenderPassCmd* renderPass) {
             VkCommandBuffer commands = recordingContext->commandBuffer;
 
+            DAWN_DEBUG();
             // Query a VkRenderPass from the cache
             VkRenderPass renderPassVK = VK_NULL_HANDLE;
             {
