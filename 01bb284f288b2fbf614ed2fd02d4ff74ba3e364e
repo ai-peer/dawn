@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45321faa_06ec97b7",
+        "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-06-23T10:48:19Z",
+      "side": 1,
+      "message": "Do you mean in this for-loop, we have no chance to call device.tick(), thus Dawn actually doesn\u0027t release any D3D12 heap?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 5
+      },
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42b20806_6778ecd1",
         "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
         "patchSetId": 2
