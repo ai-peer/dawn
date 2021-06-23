@@ -33,6 +33,23 @@
       "message": "PTAL? I think you missed this one",
       "revId": "c20ce6034bc5e8f211884a85d0810c048da0bad5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11ce4e91_3f43d21a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-23T09:20:06Z",
+      "side": 1,
+      "message": "It\u0027s probably fine to land with a single review. Thanks!",
+      "revId": "c20ce6034bc5e8f211884a85d0810c048da0bad5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
