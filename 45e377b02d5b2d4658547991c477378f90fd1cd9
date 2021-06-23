@@ -33,6 +33,40 @@
       "message": "Do you think eventually we should introduce base::CheckedNumeric into Dawn just like what ANGLE is doing[1]?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/common/third_party/base/anglebase/numerics/",
       "revId": "45e377b02d5b2d4658547991c477378f90fd1cd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e264936a_63ecff8a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-23T08:27:09Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "45e377b02d5b2d4658547991c477378f90fd1cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1de2f51_b18eb513",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-23T08:27:09Z",
+      "side": 1,
+      "message": "nit: I think we could rely on maxTextureDimension limits instead. We can enforce they are less than 2^16?\n\nEither way seems good.",
+      "revId": "45e377b02d5b2d4658547991c477378f90fd1cd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
