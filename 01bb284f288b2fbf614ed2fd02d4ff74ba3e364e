@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b06312c8_2da80716",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-23T13:32:54Z",
+      "side": 1,
+      "message": "We cannot destroy it immediately because we need to wait for the GPU to be done using it before we can reuse the allocation. Otherwise we\u0027ll remove memory while it is in use.\n\nThe best we could do is WaitForIdle, and then try to create the resource again, but there\u0027s a lot of reentrancy difficulties with doing this.",
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45321faa_06ec97b7",
         "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
         "patchSetId": 2
