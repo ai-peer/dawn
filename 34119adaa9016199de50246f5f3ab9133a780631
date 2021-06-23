@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5479faf0_b00de82e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-23T23:32:50Z",
+      "side": 1,
+      "message": "Change compared to patch 6\n* Change client::MemoryTransferService::ReadHandle::UpdateMapData to GetDataSpan. Return a \u003cvoid*, size_t\u003e pair like that of write handler instead of passing in a void** data;\n* Rename client::MemoryTransferService::WriteHandle::GetMapData to GetDataSpan.\n* Add server::MemoryTransferService::ReadHandle::UpdateData (to replace DeserializeInitialData in the future) to take in offset into account. This is needed for chrome since it\u0027s client/server handlers are using shared memory.\n\nserver::MemoryTransferService::WriteHandle::SetTarget also needs updating to take in offset as well but since it\u0027s a func for base class it\u0027s not included in this prelanding patch.\n\nThese change could make the refactored read/write handler design pass dawn end2end/unit tests and webgpu cts test in chrome.",
+      "revId": "34119adaa9016199de50246f5f3ab9133a780631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0eb34f5b_4050ddac",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-23T23:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1be41b1d_0f8d665d",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53e28eed_578d2ef8",
@@ -87,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6966db89_f4242ba4",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-23T23:32:50Z",
+      "side": 1,
+      "message": "Use GetDataSpan",
+      "parentUuid": "53e28eed_578d2ef8",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6805809_eb3231d8",
@@ -100,6 +136,24 @@
       "writtenOn": "2021-06-14T07:56:08Z",
       "side": 1,
       "message": "u-nit: GetData? GetDataSpan? This is a \"memory transfer\" service that technically doesn\u0027t know about mapping specifically.",
+      "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3c6c6b5_90d840d4",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-23T23:32:50Z",
+      "side": 1,
+      "message": "Use GetDataSpan for both client read/writehandle",
+      "parentUuid": "f6805809_eb3231d8",
       "revId": "bd20d74db181b5c5c73ffa0b9180594439f97a77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
