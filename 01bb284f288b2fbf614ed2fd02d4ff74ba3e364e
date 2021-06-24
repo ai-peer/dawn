@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7dde60c8_ce663bf4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-24T09:56:41Z",
+      "side": 1,
+      "message": "Sorry for not being too detailed. I mean Destroy() is called in a large memory allocation, we should try to free the memory immediately. If it\u0027s still in use, enqueue it to the serial queue and free it later.\n\nCurrently we always allocate committed resources from system memory, and will try to free the expired memory in LRU cache when the left memory size is not enough for current allocation. For these resources that have been called destroy, we remove their heaps from LRU cache, release their allocation, add the references of memory allocation to the delete queue and wait for free in next Tick(), which is not really released to the system memory. That is the problem, if there is no tick triggered during the resource creation and deallocation, the allocation memory of destroyed resources will never be used again. We need to free these allocations when we detect there is not enough memory, not wait for the Tick() to do that. Then try to do the allocation again, and return OOM if the memory is still not enough, there is no more memory to free.",
+      "parentUuid": "b06312c8_2da80716",
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45321faa_06ec97b7",
         "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
         "patchSetId": 2
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cb23a32_783c1574",
+        "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-24T09:56:41Z",
+      "side": 1,
+      "message": "Right, expect that Device::Tick or ResourceAllocatorManager::Tick is triggerred when there is no available memory for allocating new heap. But in this case, there is no device.tick() called.",
+      "parentUuid": "45321faa_06ec97b7",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 5
+      },
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "42b20806_6778ecd1",
         "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
         "patchSetId": 2
@@ -54,6 +96,30 @@
       "writtenOn": "2021-06-23T10:37:42Z",
       "side": 1,
       "message": "Actually I think we should run this test on all the backends. What do you think?",
+      "range": {
+        "startLine": 37,
+        "startChar": 56,
+        "endLine": 37,
+        "endChar": 70
+      },
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5d8b4f4_801d0621",
+        "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-24T09:56:41Z",
+      "side": 1,
+      "message": "It should be tested on other backends, but not checked their status on each backend, so just add the D3D12 one. We can add them but need to disable on all backends.",
+      "parentUuid": "42b20806_6778ecd1",
       "range": {
         "startLine": 37,
         "startChar": 56,
