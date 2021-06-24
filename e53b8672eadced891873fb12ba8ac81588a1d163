@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f4178c_c0c85aee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:27:41Z",
+      "side": 1,
+      "message": "PTAL!\n\nTest failures are because webgpu:api,validation,createBindGroup:binding_must_contain_resource_defined_in_layout: no longer crashes, but now I need to add a suppression for subcase: resourceType\u003d\"filtSamp\";entry\u003d{\"sampler\":{\"type\":\"non-filtering\"}} since we don\u0027t implement filtering/non-filtering yet",
+      "revId": "e53b8672eadced891873fb12ba8ac81588a1d163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
