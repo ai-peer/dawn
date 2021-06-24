@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d0999bd_31f02ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:58:35Z",
+      "side": 1,
+      "message": "didn\u0027t look at the whole thing, but some comments. i know this is still Work In Progress",
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9786c7e_966af798",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:58:35Z",
+      "side": 1,
+      "message": "this should never be the case. We check that creation succeeds in Buffer::Create",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 222,
+        "endChar": 88
+      },
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "271b5908_d470c8aa",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:58:35Z",
+      "side": 1,
+      "message": "ditto, shouldn\u0027t happen",
+      "range": {
+        "startLine": 229,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 89
+      },
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06c6d774_45d816c2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:58:35Z",
+      "side": 1,
+      "message": "do we need to send the handle in the request? We could instead send it in the CreateBufferCmd since it lives as long as the buffer",
+      "range": {
+        "startLine": 236,
+        "startChar": 12,
+        "endLine": 236,
+        "endChar": 47
+      },
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
