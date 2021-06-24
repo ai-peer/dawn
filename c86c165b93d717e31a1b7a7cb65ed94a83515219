@@ -16,6 +16,46 @@
       "message": "Sorry I forgot to add some local changes the first time, can you TAL again?",
       "revId": "c86c165b93d717e31a1b7a7cb65ed94a83515219",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bed7258_8965b45b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:02:14Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "c86c165b93d717e31a1b7a7cb65ed94a83515219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57387760_744e160d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:02:14Z",
+      "side": 1,
+      "message": "is this core? or actually just for some old tests. If it\u0027s not core, should probably call it out in CheckCoreWebGPUSupport too",
+      "range": {
+        "startLine": 320,
+        "startChar": 51,
+        "endLine": 320,
+        "endChar": 90
+      },
+      "revId": "c86c165b93d717e31a1b7a7cb65ed94a83515219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
