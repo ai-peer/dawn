@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ead671f2_eb0a15a3",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-24T05:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09adff84_1f87555e",
+      "range": {
+        "startLine": 75,
+        "startChar": 23,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "2f0b499617c87a8f6259422ba693e9596eeb2a51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f811d9f8_0709eb58",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d95675_13b9392f",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-24T05:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f811d9f8_0709eb58",
+      "revId": "2f0b499617c87a8f6259422ba693e9596eeb2a51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7956c496_a84c3255",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-06-23T13:29:47Z",
       "side": 1,
       "message": "u-u-nit: each is used a single time in the loop. We could just write params.textureFormat. Right now it is not saving a lot of reading.",
+      "range": {
+        "startLine": 690,
+        "startChar": 0,
+        "endLine": 691,
+        "endChar": 38
+      },
+      "revId": "2f0b499617c87a8f6259422ba693e9596eeb2a51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f8afb0_f95e0473",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 691,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-24T05:36:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7956c496_a84c3255",
       "range": {
         "startLine": 690,
         "startChar": 0,
