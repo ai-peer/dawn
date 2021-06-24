@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "665da069_bff6f210",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-24T19:06:40Z",
+      "side": 1,
+      "message": "It just removes an unnecessary copy assignment which would otherwise show up in the test\u0027s tracker. If the value type were something complex, this is preferable to a copy.",
+      "parentUuid": "7c1d30fc_29aef9a0",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 33
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb12bb11_54d3142f",
         "filename": "src/common/RefBase.h",
         "patchSetId": 3
@@ -77,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "deab2326_ece49d12",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-24T19:06:40Z",
+      "side": 1,
+      "message": "In past experience, unnecessarily twiddling references can *really* hurt performance, especially if the reference counts are atomic. Given that this is a template base class, atomic references seemed like a real possibility.",
+      "parentUuid": "bb12bb11_54d3142f",
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4ce12e98_c16285ef",
         "filename": "src/tests/unittests/RefBaseTests.cpp",
         "patchSetId": 3
@@ -88,6 +130,30 @@
       "writtenOn": "2021-06-24T12:52:36Z",
       "side": 1,
       "message": "u-nit: thisId and otherId.",
+      "range": {
+        "startLine": 31,
+        "startChar": 11,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5df76f69_e14bec79",
+        "filename": "src/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-24T19:06:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ce12e98_c16285ef",
       "range": {
         "startLine": 31,
         "startChar": 11,
@@ -121,6 +187,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9831fc23_1f11adcc",
+        "filename": "src/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-24T19:06:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e77e14e_c305e571",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 12
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "293d918b_1fe9a11e",
@@ -134,6 +224,30 @@
       "writtenOn": "2021-06-24T12:52:36Z",
       "side": 1,
       "message": "nit: tracker1 tracker2 ref1 ref2 might make it easier to understand the relationship with the trace below.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8573462c_629e07fd",
+        "filename": "src/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-06-24T19:06:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "293d918b_1fe9a11e",
       "range": {
         "startLine": 177,
         "startChar": 0,
