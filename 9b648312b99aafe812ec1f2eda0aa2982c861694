@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d473f361_de4d5e02",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T15:22:19Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "d72a97f9_e089bd87",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "24fce92d_1bd398ff",
         "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
         "patchSetId": 5
