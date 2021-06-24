@@ -62,6 +62,30 @@
       },
       "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25a94a66_628b8f96",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:21:55Z",
+      "side": 1,
+      "message": "i guess for now we can just flush the whole range, but could optimize in the future",
+      "parentUuid": "3ce86fc7_4407e1e5",
+      "range": {
+        "startLine": 170,
+        "startChar": 29,
+        "endLine": 170,
+        "endChar": 43
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
