@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf0896d8_d200b285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:38:54Z",
+      "side": 1,
+      "message": "PTAL! though this is blocked on https://chromium-review.googlesource.com/c/chromium/src/+/2984223",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
