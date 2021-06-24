@@ -34,6 +34,23 @@
       "parentUuid": "b6f4178c_c0c85aee",
       "revId": "e53b8672eadced891873fb12ba8ac81588a1d163",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6fa08c_cff03bb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T16:57:31Z",
+      "side": 1,
+      "message": "LGTM % suppression that\u0027s needed for the CTS.",
+      "revId": "e53b8672eadced891873fb12ba8ac81588a1d163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
