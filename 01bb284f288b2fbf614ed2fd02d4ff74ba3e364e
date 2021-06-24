@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "91f69b0f_9f01b340",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:20:14Z",
+      "side": 1,
+      "message": "we can discuss the solution separately, but adding this test LGTM.\n\nsome thoughts though: allocations to free are stored in a SerialQueue, so on OOM, we can synchronously wait for the serial using the next allocation to finish, and try again, and repeat until there is nothing left to free.",
+      "parentUuid": "7dde60c8_ce663bf4",
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "45321faa_06ec97b7",
         "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
         "patchSetId": 2
