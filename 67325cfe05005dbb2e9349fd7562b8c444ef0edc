@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b8dd33c_29cc4d4f",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-06-24T02:06:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aa08a3e6_09d623e6",
+      "range": {
+        "startLine": 60,
+        "startChar": 9,
+        "endLine": 61,
+        "endChar": 39
+      },
+      "revId": "67325cfe05005dbb2e9349fd7562b8c444ef0edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64442732_c0404167",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-06-21T15:43:27Z",
       "side": 1,
       "message": "uunit: double space",
+      "range": {
+        "startLine": 64,
+        "startChar": 44,
+        "endLine": 64,
+        "endChar": 46
+      },
+      "revId": "67325cfe05005dbb2e9349fd7562b8c444ef0edc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b278d4a1_8bab7f07",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-06-24T02:06:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "64442732_c0404167",
       "range": {
         "startLine": 64,
         "startChar": 44,
