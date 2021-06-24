@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c15e23_53ee0df1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T07:42:19Z",
+      "side": 1,
+      "message": "LGTM too. Please iterate with Austin on the remaining comments in NA hours.",
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57c847c_40d6675f",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T07:42:19Z",
+      "side": 1,
+      "message": "I\u0027m a bit concerned that GetDataSpan is also an update operation. Right now there is no way to get a pointer to the data without a deserializePointer/Size.",
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed2b816c_f78fe4b4",
