@@ -16,6 +16,24 @@
       "message": "[1]",
       "revId": "eb802aa4d896afd719f8b2d6c227149e64c11624",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a621ca8d_c4d65f04",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-24T20:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50289133_a622c7ab",
+      "revId": "eb802aa4d896afd719f8b2d6c227149e64c11624",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

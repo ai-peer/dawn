@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3afa69a5_b2a62340",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-24T20:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9786c7e_966af798",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 222,
+        "endChar": 88
+      },
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "271b5908_d470c8aa",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "824fecbf_52f4f659",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-24T20:49:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "271b5908_d470c8aa",
+      "range": {
+        "startLine": 229,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 89
+      },
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06c6d774_45d816c2",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-06-24T02:58:35Z",
       "side": 1,
       "message": "do we need to send the handle in the request? We could instead send it in the CreateBufferCmd since it lives as long as the buffer",
+      "range": {
+        "startLine": 236,
+        "startChar": 12,
+        "endLine": 236,
+        "endChar": 47
+      },
+      "revId": "f7e357bb99f5876132a1d7e0a58b4075b2492e25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ea7aa59_aa508ced",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-24T20:49:30Z",
+      "side": 1,
+      "message": "Yep we should just mRead/WriteHandle in buffer. Removed. Add an enum to MapRequestData to indicate if it\u0027s mapRead/Write instead",
+      "parentUuid": "06c6d774_45d816c2",
       "range": {
         "startLine": 236,
         "startChar": 12,
