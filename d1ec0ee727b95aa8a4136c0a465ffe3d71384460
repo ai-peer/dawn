@@ -735,6 +735,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4487cf61_31916af5",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-24T23:29:09Z",
+      "side": 1,
+      "message": "I believe most / all layouts with fields that need to land on non-16-byte alignments. It seems SPIRV-Cross doesn\u0027t attempt to do any sort of packing, which is required for a UBO.",
+      "parentUuid": "3079448e_1d6ceb0f",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61505895_d12a6af0",
