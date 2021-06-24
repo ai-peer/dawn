@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7d033f_225d4803",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f22759cd_82b5e8ca",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1853ee77_1074261b",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-06-23T02:32:57Z",
       "side": 1,
       "message": "[1]",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f5e29c_c8a3ca27",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1853ee77_1074261b",
       "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e06783f_53193121",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e5761fe_b72c8c74",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b683178_bf35459e",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-06-23T08:53:17Z",
       "side": 1,
       "message": "nit: since workgroup_size is 1, this is the same as GlobalInvocationId",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e19d286_0902d68c",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b683178_bf35459e",
       "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a379e29_4129d992",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1134,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7b02a29_085330cc",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "baed054d_b978bbcb",
@@ -120,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fab33b5_c2db5acb",
+        "filename": "src/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "baed054d_b978bbcb",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab2b4f01_641b742a",
@@ -133,6 +241,24 @@
       "writtenOn": "2021-06-23T08:53:17Z",
       "side": 1,
       "message": "note: we\u0027re assuming MultisampleDepth is handled like multisampled, which I think is fine?",
+      "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aef1a59_62f241f5",
+        "filename": "src/tests/end2end/NonzeroTextureCreationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T01:10:32Z",
+      "side": 1,
+      "message": "yea, I think it should be ok.",
+      "parentUuid": "ab2b4f01_641b742a",
       "revId": "689629ea3ffde38961fd052a8f4b0886e6fcccb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
