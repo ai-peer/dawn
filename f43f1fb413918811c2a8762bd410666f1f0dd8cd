@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23c7b39b_d8e36690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:20:34Z",
+      "side": 1,
+      "message": "still LGTM, some questions. - maybe we should review the Dawn patch first?",
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d0cd24_345b0b32",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:20:34Z",
+      "side": 1,
+      "message": "this actually should change with the new design to return the previous contents written. (and zero if no previous contents)",
+      "range": {
+        "startLine": 152,
+        "startChar": 52,
+        "endLine": 152,
+        "endChar": 96
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ce86fc7_4407e1e5",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:20:34Z",
+      "side": 1,
+      "message": "does this also need to know the modified ranges? or will we determine that by tracking calls to GetDataSpan(..) ?",
+      "range": {
+        "startLine": 170,
+        "startChar": 29,
+        "endLine": 170,
+        "endChar": 43
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
