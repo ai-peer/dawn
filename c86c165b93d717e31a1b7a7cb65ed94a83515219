@@ -56,6 +56,30 @@
       },
       "revId": "c86c165b93d717e31a1b7a7cb65ed94a83515219",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b8f51a_c07f7f2d",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T16:55:51Z",
+      "side": 1,
+      "message": "It is core and checked. Modified the comments.",
+      "parentUuid": "57387760_744e160d",
+      "range": {
+        "startLine": 320,
+        "startChar": 51,
+        "endLine": 320,
+        "endChar": 90
+      },
+      "revId": "c86c165b93d717e31a1b7a7cb65ed94a83515219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
