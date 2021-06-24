@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ed2b816c_f78fe4b4",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T02:25:08Z",
+      "side": 1,
+      "message": "nit: I feel like usually the |offset| arg comes before the |size| arg.",
+      "range": {
+        "startLine": 123,
+        "startChar": 61,
+        "endLine": 124,
+        "endChar": 74
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56d0cd24_345b0b32",
         "filename": "src/include/dawn_wire/WireClient.h",
         "patchSetId": 9
