@@ -315,14 +315,16 @@ namespace dawn_native { namespace vulkan {
         features2.sType = VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_FEATURES_2;
         PNextChainBuilder featuresChain(&features2);
 
-        // Always require independentBlend because it is a core Dawn feature
-        usedKnobs.features.independentBlend = VK_TRUE;
-        // Always require imageCubeArray because it is a core Dawn feature
-        usedKnobs.features.imageCubeArray = VK_TRUE;
-        // Always require fragmentStoresAndAtomics because it is required by end2end tests.
-        usedKnobs.features.fragmentStoresAndAtomics = VK_TRUE;
         // Always require depthBiasClamp because it is a core Dawn feature
         usedKnobs.features.depthBiasClamp = VK_TRUE;
+        // Always require fragmentStoresAndAtomics because it is required by end2end tests.
+        usedKnobs.features.fragmentStoresAndAtomics = VK_TRUE;
+        // Always require fullDrawIndexUint32 because it is a core Dawn feature
+        usedKnobs.features.fullDrawIndexUint32 = VK_TRUE;
+        // Always require imageCubeArray because it is a core Dawn feature
+        usedKnobs.features.imageCubeArray = VK_TRUE;
+        // Always require independentBlend because it is a core Dawn feature
+        usedKnobs.features.independentBlend = VK_TRUE;
 
         if (IsRobustnessEnabled()) {
             usedKnobs.features.robustBufferAccess = VK_TRUE;
