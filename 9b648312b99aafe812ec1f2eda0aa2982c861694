@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de8edb42_115a7d81",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d473f361_de4d5e02",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24fce92d_1bd398ff",
@@ -122,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aefb5a22_b6a4a96a",
+        "filename": "src/dawn_native/metal/CommandRecordingContext.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "24fce92d_1bd398ff",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f18876e_45e4c94b",
@@ -135,6 +171,24 @@
       "writtenOn": "2021-06-24T07:35:47Z",
       "side": 1,
       "message": "ditto",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f26c1ca4_31cc0956",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8f18876e_45e4c94b",
       "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +216,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a8b0750_390dea2d",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "no particular reason. removed.",
+      "parentUuid": "611515fa_c3b64b8a",
+      "range": {
+        "startLine": 469,
+        "startChar": 53,
+        "endLine": 469,
+        "endChar": 55
+      },
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1bc5780c_52d1df6c",
@@ -175,6 +253,24 @@
       "writtenOn": "2021-06-24T07:35:47Z",
       "side": 1,
       "message": "nit: no need to do anything for move stuff, because mPool is always nullptr.",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27c2daf2_3e7cb7db",
+        "filename": "src/utils/ScopedAutoreleasePool.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1bc5780c_52d1df6c",
       "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -196,6 +292,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a380fef6_423be141",
+        "filename": "src/utils/ScopedAutoreleasePool.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2debbbb_9ea8f9f3",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abfe72f1_464461c1",
@@ -209,6 +323,24 @@
       "writtenOn": "2021-06-24T07:35:47Z",
       "side": 1,
       "message": "nit: if (\u0026rhs !\u003d this) for correctness I think?",
+      "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e17abe_196cb421",
+        "filename": "src/utils/ScopedAutoreleasePool.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-24T16:06:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abfe72f1_464461c1",
       "revId": "9b648312b99aafe812ec1f2eda0aa2982c861694",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
