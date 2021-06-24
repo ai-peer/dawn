@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08305ba5_50537cdd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T12:52:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c1d30fc_29aef9a0",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T12:52:36Z",
+      "side": 1,
+      "message": "Why do we need std::move here?",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 33
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb12bb11_54d3142f",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T12:52:36Z",
+      "side": 1,
+      "message": "I\u0027m not sure if we should check equality of values here. Code is still correct without the if, and I don\u0027t think the branch will be used to skip code many times.",
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce12e98_c16285ef",
+        "filename": "src/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T12:52:36Z",
+      "side": 1,
+      "message": "u-nit: thisId and otherId.",
+      "range": {
+        "startLine": 31,
+        "startChar": 11,
+        "endLine": 31,
+        "endChar": 18
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e77e14e_c305e571",
+        "filename": "src/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T12:52:36Z",
+      "side": 1,
+      "message": "nit: DAWN_UNUSED",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 134,
+        "endChar": 12
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "293d918b_1fe9a11e",
+        "filename": "src/tests/unittests/RefBaseTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-24T12:52:36Z",
+      "side": 1,
+      "message": "nit: tracker1 tracker2 ref1 ref2 might make it easier to understand the relationship with the trace below.",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
