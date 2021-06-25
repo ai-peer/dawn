@@ -16,6 +16,23 @@
       "message": "Pretty simple deprecation, PTAL!",
       "revId": "05d35f68b85c637fd8826c3cf83897fb1f191024",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0fdea56_d00bd4d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-25T23:50:07Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "05d35f68b85c637fd8826c3cf83897fb1f191024",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
