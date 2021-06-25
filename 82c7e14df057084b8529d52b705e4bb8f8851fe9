@@ -34,6 +34,120 @@
       "parentUuid": "24b5ed7b_b8a5b94c",
       "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5487b609_f2dcd5f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:25:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d3d5d0b_c02bdd20",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:25:33Z",
+      "side": 1,
+      "message": "nit: declare just before the BeginRenderPass?",
+      "range": {
+        "startLine": 27,
+        "startChar": 27,
+        "endLine": 27,
+        "endChar": 37
+      },
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e70ab6e5_3891381e",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:25:33Z",
+      "side": 1,
+      "message": "u-unit: I think this falls exactly between two texels. My understanding (but I\"m not sure) is that texels are at position o.5, 1.5, 2.5, 3.5 so that sampling at 1 is between them and maybe depending on HW it could fall one way or another (and make the test flaky).",
+      "range": {
+        "startLine": 46,
+        "startChar": 68,
+        "endLine": 46,
+        "endChar": 77
+      },
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00d6be2f_2fcb72de",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:25:33Z",
+      "side": 1,
+      "message": "nit: or just device.CreateSampler();  !",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a90176c5_d658b42a",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:25:33Z",
+      "side": 1,
+      "message": "nit: sampleCound and mipLevelCount are the default values and can be omitted.",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fcc97c2_df8ee8cf",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:25:33Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that this test renders only a triangle and not the full square. We\u0027re not trying to measure triangle rasterization but sampling of 3D textures. Also the min/max are confusing because the max is actually kRTSize - 1 (I know this comes from another test but it\u0027s always weird.)",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
