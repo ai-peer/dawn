@@ -16,6 +16,24 @@
       "message": "Windows bots failed at some 3D texture CTS tests (3d texture init or uninitialized test). Do you know why? Per my understanding, 3D textures related CTS tests are not enabled because it is still under development and it is marked as DisallowedUnsafeAPI in dawn project. ",
       "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26ab0140_bbd29425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-25T05:49:54Z",
+      "side": 1,
+      "message": "Correct myself about comment above. Looks like bots do run 3D texture related CTS even though it is marked as DisallowedUnsafeAPIs. \n\nThe failed test is marked as Crash in WebGPUExpections but it is Timeout right now. Maybe that is the reason that the bots failed. This change didn\u0027t do anything except it removes a couple ASSERTs for resource transition. Maybe the crash was caused by the ASSERTs but now they are gone?",
+      "parentUuid": "24b5ed7b_b8a5b94c",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
