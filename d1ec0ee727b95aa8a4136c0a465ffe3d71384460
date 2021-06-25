@@ -753,6 +753,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0370e66_b184aa2a",
+        "filename": "src/tests/end2end/ComputeLayoutStorageBufferTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T05:59:27Z",
+      "side": 1,
+      "message": "Ok we can disable completely until we have Tint replace spirv-cross GLSL",
+      "parentUuid": "4487cf61_31916af5",
+      "revId": "d1ec0ee727b95aa8a4136c0a465ffe3d71384460",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61505895_d12a6af0",
