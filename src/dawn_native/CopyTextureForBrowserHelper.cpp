@@ -37,12 +37,12 @@ namespace dawn_native {
 // fragment shaders into one shader source. Now it blocks by
 // crbug.com/dawn/947 and crbug.com/tint/915
 #define HEADER \
-    R"(
-            [[block]] struct Uniforms {
-                u_scale: vec2<f32>;
-                u_offset: vec2<f32>;
-                u_alphaOp: u32;
-            };
+    R"( \
+        [[block]] struct Uniforms { \
+            u_scale: vec2<f32>; \
+            u_offset: vec2<f32>; \
+            u_alphaOp: u32; \
+        }; \
     )"
 
         static const char sCopyTextureForBrowserVertex[] = HEADER R"(
