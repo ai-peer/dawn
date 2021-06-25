@@ -322,6 +322,46 @@ fn ep_func() {
     ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader.c_str()));
 }
 
+TEST_P(ShaderTests, A) {
+    wgpu::ShaderModule module = utils::CreateShaderModule(device,  R"(
+        struct VertexOutputs {
+            [[location(0)]] texcoords : vec2<f32>;
+            [[builtin(position)]] position : vec4<f32>;
+        };
+
+        [[stage(vertex)]] fn vs_main(
+            [[builtin(vertex_index)]] VertexIndex : u32
+        ) -> VertexOutputs {
+            var output : VertexOutputs;
+            return output;
+        }
+
+        [[stage(fragment)]] fn fs_main(
+            [[location(0)]] texcoord : vec2<f32>
+        ) -> [[location(0)]] vec4<f32> {
+            return texcoord.xyxy;
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor pDesc;
+    pDesc.vertex.module = module;
+    pDesc.vertex.entryPoint = "vs_main";
+    pDesc.cFragment.module = module;
+    pDesc.cFragment.entryPoint = "fs_main";
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pDesc);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    utils::BasicRenderPass rp = utils::CreateBasicRenderPass(device, 1, 1);
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rp.renderPassInfo);
+    pass.SetPipeline(pipeline);
+    pass.Draw(3);
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
