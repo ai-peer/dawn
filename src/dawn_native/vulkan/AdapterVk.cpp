@@ -108,6 +108,120 @@ namespace dawn_native { namespace vulkan {
             return DAWN_INTERNAL_ERROR("Vulkan independentBlend feature required.");
         }
 
+        // Check base WebGPU limits are supported.
+        const VkPhysicalDeviceLimits& limits = mDeviceInfo.properties.limits;
+        if (limits.maxImageDimension1D < kMaxTextureDimension1D) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxTextureDimension1D");
+        }
+        if (limits.maxImageDimension2D < kMaxTextureDimension2D ||
+            limits.maxImageDimensionCube < kMaxTextureDimension2D ||
+            limits.maxFramebufferWidth < kMaxTextureDimension2D ||
+            limits.maxFramebufferHeight < kMaxTextureDimension2D ||
+            limits.maxViewportDimensions[0] < kMaxTextureDimension2D ||
+            limits.maxViewportDimensions[1] < kMaxTextureDimension2D ||
+            limits.viewportBoundsRange[1] < kMaxTextureDimension2D) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxTextureDimension2D");
+        }
+        if (limits.maxImageDimension3D < kMaxTextureDimension3D) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxTextureDimension3D");
+        }
+        if (limits.maxImageArrayLayers < kMaxTextureArrayLayers) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxTextureArrayLayers");
+        }
+        if (limits.maxBoundDescriptorSets < kMaxBindGroups) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxBindGroups");
+        }
+        if (limits.maxDescriptorSetUniformBuffersDynamic <
+            kMaxDynamicUniformBuffersPerPipelineLayout) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxDynamicUniformBuffersPerPipelineLayout");
+        }
+        if (limits.maxDescriptorSetStorageBuffersDynamic <
+            kMaxDynamicStorageBuffersPerPipelineLayout) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxDynamicStorageBuffersPerPipelineLayout");
+        }
+        if (limits.maxPerStageDescriptorSampledImages < kMaxSampledTexturesPerShaderStage) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxDynamicStorageBuffersPerPipelineLayout");
+        }
+        if (limits.maxPerStageDescriptorSampledImages < kMaxSampledTexturesPerShaderStage) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxSampledTexturesPerShaderStage");
+        }
+        if (limits.maxPerStageDescriptorSamplers < kMaxSamplersPerShaderStage) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxSamplersPerShaderStage");
+        }
+        if (limits.maxPerStageDescriptorStorageBuffers < kMaxStorageBuffersPerShaderStage) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxStorageBuffersPerShaderStage");
+        }
+        if (limits.maxPerStageDescriptorStorageImages < kMaxStorageTexturesPerShaderStage) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxStorageTexturesPerShaderStage");
+        }
+        if (limits.maxPerStageDescriptorUniformBuffers < kMaxUniformBuffersPerShaderStage) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxUniformBuffersPerShaderStage");
+        }
+        if (limits.maxUniformBufferRange < kMaxUniformBufferBindingSize) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxUniformBufferBindingSize");
+        }
+        if (limits.maxStorageBufferRange < kMaxStorageBufferBindingSize) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxStorageBufferBindingSize");
+        }
+        if (limits.minUniformBufferOffsetAlignment < kMinUniformBufferOffsetAlignment) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for minUniformBufferOffsetAlignment");
+        }
+        if (limits.minStorageBufferOffsetAlignment < kMinStorageBufferOffsetAlignment) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for minStorageBufferOffsetAlignment");
+        }
+        if (limits.maxVertexInputBindings < kMaxVertexBuffers) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxVertexBuffers");
+        }
+        if (limits.maxVertexInputAttributes < kMaxVertexAttributes) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxVertexAttributes");
+        }
+        if (limits.maxVertexInputBindingStride < kMaxVertexBufferArrayStride ||
+            limits.maxVertexInputAttributeOffset < kMaxVertexBufferArrayStride - 1) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxVertexBufferArrayStride");
+        }
+        if (limits.maxVertexOutputComponents < kMaxInterStageShaderComponents ||
+            limits.maxFragmentInputComponents < kMaxInterStageShaderComponents) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxInterStageShaderComponents");
+        }
+        if (limits.maxComputeSharedMemorySize < kMaxComputeWorkgroupStorageSize) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxComputeWorkgroupStorageSize");
+        }
+        if (limits.maxComputeWorkGroupInvocations < kMaxComputeWorkgroupInvocations ||
+            limits.maxComputeWorkGroupSize[0] < kMaxComputeWorkgroupInvocations ||
+            limits.maxComputeWorkGroupSize[1] < kMaxComputeWorkgroupInvocations ||
+            limits.maxComputeWorkGroupSize[2] < kMaxComputeWorkgroupInvocations) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxComputeWorkgroupInvocations");
+        }
+        if (limits.maxComputeWorkGroupCount[0] < kMaxComputePerDimensionDispatchSize ||
+            limits.maxComputeWorkGroupCount[1] < kMaxComputePerDimensionDispatchSize ||
+            limits.maxComputeWorkGroupCount[2] < kMaxComputePerDimensionDispatchSize) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan limits for maxComputePerDimensionDispatchSize");
+        }
+        if (limits.maxColorAttachments < kMaxColorAttachments) {
+            return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxColorAttachments");
+        }
+        if (limits.maxFragmentCombinedOutputResources < kMaxColorAttachments +
+                                                            kMaxStorageTexturesPerShaderStage +
+                                                            kMaxStorageBuffersPerShaderStage) {
+            return DAWN_INTERNAL_ERROR(
+                "Insufficient Vulkan maxFragmentCombinedOutputResources limit");
+        }
+
         return {};
     }
 
