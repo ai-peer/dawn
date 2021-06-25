@@ -36,16 +36,14 @@ namespace dawn_native {
 // TODO(crbug.com/1221110): Remove this header macro by merging vertex and
 // fragment shaders into one shader source. Now it blocks by
 // crbug.com/dawn/947 and crbug.com/tint/915
-#define HEADER \
-    R"(
-            [[block]] struct Uniforms {
+
+static const char sCopyTextureForBrowserShaderSource[] = R"(
+             [[block]] struct Uniforms {
                 u_scale: vec2<f32>;
                 u_offset: vec2<f32>;
                 u_alphaOp: u32;
             };
-    )"
 
-        static const char sCopyTextureForBrowserVertex[] = HEADER R"(
             [[binding(0), group(0)]] var<uniform> uniforms : Uniforms;
 
             struct VertexOutputs {
@@ -53,7 +51,7 @@ namespace dawn_native {
                 [[builtin(position)]] position : vec4<f32>;
             };
 
-            [[stage(vertex)]] fn main(
+            [[stage(vertex)]] fn vs_main(
                 [[builtin(vertex_index)]] VertexIndex : u32
             ) -> VertexOutputs {
                 var texcoord = array<vec2<f32>, 3>(
@@ -86,14 +84,11 @@ namespace dawn_native {
 
                 return output;
             }
-        )";
 
-        static const char sCopyTextureForBrowserFragment[] = HEADER R"(
-            [[binding(0), group(0)]] var<uniform> uniforms : Uniforms;
             [[binding(1), group(0)]] var mySampler: sampler;
             [[binding(2), group(0)]] var myTexture: texture_2d<f32>;
 
-            [[stage(fragment)]] fn main(
+            [[stage(fragment)]] fn fs_main(
                 [[location(0)]] texcoord : vec2<f32>
             ) -> [[location(0)]] vec4<f32> {
                 // Clamp the texcoord and discard the out-of-bound pixels.
@@ -136,13 +131,13 @@ namespace dawn_native {
             }
         )";
 
-        struct Uniform {
-            float scaleX;
-            float scaleY;
-            float offsetX;
-            float offsetY;
-            wgpu::AlphaOp alphaOp;
-        };
+struct Uniform {
+    float scaleX;
+    float scaleY;
+    float offsetX;
+    float offsetY;
+    wgpu::AlphaOp alphaOp;
+};
         static_assert(sizeof(Uniform) == 20, "");
 
         // TODO(crbug.com/dawn/856): Expand copyTextureForBrowser to support any
@@ -228,39 +223,27 @@ namespace dawn_native {
 
             if (GetCachedPipeline(store, dstFormat) == nullptr) {
                 // Create vertex shader module if not cached before.
-                if (store->copyTextureForBrowserVS == nullptr) {
+                if (store->copyTextureForBrowser == nullptr) {
                     ShaderModuleDescriptor descriptor;
                     ShaderModuleWGSLDescriptor wgslDesc;
-                    wgslDesc.source = sCopyTextureForBrowserVertex;
+                    wgslDesc.source = sCopyTextureForBrowserShaderSource;
                     descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
 
-                    DAWN_TRY_ASSIGN(store->copyTextureForBrowserVS,
+                    DAWN_TRY_ASSIGN(store->copyTextureForBrowser,
                                     device->CreateShaderModule(&descriptor));
                 }
 
-                ShaderModuleBase* vertexModule = store->copyTextureForBrowserVS.Get();
-
-                // Create fragment shader module if not cached before.
-                if (store->copyTextureForBrowserFS == nullptr) {
-                    ShaderModuleDescriptor descriptor;
-                    ShaderModuleWGSLDescriptor wgslDesc;
-                    wgslDesc.source = sCopyTextureForBrowserFragment;
-                    descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
-                    DAWN_TRY_ASSIGN(store->copyTextureForBrowserFS,
-                                    device->CreateShaderModule(&descriptor));
-                }
-
-                ShaderModuleBase* fragmentModule = store->copyTextureForBrowserFS.Get();
+                ShaderModuleBase* shaderModule = store->copyTextureForBrowser.Get();
 
                 // Prepare vertex stage.
                 VertexState vertex = {};
-                vertex.module = vertexModule;
-                vertex.entryPoint = "main";
+                vertex.module = shaderModule;
+                vertex.entryPoint = "vs_main";
 
                 // Prepare frgament stage.
                 FragmentState fragment = {};
-                fragment.module = fragmentModule;
-                fragment.entryPoint = "main";
+                fragment.module = shaderModule;
+                fragment.entryPoint = "fs_main";
 
                 // Prepare color state.
                 ColorTargetState target = {};
