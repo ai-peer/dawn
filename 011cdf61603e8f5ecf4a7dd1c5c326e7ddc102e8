@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0883e922_94b898bc",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:06:56Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "665da069_bff6f210",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 33
+      },
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb12bb11_54d3142f",
@@ -113,6 +137,24 @@
       "side": 1,
       "message": "In past experience, unnecessarily twiddling references can *really* hurt performance, especially if the reference counts are atomic. Given that this is a template base class, atomic references seemed like a real possibility.",
       "parentUuid": "bb12bb11_54d3142f",
+      "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23c88543_2094814e",
+        "filename": "src/common/RefBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T06:06:56Z",
+      "side": 1,
+      "message": "Oh yeah the references it manipulates are atomic. But it seems more the responsibility of the user of Ref\u003c\u003es to avoid overwriting with a ref to the same object when possible. This is adding a branch to all Set() operations when it should be rare that refs are the same.\n\nThat\u0027s said it\u0027s just a feeling and CL LGTM either way. We can do changes when benchmarking later if we find that branch is a hot spot.",
+      "parentUuid": "deab2326_ece49d12",
       "revId": "011cdf61603e8f5ecf4a7dd1c5c326e7ddc102e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
