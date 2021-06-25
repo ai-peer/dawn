@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df96c802_27fa647f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-25T07:18:48Z",
+      "side": 1,
+      "message": "The root cause of chromium:1196993 is confirmed, I think we\u0027d better have another issue to track this one.",
+      "parentUuid": "f6d041b1_8e1ff97e",
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "45321faa_06ec97b7",
@@ -109,6 +127,30 @@
       "side": 1,
       "message": "Right, expect that Device::Tick or ResourceAllocatorManager::Tick is triggerred when there is no available memory for allocating new heap. But in this case, there is no device.tick() called.",
       "parentUuid": "45321faa_06ec97b7",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 5
+      },
+      "revId": "01bb284f288b2fbf614ed2fd02d4ff74ba3e364e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc53562_a6265d5d",
+        "filename": "src/tests/end2end/D3D12MemoryAllocationStressTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-06-25T07:18:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cb23a32_783c1574",
       "range": {
         "startLine": 28,
         "startChar": 0,
