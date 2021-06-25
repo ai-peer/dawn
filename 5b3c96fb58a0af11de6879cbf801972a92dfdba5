@@ -33,6 +33,24 @@
       "message": "I\u0027m not sure that this is the behavior we want: logging should be called for the callback that\u0027s during the operation that does the log.\n\nInstead of this fix, what do you think of registering all dummy callbacks in Server::ClearDeviceCallbacks, and maybe also do a wait for idle there to flush all previous callbacks? Similarly to WaitForAllOperations in ValidationTests.cpp or what happens at the end of the fuzzers?",
       "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73d2f90c_82dc3702",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-25T13:29:19Z",
+      "side": 1,
+      "message": "I see, but I am not sure if one may register a complex callback (which use some external resource that may be disposed later), do some logging, and somehow unregister the callback (and dispose the external resource) before the callback tasks are scheduled. I wonder if there is a sound method to keep such complex callback valid.\nIn fact, the fuzzbot catch a very case, in which the registered callback use the dawn_wire (to post the logging string to client), and before callback tasks triggered, the dawn wire shutdown, and dispose the resource. In this case, the callback function held in the callback task will try to access the disposed dawn_wire resource, causing the use-after-release.\nIf we just stick to the callback available at the very moment of triggering callback task, we may prevent such uncertainty, because anyone who register the callback should de-register it before disposing anything it relied on. (Actually the dawn_wire server do so.) And such disposing may be just a part of a big operation, which we may probably not always want to be blacked by a callback task.",
+      "parentUuid": "e375c182_e8c42e06",
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
