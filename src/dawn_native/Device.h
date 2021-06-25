@@ -266,6 +266,7 @@ namespace dawn_native {
         void EmitDeprecationWarning(const char* warning);
         void EmitLog(const char* message);
         void EmitLog(WGPULoggingType loggingType, const char* message);
+        void DoLoggingCallback(WGPULoggingType loggingType, const char* message);
         void APILoseForTesting();
         QueueBase* GetQueue() const;
 
