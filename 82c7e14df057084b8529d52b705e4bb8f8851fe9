@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b5ed7b_b8a5b94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-25T00:37:51Z",
+      "side": 1,
+      "message": "Windows bots failed at some 3D texture CTS tests (3d texture init or uninitialized test). Do you know why? Per my understanding, 3D textures related CTS tests are not enabled because it is still under development and it is marked as DisallowedUnsafeAPI in dawn project. ",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
