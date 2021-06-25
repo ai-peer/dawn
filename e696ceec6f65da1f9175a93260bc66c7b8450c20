@@ -16,6 +16,23 @@
       "message": "Please take a look.",
       "revId": "e696ceec6f65da1f9175a93260bc66c7b8450c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa30b33_c3638a1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2021-06-25T15:07:29Z",
+      "side": 1,
+      "message": "Please also commit for the Dry run because I have no permissions for it for the Dawn project.",
+      "revId": "e696ceec6f65da1f9175a93260bc66c7b8450c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
