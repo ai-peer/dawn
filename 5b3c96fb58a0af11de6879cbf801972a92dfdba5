@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6cbe94a_49aa5644",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-25T16:45:50Z",
+      "side": 1,
+      "message": "hm.. alternatively we should probably have MakeError return a ref instead of a raw pointer.",
+      "range": {
+        "startLine": 846,
+        "startChar": 21,
+        "endLine": 846,
+        "endChar": 67
+      },
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e375c182_e8c42e06",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 3
@@ -67,6 +90,24 @@
       "side": 1,
       "message": "Yeah I\u0027m not sure what\u0027s best here, we are going to have similar issues with other callbacks that we want to put on the callback queue. Maybe we should have a way to drain the callback queue without waiting for idle.",
       "parentUuid": "73d2f90c_82dc3702",
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7e9a5b_6ca37d37",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-25T16:45:50Z",
+      "side": 1,
+      "message": "\u003e we are going to have similar issues with other callbacks that we want to put on the callback queue\n\nI think this problem is mostly due to the fact that callbacks need to be invalidated after the server is destroyed. all other wire callbacks (buffer map async, etc.) right now have a weak_ptr to ensure we don\u0027t try to call the callback after server destruction. So maybe a better solution might be to restructure the way we do the userdata for the device-level callbacks.",
+      "parentUuid": "3064a5ff_4503e921",
       "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
