@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d16b119_52ee8dde",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-06-25T21:15:31Z",
+      "side": 1,
+      "message": "note: apparently not compatible with MTLTextureUsageRenderTarget \n\nhttps://github.com/gpuweb/gpuweb/issues/1198#issuecomment-861880738",
+      "range": {
+        "startLine": 625,
+        "startChar": 58,
+        "endLine": 625,
+        "endChar": 95
+      },
+      "revId": "e9550ff5f0ee57125915d78ed0f84eaf15db51c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
