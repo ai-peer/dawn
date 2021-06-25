@@ -86,39 +86,38 @@ namespace dawn_native {
     namespace {
         struct LoggingCallbackTask : CallbackTask {
           public:
-            LoggingCallbackTask(wgpu::LoggingCallback loggingCallback,
+            LoggingCallbackTask(DeviceBase* device,
                                 WGPULoggingType loggingType,
-                                const char* message,
-                                void* userdata)
-                : mCallback(loggingCallback),
-                  mLoggingType(loggingType),
-                  mMessage(message),
-                  mUserdata(userdata) {
+                                const char* message)
+                : mDevice(device), mLoggingType(loggingType), mMessage(message) {
                 // The parameter of constructor is the same as those of callback.
                 // Since the Finish() will be called in uncertain future in which time the message
                 // may already disposed, we must keep a local copy in the CallbackTask.
             }
 
             void Finish() override {
-                // Original direct call: mLoggingCallback(message, mLoggingUserdata)
-                // Do the same here, but with everything bound locally.
-                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+                // Call the DeviceBase::DoLoggingCallback, which will call the logging callback
+                // valid at this moment.
+                if (mDevice) {
+                    mDevice->DoLoggingCallback(mLoggingType, mMessage.c_str());
+                }
             }
 
             void HandleShutDown() override {
-                // Do the logging anyway
-                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+                // Discard remaining logging when shutting down
+                return;
             }
 
             void HandleDeviceLoss() override {
-                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+                if (mDevice) {
+                    mDevice->DoLoggingCallback(mLoggingType, mMessage.c_str());
+                }
             }
 
           private:
-            wgpu::LoggingCallback mCallback;
+            DeviceBase* mDevice = nullptr;
             WGPULoggingType mLoggingType;
             std::string mMessage;
-            void* mUserdata;
         };
     }  // anonymous namespace
 
@@ -844,7 +843,7 @@ namespace dawn_native {
         std::unique_ptr<OwnedCompilationMessages> compilationMessages(
             std::make_unique<OwnedCompilationMessages>());
         if (ConsumedError(CreateShaderModule(descriptor, compilationMessages.get()), &result)) {
-            result = ShaderModuleBase::MakeError(this);
+            result = AcquireRef(ShaderModuleBase::MakeError(this));
         }
         // Move compilation messages into ShaderModuleBase and emit tint errors and warnings
         // after all other operations are finished successfully.
@@ -993,13 +992,24 @@ namespace dawn_native {
     }
 
     void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
-        if (mLoggingCallback != nullptr) {
-            // Use the thread-safe CallbackTaskManager routine
-            std::unique_ptr<LoggingCallbackTask> callbackTask =
-                std::make_unique<LoggingCallbackTask>(mLoggingCallback, loggingType, message,
-                                                      mLoggingUserdata);
-            mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+        // Use the thread-safe CallbackTaskManager routine
+        // Rather than storing pointers to callback and userdata, which may be out of date and
+        // causes memory misusage, we just keep a pointer to current device and call
+        // device->DoLoggingCallback when the task is triggered, so that we always go for the
+        // logging callback valid at that time.
+        std::unique_ptr<LoggingCallbackTask> callbackTask =
+            std::make_unique<LoggingCallbackTask>(this, loggingType, message);
+        mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+    }
+
+    void DeviceBase::DoLoggingCallback(WGPULoggingType loggingType, const char* message) {
+        // Directly call the mLoggingCallback. Should be only used by LoggingCallbackTask. By
+        // calling this function, we ensure that the newest logging callback function are called, or
+        // do nothing if the callback is cleared.
+        if (mLoggingCallback == nullptr) {
+            return;
         }
+        mLoggingCallback(loggingType, message, mLoggingUserdata);
     }
 
     void DeviceBase::APIInjectError(wgpu::ErrorType type, const char* message) {
