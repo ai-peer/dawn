@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "887d6cde_9d7a7bd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-25T10:42:44Z",
+      "side": 1,
+      "message": "PTAL! I checked locally that it works by adding debug prints and going on the Babylon.js playground.",
+      "revId": "592689f2ca82ba728dcda612b136f390e3a5348c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
