@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6750350a_ffd0ad54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-26T00:39:20Z",
+      "side": 1,
+      "message": "Updated the interface to reflect what we agree on https://bugs.chromium.org/p/dawn/issues/detail?id\u003d773#c21\nVerified changes with local dawn end2end tests and chrome webgpu cts map tests passed.",
+      "revId": "c0edf76396314daae25e07b5f44ba1abdb60d292",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

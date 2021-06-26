@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c7f584_20eac3fc",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-26T00:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f57c847c_40d6675f",
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ed2b816c_f78fe4b4",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a958adac_7f4524ce",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-26T00:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ed2b816c_f78fe4b4",
+      "range": {
+        "startLine": 123,
+        "startChar": 61,
+        "endLine": 124,
+        "endChar": 74
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56d0cd24_345b0b32",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-06-24T02:20:34Z",
       "side": 1,
       "message": "this actually should change with the new design to return the previous contents written. (and zero if no previous contents)",
+      "range": {
+        "startLine": 152,
+        "startChar": 52,
+        "endLine": 152,
+        "endChar": 96
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7da10a1_a5f963c7",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-26T00:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56d0cd24_345b0b32",
       "range": {
         "startLine": 152,
         "startChar": 52,
@@ -135,6 +201,30 @@
       "side": 1,
       "message": "i guess for now we can just flush the whole range, but could optimize in the future",
       "parentUuid": "3ce86fc7_4407e1e5",
+      "range": {
+        "startLine": 170,
+        "startChar": 29,
+        "endLine": 170,
+        "endChar": 43
+      },
+      "revId": "f43f1fb413918811c2a8762bd410666f1f0dd8cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7833dfd_97bc3b34",
+        "filename": "src/include/dawn_wire/WireClient.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-06-26T00:39:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25a94a66_628b8f96",
       "range": {
         "startLine": 170,
         "startChar": 29,
