@@ -51,6 +51,24 @@
       "parentUuid": "4ad05035_b9fb4089",
       "revId": "700a5fb869491fe25c621019aa077a42c366fe2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5940a60e_ac531817",
+        "filename": "examples/CHelloTriangle.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000801
+      },
+      "writtenOn": "2021-06-27T10:23:55Z",
+      "side": 1,
+      "message": "The reasoning is Dawn not an Objective-C API. It is not obvious for Dawn user that simple C API call like wgpuQueueSubmit or wgpuSwapChainPresent can generate memory leaks.\n\nProper C APIs like OpenGL or OpenAL behave equally well on all platforms. They do not require special measures on Apple platforms.",
+      "parentUuid": "96fe3379_0967a9b8",
+      "revId": "700a5fb869491fe25c621019aa077a42c366fe2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
