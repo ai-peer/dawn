@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a603873b_b40a9285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000801
+      },
+      "writtenOn": "2021-06-27T10:46:55Z",
+      "side": 1,
+      "message": "[cmake] CMake Error at lib/dawn/CMakeLists.txt:59 (if):\n[cmake]   if given arguments:\n[cmake] \n[cmake]     \"not\" \"WINDOWS_STORE\"\n[cmake] \n[cmake]   Unknown arguments specified",
+      "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
