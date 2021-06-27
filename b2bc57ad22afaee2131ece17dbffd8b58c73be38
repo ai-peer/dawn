@@ -33,6 +33,24 @@
       "message": "ld: error: unable to find library -ldxgi.lib\n\nI am using cmake to build Dawn on Win32/UWP/Android/iOS/macOS.\nThe build is broken on all platforms now.\n\nLooks like nobody checks the changes, neither author nor the CI.\n",
       "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323785a0_fe31bf27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-06-27T12:20:14Z",
+      "side": 1,
+      "message": "My bad. Thanks for the feedback. Should be fixed in https://dawn-review.googlesource.com/c/dawn/+/56180",
+      "parentUuid": "a603873b_b40a9285",
+      "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
