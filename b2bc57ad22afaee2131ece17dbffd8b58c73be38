@@ -51,6 +51,24 @@
       "parentUuid": "a603873b_b40a9285",
       "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ad5772_a8e6317b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002576
+      },
+      "writtenOn": "2021-06-27T13:40:39Z",
+      "side": 1,
+      "message": "My bad. Should be fixed in https://dawn-review.googlesource.com/c/dawn/+/56180",
+      "parentUuid": "d193880e_210181d4",
+      "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
