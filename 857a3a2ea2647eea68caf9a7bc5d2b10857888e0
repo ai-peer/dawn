@@ -33,6 +33,23 @@
       "message": "Second patchset doesn\u0027t work for GCC:\n\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:46:102: error: expected \u0027,\u0027 or \u0027;\u0027 before \u0027u_scale\u0027\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:46:122: error: expected unqualified-id before string constant\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:46:180: error: expected unqualified-id before string constant\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:89:104: error: expected \u0027,\u0027 or \u0027;\u0027 before \u0027u_scale\u0027\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:89:124: error: expected unqualified-id before string constant\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:89:182: error: expected unqualified-id before string constant\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:244:21: error: \u0027ls\u0027 was not declared in this scope\n../../third_party/dawn/src/dawn_native/CopyTextureForBrowserHelper.cpp:245:21: error: \u0027wgslDesc\u0027 was not declared in this scope",
       "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd856934_f26aa52e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001911
+      },
+      "writtenOn": "2021-06-27T20:49:44Z",
+      "side": 1,
+      "message": "Alternative CL: https://dawn-review.googlesource.com/c/dawn/+/56069\nTested with GCC 9.3.0 and 10.3.0.",
+      "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
