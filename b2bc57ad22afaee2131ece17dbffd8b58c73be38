@@ -16,6 +16,23 @@
       "message": "[cmake] CMake Error at lib/dawn/CMakeLists.txt:59 (if):\n[cmake]   if given arguments:\n[cmake] \n[cmake]     \"not\" \"WINDOWS_STORE\"\n[cmake] \n[cmake]   Unknown arguments specified",
       "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d193880e_210181d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000801
+      },
+      "writtenOn": "2021-06-27T11:04:07Z",
+      "side": 1,
+      "message": "ld: error: unable to find library -ldxgi.lib\n\nI am using cmake to build Dawn on Win32/UWP/Android/iOS/macOS.\nThe build is broken on all platforms now.\n\nLooks like nobody checks the changes, neither author nor the CI.\n",
+      "revId": "b2bc57ad22afaee2131ece17dbffd8b58c73be38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
