@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b93613b6_f4f491b0",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-06-28T22:45:04Z",
+      "side": 1,
+      "message": "optional nit: can be grouped with the previous two cases?",
+      "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36522f06_fa54dc4a",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-06-28T22:45:04Z",
+      "side": 1,
+      "message": "nit: Test kMaxStorageBufferBindingSize-1 as well, to verify this test case isn\u0027t running against an alignment limit.",
+      "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
