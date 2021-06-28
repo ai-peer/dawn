@@ -110,6 +110,24 @@
       "parentUuid": "3064a5ff_4503e921",
       "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c89b70c4_b129e257",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-28T16:54:09Z",
+      "side": 1,
+      "message": "That would work. Zhaoming, please see the various calls to MakeUserdata in the server code.",
+      "parentUuid": "fb7e9a5b_6ca37d37",
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
