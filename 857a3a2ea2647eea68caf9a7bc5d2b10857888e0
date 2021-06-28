@@ -67,6 +67,23 @@
       "message": "Sad to know this :( Seems all internal shaders in future needs to live with \\n.",
       "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1092d4_36f4cdce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2021-06-28T07:14:41Z",
+      "side": 1,
+      "message": "I have checked patchset #2 on the clear build and it works well for the GCC v.9.3.0 on my side.\n\n@Stephan, could you check it on your side one more time?",
+      "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
