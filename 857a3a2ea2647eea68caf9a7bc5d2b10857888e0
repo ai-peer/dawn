@@ -50,6 +50,23 @@
       "message": "Alternative CL: https://dawn-review.googlesource.com/c/dawn/+/56069\nTested with GCC 9.3.0 and 10.3.0.",
       "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2d40c9c_367883e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-06-28T02:27:44Z",
+      "side": 1,
+      "message": "Sad to know this :( Seems all internal shaders in future needs to live with \\n.",
+      "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
