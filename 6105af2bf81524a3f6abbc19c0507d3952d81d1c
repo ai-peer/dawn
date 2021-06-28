@@ -16,6 +16,23 @@
       "message": "I know it looks ugly, but it works 😊",
       "revId": "6105af2bf81524a3f6abbc19c0507d3952d81d1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7916abf7_a0af0f5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-28T08:15:49Z",
+      "side": 1,
+      "message": "LGTM if this is what we have to do, but https://dawn-review.googlesource.com/c/dawn/+/56066 would be better if it works in GCC like Ivan found.",
+      "revId": "6105af2bf81524a3f6abbc19c0507d3952d81d1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
