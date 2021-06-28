@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93cfee07_ec24f93a",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-28T07:08:32Z",
+      "side": 1,
+      "message": "Pipeline Descriptor need to use renderPass.colorFormat at [1] (although its color format is exactly the same with kFormat, and we can use kFormat at [1]), so we need to declare it before PSO creation.",
+      "parentUuid": "1d3d5d0b_c02bdd20",
+      "range": {
+        "startLine": 27,
+        "startChar": 27,
+        "endLine": 27,
+        "endChar": 37
+      },
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e70ab6e5_3891381e",
         "filename": "src/tests/end2end/Texture3DTests.cpp",
         "patchSetId": 1
@@ -152,6 +176,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a232c1_e2cdc77f",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-28T07:08:32Z",
+      "side": 1,
+      "message": "Per my understanding, [0.0, 1.0) will be for depth 0 (and width or height 0). Note that 0.0 is included and 1.0 is excluded. Likewise, [1.0, 2.0) will be for depth 1. I tried it on my local machine with quite a lot edge values at both ends. But setting z-axis to 1.5 will be safer, like you said. \n\nBTW, I made a mistake for FragCoord.xy, which need to be divided to 4.0 as well like z-axis. It was \"correct\" previously because I assigned (0, 255) to all R and B channels, so wrongly sample (x, y) locations were not reflected in the results. Now I change the color in sampled 3D texture to (x, y) for coordinate(x, y) to prevent similar errors.",
+      "parentUuid": "e70ab6e5_3891381e",
+      "range": {
+        "startLine": 46,
+        "startChar": 68,
+        "endLine": 46,
+        "endChar": 77
+      },
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3953c4_36776e3f",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-28T07:08:32Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00d6be2f_2fcb72de",
@@ -165,6 +230,24 @@
       "writtenOn": "2021-06-25T06:25:33Z",
       "side": 1,
       "message": "nit: or just device.CreateSampler();  !",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "099786cb_71a37458",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-28T07:08:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00d6be2f_2fcb72de",
       "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -186,6 +269,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1867f2e9_6e6a874f",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-28T07:08:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a90176c5_d658b42a",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fcc97c2_df8ee8cf",
@@ -199,6 +300,24 @@
       "writtenOn": "2021-06-25T06:25:33Z",
       "side": 1,
       "message": "It\u0027s a bit weird that this test renders only a triangle and not the full square. We\u0027re not trying to measure triangle rasterization but sampling of 3D textures. Also the min/max are confusing because the max is actually kRTSize - 1 (I know this comes from another test but it\u0027s always weird.)",
+      "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3918fad_99fa1655",
+        "filename": "src/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-28T07:08:32Z",
+      "side": 1,
+      "message": "Done. Good point. It is better to draw a solid rectangle. We are not testing triangle rendering/coverage.",
+      "parentUuid": "7fcc97c2_df8ee8cf",
       "revId": "82c7e14df057084b8529d52b705e4bb8f8851fe9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
