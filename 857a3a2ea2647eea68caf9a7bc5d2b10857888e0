@@ -137,6 +137,41 @@
       "parentUuid": "db1092d4_36f4cdce",
       "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "119e2bb8_b51cc4e2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2021-06-28T15:24:11Z",
+      "side": 1,
+      "message": "Could someone with submitter permissions run CQ+2?",
+      "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67740bed_593e1fef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001936
+      },
+      "writtenOn": "2021-06-28T15:24:11Z",
+      "side": 1,
+      "message": "Thank you for the check, Stephan!",
+      "parentUuid": "975911f8_592e96b9",
+      "revId": "857a3a2ea2647eea68caf9a7bc5d2b10857888e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
