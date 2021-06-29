@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3503e334_42742a4a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T07:10:05Z",
+      "side": 1,
+      "message": "Thanks for the review!",
+      "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b93613b6_f4f491b0",
@@ -52,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1372cf0d_0be5d144",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T07:10:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b93613b6_f4f491b0",
+      "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36522f06_fa54dc4a",
@@ -65,6 +100,24 @@
       "writtenOn": "2021-06-28T22:45:04Z",
       "side": 1,
       "message": "nit: Test kMaxStorageBufferBindingSize-1 as well, to verify this test case isn\u0027t running against an alignment limit.",
+      "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b27d253f_b2bb5d2c",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T07:10:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36522f06_fa54dc4a",
       "revId": "f41581abd9a05f0b132f5918355d124a0cbe542e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
