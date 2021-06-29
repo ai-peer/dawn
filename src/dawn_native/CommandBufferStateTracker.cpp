@@ -213,8 +213,12 @@ namespace dawn_native {
         mIndexBufferSize = size;
     }
 
-    void CommandBufferStateTracker::SetVertexBuffer(VertexBufferSlot slot) {
+    void CommandBufferStateTracker::SetVertexBuffer(VertexBufferSlot slot,
+                                                    BufferBase* buffer,
+                                                    uint64_t size) {
         mVertexBufferSlotsUsed.set(slot);
+        mVertexBuffers[slot] = buffer;
+        mVertexBufferSizes[slot] = size;
     }
 
     void CommandBufferStateTracker::SetPipelineCommon(PipelineBase* pipeline) {

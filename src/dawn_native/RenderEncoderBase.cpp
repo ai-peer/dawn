@@ -67,6 +67,37 @@ namespace dawn_native {
                 if (mDisableBaseInstance && firstInstance != 0) {
                     return DAWN_VALIDATION_ERROR("Non-zero first instance not supported");
                 }
+
+                // Validate the range of buffer
+                const RenderPipelineBase* pipeline = mCommandBufferState.GetRenderPipeline();
+
+                const ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>& vertexBufferSlotsUsed =
+                    pipeline->GetVertexBufferSlotsUsed();
+                auto iter = IterateBitSet(vertexBufferSlotsUsed);
+                for (auto usedSlot = iter.begin(); usedSlot != iter.end(); ++usedSlot) {
+                    VertexBufferSlot slot = *usedSlot;
+                    const VertexBufferInfo& vertexBuffer = pipeline->GetVertexBuffer(slot);
+                    uint64_t arrayStride = vertexBuffer.arrayStride;
+                    wgpu::InputStepMode stepMode = vertexBuffer.stepMode;
+                    auto bufferSize = mCommandBufferState.GetVertexBufferSize(slot);
+                    switch (stepMode) {
+                        case wgpu::InputStepMode::Vertex: {
+                            if ((firstVertex + vertexCount) * arrayStride > bufferSize) {
+                                return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                            }
+                            break;
+                        }
+                        case wgpu::InputStepMode::Instance: {
+                            if ((firstInstance + instanceCount) * arrayStride > bufferSize) {
+                                return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                            }
+                            break;
+                        }
+                        default:
+                            DAWN_UNREACHABLE();
+                            return DAWN_VALIDATION_ERROR("Unsupported step mode");
+                    }
+                }
             }
 
             DrawCmd* draw = allocator->Allocate<DrawCmd>(Command::Draw);
@@ -94,16 +125,44 @@ namespace dawn_native {
                 if (mDisableBaseVertex && baseVertex != 0) {
                     return DAWN_VALIDATION_ERROR("Non-zero base vertex not supported");
                 }
+
+                // Validate the range of index buffer
+                if (static_cast<uint64_t>(firstIndex) + indexCount >
+                    mCommandBufferState.GetIndexBufferSize() /
+                        IndexFormatSize(mCommandBufferState.GetIndexFormat())) {
+                    // Index range is out of bounds
+                    return DAWN_VALIDATION_ERROR("Index buffer out of bound");
+                }
+
+                // Validate the range of vertex buffer
+                const RenderPipelineBase* pipeline = mCommandBufferState.GetRenderPipeline();
+
+                const ityp::bitset<VertexBufferSlot, kMaxVertexBuffers>& vertexBufferSlotsUsed =
+                    pipeline->GetVertexBufferSlotsUsed();
+                auto iter = IterateBitSet(vertexBufferSlotsUsed);
+                for (auto usedSlot = iter.begin(); usedSlot != iter.end(); ++usedSlot) {
+                    VertexBufferSlot slot = *usedSlot;
+                    const VertexBufferInfo& vertexBuffer = pipeline->GetVertexBuffer(slot);
+                    uint64_t arrayStride = vertexBuffer.arrayStride;
+                    wgpu::InputStepMode stepMode = vertexBuffer.stepMode;
+                    auto bufferSize = mCommandBufferState.GetVertexBufferSize(slot);
+                    switch (stepMode) {
+                        case wgpu::InputStepMode::Vertex: {
+                            break;
+                        }
+                        case wgpu::InputStepMode::Instance: {
+                            if ((firstInstance + instanceCount) * arrayStride > bufferSize) {
+                                return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                            }
+                            break;
+                        }
+                        default:
+                            DAWN_UNREACHABLE();
+                            return DAWN_VALIDATION_ERROR("Unsupported step mode");
+                    }
+                }
             }
 
-            if (static_cast<uint64_t>(firstIndex) + indexCount >
-                mCommandBufferState.GetIndexBufferSize() /
-                    IndexFormatSize(mCommandBufferState.GetIndexFormat())) {
-                // Index range is out of bounds
-                // Treat as no-op and skip issuing draw call
-                dawn::WarningLog() << "Index range is out of bounds";
-                return {};
-            }
             DrawIndexedCmd* draw = allocator->Allocate<DrawIndexedCmd>(Command::DrawIndexed);
             draw->indexCount = indexCount;
             draw->instanceCount = instanceCount;
@@ -292,7 +351,7 @@ namespace dawn_native {
                 }
             }
 
-            mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)));
+            mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)), buffer, size);
 
             SetVertexBufferCmd* cmd =
                 allocator->Allocate<SetVertexBufferCmd>(Command::SetVertexBuffer);
