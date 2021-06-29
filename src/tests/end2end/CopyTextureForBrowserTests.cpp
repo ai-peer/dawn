@@ -235,8 +235,8 @@ class CopyTextureForBrowserTests : public DawnTest {
                         }
                         default: {
                             break;
-                        }   
-                    } 
+                        }
+                    }
 
                     // Not use loop and variable index format to workaround
                     // crbug.com/tint/638.
@@ -262,6 +262,16 @@ class CopyTextureForBrowserTests : public DawnTest {
          )");
 
         wgpu::ComputePipelineDescriptor csDesc;
+        csDesc.layout = utils::MakePipelineLayout(
+            device,
+            {utils::MakeBindGroupLayout(
+                device,
+                {
+                    {0, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::UnfilterableFloat},
+                    {1, wgpu::ShaderStage::Compute, wgpu::TextureSampleType::UnfilterableFloat},
+                    {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
+                    {3, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
+                })});
         csDesc.compute.module = csModule;
         csDesc.compute.entryPoint = "main";
 

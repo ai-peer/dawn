@@ -136,16 +136,48 @@ namespace dawn_native {
             BindGroupLayoutEntry entry = {};
             switch (shaderBinding.bindingType) {
                 case BindingInfoType::Buffer:
-                    entry.buffer = shaderBinding.buffer;
+                    entry.buffer.type = shaderBinding.buffer.type;
+                    entry.buffer.hasDynamicOffset = shaderBinding.buffer.hasDynamicOffset;
+                    entry.buffer.minBindingSize = shaderBinding.buffer.minBindingSize;
                     break;
                 case BindingInfoType::Sampler:
-                    entry.sampler = shaderBinding.sampler;
+                    if (shaderBinding.sampler.isComparison) {
+                        entry.sampler.type = wgpu::SamplerBindingType::Comparison;
+                    } else {
+                        entry.sampler.type = wgpu::SamplerBindingType::Filtering;
+                    }
                     break;
                 case BindingInfoType::Texture:
-                    entry.texture = shaderBinding.texture;
+                    switch (shaderBinding.texture.compatibleSampleTypes) {
+                        case SampleTypeBit::Depth:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Depth;
+                            break;
+                        case SampleTypeBit::Sint:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Sint;
+                            break;
+                        case SampleTypeBit::Uint:
+                            entry.texture.sampleType = wgpu::TextureSampleType::Uint;
+                            break;
+                        case SampleTypeBit::Float:
+                        case SampleTypeBit::UnfilterableFloat:
+                        case SampleTypeBit::None:
+                            UNREACHABLE();
+                            break;
+                        default:
+                            if (shaderBinding.texture.compatibleSampleTypes ==
+                                (SampleTypeBit::Float | SampleTypeBit::UnfilterableFloat)) {
+                                entry.texture.sampleType = wgpu::TextureSampleType::Float;
+                            } else {
+                                UNREACHABLE();
+                            }
+                    }
+                    entry.texture.viewDimension = shaderBinding.texture.viewDimension;
+                    entry.texture.multisampled = shaderBinding.texture.multisampled;
                     break;
                 case BindingInfoType::StorageTexture:
-                    entry.storageTexture = shaderBinding.storageTexture;
+                    entry.storageTexture.access = shaderBinding.storageTexture.access;
+                    entry.storageTexture.format = shaderBinding.storageTexture.format;
+                    entry.storageTexture.viewDimension = shaderBinding.storageTexture.viewDimension;
                     break;
                 case BindingInfoType::ExternalTexture:
                     // TODO(dawn:728) On backend configurations that use SPIRV-Cross to reflect
