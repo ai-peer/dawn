@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4810a05_68741973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T07:02:33Z",
+      "side": 1,
+      "message": "Thank you for the fix. LGTM but I\u0027d like a second review since this is a not-completely-trivial CL.\n\nAustin PTAL too.\n\nAlso do you need CQ+1 rights?",
+      "revId": "6f9f27033a713549f0de49b1a632f0a0f0c20c08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
