@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63153bf4_690c6512",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T21:00:49Z",
+      "side": 1,
+      "message": "Robustness is enabled by default in tests so this will prevent regressions of the vertex pulling transform.\n\nIn the future I think we should consider enabling it unconditionally so we don\u0027t risk breaking the non-pulling path since it will be non-existent.",
+      "revId": "141ea10ef4659c90b997843dcfd7ffc4dbc983bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
