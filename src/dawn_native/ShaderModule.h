@@ -104,16 +104,42 @@ namespace dawn_native {
     // pointers to EntryPointMetadata are safe to store as long as you also keep a Ref to the
     // ShaderModuleBase.
     struct EntryPointMetadata {
+        struct ShaderBufferBindingInfo {
+            wgpu::BufferBindingType type;
+            bool hasDynamicOffset;
+            uint64_t minBindingSize;
+        };
+
+        struct ShaderSamplerBindingInfo {
+            bool isComparison;
+        };
+
+        struct ShaderTextureBindingInfo {
+            SampleTypeBit compatibleSampleTypes;
+            wgpu::TextureViewDimension viewDimension;
+            bool multisampled;
+        };
+
+        struct ShaderStorageTextureBindingInfo {
+            wgpu::StorageTextureAccess access;
+            wgpu::TextureFormat format;
+            wgpu::TextureViewDimension viewDimension;
+        };
+
         // Per-binding shader metadata contains some SPIRV specific information in addition to
         // most of the frontend per-binding information.
-        struct ShaderBindingInfo : BindingInfo {
+        struct ShaderBindingInfo {
             // The SPIRV ID of the resource.
             uint32_t id;
             uint32_t base_type_id;
 
-          private:
-            // Disallow access to unused members.
-            using BindingInfo::visibility;
+            BindingNumber binding;
+            BindingInfoType bindingType;
+
+            ShaderBufferBindingInfo buffer;
+            ShaderSamplerBindingInfo sampler;
+            ShaderTextureBindingInfo texture;
+            ShaderStorageTextureBindingInfo storageTexture;
         };
 
         // bindings[G][B] is the reflection data for the binding defined with
@@ -121,6 +147,12 @@ namespace dawn_native {
         using BindingGroupInfoMap = std::map<BindingNumber, ShaderBindingInfo>;
         using BindingInfoArray = ityp::array<BindGroupIndex, BindingGroupInfoMap, kMaxBindGroups>;
         BindingInfoArray bindings;
+
+        struct SamplerTexturePair {
+            BindingSlot sampler;
+            BindingSlot texture;
+        };
+        std::vector<SamplerTexturePair> samplerTexturePairs;
 
         // The set of vertex attributes this entryPoint uses.
         std::bitset<kMaxVertexAttributes> usedVertexAttributes;

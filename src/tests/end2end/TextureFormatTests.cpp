@@ -173,6 +173,12 @@ class TextureFormatTest : public DawnTest {
         desc.vertex.module = vsModule;
         desc.cFragment.module = fsModule;
         desc.cTargets[0].format = renderFormatInfo.format;
+        if (strcmp(type, "f32") == 0) {
+            desc.layout = utils::MakePipelineLayout(
+                device, {utils::MakeBindGroupLayout(
+                            device, {{0, wgpu::ShaderStage::Fragment,
+                                      wgpu::TextureSampleType::UnfilterableFloat}})});
+        }
 
         return device.CreateRenderPipeline(&desc);
     }

@@ -136,10 +136,10 @@ namespace dawn_native {
             TextureBase* texture = view->GetTexture();
             switch (bindingInfo.bindingType) {
                 case BindingInfoType::Texture: {
-                    ComponentTypeBit supportedTypes =
-                        texture->GetFormat().GetAspectInfo(aspect).supportedComponentTypes;
-                    ComponentTypeBit requiredType =
-                        SampleTypeToComponentTypeBit(bindingInfo.texture.sampleType);
+                    SampleTypeBit supportedTypes =
+                        texture->GetFormat().GetAspectInfo(aspect).supportedSampleTypes;
+                    SampleTypeBit requiredType =
+                        SampleTypeToSampleTypeBit(bindingInfo.texture.sampleType);
 
                     if (!(texture->GetUsage() & wgpu::TextureUsage::Sampled)) {
                         return DAWN_VALIDATION_ERROR("Texture binding usage mismatch");

@@ -1266,6 +1266,10 @@ std::ostringstream& DawnTestBase::ExpectAttachmentDepthStencilTestData(
         })");
 
     if (depthDataTexture) {
+        pipelineDescriptor.layout = utils::MakePipelineLayout(
+            device,
+            {utils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment,
+                                                  wgpu::TextureSampleType::UnfilterableFloat}})});
         // Sample the input texture and write out depth. |result| will only be set to 1 if we
         // pass the depth test.
         pipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
