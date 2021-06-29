@@ -16,6 +16,40 @@
       "message": "PTAL. Making the index buffer OOB a validation error will fail the existing end2end and CTS tests, making all try bot failed. Previously index buffer OOB was treated as no-op rather than validation error. I am not sure how to deal with these failure, should I modify the regressed tests in this patch? Thanks.",
       "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e703d3_50089f89",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-29T12:37:19Z",
+      "side": 1,
+      "message": "Maybe I should move the implementation of these Getter into cpp file?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f57472ae_67bc8ab9",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-29T12:37:19Z",
+      "side": 1,
+      "message": "Change this into \"return {};\" will make the end2end tests and CTS pass.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
