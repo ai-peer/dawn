@@ -1335,6 +1335,15 @@ namespace dawn_native {
     void DeviceBase::SetDefaultToggles() {
         SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
         SetToggle(Toggle::DisallowUnsafeAPIs, true);
+
+        // TODO(crbug.com/tint/404): Tint does not support ShaderFloat16. If the extension
+        // is requested, disable Tint by default. We really shouldn't expose the extension at
+        // all, but we need to wait to remove the SPIRV path from Chrome.
+        if (IsExtensionEnabled(Extension::ShaderFloat16)) {
+            SetToggle(Toggle::UseTintGenerator, false);
+        } else {
+            SetToggle(Toggle::UseTintGenerator, true);
+        }
     }
 
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
