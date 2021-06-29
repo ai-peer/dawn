@@ -195,6 +195,7 @@ test("dawn_unittests") {
     "unittests/validation/CopyTextureForBrowserTests.cpp",
     "unittests/validation/DebugMarkerValidationTests.cpp",
     "unittests/validation/DrawIndirectValidationTests.cpp",
+    "unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
     "unittests/validation/DynamicStateCommandValidationTests.cpp",
     "unittests/validation/ErrorScopeValidationTests.cpp",
     "unittests/validation/ExternalTextureTests.cpp",
