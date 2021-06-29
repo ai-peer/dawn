@@ -16,6 +16,23 @@
       "message": "Still LGTM",
       "revId": "152cb467db76235dc4dc1a90432d390a69c17342",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b547453_e017a9f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-29T04:53:55Z",
+      "side": 1,
+      "message": "Thanks for review, Corentin and Austin. @Austin, the update for WebGPUExpection at another patch works. Windows bots can pass now.",
+      "revId": "152cb467db76235dc4dc1a90432d390a69c17342",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
