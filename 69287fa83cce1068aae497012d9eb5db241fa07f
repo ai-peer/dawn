@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fe3d4b5_363ac637",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-06-29T12:32:35Z",
+      "side": 1,
+      "message": "PTAL. Making the index buffer OOB a validation error will fail the existing end2end and CTS tests, making all try bot failed. Previously index buffer OOB was treated as no-op rather than validation error. I am not sure how to deal with these failure, should I modify the regressed tests in this patch? Thanks.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
