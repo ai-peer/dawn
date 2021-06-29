@@ -39,6 +39,7 @@ class ShaderFloat16Tests : public DawnTest {
 TEST_P(ShaderFloat16Tests, Basic16BitFloatFeaturesTest) {
     DAWN_TEST_UNSUPPORTED_IF(!IsShaderFloat16Supported());
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsIntel());  // Flaky crashes. crbug.com/dawn/586
+
     // TODO(crbug.com/tint/404): Implement float16 in Tint.
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("use_tint_generator"));
 
