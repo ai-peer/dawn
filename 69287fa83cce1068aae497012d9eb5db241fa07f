@@ -37,6 +37,149 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cf82d8a_12d34c9f",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Yeah that\u0027s best practice until we find it is a hot spot (it should get inlined by LTCG).",
+      "parentUuid": "c0e703d3_50089f89",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a836dd0_67532dc1",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: this is written but never used.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72bed1e6_b1c8c4b7",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Could this validation be in CommandBufferStateTracker?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c7e0ea_b7d4d29b",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t the following work?\n\n   for (VertexBufferSlot usedSlot : IterateBitSet(pipeline-\u003eGetVertexBufferSlotsUsed()))",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e498e4_de7484fe",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: just switch (vertexBuffer.stepMode)?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79394937_94abe57a",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Can we make these computations as uint64_t and explain precisely why they can\u0027t overflow? Ditto for all others.",
+      "range": {
+        "startLine": 85,
+        "startChar": 32,
+        "endLine": 85,
+        "endChar": 73
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dca8747_564b5f31",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: DAWN_UNREACHABLE() is sufficient.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab6cd5da_febb534e",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: explain it can\u0027t OOB with uint64_t. And to avoid a division (this can be a slow operation on some CPUs) we can move the IndexFormatSize on the other side of the computation.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f57472ae_67bc8ab9",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 1
@@ -48,6 +191,355 @@
       "writtenOn": "2021-06-29T12:37:19Z",
       "side": 1,
       "message": "Change this into \"return {};\" will make the end2end tests and CTS pass.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3193ee87_ed5018b7",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Let\u0027s fix the tests in this CL and land a suppression prior for the CTS prior to landing this.\n\nThis check should probably be moved in ValidateCanDrawIndexed though.",
+      "parentUuid": "f57472ae_67bc8ab9",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0457b634_14a72d93",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Same comments as above.\n\nnote: We could also precompute in the pipeline the set of vertex buffers and the set of instance buffers, then do two for loops. I think it would be marginally more efficient. We can also just open an issue and leave a TODO.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0781beb_d005ea2d",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "u-nit: braces for case statements are only really useful when variable are introduced in the block, otherwise they can be omitted.",
+      "range": {
+        "startLine": 150,
+        "startChar": 57,
+        "endLine": 150,
+        "endChar": 59
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f43c323_9a892dd6",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "I\u0027m not sure about this name because there are many other RenderPassCommand that are tested in other files. Maybe DrawVertexAndIndexOOBTests? I\u0027m not sure.",
+      "range": {
+        "startLine": 26,
+        "startChar": 10,
+        "endLine": 26,
+        "endChar": 41
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "408b4f71_ff54ebd6",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: This could just be an std::vector of a struct with member names.\n\n struct VertexBufferSpec {...};\n using VertexBufferList \u003d std::vector\u003cVertexBufferSpec\u003e\n\nThe syntax for initializing should still work AFAIK. Since we\u0027re in tests we don\u0027t really care about the performance gains of using std::initializer_list in some places.",
+      "range": {
+        "startLine": 28,
+        "startChar": 14,
+        "endLine": 28,
+        "endChar": 31
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f135b803_42f47ceb",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: Mutable references should be mutable pointers instead. (so it is clear in the caller that the variable can be mutated.)\n\nBetter: since we never modify the descriptor, why not make this CreateTestPipeline() ?",
+      "range": {
+        "startLine": 123,
+        "startChar": 82,
+        "endLine": 123,
+        "endChar": 83
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d822b938_66d18346",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a50a2bab_15701d18",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Do be able to vary the test a bit more, what do you think of passing a VertexBufferList a list of slot, stepMode, arrayStride here? The function would then be something like:\n\n  struct PipelineVertexBufferDesc {\n      slot\n      arrayStride\n      stepMode\n      attributeFormat \u003d some default;\n      skipAttribute \u003d false; // used to test the case with no attributes\n  };\n  \n  wgpu::RenderPipeline CreateTestPipeline(std::vector\u003cPipelineVertexBufferDesc\u003e) {\n    // Create the shader dynamically\n  }\n  \nThen using it looks like:\n\n  wgpu::RenderPipeline \u003d CreateTestREnderPipeline({\n       {0, wgpu::StepMode::Instance, 24},\n       {0, wgpu::StepMode::Vertex, 40},\n  })",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d0342bf_de8ad04d",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "What also can we have a test for a buffer with 0 attributes? I think the spec should still require it to be validated.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc375c6a_d2b6123c",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: just return device.CreateBuffer(...);?",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 163,
+        "endChar": 26
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aeee29cc_f54f2b54",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: Can we have a comment before each test that explains what we test. Sometimes it is redundant but for a lot of tests it helps better understand what we test and how we test it.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38d0e840_2c3779b6",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: We could have a name for this constant. For example kDefaultTestStride.",
+      "range": {
+        "startLine": 178,
+        "startChar": 53,
+        "endLine": 178,
+        "endChar": 70
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09734fd0_83ebd4b0",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "optional-nit: usually we only need to test the case just above the limit. No need to do it three times. Ditto in other tests.\n\nHowever can we test with several different strides so that we know the stride is correctly taken into account?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5897c19f_e3e74a3b",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Can we have a test that setVertexBuffer the same buffer multiple times so we know only the last one is taken into account?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a0637a_1b31c0eb",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: causing.",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88076df2_f7d7e6a6",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "The number of index values is important here. So let\u0027s spell out 12 directly.\n\nAlso can we have tests for the two index formats?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5848bbf_a2b92d5e",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "Can we have tests that baseVertex isn\u0027t taken into account for validation here?",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9b0cc65_670dd84d",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-29T13:48:22Z",
+      "side": 1,
+      "message": "nit: Instance?",
+      "range": {
+        "startLine": 287,
+        "startChar": 55,
+        "endLine": 287,
+        "endChar": 61
+      },
       "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
