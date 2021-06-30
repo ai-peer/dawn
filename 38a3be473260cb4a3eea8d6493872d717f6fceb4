@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d5f5884_82ef30d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-06-30T09:17:43Z",
+      "side": 1,
+      "message": "+2, but not auto-submitting in case you want Austin to approve before landing.",
+      "revId": "38a3be473260cb4a3eea8d6493872d717f6fceb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
