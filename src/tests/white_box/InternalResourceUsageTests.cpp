@@ -16,18 +16,25 @@
 
 #include "dawn_native/dawn_platform.h"
 
-class InternalResourceUsageTests : public DawnTest {};
+class InternalResourceUsageTests : public DawnTest {
+  protected:
+    wgpu::Buffer CreateBufferWithInternalUsage(wgpu::BufferUsage usage) {
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = 4;
+        descriptor.usage = usage;
+
+        return device.CreateBuffer(&descriptor);
+    }
+};
 
 // Verify it is an error to create a buffer with a buffer usage that should only be used
 // internally.
 TEST_P(InternalResourceUsageTests, InternalBufferUsage) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("skip_validation"));
 
-    wgpu::BufferDescriptor descriptor;
-    descriptor.size = 4;
-    descriptor.usage = dawn_native::kReadOnlyStorageBuffer;
+    ASSERT_DEVICE_ERROR(CreateBufferWithInternalUsage(dawn_native::kReadOnlyStorageBuffer));
 
-    ASSERT_DEVICE_ERROR(device.CreateBuffer(&descriptor));
+    ASSERT_DEVICE_ERROR(CreateBufferWithInternalUsage(dawn_native::kInternalStorageBuffer));
 }
 
 // Verify it is an error to create a texture with a texture usage that should only be used
