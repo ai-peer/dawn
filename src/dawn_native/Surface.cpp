@@ -95,9 +95,8 @@ namespace dawn_native {
             return {};
         }
         return DAWN_VALIDATION_ERROR("Unsupported sType");
-#endif  // defined(DAWN_PLATFORM_WINDOWS)
-
-#if defined(DAWN_USE_X11)
+#else
+#    if defined(DAWN_USE_X11)
         const SurfaceDescriptorFromXlib* xDesc = nullptr;
         FindInChain(descriptor->nextInChain, &xDesc);
         if (!xDesc) {
@@ -117,9 +116,10 @@ namespace dawn_native {
         if (status == 0) {
             return DAWN_VALIDATION_ERROR("Invalid X Window");
         }
-#endif  // defined(DAWN_USE_X11)
 
+#    endif  // defined(DAWN_USE_X11)
         return {};
+#endif      // defined(DAWN_PLATFORM_WINDOWS)
     }
 
     Surface::Surface(InstanceBase* instance, const SurfaceDescriptor* descriptor)
