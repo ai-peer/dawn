@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7d3284d_e4266dc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-06-30T07:23:08Z",
+      "side": 1,
+      "message": "lgtm, thank you!\n\nSubtle enough in some places, so requesting a Dawn-customary second review.",
+      "revId": "35f3a5002d3093875030805e0ef72258df951d08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
