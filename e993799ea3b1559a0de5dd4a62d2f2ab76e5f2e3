@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e893491_23a7e42c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-06-30T00:42:48Z",
+      "side": 1,
+      "message": "Corentin and Austin, I just realized that there is one more task for 3D texture: support storage 3D texture. For example, reading from and writing into 3D textures via textureLoad() and textureStore() in fragment shader and compute shader. You folks listed that task in dawn issue 547 too, but I missed it before. \n\nShall we hold on this patch and implement storage 3D texture at first? ",
+      "revId": "e993799ea3b1559a0de5dd4a62d2f2ab76e5f2e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
