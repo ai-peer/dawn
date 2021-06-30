@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fa1325_efc40077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-30T08:19:10Z",
+      "side": 1,
+      "message": "LGTM too with some comments so to not block you I pushed some fixes directly.",
+      "revId": "7eefda97cf53e664724745f68e533b68c19ae671",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1e0ab81_f207f233",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-30T08:19:10Z",
+      "side": 1,
+      "message": "Added the warning to what we test against on CQ.",
+      "revId": "7eefda97cf53e664724745f68e533b68c19ae671",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6326a71d_b1b47767",
+        "filename": "src/dawn_native/Surface.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-06-30T08:19:10Z",
+      "side": 1,
+      "message": "I made an alternative fix for this file.",
+      "revId": "7eefda97cf53e664724745f68e533b68c19ae671",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
