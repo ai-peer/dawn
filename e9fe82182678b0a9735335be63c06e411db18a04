@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "526dc561_89d4647d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-07-01T01:02:18Z",
+      "side": 1,
+      "message": "\u003e Info: Insufficient Vulkan limits for maxComputeWorkgroupInvocations\n",
+      "revId": "e9fe82182678b0a9735335be63c06e411db18a04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
