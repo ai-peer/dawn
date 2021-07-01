@@ -222,6 +222,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "afedf522_5033be58",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:54:46Z",
+      "side": 1,
+      "message": "Ah it was a TODO for my reviewing that I forget to remove, sorry!",
+      "parentUuid": "fe3a5054_7d160246",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "53bf5e6e_162a18c1",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 4
@@ -302,6 +320,24 @@
       "side": 1,
       "message": "the textureSampleType is an enum, so the alternative would require adding some internal enum value for wgpu::TextureSampleType which I thought is overall just less clear. \n\nI suppose I can reuse the binding layout infos instead of ShaderBufferBindingInfo and ShaderStorageTextureBindingInfo. Those are exactly the same.",
       "parentUuid": "0f14bd3d_ff08047b",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d7c0c6b_6f41eab4",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:54:46Z",
+      "side": 1,
+      "message": "Gotcha, it makes sense. No opinion on reusing types or not.",
+      "parentUuid": "d178ea43_971c3494",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -405,6 +441,24 @@
       "side": 1,
       "message": "the texture they use in the shader is not sampled, so it defaults to unfilterable float",
       "parentUuid": "1929497d_579462a8",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de699f41_d091c780",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:54:46Z",
+      "side": 1,
+      "message": "Duh, thanks for the explanation.",
+      "parentUuid": "394b38d6_98935343",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
