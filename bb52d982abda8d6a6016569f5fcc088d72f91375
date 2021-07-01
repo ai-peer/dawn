@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22e1c257_79935694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "We\u0027ll need to add additional tests for the new functionality added, like preservation of the map write contents across multiple mapAsync+unmap calls.",
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee3e5a70_7a83b5e9",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "request.mode \u003d static_cast\u003cwgpu::MapMode\u003e(mode);\n\ndo we need the isReadMode / isWriteMode booleans?",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 79
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9ecd65e_9afbdafa",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "nit: can transform this into a switch statement",
+      "range": {
+        "startLine": 256,
+        "startChar": 16,
+        "endLine": 256,
+        "endChar": 28
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c2c865a_842ef948",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "for both read/write, we can assign mMappedData \u003d mWrite/ReadHandle-\u003eGetData() after it\u0027s created successfully. We don\u0027t need to call GetData() here anymore.\n\nFor the mocks, we don\u0027t need mocks to expect calls to GetData either since it\u0027s just a simple call to return the base pointer.\n\nAnd, now that I think about it, we probably don\u0027t need FreeMappedData to be called on unmap() anymore. We can just move it into the implementation of destroy.",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 53
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a4e5fec_c9aaf483",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "this test intends to test calling mapAsyonc on an error buffer. The new cases you added look like they test that calling mapAsync(write) on a valid but mapRead buffer is an error. I think that should be a separate test",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 47
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47c4aa3a_a01096ef",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "nit: we may be able to move this expectation more precisely right before \"api.CallBufferMapAsyncCallback\" below\n\nthe serialization of the data update happens when the server gets the map async callback from the backend",
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "127378c8_f230bebf",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T00:45:35Z",
+      "side": 1,
+      "message": "ditto: add the expectation right before api.CallBufferMapAsyncCallback",
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
