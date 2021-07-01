@@ -22,6 +22,30 @@
       },
       "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "924820bf_5dc2ecbc",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T17:05:17Z",
+      "side": 1,
+      "message": "Having the flag toggle like this means that we won\u0027t be able to delete usage of SPIRV-Cross before the OT. Can we check with Jiajia first if it is a strong concern? They are porting TF.js to use WGSL so presumably they don\u0027t use f16 there.",
+      "parentUuid": "68fd013b_7ab4b065",
+      "range": {
+        "startLine": 1339,
+        "startChar": 8,
+        "endLine": 1346,
+        "endChar": 9
+      },
+      "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
