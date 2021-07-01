@@ -18,6 +18,80 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06af620e_c6d6dbc3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00cda437_32535ac1",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: We could move this constant up and use it in the helper functions.",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1576aafb_41fa162f",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "I think this work to promote in one direction but not the other (modified entry being unfilterable float and merged entry being float). What do you think of moving this check in [1] instead?\n\nAnd making it bidirectional of course.\n\nAh it works because we never have \"Float\" until we run the logic to look at sampling operations. If we don\u0027t want to make it bidirectional I think it at least requires a good comment, an ASSERT and moving into [1]",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 0
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2b13c81_6a084cf5",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a526fe3f_dbe95b37",
@@ -37,6 +111,246 @@
         "endLine": 253,
         "endChar": 13
       },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "516741f7_4bf28907",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "Makes sense. Thanks for filing the issue.",
+      "parentUuid": "a526fe3f_dbe95b37",
+      "range": {
+        "startLine": 246,
+        "startChar": 12,
+        "endLine": 253,
+        "endChar": 13
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45498fc4_6424a0b0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: This code seems like it is the same as [2]",
+      "range": {
+        "startLine": 907,
+        "startChar": 1,
+        "endLine": 926,
+        "endChar": 17
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2b9d68_1937e7ca",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 934,
+        "startChar": 1,
+        "endLine": 958,
+        "endChar": 0
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81c2195d_f3966cd9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1031,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "TODO",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53bf5e6e_162a18c1",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "Functional programming in C++ is always so convoluted :( Why don\u0027t we have container.map([](){...})?",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9089e1_5ed850b7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: maybe do an early continue to reduce the control flow?",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6554775c_2305e2b0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "This seems like it could be ASSERT(...); if (textureInfo.texture.sampleType \u003d\u003d UnfilterableFloat) return DAWN_VALIDATION_ERROR();",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f14bd3d_ff08047b",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "Maybe comment that these mirror the BindingLayout infos except for stuff that\u0027s not deducible from the shader? (isFiltering?)\n\nDo we really need to do this though? It feels like a big duplication just to remove visibility and SamplerType::NonFiltering.",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac020f3_75c7e29b",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: we can advantage of defaults!",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffef6c69_5bcec373",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: I think we should also test unfiltering -\u003e comparison and comparison -\u003e unfiltering.",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c273d66e_7c425a39",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: on both stages",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1446f50f_9d6bc268",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "nit: We could also try the other direction (Sample VS and Load FS) to better cover the logic in pipeline layout defaulting.",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1929497d_579462a8",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T14:03:52Z",
+      "side": 1,
+      "message": "Why did the tests below need to be updated to unfilterable float?",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
