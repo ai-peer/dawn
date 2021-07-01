@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7887642e_eb66826c",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T18:28:02Z",
+      "side": 1,
+      "message": "I just realized it would require passing the draw arguments to the ValidateCanDraw call. Nvm.",
+      "parentUuid": "72bed1e6_b1c8c4b7",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8c7e0ea_b7d4d29b",
