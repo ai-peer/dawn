@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b4742d_416e52df",
+        "filename": "src/dawn_native/Format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00cda437_32535ac1",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1576aafb_41fa162f",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fe24279_ef3bfdca",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1576aafb_41fa162f",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 0
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2b13c81_6a084cf5",
@@ -88,6 +130,24 @@
       "writtenOn": "2021-07-01T14:03:52Z",
       "side": 1,
       "message": "[1]",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b4dc98e_bb162eb4",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2b13c81_6a084cf5",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +222,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ee2774a_e7f73293",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45498fc4_6424a0b0",
+      "range": {
+        "startLine": 907,
+        "startChar": 1,
+        "endLine": 926,
+        "endChar": 17
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f2b9d68_1937e7ca",
@@ -175,6 +259,30 @@
       "writtenOn": "2021-07-01T14:03:52Z",
       "side": 1,
       "message": "[2]",
+      "range": {
+        "startLine": 934,
+        "startChar": 1,
+        "endLine": 958,
+        "endChar": 0
+      },
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58e71a7_1c1e6241",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f2b9d68_1937e7ca",
       "range": {
         "startLine": 934,
         "startChar": 1,
@@ -272,6 +380,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e5fee58_12b9bfcd",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aa9089e1_5ed850b7",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6554775c_2305e2b0",
@@ -285,6 +411,24 @@
       "writtenOn": "2021-07-01T14:03:52Z",
       "side": 1,
       "message": "This seems like it could be ASSERT(...); if (textureInfo.texture.sampleType \u003d\u003d UnfilterableFloat) return DAWN_VALIDATION_ERROR();",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c13ec7_eef50ccd",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1280,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6554775c_2305e2b0",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -359,6 +503,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c78d2e_16853363",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ac020f3_75c7e29b",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffef6c69_5bcec373",
@@ -372,6 +534,24 @@
       "writtenOn": "2021-07-01T14:03:52Z",
       "side": 1,
       "message": "nit: I think we should also test unfiltering -\u003e comparison and comparison -\u003e unfiltering.",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8530e91_93b689ac",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "did non-fitlering -\u003e comparison.\ncomparison -\u003e unfiltering can\u0027t be tested because the shader does not have filtering/non-filtering samplers",
+      "parentUuid": "ffef6c69_5bcec373",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -393,6 +573,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9045480_2fa26098",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c273d66e_7c425a39",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1446f50f_9d6bc268",
@@ -406,6 +604,24 @@
       "writtenOn": "2021-07-01T14:03:52Z",
       "side": 1,
       "message": "nit: We could also try the other direction (Sample VS and Load FS) to better cover the logic in pipeline layout defaulting.",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c36c272_3b3f8870",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T18:26:45Z",
+      "side": 1,
+      "message": "textureSample is invalid in the vertex stage",
+      "parentUuid": "1446f50f_9d6bc268",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
