@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3dc3492_ecc0bde9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 38
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-01T01:41:02Z",
+      "side": 1,
+      "message": "patch-38 change break cts test. it looks good locally (with/out --enable-dawn-backend-validation). will figure out tomorrow",
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee3e5a70_7a83b5e9",
