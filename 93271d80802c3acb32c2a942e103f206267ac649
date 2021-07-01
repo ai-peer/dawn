@@ -33,6 +33,24 @@
       "message": "ditto this could just be an if instead of a large switch since we use a single case.",
       "revId": "93271d80802c3acb32c2a942e103f206267ac649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f40fced_3628961e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T19:27:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b717d2dc_d6ad1bd4",
+      "revId": "93271d80802c3acb32c2a942e103f206267ac649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
