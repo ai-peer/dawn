@@ -556,6 +556,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6948e1f2_25324190",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T18:33:41Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a8530e91_93b689ac",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c273d66e_7c425a39",
@@ -622,6 +640,24 @@
       "side": 1,
       "message": "textureSample is invalid in the vertex stage",
       "parentUuid": "1446f50f_9d6bc268",
+      "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da9aad1_6070a18c",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-01T18:33:41Z",
+      "side": 1,
+      "message": "I forgot about this, however can\u0027t we use textureSampleLevel in VS?",
+      "parentUuid": "5c36c272_3b3f8870",
       "revId": "eca8f96cf160e3adcf3b5b0a4c2d4ecc26626619",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
