@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68fd013b_7ab4b065",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-01T17:00:13Z",
+      "side": 1,
+      "message": "WDYT? can also add some warnings in Chrome that shader_float16 is going away",
+      "range": {
+        "startLine": 1339,
+        "startChar": 8,
+        "endLine": 1346,
+        "endChar": 9
+      },
+      "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
