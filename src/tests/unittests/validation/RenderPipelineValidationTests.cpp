@@ -103,26 +103,16 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
     }
 }
 
-// Tests that at least one color target state is required.
-TEST_F(RenderPipelineValidationTest, ColorTargetStateRequired) {
-    {
-        // This one succeeds because attachment 0 is the color attachment
-        utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = vsModule;
-        descriptor.cFragment.module = fsModule;
-        descriptor.cFragment.targetCount = 1;
+// Tests that it is valid to create a render pipeline with no color/depth/stencil targets.
+// Note: It can't be used in a render pass though because a render pass must have
+// at least one attachment.
+TEST_F(RenderPipelineValidationTest, NoColorOrDepthStencilTargets) {
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.vertex.module = vsModule;
+    descriptor.cFragment.module = fsModule;
+    descriptor.cFragment.targetCount = 0;
 
-        device.CreateRenderPipeline(&descriptor);
-    }
-
-    {  // Fail because lack of color target states (and depth/stencil state)
-        utils::ComboRenderPipelineDescriptor descriptor;
-        descriptor.vertex.module = vsModule;
-        descriptor.cFragment.module = fsModule;
-        descriptor.cFragment.targetCount = 0;
-
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
-    }
+    device.CreateRenderPipeline(&descriptor);
 }
 
 // Tests that the color formats must be renderable.
