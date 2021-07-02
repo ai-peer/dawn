@@ -46,6 +46,30 @@
       },
       "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d8de064_33060c14",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-02T15:57:59Z",
+      "side": 1,
+      "message": "They don\u0027t use it, so in that case we can just drop support for the extension",
+      "parentUuid": "924820bf_5dc2ecbc",
+      "range": {
+        "startLine": 1339,
+        "startChar": 8,
+        "endLine": 1346,
+        "endChar": 9
+      },
+      "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
