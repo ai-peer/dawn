@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a87b3f_2cf58369",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-02T11:16:05Z",
+      "side": 0,
+      "message": "[1]",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98253962_66ef3b52",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-02T11:16:05Z",
+      "side": 0,
+      "message": "We could probably do the same modification that you did at [5]",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ff035b_900ce81c",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-02T11:16:05Z",
+      "side": 0,
+      "message": "ditto same as [5]?",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
