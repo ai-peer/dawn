@@ -207,8 +207,7 @@ namespace dawn_native { namespace vulkan {
             }
         }
 
-        VkColorComponentFlags VulkanColorWriteMask(wgpu::ColorWriteMask mask,
-                                                   bool isDeclaredInFragmentShader) {
+        VkColorComponentFlags VulkanColorWriteMask(wgpu::ColorWriteMask mask) {
             // Vulkan and Dawn color write masks match, static assert it and return the mask
             static_assert(static_cast<VkColorComponentFlagBits>(wgpu::ColorWriteMask::Red) ==
                               VK_COLOR_COMPONENT_R_BIT,
@@ -222,17 +221,10 @@ namespace dawn_native { namespace vulkan {
             static_assert(static_cast<VkColorComponentFlagBits>(wgpu::ColorWriteMask::Alpha) ==
                               VK_COLOR_COMPONENT_A_BIT,
                           "");
-
-            // According to Vulkan SPEC (Chapter 14.3): "The input values to blending or color
-            // attachment writes are undefined for components which do not correspond to a fragment
-            // shader outputs", we set the color write mask to 0 to prevent such undefined values
-            // being written into the color attachments.
-            return isDeclaredInFragmentShader ? static_cast<VkColorComponentFlags>(mask)
-                                              : static_cast<VkColorComponentFlags>(0);
+            return static_cast<VkColorComponentFlags>(mask);
         }
 
-        VkPipelineColorBlendAttachmentState ComputeColorDesc(const ColorTargetState* state,
-                                                             bool isDeclaredInFragmentShader) {
+        VkPipelineColorBlendAttachmentState ComputeColorDesc(const ColorTargetState* state) {
             VkPipelineColorBlendAttachmentState attachment;
             attachment.blendEnable = state->blend != nullptr ? VK_TRUE : VK_FALSE;
             if (attachment.blendEnable) {
@@ -252,8 +244,7 @@ namespace dawn_native { namespace vulkan {
                 attachment.dstAlphaBlendFactor = VK_BLEND_FACTOR_ZERO;
                 attachment.alphaBlendOp = VK_BLEND_OP_ADD;
             }
-            attachment.colorWriteMask =
-                VulkanColorWriteMask(state->writeMask, isDeclaredInFragmentShader);
+            attachment.colorWriteMask = VulkanColorWriteMask(state->writeMask);
             return attachment;
         }
 
@@ -444,11 +435,16 @@ namespace dawn_native { namespace vulkan {
         // pre-computed in the ColorState
         ityp::array<ColorAttachmentIndex, VkPipelineColorBlendAttachmentState, kMaxColorAttachments>
             colorBlendAttachments;
-        const auto& fragmentOutputsWritten =
-            GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten;
         for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
+            // According to Vulkan SPEC (Chapter 14.3): "The input values to blending or color
+            // attachment writes are undefined for components which do not correspond to a fragment
+            // shader outputs", we set the color write mask to 0 to prevent such undefined values
+            // being written into the color attachments.
+            // WebGPU validates that all color attachments have a fragment output.
+            ASSERT(GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten[i]);
+
             const ColorTargetState* target = GetColorTargetState(i);
-            colorBlendAttachments[i] = ComputeColorDesc(target, fragmentOutputsWritten[i]);
+            colorBlendAttachments[i] = ComputeColorDesc(target);
         }
         VkPipelineColorBlendStateCreateInfo colorBlend;
         colorBlend.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;

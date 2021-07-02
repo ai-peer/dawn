@@ -185,12 +185,7 @@ namespace dawn_native { namespace metal {
             }
         }
 
-        MTLColorWriteMask MetalColorWriteMask(wgpu::ColorWriteMask writeMask,
-                                              bool isDeclaredInFragmentShader) {
-            if (!isDeclaredInFragmentShader) {
-                return MTLColorWriteMaskNone;
-            }
-
+        MTLColorWriteMask MetalColorWriteMask(wgpu::ColorWriteMask writeMask) {
             MTLColorWriteMask mask = MTLColorWriteMaskNone;
 
             if (writeMask & wgpu::ColorWriteMask::Red) {
@@ -210,8 +205,7 @@ namespace dawn_native { namespace metal {
         }
 
         void ComputeBlendDesc(MTLRenderPipelineColorAttachmentDescriptor* attachment,
-                              const ColorTargetState* state,
-                              bool isDeclaredInFragmentShader) {
+                              const ColorTargetState* state) {
             attachment.blendingEnabled = state->blend != nullptr;
             if (attachment.blendingEnabled) {
                 attachment.sourceRGBBlendFactor =
@@ -225,8 +219,7 @@ namespace dawn_native { namespace metal {
                     MetalBlendFactor(state->blend->alpha.dstFactor, true);
                 attachment.alphaBlendOperation = MetalBlendOperation(state->blend->alpha.operation);
             }
-            attachment.writeMask =
-                MetalColorWriteMask(state->writeMask, isDeclaredInFragmentShader);
+            attachment.writeMask = MetalColorWriteMask(state->writeMask);
         }
 
         MTLStencilOperation MetalStencilOperation(wgpu::StencilOperation stencilOperation) {
@@ -392,14 +385,14 @@ namespace dawn_native { namespace metal {
             }
         }
 
-        const auto& fragmentOutputsWritten =
-            GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten;
         for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
+            // WebGPU validates that all color attachments have a fragment output.
+            ASSERT(GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten[i]);
+
             descriptorMTL.colorAttachments[static_cast<uint8_t>(i)].pixelFormat =
                 MetalPixelFormat(GetColorAttachmentFormat(i));
             const ColorTargetState* descriptor = GetColorTargetState(i);
-            ComputeBlendDesc(descriptorMTL.colorAttachments[static_cast<uint8_t>(i)], descriptor,
-                             fragmentOutputsWritten[i]);
+            ComputeBlendDesc(descriptorMTL.colorAttachments[static_cast<uint8_t>(i)], descriptor);
         }
 
         descriptorMTL.inputPrimitiveTopology = MTLInputPrimitiveTopology(GetPrimitiveTopology());
