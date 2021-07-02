@@ -253,6 +253,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f82908_a512d9b8",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Oops. This should be kept. We should guard against map mode is neither read nor write, and read write handlers creation failure.",
+      "parentUuid": "d41f0b03_fad07da1",
+      "range": {
+        "startLine": 213,
+        "startChar": 8,
+        "endLine": 223,
+        "endChar": 0
+      },
+      "revId": "96328b5fd8de08e95c193993ffd9fa5ffc581fbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d18aa923_736f6edf",
@@ -549,6 +573,30 @@
       "side": 1,
       "message": "oh I see. ok; yea that\u0027s a webgpu.h thing then. Not super high priority but we should make a PR to https://github.com/webgpu-native/webgpu-headers\n\nthis isn\u0027t really about OOM though. It\u0027s more about whether or not the buffer is mapped. In that test case, mapAsync never succeeds and never puts it into the mapped state, so unmap throws an exception.",
       "parentUuid": "edb444c6_a4894548",
+      "range": {
+        "startLine": 416,
+        "startChar": 8,
+        "endLine": 417,
+        "endChar": 15
+      },
+      "revId": "96328b5fd8de08e95c193993ffd9fa5ffc581fbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1ed1c99_10e476f9",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 36
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Removed return; and changed comment a bit.",
+      "parentUuid": "eb9579cb_1118fb5d",
       "range": {
         "startLine": 416,
         "startChar": 8,

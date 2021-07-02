@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c779d582_61fe866f",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee3e5a70_7a83b5e9",
+      "range": {
+        "startLine": 209,
+        "startChar": 8,
+        "endLine": 209,
+        "endChar": 79
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9ecd65e_9afbdafa",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-07-01T00:45:35Z",
       "side": 1,
       "message": "nit: can transform this into a switch statement",
+      "range": {
+        "startLine": 256,
+        "startChar": 16,
+        "endLine": 256,
+        "endChar": 28
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24f3ea5e_9151a462",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f9ecd65e_9afbdafa",
       "range": {
         "startLine": 256,
         "startChar": 16,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d749ce9_2d15dc86",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c2c865a_842ef948",
+      "range": {
+        "startLine": 277,
+        "startChar": 0,
+        "endLine": 277,
+        "endChar": 53
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a4e5fec_c9aaf483",
@@ -117,6 +189,30 @@
       "writtenOn": "2021-07-01T00:45:35Z",
       "side": 1,
       "message": "this test intends to test calling mapAsyonc on an error buffer. The new cases you added look like they test that calling mapAsync(write) on a valid but mapRead buffer is an error. I think that should be a separate test",
+      "range": {
+        "startLine": 160,
+        "startChar": 0,
+        "endLine": 160,
+        "endChar": 47
+      },
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c340fa1_c199ae32",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a4e5fec_c9aaf483",
       "range": {
         "startLine": 160,
         "startChar": 0,
@@ -144,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fcd146c_c312e0a0",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47c4aa3a_a01096ef",
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "127378c8_f230bebf",
@@ -157,6 +271,24 @@
       "writtenOn": "2021-07-01T00:45:35Z",
       "side": 1,
       "message": "ditto: add the expectation right before api.CallBufferMapAsyncCallback",
+      "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0eb8b0c_4e075a46",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 38
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "127378c8_f230bebf",
       "revId": "bb52d982abda8d6a6016569f5fcc088d72f91375",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

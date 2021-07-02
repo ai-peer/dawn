@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23fb059_7d32d413",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 42
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-02T01:37:59Z",
+      "side": 1,
+      "message": "Patch 41 - 38: address comments \u0026 fixes along the way\nPatch 42: some new tests for multiple getmappedrange\nThanks for the big patch review!",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
