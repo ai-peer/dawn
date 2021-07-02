@@ -490,9 +490,7 @@ namespace dawn_native {
         const TexelBlockInfo& blockInfo =
             destination->texture->GetFormat().GetAspectInfo(destination->aspect).block;
 
-        TextureDataLayout layout = FixUpDeprecatedTextureDataLayoutOptions(GetDevice(), *dataLayout,
-                                                                           blockInfo, *writeSize);
-        DAWN_TRY(ValidateLinearTextureData(layout, dataSize, blockInfo, *writeSize));
+        DAWN_TRY(ValidateLinearTextureData(*dataLayout, dataSize, blockInfo, *writeSize));
 
         DAWN_TRY(destination->texture->ValidateCanUseInSubmitNow());
 
