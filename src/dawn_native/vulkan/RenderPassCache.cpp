@@ -90,6 +90,12 @@ namespace dawn_native { namespace vulkan {
         std::array<VkAttachmentReference, kMaxColorAttachments> resolveAttachmentRefs;
         VkAttachmentReference depthStencilAttachmentRef;
 
+        // Default all attachments to unused.
+        for (auto& attachmentRef : colorAttachmentRefs) {
+            attachmentRef.attachment = VK_ATTACHMENT_UNUSED;
+            attachmentRef.layout = VK_IMAGE_LAYOUT_UNDEFINED;
+        }
+
         // Contains the attachment description that will be chained in the create info
         // The order of all attachments in attachmentDescs is "color-depthstencil-resolve".
         constexpr uint8_t kMaxAttachmentCount = kMaxColorAttachments * 2 + 1;
@@ -175,7 +181,7 @@ namespace dawn_native { namespace vulkan {
         subpassDesc.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
         subpassDesc.inputAttachmentCount = 0;
         subpassDesc.pInputAttachments = nullptr;
-        subpassDesc.colorAttachmentCount = colorAttachmentIndex;
+        subpassDesc.colorAttachmentCount = kMaxColorAttachmentCount;
         subpassDesc.pColorAttachments = colorAttachmentRefs.data();
         subpassDesc.pResolveAttachments = resolveTargetAttachmentRefs;
         subpassDesc.pDepthStencilAttachment = depthStencilAttachment;

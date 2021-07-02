@@ -442,8 +442,9 @@ namespace dawn_native { namespace vulkan {
 
         // Initialize the "blend state info" that will be chained in the "create info" from the data
         // pre-computed in the ColorState
+        // Zero-initializing disables blend and colorWrite.
         ityp::array<ColorAttachmentIndex, VkPipelineColorBlendAttachmentState, kMaxColorAttachments>
-            colorBlendAttachments;
+            colorBlendAttachments = {};
         const auto& fragmentOutputsWritten =
             GetStage(SingleShaderStage::Fragment).metadata->fragmentOutputsWritten;
         for (ColorAttachmentIndex i : IterateBitSet(GetColorAttachmentsMask())) {
@@ -457,7 +458,7 @@ namespace dawn_native { namespace vulkan {
         // LogicOp isn't supported so we disable it.
         colorBlend.logicOpEnable = VK_FALSE;
         colorBlend.logicOp = VK_LOGIC_OP_CLEAR;
-        colorBlend.attachmentCount = static_cast<uint32_t>(GetColorAttachmentsMask().count());
+        colorBlend.attachmentCount = static_cast<uint32_t>(kMaxColorAttachments);
         colorBlend.pAttachments = colorBlendAttachments.data();
         // The blend constant is always dynamic so we fill in a dummy value
         colorBlend.blendConstants[0] = 0.0f;
