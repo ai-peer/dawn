@@ -143,7 +143,7 @@ namespace dawn_native {
         return {};
     }
 
-    TextureDataLayout FixUpDeprecatedTextureDataLayoutOptions(
+    /*TextureDataLayout FixUpDeprecatedTextureDataLayoutOptions(
         DeviceBase* device,
         const TextureDataLayout& originalLayout,
         const TexelBlockInfo& blockInfo,
@@ -180,7 +180,7 @@ namespace dawn_native {
             layout.bytesPerRow = wgpu::kCopyStrideUndefined;
         }
         return layout;
-    }
+    }*/
 
     // Replace wgpu::kCopyStrideUndefined with real values, so backends don't have to think about
     // it.
