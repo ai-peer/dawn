@@ -16,6 +16,23 @@
       "message": "Looks like this will need https://chromium-review.googlesource.com/c/chromium/src/+/3003763 before it can land.",
       "revId": "4b477db53943be6900525c62b78864ebad1183b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "215546c8_95160f73",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-02T21:00:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4b477db53943be6900525c62b78864ebad1183b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
