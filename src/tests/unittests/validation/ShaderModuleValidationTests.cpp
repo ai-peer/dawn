@@ -212,3 +212,47 @@ TEST_F(ShaderModuleValidationTest, GetCompilationMessages) {
 
     shaderModule.GetCompilationInfo(callback, nullptr);
 }
+
+// Tests that we validate workgroup size limits.
+TEST_F(ShaderModuleValidationTest, ComputeWorkgroupSizeLimits) {
+    DAWN_SKIP_TEST_IF(UsesWire() || !HasToggleEnabled("use_tint_generator"));
+
+    auto make_shader_with_workgroup_size = [this](uint32_t x, uint32_t y, uint32_t z) {
+        std::ostringstream ss;
+        ss << "[[stage(compute), workgroup_size(" << x << "," << y << "," << z
+           << ")]] fn main() {}";
+        utils::CreateShaderModule(device, ss.str().c_str());
+    };
+
+    make_shader_with_workgroup_size(1, 1, 1);
+    make_shader_with_workgroup_size(kMaxComputeWorkgroupSizeX, 1, 1);
+    make_shader_with_workgroup_size(1, kMaxComputeWorkgroupSizeY, 1);
+    make_shader_with_workgroup_size(1, 1, kMaxComputeWorkgroupSizeZ);
+
+    ASSERT_DEVICE_ERROR(make_shader_with_workgroup_size(kMaxComputeWorkgroupSizeX + 1, 1, 1));
+    ASSERT_DEVICE_ERROR(make_shader_with_workgroup_size(1, kMaxComputeWorkgroupSizeY + 1, 1));
+    ASSERT_DEVICE_ERROR(make_shader_with_workgroup_size(1, 1, kMaxComputeWorkgroupSizeZ + 1));
+
+    // No individual dimension exceeds its limit, but the combined size should definitely exceed the
+    // total invocation limit.
+    ASSERT_DEVICE_ERROR(make_shader_with_workgroup_size(
+        kMaxComputeWorkgroupSizeX, kMaxComputeWorkgroupSizeY, kMaxComputeWorkgroupSizeZ));
+}
+
+// Tests that we validate workgroup storage size limits.
+TEST_F(ShaderModuleValidationTest, ComputeWorkgroupStorageSizeLimits) {
+    DAWN_SKIP_TEST_IF(UsesWire() || !HasToggleEnabled("use_tint_generator"));
+
+    auto make_shader_with_vec4_f32_workgroup_storage = [this](uint32_t count) {
+        std::ostringstream ss;
+        ss << "var<workgroup> data: array<vec4<f32>, " << count << ">;"
+           << "[[stage(compute), workgroup_size(1)]] fn main() { data[0] = data[1]; }";
+        utils::CreateShaderModule(device, ss.str().c_str());
+    };
+
+    constexpr uint32_t kVec4F32Size = 16;
+    constexpr uint32_t kMaxVec4F32Count = kMaxComputeWorkgroupStorageSize / kVec4F32Size;
+    make_shader_with_vec4_f32_workgroup_storage(1);
+    make_shader_with_vec4_f32_workgroup_storage(kMaxVec4F32Count);
+    ASSERT_DEVICE_ERROR(make_shader_with_vec4_f32_workgroup_storage(kMaxVec4F32Count + 1));
+}
