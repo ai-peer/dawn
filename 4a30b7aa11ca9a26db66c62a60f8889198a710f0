@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50cfbac6_b77be662",
+        "filename": "src/tests/white_box/InternalResourceUsageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-02T07:33:00Z",
+      "side": 1,
+      "message": "To show that this helper function is just to test buffer creation with internal usage, no other usages, so add the suffix.",
+      "parentUuid": "67b40375_596c641f",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 46
+      },
+      "revId": "4a30b7aa11ca9a26db66c62a60f8889198a710f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "384372ea_aa1ac7bc",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e638f0a_240fe7a0",
+        "filename": "src/tests/white_box/InternalStorageBufferBindingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-02T07:33:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "384372ea_aa1ac7bc",
+      "range": {
+        "startLine": 40,
+        "startChar": 35,
+        "endLine": 40,
+        "endChar": 43
+      },
+      "revId": "4a30b7aa11ca9a26db66c62a60f8889198a710f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f6939ba4_d13ef924",
@@ -60,6 +108,24 @@
       "writtenOn": "2021-07-01T13:19:24Z",
       "side": 1,
       "message": "Uuuh validation doesn\u0027t prevent that with the dawn_native::kInternalStorageBufferBinding? Sorry we should have caught that earlier but this should only be allowed from inside dawn_native.\n\nI think we can add a allowInternal \u003d false argument to DeviceBase::CreateBindGroupLayout, pipe it to ValidateBindGroupLayoutDescriptor and only allow kInternalStorageBufferBinding if it is true.\n\nFor this test we\u0027ll have to either find a way to trigger the problem without explicitly using the internal usage (double resolve back to back and rely on the Vulkan Validation Layers to produce a warning if we do things wrong?) or we need to cast device.Get() to DeviceBase* call bgl \u003d CreateBindGroupLayout(desc, true) then do wgpu::BindGroupLayout::Acquire(bgl.Detach());",
+      "revId": "4a30b7aa11ca9a26db66c62a60f8889198a710f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56bd50e3_cada56d4",
+        "filename": "src/tests/white_box/InternalStorageBufferBindingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-02T07:33:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f6939ba4_d13ef924",
       "revId": "4a30b7aa11ca9a26db66c62a60f8889198a710f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
