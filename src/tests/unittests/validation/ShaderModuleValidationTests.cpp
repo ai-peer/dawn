@@ -202,3 +202,40 @@ TEST_F(ShaderModuleValidationTest, GetCompilationMessages) {
 
     shaderModule.GetCompilationInfo(callback, nullptr);
 }
+
+// Tests that we validate workgroup size limits.
+TEST_F(ShaderModuleValidationTest, ComputeWorkgroupSizeLimits) {
+    DAWN_SKIP_TEST_IF(UsesWire() || !HasToggleEnabled("use_tint_generator"));
+
+    auto make_shader_with_workgroup_size_x = [this](uint32_t x) {
+        std::ostringstream ss;
+        ss << "[[stage(compute), workgroup_size(" << x << ")]] fn main() {}";
+        utils::CreateShaderModule(device, ss.str().c_str());
+    };
+
+    make_shader_with_workgroup_size_x(1);
+    make_shader_with_workgroup_size_x(kMaxComputePerDimensionDispatchSize);
+    ASSERT_DEVICE_ERROR(make_shader_with_workgroup_size_x(kMaxComputePerDimensionDispatchSize + 1));
+}
+
+// Tests that we validate workgroup storage size limits.
+TEST_F(ShaderModuleValidationTest, ComputeWorkgroupStorageSizeLimits) {
+    DAWN_SKIP_TEST_IF(UsesWire() || !HasToggleEnabled("use_tint_generator"));
+
+    auto make_shader_with_vec4_f32_storage = [this](uint32_t count) {
+        std::ostringstream ss;
+        ss << "[[block]] struct Data { v : array<vec4<f32>, " << count << ">; };";
+        ss << R"(
+            [[binding(0), group(0)]] var<storage, read_write> data : Data;
+            [[stage(compute), workgroup_size(1)]] fn main() {
+                data.v[0] = data.v[1];
+            })";
+        utils::CreateShaderModule(device, ss.str().c_str());
+    };
+
+    constexpr uint32_t kVec4F32Size = 16;
+    constexpr uint32_t kMaxVec4F32Count = kMaxComputeWorkgroupStorageSize / kVec4F32Size;
+    make_shader_with_vec4_f32_storage(1);
+    make_shader_with_vec4_f32_storage(kMaxVec4F32Count);
+    ASSERT_DEVICE_ERROR(make_shader_with_vec4_f32_storage(kMaxVec4F32Count + 1));
+}

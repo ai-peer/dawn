@@ -14,6 +14,7 @@
 
 #include "dawn_native/ShaderModule.h"
 
+#include "common/Constants.h"
 #include "common/HashUtils.h"
 #include "common/VertexFormatUtils.h"
 #include "dawn_native/BindGroupLayout.h"
@@ -905,6 +906,24 @@ namespace dawn_native {
                 DAWN_TRY_ASSIGN(metadata->stage, TintPipelineStageToShaderStage(entryPoint.stage));
 
                 if (metadata->stage == SingleShaderStage::Compute) {
+                    if (entryPoint.workgroup_size_x > kMaxComputePerDimensionDispatchSize ||
+                        entryPoint.workgroup_size_y > kMaxComputePerDimensionDispatchSize ||
+                        entryPoint.workgroup_size_z > kMaxComputePerDimensionDispatchSize) {
+                        std::stringstream ss;
+                        ss << "Workgroup dimension exceeds the maximum allowed ("
+                           << kMaxComputePerDimensionDispatchSize << ")";
+                        return DAWN_VALIDATION_ERROR(ss.str());
+                    }
+
+                    if (inspector.GetStorageSize(entryPoint.name) >
+                        kMaxComputeWorkgroupStorageSize) {
+                        std::stringstream ss;
+                        ss << "Workgroup storage for " << entryPoint.name
+                           << " exceeds the maximum allowed (" << kMaxComputeWorkgroupStorageSize
+                           << ")";
+                        return DAWN_VALIDATION_ERROR(ss.str());
+                    }
+
                     metadata->localWorkgroupSize.x = entryPoint.workgroup_size_x;
                     metadata->localWorkgroupSize.y = entryPoint.workgroup_size_y;
                     metadata->localWorkgroupSize.z = entryPoint.workgroup_size_z;
