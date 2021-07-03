@@ -16,6 +16,92 @@
       "message": "PTAL!",
       "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee582eac_aa31c011",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-03T00:30:17Z",
+      "side": 1,
+      "message": "for the most part, we usually have two reviewers in Dawn",
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a82518d_b887ba17",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-03T00:30:17Z",
+      "side": 1,
+      "message": "does it not work with the wire? I think it should",
+      "range": {
+        "startLine": 208,
+        "startChar": 22,
+        "endLine": 208,
+        "endChar": 36
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c3a6e1b_e59f1298",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-03T00:30:17Z",
+      "side": 1,
+      "message": "nit: in the rest of Dawn, we make lambda functions CamelCase",
+      "range": {
+        "startLine": 210,
+        "startChar": 9,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d0e57b3_88a2002a",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-03T00:30:17Z",
+      "side": 1,
+      "message": "This isn\u0027t checking what I thought it would. I thought this limit would apply to the maximum in bytes for variables using the `workgroup` storage class. i.e. declared with var\u003cworkgroup\u003e.\n\nIt seems like the spec is very vague about this https://gpuweb.github.io/gpuweb/#dom-supported-limits-maxcomputeworkgroupstoragesize. \"maximum number of bytes used by..\" Used for what?\n\nIf this limit is what I think it should be, it would mean it refers to Vulkan\u0027s VkPhysicalDeviceLimits::maxComputeSharedMemorySize.\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceLimits.html\n\nI think we need to clarify this in the spec. Corentin made that original spec PR, and he\u0027s using the limit with Vulkan\u0027s maxComputeSharedMemorySize in this CL https://dawn-review.googlesource.com/c/dawn/+/56082. So.. I think that\u0027s what it\u0027s supposed to be.",
+      "range": {
+        "startLine": 222,
+        "startChar": 35,
+        "endLine": 222,
+        "endChar": 68
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
