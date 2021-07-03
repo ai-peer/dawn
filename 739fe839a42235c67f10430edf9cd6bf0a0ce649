@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "68761150_5383241c",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c71db520_ff8b7ca5",
+      "range": {
+        "startLine": 48,
+        "startChar": 24,
+        "endLine": 48,
+        "endChar": 30
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94546bfe_0b00e1d4",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "We probably need to return null if readHandle\u003d\u003dnullptr and !device alive. Otherwise we deref the null pointer below. Ditto for the writing part.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d6d9df6_c41bb9d6",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94546bfe_0b00e1d4",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9cda66b_faeb86f6",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4676e176_27759ccb",
+      "range": {
+        "startLine": 66,
+        "startChar": 44,
+        "endLine": 66,
+        "endChar": 55
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ebb8fa88_19790945",
@@ -111,6 +177,30 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "nit: it feels a bit unnecessary that this logic be bundled with the WriteHandle creation since we check descriptor-\u003emappedAtCreation again. Maybe it could be done directly when setting up buffer below which would 1) make code more local 2) avoid introducing local variables (and mental context) 3) keep read and write handle creation completely symmetric.",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 99,
+        "endChar": 0
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da059987_54efc0b2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "I think changing\nif (descriptor-\u003emappedAtCreation) {\n    isCurrentlyMappedForWriting \u003d true;\n}\nto\nisCurrentlyMappedForWriting \u003d descriptor-\u003emappedAtCreation;\n\ncan make it not checking descriptor-\u003emappedAtCreation again?\n\nhad a if (descriptor-\u003emappedAtCreation) branch now",
+      "parentUuid": "ebb8fa88_19790945",
       "range": {
         "startLine": 88,
         "startChar": 0,
@@ -169,6 +259,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a704b66_24352574",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "For unmapped getMappedRange we check if buffer is mapped and return nullptr if not.\nWe can move setting of mMappedData and mMapSize to MapAsync (and only set here for mappedAtCreation)\nAustin just suggested to move GetData() from MapAsync to buffer creation. so we only call it once. https://dawn-review.googlesource.com/c/dawn/+/51164/38..42/src/dawn_wire/client/Buffer.cpp#b277\nI think the reason is readHandle and it\u0027s stagingData is lived through out the lifetime of the mapped buffer so it only get set at creation time. And in future we are likely going to merge read/write into one handler for a buffer. The special case is MapRead \u0026 mappedAtCreation where we need to call a readHandle-\u003eGetData at unmap.\nWDYT",
+      "parentUuid": "cb59e94a_228927ce",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd3812c9_368865dc",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 42
@@ -180,6 +294,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "This only needs to be set up in the mappedAtCreation case. Basically with the comments above this code could become:\n\n\n\n       // Serialize the buffer creation along with the read/writeHandles if needed.\n       wireClient-\u003eSerializeCommand(\n            cmd, cmd.readHandleCreateInfoLength + cmd.writeHandleCreateInfoLength,\n            [\u0026](SerializeBuffer* serializeBuffer) {\n                if (readHandle !\u003d nullptr) {\n                    char* readHandleBuffer;\n                    WIRE_TRY(\n                        serializeBuffer-\u003eNextN(cmd.readHandleCreateInfoLength, \u0026readHandleBuffer));\n                    // Serialize the ReadHandle into the space after the command.\n                    readHandle-\u003eSerializeCreate(readHandleBuffer);\n                    buffer-\u003emReadHandle \u003d std::move(readHandle);\n                }\n                if (writeHandle !\u003d nullptr) {\n                    char* writeHandleBuffer;\n                    WIRE_TRY(serializeBuffer-\u003eNextN(cmd.writeHandleCreateInfoLength,\n                                                    \u0026writeHandleBuffer));\n                    // Serialize the WriteHandle into the space after the command.\n                    writeHandle-\u003eSerializeCreate(writeHandleBuffer);\n                    buffer-\u003emWriteHandle \u003d std::move(writeHandle);\n                }\n            });\n\n        // This could be moved inside a if (mappedAtCreation) block before the serialization too if there is one. \n        if (mappedAtCreation) {\n            buffer-\u003emMapOffset \u003d 0;\n            buffer-\u003emMappedData \u003d ...;\n            buffer-\u003emMapSize \u003d ...;\n        }\n        \nWhich I think makes the logic much easier to read.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6504f4_2606bc10",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd3812c9_368865dc",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +333,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd3b63b1_a216ade3",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "This still has to be here for buffer destroyed before calling mapAsync/unmap",
+      "parentUuid": "407a9304_83ef5f33",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "485d8544_2b96af76",
@@ -214,6 +364,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "nit: TBH the code will become simple enough that we don\u0027t need to delimitate steps anymore.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1910f1b_67cb82f6",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "485d8544_2b96af76",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -235,6 +403,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ffe9cb_2582ce4e",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e275e128_0596204e",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "640d2f6c_aae4caeb",
@@ -248,6 +434,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "nit: break is unnecessary after unreachable.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa87b69_f633313a",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "640d2f6c_aae4caeb",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -275,6 +479,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72f24d71_b9faf2f6",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "mWriteHandle could be nullptr if buffer is destroyed before unmap. I\u0027ve added a comment.",
+      "parentUuid": "959823f4_a5a980b4",
+      "range": {
+        "startLine": 343,
+        "startChar": 28,
+        "endLine": 343,
+        "endChar": 54
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b93e568_14c2a506",
@@ -288,6 +516,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "This can be done after the serialization, if (mState \u003d\u003d MappedAtCreation) and the mMappedData could be just set at OnMapAsyncCallback so that we have the guarantee (mMappedData !\u003d nullptr) \u003d\u003d (mState \u003d\u003d Unmapped)",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "105a240e_858f7a0c",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b93e568_14c2a506",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -315,6 +561,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e672d8_192ce76b",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b1f49f4_2bdb0073",
+      "range": {
+        "startLine": 408,
+        "startChar": 42,
+        "endLine": 408,
+        "endChar": 49
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d95b720_32599c23",
@@ -332,6 +602,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57489e01_c39d4428",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Back to use an enum class for MapRequestData::type",
+      "parentUuid": "4d95b720_32599c23",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17a29952_7bb413ba",
@@ -345,6 +633,30 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "I think this can be replaced by an enum like:\n\n  enum class State {\n      Unmapped,\n      MappedForRead,\n      MappedForWrite,\n      MappedAtCreation,\n  };",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da1bd256_c07da436",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "hmm I made some attempt change here seems that with only one state flag we cannot differentiate MapWrite + mappedAtCreation, and mappedAtCreation only here.\nWe destroy writeHandle on unmap only if usage doesn\u0027t include MapWrite and mappedAtCreation is true.",
+      "parentUuid": "17a29952_7bb413ba",
       "range": {
         "startLine": 90,
         "startChar": 0,
@@ -378,6 +690,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40666238_b37df2fd",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "serialize buffer is black box to me so i\u0027d like to validate deserializePointer (instead of an ASSERT)\noffset size mSize bound check is added.",
+      "parentUuid": "f693c0ac_ebcdd4aa",
+      "range": {
+        "startLine": 48,
+        "startChar": 80,
+        "endLine": 48,
+        "endChar": 93
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "649f36dd_ebb20465",
@@ -391,6 +727,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "Maybe we want to ASSERT that offset + size is in bounds, so we need to keep mSize. WDYT?\n\nSame for SerializeDataUpdate and ReadHandleImpl.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c5f7ef5_60f68a5f",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "649f36dd_ebb20465",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -414,6 +768,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7959cf60_0c8e63f9",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "I don\u0027t think we can tell the difference between MapWrite usage + mappedAtCreation and mappedAtCreation only with just buffer-\u003emapWriteState. They can be both at a BufferMapWriteState::MappedAtCreation stage (unleass we have BufferMapWriteState::MappedAtCreationOnly and BufferMapWriteState::MappedAtCreationWithWriteUsage, which doesn\u0027t look good)",
+      "parentUuid": "5c117027_bdf70a22",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "14bd17fd_61a7a257",
         "filename": "src/dawn_wire/server/ServerBuffer.cpp",
         "patchSetId": 42
@@ -425,6 +797,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "I think we need to have 1) narrowing checks for uint64_t to size_t, and then 2) a comparison that the sum of both doesn\u0027t overflow in an overflow-safe manner.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05ec8014_52bdea32",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14bd17fd_61a7a257",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -446,6 +836,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ad0bb7_3ba180b8",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4700fd21_4d6b0b8d",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18e03ae2_003ff19f",
@@ -459,6 +867,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "ditto",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c75fd7b5_a406e89b",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18e03ae2_003ff19f",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -480,6 +906,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "390ba669_13bf4d55",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4743cfee_3f761aa7",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4dfb298c_8bfad35c",
@@ -493,6 +937,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "[3]",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0daea96a_1377ced1",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4dfb298c_8bfad35c",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -514,6 +976,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7afeabb_ca9bc2e4",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61bde0ce_10c1d861",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6027d26_a151222a",
@@ -527,6 +1007,30 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "We need to validate the narrowing from uint64 to size_t prior to this call.",
+      "range": {
+        "startLine": 221,
+        "startChar": 79,
+        "endLine": 221,
+        "endChar": 93
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8ea07e6_8260adc8",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6027d26_a151222a",
       "range": {
         "startLine": 221,
         "startChar": 79,
@@ -556,6 +1060,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87ce8e42_b7434555",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Sorry I don\u0027t get this one. [State modifying function] is?",
+      "parentUuid": "22936717_fa517652",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61de3755_a2996f2a",
         "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
         "patchSetId": 42
@@ -567,6 +1089,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "I think we should validate that offset + size is in bounds (and be careful of overflows). Otherwise the client could send us bad data that overflows.\n\n\nMaybe add a comment in the Read/WriteHandle interfaces explaining that the Deserialize* methods must check for OOB, including overflows (because it is not done before calling them)",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73032504_d77fb0c1",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61de3755_a2996f2a",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -588,6 +1128,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3270ca7b_f069ed38",
+        "filename": "src/include/dawn_wire/WireServer.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Checking potential OOB, add mDataLength back.",
+      "parentUuid": "b40cecb1_d52b90c5",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3ed3d56_7e01b234",
@@ -601,6 +1159,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "nit: comment before the test to explain a bit better what it does.\n\nIsn\u0027t it test at [4] already though?",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f92e0c2_b2d01960",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "d3ed3d56_7e01b234",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -628,6 +1204,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e0609c6_4a3d7116",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ba7e0bf_a17a6a60",
+      "range": {
+        "startLine": 177,
+        "startChar": 27,
+        "endLine": 178,
+        "endChar": 17
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aabea788_7281b030",
@@ -641,6 +1241,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "[4]",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01d91a44_db23a608",
+        "filename": "src/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aabea788_7281b030",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -662,6 +1280,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09fc3376_1eb506ba",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b68eb8f_750596f1",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94bad003_a49c130f",
@@ -675,6 +1311,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "THis is mapped at creation so maybe we should use a usage that\u0027s not map so we better test mappedAtCreation-specific code.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "affdeb8f_8bb9c4b5",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 1,
+      "message": "But it unmap and map again so the usage should include a map usage?",
+      "parentUuid": "94bad003_a49c130f",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

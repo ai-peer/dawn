@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b4f36e_d8592066",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "a3a87b3f_2cf58369",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98253962_66ef3b52",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683d5226_c891103d",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 0,
+      "message": "EXPECT_NE(nullptr,...)",
+      "parentUuid": "98253962_66ef3b52",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6ff035b_900ce81c",
@@ -48,6 +84,41 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 0,
       "message": "ditto same as [5]?",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e617b53d_5f120e8f",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "b6ff035b_900ce81c",
+      "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19370d1e_9bfac5f1",
+        "filename": "src/tests/unittests/wire/WireDestroyObjectTests.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-03T01:44:13Z",
+      "side": 0,
+      "message": "We create handlers in buffer creation now and device cannot be destroyed at that time. so removing this.",
       "revId": "3194a08615c010ad0cd829f994da8ee7654f74cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
