@@ -16,6 +16,57 @@
       "message": "PTAL",
       "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41291838_8da61040",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:38:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "893beaa8_fa1219ab",
+        "filename": "src/tests/end2end/RenderAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:38:51Z",
+      "side": 1,
+      "message": "nit: comment before the test to explain what / why we test things",
+      "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b1fc0c9_b2a7543b",
+        "filename": "src/tests/end2end/RenderAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:38:51Z",
+      "side": 1,
+      "message": "nit: maybe call out that fragment outputs 1, 2, 3 are unused.",
+      "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
