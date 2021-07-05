@@ -283,6 +283,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6885f97f_647cae62",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "I\u0027m not sure about the need to optimize calling GetData() once vs. making the flow of code more clear (the \"set mMappedData on unmap of mapped at creation if ...\" is pretty unexpected). Either way seems ok for now if we know we are merging both types of handles in the future.\n\nI still have concerns about mixing serialization code and state-modifying logic. Maybe we could have mappedData declared at the top of the function and modified in the read/writeHandle creation code.",
+      "parentUuid": "1a704b66_24352574",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd3812c9_368865dc",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 42
@@ -347,6 +371,24 @@
       "side": 1,
       "message": "This still has to be here for buffer destroyed before calling mapAsync/unmap",
       "parentUuid": "407a9304_83ef5f33",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b85b3a1_77a6ef17",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "[6]",
+      "parentUuid": "fd3b63b1_a216ade3",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -669,6 +711,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d4650e9_e80ec2c2",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "Ah makes sense. I think it might still be possible to merge mIsMappedRead and mIsMappedWrite with a `MapRequestType mCurrentMapMode` something like that.",
+      "parentUuid": "da1bd256_c07da436",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f693c0ac_ebcdd4aa",
         "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
         "patchSetId": 42
@@ -780,6 +846,24 @@
       "side": 1,
       "message": "I don\u0027t think we can tell the difference between MapWrite usage + mappedAtCreation and mappedAtCreation only with just buffer-\u003emapWriteState. They can be both at a BufferMapWriteState::MappedAtCreation stage (unleass we have BufferMapWriteState::MappedAtCreationOnly and BufferMapWriteState::MappedAtCreationWithWriteUsage, which doesn\u0027t look good)",
       "parentUuid": "5c117027_bdf70a22",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9235e868_4d2cfe34",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "Makes sense, ok.",
+      "parentUuid": "7959cf60_0c8e63f9",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1078,6 +1162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5b50b0f1_ba55520a",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "state modifying code. Basically everything except:\n\n if (isSuccess \u0026\u0026 isRead) {\n      char* readHandleBuffer;\n      WIRE_TRY(serializeBuffer-\u003eNextN(cmd.readDataUpdateInfoLength, \u0026readHandleBuffer));\n      // The in-flight map request returned successfully.\n      bufferData-\u003ereadHandle-\u003eSerializeDataUpdate(readData, data-\u003eoffset, data-\u003esize, readHandleBuffer);\n }\n \nHaving stuff that modifies state in the serialization callback is brittle. For example what happens if we decide to check SerializeCommand to not call the callback when the extra size is 0 (so there is nothing else to serialize)?",
+      "parentUuid": "87ce8e42_b7434555",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61de3755_a2996f2a",
         "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
         "patchSetId": 42
@@ -1333,6 +1435,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1b87dc_68ee71cd",
+        "filename": "src/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 608,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "Whoops yeah 😊",
+      "parentUuid": "affdeb8f_8bb9c4b5",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51b02052_8829590f",
@@ -1346,6 +1466,24 @@
       "writtenOn": "2021-07-02T11:16:05Z",
       "side": 1,
       "message": "I didn\u0027t review this file yet.",
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7b3d2e_d7a1aa8e",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T08:57:26Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "51b02052_8829590f",
       "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
