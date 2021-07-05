@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1d3d63d_1cf6b03a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T14:46:29Z",
+      "side": 1,
+      "message": "PTAL, Austin FYI since he is OOO",
+      "revId": "1cf134f470d3181116421ad7a221df0b7a5e58a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
