@@ -37,6 +37,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8462703_408b8737",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:36:11Z",
+      "side": 1,
+      "message": "I think we also need to validate against the maximum workgroup \"volume\" kMaxComputeWorkgroupInvocations",
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de82b12_c6a1103d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:36:11Z",
+      "side": 1,
+      "message": "sorry the limit just changed because I made a mistake in the original WebGPU PR. See https://dawn-review.googlesource.com/c/dawn/+/56082/8/src/common/Constants.h",
+      "range": {
+        "startLine": 909,
+        "startChar": 54,
+        "endLine": 909,
+        "endChar": 89
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8a82518d_b887ba17",
         "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
         "patchSetId": 2
@@ -83,6 +123,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52e59391_84985988",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:36:11Z",
+      "side": 1,
+      "message": "nit: we should also check the other dimensions (since the limits are now different per dim) and volume.",
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d0e57b3_88a2002a",
         "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
         "patchSetId": 2
@@ -94,6 +151,30 @@
       "writtenOn": "2021-07-03T00:30:17Z",
       "side": 1,
       "message": "This isn\u0027t checking what I thought it would. I thought this limit would apply to the maximum in bytes for variables using the `workgroup` storage class. i.e. declared with var\u003cworkgroup\u003e.\n\nIt seems like the spec is very vague about this https://gpuweb.github.io/gpuweb/#dom-supported-limits-maxcomputeworkgroupstoragesize. \"maximum number of bytes used by..\" Used for what?\n\nIf this limit is what I think it should be, it would mean it refers to Vulkan\u0027s VkPhysicalDeviceLimits::maxComputeSharedMemorySize.\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkPhysicalDeviceLimits.html\n\nI think we need to clarify this in the spec. Corentin made that original spec PR, and he\u0027s using the limit with Vulkan\u0027s maxComputeSharedMemorySize in this CL https://dawn-review.googlesource.com/c/dawn/+/56082. So.. I think that\u0027s what it\u0027s supposed to be.",
+      "range": {
+        "startLine": 222,
+        "startChar": 35,
+        "endLine": 222,
+        "endChar": 68
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1af2e07_4952c89b",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-05T07:36:11Z",
+      "side": 1,
+      "message": "Uuuh sorry for the bad wording in the spec, I assumed we\u0027d clean it up later. I\u0027ll improve things.",
+      "parentUuid": "6d0e57b3_88a2002a",
       "range": {
         "startLine": 222,
         "startChar": 35,
