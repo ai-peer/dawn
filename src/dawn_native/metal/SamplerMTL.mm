@@ -88,7 +88,7 @@ namespace dawn_native { namespace metal {
         }
 
         mMtlSamplerState =
-            AcquireNSPRef([device->GetMTLDevice() newSamplerStateWithDescriptor:mtlDesc]);
+            AcquireNSPRef([device->GetMTLDevice() newSamplerStateWithDescriptor:mtlDesc]); // TODO
     }
 
     id<MTLSamplerState> Sampler::GetMTLSamplerState() {

@@ -359,7 +359,7 @@ namespace dawn_native { namespace metal {
         : TextureBase(device, descriptor, TextureState::OwnedInternal) {
         NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor(device, descriptor);
         mMtlTexture =
-            AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]);
+            AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()]); // TODO
         mMtlUsage = [*mtlDesc usage];
 
         if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
@@ -391,7 +391,7 @@ namespace dawn_native { namespace metal {
 
         mMtlTexture = AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
                                                                            iosurface:ioSurface
-                                                                               plane:plane]);
+                                                                               plane:plane]); // TODO
         mMtlUsage = [*mtlDesc usage];
 
         SetIsSubresourceContentInitialized(descriptor->isInitialized, GetAllSubresources());
@@ -662,7 +662,7 @@ namespace dawn_native { namespace metal {
                 AcquireNSPRef([mtlTexture newTextureViewWithPixelFormat:format
                                                             textureType:textureViewType
                                                                  levels:mipLevelRange
-                                                                 slices:arrayLayerRange]);
+                                                                 slices:arrayLayerRange]); // TODO
         }
     }
 

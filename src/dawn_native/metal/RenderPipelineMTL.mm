@@ -410,7 +410,7 @@ namespace dawn_native { namespace metal {
             NSError* error = nullptr;
             mMtlRenderPipelineState =
                 AcquireNSPRef([mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL
-                                                                        error:&error]);
+                                                                        error:&error]); // TODO
             if (error != nullptr) {
                 NSLog(@" error => %@", error);
                 return DAWN_INTERNAL_ERROR("Error creating rendering pipeline state");

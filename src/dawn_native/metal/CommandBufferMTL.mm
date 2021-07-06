@@ -239,7 +239,7 @@ namespace dawn_native { namespace metal {
             mtlDesc.storageMode = MTLStorageModePrivate;
             mtlDesc.sampleCount = 1;
 
-            return AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc]);
+            return AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc]); // TODO
         }
 
         void CopyIntoTrueResolveTarget(CommandRecordingContext* commandContext,

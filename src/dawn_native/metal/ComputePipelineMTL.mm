@@ -42,7 +42,7 @@ namespace dawn_native { namespace metal {
         mMtlComputePipelineState.Acquire([mtlDevice
             newComputePipelineStateWithFunction:computeData.function.Get()
                                           error:&error]);
-        if (error != nullptr) {
+        if (error != nullptr) { // TODO
             NSLog(@" error => %@", error);
             return DAWN_INTERNAL_ERROR("Error creating pipeline state");
         }

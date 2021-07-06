@@ -52,7 +52,7 @@ namespace dawn_native { namespace metal {
             id<MTLCounterSampleBuffer> counterSampleBuffer =
                 [device->GetMTLDevice() newCounterSampleBufferWithDescriptor:descriptor
                                                                        error:&error];
-            if (error != nullptr) {
+            if (error != nullptr) { // TODO?
                 const char* errorString = [error.localizedDescription UTF8String];
                 return DAWN_INTERNAL_ERROR(std::string("Error creating query set: ") + errorString);
             }
@@ -79,7 +79,7 @@ namespace dawn_native { namespace metal {
                     std::max(GetQueryCount() * sizeof(uint64_t), size_t(4u)));
                 mVisibilityBuffer = AcquireNSPRef([device->GetMTLDevice()
                     newBufferWithLength:bufferSize
-                                options:MTLResourceStorageModePrivate]);
+                                options:MTLResourceStorageModePrivate]); // TODO
                 break;
             }
             case wgpu::QueryType::PipelineStatistics:

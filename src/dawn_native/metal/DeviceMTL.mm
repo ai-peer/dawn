@@ -127,7 +127,7 @@ namespace dawn_native { namespace metal {
     MaybeError Device::Initialize() {
         InitTogglesFromDriver();
 
-        mCommandQueue.Acquire([*mMtlDevice newCommandQueue]);
+        mCommandQueue.Acquire([*mMtlDevice newCommandQueue]); // TODO
 
         if (GetAdapter()->GetSupportedExtensions().IsEnabled(Extension::TimestampQuery)) {
             // Make a best guess of timestamp period based on device vendor info, and converge it to
@@ -311,7 +311,7 @@ namespace dawn_native { namespace metal {
             // The autorelease pool may drain before the command buffer is submitted. Retain so it
             // stays alive.
             mCommandContext =
-                CommandRecordingContext(AcquireNSPRef([[*mCommandQueue commandBuffer] retain]));
+                CommandRecordingContext(AcquireNSPRef([[*mCommandQueue commandBuffer] retain])); // TODO?
         }
         return &mCommandContext;
     }
