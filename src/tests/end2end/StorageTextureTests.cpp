@@ -659,32 +659,35 @@ fn IsEqualTo(pixel : vec4<f32>, expected : vec4<f32>) -> bool {
 // valid on all backends. This test is a regression test for chromium:1061156 and passes by not
 // asserting or crashing.
 TEST_P(StorageTextureTests, BindGroupLayoutWithStorageTextureBindingType) {
-    // ReadOnly is a valid storage texture binding type to create a bind group
-    // layout.
-    {
-        wgpu::BindGroupLayoutEntry entry;
-        entry.binding = 0;
-        entry.visibility = wgpu::ShaderStage::Compute;
-        entry.storageTexture.access = wgpu::StorageTextureAccess::ReadOnly;
-        entry.storageTexture.format = wgpu::TextureFormat::R32Float;
-        wgpu::BindGroupLayoutDescriptor descriptor;
-        descriptor.entryCount = 1;
-        descriptor.entries = &entry;
-        device.CreateBindGroupLayout(&descriptor);
-    }
+    // ReadOnly and WriteOnly are valid storage texture binding types to create a bind group
+    // layout on appropriate texture view dimensions.
+    wgpu::StorageTextureAccess accesses[] = {
+        wgpu::StorageTextureAccess::ReadOnly,
+        wgpu::StorageTextureAccess::WriteOnly,
+    };
 
-    // WriteOnly is a valid storage texture binding type to create a bind group
-    // layout.
-    {
-        wgpu::BindGroupLayoutEntry entry;
-        entry.binding = 0;
-        entry.visibility = wgpu::ShaderStage::Compute;
-        entry.storageTexture.access = wgpu::StorageTextureAccess::WriteOnly;
-        entry.storageTexture.format = wgpu::TextureFormat::R32Float;
-        wgpu::BindGroupLayoutDescriptor descriptor;
-        descriptor.entryCount = 1;
-        descriptor.entries = &entry;
-        device.CreateBindGroupLayout(&descriptor);
+    // Cube and Cubemap can't be used as storage texture. 1D texture has not been implemented.
+    wgpu::TextureViewDimension validDimensions[] = {
+        wgpu::TextureViewDimension::e2D,
+        wgpu::TextureViewDimension::e2DArray,
+        wgpu::TextureViewDimension::e3D,
+    };
+
+    wgpu::BindGroupLayoutEntry entry;
+    wgpu::BindGroupLayoutDescriptor descriptor;
+    descriptor.entryCount = 1;
+    descriptor.entries = &entry;
+
+    entry.binding = 0;
+    entry.visibility = wgpu::ShaderStage::Compute;
+    entry.storageTexture.format = wgpu::TextureFormat::R32Float;
+
+    for (wgpu::StorageTextureAccess access : accesses) {
+        for (wgpu::TextureViewDimension dimension : validDimensions) {
+            entry.storageTexture.access = access;
+            entry.storageTexture.viewDimension = dimension;
+            device.CreateBindGroupLayout(&descriptor);
+        }
     }
 }
 
