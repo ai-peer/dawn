@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740978dd_e2ff1e0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-06T10:20:06Z",
+      "side": 1,
+      "message": "LGTM. Do we have a Bug ID for this?",
+      "revId": "eec011e951bc805c2c3aa27ce997429d5fc0331b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
