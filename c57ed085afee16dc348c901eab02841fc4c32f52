@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33918878_da0a968f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2021-07-07T05:07:39Z",
+      "side": 1,
+      "message": "Please review this change to extend Intel graphics driver build number to 2 fields.",
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
