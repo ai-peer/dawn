@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfff1b2a_1f7098df",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ca8a139_f8251f66",
+      "range": {
+        "startLine": 95,
+        "startChar": 38,
+        "endLine": 95,
+        "endChar": 66
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c5c1067_39a87f18",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "nit: this is always `true` in this branch and can be removed.",
+      "range": {
+        "startLine": 100,
+        "startChar": 16,
+        "endLine": 100,
+        "endChar": 48
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75f14d7_b8fbe091",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c5c1067_39a87f18",
       "range": {
         "startLine": 100,
         "startChar": 16,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a4e7bb3_64615845",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3436fe2_7d881594",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3dea68f5_b7d49cbf",
@@ -98,6 +164,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b45fbb96_8984cf04",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3dea68f5_b7d49cbf",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27229c0d_8a2d95d6",
@@ -111,6 +195,30 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "nit: has been?",
+      "range": {
+        "startLine": 317,
+        "startChar": 55,
+        "endLine": 317,
+        "endChar": 63
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a135d176_c55877f2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27229c0d_8a2d95d6",
       "range": {
         "startLine": 317,
         "startChar": 55,
@@ -163,6 +271,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5dfaf083_f5732c07",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "I think keep it will make offset\u003d0, mSize\u003d0, size\u003d0 still valid. We have a zero-sized test",
+      "parentUuid": "d9aa512a_49854163",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44f0180c_ebdfd453",
         "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
         "patchSetId": 47
@@ -174,6 +306,30 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "ditto offset \u003c\u003d mSize is sufficient for the overflow check.",
+      "range": {
+        "startLine": 86,
+        "startChar": 23,
+        "endLine": 86,
+        "endChar": 52
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b00381_11da61af",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "44f0180c_ebdfd453",
       "range": {
         "startLine": 86,
         "startChar": 23,
@@ -197,6 +353,24 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "ditto",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622528ab_3a69b3db",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "b674017e_cbc7decb",
       "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -248,6 +422,30 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 61,
+        "startChar": 20,
+        "endLine": 61,
+        "endChar": 57
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25a30c4c_64de9ff6",
+        "filename": "src/dawn_wire/server/ServerInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T20:53:24Z",
+      "side": 1,
+      "message": "ditto",
+      "parentUuid": "d4a67cd6_66ff3195",
       "range": {
         "startLine": 61,
         "startChar": 20,
