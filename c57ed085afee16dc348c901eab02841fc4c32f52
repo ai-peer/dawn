@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0758a878_169210f8",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2021-07-07T08:51:23Z",
+      "side": 1,
+      "message": "Each character in driver version component is decimal digit instead of hexadecimal. Otherwise we should have already translated each component in an hexadecimal way. Two other evidences:\n1) In Intel\u0027s official document https://www.intel.com/content/www/us/en/support/articles/000005654/graphics.html, it says \"For example, the build number for 30.0.101.2031 is 1012031. The build number for 27.20.100.9466 is 1009466.\"\n2) In ANGLE\u0027s implementation, driver version is stored as LARGE_INTEGER internally, and it also translates the character as decimal.",
+      "parentUuid": "33fa162d_fef15444",
+      "range": {
+        "startLine": 55,
+        "startChar": 50,
+        "endLine": 55,
+        "endChar": 55
+      },
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb08878d_174ffd41",
