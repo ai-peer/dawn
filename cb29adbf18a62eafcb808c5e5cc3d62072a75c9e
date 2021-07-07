@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b3d4160_4e4aff69",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-07T06:46:01Z",
+      "side": 0,
+      "message": "I feel like this is a validation test, and it is fully covered by tests in src/tests/unittests/validation/StorageTextureValidationTests.cpp. However, you discussed this at https://dawn-review.googlesource.com/c/dawn/+/16920/4/src/tests/end2end/StorageTextureTests.cpp#43 (That answer from Jiawei means we need incremental implementation on different backend at that time?).\n\nBut if you want to keep this test, I am totally OK.",
+      "revId": "cb29adbf18a62eafcb808c5e5cc3d62072a75c9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
