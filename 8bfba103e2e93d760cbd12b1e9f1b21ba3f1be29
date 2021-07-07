@@ -319,6 +319,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cb8104b_73a4bd30",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T22:51:12Z",
+      "side": 1,
+      "message": "Yep it it valid.\n* offset is a multiple of 8.\n* rangeSize is a multiple of 4.\n* offset + rangeSize is less or equal to this.[[size]]\n\nkeep it like this will make this case valid (correct); change to offset \u003e mSize will make this case invalid (incorrect)",
+      "parentUuid": "6726c2c7_c0fe6525",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44f0180c_ebdfd453",
         "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
         "patchSetId": 47
@@ -497,6 +521,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65a1f1c7_a25bedf6",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T22:51:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81af08ed_8ab62081",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5880703_3d07f9cb",
@@ -527,6 +569,54 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "nit: this now tests DataUpdate",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 0
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f31ea88_964be09e",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T22:51:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee5b9f01_4e6f24bd",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 451,
+        "endChar": 0
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8aa2816_1dec82dd",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-07T22:51:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee5b9f01_4e6f24bd",
       "range": {
         "startLine": 449,
         "startChar": 0,
