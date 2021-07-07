@@ -176,6 +176,92 @@
       "message": "Still working through this.",
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f418fb_0351b105",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3b9a5f87_2d755610",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c16eec4_00830540",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "I think we\u0027re missing coverage of size !\u003d 0 in both SetVertexBuffer and SetIndexBuffer.\n\nFor SetIndexBuffer you could define a struct IndexBuffer {wgpu::Buffer buffer, wgpu::IndexFormat format, offset \u003d 0, size \u003d 0} so that the function calls can be adapted with \n\nTestRenderPassDrawIndexed(pipeline, {indexBuffer, indexFormat}, vertexBufferList, 12, 5, 0, 0, 0, true);\n\nand more if we need to test the size:\n\nTestRenderPassDrawIndexed(pipeline, {indexBuffer, indexFormat, 0, 42}, vertexBufferList, 12, 5, 0, 0, 0, true);",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "552597cd_2557e25f",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "nit: storing references to a wgpu::Buffer is a bit scary because we don\u0027t control the lifetime of this struct. Copying wgpu::Buffer is a simpler addition of a reference and is cheap so we can do that.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce734fd3_105b9871",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "nit: stray comment?",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab8df8cf_f6d69563",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "It would be nice somehow to have coverage of cases with multiple \"vertex\" or \"instance\" stepModes. Right now it\u0027s not clear there needs to be a loop in Dawn. But maybe this is too annoying and could be done in the CTS. WDYT?",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

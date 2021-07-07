@@ -642,6 +642,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e585023_54864d9b",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "That works, but what I meant is that the tests always get the ComboRenderPipelineDescriptor, call CreateRenderPipeline with it an immediately forget about it. It would be simpler to just have CreateBasicRenderPipelineDescriptorWithInstance just be wgpu::RenderPipeline CreateRenderPipelineWithInstance(...)",
+      "parentUuid": "0b41f679_47426688",
+      "range": {
+        "startLine": 123,
+        "startChar": 82,
+        "endLine": 123,
+        "endChar": 83
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d822b938_66d18346",
         "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
         "patchSetId": 1
@@ -712,6 +736,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f895c3ac_ef3519d9",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "Ok, but now the shaders are hard-coded. I think we should dynamically generate the shaders based on the VertexBufferSpec so that we can easily test slots other than 0 and 3.",
+      "parentUuid": "803048b9_0caf68b0",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d0342bf_de8ad04d",
         "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
         "patchSetId": 1
@@ -741,6 +783,24 @@
       "side": 1,
       "message": "Currently the spec doesn\u0027t descript what if a buffer has no attribute, and when creating render pipeline in RenderPipelineBase::RenderPipelineBase, those buffer with zero attribute count are simply skipped and didn\u0027t get any record in pipeline object. In this case, I can\u0027t validate them.",
       "parentUuid": "0d0342bf_de8ad04d",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b924a151_03bb1fcf",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "The spec only talks about about vertex buffers and not attributes, so I think we should still validate if there\u0027s no attribute. We could implement it in Dawn as a follow-up, and add a non-normative note to the specification.",
+      "parentUuid": "344f70c7_06ad7728",
       "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1086,6 +1146,30 @@
       "side": 1,
       "message": "Here I use vertex buffer in the meaning of GPUVertexBufferLayout, which can be rather \"vertex\" step mode or \"instance\" step mode. But I do use VertexBuffer vs InstanceBuffer somewhere, and I am not sure how to name them.",
       "parentUuid": "c9b0cc65_670dd84d",
+      "range": {
+        "startLine": 287,
+        "startChar": 55,
+        "endLine": 287,
+        "endChar": 61
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90813858_1cb4b12d",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T12:29:01Z",
+      "side": 1,
+      "message": "Got it, current naming LGTM",
+      "parentUuid": "8edc3012_505bbf76",
       "range": {
         "startLine": 287,
         "startChar": 55,
