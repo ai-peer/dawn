@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27ba4874_f90d51a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:30:00Z",
+      "side": 1,
+      "message": "LGTM too, thanks for the test addition!",
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33fa162d_fef15444",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:30:00Z",
+      "side": 1,
+      "message": "nit: driver version components are stored as uint16_t, are they all supposed to actually be less than 10000? If that\u0027s not always true, we could multiply by 65536 to make sure we don\u0027t have two versions that end up with the same build number.",
+      "range": {
+        "startLine": 55,
+        "startChar": 50,
+        "endLine": 55,
+        "endChar": 55
+      },
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb08878d_174ffd41",
@@ -31,6 +71,24 @@
       "writtenOn": "2021-07-07T05:53:50Z",
       "side": 1,
       "message": "The return values are unified among -1, 0 and 1.",
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dceae1fd_9455966a",
+        "filename": "src/common/GPUInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:30:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "eb08878d_174ffd41",
       "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
