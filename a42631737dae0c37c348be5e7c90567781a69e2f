@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ae9c4b_5bad0425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-07T06:44:50Z",
+      "side": 1,
+      "message": "PTAL. Thanks!",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78e0643f_f676139b",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-07T06:44:50Z",
+      "side": 1,
+      "message": "Is GL/GLES backend important for WebGPU OT? If not, I may defer the implementation on GL/GLES.",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
