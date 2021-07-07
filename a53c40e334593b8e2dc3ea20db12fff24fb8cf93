@@ -16,6 +16,166 @@
       "message": "PTAL, thanks!",
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a56f86c4_4f945ce0",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 52
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2eb483f_ca1548e1",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "nit: kMaxVertexBufferArrayStride now.",
+      "range": {
+        "startLine": 115,
+        "startChar": 34,
+        "endLine": 115,
+        "endChar": 56
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7689f6_bd23d88a",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "nit: we can just do mIndexBufferSize now.",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 30
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "884135e4_4fdbc2e4",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "nit: this include doesn\u0027t seem used anymore.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee22481e_ab0e9296",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "nit: this is now unused.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "327f370d_b96a8b8c",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "nit: I think these are no longer used.",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 66
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e4a618_0803dad8",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "nit: I think we can just remove this comment, no need to keep the history of previous versions in the code.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9a5f87_2d755610",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T09:22:45Z",
+      "side": 1,
+      "message": "Still working through this.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
