@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3cb08034_51b886be",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T19:02:44Z",
+      "side": 1,
+      "message": "nit: better to be explicit here \"uint64_t\"",
+      "range": {
+        "startLine": 90,
+        "startChar": 12,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a56f86c4_4f945ce0",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 2
@@ -36,6 +59,29 @@
         "startChar": 30,
         "endLine": 92,
         "endChar": 52
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efc88a1a_65e5973b",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T19:02:44Z",
+      "side": 1,
+      "message": "uint64_t",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 16
       },
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -192,6 +238,29 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "3b9a5f87_2d755610",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a208efe3_4b198f7a",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T19:02:44Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
