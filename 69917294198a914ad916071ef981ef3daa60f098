@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2622fd32_05cb3d51",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T23:38:01Z",
+      "side": 1,
+      "message": "can we wrap ComPtr\u003cID3D11DeviceContext2\u003e in our own small class (maybe override the operator-\u003e so it looks like ComPtr) that does this workaround in its destructor?\n\nOr maybe like an 11on12Util that holds both the device and context and has the workaround in the destructor. Then, maybe we could have the bulk of the 11on12 stuff organized in their own files.",
+      "range": {
+        "startLine": 499,
+        "startChar": 8,
+        "endLine": 510,
+        "endChar": 41
+      },
+      "revId": "69917294198a914ad916071ef981ef3daa60f098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be1ee8a2_5ca025f4",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T23:38:01Z",
+      "side": 1,
+      "message": "can we forward declare D3D11on12ResourceCache and put it in a unique_ptr ?  then we can move the cache, it\u0027s implementation, and D3D11on12Resource to a separate file. It adds a lot public-facing stuff to D3D12Backend.h/cpp that Dawn embedders don\u0027t need to care about.",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "69917294198a914ad916071ef981ef3daa60f098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
