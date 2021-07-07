@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "005aab0b_9d976785",
+        "filename": "src/tests/end2end/RenderAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T22:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "893beaa8_fa1219ab",
+      "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b1fc0c9_b2a7543b",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-07-05T07:38:51Z",
       "side": 1,
       "message": "nit: maybe call out that fragment outputs 1, 2, 3 are unused.",
+      "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bd9e22a_ec9c834e",
+        "filename": "src/tests/end2end/RenderAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T22:42:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b1fc0c9_b2a7543b",
       "revId": "c25db3fa5b32d97ee937220432d4eb9b2324219d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
