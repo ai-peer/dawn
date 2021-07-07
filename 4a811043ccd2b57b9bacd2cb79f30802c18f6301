@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47eaf56e_f3740176",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002556
+      },
+      "writtenOn": "2021-07-07T05:53:50Z",
+      "side": 0,
+      "message": "There is a typo for \"schema\", and I also simplified the function name a bit.",
+      "revId": "4a811043ccd2b57b9bacd2cb79f30802c18f6301",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

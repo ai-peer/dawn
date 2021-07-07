@@ -16,6 +16,40 @@
       "message": "Please review this change to extend Intel graphics driver build number to 2 fields.",
       "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb08878d_174ffd41",
+        "filename": "src/common/GPUInfo.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002556
+      },
+      "writtenOn": "2021-07-07T05:53:50Z",
+      "side": 1,
+      "message": "The return values are unified among -1, 0 and 1.",
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63419af3_ee363664",
+        "filename": "src/tests/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1002556
+      },
+      "writtenOn": "2021-07-07T05:53:50Z",
+      "side": 1,
+      "message": "For some reason, related API is not used in current code, but I think we will need this in near future. Some very simple test cases were added to gate the conformance.",
+      "revId": "c57ed085afee16dc348c901eab02841fc4c32f52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
