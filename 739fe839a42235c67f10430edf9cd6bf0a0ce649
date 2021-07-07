@@ -307,6 +307,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b17ae8fd_5be499be",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T20:38:45Z",
+      "side": 1,
+      "message": "If it helps, I think we could also just remove mMappedData entirely, and instead access it using the handle, always. It\u0027s now a simple getter just like std::vector\u003cT\u003e::data().",
+      "parentUuid": "6885f97f_647cae62",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd3812c9_368865dc",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 42
