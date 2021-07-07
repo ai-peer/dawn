@@ -295,6 +295,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6726c2c7_c0fe6525",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T22:38:53Z",
+      "side": 1,
+      "message": "does WebGPU spec say offset\u003d0, mSize\u003d0, size\u003d0  is invalid? I think it should be valid",
+      "parentUuid": "5dfaf083_f5732c07",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44f0180c_ebdfd453",
         "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
         "patchSetId": 47

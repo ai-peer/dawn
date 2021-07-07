@@ -355,6 +355,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ae7b61c_381939cb",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 42
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-07T22:38:53Z",
+      "side": 1,
+      "message": "Ah, I missed the thing about changing mMappedData upon unmap of mappedAtCreation for map read buffers. That\u0027s a good reason to set mMappedData in MapAsync as Corentin originally suggested.\n\nWe probably don\u0027t want to remove mMappedData entirely because we need to have a switch statement inside GetConstMappedRange to determine if we want the read or write handle.\n\nFor ignoring mocks, check out MockProcTable::IgnoreAllReleaseCalls as an example. Basically you add an expectation for any number of calls.\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/src/dawn/mock_webgpu.cpp;l\u003d1014;drc\u003d20a144515820179ff476f6386d70f5eba83f152a;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "97308dd5_1f45df9d",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 41
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd3812c9_368865dc",
         "filename": "src/dawn_wire/client/Buffer.cpp",
         "patchSetId": 42
