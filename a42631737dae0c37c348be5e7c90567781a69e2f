@@ -18,6 +18,91 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee5aa773_95df0c47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:20:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa3965b_546bc4f8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:20:35Z",
+      "side": 1,
+      "message": "I think this is showing another time that we need to add this validation to the spec and Dawn because there is no MostDetailedMip member: https://github.com/gpuweb/gpuweb/issues/1576",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e46ca4_c91efc1a",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:20:35Z",
+      "side": 1,
+      "message": "nit: Maybe we could pass the viewDimension as an argument.\n\nAlso don\u0027t we need to update the shader below for 3D cases?",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ea0d5d7_649aa7e2",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:20:35Z",
+      "side": 1,
+      "message": "nit: ViewDimensionToTextureDimension?\n\nAlso you used a similar thing in the previous CL, maybe we could factor that in TextureFormatUtils? (and it could be renamed TextureUtils, but no need to do the rename in this CL).",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eecb1bb_c834a7bf",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:20:35Z",
+      "side": 1,
+      "message": "Isn\u0027t the check for IsOpenGL || IsOpenGLES sufficient?",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78e0643f_f676139b",
@@ -31,6 +116,24 @@
       "writtenOn": "2021-07-07T06:44:50Z",
       "side": 1,
       "message": "Is GL/GLES backend important for WebGPU OT? If not, I may defer the implementation on GL/GLES.",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2dd92be_17503b03",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-07T08:20:35Z",
+      "side": 1,
+      "message": "We should definitely defer.",
+      "parentUuid": "78e0643f_f676139b",
       "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
