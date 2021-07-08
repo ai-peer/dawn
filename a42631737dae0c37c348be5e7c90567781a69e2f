@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19af365a_2b354025",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T20:45:40Z",
+      "side": 1,
+      "message": "Done.\n\nAnd I added a new test for 2DArray/3D read-write storage textures, which is very like tests for 3DArray/3D read-only and write-only storage textures",
+      "parentUuid": "c16fdc14_be1b1b7d",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ea0d5d7_649aa7e2",
