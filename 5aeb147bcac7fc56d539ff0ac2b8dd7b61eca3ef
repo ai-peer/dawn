@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd620199_e3c80096",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 965,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T21:55:42Z",
+      "side": 1,
+      "message": "probably should use dawn::LogMessage in common/Log.h",
+      "revId": "5aeb147bcac7fc56d539ff0ac2b8dd7b61eca3ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
