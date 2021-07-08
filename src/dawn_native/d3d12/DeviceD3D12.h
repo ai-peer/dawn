@@ -124,13 +124,14 @@ namespace dawn_native { namespace d3d12 {
 
         Ref<TextureBase> CreateExternalTexture(const TextureDescriptor* descriptor,
                                                ComPtr<ID3D12Resource> d3d12Texture,
+                                               ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                ExternalMutexSerial acquireMutexKey,
                                                ExternalMutexSerial releaseMutexKey,
                                                bool isSwapChainTexture,
                                                bool isInitialized);
-        ResultOrError<ComPtr<IDXGIKeyedMutex>> CreateKeyedMutexForTexture(
-            ID3D12Resource* d3d12Resource);
-        void ReleaseKeyedMutexForTexture(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
+
+        ComPtr<ID3D11On12Device> GetOrCreateD3D11on12Device();
+        void ReleaseD3D11on12Device();
 
         void InitTogglesFromDriver();
 
