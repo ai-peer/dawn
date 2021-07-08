@@ -457,6 +457,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfd8643_2de5a000",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-08T02:35:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00e9e49e_ff27ccbe",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4a67cd6_66ff3195",
@@ -556,6 +574,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9edce72c_b8fccc04",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-08T02:35:20Z",
+      "side": 1,
+      "message": "Add new tests for explicit wgpuBufferDestroy",
+      "parentUuid": "e5880703_3d07f9cb",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee5b9f01_4e6f24bd",
@@ -644,6 +680,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4780dc4d_0bb5847f",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-08T02:35:20Z",
+      "side": 1,
+      "message": "Seems it\u0027s because Server::HandleCommandsImpl will early return on failed deserialize command, so the unmap command is not processed.\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/win-Debug/gen/third_party/dawn/src/dawn_wire/server/ServerHandlers_autogen.cpp;l\u003d2421?q\u003dServer::HandleCommandsImpl\u0026ss\u003dchromium\n\nI should add a comment here.",
+      "parentUuid": "fa5f1fdc_35e06a55",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48fa68dd_2cd73556",
@@ -657,6 +711,24 @@
       "writtenOn": "2021-07-05T08:57:26Z",
       "side": 1,
       "message": "Maybe it\u0027s worth adding a test that checks that the write handle is not destroyed (in neither client and server) if the buffer is mappedAtCreation and MAP_WRITE.",
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c08296d_9e0e96ab",
+        "filename": "src/tests/unittests/wire/WireMemoryTransferServiceTests.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-08T02:35:20Z",
+      "side": 1,
+      "message": "Add a mappedAtCreation + MapRead and a mappedAtCreation + MapWrite test",
+      "parentUuid": "48fa68dd_2cd73556",
       "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
