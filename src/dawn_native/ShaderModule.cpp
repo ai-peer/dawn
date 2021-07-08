@@ -1124,12 +1124,6 @@ namespace dawn_native {
             newWgslCode = generator.result();
             newWgslDesc.source = newWgslCode.c_str();
 
-            if (device->IsToggleEnabled(Toggle::DumpTranslatedShaders)) {
-                std::ostringstream dumpedMsg;
-                dumpedMsg << "// Dumped generated WGSL" << std::endl << newWgslCode;
-                device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
-            }
-
             spirvDesc = nullptr;
             wgslDesc = &newWgslDesc;
         }
@@ -1152,6 +1146,12 @@ namespace dawn_native {
             }
         } else if (wgslDesc) {
             auto tintSource = std::make_unique<TintSource>("", wgslDesc->source);
+
+            if (device->IsToggleEnabled(Toggle::DumpTranslatedShaders)) {
+                std::ostringstream dumpedMsg;
+                dumpedMsg << "// Dumped WGSL:" << std::endl << wgslDesc->source;
+                device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+            }
 
             tint::Program program;
             DAWN_TRY_ASSIGN(program, ParseWGSL(&tintSource->file, outMessages));
