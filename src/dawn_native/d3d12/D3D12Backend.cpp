@@ -20,6 +20,7 @@
 #include "common/Log.h"
 #include "common/Math.h"
 #include "common/SwapChainUtils.h"
+#include "dawn_native/d3d12/D3D11on12Util.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/NativeSwapChainImplD3D12.h"
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
@@ -63,7 +64,10 @@ namespace dawn_native { namespace d3d12 {
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount) {
         ASSERT(descriptor->nextInChain == nullptr);
+        mD3D11on12ResourceCache = std::make_unique<D3D11on12ResourceCache>();
     }
+
+    ExternalImageDXGI::~ExternalImageDXGI() = default;
 
     WGPUTexture ExternalImageDXGI::ProduceTexture(
         WGPUDevice device,
@@ -84,10 +88,23 @@ namespace dawn_native { namespace d3d12 {
         textureDescriptor.mipLevelCount = mMipLevelCount;
         textureDescriptor.sampleCount = mSampleCount;
 
+        // We use IDXGIKeyedMutexes to synchronize access between D3D11 and D3D12. D3D11/12 fences
+        // are a viable alternative but are, unfortunately, not available on all versions of Windows
+        // 10. Since D3D12 does not directly support keyed mutexes, we need to wrap the D3D12
+        // resource using 11on12 and QueryInterface the D3D11 representation for the keyed mutex.
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex =
+            mD3D11on12ResourceCache->GetOrCreateDXGIKeyedMutex(device, mD3D12Resource.Get());
+        if (dxgiKeyedMutex == nullptr) {
+            dawn::ErrorLog() << "Unable to create DXGI keyed mutex for external image";
+            return nullptr;
+        }
+
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
-            &textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
+            &textureDescriptor, mD3D12Resource, std::move(dxgiKeyedMutex),
+            ExternalMutexSerial(descriptor->acquireMutexKey),
             ExternalMutexSerial(descriptor->releaseMutexKey), descriptor->isSwapChainTexture,
             descriptor->isInitialized);
+
         return reinterpret_cast<WGPUTexture>(texture.Detach());
     }
 

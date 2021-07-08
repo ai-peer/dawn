@@ -421,15 +421,16 @@ namespace dawn_native { namespace d3d12 {
     ResultOrError<Ref<Texture>> Texture::CreateExternalImage(Device* device,
                                                              const TextureDescriptor* descriptor,
                                                              ComPtr<ID3D12Resource> d3d12Texture,
+                                                             ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                              ExternalMutexSerial acquireMutexKey,
                                                              ExternalMutexSerial releaseMutexKey,
                                                              bool isSwapChainTexture,
                                                              bool isInitialized) {
         Ref<Texture> dawnTexture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
-        DAWN_TRY(dawnTexture->InitializeAsExternalTexture(descriptor, std::move(d3d12Texture),
-                                                          acquireMutexKey, releaseMutexKey,
-                                                          isSwapChainTexture));
+        DAWN_TRY(dawnTexture->InitializeAsExternalTexture(
+            descriptor, std::move(d3d12Texture), std::move(dxgiKeyedMutex), acquireMutexKey,
+            releaseMutexKey, isSwapChainTexture));
 
         // Importing a multi-planar format must be initialized. This is required because
         // a shared multi-planar format cannot be initialized by Dawn.
@@ -455,14 +456,10 @@ namespace dawn_native { namespace d3d12 {
 
     MaybeError Texture::InitializeAsExternalTexture(const TextureDescriptor* descriptor,
                                                     ComPtr<ID3D12Resource> d3d12Texture,
+                                                    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                     ExternalMutexSerial acquireMutexKey,
                                                     ExternalMutexSerial releaseMutexKey,
                                                     bool isSwapChainTexture) {
-        Device* dawnDevice = ToBackend(GetDevice());
-
-        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
-        DAWN_TRY_ASSIGN(dxgiKeyedMutex, dawnDevice->CreateKeyedMutexForTexture(d3d12Texture.Get()));
-
         DAWN_TRY(CheckHRESULT(dxgiKeyedMutex->AcquireSync(uint64_t(acquireMutexKey), INFINITE),
                               "D3D12 acquiring shared mutex"));
 
@@ -578,7 +575,6 @@ namespace dawn_native { namespace d3d12 {
 
         if (mDxgiKeyedMutex != nullptr) {
             mDxgiKeyedMutex->ReleaseSync(uint64_t(mReleaseMutexKey));
-            device->ReleaseKeyedMutexForTexture(std::move(mDxgiKeyedMutex));
         }
     }
 
