@@ -948,6 +948,23 @@ void DawnTestBase::SetUp() {
         glfwMakeContextCurrent(gTestEnv->GetOpenGLESWindow());
     }
 #endif  // defined(DAWN_ENABLE_BACKEND_OPENGLES)
+
+    device.SetLoggingCallback(
+        [](WGPULoggingType type, char const* message, void*) {
+            const char* severity = "";
+            switch (type) {
+                default:
+                    break;
+                case WGPULoggingType_Warning:
+                    severity = "WARNING: ";
+                    break;
+                case WGPULoggingType_Error:
+                    severity = "ERROR: ";
+                    break;
+            }
+            std::cout << severity << message << std::endl;
+        },
+        nullptr);
 }
 
 void DawnTestBase::TearDown() {
