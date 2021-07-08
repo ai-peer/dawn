@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "710e96f7_08a69d5e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-08T19:55:53Z",
+      "side": 1,
+      "message": "Hmm. I couldn\u0027t use ComPtr if we wrap it - it would need to inherit IUnknown which adds another QI.\n\nYou would think ~ID3D11DeviceContext2 would do this already \u003d/",
+      "parentUuid": "2622fd32_05cb3d51",
+      "range": {
+        "startLine": 499,
+        "startChar": 8,
+        "endLine": 510,
+        "endChar": 41
+      },
+      "revId": "69917294198a914ad916071ef981ef3daa60f098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be1ee8a2_5ca025f4",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 15
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-07T23:38:01Z",
       "side": 1,
       "message": "can we forward declare D3D11on12ResourceCache and put it in a unique_ptr ?  then we can move the cache, it\u0027s implementation, and D3D11on12Resource to a separate file. It adds a lot public-facing stuff to D3D12Backend.h/cpp that Dawn embedders don\u0027t need to care about.",
+      "range": {
+        "startLine": 121,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "69917294198a914ad916071ef981ef3daa60f098",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e7e817_ab035f76",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-08T19:55:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be1ee8a2_5ca025f4",
       "range": {
         "startLine": 121,
         "startChar": 8,
