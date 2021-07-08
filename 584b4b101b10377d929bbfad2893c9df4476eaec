@@ -39,6 +39,30 @@
       },
       "revId": "584b4b101b10377d929bbfad2893c9df4476eaec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5c7d533_bef1bce6",
+        "filename": "src/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 692,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T06:19:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "381c5e40_53bd33a7",
+      "range": {
+        "startLine": 692,
+        "startChar": 12,
+        "endLine": 692,
+        "endChar": 33
+      },
+      "revId": "584b4b101b10377d929bbfad2893c9df4476eaec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
