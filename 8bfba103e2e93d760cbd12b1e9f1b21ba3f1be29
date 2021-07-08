@@ -473,6 +473,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "452ba0a2_63668041",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-08T19:27:11Z",
+      "side": 1,
+      "message": "...I think you are right. The latter part will guard against size \u003d\u003d 0 when offset \u003d\u003d mSize. Fixed",
+      "parentUuid": "016cb7cd_602c6715",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44f0180c_ebdfd453",
