@@ -677,7 +677,10 @@ dawn_component("dawn_native") {
   ]
 
   if (dawn_enable_d3d12) {
-    sources += [ "d3d12/D3D12Backend.cpp" ]
+    sources += [
+      "d3d12/D3D11on12Util.cpp",
+      "d3d12/D3D12Backend.cpp",
+    ]
   }
   if (dawn_enable_metal) {
     sources += [ "metal/MetalBackend.mm" ]

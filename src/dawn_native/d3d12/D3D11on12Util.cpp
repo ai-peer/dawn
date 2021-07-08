@@ -1,0 +1,148 @@
+// Copyright 2021 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// D3D12Backend.cpp: contains the definition of symbols exported by D3D12Backend.h so that they
+// can be compiled twice: once export (shared library), once not exported (static library)
+
+#include "dawn_native/d3d12/D3D11on12Util.h"
+
+#include "common/HashUtils.h"
+#include "common/Log.h"
+#include "dawn_native/d3d12/DeviceD3D12.h"
+
+namespace dawn_native { namespace d3d12 {
+
+    D3D11on12ResourceCacheEntry::D3D11on12ResourceCacheEntry(
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+        ComPtr<ID3D11On12Device> d3d11On12Device)
+        : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)), mD3D11on12Device(std::move(d3d11On12Device)) {
+    }
+
+    D3D11on12ResourceCacheEntry::D3D11on12ResourceCacheEntry(
+        ComPtr<ID3D11On12Device> d3d11On12Device)
+        : mD3D11on12Device(std::move(d3d11On12Device)) {
+    }
+
+    D3D11on12ResourceCacheEntry::~D3D11on12ResourceCacheEntry() {
+        if (mDXGIKeyedMutex == nullptr) {
+            return;
+        }
+
+        ComPtr<ID3D11Resource> d3d11Resource;
+        if (FAILED(mDXGIKeyedMutex.As(&d3d11Resource))) {
+            return;
+        }
+
+        ASSERT(mD3D11on12Device != nullptr);
+
+        ID3D11Resource* d3d11ResourceRaw = d3d11Resource.Get();
+        mD3D11on12Device->ReleaseWrappedResources(&d3d11ResourceRaw, 1);
+
+        d3d11Resource.Reset();
+        mDXGIKeyedMutex.Reset();
+
+        // This 11on12 resource could outlive the Dawn device used to create it.
+        // Until the Dawn device destructs and calls ReleaseD3D11on12Device(),
+        // it cannot properly release. To ensure 11on12 does not leak any resources,
+        // flush the 11on12 device in both places.
+        ComPtr<ID3D11Device> d3d11Device;
+        if (FAILED(mD3D11on12Device.As(&d3d11Device))) {
+            return;
+        }
+
+        ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+        d3d11Device->GetImmediateContext(&d3d11DeviceContext);
+
+        ASSERT(d3d11DeviceContext != nullptr);
+
+        ComPtr<ID3D11DeviceContext2> d3d11DeviceContext2;
+        if (FAILED(d3d11DeviceContext.As(&d3d11DeviceContext2))) {
+            return;
+        }
+
+        d3d11DeviceContext2->TiledResourceBarrier(nullptr, nullptr);
+        d3d11DeviceContext2->Flush();
+    }
+
+    Microsoft::WRL::ComPtr<IDXGIKeyedMutex> D3D11on12ResourceCacheEntry::GetDXGIKeyedMutex() {
+        ASSERT(mDXGIKeyedMutex != nullptr);
+        return mDXGIKeyedMutex;
+    }
+
+    size_t D3D11on12ResourceCacheEntry::HashFunc::operator()(
+        const std::unique_ptr<D3D11on12ResourceCacheEntry>& a) const {
+        size_t hash = 0;
+        HashCombine(&hash, a->mD3D11on12Device.Get());
+        return hash;
+    }
+
+    bool D3D11on12ResourceCacheEntry::EqualityFunc::operator()(
+        const std::unique_ptr<D3D11on12ResourceCacheEntry>& a,
+        const std::unique_ptr<D3D11on12ResourceCacheEntry>& b) const {
+        return a->mD3D11on12Device == b->mD3D11on12Device;
+    }
+
+    ComPtr<IDXGIKeyedMutex> D3D11on12ResourceCache::GetOrCreateDXGIKeyedMutex(
+        WGPUDevice device,
+        ID3D12Resource* d3d12Resource) {
+        Device* backendDevice = reinterpret_cast<Device*>(device);
+        // The Dawn and 11on12 device share the same D3D12 command queue whereas this external image
+        // could be accessed/produced with multiple Dawn devices. To avoid cross-queue sharing
+        // restrictions, the 11 wrapped resource is forbidden to be shared between Dawn devices by
+        // using the 11on12 device as the cache key.
+        ComPtr<ID3D11On12Device> d3d11on12Device = backendDevice->GetOrCreateD3D11on12Device();
+        if (d3d11on12Device == nullptr) {
+            dawn::ErrorLog() << "Unable to create 11on12 device for external image";
+            return nullptr;
+        }
+
+        std::unique_ptr<D3D11on12ResourceCacheEntry> blueprint =
+            std::make_unique<D3D11on12ResourceCacheEntry>(d3d11on12Device);
+        auto iter = mCache.find(blueprint);
+        if (iter != mCache.end()) {
+            return (*iter)->GetDXGIKeyedMutex();
+        }
+
+        ComPtr<ID3D11Texture2D> d3d11Texture;
+        D3D11_RESOURCE_FLAGS resourceFlags;
+        resourceFlags.BindFlags = 0;
+        resourceFlags.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
+        resourceFlags.CPUAccessFlags = 0;
+        resourceFlags.StructureByteStride = 0;
+        if (FAILED(d3d11on12Device->CreateWrappedResource(
+                d3d12Resource, &resourceFlags, D3D12_RESOURCE_STATE_COMMON,
+                D3D12_RESOURCE_STATE_COMMON, IID_PPV_ARGS(&d3d11Texture)))) {
+            return nullptr;
+        }
+
+        ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+        if (FAILED(d3d11Texture.As(&dxgiKeyedMutex))) {
+            return nullptr;
+        }
+
+        // Keep this cache from growing unbounded.
+        if (mCache.size() > kMaxD3D11on12ResourceCacheSize) {
+            mCache.clear();
+        }
+
+        std::unique_ptr<D3D11on12ResourceCacheEntry> entry =
+            std::make_unique<D3D11on12ResourceCacheEntry>(dxgiKeyedMutex,
+                                                          std::move(d3d11on12Device));
+
+        mCache.insert(std::move(entry));
+
+        return dxgiKeyedMutex;
+    }
+
+}}  // namespace dawn_native::d3d12
