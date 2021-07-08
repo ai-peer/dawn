@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c1f7ed4_574a8a5d",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1198,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T07:02:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bfa3965b_546bc4f8",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9e46ca4_c91efc1a",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-07-07T08:20:35Z",
       "side": 1,
       "message": "nit: Maybe we could pass the viewDimension as an argument.\n\nAlso don\u0027t we need to update the shader below for 3D cases?",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4722b6d_4e1d1dad",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T07:02:33Z",
+      "side": 1,
+      "message": "Parameter is2DArray is not used at all in tests. So I didn\u0027t add viewDimension as an argument. \n\nI read change log history, the original patch to add function CommonReadWriteTestCode() is at https://dawn-review.googlesource.com/c/dawn/+/23040. It didn\u0027t use is2DArray parameter. This file was revised after that patch and function CommonReadWriteTestCode() was revised too as a part of other changes, but is2DArray argument is not used at any time even considering all changes history. Maybe we can remove this argument. Alternatively, we can add tests to use is2DArray argument for 2DArray textures, then expand to 3D textures (add viewDimension as an argument as you suggested). WDYT?",
+      "parentUuid": "f9e46ca4_c91efc1a",
       "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fea9c6c4_85d5659a",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 464,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T07:02:33Z",
+      "side": 1,
+      "message": "Function renaming is done.\n\nI will submit a code refactoring patch to put this function into TextureFormatUtils, and rename TextureFormatUtils to TextureUtils as well.",
+      "parentUuid": "6ea0d5d7_649aa7e2",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7eecb1bb_c834a7bf",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-07-07T08:20:35Z",
       "side": 1,
       "message": "Isn\u0027t the check for IsOpenGL || IsOpenGLES sufficient?",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d782a0ea_151884fc",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1027,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T07:02:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eecb1bb_c834a7bf",
       "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -134,6 +206,24 @@
       "side": 1,
       "message": "We should definitely defer.",
       "parentUuid": "78e0643f_f676139b",
+      "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b96689f0_0d250edf",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-08T07:02:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f2dd92be_17503b03",
       "revId": "a42631737dae0c37c348be5e7c90567781a69e2f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
