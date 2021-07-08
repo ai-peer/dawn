@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc797a96_ae537e7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 49
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c90a83b8_0980bc62",
+        "filename": "dawn_wire.json",
+        "patchSetId": 49
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "uint64_t",
+      "range": {
+        "startLine": 23,
+        "startChar": 49,
+        "endLine": 23,
+        "endChar": 57
+      },
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29163c04_2d7fdd9d",
+        "filename": "dawn_wire.json",
+        "patchSetId": 49
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "uint64_t",
+      "range": {
+        "startLine": 92,
+        "startChar": 49,
+        "endLine": 92,
+        "endChar": 57
+      },
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8c06fe_efc476af",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "needs to be uint64_t too",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 16
+      },
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd089338_fd9646ab",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "also the key type of mRequests",
+      "range": {
+        "startLine": 191,
+        "startChar": 15,
+        "endLine": 191,
+        "endChar": 24
+      },
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7652207d_ad55d1a2",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "and this member, as well as anything on the server side",
+      "range": {
+        "startLine": 207,
+        "startChar": 12,
+        "endLine": 207,
+        "endChar": 25
+      },
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b57181f2_b6845a9c",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 49
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:55:22Z",
+      "side": 1,
+      "message": "nit: old comments",
+      "range": {
+        "startLine": 98,
+        "startChar": 7,
+        "endLine": 99,
+        "endChar": 40
+      },
+      "revId": "eb18b4e678f86fd7871f9ad8d5a79dd3c1fcd697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
