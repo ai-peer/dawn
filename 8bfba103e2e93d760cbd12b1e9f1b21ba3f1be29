@@ -385,6 +385,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2727da7b_92f19efd",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-08T19:00:49Z",
+      "side": 1,
+      "message": "How will it make the case invalid? If the condition is\n\n  (offset \u003e mSize) || (size \u003e mSize - offset) \n  (0 \u003e 0) || (0 \u003e 0 + 0)\n  false || false\n  false",
+      "parentUuid": "22af0dd4_ce3feb4e",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44f0180c_ebdfd453",
         "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
         "patchSetId": 47
