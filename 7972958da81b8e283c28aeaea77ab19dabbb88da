@@ -70,6 +70,30 @@
       },
       "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b02c9ebc_bf26c45e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1346,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-08T17:05:16Z",
+      "side": 1,
+      "message": "Removed support for the extension.",
+      "parentUuid": "6d8de064_33060c14",
+      "range": {
+        "startLine": 1339,
+        "startChar": 8,
+        "endLine": 1346,
+        "endChar": 9
+      },
+      "revId": "7972958da81b8e283c28aeaea77ab19dabbb88da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
