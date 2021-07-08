@@ -39,13 +39,15 @@ namespace dawn_native { namespace d3d12 {
       public:
         static ResultOrError<Ref<Texture>> Create(Device* device,
                                                   const TextureDescriptor* descriptor);
-        static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
-                                                               const TextureDescriptor* descriptor,
-                                                               ComPtr<ID3D12Resource> d3d12Texture,
-                                                               ExternalMutexSerial acquireMutexKey,
-                                                               ExternalMutexSerial releaseMutexKey,
-                                                               bool isSwapChainTexture,
-                                                               bool isInitialized);
+        static ResultOrError<Ref<Texture>> CreateExternalImage(
+            Device* device,
+            const TextureDescriptor* descriptor,
+            ComPtr<ID3D12Resource> d3d12Texture,
+            ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
+            ExternalMutexSerial acquireMutexKey,
+            ExternalMutexSerial releaseMutexKey,
+            bool isSwapChainTexture,
+            bool isInitialized);
         static ResultOrError<Ref<Texture>> Create(Device* device,
                                                   const TextureDescriptor* descriptor,
                                                   ComPtr<ID3D12Resource> d3d12Texture);
@@ -89,6 +91,7 @@ namespace dawn_native { namespace d3d12 {
         MaybeError InitializeAsInternalTexture();
         MaybeError InitializeAsExternalTexture(const TextureDescriptor* descriptor,
                                                ComPtr<ID3D12Resource> d3d12Texture,
+                                               ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                ExternalMutexSerial acquireMutexKey,
                                                ExternalMutexSerial releaseMutexKey,
                                                bool isSwapChainTexture);
