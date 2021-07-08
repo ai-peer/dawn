@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "479ac863_60c5fab2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 50
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-08T19:01:15Z",
+      "side": 1,
+      "message": "LGTM overall though, I don\u0027t want to block while OOO.",
+      "revId": "7e438cae67575370acbf38f0b9c21d5035766e99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
