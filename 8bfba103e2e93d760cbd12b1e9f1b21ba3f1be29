@@ -451,6 +451,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "016cb7cd_602c6715",
+        "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
+        "patchSetId": 47
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-08T19:06:19Z",
+      "side": 1,
+      "message": "I think we had a data race, see my previous comment.",
+      "parentUuid": "92607b8d_db8c6ccb",
+      "range": {
+        "startLine": 52,
+        "startChar": 20,
+        "endLine": 52,
+        "endChar": 51
+      },
+      "revId": "8bfba103e2e93d760cbd12b1e9f1b21ba3f1be29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44f0180c_ebdfd453",
         "filename": "src/dawn_wire/client/ClientInlineMemoryTransferService.cpp",
         "patchSetId": 47
