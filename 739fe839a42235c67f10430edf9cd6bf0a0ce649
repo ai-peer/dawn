@@ -805,6 +805,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a56d28a_6b31fece",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 42
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-08T19:05:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d4650e9_e80ec2c2",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 49
+      },
+      "revId": "739fe839a42235c67f10430edf9cd6bf0a0ce649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f693c0ac_ebcdd4aa",
