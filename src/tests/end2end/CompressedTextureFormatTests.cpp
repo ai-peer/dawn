@@ -1164,6 +1164,9 @@ class CompressedTextureWriteTextureTest : public CompressedTextureBCFormatTest {
 // Test WriteTexture to a 2D texture with all parameters non-default
 // with BC formats.
 TEST_P(CompressedTextureWriteTextureTest, Basic) {
+    // TODO(crbug.com/dawn/976): Failing on Linux Intel OpenGL drivers.
+    DAWN_SUPPRESS_TEST_IF(IsIntel() && IsOpenGL() && IsLinux());
+
     CopyConfig config;
     config.textureDescriptor.usage = kDefaultBCFormatTextureUsage;
     config.textureDescriptor.size = {20, 24, 1};
