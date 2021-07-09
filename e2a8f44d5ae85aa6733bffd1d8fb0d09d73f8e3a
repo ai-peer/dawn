@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6c42604_02341df5",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 17
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b1c359c_8ada57f6",
+      "range": {
+        "startLine": 233,
+        "startChar": 2,
+        "endLine": 234,
+        "endChar": 31
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4043bd6f_c25a0674",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-09T00:29:34Z",
       "side": 1,
       "message": "we already have the ID3D11DeviceContext2 from GetOrCreateD3D11on12Device. Can we pass it into construction of the cache entry?",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cafb36c_4e8abff7",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "For perf? QIs are super cheap and (now) called once per device. \n\nI suppose it makes it more explicit but it\u0027s also sharing more state then required. Do re-open if you feel strongly.",
+      "parentUuid": "4043bd6f_c25a0674",
       "range": {
         "startLine": 59,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64fa8695_2caed843",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5eb4abec_35c3a4f2",
+      "range": {
+        "startLine": 74,
+        "startChar": 8,
+        "endLine": 75,
+        "endChar": 37
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2307707c_9e135603",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-07-09T00:29:34Z",
       "side": 1,
       "message": "Worth a comment why we don\u0027t compare/hash the mDXGIKeyedMutex too",
+      "range": {
+        "startLine": 83,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 0
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d75f19_d2c9135e",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "Done (@ class D3D11on12ResourceCache).",
+      "parentUuid": "2307707c_9e135603",
       "range": {
         "startLine": 83,
         "startChar": 4,
@@ -127,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "73ed4e47_64bd3b73",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6e6b7d8_0ea27af0",
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7d3678e_695a818a",
@@ -140,6 +254,30 @@
       "writtenOn": "2021-07-09T00:29:34Z",
       "side": 1,
       "message": "maybe a basic LRU?",
+      "range": {
+        "startLine": 134,
+        "startChar": 8,
+        "endLine": 138,
+        "endChar": 0
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "584f42fe_c6edcaed",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "+1 but left a TODO so I can get more data.",
+      "parentUuid": "f7d3678e_695a818a",
       "range": {
         "startLine": 134,
         "startChar": 8,
@@ -173,6 +311,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5212e7c8_6e7cd16d",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c5d46cc_5b94aa37",
+      "range": {
+        "startLine": 70,
+        "startChar": 1,
+        "endLine": 71,
+        "endChar": 44
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26b0d6b4_e723e026",
@@ -186,6 +348,30 @@
       "writtenOn": "2021-07-09T00:29:34Z",
       "side": 1,
       "message": "nit:  \u003d default",
+      "range": {
+        "startLine": 70,
+        "startChar": 43,
+        "endLine": 72,
+        "endChar": 0
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea40cee4_fce5cbb7",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-09T16:44:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26b0d6b4_e723e026",
       "range": {
         "startLine": 70,
         "startChar": 43,
