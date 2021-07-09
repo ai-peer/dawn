@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7418e84_01612a53",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-07-09T19:07:55Z",
+      "side": 1,
+      "message": "Adding some suppressions to unblock Dawn roller.",
+      "revId": "3591e75900a0dc6196e093f4853e3b765e6cfd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
