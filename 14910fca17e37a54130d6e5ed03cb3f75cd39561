@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "646f04ed_00d2b4f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-07-09T21:37:42Z",
+      "side": 1,
+      "message": "Hm... Does the rubber stamp bot work here?",
+      "revId": "14910fca17e37a54130d6e5ed03cb3f75cd39561",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
