@@ -16,6 +16,23 @@
       "message": "This is a follow-up patch for https://dawn-review.googlesource.com/c/dawn/+/57160/2..6/src/tests/end2end/StorageTextureTests.cpp#b464. PTAL. Thanks. ",
       "revId": "8589df14483334cdf33dd86333790b6d3e7d4153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e5c4d00_536f11af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-09T02:34:39Z",
+      "side": 1,
+      "message": "LGTM. Adding Jiawei to reviewer and Corentin to CC. He\u0027s on vacation for a week.",
+      "revId": "8589df14483334cdf33dd86333790b6d3e7d4153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
