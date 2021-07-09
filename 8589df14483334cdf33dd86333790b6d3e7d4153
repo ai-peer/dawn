@@ -33,6 +33,24 @@
       "message": "LGTM. Adding Jiawei to reviewer and Corentin to CC. He\u0027s on vacation for a week.",
       "revId": "8589df14483334cdf33dd86333790b6d3e7d4153",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c48c479_68d2722f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-09T02:53:33Z",
+      "side": 1,
+      "message": "\u003e LGTM. Adding Jiawei to reviewer and Corentin to CC. He\u0027s on vacation for a week.\n\nGotcha.",
+      "parentUuid": "6e5c4d00_536f11af",
+      "revId": "8589df14483334cdf33dd86333790b6d3e7d4153",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
