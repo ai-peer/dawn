@@ -56,6 +56,30 @@
       },
       "revId": "48c204bec7df48a190644f6d9f1f8b04c97fa33a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0efa5a_05739c0a",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 18
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-12T16:34:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7700528_3cd9fe5b",
+      "range": {
+        "startLine": 233,
+        "startChar": 30,
+        "endLine": 234,
+        "endChar": 30
+      },
+      "revId": "48c204bec7df48a190644f6d9f1f8b04c97fa33a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

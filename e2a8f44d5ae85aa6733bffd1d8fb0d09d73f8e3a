@@ -136,6 +136,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07a6f03b_1c3a345a",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-12T16:34:56Z",
+      "side": 1,
+      "message": "Ah, SGTM.",
+      "parentUuid": "511fb93f_6485ee17",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eb4abec_35c3a4f2",
