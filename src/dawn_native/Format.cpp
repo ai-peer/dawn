@@ -162,6 +162,7 @@ namespace dawn_native {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = renderable;
+            internalFormat.isBlendable = sampleTypes & SampleTypeBit::Float;
             internalFormat.isCompressed = false;
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = supportsStorageUsage;
@@ -198,6 +199,7 @@ namespace dawn_native {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = true;
+            internalFormat.isBlendable = false;
             internalFormat.isCompressed = false;
             internalFormat.isSupported = true;
             internalFormat.supportsStorageUsage = false;
@@ -216,6 +218,7 @@ namespace dawn_native {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = true;
+            internalFormat.isBlendable = false;
             internalFormat.isCompressed = false;
             internalFormat.isSupported = false;
             internalFormat.supportsStorageUsage = false;
@@ -235,6 +238,7 @@ namespace dawn_native {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = false;
+            internalFormat.isBlendable = false;
             internalFormat.isCompressed = true;
             internalFormat.isSupported = isSupported;
             internalFormat.supportsStorageUsage = false;
@@ -256,6 +260,7 @@ namespace dawn_native {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.isRenderable = isRenderable;
+            internalFormat.isBlendable = false;
             internalFormat.isCompressed = false;
             internalFormat.isSupported = isSupported;
             internalFormat.supportsStorageUsage = false;
