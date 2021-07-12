@@ -90,6 +90,17 @@ namespace dawn_native { namespace vulkan {
     }
 #endif  // DAWN_PLATFORM_LINUX
 
+#if defined(DAWN_PLATFORM_FUCHSIA)
+    ExternalImageDescriptorFuchsia::ExternalImageDescriptorFuchsia()
+        : ExternalImageDescriptorVk(ExternalImageType::ZirconVMO) {
+    }
+
+    ExternalImageExportInfoFuchsia::ExternalImageExportInfoFuchsia()
+        : ExternalImageExportInfoVk(ExternalImageType::ZirconVMO) {
+    }
+
+#endif  // DAWN_PLATFORM_FUCHSIA
+
     WGPUTexture WrapVulkanImage(WGPUDevice cDevice, const ExternalImageDescriptorVk* descriptor) {
 #if defined(DAWN_PLATFORM_LINUX)
         switch (descriptor->type) {
@@ -105,7 +116,14 @@ namespace dawn_native { namespace vulkan {
             default:
                 return nullptr;
         }
-#else
+#elif defined(DAWN_PLATFORM_FUCHSIA)
+        const ExternalImageDescriptorFuchsia* vmoDescriptor =
+            static_cast<const ExternalImageDescriptorFuchsia*>(descriptor);
+        Device* device = reinterpret_cast<Device*>(cDevice);
+        TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+            vmoDescriptor, vmoDescriptor->memoryHandle, vmoDescriptor->waitHandles);
+        return reinterpret_cast<WGPUTexture>(texture);
+#else   // !DAWN_PLATFORM_FUCHSIA && !DAWN_PLATFORM_LINUX
         return nullptr;
 #endif  // DAWN_PLATFORM_LINUX
     }
@@ -129,7 +147,13 @@ namespace dawn_native { namespace vulkan {
             default:
                 return false;
         }
-#else
+#elif defined(DAWN_PLATFORM_FUCHSIA)
+        Texture* texture = reinterpret_cast<Texture*>(cTexture);
+        Device* device = ToBackend(texture->GetDevice());
+        ExternalImageExportInfoFuchsia* eventInfo = static_cast<ExternalImageExportInfoFuchsia*>(info);
+        return device->SignalAndExportExternalTexture(texture, desiredLayout, eventInfo,
+                                                      &eventInfo->semaphoreHandles);
+#else   // !DAWN_PLATFORM_FUCHSIA && !DAWN_PLATFORM_LINUX
         return false;
 #endif  // DAWN_PLATFORM_LINUX
     }

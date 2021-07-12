@@ -282,7 +282,7 @@ namespace dawn_native { namespace vulkan {
         PFN_vkImportSemaphoreFdKHR ImportSemaphoreFdKHR = nullptr;
         PFN_vkGetSemaphoreFdKHR GetSemaphoreFdKHR = nullptr;
 
-#if VK_USE_PLATFORM_FUCHSIA
+#if defined(VK_USE_PLATFORM_FUCHSIA)
         // VK_FUCHSIA_external_memory
         PFN_vkGetMemoryZirconHandleFUCHSIA GetMemoryZirconHandleFUCHSIA = nullptr;
         PFN_vkGetMemoryZirconHandlePropertiesFUCHSIA GetMemoryZirconHandlePropertiesFUCHSIA =

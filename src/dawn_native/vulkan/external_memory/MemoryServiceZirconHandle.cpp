@@ -12,6 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "common/vulkan_platform.h"
+#include <dawn_native/VulkanBackend.h>
+
 #include "common/Assert.h"
 #include "dawn_native/vulkan/AdapterVk.h"
 #include "dawn_native/vulkan/BackendVk.h"
@@ -19,6 +22,7 @@
 #include "dawn_native/vulkan/TextureVk.h"
 #include "dawn_native/vulkan/VulkanError.h"
 #include "dawn_native/vulkan/external_memory/MemoryService.h"
+
 
 namespace dawn_native { namespace vulkan { namespace external_memory {
 
@@ -60,8 +64,9 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         formatProperties.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
         formatProperties.pNext = &externalFormatProperties;
 
-        VkResult result = mDevice->fn.GetPhysicalDeviceImageFormatProperties2(
-            ToBackend(mDevice->GetAdapter())->GetPhysicalDevice(), &formatInfo, &formatProperties);
+        VkResult result = VkResult::WrapUnsafe(
+            mDevice->fn.GetPhysicalDeviceImageFormatProperties2(
+                ToBackend(mDevice->GetAdapter())->GetPhysicalDevice(), &formatInfo, &formatProperties));
 
         // If handle not supported, result == VK_ERROR_FORMAT_NOT_SUPPORTED
         if (result != VK_SUCCESS) {
@@ -83,14 +88,14 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
     ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
-        if (descriptor->type != ExternalImageType::OpaqueFD) {
-            return DAWN_VALIDATION_ERROR("ExternalImageDescriptor is not an OpaqueFD descriptor");
+        if (descriptor->type != ExternalImageType::ZirconVMO) {
+            return DAWN_VALIDATION_ERROR("ExternalImageDescriptor is not a Zircon VMO descriptor");
         }
-        const ExternalImageDescriptorOpaqueFD* opaqueFDDescriptor =
-            static_cast<const ExternalImageDescriptorOpaqueFD*>(descriptor);
+        const ExternalImageDescriptorFuchsia* fxDescriptor =
+            static_cast<const ExternalImageDescriptorFuchsia*>(descriptor);
 
-        MemoryImportParams params = {opaqueFDDescriptor->allocationSize,
-                                     opaqueFDDescriptor->memoryTypeIndex};
+        MemoryImportParams params = {fxDescriptor->allocationSize,
+                                     fxDescriptor->memoryTypeIndex};
         return params;
     }
 

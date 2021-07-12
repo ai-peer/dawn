@@ -21,7 +21,7 @@
 namespace dawn_native { namespace vulkan { namespace external_semaphore {
 
     Service::Service(Device* device) : mDevice(device) {
-        mSupported = device->GetDeviceInfo().hasExt(DeviceExt::ExternalSemaphoreZirconHandle);
+        mSupported = device->GetDeviceInfo().HasExt(DeviceExt::ExternalSemaphoreZirconHandle);
 
         // Early out before we try using extension functions
         if (!mSupported) {

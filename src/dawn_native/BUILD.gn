@@ -622,9 +622,6 @@ source_set("dawn_native_sources") {
       data_deps = [
         "//third_party/fuchsia-sdk:vulkan_base",
         "//third_party/fuchsia-sdk:vulkan_validation",
-
-        # NOTE: The line below is a work around for http://crbug.com/1001081
-        "//third_party/fuchsia-sdk/sdk:trace_engine",
       ]
     }
     if (enable_vulkan_validation_layers) {

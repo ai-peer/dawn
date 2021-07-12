@@ -22,6 +22,10 @@
 
 #include <vector>
 
+#if defined(__Fuchsia__)
+#include <zircon/types.h>
+#endif  // __Fuchsia__
+
 namespace dawn_native { namespace vulkan {
 
     DAWN_NATIVE_EXPORT VkInstance GetInstance(WGPUDevice device);
@@ -63,7 +67,7 @@ namespace dawn_native { namespace vulkan {
     };
 
 // Can't use DAWN_PLATFORM_LINUX since header included in both Dawn and Chrome
-#ifdef __linux__
+#if defined(__linux__)
 
         // Common properties of external images represented by FDs. On successful import the file
         // descriptor's ownership is transferred to the Dawn implementation and they shouldn't be
@@ -112,13 +116,36 @@ namespace dawn_native { namespace vulkan {
             ExternalImageExportInfoDmaBuf();
         };
 
-#endif  // __linux__
-
         // Exports a signal semaphore from a wrapped texture. This must be called on wrapped
         // textures before they are destroyed. On failure, returns -1
         // TODO(enga): Remove after updating Chromium to use ExportVulkanImage.
         DAWN_NATIVE_EXPORT int ExportSignalSemaphoreOpaqueFD(WGPUDevice cDevice,
                                                              WGPUTexture cTexture);
+
+#endif  // __linux__
+
+#if defined (__Fuchsia__)
+
+        struct DAWN_NATIVE_EXPORT ExternalImageDescriptorFuchsia : ExternalImageDescriptorVk {
+          public:
+            ExternalImageDescriptorFuchsia();
+
+            zx_handle_t memoryHandle;
+            std::vector<zx_handle_t> waitHandles;
+
+            VkDeviceSize allocationSize;
+            uint32_t memoryTypeIndex;
+        };
+
+        struct DAWN_NATIVE_EXPORT ExternalImageExportInfoFuchsia : ExternalImageExportInfoVk {
+          public:
+            ExternalImageExportInfoFuchsia();
+
+            // Contains the exported semaphore handles.
+            std::vector<zx_handle_t> semaphoreHandles;
+        };
+
+#endif  // __Fuchsia__
 
         // Imports external memory into a Vulkan image. Internally, this uses external memory /
         // semaphore extensions to import the image and wait on the provided synchronizaton
