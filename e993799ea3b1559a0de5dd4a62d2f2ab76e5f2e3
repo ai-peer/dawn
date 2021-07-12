@@ -69,6 +69,24 @@
       "message": "LGTM",
       "revId": "e993799ea3b1559a0de5dd4a62d2f2ab76e5f2e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2761043a_bb4f2312",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-12T16:44:54Z",
+      "side": 1,
+      "message": "I have already implemented 3D storage textures. So this change should be OK to merge. PTAL. Austin.",
+      "parentUuid": "d12063e3_5c686c05",
+      "revId": "e993799ea3b1559a0de5dd4a62d2f2ab76e5f2e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
