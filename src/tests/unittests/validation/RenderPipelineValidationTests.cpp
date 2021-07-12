@@ -148,6 +148,44 @@ TEST_F(RenderPipelineValidationTest, NonRenderableFormat) {
     }
 }
 
+// Tests that the color formats must be blendable when blending is enabled.
+// Those are renderable color formats with "float" capabilities in
+// https://gpuweb.github.io/gpuweb/#plain-color-formats
+TEST_F(RenderPipelineValidationTest, NonBlendableFormat) {
+    {
+        // Succeeds because RGBA8Unorm is blendable
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].blend = &descriptor.cBlends[0];
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+
+        device.CreateRenderPipeline(&descriptor);
+    }
+
+    {
+        // Fails because RGBA32Float is not blendable
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].blend = &descriptor.cBlends[0];
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA32Float;
+
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    {
+        // Succeeds because RGBA32Float is not blendable but blending is disabled
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.cTargets[0].blend = nullptr;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA32Float;
+
+        device.CreateRenderPipeline(&descriptor);
+    }
+}
+
 // Tests that the format of the color state descriptor must match the output of the fragment shader.
 TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
     constexpr uint32_t kNumTextureFormatBaseType = 3u;
