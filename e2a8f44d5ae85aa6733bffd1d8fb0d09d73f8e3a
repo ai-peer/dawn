@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "511fb93f_6485ee17",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-12T16:07:56Z",
+      "side": 1,
+      "message": "well, d3d12::Device::GetOrCreateD3D11on12Device queries and caches the ID3D11DeviceContext2 so that we can call ReleaseD3D11on12Device(mD3d11On12DeviceContext.Get()); later on.\n\nBut the D3D11on12ResourceCacheEntry::~D3D11on12ResourceCacheEntry queries the ID3D11DeviceContext2 on demand. I\u0027m just saying we should make it consistent. I don\u0027t think the device uses mD3d11On12DeviceContext for anything except the Release call",
+      "parentUuid": "6cafb36c_4e8abff7",
+      "range": {
+        "startLine": 59,
+        "startChar": 8,
+        "endLine": 73,
+        "endChar": 0
+      },
+      "revId": "e2a8f44d5ae85aa6733bffd1d8fb0d09d73f8e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5eb4abec_35c3a4f2",
         "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
         "patchSetId": 17

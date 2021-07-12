@@ -16,6 +16,46 @@
       "message": "Thanks @enga!",
       "revId": "48c204bec7df48a190644f6d9f1f8b04c97fa33a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2bfbeb5_6f420771",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-12T16:07:56Z",
+      "side": 1,
+      "message": "Rafael, please review too - Corentin is out for a couple more days.",
+      "revId": "48c204bec7df48a190644f6d9f1f8b04c97fa33a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7700528_3cd9fe5b",
+        "filename": "src/dawn_native/CMakeLists.txt",
+        "patchSetId": 18
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-12T16:07:56Z",
+      "side": 1,
+      "message": "whoops, and missing \" to close the starting quote",
+      "range": {
+        "startLine": 233,
+        "startChar": 30,
+        "endLine": 234,
+        "endChar": 30
+      },
+      "revId": "48c204bec7df48a190644f6d9f1f8b04c97fa33a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
