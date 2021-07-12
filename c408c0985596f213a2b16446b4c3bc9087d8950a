@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e72f3066_13622dcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-12T20:48:58Z",
+      "side": 1,
+      "message": "PTAL! Not sure if you were planning to do this, but I went ahead and implemented it. Waiting on the Tint roll though.",
+      "revId": "c408c0985596f213a2b16446b4c3bc9087d8950a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
