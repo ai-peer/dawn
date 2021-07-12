@@ -104,6 +104,23 @@
       "message": "LGTM",
       "revId": "e993799ea3b1559a0de5dd4a62d2f2ab76e5f2e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa50c228_df3bf2aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-12T17:51:24Z",
+      "side": 1,
+      "message": "Thanks for your review! Now WebGPU MVP related stuff for 3D texture has been done in Dawn project. ",
+      "revId": "e993799ea3b1559a0de5dd4a62d2f2ab76e5f2e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
