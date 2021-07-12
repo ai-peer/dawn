@@ -86,39 +86,49 @@ namespace dawn_native {
     namespace {
         struct LoggingCallbackTask : CallbackTask {
           public:
-            LoggingCallbackTask(wgpu::LoggingCallback loggingCallback,
+            using CallbackDescT =
+                std::weak_ptr<DeviceBase::DeviceCalllbackDescriptor<wgpu::LoggingCallback>>;
+
+            LoggingCallbackTask(CallbackDescT callbackDesc,
                                 WGPULoggingType loggingType,
-                                const char* message,
-                                void* userdata)
-                : mCallback(loggingCallback),
-                  mLoggingType(loggingType),
-                  mMessage(message),
-                  mUserdata(userdata) {
+                                const char* message)
+                : mCallbackDescriptor(callbackDesc), mLoggingType(loggingType), mMessage(message) {
                 // The parameter of constructor is the same as those of callback.
                 // Since the Finish() will be called in uncertain future in which time the message
                 // may already disposed, we must keep a local copy in the CallbackTask.
             }
 
             void Finish() override {
-                // Original direct call: mLoggingCallback(message, mLoggingUserdata)
-                // Do the same here, but with everything bound locally.
-                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+                // Acquire the corresponding callback descriptor and ensure it is valid.
+                auto callbackDesc = mCallbackDescriptor.lock();
+                if (callbackDesc) {
+                    if (callbackDesc->callback) {
+                        callbackDesc->callback(mLoggingType, mMessage.c_str(),
+                                               callbackDesc->userdata);
+                    }
+                }
             }
 
             void HandleShutDown() override {
-                // Do the logging anyway
-                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+                // Discard remaining logging when shutting down
+                return;
             }
 
             void HandleDeviceLoss() override {
-                mCallback(mLoggingType, mMessage.c_str(), mUserdata);
+                // Try to do logging when device lost
+                auto callbackDesc = mCallbackDescriptor.lock();
+                if (callbackDesc) {
+                    if (callbackDesc->callback) {
+                        callbackDesc->callback(mLoggingType, mMessage.c_str(),
+                                               callbackDesc->userdata);
+                    }
+                }
             }
 
           private:
-            wgpu::LoggingCallback mCallback;
+            CallbackDescT mCallbackDescriptor;
             WGPULoggingType mLoggingType;
             std::string mMessage;
-            void* mUserdata;
         };
     }  // anonymous namespace
 
@@ -141,25 +151,33 @@ namespace dawn_native {
         mQueue = AcquireRef(defaultQueue);
 
 #if defined(DAWN_ENABLE_ASSERTS)
-        mUncapturedErrorCallback = [](WGPUErrorType, char const*, void*) {
-            static bool calledOnce = false;
-            if (!calledOnce) {
-                calledOnce = true;
-                dawn::WarningLog() << "No Dawn device uncaptured error callback was set. This is "
-                                      "probably not intended. If you really want to ignore errors "
-                                      "and suppress this message, set the callback to null.";
-            }
-        };
+        mUncapturedErrorCallbackDescriptor =
+            std::make_shared<DeviceCalllbackDescriptor<wgpu::ErrorCallback>>(
+                [](WGPUErrorType, char const*, void*) {
+                    static bool calledOnce = false;
+                    if (!calledOnce) {
+                        calledOnce = true;
+                        dawn::WarningLog()
+                            << "No Dawn device uncaptured error callback was set. This is "
+                               "probably not intended. If you really want to ignore errors "
+                               "and suppress this message, set the callback to null.";
+                    }
+                },
+                nullptr);
 
-        mDeviceLostCallback = [](char const*, void*) {
-            static bool calledOnce = false;
-            if (!calledOnce) {
-                calledOnce = true;
-                dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
-                                      "intended. If you really want to ignore device lost "
-                                      "and suppress this message, set the callback to null.";
-            }
-        };
+        mDeviceLostCallbackDescriptor =
+            std::make_shared<DeviceCalllbackDescriptor<wgpu::DeviceLostCallback>>(
+                [](char const*, void*) {
+                    static bool calledOnce = false;
+                    if (!calledOnce) {
+                        calledOnce = true;
+                        dawn::WarningLog()
+                            << "No Dawn device lost callback was set. This is probably not "
+                               "intended. If you really want to ignore device lost "
+                               "and suppress this message, set the callback to null.";
+                    }
+                },
+                nullptr);
 #endif  // DAWN_ENABLE_ASSERTS
 
         mCaches = std::make_unique<DeviceBase::Caches>();
@@ -281,10 +299,13 @@ namespace dawn_native {
         }
 
         if (type == InternalErrorType::DeviceLost) {
-            // The device was lost, call the application callback.
-            if (mDeviceLostCallback != nullptr) {
-                mDeviceLostCallback(message, mDeviceLostUserdata);
-                mDeviceLostCallback = nullptr;
+            // The device was lost, call the application callback only once.
+            if (mDeviceLostCallbackDescriptor) {
+                if (mDeviceLostCallbackDescriptor->callback) {
+                    mDeviceLostCallbackDescriptor->callback(
+                        message, mDeviceLostCallbackDescriptor->userdata);
+                }
+                mDeviceLostCallbackDescriptor.reset();
             }
 
             mQueue->HandleDeviceLoss();
@@ -303,9 +324,12 @@ namespace dawn_native {
             // if it isn't handled. DeviceLost is not handled here because it should be
             // handled by the lost callback.
             bool captured = mErrorScopeStack->HandleError(ToWGPUErrorType(type), message);
-            if (!captured && mUncapturedErrorCallback != nullptr) {
-                mUncapturedErrorCallback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)), message,
-                                         mUncapturedErrorUserdata);
+            if (!captured && mUncapturedErrorCallbackDescriptor) {
+                if (mUncapturedErrorCallbackDescriptor->callback) {
+                    mUncapturedErrorCallbackDescriptor->callback(
+                        static_cast<WGPUErrorType>(ToWGPUErrorType(type)), message,
+                        mUncapturedErrorCallbackDescriptor->userdata);
+                }
             }
         }
     }
@@ -322,18 +346,21 @@ namespace dawn_native {
     }
 
     void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
-        mUncapturedErrorCallback = callback;
-        mUncapturedErrorUserdata = userdata;
+        mUncapturedErrorCallbackDescriptor =
+            std::make_shared<DeviceCalllbackDescriptor<wgpu::ErrorCallback>>(callback, userdata);
     }
 
     void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
-        mLoggingCallback = callback;
-        mLoggingUserdata = userdata;
+        // Previous descriptor, if any, will be destoried, making all weak_ptr pointing to those
+        // descriptor expired.
+        mLoggingCallbackDescriptor =
+            std::make_shared<DeviceCalllbackDescriptor<wgpu::LoggingCallback>>(callback, userdata);
     }
 
     void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
-        mDeviceLostCallback = callback;
-        mDeviceLostUserdata = userdata;
+        mDeviceLostCallbackDescriptor =
+            std::make_shared<DeviceCalllbackDescriptor<wgpu::DeviceLostCallback>>(callback,
+                                                                                  userdata);
     }
 
     void DeviceBase::APIPushErrorScope(wgpu::ErrorFilter filter) {
@@ -801,8 +828,7 @@ namespace dawn_native {
     void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* descriptor,
                                                   WGPUCreateRenderPipelineAsyncCallback callback,
                                                   void* userdata) {
-        ResultOrError<Ref<RenderPipelineBase>> maybeResult =
-            CreateRenderPipeline(descriptor);
+        ResultOrError<Ref<RenderPipelineBase>> maybeResult = CreateRenderPipeline(descriptor);
         if (maybeResult.IsError()) {
             std::unique_ptr<ErrorData> error = maybeResult.AcquireError();
             callback(WGPUCreatePipelineAsyncStatus_Error, nullptr, error->GetMessage().c_str(),
@@ -993,12 +1019,13 @@ namespace dawn_native {
     }
 
     void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
-        if (mLoggingCallback != nullptr) {
-            // Use the thread-safe CallbackTaskManager routine
-            std::unique_ptr<LoggingCallbackTask> callbackTask =
-                std::make_unique<LoggingCallbackTask>(mLoggingCallback, loggingType, message,
-                                                      mLoggingUserdata);
-            mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+        if (mLoggingCallbackDescriptor) {
+            if (mLoggingCallbackDescriptor->callback) {
+                std::unique_ptr<LoggingCallbackTask> callbackTask =
+                    std::make_unique<LoggingCallbackTask>(mLoggingCallbackDescriptor, loggingType,
+                                                          message);
+                mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+            }
         }
     }
 
@@ -1222,8 +1249,7 @@ namespace dawn_native {
         }
     }
 
-    ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSampler(
-        const SamplerDescriptor* descriptor) {
+    ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSampler(const SamplerDescriptor* descriptor) {
         const SamplerDescriptor defaultDescriptor = {};
         DAWN_TRY(ValidateIsAlive());
         descriptor = descriptor != nullptr ? descriptor : &defaultDescriptor;

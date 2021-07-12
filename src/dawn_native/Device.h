@@ -151,10 +151,9 @@ namespace dawn_native {
         ResultOrError<Ref<BufferBase>> CreateBuffer(const BufferDescriptor* descriptor);
         ResultOrError<Ref<ComputePipelineBase>> CreateComputePipeline(
             const ComputePipelineDescriptor* descriptor);
-        MaybeError CreateComputePipelineAsync(
-            const ComputePipelineDescriptor* descriptor,
-            WGPUCreateComputePipelineAsyncCallback callback,
-            void* userdata);
+        MaybeError CreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
+                                              WGPUCreateComputePipelineAsyncCallback callback,
+                                              void* userdata);
         ResultOrError<Ref<ExternalTextureBase>> CreateExternalTexture(
             const ExternalTextureDescriptor* descriptor);
         ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayout(
@@ -297,6 +296,18 @@ namespace dawn_native {
                                                  void* userdata,
                                                  size_t blueprintHash);
 
+        // Descriptor for device-level callback, including DeviceLostCallback,
+        // UncapturedErrorCallback and LoggingCallback.
+        template <class T>
+        struct DeviceCalllbackDescriptor {
+            T callback = nullptr;
+            void* userdata = nullptr;
+
+            DeviceCalllbackDescriptor(T callback, void* userdata)
+                : callback(callback), userdata(userdata) {
+            }
+        };
+
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
@@ -394,14 +405,14 @@ namespace dawn_native {
         // resources.
         virtual MaybeError WaitForIdleForDestruction() = 0;
 
-        wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
-        void* mUncapturedErrorUserdata = nullptr;
+        std::shared_ptr<DeviceCalllbackDescriptor<wgpu::ErrorCallback>>
+            mUncapturedErrorCallbackDescriptor;
 
-        wgpu::LoggingCallback mLoggingCallback = nullptr;
-        void* mLoggingUserdata = nullptr;
+        std::shared_ptr<DeviceCalllbackDescriptor<wgpu::LoggingCallback>>
+            mLoggingCallbackDescriptor;
 
-        wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
-        void* mDeviceLostUserdata = nullptr;
+        std::shared_ptr<DeviceCalllbackDescriptor<wgpu::DeviceLostCallback>>
+            mDeviceLostCallbackDescriptor;
 
         std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 
