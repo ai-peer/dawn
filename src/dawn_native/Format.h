@@ -87,6 +87,7 @@ namespace dawn_native {
         wgpu::TextureFormat format;
         bool isRenderable;
         bool isCompressed;
+        bool isBlendable;
         // A format can be known but not supported because it is part of a disabled extension.
         bool isSupported;
         bool supportsStorageUsage;
