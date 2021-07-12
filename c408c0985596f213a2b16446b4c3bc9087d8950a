@@ -16,6 +16,41 @@
       "message": "PTAL! Not sure if you were planning to do this, but I went ahead and implemented it. Waiting on the Tint roll though.",
       "revId": "c408c0985596f213a2b16446b4c3bc9087d8950a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e433781f_9c2dd02c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-07-12T21:04:46Z",
+      "side": 1,
+      "message": "I was not planning on doing this myself, so thanks for picking it up!",
+      "parentUuid": "e72f3066_13622dcb",
+      "revId": "c408c0985596f213a2b16446b4c3bc9087d8950a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b40c652_09a0d984",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-07-12T21:04:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c408c0985596f213a2b16446b4c3bc9087d8950a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
