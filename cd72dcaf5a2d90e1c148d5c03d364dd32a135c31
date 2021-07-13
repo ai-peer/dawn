@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "860ea73d_4761d8db",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-13T21:10:43Z",
+      "side": 1,
+      "message": "Good question. kGenericMetalBufferSlots is set to \u0027kMetalBufferTableSize - 1\u0027 and kMetalBufferTableSize is 31, so data is currently 30 slots.\n\nThis implies that Dawn wouldn\u0027t allow any more than 30 array lengths to be stored in this buffer, right? If there are 29 or 30 array lengths needed, then yes, we\u0027d have a problem because we\u0027d align bufferCount to 32. But I don\u0027t think we can simply align kGenericMetalBufferSlots because we\u0027d be surpassing the limit that this constant is set to (30 -\u003e 32).\n\nI think the right thing here is to assert that bufferCount is \u003c\u003d kGenericMetalBufferSlots after we\u0027ve aligned it. Effectively this means we can\u0027t have more than 28 array lengths (28 slots * 4 bytes \u003d 112 bytes, which is the largest multiple of 16 bytes we can support with a max of 30 slots).\n\nDoes this make sense?",
+      "parentUuid": "145f5938_5d4ccaf9",
+      "range": {
+        "startLine": 277,
+        "startChar": 42,
+        "endLine": 277,
+        "endChar": 66
+      },
+      "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba169428_892ec082",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-13T20:19:04Z",
       "side": 1,
       "message": "do we want to align bufferCount or align the value we pass to |length| here?\n(or I guess we could also make bufferCount a multiple of 4)\n\nalso, Dawn has an Align(..) helper in common/Math.h",
+      "range": {
+        "startLine": 301,
+        "startChar": 36,
+        "endLine": 301,
+        "endChar": 42
+      },
+      "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a83705f8_88f32392",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-13T21:10:43Z",
+      "side": 1,
+      "message": "Right, this should be `bufferCount \u003d Align(bufferCount, 4)`, not 16. Good catch. I think it\u0027s fine to update bufferCount directly. We do the same for enableVertexPulling for the Vertex shader case above.",
+      "parentUuid": "ba169428_892ec082",
       "range": {
         "startLine": 301,
         "startChar": 36,
