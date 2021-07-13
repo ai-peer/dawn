@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a20701d7_167ddd72",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-07-13T23:35:10Z",
+      "side": 1,
+      "message": "Finally got around to adding this wire test. Fixed a bit of missing coverage in the non-wire CompilationInfo test while I was at it. Should close out https://bugs.chromium.org/p/dawn/issues/detail?id\u003d746",
+      "revId": "90afb42c0df80450bc884940e897e5ce2e726a56",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
