@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "460ef36f_ac67ba33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T00:09:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c84008ec5ddfe4809d6a8a4ba1cce43d4fa96991",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2951f60f_ea645ba9",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T00:09:23Z",
+      "side": 1,
+      "message": "let\u0027s test an integer format too for good measure",
+      "revId": "c84008ec5ddfe4809d6a8a4ba1cce43d4fa96991",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
