@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "97f50a7e_ca46b107",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-13T12:25:26Z",
+      "side": 1,
+      "message": "Now: Bug: dawn:943",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "e51b014984bbd66805ba3c21870ed735cc53ba11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b34c1d1f_b0b2e25a",
@@ -14,6 +37,46 @@
       "writtenOn": "2021-07-12T23:24:30Z",
       "side": 1,
       "message": "Ben, PTAL!",
+      "revId": "e51b014984bbd66805ba3c21870ed735cc53ba11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "008d4724_0082fe8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-13T12:25:26Z",
+      "side": 1,
+      "message": "Thanks for taking this over!",
+      "revId": "e51b014984bbd66805ba3c21870ed735cc53ba11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd72d836_8084670f",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-13T12:25:26Z",
+      "side": 1,
+      "message": "Should we have a TODO(crbug.com/dawn/975) or something here, so we know why the test is suppressed?",
+      "range": {
+        "startLine": 761,
+        "startChar": 4,
+        "endLine": 761,
+        "endChar": 80
+      },
       "revId": "e51b014984bbd66805ba3c21870ed735cc53ba11",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
