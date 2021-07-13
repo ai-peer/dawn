@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a7e7ac1_2bfdc947",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-13T20:13:51Z",
+      "side": 1,
+      "message": "After this lands, we will land this CL in Tint: https://dawn-review.googlesource.com/c/tint/+/57921\n\nThen we can remove the `#if TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16` in Dawn, and later remove it from Tint.",
+      "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
