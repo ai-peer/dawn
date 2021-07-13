@@ -33,6 +33,23 @@
       "message": "LGTM too",
       "revId": "ef9f47605c4b69d5a7b78961e26c1e24de8d0501",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "309f88b6_04885a48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-13T15:53:10Z",
+      "side": 1,
+      "message": "Thanks for your review, Austin and Jiawei!",
+      "revId": "ef9f47605c4b69d5a7b78961e26c1e24de8d0501",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
