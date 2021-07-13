@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "671077fd_afe2affd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T14:21:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97f50a7e_ca46b107",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 13
+      },
+      "revId": "e51b014984bbd66805ba3c21870ed735cc53ba11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "b34c1d1f_b0b2e25a",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2021-07-13T12:25:26Z",
       "side": 1,
       "message": "Should we have a TODO(crbug.com/dawn/975) or something here, so we know why the test is suppressed?",
+      "range": {
+        "startLine": 761,
+        "startChar": 4,
+        "endLine": 761,
+        "endChar": 80
+      },
+      "revId": "e51b014984bbd66805ba3c21870ed735cc53ba11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b0128f_9325ef15",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T14:21:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd72d836_8084670f",
       "range": {
         "startLine": 761,
         "startChar": 4,
