@@ -16,6 +16,24 @@
       "message": "I know this was for better debuggability, but I think we still need to make sure it compiles or testing becomes difficult.\n\nFor debugging - perhaps we could add an option to the Renamer transform to do a minimal amount of renaming instead?",
       "revId": "1c9c6eb5954a22a501970eec7e059d208010cf61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "772b5871_15c99849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-13T12:19:35Z",
+      "side": 1,
+      "message": "\u003e For debugging - perhaps we could add an option to the Renamer transform to do a minimal amount of renaming instead?\n\nThat sounds like a good plan.",
+      "parentUuid": "cde65644_46c50228",
+      "revId": "1c9c6eb5954a22a501970eec7e059d208010cf61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
