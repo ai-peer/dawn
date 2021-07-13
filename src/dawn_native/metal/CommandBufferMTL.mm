@@ -30,6 +30,8 @@
 #include "dawn_native/metal/TextureMTL.h"
 #include "dawn_native/metal/UtilsMetal.h"
 
+#include <tint/tint.h>
+
 namespace dawn_native { namespace metal {
 
     namespace {
@@ -292,6 +294,10 @@ namespace dawn_native { namespace metal {
                         bufferCount += pipeline->GetVertexBufferCount();
                     }
 
+#if TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16
+                    bufferCount = Align(bufferCount, 4);
+                    ASSERT(bufferCount <= kGenericMetalBufferSlots);
+#endif
                     [render setVertexBytes:data[SingleShaderStage::Vertex].data()
                                     length:sizeof(uint32_t) * bufferCount
                                    atIndex:kBufferLengthBufferSlot];
@@ -300,6 +306,10 @@ namespace dawn_native { namespace metal {
                 if (stagesToApply & wgpu::ShaderStage::Fragment) {
                     uint32_t bufferCount = ToBackend(pipeline->GetLayout())
                                                ->GetBufferBindingCount(SingleShaderStage::Fragment);
+#if TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16
+                    bufferCount = Align(bufferCount, 4);
+                    ASSERT(bufferCount <= kGenericMetalBufferSlots);
+#endif
                     [render setFragmentBytes:data[SingleShaderStage::Fragment].data()
                                       length:sizeof(uint32_t) * bufferCount
                                      atIndex:kBufferLengthBufferSlot];
@@ -320,6 +330,10 @@ namespace dawn_native { namespace metal {
 
                 uint32_t bufferCount = ToBackend(pipeline->GetLayout())
                                            ->GetBufferBindingCount(SingleShaderStage::Compute);
+#if TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16
+                bufferCount = Align(bufferCount, 4);
+                ASSERT(bufferCount <= kGenericMetalBufferSlots);
+#endif
                 [compute setBytes:data[SingleShaderStage::Compute].data()
                            length:sizeof(uint32_t) * bufferCount
                           atIndex:kBufferLengthBufferSlot];
