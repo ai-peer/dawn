@@ -16,6 +16,29 @@
       "message": "After this lands, we will land this CL in Tint: https://dawn-review.googlesource.com/c/tint/+/57921\n\nThen we can remove the `#if TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16` in Dawn, and later remove it from Tint.",
       "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba169428_892ec082",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T20:19:04Z",
+      "side": 1,
+      "message": "do we want to align bufferCount or align the value we pass to |length| here?\n(or I guess we could also make bufferCount a multiple of 4)\n\nalso, Dawn has an Align(..) helper in common/Math.h",
+      "range": {
+        "startLine": 301,
+        "startChar": 36,
+        "endLine": 301,
+        "endChar": 42
+      },
+      "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
