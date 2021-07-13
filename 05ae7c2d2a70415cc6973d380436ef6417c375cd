@@ -22,6 +22,30 @@
       },
       "revId": "05ae7c2d2a70415cc6973d380436ef6417c375cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "712609c6_f8432229",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T21:58:55Z",
+      "side": 1,
+      "message": "good catch, it should probably be #ifdef",
+      "parentUuid": "775fd041_32ca6055",
+      "range": {
+        "startLine": 297,
+        "startChar": 0,
+        "endLine": 297,
+        "endChar": 42
+      },
+      "revId": "05ae7c2d2a70415cc6973d380436ef6417c375cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

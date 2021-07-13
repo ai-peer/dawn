@@ -91,6 +91,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51c39f77_f8ae9cc8",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-13T21:58:55Z",
+      "side": 1,
+      "message": "Dawn might not expect more than 30 buffers from the application, but that doesn\u0027t mean we can\u0027t make this array 32 slots large.\n\nMetal has a fixed number of bindings slots (31) but [MTLRenderEncoder setVertexBytes] and friends don\u0027t take up a variable number of slots. It binds a variable-size amount of data to a single buffer slot (we always use slot index 30 here). So it should be OK to simply make this buffer slightly larger. The maximum number of buffer lengths we expect doesn\u0027t limit the maximum size this buffer could possibly be; it can be bigger.",
+      "parentUuid": "04b8b132_76d9a964",
+      "range": {
+        "startLine": 277,
+        "startChar": 42,
+        "endLine": 277,
+        "endChar": 66
+      },
+      "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ba169428_892ec082",
         "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
         "patchSetId": 1
