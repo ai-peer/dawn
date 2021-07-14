@@ -698,6 +698,14 @@ namespace dawn_native { namespace vulkan {
         const TextureDescriptor* textureDescriptor =
             reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
 
+        const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
+        FindInChain(textureDescriptor->nextInChain, &internalUsageDesc);
+
+        wgpu::TextureUsage usage = textureDescriptor->usage;
+        if (internalUsageDesc != nullptr) {
+            usage |= internalUsageDesc->internalUsage;
+        }
+
         // Check services support this combination of handle type / image info
         if (!mExternalSemaphoreService->Supported()) {
             return DAWN_VALIDATION_ERROR("External semaphore usage not supported");
@@ -705,8 +713,7 @@ namespace dawn_native { namespace vulkan {
         if (!mExternalMemoryService->SupportsImportMemory(
                 VulkanImageFormat(this, textureDescriptor->format), VK_IMAGE_TYPE_2D,
                 VK_IMAGE_TILING_OPTIMAL,
-                VulkanImageUsage(textureDescriptor->usage,
-                                 GetValidInternalFormat(textureDescriptor->format)),
+                VulkanImageUsage(usage, GetValidInternalFormat(textureDescriptor->format)),
                 VK_IMAGE_CREATE_ALIAS_BIT_KHR)) {
             return DAWN_VALIDATION_ERROR("External memory usage not supported");
         }

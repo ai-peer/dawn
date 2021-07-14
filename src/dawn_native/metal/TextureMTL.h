@@ -56,6 +56,8 @@ namespace dawn_native { namespace metal {
         Texture(Device* device, const TextureDescriptor* descriptor);
         ~Texture() override;
 
+        NSRef<MTLTextureDescriptor> CreateMetalTextureDescriptor() const;
+
         void DestroyImpl() override;
 
         MaybeError ClearTexture(CommandRecordingContext* commandContext,

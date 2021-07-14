@@ -66,6 +66,7 @@ namespace dawn_native {
         uint32_t GetSampleCount() const;
         uint32_t GetSubresourceCount() const;
         wgpu::TextureUsage GetUsage() const;
+        wgpu::TextureUsage GetInternalUsage() const;
         TextureState GetTextureState() const;
         uint32_t GetSubresourceIndex(uint32_t mipLevel, uint32_t arraySlice, Aspect aspect) const;
         bool IsSubresourceContentInitialized(const SubresourceRange& range) const;
@@ -104,6 +105,7 @@ namespace dawn_native {
         uint32_t mMipLevelCount;
         uint32_t mSampleCount;
         wgpu::TextureUsage mUsage = wgpu::TextureUsage::None;
+        wgpu::TextureUsage mInternalUsage = wgpu::TextureUsage::None;
         TextureState mState;
 
         // TODO(crbug.com/dawn/845): Use a more optimized data structure to save space
