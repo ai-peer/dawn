@@ -307,8 +307,10 @@ namespace {
             texture.CreateView(&descriptor);
             descriptor.dimension = wgpu::TextureViewDimension::e2DArray;
             texture.CreateView(&descriptor);
+            // Setting view dimension to 2D, its arrayLayer will default to 1. And view creation
+            // will success.
             descriptor.dimension = wgpu::TextureViewDimension::e2D;
-            ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
+            texture.CreateView(&descriptor);
         }
         {
             wgpu::TextureViewDescriptor descriptor;
