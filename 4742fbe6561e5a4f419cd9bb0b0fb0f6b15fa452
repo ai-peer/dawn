@@ -22,6 +22,30 @@
       },
       "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8177107e_0b9266fd",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-14T19:08:50Z",
+      "side": 0,
+      "message": "I think the spec used to say what Dawn currently does, and then we changed it. I don\u0027t remember the reasons, but we should probably just follow the spec.\n\nDo we have tests for the new defaults?",
+      "parentUuid": "6de585e6_0d80e6d6",
+      "range": {
+        "startLine": 365,
+        "startChar": 20,
+        "endLine": 369,
+        "endChar": 21
+      },
+      "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
