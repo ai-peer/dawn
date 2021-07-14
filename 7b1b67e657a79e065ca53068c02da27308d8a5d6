@@ -16,6 +16,24 @@
       "message": "Can we make a new toggle like dump_wgsl_shaders ? the name \"translated\" doesn\u0027t really make sense if the source is already WGSL.",
       "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f7830a2_dd1cf1a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-07-14T17:14:02Z",
+      "side": 1,
+      "message": "I\u0027ve added --dump_shaders, and deprecated --dump_translated_shaders.\nI\u0027ve deprecated, instead of removed, as we\u0027ve asked third-parties to use this flag, and I don\u0027t want to miss out on these logs because they haven\u0027t switched to the new flag.",
+      "parentUuid": "8cb8b4de_a507730e",
+      "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
