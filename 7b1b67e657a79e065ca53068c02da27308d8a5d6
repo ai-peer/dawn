@@ -34,6 +34,24 @@
       "parentUuid": "8cb8b4de_a507730e",
       "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8981e372_42700f94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-14T17:30:00Z",
+      "side": 1,
+      "message": "ok, that works.\nuser-provided toggles get applied in DeviceBase::ApplyToggleOverrides\nwould be nice to EmitDeprecationWarning about it.",
+      "parentUuid": "2f7830a2_dd1cf1a1",
+      "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
