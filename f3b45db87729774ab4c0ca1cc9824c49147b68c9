@@ -16,6 +16,23 @@
       "message": "Small follow-up cleanup for dawn buffer mapping refactor",
       "revId": "f3b45db87729774ab4c0ca1cc9824c49147b68c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c03853e1_eb592cb3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-14T23:57:31Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "f3b45db87729774ab4c0ca1cc9824c49147b68c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
