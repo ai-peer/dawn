@@ -46,6 +46,30 @@
       },
       "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b5eab3_9a9db86c",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-07-14T21:40:53Z",
+      "side": 0,
+      "message": "We spent quite a bit of time on this and I\u0027m pretty confident in the defaulting rules that we ended up landing in the spec. There were too many surprising or complex cases otherwise. For instance, it\u0027s likely that the number of layers in a 2d-array texture could be data-driven, and the application could end up passing 1 or \u003e1 depending on input data. And then the defaulting would suddenly change and break the app.\n\nThe rules as written mean there are more cases where optional parameters have to be specified, but in the overwhelmingly most common case (2d non-array textures), they won\u0027t have to be.",
+      "parentUuid": "8177107e_0b9266fd",
+      "range": {
+        "startLine": 365,
+        "startChar": 20,
+        "endLine": 369,
+        "endChar": 21
+      },
+      "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
