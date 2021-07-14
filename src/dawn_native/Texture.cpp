@@ -380,7 +380,22 @@ namespace dawn_native {
             desc.format = texture->GetFormat().format;
         }
         if (desc.arrayLayerCount == 0) {
-            desc.arrayLayerCount = texture->GetArrayLayers() - desc.baseArrayLayer;
+            switch (desc.dimension) {
+                case wgpu::TextureViewDimension::e1D:
+                case wgpu::TextureViewDimension::e2D:
+                case wgpu::TextureViewDimension::e3D:
+                    desc.arrayLayerCount = 1;
+                    break;
+                case wgpu::TextureViewDimension::Cube:
+                    desc.arrayLayerCount = 6;
+                    break;
+                case wgpu::TextureViewDimension::e2DArray:
+                case wgpu::TextureViewDimension::CubeArray:
+                    desc.arrayLayerCount = texture->GetArrayLayers() - desc.baseArrayLayer;
+                    break;
+                default:
+                    UNREACHABLE();
+            }
         }
         if (desc.mipLevelCount == 0) {
             desc.mipLevelCount = texture->GetNumMipLevels() - desc.baseMipLevel;
