@@ -70,6 +70,24 @@
       "parentUuid": "8981e372_42700f94",
       "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36307624_f089daf6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-14T17:47:42Z",
+      "side": 1,
+      "message": "ok, I guess as long as we keep both flags around for a while it should be fine.\nBunch of users are using --enable-dawn-features\u003ddump_translated_shaders today when they come across issues, and they have no way to easily discover they should use the other one.",
+      "parentUuid": "e0b9371f_fb33ef60",
+      "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
