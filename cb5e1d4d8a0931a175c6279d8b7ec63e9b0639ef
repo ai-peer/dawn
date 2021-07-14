@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d131ee43_53cba0ae",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-14T14:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce94e6a1_bfd474ce",
+      "range": {
+        "startLine": 299,
+        "startChar": 39,
+        "endLine": 299,
+        "endChar": 66
+      },
+      "revId": "cb5e1d4d8a0931a175c6279d8b7ec63e9b0639ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf76cc11_cec4110c",
@@ -82,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02625ad5_8ecb1fe4",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-14T14:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf76cc11_cec4110c",
+      "range": {
+        "startLine": 311,
+        "startChar": 42,
+        "endLine": 311,
+        "endChar": 66
+      },
+      "revId": "cb5e1d4d8a0931a175c6279d8b7ec63e9b0639ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3496df77_5ea903c9",
@@ -95,6 +143,30 @@
       "writtenOn": "2021-07-14T14:35:49Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 335,
+        "startChar": 38,
+        "endLine": 335,
+        "endChar": 62
+      },
+      "revId": "cb5e1d4d8a0931a175c6279d8b7ec63e9b0639ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e7c1620_2ffc259e",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-14T14:41:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3496df77_5ea903c9",
       "range": {
         "startLine": 335,
         "startChar": 38,
