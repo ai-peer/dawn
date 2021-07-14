@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dee82e8_dd44ac2a",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-14T13:33:27Z",
+      "side": 1,
+      "message": "I\u0027m not sure if this is what you meant, but I replaced kGenericMetalBufferSlots with \u002732\u0027 for the size of the array.",
+      "parentUuid": "51c39f77_f8ae9cc8",
+      "range": {
+        "startLine": 277,
+        "startChar": 42,
+        "endLine": 277,
+        "endChar": 66
+      },
+      "revId": "cd72dcaf5a2d90e1c148d5c03d364dd32a135c31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba169428_892ec082",
