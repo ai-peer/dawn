@@ -16,6 +16,23 @@
       "message": "Jiawei, PTAL!",
       "revId": "63f53e4c3dd46fe73da00d5808fcd4ed664b2c65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4c61356_cf51236d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-14T00:40:31Z",
+      "side": 1,
+      "message": "Relatively simple change, Corentin TBR",
+      "revId": "63f53e4c3dd46fe73da00d5808fcd4ed664b2c65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
