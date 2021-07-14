@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "625c79fc_c09c54b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-14T14:33:57Z",
+      "side": 1,
+      "message": "Inline-aligned the size in the array, as per our chat, Austin.",
+      "revId": "cb5e1d4d8a0931a175c6279d8b7ec63e9b0639ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
