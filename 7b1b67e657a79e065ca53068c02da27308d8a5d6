@@ -88,6 +88,24 @@
       "parentUuid": "e0b9371f_fb33ef60",
       "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "204159ad_54d9a2cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-14T18:25:13Z",
+      "side": 1,
+      "message": "Understood, that\u0027s why I wanted to keep it around for a while 😊\nWe can let the same people we told about dump_translated_shaders to switch to dump_shaders, but I\u0027m also hoping that once we\u0027re more stable, people will not need to use these flags any more.",
+      "parentUuid": "36307624_f089daf6",
+      "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
