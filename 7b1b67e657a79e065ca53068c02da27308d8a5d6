@@ -52,6 +52,24 @@
       "parentUuid": "2f7830a2_dd1cf1a1",
       "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0b9371f_fb33ef60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-07-14T17:42:52Z",
+      "side": 1,
+      "message": "That would be a bit tricky with the approach I\u0027ve taken, as these are aliased in TogglesSet, which is deeper than DeviceBase.\nIf you\u0027re using this flag in the tests, you\u0027ll get a deprecated notification at the top of your test run:\n\n  ---------------------\n  UseWire: false\n  Run suppressed tests: false\n  BackendValidation: disabled\n  Enabled Toggles\n   - dump_translated_shaders: Deprecated. Use dump_shaders\n\nThis won\u0027t appear in chrome, but I sincerely doubt that this will be used beyond OT.",
+      "parentUuid": "8981e372_42700f94",
+      "revId": "7b1b67e657a79e065ca53068c02da27308d8a5d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
