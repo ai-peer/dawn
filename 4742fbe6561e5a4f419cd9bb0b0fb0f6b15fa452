@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6de585e6_0d80e6d6",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-14T16:25:56Z",
+      "side": 0,
+      "message": "WebGPU spec says that if texture view dimension is undefined, then texture view dimension will be texture\u0027s dimension. But I feel like that Dawn\u0027s implementation make more sense on this: If texture view dimension is undefined, its dimension will be \"2d-array\" if texture is \"2d\" and texture has multiple layers and the view\u0027s arrayLayerCount is undefined. Otherwise, view\u0027s dimension is \"2d\" if texture is \"2d\". \n\nWDYT? Kai, Austin (and Corentin if you are back to office).",
+      "range": {
+        "startLine": 365,
+        "startChar": 20,
+        "endLine": 369,
+        "endChar": 21
+      },
+      "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
