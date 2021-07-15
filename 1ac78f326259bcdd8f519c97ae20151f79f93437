@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a67c7826_e3f3b3c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-15T02:42:33Z",
+      "side": 1,
+      "message": "The code in Dawn itself should be OK now.\n\nCTS PR at https://github.com/gpuweb/cts/pull/629 will fix the bots failure. After that PR merged and rolled into Chromium, the bots will be happy. ",
+      "revId": "1ac78f326259bcdd8f519c97ae20151f79f93437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

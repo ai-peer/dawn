@@ -70,6 +70,30 @@
       },
       "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b22512_166f4f45",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-15T02:42:33Z",
+      "side": 0,
+      "message": "@Austin, TextureViewValidation tests can test these default values, although there is a bug. I also add a few tests for better coverage. \n\n@Kai, agreed. Considering that 2D view is used much more widely than 2DArray view, the current default dimension is more reasonable. The latest patchset strictly follows WebGPU spec on textureview\u0027s default values.",
+      "parentUuid": "77b5eab3_9a9db86c",
+      "range": {
+        "startLine": 365,
+        "startChar": 20,
+        "endLine": 369,
+        "endChar": 21
+      },
+      "revId": "4742fbe6561e5a4f419cd9bb0b0fb0f6b15fa452",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
