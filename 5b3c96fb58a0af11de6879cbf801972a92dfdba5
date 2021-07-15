@@ -170,6 +170,24 @@
       "parentUuid": "c89b70c4_b129e257",
       "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa81b991_b417454e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T16:23:04Z",
+      "side": 1,
+      "message": "Oh sorry we didn\u0027t realize MakeUserdata wouldn\u0027t work here. The solution here looks like it would work but is very complicated (though merging userdata and callback together is a good idea).\n\nPreviously I said:\n\n\u003e Yeah I\u0027m not sure what\u0027s best here, we are going to have similar issues with other callbacks that we want to put on the callback queue. Maybe we should have a way to drain the callback queue without waiting for idle.\n\nI should have been more clear: I think calling Tick() is sufficient because the last thing that Tick() does is clear all the callback tasks. This means that if we only add a Tick+comment at the end of ClearDeviceCallbacks, it should be sufficient to fix the issue.\n\nIf that works, then it is much simpler (and should work with the long-term solutions of using WebGPU in native, even if Tick disappears, their will be a wgpu::Instance::ProcessEvents or equivalent function). Sorry you went into a rabbit hole with the MakeUserdata path.",
+      "parentUuid": "ec1744cb_397f8ca5",
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
