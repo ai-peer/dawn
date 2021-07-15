@@ -16,6 +16,24 @@
       "message": "Hey Austin, could you please take a look at this CL?\n\nI am not really sure how to add tests for this method, although as both methods use the same helper now it should be good enough, until we get it tested through the chrome infrastructure.",
       "revId": "4e2cdde624a2cc5dbb04811eadac570b925148b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7efe7ad3_b5c2f1c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-15T20:05:33Z",
+      "side": 1,
+      "message": "It *might* not be good enough because CopySrc adds flags to the texture allocation in the backend, like VK_ACCESS_TRANSFER_READ_BIT\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/vulkan/TextureVk.cpp;l\u003d353?q\u003dTextureVk.cpp\n\nWe should add some basic tests that CopySrc on creation is not needed in src/tests/validation, and tests that the copy actually copies content correctly in src/tests/end2end. The end2end test could make the source buffer with STORAGE usage, and populate it with a compute shader. Could make a new file if you\u0027d like. \n\nIf those tests work, then that\u0027s great! If not, and the backend validation complains, we\u0027ll need to add some internal usages like I prototyped in https://dawn-review.googlesource.com/c/dawn/+/58140.\n\nThat\u0027s a lot of new stuff for you, so if you\u0027re not comfortable digging into it I can take this over if you\u0027d like. But if you\u0027re interested, I\u0027m happy to help answer questions and work through it with you.",
+      "parentUuid": "7660e3d5_bc2c4403",
+      "revId": "4e2cdde624a2cc5dbb04811eadac570b925148b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
