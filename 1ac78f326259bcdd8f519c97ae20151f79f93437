@@ -16,6 +16,40 @@
       "message": "The code in Dawn itself should be OK now.\n\nCTS PR at https://github.com/gpuweb/cts/pull/629 will fix the bots failure. After that PR merged and rolled into Chromium, the bots will be happy. ",
       "revId": "1ac78f326259bcdd8f519c97ae20151f79f93437",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "402c73df_3703a485",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-07-15T04:23:18Z",
+      "side": 1,
+      "message": "I\u0027m going to add some suppressions for the tests that fail in this CL, as well as the ones failing in the CTS roll, and then we can lift them after both land.",
+      "revId": "1ac78f326259bcdd8f519c97ae20151f79f93437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993545f2_5dbfd2da",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-07-15T04:23:18Z",
+      "side": 1,
+      "message": "Please remove the commented code",
+      "revId": "1ac78f326259bcdd8f519c97ae20151f79f93437",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
