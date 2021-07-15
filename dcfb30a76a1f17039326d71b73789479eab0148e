@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8a9ee75_2920710b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-15T23:22:27Z",
+      "side": 1,
+      "message": "Didn\u0027t test this at all - just an idea. juanmihd@ may need something like this to add internal usages that are only accessible by internal commands - in order to implement GetImage(..) for the canvas. A pure-Dawn approach is preferred because it\u0027s less sync tokens and command buffer switching overhead. At a high level, WDYT?",
+      "revId": "dcfb30a76a1f17039326d71b73789479eab0148e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
