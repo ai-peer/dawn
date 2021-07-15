@@ -16,6 +16,23 @@
       "message": "Seems like the cts blending test is using rgba32float as the render target which only has \"unfilterable-float\" https://github.com/gpuweb/cts/blob/main/src/webgpu/api/operation/rendering/blending.spec.ts#L151\nwhich will fail this CL. We need to change that first.\n",
       "revId": "f34fec99056d5841890b7883cc352e3c9888b154",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7aaf9703_179affc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T09:18:26Z",
+      "side": 1,
+      "message": "LGTM, in the future we might need to add a boolean to the format if floats !\u003d blendable for some formats.",
+      "revId": "f34fec99056d5841890b7883cc352e3c9888b154",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
