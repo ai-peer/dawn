@@ -16,6 +16,177 @@
       "message": "@RC, PTAL",
       "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33669b3b_2ad98b23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5f6894_839394f0",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "nit: released.",
+      "range": {
+        "startLine": 87,
+        "startChar": 30,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62bc9852_8816137c",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "nit: Maybe Flush11On12DeviceToAvoidLeaks or something explicit like that, WDYT?",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "447a804d_8f78a7ad",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "nit: we shouldn\u0027t need dawn_wsi.h since that\u0027s only for deprecated swapchain stuff.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ed4cb4a_529b760c",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "nit: maybe we could reuse d3d12_platform.\n\nThis would also help use ComPtr instead of the fully qualified name.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0cb91bb_27faa00e",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "Things in this file shouldn\u0027t need to be DAWN_NATIVE_EXPORT\u0027ed",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb6026b0_dfcf18cd",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793fe8dd_e32d2d55",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "nit: Could we have regular DAWN_TRY handling for this instead of a new, separate error handling mechanism? Same thing for GetOrCreate11On12Device.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac38336b_f75fd511",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T15:44:19Z",
+      "side": 1,
+      "message": "I\u0027m still not sure why this is necessary see https://bugs.chromium.org/p/dawn/issues/detail?id\u003d625#c60\n\nIf it\u0027s not, then ReleaseD3D11on12Device can become an implementation detail of D3D11On12Utils.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
