@@ -54,6 +54,9 @@ namespace dawn_native {
         void APICopyTextureToTexture(const ImageCopyTexture* source,
                                      const ImageCopyTexture* destination,
                                      const Extent3D* copySize);
+        void APICopyTextureToTextureInternal(const ImageCopyTexture* source,
+                                             const ImageCopyTexture* destination,
+                                             const Extent3D* copySize);
 
         void APIInjectValidationError(const char* message);
         void APIInsertDebugMarker(const char* groupLabel);
@@ -72,6 +75,15 @@ namespace dawn_native {
       private:
         ResultOrError<Ref<CommandBufferBase>> FinishInternal(
             const CommandBufferDescriptor* descriptor);
+
+        // Helper to be able to implement both APICopyTextureToTexture and
+        // APICopyTextureToTextureInternal. The only difference between both
+        // copies, is that the Internal one will make the copy even if the
+        // source->Texture usage does not have CopySRC.
+        void APICopyTextureToTextureHelper(const ImageCopyTexture* source,
+                                           const ImageCopyTexture* destination,
+                                           const Extent3D* copySize,
+                                           bool needsUsageCopySrc);
 
         MaybeError ValidateFinish() const;
 
