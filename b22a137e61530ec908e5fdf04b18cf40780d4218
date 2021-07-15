@@ -16,6 +16,74 @@
       "message": "PTAL, thanks!",
       "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4cdf614_d7f6ce0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T14:31:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3fce601_321f90fd",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T14:31:23Z",
+      "side": 1,
+      "message": "nit: this structure is the same as vertexBuffer so maybe they can be merged?",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ea5db4_fef020da",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T14:31:23Z",
+      "side": 1,
+      "message": "nit: These are constant so they could be kVertexParamsList and outside of this initialization method and we wouldn\u0027t need a getter.",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8eba22_54468cfc",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-15T14:31:23Z",
+      "side": 1,
+      "message": "I think WGSL supports having extra trailing commas in function declarations.",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
