@@ -52,6 +52,21 @@ namespace dawn_native {
 
     struct EntryPointMetadata;
 
+    // Base component type of an inter-stage variable
+    enum class InterStageComponentType {
+        Sint,
+        Uint,
+        Float,
+    };
+
+    // Base composition type of an inter-stage variable
+    enum class InterStageCompositionType {
+        Scalar,
+        Vec2,
+        Vec3,
+        Vec4,
+    };
+
     using PipelineLayoutEntryPointPair = std::pair<PipelineLayoutBase*, std::string>;
     struct PipelineLayoutEntryPointPairHashFunc {
         size_t operator()(const PipelineLayoutEntryPointPair& pair) const;
@@ -153,6 +168,17 @@ namespace dawn_native {
         ityp::array<ColorAttachmentIndex, wgpu::TextureComponentType, kMaxColorAttachments>
             fragmentOutputFormatBaseTypes;
         ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> fragmentOutputsWritten;
+
+        // TODO(dawn:802): store InterpolationType and IntepolationSampling when we add the
+        // validations on them.
+        struct InterStageVariableInfo {
+            InterStageComponentType baseType;
+            InterStageCompositionType compositionType;
+        };
+        // Now that we only support vertex and fragment stages, there can't be both inter-stage
+        // inputs and outputs in one shader stage.
+        std::bitset<kMaxInterStageShaderVariables> usedInterStageVariables;
+        std::array<InterStageVariableInfo, kMaxInterStageShaderVariables> interStageVariables;
 
         // The local workgroup size declared for a compute entry point (or 0s otehrwise).
         Origin3D localWorkgroupSize;
