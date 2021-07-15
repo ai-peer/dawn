@@ -220,7 +220,7 @@ namespace dawn_native { namespace metal {
             if (@available(macOS 10.15, iOS 14.0, *)) {
                 if ([*mDevice supportsFamily:MTLGPUFamilyMac2] ||
                     [*mDevice supportsFamily:MTLGPUFamilyApple5]) {
-                    mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
+                    // mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
 
                     // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
                     // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
