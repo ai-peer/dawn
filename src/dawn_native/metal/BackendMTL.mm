@@ -28,6 +28,9 @@
 #    include "common/IOKitRef.h"
 #endif
 
+#include <map>
+#include <vector>
+
 namespace dawn_native { namespace metal {
 
     namespace {
@@ -168,6 +171,55 @@ namespace dawn_native { namespace metal {
 #else
 #    error "Unsupported Apple platform."
 #endif
+
+        // The counter set names and counter names of Timestamp query and PipelineStatistics query
+        const API_AVAILABLE(macos(10.15), ios(14.0))
+            std::map<MTLCommonCounterSet, std::vector<MTLCommonCounter>> kGPUCounters{
+                {MTLCommonCounterSetTimestamp, {MTLCommonCounterTimestamp}},
+                {MTLCommonCounterSetStatistic,
+                 {MTLCommonCounterVertexInvocations, MTLCommonCounterClipperInvocations,
+                  MTLCommonCounterClipperPrimitivesOut, MTLCommonCounterFragmentInvocations,
+                  MTLCommonCounterComputeKernelInvocations}}};
+
+        bool IsGPUCounterSupported(id<MTLDevice> device, MTLCommonCounterSet counterSetName)
+            API_AVAILABLE(macos(10.15), ios(14.0)) {
+            // MTLDevice’s counterSets property declares which counter sets it supports. Check
+            // whether it's available on the device before requesting a counter set.
+            id<MTLCounterSet> counterSet = nil;
+            for (id<MTLCounterSet> set in device.counterSets) {
+                if ([set.name caseInsensitiveCompare:counterSetName] == NSOrderedSame) {
+                    counterSet = set;
+                    break;
+                }
+            }
+
+            // The counter set is not supported.
+            if (counterSet == nil) {
+                return false;
+            }
+
+            auto iter = kGPUCounters.find(counterSetName);
+            if (iter == kGPUCounters.end()) {
+                return false;
+            }
+
+            // // A GPU might support a counter set, but only support a subset of the counters in
+            // that
+            // // set, check if the counter set supports the specific counters we needed. Return
+            // true
+            // // if at least one counter is supported in the counter set.
+            // for (id<MTLCounter> counter in counterSet.counters) {
+            //     for (const auto& counterName : iter->second) {
+            //         if ([counter.name caseInsensitiveCompare:counterName] == NSOrderedSame) {
+            //             return true;
+            //         }
+            //     }
+            // }
+
+            // No GPU counters is supported.
+            return false;
+        }
+
     }  // anonymous namespace
 
     // The Metal backend's Adapter.
@@ -218,10 +270,11 @@ namespace dawn_native { namespace metal {
 #endif
 
             if (@available(macOS 10.15, iOS 14.0, *)) {
-                if ([*mDevice supportsFamily:MTLGPUFamilyMac2] ||
-                    [*mDevice supportsFamily:MTLGPUFamilyApple5]) {
+                if (IsGPUCounterSupported(*mDevice, MTLCommonCounterSetStatistic)) {
                     mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
+                }
 
+                if (IsGPUCounterSupported(*mDevice, MTLCommonCounterSetTimestamp)) {
                     // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
                     // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
                     // has been fixed on macOS 11.0. See crbug.com/dawn/545
@@ -232,6 +285,7 @@ namespace dawn_native { namespace metal {
                     }
                 }
             }
+
             if (@available(macOS 10.11, iOS 11.0, *)) {
                 mSupportedExtensions.EnableExtension(Extension::DepthClamping);
             }
