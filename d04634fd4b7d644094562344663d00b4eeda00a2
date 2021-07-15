@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9372e0_5e9dd077",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T06:46:12Z",
+      "side": 1,
+      "message": "PTAL. Now I use descriptor objects to descript the device-level callbacks (both callback function pointer and userdata pointer), use shared pointers to manage these descriptor objects within the DeviceBase, and use weak pointer pointing to callback descriptor within callback tasks to track the valid state. Under this design we can make sure that callback task can properly deal with those pointers whether the server is alive or not.\nI also fix the MakeError of shader module to return a Ref\u003cShaderModuleBase\u003e.\nThanks!",
+      "revId": "d04634fd4b7d644094562344663d00b4eeda00a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

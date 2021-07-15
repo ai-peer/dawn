@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6736ef3_0780a825",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T06:46:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6cbe94a_49aa5644",
+      "range": {
+        "startLine": 846,
+        "startChar": 21,
+        "endLine": 846,
+        "endChar": 67
+      },
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e375c182_e8c42e06",
@@ -126,6 +150,24 @@
       "side": 1,
       "message": "That would work. Zhaoming, please see the various calls to MakeUserdata in the server code.",
       "parentUuid": "fb7e9a5b_6ca37d37",
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1744cb_397f8ca5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T06:46:12Z",
+      "side": 1,
+      "message": "I have looked into the details of MakeUserdata and ForwardToServer. As I understood, the key of MakeUserdata is to make a wrapped object which contains a weak pointer to dawn_wire server (mIsAlive), and ForwardToServer to wrap the callback function, check the weak_ptr to ensure the server is alive before calling server function or otherwise early return, and delete the wrapped object created by MakeUserdata.\nRather than using the MakeUserdata-ForwardToServer routine, I use the shared pointers for device-level callbacks descriptor in DeviceBase and weak pointer in callback task, as in Patchset 5. Here are the reasons:\n  1. It works as well as the MakeUserdata-ForwardToServer routine. The expected callback task behavior is calling the callback with the userdata registered at the time of creating the task if available, or do nothing otherwise. The MakeUserdata-ForwardToServer routine do so by checking if dawn_wire server is alive. In our case, it\u0027s promised that server destructor will reset the device-level callbacks in all its devices before releasing other known objects. Under current design, resetting device-level callbacks will make all weak pointers in relating callback tasks expire, and thus early return when tasks triggered afterwards.\n  2. It is complex to follow the MakeUserdata-ForwardToServer routine for userdata in device-level callbacks. \n    a) Live cycle management. All other callbacks, like BufferMapAsyncCallback, will call callback with a given userdata object only once, and then consumes the userdata. As a result, the userdata object is constructed by MakeUserdata as a unique_ptr managed object, then released as an unowned pointer and post to native device, and finally consumed and deleted by ForwardToServer-wrapped callback function. As long as the callback function will be called once and only once, the memory of userdata object is managed properly. However, for device-level callbacks, we do something different. The registered userdata will be used one or more time, or never used at all, depending on native device. Therefore, dawn_wire server have to take care of its life cycle, recording userdata objects for each device (likely in deviceInfo), and delete them when shutting down. I have tried, and met some tricky technical problem. \n    b) Generalized design of DeviceBase and CallbackTask. Since we can\u0027t assume the type of userdata registered in DeviceBase, it can only be void*, rather than some fancy shared pointer or weak pointer. So if we just register a void* pointing to the dawn_wire server managed userdata object, callback tasks still face the problem of checking if this object is already released by server. In current patchset, we bypass this problem by making sure that device-level callbacks descriptor is not expired, which means callbacks is not reset, which means server is still alive.",
+      "parentUuid": "c89b70c4_b129e257",
       "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
