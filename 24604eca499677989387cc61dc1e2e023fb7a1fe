@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c359ea08_2961461f",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b5f6894_839394f0",
+      "range": {
+        "startLine": 87,
+        "startChar": 30,
+        "endLine": 87,
+        "endChar": 37
+      },
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62bc9852_8816137c",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-07-15T15:44:19Z",
       "side": 1,
       "message": "nit: Maybe Flush11On12DeviceToAvoidLeaks or something explicit like that, WDYT?",
+      "range": {
+        "startLine": 89,
+        "startChar": 8,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08364ee_b666c23c",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "62bc9852_8816137c",
       "range": {
         "startLine": 89,
         "startChar": 8,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cafb6d79_2face513",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "447a804d_8f78a7ad",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ed4cb4a_529b760c",
@@ -111,6 +177,24 @@
       "writtenOn": "2021-07-15T15:44:19Z",
       "side": 1,
       "message": "nit: maybe we could reuse d3d12_platform.\n\nThis would also help use ComPtr instead of the fully qualified name.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf125c5_ad2992e4",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Good idea!",
+      "parentUuid": "1ed4cb4a_529b760c",
       "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -138,6 +222,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c93b51f_3e3b4ab8",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0cb91bb_27faa00e",
+      "range": {
+        "startLine": 34,
+        "startChar": 9,
+        "endLine": 34,
+        "endChar": 27
+      },
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb6026b0_dfcf18cd",
@@ -155,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcdf6852_9cda0f71",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb6026b0_dfcf18cd",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "793fe8dd_e32d2d55",
@@ -168,6 +294,24 @@
       "writtenOn": "2021-07-15T15:44:19Z",
       "side": 1,
       "message": "nit: Could we have regular DAWN_TRY handling for this instead of a new, separate error handling mechanism? Same thing for GetOrCreate11On12Device.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a293446d_5b91d743",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-15T18:28:57Z",
+      "side": 1,
+      "message": "Hmm. ConsumedError can\u0027t return COM ptr and D3D12Backend doesn\u0027t return DAWN errors anyway. What do you suggest?",
+      "parentUuid": "793fe8dd_e32d2d55",
       "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
