@@ -148,6 +148,26 @@ class CopyCommandTest : public ValidationTest {
         ValidateExpectation(encoder, expectation);
     }
 
+    void TestT2TCopyInternal(utils::Expectation expectation,
+                             wgpu::Texture srcTexture,
+                             uint32_t srcLevel,
+                             wgpu::Origin3D srcOrigin,
+                             wgpu::Texture dstTexture,
+                             uint32_t dstLevel,
+                             wgpu::Origin3D dstOrigin,
+                             wgpu::Extent3D extent3D,
+                             wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
+        wgpu::ImageCopyTexture srcImageCopyTexture =
+            utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyTextureToTextureInternal(&srcImageCopyTexture, &dstImageCopyTexture, &extent3D);
+
+        ValidateExpectation(encoder, expectation);
+    }
+
     void TestBothTBCopies(utils::Expectation expectation,
                           wgpu::Buffer buffer,
                           uint64_t bufferOffset,
@@ -173,6 +193,20 @@ class CopyCommandTest : public ValidationTest {
                            wgpu::Extent3D extent3D) {
         TestT2TCopy(expectation, texture1, level1, origin1, texture2, level2, origin2, extent3D);
         TestT2TCopy(expectation, texture2, level2, origin2, texture1, level1, origin1, extent3D);
+    }
+
+    void TestBothT2TCopiesInternal(utils::Expectation expectation,
+                                   wgpu::Texture texture1,
+                                   uint32_t level1,
+                                   wgpu::Origin3D origin1,
+                                   wgpu::Texture texture2,
+                                   uint32_t level2,
+                                   wgpu::Origin3D origin2,
+                                   wgpu::Extent3D extent3D) {
+        TestT2TCopyInternal(expectation, texture1, level1, origin1, texture2, level2, origin2,
+                            extent3D);
+        TestT2TCopyInternal(expectation, texture2, level2, origin2, texture1, level1, origin1,
+                            extent3D);
     }
 
     void TestBothTBCopiesExactBufferSize(uint32_t bufferBytesPerRow,
@@ -2013,6 +2047,435 @@ TEST_F(CopyCommandTest_T2T, CopyWithinSameTexture) {
 
         TestT2TCopy(utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin, texture3D,
                     kMipmapLevel, kDstOrigin, kCopyExtent);
+    }
+}
+
+class CopyCommandTest_T2T_internal : public CopyCommandTest {};
+
+TEST_F(CopyCommandTest_T2T_internal, Success) {
+    // We are purposely not adding CopySrc as usage.
+    wgpu::Texture source =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::None);
+    wgpu::Texture destination =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+
+    // Different copies, including some that touch the OOB condition
+    {
+        // Copy a region along top left boundary
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {4, 4, 1});
+
+        // Copy entire texture
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1});
+
+        // Copy a region along bottom right boundary
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {8, 8, 0}, destination, 0,
+                            {8, 8, 0}, {8, 8, 1});
+
+        // Copy region into mip
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 2,
+                            {0, 0, 0}, {4, 4, 1});
+
+        // Copy mip into region
+        TestT2TCopyInternal(utils::Expectation::Success, source, 2, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {4, 4, 1});
+
+        // Copy between slices
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+                            {0, 0, 1}, {16, 16, 1});
+
+        // Copy multiple slices (srcImageCopyTexture.arrayLayer + copySize.depthOrArrayLayers ==
+        // srcImageCopyTexture.texture.arrayLayerCount)
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0,
+                            {0, 0, 0}, {16, 16, 2});
+
+        // Copy multiple slices (dstImageCopyTexture.arrayLayer + copySize.depthOrArrayLayers ==
+        // dstImageCopyTexture.texture.arrayLayerCount)
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 2}, {16, 16, 2});
+    }
+
+    // Empty copies are valid
+    {
+        // An empty copy
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {0, 0, 1});
+
+        // An empty copy with depth = 0
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {0, 0, 0});
+
+        // An empty copy touching the side of the source texture
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {16, 16, 0}, {0, 0, 1});
+
+        // An empty copy touching the side of the destination texture
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {16, 16, 0}, {0, 0, 1});
+    }
+}
+
+TEST_F(CopyCommandTest_T2T_internal, IncorrectUsage) {
+    wgpu::Texture source =
+        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::None);
+    wgpu::Texture destination =
+        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopySrc);
+
+    // Incorrect destination usage causes failure
+    TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {16, 16, 1});
+}
+
+TEST_F(CopyCommandTest_T2T_internal, OutOfBounds) {
+    wgpu::Texture source =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::None);
+    wgpu::Texture destination =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+
+    // OOB on source
+    {
+        // x + width overflows
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {1, 0, 0}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1});
+
+        // y + height overflows
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 1, 0}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1});
+
+        // non-zero mip overflows
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {9, 9, 1});
+
+        // arrayLayer + depth OOB
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 3}, destination, 0,
+                            {0, 0, 0}, {16, 16, 2});
+
+        // empty copy on non-existent mip fails
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 6, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {0, 0, 1});
+
+        // empty copy from non-existent slice fails
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 4}, destination, 0,
+                            {0, 0, 0}, {0, 0, 1});
+    }
+
+    // OOB on destination
+    {
+        // x + width overflows
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                            {1, 0, 0}, {16, 16, 1});
+
+        // y + height overflows
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 1, 0}, {16, 16, 1});
+
+        // non-zero mip overflows
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 1,
+                            {0, 0, 0}, {9, 9, 1});
+
+        // arrayLayer + depth OOB
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 3}, {16, 16, 2});
+
+        // empty copy on non-existent mip fails
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 6,
+                            {0, 0, 0}, {0, 0, 1});
+
+        // empty copy on non-existent slice fails
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 4}, {0, 0, 1});
+    }
+}
+
+TEST_F(CopyCommandTest_T2T_internal, 2DTextureDepthStencil) {
+    wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8,
+                                           wgpu::TextureUsage::None);
+
+    wgpu::Texture destination = Create2DTexture(
+        16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+
+    // Success when entire depth stencil subresource is copied
+    TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {16, 16, 1});
+
+    // Failure when depth stencil subresource is partially copied
+    TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {15, 15, 1});
+
+    // Failure when selecting the depth aspect (not all)
+    TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+
+    // Failure when selecting the stencil aspect (not all)
+    TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+}
+
+TEST_F(CopyCommandTest_T2T_internal, 2DTextureDepthOnly) {
+    constexpr std::array<wgpu::TextureFormat, 2> kDepthOnlyFormats = {
+        wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Depth32Float};
+
+    for (wgpu::TextureFormat format : kDepthOnlyFormats) {
+        wgpu::Texture source = Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::None);
+
+        wgpu::Texture destination =
+            Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
+
+        // Success when entire subresource is copied
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1});
+
+        // Failure when depth subresource is partially copied
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {15, 15, 1});
+
+        // Success when selecting the depth aspect (not all)
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+
+        // Failure when selecting the stencil aspect (not all)
+        TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+    }
+}
+
+TEST_F(CopyCommandTest_T2T_internal, 2DTextureArrayDepthStencil) {
+    {
+        wgpu::Texture source = Create2DTexture(
+            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::None);
+        wgpu::Texture destination = Create2DTexture(
+            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+
+        // Success when entire depth stencil subresource (layer) is the copy source
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+                            {0, 0, 0}, {16, 16, 1});
+    }
+
+    {
+        wgpu::Texture source = Create2DTexture(
+            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::None);
+        wgpu::Texture destination = Create2DTexture(
+            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+
+        // Success when entire depth stencil subresource (layer) is the copy destination
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                            {0, 0, 1}, {16, 16, 1});
+    }
+
+    {
+        wgpu::Texture source = Create2DTexture(
+            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::None);
+        wgpu::Texture destination = Create2DTexture(
+            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+
+        // Success when src and dst are an entire depth stencil subresource (layer)
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0,
+                            {0, 0, 1}, {16, 16, 1});
+
+        // Success when src and dst are an array of entire depth stencil subresources
+        TestT2TCopyInternal(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+                            {0, 0, 0}, {16, 16, 2});
+    }
+}
+
+TEST_F(CopyCommandTest_T2T_internal, FormatsMismatch) {
+    wgpu::Texture source =
+        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Uint, wgpu::TextureUsage::None);
+    wgpu::Texture destination =
+        Create2DTexture(16, 16, 5, 2, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+
+    // Failure when formats don't match
+    TestT2TCopyInternal(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {0, 0, 1});
+}
+
+TEST_F(CopyCommandTest_T2T_internal, MultisampledCopies) {
+    wgpu::Texture sourceMultiSampled1x =
+        Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::None, 1);
+    wgpu::Texture sourceMultiSampled4x =
+        Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::None, 4);
+    wgpu::Texture destinationMultiSampled4x = Create2DTexture(
+        16, 16, 1, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst, 4);
+
+    // Success when entire multisampled subresource is copied
+    {
+        TestT2TCopyInternal(utils::Expectation::Success, sourceMultiSampled4x, 0, {0, 0, 0},
+                            destinationMultiSampled4x, 0, {0, 0, 0}, {16, 16, 1});
+    }
+
+    // Failures
+    {
+        // An empty copy with mismatched samples fails
+        TestT2TCopyInternal(utils::Expectation::Failure, sourceMultiSampled1x, 0, {0, 0, 0},
+                            destinationMultiSampled4x, 0, {0, 0, 0}, {0, 0, 1});
+
+        // A copy fails when samples are greater than 1, and entire subresource isn't copied
+        TestT2TCopyInternal(utils::Expectation::Failure, sourceMultiSampled4x, 0, {0, 0, 0},
+                            destinationMultiSampled4x, 0, {0, 0, 0}, {15, 15, 1});
+    }
+}
+
+// Test copy to mip map of non square textures
+TEST_F(CopyCommandTest_T2T_internal, CopyToMipmapOfNonSquareTexture) {
+    uint32_t maxMipmapLevel = 3;
+    wgpu::Texture source = Create2DTexture(4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm,
+                                           wgpu::TextureUsage::None);
+    wgpu::Texture destination = Create2DTexture(
+        4, 2, maxMipmapLevel, 1, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+    // Copy to top level mip map
+    TestT2TCopyInternal(utils::Expectation::Success, source, maxMipmapLevel - 1, {0, 0, 0},
+                        destination, maxMipmapLevel - 1, {0, 0, 0}, {1, 1, 1});
+    // Copy to high level mip map
+    TestT2TCopyInternal(utils::Expectation::Success, source, maxMipmapLevel - 2, {0, 0, 0},
+                        destination, maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
+    // Mip level out of range
+    TestT2TCopyInternal(utils::Expectation::Failure, source, maxMipmapLevel, {0, 0, 0}, destination,
+                        maxMipmapLevel, {0, 0, 0}, {2, 1, 1});
+    // Copy origin out of range
+    TestT2TCopyInternal(utils::Expectation::Failure, source, maxMipmapLevel - 2, {2, 0, 0},
+                        destination, maxMipmapLevel - 2, {2, 0, 0}, {2, 1, 1});
+    // Copy size out of range
+    TestT2TCopyInternal(utils::Expectation::Failure, source, maxMipmapLevel - 2, {1, 0, 0},
+                        destination, maxMipmapLevel - 2, {0, 0, 0}, {2, 1, 1});
+}
+
+// Test copy within the same texture
+TEST_F(CopyCommandTest_T2T_internal, CopyWithinSameTexture) {
+    wgpu::Texture texture =
+        Create2DTexture(32, 32, 2, 4, wgpu::TextureFormat::RGBA8Unorm, wgpu::TextureUsage::CopyDst);
+
+    // The base array layer of the copy source being equal to that of the copy destination is not
+    // allowed.
+    {
+        constexpr uint32_t kBaseArrayLayer = 0;
+
+        // copyExtent.z == 1
+        {
+            constexpr uint32_t kCopyArrayLayerCount = 1;
+            TestT2TCopyInternal(utils::Expectation::Failure, texture, 0, {0, 0, kBaseArrayLayer},
+                                texture, 0, {2, 2, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
+        }
+
+        // copyExtent.z > 1
+        {
+            constexpr uint32_t kCopyArrayLayerCount = 2;
+            TestT2TCopyInternal(utils::Expectation::Failure, texture, 0, {0, 0, kBaseArrayLayer},
+                                texture, 0, {2, 2, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
+        }
+    }
+
+    // The array slices of the source involved in the copy have no overlap with those of the
+    // destination is allowed.
+    {
+        constexpr uint32_t kCopyArrayLayerCount = 2;
+
+        // srcBaseArrayLayer < dstBaseArrayLayer
+        {
+            constexpr uint32_t kSrcBaseArrayLayer = 0;
+            constexpr uint32_t kDstBaseArrayLayer = kSrcBaseArrayLayer + kCopyArrayLayerCount;
+
+            TestT2TCopyInternal(utils::Expectation::Success, texture, 0, {0, 0, kSrcBaseArrayLayer},
+                                texture, 0, {0, 0, kDstBaseArrayLayer},
+                                {1, 1, kCopyArrayLayerCount});
+        }
+
+        // srcBaseArrayLayer > dstBaseArrayLayer
+        {
+            constexpr uint32_t kSrcBaseArrayLayer = 2;
+            constexpr uint32_t kDstBaseArrayLayer = kSrcBaseArrayLayer - kCopyArrayLayerCount;
+            TestT2TCopyInternal(utils::Expectation::Success, texture, 0, {0, 0, kSrcBaseArrayLayer},
+                                texture, 0, {0, 0, kDstBaseArrayLayer},
+                                {1, 1, kCopyArrayLayerCount});
+        }
+    }
+
+    // Copy between different mipmap levels is allowed.
+    {
+        constexpr uint32_t kSrcMipLevel = 0;
+        constexpr uint32_t kDstMipLevel = 1;
+
+        // Copy one slice
+        {
+            constexpr uint32_t kCopyArrayLayerCount = 1;
+            TestT2TCopyInternal(utils::Expectation::Success, texture, kSrcMipLevel, {0, 0, 0},
+                                texture, kDstMipLevel, {1, 1, 0}, {1, 1, kCopyArrayLayerCount});
+        }
+
+        // The base array layer of the copy source is equal to that of the copy destination.
+        {
+            constexpr uint32_t kCopyArrayLayerCount = 2;
+            constexpr uint32_t kBaseArrayLayer = 0;
+
+            TestT2TCopyInternal(utils::Expectation::Success, texture, kSrcMipLevel,
+                                {0, 0, kBaseArrayLayer}, texture, kDstMipLevel,
+                                {1, 1, kBaseArrayLayer}, {1, 1, kCopyArrayLayerCount});
+        }
+
+        // The array slices of the source involved in the copy have overlaps with those of the
+        // destination, and the copy areas have overlaps.
+        {
+            constexpr uint32_t kCopyArrayLayerCount = 2;
+
+            constexpr uint32_t kSrcBaseArrayLayer = 0;
+            constexpr uint32_t kDstBaseArrayLayer = 1;
+            ASSERT(kSrcBaseArrayLayer + kCopyArrayLayerCount > kDstBaseArrayLayer);
+
+            constexpr wgpu::Extent3D kCopyExtent = {1, 1, kCopyArrayLayerCount};
+
+            TestT2TCopyInternal(utils::Expectation::Success, texture, kSrcMipLevel,
+                                {0, 0, kSrcBaseArrayLayer}, texture, kDstMipLevel,
+                                {0, 0, kDstBaseArrayLayer}, kCopyExtent);
+        }
+    }
+
+    // The array slices of the source involved in the copy have overlaps with those of the
+    // destination is not allowed.
+    {
+        constexpr uint32_t kMipmapLevel = 0;
+        constexpr uint32_t kMinBaseArrayLayer = 0;
+        constexpr uint32_t kMaxBaseArrayLayer = 1;
+        constexpr uint32_t kCopyArrayLayerCount = 3;
+        ASSERT(kMinBaseArrayLayer + kCopyArrayLayerCount > kMaxBaseArrayLayer);
+
+        constexpr wgpu::Extent3D kCopyExtent = {4, 4, kCopyArrayLayerCount};
+
+        const wgpu::Origin3D srcOrigin = {0, 0, kMinBaseArrayLayer};
+        const wgpu::Origin3D dstOrigin = {4, 4, kMaxBaseArrayLayer};
+        TestT2TCopyInternal(utils::Expectation::Failure, texture, kMipmapLevel, srcOrigin, texture,
+                            kMipmapLevel, dstOrigin, kCopyExtent);
+    }
+
+    // Copy between different mipmap levels and array slices is allowed.
+    TestT2TCopyInternal(utils::Expectation::Success, texture, 0, {0, 0, 1}, texture, 1, {1, 1, 0},
+                        {1, 1, 1});
+
+    // Copy between 3D texture of both overlapping depth ranges is not allowed.
+    {
+        wgpu::Texture texture3D = Create3DTexture(32, 32, 4, 2, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopyDst);
+
+        constexpr uint32_t kMipmapLevel = 0;
+        constexpr wgpu::Origin3D kSrcOrigin = {0, 0, 0};
+        constexpr wgpu::Origin3D kDstOrigin = {0, 0, 1};
+        constexpr wgpu::Extent3D kCopyExtent = {4, 4, 2};
+
+        TestT2TCopyInternal(utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin,
+                            texture3D, kMipmapLevel, kDstOrigin, kCopyExtent);
+    }
+
+    // Copy between 3D texture of both non-overlapping depth ranges is not allowed.
+    {
+        wgpu::Texture texture3D = Create3DTexture(32, 32, 4, 2, wgpu::TextureFormat::RGBA8Unorm,
+                                                  wgpu::TextureUsage::CopyDst);
+
+        constexpr uint32_t kMipmapLevel = 0;
+        constexpr wgpu::Origin3D kSrcOrigin = {0, 0, 0};
+        constexpr wgpu::Origin3D kDstOrigin = {0, 0, 2};
+        constexpr wgpu::Extent3D kCopyExtent = {4, 4, 1};
+
+        TestT2TCopyInternal(utils::Expectation::Failure, texture3D, kMipmapLevel, kSrcOrigin,
+                            texture3D, kMipmapLevel, kDstOrigin, kCopyExtent);
     }
 }
 
