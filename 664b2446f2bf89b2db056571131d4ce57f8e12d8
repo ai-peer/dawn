@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cd0ecb0_f110954c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-15T18:31:00Z",
+      "side": 1,
+      "message": "Thanks for your review, Austin and Kai. \n\nNow that Kai has already suppressed the tests in WebGPUExpectations at https://chromium-review.googlesource.com/c/chromium/src/+/3028953, the bots are happy now. I am going to land this change. \n\nI will remove those suppressed tests once all related fixes in Dawn and CTS are rolled into Chromium.  ",
+      "revId": "664b2446f2bf89b2db056571131d4ce57f8e12d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
