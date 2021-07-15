@@ -664,6 +664,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96998ce_04d941f1",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e585023_54864d9b",
+      "range": {
+        "startLine": 123,
+        "startChar": 82,
+        "endLine": 123,
+        "endChar": 83
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d822b938_66d18346",
@@ -752,6 +776,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a267e14_35062429",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f895c3ac_ef3519d9",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d0342bf_de8ad04d",
@@ -801,6 +843,24 @@
       "side": 1,
       "message": "The spec only talks about about vertex buffers and not attributes, so I think we should still validate if there\u0027s no attribute. We could implement it in Dawn as a follow-up, and add a non-normative note to the specification.",
       "parentUuid": "344f70c7_06ad7728",
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "214817c7_257a6961",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "I see. Should we open an issue to change the createRenderPipeline implementation?",
+      "parentUuid": "b924a151_03bb1fcf",
       "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1170,6 +1230,30 @@
       "side": 1,
       "message": "Got it, current naming LGTM",
       "parentUuid": "8edc3012_505bbf76",
+      "range": {
+        "startLine": 287,
+        "startChar": 55,
+        "endLine": 287,
+        "endChar": 61
+      },
+      "revId": "69287fa83cce1068aae497012d9eb5db241fa07f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e722f577_de31e7cc",
+        "filename": "src/tests/unittests/validation/RenderPassCommandValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90813858_1cb4b12d",
       "range": {
         "startLine": 287,
         "startChar": 55,

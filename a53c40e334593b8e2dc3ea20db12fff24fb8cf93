@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6418498e_cb69b331",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cb08034_51b886be",
+      "range": {
+        "startLine": 90,
+        "startChar": 12,
+        "endLine": 90,
+        "endChar": 16
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a56f86c4_4f945ce0",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-07-07T09:22:45Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 52
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46253148_05386591",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a56f86c4_4f945ce0",
       "range": {
         "startLine": 92,
         "startChar": 30,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34616603_f2df7edb",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efc88a1a_65e5973b",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 16
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2eb483f_ca1548e1",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-07-07T09:22:45Z",
       "side": 1,
       "message": "nit: kMaxVertexBufferArrayStride now.",
+      "range": {
+        "startLine": 115,
+        "startChar": 34,
+        "endLine": 115,
+        "endChar": 56
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b4723b_3dc72ead",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2eb483f_ca1548e1",
       "range": {
         "startLine": 115,
         "startChar": 34,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4faf73d3_1c91c593",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d7689f6_bd23d88a",
+      "range": {
+        "startLine": 132,
+        "startChar": 12,
+        "endLine": 132,
+        "endChar": 30
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "884135e4_4fdbc2e4",
@@ -150,6 +270,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a58a67_efbcda74",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "884135e4_4fdbc2e4",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee22481e_ab0e9296",
@@ -163,6 +301,24 @@
       "writtenOn": "2021-07-07T09:22:45Z",
       "side": 1,
       "message": "nit: this is now unused.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb4a6ee6_fb02ad11",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee22481e_ab0e9296",
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +346,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "afc6b6de_e899c376",
+        "filename": "src/dawn_native/CommandBufferStateTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "327f370d_b96a8b8c",
+      "range": {
+        "startLine": 59,
+        "startChar": 0,
+        "endLine": 60,
+        "endChar": 66
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e7e4a618_0803dad8",
@@ -203,6 +383,24 @@
       "writtenOn": "2021-07-07T09:22:45Z",
       "side": 1,
       "message": "nit: I think we can just remove this comment, no need to keep the history of previous versions in the code.",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e1ae501_57afef5d",
+        "filename": "src/tests/end2end/DrawIndexedTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e7e4a618_0803dad8",
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -265,6 +463,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8b7a7f8_432df348",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a208efe3_4b198f7a",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c16eec4_00830540",
@@ -278,6 +500,24 @@
       "writtenOn": "2021-07-07T12:29:01Z",
       "side": 1,
       "message": "I think we\u0027re missing coverage of size !\u003d 0 in both SetVertexBuffer and SetIndexBuffer.\n\nFor SetIndexBuffer you could define a struct IndexBuffer {wgpu::Buffer buffer, wgpu::IndexFormat format, offset \u003d 0, size \u003d 0} so that the function calls can be adapted with \n\nTestRenderPassDrawIndexed(pipeline, {indexBuffer, indexFormat}, vertexBufferList, 12, 5, 0, 0, 0, true);\n\nand more if we need to test the size:\n\nTestRenderPassDrawIndexed(pipeline, {indexBuffer, indexFormat, 0, 42}, vertexBufferList, 12, 5, 0, 0, 0, true);",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49710a8e_d9545b80",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0c16eec4_00830540",
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -299,6 +539,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3743f880_c0035e60",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "552597cd_2557e25f",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce734fd3_105b9871",
@@ -316,6 +574,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "347351c9_67083341",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce734fd3_105b9871",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab8df8cf_f6d69563",
@@ -329,6 +605,24 @@
       "writtenOn": "2021-07-07T12:29:01Z",
       "side": 1,
       "message": "It would be nice somehow to have coverage of cases with multiple \"vertex\" or \"instance\" stepModes. Right now it\u0027s not clear there needs to be a loop in Dawn. But maybe this is too annoying and could be done in the CTS. WDYT?",
+      "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb10df94_b5af5532",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-15T08:33:49Z",
+      "side": 1,
+      "message": "I am not sure if the unit test will go a little too complex. But currently adding more vertex buffer is of no difficulty in this unit test  other than making longer parameters list.",
+      "parentUuid": "ab8df8cf_f6d69563",
       "revId": "a53c40e334593b8e2dc3ea20db12fff24fb8cf93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
