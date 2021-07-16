@@ -34,6 +34,24 @@
       "parentUuid": "7d81d29c_7373cd79",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8797c954_0f1a425a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T22:20:39Z",
+      "side": 1,
+      "message": "Thanks. Another idea - could lower kShaderVisibleSmallHeapSizes[0] so the sum doesn\u0027t overflow. Simpler than re-writing this using SSBO.",
+      "parentUuid": "798e096e_22e8e731",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
