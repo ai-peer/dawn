@@ -16,6 +16,23 @@
       "message": "Didn\u0027t test this at all - just an idea. juanmihd@ may need something like this to add internal usages that are only accessible by internal commands - in order to implement GetImage(..) for the canvas. A pure-Dawn approach is preferred because it\u0027s less sync tokens and command buffer switching overhead. At a high level, WDYT?",
       "revId": "dcfb30a76a1f17039326d71b73789479eab0148e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae5c654_73fcd2c5",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T13:20:19Z",
+      "side": 1,
+      "message": "Probably worth commenting clearly what the different between the two is here.",
+      "revId": "dcfb30a76a1f17039326d71b73789479eab0148e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
