@@ -318,6 +318,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dde8d54_02906a3c",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T12:57:43Z",
+      "side": 1,
+      "message": "We can use ResultOrError\u003cComPtr\u003cT\u003e\u003e and at the end do\n\n  ComPtr\u003cT\u003e result;\n  if (device-\u003eConsumedError(\u0026result)) {\n    return nullptr;\n  }\n  \n  // Proceed with content of result.",
+      "parentUuid": "a293446d_5b91d743",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac38336b_f75fd511",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 19
@@ -329,6 +347,24 @@
       "writtenOn": "2021-07-15T15:44:19Z",
       "side": 1,
       "message": "I\u0027m still not sure why this is necessary see https://bugs.chromium.org/p/dawn/issues/detail?id\u003d625#c60\n\nIf it\u0027s not, then ReleaseD3D11on12Device can become an implementation detail of D3D11On12Utils.",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "129875e1_37da1fa8",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T12:57:43Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ac38336b_f75fd511",
       "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
