@@ -294,10 +294,9 @@ namespace dawn_native { namespace metal {
                         bufferCount += pipeline->GetVertexBufferCount();
                     }
 
-#ifdef TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16
                     bufferCount = Align(bufferCount, 4);
                     ASSERT(bufferCount <= data[SingleShaderStage::Vertex].size());
-#endif
+
                     [render setVertexBytes:data[SingleShaderStage::Vertex].data()
                                     length:sizeof(uint32_t) * bufferCount
                                    atIndex:kBufferLengthBufferSlot];
@@ -306,10 +305,9 @@ namespace dawn_native { namespace metal {
                 if (stagesToApply & wgpu::ShaderStage::Fragment) {
                     uint32_t bufferCount = ToBackend(pipeline->GetLayout())
                                                ->GetBufferBindingCount(SingleShaderStage::Fragment);
-#ifdef TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16
                     bufferCount = Align(bufferCount, 4);
                     ASSERT(bufferCount <= data[SingleShaderStage::Fragment].size());
-#endif
+
                     [render setFragmentBytes:data[SingleShaderStage::Fragment].data()
                                       length:sizeof(uint32_t) * bufferCount
                                      atIndex:kBufferLengthBufferSlot];
@@ -330,10 +328,9 @@ namespace dawn_native { namespace metal {
 
                 uint32_t bufferCount = ToBackend(pipeline->GetLayout())
                                            ->GetBufferBindingCount(SingleShaderStage::Compute);
-#ifdef TINT_EXPECTS_UBOS_TO_BE_MULTIPLE_OF_16
                 bufferCount = Align(bufferCount, 4);
                 ASSERT(bufferCount <= data[SingleShaderStage::Compute].size());
-#endif
+
                 [compute setBytes:data[SingleShaderStage::Compute].data()
                            length:sizeof(uint32_t) * bufferCount
                           atIndex:kBufferLengthBufferSlot];
