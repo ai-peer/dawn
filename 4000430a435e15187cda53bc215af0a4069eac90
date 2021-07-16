@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f913a7a_722df31f",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:36:56Z",
+      "side": 1,
+      "message": "will require CopySrc usage. We could instead populate the texture by rendering to it or making it a storage buffer and using a compute shader.\n(memcpy in compute shader probably easier)",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 9
+      },
+      "revId": "4000430a435e15187cda53bc215af0a4069eac90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
