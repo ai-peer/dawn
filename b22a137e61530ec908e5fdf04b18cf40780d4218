@@ -86,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78013fbb_2fea09c4",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-16T03:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3fce601_321f90fd",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91ea5db4_fef020da",
@@ -99,6 +117,24 @@
       "writtenOn": "2021-07-15T14:31:23Z",
       "side": 1,
       "message": "nit: These are constant so they could be kVertexParamsList and outside of this initialization method and we wouldn\u0027t need a getter.",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8ee9e83_503306d3",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-16T03:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91ea5db4_fef020da",
       "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +156,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a13a1d2f_018438ad",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-16T03:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb8eba22_54468cfc",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db0fc68e_16e56a9b",
@@ -133,6 +187,30 @@
       "writtenOn": "2021-07-16T01:07:00Z",
       "side": 1,
       "message": "typo: Although",
+      "range": {
+        "startLine": 485,
+        "startChar": 19,
+        "endLine": 485,
+        "endChar": 28
+      },
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47aefd83_fe5d9c95",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-16T03:16:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db0fc68e_16e56a9b",
       "range": {
         "startLine": 485,
         "startChar": 19,
