@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b0b2ae_07d80f7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T01:07:00Z",
+      "side": 1,
+      "message": "LGTM too; thanks for the thorough tests!",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3fce601_321f90fd",
@@ -99,6 +116,29 @@
       "writtenOn": "2021-07-15T14:31:23Z",
       "side": 1,
       "message": "I think WGSL supports having extra trailing commas in function declarations.",
+      "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db0fc68e_16e56a9b",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T01:07:00Z",
+      "side": 1,
+      "message": "typo: Although",
+      "range": {
+        "startLine": 485,
+        "startChar": 19,
+        "endLine": 485,
+        "endChar": 28
+      },
       "revId": "b22a137e61530ec908e5fdf04b18cf40780d4218",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
