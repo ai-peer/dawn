@@ -16,6 +16,23 @@
       "message": "Sounds like there\u0027s sufficient reason to land this - at least for now. Note: Metal backend already as it as a validation error.\n\nEventually, I think we\u0027ll want to have some other kind of internal-but-not-fatal-error that is different from DAWN_VALIDATION_ERROR - mostly for clarity I guess.",
       "revId": "b3a6712066a7f8bb55755282e363f5a12727053f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1c7e876_61c37926",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T17:38:08Z",
+      "side": 1,
+      "message": "LGTM. Do we have something similar in Vulkan?",
+      "revId": "b3a6712066a7f8bb55755282e363f5a12727053f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
