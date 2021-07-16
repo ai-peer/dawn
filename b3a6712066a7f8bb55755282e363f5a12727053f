@@ -33,6 +33,24 @@
       "message": "LGTM. Do we have something similar in Vulkan?",
       "revId": "b3a6712066a7f8bb55755282e363f5a12727053f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4657ba7c_d58304a4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T17:51:20Z",
+      "side": 1,
+      "message": "No, but most users aren\u0027t using Vulkan so I was kinda lazy about that. We\u0027re also using CheckVkSuccess which we might need to teach better about error severity.\n\nFor Vulkan though, we might not even have that ability though. Spec says that pipeline and shader compilation either succeed or OOM. And I guess if you give it something bad, the driver will simply crash??? Or return some non-spec-compliant error code (according to the internet). That\u0027s kinda gross. So DeviceLost is probably the best thing here for now.",
+      "parentUuid": "e1c7e876_61c37926",
+      "revId": "b3a6712066a7f8bb55755282e363f5a12727053f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
