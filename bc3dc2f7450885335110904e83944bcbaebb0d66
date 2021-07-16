@@ -16,6 +16,24 @@
       "message": "The D3D12DescriptorHeapTests.EncodeManyUBO end2end tests uses R32Float and blend and unfortunately webgpu don\u0027t have default blend capability for that. But turns out switching to R16Float the result will overflow. (Expected is 2098176 here)\nIs there another for for testing the heapSize? maybe not using blend add? Does compute shader also has the same \"heap\" so we can test against that?\n(Added code is for checking float16 texture result against float expected value)",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "798e096e_22e8e731",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T03:06:25Z",
+      "side": 1,
+      "message": "I think it should work with storage buffers and a compute shader instead.\n\nThis allocator is used for D3D12 Constant Buffer Views (uniform buffers), Unordered Access Views (storage buffers and writeonly storage textures), and Shader Resource Views (readonly storage buffers, readonly storage textures, sampled textures).\n\n+cc Bryan - he wrote the allocator and tests and may know better.",
+      "parentUuid": "7d81d29c_7373cd79",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
