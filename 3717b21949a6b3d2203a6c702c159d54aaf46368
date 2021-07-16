@@ -33,6 +33,24 @@
       "message": "nit: maybe explain why we do this computation (also for 4 we compute 8 right now)",
       "revId": "3717b21949a6b3d2203a6c702c159d54aaf46368",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31afe09_19f256a2",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-16T14:05:35Z",
+      "side": 1,
+      "message": "You\u0027re right. See the original discussion about this here: https://dawn-review.googlesource.com/c/dawn/+/57960/1..6/src/dawn_native/metal/CommandBufferMTL.mm#b277\n\nIdeally, we\u0027d make use of Align() here, but we\u0027d need to make it constexpr. Anyway, I\u0027ll fix it in place for now.",
+      "parentUuid": "7d70da11_b49b0a83",
+      "revId": "3717b21949a6b3d2203a6c702c159d54aaf46368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
