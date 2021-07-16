@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9acff237_ff3f3a2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T13:56:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3717b21949a6b3d2203a6c702c159d54aaf46368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d70da11_b49b0a83",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T13:56:29Z",
+      "side": 1,
+      "message": "nit: maybe explain why we do this computation (also for 4 we compute 8 right now)",
+      "revId": "3717b21949a6b3d2203a6c702c159d54aaf46368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
