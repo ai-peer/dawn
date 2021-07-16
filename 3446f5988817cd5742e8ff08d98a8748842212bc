@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a22994cb_be06b975",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T18:42:56Z",
+      "side": 1,
+      "message": "nit: several of your commit messages are like \"Fix a bug in ...\"\n\nIt would be better to say \"Handle all cases in unvalidated enum switch in ...\"\n\nOr \"\u003cFunction\u003e: fix incorrect UNREACHABLE()\n\nAn UNREACHABLE() could be hit in \u003cFunction\u003e because ...\"\n\nThis would make it much clearer in the commit message what the commit does instead of just \"a bug\".",
+      "revId": "3446f5988817cd5742e8ff08d98a8748842212bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d2391f1b_1460f6ab",
