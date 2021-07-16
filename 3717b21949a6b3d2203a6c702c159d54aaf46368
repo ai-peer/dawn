@@ -51,6 +51,24 @@
       "parentUuid": "7d70da11_b49b0a83",
       "revId": "3717b21949a6b3d2203a6c702c159d54aaf46368",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de12d35_52775b90",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-07-16T14:19:31Z",
+      "side": 1,
+      "message": "PTAL.",
+      "parentUuid": "f31afe09_19f256a2",
+      "revId": "3717b21949a6b3d2203a6c702c159d54aaf46368",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
