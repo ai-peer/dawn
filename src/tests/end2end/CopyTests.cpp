@@ -322,19 +322,24 @@ class CopyTests_B2T : public CopyTests {
     }
 };
 
+// The CopyTests Texture to Texture in this class will validate both CopyTextureToTexture and
+// CopyTextureToTextureInternal.
 class CopyTests_T2T : public CopyTests {
   protected:
     void DoTest(const TextureSpec& srcSpec,
                 const TextureSpec& dstSpec,
                 const wgpu::Extent3D& copySize,
+                bool usageCopySrc,
                 bool copyWithinSameTexture = false,
-                wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D) {
-        DoTest(srcSpec, dstSpec, copySize, dimension, dimension, copyWithinSameTexture);
+                wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D, ) {
+        DoTest(srcSpec, dstSpec, copySize, usageCopySrc, dimension, dimension,
+               copyWithinSameTexture);
     }
 
     void DoTest(const TextureSpec& srcSpec,
                 const TextureSpec& dstSpec,
                 const wgpu::Extent3D& copySize,
+                bool usageCopySrc,
                 wgpu::TextureDimension srcDimension,
                 wgpu::TextureDimension dstDimension,
                 bool copyWithinSameTexture = false) {
@@ -347,7 +352,10 @@ class CopyTests_T2T : public CopyTests {
         srcDescriptor.sampleCount = 1;
         srcDescriptor.format = format;
         srcDescriptor.mipLevelCount = srcSpec.levelCount;
-        srcDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+        if (usageCopySrc)
+            srcDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+        else
+            srcDescriptor.usage = wgpu::TextureUsage::CopyDst;
         wgpu::Texture srcTexture = device.CreateTexture(&srcDescriptor);
 
         wgpu::Texture dstTexture;
@@ -360,7 +368,10 @@ class CopyTests_T2T : public CopyTests {
             dstDescriptor.sampleCount = 1;
             dstDescriptor.format = format;
             dstDescriptor.mipLevelCount = dstSpec.levelCount;
-            dstDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+            if (usageCopySrc)
+                dstDescriptor.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+            else
+                dstDescriptor.usage = wgpu::TextureUsage::CopyDst;
             dstTexture = device.CreateTexture(&dstDescriptor);
         }
 
@@ -1839,7 +1850,8 @@ TEST_P(CopyTests_T2T, Texture) {
 
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, 1};
-    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 1});
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 1}, /*usageCopySrc=*/true);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 1}, /*usageCopySrc=*/false);
 }
 
 // Test noop copies.
@@ -1849,9 +1861,12 @@ TEST_P(CopyTests_T2T, ZeroSizedCopy) {
 
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, 1};
-    DoTest(textureSpec, textureSpec, {0, kHeight, 1});
-    DoTest(textureSpec, textureSpec, {kWidth, 0, 1});
-    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 0});
+    DoTest(textureSpec, textureSpec, {0, kHeight, 1}, /*usageCopySrc=*/true);
+    DoTest(textureSpec, textureSpec, {kWidth, 0, 1}, /*usageCopySrc=*/true);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 0}, /*usageCopySrc=*/true);
+    DoTest(textureSpec, textureSpec, {0, kHeight, 1}, /*usageCopySrc=*/false);
+    DoTest(textureSpec, textureSpec, {kWidth, 0, 1}, /*usageCopySrc=*/false);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, 0}, /*usageCopySrc=*/false);
 }
 
 TEST_P(CopyTests_T2T, TextureRegion) {
@@ -1864,7 +1879,8 @@ TEST_P(CopyTests_T2T, TextureRegion) {
     for (unsigned int w : {64, 128, 256}) {
         for (unsigned int h : {16, 32, 48}) {
             TextureSpec textureSpec = defaultTextureSpec;
-            DoTest(textureSpec, textureSpec, {w, h, 1});
+            DoTest(textureSpec, textureSpec, {w, h, 1}, /*usageCopySrc=*/true);
+            DoTest(textureSpec, textureSpec, {w, h, 1}, /*usageCopySrc=*/false);
         }
     }
 }
@@ -1881,7 +1897,8 @@ TEST_P(CopyTests_T2T, TextureMip) {
         textureSpec.copyLevel = i;
         textureSpec.levelCount = i + 1;
 
-        DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, 1});
+        DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, 1}, /*usageCopySrc=*/true);
+        DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, 1}, /*usageCopySrc=*/false);
     }
 }
 
@@ -1900,7 +1917,10 @@ TEST_P(CopyTests_T2T, SingleMipSrcMultipleMipDst) {
         dstTextureSpec.copyLevel = i;
         dstTextureSpec.levelCount = i + 1;
 
-        DoTest(srcTextureSpec, dstTextureSpec, {kWidth >> i, kHeight >> i, 1});
+        DoTest(srcTextureSpec, dstTextureSpec, {kWidth >> i, kHeight >> i, 1},
+               /*usageCopySrc=*/true);
+        DoTest(srcTextureSpec, dstTextureSpec, {kWidth >> i, kHeight >> i, 1},
+               /*usageCopySrc=*/false);
     }
 }
 
@@ -1919,7 +1939,10 @@ TEST_P(CopyTests_T2T, MultipleMipSrcSingleMipDst) {
         TextureSpec dstTextureSpec = defaultTextureSpec;
         dstTextureSpec.textureSize = {kWidth >> i, kHeight >> i, 1};
 
-        DoTest(srcTextureSpec, dstTextureSpec, {kWidth >> i, kHeight >> i, 1});
+        DoTest(srcTextureSpec, dstTextureSpec, {kWidth >> i, kHeight >> i, 1},
+               /*usageCopySrc=*/true);
+        DoTest(srcTextureSpec, dstTextureSpec, {kWidth >> i, kHeight >> i, 1},
+               /*usageCopySrc=*/false);
     }
 }
 
@@ -1938,7 +1961,10 @@ TEST_P(CopyTests_T2T, Texture2DSameTextureDifferentMipLevels) {
         TextureSpec dstSpec = defaultTextureSpec;
         dstSpec.copyLevel = i;
 
-        DoTest(srcSpec, dstSpec, {kWidth >> i, kHeight >> i, 1}, true);
+        DoTest(srcSpec, dstSpec, {kWidth >> i, kHeight >> i, 1}, /*usageCopySrc=*/true,
+               /*copyWithinSameTexture=*/true);
+        DoTest(srcSpec, dstSpec, {kWidth >> i, kHeight >> i, 1}, /*usageCopySrc=*/false,
+               /*copyWithinSameTexture=*/true);
     }
 }
 
@@ -1951,7 +1977,8 @@ TEST_P(CopyTests_T2T, Texture2DArrayFull) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kLayers};
 
-    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kLayers});
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kLayers}, /*usageCopySrc=*/true);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kLayers}, /*usageCopySrc=*/false);
 }
 
 // Test copying a subresource region of the 2D array texture.
@@ -1966,7 +1993,8 @@ TEST_P(CopyTests_T2T, Texture2DArrayRegion) {
     for (unsigned int w : {64, 128, 256}) {
         for (unsigned int h : {16, 32, 48}) {
             TextureSpec textureSpec = defaultTextureSpec;
-            DoTest(textureSpec, textureSpec, {w, h, kLayers});
+            DoTest(textureSpec, textureSpec, {w, h, kLayers}, /*usageCopySrc=*/true);
+            DoTest(textureSpec, textureSpec, {w, h, kLayers}, /*usageCopySrc=*/false);
         }
     }
 }
@@ -1989,7 +2017,10 @@ TEST_P(CopyTests_T2T, Texture2DArrayCopyOneSlice) {
     TextureSpec dstTextureSpec = defaultTextureSpec;
     dstTextureSpec.copyOrigin = {0, 0, kDstBaseLayer};
 
-    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount});
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/true);
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/false);
 }
 
 // Test copying multiple contiguous slices of a 2D array texture.
@@ -2010,7 +2041,10 @@ TEST_P(CopyTests_T2T, Texture2DArrayCopyMultipleSlices) {
     TextureSpec dstTextureSpec = defaultTextureSpec;
     dstTextureSpec.copyOrigin = {0, 0, kDstBaseLayer};
 
-    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount});
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/true);
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/false);
 }
 
 // Test copying one texture slice within the same texture.
@@ -2031,7 +2065,10 @@ TEST_P(CopyTests_T2T, CopyWithinSameTextureOneSlice) {
     TextureSpec dstTextureSpec = defaultTextureSpec;
     dstTextureSpec.copyOrigin = {0, 0, kDstBaseLayer};
 
-    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount}, true);
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/true, /*copyWithinSameTexture=*/true);
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/false, /*copyWithinSameTexture=*/true);
 }
 
 // Test copying multiple contiguous texture slices within the same texture with non-overlapped
@@ -2053,7 +2090,10 @@ TEST_P(CopyTests_T2T, CopyWithinSameTextureNonOverlappedSlices) {
     TextureSpec dstTextureSpec = defaultTextureSpec;
     dstTextureSpec.copyOrigin = {0, 0, kDstBaseLayer};
 
-    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount}, true);
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/true, /*copyWithinSameTexture=*/true);
+    DoTest(srcTextureSpec, dstTextureSpec, {kWidth, kHeight, kCopyArrayLayerCount},
+           /*usageCopySrc=*/false, /*copyWithinSameTexture=*/true);
 }
 
 // A regression test (from WebGPU CTS) for an Intel D3D12 driver bug about T2T copy with specific
@@ -2103,7 +2143,8 @@ TEST_P(CopyTests_T2T, CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4Bytes) {
                     dstSpec.copyLevel = dstLevel;
                     dstSpec.textureSize = {kDstSize, kDstSize, textureLayer};
 
-                    DoTest(srcSpec, dstSpec, kUploadSize);
+                    DoTest(srcSpec, dstSpec, kUploadSize, /*usageCopySrc=*/true);
+                    DoTest(srcSpec, dstSpec, kUploadSize, /*usageCopySrc=*/false);
                 }
             }
         }
@@ -2126,7 +2167,10 @@ TEST_P(CopyTests_T2T, Texture2DArraySameTextureDifferentMipLevels) {
         TextureSpec dstSpec = defaultTextureSpec;
         dstSpec.copyLevel = i;
 
-        DoTest(srcSpec, dstSpec, {kWidth >> i, kHeight >> i, kLayers}, true);
+        DoTest(srcSpec, dstSpec, {kWidth >> i, kHeight >> i, kLayers}, /*usageCopySrc=*/true,
+               /*copyWithinSameTexture=*/true);
+        DoTest(srcSpec, dstSpec, {kWidth >> i, kHeight >> i, kLayers}, /*usageCopySrc=*/false,
+               /*copyWithinSameTexture=*/true);
     }
 }
 
@@ -2155,8 +2199,10 @@ TEST_P(CopyTests_T2T, Texture3DSameTextureDifferentMipLevels) {
     TextureSpec dstSpec = textureSpec;
     dstSpec.copyLevel = 1;
 
-    DoTest(textureSpec, dstSpec, {kWidth >> 1, kHeight >> 1, kDepth >> 1}, true,
-           wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, dstSpec, {kWidth >> 1, kHeight >> 1, kDepth >> 1}, /*usageCopySrc=*/true,
+           /*copyWithinSameTexture=*/true, wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, dstSpec, {kWidth >> 1, kHeight >> 1, kDepth >> 1}, /*usageCopySrc=*/false,
+           /*copyWithinSameTexture=*/true, wgpu::TextureDimension::e3D);
 }
 
 // Test that copying whole 3D texture to a 2D array in one texture-to-texture-copy works.
@@ -2168,8 +2214,10 @@ TEST_P(CopyTests_T2T, Texture3DTo2DArrayFull) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
 
-    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
-           wgpu::TextureDimension::e2D);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
 }
 
 // Test that copying between 3D texture and 2D array textures works. It includes partial copy
@@ -2189,35 +2237,51 @@ TEST_P(CopyTests_T2T, Texture3DAnd2DArraySubRegion) {
 
     // dst texture is a partial copy
     dstSpec.textureSize = {kWidth * 2, kHeight * 2, kDepth * 2};
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
-           wgpu::TextureDimension::e2D);
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e2D,
-           wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 
     // src texture is a partial copy
     srcSpec.textureSize = {kWidth * 2, kHeight * 2, kDepth * 2};
     dstSpec = baseSpec;
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
-           wgpu::TextureDimension::e2D);
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e2D,
-           wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 
     // Both src and dst texture is a partial copy
     srcSpec.textureSize = {kWidth * 2, kHeight * 2, kDepth * 2};
     dstSpec.textureSize = {kWidth * 2, kHeight * 2, kDepth * 2};
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
-           wgpu::TextureDimension::e2D);
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e2D,
-           wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 
     // Non-zero offset (copy origin)
     srcSpec = baseSpec;
     dstSpec.textureSize = {kWidth * 2, kHeight * 2, kDepth * 2};
     dstSpec.copyOrigin = {kWidth, kHeight, kDepth};
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
-           wgpu::TextureDimension::e2D);
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e2D,
-           wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 
     // Non-zero mip level
     srcSpec = baseSpec;
@@ -2225,10 +2289,14 @@ TEST_P(CopyTests_T2T, Texture3DAnd2DArraySubRegion) {
     dstSpec.copyOrigin = {0, 0, 0};
     dstSpec.copyLevel = 1;
     dstSpec.levelCount = 2;
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e3D,
-           wgpu::TextureDimension::e2D);
-    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e2D,
-           wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 }
 
 // Test that copying whole 2D array to a 3D texture in one texture-to-texture-copy works.
@@ -2240,8 +2308,10 @@ TEST_P(CopyTests_T2T, Texture2DArrayTo3DFull) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
 
-    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, wgpu::TextureDimension::e2D,
-           wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, textureSpec, {kWidth, kHeight, kDepth}, /*usageCopySrc=*/false,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 }
 
 // Test that copying subregion of a 3D texture in one texture-to-texture-copy works.
@@ -2254,8 +2324,10 @@ TEST_P(CopyTests_T2T, Texture3DSubRegion) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
 
-    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, false,
-           wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, /*usageCopySrc=*/true,
+           /*copyWithinSameTexture=*/false, wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, /*usageCopySrc=*/false,
+           /*copyWithinSameTexture=*/false, wgpu::TextureDimension::e3D);
 }
 
 // Test that copying subregion of a 3D texture to a 2D array in one texture-to-texture-copy works.
@@ -2267,7 +2339,9 @@ TEST_P(CopyTests_T2T, Texture3DTo2DArraySubRegion) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
 
-    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2},
+    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
+    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, /*usageCopySrc=*/false,
            wgpu::TextureDimension::e3D, wgpu::TextureDimension::e2D);
 }
 
@@ -2282,7 +2356,9 @@ TEST_P(CopyTests_T2T, Texture2DArrayTo3DSubRegion) {
     TextureSpec textureSpec;
     textureSpec.textureSize = {kWidth, kHeight, kDepth};
 
-    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2},
+    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, /*usageCopySrc=*/true,
+           wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
+    DoTest(textureSpec, textureSpec, {kWidth / 2, kHeight / 2, kDepth / 2}, /*usageCopySrc=*/false,
            wgpu::TextureDimension::e2D, wgpu::TextureDimension::e3D);
 }
 
@@ -2301,7 +2377,9 @@ TEST_P(CopyTests_T2T, Texture3DMipAligned) {
         textureSpec.levelCount = i + 1;
 
         DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, kDepth >> i},
-               wgpu::TextureDimension::e3D, wgpu::TextureDimension::e3D);
+               /*usageCopySrc=*/true, wgpu::TextureDimension::e3D, wgpu::TextureDimension::e3D);
+        DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, kDepth >> i},
+               /*usageCopySrc=*/false, wgpu::TextureDimension::e3D, wgpu::TextureDimension::e3D);
     }
 }
 
@@ -2320,7 +2398,9 @@ TEST_P(CopyTests_T2T, Texture3DMipUnaligned) {
         textureSpec.levelCount = i + 1;
 
         DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, kDepth >> i},
-               wgpu::TextureDimension::e3D, wgpu::TextureDimension::e3D);
+               /*usageCopySrc=*/true, wgpu::TextureDimension::e3D, wgpu::TextureDimension::e3D);
+        DoTest(textureSpec, textureSpec, {kWidth >> i, kHeight >> i, kDepth >> i},
+               /*usageCopySrc=*/false, wgpu::TextureDimension::e3D, wgpu::TextureDimension::e3D);
     }
 }
 
