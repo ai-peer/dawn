@@ -3,6 +3,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b4ce7310_b56ec46a",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:46:29Z",
+      "side": 1,
+      "message": "we should probably not have test variants where copyWithinSameTexture \u003d true and usageCopySrc \u003d false\n\nWe always need copySrc on the destination texture to read back the contents and check it. Technically we could add internal versions for the test readback, but I\u0027d rather not right now.",
+      "range": {
+        "startLine": 362,
+        "startChar": 12,
+        "endLine": 362,
+        "endChar": 33
+      },
+      "revId": "4000430a435e15187cda53bc215af0a4069eac90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951f961d_6a3a57c2",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:46:29Z",
+      "side": 1,
+      "message": "for the same reason as needing CopySrc on the dst texture, we would leave this code as-is.",
+      "range": {
+        "startLine": 371,
+        "startChar": 11,
+        "endLine": 374,
+        "endChar": 66
+      },
+      "revId": "4000430a435e15187cda53bc215af0a4069eac90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7f913a7a_722df31f",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
