@@ -16,6 +16,86 @@
       "message": "Hey Austin! Do you mind reviewing this one instead?",
       "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8695e27d_3f4dc537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:07:21Z",
+      "side": 1,
+      "message": "Overall, some comments on how to parameterize the tests to have less code duplication.\n\nI triggered tryjobs for you. Do you have permissions to click the CQ Dry Run button?\n\nLocally, if you run the end2end_tests with --gtest_filter\u003d*CopyTests* --enable-backend-validation it might help us determine if we need to add the internal usages without waiting for the tryjobs to come back.",
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f9209f_c259ef98",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:07:21Z",
+      "side": 1,
+      "message": "nit: prefer to have { } on the body",
+      "range": {
+        "startLine": 808,
+        "startChar": 16,
+        "endLine": 808,
+        "endChar": 38
+      },
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d14d229a_438a3253",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:07:21Z",
+      "side": 1,
+      "message": "in order to have less test verbosity, I think we should use the newly introduced DAWN_INSTANTIATE_TEST_P to make this a parameterized test.\n\nCheck out the comments in DawnTest.h and src/tests/end2end/NonzeroTextureCreationTests.cpp for an example.\n\nDon\u0027t need to overhaul the whole test to use parameters, but would be good to have a boolean to generate variants for internal / not-internal",
+      "range": {
+        "startLine": 2407,
+        "startChar": 0,
+        "endLine": 2407,
+        "endChar": 21
+      },
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401c382c_ba0cef65",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-16T18:07:21Z",
+      "side": 1,
+      "message": "we discussed that this extra coverage is good in case the implementation of copyTextureToTextureInternal starts to diverge more or change validation further.\n\nBut duplicating all these tests will make maintenance more difficult.\nWe don\u0027t have DAWN_INSTANTIATE_TEST_P in the unittests, but we can still use Gtest\u0027s INSTANTIATE_TEST_SUITE_P and TEST_P.",
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
