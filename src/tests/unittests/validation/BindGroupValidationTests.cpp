@@ -2126,8 +2126,7 @@ TEST_F(BindGroupLayoutCompatibilityTest, TextureViewDimension) {
                                       wgpu::TextureViewDimension::e2D}})}));
 }
 
-// TODO(dawn:728) Enable this test when Dawn no longer relies on SPIRV-Cross to extract shader info.
-TEST_F(BindGroupLayoutCompatibilityTest, DISABLED_ExternalTextureBindGroupLayoutCompatibility) {
+TEST_F(BindGroupLayoutCompatibilityTest, ExternalTextureBindGroupLayoutCompatibility) {
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, &utils::kExternalTextureBindingLayout}});
 
@@ -2135,7 +2134,7 @@ TEST_F(BindGroupLayoutCompatibilityTest, DISABLED_ExternalTextureBindGroupLayout
     CreateFSRenderPipeline(R"(
             [[group(0), binding(0)]] var myExternalTexture: texture_external;
             [[stage(fragment)]] fn main() {
-                textureDimensions(myExternalTexture);
+                ignore(myExternalTexture);
             })",
                            {bgl});
 
@@ -2143,7 +2142,7 @@ TEST_F(BindGroupLayoutCompatibilityTest, DISABLED_ExternalTextureBindGroupLayout
     ASSERT_DEVICE_ERROR(CreateFSRenderPipeline(R"(
             [[group(0), binding(0)]] var myTexture: texture_2d<f32>;
             [[stage(fragment)]] fn main() {
-            ignore(textureDimensions(myTexture));
+                ignore(myTexture);
             })",
                                                {bgl}));
 }
