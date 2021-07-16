@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f4e26e2_9b5099cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T13:05:14Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c04837147f16c81aed9e30a3802eb601a76ee8a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e6932bb_33df034c",
+        "filename": "src/dawn_native/PassResourceUsageTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T13:05:14Z",
+      "side": 1,
+      "message": "I have some concerns with the overhead of this approach: I expect this code path to be amazingly hot, so an additional branch in it risks slowing down things. I think we could just have a simple \"vector set\" of subresources that we check are used in BeginRenderPass.\n\nHowever this is simple to implement so we could just open a Type-Improvement-Performance issue and add a TODO instead of reworking.",
+      "revId": "c04837147f16c81aed9e30a3802eb601a76ee8a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae2c8505_287d471d",
@@ -31,6 +65,30 @@
       "writtenOn": "2021-07-16T04:55:26Z",
       "side": 1,
       "message": "whoops this is WGPUTextureUsage_Force32. I should use 0x80000001 instead",
+      "range": {
+        "startLine": 36,
+        "startChar": 40,
+        "endLine": 36,
+        "endChar": 50
+      },
+      "revId": "c04837147f16c81aed9e30a3802eb601a76ee8a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "740cd7a5_02117110",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-16T13:05:14Z",
+      "side": 1,
+      "message": "Any bit seems good, we could even reuse kReadOnlyStorageTexture with a different name, since that would also cause a validation error.",
+      "parentUuid": "ae2c8505_287d471d",
       "range": {
         "startLine": 36,
         "startChar": 40,
