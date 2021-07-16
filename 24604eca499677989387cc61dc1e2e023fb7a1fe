@@ -336,6 +336,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "04d7135b_fb9e8757",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T16:53:28Z",
+      "side": 1,
+      "message": "I\u0027m confused. I don\u0027t see ConsumedError(T* result) function in Device.h, only ConsumedError(MaybeError).\n\nThe other function, ResultOrError\u003cT\u003e resultOrError, T* result) does not work with ComPtr since \u0026result is actually ComRef and not T*.",
+      "parentUuid": "3dde8d54_02906a3c",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac38336b_f75fd511",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 19
