@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c60b4232_dad1ac9f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "Thanks, @RC for the pass.",
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "070e140f_1c5db265",
@@ -31,6 +48,30 @@
       "writtenOn": "2021-07-16T17:01:11Z",
       "side": 1,
       "message": "Since Flush11On12DeviceToAvoidLeaks does not take a reference on the d3d11on12Device, you can pass a naked pointer or std::move the last reference to this parameter from the caller.",
+      "range": {
+        "startLine": 26,
+        "startChar": 39,
+        "endLine": 26,
+        "endChar": 79
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67427ce5_3a3043dd",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "070e140f_1c5db265",
       "range": {
         "startLine": 26,
         "startChar": 39,
@@ -66,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7c97557_b512fdd0",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "If I did that I would have to QI each entry lookup or import which seemed excessive.",
+      "parentUuid": "dc549e44_da0fa812",
+      "range": {
+        "startLine": 54,
+        "startChar": 33,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18b16954_6d9b4d68",
         "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
         "patchSetId": 20
@@ -77,6 +142,30 @@
       "writtenOn": "2021-07-16T17:01:11Z",
       "side": 1,
       "message": "Nit: Extra space.",
+      "range": {
+        "startLine": 60,
+        "startChar": 69,
+        "endLine": 60,
+        "endChar": 70
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed0f48c7_c4706e76",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18b16954_6d9b4d68",
       "range": {
         "startLine": 60,
         "startChar": 69,
@@ -112,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7383f8fe_f43e0aaa",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "Nope, unordered_set have read only keys.",
+      "parentUuid": "93026663_459979d3",
+      "range": {
+        "startLine": 76,
+        "startChar": 22,
+        "endLine": 76,
+        "endChar": 40
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "68fe054e_ed3a9569",
         "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
         "patchSetId": 20
@@ -123,6 +236,30 @@
       "writtenOn": "2021-07-16T17:01:11Z",
       "side": 1,
       "message": "Since we\u0027re not making the cache on demand, consider storing the cache as a direct member variable instead of a pointer allocated on the heap.",
+      "range": {
+        "startLine": 67,
+        "startChar": 34,
+        "endLine": 67,
+        "endChar": 77
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6f87d75_dbbb4df6",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "I use unique_ptr to avoid importing D3D11on12Util.h (aka PImpl).",
+      "parentUuid": "68fe054e_ed3a9569",
       "range": {
         "startLine": 67,
         "startChar": 34,
@@ -158,6 +295,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52d9dc34_6aa87959",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "If you prefer, I can assert the QI. The 11on12 error was moved to the caller (not lost) and if successful, the QI should not fail.",
+      "parentUuid": "92d655ef_23b4db05",
+      "range": {
+        "startLine": 479,
+        "startChar": 16,
+        "endLine": 479,
+        "endChar": 31
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04f11cdb_e32b10c5",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 20
@@ -169,6 +330,30 @@
       "writtenOn": "2021-07-16T17:01:11Z",
       "side": 1,
       "message": "If shared image destruction already flushes to avoid leaks, why do we need to it here as well?  (Please add a comment which describes the reason)",
+      "range": {
+        "startLine": 604,
+        "startChar": 1,
+        "endLine": 604,
+        "endChar": 56
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "746a5fc4_1a07fbc3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-16T17:41:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04f11cdb_e32b10c5",
       "range": {
         "startLine": 604,
         "startChar": 1,
