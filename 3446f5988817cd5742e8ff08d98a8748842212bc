@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "3ba72653_48d043d8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-07-16T18:58:26Z",
+      "side": 1,
+      "message": "Done. Good suggestion, Corentin. \n\nA little explanation: I feel like it is hard to describe a bug in a short title (forgive my English). So I use \"fix a bug ...\" quite often (as you observed) and explain about the bug in the main part of commit message for most cases. You can see that my commit messages are not short for most patches. \n\nThis change is really tiny and the code can describe the bug so I didn\u0027t describe the bug in the commit msg. \n\nYour observation makes me realize that the better solution should be:\n  - try to describe the bug in the issue title even though it is short. \n  - describe the details if needed in the main part of commit msg. \n  \nThanks!",
+      "parentUuid": "a22994cb_be06b975",
+      "revId": "3446f5988817cd5742e8ff08d98a8748842212bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d2391f1b_1460f6ab",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
