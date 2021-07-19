@@ -438,7 +438,12 @@ namespace dawn_native { namespace metal {
             return nullptr;
         }
 
-        return new Texture(this, descriptor, ioSurface, plane);
+        Ref<Texture> result;
+        if (ConsumedError(Texture::CreateFromIOSurface(this, descriptor, ioSurface, plane),
+                          &result)) {
+            return nullptr;
+        }
+        return result.Detach();
     }
 
     void Device::WaitForCommandsToBeScheduled() {
