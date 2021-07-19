@@ -88,6 +88,24 @@
       "parentUuid": "b7a5e323_4fdfbcc4",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e8712f0_8421a1ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-19T20:04:06Z",
+      "side": 1,
+      "message": "Turns out even when the number is within f16 range the precision is not enough\n(expected 32896, actual 32800)\nI will try using compute shader and storage buffer for the test. Read and increment an integer in the buffer for each dispatch. (seems ping-pong isn\u0027t needed?)",
+      "parentUuid": "af6ac13c_be98b356",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
