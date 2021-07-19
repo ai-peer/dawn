@@ -406,26 +406,25 @@ namespace dawn_native { namespace metal {
         descriptorMTL.sampleCount = GetSampleCount();
         descriptorMTL.alphaToCoverageEnabled = IsAlphaToCoverageEnabled();
 
-        {
             NSError* error = nullptr;
             mMtlRenderPipelineState =
                 AcquireNSPRef([mtlDevice newRenderPipelineStateWithDescriptor:descriptorMTL
                                                                         error:&error]);
             if (error != nullptr) {
-                NSLog(@" error => %@", error);
-                return DAWN_INTERNAL_ERROR("Error creating rendering pipeline state");
+                return DAWN_INTERNAL_ERROR("Error creating pipeline state" +
+                                           std::string([error.localizedDescription UTF8String]));
             }
-        }
+            ASSERT(mMtlRenderPipelineState != nil);
 
-        // Create depth stencil state and cache it, fetch the cached depth stencil state when we
-        // call setDepthStencilState() for a given render pipeline in CommandEncoder, in order to
-        // improve performance.
-        NSRef<MTLDepthStencilDescriptor> depthStencilDesc =
-            MakeDepthStencilDesc(GetDepthStencilState());
-        mMtlDepthStencilState =
-            AcquireNSPRef([mtlDevice newDepthStencilStateWithDescriptor:depthStencilDesc.Get()]);
+            // Create depth stencil state and cache it, fetch the cached depth stencil state when we
+            // call setDepthStencilState() for a given render pipeline in CommandEncoder, in order
+            // to improve performance.
+            NSRef<MTLDepthStencilDescriptor> depthStencilDesc =
+                MakeDepthStencilDesc(GetDepthStencilState());
+            mMtlDepthStencilState = AcquireNSPRef(
+                [mtlDevice newDepthStencilStateWithDescriptor:depthStencilDesc.Get()]);
 
-        return {};
+            return {};
     }
 
     MTLPrimitiveType RenderPipeline::GetMTLPrimitiveTopology() const {
