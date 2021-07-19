@@ -352,6 +352,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "547dc332_88f928d1",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T12:58:23Z",
+      "side": 1,
+      "message": "\u0026result is ComRef and not ComPtr*? That\u0027s annoying. Ok to leave as is I guess, it\u0027s just another bespoke error handling mechanism with logs going somewhere else.",
+      "parentUuid": "04d7135b_fb9e8757",
+      "revId": "24604eca499677989387cc61dc1e2e023fb7a1fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac38336b_f75fd511",
