@@ -62,10 +62,23 @@ class DeviceLostTest : public DawnTest {
         DawnTest::TearDown();
     }
 
-    void SetCallbackAndLoseForTesting() {
+    void SetCallback() {
+        // SetDeviceLostCallback will trigger the callback task manager and clean all deferred
+        // callback tasks, so it should be called at the beginning of each test to prevent
+        // unexpectedly triggering callback tasks created during test
         device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+    }
+
+    void LoseForTesting() {
         EXPECT_CALL(*mockDeviceLostCallback, Call(_, this)).Times(1);
         device.LoseForTesting();
+    }
+
+    // For tests that do nothing before device lost, set the device lost callback and lose the
+    // device
+    void SetUpLostDeviceAtBeginning() {
+        SetCallback();
+        LoseForTesting();
     }
 
     static void MapFailCallback(WGPUBufferMapAsyncStatus status, void* userdata) {
@@ -76,22 +89,25 @@ class DeviceLostTest : public DawnTest {
 
 // Test that DeviceLostCallback is invoked when LostForTestimg is called
 TEST_P(DeviceLostTest, DeviceLostCallbackIsCalled) {
-    SetCallbackAndLoseForTesting();
+    SetCallback();
+    LoseForTesting();
 }
 
 // Test that submit fails when device is lost
 TEST_P(DeviceLostTest, SubmitFails) {
+    SetCallback();
+
     wgpu::CommandBuffer commands;
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
     commands = encoder.Finish();
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(queue.Submit(0, &commands));
 }
 
 // Test that CreateBindGroupLayout fails when device is lost
 TEST_P(DeviceLostTest, CreateBindGroupLayoutFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::BindGroupLayoutEntry entry;
     entry.binding = 0;
@@ -105,6 +121,8 @@ TEST_P(DeviceLostTest, CreateBindGroupLayoutFails) {
 
 // Test that GetBindGroupLayout fails when device is lost
 TEST_P(DeviceLostTest, GetBindGroupLayoutFails) {
+    SetCallback();
+
     wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
         [[block]] struct UniformBuffer {
             pos : vec4<f32>;
@@ -120,13 +138,13 @@ TEST_P(DeviceLostTest, GetBindGroupLayoutFails) {
 
     wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&descriptor);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(pipeline.GetBindGroupLayout(0).Get());
 }
 
 // Test that CreateBindGroup fails when device is lost
 TEST_P(DeviceLostTest, CreateBindGroupFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::BindGroupEntry entry;
     entry.binding = 0;
@@ -145,7 +163,7 @@ TEST_P(DeviceLostTest, CreateBindGroupFails) {
 
 // Test that CreatePipelineLayout fails when device is lost
 TEST_P(DeviceLostTest, CreatePipelineLayoutFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::PipelineLayoutDescriptor descriptor;
     descriptor.bindGroupLayoutCount = 0;
@@ -155,7 +173,7 @@ TEST_P(DeviceLostTest, CreatePipelineLayoutFails) {
 
 // Tests that CreateRenderBundleEncoder fails when device is lost
 TEST_P(DeviceLostTest, CreateRenderBundleEncoderFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::RenderBundleEncoderDescriptor descriptor;
     descriptor.colorFormatsCount = 0;
@@ -165,7 +183,7 @@ TEST_P(DeviceLostTest, CreateRenderBundleEncoderFails) {
 
 // Tests that CreateComputePipeline fails when device is lost
 TEST_P(DeviceLostTest, CreateComputePipelineFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::ComputePipelineDescriptor descriptor = {};
     descriptor.layout = nullptr;
@@ -175,7 +193,7 @@ TEST_P(DeviceLostTest, CreateComputePipelineFails) {
 
 // Tests that CreateRenderPipeline fails when device is lost
 TEST_P(DeviceLostTest, CreateRenderPipelineFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     utils::ComboRenderPipelineDescriptor descriptor;
     ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
@@ -183,14 +201,14 @@ TEST_P(DeviceLostTest, CreateRenderPipelineFails) {
 
 // Tests that CreateSampler fails when device is lost
 TEST_P(DeviceLostTest, CreateSamplerFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     ASSERT_DEVICE_ERROR(device.CreateSampler());
 }
 
 // Tests that CreateShaderModule fails when device is lost
 TEST_P(DeviceLostTest, CreateShaderModuleFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
         [[stage(fragment)]]
@@ -201,7 +219,7 @@ TEST_P(DeviceLostTest, CreateShaderModuleFails) {
 
 // Tests that CreateSwapChain fails when device is lost
 TEST_P(DeviceLostTest, CreateSwapChainFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::SwapChainDescriptor descriptor = {};
     ASSERT_DEVICE_ERROR(device.CreateSwapChain(nullptr, &descriptor));
@@ -209,7 +227,7 @@ TEST_P(DeviceLostTest, CreateSwapChainFails) {
 
 // Tests that CreateTexture fails when device is lost
 TEST_P(DeviceLostTest, CreateTextureFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::TextureDescriptor descriptor;
     descriptor.size.width = 4;
@@ -223,13 +241,13 @@ TEST_P(DeviceLostTest, CreateTextureFails) {
 }
 
 TEST_P(DeviceLostTest, TickFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
     ASSERT_DEVICE_ERROR(device.Tick());
 }
 
 // Test that CreateBuffer fails when device is lost
 TEST_P(DeviceLostTest, CreateBufferFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = sizeof(float);
@@ -239,12 +257,14 @@ TEST_P(DeviceLostTest, CreateBufferFails) {
 
 // Test that buffer.MapAsync for writing fails after device is lost
 TEST_P(DeviceLostTest, BufferMapAsyncFailsForWriting) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = 4;
     bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(buffer.MapAsync(wgpu::MapMode::Write, 0, 4, MapFailCallback,
                                         const_cast<int*>(&fakeUserData)));
 }
@@ -252,47 +272,56 @@ TEST_P(DeviceLostTest, BufferMapAsyncFailsForWriting) {
 // Test that BufferMapAsync for writing calls back with device lost status when device lost after
 // mapping
 TEST_P(DeviceLostTest, BufferMapAsyncBeforeLossFailsForWriting) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = 4;
     bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
     buffer.MapAsync(wgpu::MapMode::Write, 0, 4, MapFailCallback, const_cast<int*>(&fakeUserData));
-    SetCallbackAndLoseForTesting();
+
+    LoseForTesting();
 }
 
 // Test that buffer.Unmap fails after device is lost
 TEST_P(DeviceLostTest, BufferUnmapFails) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = sizeof(float);
     bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
     bufferDescriptor.mappedAtCreation = true;
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(buffer.Unmap());
 }
 
 // Test that mappedAtCreation fails after device is lost
 TEST_P(DeviceLostTest, CreateBufferMappedAtCreationFails) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = sizeof(float);
     bufferDescriptor.usage = wgpu::BufferUsage::MapWrite;
     bufferDescriptor.mappedAtCreation = true;
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(device.CreateBuffer(&bufferDescriptor));
 }
 
 // Test that BufferMapAsync for reading fails after device is lost
 TEST_P(DeviceLostTest, BufferMapAsyncFailsForReading) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = 4;
     bufferDescriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
 
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(buffer.MapAsync(wgpu::MapMode::Read, 0, 4, MapFailCallback,
                                         const_cast<int*>(&fakeUserData)));
 }
@@ -300,6 +329,8 @@ TEST_P(DeviceLostTest, BufferMapAsyncFailsForReading) {
 // Test that BufferMapAsync for reading calls back with device lost status when device lost after
 // mapping
 TEST_P(DeviceLostTest, BufferMapAsyncBeforeLossFailsForReading) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = sizeof(float);
     bufferDescriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
@@ -307,25 +338,28 @@ TEST_P(DeviceLostTest, BufferMapAsyncBeforeLossFailsForReading) {
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
     buffer.MapAsync(wgpu::MapMode::Read, 0, 4, MapFailCallback, const_cast<int*>(&fakeUserData));
-    SetCallbackAndLoseForTesting();
+
+    LoseForTesting();
 }
 
 // Test that WriteBuffer fails after device is lost
 TEST_P(DeviceLostTest, WriteBufferFails) {
+    SetCallback();
+
     wgpu::BufferDescriptor bufferDescriptor;
     bufferDescriptor.size = sizeof(float);
     bufferDescriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
 
     wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     float data = 12.0f;
     ASSERT_DEVICE_ERROR(queue.WriteBuffer(buffer, 0, &data, sizeof(data)));
 }
 
 // Test it's possible to GetMappedRange on a buffer created mapped after device loss
 TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAtCreationAfterLoss) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     wgpu::BufferDescriptor desc;
     desc.size = 4;
@@ -338,6 +372,8 @@ TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAtCreationAfterLoss) {
 
 // Test that device loss doesn't change the result of GetMappedRange, mappedAtCreation version.
 TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAtCreationBeforeLoss) {
+    SetCallback();
+
     wgpu::BufferDescriptor desc;
     desc.size = 4;
     desc.usage = wgpu::BufferUsage::CopySrc;
@@ -345,7 +381,7 @@ TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAtCreationBeforeLoss) {
     wgpu::Buffer buffer = device.CreateBuffer(&desc);
 
     void* rangeBeforeLoss = buffer.GetMappedRange();
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
 
     ASSERT_NE(buffer.GetMappedRange(), nullptr);
     ASSERT_EQ(buffer.GetMappedRange(), rangeBeforeLoss);
@@ -353,6 +389,8 @@ TEST_P(DeviceLostTest, GetMappedRange_CreateBufferMappedAtCreationBeforeLoss) {
 
 // Test that device loss doesn't change the result of GetMappedRange, mapping for reading version.
 TEST_P(DeviceLostTest, GetMappedRange_MapAsyncReading) {
+    SetCallback();
+
     wgpu::BufferDescriptor desc;
     desc.size = 4;
     desc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
@@ -362,7 +400,7 @@ TEST_P(DeviceLostTest, GetMappedRange_MapAsyncReading) {
     queue.Submit(0, nullptr);
 
     const void* rangeBeforeLoss = buffer.GetConstMappedRange();
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
 
     ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
     ASSERT_EQ(buffer.GetConstMappedRange(), rangeBeforeLoss);
@@ -370,6 +408,8 @@ TEST_P(DeviceLostTest, GetMappedRange_MapAsyncReading) {
 
 // Test that device loss doesn't change the result of GetMappedRange, mapping for writing version.
 TEST_P(DeviceLostTest, GetMappedRange_MapAsyncWriting) {
+    SetCallback();
+
     wgpu::BufferDescriptor desc;
     desc.size = 4;
     desc.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
@@ -379,7 +419,7 @@ TEST_P(DeviceLostTest, GetMappedRange_MapAsyncWriting) {
     queue.Submit(0, nullptr);
 
     const void* rangeBeforeLoss = buffer.GetConstMappedRange();
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
 
     ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
     ASSERT_EQ(buffer.GetConstMappedRange(), rangeBeforeLoss);
@@ -390,16 +430,18 @@ TEST_P(DeviceLostTest, GetMappedRange_MapAsyncWriting) {
 
 // Test that Command Encoder Finish fails when device lost
 TEST_P(DeviceLostTest, CommandEncoderFinishFails) {
+    SetCallback();
+
     wgpu::CommandBuffer commands;
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(encoder.Finish());
 }
 
 // Test that QueueOnSubmittedWorkDone fails after device is lost.
 TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneFails) {
-    SetCallbackAndLoseForTesting();
+    SetUpLostDeviceAtBeginning();
 
     // callback should have device lost status
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, nullptr))
@@ -410,19 +452,23 @@ TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneFails) {
 
 // Test that QueueOnSubmittedWorkDone when the device is lost after calling OnSubmittedWorkDone
 TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneBeforeLossFails) {
+    SetCallback();
+
     // callback should have device lost status
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, nullptr))
         .Times(1);
     queue.OnSubmittedWorkDone(0, ToMockQueueWorkDone, nullptr);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
     ASSERT_DEVICE_ERROR(device.Tick());
 }
 
 // Test that LostForTesting can only be called on one time
 TEST_P(DeviceLostTest, LoseForTestingOnce) {
     // First LoseForTesting call should occur normally
-    SetCallbackAndLoseForTesting();
+    device.SetDeviceLostCallback(ToMockDeviceLostCallback, this);
+    EXPECT_CALL(*mockDeviceLostCallback, Call(_, this)).Times(1);
+    device.LoseForTesting();
 
     // Second LoseForTesting call should result in no callbacks. The LoseForTesting will return
     // without doing anything when it sees that device has already been lost.
@@ -447,6 +493,8 @@ TEST_P(DeviceLostTest, DeviceLostDoesntCallUncapturedError) {
 // Test that WGPUCreatePipelineAsyncStatus_DeviceLost can be correctly returned when device is lost
 // before the callback of Create*PipelineAsync() is called.
 TEST_P(DeviceLostTest, DeviceLostBeforeCreatePipelineAsyncCallback) {
+    SetCallback();
+
     wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
         [[stage(compute), workgroup_size(1)]] fn main() {
         })");
@@ -461,13 +509,15 @@ TEST_P(DeviceLostTest, DeviceLostBeforeCreatePipelineAsyncCallback) {
     };
 
     device.CreateComputePipelineAsync(&descriptor, callback, nullptr);
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
 }
 
 // This is a regression test for crbug.com/1212385 where Dawn didn't clean up all
 // references to bind group layouts such that the cache was non-empty at the end
 // of shut down.
 TEST_P(DeviceLostTest, FreeBindGroupAfterDeviceLossWithPendingCommands) {
+    SetCallback();
+
     wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
         device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Storage}});
 
@@ -488,7 +538,7 @@ TEST_P(DeviceLostTest, FreeBindGroupAfterDeviceLossWithPendingCommands) {
     queue.Submit(0, nullptr);
     queue.Submit(0, nullptr);
 
-    SetCallbackAndLoseForTesting();
+    LoseForTesting();
 
     // Releasing the bing group places the bind group layout into a queue in the Vulkan backend
     // for recycling of descriptor sets. So, after these release calls there is still one last
