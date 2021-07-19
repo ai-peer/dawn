@@ -124,6 +124,24 @@
       "parentUuid": "0e8712f0_8421a1ee",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7c451a4_a0b32557",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-19T20:40:29Z",
+      "side": 1,
+      "message": "I specified a view heap size of 32 and it worked fine with your CL (64 was too large). Fine by me to keep them tiny - looking at 1K UBOs is PITA anyway.",
+      "parentUuid": "fcc3262b_c78c6f4a",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
