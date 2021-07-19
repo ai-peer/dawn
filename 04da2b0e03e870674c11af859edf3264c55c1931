@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "517f3a5d_b0af055f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-19T09:03:29Z",
+      "side": 1,
+      "message": "PTAL, thanks!\nThis bug is caused by misusing the TAssignment of RefBase (should be AcquireRef), which add the refcount unconsciously and lead to memory leak.\nA problem is that almost all MakeError function return a naked pointer which will be forwarded directly by API, but in APICreateShaderModule I store the error module in the Ref. Changing the ShaderModuleBase::MakeError to return a Ref make it seem different from other MakeErrors.",
+      "revId": "04da2b0e03e870674c11af859edf3264c55c1931",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ec854b_07dd3f27",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-19T09:03:29Z",
+      "side": 1,
+      "message": "Another way is to say result \u003d AcquireRef(ShaderModuleBase::MakeError(this)) here, while keeping ShaderModuleBase::MakeError returning a naked pointer.",
+      "revId": "04da2b0e03e870674c11af859edf3264c55c1931",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
