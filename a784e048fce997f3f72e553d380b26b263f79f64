@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "273007b3_c9050a70",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T12:52:26Z",
+      "side": 1,
+      "message": "Interesting. The intent of the specification right now (at least in the PR I made) is that locations can be arbitrary but that the sum of all components has to be less than kMaxInterStageShaderComponents. Opened https://github.com/gpuweb/gpuweb/issues/1962",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3d6cd10c_59545ab6",
@@ -31,6 +48,57 @@
       "writtenOn": "2021-07-19T07:01:08Z",
       "side": 1,
       "message": "The CL to temporarily skip webgpu:api,operation,rendering,draw:vertex_attributes,basic:* is here:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3036856",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45ebaba0_3350ea97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T12:52:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adaf1e94_bd8a6895",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T12:52:26Z",
+      "side": 1,
+      "message": "nit: We don\u0027t need to use them, they get zero-initialized.",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9e4576_df331e35",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T12:52:26Z",
+      "side": 1,
+      "message": "ditto, we should need to use them.",
       "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
