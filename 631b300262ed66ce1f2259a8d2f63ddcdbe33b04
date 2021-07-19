@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3531ba8_7e8f6235",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-07-19T22:32:36Z",
+      "side": 1,
+      "message": "The bug link got in the commit message was reset on my last upload and I didn\u0027t catch it until after merging :(",
+      "revId": "631b300262ed66ce1f2259a8d2f63ddcdbe33b04",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
