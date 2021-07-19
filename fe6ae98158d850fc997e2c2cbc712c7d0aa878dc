@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33d85763_f2666d0d",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-07-19T21:16:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df881882_a35bc356",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1df9679d_22f97503",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "243c9424_3b6b9ee7",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2129,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-07-19T21:16:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1df9679d_22f97503",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d90ec3a2_ec18d790",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-07-19T19:50:31Z",
       "side": 1,
       "message": "ditto",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7880ee3c_05f7fea6",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-07-19T21:16:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d90ec3a2_ec18d790",
       "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
