@@ -33,6 +33,24 @@
       "message": "nit: can you please update the comment why these values were picked?",
       "revId": "6da309da30e7dd44eff88cc60d5af234b43417fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacb5447_fca3276f",
+        "filename": "src/dawn_native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-19T20:59:59Z",
+      "side": 1,
+      "message": "Done. Thanks for the help!",
+      "parentUuid": "1f6851b4_20dcaf0d",
+      "revId": "6da309da30e7dd44eff88cc60d5af234b43417fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
