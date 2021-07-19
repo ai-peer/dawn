@@ -404,19 +404,15 @@ namespace dawn_native { namespace d3d12 {
             if (GetDevice()->IsRobustnessEnabled()) {
                 transformManager.Add<tint::transform::BoundArrayAccessors>();
             }
-            transformManager.Add<tint::transform::Spirv>();
 
             tint::transform::DataMap transformInputs;
-
-            tint::transform::Spirv::Config spirv_cfg;
-            spirv_cfg.emit_vertex_point_size = false;
-            transformInputs.Add<tint::transform::Spirv::Config>(spirv_cfg);
 
             {
                 // TODO(tangm): This code is copied from the Tint -> HLSL codepath. We want to
                 // eventually change the BindGroup, BindGroupLayout, PipelineLayout, etc to not
                 // compact the binding locations per resource type, since D3D12/DXIL does not have
                 // this limitation.
+                // TODO(tangm): This can now probably reuse most of the Tint -> HLSL codepath.
 
                 using BindingRemapper = tint::transform::BindingRemapper;
                 using BindingPoint = tint::transform::BindingPoint;
@@ -455,8 +451,7 @@ namespace dawn_native { namespace d3d12 {
                              bgl->GetBindingInfo(bindingIndex).buffer.type ==
                                  wgpu::BufferBindingType::Storage);
                         if (forceStorageBufferAsUAV) {
-                            accessControls.emplace(srcBindingPoint,
-                                                   tint::ast::AccessControl::kReadWrite);
+                            accessControls.emplace(srcBindingPoint, tint::ast::Access::kReadWrite);
                         }
                     }
                 }
@@ -485,13 +480,13 @@ namespace dawn_native { namespace d3d12 {
             std::ostringstream errorStream;
             errorStream << "Tint SPIR-V failure:" << std::endl;
 
-            tint::writer::spirv::Generator generator(&program);
-            if (!generator.Generate()) {
-                errorStream << "Generator: " << generator.error() << std::endl;
+            tint::writer::spirv::Options options;
+            options.emit_vertex_point_size = false;
+            auto result = tint::writer::spirv::Generate(&program, options);
+            if (!result.success) {
+                errorStream << "Generator: " << result.error << std::endl;
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
-
-            const std::vector<uint32_t>& spirv = generator.result();
 
             dxil_spirv_shader_stage dxStage;
             switch (stage) {
@@ -509,7 +504,7 @@ namespace dawn_native { namespace d3d12 {
             uint8_t* dxil = nullptr;
             size_t dxilCount = 0;
             const PlatformFunctions* functions = device->GetFunctions();
-            if (!functions->spirvToDxil(spirv.data(), spirv.size(), NULL, 0, dxStage,
+            if (!functions->spirvToDxil(result.spirv.data(), result.spirv.size(), NULL, 0, dxStage,
                                         entryPointName, reinterpret_cast<void**>(&dxil),
                                         &dxilCount)) {
                 return DAWN_VALIDATION_ERROR("spirv_to_dxil: Compilation failed");
