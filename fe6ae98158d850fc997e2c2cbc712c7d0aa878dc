@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dd69b45_97a8017d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T19:50:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df881882_a35bc356",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T19:50:31Z",
+      "side": 1,
+      "message": "nit: Maybe note that it is fine to use the same object for multiple entries since it is an empty struct.",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1df9679d_22f97503",
+        "filename": "src/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T19:50:31Z",
+      "side": 1,
+      "message": "nit: Can we have a small comment above the test explaining what it does?",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d90ec3a2_ec18d790",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T19:50:31Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "fe6ae98158d850fc997e2c2cbc712c7d0aa878dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
