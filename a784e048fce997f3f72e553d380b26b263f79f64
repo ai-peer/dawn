@@ -16,6 +16,23 @@
       "message": "The failures in api,operation,rendering,draw:vertex_attributes,basic:* fail because in the tests one of the number of inter-stage shader variables is 16, which is invalid with this CL.\n\nPTAL, thanks!",
       "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12d0b095_0ae9c127",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-19T07:01:08Z",
+      "side": 1,
+      "message": "The CL to temporarily skip webgpu:api,operation,rendering,draw:vertex_attributes,basic:* is here:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3036856",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
