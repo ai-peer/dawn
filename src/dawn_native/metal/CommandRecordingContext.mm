@@ -42,6 +42,14 @@ namespace dawn_native { namespace metal {
         return mCommands.Get();
     }
 
+    void CommandRecordingContext::MarkUsed() {
+        mUsed = true;
+    }
+
+    bool CommandRecordingContext::WasUsed() const {
+        return mUsed;
+    }
+
     NSPRef<id<MTLCommandBuffer>> CommandRecordingContext::AcquireCommands() {
         // A blit encoder can be left open from WriteBuffer, make sure we close it.
         if (mCommands != nullptr) {

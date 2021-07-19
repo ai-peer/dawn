@@ -51,7 +51,7 @@ namespace dawn_native { namespace metal {
         id<MTLCommandQueue> GetMTLQueue();
 
         CommandRecordingContext* GetPendingCommandContext();
-        void SubmitPendingCommandBuffer();
+        MaybeError SubmitPendingCommandBuffer();
 
         TextureBase* CreateTextureWrappingIOSurface(const ExternalImageDescriptor* descriptor,
                                                     IOSurfaceRef ioSurface,
@@ -117,6 +117,7 @@ namespace dawn_native { namespace metal {
                                             WGPUCreateComputePipelineAsyncCallback callback,
                                             void* userdata) override;
 
+        MaybeError PrepareCommandContext();
         void InitTogglesFromDriver();
         void ShutDownImpl() override;
         MaybeError WaitForIdleForDestruction() override;
