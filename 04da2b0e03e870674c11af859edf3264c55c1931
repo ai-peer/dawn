@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54393c8f_c71cdede",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T09:31:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "04da2b0e03e870674c11af859edf3264c55c1931",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07ec854b_07dd3f27",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-07-19T09:03:29Z",
       "side": 1,
       "message": "Another way is to say result \u003d AcquireRef(ShaderModuleBase::MakeError(this)) here, while keeping ShaderModuleBase::MakeError returning a naked pointer.",
+      "revId": "04da2b0e03e870674c11af859edf3264c55c1931",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "216ab88f_7addcad7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 848,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-19T09:31:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "07ec854b_07dd3f27",
       "revId": "04da2b0e03e870674c11af859edf3264c55c1931",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
