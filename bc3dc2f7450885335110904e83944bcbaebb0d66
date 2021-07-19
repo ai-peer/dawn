@@ -142,6 +142,24 @@
       "parentUuid": "fcc3262b_c78c6f4a",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6277f82d_0d22bd92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-19T20:46:09Z",
+      "side": 1,
+      "message": "Great. Happy to save effort here. Changed to static constexpr const uint32_t kShaderVisibleSmallHeapSizes[] \u003d {32, 16};",
+      "parentUuid": "b7c451a4_a0b32557",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
