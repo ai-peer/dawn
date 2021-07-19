@@ -70,6 +70,24 @@
       "parentUuid": "8797c954_0f1a425a",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6ac13c_be98b356",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-19T17:56:14Z",
+      "side": 1,
+      "message": "\u003e Is changing this only affecting the testing?\n\nThat\u0027s right, only testing uses fixed-size heaps (to avoid TDRs). The exact size (1024) shouldn\u0027t matter. The sum is derived from the heapSize since I blend add them all up.",
+      "parentUuid": "b7a5e323_4fdfbcc4",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
