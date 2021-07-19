@@ -52,6 +52,24 @@
       "parentUuid": "798e096e_22e8e731",
       "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a5e323_4fdfbcc4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-19T17:33:38Z",
+      "side": 1,
+      "message": "Hi Bryan. Is changing this only affecting the testing?\nstatic constexpr const uint32_t kShaderVisibleSmallHeapSizes[] \u003d {1024, 512};\n\nI think this is where it will impact, but not sure how the value correlates to kShaderVisibleSmallHeapSizes. say the limit is 65504 here.\nconst uint32_t heapSize \u003d\n        mD3DDevice-\u003eGetViewShaderVisibleDescriptorAllocator()-\u003eGetShaderVisibleHeapSizeForTesting();",
+      "parentUuid": "8797c954_0f1a425a",
+      "revId": "bc3dc2f7450885335110904e83944bcbaebb0d66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
