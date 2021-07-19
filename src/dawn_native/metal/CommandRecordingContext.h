@@ -36,6 +36,8 @@ namespace dawn_native { namespace metal {
         ~CommandRecordingContext();
 
         id<MTLCommandBuffer> GetCommands();
+        void MarkUsed();
+        bool WasUsed() const;
 
         NSPRef<id<MTLCommandBuffer>> AcquireCommands();
 
@@ -54,6 +56,7 @@ namespace dawn_native { namespace metal {
         NSPRef<id<MTLComputeCommandEncoder>> mCompute;
         NSPRef<id<MTLRenderCommandEncoder>> mRender;
         bool mInEncoder = false;
+        bool mUsed = false;
     };
 
 }}  // namespace dawn_native::metal

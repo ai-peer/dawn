@@ -128,6 +128,11 @@ namespace dawn_native { namespace metal {
         InitTogglesFromDriver();
 
         mCommandQueue.Acquire([*mMtlDevice newCommandQueue]);
+        if (mCommandQueue == nil) {
+            return DAWN_INTERNAL_ERROR("Failed to allocate MTLCommandQueue.");
+        }
+
+        DAWN_TRY(PrepareCommandContext());
 
         if (GetAdapter()->GetSupportedExtensions().IsEnabled(Extension::TimestampQuery)) {
             // Make a best guess of timestamp period based on device vendor info, and converge it to
@@ -281,8 +286,8 @@ namespace dawn_native { namespace metal {
     }
 
     MaybeError Device::TickImpl() {
-        if (mCommandContext.GetCommands() != nullptr) {
-            SubmitPendingCommandBuffer();
+        if (mCommandContext.WasUsed()) {
+            DAWN_TRY(SubmitPendingCommandBuffer());
         }
 
         // Just run timestamp period calculation when timestamp extension is enabled.
@@ -305,20 +310,28 @@ namespace dawn_native { namespace metal {
     }
 
     CommandRecordingContext* Device::GetPendingCommandContext() {
-        if (mCommandContext.GetCommands() == nullptr) {
-            TRACE_EVENT0(GetPlatform(), General, "[MTLCommandQueue commandBuffer]");
-            // The MTLCommandBuffer will be autoreleased by default.
-            // The autorelease pool may drain before the command buffer is submitted. Retain so it
-            // stays alive.
-            mCommandContext =
-                CommandRecordingContext(AcquireNSPRef([[*mCommandQueue commandBuffer] retain]));
-        }
+        mCommandContext.MarkUsed();
         return &mCommandContext;
     }
 
-    void Device::SubmitPendingCommandBuffer() {
-        if (mCommandContext.GetCommands() == nullptr) {
-            return;
+    MaybeError Device::PrepareCommandContext() {
+        ASSERT(mCommandContext.WasUsed());
+        TRACE_EVENT0(GetPlatform(), General, "[MTLCommandQueue commandBuffer]");
+        // The MTLCommandBuffer will be autoreleased by default.
+        // The autorelease pool may drain before the command buffer is submitted. Retain so it
+        // stays alive.
+        id<MTLCommandBuffer> commandBuffer = [[*mCommandQueue commandBuffer] retain];
+        if (commandBuffer == nil) {
+            return DAWN_INTERNAL_ERROR("Failed to create a command buffer.");
+        }
+
+        mCommandContext = CommandRecordingContext(AcquireNSPRef(commandBuffer));
+        return {};
+    }
+
+    MaybeError Device::SubmitPendingCommandBuffer() {
+        if (!mCommandContext.WasUsed()) {
+            return {};
         }
 
         IncrementLastSubmittedCommandSerial();
@@ -359,6 +372,8 @@ namespace dawn_native { namespace metal {
         TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
                                  uint64_t(pendingSerial));
         [*pendingCommands commit];
+
+        return PrepareCommandContext();
     }
 
     ResultOrError<std::unique_ptr<StagingBufferBase>> Device::CreateStagingBuffer(size_t size) {
@@ -427,7 +442,9 @@ namespace dawn_native { namespace metal {
     }
 
     void Device::WaitForCommandsToBeScheduled() {
-        SubmitPendingCommandBuffer();
+        if (ConsumedError(SubmitPendingCommandBuffer())) {
+            return;
+        }
 
         // Only lock the object while we take a reference to it, otherwise we could block further
         // progress if the driver calls the scheduled handler (which also acquires the lock) before
