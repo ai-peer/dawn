@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99fff4c2_3689d39d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-07-20T17:47:22Z",
+      "side": 1,
+      "message": "Done. Will actually test this once the Tint changes roll in.",
+      "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdddbbd2_396129bb",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-07-20T17:34:01Z",
       "side": 1,
       "message": "is DisableWorkgroupInit an option for MSL?",
+      "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9db7e2a5_32e5cb48",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-07-20T17:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cdddbbd2_396129bb",
       "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

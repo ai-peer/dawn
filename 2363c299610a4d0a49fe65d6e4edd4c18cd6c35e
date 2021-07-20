@@ -127,6 +127,24 @@
       "message": "What about the workgroup init?",
       "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eac2871d_1621e80e",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-07-20T17:47:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a6decb6_31849f8e",
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
