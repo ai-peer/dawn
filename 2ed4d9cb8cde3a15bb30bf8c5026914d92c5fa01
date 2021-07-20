@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb04e87_ececb87c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-20T17:04:41Z",
+      "side": 1,
+      "message": "Requires https://dawn-review.googlesource.com/c/tint/+/58843 to land and roll before I can run CQ tests.",
+      "revId": "2ed4d9cb8cde3a15bb30bf8c5026914d92c5fa01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
