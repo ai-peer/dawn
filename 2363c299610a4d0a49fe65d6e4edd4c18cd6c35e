@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "504e8892_09c6be25",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-20T17:30:03Z",
+      "side": 1,
+      "message": "Good spot. Nope. This should have been tint::transform::Renamer::Config.\nI clearly haven\u0027t bothered to try compiling this on macOS or D3D12.\nDone.",
+      "parentUuid": "63fc1a8b_47e615ce",
+      "range": {
+        "startLine": 261,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 9
+      },
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d204bad7_2dbc43ca",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-07-20T17:27:19Z",
       "side": 1,
       "message": "else {\n  transformManager.Add\u003ctint::transform::Renamer\u003e();\n}\n\n?",
+      "range": {
+        "startLine": 127,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 9
+      },
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35cfda5a_90063a00",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-20T17:30:03Z",
+      "side": 1,
+      "message": "Should have been tint::transform::Renamer::Config. Done.",
+      "parentUuid": "d204bad7_2dbc43ca",
       "range": {
         "startLine": 127,
         "startChar": 7,
