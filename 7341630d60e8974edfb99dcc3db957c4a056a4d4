@@ -16,6 +16,24 @@
       "message": "I’m not sure how to best implement this CL. I want to create a SemaphoreServiceSyncFd specialization, but I had trouble with the duplicated code (almost every line is shared between SyncFd/OpaqueFd). I took an #if defined approach here, but I don’t really like it since the file is called SemaphoreServiceOpaqueFd when it sometimes doesn’t use OpaqueFDs...",
       "revId": "7341630d60e8974edfb99dcc3db957c4a056a4d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3875efa6_83d0f796",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T21:12:16Z",
+      "side": 1,
+      "message": "Can we rename the file to SemaphoreServiceFd.cpp and pass the desired handle type into the constructor? I guess we might still have an #ifdef at [1] but the file name might be more clear.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/vulkan/DeviceVk.cpp;l\u003d90;drc\u003df887797b3b527feabd5dfe9b3f2cc7f6deade49f;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "ea4ebb46_f0c56e8d",
+      "revId": "7341630d60e8974edfb99dcc3db957c4a056a4d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
