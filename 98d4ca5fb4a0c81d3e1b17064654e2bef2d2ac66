@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea954d39_6fde0337",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-20T05:28:59Z",
+      "side": 1,
+      "message": "PTAL, thanks!\nI use a simple way to make things work. Every time the registered callback function is going to change, we first trigger all deferred callback tasks, so that they will see the unchanged callback and userdata. On the other hand, callback tasks doesn\u0027t store callback function and userdata pointers anymore, they just go to DeviceBase and use the (unchanged yet) callback function and userdata. In this way we can ensure that all tasks will be triggered and run correctly. \nAlso, dawn_wire server will call the callback setting API in DeviceBase directly (through mProcs table), which will not return until all deferred callback tasks are done. In this way, dawn_wire shutting down can be block until all related callback tasks are done, since it must clear the registered callback in native device before shutting down.\nThe DeviceLostTests end2end tests are also modified to follow the changing of SetDeviceLostCallback.",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

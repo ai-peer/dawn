@@ -188,6 +188,24 @@
       "parentUuid": "ec1744cb_397f8ca5",
       "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6cd88c2_067289fb",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-20T05:28:59Z",
+      "side": 1,
+      "message": "In this CL I use a simple way to make things work. Every time the registered callback function is going to change, we first trigger all deferred callback tasks, so that they will see the unchanged callback and userdata. On the other hand, callback tasks doesn\u0027t store callback function and userdata pointers anymore, they just go to DeviceBase and use the (unchanged yet) callback function and userdata. In this way we can ensure that all tasks will be triggered and run correctly. Also, dawn_wire server will call the callback setting API in DeviceBase directly (through mProcs table), which will not return until all deferred callback tasks are done. In this way, dawn_wire shutting down can be block until all related callback tasks are done, since it must clear the registered callback in native device before shutting down.",
+      "parentUuid": "fa81b991_b417454e",
+      "revId": "5b3c96fb58a0af11de6879cbf801972a92dfdba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
