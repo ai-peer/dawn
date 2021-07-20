@@ -249,9 +249,10 @@ namespace dawn_native {
         if (texture->GetSampleCount() > 1 || texture->GetFormat().HasDepthOrStencil()) {
             Extent3D subresourceSize = texture->GetMipLevelPhysicalSize(textureCopy.mipLevel);
             ASSERT(texture->GetDimension() == wgpu::TextureDimension::e2D);
-            if (textureCopy.origin.x != 0 || textureCopy.origin.y != 0 ||
-                subresourceSize.width != copySize.width ||
-                subresourceSize.height != copySize.height) {
+            if ((copySize.width != 0 && copySize.height != 0 && copySize.depthOrArrayLayers != 0) &&
+                (textureCopy.origin.x != 0 || textureCopy.origin.y != 0 ||
+                 subresourceSize.width != copySize.width ||
+                 subresourceSize.height != copySize.height)) {
                 return DAWN_VALIDATION_ERROR(
                     "The entire subresource must be copied when using a depth/stencil texture, or "
                     "when sample count is greater than 1.");

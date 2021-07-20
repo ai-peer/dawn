@@ -541,6 +541,16 @@ namespace {
             ASSERT_DEVICE_ERROR(TestWriteTexture(dataSize, 0, bytesPerRow, 3, destination, 0,
                                                  {0, 0, 0}, {3, 3, 1},
                                                  wgpu::TextureAspect::StencilOnly));
+
+            // It is valid to specify an empty copySize
+            {
+                TestWriteTexture(dataSize, 0, bytesPerRow, wgpu::kCopyStrideUndefined, destination,
+                                 0, {0, 0, 0}, {0, 3, 1}, wgpu::TextureAspect::StencilOnly);
+                TestWriteTexture(dataSize, 0, bytesPerRow, wgpu::kCopyStrideUndefined, destination,
+                                 0, {0, 0, 0}, {3, 0, 1}, wgpu::TextureAspect::StencilOnly);
+                TestWriteTexture(dataSize, 0, bytesPerRow, wgpu::kCopyStrideUndefined, destination,
+                                 0, {0, 0, 0}, {3, 3, 0}, wgpu::TextureAspect::StencilOnly);
+            }
         }
 
         // It is invalid to write into the stencil aspect of depth24plus (no stencil)

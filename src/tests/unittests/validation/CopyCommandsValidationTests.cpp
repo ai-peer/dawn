@@ -702,6 +702,32 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForDepthStencilTexture) {
     }
 }
 
+// Test B2T copies with zero copy sizes should be valid for depth stencil textures.
+TEST_F(CopyCommandTest_B2T, ZeroCopyWithDepthStencilTexture) {
+    // TODO(dawn:570, dawn:666, dawn:690): List other valid parameters after missing texture formats
+    // are implemented, e.g. Stencil8 and depth16unorm.
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 1> params = {
+        std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
+    };
+
+    uint64_t bufferSize = BufferSizeForTextureCopy(32, 32, 1);
+    wgpu::Buffer source = CreateBuffer(bufferSize, wgpu::BufferUsage::CopySrc);
+
+    for (auto param : params) {
+        wgpu::TextureFormat textureFormat = std::get<0>(param);
+        wgpu::TextureAspect textureAspect = std::get<1>(param);
+
+        wgpu::Texture destination =
+            Create2DTexture(16, 16, 1, 1, textureFormat, wgpu::TextureUsage::CopyDst);
+        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
+                    {0, 8, 1}, textureAspect);
+        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
+                    {8, 0, 1}, textureAspect);
+        TestB2TCopy(utils::Expectation::Success, source, 0, 256, 16, destination, 0, {0, 0, 0},
+                    {8, 8, 0}, textureAspect);
+    }
+}
+
 // Test multisampled textures cannot be used in B2T copies.
 TEST_F(CopyCommandTest_B2T, CopyToMultisampledTexture) {
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1);
@@ -1569,6 +1595,32 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
     }
 }
 
+// Test T2B copies with zero copy sizes should be valid for depth stencil textures.
+TEST_F(CopyCommandTest_T2B, ZeroCopyWithDepthStencilTexture) {
+    // TODO(dawn:570, dawn:666, dawn:690): List other valid parameters after missing texture formats
+    // are implemented, e.g. Stencil8 and depth16unorm.
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 2> params = {
+        std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::DepthOnly)};
+
+    uint64_t bufferSize = BufferSizeForTextureCopy(32, 32, 1);
+    wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
+
+    for (auto param : params) {
+        wgpu::TextureFormat textureFormat = std::get<0>(param);
+        wgpu::TextureAspect textureAspect = std::get<1>(param);
+
+        wgpu::Texture source =
+            Create2DTexture(16, 16, 1, 1, textureFormat, wgpu::TextureUsage::CopySrc);
+        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
+                    {0, 8, 1}, textureAspect);
+        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
+                    {8, 0, 1}, textureAspect);
+        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
+                    {8, 8, 0}, textureAspect);
+    }
+}
+
 // Test that CopyT2B throws an error when requiredBytesInCopy overflows uint64_t
 TEST_F(CopyCommandTest_T2B, RequiredBytesInCopyOverflow) {
     wgpu::Buffer destination = CreateBuffer(10000, wgpu::BufferUsage::CopyDst);
@@ -1746,6 +1798,16 @@ TEST_F(CopyCommandTest_T2T, 2DTextureDepthStencil) {
     // Failure when selecting the stencil aspect (not all)
     TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
                 {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+
+    // Success when the copy is empty
+    {
+        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {0, 15, 1});
+        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {15, 0, 1});
+        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {15, 15, 0});
+    }
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureDepthOnly) {
@@ -1773,6 +1835,16 @@ TEST_F(CopyCommandTest_T2T, 2DTextureDepthOnly) {
         // Failure when selecting the stencil aspect (not all)
         TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
                     {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+
+        // Success when the copy is empty
+        {
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {0, 15, 1});
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {15, 0, 1});
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {15, 15, 0});
+        }
     }
 }
 
