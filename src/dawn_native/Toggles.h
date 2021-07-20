@@ -56,6 +56,8 @@ namespace dawn_native {
         DumpShaders,
         DEPRECATED_DumpTranslatedShaders,  // Use DumpShaders
         ForceWGSLStep,
+        DisableWorkgroupInit,
+        DisableSymbolRenaming,
 
         EnumCount,
         InvalidEnum = EnumCount,
@@ -86,7 +88,6 @@ namespace dawn_native {
         bool mToggleNameToEnumMapInitialized = false;
         std::unordered_map<std::string, Toggle> mToggleNameToEnumMap;
     };
-
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_TOGGLES_H_
