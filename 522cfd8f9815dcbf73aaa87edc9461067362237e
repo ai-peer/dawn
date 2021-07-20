@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1384c2_835fd8ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T17:34:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdddbbd2_396129bb",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T17:34:01Z",
+      "side": 1,
+      "message": "is DisableWorkgroupInit an option for MSL?",
+      "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
