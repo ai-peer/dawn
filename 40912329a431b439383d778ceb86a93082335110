@@ -16,6 +16,23 @@
       "message": "Somehow let this slipthrough...",
       "revId": "40912329a431b439383d778ceb86a93082335110",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87b27d11_5d07c8ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T23:20:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "40912329a431b439383d778ceb86a93082335110",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
