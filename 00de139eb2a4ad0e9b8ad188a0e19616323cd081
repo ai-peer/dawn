@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82873ea1_e4b3acb2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T19:48:26Z",
+      "side": 1,
+      "message": "Note: moving it behind unsafe apis is a little less trivial because the extension is exposed on the adapter, and the unsafe apis toggle is a device-level thing. We can discuss what to do about this separately.",
+      "revId": "00de139eb2a4ad0e9b8ad188a0e19616323cd081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
