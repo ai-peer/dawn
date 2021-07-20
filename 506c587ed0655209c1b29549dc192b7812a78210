@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95f719e_abbcadf5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-07-20T20:22:59Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "506c587ed0655209c1b29549dc192b7812a78210",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376e5f78_432acf8e",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-07-20T20:22:59Z",
+      "side": 1,
+      "message": "Can these functions be changed to return a Ref\u003c\u003e? Or is that impossible / otherwise bad?",
+      "revId": "506c587ed0655209c1b29549dc192b7812a78210",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3903526f_83e0593c",
