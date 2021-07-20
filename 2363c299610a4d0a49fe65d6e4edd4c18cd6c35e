@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63fc1a8b_47e615ce",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T17:27:19Z",
+      "side": 1,
+      "message": "is it the desired intent to add this transform twice?",
+      "range": {
+        "startLine": 261,
+        "startChar": 8,
+        "endLine": 267,
+        "endChar": 9
+      },
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d204bad7_2dbc43ca",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T17:27:19Z",
+      "side": 1,
+      "message": "else {\n  transformManager.Add\u003ctint::transform::Renamer\u003e();\n}\n\n?",
+      "range": {
+        "startLine": 127,
+        "startChar": 7,
+        "endLine": 131,
+        "endChar": 9
+      },
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
