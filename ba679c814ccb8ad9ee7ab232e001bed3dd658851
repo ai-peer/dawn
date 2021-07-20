@@ -16,6 +16,23 @@
       "message": "Landing trivial roll TBR",
       "revId": "ba679c814ccb8ad9ee7ab232e001bed3dd658851",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba630f2_86c02d23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-20T14:38:07Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "ba679c814ccb8ad9ee7ab232e001bed3dd658851",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
