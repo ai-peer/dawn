@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea4ebb46_f0c56e8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-07-20T21:06:27Z",
+      "side": 1,
+      "message": "I’m not sure how to best implement this CL. I want to create a SemaphoreServiceSyncFd specialization, but I had trouble with the duplicated code (almost every line is shared between SyncFd/OpaqueFd). I took an #if defined approach here, but I don’t really like it since the file is called SemaphoreServiceOpaqueFd when it sometimes doesn’t use OpaqueFDs...",
+      "revId": "7341630d60e8974edfb99dcc3db957c4a056a4d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
