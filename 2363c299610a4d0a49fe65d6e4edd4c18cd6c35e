@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe2f96a3_9407eb89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T17:42:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "63fc1a8b_47e615ce",
@@ -91,6 +108,23 @@
         "endLine": 131,
         "endChar": 9
       },
+      "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a6decb6_31849f8e",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T17:42:26Z",
+      "side": 1,
+      "message": "What about the workgroup init?",
       "revId": "2363c299610a4d0a49fe65d6e4edd4c18cd6c35e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
