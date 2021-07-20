@@ -22,7 +22,6 @@
 #include "dawn_native/DawnNative.h"
 
 namespace dawn_native {
-
     enum class Toggle {
         EmulateStoreAndMSAAResolve,
         NonzeroClearResourcesOnCreationForTesting,
@@ -56,6 +55,8 @@ namespace dawn_native {
         DumpShaders,
         DEPRECATED_DumpTranslatedShaders,  // Use DumpShaders
         ForceWGSLStep,
+        DisableWorkgroupInit,
+        DisableSymbolRenaming,
 
         EnumCount,
         InvalidEnum = EnumCount,

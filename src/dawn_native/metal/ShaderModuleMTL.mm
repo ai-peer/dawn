@@ -123,7 +123,9 @@ namespace dawn_native { namespace metal {
             transformManager.Add<tint::transform::BoundArrayAccessors>();
         }
         transformManager.Add<tint::transform::BindingRemapper>();
-        transformManager.Add<tint::transform::Renamer>();
+        if (!GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming)) {
+            transformManager.Add<tint::transform::Renamer>();
+        }
 
         transformInputs.Add<BindingRemapper::Remappings>(std::move(bindingPoints),
                                                          std::move(accessControls),
@@ -140,6 +142,8 @@ namespace dawn_native { namespace metal {
                 return DAWN_VALIDATION_ERROR("Could not find remapped name for entry point.");
             }
             *remappedEntryPointName = it->second;
+        } else if (GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming)) {
+            *remappedEntryPointName = entryPointName;
         } else {
             return DAWN_VALIDATION_ERROR("Transform output missing renamer data.");
         }
