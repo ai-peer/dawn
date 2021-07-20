@@ -600,6 +600,7 @@ source_set("dawn_native_sources") {
         "vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "vulkan/external_semaphore/SemaphoreServiceOpaqueFD.cpp",
       ]
+      defines += [ "DAWN_USE_SYNC_FDS" ]
     } else if (is_linux) {
       sources += [
         "vulkan/external_memory/MemoryServiceOpaqueFD.cpp",
