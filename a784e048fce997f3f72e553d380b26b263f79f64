@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d7b8336d_b8be1d4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-20T05:35:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "273007b3_c9050a70",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3d6cd10c_59545ab6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -103,6 +121,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "691b807c_f4de76d7",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-20T05:35:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adaf1e94_bd8a6895",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d9e4576_df331e35",
@@ -116,6 +152,24 @@
       "writtenOn": "2021-07-19T12:52:26Z",
       "side": 1,
       "message": "ditto, we should need to use them.",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "376dfd1c_6d9a8b21",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-20T05:35:37Z",
+      "side": 1,
+      "message": "Oh if we don\u0027t use the fragment inputs, they will not be \"effective\" and not needed to follow the maximum location limitation.",
+      "parentUuid": "9d9e4576_df331e35",
       "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
