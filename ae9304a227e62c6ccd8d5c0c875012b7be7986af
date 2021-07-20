@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "ae9304a227e62c6ccd8d5c0c875012b7be7986af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8a0695_f6399c5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T11:40:39Z",
+      "side": 1,
+      "message": "The WebGPU specification doesn\u0027t allow empty depth-stencil copies as far as I can tell: https://gpuweb.github.io/gpuweb/#abstract-opdef-validating-gpuimagecopytexture",
+      "revId": "ae9304a227e62c6ccd8d5c0c875012b7be7986af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
