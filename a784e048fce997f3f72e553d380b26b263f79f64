@@ -172,6 +172,24 @@
       "parentUuid": "9d9e4576_df331e35",
       "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c35305_d9a00306",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T07:54:26Z",
+      "side": 1,
+      "message": "Care to elaborate? That seems weird because the entrypoint interface should be what defines the IO used, not static use.",
+      "parentUuid": "376dfd1c_6d9a8b21",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
