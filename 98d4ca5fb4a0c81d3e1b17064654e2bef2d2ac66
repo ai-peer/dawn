@@ -16,6 +16,97 @@
       "message": "PTAL, thanks!\nI use a simple way to make things work. Every time the registered callback function is going to change, we first trigger all deferred callback tasks, so that they will see the unchanged callback and userdata. On the other hand, callback tasks doesn\u0027t store callback function and userdata pointers anymore, they just go to DeviceBase and use the (unchanged yet) callback function and userdata. In this way we can ensure that all tasks will be triggered and run correctly. \nAlso, dawn_wire server will call the callback setting API in DeviceBase directly (through mProcs table), which will not return until all deferred callback tasks are done. In this way, dawn_wire shutting down can be block until all related callback tasks are done, since it must clear the registered callback in native device before shutting down.\nThe DeviceLostTests end2end tests are also modified to follow the changing of SetDeviceLostCallback.",
       "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a61e03_ae8b2046",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T08:27:34Z",
+      "side": 1,
+      "message": "I don\u0027t think the changes to this class are necessary now that we flush the callback queue on Set*Callback. We are guaranteed that the callback is still active since we flush the callback queue right before it might become inactive.\n\n[1] could be removed with this too.",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f315b4ff_54b47251",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T08:27:34Z",
+      "side": 1,
+      "message": "This comment is saying what happens, which we can see in the code. It would be more useful to explain why that needs to happen. For example:\n\n  // When changing callbacks the user might be freeing data that was previously used in the callback, for example `userdata`. Flush all queued callbacks so as to guarantee we are never going to use the previous callback after this call.\n  \nDitto below.",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3db8e66_b7daf502",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T08:27:34Z",
+      "side": 1,
+      "message": "nit: FlushCallbackQueue maybe?",
+      "range": {
+        "startLine": 915,
+        "startChar": 8,
+        "endLine": 915,
+        "endChar": 36
+      },
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5b20af_98491922",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T08:27:34Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea64afd_43443318",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-20T08:27:34Z",
+      "side": 1,
+      "message": "Since we added a call to this function at the start of every test, can we instead set up the callback at the end of SetUp?",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
