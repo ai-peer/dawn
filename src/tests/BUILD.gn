@@ -486,6 +486,10 @@ test("dawn_end2end_tests") {
     "DawnTest.h",
   ]
 
+  if (is_mac) {
+    sources += [ "DawnTest_ns.mm" ]
+  }
+
   libs = []
 
   # When building inside Chromium, use their gtest main function because it is
@@ -538,6 +542,10 @@ test("dawn_perf_tests") {
     "perf_tests/ShaderRobustnessPerf.cpp",
     "perf_tests/SubresourceTrackingPerf.cpp",
   ]
+
+  if (is_mac) {
+    sources += [ "DawnTest_ns.mm" ]
+  }
 
   libs = []
 
