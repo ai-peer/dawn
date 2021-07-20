@@ -20,19 +20,6 @@ namespace dawn_native { namespace metal {
 
     CommandRecordingContext::CommandRecordingContext() = default;
 
-    CommandRecordingContext::CommandRecordingContext(NSPRef<id<MTLCommandBuffer>> commands)
-        : mCommands(std::move(commands)) {
-    }
-
-    CommandRecordingContext::CommandRecordingContext(CommandRecordingContext&& rhs)
-        : mCommands(rhs.AcquireCommands()) {
-    }
-
-    CommandRecordingContext& CommandRecordingContext::operator=(CommandRecordingContext&& rhs) {
-        mCommands = rhs.AcquireCommands();
-        return *this;
-    }
-
     CommandRecordingContext::~CommandRecordingContext() {
         // Commands must be acquired.
         ASSERT(mCommands == nullptr);
@@ -42,6 +29,29 @@ namespace dawn_native { namespace metal {
         return mCommands.Get();
     }
 
+    void CommandRecordingContext::MarkUsed() {
+        mUsed = true;
+    }
+    bool CommandRecordingContext::WasUsed() const {
+        return mUsed;
+    }
+
+    MaybeError CommandRecordingContext::PrepareNextCommandBuffer(id<MTLCommandQueue> queue) {
+        ASSERT(mCommands == nil);
+        ASSERT(!mUsed);
+
+        id<MTLCommandBuffer> commandBuffer = [queue commandBuffer];
+        if (commandBuffer == nil) {
+            return DAWN_INTERNAL_ERROR("Failed to allocate an MTLCommandBuffer");
+        }
+
+        // The MTLCommandBuffer will be autoreleased by default.
+        // The autorelease pool may drain before the command buffer is submitted. Retain so it stays
+        // alive.
+        mCommands = AcquireNSPRef([commandBuffer retain]);
+        return {};
+    }
+
     NSPRef<id<MTLCommandBuffer>> CommandRecordingContext::AcquireCommands() {
         // A blit encoder can be left open from WriteBuffer, make sure we close it.
         if (mCommands != nullptr) {
@@ -49,6 +59,7 @@ namespace dawn_native { namespace metal {
         }
 
         ASSERT(!mInEncoder);
+        mUsed = false;
         return std::move(mCommands);
     }
 
