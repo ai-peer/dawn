@@ -343,7 +343,7 @@ namespace dawn_native { namespace metal {
         out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
 
         if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling) &&
-            GetEntryPoint(entryPointName).usedVertexAttributes.any()) {
+            GetEntryPoint(entryPointName).usedVertexInputs.any()) {
             out->needsStorageBufferLength = true;
         }
 
