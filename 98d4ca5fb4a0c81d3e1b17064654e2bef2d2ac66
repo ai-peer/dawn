@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1730d65b_3bc4729a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-21T05:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4a61e03_ae8b2046",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f315b4ff_54b47251",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-07-20T08:27:34Z",
       "side": 1,
       "message": "This comment is saying what happens, which we can see in the code. It would be more useful to explain why that needs to happen. For example:\n\n  // When changing callbacks the user might be freeing data that was previously used in the callback, for example `userdata`. Flush all queued callbacks so as to guarantee we are never going to use the previous callback after this call.\n  \nDitto below.",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e43bd6ee_10646ad6",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-21T05:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f315b4ff_54b47251",
       "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e07aeb60_44a5de0a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 915,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-21T05:20:02Z",
+      "side": 1,
+      "message": "Done, changed into FlushCallbackTaskQueue.",
+      "parentUuid": "f3db8e66_b7daf502",
+      "range": {
+        "startLine": 915,
+        "startChar": 8,
+        "endLine": 915,
+        "endChar": 36
+      },
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b5b20af_98491922",
@@ -92,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8276c659_4718678c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-21T05:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b5b20af_98491922",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea64afd_43443318",
@@ -105,6 +183,24 @@
       "writtenOn": "2021-07-20T08:27:34Z",
       "side": 1,
       "message": "Since we added a call to this function at the start of every test, can we instead set up the callback at the end of SetUp?",
+      "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dea5805_a6271980",
+        "filename": "src/tests/end2end/DeviceLostTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-07-21T05:20:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cea64afd_43443318",
       "revId": "98d4ca5fb4a0c81d3e1b17064654e2bef2d2ac66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
