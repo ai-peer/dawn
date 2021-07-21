@@ -15,7 +15,6 @@
 #include "dawn_native/ShaderModule.h"
 
 #include "common/HashUtils.h"
-#include "common/VertexFormatUtils.h"
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/ChainUtils_autogen.h"
 #include "dawn_native/CompilationMessages.h"
