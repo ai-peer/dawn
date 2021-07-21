@@ -99,6 +99,30 @@
       },
       "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e137d60_74230339",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-07-21T20:08:18Z",
+      "side": 1,
+      "message": "There\u0027s three cases that I think are relevant:\n\n1) *ExternalImage gets destroyed BEFORE Dawn gets destroyed*. In this case, your CL will Flush the 11on12device as well as release the ID3D12Resource. No memory leaks.Yay!\n\n2) *ExternalImage gets destroyed AFTER Dawn gets destroyed*.The ExternalImage will continue to hold onto the ID3D12Resource like it did before your CL. The IDXGIKeyedMutex just points to the same piece of memory that the ID3D12Resource does. When the ExternalImage eventually gets destroyed, it will clean everything up (including all of the 11on12devices it caches) and avoid memory leaks. I\u0027m failing to see the need for flushing in the destructor of the Dawn device in this case. Sure, it will make the 11on12 device release its reference but the ExternalImage is still keeping the resource alive by holding onto a reference via ID3D12Resource. \n\n3) *ExternalImage gets destroyed first but Dawn still has references to the Dawn texture via internal objects*. Here ExternalImage will release a reference (but not the last reference) to the ID3D12Resource. The other reference is held by the Dawn texture. While Externalimage does flush the 11on12Device upon destruction, Dawn will cause the 11on12 device to re-attach itself when Dawn calls ReleaseKeyedMutex.  Yes, your code here in the destructor will cause Dawn to release the last reference to the resource but that will happen when Dawn gets destroyed. Dawn destruction might happen long after the ExternalImage gets destroyed. This is a new problem with your change. Before your change, when the Dawn texture got freed, it released the last reference to the ID3D12Resource AND told the 11on12device to also release its references. \n\nI think we can fix #3 with my proposal above.",
+      "parentUuid": "38db4d47_a4a9f7b6",
+      "range": {
+        "startLine": 602,
+        "startChar": 1,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
