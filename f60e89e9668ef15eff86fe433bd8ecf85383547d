@@ -16,6 +16,47 @@
       "message": "const_cast is something that we like to avoid in general? Is there any way to not do it while still keeping the keys as values (compared to unique_ptr previsouly?)\n\nIf not, feel free to close this.",
       "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "167b354b_afa17c26",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-07-21T18:09:03Z",
+      "side": 1,
+      "message": "Can we eliminate the const_cast by making GetDXGIKeyedMutex a const method?",
+      "parentUuid": "e505b432_8771e527",
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb561b7d_ca44783b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-07-21T18:09:03Z",
+      "side": 1,
+      "message": "(Apologies for not opening this issue earlier)\n\nIf the ExternalImage object outlives the Dawn device, then then the code you added in this CL to Flush the 11on12 device upon ExternalImage destruction should avoid memory leaks. I don\u0027t think we need this particular piece of code for that case.\n\nFrom Corentin\u0027s comment in https://bugs.chromium.org/p/dawn/issues/detail?id\u003d625#c62, the reason we need this particular flush is the case is when the ExternalImage object gets destroyed but there are still references to the D3D resource in Dawn\u0027s internal data structures. In that case, we will hold onto the D3D12 resource all the way until the Dawn device gets destroyed, which might be much later in the case where videos textures, canvas elements and other shared images come and go.\n\nTo mitigate this, would it be possible to make ExternalImageDXGI (or an internal object of some sort) to be a reference counted object? If we do that, we can make the DawnTexture object hold a reference to this internal object and, then, only when the internal object\u0027s reference count goes to zero do we perform the flush. I think this should solve cases where ExternalObject outlasts Dawn devices and vice versa.",
+      "range": {
+        "startLine": 602,
+        "startChar": 1,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

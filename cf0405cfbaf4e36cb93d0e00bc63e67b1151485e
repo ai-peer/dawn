@@ -414,6 +414,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "503dead6_79d716ba",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-07-21T18:09:03Z",
+      "side": 1,
+      "message": "Bryan, thank you for the explanation. I understand now and agree with Corentin. \nWill resolve.",
+      "parentUuid": "57fc6244_7518d997",
+      "range": {
+        "startLine": 67,
+        "startChar": 34,
+        "endLine": 67,
+        "endChar": 77
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "92d655ef_23b4db05",
