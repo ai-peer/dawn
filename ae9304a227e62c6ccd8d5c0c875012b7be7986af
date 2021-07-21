@@ -33,6 +33,24 @@
       "message": "The WebGPU specification doesn\u0027t allow empty depth-stencil copies as far as I can tell: https://gpuweb.github.io/gpuweb/#abstract-opdef-validating-gpuimagecopytexture",
       "revId": "ae9304a227e62c6ccd8d5c0c875012b7be7986af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62b0512d_768551db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-21T00:18:46Z",
+      "side": 1,
+      "message": "So currently WebGPU SPEC allows empty copy on color formats, but disallows empty copy on depth-stencil formats? I think empty copies are always no-ops and skipped on all the backends, so it should be OK to support empty copies on all texture formats?\n\nWhat do you think, Austin?",
+      "parentUuid": "cf8a0695_f6399c5b",
+      "revId": "ae9304a227e62c6ccd8d5c0c875012b7be7986af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
