@@ -50,6 +50,24 @@
       "message": "LGTM",
       "revId": "241eb8eb2da74870bdb7c593b16f60e3e76bbaaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2547aa_0d045858",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T14:19:59Z",
+      "side": 1,
+      "message": "we also need to disallow it in general because the precise timing information could be a security vulnerability. We need to first understand if the timing information could be harmful, and round the results if necessary, before we can let general websites use it. You can still test on windows using --disable-dawn-features\u003ddisallow_unsafe_apis",
+      "parentUuid": "c2027519_e4106cc1",
+      "revId": "241eb8eb2da74870bdb7c593b16f60e3e76bbaaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
