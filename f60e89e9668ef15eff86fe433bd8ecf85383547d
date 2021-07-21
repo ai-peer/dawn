@@ -147,6 +147,30 @@
       },
       "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e594fa0b_851f9a17",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-07-21T23:27:01Z",
+      "side": 1,
+      "message": "\u003e Seems bad to keep a bunch of no-longer-needed references on the 11on12 device around forever. No concern there?\n\nThis situation can happen if there are one or more 2D canvas elements or videos on the page who\u0027s shared images outlast the Dawn device on account of garbage collection. \n\n\u003e In this CL, Dawn does not call ReleaseKeyedMutex anymore so how does the 11on12 device re-attach itself once the ExternalImage gets destroyed?\n\nApologies for being unclear. By \"release keyed mutex\", I mean that Dawn calls AcquireSync or ReleaseSync on the mutex.\n\nIf the web developer imports (via zero copy) a shared image into Dawn and holds a reference to the Dawn texture while the video or 2D canvas gets garbage collected, the ExternalImage will be destroyed while Dawn still holds a reference to the underlying ID3D12Resource and ID3D11KeyedMutex. Garbage collection can happen at any time in the render process when V8 detects a particular object no longer has any roots. \n\nIn this case, Dawn will release the ID3D11Resource and ID3D11KeyedMutex when the texture is destroyed at the end of the frame but the 11on12 device inside of Dawn will hold onto the reference for the lifetime of the Dawn device.",
+      "parentUuid": "c17d0f18_b9bda760",
+      "range": {
+        "startLine": 602,
+        "startChar": 1,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
