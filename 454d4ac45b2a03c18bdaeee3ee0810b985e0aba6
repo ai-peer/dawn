@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f969ed3a_5832e6d8",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T01:47:53Z",
+      "side": 1,
+      "message": "Nice, done.",
+      "parentUuid": "92984a98_c82d1710",
+      "range": {
+        "startLine": 249,
+        "startChar": 65,
+        "endLine": 249,
+        "endChar": 83
+      },
+      "revId": "454d4ac45b2a03c18bdaeee3ee0810b985e0aba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac321fe8_12b3720e",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-07-21T00:27:39Z",
       "side": 1,
       "message": "nit: maybe we should also test with two var\u003cworkgroup\u003e variables - just to be absolutely sure Dawn considers all of the accumulated storage, and not just the storage of a single variable",
+      "revId": "454d4ac45b2a03c18bdaeee3ee0810b985e0aba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7691de32_054000f6",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T01:47:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ac321fe8_12b3720e",
       "revId": "454d4ac45b2a03c18bdaeee3ee0810b985e0aba6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
