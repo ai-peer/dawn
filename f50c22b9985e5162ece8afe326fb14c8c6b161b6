@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1becb2cb_1994b9e4",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T17:17:20Z",
+      "side": 0,
+      "message": "unit: probably still a useful helper to have - though I guess if this is the only place then it\u0027s not needed yet. We can always add it back and piece together baseType and componentCount",
+      "range": {
+        "startLine": 115,
+        "startChar": 41,
+        "endLine": 115,
+        "endChar": 70
+      },
+      "revId": "f50c22b9985e5162ece8afe326fb14c8c6b161b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "f024c6116b76d8592f91422a830305417cb0bae1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab1688d9_e928a1a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T17:17:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f024c6116b76d8592f91422a830305417cb0bae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53707f74_341d9a80",
+        "filename": "src/dawn_native/VertexFormat.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T17:17:20Z",
+      "side": 1,
+      "message": "nit: maybe these should be byteSize and componentByteSize to be clear",
+      "range": {
+        "startLine": 30,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 31
+      },
+      "revId": "f024c6116b76d8592f91422a830305417cb0bae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
