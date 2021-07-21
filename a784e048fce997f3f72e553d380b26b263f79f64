@@ -190,6 +190,24 @@
       "parentUuid": "376dfd1c_6d9a8b21",
       "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa863fa6_3662b1a9",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-21T02:18:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9c35305_d9a00306",
+      "revId": "a784e048fce997f3f72e553d380b26b263f79f64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
