@@ -51,6 +51,24 @@
       "parentUuid": "fa98d767_1f4ef74d",
       "revId": "b866d502754af0028f955e4eea5b00fa2471c5b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c275f0a7_6e38ebaf",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T17:12:18Z",
+      "side": 1,
+      "message": "Yeah the topic of having safe math library comes up once in a while. It could be worth it, but in a lot of case we end up no needing overflow checks if we do operations in uint64_t for example.\n\nMaybe one day we\u0027ll actually add it though.",
+      "parentUuid": "81f1a491_b03ad06b",
+      "revId": "b866d502754af0028f955e4eea5b00fa2471c5b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
