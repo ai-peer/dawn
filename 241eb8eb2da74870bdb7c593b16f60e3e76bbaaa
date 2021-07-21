@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "241eb8eb2da74870bdb7c593b16f60e3e76bbaaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2027519_e4106cc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-21T03:16:18Z",
+      "side": 1,
+      "message": "This also disallow timestamp query on other backends. Could we just disable the timestamp query on Metal backend at https://source.chromium.org/chromium/chromium/src/+/master:third_party/dawn/src/dawn_native/metal/BackendMTL.mm;l\u003d230? So we can contine to use timestamp query for profiling on Windows.\n\nI still wonder why UpdateTimestampPeriod has such a large power consumption. It just does some simple calculations, and it will stop after about 100 times. I will verify if the power consumption is caused by these calculations. If so, we can only return a fixed experience value on Metal.",
+      "revId": "241eb8eb2da74870bdb7c593b16f60e3e76bbaaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
