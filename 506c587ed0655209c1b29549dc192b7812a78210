@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a99c0657_8662419a",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T08:56:47Z",
+      "side": 1,
+      "message": "This eventually returns a WGPUTexture, but I moved the Detach() to the entrypoint.",
+      "parentUuid": "376e5f78_432acf8e",
+      "revId": "506c587ed0655209c1b29549dc192b7812a78210",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3903526f_83e0593c",
@@ -82,6 +100,30 @@
       "writtenOn": "2021-07-19T21:47:31Z",
       "side": 1,
       "message": "can remove this now?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 86
+      },
+      "revId": "506c587ed0655209c1b29549dc192b7812a78210",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "625b2573_06aee6fd",
+        "filename": "src/dawn_native/metal/SwapChainMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T08:56:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3903526f_83e0593c",
       "range": {
         "startLine": 135,
         "startChar": 0,
