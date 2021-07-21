@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c88b649_57fb4e42",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T19:32:32Z",
+      "side": 1,
+      "message": "I would tend to agree, but yes this is what our formatter does and it\u0027s in line with the style used throughout the tree.",
+      "parentUuid": "f7a3fed6_eea3e9d8",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af278bce_da3f458d",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-07-21T19:22:55Z",
       "side": 1,
       "message": "nit: I normally would have seperate TEST_F for each TestDispatch call, so that the test name could be more descriptive of the specific case being covered, but that is a style thing.",
+      "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e700b13_6e61a6b4",
+        "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T19:32:32Z",
+      "side": 1,
+      "message": "SGTM, I like it, done.",
+      "parentUuid": "af278bce_da3f458d",
       "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
