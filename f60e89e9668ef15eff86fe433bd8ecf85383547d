@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e505b432_8771e527",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T09:09:13Z",
+      "side": 1,
+      "message": "const_cast is something that we like to avoid in general? Is there any way to not do it while still keeping the keys as values (compared to unique_ptr previsouly?)\n\nIf not, feel free to close this.",
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
