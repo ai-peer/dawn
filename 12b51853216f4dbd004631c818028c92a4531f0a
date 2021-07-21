@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5119a90_ca3669fe",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T00:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8462703_408b8737",
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4de82b12_c6a1103d",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-07-05T07:36:11Z",
       "side": 1,
       "message": "sorry the limit just changed because I made a mistake in the original WebGPU PR. See https://dawn-review.googlesource.com/c/dawn/+/56082/8/src/common/Constants.h",
+      "range": {
+        "startLine": 909,
+        "startChar": 54,
+        "endLine": 909,
+        "endChar": 89
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f340bee4_4b8f8764",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T00:00:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4de82b12_c6a1103d",
       "range": {
         "startLine": 909,
         "startChar": 54,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8630c3f_39cc79a8",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T00:00:15Z",
+      "side": 1,
+      "message": "Ah yes, done. I misunderstood comments around similar skips in other tests.",
+      "parentUuid": "8a82518d_b887ba17",
+      "range": {
+        "startLine": 208,
+        "startChar": 22,
+        "endLine": 208,
+        "endChar": 36
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c3a6e1b_e59f1298",
@@ -121,6 +187,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d42e1017_ef7b4ae5",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T00:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c3a6e1b_e59f1298",
+      "range": {
+        "startLine": 210,
+        "startChar": 9,
+        "endLine": 210,
+        "endChar": 42
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52e59391_84985988",
@@ -134,6 +224,24 @@
       "writtenOn": "2021-07-05T07:36:11Z",
       "side": 1,
       "message": "nit: we should also check the other dimensions (since the limits are now different per dim) and volume.",
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f330088_32923de3",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T00:00:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52e59391_84985988",
       "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -175,6 +283,30 @@
       "side": 1,
       "message": "Uuuh sorry for the bad wording in the spec, I assumed we\u0027d clean it up later. I\u0027ll improve things.",
       "parentUuid": "6d0e57b3_88a2002a",
+      "range": {
+        "startLine": 222,
+        "startChar": 35,
+        "endLine": 222,
+        "endChar": 68
+      },
+      "revId": "12b51853216f4dbd004631c818028c92a4531f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1cc1459_1eaab116",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T00:00:15Z",
+      "side": 1,
+      "message": "Thanks. I also originally wrote this CL with a pretty abysmal understanding of the spec and its terminology in general, so that didn\u0027t help. :)",
+      "parentUuid": "d1af2e07_4952c89b",
       "range": {
         "startLine": 222,
         "startChar": 35,
