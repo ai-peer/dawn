@@ -412,9 +412,15 @@ namespace dawn_native {
         return ValidateTextureToTextureCopyCommonRestrictions(src, dst, copySize);
     }
 
-    MaybeError ValidateCanUseAs(const TextureBase* texture, wgpu::TextureUsage usage) {
+    MaybeError ValidateCanUseAs(const TextureBase* texture,
+                                wgpu::TextureUsage usage,
+                                bool checkAlsoInternalUsage) {
         ASSERT(wgpu::HasZeroOrOneBits(usage));
-        if (!(texture->GetUsage() & usage)) {
+        if (checkAlsoInternalUsage) {
+            if (!((texture->GetInternalUsage() | texture->GetUsage()) & usage)) {
+                return DAWN_VALIDATION_ERROR("texture doesn't have the required usage.");
+            }
+        } else if (!(texture->GetUsage() & usage)) {
             return DAWN_VALIDATION_ERROR("texture doesn't have the required usage.");
         }
 
