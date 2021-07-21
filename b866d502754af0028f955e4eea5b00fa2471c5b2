@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe0aaf8c_07c9a547",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T08:42:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b866d502754af0028f955e4eea5b00fa2471c5b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa98d767_1f4ef74d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T08:42:32Z",
+      "side": 1,
+      "message": "nit: We need to be careful of overflow, so maybe we can add a comment here that the computation can\u0027t overflow because all of the values have already been checked to be less than 256 (not sure if a static_assert makes sense)",
+      "revId": "b866d502754af0028f955e4eea5b00fa2471c5b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
