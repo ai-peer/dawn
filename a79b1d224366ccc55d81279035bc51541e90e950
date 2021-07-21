@@ -33,6 +33,24 @@
       "message": "According to the page, don\u0027t we need to use only driverVersion[3] when on the old driver because when comparing two old driver versions we\u0027d need to ignore the \"release revision\" that\u0027s driverVersion[2]?",
       "revId": "a79b1d224366ccc55d81279035bc51541e90e950",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6a1301_70aef122",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002556
+      },
+      "writtenOn": "2021-07-21T10:16:07Z",
+      "side": 1,
+      "message": "That\u0027s exactly our misunderstanding in the past, so I submitted this CL to fix it. If you scroll down to the bottom of the page, there is a (incomplete) table that tells us actually for legacy driver, there are many branches (e.g., 15.45, 15.40, 15.36, etc.) instead of one (our previous understanding). These branches are totally different code bases, so we may not assume any fix in one branch would arrive in another branch. Different branches will map to different release versions (This statement is just partially true), so we rely on this info (release version) to differentiate among branches.\nIn all, for new driver, there is just one branch. And for legacy driver, there are many branches. It\u0027s meaningless to compare build number between 2 different branches. Thus to use current function, we need to limit the build number within the range of a branch. For example, \"CompareD3DDriverVersion(driverVersion, {20, 19, 15, 5107}) \u003d\u003d -1 \u0026\u0026 CompareD3DDriverVersion(driverVersion, {20, 19, 15, 0}) \u003d\u003d 1\".",
+      "parentUuid": "96e11bf0_8376431c",
+      "revId": "a79b1d224366ccc55d81279035bc51541e90e950",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
