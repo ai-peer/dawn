@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6a428f1_0eb91a34",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-07-21T19:38:56Z",
+      "side": 1,
+      "message": "Weird, I must always put my anonymous namespaces in the top-level or something.",
+      "parentUuid": "5c88b649_57fb4e42",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af278bce_da3f458d",
