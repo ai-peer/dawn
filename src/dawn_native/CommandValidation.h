@@ -69,7 +69,9 @@ namespace dawn_native {
                                                          const ImageCopyTexture& dst,
                                                          const Extent3D& copySize);
 
-    MaybeError ValidateCanUseAs(const TextureBase* texture, wgpu::TextureUsage usage);
+    MaybeError ValidateCanUseAs(const TextureBase* texture,
+                                wgpu::TextureUsage usage,
+                                bool checkAlsoInternalUsage = false);
 
     MaybeError ValidateCanUseAs(const BufferBase* buffer, wgpu::BufferUsage usage);
 
