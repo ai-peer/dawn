@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a026146_57429496",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T00:27:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "454d4ac45b2a03c18bdaeee3ee0810b985e0aba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92984a98_c82d1710",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T00:27:39Z",
+      "side": 1,
+      "message": "I think you can also say:\n\nignore(data);\n\nto do nothing but prevent it from getting removed by the compiler",
+      "range": {
+        "startLine": 249,
+        "startChar": 65,
+        "endLine": 249,
+        "endChar": 83
+      },
+      "revId": "454d4ac45b2a03c18bdaeee3ee0810b985e0aba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac321fe8_12b3720e",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T00:27:39Z",
+      "side": 1,
+      "message": "nit: maybe we should also test with two var\u003cworkgroup\u003e variables - just to be absolutely sure Dawn considers all of the accumulated storage, and not just the storage of a single variable",
+      "revId": "454d4ac45b2a03c18bdaeee3ee0810b985e0aba6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
