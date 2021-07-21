@@ -85,6 +85,24 @@
       "parentUuid": "aecafe2e_43f6fccc",
       "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb76c852_cee2b3b1",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T16:46:22Z",
+      "side": 1,
+      "message": "If all debug layers are happy then this seems fine. Can you double check that the WebGPU spec allows it (and fix it if needed)?",
+      "parentUuid": "0eb26402_d0b9ef9a",
+      "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
