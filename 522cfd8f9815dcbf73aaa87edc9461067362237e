@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9cc74d_71fde581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-07-21T14:36:46Z",
+      "side": 1,
+      "message": "Confirmed this also works as expected on macOS.",
+      "parentUuid": "069b45ef_10842a2c",
+      "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdddbbd2_396129bb",
