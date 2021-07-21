@@ -67,6 +67,24 @@
       "message": "Does this mean we allow FS to specify outputs that aren\u0027t in the attachment? Is that valid on all APIs?",
       "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eb26402_d0b9ef9a",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T16:39:36Z",
+      "side": 1,
+      "message": "We test this in RenderAttachmentTest.MoreFragmentOutputsThanAttachments. VVL gives warnings but no errors.",
+      "parentUuid": "aecafe2e_43f6fccc",
+      "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
