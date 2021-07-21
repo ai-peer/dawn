@@ -16,6 +16,57 @@
       "message": "PTAL! Need to update CTS tests as well",
       "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29e284f1_e093507d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T16:25:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c155670e_6248c0a9",
+        "filename": "src/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T16:25:59Z",
+      "side": 1,
+      "message": "TIL that this is valid.",
+      "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aecafe2e_43f6fccc",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T16:25:59Z",
+      "side": 1,
+      "message": "Does this mean we allow FS to specify outputs that aren\u0027t in the attachment? Is that valid on all APIs?",
+      "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
