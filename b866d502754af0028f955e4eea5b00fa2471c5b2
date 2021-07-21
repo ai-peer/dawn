@@ -33,6 +33,24 @@
       "message": "nit: We need to be careful of overflow, so maybe we can add a comment here that the computation can\u0027t overflow because all of the values have already been checked to be less than 256 (not sure if a static_assert makes sense)",
       "revId": "b866d502754af0028f955e4eea5b00fa2471c5b2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81f1a491_b03ad06b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 923,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-07-21T17:09:23Z",
+      "side": 1,
+      "message": "Done - more generically I added an assertion that the product of the limits can\u0027t overflow a uint32_t.\n\nFor the future it might make sense to introduce a basic safe math library to guard against overflows. I hacked up something that defines math ops as (T, T) -\u003e Result\u003cT, SafeMathError\u003e but it seemed like overkill in this case, and Result as it\u0027s defined today might even be a little heavyweight for math ops.",
+      "parentUuid": "fa98d767_1f4ef74d",
+      "revId": "b866d502754af0028f955e4eea5b00fa2471c5b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
