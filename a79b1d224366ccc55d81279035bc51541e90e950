@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a8e995b_45142802",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T08:39:24Z",
+      "side": 1,
+      "message": "LGTM, one question but the page might just not be completely up to date yet.",
+      "revId": "a79b1d224366ccc55d81279035bc51541e90e950",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e11bf0_8376431c",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-21T08:39:24Z",
+      "side": 1,
+      "message": "According to the page, don\u0027t we need to use only driverVersion[3] when on the old driver because when comparing two old driver versions we\u0027d need to ignore the \"release revision\" that\u0027s driverVersion[2]?",
+      "revId": "a79b1d224366ccc55d81279035bc51541e90e950",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
