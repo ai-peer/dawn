@@ -123,6 +123,30 @@
       },
       "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17d0f18_b9bda760",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-21T21:44:01Z",
+      "side": 1,
+      "message": "Thanks, RC. That was helpful. But I need more clarification.\n\n\u003e Sure, it will make the 11on12 device release its reference but the ExternalImage is still keeping the resource alive\n\nSeems bad to keep a bunch of no-longer-needed references on the 11on12 device around forever. No concern there?\n\n\u003e Dawn will cause the 11on12 device to re-attach itself when Dawn calls ReleaseKeyedMutex. \n\nIn this CL, Dawn does not call ReleaseKeyedMutex anymore so how does the 11on12 device re-attach itself once the ExternalImage gets destroyed?",
+      "parentUuid": "6e137d60_74230339",
+      "range": {
+        "startLine": 602,
+        "startChar": 1,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
