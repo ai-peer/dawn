@@ -778,6 +778,19 @@ namespace dawn_native {
     void CommandEncoder::APICopyTextureToTexture(const ImageCopyTexture* source,
                                                  const ImageCopyTexture* destination,
                                                  const Extent3D* copySize) {
+        APICopyTextureToTextureHelper(source, destination, copySize, /*needsUsageCopySrc=*/true);
+    }
+
+    void CommandEncoder::APICopyTextureToTextureInternal(const ImageCopyTexture* source,
+                                                         const ImageCopyTexture* destination,
+                                                         const Extent3D* copySize) {
+        APICopyTextureToTextureHelper(source, destination, copySize, /*needsUsageCopySrc=*/false);
+    }
+
+    void CommandEncoder::APICopyTextureToTextureHelper(const ImageCopyTexture* source,
+                                                       const ImageCopyTexture* destination,
+                                                       const Extent3D* copySize,
+                                                       bool needsUsageCopySrc) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(GetDevice()->ValidateObject(source->texture));
@@ -792,7 +805,9 @@ namespace dawn_native {
                 DAWN_TRY(ValidateTextureCopyRange(GetDevice(), *source, *copySize));
                 DAWN_TRY(ValidateTextureCopyRange(GetDevice(), *destination, *copySize));
 
-                DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc));
+                if (needsUsageCopySrc) {
+                    DAWN_TRY(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc));
+                }
                 DAWN_TRY(ValidateCanUseAs(destination->texture, wgpu::TextureUsage::CopyDst));
 
                 mTopLevelTextures.insert(source->texture);
