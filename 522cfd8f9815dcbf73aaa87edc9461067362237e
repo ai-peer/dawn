@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "069b45ef_10842a2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-07-21T12:59:07Z",
+      "side": 1,
+      "message": "Local Windows chrome build works as expected. Still waiting for mac build to complete...",
+      "parentUuid": "99fff4c2_3689d39d",
+      "revId": "522cfd8f9815dcbf73aaa87edc9461067362237e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cdddbbd2_396129bb",
