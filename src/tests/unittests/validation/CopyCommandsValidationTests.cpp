@@ -148,6 +148,26 @@ class CopyCommandTest : public ValidationTest {
         ValidateExpectation(encoder, expectation);
     }
 
+    void TestT2TCopyInternal(utils::Expectation expectation,
+                             wgpu::Texture srcTexture,
+                             uint32_t srcLevel,
+                             wgpu::Origin3D srcOrigin,
+                             wgpu::Texture dstTexture,
+                             uint32_t dstLevel,
+                             wgpu::Origin3D dstOrigin,
+                             wgpu::Extent3D extent3D,
+                             wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
+        wgpu::ImageCopyTexture srcImageCopyTexture =
+            utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
+        wgpu::ImageCopyTexture dstImageCopyTexture =
+            utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyTextureToTextureInternal(&srcImageCopyTexture, &dstImageCopyTexture, &extent3D);
+
+        ValidateExpectation(encoder, expectation);
+    }
+
     void TestBothTBCopies(utils::Expectation expectation,
                           wgpu::Buffer buffer,
                           uint64_t bufferOffset,
@@ -1657,6 +1677,9 @@ TEST_F(CopyCommandTest_T2T, IncorrectUsage) {
     // Incorrect source usage causes failure
     TestT2TCopy(utils::Expectation::Failure, destination, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
                 {16, 16, 1});
+    // Incorrect source usage works with internal copy
+    TestT2TCopyInternal(utils::Expectation::Success, destination, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 0}, {16, 16, 1});
 
     // Incorrect destination usage causes failure
     TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, source, 0, {0, 0, 0},
