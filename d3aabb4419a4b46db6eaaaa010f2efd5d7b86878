@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7a3fed6_eea3e9d8",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-07-21T19:22:55Z",
+      "side": 1,
+      "message": "nit: This looks like it should be un-indented one level to me. Have you run \u0027git cl format\u0027 on it?",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 0
+      },
+      "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af278bce_da3f458d",
+        "filename": "src/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-07-21T19:22:55Z",
+      "side": 1,
+      "message": "nit: I normally would have seperate TEST_F for each TestDispatch call, so that the test name could be more descriptive of the specific case being covered, but that is a style thing.",
+      "revId": "d3aabb4419a4b46db6eaaaa010f2efd5d7b86878",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
