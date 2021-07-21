@@ -103,6 +103,24 @@
       "parentUuid": "0eb26402_d0b9ef9a",
       "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5277c21_7da584cd",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 803,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-21T21:52:42Z",
+      "side": 1,
+      "message": "should be OK. It only checks the targets are covered by fragment outputs (or mask is 0), not the other way around",
+      "parentUuid": "bb76c852_cee2b3b1",
+      "revId": "352cd40bafb066c34d69478c60b9fbc8e44ad69c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
