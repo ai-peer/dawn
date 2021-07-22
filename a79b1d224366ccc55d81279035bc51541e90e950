@@ -68,6 +68,24 @@
       "parentUuid": "96e11bf0_8376431c",
       "revId": "a79b1d224366ccc55d81279035bc51541e90e950",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bd0eb6c_f43ea950",
+        "filename": "src/common/GPUInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000022
+      },
+      "writtenOn": "2021-07-22T16:48:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b6a1301_70aef122",
+      "revId": "a79b1d224366ccc55d81279035bc51541e90e950",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
