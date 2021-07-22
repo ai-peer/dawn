@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b896066b_25f7e341",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-07-22T20:09:58Z",
+      "side": 1,
+      "message": "Bug field should be in the last paragraph of the commit message",
+      "revId": "ba8d4db6c874a19f1a6ada142720d43e5bb05ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
