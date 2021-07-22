@@ -195,6 +195,30 @@
       },
       "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17bb64eb_10a90608",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-07-22T18:05:53Z",
+      "side": 1,
+      "message": "Would it be heretical to suggest that we make ExternalImageDXGI be reference counted and have both Dawn (via DawnTexture) and Chromium (via SharedImage) keep a reference? When the last component releases the object, it releases the ID3D12Resouce and flushes the references from the 11on12 Device.",
+      "parentUuid": "85b1c639_ff3b641a",
+      "range": {
+        "startLine": 602,
+        "startChar": 1,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
