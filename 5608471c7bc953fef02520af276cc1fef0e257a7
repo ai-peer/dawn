@@ -16,6 +16,143 @@
       "message": "PTAL, thanks!",
       "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c39bf4a_4be61c11",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ec1774b_98cecace",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "typo: interpolation",
+      "range": {
+        "startLine": 327,
+        "startChar": 64,
+        "endLine": 327,
+        "endChar": 77
+      },
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d7275f_337e2ac2",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "nit: IterateBitset would avoid the need to check the value of usedInterStageVariables",
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c805782_67921a6e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "This seems to be done a second time just below.",
+      "range": {
+        "startLine": 1016,
+        "startChar": 0,
+        "endLine": 1018,
+        "endChar": 99
+      },
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a636706_a21556fc",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "nit: I think this can just be changed to be a \"component count\" so we don\u0027t need an enum.",
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d81dba72_ea204e7a",
+        "filename": "src/tests/end2end/TextureViewTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "u-u-nit: FYI you can just do [[stage(fragment)]] fn main([[location(0)]] texCoord : vec2\u003cf32\u003e) -\u003e ... {...}",
+      "range": {
+        "startLine": 502,
+        "startChar": 16,
+        "endLine": 502,
+        "endChar": 52
+      },
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "217bc6d6_c13d41d3",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 877,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T10:56:16Z",
+      "side": 1,
+      "message": "Can we also have the control cases for 0 and 0, or 1 and 1?",
+      "revId": "5608471c7bc953fef02520af276cc1fef0e257a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
