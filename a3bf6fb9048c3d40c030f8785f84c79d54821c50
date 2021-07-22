@@ -16,6 +16,46 @@
       "message": "PTAL",
       "revId": "a3bf6fb9048c3d40c030f8785f84c79d54821c50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f8c1311_f382b471",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-22T15:17:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a3bf6fb9048c3d40c030f8785f84c79d54821c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c30c6b3_8dc8c91d",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-22T15:17:37Z",
+      "side": 1,
+      "message": "nit: can just directly -\u003e [[builtin(position)]] vec4\u003cf32\u003e",
+      "range": {
+        "startLine": 347,
+        "startChar": 47,
+        "endLine": 347,
+        "endChar": 56
+      },
+      "revId": "a3bf6fb9048c3d40c030f8785f84c79d54821c50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
