@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61da3e89_e434a33f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T09:09:02Z",
+      "side": 1,
+      "message": "PTAL again. The CTS found an issue when we were validating the base type matching even for non-existent inputs in the shader.",
+      "revId": "b7ec9b3f9010565cf3b4461e58bf0e912d3c2da2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
