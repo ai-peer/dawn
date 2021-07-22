@@ -94,7 +94,7 @@ class MultisampledSamplingTest : public DawnTest {
             desc.compute.entryPoint = "main";
             desc.compute.module = utils::CreateShaderModule(device, R"(
                 [[group(0), binding(0)]] var texture0 : texture_multisampled_2d<f32>;
-                [[group(0), binding(1)]] var texture1 : texture_multisampled_2d<f32>;
+                [[group(0), binding(1)]] var texture1 : texture_depth_multisampled_2d;
 
                 [[block]] struct Results {
                     colorSamples : array<f32, 4>;
@@ -105,7 +105,7 @@ class MultisampledSamplingTest : public DawnTest {
                 [[stage(compute), workgroup_size(1)]] fn main() {
                     for (var i : i32 = 0; i < 4; i = i + 1) {
                         results.colorSamples[i] = textureLoad(texture0, vec2<i32>(0, 0), i).x;
-                        results.depthSamples[i] = textureLoad(texture1, vec2<i32>(0, 0), i).x;
+                        results.depthSamples[i] = textureLoad(texture1, vec2<i32>(0, 0), i);
                     }
                 })");
 
