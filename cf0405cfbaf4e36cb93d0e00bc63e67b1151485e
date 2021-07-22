@@ -533,6 +533,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "03982f7c_92c6ecf5",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-22T17:20:58Z",
+      "side": 1,
+      "message": "Marking resolved. Feel free to re-open if you have a suggestion.",
+      "parentUuid": "addd56cf_9c29e723",
+      "range": {
+        "startLine": 479,
+        "startChar": 16,
+        "endLine": 479,
+        "endChar": 31
+      },
+      "revId": "cf0405cfbaf4e36cb93d0e00bc63e67b1151485e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04f11cdb_e32b10c5",
