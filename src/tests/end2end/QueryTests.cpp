@@ -393,6 +393,9 @@ TEST_P(OcclusionQueryTests, ResolveWithoutWritten) {
 
 // Test resolving occlusion query to the destination buffer with offset
 TEST_P(OcclusionQueryTests, ResolveToBufferWithOffset) {
+    // crbug.com/dawn/1022: Does not work on Mac 11.0+. Issue with destination
+    // offset value.
+    DAWN_TEST_UNSUPPORTED_IF(IsMacOS() && !IsMacOS(10));
     constexpr uint32_t kQueryCount = 2;
 
     wgpu::QuerySet querySet = CreateOcclusionQuerySet(kQueryCount);
