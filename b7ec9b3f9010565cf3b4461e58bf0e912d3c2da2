@@ -16,6 +16,23 @@
       "message": "PTAL again. The CTS found an issue when we were validating the base type matching even for non-existent inputs in the shader.",
       "revId": "b7ec9b3f9010565cf3b4461e58bf0e912d3c2da2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26785b93_88146c85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-22T10:30:31Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "b7ec9b3f9010565cf3b4461e58bf0e912d3c2da2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
