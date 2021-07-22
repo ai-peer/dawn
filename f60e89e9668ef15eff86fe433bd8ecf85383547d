@@ -219,6 +219,30 @@
       },
       "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "680f3e83_3ea9b50d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-07-22T23:05:56Z",
+      "side": 1,
+      "message": "I could follow-up but ExternalImage is not being shared atm (I made it unique) so I opt\u0027d to share these (internal) cache entries instead. This also allows me to use RefCounted which I don\u0027t know if we can use with ExternalImage.",
+      "parentUuid": "17bb64eb_10a90608",
+      "range": {
+        "startLine": 602,
+        "startChar": 1,
+        "endLine": 603,
+        "endChar": 26
+      },
+      "revId": "f60e89e9668ef15eff86fe433bd8ecf85383547d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
