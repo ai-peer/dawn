@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3b6a01e_462b8307",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 808,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-22T23:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30f9209f_c259ef98",
+      "range": {
+        "startLine": 808,
+        "startChar": 16,
+        "endLine": 808,
+        "endChar": 38
+      },
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d14d229a_438a3253",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-07-16T18:07:21Z",
       "side": 1,
       "message": "in order to have less test verbosity, I think we should use the newly introduced DAWN_INSTANTIATE_TEST_P to make this a parameterized test.\n\nCheck out the comments in DawnTest.h and src/tests/end2end/NonzeroTextureCreationTests.cpp for an example.\n\nDon\u0027t need to overhaul the whole test to use parameters, but would be good to have a boolean to generate variants for internal / not-internal",
+      "range": {
+        "startLine": 2407,
+        "startChar": 0,
+        "endLine": 2407,
+        "endChar": 21
+      },
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20db50c5_f419d5bd",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2407,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-22T23:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d14d229a_438a3253",
       "range": {
         "startLine": 2407,
         "startChar": 0,

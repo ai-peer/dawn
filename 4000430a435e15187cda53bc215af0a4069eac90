@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a2a5bf5_0eafe59c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-22T23:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4ce7310_b56ec46a",
+      "range": {
+        "startLine": 362,
+        "startChar": 12,
+        "endLine": 362,
+        "endChar": 33
+      },
+      "revId": "4000430a435e15187cda53bc215af0a4069eac90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "951f961d_6a3a57c2",
@@ -47,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e14dcde_fe3a0858",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 374,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-22T23:27:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "951f961d_6a3a57c2",
+      "range": {
+        "startLine": 371,
+        "startChar": 11,
+        "endLine": 374,
+        "endChar": 66
+      },
+      "revId": "4000430a435e15187cda53bc215af0a4069eac90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f913a7a_722df31f",
@@ -60,6 +108,30 @@
       "writtenOn": "2021-07-16T18:36:56Z",
       "side": 1,
       "message": "will require CopySrc usage. We could instead populate the texture by rendering to it or making it a storage buffer and using a compute shader.\n(memcpy in compute shader probably easier)",
+      "range": {
+        "startLine": 396,
+        "startChar": 0,
+        "endLine": 399,
+        "endChar": 9
+      },
+      "revId": "4000430a435e15187cda53bc215af0a4069eac90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "546530c0_1ceba1c4",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-22T23:27:13Z",
+      "side": 1,
+      "message": "Discussed offline, this is not needed.",
+      "parentUuid": "7f913a7a_722df31f",
       "range": {
         "startLine": 396,
         "startChar": 0,
