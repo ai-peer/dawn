@@ -144,6 +144,24 @@
       "message": "we discussed that this extra coverage is good in case the implementation of copyTextureToTextureInternal starts to diverge more or change validation further.\n\nBut duplicating all these tests will make maintenance more difficult.\nWe don\u0027t have DAWN_INSTANTIATE_TEST_P in the unittests, but we can still use Gtest\u0027s INSTANTIATE_TEST_SUITE_P and TEST_P.",
       "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23980bbc_f53aa638",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-22T23:41:13Z",
+      "side": 1,
+      "message": "I\u0027m not sure how to test this one ina. parametrized style, as the ValidationTest class for what these test classes inherit from, is not of the parametrized way.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tests/unittests/validation/ValidationTest.h;l\u003d63?q\u003dValidationTest\u0026ss\u003dchromium\n\nI could create a different TestT2TCopyAndInternal that could try to use the TestT2TCopy And the TestT2TCopyInternal, removing the srcCopy usage flag (or adding it), to be able to test both internal and normal CopyTextureToTexture, and making each test test both at the same time.\n\nThat would make it easier to maintain but there would be some cases where a test would be testing both methods at the same time. Which is not ideal, but it would be better than the first approach I used.\n\nWDYT?",
+      "parentUuid": "401c382c_ba0cef65",
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
