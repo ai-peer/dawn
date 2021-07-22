@@ -57,7 +57,7 @@ namespace dawn_native {
                 return DAWN_VALIDATION_ERROR("Setting attribute offset out of bounds");
             }
 
-            if (attribute->offset % formatInfo.componentByteSize != 0) {
+            if (attribute->offset % std::min(4u, formatInfo.byteSize) != 0) {
                 return DAWN_VALIDATION_ERROR(
                     "Attribute offset needs to be a multiple of the size format's components");
             }
