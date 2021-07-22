@@ -258,6 +258,13 @@ namespace dawn_native { namespace d3d12 {
             return false;
         }
 
+        // The before and after states need to be different, and no barrier is needed for the same
+        // state transition, e.g. the usage transition between CopyDst and QueryResolve which have
+        // same state.
+        if (lastState == newState) {
+            return false;
+        }
+
         barrier->Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
         barrier->Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
         barrier->Transition.pResource = GetD3D12Resource();
