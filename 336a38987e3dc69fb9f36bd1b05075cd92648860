@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58fbd0ee_a9e4d8ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T17:04:29Z",
+      "side": 1,
+      "message": "PTAL! This will fail bots because it is a breaking change.\n\nSpec PR landed: https://github.com/gpuweb/gpuweb/pull/1980\nCTS PR is up: https://github.com/gpuweb/cts/pull/661\n",
+      "revId": "336a38987e3dc69fb9f36bd1b05075cd92648860",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
