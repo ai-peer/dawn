@@ -322,6 +322,54 @@ fn ep_func() {
     ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader.c_str()));
 }
 
+// This is a regression test for an issue caused by the FirstIndexOffset transfrom being done before
+// the BindingRemapper, causing an intermediate AST to be invalid (and fail the overall
+// compilation).
+TEST_P(ShaderTests, FirstIndexOffsetRegisterConflictInHLSLTransforms) {
+    const char* shader = R"(
+// Dumped WGSL:
+
+struct Inputs {
+  [[location(1)]] attrib1 : u32;
+  // The extra register added to handle base_vertex for vertex_index conflicts with [1]
+  [[builtin(vertex_index)]] vertexIndex: u32;
+};
+
+// [1] a binding point that conflicts with the regitster
+[[block]] struct S1 { data : array<vec4<u32>, 20>; };
+[[group(0), binding(1)]] var<uniform> providedData1 : S1;
+
+
+struct VSOutputs {
+  [[builtin(position)]] position : vec4<f32>;
+};
+
+[[stage(vertex)]] fn vsMain(input : Inputs) -> VSOutputs {
+  ignore(providedData1.data[input.vertexIndex][0]);
+
+  var output : VSOutputs;
+  return output;
+}
+
+[[stage(fragment)]] fn fsMain() -> [[location(0)]] f32 {
+  return 0.0;
+}
+    )";
+    auto module = utils::CreateShaderModule(device, shader);
+
+    utils::ComboRenderPipelineDescriptor rpDesc;
+    rpDesc.vertex.module = module;
+    rpDesc.vertex.entryPoint = "vsMain";
+    rpDesc.cFragment.module = module;
+    rpDesc.cFragment.entryPoint = "fsMain";
+    rpDesc.vertex.bufferCount = 1;
+    rpDesc.cBuffers[0].attributeCount = 1;
+    rpDesc.cBuffers[0].arrayStride = 28;
+    rpDesc.cAttributes[0].shaderLocation = 1;
+    rpDesc.cAttributes[0].format = wgpu::VertexFormat::Uint8x2;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
