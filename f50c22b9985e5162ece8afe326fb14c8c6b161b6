@@ -22,6 +22,30 @@
       },
       "revId": "f50c22b9985e5162ece8afe326fb14c8c6b161b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb235535_d7001c15",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-22T07:11:45Z",
+      "side": 0,
+      "message": "Yeah it\u0027s the only place and it\u0027s easy to add back.",
+      "parentUuid": "1becb2cb_1994b9e4",
+      "range": {
+        "startLine": 115,
+        "startChar": 41,
+        "endLine": 115,
+        "endChar": 70
+      },
+      "revId": "f50c22b9985e5162ece8afe326fb14c8c6b161b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
