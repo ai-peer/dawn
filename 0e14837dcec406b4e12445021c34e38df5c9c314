@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8832c95_69dcada9",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-23T14:50:50Z",
+      "side": 1,
+      "message": "Probably, yes?",
+      "parentUuid": "53febbfc_4e0378d6",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "822738b8_7e28b30c",
         "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
         "patchSetId": 2
@@ -156,6 +174,24 @@
       "writtenOn": "2021-07-23T14:28:38Z",
       "side": 1,
       "message": "Does reworking this test require texture_multisampled_depth_2d in WGSL?",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccaa16ab_8656b86f",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-23T14:50:50Z",
+      "side": 1,
+      "message": "Yes",
+      "parentUuid": "b6949d1d_25e35389",
       "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
