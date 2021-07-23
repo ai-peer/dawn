@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a69421b1_0a81bc0b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T08:38:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f6b4874_e778f3c4",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T08:38:08Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46eb625f_5a41051a",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T08:38:08Z",
+      "side": 1,
+      "message": "Can we do this optimization as a separate CL (and better, file an issue to do it post-OT)? It is very similar to the check at [1] and it would be better to have the whole function work in D3D12 terms if we want to go that route.",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf3dad6_3ccbe9d7",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T08:38:08Z",
+      "side": 1,
+      "message": "Why do we need this check? It seems it will skip zero-initialization. (same question for Vulkan actually). I think it should just be\n\n if (hasUnavailableQueries \u0026\u0026 destination-\u003eIsDataInitialized()) {\n   ClearBuffer\n } else {\n   EnsureDataINitializedAsDestination.\n }",
+      "range": {
+        "startLine": 916,
+        "startChar": 57,
+        "endLine": 918,
+        "endChar": 87
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
