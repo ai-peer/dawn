@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "41efd259_29cd8f53",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T17:13:10Z",
+      "side": 1,
+      "message": "I assume you mean D3D12 requires the states to be \"different\". Can you add a TODO assigned to a new issue that\u0027s Type-Enhancement-Optimization about using D3D12 state instead of WebGPU usages to manage the tracking of barrier state?",
+      "parentUuid": "ca72d6ef_2f72bcfe",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daf3dad6_3ccbe9d7",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
