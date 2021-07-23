@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d3287d_a994aa15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-23T03:17:24Z",
+      "side": 1,
+      "message": "The trybot failure on \"api,operation,rendering,depth:depth_compare_func\" is caused by a bug in WebGPU CTS and the fix is https://github.com/gpuweb/cts/pull/665.",
+      "revId": "48bfd8e34dae2d06e304e11ed2d092d9908480b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
