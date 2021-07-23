@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4c1fc5c_2d4780b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-07-23T01:11:58Z",
+      "side": 1,
+      "message": "Ah... I guess this requires the CTS updates. Oops.",
+      "revId": "6b06a0a6fc08632aa6482c7b3ae04e9642de2a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
