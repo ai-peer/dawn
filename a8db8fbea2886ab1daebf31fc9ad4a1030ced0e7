@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7128c11_1d7865c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T17:01:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a8db8fbea2886ab1daebf31fc9ad4a1030ced0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3437abd_5031e637",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T17:01:42Z",
+      "side": 1,
+      "message": "Won\u0027t that re-enable it on AMD? This could be:\n\n if (!Is11 \u0026\u0026 !IsAMD) (and keep the comment about the AMD GPU)",
+      "revId": "a8db8fbea2886ab1daebf31fc9ad4a1030ced0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
