@@ -119,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a398b40d_c350eba3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-23T16:32:13Z",
+      "side": 1,
+      "message": "How about change the logic to the following to make it simpler? But it will clear the buffer twice at the first time if there are unavailable queries.\n\nEnsureDataINitializedAsDestination\nif (hasUnavailableQueries) {\n   ClearBuffer\n}",
+      "parentUuid": "8c5f59d5_8b9834eb",
+      "range": {
+        "startLine": 916,
+        "startChar": 57,
+        "endLine": 918,
+        "endChar": 87
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31ec6d1d_2e1bca19",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
