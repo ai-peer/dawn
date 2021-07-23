@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbc246ae_555f951f",
+        "filename": "src/dawn_native/d3d12/D3D11on12Util.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T14:37:30Z",
+      "side": 1,
+      "message": "Since the cache doesn\u0027t keep a ref to the entry, we could have the last ref to the entry be lost prior to this, and returned a freed pointer. We could store a Ref\u003cEntry\u003e in the cache to fix this.",
+      "revId": "2aa5c0b06cd855e4dacc0bbdc1979a261d166cf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d52bb9c_43c019ab",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 671,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T14:37:30Z",
+      "side": 1,
+      "message": "The second device does nothing. Could we instead create on device, clear to red, import in otherDevice, clear to blue, reimport on device and check it is blue?",
+      "revId": "2aa5c0b06cd855e4dacc0bbdc1979a261d166cf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
