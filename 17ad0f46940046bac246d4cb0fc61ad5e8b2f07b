@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14cb4b86_f3ad1680",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T16:39:37Z",
+      "side": 1,
+      "message": "Why? At worst we get an extra barrier. Does the D3D12 runtime produce an error?",
+      "parentUuid": "1f25d003_2b3c311c",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daf3dad6_3ccbe9d7",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -131,6 +149,30 @@
       "side": 1,
       "message": "How about change the logic to the following to make it simpler? But it will clear the buffer twice at the first time if there are unavailable queries.\n\nEnsureDataINitializedAsDestination\nif (hasUnavailableQueries) {\n   ClearBuffer\n}",
       "parentUuid": "8c5f59d5_8b9834eb",
+      "range": {
+        "startLine": 916,
+        "startChar": 57,
+        "endLine": 918,
+        "endChar": 87
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abd1ef57_ac489020",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-23T16:39:37Z",
+      "side": 1,
+      "message": "Sounds good. I don\u0027t think the double clear is too bad.",
+      "parentUuid": "a398b40d_c350eba3",
       "range": {
         "startLine": 916,
         "startChar": 57,
