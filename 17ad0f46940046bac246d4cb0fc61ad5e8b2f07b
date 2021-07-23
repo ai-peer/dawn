@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1f25d003_2b3c311c",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-23T16:09:15Z",
+      "side": 1,
+      "message": "We can do this in other PR, but we need to keep using CopyDst at [2].",
+      "parentUuid": "46eb625f_5a41051a",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "daf3dad6_3ccbe9d7",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 2
@@ -70,6 +88,53 @@
         "startChar": 57,
         "endLine": 918,
         "endChar": 87
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c5f59d5_8b9834eb",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-23T16:09:15Z",
+      "side": 1,
+      "message": "In EnsureDataINitializedAsDestination, it does not clear the buffer to zero when the buffer is fully written, this is no problem for queries that are all available, but it does not work for unavailable queries. This check is to make sure we also can clear the buffer when there are unavailbe queries and the buffer is not initialized but fully written.\nBut I find there is indeed a bug here. We need to set the buffer to be initialized in ClearBufferToZero, to prevent it from entering the else branch which will clear the whole buffer to zero if the buffer is not full written next time.\n\nThe zero-initialization will be called when there is no unavailable queries for resolving or there is unavailable queries but it\u0027s not initialized and not full buffer written.",
+      "parentUuid": "daf3dad6_3ccbe9d7",
+      "range": {
+        "startLine": 916,
+        "startChar": 57,
+        "endLine": 918,
+        "endChar": 87
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31ec6d1d_2e1bca19",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-23T16:09:15Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 927,
+        "startChar": 79,
+        "endLine": 927,
+        "endChar": 91
       },
       "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
