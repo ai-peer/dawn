@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_CHAIN_UTILS_H_
 #define DAWNNATIVE_CHAIN_UTILS_H_
 
+#include "common/Preprocessor.h"
 #include "dawn_native/dawn_platform.h"
 #include "dawn_native/Error.h"
 
@@ -25,56 +26,76 @@ namespace dawn_native {
         {% endif %}
     {% endfor %}
 
-    // Verifies that |chain| only contains ChainedStructs of types enumerated in
-    // |oneOfConstraints| and contains no duplicate sTypes. Each vector in
-    // |oneOfConstraints| defines a set of sTypes that cannot coexist in the same chain.
-    // For example:
-    //   ValidateSTypes(chain, { { ShaderModuleSPIRVDescriptor, ShaderModuleWGSLDescriptor } }))
-    //   ValidateSTypes(chain, { { Extension1 }, { Extension2 } })
-    MaybeError ValidateSTypes(const ChainedStruct* chain,
-                              std::vector<std::vector<wgpu::SType>> oneOfConstraints);
-
-    template <typename T>
-    MaybeError ValidateSingleSTypeInner(const ChainedStruct* chain, T sType) {
-        if (chain->sType != sType) {
-            return DAWN_VALIDATION_ERROR("Unsupported sType");
+    // Validate that a single chained struct in |args| is non-null.
+    template <typename... Args>
+    MaybeError ValidateSingleChainedStruct(const Args*... args) {
+        bool found = false;
+        for (const ChainedStruct* arg : {static_cast<const ChainedStruct*>(args)...}) {
+            if (DAWN_UNLIKELY(arg != nullptr && found)) {
+                return DAWN_VALIDATION_ERROR("Expected a single chained struct.");
+            }
+            if (arg) {
+                found = true;
+            }
+        }
+        if (DAWN_UNLIKELY(!found)) {
+            return DAWN_VALIDATION_ERROR("Expected a single chained struct.");
         }
         return {};
     }
 
-    template <typename T, typename... Args>
-    MaybeError ValidateSingleSTypeInner(const ChainedStruct* chain, T sType, Args... sTypes) {
-        if (chain->sType == sType) {
-            return {};
-        }
-        return ValidateSingleSTypeInner(chain, sTypes...);
-    }
+#define DEFINE_UNPACKED_CHAINED_STRUCT_HOLDER_MEMBER(name) const ::dawn_native::name * name;
 
-    // Verifies that |chain| contains a single ChainedStruct of type |sType| or no ChainedStructs
-    // at all.
-    template <typename T>
-    MaybeError ValidateSingleSType(const ChainedStruct* chain, T sType) {
-        if (chain == nullptr) {
-            return {};
-        }
-        if (chain->nextInChain != nullptr) {
-            return DAWN_VALIDATION_ERROR("Chain can only contain a single chained struct");
-        }
-        return ValidateSingleSTypeInner(chain, sType);
-    }
+#define DAWN_TRY_UNPACK_CHAINED_STRUCTS_CASE_POPULATE_STRUCT_PTR(name)  \
+case wgpu::SType::name: {                                               \
+    if (DAWN_UNLIKELY(result->name != nullptr)) {                       \
+        return DAWN_VALIDATION_ERROR("Duplicate sType " #name);         \
+    }                                                                   \
+    result->name = static_cast<const ::dawn_native::name *>(chain);     \
+    break;                                                              \
+}
 
-    // Verifies that |chain| contains a single ChainedStruct with a type enumerated in the
-    // parameter pack or no ChainedStructs at all.
-    template <typename T, typename... Args>
-    MaybeError ValidateSingleSType(const ChainedStruct* chain, T sType, Args... sTypes) {
-        if (chain == nullptr) {
-            return {};
-        }
-        if (chain->nextInChain != nullptr) {
-            return DAWN_VALIDATION_ERROR("Chain can only contain a single chained struct");
-        }
-        return ValidateSingleSTypeInner(chain, sType, sTypes...);
-    }
+#define DEFINE_UNPACKED_CHAINED_STRUCT_HOLDER(Name, ...) \
+struct Name {                                            \
+    DAWN_PP_FOR_EACH(                                    \
+        DEFINE_UNPACKED_CHAINED_STRUCT_HOLDER_MEMBER,    \
+        __VA_ARGS__)                                     \
+}
+
+// Unpacks chained structs into |outPtr|. Validates that there
+// are no sTypes not in the expected list, and that there are no duplicate sTypes.
+#define DAWN_TRY_ASSIGN_UNPACK_CHAINED_STRUCTS(outPtr, chainIn, ...)          \
+    do {                                                                      \
+        auto* result = outPtr;                                                \
+        const ::dawn_native::ChainedStruct* chain = chainIn;                  \
+        for (; chain; chain = chain->nextInChain) {                           \
+            using namespace dawn_native;                                      \
+            switch (chain->sType) {                                           \
+                DAWN_PP_FOR_EACH(                                             \
+                    DAWN_TRY_UNPACK_CHAINED_STRUCTS_CASE_POPULATE_STRUCT_PTR, \
+                    __VA_ARGS__)                                              \
+                default:                                                      \
+                    return DAWN_VALIDATION_ERROR("unsupported sType");        \
+            }                                                                 \
+        }                                                                     \
+    } while(false)
+
+#define DAWN_TRY_UNPACK_CHAINED_STRUCTS(outVarName, chainIn, ...)             \
+    DEFINE_UNPACKED_CHAINED_STRUCT_HOLDER(, __VA_ARGS__) outVarName {};       \
+    DAWN_TRY_ASSIGN_UNPACK_CHAINED_STRUCTS(&outVarName, chainIn, __VA_ARGS__)
+
+#define DAWN_UNPACK_CHAINED_STRUCTS(chainIn, ...)                            \
+[&]() {                                                                      \
+    DEFINE_UNPACKED_CHAINED_STRUCT_HOLDER(Out, __VA_ARGS__) out = {};        \
+    ::dawn_native::MaybeError err = [&]() -> ::dawn_native::MaybeError {     \
+        DAWN_TRY_ASSIGN_UNPACK_CHAINED_STRUCTS(&out, chainIn, __VA_ARGS__);  \
+        return {};                                                           \
+    }();                                                                     \
+    if (DAWN_UNLIKELY(err.IsError())) {                                      \
+        return Result<Out, ::dawn_native::ErrorData>(err.AcquireError());    \
+    }                                                                        \
+    return Result<Out, ::dawn_native::ErrorData>(std::move(out));            \
+}()
 
 }  // namespace dawn_native
 

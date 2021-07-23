@@ -225,18 +225,16 @@ namespace dawn_native {
         MaybeError ValidateExternalTextureBinding(const DeviceBase* device,
                                                   const BindGroupEntry& entry,
                                                   const BindingInfo& bindingInfo) {
-            const ExternalTextureBindingEntry* externalTextureBindingEntry = nullptr;
-            FindInChain(entry.nextInChain, &externalTextureBindingEntry);
+            DAWN_TRY_UNPACK_CHAINED_STRUCTS(chainedStructs, entry.nextInChain,
+                                            ExternalTextureBindingEntry);
 
             if (entry.sampler != nullptr || entry.textureView != nullptr ||
-                entry.buffer != nullptr || externalTextureBindingEntry == nullptr) {
+                entry.buffer != nullptr || chainedStructs.ExternalTextureBindingEntry == nullptr) {
                 return DAWN_VALIDATION_ERROR("Expected external texture binding");
             }
 
-            DAWN_TRY(ValidateSingleSType(externalTextureBindingEntry->nextInChain,
-                                         wgpu::SType::ExternalTextureBindingEntry));
-
-            DAWN_TRY(device->ValidateObject(externalTextureBindingEntry->externalTexture));
+            DAWN_TRY(device->ValidateObject(
+                chainedStructs.ExternalTextureBindingEntry->externalTexture));
 
             return {};
         }

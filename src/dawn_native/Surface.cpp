@@ -40,17 +40,20 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Surface cannot be created with just the base descriptor");
         }
 
-        DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-                                     wgpu::SType::SurfaceDescriptorFromMetalLayer,
-                                     wgpu::SType::SurfaceDescriptorFromWindowsHWND,
-                                     wgpu::SType::SurfaceDescriptorFromWindowsCoreWindow,
-                                     wgpu::SType::SurfaceDescriptorFromWindowsSwapChainPanel,
-                                     wgpu::SType::SurfaceDescriptorFromXlib));
+        DAWN_TRY_UNPACK_CHAINED_STRUCTS(
+            chainedStructs, descriptor->nextInChain, SurfaceDescriptorFromMetalLayer,
+            SurfaceDescriptorFromWindowsHWND, SurfaceDescriptorFromWindowsCoreWindow,
+            SurfaceDescriptorFromWindowsSwapChainPanel, SurfaceDescriptorFromXlib);
+
+        DAWN_TRY(
+            ValidateSingleChainedStruct(chainedStructs.SurfaceDescriptorFromMetalLayer,
+                                        chainedStructs.SurfaceDescriptorFromWindowsHWND,
+                                        chainedStructs.SurfaceDescriptorFromWindowsCoreWindow,
+                                        chainedStructs.SurfaceDescriptorFromWindowsSwapChainPanel,
+                                        chainedStructs.SurfaceDescriptorFromXlib));
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)
-        const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
-        FindInChain(descriptor->nextInChain, &metalDesc);
-        if (metalDesc) {
+        if (const auto* metalDesc = chainedStructs.SurfaceDescriptorFromMetalLayer) {
             // Check that the layer is a CAMetalLayer (or a derived class).
             if (!InheritsFromCAMetalLayer(metalDesc->layer)) {
                 return DAWN_VALIDATION_ERROR("layer must be a CAMetalLayer");
@@ -61,18 +64,14 @@ namespace dawn_native {
 
 #if defined(DAWN_PLATFORM_WINDOWS)
 #    if defined(DAWN_PLATFORM_WIN32)
-        const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
-        FindInChain(descriptor->nextInChain, &hwndDesc);
-        if (hwndDesc) {
+        if (const auto* hwndDesc = chainedStructs.SurfaceDescriptorFromWindowsHWND) {
             if (IsWindow(static_cast<HWND>(hwndDesc->hwnd)) == 0) {
                 return DAWN_VALIDATION_ERROR("Invalid HWND");
             }
             return {};
         }
 #    endif  // defined(DAWN_PLATFORM_WIN32)
-        const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
-        FindInChain(descriptor->nextInChain, &coreWindowDesc);
-        if (coreWindowDesc) {
+        if (const auto* coreWindowDesc = chainedStructs.SurfaceDescriptorFromWindowsCoreWindow) {
             // Validate the coreWindow by query for ICoreWindow interface
             ComPtr<ABI::Windows::UI::Core::ICoreWindow> coreWindow;
             if (coreWindowDesc->coreWindow == nullptr ||
@@ -82,9 +81,7 @@ namespace dawn_native {
             }
             return {};
         }
-        const SurfaceDescriptorFromWindowsSwapChainPanel* swapChainPanelDesc = nullptr;
-        FindInChain(descriptor->nextInChain, &swapChainPanelDesc);
-        if (swapChainPanelDesc) {
+        if (auto* swapChainPanelDesc = chainedStructs.SurfaceDescriptorFromWindowsSwapChainPanel) {
             // Validate the swapChainPanel by querying for ISwapChainPanel interface
             ComPtr<ABI::Windows::UI::Xaml::Controls::ISwapChainPanel> swapChainPanel;
             if (swapChainPanelDesc->swapChainPanel == nullptr ||
@@ -97,9 +94,7 @@ namespace dawn_native {
 #endif  // defined(DAWN_PLATFORM_WINDOWS)
 
 #if defined(DAWN_USE_X11)
-        const SurfaceDescriptorFromXlib* xDesc = nullptr;
-        FindInChain(descriptor->nextInChain, &xDesc);
-        if (xDesc) {
+        if (auto* xDesc = chainedStructs.SurfaceDescriptorFromXlib) {
             // Check the validity of the window by calling a getter function on the window that
             // returns a status code. If the window is bad the call return a status of zero. We
             // need to set a temporary X11 error handler while doing this because the default

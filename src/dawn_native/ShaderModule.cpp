@@ -1166,16 +1166,19 @@ namespace dawn_native {
         if (chainedDescriptor == nullptr) {
             return DAWN_VALIDATION_ERROR("Shader module descriptor missing chained descriptor");
         }
-        // For now only a single SPIRV or WGSL subdescriptor is allowed.
-        DAWN_TRY(ValidateSingleSType(chainedDescriptor, wgpu::SType::ShaderModuleSPIRVDescriptor,
-                                     wgpu::SType::ShaderModuleWGSLDescriptor));
+
+        DAWN_TRY_UNPACK_CHAINED_STRUCTS(chainedStructs, descriptor->nextInChain,
+                                        ShaderModuleSPIRVDescriptor, ShaderModuleWGSLDescriptor);
+
+        const ShaderModuleSPIRVDescriptor* spirvDesc = chainedStructs.ShaderModuleSPIRVDescriptor;
+        const ShaderModuleWGSLDescriptor* wgslDesc = chainedStructs.ShaderModuleWGSLDescriptor;
+        if (spirvDesc != nullptr ^ wgslDesc != nullptr) {
+            return DAWN_VALIDATION_ERROR(
+                "Expected exactly one of ShaderModuleSPIRVDescriptor and "
+                "ShaderModuleWGSLDescriptor");
+        }
 
         ScopedTintICEHandler scopedICEHandler(device);
-
-        const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
-        FindInChain(chainedDescriptor, &spirvDesc);
-        const ShaderModuleWGSLDescriptor* wgslDesc = nullptr;
-        FindInChain(chainedDescriptor, &wgslDesc);
 
         // We have a temporary toggle to force the SPIRV ingestion to go through a WGSL
         // intermediate step. It is done by switching the spirvDesc for a wgslDesc below.

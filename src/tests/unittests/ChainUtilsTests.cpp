@@ -57,10 +57,16 @@ TEST(ChainUtilsTests, ValidateDuplicateSTypes) {
     dawn_native::PrimitiveDepthClampingState chain3;
     chain1.nextInChain = &chain2;
     chain2.nextInChain = &chain3;
-
-    dawn_native::MaybeError result = dawn_native::ValidateSTypes(&chain1, {});
-    ASSERT_TRUE(result.IsError());
-    result.AcquireError();
+    {
+        auto result = DAWN_UNPACK_CHAINED_STRUCTS(&chain1, ShaderModuleSPIRVDescriptor);
+        ASSERT_TRUE(result.IsError());
+        result.AcquireError();
+    }
+    {
+        auto result = DAWN_UNPACK_CHAINED_STRUCTS(&chain1, PrimitiveDepthClampingState);
+        ASSERT_TRUE(result.IsError());
+        result.AcquireError();
+    }
 }
 
 // Checks that validation rejects chains that contain unspecified STypes
@@ -71,10 +77,9 @@ TEST(ChainUtilsTests, ValidateUnspecifiedSTypes) {
     chain1.nextInChain = &chain2;
     chain2.nextInChain = &chain3;
 
-    dawn_native::MaybeError result = dawn_native::ValidateSTypes(&chain1, {
-        {wgpu::SType::PrimitiveDepthClampingState},
-        {wgpu::SType::ShaderModuleSPIRVDescriptor},
-    });
+    auto result = DAWN_UNPACK_CHAINED_STRUCTS(&chain1, PrimitiveDepthClampingState,
+                                              ShaderModuleSPIRVDescriptor);
+
     ASSERT_TRUE(result.IsError());
     result.AcquireError();
 }
@@ -88,8 +93,15 @@ TEST(ChainUtilsTests, ValidateOneOfFailure) {
     chain1.nextInChain = &chain2;
     chain2.nextInChain = &chain3;
 
-    dawn_native::MaybeError result = dawn_native::ValidateSTypes(&chain1,
-        {{wgpu::SType::ShaderModuleSPIRVDescriptor, wgpu::SType::ShaderModuleWGSLDescriptor}});
+    auto structsOrError =
+        DAWN_UNPACK_CHAINED_STRUCTS(&chain1, PrimitiveDepthClampingState,
+                                    ShaderModuleSPIRVDescriptor, ShaderModuleWGSLDescriptor);
+    ASSERT_TRUE(structsOrError.IsSuccess());
+    auto structs = structsOrError.AcquireSuccess();
+
+    dawn_native::MaybeError result = dawn_native::ValidateSingleChainedStruct(
+        structs.ShaderModuleSPIRVDescriptor, structs.ShaderModuleWGSLDescriptor);
+
     ASSERT_TRUE(result.IsError());
     result.AcquireError();
 }
@@ -100,35 +112,21 @@ TEST(ChainUtilsTests, ValidateSuccess) {
     dawn_native::ShaderModuleSPIRVDescriptor chain2;
     chain1.nextInChain = &chain2;
 
-    dawn_native::MaybeError result = dawn_native::ValidateSTypes(&chain1, {
-        {wgpu::SType::ShaderModuleSPIRVDescriptor, wgpu::SType::ShaderModuleWGSLDescriptor},
-        {wgpu::SType::PrimitiveDepthClampingState},
-        {wgpu::SType::SurfaceDescriptorFromMetalLayer},
-    });
+    auto result = DAWN_UNPACK_CHAINED_STRUCTS(
+        &chain1, ShaderModuleSPIRVDescriptor, ShaderModuleWGSLDescriptor,
+        PrimitiveDepthClampingState, SurfaceDescriptorFromMetalLayer);
+
     ASSERT_TRUE(result.IsSuccess());
+    result.AcquireSuccess();
 }
 
 // Checks that validation always passes on empty chains.
 TEST(ChainUtilsTests, ValidateEmptyChain) {
-    dawn_native::MaybeError result = dawn_native::ValidateSTypes(nullptr, {
-        {wgpu::SType::ShaderModuleSPIRVDescriptor},
-        {wgpu::SType::PrimitiveDepthClampingState},
-    });
-    ASSERT_TRUE(result.IsSuccess());
+    auto result = DAWN_UNPACK_CHAINED_STRUCTS(nullptr, ShaderModuleSPIRVDescriptor,
+                                              PrimitiveDepthClampingState);
 
-    result = dawn_native::ValidateSTypes(nullptr, {});
     ASSERT_TRUE(result.IsSuccess());
-}
-
-// Checks that singleton validation always passes on empty chains.
-TEST(ChainUtilsTests, ValidateSingleEmptyChain) {
-    dawn_native::MaybeError result = dawn_native::ValidateSingleSType(nullptr,
-        wgpu::SType::ShaderModuleSPIRVDescriptor);
-    ASSERT_TRUE(result.IsSuccess());
-
-    result = dawn_native::ValidateSingleSType(nullptr,
-        wgpu::SType::ShaderModuleSPIRVDescriptor, wgpu::SType::PrimitiveDepthClampingState);
-    ASSERT_TRUE(result.IsSuccess());
+    result.AcquireSuccess();
 }
 
 // Checks that singleton validation always fails on chains with multiple children.
@@ -137,13 +135,17 @@ TEST(ChainUtilsTests, ValidateSingleMultiChain) {
     dawn_native::ShaderModuleSPIRVDescriptor chain2;
     chain1.nextInChain = &chain2;
 
-    dawn_native::MaybeError result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::PrimitiveDepthClampingState);
-    ASSERT_TRUE(result.IsError());
-    result.AcquireError();
+    auto resultOrStruct = DAWN_UNPACK_CHAINED_STRUCTS(&chain1, PrimitiveDepthClampingState,
+                                                      ShaderModuleSPIRVDescriptor);
+    ASSERT_TRUE(resultOrStruct.IsSuccess());
+    auto s = resultOrStruct.AcquireSuccess();
 
-    result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::PrimitiveDepthClampingState, wgpu::SType::ShaderModuleSPIRVDescriptor);
+    dawn_native::MaybeError result =
+        dawn_native::ValidateSingleChainedStruct(s.PrimitiveDepthClampingState);
+    ASSERT_FALSE(result.IsError());
+
+    result = dawn_native::ValidateSingleChainedStruct(s.PrimitiveDepthClampingState,
+                                                      s.ShaderModuleSPIRVDescriptor);
     ASSERT_TRUE(result.IsError());
     result.AcquireError();
 }
@@ -152,16 +154,18 @@ TEST(ChainUtilsTests, ValidateSingleMultiChain) {
 TEST(ChainUtilsTests, ValidateSingleSatisfied) {
     dawn_native::ShaderModuleWGSLDescriptor chain1;
 
-    dawn_native::MaybeError result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::ShaderModuleWGSLDescriptor);
+    auto resultOrStruct = DAWN_UNPACK_CHAINED_STRUCTS(&chain1, ShaderModuleWGSLDescriptor,
+                                                      ShaderModuleSPIRVDescriptor);
+
+    ASSERT_TRUE(resultOrStruct.IsSuccess());
+    auto s = resultOrStruct.AcquireSuccess();
+
+    dawn_native::MaybeError result = dawn_native::ValidateSingleChainedStruct(
+        s.ShaderModuleWGSLDescriptor, s.ShaderModuleSPIRVDescriptor);
     ASSERT_TRUE(result.IsSuccess());
 
-    result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::ShaderModuleSPIRVDescriptor, wgpu::SType::ShaderModuleWGSLDescriptor);
-    ASSERT_TRUE(result.IsSuccess());
-
-    result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::ShaderModuleWGSLDescriptor, wgpu::SType::ShaderModuleSPIRVDescriptor);
+    result = dawn_native::ValidateSingleChainedStruct(s.ShaderModuleSPIRVDescriptor,
+                                                      s.ShaderModuleWGSLDescriptor);
     ASSERT_TRUE(result.IsSuccess());
 }
 
@@ -169,13 +173,20 @@ TEST(ChainUtilsTests, ValidateSingleSatisfied) {
 TEST(ChainUtilsTests, ValidateSingleUnsatisfied) {
     dawn_native::PrimitiveDepthClampingState chain1;
 
-    dawn_native::MaybeError result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::ShaderModuleWGSLDescriptor);
+    auto resultOrStruct =
+        DAWN_UNPACK_CHAINED_STRUCTS(&chain1, PrimitiveDepthClampingState,
+                                    ShaderModuleWGSLDescriptor, ShaderModuleSPIRVDescriptor);
+
+    ASSERT_TRUE(resultOrStruct.IsSuccess());
+    auto s = resultOrStruct.AcquireSuccess();
+
+    dawn_native::MaybeError result =
+        dawn_native::ValidateSingleChainedStruct(s.ShaderModuleWGSLDescriptor);
     ASSERT_TRUE(result.IsError());
     result.AcquireError();
 
-    result = dawn_native::ValidateSingleSType(&chain1,
-        wgpu::SType::ShaderModuleSPIRVDescriptor, wgpu::SType::ShaderModuleWGSLDescriptor);
+    result = dawn_native::ValidateSingleChainedStruct(s.ShaderModuleWGSLDescriptor,
+                                                      s.ShaderModuleSPIRVDescriptor);
     ASSERT_TRUE(result.IsError());
     result.AcquireError();
 }

@@ -31,31 +31,4 @@ namespace dawn_native {
     {% endif %}
 {% endfor %}
 
-MaybeError ValidateSTypes(const ChainedStruct* chain,
-                          std::vector<std::vector<wgpu::SType>> oneOfConstraints) {
-    std::unordered_set<wgpu::SType> allSTypes;
-    for (; chain; chain = chain->nextInChain) {
-        if (allSTypes.find(chain->sType) != allSTypes.end()) {
-            return DAWN_VALIDATION_ERROR("Chain cannot have duplicate sTypes");
-        }
-        allSTypes.insert(chain->sType);
-    }
-    for (const auto& oneOfConstraint : oneOfConstraints) {
-        bool satisfied = false;
-        for (wgpu::SType oneOfSType : oneOfConstraint) {
-            if (allSTypes.find(oneOfSType) != allSTypes.end()) {
-                if (satisfied) {
-                    return DAWN_VALIDATION_ERROR("Unsupported sType combination");
-                }
-                satisfied = true;
-                allSTypes.erase(oneOfSType);
-            }
-        }
-    }
-    if (!allSTypes.empty()) {
-        return DAWN_VALIDATION_ERROR("Unsupported sType");
-    }
-    return {};
-}
-
 }  // namespace dawn_native

@@ -139,13 +139,15 @@ namespace dawn_native {
 
         MaybeError ValidatePrimitiveState(const DeviceBase* device,
                                           const PrimitiveState* descriptor) {
-            DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-                wgpu::SType::PrimitiveDepthClampingState));
-            const PrimitiveDepthClampingState* clampInfo = nullptr;
-            FindInChain(descriptor->nextInChain, &clampInfo);
-            if (clampInfo && !device->IsExtensionEnabled(Extension::DepthClamping)) {
-                return DAWN_VALIDATION_ERROR("The depth clamping feature is not supported");
+            DAWN_TRY_UNPACK_CHAINED_STRUCTS(chainedStructs, descriptor->nextInChain,
+                                            PrimitiveDepthClampingState);
+
+            const PrimitiveDepthClampingState* clampInfo =
+                chainedStructs.PrimitiveDepthClampingState;
+            if (clampInfo && !device->IsExtensionEnabled(Extension::DawnInternalUsages)) {
+                return DAWN_VALIDATION_ERROR("The depth clamping feature is not enabled");
             }
+
             DAWN_TRY(ValidatePrimitiveTopology(descriptor->topology));
             DAWN_TRY(ValidateIndexFormat(descriptor->stripIndexFormat));
             DAWN_TRY(ValidateFrontFace(descriptor->frontFace));
