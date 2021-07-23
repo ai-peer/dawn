@@ -180,6 +180,24 @@
       "parentUuid": "23980bbc_f53aa638",
       "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "302b2f8d_e0666fd7",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2019,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-23T13:11:21Z",
+      "side": 1,
+      "message": "Yes, that\u0027s a good point. I will do that.",
+      "parentUuid": "af158e6d_a21691a6",
+      "revId": "9eca780d0f565c3df0d60815aa6913bba23bf2ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

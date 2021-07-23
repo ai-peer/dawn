@@ -16,6 +16,24 @@
       "message": "Looking at the failing tests, it looks like we\u0027re going to need to finish this CL: https://dawn-review.googlesource.com/c/dawn/+/58140 do you want to take it over or would you like me to do it?\n\nWe need to *internally* add the CopySrc usage. Then in this CL, instead of skipping the check for CopySrc, we will validate that the texture has CopySrc OR internal CopySrc usage inside copyTextureToTextureInternal.",
       "revId": "10d8cd5e851912cc1447b5d75bcb6182fc24c92e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a2cad49_9c53d250",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-07-23T13:11:21Z",
+      "side": 1,
+      "message": "Could you take over of finishing that other CL? I will be taking a week off starting today! :)",
+      "parentUuid": "0b5d5fd4_3eb5e913",
+      "revId": "10d8cd5e851912cc1447b5d75bcb6182fc24c92e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
