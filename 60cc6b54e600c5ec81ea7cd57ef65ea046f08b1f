@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13aaed7f_02217b00",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 1682,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-23T16:12:16Z",
+      "side": 1,
+      "message": "I think this will fail for a different reason. It\u0027s invalid to copy one subresource of a texture to itself.\n\nLet\u0027s just make a separate TEST_F(CopyCommandTest_T2T, InternalCopy)\n\nto test internal usage.\n\nInternal w/ CopySrc -\u003e CopyDst is valid\nInternal w/out CopySrc -\u003e CopyDst is valid\nnot-Internal w/out CopySrc -\u003e CopyDst is invalid",
+      "range": {
+        "startLine": 1680,
+        "startChar": 2,
+        "endLine": 1682,
+        "endChar": 48
+      },
+      "revId": "60cc6b54e600c5ec81ea7cd57ef65ea046f08b1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
