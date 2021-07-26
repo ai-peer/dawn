@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eea2c89f_314d0e6c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-26T14:24:34Z",
+      "side": 1,
+      "message": "Mmmh missing commit message? 😊",
+      "revId": "a3119dcb3615770a9a2fce97770621dbbe14b6c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d4c0abb_63760a01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-26T14:24:34Z",
+      "side": 1,
+      "message": "Can you add the warning in the list in src/common/BUILD.gn (hopefully it passes CQ)",
+      "revId": "a3119dcb3615770a9a2fce97770621dbbe14b6c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
