@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e69d0de9_85dea23d",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-26T08:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6819c1d_e7889b49",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "745d622b_e9039e1b",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c13203e1_5ba8746b",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-26T08:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "745d622b_e9039e1b",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f6b4874_e778f3c4",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-07-23T08:38:08Z",
       "side": 1,
       "message": "[1]",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbeb56cb_ee210574",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-26T08:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f6b4874_e778f3c4",
       "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +208,24 @@
       "side": 1,
       "message": "I assume you mean D3D12 requires the states to be \"different\". Can you add a TODO assigned to a new issue that\u0027s Type-Enhancement-Optimization about using D3D12 state instead of WebGPU usages to manage the tracking of barrier state?",
       "parentUuid": "ca72d6ef_2f72bcfe",
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a78749a_c09a2140",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-26T08:43:20Z",
+      "side": 1,
+      "message": "Sorry, I typed wrongly. Yes, D3D validation layer requires the before and after states must be different. New issue for this: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1024",
+      "parentUuid": "41efd259_29cd8f53",
       "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -253,6 +325,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe43008_1edf78aa",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-26T08:43:20Z",
+      "side": 1,
+      "message": "Update Vulkan backend in another PR: https://dawn-review.googlesource.com/c/dawn/+/59680",
+      "parentUuid": "abd1ef57_ac489020",
+      "range": {
+        "startLine": 916,
+        "startChar": 57,
+        "endLine": 918,
+        "endChar": 87
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31ec6d1d_2e1bca19",
@@ -266,6 +362,30 @@
       "writtenOn": "2021-07-23T16:09:15Z",
       "side": 1,
       "message": "[2]",
+      "range": {
+        "startLine": 927,
+        "startChar": 79,
+        "endLine": 927,
+        "endChar": 91
+      },
+      "revId": "17ad0f46940046bac246d4cb0fc61ad5e8b2f07b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6612d620_e3abc34d",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-07-26T08:43:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31ec6d1d_2e1bca19",
       "range": {
         "startLine": 927,
         "startChar": 79,
