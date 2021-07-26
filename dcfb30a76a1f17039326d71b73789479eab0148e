@@ -33,6 +33,24 @@
       "message": "Probably worth commenting clearly what the different between the two is here.",
       "revId": "dcfb30a76a1f17039326d71b73789479eab0148e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f10dddc2_b8bd69b4",
+        "filename": "src/dawn_native/Texture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-26T22:18:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dae5c654_73fcd2c5",
+      "revId": "dcfb30a76a1f17039326d71b73789479eab0148e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
