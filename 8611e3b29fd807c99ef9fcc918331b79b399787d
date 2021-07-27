@@ -33,6 +33,23 @@
       "message": "LGTM\n\nI also opened https://github.com/gpuweb/gpuweb/issues/1994 to maybe have the other builtin from sampleRateShading.",
       "revId": "8611e3b29fd807c99ef9fcc918331b79b399787d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56b457e1_23bb6f60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T15:15:02Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "8611e3b29fd807c99ef9fcc918331b79b399787d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
