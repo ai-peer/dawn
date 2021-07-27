@@ -1,4 +1,3 @@
-// Copyright 2017 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -578,7 +577,7 @@ class DawnTestBase {
 #define DAWN_SUPPRESS_TEST_IF(condition) \
     DAWN_SKIP_TEST_IF_BASE(!RunSuppressedTests() && condition, "suppressed", condition)
 
-#define EXPECT_DEPRECATION_WARNING(statement)                                    \
+#define EXPECT_DEPRECATION_WARNINGS(statement, n)                                \
     do {                                                                         \
         if (UsesWire()) {                                                        \
             statement;                                                           \
@@ -590,11 +589,12 @@ class DawnTestBase {
                 dawn_native::GetDeprecationWarningCountForTesting(device.Get()); \
             EXPECT_EQ(mLastWarningCount, warningsBefore);                        \
             if (!HasToggleEnabled("skip_validation")) {                          \
-                EXPECT_EQ(warningsAfter, warningsBefore + 1);                    \
+                EXPECT_EQ(warningsAfter, warningsBefore + n);                    \
             }                                                                    \
             mLastWarningCount = warningsAfter;                                   \
         }                                                                        \
     } while (0)
+#define EXPECT_DEPRECATION_WARNING(statement) EXPECT_DEPRECATION_WARNINGS(statement, 1)
 
 template <typename Params = AdapterTestParam>
 class DawnTestWithParams : public DawnTestBase, public ::testing::TestWithParam<Params> {
