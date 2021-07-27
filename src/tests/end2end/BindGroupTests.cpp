@@ -1256,6 +1256,9 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
     queue.Submit(1, &commands);
 
     EXPECT_BUFFER_U32_EQ(1, result, 0);
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // This is a regression test for crbug.com/dawn/319 where creating a bind group with a
@@ -1298,9 +1301,13 @@ TEST_P(BindGroupTests, CreateWithDestroyedResource) {
 
     // Test a storage texture.
     {
-        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
-            device, {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadOnly,
-                      wgpu::TextureFormat::R32Uint}});
+        wgpu::BindGroupLayout bgl;
+        // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is
+        // passed.
+        EXPECT_DEPRECATION_WARNING(
+            bgl = utils::MakeBindGroupLayout(
+                device, {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadOnly,
+                          wgpu::TextureFormat::R32Uint}}));
 
         wgpu::TextureDescriptor textureDesc;
         textureDesc.usage = wgpu::TextureUsage::Storage;

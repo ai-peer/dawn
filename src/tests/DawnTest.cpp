@@ -1000,6 +1000,16 @@ bool DawnTestBase::EndExpectDeviceError() {
     return mError;
 }
 
+void DawnTestBase::ExpectHadSomeDeprecationWarnings() {
+    if (HasToggleEnabled("skip_validation") || UsesWire()) {
+        return;
+    }
+
+    size_t warningCount = dawn_native::GetDeprecationWarningCountForTesting(backendDevice);
+    EXPECT_LT(0u, warningCount);
+    mLastWarningCount = warningCount;
+}
+
 // static
 void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* userdata) {
     ASSERT(type != WGPUErrorType_NoError);
