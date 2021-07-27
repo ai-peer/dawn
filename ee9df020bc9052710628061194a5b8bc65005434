@@ -16,6 +16,137 @@
       "message": "ready for review now, PTAL!",
       "revId": "ee9df020bc9052710628061194a5b8bc65005434",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70820eb7_138ae4f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86eacc5e_5b5c9fa2",
+        "filename": "docs/extensions/dawn_internal_usages.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "nit: maybe it should be dawn-internal-usages to match the casing of other WebGPU extensions. (we need to rename the other ones eventually to match too)",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e0eefde_643d1b9a",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "nit: missing space",
+      "range": {
+        "startLine": 63,
+        "startChar": 36,
+        "endLine": 63,
+        "endChar": 41
+      },
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d47f0218_5c9e02f1",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "nit: the URL was truncated. Not sure what to do about it, just put the filename maybe?",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ea075a1_393865d9",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "nit: the two places were we OR the internalUsage could be moved directly in ValidateTextureDescriptor (and the usage passed as argument)",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bbc52cb_bdb1f030",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "Where is this extension marked as supported?\n\nA: In DeviceNull with mSupportedExtensions.flip(). I think we should change that to set to all true, and also have the InternalUsage() extension enabled by default at the AdapterBase level.",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9a09f89_a1b140f7",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T14:09:42Z",
+      "side": 1,
+      "message": "nit: grammar?",
+      "range": {
+        "startLine": 76,
+        "startChar": 33,
+        "endLine": 76,
+        "endChar": 44
+      },
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
