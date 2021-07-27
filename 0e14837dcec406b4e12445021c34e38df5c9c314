@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34958aa6_7e4e9066",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c8832c95_69dcada9",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "822738b8_7e28b30c",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-07-23T14:28:38Z",
       "side": 1,
       "message": "nit: What about just doing CreateSamplingRenderPipeline(aspects, {componentIndex})?",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8afa962_5f524e90",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "Can\u0027t resolve the overload between the vector\u003cuint32_t\u003e vs. uint32_t versions because it\u0027s a single scalar, not a list. it would work if it were {a, b}, but not just {a} or {{a}}",
+      "parentUuid": "822738b8_7e28b30c",
       "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -110,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "190570ff_1a5053dd",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ead5592_0a0dde9e",
+      "range": {
+        "startLine": 308,
+        "startChar": 1,
+        "endLine": 314,
+        "endChar": 76
+      },
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4130504_d2d715dd",
@@ -123,6 +183,24 @@
       "writtenOn": "2021-07-23T14:28:38Z",
       "side": 1,
       "message": "nit: Maybe CheckBuffer could take textureValues[i] directly, so a T, since it is the same caller.\n\nAh looking at the callers, they don\u0027t necessarily know. I\u0027m not sure what would be the nicest option here.",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a793edfe_b0b92fbf",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "Yea it\u0027s kinda ugly, but I\u0027m going to leave it as-is for now. We could maybe have an EXPECT_BUFFER that doesn\u0027t take an explicit type.",
+      "parentUuid": "a4130504_d2d715dd",
       "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -144,6 +222,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "171f7289_009a9b6a",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "88ecbf17_e530f634",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7e91552_7a16f06e",
@@ -157,6 +253,24 @@
       "writtenOn": "2021-07-23T14:28:38Z",
       "side": 1,
       "message": "ditto",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e92fd7f6_ae673b97",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 670,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7e91552_7a16f06e",
       "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -192,6 +306,24 @@
       "side": 1,
       "message": "Yes",
       "parentUuid": "b6949d1d_25e35389",
+      "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e8a84cd_c5eb1f45",
+        "filename": "src/tests/end2end/MultisampledSamplingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T17:09:31Z",
+      "side": 1,
+      "message": "I tried to do it in this CL, but it was not super trivial. Reverted back to the original CL here and addressed nits.",
+      "parentUuid": "ccaa16ab_8656b86f",
       "revId": "0e14837dcec406b4e12445021c34e38df5c9c314",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
