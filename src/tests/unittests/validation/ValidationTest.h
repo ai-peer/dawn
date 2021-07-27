@@ -103,6 +103,9 @@ class ValidationTest : public testing::Test {
     wgpu::Device device;
     WGPUDevice backendDevice;
 
+    // Checks that the test had deprecation warnings. Prefer using EXPECT_DEPRECATION_WARNING when
+    // possible. This method is for cases where it is too hard to properly use the macro.
+    void ExpectHadSomeDeprecationWarnings();
     size_t mLastWarningCount = 0;
 
   private:

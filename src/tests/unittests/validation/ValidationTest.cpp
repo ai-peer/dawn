@@ -141,6 +141,13 @@ std::string ValidationTest::GetLastDeviceErrorMessage() const {
     return mDeviceErrorMessage;
 }
 
+void ValidationTest::ExpectHadSomeDeprecationWarnings() {
+    FlushWire();
+    size_t warningCount = dawn_native::GetDeprecationWarningCountForTesting(backendDevice);
+    EXPECT_LT(0u, warningCount);
+    mLastWarningCount = warningCount;
+}
+
 wgpu::Device ValidationTest::RegisterDevice(WGPUDevice backendDevice) {
     return mWireHelper->RegisterDevice(backendDevice).first;
 }
