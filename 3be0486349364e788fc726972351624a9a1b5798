@@ -16,6 +16,69 @@
       "message": "PTAL",
       "revId": "3be0486349364e788fc726972351624a9a1b5798",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d28e123_e8aa5aa3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T22:27:00Z",
+      "side": 1,
+      "message": "LGTM, but would rather not have the vague expectation",
+      "revId": "3be0486349364e788fc726972351624a9a1b5798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e565eef8_7e0482aa",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T22:27:00Z",
+      "side": 1,
+      "message": "mmmm can we just put the check inside GetOrCreateBindGroupLayout instead? that way we always emit regardless of if validation is on or off\n\nit\u0027s another loop but BGL creation isn\u0027t that hot, and we\u0027ll remove the code to emit the warning soonish anyway",
+      "range": {
+        "startLine": 1004,
+        "startChar": 4,
+        "endLine": 1006,
+        "endChar": 5
+      },
+      "revId": "3be0486349364e788fc726972351624a9a1b5798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63303e64_f9e9966e",
+        "filename": "src/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T22:27:00Z",
+      "side": 1,
+      "message": "uuunit: probably reads better left-to-right as EXPECT_GT(warningCount, 0u)",
+      "range": {
+        "startLine": 147,
+        "startChar": 4,
+        "endLine": 147,
+        "endChar": 32
+      },
+      "revId": "3be0486349364e788fc726972351624a9a1b5798",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
