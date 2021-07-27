@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "8611e3b29fd807c99ef9fcc918331b79b399787d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5eeb2279_a9636ba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-27T09:50:33Z",
+      "side": 1,
+      "message": "LGTM\n\nI also opened https://github.com/gpuweb/gpuweb/issues/1994 to maybe have the other builtin from sampleRateShading.",
+      "revId": "8611e3b29fd807c99ef9fcc918331b79b399787d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
