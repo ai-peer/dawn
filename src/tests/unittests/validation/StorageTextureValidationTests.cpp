@@ -111,13 +111,17 @@ class StorageTextureValidationTests : public ValidationTest {
     wgpu::ShaderModule mDefaultFSModule;
 
     const std::array<wgpu::StorageTextureAccess, 2> kSupportedStorageTextureAccess = {
-        wgpu::StorageTextureAccess::ReadOnly, wgpu::StorageTextureAccess::WriteOnly};
+        // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is
+        // passed.
+        wgpu::StorageTextureAccess::ReadOnly,  //
+        wgpu::StorageTextureAccess::WriteOnly};
 };
 
 // Validate read-only storage textures can be declared in vertex and fragment shaders, while
 // writeonly storage textures cannot be used in vertex shaders.
 TEST_F(StorageTextureValidationTests, RenderPipeline) {
     // Readonly storage texture can be declared in a vertex shader.
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
     {
         wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
             [[group(0), binding(0)]] var image0 : texture_storage_2d<rgba8unorm, read>;
@@ -131,10 +135,11 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
         descriptor.layout = nullptr;
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = mDefaultFSModule;
-        device.CreateRenderPipeline(&descriptor);
+        EXPECT_DEPRECATION_WARNING(device.CreateRenderPipeline(&descriptor));
     }
 
     // Read-only storage textures can be declared in a fragment shader.
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
     {
         wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
             [[group(0), binding(0)]] var image0 : texture_storage_2d<rgba8unorm, read>;
@@ -148,7 +153,7 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
         descriptor.layout = nullptr;
         descriptor.vertex.module = mDefaultVSModule;
         descriptor.cFragment.module = fsModule;
-        device.CreateRenderPipeline(&descriptor);
+        EXPECT_DEPRECATION_WARNING(device.CreateRenderPipeline(&descriptor));
     }
 
     // Write-only storage textures cannot be declared in a vertex shader.
@@ -187,6 +192,7 @@ TEST_F(StorageTextureValidationTests, RenderPipeline) {
 // compute shaders.
 TEST_F(StorageTextureValidationTests, ComputePipeline) {
     // Read-only storage textures can be declared in a compute shader.
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
     {
         wgpu::ShaderModule csModule = utils::CreateShaderModule(device, R"(
             [[group(0), binding(0)]] var image0 : texture_storage_2d<rgba8unorm, read>;
@@ -205,7 +211,7 @@ TEST_F(StorageTextureValidationTests, ComputePipeline) {
         descriptor.compute.module = csModule;
         descriptor.compute.entryPoint = "main";
 
-        device.CreateComputePipeline(&descriptor);
+        EXPECT_DEPRECATION_WARNING(device.CreateComputePipeline(&descriptor));
     }
 
     // Write-only storage textures can be declared in a compute shader.
@@ -286,6 +292,9 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutWithStorageTextureBindingTy
             ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&descriptor));
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Validate it is an error to declare a read-only or write-only storage texture in shaders with any
@@ -427,6 +436,9 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutEntryTypeMatchesShaderDecla
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify it is invalid not to set a valid texture format in a bind group layout when the binding
@@ -462,6 +474,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroupLayout) {
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify the storage texture format in the bind group layout must match the declaration in shader.
@@ -517,6 +532,9 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutStorageTextureFormatMatches
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify the dimension of the bind group layout with storage textures must match the one declared
@@ -566,6 +584,9 @@ TEST_F(StorageTextureValidationTests, BindGroupLayoutViewDimensionMatchesShaderD
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify that only a texture view can be used as a read-only or write-only storage texture in a
@@ -604,6 +625,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureBindingTypeInBindGroup) {
             utils::MakeBindGroup(device, bindGroupLayout, {{0, textureView}});
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify that a texture used as read-only or write-only storage texture in a bind group must be
@@ -640,6 +664,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureUsageInBindGroup) {
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify that the format of a texture used as read-only or write-only storage texture in a bind
@@ -682,6 +709,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureFormatInBindGroup) {
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify that the dimension of a texture view used as read-only or write-only storage texture in a
@@ -738,6 +768,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureViewDimensionInBindGroup) {
             }
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify multisampled storage textures cannot be supported now.
@@ -774,6 +807,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureInRenderPass) {
         renderPassEncoder.EndPass();
         encoder.Finish();
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify it is valid to use a a texture as both read-only storage texture and sampled texture in
@@ -817,6 +853,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneRender
                 break;
         }
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify it is invalid to use a a texture as both storage texture (either read-only or write-only)
@@ -842,6 +881,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndRenderAttachmentInOneRend
         renderPassEncoder.EndPass();
         ASSERT_DEVICE_ERROR(encoder.Finish());
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify it is invalid to use a a texture as both read-only storage texture and write-only storage
@@ -852,9 +894,13 @@ TEST_F(StorageTextureValidationTests, ReadOnlyAndWriteOnlyStorageTextureInOneRen
 
     // Create a bind group that uses the same texture as both read-only and write-only storage
     // texture.
-    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadOnly, kFormat},
-                 {1, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
+    wgpu::BindGroupLayout bindGroupLayout;
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    EXPECT_DEPRECATION_WARNING(
+        bindGroupLayout = utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadOnly, kFormat},
+             {1, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly, kFormat}}));
     wgpu::BindGroup bindGroup =
         utils::MakeBindGroup(device, bindGroupLayout,
                              {{0, storageTexture.CreateView()}, {1, storageTexture.CreateView()}});
@@ -895,6 +941,9 @@ TEST_F(StorageTextureValidationTests, StorageTextureAndSampledTextureInOneComput
         computePassEncoder.EndPass();
         encoder.Finish();
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // Verify it is valid to use a texture as both read-only storage texture and write-only storage
@@ -905,9 +954,13 @@ TEST_F(StorageTextureValidationTests, ReadOnlyAndWriteOnlyStorageTextureInOneCom
 
     // Create a bind group that uses the same texture as both read-only and write-only storage
     // texture.
-    wgpu::BindGroupLayout bindGroupLayout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::ReadOnly, kFormat},
-                 {1, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}});
+    wgpu::BindGroupLayout bindGroupLayout;
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    EXPECT_DEPRECATION_WARNING(
+        bindGroupLayout = utils::MakeBindGroupLayout(
+            device,
+            {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::ReadOnly, kFormat},
+             {1, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly, kFormat}}));
     wgpu::BindGroup bindGroup =
         utils::MakeBindGroup(device, bindGroupLayout,
                              {{0, storageTexture.CreateView()}, {1, storageTexture.CreateView()}});

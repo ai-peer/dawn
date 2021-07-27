@@ -406,7 +406,7 @@ TEST_F(BindGroupValidationTest, TextureUsage) {
 // Check that a storage texture binding must have the correct usage
 TEST_F(BindGroupValidationTest, StorageTextureUsage) {
     wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
-        device, {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::ReadOnly,
+        device, {{0, wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::WriteOnly,
                   wgpu::TextureFormat::RGBA8Uint}});
 
     wgpu::TextureDescriptor descriptor;
@@ -1015,6 +1015,9 @@ TEST_F(BindGroupLayoutValidationTest, PerStageLimits) {
         bgl[1] = utils::MakeBindGroupLayout(device, {info.entry});
         TestCreatePipelineLayout(bgl, 2, false);
     }
+
+    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
+    ExpectHadSomeDeprecationWarnings();
 }
 
 // External textures require multiple binding slots (3 sampled texture, 1 uniform buffer, 1
