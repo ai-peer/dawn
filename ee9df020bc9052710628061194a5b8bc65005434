@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c76a5b0f_dfe5ec1f",
+        "filename": "docs/extensions/dawn_internal_usages.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T19:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86eacc5e_5b5c9fa2",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e0eefde_643d1b9a",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-07-27T14:09:42Z",
       "side": 1,
       "message": "nit: missing space",
+      "range": {
+        "startLine": 63,
+        "startChar": 36,
+        "endLine": 63,
+        "endChar": 41
+      },
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b1cc9a1_d829ac6d",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T19:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e0eefde_643d1b9a",
       "range": {
         "startLine": 63,
         "startChar": 36,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cc0b861_2066e299",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T19:53:45Z",
+      "side": 1,
+      "message": "I think it should be ok? It\u0027s continued on the next line. I think it\u0027s probably more important that if someone prints out the info with GetExtensionInfo, they can easily find the file with a full URL",
+      "parentUuid": "d47f0218_5c9e02f1",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ea075a1_393865d9",
@@ -105,6 +165,24 @@
       "writtenOn": "2021-07-27T14:09:42Z",
       "side": 1,
       "message": "nit: the two places were we OR the internalUsage could be moved directly in ValidateTextureDescriptor (and the usage passed as argument)",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f327eb2_a28318a3",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T19:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ea075a1_393865d9",
       "revId": "ee9df020bc9052710628061194a5b8bc65005434",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57dc7de6_9b649ff4",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T19:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bbc52cb_bdb1f030",
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c9a09f89_a1b140f7",
@@ -139,6 +235,30 @@
       "writtenOn": "2021-07-27T14:09:42Z",
       "side": 1,
       "message": "nit: grammar?",
+      "range": {
+        "startLine": 76,
+        "startChar": 33,
+        "endLine": 76,
+        "endChar": 44
+      },
+      "revId": "ee9df020bc9052710628061194a5b8bc65005434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9a1ffe1_41efd8cc",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-27T19:53:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c9a09f89_a1b140f7",
       "range": {
         "startLine": 76,
         "startChar": 33,
