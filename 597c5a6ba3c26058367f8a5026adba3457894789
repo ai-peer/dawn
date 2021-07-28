@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7ea4e48_8309a415",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-28T07:04:16Z",
+      "side": 1,
+      "message": "We can fix the compilation error by using static\u003cuint32_t\u003e(VK_SAMPLE_COUNT_1_BIT | VK_SAMPLE_COUNT_4_BIT)",
+      "range": {
+        "startLine": 223,
+        "startChar": 22,
+        "endLine": 223,
+        "endChar": 67
+      },
+      "revId": "597c5a6ba3c26058367f8a5026adba3457894789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a241c03d_9086f354",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-28T07:04:16Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 228,
+        "startChar": 22,
+        "endLine": 228,
+        "endChar": 67
+      },
+      "revId": "597c5a6ba3c26058367f8a5026adba3457894789",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
