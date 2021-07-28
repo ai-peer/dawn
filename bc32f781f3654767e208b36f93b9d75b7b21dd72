@@ -16,6 +16,24 @@
       "message": "LGTM. I think eventually we should convert a large portion of the buffer mapping doc to markdown and put it directly into the docs/ folder.\n\nThe content would be less \"why\" the buffer mapping interfaces are designed the way they are, and more of an explanation of what the interfaces are, how they\u0027re used, and how you\u0027re supposed to implement them if you want to embed Dawn. We can still link to the doc though for more information",
       "revId": "bc32f781f3654767e208b36f93b9d75b7b21dd72",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e95ee8eb_31cd4fb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-07-28T19:58:29Z",
+      "side": 1,
+      "message": "Gotcha",
+      "parentUuid": "16832657_dd018749",
+      "revId": "bc32f781f3654767e208b36f93b9d75b7b21dd72",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
