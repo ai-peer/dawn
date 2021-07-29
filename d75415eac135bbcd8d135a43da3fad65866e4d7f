@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddfe7e34_b6669e77",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1123,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-29T01:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ce6dbcb_1674fe31",
+      "revId": "d75415eac135bbcd8d135a43da3fad65866e4d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9c120f7_2dac2f71",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebe8e5ac_bbd94f34",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1191,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-29T01:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9c120f7_2dac2f71",
+      "range": {
+        "startLine": 1191,
+        "startChar": 9,
+        "endLine": 1191,
+        "endChar": 38
+      },
+      "revId": "d75415eac135bbcd8d135a43da3fad65866e4d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2e7bdc7_accb5aae",
@@ -88,6 +130,24 @@
       "writtenOn": "2021-07-28T10:48:02Z",
       "side": 1,
       "message": "u-u-nit: for clarity I think this could be put at the same level as IsInterpolationAttributeMatch",
+      "revId": "d75415eac135bbcd8d135a43da3fad65866e4d7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f9184f4_3169e82e",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1193,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-07-29T01:29:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2e7bdc7_accb5aae",
       "revId": "d75415eac135bbcd8d135a43da3fad65866e4d7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
