@@ -34,6 +34,24 @@
       "parentUuid": "0b5d5fd4_3eb5e913",
       "revId": "10d8cd5e851912cc1447b5d75bcb6182fc24c92e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8eef5f1_0ca3572a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-07-29T17:49:54Z",
+      "side": 1,
+      "message": "Ok, that CL landed. Looking at it will give you good context on how to add the internal usages.\n\nNow:\n - can probably move the unittests in your CL to src/tests/unittests/validation/InternalUsageValidationTests.cpp\n - in the end2end tests in your CL, need to override GetRequiredExtensions in CopyTests_T2T to ask for dawn-internal-usages extension\n - in Chromium in webgpu_decoder_impl.cc in WebGPUDecoderImpl::InitDawnDevice, need to always request the dawn-internal-usages extension\n - When we wrap shared images as Dawn textures, we need to always add the internal usages. i think these places:\n   - ExternalVkImageDawnRepresentation::BeginAccess\n   - SharedImageRepresentationDawnOzone::BeginAccess\n   - SharedImageBackingD3D::ProduceDawn\n   - SharedImageRepresentationDawnIOSurface::BeginAccess",
+      "parentUuid": "5a2cad49_9c53d250",
+      "revId": "10d8cd5e851912cc1447b5d75bcb6182fc24c92e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
