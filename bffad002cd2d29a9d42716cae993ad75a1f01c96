@@ -16,6 +16,23 @@
       "message": "Still LGTM",
       "revId": "bffad002cd2d29a9d42716cae993ad75a1f01c96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9d2338_062d01b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-07-29T08:50:52Z",
+      "side": 1,
+      "message": "Austin PTAL too",
+      "revId": "bffad002cd2d29a9d42716cae993ad75a1f01c96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
