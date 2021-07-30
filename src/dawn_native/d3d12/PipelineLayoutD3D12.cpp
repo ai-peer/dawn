@@ -69,9 +69,16 @@ namespace dawn_native { namespace d3d12 {
         // descriptor.
         std::vector<D3D12_ROOT_PARAMETER> rootParameters;
 
-        // Ranges are D3D12_DESCRIPTOR_RANGE_TYPE_(SRV|UAV|CBV|SAMPLER)
-        // They are grouped together so each bind group has at most 4 ranges
-        D3D12_DESCRIPTOR_RANGE ranges[kMaxBindGroups * 4];
+        std::vector<D3D12_DESCRIPTOR_RANGE> ranges;
+
+        size_t rangesCount = 0;
+        for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
+            const BindGroupLayout* bindGroupLayout = ToBackend(GetBindGroupLayout(group));
+            rangesCount += bindGroupLayout->GetCbvUavSrvDescriptorRanges().size() +
+                           bindGroupLayout->GetSamplerDescriptorRanges().size();
+        }
+        // We are taking pointers to `ranges`, so we cannot let it resize while we're pushing to it.
+        ranges.reserve(rangesCount);
 
         uint32_t rangeIndex = 0;
 
@@ -82,7 +89,8 @@ namespace dawn_native { namespace d3d12 {
             // bind group index Returns whether or not the parameter was set. A root parameter is
             // not set if the number of ranges is 0
             auto SetRootDescriptorTable =
-                [&](uint32_t rangeCount, const D3D12_DESCRIPTOR_RANGE* descriptorRanges) -> bool {
+                [&](ityp::span<size_t, const D3D12_DESCRIPTOR_RANGE> descriptorRanges) -> bool {
+                auto rangeCount = descriptorRanges.size();
                 if (rangeCount == 0) {
                     return false;
                 }
@@ -93,9 +101,9 @@ namespace dawn_native { namespace d3d12 {
                 rootParameter.DescriptorTable.NumDescriptorRanges = rangeCount;
                 rootParameter.DescriptorTable.pDescriptorRanges = &ranges[rangeIndex];
 
-                for (uint32_t i = 0; i < rangeCount; ++i) {
-                    ranges[rangeIndex] = descriptorRanges[i];
-                    ranges[rangeIndex].RegisterSpace = static_cast<uint32_t>(group);
+                for (auto& range : descriptorRanges) {
+                    ranges.push_back(range);
+                    ranges.back().RegisterSpace = static_cast<uint32_t>(group);
                     rangeIndex++;
                 }
 
@@ -104,13 +112,10 @@ namespace dawn_native { namespace d3d12 {
                 return true;
             };
 
-            if (SetRootDescriptorTable(bindGroupLayout->GetCbvUavSrvDescriptorTableSize(),
-                                       bindGroupLayout->GetCbvUavSrvDescriptorRanges())) {
+            if (SetRootDescriptorTable(bindGroupLayout->GetCbvUavSrvDescriptorRanges())) {
                 mCbvUavSrvRootParameterInfo[group] = rootParameters.size() - 1;
             }
-
-            if (SetRootDescriptorTable(bindGroupLayout->GetSamplerDescriptorTableSize(),
-                                       bindGroupLayout->GetSamplerDescriptorRanges())) {
+            if (SetRootDescriptorTable(bindGroupLayout->GetSamplerDescriptorRanges())) {
                 mSamplerRootParameterInfo[group] = rootParameters.size() - 1;
             }
 
@@ -157,15 +162,8 @@ namespace dawn_native { namespace d3d12 {
         mFirstIndexOffsetRegisterSpace = 0;
         BindGroupIndex firstOffsetGroup{mFirstIndexOffsetRegisterSpace};
         if (GetBindGroupLayoutsMask()[firstOffsetGroup]) {
-            // Find the last register used on firstOffsetGroup.
-            uint32_t maxRegister = 0;
-            for (uint32_t shaderRegister :
-                 ToBackend(GetBindGroupLayout(firstOffsetGroup))->GetBindingOffsets()) {
-                if (shaderRegister > maxRegister) {
-                    maxRegister = shaderRegister;
-                }
-            }
-            mFirstIndexOffsetShaderRegister = maxRegister + 1;
+            mFirstIndexOffsetShaderRegister =
+                ToBackend(GetBindGroupLayout(firstOffsetGroup))->GetAvailableRegister();
         } else {
             // firstOffsetGroup is not in use, we can use the first register.
             mFirstIndexOffsetShaderRegister = 0;

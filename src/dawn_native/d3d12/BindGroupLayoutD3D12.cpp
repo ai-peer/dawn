@@ -83,46 +83,52 @@ namespace dawn_native { namespace d3d12 {
             // here because they encompass multiple views.
             DescriptorType descriptorType = WGPUBindingInfoToDescriptorType(bindingInfo);
             mBindingOffsets[bindingIndex] = mDescriptorCounts[descriptorType]++;
+
+            if (mBindingOffsets[bindingIndex] >= mNextAvailableRegister) {
+                mNextAvailableRegister = mBindingOffsets[bindingIndex] + 1;
+            }
         }
 
-        auto SetDescriptorRange = [&](uint32_t index, uint32_t count, uint32_t* baseRegister,
-                                      D3D12_DESCRIPTOR_RANGE_TYPE type) -> bool {
+        auto SetDescriptorRange = [](std::vector<D3D12_DESCRIPTOR_RANGE>& ranges, uint32_t count,
+                                     uint32_t* baseRegister,
+                                     D3D12_DESCRIPTOR_RANGE_TYPE type) -> bool {
             if (count == 0) {
                 return false;
             }
 
-            auto& range = mRanges[index];
+            D3D12_DESCRIPTOR_RANGE range;
             range.RangeType = type;
             range.NumDescriptors = count;
             range.RegisterSpace = 0;
             range.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
             range.BaseShaderRegister = *baseRegister;
+            ranges.push_back(range);
             *baseRegister += count;
-            // These ranges will be copied and range.BaseShaderRegister will be set in
+            // These ranges will be copied and range.RegisterSpace will be set in
             // d3d12::PipelineLayout to account for bind group register offsets
             return true;
         };
 
-        uint32_t rangeIndex = 0;
         uint32_t baseRegister = 0;
 
         std::array<uint32_t, DescriptorType::Count> descriptorOffsets;
-        // Ranges 0-2 contain the CBV, UAV, and SRV ranges, if they exist, tightly packed
-        // Range 3 contains the Sampler range, if there is one
-        if (SetDescriptorRange(rangeIndex, mDescriptorCounts[CBV], &baseRegister,
+        // mCbvUavSrvDescriptorRanges[0-2] contain the CBV, UAV, and SRV ranges, if they exist,
+        // tightly packed mSamplerDescriptorRanges[0] contains the Sampler range, if there is one
+        mCbvUavSrvDescriptorRanges.reserve(3);
+        if (SetDescriptorRange(mCbvUavSrvDescriptorRanges, mDescriptorCounts[CBV], &baseRegister,
                                D3D12_DESCRIPTOR_RANGE_TYPE_CBV)) {
-            descriptorOffsets[CBV] = mRanges[rangeIndex++].BaseShaderRegister;
+            descriptorOffsets[CBV] = mCbvUavSrvDescriptorRanges.back().BaseShaderRegister;
         }
-        if (SetDescriptorRange(rangeIndex, mDescriptorCounts[UAV], &baseRegister,
+        if (SetDescriptorRange(mCbvUavSrvDescriptorRanges, mDescriptorCounts[UAV], &baseRegister,
                                D3D12_DESCRIPTOR_RANGE_TYPE_UAV)) {
-            descriptorOffsets[UAV] = mRanges[rangeIndex++].BaseShaderRegister;
+            descriptorOffsets[UAV] = mCbvUavSrvDescriptorRanges.back().BaseShaderRegister;
         }
-        if (SetDescriptorRange(rangeIndex, mDescriptorCounts[SRV], &baseRegister,
+        if (SetDescriptorRange(mCbvUavSrvDescriptorRanges, mDescriptorCounts[SRV], &baseRegister,
                                D3D12_DESCRIPTOR_RANGE_TYPE_SRV)) {
-            descriptorOffsets[SRV] = mRanges[rangeIndex++].BaseShaderRegister;
+            descriptorOffsets[SRV] = mCbvUavSrvDescriptorRanges.back().BaseShaderRegister;
         }
         uint32_t zero = 0;
-        SetDescriptorRange(Sampler, mDescriptorCounts[Sampler], &zero,
+        SetDescriptorRange(mSamplerDescriptorRanges, mDescriptorCounts[Sampler], &zero,
                            D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER);
         descriptorOffsets[Sampler] = 0;
 
@@ -185,16 +191,6 @@ namespace dawn_native { namespace d3d12 {
         return {mBindingOffsets.data(), mBindingOffsets.size()};
     }
 
-    uint32_t BindGroupLayout::GetCbvUavSrvDescriptorTableSize() const {
-        return (static_cast<uint32_t>(mDescriptorCounts[CBV] > 0) +
-                static_cast<uint32_t>(mDescriptorCounts[UAV] > 0) +
-                static_cast<uint32_t>(mDescriptorCounts[SRV] > 0));
-    }
-
-    uint32_t BindGroupLayout::GetSamplerDescriptorTableSize() const {
-        return mDescriptorCounts[Sampler] > 0;
-    }
-
     uint32_t BindGroupLayout::GetCbvUavSrvDescriptorCount() const {
         return mDescriptorCounts[CBV] + mDescriptorCounts[UAV] + mDescriptorCounts[SRV];
     }
@@ -203,12 +199,18 @@ namespace dawn_native { namespace d3d12 {
         return mDescriptorCounts[Sampler];
     }
 
-    const D3D12_DESCRIPTOR_RANGE* BindGroupLayout::GetCbvUavSrvDescriptorRanges() const {
-        return mRanges;
+    ityp::span<size_t, const D3D12_DESCRIPTOR_RANGE> BindGroupLayout::GetCbvUavSrvDescriptorRanges()
+        const {
+        return {mCbvUavSrvDescriptorRanges.data(), mCbvUavSrvDescriptorRanges.size()};
     }
 
-    const D3D12_DESCRIPTOR_RANGE* BindGroupLayout::GetSamplerDescriptorRanges() const {
-        return &mRanges[Sampler];
+    ityp::span<size_t, const D3D12_DESCRIPTOR_RANGE> BindGroupLayout::GetSamplerDescriptorRanges()
+        const {
+        return {mSamplerDescriptorRanges.data(), mSamplerDescriptorRanges.size()};
+    }
+
+    uint32_t BindGroupLayout::GetAvailableRegister() const {
+        return mNextAvailableRegister;
     }
 
 }}  // namespace dawn_native::d3d12
