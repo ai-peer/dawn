@@ -51,6 +51,24 @@
       "parentUuid": "c283eb3e_e587eade",
       "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "719ee7f9_b8d86b78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-02T21:36:38Z",
+      "side": 1,
+      "message": "Tools can assign the ID. Also, I want the debug name set regardless if there is a label or not.",
+      "parentUuid": "c283eb3e_e587eade",
+      "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
