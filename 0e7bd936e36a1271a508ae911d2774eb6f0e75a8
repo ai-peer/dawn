@@ -69,6 +69,24 @@
       "parentUuid": "c283eb3e_e587eade",
       "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6ea86fd_a3527c05",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-02T21:38:02Z",
+      "side": 1,
+      "message": "right, but we can still set the label if the user provided one. like if (label) set(label) else set(\"Buffer\")",
+      "parentUuid": "719ee7f9_b8d86b78",
+      "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
