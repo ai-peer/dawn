@@ -14,6 +14,7 @@
 
 #include "dawn_native/d3d12/ResourceHeapAllocationD3D12.h"
 
+#include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
 
 #include <utility>
@@ -38,5 +39,12 @@ namespace dawn_native { namespace d3d12 {
 
     D3D12_GPU_VIRTUAL_ADDRESS ResourceHeapAllocation::GetGPUPointer() const {
         return mResource->GetGPUVirtualAddress();
+    }
+
+    MaybeError ResourceHeapAllocation::SetDebugName(const wchar_t* name) {
+        // Prepend DAWN_ to seperate names from other components in the same process.
+        const std::wstring d3dNameW = std::wstring(L"DAWN_") + name;
+        DAWN_TRY(CheckHRESULT(mResource->SetName(d3dNameW.c_str()), "ID3D12Resource::SetName"));
+        return {};
     }
 }}  // namespace dawn_native::d3d12
