@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c283eb3e_e587eade",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-02T21:30:35Z",
+      "side": 1,
+      "message": "BufferDescriptor and TextureDescriptor have a ::label member. We should use that if it\u0027s set.",
+      "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
