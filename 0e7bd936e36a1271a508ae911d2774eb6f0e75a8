@@ -33,6 +33,24 @@
       "message": "BufferDescriptor and TextureDescriptor have a ::label member. We should use that if it\u0027s set.",
       "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "624630eb_696b9bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-02T21:32:25Z",
+      "side": 1,
+      "message": "And otherwise, we can give it a generated name. Would it make sense to number them?",
+      "parentUuid": "c283eb3e_e587eade",
+      "revId": "0e7bd936e36a1271a508ae911d2774eb6f0e75a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
