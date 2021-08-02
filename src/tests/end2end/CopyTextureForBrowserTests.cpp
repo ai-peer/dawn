@@ -140,6 +140,7 @@ class CopyTextureForBrowserTests : public DawnTest {
 
     void SetUp() override {
         DawnTest::SetUp();
+        DAWN_TEST_UNSUPPORTED_IF(!HasToggleEnabled("use_tint_generator"));
 
         testPipeline = MakeTestPipeline();
 
