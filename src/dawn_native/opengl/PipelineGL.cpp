@@ -47,9 +47,9 @@ namespace dawn_native { namespace opengl {
     PipelineGL::PipelineGL() = default;
     PipelineGL::~PipelineGL() = default;
 
-    void PipelineGL::Initialize(const OpenGLFunctions& gl,
-                                const PipelineLayout* layout,
-                                const PerStage<ProgrammableStage>& stages) {
+    MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
+                                          const PipelineLayout* layout,
+                                          const PerStage<ProgrammableStage>& stages) {
         auto CreateShader = [](const OpenGLFunctions& gl, GLenum type,
                                const char* source) -> GLuint {
             GLuint shader = gl.CreateShader(type);
@@ -87,9 +87,10 @@ namespace dawn_native { namespace opengl {
         bool needsDummySampler = false;
         for (SingleShaderStage stage : IterateStages(activeStages)) {
             const ShaderModule* module = ToBackend(stages[stage].module.Get());
-            std::string glsl =
-                module->TranslateToGLSL(stages[stage].entryPoint.c_str(), stage,
-                                        &combinedSamplers[stage], layout, &needsDummySampler);
+            std::string glsl;
+            DAWN_TRY_ASSIGN(glsl, module->TranslateToGLSL(stages[stage].entryPoint.c_str(), stage,
+                                                          &combinedSamplers[stage], layout,
+                                                          &needsDummySampler));
             GLuint shader = CreateShader(gl, GLShaderType(stage), glsl.c_str());
             gl.AttachShader(mProgram, shader);
         }
@@ -172,6 +173,7 @@ namespace dawn_native { namespace opengl {
 
             textureUnit++;
         }
+        return {};
     }
 
     const std::vector<PipelineGL::SamplerUnit>& PipelineGL::GetTextureUnitsForSampler(
