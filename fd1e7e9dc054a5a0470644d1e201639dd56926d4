@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5db1deea_5694a455",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T17:41:23Z",
+      "side": 1,
+      "message": "kind of a nit, but still prefer to prefix at the call-site.\n\nif there\u0027s no user-provided label,\n\"DAWN_\" + \"Buffer\" could instead be 0 temporary allocations if it were \"DAWN_Buffer\"\n\nif there is a label, it\u0027s also fewer operations:\na. \"DAWN_\" + \"Buffer\" + \"_\" + label\nb. \"DAWN_Buffer\" + \"_\" + label\n\nAlso unit: I think we should do casing like \"Dawn\". ANGLE is an acronym for Almost Native Graphics Layer Engine. Dawn is not an acronym.",
+      "parentUuid": "f47ab2f7_2f5d8480",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "fd1e7e9dc054a5a0470644d1e201639dd56926d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b8d7a61_219bb055",
