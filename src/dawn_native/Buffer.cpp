@@ -177,6 +177,13 @@ namespace dawn_native {
         return mSize;
     }
 
+    uint64_t BufferBase::GetAllocatedSize() const {
+        ASSERT(!IsError());
+        // The backend must initialize this value.
+        ASSERT(mAllocatedSize != 0);
+        return mAllocatedSize;
+    }
+
     wgpu::BufferUsage BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
@@ -217,7 +224,7 @@ namespace dawn_native {
             // error buffer.
             // TODO(crbug.com/dawn/828): Suballocate and reuse memory from a larger staging buffer
             // so we don't create many small buffers.
-            DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetSize()));
+            DAWN_TRY_ASSIGN(mStagingBuffer, GetDevice()->CreateStagingBuffer(GetAllocatedSize()));
         }
 
         return {};
@@ -343,11 +350,14 @@ namespace dawn_native {
 
     MaybeError BufferBase::CopyFromStagingBuffer() {
         ASSERT(mStagingBuffer);
-        if (GetSize() == 0) {
+        if (mSize == 0) {
+            // Staging buffer is not created if zero size.
+            ASSERT(mStagingBuffer == nullptr);
             return {};
         }
 
-        DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), 0, this, 0, GetSize()));
+        DAWN_TRY(GetDevice()->CopyFromStagingToBuffer(mStagingBuffer.get(), 0, this, 0,
+                                                      GetAllocatedSize()));
 
         DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
         uploader->ReleaseStagingBuffer(std::move(mStagingBuffer));
