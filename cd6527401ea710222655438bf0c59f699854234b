@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "cd6527401ea710222655438bf0c59f699854234b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4a9c2a_94cf5f6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-08-03T08:21:29Z",
+      "side": 1,
+      "message": "Thanks for the fixing! LGTM for the copyTextureForBrowser.cpp and InternalPipeline.h",
+      "revId": "cd6527401ea710222655438bf0c59f699854234b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
