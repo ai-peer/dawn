@@ -176,6 +176,30 @@
       },
       "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4c97eac_8f8b3b0d",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-03T22:40:12Z",
+      "side": 1,
+      "message": "Discussed offline. The end result is |label| in SetDebugName(const char* label) will need to be additionally sanitized for \\0 before use due to strlen.",
+      "parentUuid": "a2061a4d_4b6826f8",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 75
+      },
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
