@@ -152,6 +152,30 @@
       },
       "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2061a4d_4b6826f8",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-03T20:59:09Z",
+      "side": 1,
+      "message": "Bryan, I don\u0027t understand what you mean by \"safer\". strlen is speced to return the length of a string. Unless I am missing something, it shouldn\u0027t return the wrong size.\n\nAs for the string usage page you linked, it says to use char arrays for constant strings, not std::string.\n\nThe high order bit to me is we set the string in D3D quickly and efficiently. Since the internal name will always be constant, we should store it and pass it around as a const char*. The developer label should be stored and passed around as a std::string since they can change it at any time. The builder functionality should only need to build when necessary.  \n\nSee https://chromium-review.googlesource.com/c/angle/angle/+/3067921 for how we\u0027re planning on doing this in ANGLE.",
+      "parentUuid": "8ea787ec_e31228c4",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 75
+      },
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
