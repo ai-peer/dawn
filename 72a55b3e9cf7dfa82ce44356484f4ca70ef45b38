@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34220384_6992b508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-03T19:53:05Z",
+      "side": 1,
+      "message": "+1 % Austin\u0027s issue regarding const char*",
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a773102f_7cbf549f",
@@ -78,6 +95,30 @@
       "writtenOn": "2021-08-03T19:44:52Z",
       "side": 1,
       "message": "ah I see, nvm. we\u0027ll need to support user strings in the future anyway which might have \\0 unless we strip it.",
+      "parentUuid": "3f11bf16_4f5d5399",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 75
+      },
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd64a039_309c318c",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-03T19:53:05Z",
+      "side": 1,
+      "message": "+1 to using const char*. strlen gives you the size of the char* string. std::string incurs a heap allocation we can avoid if we use const char*.",
       "parentUuid": "3f11bf16_4f5d5399",
       "range": {
         "startLine": 44,
