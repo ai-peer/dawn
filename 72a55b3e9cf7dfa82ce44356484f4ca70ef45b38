@@ -16,6 +16,29 @@
       "message": "Ready to merge.",
       "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a773102f_7cbf549f",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T19:34:30Z",
+      "side": 1,
+      "message": "nit: this can be const char* now",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 75
+      },
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
