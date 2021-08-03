@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32866533_7202eec9",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-03T01:58:10Z",
+      "side": 1,
+      "message": "For ANGLE, we prepend ANGLE_ for ANGLE allocations.\n\nFYI, a CL is in the works on the ANGLE side to enhance the string to be ANGLE_\u003cinternalName\u003e_\u003cexternalName\u003e. The internal name will correspond to the internal class or data structure; \"StagingBuffer\", \"ExternalTexture\", etc. The external name will be one provided by the user of ANGLE via the KHR_debug extension. For WebGPU, the corresponding \"KHR_debug extension\" is the the label attribute on GPUObjectBase.\n\nSince we\u0027re already going to be composing strings in this manner I don\u0027t feel too strongly about pre-pending DAWN_ to everything, up to you.\n\nI think having developer names in tools would be really cool.",
+      "parentUuid": "0d013bc3_ffa0bb07",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 68
+      },
+      "revId": "fd1e7e9dc054a5a0470644d1e201639dd56926d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9b8d7a61_219bb055",
         "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
         "patchSetId": 3
@@ -54,6 +78,30 @@
       "writtenOn": "2021-08-02T23:39:08Z",
       "side": 1,
       "message": "\"Note that this is simply a convenience wrapper around ID3D12Object::SetPrivateData with WKPDID_D3DDebugObjectNameW. Therefore names which are set with SetName can be retrieved with ID3D12Object::GetPrivateData with the same GUID. Additionally, D3D12 supports narrow strings for names, using the WKPDID_D3DDebugObjectName GUID directly instead.\"\n\nSeems like we should use a narrow string instead of a wide one",
+      "range": {
+        "startLine": 47,
+        "startChar": 41,
+        "endLine": 47,
+        "endChar": 48
+      },
+      "revId": "fd1e7e9dc054a5a0470644d1e201639dd56926d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04407463_f66073b1",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-03T01:58:10Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "9b8d7a61_219bb055",
       "range": {
         "startLine": 47,
         "startChar": 41,
