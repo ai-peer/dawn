@@ -128,6 +128,30 @@
       },
       "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea787ec_e31228c4",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-03T20:28:50Z",
+      "side": 1,
+      "message": "I slightly prefer to use std::string since it\u0027s safer (ie. strlen could return the wrong size) and the perf there seems negligible. Note: chromium specifically asks for std::string [1].\n\n[1] https://www.chromium.org/developers/chromium-string-usage",
+      "parentUuid": "bd64a039_309c318c",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 75
+      },
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
