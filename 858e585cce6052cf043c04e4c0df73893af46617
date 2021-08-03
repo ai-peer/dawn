@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8981f760_9679d471",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T21:26:51Z",
+      "side": 0,
+      "message": "[2]",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad127e14_ba0fae99",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T21:26:51Z",
+      "side": 0,
+      "message": "[1]",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a387866_ddb076e2",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T21:26:51Z",
+      "side": 0,
+      "message": "hmm.. I think a simpler solution than splitting Apply into Before+After might be to move this line above the early return at [1]. That way we always have the correct mask for the check at [2].\n\nIf I\u0027m understanding the problem correctly, setting the pipeline without drawing (A then B w/out draw then A) can make the current code wrong such that mPipelineLayout is for A, but mBindGroupLayoutsMask is for B. Thus, the check at [2] fails and bind groups aren\u0027t actually set.\n\nWhat do you think?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 79
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
