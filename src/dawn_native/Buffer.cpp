@@ -177,6 +177,13 @@ namespace dawn_native {
         return mSize;
     }
 
+    uint64_t BufferBase::GetAllocatedSize() const {
+        ASSERT(!IsError());
+        // The backend must initialize this value.
+        ASSERT(mAllocatedSize != 0);
+        return mAllocatedSize;
+    }
+
     wgpu::BufferUsage BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
