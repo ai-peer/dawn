@@ -225,8 +225,14 @@ namespace dawn_native { namespace metal {
                     // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
                     // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
                     // has been fixed on macOS 11.0. See crbug.com/dawn/545
+<<<<<<< HEAD   (37140e Fix bugs about TextureViewDesc's default values)
                     if (!gpu_info::IsAMD(GetPCIInfo().vendorId) ||
                         [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:{11, 0, 0}]) {
+=======
+                    // TODO(crbug.com/dawn/940): Disable timestamp query on macOS 11.0+. Need to
+                    // figure out what to do with dstOffset alignment on that system.
+                    if (!gpu_info::IsAMD(GetPCIInfo().vendorId) && !IsMacOSVersionAtLeast(11)) {
+>>>>>>> CHANGE (783964 Disable Timestamp Query on macOS 11+)
                         mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
                     }
                 }
