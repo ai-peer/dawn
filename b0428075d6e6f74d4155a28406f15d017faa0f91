@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe4516f0_f20631aa",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T14:04:29Z",
+      "side": 1,
+      "message": "I see. That case should also be covered by the loop below though, right? I don\u0027t think we need to special-case handling empty.",
+      "parentUuid": "40aa09ef_6d181793",
+      "range": {
+        "startLine": 222,
+        "startChar": 23,
+        "endLine": 222,
+        "endChar": 28
+      },
+      "revId": "b0428075d6e6f74d4155a28406f15d017faa0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8591a982_87a1630b",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 3
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "I think we can treat counterSet is supported if at least one of its counters is supported, other counters can be written as 0s if they are not supported.\n\nWe also can require all counters to be supported, but those platforms that only support part of the counters will also be disabled. For pipeline statistics query, maybe we just want to know the compute invocations on some platforms. If checking all counters support, we cannot get that on these platfroms.",
       "parentUuid": "8591a982_87a1630b",
+      "range": {
+        "startLine": 230,
+        "startChar": 33,
+        "endLine": 230,
+        "endChar": 44
+      },
+      "revId": "b0428075d6e6f74d4155a28406f15d017faa0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bf0eef7_8fad7e2f",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-03T14:04:29Z",
+      "side": 1,
+      "message": "Hmm.. that could be confusing. Then it also becomes difficult to figure out whether a particular GPUPipelineStatisticName is actually supported or not if it always returns 0. You can\u0027t distinguish between actual 0 and not-supported. Do we need to revisit pipeline statistics queries in the spec to expose support for them individually?",
+      "parentUuid": "2335ef59_2ad10173",
       "range": {
         "startLine": 230,
         "startChar": 33,
