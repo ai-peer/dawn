@@ -50,6 +50,92 @@
       "message": "1+1\u003d2",
       "revId": "cd6527401ea710222655438bf0c59f699854234b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3617668f_853efa4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-08-03T17:19:30Z",
+      "side": 1,
+      "message": "+2, with a few nits. Feel free to ignore.",
+      "revId": "cd6527401ea710222655438bf0c59f699854234b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1807d8b6_6ddb0c6a",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-08-03T17:19:30Z",
+      "side": 1,
+      "message": "nit: You don\u0027t actually need use a transform::Manager if you\u0027re only going to run a single transform. At this point the Manager is an implementation of Transform, which just runs a bunch of sub-transforms. You could construct the SingleEntryPoint on the stack and pass the pointer of that to RunTransforms()",
+      "range": {
+        "startLine": 130,
+        "startChar": 12,
+        "endLine": 130,
+        "endChar": 54
+      },
+      "revId": "cd6527401ea710222655438bf0c59f699854234b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d3c7f45_ffe79855",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-08-03T17:19:30Z",
+      "side": 1,
+      "message": "Got any bug numbers or details you can use here?",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 74
+      },
+      "revId": "cd6527401ea710222655438bf0c59f699854234b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bea05678_bdd6b35a",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-08-03T17:19:30Z",
+      "side": 1,
+      "message": "Got any bug numbers or details you can use here?",
+      "range": {
+        "startLine": 265,
+        "startChar": 4,
+        "endLine": 265,
+        "endChar": 70
+      },
+      "revId": "cd6527401ea710222655438bf0c59f699854234b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
