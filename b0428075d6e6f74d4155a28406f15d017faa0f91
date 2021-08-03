@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "40aa09ef_6d181793",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-08-03T09:21:08Z",
+      "side": 1,
+      "message": "The \u0027GetGPUCounters\u0027 returns the supported GPU counters of \u0027counterSetName\u0027. If there is no GPU counters supported for a \u0027counterSetName\u0027, we think the counterSet is not supported.",
+      "parentUuid": "e52d2439_27ab9ae0",
+      "range": {
+        "startLine": 222,
+        "startChar": 23,
+        "endLine": 222,
+        "endChar": 28
+      },
+      "revId": "b0428075d6e6f74d4155a28406f15d017faa0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8591a982_87a1630b",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-03T01:41:59Z",
       "side": 1,
       "message": "don\u0027t we want to check that *all* counterName in counters are supported? Right now, I think this will return true if at least one is supported",
+      "range": {
+        "startLine": 230,
+        "startChar": 33,
+        "endLine": 230,
+        "endChar": 44
+      },
+      "revId": "b0428075d6e6f74d4155a28406f15d017faa0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2335ef59_2ad10173",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-08-03T09:21:08Z",
+      "side": 1,
+      "message": "I think we can treat counterSet is supported if at least one of its counters is supported, other counters can be written as 0s if they are not supported.\n\nWe also can require all counters to be supported, but those platforms that only support part of the counters will also be disabled. For pipeline statistics query, maybe we just want to know the compute invocations on some platforms. If checking all counters support, we cannot get that on these platfroms.",
+      "parentUuid": "8591a982_87a1630b",
       "range": {
         "startLine": 230,
         "startChar": 33,
