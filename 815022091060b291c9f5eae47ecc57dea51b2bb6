@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "815022091060b291c9f5eae47ecc57dea51b2bb6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae223d70_f87cc8cc",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-08-03T06:45:30Z",
+      "side": 1,
+      "message": "Do you think it better to report errors when creating the bind group with destroyed resources?",
+      "range": {
+        "startLine": 1308,
+        "startChar": 33,
+        "endLine": 1308,
+        "endChar": 87
+      },
+      "revId": "815022091060b291c9f5eae47ecc57dea51b2bb6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
