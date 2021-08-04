@@ -200,6 +200,30 @@
       },
       "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0648f30b_36b7f4f3",
+        "filename": "src/dawn_native/d3d12/ResourceHeapAllocationD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T04:26:58Z",
+      "side": 1,
+      "message": "great, still LGTM",
+      "parentUuid": "f4c97eac_8f8b3b0d",
+      "range": {
+        "startLine": 44,
+        "startChar": 52,
+        "endLine": 44,
+        "endChar": 75
+      },
+      "revId": "72a55b3e9cf7dfa82ce44356484f4ca70ef45b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
