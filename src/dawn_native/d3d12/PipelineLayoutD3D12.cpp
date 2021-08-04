@@ -102,6 +102,7 @@ namespace dawn_native { namespace d3d12 {
                 rootParameter.DescriptorTable.pDescriptorRanges = &ranges[rangeIndex];
 
                 for (auto& range : descriptorRanges) {
+                    ASSERT(range.RegisterSpace == REGISTER_SPACE_PLACEHOLDER);
                     ranges.push_back(range);
                     ranges.back().RegisterSpace = static_cast<uint32_t>(group);
                     rangeIndex++;
@@ -118,9 +119,6 @@ namespace dawn_native { namespace d3d12 {
             if (SetRootDescriptorTable(bindGroupLayout->GetSamplerDescriptorRanges())) {
                 mSamplerRootParameterInfo[group] = rootParameters.size() - 1;
             }
-
-            // Get calculated shader register for root descriptors
-            const auto& shaderRegisters = bindGroupLayout->GetBindingOffsets();
 
             // Init root descriptors in root signatures for dynamic buffer bindings.
             // These are packed at the beginning of the layout binding info.
@@ -140,7 +138,8 @@ namespace dawn_native { namespace d3d12 {
 
                 // Setup root descriptor.
                 D3D12_ROOT_DESCRIPTOR rootDescriptor;
-                rootDescriptor.ShaderRegister = shaderRegisters[dynamicBindingIndex];
+                rootDescriptor.ShaderRegister =
+                    bindGroupLayout->GetShaderRegister(dynamicBindingIndex);
                 rootDescriptor.RegisterSpace = static_cast<uint32_t>(group);
 
                 // Set root descriptors in root signatures.
@@ -162,8 +161,17 @@ namespace dawn_native { namespace d3d12 {
         mFirstIndexOffsetRegisterSpace = 0;
         BindGroupIndex firstOffsetGroup{mFirstIndexOffsetRegisterSpace};
         if (GetBindGroupLayoutsMask()[firstOffsetGroup]) {
-            mFirstIndexOffsetShaderRegister =
-                ToBackend(GetBindGroupLayout(firstOffsetGroup))->GetAvailableRegister();
+            // Find the last register used on firstOffsetGroup.
+            auto bgl = ToBackend(GetBindGroupLayout(firstOffsetGroup));
+            uint32_t maxRegister = 0;
+            for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount();
+                 ++bindingIndex) {
+                uint32_t shaderRegister = bgl->GetShaderRegister(bindingIndex);
+                if (shaderRegister > maxRegister) {
+                    maxRegister = shaderRegister;
+                }
+            }
+            mFirstIndexOffsetShaderRegister = maxRegister + 1;
         } else {
             // firstOffsetGroup is not in use, we can use the first register.
             mFirstIndexOffsetShaderRegister = 0;
