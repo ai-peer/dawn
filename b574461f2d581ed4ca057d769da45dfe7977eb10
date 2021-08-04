@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fed8559_9ad72cd7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad2a503f_c81318e6",
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b95b8ed4_4324cd59",
@@ -66,6 +84,30 @@
       "writtenOn": "2021-08-04T16:34:46Z",
       "side": 1,
       "message": "probably makes sense to check internal usage here too since the whole function is \"internal\". If we only do src, then we might want to name it in a way that calls out that only src is internal.\n\nalternatively, we could consider making ImageCopyTexture a chained struct to tag the src/dst/both as internal, but that\u0027s a bit more work and doesn\u0027t appear to be all that useful.",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 815,
+        "endChar": 94
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "150316ac_4ab8d852",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Yeah, it totally makes sense, even more given that InternalUsage is both Internal and external usage!",
+      "parentUuid": "b95b8ed4_4324cd59",
       "range": {
         "startLine": 815,
         "startChar": 0,
@@ -99,6 +141,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6217bd8f_68846e03",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80886038_62eaff53",
+      "range": {
+        "startLine": 417,
+        "startChar": 32,
+        "endLine": 417,
+        "endChar": 59
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99aaa438_b30c2e60",
@@ -112,6 +178,30 @@
       "writtenOn": "2021-08-04T16:34:46Z",
       "side": 1,
       "message": "you can use just GetInternalUsage(). It already includes GetUsage() as well.",
+      "range": {
+        "startLine": 420,
+        "startChar": 19,
+        "endLine": 420,
+        "endChar": 48
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a34dd727_6c664891",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99aaa438_b30c2e60",
       "range": {
         "startLine": 420,
         "startChar": 19,
@@ -139,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3743852_a69fb955",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c9574f4_dfd7ef64",
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af73c86e_b8028dd1",
@@ -152,6 +260,30 @@
       "writtenOn": "2021-08-04T16:34:46Z",
       "side": 1,
       "message": "do we still need to skip on this condition?",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 0
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51a8ce9_43039bf9",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af73c86e_b8028dd1",
       "range": {
         "startLine": 357,
         "startChar": 0,
@@ -185,6 +317,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbfe992a_1602380c",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "505b318c_99adc7c2",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 50
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc58f0af_39ad540a",
@@ -198,6 +354,30 @@
       "writtenOn": "2021-08-04T16:34:46Z",
       "side": 1,
       "message": "I think this assert should be on the previous case, and not here",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 181,
+        "endChar": 27
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "677186cf_2d3de847",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-04T21:18:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc58f0af_39ad540a",
       "range": {
         "startLine": 181,
         "startChar": 8,
