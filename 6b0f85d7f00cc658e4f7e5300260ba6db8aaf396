@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ee19a31_8152d593",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T21:58:00Z",
+      "side": 1,
+      "message": "Yea, clarified this a bit further. We want to make sure all of the padding bytes are initialized too.",
+      "parentUuid": "bfcd8eac_6ed20808",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "35ce0733_59cf4271",
         "filename": "src/dawn_native/vulkan/BufferVk.cpp",
         "patchSetId": 4
@@ -65,6 +83,24 @@
       "writtenOn": "2021-08-04T21:10:02Z",
       "side": 1,
       "message": "Same here: why fill the whole buffer? For security?",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a2ddb09_b8e4c222",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T21:58:00Z",
+      "side": 1,
+      "message": "Yes, but also because vkCmdFillBuffer expects the size to be a multiple of 4. Added a comment",
+      "parentUuid": "35ce0733_59cf4271",
       "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
