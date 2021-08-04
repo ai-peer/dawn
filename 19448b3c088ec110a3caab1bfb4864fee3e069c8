@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f79741_cee11f7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-04T22:22:50Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\n(Hopefully the Mac bot will pass now that https://chromium-review.googlesource.com/c/chromium/src/+/3072140 has landed.)",
+      "revId": "19448b3c088ec110a3caab1bfb4864fee3e069c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
