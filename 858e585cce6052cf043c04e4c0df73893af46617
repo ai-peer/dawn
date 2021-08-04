@@ -284,6 +284,30 @@
       },
       "revId": "858e585cce6052cf043c04e4c0df73893af46617",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "563457d5_452f3655",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T19:58:27Z",
+      "side": 0,
+      "message": "fyi I\u0027m adding the device lost check in  https://dawn-review.googlesource.com/c/dawn/+/60961",
+      "parentUuid": "f2804ab8_6b884f17",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 79
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
