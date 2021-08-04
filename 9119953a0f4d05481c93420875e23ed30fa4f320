@@ -50,6 +50,24 @@
       "message": "ugh.. I think it worked..? but now for some reason there\u0027s vulkan-deps conflicts..?",
       "revId": "9119953a0f4d05481c93420875e23ed30fa4f320",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebad97e5_96c75ff9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2021-08-04T17:33:03Z",
+      "side": 1,
+      "message": "It\u0027s moved past the conflict, but is now having compile issues, again due to vulkan-deps. Strangely, the vulkan-deps revision is newer than I would think (from July 22nd, when branch for Chromium was around the 15th?), but it\u0027s also not HEAD (which is from August) https://chromium.googlesource.com/vulkan-deps/+/4f32520bef0e26366cafeae994e29c2be50ec425.",
+      "parentUuid": "7055a1be_7d1cca69",
+      "revId": "9119953a0f4d05481c93420875e23ed30fa4f320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
