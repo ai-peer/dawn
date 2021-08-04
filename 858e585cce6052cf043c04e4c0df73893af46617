@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c1915c4_dc53004e",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T15:31:14Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "8981f760_9679d471",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 47
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad127e14_ba0fae99",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-08-03T21:26:51Z",
       "side": 0,
       "message": "[1]",
+      "range": {
+        "startLine": 63,
+        "startChar": 12,
+        "endLine": 66,
+        "endChar": 0
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff712d9f_1cb873fc",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T15:31:14Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "ad127e14_ba0fae99",
       "range": {
         "startLine": 63,
         "startChar": 12,
@@ -108,6 +156,30 @@
       "side": 0,
       "message": "This simplified fix does work with the original test case, but if I change it so the sequence is \"set pipeline B, set bind group n-1, set pipeline A\", it doesn\u0027t work. This is because the bind group isn\u0027t in mBindGroupLayoutsMask so it\u0027s not set as dirty in OnSetBindGroup(), and mLastAppliedPipelineLayout \u003d\u003d mPipelineLayout is true so setting pipeline A doesn\u0027t dirty the bind groups either.\n\nI\u0027ve updated the test case as described, since it also fails without the simplified fix, so it\u0027s better than the original.\n\nAlso with the original test case, the simplified fix still does excessive dirtying of the bind groups when setting pipeline B. Although I would consider this a minor issue, since the test case could be considered as not \"best practice\". Even if it should be functional, maybe it doesn\u0027t need to perform the best.",
       "parentUuid": "2ca2fedd_94f8831d",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 79
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b5b190c_880e1dd6",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T15:31:14Z",
+      "side": 0,
+      "message": "ah, I see. thank you for the explanation! LGTM then",
+      "parentUuid": "1aadd68e_3d3a6bb6",
       "range": {
         "startLine": 66,
         "startChar": 0,
