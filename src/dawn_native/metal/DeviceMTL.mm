@@ -67,12 +67,11 @@ namespace dawn_native { namespace metal {
             return info->filterValue;
         }
 
-        void API_AVAILABLE(macos(10.15), ios(14))
-            UpdateTimestampPeriod(id<MTLDevice> device,
-                                  KalmanInfo* info,
-                                  MTLTimestamp* cpuTimestampStart,
-                                  MTLTimestamp* gpuTimestampStart,
-                                  float* timestampPeriod) {
+        void UpdateTimestampPeriod(id<MTLDevice> device,
+                                   KalmanInfo* info,
+                                   MTLTimestamp* cpuTimestampStart,
+                                   MTLTimestamp* gpuTimestampStart,
+                                   float* timestampPeriod) API_AVAILABLE(macos(11.0), ios(14.0)) {
             // The filter value is converged to an optimal value when the kalman gain is less than
             // 0.01. At this time, the weight of the measured value is too small to change the next
             // filter value, the sampling and calculations do not need to continue anymore.
@@ -149,7 +148,7 @@ namespace dawn_native { namespace metal {
                           // the more we can trust the measured value.
             mKalmanInfo->P = 1.0f;
 
-            if (@available(macos 10.15, iOS 14.0, *)) {
+            if (@available(macos 11.0, iOS 14.0, *)) {
                 // Sample CPU timestamp and GPU timestamp for first time at device creation
                 [*mMtlDevice sampleTimestamps:&mCpuTimestamp gpuTimestamp:&mGpuTimestamp];
             }
@@ -290,7 +289,7 @@ namespace dawn_native { namespace metal {
 
         // Just run timestamp period calculation when timestamp extension is enabled.
         if (IsExtensionEnabled(Extension::TimestampQuery)) {
-            if (@available(macos 10.15, iOS 14.0, *)) {
+            if (@available(macos 11.0, iOS 14.0, *)) {
                 UpdateTimestampPeriod(GetMTLDevice(), mKalmanInfo.get(), &mCpuTimestamp,
                                       &mGpuTimestamp, &mTimestampPeriod);
             }
