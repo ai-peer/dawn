@@ -260,6 +260,30 @@
       },
       "revId": "858e585cce6052cf043c04e4c0df73893af46617",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2804ab8_6b884f17",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T19:36:59Z",
+      "side": 0,
+      "message": "I think it\u0027s a device lost error and we don\u0027t have good device lost reporting. https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12fence-getcompletedvalue\n\n\"Returns the current value of the fence. If the device has been removed, the return value will be UINT64_MAX.\"\n\n+cc some Intel/Microsoft folks to help out here",
+      "parentUuid": "2f7a5716_459b7536",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 79
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
