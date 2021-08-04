@@ -16,6 +16,23 @@
       "message": "Thanks, RC.",
       "revId": "7557c0d994b95dde157a066b3da4b73cd426b823",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f4dcfbc_4e800fd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-04T20:08:46Z",
+      "side": 1,
+      "message": "Still LGTM. \n\nI expect one we start implementing the public API, we\u0027ll need to split out the concept of an \u0027internal name\u0027 vs. \u0027external name\u0027.  But we can deal with that then.",
+      "revId": "7557c0d994b95dde157a066b3da4b73cd426b823",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
