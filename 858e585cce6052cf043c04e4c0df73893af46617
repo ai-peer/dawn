@@ -236,6 +236,30 @@
       },
       "revId": "858e585cce6052cf043c04e4c0df73893af46617",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f7a5716_459b7536",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-08-04T17:58:23Z",
+      "side": 0,
+      "message": "The test case failed in DeviceBase::CheckPassedSerials() on ASSERT(completedSerial \u003c\u003d mLastSubmittedSerial), but only for Windows with an Intel GPU and D3D12. I\u0027m not sure how to debug this, because I don\u0027t have access to an Intel GPU. Any idea on what could be causing this?",
+      "parentUuid": "a7c2bdc3_127f8c12",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 79
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
