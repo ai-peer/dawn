@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d4bd10_79a9a562",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-04T21:10:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfcd8eac_6ed20808",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-04T21:10:02Z",
+      "side": 1,
+      "message": "Not sure I understand. Is this to ensure that all of the destination buffer is initialized? Otherwise, why not only copy what\u0027s needed?",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ce0733_59cf4271",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-04T21:10:02Z",
+      "side": 1,
+      "message": "Same here: why fill the whole buffer? For security?",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
