@@ -16,6 +16,196 @@
       "message": "I\u0027m still working on this, will test it with the Chromium change.",
       "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d760a2a_d04df304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "Ack. Some early comments anyway",
+      "parentUuid": "4795cb40_fe849210",
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad2a503f_c81318e6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 791,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "this file is fairly performance-sensitive code.\n\nwe can avoid the runtime check of the boolean by using a template.\nIn src/dawn_native/CommandEncoder.h\n   template \u003cbool Internal\u003e\n   void APICopyTextureToTextureHelper(const ImageCopyTexture* source,\n                                      const ImageCopyTexture* destination,\n                                      const Extent3D* copySize);\n                                           \nAnd then here, define it like:\n template \u003cbool Internal\u003e\n void CommandEncoder::APICopyTextureToTextureHelper(\n    const ImageCopyTexture* source,\n    const ImageCopyTexture* destination,\n    const Extent3D* copySize) {\n  // stuff\n  if (Internal) {\n   // stuff\n  } else {\n   // stuff\n  }   \n  // stuff\n}",
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95b8ed4_4324cd59",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 815,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "probably makes sense to check internal usage here too since the whole function is \"internal\". If we only do src, then we might want to name it in a way that calls out that only src is internal.\n\nalternatively, we could consider making ImageCopyTexture a chained struct to tag the src/dst/both as internal, but that\u0027s a bit more work and doesn\u0027t appear to be all that useful.",
+      "range": {
+        "startLine": 815,
+        "startChar": 0,
+        "endLine": 815,
+        "endChar": 94
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80886038_62eaff53",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "instead of a bool, let\u0027s just make a separate function like \"ValidateInternalCanUseAs\"",
+      "range": {
+        "startLine": 417,
+        "startChar": 32,
+        "endLine": 417,
+        "endChar": 59
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99aaa438_b30c2e60",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "you can use just GetInternalUsage(). It already includes GetUsage() as well.",
+      "range": {
+        "startLine": 420,
+        "startChar": 19,
+        "endLine": 420,
+        "endChar": 48
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9574f4_dfd7ef64",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "it should always be supported, so I think we can just \nreturn {\"dawn-internal-usages\"}",
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af73c86e_b8028dd1",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "do we still need to skip on this condition?",
+      "range": {
+        "startLine": 357,
+        "startChar": 0,
+        "endLine": 359,
+        "endChar": 0
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "505b318c_99adc7c2",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "nit: probably should not add this to the chain if !usageCopySrc",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 376,
+        "endChar": 50
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc58f0af_39ad540a",
+        "filename": "src/tests/unittests/validation/InternalUsageValidationTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T16:34:46Z",
+      "side": 1,
+      "message": "I think this assert should be on the previous case, and not here",
+      "range": {
+        "startLine": 181,
+        "startChar": 8,
+        "endLine": 181,
+        "endChar": 27
+      },
+      "revId": "b574461f2d581ed4ca057d769da45dfe7977eb10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
