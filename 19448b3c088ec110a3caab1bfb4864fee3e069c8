@@ -16,6 +16,29 @@
       "message": "PTAL. Thanks!\n\n(Hopefully the Mac bot will pass now that https://chromium-review.googlesource.com/c/chromium/src/+/3072140 has landed.)",
       "revId": "19448b3c088ec110a3caab1bfb4864fee3e069c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1296efc_dba75dd9",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-04T22:27:55Z",
+      "side": 1,
+      "message": "let\u0027s not ASSERT since users can still force Chrome to pass this toggle. Unless of course we just remove the Toggle completely. looks like you want to do this incrementally though, so instead lets:\n\nGetDevice()-\u003eEmitLog(WGPULoggingType_Warning, ...); to tell people we ignored the toggle.",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 71
+      },
+      "revId": "19448b3c088ec110a3caab1bfb4864fee3e069c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
