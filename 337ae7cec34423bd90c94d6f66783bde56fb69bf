@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ef9a9d5_61f42fd7",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-05T21:47:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "445d3303_84a0a727",
+      "range": {
+        "startLine": 353,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74b1eb3b_cb081ec5",
@@ -95,6 +119,30 @@
       "writtenOn": "2021-08-05T21:31:06Z",
       "side": 1,
       "message": "[1] the dstTexture is copied here, so it needs public COPY_SRC usage, not internal usage",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 93
+      },
+      "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89e9c75_ddad2327",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-05T21:47:30Z",
+      "side": 1,
+      "message": "Oooh, it makes sense. We would need then a CopyTextureToBufferInternal as well? Although it is probably not worthy?",
+      "parentUuid": "74b1eb3b_cb081ec5",
       "range": {
         "startLine": 450,
         "startChar": 0,
