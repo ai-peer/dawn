@@ -39,6 +39,30 @@
       },
       "revId": "19448b3c088ec110a3caab1bfb4864fee3e069c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2095173_1f384091",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-05T13:06:32Z",
+      "side": 1,
+      "message": "I tried, but there\u0027s already an assert in ShaderModuleBase::GetTintProgram(), so if we continue this codepath it\u0027ll just assert there instead. I tried doing an early-out, but that just causes an assert on an empty shader.",
+      "parentUuid": "b1296efc_dba75dd9",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 71
+      },
+      "revId": "19448b3c088ec110a3caab1bfb4864fee3e069c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
