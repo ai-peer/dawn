@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5b4093d1_225150ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-05T21:31:06Z",
+      "side": 1,
+      "message": "Kai, please review as well!",
+      "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "927a3d66_122eaece",
         "filename": "src/tests/end2end/CopyTests.cpp",
         "patchSetId": 27
@@ -19,6 +36,53 @@
         "startChar": 0,
         "endLine": 354,
         "endChar": 19
+      },
+      "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445d3303_84a0a727",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-05T21:31:06Z",
+      "side": 1,
+      "message": "See comment at [1]. Please add a comment here saying why, and then we can put in a DAWN_TEST_UNSUPPORTED_IF(!usageCopySrc \u0026\u0026 copyWithinSameTexture);  here\n\n(that macro will do the early return and do a GTEST skip)",
+      "parentUuid": "927a3d66_122eaece",
+      "range": {
+        "startLine": 353,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74b1eb3b_cb081ec5",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 450,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-05T21:31:06Z",
+      "side": 1,
+      "message": "[1] the dstTexture is copied here, so it needs public COPY_SRC usage, not internal usage",
+      "range": {
+        "startLine": 450,
+        "startChar": 0,
+        "endLine": 450,
+        "endChar": 93
       },
       "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
