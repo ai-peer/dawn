@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52168cfb_2b8ec4ba",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-05T13:08:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "7ee19a31_8152d593",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35ce0733_59cf4271",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Yes, but also because vkCmdFillBuffer expects the size to be a multiple of 4. Added a comment",
       "parentUuid": "35ce0733_59cf4271",
+      "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7abf073_dddf68a4",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-05T13:08:28Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4a2ddb09_b8e4c222",
       "revId": "6b0f85d7f00cc658e4f7e5300260ba6db8aaf396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
