@@ -308,6 +308,30 @@
       },
       "revId": "858e585cce6052cf043c04e4c0df73893af46617",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bb2ea9_1d4fe0b3",
+        "filename": "src/dawn_native/BindGroupTracker.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-08-05T05:00:17Z",
+      "side": 0,
+      "message": "Thanks for your explanation!\n\nThe test \"DrawThenChangePipelineTwiceAndBindGroup\" fails on all Intel GPUs with the latest driver.\n- On Skylake (HD530), the rendering result is incorrect\n- On Kabylake (HD630) and Tiger Lake (Iris Xe Graphics), the device lost happens as Austin said. With Austin\u0027s CL we can see the error code is 0x887A0006 (DXGI_ERROR_DEVICE_HUNG).\n\nSo it is probably exposing an Intel driver issue. Maybe we can temporarily skip this test on Intel/D3D12 in this CL ? (DAWN_SUPPRESS_TEST_IF(IsD3D12() \u0026\u0026 IsIntel()))",
+      "parentUuid": "563457d5_452f3655",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 79
+      },
+      "revId": "858e585cce6052cf043c04e4c0df73893af46617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
