@@ -16,6 +16,23 @@
       "message": "Hi, this change is very small and optional.\n\nThe resulting effect that will be picked up by https://dawn-review.googlesource.com/c/dawn/+/60764 from this change is a reduced number of descriptor ranges that make it into the root parameter.\n\nIIUC the size of the descriptor table affects the pipeline creation performance, but not in a significant way.\n\nThank you for your time!\nMichael",
       "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faf885c2_71887b96",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-05T23:52:24Z",
+      "side": 1,
+      "message": "Change looks consistent with this line, so LGTM",
+      "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
