@@ -276,7 +276,8 @@ namespace dawn_native { namespace d3d12 {
     void PlatformFunctions::LoadSPIRVToDXIL() {
         if (!mSPIRVToDXILLib.Open("spirv_to_dxil.dll") ||
             !mSPIRVToDXILLib.GetProc(&spirvToDxil, "spirv_to_dxil") ||
-            !mSPIRVToDXILLib.GetProc(&spirvToDxilFree, "spirv_to_dxil_free")) {
+            !mSPIRVToDXILLib.GetProc(&spirvToDxilFree, "spirv_to_dxil_free") ||
+            !mSPIRVToDXILLib.GetProc(&spirvToDxilGetVersion, "spirv_to_dxil_get_version")) {
             mSPIRVToDXILLib.Close();
         }
     }
