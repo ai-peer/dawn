@@ -85,6 +85,11 @@ namespace dawn_native { namespace d3d12 {
                                                                  SingleShaderStage stage,
                                                                  PipelineLayout* layout) const;
 
+        ResultOrError<PersistentCacheKey> CreateWGSLKey(const char* entryPointName,
+                                                        SingleShaderStage stage,
+                                                        PipelineLayout* layout,
+                                                        uint32_t compileFlags) const;
+
         ResultOrError<PersistentCacheKey> CreateHLSLKey(const char* entryPointName,
                                                         SingleShaderStage stage,
                                                         const std::string& hlslSource,
