@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "956da6eb_7a278c91",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-05T22:00:47Z",
+      "side": 1,
+      "message": "LGTM, Kai PTAL as well",
+      "revId": "480c3ea49716ef742e7095d17678f574091006fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28fcf303_4436c6e2",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-05T22:00:47Z",
+      "side": 1,
+      "message": "nit: probably ForceSetToggle(Toggle::UseTintGenerator, true)",
+      "range": {
+        "startLine": 142,
+        "startChar": 12,
+        "endLine": 142,
+        "endChar": 64
+      },
+      "revId": "480c3ea49716ef742e7095d17678f574091006fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
