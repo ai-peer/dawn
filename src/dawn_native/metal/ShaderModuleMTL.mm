@@ -332,11 +332,14 @@ namespace dawn_native { namespace metal {
         NSRef<NSString> mslSource = AcquireNSRef([[NSString alloc] initWithUTF8String:msl.c_str()]);
 
         NSRef<MTLCompileOptions> compileOptions = AcquireNSRef([[MTLCompileOptions alloc] init]);
+#if (defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 110000) || \
+    (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 140000)
         if (hasInvariantAttribute) {
             if (@available(macOS 11.0, iOS 13.0, *)) {
                 (*compileOptions).preserveInvariance = true;
             }
         }
+#endif
         auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
         NSError* error = nullptr;
         NSPRef<id<MTLLibrary>> library =

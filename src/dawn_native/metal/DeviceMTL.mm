@@ -43,7 +43,8 @@
 namespace dawn_native { namespace metal {
 
     namespace {
-
+#if (defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 110000) || \
+    (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 140000)
         // The time interval for each round of kalman filter
         static constexpr uint64_t kFilterIntervalInMs = static_cast<uint64_t>(NSEC_PER_SEC / 10);
 
@@ -67,12 +68,11 @@ namespace dawn_native { namespace metal {
             return info->filterValue;
         }
 
-        void API_AVAILABLE(macos(10.15), ios(14))
-            UpdateTimestampPeriod(id<MTLDevice> device,
-                                  KalmanInfo* info,
-                                  MTLTimestamp* cpuTimestampStart,
-                                  MTLTimestamp* gpuTimestampStart,
-                                  float* timestampPeriod) {
+        void UpdateTimestampPeriod(id<MTLDevice> device,
+                                   KalmanInfo* info,
+                                   MTLTimestamp* cpuTimestampStart,
+                                   MTLTimestamp* gpuTimestampStart,
+                                   float* timestampPeriod) API_AVAILABLE(macos(11.0), ios(14)) {
             // The filter value is converged to an optimal value when the kalman gain is less than
             // 0.01. At this time, the weight of the measured value is too small to change the next
             // filter value, the sampling and calculations do not need to continue anymore.
@@ -102,7 +102,7 @@ namespace dawn_native { namespace metal {
                 *gpuTimestampStart = gpuTimestampEnd;
             }
         }
-
+#endif
     }  // namespace
 
     // static
@@ -140,19 +140,22 @@ namespace dawn_native { namespace metal {
             mTimestampPeriod =
                 gpu_info::IsIntel(GetAdapter()->GetPCIInfo().vendorId) ? 83.333f : 1.0f;
 
-            // Initialize kalman filter parameters
-            mKalmanInfo = std::make_unique<KalmanInfo>();
-            mKalmanInfo->filterValue = 0.0f;
-            mKalmanInfo->kalmanGain = 0.5f;
-            mKalmanInfo->R =
-                0.0001f;  // The smaller this value is, the smaller the error of measured value is,
-                          // the more we can trust the measured value.
-            mKalmanInfo->P = 1.0f;
+#if (defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 110000) || \
+    (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 140000)
+            if (@available(macos 11.0, iOS 14.0, *)) {
+                // Initialize kalman filter parameters
+                mKalmanInfo = std::make_unique<KalmanInfo>();
+                mKalmanInfo->filterValue = 0.0f;
+                mKalmanInfo->kalmanGain = 0.5f;
+                mKalmanInfo->R =
+                    0.0001f;  // The smaller this value is, the smaller the error of measured value
+                              // is, the more we can trust the measured value.
+                mKalmanInfo->P = 1.0f;
 
-            if (@available(macos 10.15, iOS 14.0, *)) {
                 // Sample CPU timestamp and GPU timestamp for first time at device creation
                 [*mMtlDevice sampleTimestamps:&mCpuTimestamp gpuTimestamp:&mGpuTimestamp];
             }
+#endif
         }
 
         return DeviceBase::Initialize(new Queue(this));
@@ -288,13 +291,16 @@ namespace dawn_native { namespace metal {
     MaybeError Device::TickImpl() {
         DAWN_TRY(SubmitPendingCommandBuffer());
 
+#if (defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 110000) || \
+    (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 140000)
         // Just run timestamp period calculation when timestamp extension is enabled.
         if (IsExtensionEnabled(Extension::TimestampQuery)) {
-            if (@available(macos 10.15, iOS 14.0, *)) {
+            if (@available(macos 11.0, iOS 14.0, *)) {
                 UpdateTimestampPeriod(GetMTLDevice(), mKalmanInfo.get(), &mCpuTimestamp,
                                       &mGpuTimestamp, &mTimestampPeriod);
             }
         }
+#endif
 
         return {};
     }
