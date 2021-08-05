@@ -16,6 +16,23 @@
       "message": "This can\u0027t land till the corresponding CLs land in Blink and Skia, but in terms of deprecation I think we\u0027re well past the grace period where we can remove these.",
       "revId": "83be61144423bf6b7f07382019bcfabb2c61b791",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f362f27c_9fc46e6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-05T20:29:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "83be61144423bf6b7f07382019bcfabb2c61b791",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
