@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1dc2dc5_148b450f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-05T23:00:15Z",
+      "side": 1,
+      "message": "Dawn uses FXC with shader model 5.1, so it\u0027s possible to enable `useBindingsAsRegisters \u003d true` unconditionally.\n\nI\u0027m unsure if it\u0027s better to avoid the branching and just do the above or to keep the option to compact registers available (if we want to target sm50 and avoid the max slot count, it\u0027s possible to compact the register space even further--by splitting up non-samplers registers into cbv, uav, and srv registers seperately). If the latter, I\u0027d like to add some whitebox tests for both settings.",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
