@@ -56,9 +56,9 @@ namespace dawn_native { namespace d3d12 {
             PipelineLayout* layout,
             std::string* remappedEntryPointName) const;
 
-        ResultOrError<PersistentCacheKey> CreateHLSLKey(const char* entryPointName,
+        ResultOrError<PersistentCacheKey> CreateWGSLKey(const char* entryPointName,
                                                         SingleShaderStage stage,
-                                                        const std::string& hlslSource,
+                                                        PipelineLayout* layout,
                                                         uint32_t compileFlags) const;
 
         ResultOrError<uint64_t> GetDXCompilerVersion() const;

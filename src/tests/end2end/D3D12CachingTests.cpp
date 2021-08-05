@@ -256,4 +256,6 @@ TEST_P(D3D12CachingTests, ReuseShaderWithMultipleEntryPoints) {
     EXPECT_EQ(mPersistentCache.mCache.size(), 2u);
 }
 
+// TODO vertex index test
+
 DAWN_INSTANTIATE_TEST(D3D12CachingTests, D3D12Backend());
