@@ -766,13 +766,6 @@
                 ]
             },
             {
-                "name": "create render pipeline 2",
-                "returns": "render pipeline",
-                "args": [
-                    {"name": "descriptor", "type": "render pipeline descriptor", "annotation": "const*"}
-                ]
-            },
-            {
                 "name": "create sampler",
                 "returns": "sampler",
                 "args": [
@@ -1654,10 +1647,6 @@
             {"name": "multisample", "type": "multisample state"},
             {"name": "fragment", "type": "fragment state", "annotation": "const*", "optional": true}
         ]
-    },
-    "render pipeline descriptor 2": {
-        "category": "typedef",
-        "type": "render pipeline descriptor"
     },
 
     "sampler": {
