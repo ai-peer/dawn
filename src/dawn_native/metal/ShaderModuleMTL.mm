@@ -184,7 +184,6 @@ namespace dawn_native { namespace metal {
         std::string remappedEntryPointName;
         std::string msl;
         bool hasInvariantAttribute = false;
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator));
         DAWN_TRY_ASSIGN(
             msl, TranslateToMSLWithTint(entryPointName, stage, layout, sampleMask, renderPipeline,
                                         vertexState, &remappedEntryPointName,
