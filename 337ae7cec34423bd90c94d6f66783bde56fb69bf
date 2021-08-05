@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "927a3d66_122eaece",
+        "filename": "src/tests/end2end/CopyTests.cpp",
+        "patchSetId": 27
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-05T20:39:50Z",
+      "side": 1,
+      "message": "This still seems to be needed to pass the copy within same texture tests.",
+      "range": {
+        "startLine": 353,
+        "startChar": 0,
+        "endLine": 354,
+        "endChar": 19
+      },
+      "revId": "337ae7cec34423bd90c94d6f66783bde56fb69bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
