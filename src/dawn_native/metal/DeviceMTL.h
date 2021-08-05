@@ -138,12 +138,15 @@ namespace dawn_native { namespace metal {
 
         // The current estimation of timestamp period
         float mTimestampPeriod = 1.0f;
+#if (defined(MAC_OS_X_VERSION_MAX_ALLOWED) && MAC_OS_X_VERSION_MAX_ALLOWED >= 110000) || \
+    (defined(__IPHONE_OS_VERSION_MAX_ALLOWED) && __IPHONE_OS_VERSION_MAX_ALLOWED >= 140000)
         // The base of CPU timestamp and GPU timestamp to measure the linear regression between GPU
         // and CPU timestamps.
-        MTLTimestamp mCpuTimestamp API_AVAILABLE(macos(10.15), ios(14.0)) = 0;
-        MTLTimestamp mGpuTimestamp API_AVAILABLE(macos(10.15), ios(14.0)) = 0;
+        MTLTimestamp mCpuTimestamp API_AVAILABLE(macos(11.0), ios(14.0)) = 0;
+        MTLTimestamp mGpuTimestamp API_AVAILABLE(macos(11.0), ios(14.0)) = 0;
         // The parameters for kalman filter
         std::unique_ptr<KalmanInfo> mKalmanInfo;
+#endif
     };
 
 }}  // namespace dawn_native::metal
