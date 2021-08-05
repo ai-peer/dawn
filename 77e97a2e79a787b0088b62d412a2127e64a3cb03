@@ -16,6 +16,23 @@
       "message": "Dawn uses FXC with shader model 5.1, so it\u0027s possible to enable `useBindingsAsRegisters \u003d true` unconditionally.\n\nI\u0027m unsure if it\u0027s better to avoid the branching and just do the above or to keep the option to compact registers available (if we want to target sm50 and avoid the max slot count, it\u0027s possible to compact the register space even further--by splitting up non-samplers registers into cbv, uav, and srv registers seperately). If the latter, I\u0027d like to add some whitebox tests for both settings.",
       "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "252b4e9b_83e1eabe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-05T23:15:28Z",
+      "side": 1,
+      "message": "This change is needed because dawn\u0027s d3d12 backend currently allows register overlap between samplers and non-samplers.\n\ne.g. the following:\n\n    [[group(0), binding(0)]] var sampler0 : sampler;\n    [[group(0), binding(1)]] var texture0 : texture_2d\u003cf32\u003e;\n\nwould result in the HLSL registers `s0` and `t0`, which unfortunately SPIR-V cannot represent. This change will preserve the binding numbers and result in `s0` and `t1` in the output DXIL.\n\nAgain, thanks for your time!",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
