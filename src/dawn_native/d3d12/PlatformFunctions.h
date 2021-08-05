@@ -100,6 +100,8 @@ namespace dawn_native { namespace d3d12 {
 
         decltype(&spirv_to_dxil_free) spirvToDxilFree = nullptr;
 
+        decltype(&spirv_to_dxil_get_version) spirvToDxilGetVersion = nullptr;
+
       private:
         MaybeError LoadD3D12();
         MaybeError LoadD3D11();
