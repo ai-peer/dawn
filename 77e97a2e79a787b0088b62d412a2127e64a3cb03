@@ -33,6 +33,74 @@
       "message": "This change is needed because dawn\u0027s d3d12 backend currently allows register overlap between samplers and non-samplers.\n\ne.g. the following:\n\n    [[group(0), binding(0)]] var sampler0 : sampler;\n    [[group(0), binding(1)]] var texture0 : texture_2d\u003cf32\u003e;\n\nwould result in the HLSL registers `s0` and `t0`, which unfortunately SPIR-V cannot represent. This change will preserve the binding numbers and result in `s0` and `t1` in the output DXIL.\n\nAgain, thanks for your time!",
       "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "039c15c9_15c3840d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T00:54:57Z",
+      "side": 1,
+      "message": "I\u0027m not very familiar, but lgtm I think",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c506d595_7dd908f0",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T00:54:57Z",
+      "side": 1,
+      "message": "decriptor -\u003e descriptor",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc32fea9_3b8b6a15",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T00:54:57Z",
+      "side": 1,
+      "message": "This subtraction seems like it may overflow. That\u0027s probably fine, but also I think this would be a little clearer:\n\n previous-\u003eBaseShaderRegister + previous-\u003eNumDescriptors \u003d\u003d current-\u003eBaseShaderRegister",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b39d54a8_2e3a4be1",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T00:54:57Z",
+      "side": 1,
+      "message": "nit: I think dawn uses the kRegisterSpacePlaceholder style for constants",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

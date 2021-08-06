@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f71ad1c6_5077e264",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T00:54:57Z",
+      "side": 0,
+      "message": "TODO disappeared, but I think it\u0027s still relevant?",
+      "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1ff1343_e1c7a4b9",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T00:54:57Z",
+      "side": 0,
+      "message": "same",
+      "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
