@@ -50,6 +50,24 @@
       "message": "the -\u003e they?",
       "revId": "030eb31544042079edd5b666c1664c27cdcd28be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cb05707_6851cfc0",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-06T15:07:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d660802c_21202581",
+      "revId": "030eb31544042079edd5b666c1664c27cdcd28be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
