@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1bfb9c01_04118f12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-06T00:33:31Z",
+      "side": 1,
+      "message": "LGTM too. Let me know if you want us to submit this for you",
+      "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "faf885c2_71887b96",
         "filename": "src/dawn_native/BindGroupLayout.cpp",
         "patchSetId": 4
