@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc41f5d2_e46a143b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-06T00:07:13Z",
+      "side": 1,
+      "message": "We\u0027re currently avoiding statically loading (or linking) spirv_to_dxil.dll since Mesa uses a different build system to Dawn (it uses meson) and it is non-trivial to convert it into a GN/CMake build.\n\nThis change does not include spirv_to_dxil and is a work-in-progress pending a decision on how this should be done.\n- We can ship the DLL as a binary blob with Dawn\u0027s source, although I know shipping binary blobs gets icky in many ways\n- We can let users build the DLL separately and make it entirely optional, although without CI testing this has a potential for regressions.\n- Some other option?\n\nThanks again!",
+      "revId": "caf4ff9d538f80ea6ffb4627e1e678d9fcc38c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
