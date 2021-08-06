@@ -95,7 +95,6 @@ namespace dawn_native {
 
         std::unique_ptr<tint::Program> tintProgram;
         std::unique_ptr<TintSource> tintSource;
-        std::vector<uint32_t> spirv;
     };
 
     MaybeError ValidateShaderModuleDescriptor(DeviceBase* device,
@@ -255,10 +254,8 @@ namespace dawn_native {
         std::vector<uint32_t> mOriginalSpirv;
         std::string mWgsl;
 
-        // Data computed from what is in the descriptor. mSpirv is set iff !UseTintGenerator while
-        // mTintProgram is set iff UseTintGenerator.
+        // Data computed from what is in the descriptor.
         EntryPointMetadataTable mEntryPoints;
-        std::vector<uint32_t> mSpirv;
         std::unique_ptr<tint::Program> mTintProgram;
         std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
 

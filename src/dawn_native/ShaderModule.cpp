@@ -484,21 +484,6 @@ namespace dawn_native {
             return std::move(program);
         }
 
-        ResultOrError<std::vector<uint32_t>> ModuleToSPIRV(const tint::Program* program) {
-            std::ostringstream errorStream;
-            errorStream << "Tint SPIR-V writer failure:" << std::endl;
-
-            tint::writer::spirv::Options options;
-            options.emit_vertex_point_size = true;
-            auto result = tint::writer::spirv::Generate(program, options);
-            if (!result.success) {
-                errorStream << "Generator: " << result.error << std::endl;
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-
-            return std::move(result.spirv);
-        }
-
         std::vector<uint64_t> GetBindGroupMinBufferSizes(
             const EntryPointMetadata::BindingGroupInfoMap& shaderBindings,
             const BindGroupLayoutBase* layout) {
@@ -527,44 +512,6 @@ namespace dawn_native {
             }
 
             return requiredBufferSizes;
-        }
-
-        ResultOrError<std::vector<uint32_t>> RunRobustBufferAccessPass(
-            const std::vector<uint32_t>& spirv) {
-            spvtools::Optimizer opt(SPV_ENV_VULKAN_1_1);
-
-            std::ostringstream errorStream;
-            errorStream << "SPIRV Optimizer failure:" << std::endl;
-            opt.SetMessageConsumer([&errorStream](spv_message_level_t level, const char*,
-                                                  const spv_position_t& position,
-                                                  const char* message) {
-                switch (level) {
-                    case SPV_MSG_FATAL:
-                    case SPV_MSG_INTERNAL_ERROR:
-                    case SPV_MSG_ERROR:
-                        errorStream << "error: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_WARNING:
-                        errorStream << "warning: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    case SPV_MSG_INFO:
-                        errorStream << "info: line " << position.index << ": " << message
-                                    << std::endl;
-                        break;
-                    default:
-                        break;
-                }
-            });
-            opt.RegisterPass(spvtools::CreateGraphicsRobustAccessPass());
-
-            std::vector<uint32_t> result;
-            if (!opt.Run(spirv.data(), spirv.size(), &result, spvtools::ValidatorOptions(),
-                         false)) {
-                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
-            }
-            return std::move(result);
         }
 
         MaybeError ValidateCompatibilityWithBindGroupLayout(DeviceBase* device,
@@ -693,13 +640,6 @@ namespace dawn_native {
                     }
 
                     case BindingInfoType::Sampler:
-                        // Allow mismatched samplers when using SPIRV-Cross since we can't reflect
-                        // data that's precise enough.
-                        // TODO(dawn:571): Remove once we use Tint unconditionnally for reflection.
-                        if (!device->IsToggleEnabled(Toggle::UseTintGenerator)) {
-                            break;
-                        }
-
                         if ((layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison) !=
                             shaderInfo.sampler.isComparison) {
                             return DAWN_VALIDATION_ERROR(
@@ -1238,7 +1178,7 @@ namespace dawn_native {
         default;
 
     bool ShaderModuleParseResult::HasParsedShader() const {
-        return tintProgram != nullptr || spirv.size() > 0;
+        return tintProgram != nullptr;
     }
 
     // TintSource is a PIMPL container for a tint::Source::File, which needs to be kept alive for as
@@ -1304,16 +1244,9 @@ namespace dawn_native {
             }
 
             std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
-            if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
-                tint::Program program;
-                DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
-                parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
-            } else {
-                if (device->IsValidationEnabled()) {
-                    DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
-                }
-                parseResult->spirv = std::move(spirv);
-            }
+            tint::Program program;
+            DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages));
+            parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
         } else if (wgslDesc) {
             auto tintSource = std::make_unique<TintSource>("", wgslDesc->source);
 
@@ -1326,16 +1259,8 @@ namespace dawn_native {
             tint::Program program;
             DAWN_TRY_ASSIGN(program, ParseWGSL(&tintSource->file, outMessages));
 
-            if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
-                parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
-                parseResult->tintSource = std::move(tintSource);
-            } else {
-                std::vector<uint32_t> spirv;
-                DAWN_TRY_ASSIGN(spirv, ModuleToSPIRV(&program));
-                DAWN_TRY(ValidateSpirv(spirv.data(), spirv.size()));
-
-                parseResult->spirv = std::move(spirv);
-            }
+            parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
+            parseResult->tintSource = std::move(tintSource);
         }
 
         return {};
@@ -1514,13 +1439,7 @@ namespace dawn_native {
                a->mWgsl == b->mWgsl;
     }
 
-    const std::vector<uint32_t>& ShaderModuleBase::GetSpirv() const {
-        ASSERT(!GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator));
-        return mSpirv;
-    }
-
     const tint::Program* ShaderModuleBase::GetTintProgram() const {
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator));
         return mTintProgram.get();
     }
 
@@ -1623,19 +1542,8 @@ namespace dawn_native {
     MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult) {
         mTintProgram = std::move(parseResult->tintProgram);
         mTintSource = std::move(parseResult->tintSource);
-        mSpirv = std::move(parseResult->spirv);
 
-        if (GetDevice()->IsToggleEnabled(Toggle::UseTintGenerator)) {
-            DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingTint(GetDevice(), mTintProgram.get()));
-        } else {
-            // If not using Tint to generate backend code, run the robust buffer access pass now
-            // since all backends will use this SPIR-V. If Tint is used, the robustness pass should
-            // be run per-backend.
-            if (GetDevice()->IsRobustnessEnabled()) {
-                DAWN_TRY_ASSIGN(mSpirv, RunRobustBufferAccessPass(mSpirv));
-            }
-            DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingSPIRVCross(GetDevice(), mSpirv));
-        }
+        DAWN_TRY_ASSIGN(mEntryPoints, ReflectShaderUsingTint(GetDevice(), mTintProgram.get()));
 
         return {};
     }
