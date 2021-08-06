@@ -16,6 +16,23 @@
       "message": "Thank you for the review, I think I\u0027ve addressed the issues below!",
       "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1956aa51_eb517848",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T22:15:57Z",
+      "side": 1,
+      "message": "LGTM, but will still need another review",
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
