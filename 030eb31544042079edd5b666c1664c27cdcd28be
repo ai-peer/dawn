@@ -16,6 +16,23 @@
       "message": "PTAL! I\u0027m pretty impressed the fuzzer found this.",
       "revId": "030eb31544042079edd5b666c1664c27cdcd28be",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d660802c_21202581",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-06T03:20:04Z",
+      "side": 1,
+      "message": "the -\u003e they?",
+      "revId": "030eb31544042079edd5b666c1664c27cdcd28be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
