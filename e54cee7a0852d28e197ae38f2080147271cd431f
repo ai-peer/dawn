@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95ffcf78_e2f06680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-08-06T00:52:59Z",
+      "side": 1,
+      "message": "Hi Austin, I need to roll Tint right now as I need https://dawn-review.googlesource.com/c/tint/+/61020 to check if [[sample_mask]] is used in fragment input.\n\nPTAL, thanks!",
+      "revId": "e54cee7a0852d28e197ae38f2080147271cd431f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
