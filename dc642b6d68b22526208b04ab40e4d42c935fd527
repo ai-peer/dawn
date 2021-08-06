@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1564c5f4_1e4e18fd",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-06T22:10:56Z",
+      "side": 0,
+      "message": "You\u0027re definitely right. I\u0027ll add this back in.",
+      "parentUuid": "f71ad1c6_5077e264",
+      "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1ff1343_e1c7a4b9",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-08-06T00:54:57Z",
       "side": 0,
       "message": "same",
+      "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "643fabc1_b68bc26e",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-06T22:10:56Z",
+      "side": 0,
+      "message": "Ack",
+      "parentUuid": "f1ff1343_e1c7a4b9",
       "revId": "dc642b6d68b22526208b04ab40e4d42c935fd527",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

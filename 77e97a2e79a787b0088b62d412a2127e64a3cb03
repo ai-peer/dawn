@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80e99b83_11aaaba4",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-06T22:10:56Z",
+      "side": 1,
+      "message": "Good catch, thanks",
+      "parentUuid": "c506d595_7dd908f0",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc32fea9_3b8b6a15",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d251650_cdb222a6",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-06T22:10:56Z",
+      "side": 1,
+      "message": "Good catch. I think my code assumes that the base registers are monotomically increasing with the range index, but that may not be always true.\n\nYour version is also easier to read, for sure.",
+      "parentUuid": "fc32fea9_3b8b6a15",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b39d54a8_2e3a4be1",
@@ -99,6 +135,24 @@
       "writtenOn": "2021-08-06T00:54:57Z",
       "side": 1,
       "message": "nit: I think dawn uses the kRegisterSpacePlaceholder style for constants",
+      "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4d1250_5b436473",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-06T22:10:56Z",
+      "side": 1,
+      "message": "Sounds good. It also looks like dawn prefers `static constexpr` instead of just `const`, so I will use that as well.",
+      "parentUuid": "b39d54a8_2e3a4be1",
       "revId": "77e97a2e79a787b0088b62d412a2127e64a3cb03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
