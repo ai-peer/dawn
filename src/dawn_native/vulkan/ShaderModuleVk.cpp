@@ -111,7 +111,6 @@ namespace dawn_native { namespace vulkan {
 
         // Rather than use a new ParseResult object, we just reuse the original parseResult
         parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
-        parseResult->spirv = spirv;
 
         DAWN_TRY(InitializeBase(parseResult));
 
