@@ -211,16 +211,15 @@ namespace dawn_native { namespace d3d12 {
         // with the correct registers assigned to each interface variable.
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
-            const auto& bindingOffsets = bgl->GetBindingOffsets();
             const auto& groupBindingInfo = moduleBindingInfo[group];
             for (const auto& it : groupBindingInfo) {
                 BindingNumber binding = it.first;
                 auto const& bindingInfo = it.second;
                 BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
-                uint32_t bindingOffset = bindingOffsets[bindingIndex];
                 BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
                                              static_cast<uint32_t>(binding)};
-                BindingPoint dstBindingPoint{static_cast<uint32_t>(group), bindingOffset};
+                BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
+                                             bgl->GetShaderRegister(bindingIndex)};
                 if (srcBindingPoint != dstBindingPoint) {
                     bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
                 }
@@ -362,7 +361,6 @@ namespace dawn_native { namespace d3d12 {
 
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
             const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
-            const auto& bindingOffsets = bgl->GetBindingOffsets();
             const auto& groupBindingInfo = moduleBindingInfo[group];
             for (const auto& it : groupBindingInfo) {
                 const EntryPointMetadata::ShaderBindingInfo& bindingInfo = it.second;
@@ -377,8 +375,8 @@ namespace dawn_native { namespace d3d12 {
                      bgl->GetBindingInfo(bindingIndex).buffer.type ==
                          wgpu::BufferBindingType::Storage);
 
-                uint32_t bindingOffset = bindingOffsets[bindingIndex];
-                compiler.set_decoration(bindingInfo.id, spv::DecorationBinding, bindingOffset);
+                compiler.set_decoration(bindingInfo.id, spv::DecorationBinding,
+                                        bgl->GetShaderRegister(bindingIndex));
                 if (forceStorageBufferAsUAV) {
                     compiler.set_hlsl_force_storage_buffer_as_uav(
                         static_cast<uint32_t>(group), static_cast<uint32_t>(bindingNumber));
