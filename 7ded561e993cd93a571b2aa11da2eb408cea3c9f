@@ -16,6 +16,46 @@
       "message": "Austin, Kai: PTAL. Thanks!",
       "revId": "7ded561e993cd93a571b2aa11da2eb408cea3c9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89c35d08_17d22715",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T20:32:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7ded561e993cd93a571b2aa11da2eb408cea3c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc0e4cb_92fff3e5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T20:32:00Z",
+      "side": 1,
+      "message": "realized we should probably use adapter-\u003eGetBackendType() or put this in the backends in Device::Initialize because the Vulkan backend can run on Windows/Mac with Swiftshader as well. More generally, checking the backend type will be more exact than checking platform #defines",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 64
+      },
+      "revId": "7ded561e993cd93a571b2aa11da2eb408cea3c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
