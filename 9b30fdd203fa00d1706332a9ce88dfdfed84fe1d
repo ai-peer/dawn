@@ -16,6 +16,23 @@
       "message": "PTAL, and if you have any ideas for how we could detect and produce warnings for using the deprecated flag names, please let me know!",
       "revId": "9b30fdd203fa00d1706332a9ce88dfdfed84fe1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03872666_0be0e6c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T23:12:54Z",
+      "side": 1,
+      "message": "LGTM! I think the [[deprecated]] attribute works on enums? We could try putting it in the generated header.\n\nhttps://en.cppreference.com/w/cpp/language/attributes/deprecated",
+      "revId": "9b30fdd203fa00d1706332a9ce88dfdfed84fe1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
