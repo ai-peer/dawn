@@ -24,12 +24,16 @@
 #include "dawn_native/Pipeline.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/RenderPipeline.h"
-#include "dawn_native/SpirvUtils.h"
+#if defined(DAWN_USE_SPIRV_CROSS)
+#    include "dawn_native/SpirvUtils.h"
+#endif
 #include "dawn_native/TintUtils.h"
 
 #include <spirv-tools/libspirv.hpp>
 #include <spirv-tools/optimizer.hpp>
-#include <spirv_cross.hpp>
+#if defined(DAWN_USE_SPIRV_CROSS)
+#    include <spirv_cross.hpp>
+#endif
 
 // Tint include must be after spirv_cross.hpp, because spirv-cross has its own
 // version of spirv_headers. We also need to undef SPV_REVISION because SPIRV-Cross
@@ -653,6 +657,7 @@ namespace dawn_native {
             return {};
         }
 
+#if defined(DAWN_USE_SPIRV_CROSS)
         ResultOrError<std::unique_ptr<EntryPointMetadata>> ExtractSpirvInfo(
             const DeviceBase* device,
             const spirv_cross::Compiler& compiler,
@@ -896,6 +901,7 @@ namespace dawn_native {
 
             return {std::move(metadata)};
         }
+#endif
 
         ResultOrError<EntryPointMetadataTable> ReflectShaderUsingTint(
             DeviceBase*,
@@ -1548,6 +1554,7 @@ namespace dawn_native {
         return {};
     }
 
+#if defined(DAWN_USE_SPIRV_CROSS)
     ResultOrError<EntryPointMetadataTable> ShaderModuleBase::ReflectShaderUsingSPIRVCross(
         DeviceBase* device,
         const std::vector<uint32_t>& spirv) {
@@ -1565,6 +1572,7 @@ namespace dawn_native {
         }
         return std::move(result);
     }
+#endif
 
     size_t PipelineLayoutEntryPointPairHashFunc::operator()(
         const PipelineLayoutEntryPointPair& pair) const {
