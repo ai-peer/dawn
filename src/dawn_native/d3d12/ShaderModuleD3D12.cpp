@@ -324,9 +324,19 @@ namespace dawn_native { namespace d3d12 {
         std::string hlslSource;
         std::string remappedEntryPoint;
         CompiledShader compiledShader = {};
-        DAWN_TRY_ASSIGN(hlslSource,
-                        TranslateToHLSLWithTint(entryPointName, stage, layout, &remappedEntryPoint,
-                                                &compiledShader.firstOffsetInfo));
+        if (device->IsToggleEnabled(Toggle::UseTintGenerator)) {
+            DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSLWithTint(entryPointName, stage, layout,
+                                                                &remappedEntryPoint,
+                                                                &compiledShader.firstOffsetInfo));
+            entryPointName = remappedEntryPoint.c_str();
+        } else {
+            DAWN_TRY_ASSIGN(hlslSource,
+                            TranslateToHLSLWithSPIRVCross(entryPointName, stage, layout));
+
+            // Note that the HLSL will always use entryPoint "main" under
+            // SPIRV-cross.
+            entryPointName = "main";
+        }
 
         if (device->IsToggleEnabled(Toggle::DumpShaders)) {
             std::ostringstream dumpedMsg;
