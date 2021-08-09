@@ -33,6 +33,132 @@
       "message": "LGTM, but will still need another review",
       "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f54257_cd47b3c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T18:32:17Z",
+      "side": 1,
+      "message": "some clarifying questions",
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9bcd7f3_1f846e0a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T18:32:17Z",
+      "side": 1,
+      "message": "is this ever set to true?\n\nnevermind - I see it\u0027s set in the next CL. Should setting mUseBindingAsRegister work regardless of whether we use SPIRV to DXIL ?",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f06e20_28a8d64f",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T18:32:17Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 74
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27bf1db5_50ff9e3c",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T18:32:17Z",
+      "side": 1,
+      "message": "so if I\u0027m understanding correctly, we always use the BindingNumber as the shader register for dynamic buffers. would it make sense to put that logic inside GetShaderRegister(BindingIndex) ?",
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13517252_fbb7c73c",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T18:32:17Z",
+      "side": 1,
+      "message": "is it a problem if these offsets conflict with those at [1] ?",
+      "range": {
+        "startLine": 142,
+        "startChar": 9,
+        "endLine": 144,
+        "endChar": 78
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcad86b4_f0593854",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T18:32:17Z",
+      "side": 1,
+      "message": "nit: maybe we should go directly from |bindingInfo| to RangeType, instead of going through the DescriptorType enum.\n\nChecks with descriptorType \u003d\u003d DescriptorType::Sampler could just be bindingInfo.bindingType \u003d\u003d BindingInfoType::Sampler",
+      "range": {
+        "startLine": 147,
+        "startChar": 30,
+        "endLine": 147,
+        "endChar": 87
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
