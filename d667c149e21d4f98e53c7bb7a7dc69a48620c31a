@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e118d5d_9b9dd87c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T20:42:57Z",
+      "side": 1,
+      "message": "LGTM with some comments",
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07c9708_1b8a4afb",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T20:42:57Z",
+      "side": 1,
+      "message": "I think we can remove this entirely. GLSL now always goes through Tint\u0027s spirv output which has its own robustness pass",
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69665947_0b7351c0",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T20:42:57Z",
+      "side": 1,
+      "message": "I think this #else branch is the only one we need.\nWe should also be able to remove mSpirv and ShaderModuleParseResult::spirv.\n\nEverything should first get parsed into a Tint program and reflected using Tint.\n\nFor GLSL, we\u0027ll produce spirv and reflect again with ReflectShaderUsingSPIRVCross because we need to match the binding info that SPIRV cross is reflecting for the spirv cross translation. This is the mGLEntryPoints thing you already have in the previous patch. See also the comment in third_party/dawn/src/dawn_native/opengl/ShaderModuleGL.cpp\n\n        // When the use_tint_generator toggle is on, Tint is used for the reflection of bindings\n        // for the implicit pipeline layout and pipeline/layout validation, but bindingInfo is set\n        // to mGLEntryPoints which is the SPIRV-Cross reflection. Tint reflects bindings used more\n        // precisely than SPIRV-Cross so some bindings in bindingInfo might not exist in the layout\n        // and querying the layout for them would cause an ASSERT. That\u0027s why we defensively check\n        // that bindings are in the layout before modifying them. This slight hack is ok because in\n        // the long term we will use Tint to produce GLSL.",
+      "range": {
+        "startLine": 1649,
+        "startChar": 0,
+        "endLine": 1649,
+        "endChar": 95
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecfac9ea_c0d1008f",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1655,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T20:42:57Z",
+      "side": 1,
+      "message": "would be cool if we can move this inside ShaderModuleGL.cpp\n\nAlso take a look at mGLEntryPoints and what data we reflect from it. We can probably move ExtractSpirvInfo into ShaderModuleGL.cpp as well and slim it down to contain only what we need.",
+      "range": {
+        "startLine": 1655,
+        "startChar": 61,
+        "endLine": 1655,
+        "endChar": 89
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
