@@ -77,6 +77,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f54f7a87_328c6db8",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-09T23:53:22Z",
+      "side": 1,
+      "message": "It should work regardless--as long as we target \u003e\u003d sm 5.1 (Should be fine for all feature levels of DX12, DX11 maxes out at sm 5.0).\n\nIf we want to support SM5.0, we\u0027d have to stay under the max slot counts per resource type (which are each relatively low, ~16). In that case, it might be worth compacting the registers even further. Currently we\u0027re only compacting registers for samplers vs non-samplers (basically reusing the descriptor heap offset as the register), but could do it per resource type.\n\nI have a couple of questions I\u0027d like your opinons on:\n1. Do you think it\u0027s worth it to include the \"register compacting\" behavior, given that Dawn only (currently) targets d3d12/sm51?\n2. And if yes, do you think it\u0027s worth doing the extra compaction described above and exposing the feature as e.g. a separate ctor such that it can be tested (+ eventually reused by a d3d11 backend)?",
+      "parentUuid": "e9bcd7f3_1f846e0a",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f06e20_28a8d64f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 4
@@ -115,6 +139,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfbdf29a_33006bcf",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-09T23:53:22Z",
+      "side": 1,
+      "message": "I like that more--it makes mBindingOffsets a little more focused in purpose. \n\nHowever, I think you\u0027ve found a bug in that this could conflict with below... time for me to write a test 😄",
+      "parentUuid": "27bf1db5_50ff9e3c",
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0644bfa_c71f84d8",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-09T23:53:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "76f06e20_28a8d64f",
+      "range": {
+        "startLine": 127,
+        "startChar": 0,
+        "endLine": 127,
+        "endChar": 74
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13517252_fbb7c73c",
@@ -138,6 +204,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba498f6e_26ffaf67",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-09T23:53:22Z",
+      "side": 1,
+      "message": "Great catch, I\u0027ll write a test in BindGroupTests that exercises the conflict case.",
+      "parentUuid": "13517252_fbb7c73c",
+      "range": {
+        "startLine": 142,
+        "startChar": 9,
+        "endLine": 144,
+        "endChar": 78
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fcad86b4_f0593854",
@@ -151,6 +241,30 @@
       "writtenOn": "2021-08-09T18:32:17Z",
       "side": 1,
       "message": "nit: maybe we should go directly from |bindingInfo| to RangeType, instead of going through the DescriptorType enum.\n\nChecks with descriptorType \u003d\u003d DescriptorType::Sampler could just be bindingInfo.bindingType \u003d\u003d BindingInfoType::Sampler",
+      "range": {
+        "startLine": 147,
+        "startChar": 30,
+        "endLine": 147,
+        "endChar": 87
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bff1c18_7f1103e8",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-09T23:53:22Z",
+      "side": 1,
+      "message": "What do you think of removing* d3d12::BindGroupLayout::DescriptorType and replacing it with RangeType directly? I think here (and at the sampler checks) we want the low-level d3d12 enum, in case in the future some other BindingInfoType maps to d3d12\u0027s DescriptorRangeTypeSampler, but perhaps this is an overly cautious opinion since BindingInfoType::Sampler maps directly to DescriptorRangeTypeSampler. Thoughts?\n\n*IIUC the DescriptorType enum is just a copy of D3D\u0027s RangeType added to allow indexing into ityp:array.",
+      "parentUuid": "fcad86b4_f0593854",
       "range": {
         "startLine": 147,
         "startChar": 30,
