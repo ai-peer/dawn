@@ -106,3 +106,5 @@ dawn_supports_glfw_for_windowing =
 
 # Much of the backend code is shared, so define a convenience var.
 dawn_enable_opengl = dawn_enable_opengles || dawn_enable_desktop_gl
+
+dawn_use_spirv_cross = dawn_enable_opengl
