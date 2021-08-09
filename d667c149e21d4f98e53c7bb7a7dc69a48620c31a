@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "acb0b95f_af1e637b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T23:40:24Z",
+      "side": 1,
+      "message": "If it doesn\u0027t work out, it can wait, but I\u0027m pretty sure all that\u0027s required here is to keep only line 1649",
+      "parentUuid": "f2ed5788_fd4f0df9",
+      "range": {
+        "startLine": 1649,
+        "startChar": 0,
+        "endLine": 1649,
+        "endChar": 95
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecfac9ea_c0d1008f",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 4
@@ -119,6 +143,30 @@
       "side": 1,
       "message": "Ack (but see above).",
       "parentUuid": "ecfac9ea_c0d1008f",
+      "range": {
+        "startLine": 1655,
+        "startChar": 61,
+        "endLine": 1655,
+        "endChar": 89
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f27e1aac_b10c92cc",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1655,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T23:40:24Z",
+      "side": 1,
+      "message": "Sure we can wait to simplify it",
+      "parentUuid": "8b280163_63efcd16",
       "range": {
         "startLine": 1655,
         "startChar": 61,
