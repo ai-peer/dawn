@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e918e34a_17e13e44",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 406,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-09T23:38:47Z",
+      "side": 0,
+      "message": "nit: test failures are because we lost this line",
+      "range": {
+        "startLine": 406,
+        "startChar": 0,
+        "endLine": 406,
+        "endChar": 56
+      },
+      "revId": "d1d984335cf241116f2d0a783d6f1fbee206dc42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
