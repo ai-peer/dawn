@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0eb71d9_765528ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-08-09T23:09:26Z",
+      "side": 1,
+      "message": "PTAL, and if you have any ideas for how we could detect and produce warnings for using the deprecated flag names, please let me know!",
+      "revId": "9b30fdd203fa00d1706332a9ce88dfdfed84fe1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
