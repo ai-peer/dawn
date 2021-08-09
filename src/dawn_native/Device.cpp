@@ -134,7 +134,7 @@ namespace dawn_native {
 
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
-#if defined(DAWN_PLATFORM_MACOS) || defined(DAWN_PLATFORM_LINUX) || defined(DAWN_PLATFORM_WINDOWS)
+#if !defined(DAWN_USE_SPIRV_CROSS)
         if (!IsToggleEnabled(Toggle::UseTintGenerator)) {
             EmitLog(
                 WGPULoggingType_Warning,
