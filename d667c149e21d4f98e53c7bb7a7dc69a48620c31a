@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f2ed5788_fd4f0df9",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-09T21:47:11Z",
+      "side": 1,
+      "message": "This all sounds good, and I\u0027ll give it a shot, but perhaps a medium-sized change like that could wait until after the branch point?",
+      "parentUuid": "69665947_0b7351c0",
+      "range": {
+        "startLine": 1649,
+        "startChar": 0,
+        "endLine": 1649,
+        "endChar": 95
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecfac9ea_c0d1008f",
         "filename": "src/dawn_native/ShaderModule.cpp",
         "patchSetId": 4
@@ -71,6 +95,30 @@
       "writtenOn": "2021-08-09T20:42:57Z",
       "side": 1,
       "message": "would be cool if we can move this inside ShaderModuleGL.cpp\n\nAlso take a look at mGLEntryPoints and what data we reflect from it. We can probably move ExtractSpirvInfo into ShaderModuleGL.cpp as well and slim it down to contain only what we need.",
+      "range": {
+        "startLine": 1655,
+        "startChar": 61,
+        "endLine": 1655,
+        "endChar": 89
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b280163_63efcd16",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1655,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-09T21:47:11Z",
+      "side": 1,
+      "message": "Ack (but see above).",
+      "parentUuid": "ecfac9ea_c0d1008f",
       "range": {
         "startLine": 1655,
         "startChar": 61,
