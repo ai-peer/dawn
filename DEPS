@@ -232,5 +232,6 @@ hooks = [
 ]
 
 recursedeps = [
+  'third_party/angle',
   'third_party/vulkan-deps',
 ]
