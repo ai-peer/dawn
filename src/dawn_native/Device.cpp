@@ -134,6 +134,14 @@ namespace dawn_native {
 
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
+#if !defined(DAWN_USE_SPIRV_CROSS)
+        if (!IsToggleEnabled(Toggle::UseTintGenerator)) {
+            EmitLog(
+                WGPULoggingType_Warning,
+                "Non-tint generator is not available on this platform; toggle disable ignored.\n");
+            ForceSetToggle(Toggle::UseTintGenerator, true);
+        }
+#endif
     }
 
     DeviceBase::~DeviceBase() = default;
@@ -1345,6 +1353,7 @@ namespace dawn_native {
     void DeviceBase::SetDefaultToggles() {
         SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
         SetToggle(Toggle::DisallowUnsafeAPIs, true);
+        SetToggle(Toggle::UseTintGenerator, true);
     }
 
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
