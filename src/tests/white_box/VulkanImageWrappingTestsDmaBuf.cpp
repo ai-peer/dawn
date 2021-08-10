@@ -52,6 +52,12 @@ namespace dawn_native { namespace vulkan {
                 defaultDescriptor.mipLevelCount = 1;
                 defaultDescriptor.usage = wgpu::TextureUsage::RenderAttachment |
                                           wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+
+                wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
+                defaultDescriptor.nextInChain = &internalDesc;
+                internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
+                internalDesc.sType = WGPUSType_DawnTextureInternalUsageDescriptor;
+                g
             }
 
             void TearDown() override {
@@ -180,10 +186,9 @@ namespace dawn_native { namespace vulkan {
         IgnoreSignalSemaphore(texture);
     }
 
-    // Test an error occurs if the texture descriptor is invalid
+    // Test an error occurs if there is no InternalUsageDescriptor as nextInChain
     TEST_P(VulkanImageWrappingValidationTests, InvalidTextureDescriptor) {
-        wgpu::ChainedStruct chainedDescriptor;
-        defaultDescriptor.nextInChain = &chainedDescriptor;
+        defaultDescriptor.nextInChain = nullptr;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture =
                                 WrapVulkanImage(device, &defaultDescriptor, defaultFd,
