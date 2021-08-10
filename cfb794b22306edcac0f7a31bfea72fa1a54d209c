@@ -125,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6c7f16c9_f0f6a888",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-10T20:38:45Z",
+      "side": 1,
+      "message": "If I understand correctly, FL 11.0 on d3d12 means sm 5.1, but on d3d11 it means sm 5.0 (from https://docs.microsoft.com/en-us/windows/win32/direct3d11/overviews-direct3d-11-devices-downlevel-intro#feature-support-for-feature-levels-12_2-through-9_3)\n\nWe currently partially comact the register space, this change (https://dawn-review.googlesource.com/c/dawn/+/61560/1) shows how it\u0027d look if it were even more aggresively packed. Note that compacting registers doesn\u0027t prevent issues with sm50, it just mitigates them--one could still create a shader with 16 cbvs, which would be over the max slot count.",
+      "parentUuid": "3eb6f708_c1c208a8",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f06e20_28a8d64f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 4

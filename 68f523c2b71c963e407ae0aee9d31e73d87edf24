@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4633cf9_3b3bc50c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-10T20:38:45Z",
+      "side": 1,
+      "message": "I have rebased to resolve a merge conflict.\n\nAgain, I appreciate both of your time!",
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
