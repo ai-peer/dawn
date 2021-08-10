@@ -340,6 +340,17 @@ namespace dawn_native { namespace d3d12 {
         MaybeError Apply(CommandRecordingContext* commandContext) {
             BeforeApply();
 
+            ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
+            if (mLastAppliedPipelineLayout != mPipelineLayout) {
+                if (mInCompute) {
+                    commandList->SetComputeRootSignature(
+                        ToBackend(mPipelineLayout)->GetRootSignature());
+                } else {
+                    commandList->SetGraphicsRootSignature(
+                        ToBackend(mPipelineLayout)->GetRootSignature());
+                }
+            }
+
             // Bindgroups are allocated in shader-visible descriptor heaps which are managed by a
             // ringbuffer. There can be a single shader-visible descriptor heap of each type bound
             // at any given time. This means that when we switch heaps, all other currently bound
@@ -357,8 +368,6 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
             }
-
-            ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
             if (!didCreateBindGroupViews || !didCreateBindGroupSamplers) {
                 if (!didCreateBindGroupViews) {
@@ -1038,7 +1047,6 @@ namespace dawn_native { namespace d3d12 {
                     ComputePipeline* pipeline = ToBackend(cmd->pipeline).Get();
                     PipelineLayout* layout = ToBackend(pipeline->GetLayout());
 
-                    commandList->SetComputeRootSignature(layout->GetRootSignature());
                     commandList->SetPipelineState(pipeline->GetPipelineState());
 
                     bindingTracker->OnSetPipeline(pipeline);
@@ -1405,7 +1413,6 @@ namespace dawn_native { namespace d3d12 {
                     RenderPipeline* pipeline = ToBackend(cmd->pipeline).Get();
                     PipelineLayout* layout = ToBackend(pipeline->GetLayout());
 
-                    commandList->SetGraphicsRootSignature(layout->GetRootSignature());
                     commandList->SetPipelineState(pipeline->GetPipelineState());
                     commandList->IASetPrimitiveTopology(pipeline->GetD3D12PrimitiveTopology());
 
