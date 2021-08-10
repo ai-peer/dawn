@@ -80,15 +80,16 @@ namespace dawn_native { namespace d3d12 {
         // case.
         bool mUseBindingAsRegister;
 
-        // - For non-dynamic resources, contains the offset into the descriptor heap for the given
-        // resource view. Samplers and non-samplers are stored in separate descriptor heaps, so the
-        // offsets should be unique within each group and tightly packed.
-        // - For dynamic resources and `mUseBindingAsRegister = false`, contains the shader
-        // register.
+        // Contains the offset into the descriptor heap for the given resource view. Samplers and
+        // non-samplers are stored in separate descriptor heaps, so the offsets should be unique
+        // within each group and tightly packed.
         //
-        // In the `mUseBindingAsRegister = false` case, this is also equal to the remapped shader
-        // register.
-        ityp::stack_vec<BindingIndex, uint32_t, kMaxOptimalBindingsPerGroup> mBindingOffsets;
+        // Dynamic resources are not used here since their descriptors are placed directly in root
+        // parameters.
+        ityp::stack_vec<BindingIndex, uint32_t, kMaxOptimalBindingsPerGroup> mDescriptorHeapOffsets;
+
+        // Contains the shader register this binding is mapped to.
+        ityp::stack_vec<BindingIndex, uint32_t, kMaxOptimalBindingsPerGroup> mShaderRegisters;
 
         uint32_t mCbvUavSrvDescriptorCount;
         uint32_t mSamplerDescriptorCount;

@@ -116,31 +116,42 @@ namespace dawn_native { namespace d3d12 {
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
         : BindGroupLayoutBase(device, descriptor),
           mUseBindingAsRegister(device->IsToggleEnabled(Toggle::UseMesa)),
-          mBindingOffsets(GetBindingCount()),
+          mDescriptorHeapOffsets(GetBindingCount()),
+          mShaderRegisters(GetBindingCount()),
           mCbvUavSrvDescriptorCount(0),
           mSamplerDescriptorCount(0),
           mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)) {
-        for (BindingIndex bindingIndex = GetDynamicBufferCount(); bindingIndex < GetBindingCount();
-             ++bindingIndex) {
-            const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
+        ityp::array<DescriptorType, uint32_t, DescriptorType::Count> resourceCounts = {};
 
-            // For dynamic resources, Dawn uses root descriptor in D3D12 backend. So there is no
-            // need to allocate the descriptor from descriptor heap or create descriptor ranges.
-            ASSERT(!bindingInfo.buffer.hasDynamicOffset);
+        for (BindingIndex bindingIndex{0}; bindingIndex < GetBindingCount(); ++bindingIndex) {
+            const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
 
             DescriptorType descriptorType = WGPUBindingInfoToDescriptorType(bindingInfo);
 
             // TODO(dawn:728) In the future, special handling will be needed for external textures
             // here because they encompass multiple views.
-            mBindingOffsets[bindingIndex] = descriptorType == DescriptorType::Sampler
-                                                ? mSamplerDescriptorCount++
-                                                : mCbvUavSrvDescriptorCount++;
+            mShaderRegisters[bindingIndex] = mUseBindingAsRegister
+                                                 ? uint32_t(bindingInfo.binding)
+                                                 : resourceCounts[descriptorType]++;
+
+            if (bindingIndex < GetDynamicBufferCount()) {
+                continue;
+            }
+
+            // For dynamic resources, Dawn uses root descriptor in D3D12 backend. So there is no
+            // need to allocate the descriptor from descriptor heap or create descriptor ranges.
+            ASSERT(!bindingInfo.buffer.hasDynamicOffset);
+
+            // TODO(dawn:728) In the future, special handling will be needed for external textures
+            // here because they encompass multiple views.
+            mDescriptorHeapOffsets[bindingIndex] = descriptorType == DescriptorType::Sampler
+                                                       ? mSamplerDescriptorCount++
+                                                       : mCbvUavSrvDescriptorCount++;
 
             D3D12_DESCRIPTOR_RANGE range;
             range.RangeType = DescriptorTypeToD3D12DescriptorRangeType(descriptorType);
             range.NumDescriptors = 1;
-            range.BaseShaderRegister = mUseBindingAsRegister ? uint32_t(bindingInfo.binding)
-                                                             : mBindingOffsets[bindingIndex];
+            range.BaseShaderRegister = mShaderRegisters[bindingIndex];
             range.RegisterSpace = kRegisterSpacePlaceholder;
             range.OffsetInDescriptorsFromTableStart = D3D12_DESCRIPTOR_RANGE_OFFSET_APPEND;
 
@@ -148,17 +159,6 @@ namespace dawn_native { namespace d3d12 {
                 descriptorType == DescriptorType::Sampler ? mSamplerDescriptorRanges
                                                           : mCbvUavSrvDescriptorRanges;
             descriptorRanges.push_back(range);
-        }
-
-        if (!mUseBindingAsRegister) {
-            for (BindingIndex bindingIndex{0}; bindingIndex < GetDynamicBufferCount();
-                 ++bindingIndex) {
-                // Place the dynamic buffers in registers after the non-dynamic resources.
-                // TODO(dawn:728) In the future, special handling will be needed for external
-                // textures here because they encompass multiple views.
-                mBindingOffsets[bindingIndex] =
-                    mCbvUavSrvDescriptorCount + static_cast<uint32_t>(bindingIndex);
-            }
         }
 
         MergeDescriptorRanges(mCbvUavSrvDescriptorRanges);
@@ -202,12 +202,11 @@ namespace dawn_native { namespace d3d12 {
     }
 
     ityp::span<BindingIndex, const uint32_t> BindGroupLayout::GetDescriptorHeapOffsets() const {
-        return {mBindingOffsets.data(), mBindingOffsets.size()};
+        return {mDescriptorHeapOffsets.data(), mDescriptorHeapOffsets.size()};
     }
 
     uint32_t BindGroupLayout::GetShaderRegister(BindingIndex bindingIndex) const {
-        return mUseBindingAsRegister ? static_cast<uint32_t>(GetBindingInfo(bindingIndex).binding)
-                                     : mBindingOffsets[bindingIndex];
+        return mShaderRegisters[bindingIndex];
     }
 
     uint32_t BindGroupLayout::GetCbvUavSrvDescriptorCount() const {
