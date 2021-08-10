@@ -79,6 +79,7 @@ namespace dawn_native { namespace d3d12 {
         // Contents of WGPUTextureDescriptor are stored individually since the descriptor
         // could outlive this image.
         WGPUTextureUsageFlags mUsage;
+        WGPUTextureUsageFlags mUsageInternal;
         WGPUTextureDimension mDimension;
         WGPUExtent3D mSize;
         WGPUTextureFormat mFormat;
