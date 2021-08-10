@@ -30,6 +30,11 @@ namespace dawn_native { namespace vulkan {
     namespace {
 
         class VulkanImageWrappingTestBase : public DawnTest {
+          protected:
+            std::vector<const char*> GetRequiredExtensions() override {
+                return {"dawn-internal-usages"};
+            }
+
           public:
             void SetUp() override {
                 DawnTest::SetUp();
@@ -269,6 +274,7 @@ namespace dawn_native { namespace vulkan {
     TEST_P(VulkanImageWrappingValidationTests, InvalidTextureDescriptor) {
         wgpu::ChainedStruct chainedDescriptor;
         defaultDescriptor.nextInChain = &chainedDescriptor;
+        chainedDescriptor.sType = wgpu::SType::SurfaceDescriptorFromWindowsSwapChainPanel;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapVulkanImage(
                                 device, &defaultDescriptor, defaultFd, defaultAllocationSize,
