@@ -33,6 +33,11 @@ namespace dawn_native { namespace vulkan {
     namespace {
 
         class VulkanImageWrappingTestBase : public DawnTest {
+          protected:
+            std::vector<const char*> GetRequiredExtensions() override {
+                return {"dawn-internal-usages"};
+            }
+
           public:
             void SetUp() override {
                 DAWN_TEST_UNSUPPORTED_IF(UsesWire());
@@ -52,6 +57,10 @@ namespace dawn_native { namespace vulkan {
                 defaultDescriptor.mipLevelCount = 1;
                 defaultDescriptor.usage = wgpu::TextureUsage::RenderAttachment |
                                           wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+
+                defaultDescriptor.nextInChain = &internalDesc;
+                internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
+                internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
             }
 
             void TearDown() override {
@@ -162,6 +171,7 @@ namespace dawn_native { namespace vulkan {
             dawn_native::vulkan::Device* deviceVk;
             gbm_device* gbmDevice;
             wgpu::TextureDescriptor defaultDescriptor;
+            wgpu::DawnTextureInternalUsageDescriptor internalDesc;
             gbm_bo* defaultGbmBo;
             int defaultFd;
             uint32_t defaultStride;
@@ -180,10 +190,11 @@ namespace dawn_native { namespace vulkan {
         IgnoreSignalSemaphore(texture);
     }
 
-    // Test an error occurs if the texture descriptor is invalid
+    // Test an error occurs if there is no InternalUsageDescriptor as nextInChain
     TEST_P(VulkanImageWrappingValidationTests, InvalidTextureDescriptor) {
         wgpu::ChainedStruct chainedDescriptor;
-        defaultDescriptor.nextInChain = &chainedDescriptor;
+        chainedDescriptor.sType = wgpu::SType::SurfaceDescriptorFromWindowsSwapChainPanel;
+        descriptor.nextInChain = &chainedDescriptor;
 
         ASSERT_DEVICE_ERROR(wgpu::Texture texture =
                                 WrapVulkanImage(device, &defaultDescriptor, defaultFd,
