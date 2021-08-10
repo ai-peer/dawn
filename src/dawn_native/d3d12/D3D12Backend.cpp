@@ -62,7 +62,11 @@ namespace dawn_native { namespace d3d12 {
           mFormat(descriptor->format),
           mMipLevelCount(descriptor->mipLevelCount),
           mSampleCount(descriptor->sampleCount) {
-        ASSERT(descriptor->nextInChain == nullptr);
+        ASSERT(descriptor->nextInChain != nullptr);
+        ASSERT(descriptor->nextInChain->sType == WGPUSType_DawnTextureInternalUsageDescriptor);
+        mUsageInternal =
+            static_cast<WGPUDawnTextureInternalUsageDescriptor*>(descriptor->nextInChain)
+                ->internalUsage;
     }
 
     WGPUTexture ExternalImageDXGI::ProduceTexture(
@@ -83,6 +87,11 @@ namespace dawn_native { namespace d3d12 {
         textureDescriptor.format = static_cast<wgpu::TextureFormat>(mFormat);
         textureDescriptor.mipLevelCount = mMipLevelCount;
         textureDescriptor.sampleCount = mSampleCount;
+
+        DawnTextureInternalUsageDescriptor internalDesc = {};
+        textureDescriptor.nextInChain = &internalDesc;
+        internalDesc.internalUsage = static_cast<wgpu::TextureUsage>(mUsageInternal);
+        internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
 
         Ref<TextureBase> texture = backendDevice->CreateExternalTexture(
             &textureDescriptor, mD3D12Resource, ExternalMutexSerial(descriptor->acquireMutexKey),
