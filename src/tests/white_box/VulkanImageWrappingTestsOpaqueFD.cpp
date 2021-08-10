@@ -30,6 +30,11 @@ namespace dawn_native { namespace vulkan {
     namespace {
 
         class VulkanImageWrappingTestBase : public DawnTest {
+          protected:
+            std::vector<const char*> GetRequiredExtensions() override {
+                return {"dawn-internal-usages"};
+            }
+
           public:
             void SetUp() override {
                 DawnTest::SetUp();
