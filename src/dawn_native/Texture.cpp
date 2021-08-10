@@ -257,6 +257,7 @@ namespace dawn_native {
                                          const TextureDescriptor* descriptor) {
         DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
                                      wgpu::SType::DawnTextureInternalUsageDescriptor));
+        return DAWN_VALIDATION_ERROR("I'm testing this");
 
         const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
         FindInChain(descriptor->nextInChain, &internalUsageDesc);
