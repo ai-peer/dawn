@@ -101,6 +101,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3eb6f708_c1c208a8",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-10T03:01:49Z",
+      "side": 1,
+      "message": "Ahh, I didn\u0027t realize that FL11_0 corresponds to SM5.1. (Specifically I didn\u0027t realize that the FL\u003c-\u003e SM correspondence is different between D3D11 and D3D1.)\n\nIt doesn\u0027t seem super important to keep the compacting behavior, but if we already have it (IIUC we do?) then we may as well keep it. We do want to start working on D3D11 soon*ish*.",
+      "parentUuid": "f54f7a87_328c6db8",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f06e20_28a8d64f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 4
