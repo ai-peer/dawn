@@ -63,6 +63,15 @@ namespace dawn_native { namespace d3d12 {
         BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor);
         ~BindGroupLayout() override = default;
 
+        // If `true`, use the WGSL binding numbers directly as the HLSL/DXIL shader registers.
+        // If `false`, compact the register space so there are no holes in either the CBV/UAV/SRV
+        // group or the Sampler group.
+        //
+        // When targetting shader model <=5.0, the max valid register index ("slot count") is
+        // relatively low for each resource type, so compacting the space is beneficial in that
+        // case.
+        bool mUseBindingAsRegister;
+
         // Contains the offset into the descriptor heap for the given resource view. Samplers and
         // non-samplers are stored in separate descriptor heaps, so the offsets should be unique
         // within each group and tightly packed.

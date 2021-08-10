@@ -95,11 +95,14 @@ namespace dawn_native { namespace d3d12 {
 
     BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor)
         : BindGroupLayoutBase(device, descriptor),
+          mUseBindingAsRegister(device->IsToggleEnabled(Toggle::UseMesa)),
           mDescriptorHeapOffsets(GetBindingCount()),
           mShaderRegisters(GetBindingCount()),
           mCbvUavSrvDescriptorCount(0),
           mSamplerDescriptorCount(0),
           mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)) {
+        ityp::array<D3D12_DESCRIPTOR_RANGE_TYPE, uint32_t, 4> resourceCounts = {};
+
         for (BindingIndex bindingIndex{0}; bindingIndex < GetBindingCount(); ++bindingIndex) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
 
@@ -108,7 +111,9 @@ namespace dawn_native { namespace d3d12 {
 
             // TODO(dawn:728) In the future, special handling will be needed for external textures
             // here because they encompass multiple views.
-            mShaderRegisters[bindingIndex] = uint32_t(bindingInfo.binding);
+            mShaderRegisters[bindingIndex] = mUseBindingAsRegister
+                                                 ? uint32_t(bindingInfo.binding)
+                                                 : resourceCounts[descriptorRangeType]++;
 
             if (bindingIndex < GetDynamicBufferCount()) {
                 continue;
