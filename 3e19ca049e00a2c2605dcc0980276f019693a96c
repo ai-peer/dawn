@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad1ea391_89c2abd2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T01:29:30Z",
+      "side": 1,
+      "message": "A question in the comments. Still WIP",
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86010812_261c4fd8",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T01:29:30Z",
+      "side": 1,
+      "message": "Q: Do we have an equivalent of TintCompositionTypeToInterStageComponentCount to get vec component count from spirv?",
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
