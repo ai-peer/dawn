@@ -16,6 +16,23 @@
       "message": "Thank you for the review! I have a couple open question with regards to your review.",
       "revId": "71f1602d7dcfb35e15dcff5977f6ee83bdf90133",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e1191fe_1319461f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-10T03:03:52Z",
+      "side": 1,
+      "message": "new changes lgtm",
+      "revId": "71f1602d7dcfb35e15dcff5977f6ee83bdf90133",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
