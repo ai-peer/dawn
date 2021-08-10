@@ -58,6 +58,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0868447e_666373a1",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T20:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5568fe20_d4a79934",
+      "range": {
+        "startLine": 296,
+        "startChar": 90,
+        "endLine": 296,
+        "endChar": 95
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c32169_f1bf3a8d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T20:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5568fe20_d4a79934",
+      "range": {
+        "startLine": 296,
+        "startChar": 90,
+        "endLine": 296,
+        "endChar": 95
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b993ee8_1fd6acac",
@@ -71,6 +119,54 @@
       "writtenOn": "2021-08-10T17:07:57Z",
       "side": 1,
       "message": "unit: maybe just \"channel count\"",
+      "range": {
+        "startLine": 297,
+        "startChar": 28,
+        "endLine": 297,
+        "endChar": 42
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c0b014b_9baad11c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T20:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b993ee8_1fd6acac",
+      "range": {
+        "startLine": 297,
+        "startChar": 28,
+        "endLine": 297,
+        "endChar": 42
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a89a562_79a84ae7",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T20:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9b993ee8_1fd6acac",
       "range": {
         "startLine": 297,
         "startChar": 28,
@@ -116,6 +212,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66129095_1c85bd98",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 944,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T20:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c85cd653_70012764",
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0a37fe4_be489f19",
@@ -129,6 +243,30 @@
       "writtenOn": "2021-08-10T17:07:57Z",
       "side": 1,
       "message": "nit: could this be uint8_t as well? And after getting the count from Tint, ASSERT it is less than std::numeric_limits\u003cuint8_t\u003e::max()",
+      "range": {
+        "startLine": 178,
+        "startChar": 12,
+        "endLine": 178,
+        "endChar": 35
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5116b8e2_8c4c3a8c",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T20:47:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0a37fe4_be489f19",
       "range": {
         "startLine": 178,
         "startChar": 12,
