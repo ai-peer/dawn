@@ -18,6 +18,69 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14a4c0f_ff918863",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T17:07:57Z",
+      "side": 1,
+      "message": "just some comments while I was looking at this. ",
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5568fe20_d4a79934",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T17:07:57Z",
+      "side": 1,
+      "message": "unit: \"color\" (lowercase?)",
+      "range": {
+        "startLine": 296,
+        "startChar": 90,
+        "endLine": 296,
+        "endChar": 95
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b993ee8_1fd6acac",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T17:07:57Z",
+      "side": 1,
+      "message": "unit: maybe just \"channel count\"",
+      "range": {
+        "startLine": 297,
+        "startChar": 28,
+        "endLine": 297,
+        "endChar": 42
+      },
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86010812_261c4fd8",
@@ -49,6 +112,29 @@
       "side": 1,
       "message": "we can just not care about spirv and suppress any tests that fail. We\u0027ll be removing this path soonish",
       "parentUuid": "86010812_261c4fd8",
+      "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0a37fe4_be489f19",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T17:07:57Z",
+      "side": 1,
+      "message": "nit: could this be uint8_t as well? And after getting the count from Tint, ASSERT it is less than std::numeric_limits\u003cuint8_t\u003e::max()",
+      "range": {
+        "startLine": 178,
+        "startChar": 12,
+        "endLine": 178,
+        "endChar": 35
+      },
       "revId": "3e19ca049e00a2c2605dcc0980276f019693a96c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
