@@ -940,8 +940,8 @@ namespace dawn_native {
 
                     spirv_cross::SPIRType::BaseType shaderFragmentOutputBaseType =
                         compiler.get_type(fragmentOutput.base_type_id).basetype;
-                    metadata->fragmentOutputFormatBaseTypes[attachment] =
-                        SpirvBaseTypeToTextureComponentType(shaderFragmentOutputBaseType);
+                    metadata->fragmentOutputVariables[attachment] = {
+                        SpirvBaseTypeToTextureComponentType(shaderFragmentOutputBaseType), 4u};
                     metadata->fragmentOutputsWritten.set(attachment);
                 }
             }
@@ -1159,8 +1159,12 @@ namespace dawn_native {
                         ColorAttachmentIndex attachment(
                             static_cast<uint8_t>(unsanitizedAttachment));
                         DAWN_TRY_ASSIGN(
-                            metadata->fragmentOutputFormatBaseTypes[attachment],
+                            metadata->fragmentOutputVariables[attachment].baseType,
                             TintComponentTypeToTextureComponentType(output_var.component_type));
+                        DAWN_TRY_ASSIGN(
+                            metadata->fragmentOutputVariables[attachment].componentCount,
+                            TintCompositionTypeToInterStageComponentCount(
+                                output_var.composition_type));
                         metadata->fragmentOutputsWritten.set(attachment);
                     }
                 }

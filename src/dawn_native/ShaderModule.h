@@ -173,8 +173,12 @@ namespace dawn_native {
         ityp::bitset<VertexAttributeLocation, kMaxVertexAttributes> usedVertexInputs;
 
         // An array to record the basic types (float, int and uint) of the fragment shader outputs.
-        ityp::array<ColorAttachmentIndex, wgpu::TextureComponentType, kMaxColorAttachments>
-            fragmentOutputFormatBaseTypes;
+        struct FragmentOutputVariableInfo {
+            wgpu::TextureComponentType baseType;
+            uint32_t componentCount;
+        };
+        ityp::array<ColorAttachmentIndex, FragmentOutputVariableInfo, kMaxColorAttachments>
+            fragmentOutputVariables;
         ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> fragmentOutputsWritten;
 
         // TODO(dawn:802): store InterpolationType and IntepolationSampling when we add the

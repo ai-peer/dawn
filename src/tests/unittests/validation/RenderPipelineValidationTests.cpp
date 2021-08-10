@@ -247,6 +247,59 @@ TEST_F(RenderPipelineValidationTest, FragmentOutputFormatCompatibility) {
     }
 }
 
+// Tests that the component count of the color state target format must be fewer than that of the
+// fragment shader output.
+TEST_F(RenderPipelineValidationTest, FragmentOutputComponentCountCompatibility) {
+    constexpr uint32_t kNumTextureFormat = 3u;
+    std::array<wgpu::TextureFormat, kNumTextureFormat> kColorFormats = {
+        {wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm,
+         wgpu::TextureFormat::RGBA8Unorm}};
+
+    for (size_t i = 1; i <= 4; ++i) {
+        for (size_t j = 0; j < kNumTextureFormat; ++j) {
+            utils::ComboRenderPipelineDescriptor descriptor;
+            descriptor.vertex.module = vsModule;
+            descriptor.cTargets[0].format = kColorFormats[j];
+
+            std::ostringstream stream;
+            stream << R"(
+                [[stage(fragment)]] fn main() -> [[location(0)]])";
+            switch (i) {
+                case 1:
+                    stream << R"( f32 {
+                    return 1.0;
+                    })";
+                    break;
+                case 2:
+                    stream << R"( vec2<f32> {
+                    return vec2<f32>(1.0, 1.0);
+                    })";
+                    break;
+                case 3:
+                    stream << R"( vec3<f32> {
+                    return vec3<f32>(1.0, 1.0, 1.0);
+                    })";
+                    break;
+                case 4:
+                    stream << R"( vec4<f32> {
+                    return vec4<f32>(1.0, 1.0, 1.0, 1.0);
+                    })";
+                    break;
+                default:
+                    UNREACHABLE();
+            }
+
+            descriptor.cFragment.module = utils::CreateShaderModule(device, stream.str().c_str());
+
+            if (i >= utils::GetWGSLRenderableColorTextureComponentCount(kColorFormats[j])) {
+                device.CreateRenderPipeline(&descriptor);
+            } else {
+                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+            }
+        }
+    }
+}
+
 /// Tests that the sample count of the render pipeline must be valid.
 TEST_F(RenderPipelineValidationTest, SampleCount) {
     {

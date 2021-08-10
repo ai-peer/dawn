@@ -253,10 +253,11 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ValidateColorTargetState(DeviceBase* device,
-                                            const ColorTargetState* descriptor,
-                                            bool fragmentWritten,
-                                            wgpu::TextureComponentType fragmentOutputBaseType) {
+        MaybeError ValidateColorTargetState(
+            DeviceBase* device,
+            const ColorTargetState* descriptor,
+            bool fragmentWritten,
+            const EntryPointMetadata::FragmentOutputVariableInfo& fragmentOutputVariable) {
             if (descriptor->nextInChain != nullptr) {
                 return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
             }
@@ -278,7 +279,8 @@ namespace dawn_native {
                     "Color format must be blendable when blending is enabled");
             }
             if (fragmentWritten) {
-                if (fragmentOutputBaseType != format->GetAspectInfo(Aspect::Color).baseType) {
+                if (fragmentOutputVariable.baseType !=
+                    format->GetAspectInfo(Aspect::Color).baseType) {
                     return DAWN_VALIDATION_ERROR(
                         "Color format must match the fragment stage output type");
                 }
@@ -288,6 +290,11 @@ namespace dawn_native {
                         "writeMask must be zero for color targets with no corresponding fragment "
                         "stage output");
                 }
+            }
+            if (fragmentWritten && fragmentOutputVariable.componentCount < format->componentCount) {
+                return DAWN_VALIDATION_ERROR(
+                    "The fragment stage output components count must be no fewer than the Color "
+                    "format channels count");
             }
 
             return {};
@@ -311,10 +318,10 @@ namespace dawn_native {
                 descriptor->module->GetEntryPoint(descriptor->entryPoint);
             for (ColorAttachmentIndex i(uint8_t(0));
                  i < ColorAttachmentIndex(static_cast<uint8_t>(descriptor->targetCount)); ++i) {
-                DAWN_TRY(
-                    ValidateColorTargetState(device, &descriptor->targets[static_cast<uint8_t>(i)],
-                                             fragmentMetadata.fragmentOutputsWritten[i],
-                                             fragmentMetadata.fragmentOutputFormatBaseTypes[i]));
+                DAWN_TRY(ValidateColorTargetState(device,
+                                                  &descriptor->targets[static_cast<uint8_t>(i)],
+                                                  fragmentMetadata.fragmentOutputsWritten[i],
+                                                  fragmentMetadata.fragmentOutputVariables[i]));
             }
 
             return {};
