@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa780ea4_c4e25a42",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-10T12:42:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c07c9708_1b8a4afb",
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69665947_0b7351c0",
@@ -106,6 +124,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ad4c8dd_2f8876f3",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1649,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-10T12:42:38Z",
+      "side": 1,
+      "message": "Sorry, my reply was meant to apply to another comment. Done.",
+      "parentUuid": "acb0b95f_af1e637b",
+      "range": {
+        "startLine": 1649,
+        "startChar": 0,
+        "endLine": 1649,
+        "endChar": 95
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecfac9ea_c0d1008f",
@@ -167,6 +209,30 @@
       "side": 1,
       "message": "Sure we can wait to simplify it",
       "parentUuid": "8b280163_63efcd16",
+      "range": {
+        "startLine": 1655,
+        "startChar": 61,
+        "endLine": 1655,
+        "endChar": 89
+      },
+      "revId": "d667c149e21d4f98e53c7bb7a7dc69a48620c31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ea105d1_61669618",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1655,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-10T12:42:38Z",
+      "side": 1,
+      "message": "kk",
+      "parentUuid": "f27e1aac_b10c92cc",
       "range": {
         "startLine": 1655,
         "startChar": 61,
