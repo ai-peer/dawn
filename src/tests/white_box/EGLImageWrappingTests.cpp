@@ -159,6 +159,9 @@ class EGLImageValidationTests : public EGLImageTestBase {
         descriptor.sampleCount = 1;
         descriptor.mipLevelCount = 1;
         descriptor.usage = wgpu::TextureUsage::RenderAttachment;
+        descriptor.nextInChain = &internalDesc;
+        internalDesc.internalUsage = static_cast<wgpu::TextureUsage>(mInternalUsage);
+        internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
     }
 
     ScopedEGLImage CreateDefaultEGLImage() {
@@ -167,6 +170,7 @@ class EGLImageValidationTests : public EGLImageTestBase {
 
   protected:
     wgpu::TextureDescriptor descriptor;
+    wgpu::DawnTextureInternalUsageDescriptor internalDesc;
 };
 
 // Test a successful wrapping of an EGLImage in a texture
@@ -177,12 +181,11 @@ TEST_P(EGLImageValidationTests, Success) {
     ASSERT_NE(texture.Get(), nullptr);
 }
 
-// Test an error occurs if the texture descriptor is invalid
+// Test an error occurs if there is no InternalUsageDescriptor as nextInChain
 TEST_P(EGLImageValidationTests, InvalidTextureDescriptor) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
-    wgpu::ChainedStruct chainedDescriptor;
-    descriptor.nextInChain = &chainedDescriptor;
+    descriptor.nextInChain = nullptr;
 
     ScopedEGLImage image = CreateDefaultEGLImage();
     ASSERT_DEVICE_ERROR(wgpu::Texture texture = WrapEGLImage(&descriptor, image.getImage()));
@@ -291,6 +294,12 @@ class EGLImageUsageTests : public EGLImageTestBase {
         textureDescriptor.sampleCount = 1;
         textureDescriptor.mipLevelCount = 1;
         textureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
+
+        wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
+        textureDescriptor.nextInChain = &internalDesc;
+        internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
+        internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
+
         wgpu::Texture eglImageTexture = WrapEGLImage(&textureDescriptor, eglImage);
         ASSERT_NE(eglImageTexture, nullptr);
 
