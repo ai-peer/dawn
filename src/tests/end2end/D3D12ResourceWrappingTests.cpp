@@ -68,6 +68,10 @@ namespace {
                 wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc |
                 wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopyDst;
 
+            baseDawnDescriptor.nextInChain = &internalDesc;
+            internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
+            internalDesc.sType = wgpu::SType::DawnTextureInternalUsageDescriptor;
+
             baseD3dDescriptor.Width = kTestWidth;
             baseD3dDescriptor.Height = kTestHeight;
             baseD3dDescriptor.MipLevels = 1;
@@ -142,6 +146,7 @@ namespace {
 
         D3D11_TEXTURE2D_DESC baseD3dDescriptor;
         wgpu::TextureDescriptor baseDawnDescriptor;
+        wgpu::DawnTextureInternalUsageDescriptor internalDesc;
     };
 
 }  // anonymous namespace
@@ -161,12 +166,11 @@ TEST_P(D3D12SharedHandleValidation, Success) {
     ASSERT_NE(texture.Get(), nullptr);
 }
 
-// Test an error occurs if the texture descriptor is invalid
+// Test an error occurs if there is no InternalUsageDescriptor as nextInChain
 TEST_P(D3D12SharedHandleValidation, InvalidTextureDescriptor) {
     DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
-    wgpu::ChainedStruct chainedDescriptor;
-    baseDawnDescriptor.nextInChain = &chainedDescriptor;
+    baseDawnDescriptor.nextInChain = nullptr;
 
     wgpu::Texture texture;
     ComPtr<ID3D11Texture2D> d3d11Texture;
