@@ -875,8 +875,16 @@ namespace dawn_native {
                         ColorAttachmentIndex attachment(
                             static_cast<uint8_t>(unsanitizedAttachment));
                         DAWN_TRY_ASSIGN(
-                            metadata->fragmentOutputFormatBaseTypes[attachment],
+                            metadata->fragmentOutputVariables[attachment].baseType,
                             TintComponentTypeToTextureComponentType(output_var.component_type));
+                        uint32_t componentCount;
+                        DAWN_TRY_ASSIGN(componentCount,
+                                        TintCompositionTypeToInterStageComponentCount(
+                                            output_var.composition_type));
+                        // componentCount should be no larger than 4u
+                        ASSERT(componentCount < std::numeric_limits<uint8_t>::max());
+                        metadata->fragmentOutputVariables[attachment].componentCount =
+                            componentCount;
                         metadata->fragmentOutputsWritten.set(attachment);
                     }
                 }
