@@ -16,6 +16,115 @@
       "message": "Fixed comments and add validation related to alpha and blending.",
       "revId": "a25fda342d7ccd56f12a435aa63e80b4af2d2f23",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1c49816_c98d1cae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T22:15:58Z",
+      "side": 1,
+      "message": "LGTM! would like Kai to review too",
+      "revId": "a25fda342d7ccd56f12a435aa63e80b4af2d2f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb9436e2_8c6f6108",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T22:15:58Z",
+      "side": 1,
+      "message": "nit: just inline the 3 here and use .size() elsewhere",
+      "range": {
+        "startLine": 261,
+        "startChar": 36,
+        "endLine": 261,
+        "endChar": 53
+      },
+      "revId": "a25fda342d7ccd56f12a435aa63e80b4af2d2f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89014afe_d182bfba",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T22:15:58Z",
+      "side": 1,
+      "message": "hard to tell what i and j are in this loop - prefer full names.  I think |i| is componentCount ?",
+      "range": {
+        "startLine": 276,
+        "startChar": 16,
+        "endLine": 276,
+        "endChar": 18
+      },
+      "revId": "a25fda342d7ccd56f12a435aa63e80b4af2d2f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e141016_5d73b749",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T22:15:58Z",
+      "side": 1,
+      "message": "nit: kColorFormats.size()\n\nor maybe just for (colorFormat : kColorFormats)",
+      "range": {
+        "startLine": 309,
+        "startChar": 31,
+        "endLine": 309,
+        "endChar": 48
+      },
+      "revId": "a25fda342d7ccd56f12a435aa63e80b4af2d2f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "705c2765_a0eb65bc",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-10T22:15:58Z",
+      "side": 1,
+      "message": "nit: prefer \n\nfor (srcFactor : kBlendFactors) {\n  for (dstFactor : kBlendFactors) {\n    // etc.\n  }\n}",
+      "range": {
+        "startLine": 320,
+        "startChar": 0,
+        "endLine": 328,
+        "endChar": 86
+      },
+      "revId": "a25fda342d7ccd56f12a435aa63e80b4af2d2f23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
