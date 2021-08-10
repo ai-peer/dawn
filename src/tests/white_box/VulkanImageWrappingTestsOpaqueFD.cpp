@@ -234,6 +234,10 @@ namespace dawn_native { namespace vulkan {
             defaultDescriptor.mipLevelCount = 1;
             defaultDescriptor.usage = wgpu::TextureUsage::RenderAttachment |
                                       wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+
+            wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
+            defaultDescriptor.nextInChain = &internalDesc;
+            internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
         }
 
         void TearDown() override {
@@ -381,6 +385,10 @@ namespace dawn_native { namespace vulkan {
             defaultDescriptor.mipLevelCount = 1;
             defaultDescriptor.usage = wgpu::TextureUsage::RenderAttachment |
                                       wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst;
+
+            wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
+            defaultDescriptor.nextInChain = &internalDesc;
+            internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
         }
 
         void TearDown() override {
