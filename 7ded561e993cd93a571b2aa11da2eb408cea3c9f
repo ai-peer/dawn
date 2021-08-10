@@ -56,6 +56,30 @@
       },
       "revId": "7ded561e993cd93a571b2aa11da2eb408cea3c9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca88f295_014781ea",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-10T12:14:35Z",
+      "side": 1,
+      "message": "Yeah, it\u0027s less than ideal. For example, Linux has both Vulkan and GL backends, and the warning is really only valid for the former.\n\nChanged to a backend check.",
+      "parentUuid": "6fc0e4cb_92fff3e5",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 137,
+        "endChar": 64
+      },
+      "revId": "7ded561e993cd93a571b2aa11da2eb408cea3c9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
