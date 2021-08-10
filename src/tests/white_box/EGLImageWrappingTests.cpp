@@ -291,6 +291,11 @@ class EGLImageUsageTests : public EGLImageTestBase {
         textureDescriptor.sampleCount = 1;
         textureDescriptor.mipLevelCount = 1;
         textureDescriptor.usage = wgpu::TextureUsage::RenderAttachment;
+
+        wgpu::DawnTextureInternalUsageDescriptor internalDesc = {};
+        textureDescriptor.nextInChain = &internalDesc;
+        internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
+
         wgpu::Texture eglImageTexture = WrapEGLImage(&textureDescriptor, eglImage);
         ASSERT_NE(eglImageTexture, nullptr);
 
