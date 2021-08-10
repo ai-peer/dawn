@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95110a1e_38840304",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-10T23:52:32Z",
+      "side": 1,
+      "message": "Thanks for the review (lost in for loop syntax switching between languages -_-)",
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
