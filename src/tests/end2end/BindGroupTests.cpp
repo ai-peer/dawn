@@ -758,9 +758,6 @@ TEST_P(BindGroupTests, DrawThenChangePipelineAndBindGroup) {
 // Test for crbug.com/dawn/1049, where setting a pipeline without drawing can prevent
 // bind groups from being applied later
 TEST_P(BindGroupTests, DrawThenChangePipelineTwiceAndBindGroup) {
-    // TODO(crbug.com/dawn/1055) find out why this test fails on Windows Intel D3D12 drivers.
-    DAWN_SUPPRESS_TEST_IF(IsIntel() && IsWindows() && IsD3D12());
-
     utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(device, kRTSize, kRTSize);
 
     // Create a bind group layout which uses a single dynamic uniform buffer.
