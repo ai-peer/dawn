@@ -194,6 +194,11 @@ namespace dawn_native { namespace opengl {
 
         ~Adapter() override = default;
 
+        // AdapterBase Implementation
+        bool SupportsExternalImages() const override {
+            return false;
+        }
+
       private:
         OpenGLFunctions mFunctions;
 

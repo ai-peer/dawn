@@ -251,6 +251,12 @@ namespace dawn_native { namespace vulkan {
         return {};
     }
 
+    bool Adapter::SupportsExternalImages() const {
+        return external_memory::Service::CheckSupport(mDeviceInfo) &&
+               external_semaphore::Service::CheckSupport(mDeviceInfo, mPhysicalDevice,
+                                                         mBackend->GetFunctions());
+    }
+
     void Adapter::InitializeSupportedExtensions() {
         if (mDeviceInfo.features.textureCompressionBC == VK_TRUE) {
             mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);

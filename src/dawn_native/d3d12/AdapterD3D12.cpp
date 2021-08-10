@@ -36,6 +36,10 @@ namespace dawn_native { namespace d3d12 {
         CleanUpDebugLayerFilters();
     }
 
+    bool Adapter::SupportsExternalImages() const {
+        return true;
+    }
+
     const D3D12DeviceInfo& Adapter::GetDeviceInfo() const {
         return mDeviceInfo;
     }
