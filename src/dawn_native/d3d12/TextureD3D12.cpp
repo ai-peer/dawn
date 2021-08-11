@@ -482,7 +482,8 @@ namespace dawn_native { namespace d3d12 {
         // memory management.
         mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
 
-        DAWN_TRY(mResourceAllocation.SetDebugName("Dawn_ExternalTexture"));
+        SetDebugName(ToBackend(GetDevice()), mResourceAllocation.GetD3D12Resource(),
+                     "Dawn_ExternalTexture");
 
         return {};
     }
@@ -521,7 +522,8 @@ namespace dawn_native { namespace d3d12 {
                             ->AllocateMemory(D3D12_HEAP_TYPE_DEFAULT, resourceDescriptor,
                                              D3D12_RESOURCE_STATE_COMMON));
 
-        DAWN_TRY(mResourceAllocation.SetDebugName("Dawn_InternalTexture"));
+        SetDebugName(ToBackend(GetDevice()), mResourceAllocation.GetD3D12Resource(),
+                     "Dawn_InternalTexture", GetLabel());
 
         Device* device = ToBackend(GetDevice());
 
@@ -544,7 +546,8 @@ namespace dawn_native { namespace d3d12 {
         // memory management.
         mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
 
-        DAWN_TRY(mResourceAllocation.SetDebugName("Dawn_SwapChainTexture"));
+        SetDebugName(ToBackend(GetDevice()), mResourceAllocation.GetD3D12Resource(),
+                     "Dawn_SwapChainTexture");
         return {};
     }
 
@@ -1024,6 +1027,11 @@ namespace dawn_native { namespace d3d12 {
             GetDevice()->IncrementLazyClearCountForTesting();
         }
         return {};
+    }
+
+    void Texture::SetLabelImpl() {
+        SetDebugName(ToBackend(GetDevice()), mResourceAllocation.GetD3D12Resource(),
+                     "Dawn_InternalTexture", GetLabel());
     }
 
     void Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,

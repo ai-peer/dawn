@@ -17,6 +17,8 @@
 
 #include "common/RefCounted.h"
 
+#include <string>
+
 namespace dawn_native {
 
     class DeviceBase;
@@ -27,15 +29,23 @@ namespace dawn_native {
         static constexpr ErrorTag kError = {};
 
         ObjectBase(DeviceBase* device);
+        ObjectBase(DeviceBase* device, const char* label);
         ObjectBase(DeviceBase* device, ErrorTag tag);
 
         DeviceBase* GetDevice() const;
         bool IsError() const;
 
+        // Dawn API
+        void APISetLabel(const char* label);
+
       protected:
-        ~ObjectBase() override = default;
+        const std::string& GetLabel();
 
       private:
+        virtual void SetLabelImpl();
+
+        // TODO: Optimize memory footprint for objects that don't have labels.
+        std::string mLabel;
         DeviceBase* mDevice;
     };
 
