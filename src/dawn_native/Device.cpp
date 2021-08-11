@@ -1348,6 +1348,7 @@ namespace dawn_native {
         SetToggle(Toggle::LazyClearResourceOnFirstUse, true);
         SetToggle(Toggle::DisallowUnsafeAPIs, true);
         SetToggle(Toggle::UseTintGenerator, true);
+        SetToggle(Toggle::UseDebugLabelsInBackend, false);
     }
 
     void DeviceBase::ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor) {
