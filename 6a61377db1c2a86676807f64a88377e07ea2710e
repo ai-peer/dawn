@@ -16,6 +16,69 @@
       "message": "Hey Austin, can you take a look at this CL? ",
       "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b56d3a_c5dcf74b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T22:24:02Z",
+      "side": 1,
+      "message": "LGTM; in the tests, I think we should leave the default descriptor in SetUp() {} alone, and just have a separate test for each suite that checks that adding InternalUsageDescriptor is valid.",
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "024754f4_da0643b7",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T22:24:02Z",
+      "side": 1,
+      "message": "nit: \u003d WGPUTextureUsage_None",
+      "range": {
+        "startLine": 82,
+        "startChar": 44,
+        "endLine": 82,
+        "endChar": 45
+      },
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36e51d70_1d992dd9",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T22:24:02Z",
+      "side": 1,
+      "message": "an invalid sType is in ..",
+      "range": {
+        "startLine": 174,
+        "startChar": 27,
+        "endLine": 174,
+        "endChar": 62
+      },
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
