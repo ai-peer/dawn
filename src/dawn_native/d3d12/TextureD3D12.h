@@ -99,7 +99,9 @@ namespace dawn_native { namespace d3d12 {
         MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
 
         // Dawn API
+        void SetLabelImpl() override;
         void DestroyImpl() override;
+
         MaybeError ClearTexture(CommandRecordingContext* commandContext,
                                 const SubresourceRange& range,
                                 TextureBase::ClearValue clearValue);
