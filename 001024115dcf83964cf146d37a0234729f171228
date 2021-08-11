@@ -16,6 +16,86 @@
       "message": "Thanks for the review (lost in for loop syntax switching between languages -_-)",
       "revId": "001024115dcf83964cf146d37a0234729f171228",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5304bfe5_79518cdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-11T03:59:15Z",
+      "side": 1,
+      "message": "lgtm! but looks like a few more tests need updating",
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b1ec2b_f421e657",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-11T03:59:15Z",
+      "side": 1,
+      "message": "uNit: funny string wrapping",
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "757a2c9b_e95358a6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-11T03:59:15Z",
+      "side": 1,
+      "message": "nit: could make a BlendFactorContainsSrc for this",
+      "range": {
+        "startLine": 312,
+        "startChar": 28,
+        "endLine": 314,
+        "endChar": 91
+      },
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0fb7c6_604e67da",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-11T03:59:15Z",
+      "side": 1,
+      "message": "nit: could say \u003c\u003d instead of \u003c\n\nOr could just say \u003c\u003d 4u since that\u0027s what the comment says. If it were \u003e 4 it would probably cause some issue somewhere down the line anyway. Then the comment would be unnecessary.",
+      "range": {
+        "startLine": 884,
+        "startChar": 0,
+        "endLine": 885,
+        "endChar": 85
+      },
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
