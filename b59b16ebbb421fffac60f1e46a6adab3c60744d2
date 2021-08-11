@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "324f31b2_2ee02a79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-11T16:34:30Z",
+      "side": 1,
+      "message": "Mostly nits, LGTM.",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5191916_dc5527f6",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-11T16:34:30Z",
+      "side": 1,
+      "message": "nit: could be put into a helper to prevent future mistakes, eg. InvalidateLayoutIfNeccessary",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bde40fc7_d21e9107",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-11T16:34:30Z",
+      "side": 1,
+      "message": "nit: could also invalidate the bound sampler tables here instead of OnSetPipeline. No need to check twice.",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643572f8_ac40eb69",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-11T16:34:30Z",
+      "side": 1,
+      "message": "unit: storage \u003d\u003e uniform",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf07783_bec757bf",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-11T16:34:30Z",
+      "side": 1,
+      "message": "unit: all bindgroups will be (correctly) re-applied, right?",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
