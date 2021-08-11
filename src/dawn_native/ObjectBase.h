@@ -28,14 +28,17 @@ namespace dawn_native {
 
         ObjectBase(DeviceBase* device);
         ObjectBase(DeviceBase* device, ErrorTag tag);
+        ~ObjectBase();
 
         DeviceBase* GetDevice() const;
         bool IsError() const;
 
       protected:
-        ~ObjectBase() override = default;
+        char* GetDebugLabel() const;
+        void SetDebugLabel(const char* debugLabel);
 
       private:
+        char* mDebugLabel = nullptr;
         DeviceBase* mDevice;
     };
 

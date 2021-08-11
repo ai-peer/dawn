@@ -64,8 +64,14 @@ namespace dawn_native { namespace vulkan {
 
         ::VkImage image = NativeNonDispatachableHandleFromU64<::VkImage>(next.texture.u64);
         VkImage nativeTexture = VkImage::CreateFromHandle(image);
-        return Texture::CreateForSwapChain(ToBackend(GetDevice()), descriptor, nativeTexture)
-            .Detach();
+        Ref<Texture> dawnTexture;
+        if (GetDevice()->ConsumedError(
+                Texture::CreateForSwapChain(ToBackend(GetDevice()), descriptor, nativeTexture),
+                &dawnTexture)) {
+            return nullptr;
+        }
+
+        return dawnTexture.Detach();
     }
 
     MaybeError OldSwapChain::OnBeforePresent(TextureViewBase* view) {
@@ -615,7 +621,7 @@ namespace dawn_native { namespace vulkan {
         textureDesc.usage = mConfig.wgpuUsage;
 
         VkImage currentImage = mSwapChainImages[mLastImageIndex];
-        mTexture = Texture::CreateForSwapChain(device, &textureDesc, currentImage);
+        DAWN_TRY_ASSIGN(mTexture, Texture::CreateForSwapChain(device, &textureDesc, currentImage));
 
         // In the happy path we can use the swapchain image directly.
         if (!mConfig.needsBlit) {

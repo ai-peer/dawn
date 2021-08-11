@@ -26,6 +26,23 @@ namespace dawn_native {
         : RefCounted(kErrorPayload), mDevice(device) {
     }
 
+    ObjectBase::~ObjectBase() {
+        if (mDebugLabel) {
+            delete mDebugLabel;
+        }
+    }
+
+    char* ObjectBase::GetDebugLabel() const {
+        return mDebugLabel;
+    }
+
+    void ObjectBase::SetDebugLabel(const char* debugLabel) {
+        if (debugLabel) {
+            mDebugLabel = new char[strlen(debugLabel) + 1];
+            strcpy(mDebugLabel, debugLabel);
+        }
+    }
+
     DeviceBase* ObjectBase::GetDevice() const {
         return mDevice;
     }

@@ -147,6 +147,8 @@ namespace dawn_native {
         if (mUsage & wgpu::BufferUsage::QueryResolve) {
             mUsage |= kInternalStorageBuffer;
         }
+
+        SetDebugLabel(descriptor->label);
     }
 
     BufferBase::BufferBase(DeviceBase* device,
