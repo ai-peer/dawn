@@ -148,8 +148,6 @@ target_sources(dawn_native PRIVATE
     "Sampler.h"
     "ShaderModule.cpp"
     "ShaderModule.h"
-    "SpirvUtils.cpp"
-    "SpirvUtils.h"
     "StagingBuffer.cpp"
     "StagingBuffer.h"
     "Subresource.cpp"
@@ -176,11 +174,6 @@ target_link_libraries(dawn_native
             dawn_platform
             dawn_internal_config
             libtint
-            spirv-cross-core
-            spirv-cross-glsl
-            spirv-cross-hlsl
-            spirv-cross-msl
-            SPIRV-Tools-opt
 )
 
 if (DAWN_USE_X11)
@@ -194,7 +187,7 @@ if (DAWN_USE_X11)
 endif()
 
 # Only win32 app needs to link with user32.lib
-# In UWP, all availiable APIs are defined in WindowsApp.lib 
+# In UWP, all availiable APIs are defined in WindowsApp.lib
 # and is automatically linked when WINDOWS_STORE set
 if (WIN32 AND NOT WINDOWS_STORE)
     target_link_libraries(dawn_native PRIVATE user32.lib)
@@ -407,6 +400,8 @@ if (DAWN_ENABLE_OPENGL)
         "opengl/SamplerGL.h"
         "opengl/ShaderModuleGL.cpp"
         "opengl/ShaderModuleGL.h"
+        "opengl/SpirvUtils.cpp"
+        "opengl/SpirvUtils.h"
         "opengl/SwapChainGL.cpp"
         "opengl/SwapChainGL.h"
         "opengl/TextureGL.cpp"
@@ -416,7 +411,11 @@ if (DAWN_ENABLE_OPENGL)
         "opengl/opengl_platform.h"
     )
 
-    target_link_libraries(dawn_native PRIVATE dawn_khronos_platform)
+    target_link_libraries(dawn_native
+        PRIVATE dawn_khronos_platform
+                spirv-cross-core
+                spirv-cross-glsl
+                SPIRV-Tools-opt)
 endif()
 
 if (DAWN_ENABLE_VULKAN)
@@ -486,7 +485,9 @@ if (DAWN_ENABLE_VULKAN)
         "vulkan/external_semaphore/SemaphoreService.h"
     )
 
-    target_link_libraries(dawn_native PUBLIC dawn_vulkan_headers)
+    target_link_libraries(dawn_native
+        PUBLIC dawn_vulkan_headers
+        PRIVATE SPIRV-Tools-opt)
 
     if (UNIX AND NOT APPLE)
         target_sources(dawn_native PRIVATE

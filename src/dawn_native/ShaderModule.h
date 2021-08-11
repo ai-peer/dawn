@@ -45,10 +45,6 @@ namespace tint {
 
 }  // namespace tint
 
-namespace spirv_cross {
-    class Compiler;
-}
-
 namespace dawn_native {
 
     struct EntryPointMetadata;
@@ -225,18 +221,6 @@ namespace dawn_native {
             std::unique_ptr<OwnedCompilationMessages> compilationMessages);
 
         OwnedCompilationMessages* GetCompilationMessages() const;
-
-        ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
-            const std::vector<uint32_t>& spirv,
-            const VertexState& vertexState,
-            const std::string& entryPoint,
-            BindGroupIndex pullingBufferBindingSet) const;
-
-        ResultOrError<std::vector<uint32_t>> GeneratePullingSpirv(
-            const tint::Program* program,
-            const VertexState& vertexState,
-            const std::string& entryPoint,
-            BindGroupIndex pullingBufferBindingSet) const;
 
       protected:
         MaybeError InitializeBase(ShaderModuleParseResult* parseResult);
