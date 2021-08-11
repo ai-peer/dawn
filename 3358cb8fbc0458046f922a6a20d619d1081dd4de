@@ -16,6 +16,23 @@
       "message": "Austin, Kai: PTAL. Thanks!",
       "revId": "3358cb8fbc0458046f922a6a20d619d1081dd4de",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97919716_372f9b88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T19:33:24Z",
+      "side": 1,
+      "message": "LGTM, thanks!",
+      "revId": "3358cb8fbc0458046f922a6a20d619d1081dd4de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
