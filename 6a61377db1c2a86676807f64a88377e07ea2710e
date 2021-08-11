@@ -58,6 +58,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00db9b3e_bfd15194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T22:28:42Z",
+      "side": 1,
+      "message": "Ideally we should have tests that check that the copy actually succeeds for all of the backends after the external image has been wrapped as a WGPUTexture, but we can add those tests in a follow-up to first unblock Chromuim work.",
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "024754f4_da0643b7",
