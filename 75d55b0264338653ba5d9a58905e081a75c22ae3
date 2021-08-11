@@ -51,6 +51,24 @@
       "parentUuid": "4b08cbcf_90e8057a",
       "revId": "75d55b0264338653ba5d9a58905e081a75c22ae3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4a85cf_8e33703c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000505
+      },
+      "writtenOn": "2021-08-11T14:31:21Z",
+      "side": 1,
+      "message": "Yes, for the most part, all we need is a Vulkan implementation that supports the DRM image format modifiers extension. There\u0027s an edge case where some devices don\u0027t support the SharedImage ecosystem which is required for the Chrome/Dawn interop, but those devices are all fairly old. None of them are running JSL/TGL+, so they won\u0027t have the extension anyways.\n\nThis should be good.",
+      "parentUuid": "3e6bb2ac_7713b229",
+      "revId": "75d55b0264338653ba5d9a58905e081a75c22ae3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
