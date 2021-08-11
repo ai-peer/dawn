@@ -505,12 +505,12 @@ namespace dawn_native { namespace vulkan {
     }
 
     // static
-    Ref<Texture> Texture::CreateForSwapChain(Device* device,
-                                             const TextureDescriptor* descriptor,
-                                             VkImage nativeImage) {
+    ResultOrError<Ref<Texture>> Texture::CreateForSwapChain(Device* device,
+                                                            const TextureDescriptor* descriptor,
+                                                            VkImage nativeImage) {
         Ref<Texture> texture =
             AcquireRef(new Texture(device, descriptor, TextureState::OwnedExternal));
-        texture->InitializeForSwapChain(nativeImage);
+        DAWN_TRY(texture->InitializeForSwapChain(nativeImage));
         return texture;
     }
 
@@ -577,6 +577,10 @@ namespace dawn_native { namespace vulkan {
                                   GetAllSubresources(), TextureBase::ClearValue::NonZero));
         }
 
+        DAWN_TRY(SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,
+                              reinterpret_cast<uint64_t&>(mHandle), "Dawn_InternalTexture",
+                              GetDebugLabel()));
+
         return {};
     }
 
@@ -611,11 +615,18 @@ namespace dawn_native { namespace vulkan {
         baseCreateInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
         DAWN_TRY_ASSIGN(mHandle, externalMemoryService->CreateImage(descriptor, baseCreateInfo));
+
+        DAWN_TRY(SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,
+                              reinterpret_cast<uint64_t&>(mHandle), "Dawn_ExternalTexture"));
+
         return {};
     }
 
-    void Texture::InitializeForSwapChain(VkImage nativeImage) {
+    MaybeError Texture::InitializeForSwapChain(VkImage nativeImage) {
         mHandle = nativeImage;
+        DAWN_TRY(SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,
+                              reinterpret_cast<uint64_t&>(mHandle), "Dawn_SwapChainTexture"));
+        return {};
     }
 
     MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descriptor,

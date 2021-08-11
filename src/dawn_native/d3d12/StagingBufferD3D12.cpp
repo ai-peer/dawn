@@ -17,6 +17,7 @@
 #include "dawn_native/d3d12/DeviceD3D12.h"
 #include "dawn_native/d3d12/HeapD3D12.h"
 #include "dawn_native/d3d12/ResidencyManagerD3D12.h"
+#include "dawn_native/d3d12/UtilsD3D12.h"
 
 namespace dawn_native { namespace d3d12 {
 
@@ -42,7 +43,7 @@ namespace dawn_native { namespace d3d12 {
                         mDevice->AllocateMemory(D3D12_HEAP_TYPE_UPLOAD, resourceDescriptor,
                                                 D3D12_RESOURCE_STATE_GENERIC_READ));
 
-        DAWN_TRY(mUploadHeap.SetDebugName("Dawn_StagingBuffer"));
+        DAWN_TRY(SetDebugName(GetResource(), "Dawn_StagingBuffer"));
 
         // The mapped buffer can be accessed at any time, so it must be locked to ensure it is never
         // evicted. This buffer should already have been made resident when it was created.

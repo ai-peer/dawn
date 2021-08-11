@@ -17,8 +17,10 @@
 #include "common/Assert.h"
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Format.h"
+#include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/TextureVk.h"
+#include "dawn_native/vulkan/VulkanError.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -161,5 +163,38 @@ namespace dawn_native { namespace vulkan {
         }
 
         return region;
+    }
+
+    MaybeError SetDebugName(Device* device,
+                            VkObjectType objectType,
+                            uint64_t objectHandle,
+                            const char* prefix,
+                            char* label) {
+        if (device->GetGlobalInfo().HasExt(InstanceExt::DebugUtils)) {
+            char* objectName;
+            if (label) {
+                objectName = new char[strlen(prefix) + strlen(label) + 2];
+                strcpy(objectName, prefix);
+                strcat(objectName, "_");
+                strcat(objectName, label);
+            } else {
+                objectName = new char[strlen(prefix) + 1];
+                strcpy(objectName, prefix);
+            }
+
+            VkDebugUtilsObjectNameInfoEXT objectNameInfo;
+
+            objectNameInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
+            objectNameInfo.pNext = nullptr;
+            objectNameInfo.objectType = objectType;
+            objectNameInfo.objectHandle = objectHandle;
+            objectNameInfo.pObjectName = objectName;
+
+            DAWN_TRY(CheckVkSuccess(
+                device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo),
+                "SetDebugUtilsObjectNameEXT"));
+        }
+
+        return {};
     }
 }}  // namespace dawn_native::vulkan

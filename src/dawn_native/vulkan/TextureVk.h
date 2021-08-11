@@ -57,9 +57,9 @@ namespace dawn_native { namespace vulkan {
             external_memory::Service* externalMemoryService);
 
         // Creates a texture that wraps a swapchain-allocated VkImage.
-        static Ref<Texture> CreateForSwapChain(Device* device,
-                                               const TextureDescriptor* descriptor,
-                                               VkImage nativeImage);
+        static ResultOrError<Ref<Texture>> CreateForSwapChain(Device* device,
+                                                              const TextureDescriptor* descriptor,
+                                                              VkImage nativeImage);
 
         VkImage GetHandle() const;
         VkImageAspectFlags GetVkAspectMask(wgpu::TextureAspect aspect) const;
@@ -100,7 +100,7 @@ namespace dawn_native { namespace vulkan {
         MaybeError InitializeAsInternalTexture(VkImageUsageFlags extraUsages);
         MaybeError InitializeFromExternal(const ExternalImageDescriptorVk* descriptor,
                                           external_memory::Service* externalMemoryService);
-        void InitializeForSwapChain(VkImage nativeImage);
+        MaybeError InitializeForSwapChain(VkImage nativeImage);
 
         void DestroyImpl() override;
         MaybeError ClearTexture(CommandRecordingContext* recordingContext,
