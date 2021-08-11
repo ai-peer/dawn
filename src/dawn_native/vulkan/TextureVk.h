@@ -93,6 +93,9 @@ namespace dawn_native { namespace vulkan {
                                          VkImageLayout* releasedOldLayout,
                                          VkImageLayout* releasedNewLayout);
 
+        // Dawn API
+        void APISetLabel(const char* label) override;
+
       private:
         ~Texture() override;
         Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
