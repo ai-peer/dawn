@@ -149,6 +149,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42950ca2_0ec61ad5",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T23:30:14Z",
+      "side": 1,
+      "message": "if it keeps the binding model more compatible with D3D11, then I think it\u0027s worth it to preserve the ability to compact like this. We\u0027d like webgpu compat on D3D11 to follow close after core webgpu.",
+      "parentUuid": "6c7f16c9_f0f6a888",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f06e20_28a8d64f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 4
@@ -313,6 +337,30 @@
       "side": 1,
       "message": "What do you think of removing* d3d12::BindGroupLayout::DescriptorType and replacing it with RangeType directly? I think here (and at the sampler checks) we want the low-level d3d12 enum, in case in the future some other BindingInfoType maps to d3d12\u0027s DescriptorRangeTypeSampler, but perhaps this is an overly cautious opinion since BindingInfoType::Sampler maps directly to DescriptorRangeTypeSampler. Thoughts?\n\n*IIUC the DescriptorType enum is just a copy of D3D\u0027s RangeType added to allow indexing into ityp:array.",
       "parentUuid": "fcad86b4_f0593854",
+      "range": {
+        "startLine": 147,
+        "startChar": 30,
+        "endLine": 147,
+        "endChar": 87
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc1605a3_0bec46ab",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T23:30:14Z",
+      "side": 1,
+      "message": "Given we don\u0027t have the array for the count now, that sounds fine to me.",
+      "parentUuid": "3bff1c18_7f1103e8",
       "range": {
         "startLine": 147,
         "startChar": 30,

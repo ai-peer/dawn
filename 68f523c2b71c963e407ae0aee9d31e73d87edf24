@@ -16,6 +16,92 @@
       "message": "I have rebased to resolve a merge conflict.\n\nAgain, I appreciate both of your time!",
       "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a7ad16e_6389dc0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T23:30:14Z",
+      "side": 1,
+      "message": "I\u0027m trying to understand at a high level why we need to flatten the register space like this. But I don\u0027t know the internals of what the spirv2dxil translation is doing, so any clarity there would be appreciated.\n\nLooking at https://github.com/microsoft/DirectXShaderCompiler/blob/master/docs/DXIL.rst#shader-resources\nit seems to me that DXIL still has the separation between UAV/SRV/CBV/Sampler. What do the D3D12 registers specified in the API with BaseShaderRegister etc. correspond to in the DXIL?\n\nIs flattening the register range a requirement for DXIL or is it more so a side effect of going through SPIRV which doesn\u0027t namespace the bindings? Can the SPIRV-\u003eDXIL translation do the compaction, or can we provide the SPIRV-\u003eDXIL translation a mapping of (binding, group) to DXIL register?\n\nIf flattening is not a requirement, it might be cool to have whatever necessary recompaction of spirv bindings to DXIL registers be contained within Tint. Right now, pretty much all of Dawn\u0027s backends have some Tint transform for remapping WGSL (group, binding) into the backend binding space. Tint could similarly have a \"DXIL\" backend that accepts a register mapping. Overall that might be a nice abstraction because it would mean Tint supports WGSL-\u003eDXIL translation - going through SPIRV is an implementation detail.",
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b3bf50b_1b77693a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T23:30:14Z",
+      "side": 1,
+      "message": "now this can be GetShaderRegister(bindingIndex)",
+      "range": {
+        "startLine": 142,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 93
+      },
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e711096a_557c88ce",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T23:30:14Z",
+      "side": 1,
+      "message": "nit: this doesn\u0027t need to be ityp::span because size_t isn\u0027t a type-safe integer. We could simply return a `const std::vector\u003cD3D12DescriptorRange\u003e\u0026` here",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 56
+      },
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2752985_b417f178",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T23:30:14Z",
+      "side": 1,
+      "message": "typo: aggressive",
+      "range": {
+        "startLine": 1034,
+        "startChar": 7,
+        "endLine": 1034,
+        "endChar": 16
+      },
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
