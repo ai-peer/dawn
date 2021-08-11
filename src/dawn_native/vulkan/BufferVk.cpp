@@ -19,6 +19,7 @@
 #include "dawn_native/vulkan/FencedDeleter.h"
 #include "dawn_native/vulkan/ResourceHeapVk.h"
 #include "dawn_native/vulkan/ResourceMemoryAllocatorVk.h"
+#include "dawn_native/vulkan/UtilsVulkan.h"
 #include "dawn_native/vulkan/VulkanError.h"
 
 #include <cstring>
@@ -200,6 +201,8 @@ namespace dawn_native { namespace vulkan {
             ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
         }
 
+        SetLabelImpl();
+
         return {};
     }
 
@@ -343,6 +346,11 @@ namespace dawn_native { namespace vulkan {
         } else {
             InitializeToZero(recordingContext);
         }
+    }
+
+    void Buffer::SetLabelImpl() {
+        SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_BUFFER,
+                     reinterpret_cast<uint64_t&>(mHandle), "Dawn_Buffer", GetLabel());
     }
 
     void Buffer::InitializeToZero(CommandRecordingContext* recordingContext) {
