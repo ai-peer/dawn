@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "445e6500_945b751c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T16:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5191916_dc5527f6",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bde40fc7_d21e9107",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-08-11T16:34:30Z",
       "side": 1,
       "message": "nit: could also invalidate the bound sampler tables here instead of OnSetPipeline. No need to check twice.",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf54a190_ee23b8c5",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T16:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bde40fc7_d21e9107",
       "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9ded3e0_613492bf",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 810,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T16:57:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "643572f8_ac40eb69",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cf07783_bec757bf",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-08-11T16:34:30Z",
       "side": 1,
       "message": "unit: all bindgroups will be (correctly) re-applied, right?",
+      "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c3e52f9_0dd5f45c",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T16:57:40Z",
+      "side": 1,
+      "message": "Actually, only #2 is reapplied because now pass.SetPipeline(pipeline1); doesn\u0027t actually set the root signature since there is no draw.",
+      "parentUuid": "6cf07783_bec757bf",
       "revId": "b59b16ebbb421fffac60f1e46a6adab3c60744d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
