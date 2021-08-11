@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da5bdfb9_9839cab9",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-11T19:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8b1ec2b_f421e657",
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "757a2c9b_e95358a6",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d043d35_bcf58cee",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-11T19:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "757a2c9b_e95358a6",
+      "range": {
+        "startLine": 312,
+        "startChar": 28,
+        "endLine": 314,
+        "endChar": 91
+      },
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e0fb7c6_604e67da",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-08-11T03:59:15Z",
       "side": 1,
       "message": "nit: could say \u003c\u003d instead of \u003c\n\nOr could just say \u003c\u003d 4u since that\u0027s what the comment says. If it were \u003e 4 it would probably cause some issue somewhere down the line anyway. Then the comment would be unnecessary.",
+      "range": {
+        "startLine": 884,
+        "startChar": 0,
+        "endLine": 885,
+        "endChar": 85
+      },
+      "revId": "001024115dcf83964cf146d37a0234729f171228",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6961cf9a_0051623b",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-11T19:16:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e0fb7c6_604e67da",
       "range": {
         "startLine": 884,
         "startChar": 0,
