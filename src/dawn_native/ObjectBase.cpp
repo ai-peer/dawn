@@ -1,3 +1,5 @@
+#include "OBJECTBASE.H"
+#include "ObjectBase.h"
 // Copyright 2018 The Dawn Authors
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
@@ -24,6 +26,23 @@ namespace dawn_native {
 
     ObjectBase::ObjectBase(DeviceBase* device, ErrorTag)
         : RefCounted(kErrorPayload), mDevice(device) {
+    }
+
+    ObjectBase::~ObjectBase() {
+        if (mDebugLabel) {
+            delete mDebugLabel;
+        }
+    }
+
+    char* ObjectBase::GetDebugLabel() const {
+        return mDebugLabel;
+    }
+
+    void ObjectBase::SetDebugLabel(const char* debugLabel) {
+        if (debugLabel) {
+            mDebugLabel = new char[strlen(debugLabel) + 1];
+            strcpy(mDebugLabel, debugLabel);
+        }
     }
 
     DeviceBase* ObjectBase::GetDevice() const {

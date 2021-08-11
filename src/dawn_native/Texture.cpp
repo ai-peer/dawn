@@ -456,6 +456,8 @@ namespace dawn_native {
         if (mInternalUsage & wgpu::TextureUsage::Storage) {
             mInternalUsage |= kReadOnlyStorageTexture;
         }
+
+        SetDebugLabel(descriptor->label);
     }
 
     static Format kUnusedFormat;
