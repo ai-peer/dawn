@@ -577,6 +577,9 @@ namespace dawn_native { namespace vulkan {
                                   GetAllSubresources(), TextureBase::ClearValue::NonZero));
         }
 
+        SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,
+                     reinterpret_cast<uint64_t&>(mHandle), "Dawn_InternalTexture", GetDebugLabel());
+
         return {};
     }
 
@@ -611,11 +614,17 @@ namespace dawn_native { namespace vulkan {
         baseCreateInfo.usage |= VK_IMAGE_USAGE_TRANSFER_DST_BIT;
 
         DAWN_TRY_ASSIGN(mHandle, externalMemoryService->CreateImage(descriptor, baseCreateInfo));
+
+        SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,
+                     reinterpret_cast<uint64_t&>(mHandle), "Dawn_ExternalTexture");
+
         return {};
     }
 
     void Texture::InitializeForSwapChain(VkImage nativeImage) {
         mHandle = nativeImage;
+        SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,
+                     reinterpret_cast<uint64_t&>(mHandle), "Dawn_SwapChainTexture");
     }
 
     MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descriptor,

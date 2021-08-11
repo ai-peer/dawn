@@ -17,8 +17,10 @@
 #include "common/Assert.h"
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Format.h"
+#include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/TextureVk.h"
+#include "dawn_native/vulkan/VulkanError.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -161,5 +163,33 @@ namespace dawn_native { namespace vulkan {
         }
 
         return region;
+    }
+
+    void SetDebugName(Device* device,
+                      VkObjectType objectType,
+                      uint64_t objectHandle,
+                      const char* prefix,
+                      std::string label) {
+        if (!device->IsToggleEnabled(Toggle::UseDebugLabelsInBackend)) {
+            return;
+        }
+
+        if (device->GetGlobalInfo().HasExt(InstanceExt::DebugUtils)) {
+            std::string objectName = prefix;
+            if (label != "") {
+                objectName += "_";
+                objectName += label;
+            }
+
+            VkDebugUtilsObjectNameInfoEXT objectNameInfo;
+
+            objectNameInfo.sType = VK_STRUCTURE_TYPE_DEBUG_UTILS_OBJECT_NAME_INFO_EXT;
+            objectNameInfo.pNext = nullptr;
+            objectNameInfo.objectType = objectType;
+            objectNameInfo.objectHandle = objectHandle;
+            objectNameInfo.pObjectName = objectName.c_str();
+
+            device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
+        }
     }
 }}  // namespace dawn_native::vulkan

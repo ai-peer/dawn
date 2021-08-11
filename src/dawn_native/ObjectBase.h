@@ -17,6 +17,8 @@
 
 #include "common/RefCounted.h"
 
+#include <string>
+
 namespace dawn_native {
 
     class DeviceBase;
@@ -27,15 +29,17 @@ namespace dawn_native {
         static constexpr ErrorTag kError = {};
 
         ObjectBase(DeviceBase* device);
+        ObjectBase(DeviceBase* device, const char* label);
         ObjectBase(DeviceBase* device, ErrorTag tag);
 
         DeviceBase* GetDevice() const;
         bool IsError() const;
 
       protected:
-        ~ObjectBase() override = default;
+        std::string GetDebugLabel() const;
 
       private:
+        std::string mLabel;
         DeviceBase* mDevice;
     };
 
