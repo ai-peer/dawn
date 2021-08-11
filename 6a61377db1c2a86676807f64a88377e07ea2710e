@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f3fb5c4b_f8a6e900",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 23
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-11T22:40:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f848e8ad_0623bde9",
+      "range": {
+        "startLine": 7,
+        "startChar": 20,
+        "endLine": 7,
+        "endChar": 27
+      },
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ff716664_9a01c555",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 23
@@ -77,6 +101,42 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e9c79a1b_5a8a5268",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-11T22:40:00Z",
+      "side": 1,
+      "message": "Make sense, I will change the tests.",
+      "parentUuid": "40b56d3a_c5dcf74b",
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d11891a_3a754269",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-11T22:40:00Z",
+      "side": 1,
+      "message": "Sounds good, I will add a bug to keep track of that.",
+      "parentUuid": "00db9b3e_bfd15194",
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "024754f4_da0643b7",
         "filename": "src/include/dawn_native/D3D12Backend.h",
         "patchSetId": 23
@@ -88,6 +148,30 @@
       "writtenOn": "2021-08-11T22:24:02Z",
       "side": 1,
       "message": "nit: \u003d WGPUTextureUsage_None",
+      "range": {
+        "startLine": 82,
+        "startChar": 44,
+        "endLine": 82,
+        "endChar": 45
+      },
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99cda238_7da1145b",
+        "filename": "src/include/dawn_native/D3D12Backend.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-11T22:40:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "024754f4_da0643b7",
       "range": {
         "startLine": 82,
         "startChar": 44,
@@ -111,6 +195,30 @@
       "writtenOn": "2021-08-11T22:24:02Z",
       "side": 1,
       "message": "an invalid sType is in ..",
+      "range": {
+        "startLine": 174,
+        "startChar": 27,
+        "endLine": 174,
+        "endChar": 62
+      },
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9344842a_720d00d3",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-11T22:40:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36e51d70_1d992dd9",
       "range": {
         "startLine": 174,
         "startChar": 27,
