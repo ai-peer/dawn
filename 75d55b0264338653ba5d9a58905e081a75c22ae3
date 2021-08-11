@@ -33,6 +33,24 @@
       "message": "LGTM, thanks for making the change!",
       "revId": "75d55b0264338653ba5d9a58905e081a75c22ae3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e6bb2ac_7713b229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-11T14:26:05Z",
+      "side": 1,
+      "message": "Just to be sure though - will this be sufficient to filter out ChromeOS devices that can\u0027t fully support WebGPU?",
+      "parentUuid": "4b08cbcf_90e8057a",
+      "revId": "75d55b0264338653ba5d9a58905e081a75c22ae3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
