@@ -39,6 +39,30 @@
       },
       "revId": "b3588f4e4e0766c316e920b65e55e3f00ab858ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1214d468_bccca6d7",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-12T18:27:58Z",
+      "side": 1,
+      "message": "LockAllocation isn\u0027t expected to fail, the heap should be already resident if AllocateMemory succeeds.\n\nBut we could conditionally check (vs ASSERT) in UnlockAllocation to be extra safe, if you prefer.",
+      "parentUuid": "e5e82276_98ef8eb4",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "b3588f4e4e0766c316e920b65e55e3f00ab858ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
