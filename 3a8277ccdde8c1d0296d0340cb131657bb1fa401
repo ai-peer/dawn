@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1e5e25c_9dd03a20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-12T17:23:25Z",
+      "side": 1,
+      "message": "This is moving towards a less strict validation so should go in before branching.\n\nValidation for writeMask (although not fully decided) is moving towards a stricter validation so I think we can always add that later when needed",
+      "revId": "3a8277ccdde8c1d0296d0340cb131657bb1fa401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
