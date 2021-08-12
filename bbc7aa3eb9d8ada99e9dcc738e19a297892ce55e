@@ -33,6 +33,23 @@
       "message": "LGTM, thanks!",
       "revId": "bbc7aa3eb9d8ada99e9dcc738e19a297892ce55e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2aa8a08_6aa34e12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-08-12T21:52:20Z",
+      "side": 1,
+      "message": "After digging into it a bit it seems like the CTS failures blocking this aren\u0027t actually due to this CL. (Mildly surprising, since they\u0027re at least related to depth textures.) In any case, I can repro them on Chrome Canary, so it\u0027s got to be an earlier change.\n\nI\u0027ll still poke around and see if I can figure out what\u0027s up.",
+      "revId": "bbc7aa3eb9d8ada99e9dcc738e19a297892ce55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
