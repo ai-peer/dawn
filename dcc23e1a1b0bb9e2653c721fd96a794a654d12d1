@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "c3273ace_fa641407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T17:18:25Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "dcc23e1a1b0bb9e2653c721fd96a794a654d12d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2a0abc2d_74f86421",
         "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
         "patchSetId": 2
