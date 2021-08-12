@@ -51,6 +51,24 @@
       "parentUuid": "0b17a259_30bc4b8e",
       "revId": "3a8277ccdde8c1d0296d0340cb131657bb1fa401",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "664a2332_58a3994e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-12T20:26:55Z",
+      "side": 1,
+      "message": "correction: it does have an observable effect, it loosens the validation.\nThis is because the validation in dawn \u003d\u003d cts !\u003d the version I had in the spec thread:\nhttps://github.com/gpuweb/gpuweb/issues/2013#issuecomment-897364617\n\nAnyway it\u0027s still not a rush since it loosens validation.",
+      "parentUuid": "d7cdc6c9_c106f14b",
+      "revId": "3a8277ccdde8c1d0296d0340cb131657bb1fa401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
