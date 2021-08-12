@@ -21,6 +21,7 @@ message Mutation {
     MutationReplaceIdentifier replace_identifier = 1;
     MutationChangeBinaryOperator change_binary_operator = 2;
     MutationWrapUnaryOperator wrap_unary_operator = 3;
+    MutationDeleteStatement delete_statement = 4;
   };
 }
 
@@ -41,16 +42,6 @@ message MutatorState {
   MutationSequence mutation_sequence = 2;
 }
 
-message MutationReplaceIdentifier {
-  // This transformation replaces a use of one variable with another.
-
-  // The id of the use of a variable in the AST.
-  uint32 use_id = 1;
-
-  // The id of a definition of a variable to replace the use with.
-  uint32 replacement_id = 2;
-}
-
 message MutationChangeBinaryOperator {
   // This transformation replaces one binary operator with another.
 
@@ -59,6 +50,24 @@ message MutationChangeBinaryOperator {
 
   // A BinaryOp representing the new binary operator.
   uint32 new_operator = 2;
+}
+
+message MutationDeleteStatement {
+  // This transformation delete a statement that have
+  // an allowed type.
+
+  // The id of a statement to be deleted.
+  uint32 statement_id = 1;
+}
+
+message MutationReplaceIdentifier {
+  // This transformation replaces a use of one variable with another.
+
+  // The id of the use of a variable in the AST.
+  uint32 use_id = 1;
+
+  // The id of a definition of a variable to replace the use with.
+  uint32 replacement_id = 2;
 }
 
 message MutationWrapUnaryOperator {

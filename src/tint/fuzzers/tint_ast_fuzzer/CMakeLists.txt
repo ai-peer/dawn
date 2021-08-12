@@ -42,9 +42,11 @@ set(LIBTINT_AST_FUZZER_SOURCES
         mutation.h
         mutation_finder.h
         mutation_finders/change_binary_operators.h
+        mutation_finders/delete_statements.h
         mutation_finders/replace_identifiers.h
         mutation_finders/wrap_unary_operators.h
         mutations/change_binary_operator.h
+        mutations/delete_statement.h
         mutations/replace_identifier.h
         mutations/wrap_unary_operator.h
         mutator.h
@@ -62,9 +64,11 @@ set(LIBTINT_AST_FUZZER_SOURCES ${LIBTINT_AST_FUZZER_SOURCES}
         mutation.cc
         mutation_finder.cc
         mutation_finders/change_binary_operators.cc
+        mutation_finders/delete_statements.cc
         mutation_finders/replace_identifiers.cc
         mutation_finders/wrap_unary_operators.cc
         mutations/change_binary_operator.cc
+        mutations/delete_statement.cc
         mutations/replace_identifier.cc
         mutations/wrap_unary_operator.cc
         mutator.cc
@@ -104,6 +108,7 @@ if (${TINT_BUILD_TESTS})
     set(TEST_SOURCES
             expression_size_test.cc
             mutations/change_binary_operator_test.cc
+            mutations/delete_statement_test.cc
             mutations/replace_identifier_test.cc
 	        mutations/wrap_unary_operator_test.cc)
 
