@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9b59cfd_48f26d3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-12T17:42:35Z",
+      "side": 1,
+      "message": "If there is no more comments, I plan to merge EOD.",
+      "revId": "fa95346a5a0e9e0ccdcd9c7a6157d387f4f4e31e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
