@@ -63,6 +63,30 @@
       },
       "revId": "b3588f4e4e0766c316e920b65e55e3f00ab858ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a48f444_76e4d25a",
+        "filename": "src/dawn_native/d3d12/StagingBufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T18:50:17Z",
+      "side": 1,
+      "message": "Yea, it can be a separate change though. I feel like the better way to do this might be for LockAllocation to return a ScopedResidencyLock object or something like that. The ASSERT there is useful because its checking invariant that Unlock is called only if the resource is locked. The scoped object would simply not call Unlock at all if something failed.",
+      "parentUuid": "1214d468_bccca6d7",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 0
+      },
+      "revId": "b3588f4e4e0766c316e920b65e55e3f00ab858ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
