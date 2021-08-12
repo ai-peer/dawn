@@ -33,6 +33,24 @@
       "message": "LGTM (but no rush because I\u0027m pretty sure this is all just redundant validation, and has no observable effect)",
       "revId": "3a8277ccdde8c1d0296d0340cb131657bb1fa401",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7cdc6c9_c106f14b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-12T19:05:34Z",
+      "side": 1,
+      "message": "In terms of that we can wait for the next cts roll",
+      "parentUuid": "0b17a259_30bc4b8e",
+      "revId": "3a8277ccdde8c1d0296d0340cb131657bb1fa401",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
