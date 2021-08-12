@@ -90,6 +90,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10505dcd_eabee742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T18:23:02Z",
+      "side": 1,
+      "message": "\u003e I see. You mean someone can set texture.label after the texture has been created, and that would call SetLabel within Chromium? Just trying to understand how it works.\n\nyup. See https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/dawn_object.cc;l\u003d22;bpv\u003d1;bpt\u003d1?q\u003dsetLabel%20f:webgpu\n\n\u003e metal\nunderstood. If it\u0027s too difficult, don\u0027t worry about it. I guess I was just hoping it would be manageable to get something compiling for one object, and then the rest are mostly copy-paste.\n\n\u003e sanitization\nok so const char* is sufficient - thanks all for the explanation.\nfor now, I think we need to be defensive. We don\u0027t need to do sanitization now, but we should put it behind a flag because:\n - don\u0027t want the overhead of sending the label to the driver unless someone is trying to do a trace\n - driver is a black box for us so we need to be extra careful. strings can be a target for remote execution exploits",
+      "parentUuid": "26923e3e_61ae9cd0",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbbf35cf_e4a5e75b",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T18:23:02Z",
+      "side": 1,
+      "message": "label should probably be a constructor argument. For\n\nBuffer::Create(..) {\n  b \u003d new Buffer();\n  b-\u003eInitialize();\n}\n\nwe want the label to be accessible and show up in messages for anything that happens inside the derived class constructor or inside Initialize().\n\nMaybe similar to the ErrorTag constructor, we can have a LabelNotImplementedTag constructor so the code is self documenting about where there are no labels.",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18543a9_ce8eb0f8",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 3
@@ -135,6 +176,23 @@
       "writtenOn": "2021-08-12T00:14:25Z",
       "side": 1,
       "message": "same",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "054edde7_edf696f9",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T18:23:02Z",
+      "side": 1,
+      "message": "nit: maybe we should swallow errors since it\u0027s just for debugging. application should still work if setting the debug name fails",
       "revId": "049102a00e6f806bd116091f845126c00a4b9456",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
