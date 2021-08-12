@@ -35,6 +35,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb13844_18e15eb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "Thanks for the review again! Last open question I think is: should this CL remove the \"register space compacting\" code in favor of doing it more completely in a follow-up CL?",
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406cc861_9a4a6e99",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "(note that I\u0027m understanding \"flattening\" to mean \"make registers not conflict globallt\" and \"compacting\" to mean \"make registers not conflict only within their type namespace\")\n\nFor some context, Mesa\u0027s spirv2dxil translation layer tries to do as 1:1 mapping of SPIR-V to DXIL as possible. The result is it doesn\u0027t have a mechanism to remap bindings or get reflection data out, but this hopefully means that callers can treat the DXIL output like they would the input SPIR-V.\n\n\n\u003e more so a side effect of going through SPIRV which doesn\u0027t namespace the bindings\n\nIt\u0027s 100% this. Apologies if I didn\u0027t make it clear in the description (I\u0027ll add a note about spir-v there). We use SPIR-V as an intermediate representation in the WGSL-\u003eDXIL path, so we can\u0027t have bindings that would conflict without the namespaces. e.g. a sampler and texture would try to bind to s0 and t0 in HLSL, but the s and t namespaces get stripped when going through SPIR-V and thus binding 0 and 0 conflict.\n\nMy best guess is that the current code just reuses the descriptor heap offsets as the binding number because it was convenient (and not for dx11 max slot count reasons?).\n\n\n\u003e If flattening is not a requirement, it might be cool to have whatever necessary recompaction of spirv bindings to DXIL registers be contained within Tint\n\nUnfortunately I think flattening is a requirement for using Mesa, but it\u0027s hopefully less work since the process of flattening the register space is just \"don\u0027t do the work to compact the register space and remap bindings\".\n\n\u003e [...]Tint supports WGSL-\u003eDXIL translation[...]\n\nI\u0027m definitely up for moving the mesa calling code into tint--it\u0027s currently in dawn for development convenience, but there\u0027s no reason why it shouldn\u0027t just be a backend to tint!",
+      "parentUuid": "4a7ad16e_6389dc0c",
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b3bf50b_1b77693a",
@@ -48,6 +83,30 @@
       "writtenOn": "2021-08-11T23:30:14Z",
       "side": 1,
       "message": "now this can be GetShaderRegister(bindingIndex)",
+      "range": {
+        "startLine": 142,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 93
+      },
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2649b3ef_42c2c0b6",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b3bf50b_1b77693a",
       "range": {
         "startLine": 142,
         "startChar": 39,
@@ -81,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e42932a_055b6baa",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e711096a_557c88ce",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 56
+      },
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2752985_b417f178",
@@ -94,6 +177,30 @@
       "writtenOn": "2021-08-11T23:30:14Z",
       "side": 1,
       "message": "typo: aggressive",
+      "range": {
+        "startLine": 1034,
+        "startChar": 7,
+        "endLine": 1034,
+        "endChar": 16
+      },
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "601ea263_ea7967ee",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1034,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2752985_b417f178",
       "range": {
         "startLine": 1034,
         "startChar": 7,

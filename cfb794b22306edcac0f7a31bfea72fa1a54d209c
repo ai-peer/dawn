@@ -173,6 +173,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c63cef81_6a10ec94",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "Sounds good. The linked change (https://dawn-review.googlesource.com/c/dawn/+/61560/1) is probably needed for D3D11 compat, I could move any register compacting code into there since it\u0027s doing it \"more right\"?",
+      "parentUuid": "42950ca2_0ec61ad5",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f06e20_28a8d64f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 4
@@ -361,6 +385,30 @@
       "side": 1,
       "message": "Given we don\u0027t have the array for the count now, that sounds fine to me.",
       "parentUuid": "3bff1c18_7f1103e8",
+      "range": {
+        "startLine": 147,
+        "startChar": 30,
+        "endLine": 147,
+        "endChar": 87
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff45af66_7b4103a7",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-12T22:19:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc1605a3_0bec46ab",
       "range": {
         "startLine": 147,
         "startChar": 30,
