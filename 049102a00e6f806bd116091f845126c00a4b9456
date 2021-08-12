@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "26923e3e_61ae9cd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-12T17:33:48Z",
+      "side": 1,
+      "message": "\u003e\u003e In the JS API, labels can be changed, so we should have \"set label\" in dawn.json. Maybe even \"get label\" too (can wait)? This also means piping the set label call down to the driver.\n\nI see. You mean someone can set texture.label after the texture has been created, and that would call SetLabel within Chromium? Just trying to understand how it works.\n\n\u003e\u003e is there a plan to pass labels for other objects as well? \n\nYeah. Just did textures/buffers right now to keep things manageable. I\u0027ve started a spreadsheet on my side to track progress. I\u0027ll put that into a google sheets and share it on the tracking bug.\n\n\u003e\u003e Metal also supports labels\n\nYeah, but I don\u0027t have a Mac OS development machine on hand. It\u0027d be very convenient if I could pass this portion of the work to someone else. If not, I can probably dig something up.\n\n\u003e\u003e Sanitization\n\nI\u0027m still a little unclear what sanitization will be necessary. My plan was to just limit the length on the Chromium side. The string (from the descriptor anyway) is already being converted to UTF8. This will leave us with a reasonably sized, UTF8, null terminated string to be passed over the wire. We could put the labels in error messages directly. All the backend APIs take Unicode [1][2][3], so I don\u0027t know that any further conversion is needed.\n\n[1] https://www.khronos.org/registry/vulkan/specs/1.2-extensions/man/html/VkDebugUtilsObjectNameInfoEXT.html\n[2] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12object-setname\n[3] https://developer.apple.com/documentation/metal/mtlsharedtexturehandle/2981031-label",
+      "parentUuid": "ac533a4e_4386cb76",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18543a9_ce8eb0f8",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 3
