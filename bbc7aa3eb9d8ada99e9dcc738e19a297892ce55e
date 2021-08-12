@@ -16,6 +16,23 @@
       "message": "Austin: Looking through the previous CLs associated with the same issue, it\u0027s not clear to me if anything else should be removed as port of this deprecation cleanup. Are you aware of any other code paths that should be removed as part of this CL?",
       "revId": "bbc7aa3eb9d8ada99e9dcc738e19a297892ce55e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3705fbcb_d5a2d4b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T18:12:37Z",
+      "side": 1,
+      "message": "LGTM, thanks!",
+      "revId": "bbc7aa3eb9d8ada99e9dcc738e19a297892ce55e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
