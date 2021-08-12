@@ -180,6 +180,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3e0ec67_b0008eb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-12T23:05:30Z",
+      "side": 1,
+      "message": "Regarding:\n\u003e\u003e In the JS API, labels can be changed, so we should have \"set label\" in dawn.json.\n\nHow could I best do this? It would be nice if I could add onto Device a function SetLabel(GPUObjectBase* object, const char* label), however I don\u0027t know how to express something like GPUObjectBase in dawn.json. Will I need to add a function onto every object, like Texture::SetLabel(const char* label)?",
+      "parentUuid": "91418d31_e5c4e12c",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbbf35cf_e4a5e75b",
         "filename": "src/dawn_native/ObjectBase.cpp",
         "patchSetId": 3
