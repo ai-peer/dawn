@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a21c0ec8_86f21cd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-12T01:28:37Z",
+      "side": 1,
+      "message": "Since this is a new feature, we should make sure we take the time to design it well up front, so going to be a little nit-picky:\n - In the JS API, labels can be changed, so we should have \"set label\" in dawn.json. Maybe even \"get label\" too (can wait)? This also means piping the set label call down to the driver.\n - We will want to use these labels in validation error messages as well, so I think we can probably just call it mLabel instead of mDebugLabel\n - we want to be friendly to non-English languages. If people name their objects in another language, we should ideally print out the same name in validation messages\n - so we should consider if const char* is enough or if we need a length field on that (this includes the descriptor too). I don\u0027t really know that much here; I\u0027m not sure if \"\\0\" can show up in non-utf8 encodings.\n - but... we probably can\u0027t pass those unsanitized names to the backend as Kai said. Passing them to the backend can probably be a toggle, but I think eventually we\u0027re going to want to sanitize them so the non-English debugging experience is friendly. Passing to the backend can still be a toggle though and that\u0027s what turns on the sanitization.\n - Metal also supports labels https://developer.apple.com/documentation/metal/frame_capture_debugging_tools/enhancing_frame_capture_by_using_labels?language\u003dobjc\n - is there a plan to pass labels for other objects as well? command encoders, queues, devices, etc. It would be interesting to see if there\u0027s a way we can have certainty that we actually implemented label-setting for all of the objects. As it is now, it would be pretty easy to forget to implement labels in a lot of places.",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18543a9_ce8eb0f8",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 3
