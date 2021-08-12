@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ac533a4e_4386cb76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-12T05:52:36Z",
+      "side": 1,
+      "message": "We should encode the debug strings in UTF-8. UTF-8 doesn\u0027t have any null bytes so you can still null-terminate UTF-8 strings. (Getting the strings out of JS will require a conversion, but that\u0027s OK. Since the spec requires USVString, that conversion can\u0027t fail.)\n\nFor sure we should print full fidelity debug names in our error messages. If we choose to pass strings down to drivers *by default*, we need to aggressively sanitize them (I wouldn\u0027t trust drivers with anything other than ASCII under, say, 32 bytes). However if the user is passing a command line flag then we don\u0027t need to sanitize anything; if a developer runs into issues with particular drivers/tools, they can remove fancy characters from their own debug names.",
+      "parentUuid": "a21c0ec8_86f21cd1",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18543a9_ce8eb0f8",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 3
