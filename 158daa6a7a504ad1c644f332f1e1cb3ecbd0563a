@@ -33,6 +33,24 @@
       "message": "../../third_party/dawn/src/tests/end2end/D3D12ResourceWrappingTests.cpp(174,23): error: no member named \u0027nextInChain\u0027 in \u0027D3D11_TEXTURE2D_DESC\u0027",
       "revId": "158daa6a7a504ad1c644f332f1e1cb3ecbd0563a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdf513a8_01d56666",
+        "filename": "src/tests/end2end/D3D12ResourceWrappingTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-12T00:34:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "741e2d6d_d2569fd6",
+      "revId": "158daa6a7a504ad1c644f332f1e1cb3ecbd0563a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

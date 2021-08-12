@@ -135,6 +135,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70a58648_1392c182",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-12T00:34:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9c79a1b_5a8a5268",
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45112730_f5d64330",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002567
+      },
+      "writtenOn": "2021-08-12T00:34:45Z",
+      "side": 1,
+      "message": "https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1069",
+      "parentUuid": "1d11891a_3a754269",
+      "revId": "6a61377db1c2a86676807f64a88377e07ea2710e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "024754f4_da0643b7",
