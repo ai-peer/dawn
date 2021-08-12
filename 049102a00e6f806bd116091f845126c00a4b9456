@@ -16,6 +16,74 @@
       "message": "PTAL.",
       "revId": "049102a00e6f806bd116091f845126c00a4b9456",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38666d5_29a12bfb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-12T00:14:25Z",
+      "side": 1,
+      "message": "For security, since debug names are user input, we should either:\n- Sanitize and truncate the string somehow before passing it to the driver\n- Only pass it if a dawn toggle is enabled\n\nThe latter seems nice since we sanitizing nicely will be a bit of a pain.",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f18543a9_ce8eb0f8",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-12T00:14:25Z",
+      "side": 1,
+      "message": "Use a std::string so this doesn\u0027t have to be freed manually.",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b373d6d_2c4f936d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-12T00:14:25Z",
+      "side": 1,
+      "message": "I\u0027d prefer to use something less low level, like std::ostringstream, or std::string + string::append or string::operator+\u003d.\n\n(Can use std::string::reserve + std::string::append if _really_ trying to avoid extra allocations.)",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f053474f_00560e0d",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-12T00:14:25Z",
+      "side": 1,
+      "message": "same",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
