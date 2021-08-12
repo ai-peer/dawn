@@ -28,6 +28,13 @@ namespace dawn_native { namespace d3d12 {
     class Device;
     class StagingDescriptorAllocator;
 
+    // A purposefully invalid register space.
+    //
+    // We use the bind group index as the register space, but don't know the bind group index until
+    // pipeline layout creation time. This value should be replaced in PipelineLayoutD3D12.
+    static constexpr uint32_t kRegisterSpacePlaceholder =
+        D3D12_DRIVER_RESERVED_REGISTER_SPACE_VALUES_START;
+
     class BindGroupLayout final : public BindGroupLayoutBase {
       public:
         static Ref<BindGroupLayout> Create(Device* device,
@@ -37,28 +44,49 @@ namespace dawn_native { namespace d3d12 {
                                                         const BindGroupDescriptor* descriptor);
         void DeallocateBindGroup(BindGroup* bindGroup, CPUDescriptorHeapAllocation* viewAllocation);
 
-        enum DescriptorType {
-            CBV,
-            UAV,
-            SRV,
-            Sampler,
-            Count,
-        };
+        // The offset (in descriptor count) into the corresponding descriptor heap. Not valid for
+        // dynamic binding indexes.
+        ityp::span<BindingIndex, const uint32_t> GetDescriptorHeapOffsets() const;
 
-        ityp::span<BindingIndex, const uint32_t> GetBindingOffsets() const;
-        uint32_t GetCbvUavSrvDescriptorTableSize() const;
-        uint32_t GetSamplerDescriptorTableSize() const;
+        // The D3D shader register that the Dawn binding index is mapped to by this bind group
+        // layout.
+        uint32_t GetShaderRegister(BindingIndex bindingIndex) const;
+
+        // Counts of descriptors in the descriptor tables.
         uint32_t GetCbvUavSrvDescriptorCount() const;
         uint32_t GetSamplerDescriptorCount() const;
-        const D3D12_DESCRIPTOR_RANGE* GetCbvUavSrvDescriptorRanges() const;
-        const D3D12_DESCRIPTOR_RANGE* GetSamplerDescriptorRanges() const;
+
+        const std::vector<D3D12_DESCRIPTOR_RANGE>& GetCbvUavSrvDescriptorRanges() const;
+        const std::vector<D3D12_DESCRIPTOR_RANGE>& GetSamplerDescriptorRanges() const;
 
       private:
         BindGroupLayout(Device* device, const BindGroupLayoutDescriptor* descriptor);
         ~BindGroupLayout() override = default;
+
+        // If `true`, use the WGSL binding numbers directly as the HLSL/DXIL shader registers.
+        // If `false`, compact the register space so there are no holes in either the CBV/UAV/SRV
+        // group or the Sampler group.
+        //
+        // When targetting shader model <=5.0, the max valid register index ("slot count") is
+        // relatively low for each resource type, so compacting the space is beneficial in that
+        // case.
+        bool mUseBindingAsRegister;
+
+        // - For non-dynamic resources, contains the offset into the descriptor heap for the given
+        // resource view. Samplers and non-samplers are stored in separate descriptor heaps, so the
+        // offsets should be unique within each group and tightly packed.
+        // - For dynamic resources and `mUseBindingAsRegister = false`, contains the shader
+        // register.
+        //
+        // In the `mUseBindingAsRegister = false` case, this is also equal to the remapped shader
+        // register.
         ityp::stack_vec<BindingIndex, uint32_t, kMaxOptimalBindingsPerGroup> mBindingOffsets;
-        std::array<uint32_t, DescriptorType::Count> mDescriptorCounts;
-        D3D12_DESCRIPTOR_RANGE mRanges[DescriptorType::Count];
+
+        uint32_t mCbvUavSrvDescriptorCount;
+        uint32_t mSamplerDescriptorCount;
+
+        std::vector<D3D12_DESCRIPTOR_RANGE> mCbvUavSrvDescriptorRanges;
+        std::vector<D3D12_DESCRIPTOR_RANGE> mSamplerDescriptorRanges;
 
         SlabAllocator<BindGroup> mBindGroupAllocator;
 
