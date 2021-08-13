@@ -216,6 +216,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "249fc241_563788ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-13T17:38:15Z",
+      "side": 1,
+      "message": "Adding \"set label\" in dawn.json means that the generator will call TextureBase::APISetLabel by name.\n\nBut it can be defined with a virtual method ObjectBase::APISetLabel if you\u0027d like, and we can override it for derived classes. It shouldn\u0027t be so bad to have dervied objects have\n\n void APISetLabel(const char* label) override {\n  ObjectBase::APISetLabel(label); // set mLabel in ObjectBase\n  SetDebugName(ToBackend(GetDevice()), VK_OBJECT_TYPE_IMAGE,\n                reinterpret_cast\u003cuint64_t\u0026\u003e(mHandle), \"Dawn_InternalTexture\",\n                GetDebugLabel());\n }\n\n?",
+      "parentUuid": "f3e0ec67_b0008eb6",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fbbf35cf_e4a5e75b",
         "filename": "src/dawn_native/ObjectBase.cpp",
         "patchSetId": 3
