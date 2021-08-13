@@ -219,6 +219,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5af5e8dc_6884ca61",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-13T20:11:34Z",
+      "side": 1,
+      "message": "Sounds good. Given your CL feedback, there\u0027s actually only a single place now where mUseBindingAsRegister would be checked--in the calculation of mShaderRegister, so the CL that adds compacting should be pretty small",
+      "parentUuid": "065a21ae_a80bb33a",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76f06e20_28a8d64f",

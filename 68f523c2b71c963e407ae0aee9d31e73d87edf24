@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fcb4f94_cbcb602a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-13T20:11:34Z",
+      "side": 1,
+      "message": "\u003e In the existing code, we have at most 4 descriptor ranges per bind group layout, but now there can be many. What are the implications of this? Would a contiguous range be more efficient?\n\nI\u0027ve asked around the d3d team and was told there shouldn\u0027t be any meaningful difference in dawn\u0027s use case (i.e. max of ~168 ranges, given kMaxBindingsPerPipelineLayout).\n\nA couple of notes:\n- The descriptor range count should only affect pipeline layout creation, not per-draw costs\n- Given that we\u0027re separating out mDescriptorHeapOffsets and mShaderRegisters now, it should be possible have \u003c\u003d4 descriptor ranges and a flattened shader register space... I\u0027ll see if I can push it into shape either in this CL or one that shortly follows.\n\n\u003e [...]I was an intern and still learning D3D12!\n\n:D",
+      "parentUuid": "2f3c29c2_c4afd738",
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b3bf50b_1b77693a",

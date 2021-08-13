@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "561c3a92_10a2c83a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-13T20:11:34Z",
+      "side": 1,
+      "message": "I\u0027ll add mDescriptorHeapOffsets and mShaderRegisters. I agree that having mBindingOffsets mean multiple things feels a little strange.",
+      "parentUuid": "f5df80ca_509faec1",
+      "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b70ed70f_468f91b9",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8804a102_5a7f69ff",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-13T20:11:34Z",
+      "side": 1,
+      "message": "Done. Wonderful idea on the ASSERT",
+      "parentUuid": "b70ed70f_468f91b9",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 79
+      },
+      "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d1a4bfb_2d9dc090",
@@ -54,6 +96,24 @@
       "writtenOn": "2021-08-13T00:46:55Z",
       "side": 1,
       "message": "nit: now there is no longer a SPIRV-Cross path",
+      "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2979dc38_10277945",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-13T20:11:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d1a4bfb_2d9dc090",
       "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
