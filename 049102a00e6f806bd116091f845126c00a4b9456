@@ -232,6 +232,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "190bac03_5ed13ee2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T21:51:40Z",
+      "side": 1,
+      "message": "I\u0027ve implemented it as described above.",
+      "parentUuid": "249fc241_563788ca",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbbf35cf_e4a5e75b",
@@ -245,6 +263,30 @@
       "writtenOn": "2021-08-12T18:23:02Z",
       "side": 1,
       "message": "label should probably be a constructor argument. For\n\nBuffer::Create(..) {\n  b \u003d new Buffer();\n  b-\u003eInitialize();\n}\n\nwe want the label to be accessible and show up in messages for anything that happens inside the derived class constructor or inside Initialize().\n\nMaybe similar to the ErrorTag constructor, we can have a LabelNotImplementedTag constructor so the code is self documenting about where there are no labels.",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1087b85_de06e26e",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T21:51:40Z",
+      "side": 1,
+      "message": "Changed the constructor, but didn\u0027t add a LabelNotImplementedTag because I wasn\u0027t sure how it would work. Do you mean like we could save the value using the old constructor and then ASSERT when trying to use LoadLabel/SetLabel if the label isn\u0027t implemented?",
+      "parentUuid": "fbbf35cf_e4a5e75b",
       "range": {
         "startLine": 22,
         "startChar": 27,
