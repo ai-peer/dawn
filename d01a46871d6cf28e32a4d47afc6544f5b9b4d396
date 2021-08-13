@@ -130,6 +130,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1008b08_dac39b10",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T22:14:06Z",
+      "side": 1,
+      "message": "From a resolved thread:\n    “the chrome flag --enable-dawn-features\u003ddebug_labels could be passed.“\n    \nIs this not adequate? We can add a note about this in Dawn’s debug docs, similar to how markers work.",
+      "parentUuid": "705b4d2d_4dac0e7f",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
