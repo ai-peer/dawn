@@ -16,6 +16,24 @@
       "message": "LGTM - shrek, do we also need to cherry pick an update to WebGPUExpectations to make it pass tests on the branch?",
       "revId": "33c168579b74e5dbf71ff90eeb2db2a7f6ef0ba9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b23420_e3df8f39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-13T18:03:28Z",
+      "side": 1,
+      "message": "Looking at https://chromium.googlesource.com/chromium/src.git/+log/refs/branch-heads/4606\n\nThe suppression is in but the new roll is not included https://chromium-review.googlesource.com/c/chromium/src/+/3092865.\n\nI think we will cherry-pick the cts roll first, create a revert for the suppression and cherry-pick that again. (Do we still want to do that)?",
+      "parentUuid": "354ab3ad_241d5677",
+      "revId": "33c168579b74e5dbf71ff90eeb2db2a7f6ef0ba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
