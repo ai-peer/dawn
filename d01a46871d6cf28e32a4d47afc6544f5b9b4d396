@@ -154,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2b8f378_387733f1",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-13T22:30:44Z",
+      "side": 1,
+      "message": "Memory dumps are something we\u0027re only going to get when we explicitly request them from users on bug reports, right? So we can just specify that they need --enable-dawn-features\u003duse_debug_labels_in_backend to capture memory dumps.",
+      "parentUuid": "d1008b08_dac39b10",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
@@ -188,6 +212,30 @@
       "writtenOn": "2021-08-13T21:52:01Z",
       "side": 1,
       "message": "Does setting this default parameter to \"\" cause a std::string to be allocated when you leave it off? If so, that means we\u0027re incurring a heap allocation every time this function is called, even if there is no label.\n\nWould setting label to std::string() avoid the heap allocation?",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fead0cb_c0361414",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-13T22:30:44Z",
+      "side": 1,
+      "message": "Short strings, and especially the empty string (which I\u0027m pretty sure should be equivalent to std::string() or std::string{} or {}) in practice shouldn\u0027t incur allocations due to std::string short string optimization.",
+      "parentUuid": "e28d3f0d_f2dc639d",
       "range": {
         "startLine": 87,
         "startChar": 22,
