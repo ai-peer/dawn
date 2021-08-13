@@ -411,6 +411,24 @@
       "parentUuid": "c27ecfd2_0c380abd",
       "revId": "049102a00e6f806bd116091f845126c00a4b9456",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff3f716_6f1486af",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-13T19:29:27Z",
+      "side": 1,
+      "message": "OK with me since we plan to only pass debug labels with the toggle.",
+      "parentUuid": "115bb790_bea7760e",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

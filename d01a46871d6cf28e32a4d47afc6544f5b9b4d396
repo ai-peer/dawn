@@ -16,6 +16,46 @@
       "message": "Resolved some feedback. Still considering the kObjectNotLabeled-tagged ObjectBase constructor. Still unsure on how best to implement a SetLabel entry (on other comment).",
       "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcba273b_d0557554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-13T19:29:27Z",
+      "side": 1,
+      "message": "(have not rereviewed, just replying below)",
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533efa1b_28f731d1",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-13T19:29:27Z",
+      "side": 1,
+      "message": "specific*",
+      "range": {
+        "startLine": 217,
+        "startChar": 38,
+        "endLine": 217,
+        "endChar": 45
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
