@@ -197,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "065a21ae_a80bb33a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-13T00:46:55Z",
+      "side": 1,
+      "message": "Sure - though maybe we can introduce the mDescriptorHeapOffsets and mShaderRegisters distinction into this CL though. See comment at [1]",
+      "parentUuid": "c63cef81_6a10ec94",
+      "range": {
+        "startLine": 118,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 39
+      },
+      "revId": "cfb794b22306edcac0f7a31bfea72fa1a54d209c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "76f06e20_28a8d64f",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 4

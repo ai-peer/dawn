@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f3c29c2_c4afd738",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-13T00:46:55Z",
+      "side": 1,
+      "message": "\u003e 1:1 mapping\n\nOk, makes sense - thanks for the explanation!\n\nOK, so if we directly translate from SPIR-V\u0027s binding model, now, it\u0027s pretty easy to have many sparse ranges if sequential binding numbers don\u0027t have the same descriptor type, or if for some reason you chose all your binding numbers to be even numbers. In the existing code, we have at most 4 descriptor ranges per bind group layout, but now there can be many. What are the implications of this? Would a contiguous range be more efficient?\n\n\u003e My best guess is that the current code just reuses the descriptor heap offsets as the binding number because it was convenient (and not for dx11 max slot count reasons?).\n\nYes, convenient. And also I wrote it years ago when I was an intern and still learning D3D12!",
+      "parentUuid": "406cc861_9a4a6e99",
+      "revId": "68f523c2b71c963e407ae0aee9d31e73d87edf24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b3bf50b_1b77693a",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 6

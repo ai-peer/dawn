@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5df80ca_509faec1",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-13T00:46:55Z",
+      "side": 1,
+      "message": "[1] this comment could be expanded to clarify that mBindingOffsets isn\u0027t being used for descriptor heap offsets at all, and it\u0027s just stored here because GetShaderRegister looks up in this array.\n\nThat, or just bring in a clear separation between registers and offsets like you did in your other CL.",
+      "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70ed70f_468f91b9",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-13T00:46:55Z",
+      "side": 1,
+      "message": "nit: after this loop exits, ASSERT the size of |ranges| as a sanity check that we didn\u0027t insert anything extra.\n\nAlso, small preference to declare |ranges| right before your call .reserve(). Right now the |rangesCount| accumulation is awkwardly between them.",
+      "range": {
+        "startLine": 83,
+        "startChar": 8,
+        "endLine": 87,
+        "endChar": 79
+      },
+      "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d1a4bfb_2d9dc090",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 953,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-13T00:46:55Z",
+      "side": 1,
+      "message": "nit: now there is no longer a SPIRV-Cross path",
+      "revId": "a03fbc2df93af19aadacf8207a5d146853ef08cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
