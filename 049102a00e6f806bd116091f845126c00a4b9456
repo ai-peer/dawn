@@ -196,6 +196,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "204ab1b6_46a127c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T17:02:12Z",
+      "side": 1,
+      "message": "Done, via a toggle.",
+      "parentUuid": "c38666d5_29a12bfb",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbbf35cf_e4a5e75b",
@@ -236,6 +254,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17a9b12d_b91c3cf8",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T17:02:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f18543a9_ce8eb0f8",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b373d6d_2c4f936d",
@@ -253,6 +289,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f8be73f_fc090cbf",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 389,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T17:02:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b373d6d_2c4f936d",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f053474f_00560e0d",
@@ -266,6 +320,24 @@
       "writtenOn": "2021-08-12T00:14:25Z",
       "side": 1,
       "message": "same",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fd1ecad_391d0cd3",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T17:02:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f053474f_00560e0d",
       "revId": "049102a00e6f806bd116091f845126c00a4b9456",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -301,6 +373,24 @@
       "side": 1,
       "message": "The only errors that are supposed to be possible here are VK_ERROR_OUT_OF_HOST_MEMORY and VK_ERROR_OUT_OF_DEVICE_MEMORY. If either of these happens we should probably go ahead and lose the device because they should be super rare and we don\u0027t necessarily trust the driver to recover correctly from things like this.\n\nOTOH if we only call this when a dawn toggle is enabled, being paranoid doesn\u0027t matter.",
       "parentUuid": "054edde7_edf696f9",
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115bb790_bea7760e",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T17:02:12Z",
+      "side": 1,
+      "message": "I have no strong opinion either way.\n\nI\u0027ve changed SetDebugName to just return void. This will make changes easier because I won\u0027t have to add MaybeError returns to object initializers that don\u0027t already have it. If someone feels that its worthwhile to return an error here, I\u0027m fine with adding it back.",
+      "parentUuid": "c27ecfd2_0c380abd",
       "revId": "049102a00e6f806bd116091f845126c00a4b9456",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
