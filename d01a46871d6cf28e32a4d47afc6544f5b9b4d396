@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46267d16_ebcd5684",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T22:59:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca751290_ecbeec28",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 15
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "533efa1b_28f731d1",
@@ -189,6 +213,30 @@
       "writtenOn": "2021-08-13T21:52:01Z",
       "side": 1,
       "message": "This causes a string allocation even if label is an empty string. \n\nCan we make this more efficient by passing |prefix| directly to SetPrivateData when |label| is empty?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88a899d_74642a4e",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-13T22:59:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce3dd3b6_61d50ff9",
       "range": {
         "startLine": 380,
         "startChar": 0,
