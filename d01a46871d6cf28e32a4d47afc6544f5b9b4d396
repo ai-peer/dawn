@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca751290_ecbeec28",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-13T21:52:01Z",
+      "side": 1,
+      "message": "Consider returning a const reference so the caller does not incur a copy when they\u0027re just interested in reading the string.",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 35,
+        "endChar": 15
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "533efa1b_28f731d1",
         "filename": "src/dawn_native/Toggles.cpp",
         "patchSetId": 4
@@ -77,6 +100,75 @@
         "startChar": 38,
         "endLine": 217,
         "endChar": 45
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "705b4d2d_4dac0e7f",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-13T21:52:01Z",
+      "side": 1,
+      "message": "Relegating this to a toggle might be fine for an initial CL but we\u0027re not finished with the workitem until we expose this to WebGPU developers. Having these labels will be critical when we investigate memory dumps from users and need to help developers determine where all of their memory is going.\n\nI\u0027m fine with limiting WebGPU dev labels to a certain number of characters and only accepting ASCII letters and numbers. We should put the filtering code at the mojo interface so that the GPU process can internally label things with whatever characters it wants.",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce3dd3b6_61d50ff9",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-13T21:52:01Z",
+      "side": 1,
+      "message": "This causes a string allocation even if label is an empty string. \n\nCan we make this more efficient by passing |prefix| directly to SetPrivateData when |label| is empty?",
+      "range": {
+        "startLine": 380,
+        "startChar": 0,
+        "endLine": 384,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e28d3f0d_f2dc639d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-13T21:52:01Z",
+      "side": 1,
+      "message": "Does setting this default parameter to \"\" cause a std::string to be allocated when you leave it off? If so, that means we\u0027re incurring a heap allocation every time this function is called, even if there is no label.\n\nWould setting label to std::string() avoid the heap allocation?",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
       },
       "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
