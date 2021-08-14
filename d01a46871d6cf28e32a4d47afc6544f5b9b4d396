@@ -226,6 +226,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e25a54a_769b1aa4",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-14T00:46:23Z",
+      "side": 1,
+      "message": "Makes sense to me, those are the ones we will care about for memory dumps anyway.\n\nActually in that case, we should probably label all webgpu-user-created resources with a generic label like \"WebGPU resource\" so we can distinguish them in memory dumps.",
+      "parentUuid": "90c77cb3_5add2a33",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
