@@ -202,6 +202,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90c77cb3_5add2a33",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-14T00:27:50Z",
+      "side": 1,
+      "message": "Note that a couple of devs and I are driving an Chromium-wide effort to label ANGLE, video and other GPU resources with internal-to-Chromium labels. None of this code is behind flags of any kind.\n\nI regularly get bug reports from people internal and external to Microsoft where they see inexplicably high GPU memory usage. There is typically not a \"repro\" for these instances. They\u0027ve just been using the browser \"for a while\" with some tabs open. Getting a full memory dump with labels goes a long way towards knowing where to start any investigation. \n\nEven if we put the WebGPU developer labels behind a flag, we should continue to label resources with the internal-to-Dawn labels like we used to before this CL.",
+      "parentUuid": "c2b8f378_387733f1",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
@@ -284,6 +308,30 @@
       "side": 1,
       "message": "Short strings, and especially the empty string (which I\u0027m pretty sure should be equivalent to std::string() or std::string{} or {}) in practice shouldn\u0027t incur allocations due to std::string short string optimization.",
       "parentUuid": "e28d3f0d_f2dc639d",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e556d8f6_83cdaaa1",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-14T00:27:50Z",
+      "side": 1,
+      "message": "So long as there is no heap allocations, that good with me.",
+      "parentUuid": "7fead0cb_c0361414",
       "range": {
         "startLine": 87,
         "startChar": 22,
