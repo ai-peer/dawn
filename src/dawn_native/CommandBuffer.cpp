@@ -185,7 +185,7 @@ namespace dawn_native {
 
         const uint64_t copyTextureDataSizePerRow =
             copy->copySize.width / blockInfo.width * blockInfo.byteSize;
-        if (copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
+        if (heightInBlocks > 1 && copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
             return false;
         }
 
