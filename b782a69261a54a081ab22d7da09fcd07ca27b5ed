@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6969c59_40c8b576",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "LGTM overall. Can we have tests for the label behavior? For example by adding a const char* GetObjectLabelForTesting(void*) to DawnNative.h",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a6712a_625e660d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "nit: Toggles are all initialized to false so this is redundant.",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4f21c1_766037b4",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "std::string is 24 bytes, and that\u0027s for every single object. Can we have a TODO to optimize the memory footprint of the labels for objects that don\u0027t have them? (like a unique_ptr\u003cExtendedData\u003e that will eventually contain a string for the name, and the creation error for example).",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa9c3d7_c23c2af1",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "Instead of Derived::APISetLabel -\u003e ObjectBase::APISetLabel, can we use the same pattern as in the rest of Dawn where it goes ObjectBase::APISetLabel -\u003e Derived::UpdateLabelImpl();?\n\nThis way Initialize() can just call UpdateLabelImpl() for less code duplication!",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de9dd25_d59df9dd",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "nit: VK_OBJECT_TYPE_BUFFER",
+      "range": {
+        "startLine": 354,
+        "startChar": 45,
+        "endLine": 354,
+        "endChar": 65
+      },
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6c7de2_d7a0dd60",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "I think these can still have labels passed as part of the constructor. No need to differentiate them?",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b7f5ff1_22a25fab",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "nit: I\u0027m not sure that we need a prefix. The application can do that themselves if they care.",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

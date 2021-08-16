@@ -299,6 +299,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d98d33d0_3f7ac727",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "I think Austin\u0027s suggestion is that since all objects have labels in their descriptor (or almost all), then we should make it annoying to use the label-less constructor of ObjectBase by adding a tag structure. This can be done in a follow-up though.",
+      "parentUuid": "e1087b85_de06e26e",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f18543a9_ce8eb0f8",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 3

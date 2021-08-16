@@ -364,6 +364,30 @@
       },
       "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc37195_bac965ee",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:11:41Z",
+      "side": 1,
+      "message": "TBH I think \"prefix\" can be removed, and label be a const char* so that we directly pass the user\u0027s data. IMHO it is just noise for the users to know this is a Dawn_Buffer/Dawn_Texture",
+      "parentUuid": "e556d8f6_83cdaaa1",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
