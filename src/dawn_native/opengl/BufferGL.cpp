@@ -51,6 +51,21 @@ namespace dawn_native { namespace opengl {
         } else {
             device->gl.BufferData(GL_ARRAY_BUFFER, mAllocatedSize, nullptr, GL_STATIC_DRAW);
         }
+
+        // Initialize the padding bytes to zero.
+        if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) &&
+            !descriptor->mappedAtCreation) {
+            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+            if (paddingBytes > 0) {
+                uint32_t clearSize = paddingBytes;
+                uint64_t clearOffset = GetAllocatedSize() - clearSize;
+
+                const std::vector<uint8_t> clearValues(clearSize, 0u);
+                device->gl.BindBuffer(GL_ARRAY_BUFFER, mBuffer);
+                device->gl.BufferSubData(GL_ARRAY_BUFFER, clearOffset, clearSize,
+                                         clearValues.data());
+            }
+        }
     }
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor, bool shouldLazyClear)
