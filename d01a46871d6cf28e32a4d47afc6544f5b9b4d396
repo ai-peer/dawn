@@ -250,6 +250,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15dd7c11_3eb3dfe3",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-16T16:16:57Z",
+      "side": 1,
+      "message": "\u003e Actually in that case, we should probably label all webgpu-user-created resources with a generic label like \"WebGPU resource\" so we can distinguish them in memory dumps.\n\nIf we start using Dawn for things other than WebGPU, labeling with \"WebGPU\" vs. \u003cother use case\u003e would be helpful.",
+      "parentUuid": "2e25a54a_769b1aa4",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
@@ -380,6 +404,30 @@
       "side": 1,
       "message": "TBH I think \"prefix\" can be removed, and label be a const char* so that we directly pass the user\u0027s data. IMHO it is just noise for the users to know this is a Dawn_Buffer/Dawn_Texture",
       "parentUuid": "e556d8f6_83cdaaa1",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752920fe_4e85c834",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-16T16:16:57Z",
+      "side": 1,
+      "message": "\u003e IMHO it is just noise for the users to know this is a Dawn_Buffer/Dawn_Texture\n\nIt\u0027s not noise when you\u0027re looking at Chromium wide trace and every single component (video, ANGLE, Dawn, Skia, etc) labels their staging texture with the label \"StagingTexture\". Having a prefix to disambiguate components helps target onion peeling.",
+      "parentUuid": "0bc37195_bac965ee",
       "range": {
         "startLine": 87,
         "startChar": 22,
