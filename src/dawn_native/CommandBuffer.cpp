@@ -17,6 +17,7 @@
 #include "common/BitSetIterator.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandEncoder.h"
+#include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Texture.h"
@@ -171,6 +172,7 @@ namespace dawn_native {
         ASSERT(copy != nullptr);
 
         if (copy->destination.offset > 0) {
+            // The copy doesn't touch the start of the buffer.
             return false;
         }
 
@@ -179,19 +181,27 @@ namespace dawn_native {
             texture->GetFormat().GetAspectInfo(copy->source.aspect).block;
         const uint64_t heightInBlocks = copy->copySize.height / blockInfo.height;
 
-        if (copy->destination.rowsPerImage > heightInBlocks) {
+        if (copy->copySize.depthOrArrayLayers > 1 &&
+            copy->destination.rowsPerImage > heightInBlocks) {
+            // There are gaps between slices that aren't overwritten
             return false;
         }
 
         const uint64_t copyTextureDataSizePerRow =
             copy->copySize.width / blockInfo.width * blockInfo.byteSize;
-        if (copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
+        if (heightInBlocks > 1 && copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
+            // There are gaps between rows that aren't overwritten
             return false;
         }
 
-        const uint64_t overwrittenRangeSize =
-            copyTextureDataSizePerRow * heightInBlocks * copy->copySize.depthOrArrayLayers;
-        if (copy->destination.buffer->GetSize() > overwrittenRangeSize) {
+        // After the above checks, we're sure the copy has no gaps.
+        // Now, compute the total number of bytes written.
+        const uint64_t writtenBytes =
+            ComputeRequiredBytesInCopy(blockInfo, copy->copySize, copy->destination.bytesPerRow,
+                                       copy->destination.rowsPerImage)
+                .AcquireSuccess();
+        if (!copy->destination.buffer->IsFullBufferRange(copy->destination.offset, writtenBytes)) {
+            // The written bytes don't cover the whole buffer.
             return false;
         }
 
