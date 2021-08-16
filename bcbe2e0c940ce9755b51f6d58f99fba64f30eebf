@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec9c9df9_704a3e13",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-16T21:31:16Z",
+      "side": 1,
+      "message": "Logged as https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1076.\n\nI wasn\u0027t sure if you meant we should we try to replace mGLEntryPoint with just a BindingInfoArray, but I gave it a shot here: https://dawn-review.googlesource.com/c/dawn/+/62180\n\nIt required extricating BindingInfoArray and friends from EntryPointMetadata, though. Let me know what you think. I suppose we could leave it nested, it would just be uglier in the GL backend. Or we could just leave the mGLEntryPoints as-is, with some members unused.",
+      "parentUuid": "59ccc43c_d01b84fa",
+      "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ccb8face_8b4fda80",
         "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2021-08-16T12:44:37Z",
       "side": 1,
       "message": "Ditto for everything below",
+      "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f34f746e_d533cb16",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-16T21:31:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ccb8face_8b4fda80",
       "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -48,6 +84,24 @@
       "writtenOn": "2021-08-16T12:44:37Z",
       "side": 1,
       "message": "[1]",
+      "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c15b54a2_f03a6b60",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-08-16T21:31:16Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3dc1c625_4fd66fc5",
       "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
