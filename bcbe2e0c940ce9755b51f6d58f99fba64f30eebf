@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ccc43c_d01b84fa",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T12:44:37Z",
+      "side": 1,
+      "message": "The only use of mGLEntryPoints is at [1] so we only need to extract bindings. This and the sampled_images code can be removed.",
+      "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccb8face_8b4fda80",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T12:44:37Z",
+      "side": 1,
+      "message": "Ditto for everything below",
+      "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc1c625_4fd66fc5",
+        "filename": "src/dawn_native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T12:44:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "bcbe2e0c940ce9755b51f6d58f99fba64f30eebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
