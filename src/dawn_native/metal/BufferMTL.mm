@@ -45,10 +45,6 @@ namespace dawn_native { namespace metal {
             storageMode = MTLResourceStorageModePrivate;
         }
 
-        if (GetSize() > std::numeric_limits<NSUInteger>::max()) {
-            return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
-        }
-
         uint32_t alignment = 1;
 #ifdef DAWN_PLATFORM_MACOS
         // [MTLBlitCommandEncoder fillBuffer] requires the size to be a multiple of 4 on MacOS.
@@ -64,13 +60,24 @@ namespace dawn_native { namespace metal {
             alignment = kMinUniformOrStorageBufferAlignment;
         }
 
-        // Allocate at least 4 bytes so clamped accesses are always in bounds.
-        NSUInteger currentSize = static_cast<NSUInteger>(std::max(GetSize(), uint64_t(4u)));
+        // The vertex pulling transform requires at least 4 bytes in the buffer.
+        // 0-sized vertex buffer bindings are allowed, so we always need an additional 4 bytes
+        // after the end.
+        NSUInteger extraBytes = 0u;
+        if ((GetUsage() & wgpu::BufferUsage::Vertex) != 0) {
+            extraBytes = 4u;
+        }
+
+        if (GetSize() > std::numeric_limits<NSUInteger>::max() - extraBytes) {
+            return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
+        }
+        NSUInteger currentSize = static_cast<NSUInteger>(GetSize()) + extraBytes;
+
         if (currentSize > std::numeric_limits<NSUInteger>::max() - alignment) {
             // Alignment would overlow.
             return DAWN_OUT_OF_MEMORY_ERROR("Buffer allocation is too large");
         }
-        currentSize = Align(currentSize, kMinUniformOrStorageBufferAlignment);
+        currentSize = Align(currentSize, alignment);
 
         if (@available(iOS 12, macOS 10.14, *)) {
             NSUInteger maxBufferSize = [ToBackend(GetDevice())->GetMTLDevice() maxBufferLength];
