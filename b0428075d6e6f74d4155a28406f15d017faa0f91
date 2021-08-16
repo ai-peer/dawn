@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e6ac0b_548a10e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T13:12:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b0428075d6e6f74d4155a28406f15d017faa0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e52d2439_27ab9ae0",
@@ -62,6 +79,30 @@
       "side": 1,
       "message": "I see. That case should also be covered by the loop below though, right? I don\u0027t think we need to special-case handling empty.",
       "parentUuid": "40aa09ef_6d181793",
+      "range": {
+        "startLine": 222,
+        "startChar": 23,
+        "endLine": 222,
+        "endChar": 28
+      },
+      "revId": "b0428075d6e6f74d4155a28406f15d017faa0f91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa2f633f_ddbdda30",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T13:12:58Z",
+      "side": 1,
+      "message": "Also why not just pass the set of MTLCommonCounters in the function call? Right now it seems to just select a list based on timestamp vs. statistics.",
+      "parentUuid": "fe4516f0_f20631aa",
       "range": {
         "startLine": 222,
         "startChar": 23,
