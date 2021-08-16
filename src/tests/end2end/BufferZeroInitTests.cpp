@@ -201,8 +201,10 @@ class BufferZeroInitTest : public DawnTest {
         EXPECT_PIXEL_RGBA8_EQ(kExpectedColor, outputTexture, 0u, 0u);
     }
 
-    wgpu::RenderPipeline CreateRenderPipelineForTest(const char* vertexShader,
-                                                     uint32_t vertexBufferCount = 1u) {
+    wgpu::RenderPipeline CreateRenderPipelineForTest(
+        const char* vertexShader,
+        uint32_t vertexBufferCount = 1u,
+        wgpu::VertexFormat vertexFormat = wgpu::VertexFormat::Float32x4) {
         constexpr wgpu::TextureFormat kColorAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
 
         wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader);
@@ -219,9 +221,9 @@ class BufferZeroInitTest : public DawnTest {
         descriptor.cFragment.module = fsModule;
         descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
         descriptor.vertex.bufferCount = vertexBufferCount;
-        descriptor.cBuffers[0].arrayStride = 4 * sizeof(float);
+        descriptor.cBuffers[0].arrayStride = utils::VertexFormatSize(vertexFormat);
         descriptor.cBuffers[0].attributeCount = 1;
-        descriptor.cAttributes[0].format = wgpu::VertexFormat::Float32x4;
+        descriptor.cAttributes[0].format = vertexFormat;
         descriptor.cTargets[0].format = kColorAttachmentFormat;
         return device.CreateRenderPipeline(&descriptor);
     }
@@ -243,10 +245,14 @@ class BufferZeroInitTest : public DawnTest {
         EXPECT_PIXEL_RGBA8_EQ(kExpectedPixelValue, colorAttachment, 0, 0);
     }
 
-    void TestBufferZeroInitAsVertexBuffer(uint64_t vertexBufferOffset) {
+    void TestBufferZeroInitAsVertexBuffer(uint64_t vertexBufferOffset,
+                                          wgpu::VertexFormat vertexFormat,
+                                          bool indexed,
+                                          bool oob) {
         constexpr wgpu::TextureFormat kColorAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
 
-        wgpu::RenderPipeline renderPipeline = CreateRenderPipelineForTest(R"(
+        wgpu::RenderPipeline renderPipeline =
+            CreateRenderPipelineForTest(R"(
             struct VertexOut {
                 [[location(0)]] color : vec4<f32>;
                 [[builtin(position)]] position : vec4<f32>;
@@ -261,10 +267,11 @@ class BufferZeroInitTest : public DawnTest {
                 }
                 output.position = vec4<f32>(0.0, 0.0, 0.0, 1.0);
                 return output;
-            })");
+            })",
+                                        /* vertexBufferCount */ 1u, vertexFormat);
 
-        constexpr uint64_t kVertexAttributeSize = sizeof(float) * 4;
-        const uint64_t vertexBufferSize = kVertexAttributeSize + vertexBufferOffset;
+        const uint32_t vertexAttributeSize = utils::VertexFormatSize(vertexFormat);
+        const uint64_t vertexBufferSize = vertexAttributeSize + vertexBufferOffset;
         wgpu::Buffer vertexBuffer =
             CreateBuffer(vertexBufferSize, wgpu::BufferUsage::Vertex | wgpu::BufferUsage::CopySrc |
                                                wgpu::BufferUsage::CopyDst);
@@ -272,12 +279,27 @@ class BufferZeroInitTest : public DawnTest {
             CreateAndInitializeTexture({1, 1, 1}, kColorAttachmentFormat);
         utils::ComboRenderPassDescriptor renderPassDescriptor({colorAttachment.CreateView()});
 
+        wgpu::Buffer indexBuffer;
+        if (indexed) {
+            if (oob) {
+                indexBuffer =
+                    utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {1});
+            } else {
+                indexBuffer =
+                    utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, {0});
+            }
+        }
+
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         wgpu::RenderPassEncoder renderPass = encoder.BeginRenderPass(&renderPassDescriptor);
 
         // Bind the buffer with offset == vertexBufferOffset and size kVertexAttributeSize as the
         // vertex buffer.
-        renderPass.SetVertexBuffer(0, vertexBuffer, vertexBufferOffset, kVertexAttributeSize);
+        renderPass.SetVertexBuffer(0, vertexBuffer, vertexBufferOffset, vertexAttributeSize);
+        if (indexed) {
+            renderPass.SetIndexBuffer(indexBuffer, wgpu::IndexFormat::Uint32);
+        }
+
         renderPass.SetPipeline(renderPipeline);
         renderPass.Draw(1);
         renderPass.EndPass();
@@ -1115,16 +1137,18 @@ TEST_P(BufferZeroInitTest, BoundAsStorageBuffer) {
 
 // Test the buffer will be lazily initialized correctly when its first use is in SetVertexBuffer.
 TEST_P(BufferZeroInitTest, SetVertexBuffer) {
-    // Bind the whole buffer as a vertex buffer.
-    {
-        constexpr uint64_t kVertexBufferOffset = 0u;
-        TestBufferZeroInitAsVertexBuffer(kVertexBufferOffset);
-    }
-
-    // Bind the buffer as a vertex buffer with a non-zero offset.
-    {
-        constexpr uint64_t kVertexBufferOffset = 16u;
-        TestBufferZeroInitAsVertexBuffer(kVertexBufferOffset);
+    // Bind the whole buffer as a vertex buffer, or with a non-zero offset.
+    for (uint64_t bufferOffset : {0u, 16u}) {
+        // Test both 8, 16, and, 32-byte vertex formats
+        for (wgpu::VertexFormat vertexFormat :
+             {wgpu::VertexFormat::Float16x4, wgpu::VertexFormat::Float32x4}) {
+            TestBufferZeroInitAsVertexBuffer(bufferOffset, vertexFormat, /* indexed */ false,
+                                             /* oob */ false);
+            TestBufferZeroInitAsVertexBuffer(bufferOffset, vertexFormat, /* indexed */ true,
+                                             /* oob */ false);
+            TestBufferZeroInitAsVertexBuffer(bufferOffset, vertexFormat, /* indexed */ true,
+                                             /* oob */ true);
+        }
     }
 }
 
