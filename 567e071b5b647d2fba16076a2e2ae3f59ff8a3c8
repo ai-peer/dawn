@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d182c11a_a3fd288c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:32:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "567e071b5b647d2fba16076a2e2ae3f59ff8a3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e68ec9e6_c4bbd938",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 579,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:32:06Z",
+      "side": 1,
+      "message": "nit: Do we have an issue to tag this on instead?",
+      "range": {
+        "startLine": 579,
+        "startChar": 46,
+        "endLine": 579,
+        "endChar": 50
+      },
+      "revId": "567e071b5b647d2fba16076a2e2ae3f59ff8a3c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
