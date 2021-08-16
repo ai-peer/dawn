@@ -16,6 +16,24 @@
       "message": "I think this should be updated as well so that lazy-clearing of buffers correctly takes into account the extra padding.\n\nMaybe the name should be updated to reflect it applies on the AppliedSize.",
       "revId": "6c6707021ab747005401961e90cb5659fd74c256",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e403af_4a4b02a7",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 589,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-16T15:55:01Z",
+      "side": 1,
+      "message": "Ah, yes it probably should. That\u0027s annoying though because it means even \"full\" buffer copies don\u0027t fully initialize a buffer.",
+      "parentUuid": "7e85a116_2f90c94e",
+      "revId": "6c6707021ab747005401961e90cb5659fd74c256",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
