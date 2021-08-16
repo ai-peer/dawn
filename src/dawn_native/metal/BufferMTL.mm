@@ -116,6 +116,19 @@ namespace dawn_native { namespace metal {
             ClearBuffer(commandContext, uint8_t(1u));
         }
 
+        // Initialize the padding bytes to zero.
+        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) &&
+            !mappedAtCreation) {
+            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+            if (paddingBytes > 0) {
+                uint32_t clearSize = Align(paddingBytes, 4);
+                uint64_t clearOffset = GetAllocatedSize() - clearSize;
+
+                CommandRecordingContext* commandContext =
+                    ToBackend(GetDevice())->GetPendingCommandContext();
+                ClearBuffer(commandContext, 0, clearOffset, clearSize);
+            }
+        }
         return {};
     }
 
@@ -204,11 +217,15 @@ namespace dawn_native { namespace metal {
         GetDevice()->IncrementLazyClearCountForTesting();
     }
 
-    void Buffer::ClearBuffer(CommandRecordingContext* commandContext, uint8_t clearValue) {
+    void Buffer::ClearBuffer(CommandRecordingContext* commandContext,
+                             uint8_t clearValue,
+                             uint64_t offset,
+                             uint64_t size) {
         ASSERT(commandContext != nullptr);
-        ASSERT(GetAllocatedSize() > 0);
+        size = size > 0 ? size : GetAllocatedSize();
+        ASSERT(size > 0);
         [commandContext->EnsureBlit() fillBuffer:mMtlBuffer.Get()
-                                           range:NSMakeRange(0, GetAllocatedSize())
+                                           range:NSMakeRange(offset, size)
                                            value:clearValue];
     }
 
