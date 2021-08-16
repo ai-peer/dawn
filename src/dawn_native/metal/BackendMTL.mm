@@ -18,6 +18,7 @@
 #include "common/GPUInfo.h"
 #include "common/NSRef.h"
 #include "common/Platform.h"
+#include "common/SystemUtils.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/MetalBackend.h"
 #include "dawn_native/metal/DeviceMTL.h"
@@ -152,8 +153,7 @@ namespace dawn_native { namespace metal {
 
         bool IsMetalSupported() {
             // Metal was first introduced in macOS 10.11
-            NSOperatingSystemVersion macOS10_11 = {10, 11, 0};
-            return [NSProcessInfo.processInfo isOperatingSystemAtLeastVersion:macOS10_11];
+            return IsMacOSVersionAtLeast(10, 11);
         }
 #elif defined(DAWN_PLATFORM_IOS)
         MaybeError GetDevicePCIInfo(id<MTLDevice> device, PCIIDs* ids) {
@@ -222,9 +222,18 @@ namespace dawn_native { namespace metal {
                     [*mDevice supportsFamily:MTLGPUFamilyApple5]) {
                     mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
 
+<<<<<<< HEAD   (871b45 [merge m92] Add releaseMutexKey to ExternalImageAccessDescri)
                     // TODO(hao.x.li@intel.com): Not enable timestamp query here becuase it's not
                     // clear how to convert timestamps to nanoseconds on Metal.
                     // See https://github.com/gpuweb/gpuweb/issues/1325
+=======
+                    // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
+                    // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
+                    // has been fixed on macOS 11.0. See crbug.com/dawn/545
+                    if (!gpu_info::IsAMD(GetPCIInfo().vendorId) || IsMacOSVersionAtLeast(11)) {
+                        mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
+                    }
+>>>>>>> CHANGE (e50f8c Skip BufferZeroInitTests.ResolveQuerySet if not on MacOS 10)
                 }
             }
             if (@available(macOS 10.11, iOS 11.0, *)) {
