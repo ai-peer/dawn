@@ -200,6 +200,17 @@ namespace dawn_native { namespace vulkan {
             ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
         }
 
+        // Initialize the padding bytes to zero.
+        if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) && !mappedAtCreation) {
+            uint32_t paddingBytes = GetAllocatedSize() - GetSize();
+            if (paddingBytes > 0) {
+                uint32_t clearSize = Align(paddingBytes, 4);
+                uint64_t clearOffset = GetAllocatedSize() - clearSize;
+
+                CommandRecordingContext* recordingContext = device->GetPendingRecordingContext();
+                ClearBuffer(recordingContext, 0, clearOffset, clearSize);
+            }
+        }
         return {};
     }
 
@@ -354,17 +365,21 @@ namespace dawn_native { namespace vulkan {
         SetIsDataInitialized();
     }
 
-    void Buffer::ClearBuffer(CommandRecordingContext* recordingContext, uint32_t clearValue) {
+    void Buffer::ClearBuffer(CommandRecordingContext* recordingContext,
+                             uint32_t clearValue,
+                             uint64_t offset,
+                             uint64_t size) {
         ASSERT(recordingContext != nullptr);
-        ASSERT(GetAllocatedSize() > 0);
+        size = size > 0 ? size : GetAllocatedSize();
+        ASSERT(size > 0);
 
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
 
         Device* device = ToBackend(GetDevice());
         // VK_WHOLE_SIZE doesn't work on old Windows Intel Vulkan drivers, so we don't use it.
         // Note: Allocated size must be a multiple of 4.
-        ASSERT(GetAllocatedSize() % 4 == 0);
-        device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, 0, GetAllocatedSize(),
+        ASSERT(size % 4 == 0);
+        device->fn.CmdFillBuffer(recordingContext->commandBuffer, mHandle, offset, size,
                                  clearValue);
     }
 }}  // namespace dawn_native::vulkan
