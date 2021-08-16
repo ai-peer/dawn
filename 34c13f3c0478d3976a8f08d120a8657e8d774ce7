@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "386ce25e_f6f564d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T12:51:24Z",
+      "side": 1,
+      "message": "This will make Chromium recurse into ANGLE from Dawn. Can we instead add variables to build_overrides/angle.gni to remove the need for this dependency, or alternatively add the dependency to Dawn itself?",
+      "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
