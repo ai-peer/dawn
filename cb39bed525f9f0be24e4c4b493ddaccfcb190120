@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06fef794_ac15dc78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-08-16T17:23:59Z",
+      "side": 1,
+      "message": "Cherry-picking two validation fixes and a fix for a HLSL backend crash to the M94 release branch.",
+      "revId": "cb39bed525f9f0be24e4c4b493ddaccfcb190120",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
