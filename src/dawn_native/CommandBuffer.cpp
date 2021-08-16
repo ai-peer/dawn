@@ -185,13 +185,13 @@ namespace dawn_native {
 
         const uint64_t copyTextureDataSizePerRow =
             copy->copySize.width / blockInfo.width * blockInfo.byteSize;
-        if (copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
+        if (heightInBlocks > 1 && copy->destination.bytesPerRow > copyTextureDataSizePerRow) {
             return false;
         }
 
         const uint64_t overwrittenRangeSize =
             copyTextureDataSizePerRow * heightInBlocks * copy->copySize.depthOrArrayLayers;
-        if (copy->destination.buffer->GetSize() > overwrittenRangeSize) {
+        if (!copy->destination.buffer->IsFullBufferRange(0, overwrittenRangeSize)) {
             return false;
         }
 
