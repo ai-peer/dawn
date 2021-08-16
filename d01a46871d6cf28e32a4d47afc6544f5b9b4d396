@@ -274,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3beeec3d_29955f99",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-16T18:18:10Z",
+      "side": 1,
+      "message": "what do you think about only appending |label| if UseDebugLabelsInBackend is enabled? Otherwise, we use the constant prefix.",
+      "parentUuid": "15dd7c11_3eb3dfe3",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
@@ -428,6 +452,30 @@
       "side": 1,
       "message": "\u003e IMHO it is just noise for the users to know this is a Dawn_Buffer/Dawn_Texture\n\nIt\u0027s not noise when you\u0027re looking at Chromium wide trace and every single component (video, ANGLE, Dawn, Skia, etc) labels their staging texture with the label \"StagingTexture\". Having a prefix to disambiguate components helps target onion peeling.",
       "parentUuid": "0bc37195_bac965ee",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcfc72c2_749d96e8",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-16T18:18:10Z",
+      "side": 1,
+      "message": "I think prefixes are a good idea. in the future maybe we can consider labeling the device with the URL it came from and use that as part of the prefix. Other users of Dawn could pass \"Skia\", etc. as the prefix.",
+      "parentUuid": "752920fe_4e85c834",
       "range": {
         "startLine": 87,
         "startChar": 22,
