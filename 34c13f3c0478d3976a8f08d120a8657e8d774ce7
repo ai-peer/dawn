@@ -34,6 +34,24 @@
       "parentUuid": "386ce25e_f6f564d8",
       "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2c6e554_7a94ce48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T19:41:08Z",
+      "side": 1,
+      "message": "You can try roll-dep third-party/angle to roll to the latest revision. If it gets too windy then please file an issue!",
+      "parentUuid": "94d14195_5543088e",
+      "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
