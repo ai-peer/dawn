@@ -16,6 +16,24 @@
       "message": "This will make Chromium recurse into ANGLE from Dawn. Can we instead add variables to build_overrides/angle.gni to remove the need for this dependency, or alternatively add the dependency to Dawn itself?",
       "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94d14195_5543088e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-16T17:35:34Z",
+      "side": 1,
+      "message": "You\u0027re totally correct, we could add  |angle_has_rapidjson \u003d false| into build_overrides/angle.gni. However, this has to wait until Dawn\u0027s revision of ANGLE is past 2973338: Fix roll_aosp.sh \u0027gn gen\u0027 failure | https://chromium-review.googlesource.com/c/angle/angle/+/2973338.\n\nrapidjson seems to only be used for angle testing(?)-related things and probably not required for dawn to also pull in.",
+      "parentUuid": "386ce25e_f6f564d8",
+      "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
