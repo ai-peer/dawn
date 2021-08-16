@@ -52,6 +52,24 @@
       "parentUuid": "94d14195_5543088e",
       "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c321f216_27b73de8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-16T20:16:15Z",
+      "side": 1,
+      "message": "I was able to roll third_party/angle/ 835bcb1e2..4aedb71f4 (730 commits; 1 trivial rolls), but it seems like a change may be needed in angle to fix the dawn standalone case.\n\nFrom what I can tell, we either need to:\n- move angle_has_rapidjson out of ANGLE\u0027s BUILD.gn and into ANGLE\u0027s build_overrides/angle.gn\n- or fix the build when angle_has_build \u003d false (and set it in Dawn).\n\nNote this isn\u0027t urgent or blocking for me, but am happy to make the changes with guidance on how to proceed here.",
+      "parentUuid": "d2c6e554_7a94ce48",
+      "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
