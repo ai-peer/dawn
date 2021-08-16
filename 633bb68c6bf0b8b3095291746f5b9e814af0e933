@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5c9fb51_483a9ebc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:14:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "633bb68c6bf0b8b3095291746f5b9e814af0e933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6009c178_7c3e2090",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-16T09:14:04Z",
+      "side": 1,
+      "message": "nit: This should probably use the helpers to get an exact extension struct from the chain.",
+      "revId": "633bb68c6bf0b8b3095291746f5b9e814af0e933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
