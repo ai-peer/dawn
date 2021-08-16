@@ -324,7 +324,7 @@ namespace dawn_native { namespace vulkan {
             return;
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullAllocatedBufferRange(offset, size)) {
             SetIsDataInitialized();
         } else {
             InitializeToZero(recordingContext);

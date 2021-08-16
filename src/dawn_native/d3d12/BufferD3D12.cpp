@@ -406,7 +406,7 @@ namespace dawn_native { namespace d3d12 {
             return {};
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullAllocatedBufferRange(offset, size)) {
             SetIsDataInitialized();
         } else {
             DAWN_TRY(InitializeToZero(commandContext));

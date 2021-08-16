@@ -62,7 +62,7 @@ namespace dawn_native {
 
         MaybeError ValidateCanUseOnQueueNow() const;
 
-        bool IsFullBufferRange(uint64_t offset, uint64_t size) const;
+        bool IsFullAllocatedBufferRange(uint64_t offset, uint64_t size) const;
         bool IsDataInitialized() const;
         void SetIsDataInitialized();
 

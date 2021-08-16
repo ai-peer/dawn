@@ -586,7 +586,7 @@ namespace dawn_native {
         mIsDataInitialized = true;
     }
 
-    bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
-        return offset == 0 && size == GetSize();
+    bool BufferBase::IsFullAllocatedBufferRange(uint64_t offset, uint64_t size) const {
+        return offset == 0 && size == GetAllocatedSize();
     }
 }  // namespace dawn_native

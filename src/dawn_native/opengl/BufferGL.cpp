@@ -83,7 +83,7 @@ namespace dawn_native { namespace opengl {
             return;
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullAllocatedBufferRange(offset, size)) {
             SetIsDataInitialized();
         } else {
             InitializeToZero();

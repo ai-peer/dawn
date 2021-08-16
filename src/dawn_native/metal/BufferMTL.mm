@@ -166,7 +166,7 @@ namespace dawn_native { namespace metal {
             return;
         }
 
-        if (IsFullBufferRange(offset, size)) {
+        if (IsFullAllocatedBufferRange(offset, size)) {
             SetIsDataInitialized();
         } else {
             InitializeToZero(commandContext);
