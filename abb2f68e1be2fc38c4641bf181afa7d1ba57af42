@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "381267ee_e7d7730f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-16T17:46:42Z",
+      "side": 1,
+      "message": "Resolved some feedback. There\u0027ll need to be a decision regarding the prefix before I can address the remaining comments.",
+      "revId": "abb2f68e1be2fc38c4641bf181afa7d1ba57af42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

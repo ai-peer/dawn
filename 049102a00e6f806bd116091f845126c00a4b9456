@@ -321,6 +321,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4995e75b_ee411840",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-16T17:46:42Z",
+      "side": 1,
+      "message": "Let\u0027s do this in a follow up.",
+      "parentUuid": "d98d33d0_3f7ac727",
+      "range": {
+        "startLine": 22,
+        "startChar": 27,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "049102a00e6f806bd116091f845126c00a4b9456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f18543a9_ce8eb0f8",

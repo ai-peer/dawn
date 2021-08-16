@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bca1a72_e548025f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1351,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-16T17:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8a6712a_625e660d",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d4f21c1_766037b4",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-08-16T09:11:41Z",
       "side": 1,
       "message": "std::string is 24 bytes, and that\u0027s for every single object. Can we have a TODO to optimize the memory footprint of the labels for objects that don\u0027t have them? (like a unique_ptr\u003cExtendedData\u003e that will eventually contain a string for the name, and the creation error for example).",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29de2e8d_51e1e047",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-16T17:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d4f21c1_766037b4",
       "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85473432_d0856247",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-16T17:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9aa9c3d7_c23c2af1",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4de9dd25_d59df9dd",
@@ -82,6 +136,30 @@
       "writtenOn": "2021-08-16T09:11:41Z",
       "side": 1,
       "message": "nit: VK_OBJECT_TYPE_BUFFER",
+      "range": {
+        "startLine": 354,
+        "startChar": 45,
+        "endLine": 354,
+        "endChar": 65
+      },
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e3c024d_d56aed28",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-16T17:46:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4de9dd25_d59df9dd",
       "range": {
         "startLine": 354,
         "startChar": 45,
