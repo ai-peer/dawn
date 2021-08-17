@@ -106,6 +106,7 @@ namespace dawn_native {
                             "The depth aspect of depth24plus texture cannot be selected in a "
                             "texture to buffer copy");
                     case wgpu::TextureFormat::Depth32Float:
+                    case wgpu::TextureFormat::Depth16Unorm:
                         break;
 
                     default:

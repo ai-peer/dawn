@@ -23,6 +23,7 @@ namespace {
         wgpu::TextureFormat::Depth32Float,
         wgpu::TextureFormat::Depth24Plus,
         wgpu::TextureFormat::Depth24PlusStencil8,
+        wgpu::TextureFormat::Depth16Unorm,
     };
 
     constexpr wgpu::TextureFormat kStencilFormats[] = {
