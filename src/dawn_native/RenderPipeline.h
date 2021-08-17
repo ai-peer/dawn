@@ -50,6 +50,7 @@ namespace dawn_native {
     struct VertexBufferInfo {
         uint64_t arrayStride;
         wgpu::VertexStepMode stepMode;
+        uint64_t attributesAccessBoundary;
     };
 
     class RenderPipelineBase : public PipelineBase {
