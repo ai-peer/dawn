@@ -223,6 +223,12 @@ namespace dawn_native { namespace metal {
                 return MTLPixelFormatDepth32Float;
             case wgpu::TextureFormat::Depth24PlusStencil8:
                 return MTLPixelFormatDepth32Float_Stencil8;
+            case wgpu::TextureFormat::Depth16Unorm:
+                if (@available(macOS 10.12, iOS 13.0, *)) {
+                    return MTLPixelFormatDepth16Unorm;
+                } else {
+                    UNREACHABLE();
+                }
 
 #if defined(DAWN_PLATFORM_MACOS)
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -314,8 +320,6 @@ namespace dawn_native { namespace metal {
 
             // TODO(dawn:666): implement stencil8
             case wgpu::TextureFormat::Stencil8:
-            // TODO(dawn:570): implement depth16unorm
-            case wgpu::TextureFormat::Depth16Unorm:
             case wgpu::TextureFormat::Undefined:
                 UNREACHABLE();
         }
