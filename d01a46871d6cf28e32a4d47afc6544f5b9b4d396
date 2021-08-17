@@ -298,6 +298,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06745ed0_49c4f6e1",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-17T21:09:20Z",
+      "side": 1,
+      "message": "I implemented as Rafael suggested - prefixes are now passed by default and only the user provided portion is behind a toggle.",
+      "parentUuid": "3beeec3d_29955f99",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
