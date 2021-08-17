@@ -33,6 +33,24 @@
       "message": "If we expect this to always end in \\n, specify that - otherwise it looks like things could run together (\"some error messageD3D12 serialize root signature\").\n\n(If not, add some whitespace, maybe an extra \\n.)",
       "revId": "9307407cb4c3a2fee30047cb09b6cff413a703c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "532eed88_fec2c8cc",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-17T23:41:32Z",
+      "side": 1,
+      "message": "I added an extra newline and a comment adding some context.",
+      "parentUuid": "2473b0ed_e0b85913",
+      "revId": "9307407cb4c3a2fee30047cb09b6cff413a703c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
