@@ -28,6 +28,7 @@ namespace {
 
     constexpr wgpu::TextureFormat kStencilFormats[] = {
         wgpu::TextureFormat::Depth24PlusStencil8,
+        wgpu::TextureFormat::Stencil8,
     };
 
     constexpr wgpu::CompareFunction kCompareFunctions[] = {
