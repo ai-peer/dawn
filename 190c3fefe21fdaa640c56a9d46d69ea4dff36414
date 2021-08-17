@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66144d5b_484b65a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-08-17T05:54:52Z",
+      "side": 1,
+      "message": "Testing CL passed at https://chromium-review.googlesource.com/c/chromium/src/+/3098443\n\nSubmiting this with No-Try now",
+      "revId": "190c3fefe21fdaa640c56a9d46d69ea4dff36414",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
