@@ -333,7 +333,8 @@ namespace dawn_native {
         AddStencilFormat(wgpu::TextureFormat::Stencil8);
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
                               Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, true, 2);
-        // TODO(dawn:690): Implement Depth16Unorm, Depth24UnormStencil8, Depth32FloatStencil8.
+        AddDepthFormat(wgpu::TextureFormat::Depth16Unorm, 2);
+        // TODO(dawn:690): Implement Depth24UnormStencil8, Depth32FloatStencil8.
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsExtensionEnabled(Extension::TextureCompressionBC);

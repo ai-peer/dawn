@@ -116,6 +116,7 @@ namespace dawn_native { namespace d3d12 {
                 case wgpu::TextureFormat::R16Uint:
                 case wgpu::TextureFormat::R16Sint:
                 case wgpu::TextureFormat::R16Float:
+                case wgpu::TextureFormat::Depth16Unorm:
                     return DXGI_FORMAT_R16_TYPELESS;
 
                 case wgpu::TextureFormat::RG8Unorm:
@@ -297,6 +298,8 @@ namespace dawn_native { namespace d3d12 {
                 return DXGI_FORMAT_D32_FLOAT;
             case wgpu::TextureFormat::Depth24PlusStencil8:
                 return DXGI_FORMAT_D32_FLOAT_S8X24_UINT;
+            case wgpu::TextureFormat::Depth16Unorm:
+                return DXGI_FORMAT_D16_UNORM;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
                 return DXGI_FORMAT_BC1_UNORM;
@@ -1065,6 +1068,9 @@ namespace dawn_native { namespace d3d12 {
                 case wgpu::TextureFormat::Depth32Float:
                 case wgpu::TextureFormat::Depth24Plus:
                     mSrvDesc.Format = DXGI_FORMAT_R32_FLOAT;
+                    break;
+                case wgpu::TextureFormat::Depth16Unorm:
+                    mSrvDesc.Format = DXGI_FORMAT_R16_FLOAT;
                     break;
                 case wgpu::TextureFormat::Depth24PlusStencil8:
                     switch (descriptor->aspect) {
