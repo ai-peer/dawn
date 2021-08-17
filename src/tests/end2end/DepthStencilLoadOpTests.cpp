@@ -54,6 +54,7 @@ namespace {
     constexpr static uint32_t kRTSize = 16;
     constexpr uint32_t kMipLevelCount = 2u;
     constexpr std::array<float, kMipLevelCount> kDepthValues = {0.125f, 0.875f};
+    constexpr std::array<uint16_t, kMipLevelCount> kU16DepthValues = {8192u, 57343u};
     constexpr std::array<uint8_t, kMipLevelCount> kStencilValues = {7u, 3u};
 
     class DepthStencilLoadOpTests : public DawnTestWithParams<DepthStencilLoadOpTestParams> {
@@ -104,10 +105,27 @@ namespace {
                 }
 
                 case Check::CopyDepth: {
-                    std::vector<float> expectedDepth(mipSize * mipSize, kDepthValues[mipLevel]);
-                    EXPECT_TEXTURE_EQ(expectedDepth.data(), texture, {0, 0}, {mipSize, mipSize},
-                                      mipLevel, wgpu::TextureAspect::DepthOnly)
-                        << "copy depth mip " << mipLevel;
+                    switch (GetParam().mFormat) {
+                        case wgpu::TextureFormat::Depth16Unorm: {
+                            std::vector<uint16_t> expectedDepth(mipSize * mipSize,
+                                                                kU16DepthValues[mipLevel]);
+                            EXPECT_TEXTURE_EQ(expectedDepth.data(), texture, {0, 0},
+                                              {mipSize, mipSize}, mipLevel,
+                                              wgpu::TextureAspect::DepthOnly)
+                                << "copy depth mip " << mipLevel;
+                            break;
+                        }
+                        default: {
+                            std::vector<float> expectedDepth(mipSize * mipSize,
+                                                             kDepthValues[mipLevel]);
+                            EXPECT_TEXTURE_EQ(expectedDepth.data(), texture, {0, 0},
+                                              {mipSize, mipSize}, mipLevel,
+                                              wgpu::TextureAspect::DepthOnly)
+                                << "copy depth mip " << mipLevel;
+                            break;
+                        }
+                    }
+
                     break;
                 }
 
@@ -209,7 +227,7 @@ namespace {
         auto params1 = MakeParamGenerator<DepthStencilLoadOpTestParams>(
             {D3D12Backend(), D3D12Backend({}, {"use_d3d12_render_pass"}), MetalBackend(),
              OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
-            {wgpu::TextureFormat::Depth32Float},
+            {wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Depth16Unorm},
             {Check::CopyDepth, Check::DepthTest, Check::SampleDepth});
 
         auto params2 = MakeParamGenerator<DepthStencilLoadOpTestParams>(
