@@ -318,6 +318,8 @@ namespace dawn_native::vulkan {
                 return VK_FORMAT_D24_UNORM_S8_UINT;
             case wgpu::TextureFormat::Depth32FloatStencil8:
                 return VK_FORMAT_D32_SFLOAT_S8_UINT;
+            case wgpu::TextureFormat::Stencil8:
+                return VK_FORMAT_S8_UINT;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
                 return VK_FORMAT_BC1_RGBA_UNORM_BLOCK;
@@ -430,7 +432,6 @@ namespace dawn_native::vulkan {
                 return VK_FORMAT_G8_B8R8_2PLANE_420_UNORM;
 
             // TODO(dawn:666): implement stencil8
-            case wgpu::TextureFormat::Stencil8:
             case wgpu::TextureFormat::Undefined:
                 break;
         }
