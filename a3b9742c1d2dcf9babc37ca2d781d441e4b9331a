@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbf8f47_f4d14407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T12:11:18Z",
+      "side": 1,
+      "message": "LGTM overall but let\u0027s wait for the spec PR to land first.",
+      "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a78ed535_4d20941f",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T12:11:18Z",
+      "side": 1,
+      "message": "Could we precompute the max (offset + formatSize) at pipeline creation and store it in RenderPipelineBase?",
+      "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39256277_35a827fd",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T12:11:18Z",
+      "side": 1,
+      "message": "I\u0027d like to wait to see if this constraint will be added in the spec before landing this CL.",
+      "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
