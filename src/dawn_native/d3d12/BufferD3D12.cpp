@@ -81,12 +81,10 @@ namespace dawn_native { namespace d3d12 {
         }
 
         size_t D3D12BufferSizeAlignment(wgpu::BufferUsage usage) {
-            switch (usage) {
-                case wgpu::BufferUsage::Uniform:
-                    return D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT;
-                default:
-                    return 1;
+            if ((usage & wgpu::BufferUsage::Uniform) != 0) {
+                return D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT;
             }
+            return 1;
         }
     }  // namespace
 
