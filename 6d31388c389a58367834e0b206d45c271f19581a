@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3255af38_045e625d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-17T18:20:06Z",
+      "side": 1,
+      "message": "I had no idea the |.gn| file was like a super-override (?). I was trying to make build_overrides/angle.gni work, to little success.\n\nRunning |autoninja -C .\\out\\debug_x64 all| now succeeds locally. I occurred to me that the TryJobs bots should also be running into a similar issue. It seems they run |autoninja -C .\\out\\debug_x64|, which has helped me learn that |all| and the default target are not nessecarily the same. :D",
+      "revId": "6d31388c389a58367834e0b206d45c271f19581a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
