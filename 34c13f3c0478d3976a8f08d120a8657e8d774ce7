@@ -70,6 +70,24 @@
       "parentUuid": "d2c6e554_7a94ce48",
       "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c22ed345_2039b2bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T08:57:39Z",
+      "side": 1,
+      "message": "I think we can add angle_has_rapidjson\u003dfalse to our .gn which would fix this.",
+      "parentUuid": "c321f216_27b73de8",
+      "revId": "34c13f3c0478d3976a8f08d120a8657e8d774ce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

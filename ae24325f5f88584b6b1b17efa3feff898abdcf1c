@@ -16,6 +16,23 @@
       "message": "Thanks for taking a look. As you mentioned this probably isn\u0027t the right change to fix the issue--we likely want to add something to angle\u0027s build_overrides.\n\nI\u0027ll update this once angle exposes the build option: angle_has_rapidjson",
       "revId": "ae24325f5f88584b6b1b17efa3feff898abdcf1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c38aff6_db966457",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T08:57:39Z",
+      "side": 1,
+      "message": "I think we ",
+      "revId": "ae24325f5f88584b6b1b17efa3feff898abdcf1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
