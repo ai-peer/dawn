@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406db0d2_917007e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T07:47:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8eac119965096fbd465aea608abd01d2a8b4de49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4a7fe6e_f36aef56",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-17T07:47:08Z",
+      "side": 1,
+      "message": "I as thinking of just keeping a map\u003cstring, EntryPointMetadata\u003e in the GL backend, but this works too.",
+      "revId": "8eac119965096fbd465aea608abd01d2a8b4de49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
