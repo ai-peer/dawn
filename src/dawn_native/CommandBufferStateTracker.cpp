@@ -88,11 +88,29 @@ namespace dawn_native {
                 mLastRenderPipeline->GetVertexBuffer(usedSlotVertex);
             uint64_t arrayStride = vertexBuffer.arrayStride;
             uint64_t bufferSize = mVertexBufferSizes[usedSlotVertex];
-            // firstVertex and vertexCount are in uint32_t, and arrayStride must not
-            // be larger than kMaxVertexBufferArrayStride, which is currently 2048. So by
-            // doing checks in uint64_t we avoid overflows.
-            if ((static_cast<uint64_t>(firstVertex) + vertexCount) * arrayStride > bufferSize) {
-                return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+            if (arrayStride == 0) {
+                for (auto attribLocation :
+                     IterateBitSet(mLastRenderPipeline->GetAttributeLocationsUsed())) {
+                    const auto attrib = mLastRenderPipeline->GetAttribute(attribLocation);
+                    if (attrib.vertexBufferSlot != usedSlotVertex) {
+                        continue;
+                    }
+                    // offset of an attribute and size of its format are in uint32_t, and size is
+                    // quite small (currently no larger than 16). So by doing checks in uint64_t we
+                    // avoid overflows.
+                    if (static_cast<uint64_t>(attrib.offset) +
+                            GetVertexFormatInfo(attrib.format).byteSize >
+                        bufferSize) {
+                        return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                    }
+                }
+            } else {
+                // firstVertex and vertexCount are in uint32_t, and arrayStride must not
+                // be larger than kMaxVertexBufferArrayStride, which is currently 2048. So by
+                // doing checks in uint64_t we avoid overflows.
+                if ((static_cast<uint64_t>(firstVertex) + vertexCount) * arrayStride > bufferSize) {
+                    return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                }
             }
         }
 
@@ -111,11 +129,30 @@ namespace dawn_native {
                 mLastRenderPipeline->GetVertexBuffer(usedSlotInstance);
             uint64_t arrayStride = vertexBuffer.arrayStride;
             uint64_t bufferSize = mVertexBufferSizes[usedSlotInstance];
-            // firstInstance and instanceCount are in uint32_t, and arrayStride must
-            // not be larger than kMaxVertexBufferArrayStride, which is currently 2048.
-            // So by doing checks in uint64_t we avoid overflows.
-            if ((static_cast<uint64_t>(firstInstance) + instanceCount) * arrayStride > bufferSize) {
-                return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+            if (arrayStride == 0) {
+                for (auto attribLocation :
+                     IterateBitSet(mLastRenderPipeline->GetAttributeLocationsUsed())) {
+                    const auto attrib = mLastRenderPipeline->GetAttribute(attribLocation);
+                    if (attrib.vertexBufferSlot != usedSlotInstance) {
+                        continue;
+                    }
+                    // offset of an attribute and size of its format are in uint32_t, and size is
+                    // quite small (currently no larger than 16). So by doing checks in uint64_t we
+                    // avoid overflows.
+                    if (static_cast<uint64_t>(attrib.offset) +
+                            GetVertexFormatInfo(attrib.format).byteSize >
+                        bufferSize) {
+                        return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                    }
+                }
+            } else {
+                // firstInstance and instanceCount are in uint32_t, and arrayStride must
+                // not be larger than kMaxVertexBufferArrayStride, which is currently 2048.
+                // So by doing checks in uint64_t we avoid overflows.
+                if ((static_cast<uint64_t>(firstInstance) + instanceCount) * arrayStride >
+                    bufferSize) {
+                    return DAWN_VALIDATION_ERROR("Vertex buffer out of bound");
+                }
             }
         }
 
