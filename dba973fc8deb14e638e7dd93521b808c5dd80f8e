@@ -16,6 +16,103 @@
       "message": "PTAL! Still iterating a bit - it looks like it fails on ANGLE/Swiftshader, but it\u0027s fine for me locally. Sending this out now to get feedback as it\u0027s mostly there but ending my day soon.\n\nI could split this CL, but didn\u0027t want to have to merge back too many changes.",
       "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7ebc47_fdf4780a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T13:47:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67da3d03_af601bb0",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T13:47:31Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be needed: OpenGL buffers start cleared to zero if you pass nullptr to glBufferData.",
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce23a33_aa904892",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T13:47:31Z",
+      "side": 1,
+      "message": "doesn\u0027t the use of GetAllocatedSize here again cause the buffer\u0027s padding to be cleared a second time?",
+      "range": {
+        "startLine": 373,
+        "startChar": 33,
+        "endLine": 373,
+        "endChar": 49
+      },
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2be71694_e4b3414c",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T13:47:31Z",
+      "side": 1,
+      "message": "nit: even more",
+      "range": {
+        "startLine": 1189,
+        "startChar": 47,
+        "endLine": 1189,
+        "endChar": 56
+      },
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2801bf91_08ebd759",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T13:47:31Z",
+      "side": 1,
+      "message": "IMHO we could add padding in Vulkan in this CL and see later if the group decides to do something else.",
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
