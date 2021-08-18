@@ -344,6 +344,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e10edd9a_dda14b91",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Resolving.",
+      "parentUuid": "c1871563_f52f6b7d",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce3dd3b6_61d50ff9",

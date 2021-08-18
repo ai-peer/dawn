@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1698707d_7be1a873",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Added tests.",
+      "parentUuid": "e0a8a0ee_92d1cf34",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86312f57_cd277bc8",
@@ -88,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6196e78a_1edfca6e",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86312f57_cd277bc8",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71050bc1_a4f80037",
@@ -101,6 +137,24 @@
       "writtenOn": "2021-08-18T12:24:15Z",
       "side": 1,
       "message": "Please assign TODOs with a dawn:XXX issue.",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f249651_72baa6bf",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71050bc1_a4f80037",
       "revId": "c1088c09363564a171e4dd99438603a97d94701d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -128,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78523158_e5f06b99",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f0bb2e37_941323d4",
+      "range": {
+        "startLine": 217,
+        "startChar": 23,
+        "endLine": 217,
+        "endChar": 33
+      },
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08152d4e_4e2d27b9",
@@ -141,6 +219,24 @@
       "writtenOn": "2021-08-18T12:24:15Z",
       "side": 1,
       "message": "This (and same in texture, and same in the Vulkan backend) can just be a call to SetLabelImpl() now.",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38a78f01_0a3ef058",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "08152d4e_4e2d27b9",
       "revId": "c1088c09363564a171e4dd99438603a97d94701d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +332,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "441a7bf4_4fce1171",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Both external and swapchain textures have texture descriptors in their constructors - that means that somebody, somewhere has the ability to set a label if they\u0027re inclined. I think standardizing everything to SetLabelImpl() and using Dawn_Texture as a prefix would make the most sense. The \"swapchain\" or \"external\" differentiator should be passed through the descriptor if it\u0027s needed.",
+      "parentUuid": "3a7628e6_5f7f232b",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
@@ -247,6 +361,30 @@
       "writtenOn": "2021-08-18T16:57:25Z",
       "side": 1,
       "message": "Can this be simplified to label.empty()?",
+      "range": {
+        "startLine": 376,
+        "startChar": 12,
+        "endLine": 376,
+        "endChar": 23
+      },
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9040c31a_e9b75d1d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-18T21:26:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70c9ebf9_ce27ff2a",
       "range": {
         "startLine": 376,
         "startChar": 12,
