@@ -33,6 +33,40 @@
       "message": "Switching reviewers, PTAL",
       "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a14e8f_18e55940",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-18T01:07:46Z",
+      "side": 1,
+      "message": "Just got a moment to look, LGTM.",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "555600c5_dbdf3b61",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-18T01:07:46Z",
+      "side": 1,
+      "message": "nit: consider writing a test so somebody like myself doesn\u0027t break it. ;)",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
