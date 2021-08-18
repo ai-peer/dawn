@@ -119,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a810127e_cdf788c6",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T16:29:11Z",
+      "side": 1,
+      "message": "Yeah I was thinking of the same optimization but definitely more risky.",
+      "parentUuid": "32ef1a0e_f66c5e1b",
+      "range": {
+        "startLine": 373,
+        "startChar": 33,
+        "endLine": 373,
+        "endChar": 49
+      },
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2be71694_e4b3414c",
         "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
         "patchSetId": 9
