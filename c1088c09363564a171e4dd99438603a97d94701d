@@ -200,6 +200,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d12a7718_858893d8",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T17:36:46Z",
+      "side": 1,
+      "message": "For internal, temporary resources Dawn makes for its own purposes, Chromium can\u0027t label them because it\u0027s an implementation detail of Dawn. These, Dawn should label itself.\n\nI agree with you about SwapChains as that\u0027s a Chromium concept that\u0027s done via the shared image code. \n\nFor the rest of the objects that are allocated externally to Dawn, are you suggesting that the dawn_wire do labeling? Putting the labeling in the render process at the \"WebGPU\" layer means we\u0027ll need to do more sanitizing in Dawn or dawn_wire.",
+      "parentUuid": "dc2b47af_92e11563",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
