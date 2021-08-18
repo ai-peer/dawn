@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55251064_163e031d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-18T00:55:38Z",
+      "side": 1,
+      "message": "Switching reviewers, PTAL",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
