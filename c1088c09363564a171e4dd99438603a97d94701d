@@ -51,6 +51,92 @@
       "parentUuid": "3edc554d_9df12fad",
       "revId": "c1088c09363564a171e4dd99438603a97d94701d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a8a0ee_92d1cf34",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T12:24:15Z",
+      "side": 1,
+      "message": "Exactly",
+      "parentUuid": "ab1ca026_6b023a2f",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86312f57_cd277bc8",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T12:24:15Z",
+      "side": 1,
+      "message": "Stray include?",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71050bc1_a4f80037",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T12:24:15Z",
+      "side": 1,
+      "message": "Please assign TODOs with a dawn:XXX issue.",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08152d4e_4e2d27b9",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T12:24:15Z",
+      "side": 1,
+      "message": "This (and same in texture, and same in the Vulkan backend) can just be a call to SetLabelImpl() now.",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0edbb58d_212b5fec",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T12:24:15Z",
+      "side": 1,
+      "message": "Maybe we don\u0027t need to differentiate between External/Internal/SwapChain texture and just call all of them Dawn_Texture. Then we can just use SetLabelImpl() everywhere. Ditto in the Vulkan backend.",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
