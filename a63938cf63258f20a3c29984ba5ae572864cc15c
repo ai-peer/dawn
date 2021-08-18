@@ -67,6 +67,24 @@
       "message": "nit: consider writing a test so somebody like myself doesn\u0027t break it. ;)",
       "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdff1959_39b2b5a3",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-08-18T01:42:28Z",
+      "side": 1,
+      "message": "+1 It\u0027s better to have a regression test to cover this.",
+      "parentUuid": "555600c5_dbdf3b61",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
