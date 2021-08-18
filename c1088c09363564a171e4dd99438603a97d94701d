@@ -350,6 +350,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5cf5e7b2_f6a34698",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T22:04:07Z",
+      "side": 1,
+      "message": "OK, but if the toggle will be off by default, then any label Chromium sets will be ignored, right? How can we ensure Chromium labels are respected but not ones from untrusted WebGPU developers?",
+      "parentUuid": "441a7bf4_4fce1171",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
