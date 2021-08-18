@@ -22,6 +22,30 @@
       },
       "revId": "8458f1232ac2040c23840073d51f9468e996d886",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd1e107a_73f4ebcf",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-18T02:18:58Z",
+      "side": 1,
+      "message": "Perhaps instead of reserve, would it be possible to just actually fill `ranges` with zero-initialized D3D12_DESCRIPTOR_RANGEs and then set them by index instead of push_back?",
+      "parentUuid": "50b5c97c_e766241e",
+      "range": {
+        "startLine": 102,
+        "startChar": 66,
+        "endLine": 102,
+        "endChar": 92
+      },
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
