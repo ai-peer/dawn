@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe11658_afbce7f3",
+        "filename": "src/dawn_native/opengl/BufferGL.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-18T16:20:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67da3d03_af601bb0",
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ce23a33_aa904892",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-08-18T13:47:31Z",
       "side": 1,
       "message": "doesn\u0027t the use of GetAllocatedSize here again cause the buffer\u0027s padding to be cleared a second time?",
+      "range": {
+        "startLine": 373,
+        "startChar": 33,
+        "endLine": 373,
+        "endChar": 49
+      },
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32ef1a0e_f66c5e1b",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-18T16:20:45Z",
+      "side": 1,
+      "message": "Yes - is that a concern? It\u0027s a small amount of data, and I think it makes the clearing more obviously safe.\n\nEventually I think I want to move the padding initialization on creation to be a more general clearing of bytes before the range touched in the buffer, and after the range touched in the buffer. But that change is more risky and requires rebaselining many of the expectations about the clear count.",
+      "parentUuid": "8ce23a33_aa904892",
       "range": {
         "startLine": 373,
         "startChar": 33,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a05b47b_52642ed0",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-18T16:20:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2be71694_e4b3414c",
+      "range": {
+        "startLine": 1189,
+        "startChar": 47,
+        "endLine": 1189,
+        "endChar": 56
+      },
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2801bf91_08ebd759",
@@ -111,6 +177,24 @@
       "writtenOn": "2021-08-18T13:47:31Z",
       "side": 1,
       "message": "IMHO we could add padding in Vulkan in this CL and see later if the group decides to do something else.",
+      "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c89c26d8_5476e4f1",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-18T16:20:45Z",
+      "side": 1,
+      "message": "Done.\n\nI\u0027m going to add tests for the actually-allocated size with the CL about D3D12 uniform buffer size alignment",
+      "parentUuid": "2801bf91_08ebd759",
       "revId": "dba973fc8deb14e638e7dd93521b808c5dd80f8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
