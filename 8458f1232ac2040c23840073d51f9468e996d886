@@ -1,6 +1,97 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b7f386c_494b9546",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T14:16:36Z",
+      "side": 1,
+      "message": "WGSL binding numbers can be arbitrary u32s in Dawn right now, and arbitrary u16 in the WebGPU spec (Dawn is missing validation). Is that ok for the D3D runtime?",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e77f3bcf_2dc27387",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T14:16:36Z",
+      "side": 1,
+      "message": "nit: We usually pass mutable references by pointer instead so it is clear at the callsite that the value may be modified.",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c157515_0be5f6e2",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T14:16:36Z",
+      "side": 1,
+      "message": "nit: The first part of this || will always be true so I\u0027m not sure what we\u0027re testing here.",
+      "range": {
+        "startLine": 78,
+        "startChar": 68,
+        "endLine": 80,
+        "endChar": 74
+      },
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ef2aab_80e9e448",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T14:16:36Z",
+      "side": 1,
+      "message": "Isn\u0027t this potentially doing O(n^2) computations?\n\nWe could directly try to extend the range at [1] if it is possible instead of merging at posteriori.",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a0541e9_fa498a61",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T14:16:36Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "50b5c97c_e766241e",
