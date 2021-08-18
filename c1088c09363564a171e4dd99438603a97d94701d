@@ -33,6 +33,24 @@
       "message": "As Corentin suggested, I added this that will help with testing in Chromium. PTAL.",
       "revId": "c1088c09363564a171e4dd99438603a97d94701d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab1ca026_6b023a2f",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-18T00:43:41Z",
+      "side": 1,
+      "message": "LGTM, but I think the intent was to have Dawn unittests that use this function to confirm that it\u0027s set on creation, as well as set after calling SetLabel(..)",
+      "parentUuid": "3edc554d_9df12fad",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
