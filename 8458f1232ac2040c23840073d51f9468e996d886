@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50b5c97c_e766241e",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T01:58:35Z",
+      "side": 1,
+      "message": "The win-dawn-rel job failed inside a bounds check on `ranges`. This is because we\u0027re getting the address of a range that we push on line 106 below.\n\nThere are a handful of ways to resolve this (e.g. pushing the ranges before getting the address), but I figured doing pointer math should raise the \"oops unsafe code\" alarm and get closer scrutiny. We don\u0027t expect ranges.data() to change, given the `.reserve()` call above and the `ASSERT` on `ranges.size()` below.",
+      "range": {
+        "startLine": 102,
+        "startChar": 66,
+        "endLine": 102,
+        "endChar": 92
+      },
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
