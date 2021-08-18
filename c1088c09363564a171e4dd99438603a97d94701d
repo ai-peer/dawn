@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a7628e6_5f7f232b",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T17:42:13Z",
+      "side": 1,
+      "message": "Agreed for Dawn resources that are created internally, but Dawn_ExternalTexture is for stuff coming created for ExternalDXGIImage, and the SwapChain stuff is only for non-Chromium stuff.",
+      "parentUuid": "d12a7718_858893d8",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
