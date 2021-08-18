@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c6437cd_ea7e888c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T18:38:39Z",
+      "side": 1,
+      "message": "AFAIK there\u0027s no limit on the max shader register in d3d12. However, experimentally, it seems that WARP supports up to UINT32_MAX, but my NVidia card (and the ANGLE/Swiftshader and Vulkan backends) only support up to INT32_MAX.\n\nDo you think it\u0027s worth adding a binding to BindGroupTests.ArbitraryBindingNumbers (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tests/end2end/BindGroupTests.cpp;l\u003d1017?q\u003darbitrarybind\u0026sq\u003d\u0026ss\u003dchromium) that is UINT16_MAX?",
+      "parentUuid": "6b7f386c_494b9546",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e77f3bcf_2dc27387",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 11
@@ -31,6 +49,24 @@
       "writtenOn": "2021-08-18T14:16:36Z",
       "side": 1,
       "message": "nit: We usually pass mutable references by pointer instead so it is clear at the callsite that the value may be modified.",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cdd1cfe_b9a49c4b",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T18:38:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e77f3bcf_2dc27387",
       "revId": "8458f1232ac2040c23840073d51f9468e996d886",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "203df5f5_f9dd4d6a",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T18:38:39Z",
+      "side": 1,
+      "message": "My intention was to make this code work in case the descriptor range offsets are explicitly set in the future. I\u0027ll remove it for now, since I assume testing/code review will catch any future issues.",
+      "parentUuid": "3c157515_0be5f6e2",
+      "range": {
+        "startLine": 78,
+        "startChar": 68,
+        "endLine": 80,
+        "endChar": 74
+      },
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52ef2aab_80e9e448",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ea908c4_c80a4c82",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T18:38:39Z",
+      "side": 1,
+      "message": "You\u0027re totally right, I\u0027ll move it back.\n\nI think I was originally trying to be clever here by allowing for more fancy merging, but just sorting the bindings here (https://dawn-review.googlesource.com/c/dawn/+/60765/1) ended up making this much more effective by itself.",
+      "parentUuid": "52ef2aab_80e9e448",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a0541e9_fa498a61",
@@ -88,6 +166,24 @@
       "writtenOn": "2021-08-18T14:16:36Z",
       "side": 1,
       "message": "[1]",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "050ee80f_eabb86db",
+        "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T18:38:39Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0a0541e9_fa498a61",
       "revId": "8458f1232ac2040c23840073d51f9468e996d886",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -129,6 +225,30 @@
       "side": 1,
       "message": "Perhaps instead of reserve, would it be possible to just actually fill `ranges` with zero-initialized D3D12_DESCRIPTOR_RANGEs and then set them by index instead of push_back?",
       "parentUuid": "50b5c97c_e766241e",
+      "range": {
+        "startLine": 102,
+        "startChar": 66,
+        "endLine": 102,
+        "endChar": 92
+      },
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "687d8a5c_971643eb",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-18T18:38:39Z",
+      "side": 1,
+      "message": "Seems reasonable, we potentially get extra bounds checking in this case.",
+      "parentUuid": "bd1e107a_73f4ebcf",
       "range": {
         "startLine": 102,
         "startChar": 66,
