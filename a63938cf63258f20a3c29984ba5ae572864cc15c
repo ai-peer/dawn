@@ -69,6 +69,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36a7f2f4_dd7745a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T15:21:46Z",
+      "side": 1,
+      "message": "LGTM % issues myself and others have raised.",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "555600c5_dbdf3b61",
@@ -100,6 +117,47 @@
       "side": 1,
       "message": "+1 It\u0027s better to have a regression test to cover this.",
       "parentUuid": "555600c5_dbdf3b61",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "980d0f8c_8629f312",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T15:21:46Z",
+      "side": 1,
+      "message": "+1 to writing a test so the code is protected from future bugs.",
+      "parentUuid": "bdff1959_39b2b5a3",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766a2ac8_f7aea030",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T15:21:46Z",
+      "side": 1,
+      "message": "Consider writing a comment that, like the change description, explains why \u0026 is needed instead of \u003d\u003d.",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 84,
+        "endChar": 60
+      },
       "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
