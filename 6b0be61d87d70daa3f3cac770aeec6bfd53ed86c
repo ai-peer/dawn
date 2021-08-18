@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d4b0a0d_49411c46",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-18T23:04:40Z",
+      "side": 1,
+      "message": "comment: there are gaps between rows that aren\u0027t overwritten",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53023cd_14e8fdc6",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-18T23:04:40Z",
+      "side": 1,
+      "message": "What if there are gaps between images (rowsPerImage !\u003d heightInBlocks)?",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7283b35_b401500a",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-18T23:04:40Z",
+      "side": 1,
+      "message": "I think the correctness of this computation was depending on the fact that bytesPerRow \u003d\u003d copyTextureDataSizePerRow. I think it\u0027s still technically correct, but only because bytesPerRow \u003d\u003d copyTextureDataSizePerRow || heightInBlocks \u003c\u003d 1, so the precondition is getting really muddy.\n\nCan this just use requiredBytesInCopy?\n\nThen this boils down to \"no gaps between rows \u0026\u0026 no gaps between images \u0026\u0026 no extra space at the end\"",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf151fc0_f43e7703",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-18T23:04:40Z",
+      "side": 1,
+      "message": "nit: same as GetSize()?",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c488e1_13386de9",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-18T23:04:40Z",
+      "side": 1,
+      "message": "Shouldn\u0027t the texture be zeroed by default?",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
