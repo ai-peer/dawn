@@ -100,6 +100,15 @@ TEST_P(D3D12ResourceHeapTests, AlignUBO) {
 
     EXPECT_TRUE((d3dBuffer->GetD3D12Resource()->GetDesc().Width %
                  static_cast<uint64_t>(D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT)) == 0u);
+
+    // Create another larger UBO but with additional usages.
+    descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
+
+    buffer = device.CreateBuffer(&descriptor);
+    d3dBuffer = reinterpret_cast<Buffer*>(buffer.Get());
+
+    EXPECT_TRUE((d3dBuffer->GetD3D12Resource()->GetDesc().Width %
+                 static_cast<uint64_t>(D3D12_CONSTANT_BUFFER_DATA_PLACEMENT_ALIGNMENT)) == 0u);
 }
 
 DAWN_INSTANTIATE_TEST(D3D12ResourceHeapTests, D3D12Backend());
