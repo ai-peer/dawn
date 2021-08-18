@@ -322,6 +322,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c1871563_f52f6b7d",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T16:57:25Z",
+      "side": 1,
+      "message": "The new codepath is acceptable to me.",
+      "parentUuid": "06745ed0_49c4f6e1",
+      "range": {
+        "startLine": 376,
+        "startChar": 0,
+        "endLine": 378,
+        "endChar": 9
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce3dd3b6_61d50ff9",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 4
@@ -500,6 +524,30 @@
       "side": 1,
       "message": "I think prefixes are a good idea. in the future maybe we can consider labeling the device with the URL it came from and use that as part of the prefix. Other users of Dawn could pass \"Skia\", etc. as the prefix.",
       "parentUuid": "752920fe_4e85c834",
+      "range": {
+        "startLine": 87,
+        "startChar": 22,
+        "endLine": 87,
+        "endChar": 44
+      },
+      "revId": "d01a46871d6cf28e32a4d47afc6544f5b9b4d396",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9d2c4f_86325509",
+        "filename": "src/dawn_native/d3d12/UtilsD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-08-18T16:57:25Z",
+      "side": 1,
+      "message": "+1 to Austin\u0027s suggestions for the future. \n\nWe could also include the pointer value (or some id) to the Dawn owner object in the label string itself. That should let us cast to the Dawn owner object in the debugger and get more info on the resource.",
+      "parentUuid": "bcfc72c2_749d96e8",
       "range": {
         "startLine": 87,
         "startChar": 22,
