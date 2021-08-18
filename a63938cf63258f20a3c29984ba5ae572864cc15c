@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89f1bb94_a1da1d98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-18T07:06:22Z",
+      "side": 1,
+      "message": "+1 for a test, we could add a GetBufferAppliedSizeForTesting in DawnNative.h\n\nAnd a whitebox test.",
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "555600c5_dbdf3b61",
