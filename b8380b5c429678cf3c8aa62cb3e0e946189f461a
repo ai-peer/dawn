@@ -16,6 +16,24 @@
       "message": "Hi Coretin, thanks for the review on the other CL in this stack. I\u0027m unfortunately not super familiar with gerrit, so I\u0027m opting to land this as a separate change rather than try and squash the two CLs together.",
       "revId": "b8380b5c429678cf3c8aa62cb3e0e946189f461a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "223b21d0_62207fd3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-19T07:29:09Z",
+      "side": 1,
+      "message": "LGTM but landing the roll first then the fix is likely to not work because of the compilation issue fixed in the second commit.\n\nGerrit uses the Change-Id: tag to match modified commits to existing code review. So if you want to reorder / squash commits you can just use git rebase -i and reupload with git push origin HEAD:refs/for/main.",
+      "parentUuid": "ea4dafdc_1fbcb9d1",
+      "revId": "b8380b5c429678cf3c8aa62cb3e0e946189f461a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
