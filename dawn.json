@@ -208,10 +208,6 @@
             {"name": "dst factor", "type": "blend factor", "default": "zero"}
         ]
     },
-    "blend descriptor": {
-        "category": "typedef",
-        "type": "blend component"
-    },
     "blend factor": {
         "category": "enum",
         "values": [
@@ -286,10 +282,6 @@
                 "name": "destroy"
             }
         ]
-    },
-    "buffer copy view": {
-        "category": "typedef",
-        "type": "image copy buffer"
     },
     "buffer descriptor": {
         "category": "structure",
@@ -1025,10 +1017,6 @@
             {"name": "shader location", "type": "uint32_t"}
         ]
     },
-    "vertex attribute descriptor": {
-        "category": "typedef",
-        "type": "vertex attribute"
-    },
     "vertex buffer layout": {
         "category": "structure",
         "extensible": false,
@@ -1038,10 +1026,6 @@
             {"name": "attribute count", "type": "uint32_t"},
             {"name": "attributes", "type": "vertex attribute", "annotation": "const*", "length": "attribute count"}
         ]
-    },
-    "vertex buffer layout descriptor": {
-        "category": "typedef",
-        "type": "vertex buffer layout"
     },
     "input step mode": {
         "category": "typedef",
@@ -1743,10 +1727,6 @@
             {"name": "pass op", "type": "stencil operation", "default": "keep"}
         ]
     },
-    "stencil state face descriptor": {
-        "category": "typedef",
-        "type": "stencil face state"
-    },
     "surface": {
         "category": "object"
     },
@@ -1887,10 +1867,6 @@
             {"value": 2, "name": "uint"},
             {"value": 3, "name": "depth comparison"}
         ]
-    },
-    "texture copy view": {
-        "category": "typedef",
-        "type": "image copy texture"
     },
     "texture data layout": {
         "category": "structure",
