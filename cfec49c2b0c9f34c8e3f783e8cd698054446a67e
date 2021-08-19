@@ -16,6 +16,46 @@
       "message": "LGTM",
       "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08a66d4_5e3ea012",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T15:38:46Z",
+      "side": 1,
+      "message": "LGTM too with one nit",
+      "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ee0132b_771bfd23",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T15:38:46Z",
+      "side": 1,
+      "message": "nit: maybe we don\u0027t need to copy the contents out into a std::vector\nNSArray has a containsObject method\nhttps://developer.apple.com/documentation/foundation/nsarray/1407477-containsobject?language\u003dobjc",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 212,
+        "endChar": 13
+      },
+      "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
