@@ -422,6 +422,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2238ac32_293641df",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-19T16:19:47Z",
+      "side": 1,
+      "message": "The current design of the toggle will:\n1. Pass a generic label (Dawn_Texture etc.) by default to all objects to ensure we know where specific allocations come from while debugging. Rafael had mentioned [1] this helping in scenarios where large allocations occurred over very long periods of time (which would be difficult to repro if we had to restart and turn a flag on).\n2. By default, not pass the user defined label due to security concerns around character set sanitization and passing things to the backend APIs. [2]\n\nThis means a WebGPU developer would by default see a developer defined label in object-specific error message and would only see object prefixes when using PIX/RenderDoc. A developer must turn on the toggle via command line to see their full developer defined labels with PIX/RenderDoc.\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/61588/comments/705b4d2d_4dac0e7f\n[2] https://dawn-review.googlesource.com/c/dawn/+/61588/comments/a21c0ec8_86f21cd1",
+      "parentUuid": "781268b2_ee9a9b8e",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
