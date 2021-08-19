@@ -71,6 +71,16 @@ namespace dawn_native { namespace d3d12 {
           mCbvUavSrvDescriptorCount(0),
           mSamplerDescriptorCount(0),
           mBindGroupAllocator(MakeFrontendBindGroupAllocator<BindGroup>(4096)) {
+        // Compact the register space so there are no holes in either the CBV/UAV/SRV group or the
+        // Sampler group.
+        //
+        // When targetting shader model <=5.0, the max valid register index ("slot count") is
+        // relatively low for each resource type, so compacting the space is beneficial in that
+        // case.
+        bool compactRegisterSpacePerType = true;
+
+        ityp::array<D3D12_DESCRIPTOR_RANGE_TYPE, uint32_t, 4> resourceCounts = {};
+
         for (BindingIndex bindingIndex{0}; bindingIndex < GetBindingCount(); ++bindingIndex) {
             const BindingInfo& bindingInfo = GetBindingInfo(bindingIndex);
 
@@ -79,7 +89,9 @@ namespace dawn_native { namespace d3d12 {
 
             // TODO(dawn:728) In the future, special handling will be needed for external textures
             // here because they encompass multiple views.
-            mShaderRegisters[bindingIndex] = uint32_t(bindingInfo.binding);
+            mShaderRegisters[bindingIndex] = compactRegisterSpacePerType
+                                                 ? resourceCounts[descriptorRangeType]++
+                                                 : uint32_t(bindingInfo.binding);
 
             if (bindingIndex < GetDynamicBufferCount()) {
                 continue;
