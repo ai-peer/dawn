@@ -440,6 +440,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "159072d3_3a11807e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-08-19T17:15:42Z",
+      "side": 1,
+      "message": "Added SetLabelHelper",
+      "parentUuid": "2238ac32_293641df",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8
