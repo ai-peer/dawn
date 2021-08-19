@@ -16,6 +16,23 @@
       "message": "Had to skip the label tests over the wire...which I think is normal since we\u0027re using a dawn native API. I think this is ready to merge.",
       "revId": "e8150878de82c88840b3dbe9753963cf20a2274d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9c1619_1a8cee5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T19:52:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e8150878de82c88840b3dbe9753963cf20a2274d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
