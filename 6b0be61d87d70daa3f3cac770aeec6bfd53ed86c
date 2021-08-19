@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9654262c_20eb18b9",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T03:02:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "435a7ea1_11c174bb",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d4b0a0d_49411c46",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-08-18T23:04:40Z",
       "side": 1,
       "message": "comment: there are gaps between rows that aren\u0027t overwritten",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9463d69_8c049c5f",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T03:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d4b0a0d_49411c46",
       "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -70,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f263db0b_e67e3da7",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T03:02:51Z",
+      "side": 1,
+      "message": "Ahh missed that somehow.",
+      "parentUuid": "d62b0db0_015ed147",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7283b35_b401500a",
@@ -87,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "caaf2721_88719268",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T03:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7283b35_b401500a",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf151fc0_f43e7703",
@@ -100,6 +172,24 @@
       "writtenOn": "2021-08-18T23:04:40Z",
       "side": 1,
       "message": "nit: same as GetSize()?",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9302cf88_985e60bc",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T03:02:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cf151fc0_f43e7703",
       "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -135,6 +225,24 @@
       "side": 1,
       "message": "would require adding an EXPECT_LAZY_CLEAR for it. Not desirable for two reasons:\n - makes it less clear where the clear happened: on the src or destination of a copy?\n - need to expect the clear only on the first iteration of the loop below",
       "parentUuid": "20c488e1_13386de9",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e5177d6_2c154a90",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T03:02:51Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9301ceaa_920084fb",
       "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
