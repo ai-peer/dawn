@@ -404,6 +404,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "781268b2_ee9a9b8e",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-19T07:58:10Z",
+      "side": 1,
+      "message": "I don\u0027t understand the list of requirements we\u0027re putting on the labeling system. We have the toggle to pass labels but we also want labeling without the toggle?\n\nHappy to land as is with a slight preference to de-duplicate the SetDebugName calls for textures so at least there is a single place where we call GetD3D12Resource and use VK_OBJECT_TYPE_IMAGE. (could be a SetLabelHelper method or whatever).",
+      "parentUuid": "857a0de0_5e1e9856",
+      "revId": "c1088c09363564a171e4dd99438603a97d94701d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "70c9ebf9_ce27ff2a",
         "filename": "src/dawn_native/d3d12/UtilsD3D12.cpp",
         "patchSetId": 8

@@ -202,6 +202,24 @@
       "message": "nit: I\u0027m not sure that we need a prefix. The application can do that themselves if they care.",
       "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0936284e_94ff1e64",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-19T07:58:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b7f5ff1_22a25fab",
+      "revId": "b782a69261a54a081ab22d7da09fcd07ca27b5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
