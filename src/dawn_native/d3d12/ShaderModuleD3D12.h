@@ -29,6 +29,7 @@ namespace dawn_native { namespace d3d12 {
     // emulate vertex/instance index starts
     struct CompiledShader {
         ScopedCachedBlob cachedShader;
+        ScopedCachedBlob compiledMesaShader;
         ComPtr<ID3DBlob> compiledFXCShader;
         ComPtr<IDxcBlob> compiledDXCShader;
         D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
@@ -50,11 +51,23 @@ namespace dawn_native { namespace d3d12 {
         ~ShaderModule() override = default;
         MaybeError Initialize(ShaderModuleParseResult* parseResult);
 
+        ResultOrError<tint::Program> TranslateToTintProgram(
+            bool mayCollide,
+            const char* entryPointName,
+            SingleShaderStage stage,
+            PipelineLayout* layout,
+            std::string* remappedEntryPointName) const;
+
         ResultOrError<std::string> TranslateToHLSLWithTint(
             const char* entryPointName,
             SingleShaderStage stage,
             PipelineLayout* layout,
             std::string* remappedEntryPointName) const;
+
+        ResultOrError<ScopedCachedBlob> TranslateToDXILWithMesa(Device* device,
+                                                                const char* entryPointName,
+                                                                SingleShaderStage stage,
+                                                                PipelineLayout* layout) const;
 
         ResultOrError<PersistentCacheKey> CreateWGSLKey(const char* entryPointName,
                                                         SingleShaderStage stage,
