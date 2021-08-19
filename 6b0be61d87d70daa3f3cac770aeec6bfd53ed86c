@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "435a7ea1_11c174bb",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T02:48:56Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1d4b0a0d_49411c46",
         "filename": "src/dawn_native/CommandBuffer.cpp",
         "patchSetId": 10
@@ -31,6 +48,24 @@
       "writtenOn": "2021-08-18T23:04:40Z",
       "side": 1,
       "message": "What if there are gaps between images (rowsPerImage !\u003d heightInBlocks)?",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d62b0db0_015ed147",
+        "filename": "src/dawn_native/CommandBuffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T02:48:56Z",
+      "side": 1,
+      "message": "checked at [1] ?",
+      "parentUuid": "c53023cd_14e8fdc6",
       "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -82,6 +117,24 @@
       "writtenOn": "2021-08-18T23:04:40Z",
       "side": 1,
       "message": "Shouldn\u0027t the texture be zeroed by default?",
+      "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9301ceaa_920084fb",
+        "filename": "src/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1186,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T02:48:56Z",
+      "side": 1,
+      "message": "would require adding an EXPECT_LAZY_CLEAR for it. Not desirable for two reasons:\n - makes it less clear where the clear happened: on the src or destination of a copy?\n - need to expect the clear only on the first iteration of the loop below",
+      "parentUuid": "20c488e1_13386de9",
       "revId": "6b0be61d87d70daa3f3cac770aeec6bfd53ed86c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
