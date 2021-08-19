@@ -16,6 +16,23 @@
       "message": "Thank you for the review. I believe I\u0027ve addressed the feedback, but please let me know if I missed anything!",
       "revId": "aafb7784f32283992d1bb5a8ef9ed80a23976a58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62238873_5719f130",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-19T01:19:50Z",
+      "side": 1,
+      "message": "May I defer the review since Austin and Corentin understand this much better than I do?",
+      "revId": "aafb7784f32283992d1bb5a8ef9ed80a23976a58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
