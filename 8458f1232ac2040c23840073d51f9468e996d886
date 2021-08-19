@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44e7447a_89514a7a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-19T07:52:20Z",
+      "side": 1,
+      "message": "Probably worth adding in a follow up along with the validation in ShaderModule.cpp that bindings are at most 2^16",
+      "parentUuid": "1c6437cd_ea7e888c",
+      "revId": "8458f1232ac2040c23840073d51f9468e996d886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e77f3bcf_2dc27387",
         "filename": "src/dawn_native/d3d12/BindGroupLayoutD3D12.cpp",
         "patchSetId": 11
