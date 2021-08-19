@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "954d618a_d26d2978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-19T18:44:19Z",
+      "side": 1,
+      "message": "This is a follow-up to https://dawn-review.googlesource.com/c/dawn/+/60764 to add validation to the max binding number in Dawn.",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9979e418_f44d80aa",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-19T18:44:19Z",
+      "side": 1,
+      "message": "In https://gpuweb.github.io/gpuweb/wgsl/#attribute-binding, it states that the binding number should be a \"non-negative i32 literal\". Is this correct/up-to-date? cwallez@ mentioned it should be a u16.\n\nTint seems to be okay with 0..\u003di16_max.",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19196d84_32f7acee",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-19T18:44:19Z",
+      "side": 1,
+      "message": "This lets validation errors bubble up to the caller. Note this now exposes all errors inside |ValidateCompatibilityWithPipelineLayout| to the device error callback.",
+      "range": {
+        "startLine": 305,
+        "startChar": 12,
+        "endLine": 305,
+        "endChar": 20
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb2b451_d57c173c",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-19T18:44:19Z",
+      "side": 1,
+      "message": "This was changed so we have coverage of kMaxBindingNumber and kMaxBindingNumber+1 (below)",
+      "range": {
+        "startLine": 1126,
+        "startChar": 28,
+        "endLine": 1126,
+        "endChar": 33
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7231da3_1227a18b",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-19T18:44:19Z",
+      "side": 1,
+      "message": "FYI, this was copied over from ErrorScopeValidationTests.cpp, I\u0027m unsure what it\u0027s for (or if it\u0027s required).",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
