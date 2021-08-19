@@ -302,8 +302,7 @@ namespace dawn_native {
         // pipeline.
         for (const StageAndDescriptor& stage : stages) {
             const EntryPointMetadata& metadata = stage.module->GetEntryPoint(stage.entryPoint);
-            ASSERT(ValidateCompatibilityWithPipelineLayout(device, metadata, result.Get())
-                       .IsSuccess());
+            DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, result.Get()));
         }
 
         return std::move(result);

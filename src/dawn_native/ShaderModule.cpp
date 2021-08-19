@@ -472,6 +472,11 @@ namespace dawn_native {
                 BindingNumber bindingNumber = it.first;
                 const ShaderBindingInfo& shaderInfo = it.second;
 
+                if (static_cast<uint32_t>(bindingNumber) >= kMaxBindingNumber) {
+                    return DAWN_VALIDATION_ERROR("Binding number exceeds maximum for " +
+                                                 GetShaderDeclarationString(group, bindingNumber));
+                }
+
                 const auto& bindingIt = layoutBindings.find(bindingNumber);
                 if (bindingIt == layoutBindings.end()) {
                     return DAWN_VALIDATION_ERROR("Missing bind group layout entry for " +

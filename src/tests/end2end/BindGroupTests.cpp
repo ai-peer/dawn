@@ -16,6 +16,7 @@
 #include "common/Constants.h"
 #include "common/Math.h"
 #include "tests/DawnTest.h"
+#include "tests/MockCallback.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
@@ -1122,7 +1123,7 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
             color : vec4<f32>;
         };
 
-        [[group(0), binding(953)]] var <uniform> ubo1 : Ubo;
+        [[group(0), binding(65535)]] var <uniform> ubo1 : Ubo;
         [[group(0), binding(47)]] var <uniform> ubo2 : Ubo;
         [[group(0), binding(111)]] var <uniform> ubo3 : Ubo;
 
@@ -1162,9 +1163,9 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
         };
 
         utils::BindingInitializationHelper bindings[] = {
-            {953, color1, 0, 4 * sizeof(float)},  //
-            {47, color2, 0, 4 * sizeof(float)},   //
-            {111, color3, 0, 4 * sizeof(float)},  //
+            {65535, color1, 0, 4 * sizeof(float)},  //
+            {47, color2, 0, 4 * sizeof(float)},     //
+            {111, color3, 0, 4 * sizeof(float)},    //
         };
 
         // Should work regardless of what order the bindings are specified in.
@@ -1196,6 +1197,31 @@ TEST_P(BindGroupTests, ArbitraryBindingNumbers) {
     DoTest(black, blue, red, RGBA8(255, 0, 128, 0));
     DoTest(blue, black, green, RGBA8(0, 255, 64, 0));
     DoTest(red, black, blue, RGBA8(64, 0, 255, 0));
+}
+
+// Test that assigning a binding number larger than kMaxBindingNumber fails in validation.
+TEST_P(BindGroupTests, BindingNumberTooBig) {
+    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        [[block]] struct Ubo {
+            color : vec4<f32>;
+        };
+
+        [[group(0), binding(65536)]] var <uniform> ubo1 : Ubo;
+
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return ubo1.color;
+        })");
+
+    utils::ComboRenderPipelineDescriptor pipelineDescriptor;
+    pipelineDescriptor.vertex.module = MakeSimpleVSModule();
+    pipelineDescriptor.cFragment.module = fsModule;
+
+    testing::MockCallback<WGPUErrorCallback> mock;
+    device.PushErrorScope(wgpu::ErrorFilter::Validation);
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pipelineDescriptor);
+    EXPECT_CALL(mock, Call(WGPUErrorType_Validation, testing::_, this)).Times(1);
+    device.PopErrorScope(mock.Callback(), mock.MakeUserdata(this));
+    FlushWire();
 }
 
 // This is a regression test for crbug.com/dawn/355 which tests that destruction of a bind group
