@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73f39cda_f9cb7412",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-19T21:24:34Z",
+      "side": 1,
+      "message": "Kai, PTAL\n\nMerge request in crbug.com/1241606",
+      "revId": "1e84004f4e761b085af3fc84f76523b599917cc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
