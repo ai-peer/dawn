@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb3231b_843bc680",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-19T17:07:38Z",
+      "side": 1,
+      "message": "Hi, I have squashed the two changes with my git UI. I\u0027m sure there\u0027s something wrong with my commit description--I don\u0027t think I\u0027m supposed to have two Change-Ids (gerrit seems to be using the second Change-Id).\n\nPlease let me know if there\u0027s any preference for how the description should look, like the order of changes listed (i.e. should \"build: Override ...\" go on top instead of \"Roll third_party...\" or vis versa?).\n\nThanks again,\nMichael",
+      "revId": "b2bdb24cc4b454076fcd11aca05cc62a52211474",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
