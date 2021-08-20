@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "250dfb97_4871c5d7",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-08-20T03:05:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a78ed535_4d20941f",
+      "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39256277_35a827fd",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-08-17T12:11:18Z",
       "side": 1,
       "message": "I\u0027d like to wait to see if this constraint will be added in the spec before landing this CL.",
+      "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c656f7ed_98061407",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-08-20T03:05:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "39256277_35a827fd",
       "revId": "a3b9742c1d2dcf9babc37ca2d781d441e4b9331a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
