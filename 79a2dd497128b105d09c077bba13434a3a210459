@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47c91ed_26078be4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-20T18:53:26Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "79a2dd497128b105d09c077bba13434a3a210459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e1144b3_1684dc28",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-08-20T09:33:20Z",
       "side": 1,
       "message": "no need to do computations in uint64_t since offset is small (\u003c 2k) and byteSize is small too (\u003c 16)",
+      "range": {
+        "startLine": 513,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 85
+      },
+      "revId": "79a2dd497128b105d09c077bba13434a3a210459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e2d40b1_29815e37",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-20T18:53:26Z",
+      "side": 1,
+      "message": "let\u0027s add ASSERTs about these assumptions though",
+      "parentUuid": "3e1144b3_1684dc28",
       "range": {
         "startLine": 513,
         "startChar": 0,
