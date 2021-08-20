@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ea7e6f5e_9da378c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-20T20:56:40Z",
+      "side": 1,
+      "message": "As I\u0027m mkaing the change, I\u0027m noticing there\u0027s more and more places needed to fix the change of BindingNumber -\u003e u16.\n\nI\u0027m coming to the realization (that you eluded to on your comment on testing) that this validation could be better off as e.g. a tint compiler error andrelatively minimal validation would need to be explicitly in dawn. Then, another pass could be made to change all the relevant types to make the binding a u16 (there are a handful of types in tint that use a |uint32_t binding| as well as some generated types in |wgpu_structs_autogen.h|).\n\nThoughts?",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9979e418_f44d80aa",
         "filename": "src/common/Constants.h",
         "patchSetId": 1
@@ -78,6 +95,48 @@
       "writtenOn": "2021-08-20T07:24:18Z",
       "side": 1,
       "message": "Since this is now limited to 2^16, can we change the BindingNumber typed integer to use a uint16_t for backing? It is defined in IntegerTypes.h",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44643b71_abf018fd",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-20T20:56:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "900c99fe_a70fc35e",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c3a01db_53e42566",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-20T20:56:40Z",
+      "side": 1,
+      "message": "Can do.\n\nShould tint\u0027s ResourceBinding::binding/BindingPoint::binding/etc also be changed to a u16? If so, then there\u0027s no validation needed within Dawn, since an out-of-range binding will just become a tint compiler error, right?",
+      "parentUuid": "8e153c9d_88b6e3bd",
       "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
