@@ -43,6 +43,47 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "900c99fe_a70fc35e",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-20T07:24:18Z",
+      "side": 1,
+      "message": "This was agreed to in a WebGPU meeting, see https://github.com/gpuweb/gpuweb/issues/1783 and https://docs.google.com/document/d/1W5EwbmPM83MEL7FAOvw17QMF3GSoruPx3_kd0EnBnAQ/edit#heading\u003dh.jio89xxek1kw but wasn\u0027t added to the spec yet. I pinged people so that move forward.",
+      "parentUuid": "9979e418_f44d80aa",
+      "range": {
+        "startLine": 21,
+        "startChar": 46,
+        "endLine": 21,
+        "endChar": 52
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e153c9d_88b6e3bd",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-20T07:24:18Z",
+      "side": 1,
+      "message": "Since this is now limited to 2^16, can we change the BindingNumber typed integer to use a uint16_t for backing? It is defined in IntegerTypes.h",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "19196d84_32f7acee",
         "filename": "src/dawn_native/PipelineLayout.cpp",
         "patchSetId": 1
@@ -60,6 +101,47 @@
         "endLine": 305,
         "endChar": 20
       },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a796ba_f0210c4a",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-20T07:24:18Z",
+      "side": 1,
+      "message": "I think we could validate this limitation inside ReflectShaderUsingTint [1], this way we don\u0027t need to make errors bubble up here.",
+      "parentUuid": "19196d84_32f7acee",
+      "range": {
+        "startLine": 305,
+        "startChar": 12,
+        "endLine": 305,
+        "endChar": 20
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "488bc03e_4900ad01",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-20T07:24:18Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -87,6 +169,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1940047f_49a21cd9",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-20T07:24:18Z",
+      "side": 1,
+      "message": "To make tests more robust we usually have both the control case and the error case in the same test.\n\nBut here we\u0027re doing a validation test so it could go in ShaderValidationTests.cpp",
+      "parentUuid": "ddb2b451_d57c173c",
+      "range": {
+        "startLine": 1126,
+        "startChar": 28,
+        "endLine": 1126,
+        "endChar": 33
+      },
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7231da3_1227a18b",
@@ -100,6 +206,24 @@
       "writtenOn": "2021-08-19T18:44:19Z",
       "side": 1,
       "message": "FYI, this was copied over from ErrorScopeValidationTests.cpp, I\u0027m unsure what it\u0027s for (or if it\u0027s required).",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d1253ff_b8aa3245",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1224,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-20T07:24:18Z",
+      "side": 1,
+      "message": "Checking for validation errors can be done more easily: by default all validation errors will cause the test to fail, unless they are wrapped in ASSERT_DEVICE_ERROR() that will check that exactly one validation error is produced inside the call.\n\nOverall the test could become (in ShaderModuleValidationTests)\n\n // Blah blah\n TEST_P(...) {\n     // Control case: UINT16_MAX is allowed\n     utils::CreateShaderModule(\"code with 65535\");\n     \n     // Error case: 2^16 is disallowed\n     ASSERT_DEVICE_ERROR(utils::CreateShaderModule(\"code with 65536\"));\n }\n \nBut writing this I realize that it\u0027s not clear what should happen for bindings that are not used by any entrypoint. I think we should still validate them but Dawn can\u0027t do it at the moment, because they are not given as part of the reflection. Maybe we need to do the check in Tint?",
+      "parentUuid": "b7231da3_1227a18b",
       "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
