@@ -16,6 +16,23 @@
       "message": "Kai, PTAL\n\nMerge request in crbug.com/1241606",
       "revId": "1e84004f4e761b085af3fc84f76523b599917cc8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f68b26b5_e3717474",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-20T21:27:53Z",
+      "side": 1,
+      "message": "merge request approved\nhttps://bugs.chromium.org/p/chromium/issues/detail?id\u003d1241606#c8",
+      "revId": "1e84004f4e761b085af3fc84f76523b599917cc8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
