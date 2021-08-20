@@ -67,7 +67,7 @@
         "category": "structure",
         "extensible": true,
         "members": [
-            {"name": "binding", "type": "uint32_t"},
+            {"name": "binding", "type": "uint16_t"},
             {"name": "buffer", "type": "buffer", "optional": true},
             {"name": "offset", "type": "uint64_t", "default": "0"},
             {"name": "size", "type": "uint64_t"},
@@ -182,7 +182,7 @@
         "category": "structure",
         "extensible": true,
         "members": [
-            {"name": "binding", "type": "uint32_t"},
+            {"name": "binding", "type": "uint16_t"},
             {"name": "visibility", "type": "shader stage"},
             {"name": "buffer", "type": "buffer binding layout"},
             {"name": "sampler", "type": "sampler binding layout"},

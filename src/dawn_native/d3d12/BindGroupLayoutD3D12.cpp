@@ -79,7 +79,7 @@ namespace dawn_native { namespace d3d12 {
 
             // TODO(dawn:728) In the future, special handling will be needed for external textures
             // here because they encompass multiple views.
-            mShaderRegisters[bindingIndex] = uint32_t(bindingInfo.binding);
+            mShaderRegisters[bindingIndex] = static_cast<uint16_t>(bindingInfo.binding);
 
             if (bindingIndex < GetDynamicBufferCount()) {
                 continue;

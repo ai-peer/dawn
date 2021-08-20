@@ -493,3 +493,30 @@ TEST_F(ShaderModuleValidationTest, ComputeWorkgroupStorageSizeLimits) {
     ASSERT_DEVICE_ERROR(MakeShaderWithWorkgroupStorage(0, kMaxMat4Count + 1));
     ASSERT_DEVICE_ERROR(MakeShaderWithWorkgroupStorage(4, kMaxMat4Count));
 }
+
+// Test that assigning a binding number larger than kMaxBindingNumber fails in validation.
+TEST_F(ShaderModuleValidationTest, BindingNumberLimits) {
+    // Control case: UINT16_MAX is allowed
+    utils::CreateShaderModule(device, R"(
+        [[block]] struct Ubo {
+            color : vec4<f32>;
+        };
+
+        [[group(0), binding(65535)]] var <uniform> ubo1 : Ubo;
+
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return ubo1.color;
+        })");
+
+    // Error case: 2^16 is disallowed
+    ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, R"(
+        [[block]] struct Ubo {
+            color : vec4<f32>;
+        };
+
+        [[group(0), binding(65536)]] var <uniform> ubo1 : Ubo;
+
+        [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
+            return ubo1.color;
+        })"));
+}

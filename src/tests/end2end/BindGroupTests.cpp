@@ -1305,7 +1305,7 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
     std::ostringstream interface;
     std::ostringstream body;
-    uint32_t binding = 0;
+    uint16_t binding = 0;
     uint32_t expectedValue = 42;
 
     wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();

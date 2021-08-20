@@ -37,7 +37,7 @@ namespace dawn_native {
         std::string GetShaderDeclarationString(BindGroupIndex group, BindingNumber binding) {
             std::ostringstream ostream;
             ostream << "the shader module declaration at set " << static_cast<uint32_t>(group)
-                    << " binding " << static_cast<uint32_t>(binding);
+                    << " binding " << static_cast<uint16_t>(binding);
             return ostream.str();
         }
 
@@ -817,7 +817,11 @@ namespace dawn_native {
 
                 for (const tint::inspector::ResourceBinding& resource :
                      inspector.GetResourceBindings(entryPoint.name)) {
-                    BindingNumber bindingNumber(resource.binding);
+                    if (resource.binding > kMaxBindingNumber) {
+                        return DAWN_VALIDATION_ERROR("Shader has binding number over limits");
+                    }
+
+                    BindingNumber bindingNumber(static_cast<uint16_t>(resource.binding));
                     BindGroupIndex bindGroupIndex(resource.bind_group);
                     if (bindGroupIndex >= kMaxBindGroupsTyped) {
                         return DAWN_VALIDATION_ERROR("Shader has bind group index over limits");
@@ -898,9 +902,11 @@ namespace dawn_native {
                     [](const tint::inspector::SamplerTexturePair& pair) {
                         EntryPointMetadata::SamplerTexturePair result;
                         result.sampler = {BindGroupIndex(pair.sampler_binding_point.group),
-                                          BindingNumber(pair.sampler_binding_point.binding)};
+                                          BindingNumber(static_cast<uint16_t>(
+                                              pair.sampler_binding_point.binding))};
                         result.texture = {BindGroupIndex(pair.texture_binding_point.group),
-                                          BindingNumber(pair.texture_binding_point.binding)};
+                                          BindingNumber(static_cast<uint16_t>(
+                                              pair.texture_binding_point.binding))};
                         return result;
                     });
 

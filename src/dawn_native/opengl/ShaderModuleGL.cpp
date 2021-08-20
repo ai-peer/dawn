@@ -39,7 +39,7 @@ namespace dawn_native { namespace opengl {
     std::string GetBindingName(BindGroupIndex group, BindingNumber bindingNumber) {
         std::ostringstream o;
         o << "dawn_binding_" << static_cast<uint32_t>(group) << "_"
-          << static_cast<uint32_t>(bindingNumber);
+          << static_cast<uint16_t>(bindingNumber);
         return o.str();
     }
 
@@ -59,10 +59,10 @@ namespace dawn_native { namespace opengl {
             o << "_dummy_sampler";
         } else {
             o << "_" << static_cast<uint32_t>(samplerLocation.group) << "_"
-              << static_cast<uint32_t>(samplerLocation.binding);
+              << static_cast<uint16_t>(samplerLocation.binding);
         }
         o << "_with_" << static_cast<uint32_t>(textureLocation.group) << "_"
-          << static_cast<uint32_t>(textureLocation.binding);
+          << static_cast<uint16_t>(textureLocation.binding);
         return o.str();
     }
 
@@ -89,8 +89,8 @@ namespace dawn_native { namespace opengl {
                     return DAWN_VALIDATION_ERROR("No Descriptor Decoration set for resource");
                 }
 
-                BindingNumber bindingNumber(
-                    compiler.get_decoration(resource.id, spv::DecorationBinding));
+                BindingNumber bindingNumber(static_cast<uint16_t>(
+                    compiler.get_decoration(resource.id, spv::DecorationBinding)));
                 BindGroupIndex bindGroupIndex(
                     compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
 
@@ -352,13 +352,13 @@ namespace dawn_native { namespace opengl {
                 info->useDummySampler = false;
                 info->samplerLocation.group = BindGroupIndex(
                     compiler.get_decoration(combined.sampler_id, spv::DecorationDescriptorSet));
-                info->samplerLocation.binding = BindingNumber(
-                    compiler.get_decoration(combined.sampler_id, spv::DecorationBinding));
+                info->samplerLocation.binding = BindingNumber(static_cast<uint16_t>(
+                    compiler.get_decoration(combined.sampler_id, spv::DecorationBinding)));
             }
             info->textureLocation.group = BindGroupIndex(
                 compiler.get_decoration(combined.image_id, spv::DecorationDescriptorSet));
-            info->textureLocation.binding =
-                BindingNumber(compiler.get_decoration(combined.image_id, spv::DecorationBinding));
+            info->textureLocation.binding = BindingNumber(static_cast<uint16_t>(
+                compiler.get_decoration(combined.image_id, spv::DecorationBinding)));
             compiler.set_name(combined.combined_id, info->GetName());
         }
 
