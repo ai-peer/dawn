@@ -22,7 +22,7 @@
 
 namespace dawn_native {
     // Binding numbers in the shader and BindGroup/BindGroupLayoutDescriptors
-    using BindingNumber = TypedInteger<struct BindingNumberT, uint32_t>;
+    using BindingNumber = TypedInteger<struct BindingNumberT, uint16_t>;
 
     // Binding numbers get mapped to a packed range of indices
     using BindingIndex = TypedInteger<struct BindingIndexT, uint32_t>;

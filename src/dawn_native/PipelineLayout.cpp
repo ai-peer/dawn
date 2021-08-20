@@ -247,7 +247,7 @@ namespace dawn_native {
                     // Create the BindGroupLayoutEntry
                     BindGroupLayoutEntry entry =
                         ConvertMetadataToEntry(shaderBinding, &externalTextureBindingLayout);
-                    entry.binding = static_cast<uint32_t>(bindingNumber);
+                    entry.binding = static_cast<uint16_t>(bindingNumber);
                     entry.visibility = StageBit(stage.shaderStage);
 
                     // Add it to our map of all entries, if there is an existing entry, then we

@@ -209,7 +209,7 @@ namespace dawn_native { namespace d3d12 {
                 auto const& bindingInfo = it.second;
                 BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
                 BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
-                                             static_cast<uint32_t>(binding)};
+                                             static_cast<uint16_t>(binding)};
                 BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
                                              bgl->GetShaderRegister(bindingIndex)};
                 if (srcBindingPoint != dstBindingPoint) {

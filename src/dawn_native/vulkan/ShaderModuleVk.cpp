@@ -130,7 +130,7 @@ namespace dawn_native { namespace vulkan {
                 BindingNumber binding = it.first;
                 BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
                 BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
-                                             static_cast<uint32_t>(binding)};
+                                             static_cast<uint16_t>(binding)};
 
                 BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
                                              static_cast<uint32_t>(bindingIndex)};
