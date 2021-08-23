@@ -76,27 +76,27 @@ class Type:
         self.dict_name = name
         self.name = Name(name, native=native)
         self.category = json_data['category']
-        self.javascript = self.json_data.get('javascript', True)
 
 
-EnumValue = namedtuple('EnumValue', ['name', 'value', 'valid', 'jsrepr'])
+EnumValue = namedtuple('EnumValue', ['name', 'value', 'valid', 'json_data'])
 
 
 class EnumType(Type):
-    def __init__(self, name, json_data):
+    def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
 
         self.values = []
         self.contiguousFromZero = True
         lastValue = -1
         for m in self.json_data['values']:
+            if not is_enabled(m):
+                continue
             value = m['value']
             if value != lastValue + 1:
                 self.contiguousFromZero = False
             lastValue = value
             self.values.append(
-                EnumValue(Name(m['name']), value, m.get('valid', True),
-                          m.get('jsrepr', None)))
+                EnumValue(Name(m['name']), value, m.get('valid', True), m))
 
         # Assert that all values are unique in enums
         all_values = set()
@@ -107,15 +107,15 @@ class EnumType(Type):
             all_values.add(value.value)
 
 
-BitmaskValue = namedtuple('BitmaskValue', ['name', 'value'])
+BitmaskValue = namedtuple('BitmaskValue', ['name', 'value', 'json_data'])
 
 
 class BitmaskType(Type):
-    def __init__(self, name, json_data):
+    def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
         self.values = [
-            BitmaskValue(Name(m['name']), m['value'])
-            for m in self.json_data['values']
+            BitmaskValue(Name(m['name']), m['value'], m)
+            for m in self.json_data['values'] if is_enabled(m)
         ]
         self.full_mask = 0
         for value in self.values:
@@ -123,19 +123,19 @@ class BitmaskType(Type):
 
 
 class CallbackType(Type):
-    def __init__(self, name, json_data):
+    def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
         self.arguments = []
 
 
 class TypedefType(Type):
-    def __init__(self, name, json_data):
+    def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
         self.type = None
 
 
 class NativeType(Type):
-    def __init__(self, name, json_data):
+    def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data, native=True)
 
 
@@ -146,6 +146,7 @@ class RecordMember:
                  name,
                  typ,
                  annotation,
+                 json_data,
                  optional=False,
                  is_return_value=False,
                  default_value=None,
@@ -153,6 +154,7 @@ class RecordMember:
         self.name = name
         self.type = typ
         self.annotation = annotation
+        self.json_data = json_data
         self.length = None
         self.optional = optional
         self.is_return_value = is_return_value
@@ -165,14 +167,18 @@ class RecordMember:
         self.handle_type = handle_type
 
 
-Method = namedtuple('Method', ['name', 'return_type', 'arguments'])
+Method = namedtuple('Method',
+                    ['name', 'return_type', 'arguments', 'json_data'])
 
 
 class ObjectType(Type):
-    def __init__(self, name, json_data):
-        Type.__init__(self, name, json_data)
-        self.methods = []
-        self.built_type = None
+    def __init__(self, is_enabled, name, json_data):
+        json_data_override = {'methods': []}
+        if 'methods' in json_data:
+            json_data_override['methods'] = [
+                m for m in json_data['methods'] if is_enabled(m)
+            ]
+        Type.__init__(self, name, dict(json_data, **json_data_override))
 
 
 class Record:
@@ -201,9 +207,14 @@ class Record:
 
 
 class StructureType(Record, Type):
-    def __init__(self, name, json_data):
+    def __init__(self, is_enabled, name, json_data):
         Record.__init__(self, name)
-        Type.__init__(self, name, json_data)
+        json_data_override = {}
+        if 'members' in json_data:
+            json_data_override['members'] = [
+                m for m in json_data['members'] if is_enabled(m)
+            ]
+        Type.__init__(self, name, dict(json_data, **json_data_override))
         self.chained = json_data.get("chained", False)
         self.extensible = json_data.get("extensible", False)
         # Chained structs inherit from wgpu::ChainedStruct, which has
@@ -227,6 +238,7 @@ def linked_record_members(json_data, types):
         member = RecordMember(Name(m['name']),
                               types[m['type']],
                               m.get('annotation', 'value'),
+                              m,
                               optional=m.get('optional', False),
                               is_return_value=m.get('is_return_value', False),
                               default_value=m.get('default', None),
@@ -262,7 +274,8 @@ def link_object(obj, types):
     def make_method(json_data):
         arguments = linked_record_members(json_data.get('args', []), types)
         return Method(Name(json_data['name']),
-                      types[json_data.get('returns', 'void')], arguments)
+                      types[json_data.get('returns',
+                                          'void')], arguments, json_data)
 
     obj.methods = [make_method(m) for m in obj.json_data.get('methods', [])]
     obj.methods.sort(key=lambda method: method.name.canonical_case())
@@ -323,7 +336,8 @@ def topo_sort_structure(structs):
     return result
 
 
-def parse_json(json):
+def parse_json(json, enabled_tags):
+    is_enabled = lambda json_data: item_is_enabled(enabled_tags, json_data)
     category_to_parser = {
         'bitmask': BitmaskType,
         'enum': EnumType,
@@ -344,9 +358,10 @@ def parse_json(json):
         if name[0] == '_':
             continue
         category = json_data['category']
-        parsed = category_to_parser[category](name, json_data)
-        by_category[category].append(parsed)
-        types[name] = parsed
+        parsed = category_to_parser[category](is_enabled, name, json_data)
+        if item_is_enabled(enabled_tags, parsed.json_data):
+            by_category[category].append(parsed)
+            types[name] = parsed
 
     for obj in by_category['object']:
         link_object(obj, types)
@@ -369,7 +384,11 @@ def parse_json(json):
     for struct in by_category['structure']:
         struct.update_metadata()
 
-    return {'types': types, 'by_category': by_category}
+    return {
+        'types': types,
+        'by_category': by_category,
+        'enabled_tags': enabled_tags
+    }
 
 
 ############################################################
@@ -410,7 +429,7 @@ def compute_wire_params(api_params, wire_json):
             # Create object method commands by prepending "self"
             members = [
                 RecordMember(Name('self'), types[api_object.dict_name],
-                             'value')
+                             'value', {})
             ]
             members += method.arguments
 
@@ -419,7 +438,7 @@ def compute_wire_params(api_params, wire_json):
             if method.return_type.category == 'object':
                 result = RecordMember(Name('result'),
                                       types['ObjectHandle'],
-                                      'value',
+                                      'value', {},
                                       is_return_value=True)
                 result.set_handle_type(method.return_type)
                 members.append(result)
@@ -489,7 +508,7 @@ def as_cppType(name):
 
 
 def as_jsEnumValue(value):
-    if value.jsrepr: return value.jsrepr
+    if 'jsrepr' in value.json_data: return value.json_data['jsrepr']
     return "'" + value.name.js_enum_case() + "'"
 
 
@@ -534,6 +553,12 @@ def decorate(name, typ, arg):
 def annotated(typ, arg):
     name = as_varName(arg.name)
     return decorate(name, typ, arg)
+
+
+def item_is_enabled(enabled_tags, json_data):
+    tags = json_data.get('tags')
+    if tags is None: return True
+    return any(tag in enabled_tags for tag in tags)
 
 
 def as_cEnum(type_name, value_name):
@@ -599,22 +624,57 @@ def as_wireType(typ):
         return as_cppType(typ.name)
 
 
-def c_methods(types, typ):
+def c_methods(params, typ):
     return typ.methods + [
-        Method(Name('reference'), types['void'], []),
-        Method(Name('release'), types['void'], []),
+        x for x in [
+            Method(Name('reference'), params['types']['void'], [],
+                   {'tags': ['dawn', 'emscripten']}),
+            Method(Name('release'), params['types']['void'], [],
+                   {'tags': ['dawn', 'emscripten']}),
+        ] if item_is_enabled(params['enabled_tags'], x.json_data)
     ]
 
 
 def get_c_methods_sorted_by_name(api_params):
     unsorted = [(as_MethodSuffix(typ.name, method.name), typ, method) \
             for typ in api_params['by_category']['object'] \
-            for method in c_methods(api_params['types'], typ) ]
+            for method in c_methods(api_params, typ) ]
     return [(typ, method) for (_, typ, method) in sorted(unsorted)]
 
 
 def has_callback_arguments(method):
     return any(arg.type.category == 'callback' for arg in method.arguments)
+
+
+def render(template, output, params):
+    base_params = {
+        'Name': lambda name: Name(name),
+        'enable_deprecated': 'deprecated' in params['enabled_tags'],
+        'as_annotated_cType': \
+            lambda arg: annotated(as_cTypeEnumSpecialCase(arg.type), arg),
+        'as_annotated_cppType': \
+            lambda arg: annotated(as_cppType(arg.type.name), arg),
+        'as_cEnum': as_cEnum,
+        'as_cEnumDawn': as_cEnumDawn,
+        'as_cppEnum': as_cppEnum,
+        'as_cMethod': as_cMethod,
+        'as_cMethodDawn': as_cMethodDawn,
+        'as_MethodSuffix': as_MethodSuffix,
+        'as_cProc': as_cProc,
+        'as_cProcDawn': as_cProcDawn,
+        'as_cType': as_cType,
+        'as_cTypeDawn': as_cTypeDawn,
+        'as_cppType': as_cppType,
+        'as_jsEnumValue': as_jsEnumValue,
+        'convert_cType_to_cppType': convert_cType_to_cppType,
+        'as_varName': as_varName,
+        'decorate': decorate,
+        'c_methods': lambda typ: list(c_methods(params, typ)),
+        'c_methods_sorted_by_name': \
+            get_c_methods_sorted_by_name(params),
+    }
+
+    return FileRender(template, output, [base_params, params])
 
 
 class MultiGeneratorFromDawnJSON(Generator):
@@ -642,11 +702,11 @@ class MultiGeneratorFromDawnJSON(Generator):
             help=
             'Comma-separated subset of targets to output. Available targets: '
             + ', '.join(allowed_targets))
-
     def get_file_renders(self, args):
         with open(args.dawn_json) as f:
             loaded_json = json.loads(f.read())
-        api_params = parse_json(loaded_json)
+
+        params_dawn = parse_json(loaded_json, ['dawn', 'native', 'deprecated'])
 
         targets = args.targets.split(',')
 
@@ -655,187 +715,154 @@ class MultiGeneratorFromDawnJSON(Generator):
             with open(args.wire_json) as f:
                 wire_json = json.loads(f.read())
 
-        base_params = {
-            'Name': lambda name: Name(name),
-            'as_annotated_cType': \
-                lambda arg: annotated(as_cTypeEnumSpecialCase(arg.type), arg),
-            'as_annotated_cppType': \
-                lambda arg: annotated(as_cppType(arg.type.name), arg),
-            'as_cEnum': as_cEnum,
-            'as_cEnumDawn': as_cEnumDawn,
-            'as_cppEnum': as_cppEnum,
-            'as_cMethod': as_cMethod,
-            'as_cMethodDawn': as_cMethodDawn,
-            'as_MethodSuffix': as_MethodSuffix,
-            'as_cProc': as_cProc,
-            'as_cProcDawn': as_cProcDawn,
-            'as_cType': as_cType,
-            'as_cTypeDawn': as_cTypeDawn,
-            'as_cppType': as_cppType,
-            'as_jsEnumValue': as_jsEnumValue,
-            'convert_cType_to_cppType': convert_cType_to_cppType,
-            'as_varName': as_varName,
-            'decorate': decorate,
-            'c_methods': lambda typ: c_methods(api_params['types'], typ),
-            'c_methods_sorted_by_name': \
-                get_c_methods_sorted_by_name(api_params),
-        }
-
         renders = []
 
         if 'dawn_headers' in targets:
             renders.append(
-                FileRender('webgpu.h', 'src/include/dawn/webgpu.h',
-                           [base_params, api_params]))
+                render('webgpu.h', 'src/include/dawn/webgpu.h', params_dawn))
             renders.append(
-                FileRender('dawn_proc_table.h',
-                           'src/include/dawn/dawn_proc_table.h',
-                           [base_params, api_params]))
+                render('dawn_proc_table.h',
+                       'src/include/dawn/dawn_proc_table.h', params_dawn))
 
         if 'dawncpp_headers' in targets:
             renders.append(
-                FileRender('webgpu_cpp.h', 'src/include/dawn/webgpu_cpp.h',
-                           [base_params, api_params]))
+                render('webgpu_cpp.h', 'src/include/dawn/webgpu_cpp.h',
+                       params_dawn))
 
             renders.append(
-                FileRender('webgpu_cpp_print.h',
-                           'src/include/dawn/webgpu_cpp_print.h',
-                           [base_params, api_params]))
+                render('webgpu_cpp_print.h',
+                       'src/include/dawn/webgpu_cpp_print.h', params_dawn))
 
         if 'dawn_proc' in targets:
             renders.append(
-                FileRender('dawn_proc.c', 'src/dawn/dawn_proc.c',
-                           [base_params, api_params]))
+                render('dawn_proc.c', 'src/dawn/dawn_proc.c', params_dawn))
             renders.append(
-                FileRender('dawn_thread_dispatch_proc.cpp',
-                           'src/dawn/dawn_thread_dispatch_proc.cpp',
-                           [base_params, api_params]))
+                render('dawn_thread_dispatch_proc.cpp',
+                       'src/dawn/dawn_thread_dispatch_proc.cpp', params_dawn))
 
         if 'dawncpp' in targets:
             renders.append(
-                FileRender('webgpu_cpp.cpp', 'src/dawn/webgpu_cpp.cpp',
-                           [base_params, api_params]))
+                render('webgpu_cpp.cpp', 'src/dawn/webgpu_cpp.cpp',
+                       params_dawn))
+
+        if 'webgpu_headers' in targets:
+            params_upstream = parse_json(loaded_json, ['upstream', 'native'])
+            renders.append(
+                render('webgpu.h', 'webgpu-headers/webgpu.h', params_upstream))
 
         if 'emscripten_bits' in targets:
+            params_emscripten = parse_json(loaded_json,
+                                           ['upstream', 'emscripten'])
             renders.append(
-                FileRender('webgpu_struct_info.json',
-                           'src/dawn/webgpu_struct_info.json',
-                           [base_params, api_params]))
+                render('webgpu.h', 'emscripten-bits/webgpu.h',
+                       params_emscripten))
+            # TODO: Also generate webgpu/webgpu_cpp.{h,cpp}
             renders.append(
-                FileRender('library_webgpu_enum_tables.js',
-                           'src/dawn/library_webgpu_enum_tables.js',
-                           [base_params, api_params]))
+                render('webgpu_struct_info.json',
+                       'emscripten-bits/webgpu_struct_info.json',
+                       params_emscripten))
+            renders.append(
+                render('library_webgpu_enum_tables.js',
+                       'emscripten-bits/library_webgpu_enum_tables.js',
+                       params_emscripten))
 
         if 'mock_webgpu' in targets:
-            mock_params = [
-                base_params, api_params, {
-                    'has_callback_arguments': has_callback_arguments
-                }
-            ]
+            mock_params = dict(
+                params_dawn,
+                **{'has_callback_arguments': has_callback_arguments})
             renders.append(
-                FileRender('mock_webgpu.h', 'src/dawn/mock_webgpu.h',
-                           mock_params))
+                render('mock_webgpu.h', 'src/dawn/mock_webgpu.h', mock_params))
             renders.append(
-                FileRender('mock_webgpu.cpp', 'src/dawn/mock_webgpu.cpp',
-                           mock_params))
+                render('mock_webgpu.cpp', 'src/dawn/mock_webgpu.cpp',
+                       mock_params))
 
         if 'dawn_native_utils' in targets:
-            frontend_params = [
-                base_params,
-                api_params,
-                {
-                    # TODO: as_frontendType and co. take a Type, not a Name :(
-                    'as_frontendType': lambda typ: as_frontendType(typ),
-                    'as_annotated_frontendType': \
-                        lambda arg: annotated(as_frontendType(arg.type), arg),
-                }
-            ]
+            frontend_params = dict(params_dawn, **{
+                # TODO: as_frontendType and co. take a Type, not a Name :(
+                'as_frontendType': lambda typ: as_frontendType(typ),
+                'as_annotated_frontendType': \
+                    lambda arg: annotated(as_frontendType(arg.type), arg),
+            })
 
             renders.append(
-                FileRender('dawn_native/ValidationUtils.h',
-                           'src/dawn_native/ValidationUtils_autogen.h',
-                           frontend_params))
+                render('dawn_native/ValidationUtils.h',
+                       'src/dawn_native/ValidationUtils_autogen.h',
+                       frontend_params))
             renders.append(
-                FileRender('dawn_native/ValidationUtils.cpp',
-                           'src/dawn_native/ValidationUtils_autogen.cpp',
-                           frontend_params))
+                render('dawn_native/ValidationUtils.cpp',
+                       'src/dawn_native/ValidationUtils_autogen.cpp',
+                       frontend_params))
             renders.append(
-                FileRender('dawn_native/wgpu_structs.h',
-                           'src/dawn_native/wgpu_structs_autogen.h',
-                           frontend_params))
+                render('dawn_native/wgpu_structs.h',
+                       'src/dawn_native/wgpu_structs_autogen.h',
+                       frontend_params))
             renders.append(
-                FileRender('dawn_native/wgpu_structs.cpp',
-                           'src/dawn_native/wgpu_structs_autogen.cpp',
-                           frontend_params))
+                render('dawn_native/wgpu_structs.cpp',
+                       'src/dawn_native/wgpu_structs_autogen.cpp',
+                       frontend_params))
             renders.append(
-                FileRender('dawn_native/ProcTable.cpp',
-                           'src/dawn_native/ProcTable.cpp', frontend_params))
+                render('dawn_native/ProcTable.cpp',
+                       'src/dawn_native/ProcTable.cpp', frontend_params))
             renders.append(
-                FileRender('dawn_native/ChainUtils.h',
-                           'src/dawn_native/ChainUtils_autogen.h',
-                           frontend_params))
+                render('dawn_native/ChainUtils.h',
+                       'src/dawn_native/ChainUtils_autogen.h',
+                       frontend_params))
             renders.append(
-                FileRender('dawn_native/ChainUtils.cpp',
-                           'src/dawn_native/ChainUtils_autogen.cpp',
-                           frontend_params))
+                render('dawn_native/ChainUtils.cpp',
+                       'src/dawn_native/ChainUtils_autogen.cpp',
+                       frontend_params))
 
         if 'dawn_wire' in targets:
-            additional_params = compute_wire_params(api_params, wire_json)
-
-            wire_params = [
-                base_params, api_params, {
-                    'as_wireType': as_wireType,
-                    'as_annotated_wireType': \
-                        lambda arg: annotated(as_wireType(arg.type), arg),
-                }, additional_params
-            ]
+            wire_params = dict(params_dawn,
+                               **compute_wire_params(params_dawn, wire_json))
+            wire_params['as_wireType'] = as_wireType
+            wire_params['as_annotated_wireType'] = lambda arg: annotated(
+                as_wireType(arg.type), arg)
             renders.append(
-                FileRender('dawn_wire/ObjectType.h',
-                           'src/dawn_wire/ObjectType_autogen.h', wire_params))
+                render('dawn_wire/ObjectType.h',
+                       'src/dawn_wire/ObjectType_autogen.h', wire_params))
             renders.append(
-                FileRender('dawn_wire/WireCmd.h',
-                           'src/dawn_wire/WireCmd_autogen.h', wire_params))
+                render('dawn_wire/WireCmd.h',
+                       'src/dawn_wire/WireCmd_autogen.h', wire_params))
             renders.append(
-                FileRender('dawn_wire/WireCmd.cpp',
-                           'src/dawn_wire/WireCmd_autogen.cpp', wire_params))
+                render('dawn_wire/WireCmd.cpp',
+                       'src/dawn_wire/WireCmd_autogen.cpp', wire_params))
             renders.append(
-                FileRender('dawn_wire/client/ApiObjects.h',
-                           'src/dawn_wire/client/ApiObjects_autogen.h',
-                           wire_params))
+                render('dawn_wire/client/ApiObjects.h',
+                       'src/dawn_wire/client/ApiObjects_autogen.h',
+                       wire_params))
             renders.append(
-                FileRender('dawn_wire/client/ApiProcs.cpp',
-                           'src/dawn_wire/client/ApiProcs_autogen.cpp',
-                           wire_params))
+                render('dawn_wire/client/ApiProcs.cpp',
+                       'src/dawn_wire/client/ApiProcs_autogen.cpp',
+                       wire_params))
             renders.append(
-                FileRender('dawn_wire/client/ClientBase.h',
-                           'src/dawn_wire/client/ClientBase_autogen.h',
-                           wire_params))
+                render('dawn_wire/client/ClientBase.h',
+                       'src/dawn_wire/client/ClientBase_autogen.h',
+                       wire_params))
             renders.append(
-                FileRender('dawn_wire/client/ClientHandlers.cpp',
-                           'src/dawn_wire/client/ClientHandlers_autogen.cpp',
-                           wire_params))
+                render('dawn_wire/client/ClientHandlers.cpp',
+                       'src/dawn_wire/client/ClientHandlers_autogen.cpp',
+                       wire_params))
             renders.append(
-                FileRender(
-                    'dawn_wire/client/ClientPrototypes.inc',
-                    'src/dawn_wire/client/ClientPrototypes_autogen.inc',
-                    wire_params))
+                render('dawn_wire/client/ClientPrototypes.inc',
+                       'src/dawn_wire/client/ClientPrototypes_autogen.inc',
+                       wire_params))
             renders.append(
-                FileRender('dawn_wire/server/ServerBase.h',
-                           'src/dawn_wire/server/ServerBase_autogen.h',
-                           wire_params))
+                render('dawn_wire/server/ServerBase.h',
+                       'src/dawn_wire/server/ServerBase_autogen.h',
+                       wire_params))
             renders.append(
-                FileRender('dawn_wire/server/ServerDoers.cpp',
-                           'src/dawn_wire/server/ServerDoers_autogen.cpp',
-                           wire_params))
+                render('dawn_wire/server/ServerDoers.cpp',
+                       'src/dawn_wire/server/ServerDoers_autogen.cpp',
+                       wire_params))
             renders.append(
-                FileRender('dawn_wire/server/ServerHandlers.cpp',
-                           'src/dawn_wire/server/ServerHandlers_autogen.cpp',
-                           wire_params))
+                render('dawn_wire/server/ServerHandlers.cpp',
+                       'src/dawn_wire/server/ServerHandlers_autogen.cpp',
+                       wire_params))
             renders.append(
-                FileRender(
-                    'dawn_wire/server/ServerPrototypes.inc',
-                    'src/dawn_wire/server/ServerPrototypes_autogen.inc',
-                    wire_params))
+                render('dawn_wire/server/ServerPrototypes.inc',
+                       'src/dawn_wire/server/ServerPrototypes_autogen.inc',
+                       wire_params))
 
         return renders
 

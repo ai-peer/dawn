@@ -87,3 +87,18 @@ if(BUILD_SHARED_LIBS)
 endif()
 target_sources(dawn_proc PRIVATE ${DAWNPROC_GEN_SOURCES})
 target_link_libraries(dawn_proc PUBLIC dawn_headers)
+
+###############################################################################
+# Upstream WebGPU headers
+###############################################################################
+
+DawnJSONGenerator(
+    TARGET "webgpu_headers"
+    PRINT_NAME "WebGPU headers"
+    RESULT_VARIABLE "WEBGPU_HEADERS_GEN_SOURCES"
+)
+
+add_library(webgpu_headers STATIC ${DAWN_DUMMY_FILE})
+target_sources(webgpu_headers PRIVATE
+    ${WEBGPU_HEADERS_GEN_SOURCES}
+)
