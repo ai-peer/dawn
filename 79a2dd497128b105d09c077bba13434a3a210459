@@ -125,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e4c36e8a_60bdfb70",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-23T14:59:38Z",
+      "side": 1,
+      "message": "You can cast to a uint16_t after the asserts that show it is safe. This is to very slightly reduce the memory usage of RenderPipeline. In a follow up we can do the same for the vertex attrib\u0027s .offset. WDYT Austin?",
+      "parentUuid": "43ae2d48_37c653b6",
+      "range": {
+        "startLine": 513,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 85
+      },
+      "revId": "79a2dd497128b105d09c077bba13434a3a210459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b4f95ef_fa3bd845",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 2
