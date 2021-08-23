@@ -80,6 +80,30 @@
       },
       "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8223dfac_61357b97",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-23T15:03:26Z",
+      "side": 1,
+      "message": "sounds good. still LGTM",
+      "parentUuid": "5a2f9243_a634b0b2",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 212,
+        "endChar": 13
+      },
+      "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
