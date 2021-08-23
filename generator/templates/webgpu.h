@@ -74,19 +74,17 @@
 #include <stdbool.h>
 
 #define WGPU_WHOLE_SIZE (0xffffffffffffffffULL)
-// TODO(crbug.com/dawn/520): Remove WGPU_STRIDE_UNDEFINED in favor of WGPU_COPY_STRIDE_UNDEFINED.
-#define WGPU_STRIDE_UNDEFINED (0xffffffffUL)
 #define WGPU_COPY_STRIDE_UNDEFINED (0xffffffffUL)
 
 typedef uint32_t WGPUFlags;
 
-{% for type in by_category["object"] %}
+{% for type in by_category["object"] if isenabled(type) %}
     typedef struct {{as_cType(type.name)}}Impl* {{as_cType(type.name)}};
 {% endfor %}
 
-{% for type in by_category["enum"] + by_category["bitmask"] %}
+{% for type in by_category["enum"] + by_category["bitmask"] if isenabled(type) %}
     typedef enum {{as_cType(type.name)}} {
-        {% for value in type.values %}
+        {% for value in type.values if isenabled(value) %}
             {{as_cEnum(type.name, value.name)}} = 0x{{format(value.value, "08X")}},
         {% endfor %}
         {{as_cEnum(type.name, Name("force32"))}} = 0x7FFFFFFF
@@ -102,7 +100,7 @@ typedef struct WGPUChainedStruct {
     WGPUSType sType;
 } WGPUChainedStruct;
 
-{% for type in by_category["structure"] %}
+{% for type in by_category["structure"] if isenabled(type) %}
     typedef struct {{as_cType(type.name)}} {
         {% if type.extensible %}
             WGPUChainedStruct const * nextInChain;
@@ -110,30 +108,31 @@ typedef struct WGPUChainedStruct {
         {% if type.chained %}
             WGPUChainedStruct chain;
         {% endif %}
-        {% for member in type.members %}
+        {% for member in type.members if isenabled(member) %}
             {{as_annotated_cType(member)}};
         {% endfor %}
     } {{as_cType(type.name)}};
 
 {% endfor %}
 
-{% for typeDef in by_category["typedef"] %}
+{% for typeDef in by_category["typedef"] if isenabled(typeDef) %}
     // {{as_cType(typeDef.name)}} is deprecated.
     // Use {{as_cType(typeDef.type.name)}} instead.
     typedef {{as_cType(typeDef.type.name)}} {{as_cType(typeDef.name)}};
 
 {% endfor %}
-
-// TODO(crbug.com/dawn/1023): Remove after the deprecation period.
-#define WGPUInputStepMode_Vertex WGPUVertexStepMode_Vertex
-#define WGPUInputStepMode_Instance WGPUVertexStepMode_Instance
-#define WGPUInputStepMode_Force32 WGPUVertexStepMode_Force32
+{% if isenabled_deprecated %}
+    // TODO(crbug.com/dawn/1023): Remove after the deprecation period.
+    #define WGPUInputStepMode_Vertex WGPUVertexStepMode_Vertex
+    #define WGPUInputStepMode_Instance WGPUVertexStepMode_Instance
+    #define WGPUInputStepMode_Force32 WGPUVertexStepMode_Force32
+{% endif %}
 
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-{% for type in by_category["callback"] %}
+{% for type in by_category["callback"] if isenabled(type) %}
     typedef void (*{{as_cType(type.name)}})(
         {%- for arg in type.arguments -%}
             {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
@@ -148,9 +147,9 @@ typedef void (*WGPUProc)(void);
 typedef WGPUInstance (*WGPUProcCreateInstance)(WGPUInstanceDescriptor const * descriptor);
 typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, char const * procName);
 
-{% for type in by_category["object"] if len(c_methods(type)) > 0 %}
+{% for type in by_category["object"] if isenabled(type) and len(enabled_c_methods(type)) > 0 %}
     // Procs of {{type.name.CamelCase()}}
-    {% for method in c_methods(type) %}
+    {% for method in enabled_c_methods(type) %}
         typedef {{as_cType(method.return_type.name)}} (*{{as_cProc(type.name, method.name)}})(
             {{-as_cType(type.name)}} {{as_varName(type.name)}}
             {%- for arg in method.arguments -%}
@@ -167,9 +166,9 @@ typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, char const * procN
 WGPU_EXPORT WGPUInstance wgpuCreateInstance(WGPUInstanceDescriptor const * descriptor);
 WGPU_EXPORT WGPUProc wgpuGetProcAddress(WGPUDevice device, char const * procName);
 
-{% for type in by_category["object"] if len(c_methods(type)) > 0 %}
+{% for type in by_category["object"] if isenabled(type) and len(enabled_c_methods(type)) > 0 %}
     // Methods of {{type.name.CamelCase()}}
-    {% for method in c_methods(type) %}
+    {% for method in enabled_c_methods(type) %}
         WGPU_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
             {{-as_cType(type.name)}} {{as_varName(type.name)}}
             {%- for arg in method.arguments -%}
