@@ -22,6 +22,12 @@ DawnJSONGenerator(
     RESULT_VARIABLE "DAWN_HEADERS_GEN_SOURCES"
 )
 
+DawnJSONGenerator(
+    TARGET "webgpu_headers"
+    PRINT_NAME "WebGPU headers"
+    RESULT_VARIABLE "WEBGPU_HEADERS_GEN_SOURCES"
+)
+
 # Headers only INTERFACE library with generated headers don't work in CMake
 # because the GENERATED property is local to a directory. Instead we make a
 # STATIC library with a Dummy cpp file.
@@ -34,6 +40,12 @@ add_library(dawn_headers STATIC ${DAWN_DUMMY_FILE})
 target_sources(dawn_headers PRIVATE
     "${DAWN_INCLUDE_DIR}/dawn/dawn_wsi.h"
     ${DAWN_HEADERS_GEN_SOURCES}
+)
+target_link_libraries(dawn_headers INTERFACE dawn_public_config)
+
+add_library(webgpu_headers STATIC ${DAWN_DUMMY_FILE})
+target_sources(webgpu_headers PRIVATE
+    ${WEBGPU_HEADERS_GEN_SOURCES}
 )
 target_link_libraries(dawn_headers INTERFACE dawn_public_config)
 
