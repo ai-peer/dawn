@@ -17,6 +17,43 @@
 
     "_doc": "See docs/codegen.md",
 
+    "request adapter options": {
+        "category": "structure",
+        "extensible": true,
+        "tags": ["upstream"],
+        "members": [
+            {"name": "compatible surface", "type": "surface"}
+        ]
+    },
+    "request adapter callback": {
+        "category": "callback",
+        "tags": ["upstream"],
+        "_TODO": "should be fallible",
+        "args": [
+            {"name": "result", "type": "adapter", "_FIXME": "should be nullable"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+    "adapter": {
+        "category": "object",
+        "tags": ["upstream"],
+        "methods": [
+            {
+                "name": "get properties",
+                "args": [
+                    {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "request device",
+                "args": [
+                    {"name": "descriptor", "type": "device descriptor", "annotation": "const*"},
+                    {"name": "callback", "type": "request device callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            }
+        ]
+    },
     "adapter properties": {
         "category": "structure",
         "extensible": true,
@@ -31,7 +68,6 @@
     },
     "adapter type": {
         "category": "enum",
-        "javascript": false,
         "values": [
             {"value": 0, "name": "discrete GPU"},
             {"value": 1, "name": "integrated GPU"},
@@ -39,6 +75,22 @@
             {"value": 3, "name": "unknown"}
         ]
     },
+    "device descriptor": {
+        "category": "structure",
+        "extensible": "true",
+        "tags": ["upstream"],
+        "members": []
+    },
+    "request device callback": {
+        "category": "callback",
+        "_TODO": "should be fallible",
+        "tags": ["upstream"],
+        "args": [
+            {"name": "result", "type": "device"},
+            {"name": "userdata", "type": "void", "annotation": "*"}
+        ]
+    },
+
     "address mode": {
         "category": "enum",
         "values": [
@@ -49,7 +101,6 @@
     },
     "backend type": {
         "category": "enum",
-        "javascript": false,
         "values": [
             {"value": 0, "name": "null"},
             {"value": 1, "name": "D3D11"},
@@ -149,6 +200,7 @@
     "external texture binding entry": {
         "category": "structure",
         "chained": true,
+        "tags": ["dawn"],
         "members": [
             {"name": "external texture", "type": "external texture"}
         ]
@@ -157,6 +209,7 @@
     "external texture binding layout": {
         "category": "structure",
         "chained": true,
+        "tags": ["dawn"],
         "members": []
     },
 
@@ -225,12 +278,12 @@
             {"value": 11, "name": "constant"},
             {"value": 12, "name": "one minus constant"},
 
-            {"value": 102, "name": "src color"},
-            {"value": 103, "name": "one minus src color"},
-            {"value": 106, "name": "dst color"},
-            {"value": 107, "name": "one minus dst color"},
-            {"value": 111, "name": "blend color"},
-            {"value": 112, "name": "one minus blend color"}
+            {"value": 102, "name": "src color", "tags": ["deprecated"]},
+            {"value": 103, "name": "one minus src color", "tags": ["deprecated"]},
+            {"value": 106, "name": "dst color", "tags": ["deprecated"]},
+            {"value": 107, "name": "one minus dst color", "tags": ["deprecated"]},
+            {"value": 111, "name": "blend color", "tags": ["deprecated"]},
+            {"value": 112, "name": "one minus blend color", "tags": ["deprecated"]}
         ]
     },
     "blend operation": {
@@ -278,6 +331,8 @@
             {
                 "name": "set label",
                 "returns": "void",
+                "tags": ["dawn"],
+                "_TODO": "needs an upstream equivalent",
                 "args": [
                     {"name": "label", "type": "char", "annotation": "const*", "length": "strlen"}
                 ]
@@ -427,6 +482,7 @@
             },
             {
                 "name": "copy texture to texture internal",
+                "tags": ["dawn"],
                 "args": [
                     {"name": "source", "type": "image copy texture", "annotation": "const*"},
                     {"name": "destination", "type": "image copy texture", "annotation": "const*"},
@@ -435,10 +491,10 @@
             },
             {
                 "name": "inject validation error",
+                "tags": ["dawn"],
                 "args": [
                     {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ],
-                "TODO": "enga@: Make this a Dawn extension"
+                ]
             },
             {
                 "name": "insert debug marker",
@@ -499,6 +555,7 @@
     "compilation info": {
         "category": "structure",
         "extensible": false,
+        "_TODO": "should be extensible, but need to make that work in wire: https://github.com/webgpu-native/webgpu-headers/issues/82",
         "members": [
             {"name": "message count", "type": "uint32_t"},
             {"name": "messages", "type": "compilation message", "annotation": "const*", "length": "message count"}
@@ -506,6 +563,7 @@
     },
     "compilation info callback": {
         "category": "callback",
+        "tags": ["dawn"],
         "args": [
             {"name": "status", "type": "compilation info request status"},
             {"name": "compilation info", "type": "compilation info", "annotation": "const*"},
@@ -514,6 +572,7 @@
     },
     "compilation info request status": {
         "category": "enum",
+        "tags": ["dawn"],
         "values": [
             {"value": 0, "name": "success"},
             {"value": 1, "name": "error"},
@@ -524,6 +583,7 @@
     "compilation message": {
         "category": "structure",
         "extensible": false,
+        "_TODO": "should be extensible, but need to make that work in wire: https://github.com/webgpu-native/webgpu-headers/issues/82",
         "members": [
             {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "type", "type": "compilation message type"},
@@ -590,6 +650,14 @@
                 ]
             },
             {
+                "name": "begin pipeline statistics query",
+                "tags": ["upstream"],
+                "args": [
+                    {"name": "query set", "type": "query set"},
+                    {"name": "query index", "type": "uint32_t"}
+                ]
+            },
+            {
                 "name": "dispatch",
                 "args": [
                     {"name": "x", "type": "uint32_t"},
@@ -606,6 +674,10 @@
             },
             {
                 "name": "end pass"
+            },
+            {
+                "name": "end pipeline statistics query",
+                "tags": ["upstream"]
             }
         ]
     },
@@ -628,11 +700,12 @@
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "layout", "type": "pipeline layout", "optional": true},
             {"name": "compute", "type": "programmable stage descriptor"},
-            {"name": "compute stage", "type": "programmable stage descriptor"}
+            {"name": "compute stage", "type": "programmable stage descriptor", "tags": ["deprecated"]}
         ]
     },
     "alpha op": {
         "category": "enum",
+        "tags": ["dawn"],
         "values": [
             {"value": 0, "name": "dont change"},
             {"value": 1, "name": "premultiply"},
@@ -642,6 +715,7 @@
     "copy texture for browser options": {
         "category": "structure",
         "extensible": true,
+        "tags": ["dawn"],
         "members": [
             {"name": "flipY", "type": "bool", "default": "false"},
             {"name": "alphaOp", "type": "alpha op", "default": "dont change"}
@@ -710,7 +784,7 @@
             {
                 "name": "create error buffer",
                 "returns": "buffer",
-                "TODO": "enga@: Make this part of a dawn_wire extension"
+                "tags": ["dawn"]
             },
             {
                 "name": "create command encoder",
@@ -802,12 +876,17 @@
                 ]
             },
             {
+                "name": "destroy",
+                "tags": ["upstream"]
+            },
+            {
                 "name": "get queue",
                 "returns": "queue"
             },
             {
                 "name": "create external texture",
                 "returns": "external texture",
+                "tags": ["dawn"],
                 "args": [
                     {"name": "external texture descriptor", "type": "external texture descriptor", "annotation": "const*"}
                 ]
@@ -818,13 +897,15 @@
                     {"name": "type", "type": "error type"},
                     {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"}
                 ],
-                "TODO": "enga@: Make this a Dawn extension"
+                "tags": ["dawn"]
             },
             {
-                "name": "lose for testing"
+                "name": "lose for testing",
+                "tags": ["dawn"]
             },
             {
-                "name": "tick"
+                "name": "tick",
+                "tags": ["dawn"]
             },
             {
                 "name": "set uncaptured error callback",
@@ -835,6 +916,7 @@
             },
             {
                 "name": "set logging callback",
+                "tags": ["dawn"],
                 "args": [
                     {"name": "callback", "type": "logging callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
@@ -873,6 +955,8 @@
     "device properties": {
         "category": "structure",
         "extensible": false,
+        "tags": ["dawn"],
+        "_TODO": "kainino@: this should be in upstream webgpu.h",
         "members": [
             {"name": "texture compression BC", "type": "bool", "default": "false"},
             {"name": "shader float16", "type": "bool", "default": "false"},
@@ -897,6 +981,7 @@
     },
     "logging callback": {
         "category": "callback",
+        "tags": ["dawn"],
         "args": [
             {"name": "type", "type": "logging type"},
             {"name": "message", "type": "char", "annotation": "const*"},
@@ -923,6 +1008,7 @@
     },
     "logging type": {
         "category": "enum",
+        "tags": ["dawn"],
         "values": [
             {"value": 0, "name": "verbose"},
             {"value": 1, "name": "info"},
@@ -940,6 +1026,7 @@
     },
     "external texture": {
         "category": "object",
+        "tags": ["dawn"],
         "methods": [
             {
                 "name": "destroy",
@@ -950,6 +1037,7 @@
     "external texture descriptor": {
         "category": "structure",
         "extensible": true,
+        "tags": ["dawn"],
         "members": [
             {"name": "plane 0", "type": "texture view"},
             {"name": "format", "type": "texture format"}
@@ -1007,6 +1095,19 @@
                 "args": [
                     {"name": "descriptor", "type": "surface descriptor", "annotation": "const*"}
                 ]
+            },
+            {
+                "name": "process events",
+                "tags": ["upstream"]
+            },
+            {
+                "name": "request adapter",
+                "tags": ["upstream"],
+                "args": [
+                    {"name": "options", "type": "request adapter options", "annotation": "const*"},
+                    {"name": "callback", "type": "request adapter callback"},
+                    {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
             }
         ]
     },
@@ -1036,6 +1137,7 @@
     },
     "input step mode": {
         "category": "typedef",
+        "tags": ["deprecated"],
         "type": "vertex step mode"
     },
     "vertex step mode": {
@@ -1065,7 +1167,7 @@
         "values": [
             {"value": 0, "name": "store"},
             {"value": 1, "name": "discard"},
-            {"value": 2, "name": "clear"}
+            {"value": 2, "name": "clear", "tags": ["deprecated"]}
         ]
     },
     "origin 3D": {
@@ -1191,6 +1293,7 @@
             {
                 "name": "copy texture for browser",
                 "extensible": true,
+                "tags": ["dawn"],
                 "args": [
                     {"name": "source", "type": "image copy texture", "annotation": "const*"},
                     {"name": "destination", "type": "image copy texture", "annotation": "const*"},
@@ -1344,12 +1447,13 @@
             {"name": "load op", "type": "load op"},
             {"name": "store op", "type": "store op"},
             {"name": "clear color", "type": "color"},
-            {"name": "attachment", "type": "texture view", "optional": true}
+            {"name": "attachment", "type": "texture view", "optional": true, "tags": ["deprecated"]}
         ]
     },
 
     "render pass color attachment descriptor": {
         "category": "typedef",
+        "tags": ["deprecated"],
         "type": "render pass color attachment"
     },
 
@@ -1365,12 +1469,13 @@
             {"name": "stencil store op", "type": "store op"},
             {"name": "clear stencil", "type": "uint32_t", "default": "0"},
             {"name": "stencil read only", "type": "bool", "default": "false"},
-            {"name": "attachment", "type": "texture view", "optional": true}
+            {"name": "attachment", "type": "texture view", "optional": true, "tags": ["dawn"]}
         ]
     },
 
     "render pass depth stencil attachment descriptor": {
         "category": "typedef",
+        "tags": ["deprecated"],
         "type": "render pass depth stencil attachment"
     },
 
@@ -1467,6 +1572,7 @@
             },
             {
                 "name": "set blend color",
+                "tags": ["deprecated"],
                 "args": [
                     {"name": "color", "type": "color", "annotation": "const*"}
                 ]
@@ -1522,6 +1628,14 @@
                 ]
             },
             {
+                "name": "begin pipeline statistics query",
+                "tags": ["upstream"],
+                "args": [
+                    {"name": "query set", "type": "query set"},
+                    {"name": "query index", "type": "uint32_t"}
+                ]
+            },
+            {
                 "name": "end occlusion query"
             },
             {
@@ -1533,6 +1647,10 @@
             },
             {
                 "name": "end pass"
+            },
+            {
+                "name": "end pipeline statistics query",
+                "tags": ["upstream"]
             }
         ]
     },
@@ -1673,6 +1791,7 @@
         "methods": [
             {
                 "name": "get compilation info",
+                "tags": ["dawn"],
                 "args": [
                     {"name": "callback", "type": "compilation info callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
@@ -1735,7 +1854,17 @@
         ]
     },
     "surface": {
-        "category": "object"
+        "category": "object",
+        "methods": [
+            {
+                "name": "get preferred format",
+                "returns": "texture format",
+                "tags": ["upstream"],
+                "args": [
+                    {"name": "adapter", "type": "adapter"}
+                ]
+            }
+        ]
     },
     "surface descriptor": {
         "category": "structure",
@@ -1754,7 +1883,7 @@
     "surface descriptor from metal layer": {
         "category": "structure",
         "chained": true,
-        "javascript": false,
+        "tags": ["native"],
         "members": [
             {"name": "layer", "type": "void", "annotation": "*"}
         ]
@@ -1762,7 +1891,7 @@
     "surface descriptor from windows HWND": {
         "category": "structure",
         "chained": true,
-        "javascript": false,
+        "tags": ["native"],
         "members": [
             {"name": "hinstance", "type": "void", "annotation": "*"},
             {"name": "hwnd", "type": "void", "annotation": "*"}
@@ -1771,7 +1900,7 @@
     "surface descriptor from xlib": {
         "category": "structure",
         "chained": true,
-        "javascript": false,
+        "tags": ["native"],
         "members": [
             {"name": "display", "type": "void", "annotation": "*"},
             {"name": "window", "type": "uint32_t"}
@@ -1780,7 +1909,7 @@
     "surface descriptor from windows core window": {
         "category": "structure",
         "chained": true,
-        "javascript": false,
+        "tags": ["dawn"],
         "members": [
             {"name": "core window", "type": "void", "annotation": "*"}
         ]
@@ -1788,7 +1917,7 @@
     "surface descriptor from windows swap chain panel": {
         "category": "structure",
         "chained": true,
-        "javascript": false,
+        "tags": ["dawn"],
         "members": [
             {"name": "swap chain panel", "type": "void", "annotation": "*"}
         ]
@@ -1798,6 +1927,7 @@
         "methods": [
             {
                 "name": "configure",
+                "tags": ["dawn"],
                 "args": [
                     {"name": "format", "type": "texture format"},
                     {"name": "allowed usage", "type": "texture usage"},
@@ -1819,12 +1949,11 @@
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t"},
             {"name": "present mode", "type": "present mode"},
-            {"name": "implementation", "type": "uint64_t", "default": 0}
+            {"name": "implementation", "type": "uint64_t", "default": 0, "tags": ["deprecated"]}
         ]
     },
     "s type": {
         "category": "enum",
-        "javascript": false,
         "values": [
             {"value": 0, "name": "invalid", "valid": false},
             {"value": 1, "name": "surface descriptor from metal layer"},
@@ -1834,11 +1963,11 @@
             {"value": 5, "name": "shader module SPIRV descriptor"},
             {"value": 6, "name": "shader module WGSL descriptor"},
             {"value": 7, "name": "primitive depth clamping state"},
-            {"value": 8, "name": "surface descriptor from windows core window"},
-            {"value": 9, "name": "external texture binding entry"},
-            {"value": 10, "name": "external texture binding layout"},
-            {"value": 11, "name": "surface descriptor from windows swap chain panel"},
-            {"value": 1000, "name": "dawn texture internal usage descriptor"}
+            {"value": 8, "name": "surface descriptor from windows core window", "tags": ["dawn"]},
+            {"value": 9, "name": "external texture binding entry", "tags": ["dawn"]},
+            {"value": 10, "name": "external texture binding layout", "tags": ["dawn"]},
+            {"value": 11, "name": "surface descriptor from windows swap chain panel", "tags": ["dawn"]},
+            {"value": 1000, "name": "dawn texture internal usage descriptor", "tags": ["dawn"]}
         ]
     },
     "texture": {
@@ -1854,6 +1983,8 @@
             {
                 "name": "set label",
                 "returns": "void",
+                "tags": ["dawn"],
+                "_TODO": "needs an upstream equivalent",
                 "args": [
                     {"name": "label", "type": "char", "annotation": "const*", "length": "strlen"}
                 ]
@@ -1869,8 +2000,8 @@
             {"value": 0, "name": "all"},
             {"value": 1, "name": "stencil only"},
             {"value": 2, "name": "depth only"},
-            {"value": 3, "name": "plane 0 only"},
-            {"value": 4, "name": "plane 1 only"}
+            {"value": 3, "name": "plane 0 only", "tags": ["dawn"]},
+            {"value": 4, "name": "plane 1 only", "tags": ["dawn"]}
         ]
     },
     "texture component type": {
@@ -1916,6 +2047,7 @@
         "category": "enum",
         "values": [
             {"value": 0, "name": "undefined", "valid": false, "jsrepr": "undefined"},
+
             {"value": 1, "name": "R8 unorm"},
             {"value": 2, "name": "R8 snorm"},
             {"value": 3, "name": "R8 uint"},
@@ -1957,26 +2089,28 @@
             {"value": 35, "name": "RGBA32 uint"},
             {"value": 36, "name": "RGBA32 sint"},
 
-            {"value": 37, "name": "depth32 float"},
-            {"value": 38, "name": "depth24 plus"},
-            {"value": 39, "name": "stencil8"},
+            {"value": 37, "name": "stencil8"},
+            {"value": 38, "name": "depth16 unorm", "tags": ["upstream"]},
+            {"value": 39, "name": "depth24 plus"},
             {"value": 40, "name": "depth24 plus stencil8"},
+            {"value": 41, "name": "depth32 float"},
 
-            {"value": 41, "name": "BC1 RGBA unorm"},
-            {"value": 42, "name": "BC1 RGBA unorm srgb"},
-            {"value": 43, "name": "BC2 RGBA unorm"},
-            {"value": 44, "name": "BC2 RGBA unorm srgb"},
-            {"value": 45, "name": "BC3 RGBA unorm"},
-            {"value": 46, "name": "BC3 RGBA unorm srgb"},
-            {"value": 47, "name": "BC4 R unorm"},
-            {"value": 48, "name": "BC4 R snorm"},
-            {"value": 49, "name": "BC5 RG unorm"},
-            {"value": 50, "name": "BC5 RG snorm"},
-            {"value": 51, "name": "BC6H RGB ufloat"},
-            {"value": 52, "name": "BC6H RGB float"},
-            {"value": 53, "name": "BC7 RGBA unorm"},
-            {"value": 54, "name": "BC7 RGBA unorm srgb"},
-            {"value": 55, "name": "R8 BG8 Biplanar 420 unorm"}
+            {"value": 42, "name": "BC1 RGBA unorm"},
+            {"value": 43, "name": "BC1 RGBA unorm srgb"},
+            {"value": 44, "name": "BC2 RGBA unorm"},
+            {"value": 45, "name": "BC2 RGBA unorm srgb"},
+            {"value": 46, "name": "BC3 RGBA unorm"},
+            {"value": 47, "name": "BC3 RGBA unorm srgb"},
+            {"value": 48, "name": "BC4 R unorm"},
+            {"value": 49, "name": "BC4 R snorm"},
+            {"value": 50, "name": "BC5 RG unorm"},
+            {"value": 51, "name": "BC5 RG snorm"},
+            {"value": 52, "name": "BC6H RGB ufloat"},
+            {"value": 53, "name": "BC6H RGB float"},
+            {"value": 54, "name": "BC7 RGBA unorm"},
+            {"value": 55, "name": "BC7 RGBA unorm srgb"},
+
+            {"value": 56, "name": "R8 BG8 Biplanar 420 unorm", "tags": ["dawn"]}
         ]
     },
     "texture usage": {
@@ -1988,10 +2122,10 @@
             {"value": 4, "name": "texture binding"},
             {"value": 8, "name": "storage binding"},
             {"value": 16, "name": "render attachment"},
-            {"value": 32, "name": "present"},
+            {"value": 32, "name": "present", "tags": ["dawn"]},
 
-            {"value": 4, "name": "sampled", "deprecated": true},
-            {"value": 8, "name": "storage", "deprecated": true}
+            {"value": 4, "name": "sampled", "tags": ["deprecated"]},
+            {"value": 8, "name": "storage", "tags": ["deprecated"]}
         ]
     },
     "texture view descriptor": {
@@ -2101,6 +2235,7 @@
     "dawn texture internal usage descriptor": {
         "category": "structure",
         "chained": true,
+        "tags": ["dawn"],
         "members": [
             {"name": "internal usage", "type": "texture usage", "default": "none"}
         ]
