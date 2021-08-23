@@ -56,6 +56,30 @@
       },
       "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a2f9243_a634b0b2",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-08-23T02:07:20Z",
+      "side": 1,
+      "message": "The counterSet.counters is a NSArray\u003cid\u003cMTLCounter\u003e\u003e, but the const values used to specify counters are MTLCommonCounter, which type are NSString. We cannot convert a NSString to a MTLCounter object, so a copy is needed here, to compare the counter\u0027s name.",
+      "parentUuid": "9ee0132b_771bfd23",
+      "range": {
+        "startLine": 209,
+        "startChar": 12,
+        "endLine": 212,
+        "endChar": 13
+      },
+      "revId": "cfec49c2b0c9f34c8e3f783e8cd698054446a67e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
