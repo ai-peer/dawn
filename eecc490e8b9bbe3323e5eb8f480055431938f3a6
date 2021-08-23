@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14d6b6f1_18f9ac0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-23T15:02:27Z",
+      "side": 1,
+      "message": "This approach sounds good. Like you said, we could also update the BindGroup[Layout]Entry::binding types. That would be a nice win I think. But since is getting a bit involved for a drive-by cleanup / follow-up. Feel free to push back on it.",
+      "parentUuid": "ea7e6f5e_9da378c2",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9979e418_f44d80aa",
         "filename": "src/common/Constants.h",
         "patchSetId": 1
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "Can do.\n\nShould tint\u0027s ResourceBinding::binding/BindingPoint::binding/etc also be changed to a u16? If so, then there\u0027s no validation needed within Dawn, since an out-of-range binding will just become a tint compiler error, right?",
       "parentUuid": "8e153c9d_88b6e3bd",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb435ca_55483364",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-23T15:02:27Z",
+      "side": 1,
+      "message": "Yeah I think so. If you don\u0027t want to go to all that length for a follow up, you can just file an issue on Tint to do this and we can pick this CL back up once it is completed.",
+      "parentUuid": "4c3a01db_53e42566",
       "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
