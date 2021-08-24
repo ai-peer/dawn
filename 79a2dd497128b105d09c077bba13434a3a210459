@@ -171,6 +171,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f682539_b541f19c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-08-24T08:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f93c8258_edaca60b",
+      "range": {
+        "startLine": 513,
+        "startChar": 0,
+        "endLine": 520,
+        "endChar": 85
+      },
+      "revId": "79a2dd497128b105d09c077bba13434a3a210459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b4f95ef_fa3bd845",
@@ -243,6 +267,30 @@
       "side": 1,
       "message": "The same as uint64_t accessBoundary, I used uint64_t because currently VertexAttribute::offset is of uint64_t. Should I convert it back to uint32_t?",
       "parentUuid": "af7901ca_277f6934",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 53,
+        "endChar": 16
+      },
+      "revId": "79a2dd497128b105d09c077bba13434a3a210459",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13805fb0_0be8b8b4",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-08-24T08:29:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "200bf645_5d19f61b",
       "range": {
         "startLine": 53,
         "startChar": 8,
