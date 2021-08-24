@@ -23,6 +23,8 @@ class WireWGPUDevicePropertiesTests : public testing::Test {};
 TEST_F(WireWGPUDevicePropertiesTests, SerializeWGPUDeviceProperties) {
     WGPUDeviceProperties sentWGPUDeviceProperties;
     sentWGPUDeviceProperties.textureCompressionBC = true;
+    sentWGPUDeviceProperties.textureCompressionETC2 = true;
+    sentWGPUDeviceProperties.textureCompressionASTC = true;
     // Set false to test that the serialization can handle both true and false correctly.
     sentWGPUDeviceProperties.pipelineStatisticsQuery = false;
     sentWGPUDeviceProperties.timestampQuery = true;
@@ -37,6 +39,8 @@ TEST_F(WireWGPUDevicePropertiesTests, SerializeWGPUDeviceProperties) {
     ASSERT_TRUE(dawn_wire::DeserializeWGPUDeviceProperties(&receivedWGPUDeviceProperties,
                                                            buffer.data(), buffer.size()));
     ASSERT_TRUE(receivedWGPUDeviceProperties.textureCompressionBC);
+    ASSERT_TRUE(receivedWGPUDeviceProperties.textureCompressionETC2);
+    ASSERT_TRUE(receivedWGPUDeviceProperties.textureCompressionASTC);
     ASSERT_FALSE(receivedWGPUDeviceProperties.pipelineStatisticsQuery);
     ASSERT_TRUE(receivedWGPUDeviceProperties.timestampQuery);
 }
