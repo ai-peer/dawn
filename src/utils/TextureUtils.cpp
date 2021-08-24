@@ -40,6 +40,21 @@ namespace utils {
         }
     }
 
+    bool IsBCTextureFormat(wgpu::TextureFormat textureFormat) {
+        return std::find(utils::kBCFormats.begin(), utils::kBCFormats.end(), textureFormat) !=
+               utils::kBCFormats.end();
+    }
+
+    bool IsETC2TextureFormat(wgpu::TextureFormat textureFormat) {
+        return std::find(utils::kETC2Formats.begin(), utils::kETC2Formats.end(), textureFormat) !=
+               utils::kETC2Formats.end();
+    }
+
+    bool IsASTCTextureFormat(wgpu::TextureFormat textureFormat) {
+        return std::find(utils::kASTCFormats.begin(), utils::kASTCFormats.end(), textureFormat) !=
+               utils::kASTCFormats.end();
+    }
+
     uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat) {
         switch (textureFormat) {
             case wgpu::TextureFormat::R8Unorm:
@@ -105,6 +120,20 @@ namespace utils {
             case wgpu::TextureFormat::BC6HRGBFloat:
             case wgpu::TextureFormat::BC7RGBAUnorm:
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+                return 16u;
+
+            case wgpu::TextureFormat::ETC2RGB8Unorm:
+            case wgpu::TextureFormat::ETC2RGB8UnormSrgb:
+            case wgpu::TextureFormat::ETC2RGB8A1Unorm:
+            case wgpu::TextureFormat::ETC2RGB8A1UnormSrgb:
+            case wgpu::TextureFormat::EACR11Unorm:
+            case wgpu::TextureFormat::EACR11Snorm:
+                return 8u;
+
+            case wgpu::TextureFormat::ETC2RGBA8Unorm:
+            case wgpu::TextureFormat::ETC2RGBA8UnormSrgb:
+            case wgpu::TextureFormat::EACRG11Unorm:
+            case wgpu::TextureFormat::EACRG11Snorm:
                 return 16u;
 
             case wgpu::TextureFormat::Depth24Plus:
@@ -176,6 +205,16 @@ namespace utils {
             case wgpu::TextureFormat::BC6HRGBFloat:
             case wgpu::TextureFormat::BC7RGBAUnorm:
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+            case wgpu::TextureFormat::ETC2RGB8Unorm:
+            case wgpu::TextureFormat::ETC2RGB8UnormSrgb:
+            case wgpu::TextureFormat::ETC2RGB8A1Unorm:
+            case wgpu::TextureFormat::ETC2RGB8A1UnormSrgb:
+            case wgpu::TextureFormat::ETC2RGBA8Unorm:
+            case wgpu::TextureFormat::ETC2RGBA8UnormSrgb:
+            case wgpu::TextureFormat::EACR11Unorm:
+            case wgpu::TextureFormat::EACR11Snorm:
+            case wgpu::TextureFormat::EACRG11Unorm:
+            case wgpu::TextureFormat::EACRG11Snorm:
                 return 4u;
 
             // Block size of a multi-planar format depends on aspect.
@@ -244,6 +283,16 @@ namespace utils {
             case wgpu::TextureFormat::BC6HRGBFloat:
             case wgpu::TextureFormat::BC7RGBAUnorm:
             case wgpu::TextureFormat::BC7RGBAUnormSrgb:
+            case wgpu::TextureFormat::ETC2RGB8Unorm:
+            case wgpu::TextureFormat::ETC2RGB8UnormSrgb:
+            case wgpu::TextureFormat::ETC2RGB8A1Unorm:
+            case wgpu::TextureFormat::ETC2RGB8A1UnormSrgb:
+            case wgpu::TextureFormat::ETC2RGBA8Unorm:
+            case wgpu::TextureFormat::ETC2RGBA8UnormSrgb:
+            case wgpu::TextureFormat::EACR11Unorm:
+            case wgpu::TextureFormat::EACR11Snorm:
+            case wgpu::TextureFormat::EACRG11Unorm:
+            case wgpu::TextureFormat::EACRG11Snorm:
                 return 4u;
 
             // Block size of a multi-planar format depends on aspect.
