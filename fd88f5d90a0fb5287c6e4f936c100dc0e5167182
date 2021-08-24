@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0793759_833c5493",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-24T22:56:59Z",
+      "side": 1,
+      "message": "lgtm! with nit",
+      "revId": "fd88f5d90a0fb5287c6e4f936c100dc0e5167182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa6db457_748a16d7",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 879,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-24T22:56:59Z",
+      "side": 1,
+      "message": "these tabs should be spaces",
+      "revId": "fd88f5d90a0fb5287c6e4f936c100dc0e5167182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
