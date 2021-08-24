@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8401bc83_238eee31",
+        "filename": "src/dawn_native/Extensions.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-24T20:55:31Z",
+      "side": 1,
+      "message": "also, feature names in the WebGPU spec now have hyphens https://gpuweb.github.io/gpuweb/#feature-index we should use hyphens to match, and eventually change the other names to use hyphens as well",
+      "range": {
+        "startLine": 39,
+        "startChar": 16,
+        "endLine": 39,
+        "endChar": 40
+      },
+      "revId": "2b9656131fa35b2f6d52116bbeac17b1e40fca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "09b7d103_61df88bb",
         "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
         "patchSetId": 4
