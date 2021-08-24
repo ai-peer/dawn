@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d40f4a_f4bcfcfa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000395
+      },
+      "writtenOn": "2021-08-24T20:44:40Z",
+      "side": 1,
+      "message": "LGTM assuming it all compiles ok",
+      "revId": "2b9656131fa35b2f6d52116bbeac17b1e40fca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09b7d103_61df88bb",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000395
+      },
+      "writtenOn": "2021-08-24T20:44:40Z",
+      "side": 1,
+      "message": "we\u0027ll want to add a test like this for etc2 and astc. They have different block dimensions though, depending on the format",
+      "range": {
+        "startLine": 584,
+        "startChar": 3,
+        "endLine": 585,
+        "endChar": 80
+      },
+      "revId": "2b9656131fa35b2f6d52116bbeac17b1e40fca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "320dbb65_cb08320c",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000395
+      },
+      "writtenOn": "2021-08-24T20:44:40Z",
+      "side": 1,
+      "message": "this might fail to compile on at least one platform. Zero-sized arrays are a GNU C extension",
+      "range": {
+        "startLine": 92,
+        "startChar": 21,
+        "endLine": 92,
+        "endChar": 55
+      },
+      "revId": "2b9656131fa35b2f6d52116bbeac17b1e40fca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
