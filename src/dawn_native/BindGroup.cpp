@@ -70,7 +70,7 @@ namespace dawn_native {
 
             // Handle wgpu::WholeSize, avoiding overflows.
             if (entry.offset > bufferSize) {
-                return DAWN_VALIDATION_ERROR("Buffer binding doesn't fit in the buffer");
+                return DAWN_VALIDATION_ERROR("Binding offset ({}) doesn't fit in {} of size {}", entry.offset, entry.buffer, bufferSize);
             }
             uint64_t bindingSize =
                 (entry.size == wgpu::kWholeSize) ? bufferSize - entry.offset : entry.size;
@@ -252,7 +252,7 @@ namespace dawn_native {
         DAWN_TRY(device->ValidateObject(descriptor->layout));
 
         if (BindingIndex(descriptor->entryCount) != descriptor->layout->GetBindingCount()) {
-            return DAWN_VALIDATION_ERROR("numBindings mismatch");
+            return DAWN_VALIDATION_ERROR("Binding count {} should be {}, the binding count of {}", descriptor->entryCount, descriptor->layout->GetBindingCount(), descriptor->layout);
         }
 
         const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
@@ -264,13 +264,13 @@ namespace dawn_native {
 
             const auto& it = bindingMap.find(BindingNumber(entry.binding));
             if (it == bindingMap.end()) {
-                return DAWN_VALIDATION_ERROR("setting non-existent binding");
+                return DAWN_VALIDATION_ERROR("Binding {} doesn't exist in {}", entry.binding, descriptor->layout);
             }
             BindingIndex bindingIndex = it->second;
             ASSERT(bindingIndex < descriptor->layout->GetBindingCount());
 
             if (bindingsSet[bindingIndex]) {
-                return DAWN_VALIDATION_ERROR("binding set twice");
+                return DAWN_VALIDATION_ERROR("Binding {} specified twice", entry.binding);
             }
             bindingsSet.set(bindingIndex);
 
@@ -279,17 +279,17 @@ namespace dawn_native {
             // Perform binding-type specific validation.
             switch (bindingInfo.bindingType) {
                 case BindingInfoType::Buffer:
-                    DAWN_TRY(ValidateBufferBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateBufferBinding(device, entry, bindingInfo), "validating binding {} as a buffer binding against {}", entry.binding, descriptor->layout);
                     break;
                 case BindingInfoType::Texture:
                 case BindingInfoType::StorageTexture:
-                    DAWN_TRY(ValidateTextureBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateTextureBinding(device, entry, bindingInfo), "validating binding {} as a texture binding against {}", entry.binding, descriptor->layout);
                     break;
                 case BindingInfoType::Sampler:
-                    DAWN_TRY(ValidateSamplerBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateSamplerBinding(device, entry, bindingInfo), "validating binding {} as a sampler binding against {}", entry.binding, descriptor->layout);
                     break;
                 case BindingInfoType::ExternalTexture:
-                    DAWN_TRY(ValidateExternalTextureBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateExternalTextureBinding(device, entry, bindingInfo), "validating binding {} as an external texture binding against {}", entry.binding, descriptor->layout);
                     break;
             }
         }

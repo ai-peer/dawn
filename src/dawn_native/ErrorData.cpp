@@ -42,6 +42,10 @@ namespace dawn_native {
         mBacktrace.push_back(std::move(record));
     }
 
+    void ErrorData::AppendContext(std::string context) {
+        mContexts.push_back(std::move(context));
+    }
+
     InternalErrorType ErrorData::GetType() const {
         return mType;
     }
@@ -53,5 +57,14 @@ namespace dawn_native {
     const std::vector<ErrorData::BacktraceRecord>& ErrorData::GetBacktrace() const {
         return mBacktrace;
     }
+
+    const std::vector<std::string>& ErrorData::GetContexts() const {
+        return mContexts;
+    }
+
+    std::string RenderErrorContext(std::string s) {
+        return s;
+    }
+
 
 }  // namespace dawn_native

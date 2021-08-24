@@ -52,12 +52,30 @@ namespace dawn_native {
         InternalErrorType GetType() const;
         const std::string& GetMessage() const;
         const std::vector<BacktraceRecord>& GetBacktrace() const;
+        const std::vector<std::string>& GetContexts() const;
+
+        void AppendContext(std::string context);
 
       private:
         InternalErrorType mType;
         std::string mMessage;
         std::vector<BacktraceRecord> mBacktrace;
+        std::vector<std::string> mContexts;
     };
+
+    std::string RenderErrorContext(std::string s);
+
+    template<typename F>
+    std::string RenderErrorContext(F&& func) {
+        return std::move(F());
+    }
+
+    template<typename ... Args>
+    std::string RenderErrorContext(const char* formatString, Args&& ...) {
+        return std::string("Some formatted version of: ") + formatString;
+    }
+
+    // Something with ABSL format and variadic arguments?
 
 }  // namespace dawn_native
 

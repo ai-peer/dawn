@@ -143,7 +143,7 @@ void init() {
     bufferDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
     ubo = device.CreateBuffer(&bufferDesc);
 
-    bindGroup = utils::MakeBindGroup(device, bgl, {{0, ubo, 0, sizeof(ShaderData)}});
+    bindGroup = utils::MakeBindGroup(device, bgl, {{0, ubo, 1000000000, sizeof(ShaderData)}});
 }
 
 void frame() {
@@ -184,11 +184,11 @@ int main(int argc, const char* argv[]) {
     }
     init();
 
-    while (!ShouldQuit()) {
+    //while (!ShouldQuit()) {
         utils::ScopedAutoreleasePool pool;
         frame();
         utils::USleep(16000);
-    }
+    //}
 
     // TODO release stuff
 }

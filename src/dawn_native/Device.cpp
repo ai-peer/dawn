@@ -323,10 +323,17 @@ namespace dawn_native {
     void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
         ASSERT(error != nullptr);
         std::ostringstream ss;
+        const std::vector<std::string>& contexts = error->GetContexts();
+        for (const std::string& context : contexts) {
+            ss << "while " << context << "\n";
+        }
+
         ss << error->GetMessage();
-        for (const auto& callsite : error->GetBacktrace()) {
-            ss << "\n    at " << callsite.function << " (" << callsite.file << ":" << callsite.line
-               << ")";
+        if (contexts.empty()) {
+            for (const auto& callsite : error->GetBacktrace()) {
+                ss << "\n    at " << callsite.function << " (" << callsite.file << ":" << callsite.line
+                   << ")";
+            }
         }
         HandleError(error->GetType(), ss.str().c_str());
     }
@@ -1040,7 +1047,7 @@ namespace dawn_native {
         const BindGroupDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateBindGroupDescriptor(this, descriptor));
+            DAWN_TRY_CONTEXT(ValidateBindGroupDescriptor(this, descriptor), "validating the GPUBindGroupDescriptor");
         }
         return CreateBindGroupImpl(descriptor);
     }

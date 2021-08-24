@@ -72,7 +72,7 @@ namespace dawn_native {
 #define DAWN_MAKE_ERROR(TYPE, MESSAGE) \
     ::dawn_native::ErrorData::Create(TYPE, MESSAGE, __FILE__, __func__, __LINE__)
 
-#define DAWN_VALIDATION_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Validation, MESSAGE)
+#define DAWN_VALIDATION_ERROR(...) DAWN_MAKE_ERROR(InternalErrorType::Validation, RenderErrorContext(__VA_ARGS__))
 
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.
 // We can't even do a graceful shutdown because the Device is gone.
@@ -99,13 +99,20 @@ namespace dawn_native {
     // the current function.
 #define DAWN_TRY(EXPR) DAWN_TRY_WITH_CLEANUP(EXPR, {})
 
+#define DAWN_TRY_CONTEXT(EXPR, ...)  \
+    DAWN_TRY_WITH_CLEANUP(EXPR, { \
+        if (error->GetType() == InternalErrorType::Validation) { \
+            error->AppendContext(RenderErrorContext(__VA_ARGS__)); \
+        } \
+    })
+
 #define DAWN_TRY_WITH_CLEANUP(EXPR, BODY)                                   \
     {                                                                       \
         auto DAWN_LOCAL_VAR = EXPR;                                         \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                      \
-            {BODY} /* comment to force the formatter to insert a newline */ \
             std::unique_ptr<::dawn_native::ErrorData>                       \
                 error = DAWN_LOCAL_VAR.AcquireError();                      \
+            {BODY} /* comment to force the formatter to insert a newline */ \
             error->AppendBacktrace(__FILE__, __func__, __LINE__);           \
             return {std::move(error)};                                      \
         }                                                                   \
