@@ -16,6 +16,23 @@
       "message": "Tested against Chrome CQ with:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/3114450",
       "revId": "17c505ae9c499f3db052019458bf507d45197f28",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efb2a5d_57d149b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-24T11:12:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "17c505ae9c499f3db052019458bf507d45197f28",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
