@@ -226,6 +226,30 @@
       },
       "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65eab68_0394bcd7",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-24T09:21:32Z",
+      "side": 1,
+      "message": "nit: I think the !\u003d 0 wasn\u0027t removed.",
+      "parentUuid": "d3079c2d_8f1d551b",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 84,
+        "endChar": 60
+      },
+      "revId": "a63938cf63258f20a3c29984ba5ae572864cc15c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
