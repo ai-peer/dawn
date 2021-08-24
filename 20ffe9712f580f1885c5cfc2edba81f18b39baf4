@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf15027e_61db6dc7",
+        "filename": "src/tests/white_box/BufferAllocatedSizeTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-08-24T16:28:08Z",
+      "side": 1,
+      "message": "This compares the requested (allocation) size (buffer.width), not the (actual) allocated size (allocationInfo.size). The allocated size is not guaranteed to be the same as the requested size. For example, bufferSize is 4B requested but will be 64KB allocated (both are size-aligned to requiredBufferAlignment).  \n\nI\u0027d suggest renaming GetAllocatedSize() to GetAlignedSize() in the future to make this clearer.",
+      "revId": "20ffe9712f580f1885c5cfc2edba81f18b39baf4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
