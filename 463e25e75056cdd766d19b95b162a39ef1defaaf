@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3bd7af4_e5032d84",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-24T09:47:15Z",
+      "side": 1,
+      "message": "I worry that this is not going to scale to all the code generators that we have: we are going to need to add \"isenabled\" everywhere in the dawn_wire generators etc.\n\nWhat do you think of passing the list of tags as a command line argument instead and do filtering inside parse_json?\n\nThe change to have json_data for some extended use seems good because it allows adding some special cases easily (like jsrepr).\n\nAlso don\u0027t forget to update docs/codegen.md",
+      "revId": "463e25e75056cdd766d19b95b162a39ef1defaaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f9c80c3_e986ec93",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-24T09:47:15Z",
+      "side": 1,
+      "message": "These headers aren\u0027t used by Dawn so I don\u0027t think we should make them part of the public config if dawn.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 64
+      },
+      "revId": "463e25e75056cdd766d19b95b162a39ef1defaaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
