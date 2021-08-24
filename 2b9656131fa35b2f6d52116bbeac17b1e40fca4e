@@ -157,6 +157,30 @@
       },
       "revId": "2b9656131fa35b2f6d52116bbeac17b1e40fca4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af751803_03464d19",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-24T22:17:54Z",
+      "side": 1,
+      "message": "yea, looks ok! Probably not ok for T[0] but okay for array\u003cT, 0\u003e",
+      "parentUuid": "ae49d215_6f17929a",
+      "range": {
+        "startLine": 92,
+        "startChar": 21,
+        "endLine": 92,
+        "endChar": 55
+      },
+      "revId": "2b9656131fa35b2f6d52116bbeac17b1e40fca4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
