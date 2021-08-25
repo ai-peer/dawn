@@ -626,6 +626,13 @@
                 "args": [
                     {"name": "group index", "type": "uint32_t"}
                 ]
+            }, 
+            {
+                "name": "set label",
+                "returns": "void",
+                "args": [
+                    {"name": "label", "type": "char", "annotation": "const*", "length": "strlen"}
+                ]
             }
         ]
     },
@@ -1561,7 +1568,15 @@
                 "args": [
                     {"name": "group index", "type": "uint32_t"}
                 ]
+            }, 
+            {
+                "name": "set label",
+                "returns": "void",
+                "args": [
+                    {"name": "label", "type": "char", "annotation": "const*", "length": "strlen"}
+                ]
             }
+        
         ]
     },
 
@@ -1692,6 +1707,13 @@
                 "args": [
                     {"name": "callback", "type": "compilation info callback"},
                     {"name": "userdata", "type": "void", "annotation": "*"}
+                ]
+            }, 
+            {
+                "name": "set label",
+                "returns": "void",
+                "args": [
+                    {"name": "label", "type": "char", "annotation": "const*", "length": "strlen"}
                 ]
             }
         ]
