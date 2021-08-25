@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f63c4824_485164e8",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 542,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-25T09:24:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3bd7af4_e5032d84",
+      "revId": "463e25e75056cdd766d19b95b162a39ef1defaaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f9c80c3_e986ec93",
@@ -31,6 +49,30 @@
       "writtenOn": "2021-08-24T09:47:15Z",
       "side": 1,
       "message": "These headers aren\u0027t used by Dawn so I don\u0027t think we should make them part of the public config if dawn.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 64
+      },
+      "revId": "463e25e75056cdd766d19b95b162a39ef1defaaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9762cf66_cf2f0173",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-25T09:24:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f9c80c3_e986ec93",
       "range": {
         "startLine": 46,
         "startChar": 0,
