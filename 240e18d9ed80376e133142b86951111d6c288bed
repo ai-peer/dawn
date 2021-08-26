@@ -16,6 +16,23 @@
       "message": "This is to fix the google3 import.",
       "revId": "240e18d9ed80376e133142b86951111d6c288bed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11ade0a5_fffc2020",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-26T16:50:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "240e18d9ed80376e133142b86951111d6c288bed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
