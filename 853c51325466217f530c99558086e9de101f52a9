@@ -16,6 +16,23 @@
       "message": "PTAL. You\u0027ll see that I was unable to implement a backend label for ShaderModuleD3D12, because the backend object is just a struct and cannot accept a name. Additionally, I did not implement the SetLabel mechanism for ShaderModuleVk due to the shader caching mechanism - it seems like in order to make this work we\u0027d somehow need to know the pipelineLayout and entry point to acquire the correct cache key to retrieve the underlying object.",
       "revId": "853c51325466217f530c99558086e9de101f52a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66bbfd88_05b2b6fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T16:04:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "853c51325466217f530c99558086e9de101f52a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
