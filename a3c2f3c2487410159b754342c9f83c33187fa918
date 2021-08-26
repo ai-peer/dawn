@@ -50,6 +50,24 @@
       "message": "I think this block of code can be used in DeviceBase::CreateRenderPipeline as well. Ditto for compute pipelines. Both of these changes can be done as follow-up.",
       "revId": "a3c2f3c2487410159b754342c9f83c33187fa918",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb96004_011c9de7",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1313,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-08-26T00:27:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4491f231_e80f2750",
+      "revId": "a3c2f3c2487410159b754342c9f83c33187fa918",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
