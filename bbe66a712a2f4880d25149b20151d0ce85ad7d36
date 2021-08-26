@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6396a3ea_26f09c0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "LGTM FWIW",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099780a7_4cf77154",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "I think these should still be exposed by Dawn. They are used in many places. Same for BackendType and AdapterType\n\nIn general no existing thing should be tagged as something that would cause it to not be included in Dawn: we should be making use of all the things in this JSON",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f7cfd8_421fc7ae",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "nit: this shouldn\u0027t be tagged I think.",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769d430e_55575f43",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a40ebd16_1fcf8dca",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bc63086_644911b4",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "How come we already have stencil8? It\u0027s not implemented AFAIK",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd8abaf_50eb5a82",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "nit: maybe we could filter before actually creating the item.",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94ae4c09_09928a30",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "this seems to require emscripten_bits \u003d false to prevent some enums from being generated. Wouldn\u0027t it be better to tag more things as emscripten instead?",
+      "range": {
+        "startLine": 760,
+        "startChar": 44,
+        "endLine": 760,
+        "endChar": 54
+      },
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49725183_b6a79e35",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T08:41:02Z",
+      "side": 1,
+      "message": "nit: What does this - do? There\u0027s nothing after it on the line. Is it to remove the empty line between endfor and WGPUChainedStruct?",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 100,
+        "endChar": 11
+      },
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
