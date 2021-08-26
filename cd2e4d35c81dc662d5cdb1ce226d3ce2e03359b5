@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2eeab79_ba37297b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-26T10:08:07Z",
+      "side": 1,
+      "message": "LGTM, can we do the same simplification for compute pipelines?",
+      "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
