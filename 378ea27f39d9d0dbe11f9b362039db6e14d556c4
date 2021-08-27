@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58a60b9e_14534ccb",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 0,
+      "message": "unit: I think if you put this above CompressedTextureFormatSpecificTest, the diff will be nicer to read",
+      "range": {
+        "startLine": 1132,
+        "startChar": 0,
+        "endLine": 1132,
+        "endChar": 80
+      },
+      "revId": "378ea27f39d9d0dbe11f9b362039db6e14d556c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

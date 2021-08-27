@@ -1,0 +1,176 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea134713_594034e9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 7
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "nice! :D I\u0027m quite pleasantly surprised about how much test code we could reuse here",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 139
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92e6285b_e0b9fceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "LGTM, some nits",
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44430ecb_aff79b71",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "surprised we don\u0027t have to do this in the Metal backend. Because Metal has default: UNREACHABLE()\n\nwe should fix that and explicitly list all cases, otherwise it\u0027s easy for an enum to be added and forget to handle it",
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f6739e6_393694bc",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "nit: don\u0027t need to add these yet, unless we\u0027re going to have a test that uses them in this suite",
+      "range": {
+        "startLine": 1276,
+        "startChar": 8,
+        "endLine": 1278,
+        "endChar": 0
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca397b7_3594378b",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "nit: BC -\u003e ETC",
+      "range": {
+        "startLine": 678,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 80
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a190d5d_5a94b89e",
+        "filename": "src/utils/TextureUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "nit: prefer a switch statement here",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc65cfda_e5320928",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "hm, this was already off by two. Do you know why this is different from kKnownFormatCount ?",
+      "range": {
+        "startLine": 25,
+        "startChar": 52,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f4ad64b_2a72b8f4",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T21:33:49Z",
+      "side": 1,
+      "message": "I think it would be good to add some static_asserts that the size of this array is the sum of the sizes of the BC/ETC2/ASTC arrays",
+      "range": {
+        "startLine": 109,
+        "startChar": 57,
+        "endLine": 109,
+        "endChar": 75
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
