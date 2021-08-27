@@ -50,6 +50,24 @@
       "message": "Q: do we need to mock CancelCallbacksForDisconnect here?",
       "revId": "1cbcf4b5404d14406cccc24bfe73ccb8b1b1bb6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1307fe61_78bec9c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T16:24:22Z",
+      "side": 1,
+      "message": "https://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/src/dawn/mock_webgpu.h is the stuff we can mock. Right now it\u0027s only the stuff in the public API, and calling of callbacks.\n\nSo while we can\u0027t directly mock CancelCallbacksForDisconnect, we can still have mock expectations on the callbacks that are called as a result of it.\n\nClient.cpp calls CancelCallbacksForDisconnect on all objects when Client::Disconnect is called.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_wire/client/Client.cpp;l\u003d133?q\u003dCancelCallbacksForDisconnect\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "parentUuid": "81d110b7_54ccc980",
+      "revId": "1cbcf4b5404d14406cccc24bfe73ccb8b1b1bb6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
