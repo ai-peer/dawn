@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "728c5b14_f20e48b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T23:14:13Z",
+      "side": 1,
+      "message": "one comment, otherwise LGTM. Good to know this is not actually a security issue and iterators are not invalidated.",
+      "revId": "2b38c816b815f8b7ef956c877df62eeef18d1151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec70b66_0769f7e4",
+        "filename": "src/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T23:14:13Z",
+      "side": 1,
+      "message": "you could put these in a struct, and then pass the pointer to that struct instead of the `this` pointer at [1]. Then you don\u0027t need the global statics.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 24
+      },
+      "revId": "2b38c816b815f8b7ef956c877df62eeef18d1151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d08ca19_ba1a8b0a",
+        "filename": "src/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T23:14:13Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 116,
+        "startChar": 80,
+        "endLine": 116,
+        "endChar": 84
+      },
+      "revId": "2b38c816b815f8b7ef956c877df62eeef18d1151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a24eaf9_4bd6d930",
+        "filename": "src/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T23:14:13Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 116,
+        "startChar": 80,
+        "endLine": 116,
+        "endChar": 84
+      },
+      "revId": "2b38c816b815f8b7ef956c877df62eeef18d1151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
