@@ -33,6 +33,24 @@
       "message": "LGTM, can we do the same simplification for compute pipelines?",
       "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80469c04_316f6ab6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-08-27T01:37:29Z",
+      "side": 1,
+      "message": "Oh I think we don\u0027t need to do so as CreateComputePipeline() has already been in this pattern (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/Device.cpp;l\u003d1101).",
+      "parentUuid": "e2eeab79_ba37297b",
+      "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
