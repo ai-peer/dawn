@@ -97,3 +97,30 @@ TEST_F(WireQueueTests, OnSubmittedWorkDoneAfterDisconnect) {
         .Times(1);
     wgpuQueueOnSubmittedWorkDone(queue, 0u, ToMockQueueWorkDone, this);
 }
+
+// Dirty hack to mimic user callback sending new requests
+static WireQueueTests* pTest;
+static WGPUQueue* pTestQueue;
+
+static void ToMockQueueWorkDoneWithNewRequests(WGPUQueueWorkDoneStatus status, void* userdata) {
+    mockQueueWorkDoneCallback->Call(status, userdata);
+    // Mimic the user callback is sending new requests
+    ASSERT_NE(pTest, nullptr);
+    ASSERT_NE(pTestQueue, nullptr);
+    wgpuQueueOnSubmittedWorkDone(*pTestQueue, 0u, ToMockQueueWorkDone, pTest);
+}
+
+TEST_F(WireQueueTests, OnSubmittedWorkDoneInsideCallbackBeforeDisconnect) {
+    pTest = this;
+    pTestQueue = &queue;
+    wgpuQueueOnSubmittedWorkDone(queue, 0u, ToMockQueueWorkDoneWithNewRequests, this);
+    EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, 0u, _, _))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Error);
+        }));
+    FlushClient();
+
+    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, this))
+        .Times(2);
+    GetWireClient()->Disconnect();
+}
