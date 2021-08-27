@@ -160,26 +160,12 @@ namespace dawn_native { namespace d3d12 {
         // |ranges| will have resized and the pointers in the |rootParameter|s will be invalid.
         ASSERT(rangeIndex == rangesCount);
 
-        // Since Tint's HLSL writer doesn't currently map sets to spaces, we use the default space
-        // (0).
-        mFirstIndexOffsetRegisterSpace = 0;
+        // Use a register space that a user cannot set.
+        mFirstIndexOffsetRegisterSpace = kMaxBindGroups + 1;
         BindGroupIndex firstOffsetGroup{mFirstIndexOffsetRegisterSpace};
-        if (GetBindGroupLayoutsMask()[firstOffsetGroup]) {
-            // Find the last register used on firstOffsetGroup.
-            auto bgl = ToBackend(GetBindGroupLayout(firstOffsetGroup));
-            uint32_t maxRegister = 0;
-            for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount();
-                 ++bindingIndex) {
-                uint32_t shaderRegister = bgl->GetShaderRegister(bindingIndex);
-                if (shaderRegister > maxRegister) {
-                    maxRegister = shaderRegister;
-                }
-            }
-            mFirstIndexOffsetShaderRegister = maxRegister + 1;
-        } else {
-            // firstOffsetGroup is not in use, we can use the first register.
-            mFirstIndexOffsetShaderRegister = 0;
-        }
+        ASSERT(!GetBindGroupLayoutsMask()[firstOffsetGroup]);
+        // firstOffsetGroup is not in use, we can use the first register.
+        mFirstIndexOffsetShaderRegister = 0;
 
         D3D12_ROOT_PARAMETER indexOffsetConstants{};
         indexOffsetConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
