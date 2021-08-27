@@ -86,6 +86,46 @@
       "message": "Still LGTM. I think this is trivial enough that second review can come later.",
       "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2d1f87_5be7529c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T14:55:32Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56a49e18_0ba2c376",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-08-27T14:55:32Z",
+      "side": 1,
+      "message": "nit: I think we should name this \"ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults\".\n\nIt\u0027s easy to think that the RenderPipelineDescriptor is also getting validated, but it\u0027s not; only the default layout.",
+      "range": {
+        "startLine": 1272,
+        "startChar": 35,
+        "endLine": 1272,
+        "endChar": 85
+      },
+      "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
