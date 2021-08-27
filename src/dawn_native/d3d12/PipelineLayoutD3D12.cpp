@@ -170,9 +170,7 @@ namespace dawn_native { namespace d3d12 {
         D3D12_ROOT_PARAMETER indexOffsetConstants{};
         indexOffsetConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_VERTEX;
         indexOffsetConstants.ParameterType = D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
-        // Always allocate 2 constants for vertex_index and instance_index
-        // NOTE: We should consider delaying root signature creation until we know how many values
-        // we need
+        // The index offset constants contains: [vertex_index : u32, instance_index : u32]
         indexOffsetConstants.Constants.Num32BitValues = 2;
         indexOffsetConstants.Constants.RegisterSpace = mFirstIndexOffsetRegisterSpace;
         indexOffsetConstants.Constants.ShaderRegister = mFirstIndexOffsetShaderRegister;
