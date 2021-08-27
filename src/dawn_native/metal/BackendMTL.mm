@@ -227,19 +227,6 @@ namespace dawn_native { namespace metal {
                 if ([*mDevice supportsFamily:MTLGPUFamilyMac2] ||
                     [*mDevice supportsFamily:MTLGPUFamilyApple5]) {
                     mSupportedExtensions.EnableExtension(Extension::PipelineStatisticsQuery);
-
-                    // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
-                    // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
-                    // has been fixed on macOS 11.0. See crbug.com/dawn/545
-                    BOOL enableTimestampQuery = !gpu_info::IsAMD(GetPCIInfo().vendorId);
-#if defined(DAWN_PLATFORM_MACOS)
-                    // TODO(crbug.com/dawn/940): Disable timestamp query on macOS 11.0+. Need to
-                    // figure out what to do with dstOffset alignment on that system.
-                    enableTimestampQuery &= !IsMacOSVersionAtLeast(11);
-#endif
-                    if (enableTimestampQuery) {
-                        mSupportedExtensions.EnableExtension(Extension::TimestampQuery);
-                    }
                 }
             }
             if (@available(macOS 10.11, iOS 11.0, *)) {
