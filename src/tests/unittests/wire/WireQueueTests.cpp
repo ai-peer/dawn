@@ -97,3 +97,34 @@ TEST_F(WireQueueTests, OnSubmittedWorkDoneAfterDisconnect) {
         .Times(1);
     wgpuQueueOnSubmittedWorkDone(queue, 0u, ToMockQueueWorkDone, this);
 }
+
+// Dirty hack to pass in test context into user callback
+struct TestData {
+    WireQueueTests* pTest;
+    WGPUQueue* pTestQueue;
+};
+
+static void ToMockQueueWorkDoneWithNewRequests(WGPUQueueWorkDoneStatus status, void* userdata) {
+    TestData* testData = reinterpret_cast<TestData*>(userdata);
+    // Mimic the user callback is sending new requests
+    ASSERT_NE(testData, nullptr);
+    ASSERT_NE(testData->pTest, nullptr);
+    ASSERT_NE(testData->pTestQueue, nullptr);
+    mockQueueWorkDoneCallback->Call(status, testData->pTest);
+
+    wgpuQueueOnSubmittedWorkDone(*(testData->pTestQueue), 0u, ToMockQueueWorkDone, testData->pTest);
+}
+
+TEST_F(WireQueueTests, OnSubmittedWorkDoneInsideCallbackBeforeDisconnect) {
+    TestData testData = {this, &queue};
+    wgpuQueueOnSubmittedWorkDone(queue, 0u, ToMockQueueWorkDoneWithNewRequests, &testData);
+    EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, 0u, _, _))
+        .WillOnce(InvokeWithoutArgs([&]() {
+            api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Error);
+        }));
+    FlushClient();
+
+    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, this))
+        .Times(2);
+    GetWireClient()->Disconnect();
+}
