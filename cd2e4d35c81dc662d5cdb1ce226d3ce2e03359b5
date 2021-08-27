@@ -51,6 +51,41 @@
       "parentUuid": "e2eeab79_ba37297b",
       "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efff109c_c2a0fff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-27T07:28:31Z",
+      "side": 1,
+      "message": "I should have checked. SGTM",
+      "parentUuid": "80469c04_316f6ab6",
+      "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "244db55e_9bb29b89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-27T07:28:31Z",
+      "side": 1,
+      "message": "Still LGTM. I think this is trivial enough that second review can come later.",
+      "revId": "cd2e4d35c81dc662d5cdb1ce226d3ce2e03359b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
