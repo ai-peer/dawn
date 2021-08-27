@@ -16,6 +16,23 @@
       "message": "A superset of https://dawn-review.googlesource.com/c/dawn/+/62700",
       "revId": "5bb6d3d5032501900b3740865feb2ced95fb6917",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "070d1b7e_68e68131",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-08-27T08:44:55Z",
+      "side": 1,
+      "message": "Thanks",
+      "revId": "5bb6d3d5032501900b3740865feb2ced95fb6917",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
