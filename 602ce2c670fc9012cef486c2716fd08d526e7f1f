@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b6ace5_d3883437",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-27T00:09:43Z",
+      "side": 1,
+      "message": "I\u0027ve updated the generated struct types in Dawn \u0026 filed a bug in Tint: https://crbug.com/tint/1137\n\nPlease let me know what I should do with this CL, I\u0027m happy to leave it up and do whatever fixes are needed once the tint side is up or abandon it and have it as reference.",
+      "revId": "602ce2c670fc9012cef486c2716fd08d526e7f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

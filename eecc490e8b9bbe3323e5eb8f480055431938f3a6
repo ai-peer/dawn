@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52bda125_ec31c221",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-27T00:09:43Z",
+      "side": 1,
+      "message": "Seems reasonable to me and, on the Dawn side, ends up not being a huge change.",
+      "parentUuid": "14d6b6f1_18f9ac0d",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9979e418_f44d80aa",
@@ -173,6 +191,24 @@
       "side": 1,
       "message": "Yeah I think so. If you don\u0027t want to go to all that length for a follow up, you can just file an issue on Tint to do this and we can pick this CL back up once it is completed.",
       "parentUuid": "4c3a01db_53e42566",
+      "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "924702ca_e5ca0f1e",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-08-27T00:09:43Z",
+      "side": 1,
+      "message": "I think the tint change should probably go first? I\u0027ll go ahead and file the issue.",
+      "parentUuid": "ffb435ca_55483364",
       "revId": "eecc490e8b9bbe3323e5eb8f480055431938f3a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
