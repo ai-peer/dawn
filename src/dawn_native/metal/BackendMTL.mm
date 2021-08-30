@@ -236,12 +236,12 @@ namespace dawn_native { namespace metal {
 
     class Adapter : public AdapterBase {
       public:
-        Adapter(InstanceBase* instance, id<MTLDevice> device)
-            : AdapterBase(instance, wgpu::BackendType::Metal), mDevice(device) {
+        Adapter(InstanceBase* instance, NSPRef<id<MTLDevice>> device)
+            : AdapterBase(instance, wgpu::BackendType::Metal), mDevice(std::move(device)) {
             mPCIInfo.name = std::string([[*mDevice name] UTF8String]);
 
             PCIIDs ids;
-            if (!instance->ConsumedError(GetDevicePCIInfo(device, &ids))) {
+            if (!instance->ConsumedError(GetDevicePCIInfo(device.Get(), &ids))) {
                 mPCIInfo.vendorId = ids.vendorId;
                 mPCIInfo.deviceId = ids.deviceId;
             }
@@ -250,7 +250,7 @@ namespace dawn_native { namespace metal {
             mAdapterType = wgpu::AdapterType::IntegratedGPU;
             const char* systemName = "iOS ";
 #elif defined(DAWN_PLATFORM_MACOS)
-            if ([device isLowPower]) {
+            if ([*device isLowPower]) {
                 mAdapterType = wgpu::AdapterType::IntegratedGPU;
             } else {
                 mAdapterType = wgpu::AdapterType::DiscreteGPU;
@@ -336,9 +336,8 @@ namespace dawn_native { namespace metal {
             supportedVersion = YES;
 
             NSRef<NSArray<id<MTLDevice>>> devices = AcquireNSRef(MTLCopyAllDevices());
-
             for (id<MTLDevice> device in devices.Get()) {
-                adapters.push_back(std::make_unique<Adapter>(GetInstance(), device));
+                adapters.push_back(std::make_unique<Adapter>(GetInstance(), AcquireNSPRef(device)));
             }
         }
 #endif
@@ -347,8 +346,8 @@ namespace dawn_native { namespace metal {
         if (@available(iOS 8.0, *)) {
             supportedVersion = YES;
             // iOS only has a single device so MTLCopyAllDevices doesn't exist there.
-            adapters.push_back(
-                std::make_unique<Adapter>(GetInstance(), MTLCreateSystemDefaultDevice()));
+            adapters.push_back(std::make_unique<Adapter>(
+                GetInstance(), AcquireNSPRef(MTLCreateSystemDefaultDevice())));
         }
 #endif
         if (!supportedVersion) {
