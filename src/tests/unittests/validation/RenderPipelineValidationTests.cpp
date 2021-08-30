@@ -42,6 +42,26 @@ class RenderPipelineValidationTest : public ValidationTest {
             })");
     }
 
+    void TestCreateRenderPipelineWithAndWithoutFragment(wgpu::RenderPipelineDescriptor* descriptor,
+                                                        bool isSuccess) {
+        // Create render pipeline with original descriptor
+        if (isSuccess) {
+            device.CreateRenderPipeline(descriptor);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(descriptor));
+        }
+        // Set the fragment of descriptor to nullptr to create vertex-only pipeline
+        wgpu::FragmentState const* fragment = descriptor->fragment;
+        descriptor->fragment = nullptr;
+        if (isSuccess) {
+            device.CreateRenderPipeline(descriptor);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(descriptor));
+        }
+        // Set back the fragment
+        descriptor->fragment = fragment;
+    }
+
     wgpu::ShaderModule vsModule;
     wgpu::ShaderModule fsModule;
     wgpu::ShaderModule fsModuleUint;
@@ -63,7 +83,7 @@ TEST_F(RenderPipelineValidationTest, CreationSuccess) {
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
 
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
 }
 
@@ -75,7 +95,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
         descriptor.vertex.module = vsModule;
         descriptor.cFragment.module = fsModule;
         descriptor.EnableDepthStencil();
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
 
     // Infinite depth bias clamp is valid
@@ -85,7 +105,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
         depthStencil->depthBiasClamp = INFINITY;
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
     // NAN depth bias clamp is invalid
     {
@@ -94,7 +114,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
         depthStencil->depthBiasClamp = NAN;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
 
     // Infinite depth bias slope is valid
@@ -104,7 +124,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
         depthStencil->depthBiasSlopeScale = INFINITY;
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
     // NAN depth bias slope is invalid
     {
@@ -113,7 +133,7 @@ TEST_F(RenderPipelineValidationTest, DepthBiasParameterNotBeNaN) {
         descriptor.cFragment.module = fsModule;
         wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
         depthStencil->depthBiasSlopeScale = NAN;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
 }
 
@@ -357,7 +377,7 @@ TEST_F(RenderPipelineValidationTest, SampleCount) {
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 4;
 
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
 
     {
@@ -366,7 +386,7 @@ TEST_F(RenderPipelineValidationTest, SampleCount) {
         descriptor.cFragment.module = fsModule;
         descriptor.multisample.count = 3;
 
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
 }
 
@@ -520,7 +540,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
         descriptor.multisample.count = 4;
         descriptor.multisample.alphaToCoverageEnabled = true;
 
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
 
     {
@@ -530,7 +550,7 @@ TEST_F(RenderPipelineValidationTest, AlphaToCoverageAndSampleCount) {
         descriptor.multisample.count = 1;
         descriptor.multisample.alphaToCoverageEnabled = true;
 
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
 }
 
@@ -640,7 +660,7 @@ TEST_F(RenderPipelineValidationTest, StorageBufferInVertexShaderNoLayout) {
     descriptor.layout = nullptr;
     descriptor.vertex.module = vsModuleWithStorageBuffer;
     descriptor.cFragment.module = fsModule;
-    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 }
 
 // Tests that strip primitive topologies require an index format
@@ -670,10 +690,10 @@ TEST_F(RenderPipelineValidationTest, StripIndexFormatRequired) {
             if (indexFormat == wgpu::IndexFormat::Undefined) {
                 // Fail because the index format is undefined and the primitive
                 // topology is a strip type.
-                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+                TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
             } else {
                 // Succeeds because the index format is given.
-                device.CreateRenderPipeline(&descriptor);
+                TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
             }
         }
     }
@@ -689,9 +709,9 @@ TEST_F(RenderPipelineValidationTest, StripIndexFormatRequired) {
             if (indexFormat == wgpu::IndexFormat::Undefined) {
                 // Succeeds even when the index format is undefined because the
                 // primitive topology isn't a strip type.
-                device.CreateRenderPipeline(&descriptor);
+                TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
             } else {
-                ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+                TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
             }
         }
     }
@@ -706,7 +726,7 @@ TEST_F(RenderPipelineValidationTest, ClampDepthWithoutExtension) {
         wgpu::PrimitiveDepthClampingState clampingState;
         clampingState.clampDepth = true;
         descriptor.primitive.nextInChain = &clampingState;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
     {
         utils::ComboRenderPipelineDescriptor descriptor;
@@ -715,7 +735,7 @@ TEST_F(RenderPipelineValidationTest, ClampDepthWithoutExtension) {
         wgpu::PrimitiveDepthClampingState clampingState;
         clampingState.clampDepth = false;
         descriptor.primitive.nextInChain = &clampingState;
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
 }
 
@@ -728,11 +748,11 @@ TEST_F(RenderPipelineValidationTest, DepthCompareUndefinedIsError) {
 
     // Control case: Always is valid.
     descriptor.cDepthStencil.depthCompare = wgpu::CompareFunction::Always;
-    device.CreateRenderPipeline(&descriptor);
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
 
     // Error case: Undefined is invalid.
     descriptor.cDepthStencil.depthCompare = wgpu::CompareFunction::Undefined;
-    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 }
 
 // Test that the entryPoint names must be present for the correct stage in the shader module.
@@ -754,17 +774,17 @@ TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
     descriptor.cFragment.entryPoint = "fragment_main";
 
     // Success case.
-    device.CreateRenderPipeline(&descriptor);
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
 
     // Test for the vertex stage entryPoint name.
     {
         // The entryPoint name doesn't exist in the module.
         descriptor.vertex.entryPoint = "main";
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 
         // The entryPoint name exists, but not for the correct stage.
         descriptor.vertex.entryPoint = "fragment_main";
-        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
     }
 
     descriptor.vertex.entryPoint = "vertex_main";
@@ -807,20 +827,20 @@ TEST_F(RenderPipelineValidationTest, VertexAttribCorrectEntryPoint) {
     // Success cases, the attribute used by the entryPoint is declared in the pipeline.
     descriptor.vertex.entryPoint = "vertex0";
     descriptor.cAttributes[0].shaderLocation = 0;
-    device.CreateRenderPipeline(&descriptor);
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
 
     descriptor.vertex.entryPoint = "vertex1";
     descriptor.cAttributes[0].shaderLocation = 1;
-    device.CreateRenderPipeline(&descriptor);
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
 
     // Error cases, the attribute used by the entryPoint isn't declared in the pipeline.
     descriptor.vertex.entryPoint = "vertex1";
     descriptor.cAttributes[0].shaderLocation = 0;
-    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 
     descriptor.vertex.entryPoint = "vertex0";
     descriptor.cAttributes[0].shaderLocation = 1;
-    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 }
 
 // Test that fragment output validation is for the correct entryPoint
@@ -1022,20 +1042,20 @@ TEST_F(RenderPipelineValidationTest, DISABLED_BindingsFromCorrectEntryPoint) {
     // Success case, the BGL matches the bindings used by the entryPoint
     descriptor.vertex.entryPoint = "vertex0";
     descriptor.layout = layout0;
-    device.CreateRenderPipeline(&descriptor);
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
 
     descriptor.vertex.entryPoint = "vertex1";
     descriptor.layout = layout1;
-    device.CreateRenderPipeline(&descriptor);
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
 
     // Error case, the BGL doesn't match the bindings used by the entryPoint
     descriptor.vertex.entryPoint = "vertex1";
     descriptor.layout = layout0;
-    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 
     descriptor.vertex.entryPoint = "vertex0";
     descriptor.layout = layout1;
-    ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, false);
 }
 
 class DepthClampingValidationTest : public RenderPipelineValidationTest {
@@ -1056,7 +1076,7 @@ TEST_F(DepthClampingValidationTest, Success) {
         wgpu::PrimitiveDepthClampingState clampingState;
         clampingState.clampDepth = true;
         descriptor.primitive.nextInChain = &clampingState;
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
     {
         utils::ComboRenderPipelineDescriptor descriptor;
@@ -1065,7 +1085,7 @@ TEST_F(DepthClampingValidationTest, Success) {
         wgpu::PrimitiveDepthClampingState clampingState;
         clampingState.clampDepth = false;
         descriptor.primitive.nextInChain = &clampingState;
-        device.CreateRenderPipeline(&descriptor);
+        TestCreateRenderPipelineWithAndWithoutFragment(&descriptor, true);
     }
 }
 
