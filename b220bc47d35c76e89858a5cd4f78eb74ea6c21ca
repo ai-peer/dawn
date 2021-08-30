@@ -75,6 +75,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23dc6805_42a59fe7",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44430ecb_aff79b71",
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f6739e6_393694bc",
@@ -88,6 +106,30 @@
       "writtenOn": "2021-08-27T21:33:49Z",
       "side": 1,
       "message": "nit: don\u0027t need to add these yet, unless we\u0027re going to have a test that uses them in this suite",
+      "range": {
+        "startLine": 1276,
+        "startChar": 8,
+        "endLine": 1278,
+        "endChar": 0
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fed083ea_93c5912a",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1278,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f6739e6_393694bc",
       "range": {
         "startLine": 1276,
         "startChar": 8,
@@ -115,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "965e3d85_f75f1399",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4cba77c_76f2afe5",
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d75ec5e_924fc344",
@@ -128,6 +188,30 @@
       "writtenOn": "2021-08-30T07:49:59Z",
       "side": 1,
       "message": "nit: compressed",
+      "range": {
+        "startLine": 622,
+        "startChar": 70,
+        "endLine": 622,
+        "endChar": 72
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568a1ec2_1edc7806",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d75ec5e_924fc344",
       "range": {
         "startLine": 622,
         "startChar": 70,
@@ -161,6 +245,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e0704ee_44ddd5f1",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 632,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5c3d5199_d6dc1a8d",
+      "range": {
+        "startLine": 632,
+        "startChar": 61,
+        "endLine": 632,
+        "endChar": 63
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73c5dde2_53c8cc51",
@@ -174,6 +282,24 @@
       "writtenOn": "2021-08-30T07:49:59Z",
       "side": 1,
       "message": "nit: here and for with, and for ETC, I think we should use 30 instead of 31 so that we check the size must be aligned to 4 and alignment to 2 is not enough (so we test exactly both sides of the limit)",
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "762b135b_d0d70b3e",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73c5dde2_53c8cc51",
       "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +327,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bb83eb5_c3cca094",
+        "filename": "src/tests/unittests/validation/TextureValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ca397b7_3594378b",
+      "range": {
+        "startLine": 678,
+        "startChar": 0,
+        "endLine": 679,
+        "endChar": 80
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b69477f_990d5b3e",
@@ -218,6 +368,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9e15202_29232d35",
+        "filename": "src/tests/unittests/wire/WireWGPUDevicePropertiesTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b69477f_990d5b3e",
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a190d5d_5a94b89e",
@@ -231,6 +399,30 @@
       "writtenOn": "2021-08-27T21:33:49Z",
       "side": 1,
       "message": "nit: prefer a switch statement here",
+      "range": {
+        "startLine": 43,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34af0467_16d315cd",
+        "filename": "src/utils/TextureUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a190d5d_5a94b89e",
       "range": {
         "startLine": 43,
         "startChar": 4,
@@ -288,6 +480,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19e16723_a68fa8c6",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Yup those are the missing ones. As Corentin suggested, probably will not add them to this list atm. If needed we can do so in another change.",
+      "parentUuid": "a88a192c_f921dd58",
+      "range": {
+        "startLine": 25,
+        "startChar": 52,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f4ad64b_2a72b8f4",
@@ -301,6 +517,30 @@
       "writtenOn": "2021-08-27T21:33:49Z",
       "side": 1,
       "message": "I think it would be good to add some static_asserts that the size of this array is the sum of the sizes of the BC/ETC2/ASTC arrays",
+      "range": {
+        "startLine": 109,
+        "startChar": 57,
+        "endLine": 109,
+        "endChar": 75
+      },
+      "revId": "b220bc47d35c76e89858a5cd4f78eb74ea6c21ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaec9dd5_962c1290",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-08-30T23:07:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f4ad64b_2a72b8f4",
       "range": {
         "startLine": 109,
         "startChar": 57,
