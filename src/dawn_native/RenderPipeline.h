@@ -57,7 +57,8 @@ namespace dawn_native {
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor);
 
-    std::vector<StageAndDescriptor> GetStages(const RenderPipelineDescriptor* descriptor);
+    std::vector<StageAndDescriptor> GetRenderPipelineStages(
+        const RenderPipelineDescriptor* descriptor);
 
     size_t IndexFormatSize(wgpu::IndexFormat format);
 
