@@ -59,6 +59,7 @@ namespace dawn_native {
         DisableWorkgroupInit,
         DisableSymbolRenaming,
         UseUserDefinedLabelsInBackend,
+        MetalUseDummyFragmentInVertexOnlyPipeline,
 
         EnumCount,
         InvalidEnum = EnumCount,

@@ -217,6 +217,12 @@ namespace dawn_native {
               "Enables calls to SetLabel to be forwarded to backend-specific APIs that label "
               "objects.",
               "https://crbug.com/dawn/840"}},
+            {Toggle::MetalUseDummyFragmentInVertexOnlyPipeline,
+             {"metal_use_dummy_fragment_in_vertex_only_pipeline",
+              "Use a dummy empty fragment shader in vertex only render pipeline for Metal. This "
+              "workaround is by default enabled on some devices with Intel GPU to ensure the depth "
+              "result is correct.",
+              "https://crbug.com/dawn/136"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
     }  // anonymous namespace
