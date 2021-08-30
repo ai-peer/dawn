@@ -160,12 +160,19 @@ namespace dawn_native {
                 // Ref will keep the pipeline layout alive until the end of the function where
                 // the pipeline will take another reference.
                 DAWN_TRY_ASSIGN(layoutRef,
-                                PipelineLayoutBase::CreateDefault(device, GetStages(&descriptor)));
+                                PipelineLayoutBase::CreateDefault(
+                                    device, GetRenderStagesAndSetDummyShader(device, &descriptor)));
                 outDescriptor->layout = layoutRef.Get();
             }
 
             return layoutRef;
         }
+
+        static const char sEmptyFragmentShader[] = R"(
+            [[stage(fragment)]] fn fs_empty_main() {
+                // The empty fragment shader, used as a work around for vertex-only render pipeline
+            }
+        )";
 
     }  // anonymous namespace
 
@@ -1285,6 +1292,22 @@ namespace dawn_native {
             DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
         }
 
+        // If dummy fragment shader module is needed, ensure that it is ready
+        if (IsToggleEnabled(Toggle::UseDummyFragmentInVertexOnlyPipeline) &&
+            (descriptor->fragment == nullptr)) {
+            InternalPipelineStore* store = GetInternalPipelineStore();
+
+            // Create dummy fragment shader module if not cached before.
+            if (store->dummyFragmentShader == nullptr) {
+                ShaderModuleDescriptor descriptor;
+                ShaderModuleWGSLDescriptor wgslDesc;
+                wgslDesc.source = sEmptyFragmentShader;
+                descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
+
+                DAWN_TRY_ASSIGN(store->dummyFragmentShader, CreateShaderModule(&descriptor));
+            }
+        }
+
         // Ref will keep the pipeline layout alive until the end of the function where
         // the pipeline will take another reference.
         Ref<PipelineLayoutBase> layoutRef;
@@ -1309,6 +1332,22 @@ namespace dawn_native {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
             DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
+        }
+
+        // If dummy fragment shader module is needed, ensure that it is ready
+        if (IsToggleEnabled(Toggle::UseDummyFragmentInVertexOnlyPipeline) &&
+            (descriptor->fragment == nullptr)) {
+            InternalPipelineStore* store = GetInternalPipelineStore();
+
+            // Create dummy fragment shader module if not cached before.
+            if (store->dummyFragmentShader == nullptr) {
+                ShaderModuleDescriptor descriptor;
+                ShaderModuleWGSLDescriptor wgslDesc;
+                wgslDesc.source = sEmptyFragmentShader;
+                descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
+
+                DAWN_TRY_ASSIGN(store->dummyFragmentShader, CreateShaderModule(&descriptor));
+            }
         }
 
         // Ref will keep the pipeline layout alive until the end of the function where
