@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "066634a7_67d4a190",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-30T07:25:18Z",
+      "side": 1,
+      "message": "nit: 1091?",
+      "revId": "353db028c428564a86cca4663a0d5c28c0edeef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9caf7a4f_8343fa4b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-30T07:25:18Z",
+      "side": 1,
+      "message": "LGTM too overall",
+      "revId": "353db028c428564a86cca4663a0d5c28c0edeef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c62ab76d_5193a81b",
+        "filename": "src/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-30T07:25:18Z",
+      "side": 1,
+      "message": "nit: to make sure we invalidate the iterators, can we do a lot of calls (10?) so that any underlying vector needs to be reallocated?\n\nActually this might be ok because we use std::map and the invalidation rules in C++ are:\n\n\u003e All Associative Containers: The insert and emplace members shall not affect the validity of iterators and references to the container [26.2.6/9]\n\u003e All Associative Containers: The erase members shall invalidate only iterators and references to the erased elements [26.2.6/9]\n\nThis will change if we start using abseil though since flat_hashmap doesn\u0027t have this requirement.",
+      "revId": "353db028c428564a86cca4663a0d5c28c0edeef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bc782fe_a0d42c68",
+        "filename": "src/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-30T07:25:18Z",
+      "side": 1,
+      "message": "nit: the EXPECT_CALL could be in ToMockQueueWorkDoneWithNewRequests since this is where we call ToMockQueueWorkDone",
+      "revId": "353db028c428564a86cca4663a0d5c28c0edeef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e62284f2_c46b67b1",
+        "filename": "src/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-30T07:25:18Z",
+      "side": 1,
+      "message": "Can we also test adding a bunch of calls when the callbacks are called from here? https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_wire/client/Queue.cpp;drc\u003da548578f67063fd516b23e66596b2f8a2be935f9;l\u003d23",
+      "revId": "353db028c428564a86cca4663a0d5c28c0edeef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
