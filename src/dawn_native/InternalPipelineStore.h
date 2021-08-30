@@ -32,6 +32,8 @@ namespace dawn_native {
 
         Ref<ComputePipelineBase> timestampComputePipeline;
         Ref<ShaderModuleBase> timestampCS;
+
+        Ref<ShaderModuleBase> emptyFragmentShader;
     };
 }  // namespace dawn_native
 

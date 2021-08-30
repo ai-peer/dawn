@@ -32,7 +32,8 @@ namespace dawn_native {
     MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                 const RenderPipelineDescriptor* descriptor);
 
-    std::vector<StageAndDescriptor> GetStages(const RenderPipelineDescriptor* descriptor);
+    std::vector<StageAndDescriptor> GetRenderPipelineStages(
+        const RenderPipelineDescriptor* descriptor);
 
     size_t IndexFormatSize(wgpu::IndexFormat format);
 
@@ -99,6 +100,9 @@ namespace dawn_native {
         struct EqualityFunc {
             bool operator()(const RenderPipelineBase* a, const RenderPipelineBase* b) const;
         };
+
+      protected:
+        ResultOrError<ShaderModuleBase*> GetEmptyFragmentShaderModule(DeviceBase* device);
 
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
