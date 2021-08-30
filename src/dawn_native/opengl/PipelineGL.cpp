@@ -97,6 +97,30 @@ namespace dawn_native { namespace opengl {
             gl.AttachShader(mProgram, shader);
         }
 
+        bool needsDummyFragmentShader = (activeStages & wgpu::ShaderStage::Vertex) &&
+                                        !(activeStages & wgpu::ShaderStage::Fragment) &&
+                                        gl.GetVersion().IsES();
+
+        if (needsDummyFragmentShader) {
+            const OpenGLVersion& version = gl.GetVersion();
+            if (version.IsDesktop()) {
+                // The computation of GLSL version below only works for 3.3 and above.
+                ASSERT(version.IsAtLeast(3, 3));
+            }
+            uint32_t versionNumber = version.GetMajor() * 100 + version.GetMinor() * 10;
+
+            std::stringstream dummyFragmentShaderGLSL;
+            dummyFragmentShaderGLSL << "#version " << versionNumber
+                                    << (version.IsES() && versionNumber > 100 ? " es" : "")
+                                    << std::endl
+                                    << "void main() {}";
+
+            GLuint shader;
+            DAWN_TRY_ASSIGN(shader, CreateShader(gl, GLShaderType(SingleShaderStage::Fragment),
+                                                 dummyFragmentShaderGLSL.str().c_str()));
+            gl.AttachShader(mProgram, shader);
+        }
+
         if (needsDummySampler) {
             SamplerDescriptor desc = {};
             ASSERT(desc.minFilter == wgpu::FilterMode::Nearest);
