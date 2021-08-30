@@ -22,6 +22,14 @@
 
 namespace dawn_native {
 
+    namespace {
+        static const char sEmptyFragmentShader[] = R"(
+            [[stage(fragment)]] fn fs_empty_main() {
+                // The empty fragment shader, used as a work around for vertex-only render pipeline
+            }
+        )";
+    }  // anonymous namespace
+
     MaybeError ValidateProgrammableStage(DeviceBase* device,
                                          const ShaderModuleBase* module,
                                          const std::string& entryPoint,
@@ -116,6 +124,10 @@ namespace dawn_native {
         return mStages;
     }
 
+    wgpu::ShaderStage PipelineBase::GetStageMask() const {
+        return mStageMask;
+    }
+
     MaybeError PipelineBase::ValidateGetBindGroupLayout(uint32_t groupIndex) {
         DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
@@ -157,6 +169,31 @@ namespace dawn_native {
         }
 
         return recorder.GetContentHash();
+    }
+
+    MaybeError PipelineBase::SetDummyFragmentShader() {
+        // This method should only be called on vertex-only render pipeline
+        DAWN_ASSERT((mStageMask & wgpu::ShaderStage::Vertex) &&
+                    !(mStageMask & wgpu::ShaderStage::Fragment));
+
+        // Create a dummy fragment shader module
+        ShaderModuleDescriptor descriptor;
+        ShaderModuleWGSLDescriptor wgslDesc;
+        wgslDesc.source = sEmptyFragmentShader;
+        descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
+
+        Ref<ShaderModuleBase> emptyFragmentShader;
+        DAWN_TRY_ASSIGN(emptyFragmentShader, GetDevice()->CreateShaderModule(&descriptor));
+
+        ShaderModuleBase* fragmentModule = emptyFragmentShader.Get();
+        const char fragmentEntryPoint[] = "fs_empty_main";
+        const EntryPointMetadata& metadata = fragmentModule->GetEntryPoint(fragmentEntryPoint);
+
+        // Record the dummy fragment shader module internally
+        mStageMask |= wgpu::ShaderStage::Fragment;
+        mStages[SingleShaderStage::Fragment] = {fragmentModule, fragmentEntryPoint, &metadata};
+
+        return {};
     }
 
     // static

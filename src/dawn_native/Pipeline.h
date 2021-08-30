@@ -49,6 +49,7 @@ namespace dawn_native {
         const RequiredBufferSizes& GetMinBufferSizes() const;
         const ProgrammableStage& GetStage(SingleShaderStage stage) const;
         const PerStage<ProgrammableStage>& GetAllStages() const;
+        wgpu::ShaderStage GetStageMask() const;
 
         ResultOrError<Ref<BindGroupLayoutBase>> GetBindGroupLayout(uint32_t groupIndex);
 
@@ -65,6 +66,8 @@ namespace dawn_native {
                      const char* label,
                      std::vector<StageAndDescriptor> stages);
         PipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+
+        MaybeError SetDummyFragmentShader();
 
       private:
         MaybeError ValidateGetBindGroupLayout(uint32_t group);

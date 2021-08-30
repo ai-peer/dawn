@@ -226,6 +226,13 @@ namespace dawn_native { namespace opengl {
     }
 
     MaybeError RenderPipeline::Initialize() {
+        // Add dummy fragment shader module for vertex-only render pipeline if the toggle is enabled
+        // This toggle must be enabled for OpenGL ES device.
+        if (GetDevice()->IsToggleEnabled(Toggle::UseDummyFragmentInVertexOnlyPipeline) &&
+            (!(GetStageMask() & wgpu::ShaderStage::Fragment))) {
+            DAWN_TRY(SetDummyFragmentShader());
+        }
+
         DAWN_TRY(
             InitializeBase(ToBackend(GetDevice())->gl, ToBackend(GetLayout()), GetAllStages()));
         CreateVAOForVertexState();
