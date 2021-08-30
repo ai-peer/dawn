@@ -913,6 +913,11 @@ namespace dawn_native { namespace vulkan {
         // Enough of the Device's initialization happened that we can now do regular robust
         // deinitialization.
 
+        // Wait for all previous commands on the Vulkan device to finish. This is necessary if the
+        // ErrorInjector injected a device loss error (so it is not a real one and the Vulkan device
+        // is still running commands).
+        fn.DeviceWaitIdle(mVkDevice);
+
         // Immediately tag the recording context as unused so we don't try to submit it in Tick.
         mRecordingContext.used = false;
         if (mRecordingContext.commandPool != VK_NULL_HANDLE) {
