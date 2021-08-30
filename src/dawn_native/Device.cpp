@@ -148,8 +148,8 @@ namespace dawn_native {
             if (descriptor.layout == nullptr) {
                 // Ref will keep the pipeline layout alive until the end of the function where
                 // the pipeline will take another reference.
-                DAWN_TRY_ASSIGN(layoutRef,
-                                PipelineLayoutBase::CreateDefault(device, GetStages(&descriptor)));
+                DAWN_TRY_ASSIGN(layoutRef, PipelineLayoutBase::CreateDefault(
+                                               device, GetRenderPipelineStages(&descriptor)));
                 outDescriptor->layout = layoutRef.Get();
             }
 

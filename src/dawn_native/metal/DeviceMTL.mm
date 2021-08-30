@@ -206,6 +206,16 @@ namespace dawn_native { namespace metal {
             bool useSharedMode = gpu_info::IsIntel(this->GetAdapter()->GetPCIInfo().vendorId);
             SetToggle(Toggle::MetalUseSharedModeForCounterSampleBuffer, useSharedMode);
         }
+
+        // On some Intel GPU vertex only render pipeline get wrong depth result if no fragment
+        // shader provided. Create a dummy fragment shader module to work around this issue.
+        if (gpu_info::IsIntel(this->GetAdapter()->GetPCIInfo().vendorId)) {
+            bool useDummyFragmentShader = true;
+            if (gpu_info::IsSkylake(this->GetAdapter()->GetPCIInfo().deviceId)) {
+                useDummyFragmentShader = false;
+            }
+            SetToggle(Toggle::UseDummyFragmentInVertexOnlyPipeline, useDummyFragmentShader);
+        }
     }
 
     ResultOrError<Ref<BindGroupBase>> Device::CreateBindGroupImpl(
