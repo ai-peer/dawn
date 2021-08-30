@@ -35,7 +35,7 @@ namespace dawn_native { namespace vulkan {
       private:
         ~RenderPipeline() override;
         using RenderPipelineBase::RenderPipelineBase;
-        MaybeError Initialize(const RenderPipelineDescriptor* descriptor);
+        MaybeError Initialize();
 
         struct PipelineVertexInputStateCreateInfoTemporaryAllocations {
             std::array<VkVertexInputBindingDescription, kMaxVertexBuffers> bindings;

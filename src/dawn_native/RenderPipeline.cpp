@@ -420,7 +420,7 @@ namespace dawn_native {
 
         // TODO(crbug.com/dawn/136): Support vertex-only pipelines.
         if (descriptor->fragment == nullptr) {
-            return DAWN_VALIDATION_ERROR("Null fragment stage is not supported (yet)");
+            device->EmitLog(WGPULoggingType::WGPULoggingType_Warning, "Null fragment stage");
         }
 
         DAWN_TRY(ValidateVertexState(device, &descriptor->vertex, descriptor->layout));
@@ -433,19 +433,23 @@ namespace dawn_native {
 
         DAWN_TRY(ValidateMultisampleState(&descriptor->multisample));
 
-        ASSERT(descriptor->fragment != nullptr);
-        DAWN_TRY(ValidateFragmentState(device, descriptor->fragment, descriptor->layout));
+        if (descriptor->fragment != nullptr) {
+            DAWN_TRY(ValidateFragmentState(device, descriptor->fragment, descriptor->layout));
 
-        if (descriptor->fragment->targetCount == 0 && !descriptor->depthStencil) {
-            return DAWN_VALIDATION_ERROR("Should have at least one color target or a depthStencil");
+            if (descriptor->fragment->targetCount == 0 && !descriptor->depthStencil) {
+                return DAWN_VALIDATION_ERROR(
+                    "Should have at least one color target or a depthStencil");
+            }
+
+            DAWN_TRY(
+                ValidateInterStageMatching(device, descriptor->vertex, *(descriptor->fragment)));
         }
-
-        DAWN_TRY(ValidateInterStageMatching(device, descriptor->vertex, *(descriptor->fragment)));
 
         return {};
     }
 
-    std::vector<StageAndDescriptor> GetStages(const RenderPipelineDescriptor* descriptor) {
+    std::vector<StageAndDescriptor> GetRenderPipelineStages(
+        const RenderPipelineDescriptor* descriptor) {
         std::vector<StageAndDescriptor> stages;
         stages.push_back(
             {SingleShaderStage::Vertex, descriptor->vertex.module, descriptor->vertex.entryPoint});
@@ -471,12 +475,7 @@ namespace dawn_native {
 
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
                                            const RenderPipelineDescriptor* descriptor)
-        : PipelineBase(device,
-                       descriptor->layout,
-                       {{SingleShaderStage::Vertex, descriptor->vertex.module,
-                         descriptor->vertex.entryPoint},
-                        {SingleShaderStage::Fragment, descriptor->fragment->module,
-                         descriptor->fragment->entryPoint}}),
+        : PipelineBase(device, descriptor->layout, GetRenderPipelineStages(descriptor)),
           mAttachmentState(device->GetOrCreateAttachmentState(descriptor)) {
         mVertexBufferCount = descriptor->vertex.bufferCount;
         const VertexBufferLayout* buffers = descriptor->vertex.buffers;
@@ -558,6 +557,9 @@ namespace dawn_native {
         }
 
         for (ColorAttachmentIndex i : IterateBitSet(mAttachmentState->GetColorAttachmentsMask())) {
+            // Vertex-only render pipeline have no color attachment. For a render pipeline with
+            // color attachments, there must be a valid FragmentState.
+            ASSERT(descriptor->fragment != nullptr);
             const ColorTargetState* target =
                 &descriptor->fragment->targets[static_cast<uint8_t>(i)];
             mTargets[i] = *target;
