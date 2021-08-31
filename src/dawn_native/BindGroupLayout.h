@@ -32,6 +32,8 @@
 
 namespace dawn_native {
 
+    class PipelineLayoutBase;
+
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor,
                                                  bool allowInternalBinding = false);
@@ -76,6 +78,17 @@ namespace dawn_native {
         // should be used to get typed integer counts.
         const BindingCounts& GetBindingCountInfo() const;
 
+        // Tests that the BindingInfo of two bind groups are equal,
+        // ignoring their compatibility groups.
+        bool IsLayoutEqual(const BindGroupLayoutBase* other);
+
+        void SetCompatibilityGroup(uint64_t groupId) {
+            mCompatibilityGroupId = groupId;
+        }
+        uint64_t GetCompatibilityGroup() const {
+            return mCompatibilityGroupId;
+        }
+
         struct BufferBindingData {
             uint64_t offset;
             uint64_t size;
@@ -115,6 +128,9 @@ namespace dawn_native {
 
         // Map from BindGroupLayoutEntry.binding to packed indices.
         BindingMap mBindingMap;
+
+        // Non-0 if this BindGroupLayout was created as part of a default PipelineLayout.
+        uint64_t mCompatibilityGroupId = 0;
     };
 
 }  // namespace dawn_native

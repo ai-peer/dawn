@@ -113,7 +113,8 @@ namespace dawn_native {
         // instead of a backend Foo object. If the blueprint doesn't match an object in the
         // cache, then the descriptor is used to make a new object.
         ResultOrError<Ref<BindGroupLayoutBase>> GetOrCreateBindGroupLayout(
-            const BindGroupLayoutDescriptor* descriptor);
+            const BindGroupLayoutDescriptor* descriptor,
+            uint64_t compatibilityGroup = 0);
         void UncacheBindGroupLayout(BindGroupLayoutBase* obj);
 
         BindGroupLayoutBase* GetEmptyBindGroupLayout();

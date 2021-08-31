@@ -422,6 +422,8 @@ namespace dawn_native {
 
     size_t BindGroupLayoutBase::ComputeContentHash() {
         ObjectContentHasher recorder;
+        recorder.Record(mCompatibilityGroupId);
+
         // std::map is sorted by key, so two BGLs constructed in different orders
         // will still record the same.
         for (const auto& it : mBindingMap) {
@@ -441,6 +443,9 @@ namespace dawn_native {
 
     bool BindGroupLayoutBase::EqualityFunc::operator()(const BindGroupLayoutBase* a,
                                                        const BindGroupLayoutBase* b) const {
+        if (a->GetCompatibilityGroup() != b->GetCompatibilityGroup()) {
+            return false;
+        }
         if (a->GetBindingCount() != b->GetBindingCount()) {
             return false;
         }
@@ -473,6 +478,18 @@ namespace dawn_native {
 
     const BindingCounts& BindGroupLayoutBase::GetBindingCountInfo() const {
         return mBindingCounts;
+    }
+
+    bool BindGroupLayoutBase::IsLayoutEqual(const BindGroupLayoutBase* other) {
+        if (GetBindingCount() != other->GetBindingCount()) {
+            return false;
+        }
+        for (BindingIndex i{0}; i < GetBindingCount(); ++i) {
+            if (mBindingInfo[i] != other->mBindingInfo[i]) {
+                return false;
+            }
+        }
+        return mBindingMap == other->mBindingMap;
     }
 
     size_t BindGroupLayoutBase::GetBindingDataSize() const {
