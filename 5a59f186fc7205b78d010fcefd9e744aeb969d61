@@ -16,6 +16,97 @@
       "message": "PTAL!\n\nOne minor implementation note: The spec says that the BGL should have a reference to the pipeline it was created with and use that for the compatibility check, but when implementing this I realized that we don\u0027t actually create the pipeline object until after the \"default\" layout has been created. As a result, I\u0027m using a simple \"compatibilityGroupId\" to track which bind groups are compatible with one another. Since this is never exposed the the user, it has the same effect as the spec text. ",
       "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6af5972d_e3ee9025",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-31T17:56:33Z",
+      "side": 1,
+      "message": "nit: Can this call into IsLayoutEqual?",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 457,
+        "endChar": 48
+      },
+      "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d299efd_dfeda1e0",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-31T17:56:33Z",
+      "side": 1,
+      "message": "nit: Maybe be more explicit? \"IsLayoutEqualIgnoringCompatibilityGroup\"",
+      "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991cf58e_41f1183e",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-31T17:56:33Z",
+      "side": 1,
+      "message": "nit: This is already in \"bind group layout\" so reusing \"group\" for a different purpose is a little weird. Maybe\ncompatibility class token\nassociated pipeline token\nsource pipeline token\npipeline compatibility token\nor something",
+      "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a6fb8d_5158329a",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-31T17:56:33Z",
+      "side": 1,
+      "message": "Slightly uneasy that mCompatibilityGroupId could change over the lifetime of the object. Possible to set it only in the constructor?",
+      "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d92f641_7be8a66d",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-08-31T17:56:33Z",
+      "side": 1,
+      "message": "I think this will introduce thread-unsafety that we\u0027d have to deal with in the future. Perhaps just changing this to std::atomic_uint64_t would fix that?",
+      "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
