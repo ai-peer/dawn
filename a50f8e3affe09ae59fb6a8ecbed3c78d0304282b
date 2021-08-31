@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f0ce20_3a20f1ca",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-31T09:06:44Z",
+      "side": 1,
+      "message": "When we talked about it on VC we agreed that the proper solution would be to have a callback queue on the client / device so that we can empty it on disconnect. (wgpuInstanceProcessEvents) and that in the meantime I will:\n\n 1 - make sure callbacks aren\u0027t added if the device is disconnecting.\n 2 - file an issue for the improvements.\n \n1 is already the case today, I checked all the objects for it. 2 is https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1096",
+      "parentUuid": "5bae2894_091bb36a",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 49
+      },
+      "revId": "a50f8e3affe09ae59fb6a8ecbed3c78d0304282b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8ceaa965_803b0ab3",
@@ -88,6 +112,24 @@
       "writtenOn": "2021-08-30T20:03:36Z",
       "side": 1,
       "message": "I\u0027m not familiar with how move would this prevents iterator invalidation (I will go look it up language spec)",
+      "revId": "a50f8e3affe09ae59fb6a8ecbed3c78d0304282b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e141d52_4b829772",
+        "filename": "src/dawn_wire/client/RequestTracker.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-31T09:06:44Z",
+      "side": 1,
+      "message": "This moves the content of mRequests into a local variable (so mRequests is an empty map after this). This means that if the user\u0027s callback code starts adding more stuff in mRequests, this won\u0027t invalidate the iterator. Note that since we use std::map, then this is not strictly necessary, but it will be useful in the future if/when we change map types.",
+      "parentUuid": "8ceaa965_803b0ab3",
       "revId": "a50f8e3affe09ae59fb6a8ecbed3c78d0304282b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
