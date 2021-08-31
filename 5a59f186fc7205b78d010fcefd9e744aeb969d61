@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cd803c2_73ec4160",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-08-31T16:55:03Z",
+      "side": 1,
+      "message": "PTAL!\n\nOne minor implementation note: The spec says that the BGL should have a reference to the pipeline it was created with and use that for the compatibility check, but when implementing this I realized that we don\u0027t actually create the pipeline object until after the \"default\" layout has been created. As a result, I\u0027m using a simple \"compatibilityGroupId\" to track which bind groups are compatible with one another. Since this is never exposed the the user, it has the same effect as the spec text. ",
+      "revId": "5a59f186fc7205b78d010fcefd9e744aeb969d61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
