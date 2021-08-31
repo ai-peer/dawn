@@ -16,6 +16,23 @@
       "message": "Addressed comments and add \"BeforeDisconnect\" and \"BeforeDestruction\" tests for Buffer and ShaderModule.",
       "revId": "b9eca9fe5351ab7bdea8a61a7068e03ec9885746",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7a8ce6_f062ad23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-08-31T06:57:30Z",
+      "side": 1,
+      "message": "Thank you for the update, tests look good!",
+      "revId": "b9eca9fe5351ab7bdea8a61a7068e03ec9885746",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
