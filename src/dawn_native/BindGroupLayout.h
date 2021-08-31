@@ -32,6 +32,8 @@
 
 namespace dawn_native {
 
+    class PipelineLayoutBase;
+
     MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
                                                  const BindGroupLayoutDescriptor* descriptor,
                                                  bool allowInternalBinding = false);
@@ -41,7 +43,9 @@ namespace dawn_native {
     // into a packed range of |BindingIndex| integers.
     class BindGroupLayoutBase : public CachedObject {
       public:
-        BindGroupLayoutBase(DeviceBase* device, const BindGroupLayoutDescriptor* descriptor);
+        BindGroupLayoutBase(DeviceBase* device,
+                            const BindGroupLayoutDescriptor* descriptor,
+                            uint64_t pipelineCompatibilityToken);
         ~BindGroupLayoutBase() override;
 
         static BindGroupLayoutBase* MakeError(DeviceBase* device);
@@ -75,6 +79,15 @@ namespace dawn_native {
         // Used to get counts and validate them in pipeline layout creation. Other getters
         // should be used to get typed integer counts.
         const BindingCounts& GetBindingCountInfo() const;
+
+        // Tests that the BindingInfo of two bind groups are equal,
+        // ignoring their compatibility groups.
+        bool IsLayoutEqual(const BindGroupLayoutBase* other,
+                           bool excludePipelineCompatibiltyToken = false) const;
+
+        uint64_t GetPipelineCompatibilityToken() const {
+            return mPipelineCompatibilityToken;
+        }
 
         struct BufferBindingData {
             uint64_t offset;
@@ -115,6 +128,9 @@ namespace dawn_native {
 
         // Map from BindGroupLayoutEntry.binding to packed indices.
         BindingMap mBindingMap;
+
+        // Non-0 if this BindGroupLayout was created as part of a default PipelineLayout.
+        const uint64_t mPipelineCompatibilityToken = 0;
     };
 
 }  // namespace dawn_native

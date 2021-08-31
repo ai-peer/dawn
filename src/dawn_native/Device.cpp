@@ -520,8 +520,9 @@ namespace dawn_native {
     }
 
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
-        const BindGroupLayoutDescriptor* descriptor) {
-        BindGroupLayoutBase blueprint(this, descriptor);
+        const BindGroupLayoutDescriptor* descriptor,
+        uint64_t pipelineCompatibilityToken) {
+        BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
         blueprint.SetContentHash(blueprintHash);
@@ -531,7 +532,8 @@ namespace dawn_native {
         if (iter != mCaches->bindGroupLayouts.end()) {
             result = *iter;
         } else {
-            DAWN_TRY_ASSIGN(result, CreateBindGroupLayoutImpl(descriptor));
+            DAWN_TRY_ASSIGN(result,
+                            CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
             result->SetIsCachedReference();
             result->SetContentHash(blueprintHash);
             mCaches->bindGroupLayouts.insert(result.Get());

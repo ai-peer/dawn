@@ -99,8 +99,9 @@ namespace dawn_native { namespace null {
         return AcquireRef(new BindGroup(this, descriptor));
     }
     ResultOrError<Ref<BindGroupLayoutBase>> Device::CreateBindGroupLayoutImpl(
-        const BindGroupLayoutDescriptor* descriptor) {
-        return AcquireRef(new BindGroupLayout(this, descriptor));
+        const BindGroupLayoutDescriptor* descriptor,
+        uint64_t pipelineCompatibilityToken) {
+        return AcquireRef(new BindGroupLayout(this, descriptor, pipelineCompatibilityToken));
     }
     ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
         DAWN_TRY(IncrementMemoryUsage(descriptor->size));

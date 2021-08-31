@@ -26,9 +26,12 @@ namespace dawn_native { namespace metal {
     class BindGroupLayout final : public BindGroupLayoutBase {
       public:
         static Ref<BindGroupLayout> Create(DeviceBase* device,
-                                           const BindGroupLayoutDescriptor* descriptor);
+                                           const BindGroupLayoutDescriptor* descriptor,
+                                           uint64_t pipelineCompatibilityToken);
 
-        Ref<BindGroup> AllocateBindGroup(Device* device, const BindGroupDescriptor* descriptor);
+        Ref<BindGroup> AllocateBindGroup(Device* device,
+                                         const BindGroupDescriptor* descriptor,
+                                         uint64_t pipelineCompatibilityToken);
         void DeallocateBindGroup(BindGroup* bindGroup);
 
       private:
