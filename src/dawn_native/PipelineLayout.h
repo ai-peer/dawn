@@ -31,7 +31,8 @@
 namespace dawn_native {
 
     MaybeError ValidatePipelineLayoutDescriptor(DeviceBase*,
-                                                const PipelineLayoutDescriptor* descriptor);
+                                                const PipelineLayoutDescriptor* descriptor,
+                                                uint64_t pipelineCompatibilityToken = 0);
 
     using BindGroupLayoutArray =
         ityp::array<BindGroupIndex, Ref<BindGroupLayoutBase>, kMaxBindGroups>;

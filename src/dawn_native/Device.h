@@ -113,7 +113,8 @@ namespace dawn_native {
         // instead of a backend Foo object. If the blueprint doesn't match an object in the
         // cache, then the descriptor is used to make a new object.
         ResultOrError<Ref<BindGroupLayoutBase>> GetOrCreateBindGroupLayout(
-            const BindGroupLayoutDescriptor* descriptor);
+            const BindGroupLayoutDescriptor* descriptor,
+            uint64_t pipelineCompatibilityToken = 0);
         void UncacheBindGroupLayout(BindGroupLayoutBase* obj);
 
         BindGroupLayoutBase* GetEmptyBindGroupLayout();
@@ -312,7 +313,8 @@ namespace dawn_native {
         virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
             const BindGroupDescriptor* descriptor) = 0;
         virtual ResultOrError<Ref<BindGroupLayoutBase>> CreateBindGroupLayoutImpl(
-            const BindGroupLayoutDescriptor* descriptor) = 0;
+            const BindGroupLayoutDescriptor* descriptor,
+            uint64_t pipelineCompatibilityToken) = 0;
         virtual ResultOrError<Ref<BufferBase>> CreateBufferImpl(
             const BufferDescriptor* descriptor) = 0;
         virtual ResultOrError<Ref<ComputePipelineBase>> CreateComputePipelineImpl(
