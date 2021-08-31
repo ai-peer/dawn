@@ -393,9 +393,56 @@ fn main([[location(0)]] pos : vec4<f32>) -> [[builtin(position)]] vec4<f32> {
     device.CreateRenderPipeline(&descriptor);
 }
 
+// Empty render pass
+TEST_P(ShaderTests, EmptyRenderPass) {
+    wgpu::BufferDescriptor bufDesc;
+    bufDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
+    bufDesc.size = 4;
+    wgpu::Buffer buffer = device.CreateBuffer(&bufDesc);
+
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        [[stage(vertex)]] fn vsMain() -> [[builtin(position)]] vec4<f32> {
+            return vec4<f32>(0.0, 0.0, 0.5, 1.0);
+        }
+
+        [[block]] struct S {
+            result: u32;
+        };
+        [[group(0), binding(0)]] var<storage, write> s: S;
+        [[stage(fragment)]] fn fsMain() {
+            s.result = 42u;
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor pDesc;
+    pDesc.vertex.module = module;
+    pDesc.vertex.entryPoint = "vsMain";
+    pDesc.cFragment.module = module;
+    pDesc.cFragment.entryPoint = "fsMain";
+    pDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+    pDesc.cFragment.targetCount = 0;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pDesc);
+
+    wgpu::BindGroup bg = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}});
+
+    wgpu::RenderPassDescriptor rpDesc;
+    rpDesc.colorAttachmentCount = 0;
+    rpDesc.depthStencilAttachment = nullptr;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rpDesc);
+    pass.SetBindGroup(0, bg);
+    pass.SetPipeline(pipeline);
+    pass.Draw(1);
+    pass.EndPass();
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U32_EQ(42, buffer, 0);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D12Backend(),
                       MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
                       VulkanBackend());

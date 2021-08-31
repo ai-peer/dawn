@@ -398,10 +398,10 @@ namespace dawn_native {
                 }
             }
 
-            if (descriptor->colorAttachmentCount == 0 &&
-                descriptor->depthStencilAttachment == nullptr) {
-                return DAWN_VALIDATION_ERROR("Cannot use render pass with no attachments.");
-            }
+            //if (descriptor->colorAttachmentCount == 0 &&
+            //    descriptor->depthStencilAttachment == nullptr) {
+            //    return DAWN_VALIDATION_ERROR("Cannot use render pass with no attachments.");
+            //}
 
             return {};
         }
@@ -560,7 +560,9 @@ namespace dawn_native {
                 DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height,
                                                       &sampleCount));
 
-                ASSERT(width > 0 && height > 0 && sampleCount > 0);
+                if (width == 0) {
+                    width = height = sampleCount = 1;
+                }
 
                 BeginRenderPassCmd* cmd =
                     allocator->Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);

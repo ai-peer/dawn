@@ -76,6 +76,9 @@ namespace dawn_native {
                 ASSERT(mSampleCount == attachment->GetTexture()->GetSampleCount());
             }
         }
+        if (mSampleCount == 0) {
+            mSampleCount = 1;
+        }
         ASSERT(mSampleCount > 0);
     }
 
