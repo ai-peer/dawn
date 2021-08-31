@@ -63,11 +63,13 @@ namespace dawn_native { namespace metal {
                 [MTLRenderPassDescriptor renderPassDescriptor];
             MTLRenderPassDescriptor* descriptor = descriptorRef.Get();
 
+            bool foo = false;
             for (ColorAttachmentIndex attachment :
                  IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                 uint8_t i = static_cast<uint8_t>(attachment);
                 auto& attachmentInfo = renderPass->colorAttachments[attachment];
 
+                foo = true;
                 switch (attachmentInfo.loadOp) {
                     case wgpu::LoadOp::Clear:
                         descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
@@ -122,6 +124,7 @@ namespace dawn_native { namespace metal {
             if (renderPass->attachmentState->HasDepthStencilAttachment()) {
                 auto& attachmentInfo = renderPass->depthStencilAttachment;
 
+            foo = true;
                 id<MTLTexture> texture =
                     ToBackend(attachmentInfo.view->GetTexture())->GetMTLTexture();
                 const Format& format = attachmentInfo.view->GetTexture()->GetFormat();
@@ -181,6 +184,14 @@ namespace dawn_native { namespace metal {
                             break;
                     }
                 }
+            }
+
+            if (@available(macos 10.15, iOS 14.0, *)) {
+            if (!foo) {
+                descriptor.renderTargetWidth = 1;
+                descriptor.renderTargetHeight = 1;
+                descriptor.defaultRasterSampleCount = 1;
+            }
             }
 
             if (renderPass->occlusionQuerySet.Get() != nullptr) {

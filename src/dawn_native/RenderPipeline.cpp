@@ -436,9 +436,9 @@ namespace dawn_native {
         ASSERT(descriptor->fragment != nullptr);
         DAWN_TRY(ValidateFragmentState(device, descriptor->fragment, descriptor->layout));
 
-        if (descriptor->fragment->targetCount == 0 && !descriptor->depthStencil) {
-            return DAWN_VALIDATION_ERROR("Should have at least one color target or a depthStencil");
-        }
+        //if (descriptor->fragment->targetCount == 0 && !descriptor->depthStencil) {
+        //    return DAWN_VALIDATION_ERROR("Should have at least one color target or a depthStencil");
+        //}
 
         DAWN_TRY(ValidateInterStageMatching(device, descriptor->vertex, *(descriptor->fragment)));
 
