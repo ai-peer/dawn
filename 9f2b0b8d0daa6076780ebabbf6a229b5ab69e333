@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67093ca2_a593884b",
+        "filename": "src/dawn_native/ComputePipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-01T10:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61988708_ab14a9b5",
+      "range": {
+        "startLine": 25,
+        "startChar": 11,
+        "endLine": 25,
+        "endChar": 41
+      },
+      "revId": "9f2b0b8d0daa6076780ebabbf6a229b5ab69e333",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e46b120_adc38044",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-01T08:31:12Z",
       "side": 1,
       "message": "nit: you can use NonMovable from common/NonCopyable.h",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 93
+      },
+      "revId": "9f2b0b8d0daa6076780ebabbf6a229b5ab69e333",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe69dfd4_ec70da62",
+        "filename": "src/dawn_native/ComputePipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-01T10:19:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e46b120_adc38044",
       "range": {
         "startLine": 29,
         "startChar": 0,
