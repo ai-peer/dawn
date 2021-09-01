@@ -22,6 +22,24 @@ namespace dawn_native {
     class DeviceBase;
     struct EntryPointMetadata;
 
+    struct ComboComputePipelineDescriptor : public ComputePipelineDescriptor {
+      public:
+        explicit ComboComputePipelineDescriptor(const ComputePipelineDescriptor* descriptor);
+
+        ComboComputePipelineDescriptor(const ComboComputePipelineDescriptor&) = delete;
+        ComboComputePipelineDescriptor& operator=(const ComboComputePipelineDescriptor&) = delete;
+        ComboComputePipelineDescriptor(ComboComputePipelineDescriptor&&) = delete;
+        ComboComputePipelineDescriptor& operator=(ComboComputePipelineDescriptor&&) = delete;
+
+        void SetLayout(Ref<PipelineLayoutBase> appliedLayout);
+
+      private:
+        std::string mLabel;
+        Ref<PipelineLayoutBase> mLayout;
+        std::string mEntryPoint;
+        Ref<ShaderModuleBase> mComputeModule;
+    };
+
     MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                                  const ComputePipelineDescriptor* descriptor);
 
