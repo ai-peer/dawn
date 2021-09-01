@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75ff627d_84e9a674",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6a08fa9_50d492df",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7139b0f4_ccae91a8",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a05dcc5_4e11f810",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7139b0f4_ccae91a8",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7da8fb7d_fc59581b",
@@ -82,6 +118,30 @@
       "writtenOn": "2021-09-01T06:56:44Z",
       "side": 1,
       "message": "Could be worth having a type integer for this so we don\u0027t risk using the uint64_t as something else. It can be added to IntegerTypes.h.",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd5fc012_1e093cf9",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7da8fb7d_fc59581b",
       "range": {
         "startLine": 133,
         "startChar": 14,
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "210032aa_ab53068b",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "21fec45b_0400bb9e",
+      "range": {
+        "startLine": 240,
+        "startChar": 9,
+        "endLine": 240,
+        "endChar": 43
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f771b91_a076b917",
@@ -132,6 +216,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e85b6991_c5435185",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f771b91_a076b917",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "359e076f_adb6d551",
@@ -145,6 +247,30 @@
       "writtenOn": "2021-09-01T06:56:44Z",
       "side": 1,
       "message": "In general we avoid static variables because it\u0027s not clear if it will cause static initialization issues (Chromium really doesn\u0027t like that). We could just have this counter on the device itself. It is ok to have two tokens that are the same between devices since we validate objects are always used with objects coming from the same device.",
+      "range": {
+        "startLine": 219,
+        "startChar": 46,
+        "endLine": 219,
+        "endChar": 77
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bd80a6b_9b1b44d9",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "359e076f_adb6d551",
       "range": {
         "startLine": 219,
         "startChar": 46,
@@ -178,6 +304,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57732673_9183afbf",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b499e76a_61eb791b",
+      "range": {
+        "startLine": 223,
+        "startChar": 29,
+        "endLine": 223,
+        "endChar": 44
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f1f35c1_121d1aa8",
@@ -195,6 +345,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b76a19f5_fcf6fa05",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f1f35c1_121d1aa8",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a14ee48e_73e12835",
@@ -208,6 +376,24 @@
       "writtenOn": "2021-09-01T06:56:44Z",
       "side": 1,
       "message": "nit: this member is not accessed outside of SetUp.",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b65fe9ac_baad04ac",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-01T17:54:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a14ee48e_73e12835",
       "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
