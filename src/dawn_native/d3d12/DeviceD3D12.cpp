@@ -74,13 +74,14 @@ namespace dawn_native { namespace d3d12 {
                          "D3D12 create command queue"));
 
         // Get GPU timestamp counter frequency (in ticks/second). This fails if the specified
-        // command queue doesn't support timestamps, D3D12_COMMAND_LIST_TYPE_DIRECT always support
-        // timestamps.
+        // command queue doesn't support timestamps. D3D12_COMMAND_LIST_TYPE_DIRECT queues always
+        // support timestamps except where there are bugs in Windows container and vGPU
+        // implementations.
         uint64_t frequency;
-        DAWN_TRY(CheckHRESULT(mCommandQueue->GetTimestampFrequency(&frequency),
-                              "D3D12 get timestamp frequency"));
-        // Calculate the period in nanoseconds by the frequency.
-        mTimestampPeriod = static_cast<float>(1e9) / frequency;
+        if (SUCCEEDED(mCommandQueue->GetTimestampFrequency(&frequency))) {
+            // Calculate the period in nanoseconds by the frequency.
+            mTimestampPeriod = static_cast<float>(1e9) / frequency;
+        }
 
         // If PIX is not attached, the QueryInterface fails. Hence, no need to check the return
         // value.
