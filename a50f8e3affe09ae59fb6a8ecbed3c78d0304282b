@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cad3ea37_765b615e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T15:50:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1aa6ef05_20588eaf",
+      "revId": "a50f8e3affe09ae59fb6a8ecbed3c78d0304282b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "52581484_06b5be9b",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -89,6 +107,30 @@
       "side": 1,
       "message": "When we talked about it on VC we agreed that the proper solution would be to have a callback queue on the client / device so that we can empty it on disconnect. (wgpuInstanceProcessEvents) and that in the meantime I will:\n\n 1 - make sure callbacks aren\u0027t added if the device is disconnecting.\n 2 - file an issue for the improvements.\n \n1 is already the case today, I checked all the objects for it. 2 is https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1096",
       "parentUuid": "5bae2894_091bb36a",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 49
+      },
+      "revId": "a50f8e3affe09ae59fb6a8ecbed3c78d0304282b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0338c938_c93767a8",
+        "filename": "src/dawn_wire/client/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T15:50:44Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "b7f0ce20_3a20f1ca",
       "range": {
         "startLine": 89,
         "startChar": 0,
