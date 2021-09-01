@@ -15,12 +15,26 @@
 #ifndef DAWNNATIVE_COMPUTEPIPELINE_H_
 #define DAWNNATIVE_COMPUTEPIPELINE_H_
 
+#include "common/NonCopyable.h"
 #include "dawn_native/Pipeline.h"
 
 namespace dawn_native {
 
     class DeviceBase;
     struct EntryPointMetadata;
+
+    struct FlatComputePipelineDescriptor : public ComputePipelineDescriptor, public NonCopyable {
+      public:
+        explicit FlatComputePipelineDescriptor(const ComputePipelineDescriptor* descriptor);
+
+        void SetLayout(Ref<PipelineLayoutBase> appliedLayout);
+
+      private:
+        std::string mLabel;
+        Ref<PipelineLayoutBase> mLayout;
+        std::string mEntryPoint;
+        Ref<ShaderModuleBase> mComputeModule;
+    };
 
     MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                                  const ComputePipelineDescriptor* descriptor);
