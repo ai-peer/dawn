@@ -16,6 +16,200 @@
       "message": "Fixed a typo on the metal backend",
       "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab429318_60c45795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a08fa9_50d492df",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7139b0f4_ccae91a8",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "nit: we usually put even trivial getters in the .cpp",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7da8fb7d_fc59581b",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "Could be worth having a type integer for this so we don\u0027t risk using the uint64_t as something else. It can be added to IntegerTypes.h.",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21fec45b_0400bb9e",
+        "filename": "src/dawn_native/DawnNative.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "nit: BindGroupLayoutBindingsEqualForTesting? I think Kai gave a similar comment how it would be nice that this explains in the name that it doesn\u0027t check the token.",
+      "range": {
+        "startLine": 240,
+        "startChar": 9,
+        "endLine": 240,
+        "endChar": 43
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f771b91_a076b917",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "I don\u0027t think this validation is covered by a test currently. Can we add one?",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359e076f_adb6d551",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "In general we avoid static variables because it\u0027s not clear if it will cause static initialization issues (Chromium really doesn\u0027t like that). We could just have this counter on the device itself. It is ok to have two tokens that are the same between devices since we validate objects are always used with objects coming from the same device.",
+      "range": {
+        "startLine": 219,
+        "startChar": 46,
+        "endLine": 219,
+        "endChar": 77
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b499e76a_61eb791b",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "nit: seems this is a leftover from prior to a rename?",
+      "range": {
+        "startLine": 223,
+        "startChar": 29,
+        "endLine": 223,
+        "endChar": 44
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f1f35c1_121d1aa8",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "nit: we have a helper to make this nicer\n\nutils::MakeBindGroupLayout(device, {{0, wgpu::ShaderStage::Fragment, wgpu::BufferBindingType::Uniform}})\n\nAnd utils::MakePipelineLayout(device, \u0026bgl) I think. Ditto in other tests",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a14ee48e_73e12835",
+        "filename": "src/tests/end2end/ColorStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T06:56:44Z",
+      "side": 1,
+      "message": "nit: this member is not accessed outside of SetUp.",
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
