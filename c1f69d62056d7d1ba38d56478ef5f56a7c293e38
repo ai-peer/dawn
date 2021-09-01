@@ -16,6 +16,46 @@
       "message": "Reviewers, PTAL again. I\u0027m still missing +2 on this.",
       "revId": "c1f69d62056d7d1ba38d56478ef5f56a7c293e38",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6683a135_4bcb751a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-01T14:22:15Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "c1f69d62056d7d1ba38d56478ef5f56a7c293e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4ae75b_c0a8041e",
+        "filename": "src/dawn_wire/client/RequestTracker.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-01T14:22:15Z",
+      "side": 1,
+      "message": "2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "c1f69d62056d7d1ba38d56478ef5f56a7c293e38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
