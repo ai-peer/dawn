@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798e3ba0_7fd12298",
+        "filename": "src/dawn_native/ComputePipeline.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T12:03:23Z",
+      "side": 1,
+      "message": "nit: can we have a small comment explaining what this does and why it is needed?",
+      "revId": "733f17b3e5a333984cc19b82719206150bc74818",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
