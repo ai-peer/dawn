@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1b6de0a4_6c42f41f",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-01T17:23:27Z",
+      "side": 1,
+      "message": "The Dawn bug I am fixing used to crash the GPU process. The Dawn device would fail to create because GetTimestampFrequency returned an error, thus returning a nullptr device from adapter.CreateDevice. Code in gpu_info_collector.cc never checked the return value and we crashed. \n \nI fixed the nullptr crash as part of https://chromium-review.googlesource.com/c/chromium/src/+/3134306. However, we should also fix it here so people don\u0027t end up using timestamp queries when they don\u0027t work.\n\n\u003e  are these vGPUs idenitifiable from some other adapter properties vendorId, deviceId, name, etc?\n\nNo, the vGPUs are not identifiable in this manner. The vendorid, deviceid and name return the GPU that the vGPU virtualizes.",
+      "parentUuid": "2c0e909c_ab95edac",
+      "range": {
+        "startLine": 125,
+        "startChar": 32,
+        "endLine": 125,
+        "endChar": 53
+      },
+      "revId": "d09210c17cdf9cec2acef18704b8718bf6c71eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e92e8c8d_54c51152",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 1
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-01T15:27:36Z",
       "side": 1,
       "message": "gate this whole block behind IsExtentionEnabled(Extension::TimestampQuery) ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 5,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "d09210c17cdf9cec2acef18704b8718bf6c71eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc5019c1_535b2bff",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-01T17:23:27Z",
+      "side": 1,
+      "message": "I did this with my latest patchset.\n\n(We will need to revisit the if statement when we eventually implement measureExecutionTime)",
+      "parentUuid": "e92e8c8d_54c51152",
       "range": {
         "startLine": 77,
         "startChar": 5,
