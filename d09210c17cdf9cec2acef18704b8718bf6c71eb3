@@ -16,6 +16,69 @@
       "message": "@Corentin or @Austin, please take a look.",
       "revId": "d09210c17cdf9cec2acef18704b8718bf6c71eb3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca0be41_78200106",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-01T15:27:36Z",
+      "side": 1,
+      "message": "LGTM with some questions",
+      "revId": "d09210c17cdf9cec2acef18704b8718bf6c71eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c0e909c_ab95edac",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-01T15:27:36Z",
+      "side": 1,
+      "message": "just to check, you said in Slack \"Currently the GPU process crashes due this bug.\".\n\nIs it an actual crash, or is it that originally the CheckHRESULT would cause Dawn to abort and issue a device lost error?\nIf it\u0027s a crash, would it still crash here when we check on these vGPUs?\n\nLastly, are these vGPUs idenitifiable from some other adapter properties vendorId, deviceId, name, etc?",
+      "range": {
+        "startLine": 125,
+        "startChar": 32,
+        "endLine": 125,
+        "endChar": 53
+      },
+      "revId": "d09210c17cdf9cec2acef18704b8718bf6c71eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92e8c8d_54c51152",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-01T15:27:36Z",
+      "side": 1,
+      "message": "gate this whole block behind IsExtentionEnabled(Extension::TimestampQuery) ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 5,
+        "endLine": 85,
+        "endChar": 0
+      },
+      "revId": "d09210c17cdf9cec2acef18704b8718bf6c71eb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
