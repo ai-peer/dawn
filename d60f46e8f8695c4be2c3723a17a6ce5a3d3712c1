@@ -154,6 +154,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6759d353_9bf6fd1b",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-01T18:53:58Z",
+      "side": 1,
+      "message": "It doesn\u0027t seem used here :) nor in the getter.",
+      "parentUuid": "fd5fc012_1e093cf9",
+      "range": {
+        "startLine": 133,
+        "startChar": 14,
+        "endLine": 133,
+        "endChar": 22
+      },
+      "revId": "d60f46e8f8695c4be2c3723a17a6ce5a3d3712c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21fec45b_0400bb9e",
         "filename": "src/dawn_native/DawnNative.cpp",
         "patchSetId": 3
