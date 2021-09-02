@@ -18,6 +18,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
@@ -903,6 +904,13 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
+                    DAWN_TRY(GetDevice()->GetQueue()->WriteBuffer(
+                        cmd->buffer.Get(), cmd->offset, cmd->data.data(), cmd->data.size()));
+                    break;
+                }
+
                 case Command::ResolveQuerySet: {
                     ResolveQuerySetCmd* cmd = mCommands.NextCommand<ResolveQuerySetCmd>();
                     QuerySet* querySet = ToBackend(cmd->querySet.Get());
@@ -1353,14 +1361,15 @@ namespace dawn_native { namespace d3d12 {
 
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
+                    ASSERT(draw->indirectBufferRef->GetBuffer() != nullptr);
 
                     DAWN_TRY(bindingTracker->Apply(commandContext));
                     vertexBufferTracker.Apply(commandList, lastPipeline);
-                    Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
+                    Buffer* buffer = ToBackend(draw->indirectBufferRef->GetBuffer());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDrawIndexedIndirectSignature();
                     commandList->ExecuteIndirect(signature.Get(), 1, buffer->GetD3D12Resource(),
-                                                 draw->indirectOffset, nullptr, 0);
+                                                 draw->indirectBufferRef->GetOffset(), nullptr, 0);
                     break;
                 }
 

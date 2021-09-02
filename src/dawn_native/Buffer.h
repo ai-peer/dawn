@@ -55,7 +55,12 @@ namespace dawn_native {
 
         uint64_t GetSize() const;
         uint64_t GetAllocatedSize() const;
+
+        // |GetUsage| returns the usage with which the buffer was created using the base WebGPU
+        // API. The dawn-internal-usages extension may add additional usages. |GetInternalUsage|
+        // returns the union of base usage and the usages added by the extension.
         wgpu::BufferUsage GetUsage() const;
+        wgpu::BufferUsage GetInternalUsage() const;
 
         MaybeError MapAtCreation();
         void OnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status);
@@ -116,6 +121,7 @@ namespace dawn_native {
 
         uint64_t mSize = 0;
         wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
+        wgpu::BufferUsage mInternalUsage = wgpu::BufferUsage::None;
         BufferState mState;
         bool mIsDataInitialized = false;
 
@@ -127,6 +133,29 @@ namespace dawn_native {
         wgpu::MapMode mMapMode = wgpu::MapMode::None;
         size_t mMapOffset = 0;
         size_t mMapSize = 0;
+    };
+
+    // A ref-counted wrapper around a Buffer ref and an offset into the buffer. This can be used as
+    // a placeholder for concrete Buffer ref when e.g. encoding a command which must reference a
+    // buffer that may not be allocated yet.
+    class DeferredBufferRef : public RefCounted {
+      public:
+        DeferredBufferRef();
+        ~DeferredBufferRef();
+
+        BufferBase* GetBuffer() {
+            return mBuffer.Get();
+        }
+
+        uint64_t GetOffset() const {
+            return mOffset;
+        }
+
+        void SetBuffer(BufferBase* buffer, uint64_t offset);
+
+      private:
+        Ref<BufferBase> mBuffer;
+        uint64_t mOffset = 0;
     };
 
 }  // namespace dawn_native
