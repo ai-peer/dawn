@@ -178,6 +178,24 @@
       "parentUuid": "8436acf9_bd765731",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "506bd770_638e4cda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-09-02T19:41:34Z",
+      "side": 1,
+      "message": "I removed both IsLost checks.\n\nI found that on D3D12 by calling ID3D12Device5::RemoveDevice [1], a following object-\u003eSetPrivateData call will succeed (or not cause any errors, at least).\n\nOn Vulkan, I was unsure how to force a device loss. In the spec [2] it says  \"once a device is lost, command execution may fail, and commands that return a VkResult may return VK_ERROR_DEVICE_LOST\". Seems like the worst case is that an error is returned upon a call to SetDebugUtilsObjectNameEXT - and if the device is already lost - that doesn\u0027t seem like a big deal.\n\n[1] https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device5-removedevice\n[2] https://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/chap5.html#devsandqueues-lost-device",
+      "parentUuid": "31e55fd9_29be8b9e",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
