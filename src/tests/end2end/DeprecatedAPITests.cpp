@@ -68,7 +68,7 @@ TEST_P(DeprecationTests, StoreOpClear) {
     descriptor.usage = wgpu::TextureUsage::RenderAttachment;
     wgpu::Texture depthStencil = device.CreateTexture(&descriptor);
 
-    wgpu::RenderPassDepthStencilAttachmentDescriptor* depthAttachment =
+    wgpu::RenderPassDepthStencilAttachment* depthAttachment =
         &renderPass.renderPassInfo.cDepthStencilAttachmentInfo;
     renderPass.renderPassInfo.depthStencilAttachment = depthAttachment;
     depthAttachment->view = depthStencil.CreateView();
