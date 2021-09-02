@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b369722_13ff7ec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T18:13:24Z",
+      "side": 1,
+      "message": "PTAL at the stack. Got bored waiting for food to cook. There are more deprecations to finish too!",
+      "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
