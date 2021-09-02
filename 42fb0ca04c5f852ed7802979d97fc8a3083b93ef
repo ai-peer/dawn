@@ -106,6 +106,24 @@
       "parentUuid": "aef853a4_a1454756",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "381a2e60_b37e664a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T18:12:38Z",
+      "side": 1,
+      "message": "\u003e Further, I think we should also skip setting the label if device-\u003eIsLost(). We might be able to write a test for that as well with device-\u003eAPILoseForTesting()\n\nWhy do we need this?",
+      "parentUuid": "528c5335_06564732",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
