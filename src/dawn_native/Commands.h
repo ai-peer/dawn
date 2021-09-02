@@ -63,6 +63,7 @@ namespace dawn_native {
         SetBindGroup,
         SetIndexBuffer,
         SetVertexBuffer,
+        WriteBuffer,
         WriteTimestamp,
     };
 
@@ -142,6 +143,12 @@ namespace dawn_native {
         TextureCopy source;
         TextureCopy destination;
         Extent3D copySize;  // Texels
+    };
+
+    struct WriteBufferCmd {
+        Ref<BufferBase> buffer;
+        uint64_t offset;
+        std::vector<uint8_t> data;
     };
 
     struct DispatchCmd {

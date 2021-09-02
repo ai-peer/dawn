@@ -439,4 +439,13 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError ValidateCanCopyFromBufferInternal(const BufferBase* buffer) {
+        if (!(buffer->GetUsage() & wgpu::BufferUsage::CopySrc) &&
+            !(buffer->GetInternalUsage() & wgpu::BufferUsage::CopySrc)) {
+            return DAWN_VALIDATION_ERROR("buffer cannot be used as a copy source.");
+        }
+
+        return {};
+    }
+
 }  // namespace dawn_native

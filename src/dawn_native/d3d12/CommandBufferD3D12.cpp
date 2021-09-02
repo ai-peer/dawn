@@ -18,6 +18,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
@@ -900,6 +901,13 @@ namespace dawn_native { namespace d3d12 {
                             }
                         }
                     }
+                    break;
+                }
+
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
+                    DAWN_TRY(GetDevice()->GetQueue()->WriteBuffer(
+                        cmd->buffer.Get(), cmd->offset, cmd->data.data(), cmd->data.size()));
                     break;
                 }
 
