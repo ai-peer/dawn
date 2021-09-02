@@ -22,7 +22,9 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/PassResourceUsage.h"
 
+#include <cstdint>
 #include <string>
+#include <vector>
 
 namespace dawn_native {
 
@@ -45,6 +47,11 @@ namespace dawn_native {
                                    BufferBase* destination,
                                    uint64_t destinationOffset,
                                    uint64_t size);
+        void APICopyBufferToBufferInternal(BufferBase* source,
+                                           uint64_t sourceOffset,
+                                           BufferBase* destination,
+                                           uint64_t destinationOffset,
+                                           uint64_t size);
         void APICopyBufferToTexture(const ImageCopyBuffer* source,
                                     const ImageCopyTexture* destination,
                                     const Extent3D* copySize);
@@ -72,6 +79,10 @@ namespace dawn_native {
 
         CommandBufferBase* APIFinish(const CommandBufferDescriptor* descriptor = nullptr);
 
+        // Encodes a command which is equivalent to Queue::WriteBuffer, to allow for host-to-GPU
+        // copies to be ordered against other encoded commands.
+        void EncodeWriteBuffer(BufferBase* buffer, uint64_t offset, std::vector<uint8_t> data);
+
       private:
         ResultOrError<Ref<CommandBufferBase>> FinishInternal(
             const CommandBufferDescriptor* descriptor);
@@ -83,6 +94,16 @@ namespace dawn_native {
         void APICopyTextureToTextureHelper(const ImageCopyTexture* source,
                                            const ImageCopyTexture* destination,
                                            const Extent3D* copySize);
+
+        // Helper to be able to implement both APICopyBufferToBuffer and
+        // APICopyBufferToBufferInternal. The only difference between both
+        // copies is that the Internal one will also check internal usage.
+        template <bool Internal>
+        void APICopyBufferToBufferHelper(BufferBase* source,
+                                         uint64_t sourceOffset,
+                                         BufferBase* destination,
+                                         uint64_t destinationOffset,
+                                         uint64_t size);
 
         MaybeError ValidateFinish() const;
 

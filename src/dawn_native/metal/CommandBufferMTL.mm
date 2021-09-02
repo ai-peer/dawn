@@ -18,6 +18,7 @@
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/ExternalTexture.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/metal/BindGroupMTL.h"
 #include "dawn_native/metal/BufferMTL.h"
@@ -913,6 +914,13 @@ namespace dawn_native { namespace metal {
                                                             copy->destination.origin.y,
                                                             destinationOriginZ)];
                     }
+                    break;
+                }
+
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
+                    DAWN_TRY(GetDevice()->GetQueue()->WriteBuffer(
+                        cmd->buffer.Get(), cmd->offset, cmd->data.data(), cmd->data.size()));
                     break;
                 }
 
