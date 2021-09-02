@@ -553,6 +553,7 @@ namespace dawn_native {
         uint32_t width = 0;
         uint32_t height = 0;
         Ref<AttachmentState> attachmentState;
+        mEncodingContext.WillBeginRenderPass();
         bool success =
             mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 uint32_t sampleCount = 0;
