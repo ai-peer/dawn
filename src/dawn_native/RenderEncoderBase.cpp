@@ -156,16 +156,6 @@ namespace dawn_native {
                 DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
                 DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
 
-                // Indexed indirect draws need a compute-shader based validation check that the
-                // range of indices is contained inside the index buffer on Metal. Disallow them as
-                // unsafe until the validation is implemented.
-                if (GetDevice()->IsToggleEnabled(Toggle::DisallowUnsafeAPIs)) {
-                    return DAWN_VALIDATION_ERROR(
-                        "DrawIndexedIndirect is disallowed because it doesn't validate that the "
-                        "index "
-                        "range is valid yet.");
-                }
-
                 if (indirectOffset % 4 != 0) {
                     return DAWN_VALIDATION_ERROR("Indirect offset must be a multiple of 4");
                 }
@@ -178,8 +168,15 @@ namespace dawn_native {
 
             DrawIndexedIndirectCmd* cmd =
                 allocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
-            cmd->indirectBuffer = indirectBuffer;
-            cmd->indirectOffset = indirectOffset;
+            if (IsValidationEnabled()) {
+                // `cmd` will be populated when the EncodingContext encodes a validation pass to
+                // precede our enclosing render pass.
+                mValidationEncoder.EnqueueIndexedIndirectDraw(&mCommandBufferState, indirectBuffer,
+                                                              indirectOffset, cmd);
+            } else {
+                cmd->indirectBuffer = indirectBuffer;
+                cmd->indirectOffset = indirectOffset;
+            }
 
             mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 

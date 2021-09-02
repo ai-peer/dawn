@@ -19,12 +19,15 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/ErrorData.h"
 #include "dawn_native/PassResourceUsageTracker.h"
+#include "dawn_native/RenderValidationEncoder.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <string>
+#include <vector>
 
 namespace dawn_native {
 
+    class CommandEncoder;
     class DeviceBase;
     class ObjectBase;
 
@@ -69,13 +72,21 @@ namespace dawn_native {
                 return false;
             }
             ASSERT(!mWasMovedToIterator);
-            return !ConsumedError(encodeFunction(&mAllocator));
+            return !ConsumedError(encodeFunction(&mCurrentAllocator));
         }
+
+        // Must be called prior to encoding a BeginRenderPassCmd. Note that it's OK to call this
+        // and then not actually call EnterPass+ExitRenderPass, for example if some other pass setup
+        // failed validation before the BeginRenderPassCmd could be encoded.
+        void WillBeginRenderPass();
 
         // Functions to set current encoder state
         void EnterPass(const ObjectBase* passEncoder);
-        void ExitPass(const ObjectBase* passEncoder, RenderPassResourceUsage usages);
-        void ExitPass(const ObjectBase* passEncoder, ComputePassResourceUsage usages);
+        MaybeError ExitRenderPass(const ObjectBase* passEncoder,
+                                  RenderPassResourceUsageTracker usageTracker,
+                                  CommandEncoder* commandEncoder,
+                                  RenderValidationEncoder validationEncoder);
+        void ExitComputePass(const ObjectBase* passEncoder, ComputePassResourceUsage usages);
         MaybeError Finish();
 
         const RenderPassUsages& GetRenderPassUsages() const;
@@ -84,6 +95,8 @@ namespace dawn_native {
         ComputePassUsages AcquireComputePassUsages();
 
       private:
+        void CommitCommands(CommandAllocator allocator);
+
         bool IsFinished() const;
         void MoveToIterator();
 
@@ -104,7 +117,9 @@ namespace dawn_native {
         ComputePassUsages mComputePassUsages;
         bool mWereComputePassUsagesAcquired = false;
 
-        CommandAllocator mAllocator;
+        CommandAllocator mCurrentAllocator;
+
+        std::vector<CommandAllocator> mAllocators;
         CommandIterator mIterator;
         bool mWasMovedToIterator = false;
         bool mWereCommandsAcquired = false;

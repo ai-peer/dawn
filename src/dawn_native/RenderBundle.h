@@ -21,6 +21,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/PassResourceUsage.h"
+#include "dawn_native/RenderValidationEncoder.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -36,11 +37,13 @@ namespace dawn_native {
         RenderBundleBase(RenderBundleEncoder* encoder,
                          const RenderBundleDescriptor* descriptor,
                          Ref<AttachmentState> attachmentState,
-                         RenderPassResourceUsage resourceUsage);
+                         RenderPassResourceUsage resourceUsage,
+                         RenderValidationEncoder validationEncoder);
 
         static RenderBundleBase* MakeError(DeviceBase* device);
 
         CommandIterator* GetCommands();
+        RenderValidationEncoder* GetValidationEncoder();
 
         const AttachmentState* GetAttachmentState() const;
         const RenderPassResourceUsage& GetResourceUsage() const;
@@ -52,6 +55,7 @@ namespace dawn_native {
         RenderBundleBase(DeviceBase* device, ErrorTag errorTag);
 
         CommandIterator mCommands;
+        RenderValidationEncoder mValidationEncoder;
         Ref<AttachmentState> mAttachmentState;
         RenderPassResourceUsage mResourceUsage;
     };
