@@ -70,6 +70,24 @@
       "parentUuid": "2558fe76_e7773a2f",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef853a4_a1454756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T16:28:59Z",
+      "side": 1,
+      "message": "Error objects are pure frontend objects though. But what you mentioned in your earlier comment (we had a race) makes sense: we zero-out the handles when the buffer or texture is destroyed.",
+      "parentUuid": "b982eeba_cc0d3325",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
