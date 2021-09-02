@@ -124,6 +124,24 @@
       "parentUuid": "528c5335_06564732",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa9929c6_d767474b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-02T18:14:42Z",
+      "side": 1,
+      "message": "mh, maybe just Vulkan? I would think we can\u0027t call:\n\ndevice-\u003efn.SetDebugUtilsObjectNameEXT(device-\u003eGetVkHandle(), ..)\n\nif the device is lost",
+      "parentUuid": "381a2e60_b37e664a",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
