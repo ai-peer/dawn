@@ -16,6 +16,23 @@
       "message": "PTAL at the stack. Got bored waiting for food to cook. There are more deprecations to finish too!",
       "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323338e2_a5b72af4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-02T21:45:46Z",
+      "side": 1,
+      "message": "LGTM, looks like we need a CHromium update first",
+      "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
