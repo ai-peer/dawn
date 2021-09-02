@@ -752,6 +752,88 @@ TEST_P(DepthStencilStateTest, StencilFrontAndBackFace) {
     DoTest({{state, RGBA8::kRed, 0.f, 0u, wgpu::FrontFace::CW}}, RGBA8::kZero, RGBA8::kRed);
 }
 
+// Test that the depth reference of a new render pass is initialized to default value 0
+TEST_P(DepthStencilStateTest, StencilReferenceNoInheriting) {
+    wgpu::DepthStencilState stencilAlwaysReplaceState;
+    stencilAlwaysReplaceState.stencilFront.compare = wgpu::CompareFunction::Always;
+    stencilAlwaysReplaceState.stencilFront.passOp = wgpu::StencilOperation::Replace;
+    stencilAlwaysReplaceState.stencilBack.compare = wgpu::CompareFunction::Always;
+    stencilAlwaysReplaceState.stencilBack.passOp = wgpu::StencilOperation::Replace;
+
+    wgpu::DepthStencilState stencilEqualKeepState;
+    stencilEqualKeepState.stencilFront.compare = wgpu::CompareFunction::Equal;
+    stencilEqualKeepState.stencilFront.passOp = wgpu::StencilOperation::Keep;
+    stencilEqualKeepState.stencilBack.compare = wgpu::CompareFunction::Equal;
+    stencilEqualKeepState.stencilBack.passOp = wgpu::StencilOperation::Keep;
+
+    // First drawing sets the stencil to 0x1, and the second drawing requires the stencil to be 0x0
+    const std::vector<TestSpec> testParams = {{stencilAlwaysReplaceState, RGBA8::kRed, 0.f, 0x1},
+                                              {stencilEqualKeepState, RGBA8::kGreen, 0.f, 0x0}};
+
+    const std::pair<RGBA8, RGBA8> expectation = {RGBA8::kZero, RGBA8::kZero};
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+
+    struct TriangleData {
+        float color[3];
+        float depth;
+    };
+
+    utils::ComboRenderPassDescriptor renderPass({renderTargetView}, depthTextureView);
+    renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Load;
+    renderPass.cDepthStencilAttachmentInfo.stencilLoadOp = wgpu::LoadOp::Load;
+
+    for (size_t i = 0; i < testParams.size(); ++i) {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+
+        const TestSpec& test = testParams[i];
+
+        TriangleData data = {
+            {static_cast<float>(test.color.r) / 255.f, static_cast<float>(test.color.g) / 255.f,
+             static_cast<float>(test.color.b) / 255.f},
+            test.depth,
+        };
+        // Upload a buffer for each triangle's depth and color data
+        wgpu::Buffer buffer = utils::CreateBufferFromData(device, &data, sizeof(TriangleData),
+                                                          wgpu::BufferUsage::Uniform);
+
+        // Create a pipeline for the triangles with the test spec's depth stencil state
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
+        *depthStencil = test.depthStencil;
+        depthStencil->format = wgpu::TextureFormat::Depth24PlusStencil8;
+        descriptor.primitive.frontFace = test.frontFace;
+
+        wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&descriptor);
+
+        // Create a bind group for the data
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {{0, buffer, 0, sizeof(TriangleData)}});
+
+        pass.SetPipeline(pipeline);
+        // Set the stencil reference for the first pass, and assert that for other pass it should be
+        // default value of 0
+        if (i == 0) {
+            pass.SetStencilReference(test.stencil);
+        }
+        pass.SetBindGroup(0, bindGroup);  // Set the bind group which contains color and depth data
+        pass.Draw(6);
+
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_PIXEL_RGBA8_EQ(expectation.first, renderTarget, kRTSize / 4, kRTSize / 2)
+        << "Front face check failed";
+    EXPECT_PIXEL_RGBA8_EQ(expectation.second, renderTarget, 3 * kRTSize / 4, kRTSize / 2)
+        << "Back face check failed";
+}
+
 DAWN_INSTANTIATE_TEST(DepthStencilStateTest,
                       D3D12Backend(),
                       MetalBackend(),
