@@ -1518,4 +1518,8 @@ namespace dawn_native {
         return PipelineCompatibilityToken(mNextPipelineCompatibilityToken++);
     }
 
+    ValidationScratchBuffer* DeviceBase::GetValidationScratchBuffer() {
+        return &mValidationScratchBuffer;
+    }
+
 }  // namespace dawn_native
