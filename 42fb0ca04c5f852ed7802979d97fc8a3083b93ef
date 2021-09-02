@@ -16,6 +16,24 @@
       "message": "Note this should not be required for the Vulkan implementation. Vulkan feeds an object handle into a function, which should just error if invalid.",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9c61703_e0586ce8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-02T16:24:43Z",
+      "side": 1,
+      "message": "Can wea add a test? I\u0027m concerned about\n\nbuffer.destroy();\nbuffer.label \u003d \"foo\";\n\nthe allocation backing mHandle is freed and the handle is set to null.\nWe still don\u0027t want to incur Vulkan backend validation layers, so we should probably skip for Vulkan as well.\n\nFurther, I think we should also skip setting the label if device-\u003eIsLost(). We might be able to write a test for that as well with device-\u003eAPILoseForTesting()",
+      "parentUuid": "aefb18a5_d1d17bfc",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
