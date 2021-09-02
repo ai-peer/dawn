@@ -52,6 +52,24 @@
       "parentUuid": "aefb18a5_d1d17bfc",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b982eeba_cc0d3325",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-02T16:27:27Z",
+      "side": 1,
+      "message": "You can call SetLabel on an error object. WE could either validate you don\u0027t do that, or no-op stuff in the backend. I think no-op works better so that after you create the error object, you can setLabel and still get messages like \"buffer myObject is an error\"",
+      "parentUuid": "2558fe76_e7773a2f",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
