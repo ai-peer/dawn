@@ -22,7 +22,9 @@
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/PassResourceUsage.h"
 
+#include <cstdint>
 #include <string>
+#include <vector>
 
 namespace dawn_native {
 
@@ -71,6 +73,10 @@ namespace dawn_native {
         void APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex);
 
         CommandBufferBase* APIFinish(const CommandBufferDescriptor* descriptor = nullptr);
+
+        // Encodes a command which is equivalent to Queue::WriteBuffer, to allow for host-to-GPU
+        // copies to be ordered against other encoded commands.
+        void EncodeWriteBuffer(BufferBase* buffer, uint64_t offset, std::vector<uint8_t> data);
 
       private:
         ResultOrError<Ref<CommandBufferBase>> FinishInternal(
