@@ -19,6 +19,7 @@
 
 #include "dawn_native/AttachmentState.h"
 #include "dawn_native/BindingInfo.h"
+#include "dawn_native/Buffer.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -63,6 +64,7 @@ namespace dawn_native {
         SetBindGroup,
         SetIndexBuffer,
         SetVertexBuffer,
+        WriteBuffer,
         WriteTimestamp,
     };
 
@@ -144,6 +146,12 @@ namespace dawn_native {
         Extent3D copySize;  // Texels
     };
 
+    struct WriteBufferCmd {
+        Ref<BufferBase> buffer;
+        uint64_t offset;
+        std::vector<uint8_t> data;
+    };
+
     struct DispatchCmd {
         uint32_t x;
         uint32_t y;
@@ -176,8 +184,7 @@ namespace dawn_native {
     };
 
     struct DrawIndexedIndirectCmd {
-        Ref<BufferBase> indirectBuffer;
-        uint64_t indirectOffset;
+        Ref<DeferredBufferRef> indirectBufferRef;
     };
 
     struct EndComputePassCmd {};

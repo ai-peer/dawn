@@ -19,6 +19,7 @@
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/ExternalTexture.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/VertexFormat.h"
 #include "dawn_native/opengl/BufferGL.h"
@@ -827,6 +828,13 @@ namespace dawn_native { namespace opengl {
                     break;
                 }
 
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
+                    DAWN_TRY(GetDevice()->GetQueue()->WriteBuffer(
+                        cmd->buffer.Get(), cmd->offset, cmd->data.data(), cmd->data.size()));
+                    break;
+                }
+
                 case Command::ResolveQuerySet: {
                     // TODO(crbug.com/dawn/434): Resolve non-precise occlusion query.
                     SkipCommand(&mCommands, type);
@@ -1169,11 +1177,13 @@ namespace dawn_native { namespace opengl {
 
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
+                    ASSERT(draw->indirectBufferRef->GetBuffer() != nullptr);
+
                     vertexStateBufferBindingTracker.Apply(gl);
                     bindGroupTracker.Apply(gl);
 
-                    uint64_t indirectBufferOffset = draw->indirectOffset;
-                    Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
+                    uint64_t indirectBufferOffset = draw->indirectBufferRef->GetOffset();
+                    Buffer* indirectBuffer = ToBackend(draw->indirectBufferRef->GetBuffer());
 
                     gl.BindBuffer(GL_DRAW_INDIRECT_BUFFER, indirectBuffer->GetHandle());
                     gl.DrawElementsIndirect(

@@ -19,6 +19,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/EnumMaskIterator.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/vulkan/BindGroupVk.h"
 #include "dawn_native/vulkan/BufferVk.h"
@@ -728,6 +729,13 @@ namespace dawn_native { namespace vulkan {
                     break;
                 }
 
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
+                    DAWN_TRY(GetDevice()->GetQueue()->WriteBuffer(
+                        cmd->buffer.Get(), cmd->offset, cmd->data.data(), cmd->data.size()));
+                    break;
+                }
+
                 case Command::ResolveQuerySet: {
                     ResolveQuerySetCmd* cmd = mCommands.NextCommand<ResolveQuerySetCmd>();
                     QuerySet* querySet = ToBackend(cmd->querySet.Get());
@@ -1043,13 +1051,15 @@ namespace dawn_native { namespace vulkan {
                 }
 
                 case Command::DrawIndexedIndirect: {
-                    DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
-                    VkBuffer indirectBuffer = ToBackend(draw->indirectBuffer)->GetHandle();
+                    DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
+                    ASSERT(draw->indirectBufferRef->GetBuffer() != nullptr);
+                    VkBuffer indirectBuffer =
+                        ToBackend(draw->indirectBufferRef->GetBuffer())->GetHandle();
 
                     descriptorSets.Apply(device, recordingContext, VK_PIPELINE_BIND_POINT_GRAPHICS);
                     device->fn.CmdDrawIndexedIndirect(
-                        commands, indirectBuffer, static_cast<VkDeviceSize>(draw->indirectOffset),
-                        1, 0);
+                        commands, indirectBuffer,
+                        static_cast<VkDeviceSize>(draw->indirectBufferRef->GetOffset()), 1, 0);
                     break;
                 }
 
