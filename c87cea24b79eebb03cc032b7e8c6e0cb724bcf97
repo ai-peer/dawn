@@ -33,6 +33,23 @@
       "message": "LGTM, looks like we need a CHromium update first",
       "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "424a900e_52e4de8f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-02T22:59:35Z",
+      "side": 1,
+      "message": "LGTM as well. If a fix for removing the Chromium side isn\u0027t already in flight I\u0027d be happy to do it.",
+      "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
