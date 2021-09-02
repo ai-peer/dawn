@@ -22,6 +22,7 @@
 #include "dawn_native/dawn_platform.h"
 
 #include <string>
+#include <vector>
 
 namespace dawn_native {
 
@@ -69,7 +70,7 @@ namespace dawn_native {
                 return false;
             }
             ASSERT(!mWasMovedToIterator);
-            return !ConsumedError(encodeFunction(&mAllocator));
+            return !ConsumedError(encodeFunction(&mCurrentAllocator));
         }
 
         // Functions to set current encoder state
@@ -84,6 +85,8 @@ namespace dawn_native {
         ComputePassUsages AcquireComputePassUsages();
 
       private:
+        void CommitCommands(CommandAllocator allocator);
+
         bool IsFinished() const;
         void MoveToIterator();
 
@@ -104,7 +107,9 @@ namespace dawn_native {
         ComputePassUsages mComputePassUsages;
         bool mWereComputePassUsagesAcquired = false;
 
-        CommandAllocator mAllocator;
+        CommandAllocator mCurrentAllocator;
+
+        std::vector<CommandAllocator> mAllocators;
         CommandIterator mIterator;
         bool mWasMovedToIterator = false;
         bool mWereCommandsAcquired = false;
