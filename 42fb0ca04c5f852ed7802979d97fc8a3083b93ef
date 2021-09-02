@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aefb18a5_d1d17bfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-09-02T16:18:27Z",
+      "side": 1,
+      "message": "Note this should not be required for the Vulkan implementation. Vulkan feeds an object handle into a function, which should just error if invalid.",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
