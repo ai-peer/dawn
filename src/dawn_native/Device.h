@@ -22,6 +22,7 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/Toggles.h"
+#include "dawn_native/ValidationScratchBuffer.h"
 
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
@@ -302,6 +303,8 @@ namespace dawn_native {
 
         PipelineCompatibilityToken GetNextPipelineCompatibilityToken();
 
+        ValidationScratchBuffer* GetValidationScratchBuffer();
+
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
@@ -463,6 +466,8 @@ namespace dawn_native {
 
         std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
         std::unique_ptr<dawn_platform::WorkerTaskPool> mWorkerTaskPool;
+
+        ValidationScratchBuffer mValidationScratchBuffer{this};
     };
 
 }  // namespace dawn_native
