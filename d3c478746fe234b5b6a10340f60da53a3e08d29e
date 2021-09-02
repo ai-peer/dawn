@@ -101,6 +101,24 @@
       "message": "Nit: \"device lost\" or \"device loss\"? (It could make sense as written, as in \"device lost message/signal/event\" might be fake, just verifying.)",
       "revId": "d3c478746fe234b5b6a10340f60da53a3e08d29e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f588c9d_5342175d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T16:27:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dc9d9e8_d19e8aa3",
+      "revId": "d3c478746fe234b5b6a10340f60da53a3e08d29e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
