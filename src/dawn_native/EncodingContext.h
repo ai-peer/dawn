@@ -22,6 +22,7 @@
 #include "dawn_native/dawn_platform.h"
 
 #include <string>
+#include <vector>
 
 namespace dawn_native {
 
@@ -69,7 +70,7 @@ namespace dawn_native {
                 return false;
             }
             ASSERT(!mWasMovedToIterator);
-            return !ConsumedError(encodeFunction(&mAllocator));
+            return !ConsumedError(encodeFunction(&mCurrentAllocator));
         }
 
         // Functions to set current encoder state
@@ -84,6 +85,13 @@ namespace dawn_native {
         ComputePassUsages AcquireComputePassUsages();
 
       private:
+        // Places mCurrentAllocator at the end of mAllocators and resets it to a default state.
+        // This is useful to insert boundaries in the encoded command sequence where we may need to
+        // sequence commands in a different order than they were encoded in. Namely we do this at
+        // pass boundaries so that passes can inject validation commands that precede their own
+        // already-encoded commands.
+        void BeginNewCommandSequence();
+
         bool IsFinished() const;
         void MoveToIterator();
 
@@ -104,7 +112,9 @@ namespace dawn_native {
         ComputePassUsages mComputePassUsages;
         bool mWereComputePassUsagesAcquired = false;
 
-        CommandAllocator mAllocator;
+        CommandAllocator mCurrentAllocator;
+
+        std::vector<CommandAllocator> mAllocators;
         CommandIterator mIterator;
         bool mWasMovedToIterator = false;
         bool mWereCommandsAcquired = false;

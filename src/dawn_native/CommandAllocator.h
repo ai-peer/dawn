@@ -75,8 +75,10 @@ namespace dawn_native {
         CommandIterator(CommandIterator&& other);
         CommandIterator& operator=(CommandIterator&& other);
 
-        CommandIterator(CommandAllocator&& allocator);
-        CommandIterator& operator=(CommandAllocator&& allocator);
+        // Shorthand constructor for acquiring CommandBlocks from a single CommandAllocator.
+        explicit CommandIterator(CommandAllocator allocator);
+
+        void AcquireCommandBlocks(std::vector<CommandAllocator> allocators);
 
         template <typename E>
         bool NextCommandId(E* commandId) {
@@ -149,6 +151,19 @@ namespace dawn_native {
         CommandAllocator();
         ~CommandAllocator();
 
+        // NOTE: A moved-from CommandAllocator is in a valid but unspecified state. If reusing a
+        // moved-from CommandAllocator, it should be explicitly Reset() first.
+        CommandAllocator(CommandAllocator&&);
+        CommandAllocator& operator=(CommandAllocator&&);
+
+        // Frees any allocated blocks still held by the allocator and restores the allocator to its
+        // initial default state.
+        void Reset();
+
+        bool IsEmpty() const {
+            return mBlocks.empty();
+        }
+
         template <typename T, typename E>
         T* Allocate(E commandId) {
             static_assert(sizeof(E) == sizeof(uint32_t), "");
@@ -185,6 +200,9 @@ namespace dawn_native {
         // bound of the space that will be needed in addition to the command data.
         static constexpr size_t kWorstCaseAdditionalSize =
             sizeof(uint32_t) + kMaxSupportedAlignment + alignof(uint32_t) + sizeof(uint32_t);
+
+        // The default value of mLastAllocationSize.
+        static constexpr size_t kDefaultBaseAllocationSize = 2048;
 
         friend CommandIterator;
         CommandBlocks&& AcquireBlocks();
@@ -238,7 +256,7 @@ namespace dawn_native {
         bool GetNewBlock(size_t minimumSize);
 
         CommandBlocks mBlocks;
-        size_t mLastAllocationSize = 2048;
+        size_t mLastAllocationSize = kDefaultBaseAllocationSize;
 
         // Pointers to the current range of allocation in the block. Guaranteed to allow for at
         // least one uint32_t if not nullptr, so that the special kEndOfBlock command id can always

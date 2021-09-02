@@ -47,8 +47,10 @@ namespace dawn_native {
     }
 
     void EncodingContext::MoveToIterator() {
+        // All commands must be committed to mAllocators by now.
+        ASSERT(mCurrentAllocator.IsEmpty());
         if (!mWasMovedToIterator) {
-            mIterator = std::move(mAllocator);
+            mIterator.AcquireCommandBlocks(std::move(mAllocators));
             mWasMovedToIterator = true;
         }
     }
@@ -73,6 +75,8 @@ namespace dawn_native {
         ASSERT(passEncoder != nullptr);
 
         mCurrentEncoder = passEncoder;
+
+        BeginNewCommandSequence();
     }
 
     void EncodingContext::ExitPass(const ObjectBase* passEncoder, RenderPassResourceUsage usages) {
@@ -81,6 +85,7 @@ namespace dawn_native {
 
         mCurrentEncoder = mTopLevelEncoder;
         mRenderPassUsages.push_back(std::move(usages));
+        BeginNewCommandSequence();
     }
 
     void EncodingContext::ExitPass(const ObjectBase* passEncoder, ComputePassResourceUsage usages) {
@@ -89,6 +94,7 @@ namespace dawn_native {
 
         mCurrentEncoder = mTopLevelEncoder;
         mComputePassUsages.push_back(std::move(usages));
+        BeginNewCommandSequence();
     }
 
     const RenderPassUsages& EncodingContext::GetRenderPassUsages() const {
@@ -126,6 +132,9 @@ namespace dawn_native {
         // if Finish() has been called.
         mCurrentEncoder = nullptr;
         mTopLevelEncoder = nullptr;
+        if (!mCurrentAllocator.IsEmpty()) {
+            mAllocators.push_back(std::move(mCurrentAllocator));
+        }
 
         if (mError != nullptr) {
             return std::move(mError);
@@ -134,6 +143,14 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Command buffer recording ended mid-pass");
         }
         return {};
+    }
+
+    void EncodingContext::BeginNewCommandSequence() {
+        if (mCurrentAllocator.IsEmpty()) {
+            return;
+        }
+        mAllocators.push_back(std::move(mCurrentAllocator));
+        mCurrentAllocator.Reset();
     }
 
     bool EncodingContext::IsFinished() const {
