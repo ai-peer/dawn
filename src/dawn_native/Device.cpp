@@ -195,6 +195,8 @@ namespace dawn_native {
     }
 
     void DeviceBase::ShutDownBase() {
+        mValidationScratchBuffer.Release();
+
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
             // Call all the callbacks immediately as the device is about to shut down.
@@ -1516,6 +1518,10 @@ namespace dawn_native {
 
     PipelineCompatibilityToken DeviceBase::GetNextPipelineCompatibilityToken() {
         return PipelineCompatibilityToken(mNextPipelineCompatibilityToken++);
+    }
+
+    ValidationScratchBuffer* DeviceBase::GetValidationScratchBuffer() {
+        return &mValidationScratchBuffer;
     }
 
 }  // namespace dawn_native
