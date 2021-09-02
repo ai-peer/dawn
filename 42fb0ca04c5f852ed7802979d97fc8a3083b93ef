@@ -142,6 +142,24 @@
       "parentUuid": "381a2e60_b37e664a",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8436acf9_bd765731",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2021-09-02T18:18:00Z",
+      "side": 1,
+      "message": "If the device is lost on D3D12, I don\u0027t think we can trust that the objects associated with that device are valid.",
+      "parentUuid": "aa9929c6_d767474b",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
