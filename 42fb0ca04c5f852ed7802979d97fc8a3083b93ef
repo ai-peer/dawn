@@ -160,6 +160,24 @@
       "parentUuid": "aa9929c6_d767474b",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e55fd9_29be8b9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T18:21:01Z",
+      "side": 1,
+      "message": "In general my understanding from both D3D12 and Vulkan is that if a device is lost, the CPU side objects are still valid and we can call functions on them. Setting a name is purely CPU-side so it shouldn\u0027t fail. Can we double check? In the VUID for the Vulkan function I don\u0027t see anything requiring the device to be alive, but there might be something in the device loss section.",
+      "parentUuid": "8436acf9_bd765731",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
