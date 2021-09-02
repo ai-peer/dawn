@@ -1153,6 +1153,18 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError DeviceBase::ValidateLayoutAndSetDefaultLayout(
+        FlatRenderPipelineDescriptor* appliedDescriptor) {
+        if (appliedDescriptor->layout == nullptr) {
+            Ref<PipelineLayoutBase> layoutRef;
+            DAWN_TRY_ASSIGN(layoutRef,
+                            PipelineLayoutBase::CreateDefault(this, GetStages(appliedDescriptor)));
+            appliedDescriptor->SetLayout(std::move(layoutRef));
+        }
+
+        return {};
+    }
+
     ResultOrError<Ref<PipelineLayoutBase>>
     DeviceBase::ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
         const RenderPipelineDescriptor& descriptor,
@@ -1287,12 +1299,8 @@ namespace dawn_native {
             DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
         }
 
-        // Ref will keep the pipeline layout alive until the end of the function where
-        // the pipeline will take another reference.
-        Ref<PipelineLayoutBase> layoutRef;
-        RenderPipelineDescriptor appliedDescriptor;
-        DAWN_TRY_ASSIGN(layoutRef, ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
-                                       *descriptor, &appliedDescriptor));
+        FlatRenderPipelineDescriptor appliedDescriptor(descriptor);
+        DAWN_TRY(ValidateLayoutAndSetDefaultLayout(&appliedDescriptor));
 
         // Call the callback directly when we can get a cached render pipeline object.
         auto pipelineAndBlueprintFromCache = GetCachedRenderPipeline(&appliedDescriptor);
