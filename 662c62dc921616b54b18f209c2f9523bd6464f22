@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "662c62dc921616b54b18f209c2f9523bd6464f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cc1dc67_06f250a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T17:47:23Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "662c62dc921616b54b18f209c2f9523bd6464f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e93696c_4685d251",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T17:47:23Z",
+      "side": 1,
+      "message": "I think we could just add bool setStencilReference \u003d true to TestSpec and modify DoTest. All other tests shouldn\u0027t need to be changed and we\u0027d maximally reuse code.",
+      "revId": "662c62dc921616b54b18f209c2f9523bd6464f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7f8e38_f198b066",
+        "filename": "src/tests/end2end/DepthStencilStateTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 857,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T17:47:23Z",
+      "side": 1,
+      "message": "nit: only",
+      "range": {
+        "startLine": 857,
+        "startChar": 11,
+        "endLine": 857,
+        "endChar": 15
+      },
+      "revId": "662c62dc921616b54b18f209c2f9523bd6464f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
