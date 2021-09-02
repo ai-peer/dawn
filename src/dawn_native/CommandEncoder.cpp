@@ -553,6 +553,7 @@ namespace dawn_native {
         uint32_t width = 0;
         uint32_t height = 0;
         Ref<AttachmentState> attachmentState;
+        mEncodingContext.WillBeginRenderPass();
         bool success =
             mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 uint32_t sampleCount = 0;
@@ -639,37 +640,17 @@ namespace dawn_native {
                                                BufferBase* destination,
                                                uint64_t destinationOffset,
                                                uint64_t size) {
-        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (GetDevice()->IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(source));
-                DAWN_TRY(GetDevice()->ValidateObject(destination));
+        APICopyBufferToBufferHelper<false>(source, sourceOffset, destination, destinationOffset,
+                                           size);
+    }
 
-                if (source == destination) {
-                    return DAWN_VALIDATION_ERROR(
-                        "Source and destination cannot be the same buffer.");
-                }
-
-                DAWN_TRY(ValidateCopySizeFitsInBuffer(source, sourceOffset, size));
-                DAWN_TRY(ValidateCopySizeFitsInBuffer(destination, destinationOffset, size));
-                DAWN_TRY(ValidateB2BCopyAlignment(size, sourceOffset, destinationOffset));
-
-                DAWN_TRY(ValidateCanUseAs(source, wgpu::BufferUsage::CopySrc));
-                DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::CopyDst));
-
-                mTopLevelBuffers.insert(source);
-                mTopLevelBuffers.insert(destination);
-            }
-
-            CopyBufferToBufferCmd* copy =
-                allocator->Allocate<CopyBufferToBufferCmd>(Command::CopyBufferToBuffer);
-            copy->source = source;
-            copy->sourceOffset = sourceOffset;
-            copy->destination = destination;
-            copy->destinationOffset = destinationOffset;
-            copy->size = size;
-
-            return {};
-        });
+    void CommandEncoder::APICopyBufferToBufferInternal(BufferBase* source,
+                                                       uint64_t sourceOffset,
+                                                       BufferBase* destination,
+                                                       uint64_t destinationOffset,
+                                                       uint64_t size) {
+        APICopyBufferToBufferHelper<true>(source, sourceOffset, destination, destinationOffset,
+                                          size);
     }
 
     void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
@@ -838,6 +819,50 @@ namespace dawn_native {
         });
     }
 
+    template <bool Internal>
+    void CommandEncoder::APICopyBufferToBufferHelper(BufferBase* source,
+                                                     uint64_t sourceOffset,
+                                                     BufferBase* destination,
+                                                     uint64_t destinationOffset,
+                                                     uint64_t size) {
+        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(GetDevice()->ValidateObject(source));
+                DAWN_TRY(GetDevice()->ValidateObject(destination));
+
+                if (source == destination) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Source and destination cannot be the same buffer.");
+                }
+
+                DAWN_TRY(ValidateCopySizeFitsInBuffer(source, sourceOffset, size));
+                DAWN_TRY(ValidateCopySizeFitsInBuffer(destination, destinationOffset, size));
+                DAWN_TRY(ValidateB2BCopyAlignment(size, sourceOffset, destinationOffset));
+
+                if (Internal) {
+                    DAWN_TRY(ValidateInternalCanUseAs(source, wgpu::BufferUsage::CopySrc));
+                    DAWN_TRY(ValidateInternalCanUseAs(destination, wgpu::BufferUsage::CopyDst));
+                } else {
+                    DAWN_TRY(ValidateCanUseAs(source, wgpu::BufferUsage::CopySrc));
+                    DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::CopyDst));
+                }
+
+                mTopLevelBuffers.insert(source);
+                mTopLevelBuffers.insert(destination);
+            }
+
+            CopyBufferToBufferCmd* copy =
+                allocator->Allocate<CopyBufferToBufferCmd>(Command::CopyBufferToBuffer);
+            copy->source = source;
+            copy->sourceOffset = sourceOffset;
+            copy->destination = destination;
+            copy->destinationOffset = destinationOffset;
+            copy->size = size;
+
+            return {};
+        });
+    }
+
     void CommandEncoder::APIInjectValidationError(const char* message) {
         if (mEncodingContext.CheckCurrentEncoder(this)) {
             mEncodingContext.HandleError(DAWN_VALIDATION_ERROR(message));
@@ -948,6 +973,18 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
         return commandBuffer.Detach();
+    }
+
+    void CommandEncoder::EncodeWriteBuffer(BufferBase* buffer,
+                                           uint64_t offset,
+                                           std::vector<uint8_t> data) {
+        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            WriteBufferCmd* cmd = allocator->Allocate<WriteBufferCmd>(Command::WriteBuffer);
+            cmd->buffer = buffer;
+            cmd->offset = offset;
+            cmd->data = std::move(data);
+            return {};
+        });
     }
 
     ResultOrError<Ref<CommandBufferBase>> CommandEncoder::FinishInternal(
