@@ -34,6 +34,24 @@
       "parentUuid": "aefb18a5_d1d17bfc",
       "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2558fe76_e7773a2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-02T16:25:46Z",
+      "side": 1,
+      "message": "Vulkan requires that the object is valid. So we need to check for VK_NULL_HANDLE first.\n\nhttps://www.khronos.org/registry/vulkan/specs/1.2-extensions/html/vkspec.html#VUID-VkDebugUtilsObjectNameInfoEXT-objectType-parameter\n\nThe question though is how we end up with an empty object. Shouldn\u0027t the object creation fail in this case?",
+      "parentUuid": "aefb18a5_d1d17bfc",
+      "revId": "42fb0ca04c5f852ed7802979d97fc8a3083b93ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
