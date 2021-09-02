@@ -22,6 +22,30 @@
       },
       "revId": "ebbbcc7ecb1cbbaf4c5c12b701c650244dfc7e20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bbd8b5f_3f248697",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-09-02T15:30:57Z",
+      "side": 1,
+      "message": "Ack. Logged as https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1099.",
+      "parentUuid": "676a147e_a4946b57",
+      "range": {
+        "startLine": 328,
+        "startChar": 39,
+        "endLine": 328,
+        "endChar": 47
+      },
+      "revId": "ebbbcc7ecb1cbbaf4c5c12b701c650244dfc7e20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
