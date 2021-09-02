@@ -47,6 +47,7 @@ namespace dawn_native {
     class StagingBufferBase;
     struct CallbackTask;
     struct FlatComputePipelineDescriptor;
+    struct FlatRenderPipelineDescriptor;
     struct InternalPipelineStore;
     struct ShaderModuleParseResult;
 
@@ -351,12 +352,6 @@ namespace dawn_native {
 
         ResultOrError<Ref<BindGroupLayoutBase>> CreateEmptyBindGroupLayout();
 
-        MaybeError ValidateLayoutAndSetDefaultLayout(
-            FlatComputePipelineDescriptor* appliedDescriptor);
-        ResultOrError<Ref<PipelineLayoutBase>>
-        ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
-            const RenderPipelineDescriptor& descriptor,
-            RenderPipelineDescriptor* outDescriptor);
         std::pair<Ref<ComputePipelineBase>, size_t> GetCachedComputePipeline(
             const ComputePipelineDescriptor* descriptor);
         std::pair<Ref<RenderPipelineBase>, size_t> GetCachedRenderPipeline(
