@@ -19,6 +19,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/EnumMaskIterator.h"
+#include "dawn_native/Queue.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/vulkan/BindGroupVk.h"
 #include "dawn_native/vulkan/BufferVk.h"
@@ -725,6 +726,13 @@ namespace dawn_native { namespace vulkan {
                         GetResourceUsages().computePasses[nextComputePassNumber]));
 
                     nextComputePassNumber++;
+                    break;
+                }
+
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
+                    DAWN_TRY(GetDevice()->GetQueue()->WriteBuffer(
+                        cmd->buffer.Get(), cmd->offset, cmd->data.data(), cmd->data.size()));
                     break;
                 }
 

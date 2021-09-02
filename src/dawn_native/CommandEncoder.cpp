@@ -553,6 +553,7 @@ namespace dawn_native {
         uint32_t width = 0;
         uint32_t height = 0;
         Ref<AttachmentState> attachmentState;
+        mEncodingContext.WillBeginRenderPass();
         bool success =
             mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 uint32_t sampleCount = 0;
@@ -653,7 +654,7 @@ namespace dawn_native {
                 DAWN_TRY(ValidateCopySizeFitsInBuffer(destination, destinationOffset, size));
                 DAWN_TRY(ValidateB2BCopyAlignment(size, sourceOffset, destinationOffset));
 
-                DAWN_TRY(ValidateCanUseAs(source, wgpu::BufferUsage::CopySrc));
+                DAWN_TRY(ValidateCanCopyFromBuffer(source));
                 DAWN_TRY(ValidateCanUseAs(destination, wgpu::BufferUsage::CopyDst));
 
                 mTopLevelBuffers.insert(source);
@@ -948,6 +949,18 @@ namespace dawn_native {
         }
         ASSERT(!IsError());
         return commandBuffer.Detach();
+    }
+
+    void CommandEncoder::EncodeWriteBuffer(BufferBase* buffer,
+                                           uint64_t offset,
+                                           std::vector<uint8_t> data) {
+        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            WriteBufferCmd* cmd = allocator->Allocate<WriteBufferCmd>(Command::WriteBuffer);
+            cmd->buffer = buffer;
+            cmd->offset = offset;
+            cmd->data = std::move(data);
+            return {};
+        });
     }
 
     ResultOrError<Ref<CommandBufferBase>> CommandEncoder::FinishInternal(

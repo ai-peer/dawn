@@ -229,12 +229,13 @@ class BufferZeroInitTest : public DawnTest {
         return device.CreateRenderPipeline(&descriptor);
     }
 
-    void ExpectLazyClearSubmitAndCheckOutputs(wgpu::CommandEncoder encoder,
-                                              wgpu::Buffer buffer,
-                                              uint64_t bufferSize,
-                                              wgpu::Texture colorAttachment) {
+    void ExpectLazyClearsSubmitAndCheckOutputs(uint32_t numLazyClears,
+                                               wgpu::CommandEncoder encoder,
+                                               wgpu::Buffer buffer,
+                                               uint64_t bufferSize,
+                                               wgpu::Texture colorAttachment) {
         wgpu::CommandBuffer commandBuffer = encoder.Finish();
-        EXPECT_LAZY_CLEAR(1u, queue.Submit(1, &commandBuffer));
+        EXPECT_LAZY_CLEAR(numLazyClears, queue.Submit(1, &commandBuffer));
 
         // Although we just bind a part of the buffer, we still expect the whole buffer to be
         // lazily initialized to 0.
@@ -285,8 +286,8 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.Draw(1);
         renderPass.EndPass();
 
-        ExpectLazyClearSubmitAndCheckOutputs(encoder, vertexBuffer, vertexBufferSize,
-                                             colorAttachment);
+        ExpectLazyClearsSubmitAndCheckOutputs(1u, encoder, vertexBuffer, vertexBufferSize,
+                                              colorAttachment);
     }
 
     void TestBufferZeroInitAsIndexBuffer(uint64_t indexBufferOffset) {
@@ -333,8 +334,8 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.DrawIndexed(1);
         renderPass.EndPass();
 
-        ExpectLazyClearSubmitAndCheckOutputs(encoder, indexBuffer, indexBufferSize,
-                                             colorAttachment);
+        ExpectLazyClearsSubmitAndCheckOutputs(1u, encoder, indexBuffer, indexBufferSize,
+                                              colorAttachment);
     }
 
     void TestBufferZeroInitAsIndirectBufferForDrawIndirect(uint64_t indirectBufferOffset) {
@@ -375,10 +376,12 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.DrawIndirect(indirectBuffer, indirectBufferOffset);
         renderPass.EndPass();
 
-        ExpectLazyClearSubmitAndCheckOutputs(encoder, indirectBuffer, bufferSize, colorAttachment);
+        ExpectLazyClearsSubmitAndCheckOutputs(1u, encoder, indirectBuffer, bufferSize,
+                                              colorAttachment);
     }
 
-    void TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(uint64_t indirectBufferOffset) {
+    void TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(size_t expectedNumLazyClears,
+                                                                  uint64_t indirectBufferOffset) {
         constexpr wgpu::TextureFormat kColorAttachmentFormat = wgpu::TextureFormat::RGBA8Unorm;
         constexpr wgpu::Color kClearColorGreen = {0.f, 1.f, 0.f, 1.f};
 
@@ -419,7 +422,8 @@ class BufferZeroInitTest : public DawnTest {
         renderPass.DrawIndexedIndirect(indirectBuffer, indirectBufferOffset);
         renderPass.EndPass();
 
-        ExpectLazyClearSubmitAndCheckOutputs(encoder, indirectBuffer, bufferSize, colorAttachment);
+        ExpectLazyClearsSubmitAndCheckOutputs(expectedNumLazyClears, encoder, indirectBuffer,
+                                              bufferSize, colorAttachment);
     }
 
     void TestBufferZeroInitAsIndirectBufferForDispatchIndirect(uint64_t indirectBufferOffset) {
@@ -460,7 +464,8 @@ class BufferZeroInitTest : public DawnTest {
         computePass.DispatchIndirect(indirectBuffer, indirectBufferOffset);
         computePass.EndPass();
 
-        ExpectLazyClearSubmitAndCheckOutputs(encoder, indirectBuffer, bufferSize, outputTexture);
+        ExpectLazyClearsSubmitAndCheckOutputs(1u, encoder, indirectBuffer, bufferSize,
+                                              outputTexture);
     }
 };
 
@@ -1276,13 +1281,13 @@ TEST_P(BufferZeroInitTest, IndirectBufferForDrawIndexedIndirect) {
     // Bind the whole buffer as an indirect buffer.
     {
         constexpr uint64_t kOffset = 0u;
-        TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(kOffset);
+        TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(2u, kOffset);
     }
 
     // Bind the buffer as an indirect buffer with a non-zero offset.
     {
         constexpr uint64_t kOffset = 8u;
-        TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(kOffset);
+        TestBufferZeroInitAsIndirectBufferForDrawIndexedIndirect(1u, kOffset);
     }
 }
 
