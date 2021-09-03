@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fd30691_869e254c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:26:07Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e06d6191_cf11549d",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-09-03T07:28:39Z",
       "side": 1,
       "message": "note: These and the ETC formats should be supported on some Metal devices. If you don\u0027t have access to a Mac, let\u0027s just the implementation on Metal in the issue as a follow up that we\u0027ll get to eventually.",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbc37cf3_7e4e061a",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:26:07Z",
+      "side": 1,
+      "message": "I **think** they\u0027re only iOS so not testable for us right now.",
+      "parentUuid": "e06d6191_cf11549d",
       "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
