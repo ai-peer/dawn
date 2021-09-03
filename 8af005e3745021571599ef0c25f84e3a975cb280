@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "998a9010_a666ec18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T07:28:39Z",
+      "side": 1,
+      "message": "LGTM. Amazing work updating the tests to work with variable compressed block sizes and simplifying them in the process!",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e06d6191_cf11549d",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T07:28:39Z",
+      "side": 1,
+      "message": "note: These and the ETC formats should be supported on some Metal devices. If you don\u0027t have access to a Mac, let\u0027s just the implementation on Metal in the issue as a follow up that we\u0027ll get to eventually.",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a0a50d7_a74a02cf",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2258,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T07:28:39Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9a5e5e7_2314d41b",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T07:28:39Z",
+      "side": 1,
+      "message": "nit: the extent that\u0027s testOrigin was changed (from texture 1 to texture2)",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47f6af56_5e75cc2c",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 633,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T07:28:39Z",
+      "side": 1,
+      "message": "I think first invalid bytes per row value would be kTestBytesPerRow - blockByteSize so we could use that to test exactly at the limit.",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50d95ae2_9e211128",
+        "filename": "src/tests/unittests/validation/QueueWriteTextureValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T07:28:39Z",
+      "side": 1,
+      "message": "nit: maybe add parenthesis to make it more clear that the multiplication happens after the division to round down the value.",
+      "range": {
+        "startLine": 750,
+        "startChar": 20,
+        "endLine": 750,
+        "endChar": 64
+      },
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
