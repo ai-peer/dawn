@@ -16,6 +16,24 @@
       "message": "Hi Austin, Corentin. Mind taking an initial look for overall approach?\n\n- I\u0027ve tested this by hacking up some examples and I believe it\u0027s solid, but\n  I\u0027ll be adding proper unit tests to the CL soon.\n- Not sure about the scratch buffer. Right now it\u0027s super dumb never shrinks.\n- Maybe we could be more efficient about copying Entry data; at least writing\n  the firstInvalidIndex from CPU to each Entry could maybe be done in one big\n  write; trade-off is possibly large host-side allocation but maybe we could\n  also maintain that in parallel with the GPU-side scratch buffer.\n\n",
       "revId": "c3b63073f611c0743f4635d54d3b41e39f09c85f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f07ce4_5292f929",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-03T18:15:28Z",
+      "side": 1,
+      "message": "Nice formatting. Let\u0027s try that again:\n\n- I\u0027ve tested this by hacking up some examples and I believe it\u0027s solid, but I\u0027ll be adding proper unit tests to the CL soon.\n- Not sure about the scratch buffer. Right now it\u0027s super dumb never shrinks.\n- Maybe we could be more efficient about copying Entry data; at least writing the firstInvalidIndex from CPU to each Entry could maybe be done in one big write; trade-off is possibly large host-side allocation but maybe we could also maintain that in parallel with the GPU-side scratch buffer.",
+      "parentUuid": "90294370_c8d2db70",
+      "revId": "c3b63073f611c0743f4635d54d3b41e39f09c85f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
