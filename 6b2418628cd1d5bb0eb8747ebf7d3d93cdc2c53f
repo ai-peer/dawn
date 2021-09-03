@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f7777f3_3b9223f1",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:19:06Z",
+      "side": 1,
+      "message": "Adding CopySrc usage will affect validation such that buffers not explicitly created with CopySrc will be able to be copied from (using the public API). That\u0027s why the other enums use kReadOnlyStorageBuffer / kInternalStorageBuffer\n\nWe could do a similar thing, but I might prefer to add an mInternalUsage, similar to what was done recently in Texture.cpp and with CopyTextureToTextureInternal which is permitted to see the internal usages.",
+      "range": {
+        "startLine": 156,
+        "startChar": 12,
+        "endLine": 156,
+        "endChar": 49
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "080af316_a4401dce",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:19:06Z",
+      "side": 1,
+      "message": "this performs the writes ~immediately. We don\u0027t want to do that because the command buffer might be submitted later.\n\nIf I create two command buffers A, then B, which both use indirect commands, and then submit only A, it\u0027ll be looking at the data for B that was recorded into the scratch buffer.\n\nIn general, problems if the end of another pass is encoded while another pass has yet to be submitted.\n\nSo problems if you do something like:\nconst encoderA \u003d device.createCommandEncoder();\nconst passA \u003d encoderA.beginRenderPass();\n// stuff\n\nconst encoderB \u003d device.createCommandEncoder();\nconst passB \u003d encoderB.beginRenderPass();\n// stuff\n\npassA.endPass() // pass A writes index buffer sizes;\npassB.endPass(); // oh no! pass B overwrite index buffer sizes for pass A!\n\n\nSo I think that:\n  1. The current scratch buffer offset should scoped to the RenderValidationEncoder - can we use the index (times stride) we\u0027re at in mIndexedIndirectDraws? Two passes from separate command encoders could be looking at the same scratch buffer, so we don\u0027t want the offset to be modified inside Claim(..);\n  2. As you mentioned, we\u0027ll probably need to keep a host-side allocation to hold the index buffer sizes.\n  3. We need to wait to perform writes until GPUQueue::Submit\n  \n  \nIn addition:\n\nNeed to check the spec, but I don\u0027t think we actually need to validate the index buffer size (passed to setIndexBuffer)!. On Vulkan, we rely on robust buffer access provided by the driver, and vkCmdBindIndexBuffer doesn\u0027t even take a size argument. The driver prevents reads from going outside of the buffer (bigger than the \"bound range\" for WebGPU). So I think WebGPU should use the same rule. basically: we can use the whole size of the buffer, not just the \"bound\" range. I\u0027m not sure if this actually helps. Trying to think to see if it simplifies the need for a potentially big host-side allocation to hold size information before submission..",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 77
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f0d72e3_3ea61922",
+        "filename": "src/dawn_native/ValidationScratchBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:19:06Z",
+      "side": 1,
+      "message": "We could set the buffer as initialized so we don\u0027t incur a lazy clear when we use it. It\u0027s internally managed so this should be safe as long as we always populate the data in the compute pass.",
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

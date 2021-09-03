@@ -16,6 +16,41 @@
       "message": "You can hold off on the reviews here btw. There\u0027s no ordering between writing index constraints into the scratch buffer and using the scratch buffer in submitted commands, so e.g. consecutive render passes can trample each others\u0027 validation data. (this bad behavior is in RenderValidationEncoder btw)\n\nNaively what I think I might like to do is have Submit take more than just backend commands, so e.g. you could introduce a WriteBuffer command that would be handled entirely in the frontend Queue. With CommandBuffer contents like:\n\n  [backend commands...] [WriteBuffer command] [backend commands...]\n  \nQueue::Submit would decompose this into a sequence of calls on itself (SubmitImpl, WriteBuffer, SubmitImpl).\n\nTo that end, I\u0027m also hoping to understand why writeBuffer etc are separate Queue calls rather than being encoded commands via a CommandEncoder.",
       "revId": "0087d25017d54290b10183f6907da1e2c63a5ebf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9bd6ba_3e36c401",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:19:06Z",
+      "side": 1,
+      "message": "I had some comments in flight, so sending them anyway\n\nWriteBuffer is separate mostly because there\u0027s no easy* analogous construct in the native APIs. It\u0027s there for convenience.\n\n*there kind of is: Vulkan has push constants, D3D12 root constants, and Metal\u0027s setBytes. but we had a hard time standardizing it - Size is pretty limited because data is inlined into the command buffer, and it makes things complicated with the binding model and how many bind groups / buffers you can bind at once.",
+      "parentUuid": "3a634857_b2fc54ef",
+      "revId": "0087d25017d54290b10183f6907da1e2c63a5ebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a3b1832_6a4f4b39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-03T23:19:06Z",
+      "side": 1,
+      "message": "ode",
+      "revId": "0087d25017d54290b10183f6907da1e2c63a5ebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
