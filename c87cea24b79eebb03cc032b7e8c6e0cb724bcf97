@@ -67,6 +67,24 @@
       "message": "Chromium removal: https://chromium-review.googlesource.com/c/chromium/src/+/3140720\nSkia removal: https://skia-review.googlesource.com/c/skia/+/445436\n\nShould be able to land cleanly once those two are merged.",
       "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7b0183_fb6c34ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-03T06:53:44Z",
+      "side": 1,
+      "message": "Thank you for pushing these two.",
+      "parentUuid": "9eb5625a_da5c810e",
+      "revId": "c87cea24b79eebb03cc032b7e8c6e0cb724bcf97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
