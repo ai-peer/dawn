@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a634857_b2fc54ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-03T22:47:56Z",
+      "side": 1,
+      "message": "You can hold off on the reviews here btw. There\u0027s no ordering between writing index constraints into the scratch buffer and using the scratch buffer in submitted commands, so e.g. consecutive render passes can trample each others\u0027 validation data. (this bad behavior is in RenderValidationEncoder btw)\n\nNaively what I think I might like to do is have Submit take more than just backend commands, so e.g. you could introduce a WriteBuffer command that would be handled entirely in the frontend Queue. With CommandBuffer contents like:\n\n  [backend commands...] [WriteBuffer command] [backend commands...]\n  \nQueue::Submit would decompose this into a sequence of calls on itself (SubmitImpl, WriteBuffer, SubmitImpl).\n\nTo that end, I\u0027m also hoping to understand why writeBuffer etc are separate Queue calls rather than being encoded commands via a CommandEncoder.",
+      "revId": "0087d25017d54290b10183f6907da1e2c63a5ebf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
