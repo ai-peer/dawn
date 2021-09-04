@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6f3cb5f_127998ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-04T02:54:29Z",
+      "side": 1,
+      "message": "LGTM, though needs some test updates",
+      "revId": "88f3d54b0ca1f3cf76bd3b0c5491ab3eec2826cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993462b3_85e42f46",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-04T02:54:29Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 202,
+        "startChar": 8,
+        "endLine": 202,
+        "endChar": 15
+      },
+      "revId": "88f3d54b0ca1f3cf76bd3b0c5491ab3eec2826cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
