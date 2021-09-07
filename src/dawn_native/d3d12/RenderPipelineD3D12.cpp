@@ -361,8 +361,6 @@ namespace dawn_native { namespace d3d12 {
             *shaders[stage] = compiledShader[stage].GetD3D12ShaderBytecode();
         }
 
-        mFirstOffsetInfo = compiledShader[SingleShaderStage::Vertex].firstOffsetInfo;
-
         PipelineLayout* layout = ToBackend(GetLayout());
 
         descriptorD3D12.pRootSignature = layout->GetRootSignature();
@@ -433,10 +431,6 @@ namespace dawn_native { namespace d3d12 {
 
     ID3D12PipelineState* RenderPipeline::GetPipelineState() const {
         return mPipelineState.Get();
-    }
-
-    const FirstOffsetInfo& RenderPipeline::GetFirstOffsetInfo() const {
-        return mFirstOffsetInfo;
     }
 
     void RenderPipeline::SetLabelImpl() {

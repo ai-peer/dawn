@@ -34,8 +34,6 @@ namespace dawn_native { namespace d3d12 {
         D3D12_PRIMITIVE_TOPOLOGY GetD3D12PrimitiveTopology() const;
         ID3D12PipelineState* GetPipelineState() const;
 
-        const FirstOffsetInfo& GetFirstOffsetInfo() const;
-
         // Dawn API
         void SetLabelImpl() override;
 
@@ -48,7 +46,6 @@ namespace dawn_native { namespace d3d12 {
 
         D3D12_PRIMITIVE_TOPOLOGY mD3d12PrimitiveTopology;
         ComPtr<ID3D12PipelineState> mPipelineState;
-        FirstOffsetInfo mFirstOffsetInfo;
     };
 
 }}  // namespace dawn_native::d3d12
