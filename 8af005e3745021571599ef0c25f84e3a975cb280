@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e54f9898_7945a932",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T08:44:08Z",
+      "side": 1,
+      "message": "Interesting. I think Apple probably forgot to add data for the M1 in that table: /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk/System/Library/Frameworks/Metal.framework/Versions/A/Headers/MTLPixelFormat.h shows the ASTC and ETC2 formats on macOS 11.0 which is the OS where M1 was introduced, and the M1 comes from the same family of chip as the iPhone so it would be weird to remove support for a compressed texture format. Anyways, we can address it when Apple fixes their doc so we\u0027re sure.",
+      "parentUuid": "0fc2e996_4f9990dd",
+      "revId": "8af005e3745021571599ef0c25f84e3a975cb280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a0a50d7_a74a02cf",
