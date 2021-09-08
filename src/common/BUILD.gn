@@ -126,7 +126,7 @@ config("dawn_internal") {
     if (is_win) {
       cflags += [
         # clang-cl doesn't know -pedantic, pass it explicitly to the clang driver
-        "/clang:-pedantic",
+        #"/clang:-pedantic",
 
         # Allow the use of __uuidof()
         "-Wno-language-extension-token",
