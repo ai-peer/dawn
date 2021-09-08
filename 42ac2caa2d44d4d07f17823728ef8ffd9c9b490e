@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d5ce5b2_19d3dc60",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-08T21:09:46Z",
+      "side": 1,
+      "message": "This change follows the patterns ANGLE uses to include Abseil very closely, as it seems to be a reasonable analog to Dawn\u0027s needs.",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1d0455_c2335291",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-08T21:09:46Z",
+      "side": 1,
+      "message": "Abseil, as pulled in from Chromium, assumes that the googletest directory is laid out differently than what Dawn was already using. This snippet is pulled directly from ANGLE, and switches over to use the variant of googletest that\u0027s used by the Chromium repo. It looks like it\u0027ll take a bit more effort to roll (and this may represent a roll back to an earlier version than we were previously on) but I didn\u0027t notice any problems once I adjusted the directory location in the relvant .gn files.",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d8d482_f7671b3a",
+        "filename": "build_overrides/build.gni",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-08T21:09:46Z",
+      "side": 1,
+      "message": "I was getting some Abseil/Googltest dependency issues when I switched over to Chromium\u0027s copy of googletest. This was how ANGLE resolved it.",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5afa30f1_35fd4041",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-08T21:09:46Z",
+      "side": 1,
+      "message": "This is potentially problematic. If I leave this line uncommented and attempt to use absl::StrFormat() I get multiple errors along the lines of:\n\n../../third_party/abseil-cpp\\absl/strings/internal/str_format/parser.h(313,11): error: \u0027enable_if\u0027 is a clang extension [-Werror,-Wgcc-compat]\n          enable_if(str_format_internal::EnsureConstexpr(format),\n          ^\n          \nSuppressing this flag allows it to compile cleanly, but I suspect that may have negative effects on other platforms?",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c4c5dec_7c0e30d4",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-08T21:09:46Z",
+      "side": 1,
+      "message": "Again mimicking ANGLE very directly here, with the primary difference being that we are cherry-picking a different set of dependencies for Dawn. (So far only str_format)",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a08149bf_bd5ec642",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-08T21:09:46Z",
+      "side": 1,
+      "message": "Simple usage just to sanity check that the new dependency works.",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
