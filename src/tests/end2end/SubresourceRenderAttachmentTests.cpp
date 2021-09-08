@@ -89,10 +89,13 @@ class SubresourceRenderAttachmentTest : public DawnTest {
                                   {renderTargetSize, renderTargetSize}, baseMipLevel);
                 break;
             }
-            case Type::Stencil:
-                // TODO(crbug.com/dawn/439): sample / copy of the stencil aspect.
-            default:
-                UNREACHABLE();
+            case Type::Stencil: {
+                std::vector<uint8_t> expected(renderTargetSize * renderTargetSize, expectedStencil);
+                EXPECT_TEXTURE_EQ(expected.data(), renderTarget, {0, 0, baseArrayLayer},
+                                  {renderTargetSize, renderTargetSize}, baseMipLevel,
+                                  wgpu::TextureAspect::StencilOnly);
+                break;
+            }
         }
     }
 
@@ -149,8 +152,11 @@ TEST_P(SubresourceRenderAttachmentTest, DepthTexture) {
 }
 
 // Test rendering into a subresource of a stencil texture
-// TODO(crbug.com/dawn/439): sample / copy of the stencil aspect.
-TEST_P(SubresourceRenderAttachmentTest, DISABLED_StencilTexture) {
+TEST_P(SubresourceRenderAttachmentTest, StencilTexture) {
+    // TODO(crbug.com/dawn/667): Work around the fact that some platforms are unable to read
+    // stencil.
+    DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_depth_stencil_read"));
+
     DoTest(Type::Stencil);
 }
 
