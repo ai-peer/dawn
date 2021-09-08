@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8850ead_6946fcc4",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57485506_026a4c8c",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21921e8a_4b8e75b7",
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec2ca981_63ec58d9",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Yes I agree with you.\n\nNow that this CL is big enough, how about doing such refactoring in another separated CL?",
+      "parentUuid": "21921e8a_4b8e75b7",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbe47e02_21dc9939",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 3
@@ -82,6 +118,24 @@
       "writtenOn": "2021-09-07T09:31:29Z",
       "side": 1,
       "message": "nit: this could be done inside [1]",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8531cc8_f0116b83",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbe47e02_21dc9939",
       "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -105,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "99d016c7_04059c9f",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Yes. The default value of RenderPipelineDescriptor.depthStencil is nullptr, and here if descriptor-\u003edepthStencil \u003d\u003d nullptr, this.depthStencil will keep its original value (nullptr).",
+      "parentUuid": "69dccfed_53e6f45b",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d79e1437_4e34c1a6",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 3
@@ -116,6 +188,24 @@
       "writtenOn": "2021-09-07T09:31:29Z",
       "side": 1,
       "message": "[1]",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5d9c416_7a7055d6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d79e1437_4e34c1a6",
       "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +233,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "991fc5de_bdd1955e",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f93116a0_bb9beec5",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 51,
+        "endChar": 0
+      },
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5bf20310_17ef4d50",
@@ -160,6 +274,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "988b063f_3a2497a6",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5bf20310_17ef4d50",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "277d6bfb_749859bc",
@@ -173,6 +305,30 @@
       "writtenOn": "2021-09-07T09:31:29Z",
       "side": 1,
       "message": "u-u-u-nit: extra space but also a single fragment input can be advantageously be put as an argument in the function directly.",
+      "range": {
+        "startLine": 514,
+        "startChar": 8,
+        "endLine": 514,
+        "endChar": 9
+      },
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fed0764_5aae1a80",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-08T03:28:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "277d6bfb_749859bc",
       "range": {
         "startLine": 514,
         "startChar": 8,
