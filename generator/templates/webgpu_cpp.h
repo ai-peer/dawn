@@ -23,6 +23,7 @@ namespace wgpu {
     // TODO(crbug.com/520): Remove kStrideUndefined in favor of kCopyStrideUndefined.
     static constexpr uint32_t kStrideUndefined = WGPU_STRIDE_UNDEFINED;
     static constexpr uint32_t kCopyStrideUndefined = WGPU_COPY_STRIDE_UNDEFINED;
+    static constexpr uint32_t kArrayLayerCountUndefined = WGPU_ARRAY_LAYER_COUNT_UNDEFINED;
 
     {% for type in by_category["enum"] %}
         enum class {{as_cppType(type.name)}} : uint32_t {
