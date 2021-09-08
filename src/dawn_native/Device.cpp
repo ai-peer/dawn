@@ -133,6 +133,13 @@ namespace dawn_native {
             ApplyExtensions(descriptor);
         }
 
+        if (descriptor != nullptr && descriptor->requiredLimits != nullptr) {
+            AssignLimits(&mLimits,
+                         *reinterpret_cast<const wgpu::Limits*>(descriptor->requiredLimits));
+        } else {
+            GetDefaultLimits(&mLimits);
+        }
+
         mFormatTable = BuildFormatTable(this);
         SetDefaultToggles();
         if ((adapter->GetBackendType() == wgpu::BackendType::Metal ||
