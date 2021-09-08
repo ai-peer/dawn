@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d34f0f_028ab5f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-08T09:00:25Z",
+      "side": 1,
+      "message": "PTAL, thanks",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10b8356_515192f5",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-08T09:00:25Z",
+      "side": 1,
+      "message": "This is mainly used for a work-around for Mac, holding a empty fragment shader module. It won\u0027t be initialized if it is not used.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6791c271_2b692f23",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-08T09:00:25Z",
+      "side": 1,
+      "message": "I tried to get rid of pipeline descriptor in backends\u0027 render pipeline initialization methods, but there would be some more refactoring work relating to vertex pulling transform for Mac. So currently I left it unmodified.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fec1dac_57366b69",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-08T09:00:25Z",
+      "side": 1,
+      "message": "OpenGL ES requires a fragment shader for render pipeline, So we create one here.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
