@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ddc41c5_43abd487",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T08:51:01Z",
+      "side": 1,
+      "message": "Sounds good and we can do it much later in the future. I think we\u0027ll want to remove the nextInChain etc which will require copying each member individually (and will be quite annoying). No need to do as a direct follow-up.",
+      "parentUuid": "ec2ca981_63ec58d9",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dbe47e02_21dc9939",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 3
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "Yes. The default value of RenderPipelineDescriptor.depthStencil is nullptr, and here if descriptor-\u003edepthStencil \u003d\u003d nullptr, this.depthStencil will keep its original value (nullptr).",
       "parentUuid": "69dccfed_53e6f45b",
+      "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "561d7f70_2fc8d19d",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 428,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T08:51:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "99d016c7_04059c9f",
       "revId": "2b6143da195e38c4f5b481fc2a2ef79f67dd5007",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
