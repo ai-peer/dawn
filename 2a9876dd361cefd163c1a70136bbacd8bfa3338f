@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6234a5b_1db98de0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "Bunch of comments, I didn\u0027t get through all the end2end test yet.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a10b8356_515192f5",
@@ -37,6 +54,128 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "368b28e9_f219255a",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "optional nit: TBH it seems a bit overkill to store the shader here when we use it only for Metal and on specific devices.",
+      "parentUuid": "a10b8356_515192f5",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804df07c_687c07c4",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a10b8356_515192f5",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a748a6de_718bd627",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "This could be done in the device itself, or a freestanding function not related to RenderPipeline at all (the empty fragment shader doesn\u0027t depend on anything from the pipeline). Also almost all Dawn objects can get the device with GetDevice so we don\u0027t need to pass it as an argument.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf2f468_e2afcbe8",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "nit: no need for this-\u003e here and in other places in this CL.",
+      "range": {
+        "startLine": 352,
+        "startChar": 53,
+        "endLine": 352,
+        "endChar": 59
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01208baf_4b8e5330",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "this does a copy. We should use const ProgrammableStage\u0026",
+      "range": {
+        "startLine": 351,
+        "startChar": 8,
+        "endLine": 351,
+        "endChar": 12
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c38d2d0b_91470caf",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "ditto this could be a ShaderModule* (with a .Get() at the end). In general we prefer spelling out simple types.",
+      "range": {
+        "startLine": 352,
+        "startChar": 8,
+        "endLine": 352,
+        "endChar": 13
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6791c271_2b692f23",
         "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
         "patchSetId": 6
@@ -48,6 +187,41 @@
       "writtenOn": "2021-09-08T09:00:25Z",
       "side": 1,
       "message": "I tried to get rid of pipeline descriptor in backends\u0027 render pipeline initialization methods, but there would be some more refactoring work relating to vertex pulling transform for Mac. So currently I left it unmodified.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "912cd1ee_6853c9b3",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6791c271_2b692f23",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ea7511a_1b313381",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "ditto and ditto for the line below.",
       "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +245,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b8f9e57_676514c7",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "You said that this is only needed on specific devices. Can we have a toggle to use the empty FS only on these devices?\n\nAlso we\u0027ll need to paramtrize the tests on Metal with and without the toggle.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fec1dac_57366b69",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 6
@@ -82,6 +273,132 @@
       "writtenOn": "2021-09-08T09:00:25Z",
       "side": 1,
       "message": "OpenGL ES requires a fragment shader for render pipeline, So we create one here.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "580c7a9d_f6e24422",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "3fec1dac_57366b69",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dce53312_d4567b3c",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "I think \"void main() {}\" would always work because ES 3 should still support ES 2 style shaders.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "115608c9_5ebc1f4f",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "nit: instead of a vector we could have a fixed length array and a counter. We don\u0027t need to allocate anything outside of the stack in this function.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56d3c4c9_39cc2fbe",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "Ditto, this could be stack allocated, then at [1] we would set either nullptr or \u0026colorBlend depending on whether we have a fragment stage.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8c901d6_ea85318d",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c755ee9a_1e073021",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "nit: here and in other places you can take advantages of defaults and also use .size \u003d {kRTWidth, kRTHeight}",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ff6ddcd_1ef94752",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-08T10:12:47Z",
+      "side": 1,
+      "message": "While the changes here provide a lot of coverage, I think it makes vertex-only pipeline stand out too much compared to other parts of the pipeline. We can\u0027t afford to do the same with/without testing for all properties. Can we instead have some targeted tests at things we expect to be validation errors because of vertex only pipeline? Apologies for the churn.\n\nAlso would it be possible to add a simple test for render pass compatibility with pipelines to check that they are only valid with render passes that have a depth stencil attachment (and no color attachments)?",
       "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
