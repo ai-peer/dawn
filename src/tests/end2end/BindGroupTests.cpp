@@ -1365,12 +1365,9 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
         bgEntries.push_back({nullptr, binding, nullptr, 0, 0, nullptr, texture.CreateView()});
 
         interface << "[[group(0), binding(" << binding++ << ")]] "
-                  << "var image" << i << " : texture_storage_2d<r32uint, read>;\n";
+                  << "var image" << i << " : texture_storage_2d<r32uint, write>;\n";
 
-        body << "if (textureLoad(image" << i << ", vec2<i32>(0, 0)).r != " << expectedValue++
-             << "u) {\n";
-        body << "    return;\n";
-        body << "}\n";
+        body << "ignore(image" << i << ");";
     }
 
     for (uint32_t i = 0; i < kMaxUniformBuffersPerShaderStage; ++i) {
@@ -1425,9 +1422,7 @@ TEST_P(BindGroupTests, ReallyLargeBindGroup) {
     wgpu::ComputePipelineDescriptor cpDesc;
     cpDesc.compute.module = utils::CreateShaderModule(device, shader.c_str());
     cpDesc.compute.entryPoint = "main";
-    wgpu::ComputePipeline cp;
-    // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is passed.
-    EXPECT_DEPRECATION_WARNINGS(cp = device.CreateComputePipeline(&cpDesc), 4);
+    wgpu::ComputePipeline cp = device.CreateComputePipeline(&cpDesc);
 
     wgpu::BindGroupDescriptor bgDesc = {};
     bgDesc.layout = cp.GetBindGroupLayout(0);
@@ -1499,13 +1494,9 @@ TEST_P(BindGroupTests, CreateWithDestroyedResource) {
 
     // Test a storage texture.
     {
-        wgpu::BindGroupLayout bgl;
-        // TODO(crbug.com/dawn/1025): Remove once ReadOnly storage texture deprecation period is
-        // passed.
-        EXPECT_DEPRECATION_WARNING(
-            bgl = utils::MakeBindGroupLayout(
-                device, {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadOnly,
-                          wgpu::TextureFormat::R32Uint}}));
+        wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+            device, {{0, wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::WriteOnly,
+                      wgpu::TextureFormat::R32Uint}});
 
         wgpu::TextureDescriptor textureDesc;
         textureDesc.usage = wgpu::TextureUsage::StorageBinding;
