@@ -24,6 +24,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f23d0cd7_f72b6a79",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-08T20:04:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f7777f3_3b9223f1",
+      "range": {
+        "startLine": 156,
+        "startChar": 12,
+        "endLine": 156,
+        "endChar": 49
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad775284_5d37339d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-08T20:04:22Z",
+      "side": 1,
+      "message": "Done (added mInternalUsage)",
+      "parentUuid": "4f7777f3_3b9223f1",
+      "range": {
+        "startLine": 156,
+        "startChar": 12,
+        "endLine": 156,
+        "endChar": 49
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "080af316_a4401dce",
@@ -49,6 +97,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "556e30e9_d9442e30",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-08T20:04:22Z",
+      "side": 1,
+      "message": "New patch does things differently:\n\n- There are now two scratch buffers: one for the index buffer sizes, and one for the validated indirect params.\n\n- Index buffer sizes are serialized into a host buffer at encoding time and attached to a new WriteBuffer command. This has a thin impl in each backend which just delegates back to Queue::WriteBuffer.\n\n- The WriteBuffer command for a validation pass is encoded immediately before that validation pass, along with each buffer-to-buffer copy for the relevant indirect params.\n\nAs for what to validate exactly, I don\u0027t *think* it costs us extra to account for the bound range of an index buffer vs the total size. Without losing efficiency elsewhere I think we\u0027re always going to end up needing at least one u32 of metadata per draw call.",
+      "parentUuid": "080af316_a4401dce",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 77
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f0d72e3_3ea61922",
         "filename": "src/dawn_native/ValidationScratchBuffer.cpp",
         "patchSetId": 4
@@ -60,6 +132,24 @@
       "writtenOn": "2021-09-03T23:19:06Z",
       "side": 1,
       "message": "We could set the buffer as initialized so we don\u0027t incur a lazy clear when we use it. It\u0027s internally managed so this should be safe as long as we always populate the data in the compute pass.",
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bc59397_02b97c95",
+        "filename": "src/dawn_native/ValidationScratchBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-08T20:04:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f0d72e3_3ea61922",
       "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

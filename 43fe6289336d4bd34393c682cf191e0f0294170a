@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26937138_58d8a7c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-08T20:04:22Z",
+      "side": 1,
+      "message": "PTAL - there are some bot failures that might be legit but which I can\u0027t yet explain; but modulo some details I think this is really a valid approach now.",
+      "revId": "43fe6289336d4bd34393c682cf191e0f0294170a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
