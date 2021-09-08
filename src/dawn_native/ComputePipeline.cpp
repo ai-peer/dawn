@@ -26,14 +26,8 @@ namespace dawn_native {
         label = mLabel.c_str();
         layout = mLayout.Get();
 
-        // TODO(dawn:800): Remove after deprecation period.
-        if (descriptor->compute.module == nullptr && descriptor->computeStage.module != nullptr) {
-            mComputeModule = descriptor->computeStage.module;
-            mEntryPoint = descriptor->computeStage.entryPoint;
-        } else {
-            mComputeModule = descriptor->compute.module;
-            mEntryPoint = descriptor->compute.entryPoint;
-        }
+        mComputeModule = descriptor->compute.module;
+        mEntryPoint = descriptor->compute.entryPoint;
 
         compute.entryPoint = mEntryPoint.c_str();
         compute.module = mComputeModule.Get();
@@ -54,20 +48,9 @@ namespace dawn_native {
             DAWN_TRY(device->ValidateObject(descriptor->layout));
         }
 
-        if (descriptor->compute.module != nullptr) {
-            DAWN_TRY(ValidateProgrammableStage(device, descriptor->compute.module,
-                                               descriptor->compute.entryPoint, descriptor->layout,
-                                               SingleShaderStage::Compute));
-        } else {
-            // TODO(dawn:800): Remove after deprecation period.
-            device->EmitDeprecationWarning(
-                "computeStage has been deprecated. Please begin using compute instead.");
-            DAWN_TRY(ValidateProgrammableStage(device, descriptor->computeStage.module,
-                                               descriptor->computeStage.entryPoint,
-                                               descriptor->layout, SingleShaderStage::Compute));
-        }
-
-        return {};
+        return ValidateProgrammableStage(device, descriptor->compute.module,
+                                         descriptor->compute.entryPoint, descriptor->layout,
+                                         SingleShaderStage::Compute);
     }
 
     // ComputePipelineBase
