@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0236e87a_8bc993bb",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-08T09:05:43Z",
+      "side": 1,
+      "message": "Initially I just left descriptorMTL.fragmentFunction empty (i.e. skip this else block), but the end2end test failed on Metal_Intel_Iris_Pro_Graphics, although it passed on M1 and Metal_Intel_R_Iris_TM_Graphics_550. The test results suggest that depth result of a vertex-only render pipeline is not as expected on Intel_Iris_Pro_Graphics, while stencil result is correct. To work around, I add this block and the GetEmptyFragmentShaderModule in RenderPipelineBase.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fec1dac_57366b69",
         "filename": "src/dawn_native/opengl/PipelineGL.cpp",
         "patchSetId": 6
