@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "835a6c7a_9813751b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-08T22:57:14Z",
+      "side": 1,
+      "message": "Overall, looks good! I think we can always require abseil though instead of including it conditionally.\n\nWe\u0027ll also want to update the CMake build files too",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c1d0455_c2335291",
@@ -65,6 +82,47 @@
       "writtenOn": "2021-09-08T21:09:46Z",
       "side": 1,
       "message": "This is potentially problematic. If I leave this line uncommented and attempt to use absl::StrFormat() I get multiple errors along the lines of:\n\n../../third_party/abseil-cpp\\absl/strings/internal/str_format/parser.h(313,11): error: \u0027enable_if\u0027 is a clang extension [-Werror,-Wgcc-compat]\n          enable_if(str_format_internal::EnsureConstexpr(format),\n          ^\n          \nSuppressing this flag allows it to compile cleanly, but I suspect that may have negative effects on other platforms?",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c79e8715_b38fcd9e",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-08T22:57:14Z",
+      "side": 1,
+      "message": "I think it should be ok though. Checking absl, the code that uses enable_if is behind ABSL_INTERNAL_ENABLE_FORMAT_CHECKER. I wonder.. can we make abseil a source_set that doesn\u0027t use pedantic, but use pedantic everywhere else? will that work?",
+      "parentUuid": "5afa30f1_35fd4041",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbcddcf6_f1891a6e",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-08T22:57:14Z",
+      "side": 1,
+      "message": "what\u0027s the plan for these #define ? Are we going to take a different code path in Dawn? I think we could always require it. ANGLE probably had this because they only use it for some aspects of ANGLE, only in standalone.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 35
+      },
       "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
