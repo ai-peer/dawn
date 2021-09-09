@@ -846,6 +846,24 @@ namespace dawn_native { namespace opengl {
                     break;
                 }
 
+                case Command::WriteBuffer: {
+                    WriteBufferCmd* write = mCommands.NextCommand<WriteBufferCmd>();
+                    uint64_t offset = write->offset;
+                    uint64_t size = write->size;
+                    if (size == 0) {
+                        continue;
+                    }
+
+                    Buffer* dstBuffer = ToBackend(write->buffer.Get());
+                    uint8_t* data = mCommands.NextData<uint8_t>(size);
+                    dstBuffer->EnsureDataInitializedAsDestination(offset, size);
+                    DAWN_TRY(dstBuffer->ValidateCanUseOnQueueNow());
+
+                    gl.BindBuffer(GL_ARRAY_BUFFER, dstBuffer->GetHandle());
+                    gl.BufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+                    break;
+                }
+
                 default:
                     UNREACHABLE();
             }
