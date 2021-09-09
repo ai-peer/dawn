@@ -85,7 +85,7 @@ class QueryInternalShaderTests : public DawnTest {};
 // - The params buffer passes the timestamp count, the offset in timestamps buffer and the
 //   timestamp period (here use GPU frequency (HZ) on Intel D3D12 to calculate the period in
 //   ns for testing).
-TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
+TEST_P(QueryInternalShaderTests, DISABLED_TimestampComputeShader) {
     // TODO(crbug.com/dawn/741): Test output is wrong with D3D12 + WARP.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP());
 
