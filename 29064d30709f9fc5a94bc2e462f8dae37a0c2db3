@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d37f511a_95759ba7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T19:52:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "29064d30709f9fc5a94bc2e462f8dae37a0c2db3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9b0db0a_ff8f812d",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T19:52:43Z",
+      "side": 1,
+      "message": "nit: also say it\u0027s a regression test for crbug.com/tint/1170",
+      "revId": "29064d30709f9fc5a94bc2e462f8dae37a0c2db3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
