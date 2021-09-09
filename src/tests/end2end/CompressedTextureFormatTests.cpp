@@ -1237,7 +1237,7 @@ class CompressedTextureWriteTextureTest : public CompressedTextureFormatTest {
         ASSERT(IsFormatSupported());
 
         wgpu::Texture texture = device.CreateTexture(&config.textureDescriptor);
-        WriteToCompressedTexture(texture, config);
+        ASSERT_NO_FATAL_FAILURE(WriteToCompressedTexture(texture, config));
 
         VerifyTexture(config, texture);
     }
