@@ -909,7 +909,7 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
 TEST_P(BufferTests, IndirectBufferHasInternalCopySrcUsage) {
     wgpu::BufferDescriptor descriptor;
     descriptor.usage = wgpu::BufferUsage::Indirect;
-    descriptor.size = 4;
+    descriptor.size = 160;
 
     wgpu::Buffer buffer;
     buffer = device.CreateBuffer(&descriptor);
