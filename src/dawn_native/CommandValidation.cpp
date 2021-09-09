@@ -439,4 +439,13 @@ namespace dawn_native {
         return {};
     }
 
+    MaybeError ValidateInternalCanUseAs(const BufferBase* buffer, wgpu::BufferUsage usage) {
+        ASSERT(wgpu::HasZeroOrOneBits(usage));
+        if (!(buffer->GetInternalUsage() & usage)) {
+            return DAWN_VALIDATION_ERROR("buffer doesn't have the required usage.");
+        }
+
+        return {};
+    }
+
 }  // namespace dawn_native
