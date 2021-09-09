@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9914673f_3dcecbd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:53:08Z",
+      "side": 1,
+      "message": "Not sure about the build right now; need to find out who to talk to for this",
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "610544e3_551c802a",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:53:08Z",
+      "side": 1,
+      "message": "interesting, what experimental support is required?",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b060ee76_65472b52",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:53:08Z",
+      "side": 1,
+      "message": "to avoid the copy, \nmaybe we can just make ScopedCachedBlob virtual, and then call spirvToDxilFree in the derived class constructor.\n\nOR\n\nchange the type of ScopedCachedBlob::buffer so we can bind data to the deleter and do:\n\n  std::unique_ptr\u003cuint8_t[], std::function\u003cvoid(uint8_t*)\u003e\u003e data(\n    dxil.binary.buffer, [spirvToDxilFree \u003d functions-\u003espirvToDxilFree](){\n        spirvToDxilFree(p);\n    });",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 369,
+        "endChar": 42
+      },
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
