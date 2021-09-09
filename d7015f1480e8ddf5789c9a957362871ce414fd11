@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7e83928_b0e64858",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T21:53:37Z",
+      "side": 1,
+      "message": "if I understand correctly, this checks that a gtest failure does not occur inside WriteToCompressedTexture, and returns early if it does. \n\nWhat\u0027s failing inside this function? I don\u0027t see any gtest ASSERT_ or EXPECT_ calls inside.",
+      "range": {
+        "startLine": 1240,
+        "startChar": 8,
+        "endLine": 1240,
+        "endChar": 31
+      },
+      "revId": "d7015f1480e8ddf5789c9a957362871ce414fd11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
