@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "878e7375_a39b2900",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-09T09:12:30Z",
+      "side": 1,
+      "message": "Would it be possible to make compilation of abseil tests conditional, or have a GN var to inject the correct directory in Chromium\u0027s abseil? This would avoid the need to do the hash dance to roll googletest.",
+      "parentUuid": "6c1d0455_c2335291",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "86d8d482_f7671b3a",
         "filename": "build_overrides/build.gni",
         "patchSetId": 1
@@ -100,6 +118,41 @@
       "side": 1,
       "message": "I think it should be ok though. Checking absl, the code that uses enable_if is behind ABSL_INTERNAL_ENABLE_FORMAT_CHECKER. I wonder.. can we make abseil a source_set that doesn\u0027t use pedantic, but use pedantic everywhere else? will that work?",
       "parentUuid": "5afa30f1_35fd4041",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b7e4eb3_505176d1",
+        "filename": "src/common/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-09T09:12:30Z",
+      "side": 1,
+      "message": "Does this issue also happen on non-Windows? I think it would be ok to add -Wno-gcc-compat on Windows if needed. It\u0027s unlikely someone will want to use GCC on Windows, and they can always contribute fixes if they do.",
+      "parentUuid": "c79e8715_b38fcd9e",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8926a6fd_893afaa1",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-09T09:12:30Z",
+      "side": 1,
+      "message": "We have scripts/build_overrides_with_defaults.gni where this could go",
       "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
