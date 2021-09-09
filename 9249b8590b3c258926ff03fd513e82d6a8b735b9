@@ -43,6 +43,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86832fbd_223a7dc1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:59:23Z",
+      "side": 1,
+      "message": "I think we can hit this ASSERT if someone passes UseMesa without having the DLL.\n\nWe should ForceSetToggle UseMesa to false if it\u0027s not available AND if the device cannot support the required shader model. See also d3d12::Device::ApplyUseDxcToggle. In fact, we should also ForceSetToggle to false for UseDXC if the device doesn\u0027t support the required shader model. (unless DXC never present if the shader model is unsupported?)",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 52
+      },
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b060ee76_65472b52",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 20
