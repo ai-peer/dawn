@@ -46,6 +46,30 @@
       },
       "revId": "d7015f1480e8ddf5789c9a957362871ce414fd11",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be123a17_3050d3bf",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T23:09:02Z",
+      "side": 1,
+      "message": "ah I see. I think this only works when running with use_wire \u003d false because callbacks fire synchronously. with use_wire \u003d true, they won\u0027t happen immediately.\nWe can make the wire callbacks happen with FlushWire();\n\nThat said, while this decreases log output by avoiding calling VerifyTexture? Don\u0027t we fundamentally have a test bug if WriteToCompressedTexture is producing errors?\n\nI would think we would want to add something like:\nDIE_ON_DEVICE_ERROR which is like ASSERT_DEVICE_ERROR except it does an ASSERT(..) (n.b. not gtest ASSERT_XXX) if there are any errors in the contained statememt.",
+      "parentUuid": "4eabaf59_5133b052",
+      "range": {
+        "startLine": 1240,
+        "startChar": 8,
+        "endLine": 1240,
+        "endChar": 31
+      },
+      "revId": "d7015f1480e8ddf5789c9a957362871ce414fd11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
