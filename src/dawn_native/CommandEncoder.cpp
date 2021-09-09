@@ -426,10 +426,11 @@ namespace dawn_native {
                     "set");
             }
 
-            // The destinationOffset must be a multiple of 8 bytes on D3D12 and Vulkan
-            if (destinationOffset % 8 != 0) {
+            // The destinationOffset must be a multiple of 256 bytes on Metal. See
+            // crbug.com/dawn/940
+            if (destinationOffset % 256 != 0) {
                 return DAWN_VALIDATION_ERROR(
-                    "The alignment offset into the destination buffer must be a multiple of 8 "
+                    "The alignment offset into the destination buffer must be a multiple of 256 "
                     "bytes");
             }
 
