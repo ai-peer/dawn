@@ -92,6 +92,9 @@ namespace dawn_native { namespace metal {
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
 
+        transformManager.Add<tint::transform::SingleEntryPoint>();
+        transformInputs.Add<tint::transform::SingleEntryPoint::Config>(entryPointName);
+
         if (stage == SingleShaderStage::Vertex &&
             GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling)) {
             transformManager.Add<tint::transform::VertexPulling>();
@@ -122,7 +125,6 @@ namespace dawn_native { namespace metal {
             transformInputs.Add<tint::transform::Renamer::Config>(
                 tint::transform::Renamer::Target::kMslKeywords);
         }
-
 
         transformInputs.Add<BindingRemapper::Remappings>(std::move(bindingPoints),
                                                          std::move(accessControls),
