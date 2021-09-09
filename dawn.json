@@ -465,6 +465,15 @@
                     {"name": "query set", "type": "query set"},
                     {"name": "query index", "type": "uint32_t"}
                 ]
+            },
+            {
+                "name": "write buffer internal",
+                "args": [
+                    {"name": "buffer", "type": "buffer"},
+                    {"name": "buffer offset", "type": "uint64_t"},
+                    {"name": "data", "type": "uint8_t", "annotation": "const*", "length": "size"},
+                    {"name": "size", "type": "uint64_t"}
+                ]
             }
         ]
     },
