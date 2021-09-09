@@ -184,8 +184,7 @@ namespace dawn_native { namespace d3d12 {
         const char* entryPointName,
         SingleShaderStage stage,
         PipelineLayout* layout,
-        std::string* remappedEntryPointName,
-        FirstOffsetInfo* firstOffsetInfo) const {
+        std::string* remappedEntryPointName) const {
         ASSERT(!IsError());
 
         ScopedTintICEHandler scopedICEHandler(GetDevice());
@@ -274,17 +273,6 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
                                                &transformOutputs, nullptr));
 
-        if (auto* data = transformOutputs.Get<tint::transform::FirstIndexOffset::Data>()) {
-            firstOffsetInfo->usesVertexIndex = data->has_vertex_index;
-            if (firstOffsetInfo->usesVertexIndex) {
-                firstOffsetInfo->vertexIndexOffset = data->first_vertex_offset;
-            }
-            firstOffsetInfo->usesInstanceIndex = data->has_instance_index;
-            if (firstOffsetInfo->usesInstanceIndex) {
-                firstOffsetInfo->instanceIndexOffset = data->first_instance_offset;
-            }
-        }
-
         if (auto* data = transformOutputs.Get<tint::transform::Renamer::Data>()) {
             auto it = data->remappings.find(entryPointName);
             if (it != data->remappings.end()) {
@@ -322,8 +310,7 @@ namespace dawn_native { namespace d3d12 {
         std::string remappedEntryPoint;
         CompiledShader compiledShader = {};
         DAWN_TRY_ASSIGN(hlslSource,
-                        TranslateToHLSL(entryPointName, stage, layout, &remappedEntryPoint,
-                                        &compiledShader.firstOffsetInfo));
+                        TranslateToHLSL(entryPointName, stage, layout, &remappedEntryPoint));
         entryPointName = remappedEntryPoint.c_str();
 
         if (device->IsToggleEnabled(Toggle::DumpShaders)) {

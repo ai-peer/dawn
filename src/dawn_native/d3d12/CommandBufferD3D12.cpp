@@ -157,23 +157,12 @@ namespace dawn_native { namespace d3d12 {
                                     RenderPipeline* pipeline,
                                     uint32_t firstVertex,
                                     uint32_t firstInstance) {
-            const FirstOffsetInfo& firstOffsetInfo = pipeline->GetFirstOffsetInfo();
-            if (!firstOffsetInfo.usesVertexIndex && !firstOffsetInfo.usesInstanceIndex) {
-                return;
-            }
             std::array<uint32_t, 2> offsets{};
-            uint32_t count = 0;
-            if (firstOffsetInfo.usesVertexIndex) {
-                offsets[firstOffsetInfo.vertexIndexOffset / sizeof(uint32_t)] = firstVertex;
-                ++count;
-            }
-            if (firstOffsetInfo.usesInstanceIndex) {
-                offsets[firstOffsetInfo.instanceIndexOffset / sizeof(uint32_t)] = firstInstance;
-                ++count;
-            }
+            offsets[0] = firstVertex;
+            offsets[1] = firstInstance;
             PipelineLayout* layout = ToBackend(pipeline->GetLayout());
             commandList->SetGraphicsRoot32BitConstants(layout->GetFirstIndexOffsetParameterIndex(),
-                                                       count, offsets.data(), 0);
+                                                       offsets.size(), offsets.data(), 0);
         }
 
         bool ShouldCopyUsingTemporaryBuffer(DeviceBase* device,
