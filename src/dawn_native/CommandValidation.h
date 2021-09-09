@@ -75,6 +75,8 @@ namespace dawn_native {
 
     MaybeError ValidateCanUseAs(const BufferBase* buffer, wgpu::BufferUsage usage);
 
+    MaybeError ValidateInternalCanUseAs(const BufferBase* buffer, wgpu::BufferUsage usage);
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_COMMANDVALIDATION_H_

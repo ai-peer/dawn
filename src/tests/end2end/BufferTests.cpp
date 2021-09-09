@@ -14,6 +14,9 @@
 
 #include "tests/DawnTest.h"
 
+#include "dawn_native/Buffer.h"
+#include "dawn_native/CommandValidation.h"
+
 #include <array>
 #include <cstring>
 
@@ -900,6 +903,32 @@ TEST_P(BufferTests, CreateBufferOOMMapAsync) {
     // UINT64_MAX may be special cased. Test a smaller, but really large buffer also fails
     descriptor.size = 1ull << 50;
     RunTest(descriptor);
+}
+
+// Test that a buffer with only Indirect usage also gets internal-only CopySrc usage.
+TEST_P(BufferTests, IndirectBufferHasInternalCopySrcUsage) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::Indirect;
+    descriptor.size = 4;
+
+    wgpu::Buffer buffer;
+    buffer = device.CreateBuffer(&descriptor);
+
+    dawn_native::BufferBase* bufferBase = reinterpret_cast<dawn_native::BufferBase*>(buffer.Get());
+    EXPECT_EQ(wgpu::BufferUsage::Indirect, bufferBase->GetUsage());
+    EXPECT_EQ(wgpu::BufferUsage::Indirect | wgpu::BufferUsage::CopySrc,
+              bufferBase->GetInternalUsage());
+
+    dawn_native::MaybeError result =
+        dawn_native::ValidateCanUseAs(bufferBase, wgpu::BufferUsage::Indirect);
+    EXPECT_TRUE(result.IsSuccess());
+
+    result = dawn_native::ValidateCanUseAs(bufferBase, wgpu::BufferUsage::CopySrc);
+    EXPECT_TRUE(result.IsError());
+    result.AcquireError();
+
+    result = dawn_native::ValidateInternalCanUseAs(bufferBase, wgpu::BufferUsage::CopySrc);
+    EXPECT_TRUE(result.IsSuccess());
 }
 
 DAWN_INSTANTIATE_TEST(BufferTests,
