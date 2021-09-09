@@ -147,6 +147,16 @@ namespace dawn_native {
         if (mUsage & wgpu::BufferUsage::QueryResolve) {
             mUsage |= kInternalStorageBuffer;
         }
+
+        mInternalUsage = mUsage;
+
+        // We need to be able to copy from indirect buffers in order to validate their encoded
+        // parameters on the GPU. This is really only required for indirect buffers used with
+        // drawIndexedIndirect calls, but we don't know exactly how this buffer is going to be used
+        // yet.
+        if (mUsage & wgpu::BufferUsage::Indirect) {
+            mInternalUsage |= wgpu::BufferUsage::CopySrc;
+        }
     }
 
     BufferBase::BufferBase(DeviceBase* device,
@@ -187,6 +197,11 @@ namespace dawn_native {
     wgpu::BufferUsage BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
+    }
+
+    wgpu::BufferUsage BufferBase::GetInternalUsage() const {
+        ASSERT(!IsError());
+        return mInternalUsage;
     }
 
     MaybeError BufferBase::MapAtCreation() {
@@ -589,4 +604,5 @@ namespace dawn_native {
     bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
         return offset == 0 && size == GetSize();
     }
+
 }  // namespace dawn_native
