@@ -157,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f25c712c_39862467",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-09T16:07:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8926a6fd_893afaa1",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bbcddcf6_f1891a6e",
@@ -170,6 +188,30 @@
       "writtenOn": "2021-09-08T22:57:14Z",
       "side": 1,
       "message": "what\u0027s the plan for these #define ? Are we going to take a different code path in Dawn? I think we could always require it. ANGLE probably had this because they only use it for some aspects of ANGLE, only in standalone.",
+      "range": {
+        "startLine": 63,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 35
+      },
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89a16dfc_2ef11739",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-09T16:07:53Z",
+      "side": 1,
+      "message": "Removed",
+      "parentUuid": "bbcddcf6_f1891a6e",
       "range": {
         "startLine": 63,
         "startChar": 0,
