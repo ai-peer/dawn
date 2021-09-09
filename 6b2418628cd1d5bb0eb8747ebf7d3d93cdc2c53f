@@ -121,6 +121,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "169cf165_fa559454",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-09T16:40:01Z",
+      "side": 1,
+      "message": "I have some concerns with the current approach because the cost per drawIndexedIndirect seems relatively high (and application can do a lot of drawIndexedIndirect):\n - We allocate a DeferredBufferRef\n - We do a copyBufferToBuffer. Because the same buffer is written to (and because we don\u0027t do range tracking for buffer memory barriers), we end up generating a lot of TRANSFER_DST -\u003e TRANSFER_DST barriers. We also do a lot of small copies, spamming the frontend processor. (note that on some hardware, copies are done through compute shaders, but only above a certain size)\n \nThe type of code that would use drawIndexedIndirect would look a bit like the following:\n\n run dispatches to cull objects, write data in an indirect buffer.\n for each object:\n    record the indirect call\n\nThere are a lot of indirect calls, but most of them come from the same buffer so we should be able to do 1 dispatch that copies all of the indirect calls into a scratch buffer that will be sourced by the drawIndexedIndirect. The data passed to the shader could be prepped directly in the recording of DrawIndexedIndirect and the RenderValidation would use it directly.",
+      "parentUuid": "556e30e9_d9442e30",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 77
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f0d72e3_3ea61922",
         "filename": "src/dawn_native/ValidationScratchBuffer.cpp",
         "patchSetId": 4
