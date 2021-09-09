@@ -191,6 +191,12 @@ namespace dawn_native {
                     cmd->~SetVertexBufferCmd();
                     break;
                 }
+                case Command::WriteBufferInternal: {
+                    WriteBufferInternalCmd* write = commands->NextCommand<WriteBufferInternalCmd>();
+                    commands->NextData<uint8_t>(write->size);
+                    write->~WriteBufferInternalCmd();
+                    break;
+                }
                 case Command::WriteTimestamp: {
                     WriteTimestampCmd* cmd = commands->NextCommand<WriteTimestampCmd>();
                     cmd->~WriteTimestampCmd();
@@ -335,6 +341,10 @@ namespace dawn_native {
                 commands->NextCommand<SetVertexBufferCmd>();
                 break;
             }
+
+            case Command::WriteBufferInternal:
+                commands->NextCommand<WriteBufferInternalCmd>();
+                break;
 
             case Command::WriteTimestamp: {
                 commands->NextCommand<WriteTimestampCmd>();

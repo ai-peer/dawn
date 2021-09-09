@@ -298,6 +298,7 @@ source_set("dawn_end2end_tests_sources") {
     "end2end/BufferZeroInitTests.cpp",
     "end2end/ClipSpaceTests.cpp",
     "end2end/ColorStateTests.cpp",
+    "end2end/CommandEncoderTests.cpp",
     "end2end/CompressedTextureFormatTests.cpp",
     "end2end/ComputeCopyStorageBufferTests.cpp",
     "end2end/ComputeDispatchTests.cpp",
