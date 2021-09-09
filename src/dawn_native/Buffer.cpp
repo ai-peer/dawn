@@ -131,6 +131,7 @@ namespace dawn_native {
         : ObjectBase(device, descriptor->label),
           mSize(descriptor->size),
           mUsage(descriptor->usage),
+          mInternalUsage(mUsage),
           mState(BufferState::Unmapped) {
         // Add readonly storage usage if the buffer has a storage usage. The validation rules in
         // ValidateSyncScopeResourceUsage will make sure we don't use both at the same time.
@@ -187,6 +188,11 @@ namespace dawn_native {
     wgpu::BufferUsage BufferBase::GetUsage() const {
         ASSERT(!IsError());
         return mUsage;
+    }
+
+    wgpu::BufferUsage BufferBase::GetInternalUsage() const {
+        ASSERT(!IsError());
+        return mInternalUsage;
     }
 
     MaybeError BufferBase::MapAtCreation() {
@@ -589,4 +595,5 @@ namespace dawn_native {
     bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
         return offset == 0 && size == GetSize();
     }
+
 }  // namespace dawn_native
