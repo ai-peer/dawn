@@ -922,6 +922,22 @@ namespace dawn_native {
         });
     }
 
+    void CommandEncoder::APIWriteBufferInternal(BufferBase* buffer,
+                                                uint64_t bufferOffset,
+                                                const uint8_t* data,
+                                                uint64_t size) {
+        mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
+            WriteBufferCmd* cmd = allocator->Allocate<WriteBufferCmd>(Command::WriteBuffer);
+            cmd->buffer = buffer;
+            cmd->offset = bufferOffset;
+            cmd->size = size;
+
+            uint8_t* inlinedData = allocator->AllocateData<uint8_t>(size);
+            memcpy(inlinedData, data, size);
+            return {};
+        });
+    }
+
     void CommandEncoder::APIWriteTimestamp(QuerySetBase* querySet, uint32_t queryIndex) {
         mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
