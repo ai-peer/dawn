@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51734596_130346a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:27:02Z",
+      "side": 1,
+      "message": "let\u0027s create a Dawn bug for the spirv_to_dxil integration, and like it here and the other CLs with Bug: dawn:XXX",
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11f601a_838d4b93",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:27:02Z",
+      "side": 1,
+      "message": "Maybe we can add something to Tint which can serialize the program to a binary byte stream. It should be more compact and faster than generating actual code. Anyway, for now this is probably fine.\n\nOne day we\u0027ll want to serialize+deserialize anyway so that we can also cache the WGSL -\u003e program step",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 100
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c09c66ee_771ae907",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:27:02Z",
+      "side": 1,
+      "message": "I think we could make these some strings that are obviously invalid WGSL tokens or series of tokens which Tint should never generate.",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 76
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9c1163d_a7da581f",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T22:27:02Z",
+      "side": 1,
+      "message": "two layouts can hash to the same thing. In order for this to be safe, we need to implement serialization of all of the contents to a blob",
+      "range": {
+        "startLine": 408,
+        "startChar": 18,
+        "endLine": 408,
+        "endChar": 47
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
