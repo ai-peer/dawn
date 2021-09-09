@@ -22,6 +22,30 @@
       },
       "revId": "d7015f1480e8ddf5789c9a957362871ce414fd11",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eabaf59_5133b052",
+        "filename": "src/tests/end2end/CompressedTextureFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1240,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-09T21:59:28Z",
+      "side": 1,
+      "message": "It\u0027s not obvious... But it happens here https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tests/DawnTest.cpp;l\u003d1004 via a callback registered on the device at the setup of the DawnTest.",
+      "parentUuid": "e7e83928_b0e64858",
+      "range": {
+        "startLine": 1240,
+        "startChar": 8,
+        "endLine": 1240,
+        "endChar": 31
+      },
+      "revId": "d7015f1480e8ddf5789c9a957362871ce414fd11",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
