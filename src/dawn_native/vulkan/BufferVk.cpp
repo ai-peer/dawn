@@ -184,7 +184,7 @@ namespace dawn_native { namespace vulkan {
         createInfo.size = mAllocatedSize;
         // Add CopyDst for non-mappable buffer initialization with mappedAtCreation
         // and robust resource initialization.
-        createInfo.usage = VulkanBufferUsage(GetUsage() | wgpu::BufferUsage::CopyDst);
+        createInfo.usage = VulkanBufferUsage(GetInternalUsage() | wgpu::BufferUsage::CopyDst);
         createInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
         createInfo.queueFamilyIndexCount = 0;
         createInfo.pQueueFamilyIndices = 0;
