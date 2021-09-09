@@ -33,6 +33,24 @@
       "message": "nit: also say it\u0027s a regression test for crbug.com/tint/1170",
       "revId": "29064d30709f9fc5a94bc2e462f8dae37a0c2db3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25ca9b54_dca26a83",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 427,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-09T19:54:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9b0db0a_ff8f812d",
+      "revId": "29064d30709f9fc5a94bc2e462f8dae37a0c2db3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
