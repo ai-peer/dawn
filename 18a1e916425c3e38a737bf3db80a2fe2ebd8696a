@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a09de247_76c20544",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T21:58:10Z",
+      "side": 1,
+      "message": "Yes, let\u0027s do this. Otherwise it would be relatively easy to use kMaxBindGroups + 1 elsewhere as well.\n\nMaybe it can be just in PipelineLayoutD3D12.h for now",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 15,
+        "endChar": 44
+      },
+      "revId": "18a1e916425c3e38a737bf3db80a2fe2ebd8696a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e06df20e_3adefc74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-09T21:58:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "18a1e916425c3e38a737bf3db80a2fe2ebd8696a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
