@@ -63,6 +63,7 @@ namespace dawn_native {
         SetBlendConstant,
         SetBindGroup,
         SetIndexBuffer,
+        SetValidatedBufferLocationsInternal,
         SetVertexBuffer,
         WriteBufferInternal,
         WriteTimestamp,
@@ -228,6 +229,16 @@ namespace dawn_native {
 
     struct SetStencilReferenceCmd {
         uint32_t reference;
+    };
+
+    struct DeferredBufferLocationUpdate {
+        Ref<BufferLocation> location;
+        Ref<BufferBase> buffer;
+        uint64_t offset;
+    };
+
+    struct SetValidatedBufferLocationsInternalCmd {
+        std::vector<DeferredBufferLocationUpdate> updates;
     };
 
     struct SetViewportCmd {
