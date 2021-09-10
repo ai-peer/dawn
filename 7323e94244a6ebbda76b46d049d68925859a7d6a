@@ -16,6 +16,23 @@
       "message": "PTAL, thanks",
       "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b0b582e_d26b8568",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:58:41Z",
+      "side": 1,
+      "message": "Current I enable this workaround for all Intel GPUs expect the known one that don\u0027t have the bug (i.e. use a white list). Although I have only tested 2 device (Iris 550 passed and Iris Pro failed), I will update this condition with more devices tested, or maybe change into a black list.",
+      "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
