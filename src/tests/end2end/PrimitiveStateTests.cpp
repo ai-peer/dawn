@@ -55,7 +55,7 @@ class DepthClampingTest : public DawnTest {
                 return vec4<f32>(0.0, 0.0, ubo.depth, 1.0);
             })");
 
-        fsModule = utils::CreateShaderModule(device, R"(
+        fsModule_clipping = utils::CreateShaderModule(device, R"(
             [[block]] struct UBO {
                 color : vec3<f32>;
                 depth : f32;
@@ -64,6 +64,25 @@ class DepthClampingTest : public DawnTest {
 
             [[stage(fragment)]] fn main() -> [[location(0)]] vec4<f32> {
                 return vec4<f32>(ubo.color, 1.0);
+            })");
+
+        fsModule_clamping = utils::CreateShaderModule(device, R"(
+            [[block]] struct UBO {
+                color : vec3<f32>;
+                depth : f32;
+            };
+            [[group(0), binding(0)]] var<uniform> ubo : UBO;
+
+            struct Fs_output {
+                [[location(0)]] color : vec4<f32>;
+                [[builtin(frag_depth)]] depth : f32;
+            };
+
+            [[stage(fragment)]] fn main([[builtin(position)]] frag_coord : vec4<f32>) -> Fs_output {
+                var fs_output : Fs_output;
+                fs_output.color = vec4<f32>(ubo.color, 1.0);
+                fs_output.depth = clamp(frag_coord.z, 0.0, 1.0);
+                return fs_output;
             })");
     }
 
@@ -113,7 +132,12 @@ class DepthClampingTest : public DawnTest {
             descriptor.primitive.nextInChain = test.depthClampingState;
             descriptor.primitive.topology = wgpu::PrimitiveTopology::PointList;
             descriptor.vertex.module = vsModule;
-            descriptor.cFragment.module = fsModule;
+            if (test.depthClampingState != nullptr && test.depthClampingState->clampDepth) {
+                descriptor.cFragment.module = fsModule_clamping;
+            } else {
+                descriptor.cFragment.module = fsModule_clipping;
+            }
+
             wgpu::DepthStencilState* depthStencil = descriptor.EnableDepthStencil();
             depthStencil->depthWriteEnabled = true;
             depthStencil->depthCompare = test.depthCompareFunction;
@@ -142,7 +166,8 @@ class DepthClampingTest : public DawnTest {
     wgpu::TextureView renderTargetView;
     wgpu::TextureView depthTextureView;
     wgpu::ShaderModule vsModule;
-    wgpu::ShaderModule fsModule;
+    wgpu::ShaderModule fsModule_clipping;
+    wgpu::ShaderModule fsModule_clamping;
 };
 
 // Test that fragments beyond the far plane are clamped to 1.0 if depth clamping is enabled.
