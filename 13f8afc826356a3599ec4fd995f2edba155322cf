@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "13f8afc826356a3599ec4fd995f2edba155322cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7751afeb_932ee669",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-10T15:00:31Z",
+      "side": 1,
+      "message": "LGTM. The message filtering mechanism may be needed again in the future, but it\u0027s a small enough chunk of code that it shouldn\u0027t be a big deal to add back in if we need it.",
+      "revId": "13f8afc826356a3599ec4fd995f2edba155322cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
