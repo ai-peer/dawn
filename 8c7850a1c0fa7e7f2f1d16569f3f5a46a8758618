@@ -16,6 +16,69 @@
       "message": "PTAL - I\u0027m a little leery about the test hack to inspect internal usage directly, but I wasn\u0027t sure it would be worth exposing it e.g. as a dawn extension just for the test. WDYT?",
       "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d097108_a8a777cc",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T17:58:10Z",
+      "side": 1,
+      "message": "mInternalUsage is missing these additions",
+      "range": {
+        "startLine": 149,
+        "startChar": 12,
+        "endLine": 149,
+        "endChar": 45
+      },
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a87ad14_c36f8fbf",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T17:58:10Z",
+      "side": 1,
+      "message": "D3D12 / Metal / GL too?",
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cc5cde0_d8df1483",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T17:58:10Z",
+      "side": 1,
+      "message": "nit: GetInternalUsage\nand maybe some other places need to be updated too. Overall, anything that will affect how we allocate / transition this resource",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 20
+      },
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
