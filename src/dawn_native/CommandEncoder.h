@@ -46,6 +46,11 @@ namespace dawn_native {
                                    BufferBase* destination,
                                    uint64_t destinationOffset,
                                    uint64_t size);
+        void APICopyBufferToBufferInternal(BufferBase* source,
+                                           uint64_t sourceOffset,
+                                           BufferBase* destination,
+                                           uint64_t destinationOffset,
+                                           uint64_t size);
         void APICopyBufferToTexture(const ImageCopyBuffer* source,
                                     const ImageCopyTexture* destination,
                                     const Extent3D* copySize);
@@ -88,6 +93,16 @@ namespace dawn_native {
         void APICopyTextureToTextureHelper(const ImageCopyTexture* source,
                                            const ImageCopyTexture* destination,
                                            const Extent3D* copySize);
+
+        // Helper to be able to implement both APICopyBufferToBuffer and
+        // APICopyBufferToBufferInternal. The only difference between both
+        // copies is that the Internal one will also check internal usage.
+        template <bool Internal>
+        void APICopyBufferToBufferHelper(BufferBase* source,
+                                         uint64_t sourceOffset,
+                                         BufferBase* destination,
+                                         uint64_t destinationOffset,
+                                         uint64_t size);
 
         MaybeError ValidateFinish() const;
 
