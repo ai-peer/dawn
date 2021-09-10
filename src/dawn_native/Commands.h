@@ -19,6 +19,7 @@
 
 #include "dawn_native/AttachmentState.h"
 #include "dawn_native/BindingInfo.h"
+#include "dawn_native/Buffer.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -183,7 +184,7 @@ namespace dawn_native {
     };
 
     struct DrawIndexedIndirectCmd {
-        Ref<BufferBase> indirectBuffer;
+        Ref<DeferredBufferRef> indirectBufferRef;
         uint64_t indirectOffset;
     };
 
