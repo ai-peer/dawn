@@ -57,7 +57,7 @@
 {% macro serialize_member(member, in, out) %}
     {%- if member.type.category == "object" -%}
         {%- set Optional = "Optional" if member.optional else "" -%}
-        {{out}} = provider.Get{{Optional}}Id({{in}});
+        WIRE_TRY(provider.Get{{Optional}}Id({{in}}, &{{out}}));
     {% elif member.type.category == "structure"%}
         {%- set Provider = ", provider" if member.type.may_have_dawn_object else "" -%}
         {% if member.annotation == "const*const*" %}
@@ -416,8 +416,8 @@ namespace {
     }
 
     WireResult {{Cmd}}::Serialize(size_t commandSize, SerializeBuffer* buffer
-        {%- if not is_return -%}
-            , const ObjectIdProvider& objectIdProvider
+        {%- if command.may_have_dawn_object -%}
+            , const ObjectIdProvider& provider
         {%- endif -%}
     ) const {
         {{Name}}Transfer* transfer;
@@ -426,7 +426,7 @@ namespace {
 
         WIRE_TRY({{Name}}Serialize(*this, transfer, buffer
             {%- if command.may_have_dawn_object -%}
-                , objectIdProvider
+                , provider
             {%- endif -%}
         ));
         return WireResult::Success;
@@ -666,6 +666,36 @@ namespace dawn_wire {
         {{ write_command_serialization_methods(command, True) }}
     {% endfor %}
 
+    // Implementation of ObjectIdResolver that always errors.
+    // Used when the generator adds a provider argument because of a chained
+    // struct, but in practice, a chained struct in that location is invalid.
+    class ErrorObjectIdResolver final : public ObjectIdResolver {
+        public:
+            {% for type in by_category["object"] %}
+                WireResult GetFromId(ObjectId id, {{as_cType(type.name)}}* out) const final {
+                    return WireResult::FatalError;
+                }
+                WireResult GetOptionalFromId(ObjectId id, {{as_cType(type.name)}}* out) const final {
+                    return WireResult::FatalError;
+                }
+            {% endfor %}
+    };
+
+    // Implementation of ObjectIdProvider that always errors.
+    // Used when the generator adds a provider argument because of a chained
+    // struct, but in practice, a chained struct in that location is invalid.
+    class ErrorObjectIdProvider final : public ObjectIdProvider {
+        public:
+            {% for type in by_category["object"] %}
+                WireResult GetId({{as_cType(type.name)}} object, ObjectId* out) const final {
+                    return WireResult::FatalError;
+                }
+                WireResult GetOptionalId({{as_cType(type.name)}} object, ObjectId* out) const final {
+                    return WireResult::FatalError;
+                }
+            {% endfor %}
+    };
+
         // Implementations of serialization/deserialization of WPGUDeviceProperties.
         size_t SerializedWGPUDevicePropertiesSize(const WGPUDeviceProperties* deviceProperties) {
             return sizeof(WGPUDeviceProperties) +
@@ -681,7 +711,8 @@ namespace dawn_wire {
             WireResult result = serializeBuffer.Next(&transfer);
             ASSERT(result == WireResult::Success);
 
-            result = WGPUDevicePropertiesSerialize(*deviceProperties, transfer, &serializeBuffer);
+            ErrorObjectIdProvider provider;
+            result = WGPUDevicePropertiesSerialize(*deviceProperties, transfer, &serializeBuffer, provider);
             ASSERT(result == WireResult::Success);
         }
 
@@ -694,8 +725,9 @@ namespace dawn_wire {
                 return false;
             }
 
+            ErrorObjectIdResolver resolver;
             return WGPUDevicePropertiesDeserialize(deviceProperties, transfer, &deserializeBuffer,
-                                                   nullptr) == WireResult::Success;
+                                                   nullptr, resolver) == WireResult::Success;
         }
 
 }  // namespace dawn_wire
