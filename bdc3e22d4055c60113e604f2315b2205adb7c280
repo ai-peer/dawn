@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "01e9ee25_33dae7bc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-10T10:28:23Z",
+      "side": 1,
+      "message": "I don\u0027t understand why we want to avoid additional outputs. It\u0027s likely that we\u0027ll eventually need to have additional outputs that can\u0027t be hard-coded so we could add support for that instead of trying to delay.",
+      "revId": "bdc3e22d4055c60113e604f2315b2205adb7c280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8e0482d9_64f7d129",
