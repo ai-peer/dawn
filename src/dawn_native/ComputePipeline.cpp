@@ -92,7 +92,7 @@ namespace dawn_native {
         }
     }
 
-    MaybeError ComputePipelineBase::Initialize(const ComputePipelineDescriptor* descriptor) {
+    MaybeError ComputePipelineBase::Initialize() {
         return {};
     }
 

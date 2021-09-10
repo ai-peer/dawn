@@ -1152,12 +1152,11 @@ namespace dawn_native {
             DAWN_TRY(ValidateComputePipelineDescriptor(this, descriptor));
         }
 
-        std::unique_ptr<FlatComputePipelineDescriptor> appliedDescriptor =
-            std::make_unique<FlatComputePipelineDescriptor>(descriptor);
-        DAWN_TRY(ValidateLayoutAndSetDefaultLayout(this, appliedDescriptor.get()));
+        FlatComputePipelineDescriptor appliedDescriptor(descriptor);
+        DAWN_TRY(ValidateLayoutAndSetDefaultLayout(this, &appliedDescriptor));
 
         // Call the callback directly when we can get a cached compute pipeline object.
-        auto pipelineAndBlueprintFromCache = GetCachedComputePipeline(appliedDescriptor.get());
+        auto pipelineAndBlueprintFromCache = GetCachedComputePipeline(&appliedDescriptor);
         if (pipelineAndBlueprintFromCache.first.Get() != nullptr) {
             Ref<ComputePipelineBase> result = std::move(pipelineAndBlueprintFromCache.first);
             callback(WGPUCreatePipelineAsyncStatus_Success,
@@ -1167,8 +1166,7 @@ namespace dawn_native {
             // where the pipeline object may be created asynchronously and the result will be saved
             // to mCreatePipelineAsyncTracker.
             const size_t blueprintHash = pipelineAndBlueprintFromCache.second;
-            CreateComputePipelineAsyncImpl(std::move(appliedDescriptor), blueprintHash, callback,
-                                           userdata);
+            CreateComputePipelineAsyncImpl(appliedDescriptor, blueprintHash, callback, userdata);
         }
 
         return {};
@@ -1176,15 +1174,14 @@ namespace dawn_native {
 
     // This function is overwritten with the async version on the backends
     // that supports creating compute pipeline asynchronously
-    void DeviceBase::CreateComputePipelineAsyncImpl(
-        std::unique_ptr<FlatComputePipelineDescriptor> descriptor,
-        size_t blueprintHash,
-        WGPUCreateComputePipelineAsyncCallback callback,
-        void* userdata) {
+    void DeviceBase::CreateComputePipelineAsyncImpl(const FlatComputePipelineDescriptor& descriptor,
+                                                    size_t blueprintHash,
+                                                    WGPUCreateComputePipelineAsyncCallback callback,
+                                                    void* userdata) {
         Ref<ComputePipelineBase> result;
         std::string errorMessage;
 
-        auto resultOrError = CreateComputePipelineImpl(descriptor.get());
+        auto resultOrError = CreateComputePipelineImpl(&descriptor);
         if (resultOrError.IsError()) {
             std::unique_ptr<ErrorData> error = resultOrError.AcquireError();
             errorMessage = error->GetMessage();
