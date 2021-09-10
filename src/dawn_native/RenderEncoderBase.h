@@ -20,6 +20,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/PassResourceUsageTracker.h"
 #include "dawn_native/ProgrammablePassEncoder.h"
+#include "dawn_native/RenderValidationMetadata.h"
 
 namespace dawn_native {
 
@@ -64,6 +65,7 @@ namespace dawn_native {
 
         CommandBufferStateTracker mCommandBufferState;
         RenderPassResourceUsageTracker mUsageTracker;
+        RenderValidationMetadata mValidationMetadata;
 
       private:
         Ref<AttachmentState> mAttachmentState;
