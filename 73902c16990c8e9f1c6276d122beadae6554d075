@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d033ac_865905ca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-10T00:10:28Z",
+      "side": 1,
+      "message": "Done\n\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d1103",
+      "parentUuid": "51734596_130346a0",
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e11f601a_838d4b93",
@@ -43,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a72f58a_f3028047",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-10T00:10:28Z",
+      "side": 1,
+      "message": "Is there a bug tracking the program serialization in tint? I can link to it with a todo comment here (and create it if it doesn\u0027t exist)",
+      "parentUuid": "e11f601a_838d4b93",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 100
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c09c66ee_771ae907",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 13
@@ -54,6 +96,30 @@
       "writtenOn": "2021-09-09T22:27:02Z",
       "side": 1,
       "message": "I think we could make these some strings that are obviously invalid WGSL tokens or series of tokens which Tint should never generate.",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 76
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80c0fe5f_10ce4fab",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-10T00:10:28Z",
+      "side": 1,
+      "message": "The best I can thing of is kStartGuard\u003d\"}\" and kEndGuard\u003d\"{\", as it seems like invalid WGSL (and most other languages) given a brief skim of https://gpuweb.github.io/gpuweb/wgsl/. Thoughts?",
+      "parentUuid": "c09c66ee_771ae907",
       "range": {
         "startLine": 374,
         "startChar": 0,
@@ -101,6 +167,30 @@
       "side": 1,
       "message": "oh!! much easier, and much more precise if we simply use the serialized D3D12 root signature!",
       "parentUuid": "a9c1163d_a7da581f",
+      "range": {
+        "startLine": 408,
+        "startChar": 18,
+        "endLine": 408,
+        "endChar": 47
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0af2c2c_98427d89",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-10T00:10:28Z",
+      "side": 1,
+      "message": "Super smart. I\u0027ve added it instead of the layout hash.",
+      "parentUuid": "74810dff_02264ae4",
       "range": {
         "startLine": 408,
         "startChar": 18,
