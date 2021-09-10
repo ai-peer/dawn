@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2cda007_517c982b",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T02:15:12Z",
+      "side": 1,
+      "message": "I don\u0027t think so; would be great to file one :)",
+      "parentUuid": "4a72f58a_f3028047",
+      "range": {
+        "startLine": 360,
+        "startChar": 0,
+        "endLine": 360,
+        "endChar": 100
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c09c66ee_771ae907",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 13
@@ -120,6 +144,30 @@
       "side": 1,
       "message": "The best I can thing of is kStartGuard\u003d\"}\" and kEndGuard\u003d\"{\", as it seems like invalid WGSL (and most other languages) given a brief skim of https://gpuweb.github.io/gpuweb/wgsl/. Thoughts?",
       "parentUuid": "c09c66ee_771ae907",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 76
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a8ba341_c332e4b5",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T02:15:12Z",
+      "side": 1,
+      "message": "sounds good to me",
+      "parentUuid": "80c0fe5f_10ce4fab",
       "range": {
         "startLine": 374,
         "startChar": 0,

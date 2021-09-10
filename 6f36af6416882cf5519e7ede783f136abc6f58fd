@@ -16,6 +16,46 @@
       "message": "I would love your thoughts on the open issues below. Thank you!",
       "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d8322d7_740d6f38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T02:15:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01cb7aee_8bb16f22",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T02:15:12Z",
+      "side": 1,
+      "message": "nit: \"pipeline layout\u0027s root signature\"",
+      "range": {
+        "startLine": 409,
+        "startChar": 23,
+        "endLine": 409,
+        "endChar": 38
+      },
+      "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
