@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70cb4cf9_9dbc504c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-10T19:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d097108_a8a777cc",
+      "range": {
+        "startLine": 149,
+        "startChar": 12,
+        "endLine": 149,
+        "endChar": 45
+      },
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a87ad14_c36f8fbf",
@@ -76,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38e4cfae_6bb74255",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-10T19:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a87ad14_c36f8fbf",
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1cc5cde0_d8df1483",
@@ -89,6 +131,30 @@
       "writtenOn": "2021-09-10T17:58:10Z",
       "side": 1,
       "message": "nit: GetInternalUsage\nand maybe some other places need to be updated too. Overall, anything that will affect how we allocate / transition this resource",
+      "range": {
+        "startLine": 202,
+        "startChar": 12,
+        "endLine": 202,
+        "endChar": 20
+      },
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb69271_24ddd8e3",
+        "filename": "src/dawn_native/vulkan/BufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-10T19:42:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1cc5cde0_d8df1483",
       "range": {
         "startLine": 202,
         "startChar": 12,
