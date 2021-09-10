@@ -135,6 +135,24 @@ namespace dawn_native {
         size_t mMapSize = 0;
     };
 
+    // A ref-counted wrapper around a Buffer ref and an offset into the buffer. This can be used as
+    // a placeholder for concrete Buffer ref when e.g. encoding a command which must reference a
+    // buffer that may not be allocated yet.
+    class DeferredBufferRef : public RefCounted {
+      public:
+        DeferredBufferRef();
+        ~DeferredBufferRef();
+
+        BufferBase* GetBuffer() const;
+        uint64_t GetOffset() const;
+
+        void SetBuffer(BufferBase* buffer, uint64_t offset);
+
+      private:
+        Ref<BufferBase> mBuffer;
+        uint64_t mOffset = 0;
+    };
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_BUFFER_H_

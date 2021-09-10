@@ -605,4 +605,21 @@ namespace dawn_native {
         return offset == 0 && size == GetSize();
     }
 
+    DeferredBufferRef::DeferredBufferRef() = default;
+
+    DeferredBufferRef::~DeferredBufferRef() = default;
+
+    BufferBase* DeferredBufferRef::GetBuffer() const {
+        return mBuffer.Get();
+    }
+
+    uint64_t DeferredBufferRef::GetOffset() const {
+        return mOffset;
+    }
+
+    void DeferredBufferRef::SetBuffer(BufferBase* buffer, uint64_t offset) {
+        mBuffer = buffer;
+        mOffset = offset;
+    }
+
 }  // namespace dawn_native

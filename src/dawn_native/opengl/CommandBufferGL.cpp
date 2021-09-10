@@ -1186,11 +1186,13 @@ namespace dawn_native { namespace opengl {
 
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
+                    ASSERT(draw->indirectBufferRef->GetBuffer() != nullptr);
+
                     vertexStateBufferBindingTracker.Apply(gl);
                     bindGroupTracker.Apply(gl);
 
-                    uint64_t indirectBufferOffset = draw->indirectOffset;
-                    Buffer* indirectBuffer = ToBackend(draw->indirectBuffer.Get());
+                    uint64_t indirectBufferOffset = draw->indirectBufferRef->GetOffset();
+                    Buffer* indirectBuffer = ToBackend(draw->indirectBufferRef->GetBuffer());
 
                     gl.BindBuffer(GL_DRAW_INDIRECT_BUFFER, indirectBuffer->GetHandle());
                     gl.DrawElementsIndirect(
