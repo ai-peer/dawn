@@ -16,15 +16,21 @@
 #define DAWNNATIVE_INTERNALPIPELINESTORE_H_
 
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ScratchBuffer.h"
 #include "dawn_native/dawn_platform.h"
 
 #include <unordered_map>
 
 namespace dawn_native {
+
+    class DeviceBase;
     class RenderPipelineBase;
     class ShaderModuleBase;
 
     struct InternalPipelineStore {
+        explicit InternalPipelineStore(DeviceBase* device);
+        ~InternalPipelineStore();
+
         std::unordered_map<wgpu::TextureFormat, Ref<RenderPipelineBase>>
             copyTextureForBrowserPipelines;
 
@@ -34,7 +40,18 @@ namespace dawn_native {
         Ref<ShaderModuleBase> timestampCS;
 
         Ref<ShaderModuleBase> dummyFragmentShader;
+
+        // A scratch buffer suitable for use as a copy destination and storage binding.
+        ScratchBuffer scratchStorage;
+
+        // A scratch buffer suitable for use as a copy destination, storage binding, and indirect
+        // buffer for indirect dispatch or draw calls.
+        ScratchBuffer scratchIndirectStorage;
+
+        Ref<ComputePipelineBase> renderValidationPipeline;
+        Ref<ShaderModuleBase> renderValidationShader;
     };
+
 }  // namespace dawn_native
 
 #endif  // DAWNNATIVE_INTERNALPIPELINESTORE_H_

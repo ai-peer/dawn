@@ -824,6 +824,10 @@ namespace dawn_native { namespace vulkan {
                     break;
                 }
 
+                case Command::SetValidatedBufferLocationsInternal:
+                    DoNextSetValidatedBufferLocationsInternal();
+                    break;
+
                 case Command::WriteBufferInternal: {
                     WriteBufferInternalCmd* write = mCommands.NextCommand<WriteBufferInternalCmd>();
                     const uint64_t offset = write->offset;
