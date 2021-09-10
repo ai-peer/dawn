@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad2b6cff_9f47bdb5",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T18:32:37Z",
+      "side": 1,
+      "message": "Catching up on comments in this CL, so I may have missed some discussion. Is it possible to add the dummy fragment shader in the frontend? Then we can default this toggle to true on both OpenGL ES and on Metal Intel devices that need the workaround. Then we don\u0027t need custom handling in any of the backends to add the shader in, and it will be easy to expand to other platforms if necessary.",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 225,
+        "endChar": 45
+      },
+      "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b0b582e_d26b8568",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 11
