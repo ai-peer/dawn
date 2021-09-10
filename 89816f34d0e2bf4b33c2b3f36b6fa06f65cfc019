@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdabd07b_d3e54958",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-10T08:00:28Z",
+      "side": 1,
+      "message": "Do you mean all the members of limits have no default values?",
+      "range": {
+        "startLine": 905,
+        "startChar": 81,
+        "endLine": 905,
+        "endChar": 105
+      },
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
