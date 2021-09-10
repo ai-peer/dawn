@@ -60,7 +60,7 @@ namespace dawn_native {
         // CreateComputePipelineAsyncTask is declared as a friend of ComputePipelineBase as it
         // needs to call the private member function ComputePipelineBase::Initialize().
         friend class CreateComputePipelineAsyncTask;
-        virtual MaybeError Initialize(const ComputePipelineDescriptor* descriptor);
+        virtual MaybeError Initialize();
     };
 
 }  // namespace dawn_native
