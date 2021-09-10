@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35803218_cdf1fbea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T02:47:57Z",
+      "side": 1,
+      "message": "PTAL! See https://dawn-review.googlesource.com/c/dawn/+/63983/ for context",
+      "revId": "88c29f685881241d01b344a0601da50e6a3b15b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
