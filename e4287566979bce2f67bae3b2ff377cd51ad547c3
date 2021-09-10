@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "e4287566979bce2f67bae3b2ff377cd51ad547c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ae23f3_06cea942",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-10T09:00:29Z",
+      "side": 1,
+      "message": "Oooh this is a great realization that the \"flat descriptors\" are actually the Compute/RenderPipeline objects themselves! LGTM",
+      "revId": "e4287566979bce2f67bae3b2ff377cd51ad547c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
