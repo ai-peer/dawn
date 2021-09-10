@@ -46,6 +46,30 @@
       },
       "revId": "d0640c6fbdcde1dad8e69a2ba1a74d198d2b4924",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5211e66_3c278de2",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T02:11:06Z",
+      "side": 1,
+      "message": "ok, if/when we get to optimizing this we should make sure it\u0027s well tested.\nIt\u0027s possible we end up with some tracking to avoid setting the root constants if we don\u0027t need to. We\u0027ll get a *ton* of draw calls so it needs to be fast.\n\nOn that note:\n - would be interesting if we could profile how expensive it is. There are some basic tests in dawn_perf_tests which might be helpful. I think we can look just at the CPU time of the command recording\n - That said, can\u0027t we keep the reflection from Tint but simply not put it inside TranslateToHLSL? The reflection shouldn\u0027t affect the transpiled output. This way, we can still have a signal to know what we can completely avoid calling SetGraphicsRoot32BitConstants.",
+      "parentUuid": "c47bb69b_777e6a5c",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 23
+      },
+      "revId": "d0640c6fbdcde1dad8e69a2ba1a74d198d2b4924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
