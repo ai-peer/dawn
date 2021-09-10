@@ -33,6 +33,23 @@
       "message": "Removals LGTM, though it\u0027s going to need some updates in Chrome before it lands.",
       "revId": "35b5117cf7295ff2a8843a815f9117572ac5a545",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d045d078_681b6357",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T17:43:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "35b5117cf7295ff2a8843a815f9117572ac5a545",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
