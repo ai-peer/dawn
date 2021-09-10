@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "fed90cc36dd0507113cb236f4f0dd6ed258429c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26fe6a93_9dadac5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-10T15:08:54Z",
+      "side": 1,
+      "message": "LGTM! Nice to get these required fields back to being \"correctly\" required.",
+      "revId": "fed90cc36dd0507113cb236f4f0dd6ed258429c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
