@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c1b47f4_6e4af16a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T18:04:37Z",
+      "side": 1,
+      "message": "missed this - we\u0027ll need to skip the test if UsesWire() since those pointers are only valid if using dawn_native directly.\n\nI think we would also move it to a new test file and make it part of dawn_white_box_tests_sources. That target already links dawn_native:dawn_native_sources",
+      "parentUuid": "9d98ac87_9bad85c6",
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d097108_a8a777cc",
