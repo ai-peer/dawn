@@ -162,6 +162,10 @@ namespace dawn_native { namespace d3d12 {
         // device initialization to call NextSerial
         DAWN_TRY(NextSerial());
 
+        // The environment can only use Mesa when it's available. Override the decision if it is not
+        // applicable.
+        DAWN_TRY(ApplyUseMesaToggle());
+
         // The environment can only use DXC when it's available. Override the decision if it is not
         // applicable.
         DAWN_TRY(ApplyUseDxcToggle());
@@ -198,6 +202,14 @@ namespace dawn_native { namespace d3d12 {
 
     ComPtr<IDXGIFactory4> Device::GetFactory() const {
         return ToBackend(GetAdapter())->GetBackend()->GetFactory();
+    }
+
+    MaybeError Device::ApplyUseMesaToggle() {
+        if (!ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsSPIRVToDXILAvailable()) {
+            ForceSetToggle(Toggle::UseMesa, false);
+        }
+
+        return {};
     }
 
     MaybeError Device::ApplyUseDxcToggle() {

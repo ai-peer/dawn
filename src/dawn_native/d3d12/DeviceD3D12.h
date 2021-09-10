@@ -184,6 +184,8 @@ namespace dawn_native { namespace d3d12 {
 
         MaybeError CheckDebugLayerAndGenerateErrors();
 
+        MaybeError ApplyUseMesaToggle();
+
         MaybeError ApplyUseDxcToggle();
 
         ComPtr<ID3D12Fence> mFence;
