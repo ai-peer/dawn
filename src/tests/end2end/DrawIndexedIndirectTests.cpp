@@ -59,25 +59,26 @@ class DrawIndexedIndirectTest : public DawnTest {
              // Second quad: the first 3 vertices represent the top right triangle
              -1.0f, 1.0f, 0.0f, 1.0f, 1.0f, -1.0f, 0.0f, 1.0f, 1.0f, 1.0f, 0.0f, 1.0f, -1.0f, -1.0f,
              0.0f, 1.0f});
-        indexBuffer = utils::CreateBufferFromData<uint32_t>(
-            device, wgpu::BufferUsage::Index,
-            {0, 1, 2, 0, 3, 1,
-             // The indices below are added to test negatve baseVertex
-             0 + 4, 1 + 4, 2 + 4, 0 + 4, 3 + 4, 1 + 4});
     }
 
     utils::BasicRenderPass renderPass;
     wgpu::RenderPipeline pipeline;
     wgpu::Buffer vertexBuffer;
-    wgpu::Buffer indexBuffer;
 
-    void Test(std::initializer_list<uint32_t> bufferList,
-              uint64_t indexOffset,
-              uint64_t indirectOffset,
-              RGBA8 bottomLeftExpected,
-              RGBA8 topRightExpected) {
-        wgpu::Buffer indirectBuffer =
-            utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect, bufferList);
+    wgpu::Buffer CreateIndirectBuffer(std::initializer_list<uint32_t> indirectParamList) {
+        return utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Indirect,
+                                                     indirectParamList);
+    }
+
+    wgpu::Buffer CreateIndexBuffer(std::initializer_list<uint32_t> indexList) {
+        return utils::CreateBufferFromData<uint32_t>(device, wgpu::BufferUsage::Index, indexList);
+    }
+
+    wgpu::CommandBuffer EncodeDrawCommands(std::initializer_list<uint32_t> bufferList,
+                                           wgpu::Buffer indexBuffer,
+                                           uint64_t indexOffset,
+                                           uint64_t indirectOffset) {
+        wgpu::Buffer indirectBuffer = CreateIndirectBuffer(bufferList);
 
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         {
@@ -89,11 +90,27 @@ class DrawIndexedIndirectTest : public DawnTest {
             pass.EndPass();
         }
 
-        wgpu::CommandBuffer commands = encoder.Finish();
+        return encoder.Finish();
+    }
+
+    void TestDraw(wgpu::CommandBuffer commands, RGBA8 bottomLeftExpected, RGBA8 topRightExpected) {
         queue.Submit(1, &commands);
 
         EXPECT_PIXEL_RGBA8_EQ(bottomLeftExpected, renderPass.color, 1, 3);
         EXPECT_PIXEL_RGBA8_EQ(topRightExpected, renderPass.color, 3, 1);
+    }
+
+    void Test(std::initializer_list<uint32_t> bufferList,
+              uint64_t indexOffset,
+              uint64_t indirectOffset,
+              RGBA8 bottomLeftExpected,
+              RGBA8 topRightExpected) {
+        wgpu::Buffer indexBuffer =
+            CreateIndexBuffer({0, 1, 2, 0, 3, 1,
+                               // The indices below are added to test negatve baseVertex
+                               0 + 4, 1 + 4, 2 + 4, 0 + 4, 3 + 4, 1 + 4});
+        TestDraw(EncodeDrawCommands(bufferList, indexBuffer, indexOffset, indirectOffset),
+                 bottomLeftExpected, topRightExpected);
     }
 };
 
@@ -170,6 +187,153 @@ TEST_P(DrawIndexedIndirectTest, IndirectOffset) {
 
     // Offset to draw #2
     Test({3, 1, 0, 4, 0, 3, 1, 3, 4, 0}, 0, 5 * sizeof(uint32_t), filled, notFilled);
+}
+
+TEST_P(DrawIndexedIndirectTest, BasicValidation) {
+    // TODO(crbug.com/dawn/789): Test is failing under SwANGLE on Windows only.
+    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
+
+    // It doesn't make sense to test invalid inputs when validation is disabled.
+    DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
+
+    RGBA8 filled(0, 255, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+
+    wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1});
+
+    // Test a draw with an excessive indexCount. Should draw nothing.
+    TestDraw(EncodeDrawCommands({7, 1, 0, 0, 0}, indexBuffer, 0, 0), notFilled, notFilled);
+
+    // Test a draw with an excessive firstIndex. Should draw nothing.
+    TestDraw(EncodeDrawCommands({3, 1, 7, 0, 0}, indexBuffer, 0, 0), notFilled, notFilled);
+
+    // Test a valid draw. Should draw only the second triangle.
+    TestDraw(EncodeDrawCommands({3, 1, 3, 0, 0}, indexBuffer, 0, 0), notFilled, filled);
+}
+
+TEST_P(DrawIndexedIndirectTest, ValidateWithOffsets) {
+    // TODO(crbug.com/dawn/161): The GL/GLES backend doesn't support indirect index buffer offsets
+    // yet.
+    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
+
+    // It doesn't make sense to test invalid inputs when validation is disabled.
+    DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
+
+    RGBA8 filled(0, 255, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+
+    wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
+
+    // Test that validation properly accounts for index buffer offset.
+    TestDraw(EncodeDrawCommands({3, 1, 0, 0, 0}, indexBuffer, 6 * sizeof(uint32_t), 0), filled,
+             notFilled);
+    TestDraw(EncodeDrawCommands({4, 1, 0, 0, 0}, indexBuffer, 6 * sizeof(uint32_t), 0), notFilled,
+             notFilled);
+    TestDraw(EncodeDrawCommands({3, 1, 4, 0, 0}, indexBuffer, 3 * sizeof(uint32_t), 0), notFilled,
+             notFilled);
+
+    // Test that validation properly accounts for indirect buffer offset.
+    TestDraw(
+        EncodeDrawCommands({3, 1, 0, 0, 0, 1000, 1, 0, 0, 0}, indexBuffer, 0, 4 * sizeof(uint32_t)),
+        notFilled, notFilled);
+    TestDraw(EncodeDrawCommands({3, 1, 0, 0, 0, 1000, 1, 0, 0, 0}, indexBuffer, 0, 0), filled,
+             notFilled);
+}
+
+TEST_P(DrawIndexedIndirectTest, ValidateMultiplePasses) {
+    // TODO(crbug.com/dawn/789): Test is failing under SwANGLE on Windows only.
+    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
+
+    // It doesn't make sense to test invalid inputs when validation is disabled.
+    DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
+
+    RGBA8 filled(0, 255, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+
+    wgpu::Buffer indexBuffer = CreateIndexBuffer({0, 1, 2, 0, 3, 1, 0, 1, 2});
+
+    // Test validation with multiple passes in a row. Namely this is exercising that scratch buffer
+    // data for use with a previous pass's validation commands is not overwritten before it can be
+    // used.
+    TestDraw(EncodeDrawCommands({10, 1, 0, 0, 0}, indexBuffer, 0, 0), notFilled, notFilled);
+    TestDraw(EncodeDrawCommands({6, 1, 0, 0, 0}, indexBuffer, 0, 0), filled, filled);
+    TestDraw(EncodeDrawCommands({4, 1, 6, 0, 0}, indexBuffer, 0, 0), notFilled, notFilled);
+    TestDraw(EncodeDrawCommands({3, 1, 6, 0, 0}, indexBuffer, 0, 0), filled, notFilled);
+    TestDraw(EncodeDrawCommands({3, 1, 3, 0, 0}, indexBuffer, 0, 0), notFilled, filled);
+    TestDraw(EncodeDrawCommands({6, 1, 3, 0, 0}, indexBuffer, 0, 0), filled, filled);
+    TestDraw(EncodeDrawCommands({6, 1, 6, 0, 0}, indexBuffer, 0, 0), notFilled, notFilled);
+}
+
+TEST_P(DrawIndexedIndirectTest, ValidateMultipleDraws) {
+    // TODO(crbug.com/dawn/789): Test is failing under SwANGLE on Windows only.
+    DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
+
+    // It doesn't make sense to test invalid inputs when validation is disabled.
+    DAWN_SUPPRESS_TEST_IF(HasToggleEnabled("skip_validation"));
+
+    RGBA8 filled(0, 255, 0, 255);
+    RGBA8 notFilled(0, 0, 0, 0);
+
+    // Validate multiple draw calls using the same index and indirect buffers as input, but with
+    // different indirect offsets.
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::Buffer indirectBuffer =
+            CreateIndirectBuffer({3, 1, 3, 0, 0, 10, 1, 0, 0, 0, 3, 1, 6, 0, 0});
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(CreateIndexBuffer({0, 1, 2, 0, 3, 1}), wgpu::IndexFormat::Uint32, 0);
+        pass.DrawIndexedIndirect(indirectBuffer, 0);
+        pass.DrawIndexedIndirect(indirectBuffer, 20);
+        pass.DrawIndexedIndirect(indirectBuffer, 40);
+        pass.EndPass();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+
+    queue.Submit(1, &commands);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, 1, 3);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 3, 1);
+
+    // Validate multiple draw calls using the same index buffer but different indirect buffers as
+    // input.
+    encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(CreateIndexBuffer({0, 1, 2, 0, 3, 1}), wgpu::IndexFormat::Uint32, 0);
+        pass.DrawIndexedIndirect(CreateIndirectBuffer({3, 1, 3, 0, 0}), 0);
+        pass.DrawIndexedIndirect(CreateIndirectBuffer({10, 1, 0, 0, 0}), 0);
+        pass.DrawIndexedIndirect(CreateIndirectBuffer({3, 1, 6, 0, 0}), 0);
+        pass.EndPass();
+    }
+    commands = encoder.Finish();
+
+    queue.Submit(1, &commands);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, 1, 3);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 3, 1);
+
+    // Validate multiple draw calls across different index and indirect buffers.
+    encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(pipeline);
+        pass.SetVertexBuffer(0, vertexBuffer);
+        pass.SetIndexBuffer(CreateIndexBuffer({0, 1, 2, 0, 3, 1}), wgpu::IndexFormat::Uint32, 0);
+        pass.DrawIndexedIndirect(CreateIndirectBuffer({3, 1, 3, 0, 0}), 0);
+        pass.SetIndexBuffer(CreateIndexBuffer({0, 1, 2, 0, 3, 1}), wgpu::IndexFormat::Uint32, 0);
+        pass.DrawIndexedIndirect(CreateIndirectBuffer({10, 1, 0, 0, 0}), 0);
+        pass.SetIndexBuffer(CreateIndexBuffer({0, 3, 1}), wgpu::IndexFormat::Uint32, 0);
+        pass.DrawIndexedIndirect(CreateIndirectBuffer({3, 1, 3, 0, 0}), 0);
+        pass.EndPass();
+    }
+    commands = encoder.Finish();
+
+    queue.Submit(1, &commands);
+    EXPECT_PIXEL_RGBA8_EQ(notFilled, renderPass.color, 1, 3);
+    EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 3, 1);
 }
 
 DAWN_INSTANTIATE_TEST(DrawIndexedIndirectTest,

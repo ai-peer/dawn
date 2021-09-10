@@ -144,7 +144,7 @@ namespace dawn_native {
         // only compatible with InternalStorageBuffer binding type in BGL. It shouldn't be
         // compatible with StorageBuffer binding type and the query resolve buffer cannot be bound
         // as storage buffer if it's created without Storage usage.
-        if (mUsage & wgpu::BufferUsage::QueryResolve) {
+        if (mUsage & (wgpu::BufferUsage::QueryResolve | wgpu::BufferUsage::Indirect)) {
             mUsage |= kInternalStorageBuffer;
         }
     }
@@ -169,6 +169,7 @@ namespace dawn_native {
 
     // static
     BufferBase* BufferBase::MakeError(DeviceBase* device, const BufferDescriptor* descriptor) {
+        ASSERT(false);
         return new ErrorBuffer(device, descriptor);
     }
 

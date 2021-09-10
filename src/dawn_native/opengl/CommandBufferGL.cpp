@@ -1186,6 +1186,7 @@ namespace dawn_native { namespace opengl {
 
                 case Command::DrawIndexedIndirect: {
                     DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
+                    ASSERT(draw->indirectBufferRef.Get() != nullptr);
                     ASSERT(draw->indirectBufferRef->GetBuffer() != nullptr);
 
                     vertexStateBufferBindingTracker.Apply(gl);
