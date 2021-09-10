@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d744e5_09467c0a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 927,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a748a6de_718bd627",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "daf2f468_e2afcbe8",
@@ -118,6 +136,30 @@
       "writtenOn": "2021-09-08T10:12:47Z",
       "side": 1,
       "message": "nit: no need for this-\u003e here and in other places in this CL.",
+      "range": {
+        "startLine": 352,
+        "startChar": 53,
+        "endLine": 352,
+        "endChar": 59
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4847761_26b423fb",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "daf2f468_e2afcbe8",
       "range": {
         "startLine": 352,
         "startChar": 53,
@@ -151,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da8c89b_757b0021",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01208baf_4b8e5330",
+      "range": {
+        "startLine": 351,
+        "startChar": 8,
+        "endLine": 351,
+        "endChar": 12
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c38d2d0b_91470caf",
@@ -164,6 +230,30 @@
       "writtenOn": "2021-09-08T10:12:47Z",
       "side": 1,
       "message": "ditto this could be a ShaderModule* (with a .Get() at the end). In general we prefer spelling out simple types.",
+      "range": {
+        "startLine": 352,
+        "startChar": 8,
+        "endLine": 352,
+        "endChar": 13
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73bbbef1_1491c316",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c38d2d0b_91470caf",
       "range": {
         "startLine": 352,
         "startChar": 8,
@@ -226,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "281c0410_2da52b01",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ea7511a_1b313381",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0236e87a_8bc993bb",
@@ -256,6 +364,24 @@
       "writtenOn": "2021-09-08T10:12:47Z",
       "side": 1,
       "message": "You said that this is only needed on specific devices. Can we have a toggle to use the empty FS only on these devices?\n\nAlso we\u0027ll need to paramtrize the tests on Metal with and without the toggle.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43f93e14_8b32c28b",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b8f9e57_676514c7",
       "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -314,6 +440,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37fda0b1_215fbdc9",
+        "filename": "src/dawn_native/opengl/PipelineGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "I have tried the simple \"void main() {}\" shader and get a opengl error (something like \"version mismatch between shaders\")",
+      "parentUuid": "dce53312_d4567b3c",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "115608c9_5ebc1f4f",
         "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
         "patchSetId": 6
@@ -325,6 +469,24 @@
       "writtenOn": "2021-09-08T10:12:47Z",
       "side": 1,
       "message": "nit: instead of a vector we could have a fixed length array and a counter. We don\u0027t need to allocate anything outside of the stack in this function.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444bcc40_410d7f8c",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "115608c9_5ebc1f4f",
       "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -342,6 +504,24 @@
       "writtenOn": "2021-09-08T10:12:47Z",
       "side": 1,
       "message": "Ditto, this could be stack allocated, then at [1] we would set either nullptr or \u0026colorBlend depending on whether we have a fragment stage.",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95e16859_b1dc8d47",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56d3c4c9_39cc2fbe",
       "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -369,6 +549,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72dc134d_d98025ac",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8c901d6_ea85318d",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c755ee9a_1e073021",
@@ -386,6 +590,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5945115_01e6e254",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c755ee9a_1e073021",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2ff6ddcd_1ef94752",
@@ -399,6 +621,42 @@
       "writtenOn": "2021-09-08T10:12:47Z",
       "side": 1,
       "message": "While the changes here provide a lot of coverage, I think it makes vertex-only pipeline stand out too much compared to other parts of the pipeline. We can\u0027t afford to do the same with/without testing for all properties. Can we instead have some targeted tests at things we expect to be validation errors because of vertex only pipeline? Apologies for the churn.\n\nAlso would it be possible to add a simple test for render pass compatibility with pipelines to check that they are only valid with render passes that have a depth stencil attachment (and no color attachments)?",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d160ba8f_0efab93f",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done. In fact I found no specific validation rules for vertex only render pipeline, relating rules always go like \"if descriptor.fragment is not null, ...\", but none of them said \"if fragment is null, ...\".",
+      "parentUuid": "2ff6ddcd_1ef94752",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00398580_b2806826",
+        "filename": "src/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-10T15:54:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ff6ddcd_1ef94752",
       "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
