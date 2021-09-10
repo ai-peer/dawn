@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d98ac87_9bad85c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-10T17:36:55Z",
+      "side": 1,
+      "message": "PTAL - I\u0027m a little leery about the test hack to inspect internal usage directly, but I wasn\u0027t sure it would be worth exposing it e.g. as a dawn extension just for the test. WDYT?",
+      "revId": "8c7850a1c0fa7e7f2f1d16569f3f5a46a8758618",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
