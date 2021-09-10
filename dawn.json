@@ -395,6 +395,16 @@
                 ]
             },
             {
+                "name": "copy buffer to buffer internal",
+                "args": [
+                    {"name": "source", "type": "buffer"},
+                    {"name": "source offset", "type": "uint64_t"},
+                    {"name": "destination", "type": "buffer"},
+                    {"name": "destination offset", "type": "uint64_t"},
+                    {"name": "size", "type": "uint64_t"}
+                ]
+            },
+            {
                 "name": "copy buffer to texture",
                 "args": [
                     {"name": "source", "type": "image copy buffer", "annotation": "const*"},

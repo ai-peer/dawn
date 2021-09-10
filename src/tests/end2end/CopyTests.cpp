@@ -2390,6 +2390,48 @@ TEST_P(CopyTests_B2B, ZeroSizedCopy) {
     DoTest(kLargeBufferSize, kLargeBufferSize, kLargeBufferSize, kLargeBufferSize, 0);
 }
 
+// Test that because buffers with Indirect usage implicitly get (at least internal-only) CopySrc
+// usage, they can be copied-from using CopyBufferToBufferInternal.
+TEST_P(CopyTests_B2B, CopyFromIndirectBuffer) {
+    wgpu::BufferDescriptor srcDescriptor = {};
+    srcDescriptor.size = kDrawIndexedIndirectSize;
+    srcDescriptor.usage = wgpu::BufferUsage::Indirect;
+    srcDescriptor.mappedAtCreation = true;
+
+    wgpu::Buffer src = device.CreateBuffer(&srcDescriptor);
+
+    const uint32_t kIndirectParams[] = {42, 5, 1, 2, 0};
+    memcpy(src.GetMappedRange(), kIndirectParams, kDrawIndexedIndirectSize);
+    src.Unmap();
+
+    wgpu::BufferDescriptor dstDescriptor = {};
+    dstDescriptor.size = kDrawIndexedIndirectSize;
+    dstDescriptor.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc;
+
+    wgpu::Buffer dst = device.CreateBuffer(&dstDescriptor);
+
+    // This must fail - the visible usage of src does not include CopySrc.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBuffer(src, 0, dst, 0, kDrawIndexedIndirectSize);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // This must succeed - the internal usage of src includes CopySrc.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyBufferToBufferInternal(src, 0, dst, 0, kDrawIndexedIndirectSize);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    EXPECT_BUFFER_U32_EQ(42, dst, 0);
+    EXPECT_BUFFER_U32_EQ(5, dst, sizeof(uint32_t));
+    EXPECT_BUFFER_U32_EQ(1, dst, 2 * sizeof(uint32_t));
+    EXPECT_BUFFER_U32_EQ(2, dst, 3 * sizeof(uint32_t));
+    EXPECT_BUFFER_U32_EQ(0, dst, 4 * sizeof(uint32_t));
+}
+
 DAWN_INSTANTIATE_TEST(CopyTests_B2B,
                       D3D12Backend(),
                       MetalBackend(),
