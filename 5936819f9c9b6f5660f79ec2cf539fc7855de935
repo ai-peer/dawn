@@ -16,6 +16,23 @@
       "message": "PTAL. Our VM bots require WARP and I can\u0027t get them green w/o disabling these tests.",
       "revId": "5936819f9c9b6f5660f79ec2cf539fc7855de935",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da6e7900_338cf0eb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T00:19:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5936819f9c9b6f5660f79ec2cf539fc7855de935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
