@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e82d540_c5ec9a7a",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T19:41:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c043082b_f07d4b49",
+      "range": {
+        "startLine": 675,
+        "startChar": 86,
+        "endLine": 675,
+        "endChar": 91
+      },
+      "revId": "fec391019b8d640857677d5b305c080be44271d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f8debbc1_9b768f7b",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-09-10T08:12:40Z",
       "side": 1,
       "message": "u-nit: I think it would be easier to read if we had\n\n {% if command.may_have_dawn_object %}\n   1 overload\n {% else %}\n   2 ovarloads\n {% endif %}\n \nAlternatively we can have the overload with ObjectProvider always declared and drop it inside the implementation in the .cpp",
+      "revId": "fec391019b8d640857677d5b305c080be44271d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "476745e5_5ad8de92",
+        "filename": "generator/templates/dawn_wire/WireCmd.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T19:41:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8debbc1_9b768f7b",
       "revId": "fec391019b8d640857677d5b305c080be44271d9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
