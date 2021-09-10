@@ -333,19 +333,6 @@ namespace dawn_native { namespace d3d12 {
             program = GetTintProgram();
         }
 
-        // Compile the source shader to HLSL.
-        std::string hlslSource;
-        std::string remappedEntryPoint;
-        DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(program, entryPointName, stage, layout,
-                                                    &remappedEntryPoint));
-        entryPointName = remappedEntryPoint.c_str();
-
-        if (device->IsToggleEnabled(Toggle::DumpShaders)) {
-            std::ostringstream dumpedMsg;
-            dumpedMsg << "/* Dumped generated HLSL */" << std::endl << hlslSource;
-            GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
-        }
-
         // Use HLSL source as the input for the key since it does need to know about the pipeline
         // layout. The pipeline layout is only required if we key from WGSL: two different pipeline
         // layouts could be used to produce different shader blobs and the wrong shader blob could
@@ -354,26 +341,35 @@ namespace dawn_native { namespace d3d12 {
         // needs both to ensure the shader cache key is unique to the HLSL source.
         // TODO(dawn:549): Consider keying from WGSL and serialize the pipeline layout it used.
         PersistentCacheKey shaderCacheKey;
-        DAWN_TRY_ASSIGN(shaderCacheKey,
-                        CreateHLSLKey(entryPointName, stage, hlslSource, compileFlags));
+        DAWN_TRY_ASSIGN(shaderCacheKey, CreateWGSLKey(entryPointName, stage, layout, compileFlags));
 
-        DAWN_TRY_ASSIGN(compiledShader.cachedShader,
-                        device->GetPersistentCache()->GetOrCreate(
-                            shaderCacheKey, [&](auto doCache) -> MaybeError {
-                                if (device->IsToggleEnabled(Toggle::UseDXC)) {
-                                    DAWN_TRY_ASSIGN(compiledShader.compiledDXCShader,
-                                                    CompileShaderDXC(device, stage, hlslSource,
-                                                                     entryPointName, compileFlags));
-                                } else {
-                                    DAWN_TRY_ASSIGN(compiledShader.compiledFXCShader,
-                                                    CompileShaderFXC(device, stage, hlslSource,
-                                                                     entryPointName, compileFlags));
-                                }
-                                const D3D12_SHADER_BYTECODE shader =
-                                    compiledShader.GetD3D12ShaderBytecode();
-                                doCache(shader.pShaderBytecode, shader.BytecodeLength);
-                                return {};
-                            }));
+        DAWN_TRY_ASSIGN(
+            compiledShader.cachedShader,
+            device->GetPersistentCache()->GetOrCreate(
+                shaderCacheKey, [&](auto doCache) -> MaybeError {
+                    // Compile the source shader to HLSL.
+                    std::string hlslSource;
+                    std::string remappedEntryPoint;
+                    DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(program, entryPointName, stage,
+                                                                layout, &remappedEntryPoint));
+                    if (device->IsToggleEnabled(Toggle::DumpShaders)) {
+                        std::ostringstream dumpedMsg;
+                        dumpedMsg << "/* Dumped generated HLSL */" << std::endl << hlslSource;
+                        GetDevice()->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+                    }
+                    if (device->IsToggleEnabled(Toggle::UseDXC)) {
+                        DAWN_TRY_ASSIGN(compiledShader.compiledDXCShader,
+                                        CompileShaderDXC(device, stage, hlslSource,
+                                                         remappedEntryPoint.c_str(), compileFlags));
+                    } else {
+                        DAWN_TRY_ASSIGN(compiledShader.compiledFXCShader,
+                                        CompileShaderFXC(device, stage, hlslSource,
+                                                         remappedEntryPoint.c_str(), compileFlags));
+                    }
+                    const D3D12_SHADER_BYTECODE shader = compiledShader.GetD3D12ShaderBytecode();
+                    doCache(shader.pShaderBytecode, shader.BytecodeLength);
+                    return {};
+                }));
 
         return std::move(compiledShader);
     }
@@ -390,28 +386,37 @@ namespace dawn_native { namespace d3d12 {
         return {};
     }
 
-    ResultOrError<PersistentCacheKey> ShaderModule::CreateHLSLKey(const char* entryPointName,
+    ResultOrError<PersistentCacheKey> ShaderModule::CreateWGSLKey(const char* entryPointName,
                                                                   SingleShaderStage stage,
-                                                                  const std::string& hlslSource,
+                                                                  PipelineLayout* layout,
                                                                   uint32_t compileFlags) const {
+        // Generate the WGSL from the Tint program so it's normalized.
+        auto result = tint::writer::wgsl::Generate(GetTintProgram(), tint::writer::wgsl::Options{});
+        if (!result.success) {
+            std::ostringstream errorStream;
+            errorStream << "Tint WGSL failure:" << std::endl;
+            errorStream << "Generator: " << result.error << std::endl;
+            return DAWN_INTERNAL_ERROR(errorStream.str().c_str());
+        }
+
         std::stringstream stream;
 
         // Prefix the key with the type to avoid collisions from another type that could have the
         // same key.
         stream << static_cast<uint32_t>(PersistentKeyType::Shader);
 
-        // Provide "guard" strings that the user cannot provide to help ensure the generated HLSL
+        // Provide "guard" strings that the user cannot provide to help ensure the generated WGSL
         // used to create this key is not being manufactured by the user to load the wrong shader
         // blob.
-        // These strings can be HLSL comments because Tint does not emit HLSL comments.
+        // These strings can be WGSL comments because Tint does not emit WGSL comments.
         // TODO(dawn:549): Replace guards strings with something more secure.
         constexpr char kStartGuard[] = "// Start shader autogenerated by Dawn.";
         constexpr char kEndGuard[] = "// End shader autogenerated by Dawn.";
-        ASSERT(hlslSource.find(kStartGuard) == std::string::npos);
-        ASSERT(hlslSource.find(kEndGuard) == std::string::npos);
+        ASSERT(result.wgsl.find(kStartGuard) == std::string::npos);
+        ASSERT(result.wgsl.find(kEndGuard) == std::string::npos);
 
         stream << kStartGuard << "\n";
-        stream << hlslSource;
+        stream << result.wgsl;
         stream << "\n" << kEndGuard;
 
         stream << compileFlags;
@@ -432,8 +437,18 @@ namespace dawn_native { namespace d3d12 {
         stream << static_cast<uint32_t>(stage);
         stream << entryPointName;
 
-        return PersistentCacheKey(std::istreambuf_iterator<char>{stream},
-                                  std::istreambuf_iterator<char>{});
+        PersistentCacheKey key(std::istreambuf_iterator<char>{stream},
+                               std::istreambuf_iterator<char>{});
+
+        // Include the pipeline layout as a part of the key. This is needed because two different
+        // pipeline layouts with the same WGSL can be used to produce different shader blobs and the
+        // wrong shader blob could then be loaded.
+        ID3D10Blob* serializedLayout = layout->GetSerializedRootSignature();
+        uint8_t* bufferBegin = static_cast<uint8_t*>(serializedLayout->GetBufferPointer());
+        key.reserve(key.size() + serializedLayout->GetBufferSize());
+        key.insert(key.end(), bufferBegin, bufferBegin + serializedLayout->GetBufferSize());
+
+        return std::move(key);
     }
 
     ResultOrError<uint64_t> ShaderModule::GetDXCompilerVersion() const {
