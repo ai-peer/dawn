@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d72d7f1d_d0f4d3d0",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "The default struct the application makes and passes to requestDevice() has undefined as all the defaults, just like in Javascript if you did something like:\n\nlet limits \u003d {}; // all properties are undefined.\n\nHowever, the application will get back a device with the default limits if it requests like this.",
+      "parentUuid": "cdabd07b_d3e54958",
+      "range": {
+        "startLine": 905,
+        "startChar": 81,
+        "endLine": 905,
+        "endChar": 105
+      },
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2b69a5c1_fab2accc",
         "filename": "dawn.json",
         "patchSetId": 2
@@ -71,6 +95,24 @@
       "writtenOn": "2021-09-10T08:48:36Z",
       "side": 1,
       "message": "note: maybe we need to rename this limits in the spec now that we renamed SAMPLED-\u003eTEXTURE_BINDING",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "faa8606c_fb9539c6",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2b69a5c1_fab2accc",
       "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +130,42 @@
       "writtenOn": "2021-09-10T08:48:36Z",
       "side": 1,
       "message": "If we change the function to return a boolean I think these ASSERTs should be actual validation and return false.",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5640999_04f84c77",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c3dd113_be7fac0a",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2147bb7c_11c0f6db",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "I only changed the nextInChain check. The other one feels like it should never be null - like how creating objects with descriptors can never be null (for some objects)",
+      "parentUuid": "8c3dd113_be7fac0a",
       "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93d54a16_8eff1ac7",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "59d40e1a_06a95676",
+      "range": {
+        "startLine": 123,
+        "startChar": 25,
+        "endLine": 123,
+        "endChar": 63
+      },
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1dcca86_0b973c24",
@@ -128,6 +230,24 @@
       "writtenOn": "2021-09-10T08:48:36Z",
       "side": 1,
       "message": "Shouldn\u0027t GetLimits return a boolean to say if it succeeded or not based on the validation rules you described in crbug.com/dawn/1104 ? Added a comment there too.",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e62006d_d0b52a2c",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1dcca86_0b973c24",
       "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +269,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7405c1e3_3a8327d0",
+        "filename": "src/dawn_native/Adapter.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e03e67e_a2cc35a5",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c305052_83d9a233",
@@ -162,6 +300,24 @@
       "writtenOn": "2021-09-10T08:48:36Z",
       "side": 1,
       "message": "maxTextureArrayLayers is not 256. It might need to be changed in Constants.h though.",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5de91ae_ef18a951",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c305052_83d9a233",
       "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +345,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82453804_135ad488",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d59359e4_59606d19",
+      "range": {
+        "startLine": 29,
+        "startChar": 47,
+        "endLine": 29,
+        "endChar": 48
+      },
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3082882_992ace48",
@@ -206,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccbddef7_32af72fb",
+        "filename": "src/dawn_native/Limits.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3082882_992ace48",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c38367e2_c0559418",
@@ -219,6 +417,30 @@
       "writtenOn": "2021-09-10T08:48:36Z",
       "side": 1,
       "message": "Why do we need to use STREQ for comparing a const char* to nullptr?",
+      "range": {
+        "startLine": 31,
+        "startChar": 8,
+        "endLine": 31,
+        "endChar": 20
+      },
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0159b748_8e2c34c4",
+        "filename": "src/tests/unittests/validation/RequestDeviceValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "So that if it\u0027s non-null, gtest will print out what the string was which is nice for debugging the test.",
+      "parentUuid": "c38367e2_c0559418",
       "range": {
         "startLine": 31,
         "startChar": 8,
@@ -248,6 +470,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54382705_07be7fde",
+        "filename": "src/tests/unittests/validation/RequestDeviceValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "I think so? Might not make too much sense to request below the defaults, but it does make sense to request below the max supported. Don\u0027t think there\u0027s a reason to prevent asking below the default though.",
+      "parentUuid": "7d016462_2482bffb",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5b09100_7adbebd5",
         "filename": "src/tests/unittests/validation/RequestDeviceValidationTests.cpp",
         "patchSetId": 2
@@ -259,6 +499,24 @@
       "writtenOn": "2021-09-10T08:48:36Z",
       "side": 1,
       "message": "Note: maybe we need validation that alignments requested must be a power of 2.",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "351c4dcc_ded2f923",
+        "filename": "src/tests/unittests/validation/RequestDeviceValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-10T20:04:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f5b09100_7adbebd5",
       "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
