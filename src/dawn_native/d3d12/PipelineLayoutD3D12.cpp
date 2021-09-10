@@ -180,10 +180,10 @@ namespace dawn_native { namespace d3d12 {
         rootSignatureDescriptor.Flags =
             D3D12_ROOT_SIGNATURE_FLAG_ALLOW_INPUT_ASSEMBLER_INPUT_LAYOUT;
 
-        ComPtr<ID3DBlob> signature;
         ComPtr<ID3DBlob> error;
         HRESULT hr = device->GetFunctions()->d3d12SerializeRootSignature(
-            &rootSignatureDescriptor, D3D_ROOT_SIGNATURE_VERSION_1, &signature, &error);
+            &rootSignatureDescriptor, D3D_ROOT_SIGNATURE_VERSION_1, &mSerializedRootSignature,
+            &error);
         if (DAWN_UNLIKELY(FAILED(hr))) {
             std::ostringstream messageStream;
             if (error) {
@@ -196,10 +196,11 @@ namespace dawn_native { namespace d3d12 {
             messageStream << "D3D12 serialize root signature";
             DAWN_TRY(CheckHRESULT(hr, messageStream.str().c_str()));
         }
-        DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->CreateRootSignature(
-                                  0, signature->GetBufferPointer(), signature->GetBufferSize(),
-                                  IID_PPV_ARGS(&mRootSignature)),
-                              "D3D12 create root signature"));
+        DAWN_TRY(CheckHRESULT(
+            device->GetD3D12Device()->CreateRootSignature(
+                0, mSerializedRootSignature->GetBufferPointer(),
+                mSerializedRootSignature->GetBufferSize(), IID_PPV_ARGS(&mRootSignature)),
+            "D3D12 create root signature"));
         return {};
     }
 
@@ -211,6 +212,10 @@ namespace dawn_native { namespace d3d12 {
     uint32_t PipelineLayout::GetSamplerRootParameterIndex(BindGroupIndex group) const {
         ASSERT(group < kMaxBindGroupsTyped);
         return mSamplerRootParameterInfo[group];
+    }
+
+    ID3DBlob* PipelineLayout::GetSerializedRootSignature() const {
+        return mSerializedRootSignature.Get();
     }
 
     ID3D12RootSignature* PipelineLayout::GetRootSignature() const {

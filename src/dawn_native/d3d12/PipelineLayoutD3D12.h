@@ -46,6 +46,7 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetFirstIndexOffsetShaderRegister() const;
         uint32_t GetFirstIndexOffsetParameterIndex() const;
 
+        ID3DBlob* GetSerializedRootSignature() const;
         ID3D12RootSignature* GetRootSignature() const;
 
       private:
@@ -59,6 +60,7 @@ namespace dawn_native { namespace d3d12 {
                     kMaxBindGroups>
             mDynamicRootParameterIndices;
         uint32_t mFirstIndexOffsetParameterIndex;
+        ComPtr<ID3DBlob> mSerializedRootSignature;
         ComPtr<ID3D12RootSignature> mRootSignature;
     };
 
