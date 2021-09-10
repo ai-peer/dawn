@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6178994_4746189b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-10T08:15:51Z",
+      "side": 1,
+      "message": "nit: missing word?",
+      "range": {
+        "startLine": 14,
+        "startChar": 8,
+        "endLine": 14,
+        "endChar": 16
+      },
+      "revId": "88c29f685881241d01b344a0601da50e6a3b15b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "35803218_cdf1fbea",
@@ -14,6 +37,46 @@
       "writtenOn": "2021-09-10T02:47:57Z",
       "side": 1,
       "message": "PTAL! See https://dawn-review.googlesource.com/c/dawn/+/63983/ for context",
+      "revId": "88c29f685881241d01b344a0601da50e6a3b15b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aceada0_e8114d1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-10T08:15:51Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "88c29f685881241d01b344a0601da50e6a3b15b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5e3c424_561c0b1a",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-10T08:15:51Z",
+      "side": 1,
+      "message": "nit: I think this is a simple type that can be spelt out.",
+      "range": {
+        "startLine": 89,
+        "startChar": 12,
+        "endLine": 89,
+        "endChar": 16
+      },
       "revId": "88c29f685881241d01b344a0601da50e6a3b15b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
