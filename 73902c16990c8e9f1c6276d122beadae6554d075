@@ -180,6 +180,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdd6e725_accd598a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-10T10:27:04Z",
+      "side": 1,
+      "message": "Or just put the size of the WGSL in the stream before the WGSL?",
+      "parentUuid": "9a8ba341_c332e4b5",
+      "range": {
+        "startLine": 374,
+        "startChar": 0,
+        "endLine": 380,
+        "endChar": 76
+      },
+      "revId": "73902c16990c8e9f1c6276d122beadae6554d075",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9c1163d_a7da581f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 13
