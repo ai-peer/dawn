@@ -22,6 +22,30 @@
       },
       "revId": "d0640c6fbdcde1dad8e69a2ba1a74d198d2b4924",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c47bb69b_777e6a5c",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-10T00:08:17Z",
+      "side": 1,
+      "message": "This was prehaps a premature optimization on my part. I think it\u0027s safer if we unconditionally set the root constants. This should be a very inexpensive operation.\n\nI believe in a new command list, root constants are defaulted to 0. However, if the root signature changes, the values are undefined.",
+      "parentUuid": "88ed58a4_6e94c3d4",
+      "range": {
+        "startLine": 161,
+        "startChar": 0,
+        "endLine": 161,
+        "endChar": 23
+      },
+      "revId": "d0640c6fbdcde1dad8e69a2ba1a74d198d2b4924",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
