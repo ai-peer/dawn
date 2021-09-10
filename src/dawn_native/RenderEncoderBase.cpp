@@ -178,7 +178,8 @@ namespace dawn_native {
 
             DrawIndexedIndirectCmd* cmd =
                 allocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
-            cmd->indirectBuffer = indirectBuffer;
+            cmd->indirectBufferRef = AcquireRef(new DeferredBufferRef());
+            cmd->indirectBufferRef->SetBuffer(indirectBuffer, /*baseOffset=*/0);
             cmd->indirectOffset = indirectOffset;
 
             mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);

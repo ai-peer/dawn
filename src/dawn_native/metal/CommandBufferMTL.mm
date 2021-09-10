@@ -1337,20 +1337,21 @@ namespace dawn_native { namespace metal {
                 }
 
                 case Command::DrawIndexedIndirect: {
-                    DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
+                    DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
                     vertexBuffers.Apply(encoder, lastPipeline, enableVertexPulling);
                     bindGroups.Apply(encoder);
                     storageBufferLengths.Apply(encoder, lastPipeline, enableVertexPulling);
 
-                    Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
+                    Buffer* buffer = ToBackend(draw->indirectBufferRef->GetBuffer());
                     id<MTLBuffer> indirectBuffer = buffer->GetMTLBuffer();
                     [encoder drawIndexedPrimitives:lastPipeline->GetMTLPrimitiveTopology()
                                          indexType:indexBufferType
                                        indexBuffer:indexBuffer
                                  indexBufferOffset:indexBufferBaseOffset
                                     indirectBuffer:indirectBuffer
-                              indirectBufferOffset:draw->indirectOffset];
+                              indirectBufferOffset:draw->indirectBufferRef->GetBaseOffset() +
+                                                   draw->indirectOffset];
                     break;
                 }
 
