@@ -589,4 +589,22 @@ namespace dawn_native {
     bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
         return offset == 0 && size == GetSize();
     }
+
+    DeferredBufferRef::DeferredBufferRef() = default;
+
+    DeferredBufferRef::~DeferredBufferRef() = default;
+
+    BufferBase* DeferredBufferRef::GetBuffer() const {
+        return mBuffer.Get();
+    }
+
+    uint64_t DeferredBufferRef::GetBaseOffset() const {
+        return mBaseOffset;
+    }
+
+    void DeferredBufferRef::SetBuffer(BufferBase* buffer, uint64_t baseOffset) {
+        mBuffer = buffer;
+        mBaseOffset = baseOffset;
+    }
+
 }  // namespace dawn_native

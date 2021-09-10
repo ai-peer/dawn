@@ -184,7 +184,7 @@ namespace dawn_native {
     };
 
     struct DrawIndexedIndirectCmd {
-        Ref<BufferBase> indirectBuffer;
+        Ref<DeferredBufferRef> indirectBufferRef;
         uint64_t indirectOffset;
     };
 
