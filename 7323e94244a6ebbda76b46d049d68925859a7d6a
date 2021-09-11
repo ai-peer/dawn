@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c8b0b56_c7235564",
+        "filename": "src/dawn_native/Toggles.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-11T00:37:54Z",
+      "side": 1,
+      "message": "It may work if we add a UseDummyFragmentShader method in PipelineBase, and call it in RenderPipelineBase constructor once this toggle is enabled.",
+      "parentUuid": "ad2b6cff_9f47bdb5",
+      "range": {
+        "startLine": 220,
+        "startChar": 12,
+        "endLine": 225,
+        "endChar": 45
+      },
+      "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7b0b582e_d26b8568",
         "filename": "src/dawn_native/metal/DeviceMTL.mm",
         "patchSetId": 11
