@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac6e179_891c8b86",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-11T00:23:08Z",
+      "side": 1,
+      "message": "As I understand it, the output of the FirstOffsetInfo transform is needed to set up the root signature for a draw call. Because of this, we either need to:\n\n- Unconditionally run the transform on the Tint program\n- Serialize the first offset info and store it in the pipeline cache (which is probably possible once https://crbug.com/dawn/549 is resolved?)\n- Avoid the need for the first offset info output\n\nIn this CL I\u0027ve opted for the latter, buf am open to other options.\n\nEdit: enga@ below suggested the first option, which I will give a shot to.",
+      "parentUuid": "01e9ee25_33dae7bc",
+      "revId": "bdc3e22d4055c60113e604f2315b2205adb7c280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8e0482d9_64f7d129",
