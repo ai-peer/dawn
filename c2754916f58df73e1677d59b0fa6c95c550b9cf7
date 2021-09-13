@@ -73,6 +73,30 @@
       },
       "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15b5c2c4_ab595485",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-13T23:50:09Z",
+      "side": 1,
+      "message": "Oh I don\u0027t think so. To ensure attribute.vertexBufferSlot always matches the array index of the vertex buffer in cfg.vertex_state we have to record the the vertex buffer layouts without vertex attributes, while GetVertexBufferSlotsUsed() won\u0027t record the vertex buffer layouts when vertexBuffer.attributeCount \u003d\u003d 0:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/RenderPipeline.cpp;l\u003d523",
+      "parentUuid": "995ca700_dc136d5e",
+      "range": {
+        "startLine": 1049,
+        "startChar": 0,
+        "endLine": 1051,
+        "endChar": 88
+      },
+      "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
