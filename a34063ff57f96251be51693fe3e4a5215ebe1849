@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cfc271e_c418b8e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-13T18:06:49Z",
+      "side": 1,
+      "message": "nvm, back to patchset 4 and suppressed the failures in WebGPUExpectatations",
+      "revId": "a34063ff57f96251be51693fe3e4a5215ebe1849",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
