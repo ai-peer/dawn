@@ -486,6 +486,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e33ee7ad_df9588bd",
+        "filename": "src/tests/unittests/validation/RequestDeviceValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:13:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "54382705_07be7fde",
+      "revId": "89816f34d0e2bf4b33c2b3f36b6fa06f65cfc019",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5b09100_7adbebd5",
