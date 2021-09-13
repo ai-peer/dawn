@@ -16,6 +16,23 @@
       "message": "Need to re-run trybots once https://chromium-review.googlesource.com/c/chromium/src/+/3146980 has landed.",
       "revId": "298648538fb0f5e77451dac6fa41f7186605b8bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "993727bb_8ae2488b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:07:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "298648538fb0f5e77451dac6fa41f7186605b8bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
