@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e950bf40_9b2a3f67",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-13T21:03:26Z",
+      "side": 1,
+      "message": "Should be able to land this once the CTS suppressions are added to Chrome now.",
+      "revId": "17612b51a524e5b44e29c3a2f6724219ac31bd0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
