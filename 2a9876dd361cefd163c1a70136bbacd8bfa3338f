@@ -386,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c083472_4863f879",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T09:13:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0236e87a_8bc993bb",
+      "revId": "2a9876dd361cefd163c1a70136bbacd8bfa3338f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fec1dac_57366b69",

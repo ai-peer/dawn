@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a8c57a5_2d33d77c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T09:13:47Z",
+      "side": 1,
+      "message": "PTAL, thanks",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b12bc43_f2739222",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T09:13:47Z",
+      "side": 1,
+      "message": "Currently this method is called in backends\u0027 initializing render pipeline (rather than constructor of RenderPipelineBase), because this method call device.CreateSHaderModule and (in principle) can be failed, while constructor must not failed.\nIf we choose to create and keep a empty fragment shader module earlier before constructing RenderPipelineBase (e.g. in DeviceBase.CreateRenderPipeline? I am not sure), then I can get and set the empty module at the RenderPipelineBase constructor [A1], rather than in every backend.",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4a54c68_f2033689",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T09:13:47Z",
+      "side": 1,
+      "message": "[A1]",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
