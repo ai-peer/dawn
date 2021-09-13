@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ce1954d_38d694b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:11:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3d985285f72bb21507590ea059ca6d520c55d30e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1eb0081_5d7aa0da",
+        "filename": "src/tests/end2end/BufferTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:11:09Z",
+      "side": 1,
+      "message": "Weird, this is not supposed to work because dawn_end2end_test_sources in the GN file shouldn\u0027t link against dawn_native. Instead the tests using the internal usually go in white_box_tests_sources. Can we move the new test there so that end2end_tests only use the public APIs (including DawnNative.h) but never the internals of dawn_native?",
+      "revId": "3d985285f72bb21507590ea059ca6d520c55d30e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
