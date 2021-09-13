@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "812cb91f_08765950",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:41:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b12bc43_f2739222",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef3be2a4_4b8b94df",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:41:31Z",
+      "side": 1,
+      "message": "Ah thanks for the explanation. Yeah I agree that the earlier method was better. The other concern I have with this approach is that it mutates the RenderPipelineBase\u0027s info and that could cause issues with caching, etc.\n\nApologies for the back and forth.",
+      "parentUuid": "3b12bc43_f2739222",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e4a54c68_f2033689",
         "filename": "src/dawn_native/RenderPipeline.cpp",
         "patchSetId": 14
@@ -48,6 +83,63 @@
       "writtenOn": "2021-09-13T09:13:47Z",
       "side": 1,
       "message": "[A1]",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68f03cf5_911f6243",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:41:31Z",
+      "side": 1,
+      "message": "nit: this module is unused.",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a221a97_7cd896a1",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:41:31Z",
+      "side": 1,
+      "message": "u-nit: sampleCount and mipLevelCount are defaults too (and dimension although it can make sense to keep this one spelt out)",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ba7d07_e3f6e122",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:41:31Z",
+      "side": 1,
+      "message": "nit: these modules are only used in CreateRenderPipeline so they could be created there.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 32
+      },
       "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

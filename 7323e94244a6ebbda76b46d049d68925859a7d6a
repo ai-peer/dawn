@@ -80,6 +80,24 @@
       "message": "Current I enable this workaround for all Intel GPUs expect the known one that don\u0027t have the bug (i.e. use a white list). Although I have only tested 2 device (Iris 550 passed and Iris Pro failed), I will update this condition with more devices tested, or maybe change into a black list.",
       "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca8a07fe_1eb85323",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:41:31Z",
+      "side": 1,
+      "message": "Or we could also gate on driver versions to be more sure if you want.\n\nAs a side note, we now use \"allow list\" and \"block list\" terminology to be more inclusive.",
+      "parentUuid": "7b0b582e_d26b8568",
+      "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
