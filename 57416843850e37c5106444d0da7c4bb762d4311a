@@ -39,6 +39,30 @@
       },
       "revId": "57416843850e37c5106444d0da7c4bb762d4311a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21d01e8_5529d6dd",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:16:37Z",
+      "side": 1,
+      "message": "For other dependencies I think we include them without the third_party/ thing. This is in part because the place where directories live are in GN args so we don\u0027t know for sure in the .cpp",
+      "parentUuid": "3dd77d25_ba2bfbec",
+      "range": {
+        "startLine": 17,
+        "startChar": 10,
+        "endLine": 17,
+        "endChar": 14
+      },
+      "revId": "57416843850e37c5106444d0da7c4bb762d4311a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

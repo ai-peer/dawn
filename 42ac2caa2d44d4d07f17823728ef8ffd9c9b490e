@@ -254,6 +254,24 @@
       "message": "Simple usage just to sanity check that the new dependency works.",
       "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67ab99c3_f88597cc",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:16:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a08149bf_bd5ec642",
+      "revId": "42ac2caa2d44d4d07f17823728ef8ffd9c9b490e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
