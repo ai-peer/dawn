@@ -16,6 +16,86 @@
       "message": "Another split from the bigger CL",
       "revId": "4a86ce827943f962876731f3abc1d1953deb246a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc1d09f7_0f21677e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:28:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4a86ce827943f962876731f3abc1d1953deb246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c99d1dd5_6e90c6d4",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:28:48Z",
+      "side": 1,
+      "message": "WDYT to have a getter for this like IsEmpty()?",
+      "range": {
+        "startLine": 154,
+        "startChar": 12,
+        "endLine": 154,
+        "endChar": 81
+      },
+      "revId": "4a86ce827943f962876731f3abc1d1953deb246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2fb6b88_af00c3d8",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:28:48Z",
+      "side": 1,
+      "message": "nit: this code appears 4 times (with the constructor). Might be worth making a private method for it.",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 61
+      },
+      "revId": "4a86ce827943f962876731f3abc1d1953deb246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9474ce77_fa3f4210",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:28:48Z",
+      "side": 1,
+      "message": "u-nit: we usually put implementations in the .cpp and rely on LTCG to do the right thing (at some point we\u0027ll benchmark to see if it indeed does the right thing and might reverse that)",
+      "revId": "4a86ce827943f962876731f3abc1d1953deb246a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
