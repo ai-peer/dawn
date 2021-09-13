@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "98631de0_b692bb64",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T09:23:30Z",
+      "side": 1,
+      "message": "The panel of options sound good. I think solution 2 (storing more info in the cache) will eventually be unavoidable but now I understand that it is much more work than this CL. Either 1) or 3) with an issue blocked on 549 to put the data in the cache eventually sounds good.",
+      "parentUuid": "7ac6e179_891c8b86",
+      "revId": "bdc3e22d4055c60113e604f2315b2205adb7c280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "8e0482d9_64f7d129",
