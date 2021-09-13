@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a1b3f6_5466f22c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "PTAL if the patch pass the dry run ;)",
+      "revId": "95dfa3c75978a8fbfdb1610a0ecdc849e284c758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

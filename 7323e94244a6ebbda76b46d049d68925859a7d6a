@@ -98,6 +98,42 @@
       "parentUuid": "7b0b582e_d26b8568",
       "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "371403a0_8b101d0a",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ca8a07fe_1eb85323",
+      "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2107dace_99d71b9b",
+        "filename": "src/dawn_native/metal/DeviceMTL.mm",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "I am not sure, more test is need.",
+      "parentUuid": "ca8a07fe_1eb85323",
+      "revId": "7323e94244a6ebbda76b46d049d68925859a7d6a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

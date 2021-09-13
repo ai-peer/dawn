@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41dc0865_4207870c",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef3be2a4_4b8b94df",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4a54c68_f2033689",
@@ -83,6 +101,24 @@
       "writtenOn": "2021-09-13T09:13:47Z",
       "side": 1,
       "message": "[A1]",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d290d8b_628f5f56",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4a54c68_f2033689",
       "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "034f32e4_6758fe6a",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68f03cf5_911f6243",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a221a97_7cd896a1",
@@ -121,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b0484b3_281ceba5",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a221a97_7cd896a1",
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38ba7d07_e3f6e122",
@@ -134,6 +206,30 @@
       "writtenOn": "2021-09-13T09:41:31Z",
       "side": 1,
       "message": "nit: these modules are only used in CreateRenderPipeline so they could be created there.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 171,
+        "endChar": 32
+      },
+      "revId": "27aad6c4f00a3011199924e3aa59d45b802e2c30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27358dc8_73c5ae79",
+        "filename": "src/tests/end2end/VertexOnlyRenderPipelineTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T15:45:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38ba7d07_e3f6e122",
       "range": {
         "startLine": 170,
         "startChar": 0,
