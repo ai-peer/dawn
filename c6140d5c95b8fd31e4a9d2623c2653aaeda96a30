@@ -16,6 +16,24 @@
       "message": "We should find a way to still be able to express \"I want the default please\" for users of Dawn (including Chromium) similarly to WGPU_COPY_STRIDE_UNDEFINED. Can you add something like that update the default texture view descriptor to use it, then add some tests that 0 is explicitly disallowed?",
       "revId": "c6140d5c95b8fd31e4a9d2623c2653aaeda96a30",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3822831e_86f0a526",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-13T03:11:06Z",
+      "side": 0,
+      "message": "Good point. SGTM.",
+      "parentUuid": "b7fd0c64_726f1142",
+      "revId": "c6140d5c95b8fd31e4a9d2623c2653aaeda96a30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
