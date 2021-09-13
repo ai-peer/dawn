@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b33a2b_31acdac0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-13T16:42:13Z",
+      "side": 1,
+      "message": "looks like CTS is expecting max layers to be 2048 and Chrome uses 2048 as the current limit as well. Will update this to 2048 to get it landed, then update the CTS and then update dawn back to 256.",
+      "revId": "e264236d70c82e9525177e38ed6a77ec6a95dbbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
