@@ -16,6 +16,23 @@
       "message": "PTAL if the patch pass the dry run ;)",
       "revId": "95dfa3c75978a8fbfdb1610a0ecdc849e284c758",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69745a0a_9da0f72b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-13T23:53:10Z",
+      "side": 1,
+      "message": "PTAL, thanks",
+      "revId": "95dfa3c75978a8fbfdb1610a0ecdc849e284c758",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
