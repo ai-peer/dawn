@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ed39d5_37849d15",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T13:01:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "995ca700_dc136d5e",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-13T13:01:17Z",
+      "side": 1,
+      "message": "nit: for (VertexBufferSlot slot : IterateBitSet(GetVertexBufferSlotsUsed())) { could probably replace that.",
+      "range": {
+        "startLine": 1049,
+        "startChar": 0,
+        "endLine": 1051,
+        "endChar": 88
+      },
+      "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
