@@ -53,6 +53,63 @@ if (dawn_enable_vulkan) {
       dawn_enable_vulkan_loader && dawn_vulkan_loader_dir != ""
 }
 
+config("dawn_abseil_config") {
+  if (dawn_standalone && is_clang) {
+    cflags = [
+      # Allow the use of enable_if()
+      "-Wno-gcc-compat",
+    ]
+  }
+
+  include_dirs = [ "${dawn_abseil_dir}" ]
+}
+
+source_set("dawn_abseil_source") {
+  all_dependent_configs = [ ":dawn_abseil_config" ]
+
+  sources = [
+    "${dawn_abseil_dir}/absl/base/internal/raw_logging.cc",
+    "${dawn_abseil_dir}/absl/base/internal/throw_delegate.cc",
+    "${dawn_abseil_dir}/absl/strings/ascii.cc",
+    "${dawn_abseil_dir}/absl/strings/charconv.cc",
+    "${dawn_abseil_dir}/absl/strings/escaping.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_bigint.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_bigint.h",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_parse.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_parse.h",
+    "${dawn_abseil_dir}/absl/strings/internal/memutil.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/memutil.h",
+    "${dawn_abseil_dir}/absl/strings/internal/stl_type_traits.h",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/arg.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/bind.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/extension.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/float_conversion.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/output.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/parser.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_join_internal.h",
+    "${dawn_abseil_dir}/absl/strings/internal/str_split_internal.h",
+    "${dawn_abseil_dir}/absl/strings/match.cc",
+    "${dawn_abseil_dir}/absl/strings/numbers.cc",
+    "${dawn_abseil_dir}/absl/strings/str_cat.cc",
+    "${dawn_abseil_dir}/absl/strings/str_replace.cc",
+    "${dawn_abseil_dir}/absl/strings/str_split.cc",
+    "${dawn_abseil_dir}/absl/strings/string_view.cc",
+    "${dawn_abseil_dir}/absl/strings/substitute.cc",
+  ]
+}
+
+group("dawn_abseil") {
+  # When build_with_chromium=true we need to include "//third_party/abseil-cpp:absl" while
+  # it's beneficial to be more specific with standalone Dawn, especially when it comes to
+  # including it as a dependency in other projects (such as Skia).
+  if (build_with_chromium) {
+    public_deps = [ "$dawn_abseil_dir:absl" ]
+    #public_configs = [ ":dawn_abseil_config" ]
+  } else {
+    public_deps = [ ":dawn_abseil_source" ]
+  }
+}
+
 config("dawn_native_internal") {
   configs = [ "${dawn_root}/src/common:dawn_internal" ]
 
@@ -142,6 +199,7 @@ source_set("dawn_native_headers") {
 # except those that define exported symbols.
 source_set("dawn_native_sources") {
   deps = [
+    ":dawn_abseil",
     ":dawn_native_headers",
     ":dawn_native_utils_gen",
     "${dawn_root}/src/common",
