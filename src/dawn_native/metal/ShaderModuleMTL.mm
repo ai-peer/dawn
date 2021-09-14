@@ -44,15 +44,17 @@ namespace dawn_native { namespace metal {
         return InitializeBase(parseResult);
     }
 
-    ResultOrError<std::string> ShaderModule::TranslateToMSL(const char* entryPointName,
-                                                            SingleShaderStage stage,
-                                                            const PipelineLayout* layout,
-                                                            uint32_t sampleMask,
-                                                            const RenderPipeline* renderPipeline,
-                                                            const VertexState* vertexState,
-                                                            std::string* remappedEntryPointName,
-                                                            bool* needsStorageBufferLength,
-                                                            bool* hasInvariantAttribute) {
+    ResultOrError<std::string> ShaderModule::TranslateToMSL(
+        const char* entryPointName,
+        SingleShaderStage stage,
+        const PipelineLayout* layout,
+        uint32_t sampleMask,
+        const RenderPipeline* renderPipeline,
+        const VertexState* vertexState,
+        std::string* remappedEntryPointName,
+        bool* needsStorageBufferLength,
+        bool* hasInvariantAttribute,
+        std::vector<uint32_t>* workgroupAllocations) {
         ScopedTintICEHandler scopedICEHandler(GetDevice());
 
         std::ostringstream errorStream;
@@ -167,6 +169,7 @@ namespace dawn_native { namespace metal {
 
         *needsStorageBufferLength = result.needs_storage_buffer_sizes;
         *hasInvariantAttribute = result.has_invariant_attribute;
+        *workgroupAllocations = std::move(result.workgroup_allocations[*remappedEntryPointName]);
 
         return std::move(result.msl);
     }
@@ -190,10 +193,10 @@ namespace dawn_native { namespace metal {
         std::string remappedEntryPointName;
         std::string msl;
         bool hasInvariantAttribute = false;
-        DAWN_TRY_ASSIGN(msl,
-                        TranslateToMSL(entryPointName, stage, layout, sampleMask, renderPipeline,
-                                       vertexState, &remappedEntryPointName,
-                                       &out->needsStorageBufferLength, &hasInvariantAttribute));
+        DAWN_TRY_ASSIGN(msl, TranslateToMSL(entryPointName, stage, layout, sampleMask,
+                                            renderPipeline, vertexState, &remappedEntryPointName,
+                                            &out->needsStorageBufferLength, &hasInvariantAttribute,
+                                            &out->workgroupAllocations));
 
         // Metal uses Clang to compile the shader as C++14. Disable everything in the -Wall
         // category. -Wunused-variable in particular comes up a lot in generated code, and some

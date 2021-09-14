@@ -100,6 +100,68 @@ TEST_P(ComputeSharedMemoryTests, Basic) {
         })");
 }
 
+// Test using a matrix in workgroup memory. MSL lacks constructors
+// for matrices in threadgroup memory. Basic test that reading and
+// writing a matrix in workgroup memory works.
+TEST_P(ComputeSharedMemoryTests, Matrix) {
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = utils::CreateShaderModule(device, R"(
+        [[block]] struct Dst {
+            value : mat4x4<f32>;
+        };
+
+        [[group(0), binding(0)]] var<storage, write> dst : Dst;
+
+        var<workgroup> tmp : mat4x4<f32>;
+
+        [[stage(compute), workgroup_size(4,4,1)]]
+        fn main([[builtin(local_invocation_id)]] LocalInvocationID : vec3<u32>) {
+
+            let index = LocalInvocationID.y * 4u + LocalInvocationID.x;
+            tmp[LocalInvocationID.y][LocalInvocationID.x] = f32(index);
+
+            workgroupBarrier();
+
+            if (index == 0u) {
+                dst.value = tmp;
+            }
+        }
+    )");
+    csDesc.compute.entryPoint = "main";
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&csDesc);
+
+    // Set up dst storage buffer
+    wgpu::BufferDescriptor dstDesc;
+    dstDesc.size = 16 * sizeof(float);
+    dstDesc.usage =
+        wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer dst = device.CreateBuffer(&dstDesc);
+
+    // Set up bind group and issue dispatch
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                     {
+                                                         {0, dst},
+                                                     });
+
+    wgpu::CommandBuffer commands;
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.Dispatch(1);
+        pass.EndPass();
+
+        commands = encoder.Finish();
+    }
+
+    queue.Submit(1, &commands);
+
+    std::array<float, 16> expected = {0.f, 1.f, 2.f,  3.f,  4.f,  5.f,  6.f,  7.f,
+                                      8.f, 9.f, 10.f, 11.f, 12.f, 13.f, 14.f, 15.f};
+    EXPECT_BUFFER_FLOAT_RANGE_EQ(expected.data(), dst, 0, expected.size());
+}
+
 DAWN_INSTANTIATE_TEST(ComputeSharedMemoryTests,
                       D3D12Backend(),
                       MetalBackend(),

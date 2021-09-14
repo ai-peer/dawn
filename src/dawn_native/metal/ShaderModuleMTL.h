@@ -37,6 +37,7 @@ namespace dawn_native { namespace metal {
         struct MetalFunctionData {
             NSPRef<id<MTLFunction>> function;
             bool needsStorageBufferLength;
+            std::vector<uint32_t> workgroupAllocations;
         };
         MaybeError CreateFunction(const char* entryPointName,
                                   SingleShaderStage stage,
@@ -55,7 +56,8 @@ namespace dawn_native { namespace metal {
                                                   const VertexState* vertexState,
                                                   std::string* remappedEntryPointName,
                                                   bool* needsStorageBufferLength,
-                                                  bool* hasInvariantAttribute);
+                                                  bool* hasInvariantAttribute,
+                                                  std::vector<uint32_t>* workgroupAllocations);
         ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
         ~ShaderModule() override = default;
         MaybeError Initialize(ShaderModuleParseResult* parseResult);
