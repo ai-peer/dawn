@@ -16,6 +16,40 @@
       "message": "Rebased. PTAL, thanks",
       "revId": "b1c6bef087c3c7e416793e70e6014cbc2a1172af",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b1077e9_98698417",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T08:29:43Z",
+      "side": 1,
+      "message": "LGTM, one last comment.",
+      "revId": "b1c6bef087c3c7e416793e70e6014cbc2a1172af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ee5ff1_3e4c56e4",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 1296,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T08:29:43Z",
+      "side": 1,
+      "message": "This is a bit too much render-pipeline specific logic to be in the device. I think Device could expose a ResultOrError\u003cShaderModule\u003e GetOrCreateDummyFragmentShader() that\u0027s used in RenderPipeline\u0027s constructor... Actually that doesn\u0027t work because we can\u0027t bubble errors from that constructor.\n\nLet\u0027s create the dummy FS on device initialization then, so that we don\u0027t have this much render pipeline specific code here.",
+      "revId": "b1c6bef087c3c7e416793e70e6014cbc2a1172af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
