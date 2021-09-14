@@ -948,4 +948,8 @@ namespace dawn_native {
         return true;
     }
 
+    MaybeError RenderPipelineBase::Initialize() {
+        return {};
+    }
+
 }  // namespace dawn_native

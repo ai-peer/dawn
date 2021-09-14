@@ -127,6 +127,7 @@ namespace dawn_native {
 
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+        virtual MaybeError Initialize();
 
         // TODO(dawn:529): store all the following members in a FlatRenderPipelineDescriptor object
         // Vertex state
