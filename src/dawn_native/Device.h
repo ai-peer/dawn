@@ -302,6 +302,9 @@ namespace dawn_native {
 
         PipelineCompatibilityToken GetNextPipelineCompatibilityToken();
 
+        const std::string& GetLabel() const;
+        void APISetLabel(const char* label);
+
       protected:
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
@@ -345,6 +348,7 @@ namespace dawn_native {
         virtual ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(
             TextureBase* texture,
             const TextureViewDescriptor* descriptor) = 0;
+        virtual void SetLabelImpl();
 
         virtual MaybeError TickImpl() = 0;
         void FlushCallbackTaskQueue();
@@ -457,6 +461,7 @@ namespace dawn_native {
 
         std::unique_ptr<CallbackTaskManager> mCallbackTaskManager;
         std::unique_ptr<dawn_platform::WorkerTaskPool> mWorkerTaskPool;
+        std::string mLabel;
     };
 
 }  // namespace dawn_native
