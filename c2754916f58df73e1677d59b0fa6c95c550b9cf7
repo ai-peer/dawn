@@ -121,6 +121,30 @@
       },
       "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f884abc4_c793cee2",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-14T08:27:50Z",
+      "side": 1,
+      "message": "Yes you are right.\n\ncfg.vertex_state is the data structure that should contain vertex buffer layouts and their vertex attributes, while in renderPipeline we can only get vertex buffer layouts from vertex attribute, and we can\u0027t get vertex attribute from vertex buffer layouts.",
+      "parentUuid": "9572c1e0_2c332e9c",
+      "range": {
+        "startLine": 1049,
+        "startChar": 0,
+        "endLine": 1051,
+        "endChar": 88
+      },
+      "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
