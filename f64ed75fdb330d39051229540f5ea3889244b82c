@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11fce695_046883a6",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-14T21:38:49Z",
+      "side": 1,
+      "message": "I think we have at least a few options:\n 1. Don\u0027t put this in dawn.json and have it actually be strictly internal only so only Dawn can use it and no one else using dawn_native or dawn_wire can. Need to add some other DawnNative.h API to test it, or some other mechanism to test dawn_native internally.\n 2. Remove it from dawn_wire so we don\u0027t have to worry about a compromised renderer being able to do WriteBufferInternal.\n 3. Add validation code that |buffer| has the correct usages and the range is in bounds. Then, it\u0027s actually OK if the renderer is able to call this because it will be validated to be safe (though we wouldn\u0027t expose it to JS still).\n \nIn my opinion, I like option 3 because it\u0027s both safe AND makes this generally useful as a Dawn extension, similar to how copyTextureToTextureInternal was useful in Chromium for implementing Canvas operations. I could see other native users interested in using this as well. Would probably rename it to not have \"Internal\" at the end though, and instead have nothing, or some extension/feature suffix. That said, there isn\u0027t an immediate need for it, so maybe this option is overkill.",
+      "revId": "f64ed75fdb330d39051229540f5ea3889244b82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82a84492_07efbce0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-14T21:38:49Z",
+      "side": 1,
+      "message": "can we factor QueueBase::WriteBufferImpl so we can reuse it in all the backends?\n\nthat probably will require giving commandContext a CommandRecordingContextBase so we can have the frontend record into the current commandContext instead of device-\u003eGetPendingCommandContext()",
+      "range": {
+        "startLine": 996,
+        "startChar": 20,
+        "endLine": 1011,
+        "endChar": 56
+      },
+      "revId": "f64ed75fdb330d39051229540f5ea3889244b82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
