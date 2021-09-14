@@ -16,6 +16,46 @@
       "message": "PTAL, thanks",
       "revId": "75aeb5001bcfeb7932911609f128973ac9f5bd29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "654f94fe_5b579c30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-14T15:18:04Z",
+      "side": 1,
+      "message": "LGTM too; one nit.\nAlso, I think this patch will conflict with Jiawei\u0027s change to remove the descriptor argument from Initialize(..)",
+      "revId": "75aeb5001bcfeb7932911609f128973ac9f5bd29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233d07de_252d888e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-14T15:18:04Z",
+      "side": 1,
+      "message": "nit: \"s\" prefix is for static variables but this isn\u0027t declared as static. Prefer to prefix with \"k\" and use constexpr",
+      "range": {
+        "startLine": 250,
+        "startChar": 12,
+        "endLine": 250,
+        "endChar": 43
+      },
+      "revId": "75aeb5001bcfeb7932911609f128973ac9f5bd29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
