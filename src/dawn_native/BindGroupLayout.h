@@ -118,6 +118,7 @@ namespace dawn_native {
 
       private:
         BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+        std::string ObjectTypeName() const override;
 
         BindingCounts mBindingCounts = {};
         ityp::vector<BindingIndex, BindingInfo> mBindingInfo;

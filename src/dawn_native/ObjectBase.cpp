@@ -14,6 +14,8 @@
 
 #include "dawn_native/ObjectBase.h"
 
+#include "absl/strings/str_format.h"
+
 namespace dawn_native {
 
     static constexpr uint64_t kErrorPayload = 0;
@@ -33,8 +35,18 @@ namespace dawn_native {
         : RefCounted(kNotErrorPayload), mDevice(device) {
     }
 
-    const std::string& ObjectBase::GetLabel() {
+    const std::string& ObjectBase::GetLabel() const {
         return mLabel;
+    }
+
+    std::string ObjectBase::ValidationLabel() const {
+        if (mLabel.empty()) {
+            // TODO: In cases where there is no label given it can still be useful to give some sort
+            // of unique identifier so that objects can be cross-referenced between multiple
+            // validation messages. The pointer address is maybe not the best choice for this.
+            return absl::StrFormat("%s %p", ObjectTypeName(), this);
+        }
+        return absl::StrFormat("%s \"%s\"", ObjectTypeName(), mLabel);
     }
 
     DeviceBase* ObjectBase::GetDevice() const {
@@ -51,6 +63,10 @@ namespace dawn_native {
     }
 
     void ObjectBase::SetLabelImpl() {
+    }
+
+    std::string ObjectBase::ObjectTypeName() const {
+        return "Object";
     }
 
 }  // namespace dawn_native

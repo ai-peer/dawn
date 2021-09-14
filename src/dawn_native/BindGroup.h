@@ -75,6 +75,8 @@ namespace dawn_native {
         ~BindGroupBase() override;
 
       private:
+        std::string ObjectTypeName() const override;
+
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
         void DeleteThis() override;
 

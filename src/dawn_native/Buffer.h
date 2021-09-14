@@ -93,6 +93,8 @@ namespace dawn_native {
         uint64_t mAllocatedSize = 0;
 
       private:
+        std::string ObjectTypeName() const override;
+
         virtual MaybeError MapAtCreationImpl() = 0;
         virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
         virtual void UnmapImpl() = 0;

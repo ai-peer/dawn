@@ -36,7 +36,8 @@ namespace dawn_native {
                                          const BindingInfo& bindingInfo) {
             if (entry.buffer == nullptr || entry.sampler != nullptr ||
                 entry.textureView != nullptr || entry.nextInChain != nullptr) {
-                return DAWN_VALIDATION_ERROR("Expected buffer binding");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "Expected a buffer binding, but no buffer was provided");
             }
             DAWN_TRY(device->ValidateObject(entry.buffer));
 
@@ -70,48 +71,54 @@ namespace dawn_native {
 
             // Handle wgpu::WholeSize, avoiding overflows.
             if (entry.offset > bufferSize) {
-                return DAWN_VALIDATION_ERROR("Buffer binding doesn't fit in the buffer");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "%s: binding offset of %u is larger than the buffer size of %u",
+                    entry.buffer->ValidationLabel(), entry.offset, bufferSize);
             }
             uint64_t bindingSize =
                 (entry.size == wgpu::kWholeSize) ? bufferSize - entry.offset : entry.size;
 
             if (bindingSize > bufferSize) {
-                return DAWN_VALIDATION_ERROR("Buffer binding size larger than the buffer");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "%s: binding size of %u is larger than the buffer size of %u",
+                    entry.buffer->ValidationLabel(), bindingSize, bufferSize);
             }
 
             if (bindingSize == 0) {
-                return DAWN_VALIDATION_ERROR("Buffer binding size cannot be zero.");
+                return DAWN_FORMAT_VALIDATION_ERROR("Buffer %s: binding size cannot be zero",
+                                                    entry.buffer->ValidationLabel());
             }
 
             // Note that no overflow can happen because we already checked that
             // bufferSize >= bindingSize
             if (entry.offset > bufferSize - bindingSize) {
-                return DAWN_VALIDATION_ERROR("Buffer binding doesn't fit in the buffer");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "%s: binding from %u with a size of %u doesn't fit in the buffer size of %u",
+                    entry.buffer->ValidationLabel(), entry.offset, bufferSize, bindingSize);
             }
 
             if (!IsAligned(entry.offset, requiredBindingAlignment)) {
-                return DAWN_VALIDATION_ERROR(
-                    "Buffer offset for bind group needs to satisfy the minimum alignment");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "%s: offset of %u does not satisfy the minimum alignment of %u",
+                    entry.buffer->ValidationLabel(), entry.offset, requiredBindingAlignment);
             }
 
             if (!(entry.buffer->GetUsage() & requiredUsage)) {
-                return DAWN_VALIDATION_ERROR("buffer binding usage mismatch");
+                return DAWN_FORMAT_VALIDATION_ERROR("%s: binding usage mismatch",
+                                                    entry.buffer->ValidationLabel());
             }
 
             if (bindingSize < bindingInfo.buffer.minBindingSize) {
-                return DAWN_VALIDATION_ERROR(
-                    "Binding size smaller than minimum buffer size: binding " +
-                    std::to_string(entry.binding) + " given " + std::to_string(bindingSize) +
-                    " bytes, required " + std::to_string(bindingInfo.buffer.minBindingSize) +
-                    " bytes");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "%s: binding size of %u smaller than minimum buffer size of %u",
+                    entry.buffer->ValidationLabel(), bindingSize,
+                    bindingInfo.buffer.minBindingSize);
             }
 
             if (bindingSize > maxBindingSize) {
-                return DAWN_VALIDATION_ERROR(
-                    "Binding size bigger than maximum uniform buffer binding size: binding " +
-                    std::to_string(entry.binding) + " given " + std::to_string(bindingSize) +
-                    " bytes, maximum is " + std::to_string(kMaxUniformBufferBindingSize) +
-                    " bytes");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "%s: binding size of %u bigger than maximum uniform buffer binding size of %u",
+                    entry.buffer->ValidationLabel(), bindingSize, kMaxUniformBufferBindingSize);
             }
 
             return {};
@@ -252,7 +259,10 @@ namespace dawn_native {
         DAWN_TRY(device->ValidateObject(descriptor->layout));
 
         if (BindingIndex(descriptor->entryCount) != descriptor->layout->GetBindingCount()) {
-            return DAWN_VALIDATION_ERROR("numBindings mismatch");
+            return DAWN_FORMAT_VALIDATION_ERROR(
+                "Expected %u entries, got %u",
+                static_cast<uint32_t>(descriptor->layout->GetBindingCount()),
+                descriptor->entryCount);
         }
 
         const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
@@ -264,13 +274,17 @@ namespace dawn_native {
 
             const auto& it = bindingMap.find(BindingNumber(entry.binding));
             if (it == bindingMap.end()) {
-                return DAWN_VALIDATION_ERROR("setting non-existent binding");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "Entry %u: binding index %u not present in the bind group layout", i,
+                    entry.binding);
             }
             BindingIndex bindingIndex = it->second;
             ASSERT(bindingIndex < descriptor->layout->GetBindingCount());
 
             if (bindingsSet[bindingIndex]) {
-                return DAWN_VALIDATION_ERROR("binding set twice");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "Entry %u: binding index %u already used by a previous entry", i,
+                    entry.binding);
             }
             bindingsSet.set(bindingIndex);
 
@@ -279,17 +293,21 @@ namespace dawn_native {
             // Perform binding-type specific validation.
             switch (bindingInfo.bindingType) {
                 case BindingInfoType::Buffer:
-                    DAWN_TRY(ValidateBufferBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateBufferBinding(device, entry, bindingInfo),
+                                     "Entry %u: Validating as a Buffer", i);
                     break;
                 case BindingInfoType::Texture:
                 case BindingInfoType::StorageTexture:
-                    DAWN_TRY(ValidateTextureBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateTextureBinding(device, entry, bindingInfo),
+                                     "Entry %u: Validating as a Texture", i);
                     break;
                 case BindingInfoType::Sampler:
-                    DAWN_TRY(ValidateSamplerBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateSamplerBinding(device, entry, bindingInfo),
+                                     "Entry %u: Validating as a Sampler", i);
                     break;
                 case BindingInfoType::ExternalTexture:
-                    DAWN_TRY(ValidateExternalTextureBinding(device, entry, bindingInfo));
+                    DAWN_TRY_CONTEXT(ValidateExternalTextureBinding(device, entry, bindingInfo),
+                                     "Entry %u: Validating as a ExternalTexture", i);
                     break;
             }
         }
@@ -443,6 +461,10 @@ namespace dawn_native {
         ASSERT(mLayout->GetBindingInfo(bindingIndex).bindingType ==
                BindingInfoType::ExternalTexture);
         return static_cast<ExternalTextureBase*>(mBindingData.bindings[bindingIndex].Get());
+    }
+
+    std::string BindGroupBase::ObjectTypeName() const {
+        return "BindGroup";
     }
 
 }  // namespace dawn_native

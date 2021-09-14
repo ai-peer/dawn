@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_ERROR_H_
 #define DAWNNATIVE_ERROR_H_
 
+#include "absl/strings/str_format.h"
 #include "common/Result.h"
 #include "dawn_native/ErrorData.h"
 
@@ -74,6 +75,9 @@ namespace dawn_native {
 
 #define DAWN_VALIDATION_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::Validation, MESSAGE)
 
+#define DAWN_FORMAT_VALIDATION_ERROR(...) \
+    DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__))
+
 // DAWN_DEVICE_LOST_ERROR means that there was a real unrecoverable native device lost error.
 // We can't even do a graceful shutdown because the Device is gone.
 #define DAWN_DEVICE_LOST_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::DeviceLost, MESSAGE)
@@ -99,18 +103,24 @@ namespace dawn_native {
     // the current function.
 #define DAWN_TRY(EXPR) DAWN_TRY_WITH_CLEANUP(EXPR, {})
 
-#define DAWN_TRY_WITH_CLEANUP(EXPR, BODY)                                   \
-    {                                                                       \
-        auto DAWN_LOCAL_VAR = EXPR;                                         \
-        if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                      \
-            {BODY} /* comment to force the formatter to insert a newline */ \
-            std::unique_ptr<::dawn_native::ErrorData>                       \
-                error = DAWN_LOCAL_VAR.AcquireError();                      \
-            error->AppendBacktrace(__FILE__, __func__, __LINE__);           \
-            return {std::move(error)};                                      \
-        }                                                                   \
-    }                                                                       \
-    for (;;)                                                                \
+#define DAWN_TRY_CONTEXT(EXPR, ...)                              \
+    DAWN_TRY_WITH_CLEANUP(EXPR, {                                \
+        if (error->GetType() == InternalErrorType::Validation) { \
+            error->AppendContext(absl::StrFormat(__VA_ARGS__));  \
+        }                                                        \
+    })
+
+#define DAWN_TRY_WITH_CLEANUP(EXPR, BODY)                                                    \
+    {                                                                                        \
+        auto DAWN_LOCAL_VAR = EXPR;                                                          \
+        if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                                       \
+            std::unique_ptr<::dawn_native::ErrorData> error = DAWN_LOCAL_VAR.AcquireError(); \
+            {BODY} /* comment to force the formatter to insert a newline */                  \
+            error->AppendBacktrace(__FILE__, __func__, __LINE__);                            \
+            return {std::move(error)};                                                       \
+        }                                                                                    \
+    }                                                                                        \
+    for (;;)                                                                                 \
     break
 
     // DAWN_TRY_ASSIGN is the same as DAWN_TRY for ResultOrError and assigns the success value, if
@@ -133,6 +143,17 @@ namespace dawn_native {
 
     wgpu::ErrorType ToWGPUErrorType(InternalErrorType type);
     InternalErrorType FromWGPUErrorType(wgpu::ErrorType type);
+
+    // Produces a human readable descriptor label for use in validation messages.
+    // Counterpart to ObjectBase::ValidationLabel()
+    template <typename DescriptorType>
+    std::string ValidationLabel(const std::string& descriptorType,
+                                const DescriptorType* descriptor) {
+        if (!descriptor->label) {
+            return absl::StrFormat("%s %p", descriptorType, descriptor);
+        }
+        return absl::StrFormat("%s \"%s\"", descriptorType, descriptor->label);
+    }
 
 }  // namespace dawn_native
 

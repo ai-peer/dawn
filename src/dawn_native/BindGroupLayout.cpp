@@ -523,4 +523,8 @@ namespace dawn_native {
                 {unverifiedBufferSizes, mBindingCounts.unverifiedBufferCount}};
     }
 
+    std::string BindGroupLayoutBase::ObjectTypeName() const {
+        return "BindGroupLayout";
+    }
+
 }  // namespace dawn_native

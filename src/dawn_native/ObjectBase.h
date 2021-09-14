@@ -35,14 +35,18 @@ namespace dawn_native {
         ObjectBase(DeviceBase* device, ErrorTag tag);
 
         DeviceBase* GetDevice() const;
-        const std::string& GetLabel();
+        const std::string& GetLabel() const;
         bool IsError() const;
+
+        // Used when referencing this object in a validation message
+        std::string ValidationLabel() const;
 
         // Dawn API
         void APISetLabel(const char* label);
 
       private:
         virtual void SetLabelImpl();
+        virtual std::string ObjectTypeName() const;
 
         // TODO(dawn:840): Optimize memory footprint for objects that don't have labels.
         std::string mLabel;

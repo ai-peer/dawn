@@ -379,10 +379,20 @@ namespace dawn_native {
     void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error) {
         ASSERT(error != nullptr);
         std::ostringstream ss;
+        const std::vector<std::string>& contexts = error->GetContexts();
+        if (!contexts.empty()) {
+            ss << "Error occurred while ";
+            // Iterate over the contexts in reverse order
+            for (auto it = contexts.rbegin(); it != contexts.rend(); it++) {
+                ss << *it << "\n";
+            }
+        }
         ss << error->GetMessage();
-        for (const auto& callsite : error->GetBacktrace()) {
-            ss << "\n    at " << callsite.function << " (" << callsite.file << ":" << callsite.line
-               << ")";
+        if (contexts.empty()) {
+            for (const auto& callsite : error->GetBacktrace()) {
+                ss << "\n    at " << callsite.function << " (" << callsite.file << ":"
+                   << callsite.line << ")";
+            }
         }
         HandleError(error->GetType(), ss.str().c_str());
     }
@@ -448,10 +458,11 @@ namespace dawn_native {
     MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
         ASSERT(object != nullptr);
         if (DAWN_UNLIKELY(object->GetDevice() != this)) {
-            return DAWN_VALIDATION_ERROR("Object from a different device.");
+            return DAWN_FORMAT_VALIDATION_ERROR("%s is from a different device.",
+                                                object->ValidationLabel());
         }
         if (DAWN_UNLIKELY(object->IsError())) {
-            return DAWN_VALIDATION_ERROR("Object is an error.");
+            return DAWN_FORMAT_VALIDATION_ERROR("%s is an error.", object->ValidationLabel());
         }
         return {};
     }
@@ -1103,7 +1114,10 @@ namespace dawn_native {
         const BindGroupDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateBindGroupDescriptor(this, descriptor));
+            DAWN_TRY_CONTEXT(ValidateBindGroupDescriptor(this, descriptor),
+                             "validating %s against %s",
+                             ValidationLabel("BindGroupDescriptor", descriptor),
+                             descriptor->layout->ValidationLabel());
         }
         return CreateBindGroupImpl(descriptor);
     }
