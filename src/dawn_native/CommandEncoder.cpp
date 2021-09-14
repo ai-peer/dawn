@@ -198,8 +198,10 @@ namespace dawn_native {
 
             wgpu::TextureFormat resolveTargetFormat = resolveTarget->GetFormat().format;
             if (resolveTargetFormat != attachment->GetFormat().format) {
-                return DAWN_VALIDATION_ERROR(
-                    "The format of the resolve target must be the same as the color attachment");
+                return DAWN_FORMAT_VALIDATION_ERROR(
+                    "Resolve target %s format (%s) must be the same as the color attachment %s "
+                    "format (%s)",
+                    resolveTarget, resolveTargetFormat, attachment, attachment->GetFormat().format);
             }
 
             return {};

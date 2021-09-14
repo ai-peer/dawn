@@ -14,6 +14,8 @@
 
 #include "dawn_native/ObjectBase.h"
 
+#include "absl/strings/str_format.h"
+
 namespace dawn_native {
 
     static constexpr uint64_t kErrorPayload = 0;
@@ -33,7 +35,7 @@ namespace dawn_native {
         : RefCounted(kNotErrorPayload), mDevice(device) {
     }
 
-    const std::string& ObjectBase::GetLabel() {
+    const std::string& ObjectBase::GetLabel() const {
         return mLabel;
     }
 

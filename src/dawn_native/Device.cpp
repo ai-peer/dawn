@@ -380,9 +380,17 @@ namespace dawn_native {
         ASSERT(error != nullptr);
         std::ostringstream ss;
         ss << error->GetMessage();
-        for (const auto& callsite : error->GetBacktrace()) {
-            ss << "\n    at " << callsite.function << " (" << callsite.file << ":" << callsite.line
-               << ")";
+
+        const std::vector<std::string>& contexts = error->GetContexts();
+        if (!contexts.empty()) {
+            for (auto context : contexts) {
+                ss << "\n - while " << context;
+            }
+        } else {
+            for (const auto& callsite : error->GetBacktrace()) {
+                ss << "\n    at " << callsite.function << " (" << callsite.file << ":"
+                   << callsite.line << ")";
+            }
         }
         HandleError(error->GetType(), ss.str().c_str());
     }
@@ -448,10 +456,10 @@ namespace dawn_native {
     MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
         ASSERT(object != nullptr);
         if (DAWN_UNLIKELY(object->GetDevice() != this)) {
-            return DAWN_VALIDATION_ERROR("Object from a different device.");
+            return DAWN_FORMAT_VALIDATION_ERROR("%s is from a different device.", object);
         }
         if (DAWN_UNLIKELY(object->IsError())) {
-            return DAWN_VALIDATION_ERROR("Object is an error.");
+            return DAWN_FORMAT_VALIDATION_ERROR("%s is an error.", object);
         }
         return {};
     }
@@ -1103,7 +1111,8 @@ namespace dawn_native {
         const BindGroupDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateBindGroupDescriptor(this, descriptor));
+            DAWN_TRY_CONTEXT(ValidateBindGroupDescriptor(this, descriptor),
+                             "validating %s against %s", descriptor, descriptor->layout);
         }
         return CreateBindGroupImpl(descriptor);
     }
