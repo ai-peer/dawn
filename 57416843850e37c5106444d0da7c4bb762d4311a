@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70b0e06b_5e981874",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-14T15:43:20Z",
+      "side": 1,
+      "message": "Discussion at tech banter call this morning decided that we should follow the ANGLE pattern initially and file issues against Abseil-in-chromium to request that this sort of inclusion be made easier/cleaner in the future.\n\nIn light of that, I think this CL can now land as is. Can I get a final review and +2?",
+      "revId": "57416843850e37c5106444d0da7c4bb762d4311a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3dd77d25_ba2bfbec",
