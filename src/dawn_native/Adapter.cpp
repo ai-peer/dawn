@@ -65,6 +65,7 @@ namespace dawn_native {
 
     WGPUDeviceProperties AdapterBase::GetAdapterProperties() const {
         WGPUDeviceProperties adapterProperties = {};
+        adapterProperties.vendorID = mPCIInfo.vendorId;
 
         mSupportedExtensions.InitializeDeviceProperties(&adapterProperties);
         // This is OK for now because there are no limit extension structs.
