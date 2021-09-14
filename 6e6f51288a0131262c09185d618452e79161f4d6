@@ -124,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "67431926_fbd766d9",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-14T15:22:07Z",
+      "side": 1,
+      "message": "I think GetTextureViewDescriptorWithDefaults is supposed to resolve the undefined values to their default values. So undefined, shouldn\u0027t be returned as any of the members. Could that be the reason for the failure?",
+      "parentUuid": "0f646849_c226b136",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84b25b96_8a994c6c",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 2
