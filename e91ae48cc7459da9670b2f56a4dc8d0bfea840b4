@@ -16,6 +16,24 @@
       "message": "I checked that the test is causing us to call setThreadgroupMemoryLength with 64 bytes which looks right to me for a 4x4 matrix.\n\nLooks like not all the values are making it through, so there might be something else going on? (or I\u0027m holding it wrong)\n\n[ RUN      ] ComputeSharedMemoryTests.Matrix/Metal_AMD_Radeon_R9_M370X\n../../third_party/dawn/src/tests/DawnTest.cpp:1484: Failure\nValue of: result\n  Actual: false (Expected data[1] to be 1, actual 0\nExpected:\n00 00 00 00 00 00 80 3F 00 00 00 40 00 00 40 40 00 00 80 40 00 00 A0 40 00 00 C0 40 00 00 E0 40 00 00 00 41 00 00 10 41 00 00 20 41 00 00 30 41 00 00 40 41 00 00 50 41 00 00 60 41 00 00 70 41 \nActual:\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 40 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 E0 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 30 41 00 00 00 00 00 00 00 00 00 00 00 00 00 00 70 41 \n\n[ RUN      ] ComputeSharedMemoryTests.Matrix/Metal_Intel_Iris_Graphics\n../../third_party/dawn/src/tests/DawnTest.cpp:1484: Failure\nValue of: result\n  Actual: false (Expected data[1] to be 1, actual 0\nExpected:\n00 00 00 00 00 00 80 3F 00 00 00 40 00 00 40 40 00 00 80 40 00 00 A0 40 00 00 C0 40 00 00 E0 40 00 00 00 41 00 00 10 41 00 00 20 41 00 00 30 41 00 00 40 41 00 00 50 41 00 00 60 41 00 00 70 41 \nActual:\n00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 80 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 41 00 00 00 00 00 00 00 00 00 00 00 00 00 00 40 41 00 00 00 00 00 00 00 00 00 00 00 00 \n Expectation created at ../../third_party/dawn/src/tests/end2end/ComputeSharedMemoryTests.cpp:162\n)",
       "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2006d7c_29af86e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-14T21:45:06Z",
+      "side": 1,
+      "message": "hmm nevermind; it fails on D3D12 too so this might not be metal-specific. Could be a problem overall with the shader translation - OR maybe it\u0027s expected that you shouldn\u0027t be able to write to subcomponents of a matrix from multiple threads?",
+      "parentUuid": "0f283526_63a4746d",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
