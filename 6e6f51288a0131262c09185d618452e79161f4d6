@@ -16,6 +16,91 @@
       "message": "This is the similar change to mipLevelCount as arrayLayerCount.\n\nThe Blink part change is: https://chromium-review.googlesource.com/c/chromium/src/+/3159199\n\n",
       "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ed796a_9c7ac77f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:31:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e35829_847265f4",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:31:08Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7eef66_638db765",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:31:08Z",
+      "side": 1,
+      "message": "Isn\u0027t [1] sufficient since it is the C++ structure that has the correct defaults?",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2671030b_0ae101e5",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:31:08Z",
+      "side": 1,
+      "message": "Isn\u0027t [1] sufficient since the C++ structure has the correct defaults?",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84b25b96_8a994c6c",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:31:08Z",
+      "side": 1,
+      "message": "Maybe we could duplicate the tests for 0 and WGPU_MIP_LEVEL_COUNT_UNDEFINED already so we don\u0027t forget to add a test for 0 later.",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
