@@ -1,0 +1,62 @@
+# Copyright 2020 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import("../../../scripts/dawn_overrides_with_defaults.gni")
+
+import("${dawn_root}/scripts/dawn_features.gni")
+
+config("dawn_abseil_config") {
+  if (dawn_standalone && is_clang) {
+    cflags = [
+      # Allow the use of enable_if()
+      "-Wno-gcc-compat",
+    ]
+  }
+
+  include_dirs = [ "${dawn_abseil_dir}" ]
+}
+
+source_set("dawn_abseil_source") {
+  all_dependent_configs = [ ":dawn_abseil_config" ]
+
+  sources = [
+    "${dawn_abseil_dir}/absl/base/internal/raw_logging.cc",
+    "${dawn_abseil_dir}/absl/base/internal/throw_delegate.cc",
+    "${dawn_abseil_dir}/absl/strings/ascii.cc",
+    "${dawn_abseil_dir}/absl/strings/charconv.cc",
+    "${dawn_abseil_dir}/absl/strings/escaping.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_bigint.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_bigint.h",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_parse.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/charconv_parse.h",
+    "${dawn_abseil_dir}/absl/strings/internal/memutil.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/memutil.h",
+    "${dawn_abseil_dir}/absl/strings/internal/stl_type_traits.h",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/arg.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/bind.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/extension.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/float_conversion.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/output.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_format/parser.cc",
+    "${dawn_abseil_dir}/absl/strings/internal/str_join_internal.h",
+    "${dawn_abseil_dir}/absl/strings/internal/str_split_internal.h",
+    "${dawn_abseil_dir}/absl/strings/match.cc",
+    "${dawn_abseil_dir}/absl/strings/numbers.cc",
+    "${dawn_abseil_dir}/absl/strings/str_cat.cc",
+    "${dawn_abseil_dir}/absl/strings/str_replace.cc",
+    "${dawn_abseil_dir}/absl/strings/str_split.cc",
+    "${dawn_abseil_dir}/absl/strings/string_view.cc",
+    "${dawn_abseil_dir}/absl/strings/substitute.cc",
+  ]
+}
