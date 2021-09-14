@@ -52,6 +52,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f097b61_6086ca27",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-14T08:50:37Z",
+      "side": 1,
+      "message": "Done\n\nI will declare it as virtual functions in the next CL, where RenderPipelineBase::Initialize() will be called in CreateRenderPipelineAsyncTask (just like what we are doing in CreateComputePipelineAsyncTask::Run(), https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/CreatePipelineAsyncTask.cpp;l\u003d117)",
+      "parentUuid": "0eee51e1_83854e05",
+      "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bea99ea_cfe7ecf3",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-14T08:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0eee51e1_83854e05",
+      "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b56d96e_1a7f4629",
@@ -65,6 +101,24 @@
       "writtenOn": "2021-09-14T08:36:12Z",
       "side": 1,
       "message": "u-nit: we could get fragmentStage just before it is used.",
+      "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91efadc2_46bb9703",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-14T08:50:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b56d96e_1a7f4629",
       "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
