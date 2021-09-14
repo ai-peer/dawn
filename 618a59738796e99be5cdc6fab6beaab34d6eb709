@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "704fe759_dc0c4f5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T08:36:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0eee51e1_83854e05",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T08:36:12Z",
+      "side": 1,
+      "message": "Will this virtual function be used in the future? If not imho we could remove it because it doesn\u0027t force implementation of Initialize() in the backends.",
+      "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b56d96e_1a7f4629",
+        "filename": "src/dawn_native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T08:36:12Z",
+      "side": 1,
+      "message": "u-nit: we could get fragmentStage just before it is used.",
+      "revId": "618a59738796e99be5cdc6fab6beaab34d6eb709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
