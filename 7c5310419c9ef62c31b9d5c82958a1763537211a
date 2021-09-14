@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c4d7d3_8c56c75c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-14T20:50:11Z",
+      "side": 1,
+      "message": "Putting this up for discussion, as I suspect we\u0027ll want to play with the formatting and mechanisms for error reporting a bit before we start landing large amounts of updates.\n\nThis follows the basic pattern that @cwallez outlined in https://dawn-review.googlesource.com/c/dawn/+/62621, adjusted for the realities of absl integration and with a few more convenience functions to try and make consistent formatting easier.\n\nExample validation error before this CL:\n\n    Buffer offset for bind group needs to satisfy the minimum alignment\n        at ValidateBufferBinding (../../third_party/dawn/src/dawn_native/BindGroup.cpp:94)\n        at ValidateBindGroupDescriptor (../../third_party/dawn/src/dawn_native/BindGroup.cpp:282)\n        at CreateBindGroup (../../third_party/dawn/src/dawn_native/Device.cpp:1105)\n\nSame validation error after this CL:\n\n    Error occurred while validating BindGroupDescriptor \"Frame Bind Group\" against \n    BindGroupLayout 0x21ac45a4180\n    Entry 0: Validating as a Buffer\n    Buffer \"Projection Buffer\": offset of 5 does not satisfy the minimum alignment of 256",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7afaa1_ed79f615",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-14T20:50:11Z",
+      "side": 1,
+      "message": "This is done inline in the macro because the format string passed to absl::StrFormat is required to be a constexpr for security reasons. This also prevents us from doing a direct replacement of DAWN_VALIDATION_ERROR as-is, since some of the strings being passed into that macro currently are being built on the fly. Once all of the error messages have been updated we could replace DAWN_VALIDATION_ERROR with DAWN_FORMAT_VALIDATION_ERROR and rename it for conciseness. (In the meantime it does serve as a good flag for which messages have been updated.)",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7855347_2739be08",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-14T20:50:11Z",
+      "side": 1,
+      "message": "Template utility function here because the descriptors don\u0027t have a common base like the Dawn objects do.",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f805b45_79760df8",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-14T20:50:11Z",
+      "side": 1,
+      "message": "This is a little overkill, but it allows for better reporting of objects in cases where the object type is ambiguous (such as Device::ValidateObject()) and saves typing everywhere else. It shouldn\u0027t add to the per-object size, just a bit to the VTable.",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
