@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66012136_805fb416",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-14T11:06:47Z",
+      "side": 1,
+      "message": "This is the similar change to mipLevelCount as arrayLayerCount.\n\nThe Blink part change is: https://chromium-review.googlesource.com/c/chromium/src/+/3159199\n\n",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
