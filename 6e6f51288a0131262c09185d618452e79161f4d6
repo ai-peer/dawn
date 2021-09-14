@@ -106,6 +106,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f646849_c226b136",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:56:03Z",
+      "side": 1,
+      "message": "Weird, this structure is defined here: https://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/src/dawn_native/wgpu_structs_autogen.h;l\u003d348;bpv\u003d0;bpt\u003d1 can you make sure the generated code with your CL is correct? Since all members have defaults in dawn.json we shouldn\u0027t need to explicitly set then.",
+      "parentUuid": "7d885406_2945fbea",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84b25b96_8a994c6c",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 2
@@ -135,6 +153,24 @@
       "side": 1,
       "message": "The test for 0 is added in the follow-up CL: https://dawn-review.googlesource.com/c/dawn/+/64165/3",
       "parentUuid": "84b25b96_8a994c6c",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b793127_4ef731c3",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T12:56:03Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4b6edf7b_f3670cac",
       "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
