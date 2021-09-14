@@ -97,6 +97,30 @@
       },
       "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9572c1e0_2c332e9c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1051,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-14T08:21:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, the logic in RenderPipeline assigns each vertex buffer slot to its user-defined index, and the IterateBitSet here would do the same.\n\nWe resize the cfg.vertex_state which makes makes a bunch of vertex buffers with no attributes. Then we set the values only for the used vertex buffers. Then we add each attribute to its vertex buffer.",
+      "parentUuid": "15b5c2c4_ab595485",
+      "range": {
+        "startLine": 1049,
+        "startChar": 0,
+        "endLine": 1051,
+        "endChar": 88
+      },
+      "revId": "c2754916f58df73e1677d59b0fa6c95c550b9cf7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
