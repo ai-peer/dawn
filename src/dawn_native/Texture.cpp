@@ -373,6 +373,11 @@ namespace dawn_native {
         TextureViewDescriptor desc = {};
         if (descriptor) {
             desc = *descriptor;
+        } else {
+            desc.dimension = wgpu::TextureViewDimension::Undefined;
+            desc.format = wgpu::TextureFormat::Undefined;
+            desc.arrayLayerCount = wgpu::kArrayLayerCountUndefined;
+            desc.mipLevelCount = wgpu::kMipLevelCountUndefined;
         }
 
         // The default value for the view dimension depends on the texture's dimension with a
@@ -418,9 +423,7 @@ namespace dawn_native {
             }
         }
 
-        // TODO(jie.a.chen@intel.com): Remove 'desc.mipLevelCount == 0' once the WebGPU change is
-        // landed.
-        if (desc.mipLevelCount == 0 || desc.mipLevelCount == wgpu::kMipLevelCountUndefined) {
+        if (desc.mipLevelCount == wgpu::kMipLevelCountUndefined) {
             desc.mipLevelCount = texture->GetNumMipLevels() - desc.baseMipLevel;
         }
         return desc;
