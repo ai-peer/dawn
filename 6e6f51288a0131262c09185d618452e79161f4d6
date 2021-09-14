@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d885406_2945fbea",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-14T12:51:12Z",
+      "side": 1,
+      "message": "No, it doesn\u0027t. The trybots failure helped me pinpoint this bug.",
+      "parentUuid": "fc7eef66_638db765",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "84b25b96_8a994c6c",
         "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
         "patchSetId": 2
@@ -99,6 +117,24 @@
       "writtenOn": "2021-09-14T12:31:08Z",
       "side": 1,
       "message": "Maybe we could duplicate the tests for 0 and WGPU_MIP_LEVEL_COUNT_UNDEFINED already so we don\u0027t forget to add a test for 0 later.",
+      "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b6edf7b_f3670cac",
+        "filename": "src/tests/unittests/validation/TextureViewValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-09-14T12:51:12Z",
+      "side": 1,
+      "message": "The test for 0 is added in the follow-up CL: https://dawn-review.googlesource.com/c/dawn/+/64165/3",
+      "parentUuid": "84b25b96_8a994c6c",
       "revId": "6e6f51288a0131262c09185d618452e79161f4d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
