@@ -51,6 +51,41 @@
       "message": "LGTM, thanks!\n\nAs discussed offline with Corentin, I\u0027m going to change Tint to aggregate these workgroup variables into a single threadgroup memory argument. I\u0027ll make this change in way that means Dawn can transition, so this CL is good to land as is.",
       "revId": "aa840ea4018d7b79707461d599a5fbf55b7350e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6da1d7c9_f8948ff1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T18:15:22Z",
+      "side": 1,
+      "message": "ok, thanks for the review!",
+      "parentUuid": "ba923537_34ca4808",
+      "revId": "aa840ea4018d7b79707461d599a5fbf55b7350e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bc782e4_c2a95404",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T18:15:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "aa840ea4018d7b79707461d599a5fbf55b7350e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
