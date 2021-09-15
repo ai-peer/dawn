@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f44865f_ab435625",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T15:46:54Z",
+      "side": 1,
+      "message": "All of these sound good. If we decide to go with option 3 we\u0027ll have to mimic the alignment constraints of CopyBufferToBuffer.",
+      "parentUuid": "11fce695_046883a6",
+      "revId": "f64ed75fdb330d39051229540f5ea3889244b82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82a84492_07efbce0",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 11
