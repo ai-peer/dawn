@@ -88,6 +88,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a45e1d_4673db7a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Worked on auto-generating a lot of the fomatting this morning, so I\u0027d appreciate some feedback on that. Still need to address things like putting the string formatting behind DAWN_UNLIKELY.\n\nIn the meantime it looks like abseil support was reverted from Dawn, so I\u0027ve gotta go figure out what that\u0027s about. 😞",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10d6ddfc_92b444f2",
@@ -122,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05cd1cfd_a85190a7",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Reformatted most of the error messages to try and read better.",
+      "parentUuid": "41203d10_6ac9b7f4",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0377846_f2a29d86",
@@ -139,6 +174,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac34004a_6ac649a3",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0377846_f2a29d86",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f271ae96_f2e0608f",
@@ -152,6 +205,30 @@
       "writtenOn": "2021-09-15T11:33:47Z",
       "side": 1,
       "message": "nit: this should be maxBindingSize since we also have a max binding size for storage buffers that\u0027s different now.",
+      "range": {
+        "startLine": 121,
+        "startChar": 66,
+        "endLine": 121,
+        "endChar": 94
+      },
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf673e6_2783ed7f",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f271ae96_f2e0608f",
       "range": {
         "startLine": 121,
         "startChar": 66,
@@ -196,6 +273,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "81ecd81a_08ece9c8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Hopefully the new formatting helps with this. Example:\n\nBinding size (256) is larger than the buffer size (144) of [Buffer \"Projection Buffer\"].\n - while validating entry 0 as a Buffer\n - while validating [BindGroupDescriptor \"Frame Bind Group\"] against [BindGroupLayout]",
+      "parentUuid": "a1b03b49_345a398e",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cf209e5_866ef547",
@@ -209,6 +304,24 @@
       "writtenOn": "2021-09-15T11:33:47Z",
       "side": 1,
       "message": "Wouldn\u0027t it make sense to put the error first so that it is the first thing developers see?",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6686c6_c329716e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "I was actually following the pattern that you had in your WIP patch! 😉 But after looking at it again I agree. The error should come first and be most prominent.",
+      "parentUuid": "4cf209e5_866ef547",
       "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -331,6 +444,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "07c24719_b0a3b178",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e94d2fca_cc146db9",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "3f805b45_79760df8",
         "filename": "src/dawn_native/ObjectBase.h",
         "patchSetId": 1
@@ -378,6 +509,24 @@
       "side": 1,
       "message": "Same suggestion but using AbslFormatConvert and porting over some of the enum formatting for enums and bitmasks. https://abseil.io/docs/cpp/guides/format#user-defined-formats\n\nWe might need to add a virtual method to get an enum representing the type of the object to implement AbslFormatConvert for const ObjectBase*",
       "parentUuid": "40b1994e_f3b819aa",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f8fdd8c_264c603b",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T21:08:44Z",
+      "side": 1,
+      "message": "Have some code in place to autogenerate AbslFormatConverts for most objects, descriptors, enums, and bitmasks now. I don\u0027t have anything in place yet to handle getting the right formatted string from ObjectBase* for the moment.",
+      "parentUuid": "9bb809f9_8e496327",
       "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
