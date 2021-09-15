@@ -51,6 +51,59 @@
       "message": "Code LGTM, but why does using threadgroup memory help compared to what we were doing before?",
       "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6f0bc2_a425a06b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-15T12:31:26Z",
+      "side": 1,
+      "message": "Right, MSL doesn\u0027t allow concurrently writes to different components of the same vector (see Tint chat). Presumably HLSL doesn\u0027t either.",
+      "parentUuid": "e2006d7c_29af86e6",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb12ce3e_89a436b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-15T12:31:26Z",
+      "side": 1,
+      "message": "Previously Tint was generating all workgroup allocations at kernel scope, e.g.:\n\n  kernel void main() {\n    threadgroup float2x3 m;\n  }\n\nBut the MSL compiler is missing matrix constructors overloads for the threadgroup address space, so rejects this code. Tint now generates this instead:\n\n  kernel void main(threadgroup float2x3* m [[threadgroup(0)]]) {\n  }\n\nBecause this is now a pointer, we don\u0027t need those constructors, and the MSL compiler accepts this code. This requires Dawn to set the size of the allocation, which is what this CL does.",
+      "parentUuid": "c37c90d4_5d5f5d19",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e168d33_faa3ce32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-15T12:31:26Z",
+      "side": 1,
+      "message": "Code LGTM too, just the test needs a fix.",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
