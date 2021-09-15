@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "805f6e91_9691c978",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T16:18:00Z",
+      "side": 1,
+      "message": "Updated the test to use a variety of types. It results in two threadgroup arguments now, as well as other module-scope threadgroup memory.",
+      "revId": "aa840ea4018d7b79707461d599a5fbf55b7350e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
