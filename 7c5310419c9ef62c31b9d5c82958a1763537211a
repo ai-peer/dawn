@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "997f5c8d_5ddef9ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T02:02:03Z",
+      "side": 1,
+      "message": "I\u0027d like to get an estimation of what we think the overhead of this nicer validation is, especially for APICreateBindGroup and various command-encoding functions like APIDraw, etc. \n\nI cherry-picked this CL, did a release build, and saw:\n    6fa6: e8 f5 24 07 00               \tcallq\t468213 \u003c__ZN4absl19str_format_internal10FormatPackENS0_21UntypedFormatSpecImplENS_4SpanIKNS0_13FormatArgImplEEE\u003e\n\nwithin the first 83 instructions of __ZN11dawn_native27ValidateBindGroupDescriptorEPNS_10DeviceBaseEPKNS_19BindGroupDescriptorE before the first return statement -- so not inside a deferred unlikely block.\n\nWe should try to find a way to avoid this kind of string formatting in the likely section of the code. Avoiding it is probably as simple as putting DAWN_UNLIKELY around the condition for it, but... do we want to have to do that everywhere?\nI think we used to have a DAWN_VALIDATE macro that had both the condition, AND the error message - I don\u0027t remember why we removed it.\n\nI **think** this formatting code is coming from this bit:\n    \"Expected %u entries, got %u\",\n    static_cast\u003cuint32_t\u003e(descriptor-\u003elayout-\u003eGetBindingCount()),\n    descriptor-\u003eentryCount\n\nOf course though, the code isn\u0027t actually executed unless we take that branch, but it\u0027s still not the best for the instruction cache.\n\n^this is why my suspicion is that two-phase validation is better, but if there\u0027s not a lot of overhead to the current approach, I\u0027m happy to be convinced",
+      "parentUuid": "52c4d7d3_8c56c75c",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc7afaa1_ed79f615",
         "filename": "src/dawn_native/Error.h",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2021-09-14T20:50:11Z",
       "side": 1,
       "message": "This is a little overkill, but it allows for better reporting of objects in cases where the object type is ambiguous (such as Device::ValidateObject()) and saves typing everywhere else. It shouldn\u0027t add to the per-object size, just a bit to the VTable.",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b1994e_f3b819aa",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T02:02:03Z",
+      "side": 1,
+      "message": "What do you think about having a Printable \"trait\" so instead of calling a virtual function, we call something like PrintToString(obj). Or \"PrintToMessage\" ? \n\nwhich will say \"bind group \u003cunlabeled\u003e\" or \"bind group `myLabel`\" depending on if the thing is labeled or not\n\nBasically a free function just like you have for ValidationLabel for the descriptors. We could autogenerate all the implementations of them as well so we don\u0027t need to implement ObjectTypeName everywhere.\n\nSimilar to the printing code in third_party/dawn/generator/templates/webgpu_cpp_print.h but with string instead of ostream",
+      "parentUuid": "3f805b45_79760df8",
       "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
