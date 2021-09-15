@@ -34,6 +34,23 @@
       "parentUuid": "0f283526_63a4746d",
       "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c37c90d4_5d5f5d19",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T12:10:56Z",
+      "side": 1,
+      "message": "Code LGTM, but why does using threadgroup memory help compared to what we were doing before?",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
