@@ -104,6 +104,42 @@
       "message": "Code LGTM too, just the test needs a fix.",
       "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9adce8_32d1db13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T12:40:50Z",
+      "side": 1,
+      "message": "Gotcha, do we every see having more than one threadgroup memory argument?",
+      "parentUuid": "eb12ce3e_89a436b7",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "173c7c55_40320630",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T12:40:50Z",
+      "side": 1,
+      "message": "Does Tint\u0027s workgroup zero init pass potentially do that UB as well?",
+      "parentUuid": "0e6f0bc2_a425a06b",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
