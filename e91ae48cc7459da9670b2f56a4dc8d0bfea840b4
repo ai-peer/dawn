@@ -140,6 +140,42 @@
       "parentUuid": "0e6f0bc2_a425a06b",
       "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efed2990_c7ed19ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-15T12:49:49Z",
+      "side": 1,
+      "message": "Yes, if there are multiple workgroup variables with matrices, they will all be separate threadgroup memory arguments. Maybe worth having a test here that covers that case...",
+      "parentUuid": "dc9adce8_32d1db13",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "017de7c0_c2bec953",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-15T12:49:49Z",
+      "side": 1,
+      "message": "No, that pass doesn\u0027t try to split initialization of vectors or matrices across multiple invocations.",
+      "parentUuid": "173c7c55_40320630",
+      "revId": "e91ae48cc7459da9670b2f56a4dc8d0bfea840b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
