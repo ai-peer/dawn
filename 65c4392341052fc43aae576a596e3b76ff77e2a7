@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "014f1137_6beeec64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T16:13:00Z",
+      "side": 1,
+      "message": "Michael, this is the process you need to follow to get spirv2dxil added as a third_party dependency.\n\nhttps://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/adding_to_third_party.md",
+      "revId": "65c4392341052fc43aae576a596e3b76ff77e2a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
