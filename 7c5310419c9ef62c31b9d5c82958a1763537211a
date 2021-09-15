@@ -38,6 +38,212 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "49b6c3c6_f9db90f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "Error occurred while validating BindGroupDescriptor \"Frame Bind Group\" against \n    BindGroupLayout 0x21ac45a4180\n    Entry 0: Validating as a Buffer\n    Buffer \"Projection Buffer\": offset of 5 does not satisfy the minimum alignment of 256\n    \nI commented in various places in the code but I think it would gain from being more structured:\n\nValidation error: binding offset (5) does not satisfy the minimum alignment (256) for BindingType::UniformBuffer\n - while validating entry 0 as a buffer entry\n - while validating [BindGroupDescriptor \"Frame Bind Group\"] against [BindGroupLayout 0x21ac45a4180]\n \nFor perf I\u0027m hoping some form of PGO will eventually help, but that would require putting some WebGPU test cases in the PGO training. I don\u0027t know where / when that happens in Chromium.\n\nWe could also fix it by asking LLVM to add a way to tag branch weights from inside blocks. So we\u0027d be able to add __builtin_reached_unlikely() inside DAWN_TRY_CONTEXT and that would magically be the same as a bunch of DAWN_UNLIKELY in validation code.",
+      "parentUuid": "997f5c8d_5ddef9ca",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d74bdfd_8cd57391",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d6ddfc_92b444f2",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "We might want to split this check in two: a buffer binding wasn\u0027t provided, or another binding was provided.",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41203d10_6ac9b7f4",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "The validation in this file with the \"%s:\" or \"Entry %u:\" doesn\u0027t really read like sentences. WDYT of changing it to be something like \"Binding offset (%u) is larger than the size of %s (%u)\"?",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0377846_f2a29d86",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "nit: we could tell which usages are necessary",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f271ae96_f2e0608f",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "nit: this should be maxBindingSize since we also have a max binding size for storage buffers that\u0027s different now.",
+      "range": {
+        "startLine": 121,
+        "startChar": 66,
+        "endLine": 121,
+        "endChar": 94
+      },
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4dba8d0_4afa604f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "We should probably make a set of guidelines of how to write validation error text.\n\nExamples would be (but we can differ from this, I\u0027m not a good wordsmith):\n\nIt should read nicely and make a sentence when prefixed with \"Error occurred while \" and end with a period. It should liberally add context to help understand the error better. It should say what the error should be (foo is larger than X) and not what should happen instead (foo must be less than X) etc.\n\nCould we start a small markdown file about this in docs/ ? (could be a follow-up CL)",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1b03b49_345a398e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "We probably should have something that shows that each piece of context comes one after the other, otherwise developers might see it as just information dump.",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf209e5_866ef547",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 390,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "Wouldn\u0027t it make sense to put the error first so that it is the first thing developers see?",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c81238b_b5f80923",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "nit: Since we are going to touch all validation statements, we should make them great for developers by explaining clearly what is the issue. Maybe \"[buffer \"myBuffer\"] is associated with [device \"foo\"] and cannot be used with [device \"bar\"]\"",
+      "range": {
+        "startLine": 461,
+        "startChar": 49,
+        "endLine": 461,
+        "endChar": 79
+      },
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d684939d_c32920c0",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "ditto here and in other places",
+      "range": {
+        "startLine": 465,
+        "startChar": 49,
+        "endLine": 465,
+        "endChar": 64
+      },
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bc7afaa1_ed79f615",
         "filename": "src/dawn_native/Error.h",
         "patchSetId": 1
@@ -49,6 +255,24 @@
       "writtenOn": "2021-09-14T20:50:11Z",
       "side": 1,
       "message": "This is done inline in the macro because the format string passed to absl::StrFormat is required to be a constexpr for security reasons. This also prevents us from doing a direct replacement of DAWN_VALIDATION_ERROR as-is, since some of the strings being passed into that macro currently are being built on the fly. Once all of the error messages have been updated we could replace DAWN_VALIDATION_ERROR with DAWN_FORMAT_VALIDATION_ERROR and rename it for conciseness. (In the meantime it does serve as a good flag for which messages have been updated.)",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b34ca181_7a983a96",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "Can we have a TODO to dedup the macros after all messages have been updated?",
+      "parentUuid": "bc7afaa1_ed79f615",
       "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -66,6 +290,24 @@
       "writtenOn": "2021-09-14T20:50:11Z",
       "side": 1,
       "message": "Template utility function here because the descriptors don\u0027t have a common base like the Dawn objects do.",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94d2fca_cc146db9",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "I think this could be in the autogenerated header as well.",
+      "parentUuid": "d7855347_2739be08",
       "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -101,6 +343,24 @@
       "side": 1,
       "message": "What do you think about having a Printable \"trait\" so instead of calling a virtual function, we call something like PrintToString(obj). Or \"PrintToMessage\" ? \n\nwhich will say \"bind group \u003cunlabeled\u003e\" or \"bind group `myLabel`\" depending on if the thing is labeled or not\n\nBasically a free function just like you have for ValidationLabel for the descriptors. We could autogenerate all the implementations of them as well so we don\u0027t need to implement ObjectTypeName everywhere.\n\nSimilar to the printing code in third_party/dawn/generator/templates/webgpu_cpp_print.h but with string instead of ostream",
       "parentUuid": "3f805b45_79760df8",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb809f9_8e496327",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-15T11:33:47Z",
+      "side": 1,
+      "message": "Same suggestion but using AbslFormatConvert and porting over some of the enum formatting for enums and bitmasks. https://abseil.io/docs/cpp/guides/format#user-defined-formats\n\nWe might need to add a virtual method to get an enum representing the type of the object to implement AbslFormatConvert for const ObjectBase*",
+      "parentUuid": "40b1994e_f3b819aa",
       "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
