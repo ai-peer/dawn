@@ -1043,18 +1043,14 @@ namespace dawn_native {
         cfg.entry_point_name = entryPoint;
         cfg.pulling_group = static_cast<uint32_t>(pullingBufferBindingSet);
 
-        const auto& vertexBufferSlotUsed = renderPipeline.GetVertexBufferSlotsUsed();
         cfg.vertex_state.resize(renderPipeline.GetVertexBufferCount());
-        for (uint8_t vertexBufferSlot = 0;
-             vertexBufferSlot < static_cast<uint8_t>(cfg.vertex_state.size()); ++vertexBufferSlot) {
-            if (vertexBufferSlotUsed[static_cast<VertexBufferSlot>(vertexBufferSlot)]) {
-                const auto& vertexBuffer =
-                    renderPipeline.GetVertexBuffer(static_cast<VertexBufferSlot>(vertexBufferSlot));
-                cfg.vertex_state[vertexBufferSlot].array_stride = vertexBuffer.arrayStride;
-                cfg.vertex_state[vertexBufferSlot].step_mode =
-                    ToTintVertexStepMode(vertexBuffer.stepMode);
-            }
+        for (VertexBufferSlot slot : IterateBitSet(pipeline.GetVertexBufferSlotsUsed())) {
+            const auto& vertexBuffer = renderPipeline.GetVertexBuffer(vertexBufferSlot);
+            cfg.vertex_state[vertexBufferSlot].array_stride = vertexBuffer.arrayStride;
+            cfg.vertex_state[vertexBufferSlot].step_mode =
+                ToTintVertexStepMode(vertexBuffer.stepMode);
         }
+
         for (VertexAttributeLocation location :
              IterateBitSet(renderPipeline.GetAttributeLocationsUsed())) {
             const auto& attribute = renderPipeline.GetAttribute(location);
@@ -1062,10 +1058,11 @@ namespace dawn_native {
             attr.format = ToTintVertexFormat(attribute.format);
             attr.offset = attribute.offset;
             attr.shader_location = static_cast<uint32_t>(static_cast<uint8_t>(location));
-            ASSERT(vertexBufferSlotUsed[attribute.vertexBufferSlot]);
+
             uint8_t vertexBufferSlot = static_cast<uint8_t>(attribute.vertexBufferSlot);
             cfg.vertex_state[vertexBufferSlot].attributes.push_back(attr);
         }
+
         transformInputs->Add<tint::transform::VertexPulling::Config>(cfg);
     }
 
