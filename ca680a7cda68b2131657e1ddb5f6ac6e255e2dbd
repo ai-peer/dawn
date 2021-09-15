@@ -33,6 +33,23 @@
       "message": "This revert needs review because it\u0027s landed over a day",
       "revId": "ca680a7cda68b2131657e1ddb5f6ac6e255e2dbd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0add87ba_5ba40572",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-15T19:19:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ca680a7cda68b2131657e1ddb5f6ac6e255e2dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
