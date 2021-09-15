@@ -71,6 +71,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fa53ab_181723fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-15T14:50:21Z",
+      "side": 1,
+      "message": "Thank you both for the feedback! I\u0027ll work on auto-generating the formatting (that\u0027ll make use a lot easier) and thanks Corentin for pointing out Abseil\u0027s user defined formats! If we can make those work in this context it\u0027ll definitely be the cleanest way to go.\n\nAlso, thank you Austin for doing the evaluation of the generated code! That\u0027s super helpful here. I\u0027ll play with having a version of the macro that does the condition and DAWN_UNLIKELY internally to see what the ergonomics of it feels like.\n\nAnd yes, I 100% agree that we should have some guidelines for how to format the error messages. I went through several revisions before posting this, and it\u0027s tricky to find a pattern that works well in all situations, but I definitely like Corentin\u0027s suggestion for flipping the context stack.\n\nI\u0027ll post an update to this CL later today and we\u0027ll keep iterating!",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "10d6ddfc_92b444f2",
