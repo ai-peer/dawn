@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "395d8957_1434004d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-15T17:43:01Z",
+      "side": 1,
+      "message": "This seems to be causing Dawn Skia roll build bots failing indicated by\n\nERROR at //third_party/externals/dawn/src/dawn_native/BUILD.gn:65:5: Unable to load \"c:/b/s/w/ir/skia/third_party/abseil-cpp/BUILD.gn\".\n    \"$dawn_abseil_dir:absl_define_config\",\n    ^------------------------------------\n    \nI guess to have revert first...",
+      "revId": "ca680a7cda68b2131657e1ddb5f6ac6e255e2dbd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
