@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41936cb3_a7a3d5db",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "099780a7_4cf77154",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f7cfd8_421fc7ae",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-08-26T08:41:02Z",
       "side": 1,
       "message": "nit: this shouldn\u0027t be tagged I think.",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99746971_02353a1b",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 807,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f7cfd8_421fc7ae",
       "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "991f053f_1fc183b3",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "769d430e_55575f43",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a40ebd16_1fcf8dca",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-08-26T08:41:02Z",
       "side": 1,
       "message": "ditto",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93279961_e6023372",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1851,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40ebd16_1fcf8dca",
       "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2443d746_165aa9c7",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "I don\u0027t know! it was already there. Will mark as upstreamonly.",
+      "parentUuid": "2bc63086_644911b4",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dd8abaf_50eb5a82",
@@ -116,6 +206,24 @@
       "writtenOn": "2021-08-26T08:41:02Z",
       "side": 1,
       "message": "nit: maybe we could filter before actually creating the item.",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "139b3b91_e59abd4e",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dd8abaf_50eb5a82",
       "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +253,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d0bf5e60_875a44fd",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Not sure what you mean, do you mean emscripten_no_enum_table (renamed/inverted from emscripten_enum_table)? Those items still need to be present in the emscripten headers, just not in the generated number-\u003estring tables. It could be a tag but it would be weird because tags are strictly additive, but adding a \"tags\" member is strictly subtractive. So everything that needed to be tagged with emscripten_enum_table would need a new tag list with all of the other tags in it: \"tags\": [\"dawn\", \"upstream\", \"emscripten_enum_tables\"]\n\nBTW the only thing tagged as \"emscripten\" is the reference/release methods. Everything else in Emscripten is in the upstream headers as well. So as soon as that is resolved the \"emscripten\" tag can be removed entirely.",
+      "parentUuid": "94ae4c09_09928a30",
+      "range": {
+        "startLine": 760,
+        "startChar": 44,
+        "endLine": 760,
+        "endChar": 54
+      },
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49725183_b6a79e35",
         "filename": "generator/templates/webgpu.h",
         "patchSetId": 8
@@ -156,6 +288,30 @@
       "writtenOn": "2021-08-26T08:41:02Z",
       "side": 1,
       "message": "nit: What does this - do? There\u0027s nothing after it on the line. Is it to remove the empty line between endfor and WGPUChainedStruct?",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 100,
+        "endChar": 11
+      },
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc4ec28_353f0c75",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T19:33:35Z",
+      "side": 1,
+      "message": "Yes because there\u0027s already an empty line inside the for loop. This removes the extra one.",
+      "parentUuid": "49725183_b6a79e35",
       "range": {
         "startLine": 100,
         "startChar": 10,
