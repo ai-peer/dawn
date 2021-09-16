@@ -1,0 +1,226 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ebda32e_db31ddae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9472745_1278930f",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c58a8446_c6caf4d9",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "nit: Can we have a TODO to somehow detect what the object type is in the future to help developers more?",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e6a1e62_d252bad8",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c33c3f46_ac34dd15",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "nit: whitespace",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a97bf9_91713282",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "u-nit: !\u003d nullptr for more explicitness?",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cff3c11_0804e7bd",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "Why do we skip these? I think we could add `using FooBase \u003d Foo` in each of the respective headers (and simplify dawn_native/ProcTable.cpp)\n\nEven the adapter and the instance could have a label.",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "524dbcb3_e71baa6e",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "Maybe more explicitly say it is the entry at index %u so that it is easier for devs to make the difference between the index in the array and the binding index.",
+      "range": {
+        "startLine": 278,
+        "startChar": 21,
+        "endLine": 278,
+        "endChar": 32
+      },
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294d9718_8a7dfd1a",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "Maybe these could be the binding index? Not sure.",
+      "range": {
+        "startLine": 297,
+        "startChar": 55,
+        "endLine": 297,
+        "endChar": 57
+      },
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47ea9e9_0b67afd1",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "nit: an (not 100% sure)",
+      "range": {
+        "startLine": 310,
+        "startChar": 61,
+        "endLine": 310,
+        "endChar": 62
+      },
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f85a538_64aa035c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "This is using a different style of \"foo must predicate\" instead of \"foo !predicate\" like in BindGroup. I don\u0027t have an opinion on which is best but we should be consistent if possible.",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "284d63ff_932919c1",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T09:45:48Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "1d6f9203981e2c5f350d9e3c5984c56455a126f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
