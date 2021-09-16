@@ -176,10 +176,10 @@ target_link_libraries(dawn_native
             dawn_platform
             dawn_internal_config
             libtint
-            spirv-cross-core
-            spirv-cross-glsl
-            spirv-cross-hlsl
-            spirv-cross-msl
+            # spirv-cross-core
+            # spirv-cross-glsl
+            # spirv-cross-hlsl
+            # spirv-cross-msl
             SPIRV-Tools-opt
 )
 
