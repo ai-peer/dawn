@@ -16,6 +16,103 @@
       "message": "Please take another look. Note that I have just finished hacking in a hopefully reasonable solution for supporting DII in RenderBundles too. The key problem there is that the same encoded DII command may be used by multiple render passes, so we can\u0027t simply mutate the command at render pass encoding time unless we copy the bundle\u0027s command list.\n\nMy solution to THAT problem here was to introduce a new SetValidationBufferLocationsInternal command. RenderValidationEncoder accumulates the list of all BufferLocations encoded in DII commands for the pass, paired with the actual buffer and offset they should use at execution time. The SetVBLI command actually pushes those concrete buffer+offset values to each BufferLocation, on the queue timeline, just before the render pass is recorded.\n\nIt feels a little sloppy to me especially since the backends all delegate back to the CommandBufferBase to do that trivial work. It\u0027s also not strictly necessary to do this deferred buffer resolution thing for non-bundled DII commands, but I didn\u0027t bother to optimize that (yet). Interested in your thoughts on this approach first.\n\nFinally, the current patchset also tries to address efficiency concerns. See inline comments about how validation passes are divided up now.\n\nThanks!",
       "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3623b95f_bf1e3f71",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "We\u0027re starting and ending a lot of compute passes potentially, is there a way to have them merged? (it means the scratch buffer needs to be big enough for all of them). This will eventually allow us to make all the validation dispatches run in parallel. (right now all dispatches will be seralized if we detect a data dependency but we\u0027ll likely have a WebGPU extension for controlling memory barriers inside the compute passes at some point).",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153a502e_f06a6ab9",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "PassResourceUsage.h also contains metadata used for validation. Maybe this file should be something \"IndirectCallMetadata\" or another name explaining it is just the indirect metadata and not all of it?",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31f96368_76ec6564",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "It\u0027s an interesting assumption that the number of valid indices will rarely changes. It seems pretty likely but I have less experience with this.",
+      "range": {
+        "startLine": 86,
+        "startChar": 61,
+        "endLine": 86,
+        "endChar": 69
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcec8ed3_05b26ecc",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "nit: we have common/NonCopyable.h",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 86
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d16e11_185e83b1",
+        "filename": "src/dawn_native/ScratchBuffer.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "u-nit: ditto implementation in the .cpp",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

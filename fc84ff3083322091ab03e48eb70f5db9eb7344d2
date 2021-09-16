@@ -312,6 +312,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29bae209_cc4ee9eb",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "That works, maybe we can have a comment before the struct explaining what is its semantic.",
+      "parentUuid": "0a2fea05_bfaf9712",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3120d2a_8e16f22d",
         "filename": "src/dawn_native/RenderValidationEncoder.cpp",
         "patchSetId": 12

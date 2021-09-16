@@ -169,6 +169,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a302a04_dc4296da",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T15:36:37Z",
+      "side": 1,
+      "message": "Logic looks good overall. I wasn\u0027t able to review the details of this file and the RenderValidationMetadata however.\n\nThe allocation of a BufferLocation for each indirect call seems a bit expensive, when there\u0027s only ever two refs: the one in the CommandAllocator and the one in the RenderValidationMetadata but on the other hands it means that we can magically handle bundles. I think we can go with this direction and revisit to have flat lists if we find performance issues in the future.",
+      "parentUuid": "2336e8a3_e5be4f26",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 77
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f0d72e3_3ea61922",
         "filename": "src/dawn_native/ValidationScratchBuffer.cpp",
         "patchSetId": 4
