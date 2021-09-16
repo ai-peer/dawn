@@ -275,6 +275,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e669cfc_36082ca0",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 8
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T21:17:17Z",
+      "side": 1,
+      "message": "Gotcha, thanks for the explanation. Yeah we need to resolve this lifetime management issue upstream :/",
+      "parentUuid": "d0bf5e60_875a44fd",
+      "range": {
+        "startLine": 760,
+        "startChar": 44,
+        "endLine": 760,
+        "endChar": 54
+      },
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49725183_b6a79e35",
