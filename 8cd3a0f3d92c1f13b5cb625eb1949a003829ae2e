@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeba37ad_4493fc2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-16T16:54:30Z",
+      "side": 1,
+      "message": "Gotcha! I had a long brain dump session with Austin yesterday about this as well! Thanks!",
+      "parentUuid": "15ba04a5_eb2ae2de",
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f972b07c_fda83498",
