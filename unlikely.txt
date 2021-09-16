@@ -1,0 +1,146 @@
+// New error formatting with unlikely check:
+
+[==========] Running 17 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 17 tests from DrawCallPerf
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend= 61.638011 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend= 61.487932 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend= 61.383914 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend= 61.265402 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend= 61.502406 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend= 61.385159 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend (6027 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_MultipleVertexBuffers
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleVertexBuffers= 216.667848 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleVertexBuffers= 216.470941 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleVertexBuffers= 216.109944 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleVertexBuffers= 215.914046 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleVertexBuffers= 216.865228 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleVertexBuffers= 216.672444 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_MultipleVertexBuffers (6032 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicVertexBuffer
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicVertexBuffer= 96.585709 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicVertexBuffer= 96.447459 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicVertexBuffer= 98.095960 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicVertexBuffer= 97.956114 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicVertexBuffer= 98.793662 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicVertexBuffer= 98.654079 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicVertexBuffer (6015 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_MultipleBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups= 268.129068 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups= 267.934456 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups= 267.480603 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups= 267.286611 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups= 268.718400 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups= 268.524219 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_MultipleBindGroups (5987 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicBindGroup
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup= 156.829205 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup= 156.682879 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup= 157.671920 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup= 157.521539 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup= 158.490291 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup= 158.351029 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicBindGroup (5981 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_NoReuseBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_NoReuseBindGroups= 578.365207 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_NoReuseBindGroups= 578.129666 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_NoReuseBindGroups= 578.612039 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_NoReuseBindGroups= 578.394182 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_NoReuseBindGroups= 578.931912 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_NoReuseBindGroups= 578.710426 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_NoReuseBindGroups (6014 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_RedundantPipeline_RedundantBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_RedundantPipeline_RedundantBindGroups= 182.624200 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_RedundantPipeline_RedundantBindGroups= 182.476357 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_RedundantPipeline_RedundantBindGroups= 183.122078 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_RedundantPipeline_RedundantBindGroups= 182.977041 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_RedundantPipeline_RedundantBindGroups= 183.334592 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_RedundantPipeline_RedundantBindGroups= 183.185527 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_RedundantPipeline_RedundantBindGroups (6062 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_MultipleBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups= 345.300243 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups= 345.093155 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups= 342.473419 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups= 342.276824 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups= 344.077971 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups= 343.878839 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_MultipleBindGroups (5964 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_DynamicBindGroup
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup= 226.088436 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup= 225.915690 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup= 225.650045 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup= 225.474008 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup= 225.709671 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup= 225.531222 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_DynamicBindGroup (6009 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_MultipleVertexBuffers_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleVertexBuffers_RenderBundle= 85.456746 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleVertexBuffers_RenderBundle= 85.300871 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleVertexBuffers_RenderBundle= 84.916086 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleVertexBuffers_RenderBundle= 84.761944 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleVertexBuffers_RenderBundle= 84.705232 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleVertexBuffers_RenderBundle= 84.548605 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_MultipleVertexBuffers_RenderBundle (6015 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicVertexBuffer_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicVertexBuffer_RenderBundle= 1.173509 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicVertexBuffer_RenderBundle= 1.042037 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicVertexBuffer_RenderBundle= 1.166311 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicVertexBuffer_RenderBundle= 1.062818 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicVertexBuffer_RenderBundle= 1.156119 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicVertexBuffer_RenderBundle= 1.053175 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicVertexBuffer_RenderBundle (6178 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_MultipleBindGroups_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups_RenderBundle= 85.194123 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups_RenderBundle= 85.038804 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups_RenderBundle= 85.949168 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups_RenderBundle= 85.798559 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups_RenderBundle= 86.234300 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups_RenderBundle= 86.080782 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_MultipleBindGroups_RenderBundle (5995 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicBindGroup_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup_RenderBundle= 1.153645 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup_RenderBundle= 1.051066 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup_RenderBundle= 1.153441 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup_RenderBundle= 1.050911 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup_RenderBundle= 1.155624 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup_RenderBundle= 1.053163 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicBindGroup_RenderBundle (6201 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle= 84.569924 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle= 84.417835 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle= 84.051441 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle= 83.902089 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle= 84.774398 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle= 84.617094 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_MultipleBindGroups_RenderBundle (6016 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle= 1.163581 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle= 1.063140 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle= 1.185623 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle= 1.083147 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle= 1.181321 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle= 1.079816 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicPipeline_DynamicBindGroup_RenderBundle (6179 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_MultipleBindGroups_DynamicData
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups_DynamicData= 325.807518 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups_DynamicData= 325.598949 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups_DynamicData= 327.848621 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups_DynamicData= 327.638444 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_MultipleBindGroups_DynamicData= 328.390611 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_MultipleBindGroups_DynamicData= 328.189626 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_MultipleBindGroups_DynamicData (5993 ms)
+[ RUN      ] DrawCallPerf.Run/Null_Null_backend_DynamicBindGroup_DynamicData
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup_DynamicData= 182.548998 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup_DynamicData= 182.386662 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup_DynamicData= 182.547267 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup_DynamicData= 182.383327 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_Null_Null_backend_DynamicBindGroup_DynamicData= 182.619060 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_Null_Null_backend_DynamicBindGroup_DynamicData= 182.451822 ns
+[       OK ] DrawCallPerf.Run/Null_Null_backend_DynamicBindGroup_DynamicData (6006 ms)
+[----------] 17 tests from DrawCallPerf (102694 ms total)
+
+[----------] Global test environment tear-down
+[==========] 17 tests from 1 test suite ran. (102812 ms total)
+[  PASSED  ] 17 tests.

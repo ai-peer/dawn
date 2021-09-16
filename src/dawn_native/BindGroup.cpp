@@ -70,56 +70,42 @@ namespace dawn_native {
             uint64_t bufferSize = entry.buffer->GetSize();
 
             // Handle wgpu::WholeSize, avoiding overflows.
-            if (entry.offset > bufferSize) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Binding offset (%u) is larger than the buffer size (%u) of %s.", entry.offset,
-                    bufferSize, entry.buffer);
-            }
+            DAWN_INVALID_IF(entry.offset > bufferSize,
+                            "Binding offset (%u) is larger than the buffer size (%u) of %s.",
+                            entry.offset, bufferSize, entry.buffer);
+
             uint64_t bindingSize =
                 (entry.size == wgpu::kWholeSize) ? bufferSize - entry.offset : entry.size;
 
-            if (bindingSize > bufferSize) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Binding size (%u) is larger than the buffer size (%u) of %s.", bindingSize,
-                    bufferSize, entry.buffer);
-            }
+            DAWN_INVALID_IF(bindingSize > bufferSize,
+                            "Binding size (%u) is larger than the buffer size (%u) of %s.",
+                            bindingSize, bufferSize, entry.buffer);
 
-            if (bindingSize == 0) {
-                return DAWN_FORMAT_VALIDATION_ERROR("Binding size is zero");
-            }
+            DAWN_INVALID_IF(bindingSize == 0, "Binding size is zero");
 
             // Note that no overflow can happen because we already checked that
             // bufferSize >= bindingSize
-            if (entry.offset > bufferSize - bindingSize) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Binding range (offset: %u, size: %u) doesn't fit in the buffer size (%u) of "
-                    "%s.",
-                    entry.offset, bufferSize, bindingSize, entry.buffer);
-            }
+            DAWN_INVALID_IF(
+                entry.offset > bufferSize - bindingSize,
+                "Binding range (offset: %u, size: %u) doesn't fit in the buffer size (%u) of "
+                "%s.",
+                entry.offset, bufferSize, bindingSize, entry.buffer);
 
-            if (!IsAligned(entry.offset, requiredBindingAlignment)) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Offset (%u) does not satisfy the minimum alignment (%u).", entry.offset,
-                    requiredBindingAlignment);
-            }
+            DAWN_INVALID_IF(!IsAligned(entry.offset, requiredBindingAlignment),
+                            "Offset (%u) does not satisfy the minimum alignment (%u).",
+                            entry.offset, requiredBindingAlignment);
 
-            if (!(entry.buffer->GetUsage() & requiredUsage)) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Binding usage (%s) of %s doesn't match expected usage (%s).",
-                    entry.buffer->GetUsage(), entry.buffer, requiredUsage);
-            }
+            DAWN_INVALID_IF(!(entry.buffer->GetUsage() & requiredUsage),
+                            "Binding usage (%s) of %s doesn't match expected usage (%s).",
+                            entry.buffer->GetUsage(), entry.buffer, requiredUsage);
 
-            if (bindingSize < bindingInfo.buffer.minBindingSize) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Binding size (%u) is smaller than the minimum binding size (%u).", bindingSize,
-                    bindingInfo.buffer.minBindingSize);
-            }
+            DAWN_INVALID_IF(bindingSize < bindingInfo.buffer.minBindingSize,
+                            "Binding size (%u) is smaller than the minimum binding size (%u).",
+                            bindingSize, bindingInfo.buffer.minBindingSize);
 
-            if (bindingSize > maxBindingSize) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Binding size (%u) is larger than the maximum binding size (%u).", bindingSize,
-                    maxBindingSize);
-            }
+            DAWN_INVALID_IF(bindingSize > maxBindingSize,
+                            "Binding size (%u) is larger than the maximum binding size (%u).",
+                            bindingSize, maxBindingSize);
 
             return {};
         }
@@ -258,12 +244,10 @@ namespace dawn_native {
 
         DAWN_TRY(device->ValidateObject(descriptor->layout));
 
-        if (BindingIndex(descriptor->entryCount) != descriptor->layout->GetBindingCount()) {
-            return DAWN_FORMAT_VALIDATION_ERROR(
-                "Expected %u entries, got %u",
-                static_cast<uint32_t>(descriptor->layout->GetBindingCount()),
-                descriptor->entryCount);
-        }
+        DAWN_INVALID_IF(
+            BindingIndex(descriptor->entryCount) != descriptor->layout->GetBindingCount(),
+            "Expected %u entries, got %u",
+            static_cast<uint32_t>(descriptor->layout->GetBindingCount()), descriptor->entryCount);
 
         const BindGroupLayoutBase::BindingMap& bindingMap = descriptor->layout->GetBindingMap();
         ASSERT(bindingMap.size() <= kMaxBindingsPerPipelineLayout);
@@ -273,19 +257,17 @@ namespace dawn_native {
             const BindGroupEntry& entry = descriptor->entries[i];
 
             const auto& it = bindingMap.find(BindingNumber(entry.binding));
-            if (it == bindingMap.end()) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "In entry %u, binding index %u not present in the bind group layout", i,
-                    entry.binding);
-            }
+            DAWN_INVALID_IF(it == bindingMap.end(),
+                            "In entry %u, binding index %u not present in the bind group layout", i,
+                            entry.binding);
+
             BindingIndex bindingIndex = it->second;
             ASSERT(bindingIndex < descriptor->layout->GetBindingCount());
 
-            if (bindingsSet[bindingIndex]) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "In entry %u, binding index %u already used by a previous entry", i,
-                    entry.binding);
-            }
+            DAWN_INVALID_IF(bindingsSet[bindingIndex],
+                            "In entry %u, binding index %u already used by a previous entry", i,
+                            entry.binding);
+
             bindingsSet.set(bindingIndex);
 
             const BindingInfo& bindingInfo = descriptor->layout->GetBindingInfo(bindingIndex);

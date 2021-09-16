@@ -45,25 +45,22 @@ namespace dawn_native {
                                             uint64_t srcOffset,
                                             uint64_t dstOffset) {
             // Copy size must be a multiple of 4 bytes on macOS.
-            if (dataSize % 4 != 0) {
-                return DAWN_VALIDATION_ERROR("Copy size must be a multiple of 4 bytes");
-            }
+            DAWN_INVALID_IF(dataSize % 4 != 0, "Copy size (%u) in not a multiple of 4 bytes.",
+                            dataSize);
 
             // SourceOffset and destinationOffset must be multiples of 4 bytes on macOS.
-            if (srcOffset % 4 != 0 || dstOffset % 4 != 0) {
-                return DAWN_VALIDATION_ERROR(
-                    "Source offset and destination offset must be multiples of 4 bytes");
-            }
+            DAWN_INVALID_IF(
+                srcOffset % 4 != 0 || dstOffset % 4 != 0,
+                "Source offset (%u) or destination offsets (%u) was not a multiple of 4 bytes.",
+                srcOffset, dstOffset);
 
             return {};
         }
 
         MaybeError ValidateTextureSampleCountInBufferCopyCommands(const TextureBase* texture) {
-            if (texture->GetSampleCount() > 1) {
-                return DAWN_VALIDATION_ERROR(
-                    "The sample count of textures must be 1 when copying between buffers and "
-                    "textures");
-            }
+            DAWN_INVALID_IF(texture->GetSampleCount() > 1,
+                            "%s sample count (%u) was not 1 when copying to or from a buffer.",
+                            texture, texture->GetSampleCount());
 
             return {};
         }
@@ -73,15 +70,13 @@ namespace dawn_native {
                                                    const bool hasDepthOrStencil) {
             if (hasDepthOrStencil) {
                 // For depth-stencil texture, buffer offset must be a multiple of 4.
-                if (layout.offset % 4 != 0) {
-                    return DAWN_VALIDATION_ERROR(
-                        "offset must be a multiple of 4 for depth/stencil texture.");
-                }
+                DAWN_INVALID_IF(layout.offset % 4 != 0,
+                                "Depth/stencil texture offset (%u) was not a multiple of 4.",
+                                layout.offset);
             } else {
-                if (layout.offset % blockInfo.byteSize != 0) {
-                    return DAWN_VALIDATION_ERROR(
-                        "offset must be a multiple of the texel block byte size.");
-                }
+                DAWN_INVALID_IF(layout.offset % blockInfo.byteSize != 0,
+                                "Offset (%u) was not a multiple of the texel block byte size (%u).",
+                                layout.offset, blockInfo.byteSize);
             }
             return {};
         }
@@ -110,17 +105,13 @@ namespace dawn_native {
 
         MaybeError ValidateAttachmentArrayLayersAndLevelCount(const TextureViewBase* attachment) {
             // Currently we do not support layered rendering.
-            if (attachment->GetLayerCount() > 1) {
-                return DAWN_VALIDATION_ERROR(
-                    "The layer count of the texture view used as attachment cannot be greater than "
-                    "1");
-            }
+            DAWN_INVALID_IF(attachment->GetLayerCount() > 1,
+                            "Layer count (%u) for attachment %s was greater than 1.",
+                            attachment->GetLayerCount(), attachment);
 
-            if (attachment->GetLevelCount() > 1) {
-                return DAWN_VALIDATION_ERROR(
-                    "The mipmap level count of the texture view used as attachment cannot be "
-                    "greater than 1");
-            }
+            DAWN_INVALID_IF(attachment->GetLevelCount() > 1,
+                            "Mipmap level count (%u) for an attachment %s was greater than 1.",
+                            attachment->GetLevelCount(), attachment);
 
             return {};
         }
@@ -136,8 +127,11 @@ namespace dawn_native {
                 *width = attachmentSize.width;
                 *height = attachmentSize.height;
                 DAWN_ASSERT(*width != 0 && *height != 0);
-            } else if (*width != attachmentSize.width || *height != attachmentSize.height) {
-                return DAWN_VALIDATION_ERROR("Attachment size mismatch");
+            } else {
+                DAWN_INVALID_IF(
+                    *width != attachmentSize.width || *height != attachmentSize.height,
+                    "Attachment %s size (%u x %u) did not match prior attachment's size (%u x %u).",
+                    attachment, attachmentSize.width, attachmentSize.height, *width, *height);
             }
 
             return {};
@@ -148,8 +142,12 @@ namespace dawn_native {
             if (*sampleCount == 0) {
                 *sampleCount = colorAttachment->GetTexture()->GetSampleCount();
                 DAWN_ASSERT(*sampleCount != 0);
-            } else if (*sampleCount != colorAttachment->GetTexture()->GetSampleCount()) {
-                return DAWN_VALIDATION_ERROR("Color attachment sample counts mismatch");
+            } else {
+                DAWN_INVALID_IF(
+                    *sampleCount != colorAttachment->GetTexture()->GetSampleCount(),
+                    "Color attachment %s sample count (%u) did not match prior attachment's sample "
+                    "count (%u).",
+                    colorAttachment, colorAttachment->GetTexture()->GetSampleCount(), *sampleCount);
             }
 
             return {};
@@ -167,42 +165,41 @@ namespace dawn_native {
             DAWN_TRY(ValidateCanUseAs(colorAttachment.resolveTarget->GetTexture(),
                                       wgpu::TextureUsage::RenderAttachment));
 
-            if (!attachment->GetTexture()->IsMultisampledTexture()) {
-                return DAWN_VALIDATION_ERROR(
-                    "Cannot set resolve target when the sample count of the color attachment is 1");
-            }
+            DAWN_INVALID_IF(
+                !attachment->GetTexture()->IsMultisampledTexture(),
+                "Resolve target %s was set when color attachment, %s, has a sample count of 1.",
+                resolveTarget, attachment);
 
-            if (resolveTarget->GetTexture()->IsMultisampledTexture()) {
-                return DAWN_VALIDATION_ERROR("Cannot use multisampled texture as resolve target");
-            }
+            DAWN_INVALID_IF(resolveTarget->GetTexture()->IsMultisampledTexture(),
+                            "Resolve target %s has a sample count (%u) greater than 1.",
+                            resolveTarget, resolveTarget->GetTexture()->GetSampleCount());
 
-            if (resolveTarget->GetLayerCount() > 1) {
-                return DAWN_VALIDATION_ERROR(
-                    "The array layer count of the resolve target must be 1");
-            }
+            DAWN_INVALID_IF(resolveTarget->GetLayerCount() > 1,
+                            "Resolve target %s array layer count (%u) was greater than 1.",
+                            resolveTarget, resolveTarget->GetLayerCount());
 
-            if (resolveTarget->GetLevelCount() > 1) {
-                return DAWN_VALIDATION_ERROR("The mip level count of the resolve target must be 1");
-            }
+            DAWN_INVALID_IF(resolveTarget->GetLevelCount() > 1,
+                            "Resolve target %s mip level count (%u) was greater than 1.",
+                            resolveTarget, resolveTarget->GetLevelCount());
 
             const Extent3D& colorTextureSize =
                 attachment->GetTexture()->GetMipLevelVirtualSize(attachment->GetBaseMipLevel());
             const Extent3D& resolveTextureSize =
                 resolveTarget->GetTexture()->GetMipLevelVirtualSize(
                     resolveTarget->GetBaseMipLevel());
-            if (colorTextureSize.width != resolveTextureSize.width ||
-                colorTextureSize.height != resolveTextureSize.height) {
-                return DAWN_VALIDATION_ERROR(
-                    "The size of the resolve target must be the same as the color attachment");
-            }
+            DAWN_INVALID_IF(
+                colorTextureSize.width != resolveTextureSize.width ||
+                    colorTextureSize.height != resolveTextureSize.height,
+                "Resolve target %s size (%u x %u) did not match color attachment %s size "
+                "(%u x %u).",
+                resolveTarget, resolveTextureSize.width, resolveTextureSize.height, attachment,
+                colorTextureSize.width, colorTextureSize.height);
 
             wgpu::TextureFormat resolveTargetFormat = resolveTarget->GetFormat().format;
-            if (resolveTargetFormat != attachment->GetFormat().format) {
-                return DAWN_FORMAT_VALIDATION_ERROR(
-                    "Resolve target %s format (%s) must be the same as the color attachment %s "
-                    "format (%s)",
-                    resolveTarget, resolveTargetFormat, attachment, attachment->GetFormat().format);
-            }
+            DAWN_INVALID_IF(
+                resolveTargetFormat != attachment->GetFormat().format,
+                "Resolve target %s format (%s) did not match color attachment %s format (%s)",
+                resolveTarget, resolveTargetFormat, attachment, attachment->GetFormat().format);
 
             return {};
         }
@@ -218,23 +215,24 @@ namespace dawn_native {
             DAWN_TRY(
                 ValidateCanUseAs(attachment->GetTexture(), wgpu::TextureUsage::RenderAttachment));
 
-            if (!(attachment->GetAspects() & Aspect::Color) ||
-                !attachment->GetFormat().isRenderable) {
-                return DAWN_VALIDATION_ERROR(
-                    "The format of the texture view used as color attachment is not color "
-                    "renderable");
-            }
+            DAWN_INVALID_IF(!(attachment->GetAspects() & Aspect::Color) ||
+                                !attachment->GetFormat().isRenderable,
+                            "Color attachment %s format (%s) is not color renderable.", attachment,
+                            attachment->GetFormat().format);
 
-            DAWN_TRY(ValidateLoadOp(colorAttachment.loadOp));
-            DAWN_TRY(ValidateStoreOp(colorAttachment.storeOp));
+            DAWN_TRY_CONTEXT(ValidateLoadOp(colorAttachment.loadOp),
+                             "validating color attachment %s loadOp", attachment);
+            DAWN_TRY_CONTEXT(ValidateStoreOp(colorAttachment.storeOp),
+                             "validating color attachment %s storeOp", attachment);
 
             if (colorAttachment.loadOp == wgpu::LoadOp::Clear) {
-                if (std::isnan(colorAttachment.clearColor.r) ||
-                    std::isnan(colorAttachment.clearColor.g) ||
-                    std::isnan(colorAttachment.clearColor.b) ||
-                    std::isnan(colorAttachment.clearColor.a)) {
-                    return DAWN_VALIDATION_ERROR("Color clear value cannot contain NaN");
-                }
+                DAWN_INVALID_IF(std::isnan(colorAttachment.clearColor.r) ||
+                                    std::isnan(colorAttachment.clearColor.g) ||
+                                    std::isnan(colorAttachment.clearColor.b) ||
+                                    std::isnan(colorAttachment.clearColor.a),
+                                "Color clear value (r: %f, g: %f, b: %f, a: %f) contained a NaN.",
+                                colorAttachment.clearColor.r, colorAttachment.clearColor.g,
+                                colorAttachment.clearColor.b, colorAttachment.clearColor.a);
             }
 
             DAWN_TRY(ValidateOrSetColorAttachmentSampleCount(attachment, sampleCount));
@@ -261,64 +259,68 @@ namespace dawn_native {
                 ValidateCanUseAs(attachment->GetTexture(), wgpu::TextureUsage::RenderAttachment));
 
             const Format& format = attachment->GetFormat();
-            if (!format.HasDepthOrStencil()) {
-                return DAWN_VALIDATION_ERROR(
-                    "The format of the texture view used as depth stencil attachment is not a "
-                    "depth stencil format");
-            }
-            if (!format.isRenderable) {
-                return DAWN_VALIDATION_ERROR(
-                    "The format of the texture view used as depth stencil attachment is not "
-                    "renderable");
-            }
-            if (attachment->GetAspects() != format.aspects) {
-                // TODO(https://crbug.com/dawn/812): Investigate if this limitation should be added
-                // to the WebGPU spec of lifted from Dawn.
-                return DAWN_VALIDATION_ERROR(
-                    "The texture view used as depth stencil view must encompass all aspects");
-            }
+            DAWN_INVALID_IF(
+                !format.HasDepthOrStencil(),
+                "Depth/stencil attachment %s format (%s) is not a depth stencil format.",
+                attachment, format.format);
+            DAWN_INVALID_IF(!format.isRenderable,
+                            "Depth/stencil attachment %s format (%s) is not renderable.",
+                            attachment, format.format);
+            // TODO(https://crbug.com/dawn/812): Investigate if this limitation should be added
+            // to the WebGPU spec of lifted from Dawn.
+            // TODO: Format Aspects in validation errors
+            DAWN_INVALID_IF(attachment->GetAspects() != format.aspects,
+                            "Depth/stencil attachment %s aspects did not encompass all "
+                            "aspects of the format (%s).",
+                            attachment, format.format);
 
-            DAWN_TRY(ValidateLoadOp(depthStencilAttachment->depthLoadOp));
-            DAWN_TRY(ValidateLoadOp(depthStencilAttachment->stencilLoadOp));
-            DAWN_TRY(ValidateStoreOp(depthStencilAttachment->depthStoreOp));
-            DAWN_TRY(ValidateStoreOp(depthStencilAttachment->stencilStoreOp));
+            DAWN_TRY_CONTEXT(ValidateLoadOp(depthStencilAttachment->depthLoadOp),
+                             "validating depth/stenci attachment %s depthLoadOp", attachment);
+            DAWN_TRY_CONTEXT(ValidateLoadOp(depthStencilAttachment->stencilLoadOp),
+                             "validating depth/stenci attachment %s stencilLoadOp", attachment);
+            DAWN_TRY_CONTEXT(ValidateStoreOp(depthStencilAttachment->depthStoreOp),
+                             "validating depth/stenci attachment %s depthStoreOp", attachment);
+            DAWN_TRY_CONTEXT(ValidateStoreOp(depthStencilAttachment->stencilStoreOp),
+                             "validating depth/stenci attachment %s stencilStoreOp", attachment);
 
-            if (attachment->GetAspects() == (Aspect::Depth | Aspect::Stencil) &&
-                depthStencilAttachment->depthReadOnly != depthStencilAttachment->stencilReadOnly) {
-                return DAWN_VALIDATION_ERROR(
-                    "depthReadOnly and stencilReadOnly must be the same when texture aspect is "
-                    "'all'");
-            }
+            DAWN_INVALID_IF(
+                attachment->GetAspects() == (Aspect::Depth | Aspect::Stencil) &&
+                    depthStencilAttachment->depthReadOnly !=
+                        depthStencilAttachment->stencilReadOnly,
+                "depthReadOnly (%i) and stencilReadOnly (%i) do not match when the depth/stencil "
+                "attachment %s aspect is 'all'",
+                depthStencilAttachment->depthReadOnly, depthStencilAttachment->stencilReadOnly,
+                attachment);
 
-            if (depthStencilAttachment->depthReadOnly &&
-                (depthStencilAttachment->depthLoadOp != wgpu::LoadOp::Load ||
-                 depthStencilAttachment->depthStoreOp != wgpu::StoreOp::Store)) {
-                return DAWN_VALIDATION_ERROR(
-                    "depthLoadOp must be load and depthStoreOp must be store when depthReadOnly "
-                    "is true.");
-            }
+            DAWN_INVALID_IF(
+                depthStencilAttachment->depthReadOnly &&
+                    (depthStencilAttachment->depthLoadOp != wgpu::LoadOp::Load ||
+                     depthStencilAttachment->depthStoreOp != wgpu::StoreOp::Store),
+                "depthLoadOp (%s) must be 'load' and depthStoreOp (%s) must be 'store' when "
+                "depthReadOnly is true.",
+                depthStencilAttachment->depthLoadOp, depthStencilAttachment->depthStoreOp);
 
-            if (depthStencilAttachment->stencilReadOnly &&
-                (depthStencilAttachment->stencilLoadOp != wgpu::LoadOp::Load ||
-                 depthStencilAttachment->stencilStoreOp != wgpu::StoreOp::Store)) {
-                return DAWN_VALIDATION_ERROR(
-                    "stencilLoadOp must be load and stencilStoreOp must be store when "
-                    "stencilReadOnly "
-                    "is true.");
-            }
+            DAWN_INVALID_IF(
+                depthStencilAttachment->stencilReadOnly &&
+                    (depthStencilAttachment->stencilLoadOp != wgpu::LoadOp::Load ||
+                     depthStencilAttachment->stencilStoreOp != wgpu::StoreOp::Store),
+                "stencilLoadOp (%s) must be 'load' and stencilStoreOp (%s) must be 'store' when "
+                "stencilReadOnly is true.",
+                depthStencilAttachment->stencilLoadOp, depthStencilAttachment->stencilStoreOp);
 
-            if (depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear &&
-                std::isnan(depthStencilAttachment->clearDepth)) {
-                return DAWN_VALIDATION_ERROR("Depth clear value cannot be NaN");
-            }
+            DAWN_INVALID_IF(depthStencilAttachment->depthLoadOp == wgpu::LoadOp::Clear &&
+                                std::isnan(depthStencilAttachment->clearDepth),
+                            "clearDepth is NaN");
 
             // *sampleCount == 0 must only happen when there is no color attachment. In that case we
             // do not need to validate the sample count of the depth stencil attachment.
             const uint32_t depthStencilSampleCount = attachment->GetTexture()->GetSampleCount();
             if (*sampleCount != 0) {
-                if (depthStencilSampleCount != *sampleCount) {
-                    return DAWN_VALIDATION_ERROR("Depth stencil attachment sample counts mismatch");
-                }
+                DAWN_INVALID_IF(
+                    depthStencilSampleCount != *sampleCount,
+                    "Depth/stencil attachment %s sample count (%u) does not match the sample count "
+                    "(%u) of the color attachments.",
+                    attachment, depthStencilSampleCount, *sampleCount);
             } else {
                 *sampleCount = depthStencilSampleCount;
             }
@@ -339,27 +341,31 @@ namespace dawn_native {
             }
 
             for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
-                DAWN_TRY(ValidateRenderPassColorAttachment(device, descriptor->colorAttachments[i],
-                                                           width, height, sampleCount));
+                DAWN_TRY_CONTEXT(
+                    ValidateRenderPassColorAttachment(device, descriptor->colorAttachments[i],
+                                                      width, height, sampleCount),
+                    "validating color attachment index %u", i);
             }
 
             if (descriptor->depthStencilAttachment != nullptr) {
-                DAWN_TRY(ValidateRenderPassDepthStencilAttachment(
-                    device, descriptor->depthStencilAttachment, width, height, sampleCount));
+                DAWN_TRY_CONTEXT(
+                    ValidateRenderPassDepthStencilAttachment(
+                        device, descriptor->depthStencilAttachment, width, height, sampleCount),
+                    "validating depth/stencil attachment");
             }
 
             if (descriptor->occlusionQuerySet != nullptr) {
                 DAWN_TRY(device->ValidateObject(descriptor->occlusionQuerySet));
 
-                if (descriptor->occlusionQuerySet->GetQueryType() != wgpu::QueryType::Occlusion) {
-                    return DAWN_VALIDATION_ERROR("The type of query set must be Occlusion");
-                }
+                DAWN_INVALID_IF(
+                    descriptor->occlusionQuerySet->GetQueryType() != wgpu::QueryType::Occlusion,
+                    "Query set %s type (%s) was not Occlusion", descriptor->occlusionQuerySet,
+                    descriptor->occlusionQuerySet->GetQueryType());
             }
 
-            if (descriptor->colorAttachmentCount == 0 &&
-                descriptor->depthStencilAttachment == nullptr) {
-                return DAWN_VALIDATION_ERROR("Cannot use render pass with no attachments.");
-            }
+            DAWN_INVALID_IF(descriptor->colorAttachmentCount == 0 &&
+                                descriptor->depthStencilAttachment == nullptr,
+                            "No color or depth/stencil attachments set.");
 
             return {};
         }
@@ -515,8 +521,9 @@ namespace dawn_native {
             mEncodingContext.TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
                 uint32_t sampleCount = 0;
 
-                DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height,
-                                                      &sampleCount));
+                DAWN_TRY_CONTEXT(
+                    ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount),
+                    "validating render pass %s", descriptor);
 
                 ASSERT(width > 0 && height > 0 && sampleCount > 0);
 

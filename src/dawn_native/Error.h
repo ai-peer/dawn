@@ -95,6 +95,13 @@ namespace dawn_native {
 // was too large or they should free some existing resources.
 #define DAWN_OUT_OF_MEMORY_ERROR(MESSAGE) DAWN_MAKE_ERROR(InternalErrorType::OutOfMemory, MESSAGE)
 
+#define DAWN_INVALID_IF(EXPR, ...)                                                           \
+    if (DAWN_UNLIKELY(EXPR)) {                                                               \
+        return DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__)); \
+    }                                                                                        \
+    for (;;)                                                                                 \
+    break
+
 #define DAWN_CONCAT1(x, y) x##y
 #define DAWN_CONCAT2(x, y) DAWN_CONCAT1(x, y)
 #define DAWN_LOCAL_VAR DAWN_CONCAT2(_localVar, __LINE__)
