@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15ba04a5_eb2ae2de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T13:17:07Z",
+      "side": 1,
+      "message": "LGTM\n\nFYI Loko, when doing device.Destroy we\u0027ll have to be careful of ongoing asynchronous work that might still want to access the device. We could for example wait/cancel all the tasks (after marking the device as destroyed) before touching the mDevice pointers.",
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f972b07c_fda83498",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T13:17:07Z",
+      "side": 1,
+      "message": "nit: Please assign to an issue instead of a person",
+      "range": {
+        "startLine": 1576,
+        "startChar": 24,
+        "endLine": 1576,
+        "endChar": 45
+      },
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9acd305_37dc1e39",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T13:17:07Z",
+      "side": 1,
+      "message": "nit: Maybe this should be pure virtual instead since all backends implement it (except null, but we can add a fake implementation there).",
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
