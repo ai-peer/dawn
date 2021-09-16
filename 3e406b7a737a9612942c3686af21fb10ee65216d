@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ab17bf5_cb9053f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T19:06:04Z",
+      "side": 1,
+      "message": "LGTM, can we also have validation tests for it?",
+      "revId": "3e406b7a737a9612942c3686af21fb10ee65216d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e237625_5563d9fb",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 885,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T19:06:04Z",
+      "side": 1,
+      "message": "did you mean bufferOffset? I don\u0027t see a destinationOffset defined in this function. I think this validation is already covered inside ValidateWriteBuffer though. If it\u0027s not, it should also be in the if (validation enabled) block",
+      "range": {
+        "startLine": 885,
+        "startChar": 55,
+        "endLine": 885,
+        "endChar": 72
+      },
+      "revId": "3e406b7a737a9612942c3686af21fb10ee65216d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "948b5257_0fa0bcf5",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T19:06:04Z",
+      "side": 1,
+      "message": "this should happen instead when validating Queue::Submit if we add the destination buffer into mTopLevelBuffers at encoding time.",
+      "range": {
+        "startLine": 1001,
+        "startChar": 40,
+        "endLine": 1001,
+        "endChar": 64
+      },
+      "revId": "3e406b7a737a9612942c3686af21fb10ee65216d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "500773ba_faf8eb56",
+        "filename": "src/dawn_native/metal/CommandBufferMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 1010,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T19:06:04Z",
+      "side": 1,
+      "message": "we shouldn\u0027t need to touch the serials here. It\u0027s needed for Queue::WriteBuffer because it enqueues work to the pending command context but! those commands might never be submitted. So there, we use this mechanism to indicate that there\u0027s still some work that is incomplete. However, here, we\u0027re already just about to submit work to the queue, so we don\u0027t need to change the future serial.",
+      "range": {
+        "startLine": 1010,
+        "startChar": 0,
+        "endLine": 1010,
+        "endChar": 79
+      },
+      "revId": "3e406b7a737a9612942c3686af21fb10ee65216d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
