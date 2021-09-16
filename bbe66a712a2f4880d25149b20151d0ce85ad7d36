@@ -193,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a01f336_11dda29d",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 2001,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T23:33:07Z",
+      "side": 1,
+      "message": "Added it back because it turns out we have a few pieces of code using it already.",
+      "parentUuid": "2443d746_165aa9c7",
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dd8abaf_50eb5a82",
@@ -336,6 +354,30 @@
       "side": 1,
       "message": "Yes because there\u0027s already an empty line inside the for loop. This removes the extra one.",
       "parentUuid": "49725183_b6a79e35",
+      "range": {
+        "startLine": 100,
+        "startChar": 10,
+        "endLine": 100,
+        "endChar": 11
+      },
+      "revId": "bbe66a712a2f4880d25149b20151d0ce85ad7d36",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61771106_e7b289d7",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T23:33:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ffc4ec28_353f0c75",
       "range": {
         "startLine": 100,
         "startChar": 10,
