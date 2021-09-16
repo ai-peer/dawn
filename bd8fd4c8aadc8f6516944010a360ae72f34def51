@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e8f56e6_f27189a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T20:20:38Z",
+      "side": 1,
+      "message": "One last precursor CL for DII stuff",
+      "revId": "bd8fd4c8aadc8f6516944010a360ae72f34def51",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
