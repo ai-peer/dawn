@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5a6244_dde74112",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:51:23Z",
+      "side": 1,
+      "message": "We need a \"WGPUChainedStructOut\" too.. :( ",
+      "revId": "bff1043be2a3072fc2da900407ae3e58a3f54242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d449ff9c_91b9236c",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:51:23Z",
+      "side": 1,
+      "message": "I guess I should move these to be alphabetical too.",
+      "revId": "bff1043be2a3072fc2da900407ae3e58a3f54242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
