@@ -125,6 +125,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ee1f831_73b07f93",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T17:58:30Z",
+      "side": 1,
+      "message": "FWIW I have a vague recollection that we shouldn\u0027t expose pointer addresses to the webpage because they can be used to defeat ASLR. I don\u0027t know if you still have that in the latest CS.\n\nMaybe we could use some kind of serial number instead?",
+      "parentUuid": "8252946c_35aff89c",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10d6ddfc_92b444f2",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
