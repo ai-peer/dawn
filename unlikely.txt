@@ -1,0 +1,146 @@
+// New error formatting with unlikely check:
+
+[==========] Running 17 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 17 tests from DrawCallPerf
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER= 127.399760 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER= 126.943680 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER= 127.896714 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER= 127.207824 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER= 127.559719 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER= 126.584441 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER (6067 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers= 363.369085 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers= 357.987991 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers= 366.137598 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers= 353.632023 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers= 370.719585 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers= 359.709757 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers (6168 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer= 187.261281 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer= 185.804561 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer= 188.716232 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer= 185.861821 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer= 188.625968 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer= 185.681515 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer (6069 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups= 480.944253 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups= 479.476341 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups= 481.832615 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups= 479.025048 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups= 482.046504 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups= 480.359435 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups (6089 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup= 279.459882 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup= 276.492195 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup= 277.568838 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup= 274.922656 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup= 278.516985 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup= 275.812998 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup (6002 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups= 815.688374 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups= 803.397073 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups= 833.019837 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups= 805.298943 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups= 822.869187 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups= 803.149024 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_NoReuseBindGroups (6099 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups= 314.007452 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups= 309.351330 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups= 323.685436 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups= 310.061688 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups= 318.189425 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups= 307.713111 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_RedundantPipeline_RedundantBindGroups (6130 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups= 880.900792 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups= 876.897799 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups= 893.867782 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups= 891.431690 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups= 906.971655 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups= 905.179401 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups (6142 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup= 708.980228 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup= 706.497297 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup= 710.093812 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup= 707.009104 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup= 705.831579 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup= 703.650071 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup (6021 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle= 220.280341 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle= 216.547706 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle= 227.582416 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle= 219.813761 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle= 218.938816 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle= 216.400808 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleVertexBuffers_RenderBundle (6121 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle= 91.902546 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle= 89.995367 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle= 91.783683 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle= 89.757970 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle= 91.847858 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle= 89.775786 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicVertexBuffer_RenderBundle (6027 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle= 278.604201 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle= 275.542676 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle= 276.075152 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle= 272.966667 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle= 276.579989 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle= 273.458872 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_RenderBundle (6068 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle= 120.770531 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle= 118.903064 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle= 120.855414 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle= 118.771257 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle= 121.559557 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle= 119.540492 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_RenderBundle (6024 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle= 633.593481 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle= 629.892025 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle= 629.874747 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle= 626.309873 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle= 634.242342 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle= 630.523797 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_MultipleBindGroups_RenderBundle (6067 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle= 476.026746 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle= 473.668708 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle= 481.807751 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle= 479.487703 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle= 472.481196 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle= 470.351770 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicPipeline_DynamicBindGroup_RenderBundle (6015 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData= 2418.712634 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData= 2414.362097 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData= 2477.235484 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData= 2473.106720 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData= 2456.743280 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData= 2452.506452 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_MultipleBindGroups_DynamicData (5713 ms)
+[ RUN      ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData= 321.134849 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData= 320.740935 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData= 322.395676 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData= 320.617040 ns
+Info: *RESULT DrawCallPerf.wall_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData= 323.363133 ns
+Info: *RESULT DrawCallPerf.cpu_time: Run_D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData= 322.970115 ns
+[       OK ] DrawCallPerf.Run/D3D12_NVIDIA_GeForce_GTX_1660_SUPER_DynamicBindGroup_DynamicData (6049 ms)
+[----------] 17 tests from DrawCallPerf (102883 ms total)
+
+[----------] Global test environment tear-down
+[==========] 17 tests from 1 test suite ran. (102996 ms total)
+[  PASSED  ] 17 tests.
