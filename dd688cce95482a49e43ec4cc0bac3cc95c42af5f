@@ -18,6 +18,207 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "883a30bc_91e78f2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "did not get to looking at the tests yet, but LGTM overall",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7164480_d0a949f5",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "why can\u0027t this be an array of structs? it would be nice to have named members instead of needing to remember that ex. firstIndex is at index 2. If we can\u0027t have a struct, maybe we can declare the offsets for indexCount, instanceCount, etc. as constants in the shader.",
+      "range": {
+        "startLine": 49,
+        "startChar": 28,
+        "endLine": 49,
+        "endChar": 31
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e20788_0104e036",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "unit: may read slighly better as \n\nbatch.numIndexBufferElementsHigh \u003d\u003d 0u \u0026\u0026 \nfirstIndex \u003e batch.numIndexBufferElementsLow\n\ni.e. no_high_bits \u0026\u0026 greater_than_low_bits",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 97,
+        "endChar": 58
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d45118b_0a6eda84",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "naming nit: I think these could actually be called \"Batches\" and we can put validation of multiple batches inside a single compute pass",
+      "range": {
+        "startLine": 194,
+        "startChar": 17,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0931f45_8a28c7eb",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "I think this can be clientIndirectSize instead of alignedSize. This indirect command only needs |clientIndirectSize| bytes. It\u0027s the *next* indirect command that needs the base offset to be aligned to kMinStorageBufferOffsetAlignment",
+      "range": {
+        "startLine": 207,
+        "startChar": 48,
+        "endLine": 207,
+        "endChar": 60
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60029c91_48796b49",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 211,
+        "startChar": 81,
+        "endLine": 211,
+        "endChar": 92
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4df43be_38139ca1",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "so maybe the other above we can just use clientIndirectSize, and only here perform the alignment.",
+      "range": {
+        "startLine": 216,
+        "startChar": 16,
+        "endLine": 216,
+        "endChar": 56
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72762fd_9e650f88",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "it\u0027s pretty hard to understand why we cast around like this when the struct definition in the shader is far away. Can we have a C++ struct that looks just like the WGSL one in parallel? I think the draws can be stored in a std::unique_ptr as well - it doesn\u0027t look like resizing is needed here.\n\nSomething like this, which we can then placement-allocate into a std::unique_ptr allocation.\n\n  struct BatchInfo {\n    uint64_t numElements;\n    uint32_t numDraws;\n    uint32_t indirectOffsets[];\n  };",
+      "range": {
+        "startLine": 218,
+        "startChar": 16,
+        "endLine": 221,
+        "endChar": 80
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ce65ac8_c6936f8d",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "what\u0027s the right shift for?",
+      "range": {
+        "startLine": 226,
+        "startChar": 67,
+        "endLine": 227,
+        "endChar": 26
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3623b95f_bf1e3f71",
@@ -31,6 +232,80 @@
       "writtenOn": "2021-09-16T15:36:37Z",
       "side": 1,
       "message": "We\u0027re starting and ending a lot of compute passes potentially, is there a way to have them merged? (it means the scratch buffer needs to be big enough for all of them). This will eventually allow us to make all the validation dispatches run in parallel. (right now all dispatches will be seralized if we detect a data dependency but we\u0027ll likely have a WebGPU extension for controlling memory barriers inside the compute passes at some point).",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe97c92_50eec62e",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "do we needed to consider newOffset aligned down to kMinStorageBufferOffsetAlignment instead?",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9f3fd9_e748d697",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "What about when newOffset is between minOffset and maxffset; can\u0027t we simply push it into the vector?",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e89f4c35_539ce358",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "comment: merged passes fit within the limits",
+      "range": {
+        "startLine": 102,
+        "startChar": 11,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f9ee789_a057d81d",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T20:06:16Z",
+      "side": 1,
+      "message": "UNREACHABLE() ?",
       "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
