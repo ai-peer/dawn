@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8252946c_35aff89c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-16T16:05:14Z",
+      "side": 1,
+      "message": "Having a __builtin_reached_unlikely would be nice. In the absence of that, I would really like to either explicitly include the DAWN_UNLIKELYs on the validated conditions. Relying on PGO doesn\u0027t sound like the most reliable solution when we know with certainty that we want these conditions to be tagged as unlikely. Really though, as said previously, we should do a performance test to help evaluate.",
+      "parentUuid": "49b6c3c6_f9db90f1",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10d6ddfc_92b444f2",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
