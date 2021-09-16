@@ -145,6 +145,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2336e8a3_e5be4f26",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Thanks for the pointers here, makes tons of sense.\n\nWhat we do now is have a single validation pass for each unique tuple of (indirectBuffer, indexBufferNumElements). Per the above comment, this pass may also be chunked into multiple passes in the rare event that the number of draw calls or span of indirect offsets used is massive enough (on the order of millions in both cases).\n\nFor each pass, we bind the minimum necessary span of the indirect buffer containing all client\u0027s parameter blocks, as well as a buffer populated from host memory at encoding time, containing all offsets used from that buffer as well as the number of addressable index buffer elements at the time of the draw calls. Finally we also bind our validation output buffer as writable storage.\n\nThe validated parameters are copied out of the client\u0027s indirect buffer from their original offset and packed tightly into the output buffer on success. On failure the corresponding output bytes are instead zeroed out.",
+      "parentUuid": "169cf165_fa559454",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 77
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f0d72e3_3ea61922",
         "filename": "src/dawn_native/ValidationScratchBuffer.cpp",
         "patchSetId": 4

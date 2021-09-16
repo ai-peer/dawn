@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aa1ece9_ea7620da",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e54188_92905ef9",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "560a7e32_a0848c03",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "nits: we should write the coding style somewhere. In general we avoid putting implementation in the .h even for simpler getters, assuming LTCG will inline them.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2475cccb_7e7ea31c",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done - would it make sense at some point to adopt the Google C++ style guide? Are there strong reasons not to do that?",
+      "parentUuid": "560a7e32_a0848c03",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "379cc542_3701fe00",
+        "filename": "src/dawn_native/CommandAllocator.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "626ab6b5_93924bf7",
+      "range": {
+        "startLine": 61,
+        "startChar": 13,
+        "endLine": 61,
+        "endChar": 18
+      },
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e812582d_c53d9c29",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5dbe0206_8f1ed9e7",
+        "filename": "src/dawn_native/CommandAllocator.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e812582d_c53d9c29",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38609181_cba3d12b",
@@ -88,6 +166,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "FYI, optional given the larger comments. There\u0027s facility for using the CommandAllocator for inline data. It might help with locality slightly for this command.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "addb8245_f430ec51",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done - I\u0027ve also split this into a separate CL introducing a proper WriteBufferInternal command buffer command with its own basic test coverage.",
+      "parentUuid": "38609181_cba3d12b",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +207,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "27c49933_91193bba",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Still giving this issue some thought, but I wanted to send out the rest of the changes for another pass first.",
+      "parentUuid": "af1d1631_92fe797d",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40ad0f71_eb094676",
         "filename": "src/dawn_native/EncodingContext.cpp",
         "patchSetId": 12
@@ -122,6 +236,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "For D3D12 emulation of first_instance we\u0027ll need to do this unconditionally.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df335da_837b3843",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "40ad0f71_eb094676",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +294,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0a2fea05_bfaf9712",
+        "filename": "src/dawn_native/InternalPipelineStore.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "I guess we could rename it. FWIW the current name made enough sense to me as a general object store in support of pipeline operations, given that it was already storing more than just pipeline objects.",
+      "parentUuid": "6986ff8c_b4b197e8",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e3120d2a_8e16f22d",
         "filename": "src/dawn_native/RenderValidationEncoder.cpp",
         "patchSetId": 12
@@ -173,6 +323,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "Note: in a follow up or as a longer term TODO we should have some kind of reporting if some validation was hit so that we can warn developers. Otherwise it will be difficult for them to figure out what happened when a draw gets silently dropped.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff66f0f_2c5bfa84",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Ack, filed a bug and added a TODO",
+      "parentUuid": "e3120d2a_8e16f22d",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +362,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf7d3009_b90a1900",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efa1be7d_55b3bd57",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1959fdb8_da4831a9",
@@ -207,6 +393,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "If the number of draws isn\u0027t a multiple of the workgroup_size.x then we\u0027ll access buffer out of bounds and risk being incorrect. We could pass the number of draws as an argument in a uniform buffer to early-out when this is the case.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48f4b20f_b31e6c1b",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "The buffer was padded out to the workgroup size to avoid that issue, but this is no longer relevent. I just early-out instead.",
+      "parentUuid": "1959fdb8_da4831a9",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +432,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6e4d501_ec3269ff",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done, changed to no-op to match firstInstance validation behavior.",
+      "parentUuid": "ea1392db_c450620b",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30d026e5_6683d7b3",
@@ -241,6 +463,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "Note, but might not matter. We have limits for the maxStorageBufferBindingSize and maxDispatchDimensions for x so for REALLY LARGE amounts of drawIndexedIndirect (128MB / size of per drawcall data, or 64 * 64k) we might have to chunk.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb57f5d_9d078c10",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Since it seems like a low-priority use case, I opted for a relatively simple approach of chunking into multiple validation passes if the number of draws is large enough.\n\nWe also split into multiple passes if the span of bytes used from an indirect buffer is wider than the max allowed storage binding size.\n\nThe logic deciding when and how to split is self-contained in RenderValidationMetadata as draw calls are accumulated.",
+      "parentUuid": "30d026e5_6683d7b3",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -262,6 +502,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1a51c8_7bace2b4",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "047d142e_160babac",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c31b40_510a2933",
@@ -275,6 +533,24 @@
       "writtenOn": "2021-09-09T16:40:01Z",
       "side": 1,
       "message": "WriteBuffer is supposed to happen immediately in the queue: it gets some staging allocation, copies the data into it then records the buffer-to-buffer copy in the \"pending command list\". However it\u0027s not clear what the pending command list is here. It might happen to work but it\u0027s very non-obvious so imho it we should directly get staging and copy the logic from the CopyBufferToBuffer here as well. Alternatively we can change the RenderPassValidationEncoder to use a CopyBufferToBuffer instead. You can allocate a buffer mapped, write to it, unmap then schedule copies from it.",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a081862_78a7cbc3",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T01:55:00Z",
+      "side": 1,
+      "message": "Makes sense, done (in the new WriteBufferInternal CL)",
+      "parentUuid": "87c31b40_510a2933",
       "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
