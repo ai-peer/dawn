@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f193ded0_5e76b4df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-16T20:16:59Z",
+      "side": 1,
+      "message": "PTAL! When I wrote this CL, it got us to fully autogenerating the Emscripten stuff and all but one difference in the upstream header. Unfortunately not the case anymore due to new stuff, but this is most of it.",
+      "revId": "c0e6efc7de3fda73800dc6be31d553480db3c675",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
