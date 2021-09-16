@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fae1a05_926cfc4f",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 888,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T18:44:50Z",
+      "side": 1,
+      "message": "#3 Done",
+      "parentUuid": "3f44865f_ab435625",
+      "revId": "f64ed75fdb330d39051229540f5ea3889244b82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82a84492_07efbce0",
@@ -49,6 +67,30 @@
       "writtenOn": "2021-09-14T21:38:49Z",
       "side": 1,
       "message": "can we factor QueueBase::WriteBufferImpl so we can reuse it in all the backends?\n\nthat probably will require giving commandContext a CommandRecordingContextBase so we can have the frontend record into the current commandContext instead of device-\u003eGetPendingCommandContext()",
+      "range": {
+        "startLine": 996,
+        "startChar": 20,
+        "endLine": 1011,
+        "endChar": 56
+      },
+      "revId": "f64ed75fdb330d39051229540f5ea3889244b82c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a08b660_e7a996b1",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1011,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-16T18:44:50Z",
+      "side": 1,
+      "message": "WDYT about tackling this as a follow-up? Doing this well seems somewhat more involved since with a CommandRecordingContextBase it might be cleaner to rework other bits (e.g. CopyFromStagingToBuffer) at the same time.",
+      "parentUuid": "82a84492_07efbce0",
       "range": {
         "startLine": 996,
         "startChar": 20,
