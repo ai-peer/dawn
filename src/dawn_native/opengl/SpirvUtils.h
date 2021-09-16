@@ -23,8 +23,6 @@
 #include "dawn_native/VertexFormat.h"
 #include "dawn_native/dawn_platform.h"
 
-#include <spirv_cross.hpp>
-
 namespace dawn_native {
 
     // Returns the spirv_cross equivalent for this shader stage and vice-versa.
