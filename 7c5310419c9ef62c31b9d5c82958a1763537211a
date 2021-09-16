@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b761bb68_c388f53a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-16T20:41:53Z",
+      "side": 1,
+      "message": "I took those out of the latest patches. It felt like a potential security issue AND I found that it impacted readability negatively. At this point my thinking is that we should just lean in to having developers label their objects as much as possible for the debugging benefits.\n\n\u003e I would really like to either explicitly include the DAWN_UNLIKELYs on the validated conditions\n\nI have a variant of this patch that I\u0027m going to upload as soon as I sort out some internet issues that does this, and it\u0027s not as awkward for developers as I might have thought. Plus some rudimentary benchmarking with dawn_perf_tests appears to show that performance-wise it\u0027s at least on par and slightly better than the current ToT.",
+      "parentUuid": "3ee1f831_73b07f93",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "10d6ddfc_92b444f2",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1
