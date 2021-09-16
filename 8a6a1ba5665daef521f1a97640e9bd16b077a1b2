@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f7d9fd8_782af132",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T21:25:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8a6a1ba5665daef521f1a97640e9bd16b077a1b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de513f8_7ce87c02",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 960,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-16T21:25:06Z",
+      "side": 1,
+      "message": "This is going to be a difficult change to land because the callback type is used in a bunch of places.",
+      "revId": "8a6a1ba5665daef521f1a97640e9bd16b077a1b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
