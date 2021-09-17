@@ -176,6 +176,9 @@ namespace dawn_native {
 
             Extent3D maxExtent;
             switch (descriptor->dimension) {
+                case wgpu::TextureDimension::e1D:
+                    maxExtent = {kMaxTextureDimension1D, 1, 1};
+                    break;
                 case wgpu::TextureDimension::e2D:
                     maxExtent = {kMaxTextureDimension2D, kMaxTextureDimension2D,
                                  kMaxTextureArrayLayers};
@@ -184,7 +187,6 @@ namespace dawn_native {
                     maxExtent = {kMaxTextureDimension3D, kMaxTextureDimension3D,
                                  kMaxTextureDimension3D};
                     break;
-                case wgpu::TextureDimension::e1D:
                 default:
                     UNREACHABLE();
             }
@@ -261,13 +263,17 @@ namespace dawn_native {
         const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
         FindInChain(descriptor->nextInChain, &internalUsageDesc);
 
-        if (descriptor->dimension == wgpu::TextureDimension::e1D) {
-            return DAWN_VALIDATION_ERROR("1D textures aren't supported (yet).");
-        }
-
         if (internalUsageDesc != nullptr &&
             !device->IsExtensionEnabled(Extension::DawnInternalUsages)) {
             return DAWN_VALIDATION_ERROR("The dawn-internal-usages feature is not enabled");
+        }
+
+        // Support for 1D textures is not complete so they are currently unsafe to use.
+        if (device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) &&
+            descriptor->dimension == wgpu::TextureDimension::e1D) {
+            return DAWN_VALIDATION_ERROR(
+                "1D textures are disallowed because they are only partially implemented. See "
+                "https://crbug.com/dawn/814");
         }
 
         const Format* format;
@@ -508,8 +514,6 @@ namespace dawn_native {
     }
     uint32_t TextureBase::GetArrayLayers() const {
         ASSERT(!IsError());
-        // TODO(crbug.com/dawn/814): Update for 1D textures when they are supported.
-        ASSERT(mDimension != wgpu::TextureDimension::e1D);
         if (mDimension == wgpu::TextureDimension::e3D) {
             return 1;
         }
