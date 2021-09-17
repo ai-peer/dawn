@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn_native/PipelineLayout.h"
+#include <sstream>
 
 #include "common/Assert.h"
 #include "common/BitSetIterator.h"
@@ -386,6 +387,17 @@ namespace dawn_native {
         }
 
         return true;
+    }
+
+    void PipelineLayoutBase::SerializationFunc::Serialize(std::stringstream& dest,
+                                                          const PipelineLayoutBase* src) {
+        dest << "(PipelineLayoutBase";
+        for (BindGroupIndex group : IterateBitSet(src->mMask)) {
+            const BindGroupLayoutBase* bgl = src->GetBindGroupLayout(group);
+            dest << " " << uint32_t(group) << "=";
+            BindGroupLayoutBase::SerializationFunc::Serialize(dest, bgl);
+        }
+        dest << ")";
     }
 
 }  // namespace dawn_native

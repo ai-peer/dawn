@@ -25,6 +25,7 @@
 #include <algorithm>
 #include <functional>
 #include <set>
+#include <sstream>
 
 namespace dawn_native {
 
@@ -521,6 +522,51 @@ namespace dawn_native {
         return {{bufferData, GetBufferCount()},
                 {bindings, GetBindingCount()},
                 {unverifiedBufferSizes, mBindingCounts.unverifiedBufferCount}};
+    }
+
+    void BindGroupLayoutBase::SerializationFunc::Serialize(std::stringstream& dest,
+                                                           const BindGroupLayoutBase* src) {
+        dest << "(BindGroupLayout";
+        for (BindingIndex index{0}; index < src->GetBindingCount(); index++) {
+            const BindingInfo& bindingInfo = src->GetBindingInfo(index);
+            dest << " (BindingInfo";
+            dest << " binding=" << uint32_t(bindingInfo.binding);
+            dest << " visibility=" << uint32_t(bindingInfo.visibility);
+            switch (bindingInfo.bindingType) {
+                case BindingInfoType::Buffer:
+                    dest << " (Buffer";
+                    dest << " type=" << uint32_t(bindingInfo.buffer.type);
+                    dest << " hasDynamicOffset=" << bindingInfo.buffer.hasDynamicOffset;
+                    dest << " minBindingSize=" << bindingInfo.buffer.minBindingSize;
+                    dest << ")";
+                    break;
+                case BindingInfoType::Sampler:
+                    dest << " (Sampler";
+                    dest << " type=" << uint32_t(bindingInfo.sampler.type);
+                    dest << ")";
+                    break;
+                case BindingInfoType::Texture:
+                    dest << " (Texture";
+                    dest << " sampleType=" << uint32_t(bindingInfo.texture.sampleType);
+                    dest << " viewDimension=" << uint32_t(bindingInfo.texture.viewDimension);
+                    dest << " multisampled=" << bindingInfo.texture.multisampled;
+                    dest << ")";
+                    break;
+                case BindingInfoType::StorageTexture:
+                    dest << " (StorageTexture";
+                    dest << " access=" << uint32_t(bindingInfo.storageTexture.access);
+                    dest << " format=" << uint32_t(bindingInfo.storageTexture.format);
+                    dest << " viewDimension=" << uint32_t(bindingInfo.storageTexture.viewDimension);
+                    dest << ")";
+                    break;
+                case BindingInfoType::ExternalTexture:
+                    dest << " (ExternalTexture)";
+                    break;
+            }
+
+            dest << ")";
+        }
+        dest << ")";
     }
 
 }  // namespace dawn_native

@@ -74,6 +74,10 @@ namespace dawn_native {
             bool operator()(const PipelineLayoutBase* a, const PipelineLayoutBase* b) const;
         };
 
+        struct SerializationFunc {
+            static void Serialize(std::stringstream& dest, const PipelineLayoutBase* src);
+        };
+
       protected:
         PipelineLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 

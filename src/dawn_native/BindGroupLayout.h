@@ -106,6 +106,10 @@ namespace dawn_native {
 
         BindingDataPointers ComputeBindingDataPointers(void* dataStart) const;
 
+        struct SerializationFunc {
+            static void Serialize(std::stringstream& dest, const BindGroupLayoutBase* src);
+        };
+
       protected:
         template <typename BindGroup>
         SlabAllocator<BindGroup> MakeFrontendBindGroupAllocator(size_t size) {
