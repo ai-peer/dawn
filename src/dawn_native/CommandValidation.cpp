@@ -268,12 +268,6 @@ namespace dawn::native {
         const TextureBase* texture = textureCopy.texture;
         DAWN_TRY(device->ValidateObject(texture));
 
-        // TODO(https://crbug.com/dawn/814): Disallow 1D texture copies until they are implemented.
-        DAWN_INVALID_IF(texture->GetDimension() == wgpu::TextureDimension::e1D,
-                        "%s is used in a copy and has dimension %s. Copies with %s aren't "
-                        "implemented (yet) and are disallowed. See https://crbug.com/dawn/814.",
-                        texture, wgpu::TextureDimension::e1D, wgpu::TextureDimension::e1D);
-
         DAWN_INVALID_IF(textureCopy.mipLevel >= texture->GetNumMipLevels(),
                         "MipLevel (%u) is greater than the number of mip levels (%u) in %s.",
                         textureCopy.mipLevel, texture->GetNumMipLevels(), texture);
@@ -305,8 +299,6 @@ namespace dawn::native {
                                         const ImageCopyTexture& textureCopy,
                                         const Extent3D& copySize) {
         const TextureBase* texture = textureCopy.texture;
-
-        ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
 
         // Validation for the copy being in-bounds:
         Extent3D mipSize = texture->GetMipLevelPhysicalSize(textureCopy.mipLevel);
