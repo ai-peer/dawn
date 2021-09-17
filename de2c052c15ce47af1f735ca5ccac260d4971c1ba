@@ -16,6 +16,23 @@
       "message": "PTAL. I thought about making this a Toggle, but that\u0027s a device-level concept. And, today we don\u0027t have an AdapterDescriptor that the toggle could even go in.",
       "revId": "de2c052c15ce47af1f735ca5ccac260d4971c1ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e21b387_19e9147f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:21:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "de2c052c15ce47af1f735ca5ccac260d4971c1ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
