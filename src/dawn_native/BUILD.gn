@@ -347,6 +347,7 @@ source_set("dawn_native_sources") {
   # WinPIX should be added as third party tools and linked statically
 
   if (dawn_enable_d3d12) {
+    public_deps += [ "${dawn_root}/third_party/mesa:spirv_to_dxil_headers" ]
     libs += [ "dxguid.lib" ]
     sources += [
       "d3d12/AdapterD3D12.cpp",
