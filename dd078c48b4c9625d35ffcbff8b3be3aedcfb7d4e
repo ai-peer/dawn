@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607efafd_e3c1d511",
+        "filename": "dawn.json",
+        "patchSetId": 14
+      },
+      "lineNbr": 2040,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T00:19:14Z",
+      "side": 1,
+      "message": "I realized doing this created a hole in the format table (Format.cpp). kKnownFormatCount says \"Asserts in BuildFormatTable ensure that this is the exact number of known format\" but I\u0027m not seeing any assert fail due to this hole.\n\nIs it OK to have a hole or should I un-tag depth16unorm and add stub support for it (like we have for stencil8)?",
+      "revId": "dd078c48b4c9625d35ffcbff8b3be3aedcfb7d4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
