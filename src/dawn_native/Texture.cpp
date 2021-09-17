@@ -181,6 +181,9 @@ namespace dawn_native {
             const CombinedLimits& limits = device->GetLimits();
             Extent3D maxExtent;
             switch (descriptor->dimension) {
+                case wgpu::TextureDimension::e1D:
+                    maxExtent = {limits.v1.maxTextureDimension1D, 1, 1};
+                    break;
                 case wgpu::TextureDimension::e2D:
                     maxExtent = {limits.v1.maxTextureDimension2D, limits.v1.maxTextureDimension2D,
                                  limits.v1.maxTextureArrayLayers};
@@ -189,7 +192,6 @@ namespace dawn_native {
                     maxExtent = {limits.v1.maxTextureDimension3D, limits.v1.maxTextureDimension3D,
                                  limits.v1.maxTextureDimension3D};
                     break;
-                case wgpu::TextureDimension::e1D:
                 default:
                     UNREACHABLE();
             }
@@ -271,12 +273,17 @@ namespace dawn_native {
         const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
         FindInChain(descriptor->nextInChain, &internalUsageDesc);
 
-        DAWN_INVALID_IF(descriptor->dimension == wgpu::TextureDimension::e1D,
-                        "1D textures aren't supported (yet).");
-
         DAWN_INVALID_IF(
             internalUsageDesc != nullptr && !device->IsFeatureEnabled(Feature::DawnInternalUsages),
             "The dawn-internal-usages feature is not enabled");
+
+        // Support for 1D textures is not complete so they are currently unsafe to use.
+        DAWN_INVALID_IF(
+            device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) &&
+                descriptor->dimension == wgpu::TextureDimension::e1D,
+            "Texture with dimension %s are disallowed because they are partially implemented. See "
+            "https://crbug.com/dawn/814",
+            wgpu::TextureDimension::e1D);
 
         const Format* format;
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
@@ -526,8 +533,6 @@ namespace dawn_native {
     }
     uint32_t TextureBase::GetArrayLayers() const {
         ASSERT(!IsError());
-        // TODO(crbug.com/dawn/814): Update for 1D textures when they are supported.
-        ASSERT(mDimension != wgpu::TextureDimension::e1D);
         if (mDimension == wgpu::TextureDimension::e3D) {
             return 1;
         }
