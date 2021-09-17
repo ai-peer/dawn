@@ -50,6 +50,41 @@
       "message": "Once this is CR+2\u0027d, this and the next 2 CLs should be ready to land. Can that be done with \"Submit including parents\" or do we need to land each one separately?",
       "revId": "4e5a24390cedd94d323c99910a58ae5159bf4e80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47224cb_238b3876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:20:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4e5a24390cedd94d323c99910a58ae5159bf4e80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9d5b274_0be3a322",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:20:13Z",
+      "side": 1,
+      "message": "I usually land each thing separately to make sure all intermediate commits pass CQ but no strong opinion",
+      "parentUuid": "0cda3d3f_eaa77710",
+      "revId": "4e5a24390cedd94d323c99910a58ae5159bf4e80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
