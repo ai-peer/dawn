@@ -612,6 +612,21 @@ namespace dawn_native { namespace metal {
         for (const auto& copyInfo : splitCopies) {
             uint64_t bufferOffset = copyInfo.bufferOffset;
             switch (texture->GetDimension()) {
+                case wgpu::TextureDimension::e1D: {
+                    ASSERT(copyInfo.copyExtent.depthOrArrayLayers == 1);
+                    [commandContext->EnsureBlit()
+                             copyFromBuffer:mtlBuffer
+                               sourceOffset:bufferOffset
+                          sourceBytesPerRow:copyInfo.bytesPerRow
+                        sourceBytesPerImage:copyInfo.bytesPerImage
+                                 sourceSize:MTLSizeMake(copyInfo.copyExtent.width, 1, 1)
+                                  toTexture:texture->GetMTLTexture()
+                           destinationSlice:0
+                           destinationLevel:mipLevel
+                          destinationOrigin:MTLOriginMake(copyInfo.textureOrigin.x, 0, 0)
+                                    options:blitOption];
+                    break;
+                }
                 case wgpu::TextureDimension::e2D: {
                     const MTLOrigin textureOrigin =
                         MTLOriginMake(copyInfo.textureOrigin.x, copyInfo.textureOrigin.y, 0);
@@ -653,8 +668,6 @@ namespace dawn_native { namespace metal {
                                     options:blitOption];
                     break;
                 }
-                case wgpu::TextureDimension::e1D:
-                    UNREACHABLE();
             }
         }
     }
