@@ -33,6 +33,24 @@
       "message": "This revert needs a review since it\u0027s landed more than 1 day.\n\nBuild failure example: https://task-scheduler.skia.org/job/CTkA5PYAmtSAukWqXFwj\n\nValidation error likely triggered by desc.mipLevelCount change for the desc.mipLevelCount \u003d\u003d 0 case.\n\nstart dawn gm  texel_subset_linear_mipmap_linear_down\nDevice error: Cannot create an empty texture view\n    at ValidateTextureViewDescriptor (../../../../../../skia/third_party/externals/dawn/src/dawn_native/Texture.cpp:349)\n    at CreateTextureView (../../../../../../skia/third_party/externals/dawn/src/dawn_native/Device.cpp:1423)\nDevice error: Object is an error.\n    at ValidateObject (../../../../../../skia/third_party/externals/dawn/src/dawn_native/Device.cpp:470)\n    at ValidateTextureBinding (../../../../../../skia/third_party/externals/dawn/src/dawn_native/BindGroup.cpp:127)\n    at ValidateBindGroupDescriptor (../../../../../../skia/third_party/externals/dawn/src/dawn_native/BindGroup.cpp:286)\n    at CreateBindGroup (../../../../../../skia/third_party/externals/dawn/src/dawn_native/Device.cpp:1122)",
       "revId": "6b56a1a2849899c2e43eb23050875fa8d726e1ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6c5f6b7_c152d98e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-17T17:38:21Z",
+      "side": 1,
+      "message": "Do you know how to find the related code in skia?\n\nThis is the related test launch but not where it specify the texture array layer count\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/infra/bots/gen_tasks_logic/dm_flags.go;l\u003d444?q\u003dtexel_subset_linear_mipmap_linear_down\u0026ss\u003dchromium",
+      "parentUuid": "e9f79183_bd7f7971",
+      "revId": "6b56a1a2849899c2e43eb23050875fa8d726e1ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
