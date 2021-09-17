@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03db8c72_65f096bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-17T01:49:37Z",
+      "side": 1,
+      "message": "I\u0027ve taken a stab at adding a ShaderCompilationRequest type + serializing the pipeline layout.\n\nApologies for the big diff--I\u0027ve moved all the Translate* functions in ShaderModuleD3D12 out of the type so they no longer have access to the device. They should be minimally changed, but please let me know if there\u0027s anything I can do to make the diff easier to read!",
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

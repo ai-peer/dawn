@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27bc22c2_3047d605",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-17T01:49:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "87d472a4_08930d4e",
+      "range": {
+        "startLine": 106,
+        "startChar": 42,
+        "endLine": 106,
+        "endChar": 94
+      },
+      "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01cb7aee_8bb16f22",
@@ -105,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a0ab9a4_b2b32286",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-17T01:49:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0712c9ac_a31f2ef4",
+      "range": {
+        "startLine": 409,
+        "startChar": 23,
+        "endLine": 409,
+        "endChar": 38
+      },
+      "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf84994f_b1de7d87",
@@ -118,6 +166,24 @@
       "writtenOn": "2021-09-10T10:27:04Z",
       "side": 1,
       "message": "I have some concerns about doing the caching with the inputs to HLSL translation without prior hardening. It is easy to forget to add some of the arguments to the cache, which would cause hard to debug issues.\n\nOne solution would be to make a `ShaderCompilationRequest` that contains everything that will impact the shader output, including toggles and enabled extension. It would have a way to get a PersistentCacheKey from it, and would be used as an input to TranslateToHLSL. To enforce that TranslateToHLSL and others don\u0027t use outside state, it could be given only the ShaderCompilationRequest and platform functions.",
+      "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "754b2072_fcee4515",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-17T01:49:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "bf84994f_b1de7d87",
       "revId": "6f36af6416882cf5519e7ede783f136abc6f58fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
