@@ -306,8 +306,6 @@ namespace dawn_native {
                                         const Extent3D& copySize) {
         const TextureBase* texture = textureCopy.texture;
 
-        ASSERT(texture->GetDimension() != wgpu::TextureDimension::e1D);
-
         // Validation for the copy being in-bounds:
         Extent3D mipSize = texture->GetMipLevelPhysicalSize(textureCopy.mipLevel);
         // For 1D/2D textures, include the array layer as depth so it can be checked with other
