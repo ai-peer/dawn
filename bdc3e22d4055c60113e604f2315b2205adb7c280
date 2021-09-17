@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "10945bdc_1639b0d3",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-17T01:51:47Z",
+      "side": 1,
+      "message": "I\u0027ll go with 1) since it doesn\u0027t require making a breaking change in tint (I believe 3) would require something like 63222: transform/FirstIndexOffset: Remove transform output | https://dawn-review.googlesource.com/c/tint/+/63222)",
+      "parentUuid": "98631de0_b692bb64",
+      "revId": "bdc3e22d4055c60113e604f2315b2205adb7c280",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8e0482d9_64f7d129",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
