@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "4e5a24390cedd94d323c99910a58ae5159bf4e80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0cda3d3f_eaa77710",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T01:56:58Z",
+      "side": 1,
+      "message": "Once this is CR+2\u0027d, this and the next 2 CLs should be ready to land. Can that be done with \"Submit including parents\" or do we need to land each one separately?",
+      "revId": "4e5a24390cedd94d323c99910a58ae5159bf4e80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
