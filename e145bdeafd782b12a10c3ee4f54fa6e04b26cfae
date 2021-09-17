@@ -16,6 +16,24 @@
       "message": "How should we do this? Do we need a deprecation period for this change? If so, I think we\u0027d have to do two (with a wgpuSetDeviceLostCallback2). Seems like we might be able to get away without it.",
       "revId": "e145bdeafd782b12a10c3ee4f54fa6e04b26cfae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42bc9881_e0a17b2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:16:23Z",
+      "side": 1,
+      "message": "Ideally we need a deprecation period, but I don\u0027t think a lot of people are using this function (and it\u0027s Dawn-only, not Web facing) so imho we can go ahead and do the 5-sided patch dance without deprecation periods.",
+      "parentUuid": "7c990955_8e877b77",
+      "revId": "e145bdeafd782b12a10c3ee4f54fa6e04b26cfae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
