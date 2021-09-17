@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6bbf1f39_465ed355",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 2204,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T21:01:54Z",
+      "side": 1,
+      "message": "And thanks to aligning the jsrepr\u0027s I noticed there was a typo here! rgba8a1 -\u003e rgb8a1",
+      "revId": "35de31a04fd6683dc2f1cf83c3cbdf4defe2cba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ddfd2851_a32f94d5",
         "filename": "dawn.json",
         "patchSetId": 5
