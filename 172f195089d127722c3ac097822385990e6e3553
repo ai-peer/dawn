@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0706de7c_827f2c37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-17T15:57:57Z",
+      "side": 1,
+      "message": "LGTM with a couple of typo nits",
+      "revId": "172f195089d127722c3ac097822385990e6e3553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72c6dabe_1cbc3d9f",
@@ -48,6 +65,46 @@
       "writtenOn": "2021-09-17T15:40:06Z",
       "side": 1,
       "message": "q: does this mean kMaxSampledTexturesPerShaderStage can be a larger limit?",
+      "revId": "172f195089d127722c3ac097822385990e6e3553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d2b76ff_b1091525",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-17T15:57:57Z",
+      "side": 1,
+      "message": "Nit: sampeld -\u003e sampled",
+      "revId": "172f195089d127722c3ac097822385990e6e3553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1959d3_15e2faa9",
+        "filename": "src/tests/unittests/validation/TextureSubresourceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-17T15:57:57Z",
+      "side": 1,
+      "message": "Nit: possuble -\u003e possible",
+      "range": {
+        "startLine": 70,
+        "startChar": 35,
+        "endLine": 70,
+        "endChar": 43
+      },
       "revId": "172f195089d127722c3ac097822385990e6e3553",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
