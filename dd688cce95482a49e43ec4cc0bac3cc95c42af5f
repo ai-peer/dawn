@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51209d35_0c117fc4",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "It can\u0027t be an array of structs because there\u0027s no requirement that the structs are always aligned on the same boundary. For example there might be a struct starting at index 0, and another struct starting at index 8.\n\nI really really wanted to be able to do a magic cast over a pointer, so we could define a proper IndirectParams struct and write something like:\n\n  let params \u003d ptr_bitcast\u003cIndirectParams\u003e(\u0026clientParams.data[cIndex])\n\nBut as far as I can tell there is absolutely no way to hack up something like this. Maybe there\u0027s room for this to be proposed in WGSL.\n\nFor now, I\u0027ve added constants.",
+      "parentUuid": "d7164480_d0a949f5",
+      "range": {
+        "startLine": 49,
+        "startChar": 28,
+        "endLine": 49,
+        "endChar": 31
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57e20788_0104e036",
@@ -71,6 +95,54 @@
       "writtenOn": "2021-09-16T20:06:16Z",
       "side": 1,
       "message": "unit: may read slighly better as \n\nbatch.numIndexBufferElementsHigh \u003d\u003d 0u \u0026\u0026 \nfirstIndex \u003e batch.numIndexBufferElementsLow\n\ni.e. no_high_bits \u0026\u0026 greater_than_low_bits",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 97,
+        "endChar": 58
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25842779_97716a6b",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Agreed, done",
+      "parentUuid": "57e20788_0104e036",
+      "range": {
+        "startLine": 96,
+        "startChar": 20,
+        "endLine": 97,
+        "endChar": 58
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d39ea757_e2524c70",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57e20788_0104e036",
       "range": {
         "startLine": 96,
         "startChar": 20,
@@ -104,6 +176,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb6a13b2_5112b7c4",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d45118b_0a6eda84",
+      "range": {
+        "startLine": 194,
+        "startChar": 17,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef432897_27026f56",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Yeah, makes a lot more sense",
+      "parentUuid": "1d45118b_0a6eda84",
+      "range": {
+        "startLine": 194,
+        "startChar": 17,
+        "endLine": 195,
+        "endChar": 41
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a0931f45_8a28c7eb",
@@ -117,6 +237,54 @@
       "writtenOn": "2021-09-16T20:06:16Z",
       "side": 1,
       "message": "I think this can be clientIndirectSize instead of alignedSize. This indirect command only needs |clientIndirectSize| bytes. It\u0027s the *next* indirect command that needs the base offset to be aligned to kMinStorageBufferOffsetAlignment",
+      "range": {
+        "startLine": 207,
+        "startChar": 48,
+        "endLine": 207,
+        "endChar": 60
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5727cbaa_b078b050",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a0931f45_8a28c7eb",
+      "range": {
+        "startLine": 207,
+        "startChar": 48,
+        "endLine": 207,
+        "endChar": 60
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63d9f47a_3d1f92b1",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "a0931f45_8a28c7eb",
       "range": {
         "startLine": 207,
         "startChar": 48,
@@ -150,6 +318,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "de207fb4_786965a8",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60029c91_48796b49",
+      "range": {
+        "startLine": 211,
+        "startChar": 81,
+        "endLine": 211,
+        "endChar": 92
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4df43be_38139ca1",
@@ -163,6 +355,30 @@
       "writtenOn": "2021-09-16T20:06:16Z",
       "side": 1,
       "message": "so maybe the other above we can just use clientIndirectSize, and only here perform the alignment.",
+      "range": {
+        "startLine": 216,
+        "startChar": 16,
+        "endLine": 216,
+        "endChar": 56
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d3a29c4_dcb3c94c",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a4df43be_38139ca1",
       "range": {
         "startLine": 216,
         "startChar": 16,
@@ -196,6 +412,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff8ddac2_1d663a85",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Sure, done.\n\nIt\u0027s not *quite* that nice because flexible array members aren\u0027t something the compiler will allow. But it\u0027s still nicer than all the egregious casting.\n\nAlso this is a bit trickier than it sounds right now because of alignment disparity between C++ and WGSL. Normally I think the thing to do would be to use [[align]] attributes in WGSL to match C++ behavior. In this case, it would be appropriate to tag indirectOffsets as [[align(8)]].\n\nUnfortunately, although that would be OK per the spec, the GL backend is not happy with it. I haven\u0027t dug in to understand its complaints (something about offsets and std430); instead I just stuck a padding field in both the C++ and WGSL definition to elicit the same alignment.",
+      "parentUuid": "b72762fd_9e650f88",
+      "range": {
+        "startLine": 218,
+        "startChar": 16,
+        "endLine": 221,
+        "endChar": 80
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ce65ac8_c6936f8d",
@@ -209,6 +449,30 @@
       "writtenOn": "2021-09-16T20:06:16Z",
       "side": 1,
       "message": "what\u0027s the right shift for?",
+      "range": {
+        "startLine": 226,
+        "startChar": 67,
+        "endLine": 227,
+        "endChar": 26
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2df586a4_414b9bd6",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Added a comment. It\u0027s because the value is in bytes, and we want it in u32s. Also changed to a /4 since that probably reads slightly clearer.",
+      "parentUuid": "8ce65ac8_c6936f8d",
       "range": {
         "startLine": 226,
         "startChar": 67,
@@ -236,6 +500,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f3d493f_ee14c6df",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Indeed, this was trickier to do before, but now that we compute all the layout in one go at pass exit, it\u0027s not as bad.\n\nI\u0027ve taken Austin\u0027s suggestion to rename \"pass\" to \"batch\", and we now pack multiple batches into a single compute pass where possible.\n\nWe still split passes up by source indirect buffer, but different index buffer sizes are no longer split into different passes unless the number of draw calls is huge enough.",
+      "parentUuid": "3623b95f_bf1e3f71",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fe97c92_50eec62e",
@@ -255,6 +537,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ed4eff9_d9ff3cf6",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "That\u0027s a good point. But rather than further complicate the bounds checking or doing lots of redundant alignment adjustments, I opted to decrease kMaxPassOffsetRange by kMinStorageBufferOffsetAlignment instead. That way we know there\u0027s always room for alignment later. WDYT?",
+      "parentUuid": "6fe97c92_50eec62e",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b9f3fd9_e748d697",
         "filename": "src/dawn_native/RenderValidationMetadata.cpp",
         "patchSetId": 13
@@ -266,6 +566,24 @@
       "writtenOn": "2021-09-16T20:06:16Z",
       "side": 1,
       "message": "What about when newOffset is between minOffset and maxffset; can\u0027t we simply push it into the vector?",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "444f3f09_ca0ee628",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Hah. Yes. Thanks for catching this. I think I dropped this case by accident at some point.",
+      "parentUuid": "5b9f3fd9_e748d697",
       "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -293,6 +611,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b47d3fa1_bf77b86f",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e89f4c35_539ce358",
+      "range": {
+        "startLine": 102,
+        "startChar": 11,
+        "endLine": 109,
+        "endChar": 0
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f9ee789_a057d81d",
@@ -306,6 +648,24 @@
       "writtenOn": "2021-09-16T20:06:16Z",
       "side": 1,
       "message": "UNREACHABLE() ?",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d07f85cc_7633a3a8",
+        "filename": "src/dawn_native/RenderValidationMetadata.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f9ee789_a057d81d",
       "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -329,6 +689,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d5e98b43_328334d6",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done (IndirectDrawMetadata, and IndirectDrawValidationEncoder)",
+      "parentUuid": "153a502e_f06a6ab9",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "31f96368_76ec6564",
         "filename": "src/dawn_native/RenderValidationMetadata.h",
         "patchSetId": 13
@@ -340,6 +718,30 @@
       "writtenOn": "2021-09-16T15:36:37Z",
       "side": 1,
       "message": "It\u0027s an interesting assumption that the number of valid indices will rarely changes. It seems pretty likely but I have less experience with this.",
+      "range": {
+        "startLine": 86,
+        "startChar": 61,
+        "endLine": 86,
+        "endChar": 69
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f85487dd_3fd5e9c3",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "I don\u0027t know for sure either. My assumption would be for few index buffers to be reused across many draw calls. Either way, it doesn\u0027t much matter now since we pack multiple index buffer sizes into a single pass.",
+      "parentUuid": "31f96368_76ec6564",
       "range": {
         "startLine": 86,
         "startChar": 61,
@@ -373,6 +775,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c411133a_97faf347",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bcec8ed3_05b26ecc",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 86
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d5baf89_4db2d3fa",
+        "filename": "src/dawn_native/RenderValidationMetadata.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Yes, but unfortunately deleting the default copy ctor also deletes the default move ctor; and if a base class deletes its default move ctor, a derived class can\u0027t default its own move ctor. Annoying C++ is annoying.\n\nWe can either explicitly delete this copy ctor/assign (which is why I did this before), or we can use NonCopyable but change NonCopyable to explicitly default move ctor+assign. I\u0027ve now opted for the latter because it seems harmless and will avoid the issue popping up again. WDYT?",
+      "parentUuid": "bcec8ed3_05b26ecc",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 86
+      },
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03d16e11_185e83b1",
@@ -386,6 +836,24 @@
       "writtenOn": "2021-09-16T15:36:37Z",
       "side": 1,
       "message": "u-nit: ditto implementation in the .cpp",
+      "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ee71d0_4105b923",
+        "filename": "src/dawn_native/ScratchBuffer.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T02:32:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03d16e11_185e83b1",
       "revId": "dd688cce95482a49e43ec4cc0bac3cc95c42af5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
