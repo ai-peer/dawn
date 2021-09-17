@@ -79,13 +79,6 @@ namespace {
             ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
         }
 
-        // It is an error to create a view with zero 'mipLevelCount'.
-        {
-            wgpu::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
-            descriptor.mipLevelCount = 0;
-            ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
-        }
-
         // It is OK to create a 2D texture view on a 2D texture.
         {
             wgpu::TextureViewDescriptor descriptor = base2DTextureViewDescriptor;
@@ -167,14 +160,6 @@ namespace {
             ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
         }
 
-        // It is an error to create a view with zero 'mipLevelCount'.
-        {
-            wgpu::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
-            descriptor.dimension = wgpu::TextureViewDimension::e2D;
-            descriptor.mipLevelCount = 0;
-            ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
-        }
-
         // It is OK to create a 2D texture view on a 2D array texture.
         {
             wgpu::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
@@ -243,13 +228,6 @@ namespace {
         {
             wgpu::TextureViewDescriptor descriptor = base3DTextureViewDescriptor;
             descriptor.arrayLayerCount = 0;
-            ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
-        }
-
-        // It is an error to create a view with zero 'mipLevelCount'.
-        {
-            wgpu::TextureViewDescriptor descriptor = base3DTextureViewDescriptor;
-            descriptor.mipLevelCount = 0;
             ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
         }
 
@@ -494,14 +472,6 @@ namespace {
             wgpu::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
             descriptor.dimension = wgpu::TextureViewDimension::Cube;
             descriptor.arrayLayerCount = 0;
-            ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
-        }
-
-        // It is an error to create a view with zero 'mipLevelCount'.
-        {
-            wgpu::TextureViewDescriptor descriptor = base2DArrayTextureViewDescriptor;
-            descriptor.dimension = wgpu::TextureViewDimension::Cube;
-            descriptor.mipLevelCount = 0;
             ASSERT_DEVICE_ERROR(texture.CreateView(&descriptor));
         }
 
