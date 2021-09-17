@@ -50,6 +50,23 @@
       "message": "LGTM too",
       "revId": "db37762f63e8a272e058c8f371bb9c09024b7fce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdde01b7_bfa47d2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-17T15:56:17Z",
+      "side": 1,
+      "message": "LGTM, but just curious as to why some of the BC and EAC formats were left out. Also for the formatting, it looks like for the first couple BC formats you vertically aligned the jsrepr which looks easier to read, so maybe it would be nice to do that for all the formats?",
+      "revId": "db37762f63e8a272e058c8f371bb9c09024b7fce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
