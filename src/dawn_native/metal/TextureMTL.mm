@@ -438,6 +438,13 @@ namespace dawn_native::metal {
         // Choose the correct MTLTextureType and paper over differences in how the array layer count
         // is specified.
         switch (GetDimension()) {
+            case wgpu::TextureDimension::e1D:
+                mtlDesc.arrayLength = 1;
+                mtlDesc.depth = 1;
+                ASSERT(mtlDesc.sampleCount == 1);
+                mtlDesc.textureType = MTLTextureType1D;
+                break;
+
             case wgpu::TextureDimension::e2D:
                 mtlDesc.depth = 1;
                 mtlDesc.arrayLength = GetArrayLayers();
@@ -456,9 +463,6 @@ namespace dawn_native::metal {
                 ASSERT(mtlDesc.sampleCount == 1);
                 mtlDesc.textureType = MTLTextureType3D;
                 break;
-
-            case wgpu::TextureDimension::e1D:
-                UNREACHABLE();
         }
 
         return mtlDescRef;
