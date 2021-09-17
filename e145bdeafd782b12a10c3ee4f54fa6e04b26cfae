@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c990955_8e877b77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T01:53:41Z",
+      "side": 1,
+      "message": "How should we do this? Do we need a deprecation period for this change? If so, I think we\u0027d have to do two (with a wgpuSetDeviceLostCallback2). Seems like we might be able to get away without it.",
+      "revId": "e145bdeafd782b12a10c3ee4f54fa6e04b26cfae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
