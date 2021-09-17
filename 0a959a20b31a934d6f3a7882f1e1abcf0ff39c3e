@@ -16,6 +16,23 @@
       "message": "Per reviewer/manager\u0027s request..",
       "revId": "0a959a20b31a934d6f3a7882f1e1abcf0ff39c3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31cb11d9_45587a7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T01:02:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0a959a20b31a934d6f3a7882f1e1abcf0ff39c3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
