@@ -61,6 +61,7 @@ namespace dawn_native {
         UseUserDefinedLabelsInBackend,
         DisableR8RG8Mipmaps,
         UseDummyFragmentInVertexOnlyPipeline,
+        UseTieredLimits,
 
         EnumCount,
         InvalidEnum = EnumCount,
