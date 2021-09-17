@@ -25,6 +25,11 @@ namespace dawn_native { namespace d3d12 {
     class Device;
     class PipelineLayout;
 
+    struct ScopedDxilSpirvObject {
+        std::unique_ptr<uint8_t[], std::function<void(uint8_t*)>> buffer;
+        size_t bufferSize = 0;
+    };
+
     struct FirstOffsetInfo {
         bool usesVertexIndex;
         uint32_t vertexIndexOffset;
@@ -36,6 +41,7 @@ namespace dawn_native { namespace d3d12 {
     // emulate vertex/instance index starts
     struct CompiledShader {
         ScopedCachedBlob cachedShader;
+        ScopedDxilSpirvObject compiledMesaShader;
         ComPtr<ID3DBlob> compiledFXCShader;
         ComPtr<IDxcBlob> compiledDXCShader;
         D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
