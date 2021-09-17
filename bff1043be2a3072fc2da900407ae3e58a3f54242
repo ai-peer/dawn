@@ -33,6 +33,24 @@
       "message": "I guess I should move these to be alphabetical too.",
       "revId": "bff1043be2a3072fc2da900407ae3e58a3f54242",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e63df799_b05ebded",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 940,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:38:40Z",
+      "side": 1,
+      "message": "dawn.json kinda stopped being alphabetical. I wonder if we should start having blocks instead like \"render pipeline\" \"texture\" etc. Nothing to address in this CL.",
+      "parentUuid": "d449ff9c_91b9236c",
+      "revId": "bff1043be2a3072fc2da900407ae3e58a3f54242",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
