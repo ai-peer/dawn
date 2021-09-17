@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d5c8533_286b16e1",
+        "filename": "src/dawn_native/Buffer.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "Consistency with existing code. In retrospect we should probably have done that, or used the Chromium style.",
+      "parentUuid": "2475cccb_7e7ea31c",
+      "revId": "fc84ff3083322091ab03e48eb70f5db9eb7344d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "626ab6b5_93924bf7",

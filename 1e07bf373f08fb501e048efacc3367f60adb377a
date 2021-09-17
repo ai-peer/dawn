@@ -16,6 +16,319 @@
       "message": "Phew! :) \n\nI\u0027m sure there are still more test cases to be written btw.",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d85f858_9f2889b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "LGTM, phew that was a complicated one :)",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9be27085_b90a3946",
+        "filename": "src/dawn_native/IndirectDrawMetadata.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "nit: Why do we have this condition? It seems we could extent `batch` even if its minOffset is less than the newBatch\u0027s minOffset.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 13
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca2d815f_60c678e7",
+        "filename": "src/dawn_native/IndirectDrawMetadata.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "nit: include guards aren\u0027t renamed. Same for the other file.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49e035ea_1655b0ab",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "This would be simpler if we had uaddCarry like in GLSL:\n\nvar carry: u32;\nlet value \u003d uaddCarry(firstIndex, indexCount, \u0026carry);\n\nif (carry \u003e numIndexBufferElementsHigh ||\n    (carry \u003d\u003d numIndexBufferElementsHigh \u0026\u0026 value \u003e numIndexBufferElementsLow)) {\n  fail(id.x);\n  return;\n}\n\npass(id.x)\n\n\nANGLE polyfills uaddCarry like so (translated to WGSL):\n\nfn uaddCarry(x: u32, y: u32, carry: ptr\u003cu32\u003e) -\u003e u32 {\n  carry \u003d u32(x \u003e (0xffffffffu - y));\n  return x + y;\n}\n\n\nFiled feature requests: https://github.com/gpuweb/gpuweb/issues/2123 and https://github.com/gpuweb/gpuweb/issues/2122",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f3a8e95_eb766b7f",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "Do we need to create the pipeline layout, or would it be sufficient to use the defaulted pipeline layout?",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95e7dc86_0b02adb3",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "I think we also need to make sure we don\u0027t go over the maxDispatchDimension of 65k, so we can process at most 65k * 64 draws.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "679b1d29_83b5a9e2",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "TBH I think we could use kMaxStorageBufferBindingSize at [1] at no cost so we don\u0027t need to compute this.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdcfeee7_2e067fd9",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "note that this might change in the future when we use the validation compute shader to duplicate some arguments for D3D12.",
+      "range": {
+        "startLine": 247,
+        "startChar": 68,
+        "endLine": 247,
+        "endChar": 92
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6825ca2_61efcfa0",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "This only happens if indirectDrawMetadata is empty so we could do the early out at the very top.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a659189_213d2cfd",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "When we get the buffer here, it means that it will be referenced by the CommandBuffer. So that if we have a scratch buffer that grows multiple times, we\u0027ll keep old ones around a bunch. I don\u0027t think we need to do much right now, but we might need to revisit to use more transient storage in the future.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66010208_45a5d781",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "I wonder if we could just say \"nope\" and just lose the device when there\u0027s this amount of indirect draws. It seems quite massive (as in just the GPU frontend processing would stall for more than a frame). Probably ditto in other places in this file. WDYT?",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fad0fd9f_1b94aab4",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "nit: It",
+      "range": {
+        "startLine": 316,
+        "startChar": 29,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec5c54b_970ce4e5",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "Are we sure pass.batchData is correctly aligned to do this on ARM? Unaligned stores produces SIGILL on ARM IIRC.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d87ce0a_eb9ad843",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "nit: we could factor getting the pipeline and the BGL outside the loop.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d27c603_6ce2ea1e",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4822f429_911c8b70",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "Probably something that will need to be added to the indirect command validation/twiddling code!",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 217,
+        "endChar": 11
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0292c01f_7d33feed",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "nit: commented out code?",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

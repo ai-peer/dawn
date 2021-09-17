@@ -215,6 +215,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6052dd18_652bcd86",
+        "filename": "src/dawn_native/RenderValidationEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T13:36:29Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "1690abef_9c5ab696",
+      "range": {
+        "startLine": 175,
+        "startChar": 12,
+        "endLine": 175,
+        "endChar": 77
+      },
+      "revId": "6b2418628cd1d5bb0eb8747ebf7d3d93cdc2c53f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f0d72e3_3ea61922",
