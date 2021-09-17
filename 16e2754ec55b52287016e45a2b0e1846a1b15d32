@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80285772_507d0cd4",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T02:34:02Z",
+      "side": 1,
+      "message": "optional: If \"output\" is only relevant for extensible things, maybe it could be something like \"extensible\": \"output\"?",
+      "revId": "16e2754ec55b52287016e45a2b0e1846a1b15d32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
