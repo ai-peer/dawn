@@ -16,6 +16,23 @@
       "message": "PTAL, this is one of the changes I\u0027ll incorporate into the next Emscripten update, which I\u0027m starting now to try to get things as aligned as possible. (The bc formats are currently broken in emscripten and I forgot to fix them in the PR I just landed.)",
       "revId": "db37762f63e8a272e058c8f371bb9c09024b7fce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f51287c4_e941dffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:15:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "db37762f63e8a272e058c8f371bb9c09024b7fce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
