@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddfd2851_a32f94d5",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T20:57:52Z",
+      "side": 1,
+      "message": "Realized these would be like \"etc2-rgba8unorm\" in the JS spec and changed.",
+      "revId": "35de31a04fd6683dc2f1cf83c3cbdf4defe2cba9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

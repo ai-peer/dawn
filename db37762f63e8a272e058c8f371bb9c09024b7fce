@@ -67,6 +67,24 @@
       "message": "LGTM, but just curious as to why some of the BC and EAC formats were left out. Also for the formatting, it looks like for the first couple BC formats you vertically aligned the jsrepr which looks easier to read, so maybe it would be nice to do that for all the formats?",
       "revId": "db37762f63e8a272e058c8f371bb9c09024b7fce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dcbee10_f5f42cc2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T20:57:52Z",
+      "side": 1,
+      "message": "I aligned the jsrepr primarily so it\u0027s possible to look at the srgb and non-srgb versions next to each other and see they\u0027re the same. So I actually only aligned them in pairs. But no reason they shouldn\u0027t just all be aligned.\n\nThe BC6H and EAC format names format already format correctly because of the way the js_enum_case algorithm works (it only skips a hyphen if the last character of a word is a digit). But added them for consistency because it\u0027s hard to know that - js_enum_case is kinda janky.",
+      "parentUuid": "fdde01b7_bfa47d2c",
+      "revId": "db37762f63e8a272e058c8f371bb9c09024b7fce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
