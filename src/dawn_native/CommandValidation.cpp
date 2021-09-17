@@ -237,6 +237,12 @@ namespace dawn_native {
                                         const Extent3D& copySize) {
         const TextureBase* texture = textureCopy.texture;
         DAWN_TRY(device->ValidateObject(texture));
+
+        // TODO(https://crbug.com/dawn/814): Disallow 1D texture copies until they are implemented.
+        if (texture->GetDimension() == wgpu::TextureDimension::e1D) {
+            return DAWN_VALIDATION_ERROR("1D texture copies are not implemented (yet)");
+        }
+
         if (textureCopy.mipLevel >= texture->GetNumMipLevels()) {
             return DAWN_VALIDATION_ERROR("mipLevel out of range");
         }
