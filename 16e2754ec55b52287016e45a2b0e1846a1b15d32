@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc3d9d16_afda2ceb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T15:34:17Z",
+      "side": 1,
+      "message": "thanks for the reviews!",
+      "revId": "16e2754ec55b52287016e45a2b0e1846a1b15d32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80285772_507d0cd4",
@@ -31,6 +48,24 @@
       "writtenOn": "2021-09-17T02:34:02Z",
       "side": 1,
       "message": "optional: If \"output\" is only relevant for extensible things, maybe it could be something like \"extensible\": \"output\"?",
+      "revId": "16e2754ec55b52287016e45a2b0e1846a1b15d32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a540ce0_534c4e3b",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T15:34:17Z",
+      "side": 1,
+      "message": "good idea - I\u0027ll look at this in a follow-up",
+      "parentUuid": "80285772_507d0cd4",
       "revId": "16e2754ec55b52287016e45a2b0e1846a1b15d32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
