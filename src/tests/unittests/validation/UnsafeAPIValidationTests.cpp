@@ -32,6 +32,60 @@ class UnsafeAPIValidationTest : public ValidationTest {
     }
 };
 
+// Check that 1D textures are disallowed as part of unsafe APIs.
+TEST_F(UnsafeAPIValidationTest, 1DTextures) {
+    wgpu::TextureDescriptor desc;
+    desc.size = {1, 1, 1};
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.usage = wgpu::TextureUsage::CopyDst;
+
+    // Control case: 2D textures are allowed.
+    desc.dimension = wgpu::TextureDimension::e2D;
+    device.CreateTexture(&desc);
+
+    // Error case: 1D textures are disallowed.
+    desc.dimension = wgpu::TextureDimension::e1D;
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
+}
+
+// Check that dynamic storage buffers are disallowed.
+TEST_F(UnsafeAPIValidationTest, DynamicStorageBuffer) {
+    wgpu::BindGroupLayoutEntry entry;
+    entry.visibility = wgpu::ShaderStage::Fragment;
+
+    wgpu::BindGroupLayoutDescriptor desc;
+    desc.entries = &entry;
+    desc.entryCount = 1;
+
+    // Control case: storage buffer without a dynamic offset is allowed.
+    {
+        entry.buffer.type = wgpu::BufferBindingType::Storage;
+        entry.buffer.hasDynamicOffset = false;
+        device.CreateBindGroupLayout(&desc);
+    }
+
+    // Control case: readonly storage buffer without a dynamic offset is allowed.
+    {
+        entry.buffer.type = wgpu::BufferBindingType::ReadOnlyStorage;
+        entry.buffer.hasDynamicOffset = false;
+        device.CreateBindGroupLayout(&desc);
+    }
+
+    // Storage buffer with a dynamic offset is disallowed.
+    {
+        entry.buffer.type = wgpu::BufferBindingType::Storage;
+        entry.buffer.hasDynamicOffset = true;
+        ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+    }
+
+    // Readonly storage buffer with a dynamic offset is disallowed.
+    {
+        entry.buffer.type = wgpu::BufferBindingType::ReadOnlyStorage;
+        entry.buffer.hasDynamicOffset = true;
+        ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+    }
+}
+
 // Check that pipeline overridable constants are disallowed as part of unsafe APIs.
 // TODO(dawn:1041) Remove when implementation for all backend is added
 TEST_F(UnsafeAPIValidationTest, PipelineOverridableConstants) {

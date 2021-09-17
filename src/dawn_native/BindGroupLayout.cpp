@@ -90,11 +90,13 @@ namespace dawn_native {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
                 }
             }
+
             if (entry.sampler.type != wgpu::SamplerBindingType::Undefined) {
                 bindingMemberCount++;
                 bindingType = BindingInfoType::Sampler;
                 DAWN_TRY(ValidateSamplerBindingType(entry.sampler.type));
             }
+
             if (entry.texture.sampleType != wgpu::TextureSampleType::Undefined) {
                 bindingMemberCount++;
                 bindingType = BindingInfoType::Texture;
@@ -108,11 +110,17 @@ namespace dawn_native {
                     viewDimension = texture.viewDimension;
                 }
 
+                DAWN_INVALID_IF(viewDimension == wgpu::TextureViewDimension::e1D,
+                                "View dimension (%s) is disallowed because it is not implemented "
+                                "(yet). See https://crbug.com/dawn/814.",
+                                wgpu::TextureViewDimension::e1D);
+
                 DAWN_INVALID_IF(
                     texture.multisampled && viewDimension != wgpu::TextureViewDimension::e2D,
                     "View dimension (%s) for a multisampled texture bindings was not %s.",
                     viewDimension, wgpu::TextureViewDimension::e2D);
             }
+
             if (entry.storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
                 bindingMemberCount++;
                 bindingType = BindingInfoType::StorageTexture;
@@ -125,6 +133,11 @@ namespace dawn_native {
                     DAWN_TRY(ValidateTextureViewDimension(storageTexture.viewDimension));
                     DAWN_TRY(ValidateStorageTextureViewDimension(storageTexture.viewDimension));
                 }
+
+                DAWN_INVALID_IF(storageTexture.viewDimension == wgpu::TextureViewDimension::e1D,
+                                "View dimension (%s) is disallowed because it is not implemented "
+                                "(yet). See https://crbug.com/dawn/814.",
+                                wgpu::TextureViewDimension::e1D);
 
                 if (storageTexture.access == wgpu::StorageTextureAccess::WriteOnly) {
                     allowedStages &= ~wgpu::ShaderStage::Vertex;
