@@ -110,3 +110,129 @@ TEST(Limits, ValidateLimits) {
         EXPECT_TRUE(ValidateLimits(defaults, required).IsSuccess());
     }
 }
+
+// Test that |ApplyLimitTiers| degrades limits to the next best tier.
+TEST(Limits, ApplyLimitTiers) {
+    auto SetLimitsMemorySizeTier2 = [](dawn_native::Limits* limits) {
+        limits->maxTextureDimension1D = 8192;
+        limits->maxTextureDimension2D = 8192;
+        limits->maxTextureDimension3D = 4096;
+        limits->maxTextureArrayLayers = 1024;
+        limits->maxUniformBufferBindingSize = 65536;
+        limits->maxStorageBufferBindingSize = 1073741824;
+        limits->maxComputeWorkgroupStorageSize = 32768;
+    };
+    dawn_native::Limits limitsMemorySizeTier2;
+    dawn_native::GetDefaultLimits(&limitsMemorySizeTier2);
+    SetLimitsMemorySizeTier2(&limitsMemorySizeTier2);
+
+    auto SetLimitsMemorySizeTier3 = [](dawn_native::Limits* limits) {
+        limits->maxTextureDimension1D = 16384;
+        limits->maxTextureDimension2D = 16384;
+        limits->maxTextureDimension3D = 8192;
+        limits->maxTextureArrayLayers = 2048;
+        limits->maxUniformBufferBindingSize = 134218000;
+        limits->maxStorageBufferBindingSize = 2147483647;
+        limits->maxComputeWorkgroupStorageSize = 49152;
+    };
+    dawn_native::Limits limitsMemorySizeTier3;
+    dawn_native::GetDefaultLimits(&limitsMemorySizeTier3);
+    SetLimitsMemorySizeTier3(&limitsMemorySizeTier3);
+
+    auto SetLimitsBindingSpaceTier1 = [](dawn_native::Limits* limits) {
+        limits->maxBindGroups = 4;
+        limits->maxDynamicUniformBuffersPerPipelineLayout = 8;
+        limits->maxDynamicStorageBuffersPerPipelineLayout = 4;
+        limits->maxSampledTexturesPerShaderStage = 16;
+        limits->maxSamplersPerShaderStage = 16;
+        limits->maxStorageBuffersPerShaderStage = 8;
+        limits->maxStorageTexturesPerShaderStage = 4;
+        limits->maxUniformBuffersPerShaderStage = 12;
+    };
+    dawn_native::Limits limitsBindingSpaceTier1;
+    dawn_native::GetDefaultLimits(&limitsBindingSpaceTier1);
+    SetLimitsBindingSpaceTier1(&limitsBindingSpaceTier1);
+
+    auto SetLimitsBindingSpaceTier3 = [](dawn_native::Limits* limits) {
+        limits->maxBindGroups = 16;
+        limits->maxDynamicUniformBuffersPerPipelineLayout = 32;
+        limits->maxDynamicStorageBuffersPerPipelineLayout = 16;
+        limits->maxSampledTexturesPerShaderStage = 64;
+        limits->maxSamplersPerShaderStage = 64;
+        limits->maxStorageBuffersPerShaderStage = 32;
+        limits->maxStorageTexturesPerShaderStage = 16;
+        limits->maxUniformBuffersPerShaderStage = 48;
+    };
+    dawn_native::Limits limitsBindingSpaceTier3;
+    dawn_native::GetDefaultLimits(&limitsBindingSpaceTier3);
+    SetLimitsBindingSpaceTier3(&limitsBindingSpaceTier3);
+
+    // Test that applying tiers to limits that are exactly
+    // equal to a tier returns the same values.
+    {
+        dawn_native::Limits limits = limitsMemorySizeTier2;
+        EXPECT_EQ(ApplyLimitTiers(limits), limits);
+
+        limits = limitsMemorySizeTier3;
+        EXPECT_EQ(ApplyLimitTiers(limits), limits);
+    }
+
+    // Test all limits slightly worse than tier 3.
+    {
+        dawn_native::Limits limits = limitsMemorySizeTier3;
+        limits.maxTextureDimension1D -= 1;
+        limits.maxTextureDimension2D -= 1;
+        limits.maxTextureDimension3D -= 1;
+        limits.maxTextureArrayLayers -= 1;
+        limits.maxUniformBufferBindingSize -= 1;
+        limits.maxStorageBufferBindingSize -= 1;
+        limits.maxComputeWorkgroupStorageSize -= 1;
+        EXPECT_EQ(ApplyLimitTiers(limits), limitsMemorySizeTier2);
+    }
+
+    // Test that any limit worse than tier 3 degrades all limits to tier 2.
+    {
+        dawn_native::Limits limits = limitsMemorySizeTier3;
+        limits.maxTextureArrayLayers -= 1;
+        EXPECT_EQ(ApplyLimitTiers(limits), limitsMemorySizeTier2);
+    }
+
+    // Test that limits may match one tier exactly and be degraded in another tier.
+    // Degrading to one tier does not affect the other tier.
+    {
+        dawn_native::Limits limits = limitsBindingSpaceTier3;
+        // Set tier 3 and change one limit to be insufficent.
+        SetLimitsMemorySizeTier3(&limits);
+        limits.maxTextureDimension1D -= 1;
+
+        dawn_native::Limits tiered = ApplyLimitTiers(limits);
+
+        // Check that |tiered| has the limits of memorySize tier 2
+        dawn_native::Limits tieredWithMemorySizeTier2 = tiered;
+        SetLimitsMemorySizeTier2(&tieredWithMemorySizeTier2);
+        EXPECT_EQ(tiered, tieredWithMemorySizeTier2);
+
+        // Check that |tiered| has the limits of bindingSpace tier 3
+        dawn_native::Limits tieredWithBindingSpaceTier3 = tiered;
+        SetLimitsBindingSpaceTier3(&tieredWithBindingSpaceTier3);
+        EXPECT_EQ(tiered, tieredWithBindingSpaceTier3);
+    }
+
+    // Test that limits may be simultaneously degraded in two tiers independently.
+    {
+        dawn_native::Limits limits;
+        dawn_native::GetDefaultLimits(&limits);
+        SetLimitsBindingSpaceTier3(&limits);
+        SetLimitsMemorySizeTier3(&limits);
+        limits.maxBindGroups = 5;  // Good enough for binding space tier 1, but not 2.
+        limits.maxComputeWorkgroupStorageSize =
+            49151;  // Good enough for memory size tier 2, but not 3.
+
+        dawn_native::Limits tiered = ApplyLimitTiers(limits);
+
+        dawn_native::Limits expected = tiered;
+        SetLimitsBindingSpaceTier1(&expected);
+        SetLimitsMemorySizeTier2(&expected);
+        EXPECT_EQ(tiered, expected);
+    }
+}
