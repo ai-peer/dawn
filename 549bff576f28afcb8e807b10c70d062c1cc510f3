@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "549a7466_96d66ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T21:02:28Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf7fc03_270425df",
+        "filename": "docs/validation_errors.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T21:02:28Z",
+      "side": 1,
+      "message": "uint: whitespace",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 2
+      },
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b40bb2f_e67c6cdc",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T21:02:28Z",
+      "side": 1,
+      "message": "nit: maybe \"of type Buffer\" ? \"as\" makes it sound like a cast has occured\n\nor perhaps match the language in the spec and say\n\"validating BufferBindingLayout entries[%u]\"",
+      "range": {
+        "startLine": 287,
+        "startChar": 61,
+        "endLine": 287,
+        "endChar": 72
+      },
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
