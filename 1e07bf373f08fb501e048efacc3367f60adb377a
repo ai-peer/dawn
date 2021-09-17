@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b928cf51_01c1d9fb",
+        "filename": "src/dawn_native/IndirectDrawMetadata.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "We normally do extend the batch, unless the span of the batch would exceed kMaxBatchOffsetRange or the number of draws would be too high.\n\nAt this point we know the current batch cannot support a merge, so this condition is to decide whether to stop and insert a new batch here, or to keep looking for other merge/insertion opportunities.",
+      "parentUuid": "9be27085_b90a3946",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 115,
+        "endChar": 13
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca2d815f_60c678e7",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "nit: include guards aren\u0027t renamed. Same for the other file.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4655a19_b1623295",
+        "filename": "src/dawn_native/IndirectDrawMetadata.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "WOOPS, fixed",
+      "parentUuid": "ca2d815f_60c678e7",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d95b0d0b_6edf5247",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Nice, yes that or maybe if we just had u64!",
+      "parentUuid": "49e035ea_1655b0ab",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f3a8e95_eb766b7f",
@@ -105,6 +165,24 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "Do we need to create the pipeline layout, or would it be sufficient to use the defaulted pipeline layout?",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b8351e9_2b286a79",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "The default layout can\u0027t infer our need for internal storage usage.",
+      "parentUuid": "4f3a8e95_eb766b7f",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d6b6b4b_ecfc9da0",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Ah good call. More limits. Done.",
+      "parentUuid": "95e7dc86_0b02adb3",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "679b1d29_83b5a9e2",
@@ -139,6 +235,24 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "TBH I think we could use kMaxStorageBufferBindingSize at [1] at no cost so we don\u0027t need to compute this.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "268b23f0_91ab8556",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "I don\u0027t think I understand. We validate that a binding\u0027s offset+size doesn\u0027t exceed the buffer bounds. So at best we could always just bind the whole buffer (GetSize(), capped by kMaxStorageBufferBindingSize) at offset 0.\n\nBut as this is written now, it allows for large and sparse indirect buffers (suppose there\u0027s a draw at offset 0 and a draw at offset 256 MB). That requires being able to bind at arbitrary offsets into the indirect buffer for each pass, and if we\u0027re going to bind at a non-zero offset I think we need to account for it in the binding size, no?",
+      "parentUuid": "679b1d29_83b5a9e2",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -166,6 +280,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5be40af0_c5655687",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "cdcfeee7_2e067fd9",
+      "range": {
+        "startLine": 247,
+        "startChar": 68,
+        "endLine": 247,
+        "endChar": 92
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6825ca2_61efcfa0",
@@ -179,6 +317,24 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "This only happens if indirectDrawMetadata is empty so we could do the early out at the very top.",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b348c9fb_55ceffd5",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 291,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6825ca2_61efcfa0",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -217,6 +373,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6814d64_e6082bfb",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Sounds good to me. I was going to punt on that since it sounded like something that might warrant spec clarification (e.g. something to the effect that an implementation may reject a pass with too many draw calls.)\n\nBut it seems there\u0027s already enough spec TODO around render pass details that it\u0027s probably not an issue. Happy to remove the complexity, so DONE.",
+      "parentUuid": "66010208_45a5d781",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fad0fd9f_1b94aab4",
@@ -230,6 +404,30 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "nit: It",
+      "range": {
+        "startLine": 316,
+        "startChar": 29,
+        "endLine": 316,
+        "endChar": 31
+      },
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00b529b2_34441d14",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Removed with all this stuff",
+      "parentUuid": "fad0fd9f_1b94aab4",
       "range": {
         "startLine": 316,
         "startChar": 29,
@@ -257,6 +455,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cb0ab0c_aa728ea5",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "I believe in practice it would always be aligned properly, but actually yeah make_unique\u003cuint8_t[]\u003e technically only guarantees 1-byte alignment. I\u0027ve changed batchData\u0027s allocation to use std::malloc to be safe.",
+      "parentUuid": "3ec5c54b_970ce4e5",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d87ce0a_eb9ad843",
@@ -274,6 +490,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "764d38b6_ff48933f",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d87ce0a_eb9ad843",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d27c603_6ce2ea1e",
@@ -287,6 +521,24 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "[1]",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d47376cf_70979df8",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0d27c603_6ce2ea1e",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -327,6 +579,24 @@
       "writtenOn": "2021-09-17T13:36:29Z",
       "side": 1,
       "message": "nit: commented out code?",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64d61f8e_6d450b95",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-17T18:38:21Z",
+      "side": 1,
+      "message": "Woops! Uncommented.",
+      "parentUuid": "0292c01f_7d33feed",
       "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
