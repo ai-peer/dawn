@@ -16,6 +16,150 @@
       "message": "I\u0027ve taken a stab at adding a ShaderCompilationRequest type + serializing the pipeline layout.\n\nApologies for the big diff--I\u0027ve moved all the Translate* functions in ShaderModuleD3D12 out of the type so they no longer have access to the device. They should be minimally changed, but please let me know if there\u0027s anything I can do to make the diff easier to read!",
       "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f520b397_20b86e88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "maybe if you left them in the same locations but prefixed them with \"static\" and removed ShaderModule:: it might be more pretty.\n\nAnd then we can bulk relocate them in a follow-up CL.",
+      "parentUuid": "03db8c72_65f096bf",
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7654f17b_5b4f10bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "didn\u0027t really review everything yet, hoping the diff can be easier - looks pretty nice though!",
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42b08ad3_c554d060",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "nit: I think this could be std::ostringstream",
+      "range": {
+        "startLine": 110,
+        "startChar": 34,
+        "endLine": 110,
+        "endChar": 51
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b384add6_cdecc024",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "nice work with the layout serialization, but... idea: what if we stored these inside the ShaderCompilationRequest instead? Then we don\u0027t need to keep PipelineLayout*. PipelineLayout* is riskier since you can get the Device from it.",
+      "range": {
+        "startLine": 181,
+        "startChar": 11,
+        "endLine": 182,
+        "endChar": 59
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ee1c2e5_60f79a16",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "nit: because this is only used within this translation unit, I think we can have CompileThatShader be templated over F and pass this as \"F\u0026\u0026 DumpShadersEmitLog\"\n\ncasing for functions should be CamelCase, or maybe camelCase -- we don\u0027t pass functions as args that often.",
+      "range": {
+        "startLine": 287,
+        "startChar": 37,
+        "endLine": 288,
+        "endChar": 99
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4fde90a5_0c472e73",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "nit: prefer cstdint, in a new block, below d3d12_platform.h",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 18
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6907c4b_56ed409c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-17T17:52:26Z",
+      "side": 1,
+      "message": "nit: keep everything camelCase",
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
