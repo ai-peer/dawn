@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "652c6d07_000cca9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-17T01:00:27Z",
+      "side": 1,
+      "message": "Actually +bajones since you\u0027re going to work on this bug.\n\nAny 2: PTAL",
+      "revId": "4e5a24390cedd94d323c99910a58ae5159bf4e80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
