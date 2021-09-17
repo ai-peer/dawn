@@ -16,6 +16,23 @@
       "message": "This CL has changed from removing the FirstOffsetInfo type to applying the transform and getting the result independant of the tint-\u003ehlsl transform.",
       "revId": "6464a0e21a85cd07a57cb30c87cb666820ac83ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0dd01c_eea5d69a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-17T07:51:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6464a0e21a85cd07a57cb30c87cb666820ac83ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
