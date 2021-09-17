@@ -93,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39c4b155_7ecfc093",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1576,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-17T02:55:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f972b07c_fda83498",
+      "range": {
+        "startLine": 1576,
+        "startChar": 24,
+        "endLine": 1576,
+        "endChar": 45
+      },
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74734988_d2c95f9b",
@@ -118,6 +142,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b7be5e9_3bb4814e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1579,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-17T02:55:09Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "74734988_d2c95f9b",
+      "range": {
+        "startLine": 1577,
+        "startChar": 64,
+        "endLine": 1579,
+        "endChar": 0
+      },
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e9acd305_37dc1e39",
         "filename": "src/dawn_native/RenderPipeline.h",
         "patchSetId": 1
@@ -129,6 +177,24 @@
       "writtenOn": "2021-09-16T13:17:07Z",
       "side": 1,
       "message": "nit: Maybe this should be pure virtual instead since all backends implement it (except null, but we can add a fake implementation there).",
+      "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bc98915_90463431",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-17T02:55:09Z",
+      "side": 1,
+      "message": "Oh we can\u0027t do it now because in [1] we still need to create a RenderPipelineBase object to compute the hashcode (although I think it redundant to create RenderPipelineBase object there, maybe we can either compute the hashcode from RenderPipelineDescriptor or reuse the RenderPipelineBase object created here when we create the render pipeline object at the backend). \n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/Device.cpp;l\u003d654",
+      "parentUuid": "e9acd305_37dc1e39",
       "revId": "8cd3a0f3d92c1f13b5cb625eb1949a003829ae2e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
