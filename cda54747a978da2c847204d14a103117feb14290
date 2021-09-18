@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6887eee_0564d23d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-18T00:01:48Z",
+      "side": 1,
+      "message": "Thank you for the (continued) review!\n\nI\u0027m pretty happy with how this is turning out--please let me know if this is what you envisioned!",
+      "revId": "cda54747a978da2c847204d14a103117feb14290",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

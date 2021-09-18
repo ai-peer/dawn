@@ -78,6 +78,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9d4ad91_a8ad3e3d",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-18T00:01:48Z",
+      "side": 1,
+      "message": "I wasn\u0027t able to convert the stringstream in CreateCacheKey into an ostringstream nicely... the closest I could figure was stream.flush() -\u003e std::ostream. Any ideas? (This code was moved back into ShaderModuleD3D12.cpp, but has the same std::stringstream interface)",
+      "parentUuid": "42b08ad3_c554d060",
+      "range": {
+        "startLine": 110,
+        "startChar": 34,
+        "endLine": 110,
+        "endChar": 51
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b384add6_cdecc024",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 16
@@ -125,6 +149,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "75bafada_0873a082",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-18T00:01:48Z",
+      "side": 1,
+      "message": "I think I\u0027ll opt to include these two fields in ShaderCompilationRequest, and defer sharing the code with other backends until when other backends enable pipeline caching. I don\u0027t suspect it\u0027ll take much effort to reuse this code when its needed, but for now it seems reasonable to keep the changes self-contained.",
+      "parentUuid": "d7ac6428_1e843e35",
+      "range": {
+        "startLine": 181,
+        "startChar": 11,
+        "endLine": 182,
+        "endChar": 59
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ee1c2e5_60f79a16",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 16
@@ -136,6 +184,30 @@
       "writtenOn": "2021-09-17T17:52:26Z",
       "side": 1,
       "message": "nit: because this is only used within this translation unit, I think we can have CompileThatShader be templated over F and pass this as \"F\u0026\u0026 DumpShadersEmitLog\"\n\ncasing for functions should be CamelCase, or maybe camelCase -- we don\u0027t pass functions as args that often.",
+      "range": {
+        "startLine": 287,
+        "startChar": 37,
+        "endLine": 288,
+        "endChar": 99
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e99470f_e6185d2a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-18T00:01:48Z",
+      "side": 1,
+      "message": "I think that local closures are given PascalCase names (e.g. SetRootDescriptorTable in PiplineLayoutD3D12.cpp), so I\u0027ll follow that naming pattern.",
+      "parentUuid": "8ee1c2e5_60f79a16",
       "range": {
         "startLine": 287,
         "startChar": 37,
@@ -169,6 +241,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e198ccfa_cae53549",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-18T00:01:48Z",
+      "side": 1,
+      "message": "Ack. \n\nI think this was added by my editor when I used uint32_t.",
+      "parentUuid": "4fde90a5_0c472e73",
+      "range": {
+        "startLine": 18,
+        "startChar": 10,
+        "endLine": 18,
+        "endChar": 18
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6907c4b_56ed409c",
@@ -182,6 +278,24 @@
       "writtenOn": "2021-09-17T17:52:26Z",
       "side": 1,
       "message": "nit: keep everything camelCase",
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e7875e5_58310381",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-18T00:01:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6907c4b_56ed409c",
       "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
