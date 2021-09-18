@@ -16,6 +16,23 @@
       "message": "PTAL! I missed this detail, but the CTS tests caught it :) ",
       "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc908fef_e3766372",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-18T00:57:45Z",
+      "side": 1,
+      "message": "lgtm!",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
