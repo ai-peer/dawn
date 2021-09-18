@@ -16,46 +16,41 @@
 
 #include "common/Assert.h"
 
-#define LIMITS(X)                                           \
-    X(Higher, maxTextureDimension1D, 8192)                  \
-    X(Higher, maxTextureDimension2D, 8192)                  \
-    X(Higher, maxTextureDimension3D, 2048)                  \
-    X(Higher, maxTextureArrayLayers, 256)                   \
-    X(Higher, maxBindGroups, 4)                             \
-    X(Higher, maxDynamicUniformBuffersPerPipelineLayout, 8) \
-    X(Higher, maxDynamicStorageBuffersPerPipelineLayout, 4) \
-    X(Higher, maxSampledTexturesPerShaderStage, 16)         \
-    X(Higher, maxSamplersPerShaderStage, 16)                \
-    X(Higher, maxStorageBuffersPerShaderStage, 8)           \
-    X(Higher, maxStorageTexturesPerShaderStage, 4)          \
-    X(Higher, maxUniformBuffersPerShaderStage, 12)          \
-    X(Higher, maxUniformBufferBindingSize, 16384)           \
-    X(Higher, maxStorageBufferBindingSize, 134217728)       \
-    X(Lower, minUniformBufferOffsetAlignment, 256)          \
-    X(Lower, minStorageBufferOffsetAlignment, 256)          \
-    X(Higher, maxVertexBuffers, 8)                          \
-    X(Higher, maxVertexAttributes, 16)                      \
-    X(Higher, maxVertexBufferArrayStride, 2048)             \
-    X(Higher, maxInterStageShaderComponents, 60)            \
-    X(Higher, maxComputeWorkgroupStorageSize, 16352)        \
-    X(Higher, maxComputeInvocationsPerWorkgroup, 256)       \
-    X(Higher, maxComputeWorkgroupSizeX, 256)                \
-    X(Higher, maxComputeWorkgroupSizeY, 256)                \
-    X(Higher, maxComputeWorkgroupSizeZ, 64)                 \
-    X(Higher, maxComputeWorkgroupsPerDimension, 65535)
+#define LIMITS(X)                                      \
+    X(>, maxTextureDimension1D, 8192)                  \
+    X(>, maxTextureDimension2D, 8192)                  \
+    X(>, maxTextureDimension3D, 2048)                  \
+    X(>, maxTextureArrayLayers, 256)                   \
+    X(>, maxBindGroups, 4)                             \
+    X(>, maxDynamicUniformBuffersPerPipelineLayout, 8) \
+    X(>, maxDynamicStorageBuffersPerPipelineLayout, 4) \
+    X(>, maxSampledTexturesPerShaderStage, 16)         \
+    X(>, maxSamplersPerShaderStage, 16)                \
+    X(>, maxStorageBuffersPerShaderStage, 8)           \
+    X(>, maxStorageTexturesPerShaderStage, 4)          \
+    X(>, maxUniformBuffersPerShaderStage, 12)          \
+    X(>, maxUniformBufferBindingSize, 16384)           \
+    X(>, maxStorageBufferBindingSize, 134217728)       \
+    X(<, minUniformBufferOffsetAlignment, 256)         \
+    X(<, minStorageBufferOffsetAlignment, 256)         \
+    X(>, maxVertexBuffers, 8)                          \
+    X(>, maxVertexAttributes, 16)                      \
+    X(>, maxVertexBufferArrayStride, 2048)             \
+    X(>, maxInterStageShaderComponents, 60)            \
+    X(>, maxComputeWorkgroupStorageSize, 16352)        \
+    X(>, maxComputeInvocationsPerWorkgroup, 256)       \
+    X(>, maxComputeWorkgroupSizeX, 256)                \
+    X(>, maxComputeWorkgroupSizeY, 256)                \
+    X(>, maxComputeWorkgroupSizeZ, 64)                 \
+    X(>, maxComputeWorkgroupsPerDimension, 65535)
 
 namespace dawn_native {
     namespace {
-        enum class LimitBetterDirection {
-            Lower,
-            Higher,
-        };
-
-        template <LimitBetterDirection Better>
+        template <const char BetterOp>
         struct CheckLimit;
 
         template <>
-        struct CheckLimit<LimitBetterDirection::Lower> {
+        struct CheckLimit<'<'> {
             template <typename T>
             static MaybeError Invoke(T supported, T required) {
                 if (required < supported) {
@@ -66,7 +61,7 @@ namespace dawn_native {
         };
 
         template <>
-        struct CheckLimit<LimitBetterDirection::Higher> {
+        struct CheckLimit<'>'> {
             template <typename T>
             static MaybeError Invoke(T supported, T required) {
                 if (required > supported) {
@@ -96,18 +91,19 @@ namespace dawn_native {
 
     void GetDefaultLimits(Limits* limits) {
         ASSERT(limits != nullptr);
-#define X(Better, limitName, defaultValue) limits->limitName = defaultValue;
+#define X(BetterOp, limitName, defaultValue) limits->limitName = defaultValue;
         LIMITS(X)
 #undef X
     }
 
     Limits ReifyDefaultLimits(const Limits& limits) {
         Limits out;
-#define X(Better, limitName, defaultValue)     \
-    if (!IsLimitUndefined(limits.limitName)) { \
-        out.limitName = limits.limitName;      \
-    } else {                                   \
-        out.limitName = defaultValue;          \
+#define X(BetterOp, limitName, defaultValue)                                            \
+    if (IsLimitUndefined(limits.limitName) || defaultValue BetterOp limits.limitName) { \
+        /* If the limit is undefined or the default is better, use the default */       \
+        out.limitName = defaultValue;                                                   \
+    } else {                                                                            \
+        out.limitName = limits.limitName;                                               \
     }
         LIMITS(X)
 #undef X
@@ -115,10 +111,10 @@ namespace dawn_native {
     }
 
     MaybeError ValidateLimits(const Limits& supportedLimits, const Limits& requiredLimits) {
-#define X(Better, limitName, defaultValue)                                                    \
-    if (!IsLimitUndefined(requiredLimits.limitName)) {                                        \
-        DAWN_TRY(CheckLimit<LimitBetterDirection::Better>::Invoke(supportedLimits.limitName,  \
-                                                                  requiredLimits.limitName)); \
+#define X(BetterOp, limitName, defaultValue)                                    \
+    if (!IsLimitUndefined(requiredLimits.limitName)) {                          \
+        DAWN_TRY(CheckLimit<(#BetterOp)[0]>::Invoke(supportedLimits.limitName,  \
+                                                    requiredLimits.limitName)); \
     }
         LIMITS(X)
 #undef X
