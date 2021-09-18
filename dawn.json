@@ -22,7 +22,9 @@
         "extensible": true,
         "tags": ["upstream"],
         "members": [
-            {"name": "compatible surface", "type": "surface"}
+            {"name": "compatible surface", "type": "surface"},
+            {"name": "power preference", "type": "power preference"},
+            {"name": "force fallback adapter", "type": "bool", "tags": ["upstream"]}
         ]
     },
     "request adapter status": {
@@ -51,10 +53,26 @@
         "tags": ["upstream"],
         "methods": [
             {
+                "name": "get limits",
+                "returns": "bool",
+                "tags": ["upstream"],
+                "args": [
+                    {"name": "limits", "type": "supported limits", "annotation": "*"}
+                ]
+            },
+            {
                 "name": "get properties",
                 "tags": ["upstream"],
                 "args": [
                     {"name": "properties", "type": "adapter properties", "annotation": "*"}
+                ]
+            },
+            {
+                "name": "has feature",
+                "returns": "bool",
+                "tags": ["upstream"],
+                "args": [
+                    {"name": "feature", "type": "feature name"}
                 ]
             },
             {
@@ -95,7 +113,11 @@
         "extensible": true,
         "tags": ["upstream"],
         "_TODO": "Add requiredFeatures and requiredLimits support",
-        "members": []
+        "members": [
+            {"name": "required features count", "type": "uint32_t"},
+            {"name": "required features", "type": "feature name", "annotation": "const*", "length": "required features count"},
+            {"name": "required limits", "type": "required limits", "annotation": "const*"}
+        ]
     },
     "address mode": {
         "category": "enum",
@@ -411,6 +433,14 @@
             {"value": 4, "name": "blue"},
             {"value": 8, "name": "alpha"},
             {"value": 15, "name": "all"}
+        ]
+    },
+    "constant entry": {
+        "category": "structure",
+        "extensible": "in",
+        "members": [
+            {"name": "key", "type": "char", "annotation": "const*"},
+            {"name": "value", "type": "double"}
         ]
     },
     "command buffer": {
@@ -1119,6 +1149,21 @@
             {"name": "format", "type": "texture format"}
         ]
     },
+    "feature name": {
+        "category": "enum",
+        "tags": ["upstream"],
+        "values": [
+            {"value": 0, "name": "undefined", "jsrepr": "undefined"},
+            {"value": 1, "name": "depth clamping"},
+            {"value": 2, "name": "depth24 unorm stencil8"},
+            {"value": 3, "name": "depth32 float stencil8"},
+            {"value": 4, "name": "timestamp query"},
+            {"value": 5, "name": "pipeline statistics query"},
+            {"value": 6, "name": "texture compression BC"},
+            {"value": 7, "name": "texture compression ETC2"},
+            {"value": 8, "name": "texture compression ASTC"}
+        ]
+    },
     "filter mode": {
         "category": "enum",
         "values": [
@@ -1271,6 +1316,14 @@
             {"value": 4, "name": "compute shader invocations"}
         ]
     },
+    "power preference": {
+        "category": "enum",
+        "tags": ["upstream"],
+        "values": [
+            {"value": 0, "name": "low power"},
+            {"value": 1, "name": "high performance"}
+        ]
+    },
     "present mode": {
         "category": "enum",
         "emscripten_no_enum_table": true,
@@ -1285,7 +1338,9 @@
         "extensible": true,
         "members": [
             {"name": "module", "type": "shader module"},
-            {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"}
+            {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "constant count", "type": "uint32_t", "tags": ["upstream"]},
+            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count", "tags": ["upstream"]}
         ]
     },
     "primitive topology": {
@@ -1753,6 +1808,8 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "constant count", "type": "uint32_t", "tags": ["upstream"]},
+            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count", "tags": ["upstream"]},
             {"name": "buffer count", "type": "uint32_t", "default": 0},
             {"name": "buffers", "type": "vertex buffer layout", "annotation": "const*", "length": "buffer count"}
         ]
@@ -1810,6 +1867,8 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "constant count", "type": "uint32_t", "tags": ["upstream"]},
+            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count", "tags": ["upstream"]},
             {"name": "target count", "type": "uint32_t"},
             {"name": "targets", "type": "color target state", "annotation": "const*", "length": "target count"}
         ]
