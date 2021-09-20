@@ -16,6 +16,69 @@
       "message": "Thank you for the (continued) review!\n\nI\u0027m pretty happy with how this is turning out--please let me know if this is what you envisioned!",
       "revId": "cda54747a978da2c847204d14a103117feb14290",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60de1ab9_14789993",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T19:38:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cda54747a978da2c847204d14a103117feb14290",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f134c5_db66b79c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T19:38:30Z",
+      "side": 1,
+      "message": "when is this used?",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "cda54747a978da2c847204d14a103117feb14290",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30f7be71_ec8380be",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T19:38:30Z",
+      "side": 1,
+      "message": "nit: because of the \"using\" we may be able to shorten this",
+      "range": {
+        "startLine": 468,
+        "startChar": 8,
+        "endLine": 468,
+        "endChar": 25
+      },
+      "revId": "cda54747a978da2c847204d14a103117feb14290",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

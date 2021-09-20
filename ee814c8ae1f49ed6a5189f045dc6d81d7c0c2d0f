@@ -100,6 +100,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "957ffd69_74343c7f",
+        "filename": "src/dawn_native/BindGroupLayout.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T19:38:30Z",
+      "side": 1,
+      "message": "ah because we need to read it into a std::vector. Seems fine as-is.",
+      "parentUuid": "a9d4ad91_a8ad3e3d",
+      "range": {
+        "startLine": 110,
+        "startChar": 34,
+        "endLine": 110,
+        "endChar": 51
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b384add6_cdecc024",
@@ -161,6 +185,30 @@
       "side": 1,
       "message": "I think I\u0027ll opt to include these two fields in ShaderCompilationRequest, and defer sharing the code with other backends until when other backends enable pipeline caching. I don\u0027t suspect it\u0027ll take much effort to reuse this code when its needed, but for now it seems reasonable to keep the changes self-contained.",
       "parentUuid": "d7ac6428_1e843e35",
+      "range": {
+        "startLine": 181,
+        "startChar": 11,
+        "endLine": 182,
+        "endChar": 59
+      },
+      "revId": "ee814c8ae1f49ed6a5189f045dc6d81d7c0c2d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b13e584_dde6aac6",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T19:38:30Z",
+      "side": 1,
+      "message": "sounds good to me",
+      "parentUuid": "75bafada_0873a082",
       "range": {
         "startLine": 181,
         "startChar": 11,
