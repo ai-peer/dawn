@@ -33,6 +33,40 @@
       "message": "lgtm!",
       "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cea768f5_c887f448",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:16:13Z",
+      "side": 1,
+      "message": "LGTM Does the clamping match what the spec says?",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05d4fb36_b57d5878",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:16:13Z",
+      "side": 1,
+      "message": "optional nit: I\u0027m not sure the change to have BetterOp be a char is strictly necessary: We could add IsBetter to CheckLimits which would be slightly more readable?",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
