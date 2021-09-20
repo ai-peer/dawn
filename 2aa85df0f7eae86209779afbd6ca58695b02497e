@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "aac167fb_5e560683",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T16:00:29Z",
+      "side": 1,
+      "message": "not that I could find\nhttps://gpuweb.github.io/gpuweb/#dom-gpudevicedescriptor-requiredlimits\n\n\u003e Exactly the specified limits, and no better or worse, will be allowed in validation of API calls on the resulting device.\n\nKai were you intending to make a spec PR about this?\nI guess for now I can suppress the tests and hold off on this CL until resolution in the spec.",
+      "parentUuid": "cea768f5_c887f448",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05d4fb36_b57d5878",
         "filename": "src/dawn_native/Limits.cpp",
         "patchSetId": 1
