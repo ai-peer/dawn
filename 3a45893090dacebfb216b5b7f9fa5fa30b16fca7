@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d06e1c33_a0700151",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:49:37Z",
+      "side": 1,
+      "message": "LGTM, thanks for all the iterations!",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bad8c37_d106f083",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:49:37Z",
+      "side": 1,
+      "message": "nit: I think this would be a DAWN_INTERNAL_ERROR to make sure we lose the device since we\u0027re not acting up to spec.",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
