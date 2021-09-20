@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c390e708_6dcd2e12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:45:43Z",
+      "side": 1,
+      "message": "Looks amazing, looking forward to it when we\u0027re able to re-land abseil.",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5e11b8f_4a462632",
+        "filename": "docs/validation_errors.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:45:43Z",
+      "side": 1,
+      "message": "This might be in an errors.md given there is a lot more validation. Would be nice!",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cf7fc03_270425df",
@@ -36,6 +70,46 @@
         "startChar": 0,
         "endLine": 39,
         "endChar": 2
+      },
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b30d41ac_7ed6191e",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:45:43Z",
+      "side": 1,
+      "message": "nit: slight preference for adding type aliases for FooBase for pure_frontend_types in their respective header (sorry I wasn\u0027t super clear earlier). Otherwise a pattern we can use in templates is:\n\n  {% set Base \u003d if type.name.canonical_case() in pure_frontend_types: \"Base\" else \"\"%}\n  class {{type.name.CamelCase()}}{{Base}}\n  \nThis is used extensively in wire templates to add {{Out}} or {{Return}} to types as needed.",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "853aa2a8_ea2b250d",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:45:43Z",
+      "side": 1,
+      "message": "optional nit: We could say what that it is the minimum alignment for a specific buffer binding type.",
+      "range": {
+        "startLine": 93,
+        "startChar": 79,
+        "endLine": 93,
+        "endChar": 80
       },
       "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
