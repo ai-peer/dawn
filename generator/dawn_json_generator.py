@@ -774,8 +774,11 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('webgpu_cpp.h', 'emscripten-bits/webgpu_cpp.h',
                            [RENDER_PARAMS_BASE, params_emscripten]))
             renders.append(
-                FileRender('webgpu_cpp.cpp', 'emscripten-bits/webgpu_cpp.cpp',
-                           [RENDER_PARAMS_BASE, params_emscripten]))
+                FileRender(
+                    'webgpu_cpp.cpp',
+                    # .cpp.txt so CMake doesn't try to compile it.
+                    'emscripten-bits/webgpu_cpp.cpp.txt',
+                    [RENDER_PARAMS_BASE, params_emscripten]))
             renders.append(
                 FileRender('webgpu_struct_info.json',
                            'emscripten-bits/webgpu_struct_info.json',
