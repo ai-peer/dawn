@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc64ebc_ad3a4c04",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:38:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5715073_de8dc79d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:38:17Z",
+      "side": 1,
+      "message": "TBH we don\u0027t need this comment about Metal and a Dawn issue since this is what the spec requires.",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 33
+      },
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e974d2fd_a3c64a03",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-20T11:38:17Z",
+      "side": 1,
+      "message": "Can we test 128 which is the first smallest alignment?",
+      "range": {
+        "startLine": 587,
+        "startChar": 71,
+        "endLine": 587,
+        "endChar": 72
+      },
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
