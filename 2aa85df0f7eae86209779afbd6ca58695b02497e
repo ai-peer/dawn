@@ -72,6 +72,58 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f766b9e4_619e052f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-20T18:49:07Z",
+      "side": 1,
+      "message": "I made a PR about it a while back, but obviously I missed a couple of references that imply that lower bounds are an error.\n\nThe text that you should be following is in https://gpuweb.github.io/gpuweb/#a-new-device:\n\n\"For each (key, value) pair in descriptor.requiredLimits, set the member corresponding to key in device.[[limits]] to the better value of value or the default value in supported limits.\"\n\nI\u0027ll do a followup PR to loosen the other references that imply it MUST be the default limit or better.",
+      "parentUuid": "aac167fb_5e560683",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb8d2ef_dca38dfd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-20T18:49:07Z",
+      "side": 1,
+      "message": "LGTM too.",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0199534_2b676413",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-20T18:49:07Z",
+      "side": 1,
+      "message": "µNit: Slightly concerned that the visual difference between \u003e and \u003c is easy to miss in this list.",
+      "revId": "2aa85df0f7eae86209779afbd6ca58695b02497e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05d4fb36_b57d5878",
         "filename": "src/dawn_native/Limits.cpp",
         "patchSetId": 1
