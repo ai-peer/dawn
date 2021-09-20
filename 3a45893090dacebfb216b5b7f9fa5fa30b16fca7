@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fac5776_aaf9ffe3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T15:42:55Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bad8c37_d106f083",
@@ -31,6 +48,64 @@
       "writtenOn": "2021-09-20T11:49:37Z",
       "side": 1,
       "message": "nit: I think this would be a DAWN_INTERNAL_ERROR to make sure we lose the device since we\u0027re not acting up to spec.",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2ef0e1e_cc4c8f21",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T15:42:55Z",
+      "side": 1,
+      "message": "or maybe DAWN_OUT_OF_MEMORY_ERROR which we\u0027re also allowed to throw whenever we want - but it\u0027s a little less aggressive and doesn\u0027t lose the device",
+      "parentUuid": "3bad8c37_d106f083",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9deeb7a1_dca89f59",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T15:42:55Z",
+      "side": 1,
+      "message": "unit: const",
+      "range": {
+        "startLine": 287,
+        "startChar": 13,
+        "endLine": 287,
+        "endChar": 17
+      },
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d844df0_4e564d95",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-20T15:42:55Z",
+      "side": 1,
+      "message": "nit: should also test where we do a bunch of EncodeDrawCommands up front, and then TestDraw(..) on all of them after. Right now we encode,submit,encode,submit, ... back-to-back. WE should test encoding and holding onto multiple command buffers, and then:\n - submitting them all together\n - submitting them individually\n - submitting them in an order different from the order they were encoded in",
       "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
