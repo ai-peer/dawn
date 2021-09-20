@@ -774,7 +774,8 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('webgpu_cpp.h', 'emscripten-bits/webgpu_cpp.h',
                            [RENDER_PARAMS_BASE, params_emscripten]))
             renders.append(
-                FileRender('webgpu_cpp.cpp', 'emscripten-bits/webgpu_cpp.cpp',
+                FileRender('webgpu_cpp.cpp',
+                           'emscripten-bits/webgpu_cpp.cpp.txt',
                            [RENDER_PARAMS_BASE, params_emscripten]))
             renders.append(
                 FileRender('webgpu_struct_info.json',
