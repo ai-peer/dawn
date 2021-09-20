@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "813aa193_9a092093",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-20T20:44:04Z",
+      "side": 1,
+      "message": "This is to serialize ast::Access inside of BindingRemapper::AccessControls. I can make this explicit to help clarify.",
+      "parentUuid": "a9f134c5_db66b79c",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 54,
+        "endChar": 0
+      },
+      "revId": "cda54747a978da2c847204d14a103117feb14290",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30f7be71_ec8380be",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-20T19:38:30Z",
       "side": 1,
       "message": "nit: because of the \"using\" we may be able to shorten this",
+      "range": {
+        "startLine": 468,
+        "startChar": 8,
+        "endLine": 468,
+        "endChar": 25
+      },
+      "revId": "cda54747a978da2c847204d14a103117feb14290",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4a264bb_c2a733ae",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-20T20:44:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30f7be71_ec8380be",
       "range": {
         "startLine": 468,
         "startChar": 8,
