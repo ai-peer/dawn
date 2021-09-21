@@ -126,17 +126,36 @@ dawn_json_generator("mock_webgpu_gen") {
   ]
 }
 
+# Source code for mocks used for unit testing are separated from the rest of
+# sources so that they aren't included in non-test builds.
+source_set("dawn_native_mocks_sources") {
+  testonly = true
+
+  deps = [
+    ":gmock_and_gtest",
+    "${dawn_root}/src/dawn_native:dawn_native_sources",
+    "${dawn_root}/src/dawn_native:dawn_native_static",
+    "${dawn_root}/src/utils:dawn_utils",
+  ]
+
+  sources = [
+    "unittests/native/mocks/AdapterMock.h",
+    "unittests/native/mocks/DeviceMock.h",
+  ]
+}
+
 test("dawn_unittests") {
   configs += [ "${dawn_root}/src/common:dawn_internal" ]
 
   deps = [
+    ":dawn_native_mocks_sources",
     ":gmock_and_gtest",
     ":mock_webgpu_gen",
     "${dawn_root}/src/common",
     "${dawn_root}/src/dawn:dawn_proc",
     "${dawn_root}/src/dawn:dawncpp",
-    "${dawn_root}/src/dawn_native",
     "${dawn_root}/src/dawn_native:dawn_native_sources",
+    "${dawn_root}/src/dawn_native:dawn_native_static",
     "${dawn_root}/src/dawn_wire",
     "${dawn_root}/src/utils:dawn_utils",
   ]
@@ -187,6 +206,7 @@ test("dawn_unittests") {
     "unittests/SystemUtilsTests.cpp",
     "unittests/ToBackendTests.cpp",
     "unittests/TypedIntegerTests.cpp",
+    "unittests/native/DestroyObjectTests.cpp",
     "unittests/validation/BindGroupValidationTests.cpp",
     "unittests/validation/BufferValidationTests.cpp",
     "unittests/validation/CommandBufferValidationTests.cpp",
