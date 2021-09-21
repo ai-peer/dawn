@@ -288,6 +288,11 @@ namespace dawn_native {
         ScratchBuffer& validatedParamsBuffer = store->scratchIndirectStorage;
         ScratchBuffer& batchDataBuffer = store->scratchStorage;
 
+        // HACK: Force new buffer allcation for every validated render pass.
+        // not intended for submission
+        validatedParamsBuffer.Reset();
+        batchDataBuffer.Reset();
+
         uint64_t requiredBatchDataBufferSize = 0;
         for (const Pass& pass : passes) {
             requiredBatchDataBufferSize = std::max(requiredBatchDataBufferSize, pass.batchDataSize);
