@@ -261,6 +261,15 @@ namespace dawn_native {
         State GetState() const;
         bool IsLost() const;
         std::mutex* GetObjectListMutex(ObjectType type);
+        template <typename T>
+        ResultOrError<Ref<T>> TrackObject(ResultOrError<Ref<T>> object) {
+            Ref<T> result;
+            DAWN_TRY_ASSIGN(result, object);
+            ApiObjectList& objectList = mObjectLists[result->GetType()];
+            std::lock_guard<std::mutex> lock(objectList.mutex);
+            objectList.objects.Append(result.Get());
+            return object;
+        }
 
         std::vector<const char*> GetEnabledExtensions() const;
         std::vector<const char*> GetTogglesUsed() const;
