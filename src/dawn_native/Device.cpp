@@ -1145,7 +1145,7 @@ namespace dawn_native {
             DAWN_TRY_CONTEXT(ValidateBindGroupDescriptor(this, descriptor),
                              "validating %s against %s", descriptor, descriptor->layout);
         }
-        return CreateBindGroupImpl(descriptor);
+        return TrackObject(CreateBindGroupImpl(descriptor));
     }
 
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayout(
