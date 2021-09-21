@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f60fe16_fb5d99c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-21T17:11:05Z",
+      "side": 1,
+      "message": "LGTM, but it would be nice to have that on CI or we\u0027ll keep regressing GCC compilation.",
+      "revId": "eae9cc3aaf683324a8a8e87611ca8248ea92811d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
