@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "6255b1ec_c9bab93a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-21T18:30:35Z",
+      "side": 1,
+      "message": "No bug. Just fixing CMake stuff I found that was causing trouble when using Dawn as a dependency.",
+      "parentUuid": "e3e9f6d8_d548f0e0",
+      "revId": "30eebe2dc238eba67504ab175e74498f8b4b92a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "258edb3b_e1ee6fd6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
