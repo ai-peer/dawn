@@ -20,6 +20,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/QuerySet.h"
 #include "dawn_native/RenderBundle.h"
 #include "dawn_native/RenderPipeline.h"
@@ -56,7 +57,10 @@ namespace dawn_native {
                                          QuerySetBase* occlusionQuerySet,
                                          uint32_t renderTargetWidth,
                                          uint32_t renderTargetHeight)
-        : RenderEncoderBase(device, encodingContext, std::move(attachmentState)),
+        : RenderEncoderBase(device,
+                            ObjectType::RenderPassEncoder,
+                            encodingContext,
+                            std::move(attachmentState)),
           mCommandEncoder(commandEncoder),
           mRenderTargetWidth(renderTargetWidth),
           mRenderTargetHeight(renderTargetHeight),
@@ -68,7 +72,8 @@ namespace dawn_native {
                                          CommandEncoder* commandEncoder,
                                          EncodingContext* encodingContext,
                                          ErrorTag errorTag)
-        : RenderEncoderBase(device, encodingContext, errorTag), mCommandEncoder(commandEncoder) {
+        : RenderEncoderBase(device, ObjectType::RenderPassEncoder, encodingContext, errorTag),
+          mCommandEncoder(commandEncoder) {
     }
 
     RenderPassEncoder* RenderPassEncoder::MakeError(DeviceBase* device,

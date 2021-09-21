@@ -13,24 +13,27 @@
 // limitations under the License.
 
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/Device.h"
+
+#include <mutex>
 
 namespace dawn_native {
 
     static constexpr uint64_t kErrorPayload = 0;
     static constexpr uint64_t kNotErrorPayload = 1;
 
-    ObjectBase::ObjectBase(DeviceBase* device, const char* label)
-        : RefCounted(kNotErrorPayload), mDevice(device) {
+    ObjectBase::ObjectBase(DeviceBase* device, ObjectType type, const char* label)
+        : RefCounted(kNotErrorPayload), mType(type), mDevice(device) {
         if (label) {
             mLabel = label;
         }
     }
 
-    ObjectBase::ObjectBase(DeviceBase* device, ErrorTag)
-        : RefCounted(kErrorPayload), mDevice(device) {
+    ObjectBase::ObjectBase(DeviceBase* device, ObjectType type, ErrorTag)
+        : RefCounted(kErrorPayload), mType(type), mDevice(device) {
     }
-    ObjectBase::ObjectBase(DeviceBase* device, LabelNotImplementedTag)
-        : RefCounted(kNotErrorPayload), mDevice(device) {
+    ObjectBase::ObjectBase(DeviceBase* device, ObjectType type, LabelNotImplementedTag)
+        : RefCounted(kNotErrorPayload), mType(type), mDevice(device) {
     }
 
     const std::string& ObjectBase::GetLabel() {
@@ -45,12 +48,26 @@ namespace dawn_native {
         return GetRefCountPayload() == kErrorPayload;
     }
 
+    void ObjectBase::DestroyObject() {
+        if (mState != State::Destroyed) {
+            if (mDevice != nullptr) {
+                const std::lock_guard<std::mutex> lock(mDevice->GetObjectListMutex(mType));
+                RemoveFromList();
+            }
+            DestroyObjectImpl();
+        }
+        mState = State::Destroyed;
+    }
+
     void ObjectBase::APISetLabel(const char* label) {
         mLabel = label;
         SetLabelImpl();
     }
 
     void ObjectBase::SetLabelImpl() {
+    }
+
+    void ObjectBase::DestroyObjectImpl() {
     }
 
 }  // namespace dawn_native

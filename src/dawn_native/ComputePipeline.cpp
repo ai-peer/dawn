@@ -16,6 +16,7 @@
 
 #include "dawn_native/Device.h"
 #include "dawn_native/ObjectContentHasher.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 namespace dawn_native {
 
@@ -39,6 +40,7 @@ namespace dawn_native {
     ComputePipelineBase::ComputePipelineBase(DeviceBase* device,
                                              const ComputePipelineDescriptor* descriptor)
         : PipelineBase(device,
+                       ObjectType::ComputePipeline,
                        descriptor->layout,
                        descriptor->label,
                        {{SingleShaderStage::Compute, descriptor->compute.module,
@@ -46,7 +48,7 @@ namespace dawn_native {
     }
 
     ComputePipelineBase::ComputePipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : PipelineBase(device, tag) {
+        : PipelineBase(device, ObjectType::ComputePipeline, tag) {
     }
 
     ComputePipelineBase::~ComputePipelineBase() {

@@ -18,6 +18,7 @@
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Format.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 #include "dawn_platform/DawnPlatform.h"
@@ -80,13 +81,17 @@ namespace dawn_native {
     RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device,
                                              const RenderBundleEncoderDescriptor* descriptor)
         : RenderEncoderBase(device,
+                            ObjectType::RenderBundleEncoder,
                             &mBundleEncodingContext,
                             device->GetOrCreateAttachmentState(descriptor)),
           mBundleEncodingContext(device, this) {
     }
 
     RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag)
-        : RenderEncoderBase(device, &mBundleEncodingContext, errorTag),
+        : RenderEncoderBase(device,
+                            ObjectType::RenderBundleEncoder,
+                            &mBundleEncodingContext,
+                            errorTag),
           mBundleEncodingContext(device, this) {
     }
 

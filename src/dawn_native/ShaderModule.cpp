@@ -1127,7 +1127,8 @@ namespace dawn_native {
     // ShaderModuleBase
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
-        : CachedObject(device, descriptor->label), mType(Type::Undefined) {
+        : CachedObject(device, ObjectType::ShaderModule, descriptor->label),
+          mType(Type::Undefined) {
         ASSERT(descriptor->nextInChain != nullptr);
         const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
         FindInChain(descriptor->nextInChain, &spirvDesc);
@@ -1145,7 +1146,7 @@ namespace dawn_native {
     }
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : CachedObject(device, tag), mType(Type::Undefined) {
+        : CachedObject(device, ObjectType::ShaderModule, tag), mType(Type::Undefined) {
     }
 
     ShaderModuleBase::~ShaderModuleBase() {

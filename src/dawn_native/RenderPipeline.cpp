@@ -20,6 +20,7 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/InternalPipelineStore.h"
 #include "dawn_native/ObjectContentHasher.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 #include "dawn_native/VertexFormat.h"
 
@@ -451,6 +452,7 @@ namespace dawn_native {
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
                                            const RenderPipelineDescriptor* descriptor)
         : PipelineBase(device,
+                       ObjectType::RenderPipeline,
                        descriptor->layout,
                        descriptor->label,
                        GetRenderStagesAndSetDummyShader(device, descriptor)),
@@ -550,7 +552,7 @@ namespace dawn_native {
     }
 
     RenderPipelineBase::RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : PipelineBase(device, tag) {
+        : PipelineBase(device, ObjectType::RenderPipeline, tag) {
     }
 
     // static

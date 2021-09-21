@@ -18,6 +18,7 @@
 #include "dawn_native/AttachmentState.h"
 #include "dawn_native/CommandBufferStateTracker.h"
 #include "dawn_native/Error.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PassResourceUsageTracker.h"
 #include "dawn_native/ProgrammablePassEncoder.h"
 
@@ -26,6 +27,7 @@ namespace dawn_native {
     class RenderEncoderBase : public ProgrammablePassEncoder {
       public:
         RenderEncoderBase(DeviceBase* device,
+                          ObjectType type,
                           EncodingContext* encodingContext,
                           Ref<AttachmentState> attachmentState);
 
@@ -60,7 +62,10 @@ namespace dawn_native {
 
       protected:
         // Construct an "error" render encoder base.
-        RenderEncoderBase(DeviceBase* device, EncodingContext* encodingContext, ErrorTag errorTag);
+        RenderEncoderBase(DeviceBase* device,
+                          ObjectType type,
+                          EncodingContext* encodingContext,
+                          ErrorTag errorTag);
 
         CommandBufferStateTracker mCommandBufferState;
         RenderPassResourceUsageTracker mUsageTracker;

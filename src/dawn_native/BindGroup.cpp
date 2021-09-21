@@ -22,6 +22,7 @@
 #include "dawn_native/ChainUtils_autogen.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/ExternalTexture.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/Sampler.h"
 #include "dawn_native/Texture.h"
 
@@ -309,7 +310,7 @@ namespace dawn_native {
     BindGroupBase::BindGroupBase(DeviceBase* device,
                                  const BindGroupDescriptor* descriptor,
                                  void* bindingDataStart)
-        : ObjectBase(device, kLabelNotImplemented),
+        : ObjectBase(device, ObjectType::BindGroup, kLabelNotImplemented),
           mLayout(descriptor->layout),
           mBindingData(mLayout->ComputeBindingDataPointers(bindingDataStart)) {
         for (BindingIndex i{0}; i < mLayout->GetBindingCount(); ++i) {
@@ -389,7 +390,7 @@ namespace dawn_native {
     }
 
     BindGroupBase::BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag), mBindingData() {
+        : ObjectBase(device, ObjectType::BindGroup, tag), mBindingData() {
     }
 
     // static

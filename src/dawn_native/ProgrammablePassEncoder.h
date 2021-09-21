@@ -19,6 +19,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -29,7 +30,9 @@ namespace dawn_native {
     // Base class for shared functionality between ComputePassEncoder and RenderPassEncoder.
     class ProgrammablePassEncoder : public ObjectBase {
       public:
-        ProgrammablePassEncoder(DeviceBase* device, EncodingContext* encodingContext);
+        ProgrammablePassEncoder(DeviceBase* device,
+                                ObjectType type,
+                                EncodingContext* encodingContext);
 
         void APIInsertDebugMarker(const char* groupLabel);
         void APIPopDebugGroup();
@@ -53,6 +56,7 @@ namespace dawn_native {
 
         // Construct an "error" programmable pass encoder.
         ProgrammablePassEncoder(DeviceBase* device,
+                                ObjectType type,
                                 EncodingContext* encodingContext,
                                 ErrorTag errorTag);
 

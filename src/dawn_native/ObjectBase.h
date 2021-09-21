@@ -15,7 +15,10 @@
 #ifndef DAWNNATIVE_OBJECTBASE_H_
 #define DAWNNATIVE_OBJECTBASE_H_
 
+#include "common/LinkedList.h"
 #include "common/RefCounted.h"
+#include "dawn_native/ApiObjects_autogen.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include <string>
 
@@ -23,29 +26,39 @@ namespace dawn_native {
 
     class DeviceBase;
 
-    class ObjectBase : public RefCounted {
+    class ObjectBase : public RefCounted, public LinkNode<ObjectBase> {
       public:
         struct ErrorTag {};
         static constexpr ErrorTag kError = {};
         struct LabelNotImplementedTag {};
         static constexpr LabelNotImplementedTag kLabelNotImplemented = {};
 
-        ObjectBase(DeviceBase* device, LabelNotImplementedTag tag);
-        ObjectBase(DeviceBase* device, const char* label);
-        ObjectBase(DeviceBase* device, ErrorTag tag);
+        enum class State {
+            Alive,
+            Destroyed,
+        };
+
+        ObjectBase(DeviceBase* device, ObjectType type, LabelNotImplementedTag tag);
+        ObjectBase(DeviceBase* device, ObjectType type, const char* label);
+        ObjectBase(DeviceBase* device, ObjectType type, ErrorTag tag);
 
         DeviceBase* GetDevice() const;
         const std::string& GetLabel();
         bool IsError() const;
 
+        void DestroyObject();
+
         // Dawn API
         void APISetLabel(const char* label);
 
       private:
+        virtual void DestroyObjectImpl();
         virtual void SetLabelImpl();
 
         // TODO(dawn:840): Optimize memory footprint for objects that don't have labels.
         std::string mLabel;
+        ObjectType mType = ObjectType::Unknown;
+        State mState = State::Alive;
         DeviceBase* mDevice;
     };
 

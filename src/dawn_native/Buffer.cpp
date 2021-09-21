@@ -20,6 +20,7 @@
 #include "dawn_native/Device.h"
 #include "dawn_native/DynamicUploader.h"
 #include "dawn_native/ErrorData.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/Queue.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -128,7 +129,7 @@ namespace dawn_native {
     // Buffer
 
     BufferBase::BufferBase(DeviceBase* device, const BufferDescriptor* descriptor)
-        : ObjectBase(device, descriptor->label),
+        : ObjectBase(device, ObjectType::Buffer, descriptor->label),
           mSize(descriptor->size),
           mUsage(descriptor->usage),
           mState(BufferState::Unmapped) {
@@ -152,7 +153,9 @@ namespace dawn_native {
     BufferBase::BufferBase(DeviceBase* device,
                            const BufferDescriptor* descriptor,
                            ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag), mSize(descriptor->size), mState(BufferState::Unmapped) {
+        : ObjectBase(device, ObjectType::Buffer, tag),
+          mSize(descriptor->size),
+          mState(BufferState::Unmapped) {
         if (descriptor->mappedAtCreation) {
             mState = BufferState::MappedAtCreation;
             mMapOffset = 0;

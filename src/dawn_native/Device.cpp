@@ -33,6 +33,7 @@
 #include "dawn_native/ExternalTexture.h"
 #include "dawn_native/Instance.h"
 #include "dawn_native/InternalPipelineStore.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PersistentCache.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/QuerySet.h"

@@ -49,10 +49,11 @@ namespace dawn_native {
     // PipelineBase
 
     PipelineBase::PipelineBase(DeviceBase* device,
+                               ObjectType type,
                                PipelineLayoutBase* layout,
                                const char* label,
                                std::vector<StageAndDescriptor> stages)
-        : CachedObject(device, label), mLayout(layout) {
+        : CachedObject(device, type, label), mLayout(layout) {
         ASSERT(!stages.empty());
 
         for (const StageAndDescriptor& stage : stages) {
@@ -88,8 +89,8 @@ namespace dawn_native {
         }
     }
 
-    PipelineBase::PipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : CachedObject(device, tag) {
+    PipelineBase::PipelineBase(DeviceBase* device, ObjectType type, ObjectBase::ErrorTag tag)
+        : CachedObject(device, type, tag) {
     }
 
     PipelineLayoutBase* PipelineBase::GetLayout() {

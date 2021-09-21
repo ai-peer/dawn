@@ -17,6 +17,7 @@
 
 #include "dawn_native/CachedObject.h"
 #include "dawn_native/Forward.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PerStage.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/ShaderModule.h"
@@ -62,10 +63,11 @@ namespace dawn_native {
 
       protected:
         PipelineBase(DeviceBase* device,
+                     ObjectType type,
                      PipelineLayoutBase* layout,
                      const char* label,
                      std::vector<StageAndDescriptor> stages);
-        PipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
+        PipelineBase(DeviceBase* device, ObjectType type, ObjectBase::ErrorTag tag);
 
       private:
         MaybeError ValidateGetBindGroupLayout(uint32_t group);
