@@ -240,6 +240,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "717e111d_8bfd4a75",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-21T19:09:55Z",
+      "side": 1,
+      "message": "Done - did a std::min between the limit derived from max storage binding size and the limit derived from max dispatch size.\n\nThe limited imposed by dispatch size is substantially lower (4M vs 33M), but it seems plausible that it could catch up over time.",
+      "parentUuid": "147ab359_6fac293e",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "952a35b5_6dd1c159",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-21T19:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "147ab359_6fac293e",
+      "revId": "1e07bf373f08fb501e048efacc3367f60adb377a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "679b1d29_83b5a9e2",

@@ -70,6 +70,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc08a7a_2536b7a5",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-21T19:09:55Z",
+      "side": 1,
+      "message": "Done - went with INTERNAL_ERROR for now",
+      "parentUuid": "c2ef0e1e_cc4c8f21",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdf581a_257dc404",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-21T19:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2ef0e1e_cc4c8f21",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9deeb7a1_dca89f59",
@@ -93,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fc7a285_549fb7a5",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-21T19:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9deeb7a1_dca89f59",
+      "range": {
+        "startLine": 287,
+        "startChar": 13,
+        "endLine": 287,
+        "endChar": 17
+      },
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d844df0_4e564d95",
@@ -106,6 +166,24 @@
       "writtenOn": "2021-09-20T15:42:55Z",
       "side": 1,
       "message": "nit: should also test where we do a bunch of EncodeDrawCommands up front, and then TestDraw(..) on all of them after. Right now we encode,submit,encode,submit, ... back-to-back. WE should test encoding and holding onto multiple command buffers, and then:\n - submitting them all together\n - submitting them individually\n - submitting them in an order different from the order they were encoded in",
+      "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0c8ac2a_e6f61884",
+        "filename": "src/tests/end2end/DrawIndexedIndirectTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-09-21T19:09:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d844df0_4e564d95",
       "revId": "3a45893090dacebfb216b5b7f9fa5fa30b16fca7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
