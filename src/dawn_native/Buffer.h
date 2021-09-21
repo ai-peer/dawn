@@ -19,6 +19,7 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -40,7 +41,7 @@ namespace dawn_native {
     static constexpr wgpu::BufferUsage kMappableBufferUsages =
         wgpu::BufferUsage::MapRead | wgpu::BufferUsage::MapWrite;
 
-    class BufferBase : public ObjectBase {
+    class BufferBase : public ApiObjectBase {
         enum class BufferState {
             Unmapped,
             Mapped,
@@ -52,6 +53,8 @@ namespace dawn_native {
         BufferBase(DeviceBase* device, const BufferDescriptor* descriptor);
 
         static BufferBase* MakeError(DeviceBase* device, const BufferDescriptor* descriptor);
+
+        ObjectType GetType() const override;
 
         uint64_t GetSize() const;
         uint64_t GetAllocatedSize() const;

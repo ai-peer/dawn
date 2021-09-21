@@ -14,6 +14,9 @@
 
 #include "dawn_native/webgpu_absl_format_autogen.h"
 
+#include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
+
 {% set skip_types = ["texture view", "instance", "surface"] %}
 
 {% for type in by_category["object"] %}
@@ -28,12 +31,11 @@ namespace dawn_native {
     // Objects
     //
 
-    // TODO(dawn:563) Detect the type of ObjectBase references and use the right formatter.
     absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
-    AbslFormatConvert(const ObjectBase* value,
-                        const absl::FormatConversionSpec& spec,
-                        absl::FormatSink* s) {
-        s->Append("[Object");
+    AbslFormatConvert(const DeviceBase* value,
+                      const absl::FormatConversionSpec& spec,
+                      absl::FormatSink* s) {
+        s->Append("[Device");
         const std::string& label = value->GetLabel();
         if (!label.empty()) {
             s->Append(absl::StrFormat(" \"%s\"", label));
@@ -42,30 +44,26 @@ namespace dawn_native {
         return {true};
     }
 
-    {% for type in by_category["object"] %}
-        {% if type.name.canonical_case() not in skip_types %}
-            absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
-            AbslFormatConvert(const {{as_frontendType(type)}} value,
-                                const absl::FormatConversionSpec& spec,
-                                absl::FormatSink* s) {
-                s->Append("[{{as_cppType(type.name)}}");
-                const std::string& label = value->GetLabel();
-                if (!label.empty()) {
-                    s->Append(absl::StrFormat(" \"%s\"", label));
-                }
-                s->Append("]");
-                return {true};
-            }
-        {% endif %}
-    {% endfor %}
+    absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+    AbslFormatConvert(const ApiObjectBase* value,
+                      const absl::FormatConversionSpec& spec,
+                      absl::FormatSink* s) {
+        s->Append("[");
+        s->Append(ObjectTypeAsString(value->GetType()));
+        const std::string& label = value->GetLabel();
+        if (!label.empty()) {
+            s->Append(absl::StrFormat(" \"%s\"", label));
+        }
+        s->Append("]");
+        return {true};
+    }
 
-    // Special case for textureViews, since frequently the texture will be the
-    // thing that's labeled.
     absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
     AbslFormatConvert(const TextureViewBase* value,
-                        const absl::FormatConversionSpec& spec,
-                        absl::FormatSink* s) {
-        s->Append("[TextureView");
+                      const absl::FormatConversionSpec& spec,
+                      absl::FormatSink* s) {
+        s->Append("[");
+        s->Append(ObjectTypeAsString(value->GetType()));
         const std::string& label = value->GetLabel();
         if (!label.empty()) {
             s->Append(absl::StrFormat(" \"%s\"", label));
