@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3e9f6d8_d548f0e0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-21T17:11:25Z",
+      "side": 1,
+      "message": "ditto Bug ID, same in other CLs in the stack.",
+      "revId": "30eebe2dc238eba67504ab175e74498f8b4b92a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "258edb3b_e1ee6fd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-21T17:11:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "30eebe2dc238eba67504ab175e74498f8b4b92a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
