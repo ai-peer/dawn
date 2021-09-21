@@ -39,9 +39,11 @@ namespace dawn_native {
         uint64_t size;
     };
 
-    class BindGroupBase : public ObjectBase {
+    class BindGroupBase : public ApiObjectBase {
       public:
         static BindGroupBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         BindGroupLayoutBase* GetLayout();
         const BindGroupLayoutBase* GetLayout() const;
@@ -71,7 +73,9 @@ namespace dawn_native {
             static_assert(std::is_base_of<BindGroupBase, Derived>::value, "");
         }
 
-      protected:
+        // Constructor used only for mocking and testing.
+        BindGroupBase(DeviceBase* device);
+
         ~BindGroupBase() override;
 
       private:

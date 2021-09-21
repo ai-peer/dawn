@@ -18,12 +18,15 @@
 
 #include "dawn_native/ChainUtils_autogen.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/ObjectBase.h"
 #include "dawn_native/ObjectContentHasher.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PerStage.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
 #include <algorithm>
 #include <functional>
+#include <iostream>
 #include <set>
 
 namespace dawn_native {
@@ -359,7 +362,7 @@ namespace dawn_native {
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor,
                                              PipelineCompatibilityToken pipelineCompatibilityToken)
-        : CachedObject(device, kLabelNotImplemented),
+        : ApiObjectBase(device, kLabelNotImplemented),
           mBindingInfo(BindingIndex(descriptor->entryCount)),
           mPipelineCompatibilityToken(pipelineCompatibilityToken) {
         std::vector<BindGroupLayoutEntry> sortedBindings(
@@ -386,19 +389,34 @@ namespace dawn_native {
     }
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : CachedObject(device, tag) {
+        : ApiObjectBase(device, tag) {
+    }
+
+    BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device)
+        : ApiObjectBase(device, kLabelNotImplemented) {
+    }
+
+    void BindGroupLayoutBase::DestroyApiObject() {
+        if (IsAlive()) {
+            // Do not uncache the actual cached object if we are a blueprint
+            if (IsCachedReference()) {
+                GetDevice()->UncacheBindGroupLayout(this);
+            }
+        }
+        ApiObjectBase::DestroyApiObject();
     }
 
     BindGroupLayoutBase::~BindGroupLayoutBase() {
-        // Do not uncache the actual cached object if we are a blueprint
-        if (IsCachedReference()) {
-            GetDevice()->UncacheBindGroupLayout(this);
-        }
+        DestroyApiObject();
     }
 
     // static
     BindGroupLayoutBase* BindGroupLayoutBase::MakeError(DeviceBase* device) {
         return new BindGroupLayoutBase(device, ObjectBase::kError);
+    }
+
+    ObjectType BindGroupLayoutBase::GetType() const {
+        return ObjectType::BindGroupLayout;
     }
 
     const BindGroupLayoutBase::BindingMap& BindGroupLayoutBase::GetBindingMap() const {

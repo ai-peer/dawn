@@ -22,11 +22,14 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/Limits.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
+#include "dawn_native/StagingBuffer.h"
 #include "dawn_native/Toggles.h"
 
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 
+#include <mutex>
 #include <utility>
 
 namespace dawn_platform {
@@ -75,7 +78,7 @@ namespace dawn_native {
             return false;
         }
 
-        MaybeError ValidateObject(const ObjectBase* object) const;
+        MaybeError ValidateObject(const ApiObjectBase* object) const;
 
         AdapterBase* GetAdapter() const;
         dawn_platform::Platform* GetPlatform() const;
@@ -257,6 +260,16 @@ namespace dawn_native {
         };
         State GetState() const;
         bool IsLost() const;
+        std::mutex* GetObjectListMutex(ObjectType type);
+        template <typename T>
+        ResultOrError<Ref<T>> TrackObject(ResultOrError<Ref<T>> object) {
+            Ref<T> result;
+            DAWN_TRY_ASSIGN(result, std::move(object));
+            ApiObjectList& objectList = mObjectLists[result->GetType()];
+            std::lock_guard<std::mutex> lock(objectList.mutex);
+            objectList.objects.Append(result.Get());
+            return result;
+        }
 
         std::vector<const char*> GetEnabledExtensions() const;
         std::vector<const char*> GetTogglesUsed() const;
@@ -312,6 +325,9 @@ namespace dawn_native {
         void APISetLabel(const char* label);
 
       protected:
+        // Constructor used only for mocking and testing.
+        DeviceBase();
+
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
 
@@ -450,6 +466,14 @@ namespace dawn_native {
         std::unique_ptr<DeprecationWarnings> mDeprecationWarnings;
 
         State mState = State::BeingCreated;
+
+        // Encompasses the mutex and the actual list that contains all live objects "owned" by the
+        // device.
+        struct ApiObjectList {
+            std::mutex mutex;
+            LinkedList<ApiObjectBase> objects;
+        };
+        PerObjectType<ApiObjectList> mObjectLists;
 
         FormatTable mFormatTable;
 
