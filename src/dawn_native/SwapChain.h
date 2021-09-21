@@ -18,6 +18,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn/dawn_wsi.h"
 #include "dawn_native/dawn_platform.h"
@@ -30,11 +31,13 @@ namespace dawn_native {
 
     TextureDescriptor GetSwapChainBaseTextureDescriptor(NewSwapChainBase* swapChain);
 
-    class SwapChainBase : public ObjectBase {
+    class SwapChainBase : public ApiObjectBase {
       public:
         SwapChainBase(DeviceBase* device);
 
         static SwapChainBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         // Dawn API
         virtual void APIConfigure(wgpu::TextureFormat format,
