@@ -93,7 +93,7 @@ config("dawn_internal") {
   # this BUILD.gn file and related subdirs.
   visibility = [ "../*" ]
 
-  cflags = []
+  cflags = [ "-Wno-shadow" ]
 
   # Enable more warnings that were found when using Dawn in other projects.
   # Add them only when building in standalone because we control which clang
