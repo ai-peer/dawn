@@ -18,6 +18,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -25,11 +26,13 @@ namespace dawn_native {
 
     MaybeError ValidateQuerySetDescriptor(DeviceBase* device, const QuerySetDescriptor* descriptor);
 
-    class QuerySetBase : public ObjectBase {
+    class QuerySetBase : public ApiObjectBase {
       public:
         QuerySetBase(DeviceBase* device, const QuerySetDescriptor* descriptor);
 
         static QuerySetBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         wgpu::QueryType GetQueryType() const;
         uint32_t GetQueryCount() const;

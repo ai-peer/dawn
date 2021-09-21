@@ -21,6 +21,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -39,9 +40,11 @@ namespace dawn_native {
         uint64_t size;
     };
 
-    class BindGroupBase : public ObjectBase {
+    class BindGroupBase : public ApiObjectBase {
       public:
         static BindGroupBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         BindGroupLayoutBase* GetLayout();
         const BindGroupLayoutBase* GetLayout() const;
