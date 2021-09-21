@@ -1127,7 +1127,7 @@ namespace dawn_native {
     // ShaderModuleBase
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, const ShaderModuleDescriptor* descriptor)
-        : CachedObject(device, descriptor->label), mType(Type::Undefined) {
+        : ApiObjectBase(device, descriptor->label), mType(Type::Undefined) {
         ASSERT(descriptor->nextInChain != nullptr);
         const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
         FindInChain(descriptor->nextInChain, &spirvDesc);
@@ -1145,7 +1145,7 @@ namespace dawn_native {
     }
 
     ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : CachedObject(device, tag), mType(Type::Undefined) {
+        : ApiObjectBase(device, tag), mType(Type::Undefined) {
     }
 
     ShaderModuleBase::~ShaderModuleBase() {
@@ -1157,6 +1157,10 @@ namespace dawn_native {
     // static
     Ref<ShaderModuleBase> ShaderModuleBase::MakeError(DeviceBase* device) {
         return AcquireRef(new ShaderModuleBase(device, ObjectBase::kError));
+    }
+
+    ObjectType ShaderModuleBase::GetType() const {
+        return ObjectType::ShaderModule;
     }
 
     bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint) const {

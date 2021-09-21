@@ -15,7 +15,9 @@
 #ifndef DAWNNATIVE_OBJECTBASE_H_
 #define DAWNNATIVE_OBJECTBASE_H_
 
+#include "common/LinkedList.h"
 #include "common/RefCounted.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include <string>
 
@@ -27,26 +29,39 @@ namespace dawn_native {
       public:
         struct ErrorTag {};
         static constexpr ErrorTag kError = {};
-        struct LabelNotImplementedTag {};
-        static constexpr LabelNotImplementedTag kLabelNotImplemented = {};
 
-        ObjectBase(DeviceBase* device, LabelNotImplementedTag tag);
-        ObjectBase(DeviceBase* device, const char* label);
+        explicit ObjectBase(DeviceBase* device);
         ObjectBase(DeviceBase* device, ErrorTag tag);
 
         DeviceBase* GetDevice() const;
-        const std::string& GetLabel();
         bool IsError() const;
+        void DestroyObject();
+
+      private:
+        DeviceBase* mDevice;
+    };
+
+    class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
+      public:
+        struct LabelNotImplementedTag {};
+        static constexpr LabelNotImplementedTag kLabelNotImplemented = {};
+
+        ApiObjectBase(DeviceBase* device, LabelNotImplementedTag tag);
+        ApiObjectBase(DeviceBase* device, const char* label);
+        ApiObjectBase(DeviceBase* device, ErrorTag tag);
+
+        virtual ObjectType GetType() const = 0;
+        const std::string& GetLabel();
+        void DestroyApiObject();
 
         // Dawn API
         void APISetLabel(const char* label);
 
       private:
         virtual void SetLabelImpl();
+        virtual void DestroyApiObjectImpl();
 
-        // TODO(dawn:840): Optimize memory footprint for objects that don't have labels.
         std::string mLabel;
-        DeviceBase* mDevice;
     };
 
 }  // namespace dawn_native

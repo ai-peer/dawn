@@ -20,15 +20,18 @@
 #include "dawn_native/EncodingContext.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PassResourceUsage.h"
 
 #include <string>
 
 namespace dawn_native {
 
-    class CommandEncoder final : public ObjectBase {
+    class CommandEncoder final : public ApiObjectBase {
       public:
         CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor);
+
+        ObjectType GetType() const;
 
         CommandIterator AcquireCommands();
         CommandBufferResourceUsage AcquireResourceUsages();

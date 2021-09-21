@@ -837,6 +837,10 @@ class MultiGeneratorFromDawnJSON(Generator):
                 FileRender('dawn_native/ChainUtils.cpp',
                            'src/dawn_native/ChainUtils_autogen.cpp',
                            frontend_params))
+            renders.append(
+                FileRender('dawn_native/ObjectType.h',
+                           'src/dawn_native/ObjectType_autogen.h',
+                           frontend_params))
 
         if 'dawn_wire' in targets:
             additional_params = compute_wire_params(params_dawn, wire_json)

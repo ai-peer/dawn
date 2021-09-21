@@ -15,6 +15,7 @@
 #ifndef DAWNNATIVE_DEVICE_H_
 #define DAWNNATIVE_DEVICE_H_
 
+#include "dawn_native/ApiObjects_autogen.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/Extensions.h"
@@ -22,11 +23,14 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/Limits.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/Toggles.h"
 
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 
+#include <mutex>
+#include <typeindex>
 #include <utility>
 
 namespace dawn_platform {
@@ -257,6 +261,9 @@ namespace dawn_native {
         };
         State GetState() const;
         bool IsLost() const;
+        std::mutex* GetObjectListMutex(ObjectType type) {
+            return &mObjectLists[type].mutex;
+        }
 
         std::vector<const char*> GetEnabledExtensions() const;
         std::vector<const char*> GetTogglesUsed() const;
@@ -446,6 +453,14 @@ namespace dawn_native {
         std::unique_ptr<DeprecationWarnings> mDeprecationWarnings;
 
         State mState = State::BeingCreated;
+
+        // Encompasses the mutex and the actual list that contains all live objects "owned" by the
+        // device.
+        struct ObjectList {
+            std::mutex mutex;
+            LinkedList<ObjectBase> objects;
+        };
+        PerObjectType<ObjectList> mObjectLists;
 
         FormatTable mFormatTable;
 

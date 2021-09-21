@@ -23,6 +23,7 @@
 #include "dawn_native/ChainUtils_autogen.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/EnumMaskIterator.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PassResourceUsage.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -442,7 +443,7 @@ namespace dawn_native {
     TextureBase::TextureBase(DeviceBase* device,
                              const TextureDescriptor* descriptor,
                              TextureState state)
-        : ObjectBase(device, descriptor->label),
+        : ApiObjectBase(device, descriptor->label),
           mDimension(descriptor->dimension),
           mFormat(device->GetValidInternalFormat(descriptor->format)),
           mSize(descriptor->size),
@@ -465,12 +466,16 @@ namespace dawn_native {
     static Format kUnusedFormat;
 
     TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag), mFormat(kUnusedFormat) {
+        : ApiObjectBase(device, tag), mFormat(kUnusedFormat) {
     }
 
     // static
     TextureBase* TextureBase::MakeError(DeviceBase* device) {
         return new TextureBase(device, ObjectBase::kError);
+    }
+
+    ObjectType TextureBase::GetType() const {
+        return ObjectType::Texture;
     }
 
     wgpu::TextureDimension TextureBase::GetDimension() const {
@@ -681,7 +686,7 @@ namespace dawn_native {
     // TextureViewBase
 
     TextureViewBase::TextureViewBase(TextureBase* texture, const TextureViewDescriptor* descriptor)
-        : ObjectBase(texture->GetDevice(), kLabelNotImplemented),
+        : ApiObjectBase(texture->GetDevice(), kLabelNotImplemented),
           mTexture(texture),
           mFormat(GetDevice()->GetValidInternalFormat(descriptor->format)),
           mDimension(descriptor->dimension),
@@ -691,12 +696,16 @@ namespace dawn_native {
     }
 
     TextureViewBase::TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag)
-        : ObjectBase(device, tag), mFormat(kUnusedFormat) {
+        : ApiObjectBase(device, tag), mFormat(kUnusedFormat) {
     }
 
     // static
     TextureViewBase* TextureViewBase::MakeError(DeviceBase* device) {
         return new TextureViewBase(device, ObjectBase::kError);
+    }
+
+    ObjectType TextureViewBase::GetType() const {
+        return ObjectType::TextureView;
     }
 
     const TextureBase* TextureViewBase::GetTexture() const {

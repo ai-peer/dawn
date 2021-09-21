@@ -21,6 +21,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PassResourceUsage.h"
 #include "dawn_native/Texture.h"
 
@@ -30,11 +31,13 @@ namespace dawn_native {
     struct CopyTextureToBufferCmd;
     struct TextureCopy;
 
-    class CommandBufferBase : public ObjectBase {
+    class CommandBufferBase : public ApiObjectBase {
       public:
         CommandBufferBase(CommandEncoder* encoder, const CommandBufferDescriptor* descriptor);
 
         static CommandBufferBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         MaybeError ValidateCanUseInSubmitNow() const;
         void Destroy();
@@ -42,7 +45,7 @@ namespace dawn_native {
         const CommandBufferResourceUsage& GetResourceUsages() const;
 
       protected:
-        ~CommandBufferBase();
+        ~CommandBufferBase() override;
 
         CommandIterator mCommands;
 

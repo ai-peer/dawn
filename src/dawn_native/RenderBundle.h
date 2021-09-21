@@ -20,6 +20,7 @@
 #include "dawn_native/CommandAllocator.h"
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PassResourceUsage.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -31,7 +32,7 @@ namespace dawn_native {
     struct RenderBundleDescriptor;
     class RenderBundleEncoder;
 
-    class RenderBundleBase : public ObjectBase {
+    class RenderBundleBase : public ApiObjectBase {
       public:
         RenderBundleBase(RenderBundleEncoder* encoder,
                          const RenderBundleDescriptor* descriptor,
@@ -39,6 +40,8 @@ namespace dawn_native {
                          RenderPassResourceUsage resourceUsage);
 
         static RenderBundleBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         CommandIterator* GetCommands();
 
