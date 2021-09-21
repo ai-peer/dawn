@@ -469,7 +469,7 @@ namespace dawn_native {
         return mPersistentCache.get();
     }
 
-    MaybeError DeviceBase::ValidateObject(const ObjectBase* object) const {
+    MaybeError DeviceBase::ValidateObject(const ApiObjectBase* object) const {
         ASSERT(object != nullptr);
         DAWN_INVALID_IF(object->GetDevice() != this,
                         "%s is associated with %s, and cannot be used with %s.", object,
