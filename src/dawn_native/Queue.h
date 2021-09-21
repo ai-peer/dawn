@@ -20,12 +20,13 @@
 #include "dawn_native/Forward.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn_native/dawn_platform.h"
 
 namespace dawn_native {
 
-    class QueueBase : public ObjectBase {
+    class QueueBase : public ApiObjectBase {
       public:
         struct TaskInFlight {
             virtual ~TaskInFlight();
@@ -33,8 +34,11 @@ namespace dawn_native {
             virtual void HandleDeviceLoss() = 0;
         };
 
-        static QueueBase* MakeError(DeviceBase* device);
         ~QueueBase() override;
+
+        static QueueBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         // Dawn API
         void APISubmit(uint32_t commandCount, CommandBufferBase* const* commands);

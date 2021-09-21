@@ -19,6 +19,7 @@
 #include "dawn_native/Error.h"
 #include "dawn_native/IntegerTypes.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 
 #include "dawn_native/dawn_platform.h"
 
@@ -27,7 +28,7 @@ namespace dawn_native {
     class DeviceBase;
 
     // Base class for shared functionality between ComputePassEncoder and RenderPassEncoder.
-    class ProgrammablePassEncoder : public ObjectBase {
+    class ProgrammablePassEncoder : public ApiObjectBase {
       public:
         ProgrammablePassEncoder(DeviceBase* device, EncodingContext* encodingContext);
 

@@ -17,6 +17,7 @@
 
 #include "dawn_native/Error.h"
 #include "dawn_native/ObjectBase.h"
+#include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/Subresource.h"
 
 #include <array>
@@ -29,7 +30,7 @@ namespace dawn_native {
     MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
                                                  const ExternalTextureDescriptor* descriptor);
 
-    class ExternalTextureBase : public ObjectBase {
+    class ExternalTextureBase : public ApiObjectBase {
       public:
         static ResultOrError<Ref<ExternalTextureBase>> Create(
             DeviceBase* device,
@@ -40,6 +41,8 @@ namespace dawn_native {
         MaybeError ValidateCanUseInSubmitNow() const;
 
         static ExternalTextureBase* MakeError(DeviceBase* device);
+
+        ObjectType GetType() const override;
 
         void APIDestroy();
 
