@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3553dc4c_3c6c48b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-21T19:23:12Z",
+      "side": 1,
+      "message": "PTAL! Maybe too much macro magic..?",
+      "revId": "f45bddf5f3d55bcd48d063bbfae097b145fece4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
