@@ -136,16 +136,16 @@ namespace dawn_native { namespace vulkan {
         if (limits.maxImageArrayLayers < kMaxTextureArrayLayers) {
             return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxTextureArrayLayers");
         }
-        if (limits.maxBoundDescriptorSets < kMaxBindGroups) {
+        if (limits.maxBoundDescriptorSets < kMinBindGroups) {
             return DAWN_INTERNAL_ERROR("Insufficient Vulkan limits for maxBindGroups");
         }
         if (limits.maxDescriptorSetUniformBuffersDynamic <
-            kMaxDynamicUniformBuffersPerPipelineLayout) {
+            kMinDynamicUniformBuffersPerPipelineLayout) {
             return DAWN_INTERNAL_ERROR(
                 "Insufficient Vulkan limits for maxDynamicUniformBuffersPerPipelineLayout");
         }
         if (limits.maxDescriptorSetStorageBuffersDynamic <
-            kMaxDynamicStorageBuffersPerPipelineLayout) {
+            kMinDynamicStorageBuffersPerPipelineLayout) {
             return DAWN_INTERNAL_ERROR(
                 "Insufficient Vulkan limits for maxDynamicStorageBuffersPerPipelineLayout");
         }

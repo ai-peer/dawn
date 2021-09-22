@@ -56,7 +56,10 @@ namespace ityp {
         using Base::any;
         using Base::count;
         using Base::none;
-        using Base::size;
+
+        constexpr Index size() const {
+            return static_cast<Index>(static_cast<I>(Base::size()));
+        }
 
         bool operator==(const bitset& other) const noexcept {
             return Base::operator==(static_cast<const Base&>(other));

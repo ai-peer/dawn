@@ -58,8 +58,6 @@ class BindGroupTests : public DawnTest {
     }
 
     wgpu::ShaderModule MakeFSModule(std::vector<wgpu::BufferBindingType> bindingTypes) const {
-        ASSERT(bindingTypes.size() <= kMaxBindGroups);
-
         std::ostringstream fs;
         for (size_t i = 0; i < bindingTypes.size(); ++i) {
             fs << "[[block]] struct Buffer" << i << R"( {

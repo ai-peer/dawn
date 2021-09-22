@@ -102,7 +102,7 @@ namespace dawn_native {
         const uint32_t* dynamicOffsetsIn) const {
         DAWN_TRY(GetDevice()->ValidateObject(group));
 
-        if (index >= kMaxBindGroupsTyped) {
+        if (index >= BindGroupIndex(GetDevice()->GetLimits().v1.maxBindGroups)) {
             return DAWN_VALIDATION_ERROR("Setting bind group over the max");
         }
 

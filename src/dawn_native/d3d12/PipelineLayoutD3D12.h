@@ -17,9 +17,13 @@
 
 #include "common/Constants.h"
 #include "common/ityp_array.h"
+#include "common/ityp_span.h"
+#include "common/ityp_stack_vec.h"
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
+
+#include <map>
 
 namespace dawn_native { namespace d3d12 {
 
@@ -38,9 +42,10 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetCbvUavSrvRootParameterIndex(BindGroupIndex group) const;
         uint32_t GetSamplerRootParameterIndex(BindGroupIndex group) const;
 
-        // Returns the index of the root parameter reserved for a dynamic buffer binding
-        uint32_t GetDynamicRootParameterIndex(BindGroupIndex group,
-                                              BindingIndex bindingIndex) const;
+        // Returns the indices of the root parameters reserved for dynamic buffer bindings in
+        // |group|.
+        ityp::span<BindingIndex, const uint32_t> GetDynamicRootParameterIndices(
+            BindGroupIndex group) const;
 
         uint32_t GetFirstIndexOffsetRegisterSpace() const;
         uint32_t GetFirstIndexOffsetShaderRegister() const;
@@ -54,9 +59,8 @@ namespace dawn_native { namespace d3d12 {
         MaybeError Initialize();
         ityp::array<BindGroupIndex, uint32_t, kMaxBindGroups> mCbvUavSrvRootParameterInfo;
         ityp::array<BindGroupIndex, uint32_t, kMaxBindGroups> mSamplerRootParameterInfo;
-        ityp::array<BindGroupIndex,
-                    ityp::array<BindingIndex, uint32_t, kMaxDynamicBuffersPerPipelineLayout>,
-                    kMaxBindGroups>
+        std::map<BindGroupIndex,
+                 ityp::stack_vec<BindingIndex, uint32_t, kMinDynamicBuffersPerPipelineLayout>>
             mDynamicRootParameterIndices;
         uint32_t mFirstIndexOffsetParameterIndex;
         ComPtr<ID3D12RootSignature> mRootSignature;

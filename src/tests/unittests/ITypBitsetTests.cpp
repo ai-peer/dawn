@@ -38,13 +38,13 @@ class ITypBitsetTest : public testing::Test {
         static_assert(kBitset[Key(7)] == true, "");
         static_assert(kBitset[Key(8)] == true, "");
 
-        static_assert(kBitset.size() == 9, "");
+        static_assert(kBitset.size() == Key(9), "");
     };
 
     void ExpectBits(const Bitset& bits, std::set<size_t> indices) {
         size_t mask = 0;
 
-        for (size_t i = 0; i < bits.size(); ++i) {
+        for (size_t i = 0; i < size_t(bits.size()); ++i) {
             if (indices.count(i) == 0) {
                 ASSERT_FALSE(bits[Key(i)]) << i;
                 ASSERT_FALSE(bits.test(Key(i))) << i;
@@ -58,7 +58,7 @@ class ITypBitsetTest : public testing::Test {
         ASSERT_EQ(bits.to_ullong(), mask);
         ASSERT_EQ(bits.to_ulong(), mask);
         ASSERT_EQ(bits.count(), indices.size());
-        ASSERT_EQ(bits.all(), indices.size() == bits.size());
+        ASSERT_EQ(bits.all(), indices.size() == size_t(bits.size()));
         ASSERT_EQ(bits.any(), indices.size() != 0);
         ASSERT_EQ(bits.none(), indices.size() == 0);
     }
