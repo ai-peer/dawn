@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35aacc5b_81b4fee9",
+        "filename": "generator/templates/dawn_native/ApiObjects.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "looks like ObjectTypeToTypeEnum isn\u0027t used\nDid you want to do something like infer the type of \"this\" inside the derived class constructor and automatically get the enum instead of manually saying ObjectType::BindGroup ?\n\n\nType will need to be {{Type}}Base for frontend types.\nAlso, note that some types don\u0027t have a backend equivalent. See https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/templates/dawn_native/ProcTable.cpp;l\u003d36?q\u003dProcTable.cpp\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nWe\u0027ll probably want it to work for the backend types too, like non-base\ndawn_native::d3d12::Buffer.\nIt may be possible to define for Derived by inferring the type Base* of ToBackend(Derived*). Not 100% sure. But given this isn\u0027t used right now, it\u0027s not necessary if the template stuff is unnecessarily complex.",
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "344d329d_870f176a",
+        "filename": "generator/templates/dawn_native/ObjectType.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "nit: spaces instead of tabs",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 1
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3c6c787_5c0ad841",
+        "filename": "generator/templates/dawn_native/ObjectType.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "+ 1 (you added Unknown)",
+      "range": {
+        "startLine": 30,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 81
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a1f839f_495843de",
+        "filename": "src/dawn_native/AttachmentState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "Ideally we could avoid the linked list for this object since it\u0027s a pure frontend type.\n\nThoughts:\n - Unknown might be better named PureFrontend\n - Perhaps we add a new APIObjectBase which extends ObjectBase. That\u0027s where the linked list stuff can live. This also means splitting CachedObject into CachedObject and CachedAPIObject. Note that ObjectBase doesn\u0027t need the error tag and IsError() implementation either - only API objects need that.\n - This separation could probably be done as a follow-up. i.e. probably ok to give AttachmentState a list, and then remove the Unknown/PureFrontend enum later.\n \nWDYT?",
+      "range": {
+        "startLine": 130,
+        "startChar": 31,
+        "endLine": 130,
+        "endChar": 50
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "034e8a88_70dedf4b",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "when do we add it to the list?",
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ececfcf_3e525142",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "nit: don\u0027t need to initialize this one since it\u0027s always set in the constructor",
+      "range": {
+        "startLine": 60,
+        "startChar": 27,
+        "endLine": 60,
+        "endChar": 47
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d05d3166_42ccbf4c",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T01:17:51Z",
+      "side": 1,
+      "message": "we could potentially store this in the refcount payload as well. Check out the RefCounted class. It has a uint64_t which is the refcount, but the lowest bit is a tag which indicates whether the object is an error or not. We mask out the payload to determine the refcount.\n\nThat said.. do we need it? Or does IsInList() imply State::Alive? May not be safe depending on what you\u0027re planning. like if device.destroy() races with ~Derived().",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 36
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
