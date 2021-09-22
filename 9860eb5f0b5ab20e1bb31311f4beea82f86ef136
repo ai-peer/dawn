@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43894479_974c6f20",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 386,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-09-22T02:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d5715073_de8dc79d",
+      "range": {
+        "startLine": 385,
+        "startChar": 0,
+        "endLine": 386,
+        "endChar": 33
+      },
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eee97236_e130e9b0",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-20T15:28:15Z",
       "side": 1,
       "message": "\"Min\", not \"Mini\"",
+      "range": {
+        "startLine": 39,
+        "startChar": 19,
+        "endLine": 39,
+        "endChar": 41
+      },
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea4377e_b472043b",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-09-22T02:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eee97236_e130e9b0",
       "range": {
         "startLine": 39,
         "startChar": 19,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87cd260d_5afd6b13",
+        "filename": "src/tests/end2end/QueryTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-09-22T02:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a60c8bc1_1f98e7fa",
+      "range": {
+        "startLine": 40,
+        "startChar": 19,
+        "endLine": 40,
+        "endChar": 29
+      },
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e974d2fd_a3c64a03",
@@ -117,6 +189,30 @@
       "writtenOn": "2021-09-20T11:38:17Z",
       "side": 1,
       "message": "Can we test 128 which is the first smallest alignment?",
+      "range": {
+        "startLine": 587,
+        "startChar": 71,
+        "endLine": 587,
+        "endChar": 72
+      },
+      "revId": "9860eb5f0b5ab20e1bb31311f4beea82f86ef136",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aecd2162_5eaf84e0",
+        "filename": "src/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-09-22T02:48:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e974d2fd_a3c64a03",
       "range": {
         "startLine": 587,
         "startChar": 71,
