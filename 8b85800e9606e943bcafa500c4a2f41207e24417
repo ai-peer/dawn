@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10a88d42_bf6fb5a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T04:58:10Z",
+      "side": 1,
+      "message": "In addition to maxVertexAttribute-related changes, this is one of the more non-trivial limit-related changes because this change has a non-trivial impact on Dawn\u0027s runtime memory footprint. I\u0027d recommend reviewing this by checking out the CL and looking for remaining usages of \"kMaxBindGroups\".\n\nI\u0027ve set it *very* tentatively to 32 because according to vulkan.gpuinfo.org, apparently there are thousands of reports that can support this. That said, 32 bind groups is a LOT and I think it would be reasonable to leave it at 16 or even 8. I think Dawn might prefer to expose fewer bind groups so that we can use the remaining binding space to ex.) support more dynamic buffers or something else.",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
