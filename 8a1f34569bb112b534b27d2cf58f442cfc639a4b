@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b58bf255_c3b3695d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-22T20:43:57Z",
+      "side": 1,
+      "message": "PTAL! This version of the Abseil dependency was tested against https://skia-review.googlesource.com/c/skia/+/451638 to ensure that we\u0027ll be able to roll cleanly. It\u0027s also why this CL abandons using the Abseil GN files from Chromium in favor of picking out dependent files directly. This feels more fragile to me, unfortunately, but it was about the only reasonable way I could find to prevent build issues with Skia.\n\nOn the plus side, though, that allowed us to NOT make any changes to googletest, which the previous version of this CL required. ",
+      "revId": "8a1f34569bb112b534b27d2cf58f442cfc639a4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
