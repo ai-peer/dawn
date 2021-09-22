@@ -36,7 +36,7 @@ namespace dawn_native {
                             BindGroupBase* bindGroup,
                             uint32_t dynamicOffsetCount,
                             uint32_t* dynamicOffsets) {
-            ASSERT(index < kMaxBindGroupsTyped);
+            ASSERT(index < mBindGroupLayoutsMask.size());
 
             if (mBindGroupLayoutsMask[index]) {
                 // It is okay to only dirty bind groups that are used by the current pipeline
@@ -54,7 +54,7 @@ namespace dawn_native {
             }
 
             mBindGroups[index] = bindGroup;
-            mDynamicOffsetCounts[index] = dynamicOffsetCount;
+            mDynamicOffsets[index].resize(dynamicOffsetCount);
             SetDynamicOffsets(mDynamicOffsets[index].data(), dynamicOffsetCount, dynamicOffsets);
         }
 
@@ -107,11 +107,8 @@ namespace dawn_native {
         BindGroupLayoutMask mDirtyBindGroupsObjectChangedOrIsDynamic = 0;
         BindGroupLayoutMask mBindGroupLayoutsMask = 0;
         ityp::array<BindGroupIndex, BindGroupBase*, kMaxBindGroups> mBindGroups = {};
-        ityp::array<BindGroupIndex, uint32_t, kMaxBindGroups> mDynamicOffsetCounts = {};
-        ityp::array<BindGroupIndex,
-                    std::array<DynamicOffset, kMaxDynamicBuffersPerPipelineLayout>,
-                    kMaxBindGroups>
-            mDynamicOffsets = {};
+        ityp::array<BindGroupIndex, std::vector<DynamicOffset>, kMaxBindGroups> mDynamicOffsets =
+            {};
 
         // |mPipelineLayout| is the current pipeline layout set on the command buffer.
         // |mLastAppliedPipelineLayout| is the last pipeline layout for which we applied changes

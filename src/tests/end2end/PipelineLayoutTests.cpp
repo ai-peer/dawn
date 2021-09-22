@@ -24,11 +24,14 @@ class PipelineLayoutTests : public DawnTest {};
 // dynamic offset bindings were at max. Test is successful if the pipeline layout is created
 // without error.
 TEST_P(PipelineLayoutTests, DynamicBuffersOverflow) {
+    wgpu::SupportedLimits supportedLimits = GetSupportedLimits();
+    uint32_t maxDynamicStorageBuffersPerPipelineLayout =
+        supportedLimits.limits.maxDynamicStorageBuffersPerPipelineLayout;
     // Create the first bind group layout which uses max number of dynamic buffers bindings.
     wgpu::BindGroupLayout bglA;
     {
         std::vector<wgpu::BindGroupLayoutEntry> entries;
-        for (uint32_t i = 0; i < kMaxDynamicStorageBuffersPerPipelineLayout; i++) {
+        for (uint32_t i = 0; i < maxDynamicStorageBuffersPerPipelineLayout; i++) {
             wgpu::BindGroupLayoutEntry entry;
             entry.binding = i;
             entry.visibility = wgpu::ShaderStage::Compute;

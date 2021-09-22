@@ -17,7 +17,11 @@
 
 #include <cstdint>
 
-static constexpr uint32_t kMaxBindGroups = 4u;
+// Min/max supported values for internal computation.
+// kMaxBindGroups is used to size many static arrays. Take care when increasing it.
+static constexpr uint32_t kMinBindGroups = 4u;
+static constexpr uint32_t kMaxBindGroups = 32u;
+
 static constexpr uint8_t kMaxVertexAttributes = 16u;
 static constexpr uint8_t kMaxVertexBuffers = 8u;
 static constexpr uint32_t kMaxVertexBufferArrayStride = 2048u;
@@ -42,9 +46,9 @@ static constexpr uint32_t kMaxStorageBuffersPerShaderStage = 8;
 static constexpr uint32_t kMaxStorageTexturesPerShaderStage = 4;
 static constexpr uint32_t kMaxUniformBuffersPerShaderStage = 12;
 
-// Per pipeline layout limits
-static constexpr uint32_t kMaxDynamicUniformBuffersPerPipelineLayout = 8u;
-static constexpr uint32_t kMaxDynamicStorageBuffersPerPipelineLayout = 4u;
+// Per pipeline layout minimium supported limits for internal computation.
+static constexpr uint32_t kMinDynamicUniformBuffersPerPipelineLayout = 8u;
+static constexpr uint32_t kMinDynamicStorageBuffersPerPipelineLayout = 4u;
 
 // Buffer binding constraints
 static constexpr uint64_t kMaxUniformBufferBindingSize = 16384u;

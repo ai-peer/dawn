@@ -15,6 +15,7 @@
 #include "dawn_native/Limits.h"
 
 #include "common/Assert.h"
+#include "common/Constants.h"
 
 #include <array>
 
@@ -33,7 +34,7 @@
 // For now, exponentially increase from the base. Specific values here may not make
 // sense in practice. These tiers are included for now for testing purposes.
 #define LIMITS_BINDING_SPACE(X)                                      \
-    X(Higher,                             maxBindGroups,  4,  8, 16) \
+    X(Higher,                             maxBindGroups,  4,  8, 32) \
     X(Higher, maxDynamicUniformBuffersPerPipelineLayout,  8, 16, 32) \
     X(Higher, maxDynamicStorageBuffersPerPipelineLayout,  4,  8, 16) \
     X(Higher,          maxSampledTexturesPerShaderStage, 16, 32, 64) \
@@ -41,6 +42,11 @@
     X(Higher,           maxStorageBuffersPerShaderStage,  8, 16, 32) \
     X(Higher,          maxStorageTexturesPerShaderStage,  4,  8, 16) \
     X(Higher,           maxUniformBuffersPerShaderStage, 12, 24, 48)
+
+static_assert(kMinBindGroups == 4, "kMinBindGroups in Constants.h must match Limits.cpp");
+static_assert(kMaxBindGroups == 32, "kMaxBindGroups in Constants.h must match Limits.cpp");
+static_assert(kMinDynamicUniformBuffersPerPipelineLayout == 8u, "kMinDynamicUniformBuffersPerPipelineLayout in Constants.h must match Limits.cpp");
+static_assert(kMinDynamicStorageBuffersPerPipelineLayout == 4u, "kMinDynamicStorageBuffersPerPipelineLayout in Constants.h must match Limits.cpp");
 
 // These limits don't have tiers yet. Define two tiers with the same values since the macros
 // in this file expect more than one tier.

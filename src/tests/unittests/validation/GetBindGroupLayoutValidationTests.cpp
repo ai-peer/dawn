@@ -971,15 +971,18 @@ TEST_F(GetBindGroupLayoutTests, ConflictingBindingTextureComponentType) {
 
 // Test it is an error to query an out of range bind group layout.
 TEST_F(GetBindGroupLayoutTests, OutOfRangeIndex) {
-    ASSERT_DEVICE_ERROR(RenderPipelineFromFragmentShader(R"(
-        [[stage(fragment)]] fn main() {
-        })")
-                            .GetBindGroupLayout(kMaxBindGroups));
+    wgpu::SupportedLimits supportedLimits = GetSupportedLimits();
+    uint32_t maxBindGroups = supportedLimits.limits.maxBindGroups;
 
     ASSERT_DEVICE_ERROR(RenderPipelineFromFragmentShader(R"(
         [[stage(fragment)]] fn main() {
         })")
-                            .GetBindGroupLayout(kMaxBindGroups + 1));
+                            .GetBindGroupLayout(maxBindGroups));
+
+    ASSERT_DEVICE_ERROR(RenderPipelineFromFragmentShader(R"(
+        [[stage(fragment)]] fn main() {
+        })")
+                            .GetBindGroupLayout(maxBindGroups + 1));
 }
 
 // Test that unused indices return the empty bind group layout.

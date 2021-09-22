@@ -154,7 +154,7 @@ TEST(Limits, ApplyLimitTiers) {
     SetLimitsBindingSpaceTier1(&limitsBindingSpaceTier1);
 
     auto SetLimitsBindingSpaceTier3 = [](dawn_native::Limits* limits) {
-        limits->maxBindGroups = 16;
+        limits->maxBindGroups = 32;
         limits->maxDynamicUniformBuffersPerPipelineLayout = 32;
         limits->maxDynamicStorageBuffersPerPipelineLayout = 16;
         limits->maxSampledTexturesPerShaderStage = 64;
