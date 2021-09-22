@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3e305b90_54791c75",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:35:55Z",
+      "side": 1,
+      "message": "yea as said in the other comment I think we could probably just make this 8 for now, and then mostly not care about the 2x memory usage.",
+      "parentUuid": "8f1199c0_9c6497d8",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21821869_ece27cb7",
         "filename": "src/common/Constants.h",
         "patchSetId": 5
@@ -128,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "213506ae_40301c1c",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:35:55Z",
+      "side": 1,
+      "message": "Maybe? I made this map before I made the other one stack_vec (so it was array\u003carray\u003c\u003e\u003e). Seemed bad if we had 32 * 48 \u003d 1536 items here.\nWith array\u003cstack vec\u003c\u003e\u003e, it has a static footprint of 384 integers - still kind of a lot?\n\nmaybe array\u003cvector\u003c\u003e\u003e ? (normal vector)\nindirection should be more OK now that I factored out GetDynamicRootParameterIndex to be plural GetDynamicRootParameterIndices",
+      "parentUuid": "3a97e8a9_42aeba4d",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6b4e6e5d_b263f6c6",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
         "patchSetId": 5
@@ -151,6 +193,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "377a7855_7d709a28",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:35:55Z",
+      "side": 1,
+      "message": "why would it not be ok? stack_vec is essentially a fancy std::array, but it can be stored on the heap. I guess \"stack\" in the same is misleading because it\u0027s *not* actually doing something like alloca.",
+      "parentUuid": "6b4e6e5d_b263f6c6",
+      "range": {
+        "startLine": 63,
+        "startChar": 23,
+        "endLine": 63,
+        "endChar": 32
+      },
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "755dd6bf_10d7288e",
         "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
         "patchSetId": 5
@@ -162,6 +228,24 @@
       "writtenOn": "2021-09-22T10:19:17Z",
       "side": 1,
       "message": "Any opinion on how we should write tests that ask for increased limits?",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ba587bf_10619d77",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:35:55Z",
+      "side": 1,
+      "message": "Probably with something like how some of the tests override CreateTestDevice()",
+      "parentUuid": "755dd6bf_10d7288e",
       "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
