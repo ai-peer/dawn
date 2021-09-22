@@ -122,8 +122,11 @@ namespace dawn_native { namespace d3d12 {
 
             // Init root descriptors in root signatures for dynamic buffer bindings.
             // These are packed at the beginning of the layout binding info.
-            for (BindingIndex dynamicBindingIndex{0};
-                 dynamicBindingIndex < bindGroupLayout->GetDynamicBufferCount();
+            BindingIndex dynamicBufferCount = bindGroupLayout->GetDynamicBufferCount();
+            if (dynamicBufferCount > BindingIndex(0)) {
+                mDynamicRootParameterIndices[group].resize(dynamicBufferCount);
+            }
+            for (BindingIndex dynamicBindingIndex{0}; dynamicBindingIndex < dynamicBufferCount;
                  ++dynamicBindingIndex) {
                 const BindingInfo& bindingInfo =
                     bindGroupLayout->GetBindingInfo(dynamicBindingIndex);
@@ -206,12 +209,12 @@ namespace dawn_native { namespace d3d12 {
     }
 
     uint32_t PipelineLayout::GetCbvUavSrvRootParameterIndex(BindGroupIndex group) const {
-        ASSERT(group < kMaxBindGroupsTyped);
+        ASSERT(group < mCbvUavSrvRootParameterInfo.size());
         return mCbvUavSrvRootParameterInfo[group];
     }
 
     uint32_t PipelineLayout::GetSamplerRootParameterIndex(BindGroupIndex group) const {
-        ASSERT(group < kMaxBindGroupsTyped);
+        ASSERT(group < mSamplerRootParameterInfo.size());
         return mSamplerRootParameterInfo[group];
     }
 
@@ -219,14 +222,11 @@ namespace dawn_native { namespace d3d12 {
         return mRootSignature.Get();
     }
 
-    uint32_t PipelineLayout::GetDynamicRootParameterIndex(BindGroupIndex group,
-                                                          BindingIndex bindingIndex) const {
-        ASSERT(group < kMaxBindGroupsTyped);
-        ASSERT(bindingIndex < kMaxDynamicBuffersPerPipelineLayoutTyped);
-        ASSERT(GetBindGroupLayout(group)->GetBindingInfo(bindingIndex).buffer.hasDynamicOffset);
-        ASSERT(GetBindGroupLayout(group)->GetBindingInfo(bindingIndex).visibility !=
-               wgpu::ShaderStage::None);
-        return mDynamicRootParameterIndices[group][bindingIndex];
+    ityp::span<BindingIndex, const uint32_t> PipelineLayout::GetDynamicRootParameterIndices(
+        BindGroupIndex group) const {
+        auto it = mDynamicRootParameterIndices.find(group);
+        ASSERT(it != mDynamicRootParameterIndices.end());
+        return ityp::span<BindingIndex, const uint32_t>(it->second.data(), it->second.size());
     }
 
     uint32_t PipelineLayout::GetFirstIndexOffsetRegisterSpace() const {

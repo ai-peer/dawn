@@ -361,7 +361,7 @@ namespace dawn_native { namespace metal {
                 for (BindGroupIndex index :
                      IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
                     ApplyBindGroup(encoder, index, ToBackend(mBindGroups[index]),
-                                   mDynamicOffsetCounts[index], mDynamicOffsets[index].data(),
+                                   mDynamicOffsets[index].size(), mDynamicOffsets[index].data(),
                                    ToBackend(mPipelineLayout));
                 }
                 AfterApply();
