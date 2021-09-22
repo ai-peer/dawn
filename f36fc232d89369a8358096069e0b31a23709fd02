@@ -66,6 +66,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c005b04e_2f2f578a",
+        "filename": "generator/templates/dawn_native/ObjectType.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:39:00Z",
+      "side": 1,
+      "message": "Is unknown ever accessed?",
+      "parentUuid": "d3c6c787_5c0ad841",
+      "range": {
+        "startLine": 30,
+        "startChar": 55,
+        "endLine": 30,
+        "endChar": 81
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5a1f839f_495843de",
         "filename": "src/dawn_native/AttachmentState.cpp",
         "patchSetId": 1
@@ -83,6 +107,64 @@
         "endLine": 130,
         "endChar": 50
       },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c6a5af5_e232ddbd",
+        "filename": "src/dawn_native/AttachmentState.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:39:00Z",
+      "side": 1,
+      "message": "Do we ever see some non-API objects having content that needs to be destroyed? Maybe staging buffer but I\u0027m not even sure for these because they could use dawn_native::Buffer.\n\nSeparating BaseObjects objects sounds good",
+      "parentUuid": "5a1f839f_495843de",
+      "range": {
+        "startLine": 130,
+        "startChar": 31,
+        "endLine": 130,
+        "endChar": 50
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d58d1da9_24ade840",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:39:00Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf3cd18_5973cf09",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:39:00Z",
+      "side": 1,
+      "message": "nit: we usually return mutable things with pointers so references make it clear that things are immutable. Also we usually put implementation in .cpp hoping that LTO inlines as needed.",
       "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -140,6 +222,30 @@
       "writtenOn": "2021-09-22T01:17:51Z",
       "side": 1,
       "message": "we could potentially store this in the refcount payload as well. Check out the RefCounted class. It has a uint64_t which is the refcount, but the lowest bit is a tag which indicates whether the object is an error or not. We mask out the payload to determine the refcount.\n\nThat said.. do we need it? Or does IsInList() imply State::Alive? May not be safe depending on what you\u0027re planning. like if device.destroy() races with ~Derived().",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 36
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed0d905_af29935e",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:39:00Z",
+      "side": 1,
+      "message": "Since we\u0027re talking about memory, what do you think of exposing the object type as a virtual method. This would consume barely any additional memory because we already have a vtable pointer for the virtual methods of RefCounted. Conceptually the ObjectType is duplicate information with the vtable pointer that\u0027s already a form of type information so we could deduplicate it this way.\n\nI might have an out of date understanding of the approach, but wasn\u0027t the idea to set mDevice\u003dnullptr when the object is destroyed?",
+      "parentUuid": "d05d3166_42ccbf4c",
       "range": {
         "startLine": 61,
         "startChar": 8,
