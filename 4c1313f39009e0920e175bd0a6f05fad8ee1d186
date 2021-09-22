@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "131b05c3_e802ca3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T09:27:08Z",
+      "side": 1,
+      "message": "LGTM. I checked that GetTransformedModuleHandle is thread safe.",
+      "revId": "4c1313f39009e0920e175bd0a6f05fad8ee1d186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ede5c12_0bc594d0",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T09:27:08Z",
+      "side": 1,
+      "message": "nit: Maybe comment about the multithreading guarantees?",
+      "revId": "4c1313f39009e0920e175bd0a6f05fad8ee1d186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
