@@ -254,6 +254,30 @@
       },
       "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e994a3ab_ca632c5e",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:18:04Z",
+      "side": 1,
+      "message": "1. re mDevice\u003dnullptr: ah yes, this can also be used to say the object is no longer alive\n\n2. re memory: we may not need the storage for the enum OR the virtual method. Not sure where the object is going to be added to the list, but if it\u0027s on construction, then we can do it in the constructor and not store the enum.\nThen for destruction, also not sure when DestroyObject is planning to be called - I think in the Derived destructor? But if that\u0027s the case, we also statically know the type. So with something like the following, we don\u0027t need virtual methods or storage of the enum.\n\nclass ObjectBase ..... {\n protected:\n  template\u003ctypename T\u003e\n  static void Track(T* this) {\n    this-\u003eTrackImpl(ObjectTypeToTypeEnum\u003cT\u003e::value);\n  }\n  \n  template\u003ctypename T\u003e\n  static void Untrack(T* this) {\n    this-\u003eUntrackImpl(ObjectTypeToTypeEnum\u003cT\u003e::value);\n  }\n  \n private:\n  // Impl will get the list, acquire the mutex, and append/remove from it.\n  void TrackImpl(ObjectType type);\n  void UntrackImpl(ObjectType type);\n};\n\nBindGroup::BindGroup(...) {\n  ObjectBase::Track(this);\n}\n\nBindGroup::~BindGroup(..) {\n  ObjectBase::Untrack(this);\n}",
+      "parentUuid": "9ed0d905_af29935e",
+      "range": {
+        "startLine": 61,
+        "startChar": 8,
+        "endLine": 61,
+        "endChar": 36
+      },
+      "revId": "f36fc232d89369a8358096069e0b31a23709fd02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
