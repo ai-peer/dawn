@@ -25,6 +25,7 @@
 
 #include <array>
 #include <bitset>
+#include <mutex>
 #include <unordered_map>
 
 namespace dawn_native { namespace vulkan {
@@ -86,6 +87,8 @@ namespace dawn_native { namespace vulkan {
             std::unordered_map<RenderPassCacheQuery, VkRenderPass, CacheFuncs, CacheFuncs>;
 
         Device* mDevice = nullptr;
+
+        std::mutex mMutex;
         Cache mCache;
     };
 
