@@ -16,6 +16,154 @@
       "message": "In addition to maxVertexAttribute-related changes, this is one of the more non-trivial limit-related changes because this change has a non-trivial impact on Dawn\u0027s runtime memory footprint. I\u0027d recommend reviewing this by checking out the CL and looking for remaining usages of \"kMaxBindGroups\".\n\nI\u0027ve set it *very* tentatively to 32 because according to vulkan.gpuinfo.org, apparently there are thousands of reports that can support this. That said, 32 bind groups is a LOT and I think it would be reasonable to leave it at 16 or even 8. I think Dawn might prefer to expose fewer bind groups so that we can use the remaining binding space to ex.) support more dynamic buffers or something else.",
       "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8a8dd7_5f439d2c",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "The min and max naming is a bit confusing. Maybe kBaseMaxBindGroups and kMaxSupportedBindGroups?",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f1199c0_9c6497d8",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "TBH I don\u0027t see many folks needing more than 8 bindgroups. 32 is a bit overkill?",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21821869_ece27cb7",
+        "filename": "src/common/Constants.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9e9393a_df8d6ef4",
+        "filename": "src/dawn_native/BindingInfo.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e453d11_bb98a0ca",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "I think we could compute a combination mask and use IterateBitset for this logic to avoid looping over all 32 bindgroups.",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a97e8a9_42aeba4d",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "The map will make this really slow when dynamic buffer indices are pretty hot code when used. Can\u0027t we pay the memory cost?",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 16
+      },
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b4e6e5d_b263f6c6",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "Seeing a stack_vec in a heap allocated structure looks wrong. Can we clarify in StackContainer.h that this is valid since the address of the StackAllocator never changes?",
+      "range": {
+        "startLine": 63,
+        "startChar": 23,
+        "endLine": 63,
+        "endChar": 32
+      },
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "755dd6bf_10d7288e",
+        "filename": "src/tests/unittests/validation/GetBindGroupLayoutValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 973,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:19:17Z",
+      "side": 1,
+      "message": "Any opinion on how we should write tests that ask for increased limits?",
+      "revId": "8b85800e9606e943bcafa500c4a2f41207e24417",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
