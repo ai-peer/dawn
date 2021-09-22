@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a5c9aed_1b561d1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T16:58:44Z",
+      "side": 1,
+      "message": "Looks great overall, thank you. I\u0027m sure we\u0027ll iterate over time as we add stuff or use the same pattern for other backends, but it\u0027s not clear what the improvements would be so let\u0027s get this in as is.",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82fa89a7_ffe79516",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T16:58:44Z",
+      "side": 1,
+      "message": "note:: It\u0027s not clear if it is best to put the Tint transform data or the BGL in the request. I guess we\u0027ll see in the future.",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9718b72b_928f72cc",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T16:58:44Z",
+      "side": 1,
+      "message": "u-nit: we could create the request on the stack and assign things to its members directly. I think right now there\u0027s a risk that we can silently make a mistake in the order of the arguments.",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
