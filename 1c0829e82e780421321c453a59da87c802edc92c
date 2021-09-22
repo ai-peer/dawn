@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13113bea_aa12c253",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:25:38Z",
+      "side": 1,
+      "message": "Maybe the limit tiering should be done on adapter initialization so we don\u0027t do have to repeatedly do it? WDYT?",
+      "revId": "1c0829e82e780421321c453a59da87c802edc92c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3482a955_da080696",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-22T10:25:38Z",
+      "side": 1,
+      "message": "I have some concerns about tying limits together without previously looking at some data to define the tiers. The only strong complaints (and strong limitations) seem to be on maxComputeWorkgroupStorageSize and maxComputeWorkgroupStorageSize. What do you think of tiering just these and wait for stats to define the other tiers?",
+      "revId": "1c0829e82e780421321c453a59da87c802edc92c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
