@@ -15,6 +15,7 @@
 #include "dawn_native/BindingInfo.h"
 
 #include "dawn_native/ChainUtils_autogen.h"
+#include "dawn_native/Device.h"
 
 namespace dawn_native {
 
@@ -95,14 +96,16 @@ namespace dawn_native {
         }
     }
 
-    MaybeError ValidateBindingCounts(const BindingCounts& bindingCounts) {
-        if (bindingCounts.dynamicUniformBufferCount > kMaxDynamicUniformBuffersPerPipelineLayout) {
+    MaybeError ValidateBindingCounts(const DeviceBase* device, const BindingCounts& bindingCounts) {
+        if (bindingCounts.dynamicUniformBufferCount >
+            device->GetLimits().v1.maxDynamicUniformBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR(
                 "The number of dynamic uniform buffers exceeds the maximum per-pipeline-layout "
                 "limit");
         }
 
-        if (bindingCounts.dynamicStorageBufferCount > kMaxDynamicStorageBuffersPerPipelineLayout) {
+        if (bindingCounts.dynamicStorageBufferCount >
+            device->GetLimits().v1.maxDynamicStorageBuffersPerPipelineLayout) {
             return DAWN_VALIDATION_ERROR(
                 "The number of dynamic storage buffers exceeds the maximum per-pipeline-layout "
                 "limit");

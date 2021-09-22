@@ -136,13 +136,13 @@ namespace dawn_native { namespace vulkan {
                 for (BindGroupIndex dirtyIndex :
                      IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
                     VkDescriptorSet set = ToBackend(mBindGroups[dirtyIndex])->GetHandle();
-                    const uint32_t* dynamicOffset = mDynamicOffsetCounts[dirtyIndex] > 0
-                                                        ? mDynamicOffsets[dirtyIndex].data()
-                                                        : nullptr;
-                    device->fn.CmdBindDescriptorSets(
-                        recordingContext->commandBuffer, bindPoint,
-                        ToBackend(mPipelineLayout)->GetHandle(), static_cast<uint32_t>(dirtyIndex),
-                        1, &*set, mDynamicOffsetCounts[dirtyIndex], dynamicOffset);
+                    uint32_t dynamicOffsetCount = mDynamicOffsets[dirtyIndex].size();
+                    const uint32_t* dynamicOffsets =
+                        dynamicOffsetCount > 0 ? mDynamicOffsets[dirtyIndex].data() : nullptr;
+                    device->fn.CmdBindDescriptorSets(recordingContext->commandBuffer, bindPoint,
+                                                     ToBackend(mPipelineLayout)->GetHandle(),
+                                                     static_cast<uint32_t>(dirtyIndex), 1, &*set,
+                                                     dynamicOffsetCount, dynamicOffsets);
                 }
                 AfterApply();
             }

@@ -124,7 +124,7 @@ namespace dawn_native {
         DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
         DAWN_TRY(GetDevice()->ValidateObject(mLayout.Get()));
-        if (groupIndex >= kMaxBindGroups) {
+        if (groupIndex >= GetDevice()->GetLimits().v1.maxBindGroups) {
             return DAWN_VALIDATION_ERROR("Bind group layout index out of bounds");
         }
         return {};

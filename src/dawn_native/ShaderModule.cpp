@@ -598,7 +598,7 @@ namespace dawn_native {
         }
 
         ResultOrError<EntryPointMetadataTable> ReflectShaderUsingTint(
-            DeviceBase*,
+            DeviceBase* device,
             const tint::Program* program) {
             ASSERT(program->IsValid());
 
@@ -817,7 +817,7 @@ namespace dawn_native {
                      inspector.GetResourceBindings(entryPoint.name)) {
                     BindingNumber bindingNumber(resource.binding);
                     BindGroupIndex bindGroupIndex(resource.bind_group);
-                    if (bindGroupIndex >= kMaxBindGroupsTyped) {
+                    if (bindGroupIndex >= BindGroupIndex(device->GetLimits().v1.maxBindGroups)) {
                         return DAWN_VALIDATION_ERROR("Shader has bind group index over limits");
                     }
 

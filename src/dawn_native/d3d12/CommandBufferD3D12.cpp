@@ -378,7 +378,7 @@ namespace dawn_native { namespace d3d12 {
             for (BindGroupIndex index : IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
                 BindGroup* group = ToBackend(mBindGroups[index]);
                 ApplyBindGroup(commandList, ToBackend(mPipelineLayout), index, group,
-                               mDynamicOffsetCounts[index], mDynamicOffsets[index].data());
+                               mDynamicOffsets[index].size(), mDynamicOffsets[index].data());
             }
 
             AfterApply();
@@ -425,6 +425,8 @@ namespace dawn_native { namespace d3d12 {
             if (dynamicOffsets.size() != BindingIndex(0)) {
                 // Update dynamic offsets.
                 // Dynamic buffer bindings are packed at the beginning of the layout.
+                ityp::span<BindingIndex, const uint32_t> parameterIndices =
+                    pipelineLayout->GetDynamicRootParameterIndices(index);
                 for (BindingIndex bindingIndex{0}; bindingIndex < dynamicOffsets.size();
                      ++bindingIndex) {
                     const BindingInfo& bindingInfo =
@@ -435,8 +437,7 @@ namespace dawn_native { namespace d3d12 {
                         continue;
                     }
 
-                    uint32_t parameterIndex =
-                        pipelineLayout->GetDynamicRootParameterIndex(index, bindingIndex);
+                    const uint32_t parameterIndex = parameterIndices[bindingIndex];
                     BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
 
                     // Calculate buffer locations that root descriptors links to. The location

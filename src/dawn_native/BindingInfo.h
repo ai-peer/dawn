@@ -28,12 +28,14 @@
 
 namespace dawn_native {
 
-    // Not a real WebGPU limit, but the sum of the two limits is useful for internal optimizations.
-    static constexpr uint32_t kMaxDynamicBuffersPerPipelineLayout =
-        kMaxDynamicUniformBuffersPerPipelineLayout + kMaxDynamicStorageBuffersPerPipelineLayout;
+    class DeviceBase;
 
-    static constexpr BindingIndex kMaxDynamicBuffersPerPipelineLayoutTyped =
-        BindingIndex(kMaxDynamicBuffersPerPipelineLayout);
+    // Not a real WebGPU limit, but the sum of the two limits is useful for internal optimizations.
+    static constexpr uint32_t kMinDynamicBuffersPerPipelineLayout =
+        kMinDynamicUniformBuffersPerPipelineLayout + kMinDynamicStorageBuffersPerPipelineLayout;
+
+    static constexpr BindingIndex kMinDynamicBuffersPerPipelineLayoutTyped =
+        BindingIndex(kMinDynamicBuffersPerPipelineLayout);
 
     // Not a real WebGPU limit, but used to optimize parts of Dawn which expect valid usage of the
     // API. There should never be more bindings than the max per stage, for each stage.
@@ -88,7 +90,7 @@ namespace dawn_native {
 
     void IncrementBindingCounts(BindingCounts* bindingCounts, const BindGroupLayoutEntry& entry);
     void AccumulateBindingCounts(BindingCounts* bindingCounts, const BindingCounts& rhs);
-    MaybeError ValidateBindingCounts(const BindingCounts& bindingCounts);
+    MaybeError ValidateBindingCounts(const DeviceBase* device, const BindingCounts& bindingCounts);
 
     // For buffer size validation
     using RequiredBufferSizes = ityp::array<BindGroupIndex, std::vector<uint64_t>, kMaxBindGroups>;

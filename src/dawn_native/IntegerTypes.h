@@ -29,8 +29,6 @@ namespace dawn_native {
 
     using BindGroupIndex = TypedInteger<struct BindGroupIndexT, uint32_t>;
 
-    static constexpr BindGroupIndex kMaxBindGroupsTyped = BindGroupIndex(kMaxBindGroups);
-
     using ColorAttachmentIndex = TypedInteger<struct ColorAttachmentIndexT, uint8_t>;
 
     constexpr ColorAttachmentIndex kMaxColorAttachmentsTyped =

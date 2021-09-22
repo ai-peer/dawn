@@ -172,7 +172,7 @@ namespace dawn_native {
             bindingsSet.insert(bindingNumber);
         }
 
-        DAWN_TRY(ValidateBindingCounts(bindingCounts));
+        DAWN_TRY(ValidateBindingCounts(device, bindingCounts));
 
         return {};
     }
