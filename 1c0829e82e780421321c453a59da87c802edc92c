@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "17e22ec8_4faf546e",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:40:20Z",
+      "side": 1,
+      "message": "I think eventually we will move this to be an option of RequestAdapterOptions but we don\u0027t really match the upstream API right now - maybe extension struct.\n\nRight now, you can only call SetUseTieredLimits after adapter creation. I guess I could put a bool in AdapterDiscoveryOptionsBase",
+      "parentUuid": "13113bea_aa12c253",
+      "revId": "1c0829e82e780421321c453a59da87c802edc92c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3482a955_da080696",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-22T10:25:38Z",
       "side": 1,
       "message": "I have some concerns about tying limits together without previously looking at some data to define the tiers. The only strong complaints (and strong limitations) seem to be on maxComputeWorkgroupStorageSize and maxComputeWorkgroupStorageSize. What do you think of tiering just these and wait for stats to define the other tiers?",
+      "revId": "1c0829e82e780421321c453a59da87c802edc92c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "354306d1_7a20d0ce",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-22T15:40:20Z",
+      "side": 1,
+      "message": "sounds fine",
+      "parentUuid": "3482a955_da080696",
       "revId": "1c0829e82e780421321c453a59da87c802edc92c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
