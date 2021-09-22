@@ -32,7 +32,7 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("nextInChain must be nullptr");
         }
 
-        if (descriptor->bindGroupLayoutCount > kMaxBindGroups) {
+        if (descriptor->bindGroupLayoutCount > device->GetLimits().v1.maxBindGroups) {
             return DAWN_VALIDATION_ERROR("too many bind group layouts");
         }
 
@@ -49,7 +49,7 @@ namespace dawn_native {
                                     descriptor->bindGroupLayouts[i]->GetBindingCountInfo());
         }
 
-        DAWN_TRY(ValidateBindingCounts(bindingCounts));
+        DAWN_TRY(ValidateBindingCounts(device, bindingCounts));
         return {};
     }
 
@@ -58,7 +58,7 @@ namespace dawn_native {
     PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device,
                                            const PipelineLayoutDescriptor* descriptor)
         : CachedObject(device, kLabelNotImplemented) {
-        ASSERT(descriptor->bindGroupLayoutCount <= kMaxBindGroups);
+        ASSERT(descriptor->bindGroupLayoutCount <= device->GetLimits().v1.maxBindGroups);
         for (BindGroupIndex group(0); group < BindGroupIndex(descriptor->bindGroupLayoutCount);
              ++group) {
             mBindGroupLayouts[group] = descriptor->bindGroupLayouts[static_cast<uint32_t>(group)];
@@ -247,10 +247,13 @@ namespace dawn_native {
         // there's no issue with using the same struct multiple times.
         ExternalTextureBindingLayout externalTextureBindingLayout;
 
+        BindGroupIndex largestGroupCount(0);
+
         // Loops over all the reflected BindGroupLayoutEntries from shaders.
         for (const StageAndDescriptor& stage : stages) {
             const EntryPointMetadata& metadata = stage.module->GetEntryPoint(stage.entryPoint);
 
+            largestGroupCount = std::max(largestGroupCount, metadata.bindings.size());
             for (BindGroupIndex group(0); group < metadata.bindings.size(); ++group) {
                 for (const auto& bindingIt : metadata.bindings[group]) {
                     BindingNumber bindingNumber = bindingIt.first;
@@ -287,7 +290,7 @@ namespace dawn_native {
         // same.
         BindGroupIndex pipelineBGLCount = BindGroupIndex(0);
         ityp::array<BindGroupIndex, Ref<BindGroupLayoutBase>, kMaxBindGroups> bindGroupLayouts = {};
-        for (BindGroupIndex group(0); group < kMaxBindGroupsTyped; ++group) {
+        for (BindGroupIndex group(0); group < largestGroupCount; ++group) {
             DAWN_TRY_ASSIGN(bindGroupLayouts[group],
                             CreateBGL(device, entryData[group], pipelineCompatibilityToken));
             if (entryData[group].size() != 0) {
@@ -324,7 +327,7 @@ namespace dawn_native {
 
     const BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(BindGroupIndex group) const {
         ASSERT(!IsError());
-        ASSERT(group < kMaxBindGroupsTyped);
+        ASSERT(group < mBindGroupLayouts.size());
         ASSERT(mMask[group]);
         const BindGroupLayoutBase* bgl = mBindGroupLayouts[group].Get();
         ASSERT(bgl != nullptr);
@@ -333,7 +336,7 @@ namespace dawn_native {
 
     BindGroupLayoutBase* PipelineLayoutBase::GetBindGroupLayout(BindGroupIndex group) {
         ASSERT(!IsError());
-        ASSERT(group < kMaxBindGroupsTyped);
+        ASSERT(group < mBindGroupLayouts.size());
         ASSERT(mMask[group]);
         BindGroupLayoutBase* bgl = mBindGroupLayouts[group].Get();
         ASSERT(bgl != nullptr);
@@ -354,12 +357,12 @@ namespace dawn_native {
     BindGroupIndex PipelineLayoutBase::GroupsInheritUpTo(const PipelineLayoutBase* other) const {
         ASSERT(!IsError());
 
-        for (BindGroupIndex i(0); i < kMaxBindGroupsTyped; ++i) {
+        for (BindGroupIndex i(0); i < mBindGroupLayouts.size(); ++i) {
             if (!mMask[i] || mBindGroupLayouts[i].Get() != other->mBindGroupLayouts[i].Get()) {
                 return i;
             }
         }
-        return kMaxBindGroupsTyped;
+        return mBindGroupLayouts.size();
     }
 
     size_t PipelineLayoutBase::ComputeContentHash() {

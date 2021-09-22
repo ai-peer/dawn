@@ -228,7 +228,7 @@ namespace dawn_native { namespace opengl {
                 BeforeApply();
                 for (BindGroupIndex index :
                      IterateBitSet(mDirtyBindGroupsObjectChangedOrIsDynamic)) {
-                    ApplyBindGroup(gl, index, mBindGroups[index], mDynamicOffsetCounts[index],
+                    ApplyBindGroup(gl, index, mBindGroups[index], mDynamicOffsets[index].size(),
                                    mDynamicOffsets[index].data());
                 }
                 AfterApply();

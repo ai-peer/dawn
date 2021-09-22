@@ -94,7 +94,7 @@ namespace dawn_native { namespace opengl {
                 BindGroupIndex bindGroupIndex(
                     compiler.get_decoration(resource.id, spv::DecorationDescriptorSet));
 
-                if (bindGroupIndex >= kMaxBindGroupsTyped) {
+                if (bindGroupIndex >= BindGroupIndex(device->GetLimits().v1.maxBindGroups)) {
                     return DAWN_VALIDATION_ERROR("Bind group index over limits in the SPIRV");
                 }
 

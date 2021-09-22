@@ -1114,24 +1114,33 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     std::vector<wgpu::BindGroupLayoutEntry> maxStorageDB;
     std::vector<wgpu::BindGroupLayoutEntry> maxReadonlyStorageDB;
 
+    wgpu::SupportedLimits supportedLimits;
+    wgpu::Device(backendDevice).GetLimits(&supportedLimits);
+    uint32_t maxDynamicUniformBuffersPerPipelineLayout =
+        supportedLimits.limits.maxDynamicUniformBuffersPerPipelineLayout;
+    uint32_t maxDynamicStorageBuffersPerPipelineLayout =
+        supportedLimits.limits.maxDynamicStorageBuffersPerPipelineLayout;
+    uint32_t maxUniformBuffersPerShaderStage =
+        supportedLimits.limits.maxUniformBuffersPerShaderStage;
+    uint32_t maxStorageBuffersPerShaderStage =
+        supportedLimits.limits.maxStorageBuffersPerShaderStage;
+
     // In this test, we use all the same shader stage. Ensure that this does not exceed the
     // per-stage limit.
-    static_assert(kMaxDynamicUniformBuffersPerPipelineLayout <= kMaxUniformBuffersPerShaderStage,
-                  "");
-    static_assert(kMaxDynamicStorageBuffersPerPipelineLayout <= kMaxStorageBuffersPerShaderStage,
-                  "");
+    ASSERT(maxDynamicUniformBuffersPerPipelineLayout <= maxUniformBuffersPerShaderStage);
+    ASSERT(maxDynamicStorageBuffersPerPipelineLayout <= maxStorageBuffersPerShaderStage);
 
-    for (uint32_t i = 0; i < kMaxDynamicUniformBuffersPerPipelineLayout; ++i) {
+    for (uint32_t i = 0; i < maxDynamicUniformBuffersPerPipelineLayout; ++i) {
         maxUniformDB.push_back(utils::BindingLayoutEntryInitializationHelper(
             i, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform, true));
     }
 
-    for (uint32_t i = 0; i < kMaxDynamicStorageBuffersPerPipelineLayout; ++i) {
+    for (uint32_t i = 0; i < maxDynamicStorageBuffersPerPipelineLayout; ++i) {
         maxStorageDB.push_back(utils::BindingLayoutEntryInitializationHelper(
             i, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage, true));
     }
 
-    for (uint32_t i = 0; i < kMaxDynamicStorageBuffersPerPipelineLayout; ++i) {
+    for (uint32_t i = 0; i < maxDynamicStorageBuffersPerPipelineLayout; ++i) {
         maxReadonlyStorageDB.push_back(utils::BindingLayoutEntryInitializationHelper(
             i, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::ReadOnlyStorage, true));
     }
@@ -1201,7 +1210,7 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     // Check dynamic uniform buffers exceed maximum in bind group layout.
     {
         maxUniformDB.push_back(utils::BindingLayoutEntryInitializationHelper(
-            kMaxDynamicUniformBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
+            maxDynamicUniformBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
             wgpu::BufferBindingType::Uniform, true));
         TestCreateBindGroupLayout(maxUniformDB.data(), maxUniformDB.size(), false);
     }
@@ -1209,7 +1218,7 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     // Check dynamic storage buffers exceed maximum in bind group layout.
     {
         maxStorageDB.push_back(utils::BindingLayoutEntryInitializationHelper(
-            kMaxDynamicStorageBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
+            maxDynamicStorageBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
             wgpu::BufferBindingType::Storage, true));
         TestCreateBindGroupLayout(maxStorageDB.data(), maxStorageDB.size(), false);
     }
@@ -1217,7 +1226,7 @@ TEST_F(BindGroupLayoutValidationTest, DynamicBufferNumberLimit) {
     // Check dynamic readonly storage buffers exceed maximum in bind group layout.
     {
         maxReadonlyStorageDB.push_back(utils::BindingLayoutEntryInitializationHelper(
-            kMaxDynamicStorageBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
+            maxDynamicStorageBuffersPerPipelineLayout, wgpu::ShaderStage::Fragment,
             wgpu::BufferBindingType::ReadOnlyStorage, true));
         TestCreateBindGroupLayout(maxReadonlyStorageDB.data(), maxReadonlyStorageDB.size(), false);
     }
