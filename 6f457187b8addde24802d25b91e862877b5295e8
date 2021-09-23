@@ -33,6 +33,24 @@
       "message": "nit: slight preference to have the definitions of dawn_abseil_source and dawn_abseil_config in third_party/gn/abseil to avoid cluttering this GN file and to avoid adding the compilation of extra abseil source in Chromium.",
       "revId": "6f457187b8addde24802d25b91e862877b5295e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abff90d6_923def8f",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T16:11:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c615cff1_eae7f585",
+      "revId": "6f457187b8addde24802d25b91e862877b5295e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

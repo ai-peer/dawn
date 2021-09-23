@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eaaa448_664e7f5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T16:11:03Z",
+      "side": 1,
+      "message": "Rebased and moved the abseil sources into their own gn file.",
+      "revId": "fc0969b73814f7b607287bf590dd9278ee71d822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
