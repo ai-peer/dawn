@@ -33,6 +33,24 @@
       "message": "nit: ... that compiles dawn_node.",
       "revId": "36d84301ad29d4b75aae4eb6ac5425faa938b169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc49a505_f9f5bf3c",
+        "filename": "scripts/standalone-with-node.gclient",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T14:31:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2478c19_e92e180c",
+      "revId": "36d84301ad29d4b75aae4eb6ac5425faa938b169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
