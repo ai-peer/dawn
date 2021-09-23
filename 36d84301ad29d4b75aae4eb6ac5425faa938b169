@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59a9f94c_18eeaa1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:54:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "36d84301ad29d4b75aae4eb6ac5425faa938b169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2478c19_e92e180c",
+        "filename": "scripts/standalone-with-node.gclient",
+        "patchSetId": 2
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:54:06Z",
+      "side": 1,
+      "message": "nit: ... that compiles dawn_node.",
+      "revId": "36d84301ad29d4b75aae4eb6ac5425faa938b169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
