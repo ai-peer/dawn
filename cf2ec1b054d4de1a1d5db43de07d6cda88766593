@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d63f00_adf2276f",
+        "filename": "src/dawn_node/tools/go.mod",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:51:39Z",
+      "side": 1,
+      "message": "Is there a way to have this as an explicit deps and replicated on the Git-on-Borg (like all the github mirrors on chromium.googlesource.com?) Same for the other packages in go.sum. (I don\u0027t know how luci or other Go things in Chromium do it)\n\nAs discussed offline, for now we could check in generated files and give this problem to future us.",
+      "revId": "cf2ec1b054d4de1a1d5db43de07d6cda88766593",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

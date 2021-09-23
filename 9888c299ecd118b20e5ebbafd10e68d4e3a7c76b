@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f7c1eeb_7742471b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:51:39Z",
+      "side": 1,
+      "message": "LGTM although I\u0027m not super knowledgeable about this. Do you know of another good reviewer?",
+      "revId": "9888c299ecd118b20e5ebbafd10e68d4e3a7c76b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71315aa8_4c0e61ea",
+        "filename": "src/dawn_node/tools/cmd/idlgen/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:51:39Z",
+      "side": 1,
+      "message": "nit: could be in the default?",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 0
+      },
+      "revId": "9888c299ecd118b20e5ebbafd10e68d4e3a7c76b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49be88df_41b2c9bc",
+        "filename": "src/dawn_node/tools/cmd/idlgen/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:51:39Z",
+      "side": 1,
+      "message": "Is eval used at all? In the later commits we only have 3 templates.",
+      "revId": "9888c299ecd118b20e5ebbafd10e68d4e3a7c76b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
