@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f97f8346_36a20d44",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-23T21:09:32Z",
+      "side": 1,
+      "message": "Ack.\n\nI agree that serializing the BGL itself would probably work more generally across backends. I think that this should be fine for the D3D12 backend (for now), but I\u0027m happy to switch over to serializing the BGL if you think the current state will cause issues.\n\nAlthough, now you mention tint transform data, perhaps a differnt solution could be to try and serialize the tint transformManager/transformInputs (along with the fxc/dxc/etc compiler flags). This way should make the cache keys only contain what affects the output, even if e.g. an field is added to the BGL that the current backend does not use. This would probably require changes in Tint.",
+      "parentUuid": "82fa89a7_ffe79516",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9718b72b_928f72cc",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-09-22T16:58:44Z",
       "side": 1,
       "message": "u-nit: we could create the request on the stack and assign things to its members directly. I think right now there\u0027s a risk that we can silently make a mistake in the order of the arguments.",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b595338c_71116963",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-23T21:09:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9718b72b_928f72cc",
       "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

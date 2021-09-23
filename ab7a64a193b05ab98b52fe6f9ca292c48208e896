@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cfd377b_bf63a04d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-23T21:09:32Z",
+      "side": 1,
+      "message": "Thanks for the review! If you have additional changes or nits, I\u0027m happy to make the change in this CL or do a follow-up!",
+      "revId": "ab7a64a193b05ab98b52fe6f9ca292c48208e896",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
