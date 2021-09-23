@@ -25,6 +25,8 @@ namespace dawn_native {
     MaybeError ValidateProgrammableStage(DeviceBase* device,
                                          const ShaderModuleBase* module,
                                          const std::string& entryPoint,
+                                         uint32_t constantCount,
+                                         const ConstantEntry* constants,
                                          const PipelineLayoutBase* layout,
                                          SingleShaderStage stage) {
         DAWN_TRY(device->ValidateObject(module));
@@ -41,6 +43,18 @@ namespace dawn_native {
 
         if (layout != nullptr) {
             DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, layout));
+        }
+
+        // Validate if overridable constants exist in shader module
+        // pipelineBase is not yet constructed at this moment so iterate constants from descriptor
+        if (constantCount > 0 && constants != nullptr) {
+            for (uint32_t i = 0; i < constantCount; i++) {
+                if (metadata.overridableConstants.end() ==
+                    metadata.overridableConstants.find(constants[i].key)) {
+                    return DAWN_VALIDATION_ERROR(
+                        "pipeline constant unmatched with shader module overridable constants");
+                }
+            }
         }
 
         return {};
@@ -68,6 +82,12 @@ namespace dawn_native {
             bool isFirstStage = mStageMask == wgpu::ShaderStage::None;
             mStageMask |= StageBit(shaderStage);
             mStages[shaderStage] = {module, entryPointName, &metadata};
+            auto& constants = mStages[shaderStage].constants;
+            if (stage.constantCount > 0 && stage.constants != nullptr) {
+                for (uint32_t i = 0; i < stage.constantCount; i++) {
+                    constants.emplace_back(stage.constants[i].key, stage.constants[i].value);
+                }
+            }
 
             // Compute the max() of all minBufferSizes across all stages.
             RequiredBufferSizes stageMinBufferSizes =

@@ -43,6 +43,8 @@ namespace dawn_native {
         SingleShaderStage shaderStage;
         ShaderModuleBase* module;
         std::string entryPoint;
+        uint32_t constantCount = 0u;
+        ConstantEntry const* constants = nullptr;
     };
 
     class PipelineLayoutBase : public CachedObject {
