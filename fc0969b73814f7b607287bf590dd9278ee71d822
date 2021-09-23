@@ -56,6 +56,30 @@
       },
       "revId": "fc0969b73814f7b607287bf590dd9278ee71d822",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2729a23f_27c86aaa",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T18:05:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be3735b3_01f6f25e",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "fc0969b73814f7b607287bf590dd9278ee71d822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
