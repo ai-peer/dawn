@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1b59a3_7ad30486",
+        "filename": "src/dawn_node/interop/Browser.idl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure how this is supposed to work in node-js land. Isn\u0027t this part supposed to already be implemented somewhere?",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57168fdd_13023421",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "This is probably where we would need to check in the generated files too\n\nI felt comfortable reading the header file but this one is much more complicated.",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47012240_b03b7c9c",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "nit: update \"Interface\" for Typedef",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0b7122_7d0a1e15",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ca9e950_85b68c08",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "ditto, and below too",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd56f954_6b2b8417",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "Why does this need an eval when the other macro calls don\u0027t need it?",
+      "range": {
+        "startLine": 181,
+        "startChar": 24,
+        "endLine": 181,
+        "endChar": 28
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c586110f_ce360fc7",
+        "filename": "src/dawn_node/interop/WebGPUCommon.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "Lookup is something with a side effects that puts the name here?",
+      "range": {
+        "startLine": 50,
+        "startChar": 28,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ea08e65_cc6e5b22",
+        "filename": "src/dawn_node/interop/WebGPUCommon.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:13:44Z",
+      "side": 1,
+      "message": "Ew :(\n\nAlso we might need to replace std::optional and std::variant with the absl types in the GN build.",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
