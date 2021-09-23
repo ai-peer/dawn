@@ -44,6 +44,10 @@ Errors returned from `DAWN_INVALID_IF()` or `DAWN_VALIDATION_ERROR()` should fol
  * Example: `Command encoding has already finished.`
  * Instead of: `encoder finished`
 
+**Error messages should be in the present tense.**
+ * Example: `Buffer is not large enough...`
+ * Instead of: `Buffer was not large enough...`
+
 **When possible any values mentioned should be immediately followed in parentheses by the given value.**
  * Example: `("Array stride (%u) is not...", stride)`
  * Output: `Array stride (16) is not...`
