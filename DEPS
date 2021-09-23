@@ -9,6 +9,7 @@ vars = {
   'swiftshader_git': 'https://swiftshader.googlesource.com',
 
   'dawn_standalone': True,
+  'dawn_node': False, # Also fetches dependencies required for building NodeJS bindings.
 }
 
 deps = {
@@ -134,6 +135,20 @@ deps = {
   'third_party/zlib': {
     'url': '{chromium_git}/chromium/src/third_party/zlib@c29ee8c9c3824ca013479bf8115035527967fe02',
     'condition': 'dawn_standalone',
+  },
+
+  # Dependencies required to build Dawn NodeJS bindings
+  'third_party/node-api-headers': {
+    'url': '{github_git}/nodejs/node-api-headers.git@d68505e4055ecb630e14c26c32e5c2c65e179bba',
+    'condition': 'dawn_node',
+  },
+  'third_party/node-addon-api': {
+    'url': '{github_git}/nodejs/node-addon-api.git@4a3de56c3e4ed0031635a2f642b27efeeed00add',
+    'condition': 'dawn_node',
+  },
+  'third_party/gpuweb': {
+    'url': '{github_git}/gpuweb/gpuweb.git@67edc187f5305a72456663c34d51153601b79f3b',
+    'condition': 'dawn_node',
   },
 }
 
