@@ -20,8 +20,14 @@ namespace dawn_native {
 
     AdapterBase::AdapterBase(InstanceBase* instance, wgpu::BackendType backend)
         : mInstance(instance), mBackend(backend) {
-        GetDefaultLimits(&mLimits.v1);
         mSupportedExtensions.EnableExtension(Extension::DawnInternalUsages);
+    }
+
+    MaybeError AdapterBase::Initialize() {
+        DAWN_TRY(InitializeImpl());
+        DAWN_TRY(InitializeSupportedFeaturesImpl());
+        DAWN_TRY(InitializeSupportedLimitsImpl(&mLimits));
+        return {};
     }
 
     wgpu::BackendType AdapterBase::GetBackendType() const {
