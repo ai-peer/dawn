@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8589fb19_57b5057b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-23T16:52:11Z",
+      "side": 1,
+      "message": "Antonio - do you feel comfortable reviewing the Go code?",
+      "revId": "ef0d1d116feec72866a874a59137ea010cd1f151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
