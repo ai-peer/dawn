@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d287b81_ce749e71",
+        "filename": "src/dawn_node/interop/Browser.idl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Not to my knowledge. These are all browser related things. NodeJS is just the javascript engine. I\u0027m sure there\u0027s a whole bunch of third party libraries for emulating the browser, but to my knowledge, not much of this stuff is actually used in CTS.",
+      "parentUuid": "ea1b59a3_7ad30486",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "57168fdd_13023421",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-23T14:13:44Z",
       "side": 1,
       "message": "This is probably where we would need to check in the generated files too\n\nI felt comfortable reading the header file but this one is much more complicated.",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27e08f52_a6fdadeb",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "57168fdd_13023421",
       "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d17c01f6_89794fb8",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "47012240_b03b7c9c",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f0b7122_7d0a1e15",
@@ -65,6 +119,24 @@
       "writtenOn": "2021-09-23T14:13:44Z",
       "side": 1,
       "message": "ditto",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53e4c7f3_614fd12c",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f0b7122_7d0a1e15",
       "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d89f751_cc8e2d05",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7ca9e950_85b68c08",
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd56f954_6b2b8417",
@@ -99,6 +189,30 @@
       "writtenOn": "2021-09-23T14:13:44Z",
       "side": 1,
       "message": "Why does this need an eval when the other macro calls don\u0027t need it?",
+      "range": {
+        "startLine": 181,
+        "startChar": 24,
+        "endLine": 181,
+        "endChar": 28
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e161bea5_bf8cedf4",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Because we need to pass in more than one argument.\nEval is a workaround for the golang template limitation of a single value. Here we construct a map[string]object with:\n \"Value\": $.Init\n \"Type\":  $.Type\n \nInside the template function these are accessed as $.Value and $.Type.",
+      "parentUuid": "bd56f954_6b2b8417",
       "range": {
         "startLine": 181,
         "startChar": 24,
@@ -132,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58670671_8b1d322e",
+        "filename": "src/dawn_node/interop/WebGPUCommon.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": "Lookup is registered here: https://dawn.googlesource.com/dawn/+/refs/changes/46/64746/4/src/dawn_node/tools/cmd/idlgen/main.go#129\n\nAnd the implementation just looks up the declaration by name. So we\u0027re looking up the type name, and checking whether it is an interface.",
+      "parentUuid": "c586110f_ce360fc7",
+      "range": {
+        "startLine": 50,
+        "startChar": 28,
+        "endLine": 50,
+        "endChar": 43
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ea08e65_cc6e5b22",
@@ -145,6 +283,30 @@
       "writtenOn": "2021-09-23T14:13:44Z",
       "side": 1,
       "message": "Ew :(\n\nAlso we might need to replace std::optional and std::variant with the absl types in the GN build.",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec8a4402_d0af2c8d",
+        "filename": "src/dawn_node/interop/WebGPUCommon.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-23T15:19:58Z",
+      "side": 1,
+      "message": ":(\n\nBeing forced away from C++17 to use another dependency is quite a compelling argument to keep this code out of Dawn.",
+      "parentUuid": "0ea08e65_cc6e5b22",
       "range": {
         "startLine": 55,
         "startChar": 36,
