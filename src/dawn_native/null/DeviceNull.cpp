@@ -43,6 +43,19 @@ namespace dawn_native { namespace null {
         mSupportedExtensions = GetInstance()->ExtensionNamesToExtensionsSet(requiredExtensions);
     }
 
+    MaybeError Adapter::InitializeImpl() {
+        return {};
+    }
+
+    MaybeError Adapter::InitializeSupportedFeaturesImpl() {
+        return {};
+    }
+
+    MaybeError Adapter::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
+        GetDefaultLimits(&limits->v1);
+        return {};
+    }
+
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {
         return Device::Create(this, descriptor);
     }

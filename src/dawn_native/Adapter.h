@@ -33,6 +33,8 @@ namespace dawn_native {
         AdapterBase(InstanceBase* instance, wgpu::BackendType backend);
         virtual ~AdapterBase() = default;
 
+        MaybeError Initialize();
+
         wgpu::BackendType GetBackendType() const;
         wgpu::AdapterType GetAdapterType() const;
         const std::string& GetDriverDescription() const;
@@ -66,6 +68,10 @@ namespace dawn_native {
 
       private:
         virtual ResultOrError<DeviceBase*> CreateDeviceImpl(const DeviceDescriptor* descriptor) = 0;
+
+        virtual MaybeError InitializeImpl() = 0;
+        virtual MaybeError InitializeSupportedFeaturesImpl() = 0;
+        virtual MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) = 0;
 
         MaybeError CreateDeviceInternal(DeviceBase** result, const DeviceDescriptor* descriptor);
 
