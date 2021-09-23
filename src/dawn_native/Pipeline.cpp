@@ -25,6 +25,8 @@ namespace dawn_native {
     MaybeError ValidateProgrammableStage(DeviceBase* device,
                                          const ShaderModuleBase* module,
                                          const std::string& entryPoint,
+                                         uint32_t constantCount,
+                                         const ConstantEntry* constants,
                                          const PipelineLayoutBase* layout,
                                          SingleShaderStage stage) {
         DAWN_TRY(device->ValidateObject(module));
@@ -41,6 +43,15 @@ namespace dawn_native {
 
         if (layout != nullptr) {
             DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, layout));
+        }
+
+        // Validate if overridable constants exist in shader module
+        // pipelineBase is not yet constructed at this moment so iterate constants from descriptor
+        for (uint32_t i = 0; i < constantCount; i++) {
+            if (metadata.overridableConstants.count(constants[i].key) == 0) {
+                return DAWN_VALIDATION_ERROR(
+                    "pipeline constant unmatched with shader module overridable constants");
+            }
         }
 
         return {};
@@ -67,7 +78,12 @@ namespace dawn_native {
             // Record them internally.
             bool isFirstStage = mStageMask == wgpu::ShaderStage::None;
             mStageMask |= StageBit(shaderStage);
-            mStages[shaderStage] = {module, entryPointName, &metadata};
+            mStages[shaderStage] = {module, entryPointName, &metadata,
+                                    std::vector<PipelineConstantEntry>()};
+            auto& constants = mStages[shaderStage].constants;
+            for (uint32_t i = 0; i < stage.constantCount; i++) {
+                constants.emplace_back(stage.constants[i].key, stage.constants[i].value);
+            }
 
             // Compute the max() of all minBufferSizes across all stages.
             RequiredBufferSizes stageMinBufferSizes =
