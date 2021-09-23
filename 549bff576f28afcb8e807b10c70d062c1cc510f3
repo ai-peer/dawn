@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "860605f3_4d3bd6e4",
+        "filename": "docs/validation_errors.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T20:39:07Z",
+      "side": 1,
+      "message": "Done. Moved to errors.md, updated the text to take into account the wider scope, and added a bit more content.",
+      "parentUuid": "e5e11b8f_4a462632",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cf7fc03_270425df",
@@ -92,6 +110,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f420e621_a1d65f62",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T20:39:07Z",
+      "side": 1,
+      "message": "Done. Added the `using` statements to each applicable header, though it still needs the `{% set Base \u003d ...` pattern in the header because otherwise you get a conflict in the forward declaration between the `class` and the `using`.",
+      "parentUuid": "b30d41ac_7ed6191e",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "853aa2a8_ea2b250d",
@@ -105,6 +141,30 @@
       "writtenOn": "2021-09-20T11:45:43Z",
       "side": 1,
       "message": "optional nit: We could say what that it is the minimum alignment for a specific buffer binding type.",
+      "range": {
+        "startLine": 93,
+        "startChar": 79,
+        "endLine": 93,
+        "endChar": 80
+      },
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d406390_9c18fcc1",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T20:39:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "853aa2a8_ea2b250d",
       "range": {
         "startLine": 93,
         "startChar": 79,

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76888ca3_649d363b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-23T20:39:07Z",
+      "side": 1,
+      "message": "Abseil support just got merged back in! Let\u0027s land this thing!",
+      "revId": "6b40fc12ffca2395c7b8a3d05b84242b9977f8e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
