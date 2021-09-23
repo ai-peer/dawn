@@ -193,6 +193,15 @@ namespace dawn_native {
 
         // The shader stage for this binding.
         SingleShaderStage stage;
+
+        struct OverridableConstant {
+            uint32_t id;
+            // Match tint::inspector::OverridableConstant::Type
+            enum class Type { Bool, Float32, Uint32, Int32 } type;
+        };
+
+        // Store overridableConstants from tint program
+        std::unordered_map<std::string, OverridableConstant> overridableConstants;
     };
 
     class ShaderModuleBase : public CachedObject {
