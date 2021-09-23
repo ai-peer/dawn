@@ -33,6 +33,24 @@
       "message": "nit: Maybe comment about the multithreading guarantees?",
       "revId": "4c1313f39009e0920e175bd0a6f05fad8ee1d186",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c96088ba_1ac71fe6",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-23T05:19:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ede5c12_0bc594d0",
+      "revId": "4c1313f39009e0920e175bd0a6f05fad8ee1d186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
