@@ -57,3 +57,19 @@ endfunction()
 
 add_subdirectory(binding)
 add_subdirectory(interop)
+
+add_library(dawn_node SHARED "Module.cpp")
+set_target_properties(dawn_node PROPERTIES PREFIX "" SUFFIX ".node")
+target_link_libraries(dawn_node dawn_node_binding dawn_node_interop dawn_native dawncpp dawn_proc)
+target_include_directories(dawn_node PRIVATE
+    ${CMAKE_SOURCE_DIR}
+    ${NODE_API_HEADERS_DIR}
+    ${NODE_ADDON_API_DIR}
+    ${GEN_DIR}
+)
+
+# dawn_node targets require C++17
+set_property(
+    TARGET dawn_node
+    PROPERTY CXX_STANDARD 17
+)
