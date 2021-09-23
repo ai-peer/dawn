@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18661741_db575e9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1807ffd6_cecbdb58",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "nit: Marshal / Unmarshal really depend on point of view. Maybe ToJS and FromJS or ToNapi and FromNapi?",
+      "range": {
+        "startLine": 203,
+        "startChar": 11,
+        "endLine": 203,
+        "endChar": 20
+      },
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f636c3a_280c2448",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "Maybe ConversionTrait?",
+      "range": {
+        "startLine": 211,
+        "startChar": 10,
+        "endLine": 211,
+        "endChar": 20
+      },
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc908af_dd06f469",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "nit: Napi::Object, ArrayBuffer, etc could be in the .cpp (maybe I\u0027m missing something)",
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29f7c2d5_2bbc037e",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "nit: value?",
+      "range": {
+        "startLine": 217,
+        "startChar": 15,
+        "endLine": 217,
+        "endChar": 19
+      },
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3447e5db_ad9b76c7",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we check a specific typedarray?",
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc507c6b_a589caf3",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T14:03:56Z",
+      "side": 1,
+      "message": "Could serializers internally use the Marshal and Unmarshal helper functions?",
+      "range": {
+        "startLine": 384,
+        "startChar": 17,
+        "endLine": 384,
+        "endChar": 41
+      },
+      "revId": "498268564aac51d4fedd890586a06fe8bc535fee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
