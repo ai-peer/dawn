@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1352e2d3_7623e93f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-23T20:13:25Z",
+      "side": 1,
+      "message": "Ok, changed this to only expose maxComputeWorkgroupStorageSize and maxStorageBufferBindingSize, each as their own tier.",
+      "revId": "bc619e135f07c7fee7e19ddc7fd1cc3bb6c0e234",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
