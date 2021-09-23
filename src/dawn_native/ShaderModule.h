@@ -43,6 +43,11 @@ namespace tint {
         class VertexPulling;
     }  // namespace transform
 
+    // namespace inspector {
+    //     struct OverridableConstant;
+    //     enum class OverridableConstant::Type;
+    // }
+
 }  // namespace tint
 
 namespace dawn_native {
@@ -193,6 +198,22 @@ namespace dawn_native {
 
         // The shader stage for this binding.
         SingleShaderStage stage;
+
+        struct OverridableConstant {
+            uint32_t id;
+            // Match tint::inspector::OverridableConstant::Type
+            enum class Type { Bool, Float32, Uint32, Int32 } type;
+            // tint::inspector::OverridableConstant::Type type;
+        };
+
+        // // std::vector<OverridableConstant> overridableConstants;
+        // // Need unordered_map during validation
+
+        std::unordered_map<std::string, OverridableConstant> overridableConstants;
+
+        // std::unordered_map<std::string, tint::inspector::OverridableConstant>
+        // overridableConstants; std::unordered_map<std::string, const
+        // tint::inspector::OverridableConstant&> overridableConstants;
     };
 
     class ShaderModuleBase : public CachedObject {

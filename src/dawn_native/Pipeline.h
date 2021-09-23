@@ -31,15 +31,29 @@ namespace dawn_native {
     MaybeError ValidateProgrammableStage(DeviceBase* device,
                                          const ShaderModuleBase* module,
                                          const std::string& entryPoint,
+                                         uint32_t constantCount,
+                                         const ConstantEntry* constants,
                                          const PipelineLayoutBase* layout,
                                          SingleShaderStage stage);
 
+    // TODO: This might only need to be vector
+    // using PipelineOverridableConstants = std::unordered_map<std::string, double>;
+    using PipelineConstantEntry = std::pair<std::string, double>;
     struct ProgrammableStage {
         Ref<ShaderModuleBase> module;
         std::string entryPoint;
 
         // The metadata lives as long as module, that's ref-ed in the same structure.
         const EntryPointMetadata* metadata = nullptr;
+
+        // PipelineOverridableConstants constants;
+        std::vector<PipelineConstantEntry> constants;
+        // std::vector<std constants;
+
+        // ProgrammableStage() = default;
+        // ProgrammableStage(Ref<ShaderModuleBase> module, const std::string & entryPoint, const
+        // EntryPointMetadata* metadata, uint32_t constantCount,
+        //               ConstantEntry const* constants);
     };
 
     class PipelineBase : public CachedObject {

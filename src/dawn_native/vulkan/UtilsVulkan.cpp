@@ -17,6 +17,8 @@
 #include "common/Assert.h"
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Format.h"
+#include "dawn_native/Pipeline.h"
+#include "dawn_native/ShaderModule.h"
 #include "dawn_native/vulkan/DeviceVk.h"
 #include "dawn_native/vulkan/Forward.h"
 #include "dawn_native/vulkan/TextureVk.h"
@@ -194,4 +196,71 @@ namespace dawn_native { namespace vulkan {
             device->fn.SetDebugUtilsObjectNameEXT(device->GetVkDevice(), &objectNameInfo);
         }
     }
+
+    VkSpecializationInfo* GetVkSpecializationInfo(
+        const ProgrammableStage& programmableStage,
+        VkSpecializationInfo& specializationInfo,
+        std::vector<SpecializationDataEntry>& specializationDataEntries,
+        std::vector<VkSpecializationMapEntry>& specializationMapEntries) {
+        if (programmableStage.constants.size() == 0) {
+            return nullptr;
+        } else {
+            for (const auto& pipelineConstant : programmableStage.constants) {
+                const auto& name = pipelineConstant.first;
+                auto value = pipelineConstant.second;
+                // printf("\n\n\n!!!!  %s, %f\n", name.c_str(), constant);
+
+                auto& entryPointMetaData =
+                    programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
+                // assert must exist
+                const auto& moduleConstant = entryPointMetaData.overridableConstants.at(name);
+
+                specializationMapEntries.push_back(VkSpecializationMapEntry{
+                    moduleConstant.id,
+                    static_cast<uint32_t>(specializationDataEntries.size() *
+                                          sizeof(SpecializationDataEntry)),
+                    sizeof(SpecializationDataEntry)});
+
+                const auto& last = specializationMapEntries.back();
+                printf("\n\n\n!!!! VkSpecializationMapEntry  %u  %u  %llu\n", last.constantID,
+                       last.offset, last.size);
+
+                SpecializationDataEntry entry;
+                switch (moduleConstant.type) {
+                    case EntryPointMetadata::OverridableConstant::Type::Bool:
+                        entry.b = static_cast<bool>(value);
+                        printf("%d\n", entry.b);
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Float32:
+                        entry.f32 = static_cast<float>(value);
+                        printf("%f\n", entry.f32);
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Int32:
+                        entry.i32 = static_cast<int32_t>(value);
+                        printf("%d\n", entry.i32);
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                        entry.u32 = static_cast<uint32_t>(value);
+                        printf("%u\n", entry.u32);
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+                specializationDataEntries.push_back(entry);
+            }
+
+            specializationInfo.mapEntryCount =
+                static_cast<uint32_t>(specializationMapEntries.size());
+            specializationInfo.pMapEntries = specializationMapEntries.data();
+            specializationInfo.dataSize =
+                specializationDataEntries.size() * sizeof(SpecializationDataEntry);
+            specializationInfo.pData = specializationDataEntries.data();
+
+            printf("\n\n\n!!!! specializationInfo  %u %llu\n", specializationInfo.mapEntryCount,
+                   specializationInfo.dataSize);
+
+            return &specializationInfo;
+        }
+    }
+
 }}  // namespace dawn_native::vulkan

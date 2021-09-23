@@ -39,10 +39,15 @@ namespace dawn_native {
         ityp::array<BindGroupIndex, Ref<BindGroupLayoutBase>, kMaxBindGroups>;
     using BindGroupLayoutMask = ityp::bitset<BindGroupIndex, kMaxBindGroups>;
 
+    // using PipelineOverridableConstants = std::map<std::string, double>;
+
     struct StageAndDescriptor {
         SingleShaderStage shaderStage;
         ShaderModuleBase* module;
         std::string entryPoint;
+        uint32_t constantCount = 0u;
+        ConstantEntry const* constants = nullptr;
+        // PipelineOverridableConstants constants;
     };
 
     class PipelineLayoutBase : public CachedObject {
