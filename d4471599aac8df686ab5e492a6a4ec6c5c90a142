@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f401f5_929be6fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:53:15Z",
+      "side": 1,
+      "message": "LGTM, TBD if we want to use common/Log.h long term.",
+      "revId": "d4471599aac8df686ab5e492a6a4ec6c5c90a142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "384ed7d7_09a1a8ab",
+        "filename": "src/dawn_node/utils/Debug.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-23T13:53:15Z",
+      "side": 1,
+      "message": "nit: why does this need more than FIRST?",
+      "range": {
+        "startLine": 96,
+        "startChar": 30,
+        "endLine": 96,
+        "endChar": 45
+      },
+      "revId": "d4471599aac8df686ab5e492a6a4ec6c5c90a142",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
