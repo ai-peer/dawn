@@ -16,6 +16,46 @@
       "message": "Rebased and moved the abseil sources into their own gn file.",
       "revId": "fc0969b73814f7b607287bf590dd9278ee71d822",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a4e7e116_f1b193f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-23T16:18:08Z",
+      "side": 1,
+      "message": "CR+2 - I don\u0027t think this is very controversial of a change (once it builds on the bots)",
+      "revId": "fc0969b73814f7b607287bf590dd9278ee71d822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be3735b3_01f6f25e",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-23T16:18:08Z",
+      "side": 1,
+      "message": "2021? Or was this mostly copied from somewhere else",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "fc0969b73814f7b607287bf590dd9278ee71d822",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
