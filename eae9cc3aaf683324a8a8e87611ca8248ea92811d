@@ -16,6 +16,24 @@
       "message": "LGTM, but it would be nice to have that on CI or we\u0027ll keep regressing GCC compilation.",
       "revId": "eae9cc3aaf683324a8a8e87611ca8248ea92811d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2080282e_8cf43b2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-23T10:56:52Z",
+      "side": 1,
+      "message": "Acknowledged. I\u0027m happy to set up Kokoro presubmits, if we want to take that route.\nI\u0027ve spoken to Ryan about investigating the CMake + CQ route, but he\u0027s pretty busy with other stuff right now.",
+      "parentUuid": "1f60fe16_fb5d99c1",
+      "revId": "eae9cc3aaf683324a8a8e87611ca8248ea92811d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
