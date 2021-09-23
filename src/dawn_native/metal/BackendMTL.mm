@@ -263,8 +263,6 @@ namespace dawn_native { namespace metal {
             NSString* osVersion = [[NSProcessInfo processInfo] operatingSystemVersionString];
             mDriverDescription =
                 "Metal driver on " + std::string(systemName) + [osVersion UTF8String];
-
-            InitializeSupportedExtensions();
         }
 
         // AdapterBase Implementation
@@ -278,7 +276,11 @@ namespace dawn_native { namespace metal {
             return Device::Create(this, mDevice, descriptor);
         }
 
-        void InitializeSupportedExtensions() {
+        MaybeError InitializeImpl() override {
+            return {};
+        }
+
+        MaybeError InitializeSupportedFeaturesImpl() override {
 #if defined(DAWN_PLATFORM_MACOS)
             if ([*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1]) {
                 mSupportedExtensions.EnableExtension(Extension::TextureCompressionBC);
@@ -314,6 +316,13 @@ namespace dawn_native { namespace metal {
             if (@available(macOS 10.11, iOS 11.0, *)) {
                 mSupportedExtensions.EnableExtension(Extension::DepthClamping);
             }
+
+            return {};
+        }
+
+        MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override {
+            GetDefaultLimits(&limits->v1);
+            return {};
         }
 
         NSPRef<id<MTLDevice>> mDevice;
