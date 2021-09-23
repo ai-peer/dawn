@@ -1347,8 +1347,8 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
-            {"name": "constant count", "type": "uint32_t", "tags": ["upstream"]},
-            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count", "tags": ["upstream"]}
+            {"name": "constant count", "type": "uint32_t", "default": 0},
+            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count"}
         ]
     },
     "primitive topology": {
@@ -1816,8 +1816,8 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
-            {"name": "constant count", "type": "uint32_t", "tags": ["upstream"]},
-            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count", "tags": ["upstream"]},
+            {"name": "constant count", "type": "uint32_t", "default": 0},
+            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count"},
             {"name": "buffer count", "type": "uint32_t", "default": 0},
             {"name": "buffers", "type": "vertex buffer layout", "annotation": "const*", "length": "buffer count"}
         ]
@@ -1875,8 +1875,8 @@
         "members": [
             {"name": "module", "type": "shader module"},
             {"name": "entry point", "type": "char", "annotation": "const*", "length": "strlen"},
-            {"name": "constant count", "type": "uint32_t", "tags": ["upstream"]},
-            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count", "tags": ["upstream"]},
+            {"name": "constant count", "type": "uint32_t", "default": 0},
+            {"name": "constants", "type": "constant entry", "annotation": "const*", "length": "constant count"},
             {"name": "target count", "type": "uint32_t"},
             {"name": "targets", "type": "color target state", "annotation": "const*", "length": "target count"}
         ]
