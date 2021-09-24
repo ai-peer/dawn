@@ -16,6 +16,69 @@
       "message": "PTAL, thanks!\nCurrently I use the existing wgpu::kLimitU64Undefined constant, and I am not sure if I should name a new specific constant. And I am little surprised that emitting deprecation warning didn\u0027t break CTS tests.",
       "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5de57e2_9773a732",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T15:52:05Z",
+      "side": 1,
+      "message": "LGTM - this needs tests in src/tests/end2end/DeprecatedAPITests.cpp\n\nyou can check a previous commit to see how tests were written in the past",
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4240c76_be7b8e38",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T15:52:05Z",
+      "side": 1,
+      "message": "unit: period, not a comma\nfollowed by: \"In the future\"",
+      "range": {
+        "startLine": 240,
+        "startChar": 38,
+        "endLine": 240,
+        "endChar": 39
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b023bed1_3cb1c3ab",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T15:52:05Z",
+      "side": 1,
+      "message": "nit: can stride stay as uint32_t ?",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 20
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
