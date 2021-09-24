@@ -60,6 +60,109 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2346e8b_39c8f969",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-24T22:40:22Z",
+      "side": 1,
+      "message": "Nit: this doesn\u0027t make sense to a JS user. Also, it should be wgpu::kWholeSize instead of kLimitU64Undefined. Maybe:\n\n \"Use `undefined` (wgpu::kWholeSize) or just omit the parameter instead.\"",
+      "range": {
+        "startLine": 241,
+        "startChar": 29,
+        "endLine": 241,
+        "endChar": 53
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fa93ad_51e66a3e",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-24T22:40:22Z",
+      "side": 1,
+      "message": "And please change kLimitU64Undefined to kWholeSize everywhere else in this CL.",
+      "range": {
+        "startLine": 244,
+        "startChar": 34,
+        "endLine": 244,
+        "endChar": 52
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c5fd91_aa7d03ae",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-24T22:40:22Z",
+      "side": 1,
+      "message": "buffer-\u003eGetSize() - offset is unsigned, so max with 0 doesn\u0027t do anything.\nI think we should have asserts when validation is disabled. How about:\n\n ASSERT(offset \u003c\u003d buffer-\u003eGetSize());\n size \u003d buffer-\u003eGetSize() - offset;",
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25634e63_83d396d6",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-24T22:40:22Z",
+      "side": 1,
+      "message": "Same",
+      "range": {
+        "startLine": 302,
+        "startChar": 29,
+        "endLine": 302,
+        "endChar": 53
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23369d65_04a2a085",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-24T22:40:22Z",
+      "side": 1,
+      "message": "Same",
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b023bed1_3cb1c3ab",
         "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
         "patchSetId": 1
