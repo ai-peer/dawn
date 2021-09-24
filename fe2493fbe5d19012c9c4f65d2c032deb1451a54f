@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ab4430_08fd9406",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001616
+      },
+      "writtenOn": "2021-09-24T20:07:36Z",
+      "side": 1,
+      "message": "This fixes a bug with Abseil not finding gtest when dawn is built as a sub-directory.\n\nThe scope of set(BUILD_TESTING OFF) is limited to the third_party directory.",
+      "revId": "fe2493fbe5d19012c9c4f65d2c032deb1451a54f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
