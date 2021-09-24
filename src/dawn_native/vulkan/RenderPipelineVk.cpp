@@ -328,12 +328,10 @@ namespace dawn_native { namespace vulkan {
     }  // anonymous namespace
 
     // static
-    ResultOrError<Ref<RenderPipeline>> RenderPipeline::Create(
+    Ref<RenderPipeline> RenderPipeline::CreateUninitialized(
         Device* device,
         const RenderPipelineDescriptor* descriptor) {
-        Ref<RenderPipeline> pipeline = AcquireRef(new RenderPipeline(device, descriptor));
-        DAWN_TRY(pipeline->Initialize());
-        return pipeline;
+        return AcquireRef(new RenderPipeline(device, descriptor));
     }
 
     MaybeError RenderPipeline::Initialize() {
@@ -601,15 +599,11 @@ namespace dawn_native { namespace vulkan {
         return mHandle;
     }
 
-    void RenderPipeline::CreateAsync(Device* device,
-                                     const RenderPipelineDescriptor* descriptor,
-                                     size_t blueprintHash,
-                                     WGPUCreateRenderPipelineAsyncCallback callback,
-                                     void* userdata) {
-        Ref<RenderPipeline> pipeline = AcquireRef(new RenderPipeline(device, descriptor));
+    void RenderPipeline::InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
+                                         WGPUCreateRenderPipelineAsyncCallback callback,
+                                         void* userdata) {
         std::unique_ptr<CreateRenderPipelineAsyncTask> asyncTask =
-            std::make_unique<CreateRenderPipelineAsyncTask>(pipeline, blueprintHash, callback,
-                                                            userdata);
+            std::make_unique<CreateRenderPipelineAsyncTask>(renderPipeline, callback, userdata);
         CreateRenderPipelineAsyncTask::RunAsync(std::move(asyncTask));
     }
 
