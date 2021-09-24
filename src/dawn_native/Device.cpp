@@ -847,7 +847,9 @@ namespace dawn_native {
 
     BindGroupBase* DeviceBase::APICreateBindGroup(const BindGroupDescriptor* descriptor) {
         Ref<BindGroupBase> result;
-        if (ConsumedError(CreateBindGroup(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateBindGroup(descriptor),
+                                            "calling CreateBindGroup with %s", descriptor),
+                          &result)) {
             return BindGroupBase::MakeError(this);
         }
         return result.Detach();
@@ -855,14 +857,18 @@ namespace dawn_native {
     BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor) {
         Ref<BindGroupLayoutBase> result;
-        if (ConsumedError(CreateBindGroupLayout(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateBindGroupLayout(descriptor),
+                                            "calling CreateBindGroupLayout with %s", descriptor),
+                          &result)) {
             return BindGroupLayoutBase::MakeError(this);
         }
         return result.Detach();
     }
     BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
         Ref<BufferBase> result = nullptr;
-        if (ConsumedError(CreateBuffer(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateBuffer(descriptor),
+                                            "calling CreateBuffer with %s", descriptor),
+                          &result)) {
             ASSERT(result == nullptr);
             return BufferBase::MakeError(this, descriptor);
         }
@@ -875,7 +881,9 @@ namespace dawn_native {
     ComputePipelineBase* DeviceBase::APICreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
         Ref<ComputePipelineBase> result;
-        if (ConsumedError(CreateComputePipeline(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateComputePipeline(descriptor),
+                                            "calling CreateComputePipeline with %s", descriptor),
+                          &result)) {
             return ComputePipelineBase::MakeError(this);
         }
         return result.Detach();
@@ -897,21 +905,27 @@ namespace dawn_native {
     PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
         const PipelineLayoutDescriptor* descriptor) {
         Ref<PipelineLayoutBase> result;
-        if (ConsumedError(CreatePipelineLayout(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreatePipelineLayout(descriptor),
+                                            "calling CreatePipelineLayout with %s", descriptor),
+                          &result)) {
             return PipelineLayoutBase::MakeError(this);
         }
         return result.Detach();
     }
     QuerySetBase* DeviceBase::APICreateQuerySet(const QuerySetDescriptor* descriptor) {
         Ref<QuerySetBase> result;
-        if (ConsumedError(CreateQuerySet(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateQuerySet(descriptor),
+                                            "calling CreateQuerySet with %s", descriptor),
+                          &result)) {
             return QuerySetBase::MakeError(this);
         }
         return result.Detach();
     }
     SamplerBase* DeviceBase::APICreateSampler(const SamplerDescriptor* descriptor) {
         Ref<SamplerBase> result;
-        if (ConsumedError(CreateSampler(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateSampler(descriptor),
+                                            "calling CreateSampler with %s", descriptor),
+                          &result)) {
             return SamplerBase::MakeError(this);
         }
         return result.Detach();
@@ -933,7 +947,10 @@ namespace dawn_native {
     RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
         const RenderBundleEncoderDescriptor* descriptor) {
         Ref<RenderBundleEncoder> result;
-        if (ConsumedError(CreateRenderBundleEncoder(descriptor), &result)) {
+        if (ConsumedError(
+                DAWN_WRAP_CONTEXT(CreateRenderBundleEncoder(descriptor),
+                                  "calling CreateRenderBundleEncoder with %s", descriptor),
+                &result)) {
             return RenderBundleEncoder::MakeError(this);
         }
         return result.Detach();
@@ -941,7 +958,9 @@ namespace dawn_native {
     RenderPipelineBase* DeviceBase::APICreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
         Ref<RenderPipelineBase> result;
-        if (ConsumedError(CreateRenderPipeline(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateRenderPipeline(descriptor),
+                                            "calling CreateRenderPipeline with %s", descriptor),
+                          &result)) {
             return RenderPipelineBase::MakeError(this);
         }
         return result.Detach();
@@ -950,7 +969,10 @@ namespace dawn_native {
         Ref<ShaderModuleBase> result;
         std::unique_ptr<OwnedCompilationMessages> compilationMessages(
             std::make_unique<OwnedCompilationMessages>());
-        if (ConsumedError(CreateShaderModule(descriptor, compilationMessages.get()), &result)) {
+        if (ConsumedError(
+                DAWN_WRAP_CONTEXT(CreateShaderModule(descriptor, compilationMessages.get()),
+                                  "calling CreateShaderModule with %s", descriptor),
+                &result)) {
             DAWN_ASSERT(result == nullptr);
             result = ShaderModuleBase::MakeError(this);
         }
@@ -963,14 +985,18 @@ namespace dawn_native {
     SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
                                                   const SwapChainDescriptor* descriptor) {
         Ref<SwapChainBase> result;
-        if (ConsumedError(CreateSwapChain(surface, descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateSwapChain(surface, descriptor),
+                                            "calling CreateSwapChain with %s", descriptor),
+                          &result)) {
             return SwapChainBase::MakeError(this);
         }
         return result.Detach();
     }
     TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
         Ref<TextureBase> result;
-        if (ConsumedError(CreateTexture(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateTexture(descriptor),
+                                            "calling CreateTexture with %s", descriptor),
+                          &result)) {
             return TextureBase::MakeError(this);
         }
         return result.Detach();
@@ -1037,7 +1063,9 @@ namespace dawn_native {
     ExternalTextureBase* DeviceBase::APICreateExternalTexture(
         const ExternalTextureDescriptor* descriptor) {
         Ref<ExternalTextureBase> result = nullptr;
-        if (ConsumedError(CreateExternalTexture(descriptor), &result)) {
+        if (ConsumedError(DAWN_WRAP_CONTEXT(CreateExternalTexture(descriptor),
+                                            "calling CreateExternalTexture"),
+                          &result)) {
             return ExternalTextureBase::MakeError(this);
         }
 
