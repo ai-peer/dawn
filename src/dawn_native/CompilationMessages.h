@@ -31,7 +31,7 @@ namespace dawn_native {
 
     class OwnedCompilationMessages : public NonCopyable {
       public:
-        OwnedCompilationMessages();
+        OwnedCompilationMessages() = default;
         ~OwnedCompilationMessages() = default;
 
         void AddMessageForTesting(
@@ -51,7 +51,7 @@ namespace dawn_native {
         void AddMessage(const tint::diag::Diagnostic& diagnostic);
         void AddFormattedTintMessages(const tint::diag::List& diagnostics);
 
-        WGPUCompilationInfo mCompilationInfo;
+        WGPUCompilationInfo mCompilationInfo{};
         std::vector<std::string> mMessageStrings;
         std::vector<WGPUCompilationMessage> mMessages;
         std::vector<std::string> mFormattedTintMessages;
