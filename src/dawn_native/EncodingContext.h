@@ -74,6 +74,12 @@ namespace dawn_native {
             return !ConsumedError(encodeFunction(&mPendingCommands));
         }
 
+        template <typename EncodeFunction>
+        inline MaybeError EncodeAndReturnMaybeError(EncodeFunction&& encodeFunction) {
+            ASSERT(!mWasMovedToIterator);
+            return encodeFunction(&mPendingCommands);
+        }
+
         // Must be called prior to encoding a BeginRenderPassCmd. Note that it's OK to call this
         // and then not actually call EnterPass+ExitRenderPass, for example if some other pass setup
         // failed validation before the BeginRenderPassCmd could be encoded.
@@ -125,6 +131,23 @@ namespace dawn_native {
 
         std::unique_ptr<ErrorData> mError;
     };
+
+#define TRY_ENCODE_CONTEXT(ENCODING_CONTEXT, EXPR, ...)                  \
+    [&]() {                                                              \
+        if (!ENCODING_CONTEXT->CheckCurrentEncoder(this)) {              \
+            return false;                                                \
+        }                                                                \
+        auto result = ENCODING_CONTEXT->EncodeAndReturnMaybeError(EXPR); \
+        if (DAWN_UNLIKELY(result.IsError())) {                           \
+            std::unique_ptr<ErrorData> error = result.AcquireError();    \
+            error->AppendBacktrace(__FILE__, __func__, __LINE__);        \
+            if (error->GetType() == InternalErrorType::Validation) {     \
+                error->AppendContext(absl::StrFormat(__VA_ARGS__));      \
+            }                                                            \
+            return ENCODING_CONTEXT->ConsumedError(std::move(error));    \
+        }                                                                \
+        return ENCODING_CONTEXT->ConsumedError(std::move(result));       \
+    }()
 
 }  // namespace dawn_native
 

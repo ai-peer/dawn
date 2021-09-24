@@ -148,6 +148,20 @@ namespace dawn_native {
     for (;;)                                                                  \
     break
 
+#define DAWN_WRAP_CONTEXT(EXPR, ...)                                  \
+    [&]() {                                                           \
+        auto result = EXPR;                                           \
+        if (DAWN_UNLIKELY(result.IsError())) {                        \
+            std::unique_ptr<ErrorData> error = result.AcquireError(); \
+            error->AppendBacktrace(__FILE__, __func__, __LINE__);     \
+            if (error->GetType() == InternalErrorType::Validation) {  \
+                error->AppendContext(absl::StrFormat(__VA_ARGS__));   \
+            }                                                         \
+            return decltype(result)(std::move(error));                \
+        }                                                             \
+        return std::move(result);                                     \
+    }()
+
     // Assert that errors are device loss so that we can continue with destruction
     void IgnoreErrors(MaybeError maybeError);
 

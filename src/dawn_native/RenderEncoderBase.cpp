@@ -61,27 +61,30 @@ namespace dawn_native {
                                     uint32_t instanceCount,
                                     uint32_t firstVertex,
                                     uint32_t firstInstance) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(mCommandBufferState.ValidateCanDraw());
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(mCommandBufferState.ValidateCanDraw());
 
-                DAWN_INVALID_IF(mDisableBaseInstance && firstInstance != 0,
-                                "First instance (%u) must be zero.", firstInstance);
+                    DAWN_INVALID_IF(mDisableBaseInstance && firstInstance != 0,
+                                    "First instance (%u) must be zero.", firstInstance);
 
-                DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForVertexBuffer(vertexCount,
-                                                                                  firstVertex));
-                DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForInstanceBuffer(instanceCount,
-                                                                                    firstInstance));
-            }
+                    DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForVertexBuffer(vertexCount,
+                                                                                      firstVertex));
+                    DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForInstanceBuffer(
+                        instanceCount, firstInstance));
+                }
 
-            DrawCmd* draw = allocator->Allocate<DrawCmd>(Command::Draw);
-            draw->vertexCount = vertexCount;
-            draw->instanceCount = instanceCount;
-            draw->firstVertex = firstVertex;
-            draw->firstInstance = firstInstance;
+                DrawCmd* draw = allocator->Allocate<DrawCmd>(Command::Draw);
+                draw->vertexCount = vertexCount;
+                draw->instanceCount = instanceCount;
+                draw->firstVertex = firstVertex;
+                draw->firstInstance = firstInstance;
 
-            return {};
-        });
+                return {};
+            },
+            "encoding Draw");
     }
 
     void RenderEncoderBase::APIDrawIndexed(uint32_t indexCount,
@@ -89,246 +92,274 @@ namespace dawn_native {
                                            uint32_t firstIndex,
                                            int32_t baseVertex,
                                            uint32_t firstInstance) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
 
-                DAWN_INVALID_IF(mDisableBaseInstance && firstInstance != 0,
-                                "First instance (%u) must be zero.", firstInstance);
+                    DAWN_INVALID_IF(mDisableBaseInstance && firstInstance != 0,
+                                    "First instance (%u) must be zero.", firstInstance);
 
-                DAWN_INVALID_IF(mDisableBaseVertex && baseVertex != 0,
-                                "Base vertex (%u) must be zero.", baseVertex);
+                    DAWN_INVALID_IF(mDisableBaseVertex && baseVertex != 0,
+                                    "Base vertex (%u) must be zero.", baseVertex);
 
-                DAWN_TRY(mCommandBufferState.ValidateIndexBufferInRange(indexCount, firstIndex));
+                    DAWN_TRY(
+                        mCommandBufferState.ValidateIndexBufferInRange(indexCount, firstIndex));
 
-                // Although we don't know actual vertex access range in CPU, we still call the
-                // ValidateBufferInRangeForVertexBuffer in order to deal with those vertex step mode
-                // vertex buffer with an array stride of zero.
-                DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForVertexBuffer(0, 0));
-                DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForInstanceBuffer(instanceCount,
-                                                                                    firstInstance));
-            }
+                    // Although we don't know actual vertex access range in CPU, we still call the
+                    // ValidateBufferInRangeForVertexBuffer in order to deal with those vertex step
+                    // mode vertex buffer with an array stride of zero.
+                    DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForVertexBuffer(0, 0));
+                    DAWN_TRY(mCommandBufferState.ValidateBufferInRangeForInstanceBuffer(
+                        instanceCount, firstInstance));
+                }
 
-            DrawIndexedCmd* draw = allocator->Allocate<DrawIndexedCmd>(Command::DrawIndexed);
-            draw->indexCount = indexCount;
-            draw->instanceCount = instanceCount;
-            draw->firstIndex = firstIndex;
-            draw->baseVertex = baseVertex;
-            draw->firstInstance = firstInstance;
+                DrawIndexedCmd* draw = allocator->Allocate<DrawIndexedCmd>(Command::DrawIndexed);
+                draw->indexCount = indexCount;
+                draw->instanceCount = instanceCount;
+                draw->firstIndex = firstIndex;
+                draw->baseVertex = baseVertex;
+                draw->firstInstance = firstInstance;
 
-            return {};
-        });
+                return {};
+            },
+            "encoding DrawIndexed");
     }
 
     void RenderEncoderBase::APIDrawIndirect(BufferBase* indirectBuffer, uint64_t indirectOffset) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
-                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
-                DAWN_TRY(mCommandBufferState.ValidateCanDraw());
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
+                    DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
+                    DAWN_TRY(mCommandBufferState.ValidateCanDraw());
 
-                DAWN_INVALID_IF(indirectOffset % 4 != 0,
-                                "Indirect offset (%u) was not a multiple of 4.", indirectOffset);
+                    DAWN_INVALID_IF(indirectOffset % 4 != 0,
+                                    "Indirect offset (%u) was not a multiple of 4.",
+                                    indirectOffset);
 
-                DAWN_INVALID_IF(
-                    indirectOffset >= indirectBuffer->GetSize() ||
-                        kDrawIndirectSize > indirectBuffer->GetSize() - indirectOffset,
-                    "Indirect offset (%u) out of bounds of indirect buffer %s size (%u).",
-                    indirectOffset, indirectBuffer, indirectBuffer->GetSize());
-            }
+                    DAWN_INVALID_IF(
+                        indirectOffset >= indirectBuffer->GetSize() ||
+                            kDrawIndirectSize > indirectBuffer->GetSize() - indirectOffset,
+                        "Indirect offset (%u) out of bounds of indirect buffer %s size (%u).",
+                        indirectOffset, indirectBuffer, indirectBuffer->GetSize());
+                }
 
-            DrawIndirectCmd* cmd = allocator->Allocate<DrawIndirectCmd>(Command::DrawIndirect);
-            cmd->indirectBuffer = indirectBuffer;
-            cmd->indirectOffset = indirectOffset;
+                DrawIndirectCmd* cmd = allocator->Allocate<DrawIndirectCmd>(Command::DrawIndirect);
+                cmd->indirectBuffer = indirectBuffer;
+                cmd->indirectOffset = indirectOffset;
 
-            mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
+                mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
-            return {};
-        });
+                return {};
+            },
+            "encoding DrawIndirect with %s", indirectBuffer);
     }
 
     void RenderEncoderBase::APIDrawIndexedIndirect(BufferBase* indirectBuffer,
                                                    uint64_t indirectOffset) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
-                DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
-                DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(GetDevice()->ValidateObject(indirectBuffer));
+                    DAWN_TRY(ValidateCanUseAs(indirectBuffer, wgpu::BufferUsage::Indirect));
+                    DAWN_TRY(mCommandBufferState.ValidateCanDrawIndexed());
 
-                DAWN_INVALID_IF(indirectOffset % 4 != 0,
-                                "Indirect offset (%u) was not a multiple of 4.", indirectOffset);
+                    DAWN_INVALID_IF(indirectOffset % 4 != 0,
+                                    "Indirect offset (%u) was not a multiple of 4.",
+                                    indirectOffset);
 
-                DAWN_INVALID_IF(
-                    (indirectOffset >= indirectBuffer->GetSize() ||
-                     kDrawIndexedIndirectSize > indirectBuffer->GetSize() - indirectOffset),
-                    "Indirect offset (%u) out of bounds of indirect buffer %s size (%u).",
-                    indirectOffset, indirectBuffer, indirectBuffer->GetSize());
-            }
+                    DAWN_INVALID_IF(
+                        (indirectOffset >= indirectBuffer->GetSize() ||
+                         kDrawIndexedIndirectSize > indirectBuffer->GetSize() - indirectOffset),
+                        "Indirect offset (%u) out of bounds of indirect buffer %s size (%u).",
+                        indirectOffset, indirectBuffer, indirectBuffer->GetSize());
+                }
 
-            DrawIndexedIndirectCmd* cmd =
-                allocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
-            if (IsValidationEnabled()) {
-                cmd->indirectBufferLocation = BufferLocation::New();
-                mIndirectDrawMetadata.AddIndexedIndirectDraw(
-                    mCommandBufferState.GetIndexFormat(), mCommandBufferState.GetIndexBufferSize(),
-                    indirectBuffer, indirectOffset, cmd->indirectBufferLocation.Get());
-            } else {
-                cmd->indirectBufferLocation = BufferLocation::New(indirectBuffer, indirectOffset);
-            }
+                DrawIndexedIndirectCmd* cmd =
+                    allocator->Allocate<DrawIndexedIndirectCmd>(Command::DrawIndexedIndirect);
+                if (IsValidationEnabled()) {
+                    cmd->indirectBufferLocation = BufferLocation::New();
+                    mIndirectDrawMetadata.AddIndexedIndirectDraw(
+                        mCommandBufferState.GetIndexFormat(),
+                        mCommandBufferState.GetIndexBufferSize(), indirectBuffer, indirectOffset,
+                        cmd->indirectBufferLocation.Get());
+                } else {
+                    cmd->indirectBufferLocation =
+                        BufferLocation::New(indirectBuffer, indirectOffset);
+                }
 
-            mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
+                mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
-            return {};
-        });
+                return {};
+            },
+            "encoding DrawIndexedIndirect with %s", indirectBuffer);
     }
 
     void RenderEncoderBase::APISetPipeline(RenderPipelineBase* pipeline) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(pipeline));
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(GetDevice()->ValidateObject(pipeline));
 
-                // TODO(dawn:563): More detail about why the states are incompatible would be nice.
-                DAWN_INVALID_IF(
-                    pipeline->GetAttachmentState() != mAttachmentState.Get(),
-                    "Attachment state of %s is not compatible with the attachment state of %s",
-                    pipeline, this);
-            }
+                    // TODO(dawn:563): More detail about why the states are incompatible would be
+                    // nice.
+                    DAWN_INVALID_IF(
+                        pipeline->GetAttachmentState() != mAttachmentState.Get(),
+                        "Attachment state of %s is not compatible with the attachment state of %s",
+                        pipeline, this);
+                }
 
-            mCommandBufferState.SetRenderPipeline(pipeline);
+                mCommandBufferState.SetRenderPipeline(pipeline);
 
-            SetRenderPipelineCmd* cmd =
-                allocator->Allocate<SetRenderPipelineCmd>(Command::SetRenderPipeline);
-            cmd->pipeline = pipeline;
+                SetRenderPipelineCmd* cmd =
+                    allocator->Allocate<SetRenderPipelineCmd>(Command::SetRenderPipeline);
+                cmd->pipeline = pipeline;
 
-            return {};
-        });
+                return {};
+            },
+            "encoding SetPipeline with %s", pipeline);
     }
 
     void RenderEncoderBase::APISetIndexBuffer(BufferBase* buffer,
                                               wgpu::IndexFormat format,
                                               uint64_t offset,
                                               uint64_t size) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(buffer));
-                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Index));
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(GetDevice()->ValidateObject(buffer));
+                    DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Index));
 
-                DAWN_INVALID_IF(format == wgpu::IndexFormat::Undefined,
-                                "Index format must be specified");
+                    DAWN_INVALID_IF(format == wgpu::IndexFormat::Undefined,
+                                    "Index format must be specified");
 
-                DAWN_INVALID_IF(offset % uint64_t(IndexFormatSize(format)) != 0,
-                                "Index buffer offset (%u) was not a multiple of the size (%u)"
-                                "of %s.",
-                                offset, IndexFormatSize(format), format);
+                    DAWN_INVALID_IF(offset % uint64_t(IndexFormatSize(format)) != 0,
+                                    "Index buffer offset (%u) was not a multiple of the size (%u)"
+                                    "of %s.",
+                                    offset, IndexFormatSize(format), format);
 
-                uint64_t bufferSize = buffer->GetSize();
-                DAWN_INVALID_IF(offset > bufferSize,
-                                "Index buffer offset (%u) was larger than the size (%u) of %s.",
-                                offset, bufferSize, buffer);
+                    uint64_t bufferSize = buffer->GetSize();
+                    DAWN_INVALID_IF(offset > bufferSize,
+                                    "Index buffer offset (%u) was larger than the size (%u) of %s.",
+                                    offset, bufferSize, buffer);
 
-                uint64_t remainingSize = bufferSize - offset;
+                    uint64_t remainingSize = bufferSize - offset;
 
-                if (size == 0) {
-                    size = remainingSize;
+                    if (size == 0) {
+                        size = remainingSize;
+                    } else {
+                        DAWN_INVALID_IF(size > remainingSize,
+                                        "Index buffer range (offset: %u, size: %u) doesn't fit in "
+                                        "the size (%u) of "
+                                        "%s.",
+                                        offset, size, bufferSize, buffer);
+                    }
                 } else {
-                    DAWN_INVALID_IF(
-                        size > remainingSize,
-                        "Index buffer range (offset: %u, size: %u) doesn't fit in the size (%u) of "
-                        "%s.",
-                        offset, size, bufferSize, buffer);
+                    if (size == 0) {
+                        size = buffer->GetSize() - offset;
+                    }
                 }
-            } else {
-                if (size == 0) {
-                    size = buffer->GetSize() - offset;
-                }
-            }
 
-            mCommandBufferState.SetIndexBuffer(format, size);
+                mCommandBufferState.SetIndexBuffer(format, size);
 
-            SetIndexBufferCmd* cmd =
-                allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
-            cmd->buffer = buffer;
-            cmd->format = format;
-            cmd->offset = offset;
-            cmd->size = size;
+                SetIndexBufferCmd* cmd =
+                    allocator->Allocate<SetIndexBufferCmd>(Command::SetIndexBuffer);
+                cmd->buffer = buffer;
+                cmd->format = format;
+                cmd->offset = offset;
+                cmd->size = size;
 
-            mUsageTracker.BufferUsedAs(buffer, wgpu::BufferUsage::Index);
+                mUsageTracker.BufferUsedAs(buffer, wgpu::BufferUsage::Index);
 
-            return {};
-        });
+                return {};
+            },
+            "encoding SetIndexBuffer with %s", buffer);
     }
 
     void RenderEncoderBase::APISetVertexBuffer(uint32_t slot,
                                                BufferBase* buffer,
                                                uint64_t offset,
                                                uint64_t size) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            if (IsValidationEnabled()) {
-                DAWN_TRY(GetDevice()->ValidateObject(buffer));
-                DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Vertex));
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(GetDevice()->ValidateObject(buffer));
+                    DAWN_TRY(ValidateCanUseAs(buffer, wgpu::BufferUsage::Vertex));
 
-                DAWN_INVALID_IF(slot >= kMaxVertexBuffers,
-                                "Vertex buffer slot (%u) was not less than the maximum (%u)", slot,
-                                kMaxVertexBuffers);
+                    DAWN_INVALID_IF(slot >= kMaxVertexBuffers,
+                                    "Vertex buffer slot (%u) was not less than the maximum (%u)",
+                                    slot, kMaxVertexBuffers);
 
-                DAWN_INVALID_IF(offset % 4 != 0,
-                                "Vertex buffer offset (%u) was not a multiple of 4", offset);
+                    DAWN_INVALID_IF(offset % 4 != 0,
+                                    "Vertex buffer offset (%u) was not a multiple of 4", offset);
 
-                uint64_t bufferSize = buffer->GetSize();
-                DAWN_INVALID_IF(offset > bufferSize,
-                                "Vertex buffer offset (%u) is larger than the size (%u) of %s.",
-                                offset, bufferSize, buffer);
+                    uint64_t bufferSize = buffer->GetSize();
+                    DAWN_INVALID_IF(offset > bufferSize,
+                                    "Vertex buffer offset (%u) is larger than the size (%u) of %s.",
+                                    offset, bufferSize, buffer);
 
-                uint64_t remainingSize = bufferSize - offset;
+                    uint64_t remainingSize = bufferSize - offset;
 
-                if (size == 0) {
-                    size = remainingSize;
+                    if (size == 0) {
+                        size = remainingSize;
+                    } else {
+                        DAWN_INVALID_IF(size > remainingSize,
+                                        "Vertex buffer range (offset: %u, size: %u) doesn't fit in "
+                                        "the size (%u) "
+                                        "of %s.",
+                                        offset, size, bufferSize, buffer);
+                    }
                 } else {
-                    DAWN_INVALID_IF(
-                        size > remainingSize,
-                        "Vertex buffer range (offset: %u, size: %u) doesn't fit in the size (%u) "
-                        "of %s.",
-                        offset, size, bufferSize, buffer);
+                    if (size == 0) {
+                        size = buffer->GetSize() - offset;
+                    }
                 }
-            } else {
-                if (size == 0) {
-                    size = buffer->GetSize() - offset;
-                }
-            }
 
-            mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)), size);
+                mCommandBufferState.SetVertexBuffer(VertexBufferSlot(uint8_t(slot)), size);
 
-            SetVertexBufferCmd* cmd =
-                allocator->Allocate<SetVertexBufferCmd>(Command::SetVertexBuffer);
-            cmd->slot = VertexBufferSlot(static_cast<uint8_t>(slot));
-            cmd->buffer = buffer;
-            cmd->offset = offset;
-            cmd->size = size;
+                SetVertexBufferCmd* cmd =
+                    allocator->Allocate<SetVertexBufferCmd>(Command::SetVertexBuffer);
+                cmd->slot = VertexBufferSlot(static_cast<uint8_t>(slot));
+                cmd->buffer = buffer;
+                cmd->offset = offset;
+                cmd->size = size;
 
-            mUsageTracker.BufferUsedAs(buffer, wgpu::BufferUsage::Vertex);
+                mUsageTracker.BufferUsedAs(buffer, wgpu::BufferUsage::Vertex);
 
-            return {};
-        });
+                return {};
+            },
+            "encoding SetVertexBuffer with %s at slot %u", buffer, slot);
     }
 
     void RenderEncoderBase::APISetBindGroup(uint32_t groupIndexIn,
                                             BindGroupBase* group,
                                             uint32_t dynamicOffsetCount,
                                             const uint32_t* dynamicOffsets) {
-        mEncodingContext->TryEncode(this, [&](CommandAllocator* allocator) -> MaybeError {
-            BindGroupIndex groupIndex(groupIndexIn);
+        TRY_ENCODE_CONTEXT(
+            mEncodingContext,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                BindGroupIndex groupIndex(groupIndexIn);
 
-            if (IsValidationEnabled()) {
-                DAWN_TRY(
-                    ValidateSetBindGroup(groupIndex, group, dynamicOffsetCount, dynamicOffsets));
-            }
+                if (IsValidationEnabled()) {
+                    DAWN_TRY(ValidateSetBindGroup(groupIndex, group, dynamicOffsetCount,
+                                                  dynamicOffsets));
+                }
 
-            RecordSetBindGroup(allocator, groupIndex, group, dynamicOffsetCount, dynamicOffsets);
-            mCommandBufferState.SetBindGroup(groupIndex, group);
-            mUsageTracker.AddBindGroup(group);
+                RecordSetBindGroup(allocator, groupIndex, group, dynamicOffsetCount,
+                                   dynamicOffsets);
+                mCommandBufferState.SetBindGroup(groupIndex, group);
+                mUsageTracker.AddBindGroup(group);
 
-            return {};
-        });
+                return {};
+            },
+            "encoding SetBindGroup with %s at index %u", group, groupIndexIn);
     }
 
 }  // namespace dawn_native
