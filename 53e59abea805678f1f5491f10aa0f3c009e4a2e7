@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98e5be75_27e7d4da",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "Updated the error phrasing. Thanks for the suggestion!",
+      "parentUuid": "c8a611fb_388a1da4",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "947f8967_4d8721a7",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-09-24T00:24:53Z",
       "side": 1,
       "message": "ditto about how this is validating bound buffer range, not the whole \"buffer size\"",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d89c732f_e6bb7af5",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "947f8967_4d8721a7",
       "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51ad3b72_11c8a5c3",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "I\u0027ll look into it, putting up the other fixes now because I want to make sure the bots are cool with them.",
+      "parentUuid": "c1c5ab32_8af46c58",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1799afbe_30bbe2a5",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 1
@@ -105,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02db6321_d3eb28e4",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "I\u0027ve been struggling to figure out a clean way to do this, because it\u0027s definitely something we want just about everywhere.",
+      "parentUuid": "1799afbe_30bbe2a5",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5eafcc7c_1f8ce40d",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 1
@@ -116,6 +188,30 @@
       "writtenOn": "2021-09-24T00:24:53Z",
       "side": 1,
       "message": "+1000!\n\nI think we can probably throw in something like a std::string DescribeAttachmentStateError(const AttachmentState*, const AttachmentState*); or something like that here. Can be a follow-up though.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 99
+      },
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e444ba4_16da1732",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "5eafcc7c_1f8ce40d",
       "range": {
         "startLine": 190,
         "startChar": 0,
@@ -149,6 +245,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa33521a_842ba083",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9145bb8c_03476643",
+      "range": {
+        "startLine": 279,
+        "startChar": 94,
+        "endLine": 279,
+        "endChar": 95
+      },
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f1af767_d52c19b9",
@@ -166,6 +286,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e241f677_bd1b9c6b",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f1af767_d52c19b9",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a40863b_db867503",
@@ -179,6 +317,30 @@
       "writtenOn": "2021-09-24T00:24:53Z",
       "side": 1,
       "message": "maybe print mOcclusionQuerySet as well? \"query (%u) of %s \"",
+      "range": {
+        "startLine": 257,
+        "startChar": 74,
+        "endLine": 257,
+        "endChar": 80
+      },
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de416344_d4e6e91a",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T17:56:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a40863b_db867503",
       "range": {
         "startLine": 257,
         "startChar": 74,
