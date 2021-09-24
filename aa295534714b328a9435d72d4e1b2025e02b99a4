@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4873a62b_a9773238",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-24T15:28:28Z",
+      "side": 1,
+      "message": "PTAL, thanks!\nCurrently I use the existing wgpu::kLimitU64Undefined constant, and I am not sure if I should name a new specific constant. And I am little surprised that emitting deprecation warning didn\u0027t break CTS tests.",
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
