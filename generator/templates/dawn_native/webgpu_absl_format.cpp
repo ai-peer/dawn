@@ -29,6 +29,10 @@ namespace dawn_native {
     AbslFormatConvert(const DeviceBase* value,
                       const absl::FormatConversionSpec& spec,
                       absl::FormatSink* s) {
+        if (value == nullptr) {
+            s->Append("[null]");
+            return {true};
+        }
         s->Append("[Device");
         const std::string& label = value->GetLabel();
         if (!label.empty()) {
@@ -42,6 +46,10 @@ namespace dawn_native {
     AbslFormatConvert(const ApiObjectBase* value,
                       const absl::FormatConversionSpec& spec,
                       absl::FormatSink* s) {
+        if (value == nullptr) {
+            s->Append("[null]");
+            return {true};
+        }
         s->Append("[");
         s->Append(ObjectTypeAsString(value->GetType()));
         const std::string& label = value->GetLabel();
@@ -56,6 +64,10 @@ namespace dawn_native {
     AbslFormatConvert(const TextureViewBase* value,
                       const absl::FormatConversionSpec& spec,
                       absl::FormatSink* s) {
+        if (value == nullptr) {
+            s->Append("[null]");
+            return {true};
+        }
         s->Append("[");
         s->Append(ObjectTypeAsString(value->GetType()));
         const std::string& label = value->GetLabel();
@@ -81,6 +93,10 @@ namespace dawn_native {
                 AbslFormatConvert(const {{as_cppType(type.name)}}* value,
                                     const absl::FormatConversionSpec& spec,
                                     absl::FormatSink* s) {
+                    if (value == nullptr) {
+                        s->Append("[null]");
+                        return {true};
+                    }
                     s->Append("[{{as_cppType(type.name)}}");
                     if (value->label != nullptr) {
                         s->Append(absl::StrFormat(" \"%s\"", value->label));
