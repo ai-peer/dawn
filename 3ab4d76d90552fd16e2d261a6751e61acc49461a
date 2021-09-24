@@ -33,6 +33,24 @@
       "message": "You can probably drop this block now and replace it with an explicit include of \"dawn_native/Texture.h\".",
       "revId": "3ab4d76d90552fd16e2d261a6751e61acc49461a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3b35ff7_a14dd9c8",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-24T22:42:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37779136_cb504ded",
+      "revId": "3ab4d76d90552fd16e2d261a6751e61acc49461a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

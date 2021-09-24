@@ -39,6 +39,30 @@
       },
       "revId": "fe6fe7066aec6dce2fa2fefc18b238e3914a966e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d5ccd3_daacaac5",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-24T22:42:42Z",
+      "side": 1,
+      "message": "Not sure? I will leave as is for now and we can make that change in another CL since it will be more refactoring to remove all Device deps in this class.",
+      "parentUuid": "53c80dab_50e1cd13",
+      "range": {
+        "startLine": 64,
+        "startChar": 34,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "fe6fe7066aec6dce2fa2fefc18b238e3914a966e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
