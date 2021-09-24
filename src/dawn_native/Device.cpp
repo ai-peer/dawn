@@ -1346,19 +1346,26 @@ namespace dawn_native {
         DAWN_TRY_ASSIGN(layoutRef, ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
                                        this, *descriptor, &descriptorWithPipelineLayout));
 
-        // Call the callback directly when we can get a cached render pipeline object.
-        auto pipelineAndBlueprintFromCache = GetCachedRenderPipeline(&descriptorWithPipelineLayout);
-        if (pipelineAndBlueprintFromCache.first.Get() != nullptr) {
-            Ref<RenderPipelineBase> result = std::move(pipelineAndBlueprintFromCache.first);
+        Ref<RenderPipelineBase> renderPipeline;
+        DAWN_TRY_ASSIGN(renderPipeline, CreateRenderPipelineImpl(&descriptorWithPipelineLayout));
+        const size_t blueprintHash = renderPipeline->ComputeContentHash();
+        renderPipeline->SetContentHash(blueprintHash);
+
+        auto iter = mCaches->renderPipelines.find(renderPipeline.Get());
+        if (iter != mCaches->renderPipelines.end()) {
+            Ref<RenderPipelineBase> result = *iter;
             callback(WGPUCreatePipelineAsyncStatus_Success,
                      reinterpret_cast<WGPURenderPipeline>(result.Detach()), "", userdata);
         } else {
             // Otherwise we will create the pipeline object in CreateRenderPipelineAsyncImpl(),
             // where the pipeline object may be created asynchronously and the result will be saved
             // to mCreatePipelineAsyncTracker.
-            const size_t blueprintHash = pipelineAndBlueprintFromCache.second;
-            CreateRenderPipelineAsyncImpl(&descriptorWithPipelineLayout, blueprintHash, callback,
-                                          userdata);
+            DAWN_TRY(renderPipeline->Initialize());
+            renderPipeline = AddOrGetCachedRenderPipeline(renderPipeline, blueprintHash);
+            std::unique_ptr<CreateRenderPipelineAsyncCallbackTask> callbackTask =
+                std::make_unique<CreateRenderPipelineAsyncCallbackTask>(std::move(renderPipeline),
+                                                                        "", callback, userdata);
+            mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
         }
 
         return {};

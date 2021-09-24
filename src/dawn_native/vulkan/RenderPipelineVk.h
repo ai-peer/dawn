@@ -39,11 +39,11 @@ namespace dawn_native { namespace vulkan {
 
         // Dawn API
         void SetLabelImpl() override;
+        MaybeError Initialize() override;
 
       private:
         ~RenderPipeline() override;
         using RenderPipelineBase::RenderPipelineBase;
-        MaybeError Initialize() override;
 
         struct PipelineVertexInputStateCreateInfoTemporaryAllocations {
             std::array<VkVertexInputBindingDescription, kMaxVertexBuffers> bindings;

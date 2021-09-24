@@ -219,7 +219,7 @@ namespace dawn_native { namespace opengl {
         Device* device,
         const RenderPipelineDescriptor* descriptor) {
         Ref<RenderPipeline> pipeline = AcquireRef(new RenderPipeline(device, descriptor));
-        DAWN_TRY(pipeline->Initialize());
+
         return pipeline;
     }
 

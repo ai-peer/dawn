@@ -38,11 +38,11 @@ namespace dawn_native { namespace opengl {
             VertexBufferSlot slot) const;
 
         void ApplyNow(PersistentPipelineState& persistentPipelineState);
+        MaybeError Initialize() override;
 
       private:
         RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor);
         ~RenderPipeline() override;
-        MaybeError Initialize() override;
 
         void CreateVAOForVertexState();
 

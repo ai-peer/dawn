@@ -43,11 +43,12 @@ namespace dawn_native { namespace d3d12 {
 
         // Dawn API
         void SetLabelImpl() override;
+        MaybeError Initialize() override;
 
       private:
         ~RenderPipeline() override;
         using RenderPipelineBase::RenderPipelineBase;
-        MaybeError Initialize() override;
+
         D3D12_INPUT_LAYOUT_DESC ComputeInputLayout(
             std::array<D3D12_INPUT_ELEMENT_DESC, kMaxVertexAttributes>* inputElementDescriptors);
 

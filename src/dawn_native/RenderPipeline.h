@@ -102,13 +102,14 @@ namespace dawn_native {
             bool operator()(const RenderPipelineBase* a, const RenderPipelineBase* b) const;
         };
 
+        virtual MaybeError Initialize();
+
       private:
         RenderPipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag);
 
         // CreateRenderPipelineAsyncTask is declared as a friend of RenderPipelineBase as it
         // needs to call the private member function RenderPipelineBase::Initialize().
         friend class CreateRenderPipelineAsyncTask;
-        virtual MaybeError Initialize();
 
         // TODO(dawn:529): store all the following members in a FlatRenderPipelineDescriptor object
         // Vertex state
