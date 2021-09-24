@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cabbd60_51d690e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-24T23:56:09Z",
+      "side": 1,
+      "message": "PTAL! Very open to feedback about how to improve these patterns, if you have any!",
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
