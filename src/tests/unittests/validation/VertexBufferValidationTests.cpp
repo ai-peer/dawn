@@ -228,11 +228,11 @@ TEST_F(VertexBufferValidationTest, VertexBufferOffsetOOBValidation) {
         // Explicit size
         pass.SetVertexBuffer(0, buffer, 0, 256);
         // Implicit size
-        pass.SetVertexBuffer(0, buffer, 0, 0);
-        pass.SetVertexBuffer(0, buffer, 256 - 4, 0);
-        pass.SetVertexBuffer(0, buffer, 4, 0);
+        pass.SetVertexBuffer(0, buffer, 0, wgpu::kLimitU64Undefined);
+        pass.SetVertexBuffer(0, buffer, 256 - 4, wgpu::kLimitU64Undefined);
+        pass.SetVertexBuffer(0, buffer, 4, wgpu::kLimitU64Undefined);
         // Implicit size of zero
-        pass.SetVertexBuffer(0, buffer, 256, 0);
+        pass.SetVertexBuffer(0, buffer, 256, wgpu::kLimitU64Undefined);
         pass.EndPass();
         encoder.Finish();
     }
@@ -265,11 +265,11 @@ TEST_F(VertexBufferValidationTest, VertexBufferOffsetOOBValidation) {
         // Explicit size
         encoder.SetVertexBuffer(0, buffer, 0, 256);
         // Implicit size
-        encoder.SetVertexBuffer(0, buffer, 0, 0);
-        encoder.SetVertexBuffer(0, buffer, 256 - 4, 0);
-        encoder.SetVertexBuffer(0, buffer, 4, 0);
+        encoder.SetVertexBuffer(0, buffer, 0, wgpu::kLimitU64Undefined);
+        encoder.SetVertexBuffer(0, buffer, 256 - 4, wgpu::kLimitU64Undefined);
+        encoder.SetVertexBuffer(0, buffer, 4, wgpu::kLimitU64Undefined);
         // Implicit size of zero
-        encoder.SetVertexBuffer(0, buffer, 256, 0);
+        encoder.SetVertexBuffer(0, buffer, 256, wgpu::kLimitU64Undefined);
         encoder.Finish();
     }
 

@@ -231,7 +231,17 @@ namespace dawn_native {
                 }
                 uint64_t remainingSize = bufferSize - offset;
 
+                // Temporarily treat 0 as undefined for size, and give a warning
+                // TODO(dawn:1058): Remove this if block
                 if (size == 0) {
+                    size = wgpu::kLimitU64Undefined;
+                    GetDevice()->EmitDeprecationWarning(
+                        "Using size=0 to indicate default binding size for setIndexBuffer "
+                        "is deprecated, in future it will result in a zero-size binding. "
+                        "Use wgpu::kLimitU64Undefined or just omit the parameter instead.");
+                }
+
+                if (size == wgpu::kLimitU64Undefined) {
                     size = remainingSize;
                 } else {
                     if (size > remainingSize) {
@@ -239,8 +249,8 @@ namespace dawn_native {
                     }
                 }
             } else {
-                if (size == 0) {
-                    size = buffer->GetSize() - offset;
+                if (size == wgpu::kLimitU64Undefined) {
+                    size = std::max(buffer->GetSize() - offset, uint64_t(0));
                 }
             }
 
@@ -282,7 +292,17 @@ namespace dawn_native {
                 }
                 uint64_t remainingSize = bufferSize - offset;
 
+                // Temporarily treat 0 as undefined for size, and give a warning
+                // TODO(dawn:1058): Remove this if block
                 if (size == 0) {
+                    size = wgpu::kLimitU64Undefined;
+                    GetDevice()->EmitDeprecationWarning(
+                        "Using size=0 to indicate default binding size for setVertexBuffer "
+                        "is deprecated, in future it will result in a zero-size binding. "
+                        "Use wgpu::kLimitU64Undefined or just omit the parameter instead.");
+                }
+
+                if (size == wgpu::kLimitU64Undefined) {
                     size = remainingSize;
                 } else {
                     if (size > remainingSize) {
@@ -290,8 +310,8 @@ namespace dawn_native {
                     }
                 }
             } else {
-                if (size == 0) {
-                    size = buffer->GetSize() - offset;
+                if (size == wgpu::kLimitU64Undefined) {
+                    size = std::max(buffer->GetSize() - offset, uint64_t(0));
                 }
             }
 

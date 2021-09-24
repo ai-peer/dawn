@@ -73,11 +73,11 @@ TEST_F(IndexBufferValidationTest, IndexBufferOffsetOOBValidation) {
         // Explicit size
         pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 0, 256);
         // Implicit size
-        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 0, 0);
-        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256 - 4, 0);
-        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 4, 0);
+        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 0, wgpu::kLimitU64Undefined);
+        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256 - 4, wgpu::kLimitU64Undefined);
+        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 4, wgpu::kLimitU64Undefined);
         // Implicit size of zero
-        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256, 0);
+        pass.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256, wgpu::kLimitU64Undefined);
         pass.EndPass();
         encoder.Finish();
     }
@@ -110,11 +110,12 @@ TEST_F(IndexBufferValidationTest, IndexBufferOffsetOOBValidation) {
         // Explicit size
         encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 0, 256);
         // Implicit size
-        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 0, 0);
-        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256 - 4, 0);
-        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 4, 0);
+        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 0, wgpu::kLimitU64Undefined);
+        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256 - 4,
+                               wgpu::kLimitU64Undefined);
+        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 4, wgpu::kLimitU64Undefined);
         // Implicit size of zero
-        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256, 0);
+        encoder.SetIndexBuffer(buffer, wgpu::IndexFormat::Uint32, 256, wgpu::kLimitU64Undefined);
         encoder.Finish();
     }
 
