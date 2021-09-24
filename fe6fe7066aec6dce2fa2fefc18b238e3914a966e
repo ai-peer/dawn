@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1c4f267_d497790b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T19:52:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fe6fe7066aec6dce2fa2fefc18b238e3914a966e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53c80dab_50e1cd13",
+        "filename": "src/dawn_native/AttachmentState.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T19:52:52Z",
+      "side": 1,
+      "message": "hmm.. could this actually just be RefCounted ?",
+      "range": {
+        "startLine": 64,
+        "startChar": 34,
+        "endLine": 64,
+        "endChar": 52
+      },
+      "revId": "fe6fe7066aec6dce2fa2fefc18b238e3914a966e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
