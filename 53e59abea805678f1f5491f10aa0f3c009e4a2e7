@@ -16,6 +16,177 @@
       "message": "Let the error-palooza begin!",
       "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4895003a_ac4d6b47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8a611fb_388a1da4",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "I feel like wording this as \"Stride (%u) for the vertex buffer bound at slot %u is larger than the buffer bound buffer range (%u)\" might be more clear.\n\nNote: this is also not the talking about the whole buffer\u0027s size. its the range passed to setVertexBuffer(buffer, offset, size)\n\nWould also be nice to call out the buffer\u0027s name, but we don\u0027t store it in a place that\u0027s easily accessed right now. Interesting idea (to avoid storing it) may be to traverse the command stream backward to find it :o. Not necessary right now though.\n\np.s. (oh I saw you have a todo about this already)",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "947f8967_4d8721a7",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "ditto about how this is validating bound buffer range, not the whole \"buffer size\"",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1c5ab32_8af46c58",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "could we figure it out now? similar to how the bind group iteration happens just below here",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1799afbe_30bbe2a5",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "we should have a top-level context for this - maybe it can go inside TryEncode ?\noh but annoying because absl needs to the format string to be constexpr.\n\u0027\nMaybe we can inline it here:\n\n  DAWN_TRY_CONTEXT([\u0026](){\n    DAWN_TRY(mCommandBufferState.ValidateCanDraw());\n    ...\n    \n  }(),\n  \"validating draw(%u, %u, %u, %u) on %s\",\n  vertexCount, instanceCount, firstVertex, firstInstance, this);\n\nkinda ugly though. Maybe we can have a version of DAWN_TRY_CONTEXT that makes the immediately-executing lambda for you",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eafcc7c_1f8ce40d",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "+1000!\n\nI think we can probably throw in something like a std::string DescribeAttachmentStateError(const AttachmentState*, const AttachmentState*); or something like that here. Can be a follow-up though.",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 99
+      },
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9145bb8c_03476643",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "nit: stray comma",
+      "range": {
+        "startLine": 279,
+        "startChar": 94,
+        "endLine": 279,
+        "endChar": 95
+      },
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f1af767_d52c19b9",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "nit: include the TODO to make this message betteer here as well",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a40863b_db867503",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-24T00:24:53Z",
+      "side": 1,
+      "message": "maybe print mOcclusionQuerySet as well? \"query (%u) of %s \"",
+      "range": {
+        "startLine": 257,
+        "startChar": 74,
+        "endLine": 257,
+        "endChar": 80
+      },
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
