@@ -420,37 +420,65 @@ namespace {
         return size;
     }
 
-    WireResult {{Cmd}}::Serialize(size_t commandSize, SerializeBuffer* buffer
-        {%- if command.may_have_dawn_object -%}
-            , const ObjectIdProvider& provider
-        {%- endif -%}
-    ) const {
-        {{Name}}Transfer* transfer;
-        WIRE_TRY(buffer->Next(&transfer));
-        transfer->commandSize = commandSize;
+    {% if command.may_have_dawn_object %}
+        WireResult {{Cmd}}::Serialize(size_t commandSize, SerializeBuffer* buffer,
+                                      const ObjectIdProvider& provider) const {
+            {{Name}}Transfer* transfer;
+            WIRE_TRY(buffer->Next(&transfer));
+            transfer->commandSize = commandSize;
 
-        WIRE_TRY({{Name}}Serialize(*this, transfer, buffer
-            {%- if command.may_have_dawn_object -%}
-                , provider
-            {%- endif -%}
-        ));
-        return WireResult::Success;
-    }
+            WIRE_TRY({{Name}}Serialize(*this, transfer, buffer, provider));
+            return WireResult::Success;
+        }
 
-    WireResult {{Cmd}}::Deserialize(DeserializeBuffer* deserializeBuffer, DeserializeAllocator* allocator
-        {%- if command.may_have_dawn_object -%}
-            , const ObjectIdResolver& resolver
-        {%- endif -%}
-    ) {
-        const volatile {{Name}}Transfer* transfer;
-        WIRE_TRY(deserializeBuffer->Read(&transfer));
+        WireResult {{Cmd}}::Serialize(size_t commandSize, SerializeBuffer* buffer) const {
+            {{Name}}Transfer* transfer;
+            WIRE_TRY(buffer->Next(&transfer));
+            transfer->commandSize = commandSize;
 
-        return {{Name}}Deserialize(this, transfer, deserializeBuffer, allocator
-            {%- if command.may_have_dawn_object -%}
-                , resolver
-            {%- endif -%}
-        );
-    }
+            ErrorObjectIdProvider provider;
+            WIRE_TRY({{Name}}Serialize(*this, transfer, buffer, provider));
+            return WireResult::Success;
+        }
+
+        WireResult {{Cmd}}::Deserialize(
+            DeserializeBuffer* deserializeBuffer,
+            DeserializeAllocator* allocator,
+            const ObjectIdResolver& resolver) {
+            const volatile {{Name}}Transfer* transfer;
+            WIRE_TRY(deserializeBuffer->Read(&transfer));
+
+            return {{Name}}Deserialize(this, transfer, deserializeBuffer, allocator, resolver);
+        }
+
+        WireResult {{Cmd}}::Deserialize(
+            DeserializeBuffer* deserializeBuffer,
+            DeserializeAllocator* allocator) {
+            const volatile {{Name}}Transfer* transfer;
+            WIRE_TRY(deserializeBuffer->Read(&transfer));
+
+            ErrorObjectIdResolver resolver;
+            return {{Name}}Deserialize(this, transfer, deserializeBuffer, allocator, resolver);
+        }
+    {% else %}
+        WireResult {{Cmd}}::Serialize(size_t commandSize, SerializeBuffer* buffer) const {
+            {{Name}}Transfer* transfer;
+            WIRE_TRY(buffer->Next(&transfer));
+            transfer->commandSize = commandSize;
+
+            WIRE_TRY({{Name}}Serialize(*this, transfer, buffer));
+            return WireResult::Success;
+        }
+
+        WireResult {{Cmd}}::Deserialize(
+            DeserializeBuffer* deserializeBuffer,
+            DeserializeAllocator* allocator) {
+            const volatile {{Name}}Transfer* transfer;
+            WIRE_TRY(deserializeBuffer->Read(&transfer));
+
+            return {{Name}}Deserialize(this, transfer, deserializeBuffer, allocator);
+        }
+    {% endif %}
 {% endmacro %}
 
 namespace dawn_wire {
@@ -481,6 +509,36 @@ namespace dawn_wire {
     }
 
     namespace {
+        // Implementation of ObjectIdResolver that always errors.
+        // Used when the generator adds a provider argument because of a chained
+        // struct, but in practice, a chained struct in that location is invalid.
+        class ErrorObjectIdResolver final : public ObjectIdResolver {
+            public:
+                {% for type in by_category["object"] %}
+                    WireResult GetFromId(ObjectId id, {{as_cType(type.name)}}* out) const override {
+                        return WireResult::FatalError;
+                    }
+                    WireResult GetOptionalFromId(ObjectId id, {{as_cType(type.name)}}* out) const override {
+                        return WireResult::FatalError;
+                    }
+                {% endfor %}
+        };
+
+        // Implementation of ObjectIdProvider that always errors.
+        // Used when the generator adds a provider argument because of a chained
+        // struct, but in practice, a chained struct in that location is invalid.
+        class ErrorObjectIdProvider final : public ObjectIdProvider {
+            public:
+                {% for type in by_category["object"] %}
+                    WireResult GetId({{as_cType(type.name)}} object, ObjectId* out) const override {
+                        return WireResult::FatalError;
+                    }
+                    WireResult GetOptionalId({{as_cType(type.name)}} object, ObjectId* out) const override {
+                        return WireResult::FatalError;
+                    }
+                {% endfor %}
+        };
+
         // Allocates enough space from allocator to countain T[count] and return it in out.
         // Return FatalError if the allocator couldn't allocate the memory.
         // Always writes to |out| on success.
@@ -704,36 +762,6 @@ namespace dawn_wire {
     {% for command in cmd_records["return command"] %}
         {{ write_command_serialization_methods(command, True) }}
     {% endfor %}
-
-    // Implementation of ObjectIdResolver that always errors.
-    // Used when the generator adds a provider argument because of a chained
-    // struct, but in practice, a chained struct in that location is invalid.
-    class ErrorObjectIdResolver final : public ObjectIdResolver {
-        public:
-            {% for type in by_category["object"] %}
-                WireResult GetFromId(ObjectId id, {{as_cType(type.name)}}* out) const override {
-                    return WireResult::FatalError;
-                }
-                WireResult GetOptionalFromId(ObjectId id, {{as_cType(type.name)}}* out) const override {
-                    return WireResult::FatalError;
-                }
-            {% endfor %}
-    };
-
-    // Implementation of ObjectIdProvider that always errors.
-    // Used when the generator adds a provider argument because of a chained
-    // struct, but in practice, a chained struct in that location is invalid.
-    class ErrorObjectIdProvider final : public ObjectIdProvider {
-        public:
-            {% for type in by_category["object"] %}
-                WireResult GetId({{as_cType(type.name)}} object, ObjectId* out) const override {
-                    return WireResult::FatalError;
-                }
-                WireResult GetOptionalId({{as_cType(type.name)}} object, ObjectId* out) const override {
-                    return WireResult::FatalError;
-                }
-            {% endfor %}
-    };
 
         // Implementations of serialization/deserialization of WPGUDeviceProperties.
         size_t SerializedWGPUDevicePropertiesSize(const WGPUDeviceProperties* deviceProperties) {

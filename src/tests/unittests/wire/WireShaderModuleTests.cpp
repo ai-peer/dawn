@@ -87,7 +87,8 @@ class WireShaderModuleTests : public WireTest {
 TEST_F(WireShaderModuleTests, GetCompilationInfo) {
     wgpuShaderModuleGetCompilationInfo(shaderModule, ToMockGetCompilationInfoCallback, nullptr);
 
-    WGPUCompilationMessage message = {"Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
+    WGPUCompilationMessage message = {
+        nullptr, "Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
     WGPUCompilationInfo compilationInfo;
     compilationInfo.messageCount = 1;
     compilationInfo.messages = &message;
@@ -124,7 +125,8 @@ TEST_F(WireShaderModuleTests, GetCompilationInfo) {
 TEST_F(WireShaderModuleTests, GetCompilationInfoBeforeDisconnect) {
     wgpuShaderModuleGetCompilationInfo(shaderModule, ToMockGetCompilationInfoCallback, nullptr);
 
-    WGPUCompilationMessage message = {"Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
+    WGPUCompilationMessage message = {
+        nullptr, "Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
     WGPUCompilationInfo compilationInfo;
     compilationInfo.messageCount = 1;
     compilationInfo.messages = &message;
@@ -182,7 +184,8 @@ TEST_F(WireShaderModuleTests, GetCompilationInfoInsideCallbackBeforeDisconnect) 
     wgpuShaderModuleGetCompilationInfo(shaderModule, ToMockBufferMapCallbackWithNewRequests,
                                        &testData);
 
-    WGPUCompilationMessage message = {"Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
+    WGPUCompilationMessage message = {
+        nullptr, "Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
     WGPUCompilationInfo compilationInfo;
     compilationInfo.messageCount = 1;
     compilationInfo.messages = &message;
@@ -207,7 +210,8 @@ TEST_F(WireShaderModuleTests, GetCompilationInfoInsideCallbackBeforeDestruction)
     wgpuShaderModuleGetCompilationInfo(shaderModule, ToMockBufferMapCallbackWithNewRequests,
                                        &testData);
 
-    WGPUCompilationMessage message = {"Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
+    WGPUCompilationMessage message = {
+        nullptr, "Test Message", WGPUCompilationMessageType_Info, 2, 4, 6, 8};
     WGPUCompilationInfo compilationInfo;
     compilationInfo.messageCount = 1;
     compilationInfo.messages = &message;
