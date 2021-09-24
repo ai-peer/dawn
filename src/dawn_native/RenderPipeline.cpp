@@ -556,7 +556,19 @@ namespace dawn_native {
 
     // static
     RenderPipelineBase* RenderPipelineBase::MakeError(DeviceBase* device) {
-        return new RenderPipelineBase(device, ObjectBase::kError);
+        class ErrorRenderPipeline final : public RenderPipelineBase {
+          public:
+            ErrorRenderPipeline(DeviceBase* device)
+                : RenderPipelineBase(device, ObjectBase::kError) {
+            }
+
+            MaybeError Initialize() override {
+                UNREACHABLE();
+                return {};
+            }
+        };
+
+        return new ErrorRenderPipeline(device);
     }
 
     RenderPipelineBase::~RenderPipelineBase() {
@@ -890,7 +902,4 @@ namespace dawn_native {
         return true;
     }
 
-    MaybeError RenderPipelineBase::Initialize() {
-        return {};
-    }
 }  // namespace dawn_native
