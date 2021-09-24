@@ -320,26 +320,234 @@ namespace dawn_native { namespace metal {
             return {};
         }
 
+        enum class MTLGPUFamily {
+            Apple1,
+            Apple2,
+            Apple3,
+            Apple4,
+            Apple5,
+            Apple6,
+            Apple7,
+            Mac1,
+            Mac2,
+        };
+
+        MTLGPUFamily GetMTLGPUFamily() const {
+            // https://developer.apple.com/documentation/metal/mtldevice/detecting_gpu_features_and_metal_software_versions?language=objc
+
+            if (@available(macOS 10.15, iOS 10.13, *)) {
+                if ([*mDevice supportsFamily:MTLGPUFamilyMac2]) {
+                    return MTLGPUFamily::Mac2;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyMac1]) {
+                    return MTLGPUFamily::Mac1;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple7]) {
+                    return MTLGPUFamily::Apple7;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple6]) {
+                    return MTLGPUFamily::Apple6;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple5]) {
+                    return MTLGPUFamily::Apple5;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple4]) {
+                    return MTLGPUFamily::Apple4;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple3]) {
+                    return MTLGPUFamily::Apple3;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple2]) {
+                    return MTLGPUFamily::Apple2;
+                }
+                if ([*mDevice supportsFamily:MTLGPUFamilyApple1]) {
+                    return MTLGPUFamily::Apple1;
+                }
+            }
+
+#define AVAILABLE_AND(versions, cond) \
+    [&]() -> bool {                   \
+        if (@available versions) {    \
+            return cond;              \
+        }                             \
+        return false;                 \
+    }()
+
+#if TARGET_OS_OSX
+            if (AVAILABLE_AND((macOS 10.14, *),
+                              [*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily2_v1])) {
+                return MTLGPUFamily::Mac2;
+            }
+            if (AVAILABLE_AND((macOS 10.11, *),
+                              [*mDevice supportsFeatureSet:MTLFeatureSet_macOS_GPUFamily1_v1])) {
+                return MTLGPUFamily::Mac1;
+            }
+#elif TARGET_OS_IOS
+            if (AVAILABLE_AND((iOS 11.0, *),
+                              [*mDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily4_v1])) {
+                return MTLGPUFamily::Apple4;
+            }
+            if (AVAILABLE_AND((iOS 9.0, *),
+                              [*mDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily3_v1])) {
+                return MTLGPUFamily::Apple3;
+            }
+            if (AVAILABLE_AND((iOS 8.0, *),
+                              [*mDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily2_v1])) {
+                return MTLGPUFamily::Apple2;
+            }
+            if (AVAILABLE_AND((iOS 8.0, *),
+                              [*mDevice supportsFeatureSet:MTLFeatureSet_iOS_GPUFamily1_v1])) {
+                return MTLGPUFamily::Apple1;
+            }
+#endif
+            UNREACHABLE();
+        }
+
         MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override {
             GetDefaultLimits(&limits->v1);
-            return {};
+
+#define FAMILY_TO_COL(X) \
+    X(Apple1, 1)         \
+    X(Apple2, 2)         \
+    X(Apple3, 3)         \
+    X(Apple4, 4)         \
+    X(Apple5, 5)         \
+    X(Apple6, 6)         \
+    X(Apple7, 7)         \
+    X(Mac1, 8)           \
+    X(Mac2, 9)
+
+// clang-format off
+// https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf
+//                                                          Apple                                               Mac
+//                                                              1,     2,     3,     4,     5,     6,     7,      1,      2
+#define FEATURE_INFO(X)                                                                                                       \
+    X(uint32_t,              maxVertexAttribsPerDescriptor,    31,    31,    31,    31,    31,    31,    31,     31,    31 )  \
+    X(uint32_t,            maxBufferArgumentEntriesPerFunc,    31,    31,    31,    31,    31,    31,    31,     31,    31 )  \
+    X(uint32_t,           maxTextureArgumentEntriesPerFunc,    31,    31,    31,    96,    96,   128,   128,    128,   128 )  \
+    X(uint32_t,      maxSamplerStateArgumentEntriesPerFunc,    16,    16,    16,    16,    16,    16,    16,     16,    16 )  \
+    X(uint32_t,                   maxThreadsPerThreadgroup,   512,   512,   512,  1024,  1024,  1024,  1024,   1024,  1024 )  \
+    X(uint32_t,                  maxTotalThreadgroupMemory, 16352, 16352, 16384, 32768, 32768, 32768, 32768,   1024,  1024 )  \
+    X(uint32_t,                 maxFragmentInputComponents,    60,    60,    60,   124,   124,   124,   124,    124,   124 )  \
+    X(uint32_t,                           max1DTextureSize,  8192,  8192, 16384, 16384, 16384, 16384, 16384,  16384, 16384 )  \
+    X(uint32_t,                           max2DTextureSize,  8192,  8192, 16384, 16384, 16384, 16384, 16384,  16384, 16384 )  \
+    X(uint32_t,                           max3DTextureSize,  2048,  2048,  2048,  2048,  2048,  2048,  2048,   2048,  2048 )  \
+    X(uint32_t,                      maxTextureArrayLayers,  2048,  2048,  2048,  2048,  2048,  2048,  2048,   2048,  2048 )
+                // clang-format on
+
+                struct MTLFeatureInfo {
+#define MTL_FEATURE_INFO_MEMBER(type, name, ...) type name;
+                    FEATURE_INFO(MTL_FEATURE_INFO_MEMBER)
+#undef MTL_FEATURE_INFO_MEMBER
+                };
+
+                MTLFeatureInfo mtlFeatureInfo;
+
+// Sets |name| to the first column value.
+#define POPULATE_FEATURE_INFO_1(type, name, val, ...) mtlFeatureInfo.name = static_cast<type>(val);
+
+// clang-format off
+// Sets |name| to the ith column value by consuming the first argument and forwarding to the (i-1)th macro.
+#define POPULATE_FEATURE_INFO_2(type, name, v, ...) POPULATE_FEATURE_INFO_1(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_3(type, name, v, ...) POPULATE_FEATURE_INFO_2(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_4(type, name, v, ...) POPULATE_FEATURE_INFO_3(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_5(type, name, v, ...) POPULATE_FEATURE_INFO_4(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_6(type, name, v, ...) POPULATE_FEATURE_INFO_5(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_7(type, name, v, ...) POPULATE_FEATURE_INFO_6(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_8(type, name, v, ...) POPULATE_FEATURE_INFO_7(type, name, __VA_ARGS__, dummy)
+#define POPULATE_FEATURE_INFO_9(type, name, v, ...) POPULATE_FEATURE_INFO_8(type, name, __VA_ARGS__, dummy)
+                // clang-format on
+
+                switch (GetMTLGPUFamily()) {
+#define SWITCH_CASE(Family, Col)                  \
+    case MTLGPUFamily::Family:                    \
+        FEATURE_INFO(POPULATE_FEATURE_INFO_##Col) \
+        break;
+
+                    FAMILY_TO_COL(SWITCH_CASE)
+#undef SWITCH_CASE
+                }
+
+                limits->v1.maxTextureDimension1D = mtlFeatureInfo.max1DTextureSize;
+                limits->v1.maxTextureDimension2D = mtlFeatureInfo.max2DTextureSize;
+                limits->v1.maxTextureDimension3D = mtlFeatureInfo.max3DTextureSize;
+                limits->v1.maxTextureArrayLayers = mtlFeatureInfo.maxTextureArrayLayers;
+
+                uint32_t maxBuffersPerStage = mtlFeatureInfo.maxBufferArgumentEntriesPerFunc;
+                maxBuffersPerStage -= 1;  // One slot is reserved to store buffer lengths.
+
+                uint32_t baseMaxBuffersPerStage = limits->v1.maxStorageBuffersPerShaderStage +
+                                                  limits->v1.maxUniformBuffersPerShaderStage +
+                                                  limits->v1.maxVertexBuffers;
+
+                ASSERT(maxBuffersPerStage >= baseMaxBuffersPerStage);
+                {
+                    uint32_t additional = maxBuffersPerStage - baseMaxBuffersPerStage;
+                    limits->v1.maxStorageBuffersPerShaderStage += additional / 3;
+                    limits->v1.maxUniformBuffersPerShaderStage += additional / 3;
+                    limits->v1.maxVertexBuffers += (additional - 2 * (additional / 3));
+                }
+
+                uint32_t baseMaxTexturesPerStage = limits->v1.maxSampledTexturesPerShaderStage +
+                                                   limits->v1.maxStorageTexturesPerShaderStage;
+
+                ASSERT(mtlFeatureInfo.maxTextureArgumentEntriesPerFunc >= baseMaxTexturesPerStage);
+                {
+                    uint32_t additional =
+                        mtlFeatureInfo.maxTextureArgumentEntriesPerFunc - baseMaxTexturesPerStage;
+                    limits->v1.maxSampledTexturesPerShaderStage += additional / 2;
+                    limits->v1.maxStorageTexturesPerShaderStage += (additional - additional / 2);
+                }
+
+                limits->v1.maxSamplersPerShaderStage =
+                    mtlFeatureInfo.maxSamplerStateArgumentEntriesPerFunc;
+
+                // Metal limits are per-function, so the layout limits are the same as the stage
+                // limits. Note: this should likely change if the implementation uses Metal argument
+                // buffers. Non-dynamic buffers will probably be bound argument buffers, but dynamic
+                // buffers may be set directly.
+                //   Mac GPU families with tier 1 argument buffers support 64
+                //   buffers, 128 textures, and 16 samplers. Mac GPU families
+                //   with tier 2 argument buffers support 500000 buffers and
+                //   textures, and 1024 unique samplers
+                limits->v1.maxDynamicUniformBuffersPerPipelineLayout =
+                    limits->v1.maxUniformBuffersPerShaderStage;
+                limits->v1.maxDynamicStorageBuffersPerPipelineLayout =
+                    limits->v1.maxStorageBuffersPerShaderStage;
+
+                // The WebGPU limit is the limit across all vertex buffers, combined.
+                limits->v1.maxVertexAttributes =
+                    limits->v1.maxVertexBuffers * mtlFeatureInfo.maxVertexAttribsPerDescriptor;
+
+                limits->v1.maxInterStageShaderComponents =
+                    mtlFeatureInfo.maxFragmentInputComponents;
+
+                limits->v1.maxComputeWorkgroupStorageSize =
+                    mtlFeatureInfo.maxTotalThreadgroupMemory;
+                limits->v1.maxComputeInvocationsPerWorkgroup =
+                    mtlFeatureInfo.maxThreadsPerThreadgroup;
+                limits->v1.maxComputeWorkgroupSizeX = mtlFeatureInfo.maxThreadsPerThreadgroup;
+                limits->v1.maxComputeWorkgroupSizeY = mtlFeatureInfo.maxThreadsPerThreadgroup;
+                limits->v1.maxComputeWorkgroupSizeZ = mtlFeatureInfo.maxThreadsPerThreadgroup;
+
+                return {};
+            }
+
+            NSPRef<id<MTLDevice>> mDevice;
+        };
+
+        // Implementation of the Metal backend's BackendConnection
+
+        Backend::Backend(InstanceBase* instance)
+            : BackendConnection(instance, wgpu::BackendType::Metal) {
+            if (GetInstance()->IsBackendValidationEnabled()) {
+                setenv("METAL_DEVICE_WRAPPER_TYPE", "1", 1);
+            }
         }
 
-        NSPRef<id<MTLDevice>> mDevice;
-    };
-
-    // Implementation of the Metal backend's BackendConnection
-
-    Backend::Backend(InstanceBase* instance)
-        : BackendConnection(instance, wgpu::BackendType::Metal) {
-        if (GetInstance()->IsBackendValidationEnabled()) {
-            setenv("METAL_DEVICE_WRAPPER_TYPE", "1", 1);
-        }
-    }
-
-    std::vector<std::unique_ptr<AdapterBase>> Backend::DiscoverDefaultAdapters() {
-        std::vector<std::unique_ptr<AdapterBase>> adapters;
-        BOOL supportedVersion = NO;
+        std::vector<std::unique_ptr<AdapterBase>> Backend::DiscoverDefaultAdapters() {
+            std::vector<std::unique_ptr<AdapterBase>> adapters;
+            BOOL supportedVersion = NO;
 #if defined(DAWN_PLATFORM_MACOS)
         if (@available(macOS 10.11, *)) {
             supportedVersion = YES;
@@ -364,7 +572,7 @@ namespace dawn_native { namespace metal {
             UNREACHABLE();
         }
         return adapters;
-    }
+        }
 
     BackendConnection* Connect(InstanceBase* instance) {
         if (!IsMetalSupported()) {
