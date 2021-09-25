@@ -16,6 +16,92 @@
       "message": "PTAL! Very open to feedback about how to improve these patterns, if you have any!",
       "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7b69875_de10e449",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-25T00:06:56Z",
+      "side": 1,
+      "message": "initial review and some more potential ideas! looks like there\u0027s some errors though",
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669d5a2d_a6427b7c",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-25T00:06:56Z",
+      "side": 1,
+      "message": "is it possible to avoid the parens if we move them into the macro definition?",
+      "range": {
+        "startLine": 597,
+        "startChar": 12,
+        "endLine": 597,
+        "endChar": 31
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5069baf8_79ab8938",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-25T00:06:56Z",
+      "side": 1,
+      "message": "it would be a bunch of macro magic hacks, but it might be worth it for readability if we can change this so that the format string and args come first, followed by the body. same for the other macros.\n\nit means we have to do like a thing where we extract the last argument in __VA_ARGS__ and move it to be before the other arguments.\n\nCan be a follow-up though.",
+      "range": {
+        "startLine": 684,
+        "startChar": 12,
+        "endLine": 684,
+        "endChar": 94
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baafebaa_9b62dc2f",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-25T00:06:56Z",
+      "side": 1,
+      "message": "maybe we can make an ityp::span (or just normal span but we don\u0027t have a definition for that) and then define an absl pretty-printer for it)",
+      "range": {
+        "startLine": 170,
+        "startChar": 45,
+        "endLine": 171,
+        "endChar": 75
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
