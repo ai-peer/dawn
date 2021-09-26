@@ -34,7 +34,7 @@ namespace dawn_native { namespace opengl {
         void ApplyNow();
 
       private:
-        using ComputePipelineBase::ComputePipelineBase;
+        ComputePipeline(Device* device, const ComputePipelineDescriptor* descriptor);
         ~ComputePipeline() override = default;
         MaybeError Initialize() override;
     };

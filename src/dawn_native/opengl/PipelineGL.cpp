@@ -18,6 +18,7 @@
 #include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/Pipeline.h"
+#include "dawn_native/opengl/DeviceGL.h"
 #include "dawn_native/opengl/Forward.h"
 #include "dawn_native/opengl/OpenGLFunctions.h"
 #include "dawn_native/opengl/PipelineLayoutGL.h"
@@ -45,8 +46,13 @@ namespace dawn_native { namespace opengl {
 
     }  // namespace
 
-    PipelineGL::PipelineGL() = default;
-    PipelineGL::~PipelineGL() = default;
+    PipelineGL::PipelineGL(Device* device) : mDevice(device) {
+    }
+
+    PipelineGL::~PipelineGL() {
+        const OpenGLFunctions& gl = mDevice->gl;
+        gl.DeleteProgram(mProgram);
+    }
 
     MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
                                           const PipelineLayout* layout,
@@ -87,6 +93,7 @@ namespace dawn_native { namespace opengl {
         // Create an OpenGL shader for each stage and gather the list of combined samplers.
         PerStage<CombinedSamplerInfo> combinedSamplers;
         bool needsDummySampler = false;
+        std::vector<GLuint> glShaders;
         for (SingleShaderStage stage : IterateStages(activeStages)) {
             const ShaderModule* module = ToBackend(stages[stage].module.Get());
             std::string glsl;
@@ -96,6 +103,7 @@ namespace dawn_native { namespace opengl {
             GLuint shader;
             DAWN_TRY_ASSIGN(shader, CreateShader(gl, GLShaderType(stage), glsl.c_str()));
             gl.AttachShader(mProgram, shader);
+            glShaders.push_back(shader);
         }
 
         if (needsDummySampler) {
@@ -178,6 +186,12 @@ namespace dawn_native { namespace opengl {
 
             textureUnit++;
         }
+
+        for (GLuint glShader : glShaders) {
+            gl.DetachShader(mProgram, glShader);
+            gl.DeleteShader(glShader);
+        }
+
         return {};
     }
 
