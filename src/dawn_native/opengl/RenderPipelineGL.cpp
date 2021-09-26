@@ -225,13 +225,13 @@ namespace dawn_native { namespace opengl {
 
     RenderPipeline::RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor)
         : RenderPipelineBase(device, descriptor),
+          PipelineGL(device),
           mVertexArrayObject(0),
           mGlPrimitiveTopology(GLPrimitiveTopology(GetPrimitiveTopology())) {
     }
 
     MaybeError RenderPipeline::Initialize() {
-        DAWN_TRY(
-            InitializeBase(ToBackend(GetDevice())->gl, ToBackend(GetLayout()), GetAllStages()));
+        DAWN_TRY(InitializeBase(ToBackend(GetLayout()), GetAllStages()));
         CreateVAOForVertexState();
         return {};
     }
@@ -283,10 +283,10 @@ namespace dawn_native { namespace opengl {
     }
 
     void RenderPipeline::ApplyNow(PersistentPipelineState& persistentPipelineState) {
-        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
-        PipelineGL::ApplyNow(gl);
+        PipelineGL::ApplyNow();
 
         ASSERT(mVertexArrayObject);
+        const OpenGLFunctions& gl = ToBackend(GetDevice())->gl;
         gl.BindVertexArray(mVertexArrayObject);
 
         ApplyFrontFaceAndCulling(gl, GetFrontFace(), GetCullMode());
