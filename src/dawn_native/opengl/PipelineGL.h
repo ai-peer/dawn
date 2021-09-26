@@ -29,12 +29,13 @@ namespace dawn_native {
 namespace dawn_native { namespace opengl {
 
     struct OpenGLFunctions;
+    class Device;
     class PipelineLayout;
     class Sampler;
 
     class PipelineGL {
       public:
-        PipelineGL();
+        explicit PipelineGL(Device* device);
         ~PipelineGL();
 
         // For each unit a sampler is bound to we need to know if we should use filtering or not
@@ -55,6 +56,7 @@ namespace dawn_native { namespace opengl {
                                   const PerStage<ProgrammableStage>& stages);
 
       private:
+        Device* mDevice;
         GLuint mProgram;
         std::vector<std::vector<SamplerUnit>> mUnitsForSamplers;
         std::vector<std::vector<GLuint>> mUnitsForTextures;
