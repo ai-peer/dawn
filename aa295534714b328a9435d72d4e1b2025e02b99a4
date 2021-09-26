@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b46b6e5_f2a13d13",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4240c76_be7b8e38",
+      "range": {
+        "startLine": 240,
+        "startChar": 38,
+        "endLine": 240,
+        "endChar": 39
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2346e8b_39c8f969",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-24T22:40:22Z",
       "side": 1,
       "message": "Nit: this doesn\u0027t make sense to a JS user. Also, it should be wgpu::kWholeSize instead of kLimitU64Undefined. Maybe:\n\n \"Use `undefined` (wgpu::kWholeSize) or just omit the parameter instead.\"",
+      "range": {
+        "startLine": 241,
+        "startChar": 29,
+        "endLine": 241,
+        "endChar": 53
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ba7186e_c51e2f1d",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2346e8b_39c8f969",
       "range": {
         "startLine": 241,
         "startChar": 29,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "192f969a_70803de7",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2fa93ad_51e66a3e",
+      "range": {
+        "startLine": 244,
+        "startChar": 34,
+        "endLine": 244,
+        "endChar": 52
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52c5fd91_aa7d03ae",
@@ -117,6 +189,24 @@
       "writtenOn": "2021-09-24T22:40:22Z",
       "side": 1,
       "message": "buffer-\u003eGetSize() - offset is unsigned, so max with 0 doesn\u0027t do anything.\nI think we should have asserts when validation is disabled. How about:\n\n ASSERT(offset \u003c\u003d buffer-\u003eGetSize());\n size \u003d buffer-\u003eGetSize() - offset;",
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afd75784_552fbf4b",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52c5fd91_aa7d03ae",
       "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -144,6 +234,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c3231e_5f76119a",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25634e63_83d396d6",
+      "range": {
+        "startLine": 302,
+        "startChar": 29,
+        "endLine": 302,
+        "endChar": 53
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23369d65_04a2a085",
@@ -161,6 +275,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b03b0530_98c0c1a0",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23369d65_04a2a085",
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b023bed1_3cb1c3ab",
@@ -174,6 +306,30 @@
       "writtenOn": "2021-09-24T15:52:05Z",
       "side": 1,
       "message": "nit: can stride stay as uint32_t ?",
+      "range": {
+        "startLine": 40,
+        "startChar": 12,
+        "endLine": 40,
+        "endChar": 20
+      },
+      "revId": "aa295534714b328a9435d72d4e1b2025e02b99a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fbd8089_63e5e818",
+        "filename": "src/tests/unittests/validation/DrawVertexAndIndexBufferOOBValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-09-26T03:19:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b023bed1_3cb1c3ab",
       "range": {
         "startLine": 40,
         "startChar": 12,
