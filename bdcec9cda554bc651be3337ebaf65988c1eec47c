@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a0985a9_4bcdea87",
+        "filename": "src/dawn_node/interop/Browser.idl",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T22:39:14Z",
+      "side": 1,
+      "message": "you\u0027re right that stubs are better for that; we should add some other way for developers and middleware authors to feature-detect the environment. A property on the GPU/Device/Adapter would be good enough.",
+      "parentUuid": "85628e84_fe50041a",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53ec9012_7109a2f1",
