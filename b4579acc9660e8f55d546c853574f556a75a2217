@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba8c99f_441bc85d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:08:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b4579acc9660e8f55d546c853574f556a75a2217",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d2d8412_ef3c1faf",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:08:19Z",
+      "side": 1,
+      "message": "note: This file will require significant rework once Dawn implements the device / adapter creation path properly.",
+      "revId": "b4579acc9660e8f55d546c853574f556a75a2217",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9919d9bc_28a659b9",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:08:19Z",
+      "side": 1,
+      "message": "ditto.",
+      "revId": "b4579acc9660e8f55d546c853574f556a75a2217",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "857e69dd_9931041f",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:08:19Z",
+      "side": 1,
+      "message": "Note: this is sometimes WAYYY too slow to run with the CTS.",
+      "revId": "b4579acc9660e8f55d546c853574f556a75a2217",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
