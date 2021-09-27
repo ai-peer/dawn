@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53ec9012_7109a2f1",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:04:01Z",
+      "side": 1,
+      "message": "I think we could use SetInstanceData if we target Node 12.8+",
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3131f93a_51595e7d",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:04:01Z",
+      "side": 1,
+      "message": "not sure if you\u0027ve handled this somewhere else:\n\nnew window.GPUBuffer() or new global.GPUBuffer() from JS is supposed to throw a TypeError \"Illegal constructor\" because the WebGPU objects don\u0027t have exposed constructors.\n\nin the past when I did bindings, I defined the constructors to throw these exceptions, wrapped this private call to New(..) with a small scope which would turn off the exception.",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 50
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2af3e85_62418a39",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:04:01Z",
+      "side": 1,
+      "message": "\u003d default?",
+      "range": {
+        "startLine": 299,
+        "startChar": 26,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
