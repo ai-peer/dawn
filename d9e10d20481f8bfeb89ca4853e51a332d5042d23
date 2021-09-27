@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0928f939_ea56854e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:57Z",
+      "side": 1,
+      "message": "+Kai for Corentin\u0027s question.",
+      "revId": "d9e10d20481f8bfeb89ca4853e51a332d5042d23",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
