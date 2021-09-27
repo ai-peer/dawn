@@ -122,6 +122,30 @@
       },
       "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1da6ffa7_772030e8",
+        "filename": "src/dawn_node/interop/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:20:31Z",
+      "side": 1,
+      "message": "\u003e So what you\u0027re saying is that you just omit the \u0027src\u0027 bit of the #include if it is generated?\n\u003e The inconsistency seems a bit odd to me, but okay.\n\nI think the reasoning is that all the code is in src/ stuff outside src are generators, scripts and things surrounding code. Happy to delay. Do you keep a list of refactors to do later somewhere?",
+      "parentUuid": "f991c987_8540f905",
+      "range": {
+        "startLine": 56,
+        "startChar": 10,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
