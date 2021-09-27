@@ -34,6 +34,24 @@
       "parentUuid": "84076209_9b18e75b",
       "revId": "668f24ed2b0617aff6cd878c86c779509fef12fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66133add_0a8c029f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T22:21:13Z",
+      "side": 1,
+      "message": "sorry for only *very* briefly scanning this CL - I thought it was duplicating some of the functionality from the existing cmdline runner, but now I see it mostly wraps it, so I take back what I said",
+      "parentUuid": "7c7679e2_ebd9e693",
+      "revId": "668f24ed2b0617aff6cd878c86c779509fef12fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
