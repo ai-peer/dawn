@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8f2fdf5_fe04d199",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T23:03:10Z",
+      "side": 1,
+      "message": "(%u) in %s ?",
+      "range": {
+        "startLine": 266,
+        "startChar": 52,
+        "endLine": 266,
+        "endChar": 57
+      },
+      "revId": "7bf5dbd5ba04b070f28e3b372bbb67ff51b7c037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "768567cd_30ff09f1",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T23:03:10Z",
+      "side": 1,
+      "message": "missing (%u) ?",
+      "range": {
+        "startLine": 308,
+        "startChar": 65,
+        "endLine": 308,
+        "endChar": 70
+      },
+      "revId": "7bf5dbd5ba04b070f28e3b372bbb67ff51b7c037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
