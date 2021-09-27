@@ -214,6 +214,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "860e8137_13b021da",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:58:37Z",
+      "side": 1,
+      "message": "nit: not addressed (we can choose not to, but the comment thread was still open)",
+      "parentUuid": "10d6ddfc_92b444f2",
+      "revId": "7c5310419c9ef62c31b9d5c82958a1763537211a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41203d10_6ac9b7f4",
         "filename": "src/dawn_native/BindGroup.cpp",
         "patchSetId": 1

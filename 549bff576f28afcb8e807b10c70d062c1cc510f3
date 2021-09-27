@@ -95,6 +95,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "593fe3fc_c00e9743",
+        "filename": "docs/validation_errors.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:58:37Z",
+      "side": 1,
+      "message": "Still there!",
+      "parentUuid": "3cf7fc03_270425df",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 2
+      },
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b30d41ac_7ed6191e",
         "filename": "generator/templates/dawn_native/webgpu_absl_format.h",
         "patchSetId": 3
@@ -124,6 +148,24 @@
       "side": 1,
       "message": "Done. Added the `using` statements to each applicable header, though it still needs the `{% set Base \u003d ...` pattern in the header because otherwise you get a conflict in the forward declaration between the `class` and the `using`.",
       "parentUuid": "b30d41ac_7ed6191e",
+      "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c8d1053_35168642",
+        "filename": "generator/templates/dawn_native/webgpu_absl_format.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:58:37Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f420e621_a1d65f62",
       "revId": "549bff576f28afcb8e807b10c70d062c1cc510f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

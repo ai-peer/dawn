@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52bb5d3c_c7af60e3",
+        "filename": "docs/errors.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:58:37Z",
+      "side": 1,
+      "message": "nit: indicating",
+      "range": {
+        "startLine": 3,
+        "startChar": 80,
+        "endLine": 3,
+        "endChar": 89
+      },
+      "revId": "ba662950338abc0ad985b43fa4aa91486ee04786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
