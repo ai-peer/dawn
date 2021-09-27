@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "05b20d84_7f6c4fa0",
+        "filename": "src/dawn_node/binding/GPUTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:21:42Z",
+      "side": 1,
+      "message": "They are legal to specify from JS. They will just always produce an error (because you can\u0027t have UINT32_MAX mip levels or array layers). See what\u0027s done in Chromium: https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_texture.cc;l\u003d68;drc\u003d9834395f60edc393922232e5194b4e299b6174e9?q\u003dgpu_texture.cc",
+      "parentUuid": "5aea55ae_c036edfa",
+      "revId": "084c2dc54656dfc959283c4b5ecc07ce61283b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71721926_d1113518",
         "filename": "src/dawn_node/binding/GPUTexture.cpp",
         "patchSetId": 2
