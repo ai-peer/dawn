@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a925963_63e2456c",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T18:20:29Z",
+      "side": 1,
+      "message": "I\u0027m fairly sure this was needed to pass a few CTS validation tests.\nAdding to my list of things to follow up on once this lands: crbug.com/dawn/1134",
+      "parentUuid": "527e68fa_32395600",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c36b1e0_c2f76ee5",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-09-27T15:15:00Z",
       "side": 1,
       "message": "I think this should be done automatically by Dawn so you don\u0027t need to track it. This might remove the need for state_. (Blink doesn\u0027t have it)",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9279ca04_c3924349",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T18:20:29Z",
+      "side": 1,
+      "message": "Moderately sure it was required for at least one test. crbug.com/dawn/1134",
+      "parentUuid": "5c36b1e0_c2f76ee5",
       "revId": "557b2235eaac6084a45fa118262448196ec8707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c584875_00ae41f8",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T18:20:29Z",
+      "side": 1,
+      "message": "crbug.com/dawn/1134",
+      "parentUuid": "beb8e013_91d06446",
+      "range": {
+        "startLine": 92,
+        "startChar": 27,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bd96dae_efc50ffd",
@@ -75,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "131bf8b4_cd24014e",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T18:20:29Z",
+      "side": 1,
+      "message": "I\u0027d rather use the API that\u0027s provided than depend on const_cast.",
+      "parentUuid": "2bd96dae_efc50ffd",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e56f0845_a52a48dc",
@@ -88,6 +166,24 @@
       "writtenOn": "2021-09-27T15:15:00Z",
       "side": 1,
       "message": "Can you add a TODO that the ArrayBuffer must keep this JS object alive?",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fa6fe1e_5f4f1f08",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T18:20:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e56f0845_a52a48dc",
       "revId": "557b2235eaac6084a45fa118262448196ec8707c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
