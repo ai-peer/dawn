@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5f4ff6_a1d920f9",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 928,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:30:55Z",
+      "side": 1,
+      "message": "I think that if res-\u003esize is WGPU_WHOLE_SIZE then we need to have it be WGPU_WHOLE_SIZE - 1, same idea as [2].\n\nThis could be done with if (!buffer || !Convert(out.offset, res-\u003eoffset) || !Convert(out.size, std::min(res-\u003esize, wgpu::kWholeSize - 1u)))",
+      "revId": "bb7faf8e51cbf61a1c0f1e05d5f7d2e24939b215",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

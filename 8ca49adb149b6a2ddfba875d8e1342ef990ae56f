@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfddcd86_71bff1dd",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:30:55Z",
+      "side": 1,
+      "message": "Can\u0027t GPUColor and GPUExtent3D use the same mechanism then?",
+      "parentUuid": "d99dcd8f_b4c8ba2f",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b45e2f60_ca02f6de",
@@ -119,6 +137,24 @@
       "side": 1,
       "message": "Sounds like an implementation issue with Dawn or a specification issue (stride needs to be less than that tag or something)?",
       "parentUuid": "eecd2524_2fc7dc1a",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec66190_befc1421",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:30:55Z",
+      "side": 1,
+      "message": "It is neither, just a small piece of impedance mismatch to avoid having an extra boolean or pointer indirection to represent the undefined case. It is never valid to use this value, see what Blink does: https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/dawn_conversions.cc;drc\u003d9834395f60edc393922232e5194b4e299b6174e9;l\u003d162\n\nWe can leave this to be fixed later if it\u0027s too annoying now.",
+      "parentUuid": "4cfdba07_914b1608",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -662,6 +698,30 @@
       "side": 1,
       "message": "All the others are by-ref, so I\u0027d like to keep this by ref for consistency.",
       "parentUuid": "e77883bf_728ea1ac",
+      "range": {
+        "startLine": 331,
+        "startChar": 28,
+        "endLine": 331,
+        "endChar": 41
+      },
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57c27e60_e65c5442",
+        "filename": "src/dawn_node/binding/Converter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:30:55Z",
+      "side": 1,
+      "message": "Yeah I meant doing this for every overload. Happy to defer / wont\u0027 fix.",
+      "parentUuid": "2acbaa92_49451995",
       "range": {
         "startLine": 331,
         "startChar": 28,
