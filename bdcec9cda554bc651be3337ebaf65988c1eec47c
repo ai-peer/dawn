@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85628e84_fe50041a",
+        "filename": "src/dawn_node/interop/Browser.idl",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-27T22:18:02Z",
+      "side": 1,
+      "message": "Why is stripping stuff from the IDL better than stubbing the bits we don\u0027t care about?\nMaintaining a patch is painful, and both approaches will likely result in runtime failures for the affected tests. At least with stubs we can emit a sensible error message instead of some confusing undefined symbol error.",
+      "parentUuid": "2a460ae2_a03c1c7d",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "53ec9012_7109a2f1",
         "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
         "patchSetId": 9
