@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcdba990_9157228f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523b91cb_5a83c9c0",
+        "filename": "src/dawn_node/binding/GPU.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "nit: we could use \"final\" here and in other places. I think it will help the linker to devirtualization.",
+      "range": {
+        "startLine": 33,
+        "startChar": 70,
+        "endLine": 33,
+        "endChar": 78
+      },
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85defc03_e34eb75f",
+        "filename": "src/dawn_node/binding/GPUBindGroup.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "Note that this will cause a reference to be added to the bindgroup. Maybe it could be returning a const wgpu::BindGroup\u0026 instead?",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "983b3f02_5076cd85",
+        "filename": "src/dawn_node/binding/GPUBindGroup.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "I wonder if it might be worth having a GPUObjectBase\u003cDawnType\u003e to hold the member, but also later include a tracing pointer to the Device. We do something similar in Blink.\n\nI think it could also blanket implement getLabel and setLabel (though later when Dawn has setLabel for everything)",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f7e832c_fa4e9029",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "optional nit: I feel this is a bit complicated to have in the \"all headers\" CL since it contains a bunch of logic that\u0027s for buffer internals. But maybe it\u0027s too much work to separate it out.",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff22dfc6_daf5f950",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "nit: you could just extract the size from the buffer, AFAIK the rest isn\u0027t needed.",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067a8176_947fdfdd",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "note: with a tracing pointer to the device, the async_ will be able to be moved to the device only.",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e37d856_7b56371a",
+        "filename": "src/dawn_node/binding/GPUDevice.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:57:25Z",
+      "side": 1,
+      "message": "I think the intent is there is a single one of the promises but that\u0027s not in the IDL yet. Kai should we add [SameObject]?",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
