@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fc84d3a_637a5a24",
+        "filename": "src/dawn_node/binding/AsyncRunner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61149759_8e97f00e",
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9b75bc50_ae02c86d",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d52a4c6_4497de91",
+        "filename": "src/dawn_node/binding/AsyncRunner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:12Z",
+      "side": 1,
+      "message": "Done. Added an assert for upper limit too.",
+      "parentUuid": "9b75bc50_ae02c86d",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 11
+      },
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "578bbed2_b6b09c8c",
@@ -71,6 +113,30 @@
       "writtenOn": "2021-09-27T07:45:11Z",
       "side": 1,
       "message": "Dawn uses mRunner runner_, we\u0027ll have to decide if we want consistent style between dawn_node and the rest.",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73dfd5bf_fd8bb24e",
+        "filename": "src/dawn_node/binding/AsyncRunner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:12Z",
+      "side": 1,
+      "message": "I\u0027ll consider a bulk refactor at the end.",
+      "parentUuid": "578bbed2_b6b09c8c",
       "range": {
         "startLine": 64,
         "startChar": 12,
