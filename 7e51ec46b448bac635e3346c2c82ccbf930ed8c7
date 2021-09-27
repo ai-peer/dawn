@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e551b488_4bcce2a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-27T23:27:36Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "7e51ec46b448bac635e3346c2c82ccbf930ed8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67670474_e736daed",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-27T23:27:36Z",
+      "side": 1,
+      "message": "This requirement to repeat the base limit is the only part of this that feels weird to me. That said, I can think of several ways around it, but they all feel like they would ultimately make the code harder to follow, so I don\u0027t think it\u0027s worth it.",
+      "revId": "7e51ec46b448bac635e3346c2c82ccbf930ed8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b753c80c_5b34c73e",
