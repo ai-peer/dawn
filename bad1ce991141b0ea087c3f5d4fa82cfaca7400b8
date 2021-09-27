@@ -16,6 +16,46 @@
       "message": "LGTM, Stephen PTAL too",
       "revId": "bad1ce991141b0ea087c3f5d4fa82cfaca7400b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f27c1b7_b14ed859",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T17:41:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bad1ce991141b0ea087c3f5d4fa82cfaca7400b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dd8a220_5b9e3a24",
+        "filename": "src/dawn_native/opengl/PipelineGL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T17:41:33Z",
+      "side": 1,
+      "message": "nit: now mDevice is stored in ComputePipeline -\u003e ObjectBase and also ComputePipeline -\u003e PipelineGL. It\u0027s not a big problem, but alternatively we could have a DeleteProgram(const OpenGLFunctions\u0026 gl) which we call from ~ComputePipeline and ~RenderPipeline. I don\u0027t feel strongly about this though.",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 24
+      },
+      "revId": "bad1ce991141b0ea087c3f5d4fa82cfaca7400b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
