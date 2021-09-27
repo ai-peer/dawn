@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75b296c7_d8e39b90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:16:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ec535a262ee3804e418529dfefacae02239f5b68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345805a7_3e25fcff",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:16:24Z",
+      "side": 1,
+      "message": "Do we need visibility annotations on the library so that only the correct symbols are exported?",
+      "revId": "ec535a262ee3804e418529dfefacae02239f5b68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
