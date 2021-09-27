@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57c538a9_6c9d2f20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:42:43Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bf5fbff_bf99fa12",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:42:43Z",
+      "side": 1,
+      "message": "This method looks a bit weird, who would call it? If it is the device, then it would already be holding the mutex and can remove the object from the list itself. Slight preference for adding it when the Device::Destroy logic is added.",
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85982335_45d0c358",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:42:43Z",
+      "side": 1,
+      "message": "Maybe comment here what mDevice \u003d nullptr means.",
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b334193f_190092c4",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:42:43Z",
+      "side": 1,
+      "message": "optional nit: We can forward declare the enum in Forward.h",
+      "range": {
+        "startLine": 28,
+        "startChar": 22,
+        "endLine": 28,
+        "endChar": 40
+      },
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
