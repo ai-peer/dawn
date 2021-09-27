@@ -229,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcb9379c_4dc4d2ae",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:24:12Z",
+      "side": 1,
+      "message": "Weird, Blink does without. I\u0027ll see when I get to GPUBuffer.",
+      "parentUuid": "34cccc42_c0599ab6",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "067a8176_947fdfdd",
@@ -260,6 +278,24 @@
       "side": 1,
       "message": "We can\u0027t do this.\nThe binding::Device lifetime is maintained by the JavaScript environment. If JS drops the last reference the C++ type can go bye-byes.",
       "parentUuid": "067a8176_947fdfdd",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bfa72d0_b9f01f2f",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:24:12Z",
+      "side": 1,
+      "message": "If all the objects reference the device then the wgpu::Device will be kept alive no?",
+      "parentUuid": "5331ab9d_91eda030",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
