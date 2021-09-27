@@ -177,6 +177,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53c66106_09eedb9d",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "Maybe EncodingContext.h could have a macro that\u0027s DAWN_TRY_ENCODING_CONTEXT(mEncodingContext,this, [\u0026](){...})?\n\nIt\u0027s probably worth having an extra macro given the amount of use of this pattern.",
+      "parentUuid": "02db6321_d3eb28e4",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5eafcc7c_1f8ce40d",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 1

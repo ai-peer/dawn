@@ -1,0 +1,444 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f57b3b8_c2acf1a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "Lots of nits.  Sorry :X",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f882ee4c_498fc835",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: I think this should be something like\n\n\"Bound vertex buffer size (%u) at slot %u for 0 arrayStride is less than required for all attributes (%u)\"",
+      "range": {
+        "startLine": 98,
+        "startChar": 33,
+        "endLine": 98,
+        "endChar": 39
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b326be4_58466e56",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: Do we want to not that all strides (even the last one) must be complete?",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c7d465e_f759301a",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5b1104_2c47de87",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eb64dbd_33f8779e",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "The messages seem to mention the aspect now.",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9943d0_eaefa520",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "This makes me think, do we want to not require stripIndexFormat as long as the strip pipelines are never used with index buffers? I think there\u0027s a gpuweb issue for that.",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "694cd32a_9ea21cd2",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: mention what the layouts are?",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e465ed8_950fff50",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: no verb?",
+      "range": {
+        "startLine": 268,
+        "startChar": 46,
+        "endLine": 268,
+        "endChar": 47
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad4ae10a_d7aff2d1",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: mention what the required size, and what the bind group layout is? Ah we don\u0027t know because we\u0027d need to duplicate the BufferSizesAtLeastAsBig function.",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac878d57_3616dcce",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: No pipeline set.",
+      "range": {
+        "startLine": 280,
+        "startChar": 71,
+        "endLine": 280,
+        "endChar": 74
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbcd286f_b86b1a47",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: is",
+      "range": {
+        "startLine": 131,
+        "startChar": 54,
+        "endLine": 131,
+        "endChar": 57
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68982e88_cdb1fb2c",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: no verb?",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65c7104f_ab08fd79",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 159,
+        "startChar": 54,
+        "endLine": 159,
+        "endChar": 57
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9a1f7b6_cee17a43",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db4c996a_4f6f7a9b",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: present",
+      "range": {
+        "startLine": 220,
+        "startChar": 58,
+        "endLine": 220,
+        "endChar": 61
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b0fde5_c38c0de0",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "ditto, and in other places below.",
+      "range": {
+        "startLine": 226,
+        "startChar": 58,
+        "endLine": 226,
+        "endChar": 61
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a59c5f3_796166a0",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: larger than the maximum?",
+      "range": {
+        "startLine": 271,
+        "startChar": 57,
+        "endLine": 271,
+        "endChar": 86
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f019b0ba_2334bc27",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: Writing?",
+      "range": {
+        "startLine": 39,
+        "startChar": 29,
+        "endLine": 39,
+        "endChar": 34
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61e9472c_b84c30db",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: isn\u0027t ended at the end of the render pass",
+      "range": {
+        "startLine": 97,
+        "startChar": 52,
+        "endLine": 97,
+        "endChar": 97
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2339fd07_ea24174c",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "Can we have a TODO tracked somewhere to use the debug groups in command validation messages? I think it could be done by making the EncodingContext know about the debug groups (with a vector\u003cstring\u003e?) and DAWN_TRY_CONTEXT with the debug group info.\n\nAlso the CommandEncoder label when that\u0027s added to Dawn.",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cd4a6d1_2c10a698",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:11:23Z",
+      "side": 1,
+      "message": "nit: present and same below",
+      "range": {
+        "startLine": 141,
+        "startChar": 61,
+        "endLine": 141,
+        "endChar": 64
+      },
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
