@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e300c96b_31c495e7",
+        "filename": "src/dawn_node/binding/GPU.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:35Z",
+      "side": 1,
+      "message": "Put final on the classes instead. I don\u0027t expect anything to derive from these.",
+      "parentUuid": "523b91cb_5a83c9c0",
+      "range": {
+        "startLine": 33,
+        "startChar": 70,
+        "endLine": 33,
+        "endChar": 78
+      },
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85defc03_e34eb75f",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-09-27T07:57:25Z",
       "side": 1,
       "message": "Note that this will cause a reference to be added to the bindgroup. Maybe it could be returning a const wgpu::BindGroup\u0026 instead?",
+      "range": {
+        "startLine": 31,
+        "startChar": 24,
+        "endLine": 31,
+        "endChar": 39
+      },
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ecc6818_8103a2fa",
+        "filename": "src/dawn_node/binding/GPUBindGroup.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85defc03_e34eb75f",
       "range": {
         "startLine": 31,
         "startChar": 24,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a08976df_a47d727f",
+        "filename": "src/dawn_node/binding/GPUBindGroup.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:35Z",
+      "side": 1,
+      "message": "Maybe. I was just going to add a second Device field to these binding objects. KISS.\n\nFiled crbug.com/dawn/1128 for this.",
+      "parentUuid": "983b3f02_5076cd85",
+      "range": {
+        "startLine": 40,
+        "startChar": 8,
+        "endLine": 40,
+        "endChar": 30
+      },
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f7e832c_fa4e9029",
@@ -100,6 +172,24 @@
       "writtenOn": "2021-09-27T07:57:25Z",
       "side": 1,
       "message": "optional nit: I feel this is a bit complicated to have in the \"all headers\" CL since it contains a bunch of logic that\u0027s for buffer internals. But maybe it\u0027s too much work to separate it out.",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "112f6971_53f94835",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:35Z",
+      "side": 1,
+      "message": "The ordering of these changes was to be able to declare the #includes that Converter uses, before putting the Converter CL up for review.\nIt\u0027s possible I could rip out the PIMPL fields, but yeah, that is a whole bunch of work.",
+      "parentUuid": "4f7e832c_fa4e9029",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34cccc42_c0599ab6",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:35Z",
+      "side": 1,
+      "message": "We also use usage for getMappedRange().",
+      "parentUuid": "ff22dfc6_daf5f950",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "067a8176_947fdfdd",
@@ -134,6 +242,24 @@
       "writtenOn": "2021-09-27T07:57:25Z",
       "side": 1,
       "message": "note: with a tracing pointer to the device, the async_ will be able to be moved to the device only.",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5331ab9d_91eda030",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:38:35Z",
+      "side": 1,
+      "message": "We can\u0027t do this.\nThe binding::Device lifetime is maintained by the JavaScript environment. If JS drops the last reference the C++ type can go bye-byes.",
+      "parentUuid": "067a8176_947fdfdd",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
