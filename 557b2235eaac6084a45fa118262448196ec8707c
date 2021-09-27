@@ -153,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00d389b0_713a4bdc",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T18:26:45Z",
+      "side": 1,
+      "message": "Then you can also use the MAP_READ/WRITE flag instead of the usage if needed. But Chromium doesn\u0027t care and just const_casts. Keeping the usage works as well, until we have read/write mappable buffers.",
+      "parentUuid": "131bf8b4_cd24014e",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e56f0845_a52a48dc",
