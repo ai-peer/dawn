@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d99dcd8f_b4c8ba2f",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Yup. See L96. This is automatically dispatched to these two overloads using:\n\n\n        template \u003ctypename OUT, typename... IN_TYPES\u003e\n        inline bool Convert(OUT\u0026 out, const std::variant\u003cIN_TYPES...\u003e\u0026 in) {\n            return std::visit([\u0026](auto\u0026\u0026 i) { return Convert(out, i); }, in);\n        }",
+      "parentUuid": "b7d707bc_1cfa93d9",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b45e2f60_ca02f6de",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "Shouldn\u0027t UInt8Array and friends be allowed too? I\u0027m not sure if they should, or if that\u0027s handled already.",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6721ac9_a88f70f7",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "https://heycam.github.io/webidl/#BufferSource:\n\n  typedef (ArrayBufferView or ArrayBuffer) BufferSource;",
+      "parentUuid": "b45e2f60_ca02f6de",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cfdba07_914b1608",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Sounds like an implementation issue with Dawn or a specification issue (stride needs to be less than that tag or something)?",
+      "parentUuid": "eecd2524_2fc7dc1a",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71789f4c_5e8ac4c4",
         "filename": "src/dawn_node/binding/Converter.cpp",
         "patchSetId": 3
@@ -82,6 +136,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "ditto",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61a5c14_19837d01",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71789f4c_5e8ac4c4",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b147f79_f157d553",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Couldn\u0027t find an existing issue for the missing formats. Created crbug.com/dawn/1130. We can link them in monorail.",
+      "parentUuid": "023520d1_b4278b11",
+      "range": {
+        "startLine": 339,
+        "startChar": 27,
+        "endLine": 339,
+        "endChar": 31
+      },
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adbe9e70_6a38a08a",
@@ -122,6 +218,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "nit: TODO add ASTC and ETC types.",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7c8199_d2d9086e",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "adbe9e70_6a38a08a",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +257,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c99641f5_82294d7a",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 832,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b16bf121_a24e288a",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a100223c_a51ccb52",
@@ -156,6 +288,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "Can be removed: attachment was deprecated and removed.",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09438ef8_8474a223",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a100223c_a51ccb52",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +327,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2397a6f6_e5ee3fad",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11406675_08daed4e",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3f5f7442_0aef991f",
@@ -190,6 +358,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "ditto: size and WGPU_WHOLE_SIZE",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91041004_84a6e4ff",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 925,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done, I think?",
+      "parentUuid": "3f5f7442_0aef991f",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -211,6 +397,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8071cf5_aad42671",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 929,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done, I think?",
+      "parentUuid": "97909a04_1bd0c41e",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d2aa1df_8e70ec77",
@@ -224,6 +428,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "nit: out.size \u003d wgpu::kWholeSize.",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79462cce_668f63a3",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d2aa1df_8e70ec77",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -245,6 +467,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f647b9b_003a9962",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "321e7a38_4c6f7da6",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbb68852_d556fb9f",
@@ -258,6 +498,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "[1]",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a09fdcf5_998fe9da",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 945,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbb68852_d556fb9f",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -279,6 +537,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c8afeeb_175f9c0a",
+        "filename": "src/dawn_node/binding/Converter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1125,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2713696_d4d78f81",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53b25113_34a3ddf4",
@@ -292,6 +568,24 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "It\u0027s interesting how this should mostly magically handle all the cases where \"undefined\" in Javascript results in a special Dawn value.",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb904cce_b0bdbf3d",
+        "filename": "src/dawn_node/binding/Converter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Yup. Defaults + optionals \u003d less code.",
+      "parentUuid": "53b25113_34a3ddf4",
       "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -313,6 +607,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca0df717_87d35cee",
+        "filename": "src/dawn_node/binding/Converter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "Ack. This is because of the Release() / Destroy() confusion.",
+      "parentUuid": "3c5029db_affde5c4",
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e77883bf_728ea1ac",
@@ -326,6 +638,30 @@
       "writtenOn": "2021-09-27T08:22:19Z",
       "side": 1,
       "message": "nit: very slight preference to have out taken by pointer so it is clear in the caller where mutability can occur. But if it\u0027s too annoying feel free to drop this comment.",
+      "range": {
+        "startLine": 331,
+        "startChar": 28,
+        "endLine": 331,
+        "endChar": 41
+      },
+      "revId": "8ca49adb149b6a2ddfba875d8e1342ef990ae56f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2acbaa92_49451995",
+        "filename": "src/dawn_node/binding/Converter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:39:50Z",
+      "side": 1,
+      "message": "All the others are by-ref, so I\u0027d like to keep this by ref for consistency.",
+      "parentUuid": "e77883bf_728ea1ac",
       "range": {
         "startLine": 331,
         "startChar": 28,
