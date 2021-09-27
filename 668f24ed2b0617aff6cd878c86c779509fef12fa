@@ -16,6 +16,24 @@
       "message": "tbh, I think we should put this in the CTS and write it in TS",
       "revId": "668f24ed2b0617aff6cd878c86c779509fef12fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c7679e2_ebd9e693",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-27T22:13:14Z",
+      "side": 1,
+      "message": "We can do that too if you like, but there\u0027s a whole bunch of pre-existing code I can rapidly port over from Regres, that gets us up and running. That\u0027s the immediate goal here.",
+      "parentUuid": "84076209_9b18e75b",
+      "revId": "668f24ed2b0617aff6cd878c86c779509fef12fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
