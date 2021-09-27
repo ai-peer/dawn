@@ -247,6 +247,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d55a5c30_8b8a77c3",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T16:48:13Z",
+      "side": 1,
+      "message": "I\u0027m fairly sure it was required to get a bunch of the CTS tests passing. I can try removing it and seeing.",
+      "parentUuid": "dcb9379c_4dc4d2ae",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "067a8176_947fdfdd",
@@ -296,6 +314,24 @@
       "side": 1,
       "message": "If all the objects reference the device then the wgpu::Device will be kept alive no?",
       "parentUuid": "5331ab9d_91eda030",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f865e9b_6e240a59",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T16:48:13Z",
+      "side": 1,
+      "message": "\u003e If all the objects reference the device\n\nYes, this is doable with an Napi::Reference, but there\u0027s no need each non-device binding object to keep the device binding object alive. You\u0027re just then having the pointer point to another outer layer of the onion, for the sake of fewer explicit dependencies.\n\nNote: If you were to do this, then you\u0027d either (a) need to start calling expensive Unwrap() calls on the Napi::Object to obtain the inner wgpu::Device, or (b) hold both an Napi::Reference and raw pointer to the binding::Device.\n\nEither way, this results in more pointer chasing, so I don\u0027t really think this is a great win.",
+      "parentUuid": "7bfa72d0_b9f01f2f",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
