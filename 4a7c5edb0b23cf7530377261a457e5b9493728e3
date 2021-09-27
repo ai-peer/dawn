@@ -223,6 +223,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c42d892_8987ff7c",
+        "filename": "src/dawn_node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:32:33Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e161bea5_bf8cedf4",
+      "range": {
+        "startLine": 181,
+        "startChar": 24,
+        "endLine": 181,
+        "endChar": 28
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c586110f_ce360fc7",
@@ -307,6 +331,30 @@
       "side": 1,
       "message": ":(\n\nBeing forced away from C++17 to use another dependency is quite a compelling argument to keep this code out of Dawn.",
       "parentUuid": "0ea08e65_cc6e5b22",
+      "range": {
+        "startLine": 55,
+        "startChar": 36,
+        "endLine": 55,
+        "endChar": 48
+      },
+      "revId": "4a7c5edb0b23cf7530377261a457e5b9493728e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a388dda_cbcacb67",
+        "filename": "src/dawn_node/interop/WebGPUCommon.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:32:33Z",
+      "side": 1,
+      "message": "Looking at https://bugs.chromium.org/p/chromium/issues/detail?id\u003d752720 it seems we\u0027ll be able to use C++17 very soon. I\u0027ll remove my ew and let\u0027s keep std::variant. We can\u0027t all have nice ML-style pattern matching.",
+      "parentUuid": "ec8a4402_d0af2c8d",
       "range": {
         "startLine": 55,
         "startChar": 36,
