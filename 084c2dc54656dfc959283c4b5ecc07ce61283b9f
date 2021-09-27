@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bec34706_cc892b6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T08:23:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "084c2dc54656dfc959283c4b5ecc07ce61283b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb42f953_bfded3ff",
+        "filename": "src/dawn_node/binding/GPUTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T08:23:07Z",
+      "side": 1,
+      "message": "Same issue as usual for wgpu::kMipLevelCountUndefined and wgpu::kArrayLayerCountUndefined",
+      "revId": "084c2dc54656dfc959283c4b5ecc07ce61283b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71721926_d1113518",
+        "filename": "src/dawn_node/binding/GPUTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T08:23:07Z",
+      "side": 1,
+      "message": "texture_-\u003eDestroy(), see comment for QuerySet.",
+      "revId": "084c2dc54656dfc959283c4b5ecc07ce61283b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
