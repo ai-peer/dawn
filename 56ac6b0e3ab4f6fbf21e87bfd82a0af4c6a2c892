@@ -399,6 +399,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aca0e476_fb7e9114",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-27T22:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0cfedb4d_436a1dba",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94aec752_f4e811a7",
