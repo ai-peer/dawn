@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "183b4a76_991a5c44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:09:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371dc202_e75b0b11",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:09:46Z",
+      "side": 1,
+      "message": "This can query the adapter properties and return the name from the resulting struct.",
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b28006_9f3775ce",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:09:46Z",
+      "side": 1,
+      "message": "nit: associate with one of the previously created issues.",
+      "range": {
+        "startLine": 48,
+        "startChar": 50,
+        "endLine": 48,
+        "endChar": 54
+      },
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb5dbe1_0bce88bb",
+        "filename": "third_party/gpuweb",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:09:46Z",
+      "side": 1,
+      "message": "Any reason why this is added in this commit?",
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
