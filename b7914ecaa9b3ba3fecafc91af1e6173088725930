@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7eb253d2_dfc2d086",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T08:40:56Z",
+      "side": 1,
+      "message": "Ack. I\u0027d prefer to get what we have in, then worry about the generation steps.\nAntonio is working on making more tests pass, so getting this landed is my main goal right now.",
+      "parentUuid": "95ada457_f4e42324",
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d50959b_435eab0a",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-09-27T07:37:13Z",
       "side": 1,
       "message": "All of GEN_DIR? I think in other Dawn libraries we use GEN_DIR/src so that we can include \"dawn_native/Foo.h\"",
+      "range": {
+        "startLine": 56,
+        "startChar": 10,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb307628_ab582483",
+        "filename": "src/dawn_node/interop/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T08:40:56Z",
+      "side": 1,
+      "message": "So what you\u0027re saying is that you just omit the \u0027src\u0027 bit of the #include if it is generated?\nThe inconsistency seems a bit odd to me, but okay.",
+      "parentUuid": "2d50959b_435eab0a",
       "range": {
         "startLine": 56,
         "startChar": 10,
