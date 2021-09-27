@@ -39,6 +39,30 @@
       },
       "revId": "3363d7b4b1d54c13fe356ed5c0c7ef47e96c5f6f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93f1f306_e5126476",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 6
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:36:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00358584_29f63264",
+      "range": {
+        "startLine": 242,
+        "startChar": 61,
+        "endLine": 242,
+        "endChar": 64
+      },
+      "revId": "3363d7b4b1d54c13fe356ed5c0c7ef47e96c5f6f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
