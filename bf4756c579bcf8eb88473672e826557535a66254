@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4232ba_3f5fabe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:45:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61149759_8e97f00e",
+        "filename": "src/dawn_node/binding/AsyncRunner.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:45:11Z",
+      "side": 1,
+      "message": "nit: can we have a bug associated with TODOs? I added a DawnNode component to Dawn\u0027s Gerrit.",
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b75bc50_ae02c86d",
+        "filename": "src/dawn_node/binding/AsyncRunner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:45:11Z",
+      "side": 1,
+      "message": "nit: Maybe uint64_t to be safe from overflows? I don\u0027t know how robust/secure we want dawn_node to be.",
+      "range": {
+        "startLine": 46,
+        "startChar": 8,
+        "endLine": 46,
+        "endChar": 11
+      },
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "578bbed2_b6b09c8c",
+        "filename": "src/dawn_node/binding/AsyncRunner.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:45:11Z",
+      "side": 1,
+      "message": "Dawn uses mRunner runner_, we\u0027ll have to decide if we want consistent style between dawn_node and the rest.",
+      "range": {
+        "startLine": 64,
+        "startChar": 12,
+        "endLine": 64,
+        "endChar": 19
+      },
+      "revId": "bf4756c579bcf8eb88473672e826557535a66254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
