@@ -20,6 +20,7 @@ add_library(dawn_node_binding STATIC
     "Errors.cpp"
     "Errors.h"
     "GPU.h"
+    "GPUAdapter.cpp"
     "GPUAdapter.h"
     "GPUBindGroup.cpp"
     "GPUBindGroup.h"
