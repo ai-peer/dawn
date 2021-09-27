@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dadb53c_0226b5d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:39:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0ad3682bd4900e94383270c2c57ba787a34730e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b747782_99df0b3a",
+        "filename": "src/dawn_node/binding/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:39:56Z",
+      "side": 1,
+      "message": "Is this going to work given the dawn_node_interop target is declared later in the CMakeLists (based on the add_subdirectory order)?",
+      "revId": "0ad3682bd4900e94383270c2c57ba787a34730e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f9e0f82_22b2a407",
+        "filename": "src/dawn_node/binding/Errors.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:39:56Z",
+      "side": 1,
+      "message": "nit: code is always 0 it seems?",
+      "revId": "0ad3682bd4900e94383270c2c57ba787a34730e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
