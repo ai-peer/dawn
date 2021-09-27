@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ec83dda0_e286d706",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T17:34:49Z",
+      "side": 1,
+      "message": "It is in ComputePassEncoder though :P",
+      "parentUuid": "bef8c6be_80b4244f",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "defb721e_d3bf3651",
         "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
         "patchSetId": 4
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "See my earlier CL. I really would rather not.",
       "parentUuid": "defb721e_d3bf3651",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9393dec_762e26c3",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T17:34:49Z",
+      "side": 1,
+      "message": "Oh, that change of style guide is unfortunate. It is weird that it went the direction of less clarity.",
+      "parentUuid": "0f84bfc9_515cc16c",
       "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
