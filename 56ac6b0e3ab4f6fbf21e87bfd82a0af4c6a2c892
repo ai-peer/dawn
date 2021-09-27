@@ -383,6 +383,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0cfedb4d_436a1dba",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T20:35:18Z",
+      "side": 1,
+      "message": "Writing out types instead of auto, when the written out types are fairly small (not std::unordered_map\u003cK, V\u003e::iterator::...asdieflkhef;lshf)",
+      "parentUuid": "5eec6385_2e78a1ea",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94aec752_f4e811a7",
         "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
         "patchSetId": 4
