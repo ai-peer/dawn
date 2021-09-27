@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34bd9c0e_586b3aff",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T20:08:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "23d47f8f37b132444747b0cb0ad34c076d9887a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1ba1bc_ba5865df",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T20:08:36Z",
+      "side": 1,
+      "message": "nit: usually we prefer cstdint",
+      "range": {
+        "startLine": 21,
+        "startChar": 10,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "23d47f8f37b132444747b0cb0ad34c076d9887a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46953f19_02641311",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T20:08:36Z",
+      "side": 1,
+      "message": "static_assert?",
+      "range": {
+        "startLine": 274,
+        "startChar": 0,
+        "endLine": 274,
+        "endChar": 52
+      },
+      "revId": "23d47f8f37b132444747b0cb0ad34c076d9887a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
