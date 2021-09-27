@@ -16,6 +16,46 @@
       "message": "PTAL, thanks",
       "revId": "ae53ab3a5971521c1aa16cd95cc52ab09766d83b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd09e62a_579ed3be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:26:26Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "ae53ab3a5971521c1aa16cd95cc52ab09766d83b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39db9a45_548afdcf",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1536,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:26:26Z",
+      "side": 1,
+      "message": "nit: WGPU_WHOLE_SIZE, same below",
+      "range": {
+        "startLine": 1536,
+        "startChar": 69,
+        "endLine": 1536,
+        "endChar": 93
+      },
+      "revId": "ae53ab3a5971521c1aa16cd95cc52ab09766d83b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
