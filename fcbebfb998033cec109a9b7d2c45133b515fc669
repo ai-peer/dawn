@@ -336,6 +336,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7268a1b7_b4abe99e",
+        "filename": "src/dawn_node/binding/GPUBuffer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:46:01Z",
+      "side": 1,
+      "message": "we do need everything to reference wgpu::Device though. That\u0027s a bit orthogonal to the original discussion about the async_ member though.",
+      "parentUuid": "8f865e9b_6e240a59",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e37d856_7b56371a",
@@ -349,6 +367,24 @@
       "writtenOn": "2021-09-27T07:57:25Z",
       "side": 1,
       "message": "I think the intent is there is a single one of the promises but that\u0027s not in the IDL yet. Kai should we add [SameObject]?",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8a8da8_8a036aa6",
+        "filename": "src/dawn_node/binding/GPUDevice.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:46:01Z",
+      "side": 1,
+      "message": "yes, pretty certain it should be a single object",
+      "parentUuid": "5e37d856_7b56371a",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
