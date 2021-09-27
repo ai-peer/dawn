@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da8139ba_c507e2b0",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-27T20:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc5b1104_2c47de87",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "947f8967_4d8721a7",

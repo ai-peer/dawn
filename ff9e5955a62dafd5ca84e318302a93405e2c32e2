@@ -136,6 +136,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc73bf60_602c719a",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-27T20:57:15Z",
+      "side": 1,
+      "message": "Ah, got it. Yeah, that feels like information overload. We can say how big the buffer needs to be, though, which should help anyone who hits that edge case figure out what went wrong.",
+      "parentUuid": "5bd0e8b8_d7a221f8",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c7d465e_f759301a",
@@ -289,6 +307,24 @@
       "side": 1,
       "message": "Maybe we could mention what the layout of mBindGroups[i] is.",
       "parentUuid": "763a544a_cfc1e3d1",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bc4a50d_ae560a59",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-27T20:57:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b96024b1_023cce36",
       "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
