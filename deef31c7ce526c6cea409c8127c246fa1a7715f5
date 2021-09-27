@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ac57556_a8cc57e7",
+        "filename": "src/dawn_node/binding/GPURenderBundleEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:27:31Z",
+      "side": 1,
+      "message": "generator doesn\u0027t support defaults ? :(",
+      "range": {
+        "startLine": 174,
+        "startChar": 7,
+        "endLine": 179,
+        "endChar": 0
+      },
+      "revId": "deef31c7ce526c6cea409c8127c246fa1a7715f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
