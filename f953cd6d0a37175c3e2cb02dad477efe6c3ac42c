@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93949559_8e00fa48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:48:06Z",
+      "side": 1,
+      "message": "LGTM, thanks for the fix! Ben PTAL too",
+      "revId": "f953cd6d0a37175c3e2cb02dad477efe6c3ac42c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
