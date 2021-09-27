@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41837f95_2b8895ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:43:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2fd595ed95ff9ad5d7892e63b1599f777ec6da94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bbddeb7_41965e2e",
+        "filename": "src/dawn_node/binding/GPURenderBundleEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:43:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2fd595ed95ff9ad5d7892e63b1599f777ec6da94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1762bec_01f24b9d",
+        "filename": "src/dawn_node/binding/GPURenderBundleEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:43:00Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "2fd595ed95ff9ad5d7892e63b1599f777ec6da94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
