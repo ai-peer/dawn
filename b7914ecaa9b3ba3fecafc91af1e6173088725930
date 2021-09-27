@@ -98,6 +98,30 @@
       },
       "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f991c987_8540f905",
+        "filename": "src/dawn_node/interop/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T09:37:59Z",
+      "side": 1,
+      "message": "I\u0027m going to hold off making this change until I properly understand what you\u0027re asking here. If my understanding above is correct, then I can just omit the /src/ from the generated paths and fix up the includes. Easier to do at the top of the CL stack.",
+      "parentUuid": "bb307628_ab582483",
+      "range": {
+        "startLine": 56,
+        "startChar": 10,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
