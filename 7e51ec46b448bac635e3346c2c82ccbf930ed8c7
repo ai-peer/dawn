@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42731667_b8f2f4d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:16:25Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7e51ec46b448bac635e3346c2c82ccbf930ed8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b753c80c_5b34c73e",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:16:25Z",
+      "side": 1,
+      "message": "So much magic xD",
+      "revId": "7e51ec46b448bac635e3346c2c82ccbf930ed8c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
