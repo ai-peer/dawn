@@ -102,6 +102,29 @@
       },
       "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac8af0aa_da67b6ac",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T16:24:10Z",
+      "side": 1,
+      "message": "We could have an overloaded template for ConsumedError that take the context and uses absl::FormatUntyped https://github.com/abseil/abseil-cpp/blob/ce42de10fbea616379826e91c7c23c16bffe6e61/absl/strings/str_format.h#L522",
+      "range": {
+        "startLine": 961,
+        "startChar": 12,
+        "endLine": 961,
+        "endChar": 25
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
