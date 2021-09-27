@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "551f1ecd_6d7c274e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:34:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "367d7c0e_8c6ca65c",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:34:41Z",
+      "side": 1,
+      "message": "Any reason why this is UNIMPLEMENTED?",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "defb721e_d3bf3651",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:34:41Z",
+      "side": 1,
+      "message": "this is a places where having pointers for out parameters would be useful: !conv(\u0026bundles, \u0026bundlesCount, bundles_in)",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cab4663b_3aa89ad9",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T14:34:41Z",
+      "side": 1,
+      "message": "I think the size should default to kWgpuWholeSize soon. Same for setVertexBuffer.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/65020",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
