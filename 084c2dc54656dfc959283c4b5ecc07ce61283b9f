@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fb4b7c3_5aed0eb7",
+        "filename": "src/dawn_node/binding/GPUTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T16:53:30Z",
+      "side": 1,
+      "message": "Added to https://dawn-review.googlesource.com/c/dawn/+/65161",
+      "parentUuid": "05b20d84_7f6c4fa0",
+      "revId": "084c2dc54656dfc959283c4b5ecc07ce61283b9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71721926_d1113518",
