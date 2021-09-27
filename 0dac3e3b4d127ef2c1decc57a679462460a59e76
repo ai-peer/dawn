@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a57443d1_375a1854",
+        "filename": "src/dawn_node/binding/AsyncRunner.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:11:55Z",
+      "side": 1,
+      "message": "why not just call setInterval now and cancelInterval when count_ is 0?\n\nalternatively, the more pure Node way to do this might be to use uv_timer_start on the default event loop which you could get with napi_get_uv_event_loop",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "0dac3e3b4d127ef2c1decc57a679462460a59e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
