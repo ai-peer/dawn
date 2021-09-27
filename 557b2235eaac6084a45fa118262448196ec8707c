@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527e68fa_32395600",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:15:00Z",
+      "side": 1,
+      "message": "I think this is done automatically by Dawn when mappedAtCreation is not a multiple of 4. (and the spec otherwise doesn\u0027t require buffers to be multiples of 4)",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c36b1e0_c2f76ee5",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:15:00Z",
+      "side": 1,
+      "message": "I think this should be done automatically by Dawn so you don\u0027t need to track it. This might remove the need for state_. (Blink doesn\u0027t have it)",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb8e013_91d06446",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:15:00Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 92,
+        "startChar": 27,
+        "endLine": 92,
+        "endChar": 31
+      },
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bd96dae_efc50ffd",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:15:00Z",
+      "side": 1,
+      "message": "I think you should always be able to do const_cast\u003cGetConstMappedRange\u003e, this would remove the need for the usage.",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e56f0845_a52a48dc",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T15:15:00Z",
+      "side": 1,
+      "message": "Can you add a TODO that the ArrayBuffer must keep this JS object alive?",
+      "revId": "557b2235eaac6084a45fa118262448196ec8707c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
