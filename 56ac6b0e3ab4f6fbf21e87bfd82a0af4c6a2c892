@@ -16,6 +16,337 @@
       "message": "There\u0027s a weird test failure described at https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1041#c15\nand tint feature missing described at https://bugs.chromium.org/p/tint/issues/detail?id\u003d1155#c7\nso the test should fail.\nBut open for review hopefully could get some better ideas on the issue",
       "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0ad6551_a0933208",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: this if is not necessary because the loop will just early out and it is invalid usage of the C++ API to have constantCount \u003e 0 with constants \u003d\u003d nullptr",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d917be89_43c75c9a",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: you can use .count() \u003d\u003d 0",
+      "range": {
+        "startLine": 53,
+        "startChar": 50,
+        "endLine": 53,
+        "endChar": 54
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9230d079_b4048975",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34387085_7d08262c",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: I think this condition isn\u0027t needed because if it is false, then the for loop will just early out.",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "480f5d36_b76e7543",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "This probably needs to be a const auto\u0026 to make sure we don\u0027t do a copy.",
+      "range": {
+        "startLine": 652,
+        "startChar": 20,
+        "endLine": 652,
+        "endChar": 24
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40874f84_132db47d",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: missing period.",
+      "range": {
+        "startLine": 659,
+        "startChar": 62,
+        "endLine": 659,
+        "endChar": 63
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10ac259d_62fd55bc",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: specialization",
+      "range": {
+        "startLine": 345,
+        "startChar": 44,
+        "endLine": 345,
+        "endChar": 57
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1678236_e3b21580",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: we can remove the \"else\" and dedent the rest of the function since there is an early return.",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd736983_0cdbf5d3",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: this can be moved out of the loop\n\nAlso maybe we can write out the type for small types.",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94aec752_f4e811a7",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: mutable parameters should be by pointer instead so that it is clear they are mutated in the caller.\n\nSame for specializationInfo",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 130,
+        "endChar": 71
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43305d56_7ae97d9e",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "The function takes a steps argument but doesn\u0027t use it and uses kSteps instead?",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b6fa6be_3476a1e0",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: Just prefix the test name with DISABLED_ instead. That\u0027s a special prefix that gtest understands.",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1aebbb4_8a3e4f54",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "Are different constants with the same name, but used in different entrypoints allowed?",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cee9104_bd4a219c",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 634,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a0de145_b8bd4575",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: You can use the initializer list constructor: constants{{{nullptr, \"1000\", 0}}}, something like this.",
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1c44ef9_ce32640c",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: doesn\u0027t exist",
+      "range": {
+        "startLine": 92,
+        "startChar": 32,
+        "endLine": 92,
+        "endChar": 41
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54295281_52ae06f5",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T19:10:13Z",
+      "side": 1,
+      "message": "nit: implicitly",
+      "range": {
+        "startLine": 105,
+        "startChar": 24,
+        "endLine": 105,
+        "endChar": 34
+      },
+      "revId": "56ac6b0e3ab4f6fbf21e87bfd82a0af4c6a2c892",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
