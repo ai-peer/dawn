@@ -33,6 +33,24 @@
       "message": "nit: use an issue number",
       "revId": "058c4d0406b72463b5e21120a2c4ea4cf7badf8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bf82df_98651287",
+        "filename": "src/dawn_node/binding/GPUQueue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:17:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01d98b52_171e2e95",
+      "revId": "058c4d0406b72463b5e21120a2c4ea4cf7badf8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
