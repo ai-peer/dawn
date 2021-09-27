@@ -33,6 +33,23 @@
       "message": "still LGTM",
       "revId": "ab7a64a193b05ab98b52fe6f9ca292c48208e896",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8faa349_88c09f65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:53:05Z",
+      "side": 1,
+      "message": "You should be able to CQ + 2 now.",
+      "revId": "ab7a64a193b05ab98b52fe6f9ca292c48208e896",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b039a72_d1bf55e2",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T13:53:05Z",
+      "side": 1,
+      "message": "Ah, this is to try and capture more cases where the shaders could be deduplicated? I\u0027m not sure there would be that many but it\u0027s hard to have data now.\n\nLet\u0027s keep things as is and see how other backends turn out.",
+      "parentUuid": "f97f8346_36a20d44",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9718b72b_928f72cc",
