@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15bd537_2317e906",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-27T15:33:43Z",
+      "side": 1,
+      "message": "Sound good. I agree that seeing other backends (and resolving https://crbug.com/dawn/549 ?) will help us generalize this.",
+      "parentUuid": "4b039a72_d1bf55e2",
+      "revId": "804309a756fe8c5b2843d2ece933c7083f4fd14c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9718b72b_928f72cc",

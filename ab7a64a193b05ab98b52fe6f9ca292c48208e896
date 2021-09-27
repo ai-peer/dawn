@@ -50,6 +50,23 @@
       "message": "You should be able to CQ + 2 now.",
       "revId": "ab7a64a193b05ab98b52fe6f9ca292c48208e896",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5173490a_131df149",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-27T15:33:43Z",
+      "side": 1,
+      "message": "Thank you all again for the review!",
+      "revId": "ab7a64a193b05ab98b52fe6f9ca292c48208e896",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
