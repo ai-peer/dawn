@@ -120,6 +120,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5bd0e8b8_d7a221f8",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T17:31:43Z",
+      "side": 1,
+      "message": "not-\u003enote\n\nDo we want to note that all strides (even the last one) must be complete?\n\nBasically we can technically have unused space in the last stride, but Dawn / WebGPU still validates the buffer is big enough. Not sure if it would be too much info for the devs.",
+      "parentUuid": "f480715c_e9f27740",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c7d465e_f759301a",
         "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
         "patchSetId": 5
@@ -253,6 +271,24 @@
       "side": 1,
       "message": "Could you clarify?",
       "parentUuid": "694cd32a_9ea21cd2",
+      "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b96024b1_023cce36",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T17:31:43Z",
+      "side": 1,
+      "message": "Maybe we could mention what the layout of mBindGroups[i] is.",
+      "parentUuid": "763a544a_cfc1e3d1",
       "revId": "ff9e5955a62dafd5ca84e318302a93405e2c32e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
