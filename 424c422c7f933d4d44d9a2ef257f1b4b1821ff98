@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6048f969_4d5130ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:54:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "424c422c7f933d4d44d9a2ef257f1b4b1821ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e634dd39_31b59662",
+        "filename": "src/dawn_node/Module.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:54:50Z",
+      "side": 1,
+      "message": "I don\u0027t think we should have the concept of \"navigator\". Rather, I think we should just export gpu so you use it like:\n\nconst gpu \u003d require(\u0027webgpu.node\u0027);\nor\nconst { gpu } \u003d require(\u0027webgpu.node\u0027);\n\nThe CTS has a place to customize how we get the gpu object at webgpu/util/navigator_gpu.ts",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 75
+      },
+      "revId": "424c422c7f933d4d44d9a2ef257f1b4b1821ff98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
