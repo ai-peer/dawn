@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bef8c6be_80b4244f",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:00:57Z",
+      "side": 1,
+      "message": "Because I haven\u0027t implemented it yet 😊",
+      "parentUuid": "367d7c0e_8c6ca65c",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "defb721e_d3bf3651",
         "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
         "patchSetId": 4
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0f84bfc9_515cc16c",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:00:57Z",
+      "side": 1,
+      "message": "See my earlier CL. I really would rather not.",
+      "parentUuid": "defb721e_d3bf3651",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cab4663b_3aa89ad9",
         "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
         "patchSetId": 4
@@ -65,6 +101,24 @@
       "writtenOn": "2021-09-27T14:34:41Z",
       "side": 1,
       "message": "I think the size should default to kWgpuWholeSize soon. Same for setVertexBuffer.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/65020",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b57d3f_4ae9e023",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:00:57Z",
+      "side": 1,
+      "message": "Ack. Keeping unresolved until that change lands.",
+      "parentUuid": "cab4663b_3aa89ad9",
       "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
