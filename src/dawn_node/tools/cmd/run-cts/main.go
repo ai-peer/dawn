@@ -1,0 +1,267 @@
+// Copyright 2021 The Dawn Authors
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+// idlgen is a tool used to generate code from WebIDL files and a golang
+// template file
+package main
+
+import (
+	"flag"
+	"fmt"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"runtime"
+	"strings"
+	"sync"
+	"time"
+)
+
+func main() {
+	if err := run(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+}
+
+func showUsage() {
+	fmt.Println(`
+run-cts is a tool used to run the WebGPU CTS using the Dawn module for NodeJS
+
+Usage:
+  run-cts --dawn-node=<path to dawn.node> --cts=<path to WebGPU CTS> [test-query]`)
+	os.Exit(1)
+}
+
+func run() error {
+	var dawnNode, cts, node, npx string
+	var build bool
+	flag.StringVar(&dawnNode, "dawn-node", "", "path to dawn.node module")
+	flag.StringVar(&cts, "cts", "", "root directory of WebGPU CTS")
+	flag.StringVar(&node, "node", "", "path to node executable")
+	flag.StringVar(&npx, "npx", "", "path to npx executable")
+	flag.BoolVar(&build, "build", true, "attempt to build the CTS before running")
+	flag.Parse()
+
+	// Check mandatory arguments
+	if dawnNode == "" || cts == "" {
+		showUsage()
+	}
+	if !IsFile(dawnNode) {
+		return fmt.Errorf("'%v' is not a file", dawnNode)
+	}
+	if !IsDir(cts) {
+		return fmt.Errorf("'%v' is not a directory", cts)
+	}
+
+	// Make paths absolute
+	for _, path := range []*string{&dawnNode, &cts} {
+		abs, err := filepath.Abs(*path)
+		if err != nil {
+			return fmt.Errorf("unable to get absolute path for '%v'", *path)
+		}
+		*path = abs
+	}
+
+	// The test query is the optional unnamed argument
+	queries := []string{"webgpu:*"}
+	if args := flag.Args(); len(args) > 0 {
+		queries = args
+	}
+
+	// Find node
+	if node == "" {
+		var err error
+		node, err = exec.LookPath("node")
+		if err != nil {
+			return fmt.Errorf("add node to PATH or specify with --node")
+		}
+	}
+	// Find npx
+	if npx == "" {
+		var err error
+		npx, err = exec.LookPath("npx")
+		if err != nil {
+			npx = ""
+		}
+	}
+
+	r := runner{
+		node:     node,
+		npx:      npx,
+		dawnNode: dawnNode,
+		cts:      cts,
+		evalScript: `require('./src/common/tools/setup-ts-in-node.js');
+		  require('./src/common/runtime/cmdline.ts');`,
+	}
+	if build {
+		if npx != "" {
+			if err := r.buildCTS(); err != nil {
+				return fmt.Errorf("failed to build CTS: %w", err)
+			} else {
+				r.evalScript = `require('./out-node/common/runtime/cmdline.js');`
+			}
+		} else {
+			fmt.Println("npx not found on PATH. Using runtime TypeScript transpilation (slow)")
+		}
+	}
+
+	if err := r.gatherTestCases(queries); err != nil {
+		return fmt.Errorf("failed to gather test cases: %w", err)
+	}
+
+	fmt.Printf("Testing %d test cases...\n", len(r.testcases))
+
+	return r.run()
+}
+
+type runner struct {
+	node, npx, dawnNode, cts string
+	evalScript               string
+	testcases                []string
+}
+
+func (r *runner) buildCTS() error {
+	cmd := exec.Command(r.npx, "grunt", "run:build-out-node")
+	cmd.Dir = r.cts
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("%w: %v", err, string(out))
+	}
+	return nil
+}
+
+func (r *runner) gatherTestCases(queries []string) error {
+	args := append([]string{
+		"-e", r.evalScript,
+		"--", // Start of arguments
+		// src/common/runtime/helper/sys.ts expects 'node file.js <args>'
+		// and slices away the first two arguments. When running with '-e', args
+		// start at 1, so just inject a dummy argument.
+		"dummy-arg",
+		"--list",
+	}, queries...)
+
+	cmd := exec.Command(r.node, args...)
+	cmd.Dir = r.cts
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("%w\n%v", err, string(out))
+	}
+
+	tests := filterTestcases(strings.Split(string(out), "\n"))
+	r.testcases = tests
+	return nil
+}
+
+func (r *runner) run() error {
+	caseIndices := make(chan int, len(r.testcases))
+	for i := range r.testcases {
+		caseIndices <- i
+	}
+	close(caseIndices)
+
+	results := make([]error, len(r.testcases))
+
+	start := time.Now()
+	wg := sync.WaitGroup{}
+	for i := 0; i < runtime.NumCPU(); i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			for idx := range caseIndices {
+				results[idx] = r.runTestcase(idx)
+			}
+		}()
+	}
+	wg.Wait()
+	timeTaken := time.Since(start)
+
+	numPass, numFail, numTests := 0, 0, len(results)
+	for idx, err := range results {
+		name := r.testcases[idx]
+		if err != nil {
+			fmt.Printf("%v: %v\n", name, err)
+			numPass++
+		} else {
+			fmt.Printf("%v: PASS\n", name)
+			numFail++
+		}
+	}
+
+	fmt.Println("")
+	fmt.Printf("Completed in %v\n", timeTaken)
+	fmt.Printf("%v tests pass (%v), %v tests fail (%v)\n",
+		numPass, percentage(numPass, numTests),
+		numFail, percentage(numFail, numTests),
+	)
+	return nil
+}
+
+func (r *runner) runTestcase(idx int) error {
+	eval := fmt.Sprintf(`require('%v');`, r.dawnNode) + r.evalScript
+	args := append([]string{
+		"-e", eval, // Evaluate 'eval'.
+		"--", // Start of arguments
+		// src/common/runtime/helper/sys.ts expects 'node file.js <args>'
+		// and slices away the first two arguments. When running with '-e', args
+		// start at 1, so just inject a dummy argument.
+		"dummy-arg",
+	}, r.testcases[idx]) // Actual arguments
+
+	cmd := exec.Command(r.node, args...)
+	cmd.Dir = r.cts
+	out, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("%w\n%v", err, string(out))
+	}
+	return nil
+}
+
+func filterTestcases(in []string) []string {
+	out := make([]string, 0, len(in))
+	for _, c := range in {
+		if c != "" {
+			out = append(out, c)
+		}
+	}
+	return out
+}
+
+// percentage returns the percentage of n out of total as a string
+func percentage(n, total int) string {
+	if total == 0 {
+		return "-"
+	}
+	f := float64(n) / float64(total)
+	return fmt.Sprintf("%.1f%c", f*100.0, '%')
+}
+
+// IsDir returns true if the path resolves to a directory
+func IsDir(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return s.IsDir()
+}
+
+// IsFile returns true if the path resolves to a file
+func IsFile(path string) bool {
+	s, err := os.Stat(path)
+	if err != nil {
+		return false
+	}
+	return !s.IsDir()
+}
