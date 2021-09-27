@@ -35,6 +35,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74f66d3f_8e9a7a36",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:30:57Z",
+      "side": 1,
+      "message": "Created bug and added TODO.",
+      "parentUuid": "371dc202_e75b0b11",
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bea98280_64b471d0",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "371dc202_e75b0b11",
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05b28006_9f3775ce",
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a457f4_a24bae6e",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:30:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05b28006_9f3775ce",
+      "range": {
+        "startLine": 48,
+        "startChar": 50,
+        "endLine": 48,
+        "endChar": 54
+      },
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abb5dbe1_0bce88bb",
@@ -71,6 +131,24 @@
       "writtenOn": "2021-09-27T15:09:46Z",
       "side": 1,
       "message": "Any reason why this is added in this commit?",
+      "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "981b8067_f5e02cc7",
+        "filename": "third_party/gpuweb",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T17:30:57Z",
+      "side": 1,
+      "message": "No. No idea what this is doing here. Removed.",
+      "parentUuid": "abb5dbe1_0bce88bb",
       "revId": "2230d6b2122301eec11d4b4a54e97dccc49a4476",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
