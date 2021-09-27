@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92002838_fae4c42e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:37:13Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ada457_f4e42324",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:37:13Z",
+      "side": 1,
+      "message": "If we decide to check in the generated files (until later) then we don\u0027t need this rule in the CMakeLists.",
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d50959b_435eab0a",
+        "filename": "src/dawn_node/interop/CMakeLists.txt",
+        "patchSetId": 7
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-27T07:37:13Z",
+      "side": 1,
+      "message": "All of GEN_DIR? I think in other Dawn libraries we use GEN_DIR/src so that we can include \"dawn_native/Foo.h\"",
+      "range": {
+        "startLine": 56,
+        "startChar": 10,
+        "endLine": 56,
+        "endChar": 17
+      },
+      "revId": "b7914ecaa9b3ba3fecafc91af1e6173088725930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
