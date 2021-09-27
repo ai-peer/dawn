@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99c5b974_2207b649",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:40:48Z",
+      "side": 1,
+      "message": "need to add a NapiRef to the buffer, otherwise it may be GC\u0027ed before the callback fires",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a79a2eb0_f82985c4",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:40:48Z",
+      "side": 1,
+      "message": "nit: prefer to acquire a std::unique_ptr at the top",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 58
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0e1b018_f7484434",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:40:48Z",
+      "side": 1,
+      "message": "is there a reason to not do this now? Not doing so can lead to a bunch of flakes. I\u0027d rather do this right now than have people run into confusing issues. Napi::ArrayBuffer::New can take a finalizer",
+      "range": {
+        "startLine": 134,
+        "startChar": 6,
+        "endLine": 136,
+        "endChar": 82
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92109b77_22ced392",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-27T21:40:48Z",
+      "side": 1,
+      "message": "Dawn should already emit this error if it was destroyed 0 why do we need this here and to have the state_ variable in general?\n\nnvm. I see there is already a discussion about this.",
+      "range": {
+        "startLine": 141,
+        "startChar": 7,
+        "endLine": 145,
+        "endChar": 9
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
