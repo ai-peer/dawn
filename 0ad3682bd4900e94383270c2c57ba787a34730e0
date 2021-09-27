@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3700184d_c3aefad9",
+        "filename": "src/dawn_node/binding/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T08:43:07Z",
+      "side": 1,
+      "message": "Yes, it does work.",
+      "parentUuid": "1b747782_99df0b3a",
+      "revId": "0ad3682bd4900e94383270c2c57ba787a34730e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f9e0f82_22b2a407",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-09-27T07:39:56Z",
       "side": 1,
       "message": "nit: code is always 0 it seems?",
+      "revId": "0ad3682bd4900e94383270c2c57ba787a34730e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d042b480_cd32d5fb",
+        "filename": "src/dawn_node/binding/Errors.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-27T08:43:07Z",
+      "side": 1,
+      "message": "Correct. According to the spec, the exception takes these three fields, however I haven\u0027t yet bothered with supplying the codes as I believe they\u0027re only there for deprecated use.\nIf we find that there\u0027s tests / logic that needs this, it\u0027s more obvious what needs to be supplied.",
+      "parentUuid": "6f9e0f82_22b2a407",
       "revId": "0ad3682bd4900e94383270c2c57ba787a34730e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
