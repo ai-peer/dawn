@@ -193,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "199c9429_74af4a55",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-27T17:25:11Z",
+      "side": 1,
+      "message": "This is now being handled in https://dawn-review.googlesource.com/c/dawn/+/65101",
+      "parentUuid": "53c66106_09eedb9d",
+      "revId": "53e59abea805678f1f5491f10aa0f3c009e4a2e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5eafcc7c_1f8ce40d",
