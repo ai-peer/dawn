@@ -130,6 +130,9 @@ namespace dawn_native {
         RenderPassUsages AcquireRenderPassUsages();
         ComputePassUsages AcquireComputePassUsages();
 
+        void PushDebugGroupLabel(const char* groupLabel);
+        void PopDebugGroupLabel();
+
       private:
         void CommitCommands(CommandAllocator allocator);
 
@@ -161,6 +164,7 @@ namespace dawn_native {
         bool mWereCommandsAcquired = false;
 
         std::unique_ptr<ErrorData> mError;
+        std::vector<std::string> mDebugGroupLabels;
     };
 
 }  // namespace dawn_native
