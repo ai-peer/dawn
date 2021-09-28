@@ -391,11 +391,22 @@ namespace dawn_native {
         : ApiObjectBase(device, tag) {
     }
 
-    BindGroupLayoutBase::~BindGroupLayoutBase() {
-        // Do not uncache the actual cached object if we are a blueprint
-        if (IsCachedReference()) {
-            GetDevice()->UncacheBindGroupLayout(this);
+    BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device)
+        : ApiObjectBase(device, kLabelNotImplemented) {
+    }
+
+    void BindGroupLayoutBase::DestroyApiObject() {
+        if (IsAlive()) {
+            // Do not uncache the actual cached object if we are a blueprint
+            if (IsCachedReference()) {
+                GetDevice()->UncacheBindGroupLayout(this);
+            }
         }
+        ApiObjectBase::DestroyApiObject();
+    }
+
+    BindGroupLayoutBase::~BindGroupLayoutBase() {
+        DestroyApiObject();
     }
 
     // static
