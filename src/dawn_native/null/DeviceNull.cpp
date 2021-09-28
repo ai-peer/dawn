@@ -87,7 +87,7 @@ namespace dawn_native { namespace null {
     }
 
     Device::~Device() {
-        ShutDownBase();
+        DestroyDevice();
     }
 
     MaybeError Device::Initialize() {
@@ -164,7 +164,7 @@ namespace dawn_native { namespace null {
         return std::move(stagingBuffer);
     }
 
-    void Device::ShutDownImpl() {
+    void Device::DestroyDeviceImpl() {
         ASSERT(GetState() == State::Disconnected);
 
         // Clear pending operations before checking mMemoryUsage because some operations keep a
@@ -272,7 +272,7 @@ namespace dawn_native { namespace null {
     }
 
     Buffer::~Buffer() {
-        DestroyInternal();
+        DestroyApiObject();
         ToBackend(GetDevice())->DecrementMemoryUsage(GetSize());
     }
 
@@ -311,7 +311,7 @@ namespace dawn_native { namespace null {
     void Buffer::UnmapImpl() {
     }
 
-    void Buffer::DestroyImpl() {
+    void Buffer::DestroyApiObjectImpl() {
     }
 
     // CommandBuffer
