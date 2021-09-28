@@ -22,6 +22,30 @@
       },
       "revId": "62e7e4c888eec0dd56e9f7cbdf40c8528df6f481",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71ad8aba_37d05400",
+        "filename": "src/dawn_node/binding/Errors.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:12:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbd98054_612406bd",
+      "range": {
+        "startLine": 20,
+        "startChar": 8,
+        "endLine": 20,
+        "endChar": 42
+      },
+      "revId": "62e7e4c888eec0dd56e9f7cbdf40c8528df6f481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
