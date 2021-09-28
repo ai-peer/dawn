@@ -56,6 +56,30 @@
       },
       "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db7afcff_c69661cb",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-28T21:13:51Z",
+      "side": 1,
+      "message": "I put it in a tuple to reuse the FromJS() overload that accepts the Napi::CallbackInfo as the input instead of a raw Napi::Value. This will likely be expanded to validate that the number of arguments match parameters, which is common validation for this and a regular method. \nI\u0027m moderately confident it\u0027ll all compile away.",
+      "parentUuid": "1a5d68e8_2a40e930",
+      "range": {
+        "startLine": 165,
+        "startChar": 6,
+        "endLine": 165,
+        "endChar": 45
+      },
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
