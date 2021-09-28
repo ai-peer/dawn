@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a1073ec_082185ad",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T16:05:58Z",
+      "side": 1,
+      "message": "ok. LGTM then",
+      "parentUuid": "9191b573_b7901e3e",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a79a2eb0_f82985c4",
