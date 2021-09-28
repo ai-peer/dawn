@@ -387,6 +387,24 @@
       "parentUuid": "5e37d856_7b56371a",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfabdb0e_bf27a63d",
+        "filename": "src/dawn_node/binding/GPUDevice.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-28T02:46:14Z",
+      "side": 1,
+      "message": "It\u0027s not quite as simple as [SameObject], but yes, it should be a single object. Filed https://github.com/gpuweb/gpuweb/issues/2147",
+      "parentUuid": "0f8a8da8_8a036aa6",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
