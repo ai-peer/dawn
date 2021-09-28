@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "035e6bdf_299c04aa",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-28T21:06:26Z",
+      "side": 1,
+      "message": "Yeah, maybe.\nI have questions about why someone would have a whole bunch of diagnostic messages being emitted, that they wouldn\u0027t want to address, but:\nI\u0027d really like us to focus on the immediate priority here. This effort is to reduce the barrier-of-entry of writing CTS tests.\nThese diagnostics are extremely valuable in figuring out bugs in the bindings, tests, tint and dawn.\nOnce we have all this working well, have encouraged others to start using the bindings, they have found that the diagnosis are too verbose, and report this to us, then I\u0027d be very happy to think of ways to reduce verbosity. We\u0027re a *long* way from this scenario.",
+      "parentUuid": "13e7c04f_8c26eaa1",
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c6e5ad_c00fe7aa",
         "filename": "src/dawn_node/binding/GPUDevice.cpp",
         "patchSetId": 4
