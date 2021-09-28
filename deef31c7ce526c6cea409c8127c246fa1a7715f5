@@ -22,6 +22,30 @@
       },
       "revId": "deef31c7ce526c6cea409c8127c246fa1a7715f5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caa1ef64_e6b3616c",
+        "filename": "src/dawn_node/binding/GPURenderBundleEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T14:59:34Z",
+      "side": 1,
+      "message": "That\u0027s a very good point. It would be trivial to change this. Added to my TODO list:\nhttps://dawn-review.googlesource.com/c/dawn/+/65161",
+      "parentUuid": "8ac57556_a8cc57e7",
+      "range": {
+        "startLine": 174,
+        "startChar": 7,
+        "endLine": 179,
+        "endChar": 0
+      },
+      "revId": "deef31c7ce526c6cea409c8127c246fa1a7715f5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
