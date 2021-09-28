@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "020c453e_9e54f5f7",
+        "filename": "src/dawn_native/d3d12/RenderPipelineD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 477,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T06:42:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d46c78ed_65d5d3be",
+      "range": {
+        "startLine": 477,
+        "startChar": 60,
+        "endLine": 477,
+        "endChar": 74
+      },
+      "revId": "69341faebed04862e7c90f75abf0611e38275bf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03275179_45152a86",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-27T18:41:21Z",
       "side": 1,
       "message": "nit: std::move()",
+      "range": {
+        "startLine": 606,
+        "startChar": 60,
+        "endLine": 606,
+        "endChar": 74
+      },
+      "revId": "69341faebed04862e7c90f75abf0611e38275bf9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f91a7fa2_872dced0",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 606,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T06:42:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03275179_45152a86",
       "range": {
         "startLine": 606,
         "startChar": 60,
