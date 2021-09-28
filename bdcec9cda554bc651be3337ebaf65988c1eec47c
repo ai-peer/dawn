@@ -154,6 +154,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2dd8d9_4add3c1e",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:12:02Z",
+      "side": 1,
+      "message": "Thanks, I wasn\u0027t aware of this. Added to the Known issues in https://dawn-review.googlesource.com/c/dawn/+/65161.",
+      "parentUuid": "3131f93a_51595e7d",
+      "range": {
+        "startLine": 293,
+        "startChar": 0,
+        "endLine": 293,
+        "endChar": 50
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2af3e85_62418a39",
@@ -167,6 +191,30 @@
       "writtenOn": "2021-09-27T21:04:01Z",
       "side": 1,
       "message": "\u003d default?",
+      "range": {
+        "startLine": 299,
+        "startChar": 26,
+        "endLine": 299,
+        "endChar": 28
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70225620_ae247e70",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:12:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2af3e85_62418a39",
       "range": {
         "startLine": 299,
         "startChar": 26,
