@@ -186,7 +186,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     Buffer::~Buffer() {
-        DestroyInternal();
+        DestroyApiObject();
     }
 
     ID3D12Resource* Buffer::GetD3D12Resource() const {
@@ -380,7 +380,7 @@ namespace dawn_native { namespace d3d12 {
         return mMappedData;
     }
 
-    void Buffer::DestroyImpl() {
+    void Buffer::DestroyApiObjectImpl() {
         if (mMappedData != nullptr) {
             // If the buffer is currently mapped, unmap without flushing the writes to the GPU
             // since the buffer cannot be used anymore. UnmapImpl checks mWrittenRange to know

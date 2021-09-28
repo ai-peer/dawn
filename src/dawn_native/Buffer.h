@@ -53,6 +53,7 @@ namespace dawn_native {
 
         static BufferBase* MakeError(DeviceBase* device, const BufferDescriptor* descriptor);
 
+        void DestroyApiObject() override;
         ObjectType GetType() const override;
 
         uint64_t GetSize() const;
@@ -86,9 +87,11 @@ namespace dawn_native {
         BufferBase(DeviceBase* device,
                    const BufferDescriptor* descriptor,
                    ObjectBase::ErrorTag tag);
-        ~BufferBase() override;
 
-        void DestroyInternal();
+        // Constructor used only for mocking and testing.
+        BufferBase(DeviceBase* device);
+
+        ~BufferBase() override;
 
         MaybeError MapAtCreationInternal();
 
@@ -98,7 +101,6 @@ namespace dawn_native {
         virtual MaybeError MapAtCreationImpl() = 0;
         virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
         virtual void UnmapImpl() = 0;
-        virtual void DestroyImpl() = 0;
         virtual void* GetMappedPointerImpl() = 0;
 
         virtual bool IsCPUWritableAtCreation() const = 0;

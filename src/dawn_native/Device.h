@@ -23,6 +23,7 @@
 #include "dawn_native/Limits.h"
 #include "dawn_native/ObjectBase.h"
 #include "dawn_native/ObjectType_autogen.h"
+#include "dawn_native/RenderPipeline.h"
 #include "dawn_native/StagingBuffer.h"
 #include "dawn_native/Toggles.h"
 
@@ -298,7 +299,8 @@ namespace dawn_native {
         };
         State GetState() const;
         bool IsLost() const;
-        std::mutex* GetObjectListMutex(ObjectType type);
+        void TrackObject(ApiObjectBase* object);
+        std::recursive_mutex* GetObjectListMutex(ObjectType type);
 
         std::vector<const char*> GetEnabledExtensions() const;
         std::vector<const char*> GetTogglesUsed() const;
@@ -353,11 +355,15 @@ namespace dawn_native {
         void APISetLabel(const char* label);
 
       protected:
+        // Constructor used only for mocking and testing.
+        DeviceBase();
+
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
 
         MaybeError Initialize(QueueBase* defaultQueue);
-        void ShutDownBase();
+        void DestroyApiObjects();
+        void DestroyDevice();
 
         // Incrememt mLastSubmittedSerial when we submit the next serial
         void IncrementLastSubmittedCommandSerial();
@@ -450,9 +456,9 @@ namespace dawn_native {
         ExecutionSerial mLastSubmittedSerial = ExecutionSerial(0);
         ExecutionSerial mFutureSerial = ExecutionSerial(0);
 
-        // ShutDownImpl is used to clean up and release resources used by device, does not wait for
-        // GPU or check errors.
-        virtual void ShutDownImpl() = 0;
+        // DestroyDeviceImpl is used to clean up and release resources used by device, does not wait
+        // for GPU or check errors.
+        virtual void DestroyDeviceImpl() = 0;
 
         // WaitForIdleForDestruction waits for GPU to finish, checks errors and gets ready for
         // destruction. This is only used when properly destructing the device. For a real
@@ -495,9 +501,12 @@ namespace dawn_native {
         State mState = State::BeingCreated;
 
         // Encompasses the mutex and the actual list that contains all live objects "owned" by the
-        // device.
+        // device. We use a recursive mutex to make sure that on destroy, we can lock the entire
+        // list to make sure that iterators do not become invalid during processing. (Calling
+        // destroy after acquiring the lock for the list results in another lock, hence the need for
+        // recursive_mutex instead of a simple mutex).
         struct ApiObjectList {
-            std::mutex mutex;
+            std::recursive_mutex mutex;
             LinkedList<ApiObjectBase> objects;
         };
         PerObjectType<ApiObjectList> mObjectLists;

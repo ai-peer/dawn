@@ -44,11 +44,15 @@ namespace dawn_native {
       public:
         BindGroupLayoutBase(DeviceBase* device,
                             const BindGroupLayoutDescriptor* descriptor,
+                            PipelineCompatibilityToken pipelineCompatibilityToken,
+                            ApiObjectBase::UntrackedByDeviceTag tag);
+        BindGroupLayoutBase(DeviceBase* device,
+                            const BindGroupLayoutDescriptor* descriptor,
                             PipelineCompatibilityToken pipelineCompatibilityToken);
-        ~BindGroupLayoutBase() override;
 
         static BindGroupLayoutBase* MakeError(DeviceBase* device);
 
+        void DestroyApiObject() override;
         ObjectType GetType() const override;
 
         // A map from the BindingNumber to its packed BindingIndex.
@@ -64,6 +68,8 @@ namespace dawn_native {
         BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;
 
         // Functions necessary for the unordered_set<BGLBase*>-based cache.
+        static size_t ComputeContentHashImpl(const BindGroupLayoutDescriptor* descriptor,
+                                             PipelineCompatibilityToken pipelineCompatibilityToken);
         size_t ComputeContentHash() override;
 
         struct EqualityFunc {
@@ -85,7 +91,6 @@ namespace dawn_native {
         // ignoring their compatibility groups.
         bool IsLayoutEqual(const BindGroupLayoutBase* other,
                            bool excludePipelineCompatibiltyToken = false) const;
-
         PipelineCompatibilityToken GetPipelineCompatibilityToken() const;
 
         struct BufferBindingData {
@@ -110,6 +115,9 @@ namespace dawn_native {
         BindingDataPointers ComputeBindingDataPointers(void* dataStart) const;
 
       protected:
+        // Constructor used only for mocking and testing.
+        BindGroupLayoutBase(DeviceBase* device);
+
         template <typename BindGroup>
         SlabAllocator<BindGroup> MakeFrontendBindGroupAllocator(size_t size) {
             return SlabAllocator<BindGroup>(

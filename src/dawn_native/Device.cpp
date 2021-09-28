@@ -48,6 +48,7 @@
 #include "dawn_native/ValidationUtils_autogen.h"
 #include "dawn_platform/DawnPlatform.h"
 
+#include <array>
 #include <mutex>
 #include <unordered_set>
 
@@ -199,6 +200,10 @@ namespace dawn_native {
         }
     }
 
+    DeviceBase::DeviceBase() : mState(State::Alive) {
+        mCaches = std::make_unique<DeviceBase::Caches>();
+    }
+
     DeviceBase::~DeviceBase() = default;
 
     MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
@@ -262,7 +267,25 @@ namespace dawn_native {
         return {};
     }
 
-    void DeviceBase::ShutDownBase() {
+    void DeviceBase::DestroyApiObjects() {
+        // List of object types in "dependency" order so we can iterate and delete the objects
+        // safely.
+        static constexpr std::array<ObjectType, 3> kObjectTypeDependencyOrder = {
+            ObjectType::Buffer,
+            ObjectType::BindGroup,
+            ObjectType::BindGroupLayout,
+        };
+
+        for (ObjectType type : kObjectTypeDependencyOrder) {
+            ApiObjectList& objList = mObjectLists[type];
+            const std::lock_guard<std::recursive_mutex> lock(objList.mutex);
+            for (LinkNode<ApiObjectBase>* node : objList.objects) {
+                node->value()->DestroyApiObject();
+            }
+        }
+    }
+
+    void DeviceBase::DestroyDevice() {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
             // Call all the callbacks immediately as the device is about to shut down.
@@ -304,8 +327,8 @@ namespace dawn_native {
         if (mState != State::BeingCreated) {
             // The GPU timeline is finished.
             // Tick the queue-related tasks since they should be complete. This must be done before
-            // ShutDownImpl() it may relinquish resources that will be freed by backends in the
-            // ShutDownImpl() call.
+            // DestroyDeviceImpl() it may relinquish resources that will be freed by backends in the
+            // DestroyDeviceImpl() call.
             mQueue->Tick(GetCompletedCommandSerial());
             // Call TickImpl once last time to clean up resources
             // Ignore errors so that we can continue with destruction
@@ -319,14 +342,15 @@ namespace dawn_native {
         mCallbackTaskManager = nullptr;
         mAsyncTaskManager = nullptr;
         mPersistentCache = nullptr;
-
         mEmptyBindGroupLayout = nullptr;
-
         mInternalPipelineStore = nullptr;
 
         AssumeCommandsComplete();
-        // Tell the backend that it can free all the objects now that the GPU timeline is empty.
-        ShutDownImpl();
+
+        // Now that the GPU timeline is empty, destroy all objects owned by the device, and then the
+        // backend device.
+        DestroyApiObjects();
+        DestroyDeviceImpl();
 
         mCaches = nullptr;
     }
@@ -499,7 +523,17 @@ namespace dawn_native {
         return mState != State::Alive;
     }
 
-    std::mutex* DeviceBase::GetObjectListMutex(ObjectType type) {
+    void DeviceBase::TrackObject(ApiObjectBase* object) {
+        ApiObjectList& objectList = mObjectLists[object->GetType()];
+        std::lock_guard<std::recursive_mutex> lock(objectList.mutex);
+
+        // We "push" newly created objects to the front of the list so that when we destroy, we
+        // destroy in the opposite order to avoid any possible dependencies within the same
+        // object types.
+        object->InsertBefore(objectList.objects.head());
+    }
+
+    std::recursive_mutex* DeviceBase::GetObjectListMutex(ObjectType type) {
         return &mObjectLists[type].mutex;
     }
 
@@ -600,7 +634,8 @@ namespace dawn_native {
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
-        BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken);
+        BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken,
+                                      ApiObjectBase::kUntrackedByDevice);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
         blueprint.SetContentHash(blueprintHash);
@@ -612,7 +647,7 @@ namespace dawn_native {
         } else {
             DAWN_TRY_ASSIGN(result,
                             CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->bindGroupLayouts.insert(result.Get());
         }
@@ -623,6 +658,7 @@ namespace dawn_native {
     void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->bindGroupLayouts.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -672,7 +708,7 @@ namespace dawn_native {
         computePipeline->SetContentHash(blueprintHash);
         auto insertion = mCaches->computePipelines.insert(computePipeline.Get());
         if (insertion.second) {
-            computePipeline->SetIsCachedReference();
+            computePipeline->SetIsCachedReference(true);
             return computePipeline;
         } else {
             return *(insertion.first);
@@ -683,7 +719,7 @@ namespace dawn_native {
         Ref<RenderPipelineBase> renderPipeline) {
         auto insertion = mCaches->renderPipelines.insert(renderPipeline.Get());
         if (insertion.second) {
-            renderPipeline->SetIsCachedReference();
+            renderPipeline->SetIsCachedReference(true);
             return renderPipeline;
         } else {
             return *(insertion.first);
@@ -693,6 +729,7 @@ namespace dawn_native {
     void DeviceBase::UncacheComputePipeline(ComputePipelineBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->computePipelines.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -709,7 +746,7 @@ namespace dawn_native {
             result = *iter;
         } else {
             DAWN_TRY_ASSIGN(result, CreatePipelineLayoutImpl(descriptor));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->pipelineLayouts.insert(result.Get());
         }
@@ -720,12 +757,14 @@ namespace dawn_native {
     void DeviceBase::UncachePipelineLayout(PipelineLayoutBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->pipelineLayouts.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
     void DeviceBase::UncacheRenderPipeline(RenderPipelineBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->renderPipelines.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -742,7 +781,7 @@ namespace dawn_native {
             result = *iter;
         } else {
             DAWN_TRY_ASSIGN(result, CreateSamplerImpl(descriptor));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->samplers.insert(result.Get());
         }
@@ -782,7 +821,7 @@ namespace dawn_native {
                                                         compilationMessages));
             }
             DAWN_TRY_ASSIGN(result, CreateShaderModuleImpl(descriptor, parseResult));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->shaderModules.insert(result.Get());
         }
@@ -793,6 +832,7 @@ namespace dawn_native {
     void DeviceBase::UncacheShaderModule(ShaderModuleBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->shaderModules.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -804,7 +844,7 @@ namespace dawn_native {
         }
 
         Ref<AttachmentState> attachmentState = AcquireRef(new AttachmentState(this, *blueprint));
-        attachmentState->SetIsCachedReference();
+        attachmentState->SetIsCachedReference(true);
         attachmentState->SetContentHash(attachmentState->ComputeContentHash());
         mCaches->attachmentStates.insert(attachmentState.Get());
         return attachmentState;
@@ -831,6 +871,7 @@ namespace dawn_native {
     void DeviceBase::UncacheAttachmentState(AttachmentState* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->attachmentStates.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
