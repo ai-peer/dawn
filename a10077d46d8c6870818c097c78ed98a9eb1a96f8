@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76312160_2bd833f8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1526,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T08:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d584c53c_d34540e9",
+      "revId": "a10077d46d8c6870818c097c78ed98a9eb1a96f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb8e255b_1fef0ee0",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-09-28T07:50:38Z",
       "side": 1,
       "message": "Can we have a comment explaining that Initialize() should only be called by the frontend, and only once?",
+      "revId": "a10077d46d8c6870818c097c78ed98a9eb1a96f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd13021d_7ea72f66",
+        "filename": "src/dawn_native/RenderPipeline.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T08:18:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb8e255b_1fef0ee0",
       "revId": "a10077d46d8c6870818c097c78ed98a9eb1a96f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

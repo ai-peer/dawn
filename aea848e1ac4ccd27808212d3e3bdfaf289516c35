@@ -16,6 +16,42 @@
       "message": "u-nit: is this removed on purpose?",
       "revId": "aea848e1ac4ccd27808212d3e3bdfaf289516c35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9725f843_d454ac2c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T08:18:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7027219b_f6841996",
+      "revId": "aea848e1ac4ccd27808212d3e3bdfaf289516c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fcec064_0641cf52",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1308,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T08:18:58Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7027219b_f6841996",
+      "revId": "aea848e1ac4ccd27808212d3e3bdfaf289516c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
