@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1228561c_352493fe",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-28T21:28:11Z",
+      "side": 1,
+      "message": "This is added because we currently don\u0027t sign the DXIL shaders (and D3D12ExperimentalShaderModels lets us run without signed shaders).\n\nI\u0027ve updated the CL to include calling the DXIL.dll validator so we don\u0027t need this.",
+      "parentUuid": "610544e3_551c802a",
+      "range": {
+        "startLine": 69,
+        "startChar": 6,
+        "endLine": 72,
+        "endChar": 9
+      },
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86832fbd_223a7dc1",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f55cdc_0dad9175",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-28T21:28:11Z",
+      "side": 1,
+      "message": "Sounds good. To target DXIL, a device needs to be \u003e\u003d SM 6.0, so I\u0027ll also add that into ApplyUseMesaToggle/ApplyUseDXCToggle",
+      "parentUuid": "86832fbd_223a7dc1",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 322,
+        "endChar": 52
+      },
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b060ee76_65472b52",
@@ -77,6 +125,30 @@
       "writtenOn": "2021-09-09T22:53:08Z",
       "side": 1,
       "message": "to avoid the copy, \nmaybe we can just make ScopedCachedBlob virtual, and then call spirvToDxilFree in the derived class constructor.\n\nOR\n\nchange the type of ScopedCachedBlob::buffer so we can bind data to the deleter and do:\n\n  std::unique_ptr\u003cuint8_t[], std::function\u003cvoid(uint8_t*)\u003e\u003e data(\n    dxil.binary.buffer, [spirvToDxilFree \u003d functions-\u003espirvToDxilFree](){\n        spirvToDxilFree(p);\n    });",
+      "range": {
+        "startLine": 366,
+        "startChar": 8,
+        "endLine": 369,
+        "endChar": 42
+      },
+      "revId": "9249b8590b3c258926ff03fd513e82d6a8b735b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3944a1a3_acdb2c29",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-09-28T21:28:11Z",
+      "side": 1,
+      "message": "I like it. I think we ended up not needing ScopedCachedBlob, but a unique_ptr custom deleter ends up being super helpful with all the DAWN_TRYs that ended up in the way.",
+      "parentUuid": "b060ee76_65472b52",
       "range": {
         "startLine": 366,
         "startChar": 8,
