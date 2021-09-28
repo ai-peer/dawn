@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba75ca41_23b9b9f8",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T20:38:38Z",
+      "side": 1,
+      "message": "Is this necessary? I think this should be done in the file that includes ShaderModule.h already so we don\u0027t need it.",
+      "revId": "5005944a5efe7db32b26360519244e6dc628627b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
