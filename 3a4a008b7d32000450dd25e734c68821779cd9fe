@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13e7c04f_8c26eaa1",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T20:45:14Z",
+      "side": 1,
+      "message": "Other folks using dawn.node will get stderr/stdout messages unexpectedly. For now for our own use spamming the console might be fine but I think we\u0027ll ultimately need to remove it.",
+      "parentUuid": "203685fc_42ebec8c",
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c6e5ad_c00fe7aa",
         "filename": "src/dawn_node/binding/GPUDevice.cpp",
         "patchSetId": 4
@@ -272,6 +290,30 @@
       "side": 1,
       "message": "It\u0027s exposed as an attribute on the interface, and that\u0027s how they\u0027re bound in the interop. What were you expecting?",
       "parentUuid": "aa33e466_270cc8fc",
+      "range": {
+        "startLine": 481,
+        "startChar": 57,
+        "endLine": 481,
+        "endChar": 77
+      },
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3dab3fe_23a02c2d",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 481,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T20:45:14Z",
+      "side": 1,
+      "message": "Ah I forgot event are also members for legacy reasons.",
+      "parentUuid": "e85b5c56_d64515f9",
       "range": {
         "startLine": 481,
         "startChar": 57,
