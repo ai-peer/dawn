@@ -50,6 +50,40 @@
       "message": "LGTM, thanks for the fix!",
       "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65448cf1_0c7f15fe",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-28T15:50:02Z",
+      "side": 1,
+      "message": "It\u0027s not clear that this fixes the problem? ValidateRenderPassDescriptor doesn\u0027t check if any other passes are already active.",
+      "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aa00384_fc29c9df",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-28T15:50:02Z",
+      "side": 1,
+      "message": "It\u0027s not clear that this fixes the problem? ValidateRenderPassDescriptor doesn\u0027t check if any other passes are already active, so this will still hit the same ASSERT, unless I\u0027m missing something?",
+      "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
