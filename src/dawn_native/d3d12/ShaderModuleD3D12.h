@@ -38,6 +38,7 @@ namespace dawn_native { namespace d3d12 {
         ScopedCachedBlob cachedShader;
         ComPtr<ID3DBlob> compiledFXCShader;
         ComPtr<IDxcBlob> compiledDXCShader;
+        ComPtr<IDxcBlob> compiledMesaShader;
         D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
 
         FirstOffsetInfo firstOffsetInfo;

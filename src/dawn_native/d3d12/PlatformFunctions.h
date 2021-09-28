@@ -22,6 +22,8 @@
 
 #include <d3dcompiler.h>
 
+#include "spirv_to_dxil.h"
+
 namespace dawn_native { namespace d3d12 {
 
     // Loads the functions required from the platform dynamically so that we don't need to rely on
@@ -35,6 +37,7 @@ namespace dawn_native { namespace d3d12 {
         MaybeError LoadFunctions();
         bool IsPIXEventRuntimeLoaded() const;
         bool IsDXCAvailable() const;
+        bool IsSPIRVToDXILAvailable() const;
 
         // Functions from d3d12.dll
         PFN_D3D12_CREATE_DEVICE d3d12CreateDevice = nullptr;
@@ -85,6 +88,13 @@ namespace dawn_native { namespace d3d12 {
         // Functions from D3D11.dll
         PFN_D3D11ON12_CREATE_DEVICE d3d11on12CreateDevice = nullptr;
 
+        // Functions from spriv_to_dxil.dll
+        decltype(&spirv_to_dxil) spirvToDxil = nullptr;
+
+        decltype(&spirv_to_dxil_free) spirvToDxilFree = nullptr;
+
+        decltype(&spirv_to_dxil_get_version) spirvToDxilGetVersion = nullptr;
+
       private:
         MaybeError LoadD3D12();
         MaybeError LoadD3D11();
@@ -94,6 +104,7 @@ namespace dawn_native { namespace d3d12 {
         void LoadDXCompiler(const std::string& baseWindowsSDKPath);
         MaybeError LoadFXCompiler();
         void LoadPIXRuntime();
+        void LoadSPIRVToDXIL();
 
         DynamicLib mD3D12Lib;
         DynamicLib mD3D11Lib;
@@ -102,6 +113,8 @@ namespace dawn_native { namespace d3d12 {
         DynamicLib mDXCompilerLib;
         DynamicLib mFXCompilerLib;
         DynamicLib mPIXEventRuntimeLib;
+
+        DynamicLib mSPIRVToDXILLib;
     };
 
 }}  // namespace dawn_native::d3d12
