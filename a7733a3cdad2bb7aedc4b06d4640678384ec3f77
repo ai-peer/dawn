@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ecd5a96_866d5686",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T06:58:06Z",
+      "side": 1,
+      "message": "LGTM too after comments",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a85bbb06_ed4ca3b5",
@@ -31,6 +48,23 @@
       "writtenOn": "2021-09-28T00:41:14Z",
       "side": 1,
       "message": "now that Brandon\u0027s CL has landed, all new errors should use the new formatting. ex.)\n\nDAWN_INVALID_IF(metadata.overridableConstants.count(constants[i].key) \u003d\u003d 0,\n\"Pipeline overridable constant \\\"%s\\\" not found in shader module %s.\", constants[i].key, module);\n\nSee https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/errors.md for more docs",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e3e4d42_85d65d5d",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T06:58:06Z",
+      "side": 1,
+      "message": "Where is it defined? If it is x11 stuff then we can undefined with x11_with_undefs.h",
       "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
