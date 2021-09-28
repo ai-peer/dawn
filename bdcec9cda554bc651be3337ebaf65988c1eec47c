@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c86816cb_690a658e",
+        "filename": "src/dawn_node/interop/Browser.idl",
+        "patchSetId": 9
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T07:19:38Z",
+      "side": 1,
+      "message": "Right now Chromium/CTS/Dawn are all in sync with gpuweb.idl but how do we deal with the situation where there are breaking changes? In particular Chromium/Dawn/CTS might not upgrade changes in the same order they happen in gpuweb.idl.",
+      "parentUuid": "2a0985a9_4bcdea87",
+      "range": {
+        "startLine": 68,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53ec9012_7109a2f1",
@@ -85,6 +109,24 @@
       "writtenOn": "2021-09-27T21:04:01Z",
       "side": 1,
       "message": "I think we could use SetInstanceData if we target Node 12.8+",
+      "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b91a4d1_a6c60cc0",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T07:19:38Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "53ec9012_7109a2f1",
       "revId": "bdcec9cda554bc651be3337ebaf65988c1eec47c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
