@@ -89,9 +89,6 @@ namespace dawn_native {
             void UnmapImpl() override {
                 UNREACHABLE();
             }
-            void DestroyImpl() override {
-                UNREACHABLE();
-            }
 
             std::unique_ptr<uint8_t[]> mFakeMappedData;
         };
@@ -167,11 +164,21 @@ namespace dawn_native {
         }
     }
 
+    BufferBase::BufferBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {
+    }
+
     BufferBase::~BufferBase() {
         if (mState == BufferState::Mapped) {
             ASSERT(!IsError());
             CallMapCallback(mLastMapID, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
         }
+    }
+
+    void BufferBase::DestroyApiObject() {
+        if (mState != BufferState::Destroyed) {
+            ApiObjectBase::DestroyApiObject();
+        }
+        mState = BufferState::Destroyed;
     }
 
     // static
@@ -376,7 +383,7 @@ namespace dawn_native {
             }
         }
 
-        DestroyInternal();
+        DestroyApiObject();
     }
 
     MaybeError BufferBase::CopyFromStagingBuffer() {
@@ -579,13 +586,6 @@ namespace dawn_native {
     MaybeError BufferBase::ValidateDestroy() const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
         return {};
-    }
-
-    void BufferBase::DestroyInternal() {
-        if (mState != BufferState::Destroyed) {
-            DestroyImpl();
-        }
-        mState = BufferState::Destroyed;
     }
 
     void BufferBase::OnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status) {

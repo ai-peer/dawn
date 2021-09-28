@@ -50,7 +50,7 @@ namespace dawn_native { namespace opengl {
     }
 
     Device::~Device() {
-        ShutDownBase();
+        DestroyDevice();
     }
 
     MaybeError Device::Initialize() {
@@ -291,7 +291,7 @@ namespace dawn_native { namespace opengl {
         return DAWN_UNIMPLEMENTED_ERROR("Device unable to copy from staging buffer to texture.");
     }
 
-    void Device::ShutDownImpl() {
+    void Device::DestroyDeviceImpl() {
         ASSERT(GetState() == State::Disconnected);
     }
 

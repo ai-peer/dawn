@@ -35,12 +35,9 @@ namespace dawn_native {
 
         DeviceBase* GetDevice() const;
         bool IsError() const;
-        bool IsAlive() const;
-        void DestroyObject();
 
       private:
-        // Pointer to owning device, if nullptr, that means that the object is no longer alive or
-        // valid.
+        // Pointer to owning device.
         DeviceBase* mDevice;
     };
 
@@ -56,11 +53,22 @@ namespace dawn_native {
         virtual ObjectType GetType() const = 0;
         const std::string& GetLabel() const;
 
+        // The ApiObjectBase is considered alive if it is tracked in a respective linked list owned
+        // by the owning device.
+        bool IsAlive() const;
+
+        // Allow virtual overriding of actual destroy call in order to allow for re-using of base
+        // destruction oerations. Classes that override this function should almost always call this
+        // class's implementation in the override. This needs to be public because it can be called
+        // from the device owning the object.
+        virtual void DestroyApiObject();
+
         // Dawn API
         void APISetLabel(const char* label);
 
       private:
         virtual void SetLabelImpl();
+        virtual void DestroyApiObjectImpl();
 
         std::string mLabel;
     };

@@ -37,7 +37,7 @@ namespace dawn_native {
 
       private:
         friend class DeviceBase;
-        void SetIsCachedReference();
+        void SetIsCachedReference(bool cached);
 
         bool mIsCachedReference = false;
 

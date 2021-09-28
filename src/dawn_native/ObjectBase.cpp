@@ -37,14 +37,6 @@ namespace dawn_native {
         return GetRefCountPayload() == kErrorPayload;
     }
 
-    bool ObjectBase::IsAlive() const {
-        return mDevice != nullptr;
-    }
-
-    void ObjectBase::DestroyObject() {
-        mDevice = nullptr;
-    }
-
     ApiObjectBase::ApiObjectBase(DeviceBase* device, const char* label) : ObjectBase(device) {
         if (label) {
             mLabel = label;
@@ -68,6 +60,23 @@ namespace dawn_native {
     }
 
     void ApiObjectBase::SetLabelImpl() {
+    }
+
+    bool ApiObjectBase::IsAlive() const {
+        return IsInList();
+    }
+
+    void ApiObjectBase::DestroyApiObject() {
+        if (IsAlive()) {
+            {
+                const std::lock_guard<std::mutex> lock(*GetDevice()->GetObjectListMutex(GetType()));
+                RemoveFromList();
+            }
+            DestroyApiObjectImpl();
+        }
+    }
+
+    void ApiObjectBase::DestroyApiObjectImpl() {
     }
 
 }  // namespace dawn_native

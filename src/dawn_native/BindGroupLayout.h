@@ -45,10 +45,10 @@ namespace dawn_native {
         BindGroupLayoutBase(DeviceBase* device,
                             const BindGroupLayoutDescriptor* descriptor,
                             PipelineCompatibilityToken pipelineCompatibilityToken);
-        ~BindGroupLayoutBase() override;
 
         static BindGroupLayoutBase* MakeError(DeviceBase* device);
 
+        void DestroyApiObject() override;
         ObjectType GetType() const override;
 
         // A map from the BindingNumber to its packed BindingIndex.
@@ -110,6 +110,9 @@ namespace dawn_native {
         BindingDataPointers ComputeBindingDataPointers(void* dataStart) const;
 
       protected:
+        // Constructor used only for mocking and testing.
+        BindGroupLayoutBase(DeviceBase* device);
+
         template <typename BindGroup>
         SlabAllocator<BindGroup> MakeFrontendBindGroupAllocator(size_t size) {
             return SlabAllocator<BindGroup>(
