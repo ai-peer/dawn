@@ -56,11 +56,17 @@ namespace dawn_native {
         virtual ObjectType GetType() const = 0;
         const std::string& GetLabel() const;
 
+        // Allow overriding of actual destroy call in order to allow for re-using of base
+        // destruction oerations. Classes that override this function should almost always call this
+        // class's implementation in the override.
+        virtual void DestroyApiObject();
+
         // Dawn API
         void APISetLabel(const char* label);
 
       private:
         virtual void SetLabelImpl();
+        virtual void DestroyApiObjectImpl();
 
         std::string mLabel;
     };

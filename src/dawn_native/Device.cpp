@@ -195,6 +195,10 @@ namespace dawn_native {
         }
     }
 
+    DeviceBase::DeviceBase() : mState(State::Alive) {
+        mCaches = std::make_unique<DeviceBase::Caches>();
+    }
+
     DeviceBase::~DeviceBase() = default;
 
     MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
@@ -617,8 +621,8 @@ namespace dawn_native {
         if (iter != mCaches->bindGroupLayouts.end()) {
             result = *iter;
         } else {
-            DAWN_TRY_ASSIGN(result,
-                            CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
+            DAWN_TRY_ASSIGN(result, TrackObject(CreateBindGroupLayoutImpl(
+                                        descriptor, pipelineCompatibilityToken)));
             result->SetIsCachedReference();
             result->SetContentHash(blueprintHash);
             mCaches->bindGroupLayouts.insert(result.Get());
@@ -1145,7 +1149,7 @@ namespace dawn_native {
             DAWN_TRY_CONTEXT(ValidateBindGroupDescriptor(this, descriptor),
                              "validating %s against %s", descriptor, descriptor->layout);
         }
-        return CreateBindGroupImpl(descriptor);
+        return TrackObject(CreateBindGroupImpl(descriptor));
     }
 
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayout(
