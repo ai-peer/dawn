@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "885099ae_ea80ecbb",
+        "filename": "src/dawn_node/tools/cmd/idlgen/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-09-28T17:38:46Z",
+      "side": 1,
+      "message": "Unfortunate naming, as it first comes across as a setter of \"lifeOf\", but I don\u0027t much prefer \"GetSetlikeOf\". Ah well.",
+      "range": {
+        "startLine": 131,
+        "startChar": 3,
+        "endLine": 131,
+        "endChar": 12
+      },
+      "revId": "03178cdbf1d552d5bca71ae39f29be31e22127bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
