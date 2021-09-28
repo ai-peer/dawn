@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53b01cc6_adb64843",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85bbb06_ed4ca3b5",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "now that Brandon\u0027s CL has landed, all new errors should use the new formatting. ex.)\n\nDAWN_INVALID_IF(metadata.overridableConstants.count(constants[i].key) \u003d\u003d 0,\n\"Pipeline overridable constant \\\"%s\\\" not found in shader module %s.\", constants[i].key, module);\n\nSee https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/errors.md for more docs",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601ac7b2_49864333",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "\"steps\" ? Not sure I understand why it is called this",
+      "range": {
+        "startLine": 25,
+        "startChar": 45,
+        "endLine": 25,
+        "endChar": 50
+      },
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f81f31a_a929b54a",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "nit: would be helpful to comment about the constants that are left as their defaults\n\ndo we test that unspecified constants without defaults are 0? (or invalid)",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae4328e_61d88973",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "nit: comment before the test",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eff0bfb_7a6f1ccc",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4820936_d9263994",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "nit: comment before the test",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f829b338_53a39d5b",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "nit: test setting the same constant twice",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5809b94_e3362314",
+        "filename": "src/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T00:41:14Z",
+      "side": 1,
+      "message": "nit: comment before the test",
+      "revId": "a7733a3cdad2bb7aedc4b06d4640678384ec3f77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
