@@ -80,6 +80,54 @@
       },
       "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a148079_1b9de5dc",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T22:14:50Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "db7afcff_c69661cb",
+      "range": {
+        "startLine": 165,
+        "startChar": 6,
+        "endLine": 165,
+        "endChar": 45
+      },
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5e5a753_261a945f",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T22:14:50Z",
+      "side": 1,
+      "message": "Ack I didn\u0027t realize there was a CallbackInfo vs. Value difference. Yeah I think it might compile away, and we can always optimize later.",
+      "parentUuid": "db7afcff_c69661cb",
+      "range": {
+        "startLine": 165,
+        "startChar": 6,
+        "endLine": 165,
+        "endChar": 45
+      },
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
