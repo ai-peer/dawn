@@ -405,6 +405,24 @@
       "parentUuid": "0f8a8da8_8a036aa6",
       "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5a32e7d_53377f58",
+        "filename": "src/dawn_node/binding/GPUDevice.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:12:16Z",
+      "side": 1,
+      "message": "Ack. Added to the list in https://dawn-review.googlesource.com/c/dawn/+/65161.",
+      "parentUuid": "bfabdb0e_bf27a63d",
+      "revId": "fcbebfb998033cec109a9b7d2c45133b515fc669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
