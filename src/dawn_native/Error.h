@@ -135,7 +135,16 @@ namespace dawn_native {
 
     // DAWN_TRY_ASSIGN is the same as DAWN_TRY for ResultOrError and assigns the success value, if
     // any, to VAR.
-#define DAWN_TRY_ASSIGN(VAR, EXPR)                                            \
+#define DAWN_TRY_ASSIGN(...)                                                           \
+    DAWN_ERROR_GET_VARIADIC_(                                                          \
+        (__VA_ARGS__, DAWN_TRY_ASSIGN_IMPL_3_, DAWN_TRY_ASSIGN_IMPL_2_, PLACEHOLDER_)) \
+    (__VA_ARGS__)
+
+// Macro helpers to help with overloading assignment.
+#define DAWN_ERROR_GET_VARIADIC_HELPER_(_1, _2, _3, NAME, ...) NAME
+#define DAWN_ERROR_GET_VARIADIC_(args) DAWN_ERROR_GET_VARIADIC_HELPER_ args
+
+#define DAWN_TRY_ASSIGN_IMPL_2_(VAR, EXPR)                                    \
     {                                                                         \
         auto DAWN_LOCAL_VAR = EXPR;                                           \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                        \
@@ -146,6 +155,20 @@ namespace dawn_native {
         VAR = DAWN_LOCAL_VAR.AcquireSuccess();                                \
     }                                                                         \
     for (;;)                                                                  \
+    break
+
+#define DAWN_TRY_ASSIGN_IMPL_3_(VAR, EXPR, RET)                                 \
+    {                                                                           \
+        auto DAWN_LOCAL_VAR = EXPR;                                             \
+        if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                          \
+            std::unique_ptr<ErrorData> error = DAWN_LOCAL_VAR.AcquireError();   \
+            const ErrorData* _ = error.get();                                   \
+            (void)_; /* error_expression is allowed to not use this variable */ \
+            return (RET);                                                       \
+        }                                                                       \
+        VAR = DAWN_LOCAL_VAR.AcquireSuccess();                                  \
+    }                                                                           \
+    for (;;)                                                                    \
     break
 
     // Assert that errors are device loss so that we can continue with destruction

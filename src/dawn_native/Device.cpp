@@ -48,6 +48,7 @@
 #include "dawn_native/ValidationUtils_autogen.h"
 #include "dawn_platform/DawnPlatform.h"
 
+#include <array>
 #include <mutex>
 #include <unordered_set>
 
@@ -199,6 +200,10 @@ namespace dawn_native {
         }
     }
 
+    DeviceBase::DeviceBase() : mState(State::Alive) {
+        mCaches = std::make_unique<DeviceBase::Caches>();
+    }
+
     DeviceBase::~DeviceBase() = default;
 
     MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
@@ -262,7 +267,29 @@ namespace dawn_native {
         return {};
     }
 
-    void DeviceBase::ShutDownBase() {
+    void DeviceBase::DestroyApiObjects() {
+        // List of object types in "dependency" order so we can iterate and delete the objects
+        // safely.
+        static constexpr std::array<ObjectType, 3> kObjectTypeDependencyOrder = {
+            ObjectType::Buffer,
+            ObjectType::BindGroup,
+            ObjectType::BindGroupLayout,
+        };
+
+        for (ObjectType type : kObjectTypeDependencyOrder) {
+            ApiObjectList& objList = mObjectLists[type];
+            const std::lock_guard<std::mutex> lock(objList.mutex);
+            for (LinkNode<ApiObjectBase>* node : objList.objects) {
+                // First we remove the object from the list so that we don't try to double lock on
+                // the mutex via the DestroyApiObject call.
+                ApiObjectBase* object = node->value();
+                object->RemoveFromList();
+                object->DestroyApiObject();
+            }
+        }
+    }
+
+    void DeviceBase::DestroyDevice() {
         // Skip handling device facilities if they haven't even been created (or failed doing so)
         if (mState != State::BeingCreated) {
             // Call all the callbacks immediately as the device is about to shut down.
@@ -304,8 +331,8 @@ namespace dawn_native {
         if (mState != State::BeingCreated) {
             // The GPU timeline is finished.
             // Tick the queue-related tasks since they should be complete. This must be done before
-            // ShutDownImpl() it may relinquish resources that will be freed by backends in the
-            // ShutDownImpl() call.
+            // DestroyDeviceImpl() it may relinquish resources that will be freed by backends in the
+            // DestroyDeviceImpl() call.
             mQueue->Tick(GetCompletedCommandSerial());
             // Call TickImpl once last time to clean up resources
             // Ignore errors so that we can continue with destruction
@@ -319,14 +346,15 @@ namespace dawn_native {
         mCallbackTaskManager = nullptr;
         mAsyncTaskManager = nullptr;
         mPersistentCache = nullptr;
-
         mEmptyBindGroupLayout = nullptr;
-
         mInternalPipelineStore = nullptr;
 
         AssumeCommandsComplete();
-        // Tell the backend that it can free all the objects now that the GPU timeline is empty.
-        ShutDownImpl();
+
+        // Now that the GPU timeline is empty, destroy all objects owned by the device, and then the
+        // backend device.
+        DestroyApiObjects();
+        DestroyDeviceImpl();
 
         mCaches = nullptr;
     }
@@ -610,8 +638,8 @@ namespace dawn_native {
         if (iter != mCaches->bindGroupLayouts.end()) {
             result = *iter;
         } else {
-            DAWN_TRY_ASSIGN(result,
-                            CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
+            DAWN_TRY_ASSIGN(result, TrackObject(CreateBindGroupLayoutImpl(
+                                        descriptor, pipelineCompatibilityToken)));
             result->SetIsCachedReference();
             result->SetContentHash(blueprintHash);
             mCaches->bindGroupLayouts.insert(result.Get());
@@ -1144,7 +1172,7 @@ namespace dawn_native {
             DAWN_TRY_CONTEXT(ValidateBindGroupDescriptor(this, descriptor),
                              "validating %s against %s", descriptor, descriptor->layout);
         }
-        return CreateBindGroupImpl(descriptor);
+        return TrackObject(CreateBindGroupImpl(descriptor));
     }
 
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::CreateBindGroupLayout(
@@ -1164,7 +1192,7 @@ namespace dawn_native {
         }
 
         Ref<BufferBase> buffer;
-        DAWN_TRY_ASSIGN(buffer, CreateBufferImpl(descriptor));
+        DAWN_TRY_ASSIGN(buffer, TrackObject(CreateBufferImpl(descriptor)));
 
         if (descriptor->mappedAtCreation) {
             DAWN_TRY(buffer->MapAtCreation());
