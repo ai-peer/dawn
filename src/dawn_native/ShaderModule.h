@@ -29,6 +29,10 @@
 #include "dawn_native/VertexFormat.h"
 #include "dawn_native/dawn_platform.h"
 
+#if defined(DAWN_USE_X11)
+#    include "common/xlib_with_undefs.h"
+#endif
+
 #include <bitset>
 #include <map>
 #include <unordered_map>
