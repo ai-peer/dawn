@@ -70,4 +70,18 @@ namespace dawn_native {
     void ApiObjectBase::SetLabelImpl() {
     }
 
+    void ApiObjectBase::DestroyApiObject() {
+        if (IsAlive()) {
+            if (IsInList()) {
+                const std::lock_guard<std::mutex> lock(*GetDevice()->GetObjectListMutex(GetType()));
+                RemoveFromList();
+            }
+            DestroyApiObjectImpl();
+        }
+        DestroyObject();
+    }
+
+    void ApiObjectBase::DestroyApiObjectImpl() {
+    }
+
 }  // namespace dawn_native

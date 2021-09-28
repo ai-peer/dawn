@@ -381,6 +381,9 @@ namespace dawn_native {
         }
     }
 
+    BindGroupBase::BindGroupBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {
+    }
+
     BindGroupBase::~BindGroupBase() {
         if (mLayout != nullptr) {
             ASSERT(!IsError());
