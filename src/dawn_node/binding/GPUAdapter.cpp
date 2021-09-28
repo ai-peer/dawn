@@ -31,8 +31,38 @@ namespace wgpu { namespace binding {
     }
 
     interop::Interface<interop::GPUSupportedFeatures> GPUAdapter::getFeatures(Napi::Env env) {
-        class Features : public interop::GPUSupportedFeatures {};
-        return interop::GPUSupportedFeatures::Create<Features>(env);
+        class Features : public interop::GPUSupportedFeatures {
+          public:
+            Features(WGPUDeviceProperties properties) : properties_(std::move(properties)) {
+            }
+            bool has(Napi::Env, std::string name) override {
+                interop::GPUFeatureName feature;
+                if (interop::Converter<interop::GPUFeatureName>::FromString(name, feature)) {
+                    switch (feature) {
+                        case interop::GPUFeatureName::kDepthClamping:
+                            return properties_.depthClamping;
+                        case interop::GPUFeatureName::kDepth24UnormStencil8:
+                            return false;  // TODO ???
+                        case interop::GPUFeatureName::kDepth32FloatStencil8:
+                            return false;  // TODO ???
+                        case interop::GPUFeatureName::kPipelineStatisticsQuery:
+                            return properties_.pipelineStatisticsQuery;
+                        case interop::GPUFeatureName::kTextureCompressionBc:
+                            return properties_.textureCompressionBC;
+                        case interop::GPUFeatureName::kTimestampQuery:
+                            return properties_.timestampQuery;
+                    }
+                    LOG("feature: ", feature);
+                    UNIMPLEMENTED();
+                }
+                return false;
+            }
+
+          private:
+            WGPUDeviceProperties properties_;
+        };
+        return interop::GPUSupportedFeatures::Create<Features>(env,
+                                                               adapter_.GetAdapterProperties());
     }
 
     interop::Interface<interop::GPUSupportedLimits> GPUAdapter::getLimits(Napi::Env env) {
