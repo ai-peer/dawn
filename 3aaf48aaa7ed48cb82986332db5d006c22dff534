@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9191b573_b7901e3e",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-28T15:43:13Z",
+      "side": 1,
+      "message": "This is actually surprisingly hard to fix right now, as the binding::GPUBuffer is owned by the interop wrapper (the actual JS object), and there\u0027s no clear way to get the handle to this wrapper object.\n\nTo fix this, I\u0027ll probably end up changing the first argument of all these methods to take an Napi::CallbackInfo, which holds the \u0027this\u0027 and the environment. I can get the object from the \u0027this\u0027.\n\nThat\u0027s a huge change, so I\u0027ve added this to crbug.com/dawn/1135 to address once this lot is in.",
+      "parentUuid": "99c5b974_2207b649",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 25
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a79a2eb0_f82985c4",
