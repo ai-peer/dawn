@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a238f041_0d6905d1",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T17:03:42Z",
+      "side": 1,
+      "message": "I wasn\u0027t intending on removing this. Is there any harm in logging messages to stdout?",
+      "parentUuid": "3b317d78_9c247e84",
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "87c6e5ad_c00fe7aa",
         "filename": "src/dawn_node/binding/GPUDevice.cpp",
         "patchSetId": 4
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f75ca894_3c21b36d",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T17:03:42Z",
+      "side": 1,
+      "message": "I wasn\u0027t intending on removing this. Is there any harm in logging messages to stdout?",
+      "parentUuid": "87c6e5ad_c00fe7aa",
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "faba2cf9_00fdf164",
         "filename": "src/dawn_node/binding/GPUDevice.cpp",
         "patchSetId": 4
@@ -65,6 +101,30 @@
       "writtenOn": "2021-09-27T15:21:18Z",
       "side": 1,
       "message": "Note, this will change soon with https://dawn-review.googlesource.com/c/dawn/+/64520",
+      "range": {
+        "startLine": 92,
+        "startChar": 30,
+        "endLine": 92,
+        "endChar": 71
+      },
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a344501_0374b426",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T17:03:42Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "faba2cf9_00fdf164",
       "range": {
         "startLine": 92,
         "startChar": 30,
@@ -111,6 +171,24 @@
       "writtenOn": "2021-09-27T15:21:18Z",
       "side": 1,
       "message": "nit: leftover debug code?",
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "362321c6_0fb9c9b4",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T17:03:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dcacc33_98c45c77",
       "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
