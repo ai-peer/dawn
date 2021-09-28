@@ -56,6 +56,30 @@
       },
       "revId": "bad1ce991141b0ea087c3f5d4fa82cfaca7400b8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b704296_90c39d57",
+        "filename": "src/dawn_native/opengl/PipelineGL.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-09-28T06:48:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dd8a220_5b9e3a24",
+      "range": {
+        "startLine": 57,
+        "startChar": 8,
+        "endLine": 57,
+        "endChar": 24
+      },
+      "revId": "bad1ce991141b0ea087c3f5d4fa82cfaca7400b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
