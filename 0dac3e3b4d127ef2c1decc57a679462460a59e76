@@ -22,6 +22,30 @@
       },
       "revId": "0dac3e3b4d127ef2c1decc57a679462460a59e76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b970914b_ef5693ea",
+        "filename": "src/dawn_node/binding/AsyncRunner.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T08:47:00Z",
+      "side": 1,
+      "message": "Could do. I have a slight preference to reevaluating the condition each tick than setting up edge based logic, as the latter has a much higher tendency of being buggy.\n\nAlso, I believe there was an intention for Tick() to return a boolean to indicate whether device is idle or not - if this were to this, then I think this approach is probably nicer.\n\nEither way, this is negligible in terms of performance.",
+      "parentUuid": "a57443d1_375a1854",
+      "range": {
+        "startLine": 38,
+        "startChar": 8,
+        "endLine": 39,
+        "endChar": 18
+      },
+      "revId": "0dac3e3b4d127ef2c1decc57a679462460a59e76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
