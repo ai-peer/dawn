@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b955b54b_5bf765b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T20:52:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e709ee_ce19825f",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T20:52:28Z",
+      "side": 1,
+      "message": "crbug.com/dawn/690 same below",
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a5d68e8_2a40e930",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 10
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T20:52:28Z",
+      "side": 1,
+      "message": "nit: using a tuple to store a single time seems unnecessary",
+      "range": {
+        "startLine": 165,
+        "startChar": 6,
+        "endLine": 165,
+        "endChar": 45
+      },
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
