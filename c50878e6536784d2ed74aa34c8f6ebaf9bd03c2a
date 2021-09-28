@@ -16,6 +16,24 @@
       "message": "nit: prefer to wrap as a unique_ptr at the top",
       "revId": "c50878e6536784d2ed74aa34c8f6ebaf9bd03c2a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1034b8_8cb97004",
+        "filename": "src/dawn_node/binding/GPUShaderModule.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:13:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40451e5a_ffc32a85",
+      "revId": "c50878e6536784d2ed74aa34c8f6ebaf9bd03c2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
