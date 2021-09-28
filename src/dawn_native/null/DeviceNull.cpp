@@ -87,7 +87,7 @@ namespace dawn_native { namespace null {
     }
 
     Device::~Device() {
-        ShutDownBase();
+        DestroyDevice();
     }
 
     MaybeError Device::Initialize() {
@@ -164,7 +164,7 @@ namespace dawn_native { namespace null {
         return std::move(stagingBuffer);
     }
 
-    void Device::ShutDownImpl() {
+    void Device::DestroyDeviceImpl() {
         ASSERT(GetState() == State::Disconnected);
 
         // Clear pending operations before checking mMemoryUsage because some operations keep a
@@ -263,6 +263,22 @@ namespace dawn_native { namespace null {
           BindGroupBase(device, descriptor, mBindingDataAllocation) {
     }
 
+    BindGroup::~BindGroup() {
+        DestroyApiObject();
+    }
+
+    // BindGroupLayout
+
+    BindGroupLayout::BindGroupLayout(DeviceBase* device,
+                                     const BindGroupLayoutDescriptor* descriptor,
+                                     PipelineCompatibilityToken pipelineCompatibilityToken)
+        : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken) {
+    }
+
+    BindGroupLayout::~BindGroupLayout() {
+        DestroyApiObject();
+    }
+
     // Buffer
 
     Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
@@ -272,8 +288,8 @@ namespace dawn_native { namespace null {
     }
 
     Buffer::~Buffer() {
-        DestroyInternal();
         ToBackend(GetDevice())->DecrementMemoryUsage(GetSize());
+        DestroyApiObject();
     }
 
     bool Buffer::IsCPUWritableAtCreation() const {
@@ -311,7 +327,7 @@ namespace dawn_native { namespace null {
     void Buffer::UnmapImpl() {
     }
 
-    void Buffer::DestroyImpl() {
+    void Buffer::DestroyApiObjectImpl() {
     }
 
     // CommandBuffer

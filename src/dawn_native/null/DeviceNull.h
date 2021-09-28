@@ -40,7 +40,7 @@ namespace dawn_native { namespace null {
 
     class Adapter;
     class BindGroup;
-    using BindGroupLayout = BindGroupLayoutBase;
+    class BindGroupLayout;
     class Buffer;
     class CommandBuffer;
     using ComputePipeline = ComputePipelineBase;
@@ -84,7 +84,7 @@ namespace dawn_native { namespace null {
         virtual void Execute() = 0;
     };
 
-    class Device : public DeviceBase {
+    class Device final : public DeviceBase {
       public:
         static ResultOrError<Device*> Create(Adapter* adapter, const DeviceDescriptor* descriptor);
         ~Device() override;
@@ -156,7 +156,7 @@ namespace dawn_native { namespace null {
 
         ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
 
-        void ShutDownImpl() override;
+        void DestroyDeviceImpl() override;
         MaybeError WaitForIdleForDestruction() override;
 
         std::vector<std::unique_ptr<PendingOperation>> mPendingOperations;
@@ -197,7 +197,17 @@ namespace dawn_native { namespace null {
         BindGroup(DeviceBase* device, const BindGroupDescriptor* descriptor);
 
       private:
-        ~BindGroup() override = default;
+        ~BindGroup() override;
+    };
+
+    class BindGroupLayout final : public BindGroupLayoutBase {
+      public:
+        BindGroupLayout(DeviceBase* device,
+                        const BindGroupLayoutDescriptor* descriptor,
+                        PipelineCompatibilityToken pipelineCompatibilityToken);
+
+      private:
+        ~BindGroupLayout() override;
     };
 
     class Buffer final : public BufferBase {
@@ -215,7 +225,7 @@ namespace dawn_native { namespace null {
         ~Buffer() override;
         MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
         void UnmapImpl() override;
-        void DestroyImpl() override;
+        void DestroyApiObjectImpl() override;
         bool IsCPUWritableAtCreation() const override;
         MaybeError MapAtCreationImpl() override;
         void* GetMappedPointerImpl() override;
