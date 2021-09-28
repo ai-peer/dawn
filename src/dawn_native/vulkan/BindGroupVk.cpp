@@ -160,6 +160,7 @@ namespace dawn_native { namespace vulkan {
 
     BindGroup::~BindGroup() {
         ToBackend(GetLayout())->DeallocateBindGroup(this, &mDescriptorSetAllocation);
+        DestroyApiObject();
     }
 
     VkDescriptorSet BindGroup::GetHandle() const {
