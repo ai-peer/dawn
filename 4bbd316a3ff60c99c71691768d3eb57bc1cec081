@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16935d63_ecc20624",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-28T00:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bf5fbff_bf99fa12",
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85982335_45d0c358",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b46a1a80_71988f16",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-28T00:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85982335_45d0c358",
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b334193f_190092c4",
@@ -65,6 +101,30 @@
       "writtenOn": "2021-09-27T16:42:43Z",
       "side": 1,
       "message": "optional nit: We can forward declare the enum in Forward.h",
+      "range": {
+        "startLine": 28,
+        "startChar": 22,
+        "endLine": 28,
+        "endChar": 40
+      },
+      "revId": "4bbd316a3ff60c99c71691768d3eb57bc1cec081",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f92304b1_1ec4dbd2",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-09-28T00:33:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b334193f_190092c4",
       "range": {
         "startLine": 28,
         "startChar": 22,
