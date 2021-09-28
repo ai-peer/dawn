@@ -16,6 +16,57 @@
       "message": "Thanks! I think that all the feedback should be addressed now.",
       "revId": "6cdd4890b2ec6b7fb4687e3eda276cdc72152044",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48d746bc_1976170b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T19:44:17Z",
+      "side": 1,
+      "message": "still LGTM - couple more nits",
+      "revId": "6cdd4890b2ec6b7fb4687e3eda276cdc72152044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c449f50_01003bfd",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T19:44:17Z",
+      "side": 1,
+      "message": "nit: this is only sort of a full sentence. maybe \"Query index %u of %s is written to twice in the render pass.\" ?",
+      "revId": "6cdd4890b2ec6b7fb4687e3eda276cdc72152044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6c5df7a_4e1d48da",
+        "filename": "src/dawn_native/RenderPassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-28T19:44:17Z",
+      "side": 1,
+      "message": "\"isn\u0027t ended at the end\" sounds funny to me:\nMaybe, \"Render pass %s ended with incomplete occlusion query %u of %s\" ?",
+      "revId": "6cdd4890b2ec6b7fb4687e3eda276cdc72152044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
