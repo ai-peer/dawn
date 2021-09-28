@@ -33,6 +33,24 @@
       "message": "Do we need visibility annotations on the library so that only the correct symbols are exported?",
       "revId": "ec535a262ee3804e418529dfefacae02239f5b68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fa389a8_600c8958",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T18:53:49Z",
+      "side": 1,
+      "message": "Antonio is working on build rules. We could restrict visibility to just the main symbol. I consider that an optimization.",
+      "parentUuid": "345805a7_3e25fcff",
+      "revId": "ec535a262ee3804e418529dfefacae02239f5b68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
