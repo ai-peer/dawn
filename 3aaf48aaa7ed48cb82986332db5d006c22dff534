@@ -47,6 +47,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3198f12f_b97799e4",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:31:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a79a2eb0_f82985c4",
+      "range": {
+        "startLine": 77,
+        "startChar": 0,
+        "endLine": 77,
+        "endChar": 58
+      },
+      "revId": "3aaf48aaa7ed48cb82986332db5d006c22dff534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0e1b018_f7484434",
