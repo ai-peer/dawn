@@ -119,6 +119,42 @@
       "parentUuid": "65448cf1_0c7f15fe",
       "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f62f30c_035e3f83",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-28T15:55:23Z",
+      "side": 1,
+      "message": "Not sure why this came through as two different comments.",
+      "parentUuid": "0aa00384_fc29c9df",
+      "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "564cd473_da6a6286",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-28T15:55:23Z",
+      "side": 1,
+      "message": "Awesome, thanks for the explanation!",
+      "parentUuid": "2f2373df_53e17f63",
+      "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
