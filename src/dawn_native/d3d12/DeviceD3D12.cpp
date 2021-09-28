@@ -162,6 +162,10 @@ namespace dawn_native { namespace d3d12 {
         // device initialization to call NextSerial
         DAWN_TRY(NextSerial());
 
+        // The environment can only use Mesa when it's available. Override the decision if it is not
+        // applicable.
+        DAWN_TRY(ApplyUseMesaToggle());
+
         // The environment can only use DXC when it's available. Override the decision if it is not
         // applicable.
         DAWN_TRY(ApplyUseDxcToggle());
@@ -200,8 +204,22 @@ namespace dawn_native { namespace d3d12 {
         return ToBackend(GetAdapter())->GetBackend()->GetFactory();
     }
 
+    MaybeError Device::ApplyUseMesaToggle() {
+        if (GetDeviceInfo().shaderModel < 60 ||
+            !ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsSPIRVToDXILAvailable()) {
+            ForceSetToggle(Toggle::UseMesa, false);
+        }
+
+        if (IsToggleEnabled(Toggle::UseMesa)) {
+            DAWN_TRY(ToBackend(GetAdapter())->GetBackend()->EnsureDxcValidator());
+        }
+
+        return {};
+    }
+
     MaybeError Device::ApplyUseDxcToggle() {
-        if (!ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCAvailable()) {
+        if (GetDeviceInfo().shaderModel < 60 ||
+            !ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCAvailable()) {
             ForceSetToggle(Toggle::UseDXC, false);
         } else if (IsExtensionEnabled(Extension::ShaderFloat16)) {
             // Currently we can only use DXC to compile HLSL shaders using float16.
