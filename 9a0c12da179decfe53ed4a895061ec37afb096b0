@@ -84,6 +84,24 @@
       "message": "It\u0027s not clear that this fixes the problem? ValidateRenderPassDescriptor doesn\u0027t check if any other passes are already active, so this will still hit the same ASSERT, unless I\u0027m missing something?",
       "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2373df_53e17f63",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-28T15:53:06Z",
+      "side": 1,
+      "message": "This is checked in TryEncode: it checks that \"this\" is the current encoder.",
+      "parentUuid": "65448cf1_0c7f15fe",
+      "revId": "9a0c12da179decfe53ed4a895061ec37afb096b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
