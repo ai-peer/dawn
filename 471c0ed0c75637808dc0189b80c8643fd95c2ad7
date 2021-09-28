@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38179f3d_1ca1ce8e",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:13:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec83dda0_e286d706",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "defb721e_d3bf3651",
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Oh, that change of style guide is unfortunate. It is weird that it went the direction of less clarity.",
       "parentUuid": "0f84bfc9_515cc16c",
+      "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50693f99_d7ad6e0f",
+        "filename": "src/dawn_node/binding/GPURenderPassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-28T09:13:27Z",
+      "side": 1,
+      "message": "I really think it depends on your matter of opinion. You expect a pointer to mean output, I expect it to mean nullability.",
+      "parentUuid": "c9393dec_762e26c3",
       "revId": "471c0ed0c75637808dc0189b80c8643fd95c2ad7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
