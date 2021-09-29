@@ -1521,6 +1521,10 @@ namespace dawn_native {
         }
     }
 
+    const CombinedLimits& DeviceBase::GetLimits() const {
+        return mLimits;
+    }
+
     AsyncTaskManager* DeviceBase::GetAsyncTaskManager() const {
         return mAsyncTaskManager.get();
     }
