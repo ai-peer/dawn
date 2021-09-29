@@ -51,6 +51,24 @@
       "message": "I think we should reject the promise if JS asks for a non-existent extension. I\u0027m not sure Blink handles this correctly though.",
       "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b5475b1_1745a5f9",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-29T12:11:33Z",
+      "side": 1,
+      "message": "The interop layer will convert the string to the enum. If there\u0027s no enum to match against, that\u0027s an interop exception that\u0027s already thrown.",
+      "parentUuid": "768f4975_37291258",
+      "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
