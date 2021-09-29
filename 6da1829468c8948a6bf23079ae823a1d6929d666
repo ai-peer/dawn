@@ -68,6 +68,24 @@
       "parentUuid": "4374a18a_574be26d",
       "revId": "6da1829468c8948a6bf23079ae823a1d6929d666",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "884b266b_f4bf13a4",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-29T23:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efbebd21_7efeb408",
+      "revId": "6da1829468c8948a6bf23079ae823a1d6929d666",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
