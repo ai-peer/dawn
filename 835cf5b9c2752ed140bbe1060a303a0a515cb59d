@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f539f63e_525b67ed",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4429d6d5_2fa712e5",
+      "range": {
+        "startLine": 56,
+        "startChar": 65,
+        "endLine": 56,
+        "endChar": 71
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73e04c14_c8adc0fd",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-09-29T22:13:02Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 67,
+        "startChar": 65,
+        "endLine": 67,
+        "endChar": 71
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5866396_3808a5c3",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73e04c14_c8adc0fd",
       "range": {
         "startLine": 67,
         "startChar": 65,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe13098b_fe6af484",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Added conversion functions to the top of this file. Falls under the same bucket as the issue in Shrek\u0027s CL about \"is there a better place to put them?\", but this at least gets them formatted now.",
+      "parentUuid": "abfbe179_7e01e428",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b58d71b0_365029dc",
@@ -98,6 +164,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "262f7110_3ab61cf6",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b58d71b0_365029dc",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e0434f4_762c8f01",
@@ -111,6 +195,30 @@
       "writtenOn": "2021-09-29T22:13:02Z",
       "side": 1,
       "message": "nit Maybe validating the vertex stage (with module %s entrypoint %s)? We are validating more than the module.Not sure what the right wording is",
+      "range": {
+        "startLine": 126,
+        "startChar": 17,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665a170c_9bb25930",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e0434f4_762c8f01",
       "range": {
         "startLine": 126,
         "startChar": 17,
@@ -144,6 +252,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a44bc2d_9c1d0253",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc974d8c_797e0bb4",
+      "range": {
+        "startLine": 270,
+        "startChar": 69,
+        "endLine": 270,
+        "endChar": 70
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba27fb2b_d2efabab",
@@ -157,6 +289,24 @@
       "writtenOn": "2021-09-29T22:13:02Z",
       "side": 1,
       "message": "ditto",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "107a5c59_6c4a7855",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:53:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba27fb2b_d2efabab",
       "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
