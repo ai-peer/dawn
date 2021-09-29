@@ -103,6 +103,24 @@
       "message": "nit: maybe explain why, otherwise this is just saying what the code does ^^",
       "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca757fb_3f5aa480",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T18:43:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8a4bb8c_c141b04c",
+      "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
