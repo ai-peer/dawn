@@ -53,6 +53,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a567f959_52fb6dd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-29T22:04:42Z",
+      "side": 1,
+      "message": "I agree we need to resolve how to build the project before we ship on-by-default. \n\nHowever, I do not think that decision should block this CL. We already have a similar toggle for DXC that allows people to test in that configuration with outside binaries. Mesa should be the same.",
+      "parentUuid": "dfb8aede_11c9d378",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8921aff_79111fed",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-29T22:04:42Z",
+      "side": 1,
+      "message": "I see this hardcoded number used in a couple of places. Please put it in a comment and describe why 60 was chosen.",
+      "range": {
+        "startLine": 208,
+        "startChar": 42,
+        "endLine": 208,
+        "endChar": 44
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc1e7090_7a3416e6",
@@ -71,6 +112,52 @@
         "startChar": 0,
         "endLine": 214,
         "endChar": 82
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec3e98b8_4b70adc9",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-29T22:04:42Z",
+      "side": 1,
+      "message": "The way the method is currently structured, it will return a valid remappedEntryPointName even when the method, itself, returns a failure.\n\nTo keep the failure cases consistent and avoid strings existing for longer than they should, please have TranslateTintProgram write to a local, remappedEntryPointName variable and std::move the local to the out parameter at the place where the entire method returns success.",
+      "range": {
+        "startLine": 459,
+        "startChar": 23,
+        "endLine": 459,
+        "endChar": 72
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57e01031_28ed9e79",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-29T22:04:42Z",
+      "side": 1,
+      "message": "Is there a plan to remove this \"hack\"?",
+      "range": {
+        "startLine": 553,
+        "startChar": 16,
+        "endLine": 553,
+        "endChar": 86
       },
       "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
