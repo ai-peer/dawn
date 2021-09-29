@@ -16,6 +16,24 @@
       "message": "Is this necessary? I think this should be done in the file that includes ShaderModule.h already so we don\u0027t need it.",
       "revId": "5005944a5efe7db32b26360519244e6dc628627b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "896d6bae_8027d814",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-29T18:24:09Z",
+      "side": 1,
+      "message": "Removed. (It\u0027s changed to Boolean so it\u0027s good anyway)",
+      "parentUuid": "ba75ca41_23b9b9f8",
+      "revId": "5005944a5efe7db32b26360519244e6dc628627b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
