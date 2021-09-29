@@ -862,6 +862,13 @@ const wgpu::AdapterProperties& DawnTestBase::GetAdapterProperties() const {
     return mParam.adapterProperties;
 }
 
+wgpu::SupportedLimits DawnTestBase::GetSupportedLimits() {
+    WGPUSupportedLimits supportedLimits;
+    supportedLimits.nextInChain = nullptr;
+    dawn_native::GetProcs().deviceGetLimits(backendDevice, &supportedLimits);
+    return *reinterpret_cast<wgpu::SupportedLimits*>(&supportedLimits);
+}
+
 bool DawnTestBase::SupportsExtensions(const std::vector<const char*>& extensions) {
     ASSERT(mBackendAdapter);
     std::set<std::string> supportedExtensionsSet;
