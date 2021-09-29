@@ -131,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "29f26463_6ec4f541",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T16:17:41Z",
+      "side": 1,
+      "message": "it might still be possible (or easier now with template args), but this is fine for now. I do think it reads much better when the context is above the function body, especially if it is large.",
+      "parentUuid": "959b607d_faca1a6e",
+      "range": {
+        "startLine": 684,
+        "startChar": 12,
+        "endLine": 684,
+        "endChar": 94
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "baafebaa_9b62dc2f",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 2

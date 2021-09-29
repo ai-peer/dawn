@@ -161,6 +161,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e17c8395_2b31a7c6",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T16:17:41Z",
+      "side": 1,
+      "message": "I don\u0027t think this was done for the draws. could we make all of these context strings match the method? like:\n- encoding dispatch(x, y, z)\n- encoding draw(vertexCount, instanceCount, firstVertex, firstInstance)\n- etc.",
+      "parentUuid": "e153245c_b0692ce7",
+      "range": {
+        "startLine": 104,
+        "startChar": 22,
+        "endLine": 104,
+        "endChar": 30
+      },
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "738b08ec_48d135d0",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 5
