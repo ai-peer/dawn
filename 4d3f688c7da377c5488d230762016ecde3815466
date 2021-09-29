@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "877e3164_119de8de",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-29T23:05:49Z",
+      "side": 1,
+      "message": "New knowledge acquired. (It\u0027d be nice to update into error.md as well)",
+      "parentUuid": "cf025fbc_257e227b",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43b9a408_504233ac",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 2
