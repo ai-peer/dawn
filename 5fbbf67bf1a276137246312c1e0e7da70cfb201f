@@ -34,6 +34,23 @@
       "parentUuid": "80bde4cf_1ab273b4",
       "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "768f4975_37291258",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T12:08:15Z",
+      "side": 1,
+      "message": "I think we should reject the promise if JS asks for a non-existent extension. I\u0027m not sure Blink handles this correctly though.",
+      "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
