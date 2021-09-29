@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "220a0aa2_8e9027ba",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 467,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-29T20:01:56Z",
+      "side": 1,
+      "message": "If there is no default value provided in the shader, then the user is required to override the value for any pipeline that uses that constant. So I believe that these should actually be validation errors. I think the same issue is present the validation tests.",
+      "range": {
+        "startLine": 464,
+        "startChar": 0,
+        "endLine": 467,
+        "endChar": 61
+      },
+      "revId": "e99ad765ae310769486f5a4aa1c1027d71fbf5a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
