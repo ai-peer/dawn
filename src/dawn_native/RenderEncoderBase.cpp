@@ -22,6 +22,7 @@
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/IndirectDrawValidationEncoder.h"
 #include "dawn_native/RenderPipeline.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -34,6 +35,9 @@ namespace dawn_native {
                                          EncodingContext* encodingContext,
                                          Ref<AttachmentState> attachmentState)
         : ProgrammablePassEncoder(device, encodingContext),
+          mMaxDrawCallsPerIndirectValidationBatch(
+              ComputeMaxDrawCallsPerIndirectValidationBatch(device->GetLimits())),
+          mMaxIndirectValidationBatchOffsetRange(0),
           mAttachmentState(std::move(attachmentState)),
           mDisableBaseVertex(device->IsToggleEnabled(Toggle::DisableBaseVertex)),
           mDisableBaseInstance(device->IsToggleEnabled(Toggle::DisableBaseInstance)) {
@@ -43,6 +47,9 @@ namespace dawn_native {
                                          EncodingContext* encodingContext,
                                          ErrorTag errorTag)
         : ProgrammablePassEncoder(device, encodingContext, errorTag),
+          mMaxDrawCallsPerIndirectValidationBatch(
+              ComputeMaxDrawCallsPerIndirectValidationBatch(device->GetLimits())),
+          mMaxIndirectValidationBatchOffsetRange(0),
           mDisableBaseVertex(device->IsToggleEnabled(Toggle::DisableBaseVertex)),
           mDisableBaseInstance(device->IsToggleEnabled(Toggle::DisableBaseInstance)) {
     }
@@ -170,6 +177,7 @@ namespace dawn_native {
             if (IsValidationEnabled()) {
                 cmd->indirectBufferLocation = BufferLocation::New();
                 mIndirectDrawMetadata.AddIndexedIndirectDraw(
+                    mMaxDrawCallsPerIndirectValidationBatch, mMaxIndirectValidationBatchOffsetRange,
                     mCommandBufferState.GetIndexFormat(), mCommandBufferState.GetIndexBufferSize(),
                     indirectBuffer, indirectOffset, cmd->indirectBufferLocation.Get());
             } else {

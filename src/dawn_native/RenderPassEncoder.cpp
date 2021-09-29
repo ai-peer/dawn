@@ -240,7 +240,9 @@ namespace dawn_native {
                 }
 
                 if (IsValidationEnabled()) {
-                    mIndirectDrawMetadata.AddBundle(renderBundles[i]);
+                    mIndirectDrawMetadata.AddBundle(mMaxDrawCallsPerIndirectValidationBatch,
+                                                    mMaxIndirectValidationBatchOffsetRange,
+                                                    renderBundles[i]);
                 }
             }
 

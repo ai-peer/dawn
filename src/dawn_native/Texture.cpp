@@ -174,19 +174,21 @@ namespace dawn_native {
             return {};
         }
 
-        MaybeError ValidateTextureSize(const TextureDescriptor* descriptor, const Format* format) {
+        MaybeError ValidateTextureSize(const DeviceBase* device,
+                                       const TextureDescriptor* descriptor,
+                                       const Format* format) {
             ASSERT(descriptor->size.width != 0 && descriptor->size.height != 0 &&
                    descriptor->size.depthOrArrayLayers != 0);
-
+            const CombinedLimits& limits = device->GetLimits();
             Extent3D maxExtent;
             switch (descriptor->dimension) {
                 case wgpu::TextureDimension::e2D:
-                    maxExtent = {kMaxTextureDimension2D, kMaxTextureDimension2D,
-                                 kMaxTextureArrayLayers};
+                    maxExtent = {limits.v1.maxTextureDimension2D, limits.v1.maxTextureDimension2D,
+                                 limits.v1.maxTextureArrayLayers};
                     break;
                 case wgpu::TextureDimension::e3D:
-                    maxExtent = {kMaxTextureDimension3D, kMaxTextureDimension3D,
-                                 kMaxTextureDimension3D};
+                    maxExtent = {limits.v1.maxTextureDimension3D, limits.v1.maxTextureDimension3D,
+                                 limits.v1.maxTextureDimension3D};
                     break;
                 case wgpu::TextureDimension::e1D:
                 default:
@@ -209,7 +211,6 @@ namespace dawn_native {
             if (Log2(maxMippedDimension) + 1 < descriptor->mipLevelCount) {
                 return DAWN_VALIDATION_ERROR("Texture has too many mip levels");
             }
-            ASSERT(descriptor->mipLevelCount <= kMaxTexture2DMipLevels);
 
             if (format->isCompressed) {
                 const TexelBlockInfo& blockInfo =
@@ -302,7 +303,7 @@ namespace dawn_native {
             return DAWN_VALIDATION_ERROR("Depth/stencil formats are valid for 2D textures only");
         }
 
-        DAWN_TRY(ValidateTextureSize(descriptor, format));
+        DAWN_TRY(ValidateTextureSize(device, descriptor, format));
 
         if (device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs) && format->HasStencil() &&
             descriptor->mipLevelCount > 1 &&
@@ -550,12 +551,7 @@ namespace dawn_native {
     uint32_t TextureBase::GetSubresourceIndex(uint32_t mipLevel,
                                               uint32_t arraySlice,
                                               Aspect aspect) const {
-        ASSERT(arraySlice <= kMaxTextureArrayLayers);
-        ASSERT(mipLevel <= kMaxTexture2DMipLevels);
         ASSERT(HasOneBit(aspect));
-        static_assert(
-            kMaxTexture2DMipLevels <= std::numeric_limits<uint32_t>::max() / kMaxTextureArrayLayers,
-            "texture size overflows uint32_t");
         return mipLevel +
                GetNumMipLevels() * (arraySlice + GetArrayLayers() * GetAspectIndex(aspect));
     }
