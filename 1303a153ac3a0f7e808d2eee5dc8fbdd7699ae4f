@@ -16,6 +16,23 @@
       "message": "More error-y goodness for your reviewing pleasure! Thank you so much for helping iterate on these!",
       "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d1ff2c8_06f9afa8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T16:44:18Z",
+      "side": 1,
+      "message": "overall LGTM - high level q: what\u0027s the plan for device-level debug groups? Will we put them in the same stack or differentiate the encoder/device stacks?",
+      "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
