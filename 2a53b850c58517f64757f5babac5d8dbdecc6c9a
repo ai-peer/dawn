@@ -183,6 +183,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fbe671d_589fcca9",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T17:10:33Z",
+      "side": 1,
+      "message": "Done. I\u0027ve updated every top level call to use the \"Method(arg, arg, arg)\" formatting. It feels a little overly verbose at times but at least it\u0027s easy to keep consistent.",
+      "parentUuid": "e17c8395_2b31a7c6",
+      "range": {
+        "startLine": 104,
+        "startChar": 22,
+        "endLine": 104,
+        "endChar": 30
+      },
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "738b08ec_48d135d0",
