@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a0ce1e6_082b4fa2",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-09-29T10:33:42Z",
+      "side": 1,
+      "message": "Done. Except I went with crbug.com/dawn/1130, as this matches the other dawn_node TODOs.",
+      "parentUuid": "52e709ee_ce19825f",
+      "revId": "44a12c888f48e584d1bec43c906984f66f8144d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a5d68e8_2a40e930",
