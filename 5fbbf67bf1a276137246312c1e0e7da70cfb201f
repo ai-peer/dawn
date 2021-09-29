@@ -69,6 +69,24 @@
       "parentUuid": "768f4975_37291258",
       "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2db36efd_ea54a789",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:02:49Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6b5475b1_1745a5f9",
+      "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
