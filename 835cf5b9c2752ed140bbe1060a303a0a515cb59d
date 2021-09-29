@@ -1,0 +1,164 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "046a2d6c_9b74ff90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4429d6d5_2fa712e5",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "nit: exceeds, but also maybe \"doesn\u0027t fit\" to explain that the size is important?",
+      "range": {
+        "startLine": 56,
+        "startChar": 65,
+        "endLine": 56,
+        "endChar": 71
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e04c14_c8adc0fd",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 67,
+        "startChar": 65,
+        "endLine": 67,
+        "endChar": 71
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abfbe179_7e01e428",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "Seems you\u0027d need special enum to const char* conversion methods.",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58d71b0_365029dc",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "Maybe print the attribute location anyway?",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e0434f4_762c8f01",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "nit Maybe validating the vertex stage (with module %s entrypoint %s)? We are validating more than the module.Not sure what the right wording is",
+      "range": {
+        "startLine": 126,
+        "startChar": 17,
+        "endLine": 126,
+        "endChar": 51
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc974d8c_797e0bb4",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "nit: fragment module output tupe?",
+      "range": {
+        "startLine": 270,
+        "startChar": 69,
+        "endLine": 270,
+        "endChar": 70
+      },
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba27fb2b_d2efabab",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T22:13:02Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "835cf5b9c2752ed140bbe1060a303a0a515cb59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
