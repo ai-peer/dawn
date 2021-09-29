@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d1c86362_53e466ad",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-29T20:14:03Z",
+      "side": 1,
+      "message": "This only assigns `sizeof(bool)` bytes of data, which leaves the rest of the data uninitialized. Since Vulkan requires the size of the data for a boolean spec constant to be 32-bits, you could just change the type of SpecializationDataEntry::b to be a 32-bit integer to fix this.",
+      "revId": "e99ad765ae310769486f5a4aa1c1027d71fbf5a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "220a0aa2_8e9027ba",
         "filename": "src/tests/end2end/ShaderTests.cpp",
         "patchSetId": 11
