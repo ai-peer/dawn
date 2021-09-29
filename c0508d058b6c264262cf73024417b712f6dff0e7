@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e649cea1_13c3a66e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-29T21:19:29Z",
+      "side": 1,
+      "message": "Comments from testing this locally",
+      "revId": "c0508d058b6c264262cf73024417b712f6dff0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15d64478_7db4c40c",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 23
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-29T21:19:29Z",
+      "side": 1,
+      "message": "Should have an \u003d\n\n -DDAWN_BUILD_NODE_BINDINGS\u003d1\n\nand actually then it asks me to add -DDAWN_ENABLE_PIC\u003d1 too.",
+      "revId": "c0508d058b6c264262cf73024417b712f6dff0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f45e0ce9_c55e5e3c",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 23
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-29T21:19:29Z",
+      "side": 1,
+      "message": "Some work can be saved with\n\n ninja dawn.node",
+      "revId": "c0508d058b6c264262cf73024417b712f6dff0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49354e8d_7d86a25e",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-29T21:19:29Z",
+      "side": 1,
+      "message": "For posterity, here\u0027s how I got it working on Mac:\n\n # Starting in dawn root\n cmake-js build -d . -O ./outjs  # can stop this once it starts building, I think\n cd outjs\n cmake .. -DDAWN_BUILD_NODE_BINDINGS\u003d1 -DDAWN_ENABLE_PIC\u003d1  # to change the defines\n cmake-js build -d .. -O . -T dawn.node",
+      "revId": "c0508d058b6c264262cf73024417b712f6dff0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
