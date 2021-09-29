@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "352da0bf_078379e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:11:57Z",
+      "side": 1,
+      "message": "Sorry I don\u0027t feel like I can usefully review this because I don\u0027t know Go nor the CTS\u0027s interface. Maybe Kai or Austin can review from the CTS side?",
+      "revId": "ac601c4732af9ebb6402e36c62a4f19a0284af59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
