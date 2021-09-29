@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "3be79e043f3c8768f7db5cfe953054b85d6d8b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc9a3e10_08c5b241",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-29T08:15:20Z",
+      "side": 1,
+      "message": "+2\u0027d without auto submit, so you can decide whether to wait or not for Jiawei\u0027s review.",
+      "revId": "3be79e043f3c8768f7db5cfe953054b85d6d8b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
