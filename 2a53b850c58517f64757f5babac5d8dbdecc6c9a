@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a23b58c6_01dc4e33",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:18:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e327a7c_2aabf26e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 934,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:18:18Z",
+      "side": 1,
+      "message": "nit: to?",
+      "range": {
+        "startLine": 934,
+        "startChar": 34,
+        "endLine": 934,
+        "endChar": 38
+      },
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a3695b6_45f5ecee",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:18:18Z",
+      "side": 1,
+      "message": "to",
+      "range": {
+        "startLine": 955,
+        "startChar": 37,
+        "endLine": 955,
+        "endChar": 41
+      },
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c3bfe22_47a066b4",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:18:18Z",
+      "side": 1,
+      "message": "maybe we could have the arguments to the dispatch to help identifu which one it is. Same for draws and indirect versions",
+      "range": {
+        "startLine": 104,
+        "startChar": 22,
+        "endLine": 104,
+        "endChar": 30
+      },
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "738b08ec_48d135d0",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:18:18Z",
+      "side": 1,
+      "message": "Why the TODO?",
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6a8204f_fcf2577b",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T13:18:18Z",
+      "side": 1,
+      "message": "nit: to %s",
+      "revId": "2a53b850c58517f64757f5babac5d8dbdecc6c9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
