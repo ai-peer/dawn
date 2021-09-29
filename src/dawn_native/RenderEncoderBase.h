@@ -66,6 +66,8 @@ namespace dawn_native {
         CommandBufferStateTracker mCommandBufferState;
         RenderPassResourceUsageTracker mUsageTracker;
         IndirectDrawMetadata mIndirectDrawMetadata;
+        const uint32_t mMaxDrawCallsPerIndirectValidationBatch;
+        const uint32_t mMaxIndirectValidationBatchOffsetRange;
 
       private:
         Ref<AttachmentState> mAttachmentState;
