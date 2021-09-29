@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f21c4196_b456bbb7",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T21:51:55Z",
+      "side": 1,
+      "message": "I wonder if we should have a common place to put stuff like this, we might reuse it between multiple files.\n\nAlso it can return just a const char*, no need to allocate.",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b9a408_504233ac",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T21:51:55Z",
+      "side": 1,
+      "message": "nit: (%s) is usually to denote what a noun group previously means. So I\u0027d suggest rewording either:\n\n Entry point \"%s\" isn\u0027t for the %s stage but for the %s stage.\n \nor maybe\n \n The stage (%s) of the entry point \"%s\" isn\u0027t the expected one (%s)",
+      "range": {
+        "startLine": 57,
+        "startChar": 56,
+        "endLine": 57,
+        "endChar": 81
+      },
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43087aad_3b942833",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 2
