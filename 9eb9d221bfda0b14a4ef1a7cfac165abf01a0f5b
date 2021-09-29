@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6d069f9_f5ce33f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-29T12:12:07Z",
+      "side": 1,
+      "message": "Clearly that binary shouldn\u0027t have been submitted. Removing...",
+      "revId": "9eb9d221bfda0b14a4ef1a7cfac165abf01a0f5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
