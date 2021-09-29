@@ -23,6 +23,21 @@
 
 namespace dawn_native {
 
+    namespace {
+        std::string GetSingleShaderStageString(SingleShaderStage stage) {
+            switch (stage) {
+                case SingleShaderStage::Compute:
+                    return "Compute";
+                case SingleShaderStage::Vertex:
+                    return "Vertex";
+                case SingleShaderStage::Fragment:
+                    return "Fragment";
+                default:
+                    UNREACHABLE();
+            }
+        }
+    }  // namespace
+
     MaybeError ValidateProgrammableStage(DeviceBase* device,
                                          const ShaderModuleBase* module,
                                          const std::string& entryPoint,
@@ -32,15 +47,16 @@ namespace dawn_native {
                                          SingleShaderStage stage) {
         DAWN_TRY(device->ValidateObject(module));
 
-        if (!module->HasEntryPoint(entryPoint)) {
-            return DAWN_VALIDATION_ERROR("Entry point doesn't exist in the module");
-        }
+        DAWN_INVALID_IF(!module->HasEntryPoint(entryPoint),
+                        "Entry point (%s) doesn't exist in the shader module %s.", entryPoint,
+                        module);
 
         const EntryPointMetadata& metadata = module->GetEntryPoint(entryPoint);
 
-        if (metadata.stage != stage) {
-            return DAWN_VALIDATION_ERROR("Entry point isn't for the correct stage");
-        }
+        DAWN_INVALID_IF(metadata.stage != stage,
+                        "Entry point (%s) isn't for the (%s) stage, but for (%s) stage.",
+                        entryPoint, GetSingleShaderStageString(stage),
+                        GetSingleShaderStageString(metadata.stage));
 
         if (layout != nullptr) {
             DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, layout));
@@ -140,9 +156,8 @@ namespace dawn_native {
         DAWN_TRY(GetDevice()->ValidateIsAlive());
         DAWN_TRY(GetDevice()->ValidateObject(this));
         DAWN_TRY(GetDevice()->ValidateObject(mLayout.Get()));
-        if (groupIndex >= kMaxBindGroups) {
-            return DAWN_VALIDATION_ERROR("Bind group layout index out of bounds");
-        }
+        DAWN_INVALID_IF("Bind group layout index (%u) is out of bounds of (%u).", groupIndex,
+                        kMaxBindGroups);
         return {};
     }
 
