@@ -33,6 +33,58 @@
       "message": "overall LGTM - high level q: what\u0027s the plan for device-level debug groups? Will we put them in the same stack or differentiate the encoder/device stacks?",
       "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdfdd462_5d7c4d65",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T17:13:22Z",
+      "side": 1,
+      "message": "There are no device level debug groups no?",
+      "parentUuid": "0d1ff2c8_06f9afa8",
+      "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ca28750_7ad940c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T17:13:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a4bb8c_c141b04c",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T17:13:22Z",
+      "side": 1,
+      "message": "nit: maybe explain why, otherwise this is just saying what the code does ^^",
+      "revId": "1303a153ac3a0f7e808d2eee5dc8fbdd7699ae4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
