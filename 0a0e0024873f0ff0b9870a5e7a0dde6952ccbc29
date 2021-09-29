@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a65527b_ed403938",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T00:02:46Z",
+      "side": 1,
+      "message": "Made moot by the move away from macros.",
+      "parentUuid": "669d5a2d_a6427b7c",
+      "range": {
+        "startLine": 597,
+        "startChar": 12,
+        "endLine": 597,
+        "endChar": 31
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5069baf8_79ab8938",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-09-25T00:06:56Z",
       "side": 1,
       "message": "it would be a bunch of macro magic hacks, but it might be worth it for readability if we can change this so that the format string and args come first, followed by the body. same for the other macros.\n\nit means we have to do like a thing where we extract the last argument in __VA_ARGS__ and move it to be before the other arguments.\n\nCan be a follow-up though.",
+      "range": {
+        "startLine": 684,
+        "startChar": 12,
+        "endLine": 684,
+        "endChar": 94
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "959b607d_faca1a6e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 684,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T00:02:46Z",
+      "side": 1,
+      "message": "Haven\u0027t tried this yet, though I feel like it\u0027s probably made more difficult by the move away from macros. I don\u0027t think it reads too badly as-is, though.",
+      "parentUuid": "5069baf8_79ab8938",
       "range": {
         "startLine": 684,
         "startChar": 12,
@@ -106,6 +154,54 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f5c590ee_f02e4cd9",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T00:02:46Z",
+      "side": 1,
+      "message": "Ack, though it\u0027s an open question for me how much of each methods args we should echo in the context.",
+      "parentUuid": "baafebaa_9b62dc2f",
+      "range": {
+        "startLine": 170,
+        "startChar": 45,
+        "endLine": 171,
+        "endChar": 75
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e33cee7_06ce645e",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T00:02:46Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "baafebaa_9b62dc2f",
+      "range": {
+        "startLine": 170,
+        "startChar": 45,
+        "endLine": 171,
+        "endChar": 75
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac8af0aa_da67b6ac",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 2
@@ -117,6 +213,30 @@
       "writtenOn": "2021-09-27T16:24:10Z",
       "side": 1,
       "message": "We could have an overloaded template for ConsumedError that take the context and uses absl::FormatUntyped https://github.com/abseil/abseil-cpp/blob/ce42de10fbea616379826e91c7c23c16bffe6e61/absl/strings/str_format.h#L522",
+      "range": {
+        "startLine": 961,
+        "startChar": 12,
+        "endLine": 961,
+        "endChar": 25
+      },
+      "revId": "0a0e0024873f0ff0b9870a5e7a0dde6952ccbc29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adbdc51c_974729fe",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T00:02:46Z",
+      "side": 1,
+      "message": "Made this change and removed all the new macros. Seems to be working well!",
+      "parentUuid": "ac8af0aa_da67b6ac",
       "range": {
         "startLine": 961,
         "startChar": 12,
