@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80bde4cf_1ab273b4",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T12:06:32Z",
+      "side": 1,
+      "message": "nit: leftover debug code",
+      "revId": "5fbbf67bf1a276137246312c1e0e7da70cfb201f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
