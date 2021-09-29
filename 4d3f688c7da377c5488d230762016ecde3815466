@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec7b7c45_b8cdb6ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T21:39:54Z",
+      "side": 1,
+      "message": "LGTM with one nit.",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43087aad_3b942833",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T21:39:54Z",
+      "side": 1,
+      "message": "Can this message specify what the second value represents? Something like:\n\"Bind group layout index (%u) exceeds the maximum number of bind groups (%u).\"",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
