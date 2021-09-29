@@ -445,6 +445,21 @@ namespace dawn_native {
                 encoder, destination, availabilityBuffer.Get(), paramsBuffer.Get());
         }
 
+        bool isReadOnlyDepthStencilAttachment(
+            const RenderPassDepthStencilAttachment* depthStencilAttachment) {
+            DAWN_ASSERT(depthStencilAttachment != nullptr);
+            Aspect aspects = depthStencilAttachment->view->GetAspects();
+            DAWN_ASSERT(aspects & (Aspect::Depth | Aspect::Stencil));
+
+            if ((aspects & Aspect::Depth) && !depthStencilAttachment->depthReadOnly) {
+                return false;
+            }
+            if (aspects & Aspect::Stencil && !depthStencilAttachment->stencilReadOnly) {
+                return false;
+            }
+            return true;
+        }
+
     }  // namespace
 
     CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
@@ -570,7 +585,11 @@ namespace dawn_native {
                     cmd->depthStencilAttachment.stencilStoreOp =
                         descriptor->depthStencilAttachment->stencilStoreOp;
 
-                    usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
+                    if (isReadOnlyDepthStencilAttachment(descriptor->depthStencilAttachment)) {
+                        usageTracker.TextureViewUsedAs(view, kReadOnlyRenderAttachment);
+                    } else {
+                        usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
+                    }
                 }
 
                 cmd->width = width;
