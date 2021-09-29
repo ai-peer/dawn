@@ -16,6 +16,87 @@
       "message": "I think this CL is now ready for more thorough review, given that all precursors are merged.",
       "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "740c71cf_3cf47515",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T17:57:10Z",
+      "side": 1,
+      "message": "could you follow this process to add it to third_party?\nhttps://chromium.googlesource.com/chromium/src.git/+/HEAD/docs/adding_to_third_party.md",
+      "parentUuid": "b97913e7_2ae2f95e",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfb8aede_11c9d378",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T17:57:10Z",
+      "side": 1,
+      "message": "looks okay, but we really need to first resolve how we\u0027re going to build this project\n",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc1e7090_7a3416e6",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T17:57:10Z",
+      "side": 1,
+      "message": "nit: could also ForceSetToggle to false if this is not available",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 82
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b192338e_b36eb3f3",
+        "filename": "third_party/mesa/BUILD.gn",
+        "patchSetId": 30
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-29T17:57:10Z",
+      "side": 1,
+      "message": "2021",
+      "range": {
+        "startLine": 1,
+        "startChar": 12,
+        "endLine": 1,
+        "endChar": 16
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
