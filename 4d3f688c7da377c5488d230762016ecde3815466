@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "291c3ab9_3a499b47",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-29T22:38:31Z",
+      "side": 1,
+      "message": "Hmm... this kind of enum class could be separated in different files and some nested inside other classes. Not sure we want to put them into a header with them forward declare, and include them again in the .cpp.\nIs there a better way to organize this?",
+      "parentUuid": "f21c4196_b456bbb7",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43b9a408_504233ac",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 2
@@ -48,6 +66,30 @@
       "writtenOn": "2021-09-29T21:51:55Z",
       "side": 1,
       "message": "nit: (%s) is usually to denote what a noun group previously means. So I\u0027d suggest rewording either:\n\n Entry point \"%s\" isn\u0027t for the %s stage but for the %s stage.\n \nor maybe\n \n The stage (%s) of the entry point \"%s\" isn\u0027t the expected one (%s)",
+      "range": {
+        "startLine": 57,
+        "startChar": 56,
+        "endLine": 57,
+        "endChar": 81
+      },
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7e3789d_3f9d8ebc",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-29T22:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43b9a408_504233ac",
       "range": {
         "startLine": 57,
         "startChar": 56,
@@ -71,6 +113,24 @@
       "writtenOn": "2021-09-29T21:39:54Z",
       "side": 1,
       "message": "Can this message specify what the second value represents? Something like:\n\"Bind group layout index (%u) exceeds the maximum number of bind groups (%u).\"",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc1a895_8981f554",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-29T22:38:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43087aad_3b942833",
       "revId": "4d3f688c7da377c5488d230762016ecde3815466",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
