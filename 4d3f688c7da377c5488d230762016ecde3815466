@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cf025fbc_257e227b",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T22:43:06Z",
+      "side": 1,
+      "message": "Doesn\u0027t solve the \"Where to put them\" question, but one thing that can be done here to make things a bit nicer at the error call site is to do this as an AbslFormatConvert method, which the string formatting will pick up automatically. See the methods at the top of https://dawn-review.googlesource.com/c/dawn/+/65484 as an example.",
+      "parentUuid": "291c3ab9_3a499b47",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43b9a408_504233ac",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 2
