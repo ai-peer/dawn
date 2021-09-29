@@ -33,6 +33,23 @@
       "message": "+2\u0027d without auto submit, so you can decide whether to wait or not for Jiawei\u0027s review.",
       "revId": "3be79e043f3c8768f7db5cfe953054b85d6d8b95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7478fa16_34109e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T08:15:25Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "3be79e043f3c8768f7db5cfe953054b85d6d8b95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
