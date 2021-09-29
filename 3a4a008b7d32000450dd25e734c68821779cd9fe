@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3d60e70_2845068c",
+        "filename": "src/dawn_node/binding/GPUDevice.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-29T06:43:02Z",
+      "side": 1,
+      "message": "Sounds good",
+      "parentUuid": "035e6bdf_299c04aa",
+      "revId": "3a4a008b7d32000450dd25e734c68821779cd9fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c6e5ad_c00fe7aa",
