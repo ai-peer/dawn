@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a4a6397_b5c0b301",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-29T23:14:16Z",
+      "side": 1,
+      "message": "Agreed! I need to do several updates to that file now.",
+      "parentUuid": "877e3164_119de8de",
+      "revId": "4d3f688c7da377c5488d230762016ecde3815466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43b9a408_504233ac",
         "filename": "src/dawn_native/Pipeline.cpp",
         "patchSetId": 2
