@@ -16,6 +16,108 @@
       "message": "PTAL!",
       "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e35a4f7_ca3fe342",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:20:48Z",
+      "side": 1,
+      "message": "Looking good! Thanks!",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c09060_8e4634a2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:20:48Z",
+      "side": 1,
+      "message": "nit: but is not a subset",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c92c2b3_0547e66a",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:20:48Z",
+      "side": 1,
+      "message": "nit: but is not a subset",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c71905_9a824865",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:20:48Z",
+      "side": 1,
+      "message": "This is where the compile-time checking would be nice. You need to include `this` as the first arg after the format string to satisfy the first %s.\n\nFor what it\u0027s worth, at runtime the behavior here would be that the formatting would fail because it was provided too few args and the context would silently be discarded. We can make it something more disruptive if we think the tests will catch these cases consistently enough, but I\u0027m wary of breaking users code with an errant string.",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb698114_0cee5380",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:20:48Z",
+      "side": 1,
+      "message": "You can use DAWN_FORMAT_VALIDATION_ERROR here to include the buffer object.\n\n\"%s is already mapped.\"",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a05c0872_9fc63b7b",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:20:48Z",
+      "side": 1,
+      "message": "Ditto to using DAWN_FORMAT_VALIDATION_ERROR here.",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
