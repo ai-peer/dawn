@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbf64e28_0ffff68c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T08:11:36Z",
+      "side": 1,
+      "message": "nit: it\u0027s not a bug but part of the implementation of the feature 😊\n\nMaybe \"Track read-only depth-stencil attachment as read-only usage\"",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ebbcf926_ca274034",
@@ -14,6 +31,86 @@
       "writtenOn": "2021-09-30T06:05:41Z",
       "side": 1,
       "message": "PTAL. Thanks.\n\nThe validation rule in WebGPU spec about resource usage for this (The same textureview as both SampledTexture and ReadOnlyRenderAttachment in a single render pass) is already there.",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfd1b05c_3b90b4ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T08:11:36Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f83a8199_68b89ff2",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T08:11:36Z",
+      "side": 1,
+      "message": "u-nit: IsReadOnlyDepthStencilAttachment (capital I)",
+      "range": {
+        "startLine": 448,
+        "startChar": 13,
+        "endLine": 448,
+        "endChar": 45
+      },
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd324bd9_9ff2d390",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T08:11:36Z",
+      "side": 1,
+      "message": "nit: Did you mean that the aspects should be a subset of Depth|Stencil? I don\u0027t think this checks that. You can use IsSubset from Math.h",
+      "range": {
+        "startLine": 452,
+        "startChar": 24,
+        "endLine": 452,
+        "endChar": 67
+      },
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0810f66e_fc419574",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T08:11:36Z",
+      "side": 1,
+      "message": "Since this is starting to implement the semantics of depthReadOnly/stencilReadOnly but the code isn\u0027t complete in the backends, I think we should mark this as an unsafe API until it is completed (otherwise developers will be able to cause memory barriers issues in the backends)",
       "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
