@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2566904a_88ad0806",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:25:20Z",
+      "side": 1,
+      "message": "srcFormat-\u003edstFormat",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f75a9d2d_16277a7c",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:25:20Z",
+      "side": 1,
+      "message": "For these kinds of scenarios I\u0027ve been formatting them like:\n\n\"The source texture sample count (%u) or the destination texture sample count (%u) is not 1.\"\n\nFeedback welcome if you think that\u0027s too verbose, though.",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
