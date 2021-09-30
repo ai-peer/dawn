@@ -86,6 +86,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "99348bbc_a78510c1",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:13:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1c96d19_209e9680",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1c92c2b3_0547e66a",
@@ -103,6 +121,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "192767db_c93ab73d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:13:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1c92c2b3_0547e66a",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b4ddf48_f4152c30",
@@ -116,6 +152,24 @@
       "writtenOn": "2021-09-30T15:23:25Z",
       "side": 1,
       "message": "DAWN_FORMAT_VALIDATION_ERROR",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10415fac_891282d3",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:13:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b4ddf48_f4152c30",
       "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +193,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a18a9c5_c65194ad",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:13:46Z",
+      "side": 1,
+      "message": "Maybe we can add an ASSERT so that it would break only in debug builds?\n\nAlso fixed the issue.",
+      "parentUuid": "13c71905_9a824865",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bb698114_0cee5380",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 1
@@ -150,6 +222,24 @@
       "writtenOn": "2021-09-30T15:20:48Z",
       "side": 1,
       "message": "You can use DAWN_FORMAT_VALIDATION_ERROR here to include the buffer object.\n\n\"%s is already mapped.\"",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ee1b91f_04a65cea",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:13:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb698114_0cee5380",
       "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +257,24 @@
       "writtenOn": "2021-09-30T15:20:48Z",
       "side": 1,
       "message": "Ditto to using DAWN_FORMAT_VALIDATION_ERROR here.",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6abaea_b1f3ee06",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:13:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a05c0872_9fc63b7b",
       "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
