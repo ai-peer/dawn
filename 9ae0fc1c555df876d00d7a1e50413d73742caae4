@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d73ec3_dd232cf6",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4107d10_b9a839bc",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51563b50_cc80718d",
@@ -109,6 +127,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30abfdb7_614ff0ae",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b914f28_8733c585",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345be048_370dd7c0",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51563b50_cc80718d",
+      "range": {
+        "startLine": 39,
+        "startChar": 57,
+        "endLine": 39,
+        "endChar": 80
+      },
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ac13b5c2_a29637df",
@@ -143,6 +203,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d047ae4_acd38d83",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9fbfaec_0dd87c55",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4175e786_56d65731",
@@ -156,6 +234,24 @@
       "writtenOn": "2021-09-30T15:38:25Z",
       "side": 1,
       "message": "\"The external texture plane (%s) sample count (%u) is not zero.\" ?",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "516c687f_7af06e4a",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4175e786_56d65731",
       "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -190,6 +286,24 @@
       "writtenOn": "2021-09-30T15:38:25Z",
       "side": 1,
       "message": "Nit: period at the end.",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eaeab68_f5a3144e",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:07:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e11776b3_f0df8ed4",
       "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
