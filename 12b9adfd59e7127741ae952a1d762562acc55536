@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a28958_a6c086b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T18:41:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "12b9adfd59e7127741ae952a1d762562acc55536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b09aa567_490b6f7f",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T18:41:19Z",
+      "side": 1,
+      "message": "should it be napi_static ?\n\nHeader says:\n// Used with napi_define_class to distinguish static properties\n// from instance properties. Ignored by napi_define_properties.\n  \nand that napi_default_jsproperty is for object properties (but this is a class)",
+      "range": {
+        "startLine": 157,
+        "startChar": 71,
+        "endLine": 157,
+        "endChar": 94
+      },
+      "revId": "12b9adfd59e7127741ae952a1d762562acc55536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
