@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80914a67_65f0a1f4",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-30T23:08:45Z",
+      "side": 1,
+      "message": "I personally prefer \"mipmap\" level, but I\u0027ve been trying to match the verbiage of the members as much as possible, so \"mip level\" it is. :P",
+      "parentUuid": "bb3d87fb_2ed0816f",
+      "range": {
+        "startLine": 121,
+        "startChar": 37,
+        "endLine": 121,
+        "endChar": 43
+      },
+      "revId": "84344aa0e52b133f1a458e40d56325530371161e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aadcd2af_8ed56ea5",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-09-30T21:27:44Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 214,
+        "startChar": 25,
+        "endLine": 214,
+        "endChar": 28
+      },
+      "revId": "84344aa0e52b133f1a458e40d56325530371161e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94606278_13c0aff7",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-30T23:08:45Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "aadcd2af_8ed56ea5",
       "range": {
         "startLine": 214,
         "startChar": 25,
