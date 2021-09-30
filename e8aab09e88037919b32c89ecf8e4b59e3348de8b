@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ef49d28_4623a537",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-30T16:11:51Z",
+      "side": 1,
+      "message": "Corentin - Antonio has +1\u0027d, as he doesn\u0027t have permissions to +2.\nGood to land?",
+      "revId": "e8aab09e88037919b32c89ecf8e4b59e3348de8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
