@@ -48,20 +48,6 @@ namespace dawn_native {
         return mSupportedExtensions;
     }
 
-    bool AdapterBase::SupportsAllRequestedExtensions(
-        const std::vector<const char*>& requestedExtensions) const {
-        for (const char* extensionStr : requestedExtensions) {
-            Extension extensionEnum = mInstance->ExtensionNameToEnum(extensionStr);
-            if (extensionEnum == Extension::InvalidEnum) {
-                return false;
-            }
-            if (!mSupportedExtensions.IsEnabled(extensionEnum)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     WGPUDeviceProperties AdapterBase::GetAdapterProperties() const {
         WGPUDeviceProperties adapterProperties = {};
         adapterProperties.deviceID = mPCIInfo.deviceId;
@@ -121,8 +107,12 @@ namespace dawn_native {
     MaybeError AdapterBase::CreateDeviceInternal(DeviceBase** result,
                                                  const DeviceDescriptor* descriptor) {
         if (descriptor != nullptr) {
-            if (!SupportsAllRequestedExtensions(descriptor->requiredExtensions)) {
-                return DAWN_VALIDATION_ERROR("One or more requested extensions are not supported");
+            for (const char* extensionStr : descriptor->requiredExtensions) {
+                Extension extensionEnum = mInstance->ExtensionNameToEnum(extensionStr);
+                DAWN_INVALID_IF(extensionEnum == Extension::InvalidEnum,
+                                "Requested extension %s does not exist.", extensionStr);
+                DAWN_INVALID_IF(!mSupportedExtensions.IsEnabled(extensionEnum),
+                                "Requested extension %s is disabled.", extensionStr);
             }
         }
 
@@ -131,9 +121,8 @@ namespace dawn_native {
                 mUseTieredLimits ? ApplyLimitTiers(mLimits.v1) : mLimits.v1,
                 reinterpret_cast<const RequiredLimits*>(descriptor->requiredLimits)->limits));
 
-            if (descriptor->requiredLimits->nextInChain != nullptr) {
-                return DAWN_VALIDATION_ERROR("Unsupported limit extension struct");
-            }
+            DAWN_INVALID_IF(descriptor->requiredLimits->nextInChain != nullptr,
+                            "Unsupported limit extension struct.");
         }
 
         DAWN_TRY_ASSIGN(*result, CreateDeviceImpl(descriptor));
