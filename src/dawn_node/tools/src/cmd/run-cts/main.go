@@ -20,6 +20,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
 	"math"
 	"os"
 	"os/exec"
@@ -28,6 +29,8 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/mattn/go-colorable"
 )
 
 const (
@@ -50,16 +53,25 @@ Usage:
 	os.Exit(1)
 }
 
+var stdout io.Writer
+
 func run() error {
 	var dawnNode, cts, node, npx string
-	var verbose, build bool
+	var verbose, build, noColor bool
 	flag.StringVar(&dawnNode, "dawn-node", "", "path to dawn.node module")
 	flag.StringVar(&cts, "cts", "", "root directory of WebGPU CTS")
 	flag.StringVar(&node, "node", "", "path to node executable")
 	flag.StringVar(&npx, "npx", "", "path to npx executable")
 	flag.BoolVar(&verbose, "verbose", false, "print extra information while testing")
 	flag.BoolVar(&build, "build", true, "attempt to build the CTS before running")
+	flag.BoolVar(&noColor, "no-color", false, "disable colorization")
 	flag.Parse()
+
+	if noColor {
+		stdout = colorable.NewNonColorable(os.Stdout)
+	} else {
+		stdout = colorable.NewColorableStdout()
+	}
 
 	// Check mandatory arguments
 	if dawnNode == "" || cts == "" {
@@ -239,7 +251,7 @@ func (r *runner) run() error {
 			fmt.Printf("%v - %v: %v\n", name, res.status, res.message)
 			updateProgress()
 		}
-		if time.Since(lastStatusUpdate) > time.Millisecond*10 {
+		if time.Since(lastStatusUpdate) > time.Second {
 			updateProgress()
 		}
 	}
@@ -365,7 +377,7 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		barWidth = 50
 
 		escape       = "\u001B["
-		positionLeft = escape + "G"
+		positionLeft = escape + "0G"
 		red          = escape + "31m"
 		green        = escape + "32m"
 		yellow       = escape + "33m"
@@ -375,14 +387,13 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		white        = escape + "37m"
 		reset        = escape + "0m"
 	)
-	defer fmt.Print(positionLeft)
 
 	animSymbols := []rune{'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 	blockSymbols := []rune{'▏', '▎', '▍', '▌', '▋', '▊', '▉'}
 
 	numBlocksPrinted := 0
 
-	fmt.Print(string(animSymbols[animFrame%len(animSymbols)]), " [")
+	fmt.Fprint(stdout, string(animSymbols[animFrame%len(animSymbols)]), " [")
 	animFrame++
 
 	numFinished := 0
@@ -395,7 +406,7 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		numFinished += num
 		statusFrac := float64(num) / float64(numTests)
 		fNumBlocks := barWidth * statusFrac
-		fmt.Print(ty.color)
+		fmt.Fprint(stdout, ty.color)
 		numBlocks := int(math.Ceil(fNumBlocks))
 		if numBlocks > 1 {
 			fmt.Print(strings.Repeat(string("▉"), numBlocks))
@@ -411,6 +422,13 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 	if barWidth > numBlocksPrinted {
 		fmt.Print(strings.Repeat(string(" "), barWidth-numBlocksPrinted))
 	}
-	fmt.Print(reset)
+	fmt.Fprint(stdout, reset)
 	fmt.Print("] ", percentage(numFinished, numTests))
+
+	if _, isColored := stdout.(*colorable.Writer); isColored {
+		// move cursor to start of line so the bar is overridden
+		fmt.Fprint(stdout, positionLeft)
+	} else {
+		fmt.Println() // cannot move cursor, so newline
+	}
 }
