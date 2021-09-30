@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cfcb1c7_cdb44298",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-30T16:10:19Z",
+      "side": 1,
+      "message": "Yup. Works.",
+      "parentUuid": "14d4dc2a_94170a8f",
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "39a9b558_496b258d",
@@ -160,6 +178,54 @@
       "side": 1,
       "message": "It natively understands they can be used for linking. The issue here is that we\u0027re generating them on the fly, so we need to hook up the build dependency information.",
       "parentUuid": "23315236_baf53096",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 44
+      },
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74d33b01_00e541d6",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-30T16:10:19Z",
+      "side": 1,
+      "message": "See other reply.",
+      "parentUuid": "64a2f255_6ccc42a0",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 44
+      },
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2ff9133_8e7dbbb5",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-30T16:10:19Z",
+      "side": 1,
+      "message": "I now see the rest of the message was posted here.\nNo I don\u0027t think CMake can use .def files the way we want. If CMake can consume them, then it would expect the .def to define a library\u0027s *exports*, but that\u0027s not what we\u0027re doing here. We\u0027re taking a list of symbols and producing a .lib that is used as an *import* list.\n\nWhen you build a DLL with a bunch of exports, you get a .dll and a .lib. The .lib is used by other libraries to know what symbols are exported.\n\nIn our situation, we just have the napi headers, and we\u0027re trying to synthesise the .lib, for the node binary.",
+      "parentUuid": "023a7a74_fcc793eb",
       "range": {
         "startLine": 104,
         "startChar": 0,
