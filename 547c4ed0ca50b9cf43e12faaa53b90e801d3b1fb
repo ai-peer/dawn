@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c7a8003_f56808e2",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-09-30T23:02:55Z",
+      "side": 0,
+      "message": "Non-blocking nit: It\u0027s not entirely clear to me why these asserts (and some elsewhere in this CL) are no longer benficial?",
+      "revId": "547c4ed0ca50b9cf43e12faaa53b90e801d3b1fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
