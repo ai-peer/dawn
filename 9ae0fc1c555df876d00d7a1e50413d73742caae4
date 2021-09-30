@@ -16,6 +16,80 @@
       "message": "PTAL!",
       "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f764bd20_3665b00f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:29:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51563b50_cc80718d",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:29:34Z",
+      "side": 1,
+      "message": "nit: is not a 2D view",
+      "range": {
+        "startLine": 39,
+        "startChar": 57,
+        "endLine": 39,
+        "endChar": 80
+      },
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac13b5c2_a29637df",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:29:34Z",
+      "side": 1,
+      "message": "nit: level count (%u) of the plane (%s) is not one.",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a5326b7_37f3a21f",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:29:34Z",
+      "side": 1,
+      "message": "nit: return DAWN_FORMAT_VALIDATION_ERROR",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
