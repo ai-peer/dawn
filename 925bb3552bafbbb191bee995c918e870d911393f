@@ -39,6 +39,30 @@
       },
       "revId": "925bb3552bafbbb191bee995c918e870d911393f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b77fceff_1e67706a",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-30T01:13:13Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t fully get the DAWN_TRY macro logic here. we cannot expand {} bracket inside if expr. Should it be \nDAWN_TRY_CONTEXT(GetDevice()-\u003eConsumedError(GetBindGroupLayout(groupIndexIn), \u0026result), \"Validating GetBindGroupLayout (%u) on %s\", groupIndexIn, this)\n?\nThis didn\u0027t compile though",
+      "parentUuid": "5d363055_668b0e77",
+      "range": {
+        "startLine": 184,
+        "startChar": 80,
+        "endLine": 184,
+        "endChar": 81
+      },
+      "revId": "925bb3552bafbbb191bee995c918e870d911393f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
