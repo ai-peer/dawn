@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2f277f8b_89d040fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-09-30T20:34:55Z",
+      "side": 1,
+      "message": "(Unresolving this so we can discuss as an open issue)\n\nTo be clear, there is no lib linking requirement here. Same as with the DXC toggle, the DLL must be provided externally by the person using the toggle.\n\nFor header files, Dawn\u0027s DXC and PIX functionality does not include external header files. However, in PlatformFunctions.h, the code typedefs the exact function pointer that happens to be exposed by the two DLLs. We could do that instead if you wish. :-)\n\nIs it the license you\u0027re worried about? Lack of a plan for shipping?\n\nIf the latter, how do we move forward? Would you like a GN file? Is it up to me to drive this with people external to the Dawn team on my own?",
+      "parentUuid": "198acce9_aa8f654d",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "345faded_43d2d792",
         "filename": "build_mesa.ps1",
         "patchSetId": 30
