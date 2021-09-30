@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "499e03c2_e3271829",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-30T10:16:04Z",
+      "side": 1,
+      "message": "Can you elaborate on \u0027with the infrastructure of generator/\u0027? I\u0027m not sure what you mean.\n\nI\u0027ve got GN to do this sort of thing by invoking scripts. I\u0027m confident it won\u0027t be too hard.",
+      "parentUuid": "66f801ea_1e9a0b21",
+      "revId": "e7df21087856532ed6054c4737a76c94b6f02cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a59cd68_ec97214b",
         "filename": "src/dawn_node/binding/GPUBuffer.cpp",
         "patchSetId": 1
