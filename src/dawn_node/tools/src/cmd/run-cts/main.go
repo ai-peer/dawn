@@ -20,6 +20,7 @@ import (
 	"errors"
 	"flag"
 	"fmt"
+	"io"
 	"math"
 	"os"
 	"os/exec"
@@ -28,6 +29,9 @@ import (
 	"strings"
 	"sync"
 	"time"
+
+	"github.com/mattn/go-colorable"
+	"github.com/mattn/go-isatty"
 )
 
 const (
@@ -50,7 +54,19 @@ Usage:
 	os.Exit(1)
 }
 
+var colors bool
+var stdout io.Writer
+
 func run() error {
+	colors = os.Getenv("TERM") != "dumb" ||
+		isatty.IsTerminal(os.Stdout.Fd()) ||
+		isatty.IsCygwinTerminal(os.Stdout.Fd())
+	if colors {
+		if _, disable := os.LookupEnv("NO_COLOR"); disable {
+			colors = false
+		}
+	}
+
 	var dawnNode, cts, node, npx string
 	var verbose, build bool
 	flag.StringVar(&dawnNode, "dawn-node", "", "path to dawn.node module")
@@ -59,7 +75,14 @@ func run() error {
 	flag.StringVar(&npx, "npx", "", "path to npx executable")
 	flag.BoolVar(&verbose, "verbose", false, "print extra information while testing")
 	flag.BoolVar(&build, "build", true, "attempt to build the CTS before running")
+	flag.BoolVar(&colors, "colors", colors, "enable / disable colors")
 	flag.Parse()
+
+	if colors {
+		stdout = colorable.NewColorableStdout()
+	} else {
+		stdout = colorable.NewNonColorable(os.Stdout)
+	}
 
 	// Check mandatory arguments
 	if dawnNode == "" || cts == "" {
@@ -232,6 +255,12 @@ func (r *runner) run() error {
 
 	// Pull test results as they become available.
 	// Update the status counts, and print any failures (or all test results if --verbose)
+	progressUpdateRate := time.Millisecond * 10
+	if !colors {
+		// No colors == no cursor control. Reduce progress updates so that
+		// we're not printing endless progress bars.
+		progressUpdateRate = time.Second
+	}
 	for res := range results {
 		name := res.testcase
 		numByStatus[res.status] = numByStatus[res.status] + 1
@@ -239,7 +268,7 @@ func (r *runner) run() error {
 			fmt.Printf("%v - %v: %v\n", name, res.status, res.message)
 			updateProgress()
 		}
-		if time.Since(lastStatusUpdate) > time.Millisecond*10 {
+		if time.Since(lastStatusUpdate) > progressUpdateRate {
 			updateProgress()
 		}
 	}
@@ -365,7 +394,7 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		barWidth = 50
 
 		escape       = "\u001B["
-		positionLeft = escape + "G"
+		positionLeft = escape + "0G"
 		red          = escape + "31m"
 		green        = escape + "32m"
 		yellow       = escape + "33m"
@@ -375,14 +404,13 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		white        = escape + "37m"
 		reset        = escape + "0m"
 	)
-	defer fmt.Print(positionLeft)
 
 	animSymbols := []rune{'⣾', '⣽', '⣻', '⢿', '⡿', '⣟', '⣯', '⣷'}
 	blockSymbols := []rune{'▏', '▎', '▍', '▌', '▋', '▊', '▉'}
 
 	numBlocksPrinted := 0
 
-	fmt.Print(string(animSymbols[animFrame%len(animSymbols)]), " [")
+	fmt.Fprint(stdout, string(animSymbols[animFrame%len(animSymbols)]), " [")
 	animFrame++
 
 	numFinished := 0
@@ -395,7 +423,7 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		numFinished += num
 		statusFrac := float64(num) / float64(numTests)
 		fNumBlocks := barWidth * statusFrac
-		fmt.Print(ty.color)
+		fmt.Fprint(stdout, ty.color)
 		numBlocks := int(math.Ceil(fNumBlocks))
 		if numBlocks > 1 {
 			fmt.Print(strings.Repeat(string("▉"), numBlocks))
@@ -411,6 +439,14 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 	if barWidth > numBlocksPrinted {
 		fmt.Print(strings.Repeat(string(" "), barWidth-numBlocksPrinted))
 	}
-	fmt.Print(reset)
+	fmt.Fprint(stdout, reset)
 	fmt.Print("] ", percentage(numFinished, numTests))
+
+	if colors {
+		// move cursor to start of line so the bar is overridden
+		fmt.Fprint(stdout, positionLeft)
+	} else {
+		// cannot move cursor, so newline
+		fmt.Println()
+	}
 }
