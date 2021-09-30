@@ -24,6 +24,51 @@
 
 #include <sstream>
 
+namespace {
+
+    // CanCreateD3D12Device returns true/false depending on whether D3D12 device
+    // creation should be attempted on the passed in adapter. Returns false if there
+    // are known driver bugs.
+    bool CanCreateD3D12Device(IDXGIAdapter* dxgi_adapter) {
+        DXGI_ADAPTER_DESC desc;
+        HRESULT hr = dxgi_adapter->GetDesc(&desc);
+        if (FAILED(hr)) {
+            return false;
+        }
+
+        //char dst1[2], src1[100] = "hello";
+        //errno_t r1 = strcpy_s(dst1, 2, src1);
+        //printf("%d, %s", r1, dst1);
+
+        // Known driver bugs are Intel-only. Expand in the future, as necessary, for
+        // other IHVs.
+        if (desc.VendorId != 0x8086)
+            return true;
+
+        LARGE_INTEGER umd_version;
+        hr = dxgi_adapter->CheckInterfaceSupport(__uuidof(IDXGIDevice), &umd_version);
+        if (FAILED(hr)) {
+            return false;
+        }
+
+        // On certain Intel drivers, the driver will crash if you call
+        // D3D12CreateDevice and the command line of the process is greater than 1024
+        // bytes. 100.9416 is the first driver to introduce the bug, while 100.9664 is
+        // the first driver to fix it.
+        if (HIWORD(umd_version.LowPart) == 100 && LOWORD(umd_version.LowPart) >= 9416 &&
+            LOWORD(umd_version.LowPart) < 9664) {
+            const char* command_line = GetCommandLineA();
+            const size_t command_line_length = strlen(command_line);
+            // Check for 1023 since strlen doesn't include the null terminator.
+            if (command_line_length > 1023) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+}  // namespace
+
 namespace dawn_native { namespace d3d12 {
 
     Adapter::Adapter(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter)
@@ -66,7 +111,8 @@ namespace dawn_native { namespace d3d12 {
         // Create the device to populate the adapter properties then reuse it when needed for actual
         // rendering.
         const PlatformFunctions* functions = GetBackend()->GetFunctions();
-        if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
+        if (!CanCreateD3D12Device(GetHardwareAdapter()) ||
+            FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
                                                 _uuidof(ID3D12Device), &mD3d12Device))) {
             return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");
         }
