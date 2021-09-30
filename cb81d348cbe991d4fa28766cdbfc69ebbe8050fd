@@ -73,6 +73,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "345faded_43d2d792",
+        "filename": "build_mesa.ps1",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "Can we avoid checking in this script until we have GN files for spirv_to_dxil (or decided to do something different). Or at least have it in scripts/ and with a license.",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1f728fd_020b0d13",
+        "filename": "build_mesa.ps1",
+        "patchSetId": 30
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "spirv_to_dxil is an external dependency, so I think it should be in third_party/spirv_to_dxil/spirv_to_dxil.h or something like that to make it clear. But also the header is present in this CL?",
+      "range": {
+        "startLine": 21,
+        "startChar": 88,
+        "endLine": 21,
+        "endChar": 109
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb6d4a6_ccd37962",
+        "filename": "src/dawn_native/Toggles.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "nit UseMesaSpirvToDxil, Mesa is a lot more than the translator.",
+      "range": {
+        "startLine": 48,
+        "startChar": 8,
+        "endLine": 48,
+        "endChar": 15
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8921aff_79111fed",
         "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
         "patchSetId": 30
@@ -119,6 +182,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a019528a_d2aa4d6e",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "nit: SpirvToDxil?",
+      "range": {
+        "startLine": 97,
+        "startChar": 38,
+        "endLine": 97,
+        "endChar": 42
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac2ee674_55210d83",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "Half of these variables are uninitialized and will cause the hash of the request to vary from run to run.",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d66ba1d_65ecf986",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "ApplyCommonD3DTransforms?",
+      "range": {
+        "startLine": 396,
+        "startChar": 37,
+        "endLine": 396,
+        "endChar": 57
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ec3e98b8_4b70adc9",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 30
@@ -136,6 +262,97 @@
         "endLine": 459,
         "endChar": 72
       },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c09e6a8_61022711",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "TranslateToDxilThroughSPIRV?",
+      "range": {
+        "startLine": 465,
+        "startChar": 40,
+        "endLine": 465,
+        "endChar": 57
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b46ea17_01f9b761",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "Does spirv_to_dxil produce any error messages?",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6976716_4fbd3723",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "nit: I think it is marginally simpler as a RAII class manually defined:\n\nstruct ScopeSpirvDxilObject : NonMovable {\n  dxil_spirv_object object \u003d {};\n  ~ScopeSpirvDxilObject() {\n    spirvToDxilFree(\u0026dxil); // Add an \"if\" if there is no null check in the \"free\" function\n  }\n};",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c78574_60b598fb",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "This could be in TranslateToHLSL. This way could separate the DXC and FXC cases instead of having part common code, part different code.",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bb0ce24_675eaa7e",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "I think we could have either compiledDXBCShader and compiledDXILShader. There doesn\u0027t seem to be a functional difference between mesa and DXC.",
       "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -165,6 +382,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0c9f91a_c957a8e0",
+        "filename": "src/tests/DawnTest.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 553,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "We\u0027ll need to remove this landing. You can use --enable-toggle\u003duse_mesa",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16107c6f_950aa319",
+        "filename": "third_party/mesa/BUILD.gn",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "nit: slight preference to have this in spirv_to_dxil.",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b192338e_b36eb3f3",
         "filename": "third_party/mesa/BUILD.gn",
         "patchSetId": 30
@@ -182,6 +433,57 @@
         "endLine": 1,
         "endChar": 16
       },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69d6d455_70bf66bd",
+        "filename": "third_party/mesa/BUILD.gn",
+        "patchSetId": 30
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "nit: 2021",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77834ba0_e4e9ec9e",
+        "filename": "third_party/mesa/spirv_to_dxil.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "Note that this is implicitly contributing this file under the Google CLA. I think it would be simpler to not check in the file until we figure out the GN integration or otherwise of spirv_to_dxil.",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7b3bd47_9fbd2aba",
+        "filename": "third_party/mesa/spirv_to_dxil.h",
+        "patchSetId": 30
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 1,
+      "message": "Is the API extensible enough that we won\u0027t need to do breaking changes at the same time we roll the header?",
       "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d1da563_c2afa456",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:54:36Z",
+      "side": 0,
+      "message": "I think I remember we change the pipeline layout to never produce colliding bindings. So can we just have this to false all the time?",
+      "revId": "5a18c2aab86693b311c69ad409c087564b6fd7b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
