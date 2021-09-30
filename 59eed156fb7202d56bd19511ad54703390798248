@@ -1,6 +1,109 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f16503_0fea3007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T14:03:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5eb66ba_28820bc2",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T14:03:07Z",
+      "side": 1,
+      "message": "Do the weak symbols work ok on Linux?",
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a9b558_496b258d",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T14:03:07Z",
+      "side": 1,
+      "message": "Does this need to be dawn.node or does it need to be node.exe?",
+      "range": {
+        "startLine": 98,
+        "startChar": 40,
+        "endLine": 98,
+        "endChar": 49
+      },
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023a7a74_fcc793eb",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T14:03:07Z",
+      "side": 1,
+      "message": "Doesn\u0027t CMake natively understand .def files? We could just add NAPI_SYMBOLS_DEF to the dawn_node sources.",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 44
+      },
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23315236_baf53096",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T14:03:07Z",
+      "side": 1,
+      "message": "Doesn\u0027t CMake natively understand .def files? We could just add",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 44
+      },
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07c38222_a900757a",
