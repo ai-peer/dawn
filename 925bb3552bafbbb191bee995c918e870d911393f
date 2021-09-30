@@ -87,6 +87,30 @@
       },
       "revId": "925bb3552bafbbb191bee995c918e870d911393f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3586587b_25458d68",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-09-30T16:58:54Z",
+      "side": 1,
+      "message": "Ah thanks for pointing out (turns out need to rebase first O_O)",
+      "parentUuid": "b5928fce_3cee304f",
+      "range": {
+        "startLine": 184,
+        "startChar": 80,
+        "endLine": 184,
+        "endChar": 81
+      },
+      "revId": "925bb3552bafbbb191bee995c918e870d911393f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
