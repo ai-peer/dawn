@@ -16,6 +16,24 @@
       "message": "Corentin - Antonio has +1\u0027d, as he doesn\u0027t have permissions to +2.\nGood to land?",
       "revId": "e8aab09e88037919b32c89ecf8e4b59e3348de8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "861533a5_cdfa33ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:15:45Z",
+      "side": 1,
+      "message": "Now he can :)",
+      "parentUuid": "9ef49d28_4623a537",
+      "revId": "e8aab09e88037919b32c89ecf8e4b59e3348de8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
