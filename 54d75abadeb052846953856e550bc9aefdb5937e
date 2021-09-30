@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e35b830b_a30033a0",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e293c61f_aa4d167f",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e227a26b_2776d00a",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-09-30T15:26:34Z",
       "side": 1,
       "message": "DAWN_FORMAT_VALIDATION_ERROR",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a369f84c_cf616252",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e227a26b_2776d00a",
       "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1be33874_74eee40d",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2566904a_88ad0806",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5371200_18a56a28",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-09-30T15:26:34Z",
       "side": 1,
       "message": "validating the source .. for the source?\nwhy not just \"validating the source ImageCopyTexture\" ?",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2e6aa0_1a2d1c26",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5371200_18a56a28",
       "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca58cdf_c041eae0",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58b77a55_6e71de78",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f75a9d2d_16277a7c",
@@ -133,6 +223,24 @@
       "writtenOn": "2021-09-30T15:25:20Z",
       "side": 1,
       "message": "For these kinds of scenarios I\u0027ve been formatting them like:\n\n\"The source texture sample count (%u) or the destination texture sample count (%u) is not 1.\"\n\nFeedback welcome if you think that\u0027s too verbose, though.",
+      "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe5b0917_5a95050f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:08:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f75a9d2d_16277a7c",
       "revId": "54d75abadeb052846953856e550bc9aefdb5937e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
