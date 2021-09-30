@@ -120,6 +120,24 @@
       "message": "For posterity, here\u0027s how I got it working on Mac:\n\n # Starting in dawn root\n cmake-js build -d . -O ./outjs  # can stop this once it starts building, I think\n cd outjs\n cmake .. -DDAWN_BUILD_NODE_BINDINGS\u003d1 -DDAWN_ENABLE_PIC\u003d1  # to change the defines\n cmake-js build -d .. -O . -T dawn.node",
       "revId": "c0508d058b6c264262cf73024417b712f6dff0e7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a9d822_f5570be2",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 23
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-09-30T09:19:11Z",
+      "side": 1,
+      "message": "Fixed the macOS build without resorting to cmake-js:\nhttps://dawn-review.googlesource.com/c/dawn/+/65560",
+      "parentUuid": "49354e8d_7d86a25e",
+      "revId": "c0508d058b6c264262cf73024417b712f6dff0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
