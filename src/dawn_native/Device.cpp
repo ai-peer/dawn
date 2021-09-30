@@ -1438,7 +1438,8 @@ namespace dawn_native {
     ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptor) {
         DAWN_TRY(ValidateIsAlive());
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateTextureDescriptor(this, descriptor));
+            DAWN_TRY_CONTEXT(ValidateTextureDescriptor(this, descriptor), "validating %s.",
+                             descriptor);
         }
         return CreateTextureImpl(descriptor);
     }
@@ -1450,7 +1451,8 @@ namespace dawn_native {
         DAWN_TRY(ValidateObject(texture));
         TextureViewDescriptor desc = GetTextureViewDescriptorWithDefaults(texture, descriptor);
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateTextureViewDescriptor(this, texture, &desc));
+            DAWN_TRY_CONTEXT(ValidateTextureViewDescriptor(this, texture, &desc),
+                             "validating %s against %s.", &desc, texture);
         }
         return CreateTextureViewImpl(texture, &desc);
     }
