@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce78e985_3425f427",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T22:17:31Z",
+      "side": 1,
+      "message": "corentin TBR - need to test a bot change and the switch to realms dropped permissions",
+      "revId": "2526be1ef7098b0899a464f4bafd0dbd6594c629",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
