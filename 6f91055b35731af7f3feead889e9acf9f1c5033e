@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "038c74ee_b47966ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:23:25Z",
+      "side": 1,
+      "message": "LGTM\n(wow almost raced with brandon on this CL)",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90c09060_8e4634a2",
@@ -54,6 +71,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e1c96d19_209e9680",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:23:25Z",
+      "side": 1,
+      "message": "nit: I *think* \"usages\" should be singular, and are-\u003eis\nBecause in this context, we are regarding the usage as a set (or I guess a list) which is a singular object",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1c92c2b3_0547e66a",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 1
@@ -65,6 +99,23 @@
       "writtenOn": "2021-09-30T15:20:48Z",
       "side": 1,
       "message": "nit: but is not a subset",
+      "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b4ddf48_f4152c30",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T15:23:25Z",
+      "side": 1,
+      "message": "DAWN_FORMAT_VALIDATION_ERROR",
       "revId": "6f91055b35731af7f3feead889e9acf9f1c5033e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
