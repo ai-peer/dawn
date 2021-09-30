@@ -113,6 +113,40 @@
       "message": "Since this is starting to implement the semantics of depthReadOnly/stencilReadOnly but the code isn\u0027t complete in the backends, I think we should mark this as an unsafe API until it is completed (otherwise developers will be able to cause memory barriers issues in the backends)",
       "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "306a79dd_a4f432fb",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-30T23:50:12Z",
+      "side": 1,
+      "message": "Tangential to this change, but isn\u0027t this value now kReadOnlyRenderAttachment | CopySrc? Seems like it collides with both the new usage and an existing usage.",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fafc60b8_20415c0f",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-09-30T23:50:12Z",
+      "side": 1,
+      "message": "nit: IMO you should change as little as possible between the two cases, so depthLoadOp and depthStoreOp should stay the same and only depthReadOnly should change.",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
