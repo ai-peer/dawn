@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07c38222_a900757a",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2021-09-30T13:41:50Z",
+      "side": 1,
+      "message": "I get \"target_sources called with invalid arguments\" on this line. I think it needs an `INTERFACE|PRIVATE|PUBLIC` keyword.",
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
