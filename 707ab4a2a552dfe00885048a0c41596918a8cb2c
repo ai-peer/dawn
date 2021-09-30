@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebbcf926_ca274034",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-09-30T06:05:41Z",
+      "side": 1,
+      "message": "PTAL. Thanks.\n\nThe validation rule in WebGPU spec about resource usage for this (The same textureview as both SampledTexture and ReadOnlyRenderAttachment in a single render pass) is already there.",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
