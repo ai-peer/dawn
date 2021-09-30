@@ -67,6 +67,24 @@
       "message": "Nit: period at the end.",
       "revId": "67b0eb6c4fb324c241947ddf462f5fc2bdbc6e93",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09420685_1ad814eb",
+        "filename": "src/dawn_native/QuerySet.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T16:00:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8e7e52f_0bc587c3",
+      "revId": "67b0eb6c4fb324c241947ddf462f5fc2bdbc6e93",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
