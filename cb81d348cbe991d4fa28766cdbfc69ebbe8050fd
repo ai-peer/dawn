@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "198acce9_aa8f654d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T15:57:37Z",
+      "side": 1,
+      "message": "DXC was already some cruft that because it is a completely untested codepath. This CL is in a sense worse than what we already have for DXC because the headers and the lib are not part of the Windows SDK so it has to check stuff in Dawn.",
+      "parentUuid": "a567f959_52fb6dd1",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "345faded_43d2d792",
