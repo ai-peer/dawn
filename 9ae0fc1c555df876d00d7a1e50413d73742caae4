@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18155b56_7d49e237",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:38:25Z",
+      "side": 1,
+      "message": "Thank you again! A few requests this time.",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4107d10_b9a839bc",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:38:25Z",
+      "side": 1,
+      "message": "Can we include the actual texture usage here?\n\n\"The external texture plane (%s) usage (%s) doesn\u0027t include the required usage (%s)\"\n\nOr something similar. That\u0027s information that could potentially help with debugging.",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51563b50_cc80718d",
@@ -60,6 +94,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b914f28_8733c585",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:38:25Z",
+      "side": 1,
+      "message": "\"The external texture plane (%s) dimension (%s) is not 2D.\" ?",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ac13b5c2_a29637df",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 1
@@ -77,6 +128,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9fbfaec_0dd87c55",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:38:25Z",
+      "side": 1,
+      "message": "\"The external texture plane (%s) mip level count (%u) is not 1.\" ?",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4175e786_56d65731",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:38:25Z",
+      "side": 1,
+      "message": "\"The external texture plane (%s) sample count (%u) is not zero.\" ?",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a5326b7_37f3a21f",
         "filename": "src/dawn_native/ExternalTexture.cpp",
         "patchSetId": 1
@@ -88,6 +173,23 @@
       "writtenOn": "2021-09-30T15:29:34Z",
       "side": 1,
       "message": "nit: return DAWN_FORMAT_VALIDATION_ERROR",
+      "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e11776b3_f0df8ed4",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001671
+      },
+      "writtenOn": "2021-09-30T15:38:25Z",
+      "side": 1,
+      "message": "Nit: period at the end.",
       "revId": "9ae0fc1c555df876d00d7a1e50413d73742caae4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
