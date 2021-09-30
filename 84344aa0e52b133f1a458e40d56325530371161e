@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c23e4cf1_81880f8d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T21:27:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "84344aa0e52b133f1a458e40d56325530371161e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3d87fb_2ed0816f",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T21:27:44Z",
+      "side": 1,
+      "message": "here you say mipmap, and at [1] you say mip. I think we should be consistent. Spec uses \"mipmap level\" but the member is called mipLevel :-/",
+      "range": {
+        "startLine": 121,
+        "startChar": 37,
+        "endLine": 121,
+        "endChar": 43
+      },
+      "revId": "84344aa0e52b133f1a458e40d56325530371161e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aadcd2af_8ed56ea5",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-09-30T21:27:44Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 214,
+        "startChar": 25,
+        "endLine": 214,
+        "endChar": 28
+      },
+      "revId": "84344aa0e52b133f1a458e40d56325530371161e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
