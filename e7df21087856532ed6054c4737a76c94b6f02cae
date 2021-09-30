@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "342671e0_6b1aab26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T09:49:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e7df21087856532ed6054c4737a76c94b6f02cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f801ea_1e9a0b21",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T09:49:09Z",
+      "side": 1,
+      "message": "Can we have a TODO to rewrite this with the infrastructure of generator/? It will be necessary when adding a GN build I think since GN can\u0027t do this kind of magic AFAIK.",
+      "revId": "e7df21087856532ed6054c4737a76c94b6f02cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a59cd68_ec97214b",
+        "filename": "src/dawn_node/binding/GPUBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-09-30T09:49:09Z",
+      "side": 1,
+      "message": "u-nit: this seems like an unrelated fix. Maybe mention it in the commit message? (previously destroyedBeforeCallback would reject with an UnknownError)",
+      "revId": "e7df21087856532ed6054c4737a76c94b6f02cae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
