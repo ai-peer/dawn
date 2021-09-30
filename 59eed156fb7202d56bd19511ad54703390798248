@@ -155,6 +155,24 @@
       "parentUuid": "d1347844_d3e04ec7",
       "revId": "59eed156fb7202d56bd19511ad54703390798248",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e1b07a4_2e15b6b0",
+        "filename": "src/dawn_node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-09-30T14:05:43Z",
+      "side": 1,
+      "message": "The parent change didn\u0027t use target_sources, it looks like. The documentation for target_sources does indeed require INTERFACE|PRIVATE|PUBLIC",
+      "parentUuid": "2eb4f82e_6a75fbb3",
+      "revId": "59eed156fb7202d56bd19511ad54703390798248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
