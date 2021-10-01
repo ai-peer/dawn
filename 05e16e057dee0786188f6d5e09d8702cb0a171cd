@@ -16,6 +16,23 @@
       "message": "This CL, plus some build recipe changes have the build working here:\n\nhttps://ci.chromium.org/raw/build/logs.chromium.org/dawn/led/enga_google.com/83571374a1a1c4b17fe2624d56cb551187e854959b1e23eea00d0657f621cb64/+/annotations?server\u003dchromium-swarm.appspot.com",
       "revId": "05e16e057dee0786188f6d5e09d8702cb0a171cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13f2fb43_65cbee54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T08:03:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "05e16e057dee0786188f6d5e09d8702cb0a171cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
