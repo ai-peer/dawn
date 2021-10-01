@@ -51,11 +51,11 @@ namespace wgpu { namespace binding {
 
     interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::requestAdapter(
         Napi::Env env,
-        std::optional<interop::GPURequestAdapterOptions> options) {
+        interop::GPURequestAdapterOptions options) {
         auto promise =
             interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>>(env);
 
-        if (options.has_value() && options->forceFallbackAdapter) {
+        if (options.forceFallbackAdapter) {
             // Software adapters are not currently supported.
             promise.Resolve({});
             return promise;
@@ -81,7 +81,8 @@ namespace wgpu { namespace binding {
 
         // Check for override from env var
         std::string envVar = getEnvVar("DAWNNODE_BACKEND");
-        std::transform(envVar.begin(), envVar.end(), envVar.begin(), std::tolower);
+        std::transform(envVar.begin(), envVar.end(), envVar.begin(),
+                       [](char c) { return std::tolower(c); });
         if (envVar == "null") {
             targetBackendType = wgpu::BackendType::Null;
         } else if (envVar == "webgpu") {
