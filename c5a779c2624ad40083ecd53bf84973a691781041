@@ -33,6 +33,23 @@
       "message": "+1, but you have CQ failures.",
       "revId": "c5a779c2624ad40083ecd53bf84973a691781041",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b631aad0_297b3abe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T16:29:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c5a779c2624ad40083ecd53bf84973a691781041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

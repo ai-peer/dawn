@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d149328a_18551a0c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T16:29:07Z",
+      "side": 0,
+      "message": "note: Stephen wanted to keep this for the day that Tint starts producing GLSL output.\n\nWe can always add a new Toggle though",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 199,
+        "endChar": 9
+      },
+      "revId": "8bbcd8018d08fb52cee0a4bbf83e85d1d0041651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
