@@ -67,7 +67,7 @@ func run() error {
 		}
 	}
 
-	var dawnNode, cts, node, npx string
+	var dawnNode, cts, node, npx, logFilename string
 	var verbose, build bool
 	var numRunners int
 	flag.StringVar(&dawnNode, "dawn-node", "", "path to dawn.node module")
@@ -78,6 +78,7 @@ func run() error {
 	flag.BoolVar(&build, "build", true, "attempt to build the CTS before running")
 	flag.BoolVar(&colors, "colors", colors, "enable / disable colors")
 	flag.IntVar(&numRunners, "j", runtime.NumCPU(), "number of concurrent runners")
+	flag.StringVar(&logFilename, "log", "", "path to log file of tests run and result")
 	flag.Parse()
 
 	if colors {
@@ -140,6 +141,15 @@ func run() error {
 		  require('./src/common/runtime/cmdline.ts');`,
 	}
 
+	if logFilename != "" {
+		log, err := os.Create(logFilename)
+		if err != nil {
+			return fmt.Errorf("failed to open log '%v': %w", logFilename, err)
+		}
+		defer log.Close()
+		r.log = log
+	}
+
 	if build {
 		// Attempt to build the CTS (instead of using the `setup-ts-in-node` transpiler)
 		if npx != "" {
@@ -169,6 +179,7 @@ type runner struct {
 	node, npx, dawnNode, cts string
 	evalScript               string
 	testcases                []string
+	log                      io.Writer
 }
 
 // buildCTS calls `npx grunt run:build-out-node` in the CTS directory to compile
@@ -265,9 +276,26 @@ func (r *runner) run() error {
 		// we're not printing endless progress bars.
 		progressUpdateRate = time.Second
 	}
+
+	logIdx := 0
+	resultByIndex := map[int]result{}
+
 	for res := range results {
-		name := res.testcase
+		// Log results in order as they become available
+		if r.log != nil {
+			resultByIndex[res.index] = res
+			for {
+				logRes, ok := resultByIndex[logIdx]
+				if !ok {
+					break
+				}
+				fmt.Fprintf(r.log, "%v [%v]\n", logRes.testcase, logRes.status)
+				logIdx++
+			}
+		}
+
 		numByStatus[res.status] = numByStatus[res.status] + 1
+		name := res.testcase
 		if r.verbose || (res.status != pass && res.status != skip) {
 			fmt.Printf("%v - %v: %v\n", name, res.status, res.message)
 			updateProgress()
@@ -308,6 +336,7 @@ const (
 
 // result holds the information about a completed test
 type result struct {
+	index    int
 	testcase string
 	status   status
 	message  string
@@ -341,15 +370,15 @@ func (r *runner) runTestcase(idx int) result {
 	msg := string(out)
 	switch {
 	case errors.Is(err, context.DeadlineExceeded):
-		return result{testcase: testcase, status: timeout, message: msg}
+		return result{index: idx, testcase: testcase, status: timeout, message: msg}
 	case strings.Contains(msg, "[fail]"):
-		return result{testcase: testcase, status: fail, message: msg}
+		return result{index: idx, testcase: testcase, status: fail, message: msg}
 	case strings.Contains(msg, "[skip]"):
-		return result{testcase: testcase, status: skip, message: msg}
+		return result{index: idx, testcase: testcase, status: skip, message: msg}
 	case strings.Contains(msg, "[pass]"), err == nil:
-		return result{testcase: testcase, status: pass, message: msg}
+		return result{index: idx, testcase: testcase, status: pass, message: msg}
 	}
-	return result{testcase: testcase, status: fail, message: fmt.Sprint(msg, err), error: err}
+	return result{index: idx, testcase: testcase, status: fail, message: fmt.Sprint(msg, err), error: err}
 }
 
 // filterTestcases returns in with empty strings removed
