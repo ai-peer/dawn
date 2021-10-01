@@ -101,32 +101,30 @@ namespace wgpu { namespace binding {
 
     interop::Promise<interop::Interface<interop::GPUDevice>> GPUAdapter::requestDevice(
         Napi::Env env,
-        std::optional<interop::GPUDeviceDescriptor> descriptor) {
+        interop::GPUDeviceDescriptor descriptor) {
         dawn_native::DeviceDescriptor desc{};  // TODO(crbug.com/dawn/1133): Fill in.
         interop::Promise<interop::Interface<interop::GPUDevice>> promise(env);
 
-        if (descriptor.has_value()) {
-            // See src/dawn_native/Extensions.cpp for feature <-> extension mappings.
-            for (auto required : descriptor->requiredFeatures) {
-                switch (required) {
-                    case interop::GPUFeatureName::kDepthClamping:
-                        desc.requiredExtensions.emplace_back("depth_clamping");
-                        continue;
-                    case interop::GPUFeatureName::kPipelineStatisticsQuery:
-                        desc.requiredExtensions.emplace_back("pipeline_statistics_query");
-                        continue;
-                    case interop::GPUFeatureName::kTextureCompressionBc:
-                        desc.requiredExtensions.emplace_back("texture_compression_bc");
-                        continue;
-                    case interop::GPUFeatureName::kTimestampQuery:
-                        desc.requiredExtensions.emplace_back("timestamp_query");
-                        continue;
-                    case interop::GPUFeatureName::kDepth24UnormStencil8:
-                    case interop::GPUFeatureName::kDepth32FloatStencil8:
-                        continue;  // TODO(crbug.com/dawn/1130)
-                }
-                UNIMPLEMENTED("required: ", required);
+        // See src/dawn_native/Extensions.cpp for feature <-> extension mappings.
+        for (auto required : descriptor.requiredFeatures) {
+            switch (required) {
+                case interop::GPUFeatureName::kDepthClamping:
+                    desc.requiredExtensions.emplace_back("depth_clamping");
+                    continue;
+                case interop::GPUFeatureName::kPipelineStatisticsQuery:
+                    desc.requiredExtensions.emplace_back("pipeline_statistics_query");
+                    continue;
+                case interop::GPUFeatureName::kTextureCompressionBc:
+                    desc.requiredExtensions.emplace_back("texture_compression_bc");
+                    continue;
+                case interop::GPUFeatureName::kTimestampQuery:
+                    desc.requiredExtensions.emplace_back("timestamp_query");
+                    continue;
+                case interop::GPUFeatureName::kDepth24UnormStencil8:
+                case interop::GPUFeatureName::kDepth32FloatStencil8:
+                    continue;  // TODO(crbug.com/dawn/1130)
             }
+            UNIMPLEMENTED("required: ", required);
         }
 
         auto wgpu_device = adapter_.CreateDevice(&desc);
