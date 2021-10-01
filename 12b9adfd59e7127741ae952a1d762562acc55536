@@ -39,6 +39,30 @@
       },
       "revId": "12b9adfd59e7127741ae952a1d762562acc55536",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b059b9d_c90bef7e",
+        "filename": "src/dawn_node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-10-01T08:35:00Z",
+      "side": 1,
+      "message": "That appears to break the affected tests again.\n\nwebgpu:idl,constants,flags:ShaderStage,count: - fail: Warning: Backend validation enabled but Dawn was not built with DAWN_ENABLE_VULKAN_VALIDATION_LAYERS.\n[fail] webgpu:idl,constants,flags:ShaderStage,count: (10.983ms). Log:\n  - EXCEPTION: Had 0 keys, expected 3\n        at Object.assert (/home/ben/src/gpuweb-cts/out-node/common/util/util.js:26:15)\n        at IDLTest.assertMemberCount (/home/ben/src/gpuweb-cts/out-node/webgpu/idl/idl_test.js:32:19)\n        at RunCaseSpecific.fn (/home/ben/src/gpuweb-cts/out-node/webgpu/idl/constants/flags.spec.js:69:7)\n\n** Failures **\n[fail] webgpu:idl,constants,flags:ShaderStage,count: (10.983ms). Log:\n  - EXCEPTION: Had 0 keys, expected 3\n        at Object.assert (/home/ben/src/gpuweb-cts/out-node/common/util/util.js:26:15)\n        at IDLTest.assertMemberCount (/home/ben/src/gpuweb-cts/out-node/webgpu/idl/idl_test.js:32:19)\n        at RunCaseSpecific.fn (/home/ben/src/gpuweb-cts/out-node/webgpu/idl/constants/flags.spec.js:69:7)",
+      "parentUuid": "b09aa567_490b6f7f",
+      "range": {
+        "startLine": 157,
+        "startChar": 71,
+        "endLine": 157,
+        "endChar": 94
+      },
+      "revId": "12b9adfd59e7127741ae952a1d762562acc55536",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
