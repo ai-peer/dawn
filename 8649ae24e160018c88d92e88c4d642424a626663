@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e03afb71_fa708780",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-10-01T08:34:54Z",
+      "side": 1,
+      "message": "extract() - good catch. I had this originally as a move, but significantly reworked things afterwards. This is a bug. Fixed.\n\n\u003e Also note that \"values()\" is specced as an alias of keys() (or vice-versa) so we get that for free, but also that they are specced to return keys in insertion order (for when the application can modify these objects).\n\nAck, but given that these are not assignable, this isn\u0027t an issue here, right?",
+      "parentUuid": "aac5ff32_48f3f35d",
+      "revId": "8649ae24e160018c88d92e88c4d642424a626663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "697a7a0f_90890334",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-10-01T07:47:48Z",
       "side": 1,
       "message": "Note: later we could make a template that\u0027s SetLike\u003cT\u003e that wraps an unordered_set\u003cT\u003e.",
+      "revId": "8649ae24e160018c88d92e88c4d642424a626663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11457d66_26716d19",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-10-01T08:34:54Z",
+      "side": 1,
+      "message": "Yes, I was thinking the same thing. Will do when we have more than one of them.",
+      "parentUuid": "697a7a0f_90890334",
       "revId": "8649ae24e160018c88d92e88c4d642424a626663",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
