@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d80fb59_bd193539",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T10:56:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d9652d525592c54300ef49d5e0a8e2b59af71200",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3131440_78b6362c",
+        "filename": "src/dawn_node/binding/GPURenderBundleEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T10:56:32Z",
+      "side": 1,
+      "message": "I think you\u0027ll need to update the default value of size for setVertexBuffer and setIndexBuffer to wgpu::kWholeSize soon: https://dawn-review.googlesource.com/c/dawn/+/65020",
+      "revId": "d9652d525592c54300ef49d5e0a8e2b59af71200",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
