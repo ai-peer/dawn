@@ -19,8 +19,8 @@
 
 class ShaderFloat16Tests : public DawnTest {
   protected:
-    std::vector<const char*> GetRequiredExtensions() override {
-        mIsShaderFloat16Supported = SupportsExtensions({"shader_float16"});
+    std::vector<const char*> GetRequiredFeatures() override {
+        mIsShaderFloat16Supported = SupportsFeatures({"shader_float16"});
         if (!mIsShaderFloat16Supported) {
             return {};
         }
@@ -82,13 +82,13 @@ TEST_P(ShaderFloat16Tests, Basic16BitFloatFeaturesTest) {
                OpCapability Float16
                OpCapability StorageBuffer16BitAccess
                OpCapability UniformAndStorageBuffer16BitAccess
-               OpExtension "SPV_KHR_16bit_storage"
+               OpFeature "SPV_KHR_16bit_storage"
           %1 = OpExtInstImport "GLSL.std.450"
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
                OpSource GLSL 450
-               OpSourceExtension "GL_AMD_gpu_shader_half_float"
+               OpSourceFeature "GL_AMD_gpu_shader_half_float"
                OpName %main "main"
                OpName %S "S"
                OpMemberName %S 0 "f"

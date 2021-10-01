@@ -100,9 +100,9 @@ namespace dawn_native {
         return mImpl->GetPCIInfo();
     }
 
-    std::vector<const char*> Adapter::GetSupportedExtensions() const {
-        ExtensionsSet supportedExtensionsSet = mImpl->GetSupportedExtensions();
-        return supportedExtensionsSet.GetEnabledExtensionNames();
+    std::vector<const char*> Adapter::GetSupportedFeatures() const {
+        FeaturesSet supportedFeaturesSet = mImpl->GetSupportedFeatures();
+        return supportedFeaturesSet.GetEnabledFeatureNames();
     }
 
     WGPUDeviceProperties Adapter::GetAdapterProperties() const {
