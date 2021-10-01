@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "23ab7afb_755a3cc2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbf64e28_0ffff68c",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ebbcf926_ca274034",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "24396af8_cbbbe425",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f83a8199_68b89ff2",
+      "range": {
+        "startLine": 448,
+        "startChar": 13,
+        "endLine": 448,
+        "endChar": 45
+      },
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd324bd9_9ff2d390",
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2733ef6_f14aa44e",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd324bd9_9ff2d390",
+      "range": {
+        "startLine": 452,
+        "startChar": 24,
+        "endLine": 452,
+        "endChar": 67
+      },
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0810f66e_fc419574",
@@ -111,6 +177,24 @@
       "writtenOn": "2021-09-30T08:11:36Z",
       "side": 1,
       "message": "Since this is starting to implement the semantics of depthReadOnly/stencilReadOnly but the code isn\u0027t complete in the backends, I think we should mark this as an unsafe API until it is completed (otherwise developers will be able to cause memory barriers issues in the backends)",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f96381_1387b4e4",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done.\n\nI am totally agreed that it\u0027s better to mark it as Unsafe API. but I am a little bit worried that some tests in CTS may fail if we have already had some validation or operation tests about readonly depth/stencil attachment in CTS. Let\u0027s keep an eye on the Chromium bots (Are Dawn bots testing all WebGPU CTS for each change?).",
+      "parentUuid": "0810f66e_fc419574",
       "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -168,6 +252,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e455881d_016ec2d2",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c68e1998_79037aa5",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953f78ad_ced1bfe0",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done. Set it to 0x40000000 as you suggested.",
+      "parentUuid": "c68e1998_79037aa5",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fafc60b8_20415c0f",
@@ -217,6 +337,24 @@
       "side": 1,
       "message": "I was just thinking you could move the setting of depthLoadOp/depthStoreOp before both cases, to line 903.",
       "parentUuid": "1a767dee_795bbf4b",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e99d67a_f3e77322",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T01:16:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3802894f_b0a5822b",
       "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
