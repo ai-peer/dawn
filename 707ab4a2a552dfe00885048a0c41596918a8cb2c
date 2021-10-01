@@ -201,6 +201,24 @@
       "parentUuid": "fafc60b8_20415c0f",
       "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3802894f_b0a5822b",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-01T00:37:45Z",
+      "side": 1,
+      "message": "I was just thinking you could move the setting of depthLoadOp/depthStoreOp before both cases, to line 903.",
+      "parentUuid": "1a767dee_795bbf4b",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
