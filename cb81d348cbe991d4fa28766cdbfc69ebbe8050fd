@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "828cd3f8_829bb1e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 30
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T12:05:59Z",
+      "side": 1,
+      "message": "Yeah the typedef aren\u0027t great either.\n\nI\u0027m worried about adding build scripts and headers for a dependency in random places in the repo. I don\u0027t really mind the license since it is BSD 3-clause as far as I can tell, but 1) we would need a README.dawn that explains what the license is in the spirv_to_dxil folder and 2) since the copyright is Microsoft, I think I should remind you it will get contributed under the Google CLA.\n\nThe plan for shipping being ??? is concerning yes. As discussed in previous meetings I think you should start a thread with Chrome eng review for this addition of this third-party dependency. If you want to ship a .dll and not be part of the CHromium build then you should highlight that. Otherwise we\u0027ll need GN files.",
+      "parentUuid": "2f277f8b_89d040fd",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "345faded_43d2d792",
         "filename": "build_mesa.ps1",
         "patchSetId": 30
