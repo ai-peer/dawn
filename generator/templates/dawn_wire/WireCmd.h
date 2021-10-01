@@ -100,6 +100,8 @@ namespace dawn_wire {
         //* big enough to contain all the data (as queried from GetRequiredSize).
         {% if command.may_have_dawn_object %}
             WireResult Serialize(size_t commandSize, SerializeBuffer* serializeBuffer, const ObjectIdProvider& objectIdProvider) const;
+            // Override which has no provider. The error provider will be passed instead.
+            WireResult Serialize(size_t commandSize, SerializeBuffer* serializeBuffer) const;
         {% else %}
             WireResult Serialize(size_t commandSize, SerializeBuffer* serializeBuffer) const;
             // Override which drops the provider if it's not needed.
@@ -117,11 +119,21 @@ namespace dawn_wire {
         //* Deserialize returns:
         //*  - Success if everything went well (yay!)
         //*  - FatalError is something bad happened (buffer too small for example)
-        WireResult Deserialize(DeserializeBuffer* deserializeBuffer, DeserializeAllocator* allocator
-            {%- if command.may_have_dawn_object -%}
-                , const ObjectIdResolver& resolver
-            {%- endif -%}
-        );
+        {%- if command.may_have_dawn_object -%}
+            WireResult Deserialize(
+                DeserializeBuffer* deserializeBuffer,
+                DeserializeAllocator* allocator,
+                const ObjectIdResolver& resolver);
+
+            // Override which has no resolver. The error resolver will be passed instead.
+            WireResult Deserialize(
+                DeserializeBuffer* deserializeBuffer,
+                DeserializeAllocator* allocator);
+        {%- else -%}
+            WireResult Deserialize(
+                DeserializeBuffer* deserializeBuffer,
+                DeserializeAllocator* allocator);
+        {%- endif -%}
 
         {% if command.derived_method %}
             //* Command handlers want to know the object ID in addition to the backing object.
