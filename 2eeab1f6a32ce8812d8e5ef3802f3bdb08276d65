@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f1f731f_6e094f89",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T17:55:29Z",
+      "side": 1,
+      "message": "I\u0027m working on removing a ton of these constants in https://dawn-review.googlesource.com/c/dawn/+/65483\n\ncan you query them instead?",
+      "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
