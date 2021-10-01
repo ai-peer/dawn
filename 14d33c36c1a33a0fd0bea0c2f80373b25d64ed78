@@ -16,6 +16,24 @@
       "message": "I think we need to keep this comment because we\u0027re mapping enums to strings.",
       "revId": "14d33c36c1a33a0fd0bea0c2f80373b25d64ed78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d266fbaa_1a596151",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2021-10-01T14:42:59Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0e0ee202_7f4d56bf",
+      "revId": "14d33c36c1a33a0fd0bea0c2f80373b25d64ed78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
