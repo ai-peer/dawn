@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3c04c0_960c1a74",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-01T18:52:13Z",
+      "side": 1,
+      "message": "LGTM\n\ncwallez: PTAL (Austin made this change to make https://dawn-review.googlesource.com/c/dawn/+/65100 work, I just re-uploaded it)",
+      "revId": "4fc8fe397e6622bb4075b813175969914bf5a199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
