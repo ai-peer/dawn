@@ -107,6 +107,24 @@
       "message": "In this change and other similar changes in end2end tests. Are we trying to test the limits actually supported by the device? Otherwise I\u0027m not sure what\u0027s the value or making these non-constants.\n\nWe could move the constants to a test-only header if we wanted.",
       "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "007bdb71_e864cffc",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T16:22:19Z",
+      "side": 1,
+      "message": "Not trying to test limits supported by the device right now (because this currently always getting the defaults). Mostly trying to remove all of the constants and structure the validation and code around the limits.\n\nA test-only header would work too though.",
+      "parentUuid": "2795ca06_705a71e5",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
