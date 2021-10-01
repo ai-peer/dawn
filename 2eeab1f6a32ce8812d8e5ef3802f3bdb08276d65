@@ -52,6 +52,24 @@
       "parentUuid": "76995589_cbe00a24",
       "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5a08b0c_db505ddb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-01T18:01:37Z",
+      "side": 1,
+      "message": "Perfect, thanks. I\u0027ll rework this CL then.",
+      "parentUuid": "6cfd0d13_1caa6f8b",
+      "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
