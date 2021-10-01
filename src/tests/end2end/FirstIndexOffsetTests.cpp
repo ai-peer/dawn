@@ -45,15 +45,6 @@ class FirstIndexOffsetTests : public DawnTest {
     void TestInstanceIndex(DrawMode mode, uint32_t firstInstance);
     void TestBothIndices(DrawMode mode, uint32_t firstVertex, uint32_t firstInstance);
 
-  protected:
-    void SetUp() override {
-        DawnTest::SetUp();
-        // WGSL doesn't have the ability to tag attributes as "flat". "flat" is required on u32
-        // attributes for correct runtime behavior under Vulkan and codegen under OpenGL(ES).
-        // TODO(tint:451): Remove once resolved by spec/tint
-        DAWN_SUPPRESS_TEST_IF(IsVulkan() || IsOpenGL() || IsOpenGLES());
-    }
-
   private:
     void TestImpl(DrawMode mode,
                   CheckIndex checkIndex,
