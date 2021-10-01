@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73202baf_515ad291",
+        "filename": "scripts/extract.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T00:49:48Z",
+      "side": 1,
+      "message": "copied directly from https://source.chromium.org/chromium/chromium/src/+/main:third_party/boringssl/src/util/bot/extract.py",
+      "revId": "a65d01d51fa09d9c9c405b7e1df74874acf5775a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
