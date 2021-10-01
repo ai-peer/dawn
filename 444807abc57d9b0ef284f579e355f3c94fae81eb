@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11343a77_c3238824",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T10:45:32Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "444807abc57d9b0ef284f579e355f3c94fae81eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbc61c81_78c0c048",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T10:45:32Z",
+      "side": 1,
+      "message": "optional nit: these methods could be const (both has and keys)",
+      "revId": "444807abc57d9b0ef284f579e355f3c94fae81eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

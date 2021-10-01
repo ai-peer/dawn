@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80913ad4_6ef247d7",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T10:45:32Z",
+      "side": 1,
+      "message": "I think JS might be able to mutate the setlike that\u0027s returned by the API. But agreed it doesn\u0027t really matter.",
+      "parentUuid": "e03afb71_fa708780",
+      "revId": "8649ae24e160018c88d92e88c4d642424a626663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "697a7a0f_90890334",
