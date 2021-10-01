@@ -16,6 +16,57 @@
       "message": "LGTM",
       "revId": "8649ae24e160018c88d92e88c4d642424a626663",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9687d70d_dbfa1ead",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:47:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8649ae24e160018c88d92e88c4d642424a626663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac5ff32_48f3f35d",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:47:48Z",
+      "side": 1,
+      "message": "Why is this using extract? It will deconstruct the set as we iterate over it. (and just iterating could use range based for loops). The method could even be const, same for \"has\".\n\nAlso note that \"values()\" is specced as an alias of keys() (or vice-versa) so we get that for free, but also that they are specced to return keys in insertion order (for when the application can modify these objects).",
+      "revId": "8649ae24e160018c88d92e88c4d642424a626663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "697a7a0f_90890334",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:47:48Z",
+      "side": 1,
+      "message": "Note: later we could make a template that\u0027s SetLike\u003cT\u003e that wraps an unordered_set\u003cT\u003e.",
+      "revId": "8649ae24e160018c88d92e88c4d642424a626663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
