@@ -1033,6 +1033,7 @@
             {"name": "multi planar formats", "type": "bool", "default": "false"},
             {"name": "depth clamping", "type": "bool", "default": "false"},
             {"name": "invalid extension", "type": "bool", "default": "false"},
+            {"name": "invalid feature", "type": "bool", "default": "false"},
             {"name": "dawn internal usages", "type": "bool", "default": "false"},
             {"name": "limits", "type": "supported limits"}
         ]
