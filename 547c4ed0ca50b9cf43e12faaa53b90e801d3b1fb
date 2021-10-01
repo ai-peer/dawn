@@ -34,6 +34,24 @@
       "parentUuid": "1c7a8003_f56808e2",
       "revId": "547c4ed0ca50b9cf43e12faaa53b90e801d3b1fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a56c5c8e_6d89b273",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T08:21:41Z",
+      "side": 0,
+      "message": "Yeah I don\u0027t think it brings that much value.",
+      "parentUuid": "e828599e_054eeda9",
+      "revId": "547c4ed0ca50b9cf43e12faaa53b90e801d3b1fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

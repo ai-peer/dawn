@@ -33,6 +33,80 @@
       "message": "LGTM, and kudos for doing such a thorough job across so many files!",
       "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95d89cbd_665e03ff",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T08:21:41Z",
+      "side": 1,
+      "message": "nit: we have the same line twice.",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16591a99_bd6b1649",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T08:21:41Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we have a value for this?\n\nBut also we keep piping these values that depend on the limits around. What about passing the limits to IndirectMetadata\u0027s constructor and just storing them there?",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 48
+      },
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17e53e8a_762a87b4",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T08:21:41Z",
+      "side": 1,
+      "message": "Maybe we should keep a comment about the overflow here.",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2795ca06_705a71e5",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T08:21:41Z",
+      "side": 1,
+      "message": "In this change and other similar changes in end2end tests. Are we trying to test the limits actually supported by the device? Otherwise I\u0027m not sure what\u0027s the value or making these non-constants.\n\nWe could move the constants to a test-only header if we wanted.",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
