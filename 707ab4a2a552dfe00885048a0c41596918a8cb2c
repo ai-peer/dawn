@@ -134,6 +134,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "786b7433_d127a9ce",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T00:18:33Z",
+      "side": 1,
+      "message": "Good catch. What about set kAgainAsRenderAttachment to 0xFFFFFFFF? That value will be extremely hard to be hit by combinations.",
+      "parentUuid": "306a79dd_a4f432fb",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fafc60b8_20415c0f",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 2
@@ -145,6 +163,24 @@
       "writtenOn": "2021-09-30T23:50:12Z",
       "side": 1,
       "message": "nit: IMO you should change as little as possible between the two cases, so depthLoadOp and depthStoreOp should stay the same and only depthReadOnly should change.",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a767dee_795bbf4b",
+        "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T00:18:33Z",
+      "side": 1,
+      "message": "depthLoadOp\u0027s default value in ComboRenderPassDescriptor is not \"Load\", it is \"Clear\". But the spec requires it to be \"Load\" if depthReadOnly is true. So changing depthLoadOp is a must. But setting depthStoreOp is indeed unnecessary because it is already the required value by default. I just wanted to make it clear and consistent.",
+      "parentUuid": "fafc60b8_20415c0f",
       "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
