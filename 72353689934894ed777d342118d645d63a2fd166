@@ -16,6 +16,97 @@
       "message": "PTAL!",
       "revId": "72353689934894ed777d342118d645d63a2fd166",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39f0f549_55e7ae06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:02:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60026563_8e945832",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:02:51Z",
+      "side": 1,
+      "message": "nit: Maybe put the combination of usages?",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9536d0f_b7c026f3",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:02:51Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44a87da7_ecc41ecc",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:02:51Z",
+      "side": 1,
+      "message": "Maybe we can use the range construct we usually use, like  (bufferOffset: %u, size: %u)",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7201f835_cade5268",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:02:51Z",
+      "side": 1,
+      "message": "when?",
+      "range": {
+        "startLine": 289,
+        "startChar": 85,
+        "endLine": 289,
+        "endChar": 86
+      },
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
