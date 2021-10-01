@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab2d149a_94da8d8d",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T18:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60026563_8e945832",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d9536d0f_b7c026f3",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-10-01T18:02:51Z",
       "side": 1,
       "message": "ditto",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "477bef9b_eed1e68d",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T18:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9536d0f_b7c026f3",
       "revId": "72353689934894ed777d342118d645d63a2fd166",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "55dfebf9_a1bbf6ec",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T18:34:36Z",
+      "side": 1,
+      "message": "I considered that, but this is slightly different in that the size isn\u0027t user specified, it\u0027s the full size of the linear data. And in most range cases the range is [offset, offset + size] and here it\u0027s [offset, size]. As such I thought listing it as \"(bufferOffset: %u, size: %u)\" might be confusing.",
+      "parentUuid": "44a87da7_ecc41ecc",
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7201f835_cade5268",
         "filename": "src/dawn_native/CommandValidation.cpp",
         "patchSetId": 2
@@ -99,6 +153,30 @@
       "writtenOn": "2021-10-01T18:02:51Z",
       "side": 1,
       "message": "when?",
+      "range": {
+        "startLine": 289,
+        "startChar": 85,
+        "endLine": 289,
+        "endChar": 86
+      },
+      "revId": "72353689934894ed777d342118d645d63a2fd166",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1fe5e9d_9d0b61ab",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T18:34:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7201f835_cade5268",
       "range": {
         "startLine": 289,
         "startChar": 85,
