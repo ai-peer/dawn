@@ -16,6 +16,23 @@
       "message": "Still LGTM. Asutin PTAL!",
       "revId": "dba13a7fcf2b90ecf3752b22c7dc109f935249c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "895ce27a_3c4ad7f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T21:47:56Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "dba13a7fcf2b90ecf3752b22c7dc109f935249c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
