@@ -16,6 +16,80 @@
       "message": "PTAL",
       "revId": "ab6c3bfb3be4ae7b1af204b4b0f2b88013b60763",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "622fd248_982c05b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T14:16:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ab6c3bfb3be4ae7b1af204b4b0f2b88013b60763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8426f6b1_2e265374",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T14:16:06Z",
+      "side": 1,
+      "message": "nit: add a TODO(dawn:1149): remove onces requiredExtensions is no longer used. Same in other places that still reference requiredExtensions (like dawn.json)",
+      "revId": "ab6c3bfb3be4ae7b1af204b4b0f2b88013b60763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b019bca_03eb81f3",
+        "filename": "src/dawn_native/Features.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T14:16:06Z",
+      "side": 1,
+      "message": "MultiPlanarFormats is also dawn-specific so maybe we can move it below. (the order in the .cpp will have to be changed to match)",
+      "range": {
+        "startLine": 33,
+        "startChar": 0,
+        "endLine": 33,
+        "endChar": 27
+      },
+      "revId": "ab6c3bfb3be4ae7b1af204b4b0f2b88013b60763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f576699d_954a5f41",
+        "filename": "src/tests/end2end/ShaderFloat16Tests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T14:16:06Z",
+      "side": 1,
+      "message": "These need to stay as-is. There is no OpFeature SPIRV opcode.\n\nThis wasn\u0027t caught by tests because use_tint_generator is always true now.",
+      "revId": "ab6c3bfb3be4ae7b1af204b4b0f2b88013b60763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
