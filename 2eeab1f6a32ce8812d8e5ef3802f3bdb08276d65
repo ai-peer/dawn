@@ -16,6 +16,24 @@
       "message": "I\u0027m working on removing a ton of these constants in https://dawn-review.googlesource.com/c/dawn/+/65483\n\ncan you query them instead?",
       "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76995589_cbe00a24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-01T17:57:49Z",
+      "side": 1,
+      "message": "Yes, if there APIs to query all of these? I looked last week but couldn\u0027t find the APIs to get all of these.",
+      "parentUuid": "6f1f731f_6e094f89",
+      "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
