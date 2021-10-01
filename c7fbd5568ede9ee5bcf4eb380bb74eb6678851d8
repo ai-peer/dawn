@@ -16,6 +16,63 @@
       "message": "Thanks!",
       "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da022290_c86353e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:57:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56963d00_df93408e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:57:56Z",
+      "side": 1,
+      "message": "nit: We could probably inline this check and be more explicit that cube maps must have width \u003d height",
+      "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2c9e01a_a55393ce",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:57:56Z",
+      "side": 1,
+      "message": "English question: should this be plural because it is 2 things or-ed together?",
+      "range": {
+        "startLine": 299,
+        "startChar": 69,
+        "endLine": 299,
+        "endChar": 71
+      },
+      "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
