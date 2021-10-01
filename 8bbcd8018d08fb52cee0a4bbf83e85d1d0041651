@@ -22,6 +22,30 @@
       },
       "revId": "8bbcd8018d08fb52cee0a4bbf83e85d1d0041651",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d44d475f_a5b58876",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T16:34:00Z",
+      "side": 0,
+      "message": "Yeah I think we can add a new Toggle then. And also just use it for testing locally until we switch it in one go. This should be probably safe because we won\u0027t have users of the GL backend (contrary to what we had with other backends.)",
+      "parentUuid": "d149328a_18551a0c",
+      "range": {
+        "startLine": 191,
+        "startChar": 7,
+        "endLine": 199,
+        "endChar": 9
+      },
+      "revId": "8bbcd8018d08fb52cee0a4bbf83e85d1d0041651",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
