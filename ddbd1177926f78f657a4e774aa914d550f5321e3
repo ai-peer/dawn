@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1795db94_649cce16",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-01T06:30:35Z",
+      "side": 1,
+      "message": "Addressed Kai\u0027s comment at https://dawn-review.googlesource.com/c/dawn/+/65485/2..5/src/dawn_native/dawn_platform.h#b35: group BufferUsages and TextureUsages.",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 0
+      },
+      "revId": "ddbd1177926f78f657a4e774aa914d550f5321e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
