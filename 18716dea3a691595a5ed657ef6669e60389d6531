@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9389948c_3fac69d3",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T19:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95d89cbd_665e03ff",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16591a99_bd6b1649",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2580001_29068f8d",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T19:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16591a99_bd6b1649",
+      "range": {
+        "startLine": 40,
+        "startChar": 10,
+        "endLine": 40,
+        "endChar": 48
+      },
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17e53e8a_762a87b4",
@@ -88,6 +130,24 @@
       "writtenOn": "2021-10-01T08:21:41Z",
       "side": 1,
       "message": "Maybe we should keep a comment about the overflow here.",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43c5af44_1d7059e7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T19:00:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17e53e8a_762a87b4",
       "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -123,6 +183,24 @@
       "side": 1,
       "message": "Not trying to test limits supported by the device right now (because this currently always getting the defaults). Mostly trying to remove all of the constants and structure the validation and code around the limits.\n\nA test-only header would work too though.",
       "parentUuid": "2795ca06_705a71e5",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d37f58_c96ad380",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T19:00:30Z",
+      "side": 1,
+      "message": "though soon we will want to test the actual device limits. Keeping as is for now.",
+      "parentUuid": "007bdb71_e864cffc",
       "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
