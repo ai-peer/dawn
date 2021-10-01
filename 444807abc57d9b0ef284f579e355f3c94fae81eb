@@ -33,6 +33,24 @@
       "message": "optional nit: these methods could be const (both has and keys)",
       "revId": "444807abc57d9b0ef284f579e355f3c94fae81eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cdcbe1d_44673e70",
+        "filename": "src/dawn_node/binding/GPUAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-01T11:55:12Z",
+      "side": 1,
+      "message": "I\u0027m not keen on imposing const on pure-virtuals like this, as who knows what tricks the implementation is going to need to do.",
+      "parentUuid": "fbc61c81_78c0c048",
+      "revId": "444807abc57d9b0ef284f579e355f3c94fae81eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
