@@ -16,6 +16,23 @@
       "message": "Sooo I found this when looking at the code.",
       "revId": "4c628f625c76a52f9d40e6e23e01470f63647ec1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "870cfd8c_7a1a3f1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-01T17:32:52Z",
+      "side": 1,
+      "message": "nice",
+      "revId": "4c628f625c76a52f9d40e6e23e01470f63647ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
