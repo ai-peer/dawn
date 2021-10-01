@@ -152,6 +152,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c68e1998_79037aa5",
+        "filename": "src/dawn_native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-01T00:36:53Z",
+      "side": 1,
+      "message": "Shouldn\u0027t it have its own bit? Like 0x40000000 or something.\n\nAs long as these \"internal\" bits are all next to each other (in this file) we should be able to notice collisions. Although I think we should group the BufferUsage bits and the TextureUsage bits separately so we can see the list easily.",
+      "parentUuid": "786b7433_d127a9ce",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fafc60b8_20415c0f",
         "filename": "src/tests/unittests/validation/ResourceUsageTrackingTests.cpp",
         "patchSetId": 2
