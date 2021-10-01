@@ -199,6 +199,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fc6bdf_ce8df10d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T07:50:36Z",
+      "side": 1,
+      "message": "Yeah the WebGPU CTS is tested on every Dawn CQ run.",
+      "parentUuid": "b1f96381_1387b4e4",
+      "revId": "707ab4a2a552dfe00885048a0c41596918a8cb2c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "306a79dd_a4f432fb",
