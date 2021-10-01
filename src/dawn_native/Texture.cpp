@@ -270,7 +270,7 @@ namespace dawn_native {
         }
 
         if (internalUsageDesc != nullptr &&
-            !device->IsExtensionEnabled(Extension::DawnInternalUsages)) {
+            !device->IsFeatureEnabled(Feature::DawnInternalUsages)) {
             return DAWN_VALIDATION_ERROR("The dawn-internal-usages feature is not enabled");
         }
 
@@ -429,7 +429,7 @@ namespace dawn_native {
     }
 
     // WebGPU only supports sample counts of 1 and 4. We could expand to more based on
-    // platform support, but it would probably be an extension.
+    // platform support, but it would probably be a feature.
     bool IsValidSampleCount(uint32_t sampleCount) {
         switch (sampleCount) {
             case 1:

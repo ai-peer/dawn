@@ -15,7 +15,7 @@
 #include "dawn_native/QuerySet.h"
 
 #include "dawn_native/Device.h"
-#include "dawn_native/Extensions.h"
+#include "dawn_native/Features.h"
 #include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/ValidationUtils_autogen.h"
 
@@ -67,7 +67,7 @@ namespace dawn_native {
                         "implemented");
                 }
 
-                if (!device->IsExtensionEnabled(Extension::PipelineStatisticsQuery)) {
+                if (!device->IsFeatureEnabled(Feature::PipelineStatisticsQuery)) {
                     return DAWN_VALIDATION_ERROR(
                         "The pipeline statistics query feature is not supported");
                 }
@@ -91,7 +91,7 @@ namespace dawn_native {
             } break;
 
             case wgpu::QueryType::Timestamp:
-                if (!device->IsExtensionEnabled(Extension::TimestampQuery)) {
+                if (!device->IsFeatureEnabled(Feature::TimestampQuery)) {
                     return DAWN_VALIDATION_ERROR("The timestamp query feature is not supported");
                 }
 
