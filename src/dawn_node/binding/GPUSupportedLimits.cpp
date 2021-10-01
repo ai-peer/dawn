@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "src/dawn_node/binding/GPUSupportedLimits.h"
+#include "src/common/Constants.h"
 
 namespace wgpu { namespace binding {
 
@@ -20,112 +21,111 @@ namespace wgpu { namespace binding {
     // wgpu::bindings::GPUSupportedLimits
     ////////////////////////////////////////////////////////////////////////////////
 
-    // Values taken from.
-    // https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_supported_limits.h
-    // TODO(crbug.com/dawn/1131): Actually use limits reported by the device / adapter.
+    // TODO(crbug.com/dawn/1131): Once the Dawn API exposes these values, use them instead of
+    // including Constants.h
 
     uint32_t GPUSupportedLimits::getMaxTextureDimension1D(Napi::Env) {
-        return 8192;
+        return kMaxTextureDimension1D;
     }
 
     uint32_t GPUSupportedLimits::getMaxTextureDimension2D(Napi::Env) {
-        return 8192;
+        return kMaxTextureDimension2D;
     }
 
     uint32_t GPUSupportedLimits::getMaxTextureDimension3D(Napi::Env) {
-        return 2048;
+        return kMaxTextureDimension3D;
     }
 
     uint32_t GPUSupportedLimits::getMaxTextureArrayLayers(Napi::Env) {
-        return 2048;
+        return kMaxTextureArrayLayers;
     }
 
     uint32_t GPUSupportedLimits::getMaxBindGroups(Napi::Env) {
-        return 4;
+        return kMaxBindGroups;
     }
 
     uint32_t GPUSupportedLimits::getMaxDynamicUniformBuffersPerPipelineLayout(Napi::Env) {
-        return 8;
+        return kMaxDynamicUniformBuffersPerPipelineLayout;
     }
 
     uint32_t GPUSupportedLimits::getMaxDynamicStorageBuffersPerPipelineLayout(Napi::Env) {
-        return 4;
+        return kMaxDynamicStorageBuffersPerPipelineLayout;
     }
 
     uint32_t GPUSupportedLimits::getMaxSampledTexturesPerShaderStage(Napi::Env) {
-        return 16;
+        return kMaxSampledTexturesPerShaderStage;
     }
 
     uint32_t GPUSupportedLimits::getMaxSamplersPerShaderStage(Napi::Env) {
-        return 16;
+        return kMaxSamplersPerShaderStage;
     }
 
     uint32_t GPUSupportedLimits::getMaxStorageBuffersPerShaderStage(Napi::Env) {
-        return 4;
+        return kMaxStorageBuffersPerShaderStage;
     }
 
     uint32_t GPUSupportedLimits::getMaxStorageTexturesPerShaderStage(Napi::Env) {
-        return 4;
+        return kMaxStorageTexturesPerShaderStage;
     }
 
     uint32_t GPUSupportedLimits::getMaxUniformBuffersPerShaderStage(Napi::Env) {
-        return 12;
+        return kMaxUniformBuffersPerShaderStage;
     }
 
     uint64_t GPUSupportedLimits::getMaxUniformBufferBindingSize(Napi::Env) {
-        return 16384;
+        return kMaxUniformBufferBindingSize;
     }
 
     uint64_t GPUSupportedLimits::getMaxStorageBufferBindingSize(Napi::Env) {
-        return 134217728;
+        return kMaxStorageBufferBindingSize;
     }
 
     uint32_t GPUSupportedLimits::getMinUniformBufferOffsetAlignment(Napi::Env) {
-        return 256;
+        return kMinUniformBufferOffsetAlignment;
     }
 
     uint32_t GPUSupportedLimits::getMinStorageBufferOffsetAlignment(Napi::Env) {
-        return 256;
+        return kMinStorageBufferOffsetAlignment;
     }
 
     uint32_t GPUSupportedLimits::getMaxVertexBuffers(Napi::Env) {
-        return 8;
+        return kMaxVertexBuffers;
     }
 
     uint32_t GPUSupportedLimits::getMaxVertexAttributes(Napi::Env) {
-        return 16;
+        return kMaxVertexAttributes;
     }
 
     uint32_t GPUSupportedLimits::getMaxVertexBufferArrayStride(Napi::Env) {
-        return 2048;
+        return kMaxVertexBufferArrayStride;
     }
 
     uint32_t GPUSupportedLimits::getMaxInterStageShaderComponents(Napi::Env) {
-        return 60;
+        return kMaxInterStageShaderComponents;
     }
 
     uint32_t GPUSupportedLimits::getMaxComputeWorkgroupStorageSize(Napi::Env) {
-        return 16352;
+        return kMaxComputeWorkgroupStorageSize;
     }
 
     uint32_t GPUSupportedLimits::getMaxComputeInvocationsPerWorkgroup(Napi::Env) {
-        return 256;
+        return kMaxComputeWorkgroupInvocations;
     }
 
     uint32_t GPUSupportedLimits::getMaxComputeWorkgroupSizeX(Napi::Env) {
-        return 256;
+        return kMaxComputeWorkgroupSizeX;
     }
 
     uint32_t GPUSupportedLimits::getMaxComputeWorkgroupSizeY(Napi::Env) {
-        return 256;
+        return kMaxComputeWorkgroupSizeY;
     }
 
     uint32_t GPUSupportedLimits::getMaxComputeWorkgroupSizeZ(Napi::Env) {
-        return 64;
+        return kMaxComputeWorkgroupSizeZ;
     }
 
     uint32_t GPUSupportedLimits::getMaxComputeWorkgroupsPerDimension(Napi::Env) {
-        return 65535;
+        return kMaxComputePerDimensionDispatchSize;
     }
 
 }}  // namespace wgpu::binding
