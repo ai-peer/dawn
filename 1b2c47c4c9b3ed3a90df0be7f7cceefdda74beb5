@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95bd95a0_0f9855b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002726
+      },
+      "writtenOn": "2021-10-01T19:12:08Z",
+      "side": 1,
+      "message": "Thanks for the review, as always!\n\nI have not yet addressed the issue of the spirv_to_dxil dependency in the most recent patchset, but am currently working on it with Rafael.",
+      "revId": "1b2c47c4c9b3ed3a90df0be7f7cceefdda74beb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
