@@ -299,16 +299,16 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<VulkanDeviceKnobs> Device::CreateDevice(VkPhysicalDevice physicalDevice) {
         VulkanDeviceKnobs usedKnobs = {};
 
-        // Default to asking for all avilable known extensions.
-        usedKnobs.extensions = mDeviceInfo.extensions;
+        // Default to asking for all available known features.
+        usedKnobs.features = mDeviceInfo.features;
 
-        // However only request the extensions that haven't been promoted in the device's apiVersion
-        std::vector<const char*> extensionNames;
-        for (DeviceExt ext : IterateBitSet(usedKnobs.extensions)) {
+        // However only request the features that haven't been promoted in the device's apiVersion
+        std::vector<const char*> featureNames;
+        for (DeviceExt ext : IterateBitSet(usedKnobs.features)) {
             const DeviceExtInfo& info = GetDeviceExtInfo(ext);
 
             if (info.versionPromoted > mDeviceInfo.properties.apiVersion) {
-                extensionNames.push_back(info.name);
+                featureNames.push_back(info.name);
             }
         }
 
@@ -348,31 +348,31 @@ namespace dawn_native { namespace vulkan {
             usedKnobs.features.samplerAnisotropy = VK_TRUE;
         }
 
-        if (IsExtensionEnabled(Extension::TextureCompressionBC)) {
+        if (IsFeatureEnabled(Feature::TextureCompressionBC)) {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.textureCompressionBC ==
                    VK_TRUE);
             usedKnobs.features.textureCompressionBC = VK_TRUE;
         }
 
-        if (IsExtensionEnabled(Extension::TextureCompressionETC2)) {
+        if (IsFeatureEnabled(Feature::TextureCompressionETC2)) {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.textureCompressionETC2 ==
                    VK_TRUE);
             usedKnobs.features.textureCompressionETC2 = VK_TRUE;
         }
 
-        if (IsExtensionEnabled(Extension::TextureCompressionASTC)) {
+        if (IsFeatureEnabled(Feature::TextureCompressionASTC)) {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.textureCompressionASTC_LDR ==
                    VK_TRUE);
             usedKnobs.features.textureCompressionASTC_LDR = VK_TRUE;
         }
 
-        if (IsExtensionEnabled(Extension::PipelineStatisticsQuery)) {
+        if (IsFeatureEnabled(Feature::PipelineStatisticsQuery)) {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.pipelineStatisticsQuery ==
                    VK_TRUE);
             usedKnobs.features.pipelineStatisticsQuery = VK_TRUE;
         }
 
-        if (IsExtensionEnabled(Extension::ShaderFloat16)) {
+        if (IsFeatureEnabled(Feature::ShaderFloat16)) {
             const VulkanDeviceInfo& deviceInfo = ToBackend(GetAdapter())->GetDeviceInfo();
             ASSERT(deviceInfo.HasExt(DeviceExt::ShaderFloat16Int8) &&
                    deviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
@@ -390,7 +390,7 @@ namespace dawn_native { namespace vulkan {
                               VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_16BIT_STORAGE_FEATURES);
         }
 
-        if (IsExtensionEnabled(Extension::DepthClamping)) {
+        if (IsFeatureEnabled(Feature::DepthClamping)) {
             ASSERT(ToBackend(GetAdapter())->GetDeviceInfo().features.depthClamp == VK_TRUE);
             usedKnobs.features.depthClamp = VK_TRUE;
         }
@@ -437,8 +437,8 @@ namespace dawn_native { namespace vulkan {
         createInfo.pQueueCreateInfos = queuesToRequest.data();
         createInfo.enabledLayerCount = 0;
         createInfo.ppEnabledLayerNames = nullptr;
-        createInfo.enabledExtensionCount = static_cast<uint32_t>(extensionNames.size());
-        createInfo.ppEnabledExtensionNames = extensionNames.data();
+        createInfo.enabledFeatureCount = static_cast<uint32_t>(featureNames.size());
+        createInfo.ppEnabledFeatureNames = featureNames.data();
 
         // When we have DeviceExt::GetPhysicalDeviceProperties2, use features2 so that features not
         // covered by VkPhysicalDeviceFeatures can be enabled.
