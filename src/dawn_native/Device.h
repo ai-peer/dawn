@@ -17,7 +17,7 @@
 
 #include "dawn_native/Commands.h"
 #include "dawn_native/Error.h"
-#include "dawn_native/Extensions.h"
+#include "dawn_native/Features.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/Forward.h"
 #include "dawn_native/Limits.h"
@@ -283,9 +283,9 @@ namespace dawn_native {
         bool IsLost() const;
         std::mutex* GetObjectListMutex(ObjectType type);
 
-        std::vector<const char*> GetEnabledExtensions() const;
+        std::vector<const char*> GetEnabledFeatures() const;
         std::vector<const char*> GetTogglesUsed() const;
-        bool IsExtensionEnabled(Extension extension) const;
+        bool IsFeatureEnabled(Feature feature) const;
         bool IsToggleEnabled(Toggle toggle) const;
         bool IsValidationEnabled() const;
         bool IsRobustnessEnabled() const;
@@ -406,7 +406,7 @@ namespace dawn_native {
             void* userdata);
 
         void ApplyToggleOverrides(const DeviceDescriptor* deviceDescriptor);
-        void ApplyExtensions(const DeviceDescriptor* deviceDescriptor);
+        void ApplyFeatures(const DeviceDescriptor* deviceDescriptor);
 
         void SetDefaultToggles();
 
@@ -493,7 +493,7 @@ namespace dawn_native {
         std::atomic_uint64_t mNextPipelineCompatibilityToken;
 
         CombinedLimits mLimits;
-        ExtensionsSet mEnabledExtensions;
+        FeaturesSet mEnabledFeatures;
 
         std::unique_ptr<InternalPipelineStore> mInternalPipelineStore;
 
