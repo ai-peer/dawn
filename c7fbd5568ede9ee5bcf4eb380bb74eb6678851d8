@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9291681_6ae2ce7b",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T17:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56963d00_df93408e",
+      "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2c9e01a_a55393ce",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-10-01T07:57:56Z",
       "side": 1,
       "message": "English question: should this be plural because it is 2 things or-ed together?",
+      "range": {
+        "startLine": 299,
+        "startChar": 69,
+        "endLine": 299,
+        "endChar": 71
+      },
+      "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e87ea417_cac89e66",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T17:47:28Z",
+      "side": 1,
+      "message": "Ha! \"is\" sounded right to me here, but now you\u0027ve got me questioning my grasp on my native language because \"are\" doesn\u0027t sound out of place either! Let see what the internet has to say!\n\nhttps://editorsmanual.com/articles/compound-subject-singular-or-plural/ says:\n\n\"When a compound subject contains or or nor, the verb should agree with the part of the subject closest to it.\n\nExample: Either Anita or Nesbit  *is*  handling the launch.\"\n\nWhich means this is right, but it\u0027s enough of a grammatical edge case that it tripped me up, so I don\u0027t blame you for wondering!",
+      "parentUuid": "f2c9e01a_a55393ce",
       "range": {
         "startLine": 299,
         "startChar": 69,
