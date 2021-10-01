@@ -115,6 +115,30 @@
       },
       "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a475ae2b_dc05ccd3",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T17:49:28Z",
+      "side": 1,
+      "message": "Interesting, I think French is the opposite and would choose plural here (although I\u0027d also need to do some grammar digging to be 100% sure).",
+      "parentUuid": "e87ea417_cac89e66",
+      "range": {
+        "startLine": 299,
+        "startChar": 69,
+        "endLine": 299,
+        "endChar": 71
+      },
+      "revId": "c7fbd5568ede9ee5bcf4eb380bb74eb6678851d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
