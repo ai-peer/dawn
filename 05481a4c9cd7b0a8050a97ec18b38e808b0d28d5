@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "073c206f_7754bdc1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:07:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "05481a4c9cd7b0a8050a97ec18b38e808b0d28d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a25602fa_9494d9ea",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-01T18:07:33Z",
+      "side": 1,
+      "message": "WDYT of using nodiscard on this type? You might need to depend on Dawn\u0027s common/ to use Compiler.h",
+      "revId": "05481a4c9cd7b0a8050a97ec18b38e808b0d28d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
