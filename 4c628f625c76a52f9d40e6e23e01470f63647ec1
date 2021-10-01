@@ -33,6 +33,23 @@
       "message": "nice",
       "revId": "4c628f625c76a52f9d40e6e23e01470f63647ec1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cda7e1d_b111ff3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-01T18:17:32Z",
+      "side": 1,
+      "message": "LGTM, though the win-dawn-rel bot failure looks relevant.",
+      "revId": "4c628f625c76a52f9d40e6e23e01470f63647ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
