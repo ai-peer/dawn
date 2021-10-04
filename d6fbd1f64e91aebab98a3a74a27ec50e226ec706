@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab9bfca_1d62dce8",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-04T12:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3283ae7_39a00a5d",
+      "range": {
+        "startLine": 186,
+        "startChar": 17,
+        "endLine": 186,
+        "endChar": 27
+      },
+      "revId": "d6fbd1f64e91aebab98a3a74a27ec50e226ec706",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23e68fb5_71366a4e",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-10-04T12:36:51Z",
       "side": 1,
       "message": "make this a logger?",
+      "range": {
+        "startLine": 207,
+        "startChar": 26,
+        "endLine": 207,
+        "endChar": 35
+      },
+      "revId": "d6fbd1f64e91aebab98a3a74a27ec50e226ec706",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c949b29_8620a2d2",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-04T12:54:30Z",
+      "side": 1,
+      "message": "Good idea.",
+      "parentUuid": "23e68fb5_71366a4e",
       "range": {
         "startLine": 207,
         "startChar": 26,
