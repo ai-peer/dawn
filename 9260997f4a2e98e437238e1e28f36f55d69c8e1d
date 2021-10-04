@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "9260997f4a2e98e437238e1e28f36f55d69c8e1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c173091_b158858d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-04T21:07:27Z",
+      "side": 1,
+      "message": "LGTM but I think eventually these are going to become enums for webgpu.h",
+      "revId": "9260997f4a2e98e437238e1e28f36f55d69c8e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
