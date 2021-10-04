@@ -263,6 +263,10 @@ namespace dawn_native { namespace null {
           BindGroupBase(device, descriptor, mBindingDataAllocation) {
     }
 
+    BindGroup::~BindGroup() {
+        DestroyApiObject();
+    }
+
     // BindGroupLayout
 
     BindGroupLayout::BindGroupLayout(DeviceBase* device,
