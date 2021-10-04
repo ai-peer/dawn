@@ -56,10 +56,9 @@ namespace dawn_native { namespace d3d12 {
     }
 
     QuerySet::~QuerySet() {
-        DestroyInternal();
     }
 
-    void QuerySet::DestroyImpl() {
+    void QuerySet::DestroyApiObjectImpl() {
         ToBackend(GetDevice())->ReferenceUntilUnused(mQueryHeap);
     }
 

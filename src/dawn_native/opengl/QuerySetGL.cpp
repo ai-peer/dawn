@@ -23,10 +23,9 @@ namespace dawn_native { namespace opengl {
     }
 
     QuerySet::~QuerySet() {
-        DestroyInternal();
     }
 
-    void QuerySet::DestroyImpl() {
+    void QuerySet::DestroyApiObjectImpl() {
     }
 
 }}  // namespace dawn_native::opengl
