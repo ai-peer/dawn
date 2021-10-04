@@ -284,8 +284,8 @@ namespace dawn_native { namespace null {
     }
 
     Buffer::~Buffer() {
-        DestroyInternal();
         ToBackend(GetDevice())->DecrementMemoryUsage(GetSize());
+        DestroyApiObject();
     }
 
     bool Buffer::IsCPUWritableAtCreation() const {
@@ -323,7 +323,7 @@ namespace dawn_native { namespace null {
     void Buffer::UnmapImpl() {
     }
 
-    void Buffer::DestroyImpl() {
+    void Buffer::DestroyApiObjectImpl() {
     }
 
     // CommandBuffer
