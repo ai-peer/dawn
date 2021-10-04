@@ -208,6 +208,7 @@ namespace dawn_native { namespace d3d12 {
     BindGroup::~BindGroup() {
         ToBackend(GetLayout())->DeallocateBindGroup(this, &mCPUViewAllocation);
         ASSERT(!mCPUViewAllocation.IsValid());
+        DestroyApiObject();
     }
 
     bool BindGroup::PopulateViews(ShaderVisibleDescriptorAllocator* viewAllocator) {
