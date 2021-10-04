@@ -89,9 +89,6 @@ namespace dawn_native {
             void UnmapImpl() override {
                 UNREACHABLE();
             }
-            void DestroyImpl() override {
-                UNREACHABLE();
-            }
 
             std::unique_ptr<uint8_t[]> mFakeMappedData;
         };
@@ -153,6 +150,8 @@ namespace dawn_native {
         if ((mUsage & wgpu::BufferUsage::Indirect) && device->IsValidationEnabled()) {
             mUsage |= kInternalStorageBuffer;
         }
+
+        TrackInDevice();
     }
 
     BufferBase::BufferBase(DeviceBase* device,
@@ -166,11 +165,24 @@ namespace dawn_native {
         }
     }
 
+    BufferBase::BufferBase(DeviceBase* device)
+        : ApiObjectBase(device, kLabelNotImplemented), mState(BufferState::Unmapped) {
+        TrackInDevice();
+    }
+
     BufferBase::~BufferBase() {
         if (mState == BufferState::Mapped) {
             ASSERT(!IsError());
             CallMapCallback(mLastMapID, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
         }
+    }
+
+    bool BufferBase::DestroyApiObject() {
+        if (mState == BufferState::Destroyed) {
+            return false;
+        }
+        mState = BufferState::Destroyed;
+        return ApiObjectBase::DestroyApiObject();
     }
 
     // static
@@ -388,7 +400,7 @@ namespace dawn_native {
             }
         }
 
-        DestroyInternal();
+        DestroyApiObject();
     }
 
     MaybeError BufferBase::CopyFromStagingBuffer() {
@@ -562,13 +574,6 @@ namespace dawn_native {
     MaybeError BufferBase::ValidateDestroy() const {
         DAWN_TRY(GetDevice()->ValidateObject(this));
         return {};
-    }
-
-    void BufferBase::DestroyInternal() {
-        if (mState != BufferState::Destroyed) {
-            DestroyImpl();
-        }
-        mState = BufferState::Destroyed;
     }
 
     void BufferBase::OnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status) {
