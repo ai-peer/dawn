@@ -141,6 +141,7 @@ source_set("dawn_native_mocks_sources") {
   sources = [
     "unittests/native/mocks/BindGroupLayoutMock.h",
     "unittests/native/mocks/BindGroupMock.h",
+    "unittests/native/mocks/BufferMock.h",
     "unittests/native/mocks/DeviceMock.h",
   ]
 }
