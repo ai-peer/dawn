@@ -197,7 +197,7 @@ namespace dawn_native { namespace null {
         BindGroup(DeviceBase* device, const BindGroupDescriptor* descriptor);
 
       private:
-        ~BindGroup() override = default;
+        ~BindGroup() override;
     };
 
     class BindGroupLayout final : public BindGroupLayoutBase {
