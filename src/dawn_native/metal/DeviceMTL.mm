@@ -121,7 +121,7 @@ namespace dawn_native { namespace metal {
     }
 
     Device::~Device() {
-        ShutDownBase();
+        DestroyDevice();
     }
 
     MaybeError Device::Initialize() {
@@ -483,7 +483,7 @@ namespace dawn_native { namespace metal {
         return {};
     }
 
-    void Device::ShutDownImpl() {
+    void Device::DestroyDeviceImpl() {
         ASSERT(GetState() == State::Disconnected);
 
         // Forget all pending commands.
