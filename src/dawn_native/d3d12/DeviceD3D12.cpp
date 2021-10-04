@@ -45,6 +45,13 @@
 
 namespace dawn_native { namespace d3d12 {
 
+    namespace {
+        // A device supports DXIL if its highest supported shader model is at least 6.0.
+        bool IsDXILSupported(const dawn_native::d3d12::D3D12DeviceInfo& deviceInfo) {
+            return deviceInfo.shaderModel >= 60;
+        }
+    }  // namespace
+
     // TODO(dawn:155): Figure out these values.
     static constexpr uint16_t kShaderVisibleDescriptorHeapSize = 1024;
     static constexpr uint8_t kAttachmentDescriptorHeapSize = 64;
@@ -162,6 +169,10 @@ namespace dawn_native { namespace d3d12 {
         // device initialization to call NextSerial
         DAWN_TRY(NextSerial());
 
+        // The environment can only use Mesa's spirv_to_dxil when it's available. Override the
+        // decision if it is not applicable.
+        DAWN_TRY(ApplyUseSpirvToDxilToggle());
+
         // The environment can only use DXC when it's available. Override the decision if it is not
         // applicable.
         DAWN_TRY(ApplyUseDxcToggle());
@@ -200,8 +211,22 @@ namespace dawn_native { namespace d3d12 {
         return ToBackend(GetAdapter())->GetBackend()->GetFactory();
     }
 
+    MaybeError Device::ApplyUseSpirvToDxilToggle() {
+        if (!IsDXILSupported(GetDeviceInfo()) ||
+            !ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsSPIRVToDXILAvailable()) {
+            ForceSetToggle(Toggle::UseSpirvToDxil, false);
+        }
+
+        if (IsToggleEnabled(Toggle::UseSpirvToDxil)) {
+            DAWN_TRY(ToBackend(GetAdapter())->GetBackend()->EnsureDxcValidator());
+        }
+
+        return {};
+    }
+
     MaybeError Device::ApplyUseDxcToggle() {
-        if (!ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCAvailable()) {
+        if (!IsDXILSupported(GetDeviceInfo()) ||
+            !ToBackend(GetAdapter())->GetBackend()->GetFunctions()->IsDXCAvailable()) {
             ForceSetToggle(Toggle::UseDXC, false);
         } else if (IsFeatureEnabled(Feature::ShaderFloat16)) {
             // Currently we can only use DXC to compile HLSL shaders using float16.

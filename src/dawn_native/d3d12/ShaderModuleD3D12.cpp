@@ -94,7 +94,7 @@ namespace dawn_native { namespace d3d12 {
         // The inputs to a shader compilation. These have been intentionally isolated from the
         // device to help ensure that the pipeline cache key contains all inputs for compilation.
         struct ShaderCompilationRequest {
-            enum Compiler { FXC, DXC };
+            enum Compiler { FXC, DXC, SpirvToDxil };
 
             // Common inputs
             Compiler compiler;
@@ -118,6 +118,11 @@ namespace dawn_native { namespace d3d12 {
             const D3D12DeviceInfo* deviceInfo;
             bool hasShaderFloat16Feature;
 
+            // spirv_to_dxil inputs
+            uint64_t spirvToDxilVersion;
+            uint32_t firstIndexOffsetRegisterSpace;
+            uint32_t firstIndexOffsetShaderRegister;
+
             static ResultOrError<ShaderCompilationRequest> Create(
                 const char* entryPointName,
                 SingleShaderStage stage,
@@ -128,11 +133,20 @@ namespace dawn_native { namespace d3d12 {
                 const BindingInfoArray& moduleBindingInfo) {
                 Compiler compiler;
                 uint64_t dxcVersion = 0;
-                if (device->IsToggleEnabled(Toggle::UseDXC)) {
+                uint64_t spirvToDxilVersion = 0;
+                if (device->IsToggleEnabled(Toggle::UseSpirvToDxil)) {
+                    compiler = Compiler::SpirvToDxil;
+                    spirvToDxilVersion = device->GetFunctions()->spirvToDxilGetVersion();
+                } else if (device->IsToggleEnabled(Toggle::UseDXC)) {
                     compiler = Compiler::DXC;
-                    DAWN_TRY_ASSIGN(dxcVersion, GetDXCompilerVersion(device->GetDxcValidator()));
                 } else {
                     compiler = Compiler::FXC;
+                }
+
+                if (compiler == Compiler::DXC || compiler == Compiler::SpirvToDxil) {
+                    // The spirv_to_dxil backend uses dxil.dll to sign its output, so we need to
+                    // include the DXC version.
+                    DAWN_TRY_ASSIGN(dxcVersion, GetDXCompilerVersion(device->GetDxcValidator()));
                 }
 
                 using tint::transform::BindingPoint;
@@ -193,6 +207,11 @@ namespace dawn_native { namespace d3d12 {
                 request.dxcVersion = compiler == Compiler::DXC ? dxcVersion : 0;
                 request.deviceInfo = &device->GetDeviceInfo();
                 request.hasShaderFloat16Feature = device->IsFeatureEnabled(Feature::ShaderFloat16);
+                request.spirvToDxilVersion =
+                    compiler == Compiler::SpirvToDxil ? spirvToDxilVersion : 0;
+                request.firstIndexOffsetRegisterSpace = layout->GetFirstIndexOffsetRegisterSpace();
+                request.firstIndexOffsetShaderRegister =
+                    layout->GetFirstIndexOffsetShaderRegister();
                 return std::move(request);
             }
 
@@ -240,6 +259,9 @@ namespace dawn_native { namespace d3d12 {
                 stream << " fxcVersion=" << fxcVersion;
                 stream << " dxcVersion=" << dxcVersion;
                 stream << " hasShaderFloat16Feature=" << hasShaderFloat16Feature;
+                stream << " spirvToDxilVersion=" << spirvToDxilVersion;
+                stream << " firstIndexOffsetRegisterSpace=" << firstIndexOffsetRegisterSpace;
+                stream << " firstIndexOffsetShaderRegister=" << firstIndexOffsetShaderRegister;
                 stream << ")";
                 stream << "\n";
 
@@ -371,11 +393,9 @@ namespace dawn_native { namespace d3d12 {
             return std::move(compiledShader);
         }
 
-        ResultOrError<std::string> TranslateToHLSL(const ShaderCompilationRequest& request,
-                                                   std::string* remappedEntryPointName) {
-            std::ostringstream errorStream;
-            errorStream << "Tint HLSL failure:" << std::endl;
-
+        ResultOrError<tint::Program> ApplyCommonD3DTransforms(
+            const ShaderCompilationRequest& request,
+            std::string* remappedEntryPointName) {
             tint::transform::Manager transformManager;
             tint::transform::DataMap transformInputs;
 
@@ -392,10 +412,7 @@ namespace dawn_native { namespace d3d12 {
                     tint::transform::Renamer::Target::kHlslKeywords);
             }
 
-            // D3D12 registers like `t3` and `c3` have the same bindingOffset number in
-            // the remapping but should not be considered a collision because they have
-            // different types.
-            const bool mayCollide = true;
+            bool mayCollide = false;
             transformInputs.Add<tint::transform::BindingRemapper::Remappings>(
                 std::move(request.bindingPoints), std::move(request.accessControls), mayCollide);
 
@@ -421,43 +438,187 @@ namespace dawn_native { namespace d3d12 {
                 return DAWN_VALIDATION_ERROR("Transform output missing renamer data.");
             }
 
+            return std::move(transformedProgram);
+        }
+
+        template <typename F>
+        ResultOrError<std::string> TranslateToHLSL(const ShaderCompilationRequest& request,
+                                                   std::string* remappedEntryPointName,
+                                                   bool dumpShaders,
+                                                   F&& DumpShadersEmitLog) {
+            tint::Program transformedProgram;
+            std::string remappedEntryPointNameTemp;
+            DAWN_TRY_ASSIGN(transformedProgram,
+                            ApplyCommonD3DTransforms(request, &remappedEntryPointNameTemp));
+
             tint::writer::hlsl::Options options;
             options.disable_workgroup_init = request.disableWorkgroupInit;
             auto result = tint::writer::hlsl::Generate(&transformedProgram, options);
             if (!result.success) {
+                std::ostringstream errorStream;
+                errorStream << "Tint HLSL failure:" << std::endl;
                 errorStream << "Generator: " << result.error << std::endl;
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
 
+            // Move after error case return to avoid unnecessarily extending the lifetime of
+            // remappedEntryPointNameTemp.
+            *remappedEntryPointName = std::move(remappedEntryPointNameTemp);
+
+            if (dumpShaders) {
+                std::ostringstream dumpedMsg;
+                dumpedMsg << "/* Dumped generated HLSL */" << std::endl << result.hlsl;
+                DumpShadersEmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+            }
+
             return std::move(result.hlsl);
+        }
+
+        ResultOrError<ComPtr<IDxcBlob>> TranslateToDxilThroughSPIRV(
+            const PlatformFunctions* functions,
+            IDxcValidator* dxcValidator,
+            const ShaderCompilationRequest& request) {
+            ASSERT(functions->IsSPIRVToDXILAvailable());
+
+            std::string remappedEntryPointName;
+            tint::Program transformedProgram;
+            DAWN_TRY_ASSIGN(transformedProgram,
+                            ApplyCommonD3DTransforms(request, &remappedEntryPointName));
+
+            tint::writer::spirv::Options options;
+            options.emit_vertex_point_size = false;
+            auto result = tint::writer::spirv::Generate(&transformedProgram, options);
+            if (!result.success) {
+                std::ostringstream errorStream;
+                errorStream << "Tint SPIR-V failure:" << std::endl;
+                errorStream << "Generator: " << result.error << std::endl;
+                return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
+            }
+
+            // TODO(tangm): Call ValidateSpirv here to optionally dump the intermediate SPIR-V
+
+            dxil_spirv_shader_stage dxStage;
+            switch (request.stage) {
+                case SingleShaderStage::Vertex:
+                    dxStage = DXIL_SPIRV_SHADER_VERTEX;
+                    break;
+                case SingleShaderStage::Fragment:
+                    dxStage = DXIL_SPIRV_SHADER_FRAGMENT;
+                    break;
+                case SingleShaderStage::Compute:
+                    dxStage = DXIL_SPIRV_SHADER_COMPUTE;
+                    break;
+            }
+
+            // A stack-allocated temporary wrapper of dxil_spirv_object that implements IDxcBlob
+            // so it can be validated.
+            class ScopedSpirvDxilObject : public IDxcBlob, NonMovable {
+              public:
+                ScopedSpirvDxilObject(decltype(&spirv_to_dxil_free) spirvToDxilFree)
+                    : mSpirvToDxilFree(spirvToDxilFree) {
+                }
+
+                ~ScopedSpirvDxilObject() {
+                    if (mObject.binary.buffer) {
+                        mSpirvToDxilFree(&mObject);
+                        mObject.binary.buffer = nullptr;
+                    }
+                }
+
+                dxil_spirv_object* Get() {
+                    return &mObject;
+                }
+
+                LPVOID STDMETHODCALLTYPE GetBufferPointer() override {
+                    return mObject.binary.buffer;
+                }
+
+                SIZE_T STDMETHODCALLTYPE GetBufferSize() override {
+                    return mObject.binary.size;
+                }
+
+                HRESULT STDMETHODCALLTYPE QueryInterface(REFIID, void**) override {
+                    return E_NOINTERFACE;
+                }
+
+                ULONG STDMETHODCALLTYPE AddRef() override {
+                    return 1;
+                }
+
+                ULONG STDMETHODCALLTYPE Release() override {
+                    return 0;
+                }
+
+              private:
+                decltype(&spirv_to_dxil_free) mSpirvToDxilFree;
+                dxil_spirv_object mObject = {};
+            };
+
+            ScopedSpirvDxilObject dxilObject(functions->spirvToDxilFree);
+
+            dxil_spirv_runtime_conf conf{};
+            conf.runtime_data_cbv.register_space = request.firstIndexOffsetRegisterSpace;
+            conf.runtime_data_cbv.base_shader_register = request.firstIndexOffsetShaderRegister;
+            conf.zero_based_vertex_instance_id = true;
+            if (!functions->spirvToDxil(result.spirv.data(), result.spirv.size(), NULL, 0, dxStage,
+                                        remappedEntryPointName.c_str(), &conf, dxilObject.Get())) {
+                return DAWN_VALIDATION_ERROR("spirv_to_dxil: Compilation failed");
+            }
+
+            ComPtr<IDxcOperationResult> validationResult;
+            DAWN_TRY(CheckHRESULT(
+                dxcValidator->Validate(&dxilObject, DxcValidatorFlags_Default, &validationResult),
+                "DXC validate dxil"));
+
+            HRESULT hr;
+            DAWN_TRY(CheckHRESULT(validationResult->GetStatus(&hr), "DXC get status"));
+            if (FAILED(hr)) {
+                ComPtr<IDxcBlobEncoding> errors;
+                DAWN_TRY(CheckHRESULT(validationResult->GetErrorBuffer(&errors),
+                                      "DXC get error buffer"));
+
+                std::string message = std::string("DXC validate failed with ") +
+                                      static_cast<char*>(errors->GetBufferPointer());
+                return DAWN_VALIDATION_ERROR(message);
+            }
+
+            ComPtr<IDxcBlob> dxilValidated;
+            DAWN_TRY(CheckHRESULT(validationResult->GetResult(&dxilValidated), "DXC get result"));
+
+            return std::move(dxilValidated);
         }
 
         template <typename F>
         MaybeError CompileShader(const PlatformFunctions* functions,
                                  IDxcLibrary* dxcLibrary,
                                  IDxcCompiler* dxcCompiler,
+                                 IDxcValidator* dxcValidator,
                                  ShaderCompilationRequest&& request,
                                  bool dumpShaders,
                                  F&& DumpShadersEmitLog,
                                  CompiledShader* compiledShader) {
-            // Compile the source shader to HLSL.
             std::string hlslSource;
             std::string remappedEntryPoint;
-            DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(request, &remappedEntryPoint));
-            if (dumpShaders) {
-                std::ostringstream dumpedMsg;
-                dumpedMsg << "/* Dumped generated HLSL */" << std::endl << hlslSource;
-                DumpShadersEmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
-            }
-            request.entryPointName = remappedEntryPoint.c_str();
             switch (request.compiler) {
+                case ShaderCompilationRequest::Compiler::FXC:
+                    DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(request, &remappedEntryPoint,
+                                                                dumpShaders, DumpShadersEmitLog));
+                    request.entryPointName = remappedEntryPoint.c_str();
+                    DAWN_TRY_ASSIGN(compiledShader->compiledDXBCShader,
+                                    CompileShaderFXC(functions, request, hlslSource));
+                    break;
+
                 case ShaderCompilationRequest::Compiler::DXC:
-                    DAWN_TRY_ASSIGN(compiledShader->compiledDXCShader,
+                    DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(request, &remappedEntryPoint,
+                                                                dumpShaders, DumpShadersEmitLog));
+                    request.entryPointName = remappedEntryPoint.c_str();
+                    DAWN_TRY_ASSIGN(compiledShader->compiledDXILShader,
                                     CompileShaderDXC(dxcLibrary, dxcCompiler, request, hlslSource));
                     break;
-                case ShaderCompilationRequest::Compiler::FXC:
-                    DAWN_TRY_ASSIGN(compiledShader->compiledFXCShader,
-                                    CompileShaderFXC(functions, request, hlslSource));
+
+                case ShaderCompilationRequest::Compiler::SpirvToDxil:
+                    DAWN_TRY_ASSIGN(compiledShader->compiledDXILShader,
+                                    TranslateToDxilThroughSPIRV(functions, dxcValidator, request));
                     break;
             }
 
@@ -495,12 +656,12 @@ namespace dawn_native { namespace d3d12 {
 
         CompiledShader compiledShader = {};
 
-        tint::transform::Manager transformManager;
-        tint::transform::DataMap transformInputs;
-
         const tint::Program* program;
         tint::Program programAsValue;
         if (stage == SingleShaderStage::Vertex) {
+            tint::transform::Manager transformManager;
+            tint::transform::DataMap transformInputs;
+
             transformManager.Add<tint::transform::FirstIndexOffset>();
             transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
                 layout->GetFirstIndexOffsetShaderRegister(),
@@ -548,6 +709,9 @@ namespace dawn_native { namespace d3d12 {
                                                                 : nullptr,
                         device->IsToggleEnabled(Toggle::UseDXC) ? device->GetDxcCompiler().Get()
                                                                 : nullptr,
+                        device->IsToggleEnabled(Toggle::UseSpirvToDxil)
+                            ? device->GetDxcValidator().Get()
+                            : nullptr,
                         std::move(request), device->IsToggleEnabled(Toggle::DumpShaders),
                         [&](WGPULoggingType loggingType, const char* message) {
                             GetDevice()->EmitLog(loggingType, message);
@@ -564,10 +728,10 @@ namespace dawn_native { namespace d3d12 {
     D3D12_SHADER_BYTECODE CompiledShader::GetD3D12ShaderBytecode() const {
         if (cachedShader.buffer != nullptr) {
             return {cachedShader.buffer.get(), cachedShader.bufferSize};
-        } else if (compiledFXCShader != nullptr) {
-            return {compiledFXCShader->GetBufferPointer(), compiledFXCShader->GetBufferSize()};
-        } else if (compiledDXCShader != nullptr) {
-            return {compiledDXCShader->GetBufferPointer(), compiledDXCShader->GetBufferSize()};
+        } else if (compiledDXBCShader != nullptr) {
+            return {compiledDXBCShader->GetBufferPointer(), compiledDXBCShader->GetBufferSize()};
+        } else if (compiledDXILShader != nullptr) {
+            return {compiledDXILShader->GetBufferPointer(), compiledDXILShader->GetBufferSize()};
         }
         UNREACHABLE();
         return {};

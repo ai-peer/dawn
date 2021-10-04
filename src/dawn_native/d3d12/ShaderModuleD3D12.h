@@ -36,8 +36,8 @@ namespace dawn_native { namespace d3d12 {
     // emulate vertex/instance index starts
     struct CompiledShader {
         ScopedCachedBlob cachedShader;
-        ComPtr<ID3DBlob> compiledFXCShader;
-        ComPtr<IDxcBlob> compiledDXCShader;
+        ComPtr<ID3DBlob> compiledDXBCShader;
+        ComPtr<IDxcBlob> compiledDXILShader;
         D3D12_SHADER_BYTECODE GetD3D12ShaderBytecode() const;
 
         FirstOffsetInfo firstOffsetInfo;

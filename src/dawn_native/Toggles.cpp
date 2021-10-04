@@ -149,6 +149,9 @@ namespace dawn_native {
               "Use DXC instead of FXC for compiling HLSL when both dxcompiler.dll and dxil.dll "
               "is available.",
               "https://crbug.com/dawn/402"}},
+            {Toggle::UseSpirvToDxil,
+             {"use_spirv_to_dxil", "Use Mesa's spirv_to_dxil for DXIL generation",
+              "https://crbug.com/dawn/1103"}},
             {Toggle::DisableRobustness,
              {"disable_robustness", "Disable robust buffer access", "https://crbug.com/dawn/480"}},
             {Toggle::MetalEnableVertexPulling,

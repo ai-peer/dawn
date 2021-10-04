@@ -110,6 +110,7 @@ namespace dawn_native { namespace d3d12 {
         DAWN_TRY(LoadFXCompiler());
         DAWN_TRY(LoadD3D11());
         LoadPIXRuntime();
+        LoadSPIRVToDXIL();
         return {};
     }
 
@@ -251,6 +252,11 @@ namespace dawn_native { namespace d3d12 {
         return mDXILLib.Valid() && mDXCompilerLib.Valid();
     }
 
+    bool PlatformFunctions::IsSPIRVToDXILAvailable() const {
+        // dxil.dll is needed to sign the DXIL output from spirv_to_dxil.dll.
+        return mDXILLib.Valid() && mSPIRVToDXILLib.Valid();
+    }
+
     void PlatformFunctions::LoadPIXRuntime() {
         // TODO(dawn:766):
         // In UWP PIX should be statically linked WinPixEventRuntime_UAP.lib
@@ -263,6 +269,15 @@ namespace dawn_native { namespace d3d12 {
             !mPIXEventRuntimeLib.GetProc(&pixEndEventOnCommandList, "PIXEndEventOnCommandList") ||
             !mPIXEventRuntimeLib.GetProc(&pixSetMarkerOnCommandList, "PIXSetMarkerOnCommandList")) {
             mPIXEventRuntimeLib.Close();
+        }
+    }
+
+    void PlatformFunctions::LoadSPIRVToDXIL() {
+        if (!mSPIRVToDXILLib.Open("spirv_to_dxil.dll") ||
+            !mSPIRVToDXILLib.GetProc(&spirvToDxil, "spirv_to_dxil") ||
+            !mSPIRVToDXILLib.GetProc(&spirvToDxilFree, "spirv_to_dxil_free") ||
+            !mSPIRVToDXILLib.GetProc(&spirvToDxilGetVersion, "spirv_to_dxil_get_version")) {
+            mSPIRVToDXILLib.Close();
         }
     }
 
