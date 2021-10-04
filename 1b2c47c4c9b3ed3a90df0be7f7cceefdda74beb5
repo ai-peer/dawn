@@ -16,6 +16,46 @@
       "message": "Thanks for the review, as always!\n\nI have not yet addressed the issue of the spirv_to_dxil dependency in the most recent patchset, but am currently working on it with Rafael.",
       "revId": "1b2c47c4c9b3ed3a90df0be7f7cceefdda74beb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b818fe1_90d7b82a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "LGTM % discussions on the build_mesa.ps1 and third_party inclusion.",
+      "revId": "1b2c47c4c9b3ed3a90df0be7f7cceefdda74beb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53357ba9_182e40b9",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "nit: supported",
+      "range": {
+        "startLine": 49,
+        "startChar": 49,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "1b2c47c4c9b3ed3a90df0be7f7cceefdda74beb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

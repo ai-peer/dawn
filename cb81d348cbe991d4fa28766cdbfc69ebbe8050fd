@@ -308,6 +308,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e575461_25f3dc5a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "No strong opinion here. ForceToggle to off would mean we\u0027re more robust but we\u0027d also silently fall back to something the application isn\u0027t expecting.",
+      "parentUuid": "f2152898_14c4f9c6",
+      "range": {
+        "startLine": 214,
+        "startChar": 0,
+        "endLine": 214,
+        "endChar": 82
+      },
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a019528a_d2aa4d6e",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 30
@@ -384,6 +408,24 @@
       "side": 1,
       "message": "I think I got all the fields in the ShaderCompilationRequest::Create function, perhaps I\u0027m unaware of an aspect of C++? Or is the concern a user creating a ShaderCompilationRequest without ::Create?\n\nDoes it make sense for me to provide explicit default initializers for each of these fields?",
       "parentUuid": "ac2ee674_55210d83",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6feb33c_fa9c90c5",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "Ah, my bad, I didn\u0027t see that we explicitly default some of them at the top of ::Create.",
+      "parentUuid": "06f9e077_dfd68d2c",
       "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -564,6 +606,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62ddc848_cae8af02",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "26939d63_a7dd636a",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6976716_4fbd3723",
@@ -599,6 +659,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c859567d_f2eb540d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "Ah, since this is now an implementation of IDxcBlob, I think it is a bit big and could go in an anonymous namespace. Looks good otherwise.",
+      "parentUuid": "499ec872_77d3f075",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "84c78574_60b598fb",
@@ -630,6 +708,24 @@
       "side": 1,
       "message": "Sounds good. Please let me know if you\u0027re also suggesting to moving the call to TranslateToHLSL into CompileShader{DXC,FXC}.",
       "parentUuid": "84c78574_60b598fb",
+      "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ab1e06_6160260b",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 30
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:46:36Z",
+      "side": 1,
+      "message": "I think it\u0027s ok as is. Steps are very clear.",
+      "parentUuid": "6665503c_da41daf3",
       "revId": "cb81d348cbe991d4fa28766cdbfc69ebbe8050fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
