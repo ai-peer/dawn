@@ -203,6 +203,24 @@
       "parentUuid": "007bdb71_e864cffc",
       "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47ec688a_d22bdae9",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T15:33:15Z",
+      "side": 1,
+      "message": "Mmmh ok, I\u0027m a bit concerned about the increased code noise, but I think we\u0027ll have to do that eventually anyway.",
+      "parentUuid": "d2d37f58_c96ad380",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
