@@ -277,7 +277,7 @@ namespace dawn_native {
         // TODO(dawn/628) Add types into the array as they are implemented.
 
         // clang-format off
-        static constexpr std::array<ObjectType, 8> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 9> kObjectTypeDependencyOrder = {
             ObjectType::RenderPipeline,
             ObjectType::ComputePipeline,
             ObjectType::PipelineLayout,
@@ -286,6 +286,7 @@ namespace dawn_native {
             ObjectType::BindGroupLayout,
             ObjectType::ShaderModule,
             ObjectType::Sampler,
+            ObjectType::Buffer,
         };
         // clang-format on
 
