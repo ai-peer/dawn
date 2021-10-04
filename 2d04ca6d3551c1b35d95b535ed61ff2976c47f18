@@ -16,6 +16,92 @@
       "message": "And another set of validation updates before the weekend!",
       "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473a819f_ee6699cc",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T10:50:51Z",
+      "side": 1,
+      "message": "u-nit: just %s? Somehow I\u0027ve considered the %s of objects to be like proper noun (like \"Arthur\" and not \"the cat\")",
+      "range": {
+        "startLine": 110,
+        "startChar": 53,
+        "endLine": 110,
+        "endChar": 59
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b850cdaf_96509aa8",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T10:50:51Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 115,
+        "startChar": 45,
+        "endLine": 115,
+        "endChar": 48
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49ba06d1_d3184fd7",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T10:50:51Z",
+      "side": 1,
+      "message": "nit: greater than 1 basically?",
+      "range": {
+        "startLine": 178,
+        "startChar": 63,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d231e02_66c4aadf",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T10:50:51Z",
+      "side": 1,
+      "message": "I think we can remove this TODO. The spec was updated in https://github.com/gpuweb/gpuweb/pull/2079",
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
