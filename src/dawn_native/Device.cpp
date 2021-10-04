@@ -275,10 +275,11 @@ namespace dawn_native {
         // that this only considers the immediate frontend dependencies, while backend objects could
         // add complications and extra dependencies.
         // TODO(dawn/628) Add types into the array as they are implemented.
-        static constexpr std::array<ObjectType, 8> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 9> kObjectTypeDependencyOrder = {
             ObjectType::RenderPipeline, ObjectType::ComputePipeline, ObjectType::PipelineLayout,
             ObjectType::SwapChain,      ObjectType::BindGroup,       ObjectType::BindGroupLayout,
-            ObjectType::ShaderModule,   ObjectType::Sampler};
+            ObjectType::ShaderModule,   ObjectType::Sampler,         ObjectType::Buffer,
+        };
 
         // We first move all objects out from the tracking list into a separate list so that we can
         // avoid locking the same mutex twice. We can then iterate across the separate list to call
