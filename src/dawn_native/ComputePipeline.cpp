@@ -47,17 +47,28 @@ namespace dawn_native {
                          descriptor->compute.entryPoint, descriptor->compute.constantCount,
                          descriptor->compute.constants}}) {
         SetContentHash(ComputeContentHash());
+        TrackInDevice();
+    }
+
+    ComputePipelineBase::ComputePipelineBase(DeviceBase* device) : PipelineBase(device) {
+        TrackInDevice();
     }
 
     ComputePipelineBase::ComputePipelineBase(DeviceBase* device, ObjectBase::ErrorTag tag)
         : PipelineBase(device, tag) {
     }
 
-    ComputePipelineBase::~ComputePipelineBase() {
-        // Do not uncache the actual cached object if we are a blueprint
-        if (IsCachedReference()) {
-            GetDevice()->UncacheComputePipeline(this);
+    ComputePipelineBase::~ComputePipelineBase() = default;
+
+    bool ComputePipelineBase::DestroyApiObject() {
+        bool wasDestroyed = ApiObjectBase::DestroyApiObject();
+        if (wasDestroyed) {
+            // Do not uncache the actual cached object if we are a blueprint
+            if (IsCachedReference()) {
+                GetDevice()->UncacheComputePipeline(this);
+            }
         }
+        return wasDestroyed;
     }
 
     // static
