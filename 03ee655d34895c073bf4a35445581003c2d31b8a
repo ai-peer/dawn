@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2f54dded_ebef3536",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T14:21:22Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "bf02d8c1_aa5ef59c",
         "filename": "src/dawn_node/binding/GPU.cpp",
         "patchSetId": 2
