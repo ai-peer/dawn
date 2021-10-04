@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20b1e202_ffb0696c",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-04T14:19:08Z",
+      "side": 1,
+      "message": "no need for the pointer here.",
+      "range": {
+        "startLine": 189,
+        "startChar": 32,
+        "endLine": 189,
+        "endChar": 33
+      },
+      "revId": "8e11a3431d7485e27dd65d3a428ab0748af56777",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
