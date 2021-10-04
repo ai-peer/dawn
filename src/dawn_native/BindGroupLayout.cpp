@@ -360,7 +360,8 @@ namespace dawn_native {
 
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
                                              const BindGroupLayoutDescriptor* descriptor,
-                                             PipelineCompatibilityToken pipelineCompatibilityToken)
+                                             PipelineCompatibilityToken pipelineCompatibilityToken,
+                                             ApiObjectBase::UntrackedByDeviceTag tag)
         : ApiObjectBase(device, kLabelNotImplemented),
           mBindingInfo(BindingIndex(descriptor->entryCount)),
           mPipelineCompatibilityToken(pipelineCompatibilityToken) {
@@ -387,15 +388,32 @@ namespace dawn_native {
         ASSERT(mBindingInfo.size() <= kMaxBindingsPerPipelineLayoutTyped);
     }
 
+    BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device,
+                                             const BindGroupLayoutDescriptor* descriptor,
+                                             PipelineCompatibilityToken pipelineCompatibilityToken)
+        : BindGroupLayoutBase(device, descriptor, pipelineCompatibilityToken, kUntrackedByDevice) {
+        TrackInDevice();
+    }
+
     BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device, ObjectBase::ErrorTag tag)
         : ApiObjectBase(device, tag) {
     }
 
-    BindGroupLayoutBase::~BindGroupLayoutBase() {
+    BindGroupLayoutBase::BindGroupLayoutBase(DeviceBase* device)
+        : ApiObjectBase(device, kLabelNotImplemented) {
+        TrackInDevice();
+    }
+
+    void BindGroupLayoutBase::DestroyApiObject() {
+        const std::lock_guard<std::mutex> lock(*GetDevice()->GetObjectListMutex(GetType()));
+        if (!RemoveFromList()) {
+            return;
+        }
         // Do not uncache the actual cached object if we are a blueprint
         if (IsCachedReference()) {
             GetDevice()->UncacheBindGroupLayout(this);
         }
+        DestroyApiObjectImpl();
     }
 
     // static
