@@ -51,6 +51,7 @@ namespace dawn_native { namespace opengl {
 
     BindGroup::~BindGroup() {
         ToBackend(GetLayout())->DeallocateBindGroup(this);
+        DestroyApiObject();
     }
 
     // static
