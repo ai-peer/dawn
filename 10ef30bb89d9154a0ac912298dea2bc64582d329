@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "10ef30bb89d9154a0ac912298dea2bc64582d329",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e2e51e0_86cad264",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T16:16:54Z",
+      "side": 1,
+      "message": "LGTM with one non-blocking nit.",
+      "revId": "10ef30bb89d9154a0ac912298dea2bc64582d329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125db683_7ccfbca9",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T16:16:54Z",
+      "side": 1,
+      "message": "nit: \"...contains a negative number.\" would read more naturally.",
+      "revId": "10ef30bb89d9154a0ac912298dea2bc64582d329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
