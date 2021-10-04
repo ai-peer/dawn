@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf02d8c1_aa5ef59c",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-04T12:35:25Z",
+      "side": 1,
+      "message": "perfect, thanks!",
+      "range": {
+        "startLine": 84,
+        "startChar": 69,
+        "endLine": 84,
+        "endChar": 81
+      },
+      "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab952847_f8b9b6ab",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-04T12:35:25Z",
+      "side": 1,
+      "message": "I have no idea what a webgpu backend is... for webgpu.",
+      "range": {
+        "startLine": 88,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 57
+      },
+      "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
