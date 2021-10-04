@@ -6,6 +6,7 @@
 // modifications:
 //   - Added iterators for ranged based iterations
 //   - Added in list check before removing node to prevent segfault, now returns true iff removed
+//   - Added Append functionality for appending lists to one another (in a destructive manner)
 
 #ifndef COMMON_LINKED_LIST_H
 #define COMMON_LINKED_LIST_H
@@ -89,6 +90,12 @@
 //    needs to glue on the "next" and "previous" pointers using
 //    some internal node type.
 
+// Forward declarations of the types in order for recursive referencing and friending.
+template <typename T>
+class LinkNode;
+template <typename T>
+class LinkedList;
+
 template <typename T>
 class LinkNode {
   public:
@@ -165,6 +172,7 @@ class LinkNode {
     }
 
   private:
+    friend class LinkedList<T>;
     LinkNode<T>* previous_;
     LinkNode<T>* next_;
 };
@@ -188,6 +196,20 @@ class LinkedList {
     // Appends |e| to the end of the linked list.
     void Append(LinkNode<T>* e) {
         e->InsertBefore(&root_);
+    }
+
+    // Appends all elements in |l| to the linked list, leaving |l| as an empty list.
+    void Append(LinkedList<T>* l) {
+        if (l->empty()) {
+            return;
+        }
+        root_.previous_->next_ = l->root_.next_;
+        l->root_.next_->previous_ = root_.previous_;
+        root_.previous_ = l->root_.previous_;
+        l->root_.previous_->next_ = &root_;
+
+        l->root_.next_ = &l->root_;
+        l->root_.previous_ = &l->root_;
     }
 
     LinkNode<T>* head() const {

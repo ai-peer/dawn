@@ -369,6 +369,51 @@ TEST(LinkedList, IsInList) {
     EXPECT_FALSE(n.RemoveFromList());
 }
 
+TEST(LinkedList, AppendList) {
+    LinkedList<Node> l1;
+    LinkedList<Node> l2;
+
+    Node n1(1);
+    Node n2(2);
+    l1.Append(&n1);
+    l2.Append(&n2);
+
+    l1.Append(&l2);
+    const int expected[] = {1, 2};
+    ExpectListContents(l1, 2, expected);
+    EXPECT_TRUE(l2.empty());
+}
+
+TEST(LinkedList, AppendEmptyList) {
+    LinkedList<Node> l1;
+    LinkedList<Node> l2;
+
+    Node n1(1);
+    Node n2(2);
+    l1.Append(&n1);
+    l1.Append(&n2);
+
+    l1.Append(&l2);
+    const int expected[] = {1, 2};
+    ExpectListContents(l1, 2, expected);
+    EXPECT_TRUE(l2.empty());
+}
+
+TEST(LinkedList, AppendToEmptyList) {
+    LinkedList<Node> l1;
+    LinkedList<Node> l2;
+
+    Node n1(1);
+    Node n2(2);
+    l2.Append(&n1);
+    l2.Append(&n2);
+
+    l1.Append(&l2);
+    const int expected[] = {1, 2};
+    ExpectListContents(l1, 2, expected);
+    EXPECT_TRUE(l2.empty());
+}
+
 TEST(LinkedList, RangeBasedModify) {
     LinkedList<Node> list;
 
