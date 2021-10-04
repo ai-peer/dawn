@@ -379,6 +379,12 @@ namespace dawn_native {
                 ++packedIdx;
             }
         }
+
+        TrackInDevice();
+    }
+
+    BindGroupBase::BindGroupBase(DeviceBase* device) : ApiObjectBase(device, kLabelNotImplemented) {
+        TrackInDevice();
     }
 
     BindGroupBase::~BindGroupBase() {

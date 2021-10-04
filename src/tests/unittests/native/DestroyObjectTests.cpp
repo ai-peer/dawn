@@ -16,6 +16,7 @@
 
 #include "dawn_native/Toggles.h"
 #include "mocks/BindGroupLayoutMock.h"
+#include "mocks/BindGroupMock.h"
 #include "mocks/DeviceMock.h"
 #include "tests/DawnNativeTest.h"
 
@@ -24,6 +25,26 @@ namespace dawn_native { namespace {
     using ::testing::ByMove;
     using ::testing::InSequence;
     using ::testing::Return;
+
+    TEST(DestroyObjectTests, BindGroup) {
+        // Skipping validation on descriptors as coverage for validation is already present.
+        DeviceMock device;
+        device.SetToggle(Toggle::SkipValidation, true);
+
+        BindGroupMock* bindGroupMock = new BindGroupMock(&device);
+        EXPECT_CALL(*bindGroupMock, DestroyApiObjectImpl).Times(1);
+
+        BindGroupDescriptor desc = {};
+        Ref<BindGroupBase> bindGroup;
+        EXPECT_CALL(device, CreateBindGroupImpl)
+            .WillOnce(Return(ByMove(AcquireRef(bindGroupMock))));
+        DAWN_ASSERT_AND_ASSIGN(bindGroup, device.CreateBindGroup(&desc));
+
+        EXPECT_TRUE(bindGroup->IsAlive());
+
+        bindGroup->DestroyApiObject();
+        EXPECT_FALSE(bindGroup->IsAlive());
+    }
 
     TEST(DestroyObjectTests, BindGroupLayout) {
         // Skipping validation on descriptors as coverage for validation is already present.
@@ -52,21 +73,35 @@ namespace dawn_native { namespace {
         DeviceMock device;
         device.SetToggle(Toggle::SkipValidation, true);
 
+        BindGroupMock* bindGroupMock = new BindGroupMock(&device);
         BindGroupLayoutMock* bindGroupLayoutMock = new BindGroupLayoutMock(&device);
         {
             InSequence seq;
+            EXPECT_CALL(*bindGroupMock, DestroyApiObjectImpl).Times(1);
             EXPECT_CALL(*bindGroupLayoutMock, DestroyApiObjectImpl).Times(1);
         }
 
-        BindGroupLayoutDescriptor desc = {};
+        Ref<BindGroupBase> bindGroup;
+        {
+            BindGroupDescriptor desc = {};
+            EXPECT_CALL(device, CreateBindGroupImpl)
+                .WillOnce(Return(ByMove(AcquireRef(bindGroupMock))));
+            DAWN_ASSERT_AND_ASSIGN(bindGroup, device.CreateBindGroup(&desc));
+            EXPECT_TRUE(bindGroup->IsAlive());
+        }
+
         Ref<BindGroupLayoutBase> bindGroupLayout;
-        EXPECT_CALL(device, CreateBindGroupLayoutImpl)
-            .WillOnce(Return(ByMove(AcquireRef(bindGroupLayoutMock))));
-        DAWN_ASSERT_AND_ASSIGN(bindGroupLayout, device.CreateBindGroupLayout(&desc));
-        EXPECT_TRUE(bindGroupLayout->IsAlive());
-        EXPECT_TRUE(bindGroupLayout->IsCachedReference());
+        {
+            BindGroupLayoutDescriptor desc = {};
+            EXPECT_CALL(device, CreateBindGroupLayoutImpl)
+                .WillOnce(Return(ByMove(AcquireRef(bindGroupLayoutMock))));
+            DAWN_ASSERT_AND_ASSIGN(bindGroupLayout, device.CreateBindGroupLayout(&desc));
+            EXPECT_TRUE(bindGroupLayout->IsAlive());
+            EXPECT_TRUE(bindGroupLayout->IsCachedReference());
+        }
 
         device.DestroyObjects();
+        EXPECT_FALSE(bindGroup->IsAlive());
         EXPECT_FALSE(bindGroupLayout->IsAlive());
     }
 
