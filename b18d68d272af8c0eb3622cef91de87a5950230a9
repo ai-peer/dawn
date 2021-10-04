@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "b18d68d272af8c0eb3622cef91de87a5950230a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0c1af49_77726563",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T17:48:17Z",
+      "side": 1,
+      "message": "LGTM with a couple of nits. Thanks for tackling one of the larger files, and thanks for the liberal amount of TODOs identifying future work. 😊",
+      "revId": "b18d68d272af8c0eb3622cef91de87a5950230a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "752acae8_43aa61ab",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 584,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T17:48:17Z",
+      "side": 1,
+      "message": "Nit: Elsewhere we\u0027ve been formatting these as \"(comparison: %u)\"",
+      "revId": "b18d68d272af8c0eb3622cef91de87a5950230a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a232f15_d012ac86",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T17:48:17Z",
+      "side": 1,
+      "message": "Are we able to output the entry point\u0027s name here? (Or, really, anywhere in the stack) That would be a valuable bit of context for developers.",
+      "revId": "b18d68d272af8c0eb3622cef91de87a5950230a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
