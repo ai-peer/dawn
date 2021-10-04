@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45871a05_96e66642",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-04T10:43:32Z",
+      "side": 1,
+      "message": "nit: I\u0027d consider putting this in a function of runner to keep this already too-long function a bit shorter:\n\n // logResult writes the test results to the log file in sequential order.\n // logResult should be called whenever a new test result becomes available.\n func (r *runner) logResult(res result) {\n\tif r.log \u003d\u003d nil {\n\t\treturn; // not logging\n\t}\n\tr.resultByIndex[res.index] \u003d res\n\tfor {\n\t\tres, ok :\u003d r.resultByIndex[r.nextLogResultIdx]\n\t\tif !ok {\n\t\t\tbreak // Still waiting for the next result.\n\t\t}\n\t\tfmt.Fprintf(r.log, \"%v [%v]\\n\", res.testcase, res.status)\n\t\tr.nextLogResultIdx++\n\t}\n }",
+      "range": {
+        "startLine": 284,
+        "startChar": 0,
+        "endLine": 295,
+        "endChar": 3
+      },
+      "revId": "f7adab06bbcf358886d1f5d54981277bd5ff4781",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
