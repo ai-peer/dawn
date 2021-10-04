@@ -16,7 +16,9 @@
 
 #include "dawn_native/Toggles.h"
 #include "mocks/BindGroupLayoutMock.h"
+#include "mocks/BindGroupMock.h"
 #include "mocks/DeviceMock.h"
+#include "mocks/SamplerMock.h"
 #include "tests/DawnNativeTest.h"
 
 namespace dawn_native { namespace {
@@ -24,6 +26,47 @@ namespace dawn_native { namespace {
     using ::testing::ByMove;
     using ::testing::InSequence;
     using ::testing::Return;
+
+    TEST(DestroyObjectTests, BindGroupExplicit) {
+        // Skipping validation on descriptors as coverage for validation is already present.
+        DeviceMock device;
+        device.SetToggle(Toggle::SkipValidation, true);
+
+        BindGroupMock* bindGroupMock = new BindGroupMock(&device);
+        EXPECT_CALL(*bindGroupMock, DestroyApiObjectImpl).Times(1);
+
+        BindGroupDescriptor desc = {};
+        Ref<BindGroupBase> bindGroup;
+        EXPECT_CALL(device, CreateBindGroupImpl)
+            .WillOnce(Return(ByMove(AcquireRef(bindGroupMock))));
+        DAWN_ASSERT_AND_ASSIGN(bindGroup, device.CreateBindGroup(&desc));
+
+        EXPECT_TRUE(bindGroup->IsAlive());
+
+        bindGroup->DestroyApiObject();
+        EXPECT_FALSE(bindGroup->IsAlive());
+    }
+
+    // If the reference count on API objects reach 0, they should delete themselves. Note that GTest
+    // will also complain if there is a memory leak.
+    TEST(DestroyObjectTests, BindGroupImplicit) {
+        // Skipping validation on descriptors as coverage for validation is already present.
+        DeviceMock device;
+        device.SetToggle(Toggle::SkipValidation, true);
+
+        BindGroupMock* bindGroupMock = new BindGroupMock(&device);
+        EXPECT_CALL(*bindGroupMock, DestroyApiObjectImpl).Times(1);
+
+        {
+            BindGroupDescriptor desc = {};
+            Ref<BindGroupBase> bindGroup;
+            EXPECT_CALL(device, CreateBindGroupImpl)
+                .WillOnce(Return(ByMove(AcquireRef(bindGroupMock))));
+            DAWN_ASSERT_AND_ASSIGN(bindGroup, device.CreateBindGroup(&desc));
+
+            EXPECT_TRUE(bindGroup->IsAlive());
+        }
+    }
 
     TEST(DestroyObjectTests, BindGroupLayoutExplicit) {
         // Skipping validation on descriptors as coverage for validation is already present.
@@ -68,27 +111,83 @@ namespace dawn_native { namespace {
         }
     }
 
+    TEST(DestroyObjectTests, SamplerExplicit) {
+        // Skipping validation on descriptors as coverage for validation is already present.
+        DeviceMock device;
+        device.SetToggle(Toggle::SkipValidation, true);
+
+        SamplerMock* samplerMock = new SamplerMock(&device);
+        EXPECT_CALL(*samplerMock, DestroyApiObjectImpl).Times(1);
+
+        SamplerDescriptor desc = {};
+        Ref<SamplerBase> sampler;
+        EXPECT_CALL(device, CreateSamplerImpl).WillOnce(Return(ByMove(AcquireRef(samplerMock))));
+        DAWN_ASSERT_AND_ASSIGN(sampler, device.CreateSampler(&desc));
+
+        EXPECT_TRUE(sampler->IsAlive());
+        EXPECT_TRUE(sampler->IsCachedReference());
+
+        sampler->DestroyApiObject();
+        EXPECT_FALSE(sampler->IsAlive());
+    }
+
+    // If the reference count on API objects reach 0, they should delete themselves. Note that GTest
+    // will also complain if there is a memory leak.
+    TEST(DestroyObjectTests, SamplerImplicit) {
+        // Skipping validation on descriptors as coverage for validation is already present.
+        DeviceMock device;
+        device.SetToggle(Toggle::SkipValidation, true);
+
+        SamplerMock* samplerMock = new SamplerMock(&device);
+        EXPECT_CALL(*samplerMock, DestroyApiObjectImpl).Times(1);
+
+        {
+            SamplerDescriptor desc = {};
+            Ref<SamplerBase> sampler;
+            EXPECT_CALL(device, CreateSamplerImpl)
+                .WillOnce(Return(ByMove(AcquireRef(samplerMock))));
+            DAWN_ASSERT_AND_ASSIGN(sampler, device.CreateSampler(&desc));
+
+            EXPECT_TRUE(sampler->IsAlive());
+            EXPECT_TRUE(sampler->IsCachedReference());
+        }
+    }
+
     // Destroying the objects on the device should result in all created objects being destroyed in
     // order.
     TEST(DestroyObjectTests, DestroyObjects) {
         DeviceMock device;
         device.SetToggle(Toggle::SkipValidation, true);
 
+        BindGroupMock* bindGroupMock = new BindGroupMock(&device);
         BindGroupLayoutMock* bindGroupLayoutMock = new BindGroupLayoutMock(&device);
         {
             InSequence seq;
+            EXPECT_CALL(*bindGroupMock, DestroyApiObjectImpl).Times(1);
             EXPECT_CALL(*bindGroupLayoutMock, DestroyApiObjectImpl).Times(1);
         }
 
-        BindGroupLayoutDescriptor desc = {};
+        Ref<BindGroupBase> bindGroup;
+        {
+            BindGroupDescriptor desc = {};
+            EXPECT_CALL(device, CreateBindGroupImpl)
+                .WillOnce(Return(ByMove(AcquireRef(bindGroupMock))));
+            DAWN_ASSERT_AND_ASSIGN(bindGroup, device.CreateBindGroup(&desc));
+            EXPECT_TRUE(bindGroup->IsAlive());
+        }
+
         Ref<BindGroupLayoutBase> bindGroupLayout;
-        EXPECT_CALL(device, CreateBindGroupLayoutImpl)
-            .WillOnce(Return(ByMove(AcquireRef(bindGroupLayoutMock))));
-        DAWN_ASSERT_AND_ASSIGN(bindGroupLayout, device.CreateBindGroupLayout(&desc));
-        EXPECT_TRUE(bindGroupLayout->IsAlive());
-        EXPECT_TRUE(bindGroupLayout->IsCachedReference());
+        {
+            BindGroupLayoutDescriptor desc = {};
+            EXPECT_CALL(device, CreateBindGroupLayoutImpl)
+                .WillOnce(Return(ByMove(AcquireRef(bindGroupLayoutMock))));
+            DAWN_ASSERT_AND_ASSIGN(bindGroupLayout, device.CreateBindGroupLayout(&desc));
+            EXPECT_TRUE(bindGroupLayout->IsAlive());
+            EXPECT_TRUE(bindGroupLayout->IsCachedReference());
+        }
 
         device.DestroyObjects();
+        EXPECT_FALSE(bindGroup->IsAlive());
         EXPECT_FALSE(bindGroupLayout->IsAlive());
     }
 
