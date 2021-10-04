@@ -272,7 +272,8 @@ namespace dawn_native {
         // objects safely starting at leaf objects. We define dependent here such that if B has
         // a ref to A, then B depends on A. We therefore try to destroy B before destroying A.
         // TODO(dawn/628) Add types into the array as they are implemented.
-        static constexpr std::array<ObjectType, 1> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 2> kObjectTypeDependencyOrder = {
+            ObjectType::BindGroup,
             ObjectType::BindGroupLayout,
         };
 
