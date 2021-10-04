@@ -54,6 +54,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2ef2996d_8458b0ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T10:40:08Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7b191cb78879e9064842f8843b808e4d102af061",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "72b15e4e_26508961",
         "filename": "dawn.json",
         "patchSetId": 7
@@ -65,6 +82,29 @@
       "writtenOn": "2021-10-01T18:42:16Z",
       "side": 1,
       "message": "This is \"in\" because it\u0027s being passed \"in\" to user code (via a callback) even though it\u0027s being passed \"out\" of Dawn. It makes the argument to the callback `const`.",
+      "revId": "7b191cb78879e9064842f8843b808e4d102af061",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3efdf72_c502e08d",
+        "filename": "src/dawn_native/CompilationMessages.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T10:40:08Z",
+      "side": 1,
+      "message": "nit: can we fix this function name to be CamelCase?",
+      "range": {
+        "startLine": 98,
+        "startChar": 47,
+        "endLine": 98,
+        "endChar": 72
+      },
       "revId": "7b191cb78879e9064842f8843b808e4d102af061",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
