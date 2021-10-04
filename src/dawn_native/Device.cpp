@@ -1398,8 +1398,9 @@ namespace dawn_native {
         ShaderModuleParseResult parseResult;
 
         if (IsValidationEnabled()) {
-            DAWN_TRY(ValidateShaderModuleDescriptor(this, descriptor, &parseResult,
-                                                    compilationMessages));
+            DAWN_TRY_CONTEXT(
+                ValidateShaderModuleDescriptor(this, descriptor, &parseResult, compilationMessages),
+                "validating %s", descriptor);
         }
 
         return GetOrCreateShaderModule(descriptor, &parseResult, compilationMessages);
