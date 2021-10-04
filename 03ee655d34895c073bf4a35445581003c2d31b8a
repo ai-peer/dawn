@@ -45,6 +45,30 @@
       },
       "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12045626_a874f6bc",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T12:39:29Z",
+      "side": 1,
+      "message": "It is when running in WASM. Your backend is the browser\u0027s WebGPU implementation.",
+      "parentUuid": "ab952847_f8b9b6ab",
+      "range": {
+        "startLine": 88,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 57
+      },
+      "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
