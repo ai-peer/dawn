@@ -416,6 +416,8 @@ namespace dawn_native {
         TrackInDevice();
     }
 
+    BindGroupLayoutBase::~BindGroupLayoutBase() = default;
+
     bool BindGroupLayoutBase::DestroyApiObject() {
         bool wasDestroyed = ApiObjectBase::DestroyApiObject();
         if (wasDestroyed) {
