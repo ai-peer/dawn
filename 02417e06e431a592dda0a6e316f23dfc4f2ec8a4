@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9649131a_db6aa8ca",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 28
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-04T14:45:06Z",
+      "side": 1,
+      "message": "nit: we should mention that this is only the case on Linux.",
+      "range": {
+        "startLine": 55,
+        "startChar": 43,
+        "endLine": 55,
+        "endChar": 64
+      },
+      "revId": "02417e06e431a592dda0a6e316f23dfc4f2ec8a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
