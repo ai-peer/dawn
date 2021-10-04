@@ -45,6 +45,8 @@ namespace dawn_native {
       public:
         struct LabelNotImplementedTag {};
         static constexpr LabelNotImplementedTag kLabelNotImplemented = {};
+        struct UntrackedByDeviceTag {};
+        static constexpr UntrackedByDeviceTag kUntrackedByDevice = {};
 
         ApiObjectBase(DeviceBase* device, LabelNotImplementedTag tag);
         ApiObjectBase(DeviceBase* device, const char* label);
@@ -69,10 +71,10 @@ namespace dawn_native {
 
       protected:
         void TrackInDevice();
+        virtual void DestroyApiObjectImpl();
 
       private:
         virtual void SetLabelImpl();
-        virtual void DestroyApiObjectImpl();
 
         std::string mLabel;
     };
