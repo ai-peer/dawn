@@ -270,7 +270,8 @@ namespace dawn_native {
         // that this only considers the immediate frontend dependencies, while backend objects could
         // add complications and extra dependencies.
         // TODO(dawn/628) Add types into the array as they are implemented.
-        static constexpr std::array<ObjectType, 1> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 2> kObjectTypeDependencyOrder = {
+            ObjectType::BindGroup,
             ObjectType::BindGroupLayout,
         };
 
