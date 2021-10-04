@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67aec038_db3e3213",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T20:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "473a819f_ee6699cc",
+      "range": {
+        "startLine": 110,
+        "startChar": 53,
+        "endLine": 110,
+        "endChar": 59
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b850cdaf_96509aa8",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-10-04T10:50:51Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 115,
+        "startChar": 45,
+        "endLine": 115,
+        "endChar": 48
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "092f1335_b66c18b9",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T20:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b850cdaf_96509aa8",
       "range": {
         "startLine": 115,
         "startChar": 45,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2607f70f_cc64acb4",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T20:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49ba06d1_d3184fd7",
+      "range": {
+        "startLine": 178,
+        "startChar": 63,
+        "endLine": 178,
+        "endChar": 68
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d231e02_66c4aadf",
@@ -121,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7029cd28_b043714d",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 273,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T20:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d231e02_66c4aadf",
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e8168a7_af7d3894",
@@ -134,6 +224,54 @@
       "writtenOn": "2021-10-04T16:16:20Z",
       "side": 1,
       "message": "print the bool? (%b) if that works",
+      "range": {
+        "startLine": 288,
+        "startChar": 30,
+        "endLine": 288,
+        "endChar": 31
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ff3130_5edb6309",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T20:01:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e8168a7_af7d3894",
+      "range": {
+        "startLine": 288,
+        "startChar": 30,
+        "endLine": 288,
+        "endChar": 31
+      },
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a978e877_d5d25a46",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-04T20:01:50Z",
+      "side": 1,
+      "message": "Done. There\u0027s no %b but it\u0027ll print as a %u.",
+      "parentUuid": "4e8168a7_af7d3894",
       "range": {
         "startLine": 288,
         "startChar": 30,
