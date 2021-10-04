@@ -50,6 +50,24 @@
       "message": "nit: \"...contains a negative number.\" would read more naturally.",
       "revId": "10ef30bb89d9154a0ac912298dea2bc64582d329",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd48af32_92ab71fd",
+        "filename": "src/dawn_native/Sampler.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-04T16:21:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "125db683_7ccfbca9",
+      "revId": "10ef30bb89d9154a0ac912298dea2bc64582d329",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
