@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0218e75_700a0b4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-04T16:16:20Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "473a819f_ee6699cc",
@@ -100,6 +117,29 @@
       "writtenOn": "2021-10-04T10:50:51Z",
       "side": 1,
       "message": "I think we can remove this TODO. The spec was updated in https://github.com/gpuweb/gpuweb/pull/2079",
+      "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8168a7_af7d3894",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 288,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-04T16:16:20Z",
+      "side": 1,
+      "message": "print the bool? (%b) if that works",
+      "range": {
+        "startLine": 288,
+        "startChar": 30,
+        "endLine": 288,
+        "endChar": 31
+      },
       "revId": "2d04ca6d3551c1b35d95b535ed61ff2976c47f18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
