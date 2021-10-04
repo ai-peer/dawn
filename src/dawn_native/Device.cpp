@@ -200,6 +200,10 @@ namespace dawn_native {
         }
     }
 
+    DeviceBase::DeviceBase() : mState(State::Alive) {
+        mCaches = std::make_unique<DeviceBase::Caches>();
+    }
+
     DeviceBase::~DeviceBase() = default;
 
     MaybeError DeviceBase::Initialize(QueueBase* defaultQueue) {
@@ -267,7 +271,9 @@ namespace dawn_native {
         // List of object types in "dependency" order so we can iterate and delete the objects
         // safely.
         // TODO(dawn/628) Add types into the array as they are implemented.
-        static constexpr std::array<ObjectType, 0> kObjectTypeDependencyOrder = {};
+        static constexpr std::array<ObjectType, 1> kObjectTypeDependencyOrder = {
+            ObjectType::BindGroupLayout,
+        };
 
         for (ObjectType type : kObjectTypeDependencyOrder) {
             ApiObjectList& objList = mObjectLists[type];
@@ -627,7 +633,8 @@ namespace dawn_native {
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
-        BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken);
+        BindGroupLayoutBase blueprint(this, descriptor, pipelineCompatibilityToken,
+                                      ApiObjectBase::kUntrackedByDevice);
 
         const size_t blueprintHash = blueprint.ComputeContentHash();
         blueprint.SetContentHash(blueprintHash);
@@ -639,7 +646,7 @@ namespace dawn_native {
         } else {
             DAWN_TRY_ASSIGN(result,
                             CreateBindGroupLayoutImpl(descriptor, pipelineCompatibilityToken));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->bindGroupLayouts.insert(result.Get());
         }
@@ -650,6 +657,7 @@ namespace dawn_native {
     void DeviceBase::UncacheBindGroupLayout(BindGroupLayoutBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->bindGroupLayouts.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -699,7 +707,7 @@ namespace dawn_native {
         computePipeline->SetContentHash(blueprintHash);
         auto insertion = mCaches->computePipelines.insert(computePipeline.Get());
         if (insertion.second) {
-            computePipeline->SetIsCachedReference();
+            computePipeline->SetIsCachedReference(true);
             return computePipeline;
         } else {
             return *(insertion.first);
@@ -710,7 +718,7 @@ namespace dawn_native {
         Ref<RenderPipelineBase> renderPipeline) {
         auto insertion = mCaches->renderPipelines.insert(renderPipeline.Get());
         if (insertion.second) {
-            renderPipeline->SetIsCachedReference();
+            renderPipeline->SetIsCachedReference(true);
             return renderPipeline;
         } else {
             return *(insertion.first);
@@ -720,6 +728,7 @@ namespace dawn_native {
     void DeviceBase::UncacheComputePipeline(ComputePipelineBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->computePipelines.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -736,7 +745,7 @@ namespace dawn_native {
             result = *iter;
         } else {
             DAWN_TRY_ASSIGN(result, CreatePipelineLayoutImpl(descriptor));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->pipelineLayouts.insert(result.Get());
         }
@@ -747,12 +756,14 @@ namespace dawn_native {
     void DeviceBase::UncachePipelineLayout(PipelineLayoutBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->pipelineLayouts.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
     void DeviceBase::UncacheRenderPipeline(RenderPipelineBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->renderPipelines.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -769,7 +780,7 @@ namespace dawn_native {
             result = *iter;
         } else {
             DAWN_TRY_ASSIGN(result, CreateSamplerImpl(descriptor));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->samplers.insert(result.Get());
         }
@@ -809,7 +820,7 @@ namespace dawn_native {
                                                         compilationMessages));
             }
             DAWN_TRY_ASSIGN(result, CreateShaderModuleImpl(descriptor, parseResult));
-            result->SetIsCachedReference();
+            result->SetIsCachedReference(true);
             result->SetContentHash(blueprintHash);
             mCaches->shaderModules.insert(result.Get());
         }
@@ -820,6 +831,7 @@ namespace dawn_native {
     void DeviceBase::UncacheShaderModule(ShaderModuleBase* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->shaderModules.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 
@@ -831,7 +843,7 @@ namespace dawn_native {
         }
 
         Ref<AttachmentState> attachmentState = AcquireRef(new AttachmentState(this, *blueprint));
-        attachmentState->SetIsCachedReference();
+        attachmentState->SetIsCachedReference(true);
         attachmentState->SetContentHash(attachmentState->ComputeContentHash());
         mCaches->attachmentStates.insert(attachmentState.Get());
         return attachmentState;
@@ -858,6 +870,7 @@ namespace dawn_native {
     void DeviceBase::UncacheAttachmentState(AttachmentState* obj) {
         ASSERT(obj->IsCachedReference());
         size_t removedCount = mCaches->attachmentStates.erase(obj);
+        obj->SetIsCachedReference(false);
         ASSERT(removedCount == 1);
     }
 

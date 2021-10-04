@@ -355,6 +355,9 @@ namespace dawn_native {
         void APISetLabel(const char* label);
 
       protected:
+        // Constructor used only for mocking and testing.
+        DeviceBase();
+
         void SetToggle(Toggle toggle, bool isEnabled);
         void ForceSetToggle(Toggle toggle, bool isEnabled);
 

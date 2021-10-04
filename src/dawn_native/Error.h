@@ -135,13 +135,34 @@ namespace dawn_native {
 
     // DAWN_TRY_ASSIGN is the same as DAWN_TRY for ResultOrError and assigns the success value, if
     // any, to VAR.
-#define DAWN_TRY_ASSIGN(VAR, EXPR)                                            \
+#define DAWN_TRY_ASSIGN(VAR, EXPR) DAWN_TRY_ASSIGN_WITH_CLEANUP(VAR, EXPR, {})
+
+    // Macro helpers to help with overloading assignment.
+#define DAWN_ERROR_UNIMPLEMENTED_MACRO(...)
+#define DAWN_ERROR_GET_4_ARGS_VARIADIC_HELPER_(_1, _2, _3, _4, NAME, ...) NAME
+#define DAWN_ERROR_GET_4_ARGS_VARIADIC_(args) DAWN_ERROR_GET_4_ARGS_VARIADIC_HELPER_ args
+
+// DAWN_TRY_ASSIGN_WITH_CLEANUP is overloaded with 2 version so that users can override the return
+// value of the macro when necessary. This is particularly useful if the function calling the macro
+// may want to return void instead of the error, i.e. in a test where we may just want to assert and
+// fail if the assign cannot go through.
+#define DAWN_TRY_ASSIGN_WITH_CLEANUP(...)                                               \
+    DAWN_ERROR_GET_4_ARGS_VARIADIC_((__VA_ARGS__, DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_4_, \
+                                     DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_3_,              \
+                                     DAWN_ERROR_UNIMPLEMENTED_MACRO))                   \
+    (__VA_ARGS__)
+
+#define DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_3_(VAR, EXPR, BODY) \
+    DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_4_(VAR, EXPR, BODY, std::move(error))
+
+#define DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_4_(VAR, EXPR, BODY, RET)            \
     {                                                                         \
         auto DAWN_LOCAL_VAR = EXPR;                                           \
         if (DAWN_UNLIKELY(DAWN_LOCAL_VAR.IsError())) {                        \
             std::unique_ptr<ErrorData> error = DAWN_LOCAL_VAR.AcquireError(); \
+            {BODY} /* comment to force the formatter to insert a newline */   \
             error->AppendBacktrace(__FILE__, __func__, __LINE__);             \
-            return {std::move(error)};                                        \
+            return (RET);                                                     \
         }                                                                     \
         VAR = DAWN_LOCAL_VAR.AcquireSuccess();                                \
     }                                                                         \
