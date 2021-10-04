@@ -24,6 +24,7 @@ namespace dawn_native { namespace metal {
 
     BindGroup::~BindGroup() {
         ToBackend(GetLayout())->DeallocateBindGroup(this);
+        DestroyApiObject();
     }
 
     // static

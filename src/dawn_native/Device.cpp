@@ -271,8 +271,9 @@ namespace dawn_native {
         // List of object types in "dependency" order so we can iterate and delete the objects
         // safely.
         // TODO(dawn/628) Add types into the array as they are implemented.
-        static constexpr std::array<ObjectType, 2> kObjectTypeDependencyOrder = {
+        static constexpr std::array<ObjectType, 3> kObjectTypeDependencyOrder = {
             ObjectType::Buffer,
+            ObjectType::BindGroup,
             ObjectType::BindGroupLayout,
         };
 
