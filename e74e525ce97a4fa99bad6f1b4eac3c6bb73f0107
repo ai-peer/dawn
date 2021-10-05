@@ -1,0 +1,186 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "217ca43f_f532f4b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "Lots of comments spread around this CL and the following two in the stack.\n\nI think there\u0027s a bunch of simplifications we could do to the tracking etc. Individually they are small but I think they would add up because of how core the lifetime management designed here will become to Dawn.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9edfcdfc_07d44a30",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "Can we clarify what this dependency order means? Does type A depend on B if it has a Ref\u003cB\u003e in its type? What about backend implementations that might have other dependency either in Dawn\u0027s backend code or implicitly in the API (looking at Vulkan here)?",
+      "range": {
+        "startLine": 267,
+        "startChar": 36,
+        "endLine": 267,
+        "endChar": 46
+      },
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05b2bcd2_9b6bae74",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "I wonder if we could reduce the scope of the mutex and remove the need for the recursive call by doing something like:\n\n  \n  std::vector\u003cObject\u003e toDestroy;\n  {\n    lock_quard\n    for (object : objects) {\n      object-\u003eRemoveFromList();\n      toDestroy.push_back(object)\n    }\n  }\n  for (object : toDestroy) {\n    object-\u003edestroy();\n  }\n  \nIt would mean that some objects can be unlinked but not yet destroyed for some time though.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52a9eaf7_8903779b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "Have you stumbled upon a case where this happens?",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d02ccc80_6df9d556",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "When would GetDevice be nullptr? Also WDYT of having this method only on the device? In most cases it seems that the device itself would be tracking the object since that\u0027s where almost all the CreateFoo methods are. (texture.CreateView is special but still goes through the device).\n\nThis would make the object tracking logic live only in Device / ApiObject so there are less chances to mess up.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c8b6db3_d128549c",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "Can we have an ASSERT in ~ApiObjectBase that it isn\u0027t in a list? This way in debug tests and the fuzzer can find if we forgot to implement to call Destroy() in the backends.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3973abd5_9c33784f",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "ditto early return. But also isn\u0027t this function going to be called at most once for each object?",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2464e0fe_a8fce711",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdbc81ce_89b091a1",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "Even with the comment I\u0027m not sure that we need a virtual here. Isn\u0027t the following equivalent?\n\n  class ApiObjectBase {\n    virtual void DestroyApiObjectImpl(); // \u003d 0 eventually?\n    void DestroyApiObject() {\n      RemoveFromList\n      DestroyApiObjectImpl();\n    }\n  }\n  class FooBase {\n    void DestroyApiObjectImpl() override {\n      RemoveUncachedReference\n    }\n  }\n  class backend::Foo {\n    void DestroyApiObjectImpl() override {\n      vulkan stuff\n      FooBase::DestroyApiObjectImpl();\n    }\n  }",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db681ef9_86ef597c",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:23Z",
+      "side": 1,
+      "message": "Also nit: why is this DestroyApiObject and not just Destroy()? The name collision with APIDestroy is a bit unfortunate but the semantics are almost the same?\n\nLooking at the BindGroup CL, I think it would make it more clear what\u0027s happening in the destructor. DestroyApiObject() will make it a bit curious for readers of the code, while Destroy / DestroyImpl are easier to get an intuition about.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
