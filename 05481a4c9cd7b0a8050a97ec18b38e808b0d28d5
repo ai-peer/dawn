@@ -33,6 +33,24 @@
       "message": "WDYT of using nodiscard on this type? You might need to depend on Dawn\u0027s common/ to use Compiler.h",
       "revId": "05481a4c9cd7b0a8050a97ec18b38e808b0d28d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "989a1791_f54c6191",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-05T18:46:47Z",
+      "side": 1,
+      "message": "Done. No need for Compiler.h as we\u0027re using C++17.",
+      "parentUuid": "a25602fa_9494d9ea",
+      "revId": "05481a4c9cd7b0a8050a97ec18b38e808b0d28d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
