@@ -70,6 +70,24 @@
       "parentUuid": "6cfd0d13_1caa6f8b",
       "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c94c9860_f662eb3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-05T18:47:57Z",
+      "side": 1,
+      "message": "Done. I\u0027m not sure why wgpu::Adapter::GetLimits() outputs a different type to wgpu::Device::GetLimits(), but I\u0027ve written a nasty little converter for the Adapter.",
+      "parentUuid": "f5a08b0c_db505ddb",
+      "revId": "2eeab1f6a32ce8812d8e5ef3802f3bdb08276d65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
