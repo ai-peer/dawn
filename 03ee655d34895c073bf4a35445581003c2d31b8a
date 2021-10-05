@@ -86,6 +86,30 @@
       },
       "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ca533b_93508412",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-05T15:01:16Z",
+      "side": 1,
+      "message": "Ace, thanks.",
+      "parentUuid": "12045626_a874f6bc",
+      "range": {
+        "startLine": 88,
+        "startChar": 38,
+        "endLine": 88,
+        "endChar": 57
+      },
+      "revId": "03ee655d34895c073bf4a35445581003c2d31b8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
