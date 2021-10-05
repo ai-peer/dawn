@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "313beb2a_eeec7e80",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T07:33:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "131580c59c3be0910658c500b4a8ab591447a83f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e8f6962_b63bb59a",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T07:33:11Z",
+      "side": 1,
+      "message": "We probably should add the list of modifications we did here. WDYT?",
+      "revId": "131580c59c3be0910658c500b4a8ab591447a83f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bd9d5e_3c443828",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T07:33:11Z",
+      "side": 1,
+      "message": "nit: can we have a test for this? (also u-nit we could early out to dedent control flow)",
+      "revId": "131580c59c3be0910658c500b4a8ab591447a83f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc280d1_e9b0ecfb",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T07:33:11Z",
+      "side": 1,
+      "message": "Can we have a test for this scenario?",
+      "revId": "131580c59c3be0910658c500b4a8ab591447a83f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
