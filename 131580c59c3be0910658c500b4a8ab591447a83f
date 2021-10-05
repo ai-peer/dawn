@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b79ddde5_5ca094f5",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:44:55Z",
+      "side": 1,
+      "message": "RemoveFromList could return a boolean for whether the object was actually removed or not, this could be useful for a comment in https://dawn-review.googlesource.com/c/dawn/+/65864 (with a test for that ofc)",
+      "revId": "131580c59c3be0910658c500b4a8ab591447a83f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31bd9d5e_3c443828",
         "filename": "src/common/LinkedList.h",
         "patchSetId": 2
