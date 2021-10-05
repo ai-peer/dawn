@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1da62655_9b3672df",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:34Z",
+      "side": 1,
+      "message": "Will we have a future where ApiObject derived classes never implement the destructor and instead just implement DestroyImpl()?\n\nIf we did backend changes in the same CLs, then I think we could already start implementing Destroy() this way.\n\nThe slight complication with making ~ApiObjectBase call Destroy() is that for objects like buffers it is both the refcount and APIDestroy() that can end up in a call to Destroy(). Maybe ApiObjectBase::Destroy() could check whether we have been removed from the list before calling DestroyImpl() (it would require an additional boolean returned from RemoveFromList).",
+      "revId": "488abd15af3c05a5e151b79c328be5d59bd75f9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06219565_04dcc96d",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:34Z",
+      "side": 1,
+      "message": "Is this why we have the fake constructors, so that we don\u0027t need to pass a valid constructor? Passing valid descriptors seem like a small additional thing to do but avoids turning off validation at adding FooBase(DeviceBase*) constructors just for testing. IMHO we should make the code paths in the mocks close to real backends if we can, which means passing descriptors around.",
+      "revId": "488abd15af3c05a5e151b79c328be5d59bd75f9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b997f9c3_f335aa35",
+        "filename": "src/tests/unittests/native/mocks/BindGroupMock.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:34Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "488abd15af3c05a5e151b79c328be5d59bd75f9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
