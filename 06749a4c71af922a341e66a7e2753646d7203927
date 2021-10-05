@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc2c1d8_e5884745",
+        "filename": "src/dawn_native/CachedObject.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "Why does this avoid double removing from the cache? It seems Uncache is only called in the destructor / DestroyApiObject which both should be called only once?",
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0934a648_7c900a48",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "Ah this is why we have kUntrackedByDevice. WDYT of removing it and instead calling TrackObject only in [1]?",
+      "range": {
+        "startLine": 636,
+        "startChar": 82,
+        "endLine": 637,
+        "endChar": 71
+      },
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "182a46cc_ba05e227",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aded036_93c6a15e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "nit: probably need to SetIsCachedReference(false) here",
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db02d905_43806164",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "Can we have a block comment explaining how to use the various DAWN_TRY_ASSIGN_WITH_CLEANUP? The implementation starts to be opaque enough that it\u0027s not just a matter of reading the implementation.\n\nAlso maybe we can have simple tests in ErrorTests.cpp",
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d0dc14_927050b0",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "nit: GET_5TH_ARG? It took me a while to understand that this wasn\u0027t returning 4 args.",
+      "range": {
+        "startLine": 143,
+        "startChar": 8,
+        "endLine": 143,
+        "endChar": 39
+      },
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa4da6d9_abce99d2",
+        "filename": "src/tests/DawnNativeTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "nit: 2021, ditto in other new files",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "398962b1_d6685375",
+        "filename": "src/tests/DawnNativeTest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-05T08:46:29Z",
+      "side": 1,
+      "message": "// This is similar to DAWN_TRY_ASSIGN but produces a fatal GTest error if EXPR is an error.",
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
