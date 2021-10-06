@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "78b974994abe45703785510798ae552b3639626d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce4a65c_3566059d",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-06T19:30:58Z",
+      "side": 1,
+      "message": "transform::Manager is just a container for multiple transforms.\nWe don\u0027t really need a transform::Manager here, as there\u0027s only one transform.",
+      "range": {
+        "startLine": 87,
+        "startChar": 12,
+        "endLine": 87,
+        "endChar": 53
+      },
+      "revId": "78b974994abe45703785510798ae552b3639626d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
