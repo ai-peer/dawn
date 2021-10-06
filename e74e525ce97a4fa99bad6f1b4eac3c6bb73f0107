@@ -60,6 +60,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "492c8abb_692fd5da",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-06T00:13:33Z",
+      "side": 1,
+      "message": "This may have some issues because right now the destroy call is guarded by IsAlive, and IsAlive is whether or not the obj is in a list. But we might be able to work around this with a more explicit state var?\n\nAustin and I also discussed this design (of having a separate vec of the objs when destroying) and it could be a good idea moving forwards if we wanted to run the actual destruction of objects async in the future also. WDYT?",
+      "parentUuid": "05b2bcd2_9b6bae74",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52a9eaf7_8903779b",
         "filename": "src/dawn_native/Device.cpp",
         "patchSetId": 2
@@ -71,6 +89,24 @@
       "writtenOn": "2021-10-05T08:46:23Z",
       "side": 1,
       "message": "Have you stumbled upon a case where this happens?",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34780748_923cae99",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-06T00:13:33Z",
+      "side": 1,
+      "message": "No, was just being (overly) cautious?",
+      "parentUuid": "52a9eaf7_8903779b",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +198,24 @@
       "writtenOn": "2021-10-05T08:46:23Z",
       "side": 1,
       "message": "Even with the comment I\u0027m not sure that we need a virtual here. Isn\u0027t the following equivalent?\n\n  class ApiObjectBase {\n    virtual void DestroyApiObjectImpl(); // \u003d 0 eventually?\n    void DestroyApiObject() {\n      RemoveFromList\n      DestroyApiObjectImpl();\n    }\n  }\n  class FooBase {\n    void DestroyApiObjectImpl() override {\n      RemoveUncachedReference\n    }\n  }\n  class backend::Foo {\n    void DestroyApiObjectImpl() override {\n      vulkan stuff\n      FooBase::DestroyApiObjectImpl();\n    }\n  }",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa12e083_cff52b88",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-06T00:13:33Z",
+      "side": 1,
+      "message": "That would work. The idea was to make it easier for backend classes so they don\u0027t need to remember to make the FooBase::DestroyApiObjImpl() call everytime. If they forget it would be hard to notice in that scheme, but if we bundle the destroy ops in the base class with the override, then we don\u0027t have to worry about forgetting. WDYT?",
+      "parentUuid": "fdbc81ce_89b091a1",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
