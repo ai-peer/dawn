@@ -33,6 +33,23 @@
       "message": "the warning is on by default. we currently globally disable it, but I\u0027m working on changing that. so you\u0027ll pick up the warning for your standalone build once you roll build and clang after I\u0027m done (hopefully will be fairly quick)",
       "revId": "1e0879933423ccea59c357541916d8f4b94ced81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6d1226f_54190d27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000139
+      },
+      "writtenOn": "2021-10-08T14:07:49Z",
+      "side": 1,
+      "message": "...and thanks for the quick review :)",
+      "revId": "1e0879933423ccea59c357541916d8f4b94ced81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
