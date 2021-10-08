@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "700592f7_c50b59af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-08T13:56:57Z",
+      "side": 1,
+      "message": "Thank you for the fix! Can you add the warning to src/common/BUILD.gn in the big list of opted-in warnings? Otherwise you can CQ+2 and I\u0027ll do it.",
+      "revId": "1e0879933423ccea59c357541916d8f4b94ced81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
