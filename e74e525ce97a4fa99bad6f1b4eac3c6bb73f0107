@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c037298d_7d0a6fe9",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "The first definition is what I had in mind. (Updated the comment). Regarding the second half of the comment, IIUC, for the most part, even in the backend code/implicitly in the API, the ordering is the same? i.e. BindGroups hold refs to BindGroupLayouts (which in turn may allocate the BindGroups). So if we make sure to destroy in reverse order, i.e. BindGroups and then BGLs, then we should be fine.",
+      "parentUuid": "9edfcdfc_07d44a30",
+      "range": {
+        "startLine": 267,
+        "startChar": 36,
+        "endLine": 267,
+        "endChar": 46
+      },
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05b2bcd2_9b6bae74",
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "This may have some issues because right now the destroy call is guarded by IsAlive, and IsAlive is whether or not the obj is in a list. But we might be able to work around this with a more explicit state var?\n\nAustin and I also discussed this design (of having a separate vec of the objs when destroying) and it could be a good idea moving forwards if we wanted to run the actual destruction of objects async in the future also. WDYT?",
       "parentUuid": "05b2bcd2_9b6bae74",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "030ac050_a3244123",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Actually, I thought about it a bit more, and I think it works if instead of vector, we just use a separate linked list.",
+      "parentUuid": "492c8abb_692fd5da",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ac2cae_b7cfe529",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Leaving as is unless anyone feels strongly about it.",
+      "parentUuid": "34780748_923cae99",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d02ccc80_6df9d556",
@@ -124,6 +184,24 @@
       "writtenOn": "2021-10-05T08:46:23Z",
       "side": 1,
       "message": "When would GetDevice be nullptr? Also WDYT of having this method only on the device? In most cases it seems that the device itself would be tracking the object since that\u0027s where almost all the CreateFoo methods are. (texture.CreateView is special but still goes through the device).\n\nThis would make the object tracking logic live only in Device / ApiObject so there are less chances to mess up.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "683bc6af_5284b733",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "GetDevice should probably never be nullptr. Changed to an assert instead.\n\nSo the problem with calling `TrackObject` only after the `Create*Impl` successfully returns is that in some of the Impls, the object is constructed (via factories), and some initialization occurs. If initialization fails, the `Create*Impl` will never see the object so it will never be tracked. Since being tracked in the list is how we determine whether we should call DestroyImpl, we never call DestroyImpl on these objs (not even in the destructors), and any resources they may have allocated do not end up being freed. BufferVk is a good example of this since we create the buffer in the backend, and then try allocating memory. If we fail memory alloc (OOM or w.e), we return error, and the temp object (which holds a backend Buffer resource) isn\u0027t fully destroyed because it was never tracked.\n\nThe choice we did here is to track the objects at construction so that if we fail to return the obj (as in BufferVk), the dtor would call Destroy effectively since the object is in a list.",
+      "parentUuid": "d02ccc80_6df9d556",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28dda847_39869c16",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c8b6db3_d128549c",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3973abd5_9c33784f",
@@ -162,6 +258,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3432e448_f9479b68",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3973abd5_9c33784f",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2464e0fe_a8fce711",
@@ -175,6 +289,30 @@
       "writtenOn": "2021-10-05T08:46:23Z",
       "side": 1,
       "message": "nit: unused?",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 0
+      },
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b214dbd_218cb20a",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2464e0fe_a8fce711",
       "range": {
         "startLine": 48,
         "startChar": 0,
@@ -220,6 +358,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16057c92_f58c18c1",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Leaving as is for now, but open to discussions.",
+      "parentUuid": "fa12e083_cff52b88",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db681ef9_86ef597c",
@@ -233,6 +389,24 @@
       "writtenOn": "2021-10-05T08:46:23Z",
       "side": 1,
       "message": "Also nit: why is this DestroyApiObject and not just Destroy()? The name collision with APIDestroy is a bit unfortunate but the semantics are almost the same?\n\nLooking at the BindGroup CL, I think it would make it more clear what\u0027s happening in the destructor. DestroyApiObject() will make it a bit curious for readers of the code, while Destroy / DestroyImpl are easier to get an intuition about.",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b692232_f3c65823",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-08T05:31:09Z",
+      "side": 1,
+      "message": "Yea, I am hoping to rename the function later. I can\u0027t do it at this moment because it clashes with the Destroys currently already included in some classes, i.e. Buffer. Once I finish refactoring the code for classes with Destroys I will rename them all so that we just have Destroy and DestroyImp.",
+      "parentUuid": "db681ef9_86ef597c",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
