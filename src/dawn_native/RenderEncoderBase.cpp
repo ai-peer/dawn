@@ -32,11 +32,15 @@ namespace dawn_native {
 
     RenderEncoderBase::RenderEncoderBase(DeviceBase* device,
                                          EncodingContext* encodingContext,
-                                         Ref<AttachmentState> attachmentState)
+                                         Ref<AttachmentState> attachmentState,
+                                         bool depthReadOnly,
+                                         bool stencilReadOnly)
         : ProgrammablePassEncoder(device, encodingContext),
           mAttachmentState(std::move(attachmentState)),
           mDisableBaseVertex(device->IsToggleEnabled(Toggle::DisableBaseVertex)),
           mDisableBaseInstance(device->IsToggleEnabled(Toggle::DisableBaseInstance)) {
+        mDepthReadOnly = depthReadOnly;
+        mStencilReadOnly = stencilReadOnly;
     }
 
     RenderEncoderBase::RenderEncoderBase(DeviceBase* device,
@@ -220,6 +224,16 @@ namespace dawn_native {
                         pipeline->GetAttachmentState() != mAttachmentState.Get(),
                         "Attachment state of %s is not compatible with the attachment state of %s",
                         pipeline, this);
+
+                    DAWN_INVALID_IF(
+                        pipeline->WritesDepth() && mDepthReadOnly,
+                        "It's invalid that %s's DepthWrite and %s's DepthReadOnly are both true",
+                        pipeline, this);
+
+                    DAWN_INVALID_IF(pipeline->WritesStencil() && mStencilReadOnly,
+                                    "It's invalid that %s's StencilWrite and %s's StencilReadOnly "
+                                    "are both true",
+                                    pipeline, this);
                 }
 
                 mCommandBufferState.SetRenderPipeline(pipeline);
