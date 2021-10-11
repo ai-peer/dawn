@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3668d46_8627cf22",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-11T10:36:09Z",
+      "side": 1,
+      "message": "Ack. Destruction order is always annoying :)",
+      "parentUuid": "87e3d275_12a659bf",
+      "revId": "488abd15af3c05a5e151b79c328be5d59bd75f9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06219565_04dcc96d",
