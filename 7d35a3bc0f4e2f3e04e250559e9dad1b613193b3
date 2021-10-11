@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac54a54_071d7a25",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-11T10:36:39Z",
+      "side": 1,
+      "message": "Maybe note that the dependencies considered here are only the dependencies that are in the frontend. Backend objects could be adding extra edges to that graph. I tried to find an example that would produce a cycle but couldn\u0027t find it though.",
+      "revId": "7d35a3bc0f4e2f3e04e250559e9dad1b613193b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5618825c_b08b4e23",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-11T10:36:39Z",
+      "side": 1,
+      "message": "Note, moving nodes to a new list should be possible in O(1). Can we add a TODO here to make LinkedList support something like that?",
+      "revId": "7d35a3bc0f4e2f3e04e250559e9dad1b613193b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
