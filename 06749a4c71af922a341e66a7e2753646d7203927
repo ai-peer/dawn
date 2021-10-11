@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d1edcf6_975e3953",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-11T10:32:59Z",
+      "side": 1,
+      "message": "IMHO we can track them, cached objects creation is relatively cold code so whatever makes things simpler. That said in the future we might not want to track bindgroups at all since they are slab allocated so we might need this constructor. Sooo either way sounds good.",
+      "parentUuid": "30c32e40_0463c66e",
+      "range": {
+        "startLine": 636,
+        "startChar": 82,
+        "endLine": 637,
+        "endChar": 71
+      },
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "182a46cc_ba05e227",
@@ -184,6 +208,24 @@
       "side": 1,
       "message": "Done",
       "parentUuid": "db02d905_43806164",
+      "revId": "06749a4c71af922a341e66a7e2753646d7203927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "283a031d_eb68cf73",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-11T10:32:59Z",
+      "side": 1,
+      "message": "Comment looks great, thank you!",
+      "parentUuid": "e46c4f8e_267cf981",
       "revId": "06749a4c71af922a341e66a7e2753646d7203927",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
