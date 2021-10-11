@@ -614,7 +614,9 @@ namespace dawn_native {
         if (success) {
             RenderPassEncoder* passEncoder = new RenderPassEncoder(
                 device, this, &mEncodingContext, std::move(usageTracker),
-                std::move(attachmentState), descriptor->occlusionQuerySet, width, height);
+                std::move(attachmentState), descriptor->occlusionQuerySet, width, height,
+                descriptor->depthStencilAttachment->depthReadOnly,
+                descriptor->depthStencilAttachment->stencilReadOnly);
             mEncodingContext.EnterPass(passEncoder);
             return passEncoder;
         }
