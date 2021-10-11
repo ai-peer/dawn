@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "d8200357ad387bb93c6de7c05935e25d967ebc3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2347a0e9_bf418648",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-10-11T07:39:29Z",
+      "side": 1,
+      "message": "LGTM!\nThe failure in mac-dawn-rel is a bug, fixed by https://dawn-review.googlesource.com/c/dawn/+/66220. ",
+      "revId": "d8200357ad387bb93c6de7c05935e25d967ebc3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
