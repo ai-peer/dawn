@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aece798e_eec401b9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:35:57Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8b83dae_73ad5f5f",
@@ -31,6 +48,52 @@
       "writtenOn": "2021-10-12T06:45:54Z",
       "side": 1,
       "message": "nit: seems unused?",
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa57cb5_5a685e7f",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:35:57Z",
+      "side": 1,
+      "message": "naming nit: maybe instead of \n  listToAppendTo.Append(otherList)\nit could be:\n  otherList.MoveInto(listToAppendTo)\n  \n?",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 15
+      },
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "905e6ab2_b6add5a8",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:35:57Z",
+      "side": 1,
+      "message": "nit: is this needed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 39
+      },
       "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

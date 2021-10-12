@@ -296,6 +296,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a6816e_c57b29ef",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:35:57Z",
+      "side": 1,
+      "message": "^ fwiw, I think if we do this, we may as well to do the curiously recurring template pattern thing to make ApiObjectBase::Create do device-\u003eTrackObject. And then we don\u0027t have to worry about untracking cached objects",
+      "parentUuid": "172570dd_ca98ec1b",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c8b6db3_d128549c",
