@@ -278,6 +278,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "172570dd_ca98ec1b",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:45:54Z",
+      "side": 1,
+      "message": "Ugh that\u0027s so annoying. Ok to keep as is. Maybe in the future we have some template magic to make this automatic but let\u0027s do it after we completed the first version I guess. I\u0027m thinking of something like:\n\n class ApiObjectBase {\n    ApiObjectBase(DeviceBase* device, ObjectType type) {\n      device-\u003eTrackObject(this, type);\n    }\n }\n \n template\u003cObjectType Type\u003e\n class ApiObjectBaseTagged {\n     ApiObjectBaseTagged(DeviceBase* device)\n       : ApiObjectBase(device, Type) {\n     }\n     \n     ObjectType GetObjectType() const { return Type; } \n }\n \nBut if anything we can do it later so as to make forward progress.",
+      "parentUuid": "bdc51871_6eb45e5f",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c8b6db3_d128549c",
@@ -484,6 +502,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f237c92_01332715",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:45:54Z",
+      "side": 1,
+      "message": "Thanks for the explanation. I think this new version works and doesn\u0027t have the duplication. Hopefully we don\u0027t find too many other destruction order issues with it.",
+      "parentUuid": "886f5488_f9ddc5d9",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db681ef9_86ef597c",
@@ -551,6 +587,24 @@
       "side": 1,
       "message": "Leaving as is for now because I am trying to merge most of the APIDestroy calls into these new destroys as well (since I assume that they should be fairly similar, see the Buffer changes).",
       "parentUuid": "ab1f5f5e_b857f844",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d643a96_87226a81",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:45:54Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "c073d470_aede112e",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

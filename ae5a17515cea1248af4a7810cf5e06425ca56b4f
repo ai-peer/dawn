@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c122c132_a9362965",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:45:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8b83dae_73ad5f5f",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:45:54Z",
+      "side": 1,
+      "message": "nit: seems unused?",
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
