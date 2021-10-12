@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2919bfea_c07d1efb",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T16:57:33Z",
+      "side": 1,
+      "message": "It\u0027s used via the Append/MoveTo method where we need access to the private vars `previous_` and `next_`.",
+      "parentUuid": "c8b83dae_73ad5f5f",
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fa57cb5_5a685e7f",
@@ -75,6 +93,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a58f48d7_71edd3c3",
+        "filename": "src/common/LinkedList.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T16:57:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0fa57cb5_5a685e7f",
+      "range": {
+        "startLine": 202,
+        "startChar": 9,
+        "endLine": 202,
+        "endChar": 15
+      },
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "905e6ab2_b6add5a8",
@@ -88,6 +130,30 @@
       "writtenOn": "2021-10-12T13:35:57Z",
       "side": 1,
       "message": "nit: is this needed?",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 39
+      },
+      "revId": "ae5a17515cea1248af4a7810cf5e06425ca56b4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1da17cc_b30e75b3",
+        "filename": "src/dawn_native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T16:57:33Z",
+      "side": 1,
+      "message": "Hmm it\u0027s not needed in this CL, but it is needed in the child one. Otherwise I get the following:\n\n```\nIn file included from ../../src/tests/unittests/native/DestroyObjectTests.cpp:18:\nIn file included from ../../src/tests/unittests/native/mocks/BindGroupLayoutMock.h:18:\nIn file included from ../../src/dawn_native/BindGroupLayout.h:27:\nIn file included from ../../src/dawn_native/ObjectBase.h:19:\n../../src/common/RefCounted.h:52:14: error: member access into incomplete type \u0027dawn_native::RenderPipelineBase\u0027\n        value-\u003eRelease();\n```\n\nI moved it into the next CL though since it isn\u0027t needed in this one.",
+      "parentUuid": "905e6ab2_b6add5a8",
       "range": {
         "startLine": 26,
         "startChar": 0,
