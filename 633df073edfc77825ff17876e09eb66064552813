@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0557c70f_2c1dba88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:13:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "633df073edfc77825ff17876e09eb66064552813",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9331316_cc38361c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1547,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T06:13:45Z",
+      "side": 1,
+      "message": "nit: CreateUninitializedComputePipeline (missing the second i of Uninitialized). However WDYT of removing the indirection and just making code call the Impl?",
+      "range": {
+        "startLine": 1547,
+        "startChar": 41,
+        "endLine": 1547,
+        "endChar": 74
+      },
+      "revId": "633df073edfc77825ff17876e09eb66064552813",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
