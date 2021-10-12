@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f435780_d9bc2736",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T07:04:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b80200e8_6c3a7cc6",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T07:04:30Z",
+      "side": 1,
+      "message": "Maybe \"%s writes depth while %s has depthReadOnly is true\". Ditto below. See docs/errors.md as well.",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae08a67d_e1ddc8a3",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T07:04:30Z",
+      "side": 1,
+      "message": "Can we add the render bundle descriptor depth/stencilReadOnly in this CL https://gpuweb.github.io/gpuweb/#dictdef-gpurenderbundleencoderdescriptor ?",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd408dbd_2daa6606",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T07:04:30Z",
+      "side": 1,
+      "message": "u-nit: this is used only in CreateRenderPassDescriptor and could take advantage of defaults (only size {kSize, kSize}, usage and format need to be specified)",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ff8606_4c2ace60",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T07:04:30Z",
+      "side": 1,
+      "message": "Note: not here but in the CTS we will have to check that [[writes_stencil]] is computed correctly based on all the op and stencil vs. back.",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a3495c6_bca44fef",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-12T07:04:30Z",
+      "side": 1,
+      "message": "nit: stencil\n\nNote also that we have a number of RenderPass / RenderPipeline compatibility tests in RenderPipelineValidationTests. Maybe they are there already?",
+      "range": {
+        "startLine": 116,
+        "startChar": 13,
+        "endLine": 116,
+        "endChar": 19
+      },
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
