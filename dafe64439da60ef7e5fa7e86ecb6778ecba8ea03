@@ -16,6 +16,24 @@
       "message": "As noted in the parent CL, we should find a way to not duplicate this code that removes the object from the list.\n\nIs it an artifact of removing the boolean to SetIsCachedReference so that we know if we actually had to destroy this object? This is a slight advantage for making ObjectBase::DestroyApiObject non-virtual and call ObjectBase::DestrpyApiObjectImpl only if it was removed from the list.",
       "revId": "dafe64439da60ef7e5fa7e86ecb6778ecba8ea03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5aa8c0ce_53190b2b",
+        "filename": "src/dawn_native/BindGroupLayout.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 408,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:39Z",
+      "side": 1,
+      "message": "Done, see comment in parent CL for more context on the fix.",
+      "parentUuid": "d90b81c0_1e7f3781",
+      "revId": "dafe64439da60ef7e5fa7e86ecb6778ecba8ea03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
