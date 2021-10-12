@@ -35,6 +35,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aedbd240_5d4305e7",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b80200e8_6c3a7cc6",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b4db3fa_02c2230c",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Done\n\nGood to know the doc.",
+      "parentUuid": "b80200e8_6c3a7cc6",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ae08a67d_e1ddc8a3",
@@ -48,6 +84,24 @@
       "writtenOn": "2021-10-12T07:04:30Z",
       "side": 1,
       "message": "Can we add the render bundle descriptor depth/stencilReadOnly in this CL https://gpuweb.github.io/gpuweb/#dictdef-gpurenderbundleencoderdescriptor ?",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "357f9c59_3b814da9",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "depth/stencilReadOnly are set via default values (false) here. How about add them explicitly in another patch? We may need to add some unittests to cover the explicit values. I planed to do so but forgot to mention renderbundle in TODO in PipelineAndPassCompabilityTests. Now I update the TODOs and add the rendlebundle related test into the TODOs.",
+      "parentUuid": "ae08a67d_e1ddc8a3",
       "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +123,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "403a3f90_389a5d06",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Done\n\nI feel like the CreateTexture() function may be needed by more caller(s) if we added more tests later. But we can do that later if needed.",
+      "parentUuid": "cd408dbd_2daa6606",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa6c7052_9ec78931",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd408dbd_2daa6606",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30ff8606_4c2ace60",
@@ -86,6 +176,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9adb95b7_5c82e0ca",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "30ff8606_4c2ace60",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22a496ab_14bb2564",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Ack. You are talking about CTS, not any change needed in this patch, right? \n\nbtw, writeDepth can be set true while depth test is actually disabled (depth\u0027s compareFunction is \"Always\", which means depth test always passes. No depth test at all). And the WebGPU spec doesn\u0027t require depth test to be really enabled when we set writeDepth: https://www.w3.org/TR/webgpu/#render-pipeline-creation. Note that WebGPU doesn\u0027t have an explicit boolean named enableDepthTest like some native graphics APIs. \n\nstencil is the same as depth.",
+      "parentUuid": "30ff8606_4c2ace60",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a3495c6_bca44fef",
@@ -99,6 +225,54 @@
       "writtenOn": "2021-10-12T07:04:30Z",
       "side": 1,
       "message": "nit: stencil\n\nNote also that we have a number of RenderPass / RenderPipeline compatibility tests in RenderPipelineValidationTests. Maybe they are there already?",
+      "range": {
+        "startLine": 116,
+        "startChar": 13,
+        "endLine": 116,
+        "endChar": 19
+      },
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a65a567f_4efd89a2",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Done.\n\nYeah. I also noticed that there are two tests related to pipeline and pass compability in RenderPipelineValidationTest: one is for multisample, another is for vertexOnly pipeline. We can move them into this file if needed. I feel like that we need a lot more tests for pipeline and pass compatibility tests. So I created a standalone test file here in order to reuse functions. Many of them are not related to issue 485, actually.",
+      "parentUuid": "7a3495c6_bca44fef",
+      "range": {
+        "startLine": 116,
+        "startChar": 13,
+        "endLine": 116,
+        "endChar": 19
+      },
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f93dc890_38bad36d",
+        "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-12T18:00:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a3495c6_bca44fef",
       "range": {
         "startLine": 116,
         "startChar": 13,
