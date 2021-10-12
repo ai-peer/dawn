@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c8a2c9b_431315e1",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T16:58:48Z",
+      "side": 1,
+      "message": "Hmm I tried this just now, but it would require adding some mocking hooks to change the state which is private right now. Not sure how much benefit we will get from doing that for the unit test... Alternatively, maybe we can consider delaying testing these parts for e2e tests that will not need more mocking hooks, WDYT?",
+      "parentUuid": "46862ff4_775cd600",
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2f7e25e9_fe33c5ab",
         "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
         "patchSetId": 10
@@ -48,6 +66,30 @@
       "writtenOn": "2021-10-12T13:59:04Z",
       "side": 1,
       "message": "BindGroup holds a ref to BindGroupLayoutBase, so we should probably also test the case when we call device.DestroyObjects and there are no external BGL references - it\u0027s kept alive only by the bind group\n\nprobably should do this on a previous CL though",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 37
+      },
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73b33a86_545bf2e4",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T16:58:48Z",
+      "side": 1,
+      "message": "Hmm not sure how we can do this in this CL chain yet since we don\u0027t actually pass the BGL to the BindGroups atm. I will keep this in mind though for e2e test when I am adding those.",
+      "parentUuid": "2f7e25e9_fe33c5ab",
       "range": {
         "startLine": 124,
         "startChar": 8,
