@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28ac053c_d3d15279",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:59:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46862ff4_775cd600",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:59:04Z",
+      "side": 1,
+      "message": "it would be great if we could also test DestroyApiObject while the buffer is in various states: ex.) mapped / mappedAtCreation.",
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f7e25e9_fe33c5ab",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:59:04Z",
+      "side": 1,
+      "message": "BindGroup holds a ref to BindGroupLayoutBase, so we should probably also test the case when we call device.DestroyObjects and there are no external BGL references - it\u0027s kept alive only by the bind group\n\nprobably should do this on a previous CL though",
+      "range": {
+        "startLine": 124,
+        "startChar": 8,
+        "endLine": 124,
+        "endChar": 37
+      },
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
