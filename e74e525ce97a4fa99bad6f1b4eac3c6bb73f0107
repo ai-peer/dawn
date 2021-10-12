@@ -189,6 +189,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9063f3_169bd06a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "918dedf6_5202e0bd",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d02ccc80_6df9d556",
@@ -238,6 +256,24 @@
       "side": 1,
       "message": "Thanks for the explanation, it makes sense. The addition of TrackObject in a lot of the frontend classes is a bit unfortunate though. What do you think of having ApiObjectBase::ApiObjectBase directly call GetDevice()-\u003eTrackObject(this)? It would cover this case. A drawback is that it would unnecessarily track + remove error objects, but we optimize for the error-less case anyway.",
       "parentUuid": "683bc6af_5284b733",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdc51871_6eb45e5f",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:19Z",
+      "side": 1,
+      "message": "Haha, I initially tried that, but unfortunately, TrackObject requires knowing what type the object is, and at ctor of ApiObjectBase, we don\u0027t know yet since GetType is full virtual (Construction order is ALSO always annoying XD). Since we needed to add the call to the ctors of the actual objs, I only selected the valid objects and disregarded the ctors for errors.",
+      "parentUuid": "edaa4ae1_8b3e226e",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -430,6 +466,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "886f5488_f9ddc5d9",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:19Z",
+      "side": 1,
+      "message": "Thought about it a bit more and decided to have this function return a bool to indicate whether it actually executed the destruction.\n\nThe initial attempt I had in BindGroupLayout was:\n\n```\nvoid BindGroupLayoutBase::DestroyApiObject() {\n    // Do not uncache the actual cached object if we are a blueprint\n    if (IsCachedReference()) {\n        GetDevice()-\u003eUncacheBindGroupLayout(this);\n    }\n    ApiObjectBase::DestroyApiObject();\n}\n```\n\nProblem with that was that should this be executed more than once, we will try to uncache more than once (and unfortunately segfault...). I needed the operation to be tied (atomically) to the check of whether the object was in the list (alive or not) which was inside the base implementation. Since before I didn\u0027t return anything, the only way to do that was to unwrap and call everything directly. I think by returning a bool from the base call, this should fix the issue. Feel free to take a look at the new implementation of the BindGroupLayout override in the child CL.",
+      "parentUuid": "4fa8043c_9f3f4e04",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db681ef9_86ef597c",
@@ -479,6 +533,24 @@
       "side": 1,
       "message": "Sounds good. If you want you could rename the DestroyImpl in Buffer/Texture/QuerySet to APIDestroyImpl during this refactor. This way there will be less churn in the new code. Feel free to re-resolve and not address if you think this is a bad suggestion :)",
       "parentUuid": "4b692232_f3c65823",
+      "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c073d470_aede112e",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:19Z",
+      "side": 1,
+      "message": "Leaving as is for now because I am trying to merge most of the APIDestroy calls into these new destroys as well (since I assume that they should be fairly similar, see the Buffer changes).",
+      "parentUuid": "ab1f5f5e_b857f844",
       "revId": "e74e525ce97a4fa99bad6f1b4eac3c6bb73f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

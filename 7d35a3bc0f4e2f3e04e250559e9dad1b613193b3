@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "825d79aa_699fd88e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ac54a54_071d7a25",
+      "revId": "7d35a3bc0f4e2f3e04e250559e9dad1b613193b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5618825c_b08b4e23",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-11T10:36:39Z",
       "side": 1,
       "message": "Note, moving nodes to a new list should be possible in O(1). Can we add a TODO here to make LinkedList support something like that?",
+      "revId": "7d35a3bc0f4e2f3e04e250559e9dad1b613193b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb662953_429cdb36",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-12T00:10:19Z",
+      "side": 1,
+      "message": "Done, just added the implementation for that here since its only a couple lines + tests. (Maybe should\u0027ve split into another change... but lmk if you feel strongly since its pretty small?)",
+      "parentUuid": "5618825c_b08b4e23",
       "revId": "7d35a3bc0f4e2f3e04e250559e9dad1b613193b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
