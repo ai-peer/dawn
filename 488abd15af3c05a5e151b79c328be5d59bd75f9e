@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6047b0a_e501c355",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-12T13:41:33Z",
+      "side": 1,
+      "message": "Well actually... these destructors (for non-blueprint stuff) are always invoked via RefCounted::DeleteThis. So maybe... we *could* actually make it so that Derived::DestroyApiObject is always called before ~Derived.\nOk to look into this later though - but it might be worth it if it simplifies things in this CL and other/future ones.",
+      "parentUuid": "a3668d46_8627cf22",
+      "revId": "488abd15af3c05a5e151b79c328be5d59bd75f9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "06219565_04dcc96d",
