@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15efb681_345ba55a",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-13T19:10:08Z",
+      "side": 1,
+      "message": "Adding TODOs sounds good, as a u-u-nit: maybe we can have explicit false,false in RenderBundleEncoder creation. The defaulting here doesn\u0027t bring much more readability and risks being forgotten and puzzling readers 😊\n\nYeah I believe the booleans are there in RenderBundleEncoderDescriptor because of wgpu. I distinctly remember suggesting that we automatically compute them during encoding, so I assume Dzmitry pushed back.",
+      "parentUuid": "f96bba38_efe1f971",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd408dbd_2daa6606",
         "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
         "patchSetId": 4
