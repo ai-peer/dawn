@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f96bba38_efe1f971",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-13T04:37:36Z",
+      "side": 1,
+      "message": "\u003e Even we include these redundant depth/stencilReadOnly in RenderBundleEncoderDescriptor in the spec, they are actually useless.\n\nI believe this is because Mozilla\u0027s implementation would like to directly record the native bundle in the backends (like the D3D12 bundle or Vulkan secondary command buffer). Doing so requires knowing if the render pass writes to any depth/stencil attachments for the render pass (Vulkan\u0027s render pass + pipeline compatibility).",
+      "parentUuid": "3bc21907_15225fe1",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd408dbd_2daa6606",
         "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
         "patchSetId": 4
