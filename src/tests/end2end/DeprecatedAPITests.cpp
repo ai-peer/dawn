@@ -71,6 +71,57 @@ TEST_P(DeprecationTests, SetBufferWithZeroSizeAsDefault) {
     }
 }
 
+// Test that using size=0 to indicate default size in mapAsync of buffer is
+// deprecated.
+TEST_P(DeprecationTests, BufferMapAsyncWithZeroSizeAsDefault) {
+    wgpu::BufferDescriptor bufferDesc;
+    bufferDesc.size = 128;
+    bufferDesc.usage = wgpu::BufferUsage::MapWrite;
+    wgpu::Buffer buffer1 = device.CreateBuffer(&bufferDesc);
+    wgpu::Buffer buffer2 = device.CreateBuffer(&bufferDesc);
+
+    // Use an access flag to make sure that MapAsync is done and callback function is called.
+    struct BufferWithAccessFlag {
+        wgpu::Buffer* buffer;
+        uint32_t accessFlag;
+    };
+
+    BufferWithAccessFlag flagedBuffer1 = {&buffer1, 1};
+    BufferWithAccessFlag flagedBuffer2 = {&buffer2, 1};
+
+    {
+        // Control case, use wgpu::kWholeMapSize to indicate default size.
+        buffer1.MapAsync(
+            wgpu::MapMode::Write, 0, wgpu::kWholeMapSize,
+            [](WGPUBufferMapAsyncStatus status, void* userdata) {
+                ((BufferWithAccessFlag*)userdata)->buffer->Unmap();
+                ((BufferWithAccessFlag*)userdata)->accessFlag = 0;
+            },
+            (void*)&flagedBuffer1);
+
+        // Make sure that MapAsync is done, and it is safe to destroy the buffer after the test.
+        while (flagedBuffer1.accessFlag != 0) {
+            WaitABit();
+        }
+    }
+
+    {
+        // Error case, use 0 to indicate default size will cause deprecated warning.
+        EXPECT_DEPRECATION_WARNING(buffer2.MapAsync(
+            wgpu::MapMode::Write, 0, 0,
+            [](WGPUBufferMapAsyncStatus status, void* userdata) {
+                ((BufferWithAccessFlag*)userdata)->buffer->Unmap();
+                ((BufferWithAccessFlag*)userdata)->accessFlag = 0;
+            },
+            (void*)&flagedBuffer2));
+
+        // Make sure that MapAsync is done, and it is safe to destroy the buffer after the test.
+        while (flagedBuffer2.accessFlag != 0) {
+            WaitABit();
+        }
+    }
+}
+
 DAWN_INSTANTIATE_TEST(DeprecationTests,
                       D3D12Backend(),
                       MetalBackend(),
