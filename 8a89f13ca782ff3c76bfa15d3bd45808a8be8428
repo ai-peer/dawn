@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin,\n\nSorry that I didn\u0027t notice my CL \"66221: Avoid redundant creation of ComputePipelineBase in GetCachedComputePipeline | https://dawn-review.googlesource.com/c/dawn/+/66221\" will cause compilation error on the latest Dawn upstream and introduced a compilation error. This CL can fix all the errors, PTAL, thanks!",
       "revId": "8a89f13ca782ff3c76bfa15d3bd45808a8be8428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83bc1a61_33790de8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-13T02:35:55Z",
+      "side": 1,
+      "message": "Hi Ben, sorry a CL submitted by me is breaking the compilation of Dawn upstream and this CL is the fix of this problem. Could you take a look? ",
+      "revId": "8a89f13ca782ff3c76bfa15d3bd45808a8be8428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
