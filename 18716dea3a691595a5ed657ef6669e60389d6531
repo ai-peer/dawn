@@ -221,6 +221,24 @@
       "parentUuid": "d2d37f58_c96ad380",
       "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9194c305_31fc4284",
+        "filename": "src/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-13T17:41:52Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "47ec688a_d22bdae9",
+      "revId": "18716dea3a691595a5ed657ef6669e60389d6531",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
