@@ -67,6 +67,23 @@
       "message": "The CL will unblock my work. Want land this ASAP.",
       "revId": "8a89f13ca782ff3c76bfa15d3bd45808a8be8428",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b88647_91563a2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-13T04:14:41Z",
+      "side": 1,
+      "message": "LGTM. In the future, we can also revert the previous changes if it\u0027s blocking other peoples\u0027 work.",
+      "revId": "8a89f13ca782ff3c76bfa15d3bd45808a8be8428",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
