@@ -166,8 +166,13 @@ namespace dawn_wire { namespace client {
         }
 
         // Handle the defaulting of size required by WebGPU.
-        if (size == 0 && offset < mSize) {
-            size = mSize - offset;
+        if (size == WGPU_WHOLE_MAP_SIZE) {
+            if (offset <= mSize) {
+                size = mSize - offset;
+            } else {
+                // size + offset is larger than buffer.size, will cause a validation error later.
+                size = 0;
+            }
         }
 
         // Create the request structure that will hold information while this mapping is
