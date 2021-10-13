@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3bc21907_15225fe1",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-13T00:23:04Z",
+      "side": 1,
+      "message": "I investigated more about depth/stencilReadOnly in RenderBundle. I feel like that the depth/stencilReadOnly in RenderBundleEncoderDescriptor at https://gpuweb.github.io/gpuweb/#dictdef-gpurenderbundleencoderdescriptor doesn\u0027t make sense. RenderBundleEncoder is a child class of RenderEncoderBase, which has internal arguments [[depthReadOnly]] and [[stencilReadOnly]], we can set those internal arguments to false as default. Then RenderBundleEncoderDescriptor\u0027s counterpart arguments depth/stencilReadOnly are not necessary. And we can also do the validation for setPipeline, no matter it is called by an instance of renderPassEncoder, or renderBundleEncoder. But renderBundleEncoder\u0027s validation always succeed because depth/stencilReadOnly are always false. The check actually defers to executeBundles: we need to make sure that every renderbundle\u0027s every pipeline\u0027s writeDepth/Stencil should be compatible with renderPass\u0027s depth/stencilReadOnly arguments.\n\nEven we include these redundant depth/stencilReadOnly in RenderBundleEncoderDescriptor in the spec, they are actually useless. We still need to check the compatibility during executeBundles. And these redundant arguments has side effect: these two arguments in RenderBundleEncoderDescriptor might be set true and mislead validation.\n\nSo I tend to remove depth/stencilReadOnly at RenderBundleEncoderDescriptor (https://gpuweb.github.io/gpuweb/#dictdef-gpurenderbundleencoderdescriptor). And just say that the internal values [[depthReadOnly]] (https://gpuweb.github.io/gpuweb/#dom-gpurenderencoderbase-depthreadonly-slot) and [[stencilReadOnly]] in RenderEncoderBase are false by default, and they can be set during beginRenderPass(). \n\nWDYT?",
+      "parentUuid": "357f9c59_3b814da9",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd408dbd_2daa6606",
         "filename": "src/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
         "patchSetId": 4

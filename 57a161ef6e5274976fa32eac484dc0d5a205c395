@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066bed4c_3a1e85b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-13T00:23:04Z",
+      "side": 1,
+      "message": "Add Kai because these tests are related to validation. And it may impact WebGPU spec and CTS (I should add Kai earlier but I knew Kai is OOO recently.) ",
+      "revId": "57a161ef6e5274976fa32eac484dc0d5a205c395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
