@@ -18,6 +18,74 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b751ec5a_3840fb98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b70c3ffb_c1fab96f",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "Since the paramter type is size_t, this should be SIZE_MAX and use size_t in the cpp header. Otherwise on 64bit it wouldn\u0027t work correctly for buffers larger than 4GB.",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e7030be_ea04c2e5",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "nit: tab -\u003e 4 spaces. This file doesn\u0027t get autoformatted.",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f60246_721bafc5",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "Keeping kWholeMapSize would also work. In the validation we can split [1] into two DAWN_INVALID_IF, and put it first in the function so that this cases gives an error about offset \u003e mSize.",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9f0b11c_7fd7400c",
@@ -31,6 +99,81 @@
       "writtenOn": "2021-10-14T04:58:12Z",
       "side": 1,
       "message": "BTW, why we have such a constant?",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "834325ab_499359d3",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "Because we need to return something, that\u0027s not nullptr to show the GetMappedRange worked. If people try to dereference this pointer they will see a segfault with a pointer that looks like and interesting string in hex and know where to look.",
+      "parentUuid": "a9f0b11c_7fd7400c",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a12a1530_500b6505",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1174d937_1b1e7ee4",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "ditto, we don\u0027t need the else because the offset + size will be sent to dawn_native that will produce an error.",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61eb35b9_cd6ca037",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:02Z",
+      "side": 1,
+      "message": "nit: Deprecated",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 16
+      },
       "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
