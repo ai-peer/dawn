@@ -46,6 +46,30 @@
       },
       "revId": "85f51f84f427c0f7bcfa6eaa8fea780cafd3495c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238ec321_844ab3cc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-14T15:25:57Z",
+      "side": 1,
+      "message": "See the diff between patchset 1 and 2. But it would be nice to have it in the commit message.",
+      "parentUuid": "c8de0f60_f7b86ef0",
+      "range": {
+        "startLine": 7,
+        "startChar": 0,
+        "endLine": 7,
+        "endChar": 73
+      },
+      "revId": "85f51f84f427c0f7bcfa6eaa8fea780cafd3495c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
