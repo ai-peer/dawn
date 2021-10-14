@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f572a873_6295d8e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-14T04:58:12Z",
+      "side": 1,
+      "message": "PTAL, thanks",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f0b11c_7fd7400c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-14T04:58:12Z",
+      "side": 1,
+      "message": "BTW, why we have such a constant?",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
