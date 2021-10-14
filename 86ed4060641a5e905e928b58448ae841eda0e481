@@ -160,6 +160,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a6551a7_26c5bcfa",
+        "filename": "src/dawn_native/RenderEncoderBase.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-14T04:05:50Z",
+      "side": 1,
+      "message": "Done.\n\nGood to know previous discussions around the spec. Thank you, Austin and Corentin. So, I think I will add these two parameters depthReadOnly/stencilReadOnly into RenderBundleEncoderDescriptor and do a similar but fake validation in RenderBundle.SetPipeline(), and do a real validation in RenderPassEncoder.executeBundles() in the following patch.\n\nFor the spec problem, maybe I can submit a PR and discuss it again. I still think that adding these two parameters in RenderBundleEncoderDescriptor makes no sense. One more reason is that depthReadOnly/stencilReadOnly need to be the same (true or false) if the attachment\u0027s format has both depth and stencil aspect. But we cannot know that information in RenderBundle and we can set depthReadOnly and stencilReadOnly at will, which is nonsense though. But I may defer this to the time when I finish the implementation of readonly depth/stencil attachment in various backends and know more about the situations/problems Dzmitry defended.",
+      "parentUuid": "15efb681_345ba55a",
+      "revId": "86ed4060641a5e905e928b58448ae841eda0e481",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd408dbd_2daa6606",
