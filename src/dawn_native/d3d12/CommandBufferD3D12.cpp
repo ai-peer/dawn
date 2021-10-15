@@ -212,7 +212,7 @@ namespace dawn_native { namespace d3d12 {
             ASSERT(copySize.height % blockInfo.height == 0);
             uint32_t heightInBlocks = copySize.height / blockInfo.height;
 
-            // Create tempBuffer
+            // Create constantBuffer
             uint32_t bytesPerRow =
                 Align(blockInfo.byteSize * widthInBlocks, kTextureBytesPerRowAlignment);
             uint32_t rowsPerImage = heightInBlocks;
@@ -230,7 +230,7 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY_ASSIGN(tempBufferBase, device->CreateBuffer(&tempBufferDescriptor));
             Ref<Buffer> tempBuffer = ToBackend(std::move(tempBufferBase));
 
-            // Copy from source texture into tempBuffer
+            // Copy from source texture into constantBuffer
             Texture* srcTexture = ToBackend(srcCopy.texture).Get();
             tempBuffer->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopyDst);
             BufferCopy bufferCopy;
@@ -241,15 +241,85 @@ namespace dawn_native { namespace d3d12 {
             RecordCopyTextureToBuffer(recordingContext->GetCommandList(), srcCopy, bufferCopy,
                                       srcTexture, tempBuffer.Get(), copySize);
 
-            // Copy from tempBuffer into destination texture
+            // Copy from constantBuffer into destination texture
             tempBuffer->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopySrc);
             Texture* dstTexture = ToBackend(dstCopy.texture).Get();
             RecordCopyBufferToTexture(recordingContext, dstCopy, tempBuffer->GetD3D12Resource(), 0,
                                       bytesPerRow, rowsPerImage, copySize, dstTexture,
                                       dstCopy.aspect);
 
-            // Save tempBuffer into recordingContext
+            // Save constantBuffer into recordingContext
             recordingContext->AddToTempBuffers(std::move(tempBuffer));
+
+            return {};
+        }
+
+        MaybeError RecordApplyConstantBufferWithDispatchSize(
+            Device* device,
+            CommandRecordingContext* recordingContext,
+            PipelineLayout* pipelineLayout,
+            DispatchCmd* dispatch) {
+            BufferDescriptor constantBufferDescriptor;
+            constantBufferDescriptor.usage =
+                wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+            constantBufferDescriptor.size = sizeof(DispatchCmd);
+            Ref<BufferBase> constantBufferBase;
+            DAWN_TRY_ASSIGN(constantBufferBase, device->CreateBuffer(&constantBufferDescriptor));
+            Ref<Buffer> constantBuffer = ToBackend(std::move(constantBufferBase));
+
+            DynamicUploader* uploader = device->GetDynamicUploader();
+            UploadHandle uploadHandle;
+            DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(sizeof(DispatchCmd),
+                                                             device->GetPendingCommandSerial(),
+                                                             kCopyBufferToBufferOffsetAlignment));
+            memcpy(uploadHandle.mappedBuffer, dispatch, sizeof(DispatchCmd));
+
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::CopyDst);
+            recordingContext->GetCommandList()->CopyBufferRegion(
+                constantBuffer->GetD3D12Resource(), 0,
+                ToBackend(uploadHandle.stagingBuffer)->GetResource(), uploadHandle.startOffset,
+                sizeof(DispatchCmd));
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::Uniform);
+
+            recordingContext->GetCommandList()->SetComputeRootConstantBufferView(
+                pipelineLayout->GetNumWorkgroupsParameterIndex(), constantBuffer->GetVA());
+
+            recordingContext->AddToTempBuffers(std::move(constantBuffer));
+
+            return {};
+        }
+
+        MaybeError RecordApplyConstantBufferWithDispatchSize(
+            Device* device,
+            CommandRecordingContext* recordingContext,
+            PipelineLayout* pipelineLayout,
+            DispatchIndirectCmd* dispatchIndirect) {
+            BufferDescriptor constantBufferDescriptor;
+            constantBufferDescriptor.usage =
+                wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+            constantBufferDescriptor.size = sizeof(DispatchCmd);
+            Ref<BufferBase> constantBufferBase;
+            DAWN_TRY_ASSIGN(constantBufferBase, device->CreateBuffer(&constantBufferDescriptor));
+            Ref<Buffer> constantBuffer = ToBackend(std::move(constantBufferBase));
+
+            ToBackend(dispatchIndirect->indirectBuffer)
+                ->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopySrc);
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::CopyDst);
+            recordingContext->GetCommandList()->CopyBufferRegion(
+                constantBuffer->GetD3D12Resource(), 0,
+                ToBackend(dispatchIndirect->indirectBuffer)->GetD3D12Resource(),
+                dispatchIndirect->indirectOffset, sizeof(DispatchCmd));
+            ToBackend(dispatchIndirect->indirectBuffer)
+                ->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::Indirect);
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::Uniform);
+            recordingContext->GetCommandList()->SetComputeRootConstantBufferView(
+                pipelineLayout->GetNumWorkgroupsParameterIndex(), constantBuffer->GetVA());
+
+            recordingContext->AddToTempBuffers(std::move(constantBuffer));
 
             return {};
         }
@@ -1030,6 +1100,8 @@ namespace dawn_native { namespace d3d12 {
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();
 
         Command type;
+
+        bool useNumWorkgroups = false;
         while (mCommands.NextCommandId(&type)) {
             switch (type) {
                 case Command::Dispatch: {
@@ -1045,6 +1117,11 @@ namespace dawn_native { namespace d3d12 {
                                                    resourceUsages.dispatchUsages[currentDispatch]);
                     DAWN_TRY(bindingTracker->Apply(commandContext));
 
+                    if (useNumWorkgroups) {
+                        DAWN_TRY(RecordApplyConstantBufferWithDispatchSize(
+                            ToBackend(GetDevice()), commandContext,
+                            ToBackend(bindingTracker->GetCurrentPipelineLayout()), dispatch));
+                    }
                     commandList->Dispatch(dispatch->x, dispatch->y, dispatch->z);
                     currentDispatch++;
                     break;
@@ -1057,6 +1134,12 @@ namespace dawn_native { namespace d3d12 {
                     TransitionAndClearForSyncScope(commandContext,
                                                    resourceUsages.dispatchUsages[currentDispatch]);
                     DAWN_TRY(bindingTracker->Apply(commandContext));
+
+                    if (useNumWorkgroups) {
+                        DAWN_TRY(RecordApplyConstantBufferWithDispatchSize(
+                            ToBackend(GetDevice()), commandContext,
+                            ToBackend(bindingTracker->GetCurrentPipelineLayout()), dispatch));
+                    }
 
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDispatchIndirectSignature();
@@ -1078,6 +1161,8 @@ namespace dawn_native { namespace d3d12 {
                     commandList->SetPipelineState(pipeline->GetPipelineState());
 
                     bindingTracker->OnSetPipeline(pipeline);
+
+                    useNumWorkgroups = pipeline->UseNumWorkgroups();
                     break;
                 }
 

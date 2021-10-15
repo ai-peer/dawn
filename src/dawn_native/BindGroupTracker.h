@@ -62,6 +62,10 @@ namespace dawn_native {
             mPipelineLayout = pipeline->GetLayout();
         }
 
+        PipelineLayoutBase* GetCurrentPipelineLayout() const {
+            return mPipelineLayout;
+        }
+
       protected:
         // The Derived class should call this before it applies bind groups.
         void BeforeApply() {
