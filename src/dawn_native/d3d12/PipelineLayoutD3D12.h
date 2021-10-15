@@ -42,9 +42,13 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetDynamicRootParameterIndex(BindGroupIndex group,
                                               BindingIndex bindingIndex) const;
 
-        uint32_t GetFirstIndexOffsetRegisterSpace() const;
-        uint32_t GetFirstIndexOffsetShaderRegister() const;
+        static uint32_t GetFirstIndexOffsetRegisterSpace();
+        static uint32_t GetFirstIndexOffsetShaderRegister();
         uint32_t GetFirstIndexOffsetParameterIndex() const;
+
+        static uint32_t GetNumWorkgroupsRegisterSpace();
+        static uint32_t GetNumWorkgroupsShaderRegister();
+        uint32_t GetNumWorkgroupsParameterIndex() const;
 
         ID3D12RootSignature* GetRootSignature() const;
 
@@ -59,6 +63,7 @@ namespace dawn_native { namespace d3d12 {
                     kMaxBindGroups>
             mDynamicRootParameterIndices;
         uint32_t mFirstIndexOffsetParameterIndex;
+        uint32_t mNumWorkgroupsParamterIndex;
         ComPtr<ID3D12RootSignature> mRootSignature;
     };
 

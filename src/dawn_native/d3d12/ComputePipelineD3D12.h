@@ -40,6 +40,8 @@ namespace dawn_native { namespace d3d12 {
         // Dawn API
         void SetLabelImpl() override;
 
+        bool UseNumWorkgroups() const;
+
       private:
         ~ComputePipeline() override;
         using ComputePipelineBase::ComputePipelineBase;
