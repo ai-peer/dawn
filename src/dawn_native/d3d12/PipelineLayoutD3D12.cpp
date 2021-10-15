@@ -174,6 +174,19 @@ namespace dawn_native { namespace d3d12 {
         // would need to be updated often
         rootParameters.emplace_back(indexOffsetConstants);
 
+        // Always allocate 1 CBV for num_workgroups_x, num_workgroups_y and num_workgroups_z.
+        // NOTE: We should consider delaying root signature creation until we know how many values
+        // we need
+        D3D12_ROOT_PARAMETER numWorkgroupsConstants{};
+        numWorkgroupsConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+        numWorkgroupsConstants.ParameterType = D3D12_ROOT_PARAMETER_TYPE_CBV;
+        numWorkgroupsConstants.Descriptor.RegisterSpace = GetNumWorkgroupsRegisterSpace();
+        numWorkgroupsConstants.Descriptor.ShaderRegister = GetNumWorkgroupsShaderRegister();
+        mNumWorkgroupsParamterIndex = rootParameters.size();
+        // NOTE: We should consider moving this entry to earlier in the root signature since
+        // dispatch sizes would need to be updated often
+        rootParameters.emplace_back(numWorkgroupsConstants);
+
         D3D12_ROOT_SIGNATURE_DESC rootSignatureDescriptor;
         rootSignatureDescriptor.NumParameters = rootParameters.size();
         rootSignatureDescriptor.pParameters = rootParameters.data();
@@ -229,15 +242,27 @@ namespace dawn_native { namespace d3d12 {
         return mDynamicRootParameterIndices[group][bindingIndex];
     }
 
-    uint32_t PipelineLayout::GetFirstIndexOffsetRegisterSpace() const {
+    uint32_t PipelineLayout::GetFirstIndexOffsetRegisterSpace() {
         return kReservedRegisterSpace;
     }
 
-    uint32_t PipelineLayout::GetFirstIndexOffsetShaderRegister() const {
+    uint32_t PipelineLayout::GetFirstIndexOffsetShaderRegister() {
         return kFirstOffsetInfoBaseRegister;
     }
 
     uint32_t PipelineLayout::GetFirstIndexOffsetParameterIndex() const {
         return mFirstIndexOffsetParameterIndex;
+    }
+
+    uint32_t PipelineLayout::GetNumWorkgroupsRegisterSpace() {
+        return GetFirstIndexOffsetRegisterSpace() + 1;
+    }
+
+    uint32_t PipelineLayout::GetNumWorkgroupsShaderRegister() {
+        return GetFirstIndexOffsetShaderRegister();
+    }
+
+    uint32_t PipelineLayout::GetNumWorkgroupsParameterIndex() const {
+        return mNumWorkgroupsParamterIndex;
     }
 }}  // namespace dawn_native::d3d12

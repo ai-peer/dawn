@@ -254,6 +254,88 @@ namespace dawn_native { namespace d3d12 {
             return {};
         }
 
+        MaybeError RecordApplyConstantBufferWithDispatchSize(
+            CommandRecordingContext* recordingContext,
+            PipelineLayoutBase* pipelineLayout,
+            DispatchCmd* dispatch) {
+            Device* device = ToBackend(pipelineLayout->GetDevice());
+
+            // Create constantBuffer
+            BufferDescriptor constantBufferDescriptor;
+            constantBufferDescriptor.usage =
+                wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+            constantBufferDescriptor.size = kDispatchIndirectSize;
+            Ref<BufferBase> constantBufferBase;
+            DAWN_TRY_ASSIGN(constantBufferBase, device->CreateBuffer(&constantBufferDescriptor));
+            Ref<Buffer> constantBuffer = ToBackend(std::move(constantBufferBase));
+
+            // Upload all the parameters of Dispatch() into constantBuffer
+            DynamicUploader* uploader = device->GetDynamicUploader();
+            UploadHandle uploadHandle;
+            DAWN_TRY_ASSIGN(uploadHandle, uploader->Allocate(kDispatchIndirectSize,
+                                                             device->GetPendingCommandSerial(),
+                                                             kCopyBufferToBufferOffsetAlignment));
+            memcpy(uploadHandle.mappedBuffer, dispatch, kDispatchIndirectSize);
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::CopyDst);
+            recordingContext->GetCommandList()->CopyBufferRegion(
+                constantBuffer->GetD3D12Resource(), 0,
+                ToBackend(uploadHandle.stagingBuffer)->GetResource(), uploadHandle.startOffset,
+                sizeof(DispatchCmd));
+
+            // Use constantBuffer as a root constant buffer
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::Uniform);
+            recordingContext->GetCommandList()->SetComputeRootConstantBufferView(
+                ToBackend(pipelineLayout)->GetNumWorkgroupsParameterIndex(),
+                constantBuffer->GetVA());
+
+            // Save constantBuffer into recordingContext
+            recordingContext->AddToTempBuffers(std::move(constantBuffer));
+
+            return {};
+        }
+
+        MaybeError RecordApplyConstantBufferWithDispatchSize(
+            CommandRecordingContext* recordingContext,
+            PipelineLayoutBase* pipelineLayout,
+            DispatchIndirectCmd* dispatchIndirect) {
+            // Create constantBuffer
+            BufferDescriptor constantBufferDescriptor;
+            constantBufferDescriptor.usage =
+                wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Uniform;
+            constantBufferDescriptor.size = kDispatchIndirectSize;
+            Ref<BufferBase> constantBufferBase;
+            DAWN_TRY_ASSIGN(constantBufferBase,
+                            pipelineLayout->GetDevice()->CreateBuffer(&constantBufferDescriptor));
+            Ref<Buffer> constantBuffer = ToBackend(std::move(constantBufferBase));
+
+            // Copy all the parameters of the indirect dispatch call from the indirect buffer into
+            // constantBuffer
+            ToBackend(dispatchIndirect->indirectBuffer)
+                ->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopySrc);
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::CopyDst);
+            recordingContext->GetCommandList()->CopyBufferRegion(
+                constantBuffer->GetD3D12Resource(), 0,
+                ToBackend(dispatchIndirect->indirectBuffer)->GetD3D12Resource(),
+                dispatchIndirect->indirectOffset, kDispatchIndirectSize);
+            ToBackend(dispatchIndirect->indirectBuffer)
+                ->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::Indirect);
+
+            // Use constantBuffer as a root constant buffer
+            constantBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                       wgpu::BufferUsage::Uniform);
+            recordingContext->GetCommandList()->SetComputeRootConstantBufferView(
+                ToBackend(pipelineLayout)->GetNumWorkgroupsParameterIndex(),
+                constantBuffer->GetVA());
+
+            // Save constantBuffer into recordingContext
+            recordingContext->AddToTempBuffers(std::move(constantBuffer));
+
+            return {};
+        }
+
         // Records the necessary barriers for a synchronization scope using the resource usage
         // data pre-computed in the frontend. Also performs lazy initialization if required.
         // Returns whether any UAV are used in the synchronization scope.
@@ -395,6 +477,21 @@ namespace dawn_native { namespace d3d12 {
             commandList->SetDescriptorHeaps(descriptorHeaps.size(), descriptorHeaps.data());
         }
 
+        void OnSetPipeline(PipelineBase* pipeline) {
+            BindGroupTrackerBase::OnSetPipeline(pipeline);
+            if (pipeline->GetStageMask() & wgpu::ShaderStage::Compute) {
+                mUseNumWorkgroups = static_cast<ComputePipeline*>(pipeline)->UseNumWorkgroups();
+            }
+        }
+
+        PipelineLayoutBase* GetCurrentPipelineLayout() const {
+            return mPipelineLayout;
+        }
+
+        bool UseNumWorkgroups() const {
+            return mUseNumWorkgroups;
+        }
+
       private:
         void UpdateRootSignatureIfNecessary(ID3D12GraphicsCommandList* commandList) {
             if (mLastAppliedPipelineLayout != mPipelineLayout) {
@@ -523,6 +620,8 @@ namespace dawn_native { namespace d3d12 {
         Device* mDevice;
 
         bool mInCompute = false;
+
+        bool mUseNumWorkgroups = false;
 
         ityp::array<BindGroupIndex, D3D12_GPU_DESCRIPTOR_HANDLE, kMaxBindGroups>
             mBoundRootSamplerTables = {};
@@ -1045,6 +1144,11 @@ namespace dawn_native { namespace d3d12 {
                                                    resourceUsages.dispatchUsages[currentDispatch]);
                     DAWN_TRY(bindingTracker->Apply(commandContext));
 
+                    if (bindingTracker->UseNumWorkgroups()) {
+                        ASSERT(bindingTracker->GetCurrentPipelineLayout() != nullptr);
+                        DAWN_TRY(RecordApplyConstantBufferWithDispatchSize(
+                            commandContext, bindingTracker->GetCurrentPipelineLayout(), dispatch));
+                    }
                     commandList->Dispatch(dispatch->x, dispatch->y, dispatch->z);
                     currentDispatch++;
                     break;
@@ -1057,6 +1161,12 @@ namespace dawn_native { namespace d3d12 {
                     TransitionAndClearForSyncScope(commandContext,
                                                    resourceUsages.dispatchUsages[currentDispatch]);
                     DAWN_TRY(bindingTracker->Apply(commandContext));
+
+                    if (bindingTracker->UseNumWorkgroups()) {
+                        ASSERT(bindingTracker->GetCurrentPipelineLayout() != nullptr);
+                        DAWN_TRY(RecordApplyConstantBufferWithDispatchSize(
+                            commandContext, bindingTracker->GetCurrentPipelineLayout(), dispatch));
+                    }
 
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDispatchIndirectSignature();

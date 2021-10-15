@@ -26,23 +26,17 @@ class ComputeDispatchTests : public DawnTest {
         DawnTest::SetUp();
 
         // Write workgroup number into the output buffer if we saw the biggest dispatch
-        // This is a workaround since D3D12 doesn't have gl_NumWorkGroups
         // To make sure the dispatch was not called, write maximum u32 value for 0 dispatches
         wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
-            [[block]] struct InputBuf {
-                expectedDispatch : vec3<u32>;
-            };
             [[block]] struct OutputBuf {
                 workGroups : vec3<u32>;
             };
 
-            [[group(0), binding(0)]] var<uniform> input : InputBuf;
-            [[group(0), binding(1)]] var<storage, read_write> output : OutputBuf;
+            [[group(0), binding(0)]] var<storage, read_write> output : OutputBuf;
 
             [[stage(compute), workgroup_size(1, 1, 1)]]
-            fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>) {
-                let dispatch : vec3<u32> = input.expectedDispatch;
-
+            fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>,
+                    [[builtin(num_workgroups)]] dispatch : vec3<u32>) {
                 if (dispatch.x == 0u || dispatch.y == 0u || dispatch.z == 0u) {
                     output.workGroups = vec3<u32>(0xFFFFFFFFu, 0xFFFFFFFFu, 0xFFFFFFFFu);
                     return;
@@ -66,17 +60,11 @@ class ComputeDispatchTests : public DawnTest {
             wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst,
             kSentinelData);
 
-        std::initializer_list<uint32_t> expectedBufferData{x, y, z};
-        wgpu::Buffer expectedBuffer = utils::CreateBufferFromData<uint32_t>(
-            device, wgpu::BufferUsage::Uniform, expectedBufferData);
-
         // Set up bind group and issue dispatch
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {
-                                     {0, expectedBuffer, 0, 3 * sizeof(uint32_t)},
-                                     {1, dst, 0, 3 * sizeof(uint32_t)},
-                                 });
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {
+                                                             {0, dst, 0, 3 * sizeof(uint32_t)},
+                                                         });
 
         wgpu::CommandBuffer commands;
         {
@@ -92,6 +80,7 @@ class ComputeDispatchTests : public DawnTest {
 
         queue.Submit(1, &commands);
 
+        std::initializer_list<uint32_t> expectedBufferData{x, y, z};
         std::vector<uint32_t> expected =
             x == 0 || y == 0 || z == 0 ? kSentinelData : expectedBufferData;
 
@@ -112,17 +101,11 @@ class ComputeDispatchTests : public DawnTest {
 
         uint32_t indirectStart = indirectOffset / sizeof(uint32_t);
 
-        wgpu::Buffer expectedBuffer =
-            utils::CreateBufferFromData(device, &indirectBufferData[indirectStart],
-                                        3 * sizeof(uint32_t), wgpu::BufferUsage::Uniform);
-
         // Set up bind group and issue dispatch
-        wgpu::BindGroup bindGroup =
-            utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
-                                 {
-                                     {0, expectedBuffer, 0, 3 * sizeof(uint32_t)},
-                                     {1, dst, 0, 3 * sizeof(uint32_t)},
-                                 });
+        wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                                                         {
+                                                             {0, dst, 0, 3 * sizeof(uint32_t)},
+                                                         });
 
         wgpu::CommandBuffer commands;
         {
