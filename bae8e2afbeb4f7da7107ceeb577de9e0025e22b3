@@ -16,6 +16,23 @@
       "message": "PTAL. Thanks!",
       "revId": "bae8e2afbeb4f7da7107ceeb577de9e0025e22b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a938d85_0918fa8f",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-15T20:56:51Z",
+      "side": 1,
+      "message": "Just to be sure, you\u0027ll look at validating at executeBundles too?",
+      "revId": "bae8e2afbeb4f7da7107ceeb577de9e0025e22b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
