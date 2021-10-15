@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52eaf96a_30d7fd74",
+        "filename": "generator/templates/webgpu.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b70c3ffb_c1fab96f",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5e7030be_ea04c2e5",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "149c47f2_53a86f28",
+        "filename": "generator/templates/webgpu_cpp.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7030be_ea04c2e5",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90f60246_721bafc5",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-10-14T15:25:02Z",
       "side": 1,
       "message": "Keeping kWholeMapSize would also work. In the validation we can split [1] into two DAWN_INVALID_IF, and put it first in the function so that this cases gives an error about offset \u003e mSize.",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6708c439_d4adc370",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90f60246_721bafc5",
       "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9212663a_077c8eb7",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Thanks",
+      "parentUuid": "834325ab_499359d3",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a12a1530_500b6505",
@@ -134,6 +206,24 @@
       "writtenOn": "2021-10-14T15:25:02Z",
       "side": 1,
       "message": "[1]",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "817607fb_81a7fe13",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a12a1530_500b6505",
       "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ab20063_37ff58ef",
+        "filename": "src/dawn_wire/client/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1174d937_1b1e7ee4",
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61eb35b9_cd6ca037",
@@ -168,6 +276,30 @@
       "writtenOn": "2021-10-14T15:25:02Z",
       "side": 1,
       "message": "nit: Deprecated",
+      "range": {
+        "startLine": 91,
+        "startChar": 11,
+        "endLine": 91,
+        "endChar": 16
+      },
+      "revId": "6c4cdd06c6a3bed955db43dfb44f95c659ffaf91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "481e5321_3a4848bb",
+        "filename": "src/tests/end2end/DeprecatedAPITests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-15T06:25:08Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61eb35b9_cd6ca037",
       "range": {
         "startLine": 91,
         "startChar": 11,
