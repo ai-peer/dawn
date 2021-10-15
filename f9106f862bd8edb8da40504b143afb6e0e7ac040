@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6571f87_a137369d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-15T01:20:23Z",
+      "side": 1,
+      "message": "PTAL. Thank you! I also submitted a PR to add this new validation rule for RenderBundleEncoderDescriptor into WebGPU spec, with some other validation rules: https://github.com/gpuweb/gpuweb/pull/2186. Please also review that PR.  ",
+      "revId": "f9106f862bd8edb8da40504b143afb6e0e7ac040",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
