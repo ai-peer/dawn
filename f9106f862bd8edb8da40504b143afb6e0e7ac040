@@ -16,6 +16,46 @@
       "message": "PTAL. Thank you! I also submitted a PR to add this new validation rule for RenderBundleEncoderDescriptor into WebGPU spec, with some other validation rules: https://github.com/gpuweb/gpuweb/pull/2186. Please also review that PR.  ",
       "revId": "f9106f862bd8edb8da40504b143afb6e0e7ac040",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76cbd8ce_bea83dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-15T12:21:12Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f9106f862bd8edb8da40504b143afb6e0e7ac040",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4073262_bfb99bf3",
+        "filename": "src/dawn_native/RenderBundleEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-15T12:21:12Z",
+      "side": 1,
+      "message": "nit: try to put the value of variables with (%u) similarly to https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/CommandEncoder.cpp;l\u003d285?q\u003dCommandEncoder.cpp",
+      "range": {
+        "startLine": 51,
+        "startChar": 26,
+        "endLine": 51,
+        "endChar": 27
+      },
+      "revId": "f9106f862bd8edb8da40504b143afb6e0e7ac040",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
