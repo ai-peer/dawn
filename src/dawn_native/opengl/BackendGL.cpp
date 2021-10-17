@@ -252,6 +252,45 @@ namespace dawn_native { namespace opengl {
                     mSupportedFeatures.EnableFeature(dawn_native::Feature::TextureCompressionBC);
                 }
             }
+            // TextureCompressionETC2
+            {
+                // ETC2 formats are supported past OpenGL 4.3 by default, or if relevant extensions
+                // are supported. See
+                // https://www.khronos.org/registry/OpenGL/extensions/ARB/ARB_ES3_compatibility.txt
+                bool supportedInGL = mFunctions.IsAtLeastGL(4, 3) ||
+                                     mFunctions.IsGLExtensionSupported("GL_ARB_ES3_compatibility");
+
+                // ETC2 formats are supported in OpenGLES 3.0 by default, or if relevant extensions
+                // are supported.
+                bool supportedInGLES =
+                    mFunctions.IsAtLeastGLES(3, 0) ||
+                    mFunctions.IsGLExtensionSupported("GL_ARB_ES3_compatibility");
+
+                if (supportedInGL || supportedInGLES) {
+                    mSupportedFeatures.EnableFeature(dawn_native::Feature::TextureCompressionETC2);
+                }
+            }
+            // TextureCompressionASTC
+            {
+                // ASTC formats are supported in OpenGL only if relevant extensions are supported.
+                // Note that the HDR profile is a superset of the LDR support, however, it seems
+                // most vendors only implement the LDR support. For now we check for the LDR support
+                // and enable since our textures are only handling 2D. HDR would be necessary to
+                // support TEXTURE_3D. See
+                // https://www.khronos.org/registry/OpenGL/extensions/KHR/KHR_texture_compression_astc_hdr.txt
+                bool supportedInGL =
+                    mFunctions.IsGLExtensionSupported("GL_KHR_texture_compression_astc_ldr");
+
+                // ASTC formats are supported in OpenGLES 3.2 by default, or if relevant extensions
+                // are supported.
+                bool supportedInGLES =
+                    mFunctions.IsAtLeastGLES(3, 2) ||
+                    mFunctions.IsGLExtensionSupported("GL_KHR_texture_compression_astc_ldr");
+
+                if (supportedInGL || supportedInGLES) {
+                    mSupportedFeatures.EnableFeature(dawn_native::Feature::TextureCompressionASTC);
+                }
+            }
         }
     };
 
