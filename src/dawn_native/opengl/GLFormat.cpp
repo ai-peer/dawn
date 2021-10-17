@@ -111,6 +111,18 @@ namespace dawn_native { namespace opengl {
         AddFormat(wgpu::TextureFormat::BC7RGBAUnorm, GL_COMPRESSED_RGBA_BPTC_UNORM, GL_RGBA, GL_UNSIGNED_BYTE, Type::Float);
         AddFormat(wgpu::TextureFormat::BC7RGBAUnormSrgb, GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM, GL_RGBA, GL_UNSIGNED_BYTE, Type::Float);
 
+        // ETC2/EAC compressed formats
+        AddFormat(wgpu::TextureFormat::ETC2RGB8Unorm, GL_COMPRESSED_RGB8_ETC2, GL_RGB, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::ETC2RGB8UnormSrgb, GL_COMPRESSED_SRGB8_ETC2, GL_RGB, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::ETC2RGB8A1Unorm, GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2, GL_RGBA, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::ETC2RGB8A1UnormSrgb, GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2, GL_RGBA, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::ETC2RGBA8Unorm, GL_COMPRESSED_RGBA8_ETC2_EAC, GL_RGBA, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::ETC2RGBA8UnormSrgb, GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC, GL_RGBA, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::EACR11Unorm, GL_COMPRESSED_R11_EAC, GL_RED, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::EACR11Snorm, GL_COMPRESSED_SIGNED_R11_EAC, GL_RED, GL_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::EACRG11Unorm, GL_COMPRESSED_RG11_EAC, GL_RG, GL_UNSIGNED_BYTE, Type::Float);
+        AddFormat(wgpu::TextureFormat::EACRG11Snorm, GL_COMPRESSED_SIGNED_RG11_EAC, GL_RG, GL_BYTE, Type::Float);
+
         // clang-format on
 
         return table;
