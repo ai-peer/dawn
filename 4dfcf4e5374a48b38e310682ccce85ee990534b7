@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65c56bb5_822340de",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-18T23:54:51Z",
+      "side": 1,
+      "message": "Back on validation messages after the hack week! PTAL!",
+      "revId": "4dfcf4e5374a48b38e310682ccce85ee990534b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
