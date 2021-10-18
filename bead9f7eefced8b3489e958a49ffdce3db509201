@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4dee3a1_e3d278b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-18T18:56:34Z",
+      "side": 1,
+      "message": "sorry nevermind - re-reading I think I understand better now. DispatchIndirect still needs a root buffer view because we would have no opportunity to directly set the root constants. Still need to copy from the indirect buffer into the cbv.",
+      "parentUuid": "b6fb2bf8_bfb0da13",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cad824_a5d80fd6",
