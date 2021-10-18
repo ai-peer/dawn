@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "102ec88e_c4786720",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-18T20:41:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ad2321_cbfb612e",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-18T20:41:01Z",
+      "side": 1,
+      "message": "Is that for the increased number of UAV?",
+      "range": {
+        "startLine": 69,
+        "startChar": 70,
+        "endLine": 69,
+        "endChar": 92
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
