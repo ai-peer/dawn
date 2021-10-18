@@ -70,6 +70,11 @@ namespace dawn_native {
         return IsInList();
     }
 
+    void ApiObjectBase::DeleteThis() {
+        DestroyApiObject();
+        RefCounted::DeleteThis();
+    }
+
     void ApiObjectBase::TrackInDevice() {
         ASSERT(GetDevice() != nullptr);
         GetDevice()->TrackObject(this);
