@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96dfcf9e_05d7f2ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "\u003e The approach LGTM and I only have some nits and I think we should land this approach to unblock TF.js (IIRC it\u0027s something they need?)\n\nThanks. But I\u0027d like to let TFJS try [[num_workgroups]] when the modifications on pipeline layout is completed (use root constants for Dispatch() and root constant buffer view for DispatchIndrect()). The current method has to allocate one buffer for each dispatch{indirect} call, which I think is less performant.\n\n\n\u003e In the future we will most likely rewrite this when we add DispatchIndirect GPU-based validation: in the same compute shader that validates the dispatchIndirect parameters.\n\nDo you know if anyone is working on or will work on this? If not then I can take it.",
+      "parentUuid": "bae925ca_c085b8a4",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cad824_a5d80fd6",
@@ -48,6 +66,30 @@
       "writtenOn": "2021-10-15T13:25:56Z",
       "side": 1,
       "message": "u-nit: usesNumWorkgroups.",
+      "range": {
+        "startLine": 208,
+        "startChar": 13,
+        "endLine": 208,
+        "endChar": 29
+      },
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f9d770f_173b2058",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71cad824_a5d80fd6",
       "range": {
         "startLine": 208,
         "startChar": 13,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0c62533_377096b8",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e45f7ba_aeda5fc6",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f2d96f7_b34f0e07",
@@ -88,6 +148,30 @@
       "writtenOn": "2021-10-15T13:25:56Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 43,
+        "startChar": 13,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e2b984_fc1eb4b8",
+        "filename": "src/dawn_native/d3d12/ComputePipelineD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4f2d96f7_b34f0e07",
       "range": {
         "startLine": 43,
         "startChar": 13,
@@ -123,6 +207,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f72c49b3_61b8df3f",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "However there is no D3D12_SHADER_VISIBILITY_COMPUTE according to https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_shader_visibility.",
+      "parentUuid": "bc812810_2718ead0",
+      "range": {
+        "startLine": 181,
+        "startChar": 50,
+        "endLine": 181,
+        "endChar": 77
+      },
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "43bd37f0_5fdd7e8d",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 4
@@ -134,6 +242,30 @@
       "writtenOn": "2021-10-15T13:25:56Z",
       "side": 1,
       "message": "Maybe we can add a constant defined in PipelineLayoutD3D12.h and use it directly. It\u0027s not really clear why numworkgroups would be based off FirstIndexOffset.",
+      "range": {
+        "startLine": 258,
+        "startChar": 15,
+        "endLine": 258,
+        "endChar": 47
+      },
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f59e4f9_fc9ee5c0",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43bd37f0_5fdd7e8d",
       "range": {
         "startLine": 258,
         "startChar": 15,
@@ -161,6 +293,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e467a65_a47ea3e9",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a6030e1_01a39baa",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cbfd2322_3b5e6981",
@@ -178,6 +328,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6df60315_e124fa93",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cbfd2322_3b5e6981",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66d21d88_352900a6",
@@ -191,6 +359,30 @@
       "writtenOn": "2021-10-15T13:25:56Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 109,
+        "startChar": 17,
+        "endLine": 109,
+        "endChar": 33
+      },
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be29a358_1cc9a299",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-18T06:15:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d21d88_352900a6",
       "range": {
         "startLine": 109,
         "startChar": 17,
