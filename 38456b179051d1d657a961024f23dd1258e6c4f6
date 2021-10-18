@@ -56,6 +56,30 @@
       },
       "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "faac6a94_ea824c75",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-18T20:42:17Z",
+      "side": 1,
+      "message": "yea, https://docs.microsoft.com/en-us/windows/win32/direct3d12/hardware-support \nsays Maximum number of Unordered Access Views in all descriptor tables across all stages is only 8 on 11.0",
+      "parentUuid": "76ad2321_cbfb612e",
+      "range": {
+        "startLine": 69,
+        "startChar": 70,
+        "endLine": 69,
+        "endChar": 92
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
