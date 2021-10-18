@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6fb2bf8_bfb0da13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-18T15:18:31Z",
+      "side": 1,
+      "message": "just so I\u0027m following: compute pipelines will *always* use three root constants for both dispatch and dispatch indirect? That seems much better than allocating and uploading to a buffer, and we have sufficient space in the root signature for it.",
+      "parentUuid": "56457821_a6c47d8b",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cad824_a5d80fd6",
