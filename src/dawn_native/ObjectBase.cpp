@@ -70,12 +70,25 @@ namespace dawn_native {
         return IsInList();
     }
 
+    void ApiObjectBase::DeleteThis() {
+        DestroyApiObject();
+        RefCounted::DeleteThis();
+    }
+
     void ApiObjectBase::TrackInDevice() {
         ASSERT(GetDevice() != nullptr);
         GetDevice()->TrackObject(this);
     }
 
     bool ApiObjectBase::DestroyApiObject() {
+        // We do an early (non-thread safe) check on whether the object is alive first to avoid
+        // needing to fetch the lock when unnecessary. The RemoveFromList call will do a second
+        // thread-safe read before executing anything. Note that this is also necessary for some
+        // unit tests (i.e. PerThreadProcTests) where we override the default behavior and may have
+        // ApiObjectBases that do not implement the virtual GetType function (due to casting).
+        if (!IsAlive()) {
+            return false;
+        }
         const std::lock_guard<std::mutex> lock(*GetDevice()->GetObjectListMutex(GetType()));
         if (!RemoveFromList()) {
             return false;
