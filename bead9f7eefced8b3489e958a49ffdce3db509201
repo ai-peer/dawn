@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9911d425_ba0dd0d1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-18T18:59:35Z",
+      "side": 1,
+      "message": "I think the earlier comment was correct: we have opportunity to set the root constants with D3D12 indirect commands.",
+      "parentUuid": "b4dee3a1_e3d278b6",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cad824_a5d80fd6",
