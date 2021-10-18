@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "56457821_a6c47d8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-18T12:39:56Z",
+      "side": 1,
+      "message": "I think Austin was going to look at the indirect validation stuff after the limits work. Maybe what you could do for TF.js for now is change the transform to use root constants instead of a root buffer view, then implement only for Dispatch + add validation that the pipeline in DispatchIndirect doesn\u0027t use num_workgroups (in D3D12).\n\nThis would make the code path be the \"final\" one, with the performance we expect, and TF.js could use it for Dispatch, without being blocked on the DispatchIndirect validation task.",
+      "parentUuid": "96dfcf9e_05d7f2ac",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cad824_a5d80fd6",
@@ -219,6 +237,30 @@
       "side": 1,
       "message": "However there is no D3D12_SHADER_VISIBILITY_COMPUTE according to https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ne-d3d12-d3d12_shader_visibility.",
       "parentUuid": "bc812810_2718ead0",
+      "range": {
+        "startLine": 181,
+        "startChar": 50,
+        "endLine": 181,
+        "endChar": 77
+      },
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c849f541_c54d844f",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-18T12:39:56Z",
+      "side": 1,
+      "message": "Ah, that matches [2] ok.",
+      "parentUuid": "f72c49b3_61b8df3f",
       "range": {
         "startLine": 181,
         "startChar": 50,
