@@ -33,6 +33,24 @@
       "message": "Reading this comment and looking at PerThreadProcTests I\u0027m not sure what the issue is. We only call the fake createBuffer there and never get all the way to DeviceBase::CreateBuffer so where is the issue happening?",
       "revId": "c72af5d469fc454e8ca24f916a6e078160989598",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "230af053_aa0d7f46",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-19T17:08:19Z",
+      "side": 1,
+      "message": "Dug a bit deeper and found the root cause was because Device holds a Ref to Queue (which is an Object). That meant that Device was destroyed before Queue, leading to the weird behavior I was seeing. Added an explicit \"release\" of the queue in the Device dtor so that the ordering is fixed.",
+      "parentUuid": "dc9cbf96_58360538",
+      "revId": "c72af5d469fc454e8ca24f916a6e078160989598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
