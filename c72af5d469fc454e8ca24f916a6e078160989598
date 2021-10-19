@@ -125,6 +125,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e8880fc_9cfa5bd8",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T19:49:38Z",
+      "side": 1,
+      "message": "can address making external refs outlive the device later since Dawn doesn\u0027t currently support that anyway.",
+      "parentUuid": "a51792d6_9f65d549",
+      "revId": "c72af5d469fc454e8ca24f916a6e078160989598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f56e886_d69f841b",
