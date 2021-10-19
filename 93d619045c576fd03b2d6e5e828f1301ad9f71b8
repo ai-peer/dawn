@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e9567a0_f78e0df8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-19T14:27:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "93d619045c576fd03b2d6e5e828f1301ad9f71b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80323824_4e4b91ea",
+        "filename": "src/dawn_native/d3d12/PlatformFunctions.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-19T14:27:00Z",
+      "side": 1,
+      "message": "nit: we can just add the D3DDisassemble line in the if above since the lib will already be open.",
+      "revId": "93d619045c576fd03b2d6e5e828f1301ad9f71b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f8d90ab_07d7eaf3",
