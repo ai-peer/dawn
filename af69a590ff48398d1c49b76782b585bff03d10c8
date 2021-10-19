@@ -46,6 +46,30 @@
       },
       "revId": "af69a590ff48398d1c49b76782b585bff03d10c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57b9bb6a_fe5cdb06",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T20:01:47Z",
+      "side": 1,
+      "message": "Sounds good. Maybe we can even just remove the \u0027build\u0027 option altogether if incremental builds are fast enough.",
+      "parentUuid": "b8353dcf_28546afc",
+      "range": {
+        "startLine": 168,
+        "startChar": 1,
+        "endLine": 168,
+        "endChar": 9
+      },
+      "revId": "af69a590ff48398d1c49b76782b585bff03d10c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
