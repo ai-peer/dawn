@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa9be139_bf98531b",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-19T20:25:16Z",
+      "side": 1,
+      "message": "nit: slightly surprising that an env var overrides an explicit flag",
+      "revId": "f41ac2f9ce60b72087887f4509697b58578584c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
