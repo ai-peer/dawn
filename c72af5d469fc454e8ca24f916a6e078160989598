@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6ed95d7_d186bafc",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-19T18:45:32Z",
+      "side": 1,
+      "message": "If the device is destroyed before the queue, isn\u0027t RemoveFromList going to return false because the objects are explicitly all destroyed in the device\u0027s destructor? I guess it depends on the semantics of losing the last ref to the device, but we could agree that it\u0027s an implicit device.Destroy()",
+      "parentUuid": "39222a22_cc5c44d5",
+      "revId": "c72af5d469fc454e8ca24f916a6e078160989598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f56e886_d69f841b",
         "filename": "src/dawn_native/ObjectBase.cpp",
         "patchSetId": 2
