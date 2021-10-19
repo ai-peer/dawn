@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60c62b62_ffba59ba",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T20:38:15Z",
+      "side": 1,
+      "message": "The way I\u0027ve been doing it doesn\u0027t require you to build CTS into JS, which I think works out better. You can place breakpoints in the TS files, etc. This is what my launch.json looks like:\n\n\"configurations\": [\n    {\n        \"type\": \"pwa-node\",\n        \"request\": \"launch\",\n        \"name\": \"Launch Program\",\n        \"skipFiles\": [\n            \"\u003cnode_internals\u003e/**\"\n        ],\n        \"args\": [\n            \"-e\",\n            \"require(\u0027./src/common/tools/setup-ts-in-node.js\u0027); require(\u0027./src/common/runtime/cmdline.ts\u0027);\",\n            \"--\",\n            \"dummy-arg\",\n            \"--gpu-provider\",\n            \"c:\\\\src\\\\dawn\\\\build\\\\RelWithDebInfo\\\\dawn.node\",\n            \"webgpu:shader,execution,zero_init:compute,zero_init:storageClass\u003d\\\"\\\"\\\"workgroup\\\"\\\"\\\";workgroupSize\u003d[1,1,1];batch__\u003d30\"\n        ],\n        \"cwd\": \"${workspaceFolder}\",\n        \"outFiles\": [\n            \"${workspaceFolder}/**/*.js\"\n        ]\n    }\n    \n    \nNote that I have no \"program:\" specified, in which case it launches node (probably because the type is \"pwa-node\"?) and just passes the args.\n\nThe other thing worth noting is the triple-quoting I had to do for storageClass\u003d\"workgroup\". If I didn\u0027t triple-quote, VS Code would always pass in storageClass\u003dworkgroup in, which isn\u0027t a valid test case.",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 51
+      },
+      "revId": "08f634e9833eeccbbf6b1f61b20b6f83ab8b0649",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
