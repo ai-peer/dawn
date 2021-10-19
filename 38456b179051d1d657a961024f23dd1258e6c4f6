@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "606e9eab_338f90bb",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T21:19:13Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "faac6a94_ea824c75",
+      "range": {
+        "startLine": 69,
+        "startChar": 70,
+        "endLine": 69,
+        "endChar": 92
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9696e095_7bf12530",
@@ -105,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8c90825_e9208fe0",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T21:19:13Z",
+      "side": 1,
+      "message": "Added a comment.",
+      "parentUuid": "9696e095_7bf12530",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 93
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6cf1e317_321d7a83",
@@ -118,6 +166,30 @@
       "writtenOn": "2021-10-19T17:28:14Z",
       "side": 1,
       "message": "The limit you have here is correct. No need for the TODO.",
+      "range": {
+        "startLine": 268,
+        "startChar": 8,
+        "endLine": 268,
+        "endChar": 82
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dec8b11_bd54c0c5",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T21:19:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6cf1e317_321d7a83",
       "range": {
         "startLine": 268,
         "startChar": 8,
