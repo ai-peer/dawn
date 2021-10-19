@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f8d90ab_07d7eaf3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T13:40:53Z",
+      "side": 1,
+      "message": "I chose to not fail everything if the disassemble call fails, as it\u0027s not necessary. Having said that, I doubt this call will ever actually fail, so if you want, I can change this code to use DAWN_TRY_ASSIGN.",
+      "revId": "93d619045c576fd03b2d6e5e828f1301ad9f71b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
