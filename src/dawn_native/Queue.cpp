@@ -434,9 +434,7 @@ namespace dawn_native {
         *status = WGPUQueueWorkDoneStatus_Error;
         DAWN_TRY(GetDevice()->ValidateObject(this));
 
-        if (signalValue != 0) {
-            return DAWN_VALIDATION_ERROR("SignalValue must currently be 0.");
-        }
+        DAWN_INVALID_IF(signalValue != 0, "SignalValue (%u) is not 0.", signalValue);
 
         return {};
     }
@@ -451,17 +449,17 @@ namespace dawn_native {
 
         DAWN_TRY(ValidateImageCopyTexture(GetDevice(), *destination, *writeSize));
 
-        if (dataLayout.offset > dataSize) {
-            return DAWN_VALIDATION_ERROR("Queue::WriteTexture out of range");
-        }
+        DAWN_INVALID_IF(dataLayout.offset > dataSize,
+                        "Data offset (%u) is greater than the data size (%u).", dataLayout.offset,
+                        dataSize);
 
-        if (!(destination->texture->GetUsage() & wgpu::TextureUsage::CopyDst)) {
-            return DAWN_VALIDATION_ERROR("Texture needs the CopyDst usage bit");
-        }
+        DAWN_INVALID_IF(!(destination->texture->GetUsage() & wgpu::TextureUsage::CopyDst),
+                        "%s usage (%s) does not include %s.", destination->texture,
+                        destination->texture->GetUsage(), wgpu::TextureUsage::CopyDst);
 
-        if (destination->texture->GetSampleCount() > 1) {
-            return DAWN_VALIDATION_ERROR("The sample count of textures must be 1");
-        }
+        DAWN_INVALID_IF(destination->texture->GetSampleCount() > 1,
+                        "%s sample count (%u) of is not 1", destination->texture,
+                        destination->texture->GetSampleCount());
 
         DAWN_TRY(ValidateLinearToDepthStencilCopyRestrictions(*destination));
         // We validate texture copy range before validating linear texture data,
