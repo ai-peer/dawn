@@ -14,12 +14,17 @@
 
 #include "src/dawn_node/binding/GPU.h"
 
+#include "src/dawn_node/binding/Flags.h"
 #include "src/dawn_node/binding/GPUAdapter.h"
 
 #include <cstdlib>
 
+#if defined(_WIN32)
+#    include <Windows.h>
+#endif
+
 namespace {
-    std::string getEnvVar(const char* varName) {
+    std::string GetEnvVar(const char* varName) {
 #if defined(_WIN32)
         // Use _dupenv_s to avoid unsafe warnings about std::getenv
         char* value = nullptr;
@@ -37,6 +42,14 @@ namespace {
         return "";
 #endif
     }
+
+    void SetDllDir(const char* dir) {
+        (void)dir;
+#if defined(_WIN32)
+        ::SetDllDirectory(dir);
+#endif
+    }
+
 }  // namespace
 
 namespace wgpu { namespace binding {
@@ -48,13 +61,19 @@ namespace wgpu { namespace binding {
         // TODO: Disable in 'release'
         instance_.EnableBackendValidation(true);
         instance_.SetBackendValidationLevel(dawn_native::BackendValidationLevel::Full);
-
-        instance_.DiscoverDefaultAdapters();
     }
 
     interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>> GPU::requestAdapter(
         Napi::Env env,
         interop::GPURequestAdapterOptions options) {
+        if (!discovered_adapters) {
+            if (auto dir = Flags::Get("dlldir")) {
+                SetDllDir(dir->c_str());
+            }
+            instance_.DiscoverDefaultAdapters();
+            discovered_adapters = true;
+        }
+
         auto promise =
             interop::Promise<std::optional<interop::Interface<interop::GPUAdapter>>>(env);
 
