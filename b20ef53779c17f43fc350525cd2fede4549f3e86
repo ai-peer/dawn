@@ -16,6 +16,23 @@
       "message": "Hi Corentin and Austin,\n\nI\u0027ve just updated this CL to only support [[num_workgroups]] with Dispatch call. PTAL, thanks!",
       "revId": "b20ef53779c17f43fc350525cd2fede4549f3e86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "596d284a_f454e7df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-19T12:51:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b20ef53779c17f43fc350525cd2fede4549f3e86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
