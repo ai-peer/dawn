@@ -80,6 +80,52 @@
       },
       "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9696e095_7bf12530",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-10-19T17:28:14Z",
+      "side": 1,
+      "message": "Do these come about from a decision that Dawn has made about how to do storage textures \u0026 buffers?\n\n(Would be good to have a comment here)",
+      "range": {
+        "startLine": 206,
+        "startChar": 0,
+        "endLine": 207,
+        "endChar": 93
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf1e317_321d7a83",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2021-10-19T17:28:14Z",
+      "side": 1,
+      "message": "The limit you have here is correct. No need for the TODO.",
+      "range": {
+        "startLine": 268,
+        "startChar": 8,
+        "endLine": 268,
+        "endChar": 82
+      },
+      "revId": "38456b179051d1d657a961024f23dd1258e6c4f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
