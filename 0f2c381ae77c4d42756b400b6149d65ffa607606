@@ -16,6 +16,24 @@
       "message": "nit: I believe that because this isn\u0027t a single-line macro, the reported __LINE__ will be 2 below the actual line where the macro is expanded.",
       "revId": "0f2c381ae77c4d42756b400b6149d65ffa607606",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ffd323_4b9099b9",
+        "filename": "src/dawn_node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-19T19:04:01Z",
+      "side": 1,
+      "message": "I don\u0027t think so:\nhttps://godbolt.org/z/d3cMefEjE",
+      "parentUuid": "aecacc9e_e604e3d9",
+      "revId": "0f2c381ae77c4d42756b400b6149d65ffa607606",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
