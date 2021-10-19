@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60dffc85_d148c9fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-19T05:14:04Z",
+      "side": 1,
+      "message": "PTAL. Thank you!",
+      "revId": "2a241322bee99dbf9e035459074de300621443bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa06a12_e378e247",
+        "filename": "src/dawn_native/RenderBundle.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-19T05:14:04Z",
+      "side": 1,
+      "message": "I feel like that we can put depthReadOnly and steniclReadOnly into AttachmentState. I didn\u0027t do so because AttachmentState is exactly the same with WebGPU spec\u0027s https://www.w3.org/TR/webgpu/#dictdef-gpurenderpasslayout. But maybe we can submit a PR to add these two parameters into GPURenderPassLayout too. \n\nWDYT?",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 30
+      },
+      "revId": "2a241322bee99dbf9e035459074de300621443bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
