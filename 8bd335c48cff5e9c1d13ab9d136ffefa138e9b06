@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba27944d_d0c3ac0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-19T15:54:52Z",
+      "side": 1,
+      "message": "LGTM as well with @cwallez\u0027s question answered.",
+      "revId": "8bd335c48cff5e9c1d13ab9d136ffefa138e9b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adb471cf_060d3cc3",
