@@ -16,6 +16,23 @@
       "message": "LGTM too",
       "revId": "18af899e5ce197ced6ba42b9ab3e8ec59a009f95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca37e11_447673fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-10-19T20:37:38Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin and Austin! Merging now.",
+      "revId": "18af899e5ce197ced6ba42b9ab3e8ec59a009f95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
