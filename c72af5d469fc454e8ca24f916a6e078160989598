@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a51792d6_9f65d549",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-19T19:00:26Z",
+      "side": 1,
+      "message": "Aaah thanks for the explanation. Makes sense. We can always optimize later by inlining parts of RemoveFromList if need be.",
+      "parentUuid": "837bc3d1_8470941e",
+      "revId": "c72af5d469fc454e8ca24f916a6e078160989598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f56e886_d69f841b",
         "filename": "src/dawn_native/ObjectBase.cpp",
         "patchSetId": 2
