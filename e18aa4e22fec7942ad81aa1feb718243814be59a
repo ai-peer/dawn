@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb82f5f0_e41bb689",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-19T23:32:35Z",
+      "side": 1,
+      "message": "The fact that there\u0027s no API to query this from make me sad, but this seems like a solid approach for \"querying from PDF\".",
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3442f77_2d1a7179",
@@ -37,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10d3eb85_8af9951c",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-19T23:32:35Z",
+      "side": 1,
+      "message": "Seems fine to me. Only downside is the wrapping makes it slightly annoying to read in gerrit.",
+      "parentUuid": "a3442f77_2d1a7179",
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c2fa6a17_abb65c1d",
         "filename": "src/dawn_native/metal/BackendMTL.mm",
         "patchSetId": 10
@@ -48,6 +83,30 @@
       "writtenOn": "2021-10-19T21:25:49Z",
       "side": 1,
       "message": "worth doing this? or maybe just say 4GB like on D3D12?\nDownside of this is that we\u0027re now picking a value instead of basically saying \"kinda unlimited\". And the value we choose could affect what limit tier the device falls into if/when we do that.",
+      "range": {
+        "startLine": 538,
+        "startChar": 12,
+        "endLine": 543,
+        "endChar": 67
+      },
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2abe605_a9cec705",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-19T23:32:35Z",
+      "side": 1,
+      "message": "Using the max buffer size seems reasonable.",
+      "parentUuid": "c2fa6a17_abb65c1d",
       "range": {
         "startLine": 538,
         "startChar": 12,
