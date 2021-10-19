@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0275c1c1_cce041b8",
+        "filename": "src/dawn_node/Module.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T20:44:42Z",
+      "side": 1,
+      "message": "Single flag? This function will be called multiple times...",
+      "parentUuid": "279fbc9b_b66ee9ea",
+      "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e3371c5_05fc2017",
         "filename": "src/dawn_node/binding/Flags.cpp",
         "patchSetId": 1
@@ -65,6 +83,24 @@
       "writtenOn": "2021-10-19T20:23:02Z",
       "side": 1,
       "message": "This won\u0027t be accepted by the GN build due to the global constructor, if/when set up the GN build rules.",
+      "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6d42985_925c2402",
+        "filename": "src/dawn_node/binding/Flags.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T20:44:42Z",
+      "side": 1,
+      "message": "What do you suggest?",
+      "parentUuid": "3e3371c5_05fc2017",
       "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
