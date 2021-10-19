@@ -34,6 +34,7 @@ namespace wgpu { namespace binding {
 
       private:
         dawn_native::Instance instance_;
+        bool discovered_adapters = false;
     };
 
 }}  // namespace wgpu::binding
