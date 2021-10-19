@@ -91,6 +91,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "837bc3d1_8470941e",
+        "filename": "src/dawn_native/ObjectBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T18:48:26Z",
+      "side": 1,
+      "message": "the problem is before RemoveFromList happens: when then the device deleted, and then the queue tries to call GetDevice()-\u003eGetObjectListMutex",
+      "parentUuid": "b6ed95d7_d186bafc",
+      "revId": "c72af5d469fc454e8ca24f916a6e078160989598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9f56e886_d69f841b",
         "filename": "src/dawn_native/ObjectBase.cpp",
         "patchSetId": 2
