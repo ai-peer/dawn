@@ -242,6 +242,17 @@ namespace dawn_native {
                             "Attachment state of renderBundles[%i] (%s) is not compatible with "
                             "attachment state of %s.",
                             i, renderBundles[i], this);
+
+                        DAWN_INVALID_IF(IsDepthReadOnly() != renderBundles[i]->IsDepthReadOnly(),
+                                        "depthReadOnly of renderBundle[%i] (%s) is not compatible "
+                                        "with depthReadOnly of %s",
+                                        i, renderBundles[i], this);
+
+                        DAWN_INVALID_IF(
+                            IsStencilReadOnly() != renderBundles[i]->IsStencilReadOnly(),
+                            "stencilReadOnly of renderBundle[%i] (%s) is not "
+                            "compatible with stencilReadOnly of %s",
+                            i, renderBundles[i], this);
                     }
                 }
 
