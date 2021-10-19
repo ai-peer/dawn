@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "de0b102b_3ae204fb",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-19T00:55:07Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 303,
+        "startChar": 0,
+        "endLine": 336,
+        "endChar": 22
+      },
+      "revId": "dae310e47ea7c1642cf84d35fcb63c943792d418",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b6011275_daedf94f",

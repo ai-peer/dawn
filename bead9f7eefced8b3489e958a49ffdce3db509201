@@ -125,6 +125,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92dd24bd_4bc0020f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-19T00:55:07Z",
+      "side": 1,
+      "message": "In fact I am thinking about replacing [3] with the below (simpler) code, where the indirect buffer is directly bound as a constant buffer.\n\n\n    ToBackend(dispatchIndirect-\u003eindirectBuffer)-\u003eTrackUsageAndTransitionNow(\n        recordingContext, wgpu::BufferUsage::Indirect | wgpu::BufferUsage::Uniform);\n    recordingContext-\u003eGetCommandList()-\u003eSetComputeRootConstantBufferView(\n        ToBackend(pipelineLayout)-\u003eGetNumWorkgroupsParameterIndex(),\n        (ToBackend(dispatchIndirect-\u003eindirectBuffer)-\u003eGetVA() +\n         dispatchIndirect-\u003eindirectOffset));\n    \nBut with the code above the test will fail on Nvidia (pass on Intel and AMD) so I just planned to add this modification in my next CL.",
+      "parentUuid": "9911d425_ba0dd0d1",
+      "revId": "bead9f7eefced8b3489e958a49ffdce3db509201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "71cad824_a5d80fd6",
