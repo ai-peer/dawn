@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9f40d53_a4e2a5f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T21:25:49Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3442f77_2d1a7179",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T21:25:49Z",
+      "side": 1,
+      "message": "I like the macro table because it\u0027s easy to verify the contents against the Metal Feature Set Tables pdf. Alternatively, I could replace it with some hard-coded logic, since so many of the values are the same.",
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2fa6a17_abb65c1d",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-19T21:25:49Z",
+      "side": 1,
+      "message": "worth doing this? or maybe just say 4GB like on D3D12?\nDownside of this is that we\u0027re now picking a value instead of basically saying \"kinda unlimited\". And the value we choose could affect what limit tier the device falls into if/when we do that.",
+      "range": {
+        "startLine": 538,
+        "startChar": 12,
+        "endLine": 543,
+        "endChar": 67
+      },
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
