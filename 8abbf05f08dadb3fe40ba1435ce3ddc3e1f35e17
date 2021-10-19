@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "385e3bf5_9ff8de16",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-19T20:27:55Z",
+      "side": 1,
+      "message": "Does this need to be here? Wouldn\u0027t it be generally less messy if this were done in Module.cpp?\n\nYou could then also pass down the default backend flag as a parameter to the GPU objects instead of exposing a global in disguise",
+      "revId": "8abbf05f08dadb3fe40ba1435ce3ddc3e1f35e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
