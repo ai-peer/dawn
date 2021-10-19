@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea7d6575_dea75e3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T20:33:09Z",
+      "side": 1,
+      "message": "The file is starting to get a bit long, but I guess we can live with this for now.",
+      "revId": "d2bd0f6b12ee7f4e951042101a2d8719f1d263e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "437a2596_1a7fe901",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-19T20:33:09Z",
+      "side": 1,
+      "message": "nit: \"isolate\" rather than \"isolated\"?",
+      "range": {
+        "startLine": 84,
+        "startChar": 26,
+        "endLine": 84,
+        "endChar": 34
+      },
+      "revId": "d2bd0f6b12ee7f4e951042101a2d8719f1d263e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
