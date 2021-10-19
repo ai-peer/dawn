@@ -82,26 +82,38 @@ namespace wgpu { namespace binding {
 
         auto targetBackendType = defaultBackendType;
 
+        // Check for override from flag
+        std::string forceBackend;
+        if (auto f = Flags::Get("dawn-node-backend")) {
+            forceBackend = *f;
+        }
+
         // Check for override from env var
-        std::string envVar = getEnvVar("DAWNNODE_BACKEND");
-        std::transform(envVar.begin(), envVar.end(), envVar.begin(),
+        if (std::string envVar = GetEnvVar("DAWNNODE_BACKEND"); !envVar.empty()) {
+            forceBackend = envVar;
+        }
+
+        std::transform(forceBackend.begin(), forceBackend.end(), forceBackend.begin(),
                        [](char c) { return std::tolower(c); });
-        if (envVar == "null") {
-            targetBackendType = wgpu::BackendType::Null;
-        } else if (envVar == "webgpu") {
-            targetBackendType = wgpu::BackendType::WebGPU;
-        } else if (envVar == "d3d11") {
-            targetBackendType = wgpu::BackendType::D3D11;
-        } else if (envVar == "d3d12" || envVar == "d3d") {
-            targetBackendType = wgpu::BackendType::D3D12;
-        } else if (envVar == "metal") {
-            targetBackendType = wgpu::BackendType::Metal;
-        } else if (envVar == "vulkan" || envVar == "vk") {
-            targetBackendType = wgpu::BackendType::Vulkan;
-        } else if (envVar == "opengl" || envVar == "gl") {
-            targetBackendType = wgpu::BackendType::OpenGL;
-        } else if (envVar == "opengles" || envVar == "gles") {
-            targetBackendType = wgpu::BackendType::OpenGLES;
+
+        if (!forceBackend.empty()) {
+            if (forceBackend == "null") {
+                targetBackendType = wgpu::BackendType::Null;
+            } else if (forceBackend == "webgpu") {
+                targetBackendType = wgpu::BackendType::WebGPU;
+            } else if (forceBackend == "d3d11") {
+                targetBackendType = wgpu::BackendType::D3D11;
+            } else if (forceBackend == "d3d12" || forceBackend == "d3d") {
+                targetBackendType = wgpu::BackendType::D3D12;
+            } else if (forceBackend == "metal") {
+                targetBackendType = wgpu::BackendType::Metal;
+            } else if (forceBackend == "vulkan" || forceBackend == "vk") {
+                targetBackendType = wgpu::BackendType::Vulkan;
+            } else if (forceBackend == "opengl" || forceBackend == "gl") {
+                targetBackendType = wgpu::BackendType::OpenGL;
+            } else if (forceBackend == "opengles" || forceBackend == "gles") {
+                targetBackendType = wgpu::BackendType::OpenGLES;
+            }
         }
 
         // Default to first adapter if we don't find a match
