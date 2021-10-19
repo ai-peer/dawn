@@ -55,6 +55,47 @@ If this fails with the error message `TypeError: expander is not a function or i
 
 To test against SwiftShader instead of the default Vulkan device, prefix `./src/dawn_node/tools/run-cts` with `VK_ICD_FILENAMES=<swiftshader-cmake-build>/Linux/vk_swiftshader_icd.json`
 
+## Debugging
+
+The below assumes you have built the CTS JavaScript with:
+
+`npx grunt run:build-out-node`
+
+In the CTS root directory.
+
+### Debugging TypeScript with VSCode
+
+Open or create the `.vscode/launch.json` file, and add:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug with node",
+            "type": "node",
+            "request": "launch",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "[cts-root]/out-node/common/runtime/cmdline.js",
+            "outFiles": [
+                "[cts-root]/**/*.js"
+            ],
+            "args": [
+                "--gpu-provider", "[path-to-dawn.node]",
+                "[test-query]", // Example: "webgpu:shader,execution,builtin,abs:*"
+            ]
+        }
+    ]
+}
+```
+
+Replacing:
+
+- `[cts-root]` with the path to the CTS root directory. If you are editing the `.vscode/launch.json` from within the CTS workspace, then you may use `${workspaceFolder}`.
+- `[path-to-dawn.node]` this the path to the `dawn.node` module built by the [build step](#Build)
+
 ## Known issues
 
 - Many WebGPU CTS tests are currently known to fail
