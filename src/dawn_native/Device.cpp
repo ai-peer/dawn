@@ -165,6 +165,10 @@ namespace dawn_native {
             return layoutRef;
         }
 
+        struct ConstantsBufferData {
+            uint32_t maxComputeWorkgroupsPerDimension;
+        };
+
     }  // anonymous namespace
 
     // DeviceBase
@@ -248,6 +252,21 @@ namespace dawn_native {
         mState = State::Alive;
 
         DAWN_TRY_ASSIGN(mEmptyBindGroupLayout, CreateEmptyBindGroupLayout());
+
+        // Initialize mConstantsBuffer which is a buffer that holds device-global constants which
+        // may be useful for various facilities. Currently it holds constants for GPU-based
+        // validation. In the future it could also be used for zero-initialization, etc.
+        // {
+        //     BufferDescriptor uniformDesc = {};
+        //     uniformDesc.size = sizeof(ConstantsBufferData);
+        //     uniformDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
+        //     DAWN_TRY_ASSIGN(mConstantsBuffer, CreateBuffer(&uniformDesc));
+
+        //     ConstantsBufferData data = {};
+        //     data.maxComputeWorkgroupsPerDimension =
+        //     GetLimits().v1.maxComputeWorkgroupsPerDimension;
+        //     DAWN_TRY(mQueue->WriteBuffer(mConstantsBuffer.Get(), 0, &data, sizeof(data)));
+        // }
 
         // If dummy fragment shader module is needed, initialize it
         if (IsToggleEnabled(Toggle::UseDummyFragmentInVertexOnlyPipeline)) {
@@ -350,6 +369,7 @@ namespace dawn_native {
         mAsyncTaskManager = nullptr;
         mPersistentCache = nullptr;
         mEmptyBindGroupLayout = nullptr;
+        mConstantsBuffer = nullptr;
         mInternalPipelineStore = nullptr;
 
         AssumeCommandsComplete();
@@ -670,6 +690,11 @@ namespace dawn_native {
     BindGroupLayoutBase* DeviceBase::GetEmptyBindGroupLayout() {
         ASSERT(mEmptyBindGroupLayout != nullptr);
         return mEmptyBindGroupLayout.Get();
+    }
+
+    BufferBase* DeviceBase::GetConstantsBuffer() const {
+        ASSERT(mConstantsBuffer != nullptr);
+        return mConstantsBuffer.Get();
     }
 
     Ref<ComputePipelineBase> DeviceBase::GetCachedComputePipeline(
