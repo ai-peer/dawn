@@ -111,7 +111,8 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                 // because allocating the buffer for zero-initialization fails.
                 maxBufferBindingSize =
                     std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024);
-                if (IsWARP()) {
+                // With WARP or on 32-bit platforms, such large buffer allocations often fail.
+                if (IsWARP() || sizeof(size_t) < sizeof(uint64_t)) {
                     maxBufferBindingSize =
                         std::min(maxBufferBindingSize, uint64_t(1) * 1024 * 1024 * 1024);
                 }
