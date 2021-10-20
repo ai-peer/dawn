@@ -16,6 +16,92 @@
       "message": "PTAL! As with the Vulkan backend changes, there\u0027s several errors here that just don\u0027t feel like the have a natural/useful way of expanding what they report.",
       "revId": "3570d875ffbc540da2c676990b9b2309e6c7bc9f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c442b8db_3d4b4589",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:33:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3570d875ffbc540da2c676990b9b2309e6c7bc9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c0f4e6a_fd5bd821",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:33:56Z",
+      "side": 1,
+      "message": "this reads nicely :)",
+      "range": {
+        "startLine": 372,
+        "startChar": 12,
+        "endLine": 372,
+        "endChar": 34
+      },
+      "revId": "3570d875ffbc540da2c676990b9b2309e6c7bc9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e18c771e_07641d51",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 425,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:33:56Z",
+      "side": 1,
+      "message": "context at the callsite?",
+      "range": {
+        "startLine": 425,
+        "startChar": 15,
+        "endLine": 425,
+        "endChar": 52
+      },
+      "revId": "3570d875ffbc540da2c676990b9b2309e6c7bc9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beabd397_6d25ca41",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:33:56Z",
+      "side": 1,
+      "message": "\"with uninitialized data\"",
+      "range": {
+        "startLine": 525,
+        "startChar": 69,
+        "endLine": 525,
+        "endChar": 94
+      },
+      "revId": "3570d875ffbc540da2c676990b9b2309e6c7bc9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
