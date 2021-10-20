@@ -16,6 +16,155 @@
       "message": "This backend (and I suspect the others as well) has quite a few places where it didn\u0027t seem like there was much additional contextual information that could be given, (at least that would make sense to an API user) so there\u0027s a bunch of places where the macro was updated but the message was left more-or-less unchanged.",
       "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "200d5d94_26a3b98a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c32edf71_491825ed",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "drop this?",
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8917183b_6b92a60f",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "prexisting nit: casing like \"sRGB\" ?",
+      "range": {
+        "startLine": 393,
+        "startChar": 63,
+        "endLine": 393,
+        "endChar": 67
+      },
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86c69424_fd646ab8",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "I think the caller needs a context",
+      "range": {
+        "startLine": 528,
+        "startChar": 15,
+        "endLine": 528,
+        "endChar": 46
+      },
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29bfedd4_581fe8c0",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "unit: casing should probably match the struct and enum \"DmaBuf\" or even more \"ExternalImageDescriptorDmaBuf\"",
+      "range": {
+        "startLine": 158,
+        "startChar": 58,
+        "endLine": 158,
+        "endChar": 65
+      },
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56df14f3_47394ec7",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "missing comma?",
+      "range": {
+        "startLine": 181,
+        "startChar": 26,
+        "endLine": 181,
+        "endChar": 27
+      },
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed96351_90e412aa",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceZirconHandle.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:31:09Z",
+      "side": 1,
+      "message": "\"required image size\"",
+      "range": {
+        "startLine": 110,
+        "startChar": 76,
+        "endLine": 110,
+        "endChar": 90
+      },
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
