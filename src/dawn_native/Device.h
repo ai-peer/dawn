@@ -163,6 +163,8 @@ namespace dawn_native {
 
         BindGroupLayoutBase* GetEmptyBindGroupLayout();
 
+        BufferBase* GetConstantsBuffer() const;
+
         void UncacheComputePipeline(ComputePipelineBase* obj);
 
         ResultOrError<Ref<PipelineLayoutBase>> GetOrCreatePipelineLayout(

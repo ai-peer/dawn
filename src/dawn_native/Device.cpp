@@ -165,6 +165,10 @@ namespace dawn_native {
             return layoutRef;
         }
 
+        struct ConstantsBufferData {
+            uint32_t maxComputeWorkgroupsPerDimension;
+        };
+
     }  // anonymous namespace
 
     // DeviceBase
