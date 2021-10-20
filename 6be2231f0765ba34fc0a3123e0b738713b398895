@@ -16,6 +16,57 @@
       "message": "PTAL once more! This one is a tiny bit more involved than some of the previous error updates, but not by much.",
       "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40f404ae_4877a544",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-20T12:34:51Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1a219a_def1c176",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-20T12:34:51Z",
+      "side": 1,
+      "message": "nit: can we check nextInChain too?",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94f56bbb_58941b7b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-20T12:34:51Z",
+      "side": 1,
+      "message": "nit: maybe %s instead of Device?",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
