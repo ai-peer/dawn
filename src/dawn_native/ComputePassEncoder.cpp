@@ -14,17 +14,158 @@
 
 #include "dawn_native/ComputePassEncoder.h"
 
+#include "dawn_native/BindGroup.h"
+#include "dawn_native/BindGroupLayout.h"
 #include "dawn_native/Buffer.h"
 #include "dawn_native/CommandEncoder.h"
 #include "dawn_native/CommandValidation.h"
 #include "dawn_native/Commands.h"
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
+#include "dawn_native/InternalPipelineStore.h"
 #include "dawn_native/ObjectType_autogen.h"
 #include "dawn_native/PassResourceUsageTracker.h"
 #include "dawn_native/QuerySet.h"
 
 namespace dawn_native {
+
+    namespace {
+
+        ResultOrError<ComputePipelineBase*> GetOrCreateIndirectDispatchValidationPipeline(
+            DeviceBase* device) {
+            InternalPipelineStore* store = device->GetInternalPipelineStore();
+
+            if (store->dispatchIndirectValidationPipeline == nullptr) {
+                ShaderModuleDescriptor descriptor;
+                ShaderModuleWGSLDescriptor wgslDesc;
+
+                std::string shaderSource =
+                    "let maxComputeWorkgroupsPerDimension : u32 = " +
+                    std::to_string(device->GetLimits().v1.maxComputeWorkgroupsPerDimension) +
+                    "u;\n";
+
+                // TODO(https://crbug.com/dawn/1108): Propagate validation feedback from this
+                // shader in various failure modes.
+                shaderSource += R"(
+                    [[block]] struct IndirectParams {
+                        data: array<u32>;
+                    };
+
+                    [[block]] struct ValidatedParams {
+                        data: array<u32, 3>;
+                    };
+
+                    [[group(0), binding(0)]] var<storage, read_write> clientParams: IndirectParams;
+                    [[group(0), binding(1)]] var<storage, write> validatedParams: ValidatedParams;
+
+                    [[stage(compute), workgroup_size(1, 1, 1)]]
+                    fn main() {
+                        // The client indirect buffer must be aligned to |minStorageBufferOffsetAlignment|.
+                        // which is larger than the indirect buffer offset.
+                        // To avoid passing an additional offset into the shader, we make the binding size
+                        // exactly large enough to fit the indirect client data. This means the start of
+                        // of the indirect data is a fixed distance of 3 from the end.
+                        let clientOffset = arrayLength(&clientParams.data) - 3u;
+
+                        for (var i = 0u; i < 3u; i = i + 1u) {
+                            var numWorkgroups = clientParams.data[clientOffset + i];
+                            if (numWorkgroups > maxComputeWorkgroupsPerDimension) {
+                                numWorkgroups = 0u;
+                            }
+                            validatedParams.data[i] = numWorkgroups;
+                        }
+                    }
+                )";
+                wgslDesc.source = shaderSource.c_str();
+                descriptor.nextInChain = reinterpret_cast<ChainedStruct*>(&wgslDesc);
+
+                Ref<ShaderModuleBase> shaderModule;
+                DAWN_TRY_ASSIGN(shaderModule, device->CreateShaderModule(&descriptor));
+
+                BindGroupLayoutEntry entries[2];
+                entries[0].binding = 0;
+                entries[0].visibility = wgpu::ShaderStage::Compute;
+                entries[0].buffer.type = kInternalStorageBufferBinding;
+                entries[1].binding = 1;
+                entries[1].visibility = wgpu::ShaderStage::Compute;
+                entries[1].buffer.type = wgpu::BufferBindingType::Storage;
+
+                BindGroupLayoutDescriptor bindGroupLayoutDescriptor;
+                bindGroupLayoutDescriptor.entryCount = 2;
+                bindGroupLayoutDescriptor.entries = entries;
+                Ref<BindGroupLayoutBase> bindGroupLayout;
+                DAWN_TRY_ASSIGN(bindGroupLayout,
+                                device->CreateBindGroupLayout(&bindGroupLayoutDescriptor, true));
+
+                PipelineLayoutDescriptor pipelineDescriptor;
+                pipelineDescriptor.bindGroupLayoutCount = 1;
+                pipelineDescriptor.bindGroupLayouts = &bindGroupLayout.Get();
+                Ref<PipelineLayoutBase> pipelineLayout;
+                DAWN_TRY_ASSIGN(pipelineLayout, device->CreatePipelineLayout(&pipelineDescriptor));
+
+                ComputePipelineDescriptor computePipelineDescriptor = {};
+                computePipelineDescriptor.layout = pipelineLayout.Get();
+                computePipelineDescriptor.compute.module = shaderModule.Get();
+                computePipelineDescriptor.compute.entryPoint = "main";
+
+                DAWN_TRY_ASSIGN(store->dispatchIndirectValidationPipeline,
+                                device->CreateComputePipeline(&computePipelineDescriptor));
+            }
+
+            return store->dispatchIndirectValidationPipeline.Get();
+        }
+
+        MaybeError CreateIndirectDispatchValidationResources(
+            DeviceBase* device,
+            BufferBase* indirectBuffer,
+            uint64_t indirectOffset,
+            Ref<ComputePipelineBase>* validationPipeline,
+            Ref<BufferBase>* validatedIndirectBuffer,
+            Ref<BindGroupBase>* bindGroup) {
+            auto* const store = device->GetInternalPipelineStore();
+
+            ScratchBuffer& scratchBuffer = store->scratchIndirectStorage;
+            DAWN_TRY(scratchBuffer.EnsureCapacity(kDispatchIndirectSize));
+            *validatedIndirectBuffer = scratchBuffer.GetBuffer();
+
+            DAWN_TRY_ASSIGN(*validationPipeline,
+                            GetOrCreateIndirectDispatchValidationPipeline(device));
+
+            Ref<BindGroupLayoutBase> layout;
+            DAWN_TRY_ASSIGN(layout, (*validationPipeline)->GetBindGroupLayout(0));
+
+            uint32_t storageBufferOffsetAlignment =
+                device->GetLimits().v1.minStorageBufferOffsetAlignment;
+
+            BindGroupEntry bindings[2];
+            BindGroupEntry& clientIndirectBinding = bindings[0];
+            clientIndirectBinding.binding = 0;
+            clientIndirectBinding.buffer = indirectBuffer;
+
+            const uint64_t offsetFromAlignedBoundary =
+                indirectOffset % storageBufferOffsetAlignment;
+            const uint64_t offsetAlignedDown = indirectOffset - offsetFromAlignedBoundary;
+
+            clientIndirectBinding.offset = offsetAlignedDown;
+            clientIndirectBinding.size = kDispatchIndirectSize + offsetFromAlignedBoundary;
+
+            BindGroupEntry& validatedParamsBinding = bindings[1];
+            validatedParamsBinding.binding = 1;
+            validatedParamsBinding.buffer = validatedIndirectBuffer->Get();
+            validatedParamsBinding.offset = 0;
+            validatedParamsBinding.size = kDispatchIndirectSize;
+
+            BindGroupDescriptor bindGroupDescriptor = {};
+            bindGroupDescriptor.layout = layout.Get();
+            bindGroupDescriptor.entryCount = 2;
+            bindGroupDescriptor.entries = bindings;
+
+            DAWN_TRY_ASSIGN(*bindGroup, device->CreateBindGroup(&bindGroupDescriptor));
+
+            return {};
+        }
+
+    }  // namespace
 
     ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
                                            CommandEncoder* commandEncoder,
@@ -143,10 +284,52 @@ namespace dawn_native {
                 mUsageTracker.AddReferencedBuffer(indirectBuffer);
                 AddDispatchSyncScope(std::move(scope));
 
-                DispatchIndirectCmd* dispatch =
-                    allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
-                dispatch->indirectBuffer = indirectBuffer;
-                dispatch->indirectOffset = indirectOffset;
+                if (IsValidationEnabled()) {
+                    // Validate each indirect dispatch with a single dispatch to copy the indirect
+                    // buffer params into a scratch buffer if they're valid, and otherwise zero them
+                    // out. We could consider moving the validation earlier in the pass after the
+                    // last point the indirect buffer was used with writable usage, as well as batch
+                    // validation for multiple dispatches into one, but inserting commands at
+                    // arbitrary points in the past is not possible right now.
+                    Ref<ComputePipelineBase> validationPipeline;
+                    Ref<BufferBase> validatedIndirectBuffer;
+                    Ref<BindGroupBase> validationBindGroup;
+                    DAWN_TRY(CreateIndirectDispatchValidationResources(
+                        GetDevice(), indirectBuffer, indirectOffset, &validationPipeline,
+                        &validatedIndirectBuffer, &validationBindGroup));
+
+                    ComputePipelineBase* previousPipeline =
+                        static_cast<ComputePipelineBase*>(mCommandBufferState.GetPipeline());
+                    BindGroupBase* previousBindGroup =
+                        mCommandBufferState.GetBindGroup(BindGroupIndex(0));
+
+                    // Issue commands to validate the indirect buffer.
+                    APISetPipeline(validationPipeline.Get());
+                    APISetBindGroup(0, validationBindGroup.Get());
+                    APIDispatch(1);
+
+                    // Reset the previously-bound pipeline.
+                    APISetPipeline(previousPipeline);
+                    if (previousBindGroup) {
+                        // Reset the previously-bound bind group.
+                        APISetBindGroup(0, previousBindGroup);
+                    } else {
+                        // Clear out the state if there was no prevous bind group.
+                        mCommandBufferState.SetBindGroup(BindGroupIndex(0), nullptr);
+                    }
+
+                    // Validated indirect dispatch is written into a new buffer.
+                    // Point the dispatch indirect command to it.
+                    DispatchIndirectCmd* dispatch =
+                        allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
+                    dispatch->indirectBuffer = std::move(validatedIndirectBuffer);
+                    dispatch->indirectOffset = 0;
+                } else {
+                    DispatchIndirectCmd* dispatch =
+                        allocator->Allocate<DispatchIndirectCmd>(Command::DispatchIndirect);
+                    dispatch->indirectBuffer = indirectBuffer;
+                    dispatch->indirectOffset = indirectOffset;
+                }
 
                 return {};
             },
