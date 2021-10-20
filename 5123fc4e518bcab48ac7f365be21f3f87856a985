@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf0c9728_ae7f7692",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T21:41:50Z",
+      "side": 1,
+      "message": "This backend (and I suspect the others as well) has quite a few places where it didn\u0027t seem like there was much additional contextual information that could be given, (at least that would make sense to an API user) so there\u0027s a bunch of places where the macro was updated but the message was left more-or-less unchanged.",
+      "revId": "5123fc4e518bcab48ac7f365be21f3f87856a985",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
