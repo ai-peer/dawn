@@ -16,6 +16,24 @@
       "message": "nit: slightly surprising that an env var overrides an explicit flag",
       "revId": "f41ac2f9ce60b72087887f4509697b58578584c7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1392f92d_b93d8e2d",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-20T16:03:50Z",
+      "side": 1,
+      "message": "Yes, good point, swapped the order. I also renamed the flag to \"dawn-backend\" as there\u0027s no need to say it\u0027s for dawn-node like the env var.",
+      "parentUuid": "fa9be139_bf98531b",
+      "revId": "f41ac2f9ce60b72087887f4509697b58578584c7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
