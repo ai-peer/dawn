@@ -216,6 +216,9 @@ namespace dawn_native {
                         BufferLocation::New(indirectBuffer, indirectOffset);
                 }
 
+                // TODO(crbug.com/dawn/1166): Adding the indirectBuffer is needed for correct usage
+                // validation, but it will unecessarily transition to indirectBuffer usage in the
+                // backend.
                 mUsageTracker.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
 
                 return {};
