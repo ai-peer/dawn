@@ -111,16 +111,21 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                 // because allocating the buffer for zero-initialization fails.
                 maxBufferBindingSize =
                     std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024);
-                if (IsWARP()) {
+                // With WARP or on 32-bit platforms, such large buffer allocations often fail.
+#ifndef DAWN_PLATFORM_32BIT
+                if (IsWARP())
+#else
+                {
                     maxBufferBindingSize =
-                        std::min(maxBufferBindingSize, uint64_t(1) * 1024 * 1024 * 1024);
+                        std::min(maxBufferBindingSize, uint64_t(512) * 1024 * 1024);
                 }
-                shader = R"(
+#endif
+                    shader = R"(
                   [[block]] struct Buf {
                       value0 : u32;
                       // padding such that value0 and value1 are the first and last bytes of the memory.
                       [[size()" +
-                         std::to_string(maxBufferBindingSize - 8) + R"()]] padding : u32;
+                             std::to_string(maxBufferBindingSize - 8) + R"()]] padding : u32;
                       value1 : u32;
                   };
 
