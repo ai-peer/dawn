@@ -163,6 +163,9 @@ namespace dawn_native {
 
         BindGroupLayoutBase* GetEmptyBindGroupLayout();
 
+        BufferBase* GetConstantsBuffer() const;
+        uint64_t GetMaxComputeWorkgroupsPerDimensionOffset() const;
+
         void UncacheComputePipeline(ComputePipelineBase* obj);
 
         ResultOrError<Ref<PipelineLayoutBase>> GetOrCreatePipelineLayout(
@@ -489,6 +492,7 @@ namespace dawn_native {
         std::unique_ptr<Caches> mCaches;
 
         Ref<BindGroupLayoutBase> mEmptyBindGroupLayout;
+        Ref<BufferBase> mConstantsBuffer;
 
         std::unique_ptr<DynamicUploader> mDynamicUploader;
         std::unique_ptr<AsyncTaskManager> mAsyncTaskManager;
