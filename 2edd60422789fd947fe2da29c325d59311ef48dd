@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "822935e7_ada2f79c",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T15:30:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3639053_f4704fea",
+      "revId": "2edd60422789fd947fe2da29c325d59311ef48dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d839d04_d2f64b76",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-10-20T12:46:21Z",
       "side": 1,
       "message": "u-nit: PopDebugGroup is called while no debug group is currently pushed. ?",
+      "revId": "2edd60422789fd947fe2da29c325d59311ef48dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b76ae3e_827f3c34",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T15:30:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d839d04_d2f64b76",
       "revId": "2edd60422789fd947fe2da29c325d59311ef48dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
