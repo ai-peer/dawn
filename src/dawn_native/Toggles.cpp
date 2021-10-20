@@ -228,6 +228,14 @@ namespace dawn_native {
               "be enabled for OpenGL ES backend, and serves as a workaround by default enabled on "
               "some Metal devices with Intel GPU to ensure the depth result is correct.",
               "https://crbug.com/dawn/136"}},
+            {Toggle::UseCopyFromTempBufferToClearStencilAspect,
+             {"use_copy_from_temp_buffer_to_clear_stencil_aspect",
+              "Clear stencil aspect by copying from temp buffer under specific situations. This"
+              "workaround is by default enabled on some Intel GPUs which have driver bugs in"
+              "the execution of ClearDepthStencilView/Clear with renderpass and fail to handle"
+              "transition from D3D12_RESOURCE_STATE_DEPTH_WRITE to D3D12_RESOURCE_STATE_COPY_DEST"
+              "state through transition barriers",
+              "https://crbug.com/dawn/704"}},
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
     }  // anonymous namespace

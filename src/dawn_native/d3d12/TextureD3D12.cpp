@@ -978,7 +978,26 @@ namespace dawn_native { namespace d3d12 {
         float fClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.f : 1.f;
 
         if ((mD3D12ResourceFlags & D3D12_RESOURCE_FLAG_ALLOW_DEPTH_STENCIL) != 0) {
-            TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
+            bool useCopyFromTempBufferToClearStencilAspect =
+                device->IsToggleEnabled(Toggle::UseCopyFromTempBufferToClearStencilAspect);
+
+            SubresourceRange depthRange = range;
+            depthRange.aspects = range.aspects & Aspect::Depth;
+
+            SubresourceRange stencilRange = range;
+            stencilRange.aspects = range.aspects & Aspect::Stencil;
+
+            Aspect aspectsWorksWithClearDepthStencilView = range.aspects;
+
+            // If Toggle::UseCopyFromTempBufferToClearStencilAspect is enabled, only depth aspect
+            // could be cleared by ClearDepthStencilView.
+            if (useCopyFromTempBufferToClearStencilAspect) {
+                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE,
+                                           depthRange);
+                aspectsWorksWithClearDepthStencilView = depthRange.aspects;
+            } else {
+                TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_DEPTH_WRITE, range);
+            }
 
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
@@ -986,7 +1005,7 @@ namespace dawn_native { namespace d3d12 {
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
                     // Iterate the aspects individually to determine which clear flags to use.
                     D3D12_CLEAR_FLAGS clearFlags = {};
-                    for (Aspect aspect : IterateEnumMask(range.aspects)) {
+                    for (Aspect aspect : IterateEnumMask(aspectsWorksWithClearDepthStencilView)) {
                         if (clearValue == TextureBase::ClearValue::Zero &&
                             IsSubresourceContentInitialized(
                                 SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
@@ -1023,6 +1042,14 @@ namespace dawn_native { namespace d3d12 {
                     commandList->ClearDepthStencilView(baseDescriptor, clearFlags, fClearColor,
                                                        clearColor, 0, nullptr);
                 }
+            }
+
+            // If there is stencil aspect and Toggle::UseCopyFromTempBufferToClearStencilAspect is
+            // enabled, use copyBufferToTexture to clear the stencil aspect.
+            if (useCopyFromTempBufferToClearStencilAspect && stencilRange.aspects != Aspect::None) {
+                DAWN_TRY(RecordClearTextureByCopyingFromTemporaryBuffer(
+                    device, commandContext, this, stencilRange, clearColor,
+                    clearValue == TextureBase::ClearValue::Zero));
             }
         } else if ((mD3D12ResourceFlags & D3D12_RESOURCE_FLAG_ALLOW_RENDER_TARGET) != 0) {
             TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_RENDER_TARGET, range);
@@ -1061,50 +1088,9 @@ namespace dawn_native { namespace d3d12 {
                 }
             }
         } else {
-            // create temp buffer with clear color to copy to the texture image
-            TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
-
-            for (Aspect aspect : IterateEnumMask(range.aspects)) {
-                const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
-
-                Extent3D largestMipSize = GetMipLevelPhysicalSize(range.baseMipLevel);
-
-                uint32_t bytesPerRow =
-                    Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
-                          kTextureBytesPerRowAlignment);
-                uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
-                                      largestMipSize.depthOrArrayLayers;
-                DynamicUploader* uploader = device->GetDynamicUploader();
-                UploadHandle uploadHandle;
-                DAWN_TRY_ASSIGN(uploadHandle,
-                                uploader->Allocate(bufferSize, device->GetPendingCommandSerial(),
-                                                   blockInfo.byteSize));
-                memset(uploadHandle.mappedBuffer, clearColor, bufferSize);
-
-                for (uint32_t level = range.baseMipLevel;
-                     level < range.baseMipLevel + range.levelCount; ++level) {
-                    // compute d3d12 texture copy locations for texture and buffer
-                    Extent3D copySize = GetMipLevelPhysicalSize(level);
-
-                    TextureCopySubresource copySplit = Compute2DTextureCopySubresource(
-                        {0, 0, 0}, copySize, blockInfo, uploadHandle.startOffset, bytesPerRow);
-
-                    for (uint32_t layer = range.baseArrayLayer;
-                         layer < range.baseArrayLayer + range.layerCount; ++layer) {
-                        if (clearValue == TextureBase::ClearValue::Zero &&
-                            IsSubresourceContentInitialized(
-                                SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
-                            // Skip lazy clears if already initialized.
-                            continue;
-                        }
-
-                        RecordCopyBufferToTextureFromTextureCopySplit(
-                            commandList, copySplit,
-                            ToBackend(uploadHandle.stagingBuffer)->GetResource(), 0, bytesPerRow,
-                            this, level, layer, aspect);
-                    }
-                }
-            }
+            DAWN_TRY(RecordClearTextureByCopyingFromTemporaryBuffer(
+                device, commandContext, this, range, clearColor,
+                clearValue == TextureBase::ClearValue::Zero));
         }
         if (clearValue == TextureBase::ClearValue::Zero) {
             SetIsSubresourceContentInitialized(true, range);

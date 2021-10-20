@@ -15,11 +15,15 @@
 #include "dawn_native/d3d12/UtilsD3D12.h"
 
 #include "common/Assert.h"
+#include "dawn_native/DynamicUploader.h"
 #include "dawn_native/Format.h"
 #include "dawn_native/d3d12/BufferD3D12.h"
 #include "dawn_native/d3d12/CommandRecordingContext.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/d3d12/ResourceAllocatorManagerD3D12.h"
+#include "dawn_native/d3d12/StagingBufferD3D12.h"
+#include "dawn_native/d3d12/StagingDescriptorAllocatorD3D12.h"
 
 #include <stringapiset.h>
 
@@ -370,6 +374,62 @@ namespace dawn_native { namespace d3d12 {
             Copy2DTextureToBufferWithCopySplit(commandList, textureCopy, bufferCopy, texture,
                                                buffer, copySize);
         }
+    }
+
+    MaybeError RecordClearTextureByCopyingFromTemporaryBuffer(
+        Device* device,
+        CommandRecordingContext* commandContext,
+        Texture* texture,
+        const SubresourceRange& range,
+        uint32_t clearValue,
+        bool isInitializeClear) {
+        // create temp buffer with clear color to copy to the texture image
+        texture->TrackUsageAndTransitionNow(commandContext, D3D12_RESOURCE_STATE_COPY_DEST, range);
+
+        for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            const TexelBlockInfo& blockInfo = texture->GetFormat().GetAspectInfo(aspect).block;
+
+            Extent3D largestMipSize = texture->GetMipLevelPhysicalSize(range.baseMipLevel);
+
+            uint32_t bytesPerRow =
+                Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
+                      kTextureBytesPerRowAlignment);
+            uint64_t bufferSize = bytesPerRow * (largestMipSize.height / blockInfo.height) *
+                                  largestMipSize.depthOrArrayLayers;
+            DynamicUploader* uploader = device->GetDynamicUploader();
+            UploadHandle uploadHandle;
+            DAWN_TRY_ASSIGN(uploadHandle,
+                            uploader->Allocate(bufferSize, device->GetPendingCommandSerial(),
+                                               blockInfo.byteSize));
+            memset(uploadHandle.mappedBuffer, clearValue, bufferSize);
+
+            for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
+                 ++level) {
+                // compute d3d12 texture copy locations for texture and buffer
+                Extent3D copySize = texture->GetMipLevelPhysicalSize(level);
+
+                TextureCopySubresource copySplit = Compute2DTextureCopySubresource(
+                    {0, 0, 0}, copySize, blockInfo, uploadHandle.startOffset, bytesPerRow);
+
+                for (uint32_t layer = range.baseArrayLayer;
+                     layer < range.baseArrayLayer + range.layerCount; ++layer) {
+                    if (isInitializeClear &&
+                        texture->IsSubresourceContentInitialized(
+                            SubresourceRange::SingleMipAndLayer(level, layer, aspect))) {
+                        // Skip lazy clears if already initialized.
+                        continue;
+                    }
+
+                    RecordCopyBufferToTextureFromTextureCopySplit(
+                        commandContext->GetCommandList(), copySplit,
+                        ToBackend(uploadHandle.stagingBuffer)->GetResource(), 0, bytesPerRow,
+                        texture, level, layer, aspect);
+                }
+            }
+        }
+
+        texture->TrackUsageAndTransitionNow(commandContext, texture->GetUsage(), range);
+        return {};
     }
 
     void SetDebugName(Device* device, ID3D12Object* object, const char* prefix, std::string label) {

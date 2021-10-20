@@ -516,6 +516,7 @@ namespace dawn_native { namespace d3d12 {
         SetToggle(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
         SetToggle(Toggle::UseD3D12ResidencyManagement, true);
         SetToggle(Toggle::UseDXC, false);
+        SetToggle(Toggle::UseCopyFromTempBufferToClearStencilAspect, true);
 
 #if defined(_DEBUG)
         // Enable better shader debugging with the graphics debugging tools.

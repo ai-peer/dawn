@@ -108,6 +108,8 @@ namespace dawn_native { namespace d3d12 {
                                 const SubresourceRange& range,
                                 TextureBase::ClearValue clearValue);
 
+        void ClearTextureByCopyingFromTemporaryBuffer();
+
         // Barriers implementation details.
         struct StateAndDecay {
             D3D12_RESOURCE_STATES lastState;

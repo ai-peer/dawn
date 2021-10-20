@@ -137,20 +137,28 @@ namespace dawn_native { namespace d3d12 {
             }
         }
 
-        MaybeError ClearBufferToZero(Device* device,
-                                     Buffer* destination,
-                                     uint64_t destinationOffset,
-                                     uint64_t size) {
+        MaybeError ClearBuffer(Device* device,
+                               Buffer* destination,
+                               uint64_t destinationOffset,
+                               uint64_t size,
+                               uint32_t clearValue) {
             DynamicUploader* uploader = device->GetDynamicUploader();
             UploadHandle uploadHandle;
             DAWN_TRY_ASSIGN(uploadHandle,
                             uploader->Allocate(size, device->GetPendingCommandSerial(),
                                                kCopyBufferToBufferOffsetAlignment));
-            memset(uploadHandle.mappedBuffer, 0u, size);
+            memset(uploadHandle.mappedBuffer, clearValue, size);
 
             return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer,
                                                    uploadHandle.startOffset, destination,
                                                    destinationOffset, size);
+        }
+
+        MaybeError ClearBufferToZero(Device* device,
+                                     Buffer* destination,
+                                     uint64_t destinationOffset,
+                                     uint64_t size) {
+            return ClearBuffer(device, destination, destinationOffset, size, 0u);
         }
 
         void RecordFirstIndexOffset(ID3D12GraphicsCommandList* commandList,
@@ -1154,6 +1162,9 @@ namespace dawn_native { namespace d3d12 {
                                               RenderPassBuilder* renderPassBuilder) {
         Device* device = ToBackend(GetDevice());
 
+        const bool useCopyFromTempBufferToClearStencilAspect =
+            device->IsToggleEnabled(Toggle::UseCopyFromTempBufferToClearStencilAspect);
+
         for (ColorAttachmentIndex i :
              IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
             RenderPassColorAttachmentInfo& attachmentInfo = renderPass->colorAttachments[i];
@@ -1226,9 +1237,14 @@ namespace dawn_native { namespace d3d12 {
             }
 
             if (hasStencil) {
-                renderPassBuilder->SetStencilAccess(
-                    attachmentInfo.stencilLoadOp, attachmentInfo.stencilStoreOp,
-                    attachmentInfo.clearStencil, view->GetD3D12Format());
+                if (!useCopyFromTempBufferToClearStencilAspect) {
+                    renderPassBuilder->SetStencilAccess(
+                        attachmentInfo.stencilLoadOp, attachmentInfo.stencilStoreOp,
+                        attachmentInfo.clearStencil, view->GetD3D12Format());
+                } else {
+                    renderPassBuilder->SetStencilClearByCopyingFromTempBuffer(
+                        attachmentInfo.stencilStoreOp);
+                }
             } else {
                 renderPassBuilder->SetStencilNoAccess();
             }
@@ -1310,6 +1326,10 @@ namespace dawn_native { namespace d3d12 {
 
         DAWN_TRY(SetupRenderPass(commandContext, renderPass, &renderPassBuilder));
 
+        const bool useCopyFromTempBufferToClearStencilAspect =
+            device->IsToggleEnabled(Toggle::UseCopyFromTempBufferToClearStencilAspect) &&
+            renderPassBuilder.HasStencil();
+
         // Use D3D12's native render pass API if it's available, otherwise emulate the
         // beginning and ending access operations.
         if (useRenderPass) {
@@ -1322,6 +1342,21 @@ namespace dawn_native { namespace d3d12 {
                 renderPassBuilder.GetRenderPassFlags());
         } else {
             EmulateBeginRenderPass(commandContext, &renderPassBuilder);
+        }
+
+        if (useCopyFromTempBufferToClearStencilAspect) {
+            TextureView* view = ToBackend(renderPass->depthStencilAttachment.view.Get());
+            Texture* texture = ToBackend(view->GetTexture());
+            SubresourceRange stencilRange = view->GetSubresourceRange();
+            stencilRange.aspects = stencilRange.aspects & Aspect::Stencil;
+
+            RenderPassDepthStencilAttachmentInfo& attachmentInfo =
+                renderPass->depthStencilAttachment;
+            uint32_t clearValue = attachmentInfo.clearStencil;
+
+            DAWN_TRY(RecordClearTextureByCopyingFromTemporaryBuffer(device, commandContext, texture,
+                                                                    stencilRange, clearValue,
+                                                                    /*isInitializeClear*/ false));
         }
 
         ID3D12GraphicsCommandList* commandList = commandContext->GetCommandList();

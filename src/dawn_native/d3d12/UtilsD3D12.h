@@ -81,6 +81,14 @@ namespace dawn_native { namespace d3d12 {
                                    Buffer* buffer,
                                    const Extent3D& copySize);
 
+    MaybeError RecordClearTextureByCopyingFromTemporaryBuffer(
+        Device* device,
+        CommandRecordingContext* commandContext,
+        Texture* texture,
+        const SubresourceRange& range,
+        uint32_t clearValue,
+        bool isInitialize);
+
     void SetDebugName(Device* device,
                       ID3D12Object* object,
                       const char* prefix,

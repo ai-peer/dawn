@@ -129,6 +129,10 @@ namespace dawn_native { namespace d3d12 {
         return mHasDepth;
     }
 
+    bool RenderPassBuilder::HasStencil() const {
+        return mHasStencil;
+    }
+
     ityp::span<ColorAttachmentIndex, const D3D12_RENDER_PASS_RENDER_TARGET_DESC>
     RenderPassBuilder::GetRenderPassRenderTargetDescriptors() const {
         return {mRenderPassRenderTargetDescriptors.data(), mColorAttachmentCount};
@@ -207,6 +211,7 @@ namespace dawn_native { namespace d3d12 {
                                              wgpu::StoreOp storeOp,
                                              uint8_t clearStencil,
                                              DXGI_FORMAT format) {
+        mHasStencil = true;
         mRenderPassDepthStencilDesc.StencilBeginningAccess.Type = D3D12BeginningAccessType(loadOp);
         if (loadOp == wgpu::LoadOp::Clear) {
             mRenderPassDepthStencilDesc.StencilBeginningAccess.Clear.ClearValue.DepthStencil
@@ -233,6 +238,14 @@ namespace dawn_native { namespace d3d12 {
             D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_NO_ACCESS;
         mRenderPassDepthStencilDesc.StencilEndingAccess.Type =
             D3D12_RENDER_PASS_ENDING_ACCESS_TYPE_NO_ACCESS;
+    }
+
+    // Use copy from temp buffer to clear the stencil aspect.
+    void RenderPassBuilder::SetStencilClearByCopyingFromTempBuffer(wgpu::StoreOp storeOp) {
+        mHasStencil = true;
+        mRenderPassDepthStencilDesc.StencilBeginningAccess.Type =
+            D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_DISCARD;
+        mRenderPassDepthStencilDesc.StencilEndingAccess.Type = D3D12EndingAccessType(storeOp);
     }
 
 }}  // namespace dawn_native::d3d12
