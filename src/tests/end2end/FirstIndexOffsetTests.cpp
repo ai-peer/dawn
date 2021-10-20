@@ -25,6 +25,8 @@ constexpr uint32_t kRTSize = 1;
 enum class DrawMode {
     NonIndexed,
     Indexed,
+    NonIndexedIndirect,
+    IndexedIndirect,
 };
 
 enum class CheckIndex : uint32_t {
@@ -39,7 +41,31 @@ namespace wgpu {
     };
 }  // namespace wgpu
 
-class FirstIndexOffsetTests : public DawnTest {
+namespace {
+
+    std::ostream& operator<<(std::ostream& ostream, const DrawMode& mode) {
+        switch (mode) {
+            case DrawMode::NonIndexed:
+                ostream << "NonIndexed";
+                break;
+            case DrawMode::Indexed:
+                ostream << "Indexed";
+                break;
+            case DrawMode::NonIndexedIndirect:
+                ostream << "NonIndexedIndirect";
+                break;
+            case DrawMode::IndexedIndirect:
+                ostream << "IndexedIndirect";
+                break;
+        }
+        return ostream;
+    }
+
+    DAWN_TEST_PARAM_STRUCT(FirstIndexOffsetTestParams, DrawMode)
+
+}  // namespace
+
+class FirstIndexOffsetTests : public DawnTestWithParams<FirstIndexOffsetTestParams> {
   public:
     void TestVertexIndex(DrawMode mode, uint32_t firstVertex);
     void TestInstanceIndex(DrawMode mode, uint32_t firstInstance);
@@ -47,13 +73,21 @@ class FirstIndexOffsetTests : public DawnTest {
 
   protected:
     void SetUp() override {
-        DawnTest::SetUp();
+        DawnTestWithParams::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(IsD3D12() && !HasToggleEnabled("use_tint_generator"));
+
+        // TODO(crbug.com/dawn/548): Builtins not implemented for indirect calls on D3D12.
+        DAWN_TEST_UNSUPPORTED_IF(IsD3D12() && IsIndirect());
 
         // WGSL doesn't have the ability to tag attributes as "flat". "flat" is required on u32
         // attributes for correct runtime behavior under Vulkan and codegen under OpenGL(ES).
         // TODO(tint:451): Remove once resolved by spec/tint
         DAWN_SUPPRESS_TEST_IF(IsVulkan() || IsOpenGL() || IsOpenGLES());
+    }
+
+    bool IsIndirect() const {
+        return GetParam().mDrawMode == DrawMode::NonIndexedIndirect ||
+               GetParam().mDrawMode == DrawMode::IndexedIndirect;
     }
 
   private:
@@ -174,12 +208,27 @@ struct FragInputs {
     pass.SetVertexBuffer(0, vertices);
     pass.SetBindGroup(0,
                       utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}}));
-    if (mode == DrawMode::Indexed) {
-        pass.SetIndexBuffer(indices, wgpu::IndexFormat::Uint32);
-        pass.DrawIndexed(1, 1, 0, firstVertex, firstInstance);
-
-    } else {
-        pass.Draw(1, 1, firstVertex, firstInstance);
+    switch (mode) {
+        case DrawMode::NonIndexed:
+            pass.Draw(1, 1, firstVertex, firstInstance);
+            break;
+        case DrawMode::Indexed:
+            pass.SetIndexBuffer(indices, wgpu::IndexFormat::Uint32);
+            pass.DrawIndexed(1, 1, 0, firstVertex, firstInstance);
+            break;
+        case DrawMode::NonIndexedIndirect: {
+            wgpu::Buffer indirectBuffer = utils::CreateBufferFromData<uint32_t>(
+                device, wgpu::BufferUsage::Indirect, {1, 1, firstVertex, firstInstance});
+            pass.DrawIndirect(indirectBuffer, 0);
+            break;
+        }
+        case DrawMode::IndexedIndirect: {
+            wgpu::Buffer indirectBuffer = utils::CreateBufferFromData<uint32_t>(
+                device, wgpu::BufferUsage::Indirect, {1, 1, 0, firstVertex, firstInstance});
+            pass.SetIndexBuffer(indices, wgpu::IndexFormat::Uint32);
+            pass.DrawIndexedIndirect(indirectBuffer, 0);
+            break;
+        }
     }
     pass.EndPass();
     wgpu::CommandBuffer commands = encoder.Finish();
@@ -189,40 +238,33 @@ struct FragInputs {
     EXPECT_BUFFER_U32_RANGE_EQ(expected.data(), buffer, 0, expected.size());
 }
 
-// Test that vertex_index starts at 7 when drawn using Draw()
-TEST_P(FirstIndexOffsetTests, NonIndexedVertexOffset) {
-    TestVertexIndex(DrawMode::NonIndexed, 7);
+// Test vertex_index when offset to start at 7
+TEST_P(FirstIndexOffsetTests, Vertex) {
+    TestVertexIndex(GetParam().mDrawMode, 7);
 }
 
-// Test that instance_index starts at 11 when drawn using Draw()
-TEST_P(FirstIndexOffsetTests, NonIndexedInstanceOffset) {
-    TestInstanceIndex(DrawMode::NonIndexed, 11);
+// Test instance_index when offset to start at 11
+TEST_P(FirstIndexOffsetTests, Instance) {
+    uint32_t firstInstance = 11;
+    if (IsIndirect()) {
+        // Indirect draws must have firstInstance == 0
+        firstInstance = 0;
+    }
+    TestInstanceIndex(GetParam().mDrawMode, firstInstance);
 }
 
-// Test that vertex_index and instance_index start at 7 and 11 respectively when drawn using Draw()
-TEST_P(FirstIndexOffsetTests, NonIndexedBothOffset) {
-    TestBothIndices(DrawMode::NonIndexed, 7, 11);
+// Test vertex_index and instance_index when offset to start at 7 and 11, respectively
+TEST_P(FirstIndexOffsetTests, BothOffset) {
+    uint32_t firstInstance = 11;
+    if (IsIndirect()) {
+        // Indirect draws must have firstInstance == 0
+        firstInstance = 0;
+    }
+    TestBothIndices(GetParam().mDrawMode, 7, firstInstance);
 }
 
-// Test that vertex_index starts at 7 when drawn using DrawIndexed()
-TEST_P(FirstIndexOffsetTests, IndexedVertex) {
-    TestVertexIndex(DrawMode::Indexed, 7);
-}
-
-// Test that instance_index starts at 11 when drawn using DrawIndexed()
-TEST_P(FirstIndexOffsetTests, IndexedInstance) {
-    TestInstanceIndex(DrawMode::Indexed, 11);
-}
-
-// Test that vertex_index and instance_index start at 7 and 11 respectively when drawn using
-// DrawIndexed()
-TEST_P(FirstIndexOffsetTests, IndexedBothOffset) {
-    TestBothIndices(DrawMode::Indexed, 7, 11);
-}
-
-DAWN_INSTANTIATE_TEST(FirstIndexOffsetTests,
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
+DAWN_INSTANTIATE_TEST_P(FirstIndexOffsetTests,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {DrawMode::NonIndexed, DrawMode::Indexed, DrawMode::NonIndexedIndirect,
+                         DrawMode::IndexedIndirect});
