@@ -57,6 +57,10 @@ namespace dawn_native {
                            ErrorTag errorTag);
 
       private:
+        ResultOrError<std::pair<Ref<BufferBase>, uint64_t>> ValidateIndirectDispatch(
+            BufferBase* indirectBuffer,
+            uint64_t indirectOffset);
+
         CommandBufferStateTracker mCommandBufferState;
 
         // Adds the bindgroups used for the current dispatch to the SyncScopeResourceUsage and
