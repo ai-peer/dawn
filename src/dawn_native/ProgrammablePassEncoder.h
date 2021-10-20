@@ -31,6 +31,7 @@ namespace dawn_native {
     class ProgrammablePassEncoder : public ApiObjectBase {
       public:
         ProgrammablePassEncoder(DeviceBase* device, EncodingContext* encodingContext);
+        virtual ~ProgrammablePassEncoder() override;
 
         void APIInsertDebugMarker(const char* groupLabel);
         void APIPopDebugGroup();
@@ -39,6 +40,8 @@ namespace dawn_native {
       protected:
         bool IsValidationEnabled() const;
         MaybeError ValidateProgrammableEncoderEnd() const;
+
+        //virtual void DeleteThis() override;
 
         // Compute and render passes do different things on SetBindGroup. These are helper functions
         // for the logic they have in common.
