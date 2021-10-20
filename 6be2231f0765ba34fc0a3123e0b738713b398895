@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db5c647d_b89fe470",
+        "filename": "src/dawn_native/BindGroup.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T16:10:53Z",
+      "side": 1,
+      "message": "External texture is set in the nextInChain, so it\u0027s already effectively checked above by the combination of FindInChain() and the externalTextureBindingEntry null check.",
+      "parentUuid": "fd1a219a_def1c176",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94f56bbb_58941b7b",
@@ -82,6 +100,24 @@
       "writtenOn": "2021-10-20T12:34:51Z",
       "side": 1,
       "message": "nit: maybe %s instead of Device?",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaa9e301_84ba12e1",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T16:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94f56bbb_58941b7b",
       "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +145,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ab9bc4_5585c943",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T16:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87798a0e_96ebcc9d",
+      "range": {
+        "startLine": 118,
+        "startChar": 55,
+        "endLine": 118,
+        "endChar": 77
+      },
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecdac337_11b15db4",
@@ -122,6 +182,30 @@
       "writtenOn": "2021-10-20T15:33:01Z",
       "side": 1,
       "message": "? I think you probably meant:\n\n\"Sample count (%u) of %s...\"\n\nand the previous message could be:\n\n\"Usage (%s) of %s...\"",
+      "range": {
+        "startLine": 461,
+        "startChar": 46,
+        "endLine": 461,
+        "endChar": 48
+      },
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da24ca6d_b1e0089f",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T16:10:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecdac337_11b15db4",
       "range": {
         "startLine": 461,
         "startChar": 46,
