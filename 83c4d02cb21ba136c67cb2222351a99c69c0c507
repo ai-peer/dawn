@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d42f1acb_c836aaa0",
+        "filename": "src/dawn_node/binding/Flags.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-20T16:06:49Z",
+      "side": 1,
+      "message": "So you\u0027re passing the flags around now - nice, but why is this still global, and not a field of Flags?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 22,
+        "endChar": 5
+      },
+      "revId": "83c4d02cb21ba136c67cb2222351a99c69c0c507",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
