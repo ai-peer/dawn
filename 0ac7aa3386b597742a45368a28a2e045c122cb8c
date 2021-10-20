@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3202e01b_38cab4cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T22:22:46Z",
+      "side": 1,
+      "message": "Thanks! if I understand correctly, Dawn is still incorrect because the builtins aren\u0027t implemented, but this CL makes it more predictably incorrect because it gets rid of some state leakage?\n\nI think I might prefer for us to correctly implement the builtins since indirect draws aren\u0027t currently exposed to Javascript yet.",
+      "revId": "0ac7aa3386b597742a45368a28a2e045c122cb8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
