@@ -206,6 +206,43 @@ TEST_F(CommandBufferValidationTest, CallsAfterAFailedFinish) {
     ASSERT_DEVICE_ERROR(encoder.CopyBufferToBuffer(copyBuffer, 0, copyBuffer, 0, 0));
 }
 
+// Test that passes which are de-referenced prior to ending still allow the correct errors to be
+// produced.
+TEST_F(CommandBufferValidationTest, PassDereferenced) {
+    DummyRenderPass dummyRenderPass(device);
+
+    // Control case, command buffer ended after the pass is ended.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&dummyRenderPass);
+        pass.EndPass();
+        encoder.Finish();
+    }
+
+    // Error case, no reference is kept to a render pass.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.BeginRenderPass(&dummyRenderPass);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Error case, no reference is kept to a compute pass.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.BeginComputePass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    // Error case, beginning a new pass after failing to end a de-referenced pass.
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.BeginRenderPass(&dummyRenderPass);
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.EndPass();
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
 // Test that calling inject validation error produces an error.
 TEST_F(CommandBufferValidationTest, InjectValidationError) {
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
