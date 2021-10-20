@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b28baab1_3097cfbe",
+        "filename": "src/dawn_node/Module.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-20T16:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d1107dd_5d05fac8",
+      "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fd6d1c0_e6e951cd",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-19T20:23:02Z",
       "side": 1,
       "message": "Doesn\u0027t the result here contain an error message you can use?",
+      "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccba3122_a97cf3f4",
+        "filename": "src/dawn_node/Module.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-20T16:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1fd6d1c0_e6e951cd",
       "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -70,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d99583_064edc09",
+        "filename": "src/dawn_node/Module.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-20T16:03:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0275c1c1_cce041b8",
+      "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3e3371c5_05fc2017",
@@ -101,6 +155,24 @@
       "side": 1,
       "message": "What do you suggest?",
       "parentUuid": "3e3371c5_05fc2017",
+      "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04e9fcb2_b522f2c9",
+        "filename": "src/dawn_node/binding/Flags.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-10-20T16:03:09Z",
+      "side": 1,
+      "message": "As per our discussion, we now export a create() function that takes in an array of strings for the flags. We use this to create the GPU instance with the flags, and no more global.",
+      "parentUuid": "c6d42985_925c2402",
       "revId": "20c66be8a0c0090e771afa061661e8da9760a54a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
