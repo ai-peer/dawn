@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "195be0a2_03332924",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T15:33:01Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd1a219a_def1c176",
@@ -65,6 +82,52 @@
       "writtenOn": "2021-10-20T12:34:51Z",
       "side": 1,
       "message": "nit: maybe %s instead of Device?",
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87798a0e_96ebcc9d",
+        "filename": "src/dawn_native/Limits.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T15:33:01Z",
+      "side": 1,
+      "message": "nit: the other one says \"lower than the supported\". this one doesn\u0027t have the \"the\" which we should add for consistency",
+      "range": {
+        "startLine": 118,
+        "startChar": 55,
+        "endLine": 118,
+        "endChar": 77
+      },
+      "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecdac337_11b15db4",
+        "filename": "src/dawn_native/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-20T15:33:01Z",
+      "side": 1,
+      "message": "? I think you probably meant:\n\n\"Sample count (%u) of %s...\"\n\nand the previous message could be:\n\n\"Usage (%s) of %s...\"",
+      "range": {
+        "startLine": 461,
+        "startChar": 46,
+        "endLine": 461,
+        "endChar": 48
+      },
       "revId": "6be2231f0765ba34fc0a3123e0b738713b398895",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
