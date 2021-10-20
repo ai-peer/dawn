@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7bd9fb6_b0e78d8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-20T22:09:00Z",
+      "side": 1,
+      "message": "PTAL! As with the Vulkan backend changes, there\u0027s several errors here that just don\u0027t feel like the have a natural/useful way of expanding what they report.",
+      "revId": "3570d875ffbc540da2c676990b9b2309e6c7bc9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
