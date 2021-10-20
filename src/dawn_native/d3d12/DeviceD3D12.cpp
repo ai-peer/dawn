@@ -158,9 +158,10 @@ namespace dawn_native { namespace d3d12 {
                                                  IID_PPV_ARGS(&mDrawIndexedIndirectSignature));
 
         DAWN_TRY(DeviceBase::Initialize(new Queue(this)));
-        // Device shouldn't be used until after DeviceBase::Initialize so we must wait until after
-        // device initialization to call NextSerial
+        // Submit any work done in initialization.
+        DAWN_TRY(ExecutePendingCommandContext());
         DAWN_TRY(NextSerial());
+        DAWN_TRY(CheckDebugLayerAndGenerateErrors());
 
         // The environment can only use DXC when it's available. Override the decision if it is not
         // applicable.
