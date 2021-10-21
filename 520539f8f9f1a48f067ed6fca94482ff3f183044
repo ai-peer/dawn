@@ -34,6 +34,24 @@
       "parentUuid": "daf43745_bb128838",
       "revId": "520539f8f9f1a48f067ed6fca94482ff3f183044",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b94a2e5_3d43aa66",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-21T18:32:58Z",
+      "side": 0,
+      "message": "well, that makes it a device lost - is that what we want?",
+      "parentUuid": "7a37fcc6_037b41fa",
+      "revId": "520539f8f9f1a48f067ed6fca94482ff3f183044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
