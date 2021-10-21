@@ -46,8 +46,6 @@ namespace dawn_native {
       protected:
         ~CommandBufferBase() override;
 
-        void DoNextSetValidatedBufferLocationsInternal();
-
         CommandIterator mCommands;
 
       private:
