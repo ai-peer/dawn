@@ -16,6 +16,40 @@
       "message": "PTAL!",
       "revId": "a84a74c152fa564370d992375574ed32387925c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7e6d0c_208a62c8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:11:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a84a74c152fa564370d992375574ed32387925c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3ee6487_23f8a3bc",
+        "filename": "generator/templates/dawn_native/ChainUtils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:11:52Z",
+      "side": 1,
+      "message": "Why not INVALID_IF?",
+      "revId": "a84a74c152fa564370d992375574ed32387925c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
