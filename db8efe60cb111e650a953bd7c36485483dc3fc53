@@ -46,6 +46,30 @@
       },
       "revId": "db8efe60cb111e650a953bd7c36485483dc3fc53",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fe15579_09edeec8",
+        "filename": "src/dawn_node/binding/GPUAdapter.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-21T17:16:19Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "998ba28d_59e3325b",
+      "range": {
+        "startLine": 29,
+        "startChar": 43,
+        "endLine": 29,
+        "endChar": 61
+      },
+      "revId": "db8efe60cb111e650a953bd7c36485483dc3fc53",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
