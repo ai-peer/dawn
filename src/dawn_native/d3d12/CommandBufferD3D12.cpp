@@ -1424,12 +1424,11 @@ namespace dawn_native { namespace d3d12 {
                     // Zero the index offset values to avoid reusing values from the previous draw
                     RecordFirstIndexOffset(commandList, lastPipeline, 0, 0);
 
-                    Buffer* buffer = ToBackend(draw->indirectBufferLocation->GetBuffer());
+                    Buffer* buffer = ToBackend(draw->indirectBuffer.Get());
                     ComPtr<ID3D12CommandSignature> signature =
                         ToBackend(GetDevice())->GetDrawIndexedIndirectSignature();
                     commandList->ExecuteIndirect(signature.Get(), 1, buffer->GetD3D12Resource(),
-                                                 draw->indirectBufferLocation->GetOffset(), nullptr,
-                                                 0);
+                                                 draw->indirectOffset, nullptr, 0);
                     break;
                 }
 
