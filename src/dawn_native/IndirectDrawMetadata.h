@@ -18,7 +18,6 @@
 #include "common/NonCopyable.h"
 #include "common/RefCounted.h"
 #include "dawn_native/Buffer.h"
-#include "dawn_native/BufferLocation.h"
 #include "dawn_native/CommandBufferStateTracker.h"
 #include "dawn_native/Commands.h"
 
@@ -45,7 +44,7 @@ namespace dawn_native {
       public:
         struct IndexedIndirectDraw {
             uint64_t clientBufferOffset;
-            Ref<BufferLocation> bufferLocation;
+            DrawIndexedIndirectCmd* cmd;
         };
 
         struct IndexedIndirectValidationBatch {
@@ -109,7 +108,7 @@ namespace dawn_native {
                                     uint64_t indexBufferSize,
                                     BufferBase* indirectBuffer,
                                     uint64_t indirectOffset,
-                                    BufferLocation* drawCmdIndirectBufferLocation);
+                                    DrawIndexedIndirectCmd* cmd);
 
       private:
         IndexedIndirectBufferValidationInfoMap mIndexedIndirectBufferValidationInfo;
