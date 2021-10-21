@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bebc1bd_4a38259b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-21T17:55:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1247602_7714201b",
+      "revId": "ffaa1cf2cc933ba750c03cca0dd4935b1f3fc6df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97e41f30_438f784e",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-10-21T00:08:02Z",
       "side": 1,
       "message": "nit: extra period",
+      "range": {
+        "startLine": 142,
+        "startChar": 78,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "ffaa1cf2cc933ba750c03cca0dd4935b1f3fc6df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb6ae76_1d4d0121",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-21T17:55:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97e41f30_438f784e",
       "range": {
         "startLine": 142,
         "startChar": 78,
