@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab1d6be6_b5c68dee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-21T20:15:50Z",
+      "side": 1,
+      "message": "WDYT? I\u0027m not so concerned about storing the raw pointer to the DrawIndexedIndirectCmd, so this simplifies things a decent amount",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
