@@ -16,6 +16,40 @@
       "message": "Ya\u0027ll know the drill at this point...",
       "revId": "5d6e2cf92cb93cb44be960cc9dcb3a94a3d8ce9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd13eeb7_7ca1527d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:05:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5d6e2cf92cb93cb44be960cc9dcb3a94a3d8ce9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f83fc53_f7f43f1b",
+        "filename": "src/dawn_native/opengl/BindGroupGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:05:32Z",
+      "side": 1,
+      "message": "Note that I have https://github.com/gpuweb/gpuweb/issues/1576 open for this too.",
+      "revId": "5d6e2cf92cb93cb44be960cc9dcb3a94a3d8ce9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
