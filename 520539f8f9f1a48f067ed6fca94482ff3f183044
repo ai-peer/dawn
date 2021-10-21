@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "daf43745_bb128838",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:15:10Z",
+      "side": 0,
+      "message": "Maybe these needed to be INTERNAL_ERRORs",
+      "revId": "520539f8f9f1a48f067ed6fca94482ff3f183044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

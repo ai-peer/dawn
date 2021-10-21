@@ -16,6 +16,46 @@
       "message": "Thanks for the review!",
       "revId": "b2885e2b2214086331119e58e6e18397299811b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7185691c_fe0fecc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:15:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b2885e2b2214086331119e58e6e18397299811b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30ff5211_d85e9b19",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 735,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:15:10Z",
+      "side": 1,
+      "message": "Maybe we can say which texture it is we\u0027re exporting from.",
+      "range": {
+        "startLine": 729,
+        "startChar": 0,
+        "endLine": 735,
+        "endChar": 3
+      },
+      "revId": "b2885e2b2214086331119e58e6e18397299811b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
