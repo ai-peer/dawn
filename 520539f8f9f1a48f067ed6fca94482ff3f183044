@@ -16,6 +16,24 @@
       "message": "Maybe these needed to be INTERNAL_ERRORs",
       "revId": "520539f8f9f1a48f067ed6fca94482ff3f183044",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a37fcc6_037b41fa",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-21T18:12:02Z",
+      "side": 0,
+      "message": "I kind of wondered what the logic was behind having some of these be validation errors and others be internal errors. There doesn\u0027t seem to be a lot of consistency behind it currently.\n\nRegardless, changed these to DAWN_INTERNAL_ERRORs.",
+      "parentUuid": "daf43745_bb128838",
+      "revId": "520539f8f9f1a48f067ed6fca94482ff3f183044",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
