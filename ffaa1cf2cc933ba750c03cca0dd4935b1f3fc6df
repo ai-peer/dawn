@@ -16,6 +16,63 @@
       "message": "Thanks!",
       "revId": "ffaa1cf2cc933ba750c03cca0dd4935b1f3fc6df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93a93941_9f2084a2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:08:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ffaa1cf2cc933ba750c03cca0dd4935b1f3fc6df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1247602_7714201b",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1072,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:08:02Z",
+      "side": 1,
+      "message": "nit: maybe use %s for the pipeline?",
+      "revId": "ffaa1cf2cc933ba750c03cca0dd4935b1f3fc6df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97e41f30_438f784e",
+        "filename": "src/dawn_native/d3d12/D3D12Backend.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-21T00:08:02Z",
+      "side": 1,
+      "message": "nit: extra period",
+      "range": {
+        "startLine": 142,
+        "startChar": 78,
+        "endLine": 142,
+        "endChar": 79
+      },
+      "revId": "ffaa1cf2cc933ba750c03cca0dd4935b1f3fc6df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
