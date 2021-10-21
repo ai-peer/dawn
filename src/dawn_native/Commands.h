@@ -19,6 +19,7 @@
 
 #include "dawn_native/AttachmentState.h"
 #include "dawn_native/BindingInfo.h"
+#include "dawn_native/CommandAllocator.h"
 #include "dawn_native/Texture.h"
 
 #include "dawn_native/dawn_platform.h"
@@ -33,6 +34,7 @@ namespace dawn_native {
     // dependencies: Ref<Object> needs Object to be defined.
 
     enum class Command {
+        AdditionalCommands,
         BeginComputePass,
         BeginOcclusionQuery,
         BeginRenderPass,
@@ -65,6 +67,10 @@ namespace dawn_native {
         SetVertexBuffer,
         WriteBuffer,
         WriteTimestamp,
+    };
+
+    struct AdditionalCommandsCmd {
+        CommandIterator commands;
     };
 
     struct BeginComputePassCmd {};

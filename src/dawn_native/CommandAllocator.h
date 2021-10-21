@@ -66,6 +66,7 @@ namespace dawn_native {
     }  // namespace detail
 
     class CommandAllocator;
+    struct AdditionalCommandsCmd;
 
     class CommandIterator : public NonCopyable {
       public:
@@ -146,6 +147,21 @@ namespace dawn_native {
         uint32_t mEndOfBlock = detail::kEndOfBlock;
     };
 
+    class SplitMarker : public NonCopyable {
+      public:
+        explicit SplitMarker(AdditionalCommandsCmd* cmd);
+        ~SplitMarker();
+
+        SplitMarker(SplitMarker&& rhs) = default;
+        SplitMarker& operator=(SplitMarker&& rhs) = default;
+
+        CommandAllocator* GetAllocator();
+
+      private:
+        std::unique_ptr<CommandAllocator> mAllocator;
+        AdditionalCommandsCmd* mCmd;
+    };
+
     class CommandAllocator : public NonCopyable {
       public:
         CommandAllocator();
@@ -159,6 +175,8 @@ namespace dawn_native {
         void Reset();
 
         bool IsEmpty() const;
+
+        SplitMarker CreateSplitMarker();
 
         template <typename T, typename E>
         T* Allocate(E commandId) {

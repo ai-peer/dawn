@@ -31,6 +31,12 @@ namespace dawn_native {
         Command type;
         while (commands->NextCommandId(&type)) {
             switch (type) {
+                case Command::AdditionalCommands: {
+                    AdditionalCommandsCmd* additionalCommands =
+                        commands->NextCommand<AdditionalCommandsCmd>();
+                    additionalCommands->~AdditionalCommandsCmd();
+                    break;
+                }
                 case Command::BeginComputePass: {
                     BeginComputePassCmd* begin = commands->NextCommand<BeginComputePassCmd>();
                     begin->~BeginComputePassCmd();
@@ -210,6 +216,10 @@ namespace dawn_native {
 
     void SkipCommand(CommandIterator* commands, Command type) {
         switch (type) {
+            case Command::AdditionalCommands:
+                commands->NextCommand<AdditionalCommandsCmd>();
+                break;
+
             case Command::BeginComputePass:
                 commands->NextCommand<BeginComputePassCmd>();
                 break;

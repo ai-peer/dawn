@@ -546,6 +546,9 @@ namespace dawn_native {
                 ASSERT(width > 0 && height > 0 && sampleCount > 0);
 
                 mEncodingContext.WillBeginRenderPass();
+
+                SplitMarker validationPassMarker = allocator->CreateSplitMarker();
+
                 BeginRenderPassCmd* cmd =
                     allocator->Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
 

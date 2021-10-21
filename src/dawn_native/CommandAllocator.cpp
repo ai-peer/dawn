@@ -16,6 +16,7 @@
 
 #include "common/Assert.h"
 #include "common/Math.h"
+#include "dawn_native/Commands.h"
 
 #include <algorithm>
 #include <climits>
@@ -115,6 +116,19 @@ namespace dawn_native {
         return mBlocks[0].block == reinterpret_cast<const uint8_t*>(&mEndOfBlock);
     }
 
+    SplitMarker::SplitMarker(AdditionalCommandsCmd* cmd)
+        : mAllocator(std::make_unique<CommandAllocator>()), mCmd(cmd) {
+        ASSERT(cmd != nullptr);
+    }
+
+    SplitMarker::~SplitMarker() {
+        mCmd->commands = CommandIterator(std::move(*mAllocator));
+    }
+
+    CommandAllocator* SplitMarker::GetAllocator() {
+        return mAllocator.get();
+    }
+
     // Potential TODO(crbug.com/dawn/835):
     //  - Host the size and pointer to next block in the block itself to avoid having an allocation
     //    in the vector
@@ -168,6 +182,11 @@ namespace dawn_native {
 
     bool CommandAllocator::IsEmpty() const {
         return mCurrentPtr == reinterpret_cast<const uint8_t*>(&mDummyEnum[0]);
+    }
+
+    SplitMarker CommandAllocator::CreateSplitMarker() {
+        AdditionalCommandsCmd* cmd = Allocate<AdditionalCommandsCmd>(Command::AdditionalCommands);
+        return SplitMarker(cmd);
     }
 
     CommandBlocks&& CommandAllocator::AcquireBlocks() {
