@@ -51,6 +51,24 @@
       "message": "LGTM thanks for the high-quality contribution!",
       "revId": "0ac7aa3386b597742a45368a28a2e045c122cb8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd39a881_f7df3344",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-21T00:42:33Z",
+      "side": 1,
+      "message": "makes, sense LGTM too",
+      "parentUuid": "eaa81a98_fec5c9c9",
+      "revId": "0ac7aa3386b597742a45368a28a2e045c122cb8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
