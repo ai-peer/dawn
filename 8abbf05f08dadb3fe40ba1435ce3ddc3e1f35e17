@@ -34,6 +34,24 @@
       "parentUuid": "385e3bf5_9ff8de16",
       "revId": "8abbf05f08dadb3fe40ba1435ce3ddc3e1f35e17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fab6abc2_561b5075",
+        "filename": "src/dawn_node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-21T15:58:31Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "6fbaa47d_f33fedfe",
+      "revId": "8abbf05f08dadb3fe40ba1435ce3ddc3e1f35e17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
