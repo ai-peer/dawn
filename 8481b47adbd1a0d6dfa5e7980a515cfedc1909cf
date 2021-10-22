@@ -16,6 +16,92 @@
       "message": "Last one! (Though there\u0027s a few more updates to error logging in a whole that I\u0027ll be looking at after this lands.)",
       "revId": "8481b47adbd1a0d6dfa5e7980a515cfedc1909cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8da3b41_39beaf9a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:11:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8481b47adbd1a0d6dfa5e7980a515cfedc1909cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "790e41d1_41acb0a4",
+        "filename": "src/dawn_native/metal/SamplerMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:11:18Z",
+      "side": 1,
+      "message": "I don\u0027t imagine this is going to change. We set this for pre-A9 GPUs which don\u0027t support it. I guess if we really wanted, we could have a shader transform that emulates it",
+      "range": {
+        "startLine": 59,
+        "startChar": 80,
+        "endLine": 59,
+        "endChar": 91
+      },
+      "revId": "8481b47adbd1a0d6dfa5e7980a515cfedc1909cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ca7c89_be9fae63",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:11:18Z",
+      "side": 1,
+      "message": "|format| ?",
+      "range": {
+        "startLine": 128,
+        "startChar": 56,
+        "endLine": 128,
+        "endChar": 81
+      },
+      "revId": "8481b47adbd1a0d6dfa5e7980a515cfedc1909cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd13ca42_5c43d964",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 353,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:11:18Z",
+      "side": 1,
+      "message": "nit: factor this out",
+      "range": {
+        "startLine": 353,
+        "startChar": 12,
+        "endLine": 353,
+        "endChar": 54
+      },
+      "revId": "8481b47adbd1a0d6dfa5e7980a515cfedc1909cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
