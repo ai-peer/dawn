@@ -16,6 +16,97 @@
       "message": "With the changes in the previous CL for the destroy stuff, it made each change in the classes more trivial so grouped them together into this one. Most of the changes are for testing/tests. Thanks guys!",
       "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abdf00b9_48e7f398",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:05:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb36b26b_cd25b674",
+        "filename": "src/dawn_native/ComputePipeline.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:05:44Z",
+      "side": 1,
+      "message": "nit: less nesting?",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bcc9239_8bd89e8b",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:05:44Z",
+      "side": 1,
+      "message": "nit: maybe we should \n// clang-format on\n.. stuff\n// clang-format off\n\nso that we can have these in a vertical list that\u0027s easy to see the ordering of",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da5ed77a_dd23a706",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:05:44Z",
+      "side": 1,
+      "message": "what changed such that attachmentState can be null now?",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ecde2d2_bf121398",
+        "filename": "src/tests/unittests/native/mocks/ShaderModuleMock.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T01:05:44Z",
+      "side": 1,
+      "message": "missing some text?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 60
+      },
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
