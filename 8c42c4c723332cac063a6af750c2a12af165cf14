@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9a4cf24_f0b27f07",
+        "filename": "src/dawn_native/ComputePipeline.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-22T04:11:42Z",
+      "side": 1,
+      "message": "Done here and other places where similar code exists.",
+      "parentUuid": "bb36b26b_cd25b674",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bcc9239_8bd89e8b",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-10-22T01:05:44Z",
       "side": 1,
       "message": "nit: maybe we should \n// clang-format on\n.. stuff\n// clang-format off\n\nso that we can have these in a vertical list that\u0027s easy to see the ordering of",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ed6b369_41c734c5",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-22T04:11:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bcc9239_8bd89e8b",
       "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e669a2c7_ca07d00a",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 943,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-22T04:11:42Z",
+      "side": 1,
+      "message": "In the mock we don\u0027t pass a descriptor, so we can\u0027t create the attachment state. The mock needs to use one of the ctors, but using the actual one means a lot of validation/processing happens which makes it quite difficult to use. If you feel strongly about this we can try to do something else, but I figured this would be more robust in terms of comparisons anyways.",
+      "parentUuid": "da5ed77a_dd23a706",
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ecde2d2_bf121398",
@@ -99,6 +153,30 @@
       "writtenOn": "2021-10-22T01:05:44Z",
       "side": 1,
       "message": "missing some text?",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 36,
+        "endChar": 60
+      },
+      "revId": "8c42c4c723332cac063a6af750c2a12af165cf14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2030a8d2_df21ab4b",
+        "filename": "src/tests/unittests/native/mocks/ShaderModuleMock.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-22T04:11:42Z",
+      "side": 1,
+      "message": "Oops, good catch!",
+      "parentUuid": "0ecde2d2_bf121398",
       "range": {
         "startLine": 36,
         "startChar": 0,
