@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "25b451a2_c80d861e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-22T17:57:02Z",
+      "side": 1,
+      "message": "also: fully aware this implementation kinda sucks because every DispatchIndirect is transformed into a [SetPipeline, Dispatch, RW-RW barrier, SetPipeline, DispatchIndirect]. I\u0027m writing a doc about how we can make this better, but I\u0027d like to land this version first so we can get the base functionality in.",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d45745d4_2eb24fd3",
