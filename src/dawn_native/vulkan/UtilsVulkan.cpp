@@ -215,11 +215,12 @@ namespace dawn_native { namespace vulkan {
             programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
 
         for (const auto& pipelineConstant : programmableStage.constants) {
-            const std::string& name = pipelineConstant.first;
+            const std::string& identifier = pipelineConstant.first;
             double value = pipelineConstant.second;
 
-            // This is already validated so `name` must exist
-            const auto& moduleConstant = entryPointMetaData.overridableConstants.at(name);
+            // This is already validated so `identifier` must exist
+            const auto& moduleConstant = entryPointMetaData.overridableConstants.at(
+                entryPointMetaData.overridableConstantsIdentifierToNumericID.at(identifier));
 
             specializationMapEntries->push_back(
                 VkSpecializationMapEntry{moduleConstant.id,
