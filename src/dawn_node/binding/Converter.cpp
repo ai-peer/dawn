@@ -422,6 +422,18 @@ namespace wgpu { namespace binding {
         out = {};
         out.entryPoint = in.entryPoint.c_str();
         out.module = *in.module.As<GPUShaderModule>();
+        if (in.constants.has_value()) {
+            auto* entries = Allocate<wgpu::ConstantEntry>(in.constants->size());
+            size_t i = 0;
+            for (auto& it : in.constants.value()) {
+                wgpu::ConstantEntry entry;
+                entry.key = it.first.c_str();
+                entry.value = it.second;
+                entries[i++] = entry;
+            }
+            out.constants = entries;
+            out.constantCount = static_cast<uint32_t>(in.constants->size());
+        }
         return true;
     }
 
