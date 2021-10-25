@@ -16,6 +16,57 @@
       "message": "WDYT? I\u0027m not so concerned about storing the raw pointer to the DrawIndexedIndirectCmd, so this simplifies things a decent amount",
       "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39fb65c3_e1ca5184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T11:38:26Z",
+      "side": 1,
+      "message": "LGTM. It binds us into having CommandAllocator/Iterator us fixed pointers and no compaction, but this is very likely ok.",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e903d8a2_7cd530bb",
+        "filename": "src/dawn_native/IndirectDrawMetadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T11:38:26Z",
+      "side": 1,
+      "message": "nit: comment about the lifetime.\n\nAlso is there a way to test we don\u0027t invalidate the pointer when doing CommandAllocator / CommandIterator operations?",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "766ffe51_36eb2837",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T11:38:26Z",
+      "side": 1,
+      "message": "Maybe ASSERT(cmd-\u003eindirectBuffer !\u003d nullptr) in backends? Or we could have a DrawIndexedIndirectCmd::MakeInvalid() and ::IsValid()",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
