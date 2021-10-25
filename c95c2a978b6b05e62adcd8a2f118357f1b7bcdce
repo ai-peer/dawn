@@ -69,6 +69,24 @@
       "parentUuid": "c30f3d9f_e1189488",
       "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e981383_27061a52",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-25T23:52:07Z",
+      "side": 1,
+      "message": "Seems working",
+      "parentUuid": "1236a9c2_f9d44c34",
+      "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
