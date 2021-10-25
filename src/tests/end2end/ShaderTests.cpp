@@ -490,8 +490,8 @@ TEST_P(ShaderTests, DISABLED_OverridableConstants) {
 
 // Test overridable constants with numeric identifiers
 TEST_P(ShaderTests, OverridableConstantsNumericIdentifiers) {
-    // TODO(dawn:1041): Only Vulkan backend is implemented
-    DAWN_TEST_UNSUPPORTED_IF(!IsVulkan());
+    // TODO(dawn:1041): D3D12 backend is unimplemented
+    DAWN_TEST_UNSUPPORTED_IF(IsD3D12());
 
     uint32_t const kCount = 4;
     std::vector<uint32_t> expected{1u, 2u, 3u, 0u};

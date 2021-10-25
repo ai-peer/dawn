@@ -343,7 +343,7 @@ namespace dawn_native { namespace metal {
         const char* vertexEntryPoint = vertexStage.entryPoint.c_str();
         ShaderModule::MetalFunctionData vertexData;
         DAWN_TRY(vertexModule->CreateFunction(vertexEntryPoint, SingleShaderStage::Vertex,
-                                              ToBackend(GetLayout()), &vertexData, 0xFFFFFFFF,
+                                              ToBackend(GetLayout()), &vertexData, nil, 0xFFFFFFFF,
                                               this));
 
         descriptorMTL.vertexFunction = vertexData.function.Get();
@@ -357,7 +357,7 @@ namespace dawn_native { namespace metal {
             const char* fragmentEntryPoint = fragmentStage.entryPoint.c_str();
             ShaderModule::MetalFunctionData fragmentData;
             DAWN_TRY(fragmentModule->CreateFunction(fragmentEntryPoint, SingleShaderStage::Fragment,
-                                                    ToBackend(GetLayout()), &fragmentData,
+                                                    ToBackend(GetLayout()), &fragmentData, nil,
                                                     GetSampleMask()));
 
             descriptorMTL.fragmentFunction = fragmentData.function.Get();
