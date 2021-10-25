@@ -156,7 +156,8 @@ namespace dawn_native { namespace metal {
 
         bool IsMetalSupported() {
             // Metal was first introduced in macOS 10.11
-            return IsMacOSVersionAtLeast(10, 11);
+            // Dawn is targeted at macOS 10.12+
+            return IsMacOSVersionAtLeast(10, 12);
         }
 #elif defined(DAWN_PLATFORM_IOS)
         MaybeError GetDevicePCIInfo(id<MTLDevice> device, PCIIDs* ids) {
