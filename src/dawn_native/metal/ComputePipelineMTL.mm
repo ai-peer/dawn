@@ -17,6 +17,9 @@
 #include "dawn_native/CreatePipelineAsyncTask.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/ShaderModuleMTL.h"
+#include "dawn_native/metal/UtilsMetal.h"
+
+#include <unordered_set>
 
 namespace dawn_native { namespace metal {
 
@@ -31,11 +34,10 @@ namespace dawn_native { namespace metal {
         auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
 
         const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
-        ShaderModule* computeModule = ToBackend(computeStage.module.Get());
-        const char* computeEntryPoint = computeStage.entryPoint.c_str();
         ShaderModule::MetalFunctionData computeData;
-        DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
-                                               ToBackend(GetLayout()), &computeData));
+
+        DAWN_TRY(CreateFunctionWithConstantValues(computeStage, SingleShaderStage::Compute,
+                                                  ToBackend(GetLayout()), &computeData));
 
         NSError* error = nullptr;
         mMtlComputePipelineState.Acquire([mtlDevice
