@@ -21,6 +21,11 @@
 
 #import <Metal/Metal.h>
 
+namespace dawn_native {
+    struct ProgrammableStage;
+    struct EntryPointMetadata;
+}
+
 namespace dawn_native { namespace metal {
 
     MTLCompareFunction ToMetalCompareFunction(wgpu::CompareFunction compareFunction);
@@ -64,6 +69,10 @@ namespace dawn_native { namespace metal {
                                              const Extent3D& size);
 
     MTLBlitOption ComputeMTLBlitOption(const Format& format, Aspect aspect);
+
+    void GetMTLFunctionConstantValues(const ProgrammableStage& programmableStage,
+                                      const EntryPointMetadata& entryPointMetadata,
+                                      id constantValuesPointer);
 
 }}  // namespace dawn_native::metal
 

@@ -14,6 +14,8 @@
 
 #include "dawn_native/metal/UtilsMetal.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/Pipeline.h"
+#include "dawn_native/ShaderModule.h"
 
 #include "common/Assert.h"
 
@@ -184,6 +186,90 @@ namespace dawn_native { namespace metal {
             }
         }
         return MTLBlitOptionNone;
+    }
+
+    void GetMTLFunctionConstantValues(const ProgrammableStage& programmableStage,
+                                      const EntryPointMetadata& entryPointMetadata,
+                                      id constantValuesPointer) {
+        if (@available(macOS 10.12, *)) {
+            ASSERT(constantValuesPointer != nil);
+            MTLFunctionConstantValues* constantValues = constantValuesPointer;
+
+            std::unordered_set<std::string> overrided;
+
+            for (const auto& pipelineConstant : programmableStage.constants) {
+                const std::string& name = pipelineConstant.first;
+                double value = pipelineConstant.second;
+
+                overrided.insert(name);
+
+                // This is already validated so `name` must exist
+                const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+
+                MTLDataType type;
+                OverridableConstantScalar entry{};
+                switch (moduleConstant.type) {
+                    case EntryPointMetadata::OverridableConstant::Type::Boolean:
+                        type = MTLDataTypeBool;
+                        entry.b = static_cast<int32_t>(value);
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Float32:
+                        type = MTLDataTypeFloat;
+                        entry.f32 = static_cast<float>(value);
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Int32:
+                        type = MTLDataTypeInt;
+                        entry.i32 = static_cast<int32_t>(value);
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                        type = MTLDataTypeUInt;
+                        entry.u32 = static_cast<uint32_t>(value);
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+
+                // printf("%s %f\n", name.c_str(), value);
+
+                [constantValues setConstantValue:&entry type:type atIndex:moduleConstant.id];
+            }
+
+            // Set shader initialized default values
+            for (const std::string& name : entryPointMetadata.initializedOverridableConstants) {
+                if (overrided.count(name) > 0) {
+                    // This constant has overrided value
+                    continue;
+                }
+
+                // Must exist
+                const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+                ASSERT(moduleConstant.isInitialized);
+                // printf("%s\n", name.c_str());
+                MTLDataType type;
+                switch (moduleConstant.type) {
+                    case EntryPointMetadata::OverridableConstant::Type::Boolean:
+                        type = MTLDataTypeBool;
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Float32:
+                        type = MTLDataTypeFloat;
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Int32:
+                        type = MTLDataTypeInt;
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                        type = MTLDataTypeUInt;
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+
+                [constantValues setConstantValue:&moduleConstant.defaultValue
+                                            type:type
+                                         atIndex:moduleConstant.id];
+            }
+        } else {
+            UNREACHABLE();
+        }
     }
 
 }}  // namespace dawn_native::metal

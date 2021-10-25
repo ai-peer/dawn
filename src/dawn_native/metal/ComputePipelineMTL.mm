@@ -17,6 +17,9 @@
 #include "dawn_native/CreatePipelineAsyncTask.h"
 #include "dawn_native/metal/DeviceMTL.h"
 #include "dawn_native/metal/ShaderModuleMTL.h"
+#include "dawn_native/metal/UtilsMetal.h"
+
+#include <unordered_set>
 
 namespace dawn_native { namespace metal {
 
@@ -34,8 +37,27 @@ namespace dawn_native { namespace metal {
         ShaderModule* computeModule = ToBackend(computeStage.module.Get());
         const char* computeEntryPoint = computeStage.entryPoint.c_str();
         ShaderModule::MetalFunctionData computeData;
-        DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
-                                               ToBackend(GetLayout()), &computeData));
+
+        const auto& entryPointMetadata = computeStage.module->GetEntryPoint(computeEntryPoint);
+
+        if (entryPointMetadata.overridableConstants.size() > 0) {
+            if (@available(macOS 10.12, *)) {
+                NSRef<MTLFunctionConstantValues> constantValues =
+                    AcquireNSRef([MTLFunctionConstantValues new]);
+                id constantValuesPointer = constantValues.Get();
+                GetMTLFunctionConstantValues(computeStage, entryPointMetadata,
+                                             constantValuesPointer);
+                DAWN_TRY(computeModule->CreateFunction(
+                    computeEntryPoint, SingleShaderStage::Compute, ToBackend(GetLayout()),
+                    &computeData, constantValuesPointer));
+            } else {
+                UNREACHABLE();
+            }
+        } else {
+            ASSERT(entryPointMetadata.overridableConstants.size() == 0);
+            DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
+                                                   ToBackend(GetLayout()), &computeData, nil));
+        }
 
         NSError* error = nullptr;
         mMtlComputePipelineState.Acquire([mtlDevice
