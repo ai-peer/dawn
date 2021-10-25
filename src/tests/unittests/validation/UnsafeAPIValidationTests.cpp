@@ -106,6 +106,52 @@ TEST_F(UnsafeAPIValidationTest, DynamicStorageBuffer) {
     }
 }
 
+// Check that pipeline overridable constants is disallowed as part of unsafe APIs.
+// TODO(dawn:1041) Remove when implementation for all backend is added
+TEST_F(UnsafeAPIValidationTest, PipelineOverridableConstants) {
+    // Create the dummy compute pipeline.
+    wgpu::ComputePipelineDescriptor pipelineDescBase;
+    pipelineDescBase.compute.entryPoint = "main";
+
+    // Control case: shader without overridable constant is allowed.
+    {
+        wgpu::ComputePipelineDescriptor pipelineDesc = pipelineDescBase;
+        pipelineDesc.compute.module = utils::CreateShaderModule(device, R"(
+[[block]] struct Buf {
+    data : array<u32, 1>;
+};
+
+[[group(0), binding(0)]] var<storage, read_write> buf : Buf;
+
+[[stage(compute), workgroup_size(1)]] fn main() {
+    buf.data[0] = 1u;
+})");
+
+        device.CreateComputePipeline(&pipelineDesc);
+    }
+
+    // Error case: shader with overridable constant and stage with constant entry is disallowed
+    {
+        wgpu::ComputePipelineDescriptor pipelineDesc = pipelineDescBase;
+        pipelineDesc.compute.module = utils::CreateShaderModule(device, R"(
+[[override(1000)]] let c: u32;
+
+[[block]] struct Buf {
+    data : array<u32, 1>;
+};
+
+[[group(0), binding(0)]] var<storage, read_write> buf : Buf;
+
+[[stage(compute), workgroup_size(1)]] fn main() {
+    buf.data[0] = c;
+})");
+        std::vector<wgpu::ConstantEntry> constants{{nullptr, "c", 1u}};
+        pipelineDesc.compute.constants = constants.data();
+        pipelineDesc.compute.constantCount = constants.size();
+        ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&pipelineDesc));
+    }
+}
+
 class UnsafeQueryAPIValidationTest : public ValidationTest {
   protected:
     WGPUDevice CreateTestDevice() override {
