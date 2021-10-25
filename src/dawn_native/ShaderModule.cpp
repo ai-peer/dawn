@@ -631,6 +631,11 @@ namespace dawn_native {
                 auto metadata = std::make_unique<EntryPointMetadata>();
 
                 if (!entryPoint.overridable_constants.empty()) {
+                    DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowUnsafeAPIs),
+                                    "Pipeline overridable constants is disallowed because it is "
+                                    "partially implemented "
+                                    "in Vulkan only for now.");
+
                     const auto& name2Id = inspector.GetConstantNameToIdMap();
 
                     for (auto& c : entryPoint.overridable_constants) {
