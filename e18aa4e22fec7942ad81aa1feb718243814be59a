@@ -212,6 +212,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f56e673_9ef0467b",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-25T15:49:37Z",
+      "side": 1,
+      "message": "bump - corentin, do you feel strongly about this or can we land?",
+      "parentUuid": "6740d3d4_73b00c98",
+      "revId": "e18aa4e22fec7942ad81aa1feb718243814be59a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2fa6a17_abb65c1d",
