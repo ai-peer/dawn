@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abc1f992_3d0f467d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-25T19:14:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fea25bf4af073d53cfe598884ee9c544d545f6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d163efa_8d1e65cd",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-25T19:14:26Z",
+      "side": 1,
+      "message": "nit: \"are disallowed ... are partially implemented\"\n\n\nAlso - this message reads like Vulkan is not completely implemented, whereas I think the intent is to say that Vulkan is the only platform where it is implemented? In any case, not sure the platform name is that important. We can just say \"are not fully implemented\".",
+      "range": {
+        "startLine": 50,
+        "startChar": 48,
+        "endLine": 51,
+        "endChar": 41
+      },
+      "revId": "fea25bf4af073d53cfe598884ee9c544d545f6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
