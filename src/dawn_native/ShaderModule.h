@@ -32,6 +32,7 @@
 #include <bitset>
 #include <map>
 #include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 namespace tint {
@@ -200,10 +201,22 @@ namespace dawn_native {
             // Match tint::inspector::OverridableConstant::Type
             // Bool is defined as a macro on linux X11 and cannot compile
             enum class Type { Boolean, Float32, Uint32, Int32 } type;
+
+            // If the constant doesn't not have an initializer in the shader
+            // Then it is required for the pipeline stage to have a constant record to initialize a
+            // value
+            bool isInitialized;
         };
 
-        // Store overridableConstants from tint program
-        std::unordered_map<std::string, OverridableConstant> overridableConstants;
+        // Maps numeric ID to overridable constants
+        std::unordered_map<uint32_t, OverridableConstant> overridableConstants;
+        // Maps constant identifier to its numeric ID
+        // Each OverridableConstant could have 1 or 2 identifiers
+        // which is the variable name, or the variable and the explicitly specified numeric ID
+        std::unordered_map<std::string, uint32_t> overridableConstantsIdentifierToNumericID;
+        // Overridable constants that are not initialized in shaders
+        // They need value initialization from pipeline stage or it is a validation error
+        std::unordered_set<uint32_t> uninitializedOverridableConstants;
 
         bool usesNumWorkgroups = false;
     };
