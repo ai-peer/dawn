@@ -170,12 +170,22 @@ namespace dawn_native { namespace metal {
         return std::move(result.msl);
     }
 
+    // MaybeError ShaderModule::CreateFunction(const char* entryPointName,
+    //                                         SingleShaderStage stage,
+    //                                         const PipelineLayout* layout,
+    //                                         ShaderModule::MetalFunctionData* out,
+    //                                         uint32_t sampleMask,
+    //                                         const RenderPipeline* renderPipeline) {
     MaybeError ShaderModule::CreateFunction(const char* entryPointName,
                                             SingleShaderStage stage,
                                             const PipelineLayout* layout,
                                             ShaderModule::MetalFunctionData* out,
+                                            // NSRef<id> constantValues,
+                                            // NSPRef<id> constantValuesPointer,
+                                            id constantValuesPointer,
                                             uint32_t sampleMask,
-                                            const RenderPipeline* renderPipeline) {
+                                            const RenderPipeline* renderPipeline
+                                            ) {
         ASSERT(!IsError());
         ASSERT(out);
 
@@ -231,7 +241,46 @@ namespace dawn_native { namespace metal {
 
         NSRef<NSString> name =
             AcquireNSRef([[NSString alloc] initWithUTF8String:remappedEntryPointName.c_str()]);
-        out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
+        // out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
+
+        
+        
+        if (constantValuesPointer != nil) {
+            if (@available(macOS 10.12, *)) {
+                MTLFunctionConstantValues* constantValues = constantValuesPointer;
+                // MTLFunctionConstantValues* constantValues = constantValuesPointer.Get();
+                // NSPRef<MTLFunctionConstantValues*> constantValues = AcquireNSPRef(constantValuesPointer.Get());
+                // NSPRef<id<MTLFunctionConstantValues>> constantValues = AcquireNSPRef(constantValuesPointer.Get());
+
+                // [*library newFunctionWithName:name.Get() constantValues:constantValues
+                //                                 completionHandler:^(id<MTLFunction> newFunction, NSError *error)
+                // {
+                //     //  NSAssert(newFunction, @"Failed to specialize function: %@", error);
+
+                //     //  self->_fragmentFunctions[qualityLevel] = newFunction;
+                //     //  dispatch_group_leave(specializationGroup);
+
+                //     out->function = AcquireNSPRef(newFunction);
+                // }];
+
+
+                out->function = AcquireNSPRef([*library newFunctionWithName:name.Get() constantValues:constantValues error:&error]);
+                // out->function = AcquireNSPRef([*library newFunctionWithName:name.Get() constantValues:constantValues.Get() error:&error]);
+                // out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
+
+                if (error != nullptr) {
+                    if (error.code != MTLLibraryErrorCompileWarning) {
+                        return DAWN_VALIDATION_ERROR(std::string("Function compile error: ") +
+                                                    [error.localizedDescription UTF8String]);
+                    }
+                }
+
+                ASSERT(out->function != nil);
+            }
+        } else {
+            out->function = AcquireNSPRef([*library newFunctionWithName:name.Get()]);
+        }
+        
 
         if (GetDevice()->IsToggleEnabled(Toggle::MetalEnableVertexPulling) &&
             GetEntryPoint(entryPointName).usedVertexInputs.any()) {
