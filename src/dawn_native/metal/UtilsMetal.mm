@@ -14,6 +14,8 @@
 
 #include "dawn_native/metal/UtilsMetal.h"
 #include "dawn_native/CommandBuffer.h"
+#include "dawn_native/Pipeline.h"
+#include "dawn_native/ShaderModule.h"
 
 #include "common/Assert.h"
 
@@ -184,6 +186,109 @@ namespace dawn_native { namespace metal {
             }
         }
         return MTLBlitOptionNone;
+    }
+
+    MaybeError CreateFunctionWithConstantValues(const ProgrammableStage& programmableStage,
+                                                SingleShaderStage singleShaderStage,
+                                                PipelineLayout* pipelineLayout,
+                                                ShaderModule::MetalFunctionData* functionData,
+                                                uint32_t sampleMask,
+                                                const RenderPipeline* renderPipeline) {
+        ShaderModule* shaderModule = ToBackend(programmableStage.module.Get());
+        const char* shaderEntryPoint = programmableStage.entryPoint.c_str();
+        const auto& entryPointMetadata = programmableStage.module->GetEntryPoint(shaderEntryPoint);
+        if (entryPointMetadata.overridableConstants.size() > 0) {
+            if (@available(macOS 10.12, *)) {
+                // MTLFunctionConstantValues can only be created within the if available branch
+                NSRef<MTLFunctionConstantValues> constantValues =
+                    AcquireNSRef([MTLFunctionConstantValues new]);
+                id constantValuesPointer = constantValues.Get();
+
+                std::unordered_set<std::string> overrided;
+
+                for (const auto& pipelineConstant : programmableStage.constants) {
+                    const std::string& name = pipelineConstant.first;
+                    double value = pipelineConstant.second;
+
+                    overrided.insert(name);
+
+                    // This is already validated so `name` must exist
+                    const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+
+                    MTLDataType type;
+                    OverridableConstantScalar entry{};
+                    switch (moduleConstant.type) {
+                        case EntryPointMetadata::OverridableConstant::Type::Boolean:
+                            type = MTLDataTypeBool;
+                            entry.b = static_cast<int32_t>(value);
+                            break;
+                        case EntryPointMetadata::OverridableConstant::Type::Float32:
+                            type = MTLDataTypeFloat;
+                            entry.f32 = static_cast<float>(value);
+                            break;
+                        case EntryPointMetadata::OverridableConstant::Type::Int32:
+                            type = MTLDataTypeInt;
+                            entry.i32 = static_cast<int32_t>(value);
+                            break;
+                        case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                            type = MTLDataTypeUInt;
+                            entry.u32 = static_cast<uint32_t>(value);
+                            break;
+                        default:
+                            UNREACHABLE();
+                    }
+
+                    [constantValues.Get() setConstantValue:&entry
+                                                      type:type
+                                                   atIndex:moduleConstant.id];
+                }
+
+                // Set shader initialized default values because MSL function_constant
+                // has no default value
+                for (const std::string& name : entryPointMetadata.initializedOverridableConstants) {
+                    if (overrided.count(name) > 0) {
+                        // This constant already has overrided value
+                        continue;
+                    }
+
+                    // Must exist because it is validated
+                    const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+                    ASSERT(moduleConstant.isInitialized);
+                    MTLDataType type;
+                    switch (moduleConstant.type) {
+                        case EntryPointMetadata::OverridableConstant::Type::Boolean:
+                            type = MTLDataTypeBool;
+                            break;
+                        case EntryPointMetadata::OverridableConstant::Type::Float32:
+                            type = MTLDataTypeFloat;
+                            break;
+                        case EntryPointMetadata::OverridableConstant::Type::Int32:
+                            type = MTLDataTypeInt;
+                            break;
+                        case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                            type = MTLDataTypeUInt;
+                            break;
+                        default:
+                            UNREACHABLE();
+                    }
+
+                    [constantValues.Get() setConstantValue:&moduleConstant.defaultValue
+                                                      type:type
+                                                   atIndex:moduleConstant.id];
+                }
+
+                DAWN_TRY(shaderModule->CreateFunction(
+                    shaderEntryPoint, singleShaderStage, pipelineLayout, functionData,
+                    constantValuesPointer, sampleMask, renderPipeline));
+            } else {
+                UNREACHABLE();
+            }
+        } else {
+            DAWN_TRY(shaderModule->CreateFunction(shaderEntryPoint, singleShaderStage,
+                                                  pipelineLayout, functionData, nil, sampleMask,
+                                                  renderPipeline));
+        }
+        return {};
     }
 
 }}  // namespace dawn_native::metal
