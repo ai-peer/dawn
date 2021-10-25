@@ -34,8 +34,75 @@ namespace dawn_native { namespace metal {
         ShaderModule* computeModule = ToBackend(computeStage.module.Get());
         const char* computeEntryPoint = computeStage.entryPoint.c_str();
         ShaderModule::MetalFunctionData computeData;
-        DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
-                                               ToBackend(GetLayout()), &computeData));
+
+
+
+        const auto& entryPointMetaData =
+            computeStage.module->GetEntryPoint(computeEntryPoint);
+
+        if (@available(macOS 10.12, *)) {
+            NSRef<MTLFunctionConstantValues> constantValues = AcquireNSRef([MTLFunctionConstantValues new]);
+            // computeData.mtlConstantValues = AcquireNSRef([MTLFunctionConstantValues new]);
+
+            for (const auto& pipelineConstant : computeStage.constants) {
+                const std::string& name = pipelineConstant.first;
+                // double value = pipelineConstant.second;
+                uint32_t value = pipelineConstant.second;
+
+                // This is already validated so `name` must exist
+                const auto& moduleConstant = entryPointMetaData.overridableConstants.at(name);
+
+                MTLDataType type;
+                switch (moduleConstant.type) {
+                    case EntryPointMetadata::OverridableConstant::Type::Boolean:
+                        type = MTLDataTypeBool;
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Float32:
+                        type = MTLDataTypeFloat;
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Int32:
+                        type = MTLDataTypeInt;
+                        break;
+                    case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                        type = MTLDataTypeUInt;
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+
+                printf("%d %u\n", moduleConstant.id, value);
+
+                // TODO: value cast
+
+                // temp uint
+                // [constantValues setConstantValue:value type:type atIndex:moduleConstant.id];
+                [constantValues.Get() setConstantValue:&value type:type atIndex:moduleConstant.id];
+                // [computeData.mtlConstantValues.Get() setConstantValue:&value type:type atIndex:moduleConstant.id];
+
+                // setConstantValue
+                // newFunctionWithName:constantValues:completionHandler:
+                // need to specialize each function?
+            }
+
+            // NSRef<id> constValuesPointer = AcquireNSRef(*constantValues.Get());
+            NSPRef<id> constValuesPointer = AcquireNSPRef(constantValues.Get());
+            DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
+                                               ToBackend(GetLayout()), &computeData, 
+                                               constValuesPointer
+                                               ));
+
+
+        }
+        else
+        {
+            // TODO: assert constant entries are empty
+            DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
+                                               ToBackend(GetLayout()), &computeData, nil));
+        }
+
+
+        // DAWN_TRY(computeModule->CreateFunction(computeEntryPoint, SingleShaderStage::Compute,
+        //                                        ToBackend(GetLayout()), &computeData));
 
         NSError* error = nullptr;
         mMtlComputePipelineState.Acquire([mtlDevice

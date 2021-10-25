@@ -38,13 +38,26 @@ namespace dawn_native { namespace metal {
             NSPRef<id<MTLFunction>> function;
             bool needsStorageBufferLength;
             std::vector<uint32_t> workgroupAllocations;
+
+            // NSRef<MTLFunctionConstantValues> mtlConstantValues = nullptr;
+            // NSPRef<id> mtlConstantValues = nullptr;
         };
+        // MaybeError CreateFunction(const char* entryPointName,
+        //                           SingleShaderStage stage,
+        //                           const PipelineLayout* layout,
+        //                           MetalFunctionData* out,
+        //                           uint32_t sampleMask = 0xFFFFFFFF,
+        //                           const RenderPipeline* renderPipeline = nullptr);
         MaybeError CreateFunction(const char* entryPointName,
                                   SingleShaderStage stage,
                                   const PipelineLayout* layout,
                                   MetalFunctionData* out,
+                                  // NSRef<id> constantValues = nil,
+                                  NSPRef<id> constantValues = nil,
+                                  // id constantValues = nil,
                                   uint32_t sampleMask = 0xFFFFFFFF,
-                                  const RenderPipeline* renderPipeline = nullptr);
+                                  const RenderPipeline* renderPipeline = nullptr
+                                  );
 
       private:
         ResultOrError<std::string> TranslateToMSL(const char* entryPointName,
