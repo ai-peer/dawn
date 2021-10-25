@@ -274,6 +274,14 @@ namespace dawn_native { namespace opengl {
         DAWN_TRY_ASSIGN(program, RunTransforms(&singleEntryPointTransform, GetTintProgram(),
                                                transformInputs, nullptr, nullptr));
 
+#if USE_TINT_GLSL_GENERATOR
+            tint::writer::glsl::Options tintOptions;
+            auto result = tint::writer::glsl::Generate(&program, tintOptions, entryPointName);
+            DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
+                            result.error);
+            std::string glsl = result.glsl;
+            return glsl;
+#else
         tint::writer::spirv::Options tintOptions;
         tintOptions.disable_workgroup_init =
             GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
@@ -395,6 +403,7 @@ namespace dawn_native { namespace opengl {
         }
 
         return glsl;
+#endif
     }
 
 }}  // namespace dawn_native::opengl
