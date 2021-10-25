@@ -35,6 +35,80 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e33b2c5_8c71a9a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "LGTM overall. We should eventually find a general framework to insert such commands \"in the past\" to try to maximize parallelism. Much later in the future though.",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7c744b8_c2fd154f",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "nit: Maybe have getters for GetLastCompute/RenderPipeline that assert their type.",
+      "range": {
+        "startLine": 263,
+        "startChar": 24,
+        "endLine": 263,
+        "endChar": 71
+      },
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4e2a3ab_5503446f",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "nit: maybe use an early out to dedent the rest of the code.",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "339e39e7_330f631b",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "Slight preference for using a uniform buffer here for the offsets in params and the limit. It is slightly more verbose but it remove magic and will avoid hardcoding a limit for when we have a renderer vs. device concept.",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fe216bc_b4adbb6d",
@@ -54,6 +128,97 @@
         "endLine": 66,
         "endChar": 104
       },
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90920c21_ca9a2fe6",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "Maybe we should duplicate some of WGPUHelpers.h in dawn_native (the MakeBindGroupLayout and MakeBindGroup helpers in particular, maybe MakePipelineLayout). WDYT?",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c5374b_6a896219",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "It seems this might be a good helper function and might even be merged with CreateIndirectDispatchValidationResources (there isn\u0027t much left after the addition of the uniform buffer and the MakeBindGroup). If the helper method modifies indirectBuffer and indirectOffset directly then we can reuse most of the code at [1]",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ad126d6_363f5b1d",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "What about indirect offsets? Should we store them in the CommandBufferStateTracker somewhere? (also a test please 😊)",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9e87df4_b8a25363",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "nit: previous",
+      "range": {
+        "startLine": 310,
+        "startChar": 63,
+        "endLine": 310,
+        "endChar": 70
+      },
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6be5855f_b49356cf",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-25T12:05:47Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "65854b599991ed8921466135e301977a23ff1502",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
