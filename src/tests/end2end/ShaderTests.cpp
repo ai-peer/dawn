@@ -520,7 +520,7 @@ TEST_P(ShaderTests, OverridableConstantsNumericIdentifiers) {
     constants.push_back({nullptr, "1001", 1});
     constants.push_back({nullptr, "1", 2});
     // c3 is not assigned, testing default value
-    // c4 is not assigned, testing unspecified default value
+    constants.push_back({nullptr, "1004", 0});
 
     wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main", &constants);
 
