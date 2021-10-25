@@ -53,11 +53,22 @@ namespace dawn_native {
 
         // Validate if overridable constants exist in shader module
         // pipelineBase is not yet constructed at this moment so iterate constants from descriptor
+        size_t numUninitializedConstants = metadata.uninitializedOverridableConstants.size();
         for (uint32_t i = 0; i < constantCount; i++) {
-            DAWN_INVALID_IF(metadata.overridableConstants.count(constants[i].key) == 0,
+            auto iter = metadata.overridableConstantsIdentifierToNumericID.find(constants[i].key);
+            DAWN_INVALID_IF(iter == metadata.overridableConstantsIdentifierToNumericID.end(),
                             "Pipeline overridable constant \"%s\" not found in shader module %s.",
                             constants[i].key, module);
+
+            if (metadata.uninitializedOverridableConstants.count(iter->second) > 0) {
+                numUninitializedConstants--;
+            }
         }
+
+        // Validate if any overridable constant is left uninitialized
+        DAWN_INVALID_IF(
+            numUninitializedConstants > 0,
+            "There are uninitialized pipeline overridable constants in shader module %s.", module);
 
         return {};
     }
