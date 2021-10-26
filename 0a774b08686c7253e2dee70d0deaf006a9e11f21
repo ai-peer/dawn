@@ -100,6 +100,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "64de994b_9cc0a4ea",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-26T17:40:47Z",
+      "side": 1,
+      "message": "The inspector has the two methods:\n\n  /// @returns map of const_id to initial value\n  std::map\u003cuint32_t, Scalar\u003e GetConstantIDs();\n\n  /// @returns map of module-constant name to pipeline constant ID\n  std::map\u003cstd::string, uint32_t\u003e GetConstantNameToIdMap();\n  \nCan\u0027t you take the set of map-keys from GetConstantIDs() and subtract out the map-values of GetConstantNameToIdMap() to get the list of numerical ids?",
+      "parentUuid": "455342bf_ef6db489",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 215,
+        "endChar": 94
+      },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7dba7862_10b288a9",
