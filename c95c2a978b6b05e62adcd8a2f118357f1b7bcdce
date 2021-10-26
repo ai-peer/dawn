@@ -105,6 +105,24 @@
       "parentUuid": "7e981383_27061a52",
       "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6c9b209_bae31746",
+        "filename": "src/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-26T19:26:11Z",
+      "side": 1,
+      "message": "Yes, M96 does not contain the deprecation of ignore(), and phony-assignment is not understood in that release.\nSplitting these changes in to makes perfect sense.",
+      "parentUuid": "54116a6e_962ee0c1",
+      "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
