@@ -16,6 +16,23 @@
       "message": "Rafael PTAL",
       "revId": "2123c41fa080606717a359415da6e3dea290bee3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6772668b_e666c2be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T09:12:21Z",
+      "side": 1,
+      "message": "Actually the diff between patchsets 1 and 7 is simple enough.",
+      "revId": "2123c41fa080606717a359415da6e3dea290bee3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
