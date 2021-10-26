@@ -33,6 +33,24 @@
       "message": "Patched in and re-ran. Still got an failure though: https://paste.googleplex.com/4781995688198144",
       "revId": "0321cff30a3ca808380d7c843e2ea01dd9779df5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff397981_eae4d337",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-26T21:16:43Z",
+      "side": 1,
+      "message": "ah, because the padding is odd-sized, the aligned size ends up exceeding the buffer size. Aligned up the buffer size so there should be enough space now?",
+      "parentUuid": "2ddc263a_7596007a",
+      "revId": "0321cff30a3ca808380d7c843e2ea01dd9779df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
