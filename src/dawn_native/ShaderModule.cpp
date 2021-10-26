@@ -639,12 +639,16 @@ namespace dawn_native {
 
                     for (auto& c : entryPoint.overridable_constants) {
                         EntryPointMetadata::OverridableConstant constant = {
-                            name2Id.at(c.name), FromTintOverridableConstantType(c.type)};
-                        metadata->overridableConstants[c.name] = constant;
-                        // TODO(tint:1155) tint needs ways to differentiate whether a pipeline
-                        // constant id is specified explicitly. Now we just store numeric id and
-                        // variable name in the index at the same time
-                        metadata->overridableConstants[std::to_string(constant.id)] = constant;
+                            name2Id.at(c.name), FromTintOverridableConstantType(c.type),
+                            c.is_initialized};
+
+                        std::string identifier =
+                            c.is_numeric_id_specified ? std::to_string(constant.id) : c.name;
+                        metadata->overridableConstants[identifier] = constant;
+
+                        if (!c.is_initialized) {
+                            metadata->uninitializedOverridableConstants.insert(identifier);
+                        }
                     }
                 }
 
