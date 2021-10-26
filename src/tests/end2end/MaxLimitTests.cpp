@@ -112,20 +112,20 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                 maxBufferBindingSize =
                     std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024);
                 // With WARP or on 32-bit platforms, such large buffer allocations often fail.
-#ifndef DAWN_PLATFORM_32BIT
-                DAWN_TEST_UNSUPPORTED_IF(IsWindows());
+#ifdef DAWN_PLATFORM_32BIT
+                if (IsWindows()) {
+                    continue;
+                }
 #endif
                 if (IsWARP()) {
                     maxBufferBindingSize =
                         std::min(maxBufferBindingSize, uint64_t(512) * 1024 * 1024);
                 }
+                // The binding stores u32 values. Align to 4 bytes.
+                maxBufferBindingSize = maxBufferBindingSize - (maxBufferBindingSize % 4);
                 shader = R"(
                   [[block]] struct Buf {
-                      value0 : u32;
-                      // padding such that value0 and value1 are the first and last bytes of the memory.
-                      [[size()" +
-                         std::to_string(maxBufferBindingSize - 8) + R"()]] padding : u32;
-                      value1 : u32;
+                      values : array<u32>;
                   };
 
                   [[block]] struct Result {
@@ -138,13 +138,19 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
 
                   [[stage(compute), workgroup_size(1,1,1)]]
                   fn main() {
-                      result.value0 = buf.value0;
-                      result.value1 = buf.value1;
+                      result.value0 = buf.values[0];
+                      result.value1 = buf.values[arrayLength(&buf.values) - 1u];
                   }
               )";
                 break;
             case wgpu::BufferUsage::Uniform:
                 maxBufferBindingSize = GetSupportedLimits().limits.maxUniformBufferBindingSize;
+
+                // Clamp to not exceed the maximum i32 value for the WGSL [[size(x)]] annotation.
+                maxBufferBindingSize = std::min(maxBufferBindingSize,
+                                                uint64_t(std::numeric_limits<int32_t>::max()) + 8);
+                // The binding stores u32 values. Align to 4 bytes.
+                maxBufferBindingSize = maxBufferBindingSize - (maxBufferBindingSize % 4);
                 shader = R"(
                   [[block]] struct Buf {
                       value0 : u32;
@@ -197,7 +203,7 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
         queue.WriteBuffer(buffer, 0, &value0, sizeof(value0));
 
         uint32_t value1 = 234;
-        uint64_t value1Offset = Align(maxBufferBindingSize - sizeof(value1), 4);
+        uint64_t value1Offset = maxBufferBindingSize - sizeof(value1);
         queue.WriteBuffer(buffer, value1Offset, &value1, sizeof(value1));
 
         wgpu::ComputePipelineDescriptor csDesc;
