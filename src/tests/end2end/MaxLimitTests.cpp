@@ -113,9 +113,9 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                     std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024);
                 // With WARP or on 32-bit platforms, such large buffer allocations often fail.
 #ifndef DAWN_PLATFORM_32BIT
-                if (IsWARP())
+                DAWN_TEST_UNSUPPORTED_IF(IsWindows());
 #endif
-                {
+                if (IsWARP()) {
                     maxBufferBindingSize =
                         std::min(maxBufferBindingSize, uint64_t(512) * 1024 * 1024);
                 }
