@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c3e65b3_965a10f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-26T09:39:32Z",
+      "side": 1,
+      "message": "Confirmed this behaves as expected with CTS tests.",
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dba7862_10b288a9",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-26T09:39:32Z",
+      "side": 1,
+      "message": "ditto.",
+      "range": {
+        "startLine": 234,
+        "startChar": 42,
+        "endLine": 234,
+        "endChar": 49
+      },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed6018b_00d673ff",
+        "filename": "src/dawn_native/vulkan/UtilsVulkan.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-26T09:39:32Z",
+      "side": 1,
+      "message": "Note: I\u0027ve landed https://dawn-review.googlesource.com/c/dawn/+/67383 which fixes this by zeroing the whole union, and keeps this a bool.",
+      "range": {
+        "startLine": 117,
+        "startChar": 0,
+        "endLine": 118,
+        "endChar": 18
+      },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
