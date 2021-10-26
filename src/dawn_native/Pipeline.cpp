@@ -53,10 +53,37 @@ namespace dawn_native {
 
         // Validate if overridable constants exist in shader module
         // pipelineBase is not yet constructed at this moment so iterate constants from descriptor
+        size_t numUninitializedConstants = metadata.uninitializedOverridableConstants.size();
         for (uint32_t i = 0; i < constantCount; i++) {
             DAWN_INVALID_IF(metadata.overridableConstants.count(constants[i].key) == 0,
                             "Pipeline overridable constant \"%s\" not found in shader module %s.",
                             constants[i].key, module);
+
+            if (metadata.uninitializedOverridableConstants.count(constants[i].key) > 0) {
+                numUninitializedConstants--;
+            }
+        }
+
+        // Validate if any overridable constant is left uninitialized
+        if (DAWN_UNLIKELY(numUninitializedConstants > 0)) {
+            // cold code, iterate constant entries again to build better error message.
+            std::unordered_set<std::string> uninitializedConstants =
+                metadata.uninitializedOverridableConstants;
+            for (uint32_t i = 0; i < constantCount; i++) {
+                if (uninitializedConstants.count(constants[i].key) > 0) {
+                    uninitializedConstants.erase(constants[i].key);
+                }
+            }
+            std::string uninitializedConstantsArray;
+            for (std::string identifier : uninitializedConstants) {
+                uninitializedConstantsArray.append(identifier);
+                uninitializedConstantsArray.append("\n");
+            }
+
+            return DAWN_FORMAT_VALIDATION_ERROR(
+                "There are uninitialized pipeline overridable constants in shader module %s, their "
+                "identifiers:\n%s",
+                module, uninitializedConstantsArray.c_str());
         }
 
         return {};
