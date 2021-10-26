@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fbe2f82_6db97eb9",
+        "filename": "src/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-26T18:28:33Z",
+      "side": 1,
+      "message": "@rafael, I tried the \"ull\" suffix but got a compile failure in patchset 3",
+      "range": {
+        "startLine": 120,
+        "startChar": 55,
+        "endLine": 120,
+        "endChar": 63
+      },
+      "revId": "360a1c85a9967164d6a51d4b26afc92dbfd4b73c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
