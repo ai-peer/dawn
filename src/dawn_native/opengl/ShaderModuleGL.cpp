@@ -265,6 +265,41 @@ namespace dawn_native { namespace opengl {
                                                              CombinedSamplerInfo* combinedSamplers,
                                                              const PipelineLayout* layout,
                                                              bool* needsDummySampler) const {
+#if USE_TINT_GLSL_GENERATOR
+        tint::transform::Manager transformManager;
+        tint::transform::DataMap transformInputs;
+        tint::transform::DataMap transformOutputs;
+
+        transformManager.Add<tint::transform::Renamer>();
+
+        transformInputs.Add<tint::transform::Renamer::Config>(
+            tint::transform::Renamer::Target::kGlslKeywords);
+
+        tint::Program program;
+        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(),
+                                               transformInputs, &transformOutputs, nullptr));
+
+        std::string remappedEntryPointName;
+        if (auto* data = transformOutputs.Get<tint::transform::Renamer::Data>()) {
+            auto it = data->remappings.find(entryPointName);
+            if (it != data->remappings.end()) {
+                remappedEntryPointName = it->second;
+            } else {
+                DAWN_INVALID_IF(!GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming),
+                                "Could not find remapped name for entry point.");
+
+                remappedEntryPointName = entryPointName;
+            }
+        } else {
+            return DAWN_FORMAT_VALIDATION_ERROR("Transform output missing renamer data.");
+        }
+        tint::writer::glsl::Options tintOptions;
+        auto result = tint::writer::glsl::Generate(&program, tintOptions, remappedEntryPointName);
+        DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
+                        result.error);
+        std::string glsl = result.glsl;
+        return glsl;
+#else
         tint::transform::SingleEntryPoint singleEntryPointTransform;
 
         tint::transform::DataMap transformInputs;
@@ -274,14 +309,6 @@ namespace dawn_native { namespace opengl {
         DAWN_TRY_ASSIGN(program, RunTransforms(&singleEntryPointTransform, GetTintProgram(),
                                                transformInputs, nullptr, nullptr));
 
-#if USE_TINT_GLSL_GENERATOR
-            tint::writer::glsl::Options tintOptions;
-            auto result = tint::writer::glsl::Generate(&program, tintOptions, entryPointName);
-            DAWN_INVALID_IF(!result.success, "An error occured while generating GLSL: %s.",
-                            result.error);
-            std::string glsl = result.glsl;
-            return glsl;
-#else
         tint::writer::spirv::Options tintOptions;
         tintOptions.disable_workgroup_init =
             GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
