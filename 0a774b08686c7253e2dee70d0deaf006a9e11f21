@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53244560_662869eb",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-26T23:45:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c6bbec5_a8d4b031",
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74e36521_fc322c0a",
@@ -162,6 +180,30 @@
       "side": 1,
       "message": "Hmm turns out GetConstantIDs and GetConstantNameToIdMap both gets data from program_-\u003eAST().GlobalVariables() and the size() of which are always identical.\n\nFor\n[[overridable]] let c1:u32;\n[[overridable(1234)]] let c2:u32;\ntheir number should be different if we want to subtract them.\n\nI think a flag to tell if a numeric ID is explicitly specified is still needed",
       "parentUuid": "ebdc6652_35a0af9a",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 215,
+        "endChar": 94
+      },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74fbfc34_845f9e95",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-26T23:45:20Z",
+      "side": 1,
+      "message": "Add a flag at https://dawn-review.googlesource.com/c/tint/+/67602\nThis CL now is based on this tint CL.",
+      "parentUuid": "ee3c76fd_bb0424a2",
       "range": {
         "startLine": 214,
         "startChar": 11,
