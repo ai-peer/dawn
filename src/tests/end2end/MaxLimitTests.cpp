@@ -117,11 +117,7 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                 }
                 shader = R"(
                   [[block]] struct Buf {
-                      value0 : u32;
-                      // padding such that value0 and value1 are the first and last bytes of the memory.
-                      [[size()" +
-                         std::to_string(maxBufferBindingSize - 8) + R"()]] padding : u32;
-                      value1 : u32;
+                      values : array<u32>;
                   };
 
                   [[block]] struct Result {
@@ -134,13 +130,18 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
 
                   [[stage(compute), workgroup_size(1,1,1)]]
                   fn main() {
-                      result.value0 = buf.value0;
-                      result.value1 = buf.value1;
+                      result.value0 = buf.values[0];
+                      result.value1 = buf.values[arrayLength(&buf.values) - 1u];
                   }
               )";
                 break;
             case wgpu::BufferUsage::Uniform:
                 maxBufferBindingSize = GetSupportedLimits().limits.maxUniformBufferBindingSize;
+
+                // Clamp to not exceed the maximum i32 value for the WGSL [[size(x)]] annotation.
+                maxBufferBindingSize = std::min(maxBufferBindingSize,
+                                                uint64_t(std::numeric_limits<int32_t>::max()) + 8);
+
                 shader = R"(
                   [[block]] struct Buf {
                       value0 : u32;
