@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c53bf57a_ca6750fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002757
+      },
+      "writtenOn": "2021-10-26T15:20:40Z",
+      "side": 1,
+      "message": "I agree this is probably what we want to do. I kind of wish it were more difficult for future changes to violate the lifetime dependency, but not a blocker.",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e903d8a2_7cd530bb",
