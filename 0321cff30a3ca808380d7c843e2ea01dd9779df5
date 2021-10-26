@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "0321cff30a3ca808380d7c843e2ea01dd9779df5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ddc263a_7596007a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-26T20:57:00Z",
+      "side": 1,
+      "message": "Patched in and re-ran. Still got an failure though: https://paste.googleplex.com/4781995688198144",
+      "revId": "0321cff30a3ca808380d7c843e2ea01dd9779df5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
