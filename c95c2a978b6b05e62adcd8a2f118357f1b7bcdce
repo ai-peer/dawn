@@ -16,6 +16,24 @@
       "message": "Is this TODO still current?",
       "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c263a730_e887e3c8",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-26T16:50:11Z",
+      "side": 0,
+      "message": "Removed. Rebased the CL so this test is also enabled.",
+      "parentUuid": "b9f78647_ba2050b6",
+      "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

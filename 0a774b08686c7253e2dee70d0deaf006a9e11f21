@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c6bbec5_a8d4b031",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-26T16:50:11Z",
+      "side": 1,
+      "message": "If using count, the cases where there are constants with initializer in shader and override in pipeline at the same time could fail.\n[[overridable]] let c1:u32 \u003d 1u;\n[[overridable]] let c2: u32;\nconstantEntry \u003d {\"c1\", 99}\ncount is 1 (c1) \u003d\u003d uninitializedCount which is 1 (c2), but c2 is uninitialized\n\nFor better error meesages part + 1 since it\u0027s cold code.",
+      "parentUuid": "1064a0f6_c9ea3545",
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "74e36521_fc322c0a",
         "filename": "src/dawn_native/ShaderModule.h",
         "patchSetId": 4
@@ -48,6 +66,30 @@
       "writtenOn": "2021-10-26T13:51:41Z",
       "side": 1,
       "message": "The spec says:\n\n\u003e Each such pipeline-overridable constant is uniquely identified by a single pipeline-overridable constant identifier string (representing the numeric ID of the constant, if one is specified, and otherwise the constant’s identifier name).\n\nSo if a numeric ID is specified, I think you can\u0027t refer to the variable through its name. This means that we can keep a\n\n  std::unordered_map\u003cstd::string, OverridableConstant\u003e overridableConstants;",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 215,
+        "endChar": 94
+      },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "455342bf_ef6db489",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-26T16:50:11Z",
+      "side": 1,
+      "message": "Tint still needs a new flag indicating if the numericID is explicitly Specified. So this is like a temp solution since I now pushed both variable name and numericID as identifiers. I should add a TODO(tint:1155) here to better explain.\nBen do you have recent plan to add this? Some flag like https://dawn-review.googlesource.com/c/tint/+/65641 is_initialized should do the work",
+      "parentUuid": "74e36521_fc322c0a",
       "range": {
         "startLine": 214,
         "startChar": 11,
@@ -117,6 +159,24 @@
       "writtenOn": "2021-10-26T13:51:41Z",
       "side": 1,
       "message": "This tests seems to be testing overriding default values, but we should also have validation tests that 1) you must override constants with no default value 2) only the numeric ID is valid if [[override(N)]] is used.",
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddccf515_c20d7c54",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-26T16:50:11Z",
+      "side": 1,
+      "message": "Rebased so it should be good now.",
+      "parentUuid": "6c861f54_5c45fbf7",
       "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
