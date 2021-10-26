@@ -469,12 +469,24 @@ namespace dawn_native {
         if (internalUsageDesc != nullptr) {
             mInternalUsage |= internalUsageDesc->internalUsage;
         }
+        TrackInDevice();
     }
 
     static Format kUnusedFormat;
 
+    TextureBase::TextureBase(DeviceBase* device, TextureState state)
+        : ApiObjectBase(device, kLabelNotImplemented), mFormat(kUnusedFormat), mState(state) {
+        TrackInDevice();
+    }
+
     TextureBase::TextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)
         : ApiObjectBase(device, tag), mFormat(kUnusedFormat) {
+    }
+
+    bool TextureBase::DestroyApiObject() {
+        bool wasDestroyed = ApiObjectBase::DestroyApiObject();
+        mState = TextureState::Destroyed;
+        return wasDestroyed;
     }
 
     // static
@@ -670,15 +682,7 @@ namespace dawn_native {
             return;
         }
         ASSERT(!IsError());
-        DestroyInternal();
-    }
-
-    void TextureBase::DestroyImpl() {
-    }
-
-    void TextureBase::DestroyInternal() {
-        DestroyImpl();
-        mState = TextureState::Destroyed;
+        DestroyApiObject();
     }
 
     MaybeError TextureBase::ValidateDestroy() const {
@@ -696,6 +700,14 @@ namespace dawn_native {
           mRange({ConvertViewAspect(mFormat, descriptor->aspect),
                   {descriptor->baseArrayLayer, descriptor->arrayLayerCount},
                   {descriptor->baseMipLevel, descriptor->mipLevelCount}}) {
+        TrackInDevice();
+    }
+
+    TextureViewBase::TextureViewBase(TextureBase* texture)
+        : ApiObjectBase(texture->GetDevice(), kLabelNotImplemented),
+          mTexture(texture),
+          mFormat(kUnusedFormat) {
+        TrackInDevice();
     }
 
     TextureViewBase::TextureViewBase(DeviceBase* device, ObjectBase::ErrorTag tag)

@@ -488,10 +488,9 @@ namespace dawn_native { namespace metal {
     }
 
     Texture::~Texture() {
-        DestroyInternal();
     }
 
-    void Texture::DestroyImpl() {
+    void Texture::DestroyApiObjectImpl() {
         mMtlTexture = nullptr;
     }
 
