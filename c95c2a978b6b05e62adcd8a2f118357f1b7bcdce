@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f78647_ba2050b6",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T13:51:41Z",
+      "side": 0,
+      "message": "Is this TODO still current?",
+      "revId": "c95c2a978b6b05e62adcd8a2f118357f1b7bcdce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

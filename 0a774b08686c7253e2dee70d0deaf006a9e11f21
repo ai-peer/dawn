@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1064a0f6_c9ea3545",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T13:51:41Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need to keep a set of uninitialized overridable constants. We could have a count of uninitialized ones, find the OverridableConstant entry and if it is uninitialized counter + 1. Then check that counter \u003d\u003d uninitializedCount.\n\nFor even better messages, since this is pretty cold code, we could build a unordered_set\u003cstd::string\u003e initializedConstants then for each metadata.constants that\u0027s uninitialized check if it is in the initializedConstants set (this way we can print the name of the missing constant in the error message).",
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74e36521_fc322c0a",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T13:51:41Z",
+      "side": 1,
+      "message": "The spec says:\n\n\u003e Each such pipeline-overridable constant is uniquely identified by a single pipeline-overridable constant identifier string (representing the numeric ID of the constant, if one is specified, and otherwise the constant’s identifier name).\n\nSo if a numeric ID is specified, I think you can\u0027t refer to the variable through its name. This means that we can keep a\n\n  std::unordered_map\u003cstd::string, OverridableConstant\u003e overridableConstants;",
+      "range": {
+        "startLine": 214,
+        "startChar": 11,
+        "endLine": 215,
+        "endChar": 94
+      },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "7dba7862_10b288a9",
@@ -60,6 +100,23 @@
         "endLine": 118,
         "endChar": 18
       },
+      "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c861f54_5c45fbf7",
+        "filename": "src/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-26T13:51:41Z",
+      "side": 1,
+      "message": "This tests seems to be testing overriding default values, but we should also have validation tests that 1) you must override constants with no default value 2) only the numeric ID is valid if [[override(N)]] is used.",
       "revId": "0a774b08686c7253e2dee70d0deaf006a9e11f21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
