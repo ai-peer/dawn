@@ -109,6 +109,11 @@ deps = {
     'condition': 'dawn_standalone',
   },
 
+  # Mesa for spirv_to_dxil
+  'third_party/spirv_to_dxil/mesa': {
+    'url': 'https://gitlab.freedesktop.org/mesa/mesa.git@7e26ea84da94a8157808f391c9849ae4a1c52cc8',
+  },
+
   # Dependencies for samples: GLM
   'third_party/glm': {
     'url': '{github_git}/g-truc/glm.git@bf71a834948186f4097caa076cd2663c69a10e1e',

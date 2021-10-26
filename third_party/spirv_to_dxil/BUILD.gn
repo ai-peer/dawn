@@ -1,0 +1,710 @@
+# Copyright 2021 The Dawn Authors
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# This file is auto-generated!
+
+config("spirv_to_dxil_header_public") {
+  include_dirs = [ "mesa/src/microsoft/spirv_to_dxil" ]
+}
+
+config("mesa_internal_config") {
+  include_dirs = [ "mesa/src/microsoft/spirv_to_dxil" ]
+
+  defines = [
+    "DEBUG",
+    "EGL_NO_X11",
+    "ENABLE_ST_OMX_BELLAGIO=0",
+    "ENABLE_ST_OMX_TIZONIA=0",
+    "HAVE_QSORT_S",
+    "HAVE_STRTOF",
+    "HAVE_WINDOWS_PLATFORM",
+    "MESA_EXECMEM",
+    "MISSING_64BIT_ATOMICS",
+    "NOMINMAX",
+    "PACKAGE_BUGREPORT=\"https://gitlab.freedesktop.org/mesa/mesa/-/issues\"",
+    "PACKAGE_VERSION=\"22.0.0-devel\"",
+    "PIPE_SUBSYSTEM_WINDOWS_USER",
+    "USE_ELF_TLS",
+    "VC_EXTRALEAN",
+    "VK_USE_PLATFORM_WIN32_KHR",
+    "WINVER=0x0A00",
+    "_ALLOW_KEYWORD_MACROS",
+    "_CRT_SECURE_NO_DEPRECATE",
+    "_CRT_SECURE_NO_WARNINGS",
+    "_SCL_SECURE_NO_DEPRECATE",
+    "_SCL_SECURE_NO_WARNINGS",
+    "_USE_MATH_DEFINES",
+    "_WIN32_WINNT=0x0A00",
+    "_WINDOWS",
+    "__STDC_CONSTANT_MACROS",
+    "__STDC_FORMAT_MACROS",
+    "__STDC_LIMIT_MACROS",
+  ]
+
+  if (is_clang) {
+    cflags = [
+      "-Wno-constant-conversion",
+      "-Wno-enum-conversion",
+      "-Wno-extra-semi",
+      "-Wno-implicit-fallthrough",
+      "-Wno-incompatible-pointer-types",
+      "-Wno-microsoft-enum-forward-reference",
+      "-Wno-pointer-sign",
+      "-Wno-sign-compare",
+      "-Wno-string-conversion",
+      "-Wno-tautological-constant-out-of-range-compare",
+      "-Wno-unreachable-code",
+      "-Wno-unused-function",
+      "-Wno-unused-variable",
+    ]
+  }
+}
+
+action("dxil_nir_algebraic_c") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/microsoft/compiler/dxil_nir_algebraic.c"),
+    rebase_path("mesa/src/microsoft/compiler/dxil_nir_algebraic.py"),
+    "-p",
+    rebase_path("mesa/src/compiler/nir"),
+  ]
+  inputs = [
+    "mesa/src/microsoft/compiler/dxil_nir_algebraic.py",
+    "mesa/src/compiler/nir/nir_algebraic.py",
+  ]
+  outputs = [ "$target_gen_dir/src/microsoft/compiler/dxil_nir_algebraic.c" ]
+}
+
+action("format_srgb_c") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/util/format_srgb.c"),
+    rebase_path("mesa/src/util/format_srgb.py"),
+  ]
+  inputs = [ "mesa/src/util/format_srgb.py" ]
+  outputs = [ "$target_gen_dir/src/util/format_srgb.c" ]
+}
+
+action("git_sha1_h") {
+  script = "mesa/bin/git_sha1_gen.py"
+  args = [
+    "--output",
+    rebase_path("$target_gen_dir/src/git_sha1.h"),
+  ]
+  inputs = [ "mesa/bin/git_sha1_gen.py" ]
+  outputs = [ "$target_gen_dir/src/git_sha1.h" ]
+}
+
+action("ir_expression_operation_h") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/compiler/ir_expression_operation.h"),
+    rebase_path("mesa/src/compiler/glsl/ir_expression_operation.py"),
+    "enum",
+  ]
+  inputs = [ "mesa/src/compiler/glsl/ir_expression_operation.py" ]
+  outputs = [ "$target_gen_dir/src/compiler/ir_expression_operation.h" ]
+}
+
+source_set("libcompiler") {
+  configs += [ ":mesa_internal_config" ]
+  deps = [ ":ir_expression_operation_h" ]
+  sources = [
+    "mesa/src/compiler/glsl_types.cpp",
+    "mesa/src/compiler/nir_types.cpp",
+    "mesa/src/compiler/shader_enums.c",
+  ]
+  include_dirs = [
+    "$target_gen_dir/include",
+    "$target_gen_dir/src",
+    "$target_gen_dir/src/compiler",
+    "$target_gen_dir/src/mapi",
+    "$target_gen_dir/src/mesa",
+    "mesa/include",
+    "mesa/src",
+    "mesa/src/compiler",
+    "mesa/src/gallium/auxiliary",
+    "mesa/src/gallium/include",
+    "mesa/src/mapi",
+    "mesa/src/mesa",
+  ]
+}
+
+source_set("libdxil_compiler") {
+  configs += [ ":mesa_internal_config" ]
+  deps = [
+    ":dxil_nir_algebraic_c",
+    ":git_sha1_h",
+    ":nir_builder_opcodes_h",
+    ":nir_intrinsics_h",
+    ":nir_intrinsics_indices_h",
+    ":nir_opcodes_h",
+  ]
+  sources = [
+    "$target_gen_dir/src/microsoft/compiler/dxil_nir_algebraic.c",
+    "mesa/src/microsoft/compiler/dxil_buffer.c",
+    "mesa/src/microsoft/compiler/dxil_container.c",
+    "mesa/src/microsoft/compiler/dxil_dump.c",
+    "mesa/src/microsoft/compiler/dxil_enums.c",
+    "mesa/src/microsoft/compiler/dxil_function.c",
+    "mesa/src/microsoft/compiler/dxil_module.c",
+    "mesa/src/microsoft/compiler/dxil_nir.c",
+    "mesa/src/microsoft/compiler/dxil_nir_lower_int_samplers.c",
+    "mesa/src/microsoft/compiler/dxil_signature.c",
+    "mesa/src/microsoft/compiler/nir_to_dxil.c",
+  ]
+  include_dirs = [
+    "$target_gen_dir/include",
+    "$target_gen_dir/src",
+    "$target_gen_dir/src/compiler",
+    "$target_gen_dir/src/compiler/nir",
+    "$target_gen_dir/src/mapi",
+    "$target_gen_dir/src/mesa",
+    "$target_gen_dir/src/microsoft/compiler",
+    "mesa/include",
+    "mesa/src",
+    "mesa/src/compiler",
+    "mesa/src/compiler/nir",
+    "mesa/src/gallium/include",
+    "mesa/src/mapi",
+    "mesa/src/mesa",
+    "mesa/src/microsoft/compiler",
+  ]
+}
+
+source_set("libmesa_format") {
+  configs += [ ":mesa_internal_config" ]
+  deps = [
+    ":u_format_pack_h",
+    ":u_format_table_c",
+  ]
+  sources = [
+    "$target_gen_dir/src/util/format/u_format_table.c",
+    "mesa/src/util/format/u_format.c",
+    "mesa/src/util/format/u_format_bptc.c",
+    "mesa/src/util/format/u_format_etc.c",
+    "mesa/src/util/format/u_format_fxt1.c",
+    "mesa/src/util/format/u_format_latc.c",
+    "mesa/src/util/format/u_format_other.c",
+    "mesa/src/util/format/u_format_rgtc.c",
+    "mesa/src/util/format/u_format_s3tc.c",
+    "mesa/src/util/format/u_format_tests.c",
+    "mesa/src/util/format/u_format_unpack_neon.c",
+    "mesa/src/util/format/u_format_yuv.c",
+    "mesa/src/util/format/u_format_zs.c",
+  ]
+  include_dirs = [
+    "$target_gen_dir/include",
+    "$target_gen_dir/src",
+    "$target_gen_dir/src/mapi",
+    "$target_gen_dir/src/mesa",
+    "$target_gen_dir/src/util/format",
+    "mesa/include",
+    "mesa/src",
+    "mesa/src/gallium/auxiliary",
+    "mesa/src/gallium/include",
+    "mesa/src/mapi",
+    "mesa/src/mesa",
+    "mesa/src/util/format",
+  ]
+}
+
+source_set("libmesa_util") {
+  configs += [ ":mesa_internal_config" ]
+  deps = [ ":format_srgb_c" ]
+  sources = [
+    "$target_gen_dir/src/util/format_srgb.c",
+    "mesa/src/util/anon_file.c",
+    "mesa/src/util/bitscan.c",
+    "mesa/src/util/blob.c",
+    "mesa/src/util/build_id.c",
+    "mesa/src/util/compress.c",
+    "mesa/src/util/crc32.c",
+    "mesa/src/util/dag.c",
+    "mesa/src/util/debug.c",
+    "mesa/src/util/disk_cache.c",
+    "mesa/src/util/disk_cache_os.c",
+    "mesa/src/util/double.c",
+    "mesa/src/util/fast_idiv_by_const.c",
+    "mesa/src/util/fossilize_db.c",
+    "mesa/src/util/half_float.c",
+    "mesa/src/util/hash_table.c",
+    "mesa/src/util/log.c",
+    "mesa/src/util/memstream.c",
+    "mesa/src/util/mesa-sha1.c",
+    "mesa/src/util/os_file.c",
+    "mesa/src/util/os_memory_fd.c",
+    "mesa/src/util/os_misc.c",
+    "mesa/src/util/os_socket.c",
+    "mesa/src/util/os_time.c",
+    "mesa/src/util/perf/u_trace.c",
+    "mesa/src/util/ralloc.c",
+    "mesa/src/util/rand_xor.c",
+    "mesa/src/util/rb_tree.c",
+    "mesa/src/util/register_allocate.c",
+    "mesa/src/util/rgtc.c",
+    "mesa/src/util/set.c",
+    "mesa/src/util/sha1/sha1.c",
+    "mesa/src/util/slab.c",
+    "mesa/src/util/softfloat.c",
+    "mesa/src/util/sparse_array.c",
+    "mesa/src/util/string_buffer.c",
+    "mesa/src/util/strtod.c",
+    "mesa/src/util/u_atomic.c",
+    "mesa/src/util/u_cpu_detect.c",
+    "mesa/src/util/u_debug.c",
+    "mesa/src/util/u_debug_describe.c",
+    "mesa/src/util/u_debug_memory.c",
+    "mesa/src/util/u_debug_refcnt.c",
+    "mesa/src/util/u_debug_stack.c",
+    "mesa/src/util/u_debug_symbol.c",
+    "mesa/src/util/u_hash_table.c",
+    "mesa/src/util/u_idalloc.c",
+    "mesa/src/util/u_math.c",
+    "mesa/src/util/u_mm.c",
+    "mesa/src/util/u_printf.cpp",
+    "mesa/src/util/u_process.c",
+    "mesa/src/util/u_qsort.cpp",
+    "mesa/src/util/u_queue.c",
+    "mesa/src/util/u_vector.c",
+    "mesa/src/util/vma.c",
+  ]
+  include_dirs = [
+    "$target_gen_dir/include",
+    "$target_gen_dir/src",
+    "$target_gen_dir/src/mapi",
+    "$target_gen_dir/src/mesa",
+    "$target_gen_dir/src/util",
+    "mesa/include",
+    "mesa/src",
+    "mesa/src/gallium/auxiliary",
+    "mesa/src/gallium/include",
+    "mesa/src/mapi",
+    "mesa/src/mesa",
+    "mesa/src/util",
+  ]
+}
+
+source_set("libnir") {
+  configs += [ ":mesa_internal_config" ]
+  deps = [
+    ":nir_builder_opcodes_h",
+    ":nir_constant_expressions_c",
+    ":nir_intrinsics_c",
+    ":nir_intrinsics_h",
+    ":nir_intrinsics_indices_h",
+    ":nir_opcodes_c",
+    ":nir_opcodes_h",
+    ":nir_opt_algebraic_c",
+    ":spirv_info_c",
+    ":vtn_gather_types_c",
+    ":vtn_generator_ids_h",
+  ]
+  sources = [
+    "$target_gen_dir/src/compiler/nir/nir_constant_expressions.c",
+    "$target_gen_dir/src/compiler/nir/nir_intrinsics.c",
+    "$target_gen_dir/src/compiler/nir/nir_opcodes.c",
+    "$target_gen_dir/src/compiler/nir/nir_opt_algebraic.c",
+    "$target_gen_dir/src/compiler/spirv/spirv_info.c",
+    "$target_gen_dir/src/compiler/spirv/vtn_gather_types.c",
+    "mesa/src/compiler/nir/../spirv/gl_spirv.c",
+    "mesa/src/compiler/nir/../spirv/nir_load_libclc.c",
+    "mesa/src/compiler/nir/../spirv/nir_lower_libclc.c",
+    "mesa/src/compiler/nir/../spirv/spirv_to_nir.c",
+    "mesa/src/compiler/nir/../spirv/vtn_alu.c",
+    "mesa/src/compiler/nir/../spirv/vtn_amd.c",
+    "mesa/src/compiler/nir/../spirv/vtn_cfg.c",
+    "mesa/src/compiler/nir/../spirv/vtn_glsl450.c",
+    "mesa/src/compiler/nir/../spirv/vtn_opencl.c",
+    "mesa/src/compiler/nir/../spirv/vtn_subgroup.c",
+    "mesa/src/compiler/nir/../spirv/vtn_variables.c",
+    "mesa/src/compiler/nir/nir.c",
+    "mesa/src/compiler/nir/nir_builtin_builder.c",
+    "mesa/src/compiler/nir/nir_clone.c",
+    "mesa/src/compiler/nir/nir_control_flow.c",
+    "mesa/src/compiler/nir/nir_convert_ycbcr.c",
+    "mesa/src/compiler/nir/nir_deref.c",
+    "mesa/src/compiler/nir/nir_divergence_analysis.c",
+    "mesa/src/compiler/nir/nir_dominance.c",
+    "mesa/src/compiler/nir/nir_from_ssa.c",
+    "mesa/src/compiler/nir/nir_gather_info.c",
+    "mesa/src/compiler/nir/nir_gather_ssa_types.c",
+    "mesa/src/compiler/nir/nir_gather_xfb_info.c",
+    "mesa/src/compiler/nir/nir_gs_count_vertices.c",
+    "mesa/src/compiler/nir/nir_inline_functions.c",
+    "mesa/src/compiler/nir/nir_inline_uniforms.c",
+    "mesa/src/compiler/nir/nir_instr_set.c",
+    "mesa/src/compiler/nir/nir_linking_helpers.c",
+    "mesa/src/compiler/nir/nir_liveness.c",
+    "mesa/src/compiler/nir/nir_loop_analyze.c",
+    "mesa/src/compiler/nir/nir_lower_alpha_test.c",
+    "mesa/src/compiler/nir/nir_lower_alu.c",
+    "mesa/src/compiler/nir/nir_lower_alu_to_scalar.c",
+    "mesa/src/compiler/nir/nir_lower_amul.c",
+    "mesa/src/compiler/nir/nir_lower_array_deref_of_vec.c",
+    "mesa/src/compiler/nir/nir_lower_atomics_to_ssbo.c",
+    "mesa/src/compiler/nir/nir_lower_bit_size.c",
+    "mesa/src/compiler/nir/nir_lower_bitmap.c",
+    "mesa/src/compiler/nir/nir_lower_blend.c",
+    "mesa/src/compiler/nir/nir_lower_bool_to_bitsize.c",
+    "mesa/src/compiler/nir/nir_lower_bool_to_float.c",
+    "mesa/src/compiler/nir/nir_lower_bool_to_int32.c",
+    "mesa/src/compiler/nir/nir_lower_clamp_color_outputs.c",
+    "mesa/src/compiler/nir/nir_lower_clip.c",
+    "mesa/src/compiler/nir/nir_lower_clip_cull_distance_arrays.c",
+    "mesa/src/compiler/nir/nir_lower_clip_disable.c",
+    "mesa/src/compiler/nir/nir_lower_clip_halfz.c",
+    "mesa/src/compiler/nir/nir_lower_convert_alu_types.c",
+    "mesa/src/compiler/nir/nir_lower_discard_or_demote.c",
+    "mesa/src/compiler/nir/nir_lower_double_ops.c",
+    "mesa/src/compiler/nir/nir_lower_drawpixels.c",
+    "mesa/src/compiler/nir/nir_lower_fb_read.c",
+    "mesa/src/compiler/nir/nir_lower_flatshade.c",
+    "mesa/src/compiler/nir/nir_lower_flrp.c",
+    "mesa/src/compiler/nir/nir_lower_fp16_conv.c",
+    "mesa/src/compiler/nir/nir_lower_fragcolor.c",
+    "mesa/src/compiler/nir/nir_lower_fragcoord_wtrans.c",
+    "mesa/src/compiler/nir/nir_lower_frexp.c",
+    "mesa/src/compiler/nir/nir_lower_global_vars_to_local.c",
+    "mesa/src/compiler/nir/nir_lower_goto_ifs.c",
+    "mesa/src/compiler/nir/nir_lower_gs_intrinsics.c",
+    "mesa/src/compiler/nir/nir_lower_idiv.c",
+    "mesa/src/compiler/nir/nir_lower_image.c",
+    "mesa/src/compiler/nir/nir_lower_indirect_derefs.c",
+    "mesa/src/compiler/nir/nir_lower_input_attachments.c",
+    "mesa/src/compiler/nir/nir_lower_int64.c",
+    "mesa/src/compiler/nir/nir_lower_int_to_float.c",
+    "mesa/src/compiler/nir/nir_lower_interpolation.c",
+    "mesa/src/compiler/nir/nir_lower_io.c",
+    "mesa/src/compiler/nir/nir_lower_io_arrays_to_elements.c",
+    "mesa/src/compiler/nir/nir_lower_io_to_scalar.c",
+    "mesa/src/compiler/nir/nir_lower_io_to_temporaries.c",
+    "mesa/src/compiler/nir/nir_lower_io_to_vector.c",
+    "mesa/src/compiler/nir/nir_lower_is_helper_invocation.c",
+    "mesa/src/compiler/nir/nir_lower_load_const_to_scalar.c",
+    "mesa/src/compiler/nir/nir_lower_locals_to_regs.c",
+    "mesa/src/compiler/nir/nir_lower_mediump.c",
+    "mesa/src/compiler/nir/nir_lower_memcpy.c",
+    "mesa/src/compiler/nir/nir_lower_memory_model.c",
+    "mesa/src/compiler/nir/nir_lower_multiview.c",
+    "mesa/src/compiler/nir/nir_lower_non_uniform_access.c",
+    "mesa/src/compiler/nir/nir_lower_packing.c",
+    "mesa/src/compiler/nir/nir_lower_passthrough_edgeflags.c",
+    "mesa/src/compiler/nir/nir_lower_patch_vertices.c",
+    "mesa/src/compiler/nir/nir_lower_phis_to_scalar.c",
+    "mesa/src/compiler/nir/nir_lower_pntc_ytransform.c",
+    "mesa/src/compiler/nir/nir_lower_point_size.c",
+    "mesa/src/compiler/nir/nir_lower_point_size_mov.c",
+    "mesa/src/compiler/nir/nir_lower_printf.c",
+    "mesa/src/compiler/nir/nir_lower_readonly_images_to_tex.c",
+    "mesa/src/compiler/nir/nir_lower_regs_to_ssa.c",
+    "mesa/src/compiler/nir/nir_lower_returns.c",
+    "mesa/src/compiler/nir/nir_lower_samplers.c",
+    "mesa/src/compiler/nir/nir_lower_scratch.c",
+    "mesa/src/compiler/nir/nir_lower_shader_calls.c",
+    "mesa/src/compiler/nir/nir_lower_ssbo.c",
+    "mesa/src/compiler/nir/nir_lower_subgroups.c",
+    "mesa/src/compiler/nir/nir_lower_system_values.c",
+    "mesa/src/compiler/nir/nir_lower_sysvals_to_varyings.c",
+    "mesa/src/compiler/nir/nir_lower_tex.c",
+    "mesa/src/compiler/nir/nir_lower_texcoord_replace.c",
+    "mesa/src/compiler/nir/nir_lower_to_source_mods.c",
+    "mesa/src/compiler/nir/nir_lower_two_sided_color.c",
+    "mesa/src/compiler/nir/nir_lower_ubo_vec4.c",
+    "mesa/src/compiler/nir/nir_lower_undef_to_zero.c",
+    "mesa/src/compiler/nir/nir_lower_uniforms_to_ubo.c",
+    "mesa/src/compiler/nir/nir_lower_var_copies.c",
+    "mesa/src/compiler/nir/nir_lower_variable_initializers.c",
+    "mesa/src/compiler/nir/nir_lower_vars_to_ssa.c",
+    "mesa/src/compiler/nir/nir_lower_vec3_to_vec4.c",
+    "mesa/src/compiler/nir/nir_lower_vec_to_movs.c",
+    "mesa/src/compiler/nir/nir_lower_viewport_transform.c",
+    "mesa/src/compiler/nir/nir_lower_wpos_center.c",
+    "mesa/src/compiler/nir/nir_lower_wpos_ytransform.c",
+    "mesa/src/compiler/nir/nir_lower_wrmasks.c",
+    "mesa/src/compiler/nir/nir_metadata.c",
+    "mesa/src/compiler/nir/nir_move_vec_src_uses_to_dest.c",
+    "mesa/src/compiler/nir/nir_normalize_cubemap_coords.c",
+    "mesa/src/compiler/nir/nir_opt_access.c",
+    "mesa/src/compiler/nir/nir_opt_barriers.c",
+    "mesa/src/compiler/nir/nir_opt_combine_stores.c",
+    "mesa/src/compiler/nir/nir_opt_comparison_pre.c",
+    "mesa/src/compiler/nir/nir_opt_conditional_discard.c",
+    "mesa/src/compiler/nir/nir_opt_constant_folding.c",
+    "mesa/src/compiler/nir/nir_opt_copy_prop_vars.c",
+    "mesa/src/compiler/nir/nir_opt_copy_propagate.c",
+    "mesa/src/compiler/nir/nir_opt_cse.c",
+    "mesa/src/compiler/nir/nir_opt_dce.c",
+    "mesa/src/compiler/nir/nir_opt_dead_cf.c",
+    "mesa/src/compiler/nir/nir_opt_dead_write_vars.c",
+    "mesa/src/compiler/nir/nir_opt_find_array_copies.c",
+    "mesa/src/compiler/nir/nir_opt_fragdepth.c",
+    "mesa/src/compiler/nir/nir_opt_gcm.c",
+    "mesa/src/compiler/nir/nir_opt_idiv_const.c",
+    "mesa/src/compiler/nir/nir_opt_if.c",
+    "mesa/src/compiler/nir/nir_opt_intrinsics.c",
+    "mesa/src/compiler/nir/nir_opt_large_constants.c",
+    "mesa/src/compiler/nir/nir_opt_load_store_vectorize.c",
+    "mesa/src/compiler/nir/nir_opt_loop_unroll.c",
+    "mesa/src/compiler/nir/nir_opt_memcpy.c",
+    "mesa/src/compiler/nir/nir_opt_move.c",
+    "mesa/src/compiler/nir/nir_opt_move_discards_to_top.c",
+    "mesa/src/compiler/nir/nir_opt_offsets.c",
+    "mesa/src/compiler/nir/nir_opt_peephole_select.c",
+    "mesa/src/compiler/nir/nir_opt_phi_precision.c",
+    "mesa/src/compiler/nir/nir_opt_rematerialize_compares.c",
+    "mesa/src/compiler/nir/nir_opt_remove_phis.c",
+    "mesa/src/compiler/nir/nir_opt_shrink_vectors.c",
+    "mesa/src/compiler/nir/nir_opt_sink.c",
+    "mesa/src/compiler/nir/nir_opt_trivial_continues.c",
+    "mesa/src/compiler/nir/nir_opt_undef.c",
+    "mesa/src/compiler/nir/nir_opt_uniform_atomics.c",
+    "mesa/src/compiler/nir/nir_opt_vectorize.c",
+    "mesa/src/compiler/nir/nir_phi_builder.c",
+    "mesa/src/compiler/nir/nir_print.c",
+    "mesa/src/compiler/nir/nir_propagate_invariant.c",
+    "mesa/src/compiler/nir/nir_range_analysis.c",
+    "mesa/src/compiler/nir/nir_remove_dead_variables.c",
+    "mesa/src/compiler/nir/nir_repair_ssa.c",
+    "mesa/src/compiler/nir/nir_schedule.c",
+    "mesa/src/compiler/nir/nir_search.c",
+    "mesa/src/compiler/nir/nir_serialize.c",
+    "mesa/src/compiler/nir/nir_split_per_member_structs.c",
+    "mesa/src/compiler/nir/nir_split_var_copies.c",
+    "mesa/src/compiler/nir/nir_split_vars.c",
+    "mesa/src/compiler/nir/nir_sweep.c",
+    "mesa/src/compiler/nir/nir_to_lcssa.c",
+    "mesa/src/compiler/nir/nir_validate.c",
+    "mesa/src/compiler/nir/nir_worklist.c",
+  ]
+  include_dirs = [
+    "$target_gen_dir/include",
+    "$target_gen_dir/src",
+    "$target_gen_dir/src/compiler",
+    "$target_gen_dir/src/compiler/nir",
+    "$target_gen_dir/src/compiler/spirv",
+    "$target_gen_dir/src/mapi",
+    "$target_gen_dir/src/mesa",
+    "mesa/include",
+    "mesa/src",
+    "mesa/src/compiler",
+    "mesa/src/compiler/nir",
+    "mesa/src/compiler/spirv",
+    "mesa/src/gallium/auxiliary",
+    "mesa/src/gallium/include",
+    "mesa/src/mapi",
+    "mesa/src/mesa",
+  ]
+}
+
+action("nir_builder_opcodes_h") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/compiler/nir/nir_builder_opcodes.h"),
+    rebase_path("mesa/src/compiler/nir/nir_builder_opcodes_h.py"),
+  ]
+  inputs = [
+    "mesa/src/compiler/nir/nir_builder_opcodes_h.py",
+    "mesa/src/compiler/nir/nir_intrinsics.py",
+    "mesa/src/compiler/nir/nir_opcodes.py",
+  ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_builder_opcodes.h" ]
+}
+
+action("nir_constant_expressions_c") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/compiler/nir/nir_constant_expressions.c"),
+    rebase_path("mesa/src/compiler/nir/nir_constant_expressions.py"),
+  ]
+  inputs = [
+    "mesa/src/compiler/nir/nir_constant_expressions.py",
+    "mesa/src/compiler/nir/nir_intrinsics.py",
+    "mesa/src/compiler/nir/nir_opcodes.py",
+  ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_constant_expressions.c" ]
+}
+
+action("nir_intrinsics_c") {
+  script = "mesa/src/compiler/nir/nir_intrinsics_c.py"
+  args = [
+    "--outdir",
+    rebase_path("$target_gen_dir/src/compiler/nir"),
+  ]
+  inputs = [ "mesa/src/compiler/nir/nir_intrinsics.py" ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_intrinsics.c" ]
+}
+
+action("nir_intrinsics_h") {
+  script = "mesa/src/compiler/nir/nir_intrinsics_h.py"
+  args = [
+    "--outdir",
+    rebase_path("$target_gen_dir/src/compiler/nir"),
+  ]
+  inputs = [ "mesa/src/compiler/nir/nir_intrinsics.py" ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_intrinsics.h" ]
+}
+
+action("nir_intrinsics_indices_h") {
+  script = "mesa/src/compiler/nir/nir_intrinsics_indices_h.py"
+  args = [
+    "--outdir",
+    rebase_path("$target_gen_dir/src/compiler/nir"),
+  ]
+  inputs = [ "mesa/src/compiler/nir/nir_intrinsics.py" ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_intrinsics_indices.h" ]
+}
+
+action("nir_opcodes_c") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/compiler/nir/nir_opcodes.c"),
+    rebase_path("mesa/src/compiler/nir/nir_opcodes_c.py"),
+  ]
+  inputs = [
+    "mesa/src/compiler/nir/nir_opcodes_c.py",
+    "mesa/src/compiler/nir/nir_intrinsics.py",
+    "mesa/src/compiler/nir/nir_opcodes.py",
+  ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_opcodes.c" ]
+}
+
+action("nir_opcodes_h") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/compiler/nir/nir_opcodes.h"),
+    rebase_path("mesa/src/compiler/nir/nir_opcodes_h.py"),
+  ]
+  inputs = [
+    "mesa/src/compiler/nir/nir_opcodes_h.py",
+    "mesa/src/compiler/nir/nir_intrinsics.py",
+    "mesa/src/compiler/nir/nir_opcodes.py",
+  ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_opcodes.h" ]
+}
+
+action("nir_opt_algebraic_c") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/compiler/nir/nir_opt_algebraic.c"),
+    rebase_path("mesa/src/compiler/nir/nir_opt_algebraic.py"),
+  ]
+  inputs = [
+    "mesa/src/compiler/nir/nir_opt_algebraic.py",
+    "mesa/src/compiler/nir/nir_algebraic.py",
+  ]
+  outputs = [ "$target_gen_dir/src/compiler/nir/nir_opt_algebraic.c" ]
+}
+
+action("spirv_info_c") {
+  script = "mesa/src/compiler/spirv/spirv_info_c.py"
+  args = [
+    rebase_path("mesa/src/compiler/spirv/spirv.core.grammar.json"),
+    rebase_path("$target_gen_dir/src/compiler/spirv/spirv_info.c"),
+  ]
+  inputs = [ "mesa/src/compiler/spirv/spirv.core.grammar.json" ]
+  outputs = [ "$target_gen_dir/src/compiler/spirv/spirv_info.c" ]
+}
+
+shared_library("spirv_to_dxil") {
+  public_configs = [ ":spirv_to_dxil_header_public" ]
+  configs += [ ":mesa_internal_config" ]
+  deps = [
+    ":git_sha1_h",
+    ":libcompiler",
+    ":libdxil_compiler",
+    ":libmesa_format",
+    ":libmesa_util",
+    ":libnir",
+    ":nir_builder_opcodes_h",
+    ":nir_intrinsics_h",
+    ":nir_intrinsics_indices_h",
+    ":nir_opcodes_h",
+  ]
+  sources = [
+    "mesa/src/microsoft/spirv_to_dxil/spirv_to_dxil.c",
+    "mesa/src/microsoft/spirv_to_dxil/spirv_to_dxil.def",
+  ]
+  include_dirs = [
+    "$target_gen_dir/include",
+    "$target_gen_dir/src",
+    "$target_gen_dir/src/compiler",
+    "$target_gen_dir/src/compiler/nir",
+    "$target_gen_dir/src/microsoft/compiler",
+    "$target_gen_dir/src/microsoft/spirv_to_dxil",
+    "$target_gen_dir/src/microsoft/spirv_to_dxil/spirv_to_dxil.dll.p",
+    "$target_gen_dir/src/util",
+    "mesa/include",
+    "mesa/src",
+    "mesa/src/compiler",
+    "mesa/src/compiler/nir",
+    "mesa/src/gallium/include",
+    "mesa/src/microsoft/compiler",
+    "mesa/src/microsoft/spirv_to_dxil",
+    "mesa/src/util",
+  ]
+}
+
+action("u_format_pack_h") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/util/format/u_format_pack.h"),
+    rebase_path("mesa/src/util/format/u_format_table.py"),
+    rebase_path("mesa/src/util/format/u_format.csv"),
+    "--header",
+  ]
+  inputs = [
+    "mesa/src/util/format/u_format_table.py",
+    "mesa/src/util/format/u_format.csv",
+    "mesa/src/util/format/u_format_pack.py",
+    "mesa/src/util/format/u_format_parse.py",
+  ]
+  outputs = [ "$target_gen_dir/src/util/format/u_format_pack.h" ]
+}
+
+action("u_format_table_c") {
+  script = "capture.py"
+  args = [
+    rebase_path("$target_gen_dir/src/util/format/u_format_table.c"),
+    rebase_path("mesa/src/util/format/u_format_table.py"),
+    rebase_path("mesa/src/util/format/u_format.csv"),
+  ]
+  inputs = [
+    "mesa/src/util/format/u_format_table.py",
+    "mesa/src/util/format/u_format.csv",
+    "mesa/src/util/format/u_format_pack.py",
+    "mesa/src/util/format/u_format_parse.py",
+  ]
+  outputs = [ "$target_gen_dir/src/util/format/u_format_table.c" ]
+}
+
+action("vtn_gather_types_c") {
+  script = "mesa/src/compiler/spirv/vtn_gather_types_c.py"
+  args = [
+    rebase_path("mesa/src/compiler/spirv/spirv.core.grammar.json"),
+    rebase_path("$target_gen_dir/src/compiler/spirv/vtn_gather_types.c"),
+  ]
+  inputs = [ "mesa/src/compiler/spirv/spirv.core.grammar.json" ]
+  outputs = [ "$target_gen_dir/src/compiler/spirv/vtn_gather_types.c" ]
+}
+
+action("vtn_generator_ids_h") {
+  script = "mesa/src/compiler/spirv/vtn_generator_ids_h.py"
+  args = [
+    rebase_path("mesa/src/compiler/spirv/spir-v.xml"),
+    rebase_path("$target_gen_dir/src/compiler/spirv/vtn_generator_ids.h"),
+  ]
+  inputs = [ "mesa/src/compiler/spirv/spir-v.xml" ]
+  outputs = [ "$target_gen_dir/src/compiler/spirv/vtn_generator_ids.h" ]
+}
