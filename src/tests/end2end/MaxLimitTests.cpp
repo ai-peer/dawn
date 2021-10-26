@@ -109,11 +109,13 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                 maxBufferBindingSize = GetSupportedLimits().limits.maxStorageBufferBindingSize;
                 // TODO(crbug.com/dawn/1160): Usually can't actually allocate a buffer this large
                 // because allocating the buffer for zero-initialization fails.
-                maxBufferBindingSize =
-                    std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024);
+                maxBufferBindingSize = std::min(maxBufferBindingSize, 2ull * 1024 * 1024 * 1024);
+                // With WARP or on 32-bit platforms, such large buffer allocations often fail.
+#ifndef DAWN_PLATFORM_32BIT
+                DAWN_TEST_UNSUPPORTED_IF(IsWindows());
+#endif
                 if (IsWARP()) {
-                    maxBufferBindingSize =
-                        std::min(maxBufferBindingSize, uint64_t(1) * 1024 * 1024 * 1024);
+                    maxBufferBindingSize = std::min(maxBufferBindingSize, 512ull * 1024 * 1024);
                 }
                 shader = R"(
                   [[block]] struct Buf {
