@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e486c0ac_00dbaad0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-26T23:54:24Z",
+      "side": 1,
+      "message": "PTAL! This is take 2 after https://dawn-review.googlesource.com/c/dawn/+/67000 was reverted. The primary change this time is that pass encoders have been updated to no longer leave invalid pointers in the EncoderContext after they\u0027ve been deleted, which should avoid the use after free issue that we had previously.",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
