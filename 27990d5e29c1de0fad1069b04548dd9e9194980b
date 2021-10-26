@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49eee601_c8ae5f04",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-26T19:18:56Z",
+      "side": 1,
+      "message": "Resolving this for now.",
+      "parentUuid": "7c8a2c9b_431315e1",
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f7e25e9_fe33c5ab",
