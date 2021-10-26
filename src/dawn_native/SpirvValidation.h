@@ -20,8 +20,8 @@ namespace dawn_native {
 
     class DeviceBase;
 
-    MaybeError ValidateSpirv(DeviceBase* device,
-                             const std::vector<uint32_t>& spirv,
-                             bool dumpSpirv);
+    MaybeError ValidateSpirv(
+        const std::vector<uint32_t>& spirv,
+        const std::function<void(WGPULoggingType loggingType, const char* message)> EmitLog);
 
 }  // namespace dawn_native

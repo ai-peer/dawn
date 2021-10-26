@@ -506,7 +506,7 @@ source_set("dawn_native_sources") {
     ]
   }
 
-  if (dawn_enable_opengl || dawn_enable_vulkan) {
+  if (dawn_enable_opengl || dawn_enable_vulkan || dawn_enable_d3d12) {
     sources += [
       "SpirvValidation.cpp",
       "SpirvValidation.h",

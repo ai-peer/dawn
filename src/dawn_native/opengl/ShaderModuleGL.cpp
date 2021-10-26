@@ -282,8 +282,7 @@ namespace dawn_native { namespace opengl {
                         result.error);
 
         std::vector<uint32_t> spirv = std::move(result.spirv);
-        DAWN_TRY(
-            ValidateSpirv(GetDevice(), spirv, GetDevice()->IsToggleEnabled(Toggle::DumpShaders)));
+        DAWN_TRY(ValidateSpirv(spirv, GetDevice()->MaybeEmitLogFunction()));
 
         // If these options are changed, the values in DawnSPIRVCrossGLSLFastFuzzer.cpp need to
         // be updated.

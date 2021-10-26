@@ -31,6 +31,7 @@
 #include "dawn_native/DawnNative.h"
 #include "dawn_native/dawn_platform.h"
 
+#include <functional>
 #include <mutex>
 #include <utility>
 
@@ -355,6 +356,15 @@ namespace dawn_native {
 
         const std::string& GetLabel() const;
         void APISetLabel(const char* label);
+
+        std::function<void(WGPULoggingType, const char*)> MaybeEmitLogFunction() {
+            if (IsToggleEnabled(Toggle::DumpShaders)) {
+                return [this](WGPULoggingType loggingType, const char* message) {
+                    EmitLog(loggingType, message);
+                };
+            }
+            return {};
+        }
 
       protected:
         // Constructor used only for mocking and testing.

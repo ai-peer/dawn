@@ -161,8 +161,7 @@ namespace dawn_native { namespace vulkan {
                         result.error);
 
         std::vector<uint32_t> spirv = std::move(result.spirv);
-        DAWN_TRY(
-            ValidateSpirv(GetDevice(), spirv, GetDevice()->IsToggleEnabled(Toggle::DumpShaders)));
+        DAWN_TRY(ValidateSpirv(spirv, GetDevice()->MaybeEmitLogFunction()));
 
         VkShaderModuleCreateInfo createInfo;
         createInfo.sType = VK_STRUCTURE_TYPE_SHADER_MODULE_CREATE_INFO;

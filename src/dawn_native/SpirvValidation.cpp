@@ -21,38 +21,40 @@
 
 namespace dawn_native {
 
-    MaybeError ValidateSpirv(DeviceBase* device,
-                             const std::vector<uint32_t>& spirv,
-                             bool dumpSpirv) {
+    MaybeError ValidateSpirv(
+        const std::vector<uint32_t>& spirv,
+        const std::function<void(WGPULoggingType loggingType, const char* message)> EmitLog) {
         spvtools::SpirvTools spirvTools(SPV_ENV_VULKAN_1_1);
-        spirvTools.SetMessageConsumer([device](spv_message_level_t level, const char*,
-                                               const spv_position_t& position,
-                                               const char* message) {
-            WGPULoggingType wgpuLogLevel;
-            switch (level) {
-                case SPV_MSG_FATAL:
-                case SPV_MSG_INTERNAL_ERROR:
-                case SPV_MSG_ERROR:
-                    wgpuLogLevel = WGPULoggingType_Error;
-                    break;
-                case SPV_MSG_WARNING:
-                    wgpuLogLevel = WGPULoggingType_Warning;
-                    break;
-                case SPV_MSG_INFO:
-                    wgpuLogLevel = WGPULoggingType_Info;
-                    break;
-                default:
-                    wgpuLogLevel = WGPULoggingType_Error;
-                    break;
-            }
+        if (EmitLog) {
+            spirvTools.SetMessageConsumer([EmitLog](spv_message_level_t level, const char*,
+                                                    const spv_position_t& position,
+                                                    const char* message) {
+                WGPULoggingType wgpuLogLevel;
+                switch (level) {
+                    case SPV_MSG_FATAL:
+                    case SPV_MSG_INTERNAL_ERROR:
+                    case SPV_MSG_ERROR:
+                        wgpuLogLevel = WGPULoggingType_Error;
+                        break;
+                    case SPV_MSG_WARNING:
+                        wgpuLogLevel = WGPULoggingType_Warning;
+                        break;
+                    case SPV_MSG_INFO:
+                        wgpuLogLevel = WGPULoggingType_Info;
+                        break;
+                    default:
+                        wgpuLogLevel = WGPULoggingType_Error;
+                        break;
+                }
 
-            std::ostringstream ss;
-            ss << "SPIRV line " << position.index << ": " << message << std::endl;
-            device->EmitLog(wgpuLogLevel, ss.str().c_str());
-        });
+                std::ostringstream ss;
+                ss << "SPIRV line " << position.index << ": " << message << std::endl;
+                EmitLog(wgpuLogLevel, ss.str().c_str());
+            });
+        }
 
         const bool valid = spirvTools.Validate(spirv);
-        if (dumpSpirv || !valid) {
+        if (EmitLog || !valid) {
             std::ostringstream dumpedMsg;
             std::string disassembly;
             if (spirvTools.Disassemble(
@@ -62,7 +64,7 @@ namespace dawn_native {
             } else {
                 dumpedMsg << "/* Failed to disassemble generated SPIRV */";
             }
-            device->EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+            EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
         }
 
         DAWN_INVALID_IF(!valid,

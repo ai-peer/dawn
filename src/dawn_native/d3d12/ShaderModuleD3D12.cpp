@@ -17,6 +17,8 @@
 #include "common/Assert.h"
 #include "common/BitSetIterator.h"
 #include "common/Log.h"
+#include "dawn/webgpu.h"
+#include "dawn_native/SpirvValidation.h"
 #include "dawn_native/TintUtils.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
@@ -447,11 +449,10 @@ namespace dawn_native { namespace d3d12 {
             return std::move(transformedProgram);
         }
 
-        template <typename F>
-        ResultOrError<std::string> TranslateToHLSL(const ShaderCompilationRequest& request,
-                                                   std::string* remappedEntryPointName,
-                                                   bool dumpShaders,
-                                                   F&& DumpShadersEmitLog) {
+        ResultOrError<std::string> TranslateToHLSL(
+            const ShaderCompilationRequest& request,
+            std::string* remappedEntryPointName,
+            const std::function<void(WGPULoggingType, const char*)> EmitLog) {
             tint::Program transformedProgram;
             std::string remappedEntryPointNameTemp;
             DAWN_TRY_ASSIGN(transformedProgram,
@@ -471,10 +472,10 @@ namespace dawn_native { namespace d3d12 {
             // remappedEntryPointNameTemp.
             *remappedEntryPointName = std::move(remappedEntryPointNameTemp);
 
-            if (dumpShaders) {
+            if (EmitLog) {
                 std::ostringstream dumpedMsg;
                 dumpedMsg << "/* Dumped generated HLSL */" << std::endl << result.hlsl;
-                DumpShadersEmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+                EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
             }
 
             return std::move(result.hlsl);
@@ -483,7 +484,9 @@ namespace dawn_native { namespace d3d12 {
         ResultOrError<ComPtr<IDxcBlob>> TranslateToDxilThroughSPIRV(
             const PlatformFunctions* functions,
             IDxcValidator* dxcValidator,
-            const ShaderCompilationRequest& request) {
+            const ShaderCompilationRequest& request,
+            const std::function<void(WGPULoggingType, const char*)> EmitLog,
+            /* can be null */ IDxcCompiler* dxcCompiler) {
             ASSERT(functions->IsSPIRVToDXILAvailable());
 
             std::string remappedEntryPointName;
@@ -501,7 +504,7 @@ namespace dawn_native { namespace d3d12 {
                 return DAWN_VALIDATION_ERROR(errorStream.str().c_str());
             }
 
-            // TODO(tangm): Call ValidateSpirv here to optionally dump the intermediate SPIR-V
+            DAWN_TRY(ValidateSpirv(result.spirv, EmitLog));
 
             dxil_spirv_shader_stage dxStage;
             switch (request.stage) {
@@ -516,8 +519,8 @@ namespace dawn_native { namespace d3d12 {
                     break;
             }
 
-            // A stack-allocated temporary wrapper of dxil_spirv_object that implements IDxcBlob
-            // so it can be validated.
+            // A stack-allocated temporary wrapper of dxil_spirv_object that
+            // implements IDxcBlob so it can be validated.
             class ScopedSpirvDxilObject : public IDxcBlob, NonMovable {
               public:
                 ScopedSpirvDxilObject(decltype(&spirv_to_dxil_free) spirvToDxilFree)
@@ -585,6 +588,24 @@ namespace dawn_native { namespace d3d12 {
                 return DAWN_VALIDATION_ERROR("spirv_to_dxil: Compilation failed");
             }
 
+            if (EmitLog) {
+                if (dxcCompiler) {
+                    ComPtr<IDxcBlobEncoding> disassemblyBlob;
+                    if (SUCCEEDED(dxcCompiler->Disassemble(&dxilObject, &disassemblyBlob))) {
+                        std::ostringstream dumpedMsg;
+                        dumpedMsg << "; Dumped generated DXIL disassembly" << std::endl
+                                  << std::string(
+                                         static_cast<char*>(disassemblyBlob->GetBufferPointer()),
+                                         disassemblyBlob->GetBufferSize());
+                        EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+                    } else {
+                        EmitLog(WGPULoggingType_Warning, "DXIL disassembly failed");
+                    }
+                } else {
+                    EmitLog(WGPULoggingType_Warning, "Need use_dxc to dump DXIL disassembly");
+                }
+            }
+
             ComPtr<IDxcOperationResult> validationResult;
             DAWN_TRY(CheckHRESULT(
                 dxcValidator->Validate(&dxilObject, DxcValidatorFlags_Default, &validationResult),
@@ -608,29 +629,27 @@ namespace dawn_native { namespace d3d12 {
             return std::move(dxilValidated);
         }
 
-        template <typename F>
         MaybeError CompileShader(const PlatformFunctions* functions,
                                  IDxcLibrary* dxcLibrary,
                                  IDxcCompiler* dxcCompiler,
                                  IDxcValidator* dxcValidator,
                                  ShaderCompilationRequest&& request,
-                                 bool dumpShaders,
-                                 F&& DumpShadersEmitLog,
+                                 const std::function<void(WGPULoggingType, const char*)> EmitLog,
                                  CompiledShader* compiledShader) {
             std::string hlslSource;
             std::string remappedEntryPoint;
             switch (request.compiler) {
                 case ShaderCompilationRequest::Compiler::FXC:
-                    DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(request, &remappedEntryPoint,
-                                                                dumpShaders, DumpShadersEmitLog));
+                    DAWN_TRY_ASSIGN(hlslSource,
+                                    TranslateToHLSL(request, &remappedEntryPoint, EmitLog));
                     request.entryPointName = remappedEntryPoint.c_str();
                     DAWN_TRY_ASSIGN(compiledShader->compiledDXBCShader,
                                     CompileShaderFXC(functions, request, hlslSource));
                     break;
 
                 case ShaderCompilationRequest::Compiler::DXC:
-                    DAWN_TRY_ASSIGN(hlslSource, TranslateToHLSL(request, &remappedEntryPoint,
-                                                                dumpShaders, DumpShadersEmitLog));
+                    DAWN_TRY_ASSIGN(hlslSource,
+                                    TranslateToHLSL(request, &remappedEntryPoint, EmitLog));
                     request.entryPointName = remappedEntryPoint.c_str();
                     DAWN_TRY_ASSIGN(compiledShader->compiledDXILShader,
                                     CompileShaderDXC(dxcLibrary, dxcCompiler, request, hlslSource));
@@ -638,11 +657,12 @@ namespace dawn_native { namespace d3d12 {
 
                 case ShaderCompilationRequest::Compiler::SpirvToDxil:
                     DAWN_TRY_ASSIGN(compiledShader->compiledDXILShader,
-                                    TranslateToDxilThroughSPIRV(functions, dxcValidator, request));
+                                    TranslateToDxilThroughSPIRV(functions, dxcValidator, request,
+                                                                EmitLog, dxcCompiler));
                     break;
             }
 
-            if (dumpShaders && request.compiler == ShaderCompilationRequest::Compiler::FXC) {
+            if (EmitLog && request.compiler == ShaderCompilationRequest::Compiler::FXC) {
                 std::ostringstream dumpedMsg;
                 dumpedMsg << "/* Dumped disassembled DXBC */" << std::endl;
 
@@ -655,7 +675,7 @@ namespace dawn_native { namespace d3d12 {
                 } else {
                     dumpedMsg << reinterpret_cast<const char*>(disassembly->GetBufferPointer());
                 }
-                DumpShadersEmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
+                EmitLog(WGPULoggingType_Info, dumpedMsg.str().c_str());
             }
 
             return {};
@@ -748,11 +768,7 @@ namespace dawn_native { namespace d3d12 {
                         device->IsToggleEnabled(Toggle::UseSpirvToDxil)
                             ? device->GetDxcValidator().Get()
                             : nullptr,
-                        std::move(request), device->IsToggleEnabled(Toggle::DumpShaders),
-                        [&](WGPULoggingType loggingType, const char* message) {
-                            GetDevice()->EmitLog(loggingType, message);
-                        },
-                        &compiledShader));
+                        std::move(request), GetDevice()->MaybeEmitLogFunction(), &compiledShader));
                     const D3D12_SHADER_BYTECODE shader = compiledShader.GetD3D12ShaderBytecode();
                     doCache(shader.pShaderBytecode, shader.BytecodeLength);
                     return {};
