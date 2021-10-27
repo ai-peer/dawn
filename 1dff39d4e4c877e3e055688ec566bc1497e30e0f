@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf057cb2_b837caa3",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T16:07:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40f024f8_73a76f7d",
         "filename": "src/dawn_native/EncodingContext.cpp",
         "patchSetId": 1
@@ -107,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "214995ae_5a888fef",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T16:07:37Z",
+      "side": 1,
+      "message": "This was the primary thing I struggled with. Keeping a Ref to the PassEncoder anywhere creates a reference loop: CommandEncoder owns the EncodingContext, and the Passes keep a Ref to the CommandEncoder, so if the EncodingContext keeps a ref to the Pass then you could drop both the unfinished Pass and the CommandEncoder and they\u0027d never be deleted.\n\nStill open to better recommendations than this, though!\n\nAlso, given how the EncodingContext handles errors (See [1]), it would store the error until the CommandEncoder calls Finish(), which prevents the garbage collect from being directly observed. \n\nI guess you could presumably set up a whole bunch of encoders with de-referenced passes and call finish on the CommandEncoders at a steady cadence and see which one starts complaining about the Pass being deleted. To avoid that concern I\u0027ve simply made it report the same error as not ending the pass.",
+      "parentUuid": "40f024f8_73a76f7d",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c28368e_c9d4441c",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 1
@@ -124,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f02df6d_c23c335c",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T16:07:37Z",
+      "side": 1,
+      "message": "Tried that first! It crashed a lot.",
+      "parentUuid": "7c28368e_c9d4441c",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af36b116_cb940daa",
         "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
         "patchSetId": 1
@@ -135,6 +188,24 @@
       "writtenOn": "2021-10-27T04:26:07Z",
       "side": 1,
       "message": "also test the case where you don\u0027t ever call Finish()\n{\n  wgpu::CommandEncoder encoder \u003d device.CreateCommandEncoder();\n  wgpu::RenderPassEncoder pass \u003d encoder.BeginRenderPass(\u0026dummyRenderPass);\n}\n\nwhich generates the error internally but never surfaces it anywhere - so the uncaptured error callback shouldn\u0027t be called",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3616931c_ff4be897",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T16:07:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af36b116_cb940daa",
       "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
