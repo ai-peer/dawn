@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d6d26ba_d71c1a22",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "We actually call TrackInDevice for all of the mock constructors.",
+      "parentUuid": "ab5b13f3_f0e34888",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1104176c_38ca3161",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-10-27T13:11:12Z",
       "side": 1,
       "message": "It\u0027s a bit weird that this doesn\u0027t call ApiObjectBase::DestroyApiObject. Can\u0027t it do:\n\n if (!ApiObjectBase::ApiDestroyObject()) {\n   return false;\n }\n \n // do the rest.",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99bb8b08_5c1d09ea",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "So the problem here is that we want to call DestroyApiObjectImpl() after we have unmapped the buffer. This is a problem if we use ApiObjectBase::ApiDestroyObject() directly since it will actually call DestroyApiObjectImpl() before returning a bool. (Notice that we then manually call DestroyApiObjectImpl() in this override).\n\nAs a result, I had to create the MarkDestroyed function for this special case.",
+      "parentUuid": "1104176c_38ca3161",
       "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66cf7945_a05fb340",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "The behavior only changed such that it is valid to destroy error buffers. Added a test for this (note that in CTS we actually already had this and it was failing according to dawn:1002), and a test to verify that Unmap on error buffer fails since this was defined in the spec but I didn\u0027t see a validation unit test for it.",
+      "parentUuid": "52436960_72b1404c",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca1127a_939c0c57",
@@ -82,6 +136,24 @@
       "writtenOn": "2021-10-27T13:11:12Z",
       "side": 1,
       "message": "With the comment in BufferBase::DestroyApiObject I think this can disappear.",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "886e4c89_17abc16e",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "See the comment above.",
+      "parentUuid": "aca1127a_939c0c57",
       "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe4b47e_ccc4ad4d",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6a4b77c_022809e4",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad1165c2_88adb6f1",
@@ -116,6 +206,24 @@
       "writtenOn": "2021-10-27T13:11:12Z",
       "side": 1,
       "message": "I don\u0027t remember exactly, but in the meeting we had about this didn\u0027t we end up with a solution where this is DestroyApiObject? and not Impl?",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31231204_1ffdba1d",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "So DestroyApiObject is generally overridden in the *Base classes. This is the actual backend implementation which is expected to override the Impl function instead since it does D3D12 specific stuff.",
+      "parentUuid": "ad1165c2_88adb6f1",
       "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c545c5c_dab66a65",
+        "filename": "src/dawn_native/metal/BufferMTL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "I actually think that all the others were final and not this one, hence me marking this one final.",
+      "parentUuid": "c495274a_4827310b",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "914266ad_0da17c2c",
@@ -150,6 +276,24 @@
       "writtenOn": "2021-10-27T13:11:12Z",
       "side": 1,
       "message": "u-u-nit: can be \u003d default, ditto in other places.",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2cb5b3e_6710de34",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "914266ad_0da17c2c",
       "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
