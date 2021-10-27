@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d321d85_4714d5d9",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:20:52Z",
+      "side": 1,
+      "message": "do Error buffers still generate errors when you call .unmap() or .destroy() on them? Looking at end2end/BufferTests.cpp, I guess we don\u0027t have tests for this, but I think these methods should produce validation errors if you make an invalid buffer (with mappedAtCreation\u003dtrue), and then call unmap() or destroy() on it.\n\nEdit: nevermind! spec says:\nNote: It is valid to unmap an invalid GPUBuffer that is mapped at creation because the Content timeline might not know it is an error GPUBuffer.\nand I see destroy() was discussed on crbug.com/dawn/1002",
+      "revId": "27990d5e29c1de0fad1069b04548dd9e9194980b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46862ff4_775cd600",

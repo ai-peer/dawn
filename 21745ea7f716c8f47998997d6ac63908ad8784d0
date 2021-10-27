@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1a78e88_1427dfa9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:20:52Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe234967_a9c5a3e9",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:20:52Z",
+      "side": 1,
+      "message": "is it possible to test DestroyApiObject while the buffer is mapped?",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
