@@ -265,6 +265,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ddbd025_4053fae4",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T23:57:48Z",
+      "side": 1,
+      "message": "Comment added",
+      "parentUuid": "6eecb6d7_37eb59b6",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af36b116_cb940daa",
