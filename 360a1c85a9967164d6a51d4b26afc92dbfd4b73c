@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "10a6f273_ac9374db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:36:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "360a1c85a9967164d6a51d4b26afc92dbfd4b73c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8fbe2f82_6db97eb9",
         "filename": "src/tests/end2end/MaxLimitTests.cpp",
         "patchSetId": 4
@@ -14,6 +31,30 @@
       "writtenOn": "2021-10-26T18:28:33Z",
       "side": 1,
       "message": "@rafael, I tried the \"ull\" suffix but got a compile failure in patchset 3",
+      "range": {
+        "startLine": 120,
+        "startChar": 55,
+        "endLine": 120,
+        "endChar": 63
+      },
+      "revId": "360a1c85a9967164d6a51d4b26afc92dbfd4b73c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d266505_0088f5da",
+        "filename": "src/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:36:46Z",
+      "side": 1,
+      "message": "ull is not guaranteed to be uint64_t in the C standard AFAIK",
+      "parentUuid": "8fbe2f82_6db97eb9",
       "range": {
         "startLine": 120,
         "startChar": 55,
