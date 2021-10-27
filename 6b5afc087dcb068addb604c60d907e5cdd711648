@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "6b5afc087dcb068addb604c60d907e5cdd711648",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4151753e_488b3ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T16:10:46Z",
+      "side": 1,
+      "message": "Nice! LGTM",
+      "revId": "6b5afc087dcb068addb604c60d907e5cdd711648",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe83385_32bf5e08",
+        "filename": "generator/templates/dawn_native/dawn_platform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T16:10:46Z",
+      "side": 1,
+      "message": "When are the C++ types necessary at the interface? Is it because of DawnNative.h that uses some wgpu:: objects instead of WGPU(the C API)?",
+      "revId": "6b5afc087dcb068addb604c60d907e5cdd711648",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6a19381_c8ac68ed",
+        "filename": "src/dawn_native/Forward.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T16:10:46Z",
+      "side": 1,
+      "message": "I think we have aliases like these in other places, can you remove them if you find any?",
+      "revId": "6b5afc087dcb068addb604c60d907e5cdd711648",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
