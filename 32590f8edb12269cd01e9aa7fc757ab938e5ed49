@@ -16,6 +16,24 @@
       "message": "hmm looking at this now, I think another case to test:\n\nwgpu::CommandEncoder encoder \u003d device.CreateCommandEncoder();\nwgpu::ComputePassEncoder pass \u003d encoder.BeginComputePass();\nASSERT_DEVICE_ERROR(encoder.Finish());\n\n// Deleting the pass now should not generate an uncaptured error (would make GC observable)\npass \u003d nullptr;",
       "revId": "32590f8edb12269cd01e9aa7fc757ab938e5ed49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7696ea24_2511bea8",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T20:44:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e1b64905_250be4bb",
+      "revId": "32590f8edb12269cd01e9aa7fc757ab938e5ed49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
