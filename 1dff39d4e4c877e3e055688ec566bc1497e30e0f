@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1e120207_92a007e1",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T15:43:17Z",
+      "side": 1,
+      "message": "it shouldn\u0027t get the error until Finish(), so not observable (which we should add a test though)\n\nAlthough I guess the error message might be different which could potentially be observed. We can make the message the same?",
+      "parentUuid": "40f024f8_73a76f7d",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7c28368e_c9d4441c",
         "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
         "patchSetId": 1
