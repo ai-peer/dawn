@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef0ada8c_b911051a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-27T22:36:47Z",
+      "side": 1,
+      "message": "Besides addressing comments, add a test case for duplicate initialization and modify ValidateProgrammableStage a bit to handle that.",
+      "revId": "329917aed7226b65378d33289a98a9c3b0a9293f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
