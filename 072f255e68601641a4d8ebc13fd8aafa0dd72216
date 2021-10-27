@@ -115,6 +115,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f1fad10_3503e8a6",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-10-27T08:56:27Z",
+      "side": 1,
+      "message": "übernit: use emplace(std::move(identifier))",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05c2c193_8e886cba",
