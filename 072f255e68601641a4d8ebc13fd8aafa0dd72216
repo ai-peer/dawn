@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "875bc5f4_658f41bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:39:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67215ce_48845661",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:39:38Z",
+      "side": 1,
+      "message": "nit: might be wrong, but I think with absl, we don\u0027t need the .c_str()",
+      "range": {
+        "startLine": 86,
+        "startChar": 51,
+        "endLine": 86,
+        "endChar": 59
+      },
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d60390a_484941a7",
+        "filename": "src/dawn_native/ShaderModule.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:39:38Z",
+      "side": 1,
+      "message": "nit: assert the insertion took place?\n\nI think: auto it \u003d foo.insert(bar);\nASSERT(it-\u003esecond);",
+      "range": {
+        "startLine": 650,
+        "startChar": 0,
+        "endLine": 650,
+        "endChar": 91
+      },
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05c2c193_8e886cba",
+        "filename": "src/tests/unittests/validation/OverridableConstantsValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T04:39:38Z",
+      "side": 1,
+      "message": "nit: also test if just one of them is missing",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
