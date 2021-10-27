@@ -121,6 +121,24 @@
       "parentUuid": "b09d81b0_dd71d9e8",
       "revId": "6b5afc087dcb068addb604c60d907e5cdd711648",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "483fd816_15346c79",
+        "filename": "src/dawn_native/Forward.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-27T16:46:07Z",
+      "side": 1,
+      "message": "Done. Turns out we don\u0027t need the template to see the aliases anymore because Loko generalized the formatting to work for ApiObjectBase*",
+      "parentUuid": "20e6cf06_4d7d52b5",
+      "revId": "6b5afc087dcb068addb604c60d907e5cdd711648",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
