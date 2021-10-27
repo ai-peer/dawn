@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c214107_dd5be950",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 446,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 0,
+      "message": "This assert was removed because we can be an error buffer here?",
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

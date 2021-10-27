@@ -20,6 +20,142 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ab5b13f3_f0e34888",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "IIRC in other constructors used for mocks only, we don\u0027t call TrackInDevice(). Why do we do it for Buffer?",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1104176c_38ca3161",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that this doesn\u0027t call ApiObjectBase::DestroyApiObject. Can\u0027t it do:\n\n if (!ApiObjectBase::ApiDestroyObject()) {\n   return false;\n }\n \n // do the rest.",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52436960_72b1404c",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "Can we have validation tests for the change in behavior for Unmap and Destroy?",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca1127a_939c0c57",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "With the comment in BufferBase::DestroyApiObject I think this can disappear.",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6a4b77c_022809e4",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "I think we should lose the reference to the query heap that\u0027s in this object too (so set it to nullptr)",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad1165c2_88adb6f1",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "I don\u0027t remember exactly, but in the meeting we had about this didn\u0027t we end up with a solution where this is DestroyApiObject? and not Impl?",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c495274a_4827310b",
+        "filename": "src/dawn_native/metal/BufferMTL.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "Any reason why this one is marked final and not the others?",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "914266ad_0da17c2c",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 23
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T13:11:12Z",
+      "side": 1,
+      "message": "u-u-nit: can be \u003d default, ditto in other places.",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe234967_a9c5a3e9",
         "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
         "patchSetId": 23
