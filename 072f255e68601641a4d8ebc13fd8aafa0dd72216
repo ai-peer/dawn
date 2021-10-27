@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0518ab2_351d6445",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:43:47Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77fedf88_9687b386",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:43:47Z",
+      "side": 1,
+      "message": "This isn\u0027t exactly what this code does: it doesn\u0027t do the validation (that\u0027s numUninintializedConstants), it produces a nice error message.",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dd01838_b5c837d9",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:43:47Z",
+      "side": 1,
+      "message": "nit: maybe use ostringstream? Here it is O(n^2) because of the string reallocations. Also slight preference to separate then with commas because newlines will break the formatting of the error message I think.",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d67215ce_48845661",
