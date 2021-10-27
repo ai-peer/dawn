@@ -16,6 +16,92 @@
       "message": "still LGTM",
       "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05cda23a_7609d5c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T11:46:31Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6189eb4c_0da264a8",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T11:46:31Z",
+      "side": 1,
+      "message": "nit: we can put it on a single if like for other objects.",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 38
+      },
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0948b7c0_e8fa2c9c",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T11:46:31Z",
+      "side": 1,
+      "message": "nit: we should be able to only check one of them since just above we check they are equal",
+      "range": {
+        "startLine": 941,
+        "startChar": 48,
+        "endLine": 941,
+        "endChar": 88
+      },
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be4c4fe_95f8bb1f",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T11:46:31Z",
+      "side": 1,
+      "message": "DAWN_ASSERT_AND_ASSIGN?",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 40
+      },
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
