@@ -278,6 +278,35 @@ namespace dawn::native::opengl {
         transformInputs.Add<tint::transform::Renamer::Config>(
             tint::transform::Renamer::Target::kGlslKeywords);
 
+        using tint::transform::BindingRemapper;
+        BindingRemapper::BindingPoints bindingPoints;
+        BindingRemapper::AccessControls accessControls;
+        for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+            const BindGroupLayoutBase::BindingMap& bindingMap =
+                layout->GetBindGroupLayout(group)->GetBindingMap();
+            for (const auto& it : bindingMap) {
+                BindingNumber bindingNumber = it.first;
+                BindingIndex bindingIndex = it.second;
+                const BindingInfo& bindingInfo =
+                    layout->GetBindGroupLayout(group)->GetBindingInfo(bindingIndex);
+                if (!(bindingInfo.visibility & StageBit(stage))) {
+                    continue;
+                }
+
+                uint32_t shaderIndex = layout->GetBindingIndexInfo()[group][bindingIndex];
+                tint::transform::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                                              static_cast<uint32_t>(bindingNumber)};
+                tint::transform::BindingPoint dstBindingPoint{0, shaderIndex};
+                if (srcBindingPoint != dstBindingPoint) {
+                    bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
+                }
+            }
+        }
+        transformManager.Add<tint::transform::BindingRemapper>();
+        transformInputs.Add<tint::transform::BindingRemapper::Remappings>(std::move(bindingPoints),
+                                                                          std::move(accessControls),
+                                                                          /* mayCollide */ true);
+
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(),
                                                transformInputs, &transformOutputs, nullptr));
