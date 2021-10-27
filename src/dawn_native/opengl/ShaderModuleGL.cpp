@@ -278,7 +278,9 @@ namespace dawn::native::opengl {
         transformInputs.Add<tint::transform::Renamer::Config>(
             tint::transform::Renamer::Target::kGlslKeywords);
 
+        using tint::transform::BindingPoint;
         using tint::transform::BindingRemapper;
+
         BindingRemapper::BindingPoints bindingPoints;
         BindingRemapper::AccessControls accessControls;
         for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
@@ -294,18 +296,18 @@ namespace dawn::native::opengl {
                 }
 
                 uint32_t shaderIndex = layout->GetBindingIndexInfo()[group][bindingIndex];
-                tint::transform::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
-                                                              static_cast<uint32_t>(bindingNumber)};
-                tint::transform::BindingPoint dstBindingPoint{0, shaderIndex};
+                BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                             static_cast<uint32_t>(bindingNumber)};
+                BindingPoint dstBindingPoint{0, shaderIndex};
                 if (srcBindingPoint != dstBindingPoint) {
                     bindingPoints.emplace(srcBindingPoint, dstBindingPoint);
                 }
             }
         }
-        transformManager.Add<tint::transform::BindingRemapper>();
-        transformInputs.Add<tint::transform::BindingRemapper::Remappings>(std::move(bindingPoints),
-                                                                          std::move(accessControls),
-                                                                          /* mayCollide */ true);
+        transformManager.Add<BindingRemapper>();
+        transformInputs.Add<BindingRemapper::Remappings>(std::move(bindingPoints),
+                                                         std::move(accessControls),
+                                                         /* mayCollide */ true);
 
         tint::Program program;
         DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(),
