@@ -195,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9ab119a6_15322769",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-10-27T16:39:44Z",
+      "side": 1,
+      "message": "In EnsurePassExited I\u0027m generating an error message that uses the pass as one of the formatting inputs. I can\u0027t point at a specific spot and say \"This is what caused the crash\", but it was generally doing a lot more with the pointer in the formatting code than I was comfortable with happening in a destructor. I moved the code to DeleteThis() when I realized what was going on.",
+      "parentUuid": "a5cfe9f5_342210fd",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "af36b116_cb940daa",
         "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
         "patchSetId": 1
