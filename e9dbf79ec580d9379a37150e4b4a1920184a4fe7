@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97db3c21_dbf4d5fa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T17:35:24Z",
+      "side": 1,
+      "message": "LGTM. Was wondering if there\u0027s any way in the future for us to be able to see the generated file in the code review since it\u0027s a bit easier to read that than the template.",
+      "revId": "e9dbf79ec580d9379a37150e4b4a1920184a4fe7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
