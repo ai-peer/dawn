@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0d8196_8820e62a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-27T20:35:22Z",
+      "side": 1,
+      "message": "Also fix the and operator which fails current bot. This is addressed in https://dawn-review.googlesource.com/c/dawn/+/66200.\nI think will land this once it passed the tests without Corentin\u0027s review to unblock the back merge.",
+      "revId": "dbc8b769c6d60b0bf72c188fc7af58f7645e18c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
