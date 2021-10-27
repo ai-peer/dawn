@@ -35,6 +35,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e704238_423f4b9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:50:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f024f8_73a76f7d",
+        "filename": "src/dawn_native/EncodingContext.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:50:22Z",
+      "side": 1,
+      "message": "Maybe the encoding context should keep a ref? This new error means that JS is able to observe garbage collection by doing:\n\nlet encoder \u003d ...;\nencoder.beginComputePass();\n\n// wait for the unhandled error callback here.\n\nWe can fix this in a follow-up, or file an issue for it.",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c28368e_c9d4441c",
+        "filename": "src/dawn_native/ProgrammablePassEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-27T07:50:22Z",
+      "side": 1,
+      "message": "Can\u0027t it be in the destructor?",
+      "revId": "1dff39d4e4c877e3e055688ec566bc1497e30e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af36b116_cb940daa",
