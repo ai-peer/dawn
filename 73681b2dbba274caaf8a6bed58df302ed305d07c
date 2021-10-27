@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2ae4cdc_7c4fa508",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-10-27T20:02:24Z",
+      "side": 1,
+      "message": "To back merging https://dawn-review.googlesource.com/c/dawn/+/67600 to M96,\nthe device name is missing from the function arguments and failing the test: https://chromium-review.googlesource.com/c/chromium/src/+/3248140.\nThis was later added in https://dawn-review.googlesource.com/c/dawn/+/65483\nI think it should be fine to land this directly to chromium/4664 to unblock the backmerge for ?",
+      "revId": "73681b2dbba274caaf8a6bed58df302ed305d07c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
