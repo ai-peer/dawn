@@ -30,10 +30,13 @@ namespace {
 
     // Dst texture format copyTextureForBrowser accept
     static const wgpu::TextureFormat kDstTextureFormats[] = {
-        wgpu::TextureFormat::RGBA8Unorm,  wgpu::TextureFormat::BGRA8Unorm,
-        wgpu::TextureFormat::RGBA32Float, wgpu::TextureFormat::RG8Unorm,
-        wgpu::TextureFormat::RGBA16Float, wgpu::TextureFormat::RG16Float,
-        wgpu::TextureFormat::RGB10A2Unorm};
+        wgpu::TextureFormat::R8Unorm,      wgpu::TextureFormat::R16Float,
+        wgpu::TextureFormat::R32Float,     wgpu::TextureFormat::RG8Unorm,
+        wgpu::TextureFormat::RG16Float,    wgpu::TextureFormat::RG32Float,
+        wgpu::TextureFormat::RGBA8Unorm,   wgpu::TextureFormat::RGBA8UnormSrgb,
+        wgpu::TextureFormat::BGRA8Unorm,   wgpu::TextureFormat::BGRA8UnormSrgb,
+        wgpu::TextureFormat::RGB10A2Unorm, wgpu::TextureFormat::RGBA16Float,
+        wgpu::TextureFormat::RGBA32Float};
 
     static const wgpu::Origin3D kOrigins[] = {{1, 1}, {1, 2}, {2, 1}};
 
@@ -187,7 +190,7 @@ class CopyTextureForBrowserTests : public DawnTest {
             [[group(0), binding(3)]] var<uniform> uniforms : Uniforms;
             fn aboutEqual(value : f32, expect : f32) -> bool {
                 // The value diff should be smaller than the hard coded tolerance.
-                return abs(value - expect) < 0.001;
+                return abs(value - expect) < 0.003;
             }
             [[stage(compute), workgroup_size(1, 1, 1)]]
             fn main([[builtin(global_invocation_id)]] GlobalInvocationID : vec3<u32>) {
@@ -244,16 +247,28 @@ class CopyTextureForBrowserTests : public DawnTest {
 
                     // Not use loop and variable index format to workaround
                     // crbug.com/tint/638.
-                    if (uniforms.channelCount == 2u) { // All have rg components.
-                        success = success &&
-                                  aboutEqual(dstColor.r, srcColor.r) &&
-                                  aboutEqual(dstColor.g, srcColor.g);
-                    } else {
-                        success = success &&
-                                  aboutEqual(dstColor.r, srcColor.r) &&
-                                  aboutEqual(dstColor.g, srcColor.g) &&
-                                  aboutEqual(dstColor.b, srcColor.b) &&
-                                  aboutEqual(dstColor.a, srcColor.a);
+                    switch(uniforms.channelCount) {
+                        case 1u: {
+                            success = success && aboutEqual(dstColor.r, srcColor.r);                            
+                            break;
+                        }
+                        case 2u: {
+                            success = success &&
+                                      aboutEqual(dstColor.r, srcColor.r) &&
+                                      aboutEqual(dstColor.g, srcColor.g);
+                            break;
+                        }
+                        case 4u: {
+                            success = success &&
+                                      aboutEqual(dstColor.r, srcColor.r) &&
+                                      aboutEqual(dstColor.g, srcColor.g) &&
+                                      aboutEqual(dstColor.b, srcColor.b) &&
+                                      aboutEqual(dstColor.a, srcColor.a);
+                            break;
+                        }
+                        default: {
+                            break;
+                        }
                     }
                 }
                 let outputIndex = GlobalInvocationID.y * u32(dstSize.x) + GlobalInvocationID.x;
@@ -274,14 +289,21 @@ class CopyTextureForBrowserTests : public DawnTest {
     static uint32_t GetTextureFormatComponentCount(wgpu::TextureFormat format) {
         switch (format) {
             case wgpu::TextureFormat::RGBA8Unorm:
+            case wgpu::TextureFormat::RGBA8UnormSrgb:
             case wgpu::TextureFormat::BGRA8Unorm:
+            case wgpu::TextureFormat::BGRA8UnormSrgb:
             case wgpu::TextureFormat::RGB10A2Unorm:
             case wgpu::TextureFormat::RGBA16Float:
             case wgpu::TextureFormat::RGBA32Float:
                 return 4;
             case wgpu::TextureFormat::RG8Unorm:
             case wgpu::TextureFormat::RG16Float:
+            case wgpu::TextureFormat::RG32Float:
                 return 2;
+            case wgpu::TextureFormat::R8Unorm:
+            case wgpu::TextureFormat::R16Float:
+            case wgpu::TextureFormat::R32Float:
+                return 1;
             default:
                 UNREACHABLE();
         }
