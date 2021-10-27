@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d0fe44_3b425c42",
+        "filename": "src/dawn_native/PipelineLayout.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:14Z",
+      "side": 1,
+      "message": "Oops yea missed this one! Good catch.",
+      "parentUuid": "6189eb4c_0da264a8",
+      "range": {
+        "startLine": 90,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 38
+      },
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0948b7c0_e8fa2c9c",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd13c7de_09764c39",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 941,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0948b7c0_e8fa2c9c",
+      "range": {
+        "startLine": 941,
+        "startChar": 48,
+        "endLine": 941,
+        "endChar": 88
+      },
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4be4c4fe_95f8bb1f",
@@ -94,6 +142,30 @@
       "writtenOn": "2021-10-27T11:46:31Z",
       "side": 1,
       "message": "DAWN_ASSERT_AND_ASSIGN?",
+      "range": {
+        "startLine": 58,
+        "startChar": 12,
+        "endLine": 58,
+        "endChar": 40
+      },
+      "revId": "6b345331a1cfe5acf63eb10d261ae9faf5fb1a41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca7a4cb_16bb2afe",
+        "filename": "src/tests/unittests/native/DestroyObjectTests.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-27T18:12:14Z",
+      "side": 1,
+      "message": "Unfortunately cannot do that because that macro returns void which will cause a compilation error. I also don\u0027t want to put an ASSERT in that macro directly since then it would stop all other tests from running instead of only failing the particular test it was called in. \n\nFor here, I decided to use ASSERT since it\u0027s really not supposed to ever fail. I just wanted it to be a lazy init since most tests don\u0027t need the extra objects.",
+      "parentUuid": "4be4c4fe_95f8bb1f",
       "range": {
         "startLine": 58,
         "startChar": 12,
