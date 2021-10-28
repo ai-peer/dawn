@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33961b29_343321e2",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T15:49:30Z",
+      "side": 1,
+      "message": "if we had backends override DestroyApiObject instead, then doesn\u0027t that mean we\u0027ll need to move the uncaching logic as well into the backend?",
+      "parentUuid": "9d4cba26_e5061bba",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52436960_72b1404c",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 23
