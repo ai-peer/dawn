@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cac215ca_b8d1a96c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-28T23:38:38Z",
+      "side": 1,
+      "message": "Is it time to remove this? I don\u0027t know the deprecation periods. Looks like the deprecation landed in M96 and this would land in M97 so I think that\u0027s OK?\n\nSame as mapAsync, doesn\u0027t look like we have any special casing for size\u003d0 in Blink so this will be a breaking change for the Web API.",
+      "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
