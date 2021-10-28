@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c6fe2fb_e54580d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-10-28T01:31:04Z",
+      "side": 1,
+      "message": "Hi, Corentin and Austin,\nThe bots failure shows that some formats copyTextureForBrowser used as render attachment are not supported in OpenGL backend (I suspect they\u0027re *-srgb formats). Do we need to take care of this issue in this CL? I think in webgpu spec, these formats should support RENDER_ATTACHMENT ",
+      "revId": "62a09aa46f070994d41b664af24fa2b5cc61fa61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
