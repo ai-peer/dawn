@@ -187,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08e88323_33b4460f",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "can\u0027t repo/debug this right now, so keeping the uniform buffer per dispatchIndirect for now",
+      "parentUuid": "c0905d47_25c74319",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fe216bc_b4adbb6d",

@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef14075e_03d41a94",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "I don\u0027t think so, because it needs to be guarded by the aspect. Otherwise, it\u0027ll hit the ASSERT in a compute pass that the type is not a render pipeline.",
+      "parentUuid": "675c5066_9bb1dd33",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22a3a2b8_e8681c15",
@@ -31,6 +49,24 @@
       "writtenOn": "2021-10-28T14:33:10Z",
       "side": 1,
       "message": "nit: that\u0027s checked in the getter so we could remove it.",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ceb7d9_a80834ad",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22a3a2b8_e8681c15",
       "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "583886fc_058b5c79",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "ok. I can\u0027t debug the issue I saw in patchset 11 right now, so keeping the uniform buffer per-dispatchIndirect and added the offset into it.",
+      "parentUuid": "d3d09bc4_537046e3",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18657572_42ea88db",
@@ -101,6 +155,30 @@
       "writtenOn": "2021-10-28T14:33:10Z",
       "side": 1,
       "message": "Maybe this is not strictly needed so we reapplied the state manually. I\u0027m that things like dirty bits might not be 100% correct (it looks like it might be ok now, but it\u0027s brittle in the future).",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 47
+      },
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95fc79b8_319f8fb1",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "it is needed because the code above only applies the state if a pipeline / bind group is non-null.\n\nIt\u0027s problematic if there is *no* pipeline set, you snapshot state into |prev|, SetPipeline on the current state, then restore |prev| (the pipeline is not unset!), then perform a draw/dispatch.\n\nInstead of an error that no pipeline is set, you\u0027ll either successfully do the draw/dispatch or get a different, confusing error that your bindings are wrong.\n\nAdded a test for this",
+      "parentUuid": "18657572_42ea88db",
       "range": {
         "startLine": 458,
         "startChar": 0,
@@ -128,6 +206,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a72377a7_e35e74c3",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b4fbe51_336edaef",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b5be14c_0638a3b3",
@@ -141,6 +237,24 @@
       "writtenOn": "2021-10-28T14:33:10Z",
       "side": 1,
       "message": "I assume leftover debug code will be removed?",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77252077_4938495b",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T20:06:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b5be14c_0638a3b3",
       "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
