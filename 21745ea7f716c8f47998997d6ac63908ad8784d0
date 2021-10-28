@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6de6170c_0746da3d",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T10:15:10Z",
+      "side": 1,
+      "message": "Doesn\u0027t this problem disappear if the backends implement DestroyApiObject since they can do the unmap before calling BufferBase::DestroyApiObject?\n\nTo unblock, if this is doable, we can fix this as a follow-up.",
+      "parentUuid": "99bb8b08_5c1d09ea",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52436960_72b1404c",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 23
@@ -224,6 +242,24 @@
       "side": 1,
       "message": "So DestroyApiObject is generally overridden in the *Base classes. This is the actual backend implementation which is expected to override the Impl function instead since it does D3D12 specific stuff.",
       "parentUuid": "ad1165c2_88adb6f1",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0115c6fe_d37f1700",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T10:15:10Z",
+      "side": 1,
+      "message": "Yeah it is the backend object but for some reason I thought we would use DestroyApiObject in the backend too, and call FooBase::DestroyApiObject there.",
+      "parentUuid": "31231204_1ffdba1d",
       "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
