@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3d09bc4_537046e3",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T16:11:07Z",
+      "side": 1,
+      "message": "Because subjectively I think it is simpler and that we don\u0027t really need to optimize for the uniform buffer write. But either way seems ok.",
+      "parentUuid": "431aa222_e95d64f5",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18657572_42ea88db",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 12
