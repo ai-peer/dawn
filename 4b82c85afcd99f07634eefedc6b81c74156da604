@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "4b82c85afcd99f07634eefedc6b81c74156da604",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1fe4ab2_db4fe4c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2021-10-28T17:22:05Z",
+      "side": 1,
+      "message": "lgtm, do I need to do the same for the Tint repo?",
+      "revId": "4b82c85afcd99f07634eefedc6b81c74156da604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
