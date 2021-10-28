@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9d4cba26_e5061bba",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T10:16:42Z",
+      "side": 1,
+      "message": "Ah, I see that all the backends have a DestroyApiObjectImpl so duplicating the call to FooBase::DestroyApiObjectImpl would be annoying to do every time. I don\u0027t know what\u0027s best here.",
+      "parentUuid": "6de6170c_0746da3d",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52436960_72b1404c",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 23
