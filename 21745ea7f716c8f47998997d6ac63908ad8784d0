@@ -178,6 +178,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbaab325_d2af156e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-28T17:28:00Z",
+      "side": 1,
+      "message": "Hmm I think (1) may be more flexible, but it will also be more duplicated code and more room for error of forgetting to add the call to backends. My general design was to make it so that backends only ever have to override the Impl. To do that though, a little extra logic is pushed into the *Base classes.\n\nAs Corentin suggested though, I will leave as is for now and we can change it again later on if anyone feels strongly about it.",
+      "parentUuid": "63980894_81d71989",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52436960_72b1404c",
@@ -332,6 +350,24 @@
       "side": 1,
       "message": "Yeah it is the backend object but for some reason I thought we would use DestroyApiObject in the backend too, and call FooBase::DestroyApiObject there.",
       "parentUuid": "31231204_1ffdba1d",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c9b7796_070f90de",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-28T17:28:00Z",
+      "side": 1,
+      "message": "See comment above. TLDR, design goal is so that backend only ever needs to override Impl function.",
+      "parentUuid": "0115c6fe_d37f1700",
       "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
