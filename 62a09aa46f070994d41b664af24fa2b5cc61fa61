@@ -33,6 +33,24 @@
       "message": "LGTM. You could change some of the tests to be parametrized on the texture formats, then add suppressions for OpenGL. See CopyTests and search for DAWN_TEST_PARAM_STRUCT for an example on how to do this.",
       "revId": "62a09aa46f070994d41b664af24fa2b5cc61fa61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecb42879_463bfb4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T15:42:16Z",
+      "side": 1,
+      "message": "+1 - I\u0027d like to see this test parameterized",
+      "parentUuid": "dcc256bf_c476fe87",
+      "revId": "62a09aa46f070994d41b664af24fa2b5cc61fa61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
