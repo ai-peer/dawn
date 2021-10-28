@@ -162,6 +162,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63980894_81d71989",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T16:15:02Z",
+      "side": 1,
+      "message": "ah, so we either have\n 1) Derived::DestroyApiObject calls Base::DestroyApiObject\n 2) Base::DestroyApiObject calls Derived::DestroyApiObjectImpl\n\n¯\\_(ツ)_/¯ with (1) being slightly more flexible because it lets the backend control when the frontend work happens",
+      "parentUuid": "993c29f2_90461c0e",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52436960_72b1404c",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 23
