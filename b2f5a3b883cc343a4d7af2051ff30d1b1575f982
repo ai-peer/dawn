@@ -50,6 +50,24 @@
       "message": "u-nit: mState \u003d TextureState::Destroyed; return ApiObjectBase::DestroyApiObject()?",
       "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff62b875_c41b3097",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-28T17:31:18Z",
+      "side": 1,
+      "message": "I actually had that initially, but that is problematic for the Vulkan backend implementation because it starts with a check that the state \u003d\u003d OwnedInternal before doing anything. (So textures were leaking.)\n\nThis is also more consistent with what is happening in reality in case we have any other state checking before destroying.",
+      "parentUuid": "eb0b8949_dca33ee0",
+      "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
