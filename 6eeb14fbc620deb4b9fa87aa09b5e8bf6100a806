@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "431aa222_e95d64f5",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-28T16:03:33Z",
+      "side": 1,
+      "message": "why? that means we have to schedule even more uniform buffer writes in the past. maxComputeWorkgroupsPerDimension is basically constant (eventually can be a spec constant), and the offset can already be inferred from the length. So it\u0027s not necessary to add additional complexity with buffer writes until we want to batch and schedule the entire validation earlier in the past (when we have generalized time-traveling).",
+      "parentUuid": "3e02a9fb_ebcb3808",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18657572_42ea88db",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 12
