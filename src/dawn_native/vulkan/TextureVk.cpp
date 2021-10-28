@@ -462,9 +462,9 @@ namespace dawn_native { namespace vulkan {
         }
 
         if (!wgpu::HasZeroOrOneBits(usage)) {
-            // Sampled | ReadOnlyStorage is the only possible multi-bit usage, if more appear  we
-            // might need additional special-casing.
-            ASSERT(usage == wgpu::TextureUsage::TextureBinding);
+            // Sampled | kReadOnlyRenderAttachment is the only possible multi-bit usage, if more
+            // appear we might need additional special-casing.
+            ASSERT(usage == (wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment));
             return VK_IMAGE_LAYOUT_GENERAL;
         }
 
