@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca2341a1_241194bc",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T10:01:05Z",
+      "side": 1,
+      "message": "This was just a nitpick that the comment wasn\u0027t 100% accurate because the validation is already done in numUninitializedConstants so the code here is more about producing the correct error message. But it was a nitpick.",
+      "parentUuid": "2f3625e1_65591def",
+      "revId": "072f255e68601641a4d8ebc13fd8aafa0dd72216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9dd01838_b5c837d9",
