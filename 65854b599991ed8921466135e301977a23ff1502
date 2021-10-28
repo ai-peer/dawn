@@ -171,6 +171,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0905d47_25c74319",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "I\u0027m not sure, I feel that it should be working. The only thing the D3D12 backend does is NextSerial() but I don\u0027t know how that would change things.",
+      "parentUuid": "24605837_bced57a6",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0fe216bc_b4adbb6d",
         "filename": "src/dawn_native/ComputePassEncoder.cpp",
         "patchSetId": 4
@@ -247,6 +265,42 @@
       "side": 1,
       "message": "I don\u0027t think the verbosity is so so bad, so I don\u0027t feel strongly, but I can dup some helpers if you like. Mostly did not do it because I ran out of time today.",
       "parentUuid": "90920c21_ca9a2fe6",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b90a4e06_7d3d7ef7",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "Sounds good, we can easily do it later.",
+      "parentUuid": "1beb8aa9_a8be9cc1",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "585dee2d_f29cdff9",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "Sounds good, we can easily do it later.",
+      "parentUuid": "1beb8aa9_a8be9cc1",
       "revId": "65854b599991ed8921466135e301977a23ff1502",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

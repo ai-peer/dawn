@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "675c5066_9bb1dd33",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "nit: we could get the pipeline once for both vertex buffer checks and index buffer checks.",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a3a2b8_e8681c15",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "nit: that\u0027s checked in the getter so we could remove it.",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e02a9fb_ebcb3808",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "nit: I was also suggesting to have an offset into the clientParams and validatedParams buffers to avoid using the length \"hack\".",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18657572_42ea88db",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "Maybe this is not strictly needed so we reapplied the state manually. I\u0027m that things like dirty bits might not be 100% correct (it looks like it might be ok now, but it\u0027s brittle in the future).",
+      "range": {
+        "startLine": 458,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 47
+      },
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b4fbe51_336edaef",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b5be14c_0638a3b3",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T14:33:10Z",
+      "side": 1,
+      "message": "I assume leftover debug code will be removed?",
+      "revId": "6eeb14fbc620deb4b9fa87aa09b5e8bf6100a806",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
