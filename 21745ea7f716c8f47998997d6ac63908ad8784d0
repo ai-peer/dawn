@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "993c29f2_90461c0e",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-28T16:02:42Z",
+      "side": 1,
+      "message": "Not if it calls FooBase::DestroyApiObject that\u0027s the one that has the uncaching logic.",
+      "parentUuid": "33961b29_343321e2",
+      "revId": "21745ea7f716c8f47998997d6ac63908ad8784d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "52436960_72b1404c",
         "filename": "src/dawn_native/Buffer.cpp",
         "patchSetId": 23
