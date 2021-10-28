@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "90c3bc0ba9544e3508fd7d05aa4f3825149fcc5a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "541b3963_bcb75741",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-28T23:36:16Z",
+      "side": 1,
+      "message": "Can we already remove this? Seems we only just deprecated it.\n\nDoesn\u0027t look like we have any special casing for size\u003d0 in Blink so this will be a breaking change for the Web API.",
+      "revId": "90c3bc0ba9544e3508fd7d05aa4f3825149fcc5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
