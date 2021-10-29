@@ -33,6 +33,40 @@
       "message": "LGTM",
       "revId": "072c4692ca80f06c31afd151e4532f03b955d462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "073215d1_99db1e9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T15:43:12Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "072c4692ca80f06c31afd151e4532f03b955d462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c566cc7_eb956fa7",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T15:43:12Z",
+      "side": 1,
+      "message": "check out the TRACE_EVENT_FLOW_* macros too. They let us draw a line from one point to another point. I think it would be useful to begin the flow event when the task is created in  CreateRenderPipelineAsyncTask::RunAsync and end the flow event in   CreateRenderPipelineAsyncTask::Run. This will let us to correlate when the task was scheduled and when it was started. \n\nWe can use the content hash of the pipeline as the |id| of the flow event.",
+      "revId": "072c4692ca80f06c31afd151e4532f03b955d462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
