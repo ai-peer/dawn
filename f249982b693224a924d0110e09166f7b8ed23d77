@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "092a798a_2b548c87",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df170f50_c2d19c5d",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 14
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6b88f921_3e4c1ed3",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-10-29T12:17:55Z",
       "side": 1,
       "message": "nit: simple buffers",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 83,
+        "endChar": 29
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60438e5d_dcb94db1",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b88f921_3e4c1ed3",
       "range": {
         "startLine": 83,
         "startChar": 14,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28b6277f_6aa9029c",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96d06ac9_6ad0a412",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0274c8a_17f6b6f9",
@@ -94,6 +160,30 @@
       "writtenOn": "2021-10-29T12:17:55Z",
       "side": 1,
       "message": "Any reason why we test this two times?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 87
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d5cf7b7_df209676",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "checking that the restored state is bound correctly for the dispatch. Added a comment. Perhaps a little redundant now that the internals of the state tracker are exposed. Also updated this second one to use an offset though",
+      "parentUuid": "b0274c8a_17f6b6f9",
       "range": {
         "startLine": 121,
         "startChar": 0,
@@ -121,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e674120f_94f8a684",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "it\u0027s lazily created the first time we need it so that doesn\u0027t really work. TBD on whether we should keep doing it that way or if pipeline caching will save us",
+      "parentUuid": "846bc1cc_aec1fca3",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ecd574cb_b7848924",
@@ -134,6 +242,24 @@
       "writtenOn": "2021-10-29T12:17:55Z",
       "side": 1,
       "message": "If we start having more tests like this one, I think we could make something better, either with a CommandBufferExpectationBuilder where we can call APIs directly, or by dumping the state of a CommandBuffer as text (and use object labels to differentiate them) (this would also allow debugging Dawn in the future by using the dumping-to-text function).",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee35273c_5f870c0c",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "ecd574cb_b7848924",
       "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -377,6 +377,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "716823b5_39d233b2",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T16:35:02Z",
+      "side": 1,
+      "message": "Ok, will do.",
+      "parentUuid": "73e863f8_261d0bb6",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c2c5374b_6a896219",
