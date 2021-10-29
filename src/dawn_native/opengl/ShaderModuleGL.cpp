@@ -265,7 +265,7 @@ namespace dawn_native { namespace opengl {
                                                              CombinedSamplerInfo* combinedSamplers,
                                                              const PipelineLayout* layout,
                                                              bool* needsDummySampler) const {
-#if USE_TINT_GLSL_GENERATOR
+#if 1
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
         tint::transform::DataMap transformOutputs;
