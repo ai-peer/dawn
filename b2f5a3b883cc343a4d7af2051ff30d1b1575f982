@@ -122,6 +122,24 @@
       "parentUuid": "45051eb2_707bb223",
       "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af81805d_ef050064",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-10-29T17:24:37Z",
+      "side": 1,
+      "message": "Hmm, I\u0027m assuming the other \"special\" casing that\u0027s referred here is the unmap part in Buffer? (if not which part is being referred to?) But I disagree (a bit) here.\n\nI think that the problem we see here is actually because we have a \"Destroyed\" enum in state. Given that we are using whether the object is in a list to indicate that, we should only ever need the state to be mapped/unmapped. Then since we unmap (and set the enum to unmap) before we destroy buffers, we could eliminate this dependency. This is true for a couple other classes that have a state member as well. (I can have a follow up change to remove all of those?)\n\nAs for the unmap logic, yes I think it is a bit more of a special case, but that doesn\u0027t have to do with caring about the backend. Buffers are just meant to be unmapped before being destroyed (regardless of backend), hence we move the logic up to BufferBase.\n\nUltimately, the design is to minimize redundant code in the backends, and I don\u0027t actually think they care much about the backend implementation? Maybe for clarity, I am defining frontend to be the *Base objects and upwards, and the backend to be the `final` implementations, i.e. in vulkan/, metal/, d3d12, etc.",
+      "parentUuid": "bfd10176_f4da984d",
+      "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
