@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8fa8a888_26bd1b0f",
+        "filename": "src/dawn_native/IndirectDrawMetadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T19:32:03Z",
+      "side": 1,
+      "message": "added a comment. Do you have any ideas for a test? I couldn\u0027t find a good way to fetch the pointer during encoding in a test such that later on I could verify that the pointer in the command buffer at submission time is the same. Without like making the command allocator an abstract class and adding a ForTesting API to swap out the EncodingContext\u0027s allocator with a wrapper class (or something like that)",
+      "parentUuid": "e903d8a2_7cd530bb",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "766ffe51_36eb2837",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 2
@@ -82,6 +100,24 @@
       "writtenOn": "2021-10-25T11:38:26Z",
       "side": 1,
       "message": "Maybe ASSERT(cmd-\u003eindirectBuffer !\u003d nullptr) in backends? Or we could have a DrawIndexedIndirectCmd::MakeInvalid() and ::IsValid()",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1f85e3b_3f7f0652",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T19:32:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "766ffe51_36eb2837",
       "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
