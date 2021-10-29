@@ -18,6 +18,8 @@
 #include "dawn_native/ComputePipeline.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/RenderPipeline.h"
+#include "dawn_platform/DawnPlatform.h"
+#include "dawn_platform/tracing/TraceEvent.h"
 
 namespace dawn_native {
 
@@ -112,6 +114,8 @@ namespace dawn_native {
     }
 
     void CreateComputePipelineAsyncTask::Run() {
+        TRACE_EVENT0(mComputePipeline->GetDevice()->GetPlatform(), General,
+                     "CreateComputePipelineAsyncTask::Run");
         MaybeError maybeError = mComputePipeline->Initialize();
         std::string errorMessage;
         if (maybeError.IsError()) {
@@ -148,6 +152,8 @@ namespace dawn_native {
     }
 
     void CreateRenderPipelineAsyncTask::Run() {
+        TRACE_EVENT0(mRenderPipeline->GetDevice()->GetPlatform(), General,
+                     "CreateRenderPipelineAsyncTask::Run");
         MaybeError maybeError = mRenderPipeline->Initialize();
         std::string errorMessage;
         if (maybeError.IsError()) {
