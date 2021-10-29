@@ -194,6 +194,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69f7be1f_53a1c65f",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T16:50:19Z",
+      "side": 1,
+      "message": "Ack, thank you!",
+      "parentUuid": "0d5cf7b7_df209676",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 87
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "846bc1cc_aec1fca3",
