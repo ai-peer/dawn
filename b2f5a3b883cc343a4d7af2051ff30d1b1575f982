@@ -104,6 +104,24 @@
       "parentUuid": "23617418_8ec442d9",
       "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd10176_f4da984d",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:22:55Z",
+      "side": 1,
+      "message": "Heh, that\u0027s another place where we have non-obvious special casing because of the split between DestroyApiObject / DestroyApiObjectImpl. The frontend shouldn\u0027t care about things in the backend ideally and right now, it does. If the backends where the ones calling the frontend, it could control when the destruction happens and the frontend wouldn\u0027t care.",
+      "parentUuid": "45051eb2_707bb223",
+      "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
