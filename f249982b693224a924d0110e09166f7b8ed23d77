@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73704ad2_a34c9a84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "LGTM, thank you for the iterations.",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df170f50_c2d19c5d",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "nit: I think that if we use ASSERT_LT/EQ then we don\u0027t need to skip calling .second.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 35,
+        "endChar": 14
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b88f921_3e4c1ed3",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "nit: simple buffers",
+      "range": {
+        "startLine": 83,
+        "startChar": 14,
+        "endLine": 83,
+        "endChar": 29
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96d06ac9_6ad0a412",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "nit: // block comment to help separate sections.",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0274c8a_17f6b6f9",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "Any reason why we test this two times?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 130,
+        "endChar": 87
+      },
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "846bc1cc_aec1fca3",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "Alternatively we can reach into the device to get the pipeline. Not sure what\u0027s best.",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecd574cb_b7848924",
+        "filename": "src/tests/unittests/native/CommandBufferEncodingTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "If we start having more tests like this one, I think we could make something better, either with a CommandBufferExpectationBuilder where we can call APIs directly, or by dumping the state of a CommandBuffer as text (and use object labels to differentiate them) (this would also allow debugging Dawn in the future by using the dumping-to-text function).",
+      "revId": "f249982b693224a924d0110e09166f7b8ed23d77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

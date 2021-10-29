@@ -223,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "752c9c69_b1155e47",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "It\u0027s ok, we can optimize to have some aggregate buffer for all such operations in the future. Or push constants ;)",
+      "parentUuid": "f7f59888_a88c9594",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fe216bc_b4adbb6d",
@@ -337,6 +355,24 @@
       "side": 1,
       "message": "Sounds good, we can easily do it later.",
       "parentUuid": "1beb8aa9_a8be9cc1",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73e863f8_261d0bb6",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T12:17:55Z",
+      "side": 1,
+      "message": "Actually if you don\u0027t mind, could we do it in a later CL? We Dawn reentrantly in 4 places at least right now and it would be nice to have the simplications.",
+      "parentUuid": "b90a4e06_7d3d7ef7",
       "revId": "65854b599991ed8921466135e301977a23ff1502",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
