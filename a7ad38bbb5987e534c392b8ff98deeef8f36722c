@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24afc08_738aaf00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T17:25:48Z",
+      "side": 1,
+      "message": "PTAL this owner\u0027s file change everyone.",
+      "revId": "a7ad38bbb5987e534c392b8ff98deeef8f36722c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
