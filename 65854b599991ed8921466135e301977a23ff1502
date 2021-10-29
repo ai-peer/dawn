@@ -205,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7f59888_a88c9594",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-10-29T01:21:02Z",
+      "side": 1,
+      "message": "Oh it\u0027s really unfortunate that we fail to reuse that buffer for all the dispatchIndirect calls.",
+      "parentUuid": "08e88323_33b4460f",
+      "revId": "65854b599991ed8921466135e301977a23ff1502",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fe216bc_b4adbb6d",
