@@ -104,6 +104,24 @@
       "parentUuid": "8a6acbb4_a12f5060",
       "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6347d1e2_6dec90e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-10-29T20:10:11Z",
+      "side": 1,
+      "message": "Don\u0027t they affect JS if JS explicitly passes 0? (Which happened with older versions of Emscripten, at least, but probably some other applications out there too.)",
+      "parentUuid": "ec4ba4bf_dfb6a031",
+      "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
