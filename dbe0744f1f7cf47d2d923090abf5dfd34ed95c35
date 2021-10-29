@@ -68,6 +68,24 @@
       "parentUuid": "cac215ca_b8d1a96c",
       "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a6acbb4_a12f5060",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-10-29T01:46:00Z",
+      "side": 1,
+      "message": "I will wait for M97, thanks!",
+      "parentUuid": "2b0df23d_8cf47658",
+      "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
