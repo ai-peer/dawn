@@ -16,6 +16,23 @@
       "message": "1+1\u003d2!",
       "revId": "f765f4c93ae6bdc7be55771024b4be5b5066057b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa83142e_cc43abf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:29:01Z",
+      "side": 1,
+      "message": "Can I haz +2 ?",
+      "revId": "f765f4c93ae6bdc7be55771024b4be5b5066057b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
