@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6572ae7_8b5a9e06",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T17:00:04Z",
+      "side": 1,
+      "message": "I think? it can\u0027t be an ASSERT because the render pass descriptor can say depthReadOnly but bind a stencil texture and I think that is supposed to be valid.\nwhich is kinda confusing and why there\u0027s https://github.com/gpuweb/gpuweb/issues/2131 about having some state that means its not used or doesn\u0027t exist.",
+      "parentUuid": "c1b45215_63868d73",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4c96b8cc_1d716901",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -134,6 +152,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c303fe63_826667d4",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T17:00:04Z",
+      "side": 1,
+      "message": "nit: not needed if it just calls the base class",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d90b408_f6769795",
         "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
         "patchSetId": 3
@@ -145,6 +186,30 @@
       "writtenOn": "2021-10-29T09:27:43Z",
       "side": 1,
       "message": "I think we\u0027ll want to test with varying formats here because to make sure our selection of aspects is correct.",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ca49d5e_41b77b9a",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-10-29T17:00:04Z",
+      "side": 1,
+      "message": "(please see tests that use DAWN_INSTANTIATE_TEST_P as an example of parameterization\nhttps://source.chromium.org/search?q\u003dDAWN_INSTANTIATE_TEST_P%20f:dawn%2Fsrc%2Ftests\u0026sq\u003d\u0026ss\u003dchromium%2Fchromium%2Fsrc)",
+      "parentUuid": "7d90b408_f6769795",
       "range": {
         "startLine": 77,
         "startChar": 12,
