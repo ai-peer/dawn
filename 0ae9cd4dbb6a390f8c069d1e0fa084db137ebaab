@@ -16,6 +16,166 @@
       "message": "PTAL. Thanks!",
       "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4f6dce9_0f326a06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da5395b5_5767a95a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1b45215_63868d73",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "nit: Maybe we could ASSERT(IsSubset(readOnlyAspects, aspects)) so we don\u0027t need to check for \u0026\u0026 aspects \u0026 Aspect::Depth/Stencil",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c96b8cc_1d716901",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "This seems like it is part of the implementation of readOnlyStencil, maybe we could add the logic at [1] for stencil too then.",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc1376c0_de154a59",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "nit: defaults make the code less obvious when it only helps for a couple callers of the function.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 83
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50eafc20_6f53f5e4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "nit: Maybe we can bundle both with Aspect readonlyAspects.",
+      "range": {
+        "startLine": 154,
+        "startChar": 55,
+        "endLine": 155,
+        "endChar": 75
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d90b408_f6769795",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "I think we\u0027ll want to test with varying formats here because to make sure our selection of aspects is correct.",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b189b2d_bd443511",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-10-29T09:27:43Z",
+      "side": 1,
+      "message": "nit: bottom",
+      "range": {
+        "startLine": 124,
+        "startChar": 11,
+        "endLine": 124,
+        "endChar": 18
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
