@@ -360,6 +360,7 @@ namespace dawn_native {
 
         const std::string& GetLabel() const;
         void APISetLabel(const char* label);
+        void APIDestroy();
 
       protected:
         // Constructor used only for mocking and testing.
