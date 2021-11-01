@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9cbbcc4b_bf0c0fdf",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T21:00:53Z",
+      "side": 1,
+      "message": "Great idea, I\u0027ll follow up with a small change to add that.",
+      "parentUuid": "072fc89c_e4588159",
+      "range": {
+        "startLine": 56,
+        "startChar": 111,
+        "endLine": 56,
+        "endChar": 235
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e02ceecb_3009c4c3",
         "filename": "src/dawn_node/README.md",
         "patchSetId": 2
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-01T19:21:52Z",
       "side": 1,
       "message": "This is a good point, and the lack of stdout for the server had me really confused last week. Maybe we should just pipe all stdout into the test log (preferably with the \u003c\u003cport\u003e\u003e stuff stripped).",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 102
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1783699_3c581abb",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T21:00:53Z",
+      "side": 1,
+      "message": "I suppose, though that will obfuscate what the log currently gives us, which is a single line per test with pass/fail/etc. But maybe it\u0027s okay. Should I folow up with a change for this?",
+      "parentUuid": "e02ceecb_3009c4c3",
       "range": {
         "startLine": 74,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ca8699_6b02285f",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T21:00:53Z",
+      "side": 1,
+      "message": "Sure thing. This came from https://golang.org/src/flag/example_test.go, so I figured it was idiomatic. I have no problem being explicit, though.",
+      "parentUuid": "a8d4eac7_27354031",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 22
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9939bbab_0d20e3f0",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-11-01T19:21:52Z",
       "side": 1,
       "message": "I\u0027d just call this `flag`. There\u0027s only one thing this tool invokes.",
+      "range": {
+        "startLine": 102,
+        "startChar": 19,
+        "endLine": 102,
+        "endChar": 33
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a6d393f_dc5003b9",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T21:00:53Z",
+      "side": 1,
+      "message": "That was my initial idea, too, but because there\u0027s an arg named \"dawn-node\", I went along with that. But I much prefer just \"flag\", so done.",
+      "parentUuid": "9939bbab_0d20e3f0",
       "range": {
         "startLine": 102,
         "startChar": 19,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc15e3be_3fb30f40",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T21:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e147129_bdbe35eb",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 25
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b647ff37_2429aba1",
@@ -146,6 +266,30 @@
       "writtenOn": "2021-11-01T19:21:52Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 705,
+        "startChar": 2,
+        "endLine": 707,
+        "endChar": 0
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e913fb19_385744f3",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T21:00:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b647ff37_2429aba1",
       "range": {
         "startLine": 705,
         "startChar": 2,
