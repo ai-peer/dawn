@@ -16,6 +16,29 @@
       "message": "In case you\u0027re wondering, I learned how to do this parsing of multiple args from here: https://golang.org/src/flag/example_test.go",
       "revId": "833e10bf73ecd04e40b75e2dc3bc94356bcccd94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fd4c8c2_ecb7f231",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-01T19:00:59Z",
+      "side": 1,
+      "message": "Hmm, I just realized that comma-separated will not work here because we want to be able to pass in comma-separated values for enable/disable-dawn-features. I have 2 options: chooose another delimiter, or none at all, which means each flag must be passed in with a separate --dawn-node-flag\u003d\u003cflag\u003e\u003d\u003cvalue\u003e arg. I\u0027m leaning towards the latter, as this matches what I did for the CTS code, for the same reasons.",
+      "range": {
+        "startLine": 76,
+        "startChar": 40,
+        "endLine": 76,
+        "endChar": 43
+      },
+      "revId": "833e10bf73ecd04e40b75e2dc3bc94356bcccd94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
