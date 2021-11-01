@@ -375,6 +375,10 @@ namespace dawn_native {
         mCaches = nullptr;
     }
 
+    void DeviceBase::APIDestroy() {
+        Destroy();
+    }
+
     void DeviceBase::HandleError(InternalErrorType type, const char* message) {
         if (type == InternalErrorType::DeviceLost) {
             mState = State::Disconnected;
