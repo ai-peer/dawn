@@ -66,6 +66,8 @@ namespace dawn_native { namespace vulkan {
 
         void EnqueueDeferredDeallocation(BindGroupLayout* bindGroupLayout);
 
+        bool IsDepthStencilFormatSupported(VkFormat format);
+
         // Dawn Native API
 
         TextureBase* CreateTextureWrappingVulkanImage(
