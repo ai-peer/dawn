@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a74654e0_2a888356",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-01T20:48:36Z",
+      "side": 1,
+      "message": "The BindGroupLayout messages are a bit verbose, but this also seems to be one of the most common areas of confusion I hear about so I think it\u0027s worthwhile to make them more explicit.",
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
