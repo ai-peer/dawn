@@ -27,6 +27,7 @@
 #include "utils/ScopedAutoreleasePool.h"
 
 #include <dawn_platform/DawnPlatform.h>
+#include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
 #include <memory>
@@ -94,10 +95,40 @@
 
 #define EXPECT_TEXTURE_EQ(...) AddTextureExpectation(__FILE__, __LINE__, __VA_ARGS__)
 
-// Should only be used to test validation of function that can't be tested by regular validation
-// tests;
-#define ASSERT_DEVICE_ERROR(statement)                          \
+// Argument helpers to allow macro overriding.
+#define UNIMPLEMENTED_MACRO(...) UNREACHABLE()
+#define GET_3RD_ARG_HELPER_(_1, _2, NAME, ...) NAME
+#define GET_3RD_ARG_(args) GET_3RD_ARG_HELPER_ args
+
+// Overloaded to allow further validation of the error messages given an error is expected.
+// Especially useful to verify that the expected errors are occuring, not just any error. In general
+// should only be used to test validation of function that can't be tested by regular validation
+// tests.
+//
+// Example usages:
+//   1 Argument Case:
+//     ASSERT_DEVICE_ERROR(FunctionThatExpectsError());
+//
+//   2 Argument Case:
+//     ASSERT_DEVICE_ERROR(FunctionThatHasLongError(), HasSubstr("partial match"))
+//     ASSERT_DEVICE_ERROR(FunctionThatHasShortError(), Eq("exact match"));
+#define ASSERT_DEVICE_ERROR(...)                                                         \
+    GET_3RD_ARG_((__VA_ARGS__, ASSERT_DEVICE_ERROR_IMPL_2_, ASSERT_DEVICE_ERROR_IMPL_1_, \
+                  UNIMPLEMENTED_MACRO))                                                  \
+    (__VA_ARGS__)
+
+#define ASSERT_DEVICE_ERROR_IMPL_1_(statement)                  \
     StartExpectDeviceError();                                   \
+    statement;                                                  \
+    FlushWire();                                                \
+    if (!EndExpectDeviceError()) {                              \
+        FAIL() << "Expected device error in:\n " << #statement; \
+    }                                                           \
+    do {                                                        \
+    } while (0)
+
+#define ASSERT_DEVICE_ERROR_IMPL_2_(statement, matcher)         \
+    StartExpectDeviceError(matcher);                            \
     statement;                                                  \
     FlushWire();                                                \
     if (!EndExpectDeviceError()) {                              \
@@ -305,6 +336,7 @@ class DawnTestBase {
 
     bool HasToggleEnabled(const char* workaround) const;
 
+    void StartExpectDeviceError(testing::Matcher<std::string> errorMatcher);
     void StartExpectDeviceError();
     bool EndExpectDeviceError();
 
@@ -339,6 +371,11 @@ class DawnTestBase {
     WGPUDevice backendDevice = nullptr;
 
     size_t mLastWarningCount = 0;
+
+    // Default callbacks
+    static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
+    static void OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata);
+    static void OnDeviceDestroy(WGPUDeviceLostReason reason, const char* message, void* userdata);
 
     // Helper methods to implement the EXPECT_ macros
     std::ostringstream& AddBufferExpectation(const char* file,
@@ -501,10 +538,9 @@ class DawnTestBase {
     std::unique_ptr<utils::WireHelper> mWireHelper;
 
     // Tracking for validation errors
-    static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata);
-    static void OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata);
     bool mExpectError = false;
     bool mError = false;
+    testing::Matcher<std::string> mErrorMatcher;
 
     std::ostringstream& AddTextureExpectationImpl(const char* file,
                                                   int line,

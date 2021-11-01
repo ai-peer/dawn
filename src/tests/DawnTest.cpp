@@ -1007,14 +1007,24 @@ void DawnTestBase::TearDown() {
         EXPECT_EQ(mLastWarningCount,
                   dawn_native::GetDeprecationWarningCountForTesting(device.Get()));
     }
+
+    // The device will be destroyed soon after, so we want to override the callback that normally
+    // ensures that we don't get a device lost.
+    device.SetDeviceLostCallback(OnDeviceDestroy, this);
 }
 
-void DawnTestBase::StartExpectDeviceError() {
+void DawnTestBase::StartExpectDeviceError(testing::Matcher<std::string> errorMatcher) {
     mExpectError = true;
     mError = false;
+    mErrorMatcher = errorMatcher;
 }
+void DawnTestBase::StartExpectDeviceError() {
+    StartExpectDeviceError(testing::_);
+}
+
 bool DawnTestBase::EndExpectDeviceError() {
     mExpectError = false;
+    mErrorMatcher = testing::_;
     return mError;
 }
 
@@ -1025,14 +1035,25 @@ void DawnTestBase::OnDeviceError(WGPUErrorType type, const char* message, void* 
 
     ASSERT_TRUE(self->mExpectError) << "Got unexpected device error: " << message;
     ASSERT_FALSE(self->mError) << "Got two errors in expect block";
+    if (self->mExpectError) {
+        ASSERT_THAT(message, self->mErrorMatcher);
+    }
     self->mError = true;
 }
 
 void DawnTestBase::OnDeviceLost(WGPUDeviceLostReason reason, const char* message, void* userdata) {
     // Using ADD_FAILURE + ASSERT instead of FAIL to prevent the current test from continuing with a
     // corrupt state.
-    ADD_FAILURE() << "Device Lost during test: " << message;
+    ADD_FAILURE() << "Device lost during test: " << message;
     ASSERT(false);
+}
+
+void DawnTestBase::OnDeviceDestroy(WGPUDeviceLostReason reason,
+                                   const char* message,
+                                   void* userdata) {
+    // This callback is injected prior to destruction of the device. If it runs, it should always
+    // see the destroyed reason.
+    EXPECT_EQ(reason, WGPUDeviceLostReason_Destroyed);
 }
 
 std::ostringstream& DawnTestBase::AddBufferExpectation(const char* file,

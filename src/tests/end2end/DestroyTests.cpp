@@ -17,6 +17,8 @@
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
+using ::testing::HasSubstr;
+
 constexpr uint32_t kRTSize = 4;
 
 class DestroyTest : public DawnTest {
@@ -162,6 +164,19 @@ TEST_P(DestroyTest, DestroyThenSetLabel) {
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
     buffer.Destroy();
     buffer.SetLabel(label.c_str());
+}
+
+// Device destroy before buffer submit will result in error.
+TEST_P(DestroyTest, DestroyDeviceBeforeSubmit) {
+    // TODO(crbug.com/dawn/628) Add more comprehensive tests with destroy and backends.
+    DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+    wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
+
+    // Tests normally don't expect a device lost error, but since we are destroying the device, we
+    // actually do, so we need to override the default device lost callback.
+    device.SetDeviceLostCallback(OnDeviceDestroy, this);
+    device.Destroy();
+    ASSERT_DEVICE_ERROR(queue.Submit(1, &commands), HasSubstr("[Device] is lost."));
 }
 
 DAWN_INSTANTIATE_TEST(DestroyTest,
