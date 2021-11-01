@@ -16,6 +16,46 @@
       "message": "The BindGroupLayout messages are a bit verbose, but this also seems to be one of the most common areas of confusion I hear about so I think it\u0027s worthwhile to make them more explicit.",
       "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "464287a0_1ccded1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-01T20:57:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6ae6f65_d16590dd",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-01T20:57:48Z",
+      "side": 1,
+      "message": "nit: can just use mLastPipeline (after ASSERTing it is not null). GetRenderPipeline will ASSERT it is render when it could be compute.",
+      "range": {
+        "startLine": 271,
+        "startChar": 57,
+        "endLine": 271,
+        "endChar": 77
+      },
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
