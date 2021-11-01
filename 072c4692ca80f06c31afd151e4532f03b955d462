@@ -85,6 +85,24 @@
       "parentUuid": "7c566cc7_eb956fa7",
       "revId": "072c4692ca80f06c31afd151e4532f03b955d462",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3d9233_e61ddb23",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-01T02:11:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f89f568_d1cd640e",
+      "revId": "072c4692ca80f06c31afd151e4532f03b955d462",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
