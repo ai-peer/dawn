@@ -378,7 +378,7 @@ namespace dawn_native { namespace d3d12 {
         return mMappedData;
     }
 
-    void Buffer::DestroyApiObjectImpl() {
+    void Buffer::DestroyImpl() {
         ToBackend(GetDevice())->DeallocateMemory(mResourceAllocation);
     }
 
