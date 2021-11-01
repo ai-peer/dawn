@@ -143,6 +143,30 @@
       },
       "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "418c24f5_932bc6d9",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-01T22:54:11Z",
+      "side": 1,
+      "message": "Thanks! Maybe the articles (a/the) are a little awkward, but looks good.",
+      "parentUuid": "8753b479_6bd83f4b",
+      "range": {
+        "startLine": 278,
+        "startChar": 37,
+        "endLine": 278,
+        "endChar": 43
+      },
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
