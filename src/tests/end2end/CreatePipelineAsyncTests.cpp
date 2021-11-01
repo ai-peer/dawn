@@ -364,6 +364,8 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineFailed) {
 // Verify there is no error when the device is released before the callback of
 // CreateComputePipelineAsync() is called.
 TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipelineAsync) {
+    device.SetDeviceLostCallback(OnDeviceDestroy, this);
+
     wgpu::ComputePipelineDescriptor csDesc;
     csDesc.compute.module = utils::CreateShaderModule(device, R"(
         [[stage(compute), workgroup_size(1)]] fn main() {
@@ -383,11 +385,14 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateComputePipeli
             task->message = message;
         },
         &task);
+    device.Destroy();
 }
 
 // Verify there is no error when the device is released before the callback of
 // CreateRenderPipelineAsync() is called.
 TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateRenderPipelineAsync) {
+    device.SetDeviceLostCallback(OnDeviceDestroy, this);
+
     utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
     wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
         [[stage(vertex)]] fn main() -> [[builtin(position)]] vec4<f32> {
@@ -415,6 +420,7 @@ TEST_P(CreatePipelineAsyncTest, ReleaseDeviceBeforeCallbackOfCreateRenderPipelin
             task->message = message;
         },
         &task);
+    device.Destroy();
 }
 
 // Verify the code path of CreateComputePipelineAsync() to directly return the compute pipeline
