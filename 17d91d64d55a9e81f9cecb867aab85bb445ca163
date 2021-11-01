@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9cb5ba_7201fa00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "Looks great. Just a bunch of nits.",
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "072fc89c_e4588159",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "completely ignoreable, but maybe we should add `--vk-icd\u003d\u003cpath-to-icd\u003e` and reduce the usage complexity here.\nI use swiftshader more than any hardware driver (I also have a bash script for this), but for new people, less is more.",
+      "range": {
+        "startLine": 56,
+        "startChar": 111,
+        "endLine": 56,
+        "endChar": 235
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02ceecb_3009c4c3",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "This is a good point, and the lack of stdout for the server had me really confused last week. Maybe we should just pipe all stdout into the test log (preferably with the \u003c\u003cport\u003e\u003e stuff stripped).",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 102
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8d4eac7_27354031",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sure what the output of Sprint of a []string is. I\u0027d suggest using strings.Join() to be explicit.",
+      "range": {
+        "startLine": 68,
+        "startChar": 8,
+        "endLine": 68,
+        "endChar": 22
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9939bbab_0d20e3f0",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "I\u0027d just call this `flag`. There\u0027s only one thing this tool invokes.",
+      "range": {
+        "startLine": 102,
+        "startChar": 19,
+        "endLine": 102,
+        "endChar": 33
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e147129_bdbe35eb",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 462,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "append is variadic, so this can be:\n\n append(args, \"--gpu-provider-flag\", f)",
+      "range": {
+        "startLine": 461,
+        "startChar": 0,
+        "endLine": 462,
+        "endChar": 25
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b647ff37_2429aba1",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2021-11-01T19:21:52Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 705,
+        "startChar": 2,
+        "endLine": 707,
+        "endChar": 0
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
