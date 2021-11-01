@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef7750d6_90bea4b2",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-01T23:21:58Z",
+      "side": 1,
+      "message": "Thanks for pointing that out! Fixed.",
+      "parentUuid": "e6ae6f65_d16590dd",
+      "range": {
+        "startLine": 271,
+        "startChar": 57,
+        "endLine": 271,
+        "endChar": 77
+      },
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "906d719f_f622ac68",
