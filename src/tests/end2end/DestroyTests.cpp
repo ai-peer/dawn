@@ -119,6 +119,12 @@ TEST_P(DestroyTest, BufferSubmitDestroySubmit) {
     EXPECT_PIXEL_RGBA8_EQ(filled, renderPass.color, 1, 3);
 }
 
+// Destroy before buffer submit will result in error, and nothing drawn
+TEST_P(DestroyTest, DeviceDestroyBeforeBufferSubmit) {
+    wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
+    device.Destroy();
+}
+
 // Destroy texture before submit should fail submit
 TEST_P(DestroyTest, TextureDestroyBeforeSubmit) {
     wgpu::CommandBuffer commands = CreateTriangleCommandBuffer();
