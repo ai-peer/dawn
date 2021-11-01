@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da3dddf8_56dc830c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Are you saying STENCIL_READ? There is no STENCIL_READ. I guess stencil-only texture view will reuse DEPTH_READ.",
+      "parentUuid": "da5395b5_5767a95a",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1b45215_63868d73",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -105,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b68b89_50b6adbd",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Yeah. Agreed with Austin. According to current WebGPU spec, if depthReadOnly is true, aspect \u0026 aspect::Depth can be true of false (either one is valid). So we can\u0027t ASSERT here [2].\n\nI actually added a TODO for more validation test about this when I wrote this code snippet, here it is: https://dawn-review.googlesource.com/c/dawn/+/67962.",
+      "parentUuid": "8975ce1a_ce349df2",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c96b8cc_1d716901",
@@ -122,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "019ced6d_64e55551",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 961,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "See the comment at [1]. If I understood your suggestion correctly. We don\u0027t need to add the logic at [1]. But I will verify it when I implement stencilReadOnly on D3D12.",
+      "parentUuid": "4c96b8cc_1d716901",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc1376c0_de154a59",
@@ -135,6 +189,30 @@
       "writtenOn": "2021-10-29T09:27:43Z",
       "side": 1,
       "message": "nit: defaults make the code less obvious when it only helps for a couple callers of the function.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 83
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbd56ca5_0c4d7f8c",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc1376c0_de154a59",
       "range": {
         "startLine": 66,
         "startChar": 0,
@@ -170,6 +248,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "927d2630_0320c879",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "See the discussion below at [2]. Maybe we don\u0027t (cannot) need to do this?",
+      "parentUuid": "50eafc20_6f53f5e4",
+      "range": {
+        "startLine": 154,
+        "startChar": 55,
+        "endLine": 155,
+        "endChar": 75
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c303fe63_826667d4",
         "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
         "patchSetId": 3
@@ -181,6 +283,30 @@
       "writtenOn": "2021-10-29T17:00:04Z",
       "side": 1,
       "message": "nit: not needed if it just calls the base class",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88ae5484_a2854c08",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Thanks for your suggestion about parameterization, Austin. I added the formats, not 100% sure it is what you suggested, though.",
+      "parentUuid": "c303fe63_826667d4",
       "range": {
         "startLine": 25,
         "startChar": 4,
@@ -251,6 +377,30 @@
       "writtenOn": "2021-10-29T09:27:43Z",
       "side": 1,
       "message": "nit: bottom",
+      "range": {
+        "startLine": 124,
+        "startChar": 11,
+        "endLine": 124,
+        "endChar": 18
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a71baad_1006d43f",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b189b2d_bd443511",
       "range": {
         "startLine": 124,
         "startChar": 11,

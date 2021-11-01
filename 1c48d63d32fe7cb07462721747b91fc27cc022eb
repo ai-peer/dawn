@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efa49cdc_97210be5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin and Austin. Added Kai because of a previous discussion.",
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e96abbd_365bfd1e",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-01T15:44:31Z",
+      "side": 1,
+      "message": "Kai, did you remember we discuss the workaround about single-aspect of texture view in pipeline vs both-aspect of texture view in render pass attachment for depth/stencil format? Here it is. It works. See depthStencilViewInPipeline and depthStencilViewInAttachment. Although it might be a little ugly.",
+      "range": {
+        "startLine": 84,
+        "startChar": 26,
+        "endLine": 84,
+        "endChar": 52
+      },
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
