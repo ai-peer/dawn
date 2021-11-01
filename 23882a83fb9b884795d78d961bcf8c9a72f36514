@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "23882a83fb9b884795d78d961bcf8c9a72f36514",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e82d7ae_c288d61a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-01T16:37:44Z",
+      "side": 1,
+      "message": "LGTM, but is there a preceding change that adds test case(s) that the validation is working as expected? If yes, could you add a link in the CL? Otherwise would be good to see that added here also.",
+      "revId": "23882a83fb9b884795d78d961bcf8c9a72f36514",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
