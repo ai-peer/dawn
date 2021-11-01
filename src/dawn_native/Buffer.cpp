@@ -91,7 +91,7 @@ namespace dawn_native {
                 mFakeMappedData.reset();
             }
 
-            void DestroyApiObjectImpl() override {
+            void DestroyImpl() override {
                 mFakeMappedData.reset();
             }
 
@@ -179,7 +179,7 @@ namespace dawn_native {
         ASSERT(mState == BufferState::Unmapped || mState == BufferState::Destroyed);
     }
 
-    bool BufferBase::DestroyApiObject() {
+    bool BufferBase::Destroy() {
         bool marked = MarkDestroyed();
         if (!marked) {
             return false;
@@ -195,7 +195,7 @@ namespace dawn_native {
             }
         }
 
-        DestroyApiObjectImpl();
+        DestroyImpl();
         mState = BufferState::Destroyed;
         return true;
     }
@@ -393,7 +393,7 @@ namespace dawn_native {
     }
 
     void BufferBase::APIDestroy() {
-        DestroyApiObject();
+        Destroy();
     }
 
     MaybeError BufferBase::CopyFromStagingBuffer() {
