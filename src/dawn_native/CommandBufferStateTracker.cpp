@@ -266,12 +266,39 @@ namespace dawn_native {
                 DAWN_INVALID_IF(mBindgroups[i] == nullptr, "No bind group set at index %u.",
                                 static_cast<uint32_t>(i));
 
+                BindGroupLayoutBase* requiredBGL = mLastPipelineLayout->GetBindGroupLayout(i);
+                BindGroupLayoutBase* currentBGL = mBindgroups[i]->GetLayout();
+                RenderPipelineBase* lastRenderPipeline = GetRenderPipeline();
+
+                DAWN_INVALID_IF(
+                    requiredBGL->GetPipelineCompatibilityToken() != PipelineCompatibilityToken(0) &&
+                        currentBGL->GetPipelineCompatibilityToken() !=
+                            requiredBGL->GetPipelineCompatibilityToken(),
+                    "The current pipeline (%s) was created with a default layout, and is not "
+                    "compatible with the %s at index %u which uses a %s that was not created by "
+                    "the pipeline. Either use the bind group layout returned by calling "
+                    "getBindGroupLayout(%u) on the pipeline when creating the bind group, or "
+                    "provide an explicit pipeline layout when creating the pipeline.",
+                    lastRenderPipeline, mBindgroups[i], static_cast<uint32_t>(i), currentBGL,
+                    static_cast<uint32_t>(i));
+
+                DAWN_INVALID_IF(
+                    requiredBGL->GetPipelineCompatibilityToken() == PipelineCompatibilityToken(0) &&
+                        currentBGL->GetPipelineCompatibilityToken() !=
+                            PipelineCompatibilityToken(0),
+                    "%s at index %u uses a %s which was created as part of the default layout for "
+                    "a different pipeline than the current one (%s), and as a result is not "
+                    "compatible. Use an explicit bind group layout when creating bind groups and "
+                    "an explicit pipeline layout when creating pipelines to share bind groups "
+                    "between pipelines.",
+                    mBindgroups[i], static_cast<uint32_t>(i), currentBGL, lastRenderPipeline);
+
                 DAWN_INVALID_IF(
                     mLastPipelineLayout->GetBindGroupLayout(i) != mBindgroups[i]->GetLayout(),
                     "Bind group layout %s of pipeline layout %s does not match layout %s of bind "
                     "group %s at index %u.",
-                    mLastPipelineLayout->GetBindGroupLayout(i), mLastPipelineLayout,
-                    mBindgroups[i]->GetLayout(), mBindgroups[i], static_cast<uint32_t>(i));
+                    requiredBGL, mLastPipelineLayout, currentBGL, mBindgroups[i],
+                    static_cast<uint32_t>(i));
 
                 // TODO(dawn:563): Report the binding sizes and which ones are failing.
                 DAWN_INVALID_IF(!BufferSizesAtLeastAsBig(mBindgroups[i]->GetUnverifiedBufferSizes(),
