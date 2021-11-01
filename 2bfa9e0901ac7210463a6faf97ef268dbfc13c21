@@ -73,6 +73,52 @@
       },
       "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906d719f_f622ac68",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-01T20:59:47Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 278,
+        "startChar": 67,
+        "endLine": 278,
+        "endChar": 71
+      },
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e378d06c_91f1b044",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-01T20:59:47Z",
+      "side": 1,
+      "message": "I don\u0027t know how this stringifies. Is it clear that %s is a bind group? And does the grammar make sense?",
+      "range": {
+        "startLine": 278,
+        "startChar": 37,
+        "endLine": 278,
+        "endChar": 43
+      },
+      "revId": "2bfa9e0901ac7210463a6faf97ef268dbfc13c21",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
