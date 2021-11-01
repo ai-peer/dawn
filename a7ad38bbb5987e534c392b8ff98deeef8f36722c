@@ -69,6 +69,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aafd2ab_9794ada2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2021-11-01T13:17:24Z",
+      "side": 1,
+      "message": "LGTM (but do fix Ben\u0027s email)",
+      "revId": "a7ad38bbb5987e534c392b8ff98deeef8f36722c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce209d34_e414a7bf",
