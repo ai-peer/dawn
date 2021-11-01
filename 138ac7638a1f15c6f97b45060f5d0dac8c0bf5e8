@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4d340d_69eefa23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-01T16:45:42Z",
+      "side": 1,
+      "message": "still LGTM",
+      "revId": "138ac7638a1f15c6f97b45060f5d0dac8c0bf5e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49287dc0_d7eb71b4",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-01T16:45:42Z",
+      "side": 1,
+      "message": "u-unit: maybe put it at the top of Run() ?",
+      "revId": "138ac7638a1f15c6f97b45060f5d0dac8c0bf5e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ced2a8c_e8751f39",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-01T16:45:42Z",
+      "side": 1,
+      "message": "can still have this as well:\n\n    TRACE_EVENT0(mComputePipeline-\u003eGetDevice()-\u003eGetPlatform(), General,\n                     \"CreateRenderPipelineAsyncTask::Run\");",
+      "revId": "138ac7638a1f15c6f97b45060f5d0dac8c0bf5e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20adc219_866cb721",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-01T16:45:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "138ac7638a1f15c6f97b45060f5d0dac8c0bf5e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
