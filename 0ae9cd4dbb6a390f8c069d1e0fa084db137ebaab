@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "505b0ce3_5d2312b4",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c0d1ef4_e83a90f6",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1b45215_63868d73",
@@ -312,6 +330,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "500a40e4_69809c7a",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Yeah. Two bools here are simple. I will see whether it is simple enough if we do it at frontend in next CL. Maybe we can record the render pass\u0027s depthStencilAttachment\u0027s depth/stencilReadOnly to REAL depth/stencilReadOnly (only if the view does have the aspect) when we read that info from RenderPassDescriptor at frontend.",
+      "parentUuid": "62fab339_a1b3b8f1",
+      "range": {
+        "startLine": 154,
+        "startChar": 55,
+        "endLine": 155,
+        "endChar": 75
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c303fe63_826667d4",
@@ -359,6 +401,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "481c598b_d90f2693",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "88ae5484_a2854c08",
+      "range": {
+        "startLine": 25,
+        "startChar": 4,
+        "endLine": 27,
+        "endChar": 5
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d90b408_f6769795",
@@ -396,6 +462,30 @@
       "side": 1,
       "message": "(please see tests that use DAWN_INSTANTIATE_TEST_P as an example of parameterization\nhttps://source.chromium.org/search?q\u003dDAWN_INSTANTIATE_TEST_P%20f:dawn%2Fsrc%2Ftests\u0026sq\u003d\u0026ss\u003dchromium%2Fchromium%2Fsrc)",
       "parentUuid": "7d90b408_f6769795",
+      "range": {
+        "startLine": 77,
+        "startChar": 12,
+        "endLine": 77,
+        "endChar": 19
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e2d0f6_b7ce4f43",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ca49d5e_41b77b9a",
       "range": {
         "startLine": 77,
         "startChar": 12,

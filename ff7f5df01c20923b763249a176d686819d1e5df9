@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a5d19ee_ddeac3af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Thanks for your review, Corentin and Austin. Merging now.",
+      "revId": "ff7f5df01c20923b763249a176d686819d1e5df9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

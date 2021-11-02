@@ -99,6 +99,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a77a5819_2138d285",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "d46c27d9_2f4f159b",
+      "range": {
+        "startLine": 84,
+        "startChar": 26,
+        "endLine": 84,
+        "endChar": 52
+      },
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba318478_e56784f5",
@@ -112,6 +136,24 @@
       "writtenOn": "2021-11-02T08:51:19Z",
       "side": 1,
       "message": "nit: we could introduce a GetFormatAspects to TextureUtils.h. Deferring it to later LGTM too though. We can do the very comprehensive tests with extension formats etc later in the CTS.",
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2628cbc9_2f4bd48d",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-02T19:07:58Z",
+      "side": 1,
+      "message": "Gotcha. Will do.",
+      "parentUuid": "ba318478_e56784f5",
       "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
