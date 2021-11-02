@@ -140,6 +140,24 @@
       "parentUuid": "bfd10176_f4da984d",
       "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b506bc49_84982c81",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T09:40:22Z",
+      "side": 1,
+      "message": "Re: frontend vs. backend, yeah that\u0027s how we talk about *Base vs. vulkan/d3d12::*.\n\nWe discussed about this offline last week, and I think we can go this direction. The overarching idea is that we should try to make the code as clear and regular as possible for future maintainability / readability, but these special cases are probably ok. An option is to also fold the destroyed state into IsAlive(), this will have a slight perf cost but we can always reoptimize later if needed.",
+      "parentUuid": "af81805d_ef050064",
+      "revId": "b2f5a3b883cc343a4d7af2051ff30d1b1575f982",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
