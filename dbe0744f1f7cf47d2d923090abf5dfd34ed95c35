@@ -140,6 +140,24 @@
       "parentUuid": "6347d1e2_6dec90e5",
       "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcd6310e_ac730420",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-02T19:05:21Z",
+      "side": 1,
+      "message": "IIUC this deprecation warning already landed in M96 though so it depends on how much time we\u0027re giving people to take care of deprecations. If just one milestone then we can land this anytime. (I think the mapAsync deprecation landed in M97 though.)",
+      "parentUuid": "7325abdd_f4de5ec1",
+      "revId": "dbe0744f1f7cf47d2d923090abf5dfd34ed95c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
