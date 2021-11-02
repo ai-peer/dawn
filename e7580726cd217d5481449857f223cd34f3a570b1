@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a84b2d53_fb5a3e94",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:31:48Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "e7580726cd217d5481449857f223cd34f3a570b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d926718f_4e67db78",
+        "filename": "src/dawn_native/CommandBufferStateTracker.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 277,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:31:48Z",
+      "side": 1,
+      "message": "nit: Here or in a follow-up can we have a constexpr variable in IntegerTypes.h for this so it is more clear what this special value is for?",
+      "range": {
+        "startLine": 277,
+        "startChar": 68,
+        "endLine": 277,
+        "endChar": 97
+      },
+      "revId": "e7580726cd217d5481449857f223cd34f3a570b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
