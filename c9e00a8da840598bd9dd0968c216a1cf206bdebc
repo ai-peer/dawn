@@ -33,6 +33,24 @@
       "message": "Note: When all objects will have been handled, WDYT of having a static_assert() that the size of kObjectTypeDependencyOrder is the same size as mObjectLists so we never forget to add objects to the list?",
       "revId": "c9e00a8da840598bd9dd0968c216a1cf206bdebc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99638c33_57c8e80d",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-02T17:24:54Z",
+      "side": 1,
+      "message": "Hmm, that might not work since I wasn\u0027t initially intending to add all the types to the list since some of them don\u0027t have any sort of cleanup? (And some just don\u0027t make sense, i.e. Device). We could consider trimming the mObjectLists at creation to match, but I was reusing the generated object code for that which is more generic and used in other areas now too, namely error messages.",
+      "parentUuid": "6a2eb48b_86d9b87a",
+      "revId": "c9e00a8da840598bd9dd0968c216a1cf206bdebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
