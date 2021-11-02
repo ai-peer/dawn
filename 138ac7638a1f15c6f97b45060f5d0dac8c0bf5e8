@@ -144,6 +144,24 @@
       "parentUuid": "20adc219_866cb721",
       "revId": "138ac7638a1f15c6f97b45060f5d0dac8c0bf5e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8aa3d3b_c871b224",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-02T03:03:12Z",
+      "side": 1,
+      "message": "ah yea this ok. sorry for the confusion",
+      "parentUuid": "243f05bd_2e303ec5",
+      "revId": "138ac7638a1f15c6f97b45060f5d0dac8c0bf5e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
