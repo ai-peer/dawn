@@ -39,6 +39,30 @@
       },
       "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d46c27d9_2f4f159b",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-02T00:08:36Z",
+      "side": 1,
+      "message": "Thanks! TBH it doesn\u0027t look bad to me. Thanks for sending the example!",
+      "parentUuid": "7e96abbd_365bfd1e",
+      "range": {
+        "startLine": 84,
+        "startChar": 26,
+        "endLine": 84,
+        "endChar": 52
+      },
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
