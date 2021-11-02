@@ -213,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf4181a0_3ae89d7d",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-02T18:54:31Z",
+      "side": 1,
+      "message": "do we filter out all adapters less than 10.12 in adapter discovery? the filtering can be in Dawn too as long as all the bots are on 10.12 now (I think they are)",
+      "parentUuid": "a08dc326_c21f6306",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d43e7145_14457f1c",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 6
