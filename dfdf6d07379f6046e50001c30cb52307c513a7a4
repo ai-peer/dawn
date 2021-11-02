@@ -249,6 +249,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "719a1662_e3c16a3c",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T21:25:27Z",
+      "side": 1,
+      "message": "Changed in BackendMTL.mm to gate Connect behind 10.12, seems all bots are green",
+      "parentUuid": "b7fd8a94_536f2baf",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d43e7145_14457f1c",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 6
