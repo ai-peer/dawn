@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a3279ab_2a4ff56f",
+        "filename": "src/dawn_native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfff992b_7bcdfaf4",
+      "range": {
+        "startLine": 234,
+        "startChar": 48,
+        "endLine": 234,
+        "endChar": 81
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "459f8eb7_2eb2e098",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-11-02T09:53:14Z",
       "side": 1,
       "message": "nit: CreateMTLFunction? I think the caller doesn\u0027t really need to care that it also handles overridable constants, because that\u0027s just one of the pieces of data in computeStage and we might have more in the future.",
+      "range": {
+        "startLine": 37,
+        "startChar": 17,
+        "endLine": 37,
+        "endChar": 49
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66424d21_1ef4ae8f",
+        "filename": "src/dawn_native/metal/ComputePipelineMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "459f8eb7_2eb2e098",
       "range": {
         "startLine": 37,
         "startChar": 17,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1008ef76_101a8550",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05a6f326_a0d790dd",
+      "range": {
+        "startLine": 44,
+        "startChar": 74,
+        "endLine": 44,
+        "endChar": 81
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b27e248a_51ec33bf",
@@ -123,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a08dc326_c21f6306",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "I think we are targeting at 10.12 https://github.com/gpuweb/gpuweb/issues/1069\nSo no fallback implementation is needed, and UNREACHABLE is enough?",
+      "parentUuid": "b27e248a_51ec33bf",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d43e7145_14457f1c",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 6
@@ -134,6 +224,30 @@
       "writtenOn": "2021-11-02T09:53:14Z",
       "side": 1,
       "message": "nit: this code seems like it should be common to both the constants and the non-constant code paths.",
+      "range": {
+        "startLine": 242,
+        "startChar": 0,
+        "endLine": 248,
+        "endChar": 45
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bcbe1b3_8cbaa96c",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "There\u0027s no newFunctionWithName + error signature. That seems to be handled at newLibraryWithSource step which takes in the source. newFunctionWithName is just getting entrypoint name from the",
+      "parentUuid": "d43e7145_14457f1c",
       "range": {
         "startLine": 242,
         "startChar": 0,
@@ -167,6 +281,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcdff611_f672e3fa",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec3f44bc_52373736",
+      "range": {
+        "startLine": 249,
+        "startChar": 12,
+        "endLine": 249,
+        "endChar": 13
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2139c497_d89c0e37",
@@ -184,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3f6ce24_7c6f6374",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2139c497_d89c0e37",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "741304fe_6ea74fcb",
@@ -197,6 +353,30 @@
       "writtenOn": "2021-11-02T01:03:17Z",
       "side": 1,
       "message": "maybe \"overriddenConstants\" to be clear\n\nor maybe initialize this as constantsToInitialize \u003d entryPointMetadata.initializedOverridableConstants, and remove values that are already specified in programmableStage.constants ? This way it\u0027s a copy and O(n) removals instead of O(n) insertions and O(m) lookups.",
+      "range": {
+        "startLine": 207,
+        "startChar": 48,
+        "endLine": 207,
+        "endChar": 57
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4096deb1_6d347285",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 207,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Hmm... seems to be a copy + O(n) lookup + O(n) removals since initializedOverridableConstants only has the key so still need to fetch OverridableConstant from entryPointMetadata.overridableConstants.\nJust renaming to overriddenConstants",
+      "parentUuid": "741304fe_6ea74fcb",
       "range": {
         "startLine": 207,
         "startChar": 48,
@@ -230,6 +410,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83c5e744_03ffb6ad",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06ab9a0e_baee2bf4",
+      "range": {
+        "startLine": 249,
+        "startChar": 46,
+        "endLine": 249,
+        "endChar": 49
+      },
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bd2d465_5f5d21b0",
@@ -247,6 +451,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a48c9c_64bfd00a",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4bd2d465_5f5d21b0",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6b11064_f32938b9",
@@ -260,6 +482,24 @@
       "writtenOn": "2021-11-02T09:53:14Z",
       "side": 1,
       "message": "nit: we can early out with this case first so as to dedent the rest of the function.",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79cd472d_9ee5a87e",
+        "filename": "src/dawn_native/metal/UtilsMetal.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T18:39:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6b11064_f32938b9",
       "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
