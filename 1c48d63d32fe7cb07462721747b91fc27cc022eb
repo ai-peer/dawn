@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b7270e4_2ecb8a88",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:51:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7e96abbd_365bfd1e",
@@ -78,6 +95,23 @@
         "endLine": 84,
         "endChar": 52
       },
+      "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba318478_e56784f5",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:51:19Z",
+      "side": 1,
+      "message": "nit: we could introduce a GetFormatAspects to TextureUtils.h. Deferring it to later LGTM too though. We can do the very comprehensive tests with extension formats etc later in the CTS.",
       "revId": "1c48d63d32fe7cb07462721747b91fc27cc022eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

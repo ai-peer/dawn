@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c0d1ef4_e83a90f6",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:51:19Z",
+      "side": 1,
+      "message": "Ack, then it seems this CL implements both depth and stencil readonly in D3D12, but only tests one for now. LGTM assuming there\u0027s a follow-up CL with a test for stencil-readonly.\n\nCan we have a comment that there is not STENCIL_READ state and that it is bundled with DEPTH_READ?",
+      "parentUuid": "da3dddf8_56dc830c",
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1b45215_63868d73",
         "filename": "src/dawn_native/d3d12/TextureD3D12.cpp",
         "patchSetId": 3
@@ -260,6 +278,30 @@
       "side": 1,
       "message": "See the discussion below at [2]. Maybe we don\u0027t (cannot) need to do this?",
       "parentUuid": "50eafc20_6f53f5e4",
+      "range": {
+        "startLine": 154,
+        "startChar": 55,
+        "endLine": 155,
+        "endChar": 75
+      },
+      "revId": "0ae9cd4dbb6a390f8c069d1e0fa084db137ebaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62fab339_a1b3b8f1",
+        "filename": "src/dawn_native/d3d12/TextureD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:51:19Z",
+      "side": 1,
+      "message": "I think the frontend could do the translation from two bools to a single aspect mask. I have a very slight aesthetic preference for that, but have two bools is ok too.",
+      "parentUuid": "927d2630_0320c879",
       "range": {
         "startLine": 154,
         "startChar": 55,
