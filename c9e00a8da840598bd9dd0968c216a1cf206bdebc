@@ -51,6 +51,24 @@
       "parentUuid": "6a2eb48b_86d9b87a",
       "revId": "c9e00a8da840598bd9dd0968c216a1cf206bdebc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95743062_a4ede274",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T17:38:08Z",
+      "side": 1,
+      "message": "Which objects don\u0027t have cleanup? Even encoders might reach into the device in some cases no?\n\nBut since Device is in there, happy to not address this comment.",
+      "parentUuid": "99638c33_57c8e80d",
+      "revId": "c9e00a8da840598bd9dd0968c216a1cf206bdebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
