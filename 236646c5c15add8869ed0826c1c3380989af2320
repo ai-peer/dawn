@@ -84,6 +84,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "01f29fa2_50a5c1a6",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T09:17:57Z",
+      "side": 1,
+      "message": "Ah ok. I think another way to fix it would be to do:\n\ntemplate\u003ctypename Parent\u003e\nclass CopyTextureForBrowser : public Parent {\n\n}\n\nclass CopyTextureForBrowser_AlphaOps : public CopyTextureForBrowser\u003cDawnTestWithParams\u003cAlphaTestParams\u003e\u003e\n\nThis way CopyTextureForBrowser is always a child class of DawnTest.\n\nhttps://en.wikipedia.org/wiki/Curiously_recurring_template_pattern",
+      "parentUuid": "a2be31ca_9f9fbc95",
+      "range": {
+        "startLine": 582,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 0
+      },
+      "revId": "236646c5c15add8869ed0826c1c3380989af2320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c22cb55_96719f37",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
