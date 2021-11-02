@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daab1d96_ae817992",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-11-02T13:02:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "9cbbcc4b_bf0c0fdf",
+      "range": {
+        "startLine": 56,
+        "startChar": 111,
+        "endLine": 56,
+        "endChar": 235
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e02ceecb_3009c4c3",
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "I suppose, though that will obfuscate what the log currently gives us, which is a single line per test with pass/fail/etc. But maybe it\u0027s okay. Should I folow up with a change for this?",
       "parentUuid": "e02ceecb_3009c4c3",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 102
+      },
+      "revId": "17d91d64d55a9e81f9cecb867aab85bb445ca163",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61096b04_51cb07c3",
+        "filename": "src/dawn_node/README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-11-02T13:02:40Z",
+      "side": 1,
+      "message": "Not really a request, just something that I hit.",
+      "parentUuid": "b1783699_3c581abb",
       "range": {
         "startLine": 74,
         "startChar": 0,
