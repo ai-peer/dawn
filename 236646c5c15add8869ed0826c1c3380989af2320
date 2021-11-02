@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2be31ca_9f9fbc95",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-02T09:10:13Z",
+      "side": 1,
+      "message": "The problem is that DoTest is in CopyTextureForBrowserTest, which cannot use this Macro EXPECT_BUFFER_U32_RANGE_EQ",
+      "parentUuid": "cf070433_25095d7f",
+      "range": {
+        "startLine": 582,
+        "startChar": 0,
+        "endLine": 587,
+        "endChar": 0
+      },
+      "revId": "236646c5c15add8869ed0826c1c3380989af2320",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c22cb55_96719f37",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 6
