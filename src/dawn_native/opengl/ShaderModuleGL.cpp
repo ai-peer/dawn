@@ -307,8 +307,8 @@ namespace dawn_native { namespace opengl {
                                                          /* mayCollide */ true);
 
         tint::Program program;
-        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(),
-                                               transformInputs, &transformOutputs, nullptr));
+        DAWN_TRY_ASSIGN(program, RunTransforms(&transformManager, GetTintProgram(), transformInputs,
+                                               &transformOutputs, nullptr));
 
         std::string remappedEntryPointName;
         if (auto* data = transformOutputs.Get<tint::transform::Renamer::Data>()) {
