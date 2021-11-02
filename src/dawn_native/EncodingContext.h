@@ -52,9 +52,7 @@ namespace dawn_native {
         }
 
         template <typename... Args>
-        inline bool ConsumedError(MaybeError maybeError,
-                                  const char* formatStr,
-                                  const Args&... args) {
+        inline bool ConsumedError(MaybeError maybeError, const char* formatStr, Args&&... args) {
             if (DAWN_UNLIKELY(maybeError.IsError())) {
                 std::unique_ptr<ErrorData> error = maybeError.AcquireError();
                 if (error->GetType() == InternalErrorType::Validation) {
@@ -62,6 +60,9 @@ namespace dawn_native {
                     absl::UntypedFormatSpec format(formatStr);
                     if (absl::FormatUntyped(&out, format, {absl::FormatArg(args)...})) {
                         error->AppendContext(std::move(out));
+                    } else {
+                        error->AppendContext(absl::StrFormat(
+                            "[Failed to format error message: \"%s\"].", formatStr));
                     }
                 }
                 HandleError(std::move(error));
@@ -98,12 +99,13 @@ namespace dawn_native {
         inline bool TryEncode(const ApiObjectBase* encoder,
                               EncodeFunction&& encodeFunction,
                               const char* formatStr,
-                              const Args&... args) {
+                              Args&&... args) {
             if (!CheckCurrentEncoder(encoder)) {
                 return false;
             }
             ASSERT(!mWasMovedToIterator);
-            return !ConsumedError(encodeFunction(&mPendingCommands), formatStr, args...);
+            return !ConsumedError(encodeFunction(&mPendingCommands), formatStr,
+                                  std::forward<Args>(args)...);
         }
 
         // Must be called prior to encoding a BeginRenderPassCmd. Note that it's OK to call this
