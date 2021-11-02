@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "53daaa69_c0c0d980",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-02T23:48:06Z",
+      "side": 1,
+      "message": "nit: \"Invalid\" now",
+      "range": {
+        "startLine": 14,
+        "startChar": 41,
+        "endLine": 14,
+        "endChar": 46
+      },
+      "revId": "4c390f242f1de981e36af93bd3a16a38305a2665",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e26966e5_b354e317",
@@ -14,6 +37,23 @@
       "writtenOn": "2021-11-02T23:24:22Z",
       "side": 1,
       "message": "Thanks for the review!",
+      "revId": "4c390f242f1de981e36af93bd3a16a38305a2665",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8aa5570_fed073c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-02T23:48:06Z",
+      "side": 1,
+      "message": "LGTM too",
       "revId": "4c390f242f1de981e36af93bd3a16a38305a2665",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
