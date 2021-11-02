@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac4feda_dc402c31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:39:16Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "c9e00a8da840598bd9dd0968c216a1cf206bdebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a2eb48b_86d9b87a",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T08:39:16Z",
+      "side": 1,
+      "message": "Note: When all objects will have been handled, WDYT of having a static_assert() that the size of kObjectTypeDependencyOrder is the same size as mObjectLists so we never forget to add objects to the list?",
+      "revId": "c9e00a8da840598bd9dd0968c216a1cf206bdebc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
