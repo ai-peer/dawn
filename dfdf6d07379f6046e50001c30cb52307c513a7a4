@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7fd8a94_536f2baf",
+        "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-02T19:41:50Z",
+      "side": 1,
+      "message": "I don\u0027t see a AdapterMTL (There\u0027s AdapterVk and AdapterD3D12) Is that done elsewhere?",
+      "parentUuid": "bf4181a0_3ae89d7d",
+      "revId": "dfdf6d07379f6046e50001c30cb52307c513a7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d43e7145_14457f1c",
         "filename": "src/dawn_native/metal/ShaderModuleMTL.mm",
         "patchSetId": 6
