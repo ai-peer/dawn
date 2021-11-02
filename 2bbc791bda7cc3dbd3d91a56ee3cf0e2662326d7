@@ -89,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "375de4f4_bbdde555",
+        "filename": "src/dawn_native/IndirectDrawMetadata.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-02T09:29:28Z",
+      "side": 1,
+      "message": "Yeah, I can\u0027t find a good way to test this either. I guess fuzzers + ASAN will cover it :)",
+      "parentUuid": "8fa8a888_26bd1b0f",
+      "revId": "2bbc791bda7cc3dbd3d91a56ee3cf0e2662326d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "766ffe51_36eb2837",
         "filename": "src/dawn_native/RenderEncoderBase.cpp",
         "patchSetId": 2
