@@ -14,6 +14,8 @@
 
 #include "TextureUtils.h"
 
+#include "dawn_native/DawnNative.h"
+
 namespace utils {
     bool TextureFormatSupportsStorageTexture(wgpu::TextureFormat format) {
         switch (format) {
@@ -117,6 +119,11 @@ namespace utils {
             default:
                 return false;
         }
+    }
+
+    bool IsFormatSupported(wgpu::Device device, wgpu::TextureFormat textureFormat) {
+        return dawn_native::IsFormatSupported(device.Get(),
+                                              static_cast<WGPUTextureFormat>(textureFormat));
     }
 
     uint32_t GetTexelBlockSizeInBytes(wgpu::TextureFormat textureFormat) {
@@ -233,6 +240,8 @@ namespace utils {
 
             case wgpu::TextureFormat::Depth24Plus:
             case wgpu::TextureFormat::Depth24PlusStencil8:
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+            case wgpu::TextureFormat::Depth32FloatStencil8:
 
             // Block size of a multi-planar format depends on aspect.
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
@@ -287,6 +296,8 @@ namespace utils {
             case wgpu::TextureFormat::Depth24Plus:
             case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth16Unorm:
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+            case wgpu::TextureFormat::Depth32FloatStencil8:
                 return 1u;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
@@ -403,6 +414,8 @@ namespace utils {
             case wgpu::TextureFormat::Depth24Plus:
             case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth16Unorm:
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+            case wgpu::TextureFormat::Depth32FloatStencil8:
                 return 1u;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
