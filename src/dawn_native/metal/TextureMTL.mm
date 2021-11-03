@@ -223,6 +223,10 @@ namespace dawn_native { namespace metal {
                 return MTLPixelFormatDepth32Float;
             case wgpu::TextureFormat::Depth24PlusStencil8:
                 return MTLPixelFormatDepth32Float_Stencil8;
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+                return MTLPixelFormatDepth24Unorm_Stencil8;
+            case wgpu::TextureFormat::Depth32FloatStencil8:
+                return MTLPixelFormatDepth32Float_Stencil8;
 
 #if defined(DAWN_PLATFORM_MACOS)
             case wgpu::TextureFormat::BC1RGBAUnorm:
