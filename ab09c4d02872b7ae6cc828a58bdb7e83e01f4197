@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a5d8ee1_6ae9d8b9",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-03T18:20:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e73d0a35_6be9d26e",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddf8cd77_40fa7003",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-03T16:57:31Z",
       "side": 1,
       "message": "nit: This seems like it could just be an if since we use default: below.",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3300a4a_99968551",
+        "filename": "src/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-03T18:20:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddf8cd77_40fa7003",
       "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb885be2_07c23044",
+        "filename": "src/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-03T18:20:21Z",
+      "side": 1,
+      "message": "Filed a swiftshader issue. It appears that it doesn\u0027t clear with certain value, and may be truncating the value somehow. https://issuetracker.google.com/issues/204919030",
+      "parentUuid": "dc69a73d_ef7ad7aa",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a071978_077387e1",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-11-03T16:57:31Z",
       "side": 1,
       "message": "IMHO we can leave this to the CTS.",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb9652cb_1a3f2958",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-03T18:20:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a071978_077387e1",
       "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
