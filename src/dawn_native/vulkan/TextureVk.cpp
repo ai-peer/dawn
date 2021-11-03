@@ -306,6 +306,10 @@ namespace dawn_native { namespace vulkan {
                 } else {
                     return VK_FORMAT_D24_UNORM_S8_UINT;
                 }
+            case wgpu::TextureFormat::Depth24UnormStencil8:
+                return VK_FORMAT_D24_UNORM_S8_UINT;
+            case wgpu::TextureFormat::Depth32FloatStencil8:
+                return VK_FORMAT_D32_SFLOAT_S8_UINT;
 
             case wgpu::TextureFormat::BC1RGBAUnorm:
                 return VK_FORMAT_BC1_RGBA_UNORM_BLOCK;
