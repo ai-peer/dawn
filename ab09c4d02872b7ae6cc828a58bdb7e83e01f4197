@@ -16,6 +16,91 @@
       "message": "Still fiddling with how to handle equality comparison sampler tests, but in the meantime I think it\u0027s important that we get this (and the stencil8 followup that\u0027s almost ready) landed. PTAL!",
       "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b3ace0_0c24370f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T16:57:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e73d0a35_6be9d26e",
+        "filename": "src/dawn_native/metal/TextureMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T16:57:31Z",
+      "side": 1,
+      "message": "Can we add a TODO for https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1181 ?",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddf8cd77_40fa7003",
+        "filename": "src/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T16:57:31Z",
+      "side": 1,
+      "message": "nit: This seems like it could just be an if since we use default: below.",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc69a73d_ef7ad7aa",
+        "filename": "src/tests/end2end/DepthStencilLoadOpTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T16:57:31Z",
+      "side": 1,
+      "message": "Why does this fail on Swiftshader. Should we open a Dawn issue to track resolving this or Swiftshader issue if it is a swiftshader issue?",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a071978_077387e1",
+        "filename": "src/tests/end2end/DepthStencilSamplingTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T16:57:31Z",
+      "side": 1,
+      "message": "IMHO we can leave this to the CTS.",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
