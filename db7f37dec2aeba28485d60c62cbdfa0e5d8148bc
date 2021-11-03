@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef0153a_09c37b71",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 526,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-03T17:37:44Z",
+      "side": 1,
+      "message": "This is to avoid restarting the server below. A bit crude, but it works.",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 526,
+        "endChar": 11
+      },
+      "revId": "db7f37dec2aeba28485d60c62cbdfa0e5d8148bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
