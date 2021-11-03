@@ -637,6 +637,12 @@ namespace dawn_native {
         return mFormatTable[index];
     }
 
+    bool DeviceBase::IsFormatSupported(wgpu::TextureFormat format) const {
+        size_t index = ComputeFormatIndex(format);
+        ASSERT(index < mFormatTable.size());
+        return mFormatTable[index].isSupported;
+    }
+
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
         const BindGroupLayoutDescriptor* descriptor,
         PipelineCompatibilityToken pipelineCompatibilityToken) {
