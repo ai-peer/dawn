@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1de363b_1ffa19c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-03T16:50:12Z",
+      "side": 1,
+      "message": "Still fiddling with how to handle equality comparison sampler tests, but in the meantime I think it\u0027s important that we get this (and the stencil8 followup that\u0027s almost ready) landed. PTAL!",
+      "revId": "ab09c4d02872b7ae6cc828a58bdb7e83e01f4197",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
