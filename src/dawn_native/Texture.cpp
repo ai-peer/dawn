@@ -277,6 +277,14 @@ namespace dawn_native {
             internalUsageDesc != nullptr && !device->IsFeatureEnabled(Feature::DawnInternalUsages),
             "The dawn-internal-usages feature is not enabled");
 
+        DAWN_INVALID_IF(descriptor->format == wgpu::TextureFormat::Depth24UnormStencil8 &&
+                            !device->IsFeatureEnabled(Feature::Depth24UnormStencil8),
+                        "The depth24unorm-stencil8 feature is not enabled");
+
+        DAWN_INVALID_IF(descriptor->format == wgpu::TextureFormat::Depth32FloatStencil8 &&
+                            !device->IsFeatureEnabled(Feature::Depth32FloatStencil8),
+                        "The depth32float-stencil8 feature is not enabled");
+
         const Format* format;
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
 

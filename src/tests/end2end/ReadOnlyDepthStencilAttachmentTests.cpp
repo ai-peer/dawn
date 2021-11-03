@@ -163,11 +163,16 @@ class ReadOnlyDepthStencilAttachmentTests
 class ReadOnlyDepthAttachmentTests : public ReadOnlyDepthStencilAttachmentTests {};
 
 TEST_P(ReadOnlyDepthAttachmentTests, Test) {
+    wgpu::TextureFormat depthFormat = GetParam().mTextureFormat;
+
+    // TODO(crbug.com/dawn/690): depth24unorm-stencil8 and depth32float-stencil8 texture formats are
+    // unimplemented.
+    DAWN_TEST_UNSUPPORTED_IF(depthFormat == wgpu::TextureFormat::Depth24UnormStencil8);
+    DAWN_TEST_UNSUPPORTED_IF(depthFormat == wgpu::TextureFormat::Depth32FloatStencil8);
+
     wgpu::Texture colorTexture =
         CreateTexture(wgpu::TextureFormat::RGBA8Unorm,
                       wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc);
-
-    wgpu::TextureFormat depthFormat = GetParam().mTextureFormat;
 
     DepthStencilValues values;
     values.depthInitValue = 0.2;
@@ -188,11 +193,16 @@ TEST_P(ReadOnlyDepthAttachmentTests, Test) {
 class ReadOnlyStencilAttachmentTests : public ReadOnlyDepthStencilAttachmentTests {};
 
 TEST_P(ReadOnlyStencilAttachmentTests, Test) {
+    wgpu::TextureFormat stencilFormat = GetParam().mTextureFormat;
+
+    // TODO(crbug.com/dawn/690): depth24unorm-stencil8 and depth32float-stencil8 texture formats are
+    // unimplemented.
+    DAWN_TEST_UNSUPPORTED_IF(stencilFormat == wgpu::TextureFormat::Depth24UnormStencil8);
+    DAWN_TEST_UNSUPPORTED_IF(stencilFormat == wgpu::TextureFormat::Depth32FloatStencil8);
+
     wgpu::Texture colorTexture =
         CreateTexture(wgpu::TextureFormat::RGBA8Unorm,
                       wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc);
-
-    wgpu::TextureFormat stencilFormat = GetParam().mTextureFormat;
 
     DepthStencilValues values;
     values.stencilInitValue = 3;
