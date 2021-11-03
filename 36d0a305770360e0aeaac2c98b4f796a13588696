@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72688588_279e7f08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T09:23:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "36d0a305770360e0aeaac2c98b4f796a13588696",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30c3885_393caa13",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T09:23:42Z",
+      "side": 1,
+      "message": "nit: WebGPU is targeted at 10.12 but Dawn should ideally span all Metal devices. (with extra validation when stuff is not available, like the firstIndex/offset stuff on old iOS devices).",
+      "range": {
+        "startLine": 159,
+        "startChar": 15,
+        "endLine": 159,
+        "endChar": 19
+      },
+      "revId": "36d0a305770360e0aeaac2c98b4f796a13588696",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "601899da_763db3d2",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-03T09:23:42Z",
+      "side": 1,
+      "message": "Can we have a TODO + issue filed to have Dawn allow non-conformant WebGPU on macOS 10.11? It would be useful to native users of Dawn.",
+      "revId": "36d0a305770360e0aeaac2c98b4f796a13588696",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
