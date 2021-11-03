@@ -246,6 +246,12 @@ namespace dawn_native { namespace opengl {
                 }
             }
 
+            // Depth/Stencil Texture Formats
+            {
+                mSupportedFeatures.EnableFeature(dawn_native::Feature::Depth24UnormStencil8);
+                mSupportedFeatures.EnableFeature(dawn_native::Feature::Depth32FloatStencil8);
+            }
+
             return {};
         }
 
