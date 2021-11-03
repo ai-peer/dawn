@@ -28,12 +28,14 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
+	"os/signal"
 	"path/filepath"
 	"regexp"
 	"runtime"
 	"strconv"
 	"strings"
 	"sync"
+	"syscall"
 	"time"
 
 	"github.com/mattn/go-colorable"
@@ -514,7 +516,17 @@ func (r *runner) runServer(caseIndices <-chan int, results chan<- result) error 
 		}
 	}
 
+	cancel := false
+	onSignal(func() {
+		cancel = true
+		stopServer()
+	})
+
 	for idx := range caseIndices {
+		if cancel {
+			break
+		}
+
 		// Redirect the server log per test case
 		caseServerLog := &bytes.Buffer{}
 		rw.Writer = caseServerLog
@@ -728,6 +740,8 @@ func (r *runner) runTestcase(query string) result {
 	ctx, cancel := context.WithTimeout(context.Background(), testTimeout)
 	defer cancel()
 
+	onSignal(cancel)
+
 	args := []string{
 		"-e", r.evalScript("cmdline"), // Evaluate 'eval'.
 		"--",
@@ -869,4 +883,14 @@ func printANSIProgressBar(animFrame int, numTests int, numByStatus map[status]in
 		// cannot move cursor, so newline
 		fmt.Println()
 	}
+}
+
+func onSignal(f func()) {
+	sigs := make(chan os.Signal, 1)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
+	go func() {
+		sig := <-sigs
+		fmt.Printf("Signal received: %v\n", sig)
+		f()
+	}()
 }
