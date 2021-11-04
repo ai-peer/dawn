@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bdee830_47be9260",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T05:06:20Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12bb36bf_3a225fa9",
+        "filename": "src/dawn_native/utils/WGPUHelpers.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T05:06:20Z",
+      "side": 1,
+      "message": "this could probably take the BGL directly (was find-replace from the other WGPUHelpers)",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 39
+      },
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
