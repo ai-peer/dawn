@@ -33,6 +33,24 @@
       "message": "LGTM. As a thought though, would it make sense to consider trying to either use these implementations in the other (almost identical) WGPUHelper file (probably using casting?) or vice-versa? Especially with the extra constructors for the initializer list stuff.",
       "revId": "d5e729324c5ed3c40b61b609cd500e2f0cf452cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb716dba_2126fdc0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T17:11:52Z",
+      "side": 1,
+      "message": "I tried, but it was pretty hard to make them share the same code. Do you have any ideas?",
+      "parentUuid": "f9c95703_1ceccaab",
+      "revId": "d5e729324c5ed3c40b61b609cd500e2f0cf452cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
