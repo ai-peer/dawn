@@ -1548,6 +1548,22 @@ namespace detail {
         mExpected.assign(values, values + count);
     }
 
+    template <typename T, typename U>
+    ExpectAtLeastOneEq<T, U>::ExpectAtLeastOneEq(const unsigned int count,
+                                                 std::initializer_list<const T*> values)
+        : ExpectAtLeastOneEq(count, 0, values) {
+    }
+
+    template <typename T, typename U>
+    ExpectAtLeastOneEq<T, U>::ExpectAtLeastOneEq(const unsigned int count,
+                                                 T tolerance,
+                                                 std::initializer_list<const T*> values)
+        : mTolerance(tolerance) {
+        for (const T* v : values) {
+            mExpectations.emplace_back(v, v + count);
+        }
+    }
+
     namespace {
 
         template <typename T, typename U = T>
@@ -1616,6 +1632,27 @@ namespace detail {
         return testing::AssertionSuccess();
     }
 
+    template <typename T, typename U>
+    testing::AssertionResult ExpectAtLeastOneEq<T, U>::Check(const void* data, size_t size) {
+        bool hadSuccess = false;
+        testing::AssertionResult allResults =
+            testing::AssertionFailure() << "All checks failed. Expected at least one success.\n";
+
+        uint32_t i = 0;
+        for (auto& exp : mExpectations) {
+            testing::AssertionResult result =
+                ExpectEq<T, U>(exp.data(), exp.size(), mTolerance).Check(data, size);
+            allResults << "===== CHECK " << (i++) << " =====\n" << result.message();
+            if (result) {
+                hadSuccess = true;
+            }
+        }
+        if (!hadSuccess) {
+            return allResults;
+        }
+        return testing::AssertionSuccess();
+    }
+
     template class ExpectEq<uint8_t>;
     template class ExpectEq<uint16_t>;
     template class ExpectEq<uint32_t>;
@@ -1623,6 +1660,7 @@ namespace detail {
     template class ExpectEq<RGBA8>;
     template class ExpectEq<float>;
     template class ExpectEq<float, uint16_t>;
+    template class ExpectAtLeastOneEq<uint32_t>;
 
     template <typename T>
     ExpectBetweenColors<T>::ExpectBetweenColors(T value0, T value1) {
