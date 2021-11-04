@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91cb52c5_f8cb3c56",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-04T14:10:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a792ec80_e66eeb97",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 27
+      },
+      "revId": "05d6a52dedf0512e292e5a3cc2b3fb40fd6a0831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "820934a4_48b4f1f0",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-04T14:04:56Z",
       "side": 1,
       "message": "I assume this works on windows too?",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 53
+      },
+      "revId": "05d6a52dedf0512e292e5a3cc2b3fb40fd6a0831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a356e6cd_21ad2fe1",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-04T14:10:17Z",
+      "side": 1,
+      "message": "Yeah, I only tested it on Windows, actually.",
+      "parentUuid": "820934a4_48b4f1f0",
       "range": {
         "startLine": 85,
         "startChar": 1,
