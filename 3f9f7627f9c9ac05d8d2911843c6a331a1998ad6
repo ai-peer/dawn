@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37610de6_234d90d0",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T21:28:00Z",
+      "side": 1,
+      "message": "even with a stack vec, I\u0027m not super optimistic the compiler will inline and optimize out the internals of utils::MakeBindGroup to stack allocate it just once and do the minimal patching this loop currently requires, so keeping this callsite as-is. \n\nIt\u0027s worth considering putting stack_vec in utils::MakeBindGroup anyway though? but I\u0027ll leave that as a follow-up if we find we need it for perf.\n\nActually some of those functions could potentially just calloc(..)",
+      "parentUuid": "a2a9c7b2_47e244ef",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd50f86d_2e50bcba",
