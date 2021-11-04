@@ -105,21 +105,26 @@ namespace dawn_native {
     ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
                                            CommandEncoder* commandEncoder,
                                            EncodingContext* encodingContext)
-        : ProgrammablePassEncoder(device, encodingContext), mCommandEncoder(commandEncoder) {
+        : ProgrammableEncoder(device, encodingContext), mCommandEncoder(commandEncoder) {
+        TrackInDevice();
     }
 
     ComputePassEncoder::ComputePassEncoder(DeviceBase* device,
                                            CommandEncoder* commandEncoder,
                                            EncodingContext* encodingContext,
                                            ErrorTag errorTag)
-        : ProgrammablePassEncoder(device, encodingContext, errorTag),
-          mCommandEncoder(commandEncoder) {
+        : ProgrammableEncoder(device, encodingContext, errorTag), mCommandEncoder(commandEncoder) {
     }
 
     ComputePassEncoder* ComputePassEncoder::MakeError(DeviceBase* device,
                                                       CommandEncoder* commandEncoder,
                                                       EncodingContext* encodingContext) {
         return new ComputePassEncoder(device, commandEncoder, encodingContext, ObjectBase::kError);
+    }
+
+    void ComputePassEncoder::DeleteThis() {
+        mEncodingContext->EnsurePassExited(this);
+        ApiObjectBase::DeleteThis();
     }
 
     ObjectType ComputePassEncoder::GetType() const {
