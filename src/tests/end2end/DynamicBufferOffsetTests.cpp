@@ -14,8 +14,11 @@
 
 #include "tests/DawnTest.h"
 
+#include "common/Math.h"
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
+
+#include <numeric>
 
 constexpr uint32_t kRTSize = 400;
 constexpr uint32_t kBindingSize = 8;
@@ -398,9 +401,224 @@ TEST_P(DynamicBufferOffsetTests, UpdateDynamicOffsetsMultipleTimesComputePipelin
     EXPECT_BUFFER_U32_RANGE_EQ(expectedData.data(), mStorageBuffers[1], 0, expectedData.size());
 }
 
+namespace {
+    using SourceUsage = wgpu::BufferUsage;
+    using OOBRead = bool;
+    using OOBWrite = bool;
+
+    DAWN_TEST_PARAM_STRUCT(OOBDynamicBufferOffsetParams, SourceUsage, OOBRead, OOBWrite)
+}  // anonymous namespace
+
+class OOBDynamicBufferOffsetTests : public DawnTestWithParams<OOBDynamicBufferOffsetParams> {};
+
+// Test robust buffer access behavior for out of bounds accesses to dynamic buffer bindings.
+TEST_P(OOBDynamicBufferOffsetTests, CheckOOBAccess) {
+    // TODO(crbug.com/dawn/429): Dynamic storage buffers are not bounds clamped on D3D12.
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && ((GetParam().mOOBRead &&
+                                         GetParam().mSourceUsage == wgpu::BufferUsage::Storage) ||
+                                        GetParam().mOOBWrite));
+
+    // Debug layers on NVIDIA OpenGLES seem to add additional data into the buffer for OOB
+    // uniform buffer writes.
+    DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES() && !IsANGLE() && IsNvidia() &&
+                             IsBackendValidationEnabled() &&
+                             GetParam().mSourceUsage == wgpu::BufferUsage::Uniform &&
+                             GetParam().mOOBRead && !GetParam().mOOBWrite);
+
+    static constexpr uint32_t kArrayLength = 5u;
+
+    // Out-of-bounds access will start halfway into the array and index off the end.
+    static constexpr uint32_t kOOBOffset = kArrayLength / 2;
+
+    wgpu::BufferBindingType sourceBindingType;
+    switch (GetParam().mSourceUsage) {
+        case wgpu::BufferUsage::Uniform:
+            sourceBindingType = wgpu::BufferBindingType::Uniform;
+            break;
+        case wgpu::BufferUsage::Storage:
+            sourceBindingType = wgpu::BufferBindingType::ReadOnlyStorage;
+            break;
+        default:
+            UNREACHABLE();
+    }
+    wgpu::BindGroupLayout bgl = utils::MakeBindGroupLayout(
+        device, {{0, wgpu::ShaderStage::Compute, sourceBindingType, true},
+                 {1, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage, true}});
+    wgpu::PipelineLayout layout = utils::MakeBasicPipelineLayout(device, &bgl);
+
+    wgpu::ComputePipeline pipeline;
+    {
+        std::ostringstream shader;
+        shader << "let kArrayLength: u32 = " << std::to_string(kArrayLength) << "u;\n";
+        if (GetParam().mOOBRead) {
+            shader << "let kReadOffset: u32 = " << std::to_string(kOOBOffset) << "u;\n";
+        } else {
+            shader << "let kReadOffset: u32 = 0u;\n";
+        }
+
+        if (GetParam().mOOBWrite) {
+            shader << "let kWriteOffset: u32 = " << std::to_string(kOOBOffset) << "u;\n";
+        } else {
+            shader << "let kWriteOffset: u32 = 0u;\n";
+        }
+        switch (GetParam().mSourceUsage) {
+            case wgpu::BufferUsage::Uniform:
+                shader << R"(
+                    [[block]] struct Src {
+                        values : array<vec4<u32>, kArrayLength>;
+                    };
+                    [[group(0), binding(0)]] var<uniform> src : Src;
+                )";
+                break;
+            case wgpu::BufferUsage::Storage:
+                shader << R"(
+                    [[block]] struct Src {
+                        values : array<vec4<u32>>;
+                    };
+                    [[group(0), binding(0)]] var<storage, read> src : Src;
+                )";
+                break;
+            default:
+                UNREACHABLE();
+        }
+
+        shader << R"(
+            [[block]] struct Dst {
+                values : array<vec4<u32>>;
+            };
+            [[group(0), binding(1)]] var<storage, read_write> dst : Dst;
+        )";
+        shader << R"(
+            [[stage(compute), workgroup_size(1)]] fn main() {
+                for (var i: u32 = 0u; i < kArrayLength; i = i + 1u) {
+                    dst.values[i + kWriteOffset] = src.values[i + kReadOffset];
+                }
+            }
+        )";
+        wgpu::ComputePipelineDescriptor pipelineDesc;
+        pipelineDesc.layout = layout;
+        pipelineDesc.compute.module = utils::CreateShaderModule(device, shader.str().c_str());
+        pipelineDesc.compute.entryPoint = "main";
+        pipeline = device.CreateComputePipeline(&pipelineDesc);
+    }
+
+    uint32_t minUniformBufferOffsetAlignment =
+        GetSupportedLimits().limits.minUniformBufferOffsetAlignment;
+    uint32_t minStorageBufferOffsetAlignment =
+        GetSupportedLimits().limits.minStorageBufferOffsetAlignment;
+
+    uint32_t arrayByteLength = kArrayLength * 4 * sizeof(uint32_t);
+
+    uint32_t uniformBufferOffset = Align(arrayByteLength, minUniformBufferOffsetAlignment);
+    uint32_t storageBufferOffset = Align(arrayByteLength, minStorageBufferOffsetAlignment);
+
+    // Enough space to bind at a dynamic offset.
+    uint32_t uniformBufferSize = uniformBufferOffset + arrayByteLength;
+    uint32_t storageBufferSize = storageBufferOffset + arrayByteLength;
+
+    uint64_t srcBufferSize;
+    uint32_t srcBufferByteOffset;
+    uint32_t dstBufferByteOffset = storageBufferOffset;
+    uint64_t dstBufferSize = storageBufferSize;
+    switch (GetParam().mSourceUsage) {
+        case wgpu::BufferUsage::Uniform:
+            srcBufferSize = uniformBufferSize;
+            srcBufferByteOffset = uniformBufferOffset;
+            break;
+        case wgpu::BufferUsage::Storage:
+            srcBufferSize = storageBufferSize;
+            srcBufferByteOffset = storageBufferOffset;
+            break;
+        default:
+            UNREACHABLE();
+    }
+
+    std::vector<uint32_t> srcData(srcBufferSize / sizeof(uint32_t));
+
+    // Robust buffer access may clamp, or zero reads and skip writes.
+    // There are multiple expected data because the implementation may choose
+    // how RBA is implemented.
+    std::vector<uint32_t> expectedDst0(dstBufferSize / sizeof(uint32_t));
+    std::vector<uint32_t> expectedDst1(dstBufferSize / sizeof(uint32_t));
+
+    wgpu::BufferDescriptor bufferDesc;
+    bufferDesc.mappedAtCreation = true;
+
+    bufferDesc.usage = GetParam().mSourceUsage;
+    bufferDesc.size = srcBufferSize;
+    wgpu::Buffer src = device.CreateBuffer(&bufferDesc);
+    // Fill with 0, 1, 2, ...
+    uint32_t* srcPtr = static_cast<uint32_t*>(src.GetMappedRange());
+    std::iota(srcPtr, srcPtr + bufferDesc.size / sizeof(uint32_t), 0);
+    std::iota(srcData.begin(), srcData.end(), 0);
+    src.Unmap();
+
+    bufferDesc.size = dstBufferSize;
+    bufferDesc.usage = wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc;
+    wgpu::Buffer dst = device.CreateBuffer(&bufferDesc);
+
+    // Fill the dst buffer with 0xFF.
+    memset(dst.GetMappedRange(), 0xFF, dstBufferSize);
+    memset(expectedDst0.data(), 0xFF, dstBufferSize);
+    memset(expectedDst1.data(), 0xFF, dstBufferSize);
+    dst.Unmap();
+
+    // Produce expected data if the implementation performs clamping.
+    for (uint32_t i = 0; i < kArrayLength; ++i) {
+        uint32_t readIndex = GetParam().mOOBRead ? std::min(kOOBOffset + i, kArrayLength - 1) : i;
+        uint32_t writeIndex = GetParam().mOOBWrite ? std::min(kOOBOffset + i, kArrayLength - 1) : i;
+
+        for (uint32_t c = 0; c < 4; ++c) {
+            uint32_t value = srcData[srcBufferByteOffset / 4 + 4 * readIndex + c];
+            expectedDst0[dstBufferByteOffset / 4 + 4 * writeIndex + c] = value;
+        }
+    }
+
+    // Produce expected data if the implementation zeros out reads and skips writes.
+    for (uint32_t i = 0; i < kArrayLength; ++i) {
+        uint32_t readIndex = GetParam().mOOBRead ? kOOBOffset + i : i;
+        uint32_t writeIndex = GetParam().mOOBWrite ? kOOBOffset + i : i;
+
+        for (uint32_t c = 0; c < 4; ++c) {
+            uint32_t value =
+                readIndex < kArrayLength ? srcData[srcBufferByteOffset / 4 + 4 * readIndex + c] : 0;
+            if (writeIndex < kArrayLength) {
+                expectedDst1[dstBufferByteOffset / 4 + 4 * writeIndex + c] = value;
+            }
+        }
+    }
+
+    std::array<uint32_t, 2> dynamicOffsets = {srcBufferByteOffset, dstBufferByteOffset};
+
+    wgpu::BindGroup bindGroup = utils::MakeBindGroup(device, bgl,
+                                                     {
+                                                         {0, src, 0, arrayByteLength},
+                                                         {1, dst, 0, arrayByteLength},
+                                                     });
+
+    wgpu::CommandEncoder commandEncoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder computePassEncoder = commandEncoder.BeginComputePass();
+    computePassEncoder.SetPipeline(pipeline);
+    computePassEncoder.SetBindGroup(0, bindGroup, dynamicOffsets.size(), dynamicOffsets.data());
+    computePassEncoder.Dispatch(1);
+    computePassEncoder.EndPass();
+    wgpu::CommandBuffer commands = commandEncoder.Finish();
+    queue.Submit(1, &commands);
+
+    EXPECT_BUFFER_U32_RANGE_AT_LEAST_ONE_EQ(dst, 0, dstBufferSize / sizeof(uint32_t),
+                                            expectedDst0.data(), expectedDst1.data());
+}
+
 DAWN_INSTANTIATE_TEST(DynamicBufferOffsetTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
+
+DAWN_INSTANTIATE_TEST_P(OOBDynamicBufferOffsetTests,
+                        {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(),
+                         VulkanBackend()},
+                        {wgpu::BufferUsage::Uniform, wgpu::BufferUsage::Storage},
+                        {false, true},
+                        {false, true});
