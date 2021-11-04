@@ -68,6 +68,7 @@ namespace dawn_native {
           mRenderTargetHeight(renderTargetHeight),
           mOcclusionQuerySet(occlusionQuerySet) {
         mUsageTracker = std::move(usageTracker);
+        TrackInDevice();
     }
 
     RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
@@ -81,6 +82,11 @@ namespace dawn_native {
                                                     CommandEncoder* commandEncoder,
                                                     EncodingContext* encodingContext) {
         return new RenderPassEncoder(device, commandEncoder, encodingContext, ObjectBase::kError);
+    }
+
+    void RenderPassEncoder::DeleteThis() {
+        mEncodingContext->EnsurePassExited(this);
+        ApiObjectBase::DeleteThis();
     }
 
     ObjectType RenderPassEncoder::GetType() const {
