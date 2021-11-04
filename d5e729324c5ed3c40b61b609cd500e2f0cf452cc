@@ -51,6 +51,24 @@
       "parentUuid": "f9c95703_1ceccaab",
       "revId": "d5e729324c5ed3c40b61b609cd500e2f0cf452cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7136de3e_e9df2e75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-04T17:17:16Z",
+      "side": 1,
+      "message": "Hmm I was just thinking about casting the results as a start? (i.e. have either these new functions call their old equivalents and return a casted result, or vice-versa). Not sure if that would work (or be better?)",
+      "parentUuid": "bb716dba_2126fdc0",
+      "revId": "d5e729324c5ed3c40b61b609cd500e2f0cf452cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
