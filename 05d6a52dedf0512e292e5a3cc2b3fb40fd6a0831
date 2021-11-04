@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c8eb55_2521240c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-11-04T14:04:56Z",
+      "side": 1,
+      "message": "Nice!",
+      "revId": "05d6a52dedf0512e292e5a3cc2b3fb40fd6a0831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a792ec80_e66eeb97",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-11-04T14:04:56Z",
+      "side": 1,
+      "message": "übernit: once you have a few vars together, it\u0027s common to put them in a var() block:\n\n  var (\n    colors bool\n    stdout io.Writer\n    mainCtx context.Context\n  )",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 27
+      },
+      "revId": "05d6a52dedf0512e292e5a3cc2b3fb40fd6a0831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "820934a4_48b4f1f0",
+        "filename": "src/dawn_node/tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-11-04T14:04:56Z",
+      "side": 1,
+      "message": "I assume this works on windows too?",
+      "range": {
+        "startLine": 85,
+        "startChar": 1,
+        "endLine": 85,
+        "endChar": 53
+      },
+      "revId": "05d6a52dedf0512e292e5a3cc2b3fb40fd6a0831",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
