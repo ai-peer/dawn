@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "121d419f_142daac6",
+        "filename": "src/dawn_native/utils/WGPUHelpers.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T16:24:05Z",
+      "side": 1,
+      "message": "also, FYI this means we can have dawn::native and dawn::wire without terrible indentation",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 41
+      },
+      "revId": "ada133514ac9cd140cc44099ac5baa1743f829e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

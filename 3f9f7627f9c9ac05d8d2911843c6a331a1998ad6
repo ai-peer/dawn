@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "406ae1d0_610f4da1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T16:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36a8a5e2_8deb6f75",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "7bdee830_47be9260",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a7b89df_3d6c5d49",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T16:24:05Z",
+      "side": 1,
+      "message": "This is used in a for-loop, so I didn\u0027t want to incur the vector allocation every time.",
+      "parentUuid": "83b923af_bb0e47af",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd50f86d_2e50bcba",
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d807d096_459e94cd",
+        "filename": "src/dawn_native/utils/WGPUHelpers.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T16:24:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd50f86d_2e50bcba",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef33dfd6_dce45e10",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-11-04T09:51:02Z",
       "side": 1,
       "message": "nit: it feels that the order of arguments for this helper are in the wrong order: what about device, usage, size, data ?",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0e5339c_fb995392",
+        "filename": "src/dawn_native/utils/WGPUHelpers.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T16:24:05Z",
+      "side": 1,
+      "message": "Done, but I like (device, usage, data, size) more",
+      "parentUuid": "ef33dfd6_dce45e10",
       "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -140,6 +212,30 @@
       "side": 1,
       "message": "And nit: it could be MakePipelineLayout(DeviceBase* device, std::initializer_list\u003cBindGroupLayoutBase*\u003e bgls). Not sure if we ever are going to use multiple BGLs though.",
       "parentUuid": "12bb36bf_3a225fa9",
+      "range": {
+        "startLine": 45,
+        "startChar": 8,
+        "endLine": 45,
+        "endChar": 39
+      },
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fb2f4bf_dc08535a",
+        "filename": "src/dawn_native/utils/WGPUHelpers.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-04T16:24:05Z",
+      "side": 1,
+      "message": "I just kept it simple for now until we need multiple.",
+      "parentUuid": "c27c0e15_a26b54f2",
       "range": {
         "startLine": 45,
         "startChar": 8,
