@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519f8039_dd9cb75e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-04T16:43:34Z",
+      "side": 1,
+      "message": "LGTM, reopened a thread but feel free to skip",
+      "revId": "d5e729324c5ed3c40b61b609cd500e2f0cf452cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

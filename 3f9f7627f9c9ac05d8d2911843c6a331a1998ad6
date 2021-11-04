@@ -107,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2a9c7b2_47e244ef",
+        "filename": "src/dawn_native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-04T16:43:34Z",
+      "side": 1,
+      "message": "Ah, maybe worth putting a stack vector with X (8?) entries?",
+      "parentUuid": "2a7b89df_3d6c5d49",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd50f86d_2e50bcba",
         "filename": "src/dawn_native/utils/WGPUHelpers.cpp",
         "patchSetId": 3
@@ -171,6 +189,24 @@
       "side": 1,
       "message": "Done, but I like (device, usage, data, size) more",
       "parentUuid": "ef33dfd6_dce45e10",
+      "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0f16b83_02babb50",
+        "filename": "src/dawn_native/utils/WGPUHelpers.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-04T16:43:34Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "c0e5339c_fb995392",
       "revId": "3f9f7627f9c9ac05d8d2911843c6a331a1998ad6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
