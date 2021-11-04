@@ -37,6 +37,10 @@ namespace dawn_native {
         EncodingContext(DeviceBase* device, const ApiObjectBase* initialEncoder);
         ~EncodingContext();
 
+        // Marks the encoding context as destroyed so that any future encodes will fail, and all
+        // encoded commands are released.
+        void Destroy();
+
         CommandIterator AcquireCommands();
         CommandIterator* GetIterator();
 
@@ -83,6 +87,10 @@ namespace dawn_native {
                     HandleError(DAWN_FORMAT_VALIDATION_ERROR(
                         "Recording in an error or already ended %s.", encoder));
                 }
+                return false;
+            } else if (DAWN_UNLIKELY(mDestroyed)) {
+                HandleError(
+                    DAWN_FORMAT_VALIDATION_ERROR("Recording in a destroyed encoder %s.", encoder));
                 return false;
             }
             return true;
@@ -164,6 +172,7 @@ namespace dawn_native {
         CommandIterator mIterator;
         bool mWasMovedToIterator = false;
         bool mWereCommandsAcquired = false;
+        bool mDestroyed = false;
 
         std::unique_ptr<ErrorData> mError;
         std::vector<std::string> mDebugGroupLabels;
