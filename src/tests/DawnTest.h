@@ -65,6 +65,10 @@
     EXPECT_BUFFER(buffer, offset, sizeof(uint32_t) * (count),       \
                   new ::detail::ExpectEq<uint32_t>(expected, count))
 
+#define EXPECT_BUFFER_U32_RANGE_AT_LEAST_ONE_EQ(buffer, offset, count, ...) \
+    EXPECT_BUFFER(buffer, offset, sizeof(uint32_t) * (count),               \
+                  new ::detail::ExpectAtLeastOneEq<uint32_t>(count, {__VA_ARGS__}))
+
 #define EXPECT_BUFFER_U64_EQ(expected, buffer, offset) \
     EXPECT_BUFFER(buffer, offset, sizeof(uint64_t), new ::detail::ExpectEq<uint64_t>(expected))
 
@@ -192,6 +196,8 @@ namespace detail {
 
     template <typename T, typename U = T>
     class ExpectEq;
+    template <typename T, typename U = T>
+    class ExpectAtLeastOneEq;
     template <typename T>
     class ExpectBetweenColors;
 }  // namespace detail
@@ -725,6 +731,21 @@ namespace detail {
         std::vector<T> mExpected;
         T mTolerance;
     };
+
+    template <typename T, typename U>
+    class ExpectAtLeastOneEq : public Expectation {
+      public:
+        ExpectAtLeastOneEq(const unsigned int count, std::initializer_list<const T*> values);
+        ExpectAtLeastOneEq(const unsigned int count,
+                           T tolerance,
+                           std::initializer_list<const T*> values);
+
+        testing::AssertionResult Check(const void* data, size_t size) override;
+
+      private:
+        std::vector<std::vector<T>> mExpectations;
+        T mTolerance;
+    };
     extern template class ExpectEq<uint8_t>;
     extern template class ExpectEq<int16_t>;
     extern template class ExpectEq<uint32_t>;
@@ -732,6 +753,7 @@ namespace detail {
     extern template class ExpectEq<RGBA8>;
     extern template class ExpectEq<float>;
     extern template class ExpectEq<float, uint16_t>;
+    extern template class ExpectAtLeastOneEq<uint32_t>;
 
     template <typename T>
     class ExpectBetweenColors : public Expectation {
