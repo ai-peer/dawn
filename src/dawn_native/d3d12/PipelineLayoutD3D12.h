@@ -17,6 +17,7 @@
 
 #include "common/Constants.h"
 #include "common/ityp_array.h"
+#include "common/ityp_stack_vec.h"
 #include "dawn_native/BindingInfo.h"
 #include "dawn_native/PipelineLayout.h"
 #include "dawn_native/d3d12/d3d12_platform.h"
@@ -25,10 +26,16 @@ namespace dawn_native { namespace d3d12 {
 
     // We reserve a register space that a user cannot use.
     static constexpr uint32_t kReservedRegisterSpace = kMaxBindGroups + 1;
-    static constexpr uint32_t kFirstOffsetInfoBaseRegister = 0;
+
     static constexpr uint32_t kFirstIndexOffsetRegisterSpace = kReservedRegisterSpace;
+    static constexpr uint32_t kFirstOffsetInfoBaseRegister = 0;
+
     static constexpr uint32_t kNumWorkgroupsRegisterSpace = kReservedRegisterSpace + 1;
     static constexpr uint32_t kNumWorkgroupsBaseRegister = 0;
+
+    static constexpr uint32_t kDynamicStorageBufferLengthsRegisterSpace =
+        kReservedRegisterSpace + 2;
+    static constexpr uint32_t kDynamicStorageBufferLengthsBaseRegister = 0;
 
     class Device;
 
@@ -45,6 +52,11 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetDynamicRootParameterIndex(BindGroupIndex group,
                                               BindingIndex bindingIndex) const;
 
+        // Returns the index of the root parameter reserved for the length of a dynamic storgae
+        // buffer binding
+        uint32_t GetDynamicStorageBufferLengthRootParameterIndex(BindGroupIndex group,
+                                                                 BindingIndex bindingIndex) const;
+
         uint32_t GetFirstIndexOffsetRegisterSpace() const;
         uint32_t GetFirstIndexOffsetShaderRegister() const;
         uint32_t GetFirstIndexOffsetParameterIndex() const;
@@ -53,7 +65,25 @@ namespace dawn_native { namespace d3d12 {
         uint32_t GetNumWorkgroupsShaderRegister() const;
         uint32_t GetNumWorkgroupsParameterIndex() const;
 
+        uint32_t GetDynamicStorageBufferLengthsRegisterSpace() const;
+        uint32_t GetDynamicStorageBufferLengthsShaderRegister() const;
+        uint32_t GetDynamicStorageBufferLengthsParameterIndex() const;
+
         ID3D12RootSignature* GetRootSignature() const;
+
+        struct DynamicStorageBufferLengthBindingAndRegisterOffset {
+            BindingNumber binding;
+            uint32_t registerOffset;
+        };
+
+        using DynamicStorageBufferLengthInfo =
+            ityp::array<BindGroupIndex,
+                        ityp::stack_vec<uint32_t,
+                                        DynamicStorageBufferLengthBindingAndRegisterOffset,
+                                        kMaxDynamicStorageBuffersPerPipelineLayout>,
+                        kMaxBindGroups>;
+
+        const DynamicStorageBufferLengthInfo& GetDynamicStorageBufferLengthInfo() const;
 
       private:
         ~PipelineLayout() override = default;
@@ -65,8 +95,10 @@ namespace dawn_native { namespace d3d12 {
                     ityp::array<BindingIndex, uint32_t, kMaxDynamicBuffersPerPipelineLayout>,
                     kMaxBindGroups>
             mDynamicRootParameterIndices;
+        DynamicStorageBufferLengthInfo mDynamicStorageBufferLengthInfo;
         uint32_t mFirstIndexOffsetParameterIndex;
-        uint32_t mNumWorkgroupsParamterIndex;
+        uint32_t mNumWorkgroupsParameterIndex;
+        uint32_t mDynamicStorageBufferLengthsParameterIndex;
         ComPtr<ID3D12RootSignature> mRootSignature;
     };
 

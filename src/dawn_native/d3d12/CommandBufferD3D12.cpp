@@ -530,6 +530,23 @@ namespace dawn_native { namespace d3d12 {
                     mBoundRootSamplerTables[index] = baseDescriptor;
                 }
             }
+
+            const auto& dynamicStorageBufferLengthInfo =
+                pipelineLayout->GetDynamicStorageBufferLengthInfo()[index];
+            if (dynamicStorageBufferLengthInfo.size() > 0) {
+                uint32_t parameterIndex =
+                    pipelineLayout->GetDynamicStorageBufferLengthsParameterIndex();
+                uint32_t firstRegisterOffset = dynamicStorageBufferLengthInfo[0].registerOffset;
+                const auto& lengths = group->GetDynamicStorageBufferLengths();
+
+                if (mInCompute) {
+                    commandList->SetComputeRoot32BitConstants(parameterIndex, lengths.size(),
+                                                              lengths.data(), firstRegisterOffset);
+                } else {
+                    commandList->SetGraphicsRoot32BitConstants(parameterIndex, lengths.size(),
+                                                               lengths.data(), firstRegisterOffset);
+                }
+            }
         }
 
         Device* mDevice;
