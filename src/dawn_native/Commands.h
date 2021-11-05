@@ -50,6 +50,7 @@ namespace dawn_native {
         EndOcclusionQuery,
         EndRenderPass,
         ExecuteBundles,
+        FillBuffer,
         InsertDebugMarker,
         PopDebugGroup,
         PushDebugGroup,
@@ -194,6 +195,13 @@ namespace dawn_native {
 
     struct ExecuteBundlesCmd {
         uint32_t count;
+    };
+
+    struct FillBufferCmd {
+        Ref<BufferBase> destination;
+        uint64_t destinationOffset;
+        uint64_t size;
+        uint8_t value;
     };
 
     struct InsertDebugMarkerCmd {

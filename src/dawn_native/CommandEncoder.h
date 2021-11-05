@@ -59,6 +59,10 @@ namespace dawn_native {
         void APICopyTextureToTextureInternal(const ImageCopyTexture* source,
                                              const ImageCopyTexture* destination,
                                              const Extent3D* copySize);
+        void APIFillBuffer(BufferBase* destination,
+                           uint64_t destinationOffset,
+                           uint64_t size,
+                           uint8_t value);
 
         void APIInjectValidationError(const char* message);
         void APIInsertDebugMarker(const char* groupLabel);

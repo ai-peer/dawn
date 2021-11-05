@@ -914,6 +914,27 @@ namespace dawn_native { namespace metal {
                     break;
                 }
 
+                case Command::FillBuffer: {
+                    FillBufferCmd* cmd = mCommands.NextCommand<FillBufferCmd>();
+                    if (cmd->size == 0) {
+                        // Skip no-op copies.
+                        break;
+                    }
+                    Buffer* dstBuffer = ToBackend(cmd->destination.Get());
+
+                    bool clearedToZero = dstBuffer->EnsureDataInitializedAsDestination(
+                        commandContext, cmd->destinationOffset, cmd->size);
+
+                    if (!clearedToZero || cmd->value != 0u) {
+                        [commandContext->EnsureBlit()
+                            fillBuffer:dstBuffer->GetMTLBuffer()
+                                 range:NSMakeRange(cmd->destinationOffset, cmd->size)
+                                 value:cmd->value];
+                    }
+
+                    break;
+                }
+
                 case Command::ResolveQuerySet: {
                     ResolveQuerySetCmd* cmd = mCommands.NextCommand<ResolveQuerySetCmd>();
                     QuerySet* querySet = ToBackend(cmd->querySet.Get());

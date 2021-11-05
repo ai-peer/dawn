@@ -707,6 +707,31 @@ namespace dawn_native { namespace vulkan {
                     break;
                 }
 
+                case Command::FillBuffer: {
+                    FillBufferCmd* cmd = mCommands.NextCommand<FillBufferCmd>();
+                    if (cmd->size == 0) {
+                        // Skip no-op fills.
+                        break;
+                    }
+
+                    Buffer* dstBuffer = ToBackend(cmd->destination.Get());
+                    bool clearedToZero = dstBuffer->EnsureDataInitializedAsDestination(
+                        recordingContext, cmd->destinationOffset, cmd->size);
+
+                    if (!clearedToZero || cmd->value != 0u) {
+                        dstBuffer->TransitionUsageNow(recordingContext, wgpu::BufferUsage::CopyDst);
+
+                        // CmdFillBuffer takes 32 bit values, fill one with the repeated byte value.
+                        uint32_t value = cmd->value | (cmd->value << 8) | (cmd->value << 16) |
+                                         (cmd->value << 24);
+                        device->fn.CmdFillBuffer(recordingContext->commandBuffer,
+                                                 dstBuffer->GetHandle(), cmd->destinationOffset,
+                                                 cmd->size, value);
+                    }
+
+                    break;
+                }
+
                 case Command::BeginRenderPass: {
                     BeginRenderPassCmd* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
 
