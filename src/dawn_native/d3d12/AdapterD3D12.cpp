@@ -240,10 +240,9 @@ namespace dawn_native { namespace d3d12 {
         //  RESERVED:
         //  - 2 root constants for the baseVertex/baseInstance constants.
         //  - 3 root constants for num workgroups X, Y, Z
-        //  - (1)
-        //    TODO(crbug.com/dawn/429): Dynamic storage buffers need bounds checks.
-        //    This will probably be 1 CBV (root descriptor table) to store all the lengths.
-        static constexpr uint32_t kReservedSlots = 6;
+        //  - 4 root constants (kMaxDynamicStorageBuffersPerPipelineLayout) for dynamic storage
+        //  buffer lengths.
+        static constexpr uint32_t kReservedSlots = 9;
 
         // Available slots after base limits considered.
         uint32_t availableRootSignatureSlots =

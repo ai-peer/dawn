@@ -203,6 +203,25 @@ namespace dawn_native { namespace d3d12 {
                 }
             }
         }
+
+        mDynamicStorageBufferLengths.resize(bgl->GetBindingCountInfo().dynamicStorageBufferCount);
+        uint32_t dynamicStorageBufferIndex = 0;
+        for (BindingIndex bindingIndex(0); bindingIndex < bgl->GetDynamicBufferCount();
+             ++bindingIndex) {
+            const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
+            switch (bindingInfo.buffer.type) {
+                case wgpu::BufferBindingType::Uniform:
+                    break;
+                case kInternalStorageBufferBinding:
+                case wgpu::BufferBindingType::Storage:
+                case wgpu::BufferBindingType::ReadOnlyStorage:
+                    mDynamicStorageBufferLengths[dynamicStorageBufferIndex++] =
+                        GetBindingAsBufferBinding(bindingIndex).size;
+                    break;
+                case wgpu::BufferBindingType::Undefined:
+                    UNREACHABLE();
+            }
+        }
     }
 
     BindGroup::~BindGroup() = default;
@@ -261,4 +280,10 @@ namespace dawn_native { namespace d3d12 {
     void BindGroup::SetSamplerAllocationEntry(Ref<SamplerHeapCacheEntry> entry) {
         mSamplerAllocationEntry = std::move(entry);
     }
+
+    const BindGroup::DynamicStorageBufferLengths& BindGroup::GetDynamicStorageBufferLengths()
+        const {
+        return mDynamicStorageBufferLengths;
+    }
+
 }}  // namespace dawn_native::d3d12
