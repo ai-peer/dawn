@@ -867,6 +867,43 @@ namespace dawn_native {
             destination->texture, copySize);
     }
 
+    void CommandEncoder::APIFillBuffer(BufferBase* destination,
+                                       uint64_t destinationOffset,
+                                       uint64_t size) {
+        mEncodingContext.TryEncode(
+            this,
+            [&](CommandAllocator* allocator) -> MaybeError {
+                if (GetDevice()->IsValidationEnabled()) {
+                    DAWN_TRY(GetDevice()->ValidateObject(destination));
+
+                    DAWN_TRY_CONTEXT(
+                        ValidateCopySizeFitsInBuffer(destination, destinationOffset, size),
+                        "validating destination %s fill size.", destination);
+                    DAWN_TRY_CONTEXT(ValidateCanUseAs(destination, wgpu::BufferUsage::CopyDst),
+                                     "validating destination %s usage.", destination);
+
+                    // Size must be a multiple of 4 bytes on macOS.
+                    DAWN_INVALID_IF(size % 4 != 0, "Fill size (%u) is not a multiple of 4 bytes.",
+                                    size);
+
+                    // SourceOffset and destinationOffset must be multiples of 4 bytes on macOS.
+                    DAWN_INVALID_IF(destinationOffset % 4 != 0,
+                                    "Destination offset (%u) is not a multiple of 4 bytes,",
+                                    destinationOffset);
+
+                    mTopLevelBuffers.insert(destination);
+                }
+
+                FillBufferCmd* copy = allocator->Allocate<FillBufferCmd>(Command::FillBuffer);
+                copy->destination = destination;
+                copy->destinationOffset = destinationOffset;
+                copy->size = size;
+
+                return {};
+            },
+            "encoding %s.FillBuffer(%s, %u, %u).", this, destination, destinationOffset, size);
+    }
+
     void CommandEncoder::APIInjectValidationError(const char* message) {
         if (mEncodingContext.CheckCurrentEncoder(this)) {
             mEncodingContext.HandleError(DAWN_VALIDATION_ERROR(message));
