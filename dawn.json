@@ -520,6 +520,14 @@
                 ]
             },
             {
+                "name": "fill buffer",
+                "args": [
+                    {"name": "destination", "type": "buffer"},
+                    {"name": "destination offset", "type": "uint64_t"},
+                    {"name": "size", "type": "uint64_t"}
+                ]
+            },
+            {
                 "name": "inject validation error",
                 "tags": ["dawn"],
                 "args": [

@@ -404,8 +404,10 @@ namespace dawn_native { namespace d3d12 {
 
         Buffer* dstBuffer = ToBackend(destination);
 
-        DAWN_TRY(dstBuffer->EnsureDataInitializedAsDestination(commandRecordingContext,
-                                                               destinationOffset, size));
+        bool cleared;
+        DAWN_TRY_ASSIGN(cleared, dstBuffer->EnsureDataInitializedAsDestination(
+                                     commandRecordingContext, destinationOffset, size));
+        DAWN_UNUSED(cleared);
 
         CopyFromStagingToBufferImpl(commandRecordingContext, source, sourceOffset, destination,
                                     destinationOffset, size);
