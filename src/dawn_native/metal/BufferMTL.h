@@ -38,6 +38,7 @@ namespace dawn_native { namespace metal {
                                                 uint64_t size);
         void EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
                                                 const CopyTextureToBufferCmd* copy);
+        void InitializeToZero(CommandRecordingContext* commandContext);
 
         static uint64_t QueryMaxBufferLength(id<MTLDevice> mtlDevice);
 
@@ -53,7 +54,6 @@ namespace dawn_native { namespace metal {
         bool IsCPUWritableAtCreation() const override;
         MaybeError MapAtCreationImpl() override;
 
-        void InitializeToZero(CommandRecordingContext* commandContext);
         void ClearBuffer(CommandRecordingContext* commandContext,
                          uint8_t clearValue,
                          uint64_t offset = 0,

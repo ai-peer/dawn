@@ -49,6 +49,8 @@ namespace dawn_native { namespace vulkan {
         void EnsureDataInitializedAsDestination(CommandRecordingContext* recordingContext,
                                                 const CopyTextureToBufferCmd* copy);
 
+        void InitializeToZero(CommandRecordingContext* recordingContext);
+
         // Dawn API
         void SetLabelImpl() override;
 
@@ -57,7 +59,7 @@ namespace dawn_native { namespace vulkan {
         using BufferBase::BufferBase;
 
         MaybeError Initialize(bool mappedAtCreation);
-        void InitializeToZero(CommandRecordingContext* recordingContext);
+
         void ClearBuffer(CommandRecordingContext* recordingContext,
                          uint32_t clearValue,
                          uint64_t offset = 0,
