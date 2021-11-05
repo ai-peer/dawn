@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b84865f_f1a28b03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-05T00:07:28Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "a1963653aa46c1cc4cac325b57a702aa7ace8b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f46d1ce_5d1a4f74",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 619,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-05T00:07:28Z",
+      "side": 1,
+      "message": "alternatively, we can test only on D3D12/Metal where we\u0027re not relying on the driver for robustness, only test clamping behavior here, and leave the rest of the testing to the CTS",
+      "revId": "a1963653aa46c1cc4cac325b57a702aa7ace8b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
