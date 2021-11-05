@@ -825,6 +825,27 @@ namespace dawn_native { namespace opengl {
                     break;
                 }
 
+                case Command::FillBuffer: {
+                    FillBufferCmd* cmd = mCommands.NextCommand<FillBufferCmd>();
+                    if (cmd->size == 0) {
+                        // Skip no-op fills.
+                        break;
+                    }
+                    Buffer* dstBuffer = ToBackend(cmd->destination.Get());
+
+                    if (dstBuffer->IsDataInitialized() ||
+                        !GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+                        const std::vector<uint8_t> clearValues(cmd->size, 0u);
+                        gl.BindBuffer(GL_ARRAY_BUFFER, dstBuffer->GetHandle());
+                        gl.BufferSubData(GL_ARRAY_BUFFER, cmd->destinationOffset, cmd->size,
+                                         clearValues.data());
+                    } else {
+                        dstBuffer->InitializeToZero();
+                    }
+
+                    break;
+                }
+
                 case Command::ResolveQuerySet: {
                     // TODO(crbug.com/dawn/434): Resolve non-precise occlusion query.
                     SkipCommand(&mCommands, type);

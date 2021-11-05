@@ -36,6 +36,7 @@ namespace dawn_native { namespace opengl {
         void EnsureDataInitialized();
         void EnsureDataInitializedAsDestination(uint64_t offset, uint64_t size);
         void EnsureDataInitializedAsDestination(const CopyTextureToBufferCmd* copy);
+        void InitializeToZero();
 
       private:
         Buffer(Device* device, const BufferDescriptor* descriptor, bool shouldLazyClear);
@@ -46,8 +47,6 @@ namespace dawn_native { namespace opengl {
         bool IsCPUWritableAtCreation() const override;
         MaybeError MapAtCreationImpl() override;
         void* GetMappedPointerImpl() override;
-
-        void InitializeToZero();
 
         GLuint mBuffer = 0;
         void* mMappedData = nullptr;
