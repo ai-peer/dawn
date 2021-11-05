@@ -48,6 +48,13 @@ namespace dawn_native { namespace d3d12 {
                                                       uint64_t size);
         MaybeError EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
                                                       const CopyTextureToBufferCmd* copy);
+
+        MaybeError InitializeToZero(CommandRecordingContext* commandContext);
+        MaybeError ClearBuffer(CommandRecordingContext* commandContext,
+                               uint8_t clearValue,
+                               uint64_t offset = 0,
+                               uint64_t size = 0);
+
         // Dawn API
         void SetLabelImpl() override;
 
@@ -68,12 +75,6 @@ namespace dawn_native { namespace d3d12 {
         bool TransitionUsageAndGetResourceBarrier(CommandRecordingContext* commandContext,
                                                   D3D12_RESOURCE_BARRIER* barrier,
                                                   wgpu::BufferUsage newUsage);
-
-        MaybeError InitializeToZero(CommandRecordingContext* commandContext);
-        MaybeError ClearBuffer(CommandRecordingContext* commandContext,
-                               uint8_t clearValue,
-                               uint64_t offset = 0,
-                               uint64_t size = 0);
 
         ResourceHeapAllocation mResourceAllocation;
         bool mFixedResourceState = false;
