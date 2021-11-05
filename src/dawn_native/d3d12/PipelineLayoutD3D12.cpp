@@ -184,10 +184,52 @@ namespace dawn_native { namespace d3d12 {
         numWorkgroupsConstants.Constants.Num32BitValues = 3;
         numWorkgroupsConstants.Constants.RegisterSpace = GetNumWorkgroupsRegisterSpace();
         numWorkgroupsConstants.Constants.ShaderRegister = GetNumWorkgroupsShaderRegister();
-        mNumWorkgroupsParamterIndex = rootParameters.size();
+        mNumWorkgroupsParameterIndex = rootParameters.size();
         // NOTE: We should consider moving this entry to earlier in the root signature since
         // dispatch sizes would need to be updated often
         rootParameters.emplace_back(numWorkgroupsConstants);
+
+        uint32_t dynamicStorageBufferLengthsShaderRegisterOffset = 0;
+        for (BindGroupIndex group : IterateBitSet(GetBindGroupLayoutsMask())) {
+            const BindGroupLayoutBase* bgl = GetBindGroupLayout(group);
+
+            mDynamicStorageBufferLengthInfo[group].resize(
+                bgl->GetBindingCountInfo().dynamicStorageBufferCount);
+
+            uint32_t i = 0;
+            for (BindingIndex bindingIndex(0); bindingIndex < bgl->GetDynamicBufferCount();
+                 ++bindingIndex) {
+                const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
+                switch (bindingInfo.buffer.type) {
+                    case kInternalStorageBufferBinding:
+                    case wgpu::BufferBindingType::Storage:
+                    case wgpu::BufferBindingType::ReadOnlyStorage:
+                        mDynamicStorageBufferLengthInfo[group][i++] = {
+                            bindingInfo.binding, dynamicStorageBufferLengthsShaderRegisterOffset++};
+                        break;
+                    case wgpu::BufferBindingType::Uniform:
+                        break;
+                    case wgpu::BufferBindingType::Undefined:
+                        UNREACHABLE();
+                        break;
+                }
+            }
+        }
+        ASSERT(dynamicStorageBufferLengthsShaderRegisterOffset <=
+               kMaxDynamicStorageBuffersPerPipelineLayout);
+
+        D3D12_ROOT_PARAMETER dynamicStorageBufferLengthConstants{};
+        dynamicStorageBufferLengthConstants.ShaderVisibility = D3D12_SHADER_VISIBILITY_ALL;
+        dynamicStorageBufferLengthConstants.ParameterType =
+            D3D12_ROOT_PARAMETER_TYPE_32BIT_CONSTANTS;
+        dynamicStorageBufferLengthConstants.Constants.Num32BitValues =
+            dynamicStorageBufferLengthsShaderRegisterOffset;
+        dynamicStorageBufferLengthConstants.Constants.RegisterSpace =
+            GetDynamicStorageBufferLengthsRegisterSpace();
+        dynamicStorageBufferLengthConstants.Constants.ShaderRegister =
+            GetDynamicStorageBufferLengthsShaderRegister();
+        mDynamicStorageBufferLengthsParameterIndex = rootParameters.size();
+        rootParameters.emplace_back(dynamicStorageBufferLengthConstants);
 
         D3D12_ROOT_SIGNATURE_DESC rootSignatureDescriptor;
         rootSignatureDescriptor.NumParameters = rootParameters.size();
@@ -234,6 +276,11 @@ namespace dawn_native { namespace d3d12 {
         return mRootSignature.Get();
     }
 
+    const PipelineLayout::DynamicStorageBufferLengthInfo&
+    PipelineLayout::GetDynamicStorageBufferLengthInfo() const {
+        return mDynamicStorageBufferLengthInfo;
+    }
+
     uint32_t PipelineLayout::GetDynamicRootParameterIndex(BindGroupIndex group,
                                                           BindingIndex bindingIndex) const {
         ASSERT(group < kMaxBindGroupsTyped);
@@ -265,6 +312,19 @@ namespace dawn_native { namespace d3d12 {
     }
 
     uint32_t PipelineLayout::GetNumWorkgroupsParameterIndex() const {
-        return mNumWorkgroupsParamterIndex;
+        return mNumWorkgroupsParameterIndex;
     }
+
+    uint32_t PipelineLayout::GetDynamicStorageBufferLengthsRegisterSpace() const {
+        return kDynamicStorageBufferLengthsRegisterSpace;
+    }
+
+    uint32_t PipelineLayout::GetDynamicStorageBufferLengthsShaderRegister() const {
+        return kDynamicStorageBufferLengthsBaseRegister;
+    }
+
+    uint32_t PipelineLayout::GetDynamicStorageBufferLengthsParameterIndex() const {
+        return mDynamicStorageBufferLengthsParameterIndex;
+    }
+
 }}  // namespace dawn_native::d3d12
