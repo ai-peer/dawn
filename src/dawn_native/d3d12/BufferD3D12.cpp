@@ -400,47 +400,45 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::EnsureDataInitialized(CommandRecordingContext* commandContext) {
-        if (IsDataInitialized() ||
-            !GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+        if (!NeedsInitialization()) {
             return {};
         }
 
         DAWN_TRY(InitializeToZero(commandContext));
-
         return {};
     }
 
-    MaybeError Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
-                                                          uint64_t offset,
-                                                          uint64_t size) {
-        if (IsDataInitialized() ||
-            !GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            return {};
+    ResultOrError<bool> Buffer::EnsureDataInitializedAsDestination(
+        CommandRecordingContext* commandContext,
+        uint64_t offset,
+        uint64_t size) {
+        if (!NeedsInitialization()) {
+            return {false};
         }
 
         if (IsFullBufferRange(offset, size)) {
             SetIsDataInitialized();
-        } else {
-            DAWN_TRY(InitializeToZero(commandContext));
+            return {false};
         }
 
-        return {};
+        DAWN_TRY(InitializeToZero(commandContext));
+        return {true};
     }
 
-    MaybeError Buffer::EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
-                                                          const CopyTextureToBufferCmd* copy) {
-        if (IsDataInitialized() ||
-            !GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
-            return {};
+    ResultOrError<bool> Buffer::EnsureDataInitializedAsDestination(
+        CommandRecordingContext* commandContext,
+        const CopyTextureToBufferCmd* copy) {
+        if (!NeedsInitialization()) {
+            return {false};
         }
 
         if (IsFullBufferOverwrittenInTextureToBufferCopy(copy)) {
             SetIsDataInitialized();
-        } else {
-            DAWN_TRY(InitializeToZero(commandContext));
+            return {false};
         }
 
-        return {};
+        DAWN_TRY(InitializeToZero(commandContext));
+        return {true};
     }
 
     void Buffer::SetLabelImpl() {
@@ -449,8 +447,7 @@ namespace dawn_native { namespace d3d12 {
     }
 
     MaybeError Buffer::InitializeToZero(CommandRecordingContext* commandContext) {
-        ASSERT(GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse));
-        ASSERT(!IsDataInitialized());
+        ASSERT(NeedsInitialization());
 
         // TODO(crbug.com/dawn/484): skip initializing the buffer when it is created on a heap
         // that has already been zero initialized.

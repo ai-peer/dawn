@@ -2315,3 +2315,99 @@ TEST_F(CopyCommandTest_CompressedTextureFormats, CopyToMultipleArrayLayers) {
                                         {testWidth - blockWidth, testHeight - blockHeight, 16});
     }
 }
+
+class CopyCommandTest_FillBuffer : public CopyCommandTest {};
+
+TEST_F(CopyCommandTest_FillBuffer, Success) {
+    wgpu::Buffer destination = CreateBuffer(16, wgpu::BufferUsage::CopyDst);
+
+    // Fill different ranges, including some that touch the OOB condition
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.FillBuffer(destination, 0, 16);
+        encoder.FillBuffer(destination, 0, 8);
+        encoder.FillBuffer(destination, 8, 8);
+        encoder.Finish();
+    }
+
+    // Empty fills are valid
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.FillBuffer(destination, 0, 0);
+        encoder.FillBuffer(destination, 16, 0);
+        encoder.FillBuffer(destination, 0, 0);
+        encoder.Finish();
+    }
+}
+
+// Test a successful FillBuffer where the last external reference is dropped.
+TEST_F(CopyCommandTest_FillBuffer, DroppedBuffer) {
+    wgpu::Buffer destination = CreateBuffer(16, wgpu::BufferUsage::CopyDst);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.FillBuffer(destination, 0, 8);
+    wgpu::CommandBuffer commandBuffer = encoder.Finish();
+
+    destination = nullptr;
+    device.GetQueue().Submit(1, &commandBuffer);
+}
+
+// Test FillBuffer copies with OOB
+TEST_F(CopyCommandTest_FillBuffer, OutOfBounds) {
+    wgpu::Buffer destination = CreateBuffer(16, wgpu::BufferUsage::CopyDst);
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.FillBuffer(destination, 8, 12);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+
+    {
+        // Despite being zero length, should still raise an error due to being out of bounds.
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.FillBuffer(destination, 20, 0);
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+    }
+}
+
+// Test FillBuffer with incorrect buffer usage
+TEST_F(CopyCommandTest_FillBuffer, BadUsage) {
+    wgpu::Buffer vertex = CreateBuffer(16, wgpu::BufferUsage::Vertex);
+
+    // Destination with incorrect usage
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.FillBuffer(vertex, 0, 16);
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
+// Test FillBuffer with unaligned data size
+TEST_F(CopyCommandTest_FillBuffer, UnalignedSize) {
+    wgpu::Buffer destination = CreateBuffer(16, wgpu::BufferUsage::CopyDst);
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.FillBuffer(destination, 0, 2);
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
+// Test FillBuffer with unaligned offset
+TEST_F(CopyCommandTest_FillBuffer, UnalignedOffset) {
+    wgpu::Buffer destination = CreateBuffer(16, wgpu::BufferUsage::CopyDst);
+
+    // Unaligned destination offset
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.FillBuffer(destination, 2, 4);
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}
+
+// Test FillBuffer with buffers in error state cause errors.
+TEST_F(CopyCommandTest_FillBuffer, BuffersInErrorState) {
+    wgpu::BufferDescriptor errorBufferDescriptor;
+    errorBufferDescriptor.size = 4;
+    errorBufferDescriptor.usage =
+        wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    ASSERT_DEVICE_ERROR(wgpu::Buffer errorBuffer = device.CreateBuffer(&errorBufferDescriptor));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    encoder.FillBuffer(errorBuffer, 0, 4);
+    ASSERT_DEVICE_ERROR(encoder.Finish());
+}

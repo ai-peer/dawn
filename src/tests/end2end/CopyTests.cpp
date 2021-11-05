@@ -547,6 +547,40 @@ class CopyTests_B2B : public DawnTest {
     }
 };
 
+class FillBufferTests : public DawnTest {
+  protected:
+    // This is the same signature as FillBuffer except that the buffers are replaced by
+    // only their size.
+    void DoTest(uint64_t bufferSize, uint64_t fillOffset, uint64_t fillSize) {
+        ASSERT(bufferSize % 4 == 0);
+        ASSERT(fillSize % 4 == 0);
+
+        // Create our test buffer, filled with non-zeroes
+        std::vector<uint32_t> bufferData(static_cast<size_t>(bufferSize / sizeof(uint32_t)));
+        for (size_t i = 0; i < bufferData.size(); i++) {
+            bufferData[i] = i + 1;
+        }
+        wgpu::Buffer buffer = utils::CreateBufferFromData(
+            device, bufferData.data(), bufferData.size() * sizeof(uint32_t),
+            wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc);
+
+        std::vector<uint32_t> zeroes(static_cast<size_t>(fillSize / sizeof(uint32_t)));
+
+        // Submit the fill
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.FillBuffer(buffer, fillOffset, fillSize);
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        // Check destination is exactly the expected content.
+        EXPECT_BUFFER_U32_RANGE_EQ(bufferData.data(), buffer, 0, fillOffset / sizeof(uint32_t));
+        EXPECT_BUFFER_U32_RANGE_EQ(zeroes.data(), buffer, fillOffset, fillSize / sizeof(uint32_t));
+        uint64_t fillEnd = fillOffset + fillSize;
+        EXPECT_BUFFER_U32_RANGE_EQ(bufferData.data() + fillEnd / sizeof(uint32_t), buffer, fillEnd,
+                                   (bufferSize - fillEnd) / sizeof(uint32_t));
+    }
+};
+
 // Test that copying an entire texture with 256-byte aligned dimensions works
 TEST_P(CopyTests_T2B, FullTextureAligned) {
     constexpr uint32_t kWidth = 256;
@@ -2396,6 +2430,34 @@ TEST_P(CopyTests_B2B, ZeroSizedCopy) {
 }
 
 DAWN_INSTANTIATE_TEST(CopyTests_B2B,
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
+// Test copying full buffers
+TEST_P(FillBufferTests, FullFill) {
+    DoTest(kSmallBufferSize, 0, kSmallBufferSize);
+    DoTest(kLargeBufferSize, 0, kLargeBufferSize);
+}
+
+// Test copying small pieces of a buffer at different corner case offsets
+TEST_P(FillBufferTests, SmallFillInBigBuffer) {
+    constexpr uint64_t kEndOffset = kLargeBufferSize - kSmallBufferSize;
+    DoTest(kLargeBufferSize, 0, kSmallBufferSize);
+    DoTest(kLargeBufferSize, kSmallBufferSize, kSmallBufferSize);
+    DoTest(kLargeBufferSize, kEndOffset, kSmallBufferSize);
+}
+
+// Test zero-size copies
+TEST_P(FillBufferTests, ZeroSizedFill) {
+    DoTest(kLargeBufferSize, 0, 0);
+    DoTest(kLargeBufferSize, kSmallBufferSize, 0);
+    DoTest(kLargeBufferSize, kLargeBufferSize, 0);
+}
+
+DAWN_INSTANTIATE_TEST(FillBufferTests,
                       D3D12Backend(),
                       MetalBackend(),
                       OpenGLBackend(),

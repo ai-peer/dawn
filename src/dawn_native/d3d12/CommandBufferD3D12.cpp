@@ -915,6 +915,27 @@ namespace dawn_native { namespace d3d12 {
                     break;
                 }
 
+                case Command::FillBuffer: {
+                    FillBufferCmd* cmd = mCommands.NextCommand<FillBufferCmd>();
+                    if (cmd->size == 0) {
+                        // Skip no-op fills.
+                        break;
+                    }
+                    Buffer* dstBuffer = ToBackend(cmd->destination.Get());
+
+                    bool bufferWasInitializedToZero;
+                    DAWN_TRY_ASSIGN(bufferWasInitializedToZero,
+                                    dstBuffer->EnsureDataInitializedAsDestination(
+                                        commandContext, cmd->destinationOffset, cmd->size));
+
+                    if (!bufferWasInitializedToZero) {
+                        DAWN_TRY(ClearBufferToZero(device, dstBuffer, cmd->destinationOffset,
+                                                   cmd->size));
+                    }
+
+                    break;
+                }
+
                 case Command::ResolveQuerySet: {
                     ResolveQuerySetCmd* cmd = mCommands.NextCommand<ResolveQuerySetCmd>();
                     QuerySet* querySet = ToBackend(cmd->querySet.Get());
