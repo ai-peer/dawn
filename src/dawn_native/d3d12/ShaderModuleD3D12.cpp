@@ -17,10 +17,12 @@
 #include "common/Assert.h"
 #include "common/BitSetIterator.h"
 #include "common/Log.h"
+#include "common/WindowsUtils.h"
 #include "dawn_native/TintUtils.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
 #include "dawn_native/d3d12/DeviceD3D12.h"
+#include "dawn_native/Pipeline.h"
 #include "dawn_native/d3d12/PipelineLayoutD3D12.h"
 #include "dawn_native/d3d12/PlatformFunctions.h"
 #include "dawn_native/d3d12/UtilsD3D12.h"
@@ -32,7 +34,180 @@
 #include <sstream>
 #include <unordered_map>
 
+namespace dawn_native {
+    // // 32 bit float has 7 decimal digits of precision so setting n to 8 should be enough
+    // template <typename T>
+    // std::string to_string_with_precision(const float a_value, const int n = 8) {
+    //     std::ostringstream out;
+    //     out.precision(n);
+    //     out << std::fixed << a_value;
+    //     return out.str();
+    // }
+
+    // template <typename stringType>
+    // std::string GetHLSLValueString(EntryPointMetadata::OverridableConstant::Type dawnType, const OverridableConstantScalar* entry,
+    //                               double value = 0) {
+            
+    //         switch (dawnType) {
+    //                 case EntryPointMetadata::OverridableConstant::Type::Boolean:
+    //                     return std::to_string(entry ? entry->b : static_cast<int32_t>(value));
+    //                 case EntryPointMetadata::OverridableConstant::Type::Float32:
+    //                     return to_string_with_precision(entry ? entry->f32 : static_cast<float>(value));
+    //                 case EntryPointMetadata::OverridableConstant::Type::Int32:
+    //                     return std::to_string(entry ? entry->i32 : static_cast<int32_t>(value));
+    //                 case EntryPointMetadata::OverridableConstant::Type::Uint32:
+    //                     return std::to_string(entry ? entry->u32 : static_cast<uint32_t>(value)) + "u";
+    //                 default:
+    //                     UNREACHABLE();
+    //             }
+    //         }
+
+    // // 32 bit float has 7 decimal digits of precision so setting n to 8 should be enough
+    // // template <typename T>
+    // std::string to_string_with_precision(const float a_value, const int n = 8) {
+    //     std::ostringstream out;
+    //     out.precision(n);
+    //     out << std::fixed << a_value;
+    //     return out.str();
+    // }
+
+    // template<typename StringType, typename T>
+    // struct NumberToString {
+    //     static StringType toStringFunc(T v) {
+    //         return std::is_same<StringType, std::string>::value ? std::to_string(v) : std::to_wstring(v);
+    //     }
+    // };
+    // template<typename StringType>
+    // static constexpr std::enable_if<std::is_same<StringType, std::string>::value, std::string>::type
+    // struct NumberToString {
+    //     template<typename T>
+    //     static StringType toStringFunc(T v) {
+    //         return std::is_same<StringType, std::string>::value ? std::to_string(v) : std::to_wstring(v);
+    //     }
+    // };
+
+
+
+    // template<typename T>
+    // std::string NumberToString<std::string, T>::toStringFunc(T v) {
+    //     return std::to_string(v);
+    // }
+
+
+    template<typename StringType, typename T>
+    struct NumberToString {
+        static StringType toStringFunc(T v);
+    };
+
+    template<typename T>
+    struct NumberToString<std::string, T> {
+        static std::string toStringFunc(T v) {
+            return std::to_string(v);
+        }
+    };
+
+    template<>
+    struct NumberToString<std::string, float> {
+        static std::string toStringFunc(float v) {
+            std::ostringstream out;
+            // 32 bit float has 7 decimal digits of precision so setting n to 8 should be enough
+            out.precision(8);
+            out << std::fixed << v;
+            return out.str();
+        }
+    };
+
+    template<>
+    struct NumberToString<std::string, uint32_t> {
+        static std::string toStringFunc(uint32_t v) {
+            return std::to_string(v) + "u";
+        }
+    };
+
+    template<typename T>
+    struct NumberToString<std::wstring, T> {
+        static std::wstring toStringFunc(T v) {
+            return std::to_wstring(v);
+        }
+    };
+
+    // template<typename StringType, typename T>
+    // struct NumberToString {
+    //     static StringType toStringFunc(typename std::enable_if_t<std::is_same<uint32_t, T>::value> v);
+    // };
+
+    // template<typename T>
+    // std::string NumberToString<std::string, T>::toStringFunc(T v) {
+    //     return std::to_string(v);
+    // }
+
+    // template<>
+    // std::string NumberToString<std::string, uint32_t>::toStringFunc(uint32_t v) {
+    //     return std::to_string(v);
+    // }
+    // template<>
+    // std::wstring NumberToString<std::wstring, uint32_t>::toStringFunc(uint32_t v) {
+    //     return std::to_wstring(v);
+    // }
+
+//     template<typename StringType, typename T>
+// typename std::enable_if_t<std::is_same<StringType, std::string>::value, std::string>
+// toStringFunc(T v) {
+//     return std::to_string(v);
+// }
+
+// template<typename StringType, typename T>
+// typename std::enable_if_t<std::is_same<StringType, std::wstring>::value, std::wstring>
+// toStringFunc(T v) {
+//     return std::to_wstring(v);
+// }
+
+    // template<typename T>
+    // std::string NumberToString<std::string, T>::toStringFunc(T v) {
+    //     return v ? "" : "xxx";
+    // }
+
+    // template<typename T>
+    // std::string NumberToString<std::string, T>::toStringFunc(typename std::enable_if_t<std::is_same<uint32_t, T>::value> v) {
+    //     return std::to_string<T>(v);
+    // }
+
+    // template <
+    //     typename StringType = std::string,
+    //     typename toStringFunc = (std::is_same<StringType, std::string> ? std::to_string : std::to_wstring)
+    // >
+    template <typename StringType = std::string>
+    StringType GetHLSLValueString(EntryPointMetadata::OverridableConstant::Type dawnType, const OverridableConstantScalar* entry,
+                                  double value = 0) {
+            // constexpr auto toStringFunc = std::is_same<StringType, std::string>::value ? std::to_string : std::to_wstring;
+            // constexpr auto toStringFunc = std::is_same<StringType, std::string>::value ? decltype(std::to_string) : decltype(std::to_wstring);
+            switch (dawnType) {
+                    case EntryPointMetadata::OverridableConstant::Type::Boolean:
+                        // return toStringFunc<std::string, int32_t>(entry ? entry->b : static_cast<int32_t>(value));
+                        return NumberToString<StringType, int32_t>::toStringFunc(entry ? entry->b : static_cast<int32_t>(value));
+                    case EntryPointMetadata::OverridableConstant::Type::Float32:
+                        // return to_string_with_precision(entry ? entry->f32 : static_cast<float>(value));
+                        return NumberToString<StringType, float>::toStringFunc(entry ? entry->f32 : static_cast<float>(value));
+                    case EntryPointMetadata::OverridableConstant::Type::Int32:
+                        // return toStringFunc<std::string, int32_t>(entry ? entry->i32 : static_cast<int32_t>(value));
+                        return NumberToString<StringType, int32_t>::toStringFunc(entry ? entry->i32 : static_cast<int32_t>(value));
+                    case EntryPointMetadata::OverridableConstant::Type::Uint32:
+                        // return toStringFunc<std::string, uint32_t>(entry ? entry->u32 : static_cast<uint32_t>(value)) + "u";
+                        return NumberToString<StringType, uint32_t>::toStringFunc(entry ? entry->u32 : static_cast<uint32_t>(value));
+                        // return NumberToString<StringType, uint32_t>::toStringFunc(entry ? entry->u32 : static_cast<uint32_t>(value)) + "u";
+                        // return NumberToString<std::string>::toStringFunc(entry ? entry->u32 : static_cast<uint32_t>(value)) + "u";
+                    default:
+                        UNREACHABLE();
+                }
+            }
+
+
+
+} // namespace dawn_native
+
 namespace dawn_native { namespace d3d12 {
+
+    const char kSpecConstantPrefix[] = "WGSL_SPEC_CONSTANT_";
 
     namespace {
         ResultOrError<uint64_t> GetDXCompilerVersion(ComPtr<IDxcValidator> dxcValidator) {
@@ -101,6 +276,7 @@ namespace dawn_native { namespace d3d12 {
             const tint::Program* program;
             const char* entryPointName;
             SingleShaderStage stage;
+            //defines?
             uint32_t compileFlags;
             bool disableSymbolRenaming;
             tint::transform::BindingRemapper::BindingPoints bindingPoints;
@@ -121,6 +297,7 @@ namespace dawn_native { namespace d3d12 {
             const D3D12DeviceInfo* deviceInfo;
             bool hasShaderFloat16Feature;
 
+            // Add defines for cachekeys
             static ResultOrError<ShaderCompilationRequest> Create(
                 const char* entryPointName,
                 SingleShaderStage stage,
@@ -310,9 +487,81 @@ namespace dawn_native { namespace d3d12 {
             return arguments;
         }
 
+        template <typename DefineType, typename stringType>
+        void GetOverridableConstantsDefines(const ProgrammableStage& programmableStage, std::vector<DefineType>* defines, std::vector<std::pair<stringType, stringType>>* defineStrings) {
+            // // Build defines for overridable constants
+            // const D3D_SHADER_MACRO* pDefines = nullptr;
+            // std::vector<D3D_SHADER_MACRO> fxcDefines;
+
+            // // Store define strings
+            // // Make sure live until it's passed to D3D API
+            // std::vector<std::pair<std::string, std::string>> defineStrings;
+
+            const EntryPointMetadata& entryPointMetadata =
+                programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
+
+                std::unordered_set<std::string> overriddenConstants;
+
+                // Set pipeline overridden values
+                for (const auto& pipelineConstant : programmableStage.constants) {
+                    const std::string& name = pipelineConstant.first;
+                    double value = pipelineConstant.second;
+
+                    overriddenConstants.insert(name);
+
+                    // This is already validated so `name` must exist
+                    const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+
+                    defineStrings->emplace_back(kSpecConstantPrefix + std::to_string(moduleConstant.id), GetHLSLValueString(moduleConstant.type, nullptr, value));
+                }
+
+                // Set shader initialized default values
+                // D3D12 HLSL shaders use defines so we should define every constants regardless whether they are reference by current entryPoint or not to pass shader compilation
+                const EntryPointMetadataTable& entryPoints = programmableStage.module->GetAllEntryPoints();
+                for (const auto& it : entryPoints) {
+                    // printf("\n\n!!!!!!!!!!! %s \n\n", it.first.c_str());
+                    const EntryPointMetadata* curEntryPointMetadata = it.second.get();
+                    for (const auto& iter : curEntryPointMetadata->overridableConstants) {
+                        const std::string& name = iter.first;
+                        // printf("   %s \n\n", name.c_str());
+                        if (overriddenConstants.count(name) != 0) {
+                            // This constant already has overridden value
+                            continue;
+                        }
+
+                        const auto& moduleConstant = curEntryPointMetadata->overridableConstants.at(name);
+
+                        // uninitialized default values are okay since they are only defined to pass compilation but not used
+                        defineStrings->emplace_back(kSpecConstantPrefix + std::to_string(moduleConstant.id), GetHLSLValueString(moduleConstant.type, &moduleConstant.defaultValue));
+                    }
+                }
+
+                // Needs to populate defines at the end to avoid vector reallocation messing up with char pointers
+                // for (size_t i = 0; i < defineStrings->size(); i++) {
+                    // const auto& d = defineStrings->at(i);
+                for (const auto& d : *defineStrings) {
+                    defines->push_back({d.first.c_str(), d.second.c_str()});
+                }
+
+                // if (defines.size() > 0) {
+                //     // d3dCompile D3D_SHADER_MACRO* pDefines is a nullptr terminated array
+                //     defines.push_back({nullptr});
+                //     pDefines = defines.data();
+                // }
+                
+
+
+                // for (size_t i = 0; i < defines.size() - 1; i++) {
+                for (const auto& d : *defines) {
+                    printf("\n\n%s %s\n\n", d.Name, d.Definition);
+                }
+        }
+
         ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(IDxcLibrary* dxcLibrary,
                                                          IDxcCompiler* dxcCompiler,
                                                          const ShaderCompilationRequest& request,
+                                                        //  const EntryPointMetadata& entryPointMetadata,
+                                                         const ProgrammableStage& programmableStage,
                                                          const std::string& hlslSource) {
             ComPtr<IDxcBlobEncoding> sourceBlob;
             DAWN_TRY(
@@ -330,7 +579,10 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(CheckHRESULT(
                 dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
                                      request.deviceInfo->shaderProfiles[request.stage].c_str(),
-                                     arguments.data(), arguments.size(), nullptr, 0, nullptr,
+                                     arguments.data(), arguments.size(),
+                                    //  defines.data(), defines.size(),
+                                    nullptr, 0,
+                                     nullptr,
                                      &result),
                 "DXC compile"));
 
@@ -350,8 +602,10 @@ namespace dawn_native { namespace d3d12 {
             return std::move(compiledShader);
         }
 
+
         ResultOrError<ComPtr<ID3DBlob>> CompileShaderFXC(const PlatformFunctions* functions,
                                                          const ShaderCompilationRequest& request,
+                                                         const ProgrammableStage& programmableStage,
                                                          const std::string& hlslSource) {
             const char* targetProfile = nullptr;
             switch (request.stage) {
@@ -369,8 +623,25 @@ namespace dawn_native { namespace d3d12 {
             ComPtr<ID3DBlob> compiledShader;
             ComPtr<ID3DBlob> errors;
 
+            // Build defines for overridable constants
+            const D3D_SHADER_MACRO* pDefines = nullptr;
+            std::vector<D3D_SHADER_MACRO> fxcDefines;
+            // Store define strings
+            // Make sure live until it's passed to D3D API
+            std::vector<std::pair<std::string, std::string>> defineStrings;
+
+            GetOverridableConstantsDefines(programmableStage, &fxcDefines, &defineStrings);
+
+            if (fxcDefines.size() > 0) {
+                // d3dCompile D3D_SHADER_MACRO* pDefines is a nullptr terminated array
+                fxcDefines.push_back({nullptr});
+                pDefines = fxcDefines.data();
+            }
+
             DAWN_INVALID_IF(FAILED(functions->d3dCompile(
-                                hlslSource.c_str(), hlslSource.length(), nullptr, nullptr, nullptr,
+                                hlslSource.c_str(), hlslSource.length(), nullptr,
+                                pDefines,
+                                nullptr,
                                 request.entryPointName, targetProfile, request.compileFlags, 0,
                                 &compiledShader, &errors)),
                             "D3D compile failed with: %s",
@@ -445,6 +716,8 @@ namespace dawn_native { namespace d3d12 {
                                  IDxcLibrary* dxcLibrary,
                                  IDxcCompiler* dxcCompiler,
                                  ShaderCompilationRequest&& request,
+                                //  const EntryPointMetadata& entryPointMetaData,
+                                 const ProgrammableStage& programmableStage,
                                  bool dumpShaders,
                                  F&& DumpShadersEmitLog,
                                  CompiledShader* compiledShader) {
@@ -461,11 +734,11 @@ namespace dawn_native { namespace d3d12 {
             switch (request.compiler) {
                 case ShaderCompilationRequest::Compiler::DXC:
                     DAWN_TRY_ASSIGN(compiledShader->compiledDXCShader,
-                                    CompileShaderDXC(dxcLibrary, dxcCompiler, request, hlslSource));
+                                    CompileShaderDXC(dxcLibrary, dxcCompiler, request, programmableStage, hlslSource));
                     break;
                 case ShaderCompilationRequest::Compiler::FXC:
                     DAWN_TRY_ASSIGN(compiledShader->compiledFXCShader,
-                                    CompileShaderFXC(functions, request, hlslSource));
+                                    CompileShaderFXC(functions, request, programmableStage, hlslSource));
                     break;
             }
 
@@ -508,7 +781,9 @@ namespace dawn_native { namespace d3d12 {
         return InitializeBase(parseResult);
     }
 
-    ResultOrError<CompiledShader> ShaderModule::Compile(const char* entryPointName,
+    ResultOrError<CompiledShader> ShaderModule::Compile(
+        // const char* entryPointName,
+                                                        const ProgrammableStage& programmableStage,
                                                         SingleShaderStage stage,
                                                         PipelineLayout* layout,
                                                         uint32_t compileFlags) {
@@ -555,12 +830,15 @@ namespace dawn_native { namespace d3d12 {
         }
 
         ShaderCompilationRequest request;
-        DAWN_TRY_ASSIGN(request, ShaderCompilationRequest::Create(entryPointName, stage, layout,
+        DAWN_TRY_ASSIGN(request, ShaderCompilationRequest::Create(programmableStage.entryPoint.c_str(), stage, layout,
                                                                   compileFlags, device, program,
-                                                                  GetEntryPoint(entryPointName)));
+                                                                  GetEntryPoint(programmableStage.entryPoint)));
 
         PersistentCacheKey shaderCacheKey;
         DAWN_TRY_ASSIGN(shaderCacheKey, request.CreateCacheKey());
+
+        // const EntryPointMetadata& entryPointMetaData =
+        //     programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
 
         DAWN_TRY_ASSIGN(
             compiledShader.cachedShader,
@@ -572,7 +850,11 @@ namespace dawn_native { namespace d3d12 {
                                                                 : nullptr,
                         device->IsToggleEnabled(Toggle::UseDXC) ? device->GetDxcCompiler().Get()
                                                                 : nullptr,
-                        std::move(request), device->IsToggleEnabled(Toggle::DumpShaders),
+                        std::move(request),
+                        // defines,
+                        // entryPointMetaData,
+                        programmableStage,
+                        device->IsToggleEnabled(Toggle::DumpShaders),
                         [&](WGPULoggingType loggingType, const char* message) {
                             GetDevice()->EmitLog(loggingType, message);
                         },

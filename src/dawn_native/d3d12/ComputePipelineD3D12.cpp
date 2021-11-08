@@ -47,9 +47,15 @@ namespace dawn_native { namespace d3d12 {
         D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
         d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 
+        // std::vector<Define> defines = {
+        //     {"WGSL_SPEC_CONSTANT_1001", "1"},
+        //     {"WGSL_SPEC_CONSTANT_1", "2"},
+        //     {"WGSL_SPEC_CONSTANT_1004", "0"},
+        // };
+
         CompiledShader compiledShader;
         DAWN_TRY_ASSIGN(compiledShader,
-                        module->Compile(computeStage.entryPoint.c_str(), SingleShaderStage::Compute,
+                        module->Compile(computeStage, SingleShaderStage::Compute,
                                         ToBackend(GetLayout()), compileFlags));
         d3dDesc.CS = compiledShader.GetD3D12ShaderBytecode();
         auto* d3d12Device = device->GetD3D12Device();
