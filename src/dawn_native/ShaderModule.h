@@ -254,9 +254,12 @@ namespace dawn_native {
         // Return true iff the program has an entrypoint called `entryPoint`.
         bool HasEntryPoint(const std::string& entryPoint) const;
 
-        // Returns the metadata for the given `entryPoint`. HasEntryPoint with the same argument
+        // Return the metadata for the given `entryPoint`. HasEntryPoint with the same argument
         // must be true.
         const EntryPointMetadata& GetEntryPoint(const std::string& entryPoint) const;
+
+        // Return the metadata for all entry points
+        const EntryPointMetadataTable& GetAllEntryPoints() const;
 
         // Functions necessary for the unordered_set<ShaderModuleBase*>-based cache.
         size_t ComputeContentHash() override;
