@@ -350,7 +350,7 @@ namespace dawn_native { namespace d3d12 {
         for (auto stage : IterateStages(GetStageMask())) {
             DAWN_TRY_ASSIGN(compiledShader[stage],
                             ToBackend(pipelineStages[stage].module)
-                                ->Compile(pipelineStages[stage].entryPoint.c_str(), stage,
+                                ->Compile(pipelineStages[stage], stage,
                                           ToBackend(GetLayout()), compileFlags));
             *shaders[stage] = compiledShader[stage].GetD3D12ShaderBytecode();
         }
