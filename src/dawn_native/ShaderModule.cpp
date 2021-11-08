@@ -1231,6 +1231,10 @@ namespace dawn_native {
         return *mEntryPoints.at(entryPoint);
     }
 
+    const EntryPointMetadataTable& ShaderModuleBase::GetAllEntryPoints() const {
+        return mEntryPoints;
+    }
+
     size_t ShaderModuleBase::ComputeContentHash() {
         ObjectContentHasher recorder;
         recorder.Record(mType);
