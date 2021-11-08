@@ -17,6 +17,7 @@
 #include "common/Assert.h"
 #include "common/BitSetIterator.h"
 #include "common/Log.h"
+#include "common/WindowsUtils.h"
 #include "dawn_native/TintUtils.h"
 #include "dawn_native/d3d12/BindGroupLayoutD3D12.h"
 #include "dawn_native/d3d12/D3D12Error.h"
@@ -101,6 +102,7 @@ namespace dawn_native { namespace d3d12 {
             const tint::Program* program;
             const char* entryPointName;
             SingleShaderStage stage;
+            //defines?
             uint32_t compileFlags;
             bool disableSymbolRenaming;
             tint::transform::BindingRemapper::BindingPoints bindingPoints;
@@ -121,6 +123,7 @@ namespace dawn_native { namespace d3d12 {
             const D3D12DeviceInfo* deviceInfo;
             bool hasShaderFloat16Feature;
 
+            // Add defines for cachekeys
             static ResultOrError<ShaderCompilationRequest> Create(
                 const char* entryPointName,
                 SingleShaderStage stage,
@@ -313,6 +316,8 @@ namespace dawn_native { namespace d3d12 {
         ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(IDxcLibrary* dxcLibrary,
                                                          IDxcCompiler* dxcCompiler,
                                                          const ShaderCompilationRequest& request,
+                                                        //  const EntryPointMetadata& entryPointMetadata,
+                                                         const ProgrammableStage& programmableStage,
                                                          const std::string& hlslSource) {
             ComPtr<IDxcBlobEncoding> sourceBlob;
             DAWN_TRY(
@@ -330,7 +335,10 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(CheckHRESULT(
                 dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
                                      request.deviceInfo->shaderProfiles[request.stage].c_str(),
-                                     arguments.data(), arguments.size(), nullptr, 0, nullptr,
+                                     arguments.data(), arguments.size(),
+                                    //  defines.data(), defines.size(),
+                                    nullptr, 0,
+                                     nullptr,
                                      &result),
                 "DXC compile"));
 
@@ -352,6 +360,8 @@ namespace dawn_native { namespace d3d12 {
 
         ResultOrError<ComPtr<ID3DBlob>> CompileShaderFXC(const PlatformFunctions* functions,
                                                          const ShaderCompilationRequest& request,
+                                                        //  const EntryPointMetadata& entryPointMetadata,
+                                                         const ProgrammableStage& programmableStage,
                                                          const std::string& hlslSource) {
             const char* targetProfile = nullptr;
             switch (request.stage) {
@@ -369,8 +379,151 @@ namespace dawn_native { namespace d3d12 {
             ComPtr<ID3DBlob> compiledShader;
             ComPtr<ID3DBlob> errors;
 
+            // NULL-terminated array
+            // std::vector<D3D_SHADER_MACRO> defines = {
+            //     {"WGSL_SPEC_CONSTANT_1001", "1"},
+            //     {"WGSL_SPEC_CONSTANT_1", "2"},
+            //     {"WGSL_SPEC_CONSTANT_1004", "0"},
+            //     { nullptr }
+            // };
+            // D3D_SHADER_MACRO pDefines[] = {
+            //     defines[0],
+            //     defines[1],
+            //     defines[2],
+            //     { nullptr }
+            // };
+
+            // std::vector<D3D_SHADER_MACRO> fxcDefines(defines.size() + 1);
+
+            // // // D3D_SHADER_MACRO::Name and Definition are non-const LPCSTR
+            // // std::vector<std::pair<std::string, std::string>>
+            // // fxcDefines.reserve(defines.size() + 1);
+            // for (size_t i = 0; i < defines.size(); i++) {
+            //     const std::string name = WCharToUTF8(defines[i].Name);
+            //     const std::string definition = WCharToUTF8(defines[i].Value);
+            //     // fxcDefines[i].Name = name.c_str();
+            //     // fxcDefines[i].Definition = definition.c_str();
+            //     fxcDefines[i] = {name.c_str(), definition.c_str()};
+            //     // printf("\n\n%s %s\n\n", fxcDefines[i].Name, fxcDefines[i].Definition);
+            // }
+            // fxcDefines.back() = { nullptr, nullptr };
+
+
+            // std::vector<D3D_SHADER_MACRO> fxcDefines;
+            // for (size_t i = 0; i < defines.size(); i++) {
+            //     fxcDefines.emplace_back(
+            //         WCharToUTF8(defines[i].Name).c_str(),
+            //         WCharToUTF8(defines[i].Value).c_str()
+            //     );
+            // }
+            // fxcDefines.emplace_back(nullptr, nullptr);
+
+
+            // printf("\n\n%s %s\n\n", fxcDefines[0].Name, fxcDefines[0].Definition);
+
+            // Build defines for overridable constants
+            const D3D_SHADER_MACRO* pDefines = nullptr;
+            std::vector<D3D_SHADER_MACRO> fxcDefines;
+
+            // std::vector<std::string> strs;
+            std::vector<std::pair<std::string, std::string>> defines;
+
+            const EntryPointMetadata& entryPointMetadata =
+                programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
+
+            if (entryPointMetadata.overridableConstants.size() > 0) {
+                // populate fxcDefines, 
+
+                std::unordered_set<std::string> overriddenConstants;
+
+                // Set pipeline overridden values
+                for (const auto& pipelineConstant : programmableStage.constants) {
+                    const std::string& name = pipelineConstant.first;
+                    double value = pipelineConstant.second;
+
+                    overriddenConstants.insert(name);
+
+                    // This is already validated so `name` must exist
+                    // const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+
+                    // TODO: get value string based on type
+                    // TOOD: to_string().c_str() cannot persist?
+                    // auto vs = std::to_string(uint32_t(value));
+                    // fxcDefines.push_back({name.c_str(), vs.c_str()});
+                    // strs.push_back(std::move(vs));
+
+                    // strs.emplace_back(std::to_string((uint32_t)value));
+                    // fxcDefines.push_back({name.c_str(), strs.back().c_str()});
+
+                    defines.emplace_back("WGSL_SPEC_CONSTANT_" + name, std::to_string((uint32_t)value));
+
+                    // LPCSTR v = std::to_string(value).c_str();
+                    // fxcDefines.push_back(std::move(D3D_SHADER_MACRO{name, v}));
+                    // fxcDefines.push_back(std::move(D3D_SHADER_MACRO{name.c_str(), vs.c_str()}));
+                    // fxcDefines.push_back({name.c_str(), vs.c_str()});
+                }
+
+                // Set shader initialized default values
+                for (const std::string& name : entryPointMetadata.initializedOverridableConstants) {
+                    if (overriddenConstants.count(name) != 0) {
+                        // This constant already has overridden value
+                        continue;
+                    }
+
+                    const auto& moduleConstant = entryPointMetadata.overridableConstants.at(name);
+                    ASSERT(moduleConstant.isInitialized);
+
+                    // auto vs = std::to_string(moduleConstant.defaultValue.u32);
+                    // fxcDefines.push_back({name.c_str(), vs.c_str()});
+                    // strs.push_back(std::move(vs));
+
+                    // strs.emplace_back(std::to_string(moduleConstant.defaultValue.u32));
+                    // fxcDefines.push_back({name.c_str(), strs.back().c_str()});
+
+                    defines.emplace_back("WGSL_SPEC_CONSTANT_" + name, std::to_string(moduleConstant.defaultValue.u32));
+                }
+
+
+                for (size_t i = 0; i < defines.size(); i++) {
+                    fxcDefines.push_back({defines[i].first.c_str(), defines[i].second.c_str()});
+                }
+
+
+
+
+                // d3dCompile D3D_SHADER_MACRO* pDefines is a nullptr terminated array
+                fxcDefines.push_back({nullptr});
+                // fxcDefines.push_back({nullptr, nullptr});
+
+                pDefines = fxcDefines.data();
+
+
+                for (size_t i = 0; i < fxcDefines.size() - 1; i++) {
+                    printf("\n\n%s %s\n\n", fxcDefines[i].Name, fxcDefines[i].Definition);
+                }
+            }
+
+
+            // D3D_SHADER_MACRO pDefinesArray[] = {
+            //     // fxcDefines[0],
+            //     // fxcDefines[1],
+            //     // fxcDefines[2],
+            //     {"WGSL_SPEC_CONSTANT_1001", "1"},
+            //     {"WGSL_SPEC_CONSTANT_1", "2"},
+            //     {"WGSL_SPEC_CONSTANT_1004", "0"},
+            //     { nullptr }
+            // };
+            // pDefines = pDefinesArray;
+
             DAWN_INVALID_IF(FAILED(functions->d3dCompile(
-                                hlslSource.c_str(), hlslSource.length(), nullptr, nullptr, nullptr,
+                                hlslSource.c_str(), hlslSource.length(), nullptr,
+                                // nullptr,
+                                // defines.data(),
+                                // fxcDefines.data(),
+                                // nullptr,
+                                pDefines,
+
+                                nullptr,
                                 request.entryPointName, targetProfile, request.compileFlags, 0,
                                 &compiledShader, &errors)),
                             "D3D compile failed with: %s",
@@ -445,6 +598,8 @@ namespace dawn_native { namespace d3d12 {
                                  IDxcLibrary* dxcLibrary,
                                  IDxcCompiler* dxcCompiler,
                                  ShaderCompilationRequest&& request,
+                                //  const EntryPointMetadata& entryPointMetaData,
+                                 const ProgrammableStage& programmableStage,
                                  bool dumpShaders,
                                  F&& DumpShadersEmitLog,
                                  CompiledShader* compiledShader) {
@@ -461,11 +616,11 @@ namespace dawn_native { namespace d3d12 {
             switch (request.compiler) {
                 case ShaderCompilationRequest::Compiler::DXC:
                     DAWN_TRY_ASSIGN(compiledShader->compiledDXCShader,
-                                    CompileShaderDXC(dxcLibrary, dxcCompiler, request, hlslSource));
+                                    CompileShaderDXC(dxcLibrary, dxcCompiler, request, programmableStage, hlslSource));
                     break;
                 case ShaderCompilationRequest::Compiler::FXC:
                     DAWN_TRY_ASSIGN(compiledShader->compiledFXCShader,
-                                    CompileShaderFXC(functions, request, hlslSource));
+                                    CompileShaderFXC(functions, request, programmableStage, hlslSource));
                     break;
             }
 
@@ -508,7 +663,9 @@ namespace dawn_native { namespace d3d12 {
         return InitializeBase(parseResult);
     }
 
-    ResultOrError<CompiledShader> ShaderModule::Compile(const char* entryPointName,
+    ResultOrError<CompiledShader> ShaderModule::Compile(
+        // const char* entryPointName,
+                                                        const ProgrammableStage& programmableStage,
                                                         SingleShaderStage stage,
                                                         PipelineLayout* layout,
                                                         uint32_t compileFlags) {
@@ -555,12 +712,15 @@ namespace dawn_native { namespace d3d12 {
         }
 
         ShaderCompilationRequest request;
-        DAWN_TRY_ASSIGN(request, ShaderCompilationRequest::Create(entryPointName, stage, layout,
+        DAWN_TRY_ASSIGN(request, ShaderCompilationRequest::Create(programmableStage.entryPoint.c_str(), stage, layout,
                                                                   compileFlags, device, program,
-                                                                  GetEntryPoint(entryPointName)));
+                                                                  GetEntryPoint(programmableStage.entryPoint)));
 
         PersistentCacheKey shaderCacheKey;
         DAWN_TRY_ASSIGN(shaderCacheKey, request.CreateCacheKey());
+
+        // const EntryPointMetadata& entryPointMetaData =
+        //     programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
 
         DAWN_TRY_ASSIGN(
             compiledShader.cachedShader,
@@ -572,7 +732,11 @@ namespace dawn_native { namespace d3d12 {
                                                                 : nullptr,
                         device->IsToggleEnabled(Toggle::UseDXC) ? device->GetDxcCompiler().Get()
                                                                 : nullptr,
-                        std::move(request), device->IsToggleEnabled(Toggle::DumpShaders),
+                        std::move(request),
+                        // defines,
+                        // entryPointMetaData,
+                        programmableStage,
+                        device->IsToggleEnabled(Toggle::DumpShaders),
                         [&](WGPULoggingType loggingType, const char* message) {
                             GetDevice()->EmitLog(loggingType, message);
                         },
