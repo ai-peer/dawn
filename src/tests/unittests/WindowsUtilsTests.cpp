@@ -31,6 +31,16 @@ TEST(WindowsUtilsTests, WCharToUTF8) {
 
     // Test three-byte utf8 codepoint
     ASSERT_EQ("\xe1\x81\x90", WCharToUTF8(L"\x1050"));
+
+    // Regression
+    ASSERT_EQ("WGSL_SPEC_CONSTANT_1001", WCharToUTF8(L"WGSL_SPEC_CONSTANT_1001"));
+    printf("\n\n%s %s\n\n", WCharToUTF8(L"WGSL_SPEC_CONSTANT_1001").c_str(),
+           "WGSL_SPEC_CONSTANT_1001");
+    ASSERT_EQ("1", WCharToUTF8(L"1"));
+    ASSERT_EQ("WGSL_SPEC_CONSTANT_1", WCharToUTF8(L"WGSL_SPEC_CONSTANT_1"));
+    ASSERT_EQ("2", WCharToUTF8(L"2"));
+    ASSERT_EQ("WGSL_SPEC_CONSTANT_1004", WCharToUTF8(L"WGSL_SPEC_CONSTANT_1004"));
+    ASSERT_EQ("0", WCharToUTF8(L"0"));
 }
 
 TEST(WindowsUtilsTests, UTF8ToWStr) {
