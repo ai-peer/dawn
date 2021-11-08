@@ -66,7 +66,7 @@ namespace dawn_native { namespace d3d12 {
         // Create the device to populate the adapter properties then reuse it when needed for actual
         // rendering.
         const PlatformFunctions* functions = GetBackend()->GetFunctions();
-        if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_1,
+        if (FAILED(functions->d3d12CreateDevice(GetHardwareAdapter(), D3D_FEATURE_LEVEL_11_0,
                                                 _uuidof(ID3D12Device), &mD3d12Device))) {
             return DAWN_INTERNAL_ERROR("D3D12CreateDevice failed");
         }
@@ -143,7 +143,25 @@ namespace dawn_native { namespace d3d12 {
 
         DAWN_TRY(CheckHRESULT(mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_D3D12_OPTIONS,
                                                                 &featureData, sizeof(featureData)),
-                              "CheckFeatureSupport"));
+                              "CheckFeatureSupport D3D12_FEATURE_D3D12_OPTIONS"));
+
+        // Check if the device is at least D3D_FEATURE_LEVEL_11_1 or D3D_FEATURE_LEVEL_11_0
+        const D3D_FEATURE_LEVEL levelsToQuery[]{D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
+
+        D3D12_FEATURE_DATA_FEATURE_LEVELS featureLevels;
+        featureLevels.NumFeatureLevels = sizeof(levelsToQuery) / sizeof(D3D_FEATURE_LEVEL);
+        featureLevels.pFeatureLevelsRequested = levelsToQuery;
+        DAWN_TRY(
+            CheckHRESULT(mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_FEATURE_LEVELS,
+                                                           &featureLevels, sizeof(featureLevels)),
+                         "CheckFeatureSupport D3D12_FEATURE_FEATURE_LEVELS"));
+
+        if (featureLevels.MaxSupportedFeatureLevel == D3D_FEATURE_LEVEL_11_0 &&
+            featureData.ResourceBindingTier < D3D12_RESOURCE_BINDING_TIER_2) {
+            return DAWN_VALIDATION_ERROR(
+                "At least Resource Binding Tier 2 is required for D3D12 Feature Level 11.0 "
+                "devices.");
+        }
 
         GetDefaultLimits(&limits->v1);
 
