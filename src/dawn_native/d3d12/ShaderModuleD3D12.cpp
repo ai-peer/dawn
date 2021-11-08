@@ -519,39 +519,73 @@ namespace dawn_native { namespace d3d12 {
 
         CompiledShader compiledShader = {};
 
+        // This will be set to true if any transform needs to be run. Otherwise we don't need to
+        // transform+clone the Tint program.
+        bool needsTransform = false;
+
         tint::transform::Manager transformManager;
         tint::transform::DataMap transformInputs;
+        {
+            tint::sem::BindingPoint uboBinding{
+                layout->GetDynamicStorageBufferLengthsRegisterSpace(),
+                layout->GetDynamicStorageBufferLengthsShaderRegister()};
 
-        const tint::Program* program;
-        tint::Program programAsValue;
+            tint::transform::ExtrinsicBufferSizeFromUniform::Config config;
+
+            const auto& storageBufferLengthInfo = layout->GetDynamicStorageBufferLengthInfo();
+            for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+                for (const auto& bindingAndRegisterOffset : storageBufferLengthInfo[group]) {
+                    needsTransform = true;
+
+                    BindingNumber binding = bindingAndRegisterOffset.binding;
+                    uint32_t registerOffset = bindingAndRegisterOffset.registerOffset;
+
+                    config.bindpoint_to_ubo_and_size_index.emplace(
+                        tint::sem::BindingPoint{static_cast<uint32_t>(group),
+                                                static_cast<uint32_t>(binding)},
+                        decltype(config.bindpoint_to_ubo_and_size_index)::mapped_type{
+                            uboBinding, registerOffset});
+                }
+            }
+
+            transformManager.Add<tint::transform::ExtrinsicBufferSizeFromUniform>();
+            transformInputs.Add<tint::transform::ExtrinsicBufferSizeFromUniform::Config>(
+                std::move(config));
+        }
+
         if (stage == SingleShaderStage::Vertex) {
+            needsTransform = true;
+
             transformManager.Add<tint::transform::FirstIndexOffset>();
             transformInputs.Add<tint::transform::FirstIndexOffset::BindingPoint>(
                 layout->GetFirstIndexOffsetShaderRegister(),
                 layout->GetFirstIndexOffsetRegisterSpace());
+        }
 
-            tint::transform::DataMap transformOutputs;
+        const tint::Program* program;
+        tint::Program programAsValue;
+        tint::transform::DataMap transformOutputs;
+
+        if (needsTransform) {
             DAWN_TRY_ASSIGN(programAsValue,
                             RunTransforms(&transformManager, GetTintProgram(), transformInputs,
                                           &transformOutputs, nullptr));
-
-            if (auto* data = transformOutputs.Get<tint::transform::FirstIndexOffset::Data>()) {
-                // TODO(dawn:549): Consider adding this information to the pipeline cache once we
-                // can store more than the shader blob in it.
-                compiledShader.firstOffsetInfo.usesVertexIndex = data->has_vertex_index;
-                if (compiledShader.firstOffsetInfo.usesVertexIndex) {
-                    compiledShader.firstOffsetInfo.vertexIndexOffset = data->first_vertex_offset;
-                }
-                compiledShader.firstOffsetInfo.usesInstanceIndex = data->has_instance_index;
-                if (compiledShader.firstOffsetInfo.usesInstanceIndex) {
-                    compiledShader.firstOffsetInfo.instanceIndexOffset =
-                        data->first_instance_offset;
-                }
-            }
-
             program = &programAsValue;
         } else {
             program = GetTintProgram();
+        }
+
+        if (auto* data = transformOutputs.Get<tint::transform::FirstIndexOffset::Data>()) {
+            // TODO(dawn:549): Consider adding this information to the pipeline cache once we
+            // can store more than the shader blob in it.
+            compiledShader.firstOffsetInfo.usesVertexIndex = data->has_vertex_index;
+            if (compiledShader.firstOffsetInfo.usesVertexIndex) {
+                compiledShader.firstOffsetInfo.vertexIndexOffset = data->first_vertex_offset;
+            }
+            compiledShader.firstOffsetInfo.usesInstanceIndex = data->has_instance_index;
+            if (compiledShader.firstOffsetInfo.usesInstanceIndex) {
+                compiledShader.firstOffsetInfo.instanceIndexOffset = data->first_instance_offset;
+            }
         }
 
         ShaderCompilationRequest request;
