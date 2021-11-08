@@ -258,6 +258,9 @@ namespace dawn_native {
         // must be true.
         const EntryPointMetadata& GetEntryPoint(const std::string& entryPoint) const;
 
+        //
+        const EntryPointMetadataTable& GetAllEntryPoints() const;
+
         // Functions necessary for the unordered_set<ShaderModuleBase*>-based cache.
         size_t ComputeContentHash() override;
 
