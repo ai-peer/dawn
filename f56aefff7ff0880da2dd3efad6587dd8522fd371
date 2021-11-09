@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ca6a9b0_1c9256cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T00:14:36Z",
+      "side": 1,
+      "message": "PTAL! Tests are currePTAL! Tests are currently written in the CopyCommand filesntly written in the CopyCommand test files because it kinda sorta follows some of the same patterns as copy commands and seemed silly to have them in their own file. Can move them out if you\u0027d prefer!",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
