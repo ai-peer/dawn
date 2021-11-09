@@ -33,6 +33,23 @@
       "message": "LGTM too",
       "revId": "0708abff5b8ea9dfcfb005a26c6268a1abfeeffe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d9bfb9_4eb9ce32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-09T23:13:41Z",
+      "side": 1,
+      "message": "Thanks for review! Kai and Austin.",
+      "revId": "0708abff5b8ea9dfcfb005a26c6268a1abfeeffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
