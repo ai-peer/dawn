@@ -16,6 +16,57 @@
       "message": "PTAL",
       "revId": "855a11fff05419190fd95f43a5311b596836c116",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f82752_22124934",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T09:29:55Z",
+      "side": 1,
+      "message": "LGTM, thanks for the quick fix! Got a couple comments on the existing logic though. WDYT?",
+      "revId": "855a11fff05419190fd95f43a5311b596836c116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b6d699a_e2ce4b3c",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T09:29:55Z",
+      "side": 1,
+      "message": "Unrelated, but I found it weird we  have an UNREACHABLE default case here since D3D12 can start adding a TIER 4 in which case Dawn would trip up.",
+      "revId": "855a11fff05419190fd95f43a5311b596836c116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbe20d3e_c0442397",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T09:29:55Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be / 2 for the split between textures and buffers, then by 2 again for the FS + VS?",
+      "revId": "855a11fff05419190fd95f43a5311b596836c116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
