@@ -16,6 +16,131 @@
       "message": "PTAL! Tests are currePTAL! Tests are currently written in the CopyCommand filesntly written in the CopyCommand test files because it kinda sorta follows some of the same patterns as copy commands and seemed silly to have them in their own file. Can move them out if you\u0027d prefer!",
       "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "babae645_c9ac300f",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "nit: IIRC in the discussion around fillBuffer it was clear that it would have a \"value\" argument like a memset in the future. Just that the group didn\u0027t want to add it yet. Maybe it is worth adding the argument already and validating that it is 0? This would avoid future breaking changes.",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe1bdc5b_ff1e4980",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "nit: this would be done by the ClearBuffer / FillBufferWithZeroes operation, because for buffers with UAV usages we could instead choose to clear by emitting a compute shader.\n\nHowever the code is a bit brittle now because ClearBuffer assumes it is an initialization operation (see how it clears the D3D12_HEAP_TYPE_UPLOAD with a CPU memset). I think we should split it into ClearBuffer() and FillWithZeroes.\n\nI think the VUlkan backends has similar issues.",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfb174ab_9e390035",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "I think that BufferBase should be checking for the toggle instead so that we don\u0027t forget to check it in other places (we forget about it EVERYWHERE right now). Maybe rename BufferBase::NeedsInitialization()?\n\nBut also we could use EnsureDataInitializedAsDestination so that we skip the clear if we fill the whole range. Ditto for other backends.",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c1acc8f_1ae4ed71",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "Same comment as for D3D12.",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcb6db41_4b7637fa",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "nit: can we also have a test with size\u003d0 but an OOB offset?",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe796518_00473e6e",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "nit: the next smaller alignment is 2, not 1, can we test that instead?",
+      "range": {
+        "startLine": 2379,
+        "startChar": 39,
+        "endLine": 2379,
+        "endChar": 54
+      },
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0c3c528_abd44b2a",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2389,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T11:09:42Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
