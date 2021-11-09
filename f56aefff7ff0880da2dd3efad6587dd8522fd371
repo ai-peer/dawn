@@ -123,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba9232e9_27690031",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T22:39:38Z",
+      "side": 1,
+      "message": "Noticed that the D3D12 CommandBuffer already has a ClearBufferToZero method that I overlooked previously. I\u0027ve refactored this to leave the Buffer\u0027s Initialize/ClearBuffer alone and use ClearBufferToZero instead.\n\nThe Vulkan backend\u0027s implementation is simple enough that it seems appropriate to leave it as-is.",
+      "parentUuid": "53504ad6_45935bd0",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfb174ab_9e390035",
