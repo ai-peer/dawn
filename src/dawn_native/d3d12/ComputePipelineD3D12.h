@@ -40,7 +40,7 @@ namespace dawn_native { namespace d3d12 {
         // Dawn API
         void SetLabelImpl() override;
 
-        bool UsesNumWorkgroups() const;
+        ComPtr<ID3D12CommandSignature> GetDispatchIndirectCommandSignature();
 
       private:
         ~ComputePipeline() override;

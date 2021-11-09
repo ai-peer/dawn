@@ -95,4 +95,8 @@ namespace dawn_native {
         return PipelineBase::EqualForCache(a, b);
     }
 
+    bool ComputePipelineBase::UsesNumWorkgroups() const {
+        return GetStage(SingleShaderStage::Compute).metadata->usesNumWorkgroups;
+    }
+
 }  // namespace dawn_native
