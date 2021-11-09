@@ -675,4 +675,51 @@ namespace dawn_native { namespace d3d12 {
         return mTimestampPeriod;
     }
 
+    // On D3D12 we need to duplicate all the dispatch indirect parameters again as the root
+    // constants for [[num_workgroups]].
+    // TODO(dawn:839): return kDispatchIndirectSize when [[num_workgroups]] is not declared in the
+    // original coompute shader.
+    uint64_t Device::GetDispatchIndirectScratchBufferSize() const {
+        return kDispatchIndirectSize * 2;
+    }
+
+    const char* Device::GetShaderForIndirectDispatchValidation() const {
+        // On D3D12, the contents in the dispatch indirect scratch buffer are:
+        // num_workgroups_x, num_workgroups_y, num_workgroups_z (as dispatch indirect parameters),
+        // num_workgroups_x, num_workgroups_y, num_workgroups_z (as the root constants for
+        // [[num_workgroups]].
+        // TODO(dawn:839): use the shader that doesn't duplicate num_workgroups when
+        // [[num_workgroups]] is not declared in the original coompute shader.
+        return R"(
+                [[block]] struct UniformParams {
+                    maxComputeWorkgroupsPerDimension: u32;
+                    clientOffsetInU32: u32;
+                };
+
+                [[block]] struct IndirectParams {
+                    data: array<u32>;
+                };
+
+                [[block]] struct ValidatedParams {
+                    data: array<u32, 6>;
+                };
+
+                [[group(0), binding(0)]] var<uniform> uniformParams: UniformParams;
+                [[group(0), binding(1)]] var<storage, read_write> clientParams: IndirectParams;
+                [[group(0), binding(2)]] var<storage, write> validatedParams: ValidatedParams;
+
+                [[stage(compute), workgroup_size(1, 1, 1)]]
+                fn main() {
+                    for (var i = 0u; i < 3u; i = i + 1u) {
+                        var numWorkgroups = clientParams.data[uniformParams.clientOffsetInU32 + i];
+                        if (numWorkgroups > uniformParams.maxComputeWorkgroupsPerDimension) {
+                            numWorkgroups = 0u;
+                        }
+                        validatedParams.data[i] = numWorkgroups;
+                        validatedParams.data[i + 3u] = numWorkgroups;
+                    }
+                }
+            )";
+    }
+
 }}  // namespace dawn_native::d3d12

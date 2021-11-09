@@ -361,6 +361,9 @@ namespace dawn_native {
         const std::string& GetLabel() const;
         void APISetLabel(const char* label);
 
+        virtual uint64_t GetDispatchIndirectScratchBufferSize() const;
+        virtual const char* GetShaderForIndirectDispatchValidation() const;
+
       protected:
         // Constructor used only for mocking and testing.
         DeviceBase();

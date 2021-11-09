@@ -1063,12 +1063,6 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
-                    // TODO(dawn:839): support [[num_workgroups]] for DispatchIndirect calls
-                    DAWN_INVALID_IF(lastPipeline->UsesNumWorkgroups(),
-                                    "Using %s with [[num_workgroups]] in a DispatchIndirect call "
-                                    "is not implemented.",
-                                    lastPipeline);
-
                     Buffer* buffer = ToBackend(dispatch->indirectBuffer.Get());
 
                     TransitionAndClearForSyncScope(commandContext,
@@ -1076,7 +1070,7 @@ namespace dawn_native { namespace d3d12 {
                     DAWN_TRY(bindingTracker->Apply(commandContext));
 
                     ComPtr<ID3D12CommandSignature> signature =
-                        ToBackend(GetDevice())->GetDispatchIndirectSignature();
+                        lastPipeline->GetDispatchIndirectCommandSignature();
                     commandList->ExecuteIndirect(signature.Get(), 1, buffer->GetD3D12Resource(),
                                                  dispatch->indirectOffset, nullptr, 0);
                     currentDispatch++;
