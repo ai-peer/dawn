@@ -1657,4 +1657,40 @@ namespace dawn_native {
     void DeviceBase::SetLabelImpl() {
     }
 
+    uint64_t DeviceBase::GetDispatchIndirectScratchBufferSize() const {
+        return kDispatchIndirectSize;
+    }
+
+    const char* DeviceBase::GetShaderForIndirectDispatchValidation() const {
+        return R"(
+                [[block]] struct UniformParams {
+                    maxComputeWorkgroupsPerDimension: u32;
+                    clientOffsetInU32: u32;
+                };
+
+                [[block]] struct IndirectParams {
+                    data: array<u32>;
+                };
+
+                [[block]] struct ValidatedParams {
+                    data: array<u32, 3>;
+                };
+
+                [[group(0), binding(0)]] var<uniform> uniformParams: UniformParams;
+                [[group(0), binding(1)]] var<storage, read_write> clientParams: IndirectParams;
+                [[group(0), binding(2)]] var<storage, write> validatedParams: ValidatedParams;
+
+                [[stage(compute), workgroup_size(1, 1, 1)]]
+                fn main() {
+                    for (var i = 0u; i < 3u; i = i + 1u) {
+                        var numWorkgroups = clientParams.data[uniformParams.clientOffsetInU32 + i];
+                        if (numWorkgroups > uniformParams.maxComputeWorkgroupsPerDimension) {
+                            numWorkgroups = 0u;
+                        }
+                        validatedParams.data[i] = numWorkgroups;
+                    }
+                }
+            )";
+    }
+
 }  // namespace dawn_native

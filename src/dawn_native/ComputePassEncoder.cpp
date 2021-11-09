@@ -43,35 +43,9 @@ namespace dawn_native {
             // TODO(https://crbug.com/dawn/1108): Propagate validation feedback from this
             // shader in various failure modes.
             Ref<ShaderModuleBase> shaderModule;
-            DAWN_TRY_ASSIGN(shaderModule, utils::CreateShaderModule(device, R"(
-                [[block]] struct UniformParams {
-                    maxComputeWorkgroupsPerDimension: u32;
-                    clientOffsetInU32: u32;
-                };
-
-                [[block]] struct IndirectParams {
-                    data: array<u32>;
-                };
-
-                [[block]] struct ValidatedParams {
-                    data: array<u32, 3>;
-                };
-
-                [[group(0), binding(0)]] var<uniform> uniformParams: UniformParams;
-                [[group(0), binding(1)]] var<storage, read_write> clientParams: IndirectParams;
-                [[group(0), binding(2)]] var<storage, write> validatedParams: ValidatedParams;
-
-                [[stage(compute), workgroup_size(1, 1, 1)]]
-                fn main() {
-                    for (var i = 0u; i < 3u; i = i + 1u) {
-                        var numWorkgroups = clientParams.data[uniformParams.clientOffsetInU32 + i];
-                        if (numWorkgroups > uniformParams.maxComputeWorkgroupsPerDimension) {
-                            numWorkgroups = 0u;
-                        }
-                        validatedParams.data[i] = numWorkgroups;
-                    }
-                }
-            )"));
+            DAWN_TRY_ASSIGN(shaderModule,
+                            utils::CreateShaderModule(
+                                device, device->GetShaderForIndirectDispatchValidation()));
 
             Ref<BindGroupLayoutBase> bindGroupLayout;
             DAWN_TRY_ASSIGN(
@@ -227,7 +201,7 @@ namespace dawn_native {
 
         // Reserve space in the scratch buffer to hold the validated indirect params.
         ScratchBuffer& scratchBuffer = store->scratchIndirectStorage;
-        DAWN_TRY(scratchBuffer.EnsureCapacity(kDispatchIndirectSize));
+        DAWN_TRY(scratchBuffer.EnsureCapacity(device->GetDispatchIndirectScratchBufferSize()));
         Ref<BufferBase> validatedIndirectBuffer = scratchBuffer.GetBuffer();
 
         Ref<BindGroupBase> validationBindGroup;
@@ -238,7 +212,7 @@ namespace dawn_native {
                 {
                     {0, uniformBuffer},
                     {1, indirectBuffer, clientIndirectBindingOffset, clientIndirectBindingSize},
-                    {2, validatedIndirectBuffer, 0, kDispatchIndirectSize},
+                    {2, validatedIndirectBuffer, 0, device->GetDispatchIndirectScratchBufferSize()},
                 }));
 
         // Issue commands to validate the indirect buffer.

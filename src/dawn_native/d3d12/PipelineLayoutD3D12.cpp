@@ -267,4 +267,36 @@ namespace dawn_native { namespace d3d12 {
     uint32_t PipelineLayout::GetNumWorkgroupsParameterIndex() const {
         return mNumWorkgroupsParamterIndex;
     }
+
+    ID3D12CommandSignature* PipelineLayout::GetDispatchIndirectCommandSignatureWithNumWorkgroups() {
+        // mDispatchIndirectCommandSignatureWithNumWorkgroups won't be created until it is needed.
+        if (mDispatchIndirectCommandSignatureWithNumWorkgroups.Get() != nullptr) {
+            return mDispatchIndirectCommandSignatureWithNumWorkgroups.Get();
+        }
+
+        D3D12_INDIRECT_ARGUMENT_DESC argumentDescs[2] = {};
+        argumentDescs[0].Type = D3D12_INDIRECT_ARGUMENT_TYPE_CONSTANT;
+        argumentDescs[0].Constant.RootParameterIndex = GetNumWorkgroupsParameterIndex();
+        argumentDescs[0].Constant.Num32BitValuesToSet = 3;
+        argumentDescs[0].Constant.DestOffsetIn32BitValues = 0;
+
+        // A command signature must contain exactly 1 Draw / Dispatch / DispatchMesh / DispatchRays
+        // command. That command must come last.
+        argumentDescs[1].Type = D3D12_INDIRECT_ARGUMENT_TYPE_DISPATCH;
+
+        D3D12_COMMAND_SIGNATURE_DESC programDesc = {};
+        programDesc.ByteStride = 6 * sizeof(uint32_t);
+        programDesc.NumArgumentDescs = 2;
+        programDesc.pArgumentDescs = argumentDescs;
+
+        // The root signature must be specified if and only if the command signature changes one of
+        // the root arguments.
+        ToBackend(GetDevice())
+            ->GetD3D12Device()
+            ->CreateCommandSignature(
+                &programDesc, GetRootSignature(),
+                IID_PPV_ARGS(&mDispatchIndirectCommandSignatureWithNumWorkgroups));
+        return mDispatchIndirectCommandSignatureWithNumWorkgroups.Get();
+    }
+
 }}  // namespace dawn_native::d3d12
