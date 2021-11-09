@@ -43,6 +43,7 @@
 #include "dawn_native/SwapChain.h"
 #include "dawn_native/Texture.h"
 #include "dawn_native/ValidationUtils_autogen.h"
+#include "dawn_native/utils/WGPUHelpers.h"
 #include "dawn_platform/DawnPlatform.h"
 #include "dawn_platform/tracing/TraceEvent.h"
 
@@ -1655,6 +1656,89 @@ namespace dawn_native {
     }
 
     void DeviceBase::SetLabelImpl() {
+    }
+
+    uint64_t DeviceBase::GetDispatchIndirectScratchBufferSize(bool supportNumWorkgroups) const {
+        return kDispatchIndirectSize;
+    }
+
+    ResultOrError<ComputePipelineBase*>
+    DeviceBase::GetComputePipelineForDispatchIndirectBufferTransformation(
+        bool supportNumWorkgroups) {
+        if (!IsValidationEnabled()) {
+            return nullptr;
+        }
+
+        InternalPipelineStore* store = GetInternalPipelineStore();
+        if (store->dispatchIndirectValidationPipeline != nullptr) {
+            return store->dispatchIndirectValidationPipeline.Get();
+        }
+
+        const char* transformShader = R"(
+                [[block]] struct UniformParams {
+                    maxComputeWorkgroupsPerDimension: u32;
+                    clientOffsetInU32: u32;
+                };
+
+                [[block]] struct IndirectParams {
+                    data: array<u32>;
+                };
+
+                [[block]] struct ValidatedParams {
+                    data: array<u32, 3>;
+                };
+
+                [[group(0), binding(0)]] var<uniform> uniformParams: UniformParams;
+                [[group(0), binding(1)]] var<storage, read_write> clientParams: IndirectParams;
+                [[group(0), binding(2)]] var<storage, write> validatedParams: ValidatedParams;
+
+                [[stage(compute), workgroup_size(1, 1, 1)]]
+                fn main() {
+                    for (var i = 0u; i < 3u; i = i + 1u) {
+                        var numWorkgroups = clientParams.data[uniformParams.clientOffsetInU32 + i];
+                        if (numWorkgroups > uniformParams.maxComputeWorkgroupsPerDimension) {
+                            numWorkgroups = 0u;
+                        }
+                        validatedParams.data[i] = numWorkgroups;
+                    }
+                }
+            )";
+
+        DAWN_TRY_ASSIGN(
+            store->dispatchIndirectValidationPipeline,
+            CreateComputePipelineForDispatchIndirectBufferTransformation(transformShader));
+
+        return store->dispatchIndirectValidationPipeline.Get();
+    }
+
+    ResultOrError<Ref<ComputePipelineBase>>
+    DeviceBase::CreateComputePipelineForDispatchIndirectBufferTransformation(
+        const char* transformShader) {
+        // TODO(https://crbug.com/dawn/1108): Propagate validation feedback from this
+        // shader in various failure modes.
+        Ref<ShaderModuleBase> shaderModule;
+        DAWN_TRY_ASSIGN(shaderModule, utils::CreateShaderModule(this, transformShader));
+
+        Ref<BindGroupLayoutBase> bindGroupLayout;
+        DAWN_TRY_ASSIGN(bindGroupLayout,
+                        utils::MakeBindGroupLayout(
+                            this,
+                            {
+                                {0, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Uniform},
+                                {1, wgpu::ShaderStage::Compute, kInternalStorageBufferBinding},
+                                {2, wgpu::ShaderStage::Compute, wgpu::BufferBindingType::Storage},
+                            },
+                            /* allowInternalBinding */ true));
+
+        Ref<PipelineLayoutBase> pipelineLayout;
+        DAWN_TRY_ASSIGN(pipelineLayout, utils::MakeBasicPipelineLayout(this, bindGroupLayout));
+
+        ComputePipelineDescriptor computePipelineDescriptor = {};
+        computePipelineDescriptor.layout = pipelineLayout.Get();
+        computePipelineDescriptor.compute.module = shaderModule.Get();
+        computePipelineDescriptor.compute.entryPoint = "main";
+
+        return CreateComputePipeline(&computePipelineDescriptor);
     }
 
 }  // namespace dawn_native

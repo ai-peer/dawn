@@ -361,6 +361,10 @@ namespace dawn_native {
         const std::string& GetLabel() const;
         void APISetLabel(const char* label);
 
+        virtual uint64_t GetDispatchIndirectScratchBufferSize(bool supportNumWorkgroups) const;
+        virtual ResultOrError<ComputePipelineBase*>
+        GetComputePipelineForDispatchIndirectBufferTransformation(bool supportNumWorkgroups);
+
       protected:
         // Constructor used only for mocking and testing.
         DeviceBase();
@@ -374,6 +378,9 @@ namespace dawn_native {
 
         // Incrememt mLastSubmittedSerial when we submit the next serial
         void IncrementLastSubmittedCommandSerial();
+
+        ResultOrError<Ref<ComputePipelineBase>>
+        CreateComputePipelineForDispatchIndirectBufferTransformation(const char* transformShader);
 
       private:
         virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
