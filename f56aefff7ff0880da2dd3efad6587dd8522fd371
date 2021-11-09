@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92de6857_4f8dc3aa",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T16:50:12Z",
+      "side": 1,
+      "message": "This made me realize that we need to tweak this API shape to be feature-detectable for JS developers. Filed https://github.com/gpuweb/gpuweb/issues/2278",
+      "parentUuid": "babae645_c9ac300f",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe1bdc5b_ff1e4980",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
