@@ -139,6 +139,11 @@ namespace dawn_native { namespace d3d12 {
 
         float GetTimestampPeriodInNS() const override;
 
+        uint64_t GetDispatchIndirectScratchBufferSize(bool supportNumWorkgroups) const override;
+        ResultOrError<ComputePipelineBase*>
+        GetComputePipelineForDispatchIndirectBufferTransformation(
+            bool supportNumWorkgroups) override;
+
       private:
         using DeviceBase::DeviceBase;
 

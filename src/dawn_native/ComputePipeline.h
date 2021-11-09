@@ -42,6 +42,8 @@ namespace dawn_native {
             bool operator()(const ComputePipelineBase* a, const ComputePipelineBase* b) const;
         };
 
+        bool UsesNumWorkgroups() const;
+
       protected:
         // Constructor used only for mocking and testing.
         ComputePipelineBase(DeviceBase* device);

@@ -53,6 +53,7 @@ namespace dawn_native {
         Ref<ComputePipelineBase> renderValidationPipeline;
         Ref<ShaderModuleBase> renderValidationShader;
         Ref<ComputePipelineBase> dispatchIndirectValidationPipeline;
+        Ref<ComputePipelineBase> dispatchIndirectValidationPipelineWithNumWorkgroupsD3D12;
     };
 
 }  // namespace dawn_native
