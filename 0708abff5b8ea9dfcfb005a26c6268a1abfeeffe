@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d4f48c8_7eece957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-09T20:05:29Z",
+      "side": 1,
+      "message": "This tiny change is a follow-up for the discussion at https://github.com/gpuweb/gpuweb/pull/2240. PTAL. Thank you!",
+      "revId": "0708abff5b8ea9dfcfb005a26c6268a1abfeeffe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
