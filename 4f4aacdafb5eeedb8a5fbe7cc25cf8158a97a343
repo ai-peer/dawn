@@ -16,6 +16,24 @@
       "message": "LGTM. Is it possible to write tests that exert the issues this fixes?",
       "revId": "4f4aacdafb5eeedb8a5fbe7cc25cf8158a97a343",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70ff6e35_fa2728a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-09T23:55:24Z",
+      "side": 1,
+      "message": "Tried to do this for a while and also talked with Austin about it. I was able to create a pseudo test that exercised this and worked on my machine, but it was just creating a large (but not too large) uniform buffer that passed validation but would fail when trying to allocate the staging buffer. I ended up scrapping that because it\u0027s device dependent since \"large but not too large\" is sort of relative.\n\nI will come back to this though as Austin and I are trying to design a way to test the backend implementations more rigorously anyways for cases like these. (Ideally being able to inject some sort of error when we try to create the staging buffer.)",
+      "parentUuid": "da7041b3_fdb4d33b",
+      "revId": "4f4aacdafb5eeedb8a5fbe7cc25cf8158a97a343",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

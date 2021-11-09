@@ -16,6 +16,24 @@
       "message": "Can we have a TODO somewhere to re-introduce this optimization?",
       "revId": "d25277844ceca71d6e2442e48d82c60ca351f753",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccf93aae_0c8dd200",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-09T23:55:24Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "8fa6abd1_20e27af4",
+      "revId": "d25277844ceca71d6e2442e48d82c60ca351f753",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
