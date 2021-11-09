@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da7041b3_fdb4d33b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-09T09:45:13Z",
+      "side": 1,
+      "message": "LGTM. Is it possible to write tests that exert the issues this fixes?",
+      "revId": "4f4aacdafb5eeedb8a5fbe7cc25cf8158a97a343",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
