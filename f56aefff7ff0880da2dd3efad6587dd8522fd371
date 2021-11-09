@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38776d6b_e8ed193e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Most feedback addressed, two specific items still outstanding. Making sure I can still pass CQ while I work on those.",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "babae645_c9ac300f",
@@ -55,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57f43953_c24fd84d",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 527,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Holding off on this change for just a bit to see if the GH issue shows an early clear preference one way or the other.",
+      "parentUuid": "92de6857_4f8dc3aa",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe1bdc5b_ff1e4980",
         "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
         "patchSetId": 3
@@ -72,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53504ad6_45935bd0",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 926,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Refactored all these methods, but I haven\u0027t addressed this particular feedback yet because I need to familiarize myself with the function of the usage transitions a bit more before I can confidently make any changes in that regard.",
+      "parentUuid": "fe1bdc5b_ff1e4980",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfb174ab_9e390035",
         "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
         "patchSetId": 3
@@ -83,6 +136,24 @@
       "writtenOn": "2021-11-09T11:09:42Z",
       "side": 1,
       "message": "I think that BufferBase should be checking for the toggle instead so that we don\u0027t forget to check it in other places (we forget about it EVERYWHERE right now). Maybe rename BufferBase::NeedsInitialization()?\n\nBut also we could use EnsureDataInitializedAsDestination so that we skip the clear if we fill the whole range. Ditto for other backends.",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c5f4310_79d71670",
+        "filename": "src/dawn_native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Did both. :)",
+      "parentUuid": "dfb174ab_9e390035",
       "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -121,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa0098b5_6fce6925",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2360,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcb6db41_4b7637fa",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe796518_00473e6e",
@@ -144,6 +233,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4290af0d_bff515be",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2379,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe796518_00473e6e",
+      "range": {
+        "startLine": 2379,
+        "startChar": 39,
+        "endLine": 2379,
+        "endChar": 54
+      },
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0c3c528_abd44b2a",
@@ -157,6 +270,24 @@
       "writtenOn": "2021-11-09T11:09:42Z",
       "side": 1,
       "message": "ditto",
+      "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "256b42a1_55e023e3",
+        "filename": "src/tests/unittests/validation/CopyCommandsValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2389,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-09T19:00:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0c3c528_abd44b2a",
       "revId": "f56aefff7ff0880da2dd3efad6587dd8522fd371",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
