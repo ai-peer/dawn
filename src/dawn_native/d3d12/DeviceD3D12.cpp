@@ -16,6 +16,7 @@
 
 #include "common/GPUInfo.h"
 #include "dawn_native/Instance.h"
+#include "dawn_native/InternalPipelineStore.h"
 #include "dawn_native/d3d12/AdapterD3D12.h"
 #include "dawn_native/d3d12/BackendD3D12.h"
 #include "dawn_native/d3d12/BindGroupD3D12.h"
@@ -673,6 +674,86 @@ namespace dawn_native { namespace d3d12 {
 
     float Device::GetTimestampPeriodInNS() const {
         return mTimestampPeriod;
+    }
+
+    // On D3D12 we need to duplicate all the dispatch indirect parameters again as the root
+    // constants for [[num_workgroups]].
+    uint64_t Device::GetDispatchIndirectScratchBufferSize(bool supportNumWorkgroups) const {
+        return supportNumWorkgroups ? kDispatchIndirectSize * 2 : kDispatchIndirectSize;
+    }
+
+    ResultOrError<ComputePipelineBase*>
+    Device::GetComputePipelineForDispatchIndirectBufferTransformation(bool supportNumWorkgroups) {
+        // We don't need to transform the indirect dispatch buffer when validation is disabled and
+        // [[num_workgroups]] isn't used in the original compute shader.
+        if (!IsValidationEnabled() && !supportNumWorkgroups) {
+            return nullptr;
+        }
+
+        // Return the required compute pipeline directly if it has already been cached.
+        // Here we assume that IsValidationEnabled() won't be changed.
+        InternalPipelineStore* store = GetInternalPipelineStore();
+        if (supportNumWorkgroups &&
+            store->dispatchIndirectValidationPipelineWithNumWorkgroupsD3D12 != nullptr) {
+            return store->dispatchIndirectValidationPipelineWithNumWorkgroupsD3D12.Get();
+        }
+        if (!supportNumWorkgroups && store->dispatchIndirectValidationPipeline != nullptr) {
+            return store->dispatchIndirectValidationPipeline.Get();
+        }
+
+        // Generate the required compute shader.
+        const uint32_t validatedParamsSizeInUint32 =
+            GetDispatchIndirectScratchBufferSize(supportNumWorkgroups) / sizeof(uint32_t);
+
+        std::ostringstream stream;
+        stream << R"(
+                [[block]] struct UniformParams {
+                    maxComputeWorkgroupsPerDimension: u32;
+                    clientOffsetInU32: u32;
+                };
+
+                [[block]] struct IndirectParams {
+                    data: array<u32>;
+                };
+
+                [[block]] struct ValidatedParams {
+                    data: array<u32, )"
+               << validatedParamsSizeInUint32 << R"(>;
+                };
+
+                [[group(0), binding(0)]] var<uniform> uniformParams: UniformParams;
+                [[group(0), binding(1)]] var<storage, read_write> clientParams: IndirectParams;
+                [[group(0), binding(2)]] var<storage, write> validatedParams: ValidatedParams;
+
+                [[stage(compute), workgroup_size(1, 1, 1)]]
+                fn main() {
+                    for (var i = 0u; i < 3u; i = i + 1u) {
+                        var numWorkgroups = clientParams.data[uniformParams.clientOffsetInU32 + i];)";
+
+        if (IsValidationEnabled()) {
+            stream << R"(
+                        if (numWorkgroups > uniformParams.maxComputeWorkgroupsPerDimension) {
+                            numWorkgroups = 0u;
+                        })";
+        }
+
+        stream << "validatedParams.data[i] = numWorkgroups;" << std::endl;
+        if (supportNumWorkgroups) {
+            stream << "validatedParams.data[i + 3u] = numWorkgroups;" << std::endl;
+        }
+        stream << "}}";
+
+        if (supportNumWorkgroups) {
+            DAWN_TRY_ASSIGN(
+                store->dispatchIndirectValidationPipelineWithNumWorkgroupsD3D12,
+                CreateComputePipelineForDispatchIndirectBufferTransformation(stream.str().c_str()));
+            return store->dispatchIndirectValidationPipelineWithNumWorkgroupsD3D12.Get();
+        } else {
+            DAWN_TRY_ASSIGN(
+                store->dispatchIndirectValidationPipeline,
+                CreateComputePipelineForDispatchIndirectBufferTransformation(stream.str().c_str()));
+            return store->dispatchIndirectValidationPipeline.Get();
+        }
     }
 
 }}  // namespace dawn_native::d3d12
