@@ -16,6 +16,29 @@
       "message": "PTAL, thanks!",
       "revId": "a0f8b673b0523d6f520786826d883e4caa8ba0b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6695d4a_cd69acb4",
+        "filename": "src/dawn_native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-09T22:26:15Z",
+      "side": 1,
+      "message": "Eventually, we\u0027re going to make the dispatch indirect validation more efficient by batching them and scheduling them earlier before the dispatch. That optimization unfortunately wouldn\u0027t be applied for the case were validation is off because we introducing a new path here that does a copy.\n\nWhat do you think about instead returning a shader from GetShaderForIndirectDispatchValidation that expands and copies the indirect parameters but does not do the validation. This way any improvements we make to the validation code also improve the no-validation path.\n\n\nSo maybe? we can rename ValidateIndirectDispatch to something like \n TransformIndirectDispatch(\n    BufferBase* indirectBuffer,\n    uint64_t indirectOffset,\n    bool validate,\n    bool expandForD3D12Constants);\n\nAnd call it like:\n\n const bool expandD3D12Constants \u003d\n  mCommandBufferStateTracker.GetComputePipeline()-\u003eUsesNumWorkgroups() \u0026\u0026\n  device-\u003eGetAdapter()-\u003eGetBackendType() \u003d wgpu::BackendType::D3D12;\n\n DAWN_TRY_ASSIGN(std::tie(indirectBufferRef, indirectOffset),\n                   TransformIndirectDispatch(\n                        indirectBufferRef.Get(),\n                        indirectOffset,\n                        IsValidationEnabled(),\n                        expandD3D12Constants));",
+      "range": {
+        "startLine": 1108,
+        "startChar": 19,
+        "endLine": 1114,
+        "endChar": 21
+      },
+      "revId": "a0f8b673b0523d6f520786826d883e4caa8ba0b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
