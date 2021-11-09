@@ -321,6 +321,44 @@ namespace dawn_native { namespace d3d12 {
                     textureUsages & wgpu::TextureUsage::StorageBinding);
         }
 
+        ResultOrError<Ref<BufferBase>> CreateScratchBufferAndRecordCopyIndirectBufferIntoIt(
+            DeviceBase* device,
+            CommandRecordingContext* recordingContext,
+            DispatchIndirectCmd* dispatchIndirect) {
+            // Create a scratch indirect buffer
+            BufferDescriptor scratchIndirectBufferDescriptor;
+            scratchIndirectBufferDescriptor.usage =
+                wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::Indirect;
+            scratchIndirectBufferDescriptor.size = kDispatchIndirectSize * 2;
+            Ref<BufferBase> scratchIndirectBufferBase;
+            DAWN_TRY_ASSIGN(scratchIndirectBufferBase,
+                            device->CreateBuffer(&scratchIndirectBufferDescriptor));
+
+            // Copy all the parameters of the indirect dispatch call from the indirect buffer into
+            // the scratch indirect buffer
+            Buffer* scratchIndirectBuffer = ToBackend(scratchIndirectBufferBase.Get());
+            ToBackend(dispatchIndirect->indirectBuffer)
+                ->TrackUsageAndTransitionNow(recordingContext, wgpu::BufferUsage::CopySrc);
+            scratchIndirectBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                              wgpu::BufferUsage::CopyDst);
+            recordingContext->GetCommandList()->CopyBufferRegion(
+                scratchIndirectBuffer->GetD3D12Resource(), 0,
+                ToBackend(dispatchIndirect->indirectBuffer)->GetD3D12Resource(),
+                dispatchIndirect->indirectOffset, kDispatchIndirectSize);
+            recordingContext->GetCommandList()->CopyBufferRegion(
+                scratchIndirectBuffer->GetD3D12Resource(), kDispatchIndirectSize,
+                ToBackend(dispatchIndirect->indirectBuffer)->GetD3D12Resource(),
+                dispatchIndirect->indirectOffset, kDispatchIndirectSize);
+
+            scratchIndirectBuffer->TrackUsageAndTransitionNow(recordingContext,
+                                                              wgpu::BufferUsage::Indirect);
+
+            // Save the scratch indirect buffer into recordingContext
+            recordingContext->AddToTempBuffers(ToBackend(scratchIndirectBufferBase));
+
+            return scratchIndirectBufferBase;
+        }
+
     }  // anonymous namespace
 
     class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
@@ -1063,22 +1101,30 @@ namespace dawn_native { namespace d3d12 {
                 case Command::DispatchIndirect: {
                     DispatchIndirectCmd* dispatch = mCommands.NextCommand<DispatchIndirectCmd>();
 
-                    // TODO(dawn:839): support [[num_workgroups]] for DispatchIndirect calls
-                    DAWN_INVALID_IF(lastPipeline->UsesNumWorkgroups(),
-                                    "Using %s with [[num_workgroups]] in a DispatchIndirect call "
-                                    "is not implemented.",
-                                    lastPipeline);
-
-                    Buffer* buffer = ToBackend(dispatch->indirectBuffer.Get());
+                    Ref<BufferBase> appliedIndirectBuffer;
+                    uint64_t appliedIndirectBufferOffset;
+                    // When validation is disabled, we need to create a scratch indirect buffer and
+                    // duplicate the indirect dispatch parameters for [[num_workgroups]] into it.
+                    if (!GetDevice()->IsValidationEnabled() && lastPipeline->UsesNumWorkgroups()) {
+                        appliedIndirectBuffer =
+                            CreateScratchBufferAndRecordCopyIndirectBufferIntoIt(
+                                GetDevice(), commandContext, dispatch)
+                                .AcquireSuccess();
+                        appliedIndirectBufferOffset = 0;
+                    } else {
+                        appliedIndirectBuffer = dispatch->indirectBuffer;
+                        appliedIndirectBufferOffset = dispatch->indirectOffset;
+                    }
 
                     TransitionAndClearForSyncScope(commandContext,
                                                    resourceUsages.dispatchUsages[currentDispatch]);
                     DAWN_TRY(bindingTracker->Apply(commandContext));
 
                     ComPtr<ID3D12CommandSignature> signature =
-                        ToBackend(GetDevice())->GetDispatchIndirectSignature();
-                    commandList->ExecuteIndirect(signature.Get(), 1, buffer->GetD3D12Resource(),
-                                                 dispatch->indirectOffset, nullptr, 0);
+                        lastPipeline->GetDispatchIndirectCommandSignature();
+                    commandList->ExecuteIndirect(
+                        signature.Get(), 1, ToBackend(appliedIndirectBuffer)->GetD3D12Resource(),
+                        appliedIndirectBufferOffset, nullptr, 0);
                     currentDispatch++;
                     break;
                 }

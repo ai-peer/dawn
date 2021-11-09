@@ -139,6 +139,9 @@ namespace dawn_native { namespace d3d12 {
 
         float GetTimestampPeriodInNS() const override;
 
+        uint64_t GetDispatchIndirectScratchBufferSize() const override;
+        const char* GetShaderForIndirectDispatchValidation() const override;
+
       private:
         using DeviceBase::DeviceBase;
 
