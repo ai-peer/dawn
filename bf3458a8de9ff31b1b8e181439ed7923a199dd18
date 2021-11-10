@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c32d34b1_ed39088c",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T15:11:05Z",
+      "side": 1,
+      "message": "Duplicating the pipelines in the backend and having a chattier interface for the indirect buffer scratch space, and pipeline depending on numworkgroups make the code more all over the place.\n\nWDYT of instead having per-device options exposed by the backends, that control how certain things are done in the frontend. It can be a dump struct that has bool \"duplicateArgumentsForDispatchIndirectWithNumWorkgroups\" that\u0027s set to true for D3D. This way the logic isn\u0027t exactly D3D12-specific, and stays in one places instead of being spread across ComputePassEncoder.cpp, Device.cpp and DeviceD3D12.cpp.\n\nAlso instead of having two pipelines, we can pass options as uniforms: VALIDATE or DUPLICATE_ARGUMENTS.",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb43edaf_e367d6be",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T15:11:05Z",
+      "side": 1,
+      "message": "nit: this could be cached on the d3d12::Device because it only depends on one integer: GetNumWorkgroupsParameterIndex()",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
