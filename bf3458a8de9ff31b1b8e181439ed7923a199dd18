@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca98d505_79ab4d5b",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T16:56:05Z",
+      "side": 1,
+      "message": "I was thinking between num_workgroups vs. not vs. validation. Pipeline overridable constants are per-pipeline so you would need one pipeline per set of constants.",
+      "parentUuid": "9368c26c_30c22cb0",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb43edaf_e367d6be",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 7
