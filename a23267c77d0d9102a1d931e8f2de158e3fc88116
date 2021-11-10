@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e2a656e_ab94e78e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T10:17:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a23267c77d0d9102a1d931e8f2de158e3fc88116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5feb365_2141f5db",
+        "filename": "src/dawn_native/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T10:17:10Z",
+      "side": 1,
+      "message": "nit: in the future I think it could help to split reworks that are orthogonal like this one in a pre-CL. It would make it easier to review, and easier to land.",
+      "revId": "a23267c77d0d9102a1d931e8f2de158e3fc88116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fcb4f775_c00460ab",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T10:17:10Z",
+      "side": 1,
+      "message": "u-nit: the meaning of the boolean is not super clear from the function name. Maybe \"PerformZeroInitializationAsDestination\"? so the code reads like:\n\n  if (buffer-\u003ePerform....) (which almost is \"if performed X, do Y\").\n  \nTo avoid churn, the optional rename can be a follow-up.",
+      "revId": "a23267c77d0d9102a1d931e8f2de158e3fc88116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29ba3429_ec6919f8",
+        "filename": "src/dawn_native/metal/BufferMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T10:17:10Z",
+      "side": 1,
+      "message": "FYI https://bugs.chromium.org/p/dawn/issues/detail?id\u003d813 is a thing that if extended to buffers would help make all these EnsureXXX helpers live only in the frontend.",
+      "revId": "a23267c77d0d9102a1d931e8f2de158e3fc88116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
