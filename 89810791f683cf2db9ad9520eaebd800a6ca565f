@@ -16,6 +16,23 @@
       "message": "Dry run is happy with this now, and I\u0027ve gotten two +1s. Can I get a +2?",
       "revId": "89810791f683cf2db9ad9520eaebd800a6ca565f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12e5571c_5a626256",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-10T21:04:03Z",
+      "side": 1,
+      "message": "I rescind my auto-submit +1 in light of the discussion at today\u0027s call. I\u0027ll update this to add a 4th byte value.",
+      "revId": "89810791f683cf2db9ad9520eaebd800a6ca565f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
