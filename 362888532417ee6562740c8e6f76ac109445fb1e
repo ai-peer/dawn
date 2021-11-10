@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40eada46_d76fd900",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-10T06:26:37Z",
+      "side": 1,
+      "message": "@Yunchao\nI am not clear about why this CL run into this assert. Hopefully you may have some informative idea. The corresponding blink side change is https://chromium-review.googlesource.com/c/chromium/src/+/3270773",
+      "revId": "362888532417ee6562740c8e6f76ac109445fb1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
