@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "775bb640_146f55fd",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-10T20:27:51Z",
+      "side": 1,
+      "message": "I would prefer to land this and revisit the name as a follow-up. If we end up implementing this with a fill value rather than zero then this pattern will no longer be appropriate (we\u0027ll have to clear and then fill with the given value if it\u0027s not zero), so I don\u0027t want to over-index on making the code fit this exact use case.",
+      "parentUuid": "fcb4f775_c00460ab",
+      "revId": "a23267c77d0d9102a1d931e8f2de158e3fc88116",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "29ba3429_ec6919f8",
