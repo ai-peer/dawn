@@ -50,6 +50,24 @@
       "message": "unit: we try to file bugs for things now even if they\u0027re tiny \n\nthis one we could probably resolve by overriding APIObjectBase::DestroyAPIObject though. OR it is another case where we could override DestroyAPIObject in all the backends instead of having DestroyAPIObjectImpl and then have the backend call the frontend.",
       "revId": "c21f26f6009a07d9be2f29c2984138a137c3b686",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61a4ce39_cfffd6ea",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-10T19:04:52Z",
+      "side": 1,
+      "message": "Done. Yea, I think this also convinces me that maybe the backend calling Destroy upwards is a better design. I will follow up with the changes in a separate cl. Thanks!",
+      "parentUuid": "ffb97f93_22f86c60",
+      "revId": "c21f26f6009a07d9be2f29c2984138a137c3b686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
