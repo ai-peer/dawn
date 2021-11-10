@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9368c26c_30c22cb0",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T16:02:50Z",
+      "side": 1,
+      "message": "isn\u0027t only one ever created? or are we talking about the case where there\u0027s two logical devices with on the same backend device.\nThe uniform is a bit annoying because we need to upload the data for it but I guess that\u0027s fine because we\u0027re going to want to batch the validation and upload the batch size and batch offset anyway.",
+      "parentUuid": "3af976f7_1aedd8f1",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb43edaf_e367d6be",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 7
