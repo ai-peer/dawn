@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "baa6c1b8_f642a413",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T23:30:18Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8284ae1_6fe9c8c3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T23:30:18Z",
+      "side": 1,
+      "message": "casing: ToStringFunc",
+      "range": {
+        "startLine": 40,
+        "startChar": 26,
+        "endLine": 40,
+        "endChar": 38
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1a0f6fa_35dd3007",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T23:30:18Z",
+      "side": 1,
+      "message": "Maybe NumberToString should have two functions ::IdAsString and ::ValueAsString. IdAsString does not append the u, but ValueAsString does.",
+      "range": {
+        "startLine": 418,
+        "startChar": 20,
+        "endLine": 419,
+        "endChar": 31
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3c0636e_ce767ef0",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T23:30:18Z",
+      "side": 1,
+      "message": "remove this part of the comment?",
+      "range": {
+        "startLine": 457,
+        "startChar": 29,
+        "endLine": 458,
+        "endChar": 36
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7095b35f_2e35c919",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T23:30:18Z",
+      "side": 1,
+      "message": "nit: I think the lifetime would be more clear if GetOverridableConstantsDefines simply returned the |defineStrings| and then we did the second small loop right here to populate |fxcDefines|.\n\nEspecially since we need to mutate fxcDefines anyway to null-terminate it, it makes sense to have all the code to populate and null-terminate it in the same place.\n\nWe can also have GetOverridableConstantsDefines return a const vector. This makes it super obvious that |defineStrings| is *never* mutated after it is populated, so we won\u0027t invalidate the pointers in fxcDefines.",
+      "range": {
+        "startLine": 537,
+        "startChar": 12,
+        "endLine": 543,
+        "endChar": 0
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b1778ed_da70c120",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T23:30:18Z",
+      "side": 1,
+      "message": "instead of passing in programmableStage as an argument, it should be made part of the ShaderCompilationRequest.\n\nShaderCompilationRequest encapsulates *everything* that may influence the compiled shader, so defines must be included here.\n\nYou\u0027ll also need to update ShaderCompilationRequest::CreateCacheKey to include the constants as part of the key.",
+      "range": {
+        "startLine": 757,
+        "startChar": 23,
+        "endLine": 757,
+        "endChar": 62
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
