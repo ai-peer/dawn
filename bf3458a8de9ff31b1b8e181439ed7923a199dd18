@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3af976f7_1aedd8f1",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-10T15:58:33Z",
+      "side": 1,
+      "message": "That would require two pipelines. I don\u0027t think the cost of the branch on the uniform is significant at all.",
+      "parentUuid": "e0802b8a_fb60a2e6",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb43edaf_e367d6be",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 7
