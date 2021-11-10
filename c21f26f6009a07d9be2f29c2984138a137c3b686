@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4816694_a1baabb5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T01:36:30Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c21f26f6009a07d9be2f29c2984138a137c3b686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffb97f93_22f86c60",
+        "filename": "src/dawn_native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-10T01:36:30Z",
+      "side": 1,
+      "message": "unit: we try to file bugs for things now even if they\u0027re tiny \n\nthis one we could probably resolve by overriding APIObjectBase::DestroyAPIObject though. OR it is another case where we could override DestroyAPIObject in all the backends instead of having DestroyAPIObjectImpl and then have the backend call the frontend.",
+      "revId": "c21f26f6009a07d9be2f29c2984138a137c3b686",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
