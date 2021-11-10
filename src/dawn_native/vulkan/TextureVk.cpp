@@ -415,6 +415,8 @@ namespace dawn_native { namespace vulkan {
                 return VK_FORMAT_ASTC_12x12_SRGB_BLOCK;
 
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                return VK_FORMAT_G8_B8R8_2PLANE_420_UNORM;
+
             // TODO(dawn:666): implement stencil8
             case wgpu::TextureFormat::Stencil8:
             // TODO(dawn:570): implement depth16unorm
@@ -706,20 +708,51 @@ namespace dawn_native { namespace vulkan {
 
     MaybeError Texture::BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
                                            VkSemaphore signalSemaphore,
-                                           VkDeviceMemory externalMemoryAllocation,
+                                           std::vector<VkDeviceMemory> externalMemoryAllocations,
                                            std::vector<VkSemaphore> waitSemaphores) {
+        ASSERT(externalMemoryAllocations.size() != 0u);
         Device* device = ToBackend(GetDevice());
-        DAWN_TRY(CheckVkSuccess(
-            device->fn.BindImageMemory(device->GetVkDevice(), mHandle, externalMemoryAllocation, 0),
-            "BindImageMemory (external)"));
 
+        // multi-planar
+        if (externalMemoryAllocations.size() > 1u) {
+            constexpr size_t kMaxMemoryPlanes = 4u;
+            ASSERT(externalMemoryAllocations.size() <= kMaxMemoryPlanes);
+            constexpr VkImageAspectFlagBits kMemoryPlaneAspects[kMaxMemoryPlanes] = {
+                VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT,
+                VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT,
+                VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT,
+                VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT,
+            };
+
+            for (uint32_t memoryPlane = 0; memoryPlane < externalMemoryAllocations.size();
+                 ++memoryPlane) {
+                VkBindImagePlaneMemoryInfo bindImagePlaneMemoryInfo = {};
+                bindImagePlaneMemoryInfo.sType = VK_STRUCTURE_TYPE_BIND_IMAGE_PLANE_MEMORY_INFO;
+                bindImagePlaneMemoryInfo.planeAspect = kMemoryPlaneAspects[memoryPlane];
+
+                VkBindImageMemoryInfo bindImageMemoryInfo = {};
+                bindImageMemoryInfo.sType = VK_STRUCTURE_TYPE_BIND_IMAGE_MEMORY_INFO;
+                bindImageMemoryInfo.pNext = &bindImagePlaneMemoryInfo;
+                bindImageMemoryInfo.image = mHandle;
+                bindImageMemoryInfo.memory = externalMemoryAllocations[memoryPlane];
+                bindImageMemoryInfo.memoryOffset = 0u;
+
+                DAWN_TRY(CheckVkSuccess(
+                    device->fn.BindImageMemory2(device->GetVkDevice(), 1u, &bindImageMemoryInfo),
+                    "BindImageMemory (external)"));
+            }
+        } else {
+            DAWN_TRY(CheckVkSuccess(device->fn.BindImageMemory(device->GetVkDevice(), mHandle,
+                                                               externalMemoryAllocations[0], 0),
+                                    "BindImageMemory (external)"));
+        }
         // Don't clear imported texture if already initialized
         if (descriptor->isInitialized) {
             SetIsSubresourceContentInitialized(true, GetAllSubresources());
         }
 
         // Success, acquire all the external objects.
-        mExternalAllocation = externalMemoryAllocation;
+        mExternalAllocations = externalMemoryAllocations;
         mSignalSemaphore = signalSemaphore;
         mWaitRequirements = std::move(waitSemaphores);
         return {};
@@ -735,7 +768,7 @@ namespace dawn_native { namespace vulkan {
             return DAWN_VALIDATION_ERROR("Can't export signal semaphore from signaled texture");
         }
 
-        if (mExternalAllocation == VK_NULL_HANDLE) {
+        if (mExternalAllocations.empty()) {
             return DAWN_VALIDATION_ERROR(
                 "Can't export signal semaphore from destroyed / non-external texture");
         }
@@ -827,12 +860,14 @@ namespace dawn_native { namespace vulkan {
                 device->GetFencedDeleter()->DeleteWhenUnused(mHandle);
             }
 
-            if (mExternalAllocation != VK_NULL_HANDLE) {
-                device->GetFencedDeleter()->DeleteWhenUnused(mExternalAllocation);
+            for (auto allocation : mExternalAllocations) {
+                if (allocation != VK_NULL_HANDLE) {
+                    device->GetFencedDeleter()->DeleteWhenUnused(allocation);
+                }
             }
 
             mHandle = VK_NULL_HANDLE;
-            mExternalAllocation = VK_NULL_HANDLE;
+            mExternalAllocations.clear();
             // If a signal semaphore exists it should be requested before we delete the texture
             ASSERT(mSignalSemaphore == VK_NULL_HANDLE);
         }
@@ -868,7 +903,7 @@ namespace dawn_native { namespace vulkan {
         // transitionBarrierStart specify the index where barriers for current transition start in
         // the vector. barriers->size() - transitionBarrierStart is the number of barriers that we
         // have already added into the vector during current transition.
-        ASSERT(barriers->size() - transitionBarrierStart <= 1);
+        // ASSERT(barriers->size() - transitionBarrierStart <= 1);
 
         if (mExternalState == ExternalState::PendingAcquire) {
             if (barriers->size() == transitionBarrierStart) {

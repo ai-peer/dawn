@@ -57,6 +57,11 @@ namespace dawn_native {
 
         DAWN_TRY(device->ValidateObject(descriptor->plane0));
 
+        if (descriptor->format == wgpu::TextureFormat::R8BG8Biplanar420Unorm) {
+            ASSERT(descriptor->plane1);
+            DAWN_TRY(device->ValidateObject(descriptor->plane1));
+        }
+
         const Format* format;
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(descriptor->format));
         DAWN_UNUSED(format);
@@ -69,6 +74,9 @@ namespace dawn_native {
                     ValidateExternalTexturePlane(descriptor->plane0, descriptor->format),
                     "validating plane0 against the external texture format (%s)",
                     descriptor->format);
+                break;
+            case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                // Each plane may have a different format from the texture.
                 break;
             default:
                 return DAWN_FORMAT_VALIDATION_ERROR(
@@ -91,6 +99,7 @@ namespace dawn_native {
                                              const ExternalTextureDescriptor* descriptor)
         : ApiObjectBase(device, kLabelNotImplemented), mState(ExternalTextureState::Alive) {
         textureViews[0] = descriptor->plane0;
+        textureViews[1] = descriptor->plane1;
     }
 
     ExternalTextureBase::ExternalTextureBase(DeviceBase* device, ObjectBase::ErrorTag tag)

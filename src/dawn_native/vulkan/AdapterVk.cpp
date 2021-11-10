@@ -281,6 +281,8 @@ namespace dawn_native { namespace vulkan {
         if (mDeviceInfo.properties.limits.timestampComputeAndGraphics == VK_TRUE) {
             mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
         }
+
+        mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {

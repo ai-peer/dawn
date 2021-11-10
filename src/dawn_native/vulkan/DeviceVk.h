@@ -70,7 +70,7 @@ namespace dawn_native { namespace vulkan {
 
         TextureBase* CreateTextureWrappingVulkanImage(
             const ExternalImageDescriptorVk* descriptor,
-            ExternalMemoryHandle memoryHandle,
+            std::vector<ExternalMemoryHandle> memoryHandles,
             const std::vector<ExternalSemaphoreHandle>& waitHandles);
         bool SignalAndExportExternalTexture(Texture* texture,
                                             VkImageLayout desiredLayout,
@@ -198,11 +198,11 @@ namespace dawn_native { namespace vulkan {
         CommandRecordingContext mRecordingContext;
 
         MaybeError ImportExternalImage(const ExternalImageDescriptorVk* descriptor,
-                                       ExternalMemoryHandle memoryHandle,
+                                       std::vector<ExternalMemoryHandle> memoryHandles,
                                        VkImage image,
                                        const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                        VkSemaphore* outSignalSemaphore,
-                                       VkDeviceMemory* outAllocation,
+                                       std::vector<VkDeviceMemory>* outAllocations,
                                        std::vector<VkSemaphore>* outWaitSemaphores);
     };
 

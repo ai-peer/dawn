@@ -320,6 +320,18 @@ namespace dawn_native { namespace vulkan {
             GET_DEVICE_PROC(QueuePresentKHR);
         }
 
+        if (deviceInfo.HasExt(DeviceExt::GetMemoryRequirements2)) {
+            GET_DEVICE_PROC(GetImageMemoryRequirements2);
+        }
+
+        if (deviceInfo.HasExt(DeviceExt::BindMemory2)) {
+            GET_DEVICE_PROC(BindImageMemory2);
+        }
+
+        if (deviceInfo.HasExt(DeviceExt::SamplerYCbCrConversion)) {
+            GET_DEVICE_PROC(CreateSamplerYcbcrConversion);
+        }
+
         return {};
     }
 

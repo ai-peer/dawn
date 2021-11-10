@@ -728,11 +728,11 @@ namespace dawn_native { namespace vulkan {
     }
 
     MaybeError Device::ImportExternalImage(const ExternalImageDescriptorVk* descriptor,
-                                           ExternalMemoryHandle memoryHandle,
+                                           std::vector<ExternalMemoryHandle> memoryHandles,
                                            VkImage image,
                                            const std::vector<ExternalSemaphoreHandle>& waitHandles,
                                            VkSemaphore* outSignalSemaphore,
-                                           VkDeviceMemory* outAllocation,
+                                           std::vector<VkDeviceMemory>* outAllocations,
                                            std::vector<VkSemaphore>* outWaitSemaphores) {
         const TextureDescriptor* textureDescriptor =
             reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
@@ -762,11 +762,11 @@ namespace dawn_native { namespace vulkan {
                         mExternalSemaphoreService->CreateExportableSemaphore());
 
         // Import the external image's memory
-        external_memory::MemoryImportParams importParams;
+        std::vector<external_memory::MemoryImportParams> importParams = {};
         DAWN_TRY_ASSIGN(importParams,
                         mExternalMemoryService->GetMemoryImportParams(descriptor, image));
-        DAWN_TRY_ASSIGN(*outAllocation,
-                        mExternalMemoryService->ImportMemory(memoryHandle, importParams, image));
+        DAWN_TRY_ASSIGN(*outAllocations,
+                        mExternalMemoryService->ImportMemory(memoryHandles, importParams, image));
 
         // Import semaphores we have to wait on before using the texture
         for (const ExternalSemaphoreHandle& handle : waitHandles) {
@@ -807,7 +807,7 @@ namespace dawn_native { namespace vulkan {
 
     TextureBase* Device::CreateTextureWrappingVulkanImage(
         const ExternalImageDescriptorVk* descriptor,
-        ExternalMemoryHandle memoryHandle,
+        std::vector<ExternalMemoryHandle> memoryHandles,
         const std::vector<ExternalSemaphoreHandle>& waitHandles) {
         const TextureDescriptor* textureDescriptor =
             reinterpret_cast<const TextureDescriptor*>(descriptor->cTextureDescriptor);
@@ -821,7 +821,7 @@ namespace dawn_native { namespace vulkan {
         }
 
         VkSemaphore signalSemaphore = VK_NULL_HANDLE;
-        VkDeviceMemory allocation = VK_NULL_HANDLE;
+        std::vector<VkDeviceMemory> allocations = {};
         std::vector<VkSemaphore> waitSemaphores;
         waitSemaphores.reserve(waitHandles.size());
 
@@ -832,10 +832,10 @@ namespace dawn_native { namespace vulkan {
         if (ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,
                                                       mExternalMemoryService.get()),
                           &result) ||
-            ConsumedError(ImportExternalImage(descriptor, memoryHandle, result->GetHandle(),
-                                              waitHandles, &signalSemaphore, &allocation,
+            ConsumedError(ImportExternalImage(descriptor, memoryHandles, result->GetHandle(),
+                                              waitHandles, &signalSemaphore, &allocations,
                                               &waitSemaphores)) ||
-            ConsumedError(result->BindExternalMemory(descriptor, signalSemaphore, allocation,
+            ConsumedError(result->BindExternalMemory(descriptor, signalSemaphore, allocations,
                                                      waitSemaphores))) {
             // Delete the Texture if it was created
             if (result != nullptr) {
@@ -846,7 +846,9 @@ namespace dawn_native { namespace vulkan {
             fn.DestroySemaphore(GetVkDevice(), signalSemaphore, nullptr);
 
             // Clear image memory
-            fn.FreeMemory(GetVkDevice(), allocation, nullptr);
+            for (auto allocation : allocations) {
+                fn.FreeMemory(GetVkDevice(), allocation, nullptr);
+            }
 
             // Clear any wait semaphores we were able to import
             for (VkSemaphore semaphore : waitSemaphores) {

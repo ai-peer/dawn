@@ -71,7 +71,8 @@ namespace dawn_native { namespace vulkan {
         // caller can assume the FD is always consumed.
         struct DAWN_NATIVE_EXPORT ExternalImageDescriptorFD : ExternalImageDescriptorVk {
           public:
-            int memoryFD;  // A file descriptor from an export of the memory of the image
+            std::vector<int>
+                memoryFDs;             // File descriptors from an export of the memory of the image
             std::vector<int> waitFDs;  // File descriptors of semaphores which will be waited on
 
           protected:
@@ -90,7 +91,7 @@ namespace dawn_native { namespace vulkan {
         struct DAWN_NATIVE_EXPORT ExternalImageDescriptorDmaBuf : ExternalImageDescriptorFD {
             ExternalImageDescriptorDmaBuf();
 
-            uint32_t stride;       // Stride of the buffer in bytes
+            std::vector<uint32_t> strides;  // Stride of the buffer in bytes
             uint64_t drmModifier;  // DRM modifier of the buffer
         };
 

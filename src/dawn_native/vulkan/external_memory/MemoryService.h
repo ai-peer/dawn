@@ -52,14 +52,15 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                                  VkImageUsageFlags usage);
 
         // Returns the parameters required for importing memory
-        ResultOrError<MemoryImportParams> GetMemoryImportParams(
+        ResultOrError<std::vector<MemoryImportParams>> GetMemoryImportParams(
             const ExternalImageDescriptor* descriptor,
             VkImage image);
 
-        // Given an external handle pointing to memory, import it into a VkDeviceMemory
-        ResultOrError<VkDeviceMemory> ImportMemory(ExternalMemoryHandle handle,
-                                                   const MemoryImportParams& importParams,
-                                                   VkImage image);
+        // Given a vector of external handles pointing to memory, import them into VkDeviceMemory
+        ResultOrError<std::vector<VkDeviceMemory>> ImportMemory(
+            std::vector<ExternalMemoryHandle> handles,
+            const std::vector<MemoryImportParams>& importParams,
+            VkImage image);
 
         // Create a VkImage for the given handle type
         ResultOrError<VkImage> CreateImage(const ExternalImageDescriptor* descriptor,

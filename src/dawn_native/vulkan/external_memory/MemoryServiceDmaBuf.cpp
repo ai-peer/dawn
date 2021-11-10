@@ -104,10 +104,6 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         if (planeCount == 0) {
             return false;
         }
-        // TODO(hob): Support multi-plane formats like I915_FORMAT_MOD_Y_TILED_CCS.
-        if (planeCount > 1) {
-            return false;
-        }
 
         // Verify that the format modifier of the external memory and the requested Vulkan format
         // are actually supported together in a dma-buf import.
@@ -151,7 +147,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         return featureFlags & VK_EXTERNAL_MEMORY_FEATURE_IMPORTABLE_BIT;
     }
 
-    ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
+    ResultOrError<std::vector<MemoryImportParams>> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
         if (descriptor->type != ExternalImageType::DmaBuf) {
@@ -161,61 +157,101 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
             static_cast<const ExternalImageDescriptorDmaBuf*>(descriptor);
         VkDevice device = mDevice->GetVkDevice();
 
+        std::vector<MemoryImportParams> result = {};
         // Get the valid memory types for the VkImage.
-        VkMemoryRequirements memoryRequirements;
-        mDevice->fn.GetImageMemoryRequirements(device, image, &memoryRequirements);
+        for (size_t plane = 0u; plane < dmaBufDescriptor->memoryFDs.size(); ++plane) {
+            VkMemoryRequirements memoryRequirements;
+            if (dmaBufDescriptor->memoryFDs.size() == 1u) {
+                mDevice->fn.GetImageMemoryRequirements(device, image, &memoryRequirements);
+            } else {
+                // vkspec: If the image's tiling is VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT,
+                // planeAspect must be single valid memory plane.
+                VkImageAspectFlagBits planeAspects[] = {
+                    VK_IMAGE_ASPECT_MEMORY_PLANE_0_BIT_EXT, VK_IMAGE_ASPECT_MEMORY_PLANE_1_BIT_EXT,
+                    VK_IMAGE_ASPECT_MEMORY_PLANE_2_BIT_EXT, VK_IMAGE_ASPECT_MEMORY_PLANE_3_BIT_EXT};
+                VkImagePlaneMemoryRequirementsInfo planeRequirementsInfo = {};
+                planeRequirementsInfo.sType =
+                    VK_STRUCTURE_TYPE_IMAGE_PLANE_MEMORY_REQUIREMENTS_INFO;
+                planeRequirementsInfo.planeAspect = planeAspects[plane];
 
-        VkMemoryFdPropertiesKHR fdProperties;
-        fdProperties.sType = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR;
-        fdProperties.pNext = nullptr;
+                VkImageMemoryRequirementsInfo2 memoryRequirementsInfo2 = {};
+                memoryRequirementsInfo2.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_REQUIREMENTS_INFO_2;
+                memoryRequirementsInfo2.image = image;
+                memoryRequirementsInfo2.pNext = &planeRequirementsInfo;
 
-        // Get the valid memory types that the external memory can be imported as.
-        mDevice->fn.GetMemoryFdPropertiesKHR(device, VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
-                                             dmaBufDescriptor->memoryFD, &fdProperties);
-        // Choose the best memory type that satisfies both the image's constraint and the import's
-        // constraint.
-        memoryRequirements.memoryTypeBits &= fdProperties.memoryTypeBits;
-        int memoryTypeIndex = mDevice->GetResourceMemoryAllocator()->FindBestTypeIndex(
-            memoryRequirements, MemoryKind::Opaque);
-        if (memoryTypeIndex == -1) {
-            return DAWN_VALIDATION_ERROR("Unable to find appropriate memory type for import");
+                VkMemoryDedicatedRequirements dedicatedMemoryRquirements = {};
+                dedicatedMemoryRquirements.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_REQUIREMENTS;
+
+                VkMemoryRequirements2 memoryRequirements2 = {};
+                memoryRequirements2.sType = VK_STRUCTURE_TYPE_MEMORY_REQUIREMENTS_2;
+                memoryRequirements2.pNext = &dedicatedMemoryRquirements;
+
+                mDevice->fn.GetImageMemoryRequirements2(device, &memoryRequirementsInfo2,
+                                                        &memoryRequirements2);
+                memoryRequirements = memoryRequirements2.memoryRequirements;
+            }
+
+            VkMemoryFdPropertiesKHR fdProperties;
+            fdProperties.sType = VK_STRUCTURE_TYPE_MEMORY_FD_PROPERTIES_KHR;
+            fdProperties.pNext = nullptr;
+
+            // Get the valid memory types that the external memory can be imported as.
+            mDevice->fn.GetMemoryFdPropertiesKHR(device,
+                                                 VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
+                                                 dmaBufDescriptor->memoryFDs[plane], &fdProperties);
+            // Choose the best memory type that satisfies both the image's constraint and the
+            // import's constraint.
+            memoryRequirements.memoryTypeBits &= fdProperties.memoryTypeBits;
+            int memoryTypeIndex = mDevice->GetResourceMemoryAllocator()->FindBestTypeIndex(
+                memoryRequirements, MemoryKind::Opaque);
+            DAWN_INVALID_IF(memoryTypeIndex == -1,
+                            "Unable to find an appropriate memory type for import.");
+
+            MemoryImportParams params = {memoryRequirements.size,
+                                         static_cast<uint32_t>(memoryTypeIndex)};
+            result.push_back(params);
         }
-        MemoryImportParams params = {memoryRequirements.size,
-                                     static_cast<uint32_t>(memoryTypeIndex)};
-        return params;
+        return result;
     }
 
-    ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                        const MemoryImportParams& importParams,
-                                                        VkImage image) {
-        if (handle < 0) {
-            return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
+    ResultOrError<std::vector<VkDeviceMemory>> Service::ImportMemory(
+        std::vector<ExternalMemoryHandle> handles,
+        const std::vector<MemoryImportParams>& importParams,
+        VkImage image) {
+        std::vector<VkDeviceMemory> result = {};
+        size_t plane = 0;
+        for (auto handle : handles) {
+            if (handle < 0) {
+                return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
+            }
+
+            VkMemoryDedicatedAllocateInfo memoryDedicatedAllocateInfo;
+            memoryDedicatedAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+            memoryDedicatedAllocateInfo.pNext = nullptr;
+            memoryDedicatedAllocateInfo.image = image;
+            memoryDedicatedAllocateInfo.buffer = VkBuffer{};
+
+            VkImportMemoryFdInfoKHR importMemoryFdInfo;
+            importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
+            importMemoryFdInfo.pNext = &memoryDedicatedAllocateInfo;
+            importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
+            importMemoryFdInfo.fd = handle;
+
+            VkMemoryAllocateInfo memoryAllocateInfo;
+            memoryAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+            memoryAllocateInfo.pNext = &importMemoryFdInfo;
+            memoryAllocateInfo.allocationSize = importParams[plane].allocationSize;
+            memoryAllocateInfo.memoryTypeIndex = importParams[plane].memoryTypeIndex;
+
+            VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
+            DAWN_TRY(CheckVkSuccess(
+                mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &memoryAllocateInfo, nullptr,
+                                           &*allocatedMemory),
+                "vkAllocateMemory"));
+            result.push_back(allocatedMemory);
+            ++plane;
         }
-
-        VkMemoryDedicatedAllocateInfo memoryDedicatedAllocateInfo;
-        memoryDedicatedAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
-        memoryDedicatedAllocateInfo.pNext = nullptr;
-        memoryDedicatedAllocateInfo.image = image;
-        memoryDedicatedAllocateInfo.buffer = VkBuffer{};
-
-        VkImportMemoryFdInfoKHR importMemoryFdInfo;
-        importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
-        importMemoryFdInfo.pNext = &memoryDedicatedAllocateInfo;
-        importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
-        importMemoryFdInfo.fd = handle;
-
-        VkMemoryAllocateInfo memoryAllocateInfo;
-        memoryAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        memoryAllocateInfo.pNext = &importMemoryFdInfo;
-        memoryAllocateInfo.allocationSize = importParams.allocationSize;
-        memoryAllocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
-
-        VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-        DAWN_TRY(
-            CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &memoryAllocateInfo,
-                                                      nullptr, &*allocatedMemory),
-                           "vkAllocateMemory"));
-        return allocatedMemory;
+        return result;
     }
 
     ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,
@@ -228,20 +264,26 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         VkPhysicalDevice physicalDevice = ToBackend(mDevice->GetAdapter())->GetPhysicalDevice();
         VkDevice device = mDevice->GetVkDevice();
 
-        // Dawn currently doesn't support multi-plane formats, so we only need to create a single
-        // VkSubresourceLayout here.
-        VkSubresourceLayout planeLayout;
-        planeLayout.offset = 0;
-        planeLayout.size = 0;  // VK_EXT_image_drm_format_modifier mandates size = 0.
-        planeLayout.rowPitch = dmaBufDescriptor->stride;
-        planeLayout.arrayPitch = 0;  // Not an array texture
-        planeLayout.depthPitch = 0;  // Not a depth texture
-
         uint32_t planeCount;
         DAWN_TRY_ASSIGN(planeCount,
                         GetModifierPlaneCount(mDevice->fn, physicalDevice, baseCreateInfo.format,
                                               dmaBufDescriptor->drmModifier));
-        ASSERT(planeCount == 1);
+
+        std::vector<VkSubresourceLayout> planeLayouts = {};
+        for (size_t plane = 0u; plane < planeCount; ++plane) {
+            VkSubresourceLayout planeLayout = {};
+            // TODO: Check offset's relativeness.
+            // If the image is disjoint, then the offset is relative to the base address of the
+            // memory plane. If the image is non-disjoint, then the offset is relative to the
+            // base address of the image. If the image is non-linear, then rowPitch, arrayPitch,
+            // and depthPitch have an implementation-dependent meaning.
+            planeLayout.offset = 0;
+            planeLayout.size = 0;  // VK_EXT_image_drm_format_modifier mandates size = 0.
+            planeLayout.rowPitch = dmaBufDescriptor->strides[plane];
+            planeLayout.arrayPitch = 0;  // Not an array texture
+            planeLayout.depthPitch = 0;  // Not a depth texture
+            planeLayouts.push_back(planeLayout);
+        }
 
         VkImageDrmFormatModifierExplicitCreateInfoEXT explicitCreateInfo;
         explicitCreateInfo.sType =
@@ -249,7 +291,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         explicitCreateInfo.pNext = NULL;
         explicitCreateInfo.drmFormatModifier = dmaBufDescriptor->drmModifier;
         explicitCreateInfo.drmFormatModifierPlaneCount = planeCount;
-        explicitCreateInfo.pPlaneLayouts = &planeLayout;
+        explicitCreateInfo.pPlaneLayouts = planeLayouts.data();
 
         VkExternalMemoryImageCreateInfo externalMemoryImageCreateInfo;
         externalMemoryImageCreateInfo.sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO;
@@ -260,6 +302,16 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
         createInfo.pNext = &externalMemoryImageCreateInfo;
         createInfo.flags = 0;
+        if (planeCount > 1) {
+            // For multi-planar formats, VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT specifies that a
+            // VkImageView can be created of a plane of the image.
+            createInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
+            // VK_IMAGE_CREATE_DISJOINT_BIT specifies that an image with a multi-planar format
+            // must have each plane separately bound to memory, rather than having a single
+            // memory binding for the whole image;
+            // TODO: VK_IMAGE_CREATE_DISJOINT_BIT for multiplanar format?
+            createInfo.flags |= VK_IMAGE_CREATE_DISJOINT_BIT;
+        }
         createInfo.tiling = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT;
 
         // Create a new VkImage with tiling equal to the DRM format modifier.
@@ -268,5 +320,4 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                                 "CreateImage"));
         return image;
     }
-
 }}}  // namespace dawn_native::vulkan::external_memory

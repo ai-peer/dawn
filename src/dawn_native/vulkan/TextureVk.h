@@ -85,7 +85,7 @@ namespace dawn_native { namespace vulkan {
         // semaphores.
         MaybeError BindExternalMemory(const ExternalImageDescriptorVk* descriptor,
                                       VkSemaphore signalSemaphore,
-                                      VkDeviceMemory externalMemoryAllocation,
+                                      std::vector<VkDeviceMemory> externalMemoryAllocations,
                                       std::vector<VkSemaphore> waitSemaphores);
 
         MaybeError ExportExternalTexture(VkImageLayout desiredLayout,
@@ -145,7 +145,7 @@ namespace dawn_native { namespace vulkan {
 
         VkImage mHandle = VK_NULL_HANDLE;
         ResourceMemoryAllocation mMemoryAllocation;
-        VkDeviceMemory mExternalAllocation = VK_NULL_HANDLE;
+        std::vector<VkDeviceMemory> mExternalAllocations = {};
 
         enum class ExternalState {
             InternalOnly,

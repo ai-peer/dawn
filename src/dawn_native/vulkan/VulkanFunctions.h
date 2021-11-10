@@ -292,6 +292,14 @@ namespace dawn_native { namespace vulkan {
         PFN_vkImportSemaphoreZirconHandleFUCHSIA ImportSemaphoreZirconHandleFUCHSIA = nullptr;
         PFN_vkGetSemaphoreZirconHandleFUCHSIA GetSemaphoreZirconHandleFUCHSIA = nullptr;
 #endif
+
+        // VK_KHR_get_memory_requirements2
+        PFN_vkGetImageMemoryRequirements2 GetImageMemoryRequirements2 = nullptr;
+
+        // VK_KHR_bind_memory2
+        PFN_vkBindImageMemory2 BindImageMemory2 = nullptr;
+
+        PFN_vkCreateSamplerYcbcrConversion CreateSamplerYcbcrConversion = nullptr;
     };
 
     // Create a wrapper around VkResult in the dawn_native::vulkan namespace. This shadows the

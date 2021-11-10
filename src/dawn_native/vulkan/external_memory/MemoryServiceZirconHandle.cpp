@@ -85,7 +85,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         return mSupported;
     }
 
-    ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
+    ResultOrError<std::vector<MemoryImportParams>> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
         if (descriptor->type != ExternalImageType::OpaqueFD) {
@@ -96,15 +96,16 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
 
         MemoryImportParams params = {opaqueFDDescriptor->allocationSize,
                                      opaqueFDDescriptor->memoryTypeIndex};
-        return params;
+        std::vector<MemoryImportParams> result = {};
+        result.push_back(result);
+        return result;
     }
 
-    ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                        const MemoryImportParams& importParams,
-                                                        VkImage image) {
-        if (handle == ZX_HANDLE_INVALID) {
-            return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
-        }
+    ResultOrError<std::vector<VkDeviceMemory>> Service::ImportMemory(
+        std::vector<ExternalMemoryHandle> handles,
+        const std::vector<MemoryImportParams>& importParams,
+        VkImage image) {
+        std::vector<VkDeviceMemory> result = {};
 
         VkMemoryRequirements requirements;
         mDevice->fn.GetImageMemoryRequirements(mDevice->GetVkDevice(), image, &requirements);
@@ -112,25 +113,35 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
             return DAWN_VALIDATION_ERROR("Requested allocation size is too small for image");
         }
 
-        VkImportMemoryZirconHandleInfoFUCHSIA importMemoryHandleInfo;
-        importMemoryHandleInfo.sType =
-            VK_STRUCTURE_TYPE_TEMP_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA;
-        importMemoryHandleInfo.pNext = nullptr;
-        importMemoryHandleInfo.handleType =
-            VK_EXTERNAL_MEMORY_HANDLE_TYPE_TEMP_ZIRCON_VMO_BIT_FUCHSIA;
-        importMemoryHandleInfo.handle = handle;
+        size_t plane = 0u;
+        for (auto handle : handles) {
+            if (handle == ZX_HANDLE_INVALID) {
+                return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
+            }
 
-        VkMemoryAllocateInfo allocateInfo;
-        allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocateInfo.pNext = &importMemoryHandleInfo;
-        allocateInfo.allocationSize = importParams.allocationSize;
-        allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
+            VkImportMemoryZirconHandleInfoFUCHSIA importMemoryHandleInfo;
+            importMemoryHandleInfo.sType =
+                VK_STRUCTURE_TYPE_TEMP_MEMORY_ZIRCON_HANDLE_PROPERTIES_FUCHSIA;
+            importMemoryHandleInfo.pNext = nullptr;
+            importMemoryHandleInfo.handleType =
+                VK_EXTERNAL_MEMORY_HANDLE_TYPE_TEMP_ZIRCON_VMO_BIT_FUCHSIA;
+            importMemoryHandleInfo.handle = handle;
 
-        VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-        DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
-                                                           nullptr, &*allocatedMemory),
-                                "vkAllocateMemory"));
-        return allocatedMemory;
+            VkMemoryAllocateInfo allocateInfo;
+            allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+            allocateInfo.pNext = &importMemoryHandleInfo;
+            allocateInfo.allocationSize = importParams[plane].allocationSize;
+            allocateInfo.memoryTypeIndex = importParams[plane].memoryTypeIndex;
+
+            VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
+            DAWN_TRY(
+                CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
+                                                          nullptr, &*allocatedMemory),
+                               "vkAllocateMemory"));
+            result.push_back(allocatedMemory);
+            ++plane;
+        }
+        return result;
     }
 
     ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,

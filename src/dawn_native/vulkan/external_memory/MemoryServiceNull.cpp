@@ -43,15 +43,16 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         return false;
     }
 
-    ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
+    ResultOrError<std::vector<MemoryImportParams>> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
         return DAWN_UNIMPLEMENTED_ERROR("Using null memory service to interop inside Vulkan");
     }
 
-    ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                        const MemoryImportParams& importParams,
-                                                        VkImage image) {
+    ResultOrError<std::vector<VkDeviceMemory>> Service::ImportMemory(
+        std::vector<ExternalMemoryHandle> handles,
+        const std::vector<MemoryImportParams>& importParams,
+        VkImage image) {
         return DAWN_UNIMPLEMENTED_ERROR("Using null memory service to interop inside Vulkan");
     }
 

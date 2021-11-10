@@ -85,7 +85,7 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         return mSupported;
     }
 
-    ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
+    ResultOrError<std::vector<MemoryImportParams>> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
         if (descriptor->type != ExternalImageType::OpaqueFD) {
@@ -96,39 +96,49 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
 
         MemoryImportParams params = {opaqueFDDescriptor->allocationSize,
                                      opaqueFDDescriptor->memoryTypeIndex};
-        return params;
+        std::vector<MemoryImportParams> result = {};
+        result.push_back(params);
+        return result;
     }
 
-    ResultOrError<VkDeviceMemory> Service::ImportMemory(ExternalMemoryHandle handle,
-                                                        const MemoryImportParams& importParams,
-                                                        VkImage image) {
-        if (handle < 0) {
-            return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
-        }
-
+    ResultOrError<std::vector<VkDeviceMemory>> Service::ImportMemory(
+        std::vector<ExternalMemoryHandle> handles,
+        const std::vector<MemoryImportParams>& importParams,
+        VkImage image) {
         VkMemoryRequirements requirements;
         mDevice->fn.GetImageMemoryRequirements(mDevice->GetVkDevice(), image, &requirements);
         if (requirements.size > importParams.allocationSize) {
             return DAWN_VALIDATION_ERROR("Requested allocation size is too small for image");
         }
 
-        VkImportMemoryFdInfoKHR importMemoryFdInfo;
-        importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
-        importMemoryFdInfo.pNext = nullptr;
-        importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-        importMemoryFdInfo.fd = handle;
+        size_t plane = 0u;
+        std::vector<VkDeviceMemory> result = {};
+        for (auto handle : handles) {
+            if (handle < 0) {
+                return DAWN_VALIDATION_ERROR("Trying to import memory with invalid handle");
+            }
 
-        VkMemoryAllocateInfo allocateInfo;
-        allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocateInfo.pNext = &importMemoryFdInfo;
-        allocateInfo.allocationSize = importParams.allocationSize;
-        allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
+            VkImportMemoryFdInfoKHR importMemoryFdInfo;
+            importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
+            importMemoryFdInfo.pNext = nullptr;
+            importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
+            importMemoryFdInfo.fd = handle;
 
-        VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
-        DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
-                                                           nullptr, &*allocatedMemory),
-                                "vkAllocateMemory"));
-        return allocatedMemory;
+            VkMemoryAllocateInfo allocateInfo;
+            allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
+            allocateInfo.pNext = &importMemoryFdInfo;
+            allocateInfo.allocationSize = importParams[plane].allocationSize;
+            allocateInfo.memoryTypeIndex = importParams[plane].memoryTypeIndex;
+
+            VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
+            DAWN_TRY(
+                CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
+                                                          nullptr, &*allocatedMemory),
+                               "vkAllocateMemory"));
+            result.push_back(allocatedMemory);
+            ++plane;
+        }
+        return result;
     }
 
     ResultOrError<VkImage> Service::CreateImage(const ExternalImageDescriptor* descriptor,

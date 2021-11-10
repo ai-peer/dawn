@@ -86,7 +86,7 @@ namespace dawn_native { namespace vulkan {
                     static_cast<const ExternalImageDescriptorFD*>(descriptor);
                 Device* device = reinterpret_cast<Device*>(cDevice);
                 TextureBase* texture = device->CreateTextureWrappingVulkanImage(
-                    fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
+                    fdDescriptor, fdDescriptor->memoryFDs, fdDescriptor->waitFDs);
                 return reinterpret_cast<WGPUTexture>(texture);
             }
             default:
