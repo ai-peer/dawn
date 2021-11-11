@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01988583_880dcb1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:26:45Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f681522b55545611f6a288087badd7c8a1cbaf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d488a70a_5972d574",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:26:45Z",
+      "side": 1,
+      "message": "I think we should make sure these are sorted. Otherwise we don\u0027t get a cache hit if you pass the constants in a different order.\n\nEek are you able to define |foo| twice to be two different values though such that only one override takes effect and the order of them matters? Then this would be less trivial.",
+      "range": {
+        "startLine": 351,
+        "startChar": 21,
+        "endLine": 351,
+        "endChar": 80
+      },
+      "revId": "f681522b55545611f6a288087badd7c8a1cbaf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6c15322_85d66c00",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:26:45Z",
+      "side": 1,
+      "message": "nit: can probably .reserve(defineStrings.size() + 1) since we know exactly how big it should be",
+      "range": {
+        "startLine": 499,
+        "startChar": 35,
+        "endLine": 499,
+        "endChar": 45
+      },
+      "revId": "f681522b55545611f6a288087badd7c8a1cbaf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
