@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5321db8b_ea97ead2",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T19:00:04Z",
+      "side": 1,
+      "message": "Make programmableStage-\u003econstants from vector to map. as it seems all operation to it is iteration. thus the order is fixed.\nAnd just change duplicate entries from a valid case to invalid, seems to make life much easier.",
+      "parentUuid": "d488a70a_5972d574",
+      "range": {
+        "startLine": 351,
+        "startChar": 21,
+        "endLine": 351,
+        "endChar": 80
+      },
+      "revId": "f681522b55545611f6a288087badd7c8a1cbaf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6c15322_85d66c00",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-11T16:26:45Z",
       "side": 1,
       "message": "nit: can probably .reserve(defineStrings.size() + 1) since we know exactly how big it should be",
+      "range": {
+        "startLine": 499,
+        "startChar": 35,
+        "endLine": 499,
+        "endChar": 45
+      },
+      "revId": "f681522b55545611f6a288087badd7c8a1cbaf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b79c6eb4_ed50091d",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T19:00:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6c15322_85d66c00",
       "range": {
         "startLine": 499,
         "startChar": 35,
