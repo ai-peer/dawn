@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7db0b88b_31b01e2f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T18:39:34Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74e0794_ebadec27",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T18:39:34Z",
+      "side": 1,
+      "message": "even though it\u0027s tagged as unlikely, CheckCurrentEncoder will still need to check both conditions of the if and else-if in the happy case where there are no errors and the encoder is not destroyed.\n\nCould we put this check inside the if block above, and on Destroy() set both mDestroyed to true and mCurrentEncoder to nullptr?",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 94,
+        "endChar": 13
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5e42ff2_4998aed2",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T18:39:34Z",
+      "side": 1,
+      "message": "nit: also test cases of double explicit -\u003eDestroy()",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8172174_5f4760a2",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T18:39:34Z",
+      "side": 1,
+      "message": "\"No argument case\" ?\n\nthe addition of the matcher is pretty nice! Hopefully if error messages change it\u0027s not too much of a burden to find+replace.",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
