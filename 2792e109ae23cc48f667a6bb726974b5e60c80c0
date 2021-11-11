@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c814dc9e_37dceb1e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-11T18:09:41Z",
+      "side": 1,
+      "message": "Yea, that\u0027s reasonable. I\u0027m only slightly more in favor of this so I\u0027ll see what Corentin thinks and adjust as necessary then.",
+      "parentUuid": "5cf1c708_7ca8621d",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 128
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c8362235_1f203ddb",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47d18000_f6b09815",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-11T18:09:41Z",
+      "side": 1,
+      "message": "Nice catch!",
+      "parentUuid": "28406b61_0d6aac46",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 286,
+        "endChar": 28
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e30b484_f3839736",
@@ -77,6 +125,24 @@
       "writtenOn": "2021-11-11T16:48:29Z",
       "side": 1,
       "message": "it\u0027s probably worth commenting why we need to destroy the encoders like this. I think because destroy also destroys all the frontend caches, so AttachmentState needs to be destroyed completely as well. But secondly, it frees up a bunch of CPU memory as well.",
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "374a076f_f2480471",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-11T18:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e30b484_f3839736",
       "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fa05e20_bd7a4238",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-11T18:09:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e4311d9_9f42a024",
+      "range": {
+        "startLine": 93,
+        "startChar": 75,
+        "endLine": 93,
+        "endChar": 85
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0a3f1ec_1f21c07a",
@@ -117,6 +207,30 @@
       "writtenOn": "2021-11-11T16:48:29Z",
       "side": 1,
       "message": "some of our tests do this namespace thing, and some don\u0027t. Is it to avoid linking errors from duplicate symbols?\n\noverall, seems like something we should be consistent about.\nIf we should add it everywhere, can we do it in a separate change to hopefully make this diff easier to read? Otherwise it\u0027s hard to tell what the test changes were.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e70b0e4_e50b35a6",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-11T18:09:41Z",
+      "side": 1,
+      "message": "Ah, good point. Reverted it in this CL. I think it would be nice to cleanup the namespaces at some point later then. See https://groups.google.com/a/chromium.org/g/chromium-dev/c/pKY2G4GHcu0\n\nNot officially a part of style, but I think general consensus is at least anonymous namespace if we are linking the tests all into a single binary (which we are).",
+      "parentUuid": "c0a3f1ec_1f21c07a",
       "range": {
         "startLine": 23,
         "startChar": 0,
