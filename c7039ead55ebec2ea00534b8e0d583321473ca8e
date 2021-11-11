@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f937fcfd_ebf3f230",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T20:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d9bdbcf5_68ba9d06",
+      "range": {
+        "startLine": 61,
+        "startChar": 79,
+        "endLine": 61,
+        "endChar": 95
+      },
+      "revId": "c7039ead55ebec2ea00534b8e0d583321473ca8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb3ef875_4c4f323b",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-11T19:24:59Z",
       "side": 1,
       "message": "nit: just \"%s\". it will print [Shader Module \u003clabel\u003e]",
+      "range": {
+        "startLine": 73,
+        "startChar": 31,
+        "endLine": 73,
+        "endChar": 48
+      },
+      "revId": "c7039ead55ebec2ea00534b8e0d583321473ca8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdacc555_bf08722c",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T20:02:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb3ef875_4c4f323b",
       "range": {
         "startLine": 73,
         "startChar": 31,
