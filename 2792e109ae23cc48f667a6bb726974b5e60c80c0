@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5cf1c708_7ca8621d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:48:29Z",
+      "side": 1,
+      "message": "I understand the confusion, but also RenderBundleEncoder records commands that are for a \"pass\" so it kinda makes sense. The spec also says \"GPURenderBundleEncoder includes GPUProgrammablePassEncoder;\" so maybe it\u0027s kinda nice we match the same names?? But I really don\u0027t feel strongly. I am +0 (apathetic) about this.",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 128
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8362235_1f203ddb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:48:29Z",
+      "side": 1,
+      "message": "did not review tests yet because the diff is hard :-/ ",
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28406b61_0d6aac46",
+        "filename": "src/dawn_native/BUILD.gn",
+        "patchSetId": 8
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:48:29Z",
+      "side": 1,
+      "message": "change needs to occur in CMakeLists.txt as well",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 286,
+        "endChar": 28
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e30b484_f3839736",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:48:29Z",
+      "side": 1,
+      "message": "it\u0027s probably worth commenting why we need to destroy the encoders like this. I think because destroy also destroys all the frontend caches, so AttachmentState needs to be destroyed completely as well. But secondly, it frees up a bunch of CPU memory as well.",
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e4311d9_9f42a024",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:48:29Z",
+      "side": 1,
+      "message": "%s will print [CommandEncoder label], so I don\u0027t think we need \"encoder\"",
+      "range": {
+        "startLine": 93,
+        "startChar": 75,
+        "endLine": 93,
+        "endChar": 85
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0a3f1ec_1f21c07a",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T16:48:29Z",
+      "side": 1,
+      "message": "some of our tests do this namespace thing, and some don\u0027t. Is it to avoid linking errors from duplicate symbols?\n\noverall, seems like something we should be consistent about.\nIf we should add it everywhere, can we do it in a separate change to hopefully make this diff easier to read? Otherwise it\u0027s hard to tell what the test changes were.",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 11
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
