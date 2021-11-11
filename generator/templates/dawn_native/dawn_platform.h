@@ -59,6 +59,22 @@ namespace dawn_native {
             return reinterpret_cast<{{as_cppType(type.name)}}Base*>(rhs);
         }
     {% endfor %}
+
+    namespace detail {
+        template <typename T>
+        struct EnumCount;
+
+        {% for e in by_category["enum"] if e.contiguousFromZero %}
+            template<>
+            struct EnumCount<wgpu::{{as_cppType(e.name)}}> {
+                static constexpr uint32_t value = {{len(e.values)}};
+            };
+        {% endfor %}
+
+    }  // namespace detail
+
+    template<typename T>
+    constexpr uint32_t kEnumCount = detail::EnumCount<T>::value;
 }
 
 #endif  // DAWNNATIVE_DAWN_PLATFORM_AUTOGEN_H_
