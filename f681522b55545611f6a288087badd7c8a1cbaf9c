@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f17e7cad_5a84c548",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 351,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-11T19:24:59Z",
+      "side": 1,
+      "message": "ok right, and JS dictionaries can\u0027t even express duplicate entries anyway:\n\n{ foo: 2, foo: 3, } is just { foo: 3 }",
+      "parentUuid": "5321db8b_ea97ead2",
+      "range": {
+        "startLine": 351,
+        "startChar": 21,
+        "endLine": 351,
+        "endChar": 80
+      },
+      "revId": "f681522b55545611f6a288087badd7c8a1cbaf9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6c15322_85d66c00",
