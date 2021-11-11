@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "69502530_6517defc",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T00:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8284ae1_6fe9c8c3",
+      "range": {
+        "startLine": 40,
+        "startChar": 26,
+        "endLine": 40,
+        "endChar": 38
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1a0f6fa_35dd3007",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-10T23:30:18Z",
       "side": 1,
       "message": "Maybe NumberToString should have two functions ::IdAsString and ::ValueAsString. IdAsString does not append the u, but ValueAsString does.",
+      "range": {
+        "startLine": 418,
+        "startChar": 20,
+        "endLine": 419,
+        "endChar": 31
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a493a6_9b6898e7",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T00:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1a0f6fa_35dd3007",
       "range": {
         "startLine": 418,
         "startChar": 20,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f21adb0_087e8837",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T00:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3c0636e_ce767ef0",
+      "range": {
+        "startLine": 457,
+        "startChar": 29,
+        "endLine": 458,
+        "endChar": 36
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7095b35f_2e35c919",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "728b4e7b_3149c57c",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T00:47:16Z",
+      "side": 1,
+      "message": "This approach really makes it feel much better",
+      "parentUuid": "7095b35f_2e35c919",
+      "range": {
+        "startLine": 537,
+        "startChar": 12,
+        "endLine": 543,
+        "endChar": 0
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b1778ed_da70c120",
@@ -123,6 +219,30 @@
       "writtenOn": "2021-11-10T23:30:18Z",
       "side": 1,
       "message": "instead of passing in programmableStage as an argument, it should be made part of the ShaderCompilationRequest.\n\nShaderCompilationRequest encapsulates *everything* that may influence the compiled shader, so defines must be included here.\n\nYou\u0027ll also need to update ShaderCompilationRequest::CreateCacheKey to include the constants as part of the key.",
+      "range": {
+        "startLine": 757,
+        "startChar": 23,
+        "endLine": 757,
+        "endChar": 62
+      },
+      "revId": "992a110a0c909157ca7bb3e8356e97b67906d02b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf8aeec9_3064cad6",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-11T00:47:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b1778ed_da70c120",
       "range": {
         "startLine": 757,
         "startChar": 23,
