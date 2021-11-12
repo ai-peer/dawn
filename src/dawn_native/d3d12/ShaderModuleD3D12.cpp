@@ -109,6 +109,10 @@ namespace dawn_native { namespace d3d12 {
             bool usesNumWorkgroups;
             uint32_t numWorkgroupsRegisterSpace;
             uint32_t numWorkgroupsShaderRegister;
+            uint32_t dynamicStorageBufferLengthsRegisterSpace;
+            uint32_t dynamicStorageBufferLengthsShaderRegister;
+            const PipelineLayout::DynamicStorageBufferLengthInfo* dynamicStorageBufferLengthInfo;
+            BindGroupLayoutMask bindGroupLayoutMask;
 
             // FXC/DXC common inputs
             bool disableWorkgroupInit;
@@ -196,6 +200,13 @@ namespace dawn_native { namespace d3d12 {
                 request.usesNumWorkgroups = entryPoint.usesNumWorkgroups;
                 request.numWorkgroupsShaderRegister = layout->GetNumWorkgroupsShaderRegister();
                 request.numWorkgroupsRegisterSpace = layout->GetNumWorkgroupsRegisterSpace();
+                request.dynamicStorageBufferLengthsRegisterSpace =
+                    layout->GetDynamicStorageBufferLengthsRegisterSpace();
+                request.dynamicStorageBufferLengthsShaderRegister =
+                    layout->GetDynamicStorageBufferLengthsShaderRegister();
+                request.dynamicStorageBufferLengthInfo =
+                    &layout->GetDynamicStorageBufferLengthInfo();
+                request.bindGroupLayoutMask = layout->GetBindGroupLayoutsMask();
                 request.fxcVersion = compiler == Compiler::FXC ? GetD3DCompilerVersion() : 0;
                 request.dxcVersion = compiler == Compiler::DXC ? dxcVersion : 0;
                 request.deviceInfo = &device->GetDeviceInfo();
@@ -244,6 +255,26 @@ namespace dawn_native { namespace d3d12 {
                 stream << " useNumWorkgroups=" << usesNumWorkgroups;
                 stream << " numWorkgroupsRegisterSpace=" << numWorkgroupsRegisterSpace;
                 stream << " numWorkgroupsShaderRegister=" << numWorkgroupsShaderRegister;
+
+                stream << " dynamicStorageBufferLengthsRegisterSpace="
+                       << dynamicStorageBufferLengthsRegisterSpace;
+                stream << " dynamicStorageBufferLengthsShaderRegister="
+                       << dynamicStorageBufferLengthsShaderRegister;
+                stream << " dynamicStorageBufferLengthInfo=[";
+                for (BindGroupIndex group : IterateBitSet(bindGroupLayoutMask)) {
+                    stream << "(group=" << static_cast<uint32_t>(group)
+                           << " bindingAndRegisterOffsets=[";
+                    for (const auto& bindingAndRegisterOffset :
+                         (*dynamicStorageBufferLengthInfo)[group]) {
+                        BindingNumber binding = bindingAndRegisterOffset.binding;
+                        uint32_t registerOffset = bindingAndRegisterOffset.registerOffset;
+                        stream << "binding=" << static_cast<uint32_t>(binding);
+                        stream << "registerOffset=" << registerOffset;
+                    }
+                    stream << "])";
+                }
+                stream << "]";
+                stream << " bindGroupLayoutMask=" << bindGroupLayoutMask.to_ulong();
 
                 stream << " shaderModel=" << deviceInfo->shaderModel;
                 stream << " disableWorkgroupInit=" << disableWorkgroupInit;
@@ -390,6 +421,36 @@ namespace dawn_native { namespace d3d12 {
             if (request.isRobustnessEnabled) {
                 transformManager.Add<tint::transform::Robustness>();
             }
+
+            transformManager.Add<tint::transform::InlinePointerLets>();
+            transformManager.Add<tint::transform::Simplify>();
+            // ArrayLengthFromUniform must come after InlinePointerLets and Simplify, as
+            // it assumes that the form of the array length argument is &var.array.
+            // It also must run after Robustness which inserts arrayLength calls.
+            transformManager.Add<tint::transform::ArrayLengthFromUniform>();
+            {
+                tint::sem::BindingPoint uboBinding{
+                    request.dynamicStorageBufferLengthsRegisterSpace,
+                    request.dynamicStorageBufferLengthsShaderRegister};
+                auto config = tint::transform::ArrayLengthFromUniform::Config(uboBinding);
+
+                for (BindGroupIndex group : IterateBitSet(request.bindGroupLayoutMask)) {
+                    for (const auto& bindingAndRegisterOffset :
+                         (*request.dynamicStorageBufferLengthInfo)[group]) {
+                        BindingNumber binding = bindingAndRegisterOffset.binding;
+                        uint32_t registerOffset = bindingAndRegisterOffset.registerOffset;
+
+                        config.bindpoint_to_size_index.emplace(
+                            tint::sem::BindingPoint{static_cast<uint32_t>(group),
+                                                    static_cast<uint32_t>(binding)},
+                            registerOffset);
+                    }
+                }
+
+                transformInputs.Add<tint::transform::ArrayLengthFromUniform::Config>(
+                    std::move(config));
+            }
+
             transformManager.Add<tint::transform::BindingRemapper>();
 
             transformManager.Add<tint::transform::Renamer>();
