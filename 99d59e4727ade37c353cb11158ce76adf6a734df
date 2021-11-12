@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e40d082a_1cdbbeda",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-12T23:30:54Z",
+      "side": 1,
+      "message": "I feel like that sampling from stencil is not widely used, so there is no textureSample() function for stencil in wgsl. And it seems that we cannot sample from stencil in some native APIs (like glsl es 3.1), either. So I have to use textureLoad to read/sample data from stencil texture view. \n\nIn addition, I guess we can also sample from both depth view and stencil view upon the same depth/stencil attachment in one pipeline, like color.r\u003dtextureSample(depthView), color.g\u003dtextureLoad(stencilView), and enable depth test AND stencil test for this pipeline. But I didn\u0027t do that considering that sampling from stencil is not very useful. So I chose to keep the test simple. But if you think that we should test that, I can do it in the next CL via one more test named DepthAndStencil.",
+      "range": {
+        "startLine": 78,
+        "startChar": 18,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
