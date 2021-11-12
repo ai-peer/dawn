@@ -27,6 +27,10 @@ namespace dawn_native { namespace metal {
         return device->GetMTLDevice();
     }
 
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions()
+        : AdapterDiscoveryOptionsBase(WGPUBackendType_Metal) {
+    }
+
     ExternalImageDescriptorIOSurface::ExternalImageDescriptorIOSurface()
         : ExternalImageDescriptor(ExternalImageType::IOSurface) {
     }
