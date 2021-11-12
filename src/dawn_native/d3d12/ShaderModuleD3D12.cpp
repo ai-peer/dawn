@@ -178,6 +178,10 @@ namespace dawn_native { namespace d3d12 {
             bool usesNumWorkgroups;
             uint32_t numWorkgroupsRegisterSpace;
             uint32_t numWorkgroupsShaderRegister;
+            uint32_t dynamicStorageBufferLengthsRegisterSpace;
+            uint32_t dynamicStorageBufferLengthsShaderRegister;
+            const PipelineLayout::DynamicStorageBufferLengthInfo* dynamicStorageBufferLengthInfo;
+            BindGroupLayoutMask bindGroupLayoutMask;
             std::vector<std::pair<std::string, std::string>> defineStrings;
 
             // FXC/DXC common inputs
@@ -267,6 +271,13 @@ namespace dawn_native { namespace d3d12 {
                 request.usesNumWorkgroups = entryPoint.usesNumWorkgroups;
                 request.numWorkgroupsShaderRegister = layout->GetNumWorkgroupsShaderRegister();
                 request.numWorkgroupsRegisterSpace = layout->GetNumWorkgroupsRegisterSpace();
+                request.dynamicStorageBufferLengthsRegisterSpace =
+                    layout->GetDynamicStorageBufferLengthsRegisterSpace();
+                request.dynamicStorageBufferLengthsShaderRegister =
+                    layout->GetDynamicStorageBufferLengthsShaderRegister();
+                request.dynamicStorageBufferLengthInfo =
+                    &layout->GetDynamicStorageBufferLengthInfo();
+                request.bindGroupLayoutMask = layout->GetBindGroupLayoutsMask();
                 request.fxcVersion = compiler == Compiler::FXC ? GetD3DCompilerVersion() : 0;
                 request.dxcVersion = compiler == Compiler::DXC ? dxcVersion : 0;
                 request.deviceInfo = &device->GetDeviceInfo();
@@ -321,6 +332,26 @@ namespace dawn_native { namespace d3d12 {
                 stream << " useNumWorkgroups=" << usesNumWorkgroups;
                 stream << " numWorkgroupsRegisterSpace=" << numWorkgroupsRegisterSpace;
                 stream << " numWorkgroupsShaderRegister=" << numWorkgroupsShaderRegister;
+
+                stream << " dynamicStorageBufferLengthsRegisterSpace="
+                       << dynamicStorageBufferLengthsRegisterSpace;
+                stream << " dynamicStorageBufferLengthsShaderRegister="
+                       << dynamicStorageBufferLengthsShaderRegister;
+                stream << " dynamicStorageBufferLengthInfo=[";
+                for (BindGroupIndex group : IterateBitSet(bindGroupLayoutMask)) {
+                    stream << "(group=" << static_cast<uint32_t>(group)
+                           << " bindingAndRegisterOffsets=[";
+                    for (const auto& bindingAndRegisterOffset :
+                         (*dynamicStorageBufferLengthInfo)[group]) {
+                        BindingNumber binding = bindingAndRegisterOffset.binding;
+                        uint32_t registerOffset = bindingAndRegisterOffset.registerOffset;
+                        stream << "binding=" << static_cast<uint32_t>(binding);
+                        stream << "registerOffset=" << registerOffset;
+                    }
+                    stream << "])";
+                }
+                stream << "]";
+                stream << " bindGroupLayoutMask=" << bindGroupLayoutMask.to_ulong();
 
                 stream << " shaderModel=" << deviceInfo->shaderModel;
                 stream << " disableWorkgroupInit=" << disableWorkgroupInit;
@@ -501,6 +532,7 @@ namespace dawn_native { namespace d3d12 {
             if (request.isRobustnessEnabled) {
                 transformManager.Add<tint::transform::Robustness>();
             }
+
             transformManager.Add<tint::transform::BindingRemapper>();
 
             transformManager.Add<tint::transform::SingleEntryPoint>();
@@ -546,6 +578,37 @@ namespace dawn_native { namespace d3d12 {
             if (request.usesNumWorkgroups) {
                 options.root_constant_binding_point.group = request.numWorkgroupsRegisterSpace;
                 options.root_constant_binding_point.binding = request.numWorkgroupsShaderRegister;
+            }
+            {
+                // Apply arrayLengthFromUniform options
+                using tint::transform::BindingPoint;
+
+                auto& array_length_from_uniform = options.array_length_from_uniform;
+                array_length_from_uniform.ubo_binding =
+                    BindingPoint{request.dynamicStorageBufferLengthsRegisterSpace,
+                                 request.dynamicStorageBufferLengthsShaderRegister};
+
+                for (BindGroupIndex group : IterateBitSet(request.bindGroupLayoutMask)) {
+                    for (const auto& bindingAndRegisterOffset :
+                         (*request.dynamicStorageBufferLengthInfo)[group]) {
+                        BindingNumber binding = bindingAndRegisterOffset.binding;
+                        uint32_t registerOffset = bindingAndRegisterOffset.registerOffset;
+
+                        BindingPoint bindingPoint{static_cast<uint32_t>(group),
+                                                  static_cast<uint32_t>(binding)};
+                        auto it = request.bindingPoints.find(bindingPoint);
+                        if (it != request.bindingPoints.end()) {
+                            bindingPoint = it->second;
+                        }
+                        array_length_from_uniform.bindpoint_to_size_index.emplace(bindingPoint,
+                                                                                  registerOffset);
+                    }
+                }
+                // TODO(dawn:549): HLSL generation outputs the indices into the
+                // array_length_from_uniform buffer that were actually used. When the blob cache can
+                // store more than compiled shaders, we should reflect these used indices and store
+                // them as well. This would allow us to only upload root constants that are actually
+                // read by the shader.
             }
             auto result = tint::writer::hlsl::Generate(&transformedProgram, options);
             DAWN_INVALID_IF(!result.success, "An error occured while generating HLSL: %s",
