@@ -197,6 +197,9 @@ namespace utils {
     uint32_t GetTextureFormatBlockWidth(wgpu::TextureFormat textureFormat);
     uint32_t GetTextureFormatBlockHeight(wgpu::TextureFormat textureFormat);
 
+    bool HasDepthAspect(wgpu::TextureFormat format);
+    bool HasStencilAspect(wgpu::TextureFormat format);
+
     const char* GetWGSLColorTextureComponentType(wgpu::TextureFormat textureFormat);
     const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat);
     uint32_t GetWGSLRenderableColorTextureComponentCount(wgpu::TextureFormat textureFormat);
