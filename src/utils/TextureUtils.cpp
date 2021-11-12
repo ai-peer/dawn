@@ -477,6 +477,36 @@ namespace utils {
         UNREACHABLE();
     }
 
+    bool HasDepthAspect(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::Depth32Float:
+            case wgpu::TextureFormat::Depth24Plus:
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                return true;
+
+            // TODO(dawn:666, 570, 690): implement more depth/stencil formats
+            case wgpu::TextureFormat::Depth16Unorm:
+            // case wgpu::TextureFormat::Depth24UnormStencil8:
+            // case wgpu::TextureFormat::Depth32FloatStencil8:
+            default:
+                return false;
+        }
+    }
+
+    bool HasStencilAspect(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::Depth24PlusStencil8:
+                return true;
+
+            // TODO(dawn:666, 570, 690): implement more depth/stencil formats
+            case wgpu::TextureFormat::Stencil8:
+            // case wgpu::TextureFormat::Depth24UnormStencil8:
+            // case wgpu::TextureFormat::Depth32FloatStencil8:
+            default:
+                return false;
+        }
+    }
+
     const char* GetWGSLColorTextureComponentType(wgpu::TextureFormat textureFormat) {
         switch (textureFormat) {
             case wgpu::TextureFormat::R8Unorm:
