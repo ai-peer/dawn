@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5862e3f3_ef9313a6",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-12T23:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "390dbe4f_03bc0678",
+      "range": {
+        "startLine": 405,
+        "startChar": 10,
+        "endLine": 405,
+        "endChar": 21
+      },
+      "revId": "a92eb8d3a977e413c854a2fdbdaa711926746790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a05edb06_340ba13a",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-11-08T16:48:41Z",
       "side": 1,
       "message": "Maybe useful to add a utils::MakeBuffer? You won\u0027t be able to reuse the descriptor below, but for testing, I think it would be easier to understand if we didn\u0027t have to reuse and just called the helper with explicit args.",
+      "range": {
+        "startLine": 536,
+        "startChar": 0,
+        "endLine": 541,
+        "endChar": 56
+      },
+      "revId": "a92eb8d3a977e413c854a2fdbdaa711926746790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7de78c_aa64ec1c",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-12T23:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a05edb06_340ba13a",
       "range": {
         "startLine": 536,
         "startChar": 0,
@@ -118,6 +166,30 @@
       "side": 1,
       "message": "Yea, alternatively, instead of making a utils::MakeBuffer, could maybe call utils::CreateBufferFromData with the first set of created data?",
       "parentUuid": "268a328c_44c9ee07",
+      "range": {
+        "startLine": 544,
+        "startChar": 0,
+        "endLine": 545,
+        "endChar": 49
+      },
+      "revId": "a92eb8d3a977e413c854a2fdbdaa711926746790",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "176cc1b9_fdbc4b80",
+        "filename": "src/tests/end2end/DynamicBufferOffsetTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-12T23:05:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cf08626_a75467ee",
       "range": {
         "startLine": 544,
         "startChar": 0,
