@@ -67,6 +67,19 @@ namespace dawn_native { namespace null {
         }
 
         std::vector<std::unique_ptr<AdapterBase>> DiscoverDefaultAdapters() override {
+            dawn_native::AdapterDiscoveryOptionsBase options(WGPUBackendType_Null);
+            auto result = DiscoverAdapters(&options);
+            if (result.IsError()) {
+                GetInstance()->ConsumedError(result.AcquireError());
+                return {};
+            }
+            return result.AcquireSuccess();
+        }
+
+        ResultOrError<std::vector<std::unique_ptr<AdapterBase>>> DiscoverAdapters(
+            const AdapterDiscoveryOptionsBase* optionsBase) override {
+            ASSERT(optionsBase->backendType == WGPUBackendType_Null);
+
             // There is always a single Null adapter because it is purely CPU based and doesn't
             // depend on the system.
             std::vector<std::unique_ptr<AdapterBase>> adapters;
