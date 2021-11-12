@@ -144,10 +144,9 @@ namespace dawn_native {
     // Base class for options passed to Instance::DiscoverAdapters.
     struct DAWN_NATIVE_EXPORT AdapterDiscoveryOptionsBase {
       public:
-        const WGPUBackendType backendType;
-
-      protected:
         AdapterDiscoveryOptionsBase(WGPUBackendType type);
+
+        const WGPUBackendType backendType;
     };
 
     enum BackendValidationLevel { Full, Partial, Disabled };
