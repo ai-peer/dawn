@@ -16,6 +16,24 @@
       "message": "@Yunchao\nI am not clear about why this CL run into this assert. Hopefully you may have some informative idea. The corresponding blink side change is https://chromium-review.googlesource.com/c/chromium/src/+/3270773",
       "revId": "362888532417ee6562740c8e6f76ac109445fb1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abea03bd_dc0a0dd4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 906,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-12T21:31:27Z",
+      "side": 1,
+      "message": "Jie, do you still have this problem? Sorry I didn\u0027t notice this a couple days ago. Can you update the change in order to resolve the merge conflict? Then I can help to dig.",
+      "parentUuid": "40eada46_d76fd900",
+      "revId": "362888532417ee6562740c8e6f76ac109445fb1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
