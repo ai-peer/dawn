@@ -174,6 +174,8 @@ namespace dawn_native { namespace d3d12 {
             memorySegment, requestedReservationSize);
     }
 
+    AdapterDiscoveryOptions::AdapterDiscoveryOptions() = default;
+
     AdapterDiscoveryOptions::AdapterDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
         : AdapterDiscoveryOptionsBase(WGPUBackendType_D3D12), dxgiAdapter(std::move(adapter)) {
     }
