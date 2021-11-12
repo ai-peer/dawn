@@ -581,6 +581,12 @@ namespace dawn_native { namespace metal {
         return adapters;
     }
 
+    ResultOrError<std::vector<std::unique_ptr<AdapterBase>>> Backend::DiscoverAdapters(
+        const AdapterDiscoveryOptionsBase* optionsBase) {
+        ASSERT(optionsBase->backendType == WGPUBackendType_Metal);
+        return DiscoverDefaultAdapters();
+    }
+
     BackendConnection* Connect(InstanceBase* instance) {
         if (!IsMetalSupported()) {
             return nullptr;
