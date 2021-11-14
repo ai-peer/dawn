@@ -62,8 +62,8 @@ namespace dawn_native {
                            ErrorTag errorTag);
 
       private:
-        ResultOrError<std::pair<Ref<BufferBase>, uint64_t>> ValidateIndirectDispatch(
-            BufferBase* indirectBuffer,
+        ResultOrError<std::pair<Ref<BufferBase>, uint64_t>> TransformIndirectDispatchBuffer(
+            Ref<BufferBase> indirectBuffer,
             uint64_t indirectOffset);
 
         void RestoreCommandBufferState(CommandBufferStateTracker state);

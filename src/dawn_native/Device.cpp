@@ -1661,4 +1661,18 @@ namespace dawn_native {
     void DeviceBase::SetLabelImpl() {
     }
 
+    bool DeviceBase::ShouldTransformIndirectBuffer(ComputePipelineBase* computePipeline) const {
+        return IsValidationEnabled();
+    }
+
+    uint64_t DeviceBase::GetDispatchIndirectScratchBufferSize(
+        ComputePipelineBase* computePipeline) const {
+        return kDispatchIndirectSize;
+    }
+
+    bool DeviceBase::ShouldDuplicateNumWorkgroupsForDispatchIndirect(
+        ComputePipelineBase* computePipeline) const {
+        return false;
+    }
+
 }  // namespace dawn_native

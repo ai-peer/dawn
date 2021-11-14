@@ -361,6 +361,12 @@ namespace dawn_native {
         const std::string& GetLabel() const;
         void APISetLabel(const char* label);
 
+        virtual bool ShouldTransformIndirectBuffer(ComputePipelineBase* computePipeline) const;
+        virtual uint64_t GetDispatchIndirectScratchBufferSize(
+            ComputePipelineBase* computePipeline) const;
+        virtual bool ShouldDuplicateNumWorkgroupsForDispatchIndirect(
+            ComputePipelineBase* computePipeline) const;
+
       protected:
         // Constructor used only for mocking and testing.
         DeviceBase();

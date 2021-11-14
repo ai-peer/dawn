@@ -675,4 +675,20 @@ namespace dawn_native { namespace d3d12 {
         return mTimestampPeriod;
     }
 
+    bool Device::ShouldTransformIndirectBuffer(ComputePipelineBase* computePipeline) const {
+        return IsValidationEnabled() ||
+               ShouldDuplicateNumWorkgroupsForDispatchIndirect(computePipeline);
+    }
+
+    uint64_t Device::GetDispatchIndirectScratchBufferSize(
+        ComputePipelineBase* computePipeline) const {
+        return ToBackend(computePipeline)->UsesNumWorkgroups() ? kDispatchIndirectSize * 2
+                                                               : kDispatchIndirectSize;
+    }
+
+    bool Device::ShouldDuplicateNumWorkgroupsForDispatchIndirect(
+        ComputePipelineBase* computePipeline) const {
+        return ToBackend(computePipeline)->UsesNumWorkgroups();
+    }
+
 }}  // namespace dawn_native::d3d12
