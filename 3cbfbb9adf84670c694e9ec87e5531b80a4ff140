@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38bd254d_5c3842f9",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T08:46:50Z",
+      "side": 1,
+      "message": "u-u-nit: since these are the only two valid values, we could ASSERT(aspect \u003d\u003d StencilOnly) instead of else if.",
+      "range": {
+        "startLine": 72,
+        "startChar": 14,
+        "endLine": 72,
+        "endChar": 62
+      },
+      "revId": "3cbfbb9adf84670c694e9ec87e5531b80a4ff140",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "60587a93_1d0ed659",
         "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
         "patchSetId": 2
