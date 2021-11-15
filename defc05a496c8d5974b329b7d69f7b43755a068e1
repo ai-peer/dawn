@@ -16,6 +16,46 @@
       "message": "PTAL!",
       "revId": "defc05a496c8d5974b329b7d69f7b43755a068e1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45d48756_a953fa25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-15T19:36:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "defc05a496c8d5974b329b7d69f7b43755a068e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3aef699c_6a4c0094",
+        "filename": "src/dawn_native/ErrorData.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-15T19:36:23Z",
+      "side": 1,
+      "message": "Is this also pending on Brandon\u0027s response about why only validation errors? (We should add a comment about the reason or update accordingly.)",
+      "range": {
+        "startLine": 84,
+        "startChar": 30,
+        "endLine": 84,
+        "endChar": 71
+      },
+      "revId": "defc05a496c8d5974b329b7d69f7b43755a068e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
