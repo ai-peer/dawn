@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b96cad3_534ca47c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-11-15T08:06:29Z",
+      "side": 1,
+      "message": "Hi, since the deprecation patch is landed in M96, I think we can submit this removal patch and make it landed in M98. Thanks.",
+      "revId": "b8a1ac2831b79fc29087b806ecbb1fcc00a0d247",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
