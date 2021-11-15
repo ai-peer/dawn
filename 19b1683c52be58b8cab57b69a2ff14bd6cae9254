@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "604dbd5a_7947a693",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T08:35:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e95887a_83efd8dd",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T08:35:33Z",
+      "side": 1,
+      "message": "I think these things can be moved inside Destroy() since DeleteThis calls ApiObjectBase::Destroy. Ditto in other encoders.\n\nBut this also means that it can stay in ProgrammableEncoder I think?",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f74e0794_ebadec27",
@@ -36,6 +70,75 @@
         "startChar": 14,
         "endLine": 94,
         "endChar": 13
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9edefd6a_9cfe85ac",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T08:35:33Z",
+      "side": 1,
+      "message": "u-nit: Remove?",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "583bb204_838ae871",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T08:35:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6954e6_38093fee",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T08:35:33Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 693,
+        "startChar": 11,
+        "endLine": 693,
+        "endChar": 18
       },
       "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
