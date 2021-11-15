@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bd63c89_3500e87e",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-15T21:54:21Z",
+      "side": 1,
+      "message": "yea, these only go to the command line console, not the Javascript console",
+      "parentUuid": "98133167_71aa7480",
+      "revId": "defc05a496c8d5974b329b7d69f7b43755a068e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aef699c_6a4c0094",
