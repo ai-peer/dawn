@@ -20,7 +20,7 @@
 #include <string>
 
 const char* GetPathSeparator();
-std::string GetEnvironmentVar(const char* variableName);
+std::pair<std::string, bool> GetEnvironmentVar(const char* variableName);
 bool SetEnvironmentVar(const char* variableName, const char* value);
 std::string GetExecutableDirectory();
 
@@ -42,7 +42,7 @@ class ScopedEnvironmentVar {
 
   private:
     std::string mName;
-    std::string mOriginalValue;
+    std::pair<std::string, bool> mOriginalValue;
     bool mIsSet = false;
 };
 
