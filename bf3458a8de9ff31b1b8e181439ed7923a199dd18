@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cec914f_bf5dafa0",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-15T01:34:02Z",
+      "side": 1,
+      "message": "I\u0027ve updated this CL. PTAL, thanks!",
+      "parentUuid": "ca98d505_79ab4d5b",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb43edaf_e367d6be",
         "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
         "patchSetId": 7
@@ -103,6 +121,47 @@
       "writtenOn": "2021-11-10T15:11:05Z",
       "side": 1,
       "message": "nit: this could be cached on the d3d12::Device because it only depends on one integer: GetNumWorkgroupsParameterIndex()",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8891f2b4_65eaee63",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-15T01:34:02Z",
+      "side": 1,
+      "message": "Oh we can\u0027t as we also need to specify the root signature (see [1]) when creating command signature, and we can only get the root signature from the pipeline layout.",
+      "parentUuid": "eb43edaf_e367d6be",
+      "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feefa4ee_e4f79f56",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 297,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-15T01:34:02Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 297,
+        "startChar": 30,
+        "endLine": 297,
+        "endChar": 48
+      },
       "revId": "bf3458a8de9ff31b1b8e181439ed7923a199dd18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
