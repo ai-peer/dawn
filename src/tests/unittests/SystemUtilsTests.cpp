@@ -12,24 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include <gmock/gmock-matchers.h>
 #include <gtest/gtest.h>
 
+#include "common/Assert.h"
 #include "common/SystemUtils.h"
+
+namespace {
+
+    // Matches against the return value of |GetEnvironmentVar|. Checks that the variable
+    // value is |s|, and whether or not the variable was |empty|.
+    MATCHER_P2(EnvVarEq, s, empty, "") {
+        return ExplainMatchResult(::testing::StrEq(s), arg.first, result_listener) &&
+               empty == arg.second;
+    }
+
+    // Matches against the return value of |GetEnvironmentVar|. Checks that the variable
+    // value is |s|, assuming that |s| is non-empty.
+    MATCHER_P(EnvVarEq, s, "") {
+        ASSERT(s != nullptr);
+        return ExplainMatchResult(::testing::StrEq(s), arg.first, result_listener) && arg.second;
+    }
+
+}  // namespace
 
 // Tests for GetEnvironmentVar
 TEST(SystemUtilsTests, GetEnvironmentVar) {
     // Test nonexistent environment variable
-    ASSERT_EQ(GetEnvironmentVar("NonexistentEnvironmentVar"), "");
+    ASSERT_THAT(GetEnvironmentVar("NonexistentEnvironmentVar"), EnvVarEq("", false));
 }
 
 // Tests for SetEnvironmentVar
 TEST(SystemUtilsTests, SetEnvironmentVar) {
     // Test new environment variable
     ASSERT_TRUE(SetEnvironmentVar("EnvironmentVarForTest", "NewEnvironmentVarValue"));
-    ASSERT_EQ(GetEnvironmentVar("EnvironmentVarForTest"), "NewEnvironmentVarValue");
+    ASSERT_THAT(GetEnvironmentVar("EnvironmentVarForTest"), EnvVarEq("NewEnvironmentVarValue"));
     // Test override environment variable
     ASSERT_TRUE(SetEnvironmentVar("EnvironmentVarForTest", "OverrideEnvironmentVarValue"));
-    ASSERT_EQ(GetEnvironmentVar("EnvironmentVarForTest"), "OverrideEnvironmentVarValue");
+    ASSERT_THAT(GetEnvironmentVar("EnvironmentVarForTest"),
+                EnvVarEq("OverrideEnvironmentVarValue"));
 }
 
 // Tests for GetExecutableDirectory
@@ -51,36 +72,59 @@ TEST(SystemUtilsTests, ScopedEnvironmentVar) {
     {
         ScopedEnvironmentVar var;
         var.Set("ScopedEnvironmentVarForTest", "NewEnvironmentVarValue");
-        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "NewEnvironmentVarValue");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"),
+                    EnvVarEq("NewEnvironmentVarValue"));
     }
-    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+    ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("original"));
 
     // Test that the environment variable can be set, and it is unset at the end of the scope.
     {
         ScopedEnvironmentVar var("ScopedEnvironmentVarForTest", "NewEnvironmentVarValue");
-        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "NewEnvironmentVarValue");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"),
+                    EnvVarEq("NewEnvironmentVarValue"));
     }
-    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+    ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("original"));
 
     // Test nested scopes
     {
         ScopedEnvironmentVar outer("ScopedEnvironmentVarForTest", "outer");
-        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "outer");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("outer"));
         {
             ScopedEnvironmentVar inner("ScopedEnvironmentVarForTest", "inner");
-            ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "inner");
+            ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("inner"));
         }
-        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "outer");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("outer"));
     }
-    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+    ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("original"));
 
     // Test redundantly setting scoped variables
     {
         ScopedEnvironmentVar var1("ScopedEnvironmentVarForTest", "var1");
-        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "var1");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("var1"));
 
         ScopedEnvironmentVar var2("ScopedEnvironmentVarForTest", "var2");
-        ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "var2");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("var2"));
     }
-    ASSERT_EQ(GetEnvironmentVar("ScopedEnvironmentVarForTest"), "original");
+    ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("original"));
+}
+
+// Test that restoring a scoped environment variable to the empty string.
+TEST(SystemUtilsTests, ScopedEnvironmentVarRestoresEmptyString) {
+    ScopedEnvironmentVar empty("ScopedEnvironmentVarForTest", "");
+    {
+        ScopedEnvironmentVar var1("ScopedEnvironmentVarForTest", "var1");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("var1"));
+    }
+    ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("", true));
+}
+
+// Test that restoring a scoped environment variable to not set (distuishable from empty string)
+// works.
+TEST(SystemUtilsTests, ScopedEnvironmentVarRestoresNotSet) {
+    ScopedEnvironmentVar null("ScopedEnvironmentVarForTest", nullptr);
+    {
+        ScopedEnvironmentVar var1("ScopedEnvironmentVarForTest", "var1");
+        ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("var1"));
+    }
+    ASSERT_THAT(GetEnvironmentVar("ScopedEnvironmentVarForTest"), EnvVarEq("", false));
 }
