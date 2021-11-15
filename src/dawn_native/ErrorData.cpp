@@ -79,7 +79,9 @@ namespace dawn_native {
             for (auto context : mContexts) {
                 ss << " - While " << context << "\n";
             }
-        } else {
+        }
+
+        if (mContexts.empty() || mType != InternalErrorType::Validation) {
             for (const auto& callsite : mBacktrace) {
                 ss << "    at " << callsite.function << " (" << callsite.file << ":"
                    << callsite.line << ")\n";
