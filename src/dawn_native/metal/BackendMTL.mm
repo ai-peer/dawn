@@ -16,6 +16,7 @@
 
 #include "common/CoreFoundationRef.h"
 #include "common/GPUInfo.h"
+#include "common/Log.h"
 #include "common/NSRef.h"
 #include "common/Platform.h"
 #include "common/SystemUtils.h"
@@ -182,9 +183,13 @@ namespace dawn_native { namespace metal {
                 [device supportsCounterSampling:MTLCounterSamplingPointAtDispatchBoundary];
             bool isDrawBoundarySupported =
                 [device supportsCounterSampling:MTLCounterSamplingPointAtDrawBoundary];
+            // Supported on TBDR GPUs
+            bool isStageSupported =
+                [device supportsCounterSampling:MTLCounterSamplingPointAtStageBoundary];
 
-            return isBlitBoundarySupported && isDispatchBoundarySupported &&
-                   isDrawBoundarySupported;
+            return (isBlitBoundarySupported && isDispatchBoundarySupported &&
+                    isDrawBoundarySupported) ||
+                   isStageSupported;
         }
 
         bool IsGPUCounterSupported(id<MTLDevice> device,
@@ -194,9 +199,12 @@ namespace dawn_native { namespace metal {
             // MTLDevice’s counterSets property declares which counter sets it supports. Check
             // whether it's available on the device before requesting a counter set.
             id<MTLCounterSet> counterSet = nil;
+            dawn::WarningLog() << "device.counterSets is null: " << (device.counterSets == nil);
             if (device.counterSets != nil) {
                 for (id<MTLCounterSet> set in device.counterSets) {
+                    dawn::WarningLog() << "set is null: " << (set == nil);
                     if ([set.name caseInsensitiveCompare:counterSetName] == NSOrderedSame) {
+                        dawn::WarningLog() << "counterSet is found";
                         counterSet = set;
                         break;
                     }
@@ -213,7 +221,10 @@ namespace dawn_native { namespace metal {
             // if there is a counter unsupported.
             std::vector<NSString*> supportedCounters;
             for (id<MTLCounter> counter in counterSet.counters) {
-                supportedCounters.push_back(counter.name);
+                dawn::WarningLog() << "counter is null: " << (counter == nil);
+                if (counter != nil) {
+                    supportedCounters.push_back(counter.name);
+                }
             }
             for (const auto& counterName : counters) {
                 if (std::find(supportedCounters.begin(), supportedCounters.end(), counterName) ==
@@ -221,17 +232,7 @@ namespace dawn_native { namespace metal {
                     return false;
                 }
             }
-
-            if (@available(macOS 11.0, iOS 14.0, *)) {
-                // Check whether it can read GPU counters at the specified command boundary. Apple
-                // family GPUs do not support sampling between different Metal commands, because
-                // they defer fragment processing until after the GPU processes all the primitives
-                // in the render pass.
-                if (!IsCounterSamplingBoundarySupport(device)) {
-                    return false;
-                }
-            }
-
+            dawn::WarningLog() << "IsGPUCounterSupported: true ";
             return true;
         }
 
@@ -292,30 +293,45 @@ namespace dawn_native { namespace metal {
             }
 #endif
 
+            bool isPipelineStatisticCounterSupported = false;
+            bool isTimestampCounterSupported = false;
+
             if (@available(macOS 10.15, iOS 14.0, *)) {
-                if (IsGPUCounterSupported(
-                        *mDevice, MTLCommonCounterSetStatistic,
-                        {MTLCommonCounterVertexInvocations, MTLCommonCounterClipperInvocations,
-                         MTLCommonCounterClipperPrimitivesOut, MTLCommonCounterFragmentInvocations,
-                         MTLCommonCounterComputeKernelInvocations})) {
+                isPipelineStatisticCounterSupported = IsGPUCounterSupported(
+                    *mDevice, MTLCommonCounterSetStatistic,
+                    {MTLCommonCounterVertexInvocations, MTLCommonCounterClipperInvocations,
+                     MTLCommonCounterClipperPrimitivesOut, MTLCommonCounterFragmentInvocations,
+                     MTLCommonCounterComputeKernelInvocations});
+
+                isTimestampCounterSupported = IsGPUCounterSupported(
+                    *mDevice, MTLCommonCounterSetTimestamp, {MTLCommonCounterTimestamp});
+            }
+
+            bool isCounterSamplingBoundarySupport = true;
+
+            if (@available(macOS 11.0, iOS 14.0, *)) {
+                // Check whether it can read GPU counters at the specified command boundary. Apple
+                // family GPUs do not support sampling between different Metal commands, because
+                // they defer fragment processing until after the GPU processes all the primitives
+                // in the render pass.
+                isCounterSamplingBoundarySupport = IsCounterSamplingBoundarySupport(*mDevice);
+            }
+
+            if (isCounterSamplingBoundarySupport) {
+                if (isPipelineStatisticCounterSupported) {
                     mSupportedFeatures.EnableFeature(Feature::PipelineStatisticsQuery);
                 }
 
-                if (IsGPUCounterSupported(*mDevice, MTLCommonCounterSetTimestamp,
-                                          {MTLCommonCounterTimestamp})) {
-                    bool enableTimestampQuery = true;
-
 #if defined(DAWN_PLATFORM_MACOS)
-                    // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
-                    // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
-                    // has been fixed on macOS 11.0. See crbug.com/dawn/545
-                    enableTimestampQuery &=
-                        !(gpu_info::IsAMD(GetPCIInfo().vendorId) && IsMacOSVersionAtLeast(11));
+                // Disable timestamp query on macOS 10.15 on AMD GPU because WriteTimestamp
+                // fails to call without any copy commands on MTLBlitCommandEncoder. This issue
+                // has been fixed on macOS 11.0. See crbug.com/dawn/545
+                isTimestampCounterSupported &=
+                    !(gpu_info::IsAMD(GetPCIInfo().vendorId) && IsMacOSVersionAtLeast(11));
 #endif
 
-                    if (enableTimestampQuery) {
-                        mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
-                    }
+                if (isTimestampCounterSupported) {
+                    mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
                 }
             }
 
