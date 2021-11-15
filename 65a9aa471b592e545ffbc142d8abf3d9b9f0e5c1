@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8845514_c0753684",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-15T19:20:31Z",
+      "side": 0,
+      "message": "Brandon, is there a reason we did this only for validation errors?\n\nI\u0027ve now updated GetFormattedMessage to print both the context and backtrace for non-validation errors, so that if we\u0027re looking at bug reports we can see both the context and the callstack.",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 120,
+        "endChar": 66
+      },
+      "revId": "65a9aa471b592e545ffbc142d8abf3d9b9f0e5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
