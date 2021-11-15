@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "080f43e0_0c0d5ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-11-15T06:51:40Z",
+      "side": 1,
+      "message": "Hi, since the deprecation patch is already landed in M97, which is branched, I think we can submit this patch and make it landed in M98. Thanks.",
+      "revId": "f00d90643f12cec3dfbe308df41d12ecfd78191c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
