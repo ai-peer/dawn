@@ -22,6 +22,30 @@
       },
       "revId": "65a9aa471b592e545ffbc142d8abf3d9b9f0e5c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4affb382_6fde9fdc",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-15T21:48:07Z",
+      "side": 0,
+      "message": "I think there was some previous logic in place on some other error macro that had filtered to only validation messages and I carried it over here as well. I don\u0027t think it problematic to extend it to all errors, though.",
+      "parentUuid": "d8845514_c0753684",
+      "range": {
+        "startLine": 118,
+        "startChar": 8,
+        "endLine": 120,
+        "endChar": 66
+      },
+      "revId": "65a9aa471b592e545ffbc142d8abf3d9b9f0e5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

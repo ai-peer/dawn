@@ -35,6 +35,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "64ef959b_369da1c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-15T21:48:07Z",
+      "side": 1,
+      "message": "One question about where the adapter errors surface, but otherwise LGTM!",
+      "revId": "defc05a496c8d5974b329b7d69f7b43755a068e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98133167_71aa7480",
+        "filename": "src/dawn_native/Adapter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-15T21:48:07Z",
+      "side": 1,
+      "message": "I don\u0027t believe these errors are something that a page\u0027s Javascript can intercept, but wanted to check and make sure. Don\u0027t want to leak this info in a parsable way to the page without going through the appropriate API calls (especially while the shape of those are in flux.) If these can only surface on the console, or don\u0027t surface to browser usage at all, then it\u0027s great!",
+      "revId": "defc05a496c8d5974b329b7d69f7b43755a068e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3aef699c_6a4c0094",
