@@ -23,7 +23,14 @@
 namespace dawn_native { namespace vulkan {
 
     namespace {
-        VkAttachmentLoadOp VulkanAttachmentLoadOp(wgpu::LoadOp op) {
+        VkAttachmentLoadOp VulkanAttachmentLoadOp(wgpu::LoadOp op,
+                                                  bool readOnlyAttachment = false) {
+            // Depth/stencil attachment can be readonly for one aspect or both aspects. If an
+            // aspect is readonly, its image layout will be set to READ_ONLY_OPTIMAL, which requires
+            // the loadOp of corresponding aspect(s) to be VK_ATTACHMENT_LOAD_OP_LOAD.
+            if (readOnlyAttachment) {
+                return VK_ATTACHMENT_LOAD_OP_LOAD;
+            }
             switch (op) {
                 case wgpu::LoadOp::Load:
                     return VK_ATTACHMENT_LOAD_OP_LOAD;
@@ -33,7 +40,17 @@ namespace dawn_native { namespace vulkan {
             UNREACHABLE();
         }
 
-        VkAttachmentStoreOp VulkanAttachmentStoreOp(wgpu::StoreOp op) {
+        VkAttachmentStoreOp VulkanAttachmentStoreOp(wgpu::StoreOp op,
+                                                    bool readOnlyAttachment = false) {
+            // Depth/stencil attachment can be readonly for one aspect or both aspects. If an
+            // aspect is readonly, its image layout will be set to READ_ONLY_OPTIMAL, which requires
+            // the storeOp of corresponding aspect to be VK_ATTACHMENT_STORE_OP_NONE.
+
+            // TODO(crbug.com/dawn/485): return STORE_OP_STORE_NONE_QCOM if the device has required
+            // extension.
+            // if (readOnlyAttachment) {
+            //     return VK_ATTACHMENT_STORE_OP_NONE_QCOM;
+            // }
             switch (op) {
                 case wgpu::StoreOp::Store:
                     return VK_ATTACHMENT_STORE_OP_STORE;
@@ -62,13 +79,15 @@ namespace dawn_native { namespace vulkan {
                                                wgpu::LoadOp depthLoadOpIn,
                                                wgpu::StoreOp depthStoreOpIn,
                                                wgpu::LoadOp stencilLoadOpIn,
-                                               wgpu::StoreOp stencilStoreOpIn) {
+                                               wgpu::StoreOp stencilStoreOpIn,
+                                               bool readOnly) {
         hasDepthStencil = true;
         depthStencilFormat = format;
         depthLoadOp = depthLoadOpIn;
         depthStoreOp = depthStoreOpIn;
         stencilLoadOp = stencilLoadOpIn;
         stencilStoreOp = stencilStoreOpIn;
+        readOnlyDepthStencil = readOnly;
     }
 
     void RenderPassCacheQuery::SetSampleCount(uint32_t sampleCount) {
@@ -144,17 +163,33 @@ namespace dawn_native { namespace vulkan {
             depthStencilAttachment = &depthStencilAttachmentRef;
 
             depthStencilAttachmentRef.attachment = attachmentCount;
-            depthStencilAttachmentRef.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+            depthStencilAttachmentRef.layout =
+                query.readOnlyDepthStencil ? VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL
+                                           : VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 
             attachmentDesc.flags = 0;
             attachmentDesc.format = VulkanImageFormat(mDevice, query.depthStencilFormat);
             attachmentDesc.samples = vkSampleCount;
-            attachmentDesc.loadOp = VulkanAttachmentLoadOp(query.depthLoadOp);
-            attachmentDesc.storeOp = VulkanAttachmentStoreOp(query.depthStoreOp);
-            attachmentDesc.stencilLoadOp = VulkanAttachmentLoadOp(query.stencilLoadOp);
-            attachmentDesc.stencilStoreOp = VulkanAttachmentStoreOp(query.stencilStoreOp);
-            attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-            attachmentDesc.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
+            // If either aspect is readonly, query.readOnlyDepthStencil will be set, and
+            // DEPTH_STENCIL_READ_ONLY_OPTIMAL image layout will be set for both aspects, even
+            // there is only one aspect in the format. And the READ_ONLY_OPTIMAL image layout for
+            // both aspects also requires loadOp / storeOp to be identical for both asepcts, which
+            // can be assured by the parameter query.readOnlyDepthStencil for VulkanAttachmentLoadOp
+            // and VulkanAttachmentStoreOp.
+            attachmentDesc.loadOp =
+                VulkanAttachmentLoadOp(query.depthLoadOp, query.readOnlyDepthStencil);
+            attachmentDesc.stencilLoadOp =
+                VulkanAttachmentLoadOp(query.stencilLoadOp, query.readOnlyDepthStencil);
+            attachmentDesc.storeOp =
+                VulkanAttachmentStoreOp(query.depthStoreOp, query.readOnlyDepthStencil);
+            attachmentDesc.stencilStoreOp =
+                VulkanAttachmentStoreOp(query.stencilStoreOp, query.readOnlyDepthStencil);
+
+            // There is only one subpass, so it is safe to set both initialLayout and finalLayout to
+            // the only subpass's layout.
+            attachmentDesc.initialLayout = depthStencilAttachmentRef.layout;
+            attachmentDesc.finalLayout = depthStencilAttachmentRef.layout;
 
             ++attachmentCount;
         }
@@ -235,7 +270,8 @@ namespace dawn_native { namespace vulkan {
 
         HashCombine(&hash, query.hasDepthStencil);
         if (query.hasDepthStencil) {
-            HashCombine(&hash, query.depthStencilFormat, query.depthLoadOp, query.stencilLoadOp);
+            HashCombine(&hash, query.depthStencilFormat, query.depthLoadOp, query.stencilLoadOp,
+                        query.readOnlyDepthStencil);
         }
 
         HashCombine(&hash, query.sampleCount);
@@ -270,7 +306,8 @@ namespace dawn_native { namespace vulkan {
 
         if (a.hasDepthStencil) {
             if ((a.depthStencilFormat != b.depthStencilFormat) ||
-                (a.depthLoadOp != b.depthLoadOp) || (a.stencilLoadOp != b.stencilLoadOp)) {
+                (a.depthLoadOp != b.depthLoadOp) || (a.stencilLoadOp != b.stencilLoadOp) ||
+                (a.readOnlyDepthStencil != b.readOnlyDepthStencil)) {
                 return false;
             }
         }
