@@ -83,6 +83,9 @@ namespace dawn_native { namespace vulkan {
                         VK_ACCESS_COLOR_ATTACHMENT_READ_BIT | VK_ACCESS_COLOR_ATTACHMENT_WRITE_BIT;
                 }
             }
+            if (usage & kReadOnlyRenderAttachment) {
+                flags |= VK_ACCESS_DEPTH_STENCIL_ATTACHMENT_READ_BIT;
+            }
             if (usage & kPresentTextureUsage) {
                 // The present usage is only used internally by the swapchain and is never used in
                 // combination with other usages.
@@ -136,6 +139,10 @@ namespace dawn_native { namespace vulkan {
                 } else {
                     flags |= VK_PIPELINE_STAGE_COLOR_ATTACHMENT_OUTPUT_BIT;
                 }
+            }
+            if (usage & kReadOnlyRenderAttachment) {
+                flags |= VK_PIPELINE_STAGE_EARLY_FRAGMENT_TESTS_BIT |
+                         VK_PIPELINE_STAGE_LATE_FRAGMENT_TESTS_BIT;
             }
             if (usage & kPresentTextureUsage) {
                 // The present usage is only used internally by the swapchain and is never used in
@@ -449,6 +456,9 @@ namespace dawn_native { namespace vulkan {
                 flags |= VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT;
             }
         }
+        if (usage & kReadOnlyRenderAttachment) {
+            flags |= VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
+        }
 
         return flags;
     }
@@ -462,10 +472,15 @@ namespace dawn_native { namespace vulkan {
         }
 
         if (!wgpu::HasZeroOrOneBits(usage)) {
-            // Sampled | ReadOnlyStorage is the only possible multi-bit usage, if more appear  we
-            // might need additional special-casing.
-            ASSERT(usage == wgpu::TextureUsage::TextureBinding);
-            return VK_IMAGE_LAYOUT_GENERAL;
+            // Sampled | kReadOnlyRenderAttachment is the only possible multi-bit usage, if more
+            // appear we might need additional special-casing.
+            ASSERT(usage == (wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment));
+
+            // Vulkan 1.1 and above have VK_IMAGE_LAYOUT_DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL
+            // and VK_IMAGE_LAYOUT_DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL, but Vulkan 1.0
+            // doesn't. Moreover, WebGPU requires both aspects to be readonly if the attachment's
+            // format does have both depth and stencil aspects.
+            return VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
         }
 
         // Usage has a single bit so we can switch on its value directly.
@@ -481,6 +496,16 @@ namespace dawn_native { namespace vulkan {
             case wgpu::TextureUsage::TextureBinding:
                 if (texture->GetInternalUsage() & wgpu::TextureUsage::StorageBinding) {
                     return VK_IMAGE_LAYOUT_GENERAL;
+                }
+                if (texture->GetFormat().HasDepthOrStencil()) {
+                    // If a depth/stencil texture is being bound as sampled texture and the texture
+                    // is used as readonly depth/stencil attachment, the layout in render pass will
+                    // be VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL. In that situation, the
+                    // binding's layout need to be set to the same. Otherwise, Vulkan validation
+                    // layer will report an error. If the depth/stencil sampled texture is not used
+                    // as readonly depth/stencil attachment, setting the binding's layout to
+                    // VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL still works.
+                    return VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
                 } else {
                     return VK_IMAGE_LAYOUT_SHADER_READ_ONLY_OPTIMAL;
                 }
@@ -505,6 +530,9 @@ namespace dawn_native { namespace vulkan {
                 } else {
                     return VK_IMAGE_LAYOUT_COLOR_ATTACHMENT_OPTIMAL;
                 }
+
+            case kReadOnlyRenderAttachment:
+                return VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
 
             case kPresentTextureUsage:
                 return VK_IMAGE_LAYOUT_PRESENT_SRC_KHR;
