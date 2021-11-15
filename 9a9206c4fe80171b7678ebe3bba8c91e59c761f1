@@ -16,6 +16,23 @@
       "message": "Refactored to add an optional value arg (presuming https://github.com/gpuweb/gpuweb/pull/2289 lands). ",
       "revId": "9a9206c4fe80171b7678ebe3bba8c91e59c761f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dce3c2ef_e6caa40f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T09:13:26Z",
+      "side": 1,
+      "message": "Still LGTM, assuming Mozilla doesn\u0027t object to the spec change.",
+      "revId": "9a9206c4fe80171b7678ebe3bba8c91e59c761f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
