@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b209b9f_ff715dd2",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-15T21:18:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38bd254d_5c3842f9",
+      "range": {
+        "startLine": 72,
+        "startChar": 14,
+        "endLine": 72,
+        "endChar": 62
+      },
+      "revId": "3cbfbb9adf84670c694e9ec87e5531b80a4ff140",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "60587a93_1d0ed659",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c460eeb1_9bf7f0d0",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-15T21:18:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "60587a93_1d0ed659",
+      "range": {
+        "startLine": 121,
+        "startChar": 26,
+        "endLine": 121,
+        "endChar": 52
+      },
+      "revId": "3cbfbb9adf84670c694e9ec87e5531b80a4ff140",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d964c6e_1f19cffa",
@@ -94,6 +142,30 @@
       "writtenOn": "2021-11-13T00:35:06Z",
       "side": 1,
       "message": "instead of this, we should probably just have separate lists kDepthStencilFormats, kDepthFormats, kStencilFormats and instantiate the tests separately on each.\n\nCan have\nclass ReadOnlyStencilAttachmentTests : public ReadOnlyDepthStencilAttachmentTests {};\n\nDAWN_INSTANTIATE_TEST_P(ReadOnlyStencilAttachmentTests,\n                        {D3D12Backend()},\n                        std::vector\u003cwgpu::TextureFormat\u003e(utils::kStencilFormats.begin(),\n                                                         utils::kStencilFormats.end()));",
+      "range": {
+        "startLine": 190,
+        "startChar": 8,
+        "endLine": 190,
+        "endChar": 51
+      },
+      "revId": "3cbfbb9adf84670c694e9ec87e5531b80a4ff140",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77842d12_b9d3d588",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-15T21:18:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d964c6e_1f19cffa",
       "range": {
         "startLine": 190,
         "startChar": 8,

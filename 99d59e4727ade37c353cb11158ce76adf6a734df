@@ -46,6 +46,30 @@
       },
       "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6b800cf_046c29cc",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-15T21:18:54Z",
+      "side": 1,
+      "message": "Ack. Thanks for the explanation that why there is no textureSample for stencil. \n\nNow that you think DepthAndStencil still make sense, I will add it in the next CL soon. It will be 3 views upon the same texture in one single pipeline/pass: depthView in pipeline, stenciView in pipeline, and depthStencilView for attachment. But I guess it should work.",
+      "parentUuid": "fff6b92b_c581bb3d",
+      "range": {
+        "startLine": 78,
+        "startChar": 18,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
