@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3462ae0_8da68861",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T09:02:14Z",
+      "side": 1,
+      "message": "LGTM. The logic is much more clear now!",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e4dfb46_2a76fd8e",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T09:02:14Z",
+      "side": 1,
+      "message": "IMHO this is frontend specific. We could have ComputeEncoder check IsValidationEnabled || device-\u003eShouldDuplicateNumWorkgroupsForDispatchIndirect directly. This would make the logic more local.",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "012b6873_e6d6192c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T09:02:14Z",
+      "side": 1,
+      "message": "Austin, Jiawei, WDYT in the future of having these things be returned and stored by value in the device? Like a BackendMetadata struct that you can query from the device? This way in the frontend we know that values will never change.\n\nIf we want to do that, then in this CL we should at most add a TODO for it. I don\u0027t think it\u0027s urgent at all.",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ad7acbb_15098629",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-15T09:02:14Z",
+      "side": 1,
+      "message": "nit: I think we can compute this from ShouldDuplicateNumWorkgroupsForDispatchIndirect so we could remove this function.",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
