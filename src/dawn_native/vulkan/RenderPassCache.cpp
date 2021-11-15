@@ -62,13 +62,15 @@ namespace dawn_native { namespace vulkan {
                                                wgpu::LoadOp depthLoadOpIn,
                                                wgpu::StoreOp depthStoreOpIn,
                                                wgpu::LoadOp stencilLoadOpIn,
-                                               wgpu::StoreOp stencilStoreOpIn) {
+                                               wgpu::StoreOp stencilStoreOpIn,
+                                               bool readOnlyDepthStencilIn) {
         hasDepthStencil = true;
         depthStencilFormat = format;
         depthLoadOp = depthLoadOpIn;
         depthStoreOp = depthStoreOpIn;
         stencilLoadOp = stencilLoadOpIn;
         stencilStoreOp = stencilStoreOpIn;
+        readOnlyDepthStencil = readOnlyDepthStencilIn;
     }
 
     void RenderPassCacheQuery::SetSampleCount(uint32_t sampleCount) {
@@ -144,17 +146,43 @@ namespace dawn_native { namespace vulkan {
             depthStencilAttachment = &depthStencilAttachmentRef;
 
             depthStencilAttachmentRef.attachment = attachmentCount;
-            depthStencilAttachmentRef.layout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+            depthStencilAttachmentRef.layout =
+                query.readOnlyDepthStencil ? VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL
+                                           : VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
 
             attachmentDesc.flags = 0;
             attachmentDesc.format = VulkanImageFormat(mDevice, query.depthStencilFormat);
             attachmentDesc.samples = vkSampleCount;
-            attachmentDesc.loadOp = VulkanAttachmentLoadOp(query.depthLoadOp);
-            attachmentDesc.storeOp = VulkanAttachmentStoreOp(query.depthStoreOp);
-            attachmentDesc.stencilLoadOp = VulkanAttachmentLoadOp(query.stencilLoadOp);
-            attachmentDesc.stencilStoreOp = VulkanAttachmentStoreOp(query.stencilStoreOp);
-            attachmentDesc.initialLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
-            attachmentDesc.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+
+            // WebGPU cannot support depth read-only but stencil writeable or vice versa. So if
+            // either aspect is readonly, query.readOnlyDepthStencil will be set to true, and we can
+            // blindedly set both depth and stencil's loadOp to VK_ATTACHMENT_LOAD_OP_LOAD. Besides,
+            // if only one aspect is being set to LOAD and the other is not, validation layer still
+            // reports an error, even though the format doesn't have that aspect. Because the
+            // attachment's layout is set to DEPTH_STENCIL_READ_ONLY_OPTIMAL. A writeable loadOp
+            // like CLEAR for any aspect will lead to incompatibility between layout and loadOp by
+            // Vulkan validation layer even the format doesn't have that aspect.
+            attachmentDesc.loadOp = query.readOnlyDepthStencil
+                                        ? VK_ATTACHMENT_LOAD_OP_LOAD
+                                        : VulkanAttachmentLoadOp(query.depthLoadOp);
+            attachmentDesc.stencilLoadOp = query.readOnlyDepthStencil
+                                               ? VK_ATTACHMENT_LOAD_OP_LOAD
+                                               : VulkanAttachmentLoadOp(query.stencilLoadOp);
+
+            // If the render pass enables read-only depth/stencil attachment, depth and stencil's
+            // storeOp need to be set to VK_ATTACHMENT_STORE_OP_NONE. Otherwise, the validation
+            // layer will report incompatibility between storeOp and layout.
+            attachmentDesc.storeOp = query.readOnlyDepthStencil
+                                         ? VK_ATTACHMENT_STORE_OP_NONE_QCOM
+                                         : VulkanAttachmentStoreOp(query.depthStoreOp);
+            attachmentDesc.stencilStoreOp = query.readOnlyDepthStencil
+                                                ? VK_ATTACHMENT_STORE_OP_NONE_QCOM
+                                                : VulkanAttachmentStoreOp(query.stencilStoreOp);
+
+            // There is only one subpass, so it is safe to set both initialLayout and finalLayout to
+            // the only subpass's layout.
+            attachmentDesc.initialLayout = depthStencilAttachmentRef.layout;
+            attachmentDesc.finalLayout = depthStencilAttachmentRef.layout;
 
             ++attachmentCount;
         }
