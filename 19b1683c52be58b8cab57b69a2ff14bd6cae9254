@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dc24593_1fc4e34c",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "It can\u0027t be in ProgrammableEncoder because we only need to ensure that the pass exited if it is a pass (i.e. not renderbundle). But moved into the destroy.",
+      "parentUuid": "7e95887a_83efd8dd",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f74e0794_ebadec27",
@@ -65,6 +83,30 @@
       "writtenOn": "2021-11-11T18:39:34Z",
       "side": 1,
       "message": "even though it\u0027s tagged as unlikely, CheckCurrentEncoder will still need to check both conditions of the if and else-if in the happy case where there are no errors and the encoder is not destroyed.\n\nCould we put this check inside the if block above, and on Destroy() set both mDestroyed to true and mCurrentEncoder to nullptr?",
+      "range": {
+        "startLine": 91,
+        "startChar": 14,
+        "endLine": 94,
+        "endChar": 13
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "953c079e_c7a88263",
+        "filename": "src/dawn_native/EncodingContext.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f74e0794_ebadec27",
       "range": {
         "startLine": 91,
         "startChar": 14,
@@ -98,6 +140,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85382dd9_2680db73",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9edefd6a_9cfe85ac",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "500f8283_f2e3a3db",
+        "filename": "src/dawn_native/RenderBundle.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9edefd6a_9cfe85ac",
+      "range": {
+        "startLine": 45,
+        "startChar": 11,
+        "endLine": 45,
+        "endChar": 18
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "583bb204_838ae871",
@@ -111,6 +201,30 @@
       "writtenOn": "2021-11-15T08:35:33Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 56,
+        "startChar": 11,
+        "endLine": 56,
+        "endChar": 18
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16315dc2_806c88a1",
+        "filename": "src/dawn_native/RenderEncoderBase.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "583bb204_838ae871",
       "range": {
         "startLine": 56,
         "startChar": 11,
@@ -144,6 +258,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5601415c_a2fdb8b0",
+        "filename": "src/dawn_native/RenderPipeline.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e6954e6_38093fee",
+      "range": {
+        "startLine": 693,
+        "startChar": 11,
+        "endLine": 693,
+        "endChar": 18
+      },
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b5e42ff2_4998aed2",
@@ -161,6 +299,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00260916_1f42981e",
+        "filename": "src/tests/unittests/validation/CommandBufferValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e42ff2_4998aed2",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8172174_5f4760a2",
@@ -174,6 +330,24 @@
       "writtenOn": "2021-11-11T18:39:34Z",
       "side": 1,
       "message": "\"No argument case\" ?\n\nthe addition of the matcher is pretty nice! Hopefully if error messages change it\u0027s not too much of a burden to find+replace.",
+      "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d72e24c2_d0aca886",
+        "filename": "src/tests/unittests/validation/ValidationTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T00:45:54Z",
+      "side": 1,
+      "message": "I think 1 argument makes more sense here, (the argument being the call that we are asserting the device error on), and yea the matcher will give us more control of what we are testing.",
+      "parentUuid": "d8172174_5f4760a2",
       "revId": "19b1683c52be58b8cab57b69a2ff14bd6cae9254",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
