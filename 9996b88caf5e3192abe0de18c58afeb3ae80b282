@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c50bed_d9bc0bca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-16T01:52:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17a1dd0_298fbc5d",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-16T01:52:58Z",
+      "side": 1,
+      "message": "ProgrammablePassEncoder has IsValidationEnabled() which I think we should call instead.\n\nIt will be useful in the future if Dawn wants to make entire internal command encoders that have no validation.",
+      "range": {
+        "startLine": 246,
+        "startChar": 38,
+        "endLine": 246,
+        "endChar": 96
+      },
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e4dfb46_2a76fd8e",
@@ -48,6 +88,24 @@
       "writtenOn": "2021-11-15T09:02:14Z",
       "side": 1,
       "message": "Austin, Jiawei, WDYT in the future of having these things be returned and stored by value in the device? Like a BackendMetadata struct that you can query from the device? This way in the frontend we know that values will never change.\n\nIf we want to do that, then in this CL we should at most add a TODO for it. I don\u0027t think it\u0027s urgent at all.",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d584c743_583e7932",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-16T01:52:58Z",
+      "side": 1,
+      "message": "SGTM",
+      "parentUuid": "012b6873_e6d6192c",
       "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
