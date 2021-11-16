@@ -74,6 +74,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d5afdd92_9ed49086",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-16T21:20:11Z",
+      "side": 1,
+      "message": "Added update to specs in https://github.com/gpuweb/gpuweb/pull/2312.",
+      "parentUuid": "db53f6a1_89cb3c9c",
+      "range": {
+        "startLine": 9,
+        "startChar": 2,
+        "endLine": 9,
+        "endChar": 128
+      },
+      "revId": "2792e109ae23cc48f667a6bb726974b5e60c80c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c8362235_1f203ddb",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
