@@ -16,6 +16,57 @@
       "message": "PTAL!",
       "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc69484c_31ac21b6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-16T16:23:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0643a9_83b33b68",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-16T16:23:46Z",
+      "side": 1,
+      "message": "FYI: https://github.com/gpuweb/gpuweb/pull/2289 hasn\u0027t landed yet, so this arg isn\u0027t technically part of the spec yet. (Otherwise I would have already landed https://dawn-review.googlesource.com/c/dawn/+/68642)",
+      "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "753460ff_bbb4d91e",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-16T16:23:46Z",
+      "side": 1,
+      "message": "nit, though probably not something to solve here: Why are RenderPassTimestampLocation and ComputePassTimestampLocation two separate enums?",
+      "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
