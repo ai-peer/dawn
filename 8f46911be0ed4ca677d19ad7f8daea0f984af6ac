@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "185318f2_be934c24",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-16T18:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2efd7775_0eba2c8d",
+      "range": {
+        "startLine": 72,
+        "startChar": 21,
+        "endLine": 73,
+        "endChar": 34
+      },
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59afa26d_130a5fa2",
@@ -37,6 +61,30 @@
       "writtenOn": "2021-11-15T08:26:01Z",
       "side": 1,
       "message": "nit: I think {} is sufficient.",
+      "range": {
+        "startLine": 126,
+        "startChar": 36,
+        "endLine": 126,
+        "endChar": 67
+      },
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "750ae6d3_48214f2f",
+        "filename": "src/dawn_native/Pipeline.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-16T18:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59afa26d_130a5fa2",
       "range": {
         "startLine": 126,
         "startChar": 36,
@@ -64,6 +112,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "00cfe0ee_a3004d1b",
+        "filename": "src/dawn_native/Pipeline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-16T18:25:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "987646b0_76a95a53",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07579bc3_a29aa74f",
@@ -77,6 +143,24 @@
       "writtenOn": "2021-11-15T08:26:01Z",
       "side": 1,
       "message": "nit: Instead of the templates used everywhere in this file, I think we could use the conversion function in WindowsUtils.h\n\nShaderCompilationRequest could take the list of constants, build the vector\u003cstd::string\u003e used to make the cache key, then have a method that returns a std::vector\u003cwstring\u003e for the list of defines, something like that.\n\nOr the inverse actually, since it will be less code to do the conversion from wstring to string in the cache key generation.",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "165eea38_f2e25381",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-16T18:25:56Z",
+      "side": 1,
+      "message": "Ah I\u0027m aware of the WCharToUTF8 and UTF8ToWStr. Thinking it would cost extra time if doing the string conversion. Tried passing in just a vector of DefineStr to ValueStr but find it awakard to constructor another wstring vector for dxc path.\n(another reason not fix is there is just too much to change for a nit...-_-)",
+      "parentUuid": "07579bc3_a29aa74f",
       "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +182,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "832371f2_616dcb6f",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-16T18:25:56Z",
+      "side": 1,
+      "message": "Only store pipelineConstantEntries and shaderEntryPointConstants to build defines and cachekeys",
+      "parentUuid": "f39bad93_013d6bd1",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf628906_036066bf",
@@ -111,6 +213,24 @@
       "writtenOn": "2021-11-15T08:26:01Z",
       "side": 1,
       "message": "We generate HLSL for each individual pipelines, so instead of this, can we use tint::transform::SingleEntryPoint to remove all unused pipeline overridable constants?\n\nIt would also remove the need for GetAllEntryPoints();",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76053d7d_ff022543",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 452,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-16T18:25:56Z",
+      "side": 1,
+      "message": "Seems that these constants ifdef are not removed by SingleEntryPoint transform. Adding that in Tint WIP: https://dawn-review.googlesource.com/c/tint/+/69500. This CL will depend on that",
+      "parentUuid": "cf628906_036066bf",
       "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
