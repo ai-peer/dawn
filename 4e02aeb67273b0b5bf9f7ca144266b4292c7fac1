@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4485ee8_4b0b3630",
+        "filename": "src/common/SystemUtils.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-16T17:53:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f7e6ac_831bd9cf",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 23,
+        "endChar": 73
+      },
+      "revId": "4e02aeb67273b0b5bf9f7ca144266b4292c7fac1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4016cd2b_b6449082",
@@ -88,6 +112,30 @@
       "writtenOn": "2021-11-16T17:21:03Z",
       "side": 1,
       "message": "Up to you, but I think we could also just use some built-in matchers.\n\nExample:\n```\nusing ::testing::_;\nusing ::testing::Pair;\n\nASSERT_THAT(GetEnvironmentVar(\"NonexistentEnvironmentVar\"), \n            Pair(\"NewEnvironmentVarValue\", _));\nASSERT_THAT(GetEnvironmentVar(\"NonexistentEnvironmentVar\"), \n            Pair(\"\", true));\n```\nAlso, I think that we should change some of the ASSERT_THAT calls on the Get* to EXPECT_THAT calls instead. I think the standard is to use ASSERT if failure means that the rest of the test is corrupted, while EXPECT is the actual thing to test.",
+      "range": {
+        "startLine": 21,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 15
+      },
+      "revId": "4e02aeb67273b0b5bf9f7ca144266b4292c7fac1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec9e663_abedad6f",
+        "filename": "src/tests/unittests/SystemUtilsTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-16T17:53:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4016cd2b_b6449082",
       "range": {
         "startLine": 21,
         "startChar": 0,
