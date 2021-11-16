@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cc3f5c3_90d8e79f",
+        "filename": "src/dawn_native/ComputePassEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-16T03:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c17a1dd0_298fbc5d",
+      "range": {
+        "startLine": 246,
+        "startChar": 38,
+        "endLine": 246,
+        "endChar": 96
+      },
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e4dfb46_2a76fd8e",
@@ -71,6 +95,24 @@
       "writtenOn": "2021-11-15T09:02:14Z",
       "side": 1,
       "message": "IMHO this is frontend specific. We could have ComputeEncoder check IsValidationEnabled || device-\u003eShouldDuplicateNumWorkgroupsForDispatchIndirect directly. This would make the logic more local.",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e308a34_20e010a6",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 679,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-16T03:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e4dfb46_2a76fd8e",
       "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -110,6 +152,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b007983_c60fdf86",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-16T03:16:16Z",
+      "side": 1,
+      "message": "SGTM and I\u0027ve added the TODO for it.",
+      "parentUuid": "d584c743_583e7932",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ad7acbb_15098629",
@@ -123,6 +183,24 @@
       "writtenOn": "2021-11-15T09:02:14Z",
       "side": 1,
       "message": "nit: I think we can compute this from ShouldDuplicateNumWorkgroupsForDispatchIndirect so we could remove this function.",
+      "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dbeada1_f492e106",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-16T03:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ad7acbb_15098629",
       "revId": "9996b88caf5e3192abe0de18c58afeb3ae80b282",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
