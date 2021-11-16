@@ -70,6 +70,30 @@
       },
       "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3874564_a9f0fc32",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-16T08:16:01Z",
+      "side": 1,
+      "message": "What I meant is that it makes sense to add a Dawn end2end test for this only if there\u0027s special handling in the backends (more than switch cases or combining bitmasks). Otherwise we can just add the more comprehensive tests in the CTS.",
+      "parentUuid": "d6b800cf_046c29cc",
+      "range": {
+        "startLine": 78,
+        "startChar": 18,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
