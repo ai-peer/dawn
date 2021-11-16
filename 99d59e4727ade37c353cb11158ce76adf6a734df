@@ -94,6 +94,30 @@
       },
       "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e96a259a_86f433ca",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-16T18:38:24Z",
+      "side": 1,
+      "message": "Sorry for misunderstanding. There is no special handling on D3D12. I will keep an eye on other backends. But I guess it is very likely that other backends have no special handling, either.",
+      "parentUuid": "a3874564_a9f0fc32",
+      "range": {
+        "startLine": 78,
+        "startChar": 18,
+        "endLine": 78,
+        "endChar": 29
+      },
+      "revId": "99d59e4727ade37c353cb11158ce76adf6a734df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
