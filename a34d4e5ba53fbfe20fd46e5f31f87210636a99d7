@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f924f5c_cd4ddd79",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 530,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-16T16:34:30Z",
+      "side": 1,
+      "message": "I don\u0027t mind, just was making sure you were aware!",
+      "parentUuid": "0180d584_f2eae58a",
+      "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "753460ff_bbb4d91e",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "Myles made the two separate in the WebGPU spec because the idea is that the render pass on can be extended with \"vertex end\" \"fagment start\" and stuff like that.",
       "parentUuid": "753460ff_bbb4d91e",
+      "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b7371a1_d224dbf2",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 1807,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-16T16:34:30Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "dfc02efb_938ed76a",
       "revId": "a34d4e5ba53fbfe20fd46e5f31f87210636a99d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
