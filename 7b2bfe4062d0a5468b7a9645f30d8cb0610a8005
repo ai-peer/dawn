@@ -33,6 +33,41 @@
       "message": "can check DAWN_PLATFORM_32_BIT as well since this is only x86\n https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/common/Platform.h;l\u003d76?q\u003dPlatform.h%20f:dawn\n\nit\u0027s kinda weird this is only x86 though - I\u0027m not sure what\u0027s wrong. Maybe we should just revert https://dawn-review.googlesource.com/c/dawn/+/68843 ?",
       "revId": "7b2bfe4062d0a5468b7a9645f30d8cb0610a8005",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11442070_e34e24a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-17T19:30:19Z",
+      "side": 1,
+      "message": "basically, we shou",
+      "revId": "7b2bfe4062d0a5468b7a9645f30d8cb0610a8005",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eecdf81_8f3d691d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-17T19:30:19Z",
+      "side": 1,
+      "message": "we should revert if we think we have somehow catastrophically broken indirect dispatches - so might need to look into what the failure mode exactly is and what changed",
+      "parentUuid": "5aa364af_10e647f6",
+      "revId": "7b2bfe4062d0a5468b7a9645f30d8cb0610a8005",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
