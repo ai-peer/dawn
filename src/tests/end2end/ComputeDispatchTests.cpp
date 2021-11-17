@@ -214,6 +214,9 @@ TEST_P(ComputeDispatchTests, DirectNoop) {
 
 // Test basic indirect
 TEST_P(ComputeDispatchTests, IndirectBasic) {
+    // TODO(crbug.com/dawn/1196): Fails on Quadro P400
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia());
+
     IndirectTest({2, 3, 4}, 0);
 }
 
@@ -239,6 +242,9 @@ TEST_P(ComputeDispatchTests, IndirectNoop) {
 
 // Test indirect with buffer offset
 TEST_P(ComputeDispatchTests, IndirectOffset) {
+    // TODO(crbug.com/dawn/1196): Fails on Quadro P400
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia());
+
     IndirectTest({0, 0, 0, 2, 3, 4}, 3 * sizeof(uint32_t));
 }
 
@@ -251,6 +257,10 @@ TEST_P(ComputeDispatchTests, IndirectOffsetWithoutNumWorkgroups) {
 TEST_P(ComputeDispatchTests, MaxWorkgroups) {
     // TODO(crbug.com/dawn/1165): Fails with WARP
     DAWN_SUPPRESS_TEST_IF(IsWARP());
+
+    // TODO(crbug.com/dawn/1196): Fails on Quadro P400
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsNvidia());
+
     uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
 
     // Test that the maximum works in each dimension.
