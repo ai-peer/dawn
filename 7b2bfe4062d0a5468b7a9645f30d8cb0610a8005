@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "208ca89a_e3564d7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-17T19:05:14Z",
+      "side": 1,
+      "message": "I would prefer making this suppression a little tighter and targeting just the known failing card, but I don\u0027t think we have the ability to do that in Dawn?",
+      "revId": "7b2bfe4062d0a5468b7a9645f30d8cb0610a8005",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
