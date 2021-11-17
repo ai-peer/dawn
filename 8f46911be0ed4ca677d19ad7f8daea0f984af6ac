@@ -132,6 +132,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d6eaff16_edf6b7d5",
+        "filename": "src/dawn_native/Pipeline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T18:06:59Z",
+      "side": 1,
+      "message": "u-u-unit: And now the comment is not next to where we use std::map, can it be next to the type alias?",
+      "parentUuid": "00cfe0ee_a3004d1b",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07579bc3_a29aa74f",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 13
@@ -161,6 +179,24 @@
       "side": 1,
       "message": "Ah I\u0027m aware of the WCharToUTF8 and UTF8ToWStr. Thinking it would cost extra time if doing the string conversion. Tried passing in just a vector of DefineStr to ValueStr but find it awakard to constructor another wstring vector for dxc path.\n(another reason not fix is there is just too much to change for a nit...-_-)",
       "parentUuid": "07579bc3_a29aa74f",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17662b9a_63f73ded",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T18:06:59Z",
+      "side": 1,
+      "message": "Yeah that was a big nit. But if we use these utility functions (and really the copy shouldn\u0027t matter because this is very cold code), then everything in the anonymous namespace just becomes something like:\n\n    std::string GetHLSLValueString(EntryPointMetadata::OverridableConstant::Type dawnType,\n                                  const OverridableConstantScalar* entry,\n                                  double value \u003d 0) {\n        switch (dawnType) {\n            case EntryPointMetadata::OverridableConstant::Type::Boolean:\n                return std::to_string(entry ? entry-\u003eb : static_cast\u003cint32_t\u003e(value));\n            case EntryPointMetadata::OverridableConstant::Type::Float32:\n                return // precision stuff. Like there\u0027s an ostringstream here anyway.\n            case EntryPointMetadata::OverridableConstant::Type::Int32:\n                return std::to_string(entry ? entry-\u003ei32 : static_cast\u003cint32_t\u003e(value));\n            case EntryPointMetadata::OverridableConstant::Type::Uint32:\n                return std::to_string(entry ? entry-\u003eu32 : static_cast\u003cuint32_t\u003e(value)) + \"u\u0027;\n            default:\n                UNREACHABLE();\n        }\n    }",
+      "parentUuid": "165eea38_f2e25381",
       "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
