@@ -68,6 +68,24 @@
       "parentUuid": "5aa364af_10e647f6",
       "revId": "7b2bfe4062d0a5468b7a9645f30d8cb0610a8005",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2b87c08_61086a82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-17T19:36:20Z",
+      "side": 1,
+      "message": "I\u0027m inclined to think that it\u0027s not completely broken? The dawn-win10-x64-deps-rel seems to be passing the same tests with an Intel GPU, and my PC runs the tests fine with a consumer NVIDIA GPU.",
+      "parentUuid": "1eecdf81_8f3d691d",
+      "revId": "7b2bfe4062d0a5468b7a9645f30d8cb0610a8005",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
