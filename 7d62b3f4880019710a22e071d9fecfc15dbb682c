@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95eb9445_08340fc9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-17T02:34:57Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, this CL has been rebased. PTAL, thanks!",
+      "revId": "7d62b3f4880019710a22e071d9fecfc15dbb682c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
