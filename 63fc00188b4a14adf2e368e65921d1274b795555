@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74546262_a018cd9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "LGTM overall",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "363075f2_bdeea9ae",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need these checks because Format.cpp already has logic to disable these formats if the feature is not present. (GetInternalFormat below will produce a validation error)",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38556c8e_b9b3708a",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "We shouldn\u0027t advertise the feature as enabled if it\u0027s not implemented in TextureD3D12.\n\nDitto in all the other backends.",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "714d167c_f9d044f8",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "nit: this needs to be guarded in a DAWN_PLATFORM_MACOS because the * at the end means ok for all the other OSes (and iOS doesn\u0027t support the format). Otherwise compilation will fail on iOS.",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63cf5109_566ee3d5",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "u-nit: this method could be in an anonymous namespace and take the adapter as a const argument. It doesn\u0027t need to be part of the public API of vulkan::Adapter since it is just an internal helper.",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0598281_e68eef8e",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72bd8711_ef5757e7",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "Maybe we could have a helper in TextureFormatUtils that\u0027s IsFormatSupported(device, format) that asks the device for the extension if needed. Then here we\u0027d do DAWN_TEST_UNSUPPORTED_IF(!IsFormatSupported(device, GeTParam().mTextureFormat))",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72041d8e_bc41c7d5",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-17T11:07:38Z",
+      "side": 1,
+      "message": "We must be missing some: Format.cpp knows 96 formats. To you know off-hand which ones are missing? There\u0027s the multiplanar one but I don\u0027t know which other.",
+      "range": {
+        "startLine": 25,
+        "startChar": 53,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
