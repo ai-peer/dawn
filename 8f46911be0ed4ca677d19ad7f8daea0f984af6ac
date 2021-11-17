@@ -148,6 +148,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0252e1b_61470994",
+        "filename": "src/dawn_native/Pipeline.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-17T23:52:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6eaff16_edf6b7d5",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07579bc3_a29aa74f",
