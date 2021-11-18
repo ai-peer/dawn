@@ -17,9 +17,8 @@
 
 #include "dawn_native/BackendConnection.h"
 
-#include "common/DynamicLib.h"
-#include "dawn_native/vulkan/VulkanFunctions.h"
-#include "dawn_native/vulkan/VulkanInfo.h"
+#include "common/ityp_array.h"
+#include "dawn_native/vulkan/VulkanInstance.h"
 
 namespace dawn_native { namespace vulkan {
 
@@ -28,28 +27,12 @@ namespace dawn_native { namespace vulkan {
         Backend(InstanceBase* instance);
         ~Backend() override;
 
-        const VulkanFunctions& GetFunctions() const;
-        VkInstance GetVkInstance() const;
-        const VulkanGlobalInfo& GetGlobalInfo() const;
-
-        MaybeError Initialize(bool useSwiftshader);
+        MaybeError Initialize();
 
         std::vector<std::unique_ptr<AdapterBase>> DiscoverDefaultAdapters() override;
 
       private:
-        MaybeError LoadVulkan(bool useSwiftshader);
-        ResultOrError<VulkanGlobalKnobs> CreateInstance();
-
-        MaybeError RegisterDebugUtils();
-
-        DynamicLib mVulkanLib;
-        VulkanGlobalInfo mGlobalInfo = {};
-        VkInstance mInstance = VK_NULL_HANDLE;
-        VulkanFunctions mFunctions;
-
-        VkDebugUtilsMessengerEXT mDebugUtilsMessenger = VK_NULL_HANDLE;
-
-        std::vector<VkPhysicalDevice> mPhysicalDevices;
+        ityp::array<ICD, Ref<VulkanInstance>, 2> mVulkanInstances = {};
     };
 
 }}  // namespace dawn_native::vulkan
