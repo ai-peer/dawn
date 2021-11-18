@@ -219,6 +219,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88154deb_12b44654",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-18T01:33:59Z",
+      "side": 1,
+      "message": "I think I agree with Corentin that having less code here and using a second pass to convert the vector of strings is preferable since shader compilation is already expensive enough. Won\u0027t block this though so still LGTM - we could do this as a follow-up.",
+      "parentUuid": "17662b9a_63f73ded",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f39bad93_013d6bd1",
