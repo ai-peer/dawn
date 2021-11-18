@@ -639,14 +639,25 @@ def as_wireType(typ):
 
 
 def c_methods(params, typ):
-    return typ.methods + [
-        x for x in [
-            Method(Name('reference'), params['types']['void'], [],
-                   {'tags': ['dawn', 'emscripten']}),
-            Method(Name('release'), params['types']['void'], [],
-                   {'tags': ['dawn', 'emscripten']}),
-        ] if item_is_enabled(params['enabled_tags'], x.json_data)
+    ref_release_tags = ['dawn', 'emscripten']
+    extra_methods = []
+
+    if typ.name.concatcase().endswith('encoder'):
+        extra_methods += [
+            Method(Name('delete'), params['types']['void'], [],
+                {'tags': ['upstream']}),
+        ]
+    else:
+        ref_release_tags += ['upstream']
+
+    extra_methods += [
+        Method(Name('reference'), params['types']['void'], [],
+            {'tags': ref_release_tags}),
+        Method(Name('release'), params['types']['void'], [],
+            {'tags': ref_release_tags}),
     ]
+
+    return typ.methods + [x for x in extra_methods if item_is_enabled(params['enabled_tags'], x.json_data)]
 
 
 def get_c_methods_sorted_by_name(api_params):
