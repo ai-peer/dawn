@@ -237,6 +237,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47f78dc9_3863100e",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-18T17:46:00Z",
+      "side": 1,
+      "message": "Fixing in a follow-up CL sounds good to me. (One more CL, perf-orinted programming, yeah...)",
+      "parentUuid": "88154deb_12b44654",
+      "revId": "8f46911be0ed4ca677d19ad7f8daea0f984af6ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f39bad93_013d6bd1",
