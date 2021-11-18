@@ -466,8 +466,8 @@ namespace dawn_native {
 
     }  // namespace
 
-    CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor*)
-        : ApiObjectBase(device, kLabelNotImplemented), mEncodingContext(device, this) {
+    CommandEncoder::CommandEncoder(DeviceBase* device, const CommandEncoderDescriptor* descriptor)
+        : ApiObjectBase(device, descriptor->label), mEncodingContext(device, this) {
         TrackInDevice();
     }
 
@@ -522,8 +522,14 @@ namespace dawn_native {
             "encoding %s.BeginComputePass(%s).", this, descriptor);
 
         if (success) {
-            ComputePassEncoder* passEncoder =
-                new ComputePassEncoder(device, this, &mEncodingContext);
+            ComputePassEncoder* passEncoder;
+            if (descriptor == nullptr) {
+                const ComputePassDescriptor defaultDescriptor = {};
+                passEncoder =
+                    new ComputePassEncoder(device, &defaultDescriptor, this, &mEncodingContext);
+            } else {
+                passEncoder = new ComputePassEncoder(device, descriptor, this, &mEncodingContext);
+            }
             mEncodingContext.EnterPass(passEncoder);
             return passEncoder;
         }
@@ -627,10 +633,10 @@ namespace dawn_native {
             "encoding %s.BeginRenderPass(%s).", this, descriptor);
 
         if (success) {
-            RenderPassEncoder* passEncoder =
-                new RenderPassEncoder(device, this, &mEncodingContext, std::move(usageTracker),
-                                      std::move(attachmentState), descriptor->occlusionQuerySet,
-                                      width, height, depthReadOnly, stencilReadOnly);
+            RenderPassEncoder* passEncoder = new RenderPassEncoder(
+                device, descriptor, this, &mEncodingContext, std::move(usageTracker),
+                std::move(attachmentState), descriptor->occlusionQuerySet, width, height,
+                depthReadOnly, stencilReadOnly);
             mEncodingContext.EnterPass(passEncoder);
             return passEncoder;
         }
@@ -1041,6 +1047,12 @@ namespace dawn_native {
         if (device->IsValidationEnabled()) {
             DAWN_TRY(ValidateFinish());
         }
+
+        if (descriptor == nullptr) {
+            const CommandBufferDescriptor defaultDescriptor = {};
+            return device->CreateCommandBuffer(this, &defaultDescriptor);
+        }
+
         return device->CreateCommandBuffer(this, descriptor);
     }
 
