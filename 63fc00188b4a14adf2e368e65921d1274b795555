@@ -122,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02e1a501_d6a27a4f",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:40:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "2d75351f_8cca8fb4",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c4c223e_ec3ec7f5",
@@ -135,6 +153,24 @@
       "writtenOn": "2021-11-18T10:33:06Z",
       "side": 1,
       "message": "[1]",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "434ee789_23cc58a3",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:40:47Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8c4c223e_ec3ec7f5",
       "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -210,6 +246,30 @@
       "side": 1,
       "message": "The multiplanar one is R8BG8Biplanar420Unorm, other two missing formats are  Stencil8 and Depth16Unorm. The Stencil8 format is not implemented, but the Depth16Unorm is supported but not added here.",
       "parentUuid": "72041d8e_bc41c7d5",
+      "range": {
+        "startLine": 25,
+        "startChar": 53,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c50570_8e334303",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:40:47Z",
+      "side": 1,
+      "message": "Thanks, can you add TODOs referencing the depth16float and stencil8 Dawn bugs to add them to the list?",
+      "parentUuid": "24668c6e_a079b12d",
       "range": {
         "startLine": 25,
         "startChar": 53,
