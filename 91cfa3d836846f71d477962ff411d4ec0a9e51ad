@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "91cfa3d836846f71d477962ff411d4ec0a9e51ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cededc0_54927b87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:52:23Z",
+      "side": 1,
+      "message": "LGTM but there\u0027s a compile error.",
+      "revId": "91cfa3d836846f71d477962ff411d4ec0a9e51ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2523f3_c8a76809",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:52:23Z",
+      "side": 1,
+      "message": "nit: Maybe we could have a small helper PipelineBase::GetLabelForTrace?",
+      "revId": "91cfa3d836846f71d477962ff411d4ec0a9e51ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
