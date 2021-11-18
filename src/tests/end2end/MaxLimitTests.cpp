@@ -102,9 +102,6 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
     // The uniform buffer layout used in this test is not supported on ES.
     DAWN_TEST_UNSUPPORTED_IF(IsOpenGLES());
 
-    // TODO(crbug.com/dawn/1172)
-    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
-
     for (wgpu::BufferUsage usage : {wgpu::BufferUsage::Storage, wgpu::BufferUsage::Uniform}) {
         uint64_t maxBufferBindingSize;
         std::string shader;
@@ -114,7 +111,7 @@ TEST_P(MaxLimitTests, MaxBufferBindingSize) {
                 // TODO(crbug.com/dawn/1160): Usually can't actually allocate a buffer this large
                 // because allocating the buffer for zero-initialization fails.
                 maxBufferBindingSize =
-                    std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024);
+                    std::min(maxBufferBindingSize, uint64_t(2) * 1024 * 1024 * 1024 - 4u);
                 // With WARP or on 32-bit platforms, such large buffer allocations often fail.
 #ifdef DAWN_PLATFORM_32_BIT
                 if (IsWindows()) {
