@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "26b546b011535ce928bf6bbab8e84cbcdcf30f1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1afda780_d72ffec0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:49:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "26b546b011535ce928bf6bbab8e84cbcdcf30f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5828241b_97f558bd",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-18T10:49:57Z",
+      "side": 1,
+      "message": "This bool is no longer used.",
+      "revId": "26b546b011535ce928bf6bbab8e84cbcdcf30f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
