@@ -86,10 +86,12 @@ namespace dawn_native { namespace vulkan {
 
     namespace {
 
-        ResultOrError<VkSurfaceKHR> CreateVulkanSurface(Backend* backend, Surface* surface) {
-            const VulkanGlobalInfo& info = backend->GetGlobalInfo();
-            const VulkanFunctions& fn = backend->GetFunctions();
-            VkInstance instance = backend->GetVkInstance();
+        ResultOrError<VkSurfaceKHR> CreateVulkanSurface(InstanceBase* instanceBase,
+                                                        VulkanInstance* vulkanInstance,
+                                                        Surface* surface) {
+            const VulkanGlobalInfo& info = vulkanInstance->GetGlobalInfo();
+            const VulkanFunctions& fn = vulkanInstance->GetFunctions();
+            VkInstance instance = vulkanInstance->GetVkInstance();
 
             // May not be used in the platform-specific switches below.
             DAWN_UNUSED(info);
@@ -154,8 +156,7 @@ namespace dawn_native { namespace vulkan {
                     // Fall back to using XCB surfaces if the Xlib extension isn't available.
                     // See https://xcb.freedesktop.org/MixingCalls/ for more information about
                     // interoperability between Xlib and XCB
-                    const XlibXcbFunctions* xlibXcb =
-                        backend->GetInstance()->GetOrCreateXlibXcbFunctions();
+                    const XlibXcbFunctions* xlibXcb = instanceBase->GetOrCreateXlibXcbFunctions();
                     ASSERT(xlibXcb != nullptr);
 
                     if (info.HasExt(InstanceExt::XcbSurface) && xlibXcb->IsLoaded()) {
@@ -274,7 +275,9 @@ namespace dawn_native { namespace vulkan {
         }
 
         if (mVkSurface == VK_NULL_HANDLE) {
-            DAWN_TRY_ASSIGN(mVkSurface, CreateVulkanSurface(adapter->GetBackend(), GetSurface()));
+            DAWN_TRY_ASSIGN(mVkSurface,
+                            CreateVulkanSurface(adapter->GetInstance(),
+                                                adapter->GetVulkanInstance(), GetSurface()));
         }
 
         VulkanSurfaceInfo surfaceInfo;
