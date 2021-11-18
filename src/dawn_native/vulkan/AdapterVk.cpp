@@ -22,10 +22,12 @@
 
 namespace dawn_native { namespace vulkan {
 
-    Adapter::Adapter(Backend* backend, VkPhysicalDevice physicalDevice)
-        : AdapterBase(backend->GetInstance(), wgpu::BackendType::Vulkan),
+    Adapter::Adapter(InstanceBase* instance,
+                     VulkanInstance* vulkanInstance,
+                     VkPhysicalDevice physicalDevice)
+        : AdapterBase(instance, wgpu::BackendType::Vulkan),
           mPhysicalDevice(physicalDevice),
-          mBackend(backend) {
+          mVulkanInstance(vulkanInstance) {
     }
 
     const VulkanDeviceInfo& Adapter::GetDeviceInfo() const {
@@ -36,8 +38,8 @@ namespace dawn_native { namespace vulkan {
         return mPhysicalDevice;
     }
 
-    Backend* Adapter::GetBackend() const {
-        return mBackend;
+    VulkanInstance* Adapter::GetVulkanInstance() const {
+        return mVulkanInstance.Get();
     }
 
     MaybeError Adapter::InitializeImpl() {
@@ -317,7 +319,7 @@ namespace dawn_native { namespace vulkan {
         // Via dawn_native::vulkan::WrapVulkanImage
         return external_memory::Service::CheckSupport(mDeviceInfo) &&
                external_semaphore::Service::CheckSupport(mDeviceInfo, mPhysicalDevice,
-                                                         mBackend->GetFunctions());
+                                                         mVulkanInstance->GetFunctions());
     }
 
     ResultOrError<DeviceBase*> Adapter::CreateDeviceImpl(const DeviceDescriptor* descriptor) {

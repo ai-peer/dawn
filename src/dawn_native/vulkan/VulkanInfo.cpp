@@ -61,10 +61,8 @@ namespace dawn_native { namespace vulkan {
         return extensions[ext];
     }
 
-    ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const Backend& backend) {
+    ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const VulkanFunctions& vkFunctions) {
         VulkanGlobalInfo info = {};
-        const VulkanFunctions& vkFunctions = backend.GetFunctions();
-
         // Gather info on available API version
         {
             uint32_t supportedAPIVersion = VK_MAKE_VERSION(1, 0, 0);
@@ -125,10 +123,9 @@ namespace dawn_native { namespace vulkan {
         return std::move(info);
     }
 
-    ResultOrError<std::vector<VkPhysicalDevice>> GetPhysicalDevices(const Backend& backend) {
-        VkInstance instance = backend.GetVkInstance();
-        const VulkanFunctions& vkFunctions = backend.GetFunctions();
-
+    ResultOrError<std::vector<VkPhysicalDevice>> GatherPhysicalDevices(
+        VkInstance instance,
+        const VulkanFunctions& vkFunctions) {
         uint32_t count = 0;
         VkResult result =
             VkResult::WrapUnsafe(vkFunctions.EnumeratePhysicalDevices(instance, &count, nullptr));
@@ -147,8 +144,8 @@ namespace dawn_native { namespace vulkan {
     ResultOrError<VulkanDeviceInfo> GatherDeviceInfo(const Adapter& adapter) {
         VulkanDeviceInfo info = {};
         VkPhysicalDevice physicalDevice = adapter.GetPhysicalDevice();
-        const VulkanGlobalInfo& globalInfo = adapter.GetBackend()->GetGlobalInfo();
-        const VulkanFunctions& vkFunctions = adapter.GetBackend()->GetFunctions();
+        const VulkanGlobalInfo& globalInfo = adapter.GetVulkanInstance()->GetGlobalInfo();
+        const VulkanFunctions& vkFunctions = adapter.GetVulkanInstance()->GetFunctions();
 
         // Query the device properties first to get the ICD's `apiVersion`
         vkFunctions.GetPhysicalDeviceProperties(physicalDevice, &info.properties);
@@ -280,7 +277,7 @@ namespace dawn_native { namespace vulkan {
         VulkanSurfaceInfo info = {};
 
         VkPhysicalDevice physicalDevice = adapter.GetPhysicalDevice();
-        const VulkanFunctions& vkFunctions = adapter.GetBackend()->GetFunctions();
+        const VulkanFunctions& vkFunctions = adapter.GetVulkanInstance()->GetFunctions();
 
         // Get the surface capabilities
         DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceCapabilitiesKHR(
