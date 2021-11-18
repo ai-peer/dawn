@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "465cb37a_98d6f88c",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-18T10:33:06Z",
+      "side": 1,
+      "message": "Thanks! I will take care of this when doing implementation on Metal.",
+      "parentUuid": "714d167c_f9d044f8",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "63cf5109_566ee3d5",
         "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
         "patchSetId": 7
@@ -82,6 +100,41 @@
       "writtenOn": "2021-11-17T11:07:38Z",
       "side": 1,
       "message": "u-nit: this method could be in an anonymous namespace and take the adapter as a const argument. It doesn\u0027t need to be part of the public API of vulkan::Adapter since it is just an internal helper.",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d75351f_8cca8fb4",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-18T10:33:06Z",
+      "side": 1,
+      "message": "Actually this helper comes from [1] in DeviceVk.cpp, we also need it there.",
+      "parentUuid": "63cf5109_566ee3d5",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c4c223e_ec3ec7f5",
+        "filename": "src/dawn_native/vulkan/DeviceVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 502,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-18T10:33:06Z",
+      "side": 1,
+      "message": "[1]",
       "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -133,6 +186,30 @@
       "writtenOn": "2021-11-17T11:07:38Z",
       "side": 1,
       "message": "We must be missing some: Format.cpp knows 96 formats. To you know off-hand which ones are missing? There\u0027s the multiplanar one but I don\u0027t know which other.",
+      "range": {
+        "startLine": 25,
+        "startChar": 53,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24668c6e_a079b12d",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-18T10:33:06Z",
+      "side": 1,
+      "message": "The multiplanar one is R8BG8Biplanar420Unorm, other two missing formats are  Stencil8 and Depth16Unorm. The Stencil8 format is not implemented, but the Depth16Unorm is supported but not added here.",
+      "parentUuid": "72041d8e_bc41c7d5",
       "range": {
         "startLine": 25,
         "startChar": 53,
