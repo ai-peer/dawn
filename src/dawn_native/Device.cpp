@@ -911,7 +911,10 @@ namespace dawn_native {
     }
     ComputePipelineBase* DeviceBase::APICreateComputePipeline(
         const ComputePipelineDescriptor* descriptor) {
-        TRACE_EVENT0(GetPlatform(), General, "DeviceBase::APICreateComputePipeline");
+        const char* eventLabel = descriptor->label ? descriptor->label : "None";
+        TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateComputePipeline", "label",
+                     eventLabel);
+
         Ref<ComputePipelineBase> result;
         if (ConsumedError(CreateComputePipeline(descriptor), &result,
                           "calling %s.CreateComputePipeline(%s).", this, descriptor)) {
@@ -922,7 +925,10 @@ namespace dawn_native {
     void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
                                                    WGPUCreateComputePipelineAsyncCallback callback,
                                                    void* userdata) {
-        TRACE_EVENT0(GetPlatform(), General, "DeviceBase::APICreateComputePipelineAsync");
+        const char* eventLabel = descriptor->label ? descriptor->label : "None";
+        TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateComputePipelineAsync", "label",
+                     eventLabel);
+
         MaybeError maybeResult = CreateComputePipelineAsync(descriptor, callback, userdata);
 
         // Call the callback directly when a validation error has been found in the front-end
@@ -962,7 +968,9 @@ namespace dawn_native {
     void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* descriptor,
                                                   WGPUCreateRenderPipelineAsyncCallback callback,
                                                   void* userdata) {
-        TRACE_EVENT0(GetPlatform(), General, "DeviceBase::APICreateRenderPipelineAsync");
+        const char* eventLabel = descriptor->label ? descriptor->label : "None";
+        TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateRenderPipelineAsync", "label",
+                     eventLabel);
         // TODO(dawn:563): Add validation error context.
         MaybeError maybeResult = CreateRenderPipelineAsync(descriptor, callback, userdata);
 
@@ -986,7 +994,10 @@ namespace dawn_native {
     }
     RenderPipelineBase* DeviceBase::APICreateRenderPipeline(
         const RenderPipelineDescriptor* descriptor) {
-        TRACE_EVENT0(GetPlatform(), General, "DeviceBase::APICreateRenderPipeline");
+        const char* eventLabel = descriptor->label ? descriptor->label : "None";
+        TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateRenderPipeline", "label",
+                     eventLabel);
+
         Ref<RenderPipelineBase> result;
         if (ConsumedError(CreateRenderPipeline(descriptor), &result,
                           "calling %s.CreateRenderPipeline(%s).", this, descriptor)) {
@@ -995,7 +1006,10 @@ namespace dawn_native {
         return result.Detach();
     }
     ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor* descriptor) {
-        TRACE_EVENT0(GetPlatform(), General, "DeviceBase::APICreateShaderModule");
+        const char* eventLabel = descriptor->label ? descriptor->label : "None";
+        TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateShaderModule", "label",
+                     eventLabel);
+
         Ref<ShaderModuleBase> result;
         std::unique_ptr<OwnedCompilationMessages> compilationMessages(
             std::make_unique<OwnedCompilationMessages>());
