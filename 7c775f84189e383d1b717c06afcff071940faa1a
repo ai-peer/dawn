@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa04d01_3e35948a",
+        "filename": "src/tests/end2end/DestroyTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-19T14:58:43Z",
+      "side": 1,
+      "message": "This is a bare minimum test for the destroy right now as it is hard to test the backend side of it atm. I intend to add more testing for it once we decide on some infra for the testing.\n\nThis at least verifies (in Vulkan if validations are on), that the destroy does in fact release handles.",
+      "range": {
+        "startLine": 170,
+        "startChar": 1,
+        "endLine": 170,
+        "endChar": 48
+      },
+      "revId": "7c775f84189e383d1b717c06afcff071940faa1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
