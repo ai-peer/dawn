@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "82066db18396a88f33d6d1fc82261e02cdb2967e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea9ac448_b4adf490",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T16:59:12Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "82066db18396a88f33d6d1fc82261e02cdb2967e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
