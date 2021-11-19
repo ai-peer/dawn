@@ -33,6 +33,57 @@
       "message": "LGTM too",
       "revId": "48524a11a2b1221cef1efc77e38a062c7e724b6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8f0cdc6_4411b6d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:23:03Z",
+      "side": 1,
+      "message": "LGTM too (whoops drive by)\n\nNote that Metal does have a .label on many objects too.",
+      "revId": "48524a11a2b1221cef1efc77e38a062c7e724b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8b951f2_3459591d",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:23:03Z",
+      "side": 1,
+      "message": "Note that we might have a generic setLabel methods instead: https://github.com/webgpu-native/webgpu-headers/issues/126",
+      "revId": "48524a11a2b1221cef1efc77e38a062c7e724b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb8746cc_343bf37d",
+        "filename": "src/dawn_native/d3d12/QuerySetD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:23:03Z",
+      "side": 1,
+      "message": "Note: Can we add to the issue that we need to name other D3D objects that have a 1-1 relationship with WebGPU object? For example pipelines and samplers?",
+      "revId": "48524a11a2b1221cef1efc77e38a062c7e724b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
