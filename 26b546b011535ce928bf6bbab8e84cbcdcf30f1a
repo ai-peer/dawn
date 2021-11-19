@@ -50,6 +50,24 @@
       "message": "This bool is no longer used.",
       "revId": "26b546b011535ce928bf6bbab8e84cbcdcf30f1a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e89e991_7889f9ff",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-19T01:52:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5828241b_97f558bd",
+      "revId": "26b546b011535ce928bf6bbab8e84cbcdcf30f1a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
