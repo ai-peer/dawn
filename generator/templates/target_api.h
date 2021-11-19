@@ -14,14 +14,14 @@
 //*
 //*
 //* This template itself is part of the Dawn source and follows Dawn's license
-//* but the generated file is used for "WebGPU native". The template comments
+//* but the generated file is used for "Web API native". The template comments
 //* using //* at the top of the file are removed during generation such that
 //* the resulting file starts with the BSD 3-Clause comment.
 //*
 //*
 // BSD 3-Clause License
 //
-// Copyright (c) 2019, "WebGPU native" developers
+// Copyright (c) 2019, "{{target_api().upper()}} native" developers
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -48,26 +48,26 @@
 // CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#ifndef WEBGPU_H_
-#define WEBGPU_H_
+#ifndef _{{target_api().upper()}}_H_
+#define _{{target_api().upper()}}_H_
 
-#if defined(WGPU_SHARED_LIBRARY)
+#if defined({{c_prefix()}}_SHARED_LIBRARY)
 #    if defined(_WIN32)
-#        if defined(WGPU_IMPLEMENTATION)
-#            define WGPU_EXPORT __declspec(dllexport)
+#        if defined({{c_prefix()}}_IMPLEMENTATION)
+#            define {{c_prefix()}}_EXPORT __declspec(dllexport)
 #        else
-#            define WGPU_EXPORT __declspec(dllimport)
+#            define {{c_prefix()}}_EXPORT __declspec(dllimport)
 #        endif
 #    else  // defined(_WIN32)
-#        if defined(WGPU_IMPLEMENTATION)
-#            define WGPU_EXPORT __attribute__((visibility("default")))
+#        if defined({{c_prefix()}}_IMPLEMENTATION)
+#            define {{c_prefix()}}_EXPORT __attribute__((visibility("default")))
 #        else
-#            define WGPU_EXPORT
+#            define {{c_prefix()}}_EXPORT
 #        endif
 #    endif  // defined(_WIN32)
-#else       // defined(WGPU_SHARED_LIBRARY)
-#    define WGPU_EXPORT
-#endif  // defined(WGPU_SHARED_LIBRARY)
+#else       // defined({{c_prefix()}}_SHARED_LIBRARY)
+#    define {{c_prefix()}}_EXPORT
+#endif  // defined({{c_prefix()}}_SHARED_LIBRARY)
 
 #include <stdint.h>
 #include <stddef.h>
@@ -85,7 +85,7 @@
 #define WGPU_ARRAY_LAYER_COUNT_UNDEFINED (0xffffffffUL)
 #define WGPU_MIP_LEVEL_COUNT_UNDEFINED (0xffffffffUL)
 
-typedef uint32_t WGPUFlags;
+typedef uint32_t {{c_prefix()}}Flags;
 
 {% for type in by_category["object"] %}
     typedef struct {{as_cType(type.name)}}Impl* {{as_cType(type.name)}};
@@ -99,30 +99,30 @@ typedef uint32_t WGPUFlags;
         {{as_cEnum(type.name, Name("force32"))}} = 0x7FFFFFFF
     } {{as_cType(type.name)}};
     {% if type.category == "bitmask" %}
-        typedef WGPUFlags {{as_cType(type.name)}}Flags;
+        typedef {{c_prefix()}}Flags {{as_cType(type.name)}}Flags;
     {% endif %}
 
 {% endfor -%}
 
-typedef struct WGPUChainedStruct {
-    struct WGPUChainedStruct const * next;
-    WGPUSType sType;
-} WGPUChainedStruct;
+typedef struct {{c_prefix()}}ChainedStruct {
+    struct {{c_prefix()}}ChainedStruct const * next;
+    {{c_prefix()}}SType sType;
+} {{c_prefix()}}ChainedStruct;
 
-typedef struct WGPUChainedStructOut {
-    struct WGPUChainedStructOut * next;
-    WGPUSType sType;
-} WGPUChainedStructOut;
+typedef struct {{c_prefix()}}ChainedStructOut {
+    struct {{c_prefix()}}ChainedStructOut * next;
+    {{c_prefix()}}SType sType;
+} {{c_prefix()}}ChainedStructOut;
 
 {% for type in by_category["structure"] %}
     typedef struct {{as_cType(type.name)}} {
         {% set Out = "Out" if type.output else "" %}
         {% set const = "const " if not type.output else "" %}
         {% if type.extensible %}
-            WGPUChainedStruct{{Out}} {{const}}* nextInChain;
+            {{c_prefix()}}ChainedStruct{{Out}} {{const}}* nextInChain;
         {% endif %}
         {% if type.chained %}
-            WGPUChainedStruct{{Out}} chain;
+            {{c_prefix()}}ChainedStruct{{Out}} chain;
         {% endif %}
         {% for member in type.members %}
             {{as_annotated_cType(member)}};
@@ -155,9 +155,9 @@ extern "C" {
     );
 {% endfor %}
 
-typedef void (*WGPUProc)(void);
+typedef void (*{{c_prefix()}}Proc)(void);
 
-#if !defined(WGPU_SKIP_PROCS)
+#if !defined({{c_prefix()}}_SKIP_PROCS)
 
 typedef WGPUInstance (*WGPUProcCreateInstance)(WGPUInstanceDescriptor const * descriptor);
 typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, char const * procName);
@@ -174,9 +174,9 @@ typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, char const * procN
     {% endfor %}
 
 {% endfor %}
-#endif  // !defined(WGPU_SKIP_PROCS)
+#endif  // !defined({{c_prefix()}}_SKIP_PROCS)
 
-#if !defined(WGPU_SKIP_DECLARATIONS)
+#if !defined({{c_prefix()}}_SKIP_DECLARATIONS)
 
 WGPU_EXPORT WGPUInstance wgpuCreateInstance(WGPUInstanceDescriptor const * descriptor);
 WGPU_EXPORT WGPUProc wgpuGetProcAddress(WGPUDevice device, char const * procName);
@@ -184,7 +184,7 @@ WGPU_EXPORT WGPUProc wgpuGetProcAddress(WGPUDevice device, char const * procName
 {% for type in by_category["object"] if len(c_methods(type)) > 0 %}
     // Methods of {{type.name.CamelCase()}}
     {% for method in c_methods(type) %}
-        WGPU_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
+        {{c_prefix()}}_EXPORT {{as_cType(method.return_type.name)}} {{as_cMethod(type.name, method.name)}}(
             {{-as_cType(type.name)}} {{as_varName(type.name)}}
             {%- for arg in method.arguments -%}
                 , {{as_annotated_cType(arg)}}
@@ -193,10 +193,10 @@ WGPU_EXPORT WGPUProc wgpuGetProcAddress(WGPUDevice device, char const * procName
     {% endfor %}
 
 {% endfor %}
-#endif  // !defined(WGPU_SKIP_DECLARATIONS)
+#endif  // !defined({{c_prefix()}}_SKIP_DECLARATIONS)
 
 #ifdef __cplusplus
 } // extern "C"
 #endif
 
-#endif // WEBGPU_H_
+#endif // _{{target_api().upper()}}_H_
