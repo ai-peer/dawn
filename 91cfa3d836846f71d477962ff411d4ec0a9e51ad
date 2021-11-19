@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db9eaeb1_93b4a6ac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-19T06:30:37Z",
+      "side": 1,
+      "message": "I found it because on Linux uint64_t is \"unsigned long\" while on Windows uint64_t is \"unsigned long long\", so unsigned long long* isn\u0027t compatible with uint64_t*.\n\nThe compilation error disappears when I changed \"unsigned long long\" into \"uint64_t\".",
+      "parentUuid": "3cededc0_54927b87",
+      "revId": "91cfa3d836846f71d477962ff411d4ec0a9e51ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd2523f3_c8a76809",
