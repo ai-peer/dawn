@@ -56,6 +56,24 @@
       "message": "Can we have a small test for this or is it not possible?",
       "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d943e6_36ba4aad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T15:30:26Z",
+      "side": 1,
+      "message": "NVM, it is just to more eagerly clean stuff up. Maybe we can replace the INVALID_IF with an assert",
+      "parentUuid": "bf43525b_214120dd",
+      "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
