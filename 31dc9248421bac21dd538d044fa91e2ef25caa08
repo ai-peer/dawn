@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b292f749_93b9128a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-19T23:41:07Z",
+      "side": 1,
+      "message": "Can I get a +2 to this manual roll in order to unblock the CTS roller?",
+      "revId": "31dc9248421bac21dd538d044fa91e2ef25caa08",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
