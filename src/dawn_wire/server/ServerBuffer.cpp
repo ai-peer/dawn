@@ -74,8 +74,12 @@ namespace dawn_wire { namespace server {
         userdata->requestSerial = requestSerial;
         userdata->mode = mode;
 
+        // Make sure that the deserialized offset and size is CPU-addressable, and size is not
+        // WGPU_WHOLE_MAP_SIZE. Since client does the default size computation, we should always
+        // have a valid actual size here in server. All other invalid actual size can be caught
+        // by dawn native side validation.
         if (offset64 > std::numeric_limits<size_t>::max() ||
-            size64 > std::numeric_limits<size_t>::max()) {
+            size64 > std::numeric_limits<size_t>::max() || size64 == WGPU_WHOLE_MAP_SIZE) {
             OnBufferMapAsyncCallback(WGPUBufferMapAsyncStatus_Error, userdata.get());
             return true;
         }
