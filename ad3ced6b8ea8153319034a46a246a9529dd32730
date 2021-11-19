@@ -74,6 +74,23 @@
       "parentUuid": "bf43525b_214120dd",
       "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3deded_0c8f14f7",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T17:51:13Z",
+      "side": 1,
+      "message": "when does this happen?\n\nGetTransformedModuleHandle happens when the pipeline is initialized.\nWe already validate the device is alive for synchronous pipeline creation.\n\nFor async creation, DeviceBase::Destroy currently waits for all tasks to complete before destroying anything.",
+      "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
