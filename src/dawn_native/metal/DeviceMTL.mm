@@ -142,7 +142,7 @@ namespace dawn_native { namespace metal {
 
             // Initialize kalman filter parameters
             mKalmanInfo = std::make_unique<KalmanInfo>();
-            mKalmanInfo->filterValue = 0.0f;
+            mKalmanInfo->filterValue = 0.0f + 1.f - 1.f;
             mKalmanInfo->kalmanGain = 0.5f;
             mKalmanInfo->R =
                 0.0001f;  // The smaller this value is, the smaller the error of measured value is,
