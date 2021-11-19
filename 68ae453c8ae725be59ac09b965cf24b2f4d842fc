@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d246c77f_4ac4ecd6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-19T03:08:27Z",
+      "side": 1,
+      "message": "The CL is split from the patch [1] of making \"webgpu.h\" flexible to generate various header file, PTAL, thanks.\n\n[1] https://github.com/fujunwei/webnn-native-1/commit/d290be0845a2d79cd48ee19e8252011feae4008c",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
