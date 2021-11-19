@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "0982b755_dd0436c8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "Can you file an issue on crbug.com/dawn that will be used to track this work? This allow seeing everything in on place as well as store things like follow ups that were asked.",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d246c77f_4ac4ecd6",
@@ -14,6 +31,217 @@
       "writtenOn": "2021-11-19T03:08:27Z",
       "side": 1,
       "message": "The CL is split from the patch [1] of making \"webgpu.h\" flexible to generate various header file, PTAL, thanks.\n\n[1] https://github.com/fujunwei/webnn-native-1/commit/d290be0845a2d79cd48ee19e8252011feae4008c",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca4fb32_4553e841",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "LGTM, lots of small comments but the approach looks good.\n\nYou can start stacking comments on top of on another so you\u0027re not blocked on this review to make progress on the rest of the work. You can do that by adding more comments and using `git push origin HEAD:refs/for/master` to upload a whole stack and `git rebase -i` to make edits inside the stack.",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996dd482_55eb502e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "Maybe in a follow up at the end of this stack we should rename dawn.json to webgpu.json. WDYT?",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3793dd02_327ad236",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "Can you update docs/codegen.md to explain that there is a metadata and what it is used for?",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ca46a90_93d60e9b",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "nit: small preference for using api instead of target_api here and in the renamed file.",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffda4d6b_43889fb4",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "WDYT of just exposing the metadata dictionary to templates as \"metadata\" directly?",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86e8da3d_2c6870c5",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "nit: make_base_render_params?",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f29878b3_9a09ed49",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "nit: needs to be updated too.",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eec46b24_abd8308a",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "226c74a4_21c712ad",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "Can this be another entry in the metadata? Like \"base header copyright holder\"? Right now it changed to be WEBGPU instead of WebGPU.",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 55
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643a6ef8_d265f1b4",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "nit: leading underscore wasn\u0027t present in the original version. Any reason it was added?",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e44689_46fe0a20",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 1,
+      "message": "nit: I think we don\u0027t need these to be function. c_prefix (or metadata.c_prefix) should work.\n\nTo avoid a ton of redundant metadata., you could do {% set c_prefix \u003d metadata.c_prefix %} inside the template.\n\nAh maybe it is a dictionary, in which case it is ammoying to do metadata[\"api\"] all the time. I\u0027m not sure what\u0027s the best solution. Maybe a Metadata object that copies things from _metadata?",
+      "range": {
+        "startLine": 56,
+        "startChar": 22,
+        "endLine": 56,
+        "endChar": 32
+      },
       "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

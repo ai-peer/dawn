@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb82848f_7b8efc49",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 0,
+      "message": "nit: unused, can be removed.",
+      "revId": "53db01bf1e64b3da899fd8b112e48eab2d13592e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd9a9130_58bcbfcf",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 583,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 0,
+      "message": "This one isn\u0027t used at all, so I think we can remove it.",
+      "revId": "53db01bf1e64b3da899fd8b112e48eab2d13592e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b08c6a3f_13dd8ecc",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "53db01bf1e64b3da899fd8b112e48eab2d13592e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e86292b_19a87139",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 616,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:37:54Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "53db01bf1e64b3da899fd8b112e48eab2d13592e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
