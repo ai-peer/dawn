@@ -16,6 +16,40 @@
       "message": "Hi, this patch is a simple fix for chromium:1270819, and I am not sure if we should also implement the default size computation within wire server (likely will never get used other than testing) instead of just banning it. \nThe mac bot failed, which is likely a bot issue.",
       "revId": "7316cfe343437fb59b5513102d8016c1e815bb9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9569cfb_86250e22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:06:25Z",
+      "side": 1,
+      "message": "LGTM, thanks for the fix!",
+      "revId": "7316cfe343437fb59b5513102d8016c1e815bb9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2aa9616_24bcca16",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:06:25Z",
+      "side": 1,
+      "message": "nit: we can just check size64 \u003c WGPU_WHOLE_MAP_SIZE because WGPU_WHOLE_MAP_SIZE happens to be SIZE_MAX \u003d\u003d std::numeric_limits\u003csize_t\u003e::max()\n\nThe comment would have to be modified to explain that.",
+      "revId": "7316cfe343437fb59b5513102d8016c1e815bb9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
