@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e67b7405_6676a7b1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-19T17:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2f03d76_b9f41419",
+      "range": {
+        "startLine": 39,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 10
+      },
+      "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4ba7a0b_d7453e16",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-11-19T03:12:23Z",
       "side": 1,
       "message": "nit: this looks a bit funny. maybe we could just put it inside the namespace at [1]?",
+      "range": {
+        "startLine": 62,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 30
+      },
+      "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed6cb1e5_f0420dfa",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-19T17:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d4ba7a0b_d7453e16",
       "range": {
         "startLine": 62,
         "startChar": 0,
@@ -98,6 +146,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdbb3bfd_61beee98",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-19T17:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a623356_421f17ef",
+      "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01aaf6a4_5a1191a0",
@@ -111,6 +177,30 @@
       "writtenOn": "2021-11-19T03:12:23Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 68,
+        "startChar": 4,
+        "endLine": 68,
+        "endChar": 15
+      },
+      "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a62b167_c56d2a7e",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2021-11-19T17:10:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01aaf6a4_5a1191a0",
       "range": {
         "startLine": 68,
         "startChar": 4,
