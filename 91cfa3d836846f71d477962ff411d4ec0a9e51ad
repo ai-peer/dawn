@@ -50,6 +50,24 @@
       "message": "nit: Maybe we could have a small helper PipelineBase::GetLabelForTrace?",
       "revId": "91cfa3d836846f71d477962ff411d4ec0a9e51ad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9b2238c_bad54c0b",
+        "filename": "src/dawn_native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-11-19T02:28:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cd2523f3_c8a76809",
+      "revId": "91cfa3d836846f71d477962ff411d4ec0a9e51ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
