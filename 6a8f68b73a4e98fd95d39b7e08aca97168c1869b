@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7d302a_032c0e7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-19T22:47:12Z",
+      "side": 1,
+      "message": "These one\u0027s are not wired up to their D3D12/Vulkan/Metal equivalents yet because their relationship to the equivalent backend objects seems to be a bit complicated. In the meantime I\u0027m mostly concerned about making sure that the labels appear correctly for developers in error messages, which this change achieves.",
+      "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
