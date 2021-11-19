@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1523656a_7f0de40f",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T18:00:33Z",
+      "side": 1,
+      "message": "error scope callbacks and queue onSubmittedWorkDone callbacks all need to reject as well - should make sure we have tests of this too",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 74
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "389cc1ec_126aa05e",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T18:00:33Z",
+      "side": 1,
+      "message": "could we have both tests of \"ReleaseDeviceBefore...\" and \"DestroyDeviceBefore...\" ?",
+      "range": {
+        "startLine": 366,
+        "startChar": 32,
+        "endLine": 366,
+        "endChar": 51
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "05bedc4c_b3d22fe6",
         "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
         "patchSetId": 13
