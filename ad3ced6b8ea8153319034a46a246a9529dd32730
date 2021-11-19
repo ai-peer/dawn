@@ -39,6 +39,23 @@
       "message": "LGTM",
       "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf43525b_214120dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T15:29:42Z",
+      "side": 1,
+      "message": "Can we have a small test for this or is it not possible?",
+      "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
