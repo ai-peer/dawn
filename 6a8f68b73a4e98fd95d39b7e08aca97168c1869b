@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6236d0d7_3d73d686",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T23:33:41Z",
+      "side": 1,
+      "message": "pass encoders, I don\u0027t think so.\n\nCommandEncoder/CommandBuffer, yes but it might not make a ton of sense for Dawn\u0027s implementation. We have a single \"pending\" command encoder / command buffer that all the commands get shoved into, and we make a new one for each Submit or device.Tick(). So I guess we could label it with a list of all the contained labels from the developer..?",
+      "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ae7d302a_032c0e7b",
@@ -14,6 +31,23 @@
       "writtenOn": "2021-11-19T22:47:12Z",
       "side": 1,
       "message": "These one\u0027s are not wired up to their D3D12/Vulkan/Metal equivalents yet because their relationship to the equivalent backend objects seems to be a bit complicated. In the meantime I\u0027m mostly concerned about making sure that the labels appear correctly for developers in error messages, which this change achieves.",
+      "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a128599_02d1c742",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T23:33:41Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
