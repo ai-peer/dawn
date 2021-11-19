@@ -16,6 +16,23 @@
       "message": "Got some feedback that labels weren\u0027t showing up in the new error messages in all cases and was mildly surprised to realize we only had a few object types wired up to actually save the labels. This doesn\u0027t add them to everything that they were missing from, but hits a lot of the more common objects.\n\nFWIW I don\u0027t know what the equivalent mechanism is for Metal, if there is one, but previous CLs for the same bug have ignored Metal as well so I\u0027m just following that pattern.",
       "revId": "48524a11a2b1221cef1efc77e38a062c7e724b6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c8bb4f8_83e1aacd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-19T03:06:39Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "48524a11a2b1221cef1efc77e38a062c7e724b6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
