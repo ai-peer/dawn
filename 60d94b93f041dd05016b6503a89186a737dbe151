@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acb650f8_3c131a46",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:04:34Z",
+      "side": 1,
+      "message": "LGTM, thanks for the follow up!",
+      "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a2f03d76_b9f41419",
@@ -60,6 +77,23 @@
         "endLine": 62,
         "endChar": 30
       },
+      "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a623356_421f17ef",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-19T13:04:34Z",
+      "side": 1,
+      "message": "ditto this could be in the anonymous namespace.",
       "revId": "60d94b93f041dd05016b6503a89186a737dbe151",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
