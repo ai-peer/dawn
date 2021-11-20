@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1dfe315_650a84e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-20T02:01:58Z",
+      "side": 1,
+      "message": "PTAL. Thanks!\n\nThis is a small change, but I met many issues in order to make Vulkan validation layer happy. Finally it works, with some workarounds applied. See the comments inclined. ",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c7d8d7_e03ae079",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-20T02:01:58Z",
+      "side": 1,
+      "message": "It is a little weird that we need to rely on an extension, and its name include _QCOM. The equivalent one with _EXT and _KHR doesn\u0027t work.\n\nYou can also refer to the issue at https://github.com/KhronosGroup/Vulkan-Docs/issues/1700 to propose STORE_OP_NONE into core (without any suffix): https://github.com/KhronosGroup/Vulkan-Docs/issues/1700",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "984d8da3_b369e0a4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-20T02:01:58Z",
+      "side": 1,
+      "message": "You can also refer to the PR and discussion at https://github.com/KhronosGroup/Vulkan-Docs/pull/1699. But the driver change will take a long time even that PR is accepted.",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 453,
+        "endChar": 13
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7225fef8_56913672",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 486,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-20T02:01:58Z",
+      "side": 1,
+      "message": "Vulkan 1.0 specification actually has a small bug, see https://github.com/KhronosGroup/Vulkan-Docs/pull/1698",
+      "range": {
+        "startLine": 486,
+        "startChar": 83,
+        "endLine": 486,
+        "endChar": 93
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65fdda4e_5b899d20",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-11-20T02:01:58Z",
+      "side": 1,
+      "message": "Also refer to https://github.com/KhronosGroup/Vulkan-Docs/pull/1699",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 75
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
