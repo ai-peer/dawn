@@ -35,6 +35,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b52e37ef_3d8afd08",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-22T19:13:00Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c50b104_877848c3",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-22T19:13:00Z",
+      "side": 1,
+      "message": "unit: maybe the generator could infer c_prefix to be namespace.upper() if it\u0027s not provided. Perhaps other APIs using this will follow the same pattern where they are the same except for casing. c_prefix can still be explicitly provided though in case something different is needed",
+      "range": {
+        "startLine": 22,
+        "startChar": 8,
+        "endLine": 23,
+        "endChar": 27
+      },
+      "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51b1a2f1_60ff0b3c",

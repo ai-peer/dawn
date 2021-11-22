@@ -489,6 +489,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "68692e74_4151a6c4",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-22T19:13:00Z",
+      "side": 1,
+      "message": "for what it\u0027s worth, this is the only change in the generated files",
+      "parentUuid": "463d7c50_4ea2e4cb",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e44689_46fe0a20",
         "filename": "generator/templates/target_api.h",
         "patchSetId": 3
