@@ -67,6 +67,24 @@
       "message": "nit: we can just check size64 \u003c WGPU_WHOLE_MAP_SIZE because WGPU_WHOLE_MAP_SIZE happens to be SIZE_MAX \u003d\u003d std::numeric_limits\u003csize_t\u003e::max()\n\nThe comment would have to be modified to explain that.",
       "revId": "7316cfe343437fb59b5513102d8016c1e815bb9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb855a5_0f1bbe6b",
+        "filename": "src/dawn_wire/server/ServerBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2021-11-22T02:26:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a2aa9616_24bcca16",
+      "revId": "7316cfe343437fb59b5513102d8016c1e815bb9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
