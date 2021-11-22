@@ -392,6 +392,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87dc09ce_00014f5f",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-22T15:49:56Z",
+      "side": 1,
+      "message": "Ack, we can always change if this header is used for an API that doesn\u0027t follow the pattern for the developer name.",
+      "parentUuid": "a1e98e97_bc972b93",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 55
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "643a6ef8_d265f1b4",
@@ -429,6 +453,30 @@
       "side": 1,
       "message": "There is an error \"expected an identifier\" when using identifier start with \"{{\", and whole header file will be gray that is hard to read code, so i propose to add the underscore before it.",
       "parentUuid": "643a6ef8_d265f1b4",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463d7c50_4ea2e4cb",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-22T15:49:56Z",
+      "side": 1,
+      "message": "This is a template file so TBH syntax highlighting will always be broken and is not that important. The header guard is without underscores in https://github.com/webgpu-native/webgpu-headers/blob/main/webgpu.h and we generate it with the `webgpu_headers_gen` target so I\u0027d like to keep it the same.",
+      "parentUuid": "b77547ce_95ecc2d3",
       "range": {
         "startLine": 51,
         "startChar": 8,

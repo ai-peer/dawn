@@ -16,6 +16,46 @@
       "message": "PTAL, thanks.",
       "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e81720f2_1bf808ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-22T15:49:56Z",
+      "side": 1,
+      "message": "Still LGTM, thanks for the update.\n\nCan someone else take a look? Austin, Jiawei?",
+      "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51b1a2f1_60ff0b3c",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-22T15:49:56Z",
+      "side": 1,
+      "message": "nit: will the copyright year need to be customized for WebNN?",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
