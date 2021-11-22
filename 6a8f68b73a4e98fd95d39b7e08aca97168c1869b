@@ -50,6 +50,57 @@
       "message": "LGTM",
       "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438596d8_41ee2203",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 531,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-22T20:40:27Z",
+      "side": 1,
+      "message": "nit: Perhaps overwrite `descriptor` so two copies of \"new ComputePassEncoder\" aren\u0027t needed?",
+      "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fb9e13b_3b208fbd",
+        "filename": "src/dawn_native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1053,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-22T20:40:27Z",
+      "side": 1,
+      "message": "same although less code is repeated here",
+      "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0faebf_212b782c",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 912,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-22T20:40:27Z",
+      "side": 1,
+      "message": "same",
+      "revId": "6a8f68b73a4e98fd95d39b7e08aca97168c1869b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
