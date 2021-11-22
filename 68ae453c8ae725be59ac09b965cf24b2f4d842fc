@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ac05670_e046ac43",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "np, could you please grant the access of the crbug.com/dawn and try bots.",
+      "parentUuid": "0982b755_dd0436c8",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d246c77f_4ac4ecd6",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54541dee_933060f6",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Yes, I think so.",
+      "parentUuid": "996dd482_55eb502e",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3793dd02_327ad236",
@@ -82,6 +118,24 @@
       "writtenOn": "2021-11-19T13:37:54Z",
       "side": 1,
       "message": "Can you update docs/codegen.md to explain that there is a metadata and what it is used for?",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9abed008_2bc8ab6d",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3793dd02_327ad236",
       "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1b62af0_a24c7218",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ca46a90_93d60e9b",
+      "range": {
+        "startLine": 21,
+        "startChar": 9,
+        "endLine": 21,
+        "endChar": 19
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffda4d6b_43889fb4",
@@ -122,6 +200,24 @@
       "writtenOn": "2021-11-19T13:37:54Z",
       "side": 1,
       "message": "WDYT of just exposing the metadata dictionary to templates as \"metadata\" directly?",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4fa6113_48e8eb6b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffda4d6b_43889fb4",
       "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +239,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a1b098a_c394f676",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "86e8da3d_2c6870c5",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f29878b3_9a09ed49",
@@ -156,6 +270,24 @@
       "writtenOn": "2021-11-19T13:37:54Z",
       "side": 1,
       "message": "nit: needs to be updated too.",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67d1bdd6_7385c3bb",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 789,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f29878b3_9a09ed49",
       "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +309,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a29a2d32_ff247772",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 3
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eec46b24_abd8308a",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "226c74a4_21c712ad",
@@ -190,6 +340,30 @@
       "writtenOn": "2021-11-19T13:37:54Z",
       "side": 1,
       "message": "Can this be another entry in the metadata? Like \"base header copyright holder\"? Right now it changed to be WEBGPU instead of WebGPU.",
+      "range": {
+        "startLine": 24,
+        "startChar": 24,
+        "endLine": 24,
+        "endChar": 55
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e98e97_bc972b93",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "\"webgpu\" is only used for file name and the \"WebGPU\" is the standard api name,  so how about configuring \"WebGPU\" in the metadata and convert it to lower when using it as \"webgpu\".\n\n    \"_metadata\": {\n        \"api\": \"WebGPU\",\n        \"c_prefix\": \"WGPU\",\n        \"namespace\": \"wgpu\"\n    },",
+      "parentUuid": "226c74a4_21c712ad",
       "range": {
         "startLine": 24,
         "startChar": 24,
@@ -225,6 +399,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b77547ce_95ecc2d3",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "There is an error \"expected an identifier\" when using identifier start with \"{{\", and whole header file will be gray that is hard to read code, so i propose to add the underscore before it.",
+      "parentUuid": "643a6ef8_d265f1b4",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e44689_46fe0a20",
         "filename": "generator/templates/target_api.h",
         "patchSetId": 3
@@ -236,6 +434,30 @@
       "writtenOn": "2021-11-19T13:37:54Z",
       "side": 1,
       "message": "nit: I think we don\u0027t need these to be function. c_prefix (or metadata.c_prefix) should work.\n\nTo avoid a ton of redundant metadata., you could do {% set c_prefix \u003d metadata.c_prefix %} inside the template.\n\nAh maybe it is a dictionary, in which case it is ammoying to do metadata[\"api\"] all the time. I\u0027m not sure what\u0027s the best solution. Maybe a Metadata object that copies things from _metadata?",
+      "range": {
+        "startLine": 56,
+        "startChar": 22,
+        "endLine": 56,
+        "endChar": 32
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35781d13_283244f4",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-22T12:25:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1e44689_46fe0a20",
       "range": {
         "startLine": 56,
         "startChar": 22,
