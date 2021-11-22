@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39b12ec5_fd408f95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-22T09:37:47Z",
+      "side": 1,
+      "message": "Can you mark the comment threads that you addressed as resolved so that we know what is left to do? For convenience you can click the \"Done\" button that will mark resolved and comment \"Done\".",
+      "revId": "86802f986c0464b8024a41f7c46483a87e456805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15a17846_c9a3f9d2",
+        "filename": "docs/codegen.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-22T09:37:47Z",
+      "side": 1,
+      "message": "u-nit: I think we need an empty line to make the list properly recognized in Markdown.",
+      "revId": "86802f986c0464b8024a41f7c46483a87e456805",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
