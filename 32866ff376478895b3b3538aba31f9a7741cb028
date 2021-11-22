@@ -227,6 +227,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cd66d1d_6d36d303",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-22T18:30:20Z",
+      "side": 1,
+      "message": "nit: comment what the boolean means /* readOnly */\n\nAlso, we should expand the comment above if this value does not actually matter to create the VkRenderPipeline. Otherwise, it\u0027s not clear why we don\u0027t set it to writesDepth || writesStencil\n\nhttps://gpuweb.github.io/gpuweb/#dom-gpurenderpipeline-writesdepth-slot",
+      "range": {
+        "startLine": 513,
+        "startChar": 59,
+        "endLine": 513,
+        "endChar": 61
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4982db4a_6209f5f4",
         "filename": "src/dawn_native/vulkan/TextureVk.cpp",
         "patchSetId": 2
@@ -353,6 +376,24 @@
       "writtenOn": "2021-11-22T11:02:16Z",
       "side": 1,
       "message": "I think we should use VK_IMAGE_LAYOUT_GENERAL for Vulkan 1.0 support and then we can special case for Vulkan 1.1 or KHR_maintenance2 to use the new, more precise layout. (but IMHO let\u0027s just do GENERAL for now + a TODO since it is just an optimization)",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b46876_4ea17e50",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-22T18:30:20Z",
+      "side": 1,
+      "message": "I think there was some misunderstanding, because VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL is indeed available on Vulkan 1.0 and allows both readonly depth/stencil attachments and sampling. The enums referred to in this comment are 1.1 enums which pertain to when one plane is writable and the other is readonly. WebGPU currently requires both to be readonly or both to be writable for multiplanar depth/stencil formats.",
+      "parentUuid": "84934966_01f31a73",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
