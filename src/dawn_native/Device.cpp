@@ -14,6 +14,7 @@
 
 #include "dawn_native/Device.h"
 
+#include "absl/strings/str_format.h"
 #include "common/Log.h"
 #include "dawn_native/Adapter.h"
 #include "dawn_native/AsyncTask.h"
@@ -187,6 +188,10 @@ namespace dawn_native {
         }
 
         mFormatTable = BuildFormatTable(this);
+        for (size_t i = 0; i < mFormatTable.size(); i++) {
+            dawn::WarningLog() << "FormatTable index= " << i
+                               << absl::StrFormat(", format= %s", mFormatTable[i].format);
+        }
         SetDefaultToggles();
     }
 
@@ -645,6 +650,18 @@ namespace dawn_native {
         ASSERT(index < mFormatTable.size());
         ASSERT(mFormatTable[index].isSupported);
         return mFormatTable[index];
+    }
+
+    bool DeviceBase::IsFormatSupported(wgpu::TextureFormat format) const {
+        dawn::WarningLog() << absl::StrFormat("TextureFormat: %s", format);
+        size_t index = ComputeFormatIndex(format);
+        dawn::WarningLog() << "Format index: " << index;
+        ASSERT(index < mFormatTable.size());
+        dawn::WarningLog() << absl::StrFormat("mFormatTable[index]: %s",
+                                              mFormatTable[index].format);
+        dawn::WarningLog() << "mFormatTable[index].isSupported: "
+                           << mFormatTable[index].isSupported;
+        return mFormatTable[index].isSupported;
     }
 
     ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(

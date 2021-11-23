@@ -224,6 +224,12 @@ namespace dawn_native {
         return texture->IsSubresourceContentInitialized(range);
     }
 
+    bool IsFormatSupported(WGPUDevice device, WGPUTextureFormat format) {
+        const dawn_native::DeviceBase* deviceBase =
+            reinterpret_cast<const dawn_native::DeviceBase*>(device);
+        return deviceBase->IsFormatSupported(static_cast<wgpu::TextureFormat>(format));
+    }
+
     std::vector<const char*> GetProcMapNamesForTestingInternal();
 
     std::vector<const char*> GetProcMapNamesForTesting() {

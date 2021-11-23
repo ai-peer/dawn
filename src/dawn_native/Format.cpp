@@ -14,6 +14,8 @@
 
 #include "dawn_native/Format.h"
 
+#include "absl/strings/str_format.h"
+#include "common/Log.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Features.h"
@@ -141,6 +143,8 @@ namespace dawn_native {
 
         auto AddFormat = [&table, &formatsSet](Format format) {
             size_t index = ComputeFormatIndex(format.format);
+            dawn::WarningLog() << "AddFormat index: " << index
+                               << absl::StrFormat(", format: %s", format.format);
             ASSERT(index < table.size());
 
             // This checks that each format is set at most once, the first part of checking that all
@@ -154,6 +158,8 @@ namespace dawn_native {
                    (kTextureBytesPerRowAlignment % format.aspectInfo[0].block.byteSize) == 0);
 
             table[index] = format;
+            dawn::WarningLog() << "table[" << index
+                               << absl::StrFormat("].format: %s", table[index].format);
             formatsSet.set(index);
         };
 
@@ -269,8 +275,13 @@ namespace dawn_native {
                 internalFormat.aspects = aspects;
                 internalFormat.componentCount = componentCount;
                 const size_t firstFormatIndex = ComputeFormatIndex(firstFormat);
+                dawn::WarningLog()
+                    << "firstFormatIndex : " << firstFormatIndex
+                    << absl::StrFormat("].format: %s", table[firstFormatIndex].format);
                 const size_t secondFormatIndex = ComputeFormatIndex(secondFormat);
-
+                dawn::WarningLog()
+                    << "secondFormatIndex : " << secondFormatIndex
+                    << absl::StrFormat("].format: %s", table[secondFormatIndex].format);
                 internalFormat.aspectInfo[0] = table[firstFormatIndex].aspectInfo[0];
                 internalFormat.aspectInfo[1] = table[secondFormatIndex].aspectInfo[0];
 
@@ -335,8 +346,13 @@ namespace dawn_native {
         AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 4, true);
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
                               Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, true, 2);
+        // bool isD24S8Supported = device->IsFeatureEnabled(Feature::Depth24UnormStencil8);
+        AddMultiAspectFormat(wgpu::TextureFormat::Depth24UnormStencil8,
+                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, false, 2);
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, true);
-        // TODO(dawn:690): Implement Depth24UnormStencil8, Depth32FloatStencil8.
+        // bool isD32S8Supported = device->IsFeatureEnabled(Feature::Depth32FloatStencil8);
+        AddMultiAspectFormat(wgpu::TextureFormat::Depth32FloatStencil8,
+                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Stencil8, true, false, 2);
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsFeatureEnabled(Feature::TextureCompressionBC);

@@ -211,6 +211,9 @@ namespace dawn_native {
         uint32_t layerCount,
         WGPUTextureAspect aspect = WGPUTextureAspect_All);
 
+    // Query if texture format is supported on the device
+    DAWN_NATIVE_EXPORT bool IsFormatSupported(WGPUDevice device, WGPUTextureFormat format);
+
     // Backdoor to get the order of the ProcMap for testing
     DAWN_NATIVE_EXPORT std::vector<const char*> GetProcMapNamesForTesting();
 
