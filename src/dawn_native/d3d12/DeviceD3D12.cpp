@@ -48,6 +48,7 @@ namespace dawn_native { namespace d3d12 {
     // TODO(dawn:155): Figure out these values.
     static constexpr uint16_t kShaderVisibleDescriptorHeapSize = 1024;
     static constexpr uint8_t kAttachmentDescriptorHeapSize = 64;
+    static constexpr uint64_t kZeroBufferSize = 4098;
 
     static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
 
@@ -124,6 +125,10 @@ namespace dawn_native { namespace d3d12 {
 
         mResidencyManager = std::make_unique<ResidencyManager>(this);
         mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
+
+        // Allocate a buffer filled with zeros to be used during clears.
+        DAWN_TRY_ASSIGN(mZeroBuffer, CreateStagingBuffer(kZeroBufferSize));
+        memset(mZeroBuffer->GetMappedPointer(), 0, kZeroBufferSize);
 
         // ShaderVisibleDescriptorAllocators use the ResidencyManager and must be initialized after.
         DAWN_TRY_ASSIGN(
@@ -454,6 +459,25 @@ namespace dawn_native { namespace d3d12 {
                                   texture, range.aspects);
 
         return {};
+    }
+
+    void Device::ZeroBuffer(CommandRecordingContext* commandContext,
+                            BufferBase* destination,
+                            uint64_t offset,
+                            uint64_t size) {
+        ASSERT(commandContext != nullptr);
+        Buffer* dstBuffer = ToBackend(destination);
+        StagingBuffer* srcBuffer = ToBackend(mZeroBuffer.get());
+        dstBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopyDst);
+
+        while (size > 0) {
+            uint64_t copySize = std::min(kZeroBufferSize, size);
+            commandContext->GetCommandList()->CopyBufferRegion(
+                dstBuffer->GetD3D12Resource(), offset, srcBuffer->GetResource(), 0, copySize);
+
+            offset += copySize;
+            size -= copySize;
+        }
     }
 
     void Device::DeallocateMemory(ResourceHeapAllocation& allocation) {

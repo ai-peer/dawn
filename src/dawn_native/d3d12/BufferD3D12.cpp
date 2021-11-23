@@ -470,18 +470,22 @@ namespace dawn_native { namespace d3d12 {
             memset(mMappedData, clearValue, size);
             UnmapImpl();
         } else {
-            // TODO(crbug.com/dawn/852): use ClearUnorderedAccessView*() when the buffer usage
-            // includes STORAGE.
-            DynamicUploader* uploader = device->GetDynamicUploader();
-            UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle,
-                            uploader->Allocate(size, device->GetPendingCommandSerial(),
-                                               kCopyBufferToBufferOffsetAlignment));
+            if (clearValue == 0u) {
+                device->ZeroBuffer(commandContext, this, offset, size);
+            } else {
+                // TODO(crbug.com/dawn/852): use ClearUnorderedAccessView*() when the buffer usage
+                // includes STORAGE.
+                DynamicUploader* uploader = device->GetDynamicUploader();
+                UploadHandle uploadHandle;
+                DAWN_TRY_ASSIGN(uploadHandle,
+                                uploader->Allocate(size, device->GetPendingCommandSerial(),
+                                                   kCopyBufferToBufferOffsetAlignment));
 
-            memset(uploadHandle.mappedBuffer, clearValue, size);
+                memset(uploadHandle.mappedBuffer, clearValue, size);
 
-            device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
-                                                uploadHandle.startOffset, this, offset, size);
+                device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
+                                                    uploadHandle.startOffset, this, offset, size);
+            }
         }
 
         return {};

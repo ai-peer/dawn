@@ -100,6 +100,11 @@ namespace dawn_native { namespace d3d12 {
                                             TextureCopy* dst,
                                             const Extent3D& copySizePixels) override;
 
+        void ZeroBuffer(CommandRecordingContext* commandContext,
+                        BufferBase* destination,
+                        uint64_t offset,
+                        uint64_t size);
+
         ResultOrError<ResourceHeapAllocation> AllocateMemory(
             D3D12_HEAP_TYPE heapType,
             const D3D12_RESOURCE_DESC& resourceDescriptor,
@@ -245,6 +250,10 @@ namespace dawn_native { namespace d3d12 {
         // Sampler cache needs to be destroyed before the CPU sampler allocator to ensure the final
         // release is called.
         std::unique_ptr<SamplerHeapCache> mSamplerHeapCache;
+
+        // A buffer filled with zeros that is used to copy into other buffers when they need to be
+        // cleared.
+        std::unique_ptr<StagingBufferBase> mZeroBuffer;
 
         // The number of nanoseconds required for a timestamp query to be incremented by 1
         float mTimestampPeriod = 1.0f;
