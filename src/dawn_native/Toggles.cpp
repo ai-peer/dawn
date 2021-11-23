@@ -225,6 +225,10 @@ namespace dawn_native {
               "be enabled for OpenGL ES backend, and serves as a workaround by default enabled on "
               "some Metal devices with Intel GPU to ensure the depth result is correct.",
               "https://crbug.com/dawn/136"}},
+            {Toggle::DisableOptimizations,
+             {"disable_optimizations", "Disables optimizations when compiling shaders.",
+              "https://crbug.com/dawn/1203"}},
+
             // Dummy comment to separate the }} so it is clearer what to copy-paste to add a toggle.
         }};
     }  // anonymous namespace
