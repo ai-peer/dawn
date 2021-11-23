@@ -470,18 +470,32 @@ namespace dawn_native { namespace d3d12 {
             memset(mMappedData, clearValue, size);
             UnmapImpl();
         } else {
-            // TODO(crbug.com/dawn/852): use ClearUnorderedAccessView*() when the buffer usage
-            // includes STORAGE.
-            DynamicUploader* uploader = device->GetDynamicUploader();
-            UploadHandle uploadHandle;
-            DAWN_TRY_ASSIGN(uploadHandle,
-                            uploader->Allocate(size, device->GetPendingCommandSerial(),
-                                               kCopyBufferToBufferOffsetAlignment));
+            const Buffer* zeroBuffer = device->GetZeroBuffer();
+            if (clearValue == 0u && zeroBuffer != nullptr) {
+                uint64_t zeroBufferSize = zeroBuffer->GetAllocatedSize();
 
-            memset(uploadHandle.mappedBuffer, clearValue, size);
+                while (size > 0) {
+                    uint64_t copySize = std::min(zeroBufferSize, size);
+                    commandContext->GetCommandList()->CopyBufferRegion(
+                        GetD3D12Resource(), offset, zeroBuffer->GetD3D12Resource(), 0, copySize);
 
-            device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
-                                                uploadHandle.startOffset, this, offset, size);
+                    offset += copySize;
+                    size -= copySize;
+                }
+            } else {
+                // TODO(crbug.com/dawn/852): use ClearUnorderedAccessView*() when the buffer usage
+                // includes STORAGE.
+                DynamicUploader* uploader = device->GetDynamicUploader();
+                UploadHandle uploadHandle;
+                DAWN_TRY_ASSIGN(uploadHandle,
+                                uploader->Allocate(size, device->GetPendingCommandSerial(),
+                                                   kCopyBufferToBufferOffsetAlignment));
+
+                memset(uploadHandle.mappedBuffer, clearValue, size);
+
+                device->CopyFromStagingToBufferImpl(commandContext, uploadHandle.stagingBuffer,
+                                                    uploadHandle.startOffset, this, offset, size);
+            }
         }
 
         return {};

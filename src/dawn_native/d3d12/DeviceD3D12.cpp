@@ -49,6 +49,9 @@ namespace dawn_native { namespace d3d12 {
     static constexpr uint16_t kShaderVisibleDescriptorHeapSize = 1024;
     static constexpr uint8_t kAttachmentDescriptorHeapSize = 64;
 
+    // Value may change in the future to better accomodate large clears.
+    static constexpr uint64_t kZeroBufferSize = 1024 * 1024 * 4;  // 4 Mb
+
     static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
 
     // static
@@ -166,6 +169,27 @@ namespace dawn_native { namespace d3d12 {
         // The environment can only use DXC when it's available. Override the decision if it is not
         // applicable.
         DAWN_TRY(ApplyUseDxcToggle());
+
+        // Allocate a buffer filled with zeros to use when clearing.
+        BufferDescriptor zeroBufferDescriptor;
+        zeroBufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+        zeroBufferDescriptor.size = kZeroBufferSize;
+        zeroBufferDescriptor.label = "ZeroBuffer_DawnInternal";
+        Ref<BufferBase> zeroBufferBase;
+        DAWN_TRY_ASSIGN(zeroBufferBase, CreateBuffer(&zeroBufferDescriptor));
+
+        CommandRecordingContext* commandContext;
+        DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext());
+
+        Ref<Buffer> zeroBuffer = ToBackend(std::move(zeroBufferBase));
+        DAWN_TRY(zeroBuffer->EnsureDataInitialized(commandContext));
+
+        zeroBuffer->TrackUsageAndTransitionNow(commandContext, wgpu::BufferUsage::CopySrc);
+
+        // Don't assign to the member until the buffer has been initialized, otherwise it will
+        // attempt to copy from itself.
+        mZeroBuffer = std::move(zeroBuffer);
+
         return {};
     }
 
@@ -249,6 +273,10 @@ namespace dawn_native { namespace d3d12 {
             DAWN_TRY(mPendingCommands.Open(mD3d12Device.Get(), mCommandAllocatorManager.get()));
         }
         return &mPendingCommands;
+    }
+
+    const Buffer* Device::GetZeroBuffer() const {
+        return mZeroBuffer.Get();
     }
 
     MaybeError Device::TickImpl() {
