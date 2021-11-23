@@ -67,6 +67,24 @@
       "message": "LGTM although it seems like we should be using WGPUAdapterProperties for this. I assume that\u0027s not easy to do right now though.",
       "revId": "683061e26a2d2a3c97db2b7eec47291ffe112164",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96baee63_0d41e927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-23T22:26:12Z",
+      "side": 1,
+      "message": "yea. I\u0027m getting annoyed by this so I may make the push to put the adapter APIs all on the wire",
+      "parentUuid": "b57524c7_6db42132",
+      "revId": "683061e26a2d2a3c97db2b7eec47291ffe112164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
