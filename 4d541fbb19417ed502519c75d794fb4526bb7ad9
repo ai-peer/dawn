@@ -16,6 +16,142 @@
       "message": "PTAL! The shader bit is in the next CL if you want to see, but that one is still blocked on the Tint roll into Dawn.",
       "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b36737_33aca1fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3fee8ee_a47fcc1b",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "Can\u0027t the slots be merged between VS (baseVertex/Instance) and CS (numWorkgroups) such that there are only max(2, 3) + 4 \u003d 7 slots needed?",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6a74b19_fcd0d9e3",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "Won\u0027t the storage buffers be sorted after the uniform buffers such that we can go from GetDynamicUniformBufferCount to GetDynamicBufferCount?",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "725c917e_756eb6a3",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "Can we have a block comment that explains what happens here roughly? It will make it easier to come back to this code.",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5134071_2d3db296",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "ditto about looping over exactly the dynamic storage buffers.",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e602cd6_2a9e4642",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "nit: Maybe add a comment that says that we allocate register names so that we can match between the pipeline layout and the shader, but that they are not related to the allocation in the root signature. Also maybe it makes sense to start having a RegisterName struct with a space and a register now. WDYT?",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bcc1c0f_ff63703d",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "nit: leftover code?",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98850d4b_59707d98",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T17:06:09Z",
+      "side": 1,
+      "message": "We only ever use the first element of the stack_vec so I think it could just be an ityp::array\u003cBindGroupIndex, uint32_t, kMaxBindGroups\u003e.\n\nThe data used for the shaders could just be a vec. IMHO it\u0027s ok to have duplication because it will end up using less memory overall and also we can hide the shader data at the end of the structure so we have more memory locality.",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
