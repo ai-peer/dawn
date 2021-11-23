@@ -22,6 +22,30 @@
       },
       "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd9425d1_53ee0a95",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-23T14:38:20Z",
+      "side": 1,
+      "message": "Yeah, I thought of that, but since I\u0027m using it below for DXBC output, I think it\u0027s clearer to have it here. Also, it\u0027s just for the exceptional case of dumping stuff, so I think the extra string concat cost is okay.",
+      "parentUuid": "8b7a663c_b6b2510e",
+      "range": {
+        "startLine": 528,
+        "startChar": 16,
+        "endLine": 528,
+        "endChar": 34
+      },
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
