@@ -16,6 +16,24 @@
       "message": "Forgot to say that this change also changes this behaviour -- we no longer default to EmitHLSLDebugSymbols (disable optimizations) in Debug builds. Will update the commit comment.",
       "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d3c3571_285ee39c",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-23T18:48:37Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "0b1762be_6293156b",
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
