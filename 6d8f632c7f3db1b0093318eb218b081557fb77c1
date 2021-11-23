@@ -3,6 +3,63 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1ab77a6a_246f94a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T16:15:21Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81b0a7e6_08eedb87",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T16:15:21Z",
+      "side": 1,
+      "message": "unit: const Flag\u0026",
+      "range": {
+        "startLine": 387,
+        "startChar": 17,
+        "endLine": 387,
+        "endChar": 21
+      },
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81998586_b823fdf0",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T16:15:21Z",
+      "side": 1,
+      "message": "nit: Maybe also explain why do they need to be handled separately. Is it because they are combination flags on multiple bits? Does the order matter?",
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "8b7a663c_b6b2510e",
         "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
         "patchSetId": 1
