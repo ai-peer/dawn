@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad5abed8_9cd17fa2",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-23T16:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81b0a7e6_08eedb87",
+      "range": {
+        "startLine": 387,
+        "startChar": 17,
+        "endLine": 387,
+        "endChar": 21
+      },
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81998586_b823fdf0",
@@ -72,6 +96,24 @@
       "side": 1,
       "message": "Yes to both. Two bits are used, and they don\u0027t map nicely to 0-3:\n\n#define D3DCOMPILE_OPTIMIZATION_LEVEL0                  (1 \u003c\u003c 14)\n#define D3DCOMPILE_OPTIMIZATION_LEVEL1                  0\n#define D3DCOMPILE_OPTIMIZATION_LEVEL2                  ((1 \u003c\u003c 14) | (1 \u003c\u003c 15))\n#define D3DCOMPILE_OPTIMIZATION_LEVEL3                  (1 \u003c\u003c 15)\n\n\nAt first I thought I could mask the 2 bits like: ((compileFlags \u003e\u003e 14) \u0026 0b11)\n\nBut the values don\u0027t map nicely:\n\nv  -\u003e optimization level\n00 -\u003e 1\n01 -\u003e 0\n10 -\u003e 3\n11 -\u003e 2\n\nI\u0027ll update the comment.",
       "parentUuid": "81998586_b823fdf0",
+      "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba24aa9c_94d0a3e3",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-23T16:48:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a47ebbcd_7d461912",
       "revId": "6d8f632c7f3db1b0093318eb218b081557fb77c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
