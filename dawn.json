@@ -26,7 +26,6 @@
     "request adapter options": {
         "category": "structure",
         "extensible": "in",
-        "tags": ["upstream"],
         "members": [
             {"name": "compatible surface", "type": "surface"},
             {"name": "power preference", "type": "power preference", "tags": ["upstream"]},
@@ -35,7 +34,6 @@
     },
     "request adapter status": {
         "category": "enum",
-        "tags": ["upstream"],
         "emscripten_no_enum_table": true,
         "values": [
             {"value": 0, "name": "success"},
@@ -46,7 +44,6 @@
     },
     "request adapter callback": {
         "category": "callback",
-        "tags": ["upstream"],
         "args": [
             {"name": "status", "type": "request adapter status"},
             {"name": "adapter", "type": "adapter"},
@@ -56,19 +53,16 @@
     },
     "adapter": {
         "category": "object",
-        "tags": ["upstream"],
         "methods": [
             {
                 "name": "get limits",
                 "returns": "bool",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "limits", "type": "supported limits", "annotation": "*"}
                 ]
             },
             {
                 "name": "get properties",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "properties", "type": "adapter properties", "annotation": "*"}
                 ]
@@ -76,7 +70,6 @@
             {
                 "name": "has feature",
                 "returns": "bool",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "feature", "type": "feature name"}
                 ]
@@ -116,8 +109,6 @@
     "device descriptor": {
         "category": "structure",
         "extensible": "in",
-        "tags": ["upstream"],
-        "_TODO": "Add requiredFeatures and requiredLimits support",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "required features count", "type": "uint32_t"},
@@ -1255,7 +1246,6 @@
     },
     "feature name": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "undefined", "jsrepr": "undefined"},
             {"value": 1, "name": "depth clip control", "tags": ["upstream"]},
@@ -1329,7 +1319,6 @@
             },
             {
                 "name": "request adapter",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "options", "type": "request adapter options", "annotation": "const*"},
                     {"name": "callback", "type": "request adapter callback"},
