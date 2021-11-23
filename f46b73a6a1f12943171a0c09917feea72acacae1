@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8db9e451_dcef2dfe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-23T08:42:22Z",
+      "side": 1,
+      "message": "No additional comments, thanks for the iterations. You can press the CQ+2 button, I think it should work.",
+      "revId": "f46b73a6a1f12943171a0c09917feea72acacae1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
