@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "f40e9bc44bc49156ac86a3d342fee1ec39f97a33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7e4265c_8978a202",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-23T22:55:54Z",
+      "side": 1,
+      "message": "switching reviewers for Corentin since Loko is out",
+      "revId": "f40e9bc44bc49156ac86a3d342fee1ec39f97a33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
