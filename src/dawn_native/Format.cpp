@@ -14,6 +14,8 @@
 
 #include "dawn_native/Format.h"
 
+#include "absl/strings/str_format.h"
+#include "common/Log.h"
 #include "dawn_native/Device.h"
 #include "dawn_native/EnumMaskIterator.h"
 #include "dawn_native/Features.h"
@@ -141,6 +143,8 @@ namespace dawn_native {
 
         auto AddFormat = [&table, &formatsSet](Format format) {
             size_t index = ComputeFormatIndex(format.format);
+            dawn::WarningLog() << "AddFormat index: " << index
+                               << absl::StrFormat(", format: %s", format.format);
             ASSERT(index < table.size());
 
             // This checks that each format is set at most once, the first part of checking that all
@@ -335,8 +339,15 @@ namespace dawn_native {
         AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 4, true);
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
                               Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, true, 2);
+        bool isD24S8Supported = device->IsFeatureEnabled(Feature::Depth24UnormStencil8);
+        dawn::WarningLog() << "isD24S8Supported = " << isD24S8Supported;
+        AddMultiAspectFormat(wgpu::TextureFormat::Depth24UnormStencil8,
+                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, isD24S8Supported, 2);
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, true);
-        // TODO(dawn:690): Implement Depth24UnormStencil8, Depth32FloatStencil8.
+        bool isD32S8Supported = device->IsFeatureEnabled(Feature::Depth32FloatStencil8);
+         dawn::WarningLog() << "isD32S8Supported = " << isD32S8Supported;
+        AddMultiAspectFormat(wgpu::TextureFormat::Depth32FloatStencil8,
+                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Stencil8, true, isD32S8Supported, 2);
 
         // BC compressed formats
         bool isBCFormatSupported = device->IsFeatureEnabled(Feature::TextureCompressionBC);
