@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b84eab_30726157",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-11-23T06:13:37Z",
+      "side": 1,
+      "message": "LGTM, thanks Junwei.",
+      "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c50b104_877848c3",
@@ -88,6 +105,30 @@
       "writtenOn": "2021-11-22T15:49:56Z",
       "side": 1,
       "message": "nit: will the copyright year need to be customized for WebNN?",
+      "range": {
+        "startLine": 24,
+        "startChar": 17,
+        "endLine": 24,
+        "endChar": 21
+      },
+      "revId": "47c2a321aa2577d3cf617576ad8e865461774150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fb3ff87_0bbfe6e7",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1002176
+      },
+      "writtenOn": "2021-11-23T06:13:37Z",
+      "side": 1,
+      "message": "WebNN probably needs to set the copyright year to 2021.",
+      "parentUuid": "51b1a2f1_60ff0b3c",
       "range": {
         "startLine": 24,
         "startChar": 17,
