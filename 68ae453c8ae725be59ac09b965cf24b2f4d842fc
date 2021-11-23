@@ -56,6 +56,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8e136b10_19c203a4",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-23T07:34:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1372fdb6_450b46c2",
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d246c77f_4ac4ecd6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -501,6 +519,30 @@
       "side": 1,
       "message": "for what it\u0027s worth, this is the only change in the generated files",
       "parentUuid": "463d7c50_4ea2e4cb",
+      "range": {
+        "startLine": 51,
+        "startChar": 8,
+        "endLine": 51,
+        "endChar": 9
+      },
+      "revId": "68ae453c8ae725be59ac09b965cf24b2f4d842fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21de2b35_acb682ca",
+        "filename": "generator/templates/target_api.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-23T07:34:54Z",
+      "side": 1,
+      "message": "Got it, thanks.",
+      "parentUuid": "68692e74_4151a6c4",
       "range": {
         "startLine": 51,
         "startChar": 8,
