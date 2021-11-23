@@ -50,6 +50,23 @@
       "message": "Kai, PTAL!",
       "revId": "683061e26a2d2a3c97db2b7eec47291ffe112164",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b57524c7_6db42132",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-23T22:24:12Z",
+      "side": 1,
+      "message": "LGTM although it seems like we should be using WGPUAdapterProperties for this. I assume that\u0027s not easy to do right now though.",
+      "revId": "683061e26a2d2a3c97db2b7eec47291ffe112164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
