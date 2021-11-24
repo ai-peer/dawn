@@ -40,6 +40,8 @@ namespace dawn_native {
                 u_scale: vec2<f32>;
                 u_offset: vec2<f32>;
                 u_alphaOp: u32;
+                u_srcColorSpace: u32;
+                u_dstColorSpace: u32;
             };
 
             [[binding(0), group(0)]] var<uniform> uniforms : Uniforms;
@@ -48,6 +50,83 @@ namespace dawn_native {
                 [[location(0)]] texcoords : vec2<f32>;
                 [[builtin(position)]] position : vec4<f32>;
             };
+
+            fn display_p3_gamma_to_linear_transform(v: f32) -> f32 {
+                var value = v;
+                if (v < 4.04499359e-02) {
+                    value = 7.73993805e-02 * v;
+                } else {
+                    value = pow(9.47867334e-01 * v + 5.21326549e-02, 2.40000010e+00);
+                }
+                return value;
+            }
+
+            fn scRGBLinear_to_sRGB_gamma_to_linear_transform(v: f32) -> f32 {
+                var value = v;
+                if (v < 3.13080009e-03) {
+                    value = 1.29200001e+01 * v;
+                } else {
+                    value = pow(1.13711894e+00 * v, 4.16666657e-01) + -5.49999475e-02;
+                }
+                return value;
+            }
+
+            fn display_p3_to_scRGBLinear(color: vec3<f32>) -> vec3<f32> {
+                var pixel = color;
+                pixel.r = display_p3_gamma_to_linear_transform(color.r);
+                pixel.g = display_p3_gamma_to_linear_transform(color.g);
+                pixel.b = display_p3_gamma_to_linear_transform(color.b);
+                pixel = 
+                    mat3x3<f32>(1.22493994e+00, -4.20570746e-02, -1.96375493e-02,
+                         -2.24940181e-01, 1.04205704e+00, -7.86360055e-02,
+                         -8.24630817e-08, 1.82840978e-08, 1.09827363e+00) * pixel;
+                return pixel;
+            }
+
+            fn scRGBLinear_to_sRGB(color: vec3<f32>) -> vec3<f32> {
+                var pixel = color;
+                pixel.r = sign(color.r) *
+                    scRGBLinear_to_sRGB_gamma_to_linear_transform(abs(color.r));
+                pixel.g = sign(color.g) *
+                    scRGBLinear_to_sRGB_gamma_to_linear_transform(abs(color.g));
+                pixel.b = sign(color.b) *
+                    scRGBLinear_to_sRGB_gamma_to_linear_transform(abs(color.b));
+                return pixel;
+            }
+
+
+            fn color_space_conversion(color: vec3<f32>,
+                                      srcColorSpace: u32,
+                                      dstColorSpace: u32) -> vec3<f32> {
+                if (srcColorSpace == dstColorSpace) {
+                    return color;
+                }
+                
+                // Color space conversion op could be handled in two steps:
+                //     1. Convert from soruce color space to scRGBLinear
+                //     2. Convert from scRGBLinear to dst color space.
+                var pixel = color;
+                switch (srcColorSpace) {
+                    case 1u: { // display p3
+                        pixel = display_p3_to_scRGBLinear(pixel);
+                        break;
+                    }
+                    default: {
+                        break;
+                    }
+                }
+
+                switch (dstColorSpace) {
+                    case 0u: { // extended sRGB
+                        pixel = scRGBLinear_to_sRGB(pixel);
+                        break;
+                    }
+                    default: {
+                        break;
+                    }
+                }
+                return pixel;
+            }
 
             [[stage(vertex)]] fn vs_main(
                 [[builtin(vertex_index)]] VertexIndex : u32
@@ -125,6 +204,12 @@ namespace dawn_native {
                     }
                 }
 
+                srcColor =
+                    vec4<f32>(color_space_conversion(srcColor.rgb,
+                                                     uniforms.u_srcColorSpace,
+                                                     uniforms.u_dstColorSpace),
+                              srcColor.a);
+
                 return srcColor;
             }
         )";
@@ -135,8 +220,10 @@ namespace dawn_native {
             float offsetX;
             float offsetY;
             wgpu::AlphaOp alphaOp;
+            wgpu::ColorSpace srcColorSpace;
+            wgpu::ColorSpace dstColorSpace;
         };
-        static_assert(sizeof(Uniform) == 20, "");
+        static_assert(sizeof(Uniform) == 28, "");
 
         // TODO(crbug.com/dawn/856): Expand copyTextureForBrowser to support any
         // non-depth, non-stencil, non-compressed texture format pair copy. Now this API
@@ -310,7 +397,9 @@ namespace dawn_native {
             copySize->height / static_cast<float>(srcTextureSize.height),  // scale
             source->origin.x / static_cast<float>(srcTextureSize.width),
             source->origin.y / static_cast<float>(srcTextureSize.height),  // offset
-            wgpu::AlphaOp::DontChange  // alphaOp default value: DontChange
+            wgpu::AlphaOp::DontChange,  // alphaOp default value: DontChange
+            wgpu::ColorSpace::SRGB,     // src color space default value: SRGB
+            wgpu::ColorSpace::SRGB,     // dst color space default value: SRGB
         };
 
         // Handle flipY. FlipY here means we flip the source texture firstly and then
@@ -323,6 +412,10 @@ namespace dawn_native {
 
         // Set alpha op.
         uniformData.alphaOp = options->alphaOp;
+
+        // Set color space.
+        uniformData.srcColorSpace = options->colorSpaceInfo.srcColorSpace;
+        uniformData.dstColorSpace = options->colorSpaceInfo.dstColorSpace;
 
         Ref<BufferBase> uniformBuffer;
         DAWN_TRY_ASSIGN(

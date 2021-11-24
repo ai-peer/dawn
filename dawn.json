@@ -843,13 +843,30 @@
             {"value": 2, "name": "unpremultiply"}
         ]
     },
+    "color space": {
+        "category": "enum",
+        "tags": ["dawn"],
+        "values": [
+            {"value": 0, "name": "sRGB"},
+            {"value": 1, "name": "display p3"}
+        ]
+    },
+    "color space info": {
+        "category": "structure",
+        "extensible": "in",
+        "members": [
+            {"name": "srcColorSpace", "type": "color space", "default": "sRGB"},
+            {"name": "dstColorSpace", "type": "color space", "default": "sRGB"}
+        ]
+    },
     "copy texture for browser options": {
         "category": "structure",
         "extensible": "in",
         "tags": ["dawn"],
         "members": [
             {"name": "flipY", "type": "bool", "default": "false"},
-            {"name": "alphaOp", "type": "alpha op", "default": "dont change"}
+            {"name": "alphaOp", "type": "alpha op", "default": "dont change"},
+            {"name": "colorSpaceInfo", "type": "color space info"}
         ]
     },
     "create compute pipeline async callback": {

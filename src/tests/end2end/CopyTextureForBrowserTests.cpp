@@ -37,6 +37,8 @@ namespace {
     using DstOrigin = wgpu::Origin3D;
     using CopySize = wgpu::Extent3D;
     using FlipY = bool;
+    using SrcColorSpace = wgpu::ColorSpace;
+    using DstColorSpace = wgpu::ColorSpace;
 
     std::ostream& operator<<(std::ostream& o, wgpu::Origin3D origin) {
         o << origin.x << ", " << origin.y << ", " << origin.z;
@@ -50,6 +52,7 @@ namespace {
 
     DAWN_TEST_PARAM_STRUCT(FormatTestParams, SrcFormat, DstFormat)
     DAWN_TEST_PARAM_STRUCT(SubRectTestParams, SrcOrigin, DstOrigin, CopySize, FlipY)
+    DAWN_TEST_PARAM_STRUCT(ColorSpaceTestParams, DstFormat, SrcColorSpace, DstColorSpace)
 
 }  // anonymous namespace
 
@@ -578,6 +581,110 @@ class CopyTextureForBrowser_AlphaOps
     }
 };
 
+class CopyTextureForBrowser_ColorSpace
+    : public CopyTextureForBrowserTests<DawnTestWithParams<ColorSpaceTestParams>> {
+  protected:
+    // sRGB color space is the only valid color space right now.
+    // Expected data generated in sRGB color space by default
+    std::vector<float> GetExpectedData(wgpu::ColorSpace srcColorSpace) {
+        switch (srcColorSpace) {
+            case wgpu::ColorSpace::SRGB:
+                return std::vector<float>{
+                    0.0, 1.0, 1.0, 1.0, 0.4, 0.0, 0.0, 1.0, 0.6, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0,
+
+                    1.0, 0.0, 1.0, 1.0, 0.0, 0.4, 0.0, 1.0, 0.0, 0.6, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0,
+
+                    1.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.4, 1.0, 0.0, 0.0, 0.6, 1.0, 0.0, 0.0, 1.0, 1.0,
+                };
+            case wgpu::ColorSpace::DisplayP3:
+                return std::vector<float>{
+                    -0.5118, 1.0183,  1.0085,  1.0, 0.4401,  -0.0665, -0.0337, 1.0,
+                    0.6578,  -0.1199, -0.0723, 1.0, 1.093,   -0.2267, -0.1501, 1.0,
+
+                    1.093,   -0.2266, 1.0337,  1.0, -0.1894, 0.4079,  -0.1027, 1.0,
+                    -0.2969, 0.6114,  -0.1720, 1.0, -0.5118, 1.0183,  -0.3107, 1.0,
+
+                    0.9999,  1.0001,  -0.3462, 1.0, 0.0000,  0.0001,  0.4181,  1.0,
+                    0.0001,  0.0001,  0.6260,  1.0, 0.0002,  0.0004,  1.0419,  1.0,
+                };
+        }
+        UNREACHABLE();
+    }
+
+    void DoColorSpaceConversionTest() {
+        constexpr uint32_t kWidth = 12;
+        constexpr uint32_t kHeight = 1;
+
+        std::vector<RGBA8> sourceTextureData{
+            // Take RGBA8Unorm as example:
+            // R channel has different values
+            RGBA8(0, 255, 255, 255),  // r = 0.0
+            RGBA8(102, 0, 0, 255),    // r = 0.4
+            RGBA8(153, 0, 0, 255),    // r = 0.6
+            RGBA8(255, 0, 0, 255),    // r = 1.0
+
+            // G channel has different values
+            RGBA8(255, 0, 255, 255),  // g = 0.0
+            RGBA8(0, 102, 0, 255),    // g = 0.4
+            RGBA8(0, 153, 0, 255),    // g = 0.6
+            RGBA8(0, 255, 0, 255),    // g = 1.0
+
+            // B channel has different values
+            RGBA8(255, 255, 0, 255),  // b = 0.0
+            RGBA8(0, 0, 102, 255),    // b = 0.4
+            RGBA8(0, 0, 153, 255),    // b = 0.6
+            RGBA8(0, 0, 255, 255),    // b = 1.0
+        };
+
+        TextureSpec srcTextureSpec;
+        srcTextureSpec.textureSize = {kWidth, kHeight};
+
+        TextureSpec dstTextureSpec;
+        dstTextureSpec.textureSize = {kWidth, kHeight};
+        dstTextureSpec.format = GetParam().mDstFormat;
+
+        wgpu::CopyTextureForBrowserOptions options = {};
+        options.colorSpaceInfo.srcColorSpace = GetParam().mSrcColorSpace;
+        options.colorSpaceInfo.dstColorSpace = GetParam().mDstColorSpace;
+
+        const wgpu::Extent3D& copySize = {kWidth, kHeight};
+
+        const utils::TextureDataCopyLayout srcCopyLayout =
+            utils::GetTextureDataCopyLayoutForTextureAtLevel(
+                kTextureFormat,
+                {srcTextureSpec.textureSize.width, srcTextureSpec.textureSize.height,
+                 copySize.depthOrArrayLayers},
+                srcTextureSpec.level);
+
+        wgpu::TextureUsage srcUsage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                                      wgpu::TextureUsage::TextureBinding;
+        wgpu::Texture srcTexture = this->CreateAndInitTexture(
+            srcTextureSpec, srcUsage, srcCopyLayout, sourceTextureData.data(),
+            sourceTextureData.size() * sizeof(RGBA8));
+
+        // Create dst texture.
+        wgpu::Texture dstTexture = this->CreateTexture(
+            dstTextureSpec, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding |
+                                wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc);
+
+        // Perform the texture to texture copy
+        this->RunCopyExternalImageToTexture(srcTextureSpec, srcTexture, dstTextureSpec, dstTexture,
+                                            copySize, options);
+
+        std::vector<float> expectedData = GetExpectedData(options.colorSpaceInfo.srcColorSpace);
+
+        // The value provided by Apple's
+        float tolerance = 0.001;
+        if (dstTextureSpec.format == wgpu::TextureFormat::RGBA16Float) {
+            EXPECT_TEXTURE_FLOAT16_EQ(expectedData.data(), dstTexture, {0, 0}, {kWidth, kHeight},
+                                      dstTextureSpec.format, tolerance);
+        } else {
+            EXPECT_TEXTURE_EQ(expectedData.data(), dstTexture, {0, 0}, {kWidth, kHeight},
+                              dstTextureSpec.format, tolerance);
+        }
+    }
+};
+
 // Verify CopyTextureForBrowserTests works with internal pipeline.
 // The case do copy without any transform.
 TEST_P(CopyTextureForBrowser_Basic, PassthroughCopy) {
@@ -686,3 +793,26 @@ DAWN_INSTANTIATE_TEST_P(
     {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
     std::vector<wgpu::AlphaOp>({wgpu::AlphaOp::DontChange, wgpu::AlphaOp::Premultiply,
                                 wgpu::AlphaOp::Unpremultiply}));
+
+// Verify |CopyTextureForBrowser| doing color space conversion.
+// Currently the only supported color space conversions are sRGB->sRGB and
+// display p3->sRGB
+// Test alpha ops: DontChange, Premultiply, Unpremultiply.
+TEST_P(CopyTextureForBrowser_ColorSpace, colorSpaceConversion) {
+    // Skip OpenGLES backend because it fails on using RGBA8Unorm as
+    // source texture format.
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
+
+    // Tests skip due to crbug.com/dawn/1104.
+    DAWN_SUPPRESS_TEST_IF(IsWARP());
+
+    DoColorSpaceConversionTest();
+}
+
+DAWN_INSTANTIATE_TEST_P(
+    CopyTextureForBrowser_ColorSpace,
+    {D3D12Backend(), MetalBackend(), OpenGLBackend(), OpenGLESBackend(), VulkanBackend()},
+    std::vector<wgpu::TextureFormat>({wgpu::TextureFormat::RGBA16Float,
+                                      wgpu::TextureFormat::RGBA32Float}),
+    std::vector<wgpu::ColorSpace>({wgpu::ColorSpace::SRGB, wgpu::ColorSpace::DisplayP3}),
+    std::vector<wgpu::ColorSpace>({wgpu::ColorSpace::SRGB}));
