@@ -16,6 +16,40 @@
       "message": "Let\u0027s try that again!",
       "revId": "49a97f4157158d2f84c5d390b9001d8880734a92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d4a3e6b_4f5fee61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T18:40:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "49a97f4157158d2f84c5d390b9001d8880734a92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e2a766f_0a8e43fd",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T18:40:04Z",
+      "side": 1,
+      "message": "optional nit: we could extract the  constant to share it between the functions.",
+      "revId": "49a97f4157158d2f84c5d390b9001d8880734a92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
