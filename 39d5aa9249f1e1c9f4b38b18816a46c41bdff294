@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "738438ec_9ca8e292",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-24T03:37:00Z",
+      "side": 1,
+      "message": "10:30 pm: scratch that. FXC still miscompiles to infinite loops even when I make \"for\" loops into \"while\" loops... except if I repeat the loop condition as the last statement in the while loop:\n\n    uint i0 \u003d 0u;\n    while (true) {\n      if (!((i0 \u003c 2u))) { break; }\n      if ((testVar[min(i0, 1u)] !\u003d 0.0f)) {\n        atomicStore_1(output, 0u, 1u);\n      }\n      i0 \u003d (i0 + 1u);\n      if (!((i0 \u003c 2u))) { break; } // Repeat break condition\n    }\n    \nDoing this in for loops doesn\u0027t work, though.\n\nSorry for the wall of text, btw.",
+      "parentUuid": "9c510108_54572ed0",
+      "revId": "39d5aa9249f1e1c9f4b38b18816a46c41bdff294",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d27dcd96_9adfeb00",
         "filename": "src/dawn_native/Toggles.h",
         "patchSetId": 2
