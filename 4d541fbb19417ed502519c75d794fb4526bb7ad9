@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39331450_81467d06",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "Done. but now the visibility is ALL. not sure the perf implications of letting the fragment stage have visibility to baseVertex/baseInstance. I don\u0027t feel strongly in either direction though. We do have enough binding space to leave them separate, but fewer might be better? cause then there\u0027s more space for root constant promotion of other buffers???\nOr maybe ALL doesn\u0027t matter for things that are readonly because the driver doesn\u0027t have to flush changed data between stages.\n\nI\u0027ll ask someone.",
+      "parentUuid": "b3fee8ee_a47fcc1b",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6a74b19_fcd0d9e3",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 3
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-23T17:06:09Z",
       "side": 1,
       "message": "Won\u0027t the storage buffers be sorted after the uniform buffers such that we can go from GetDynamicUniformBufferCount to GetDynamicBufferCount?",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265cebec_e0f19502",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "GetDynamicUniformBufferCount is not a thing though. Dynamic buffers are in front, but they\u0027re not sorted by type, they\u0027re sorted by binding number. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/BindGroupLayout.cpp;l\u003d294",
+      "parentUuid": "c6a74b19_fcd0d9e3",
       "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c83b545_2da1fc20",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "725c917e_756eb6a3",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5134071_2d3db296",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-11-23T17:06:09Z",
       "side": 1,
       "message": "ditto about looping over exactly the dynamic storage buffers.",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1ef6f51_eaa9c8e7",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "e5134071_2d3db296",
       "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b13a644_bbdf45e2",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "hm, I\u0027ll add a struct in a follow-up, so the rebasing is easier",
+      "parentUuid": "1e602cd6_2a9e4642",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0bcc1c0f_ff63703d",
@@ -137,6 +227,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b057eb9_80794702",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0bcc1c0f_ff63703d",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98850d4b_59707d98",
@@ -150,6 +258,24 @@
       "writtenOn": "2021-11-23T17:06:09Z",
       "side": 1,
       "message": "We only ever use the first element of the stack_vec so I think it could just be an ityp::array\u003cBindGroupIndex, uint32_t, kMaxBindGroups\u003e.\n\nThe data used for the shaders could just be a vec. IMHO it\u0027s ok to have duplication because it will end up using less memory overall and also we can hide the shader data at the end of the structure so we have more memory locality.",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6996a93b_876f748a",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:42:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "98850d4b_59707d98",
       "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
