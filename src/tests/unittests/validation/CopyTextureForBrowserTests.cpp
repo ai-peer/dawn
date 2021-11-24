@@ -50,12 +50,12 @@ class CopyTextureForBrowserTest : public ValidationTest {
                                    uint32_t dstLevel,
                                    wgpu::Origin3D dstOrigin,
                                    wgpu::Extent3D extent3D,
-                                   wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
+                                   wgpu::TextureAspect aspect = wgpu::TextureAspect::All,
+                                   wgpu::CopyTextureForBrowserOptions options = {}) {
         wgpu::ImageCopyTexture srcImageCopyTexture =
             utils::CreateImageCopyTexture(srcTexture, srcLevel, srcOrigin, aspect);
         wgpu::ImageCopyTexture dstImageCopyTexture =
             utils::CreateImageCopyTexture(dstTexture, dstLevel, dstOrigin, aspect);
-        wgpu::CopyTextureForBrowserOptions options = {};
 
         if (expectation == utils::Expectation::Success) {
             device.GetQueue().CopyTextureForBrowser(&srcImageCopyTexture, &dstImageCopyTexture,
@@ -253,4 +253,73 @@ TEST_F(CopyTextureForBrowserTest, InvalidSampleCount) {
     // A empty copy with source texture sample count > 1 failure
     TestCopyTextureForBrowser(utils::Expectation::Failure, sourceMultiSampled4x, 0, {0, 0, 0},
                               destinationMultiSampled1x, 0, {0, 0, 0}, {0, 0, 1});
+}
+
+// Test option.colorSpaceConversion.srcColorSpace/dstColroSpace
+TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_ColorSpace) {
+    wgpu::Texture source =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
+                        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding);
+    wgpu::Texture destination =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
+                        wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
+
+    wgpu::CopyTextureForBrowserOptions options = {};
+
+    // Valid src color space and dst color space
+    {
+        options.colorSpaceConversion.srcColorSpace = wgpu::ColorSpace::DisplayP3;
+        options.colorSpaceConversion.dstColorSpace = wgpu::ColorSpace::SRGB;
+
+        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+
+        options.colorSpaceConversion.srcColorSpace = wgpu::ColorSpace::SRGB;
+        options.colorSpaceConversion.dstColorSpace = wgpu::ColorSpace::SRGB;
+
+        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+    }
+
+    // Invalid dst color space
+    {
+        options.colorSpaceConversion.srcColorSpace = wgpu::ColorSpace::DisplayP3;
+        options.colorSpaceConversion.dstColorSpace = wgpu::ColorSpace::DisplayP3;
+
+        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+    }
+}
+
+// Test colorSpaceConversion.srcTextureAlphaOp
+TEST_F(CopyTextureForBrowserTest, ColorSpaceConversion_SrcTextureAlphaOp) {
+    wgpu::Texture source =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
+                        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding);
+    wgpu::Texture destination =
+        Create2DTexture(16, 16, 5, 4, wgpu::TextureFormat::RGBA8Unorm,
+                        wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::RenderAttachment);
+
+    wgpu::CopyTextureForBrowserOptions options = {};
+
+    // Valid srcTextureAlphaOp
+    {
+        options.colorSpaceConversion.srcTextureAlphaOp = wgpu::AlphaOp::Premultiply;
+
+        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+
+        options.colorSpaceConversion.srcTextureAlphaOp = wgpu::AlphaOp::Unpremultiply;
+
+        TestCopyTextureForBrowser(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+    }
+
+    // Invalid srcTextureAlphaOp
+    {
+        options.colorSpaceConversion.srcTextureAlphaOp = wgpu::AlphaOp::DontChange;
+
+        TestCopyTextureForBrowser(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0,
+                                  {0, 0, 0}, {4, 4, 1}, wgpu::TextureAspect::All, options);
+    }
 }
