@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "521929e3_b9516c48",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-24T01:22:30Z",
+      "side": 1,
+      "message": "Okay, FXC is really broken. Now it\u0027s producing an infinite loop with optimizations disabled. Here\u0027s what it fails on:\n\n//1: /* Dumped generated HLSL */\nvoid atomicStore_1(RWByteAddressBuffer buffer, uint offset, uint value) {\n  uint ignored;\n  buffer.InterlockedExchange(offset, value, ignored);\n}\n\nRWByteAddressBuffer output : register(u0, space0);\n\n[numthreads(1, 1, 1)]\nvoid main() {\n  float2 testVar \u003d float2(0.0f, 0.0f);\n  {\n    [loop] for(uint i0 \u003d 0u; (i0 \u003c 2u); i0 \u003d (i0 + 1u)) {\n      if ((testVar[min(i0, 1u)] !\u003d 0.0f)) {\n        atomicStore_1(output, 0u, 1u);\n      }\n      //if (i0 \u003c 2u) break;\n    }\n  }\n  return;\n}\n\nWhen optimizations are enabled, FXC figures out that this loop does nothing (note that testVar is initialized to 0, so the \"if\" in the loop is always false), and emits a valid empty program:\n\ncs_5_1\ndcl_globalFlags refactoringAllowed | skipOptimization\ndcl_thread_group 1, 1, 1\nret\n\nOTOH, with optimizations disabled, it still sees that the loop does nothing BUT because of the [loop] attribute, it emits a loop that never breaks -- at least, that\u0027s my suspicion. Here\u0027s what it outputs:\n\ncs_5_1\ndcl_globalFlags refactoringAllowed | skipOptimization\ndcl_uav_raw U0[0:0], space\u003d0\ndcl_temps 1\ndcl_thread_group 1, 1, 1\nloop\n  mov r0.x, l(0)\n  ne r0.x, r0.x, l(0.000000)\n  if_nz r0.x\n    mov r0.x, l(0)\n    mov r0.y, l(1)\n    imm_atomic_exch r0.x, U0[0], r0.x, r0.y\n  endif\nendloop\nret\n\nNow here\u0027s something interesting. If I take the loop condition, and simply repeat it at the top of the for loop body and break, like this:\n\n    [loop] for(uint i0 \u003d 0u; (i0 \u003c 2u); i0 \u003d (i0 + 1u)) {\n      if (i0 \u003c 2u) break; // \u003c-- repeat exit condition\n\n      if ((testVar[min(i0, 1u)] !\u003d 0.0f)) {\n        atomicStore_1(output, 0u, 1u);\n      }\n    \n    }\n\nWhen I compile with FXC with optimizations disabled, it now produces the empty program (!!) and emits these warnings:\n\nC:\\src\\tint\\out\\build\\x64-Debug\\70700.hlsl(13,12-55): warning X3557: loop only executes for 0 iteration(s), consider removing [loop]\nC:\\src\\tint\\out\\build\\x64-Debug\\70700.hlsl(13,12-55): warning X3557: loop doesn\u0027t seem to do anything, consider removing [loop]\n\nWhat this reveals is that the infinite loop generation bug in FXC has to do with the compiler deciding to generate a loop AND having determined that the loop doesn\u0027t do anything. In that case, it generates the loop body with no exit condition! This is pretty terrible.\n\nSince repeating the break condition seems to have worked here, my guess is that the problem happens with \u0027for\u0027 loops, but maybe not \u0027while\u0027 loops. If I rewrite the for loop as a while (true) loop, FXC still gives the 2 warnings, but produces a valid empty program:\n\n    uint i0 \u003d 0u;\n    [loop] while (true) {\n      if (i0 \u003c 2u) break; // \u003c-- repeat exit condition\n\n      if ((testVar[min(i0, 1u)] !\u003d 0.0f)) {\n        atomicStore_1(output, 0u, 1u);\n      }\n      \n      i0 \u003d (i0 + 1u);\n    }\n  }\n\nSo maybe the HLSL backend should always emit \u0027while (true)\u0027 loops... 😞",
+      "parentUuid": "1bb45371_72689209",
+      "revId": "39d5aa9249f1e1c9f4b38b18816a46c41bdff294",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d27dcd96_9adfeb00",
         "filename": "src/dawn_native/Toggles.h",
         "patchSetId": 2
