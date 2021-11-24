@@ -127,6 +127,24 @@
       "parentUuid": "e31d3ed3_e5de2200",
       "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d57660d_1eee9cf6",
+        "filename": "src/dawn_native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T18:47:01Z",
+      "side": 1,
+      "message": "Hmm, ok, I will replace it with an assert for now, and for the testing, I want to defer to after https://dawn-review.googlesource.com/c/dawn/+/68120 goes in. Once that is in, I can add a unit/validation test suite that tries creating stuff with destroyed device (or add a test case to each of the existing suites?) and make sure they all fail. (Without the exposed API I need to do the casting stuff to destroy the device which isn\u0027t as nice.)\n\nThen for the async case, I think I can test that with the that change since I needed to modify some of the async pipeline tests in that change anyways.",
+      "parentUuid": "07529850_7cb48c37",
+      "revId": "ad3ced6b8ea8153319034a46a246a9529dd32730",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
