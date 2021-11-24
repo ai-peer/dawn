@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "541304ef_f994b7f1",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-24T22:09:11Z",
+      "side": 1,
+      "message": "Eventually yes, but we don\u0027t have any linear options yet in the spec. Input images can have arbitrary color profiles, so it\u0027s possible an input image could be labeled as linear-srgb, but it would be uncommon.\n\nMy bigger question is how we would handle arbitrary input color profiles. I don\u0027t know what the Chromium code looks like so I don\u0027t know what we would need to feed into Dawn. In practice I think images are just tagged with arbitrary embedded color profiles so I guess Chromium must be detecting those and figuring out how they map to predefined profiles like sRGB or Display-P3. As I discovered when I was trying to create test files there are multiple possible icc definitions for Display-P3 though:\nhttps://github.com/saucecontrol/Compact-ICC-Profiles\n(But instead of using one of these I used the profile from the WebKit Logo test image here https://webkit.org/blog-files/color-gamut/)\n\nMaybe in the long term we need fully general support just like for sampling external textures. I imagine we could compute the color conversion constants on the CPU and pass them in a uniform buffer. Hopefully they could share the implementation.\n\nHaving the full matrix be computed ahead of time on the CPU would also avoid needing to do two conversions inside the shader at [1]. (But it\u0027s probably OK if we have two conversions for now.)",
+      "parentUuid": "057f5f87_e8afe245",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e759125b_2e5a63fb",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -71,6 +89,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2143c9d7_955ee235",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-24T22:09:11Z",
+      "side": 1,
+      "message": "Display-P3\u0027s gamma conversion function is the same as sRGB\u0027s. So I think this implementation can be agnostic to which of the two it\u0027s used with and called something like \"srgb_nonlinear_to_linear_positive\". (since it doesn\u0027t handle negative numbers)\n\nAlso I don\u0027t know if there\u0027s a reason these constants differ slightly from the typical definition of sRGB, but, if possible, using the typical numbers would be clearer. (0.04045 instead of 4.04499359e-02, 1/12.92 instead of 7.73993805e-02, etc.)\nhttps://en.wikipedia.org/wiki/SRGB",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "682f7179_6f13bd0d",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
@@ -99,6 +134,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "This transform looks like there are three steps? Why scRGBLinear to sRGBGamme to linear and not just scRGBLinear to linear?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22ac0dfd_c74287a8",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-24T22:09:11Z",
+      "side": 1,
+      "message": "This looks like the sRGB linear-to-nonlinear conversion (see above), in which case it could be called something like \"srgb_linear_to_nonlinear_positive\".\n\nHowever there\u0027s one difference with the sRGB conversion which is it uses 1.13711894 instead of 1.055. Is that difference intentional?",
+      "parentUuid": "8c08a276_627b1f79",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -150,6 +203,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "We do nothing to convert from extended sRGB to scRGBLinear. Do we need to do something? Otherwise we should probably rename one of them to make it clear extended sRGB \u003d\u003d scRGBLinear.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4728c1e3_cadcec76",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-24T22:09:11Z",
+      "side": 1,
+      "message": "[1]\n\nI think we should use the naming \"extended sRGB\" and avoid the \"scRGB\" naming as it carries a lot of weight that I don\u0027t think is relevant here (especially the canonical encodings which represent of a finite -0.5..+7.5 range as unsigned integers with bias).\nhttps://en.wikipedia.org/wiki/ScRGB\n\nIn the WebGPU spec we call \"extended sRGB\" simply \"srgb\" (taking the definitions from CSS Color Module Level 4) so I think it\u0027s appropriate to do so here too. (Comments could explain that \"srgb\" is extended.)",
+      "parentUuid": "923bc743_b239147f",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
