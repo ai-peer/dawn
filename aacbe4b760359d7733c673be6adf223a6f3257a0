@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "70aab326_93213632",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T18:54:05Z",
+      "side": 1,
+      "message": "This is currently only for device lost. Do these need to be added to destory as well? (I think that some of this functionality for device lost is being tested in DeviceLostTests).",
+      "parentUuid": "1523656a_7f0de40f",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 74
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "389cc1ec_126aa05e",
         "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
         "patchSetId": 13
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-19T18:00:33Z",
       "side": 1,
       "message": "could we have both tests of \"ReleaseDeviceBefore...\" and \"DestroyDeviceBefore...\" ?",
+      "range": {
+        "startLine": 366,
+        "startChar": 32,
+        "endLine": 366,
+        "endChar": 51
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "141249ae_2a4759a2",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T18:54:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "389cc1ec_126aa05e",
       "range": {
         "startLine": 366,
         "startChar": 32,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9339cf9_d1b46ecb",
+        "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T18:54:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05bedc4c_b3d22fe6",
+      "range": {
+        "startLine": 367,
+        "startChar": 33,
+        "endLine": 367,
+        "endChar": 48
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e4f4729_ab42c6b0",
@@ -100,6 +172,24 @@
       "writtenOn": "2021-11-19T15:37:00Z",
       "side": 1,
       "message": "Instead of all the additional logic here, can we use ValidationTest::SetErrorMatcher? There\u0027s a lot of additional macro magic in this CL for just one test.",
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a2bf6b_6d2d986e",
+        "filename": "src/tests/end2end/DestroyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T18:54:05Z",
+      "side": 1,
+      "message": "It\u0027s currently the same logic as in the validation test suite. It\u0027s only one test right now, but I think the infra will be worth it for future tests! If it\u0027d be preferable I can split the infra change into a separate change?",
+      "parentUuid": "0e4f4729_ab42c6b0",
       "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
