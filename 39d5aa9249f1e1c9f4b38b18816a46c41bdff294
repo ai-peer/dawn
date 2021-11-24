@@ -126,6 +126,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92ed5013_39a498dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-24T22:12:37Z",
+      "side": 1,
+      "message": "All CQ tests pass, yay!",
+      "parentUuid": "e4442c7a_041e3c8f",
+      "revId": "39d5aa9249f1e1c9f4b38b18816a46c41bdff294",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d27dcd96_9adfeb00",
