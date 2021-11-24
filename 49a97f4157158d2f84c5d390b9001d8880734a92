@@ -50,6 +50,24 @@
       "message": "optional nit: we could extract the  constant to share it between the functions.",
       "revId": "49a97f4157158d2f84c5d390b9001d8880734a92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b7707f3_6f52e2b9",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-24T20:01:49Z",
+      "side": 1,
+      "message": "Will leave like this for now to reduce churn. Will attempt to address in the future.",
+      "parentUuid": "8e2a766f_0a8e43fd",
+      "revId": "49a97f4157158d2f84c5d390b9001d8880734a92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
