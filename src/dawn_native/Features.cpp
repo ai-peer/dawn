@@ -113,6 +113,43 @@ namespace dawn_native {
             return Feature::InvalidEnum;
         }
 
+        bool ToAPIFeature(Feature feature, wgpu::FeatureName* out) {
+            switch (feature) {
+                case Feature::TextureCompressionBC:
+                    *out = wgpu::FeatureName::TextureCompressionBC;
+                    return true;
+                case Feature::TextureCompressionETC2:
+                    *out = wgpu::FeatureName::TextureCompressionETC2;
+                    return true;
+                case Feature::TextureCompressionASTC:
+                    *out = wgpu::FeatureName::TextureCompressionASTC;
+                    return true;
+                case Feature::PipelineStatisticsQuery:
+                    *out = wgpu::FeatureName::PipelineStatisticsQuery;
+                    return true;
+                case Feature::TimestampQuery:
+                    *out = wgpu::FeatureName::TimestampQuery;
+                    return true;
+                case Feature::DepthClamping:
+                    *out = wgpu::FeatureName::DepthClamping;
+                    return true;
+                case Feature::Depth24UnormStencil8:
+                    *out = wgpu::FeatureName::Depth24UnormStencil8;
+                    return true;
+                case Feature::Depth32FloatStencil8:
+                    *out = wgpu::FeatureName::Depth32FloatStencil8;
+                    return true;
+
+                case Feature::ShaderFloat16:
+                case Feature::DawnInternalUsages:
+                case Feature::MultiPlanarFormats:
+                    return false;
+
+                case Feature::EnumCount:
+                    UNREACHABLE();
+            }
+        }
+
     }  // anonymous namespace
 
     void FeaturesSet::EnableFeature(Feature feature) {
@@ -130,6 +167,22 @@ namespace dawn_native {
     bool FeaturesSet::IsEnabled(wgpu::FeatureName feature) const {
         Feature f = FromAPIFeature(feature);
         return f != Feature::InvalidEnum && IsEnabled(f);
+    }
+
+    uint32_t FeaturesSet::EnumerateFeatures(wgpu::FeatureName* features) const {
+        uint32_t count = 0;
+        for (uint32_t i : IterateBitSet(featuresBitSet)) {
+            wgpu::FeatureName feature;
+            if (!ToAPIFeature(static_cast<Feature>(i), &feature)) {
+                continue;
+            }
+            count += 1;
+            if (features != nullptr) {
+                *features = feature;
+                features += 1;
+            }
+        }
+        return count;
     }
 
     std::vector<const char*> FeaturesSet::GetEnabledFeatureNames() const {
