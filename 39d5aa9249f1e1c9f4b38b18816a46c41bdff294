@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c510108_54572ed0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-24T03:19:10Z",
+      "side": 1,
+      "message": "Took another look. I realized that I had forgotten to \"gclient sync\" my Dawn checkout, which is why my comment above shows code with the \"[loop]\" attribute, despite this change having been reverted. Turns out that the \"[loop]\" attribute here has no bearing on the bug.\n\nSo let me rephrase what I wrote above without mixing up the \"[loop]\" attribute in there:\n\nFXC fails to compiles loops into infinite loops if:\n1. Optimizations are disabled (the point of this CL)\n2. FXC statically determines that the loop does nothing\n\nSo the \"[loop]\" attribute has no bearing. Indeed, the CQ failures here are running without the \"[loop]\" change.\n\nKeep in mind that FXC ALSO fails to compile loops into infinite loops when optimizations are _enabled_ in some cases, like https://crbug.com/tint/1175. In this case, FXC miscompiles when there are early returns in the loop. With this new information, I tried modifying the 1175 code by replacing for loops with while loops, and it still miscompiles with optimizations enabled, but compiles correctly with optimizations disabled.\n\nSo what\u0027s my conclusion? Well, I think it\u0027s this:\n\n1. FXC\u0027s optimizations are broken, we should disable them (this CL).\n2. FXC\u0027s analysis of loops are broken, we should effectively disable them by replacing for loops with while loops.\n\nIf I\u0027m right, then we can\u0027t land this CL before we modify Tint to produce while loops instead of for loops in the HLSL backend.\n\nThat\u0027s where I\u0027m at at 10:20 pm on Tuesday night.",
+      "parentUuid": "521929e3_b9516c48",
+      "revId": "39d5aa9249f1e1c9f4b38b18816a46c41bdff294",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d27dcd96_9adfeb00",
         "filename": "src/dawn_native/Toggles.h",
         "patchSetId": 2
