@@ -20,6 +20,7 @@
 #include "common/LinkedList.h"
 #include "dawn_wire/WireCmd_autogen.h"
 #include "dawn_wire/client/ApiObjects_autogen.h"
+#include "dawn_wire/client/LimitsAndFeatures.h"
 #include "dawn_wire/client/ObjectBase.h"
 #include "dawn_wire/client/RequestTracker.h"
 
@@ -30,7 +31,7 @@ namespace dawn_wire { namespace client {
     class Client;
     class Queue;
 
-    class Device final : public ObjectBase {
+    class Device final : public LimitsAndFeatures, public ObjectBase {
       public:
         Device(Client* client, uint32_t refcount, uint32_t id);
         ~Device();
@@ -64,9 +65,6 @@ namespace dawn_wire { namespace client {
                                                  WGPUCreatePipelineAsyncStatus status,
                                                  const char* message);
 
-        bool GetLimits(WGPUSupportedLimits* limits) const;
-        bool HasFeature(WGPUFeatureName feature) const;
-        uint32_t EnumerateFeatures(WGPUFeatureName* features) const;
         WGPUQueue GetQueue();
 
         void CancelCallbacksForDisconnect() override;

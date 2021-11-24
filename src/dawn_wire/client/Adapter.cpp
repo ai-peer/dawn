@@ -14,28 +14,85 @@
 
 #include "dawn_wire/client/Adapter.h"
 
+#include "dawn_wire/client/Client.h"
+
 namespace dawn_wire { namespace client {
 
-    bool Adapter::GetLimits(WGPUSupportedLimits* limits) const {
-        UNREACHABLE();
+    Adapter::~Adapter() {
+    }
+
+    void Adapter::CancelCallbacksForDisconnect() {
+    }
+
+    void Adapter::SetProperties(const WGPUAdapterProperties* properties) {
+        mProperties = *properties;
+        mProperties.nextInChain = nullptr;
     }
 
     void Adapter::GetProperties(WGPUAdapterProperties* properties) const {
-        UNREACHABLE();
-    }
-
-    bool Adapter::HasFeature(WGPUFeatureName feature) const {
-        UNREACHABLE();
-    }
-
-    uint32_t Adapter::EnumerateFeatures(WGPUFeatureName* features) const {
-        UNREACHABLE();
+        *properties = mProperties;
     }
 
     void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
                                 WGPURequestDeviceCallback callback,
                                 void* userdata) {
-        callback(WGPURequestDeviceStatus_Error, nullptr, "Not implemented", nullptr);
+        if (client->IsDisconnected()) {
+            callback(WGPURequestDeviceStatus_Error, nullptr, "GPU connection lost", userdata);
+            return;
+        }
+
+        auto* allocation = client->DeviceAllocator().New(client);
+        uint64_t serial = mRequestDeviceRequests.Add({callback, allocation->object->id, userdata});
+
+        AdapterRequestDeviceCmd cmd;
+        cmd.adapterId = this->id;
+        cmd.requestSerial = serial;
+        cmd.deviceObjectHandle = ObjectHandle(allocation->object->id, allocation->generation);
+        cmd.descriptor = descriptor;
+
+        client->SerializeCommand(cmd);
+    }
+
+    bool Client::DoAdapterRequestDeviceCallback(Adapter* adapter,
+                                                uint64_t requestSerial,
+                                                WGPURequestDeviceStatus status,
+                                                const char* message,
+                                                const WGPUSupportedLimits* limits,
+                                                uint32_t featuresCount,
+                                                const WGPUFeatureName* features) {
+        // May have been deleted or recreated so this isn't an error.
+        if (adapter == nullptr) {
+            return true;
+        }
+        return adapter->OnRequestDeviceCallback(requestSerial, status, message, limits,
+                                                featuresCount, features);
+    }
+
+    bool Adapter::OnRequestDeviceCallback(uint64_t requestSerial,
+                                          WGPURequestDeviceStatus status,
+                                          const char* message,
+                                          const WGPUSupportedLimits* limits,
+                                          uint32_t featuresCount,
+                                          const WGPUFeatureName* features) {
+        RequestDeviceData request;
+        if (!mRequestDeviceRequests.Acquire(requestSerial, &request)) {
+            return false;
+        }
+
+        Device* device = client->DeviceAllocator().GetObject(request.deviceObjectId);
+        device->SetLimits(limits);
+        device->SetFeatures(features, featuresCount);
+
+        // If the return status is a failure we should give a null device to the callback and
+        // free the allocation both on the client side and the server side.
+        if (status != WGPURequestDeviceStatus_Success) {
+            client->DeviceAllocator().Free(device);
+            request.callback(status, nullptr, message, request.userdata);
+            return true;
+        }
+
+        request.callback(status, ToAPI(device), message, request.userdata);
+        return true;
     }
 
 }}  // namespace dawn_wire::client
