@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab62ed60_c5b5d079",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T16:56:27Z",
+      "side": 1,
+      "message": "depth24unorm-stencil8",
+      "range": {
+        "startLine": 9,
+        "startChar": 4,
+        "endLine": 9,
+        "endChar": 26
+      },
+      "revId": "eea4af15acf5b20f51964357aaaa490c9bbd0f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c46160c_9a0d8efa",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 12
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T16:56:27Z",
+      "side": 1,
+      "message": "unimplemented",
+      "range": {
+        "startLine": 13,
+        "startChar": 9,
+        "endLine": 13,
+        "endChar": 21
+      },
+      "revId": "eea4af15acf5b20f51964357aaaa490c9bbd0f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cd03d2b2_4f662224",
@@ -14,6 +60,23 @@
       "writtenOn": "2021-11-24T09:32:59Z",
       "side": 1,
       "message": "LGTM, no additional comments.",
+      "revId": "eea4af15acf5b20f51964357aaaa490c9bbd0f4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70cb5854_da3cd2d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T16:56:27Z",
+      "side": 1,
+      "message": "LGTM too",
       "revId": "eea4af15acf5b20f51964357aaaa490c9bbd0f4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
