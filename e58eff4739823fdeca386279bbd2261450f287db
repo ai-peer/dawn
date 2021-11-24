@@ -16,6 +16,301 @@
       "message": "PTAL, thanks!",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057f5f87_e8afe245",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "Do we need to add linear/nonlinear suffixes like VkColorSpaceKHR does? I don\u0027t understand color spaces so I can\u0027t tell.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e759125b_2e5a63fb",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "The name is a bit generic, and there doesn\u0027t really seem to be a reason why it can\u0027t be folded in CopyTextureForBrowserOptions?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44b64d98_88b082b0",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "u-nit: _transform in the function name seems unnecessary, or should be at the start like transform_display_p3_gamma_to_linear.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "682f7179_6f13bd0d",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "Can we use early returns to avoid the temporary value variable?\n\nif (v \u003c ...) {\n  return ...;\n}\nreturn ...;\n\nSame in other functions.\n\nDo you have a reference of where these magic numbers come from? Like a display P3 spec or something similar? We should link to it (or if not possible at least say something like \"Display P3 specification section 2.1 ...\")\n\nSame in other functions.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c08a276_627b1f79",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "This transform looks like there are three steps? Why scRGBLinear to sRGBGamme to linear and not just scRGBLinear to linear?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f3500f3_0653c672",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "nit: trailing whitespace, but also where does this magic matrix come from?\n\nIt could also be let colorTransform \u003d mat....; return colorTransform*pixel;",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f3074b5_8d213147",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "nit: trailing whitespace",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "923bc743_b239147f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "We do nothing to convert from extended sRGB to scRGBLinear. Do we need to do something? Otherwise we should probably rename one of them to make it clear extended sRGB \u003d\u003d scRGBLinear.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a657014d_b583f196",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "We should validate these enums (and alphaOp if it isn\u0027t done already)",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f782b38_a5220601",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "nit: it doesn\u0027t really matter what the defaults are since we just set the option unconditionally. Can we directly set the correct value from options-\u003e ?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3467a501_0fef0850",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "u-u-nit: this comment and \"Set color space\" seem a bit unnecessary",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d3f224_cf379c73",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "nit: maybe the tolerance could default to 0",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e360c7de_2910fea5",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "nit: can we split the data for each pixel? To make clang-format do it, you can add empty line comments to force it to separate lines.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b097c80_e981722b",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63ddea0b_8b07b47a",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "nit: so just 1 or skipped?",
+      "range": {
+        "startLine": 656,
+        "startChar": 17,
+        "endLine": 656,
+        "endChar": 44
+      },
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51faa783_2d8a7be2",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "If we can\u0027t do sRGB-\u003ediplayP3 or p3-\u003ep3, then I think we should add validation that prevents it.\n\nAlso the test seems to only test sRGB -\u003e sRGB and sRGB-\u003eP3? So an unsupported configuration?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "951eec0c_869228f9",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:43:54Z",
+      "side": 1,
+      "message": "Alpha ops aren\u0027t tested, maybe this comment is a leftover?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
