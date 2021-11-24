@@ -16,6 +16,125 @@
       "message": "PTAL, thanks.",
       "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98d05ed6_94a996a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "Approach LGTM overall",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "471fc747_f2ab5981",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2580,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "[1] In api_cpp.h these are translated as:\n\n uint64_t kWholeSize \u003d WGPU_WHOLE_SIZE;\n\nSo instead I think we should call them \"constant\"s and add a type so that we can output the correct type in the C++ file.",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66f0e041_977cfa71",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2587,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "nit: can we keep the TODO? It can be done by adding a dummy key. \"_TODO\": \"crbug.com/dawn/520: Remove WGPU_STRIDE_UNDEFINED in favor of WGPU_COPY_STRIDE_UNDEFINED.\"",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0474ca80_7d18eb77",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2616,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "The host_index could be removed, see comment [2].",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dad7b3d4_dfd46890",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "nit: This isn\u0027t a type. And with comment [1] I think this could be ConstantDefinition. WDYT?",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a4555cc_f27a6318",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "nit: this can be extracted inside the constructor of DefineType. Linking is only needed if parts of the object reference other stuff defined in api.json (like other types, which comment [1] will require).",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0b4881_52911870",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-24T13:11:56Z",
+      "side": 1,
+      "message": "Oh, we completely forgot about these. Instead of the host_index mechanism I think we can just remove them. Can you do it and add dawn:1023 to the bug tag in the commit message?",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
