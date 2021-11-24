@@ -40,7 +40,12 @@ constexpr char kSwiftshaderLibName[] = "libvk_swiftshader.dylib";
 #    if defined(DAWN_PLATFORM_ANDROID)
 constexpr char kVulkanLibName[] = "libvulkan.so";
 #    else
-constexpr char kVulkanLibName[] = "libvulkan.so.1";
+// For Linux we are using ANGLE's custom Vulkan loader. Note that when we are currently getting the
+// absolute path for the custom loader by getting the path to the dawn native library and traversing
+// relative from there. This has implications for dawn tests because some of them are linking
+// statically to dawn_native which means the "module" is actually the test as well. If the directory
+// location of the tests change w.r.t the shared lib then this may break.
+static string kVulkanLibName = GetModuleDirectory() + "libvulkan.so.1";
 #    endif
 #elif defined(DAWN_PLATFORM_WINDOWS)
 constexpr char kVulkanLibName[] = "vulkan-1.dll";
