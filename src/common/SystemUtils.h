@@ -25,6 +25,7 @@ const char* GetPathSeparator();
 std::pair<std::string, bool> GetEnvironmentVar(const char* variableName);
 bool SetEnvironmentVar(const char* variableName, const char* value);
 std::string GetExecutableDirectory();
+std::string GetModuleDirectory();
 
 #ifdef DAWN_PLATFORM_MACOS
 void GetMacOSVersion(int32_t* majorVersion, int32_t* minorVersion = nullptr);
