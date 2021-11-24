@@ -18,21 +18,43 @@
 #include <dawn/webgpu.h>
 
 #include "dawn_wire/WireClient.h"
+#include "dawn_wire/WireCmd_autogen.h"
+#include "dawn_wire/client/LimitsAndFeatures.h"
 #include "dawn_wire/client/ObjectBase.h"
+#include "dawn_wire/client/RequestTracker.h"
 
 namespace dawn_wire { namespace client {
 
-    class Adapter final : public ObjectBase {
+    class Adapter final : public LimitsAndFeatures, public ObjectBase {
       public:
         using ObjectBase::ObjectBase;
 
-        bool GetLimits(WGPUSupportedLimits* limits) const;
+        ~Adapter();
+        void CancelCallbacksForDisconnect() override;
+
+        void SetProperties(const WGPUAdapterProperties* properties);
+
         void GetProperties(WGPUAdapterProperties* properties) const;
-        bool HasFeature(WGPUFeatureName feature) const;
-        uint32_t EnumerateFeatures(WGPUFeatureName* features) const;
         void RequestDevice(const WGPUDeviceDescriptor* descriptor,
                            WGPURequestDeviceCallback callback,
                            void* userdata);
+
+        bool OnRequestDeviceCallback(uint64_t requestSerial,
+                                     WGPURequestDeviceStatus status,
+                                     const char* message,
+                                     const WGPUSupportedLimits* limits,
+                                     uint32_t featuresCount,
+                                     const WGPUFeatureName* features);
+
+      private:
+        WGPUAdapterProperties mProperties;
+
+        struct RequestDeviceData {
+            WGPURequestDeviceCallback callback = nullptr;
+            ObjectId deviceObjectId;
+            void* userdata = nullptr;
+        };
+        RequestTracker<RequestDeviceData> mRequestDeviceRequests;
     };
 
 }}  // namespace dawn_wire::client
