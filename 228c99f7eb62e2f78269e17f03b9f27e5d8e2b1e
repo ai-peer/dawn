@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ee70c0_9f29d402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T19:59:14Z",
+      "side": 1,
+      "message": "LGMT",
+      "revId": "228c99f7eb62e2f78269e17f03b9f27e5d8e2b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "194027ae_930a1c00",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-24T19:59:14Z",
+      "side": 1,
+      "message": "nit. remove",
+      "range": {
+        "startLine": 208,
+        "startChar": 93,
+        "endLine": 208,
+        "endChar": 95
+      },
+      "revId": "228c99f7eb62e2f78269e17f03b9f27e5d8e2b1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
