@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ca834cac_fae6d56e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2021-11-24T03:53:39Z",
+      "side": 1,
+      "message": "10:45 pm: OMG, I can\u0027t believe this! I was thinking about how \"skip/disable optimizations (/Od)\" is a separate flag from the actual optimization level (e.g. \"/O2\"), so then I wondered -- what if I disable optimizations AND I tell it to optimize at level 0? In other words, calling \"fxc /Od /O0 ...\". I figured, maybe the bad analysis of loops is coming from the optimization level being at 2 (the default), while skip optimizations is something that\u0027s orthogonal and applied afterwards or something. Well, I just tried it against the above examples, and it does the right thing for both \"for\" and \"while\" loops!\n\nI need to run more tests, but maybe we can set only optimization level 0 (/O0) and forget about skip optimizations (/Od). I\u0027m not sure yet.",
+      "parentUuid": "738438ec_9ca8e292",
+      "revId": "39d5aa9249f1e1c9f4b38b18816a46c41bdff294",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d27dcd96_9adfeb00",
         "filename": "src/dawn_native/Toggles.h",
         "patchSetId": 2
