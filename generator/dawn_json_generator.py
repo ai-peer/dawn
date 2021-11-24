@@ -141,6 +141,11 @@ class TypedefType(Type):
         Type.__init__(self, name, json_data)
         self.type = None
 
+class DefineType(Type):
+    def __init__(self, is_enabled, name, json_data):
+        Type.__init__(self, name, json_data)
+        self.value = None
+        self.host_index = 0
 
 class NativeType(Type):
     def __init__(self, is_enabled, name, json_data):
@@ -310,6 +315,11 @@ def link_typedef(typedef, types):
     typedef.type = types[typedef.json_data['type']]
 
 
+def link_define(define, types):
+    define.value = define.json_data['value']
+    define.host_index = define.json_data.get('host_index', 0)
+
+
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
 #
@@ -362,6 +372,7 @@ def parse_json(json, enabled_tags):
         'object': ObjectType,
         'structure': StructureType,
         'typedef': TypedefType,
+        'define': DefineType,
     }
 
     types = {}
@@ -389,6 +400,9 @@ def parse_json(json, enabled_tags):
 
     for typedef in by_category['typedef']:
         link_typedef(typedef, types)
+
+    for define in by_category['define']:
+        link_define(define, types)
 
     for category in by_category.keys():
         by_category[category] = sorted(

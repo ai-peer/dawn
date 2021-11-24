@@ -2576,6 +2576,57 @@
             {"value": 30, "name": "sint32x4"}
         ]
     },
+    "whole size" : {
+        "category": "define",
+        "value":  "(0xffffffffffffffffULL)"
+    },
+    "whole map size" : {
+        "category": "define",
+        "value":  "SIZE_MAX"
+    },
+    "stride undefined" : {
+        "tags": ["deprecated"],
+        "category": "define",
+        "value":  "(0xffffffffUL)"
+    },
+    "copy stride undefined" : {
+        "category": "define",
+        "value":  "(0xffffffffUL)"
+    },
+    "limit u32 undefined" : {
+        "category": "define",
+        "value":  "(0xffffffffUL)"
+    },
+    "limit u64 undefined" : {
+        "category": "define",
+        "value":  "(0xffffffffffffffffULL)"
+    },
+    "array layer count undefined" : {
+        "category": "define",
+        "value":  "(0xffffffffUL)"
+    },
+    "mip level count undefined" : {
+        "category": "define",
+        "value":  "(0xffffffffUL)"
+    },
+    "WGPUInputStepMode_Vertex" : {
+        "tags": ["deprecated"],
+        "category": "define",
+        "value":  "WGPUVertexStepMode_Vertex",
+        "host_index": 1
+    },
+    "WGPUInputStepMode_Instance" : {
+        "tags": ["deprecated"],
+        "category": "define",
+        "value":  "WGPUVertexStepMode_Instance",
+        "host_index": 1
+    },
+    "WGPUInputStepMode_Force32" : {
+        "tags": ["deprecated"],
+        "category": "define",
+        "value":  "WGPUVertexStepMode_Force32",
+        "host_index": 1
+    },
     "ObjectType": {
       "_comment": "Only used for the wire",
       "category": "native"
