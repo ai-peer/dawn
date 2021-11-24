@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b6d702e_085a0176",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T23:37:15Z",
+      "side": 1,
+      "message": "nice job figuring this out!",
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92abb5a2_2e6cea7f",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T23:37:15Z",
+      "side": 1,
+      "message": "it\u0027s not really ANGLE\u0027s, we can probably just say \"custom\" or \"own build\". It happens to be the case that in Chromium, ANGLE and Dawn will use the same library.",
+      "range": {
+        "startLine": 43,
+        "startChar": 26,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cb2749d_194b3a2f",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T23:37:15Z",
+      "side": 1,
+      "message": "so how does it work now? Should we be using GetExecutableDirectory() instead if dawn_native is linked statically?",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 60
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0ccbf0_12a8c2f5",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T23:37:15Z",
+      "side": 1,
+      "message": "I think this is the case even if we\u0027re not linking statically too, right? Basically libdawn_native and libvulkan are expected to be next to each other.",
+      "range": {
+        "startLine": 46,
+        "startChar": 84,
+        "endLine": 47,
+        "endChar": 73
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce972f57_ca3acf88",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T23:37:15Z",
+      "side": 1,
+      "message": "static initializers should be avoided because they result in global constructors/destructors - and these happen in undefined order which is bad news.\n\nInstead, we should have some define like \"DAWN_USE_CUSTOM_VULKAN_LOADER\" and have two branches in Backend::LoadVulkan. One that prepends the string, and one that doesn\u0027t.\n\nFor now, we can set dawn_use_custom_loader \u003d dawn_enable_vulkan \u0026\u0026 (is_mac || is_linux) in dawn_features.gni. But eventually, I think we should extend this to ChromeOS and Windows as well (basically, whatever ANGLE does).\nBut, we can do that stuff, which will require implementing GetModulePath on the additional platforms, later. I guess for MacOS we can lie about GetModulePath and return empty string for now - with a TODO about actually getting the path.\n\n(or maybe we should just reuse the existing dawn_enable_vulkan_loader).\n\nBasically, the meaning of dawn_enable_vulkan_loader will change from just \"please build vulkan loader\" to \"please build vulkan loader AND explicitly load the exact path to it\".",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
