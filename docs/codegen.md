@@ -47,6 +47,10 @@ A **record** is a list of **record members**, each of which is a dictionary with
 **`"typedef"`** (usually only used for gradual deprecations):
  - `"name"`: the name of the things this is a typedef for.
 
+**`"define"`** defines a macro that associates an identifier with a string.
+ - `"value"`: a string will replace the identifier
+ - `"host_index"`: a global number, the macro will be placed in the specific location of a file with the index.
+
 **`"enum"`** an `uint32_t`-based enum value.
  - `"values"` an array of enum values. Each value is a dictionary containing:
    - `"name"` a string
