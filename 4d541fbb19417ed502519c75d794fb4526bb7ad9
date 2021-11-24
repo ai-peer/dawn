@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0362a648_5ba30ab3",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-24T19:44:36Z",
+      "side": 1,
+      "message": "I suspect what we\u0027ll want to do (eventually) is to just have separate root signatures.",
+      "parentUuid": "39331450_81467d06",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6a74b19_fcd0d9e3",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 3
