@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53a38628_1987d900",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-24T09:30:11Z",
+      "side": 1,
+      "message": "Thanks, I didn\u0027t notice that GetInternalFormat had validated the format support.",
+      "parentUuid": "363075f2_bdeea9ae",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "38556c8e_b9b3708a",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-17T11:07:38Z",
       "side": 1,
       "message": "We shouldn\u0027t advertise the feature as enabled if it\u0027s not implemented in TextureD3D12.\n\nDitto in all the other backends.",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7647fe64_f7eed47d",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-24T09:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38556c8e_b9b3708a",
       "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -100,6 +136,24 @@
       "side": 1,
       "message": "Thanks! I will take care of this when doing implementation on Metal.",
       "parentUuid": "714d167c_f9d044f8",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2fcc88a_ff760cb7",
+        "filename": "src/dawn_native/metal/BackendMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-24T09:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "465cb37a_98d6f88c",
       "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -209,6 +263,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc88fb86_2f1aaa1d",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-24T09:30:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0598281_e68eef8e",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72bd8711_ef5757e7",
@@ -222,6 +294,24 @@
       "writtenOn": "2021-11-17T11:07:38Z",
       "side": 1,
       "message": "Maybe we could have a helper in TextureFormatUtils that\u0027s IsFormatSupported(device, format) that asks the device for the extension if needed. Then here we\u0027d do DAWN_TEST_UNSUPPORTED_IF(!IsFormatSupported(device, GeTParam().mTextureFormat))",
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6511cab0_9b9f4372",
+        "filename": "src/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-24T09:30:11Z",
+      "side": 1,
+      "message": "I found we cannot check whether a texture format is supported on the device in wire mode. Because when casting wgp::Device to DeviceBase, the values of mFormatTable on DeviceBase are totally incorrect.\n\nTo make the tests could run with UseWire, I use the helper function in CompressedTextureFormatTests.cpp (https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/tests/end2end/CompressedTextureFormatTests.cpp;l\u003d45;bpv\u003d1;bpt\u003d0).",
+      "parentUuid": "72bd8711_ef5757e7",
       "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -287,6 +377,30 @@
       "side": 1,
       "message": "Thanks, can you add TODOs referencing the depth16float and stencil8 Dawn bugs to add them to the list?",
       "parentUuid": "24668c6e_a079b12d",
+      "range": {
+        "startLine": 25,
+        "startChar": 53,
+        "endLine": 25,
+        "endChar": 55
+      },
+      "revId": "63fc00188b4a14adf2e368e65921d1274b795555",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17f29984_0677ca70",
+        "filename": "src/utils/TextureUtils.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-24T09:30:11Z",
+      "side": 1,
+      "message": "Sure. I will add TODO here firstly, then submit another PR to add the Depth16Unorm format to kAllTextureFormats and kDepthFormats.",
+      "parentUuid": "e7c50570_8e334303",
       "range": {
         "startLine": 25,
         "startChar": 53,
