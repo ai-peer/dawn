@@ -136,6 +136,48 @@ std::string GetExecutableDirectory() {
     return lastPathSepLoc != std::string::npos ? exePath.substr(0, lastPathSepLoc + 1) : "";
 }
 
+#if defined(DAWN_PLATFORM_LINUX)
+std::string GetModulePath() {
+    static int placeholderSymbol = 0;
+    Dl_info dlInfo;
+    if (dladdr(&placeholderSymbol, &dlInfo) == 0) {
+        return "";
+    }
+
+    std::array<char, PATH_MAX> absolutePath;
+    realpath(dlInfo.dli_fname, absolutePath.data());
+    return absolutePath.data();
+}
+#elif defined(DAWN_PLATFORM_WINDOWS)
+std::string GetModulePath() {
+    UNREACHABLE();
+    return "";
+}
+#elif defined(DAWN_PLATFORM_MACOS) || defined(DAWN_PLATFORM_IOS)
+std::string GetModulePath() {
+    UNREACHABLE();
+    return "";
+}
+#elif defined(DAWN_PLATFORM_FUCHSIA)
+std::string GetModulePath() {
+    UNREACHABLE();
+    return "";
+}
+#elif defined(DAWN_PLATFORM_EMSCRIPTEN)
+std::string GetModulePath() {
+    UNREACHABLE();
+    return "";
+}
+#else
+#    error "Implement GetModulePath for your platform."
+#endif
+
+std::string GetModuleDirectory() {
+    std::string modPath = GetModulePath();
+    size_t lastPathSepLoc = modPath.find_last_of(GetPathSeparator());
+    return lastPathSepLoc != std::string::npos ? modPath.substr(0, lastPathSepLoc + 1) : "";
+}
+
 // ScopedEnvironmentVar
 
 ScopedEnvironmentVar::ScopedEnvironmentVar(const char* variableName, const char* value)
