@@ -36,10 +36,18 @@ namespace dawn_native {
     namespace {
 
         static const char sCopyTextureForBrowserShader[] = R"(
-            [[block]] struct Uniforms {
-                u_scale: vec2<f32>;
-                u_offset: vec2<f32>;
-                u_alphaOp: u32;
+            [[block]] struct Uniforms {                 // offset   align   size
+                u_scale: vec2<f32>;                     // 0        8       8
+                u_offset: vec2<f32>;                    // 8        8       8
+                u_steps_mask: u32;                      // 16       4       4  
+                // implicit padding;                    // 20               12
+                u_conversionMatrix: mat3x3<f32>;        // 32       16      48
+                u_gamma_decoding_gamma: vec4<f32>;      // 80       16      16      
+                u_gamma_decoding_linear: vec3<f32>;     // 96       16      12
+                u_src_color_space_is_extended: u32;     // 108      4       4
+                u_gamma_encoding_gamma: vec4<f32>;      // 112      16      16
+                u_gamma_encoding_linear: vec3<f32>;     // 128      16      12
+                u_dst_color_space_is_extended: u32;     // 140      4       4
             };
 
             [[binding(0), group(0)]] var<uniform> uniforms : Uniforms;
@@ -49,7 +57,39 @@ namespace dawn_native {
                 [[builtin(position)]] position : vec4<f32>;
             };
 
-            [[stage(vertex)]] fn vs_main(
+            // Chromium uses unified equation to construct gamma decoding function
+            // and gamma encoding function.
+            // The logic is:
+            //  if x < epsilon
+            //      linear = C * x + F
+            //  nonlinear = pow(A * x + B, G) + E
+            // (https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_transform.cc;l=541)
+            // Expand the equation with sign() to make it handle all gamma conversions.
+            fn gamma_conversion(v: vec3<f32>,
+                                linearParams: vec3<f32>,
+                                gammaParams: vec4<f32>, colorSpaceIsExtended: u32) -> vec3<f32> {
+                let signFactor = select(vec3<f32>(1.0), sign(v), colorSpaceIsExtended > 0u);
+                let value = select(v, abs(v), colorSpaceIsExtended > 0u);
+
+                // Linear part: C * x + F
+                let C = linearParams.y;
+                let F = linearParams.z;
+                let linear_part = signFactor * (vec3<f32>(C) * value + vec3<f32>(F));
+
+                // Gamma part: pow(A * x + B, G) + E
+                let A = gammaParams.x;
+                let B = gammaParams.y;
+                let G = gammaParams.z;
+                let E = gammaParams.w;
+                let gamma_part = signFactor * (pow(vec3<f32>(A) * value + vec3<f32>(B),
+                                                  vec3<f32>(G)) + vec3<f32>(E));
+
+                let epsilon = linearParams.x;
+                return select(gamma_part, linear_part, value < vec3<f32>(epsilon));
+            }
+
+            [[stage(vertex)]]
+            fn vs_main(
                 [[builtin(vertex_index)]] VertexIndex : u32
             ) -> VertexOutputs {
                 var texcoord = array<vec2<f32>, 3>(
@@ -86,7 +126,8 @@ namespace dawn_native {
             [[binding(1), group(0)]] var mySampler: sampler;
             [[binding(2), group(0)]] var myTexture: texture_2d<f32>;
 
-            [[stage(fragment)]] fn fs_main(
+            [[stage(fragment)]]
+            fn fs_main(
                 [[location(0)]] texcoord : vec2<f32>
             ) -> [[location(0)]] vec4<f32> {
                 // Clamp the texcoord and discard the out-of-bound pixels.
@@ -100,29 +141,44 @@ namespace dawn_native {
                 // hardware so we don't need special logic in this shader. This is covered by tests.
                 var srcColor = textureSample(myTexture, mySampler, texcoord);
 
-                // Handle alpha. Alpha here helps on the source content and dst content have
-                // different alpha config. There are three possible ops: DontChange, Premultiply
-                // and Unpremultiply.
-                // TODO(crbug.com/1217153): if wgsl support `constexpr` and allow it
-                // to be case selector, Replace 0u/1u/2u with a constexpr variable with
-                // meaningful name.
-                switch(uniforms.u_alphaOp) {
-                    case 0u: { // AlphaOp: DontChange
-                        break;
+                // Unpremultiply step. Appling color space conversion op on premultiplied source texture
+                // also needs to unpremultiply first.
+                if (bool(uniforms.u_steps_mask & 0x01u)) {
+                    if (srcColor.a != 0.0) {
+                        srcColor = vec4<f32>(srcColor.rgb / srcColor.a, srcColor.a);
                     }
-                    case 1u: { // AlphaOp: Premultiply
-                        srcColor = vec4<f32>(srcColor.rgb * srcColor.a, srcColor.a);
-                        break;
-                    }
-                    case 2u: { // AlphaOp: Unpremultiply
-                        if (srcColor.a != 0.0) {
-                            srcColor = vec4<f32>(srcColor.rgb / srcColor.a, srcColor.a);
-                        }
-                        break;
-                    }
-                    default: {
-                        break;
-                    }
+                }
+
+                // Linearize the source color using the source color space’s
+                // transfer function if it is non-linear.
+                if (bool(uniforms.u_steps_mask & 0x02u)) {
+                    srcColor = vec4<f32>(gamma_conversion(srcColor.rgb,
+                                                          uniforms.u_gamma_decoding_linear,
+                                                          uniforms.u_gamma_decoding_gamma,
+                                                          uniforms.u_src_color_space_is_extended),
+                                         srcColor.a);
+                }
+
+                // Convert unpremultiplied, linear source colors to the destination gamut by
+                // multiplying by a 3x3 matrix. Calculate transformFromXYZD50 * transformToXYZD50
+                // in CPU side and upload the final result in uniforms.
+                if (bool(uniforms.u_steps_mask & 0x04u)) {
+                    srcColor = vec4<f32>(uniforms.u_conversionMatrix * srcColor.rgb, srcColor.a);
+                }
+
+                // Encode that color using the inverse of the destination color
+                // space’s transfer function if it is non-linear.
+                if (bool(uniforms.u_steps_mask & 0x08u)) {
+                    srcColor = vec4<f32>(gamma_conversion(srcColor.rgb,
+                                                          uniforms.u_gamma_encoding_linear,
+                                                          uniforms.u_gamma_encoding_gamma,
+                                                          uniforms.u_dst_color_space_is_extended),
+                                         srcColor.a);
+                }
+
+                // Premultiply step.
+                if (bool(uniforms.u_steps_mask & 0x10u)) {
+                    srcColor = vec4<f32>(srcColor.rgb * srcColor.a, srcColor.a);
                 }
 
                 return srcColor;
@@ -134,9 +190,15 @@ namespace dawn_native {
             float scaleY;
             float offsetX;
             float offsetY;
-            wgpu::AlphaOp alphaOp;
+            uint32_t stepsMask = 0;
+            const std::array<uint32_t, 3> padding = {};  // 12 bytes padding
+            std::array<float, 12> conversionMatrix = {};
+            std::array<float, 7> gammaDecodingParams = {};  // vec4 gamma_part, vec3 linear_part
+            uint32_t srcColorSpaceIsExtended = 0;
+            std::array<float, 7> gammaEncodingParams = {};
+            uint32_t dstColorSpaceIsExtended = 0;
         };
-        static_assert(sizeof(Uniform) == 20, "");
+        static_assert(sizeof(Uniform) == 144, "");
 
         // TODO(crbug.com/dawn/856): Expand copyTextureForBrowser to support any
         // non-depth, non-stencil, non-compressed texture format pair copy. Now this API
@@ -168,6 +230,31 @@ namespace dawn_native {
                 default:
                     return DAWN_FORMAT_VALIDATION_ERROR(
                         "Destination texture format (%s) is not supported.", dstFormat);
+            }
+
+            return {};
+        }
+
+        MaybeError ValidateCopyTextureColorSpaceConversion(wgpu::ColorSpace srcColorSpace,
+                                                           wgpu::ColorSpace dstColorSpace) {
+            DAWN_TRY(ValidateColorSpace(srcColorSpace));
+            DAWN_TRY(ValidateColorSpace(dstColorSpace));
+
+            switch (srcColorSpace) {
+                case wgpu::ColorSpace::SRGB:
+                case wgpu::ColorSpace::DisplayP3:
+                    break;
+                default:
+                    return DAWN_FORMAT_VALIDATION_ERROR("Source color space (%s) is not supported.",
+                                                        srcColorSpace);
+            }
+
+            switch (dstColorSpace) {
+                case wgpu::ColorSpace::SRGB:
+                    break;
+                default:
+                    return DAWN_FORMAT_VALIDATION_ERROR(
+                        "Destination color space (%s) is not supported.", dstColorSpace);
             }
 
             return {};
@@ -233,6 +320,110 @@ namespace dawn_native {
             return GetCachedPipeline(store, dstFormat);
         }
 
+        // Row major 3x3 matrix
+        struct ColorSpaceInfo {
+            std::array<float, 9> toXYZD50;    // 3x3 row major transform matrix
+            std::array<float, 9> fromXYZD50;  // inverse transform matrix of toXYZD50, precomputed
+            std::array<float, 7> gammaDecodingParams;  // Follow { A, B, G, E, epsilon, C, F } order
+            std::array<float, 7> gammaEncodingParams;  // inverse op of decoding, precomputed
+            bool isNonLinear;
+            bool isExtended;  // For extended color space.
+        };
+
+        static constexpr size_t kSupportedColorSpaceCount = 2;
+        static constexpr std::array<ColorSpaceInfo, kSupportedColorSpaceCount> ColorSpaceTable = {{
+            // sRGB,
+            // Got primary attributes from https://drafts.csswg.org/css-color/#predefined-sRGB
+            // Use matries from
+            // http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html#WSMatrices
+            // Get gamma-linear conversion params from https://en.wikipedia.org/wiki/SRGB with some
+            // mathmatics.
+            {
+                //
+                {{
+                    //
+                    0.4360747, 0.3850649, 0.1430804,  //
+                    0.2225045, 0.7168786, 0.0606169,  //
+                    0.0139322, 0.0971045, 0.7141733   //
+                }},
+
+                {{
+                    //
+                    3.1338561, -1.6168667, -0.4906146,  //
+                    -0.9787684, 1.9161415, 0.0334540,   //
+                    0.0719453, -0.2289914, 1.4052427    //
+                }},
+
+                // {A, B, G, E, epsilon, C, F, }
+                {{1.0 / 1.055, 0.055 / 1.055, 2.4, 0.0, 4.045e-02, 1.0 / 12.92, 0.0}},
+
+                {{1.13711 /*pow(1.055, 2.4)*/, 0.0, 1.0 / 2.4, -0.055, 3.1308e-03, 12.92f, 0.0}},
+
+                true,
+                true  //
+            },
+
+            // Display P3, got primary attributes from
+            // https://www.w3.org/TR/css-color-4/#valdef-color-display-p3
+            // Use equations found in
+            // http://www.brucelindbloom.com/index.html?Eqn_RGB_XYZ_Matrix.html,
+            // Use Bradford method to do D65 to D50 transform.
+            // Get matries with help of http://www.russellcottrell.com/photo/matrixCalculator.htm
+            // Gamma-linear conversion params is the same as Srgb.
+            {
+                //
+                {{
+                    //
+                    0.5151114, 0.2919612, 0.1571274,  //
+                    0.2411865, 0.6922440, 0.0665695,  //
+                    -0.0010491, 0.0418832, 0.7842659  //
+                }},
+
+                {{
+                    //
+                    2.4039872, -0.9898498, -0.3976181,  //
+                    -0.8422138, 1.7988188, 0.0160511,   //
+                    0.0481937, -0.0973889, 1.2736887    //
+                }},
+
+                // {A, B, G, E, epsilon, C, F, }
+                {{1.0 / 1.055, 0.055 / 1.055, 2.4, 0.0, 4.045e-02, 1.0 / 12.92, 0.0}},
+
+                {{1.13711 /*pow(1.055, 2.4)*/, 0.0, 1.0 / 2.4, -0.055, 3.1308e-03, 12.92f, 0.0}},
+
+                true,
+                false  //
+            }
+            //
+        }};
+
+        std::array<float, 12> GetConversionMatrix(wgpu::ColorSpace src, wgpu::ColorSpace dst) {
+            ASSERT(src < wgpu::ColorSpace::Invalid);
+            ASSERT(dst < wgpu::ColorSpace::Invalid);
+
+            std::array<float, 9> toXYZD50 = ColorSpaceTable[static_cast<uint32_t>(src)].toXYZD50;
+            std::array<float, 9> fromXYZD50 =
+                ColorSpaceTable[static_cast<uint32_t>(dst)].fromXYZD50;
+
+            // Fuse the transform matrix. The color space transformation equation is:
+            // Pixels = fromXYZD50 * toXYZD50 * Pixels.
+            // Calculate fromXYZD50 * toXYZD50 to simplify
+            // Add a padding in each row for Mat3x3 in wgsl uniform(mat3x3, Align(16), Size(48)).
+            std::array<float, 12> fuseMatrix = {};
+
+            // Mat3x3 * Mat3x3
+            for (uint32_t row = 0; row < 3; ++row) {
+                for (uint32_t col = 0; col < 3; ++col) {
+                    // fuseMatrix has 1 float padding each row.
+                    // Transpose the matrix from row major to column major for wgsl.
+                    fuseMatrix[col * 4 + row] = fromXYZD50[row * 3 + 0] * toXYZD50[col] +
+                                                fromXYZD50[row * 3 + 1] * toXYZD50[3 + col] +
+                                                fromXYZD50[row * 3 + 2] * toXYZD50[3 * 2 + col];
+                }
+            }
+
+            return fuseMatrix;
+        }
     }  // anonymous namespace
 
     MaybeError ValidateCopyTextureForBrowser(DeviceBase* device,
@@ -276,7 +467,14 @@ namespace dawn_native {
                                                      destination->texture->GetFormat().format));
 
         DAWN_INVALID_IF(options->nextInChain != nullptr, "nextInChain must be nullptr");
+
+        // TODO(crbug.com/dawn/1140): Remove alphaOp and wgpu::AlphaState::DontChange.
         DAWN_TRY(ValidateAlphaOp(options->alphaOp));
+        DAWN_TRY(ValidateAlphaState(options->srcTextureAlphaState));
+        DAWN_TRY(ValidateAlphaState(options->dstTextureAlphaState));
+        DAWN_TRY(
+            ValidateCopyTextureColorSpaceConversion(options->colorSpaceConversion.srcColorSpace,
+                                                    options->colorSpaceConversion.dstColorSpace));
 
         return {};
     }
@@ -309,8 +507,7 @@ namespace dawn_native {
             copySize->width / static_cast<float>(srcTextureSize.width),
             copySize->height / static_cast<float>(srcTextureSize.height),  // scale
             source->origin.x / static_cast<float>(srcTextureSize.width),
-            source->origin.y / static_cast<float>(srcTextureSize.height),  // offset
-            wgpu::AlphaOp::DontChange  // alphaOp default value: DontChange
+            source->origin.y / static_cast<float>(srcTextureSize.height)  // offset
         };
 
         // Handle flipY. FlipY here means we flip the source texture firstly and then
@@ -321,8 +518,76 @@ namespace dawn_native {
             uniformData.offsetY += copySize->height / static_cast<float>(srcTextureSize.height);
         }
 
-        // Set alpha op.
-        uniformData.alphaOp = options->alphaOp;
+        uint32_t stepsMask = 0u;
+
+        // Steps to do color space conversion
+        // From https://skia.org/docs/user/color/
+        // - unpremultiply if the source color is premultiplied alpha is not involved in color
+        // management,
+        //   and we need to divide it out if it’s multiplied in
+        // - linearize the source color using the source color space’s transfer function
+        // - convert those unpremultiplied, linear source colors to XYZ D50 gamut by multiplying by
+        // a 3x3 matrix
+        // - convert those XYZ D50 colors to the destination gamut by multiplying by a 3x3 matrix
+        // - encode that color using the inverse of the destination color space’s transfer function
+        // - premultiply by alpha if the destination is premultiplied
+        // The reason to choose XYZ D50 as intermediate color space:
+        // From http://www.brucelindbloom.com/index.html?WorkingSpaceInfo.html
+        // "Since the Lab TIFF specification, the ICC profile specification and
+        // Adobe Photoshop all use a D50"
+        bool skipColorSpaceConversion = options->colorSpaceConversion.srcColorSpace ==
+                                        options->colorSpaceConversion.dstColorSpace;
+
+        if (options->srcTextureAlphaState == wgpu::AlphaState::Premultiplied) {
+            if (!skipColorSpaceConversion ||
+                options->dstTextureAlphaState == wgpu::AlphaState::Seperate) {
+                stepsMask |= 0x01;  // Umpremultiply step
+            }
+        }
+
+        if (!skipColorSpaceConversion) {
+            ColorSpaceInfo srcColorSpace =
+                ColorSpaceTable[static_cast<uint32_t>(options->colorSpaceConversion.srcColorSpace)];
+            ColorSpaceInfo dstColorSpace =
+                ColorSpaceTable[static_cast<uint32_t>(options->colorSpaceConversion.dstColorSpace)];
+
+            if (srcColorSpace.isNonLinear) {
+                stepsMask |= 0x02;  // Linearize source color
+                uniformData.gammaDecodingParams = srcColorSpace.gammaDecodingParams;
+                uniformData.srcColorSpaceIsExtended =
+                    static_cast<uint32_t>(srcColorSpace.isExtended);
+            }
+
+            stepsMask |= 0x04;  // convert to destination gamut
+            uniformData.conversionMatrix =
+                GetConversionMatrix(options->colorSpaceConversion.srcColorSpace,
+                                    options->colorSpaceConversion.dstColorSpace);
+
+            if (dstColorSpace.isNonLinear) {
+                stepsMask |= 0x08;  // Encode linear color to non-linear
+                uniformData.gammaEncodingParams = dstColorSpace.gammaEncodingParams;
+                uniformData.dstColorSpaceIsExtended =
+                    static_cast<uint32_t>(dstColorSpace.isExtended);
+            }
+        }
+
+        if (options->dstTextureAlphaState == wgpu::AlphaState::Premultiplied) {
+            if (!skipColorSpaceConversion ||
+                options->srcTextureAlphaState == wgpu::AlphaState::Seperate) {
+                stepsMask |= 0x10;  // Premultiply step
+            }
+        }
+
+        // TODO(crbugs.com/dawn/1140): AlphaOp will be deprecated
+        if (options->alphaOp == wgpu::AlphaOp::Premultiply) {
+            stepsMask |= 0x10;
+        }
+
+        if (options->alphaOp == wgpu::AlphaOp::Unpremultiply) {
+            stepsMask |= 0x01;
+        }
+
+        uniformData.stepsMask = stepsMask;
 
         Ref<BufferBase> uniformBuffer;
         DAWN_TRY_ASSIGN(
