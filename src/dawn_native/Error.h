@@ -81,6 +81,9 @@ namespace dawn_native {
 #define DAWN_FORMAT_VALIDATION_ERROR(...) \
     DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__))
 
+#define DAWN_ENUM_VALIDATION_ERROR(...) \
+    DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__))
+
 #define DAWN_INVALID_IF(EXPR, ...)                                                           \
     if (DAWN_UNLIKELY(EXPR)) {                                                               \
         return DAWN_MAKE_ERROR(InternalErrorType::Validation, absl::StrFormat(__VA_ARGS__)); \
