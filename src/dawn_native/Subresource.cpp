@@ -69,6 +69,7 @@ namespace dawn_native {
             case Aspect::Depth:
             case Aspect::Plane0:
             case Aspect::CombinedDepthStencil:
+            case Aspect::CombinedPlanes:
                 return 0;
             case Aspect::Plane1:
             case Aspect::Stencil:
@@ -83,7 +84,7 @@ namespace dawn_native {
         // Note that we can't do a switch because compilers complain that Depth | Stencil is not
         // a valid enum value.
         if (aspects == Aspect::Color || aspects == Aspect::Depth ||
-            aspects == Aspect::CombinedDepthStencil) {
+            aspects == Aspect::CombinedDepthStencil || aspects == Aspect::CombinedPlanes) {
             return 1;
         } else if (aspects == (Aspect::Plane0 | Aspect::Plane1)) {
             return 2;
