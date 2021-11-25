@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "366f3de1_90ba470d",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:18:44Z",
+      "side": 1,
+      "message": "Good question. TBH, chromium has the ability to support some customer color space if they could provide transform method about tranferring to XYZD50 color space. I\u0027m not 100% understand them for now but per my current understanding from this doc https://skia.org/docs/user/color and chromium related codes.\n1. Chromium defined color space with 4 IDs(They all have some predefined enums), PrimaryID, TransferID, MatrixID, RangeID.\n  - 1.a according to the list, it covers most common cases(I think), including HDR \n        cases     \n2. Chromium support customer color space if you could provide toXYZD50 transform matrix and transferFn.\n3. The transformation has two steps, transfer to XYZD50 from source color space and then transfer from XYZD50 to dst color space. This provide ability to support almost all of the color space conversions().\n   3.a the steps could be simplified in some situations\n4. ICC Profile I referred https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/include/third_party/skcms/skcms.h;l\u003d156;drc\u003dde68be3f18ba99cc01d75903e167ca09bade253c. But not quite sure whether this could handle all cases.",
+      "parentUuid": "541304ef_f994b7f1",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e759125b_2e5a63fb",
         "filename": "dawn.json",
         "patchSetId": 1
@@ -66,6 +84,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "The name is a bit generic, and there doesn\u0027t really seem to be a reason why it can\u0027t be folded in CopyTextureForBrowserOptions?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d441911_b6e6b7be",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:18:44Z",
+      "side": 1,
+      "message": "The reason is that current enum is quite simple, And if we want to support more complex situations we might expand the structure to contains something like MatrixID, TransferID, RangeID etc. Even with some ability to have customer transform matrix.",
+      "parentUuid": "e759125b_2e5a63fb",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -106,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "563b2457_a04dc7c6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:18:44Z",
+      "side": 1,
+      "message": "Good question. TBH, I dumped the shader generated here https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_transform.cc;l\u003d1051;drc\u003dde68be3f18ba99cc01d75903e167ca09bade253c?q\u003dcolor_transform.cc\u0026ss\u003dchromium%2Fchromium%2Fsrc.\nAnd I think you\u0027re right that we could form these magic numbers to a more readable formulas.",
+      "parentUuid": "2143c9d7_955ee235",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "682f7179_6f13bd0d",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
@@ -117,6 +171,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "Can we use early returns to avoid the temporary value variable?\n\nif (v \u003c ...) {\n  return ...;\n}\nreturn ...;\n\nSame in other functions.\n\nDo you have a reference of where these magic numbers come from? Like a display P3 spec or something similar? We should link to it (or if not possible at least say something like \"Display P3 specification section 2.1 ...\")\n\nSame in other functions.",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e61c72_df9c4048",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:18:44Z",
+      "side": 1,
+      "message": "I dumped the shader generated here https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_transform.cc;l\u003d1051;drc\u003dde68be3f18ba99cc01d75903e167ca09bade253c?q\u003dcolor_transform.cc\u0026ss\u003dchromium%2Fchromium%2Fsrc. And I think we could reshape these magic numbers into readable formulas.",
+      "parentUuid": "682f7179_6f13bd0d",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -380,6 +452,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "Alpha ops aren\u0027t tested, maybe this comment is a leftover?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "673beafe_35ead2af",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:18:44Z",
+      "side": 1,
+      "message": "Sry, a left over and forgot to change it.",
+      "parentUuid": "951eec0c_869228f9",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
