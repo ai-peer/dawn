@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "28ff9fdd_0e8244ce",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 850,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:24:34Z",
+      "side": 1,
+      "message": "One thing I forget to mention:\nFor WebGPU CopyExternalImageToTexture, we got the color space info from SkImage, I think we\u0027ll always get matrxi toXYZD50 and transferFn.",
+      "parentUuid": "366f3de1_90ba470d",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e759125b_2e5a63fb",
         "filename": "dawn.json",
         "patchSetId": 1
