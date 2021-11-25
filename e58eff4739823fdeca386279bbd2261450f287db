@@ -317,6 +317,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "657b5dec_7c6749c8",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T02:47:28Z",
+      "side": 1,
+      "message": "Yes, it is not ScRGB, it is XYZD50. Sry for the wrong understanding.",
+      "parentUuid": "4728c1e3_cadcec76",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a657014d_b583f196",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
