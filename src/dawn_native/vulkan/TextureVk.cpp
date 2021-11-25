@@ -173,7 +173,7 @@ namespace dawn_native { namespace vulkan {
             barrier.oldLayout = VulkanImageLayout(texture, lastUsage);
             barrier.newLayout = VulkanImageLayout(texture, usage);
             barrier.image = texture->GetHandle();
-            barrier.subresourceRange.aspectMask = VulkanAspectMask(range.aspects);
+            barrier.subresourceRange.aspectMask = texture->ComputeAspectsForBarrier(range.aspects);
             barrier.subresourceRange.baseMipLevel = range.baseMipLevel;
             barrier.subresourceRange.levelCount = range.levelCount;
             barrier.subresourceRange.baseArrayLayer = range.baseArrayLayer;
@@ -417,6 +417,8 @@ namespace dawn_native { namespace vulkan {
                 return VK_FORMAT_ASTC_12x12_SRGB_BLOCK;
 
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                return VK_FORMAT_G8_B8R8_2PLANE_420_UNORM;
+
             // TODO(dawn:666): implement stencil8
             case wgpu::TextureFormat::Stencil8:
             case wgpu::TextureFormat::Undefined:
@@ -746,7 +748,7 @@ namespace dawn_native { namespace vulkan {
         barrier.sType = VK_STRUCTURE_TYPE_IMAGE_MEMORY_BARRIER;
         barrier.pNext = nullptr;
         barrier.image = GetHandle();
-        barrier.subresourceRange.aspectMask = VulkanAspectMask(GetFormat().aspects);
+        barrier.subresourceRange.aspectMask = ComputeAspectsForBarrier(GetFormat().aspects);
         barrier.subresourceRange.baseMipLevel = 0;
         barrier.subresourceRange.levelCount = 1;
         barrier.subresourceRange.baseArrayLayer = 0;
@@ -940,15 +942,65 @@ namespace dawn_native { namespace vulkan {
         return false;
     }
 
+    // Base Vulkan doesn't support transitioning depth and stencil separately. We work around
+    // this limitation by combining the usages in the two planes of `textureUsages` into a
+    // single plane in a new SubresourceStorage<TextureUsage>. The barriers will be produced
+    // for DEPTH | STENCIL since the SubresourceRange uses Aspect::CombinedDepthStencil.
     bool Texture::ShouldCombineDepthStencilBarriers() const {
         return GetFormat().aspects == (Aspect::Depth | Aspect::Stencil);
+    }
+
+    // The Vulkan spec requires:
+    // "If image has a single-plane color format or is not disjoint, then the aspectMask member of
+    // subresourceRange must be VK_IMAGE_ASPECT_COLOR_BIT.".
+    // For multi-planar formats, we currently only support import them in non-disjoint way.
+    // TODO(chromium:1258986): Support disjoint vkImage if needed.
+    bool Texture::ShouldCombineMultiPlaneBarriers() const {
+        return GetFormat().aspects == (Aspect::Plane0 | Aspect::Plane1);
     }
 
     Aspect Texture::ComputeAspectsForSubresourceStorage() const {
         if (ShouldCombineDepthStencilBarriers()) {
             return Aspect::CombinedDepthStencil;
         }
+        if (ShouldCombineMultiPlaneBarriers()) {
+            return Aspect::Color;
+        }
         return GetFormat().aspects;
+    }
+
+    VkImageAspectFlags Texture::ComputeAspectsForBarrier(const Aspect& aspects) const {
+        VkImageAspectFlags flags = 0;
+        for (Aspect aspect : IterateEnumMask(aspects)) {
+            switch (aspect) {
+                case Aspect::Color:
+                    flags |= VK_IMAGE_ASPECT_COLOR_BIT;
+                    break;
+                case Aspect::Depth:
+                    flags |= VK_IMAGE_ASPECT_DEPTH_BIT;
+                    break;
+                case Aspect::Stencil:
+                    flags |= VK_IMAGE_ASPECT_STENCIL_BIT;
+                    break;
+
+                case Aspect::CombinedDepthStencil:
+                    flags |= VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
+                    break;
+
+                case Aspect::Plane0:
+                    flags |= (ShouldCombineMultiPlaneBarriers() ? VK_IMAGE_ASPECT_COLOR_BIT
+                                                                : VK_IMAGE_ASPECT_PLANE_0_BIT);
+                    break;
+                case Aspect::Plane1:
+                    flags |= (ShouldCombineMultiPlaneBarriers() ? VK_IMAGE_ASPECT_COLOR_BIT
+                                                                : VK_IMAGE_ASPECT_PLANE_1_BIT);
+                    break;
+
+                case Aspect::None:
+                    UNREACHABLE();
+            }
+        }
+        return flags;
     }
 
     void Texture::TransitionUsageForPass(CommandRecordingContext* recordingContext,
@@ -956,16 +1008,13 @@ namespace dawn_native { namespace vulkan {
                                          std::vector<VkImageMemoryBarrier>* imageBarriers,
                                          VkPipelineStageFlags* srcStages,
                                          VkPipelineStageFlags* dstStages) {
-        // Base Vulkan doesn't support transitioning depth and stencil separately. We work around
-        // this limitation by combining the usages in the two planes of `textureUsages` into a
-        // single plane in a new SubresourceStorage<TextureUsage>. The barriers will be produced
-        // for DEPTH | STENCIL since the SubresourceRange uses Aspect::CombinedDepthStencil.
-        if (ShouldCombineDepthStencilBarriers()) {
-            SubresourceStorage<wgpu::TextureUsage> combinedUsages(
-                Aspect::CombinedDepthStencil, GetArrayLayers(), GetNumMipLevels());
+        if (ShouldCombineBarriers()) {
+            Aspect combinedAspect = ComputeAspectsForSubresourceStorage();
+            SubresourceStorage<wgpu::TextureUsage> combinedUsages(combinedAspect, GetArrayLayers(),
+                                                                  GetNumMipLevels());
             textureUsages.Iterate([&](const SubresourceRange& range, wgpu::TextureUsage usage) {
                 SubresourceRange updateRange = range;
-                updateRange.aspects = Aspect::CombinedDepthStencil;
+                updateRange.aspects = combinedAspect;
 
                 combinedUsages.Update(
                     updateRange, [&](const SubresourceRange&, wgpu::TextureUsage* combinedUsage) {
@@ -1183,7 +1232,7 @@ namespace dawn_native { namespace vulkan {
                         continue;
                     }
 
-                    imageRange.aspectMask = VulkanAspectMask(aspects);
+                    imageRange.aspectMask = ComputeAspectsForBarrier(aspects);
                     imageRange.baseArrayLayer = layer;
 
                     if (aspects &
