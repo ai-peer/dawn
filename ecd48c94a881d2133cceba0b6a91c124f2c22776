@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cda0f73e_c15d4ea4",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-25T01:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92abb5a2_2e6cea7f",
+      "range": {
+        "startLine": 43,
+        "startChar": 26,
+        "endLine": 43,
+        "endChar": 33
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cb2749d_194b3a2f",
@@ -54,6 +78,30 @@
       "writtenOn": "2021-11-24T23:37:15Z",
       "side": 1,
       "message": "so how does it work now? Should we be using GetExecutableDirectory() instead if dawn_native is linked statically?",
+      "range": {
+        "startLine": 45,
+        "startChar": 24,
+        "endLine": 45,
+        "endChar": 60
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bc5956_3b837c48",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-25T01:18:25Z",
+      "side": 1,
+      "message": "Actually I think that GetExecutableDirectory \u003d\u003d GetModuleDirectory if linked statically, otherwise that may not necessarily be true.",
+      "parentUuid": "8cb2749d_194b3a2f",
       "range": {
         "startLine": 45,
         "startChar": 24,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae1b435_11d560fb",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-25T01:18:25Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "0b0ccbf0_12a8c2f5",
+      "range": {
+        "startLine": 46,
+        "startChar": 84,
+        "endLine": 47,
+        "endChar": 73
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce972f57_ca3acf88",
@@ -100,6 +172,30 @@
       "writtenOn": "2021-11-24T23:37:15Z",
       "side": 1,
       "message": "static initializers should be avoided because they result in global constructors/destructors - and these happen in undefined order which is bad news.\n\nInstead, we should have some define like \"DAWN_USE_CUSTOM_VULKAN_LOADER\" and have two branches in Backend::LoadVulkan. One that prepends the string, and one that doesn\u0027t.\n\nFor now, we can set dawn_use_custom_loader \u003d dawn_enable_vulkan \u0026\u0026 (is_mac || is_linux) in dawn_features.gni. But eventually, I think we should extend this to ChromeOS and Windows as well (basically, whatever ANGLE does).\nBut, we can do that stuff, which will require implementing GetModulePath on the additional platforms, later. I guess for MacOS we can lie about GetModulePath and return empty string for now - with a TODO about actually getting the path.\n\n(or maybe we should just reuse the existing dawn_enable_vulkan_loader).\n\nBasically, the meaning of dawn_enable_vulkan_loader will change from just \"please build vulkan loader\" to \"please build vulkan loader AND explicitly load the exact path to it\".",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 18
+      },
+      "revId": "ecd48c94a881d2133cceba0b6a91c124f2c22776",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50f85883_f751f8a5",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-25T01:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce972f57_ca3acf88",
       "range": {
         "startLine": 48,
         "startChar": 0,
