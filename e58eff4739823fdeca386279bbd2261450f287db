@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4396c79e_85da223f",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T08:47:19Z",
+      "side": 1,
+      "message": "Maybe at least \"copy color space info\" then so that it doesn\u0027t use the name that could be used for the color space info of a single texture.",
+      "parentUuid": "7d441911_b6e6b7be",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44b64d98_88b082b0",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
