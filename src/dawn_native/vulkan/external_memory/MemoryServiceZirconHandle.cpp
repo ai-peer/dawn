@@ -111,17 +111,28 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
             "Requested allocation size (%u) is smaller than the required image size (%u).",
             importParams.allocationSize, requirements.size);
 
-        VkImportMemoryZirconHandleInfoFUCHSIA importMemoryHandleInfo;
-        importMemoryHandleInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA;
-        importMemoryHandleInfo.pNext = nullptr;
-        importMemoryHandleInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA;
-        importMemoryHandleInfo.handle = handle;
-
         VkMemoryAllocateInfo allocateInfo;
         allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocateInfo.pNext = &importMemoryHandleInfo;
         allocateInfo.allocationSize = importParams.allocationSize;
         allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
+        NextChainBuilder allocateInfoChain(&allocateInfo);
+
+        VkImportMemoryZirconHandleInfoFUCHSIA importMemoryHandleInfo;
+        importMemoryHandleInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_ZIRCON_VMO_BIT_FUCHSIA;
+        importMemoryHandleInfo.handle = handle;
+        allocateInfoChain.Add(&importMemoryHandleInfo,
+                              VK_STRUCTURE_TYPE_IMPORT_MEMORY_ZIRCON_HANDLE_INFO_FUCHSIA);
+
+        // Tag the memory as dedicated for this texture. This is sometimse necessary for imported
+        // texture. We could query whether it is really needed but since the memory is only for
+        // that one texture we might as well always use a dedicated allocation for it when the
+        // feature is available.
+        VkMemoryDedicatedAllocateInfo dedicatedAllocateInfo;
+        if (mDevice->GetDeviceInfo().HasExt(DeviceExt::DedicateAllocation)) {
+            dedicatedAllocateInfo.image = image;
+            dedicatedAllocateInfo.buffer = VkBuffer{};
+            allocateInfoChain.Add(&dedicatedAllocateInfo, VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+        }
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
         DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,

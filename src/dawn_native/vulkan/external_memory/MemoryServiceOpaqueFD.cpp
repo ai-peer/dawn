@@ -110,17 +110,27 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                         "Requested allocation size (%u) is smaller than the image requires (%u).",
                         importParams.allocationSize, requirements.size);
 
-        VkImportMemoryFdInfoKHR importMemoryFdInfo;
-        importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
-        importMemoryFdInfo.pNext = nullptr;
-        importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
-        importMemoryFdInfo.fd = handle;
-
         VkMemoryAllocateInfo allocateInfo;
         allocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_ALLOCATE_INFO;
-        allocateInfo.pNext = &importMemoryFdInfo;
         allocateInfo.allocationSize = importParams.allocationSize;
         allocateInfo.memoryTypeIndex = importParams.memoryTypeIndex;
+        NextChainBuilder allocateInfoChain(&allocateInfo);
+
+        VkImportMemoryFdInfoKHR importMemoryFdInfo;
+        importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT,
+        importMemoryFdInfo.fd = handle;
+        allocateInfoChain.Add(&importMemoryFdInfo, VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR);
+
+        // Tag the memory as dedicated for this texture. This is sometimse necessary for imported
+        // texture. We could query whether it is really needed but since the memory is only for
+        // that one texture we might as well always use a dedicated allocation for it when the
+        // feature is available.
+        VkMemoryDedicatedAllocateInfo dedicatedAllocateInfo;
+        if (mDevice->GetDeviceInfo().HasExt(DeviceExt::DedicateAllocation)) {
+            dedicatedAllocateInfo.image = image;
+            dedicatedAllocateInfo.buffer = VkBuffer{};
+            allocateInfoChain.Add(&dedicatedAllocateInfo, VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+        }
 
         VkDeviceMemory allocatedMemory = VK_NULL_HANDLE;
         DAWN_TRY(CheckVkSuccess(mDevice->fn.AllocateMemory(mDevice->GetVkDevice(), &allocateInfo,
