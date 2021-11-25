@@ -98,6 +98,8 @@ namespace dawn_native { namespace vulkan {
         // Dawn API
         void SetLabelImpl() override;
 
+        VkImageAspectFlags ComputeAspectsForBarrier(const Aspect& aspects) const;
+
       private:
         ~Texture() override;
         Texture(Device* device, const TextureDescriptor* descriptor, TextureState state);
@@ -139,8 +141,18 @@ namespace dawn_native { namespace vulkan {
         // indicates whether we should combine depth and stencil barriers to accommodate this
         // limitation.
         bool ShouldCombineDepthStencilBarriers() const;
+
+        // This indicates whether the VK_IMAGE_ASPECT_COLOR_BIT instead of
+        // VK_IMAGE_ASPECT_PLANE_n_BIT must be used.
+        bool ShouldCombineMultiPlaneBarriers() const;
+
+        bool ShouldCombineBarriers() const {
+            return ShouldCombineDepthStencilBarriers() || ShouldCombineMultiPlaneBarriers();
+        }
+
         // Compute the Aspects of the SubresourceStoage for this texture depending on whether we're
-        // doing the workaround for combined depth and stencil barriers.
+        // doing the workaround for combined depth and stencil barriers, or combining multi-plane
+        // barriers.
         Aspect ComputeAspectsForSubresourceStorage() const;
 
         VkImage mHandle = VK_NULL_HANDLE;
@@ -165,7 +177,9 @@ namespace dawn_native { namespace vulkan {
         // Note that in early Vulkan versions it is not possible to transition depth and stencil
         // separately so textures with Depth|Stencil aspects will have a single Depth aspect in the
         // storage.
-        SubresourceStorage<wgpu::TextureUsage> mSubresourceLastUsages;
+        std::unique_ptr<SubresourceStorage<wgpu::TextureUsage>> mSubresourceLastUsages;
+
+        bool mSupportsDisjointVkImage = false;
     };
 
     class TextureView final : public TextureViewBase {
