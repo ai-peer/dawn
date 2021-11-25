@@ -110,9 +110,15 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
                         "Requested allocation size (%u) is smaller than the image requires (%u).",
                         importParams.allocationSize, requirements.size);
 
+        VkMemoryDedicatedAllocateInfo memoryDedicatedAllocateInfo;
+        memoryDedicatedAllocateInfo.sType = VK_STRUCTURE_TYPE_MEMORY_DEDICATED_ALLOCATE_INFO;
+        memoryDedicatedAllocateInfo.pNext = nullptr;
+        memoryDedicatedAllocateInfo.image = image;
+        memoryDedicatedAllocateInfo.buffer = VkBuffer{};
+
         VkImportMemoryFdInfoKHR importMemoryFdInfo;
         importMemoryFdInfo.sType = VK_STRUCTURE_TYPE_IMPORT_MEMORY_FD_INFO_KHR;
-        importMemoryFdInfo.pNext = nullptr;
+        importMemoryFdInfo.pNext = &memoryDedicatedAllocateInfo;
         importMemoryFdInfo.handleType = VK_EXTERNAL_MEMORY_HANDLE_TYPE_OPAQUE_FD_BIT;
         importMemoryFdInfo.fd = handle;
 
