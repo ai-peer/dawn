@@ -16,6 +16,23 @@
       "message": "This is ready to land. PTAL again, thanks.",
       "revId": "7d2ceb7e39d63bb7aee0402460ee4c2d2b261acb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40b83df3_61c3c00b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T08:48:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7d2ceb7e39d63bb7aee0402460ee4c2d2b261acb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
