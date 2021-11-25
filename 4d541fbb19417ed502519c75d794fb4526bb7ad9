@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6f415641_28645522",
+        "filename": "src/dawn_native/d3d12/AdapterD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T09:07:37Z",
+      "side": 1,
+      "message": "Ok sounds good. Using a single parameter for both the VS and CS root parameters sounds good.",
+      "parentUuid": "b1102916_4928c246",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6a74b19_fcd0d9e3",
         "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
         "patchSetId": 3
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "GetDynamicUniformBufferCount is not a thing though. Dynamic buffers are in front, but they\u0027re not sorted by type, they\u0027re sorted by binding number. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/BindGroupLayout.cpp;l\u003d294",
       "parentUuid": "c6a74b19_fcd0d9e3",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30e8ed7d_5c502ab0",
+        "filename": "src/dawn_native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T09:07:37Z",
+      "side": 1,
+      "message": "Ah ok makes sense. Maybe we can have a IsStorageBufferBinding helper to try and reduce the boilerplate here, but that\u0027s the best we can do I guess.",
+      "parentUuid": "265cebec_e0f19502",
       "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -242,6 +278,24 @@
       "side": 1,
       "message": "hm, I\u0027ll add a struct in a follow-up, so the rebasing is easier",
       "parentUuid": "1e602cd6_2a9e4642",
+      "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58a7f972_41b9a980",
+        "filename": "src/dawn_native/d3d12/PipelineLayoutD3D12.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T09:07:37Z",
+      "side": 1,
+      "message": "Sounds good, and feel free to skip if you think the struct is unnecessary.",
+      "parentUuid": "3b13a644_bbdf45e2",
       "revId": "4d541fbb19417ed502519c75d794fb4526bb7ad9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
