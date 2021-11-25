@@ -149,6 +149,10 @@ namespace dawn_native { namespace vulkan {
             mSupportedFeatures.EnableFeature(Feature::TimestampQuery);
         }
 
+#if defined(DAWN_USE_SYNC_FDS)
+        mSupportedFeatures.EnableFeature(Feature::MultiPlanarFormats);
+#endif
+
         return {};
     }
 
