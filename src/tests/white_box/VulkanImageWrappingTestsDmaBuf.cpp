@@ -41,6 +41,7 @@ namespace dawn_native { namespace vulkan {
           public:
             void SetUp() override {
                 DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+                DawnTest::SetUp();
 
                 gbmDevice = CreateGbmDevice();
                 deviceVk = reinterpret_cast<dawn_native::vulkan::Device*>(device.Get());
@@ -65,6 +66,7 @@ namespace dawn_native { namespace vulkan {
 
                 gbm_bo_destroy(defaultGbmBo);
                 gbm_device_destroy(gbmDevice);
+                DawnTest::TearDown();
             }
 
             gbm_device* CreateGbmDevice() {
@@ -300,10 +302,10 @@ namespace dawn_native { namespace vulkan {
     class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
       public:
         void SetUp() override {
-            VulkanImageWrappingTestBase::SetUp();
             if (UsesWire()) {
                 return;
             }
+            VulkanImageWrappingTestBase::SetUp();
 
             // Create another device based on the original
             backendAdapter =
