@@ -50,6 +50,24 @@
       "message": "\u003e Patch Set 3: Code-Review+2\n\u003e \n\u003e By voting Code-Review+2 the following files are now code-owner approved by \u003cGERRIT_ACCOUNT_1000019\u003e:\n\u003e * dawn.json\n\u003e * docs/codegen.md\n\u003e * generator/dawn_json_generator.py\n\u003e * generator/templates/api.h\n\u003e * generator/templates/webgpu_cpp.h\n\u003e \n\nThanks for reviewing, i will submit it when bots are green.",
       "revId": "57ea5df19365ae56976e3d7a113809b5a46995a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f427161f_501d1af0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T08:40:24Z",
+      "side": 1,
+      "message": "CQ+2 also waits for the bots to be green so you can do it directly if you want.",
+      "parentUuid": "f6b30b4d_d03d0cac",
+      "revId": "57ea5df19365ae56976e3d7a113809b5a46995a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
