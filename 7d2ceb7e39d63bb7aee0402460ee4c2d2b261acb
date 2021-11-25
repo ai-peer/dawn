@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "7d2ceb7e39d63bb7aee0402460ee4c2d2b261acb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17274d87_5566c773",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-11-25T10:43:23Z",
+      "side": 1,
+      "message": "übernit: \"Default to disabling optimizations when using FXC\"",
+      "revId": "7d2ceb7e39d63bb7aee0402460ee4c2d2b261acb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
