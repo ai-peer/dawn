@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad44f75_b747963f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T08:57:27Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "bcda0549a48ed70e5f2c8eb30472ebe829bd6387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17d86632_8045367b",
+        "filename": "src/common/SystemUtils.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-25T08:57:27Z",
+      "side": 1,
+      "message": "u-nit: maybe comment that the directories are returned with a trailing path separator.",
+      "revId": "bcda0549a48ed70e5f2c8eb30472ebe829bd6387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
