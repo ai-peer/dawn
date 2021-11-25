@@ -704,9 +704,11 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForColorTexture) {
 
 // Test B2T copies with incorrect buffer offset usage for depth-stencil texture
 TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForDepthStencilTexture) {
-    // TODO(dawn:570, dawn:666, dawn:690): List other valid parameters after missing texture formats
-    // are implemented, e.g. Stencil8 and depth16unorm.
-    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 1> params = {
+    // TODO(dawn:666, dawn:690): List other valid parameters after missing texture formats
+    // are implemented, e.g. Stencil8 and Depth24UnormStencil8.
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 3> params = {
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::DepthOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::All),
         std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
     };
 
@@ -1317,10 +1319,12 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForColorTexture) {
 
 // Test T2B copies with incorrect buffer offset usage for depth-stencil texture
 TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForDepthStencilTexture) {
-    // TODO(dawn:570, dawn:666, dawn:690): List other valid parameters after missing texture formats
-    // are implemented, e.g. Stencil8 and depth16unorm.
-    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 3> params = {
+    // TODO(dawn:666, dawn:690): List other valid parameters after missing texture formats
+    // are implemented, e.g. Stencil8 and Depth24UnormStencil8.
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 5> params = {
         std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::DepthOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth16Unorm, wgpu::TextureAspect::All),
         std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::DepthOnly),
         std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::All),
     };

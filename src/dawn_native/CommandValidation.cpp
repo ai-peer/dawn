@@ -383,8 +383,10 @@ namespace dawn_native {
     MaybeError ValidateLinearToDepthStencilCopyRestrictions(const ImageCopyTexture& dst) {
         Aspect aspectUsed;
         DAWN_TRY_ASSIGN(aspectUsed, SingleAspectUsedByImageCopyTexture(dst));
-        DAWN_INVALID_IF(aspectUsed == Aspect::Depth, "Cannot copy into the depth aspect of %s.",
-                        dst.texture);
+        // The depth aspect image copies is only allowed with Depth16Unorm format
+        bool isAllowed = aspectUsed != Aspect::Depth ||
+                         wgpu::TextureFormat::Depth16Unorm == dst.texture->GetFormat().format;
+        DAWN_INVALID_IF(!isAllowed, "Cannot copy into the depth aspect of %s.", dst.texture);
 
         return {};
     }
