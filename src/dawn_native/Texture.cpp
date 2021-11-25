@@ -250,8 +250,10 @@ namespace dawn_native {
                 "The texture usage (%s) includes %s, which is incompatible with the format (%s).",
                 usage, wgpu::TextureUsage::StorageBinding, format->format);
 
+            // 'CopySrc' usage could be required as well for CopyTextureToTextureInternal.
+            // https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image_representation_dawn_ozone.cc;drc=cc2a523bb50626b8d633871090b696562daea8be;l=77
             constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
-                wgpu::TextureUsage::TextureBinding;
+                wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
             DAWN_INVALID_IF(
                 format->IsMultiPlanar() && !IsSubset(usage, kValidMultiPlanarUsages),
                 "The texture usage (%s) is incompatible with the multi-planar format (%s).", usage,

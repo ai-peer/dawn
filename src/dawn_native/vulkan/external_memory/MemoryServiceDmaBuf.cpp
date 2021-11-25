@@ -104,17 +104,31 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         if (planeCount == 0) {
             return false;
         }
-        // TODO(hob): Support multi-plane formats like I915_FORMAT_MOD_Y_TILED_CCS.
-        if (planeCount > 1) {
+        // Only support the NV12 multi-planar format for now.
+        if (planeCount > 1 && format != VK_FORMAT_G8_B8R8_2PLANE_420_UNORM) {
             return false;
         }
 
         // Verify that the format modifier of the external memory and the requested Vulkan format
         // are actually supported together in a dma-buf import.
-        VkPhysicalDeviceImageDrmFormatModifierInfoEXT drmModifierInfo;
+
+        // For mutable vkimage of multi-planar format, we also need to make sure the each plane's
+        // view format can be supported.
+        std::array<VkFormat, 2> viewFormats = {VK_FORMAT_R8_UNORM, VK_FORMAT_R8G8_UNORM};
+        VkImageFormatListCreateInfo imageFormatListInfo = {};
+        imageFormatListInfo.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_LIST_CREATE_INFO;
+        imageFormatListInfo.pNext = nullptr;
+        imageFormatListInfo.viewFormatCount = 2;
+        imageFormatListInfo.pViewFormats = viewFormats.data();
+
+        VkPhysicalDeviceImageDrmFormatModifierInfoEXT drmModifierInfo = {};
         drmModifierInfo.sType =
             VK_STRUCTURE_TYPE_PHYSICAL_DEVICE_IMAGE_DRM_FORMAT_MODIFIER_INFO_EXT;
-        drmModifierInfo.pNext = nullptr;
+        if (planeCount > 1) {
+            drmModifierInfo.pNext = &imageFormatListInfo;
+        } else {
+            drmModifierInfo.pNext = nullptr;
+        }
         drmModifierInfo.drmFormatModifier = dmaBufDescriptor->drmModifier;
         drmModifierInfo.sharingMode = VK_SHARING_MODE_EXCLUSIVE;
 
@@ -131,6 +145,9 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         imageFormatInfo.tiling = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT;
         imageFormatInfo.usage = usage;
         imageFormatInfo.flags = 0;
+        if (planeCount > 1) {
+            imageFormatInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
+        }
         imageFormatInfo.pNext = &externalImageFormatInfo;
 
         VkExternalImageFormatProperties externalImageFormatProps;
@@ -172,8 +189,8 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         // Get the valid memory types that the external memory can be imported as.
         mDevice->fn.GetMemoryFdPropertiesKHR(device, VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT,
                                              dmaBufDescriptor->memoryFD, &fdProperties);
-        // Choose the best memory type that satisfies both the image's constraint and the import's
-        // constraint.
+        // Choose the best memory type that satisfies both the image's constraint and the
+        // import's constraint.
         memoryRequirements.memoryTypeBits &= fdProperties.memoryTypeBits;
         int memoryTypeIndex = mDevice->GetResourceMemoryAllocator()->FindBestTypeIndex(
             memoryRequirements, MemoryKind::Opaque);
@@ -226,45 +243,60 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         VkPhysicalDevice physicalDevice = ToBackend(mDevice->GetAdapter())->GetPhysicalDevice();
         VkDevice device = mDevice->GetVkDevice();
 
-        // Dawn currently doesn't support multi-plane formats, so we only need to create a single
-        // VkSubresourceLayout here.
-        VkSubresourceLayout planeLayout;
+        // For single plane formats.
+        VkSubresourceLayout planeLayout = {};
         planeLayout.offset = 0;
         planeLayout.size = 0;  // VK_EXT_image_drm_format_modifier mandates size = 0.
         planeLayout.rowPitch = dmaBufDescriptor->stride;
         planeLayout.arrayPitch = 0;  // Not an array texture
         planeLayout.depthPitch = 0;  // Not a depth texture
 
-        uint32_t planeCount;
-        DAWN_TRY_ASSIGN(planeCount,
-                        GetModifierPlaneCount(mDevice->fn, physicalDevice, baseCreateInfo.format,
-                                              dmaBufDescriptor->drmModifier));
-        ASSERT(planeCount == 1);
-
         VkImageDrmFormatModifierExplicitCreateInfoEXT explicitCreateInfo;
         explicitCreateInfo.sType =
             VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_EXPLICIT_CREATE_INFO_EXT;
         explicitCreateInfo.pNext = NULL;
         explicitCreateInfo.drmFormatModifier = dmaBufDescriptor->drmModifier;
-        explicitCreateInfo.drmFormatModifierPlaneCount = planeCount;
+        explicitCreateInfo.drmFormatModifierPlaneCount = 1;
         explicitCreateInfo.pPlaneLayouts = &planeLayout;
+
+        // For multi-planar formats, we can't explicitly specify VkSubresourceLayout for each plane
+        // due to the lack of knowledge about the required 'offset'. Alternatively
+        // VkImageDrmFormatModifierListCreateInfoEXT can be used to create image with the DRM format
+        // modifier.
+        VkImageDrmFormatModifierListCreateInfoEXT listCreateInfo = {};
+        listCreateInfo.sType = VK_STRUCTURE_TYPE_IMAGE_DRM_FORMAT_MODIFIER_LIST_CREATE_INFO_EXT;
+        listCreateInfo.drmFormatModifierCount = 1u;
+        listCreateInfo.pDrmFormatModifiers = &dmaBufDescriptor->drmModifier;
 
         VkExternalMemoryImageCreateInfo externalMemoryImageCreateInfo;
         externalMemoryImageCreateInfo.sType = VK_STRUCTURE_TYPE_EXTERNAL_MEMORY_IMAGE_CREATE_INFO;
-        externalMemoryImageCreateInfo.pNext = &explicitCreateInfo;
+        uint32_t planeCount;
+        DAWN_TRY_ASSIGN(planeCount,
+                        GetModifierPlaneCount(mDevice->fn, physicalDevice, baseCreateInfo.format,
+                                              dmaBufDescriptor->drmModifier));
+        if (planeCount == 1) {
+            externalMemoryImageCreateInfo.pNext = &explicitCreateInfo;
+        } else {
+            externalMemoryImageCreateInfo.pNext = &listCreateInfo;
+        }
         externalMemoryImageCreateInfo.handleTypes = VK_EXTERNAL_MEMORY_HANDLE_TYPE_DMA_BUF_BIT_EXT;
 
         VkImageCreateInfo createInfo = baseCreateInfo;
         createInfo.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
         createInfo.pNext = &externalMemoryImageCreateInfo;
         createInfo.flags = 0;
+        if (planeCount > 1) {
+            // For multi-planar formats, VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT specifies that a
+            // VkImageView can be plane's format which might differ from the image's format.
+            createInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
+        }
         createInfo.tiling = VK_IMAGE_TILING_DRM_FORMAT_MODIFIER_EXT;
 
         // Create a new VkImage with tiling equal to the DRM format modifier.
         VkImage image;
         DAWN_TRY(CheckVkSuccess(mDevice->fn.CreateImage(device, &createInfo, nullptr, &*image),
                                 "CreateImage"));
+
         return image;
     }
-
 }}}  // namespace dawn_native::vulkan::external_memory

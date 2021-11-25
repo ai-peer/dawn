@@ -70,6 +70,9 @@ namespace dawn_native {
                     "validating plane0 against the external texture format (%s)",
                     descriptor->format);
                 break;
+            case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                // Each plane may have a different format from the texture.
+                break;
             default:
                 return DAWN_FORMAT_VALIDATION_ERROR(
                     "Format (%s) is not a supported external texture format.", descriptor->format);
