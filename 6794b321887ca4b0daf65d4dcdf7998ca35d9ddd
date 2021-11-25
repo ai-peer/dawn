@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab7965ea_253e4130",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2580,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-25T07:17:32Z",
+      "side": 1,
+      "message": "Got it, thanks.",
+      "parentUuid": "471fc747_f2ab5981",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66f0e041_977cfa71",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-24T13:11:56Z",
       "side": 1,
       "message": "nit: can we keep the TODO? It can be done by adding a dummy key. \"_TODO\": \"crbug.com/dawn/520: Remove WGPU_STRIDE_UNDEFINED in favor of WGPU_COPY_STRIDE_UNDEFINED.\"",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3e3f75_4fab7869",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2587,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-25T07:17:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66f0e041_977cfa71",
       "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70090809_d431ded9",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 2616,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-25T07:17:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0474ca80_7d18eb77",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dad7b3d4_dfd46890",
@@ -99,6 +153,24 @@
       "writtenOn": "2021-11-24T13:11:56Z",
       "side": 1,
       "message": "nit: This isn\u0027t a type. And with comment [1] I think this could be ConstantDefinition. WDYT?",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1c408d5_4eea4d5c",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-25T07:17:32Z",
+      "side": 1,
+      "message": "make sense, thanks.",
+      "parentUuid": "dad7b3d4_dfd46890",
       "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cc0818a_143ef925",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-25T07:17:32Z",
+      "side": 1,
+      "message": "Got it, thanks for explanation.",
+      "parentUuid": "9a4555cc_f27a6318",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0b4881_52911870",
@@ -133,6 +223,24 @@
       "writtenOn": "2021-11-24T13:11:56Z",
       "side": 1,
       "message": "Oh, we completely forgot about these. Instead of the host_index mechanism I think we can just remove them. Can you do it and add dawn:1023 to the bug tag in the commit message?",
+      "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "732bb819_5bd96a71",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-25T07:17:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0b4881_52911870",
       "revId": "6794b321887ca4b0daf65d4dcdf7998ca35d9ddd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
