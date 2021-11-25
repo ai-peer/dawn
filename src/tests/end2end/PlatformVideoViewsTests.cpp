@@ -14,81 +14,67 @@
 
 #include "tests/DawnTest.h"
 
-#include <d3d11.h>
-#include <d3d12.h>
-#include <dxgi1_4.h>
-#include <wrl/client.h>
+#if defined(DAWN_PLATFORM_WINDOWS)
+#    include <d3d11.h>
+#    include <d3d12.h>
+#    include <dxgi1_4.h>
+#    include <wrl/client.h>
 
-#include "dawn_native/D3D12Backend.h"
+#    include "dawn_native/D3D12Backend.h"
+#else
+#    include <fcntl.h>
+#    include <gbm.h>
+#    include "dawn_native/VulkanBackend.h"
+#endif
+
 #include "utils/ComboRenderPipelineDescriptor.h"
 #include "utils/WGPUHelpers.h"
 
-using Microsoft::WRL::ComPtr;
-
 namespace {
-    class D3D12VideoViewsTests : public DawnTest {
+    // The width and height in texels are 4 for all YUV formats.
+    static constexpr uint32_t kYUVImageDataWidthInTexels = 4;
+    static constexpr uint32_t kYUVImageDataHeightInTexels = 4;
+
+    static constexpr size_t kYUVLumaPlaneIndex = 0;
+    static constexpr size_t kYUVChromaPlaneIndex = 1;
+
+    // RGB colors converted into YUV (per plane), for testing.
+    // RGB colors are mapped to the BT.601 definition of luma.
+    // https://docs.microsoft.com/en-us/windows/win32/medfound/about-yuv-video
+    static constexpr std::array<RGBA8, 2> kYellowYUVColor = {RGBA8{210, 0, 0, 0xFF},    // Y
+                                                             RGBA8{16, 146, 0, 0xFF}};  // UV
+
+    static constexpr std::array<RGBA8, 2> kWhiteYUVColor = {RGBA8{235, 0, 0, 0xFF},     // Y
+                                                            RGBA8{128, 128, 0, 0xFF}};  // UV
+
+    static constexpr std::array<RGBA8, 2> kBlueYUVColor = {RGBA8{41, 0, 0, 0xFF},      // Y
+                                                           RGBA8{240, 110, 0, 0xFF}};  // UV
+
+    static constexpr std::array<RGBA8, 2> kRedYUVColor = {RGBA8{81, 0, 0, 0xFF},     // Y
+                                                          RGBA8{90, 240, 0, 0xFF}};  // UV
+
+    class VideoViewsTests : public DawnTest {
       protected:
         void SetUp() override {
             DawnTest::SetUp();
-            DAWN_TEST_UNSUPPORTED_IF(UsesWire());
-            DAWN_TEST_UNSUPPORTED_IF(!IsMultiPlanarFormatsSupported());
+        }
 
-            // Create the D3D11 device/contexts that will be used in subsequent tests
-            ComPtr<ID3D12Device> d3d12Device = dawn_native::d3d12::GetD3D12Device(device.Get());
-
-            const LUID adapterLuid = d3d12Device->GetAdapterLuid();
-
-            ComPtr<IDXGIFactory4> dxgiFactory;
-            HRESULT hr = ::CreateDXGIFactory2(0, IID_PPV_ARGS(&dxgiFactory));
-            ASSERT_EQ(hr, S_OK);
-
-            ComPtr<IDXGIAdapter> dxgiAdapter;
-            hr = dxgiFactory->EnumAdapterByLuid(adapterLuid, IID_PPV_ARGS(&dxgiAdapter));
-            ASSERT_EQ(hr, S_OK);
-
-            ComPtr<ID3D11Device> d3d11Device;
-            D3D_FEATURE_LEVEL d3dFeatureLevel;
-            ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
-            hr = ::D3D11CreateDevice(dxgiAdapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0,
-                                     nullptr, 0, D3D11_SDK_VERSION, &d3d11Device, &d3dFeatureLevel,
-                                     &d3d11DeviceContext);
-            ASSERT_EQ(hr, S_OK);
-
-            // Runtime of the created texture (D3D11 device) and OpenSharedHandle runtime (Dawn's
-            // D3D12 device) must agree on resource sharing capability. For NV12 formats, D3D11
-            // requires at-least D3D11_SHARED_RESOURCE_TIER_2 support.
-            // https://docs.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_shared_resource_tier
-            D3D11_FEATURE_DATA_D3D11_OPTIONS5 featureOptions5{};
-            hr = d3d11Device->CheckFeatureSupport(D3D11_FEATURE_D3D11_OPTIONS5, &featureOptions5,
-                                                  sizeof(featureOptions5));
-            ASSERT_EQ(hr, S_OK);
-
-            ASSERT_GE(featureOptions5.SharedResourceTier, D3D11_SHARED_RESOURCE_TIER_2);
-
-            mD3d11Device = std::move(d3d11Device);
+        void TearDown() override {
+            DawnTest::TearDown();
         }
 
         std::vector<const char*> GetRequiredFeatures() override {
+            std::vector<const char*> requiredFeatures = {};
             mIsMultiPlanarFormatsSupported = SupportsFeatures({"multiplanar-formats"});
-            if (!mIsMultiPlanarFormatsSupported) {
-                return {};
+            if (mIsMultiPlanarFormatsSupported) {
+                requiredFeatures.push_back("multiplanar-formats");
             }
-
-            return {"multiplanar-formats"};
+            requiredFeatures.push_back("dawn-internal-usages");
+            return requiredFeatures;
         }
 
         bool IsMultiPlanarFormatsSupported() const {
             return mIsMultiPlanarFormatsSupported;
-        }
-
-        static DXGI_FORMAT GetDXGITextureFormat(wgpu::TextureFormat format) {
-            switch (format) {
-                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
-                    return DXGI_FORMAT_NV12;
-                default:
-                    UNREACHABLE();
-                    return DXGI_FORMAT_UNKNOWN;
-            }
         }
 
         // Returns a pre-prepared multi-planar formatted texture
@@ -148,10 +134,106 @@ namespace {
             }
         }
 
+        virtual void CreateVideoTextureForTest(wgpu::TextureFormat format,
+                                               wgpu::TextureUsage usage,
+                                               bool isCheckerboard,
+                                               wgpu::Texture* dawnTextureOut,
+                                               void** platformTextureOut) {
+            *platformTextureOut = nullptr;
+        }
+
+        virtual void DestroyVideoTextureForTest(void* handle, wgpu::Texture texture) {
+        }
+
+        // Vertex shader used to render a sampled texture into a quad.
+        wgpu::ShaderModule GetTestVertexShaderModule() const {
+            return utils::CreateShaderModule(device, R"(
+                struct VertexOut {
+                    [[location(0)]] texCoord : vec2 <f32>;
+                    [[builtin(position)]] position : vec4<f32>;
+                };
+
+                [[stage(vertex)]]
+                fn main([[builtin(vertex_index)]] VertexIndex : u32) -> VertexOut {
+                    var pos = array<vec2<f32>, 6>(
+                        vec2<f32>(-1.0, 1.0),
+                        vec2<f32>(-1.0, -1.0),
+                        vec2<f32>(1.0, -1.0),
+                        vec2<f32>(-1.0, 1.0),
+                        vec2<f32>(1.0, -1.0),
+                        vec2<f32>(1.0, 1.0)
+                    );
+                    var output : VertexOut;
+                    output.position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
+                    output.texCoord = vec2<f32>(output.position.xy * 0.5) + vec2<f32>(0.5, 0.5);
+                    return output;
+            })");
+        }
+
+        bool mIsMultiPlanarFormatsSupported = false;
+    };
+
+#if defined(DAWN_PLATFORM_WINDOWS)
+
+    using Microsoft::WRL::ComPtr;
+    class PlatformVideoViewsTests : public VideoViewsTests {
+      protected:
+        void SetUp() override {
+            VideoViewsTests::SetUp();
+
+            DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+            DAWN_TEST_UNSUPPORTED_IF(!IsMultiPlanarFormatsSupported());
+
+            // Create the D3D11 device/contexts that will be used in subsequent tests
+            ComPtr<ID3D12Device> d3d12Device = dawn_native::d3d12::GetD3D12Device(device.Get());
+
+            const LUID adapterLuid = d3d12Device->GetAdapterLuid();
+
+            ComPtr<IDXGIFactory4> dxgiFactory;
+            HRESULT hr = ::CreateDXGIFactory2(0, IID_PPV_ARGS(&dxgiFactory));
+            ASSERT_EQ(hr, S_OK);
+
+            ComPtr<IDXGIAdapter> dxgiAdapter;
+            hr = dxgiFactory->EnumAdapterByLuid(adapterLuid, IID_PPV_ARGS(&dxgiAdapter));
+            ASSERT_EQ(hr, S_OK);
+
+            ComPtr<ID3D11Device> d3d11Device;
+            D3D_FEATURE_LEVEL d3dFeatureLevel;
+            ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+            hr = ::D3D11CreateDevice(dxgiAdapter.Get(), D3D_DRIVER_TYPE_UNKNOWN, nullptr, 0,
+                                     nullptr, 0, D3D11_SDK_VERSION, &d3d11Device, &d3dFeatureLevel,
+                                     &d3d11DeviceContext);
+            ASSERT_EQ(hr, S_OK);
+
+            // Runtime of the created texture (D3D11 device) and OpenSharedHandle runtime (Dawn's
+            // D3D12 device) must agree on resource sharing capability. For NV12 formats, D3D11
+            // requires at-least D3D11_SHARED_RESOURCE_TIER_2 support.
+            // https://docs.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_shared_resource_tier
+            D3D11_FEATURE_DATA_D3D11_OPTIONS5 featureOptions5{};
+            hr = d3d11Device->CheckFeatureSupport(D3D11_FEATURE_D3D11_OPTIONS5, &featureOptions5,
+                                                  sizeof(featureOptions5));
+            ASSERT_EQ(hr, S_OK);
+
+            ASSERT_GE(featureOptions5.SharedResourceTier, D3D11_SHARED_RESOURCE_TIER_2);
+
+            mD3d11Device = std::move(d3d11Device);
+        }
+
+        static DXGI_FORMAT GetDXGITextureFormat(wgpu::TextureFormat format) {
+            switch (format) {
+                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                    return DXGI_FORMAT_NV12;
+                default:
+                    UNREACHABLE();
+                    return DXGI_FORMAT_UNKNOWN;
+            }
+        }
+
         void CreateVideoTextureForTest(wgpu::TextureFormat format,
                                        wgpu::TextureUsage usage,
                                        bool isCheckerboard,
-                                       wgpu::Texture* dawnTextureOut) {
+                                       wgpu::Texture* dawnTextureOut,
+                                       void** platformTextureOut) override {
             wgpu::TextureDescriptor textureDesc;
             textureDesc.format = format;
             textureDesc.dimension = wgpu::TextureDimension::e2D;
@@ -227,71 +309,188 @@ namespace {
 
             *dawnTextureOut = wgpu::Texture::Acquire(
                 externalImage->ProduceTexture(device.Get(), &externalAccessDesc));
+            *platformTextureOut = nullptr;
         }
-
-        // Vertex shader used to render a sampled texture into a quad.
-        wgpu::ShaderModule GetTestVertexShaderModule() const {
-            return utils::CreateShaderModule(device, R"(
-                struct VertexOut {
-                    [[location(0)]] texCoord : vec2 <f32>;
-                    [[builtin(position)]] position : vec4<f32>;
-                };
-
-                [[stage(vertex)]]
-                fn main([[builtin(vertex_index)]] VertexIndex : u32) -> VertexOut {
-                    var pos = array<vec2<f32>, 6>(
-                        vec2<f32>(-1.0, 1.0),
-                        vec2<f32>(-1.0, -1.0),
-                        vec2<f32>(1.0, -1.0),
-                        vec2<f32>(-1.0, 1.0),
-                        vec2<f32>(1.0, -1.0),
-                        vec2<f32>(1.0, 1.0)
-                    );
-                    var output : VertexOut;
-                    output.position = vec4<f32>(pos[VertexIndex], 0.0, 1.0);
-                    output.texCoord = vec2<f32>(output.position.xy * 0.5) + vec2<f32>(0.5, 0.5);
-                    return output;
-            })");
-        }
-
-        // The width and height in texels are 4 for all YUV formats.
-        static constexpr uint32_t kYUVImageDataWidthInTexels = 4;
-        static constexpr uint32_t kYUVImageDataHeightInTexels = 4;
-
-        static constexpr size_t kYUVLumaPlaneIndex = 0;
-        static constexpr size_t kYUVChromaPlaneIndex = 1;
-
-        // RGB colors converted into YUV (per plane), for testing.
-        // RGB colors are mapped to the BT.601 definition of luma.
-        // https://docs.microsoft.com/en-us/windows/win32/medfound/about-yuv-video
-        static constexpr std::array<RGBA8, 2> kYellowYUVColor = {RGBA8{210, 0, 0, 0xFF},    // Y
-                                                                 RGBA8{16, 146, 0, 0xFF}};  // UV
-
-        static constexpr std::array<RGBA8, 2> kWhiteYUVColor = {RGBA8{235, 0, 0, 0xFF},     // Y
-                                                                RGBA8{128, 128, 0, 0xFF}};  // UV
-
-        static constexpr std::array<RGBA8, 2> kBlueYUVColor = {RGBA8{41, 0, 0, 0xFF},      // Y
-                                                               RGBA8{240, 110, 0, 0xFF}};  // UV
-
-        static constexpr std::array<RGBA8, 2> kRedYUVColor = {RGBA8{81, 0, 0, 0xFF},     // Y
-                                                              RGBA8{90, 240, 0, 0xFF}};  // UV
-
         ComPtr<ID3D11Device> mD3d11Device;
-
-        bool mIsMultiPlanarFormatsSupported = false;
     };
+#else
+    class PlatformVideoViewsTests : public VideoViewsTests {
+      protected:
+        void SetUp() override {
+            VideoViewsTests::SetUp();
+
+            DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+            DAWN_TEST_UNSUPPORTED_IF(!IsMultiPlanarFormatsSupported());
+
+            gbmDevice = CreateGbmDevice();
+            // TODO(chromium:1258986): Add DISJOINT vkImage support for multi-plannar formats.
+            DAWN_TEST_UNSUPPORTED_IF(IsNv12GbmBoDisjoint());
+        }
+        void TearDown() override {
+            if (!UsesWire() && IsMultiPlanarFormatsSupported()) {
+                gbm_device_destroy(gbmDevice);
+            }
+
+            VideoViewsTests::TearDown();
+        }
+
+        gbm_device* CreateGbmDevice() {
+            // Render nodes [1] are the primary interface for communicating with the GPU on
+            // devices that support DRM. The actual filename of the render node is
+            // implementation-specific, so we must scan through all possible filenames to find
+            // one that we can use [2].
+            //
+            // [1] https://dri.freedesktop.org/docs/drm/gpu/drm-uapi.html#render-nodes
+            // [2]
+            // https://cs.chromium.org/chromium/src/ui/ozone/platform/wayland/gpu/drm_render_node_path_finder.cc
+            const uint32_t kRenderNodeStart = 128;
+            const uint32_t kRenderNodeEnd = kRenderNodeStart + 16;
+            const std::string kRenderNodeTemplate = "/dev/dri/renderD";
+
+            int renderNodeFd = -1;
+            for (uint32_t i = kRenderNodeStart; i < kRenderNodeEnd; i++) {
+                std::string renderNode = kRenderNodeTemplate + std::to_string(i);
+                renderNodeFd = open(renderNode.c_str(), O_RDWR);
+                if (renderNodeFd >= 0)
+                    break;
+            }
+            EXPECT_GE(renderNodeFd, 0) << "Failed to get file descriptor for render node";
+
+            gbm_device* gbmDevice = gbm_create_device(renderNodeFd);
+            EXPECT_NE(gbmDevice, nullptr) << "Failed to create GBM device";
+            return gbmDevice;
+        }
+
+        static uint32_t GetGbmBoFormat(wgpu::TextureFormat format) {
+            switch (format) {
+                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                    return GBM_FORMAT_NV12;
+                default:
+                    UNREACHABLE();
+                    return -1;
+            }
+        }
+
+        WGPUTextureFormat ToWGPUTextureFormat(wgpu::TextureFormat format) {
+            switch (format) {
+                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                    return WGPUTextureFormat_R8BG8Biplanar420Unorm;
+                default:
+                    UNREACHABLE();
+                    return WGPUTextureFormat_Undefined;
+            }
+        }
+
+        WGPUTextureUsage ToWGPUTextureUsage(wgpu::TextureUsage usage) {
+            switch (usage) {
+                case wgpu::TextureUsage::TextureBinding:
+                    return WGPUTextureUsage_TextureBinding;
+                default:
+                    UNREACHABLE();
+                    return WGPUTextureUsage_None;
+            }
+        }
+
+        // Checks if the plane handles of a NV12 gbm_bo are same.
+        bool IsNv12GbmBoDisjoint() {
+            uint32_t flags = GBM_BO_USE_SCANOUT | GBM_BO_USE_TEXTURING |
+                             GBM_BO_USE_HW_VIDEO_DECODER | GBM_BO_USE_SW_WRITE_RARELY;
+            gbm_bo* gbmBo = gbm_bo_create(gbmDevice, 1, 1, GBM_FORMAT_NV12, flags);
+            if (gbmBo == nullptr) {
+                return true;
+            }
+            gbm_bo_handle plane0Handle = gbm_bo_get_handle_for_plane(gbmBo, 0);
+            for (int plane = 1; plane < gbm_bo_get_plane_count(gbmBo); ++plane) {
+                if (gbm_bo_get_handle_for_plane(gbmBo, plane).u32 != plane0Handle.u32) {
+                    gbm_bo_destroy(gbmBo);
+                    return true;
+                }
+            }
+            gbm_bo_destroy(gbmBo);
+            return false;
+        }
+
+        void CreateVideoTextureForTest(wgpu::TextureFormat format,
+                                       wgpu::TextureUsage usage,
+                                       bool isCheckerboard,
+                                       wgpu::Texture* dawnTextureOut,
+                                       void** platformTextureOut) override {
+            *platformTextureOut = nullptr;
+            uint32_t flags = GBM_BO_USE_SCANOUT | GBM_BO_USE_TEXTURING |
+                             GBM_BO_USE_HW_VIDEO_DECODER | GBM_BO_USE_SW_WRITE_RARELY;
+            gbm_bo* gbmBo = gbm_bo_create(gbmDevice, kYUVImageDataWidthInTexels,
+                                          kYUVImageDataHeightInTexels, GBM_FORMAT_NV12, flags);
+            EXPECT_NE(gbmBo, nullptr) << "Failed to create GBM buffer object";
+
+            void* mapHandle = nullptr;
+            uint32_t strideBytes = 0;
+            void* addr =
+                gbm_bo_map(gbmBo, 0, 0, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels,
+                           GBM_BO_TRANSFER_WRITE, &strideBytes, &mapHandle);
+            EXPECT_NE(addr, nullptr);
+            std::vector<uint8_t> initialData = GetTestTextureData(format, isCheckerboard);
+            std::memcpy(addr, initialData.data(), initialData.size());
+
+            gbm_bo_unmap(gbmBo, mapHandle);
+
+            WGPUTextureDescriptor textureDesc = {};
+            textureDesc.format = ToWGPUTextureFormat(format);
+            textureDesc.dimension = WGPUTextureDimension_2D;
+            textureDesc.usage = ToWGPUTextureUsage(usage);
+            textureDesc.size = {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels, 1};
+            textureDesc.mipLevelCount = 1;
+            textureDesc.sampleCount = 1;
+
+            WGPUDawnTextureInternalUsageDescriptor internalDesc = {};
+            internalDesc.chain.sType = WGPUSType_DawnTextureInternalUsageDescriptor;
+            internalDesc.internalUsage = WGPUTextureUsage_CopySrc;
+            textureDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(&internalDesc);
+
+            dawn_native::vulkan::ExternalImageDescriptorDmaBuf descriptor = {};
+            descriptor.cTextureDescriptor = &textureDesc;
+            descriptor.isInitialized = true;
+
+            descriptor.memoryFD = gbm_bo_get_fd(gbmBo);
+            descriptor.stride = gbm_bo_get_stride(gbmBo);
+            descriptor.drmModifier = gbm_bo_get_modifier(gbmBo);
+            descriptor.waitFDs = {};
+
+            *dawnTextureOut = wgpu::Texture::Acquire(
+                dawn_native::vulkan::WrapVulkanImage(backendDevice, &descriptor));
+            *platformTextureOut = gbmBo;
+        }
+
+        void DestroyVideoTextureForTest(void* handle, wgpu::Texture texture) override {
+            // Exports the signal and ignores it.
+            dawn_native::vulkan::ExternalImageExportInfoDmaBuf exportInfo;
+            dawn_native::vulkan::ExportVulkanImage(texture.Get(), VK_IMAGE_LAYOUT_GENERAL,
+                                                   &exportInfo);
+            for (int fd : exportInfo.semaphoreHandles) {
+                ASSERT_NE(fd, -1);
+                close(fd);
+            }
+            ASSERT_NE(handle, nullptr);
+            gbm_bo* gbmBo = static_cast<gbm_bo*>(handle);
+            gbm_bo_destroy(gbmBo);
+        }
+
+        gbm_device* gbmDevice;
+    };
+#endif
 }  // namespace
 
 // Samples the luminance (Y) plane from an imported NV12 texture into a single channel of an RGBA
 // output attachment and checks for the expected pixel value in the rendered quad.
-TEST_P(D3D12VideoViewsTests, NV12SampleYtoR) {
+TEST_P(PlatformVideoViewsTests, NV12SampleYtoR) {
     wgpu::Texture wgpuTexture;
+    void* platformTexture = nullptr;
     CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
-                              wgpu::TextureUsage::TextureBinding, /*isCheckerboard*/ false,
-                              &wgpuTexture);
+                              wgpu::TextureUsage::TextureBinding,
+                              /*isCheckerboard*/ false, &wgpuTexture, &platformTexture);
     ASSERT_NE(wgpuTexture.Get(), nullptr);
 
     wgpu::TextureViewDescriptor viewDesc;
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
     viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView textureView = wgpuTexture.CreateView(&viewDesc);
 
@@ -332,18 +531,21 @@ TEST_P(D3D12VideoViewsTests, NV12SampleYtoR) {
 
     // Test the luma plane in the top left corner of RGB image.
     EXPECT_PIXEL_RGBA8_EQ(kYellowYUVColor[kYUVLumaPlaneIndex], renderPass.color, 0, 0);
+    DestroyVideoTextureForTest(platformTexture, wgpuTexture);
 }
 
 // Samples the chrominance (UV) plane from an imported texture into two channels of an RGBA output
 // attachment and checks for the expected pixel value in the rendered quad.
-TEST_P(D3D12VideoViewsTests, NV12SampleUVtoRG) {
+TEST_P(PlatformVideoViewsTests, NV12SampleUVtoRG) {
     wgpu::Texture wgpuTexture;
+    void* platformTexture = nullptr;
     CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
-                              wgpu::TextureUsage::TextureBinding, /*isCheckerboard*/ false,
-                              &wgpuTexture);
+                              wgpu::TextureUsage::TextureBinding,
+                              /*isCheckerboard*/ false, &wgpuTexture, &platformTexture);
     ASSERT_NE(wgpuTexture.Get(), nullptr);
 
     wgpu::TextureViewDescriptor viewDesc;
+    viewDesc.format = wgpu::TextureFormat::RG8Unorm;
     viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView textureView = wgpuTexture.CreateView(&viewDesc);
 
@@ -385,26 +587,30 @@ TEST_P(D3D12VideoViewsTests, NV12SampleUVtoRG) {
 
     // Test the chroma plane in the top left corner of RGB image.
     EXPECT_PIXEL_RGBA8_EQ(kYellowYUVColor[kYUVChromaPlaneIndex], renderPass.color, 0, 0);
+    DestroyVideoTextureForTest(platformTexture, wgpuTexture);
 }
 
 // Renders a NV12 "checkerboard" texture into a RGB quad then checks the color at specific
 // points to ensure the image has not been flipped.
-TEST_P(D3D12VideoViewsTests, NV12SampleYUVtoRGB) {
+TEST_P(PlatformVideoViewsTests, NV12SampleYUVtoRGB) {
     // TODO(https://crbug.com/dawn/733): Figure out why Nvidia bot occasionally fails testing all
     // four corners.
     DAWN_SUPPRESS_TEST_IF(IsNvidia());
 
     wgpu::Texture wgpuTexture;
+    void* platformTexture = nullptr;
     CreateVideoTextureForTest(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
-                              wgpu::TextureUsage::TextureBinding, /*isCheckerboard*/ true,
-                              &wgpuTexture);
+                              wgpu::TextureUsage::TextureBinding,
+                              /*isCheckerboard*/ true, &wgpuTexture, &platformTexture);
     ASSERT_NE(wgpuTexture.Get(), nullptr);
 
     wgpu::TextureViewDescriptor lumaViewDesc;
+    lumaViewDesc.format = wgpu::TextureFormat::R8Unorm;
     lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
     wgpu::TextureView lumaTextureView = wgpuTexture.CreateView(&lumaViewDesc);
 
     wgpu::TextureViewDescriptor chromaViewDesc;
+    chromaViewDesc.format = wgpu::TextureFormat::RG8Unorm;
     chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
     wgpu::TextureView chromaTextureView = wgpuTexture.CreateView(&chromaViewDesc);
 
@@ -465,6 +671,11 @@ TEST_P(D3D12VideoViewsTests, NV12SampleYUVtoRGB) {
                    kWhiteYUVColor[kYUVChromaPlaneIndex].g, 0xFF);
     EXPECT_PIXEL_RGBA8_EQ(whiteYUV, renderPass.color, 0,
                           kYUVImageDataHeightInTexels - 1);  // bottom left
+    DestroyVideoTextureForTest(platformTexture, wgpuTexture);
 }
 
-DAWN_INSTANTIATE_TEST(D3D12VideoViewsTests, D3D12Backend());
+#if defined(DAWN_PLATFORM_WINDOWS)
+DAWN_INSTANTIATE_TEST(PlatformVideoViewsTests, D3D12Backend());
+#else
+DAWN_INSTANTIATE_TEST(PlatformVideoViewsTests, VulkanBackend());
+#endif
