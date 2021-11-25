@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "85959cf1_8dcf3132",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T08:55:09Z",
+      "side": 1,
+      "message": "Ah, understand. That make sense.",
+      "parentUuid": "4396c79e_85da223f",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44b64d98_88b082b0",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "This looks like the sRGB linear-to-nonlinear conversion (see above), in which case it could be called something like \"srgb_linear_to_nonlinear_positive\".\n\nHowever there\u0027s one difference with the sRGB conversion which is it uses 1.13711894 instead of 1.055. Is that difference intentional?",
       "parentUuid": "8c08a276_627b1f79",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55c039a_35b3723f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-25T08:55:09Z",
+      "side": 1,
+      "message": "I think this 1.13711894 is intentional by chromium. The clues shows that TransferFn of \"Srgb\" in chromium uses gamma 2.4 instead of gamma 2.2 (comments here https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_space.cc;l\u003d1005?q\u003dColorSpace::TransferID::IEC61966_2_1\u0026ss\u003dchromium).",
+      "parentUuid": "22ac0dfd_c74287a8",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
