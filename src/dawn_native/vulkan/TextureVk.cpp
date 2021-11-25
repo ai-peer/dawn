@@ -417,6 +417,8 @@ namespace dawn_native { namespace vulkan {
                 return VK_FORMAT_ASTC_12x12_SRGB_BLOCK;
 
             case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                return VK_FORMAT_G8_B8R8_2PLANE_420_UNORM;
+
             // TODO(dawn:666): implement stencil8
             case wgpu::TextureFormat::Stencil8:
             // TODO(dawn:690): implement depth24unorm-stencil8
@@ -865,7 +867,7 @@ namespace dawn_native { namespace vulkan {
         // transitionBarrierStart specify the index where barriers for current transition start in
         // the vector. barriers->size() - transitionBarrierStart is the number of barriers that we
         // have already added into the vector during current transition.
-        ASSERT(barriers->size() - transitionBarrierStart <= 1);
+        ASSERT(barriers->size() - transitionBarrierStart <= kMaxPlanesPerFormat);
 
         if (mExternalState == ExternalState::PendingAcquire) {
             if (barriers->size() == transitionBarrierStart) {
