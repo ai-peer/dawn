@@ -416,7 +416,14 @@ TEST_F(CopyCommandTest_B2B, CopyWithinSameBuffer) {
     }
 }
 
-class CopyCommandTest_B2T : public CopyCommandTest {};
+class CopyCommandTest_B2T : public CopyCommandTest {
+  protected:
+    WGPUDevice CreateTestDevice() override {
+        dawn_native::DeviceDescriptor descriptor;
+        descriptor.requiredFeatures = {"depth24unorm-stencil8", "depth32float-stencil8"};
+        return adapter.CreateDevice(&descriptor);
+    }
+};
 
 // Test a successfull B2T copy
 TEST_F(CopyCommandTest_B2T, Success) {
@@ -704,10 +711,14 @@ TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForColorTexture) {
 
 // Test B2T copies with incorrect buffer offset usage for depth-stencil texture
 TEST_F(CopyCommandTest_B2T, IncorrectBufferOffsetForDepthStencilTexture) {
-    // TODO(dawn:570, dawn:666, dawn:690): List other valid parameters after missing texture formats
+    // TODO(dawn:570, dawn:666): List other valid parameters after missing texture formats
     // are implemented, e.g. Stencil8 and depth16unorm.
-    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 1> params = {
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 3> params = {
         std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth24UnormStencil8,
+                        wgpu::TextureAspect::StencilOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth32FloatStencil8,
+                        wgpu::TextureAspect::StencilOnly),
     };
 
     uint64_t bufferSize = BufferSizeForTextureCopy(32, 32, 1);
@@ -1003,7 +1014,25 @@ TEST_F(CopyCommandTest_B2T, RequiredBytesInCopyOverflow) {
                 {0, 0, 0}, {1, 1, 16});
 }
 
-class CopyCommandTest_T2B : public CopyCommandTest {};
+class CopyCommandTest_T2B : public CopyCommandTest {
+  protected:
+    WGPUDevice CreateTestDevice() override {
+        dawn_native::DeviceDescriptor descriptor;
+        descriptor.requiredFeatures = {"depth24unorm-stencil8", "depth32float-stencil8"};
+        return adapter.CreateDevice(&descriptor);
+    }
+
+    bool IsDepthOnlyFormat(wgpu::TextureFormat format) {
+        switch (format) {
+            case wgpu::TextureFormat::Depth16Unorm:
+            case wgpu::TextureFormat::Depth24Plus:
+            case wgpu::TextureFormat::Depth32Float:
+                return true;
+            default:
+                return false;
+        }
+    }
+};
 
 // Test a successfull T2B copy
 TEST_F(CopyCommandTest_T2B, Success) {
@@ -1317,12 +1346,17 @@ TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForColorTexture) {
 
 // Test T2B copies with incorrect buffer offset usage for depth-stencil texture
 TEST_F(CopyCommandTest_T2B, IncorrectBufferOffsetForDepthStencilTexture) {
-    // TODO(dawn:570, dawn:666, dawn:690): List other valid parameters after missing texture formats
+    // TODO(dawn:570, dawn:666): List other valid parameters after missing texture formats
     // are implemented, e.g. Stencil8 and depth16unorm.
-    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 3> params = {
+    std::array<std::tuple<wgpu::TextureFormat, wgpu::TextureAspect>, 6> params = {
         std::make_tuple(wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureAspect::StencilOnly),
         std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::DepthOnly),
         std::make_tuple(wgpu::TextureFormat::Depth32Float, wgpu::TextureAspect::All),
+        std::make_tuple(wgpu::TextureFormat::Depth24UnormStencil8,
+                        wgpu::TextureAspect::StencilOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth32FloatStencil8, wgpu::TextureAspect::DepthOnly),
+        std::make_tuple(wgpu::TextureFormat::Depth32FloatStencil8,
+                        wgpu::TextureAspect::StencilOnly),
     };
 
     uint64_t bufferSize = BufferSizeForTextureCopy(32, 32, 1);
@@ -1472,36 +1506,43 @@ TEST_F(CopyCommandTest_T2B, CopyFromMipmapOfNonSquareTexture) {
 
 // Test copy from only the depth aspect of a texture
 TEST_F(CopyCommandTest_T2B, CopyFromDepthAspect) {
-    uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1, wgpu::TextureFormat::R32Float);
+    uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1, wgpu::TextureFormat::Depth32Float);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
-    {
-        wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth32Float,
-                                               wgpu::TextureUsage::CopySrc);
 
-        // Test "all" of a depth texture which is only the depth aspect.
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::All);
+    constexpr std::array<wgpu::TextureFormat, 3> kAllowDepthCopyFormats = {
+        wgpu::TextureFormat::Depth16Unorm, wgpu::TextureFormat::Depth32Float,
+        wgpu::TextureFormat::Depth32FloatStencil8};
+    for (wgpu::TextureFormat format : kAllowDepthCopyFormats) {
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
-        // Test it is valid to copy the depth aspect of a depth texture
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+            if (IsDepthOnlyFormat(format)) {
+                // Test "all" of a depth texture which is only the depth aspect.
+                TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256,
+                            16, {16, 16, 1}, wgpu::TextureAspect::All);
+            }
+
+            // Test it is valid to copy the depth aspect of these depth texture
+            TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
+                        {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        }
     }
-    {
-        wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth24Plus,
-                                               wgpu::TextureUsage::CopySrc);
 
-        // Test it is invalid to copy from the depth aspect of depth24plus
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
-    }
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
+    constexpr std::array<wgpu::TextureFormat, 3> kDisallowDepthCopyFormats = {
+        wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Depth24PlusStencil8,
+        wgpu::TextureFormat::Depth24UnormStencil8};
+    for (wgpu::TextureFormat format : kDisallowDepthCopyFormats) {
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
-        // Test it is invalid to copy from the depth aspect of depth24plus-stencil8
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+            // Test it is invalid to copy from the depth aspect of these depth texture
+            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
+                        {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        }
     }
+
     {
         wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::R32Float,
                                                wgpu::TextureUsage::CopySrc);
@@ -1516,19 +1557,75 @@ TEST_F(CopyCommandTest_T2B, CopyFromDepthAspect) {
 TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
     uint64_t bufferSize = BufferSizeForTextureCopy(16, 16, 1, wgpu::TextureFormat::R8Uint);
     wgpu::Buffer destination = CreateBuffer(bufferSize, wgpu::BufferUsage::CopyDst);
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
 
-        // Test it is valid to copy from the stencil aspect of a depth24plus-stencil8 texture
-        TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+    for (wgpu::TextureFormat format : utils::kStencilFormats) {
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
-        // Test it is invalid if the buffer is too small
-        wgpu::Buffer destinationSmall = CreateBuffer(bufferSize - 1, wgpu::BufferUsage::CopyDst);
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destinationSmall, 0, 256, 16,
-                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+            // TODO(dawn:666) Test "all" of a stencil texture which is only the stencil aspect.
+
+            // Test it is valid to copy from the stencil aspect of a depth/stencil texture
+            TestT2BCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, 256, 16,
+                        {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+
+            // Test it is invalid if the buffer is too small
+            wgpu::Buffer destinationSmall =
+                CreateBuffer(bufferSize - 1, wgpu::BufferUsage::CopyDst);
+            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destinationSmall, 0, 256,
+                        16, {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        }
+
+        // A copy fails when using a depth/stencil texture, and the entire subresource isn't
+        // copied
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
+
+            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 15,
+                        {15, 15, 1}, wgpu::TextureAspect::StencilOnly);
+
+            TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
+                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+        }
+
+        // Non-zero mip: A copy fails when using a depth/stencil texture, and the entire
+        // subresource isn't copied
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 2, 1, format, wgpu::TextureUsage::CopySrc);
+
+            // Whole mip is success
+            TestT2BCopy(utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0, 256, 8,
+                        {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
+
+            // Partial mip fails
+            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 7,
+                        {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
+
+            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 1,
+                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+        }
+
+        // Non-zero mip, non-pow-2: A copy fails when using a depth/stencil texture, and the
+        // entire subresource isn't copied
+        {
+            wgpu::Texture source =
+                Create2DTexture(17, 17, 2, 1, format, wgpu::TextureUsage::CopySrc);
+
+            // Whole mip is success
+            TestT2BCopy(utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0, 256, 8,
+                        {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
+
+            // Partial mip fails
+            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 7,
+                        {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
+
+            TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 1,
+                        {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
+        }
     }
+
     {
         wgpu::Texture source =
             Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::R8Uint, wgpu::TextureUsage::CopySrc);
@@ -1544,55 +1641,6 @@ TEST_F(CopyCommandTest_T2B, CopyFromStencilAspect) {
         // Test it is invalid to copy from the stencil aspect of a depth-only texture
         TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 16,
                     {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
-    }
-
-    // A copy fails when using a depth/stencil texture, and the entire subresource isn't
-    // copied
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
-
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 15,
-                    {15, 15, 1}, wgpu::TextureAspect::StencilOnly);
-
-        TestT2BCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, 256, 1,
-                    {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
-    }
-
-    // Non-zero mip: A copy fails when using a depth/stencil texture, and the entire
-    // subresource isn't copied
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 2, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
-
-        // Whole mip is success
-        TestT2BCopy(utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0, 256, 8,
-                    {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
-
-        // Partial mip fails
-        TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 7,
-                    {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
-
-        TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 1,
-                    {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
-    }
-
-    // Non-zero mip, non-pow-2: A copy fails when using a depth/stencil texture, and the
-    // entire subresource isn't copied
-    {
-        wgpu::Texture source = Create2DTexture(
-            17, 17, 2, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
-
-        // Whole mip is success
-        TestT2BCopy(utils::Expectation::Success, source, 1, {0, 0, 0}, destination, 0, 256, 8,
-                    {8, 8, 1}, wgpu::TextureAspect::StencilOnly);
-
-        // Partial mip fails
-        TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 7,
-                    {7, 7, 1}, wgpu::TextureAspect::StencilOnly);
-
-        TestT2BCopy(utils::Expectation::Failure, source, 1, {0, 0, 0}, destination, 0, 256, 1,
-                    {1, 1, 1}, wgpu::TextureAspect::StencilOnly);
     }
 }
 
@@ -1610,7 +1658,14 @@ TEST_F(CopyCommandTest_T2B, RequiredBytesInCopyOverflow) {
                 (1 << 31), {1, 1, 16});
 }
 
-class CopyCommandTest_T2T : public CopyCommandTest {};
+class CopyCommandTest_T2T : public CopyCommandTest {
+  protected:
+    WGPUDevice CreateTestDevice() override {
+        dawn_native::DeviceDescriptor descriptor;
+        descriptor.requiredFeatures = {"depth24unorm-stencil8", "depth32float-stencil8"};
+        return adapter.CreateDevice(&descriptor);
+    }
+};
 
 TEST_F(CopyCommandTest_T2T, Success) {
     wgpu::Texture source =
@@ -1752,27 +1807,28 @@ TEST_F(CopyCommandTest_T2T, OutOfBounds) {
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureDepthStencil) {
-    wgpu::Texture source = Create2DTexture(16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8,
-                                           wgpu::TextureUsage::CopySrc);
+    for (wgpu::TextureFormat format : utils::kDepthAndStencilFormats) {
+        wgpu::Texture source = Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
 
-    wgpu::Texture destination = Create2DTexture(
-        16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+        wgpu::Texture destination =
+            Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
-    // Success when entire depth stencil subresource is copied
-    TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                {16, 16, 1});
+        // Success when entire depth stencil subresource is copied
+        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {16, 16, 1});
 
-    // Failure when depth stencil subresource is partially copied
-    TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                {15, 15, 1});
+        // Failure when depth stencil subresource is partially copied
+        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {15, 15, 1});
 
-    // Failure when selecting the depth aspect (not all)
-    TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
+        // Failure when selecting the depth aspect (not all)
+        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {16, 16, 1}, wgpu::TextureAspect::DepthOnly);
 
-    // Failure when selecting the stencil aspect (not all)
-    TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
-                {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+        // Failure when selecting the stencil aspect (not all)
+        TestT2TCopy(utils::Expectation::Failure, source, 0, {0, 0, 0}, destination, 0, {0, 0, 0},
+                    {16, 16, 1}, wgpu::TextureAspect::StencilOnly);
+    }
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureDepthOnly) {
@@ -1804,41 +1860,43 @@ TEST_F(CopyCommandTest_T2T, 2DTextureDepthOnly) {
 }
 
 TEST_F(CopyCommandTest_T2T, 2DTextureArrayDepthStencil) {
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
-        wgpu::Texture destination = Create2DTexture(
-            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+    for (wgpu::TextureFormat format : utils::kDepthAndStencilFormats) {
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopySrc);
+            wgpu::Texture destination =
+                Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopyDst);
 
-        // Success when entire depth stencil subresource (layer) is the copy source
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0, {0, 0, 0},
-                    {16, 16, 1});
-    }
+            // Success when entire depth stencil subresource (layer) is the copy source
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+                        {0, 0, 0}, {16, 16, 1});
+        }
 
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 1, 1, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
-        wgpu::Texture destination = Create2DTexture(
-            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 1, format, wgpu::TextureUsage::CopySrc);
+            wgpu::Texture destination =
+                Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopyDst);
 
-        // Success when entire depth stencil subresource (layer) is the copy destination
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0, {0, 0, 1},
-                    {16, 16, 1});
-    }
+            // Success when entire depth stencil subresource (layer) is the copy destination
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 0}, destination, 0,
+                        {0, 0, 1}, {16, 16, 1});
+        }
 
-    {
-        wgpu::Texture source = Create2DTexture(
-            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopySrc);
-        wgpu::Texture destination = Create2DTexture(
-            16, 16, 1, 3, wgpu::TextureFormat::Depth24PlusStencil8, wgpu::TextureUsage::CopyDst);
+        {
+            wgpu::Texture source =
+                Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopySrc);
+            wgpu::Texture destination =
+                Create2DTexture(16, 16, 1, 3, format, wgpu::TextureUsage::CopyDst);
 
-        // Success when src and dst are an entire depth stencil subresource (layer)
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0, {0, 0, 1},
-                    {16, 16, 1});
+            // Success when src and dst are an entire depth stencil subresource (layer)
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 2}, destination, 0,
+                        {0, 0, 1}, {16, 16, 1});
 
-        // Success when src and dst are an array of entire depth stencil subresources
-        TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0, {0, 0, 0},
-                    {16, 16, 2});
+            // Success when src and dst are an array of entire depth stencil subresources
+            TestT2TCopy(utils::Expectation::Success, source, 0, {0, 0, 1}, destination, 0,
+                        {0, 0, 0}, {16, 16, 2});
+        }
     }
 }
 
