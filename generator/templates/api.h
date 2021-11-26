@@ -146,8 +146,13 @@ typedef void (*{{c_prefix}}Proc)(void);
 
 #if !defined({{c_prefix}}_SKIP_PROCS)
 
-typedef WGPUInstance (*WGPUProcCreateInstance)(WGPUInstanceDescriptor const * descriptor);
-typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, char const * procName);
+{% for function in by_category["function"] %}
+    typedef {{as_cType(function.return_name)}} (*{{function.c_proc(c_prefix, function.name)}})(
+            {%- for arg in function.arguments -%}
+                {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
+            {%- endfor -%}
+        );
+{% endfor %}
 
 {% for type in by_category["object"] if len(c_methods(type)) > 0 %}
     // Procs of {{type.name.CamelCase()}}
@@ -165,8 +170,13 @@ typedef WGPUProc (*WGPUProcGetProcAddress)(WGPUDevice device, char const * procN
 
 #if !defined({{c_prefix}}_SKIP_DECLARATIONS)
 
-WGPU_EXPORT WGPUInstance wgpuCreateInstance(WGPUInstanceDescriptor const * descriptor);
-WGPU_EXPORT WGPUProc wgpuGetProcAddress(WGPUDevice device, char const * procName);
+{% for function in by_category["function"] %}
+    {{c_prefix}}_EXPORT {{as_cType(function.return_name)}} {{function.c_method(c_prefix, function.name)}}(
+            {%- for arg in function.arguments -%}
+                {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
+            {%- endfor -%}
+        );
+{% endfor %}
 
 {% for type in by_category["object"] if len(c_methods(type)) > 0 %}
     // Methods of {{type.name.CamelCase()}}

@@ -247,6 +247,24 @@ class ConstantDefinition():
         self.name = Name(name)
 
 
+class FunctionDeclaration():
+    def __init__(self, is_enabled, name, json_data):
+        def c_proc(c_prefix, method_name):
+            assert not method_name.native
+            return c_prefix + 'Proc' + method_name.CamelCase()
+
+        def c_method(c_prefix, method_name):
+            assert not method_name.native
+            return c_prefix.lower() + method_name.CamelCase()
+
+        self.return_name = None
+        self.arguments = None
+        self.json_data = json_data
+        self.name = Name(name)
+        self.c_proc = c_proc
+        self.c_method = c_method
+
+
 class Command(Record):
     def __init__(self, name, members=None):
         Record.__init__(self, name)
@@ -323,6 +341,16 @@ def link_constant(constant, types):
     assert constant.type.name.native
 
 
+def link_function(function, types):
+    returns = function.json_data.get('returns', 'void')
+    if returns == 'proc':
+        function.return_name = Name(returns)
+    else:
+        function.return_name = types[returns].name
+    function.arguments = linked_record_members(function.json_data['args'],
+                                               types)
+
+
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
 #
@@ -376,6 +404,7 @@ def parse_json(json, enabled_tags):
         'structure': StructureType,
         'typedef': TypedefType,
         'constant': ConstantDefinition,
+        'function': FunctionDeclaration
     }
 
     types = {}
@@ -406,6 +435,9 @@ def parse_json(json, enabled_tags):
 
     for constant in by_category['constant']:
         link_constant(constant, types)
+
+    for function in by_category['function']:
+        link_function(function, types)
 
     for category in by_category.keys():
         by_category[category] = sorted(
