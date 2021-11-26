@@ -16,6 +16,199 @@
       "message": "PTAL, thanks!",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ad50f37_f003768f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Code in dawn_native LGTM.",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4385cb65_e220de68",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Unless we need something special for ChromeOS, external texture shouldn\u0027t support multiplanar formats directly. Instead the flow will be something like this:\n\n wgpu::Texture importedMultiPlanar \u003d importFromDMABuf\n wgpu::TextureView plane0  \u003d importMultiPlanar.CreateView(plane0)\n wgpu::TextureView plane1  \u003d importMultiPlanar.CreateView(plane1)\n \n wgpu::ExternalTexture \u003d createExternalTexture(plane0, plane1);\n \nBrandon Jones at Intel is currently implementing the logic to make that flow work, but it is independent from the ability to import a multi-planar texture from DMA bufs.",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a467c649_18e8ce55",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Sounds good. Maybe we could just say that we only allow simple readonly texture usages (not sure about readonly storage in the future)",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbcaaaef_bb8e7c42",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Multi-planar formats were introduced in Vulkan 1.1 so we should probably gate on that. But even then they might not be supported. I don\u0027t know that we want to query the format features at init though. Can you add a TODO(dawn:\u003csome issue related, a new one if needed\u003e) to figure it out?",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "396eeb44_a60bfaf5",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Maybe we can use this texture\u0027s plane count instead of kMaxPLanesPerFormat so the assert is tighter for non-planar textures. But that also means that the code below will need to be modified because it only handle \"tweaking\" the last barrier added.\n\nDo you know when the addition of multiple barriers happens? Is it allowed in Vulkan to transition the planes separately (at least in D3D12 I think it is not allowed in some cases).\n\nBe sure to run the tests and Chromium with the Vulkan Validation Layers and the synchronization validation enabled, it might catch some issues if there are present.",
+      "range": {
+        "startLine": 870,
+        "startChar": 60,
+        "endLine": 870,
+        "endChar": 79
+      },
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf48877_ef5c8c86",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "This should return false if the format is multiplanar and we don\u0027t have VK_KHR_image_format_list or Vulkan 1.2. You can check it with device-\u003eGetDeviceInfo().HasExt(...)",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a1a5266_6a191367",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "nit: I think we could use PNextChainBuilder in this file. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/vulkan/UtilsVulkan.h;l\u003d55?q\u003dPNextCha\u0026sq\u003d",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67542222_60a62cb7",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Since this is only used in the plane \u003e 1 condition it could be put inside there.",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "197de779_c1e4b12c",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "u-u-nit: very slight preference to coalesce this condition with the one above (with PNextInChainBuilder it allows modifying pNext a posteriori)",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "749b4a6b_01993de2",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "Ditto pNextInChainBuilder and putting more stuff inside the plane \u003e 1  (or else) conditions.",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6156332a_16bdfdb7",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T10:09:09Z",
+      "side": 1,
+      "message": "I didn\u0027t review this part yet because I\u0027m technically OOO. Austin can you take a look? In particular I don\u0027t know if / what\u0027s the best way to reuse the D3D12 tests. #define in files seems like it could be a bit brittle when tests are extended later.",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
