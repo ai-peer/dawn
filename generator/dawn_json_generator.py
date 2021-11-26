@@ -136,6 +136,11 @@ class CallbackType(Type):
         self.arguments = []
 
 
+class FunctionPointerType(Type):
+    def __init__(self, is_enabled, name, json_data):
+        Type.__init__(self, name, json_data)
+
+
 class TypedefType(Type):
     def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
@@ -247,6 +252,14 @@ class ConstantDefinition():
         self.name = Name(name)
 
 
+class FunctionDeclaration():
+    def __init__(self, is_enabled, name, json_data):
+        self.return_type = None
+        self.arguments = []
+        self.json_data = json_data
+        self.name = Name(name)
+
+
 class Command(Record):
     def __init__(self, name, members=None):
         Record.__init__(self, name)
@@ -323,6 +336,12 @@ def link_constant(constant, types):
     assert constant.type.name.native
 
 
+def link_function(function, types):
+    function.return_type = types[function.json_data.get('returns', 'void')]
+    function.arguments = linked_record_members(function.json_data['args'],
+                                               types)
+
+
 # Sort structures so that if struct A has struct B as a member, then B is
 # listed before A.
 #
@@ -376,6 +395,8 @@ def parse_json(json, enabled_tags):
         'structure': StructureType,
         'typedef': TypedefType,
         'constant': ConstantDefinition,
+        'function': FunctionDeclaration,
+        'function pointer': FunctionPointerType
     }
 
     types = {}
@@ -406,6 +427,9 @@ def parse_json(json, enabled_tags):
 
     for constant in by_category['constant']:
         link_constant(constant, types)
+
+    for function in by_category['function']:
+        link_function(function, types)
 
     for category in by_category.keys():
         by_category[category] = sorted(
@@ -655,12 +679,22 @@ def make_base_render_params(metadata):
         return c_prefix + type_name.CamelCase() + '_' + value_name.CamelCase()
 
     def as_cMethod(type_name, method_name):
-        assert not type_name.native and not method_name.native
-        return c_prefix.lower() + type_name.CamelCase() + method_name.CamelCase()
+        c_method = c_prefix.lower()
+        if type_name != None:
+            assert not type_name.native
+            c_method += type_name.CamelCase()
+        assert not method_name.native
+        c_method += method_name.CamelCase()
+        return c_method
 
     def as_cProc(type_name, method_name):
-        assert not type_name.native and not method_name.native
-        return c_prefix + 'Proc' + type_name.CamelCase() + method_name.CamelCase()
+        c_proc = c_prefix + 'Proc'
+        if type_name != None:
+            assert not type_name.native
+            c_proc += type_name.CamelCase()
+        assert not method_name.native
+        c_proc += method_name.CamelCase()
+        return c_proc
 
     return {
             'Name': lambda name: Name(name),
