@@ -33,6 +33,24 @@
       "message": "Can this be a separate CL? I think we\u0027ll want at least one additional validation tests for this and the addition of a test plan in the CTS.",
       "revId": "23c0611426ceae1d935e1385116bea61c6f0800c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06a8f869_4a654a3a",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2021-11-26T14:45:59Z",
+      "side": 1,
+      "message": "The additinal validation tests for depth/stencil aspect image copies will be added when I submit the validation for depth24unorm-stencil8 and depth32float-stencil8 in T2B/B2T/T2T copies together. This change just make the CopyCommandTest_B2T.IncorrectBufferOffsetForDepthStencilTexture pass.\n\nI want to clean up the TODOs for dawn:570 here, so put them in same CL. We can have another CL for that, togther with the image copies validation of depth24unorm-stencil8 and depth32float-stencil8.",
+      "parentUuid": "f8154eb0_003e9834",
+      "revId": "23c0611426ceae1d935e1385116bea61c6f0800c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
