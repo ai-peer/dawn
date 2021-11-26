@@ -192,6 +192,24 @@
       "parentUuid": "0e4f4729_ab42c6b0",
       "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34bd751a_1d2860e3",
+        "filename": "src/tests/end2end/DestroyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T09:31:56Z",
+      "side": 1,
+      "message": "I think it would be best to split. In particular I\u0027m concerned about the addition of variadic macros to choose an overload between macros. That\u0027s a cool trick but it should be very exceptional. Instead we could have something like ExpectErrorMessageMatches(lambda that runs code, gtest matcher?)",
+      "parentUuid": "96a2bf6b_6d2d986e",
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
