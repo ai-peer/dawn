@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc22796_a6b855dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T09:09:53Z",
+      "side": 1,
+      "message": "LGTM up to the changed validation.",
+      "revId": "23c0611426ceae1d935e1385116bea61c6f0800c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8154eb0_003e9834",
+        "filename": "src/dawn_native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 383,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-11-26T09:09:53Z",
+      "side": 1,
+      "message": "Can this be a separate CL? I think we\u0027ll want at least one additional validation tests for this and the addition of a test plan in the CTS.",
+      "revId": "23c0611426ceae1d935e1385116bea61c6f0800c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
