@@ -128,6 +128,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe1bfffb_42030f19",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-27T03:22:31Z",
+      "side": 1,
+      "message": "It was from:\n#0  dawn_native::vulkan::Texture::TransitionUsageForPass (this\u003d0x381c015e5a00,\n    recordingContext\u003d0x381c015faaa0, textureUsages\u003d..., imageBarriers\u003d0x7ffe1e715180,\n    srcStages\u003d0x7ffe1e71517c, dstStages\u003d0x7ffe1e715178)\n    at ./../../third_party/dawn/src/dawn_native/vulkan/TextureVk.cpp:1017\n#1  0x00005592d1ece16f in dawn_native::vulkan::(anonymous namespace)::TransitionAndClearForSyncScope (device\u003d0x381c015f7800, recordingContext\u003d0x381c015faaa0, scope\u003d...)\n    at ./../../third_party/dawn/src/dawn_native/vulkan/CommandBufferVk.cpp:185\n#2  0x00005592d1ecc339 in dawn_native::vulkan::CommandBuffer::RecordCommands(dawn_native::vulkan::CommandRecordingContext*)::$_0::operator()(dawn_native::vulkan::Device*, dawn_native::vulkan::CommandRecordingContext*, dawn_native::RenderPassResourceUsage const\u0026) const (this\u003d0x7ffe1e715748, device\u003d0x381c015f7800, recordingContext\u003d0x381c015faaa0,\n    usages\u003d...)\n    at ./../../third_party/dawn/src/dawn_native/vulkan/CommandBufferVk.cpp:506\n#3  0x00005592d1ecb118 in dawn_native::vulkan::CommandBuffer::RecordCommands (\n    this\u003d0x381c048cc300, recordingContext\u003d0x381c015faaa0)\n    at ./../../third_party/dawn/src/dawn_native/vulkan/CommandBufferVk.cpp:713\n#4  0x00005592d1ee3986 in dawn_native::vulkan::Queue::SubmitImpl (this\u003d0x381c01c7cf80,\n    commandCount\u003d1, commands\u003d0x381c019f4268)\n    at ./../../third_party/dawn/src/dawn_native/vulkan/QueueVk.cpp:50\n#5  0x00005592d1e81057 in dawn_native::QueueBase::SubmitInternal (this\u003d0x381c01c7cf80,\n    commandCount\u003d1, commands\u003d0x381c019f4268)\n    at ./../../third_party/dawn/src/dawn_native/Queue.cpp:497\n#6  0x00005592d1e80db3 in dawn_native::QueueBase::APISubmit (this\u003d0x381c01c7cf80,\n\nBut what actually matters I believe is the bindings of texture views in BindGroup:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/PassResourceUsageTracker.cpp;l\u003d111;drc\u003d66f8666257dd5d2687c37c155f40cc72e0176270;bpv\u003d0;bpt\u003d1\n\nSo I can\u0027t exactly catch the purpose of this ASSERT here. Maybe we can simply remove it.",
+      "parentUuid": "396eeb44_a60bfaf5",
+      "range": {
+        "startLine": 870,
+        "startChar": 60,
+        "endLine": 870,
+        "endChar": 79
+      },
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecf48877_ef5c8c86",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 6
