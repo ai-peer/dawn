@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b29eb229_bc401769",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-28T09:21:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1db71827_1d0b0cc4",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fc1cd7f_19d94bdd",
@@ -48,6 +66,24 @@
       "writtenOn": "2021-11-26T09:37:23Z",
       "side": 1,
       "message": "Mmmh I wonder if we should make \"procs\" be a native type but that has a suffix, so it would not need special casing. Maybe add a comment to that effect and we can figure out later.",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e8cfac_2fa69941",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-28T09:21:18Z",
+      "side": 1,
+      "message": "I also considered the approach that makes \"WGPUProc\" be a native category, i concern the \"WGPUProc\" is a function not a data type, do you mean \"WGPUProc\" also can be treated as native type?\n\ntypedef void (*WGPUProc)(void);",
+      "parentUuid": "3fc1cd7f_19d94bdd",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
