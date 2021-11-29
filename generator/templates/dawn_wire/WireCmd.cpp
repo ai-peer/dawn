@@ -269,12 +269,17 @@
                 {{member_transfer_type(member)}}* memberBuffer;
                 WIRE_TRY(buffer->NextN(memberLength, &memberBuffer));
 
-                //* This loop cannot overflow because it iterates up to |memberLength|. Even if
-                //* memberLength were the maximum integer value, |i| would become equal to it just before
-                //* exiting the loop, but not increment past or wrap around.
-                for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                    {{serialize_member(member, "record." + memberName + "[i]", "memberBuffer[i]" )}}
-                }
+                //* We can't use std::copy when the return value of member_transfer_type(member) isn't as_cType(member.type.name).
+                {% if member.type.category == "object" or member.type.category == "structure" or member.type.category == "bitmask" %}
+                    //* This loop cannot overflow because it iterates up to |memberLength|. Even if
+                    //* memberLength were the maximum integer value, |i| would become equal to it just before
+                    //* exiting the loop, but not increment past or wrap around.
+                    for (decltype(memberLength) i = 0; i < memberLength; ++i) {
+                        {{serialize_member(member, "record." + memberName + "[i]", "memberBuffer[i]" )}}
+                    }
+                {% else %}
+                    std::copy(record.{{memberName}}, record.{{memberName}} + memberLength, memberBuffer);
+                {% endif %}
             }
         {% endfor %}
         return WireResult::Success;
@@ -392,12 +397,18 @@
                     record->{{memberName}} = copiedMembers;
                 {% endif %}
 
-                //* This loop cannot overflow because it iterates up to |memberLength|. Even if
-                //* memberLength were the maximum integer value, |i| would become equal to it just before
-                //* exiting the loop, but not increment past or wrap around.
-                for (decltype(memberLength) i = 0; i < memberLength; ++i) {
-                    {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
-                }
+                //* We can't use std::copy when the return value of member_transfer_type(member) isn't as_cType(member.type.name).
+                {% if member.type.category == "object" or member.type.category == "structure" or member.type.category == "bitmask" %}
+                    //* This loop cannot overflow because it iterates up to |memberLength|. Even if
+                    //* memberLength were the maximum integer value, |i| would become equal to it just before
+                    //* exiting the loop, but not increment past or wrap around.
+                    for (decltype(memberLength) i = 0; i < memberLength; ++i) {
+                        {{deserialize_member(member, "memberBuffer[i]", "copiedMembers[i]")}}
+                    }
+                {% else %}
+                    //* memcpy is not allowed to copy from volatile objects.
+                    std::copy(memberBuffer, memberBuffer + memberLength, copiedMembers);
+                {% endif %}
             }
         {% endfor %}
 
