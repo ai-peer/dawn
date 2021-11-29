@@ -16,6 +16,29 @@
       "message": "loko, PTAL!",
       "revId": "98dddfbc5cc0814972558768333244d7c348874e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10157362_6ec59dd1",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-29T18:48:21Z",
+      "side": 1,
+      "message": "We could potentially save these moves (and the one below), if we just declare the request earlier and do the modifications in place. (Could use a temp ref var if writing out the entire member is too long.)",
+      "range": {
+        "startLine": 307,
+        "startChar": 16,
+        "endLine": 308,
+        "endChar": 83
+      },
+      "revId": "98dddfbc5cc0814972558768333244d7c348874e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
