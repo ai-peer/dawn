@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f652caf_9fe98909",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "4385cb65_e220de68",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a467c649_18e8ce55",
@@ -86,6 +104,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51ef839e_b34e665e",
+        "filename": "src/dawn_native/Texture.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a467c649_18e8ce55",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbcaaaef_bb8e7c42",
@@ -99,6 +135,24 @@
       "writtenOn": "2021-11-26T10:09:09Z",
       "side": 1,
       "message": "Multi-planar formats were introduced in Vulkan 1.1 so we should probably gate on that. But even then they might not be supported. I don\u0027t know that we want to query the format features at init though. Can you add a TODO(dawn:\u003csome issue related, a new one if needed\u003e) to figure it out?",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23a165f0_3c2d5781",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbcaaaef_bb8e7c42",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +221,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f5c8070_90c50c9e",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecf48877_ef5c8c86",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a1a5266_6a191367",
@@ -180,6 +252,24 @@
       "writtenOn": "2021-11-26T10:09:09Z",
       "side": 1,
       "message": "nit: I think we could use PNextChainBuilder in this file. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/vulkan/UtilsVulkan.h;l\u003d55?q\u003dPNextCha\u0026sq\u003d",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9265cc50_57b66821",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a1a5266_6a191367",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +291,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1668ea47_46a8cc3c",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67542222_60a62cb7",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "197de779_c1e4b12c",
@@ -218,6 +326,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca7eb18_90d68a56",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "197de779_c1e4b12c",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "749b4a6b_01993de2",
@@ -231,6 +357,24 @@
       "writtenOn": "2021-11-26T10:09:09Z",
       "side": 1,
       "message": "Ditto pNextInChainBuilder and putting more stuff inside the plane \u003e 1  (or else) conditions.",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed501b04_46586054",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-29T08:38:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "749b4a6b_01993de2",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
