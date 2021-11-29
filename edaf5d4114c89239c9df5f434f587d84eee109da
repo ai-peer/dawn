@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "edaf5d4114c89239c9df5f434f587d84eee109da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bdcc588_2b6f0eba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-29T18:04:48Z",
+      "side": 1,
+      "message": "LGTM! Sorry for missing this on the first pass and thanks for fixing it!",
+      "revId": "edaf5d4114c89239c9df5f434f587d84eee109da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
