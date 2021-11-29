@@ -210,6 +210,24 @@
       "parentUuid": "96a2bf6b_6d2d986e",
       "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f29550ca_17fe868f",
+        "filename": "src/tests/end2end/DestroyTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-29T19:00:30Z",
+      "side": 1,
+      "message": "Split into https://dawn-review.googlesource.com/c/dawn/+/71240.\n\nI agree that the overloaded macros may be a bit confusing, but since its for testing, the complexity makes the reading/writing of tests easier so I think it is worth it. This also makes it easier to update other tests we already have in case we want further error verification whereas introducing something like ExpectErrorMessageMatches would require more changes (like wrapping the code in lambda, etc). \n\nThe overloaded macros is actually inspired by how google3 does some of its work for errors: https://source.corp.google.com/piper///depot/google3/util/task/status_macros.h;l\u003d139;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "34bd751a_1d2860e3",
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
