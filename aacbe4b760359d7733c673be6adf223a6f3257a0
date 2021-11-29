@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "447e68a8_56b89d80",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-29T20:12:12Z",
+      "side": 1,
+      "message": "yes, I think so.\n\"Destroys the device, preventing further operations on it. Outstanding asynchronous operations will fail.\"",
+      "parentUuid": "70aab326_93213632",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 74
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "389cc1ec_126aa05e",
         "filename": "src/tests/end2end/CreatePipelineAsyncTests.cpp",
         "patchSetId": 13
