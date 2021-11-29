@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "8bbf44f1ef1e0c05a357b6b94dc2eb9a8a3ffcc6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea96f60a_5b5fa317",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-29T18:00:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8bbf44f1ef1e0c05a357b6b94dc2eb9a8a3ffcc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a221af6_4560248e",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-29T18:00:03Z",
+      "side": 1,
+      "message": "we can const_cast and do a memcpy, and comment about why.\n\nmemcpy has an implementation-specific access pattern, and generally use of `volatile` means you require a specific, exact access pattern.\n\nHowever, these arrays are just used as plain data, and don\u0027t impact control flow. So if the underlying data were changed while the copy was still executing, we would get different data - but it wouldn\u0027t cause unexpected downstream effects. It would simply be as-if different data were in the buffer.",
+      "range": {
+        "startLine": 413,
+        "startChar": 0,
+        "endLine": 415,
+        "endChar": 0
+      },
+      "revId": "8bbf44f1ef1e0c05a357b6b94dc2eb9a8a3ffcc6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
