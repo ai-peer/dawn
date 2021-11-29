@@ -319,6 +319,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8977c4c_946535eb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-11-29T23:52:49Z",
+      "side": 1,
+      "message": "Hmm, this comment seems to say Chromium uses gamma ~2.2 for BT709, I don\u0027t think it says anything directly about sRGB. From reading that comment and Wikipedia, the gamma for Rec. 709 is not well-defined but is usually 2.4 or 2.2. So it makes sense for Chromium to pick ~2.2 and then use the sRGB transfer function (which is very close to 2.2) to match hardware.\n\nI\u0027m sure you noticed the actual code sets the value of \u0027g\u0027 to 2.4. But the overall gamma is close to 2.2 because of how sRGB is defined. This is explained by Wikipedia as follows:\n\n\u003e This curve is a slight tweaking of the simple Gamma 2.2 function.[5] A linear section is near zero, in order to avoid an infinite or zero slope that a gamma curve has. This is spliced to a curved section designed so the overall function is very close to a gamma 2.2 function. In order to do this a formula using a higher exponent (2.4 in this case) is necessary. The instantaneous gamma (the slope when plotted on a log:log scale) varies from 1 in the linear section to 2.4 at maximum intensity, with a median value being close to 2.2.\n\nhttps://en.wikipedia.org/wiki/SRGB\n\nIn any case, I realized why this constant is different: it\u0027s not in the same place. The nonlinear part of sRGB is:\n\n1.055 * x^(1/2.4) - 0.055\n\nwhich is equivalent to:\n\n\u003d ((1.055^2.4 * x)^(1/2.4) - 0.055\n\u003d (1.13711894 * x)^(1/2.4) - 0.055\n\nSo this does match the definition of sRGB on Wikipedia.\n\nLooks like Chromium uses this alternate formulation so that more transfer functions (like sRGB and inverse sRGB I suspect) can be defined with constants in the same formula:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/include/third_party/skcms/skcms.h;l\u003d39;drc\u003d1e0c2a218eb71bef788fd87b0e7a4e9e93ecfe1d\n\nThis is really useful and we may want it for the future so our transfer function can be fully controlled by values in a uniform buffer for inputs like videos that may have many different color profiles.",
+      "parentUuid": "c55c039a_35b3723f",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f3500f3_0653c672",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
