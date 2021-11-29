@@ -22,6 +22,30 @@
       },
       "revId": "2169a55bfac348842418f331755cce7cf4d62a77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80275331_a105478e",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-29T20:56:30Z",
+      "side": 1,
+      "message": "We need the tick to finish actually destroying objects that were slab allocated. Otherwise when we call the destroy on the device we will get errors.",
+      "parentUuid": "e3567bd6_23535c6a",
+      "range": {
+        "startLine": 375,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 29
+      },
+      "revId": "2169a55bfac348842418f331755cce7cf4d62a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

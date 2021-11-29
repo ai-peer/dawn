@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bf31d97_df67a0a8",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-29T20:56:30Z",
+      "side": 1,
+      "message": "Ok, I will defer to a follow up CL then since that might introduce some more changes. Will add tests for it as well in the follow up.",
+      "parentUuid": "447e68a8_56b89d80",
+      "range": {
+        "startLine": 449,
+        "startChar": 0,
+        "endLine": 460,
+        "endChar": 74
+      },
+      "revId": "aacbe4b760359d7733c673be6adf223a6f3257a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "389cc1ec_126aa05e",
