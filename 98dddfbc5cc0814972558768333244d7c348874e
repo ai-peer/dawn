@@ -63,6 +63,30 @@
       },
       "revId": "98dddfbc5cc0814972558768333244d7c348874e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abc5a1b_5f7c042a",
+        "filename": "src/dawn_native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-29T22:08:09Z",
+      "side": 1,
+      "message": "Yea, that\u0027s fine.",
+      "parentUuid": "86726cde_76872f3c",
+      "range": {
+        "startLine": 307,
+        "startChar": 16,
+        "endLine": 308,
+        "endChar": 83
+      },
+      "revId": "98dddfbc5cc0814972558768333244d7c348874e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
