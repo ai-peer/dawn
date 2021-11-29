@@ -154,7 +154,7 @@
             { "name": "instance", "type": "ObjectHandle", "handle_type": "instance" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "status", "type": "request adapter status" },
-            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true },
             { "name": "properties", "type": "adapter properties", "annotation": "const*" },
             { "name": "limits", "type": "supported limits", "annotation": "const*" },
             { "name": "features count", "type": "uint32_t"},
@@ -164,7 +164,7 @@
             { "name": "adapter", "type": "ObjectHandle", "handle_type": "adapter" },
             { "name": "request serial", "type": "uint64_t" },
             { "name": "status", "type": "request device status" },
-            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen" },
+            { "name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true },
             { "name": "limits", "type": "supported limits", "annotation": "const*" },
             { "name": "features count", "type": "uint32_t"},
             { "name": "features", "type": "feature name", "annotation": "const*", "length": "features count"}
