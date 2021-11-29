@@ -86,6 +86,24 @@
       "parentUuid": "3fc1cd7f_19d94bdd",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee2d3372_b05ddd82",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-11-29T01:41:02Z",
+      "side": 1,
+      "message": "\u003e I wonder if we should make \"procs\" be a native type but that has a suffix.\n\nHow about moving \"using Proc \u003d WGPUProc;\"[1] from api_app.h to api.h if we want to define \"Proc\" as native type.\n\n[1] https://dawn.googlesource.com/dawn/+/refs/heads/main/generator/templates/webgpu_cpp.h#55",
+      "parentUuid": "77e8cfac_2fa69941",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
