@@ -27,8 +27,8 @@
         "category": "structure",
         "extensible": "in",
         "members": [
-            {"name": "compatible surface", "type": "surface"},
-            {"name": "power preference", "type": "power preference", "tags": ["upstream"]},
+            {"name": "compatible surface", "type": "surface", "optional": true},
+            {"name": "power preference", "type": "power preference", "default": "low power"},
             {"name": "force fallback adapter", "type": "bool", "tags": ["upstream"]}
         ]
     },
@@ -47,7 +47,7 @@
         "args": [
             {"name": "status", "type": "request adapter status"},
             {"name": "adapter", "type": "adapter"},
-            {"name": "message", "type": "char", "annotation": "const*"},
+            {"name": "message", "type": "char", "annotation": "const*", "optional": true},
             {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
@@ -1448,7 +1448,6 @@
     },
     "power preference": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "undefined"},
             {"value": 1, "name": "low power"},
@@ -1967,7 +1966,7 @@
         "args": [
             {"name": "status", "type": "request device status"},
             {"name": "device", "type": "device"},
-            {"name": "message", "type": "char", "annotation": "const*"},
+            {"name": "message", "type": "char", "annotation": "const*", "optional": true},
             {"name": "userdata", "type": "void", "annotation": "*"}
         ]
     },
