@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3045b54b_b4607f8a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-29T17:19:48Z",
+      "side": 1,
+      "message": "Good point. Bumped it up to 4Mb, with a comment about the size possibly needing adjustment.",
+      "parentUuid": "2c0745fc_1f9be8e7",
+      "revId": "6f70e0fc34965275c6bc12172ed90e26703ccaad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2998950d_20252765",
@@ -65,6 +83,24 @@
       "writtenOn": "2021-11-24T14:09:30Z",
       "side": 1,
       "message": "I think this could be better as a Buffer because it would be faster to copy from it if it is already in VRAM (as apposed to CPU RAM). We could allocate a buffer that\u0027s a UAV and manually clear it with https://docs.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12graphicscommandlist-clearunorderedaccessviewuint",
+      "revId": "6f70e0fc34965275c6bc12172ed90e26703ccaad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bb06ecf_3565d89f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-29T17:19:48Z",
+      "side": 1,
+      "message": "Switched to using Buffer, set it\u0027s usage to Storage so that we can use UAV clears in the future.\n\nI tried to get UAV clears working last week, but ran into a lot of issues that are probably entirely due to my inexperience with D3D12. I\u0027ll tackle that in a separate CL.",
+      "parentUuid": "2998950d_20252765",
       "revId": "6f70e0fc34965275c6bc12172ed90e26703ccaad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

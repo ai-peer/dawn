@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "544b5503_0b0e11c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-29T17:19:48Z",
+      "side": 1,
+      "message": "Thanks for the feedback! Made some updates, and it seems to be working well for most content but there\u0027s a couple of D3D12DescriptorHeapTests that are failing only with the MS Basic Render Driver now and I\u0027ll admit that I\u0027m a bit stumped as to why? Pointers would be appreciated.",
+      "revId": "aa0b8dac6c50fcdb3306f452d83e98759b87ec9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
