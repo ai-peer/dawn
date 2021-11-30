@@ -46,6 +46,30 @@
       },
       "revId": "2169a55bfac348842418f331755cce7cf4d62a77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ec28445_4a1aac80",
+        "filename": "src/dawn_native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T04:11:36Z",
+      "side": 1,
+      "message": "ah - because lots of object destruction just enqueues objects to the list of things to be destroyed on the next tick",
+      "parentUuid": "80275331_a105478e",
+      "range": {
+        "startLine": 375,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 29
+      },
+      "revId": "2169a55bfac348842418f331755cce7cf4d62a77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
