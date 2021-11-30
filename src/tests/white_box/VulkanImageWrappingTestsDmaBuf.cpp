@@ -40,6 +40,7 @@ namespace dawn_native { namespace vulkan {
 
           public:
             void SetUp() override {
+                DawnTest::SetUp();
                 DAWN_TEST_UNSUPPORTED_IF(UsesWire());
 
                 gbmDevice = CreateGbmDevice();
@@ -60,11 +61,15 @@ namespace dawn_native { namespace vulkan {
             }
 
             void TearDown() override {
-                if (UsesWire())
+                if (UsesWire()) {
+                    DawnTest::TearDown();
                     return;
+                }
 
                 gbm_bo_destroy(defaultGbmBo);
                 gbm_device_destroy(gbmDevice);
+
+                DawnTest::TearDown();
             }
 
             gbm_device* CreateGbmDevice() {
@@ -316,6 +321,10 @@ namespace dawn_native { namespace vulkan {
             secondDevice = wgpu::Device::Acquire(reinterpret_cast<WGPUDevice>(secondDeviceVk));
         }
 
+        void TearDown() override {
+            VulkanImageWrappingTestBase::TearDown();
+        }
+
       protected:
         dawn_native::vulkan::Adapter* backendAdapter;
         dawn_native::DawnDeviceDescriptor deviceDescriptor;
@@ -554,7 +563,7 @@ namespace dawn_native { namespace vulkan {
         queue.Submit(1, &commands);
 
         // Verify |copyDstBuffer| sees changes from |secondDevice|
-        uint32_t expected = 1;
+        uint32_t expected = 0x04030201;
         EXPECT_BUFFER_U32_EQ(expected, copyDstBuffer, 0);
 
         IgnoreSignalSemaphore(deviceWrappedTexture);
