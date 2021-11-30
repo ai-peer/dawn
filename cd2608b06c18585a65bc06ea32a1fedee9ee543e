@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9593bf0d_7750da83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T22:53:28Z",
+      "side": 1,
+      "message": "so it flakes only after the destroy changes? or does it already flake? would be useful to add to the bug if the destroy makes it more often since it might have to do with how the memory is allocated/recycled.",
+      "revId": "cd2608b06c18585a65bc06ea32a1fedee9ee543e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
