@@ -16,6 +16,46 @@
       "message": "PTAL, thanks.",
       "revId": "695743e7b8352cf1445a899bf7656d9715687e10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "414b485c_f79d6225",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T17:43:20Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "695743e7b8352cf1445a899bf7656d9715687e10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58d3726a_4e721228",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T17:43:20Z",
+      "side": 1,
+      "message": "could this be generated as well in a loop of `fptr in by_category[\"function pointer\"]` ?",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 39
+      },
+      "revId": "695743e7b8352cf1445a899bf7656d9715687e10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
