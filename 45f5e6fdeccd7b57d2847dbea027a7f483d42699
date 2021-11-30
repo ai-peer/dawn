@@ -104,6 +104,24 @@
       "parentUuid": "77e8cfac_2fa69941",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b43eb1b_92acf57b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T04:44:11Z",
+      "side": 1,
+      "message": "I think it is a good idea to have a type like \"proc\" but maybe instead named \"function pointer\"\n\n    \"get proc address\": {\n        \"category\": \"function\",\n        \"returns\": \"proc\",\n        \"args\": [\n            {\"name\": \"device\", \"type\": \"device\"},\n            {\"name\": \"proc name\", \"type\": \"char\", \"annotation\": \"const*\"}\n        ]\n    },\n    \n    \"proc\": {\n        \"category\": \"function pointer\",\n        \"returns\": \"void\",\n        \"args\": [\n        ]\n    },\n\nI think it would be useful so we can have native-specific extensions that take a function pointer as a member of a descriptor. One use would be the getProc member of the adapter options for OpenGL/ES. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/include/dawn_native/OpenGLBackend.h;l\u003d28?q\u003dAdapterDiscoveryOptions\n\nex.)\n\n   \"opengl get proc\": {\n       \"category\": \"function pointer\",\n        \"returns\": \"void\",\n        \"args\": [\n           {\"name\": \"name\", \"type\": \"char\", \"annotation\": \"const*\"}\n        ]\n   },\n   \"adapter discovery options opengl\": {\n       \"category\": \"struct\",\n       \"members\": [\n           // no const* annotation because it is already of type \"function pointer\"\n           {\"name\": \"get proc\", \"type\": \"opengl get proc\"},\n       ]\n   },",
+      "parentUuid": "ee2d3372_b05ddd82",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
