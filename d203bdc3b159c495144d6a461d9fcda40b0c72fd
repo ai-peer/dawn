@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1bedffd_1e0bdd5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-11-30T00:50:11Z",
+      "side": 1,
+      "message": "Thanks, Austin, for taking the time to run through some D3D12 concepts with me offline! Hopefully this passes the dry run now.\n\nWorking on lifting the zero buffer up to a base layer now, but it seems like it\u0027ll be enough code that it might be better left for a follow up to make review easier.",
+      "revId": "d203bdc3b159c495144d6a461d9fcda40b0c72fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
