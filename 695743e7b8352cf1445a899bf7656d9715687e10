@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3987e813_c6e8a99c",
+        "filename": "docs/codegen.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T17:44:56Z",
+      "side": 1,
+      "message": "it\u0027s also a return type of wgpuGetProcAddress. I think it could be an argument as well, so perhaps this statement isn\u0027t needed.",
+      "range": {
+        "startLine": 82,
+        "startChar": 69,
+        "endLine": 82,
+        "endChar": 102
+      },
+      "revId": "695743e7b8352cf1445a899bf7656d9715687e10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58d3726a_4e721228",
         "filename": "generator/templates/api.h",
         "patchSetId": 4
