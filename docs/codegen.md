@@ -79,6 +79,10 @@ A **record** is a list of **record members**, each of which is a dictionary with
  - `"returns"` a string that's the name of the return type
  - `"args"` a **record**, so an array of **record members**
 
+**`"function pointer"`** defines a function pointer type that can be used as a member of a descriptor.
+ - `"returns"` a string that's the name of the return type
+ - `"args"` a **record**, so an array of **record members**
+
 ## Dawn "wire" generators
 
 The generator for the pieces of dawn_wire need additional data which is found in [`dawn_wire_json`](../dawn_wire.json). Examples of pieces that are generated are:

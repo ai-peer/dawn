@@ -30,6 +30,11 @@
             {"name": "descriptor", "type": "instance descriptor", "annotation": "const*"}
         ]
     },
+    "proc": {
+        "category": "function pointer",
+        "returns": "void",
+        "args": []
+    },
     "get proc address": {
         "category": "function",
         "returns": "proc",

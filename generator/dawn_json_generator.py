@@ -136,6 +136,11 @@ class CallbackType(Type):
         self.arguments = []
 
 
+class FunctionPointerType(Type):
+    def __init__(self, is_enabled, name, json_data):
+        Type.__init__(self, name, json_data)
+
+
 class TypedefType(Type):
     def __init__(self, is_enabled, name, json_data):
         Type.__init__(self, name, json_data)
@@ -249,8 +254,8 @@ class ConstantDefinition():
 
 class FunctionDeclaration():
     def __init__(self, is_enabled, name, json_data):
-        self.return_name = None
-        self.arguments = None
+        self.return_type = None
+        self.arguments = []
         self.json_data = json_data
         self.name = Name(name)
 
@@ -332,11 +337,7 @@ def link_constant(constant, types):
 
 
 def link_function(function, types):
-    returns = function.json_data.get('returns', 'void')
-    if returns == 'proc':
-        function.return_name = Name(returns)
-    else:
-        function.return_name = types[returns].name
+    function.return_type = types[function.json_data.get('returns', 'void')]
     function.arguments = linked_record_members(function.json_data['args'],
                                                types)
 
@@ -394,7 +395,8 @@ def parse_json(json, enabled_tags):
         'structure': StructureType,
         'typedef': TypedefType,
         'constant': ConstantDefinition,
-        'function': FunctionDeclaration
+        'function': FunctionDeclaration,
+        'function pointer': FunctionPointerType
     }
 
     types = {}

@@ -147,7 +147,7 @@ typedef void (*{{c_prefix}}Proc)(void);
 #if !defined({{c_prefix}}_SKIP_PROCS)
 
 {% for function in by_category["function"] %}
-    typedef {{as_cType(function.return_name)}} (*{{as_cProc(None, function.name)}})(
+    typedef {{as_cType(function.return_type.name)}} (*{{as_cProc(None, function.name)}})(
             {%- for arg in function.arguments -%}
                 {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
             {%- endfor -%}
@@ -171,7 +171,7 @@ typedef void (*{{c_prefix}}Proc)(void);
 #if !defined({{c_prefix}}_SKIP_DECLARATIONS)
 
 {% for function in by_category["function"] %}
-    {{c_prefix}}_EXPORT {{as_cType(function.return_name)}} {{as_cMethod(None, function.name)}}(
+    {{c_prefix}}_EXPORT {{as_cType(function.return_type.name)}} {{as_cMethod(None, function.name)}}(
             {%- for arg in function.arguments -%}
                 {% if not loop.first %}, {% endif %}{{as_annotated_cType(arg)}}
             {%- endfor -%}
