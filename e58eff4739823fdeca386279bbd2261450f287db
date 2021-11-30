@@ -337,6 +337,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f82bf018_d58e7cc6",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T01:19:25Z",
+      "side": 1,
+      "message": "Yes, you\u0027re right. Sry for the wrong comments. I\u0027m doing more homework these days and will upload a new patch set for reviewing. And for this form of formulation, it will helps us to config the transferFn with uniform params too. So I left a comment there and see whether we should choose that way.",
+      "parentUuid": "d8977c4c_946535eb",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0f3500f3_0653c672",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 1
