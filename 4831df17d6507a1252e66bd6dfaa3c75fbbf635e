@@ -206,6 +206,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58491d3d_701bbaea",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T22:38:56Z",
+      "side": 1,
+      "message": "I think it is because it modifies \u0026(*barriers)[transitionBarrierStart]; so it expects only one barrier to be newly added since the start.\n\nIf separate barriers are not allowed, we could try to force planes to be transitioned together in a single barrier with ShouldCombineDepthStencilBarriers().\n\nOtherwise, maybe we need to update the code to iterate from transitionBarrierStart --\u003e barriers.size() and tweak all the barriers to transfer to VK_QUEUE_FAMILY_EXTERNAL_KHR",
+      "parentUuid": "fe1bfffb_42030f19",
+      "range": {
+        "startLine": 870,
+        "startChar": 60,
+        "endLine": 870,
+        "endChar": 79
+      },
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecf48877_ef5c8c86",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 6
@@ -410,6 +434,24 @@
       "side": 1,
       "message": "It\u0027d better if we had a rule or guide on how to reuse test code lines.\nAnother similar existing example is VulkanImageWrappingTestsDmaBuf and VulkanImageWrappingTestsOpaqueFD, respectively for CROS and Linux. They share a large proportion of code, but are simply duplicated. We generally hate code duplication, but when it comes to test code, sometimes we need it and live with it. That doesn\u0027t mean we can use it unlimitedly. The bug https://dawn-review.googlesource.com/c/dawn/+/71245 I\u0027ve just caught shows the fixes in VulkanImageWrappingTestsOpaqueFD didn\u0027t get applied to VulkanImageWrappingTestsDmaBuf because of duplication. I was wondering if we can put such common test source code files into a separate folder like src/tests/common or src/tests/utils/.",
       "parentUuid": "6156332a_16bdfdb7",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e69addc6_ba711abd",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T22:38:56Z",
+      "side": 1,
+      "message": "I\u0027d prefer to have the windows/chromeos implementation in separate files that share a common header if possible. I think the interface would be SetUp, TearDown, CreateVideoTextureForTest, DestroyVideoTextureForTest ? \n\nEffectively what this file is doing is that we\u0027re creating two different test suites which happen to have the same name in different compilation modes - that way we are able to instantiate on both test suites without re-writing the TEST_P code.\n\nWe could instead have\n\n// PlatformVideoViewsTests.h\n class VideoViewsTestBackend {\n  class PlatformTexture {\n    PlatformTexture();\n    virtual ~PlatformTexture();\n  };\n\n  void void SetUp();\n  void TearDown();\n  std::unique_ptr\u003cPlatformTexture\u003e CreateVideoTextureForTest(...);\n  void DestroyVideoTextureForTest(std::unique_ptr\u003cPlatformTexture\u003e, ...);\n };\n\n\n// PlatformVideoViewsTests_win.cpp \n // Implement VideoViewsTestBackend and PlatformTexture for Windows\n\n// PlatformVideoViewsTests_gbm.cpp\n // Implement VideoViewsTestBackend and PlatformTexture using gbm stuff\n\n\n// PlatformVideoViewsTests.cpp\n class VideoViewsTests : public DawnTest {\n   // forward calls to SetUp, TearDown, CreateVideoTextureForTest, to mBackend\n   std::unique_ptr\u003cVideoViewsTestBackend\u003e mBackend;\n };\n \n \nAsked lokokung@ to take a look too in case he has other ideas.",
+      "parentUuid": "95f74dd3_4bcf4ce4",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
