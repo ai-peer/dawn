@@ -394,6 +394,24 @@
       "message": "I didn\u0027t review this part yet because I\u0027m technically OOO. Austin can you take a look? In particular I don\u0027t know if / what\u0027s the best way to reuse the D3D12 tests. #define in files seems like it could be a bit brittle when tests are extended later.",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f74dd3_4bcf4ce4",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-30T02:17:19Z",
+      "side": 1,
+      "message": "It\u0027d better if we had a rule or guide on how to reuse test code lines.\nAnother similar existing example is VulkanImageWrappingTestsDmaBuf and VulkanImageWrappingTestsOpaqueFD, respectively for CROS and Linux. They share a large proportion of code, but are simply duplicated. We generally hate code duplication, but when it comes to test code, sometimes we need it and live with it. That doesn\u0027t mean we can use it unlimitedly. The bug https://dawn-review.googlesource.com/c/dawn/+/71245 I\u0027ve just caught shows the fixes in VulkanImageWrappingTestsOpaqueFD didn\u0027t get applied to VulkanImageWrappingTestsDmaBuf because of duplication. I was wondering if we can put such common test source code files into a separate folder like src/tests/common or src/tests/utils/.",
+      "parentUuid": "6156332a_16bdfdb7",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
