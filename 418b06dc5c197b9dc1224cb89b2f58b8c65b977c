@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1de1cbb7_1593c461",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-30T05:19:26Z",
+      "side": 1,
+      "message": "Thanks for reviewing.",
+      "revId": "418b06dc5c197b9dc1224cb89b2f58b8c65b977c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0261b462_6cc0daf6",
@@ -48,6 +65,30 @@
       "writtenOn": "2021-11-30T04:28:39Z",
       "side": 1,
       "message": "is this needed? it should just the base class by default if we don\u0027t override it",
+      "range": {
+        "startLine": 324,
+        "startChar": 8,
+        "endLine": 327,
+        "endChar": 0
+      },
+      "revId": "418b06dc5c197b9dc1224cb89b2f58b8c65b977c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7326a218_1e0e05de",
+        "filename": "src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-30T05:19:26Z",
+      "side": 1,
+      "message": "Yes, you are right.",
+      "parentUuid": "0261b462_6cc0daf6",
       "range": {
         "startLine": 324,
         "startChar": 8,
