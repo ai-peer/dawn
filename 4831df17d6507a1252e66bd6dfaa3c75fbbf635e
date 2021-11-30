@@ -454,6 +454,24 @@
       "parentUuid": "95f74dd3_4bcf4ce4",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09c2ebbe_ebf014f3",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-11-30T23:21:53Z",
+      "side": 1,
+      "message": "Yea, I think the way that Austin showed is probably (close to) if not the best way to go. You can maybe use the idea he posed in conjunction with typed testing (see https://github.com/google/googletest/blob/main/googletest/samples/sample6_unittest.cc for an example of this), to accomplish the switching.",
+      "parentUuid": "e69addc6_ba711abd",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
