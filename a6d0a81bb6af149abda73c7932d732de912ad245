@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ff76d28_e2d6be78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T04:13:39Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a6d0a81bb6af149abda73c7932d732de912ad245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "068b6d1a_7e00215c",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T04:13:39Z",
+      "side": 1,
+      "message": "could this be static_assert(false, \"invalid usage etc...\") ?",
+      "range": {
+        "startLine": 99,
+        "startChar": 33,
+        "endLine": 99,
+        "endChar": 44
+      },
+      "revId": "a6d0a81bb6af149abda73c7932d732de912ad245",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
