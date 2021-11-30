@@ -16,6 +16,46 @@
       "message": "Thanks, Austin, for taking the time to run through some D3D12 concepts with me offline! Hopefully this passes the dry run now.\n\nWorking on lifting the zero buffer up to a base layer now, but it seems like it\u0027ll be enough code that it might be better left for a follow up to make review easier.",
       "revId": "d203bdc3b159c495144d6a461d9fcda40b0c72fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b2163a_7298191f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T05:14:31Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d203bdc3b159c495144d6a461d9fcda40b0c72fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbc27cf9_fc98e21f",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-11-30T05:14:31Z",
+      "side": 1,
+      "message": "I think crashes are because mZeroBuffer is null when we initialize the zero buffer. i.e. we crash before getting to the \"this !\u003d zeroBuffer\" check. So we can move the transition out.\n\nAnyway though, it would be unexpected for the getter to perform the transition, so that\u0027s another reason to move it out to the callsite.\nIf we don\u0027t want to optimize to avoid the transition now, let\u0027s leave a comment about doing so in the future since the barrier could be dropped.",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 274,
+        "endChar": 92
+      },
+      "revId": "d203bdc3b159c495144d6a461d9fcda40b0c72fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
