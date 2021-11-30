@@ -177,6 +177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be249ad2_e597953c",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 854,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85959cf1_8dcf3132",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44b64d98_88b082b0",
@@ -229,6 +247,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1cf78a8d_becfe61a",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "563b2457_a04dc7c6",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c96fa62_16dd3dff",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44b64d98_88b082b0",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "682f7179_6f13bd0d",
@@ -260,6 +314,24 @@
       "side": 1,
       "message": "I dumped the shader generated here https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_transform.cc;l\u003d1051;drc\u003dde68be3f18ba99cc01d75903e167ca09bade253c?q\u003dcolor_transform.cc\u0026ss\u003dchromium%2Fchromium%2Fsrc. And I think we could reshape these magic numbers into readable formulas.",
       "parentUuid": "682f7179_6f13bd0d",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "123facc7_ee2211f1",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6e61c72_df9c4048",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -353,6 +425,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ba85a8_035796be",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f82bf018_d58e7cc6",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f3500f3_0653c672",
@@ -370,6 +460,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc42bf70_1cc78420",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f3500f3_0653c672",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f3074b5_8d213147",
@@ -383,6 +491,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "nit: trailing whitespace",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "853e1cf8_1c885e2f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f3074b5_8d213147",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -440,6 +566,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c099d52_b750a932",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "657b5dec_7c6749c8",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a657014d_b583f196",
@@ -453,6 +597,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "We should validate these enums (and alphaOp if it isn\u0027t done already)",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b5cbce8_120a8543",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a657014d_b583f196",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -474,6 +636,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46fe53a6_39672fba",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f782b38_a5220601",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3467a501_0fef0850",
@@ -487,6 +667,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "u-u-nit: this comment and \"Set color space\" seem a bit unnecessary",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a805de2_922938f5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3467a501_0fef0850",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -508,6 +706,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26cc3e23_75ef49b1",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "49d3f224_cf379c73",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e360c7de_2910fea5",
@@ -525,6 +741,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e39d13e1_f020f5e4",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e360c7de_2910fea5",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b097c80_e981722b",
@@ -538,6 +772,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "ditto",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceba48b0_2152739a",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 601,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2b097c80_e981722b",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -565,6 +817,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6741c7b4_1ba8e968",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "63ddea0b_8b07b47a",
+      "range": {
+        "startLine": 656,
+        "startChar": 17,
+        "endLine": 656,
+        "endChar": 44
+      },
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51faa783_2d8a7be2",
@@ -578,6 +854,24 @@
       "writtenOn": "2021-11-24T13:43:54Z",
       "side": 1,
       "message": "If we can\u0027t do sRGB-\u003ediplayP3 or p3-\u003ep3, then I think we should add validation that prevents it.\n\nAlso the test seems to only test sRGB -\u003e sRGB and sRGB-\u003eP3? So an unsupported configuration?",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8eb04f6_7ce8d646",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 799,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Sry, previous comments has lots of errors. Resolved them in latest patch set. Done.",
+      "parentUuid": "51faa783_2d8a7be2",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -613,6 +907,24 @@
       "side": 1,
       "message": "Sry, a left over and forgot to change it.",
       "parentUuid": "951eec0c_869228f9",
+      "revId": "e58eff4739823fdeca386279bbd2261450f287db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72324804_7f905ab3",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-11-30T09:17:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "673beafe_35ead2af",
       "revId": "e58eff4739823fdeca386279bbd2261450f287db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
