@@ -81,7 +81,6 @@ namespace dawn_native {
 
       private:
         BindGroupBase(DeviceBase* device, ObjectBase::ErrorTag tag);
-        void DeleteThis() override;
 
         Ref<BindGroupLayoutBase> mLayout;
         BindGroupLayoutBase::BindingDataPointers mBindingData;
