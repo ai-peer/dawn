@@ -16,6 +16,23 @@
       "message": "LGTM too",
       "revId": "28e860d85dae8d5575ffe77a4e9d08f78457b41b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ee6d7dc_2fbb71ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2021-11-30T12:39:36Z",
+      "side": 1,
+      "message": "\u003e Patch Set 3: Code-Review+2\n\u003e \n\u003e (1 comment)\n\u003e \n\u003e By voting Code-Review+2 the following files are now code-owner approved by \u003cGERRIT_ACCOUNT_1000002\u003e:\n\u003e * src/tests/white_box/VulkanImageWrappingTestsDmaBuf.cpp\n\u003e \n\nThanks, 😊",
+      "revId": "28e860d85dae8d5575ffe77a4e9d08f78457b41b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
