@@ -342,6 +342,14 @@ namespace dawn_native { namespace metal {
 
         IncrementLastSubmittedCommandSerial();
 
+        // Make a local copy of mLastSubmittedSerial so it is captured by value in C-blocks.
+        // We will update the completed serial to this once the completed handler is fired.
+        ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
+
+        TRACE_EVENT_NESTABLE_ASYNC_BEGIN1(
+            GetPlatform(), General, "DeviceMTL::SubmitPendingCommandBuffer",
+            uint64_t(pendingSerial), "serial", uint64_t(pendingSerial));
+
         // Acquire the pending command buffer, which is retained. It must be released later.
         NSPRef<id<MTLCommandBuffer>> pendingCommands = mCommandContext.AcquireCommands();
 
@@ -364,21 +372,47 @@ namespace dawn_native { namespace metal {
             }
         }];
 
-        // Update the completed serial once the completed handler is fired. Make a local copy of
-        // mLastSubmittedSerial so it is captured by value.
-        ExecutionSerial pendingSerial = GetLastSubmittedCommandSerial();
+        double platformTime = GetPlatform()->MonotonicallyIncreasingTime();
+        NSTimeInterval systemUptime = [[NSProcessInfo processInfo] systemUptime];
+
         // this ObjC block runs on a different thread
-        [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer>) {
-            TRACE_EVENT_ASYNC_END0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
-                                   uint64_t(pendingSerial));
+        [*pendingCommands addCompletedHandler:^(id<MTLCommandBuffer> cb) {
             ASSERT(uint64_t(pendingSerial) > mCompletedSerial.load());
             this->mCompletedSerial = uint64_t(pendingSerial);
+            if (@available(macOS 10.15, iOS 10.3, *)) {
+                TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP1(
+                    GetPlatform(), General, "schedule MTLCommandBuffer", uint64_t(pendingSerial),
+                    platformTime + cb.kernelStartTime - systemUptime, "serial",
+                    uint64_t(pendingSerial));
+                TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(
+                    GetPlatform(), General, "schedule MTLCommandBuffer", uint64_t(pendingSerial),
+                    platformTime + cb.kernelEndTime - systemUptime);
+
+                TRACE_EVENT_NESTABLE_ASYNC_BEGIN_WITH_TIMESTAMP1(
+                    GetPlatform(), GPUWork, "execute MTLCommandBuffer", uint64_t(pendingSerial),
+                    platformTime + cb.GPUStartTime - systemUptime, "serial",
+                    uint64_t(pendingSerial));
+                TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(
+                    GetPlatform(), GPUWork, "execute MTLCommandBuffer", uint64_t(pendingSerial),
+                    platformTime + cb.GPUEndTime - systemUptime);
+
+                TRACE_EVENT_NESTABLE_ASYNC_END_WITH_TIMESTAMP0(
+                    GetPlatform(), General, "DeviceMTL::SubmitPendingCommandBuffer",
+                    uint64_t(pendingSerial), platformTime + cb.GPUEndTime - systemUptime);
+            } else {
+                TRACE_EVENT_NESTABLE_ASYNC_END0(GetPlatform(), General,
+                                                "DeviceMTL::SubmitPendingCommandBuffer",
+                                                uint64_t(pendingSerial));
+            }
         }];
 
-        TRACE_EVENT_ASYNC_BEGIN0(GetPlatform(), GPUWork, "DeviceMTL::SubmitPendingCommandBuffer",
-                                 uint64_t(pendingSerial));
-        [*pendingCommands commit];
+        {
+            TRACE_EVENT1(GetPlatform(), General, "[MTLCommandBuffer commit]", "serial",
+                         uint64_t(pendingSerial));
+            [*pendingCommands commit];
+        }
 
+        TRACE_EVENT0(GetPlatform(), General, "CommandRecordingContext::PrepareNextCommandBuffer");
         return mCommandContext.PrepareNextCommandBuffer(*mCommandQueue);
     }
 

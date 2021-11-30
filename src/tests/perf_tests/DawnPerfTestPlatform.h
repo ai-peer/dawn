@@ -33,15 +33,22 @@ class DawnPerfTestPlatform : public dawn_platform::Platform {
     // See https://docs.google.com/document/d/1CvAClvFfyA5R-PhYUmn5OOQtYMH4h6I0nSsKchNAySU
     // Only a subset of the properties are implemented.
     struct TraceEvent final {
-        TraceEvent() {
-        }
         TraceEvent(char phaseIn,
                    dawn_platform::TraceCategory categoryIn,
                    const char* nameIn,
                    uint64_t idIn,
-                   double timestampIn)
-            : phase(phaseIn), category(categoryIn), name(nameIn), id(idIn), timestamp(timestampIn) {
-        }
+                   double timestampIn,
+                   int numArgs,
+                   const char** argNames,
+                   const unsigned char* argTypes,
+                   const uint64_t* argValues,
+                   unsigned char flags);
+
+        struct Arg {
+            const char* name;
+            unsigned char type;
+            uint64_t value;
+        };
 
         char phase = 0;
         dawn_platform::TraceCategory category;
@@ -49,6 +56,10 @@ class DawnPerfTestPlatform : public dawn_platform::Platform {
         uint64_t id = 0;
         std::string threadId;
         double timestamp = 0;
+        std::vector<Arg> args;
+
+      private:
+        std::vector<std::unique_ptr<std::string>> strings;
     };
 
     DawnPerfTestPlatform();

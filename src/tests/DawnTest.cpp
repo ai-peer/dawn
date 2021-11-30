@@ -913,7 +913,9 @@ void DawnTestBase::SetUp() {
 
     // Setup the per-test platform. Tests can provide one by overloading CreateTestPlatform.
     mTestPlatform = CreateTestPlatform();
-    gTestEnv->GetInstance()->SetPlatform(mTestPlatform.get());
+    if (mTestPlatform) {
+        gTestEnv->GetInstance()->SetPlatform(mTestPlatform.get());
+    }
 
     // Create the device from the adapter
     for (const char* forceEnabledWorkaround : mParam.forceEnabledWorkarounds) {
