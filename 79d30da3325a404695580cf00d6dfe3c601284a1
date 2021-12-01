@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "79d30da3325a404695580cf00d6dfe3c601284a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89d9e10b_75ec9b49",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-01T23:09:34Z",
+      "side": 1,
+      "message": "LGTM, but is there any way we could add a test that, for example, connects to one backend, then tries to connect to other ones afterwards? Not sure how hard that would be though given our current testing framework. Could be a TODO or separate change.",
+      "revId": "79d30da3325a404695580cf00d6dfe3c601284a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
