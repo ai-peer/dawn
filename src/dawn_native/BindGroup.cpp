@@ -182,6 +182,10 @@ namespace dawn_native {
                         "Dimension (%s) of %s doesn't match the expected dimension (%s).",
                         entry.textureView->GetDimension(), entry.textureView,
                         bindingInfo.storageTexture.viewDimension);
+
+                    DAWN_INVALID_IF(entry.textureView->GetLevelCount() != 1,
+                                    "mipLayerCount (%d) of %s expected to be 1.",
+                                    entry.textureView->GetLayerCount(), entry.textureView);
                     break;
                 }
                 default:
