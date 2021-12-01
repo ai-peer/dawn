@@ -451,6 +451,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6055104b_1454d138",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T19:18:01Z",
+      "side": 1,
+      "message": "Thanks for the two findings, Austin! It looks like that ANGLE use STORE_OP_NONE if the renderer can support the required extension. And use STORE_OP_STORE if that extension is not supported and ignore the validation error.\n\nWhat do you think about how to proceed the implementation on Vulkan, Corentin?",
+      "parentUuid": "86168a0d_1f958edc",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f4604e_f18331e9",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
