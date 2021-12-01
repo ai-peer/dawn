@@ -194,6 +194,24 @@
       "parentUuid": "129ab28d_9a73a06b",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c6f217_dbd0a6d5",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-01T19:00:28Z",
+      "side": 1,
+      "message": "ah, yea I think you\u0027re right. also because that code only operates on callbacks that are arguments of some object\u0027s methods. so it should still work the same if we rename to function pointer.",
+      "parentUuid": "0f8e9386_58de5140",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
