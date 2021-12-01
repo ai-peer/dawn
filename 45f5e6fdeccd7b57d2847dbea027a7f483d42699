@@ -158,6 +158,24 @@
       "parentUuid": "f5b20ac5_45665bc3",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "129ab28d_9a73a06b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-01T17:46:12Z",
+      "side": 1,
+      "message": "we autogenerate mocks specifically for callbacks. So I think they still need to be separate.",
+      "parentUuid": "a177666c_1d4460e9",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
