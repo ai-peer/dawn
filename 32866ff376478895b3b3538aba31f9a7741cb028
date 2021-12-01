@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b109798_d62eecb6",
+        "filename": "src/dawn_native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9fff2b8e_70fe7b8f",
+      "range": {
+        "startLine": 224,
+        "startChar": 53,
+        "endLine": 224,
+        "endChar": 54
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6b77827_776be67c",
@@ -128,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "271d281c_b0af0345",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Ack. Only one ternary now.",
+      "parentUuid": "e6b77827_776be67c",
+      "range": {
+        "startLine": 150,
+        "startChar": 22,
+        "endLine": 150,
+        "endChar": 42
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b3df333b_332a62b0",
@@ -163,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2b87120_77e743b7",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "I feel like that add query.readOnlyDepthStencil as a parameter to VulkanAttachmentLoadOp / VulkanAttachmentStoreOp makes more sense. And these two functions can be reused in other places if needed. \n\nThe current load op can guarantee that it is LOAD if it does have that aspect, but it cannot guarantee if it doesn\u0027t have that aspect at all. Because we blindly use DEPTH_STENCIL_READ_ONLY_OPTIMAL image layout, which means READ_ONLY_OPTIMAL for both aspects, so we need to set both aspects to LOAD, and it doesn\u0027t hurt anything if one aspect doesn\u0027t exist.",
+      "parentUuid": "aecb37eb_10b7d6a7",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56e774b3_c3f78bab",
@@ -176,6 +242,24 @@
       "writtenOn": "2021-11-22T11:02:16Z",
       "side": 1,
       "message": "ditto, the API validation guarantees this is Store.",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "123f8e89_e4faf746",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 175,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "WebGPU\u0027s StoreOp doesn\u0027t have NONE. So the frontend will not guarantee NONE storeOp. we need to change it to NONE if it is readonly depth/stencil attachment inside VulkanAttachmentStoreOp().",
+      "parentUuid": "56e774b3_c3f78bab",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -227,6 +311,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7160ebc3_6820a234",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Thanks for the explanation! Is this change going to fail if some hardware doesn\u0027t support STORE_OP_NONE extension? (according to your explanation, say on non-tiled GPUs like Intel iGPU). I run the CL on my desktop with Intel iGPU, it works.",
+      "parentUuid": "497457d0_d9dd03df",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37f4604e_f18331e9",
@@ -244,6 +352,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e34ee47_e3e75e17",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37f4604e_f18331e9",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de04450f_300a3ae2",
@@ -257,6 +383,30 @@
       "writtenOn": "2021-11-22T11:02:16Z",
       "side": 1,
       "message": "u-nit: readOnly since we are already in SetDepthStencil.",
+      "range": {
+        "startLine": 51,
+        "startChar": 34,
+        "endLine": 51,
+        "endChar": 54
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cca9b43d_1693e597",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de04450f_300a3ae2",
       "range": {
         "startLine": 51,
         "startChar": 34,
@@ -290,6 +440,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77db5b50_e927513b",
+        "filename": "src/dawn_native/vulkan/RenderPipelineVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done. I revised the comment above.",
+      "parentUuid": "8cd66d1d_6d36d303",
+      "range": {
+        "startLine": 513,
+        "startChar": 59,
+        "endLine": 513,
+        "endChar": 61
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4982db4a_6209f5f4",
@@ -307,6 +481,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf28ff5_85afd61d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4982db4a_6209f5f4",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f14a553_82b927fa",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4982db4a_6209f5f4",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "840a8165_ce2aba21",
@@ -320,6 +530,24 @@
       "writtenOn": "2021-11-22T11:02:16Z",
       "side": 1,
       "message": "nit: Can we moved in the case above with if (usage \u0026 (wgpu::TextureUsage::RenderAttachment | kReadOnlyRenderAttachment))",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9e7797_4390df85",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "840a8165_ce2aba21",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -355,6 +583,24 @@
       "side": 1,
       "message": "Actually, for the same reason as [3] I think?",
       "parentUuid": "3f53bef7_14161d17",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12bdff2a_1a8a6b17",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 451,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "See the explaination below.",
+      "parentUuid": "0131f4eb_0e632244",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -406,6 +652,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b37b61fa_98be463f",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Your comment exactly explained why I made that PR: \nThe current situation is that DEPTH_STENCIL_READ_ONLY image layout is blindly set for all sampled textures for renderable depth/stencil formats at [4], even it is not used as an attachment, in order to make validation happy. As a result, it also requires DEPTH_STENCIL_ATTACHMENT image usage at [5], no matter it is used as an attachment. This is the current implementation in Dawn project.\n\nThe proposal will make that: if the depth/stencil image is used as both depth/stencil attachment and sampled image, it will set as DEPTH_STENCIL_READ_ONLY and SHADER_READ_ONLY image layout respectively, and they are reasonable and they are compatible. If the image is only used as sampled image, then its layout is SHADER_READ_ONLY alone (no need to set to DEPTH_STENCIL_READ_ONLY image layout and DEPTH_STENCIL_ATTACHMENT image usage), which is more reasonable than DEPTH_STENCIL_READ_ONLY image layout. \n\nAnyway, welcome to comment on that PR.",
+      "parentUuid": "ae822191_27ed33ef",
+      "range": {
+        "startLine": 448,
+        "startChar": 0,
+        "endLine": 453,
+        "endChar": 13
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b52fde6_1ee2a886",
@@ -437,6 +707,24 @@
       "side": 1,
       "message": "[3]",
       "parentUuid": "0b52fde6_1ee2a886",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbb41e20_fb7730c4",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Not really, TextureUsage::RenderAttachment is replaced by kReadOnlyRenderAttachment if it is a readonly depth/stencil attachment, see the if-else code block started from https://dawn.googlesource.com/dawn/+/refs/heads/main/src/dawn_native/CommandEncoder.cpp#608.",
+      "parentUuid": "0f001d24_bbf77551",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -511,6 +799,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59b794f3_3eacb390",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 485,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4cfed0a_158ed8d6",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7225fef8_56913672",
@@ -575,6 +881,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a0cc404_0104f96e",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 497,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a0b8e20_cc7c0feb",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5c7482c7_250c6220",
@@ -592,6 +916,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "63cf99aa_73f803c9",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done. I looked into CTS. All depth/stencil formats we supported now are renderable. As we know, CTS includes all depth/stencil formats and some of them have not been implemented in Dawn. However, adding isRenderable doesn\u0027t hurt anything, and it can prevent harm if we introduce new formats.",
+      "parentUuid": "5c7482c7_250c6220",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33e1ae9a_3c620c02",
@@ -605,6 +947,24 @@
       "writtenOn": "2021-11-22T11:02:16Z",
       "side": 1,
       "message": "I think this comment can be refactored with [1] to first explain something like:\n\nThe layout returned here is the one that will be used at bindgroup creation time. The bindgroup\u0027s layout must match the runtime layout of the image when it is used via the bindgroup, but we don\u0027t know exactly what it will be yet. So we have to prepare for the pessimistic case.\n\nOnly VK_IMAGE_LAYOUT_GENERAL can do sampling and storage access of texture at the same time.\n\u003ccode for that case\u003e\n\nThe texture can be used as a readonly depth attachment so it needs to be ...\n\u003ccode for that case\u003e.",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e6902d8_e6b35cfc",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e1ae9a_3c620c02",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -649,6 +1009,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0481b58_d3a0a6ed",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04fd8059_69df3712",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f877aa94_6202edc6",
@@ -680,6 +1058,24 @@
       "side": 1,
       "message": "Ack",
       "parentUuid": "f877aa94_6202edc6",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c2f2d8_4a07459d",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T01:56:53Z",
+      "side": 1,
+      "message": "This is not useful for current end2end test. The current test will go to either if block at [6] (readonly depth/stencil attachment + sampling), or if block at [4] (sampling only).\n\nI feel like this should be needed if we add tests where we only have readonly depth/stencil attachment (no sampling). I will do that in order to verify my guess.",
+      "parentUuid": "80c7df84_a190e1d6",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
