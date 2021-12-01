@@ -16,6 +16,23 @@
       "message": "Do some homework to update the CL. Thanks for Reveiwing! And PTAL the latest patch set.",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4884cf88_fb46c897",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-01T07:11:07Z",
+      "side": 1,
+      "message": "The bots fail show me a bug in blink side:\nIt seems that in blink side, there is not default value for the struct webgpu.h. We need to assign value in the implementation. The code here https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_queue.cc;l\u003d766?q\u003dgpu_queue.cc\u0026ss\u003dchromium%2Fchromium%2Fsrc\nhappens to work because our default value in Dawn side is all 0. \nBut in this CL, we set default value of srcTextureAlphaOp to wgpu::AlphaOp::Unpremultiply (which is 2). And the bots caught that bug.\n\nDo you have any suggestions on making bots happy? ",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
