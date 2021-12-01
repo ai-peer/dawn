@@ -20,7 +20,8 @@
     "_metadata": {
         "api": "WebGPU",
         "c_prefix": "WGPU",
-        "namespace": "wgpu"
+        "namespace": "wgpu",
+        "proc_table_prefix": "Dawn"
     },
 
     "create instance": {

@@ -1,11 +1,12 @@
-#include "dawn/dawn_thread_dispatch_proc.h"
+{% set api = metadata.proc_table_prefix %}
+#include "dawn/{{api.lower()}}_thread_dispatch_proc.h"
 
 #include <thread>
 
-static DawnProcTable nullProcs;
-thread_local DawnProcTable perThreadProcs;
+static {{api}}ProcTable nullProcs;
+thread_local {{api}}ProcTable perThreadProcs;
 
-void dawnProcSetPerThreadProcs(const DawnProcTable* procs) {
+void {{api.lower()}}ProcSetPerThreadProcs(const {{api}}ProcTable* procs) {
     if (procs) {
         perThreadProcs = *procs;
     } else {
@@ -40,13 +41,14 @@ static WGPUInstance ThreadDispatchCreateInstance(WGPUInstanceDescriptor const * 
 {% endfor %}
 
 extern "C" {
-    DawnProcTable dawnThreadDispatchProcTable = {
-        ThreadDispatchGetProcAddress,
-        ThreadDispatchCreateInstance,
-{% for type in by_category["object"] %}
-    {% for method in c_methods(type) %}
-        ThreadDispatch{{as_MethodSuffix(type.name, method.name)}},
-    {% endfor %}
-{% endfor %}
+    {{api}}ProcTable {{api.lower()}}ThreadDispatchProcTable = {
+        {% for function in by_category["function"] %}
+            ThreadDispatch{{as_cppType(function.name)}},
+        {% endfor %}
+        {% for type in by_category["object"] %}
+            {% for method in c_methods(type) %}
+                ThreadDispatch{{as_MethodSuffix(type.name, method.name)}},
+            {% endfor %}
+        {% endfor %}
     };
 }
