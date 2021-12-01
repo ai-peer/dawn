@@ -16,6 +16,63 @@
       "message": "Ha! Finally got the bots to stop complaining! PTAL, and hopefully we can wrap this frustratingly-delicate-yet-educational CL up.",
       "revId": "31c1b807be45651a81ebc14c5ffe13e7770d3fa8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64898dd_6d6b4a85",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:18:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "31c1b807be45651a81ebc14c5ffe13e7770d3fa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6756f1a_5210072a",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:18:29Z",
+      "side": 1,
+      "message": "This one seems very generous however :P But we can keep and adjust in the future.",
+      "revId": "31c1b807be45651a81ebc14c5ffe13e7770d3fa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0f83798_ad79b33d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:18:29Z",
+      "side": 1,
+      "message": "I\u0027ve always worried that these tests were change detection tests. If you have any idea how to make them better please do!",
+      "range": {
+        "startLine": 276,
+        "startChar": 55,
+        "endLine": 276,
+        "endChar": 70
+      },
+      "revId": "31c1b807be45651a81ebc14c5ffe13e7770d3fa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
