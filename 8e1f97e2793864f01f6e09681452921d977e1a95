@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edd8f00d_f99d2a59",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T13:52:57Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8e1f97e2793864f01f6e09681452921d977e1a95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad012a1_e9bf4a22",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T13:52:57Z",
+      "side": 1,
+      "message": "Should be called only once (as in developers should be careful to do it), or will be called only once (as in the code will call it only once so you can rely on that guarantee)?",
+      "range": {
+        "startLine": 85,
+        "startChar": 56,
+        "endLine": 86,
+        "endChar": 53
+      },
+      "revId": "8e1f97e2793864f01f6e09681452921d977e1a95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "623d2aee_835df821",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T13:52:57Z",
+      "side": 1,
+      "message": "Any reason the call to Parent::DestroyImpl() is always first instead of being last like in C++ destructors? No need to address, we can do it as needed in the future (it might not ever be necessary).",
+      "revId": "8e1f97e2793864f01f6e09681452921d977e1a95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
