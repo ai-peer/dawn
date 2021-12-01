@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed5f60e3_8a714c17",
+        "filename": "docs/codegen.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-01T01:12:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3987e813_c6e8a99c",
+      "range": {
+        "startLine": 82,
+        "startChar": 69,
+        "endLine": 82,
+        "endChar": 102
+      },
+      "revId": "695743e7b8352cf1445a899bf7656d9715687e10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "58d3726a_4e721228",
@@ -71,6 +95,30 @@
       "writtenOn": "2021-11-30T17:43:20Z",
       "side": 1,
       "message": "could this be generated as well in a loop of `fptr in by_category[\"function pointer\"]` ?",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 145,
+        "endChar": 39
+      },
+      "revId": "695743e7b8352cf1445a899bf7656d9715687e10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e78591_6a783a20",
+        "filename": "generator/templates/api.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 145,
+      "author": {
+        "id": 1002956
+      },
+      "writtenOn": "2021-12-01T01:12:38Z",
+      "side": 1,
+      "message": "I don\u0027t use it because \"opengl get proc\" function pointer as you mentioned will be added in the webgpu.h, does it make sense?",
+      "parentUuid": "58d3726a_4e721228",
       "range": {
         "startLine": 145,
         "startChar": 0,
