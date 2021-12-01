@@ -230,6 +230,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4004c0b1_022cc6aa",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 870,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:28:01Z",
+      "side": 1,
+      "message": "+1 to either coalescing barriers or tweaking the N last barriers instead of just the last one.",
+      "parentUuid": "58491d3d_701bbaea",
+      "range": {
+        "startLine": 870,
+        "startChar": 60,
+        "endLine": 870,
+        "endChar": 79
+      },
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ecf48877_ef5c8c86",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 6
@@ -470,6 +494,24 @@
       "side": 1,
       "message": "Yea, I think the way that Austin showed is probably (close to) if not the best way to go. You can maybe use the idea he posed in conjunction with typed testing (see https://github.com/google/googletest/blob/main/googletest/samples/sample6_unittest.cc for an example of this), to accomplish the switching.",
       "parentUuid": "e69addc6_ba711abd",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d84ea787_e23208a6",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:28:01Z",
+      "side": 1,
+      "message": "I\u0027m not sure that typed testing would work because a different set of things would be available on each platform. But maybe with ifdefs to choose what goes in Types\u003c\u003e it would work?",
+      "parentUuid": "09c2ebbe_ebf014f3",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -20,6 +20,64 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "270160dd_6dce3abf",
+        "filename": "src/dawn_native/ExternalTexture.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:28:01Z",
+      "side": 1,
+      "message": "I think we should completely remove this branch. Views should be extracted from planes directly, then bound individually to an external texture. It\u0027s really not clear what should happen if we bind a multiplanar texture to a single plane of an external texture.",
+      "parentUuid": "74a3a76b_48ec6ae2",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83e79231_85c35e6f",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:28:01Z",
+      "side": 1,
+      "message": "u-nit: since is only useful in the multiplanar case. So maybe we can move it inside the condition. (maybe ditto for viewFormats\u0027 initialization, not sure). And maybe we could add an ASSERT that the Vulkan format is VK_FORMAT_G8_B8R8_2PLANE_420_UNORM so we know to change this code if we support additional formats in the future.",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 0
+      },
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fc48baf_d3b421c6",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:28:01Z",
+      "side": 1,
+      "message": "ditto having more of the code in the conditions so it is clear what is used where, and the ASSERT for VK_FORMAT_G8_B8R8_2PLANE_420_UNORM",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4294c4c6_35c81703",
         "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
         "patchSetId": 9
