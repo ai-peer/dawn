@@ -427,6 +427,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86168a0d_1f958edc",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-01T18:44:37Z",
+      "side": 1,
+      "message": "I just asked Shabby. ANGLE chose to simply ignore the error as it had no effect on hardware they tested. It doesn\u0027t have an ID but they exclude the message by string.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/vulkan/RendererVk.cpp;l\u003d242?q\u003df:angle%20SYNC-HAZARD-WRITE_AFTER_READ\n\nI suggest we do the same here",
+      "parentUuid": "7afcca67_36796a36",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f4604e_f18331e9",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
