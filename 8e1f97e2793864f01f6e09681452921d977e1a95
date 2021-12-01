@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27db81f7_aae306dc",
+        "filename": "src/dawn_native/ObjectBase.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-01T17:56:49Z",
+      "side": 1,
+      "message": "Guaranteed. Updated comment to make it more clear.",
+      "parentUuid": "1ad012a1_e9bf4a22",
+      "range": {
+        "startLine": 85,
+        "startChar": 56,
+        "endLine": 86,
+        "endChar": 53
+      },
+      "revId": "8e1f97e2793864f01f6e09681452921d977e1a95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "623d2aee_835df821",
@@ -54,6 +78,24 @@
       "writtenOn": "2021-12-01T13:52:57Z",
       "side": 1,
       "message": "Any reason the call to Parent::DestroyImpl() is always first instead of being last like in C++ destructors? No need to address, we can do it as needed in the future (it might not ever be necessary).",
+      "revId": "8e1f97e2793864f01f6e09681452921d977e1a95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e08569_4078b2f4",
+        "filename": "src/dawn_native/vulkan/QuerySetVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-01T17:56:49Z",
+      "side": 1,
+      "message": "No particular reason at the moment. Just did it because the architecture before ended up always calling the parent one first and it was working so I didn\u0027t change anything unnecessarily.\n\nNote it isn\u0027t called first in special cases (i.e. the BufferD3D12 case because we need to zero out the written range first for the optimization).",
+      "parentUuid": "623d2aee_835df821",
       "revId": "8e1f97e2793864f01f6e09681452921d977e1a95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
