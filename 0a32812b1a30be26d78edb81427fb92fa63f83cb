@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45a75ba5_fceb24b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000268
+      },
+      "writtenOn": "2021-12-01T20:59:40Z",
+      "side": 1,
+      "message": "Moving myself to CC.",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74a3a76b_48ec6ae2",
