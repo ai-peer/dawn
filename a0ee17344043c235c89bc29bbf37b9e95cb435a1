@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b0df87b_1a0ab285",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:14:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a0ee17344043c235c89bc29bbf37b9e95cb435a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62de9ced_a2e886ee",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:14:32Z",
+      "side": 1,
+      "message": "I\u0027m still concerned about using macros overloads when it doesn\u0027t seem strictly necessary (and this header is starting to do way too much).\n\nWhat about:\n\n  ASSERT_DEVICE_ERROR vs. ASSERT_DEVICE_ERROR_MSG\n  \nor\n\n  // Single overload, second argument is ignored and used just because technically\n  // __VA_ARGS__ can only be used if it is not empty.\n  void StartExpectDeviceError(testing::Matcher\u003cstd::string\u003e errorMatcher, testing::Matcher\u003cstd::string\u003e \u003d testing::_);\n  \n\n  #define ASSERT_DEVICE_ERROR(...) ASSERT_DEVICE_ERROR_IMPL(__VA_ARGS__, testing::_);\n  #define ASSERT_DEVICE_ERROR_IMPL(statement, ...) \\\n    stuff stuff, calls StartExpectDeviceError(__VA_ARGS__)",
+      "revId": "a0ee17344043c235c89bc29bbf37b9e95cb435a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4347063_1cd32512",
+        "filename": "src/tests/DawnTest.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:14:32Z",
+      "side": 1,
+      "message": "nit: could have a single overload with errorMatcher defaulting to _",
+      "revId": "a0ee17344043c235c89bc29bbf37b9e95cb435a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
