@@ -140,6 +140,24 @@
       "parentUuid": "9b43eb1b_92acf57b",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a177666c_1d4460e9",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:40:36Z",
+      "side": 1,
+      "message": "Reopening this. Maybe we could rename \"callback\" to \"function pointer\" and add a return type to them. It means WGPUProc would be in the middle of other callbacks but I guess that\u0027s ok. Austin WDYT? Sorry for the back and forth.",
+      "parentUuid": "f5b20ac5_45665bc3",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
