@@ -176,6 +176,24 @@
       "parentUuid": "a177666c_1d4460e9",
       "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f8e9386_58de5140",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 2
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T18:48:59Z",
+      "side": 1,
+      "message": "Seems that it wouldn\u0027t break this code path? We directly forward arguments in mock_webgpu.h/.cpp as far as I can see. Maybe I\u0027m wrong.",
+      "parentUuid": "129ab28d_9a73a06b",
+      "revId": "45f5e6fdeccd7b57d2847dbea027a7f483d42699",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
