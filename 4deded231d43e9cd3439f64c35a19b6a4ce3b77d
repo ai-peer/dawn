@@ -33,6 +33,452 @@
       "message": "The bots fail show me a bug in blink side:\nIt seems that in blink side, there is not default value for the struct webgpu.h. We need to assign value in the implementation. The code here https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webgpu/gpu_queue.cc;l\u003d766?q\u003dgpu_queue.cc\u0026ss\u003dchromium%2Fchromium%2Fsrc\nhappens to work because our default value in Dawn side is all 0. \nBut in this CL, we set default value of srcTextureAlphaOp to wgpu::AlphaOp::Unpremultiply (which is 2). And the bots caught that bug.\n\nDo you have any suggestions on making bots happy? ",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8eb32f1_ec7e960c",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "Isn\u0027t it a bit weird that we say what operation to do, instead of declaring what the state of the texture is? (so alpha is either \"premultiplied\", or \"separate\")? Then with [c] we only have 4 (2x2) cases to consider instead of 9 (3x3).\n\nIf alpha is premultiplied in the source then we unmultiply it, if the destination has premultiplied alpha then we multiply it at the end.",
+      "range": {
+        "startLine": 860,
+        "startChar": 74,
+        "endLine": 860,
+        "endChar": 87
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ff5aa34_235f52c1",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "nit: transform",
+      "range": {
+        "startLine": 46,
+        "startChar": 18,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ef48d4c_8ae1e2d5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 56,
+        "startChar": 26,
+        "endLine": 56,
+        "endChar": 31
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1032bee_614ba165",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "nit: s/\\t/    / (replace tabs with 4 spaces)",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 1
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2d38039_0df21801",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "nit: companded? Also the comment could be reflowed a bit I think (lines are very short)",
+      "range": {
+        "startLine": 58,
+        "startChar": 32,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72deb60a_f0217449",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "nit: unified",
+      "range": {
+        "startLine": 62,
+        "startChar": 57,
+        "endLine": 62,
+        "endChar": 62
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc42d4cd_9c17303e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "That\u0027s a single value currently.",
+      "range": {
+        "startLine": 76,
+        "startChar": 26,
+        "endLine": 76,
+        "endChar": 31
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "713a7587_078d05f5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "nit: ranges are usually written [0, 1] in english I think. Same above.",
+      "range": {
+        "startLine": 76,
+        "startChar": 73,
+        "endLine": 76,
+        "endChar": 80
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9136525_e4c7ac6e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebfa24d7_c476fa37",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "Can we have a constant that we use for this? This magic 1u is in a bunch of places and it\u0027s hard to remember that it is unpremultiply.\n\nAnd nit: we can divide by 1.0. That\u0027s free. Did you mean 0.0?",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 54
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128b0aa3_d37e63c9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "[c] It\u0027s a bit weird to have srcTextureAlphaOp but also alphaOp. Shouldn\u0027t it be srcTextureAlphaOp + dstTextureAlphaOp?",
+      "range": {
+        "startLine": 152,
+        "startChar": 42,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f2806f9_27ce54b2",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "ditto, multiplication by 1.0 is free, we can just do it in this case.",
+      "range": {
+        "startLine": 153,
+        "startChar": 20,
+        "endLine": 153,
+        "endChar": 34
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda2a760_73e5a657",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 303,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "You can use ValidationUtils_autogen.h and call ValidateColorSpace().\n\nSo the code could be\n\n  DAWN_TRY(ValidateColorSpace(srcColorSpace));\n  DAWN_TRY(ValidateColorSpace(dstColorSpace));\n  DAWN_INVALID_IF(dstColorSpace, \"Destination color space (%s) is not %s.\", dstColorSpace, wgpu::ColorSpace::SRGB);\n  \n(and IMHO then we don\u0027t need a new function for this)",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cba4b0f_645ec7e7",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "DontChange is not allowed? If it is allowed, then [a] should cover it already.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27f40793_2257ff77",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "We must avoid global constructors in Chromium, and unordered_map\u0027s constructor is not constexpr. Can we instead have something similar to what is done in Format.cpp or VulkanExtensions.cpp where we have an array of values that\u0027s constexpr and we check when accessing it that the ColorSpace associated with the entry is what we expected?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a586889_4c711b6e",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 403,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "nit: I think you can skip this type and that it will work.",
+      "range": {
+        "startLine": 403,
+        "startChar": 14,
+        "endLine": 403,
+        "endChar": 34
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e17d49f_da63b6d7",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 448,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "Why does fuseMatrix start as the partial identity? All values will be overwritten anyway so we can use {} (that will zero initialize).",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf6338e9_fb5adfbb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "[a]",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3dc1f2a3_7e38bbcb",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "[b]",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a3f071_601e19b3",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 559,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "I think that if uniformData contained that data and GetTransformMatrix used at [b], then a pointer to the stack would be passed to GetTransformMatrix and \"return value optimization\" would happen. This means that we can keep using utils::CreateBufferFromData without any performance penalty.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "47246776_6cb7faca",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "This seems to be exactly the same as DAWN_ENUM_VALIDATION_ERROR so why was it added?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8654b9d_5327c9da",
+        "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T16:21:43Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t have time to re-review the tests yet.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
