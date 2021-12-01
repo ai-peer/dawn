@@ -231,6 +231,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cc98a669_8dd22640",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:03:07Z",
+      "side": 1,
+      "message": "Given [a] means no modification to VulkanAttachmentLoad/StoreOp is needed I think it\u0027s better to rely on the frontend doing the correct thing (and ASSERTing that it does).",
+      "parentUuid": "b2b87120_77e743b7",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "56e774b3_c3f78bab",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
@@ -325,6 +343,30 @@
       "side": 1,
       "message": "Thanks for the explanation! Is this change going to fail if some hardware doesn\u0027t support STORE_OP_NONE extension? (according to your explanation, say on non-tiled GPUs like Intel iGPU). I run the CL on my desktop with Intel iGPU, it works.",
       "parentUuid": "497457d0_d9dd03df",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "119247e8_a989fa0a",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:03:07Z",
+      "side": 1,
+      "message": "[a] The change will not fail on hardware that doesn\u0027t support NONE, instead we should use STORE (and have NONE be an optimization we do much later in the future).\n\nTechnically STORE is a write, but it is allowed in the Vulkan specification with the DEPTH_STENCIL_READ_ONLY_OPTIMAL layout because:\n\n - on desktop GPUs the modifications to the DS attachment will be streamed to memory, but since there are none (all pipelines must have depthWrite \u003d false), there are no writes.\n - on tiler GPUs at BeginRenderPass the DS attachment tile is loaded from memory into the tile cache, then at EndPass it is copied from the tile cache to the memory. Technically a write happens, but with the exact same values that were in memory, so there is no risk of data race. (but _NONE was added to be able to remove that other copy).\n \nWe should really use STORE, because it has the correct behavior, but also because NONE is a tiler-specific extension and it is incorrect to use it when it is not supported by the driver.",
+      "parentUuid": "7160ebc3_6820a234",
       "range": {
         "startLine": 172,
         "startChar": 12,
@@ -992,6 +1034,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6bc974f_b90fd4b1",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:03:07Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "65fdda4e_5b899d20",
+      "range": {
+        "startLine": 505,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 75
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04fd8059_69df3712",
@@ -1076,6 +1142,24 @@
       "side": 1,
       "message": "This is not useful for current end2end test. The current test will go to either if block at [6] (readonly depth/stencil attachment + sampling), or if block at [4] (sampling only).\n\nI feel like this should be needed if we add tests where we only have readonly depth/stencil attachment (no sampling). I will do that in order to verify my guess.",
       "parentUuid": "80c7df84_a190e1d6",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31229e39_06006f99",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T15:03:07Z",
+      "side": 1,
+      "message": "Sounds good. Even if that test doesn\u0027t end up using it, I think we should add an UNREACHABLE() for that case so it crashes in debug if we happen to have the incorrect assumption. Leaving this comment thread unresolved so that we don\u0027t forget to add the test case or the UNREACHABLE().",
+      "parentUuid": "b7c2f2d8_4a07459d",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
