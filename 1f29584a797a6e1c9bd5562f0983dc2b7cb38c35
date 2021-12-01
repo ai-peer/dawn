@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17b43e16_d7fb64ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T13:42:16Z",
+      "side": 1,
+      "message": "LGTM too, thanks for splitting",
+      "revId": "1f29584a797a6e1c9bd5562f0983dc2b7cb38c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
