@@ -56,6 +56,30 @@
       },
       "revId": "d203bdc3b159c495144d6a461d9fcda40b0c72fd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "735f11bc_c8a3725d",
+        "filename": "src/dawn_native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-01T04:36:57Z",
+      "side": 1,
+      "message": "Alright, ended up shuffling this around quite a bit for a variety of reasons, but it should make this logic cleaner. The zero buffer is now handled entirely in the device, and is cleared on first use to avoid triggering some end2end test asserts that expect no heaps to be allocated after the device is created.",
+      "parentUuid": "dbc27cf9_fc98e21f",
+      "range": {
+        "startLine": 273,
+        "startChar": 8,
+        "endLine": 274,
+        "endChar": 92
+      },
+      "revId": "d203bdc3b159c495144d6a461d9fcda40b0c72fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

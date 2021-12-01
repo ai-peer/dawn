@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12944d81_fb2ef781",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-01T04:36:57Z",
+      "side": 1,
+      "message": "Ha! Finally got the bots to stop complaining! PTAL, and hopefully we can wrap this frustratingly-delicate-yet-educational CL up.",
+      "revId": "31c1b807be45651a81ebc14c5ffe13e7770d3fa8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

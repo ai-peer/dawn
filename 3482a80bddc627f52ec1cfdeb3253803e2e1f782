@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c93e5ca_a031b142",
+        "filename": "src/dawn_native/d3d12/ResidencyManagerD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2021-12-01T04:36:57Z",
+      "side": 0,
+      "message": "Not 100% sure about it, but I think that with the zero buffer being allocated as part of device initialization this assert no longer makes sense. I don\u0027t see a clean way around it, in any case.",
+      "revId": "3482a80bddc627f52ec1cfdeb3253803e2e1f782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
