@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14b23b4f_6dc395a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "Only skimmed the tests so far but they look good",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8eb32f1_ec7e960c",
@@ -60,6 +77,64 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe4acee0_c06bb787",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "Agree, I guess originally we implemented this with a single precomputed alphaOp (\"premultiply\", \"unpremultiply\", or \"none\") but now that we have color conversions we need separate src and dst premultipliedAlpha states (each being true or false).\n\nUnfortunately this is going to need changes in both Dawn and Blink but maybe we can smoothly transition with a few stages of changes.",
+      "parentUuid": "a8eb32f1_ec7e960c",
+      "range": {
+        "startLine": 860,
+        "startChar": 74,
+        "endLine": 860,
+        "endChar": 87
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc927528_53c98baf",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "unrelated nit: Shouldn\u0027t the names be spelled \"flip y\" and \"alpha op\"?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c6c7c13_c0a0a871",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "With the matrix now precomputed, u_srcColorSpace and u_dstColorSpace should be in principle used only to derive some specific information:\n\n- Is the conversion matrix an identity and therefore can be skipped?\n- What is the transfer function of src?\n- What is the transfer function of dst?\n- If the conversion matrix is an identity, can the transfer functions also be skipped?\n\nHaving the uniform inputs correspond to wgpu::ColorSpace confuses things a bit because that information is not really used directly.\n\nI think I would have the final logic look something like:\n\n // 3 \u003d skip all, 2 \u003d skip matrix and TF, 1 \u003d skip matrix, 0 \u003d skip none:\n u32 conversion_mode;\n\n // Later probably replaced with full a/b/c/d/e/f/g formulation:\n u32 src_is_nonlinear, dst_is_nonlinear; // 0 or 1\n\n u32 src_is_premul, dst_is_premul; // 0 or 1\n\n if (conversion_mode \u003c 3) { // Can\u0027t skip premul/unpremul\n   if (src_is_premul \u003d\u003d 1) unpremultiply;\n   if (conversion_type \u003c 2) { // Can\u0027t skip transfer function\n     if (src_is_nonlinear \u003d\u003d 1) convert nonlinear to linear;\n     if (conversion_type \u003c 1) { // Can\u0027t skip conversion matrix\n       apply conversion matrix;\n     }\n     if (dst_is_nonlinear \u003d\u003d 1) convert linear to nonlinear;\n   }\n   if (dst_is_premul \u003d\u003d 1) premultiply;\n }",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1ff5aa34_235f52c1",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -71,6 +146,30 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "nit: transform",
+      "range": {
+        "startLine": 46,
+        "startChar": 18,
+        "endLine": 46,
+        "endChar": 27
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7022d0e5_61be84ee",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "or perhaps colorSpaceConversionMatrix or conversionMatrix",
+      "parentUuid": "1ff5aa34_235f52c1",
       "range": {
         "startLine": 46,
         "startChar": 18,
@@ -152,6 +251,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ad8b4e06_e0454188",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "nit: Browser",
+      "range": {
+        "startLine": 60,
+        "startChar": 49,
+        "endLine": 60,
+        "endChar": 56
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "72deb60a_f0217449",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -169,6 +291,47 @@
         "endLine": 62,
         "endChar": 62
       },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d23e7208_7b05a671",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "Also \"uses\", and add end punctuation:\n\n Chromium uses a unified formula:",
+      "parentUuid": "72deb60a_f0217449",
+      "range": {
+        "startLine": 62,
+        "startChar": 57,
+        "endLine": 62,
+        "endChar": 62
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adfb48d0_7e2a564f",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "Architectures might prefer a \"vectorized\" version of this operation which operates on all three components in parallel, like:\n\n ... (v: vec3\u003cf32\u003e) -\u003e vec3\u003cf32\u003e {\n   let linear_part \u003d vec3\u003cf32\u003e(12.92) * v;\n   let gamma_part \u003d vec3\u003cf32\u003e(1.055) * pow(v, vec3\u003cf32\u003e(1.0 / 2.4)) - vec3\u003cf32\u003e(0.055);\n   return select(gamma_part, linear_part, v \u003c vec\u003cf32\u003e(0.0031308));\n }\n\nNot very necessary to do now, but could try it, or leave a TODO to consider it.",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -221,6 +384,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1986f026_220abec5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "There isn\u0027t really consistency in English except in contexts where mathematical [inclusive,exclusive) style intervals are understood. Outside of math-y contexts 0.0-1.0 is much more common. I find in English if you just write [0, 1] or (0, 1) it\u0027s not always clear that it\u0027s an interval.\n\nIn this case I think 0.0-1.0, [0.0,1.0] and other variants are perfectly clear.",
+      "parentUuid": "713a7587_078d05f5",
+      "range": {
+        "startLine": 76,
+        "startChar": 73,
+        "endLine": 76,
+        "endChar": 80
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a9136525_e4c7ac6e",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -232,6 +419,23 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "ditto",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e40c0e4_07033d1b",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "I think this will skip a premultiply/unpremultiply operation if one is needed.",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -255,6 +459,64 @@
         "endLine": 117,
         "endChar": 54
       },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf21cfa_b2fccbae",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "It is important to avoid the divide if a\u003d0.0. Otherwise a valid color (transparent \u003d [0,0,0,0]) can result in NaN.",
+      "parentUuid": "ebfa24d7_c476fa37",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 54
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c35a023d_806a9376",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "Doesn\u0027t srgb_nonlinear_to_linear_positive need to be run for both srgb and display p3?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6467e9f5_d782c9db",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "Also needs to run for display p3?",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -318,6 +580,29 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "You can use ValidationUtils_autogen.h and call ValidateColorSpace().\n\nSo the code could be\n\n  DAWN_TRY(ValidateColorSpace(srcColorSpace));\n  DAWN_TRY(ValidateColorSpace(dstColorSpace));\n  DAWN_INVALID_IF(dstColorSpace, \"Destination color space (%s) is not %s.\", dstColorSpace, wgpu::ColorSpace::SRGB);\n  \n(and IMHO then we don\u0027t need a new function for this)",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fb88b81_88f43473",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-01T23:23:17Z",
+      "side": 1,
+      "message": "nit: Source",
+      "range": {
+        "startLine": 308,
+        "startChar": 55,
+        "endLine": 308,
+        "endChar": 61
+      },
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
