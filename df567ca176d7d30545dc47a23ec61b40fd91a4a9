@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "df17ce46_97a2e7bd",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-01T07:33:19Z",
+      "side": 1,
+      "message": "Oh in this patch I just set is_wire_transparent to true on non-structure types. I still need some time to figure out how to handle structures.",
+      "parentUuid": "8da3557c_d162a885",
+      "revId": "df567ca176d7d30545dc47a23ec61b40fd91a4a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ddea6a29_f4669005",
         "filename": "generator/templates/dawn_wire/WireCmd.cpp",
         "patchSetId": 6
@@ -31,6 +49,30 @@
       "writtenOn": "2021-11-30T16:12:27Z",
       "side": 1,
       "message": "Why are bitmasks not wire transparent?",
+      "range": {
+        "startLine": 275,
+        "startChar": 21,
+        "endLine": 275,
+        "endChar": 54
+      },
+      "revId": "df567ca176d7d30545dc47a23ec61b40fd91a4a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9ee171_55d6244f",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2021-12-01T07:33:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddea6a29_f4669005",
       "range": {
         "startLine": 275,
         "startChar": 21,
