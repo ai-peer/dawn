@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6909e4d7_0bd5ab83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:31:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8f846f50990cb78442a1766d3ebb25879e55dcdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f4f91cd_4da6d5eb",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 7
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:31:40Z",
+      "side": 1,
+      "message": "Did you hit an issue with \"void\"? I thought it was not used in any WireCmd because we always add a uint8_t* version of void* methods.",
+      "revId": "8f846f50990cb78442a1766d3ebb25879e55dcdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70b933f2_ced2184a",
+        "filename": "generator/templates/dawn_wire/WireCmd.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-01T14:31:40Z",
+      "side": 1,
+      "message": "nit: we can keep the constness of the pointer. We\u0027re just removing the volatile keyword.",
+      "range": {
+        "startLine": 407,
+        "startChar": 50,
+        "endLine": 407,
+        "endChar": 51
+      },
+      "revId": "8f846f50990cb78442a1766d3ebb25879e55dcdc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
