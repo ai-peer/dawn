@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "494a95dc_2956821c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T18:04:14Z",
+      "side": 1,
+      "message": "Some follow-ups about STORE_OP_NONE vs STORE_OP_STORE in Vulkan validation layer, please take a look, Corentin and Austin. \n\nMaybe we need to use GENERAL image layout on Vulkan, which is unfortunate. ",
+      "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13541e59_91fda11d",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T18:04:14Z",
+      "side": 1,
+      "message": "[7]",
+      "range": {
+        "startLine": 48,
+        "startChar": 12,
+        "endLine": 50,
+        "endChar": 13
+      },
+      "revId": "505d632f290855ca535299e77c1e0a52ca9e3537",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

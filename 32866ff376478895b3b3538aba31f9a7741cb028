@@ -379,6 +379,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a794a52_00f88f08",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T18:04:14Z",
+      "side": 1,
+      "message": "As I mentioned during the meeting: 1) STORE_OP_STORE will lead to validation layer failure, that\u0027s why I have to use STORE_OP_NONE. 2) STORE_OP_NONE_QCOM is working on (at least some of) desktop machines with Intel integrated GPU (non-tiled, I think). 3) STORE_OP_STORE and STORE_OP_DONT_CARE explicitly say that it only compatible with writable depth/stencil, so I feel like the validation layer is conformant to the Vulkan spec at this point. What makes me feel weird is that depth/stencil readonly is a core feature, but it relies on an extension like STORE_OP_NONE_QCOM (or _KHR, _EXT). It is not self-contained.\n\nUnfortunately, the validation layer error doesn\u0027t have a VU-id for the error, the error is: \nWarning: Validation Error: [ SYNC-HAZARD-WRITE_AFTER_READ ] Object 0: handle \u003d 0x1150000000115, type \u003d VK_OBJECT_TYPE_RENDER_PASS; | MessageID \u003d 0x4b3455b4 | vkCmdEndRenderPass: Hazard WRITE_AFTER_READ in subpass 0 for attachment 1 depth aspect during store with storeOp VK_ATTACHMENT_STORE_OP_STORE. Access info (usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, prior_usage: SYNC_FRAGMENT_SHADER_SHADER_STORAGE_READ, read_barriers: VK_PIPELINE_STAGE_2_NONE_KHR, command: vkCmdDraw, seq_no: 6, reset_no: 1)\nError: Assertion failure at ../../src/dawn_native/vulkan/BackendVk.cpp:65 (OnDebugUtilsCallback): (messageSeverity \u0026 VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT) \u003d\u003d 0\nTrace/breakpoint trap (core dumped)\n\nYou can verify/reproduce the validation error by remove the small code block at [7] after pull this CL on your local machine.",
+      "parentUuid": "119247e8_a989fa0a",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f4604e_f18331e9",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
@@ -1160,6 +1184,24 @@
       "side": 1,
       "message": "Sounds good. Even if that test doesn\u0027t end up using it, I think we should add an UNREACHABLE() for that case so it crashes in debug if we happen to have the incorrect assumption. Leaving this comment thread unresolved so that we don\u0027t forget to add the test case or the UNREACHABLE().",
       "parentUuid": "b7c2f2d8_4a07459d",
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81fdcf8a_805c9628",
+        "filename": "src/dawn_native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000017
+      },
+      "writtenOn": "2021-12-01T18:04:14Z",
+      "side": 1,
+      "message": "The new end2end test verified my guess, see the patch at https://dawn-review.googlesource.com/c/dawn/+/71441",
+      "parentUuid": "31229e39_06006f99",
       "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
