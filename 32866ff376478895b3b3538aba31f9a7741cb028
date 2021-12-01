@@ -403,6 +403,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7afcca67_36796a36",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-01T18:21:16Z",
+      "side": 1,
+      "message": "I just found this https://github.com/KhronosGroup/Vulkan-ValidationLayers/issues/2349",
+      "parentUuid": "5a794a52_00f88f08",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f4604e_f18331e9",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
