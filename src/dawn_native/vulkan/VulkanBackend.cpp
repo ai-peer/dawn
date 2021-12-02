@@ -77,11 +77,26 @@ namespace dawn_native { namespace vulkan {
     }
 #endif  // DAWN_PLATFORM_LINUX
 
+#if defined(DAWN_PLATFORM_FUCHSIA)
+    ExternalImageExportInfoZirconHandle::ExternalImageExportInfoZirconHandle()
+        : ExternalImageExportInfoFD(ExternalImageType::ZirconHandle) {
+    }
+
+#endif  // defined(DAWN_PLATFORM_FUCHSIA)
     WGPUTexture WrapVulkanImage(WGPUDevice cDevice, const ExternalImageDescriptorVk* descriptor) {
-#if defined(DAWN_PLATFORM_LINUX)
         switch (descriptor->type) {
+#if defined(DAWN_PLATFORM_LINUX)
             case ExternalImageType::OpaqueFD:
             case ExternalImageType::DmaBuf: {
+                const ExternalImageDescriptorZirconHandle* fdDescriptor =
+                    static_cast<const ExternalImageDescriptorZirconHandle*>(descriptor);
+                Device* device = reinterpret_cast<Device*>(cDevice);
+                TextureBase* texture = device->CreateTextureWrappingVulkanImage(
+                    descriptor, fdDescriptor->memoryHandle, fdDescriptor->waitHandles);
+                return reinterpret_cast<WGPUTexture>(texture);
+            }
+#elif defined(DAWN_PLATFORM_FUCHSIA)
+            case ExternalImageType::ZirconHandle: {
                 const ExternalImageDescriptorFD* fdDescriptor =
                     static_cast<const ExternalImageDescriptorFD*>(descriptor);
                 Device* device = reinterpret_cast<Device*>(cDevice);
@@ -89,12 +104,10 @@ namespace dawn_native { namespace vulkan {
                     fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
                 return reinterpret_cast<WGPUTexture>(texture);
             }
+#endif
             default:
                 return nullptr;
         }
-#else
-        return nullptr;
-#endif  // DAWN_PLATFORM_LINUX
     }
 
     bool ExportVulkanImage(WGPUTexture cTexture,

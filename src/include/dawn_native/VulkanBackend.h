@@ -114,6 +114,21 @@ namespace dawn_native { namespace vulkan {
 
 #endif  // __linux__
 
+#ifdef __Fuchsia__
+
+        struct DAWN_NATIVE_EXPORT ExternalImageDescriptorZirconHandle : ExternalImageDescriptorVk {
+          public:
+            uint32_t memoryHandle;  // A file descriptor from an export of the memory of the image
+            std::vector<uint32_t> waitHandles;  // File descriptors of semaphores which will be waited on
+
+            VkDeviceSize allocationSize;  // Must match VkMemoryAllocateInfo from image creation
+            uint32_t memoryTypeIndex;     // Must match VkMemoryAllocateInfo from image creation
+          protected:
+            using ExternalImageDescriptorVk::ExternalImageDescriptorVk;
+        };
+
+#endif  // __Fuchsia__
+
         // Imports external memory into a Vulkan image. Internally, this uses external memory /
         // semaphore extensions to import the image and wait on the provided synchronizaton
         // primitives before the texture can be used.
