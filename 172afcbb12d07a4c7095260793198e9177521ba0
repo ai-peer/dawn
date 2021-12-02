@@ -16,6 +16,23 @@
       "message": "PTAL! We were trying to see with qsr@ if we could hack for an hour to get WebGPU running on Chrome Fuchsia and couldn\u0027t get it to work, but there\u0027s some ok code that we can land already.",
       "revId": "172afcbb12d07a4c7095260793198e9177521ba0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3315e794_9c3763a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T15:58:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "172afcbb12d07a4c7095260793198e9177521ba0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
