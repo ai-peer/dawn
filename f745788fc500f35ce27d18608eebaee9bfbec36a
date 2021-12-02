@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70fae3c8_16bc2a1c",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T19:17:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "a272c8e3_72fb5c03",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "123a09da_4e3c0058",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "\u003e The function dlclose() decrements the reference count on the dynamic library handle handle. If the reference count drops to zero and no other loaded libraries use symbols in it, then the dynamic library is unloaded.\n\u003e The function dlclose() returns 0 on success, and nonzero on error.",
       "parentUuid": "123a09da_4e3c0058",
+      "range": {
+        "startLine": 163,
+        "startChar": 16,
+        "endLine": 163,
+        "endChar": 61
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3439d3ac_dc94623f",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T19:17:22Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "02a26038_40c4a0be",
       "range": {
         "startLine": 163,
         "startChar": 16,
