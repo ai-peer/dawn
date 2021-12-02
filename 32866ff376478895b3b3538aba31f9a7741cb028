@@ -475,6 +475,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3fc2ce9b_ca0fc21a",
+        "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T07:55:53Z",
+      "side": 1,
+      "message": "I think we should do like ANGLE does. It\u0027s really unfortunate that the VVL has a spec interpretation bug that they are not willing to fix.",
+      "parentUuid": "6055104b_1454d138",
+      "range": {
+        "startLine": 172,
+        "startChar": 12,
+        "endLine": 181,
+        "endChar": 0
+      },
+      "revId": "32866ff376478895b3b3538aba31f9a7741cb028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "37f4604e_f18331e9",
         "filename": "src/dawn_native/vulkan/RenderPassCache.cpp",
         "patchSetId": 2
