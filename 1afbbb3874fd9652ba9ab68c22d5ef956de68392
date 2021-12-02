@@ -51,6 +51,24 @@
       "parentUuid": "4341895e_abc99a35",
       "revId": "1afbbb3874fd9652ba9ab68c22d5ef956de68392",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a8f60b6_1cbcda56",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2021-12-02T00:11:00Z",
+      "side": 1,
+      "message": "So are the CQ runs standalone? I\u0027m just worried that if the CQ bots build not as standalone then idk what will happen on some of the nvidia/linux bots. Feel free to close and ignore if that shouldn\u0027t be a problem though!",
+      "parentUuid": "a3fb8811_627b536a",
+      "revId": "1afbbb3874fd9652ba9ab68c22d5ef956de68392",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
