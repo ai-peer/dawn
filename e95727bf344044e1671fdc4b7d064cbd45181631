@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8ca9df_2b0809d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:09:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e95727bf344044e1671fdc4b7d064cbd45181631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f9fb60_b10d2e70",
+        "filename": "src/dawn_native/Instance.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:09:26Z",
+      "side": 1,
+      "message": "nit: we don\u0027t need to filter out already connected backends because that\u0027s done in EnsureBackendConnection.",
+      "range": {
+        "startLine": 103,
+        "startChar": 69,
+        "endLine": 103,
+        "endChar": 91
+      },
+      "revId": "e95727bf344044e1671fdc4b7d064cbd45181631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
