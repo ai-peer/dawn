@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "231d3133_751e93d9",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T10:19:53Z",
+      "side": 1,
+      "message": "Ah I meant the initialization of members, not the declaration, similar to how we do it in BackendVk for example. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn_native/vulkan/BackendVk.cpp;drc\u003d349062fb7231c1d1716176e8417d2cf81d4307ca;l\u003d299\n\nBut that\u0027s some really small nitpicking.",
+      "parentUuid": "96211bc5_324146a6",
+      "range": {
+        "startLine": 170,
+        "startChar": 0,
+        "endLine": 172,
+        "endChar": 0
+      },
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fc48baf_d3b421c6",
         "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
         "patchSetId": 9
@@ -149,6 +173,24 @@
       "side": 1,
       "message": "Unlike viewFormat, and imageFormatListInfo, lines here are not specific to VK_FORMAT_G8_B8R8_2PLANE_420_UNORM. It\u0027s general for multi-planar formats. Maybe we don\u0027t need ASSERT here.",
       "parentUuid": "3fc48baf_d3b421c6",
+      "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc7fa049_8d416eeb",
+        "filename": "src/dawn_native/vulkan/external_memory/MemoryServiceDmaBuf.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T10:19:53Z",
+      "side": 1,
+      "message": "Yeah the assert would be unnecessary.",
+      "parentUuid": "647cced0_f6a080b8",
       "revId": "0a32812b1a30be26d78edb81427fb92fa63f83cb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
