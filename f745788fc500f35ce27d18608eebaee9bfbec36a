@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f635ab66_2d57a0de",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T19:01:24Z",
+      "side": 1,
+      "message": "this is about https://github.com/KhronosGroup/Vulkan-Loader/issues/287. I could change the comment to reference that issue and be more specific since we do link against the loader now.\n\nwe want to be able to link SwiftShader *statically* (there\u0027s some ideological opposition from SwiftShader to that) and just pass the loader the pointer to the SwiftShader function pointers. Then we don\u0027t even need ICD stuff for SwiftShader.\n\nSince we have the ICD path though, I guess we can maybe completely remove the load of libvk_swiftshader. Not sure if we really really need DAWN_ENABLE_SWIFTSHADER to work without DAWN_SWIFTSHADER_VK_ICD_JSON?\n\nI\u0027ve been thinking it\u0027s worth adding an optional ICD path to vulkan::AdapterDiscoveryOptions and having the embedder be able to explicitly pass in the .json (and then remove DAWN_SWIFTSHADER_VK_ICD_JSON?)... but that\u0027s a change for another day.",
+      "parentUuid": "44c7c7e6_70967db1",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "123a09da_4e3c0058",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2021-12-02T18:36:22Z",
       "side": 1,
       "message": "Do we end up loading the same lib twice if we are running with both SS (via json) and an actual vulkan device? Do you know if the close on the dynamic lib on one of the instances will cause the other to lose access to the lib? (i.e. is it cached when we load it internally? I\u0027m not too familiar with that).",
+      "range": {
+        "startLine": 163,
+        "startChar": 16,
+        "endLine": 163,
+        "endChar": 61
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02a26038_40c4a0be",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T19:01:24Z",
+      "side": 1,
+      "message": "\u003e The function dlclose() decrements the reference count on the dynamic library handle handle. If the reference count drops to zero and no other loaded libraries use symbols in it, then the dynamic library is unloaded.\n\u003e The function dlclose() returns 0 on success, and nonzero on error.",
+      "parentUuid": "123a09da_4e3c0058",
       "range": {
         "startLine": 163,
         "startChar": 16,
