@@ -47,8 +47,6 @@ TEST_P(BufferAllocatedSizeTests, UniformUsage) {
         requiredBufferAlignment = 256u;
     } else if (IsMetal()) {
         requiredBufferAlignment = 16u;
-    } else if (IsVulkan()) {
-        requiredBufferAlignment = 4u;
     }
 
     // Test uniform usage
