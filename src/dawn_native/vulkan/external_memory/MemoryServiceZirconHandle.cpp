@@ -66,8 +66,8 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
         formatProperties.sType = VK_STRUCTURE_TYPE_IMAGE_FORMAT_PROPERTIES_2_KHR;
         formatProperties.pNext = &externalFormatProperties;
 
-        VkResult result = mDevice->fn.GetPhysicalDeviceImageFormatProperties2(
-            ToBackend(mDevice->GetAdapter())->GetPhysicalDevice(), &formatInfo, &formatProperties);
+        VkResult result = VkResult::WrapUnsafe(mDevice->fn.GetPhysicalDeviceImageFormatProperties2(
+            ToBackend(mDevice->GetAdapter())->GetPhysicalDevice(), &formatInfo, &formatProperties));
 
         // If handle not supported, result == VK_ERROR_FORMAT_NOT_SUPPORTED
         if (result != VK_SUCCESS) {
@@ -88,14 +88,14 @@ namespace dawn_native { namespace vulkan { namespace external_memory {
     ResultOrError<MemoryImportParams> Service::GetMemoryImportParams(
         const ExternalImageDescriptor* descriptor,
         VkImage image) {
-        DAWN_INVALID_IF(descriptor->type != ExternalImageType::OpaqueFD,
-                        "ExternalImageDescriptor is not an OpaqueFD descriptor.");
+        DAWN_INVALID_IF(descriptor->type != ExternalImageType::ZirconHandle,
+                        "ExternalImageDescriptor is not a ZirconHandle descriptor.");
 
-        const ExternalImageDescriptorOpaqueFD* opaqueFDDescriptor =
-            static_cast<const ExternalImageDescriptorOpaqueFD*>(descriptor);
+        const ExternalImageDescriptorZirconHandle* zirconHandleDescriptor =
+            static_cast<const ExternalImageDescriptorZirconHandle*>(descriptor);
 
-        MemoryImportParams params = {opaqueFDDescriptor->allocationSize,
-                                     opaqueFDDescriptor->memoryTypeIndex};
+        MemoryImportParams params = {zirconHandleDescriptor->allocationSize,
+                                     zirconHandleDescriptor->memoryTypeIndex};
         return params;
     }
 
