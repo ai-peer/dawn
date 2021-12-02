@@ -16,6 +16,24 @@
       "message": "I think we might need to set the vulkan loader dir in Chromium\u0027s build_overrides/dawn.gni. Otherwise we\u0027re going to break the GTX 1660s again",
       "revId": "ec5aa6e5dfd346f92533e24237dea6fc0883558b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd53b3c4_ed359da1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T03:16:48Z",
+      "side": 1,
+      "message": "Oops. I had assumed Chromium already sets dawn_vulkan_loader_dir. I forgot the appropriate dawn_vulkan_loader_dir would happen to be the same between the two. I can make that CL.",
+      "parentUuid": "e30e4d0f_c7e44ce9",
+      "revId": "ec5aa6e5dfd346f92533e24237dea6fc0883558b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
