@@ -36,8 +36,11 @@ class BufferAllocatedSizeTests : public DawnTest {
 
 // Test expected allocated size for buffers with uniform usage
 TEST_P(BufferAllocatedSizeTests, UniformUsage) {
-    // Some backends have a minimum buffer size, so make sure
-    // we allocate above that.
+    // Disables the test if we are on Vulkan because we get the buffer size requirements from the
+    // driver which could have different alignment restrictions.
+    DAWN_TEST_UNSUPPORTED_IF(IsVulkan());
+
+    // Some backends have a minimum buffer size, so make sure we allocate above that.
     constexpr uint32_t kMinBufferSize = 4u;
 
     uint32_t requiredBufferAlignment = 1u;
@@ -45,8 +48,6 @@ TEST_P(BufferAllocatedSizeTests, UniformUsage) {
         requiredBufferAlignment = 256u;
     } else if (IsMetal()) {
         requiredBufferAlignment = 16u;
-    } else if (IsVulkan()) {
-        requiredBufferAlignment = 4u;
     }
 
     // Test uniform usage
