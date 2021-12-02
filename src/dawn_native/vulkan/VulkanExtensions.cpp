@@ -142,6 +142,7 @@ namespace dawn_native { namespace vulkan {
          VulkanVersion_1_1},
         {DeviceExt::ExternalMemory, "VK_KHR_external_memory", VulkanVersion_1_1},
         {DeviceExt::ExternalSemaphore, "VK_KHR_external_semaphore", VulkanVersion_1_1},
+        {DeviceExt::DedicatedAllocation, "VK_KHR_dedicated_allocation", VulkanVersion_1_1},
         {DeviceExt::_16BitStorage, "VK_KHR_16bit_storage", VulkanVersion_1_1},
         {DeviceExt::SamplerYCbCrConversion, "VK_KHR_sampler_ycbcr_conversion", VulkanVersion_1_1},
 
@@ -262,6 +263,10 @@ namespace dawn_native { namespace vulkan {
                 case DeviceExt::ExternalSemaphoreFD:
                 case DeviceExt::ExternalSemaphoreZirconHandle:
                     hasDependencies = HasDep(DeviceExt::ExternalSemaphore);
+                    break;
+
+                case DeviceExt::DedicatedAllocation:
+                    hasDependencies = HasDep(DeviceExt::GetMemoryRequirements2);
                     break;
 
                 case DeviceExt::_16BitStorage:

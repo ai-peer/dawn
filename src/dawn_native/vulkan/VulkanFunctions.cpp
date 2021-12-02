@@ -314,7 +314,7 @@ namespace dawn_native { namespace vulkan {
             GET_DEVICE_PROC(GetImageSparseMemoryRequirements2);
         }
 
-#if VK_USE_PLATFORM_FUCHSIA
+#if defined(VK_USE_PLATFORM_FUCHSIA)
         if (deviceInfo.HasExt(DeviceExt::ExternalMemoryZirconHandle)) {
             GET_DEVICE_PROC(GetMemoryZirconHandleFUCHSIA);
             GET_DEVICE_PROC(GetMemoryZirconHandlePropertiesFUCHSIA);
