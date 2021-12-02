@@ -556,6 +556,24 @@
       "parentUuid": "09c2ebbe_ebf014f3",
       "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2dc844_71b81c1a",
+        "filename": "src/tests/end2end/PlatformVideoViewsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T10:54:56Z",
+      "side": 1,
+      "message": "This is fairly limited ifdefing so IMHO it would be ok. The other option is to have a function that\u0027s implemented by a different file on each platforms and returns the VideoViewsTestBackend. That\u0027d work too but prevents testing multiple backends at the same time in the future (don\u0027t know if we\u0027ll ever have multiple backends available on a single OS)",
+      "parentUuid": "1a83f6f5_b3782344",
+      "revId": "4831df17d6507a1252e66bd6dfaa3c75fbbf635e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
