@@ -787,6 +787,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c8b319a1_6a948953",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2021-12-02T03:30:20Z",
+      "side": 1,
+      "message": "I think \"FORMAT\" in this macro name is like \"Format the string\" (as in absl::StrFormat) not TextureFormat.",
+      "parentUuid": "890c70cf_fd9d12c4",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e8654b9d_5327c9da",
         "filename": "src/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 3
