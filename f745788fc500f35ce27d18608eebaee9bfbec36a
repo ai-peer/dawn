@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a272c8e3_72fb5c03",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2021-12-02T19:07:32Z",
+      "side": 1,
+      "message": "hm.. will probably keep libbk_swiftshader.so for now. Chrome still has it as well\nhttps://source.chromium.org/chromium/chromium/src/+/main:gpu/vulkan/x/vulkan_implementation_x11.cc;l\u003d73?q\u003d%22libvk_swiftshader.so%22\u0026ss\u003dchromium%2Fchromium%2Fsrc\u0026start\u003d11 so maybe it\u0027s still worth keeping until we investigate more. We should first get the CTS running on SwiftShader on all our target platforms - and then see if SwiftShader still works if we remove this and only use the ICD.",
+      "parentUuid": "f635ab66_2d57a0de",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 76
+      },
+      "revId": "f745788fc500f35ce27d18608eebaee9bfbec36a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "123a09da_4e3c0058",
         "filename": "src/dawn_native/vulkan/BackendVk.cpp",
         "patchSetId": 9
