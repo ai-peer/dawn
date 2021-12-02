@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd1c43f_f8f69a12",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:31:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "11b927aba7646f05c135a9c7ad4e5e948bbdf5c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e36d2252_3226f9bd",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:31:42Z",
+      "side": 1,
+      "message": "Is there a simple way to test discovering the adapter for a specific DXGIAdapter?",
+      "revId": "11b927aba7646f05c135a9c7ad4e5e948bbdf5c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ab4d8f5_0724e61d",
+        "filename": "src/tests/end2end/AdapterDiscoveryTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:31:42Z",
+      "side": 1,
+      "message": "FYI we have a very longstanding TODO to make the GL backend create its own context from EGL/GLX/whathaveyou, so that we don\u0027t need GLFW. But it\u0027s low priority.",
+      "revId": "11b927aba7646f05c135a9c7ad4e5e948bbdf5c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
