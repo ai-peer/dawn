@@ -52,6 +52,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3bbfce17_984e5694",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "Thanks for reviewing (Appreciate for all the comments and times!). I\u0027m working on addressing them but I\u0027m afraid I cannot finish it today. So send out some replies first.",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8eb32f1_ec7e960c",
@@ -101,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dbf358a7_d29c770e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "Agree.  AlphaOp now means states more than a hint of next operations. I think I could keep the alphaOp attributes but add srcTextureAlphaState and dstTextureAlphaState attributes. So we could changes smoothly.",
+      "parentUuid": "fe4acee0_c06bb787",
+      "range": {
+        "startLine": 860,
+        "startChar": 74,
+        "endLine": 860,
+        "endChar": 87
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc927528_53c98baf",
         "filename": "dawn.json",
         "patchSetId": 3
@@ -129,6 +170,24 @@
       "writtenOn": "2021-12-01T23:23:17Z",
       "side": 1,
       "message": "With the matrix now precomputed, u_srcColorSpace and u_dstColorSpace should be in principle used only to derive some specific information:\n\n- Is the conversion matrix an identity and therefore can be skipped?\n- What is the transfer function of src?\n- What is the transfer function of dst?\n- If the conversion matrix is an identity, can the transfer functions also be skipped?\n\nHaving the uniform inputs correspond to wgpu::ColorSpace confuses things a bit because that information is not really used directly.\n\nI think I would have the final logic look something like:\n\n // 3 \u003d skip all, 2 \u003d skip matrix and TF, 1 \u003d skip matrix, 0 \u003d skip none:\n u32 conversion_mode;\n\n // Later probably replaced with full a/b/c/d/e/f/g formulation:\n u32 src_is_nonlinear, dst_is_nonlinear; // 0 or 1\n\n u32 src_is_premul, dst_is_premul; // 0 or 1\n\n if (conversion_mode \u003c 3) { // Can\u0027t skip premul/unpremul\n   if (src_is_premul \u003d\u003d 1) unpremultiply;\n   if (conversion_type \u003c 2) { // Can\u0027t skip transfer function\n     if (src_is_nonlinear \u003d\u003d 1) convert nonlinear to linear;\n     if (conversion_type \u003c 1) { // Can\u0027t skip conversion matrix\n       apply conversion matrix;\n     }\n     if (dst_is_nonlinear \u003d\u003d 1) convert linear to nonlinear;\n   }\n   if (dst_is_premul \u003d\u003d 1) premultiply;\n }",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93e8f114_3e535421",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "That\u0027s much clear.\nThe reason I provide the color space is due to the super complicated cases here.https://source.chromium.org/chromium/chromium/src/+/main:ui/gfx/color_transform_unittest.cc;l\u003d481. (And I think I could use if-else to support all of them, but in fact, it will make the shader crazy.)\nBut I think we could ignore it because we don\u0027t touch HDR now.",
+      "parentUuid": "0c6c7c13_c0a0a871",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -239,6 +298,30 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "nit: companded? Also the comment could be reflowed a bit I think (lines are very short)",
+      "range": {
+        "startLine": 58,
+        "startChar": 32,
+        "endLine": 58,
+        "endChar": 41
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1c12020_2910b4a5",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "Un-companded, I think. It decodes from a sRGB values. (Comments from https://www.w3.org/TR/css-color-4/#color-conversion-code)",
+      "parentUuid": "e2d38039_0df21801",
       "range": {
         "startLine": 58,
         "startChar": 32,
@@ -442,6 +525,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "642b1b76_7dcc89c4",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "No, I think? If source and dst color space are same, we don\u0027t need to unpremultiply and premultiply. And \n\nThe logic to decode whether to skip AlphaOp is   \nvar unpremultiplied_in_color_space_conversion \u003d\n                    uniforms.u_srcTextureAlphaOp \u003d\u003d 1u \u0026\u0026\n                    uniforms.u_srcColorSpace !\u003d uniforms.u_dstColorSpace;\nIf they skip the color conversion, the unpremultiply should work. \n\nAm I miss something?",
+      "parentUuid": "8e40c0e4_07033d1b",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebfa24d7_c476fa37",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -489,6 +590,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10ae74a1_68cbc728",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "Ah, good point. Previously, I think we don\u0027t need to divide 1.0 so I skip it. But 0.0 is the one that need to handle here.\n\nAnd yes, constant value will make life easier. I\u0027ll add them.",
+      "parentUuid": "8bf21cfa_b2fccbae",
+      "range": {
+        "startLine": 117,
+        "startChar": 52,
+        "endLine": 117,
+        "endChar": 54
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c35a023d_806a9376",
         "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
         "patchSetId": 3
@@ -500,6 +625,24 @@
       "writtenOn": "2021-12-01T23:23:17Z",
       "side": 1,
       "message": "Doesn\u0027t srgb_nonlinear_to_linear_positive need to be run for both srgb and display p3?",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d032b1_92b2f026",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "The reason is that we don\u0027t support display p3 as destination color space in this CL 😊\nI plan to use following CL to support more source/dest color space but I\u0027m not sure which ones should in the lists.",
+      "parentUuid": "c35a023d_806a9376",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -534,6 +677,30 @@
       "writtenOn": "2021-12-01T16:21:43Z",
       "side": 1,
       "message": "[c] It\u0027s a bit weird to have srcTextureAlphaOp but also alphaOp. Shouldn\u0027t it be srcTextureAlphaOp + dstTextureAlphaOp?",
+      "range": {
+        "startLine": 152,
+        "startChar": 42,
+        "endLine": 152,
+        "endChar": 44
+      },
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8206ed0f_9c0c15f9",
+        "filename": "src/dawn_native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "Yes, it is confusing. The alphaOp here means the concrete operation that the shader needs to do. But in srcTextureAlphaOp, it means a state. Maybe we should seperate them.",
+      "parentUuid": "128b0aa3_d37e63c9",
       "range": {
         "startLine": 152,
         "startChar": 42,
@@ -799,6 +966,24 @@
       "side": 1,
       "message": "I think \"FORMAT\" in this macro name is like \"Format the string\" (as in absl::StrFormat) not TextureFormat.",
       "parentUuid": "890c70cf_fd9d12c4",
+      "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286b050e_97604309",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2021-12-02T07:48:32Z",
+      "side": 1,
+      "message": "Got it 😂",
+      "parentUuid": "c8b319a1_6a948953",
       "revId": "4deded231d43e9cd3439f64c35a19b6a4ce3b77d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
