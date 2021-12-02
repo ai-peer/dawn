@@ -1,6 +1,86 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "721d33d3_6d55c7fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:21:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96d54558_066a53ef",
+        "filename": "src/dawn_native/Error.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:21:01Z",
+      "side": 1,
+      "message": "I think we eventually want to merge DAWN_VALITION_ERROR and DAWN_FORMAT_VALIDATION_ERROR, the split was mostly to track which places still needed to be updated. Maybe we can directly keep DAWN_INTERNAL_ERROR merged?\n\nBut then we get in the __VA_ARGS__ being empty issue. So maybe not.",
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "288212d7_6135653f",
+        "filename": "src/dawn_native/vulkan/AdapterVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:21:01Z",
+      "side": 1,
+      "message": "nit: mVulkanInstance since it is one of our members?",
+      "range": {
+        "startLine": 50,
+        "startChar": 8,
+        "endLine": 50,
+        "endChar": 27
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5261bbb2_2258fae1",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:21:01Z",
+      "side": 1,
+      "message": "nit: grammar",
+      "range": {
+        "startLine": 181,
+        "startChar": 21,
+        "endLine": 181,
+        "endChar": 32
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e5cf53e_dce92958",
@@ -19,6 +99,53 @@
         "startChar": 33,
         "endLine": 283,
         "endChar": 55
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7506b201_e8eb9314",
+        "filename": "src/dawn_native/vulkan/BackendVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:21:01Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "8e5cf53e_dce92958",
+      "range": {
+        "startLine": 283,
+        "startChar": 33,
+        "endLine": 283,
+        "endChar": 55
+      },
+      "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5b384d0_99efa5b6",
+        "filename": "src/dawn_native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2021-12-02T08:21:01Z",
+      "side": 1,
+      "message": "optional-nit: we might as well pass the adapter now.",
+      "range": {
+        "startLine": 279,
+        "startChar": 48,
+        "endLine": 280,
+        "endChar": 76
       },
       "revId": "523a73d9d81a9ec44d3a8601ec79e5686b3980d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
