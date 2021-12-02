@@ -16,6 +16,40 @@
       "message": "In the email it is also mentioned to add apache license to generated files. From my understanding generated files has nothing to do with that. Let\u0027s see what we deal with it in the email thread first.",
       "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c289cf8_b49b395b",
+        "filename": "LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-12-02T14:59:36Z",
+      "side": 1,
+      "message": "I\u0027d put a comment under this line stating that the following license is exclusively used by the template generated header files.",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59b59496_42540838",
+        "filename": "generator/LICENSE",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2021-12-02T14:59:36Z",
+      "side": 1,
+      "message": "I don\u0027t think it is usually common to add more than one LICENSE file in the project.",
+      "revId": "03bacaf4c502cf3aaa1893a00b7ab190ee9de132",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
